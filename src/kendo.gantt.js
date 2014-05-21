@@ -975,6 +975,15 @@ var __meta__ = {
                 .bind("percentResizeEnd", function(e) {
                     that.updateTask(that.dataSource.getByUid(e.task.uid), { percentComplete: e.percentComplete });
                 })
+                .bind("dependencyDragEnd", function(e) {
+                    var dependency = new GanttDependency({
+                        type: e.type,
+                        predecessorId: e.predecessor.id,
+                        successorId: e.successor.id
+                    });
+
+                    that.createDependency(dependency);
+                })
                 .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");
                 })
@@ -1060,6 +1069,16 @@ var __meta__ = {
             }
         },
 
+        createDependency: function(dependency) {
+            this._preventDependencyRefresh = true;
+
+            this.dependencies.add(dependency);
+
+            this._preventDependencyRefresh = false;
+
+            this.dependencies.sync();
+        },
+
         refresh: function(e) {
             if (this._preventRefresh || this.list.editable) {
                 return;
@@ -1081,6 +1100,10 @@ var __meta__ = {
         },
 
         refreshDependencies: function(e) {
+            if (this._preventDependencyRefresh) {
+                return;
+            }
+
             this.timeline._renderDependencies(this.dependencies.view());
         },
 

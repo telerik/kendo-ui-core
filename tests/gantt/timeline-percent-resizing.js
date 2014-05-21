@@ -6,7 +6,7 @@
     var task;
     var extend = $.extend;
 
-    module("Gantt Task Progress Resizing", {
+    module("Gantt Task PercentComplete Resizing", {
         setup: function() {
             element = $("<div />").appendTo(QUnit.fixture);
         },
@@ -39,7 +39,7 @@
     });
 
 
-    module("Timeline Task Progress Resizing", {
+    module("Timeline Task PercentComplete Resizing", {
         setup: function() {
             element = $("<div class='k-timeline k-grid k-widget' style='height: 500px;'/>").appendTo(QUnit.fixture);
         },
@@ -202,7 +202,7 @@
     });
 
 
-    module("Timeline Task Progress Resize Clue", {
+    module("Timeline Task PercentComplete Resize Clue", {
         setup: function() {
             element = $("<div class='k-timeline k-grid k-widget' style='height: 500px;'/>").appendTo(QUnit.fixture);
         },

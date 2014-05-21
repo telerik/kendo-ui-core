@@ -106,6 +106,8 @@ var __meta__ = {
 
             this._dragHint = null;
             this._resizeHint = null;
+            this._resizeTooltip = null;
+            this._percentCompleteResizeTooltip = null;
 
             this._headerTree = null;
             this._taskTree = null;
@@ -815,6 +817,55 @@ var __meta__ = {
             this._percentCompleteResizeTooltip = null;
         },
 
+        _updateDependencyDragHint: function(from, to, useVML) {
+            this._removeDependencyDragHint();
+
+            if (useVML) {
+                this._creteVmlDependencyDragHint(from, to);
+            } else {
+                this._creteDependencyDragHint(from, to);
+            }
+        },
+
+        _creteDependencyDragHint: function(from, to) {
+            var deltaX = to.x - from.x;
+            var deltaY = to.y - from.y;
+
+            var width = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+            var angle = Math.atan(deltaY / deltaX);
+
+            if (deltaX < 0) {
+                angle += Math.PI;
+            }
+
+            $("<div class='k-line-h k-dependency-hint'></div>")
+                .css({
+                    "top": from.y,
+                    "left": from.x,
+                    "width": width,
+                    "transform-origin": "0% 0",
+                    "-ms-transform-origin": "0% 0",
+                    "-webkit-transform-origin": "0% 0",
+                    "transform": "rotate(" + angle + "rad)",
+                    "-ms-transform": "rotate(" + angle + "rad)",
+                    "-webkit-transform": "rotate(" + angle + "rad)"
+                })
+                .appendTo(this.content);
+        },
+
+        _creteVmlDependencyDragHint: function(from, to) {
+            var hint = $("<kvml:line class='k-dependency-hint' style='position:absolute; top: 0px;' strokecolor='black' strokeweight='2px' from='" +
+                from.x + "px," + from.y + "px' to='" + to.x + "px," + to.y + "px'" + "></kvml:line>")
+                .appendTo(this.content);
+
+            // IE8 Bug
+            hint[0].outerHTML = hint[0].outerHTML;
+        },
+
+        _removeDependencyDragHint: function() {
+            this.content.find(".k-dependency-hint").remove();
+        },
+
         _timeSlots: function() {
             return this._slots[this._slots.length - 1];
         },
@@ -1144,6 +1195,8 @@ var __meta__ = {
 
             this._percentResizeDraggable();
 
+            this._createDependencyDraggable();
+
             this._attachEvents();
         },
         
@@ -1175,6 +1228,10 @@ var __meta__ = {
 
             if (this._percentDraggable) {
                 this._percentDraggable.destroy();
+            }
+
+            if (this._dependencyDraggable) {
+                this._dependencyDraggable.destroy();
             }
 
             this._headerTree = null;
@@ -1563,6 +1620,111 @@ var __meta__ = {
                 .bind("dragcancel", function(e) {
                     updateElement(originalPercentWidth);
 
+                    cleanUp();
+                });
+        },
+        
+        _createDependencyDraggable: function() {
+            var that = this;
+            var originalHandle;
+            var hoveredHandle = $();
+            var hoveredTask = $();
+            var dragInProgress;
+            var startX;
+            var startY;
+            var content;
+            var contentOffset;
+            var useVML = kendo.support.browser.msie && kendo.support.browser.version < 9;
+
+            if (useVML && document.namespaces) {
+                document.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
+
+            this._dependencyDraggable = new kendo.ui.Draggable(this.wrapper, {
+                distance: 0,
+                filter: ".k-task-dot",
+                holdToDrag: false
+            });
+
+            var cleanUp = function() {
+                originalHandle
+                    .css("display", "")
+                    .removeClass("k-state-hover");
+
+                originalHandle.parent().removeClass("k-origin");
+                originalHandle = null;
+
+                toggleHandles(false);
+
+                hoveredTask = $();
+                hoveredHandle = $();
+
+                that.view()._removeDependencyDragHint();
+
+                dragInProgress = false;
+            };
+
+            var toggleHandles = function(value) {
+                if (!hoveredTask.hasClass("k-origin")) {
+                    hoveredTask.find(".k-task-dot").css("display", value ? "block" : "");
+                    hoveredHandle.toggleClass("k-state-hover", value);
+                }
+            };
+
+            this._dependencyDraggable
+                .bind("dragstart", function(e) {
+                    originalHandle = e.currentTarget
+                        .css("display", "block")
+                        .addClass("k-state-hover");
+
+                    originalHandle.parent().addClass("k-origin");
+
+                    var elementOffset = originalHandle.offset();
+
+                    content = that.view().content;
+                    contentOffset = content.offset();
+
+                    startX = Math.round(elementOffset.left + content.scrollLeft() - contentOffset.left + (originalHandle.outerHeight() / 2));
+                    startY = Math.round(elementOffset.top + content.scrollTop() - contentOffset.top + (originalHandle.outerWidth() / 2));
+
+                    dragInProgress = true;
+                })
+                .bind("drag", kendo.throttle(function(e) {
+                    if (!dragInProgress) {
+                        return;
+                    }
+
+                    var target = $(kendo.elementUnderCursor(e));
+                    var currentX = e.x.location + content.scrollLeft() - contentOffset.left;
+                    var currentY = e.y.location + content.scrollTop() - contentOffset.top;
+
+                    that.view()._updateDependencyDragHint({ x: startX, y: startY }, { x: currentX, y: currentY }, useVML);
+
+                    toggleHandles(false);
+
+                    hoveredHandle = (target.hasClass("k-task-dot")) ? target : $();
+                    hoveredTask = target.closest(".k-task-wrap");
+
+                    toggleHandles(true);
+                }, 15))
+                .bind("dragend", function(e) {
+                    if (hoveredHandle.length) {
+                        var fromStart = originalHandle.hasClass("k-task-start");
+                        var toStart = hoveredHandle.hasClass("k-task-start");
+
+                        var type = fromStart ? (toStart ? 3 : 2) : (toStart ? 1 : 0);
+
+                        var predecessor = that._taskByUid(originalHandle.siblings(".k-task").attr("data-uid"));
+                        var successor = that._taskByUid(hoveredHandle.siblings(".k-task").attr("data-uid"));
+
+                        if (predecessor !== successor) {
+                            that.trigger("dependencyDragEnd", { type: type, predecessor: predecessor, successor: successor });
+                        }
+                    }
+
+                    cleanUp();
+                })
+                .bind("dragcancel", function(e) {
                     cleanUp();
                 });
         },
