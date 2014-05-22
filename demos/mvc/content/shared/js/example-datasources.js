@@ -130,3 +130,18 @@ function searchExamplesFor(value, product) {
         searchDataSource.filter(filter);
     }
 }
+
+kendo.ui.plugin(kendo.ui.AutoComplete.extend({
+    init: function(element, options) {
+        kendo.ui.AutoComplete.fn.init.call(this, 
+            element, 
+            $.extend(true, { dataSource: searchDataSource }, options)
+        );
+    },
+    options: {
+        name: "ExampleSearch"
+    },
+    _filterSource: function() {
+       searchExamplesFor(this.value(), this.options.product); 
+    }
+}));
