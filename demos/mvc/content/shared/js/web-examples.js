@@ -1,7 +1,7 @@
 $(function() {
     populateSearchDataSource(desktopExamples);
 
-    $("#search").on("input", function() {
+    $("#example-search").on("input", function() {
         searchExamplesFor($(this).val(), product);
     });
 
