@@ -533,8 +533,8 @@ var __meta__ = {
             var arrowOverlap = 1;
             var rowHeight = this._rowHeight;
             var minLineLength = Math.floor(rowHeight / 2);
-            var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2);
-            var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2);
+            var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
+            var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
 
             var addHorizontal = function() {
                 lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
@@ -554,12 +554,12 @@ var __meta__ = {
             }
 
             if (reverse) {
-                left = left - width;
+                left -= width;
                 width -= arrowOverlap;
                 addHorizontal();
             } else {
                 addHorizontal();
-                left = left + width;
+                left += width;
             }
 
             if (toTop < top) {
@@ -571,14 +571,14 @@ var __meta__ = {
                 height = toTop - top;
                 height += overlap;
                 addVertical();
-                top = top + height - overlap;
+                top += (height - overlap);
             }
 
             width = Math.abs(left - to[dir]);
 
             if (!reverse) {
                 width -= arrowOverlap;
-                left = left - width;
+                left -= width;
             }
 
             addHorizontal();
@@ -619,23 +619,25 @@ var __meta__ = {
                 if (delta > minDistance) {
                     width = delta - minLineLength;
                 }
+
+                width -= arrowOverlap;
             }
 
             addHorizontal();
-            left = left + width;
+            left += width;
 
             if ((delta) <= minDistance) {
                 height = reverse ? Math.abs(toTop - fromTop) - minLineLength : minLineLength;
 
                 if (toTop < fromTop) {
-                    top = top - height;
+                    top -= height;
 
                     height += overlap;
 
                     addVertical();
                 } else {
                     addVertical();
-                    top = top + height;
+                    top += height;
                 }
 
                 width = (from.end - to.start) + minDistance;
@@ -661,7 +663,7 @@ var __meta__ = {
             } else {
                 height = toTop - top;
                 addVertical();
-                top = top + height;
+                top += height;
             }
 
             width = to.start - left;
