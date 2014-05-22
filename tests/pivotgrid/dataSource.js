@@ -623,6 +623,47 @@
             'FROM [cubeName]') > -1);
     });
 
+    test("parameterMap same hierarchy members are not cross joined - 3 members", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }, { name: "[bar]", expand: false }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
+            'CROSSJOIN({[foo].[ALL].Children},{[bar].[(ALL)].MEMBERS}),' +
+            'CROSSJOIN({[foo].&amp;[1].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap same hierarchy members are not cross joined - 2 members", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS,' +
+            '[foo].[ALL].Children,' +
+            '[foo].&amp;[1].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap same hierarchy members are not cross joined - 2 members and 2 measures", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }],
+            measures: [ "measure1", "measure2"]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{measure1,measure2}}),CROSSJOIN({[foo].[ALL].Children},{{measure1,measure2}}),'+
+            'CROSSJOIN({[foo].&amp;[1].Children},{{measure1,measure2}})}' +
+            ' DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+    });
+
+
     test("parameterMap multiple rows are cross joined", function() {
         var transport = new kendo.data.XmlaTransport({ });
 

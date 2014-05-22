@@ -35,22 +35,34 @@ var __meta__ = {
         });
     }
 
-    function descriptorsForAxes(axes) {
-        var tuples = axes.tuples || [];
-
-        var result = {};
+    function accumulateMembers(accumulator, tuples) {
         var members;
         var name;
+        var parentName;
 
         for (var idx = 0; idx < tuples.length; idx++) {
             members = tuples[idx].members;
 
             for (var memberIdx = 0; memberIdx < members.length; memberIdx++) {
                 name = members[memberIdx].name.replace(/\.\[all\]$/i, "");
+                parentName = (members[memberIdx].parentName || "").replace(/\.\[all\]$/i, "");
 
-                result[name] = members[memberIdx].children.length > 0;
+                if (members[memberIdx].children.length > 0) {
+                    accumulator[name] = true;
+                    accumulateMembers(accumulator, members[memberIdx].children);
+                } else if (!(parentName in accumulator)) {
+                    accumulator[name] = false;
+                }
             }
         }
+    }
+
+    function descriptorsForAxes(axes) {
+        var tuples = axes.tuples || [];
+
+        var result = {};
+
+        accumulateMembers(result, tuples);
 
         var descriptors = [];
         for (var k in result) {
@@ -103,7 +115,7 @@ var __meta__ = {
                 for (var idx = 0; idx < axis1.length; idx++) {
                     var found = false;
                     for (var j = 0; j < members.length; j++) {
-                        if (members[j].name.indexOf(axis1[idx].name) == 0) {
+                        if (members[j].name.indexOf(axis1[idx].name) === 0) {
                             found = true;
                             break;
                         }
@@ -418,6 +430,67 @@ var __meta__ = {
         return result;
     }
 
+    function trimSameHierarchyChildDescriptors(members) {
+        var result = [];
+
+        for (var idx = 0; idx < members.length; idx++) {
+            var found = false;
+            var name = members[idx].name;
+
+            for (var j = 0; j < members.length; j++) {
+                var memberName = members[j].name;
+                if (name.indexOf(memberName) === 0 && memberName !== name) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                result.push(members[idx]);
+            }
+        }
+
+        return result;
+    }
+
+    function trimSameHierarchyChildDescriptorsForName(members, memberName) {
+        var result = [];
+
+        for (var idx = 0; idx < members.length; idx++) {
+            var name = members[idx].name;
+
+            if (memberName == name || !(name.indexOf(memberName) === 0 || memberName.indexOf(name) === 0)) {
+                result.push(members[idx]);
+            }
+        }
+
+        return result;
+    }
+
+    function sameHierarchyDescriptors(members) {
+        var same = {};
+
+        for (var idx = 0; idx < members.length; idx++) {
+            var name = members[idx].name;
+
+            for (var j = 0; j < members.length; j++) {
+                var memberName = members[j].name;
+                if ((memberName.indexOf(name) === 0 || name.indexOf(memberName) === 0) && memberName !== name) {
+                    same[name] = members[idx];
+                }
+            }
+        }
+
+        var result = [];
+
+        for (var key in same) {
+            result.push(same[key]);
+        }
+
+        return result;
+    }
+
+
     function expandMemberDescriptor(members, memberNames) {
         return transformDescriptors(members, function(member) {
             var name = member.name;
@@ -514,25 +587,39 @@ var __meta__ = {
 
         members = members || [];
 
-        var memberNames = convertMemberDescriptors(members);
+        var memberNames = convertMemberDescriptors(trimSameHierarchyChildDescriptors(members));
         var expandedColumns = expandedMembers(members);
 
-        if (members.length > 1 || measures.length > 1) {
+        if (memberNames.length > 1 || measures.length > 1) {
             command += crossJoinCommand(memberNames, measures);
 
             if (expandedColumns.length) {
                 var start = 0;
                 var idx;
+                var j;
+                var name;
 
                 var expandedMemberNames = [];
+                var sameHierarchyMembers = sameHierarchyDescriptors(members);
+
+                var generatedMembers = [];
 
                 for (idx = 0; idx < expandedColumns.length; idx++) {
-                    command += ",";
 
                     for (j=start; j < expandedColumns.length; j++) {
-                        command += crossJoinCommand(expandMemberDescriptor(members, expandedMemberNames.concat(expandedColumns[j].name)), measures);
-                        if (j < expandedColumns.length - 1) {
+                        name = expandedColumns[j].name;
+
+                        var tmpMembers = trimSameHierarchyChildDescriptors(members);
+
+                        if ($.inArray(expandedColumns[j], sameHierarchyMembers) > -1) {
+                            tmpMembers = trimSameHierarchyChildDescriptorsForName(members, name);
+                        }
+
+                        var tmp = crossJoinCommand(expandMemberDescriptor(tmpMembers, expandedMemberNames.concat(name)), measures);
+                        if ($.inArray(tmp, generatedMembers) == -1) {
                             command += ",";
+                            command += tmp;
+                            generatedMembers.push(tmp);
                         }
                     }
                     start++;
@@ -860,7 +947,7 @@ var __meta__ = {
     //column headers
     function kendo_column_headers(columns) {
         return [ element("table", null, [kendo_columns_thead(columns)]) ];
-    };
+    }
 
     function kendo_columns_thead(columns) {
         return element("thead", null, kendo_columns_thead_rows(columns));
@@ -966,7 +1053,7 @@ var __meta__ = {
     //row headers
     function kendo_row_headers(rows) {
         return [ element("table", null, [kendo_row_thead(rows)]) ];
-    };
+    }
 
     function kendo_row_thead(rows) {
         return element("thead", null, kendo_row_thead_rows(rows));
