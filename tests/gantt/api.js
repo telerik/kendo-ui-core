@@ -104,6 +104,18 @@
         ok(ganttList.calls("clearSelection"));
     });
 
+    test("view('name') calls timeline's view method", function() {
+        gantt = new Gantt(element);
+
+        stub(gantt.timeline, {
+            view: function(name) {
+                ok(name);
+            }
+        });
+
+        gantt.view("day");
+    });
+
     test("removeTask() triggers remove event", 1, function() {
         setupGantt({
             data: [

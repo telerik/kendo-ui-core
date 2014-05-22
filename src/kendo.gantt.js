@@ -1035,6 +1035,10 @@ var __meta__ = {
                 .bind("error", this._dependencyErrorHandler);
         },
 
+        view: function(type) {
+            return this.timeline.view(type);
+        },
+
         dataItem: function(element) {
             if (!element) {
                 return null;
