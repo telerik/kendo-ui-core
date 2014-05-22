@@ -59,7 +59,7 @@
 	content: "\e605";
 }
 
-body,h1,h2,h3,h4,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,h4,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#nav-pager,#examples-list,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -684,6 +684,76 @@ div.submenu-box ol {
     vertical-align: bottom;
 }
 
+.themechooser
+{
+    background-color: #f5f7f8;
+    border-bottom: 1px solid #ebecee;
+    text-align: right;
+}
+
+.themechooser .tc-activator
+{
+    color: #2d3e50;
+    display: inline-block;
+    padding: 0 20px;
+    line-height: 59px;
+    font-size: 1.1667em;
+    text-decoration: none;
+}
+
+.themechooser .tc-activator:hover,
+.themechooser .tc-active,
+.tc-theme-list
+{
+    background-color: #ebeef0;
+}
+
+.themechooser h4
+{
+    text-transform: uppercase;
+    font-size: 1em;
+}
+
+.tc-theme-list
+{
+    border: 0;
+    text-align: left;
+    overflow: hidden;
+}
+
+.tc-theme-list ul
+{
+    float: left;
+    width: 160px;
+}
+
+.tc-theme
+{
+    display: block;
+    line-height: 26px;
+    color: #2d3e50;
+    padding: 0 10px;
+}
+
+.tc-theme:hover
+{
+    text-decoration: none;
+    background-color: #cad0d6;
+}
+
+.tc-theme-list .tc-active
+{
+    color: #000;
+    background-color: #cad0d6;
+}
+
+.tc-color
+{
+    border-radius: 50%;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
 #qrWrap
 {
     margin-left:14px;
@@ -3023,9 +3093,4 @@ a.footer-links:hover {
     width: 44%;
     margin: 0 auto; 
     overflow: auto;
-}
-
-.k-state-hover,
-.k-state-hover:hover {
-    
 }

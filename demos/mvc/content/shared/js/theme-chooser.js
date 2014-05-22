@@ -14,23 +14,47 @@
             }
         },
         skinRegex = /kendo\.[\w\-]+(\.min)?\.(less|css)/i,
-        dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi,
-        supports = {
-            sessionStorage: (function () {
-                // try-catch for obscure cases that do not allow "sessionStorage" in window
-                // also for Safari private mode
-                try {
-                    sessionStorage.setItem("kendo-test", "success!");
-                    sessionStorage.removeItem("kendo-test");
-                    return !!sessionStorage.getItem;
-                } catch (e) {
-                    return false;
-                }
-            })(),
-            pushState: ("pushState" in history)
-        };
+        dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi;
 
-    ThemeChooser = {
+    ThemeChooser = kendo.ui.Widget.extend({
+        init: function(element, options) {
+            kendo.ui.Widget.fn.init.call(this, element, options);
+
+            var element = this.element;
+            var options = this.options;
+            var template = options.template;
+
+            if (typeof template == "string") {
+                template = kendo.template(template);
+            }
+
+            element.find(options.container).html(
+                template(options)
+            );
+        },
+        options: {
+            name: "ThemeChooser",
+            themes: [
+                { name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
+                { name: "Blue Opal", colors: [ "#076186", "#7ed3f6", "#94c0d2" ]  },
+                { name: "Bootstrap", colors: [ "#3276b1", "#67afe9", "#fff" ]  },
+                { name: "Silver", colors: [ "#298bc8", "#515967", "#eaeaec" ]  },
+                { name: "Uniform", colors: [ "#666", "#ccc", "#fff" ]  },
+                { name: "Metro", colors: [ "#8ebc00", "#787878", "#fff" ]  },
+                { name: "Black", colors: [ "#0167cc", "#4698e9", "#272727" ]  },
+                { name: "Metro Black", colors: [ "#00aba9", "#0e0e0e", "#565656" ]  },
+                { name: "High Contrast", colors: [ "#b11e9c", "#880275", "#1b141a" ]  },
+                { name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
+                { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
+            ],
+            sizes: [
+                { name: "Standart" },
+                { name: "Bootstrap", relativity: "larger" }
+            ]
+        }
+    });
+
+    extend(ThemeChooser, {
         preloadStylesheet: function (file, callback) {
             var element = $("<link rel='stylesheet' media='print' href='" + file + "' />").appendTo("head");
 
@@ -195,7 +219,9 @@
                 ThemeChooser.replaceTheme(themeName);
             }
         },
-    };
+    });
+
+    kendo.ui.plugin(ThemeChooser);
 
     window.kendoThemeChooser = ThemeChooser;
 })();
