@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes",
            "./svg",
            "./services",
            "./layout",
@@ -278,7 +278,6 @@
                 that._template();
             },
             options: {
-                background: "Green",
                 hover: {},
                 cursor: Cursors.grip,
                 content: {
@@ -1250,10 +1249,13 @@
         });
 
         var Diagram = Widget.extend({
-            init: function (element, options) {
-                var that = this;
+            init: function (element, userOptions) {
+                var that = this,
+                    options;
+
                 kendo.destroy(element);
-                Widget.fn.init.call(that, element, options);
+                Widget.fn.init.call(that, element);
+                that.options = options = deepExtend({}, that.options, userOptions);
                 element = that.element; // the hosting element
                 element.empty();
                 that._initTheme();
