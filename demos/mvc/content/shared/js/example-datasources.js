@@ -137,6 +137,8 @@ kendo.ui.plugin(kendo.ui.AutoComplete.extend({
             element, 
             $.extend(true, { dataSource: searchDataSource }, options)
         );
+
+        this.wrapper.append('<span class="k-uniE600" />');
     },
     options: {
         name: "ExampleSearch"

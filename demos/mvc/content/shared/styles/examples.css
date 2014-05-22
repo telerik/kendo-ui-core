@@ -210,74 +210,7 @@ header
     transition: all 0.2s ease 0s;
 }
 
- Overview page 
-.section
-{
-    padding: 84px 0;
-}
-
-.section--green
-{
-    padding:54px 0 84px;
-}
-
-.section--grey
-{
-    background-color: #f3f5f7
-}
-
-.section--green,
-.overview .section--green .demos-nav
-{
-   background-color: #2db245;
-}
-
-.section--white
-{
-    background-color: #fff;
-}
-
-.teampulse h2,
-.section--white .centerWrap h2
-{
-    -ms-word-wrap: break-word;
-    word-wrap: break-word;
-    line-height: 1;
-    margin: 0 0 40px;
-    font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
-    letter-spacing: -0.04em;
-    margin-bottom: 50px;
-    color: #000;
-}
-
-.overview .teampulse p
-{
-    font-size: 18px;
-    color: #000;
-}
-
-.overview .teampulse .launchButton
-{
-    font-size: 22px;
-    font-weight: normal;
-    margin-top: 30px;
-    margin-right: 50px;
-}
-
-.overview .teampulse .column13 p
-{
-    margin-right: 560px;
-}
-
-
-.compatibility p
-{
-    color: #555555;
-}
-
-
- Header navigation 
-
+ /*Header navigation*/ 
 .suite-demos-nav .header,
 .suite-demos-nav .header a
 {
@@ -3746,13 +3679,16 @@ a.footer-links:hover {
 
 #example-search-wrapper .search {         
     margin: 1em;
-    border: 1px solid #d7dbdf; 
 }
 
 #layout-search-wrapper .search {
     margin: 0 auto;
     width: 44%;
-    border: 1px solid #d5dade;    
+}
+
+#example-search-wrapper .search > span,
+#layout-search-wrapper .search > span{
+    width: 100%
 }
 
 #example-search-wrapper input,
@@ -3764,38 +3700,67 @@ a.footer-links:hover {
 }
 
 #example-search-wrapper input {
-    padding: 0.5em;
+    padding: 0.5em 0;
     font-size: 14px;
     line-height: 14px;
 }
 
 #layout-search-wrapper input {
-    padding: 0.750em;
+    padding: 0.750em 0;
     font-size: 16px;
     line-height: 16px;
 }
 
-#example-search-wrapper #icon-search {  
+#example-search-wrapper .k-uniE600 {  
    position: absolute;
-   right: 3px;
+   right: 6px;
    top: 9px;
 }
 
-#layout-search-wrapper #icon-search {
+#layout-search-wrapper .k-uniE600 {
    font-size: 16px;
    position: absolute;
-   right: 6px;
    top: 13px;
+   right: 6px;
 }
 
 #layout-search-wrapper .km-listview-wrapper {
    position: relative;  
 }
 
+#example-search-list {
+    background: #f5f7f8;
+}
+
+#example-search-list li {
+    padding: 0.692em;
+}
+
+#example-search-list li.k-state-hover {
+    font-weight: bold;
+    background: #cad0d6;
+    border: none;
+    min-height: 0;    
+}
+
+#example-search-list a{
+    font-size: 13px;
+    line-height: 13px;
+    color: #2d3e50;
+}
+
+#example-search-list a:hover {
+    text-decoration: none;
+}
+
 #search-results {
     z-index: 10;
-    /*width: 250px;*/
     width: 44%;
     margin: 0 auto; 
     overflow: auto;
+}
+
+.k-state-hover,
+.k-state-hover:hover {
+    
 }
