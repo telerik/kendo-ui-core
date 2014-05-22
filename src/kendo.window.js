@@ -1195,35 +1195,45 @@ var __meta__ = {
 
 
     function WindowResizing(wnd) {
-        this.owner = wnd;
-        this._draggable = new Draggable(wnd.wrapper, {
+        var that = this;
+        that.owner = wnd;
+        that._draggable = new Draggable(wnd.wrapper, {
             filter: KWINDOWRESIZEHANDLES,
             group: wnd.wrapper.id + "-resizing",
-            dragstart: proxy(this.dragstart, this),
-            drag: proxy(this.drag, this),
-            dragend: proxy(this.dragend, this)
+            dragstart: proxy(that.dragstart, that),
+            drag: proxy(that.drag, that),
+            dragend: proxy(that.dragend, that)
         });
+
+        that._draggable.userEvents.bind("press", proxy(that.addOverlay, that));
+        that._draggable.userEvents.bind("release", proxy(that.removeOverlay, that));
     }
 
     WindowResizing.prototype = {
+        addOverlay: function () {
+            this.owner.wrapper.append(templates.overlay);
+        },
+        removeOverlay: function () {
+            this.owner.wrapper.find(KOVERLAY).remove();
+        },
         dragstart: function (e) {
-            var wnd = this.owner;
+            var that = this;
+            var wnd = that.owner;
             var wrapper = wnd.wrapper;
 
-            this.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            this.initialCursorPosition = kendo.getOffset(wrapper, "position");
+            that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
+            that.initialCursorPosition = kendo.getOffset(wrapper, "position");
 
-            this.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
+            that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
-            this.initialSize = {
+            that.initialSize = {
                 width: wrapper.width(),
                 height: wrapper.height()
             };
 
-            this.containerOffset = kendo.getOffset(wnd.appendTo);
+            that.containerOffset = kendo.getOffset(wnd.appendTo);
 
             wrapper
-                .append(templates.overlay)
                 .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
 
             $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
@@ -1285,7 +1295,6 @@ var __meta__ = {
                 wrapper = wnd.wrapper;
 
             wrapper
-                .find(KOVERLAY).remove().end()
                 .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).show();
 
             $(BODY).css(CURSOR, "");
@@ -1310,17 +1319,18 @@ var __meta__ = {
     };
 
     function WindowDragging(wnd, dragHandle) {
-        this.owner = wnd;
-        this._draggable = new Draggable(wnd.wrapper, {
+        var that = this;
+        that.owner = wnd;
+        that._draggable = new Draggable(wnd.wrapper, {
             filter: dragHandle,
             group: wnd.wrapper.id + "-moving",
-            dragstart: proxy(this.dragstart, this),
-            drag: proxy(this.drag, this),
-            dragend: proxy(this.dragend, this),
-            dragcancel: proxy(this.dragcancel, this)
+            dragstart: proxy(that.dragstart, that),
+            drag: proxy(that.drag, that),
+            dragend: proxy(that.dragend, that),
+            dragcancel: proxy(that.dragcancel, that)
         });
 
-        this._draggable.userEvents.stopPropagation = false;
+        that._draggable.userEvents.stopPropagation = false;
     }
 
     WindowDragging.prototype = {
