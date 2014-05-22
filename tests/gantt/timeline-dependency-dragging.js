@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 
     var element;
     var timeline;
