@@ -990,9 +990,8 @@ var __meta__ = {
                     rowLength = row.children.length;
 
                     while(cellsCount) {
-                        var attr = {};
                         if (hasChildren) {
-                            attr["rowspan"] = 1;
+                            attr.rowspan = 1;
                         }
 
                         row.children.push(kendo_th(member, attr));
@@ -1146,7 +1145,7 @@ var __meta__ = {
                     cells.push(kendo_th(member));
                 }
             } else {
-                var member = {
+                member = {
                     caption: ""
                 };
 
@@ -1162,7 +1161,7 @@ var __meta__ = {
     //content
     function kendo_content(data, columnsTree, rowsTree) {
         return [ element("table", null, [kendo_tbody(data, columnsTree, rowsTree)]) ];
-    };
+    }
 
     function kendo_tbody(data, columnsTree, rowsTree) {
         return element("tbody", null, kendo_rows(data, columnsTree, rowsTree));
