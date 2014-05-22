@@ -501,7 +501,7 @@ var __meta__ = {
 
             lines[0].children[0] = this._arrow(false);
 
-            return lines;
+            return lines.reverse();
         },
 
         _renderFS: function(from, to) {
@@ -517,7 +517,7 @@ var __meta__ = {
 
             lines[0].children[0] = this._arrow(true);
 
-            return lines;
+            return lines.reverse();
         },
 
         _dependencyFF: function(from, to, reverse) {
