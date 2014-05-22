@@ -684,6 +684,164 @@ test("range total is change during the request", function() {
     equal(dataSource.view()[0].foo, 0);
 });
 
+test("range existing range is requested while remote is fetched - remote request is not loaded", function() {
+    var mainData = generator(80),
+        dataSource = new DataSource({
+            pageSize: 10,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var data = [];
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+
+                    if (skip != 0) {
+                        dataSource.range(0, 10);
+                    }
+
+                    data = mainData.slice(skip, skip + take);
+
+                    options.success({ data: data, total: mainData.length });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    dataSource.page(1);
+
+    dataSource.range(20, 10);
+
+    equal(dataSource.view().length, 10);
+    equal(dataSource.page(), 1);
+    equal(dataSource.view()[0].foo, 0);
+    equal(dataSource.view()[9].foo, 9);
+});
+
+test("range existing range is requested while multiple remote requests are fetched - remote request is not loaded", function() {
+    var mainData = generator(80),
+        dataSource = new DataSource({
+            pageSize: 10,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var data = [];
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+
+                    if (skip == 20) {
+                        dataSource.range(30, 10);
+                    }
+
+                    if (skip == 30) {
+                        dataSource.range(0, 10);
+                    }
+
+                    data = mainData.slice(skip, skip + take);
+
+                    options.success({ data: data, total: mainData.length });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    dataSource.page(1);
+
+    dataSource.range(20, 10);
+
+    equal(dataSource.view().length, 10);
+    equal(dataSource.page(), 1);
+    equal(dataSource.view()[0].foo, 0);
+    equal(dataSource.view()[9].foo, 9);
+});
+
+test("range request made after remote requests are cancelled as existing range is requests is proccessed", function() {
+    var mainData = generator(80),
+        dataSource = new DataSource({
+            pageSize: 10,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var data = [];
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+
+                    if (skip == 20) {
+                        dataSource.range(30, 10);
+                    }
+
+                    if (skip == 30) {
+                        dataSource.range(0, 10);
+                    }
+
+                    data = mainData.slice(skip, skip + take);
+
+                    options.success({ data: data, total: mainData.length });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    dataSource.page(1);
+
+    dataSource.range(20, 10);
+
+    dataSource.range(39, 10);
+
+    equal(dataSource.view().length, 10);
+    equal(dataSource.page(), 5);
+    equal(dataSource.view()[0].foo, 39);
+    equal(dataSource.view()[9].foo, 48);
+});
+
+test("range existing data requested after remote requests are cancelled as existing range is requests is proccessed", function() {
+    var mainData = generator(80),
+        dataSource = new DataSource({
+            pageSize: 10,
+            serverPaging: true,
+            transport: {
+                read: function(options) {
+                    var data = [];
+                    var skip = options.data.skip;
+                    var take = options.data.take;
+
+                    if (skip == 20) {
+                        dataSource.range(30, 10);
+                    }
+
+                    if (skip == 30) {
+                        dataSource.range(0, 10);
+                    }
+
+                    data = mainData.slice(skip, skip + take);
+
+                    options.success({ data: data, total: mainData.length });
+                }
+            },
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+
+    dataSource.page(1);
+
+    dataSource.range(20, 10);
+
+    dataSource.page(2);
+
+    equal(dataSource.view().length, 10);
+    equal(dataSource.page(), 2);
+    equal(dataSource.view()[0].foo, 10);
+    equal(dataSource.view()[9].foo, 19);
+});
+
+
 test("range total is updated", function() {
     var totalCount = 47,
         dataSource = new DataSource({
