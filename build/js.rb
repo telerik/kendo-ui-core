@@ -57,6 +57,7 @@ WIN_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.min.js')]
 WIN_SRC_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.winjs.js')]
 
 APP_BUILDER_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.dataviz.mobile.min.js')].include(JQUERY)
+APP_BUILDER_CORE_MIN_JS = FileList[File.join(DIST_JS_ROOT, 'kendo.mobile.min.js')].include(JQUERY)
 
 CORE_SRC_JS = dependencies("ui.core")
 CORE_MIN_JS = CORE_SRC_JS.ext('min.js').include(JQUERY)

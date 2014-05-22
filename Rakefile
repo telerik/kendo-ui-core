@@ -94,7 +94,11 @@ def md_api_suite(suite)
         FileList["docs/api/mobile/*.md"]
         .include('docs/api/framework/*.md')
 
-    when 'appbuilder'
+    when 'appbuilder.professional'
+        FileList["docs/api/mobile/*.md"]
+        .include('docs/api/framework/*.md')
+
+    when 'appbuilder.core'
         FileList["docs/api/mobile/*.md"]
         .include('docs/api/framework/*.md')
     end
@@ -210,7 +214,7 @@ bundle :name => 'professional.commercial',
        :release_build => {
            :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -221,7 +225,7 @@ bundle :name => 'professional.commercial',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              },
              :msi => {
-              :label => "Automatic Installation", 
+              :label => "Automatic Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.commercial.msi",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -232,7 +236,7 @@ bundle :name => 'professional.commercial',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles<br />Complete Source Code</strong>"
              },
              :exe => {
-              :label => "Control Panel:", 
+              :label => "Control Panel:",
               :download_name => "TelerikControlPanelSetup.KUI.Professional.#{VERSION}.exe",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -240,7 +244,7 @@ bundle :name => 'professional.commercial',
               :file_markers => ["Is Bolded"],
               :websites => ["Telerik"],
               :download_message => 'You successfully downloaded the Kendo UI Professional installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
-              :whats_included_message => "<strong>Installer EXE package</strong>" 
+              :whats_included_message => "<strong>Installer EXE package</strong>"
              }
            },
            :download_builder => true,
@@ -272,7 +276,7 @@ bundle :name => 'professional.trial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -283,7 +287,7 @@ bundle :name => 'professional.trial',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles</strong>"
              },
              :msi => {
-              :label => "Automatic Installation", 
+              :label => "Automatic Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.trial.msi",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -298,7 +302,7 @@ bundle :name => 'professional.trial',
        :beta_build => {
           :file_metadata => {
              :zip => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.beta.trial.zip",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -308,7 +312,7 @@ bundle :name => 'professional.trial',
               :whats_included_message => "<strong>Quick Start Demos<br />Minified Javascript Files<br />Minified Css Styles</strong>"
              },
              :msi => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta -Automatic Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta -Automatic Installation",
               :download_name => "telerik.kendoui.professional.#{VERSION}.beta.trial.msi",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -420,7 +424,7 @@ bundle :name => 'aspnetmvc.trial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -431,7 +435,7 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              },
              :msi => {
-              :label => "Automatic Installation", 
+              :label => "Automatic Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.trial.msi",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -442,7 +446,7 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              },
              :exe => {
-              :label => "Web Installer:", 
+              :label => "Web Installer:",
               :download_name => "TelerikUIForAspNetMvcSetup.#{VERSION}.exe",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -453,7 +457,7 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Installer EXE package</strong>"
              },
              :nuget => {
-              :label => "Telerik UI for ASP.NET MVC NuGet package", 
+              :label => "Telerik UI for ASP.NET MVC NuGet package",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.trial.nupkg.zip",
               :file_category => "Other Setup Files",
               :file_type => "Trial Files",
@@ -469,7 +473,7 @@ bundle :name => 'aspnetmvc.trial',
        :beta_build => {
           :file_metadata => {
              :zip => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.beta.trial.zip",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -479,7 +483,7 @@ bundle :name => 'aspnetmvc.trial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers</strong>"
              },
              :msi => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Automatic Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Automatic Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.beta.trial.msi",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -520,7 +524,7 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :release_build => {
          :file_metadata => {
              :zip => {
-              :label => "DLL, Scripts and Skins", 
+              :label => "DLL, Scripts and Skins",
               :download_name => "telerik.ui.for.aspnetmvc.hotfix.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -564,7 +568,7 @@ bundle :name => 'aspnetmvc.commercial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -575,7 +579,7 @@ bundle :name => 'aspnetmvc.commercial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers <br />Complete Source Code</strong>"
              },
              :msi => {
-              :label => "Automatic Installation", 
+              :label => "Automatic Installation",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.commercial.msi",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -586,7 +590,7 @@ bundle :name => 'aspnetmvc.commercial',
               :whats_included_message => "<strong>Quick Start Demos <br />Minified Javascript Files<br />Minified Css Styles<br />ASP.NET MVC Server Wrappers <br />Complete Source Code</strong>"
              },
              :exe => {
-              :label => "Control Panel:", 
+              :label => "Control Panel:",
               :download_name => "TelerikControlPanelSetup.MVC.#{VERSION}.exe",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -597,7 +601,7 @@ bundle :name => 'aspnetmvc.commercial',
               :whats_included_message => "<strong>Installer EXE package</strong>"
              },
              :nuget => {
-              :label => "Telerik UI for ASP.NET MVC NuGet package", 
+              :label => "Telerik UI for ASP.NET MVC NuGet package",
               :download_name => "telerik.ui.for.aspnetmvc.#{VERSION}.commercial.nupkg.zip",
               :file_category => "Other Setup Files",
               :file_type => "Paid Files",
@@ -679,7 +683,7 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "DLL, Scripts and Skins", 
+              :label => "DLL, Scripts and Skins",
               :download_name => "telerik.ui.for.aspnetmvc.hotfix.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -720,7 +724,7 @@ bundle :name => 'winjs.commercial',
             '.' => WIN_JS_RESOURCES
        }
 
-bundle :name => 'appbuilder',
+bundle :name => 'appbuilder.professional',
        :license => 'src-license-appbuilder',
        :type_script => %w(mobile),
        :contents => {
@@ -728,6 +732,13 @@ bundle :name => 'appbuilder',
             'js' => APP_BUILDER_MIN_JS + JQUERY_MAP
        }
 
+bundle :name => 'appbuilder.core',
+       :license => 'src-license-appbuilder',
+       :type_script => %w(mobile),
+       :contents => {
+            'styles' => APP_BUILDER_CORE_MIN_CSS,
+            'js' => APP_BUILDER_CORE_MIN_JS + JQUERY_MAP
+       }
 # UI for JSP
 bundle :name => 'jsp.trial',
        :license => 'src-license-complete',
@@ -739,7 +750,7 @@ bundle :name => 'jsp.trial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.jsp.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -755,7 +766,7 @@ bundle :name => 'jsp.trial',
         :beta_build => {
           :file_metadata => {
              :zip => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation",
               :download_name => "telerik.ui.for.jsp.#{VERSION}.beta.trial.zip",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -766,7 +777,7 @@ bundle :name => 'jsp.trial',
              }
           },
           :changelog => true,
-        },    
+        },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -787,7 +798,7 @@ bundle :name => 'jsp.commercial',
        :release_build => {
          :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.jsp.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -825,7 +836,7 @@ bundle :name => 'php.trial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.php.#{VERSION}.trial.zip",
               :file_category => "Installation",
               :file_type => "Trial Files",
@@ -841,7 +852,7 @@ bundle :name => 'php.trial',
         :beta_build => {
           :file_metadata => {
              :zip => {
-              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation", 
+              :label => "Q#{VERSION_Q} #{VERSION_YEAR} Beta - Manual Installation",
               :download_name => "telerik.ui.for.php.#{VERSION}.beta.trial.zip",
               :file_category => "Beta",
               :file_type => "Additional files - shown to all",
@@ -852,7 +863,7 @@ bundle :name => 'php.trial',
              }
           },
           :changelog => true,
-        },  
+        },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -871,7 +882,7 @@ bundle :name => 'php.commercial',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.ui.for.php.#{VERSION}.commercial.zip",
               :file_category => "Installation",
               :file_type => "Paid Files",
@@ -908,7 +919,7 @@ bundle :name => 'core',
        :release_build => {
           :file_metadata => {
              :zip => {
-              :label => "Manual Installation", 
+              :label => "Manual Installation",
               :download_name => "telerik.kendoui.#{VERSION}.core.zip",
               :file_category => "Installation",
               :file_type => "Free Product Files",
@@ -941,7 +952,8 @@ BUNDLES = [
     'php.commercial',
     'php.trial',
     'winjs.commercial',
-    'appbuilder',
+    'appbuilder.professional',
+    'appbuilder.core',
     'core'
 ]
 
@@ -995,14 +1007,24 @@ namespace :build do
         zip_bundles.push("#{ARCHIVE_ROOT}/WinJS/#{destination}")
 
         tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js",
-             :from => FileList[APP_BUILDER_MIN_JS].pathmap('dist/bundles/appbuilder/js/%f'),
-             :root => 'dist/bundles/appbuilder/js'
+             :from => FileList[APP_BUILDER_MIN_JS].pathmap('dist/bundles/appbuilder.professional/js/%f'),
+             :root => 'dist/bundles/appbuilder.professional/js'
 
         zip_bundles.push("#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js")
 
         tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/styles",
-             :from => FileList[APP_BUILDER_MIN_CSS].sub!(/dist\/styles\/(mobile|dataviz)/, 'dist/bundles/appbuilder/styles'),
-             :root => 'dist/bundles/appbuilder/styles'
+             :from => FileList[APP_BUILDER_MIN_CSS].sub!(/dist\/styles\/(mobile|dataviz)/, 'dist/bundles/appbuilder.professional/styles'),
+             :root => 'dist/bundles/appbuilder.professional/styles'
+
+        tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js",
+             :from => FileList[APP_BUILDER_CORE_MIN_JS].pathmap('dist/bundles/appbuilder.core/js/%f'),
+             :root => 'dist/bundles/appbuilder.core/js'
+
+        zip_bundles.push("#{ARCHIVE_ROOT}/AppBuilder/#{destination}/js")
+
+        tree :to => "#{ARCHIVE_ROOT}/AppBuilder/#{destination}/styles",
+             :from => FileList[APP_BUILDER_CORE_MIN_CSS].sub!(/dist\/styles\/(mobile|dataviz)/, 'dist/bundles/appbuilder.core/styles'),
+             :root => 'dist/bundles/appbuilder.core/styles'
 
         zip_bundles.push("#{ARCHIVE_ROOT}/AppBuilder/#{destination}/styles")
 

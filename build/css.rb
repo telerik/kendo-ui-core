@@ -43,6 +43,7 @@ WIN_MIN_CSS = FileList["#{DIST_STYLES_ROOT}web/kendo.winjs.min.css"]
 
 APP_BUILDER_MIN_RESOURCES = FileList[MOBILE_MIN_CSS].keep_if { |f| f =~ /styles\/mobile\/images\// }
 APP_BUILDER_MIN_CSS = FileList["#{DIST_STYLES_ROOT}mobile/kendo.dataviz.mobile.min.css"].include(APP_BUILDER_MIN_RESOURCES).include(DATAVIZ_MIN_CSS).exclude("#{DIST_STYLES_ROOT}dataviz/kendo.dataviz.min.css")
+APP_BUILDER_CORE_MIN_CSS = FileList[APP_BUILDER_MIN_RESOURCES]
 
 CLEAN.include('dist/styles')
 
