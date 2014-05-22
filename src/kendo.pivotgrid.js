@@ -1016,16 +1016,15 @@ var __meta__ = {
 
                     index = rows.length;
 
+                    var maxRowSpan = row._maxRowSpan;
                     var rowspan = newChildRows.length + 1;
 
-                    row.children[rowLength].attr.colspan = getCellsCount(newChildRows[0]);
-                    row.children[rowLength + 1].attr.rowspan = rowspan;
-
-                    var maxRowSpan = row._maxRowSpan;
-
                     if (rowspan > maxRowSpan) {
-                        row._maxRowSpan = rowspan;
+                        row._maxRowSpan = maxRowSpan = rowspan;
                     }
+
+                    row.children[rowLength].attr.colspan = getCellsCount(newChildRows[0]);
+                    row.children[rowLength + 1].attr.rowspan = maxRowSpan;
 
                     var cell = row.children[row.children.length - 1];
 
@@ -1085,13 +1084,35 @@ var __meta__ = {
     }
 
     function addCells(rows, newRows) {
-        var length = rows.length;
+        var rowsLength = rows.length;
+        var newRowsLength = newRows.length;
         var idx = 0;
-        var current;
 
-        for(; idx < length; idx++) {
-            current = rows[idx];
-            current.children = current.children.concat(newRows[idx].children);
+        var row;
+        var rowChildren;
+        var newRowChildren;
+        var cell;
+
+        var j, length;
+
+        if (rowsLength > newRowsLength) {
+            rowsLength = newRowsLength;
+        }
+
+        for(; idx < rowsLength; idx++) {
+            row = rows[idx];
+            rowChildren = row.children;
+            newRowChildren = newRows[idx].children;
+
+            for (j = 0, length = newRowChildren.length; j < length; j++){
+                cell = newRowChildren[j];
+
+                if (!cell.attr.rowspan) {
+                    cell.attr.rowspan = row._maxRowSpan;
+                }
+
+                rowChildren.push(cell);
+            }
         }
     }
 

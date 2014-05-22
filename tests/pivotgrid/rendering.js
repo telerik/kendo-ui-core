@@ -452,6 +452,45 @@
         equal(cells_row3.eq(2).text(), "level 2_3");
     });
 
+    test("PivotGrid appends first level expanded tuple to two levels expanded sibling tuple ", function() {
+       var tuples = [
+            { members: [ { name: "level 0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2_1", parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 3_1", parentName: "level 2_1", children: [] }] },
+            { members: [ { name: "level 2_2", parentName: "level 1_2", children: [] }] },
+            { members: [ { name: "level 2_3", parentName: "level 1_2", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var tr = headerTable.find("tr");
+
+        var row_2 = tr.eq(1);
+        var cells_row2 = row_2.find("th");
+
+        equal(cells_row2.length, 5);
+
+        equal(cells_row2.eq(2).text(), "level 1_2");
+        equal(cells_row2.eq(2).attr("colspan"), 2);
+
+        equal(cells_row2.eq(3).text(), "level 1_2");
+        equal(cells_row2.eq(3).attr("rowspan"), 3);
+
+        var row_3 = tr.eq(2);
+        var cells_row3 = row_3.find("th");
+
+        equal(cells_row3.eq(2).text(), "level 2_2");
+        equal(cells_row3.eq(2).attr("rowspan"), 2);
+        equal(cells_row3.eq(3).text(), "level 2_3");
+        equal(cells_row3.eq(3).attr("rowspan"), 2);
+    });
+
     test("PivotGrid normalizes rowspan values of master row", function() {
         var tuples = [
             { members: [ { name: "level 0", children: [] }] },
