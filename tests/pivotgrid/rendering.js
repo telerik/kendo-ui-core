@@ -403,6 +403,55 @@
         equal(cells_row4.length, 1);
     });
 
+    test("PivotGrid renders second level with two expanded tuples corretly", function() {
+       var tuples = [
+            { members: [ { name: "level 0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2_1", parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 2_2", parentName: "level 1_2", children: [] }] },
+            { members: [ { name: "level 2_3", parentName: "level 1_2", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var tr = headerTable.find("tr");
+        equal(tr.length, 3);
+
+        var row_2 = tr.eq(1);
+        var cells_row2 = row_2.find("th");
+
+        equal(cells_row2.length, 5);
+
+        equal(cells_row2.eq(0).text(), "level 1_1");
+        equal(cells_row2.eq(0).attr("colspan"), 1);
+
+        equal(cells_row2.eq(1).text(), "level 1_1");
+        equal(cells_row2.eq(1).attr("rowspan"), 2);
+
+        equal(cells_row2.eq(2).text(), "level 1_2");
+        equal(cells_row2.eq(2).attr("colspan"), 2);
+
+        equal(cells_row2.eq(3).text(), "level 1_2");
+        equal(cells_row2.eq(3).attr("rowspan"), 2);
+
+        equal(cells_row2.eq(4).text(), "level 1_3");
+        equal(cells_row2.eq(4).attr("rowspan"), 2);
+
+        var row_3 = tr.eq(2);
+        var cells_row3 = row_3.find("th");
+
+        equal(cells_row3.length, 3);
+        equal(cells_row3.eq(0).text(), "level 2_1");
+        equal(cells_row3.eq(1).text(), "level 2_2");
+        equal(cells_row3.eq(2).text(), "level 2_3");
+    });
+
     test("PivotGrid normalizes rowspan values of master row", function() {
         var tuples = [
             { members: [ { name: "level 0", children: [] }] },
