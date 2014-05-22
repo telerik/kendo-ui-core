@@ -1,20 +1,7 @@
 
         <div id="example" class="k-content">
-            <div id="clientsDb">
+            <div id="grid"></div>
 
-                <div id="grid" style="height: 365px"></div>
-
-            </div>
-
-            <style scoped>
-                #clientsDb {
-                    width: 952px;
-                    height: 396px;
-                    margin: 20px auto 0;
-                    padding: 51px 4px 0 4px;
-                    background: url('../content/web/grid/clientsDb.png') no-repeat 0 0;
-                }
-            </style>
             <script>
                 $(document).ready(function () {
                     $("#grid").kendoGrid({
@@ -23,8 +10,9 @@
                             transport: {
                                 read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                             },
-                            pageSize: 10
+                            pageSize: 20
                         },
+                        height: 550,
                         groupable: true,
                         sortable: true,
                         pageable: {
@@ -38,8 +26,7 @@
                             width: 200
                         }, {
                             field: "ContactTitle",
-                            title: "Contact Title",
-                            width: 250
+                            title: "Contact Title"
                         }, {
                             field: "CompanyName",
                             title: "Company Name"
