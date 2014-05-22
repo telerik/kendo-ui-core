@@ -1250,12 +1250,12 @@
 
         var Diagram = Widget.extend({
             init: function (element, userOptions) {
-                var that = this,
-                    options;
+                var that = this;
 
                 kendo.destroy(element);
                 Widget.fn.init.call(that, element);
-                that.options = options = deepExtend({}, that.options, userOptions);
+                that.options = deepExtend({}, that.options, userOptions);
+                that.bind(that.events, that.options);
                 element = that.element; // the hosting element
                 element.empty();
                 that._initTheme();
