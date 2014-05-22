@@ -38,6 +38,20 @@ function stub(that, methods) {
 }
 
 function spy(that, methods) {
+    if (!arguments.length) {
+        var callback = function() {
+            if (!callback.calls) {
+                callback.calls = 0;
+                callback.args = [];
+            }
+
+            callback.calls++;
+            callback.args.push(Array.prototype.splice.call(arguments));
+        };
+
+        return callback;
+    }
+
     methods = callbackHash(methods);
 
     $.each(methods, function(method) {
