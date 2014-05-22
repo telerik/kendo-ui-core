@@ -3115,9 +3115,15 @@ var __meta__ = {
                 size = math.min(pageSkip + take, that.total()),
                 data;
 
+            that._skipRequestsInProgress = false;
+
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
             if (data.length) {
+                if (that._requestInProgress) {
+                    that._skipRequestsInProgress = true;
+                }
+
                 that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
                 that._take = take;
@@ -3296,10 +3302,12 @@ var __meta__ = {
                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
 
-                if (callback && temp.length) {
-                    callback();
-                } else {
-                    that.trigger(CHANGE, {});
+                if (!that._skipRequestsInProgress) {
+                    if (callback && temp.length) {
+                        callback();
+                    } else {
+                        that.trigger(CHANGE, {});
+                    }
                 }
             };
         },
