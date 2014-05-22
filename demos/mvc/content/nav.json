@@ -4,22 +4,22 @@
     "name": "autocomplete",
     "api": "web/autocomplete",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/autocomplete/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/autocomplete/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/autocomplete/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/autocomplete/overview"
+       "kendo-ui": "getting-started/web/autocomplete/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/autocomplete/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/autocomplete/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/autocomplete/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/autocomplete",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/autocomplete",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/autocomplete",
-       "php-ui": "http://www.telerik.com/forums/php/autocomplete"
+       "kendo-ui": "kendo-ui/autocomplete",
+       "aspnet-mvc": "aspnet-mvc/autocomplete",
+       "jsp-ui": "jsp/autocomplete",
+       "php-ui": "php/autocomplete"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/autocomplete",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/autocomplete",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/autocomplete",
-       "php-ui": "http://www.telerik.com/support/code-library/php/autocomplete"
+       "kendo-ui": "kendo-ui/autocomplete",
+       "aspnet-mvc": "aspnet-mvc/autocomplete",
+       "jsp-ui": "jsp/autocomplete",
+       "php-ui": "php/autocomplete"
     },
     "spriteCssClass": "autoCompleteIcon",
     "items": [
@@ -136,22 +136,22 @@
     "name": "button",
     "api": "web/button",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/button/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/button/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/button/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/button/overview"
+       "kendo-ui": "getting-started/web/button/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/button/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/button/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/button/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/button",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/buttonw",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/button",
-       "php-ui": "http://www.telerik.com/forums/php/button"
+       "kendo-ui": "kendo-ui/button",
+       "aspnet-mvc": "aspnet-mvc/buttonw",
+       "jsp-ui": "jsp/button",
+       "php-ui": "php/button"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/button",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/button",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/button",
-       "php-ui": "http://www.telerik.com/support/code-library/php/button"
+       "kendo-ui": "kendo-ui/button",
+       "aspnet-mvc": "aspnet-mvc/button",
+       "jsp-ui": "jsp/button",
+       "php-ui": "php/button"
     },
     "spriteCssClass": "buttonIcon",
     "items": [
@@ -253,22 +253,22 @@
     "name": "calendar",
     "api": "web/calendar",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/calendar/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/calendar/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/calendar/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/calendar/overview"
+       "kendo-ui": "getting-started/web/calendar/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/calendar/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/calendar/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/calendar/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/calendar",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/calendar",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/calendar",
-       "php-ui": "http://www.telerik.com/forums/php/calendar"
+       "kendo-ui": "kendo-ui/calendar",
+       "aspnet-mvc": "aspnet-mvc/calendar",
+       "jsp-ui": "jsp/calendar",
+       "php-ui": "php/calendar"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/calendar",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/calendar",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/calendar",
-       "php-ui": "http://www.telerik.com/support/code-library/php/calendar"
+       "kendo-ui": "kendo-ui/calendar",
+       "aspnet-mvc": "aspnet-mvc/calendar",
+       "jsp-ui": "jsp/calendar",
+       "php-ui": "php/calendar"
     },
     "spriteCssClass": "calendarIcon",
     "items": [
@@ -365,22 +365,22 @@
     "name": "colorpicker",
     "api": "web/colorpicker",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/colorpicker/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/colorpicker/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/colorpicker/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/colorpicker/overview"
+       "kendo-ui": "getting-started/web/colorpicker/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/colorpicker/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/colorpicker/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/colorpicker/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/color-picker",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/color-picker",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/color-picker",
-       "php-ui": "http://www.telerik.com/forums/php/color-picker"
+       "kendo-ui": "kendo-ui/color-picker",
+       "aspnet-mvc": "aspnet-mvc/color-picker",
+       "jsp-ui": "jsp/color-picker",
+       "php-ui": "php/color-picker"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/colorpicker",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/colorpicker",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/colorpicker",
-       "php-ui": "http://www.telerik.com/support/code-library/php/colorpicker"
+       "kendo-ui": "kendo-ui/colorpicker",
+       "aspnet-mvc": "aspnet-mvc/colorpicker",
+       "jsp-ui": "jsp/colorpicker",
+       "php-ui": "php/colorpicker"
     },
     "spriteCssClass": "colorPickerIcon",
     "items": [
@@ -478,22 +478,22 @@
     "name": "combobox",
     "api": "web/combobox",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/combobox/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/combobox/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/combobox/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/combobox/overview"
+       "kendo-ui": "getting-started/web/combobox/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/combobox/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/combobox/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/combobox/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/combobox",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/combobox",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/combobox",
-       "php-ui": "http://www.telerik.com/forums/php/combobox"
+       "kendo-ui": "kendo-ui/combobox",
+       "aspnet-mvc": "aspnet-mvc/combobox",
+       "jsp-ui": "jsp/combobox",
+       "php-ui": "php/combobox"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/combobox",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/combobox",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/combobox",
-       "php-ui": "http://www.telerik.com/support/code-library/php/combobox"
+       "kendo-ui": "kendo-ui/combobox",
+       "aspnet-mvc": "aspnet-mvc/combobox",
+       "jsp-ui": "jsp/combobox",
+       "php-ui": "php/combobox"
     },
     "spriteCssClass": "comboBoxIcon",
     "items": [
@@ -619,22 +619,22 @@
     "name": "datepicker",
     "api": "web/datepicker",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/datepicker/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/datepicker/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/datepicker/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/datepicker/overview"
+       "kendo-ui": "getting-started/web/datepicker/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/datepicker/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/datepicker/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/datepicker/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/date-time-pickers",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/date-time-pickers",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/date-picker-pickers",
-       "php-ui": "http://www.telerik.com/forums/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/date-time-pickers",
+       "aspnet-mvc": "aspnet-mvc/date-time-pickers",
+       "jsp-ui": "jsp/date-picker-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/datepicker",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/datetime",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/date-time-pickers",
-       "php-ui": "http://www.telerik.com/support/code-library/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/datepicker",
+       "aspnet-mvc": "aspnet-mvc/datetime",
+       "jsp-ui": "jsp/date-time-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "spriteCssClass": "datePickerIcon",
     "items": [
@@ -741,22 +741,22 @@
     "name": "datetimepicker",
     "api": "web/datetimepicker",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/datetimepicker/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/datetimepicker/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/datetimepicker/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/datetimepicker/overview"
+       "kendo-ui": "getting-started/web/datetimepicker/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/datetimepicker/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/datetimepicker/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/datetimepicker/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/date-time-pickers",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/date-time-pickers",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/date-picker-pickers",
-       "php-ui": "http://www.telerik.com/forums/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/date-time-pickers",
+       "aspnet-mvc": "aspnet-mvc/date-time-pickers",
+       "jsp-ui": "jsp/date-picker-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/datepicker",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/datetime",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/date-time-pickers",
-       "php-ui": "http://www.telerik.com/support/code-library/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/datepicker",
+       "aspnet-mvc": "aspnet-mvc/datetime",
+       "jsp-ui": "jsp/date-time-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "spriteCssClass": "dateTimePickerIcon",
     "items": [
@@ -863,22 +863,22 @@
     "name": "dropdownlist",
     "api": "web/dropdownlist",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/dropdownlist/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/dropdownlist/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/dropdownlist/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/dropdownlist/overview"
+       "kendo-ui": "getting-started/web/dropdownlist/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/dropdownlist/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/dropdownlist/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/dropdownlist/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/dropdownlist",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/dropdownlist",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/dropdownlist",
-       "php-ui": "http://www.telerik.com/forums/php/dropdownlist"
+       "kendo-ui": "kendo-ui/dropdownlist",
+       "aspnet-mvc": "aspnet-mvc/dropdownlist",
+       "jsp-ui": "jsp/dropdownlist",
+       "php-ui": "php/dropdownlist"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/dropdownlist",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/dropdownlist",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/dropdownlist",
-       "php-ui": "http://www.telerik.com/support/code-library/php/dropdownlist"
+       "kendo-ui": "kendo-ui/dropdownlist",
+       "aspnet-mvc": "aspnet-mvc/dropdownlist",
+       "jsp-ui": "jsp/dropdownlist",
+       "php-ui": "php/dropdownlist"
     },
     "spriteCssClass": "dropDownListIcon",
     "items": [
@@ -996,22 +996,22 @@
     "pro": "true",
     "api": "web/editor",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/editor/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/editor/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/editor/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/editor/overview"
+       "kendo-ui": "getting-started/web/editor/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/editor/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/editor/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/editor/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/editor",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/editor",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/editor",
-       "php-ui": "http://www.telerik.com/forums/php/editor"
+       "kendo-ui": "kendo-ui/editor",
+       "aspnet-mvc": "aspnet-mvc/editor",
+       "jsp-ui": "jsp/editor",
+       "php-ui": "php/editor"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/editor",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/editor",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/editor",
-       "php-ui": "http://www.telerik.com/support/code-library/php/editor"
+       "kendo-ui": "kendo-ui/editor",
+       "aspnet-mvc": "aspnet-mvc/editor",
+       "jsp-ui": "jsp/editor",
+       "php-ui": "php/editor"
     },
     "spriteCssClass": "editorIcon",
     "items": [
@@ -1165,22 +1165,22 @@
     "pro": "true",
     "api": "web/grid",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/grid/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/grid/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/grid/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/grid/overview"
+       "kendo-ui": "getting-started/web/grid/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/grid/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/grid/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/grid/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/grid",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/grid",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/grid",
-       "php-ui": "http://www.telerik.com/forums/php/grid"
+       "kendo-ui": "kendo-ui/grid",
+       "aspnet-mvc": "aspnet-mvc/grid",
+       "jsp-ui": "jsp/grid",
+       "php-ui": "php/grid"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/grid",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/grid",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/grid",
-       "php-ui": "http://www.telerik.com/support/code-library/php/grid"
+       "kendo-ui": "kendo-ui/grid",
+       "aspnet-mvc": "aspnet-mvc/grid",
+       "jsp-ui": "jsp/grid",
+       "php-ui": "php/grid"
     },
     "spriteCssClass": "gridIcon",
     "items": [
@@ -1687,22 +1687,22 @@
     "name": "listview",
     "api": "web/listview",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/listview/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/listview/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/listview/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/listview/overview"
+       "kendo-ui": "getting-started/web/listview/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/listview/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/listview/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/listview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/listview",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/listview",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/listview",
-       "php-ui": "http://www.telerik.com/forums/php/listview"
+       "kendo-ui": "kendo-ui/listview",
+       "aspnet-mvc": "aspnet-mvc/listview",
+       "jsp-ui": "jsp/listview",
+       "php-ui": "php/listview"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/listview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/listview",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/listview",
-       "php-ui": "http://www.telerik.com/support/code-library/php/listview"
+       "kendo-ui": "kendo-ui/listview",
+       "aspnet-mvc": "aspnet-mvc/listview",
+       "jsp-ui": "jsp/listview",
+       "php-ui": "php/listview"
     },
     "spriteCssClass": "listViewIcon",
     "items": [
@@ -1803,22 +1803,22 @@
     "new": "true",
     "api": "web/maskedtextbox",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/maskedtextbox/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/maskedtextbox/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/maskedtextbox/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/maskedtextbox/overview"
+       "kendo-ui": "getting-started/web/maskedtextbox/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/maskedtextbox/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/maskedtextbox/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/maskedtextbox/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/maskedtextbox",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/maskedtextbox",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/maskedtextbox",
-       "php-ui": "http://www.telerik.com/forums/php/maskedtextbox"
+       "kendo-ui": "kendo-ui/maskedtextbox",
+       "aspnet-mvc": "aspnet-mvc/maskedtextbox",
+       "jsp-ui": "jsp/maskedtextbox",
+       "php-ui": "php/maskedtextbox"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/maskedtextbox",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/maskedtextbox",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/maskedtextbox",
-       "php-ui": "http://www.telerik.com/support/code-library/php/maskedtextbox"
+       "kendo-ui": "kendo-ui/maskedtextbox",
+       "aspnet-mvc": "aspnet-mvc/maskedtextbox",
+       "jsp-ui": "jsp/maskedtextbox",
+       "php-ui": "php/maskedtextbox"
     },
     "spriteCssClass": "maskedtextboxIcon",
     "items": [
@@ -1906,22 +1906,22 @@
     "name": "menu",
     "api": "web/menu",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/menu/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/menu/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/menu/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/menu/overview"
+       "kendo-ui": "getting-started/web/menu/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/menu/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/menu/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/menu/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/menu",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/menu",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/menu",
-       "php-ui": "http://www.telerik.com/forums/php/menu"
+       "kendo-ui": "kendo-ui/menu",
+       "aspnet-mvc": "aspnet-mvc/menu",
+       "jsp-ui": "jsp/menu",
+       "php-ui": "php/menu"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/menu",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/menu",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/menu",
-       "php-ui": "http://www.telerik.com/support/code-library/php/menu"
+       "kendo-ui": "kendo-ui/menu",
+       "aspnet-mvc": "aspnet-mvc/menu",
+       "jsp-ui": "jsp/menu",
+       "php-ui": "php/menu"
     },
     "spriteCssClass": "menuIcon",
     "items": [
@@ -2056,22 +2056,22 @@
     "name": "multiselect",
     "api": "web/multiselect",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/multiselect/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/multiselect/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/multiselect/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/multiselect/overview"
+       "kendo-ui": "getting-started/web/multiselect/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/multiselect/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/multiselect/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/multiselect/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/multi-select",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/multi-select",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/multi-select",
-       "php-ui": "http://www.telerik.com/forums/php/multi-select"
+       "kendo-ui": "kendo-ui/multi-select",
+       "aspnet-mvc": "aspnet-mvc/multi-select",
+       "jsp-ui": "jsp/multi-select",
+       "php-ui": "php/multi-select"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/multiselect",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/multiselect",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/multiselect",
-       "php-ui": "http://www.telerik.com/support/code-library/php/multiselect"
+       "kendo-ui": "kendo-ui/multiselect",
+       "aspnet-mvc": "aspnet-mvc/multiselect",
+       "jsp-ui": "jsp/multiselect",
+       "php-ui": "php/multiselect"
     },
     "spriteCssClass": "multiselectIcon",
     "items": [
@@ -2180,22 +2180,22 @@
     "new": true,
     "api": "web/notification",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/notification/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/notification/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/notification/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/notification/overview"
+       "kendo-ui": "getting-started/web/notification/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/notification/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/notification/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/notification/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/notification",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/notification",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/notification",
-       "php-ui": "http://www.telerik.com/forums/php/notification"
+       "kendo-ui": "kendo-ui/notification",
+       "aspnet-mvc": "aspnet-mvc/notification",
+       "jsp-ui": "jsp/notification",
+       "php-ui": "php/notification"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/notification",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/notification",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/notification",
-       "php-ui": "http://www.telerik.com/support/code-library/php/notification"
+       "kendo-ui": "kendo-ui/notification",
+       "aspnet-mvc": "aspnet-mvc/notification",
+       "jsp-ui": "jsp/notification",
+       "php-ui": "php/notification"
     },
     "spriteCssClass": "notificationIcon",
     "items": [
@@ -2268,22 +2268,22 @@
     "name": "numerictextbox",
     "api": "web/numerictextbox",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/numerictextbox/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/numerictextbox/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/numerictextbox/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/numerictextbox/overview"
+       "kendo-ui": "getting-started/web/numerictextbox/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/numerictextbox/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/numerictextbox/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/numerictextbox/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/numeric-textbox",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/numeric-textbox",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/numeric-textbox",
-       "php-ui": "http://www.telerik.com/forums/php/numeric-textbox"
+       "kendo-ui": "kendo-ui/numeric-textbox",
+       "aspnet-mvc": "aspnet-mvc/numeric-textbox",
+       "jsp-ui": "jsp/numeric-textbox",
+       "php-ui": "php/numeric-textbox"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/numerictextbox",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/numerictextbox",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/numerictextbox",
-       "php-ui": "http://www.telerik.com/support/code-library/php/numerictextbox"
+       "kendo-ui": "kendo-ui/numerictextbox",
+       "aspnet-mvc": "aspnet-mvc/numerictextbox",
+       "jsp-ui": "jsp/numerictextbox",
+       "php-ui": "php/numerictextbox"
     },
     "spriteCssClass": "numericTextBoxIcon",
     "items": [
@@ -2370,22 +2370,22 @@
     "name": "panelbar",
     "api": "web/panelbar",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/panelbar/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/panelbar/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/panelbar/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/panelbar/overview"
+       "kendo-ui": "getting-started/web/panelbar/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/panelbar/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/panelbar/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/panelbar/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/panelbar",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/panelbar",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/panelbar",
-       "php-ui": "http://www.telerik.com/forums/php/panelbar"
+       "kendo-ui": "kendo-ui/panelbar",
+       "aspnet-mvc": "aspnet-mvc/panelbar",
+       "jsp-ui": "jsp/panelbar",
+       "php-ui": "php/panelbar"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/panelbar",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/panelbar",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/panelbar",
-       "php-ui": "http://www.telerik.com/support/code-library/php/panelbar"
+       "kendo-ui": "kendo-ui/panelbar",
+       "aspnet-mvc": "aspnet-mvc/panelbar",
+       "jsp-ui": "jsp/panelbar",
+       "php-ui": "php/panelbar"
     },
     "spriteCssClass": "panelBarIcon",
     "items": [
@@ -2496,22 +2496,22 @@
     "name": "progressbar",
     "api": "web/progressbar",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/progressbar/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/progressbar/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/progressbar/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/progressbar/overview"
+       "kendo-ui": "getting-started/web/progressbar/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/progressbar/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/progressbar/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/progressbar/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/progressbar",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/progressbar",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/progressbar",
-       "php-ui": "http://www.telerik.com/forums/php/progressbar"
+       "kendo-ui": "kendo-ui/progressbar",
+       "aspnet-mvc": "aspnet-mvc/progressbar",
+       "jsp-ui": "jsp/progressbar",
+       "php-ui": "php/progressbar"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/progressbar",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/progressbar",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/progressbar",
-       "php-ui": "http://www.telerik.com/support/code-library/php/progressbar"
+       "kendo-ui": "kendo-ui/progressbar",
+       "aspnet-mvc": "aspnet-mvc/progressbar",
+       "jsp-ui": "jsp/progressbar",
+       "php-ui": "php/progressbar"
     },
     "spriteCssClass": "progressBarIcon",
     "items": [
@@ -2610,22 +2610,22 @@
     "pro": "true",
     "api": "web/scheduler",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/scheduler/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/scheduler/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/scheduler/overview"
+       "kendo-ui": "getting-started/web/scheduler/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/scheduler/mvc-scheduler-overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/scheduler/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/scheduler/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/scheduler",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/scheduler",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/scheduler",
-       "php-ui": "http://www.telerik.com/forums/php/scheduler"
+       "kendo-ui": "kendo-ui/scheduler",
+       "aspnet-mvc": "aspnet-mvc/scheduler",
+       "jsp-ui": "jsp/scheduler",
+       "php-ui": "php/scheduler"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/scheduler",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/mvc-scheduler",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/scheduler",
-       "php-ui": "http://www.telerik.com/support/code-library/php/scheduler"
+       "kendo-ui": "kendo-ui/scheduler",
+       "aspnet-mvc": "aspnet-mvc/mvc-scheduler",
+       "jsp-ui": "jsp/scheduler",
+       "php-ui": "php/scheduler"
     },
     "spriteCssClass": "schedulerIcon",
     "items": [
@@ -2800,22 +2800,22 @@
     "name": "slider",
     "api": "web/slider",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/slider/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/slider/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/slider/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/slider/overview"
+       "kendo-ui": "getting-started/web/slider/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/slider/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/slider/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/slider/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/slider",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/slider",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/slider",
-       "php-ui": "http://www.telerik.com/forums/php/slider"
+       "kendo-ui": "kendo-ui/slider",
+       "aspnet-mvc": "aspnet-mvc/slider",
+       "jsp-ui": "jsp/slider",
+       "php-ui": "php/slider"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/slider",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/slider",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/slider",
-       "php-ui": "http://www.telerik.com/support/code-library/php/slider"
+       "kendo-ui": "kendo-ui/slider",
+       "aspnet-mvc": "aspnet-mvc/slider",
+       "jsp-ui": "jsp/slider",
+       "php-ui": "php/slider"
     },
     "spriteCssClass": "sliderIcon",
     "items": [
@@ -2888,22 +2888,22 @@
     "name": "sortable",
     "api": "web/sortable",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/sortable/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/sortable/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/sortable/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/sortable/overview"
+       "kendo-ui": "getting-started/web/sortable/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/sortable/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/sortable/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/sortable/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/sortable",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/sortable",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/sortable",
-       "php-ui": "http://www.telerik.com/forums/php/sortable"
+       "kendo-ui": "kendo-ui/sortable",
+       "aspnet-mvc": "aspnet-mvc/sortable",
+       "jsp-ui": "jsp/sortable",
+       "php-ui": "php/sortable"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/sortable",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/sortable",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/sortable",
-       "php-ui": "http://www.telerik.com/support/code-library/php/sortable"
+       "kendo-ui": "kendo-ui/sortable",
+       "aspnet-mvc": "aspnet-mvc/sortable",
+       "jsp-ui": "jsp/sortable",
+       "php-ui": "php/sortable"
     },
     "spriteCssClass": "sortableIcon",
     "new": true,
@@ -3016,22 +3016,22 @@
     "name": "splitter",
     "api": "web/splitter",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/splitter/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/splitter/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/splitter/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/splitter/overview"
+       "kendo-ui": "getting-started/web/splitter/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/splitter/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/splitter/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/splitter/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/splitter",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/splitter",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/splitter",
-       "php-ui": "http://www.telerik.com/forums/php/splitter"
+       "kendo-ui": "kendo-ui/splitter",
+       "aspnet-mvc": "aspnet-mvc/splitter",
+       "jsp-ui": "jsp/splitter",
+       "php-ui": "php/splitter"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/splitter",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/splitter",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/splitter",
-       "php-ui": "http://www.telerik.com/support/code-library/php/splitter"
+       "kendo-ui": "kendo-ui/splitter",
+       "aspnet-mvc": "aspnet-mvc/splitter",
+       "jsp-ui": "jsp/splitter",
+       "php-ui": "php/splitter"
     },
     "spriteCssClass": "splitterIcon",
     "items": [
@@ -3123,22 +3123,22 @@
     "name": "tabstrip",
     "api": "web/tabstrip",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/tabstrip/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/tabstrip/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/tabstrip/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/tabstrip/overview"
+       "kendo-ui": "getting-started/web/tabstrip/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/tabstrip/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/tabstrip/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/tabstrip/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/tabstrip",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/tabstrip",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/tabstrip",
-       "php-ui": "http://www.telerik.com/forums/php/tabstrip"
+       "kendo-ui": "kendo-ui/tabstrip",
+       "aspnet-mvc": "aspnet-mvc/tabstrip",
+       "jsp-ui": "jsp/tabstrip",
+       "php-ui": "php/tabstrip"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/tabstrip",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/tabstrip",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/tabstrip",
-       "php-ui": "http://www.telerik.com/support/code-library/php/tabstrip"
+       "kendo-ui": "kendo-ui/tabstrip",
+       "aspnet-mvc": "aspnet-mvc/tabstrip",
+       "jsp-ui": "jsp/tabstrip",
+       "php-ui": "php/tabstrip"
     },
     "spriteCssClass": "tabStripIcon",
     "items": [
@@ -3249,22 +3249,22 @@
     "name": "timepicker",
     "api": "web/timepicker",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/timepicker/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/timepicker/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/timepicker/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/timepicker/overview"
+       "kendo-ui": "getting-started/web/timepicker/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/timepicker/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/timepicker/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/timepicker/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/date-time-pickers",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/date-time-pickers",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/date-picker-pickers",
-       "php-ui": "http://www.telerik.com/forums/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/date-time-pickers",
+       "aspnet-mvc": "aspnet-mvc/date-time-pickers",
+       "jsp-ui": "jsp/date-picker-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/datepicker",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/datetime",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/date-time-pickers",
-       "php-ui": "http://www.telerik.com/support/code-library/php/date-time-pickers"
+       "kendo-ui": "kendo-ui/datepicker",
+       "aspnet-mvc": "aspnet-mvc/datetime",
+       "jsp-ui": "jsp/date-time-pickers",
+       "php-ui": "php/date-time-pickers"
     },
     "spriteCssClass": "timePickerIcon",
     "items": [
@@ -3361,22 +3361,22 @@
     "name": "tooltip",
     "api": "web/tooltip",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/tooltip/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/tooltip/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/tooltip/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/tooltip/overview"
+       "kendo-ui": "getting-started/web/tooltip/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/tooltip/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/tooltip/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/tooltip/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/tooltip",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/tooltip",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/tooltip",
-       "php-ui": "http://www.telerik.com/forums/php/tooltip"
+       "kendo-ui": "kendo-ui/tooltip",
+       "aspnet-mvc": "aspnet-mvc/tooltip",
+       "jsp-ui": "jsp/tooltip",
+       "php-ui": "php/tooltip"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/tooltip",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/tooltip",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/tooltip",
-       "php-ui": "http://www.telerik.com/support/code-library/php/tooltip"
+       "kendo-ui": "kendo-ui/tooltip",
+       "aspnet-mvc": "aspnet-mvc/tooltip",
+       "jsp-ui": "jsp/tooltip",
+       "php-ui": "php/tooltip"
     },
     "spriteCssClass": "tooltipIcon",
     "items": [
@@ -3455,22 +3455,22 @@
     "name": "treeview",
     "api": "web/treeview",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/treeview/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/treeview/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/treeview/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/treeview/overview"
+       "kendo-ui": "getting-started/web/treeview/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/treeview/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/treeview/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/treeview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/treeview",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/treeview",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/treeview",
-       "php-ui": "http://www.telerik.com/forums/php/treeview"
+       "kendo-ui": "kendo-ui/treeview",
+       "aspnet-mvc": "aspnet-mvc/treeview",
+       "jsp-ui": "jsp/treeview",
+       "php-ui": "php/treeview"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/treeview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/treeview",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/treeview",
-       "php-ui": "http://www.telerik.com/support/code-library/php/treeview"
+       "kendo-ui": "kendo-ui/treeview",
+       "aspnet-mvc": "aspnet-mvc/treeview",
+       "jsp-ui": "jsp/treeview",
+       "php-ui": "php/treeview"
     },
     "spriteCssClass": "treeViewIcon",
     "items": [
@@ -3633,22 +3633,22 @@
     "pro": "true",
     "api": "web/upload",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/upload/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/upload/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/upload/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/upload/overview"
+       "kendo-ui": "getting-started/web/upload/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/upload/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/upload/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/upload/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/upload",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/upload",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/upload",
-       "php-ui": "http://www.telerik.com/forums/php/upload"
+       "kendo-ui": "kendo-ui/upload",
+       "aspnet-mvc": "aspnet-mvc/upload",
+       "jsp-ui": "jsp/upload",
+       "php-ui": "php/upload"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/upload",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/upload",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/upload",
-       "php-ui": "http://www.telerik.com/support/code-library/php/upload"
+       "kendo-ui": "kendo-ui/upload",
+       "aspnet-mvc": "aspnet-mvc/upload",
+       "jsp-ui": "jsp/upload",
+       "php-ui": "php/upload"
     },
     "spriteCssClass": "uploadIcon",
     "packages": [
@@ -3749,22 +3749,22 @@
     "name": "window",
     "api": "web/window",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/web/window/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/window/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/window/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/window/overview"
+       "kendo-ui": "getting-started/web/window/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/window/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/window/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/window/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/window",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/window",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/window",
-       "php-ui": "http://www.telerik.com/forums/php/window"
+       "kendo-ui": "kendo-ui/window",
+       "aspnet-mvc": "aspnet-mvc/window",
+       "jsp-ui": "jsp/window",
+       "php-ui": "php/window"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/window",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/window",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/window",
-       "php-ui": "http://www.telerik.com/support/code-library/php/window"
+       "kendo-ui": "kendo-ui/window",
+       "aspnet-mvc": "aspnet-mvc/window",
+       "jsp-ui": "jsp/window",
+       "php-ui": "php/window"
     },
     "spriteCssClass": "windowIcon",
     "items": [
@@ -3877,13 +3877,13 @@
     "name": "datasource",
     "api": "framework/datasource",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/datasource/overview"
+       "kendo-ui": "getting-started/framework/datasource/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/data-source"
+       "kendo-ui": "kendo-ui/data-source"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/datasource"
+       "kendo-ui": "kendo-ui/datasource"
     },
     "spriteCssClass": "dataSourceIcon",
     "items": [
@@ -3958,13 +3958,13 @@
     "name": "templates",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/templates/overview"
+       "kendo-ui": "getting-started/framework/templates/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/templates"
+       "kendo-ui": "kendo-ui/templates"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/templates"
+       "kendo-ui": "kendo-ui/templates"
     },
     "spriteCssClass": "templatesIcon",
     "items": [
@@ -3997,13 +3997,13 @@
     "name": "mvvm",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/overview"
+       "kendo-ui": "getting-started/framework/mvvm/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/mvvm"
+       "kendo-ui": "kendo-ui/mvvm"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/mvvm"
+       "kendo-ui": "kendo-ui/mvvm"
     },
     "spriteCssClass": "mvvmIcon",
     "items": [
@@ -4106,13 +4106,13 @@
     "name": "spa",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/spa/overview"
+       "kendo-ui": "getting-started/framework/spa/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/spa"
+       "kendo-ui": "kendo-ui/spa"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/spa"
+       "kendo-ui": "kendo-ui/spa"
     },
     "spriteCssClass": "spaIcon",
     "disableInMobile": true,
@@ -4125,7 +4125,8 @@
         },
         "meta": {
             "kendo-ui": "In this example we will demonstrate the basic usage and functionality of Kendo UI Web for building single-page applications."
-        }
+        },
+        "packages": [ "!mvc", "!jsp", "!php", "!offline" ]
       }
     ],
     "category": "Framework"
@@ -4137,13 +4138,13 @@
     "name": "fx",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/fx/overview"
+       "kendo-ui": "getting-started/framework/fx/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/effects"
+       "kendo-ui": "kendo-ui/effects"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/effects"
+       "kendo-ui": "kendo-ui/effects"
     },
     "spriteCssClass": "mvvmIcon",
     "items": [
@@ -4257,13 +4258,13 @@
     "name": "dragdrop",
     "api": "framework/draggable",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/draganddrop/overview"
+       "kendo-ui": "getting-started/framework/draganddrop/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/drag-and-drop"
+       "kendo-ui": "kendo-ui/drag-and-drop"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/draganddrop"
+       "kendo-ui": "kendo-ui/draganddrop"
     },
     "spriteCssClass": "dragDropIcon",
     "items": [
@@ -4316,13 +4317,13 @@
     "name": "validator",
     "api": "framework/validator",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/validator/overview"
+       "kendo-ui": "getting-started/framework/validator/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/validation"
+       "kendo-ui": "kendo-ui/validation"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/validator"
+       "kendo-ui": "kendo-ui/validator"
     },
     "spriteCssClass": "validatorIcon",
     "items": [
@@ -4355,13 +4356,13 @@
     "name": "globalization",
     "api": "framework/kendo",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/framework/globalization/overview"
+       "kendo-ui": "getting-started/framework/globalization/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/globalization"
+       "kendo-ui": "kendo-ui/globalization"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/globalization"
+       "kendo-ui": "kendo-ui/globalization"
     },
     "spriteCssClass": "globalizationIcon",
     "items": [
@@ -4451,22 +4452,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartAreaIcon",
     "items": [
@@ -4620,22 +4621,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartBarIcon",
     "items": [
@@ -4833,22 +4834,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartBoxPlotIcon",
     "items": [
@@ -4900,22 +4901,22 @@
     "name": "bubble-charts",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartBubbleIcon",
     "items": [
@@ -4985,22 +4986,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartBulletIcon",
     "items": [
@@ -5059,22 +5060,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartDonutIcon",
     "items": [
@@ -5144,22 +5145,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartFunnelIcon",
     "items": [
@@ -5235,22 +5236,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartLineIcon",
     "items": [
@@ -5414,22 +5415,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartPieIcon",
     "items": [
@@ -5499,22 +5500,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartPolarIcon",
     "items": [
@@ -5604,22 +5605,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartRadarIcon",
     "items": [
@@ -5721,22 +5722,22 @@
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/chart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/chart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/chart/overview"
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartScatterIcon",
     "items": [
@@ -5861,22 +5862,22 @@
     "pro": "true",
     "api": "dataviz/sparkline",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/sparkline/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/sparkline/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/sparkline/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/sparkline/overview"
+       "kendo-ui": "getting-started/dataviz/sparkline/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/sparkline/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/sparkline/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/sparkline/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/sparkline",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/sparkline",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/sparkline",
-       "php-ui": "http://www.telerik.com/forums/php/sparkline"
+       "kendo-ui": "kendo-ui/sparkline",
+       "aspnet-mvc": "aspnet-mvc/sparkline",
+       "jsp-ui": "jsp/sparkline",
+       "php-ui": "php/sparkline"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/sparkline",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/sparkline",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/sparkline",
-       "php-ui": "http://www.telerik.com/support/code-library/php/sparkline"
+       "kendo-ui": "kendo-ui/sparkline",
+       "aspnet-mvc": "aspnet-mvc/sparkline",
+       "jsp-ui": "jsp/sparkline",
+       "php-ui": "php/sparkline"
     },
     "spriteCssClass": "sparklineIcon",
     "items": [
@@ -5983,22 +5984,22 @@
     "spriteCssClass": "gaugeLinearIcon",
     "api": "dataviz/lineargauge",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/lineargauge/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/lineargauge/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/lineargauge/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/lineargauge/overview"
+       "kendo-ui": "getting-started/dataviz/lineargauge/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/lineargauge/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/lineargauge/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/lineargauge/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/gauges",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/gauge",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/gauge",
-       "php-ui": "http://www.telerik.com/forums/php/gauge"
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/gauges",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/gauge",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/gauge",
-       "php-ui": "http://www.telerik.com/support/code-library/php/gauge"
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
     },
     "items": [
       {
@@ -6046,22 +6047,22 @@
     "spriteCssClass": "gaugeRadialIcon",
     "api": "dataviz/radialgauge",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/radialgauge/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/radialgauge/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/radialgauge/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/radialgauge/overview"
+       "kendo-ui": "getting-started/dataviz/radialgauge/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/radialgauge/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/radialgauge/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/radialgauge/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/gauges",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/gauge",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/gauge",
-       "php-ui": "http://www.telerik.com/forums/php/gauge"
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/gauges",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/gauge",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/gauge",
-       "php-ui": "http://www.telerik.com/support/code-library/php/gauge"
+       "kendo-ui": "kendo-ui/gauges",
+       "aspnet-mvc": "aspnet-mvc/gauge",
+       "jsp-ui": "jsp/gauge",
+       "php-ui": "php/gauge"
     },
     "items": [
       {
@@ -6124,22 +6125,22 @@
     "spriteCssClass": "barcodeIcon",
     "api": "dataviz/barcode",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/barcode/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/barcode/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/barcode/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/barcode/overview"
+       "kendo-ui": "getting-started/dataviz/barcode/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/barcode/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/barcode/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/barcode/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/barcode",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/barcode",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/barcode",
-       "php-ui": "http://www.telerik.com/forums/php/barcode"
+       "kendo-ui": "kendo-ui/barcode",
+       "aspnet-mvc": "aspnet-mvc/barcode",
+       "jsp-ui": "jsp/barcode",
+       "php-ui": "php/barcode"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/barcode",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/barcode",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/barcode",
-       "php-ui": "http://www.telerik.com/support/code-library/php/barcode"
+       "kendo-ui": "kendo-ui/barcode",
+       "aspnet-mvc": "aspnet-mvc/barcode",
+       "jsp-ui": "jsp/barcode",
+       "php-ui": "php/barcode"
     },
     "items": [
       {
@@ -6190,22 +6191,22 @@
     "spriteCssClass": "qrcodeIcon",
     "api": "dataviz/qrcode",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/qrcode/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/rqcode/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/qrcode/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/qrcode/overview"
+       "kendo-ui": "getting-started/dataviz/qrcode/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/rqcode/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/qrcode/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/qrcode/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/qrcode",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/qrcode",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/qrcode",
-       "php-ui": "http://www.telerik.com/forums/php/qrcode"
+       "kendo-ui": "kendo-ui/qrcode",
+       "aspnet-mvc": "aspnet-mvc/qrcode",
+       "jsp-ui": "jsp/qrcode",
+       "php-ui": "php/qrcode"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/qrcode",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/qrcode",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/qrcode",
-       "php-ui": "http://www.telerik.com/support/code-library/php/qrcode"
+       "kendo-ui": "kendo-ui/qrcode",
+       "aspnet-mvc": "aspnet-mvc/qrcode",
+       "jsp-ui": "jsp/qrcode",
+       "php-ui": "php/qrcode"
     },
     "items": [
       {
@@ -6255,22 +6256,22 @@
     "pro": "true",
     "api": "dataviz/stock-chart",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/stockchart/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/stockchart/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/stockchart/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/stockchart/overview"
+       "kendo-ui": "getting-started/dataviz/stockchart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/stockchart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/stockchart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/stockchart/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/chart",
-       "php-ui": "http://www.telerik.com/forums/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/charts",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/chart",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/chart",
-       "php-ui": "http://www.telerik.com/support/code-library/php/chart"
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
     },
     "spriteCssClass": "chartStockIcon",
     "items": [
@@ -6331,22 +6332,22 @@
     "name": "map",
     "api": "dataviz/map",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/map/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/map/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/map/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/map/overview"
+       "kendo-ui": "getting-started/dataviz/map/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/map/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/map/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/map/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/map",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/map",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/map",
-       "php-ui": "http://www.telerik.com/forums/php/map"
+       "kendo-ui": "kendo-ui/map",
+       "aspnet-mvc": "aspnet-mvc/map",
+       "jsp-ui": "jsp/map",
+       "php-ui": "php/map"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/map",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/map",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/map",
-       "php-ui": "http://www.telerik.com/support/code-library/php/map"
+       "kendo-ui": "kendo-ui/map",
+       "aspnet-mvc": "aspnet-mvc/map",
+       "jsp-ui": "jsp/map",
+       "php-ui": "php/map"
     },
     "spriteCssClass": "mapIcon",
     "items": [
@@ -6418,22 +6419,22 @@
     "beta": "true",
     "api": "dataviz/diagram",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/dataviz/diagram/overview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/diagram/overview",
-       "jsp-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/jsp/tags/diagram/overview",
-       "php-ui": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/php/widgets/diagram/overview"
+       "kendo-ui": "getting-started/dataviz/diagram/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/diagram/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/diagram/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/diagram/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/diagram",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/diagram",
-       "jsp-ui": "http://www.telerik.com/forums/jsp/diagram",
-       "php-ui": "http://www.telerik.com/forums/php/diagram"
+       "kendo-ui": "kendo-ui/diagram",
+       "aspnet-mvc": "aspnet-mvc/diagram",
+       "jsp-ui": "jsp/diagram",
+       "php-ui": "php/diagram"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/diagram",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/diagram",
-       "jsp-ui": "http://www.telerik.com/support/code-library/jsp/diagram",
-       "php-ui": "http://www.telerik.com/support/code-library/php/diagram"
+       "kendo-ui": "kendo-ui/diagram",
+       "aspnet-mvc": "aspnet-mvc/diagram",
+       "jsp-ui": "jsp/diagram",
+       "php-ui": "php/diagram"
     },
     "spriteCssClass": "diagramIcon",
     "items": [
@@ -6466,16 +6467,16 @@
     "name": "actionsheet",
     "api": "actionsheet/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/actionsheet",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
+       "kendo-ui": "getting-started/mobile/actionsheet",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/action-sheet",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/actionsheet"
+       "kendo-ui": "kendo-ui/action-sheet",
+       "aspnet-mvc": "aspnet-mvc/actionsheet"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/actionsheet",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/actionsheet"
+       "kendo-ui": "kendo-ui/actionsheet",
+       "aspnet-mvc": "aspnet-mvc/actionsheet"
     },
     "spriteCssClass": "mobileActionSheetIcon",
     "mobile": true,
@@ -6510,16 +6511,16 @@
     "name": "mobile-button",
     "api": "button/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/button",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebutton/overview"
+       "kendo-ui": "getting-started/mobile/button",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebutton/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/mobile-button",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/button"
+       "kendo-ui": "kendo-ui/mobile-button",
+       "aspnet-mvc": "aspnet-mvc/button"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/mobile-button",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/mobile-button"
+       "kendo-ui": "kendo-ui/mobile-button",
+       "aspnet-mvc": "aspnet-mvc/mobile-button"
     },
     "spriteCssClass": "mobileButtonIcon",
     "mobile": true,
@@ -6600,16 +6601,16 @@
     "name": "buttongroup",
     "api": "buttongroup/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/buttongroup",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebuttongroup/overview"
+       "kendo-ui": "getting-started/mobile/buttongroup",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebuttongroup/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/button-group",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/buttongroup"
+       "kendo-ui": "kendo-ui/button-group",
+       "aspnet-mvc": "aspnet-mvc/buttongroup"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/buttongroup",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/buttongroup"
+       "kendo-ui": "kendo-ui/buttongroup",
+       "aspnet-mvc": "aspnet-mvc/buttongroup"
     },
     "spriteCssClass": "mobileButtonGroupIcon",
     "mobile": true,
@@ -6699,16 +6700,16 @@
     "name": "drawer",
     "api": "drawer/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/drawer",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobiledrawer/overview"
+       "kendo-ui": "getting-started/mobile/drawer",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobiledrawer/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/drawer",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/drawer"
+       "kendo-ui": "kendo-ui/drawer",
+       "aspnet-mvc": "aspnet-mvc/drawer"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/drawer",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/drawer"
+       "kendo-ui": "kendo-ui/drawer",
+       "aspnet-mvc": "aspnet-mvc/drawer"
     },
     "spriteCssClass": "mobileDrawerIcon",
     "mobile": true,
@@ -6753,16 +6754,16 @@
     "name": "mobile-listview",
     "api": "listview/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/listview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelistview/overview"
+       "kendo-ui": "getting-started/mobile/listview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelistview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/mobile-listview",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/listview-mobile"
+       "kendo-ui": "kendo-ui/mobile-listview",
+       "aspnet-mvc": "aspnet-mvc/listview-mobile"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/mobile-listview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/mobile-listview"
+       "kendo-ui": "kendo-ui/mobile-listview",
+       "aspnet-mvc": "aspnet-mvc/mobile-listview"
     },
     "spriteCssClass": "mobileListViewIcon",
     "mobile": true,
@@ -6933,16 +6934,16 @@
     "packages": [ "!jsp", "!php" ],
     "api": "modalview/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/modalview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilemodalview/overview"
+       "kendo-ui": "getting-started/mobile/modalview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilemodalview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/modal-view",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/modalview"
+       "kendo-ui": "kendo-ui/modal-view",
+       "aspnet-mvc": "aspnet-mvc/modalview"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/modalview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/modalview"
+       "kendo-ui": "kendo-ui/modalview",
+       "aspnet-mvc": "aspnet-mvc/modalview"
     },
     "spriteCssClass": "mobileModalViewIcon",
     "mobile": true,
@@ -6976,16 +6977,16 @@
     "name": "navbar",
     "api": "navbar/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/navbar",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelanavbar/overview"
+       "kendo-ui": "getting-started/mobile/navbar",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelanavbar/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/navbar",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/navbar"
+       "kendo-ui": "kendo-ui/navbar",
+       "aspnet-mvc": "aspnet-mvc/navbar"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/navbar",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/navbar"
+       "kendo-ui": "kendo-ui/navbar",
+       "aspnet-mvc": "aspnet-mvc/navbar"
     },
     "spriteCssClass": "mobileNavBarIcon",
     "mobile": true,
@@ -7031,16 +7032,16 @@
     "tablet": true,
     "api": "popover/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/popover",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilepopover/overview"
+       "kendo-ui": "getting-started/mobile/popover",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilepopover/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/pop-over",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/popover"
+       "kendo-ui": "kendo-ui/pop-over",
+       "aspnet-mvc": "aspnet-mvc/popover"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/popover",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/popover"
+       "kendo-ui": "kendo-ui/popover",
+       "aspnet-mvc": "aspnet-mvc/popover"
     },
     "spriteCssClass": "mobilePopOverIcon",
     "mobile": true,
@@ -7075,16 +7076,16 @@
     "name": "scroller",
     "api": "scroller/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/scroller",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescroller/overview"
+       "kendo-ui": "getting-started/mobile/scroller",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescroller/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/scroller",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/scroller"
+       "kendo-ui": "kendo-ui/scroller",
+       "aspnet-mvc": "aspnet-mvc/scroller"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/scroller",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/scroller"
+       "kendo-ui": "kendo-ui/scroller",
+       "aspnet-mvc": "aspnet-mvc/scroller"
     },
     "spriteCssClass": "mobileScrollerIcon",
     "mobile": true,
@@ -7129,16 +7130,16 @@
     "name": "scrollview",
     "api": "scrollview/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/scrollview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescrollview/overview"
+       "kendo-ui": "getting-started/mobile/scrollview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescrollview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/scrollview",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/scrollview"
+       "kendo-ui": "kendo-ui/scrollview",
+       "aspnet-mvc": "aspnet-mvc/scrollview"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/scrollview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/scrollview"
+       "kendo-ui": "kendo-ui/scrollview",
+       "aspnet-mvc": "aspnet-mvc/scrollview"
     },
     "spriteCssClass": "mobileScrollViewIcon",
     "mobile": true,
@@ -7199,16 +7200,16 @@
     "name": "Switch",
     "api": "switch/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/switch",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobileswitch/overview"
+       "kendo-ui": "getting-started/mobile/switch",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileswitch/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/switch",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/switch"
+       "kendo-ui": "kendo-ui/switch",
+       "aspnet-mvc": "aspnet-mvc/switch"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/switch",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/switch"
+       "kendo-ui": "kendo-ui/switch",
+       "aspnet-mvc": "aspnet-mvc/switch"
     },
     "spriteCssClass": "mobileSwitchIcon",
     "mobile": true,
@@ -7268,16 +7269,16 @@
     "name": "mobile-tabstrip",
     "api": "tabstrip/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/tabstrip",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobiletabstrip/overview"
+       "kendo-ui": "getting-started/mobile/tabstrip",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobiletabstrip/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/mobile-tabstrip",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/tabstrip-mobile"
+       "kendo-ui": "kendo-ui/mobile-tabstrip",
+       "aspnet-mvc": "aspnet-mvc/tabstrip-mobile"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/mobile-tabstrip",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/mobile-tabstrip"
+       "kendo-ui": "kendo-ui/mobile-tabstrip",
+       "aspnet-mvc": "aspnet-mvc/mobile-tabstrip"
     },
     "spriteCssClass": "mobileTabStripIcon",
     "mobile": true,
@@ -7332,16 +7333,16 @@
     "name": "application",
     "api": "application/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/application",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
+       "kendo-ui": "getting-started/mobile/application",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/application",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/application"
+       "kendo-ui": "kendo-ui/application",
+       "aspnet-mvc": "aspnet-mvc/application"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/application",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/application"
+       "kendo-ui": "kendo-ui/application",
+       "aspnet-mvc": "aspnet-mvc/application"
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
@@ -7425,7 +7426,7 @@
     "name": "touchevents",
     "api": "touch/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/touch"
+       "kendo-ui": "getting-started/mobile/touch"
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
@@ -7449,16 +7450,16 @@
     "name": "mobile-view",
     "api": "view/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/view",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobileview/overview"
+       "kendo-ui": "getting-started/mobile/view",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/view",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/view"
+       "kendo-ui": "kendo-ui/view",
+       "aspnet-mvc": "aspnet-mvc/view"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/view",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/view"
+       "kendo-ui": "kendo-ui/view",
+       "aspnet-mvc": "aspnet-mvc/view"
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
@@ -7495,16 +7496,16 @@
     "name": "SplitView",
     "api": "splitview/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/splitview",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilesplitview/overview"
+       "kendo-ui": "getting-started/mobile/splitview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilesplitview/overview"
     },
     "forum": {
-       "kendo-ui": "http://www.telerik.com/forums/kendo-ui/split-view",
-       "aspnet-mvc": "http://www.telerik.com/forums/aspnet-mvc/splitview"
+       "kendo-ui": "kendo-ui/split-view",
+       "aspnet-mvc": "aspnet-mvc/splitview"
     },
     "codelibrary": {
-       "kendo-ui": "http://www.telerik.com/support/code-library/kendo-ui/splitview",
-       "aspnet-mvc": "http://www.telerik.com/support/code-library/aspnet-mvc/splitview"
+       "kendo-ui": "kendo-ui/splitview",
+       "aspnet-mvc": "aspnet-mvc/splitview"
     },
     "spriteCssClass": "mobileSplitViewIcon",
     "mobile": true,
@@ -7539,8 +7540,8 @@
     "name": "mobile-layout",
     "api": "layout/adaptive",
     "documentation": {
-       "kendo-ui": "http://docs.telerik.com/kendo-ui/getting-started/mobile/layout",
-       "aspnet-mvc": "http://docs.telerik.com/kendo-ui/getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelayout/overview"
+       "kendo-ui": "getting-started/mobile/layout",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelayout/overview"
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,

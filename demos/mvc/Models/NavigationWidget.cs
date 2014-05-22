@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Kendo.Models
 {
@@ -15,6 +16,9 @@ namespace Kendo.Models
         public bool Beta { get; set; }
         public bool Pro { get; set; }
         public bool Mobile { get; set; }
+        public IDictionary<string, string> Documentation { get; set; }
+        public IDictionary<string, string> Forum { get; set; }
+        public IDictionary<string, string> CodeLibrary { get; set; }
 
         public NavigationExample[] Items { get; set; }
     }

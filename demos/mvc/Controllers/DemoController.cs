@@ -83,6 +83,21 @@ namespace Kendo.Controllers
                 }
             }
 
+            if (ViewBag.CurrentWidget.Documentation.ContainsKey(product))
+            {
+                ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/" + ViewBag.CurrentWidget.Documentation[product];
+            }
+
+            if (ViewBag.CurrentWidget.Forum.ContainsKey(product))
+            {
+                ViewBag.Forum = "http://www.telerik.com/forums/" + ViewBag.CurrentWidget.Forum[product];
+            }
+
+            if (ViewBag.CurrentWidget.CodeLibrary.ContainsKey(product))
+            {
+                ViewBag.CodeLibrary = "http://www.telerik.com/support/code-library/" + ViewBag.CurrentWidget.CodeLibrary[product];
+            }
+
             return View(
                 string.Format("~/Views/demos/{0}/{1}.cshtml", section, example)
             );
