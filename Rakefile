@@ -71,7 +71,8 @@ ROOT_MAP = {
     'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
     'src/php' => 'wrappers/php/',
     'wrappers/jsp/spring-demos/src' => 'wrappers/java/spring-demos/src/',
-    'wrappers/php' => 'wrappers/php'
+    'wrappers/php' => 'wrappers/php',
+    'typescript' => 'resources/typescript'
 }
 
 def md_api_suite(suite)
@@ -729,7 +730,8 @@ bundle :name => 'appbuilder.professional',
        :type_script => %w(mobile),
        :contents => {
             'styles' => APP_BUILDER_MIN_CSS,
-            'js' => APP_BUILDER_MIN_JS + JQUERY_MAP
+            'js' => APP_BUILDER_MIN_JS + JQUERY_MAP,
+            'typescript' => FileList['resources/typescript/jquery.d.ts']
        }
 
 bundle :name => 'appbuilder.core',
@@ -737,7 +739,8 @@ bundle :name => 'appbuilder.core',
        :type_script => %w(mobile),
        :contents => {
             'styles' => APP_BUILDER_CORE_MIN_CSS,
-            'js' => APP_BUILDER_CORE_MIN_JS + JQUERY_MAP
+            'js' => APP_BUILDER_CORE_MIN_JS + JQUERY_MAP,
+            'typescript' => FileList['resources/typescript/jquery.d.ts']
        }
 # UI for JSP
 bundle :name => 'jsp.trial',
