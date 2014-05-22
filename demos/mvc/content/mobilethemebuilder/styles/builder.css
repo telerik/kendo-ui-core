@@ -131,7 +131,7 @@ body.k-popup
     position: relative;
     display: inline-block;
     overflow: visible;
-    margin: 100px 50px 0 15px;
+    margin: 100px 50px 60px 15px;
     text-align: left;
     white-space: normal;
 }
@@ -334,10 +334,10 @@ body > label
 
 .tools
 {
-    height: 136px;
     background: #d9d9d9;
-    box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
+    background: linear-gradient(to bottom, #FFF, #EEE 55px, #d9d9d9 56px, #d9d9d9 100%);
     -webkit-box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
+    box-shadow: inset 0 1px 0 #c4c4c4, inset 0 -1px 0 #fff;
 }
 
 .holder
@@ -515,8 +515,6 @@ body > label
     background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#eee));
     background: -moz-linear-gradient(top, #fff, #eee);
     background: linear-gradient(to bottom, #fff, #eee);
-    height: 62px;
-    line-height: 62px;
     color: #777;
     white-space: nowrap;
     vertical-align: middle;
@@ -530,7 +528,7 @@ body > label
 
 .tools .menu
 {
-    margin: 10px 0 0 10px;
+    margin: 10px;
     font-size: 14px;
     display: inline-block;
     text-transform: uppercase;
@@ -1212,7 +1210,7 @@ body > label
 .applyall
 {
     position: fixed;
-    top: 205px;
+    top: 257px;
     right: 56px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1224,7 +1222,7 @@ body > label
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     z-index: 1000;
     right: 0;
-    top: 197px;
+    top: 248px;
     background: #7f7f7f;
     box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
     -webkit-box-shadow: inset -1px 1px 3px rgba(0,0,0,.3), -1px 1px 5px rgba(0,0,0,.3);
