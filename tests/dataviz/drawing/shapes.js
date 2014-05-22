@@ -445,7 +445,7 @@
 
         test("measure takes font in consideration", function() {
             text.options.set("font", "15px sans-serif");
-            deepEqual(text.measure(), util.measureText("Foo", { font: "15px arial" }));
+            deepEqual(text.measure(), util.measureText("Foo", { font: "15px sans-serif" }));
         });
 
         shapeBaseTests(Text, "Text");
