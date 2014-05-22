@@ -14,7 +14,7 @@
                             serverPaging: true,
                             serverSorting: true
                         },
-                        height: 430,
+                        height: 600,
                         sortable: true,
                         pageable: true,
                         detailInit: detailInit,
@@ -57,7 +57,7 @@
                             serverPaging: true,
                             serverSorting: true,
                             serverFiltering: true,
-                            pageSize: 5,
+                            pageSize: 10,
                             filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
                         },
                         scrollable: false,
@@ -67,7 +67,7 @@
                             { field: "OrderID", width: "70px" },
                             { field: "ShipCountry", title:"Ship Country", width: "110px" },
                             { field: "ShipAddress", title:"Ship Address" },
-                            { field: "ShipName", title: "Ship Name", width: "200px" }
+                            { field: "ShipName", title: "Ship Name", width: "300px" }
                         ]
                     });
                 }

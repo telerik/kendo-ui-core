@@ -37,13 +37,13 @@
                             transport: {
                                 read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees"
                             },
-                            pageSize: 5,
+                            pageSize: 20,
                             serverPaging: true,
                             serverSorting: true
                         },
-                        height: 430,
+                        height: 550,
                         sortable: true,
-                        pageable: true,
+                        pageable: false,
                         detailTemplate: kendo.template($("#template").html()),
                         detailInit: detailInit,
                         dataBound: function() {
@@ -93,17 +93,17 @@
                             serverPaging: true,
                             serverSorting: true,
                             serverFiltering: true,
-                            pageSize: 5,
+                            pageSize: 7,
                             filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
                         },
                         scrollable: false,
                         sortable: true,
                         pageable: true,
                         columns: [
-                            { field: "OrderID", title:"ID", width: "56px" },
+                            { field: "OrderID", title:"ID", width: "70px" },
                             { field: "ShipCountry", title:"Ship Country", width: "110px" },
                             { field: "ShipAddress", title:"Ship Address" },
-                            { field: "ShipName", title: "Ship Name", width: "190px" }
+                            { field: "ShipName", title: "Ship Name", width: "300px" }
                         ]
                     });
                 }

@@ -17,7 +17,7 @@
                     $("#singleSort").kendoGrid({
                         dataSource: {
                             data: orders,
-                            pageSize: 5
+                            pageSize: 6
                         },
                         sortable: {
                             mode: "single",
@@ -31,11 +31,11 @@
                             {
                                 field: "ShipCountry",
                                 title: "Ship Country",
-                                width: 200
+                                width: 300
                             },
                             {
                                 field: "Freight",
-                                width: 200
+                                width: 300
                             },
                             {
                                 field: "OrderDate",
@@ -48,7 +48,7 @@
                     $("#multipleSort").kendoGrid({
                         dataSource: {
                             data: orders,
-                            pageSize: 5
+                            pageSize: 6
                         },
                         sortable: {
                             mode: "multiple",
@@ -62,11 +62,11 @@
                             {
                                 field: "ShipCountry",
                                 title: "Ship Country",
-                                width: 200
+                                width: 300
                             },
                             {
                                 field: "Freight",
-                                width: 200
+                                width: 300
                             },
                             {
                                 field: "OrderDate",
@@ -78,12 +78,8 @@
                 });
             </script>
             <style scoped>
-                .demo-section {
-                    width: 600px;
-                }
                 .demo-section h3 {
                     margin: 5px 0 15px 0;
-                    text-align: center;
                 }
             </style>
         </div>
