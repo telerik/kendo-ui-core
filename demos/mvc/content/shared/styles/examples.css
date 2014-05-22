@@ -3003,7 +3003,8 @@ a.footer-links:hover {
 }
 
 #layout-search-wrapper {
-    padding: 1.875em 0;
+    padding: 2.833em 0;
+    border-bottom: 1px solid #ebecee;
 }
 
 #example-search-wrapper .search,
@@ -3065,17 +3066,19 @@ a.footer-links:hover {
 
 #example-search-list {
     background: #f5f7f8;
+    height: 290px;
 }
 
 #example-search-list li {
-    padding: 0.692em;
+    padding: 0.750em;
+    line-height: 1.083em;
+    min-height: 0;  
+    border: none;
 }
 
 #example-search-list li.k-state-hover {
-    font-weight: bold;
-    background: #cad0d6;
-    border: none;
-    min-height: 0;    
+    /*font-weight: bold;*/
+    background: #cad0d6; 
 }
 
 #example-search-list a{
@@ -3093,4 +3096,18 @@ a.footer-links:hover {
     width: 44%;
     margin: 0 auto; 
     overflow: auto;
+}
+
+.section {
+    display: inline-block;
+    width: 17%;   
+}
+
+.demo-name {
+    display: inline-block; 
+}
+
+.k-state-hover,
+.k-state-hover:hover {
+    
 }
