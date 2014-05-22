@@ -3072,8 +3072,7 @@ var __meta__ = {
                 that.scrollables = header.children(".k-grid-header-wrap");
 
                 // the footer may exists if rendered from the server
-                var footer = that.wrapper.find(".k-grid-footer"),
-                    webKitRtlCorrection = (isRtl && browser.webkit) ? scrollbar : 0;
+                var footer = that.wrapper.find(".k-grid-footer");
 
                 if (footer.length) {
                     that.scrollables = that.scrollables.add(footer.children(".k-grid-footer-wrap"));
@@ -3081,14 +3080,14 @@ var __meta__ = {
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
+                        that.scrollables.scrollLeft(this.scrollLeft);
                         if (that.lockedContent) {
                             that.lockedContent[0].scrollTop = this.scrollTop;
                         }
                     });
                 } else {
                     that.content.bind("scroll" + NS, function () {
-                        that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
+                        that.scrollables.scrollLeft(this.scrollLeft);
                         if (that.lockedContent) {
                             that.lockedContent[0].scrollTop = this.scrollTop;
                         }
