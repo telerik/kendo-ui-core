@@ -74,15 +74,21 @@
         @foreach (var columnCategory in column)
         {
             var category = categories.FirstOrDefault(c => c.Key == columnCategory);
+            if (category.Any(c => c.ShouldInclude((string)ViewBag.NavProduct)))
+            {
             <li class="widget">
                 <h3>@category.Key</h3>
                 <ul>
                 @foreach (var widget in category)
                 {
+                    if (widget.ShouldInclude((string)ViewBag.NavProduct))
+                    {
                     <li>@Html.WidgetLink(widget)</li>
+                    }
                 }
                 </ul>
             </li>
+            }
         }
         </ul>
     }

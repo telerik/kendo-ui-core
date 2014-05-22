@@ -10,7 +10,8 @@ namespace Kendo.Controllers
         // GET: /m
         public ActionResult Index()
         {
-            ViewBag.product = CurrentProduct();
+            ViewBag.Product = CurrentProduct();
+            ViewBag.NavProduct = CurrentNavProduct();
 #if DEBUG
             ViewBag.Debug = true;
 #else

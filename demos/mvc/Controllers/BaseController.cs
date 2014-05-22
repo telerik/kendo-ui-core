@@ -70,6 +70,16 @@ namespace Kendo.Controllers
             return product;
         }
 
+        public string CurrentNavProduct()
+        {
+            return new Dictionary<string, string> {
+                {"aspnet-mvc", "mvc"},
+                {"kendo-ui", "online"},
+                {"php-ui", "php"},
+                {"jsp-ui", "jsp"}
+            }[CurrentProduct()];
+        }
+
         protected void LoadNavigation()
         {
             ViewBag.Navigation = LoadWidgets();

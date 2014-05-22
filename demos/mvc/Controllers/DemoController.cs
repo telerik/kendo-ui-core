@@ -37,6 +37,7 @@ namespace Kendo.Controllers
 
             ViewBag.ShowCodeStrip = true;
             ViewBag.Product = product;
+            ViewBag.NavProduct = CurrentNavProduct();
             ViewBag.Section = section;
             ViewBag.Example = example;
             ViewBag.ExampleFiles = SourceCode(product, section, example);

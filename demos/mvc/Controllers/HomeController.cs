@@ -16,6 +16,7 @@ namespace Kendo.Controllers
             }
 
             ViewBag.Product = CurrentProduct();
+            ViewBag.NavProduct = CurrentNavProduct();
             LoadNavigation();
             LoadCategories();
 #if DEBUG

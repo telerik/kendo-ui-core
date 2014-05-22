@@ -1,11 +1,6 @@
 ﻿<script>
 @{
-    string navProduct = new Dictionary<string, string> {
-        {"aspnet-mvc", "mvc"},
-        {"kendo-ui", "online"},
-        {"php-ui", "php"},
-        {"jsp-ui", "jsp"}
-    }[ViewBag.Product];
+    string navProduct = ViewBag.NavProduct;
 }
     var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
     var navProduct = "@navProduct";
