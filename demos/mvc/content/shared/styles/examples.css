@@ -2260,7 +2260,7 @@ pre.prettyprint
     padding: 0;
     position: relative;
     z-index:1;
-    background: #fff; /* Old browsers */
+    background: #f5f7f8; /* Old browsers */
 }
 
 #codeStrip .k-item .k-loading
@@ -2298,7 +2298,9 @@ pre.prettyprint
     border-width:0;
     color:#428bca;
     font-size:1.1em;
-    padding:13px 0;
+    line-height: 1.1em;
+    padding:0.769em 1.462em;
+    background: red;
     margin-right: 30px;
 }
 
