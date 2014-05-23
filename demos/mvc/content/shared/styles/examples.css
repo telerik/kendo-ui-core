@@ -2910,6 +2910,11 @@ a.footer-links:hover {
 }
 
 /* Clear floats */
+.k-ie7 #header,
+.k-ie7 #codeStrip {
+    display: inline-block;
+}
+
 #header:after,
 #codeStrip:after{
     display: block;
@@ -2933,13 +2938,7 @@ a.footer-links:hover {
     width: 600px;
    
     white-space: nowrap;
-    /*-webkit-transform: translatex(-300px);*/
-    -moz-transform: translateX(-300px);
-    -webkit-transform: translateX(-300px);
-    -o-transform: translateX(-300px);
-    -ms-transform: translateX(-300px);
-    transform: translateX(-300px);
-    /*-webkit-transition: all 0.3s ease-out;*/
+    margin-left: -300px;
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -ms-transition: all 0.3s ease-out;
@@ -2954,18 +2953,12 @@ a.footer-links:hover {
 }
 
 #nav #root-nav {
-    /*height: 10px;*/
+    height: 10px;
     overflow: hidden;
 }
 
 #nav.root {
-    /*-webkit-transform: translatex(0);*/
-    -moz-transform: translateX(0px);
-    -webkit-transform: translateX(0px);
-    -o-transform: translateX(0px);
-    -ms-transform: translateX(0px);
-    transform: translateX(0px);
-
+    margin-left: 0px;
 }
 
 #nav.root #root-nav {
@@ -2977,6 +2970,7 @@ a.footer-links:hover {
 #main {
     float: none;
     width: auto;
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 }
