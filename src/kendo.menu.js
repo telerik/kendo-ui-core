@@ -771,7 +771,7 @@ var __meta__ = {
                 targetHref = target.attr("href"),
                 sampleHref = $("<a href='#' />").attr("href"),
                 isLink = (!!href && href !== sampleHref),
-                isTargetLink = (!!target.attr("href") && targetHref !== sampleHref);
+                isTargetLink = (!!targetHref && targetHref !== sampleHref);
 
             if (!options.openOnClick && element.children(templateSelector)[0]) {
                 return;
