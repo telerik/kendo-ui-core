@@ -539,7 +539,7 @@
             Element.fn.init.call(this, options);
 
             this.src(src);
-            this.rect(rect);
+            this.rect(rect || new g.Rect());
         },
 
         src: function(value) {

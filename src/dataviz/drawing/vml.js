@@ -6,6 +6,7 @@
 
     // Imports ================================================================
     var doc = document,
+        max = Math.max,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
@@ -126,6 +127,8 @@
                     childNode = new CircleNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Arc) {
                     childNode = new ArcNode(srcElement, combinedTransform);
+                } else if (srcElement instanceof d.Image) {
+                    childNode = new ImageNode(srcElement, combinedTransform);
                 }
 
                 if (children && children.length > 0) {
@@ -734,6 +737,88 @@
         )
     });
 
+    var ImageNode = Node.extend({
+        init: function(srcElement, transform) {
+            Node.fn.init.call(this, srcElement);
+            this.transform = transform;
+        },
+
+        contentChange: function() {
+        },
+
+        optionsChange: function(e) {
+            if (e.field === "visible") {
+                this.css("display", e.value ? "" : "none");
+            } else if (e.field === "transform") {
+                this.refreshTransform(this.srcElement.currentTransform());
+            }
+
+            this.invalidate();
+        },
+
+        mapStyle: function() {
+            var image = this.srcElement;
+            var rect = image.rect();
+
+            var pos = rect.topLeft();
+            var style = [
+                ["position", "absolute"],
+                ["top", "0px"],
+                ["left", "0px"],
+                ["padding-left", pos.x + "px"],
+                ["padding-top", pos.y + "px"],
+                ["width", rect.width() + "px"],
+                ["height", rect.height() + "px"],
+                ["cursor", image.options.cursor]
+            ];
+
+            if (image.options.visible === false) {
+                style.push(["display", "none"]);
+            }
+
+            if (this.transform) {
+                util.append(style, this.mapTransform(this.transform));
+            }
+
+            return style;
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        refreshTransform: function(transform) {
+            var transform = this.srcElement.currentTransform(transform);
+            this.allCss(this.mapTransform(transform));
+        },
+
+        mapTransform: function(transform) {
+            var style = [];
+            var matrix = transformationMatrix(transform);
+            if (matrix) {
+                matrix.round(TRANSFORM_PRECISION);
+                style.push(["filter", this.transformTemplate(matrix)]);
+
+                var bbox = this.srcElement.bbox();
+                var br = this.srcElement.rect().bottomRight();
+                style.push(["padding-right", max(bbox.p1.x - br.x, 0) + "px"],
+                           ["padding-bottom", max(bbox.p1.y - br.y, 0) + "px"]);
+            }
+
+            return style;
+        },
+
+        transformTemplate: renderTemplate(
+            "progid:DXImageTransform.Microsoft.Matrix(" +
+            "M11=${d.a}, M12=${d.c}, M21=${d.b}, M22=${d.d}, Dx=${d.e}, Dy=${d.f})"
+        ),
+
+        template: renderTemplate(
+            "<img src='#= d.srcElement.src() #' " +
+            "#= d.renderStyle() # />"
+        )
+    });
+
     // Helper functions =======================================================
     function printPoints(points) {
         var length = points.length;
@@ -761,6 +846,7 @@
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,
+            ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
