@@ -262,10 +262,12 @@
         },
 
         bbox: function(matrix) {
-            var p0 = this.p0.transformCopy(matrix);
-            var p1 = this.p1.transformCopy(matrix);
+            var tl = this.topLeft().transformCopy(matrix);
+            var tr = this.topRight().transformCopy(matrix);
+            var br = this.bottomRight().transformCopy(matrix);
+            var bl = this.bottomLeft().transformCopy(matrix);
 
-            return new Rect(Point.min(p0, p1), Point.max(p0, p1));
+            return new Rect(Point.min(tl, tr, br, bl), Point.max(tl, tr, br, bl));
         }
     });
 

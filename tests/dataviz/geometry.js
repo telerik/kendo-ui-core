@@ -476,6 +476,11 @@
         compareBoundingBox(bbox, [0, 0, 20, 20]);
     });
 
+    test("boundingBox takes all corners into account", function() {
+        var bbox = rect.bbox(Matrix.rotate(45, new Point(5, 10)));
+        compareBoundingBox(bbox, [-14.1421, 0, 7.0711, 21.2132], 1e-4);
+    });
+
     // ------------------------------------------------------------
     var circle;
 
