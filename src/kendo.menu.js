@@ -768,7 +768,10 @@ var __meta__ = {
                 link = target.closest("." + LINK),
                 element = target.closest(allItemsSelector),
                 href = link.attr("href"), childGroup, childGroupVisible,
-                isLink = (!!href && href !== $("<a href='#' />").attr("href"));
+                targetHref = target.attr("href"),
+                sampleHref = $("<a href='#' />").attr("href"),
+                isLink = (!!href && href !== sampleHref),
+                isTargetLink = (!!target.attr("href") && targetHref !== sampleHref);
 
             if (!options.openOnClick && element.children(templateSelector)[0]) {
                 return;
@@ -807,7 +810,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!isLink && !formNode) {
+            if (!isLink && !formNode && !isTargetLink) {
                 e.preventDefault();
             }
 
