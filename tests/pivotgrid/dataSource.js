@@ -189,29 +189,6 @@
         equal(data[3].ordinal, 3);
         ok(!data[3].value);
     });
-/*
-    test("expand sets the column as expanded", function() {
-        var dataSource = new PivotDataSource({
-            columns: ["foo", "bar", { name: "baz", expand: true } ]
-        });
-
-        dataSource.expand("foo");
-
-        equal(dataSource.columns()[0].name, "foo");
-        ok(dataSource.columns()[0].expand);
-    });
-
-    test("expand sets the row as expanded", function() {
-        var dataSource = new PivotDataSource({
-            rows: ["foo", "bar", { name: "baz", expand: true } ]
-        });
-
-        dataSource.expand("foo");
-
-        equal(dataSource.rows()[0].name, "foo");
-        ok(dataSource.rows()[0].expand);
-    });
-    */
 
     test("expandColumn issue a request", 1, function() {
         var dataSource = new PivotDataSource({
@@ -247,6 +224,49 @@
         });
 
         dataSource.expandColumn("foo");
+    });
+
+    test("expandRow does not add measures to columns state", 8, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo"],
+            rows: ["baz"],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    equal(options.data.rows.length, 1);
+                    equal(options.data.rows[0].name, "baz");
+
+                    equal(options.data.columns.length, 1);
+                    equal(options.data.columns[0].name, "foo");
+
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "foo", children: [] }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "foo", children: [] }, { name: "measure 2", children: [] } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "baz", children: [] } ] },
+                                    { members: [ { name: "baz", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.expandRow("baz");
     });
 
     test("expandColumn pass current columns state when expanding top member", 4, function() {

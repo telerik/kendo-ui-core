@@ -44,6 +44,10 @@ var __meta__ = {
             members = tuples[idx].members;
 
             for (var memberIdx = 0; memberIdx < members.length; memberIdx++) {
+                if (members[memberIdx].measure) {
+                    continue;
+                }
+
                 name = members[memberIdx].name.replace(/\.\[all\]$/i, "");
                 parentName = (members[memberIdx].parentName || "").replace(/\.\[all\]$/i, "");
 
@@ -221,7 +225,7 @@ var __meta__ = {
         result.columns.tuples = mergeTuples(columnTuples, sourceTuples);
 
         if (source.rows) {
-            result.rows.tuples = parseSource(source.rows.tuples || [], measures);
+            result.rows.tuples = parseSource(source.rows.tuples || [], []);
         }
 
         return result;
