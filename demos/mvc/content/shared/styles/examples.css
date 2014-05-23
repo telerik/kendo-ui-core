@@ -128,12 +128,12 @@ a:hover
     font-weight: normal;
 }
 
-#example h4
+/*#example h4 SP2 REVAMP
 {
     width: 690px;
     margin-left: auto;
     margin-right: auto;
-}
+}*/
 
 /*.overview #banner,*/
 .overview #header,
@@ -801,7 +801,7 @@ div.submenu-box ol {
 {
     position:relative;
     min-height:200px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 *+html #example
@@ -819,8 +819,8 @@ div.submenu-box ol {
 {
     margin: 0 auto 15px auto;
     padding: 10px;
-    border: 1px solid rgba(0,0,0,0.05);
-    background-color: rgba(0,0,0,0.01)
+    border: 1px solid rgba(20,53,80,0.05);
+    background-color: rgba(20,53,80,0.038);
 }
 
 .demo-section h2
@@ -839,7 +839,6 @@ div.submenu-box ol {
 
 .demo-section > .title {
     margin: 5px 0 15px 0;
-    text-align: center;
 }
 
 .demo-section p a.hyperlink,
@@ -1296,15 +1295,11 @@ pre.prettyprint
 
 .console
 {
-    background-color: #fff;
-    border:solid #ccc;
-    border-width:1px;
+    background-color: transparent;
     color: #333;
     font: 11px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-    height: 200px;
-    margin: 0 0 1.4em;
+    margin: 0;
     overflow-x: hidden;
-    overflow-y: scroll;
     text-align: left;
 }
 
@@ -1520,7 +1515,7 @@ pre.prettyprint
 
 #codeStrip .k-tabstrip-items
 {
-    border-bottom:1px solid #dfdfdf;
+    border-bottom:1px solid rgba(20,53,80,0.05);
     padding: 0;
     position: relative;
     z-index:1;
@@ -2854,12 +2849,13 @@ a.footer-links:hover {
     padding: 2.500em 1.250em;
 }
 
-#resources-technologies h4 {
+#resources-technologies h4,
+ {
    font-size: 12px;
    text-transform: uppercase;
    font-weight: bold;
    line-height: 2.167em;
-    padding-left: 2.500em; 
+   padding-left: 2.500em; 
 }
 
 #resources-technologies a {
@@ -3110,4 +3106,50 @@ a.footer-links:hover {
 .k-state-hover,
 .k-state-hover:hover {
     
+}
+
+
+
+
+/* ##################### BOX ##################### */
+
+.box {
+    margin: 4.5em 7.5em;
+    padding: 3em;
+    background-color: rgba(20,53,80,0.038);
+    border: 1px solid rgba(20,53,80,0.05);  
+}
+.box:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+}
+#example .box {
+    margin: 4.5em 0; 
+}
+.box h4 {
+    margin-bottom: 1em;
+    color: #000;
+    font-size: 12px;
+    line-height: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.box-col {
+    display: block;
+    float: left;
+    padding: 0 3em;
+    border-left: 1px solid #ebecee; 
+}
+.box-col:first-child {
+    border-left: 0;
+    padding-left: 0; 
+}
+
+.box li {
+    margin-bottom: .6em;
+}
+.box li:last-child {
+    margin-bottom: 0;
 }
