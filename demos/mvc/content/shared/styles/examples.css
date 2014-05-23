@@ -841,7 +841,7 @@ div.submenu-box ol {
 #example
 {
     position:relative;
-    min-height:200px;
+    min-height:300px;
     font-size: 14px;
 }
 
@@ -856,7 +856,7 @@ div.submenu-box ol {
     background-color: #fff;
 }
 
-.demo-section
+/*.demo-section SP2 REVAMP
 {
     margin: 0 auto 15px auto;
     padding: 10px;
@@ -885,7 +885,7 @@ div.submenu-box ol {
 .demo-section p a.hyperlink,
 .config-section a {
     text-decoration: none;
-}
+}*/
 
 .k-block
 {
@@ -2469,7 +2469,6 @@ div.old-browser
 ul.keyboard-legend {
     list-style-type: none;
     margin: 0 auto;
-    width: 690px;
     padding: 0;
 }
 
@@ -2975,12 +2974,12 @@ a.footer-links:hover {
     overflow-y: auto;
 }
 
-#search {
+/*#search { SP2 REVAMP
     background-image: url("");
     background-position: right;
     background-repeat: no-repeat;
     border: none;
-}
+}*/
 
 #example-search-wrapper,
 #layout-search-wrapper {
@@ -3129,27 +3128,33 @@ a.footer-links:hover {
 
 /* ##################### BOX ##################### */
 
-#main > .box {
+.box {
     margin: 4.5em 7.5em;
     padding: 3em;
     background-color: rgba(20,53,80,0.038);
     border: 1px solid rgba(20,53,80,0.05);  
 }
-.box:after {
+.demo-section {
+    margin: 4.5em auto;
+    padding: 3em;
+    border: 1px solid rgba(20,53,80,0.05);  
+}
+.box:after,
+.demo-section:after {
     content: "";
     display: block;
     clear: both;
     height: 0;
 }
 #example .box {
-    margin: 4.5em 0;
-    padding: 3em;
-    border: 1px solid rgba(20,53,80,0.05);  
+    margin: 4.5em auto;
 }
-.box.k-header {
+.box.k-header,
+.demo-section.k-header {
     background-position: 50% 70%;
 }
-.box h4 {
+.box h4,
+.demo-section h4 {
     margin-bottom: 1em;
     font-size: 12px;
     line-height: 1em;
@@ -3159,7 +3164,7 @@ a.footer-links:hover {
 .box-col {
     display: block;
     float: left;
-    padding: 0 3em 0 0;
+    padding: 0 3em 1em 0;
 }
 
 .box li {
@@ -3171,4 +3176,11 @@ a.footer-links:hover {
 
 .box li a {
     font-size: 13px;
+}
+
+.demo-hint {
+    line-height: 22px;
+    color: #aaa;
+    font-style: italic;
+    font-size: .9em;
 }
