@@ -1449,6 +1449,7 @@ var __meta__ = {
             var currentStart;
             var startOffset;
             var snap = this.options.snap;
+            var dragInProgress;
 
             var cleanUp = function() {
                 that.view()._removeDragHint();
@@ -1459,6 +1460,7 @@ var __meta__ = {
 
                 element = null;
                 task = null;
+                dragInProgress = false;
             };
 
             if (this.options.editable !== true) {
@@ -1488,8 +1490,14 @@ var __meta__ = {
                     view._createDragHint(element);
 
                     element.css("opacity", 0.5);
+
+                    dragInProgress = true;
                 })
                 .bind("drag", kendo.throttle(function(e) {
+                    if (!dragInProgress) {
+                        return;
+                    }
+
                     var view = that.view();
                     var date = new Date(view._timeByPosition(e.x.location, snap) - startOffset);
                     
