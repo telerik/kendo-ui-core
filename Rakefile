@@ -95,12 +95,9 @@ def md_api_suite(suite)
         FileList["docs/api/mobile/*.md"]
         .include('docs/api/framework/*.md')
 
-    when 'appbuilder.professional'
+    when 'dataviz.mobile'
         FileList["docs/api/mobile/*.md"]
-        .include('docs/api/framework/*.md')
-
-    when 'appbuilder.core'
-        FileList["docs/api/mobile/*.md"]
+        .include('docs/api/dataviz/**/*.md')
         .include('docs/api/framework/*.md')
     end
 end
@@ -727,7 +724,7 @@ bundle :name => 'winjs.commercial',
 
 bundle :name => 'appbuilder.professional',
        :license => 'src-license-appbuilder',
-       :type_script => %w(mobile),
+       :type_script => %w(dataviz.mobile),
        :contents => {
             'styles' => APP_BUILDER_MIN_CSS,
             'js' => APP_BUILDER_MIN_JS + JQUERY_MAP,
@@ -748,7 +745,7 @@ bundle :name => 'jsp.trial',
        :eula => 'jsp',
        :readme => 'README.KendoUI.Trial',
        :changelog => %w(components jsp),
-       :type_script => %w(all web mobile dataviz),
+       :type_script => %w(core),
        :product => 'UI for JSP',
        :release_build => {
           :file_metadata => {

@@ -513,7 +513,7 @@ def get_type_script(name, sources, jsdoc)
         components.each { |component| component.jsdoc = true }
     end
 
-    suite = name.match(/kendo\.([^.]*)\.d\.ts/).captures.first
+    suite = name.match(/kendo\.(.*?)\.d\.ts/).captures.first,
 
     suite = 'mobile' if suite == 'appbuilder'
 
