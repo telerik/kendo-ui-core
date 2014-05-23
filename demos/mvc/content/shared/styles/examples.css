@@ -722,6 +722,11 @@ div.submenu-box ol {
 .tc-column
 {
     display: inline-block;
+}
+
+.tc-column:first-child
+{
+    border-right: 1px solid #cad0d6;
     margin-right: 30px;
     padding-right: 5px;
 }
@@ -739,11 +744,6 @@ div.submenu-box ol {
     float: left;
     width: 160px;
     margin-right: 15px;
-}
-
-.tc-column:first-child
-{
-    border-right: 1px solid #cad0d6;
 }
 
 .tc-column h4+ul

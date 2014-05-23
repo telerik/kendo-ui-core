@@ -38,7 +38,7 @@
                 .on("click", proxy(this._toggle, this));
 
             this.currentTheme = "Silver";
-            this.currentSize = "Standart";
+            this.currentSize = "Standard";
 
             this._updateState();
         },
@@ -108,7 +108,7 @@
                 { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
             ],
             sizes: [
-                { name: "Standart" },
+                { name: "Standard" },
                 { name: "Bootstrap", relativity: "larger" }
             ]
         }
