@@ -49,6 +49,37 @@
         equal(dataSource.measures()[1], "bar");
     });
 
+    test("default measures axis is columns", function() {
+        var dataSource = new PivotDataSource({ });
+
+        equal(dataSource.measuresAxis(), "columns");
+    });
+
+    test("default measures axis - measures as object", function() {
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: ["foo", "bar"]
+            }
+        });
+
+        equal(dataSource.measures()[0], "foo");
+        equal(dataSource.measures()[1], "bar");
+        equal(dataSource.measuresAxis(), "columns");
+    });
+
+    test("setting measures axis during initialization", function() {
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: ["foo", "bar"],
+                axis: "rows"
+            }
+        });
+
+        equal(dataSource.measures()[0], "foo");
+        equal(dataSource.measures()[1], "bar");
+        equal(dataSource.measuresAxis(), "rows");
+    });
+
     test("setting rows during initialization", function() {
         var dataSource = new PivotDataSource({
             rows: [{ name: "foo", expand: true }, "bar"]

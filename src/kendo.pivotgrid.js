@@ -86,7 +86,18 @@ var __meta__ = {
 
             this._columns = normalizeMembers(this.options.columns);
             this._rows = normalizeMembers(this.options.rows);
-            this._measures = this.options.measures || [];
+
+            var measures = this.options.measures || [];
+            var measuresAxis = "columns";
+
+            if (this.options.measures !== null && toString.call(this.options.measures) === "[object Object]") {
+                measures = this.options.measures.values || [];
+                measuresAxis = this.options.measures.axis || "columns";
+            }
+
+            this._measures = measures || [];
+            this._measuresAxis = measuresAxis;
+
             this._axes = {};
         },
 
@@ -104,6 +115,10 @@ var __meta__ = {
 
         measures: function() {
             return this._measures;
+        },
+
+        measuresAxis: function() {
+            return this._measuresAxis || "columns";
         },
 
         _expandPath: function(path, axis) {
