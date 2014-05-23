@@ -985,4 +985,92 @@
         shapeBaseTests(MultiPath, "MultiPath");
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var rect,
+            image;
+
+        module("Image", {
+            setup: function() {
+                rect = new g.Rect(new g.Point(0, 0), new g.Point(100, 100));
+                image = new d.Image("foo", rect);
+            }
+        });
+
+        test("sets initial source", function() {
+            deepEqual(image.src(), "foo");
+        });
+
+        test("sets initial rect", function() {
+            deepEqual(image.rect(), rect);
+        });
+
+        test("sets initial options", function() {
+            var image = new d.Image("foo", rect, { foo: true });
+            ok(image.options.foo);
+        });
+
+        test("src returns current source", function() {
+            equal(image.src(), "foo");
+        });
+
+        test("src setter triggers contentChange", function() {
+            image.observer = {
+                contentChange: function() {
+                    ok(true);
+                }
+            };
+
+            image.src("bar");
+        });
+
+        test("src setter is chainable", function() {
+            equal(image.src("bar"), image);
+        });
+
+        test("rect returns current rect", function() {
+            equal(image.rect(), rect);
+        });
+
+        test("rect setter triggers geometryChange", function() {
+            image.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            image.rect(new g.Rect());
+        });
+
+        test("rect setter is chainable", function() {
+            equal(image.rect(new g.Rect()), image);
+        });
+
+        test("changing the rect triggers geometryChange", function() {
+            image.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            image.rect().p0.set("x", 5);
+        });
+
+        test("boundingBox returns bounding rect", function() {
+            compareBoundingBox(image.bbox(), [0, 0, 100, 100]);
+        });
+
+        test("boundingBox passes matrix to geometry boundingBox method", function() {
+            var transform = g.transform();
+
+            rect.bbox = function(matrix) {
+                ok(matrix.equals(transform.matrix()));
+                return new g.Rect();
+            };
+
+            image.transform(transform);
+            image.bbox();
+        });
+    })();
+
 })();
