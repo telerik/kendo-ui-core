@@ -24,6 +24,7 @@ var __meta__ = {
     var Widget = ui.Widget;
     var extend = $.extend;
     var map = $.map;
+    var isFunction = $.isFunction;
     var keys = kendo.keys;
     var titleFromField = {
         "title": "Title",
@@ -459,6 +460,7 @@ var __meta__ = {
             var model = this._modelFromElement(cell);
             var modelCopy = this.dataSource._createNewModel(model.toJSON());
             var field = modelCopy.fields[column.field] || modelCopy[column.field];
+            var validation = field.validation;
             var DATATYPE = kendo.attr("type");
             var BINDING = kendo.attr("bind");
             var attr = {
@@ -493,6 +495,12 @@ var __meta__ = {
                                     model: modelCopy,
                                     clearContainer: false
                                 }).data("kendoEditable");
+
+            if (validation && validation.dateCompare &&
+                isFunction(validation.dateCompare) && validation.message) {
+                cell.find('[name=' + column.field + ']')
+                    .attr(kendo.attr("dateCompare-msg"), validation.message);
+            }
 
             if (this.trigger("edit", { model: model, cell: cell })) {
                 this._closeCell(true);
@@ -585,7 +593,7 @@ var __meta__ = {
 
             this._reorderDraggable = this.content
                 .kendoDraggable({
-                    distance: 0,
+                    distance: 10,
                     group: "listGroup",
                     filter: "tr[data-uid]",
                     hint: function(target) {
@@ -600,7 +608,7 @@ var __meta__ = {
                                 })
                                 .append('<span class="k-icon k-drag-status" /><span class="k-clue-text"/>');
                     },
-                    cursorOffset: { top: 10, left: 0 },
+                    cursorOffset: { top: -20, left: 0 },
                     container: this.content,
                     "dragstart": function(e) {
                         draggedTask = that._modelFromElement(e.currentTarget);

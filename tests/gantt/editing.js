@@ -571,6 +571,88 @@
         ok(targetCell.find("input").data("kendoDateTimePicker"));
     });
 
+    module("Gantt validation", {
+        setup: function() {
+            element = $("<div/>").appendTo(QUnit.fixture);
+
+            dataSource = new GanttDataSource({
+                data: [{
+                    id: 1,
+                    parentId: null,
+                    title: "foo",
+                    start: new Date("05/05/2014"),
+                    end: new Date("05/06/2014")
+                }],
+                schema: {
+                    model:{
+                        id: "id"
+                    }
+                }
+            });
+
+            gantt = new Gantt(element, {
+                columns: [
+                    { field: "start", editable: true, format: "{0:MM/dd/yyyy}" },
+                    { field: "end", editable: true, format: "{0:MM/dd/yyyy}" }
+                ],
+                dataSource: dataSource
+            });
+
+            ganttList = gantt.list;
+        },
+        teardown: function() {
+            gantt.destroy();
+            kendo.destroy(QUnit.fixture);
+            element.remove();
+        }
+    });
+
+    test("fails when start after end", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var picker;
+
+        doubleTap(targetCell);
+        picker = kendo.widgetInstance(ganttList._editableContainer.find("input[name=start]"));
+        picker.value("05/07/2014")
+
+        ok(!ganttList.editable.end());
+    });
+
+    test("passes when start equals end", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var picker;
+
+        doubleTap(targetCell);
+        picker = kendo.widgetInstance(ganttList._editableContainer.find("input[name=start]"));
+        picker.value("05/06/2014")
+
+        ok(ganttList.editable.end());
+    });
+
+    test("fails when end before start", function() {
+        var targetCell = ganttList.content.find("td").eq(1);
+        var picker;
+
+        doubleTap(targetCell);
+        picker = kendo.widgetInstance(ganttList._editableContainer.find("input[name=end]"));
+        picker.value("05/03/2014")
+
+        ok(!ganttList.editable.end());
+
+    });
+
+    test("passes when end equals start", function() {
+        var targetCell = ganttList.content.find("td").eq(1);
+        var picker;
+
+        doubleTap(targetCell);
+        picker = kendo.widgetInstance(ganttList._editableContainer.find("input[name=end]"));
+        picker.value("05/05/2014")
+
+        ok(ganttList.editable.end());
+
+    });
+
     module("Gantt non-editable", {
         setup: function() {
             element = $("<div/>");

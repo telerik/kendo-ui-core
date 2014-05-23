@@ -74,6 +74,29 @@ var __meta__ = {
         return options;
     }
 
+    function dateCompareValidator(input) {
+        if (input.filter("[name=end], [name=start]").length) {
+            var container = input.closest("td.k-edit-cell");
+            var editable = container.data("kendoEditable");
+            var field = input.attr("name");
+            var picker = kendo.widgetInstance(input, kendo.ui);
+            var model = editable ? editable.options.model : null;
+            var dates = {};
+
+            if (!model) {
+                return true;
+            }
+
+            dates.start = model.start;
+            dates.end = model.end;
+            dates[field] = picker ? picker.value() : kendo.parseDate(input.value());
+
+            return dates.start <= dates.end;
+        }
+
+        return true;
+    }
+
     var TaskDropDown = Observable.extend({
         init: function(element, options) {
 
@@ -287,8 +310,20 @@ var __meta__ = {
             parentId: { type: "number", defaultValue: null, validation: { required: true } },
             orderId: { type: "number", validation: { required: true } },
             title: { type: "string", defaultValue: "" },
-            start: { type: "date", validation: { required: true } },
-            end: { type: "date", validation: { required: true } },
+            start: {
+                type: "date", validation: {
+                    required: true,
+                    dateCompare: dateCompareValidator,
+                    message: "Start date should be before or equal to the end date"
+                }
+            },
+            end: {
+                type: "date", validation: {
+                    required: true,
+                    dateCompare: dateCompareValidator,
+                    message: "End date should be after or equal to the start date"
+                }
+            },
             percentComplete: { type: "number", validation: { required: true, min:0, max: 1, step: 0.01 } },
             summary: { type: "boolean" },
             expanded: { type: "boolean", defaultValue: true }
