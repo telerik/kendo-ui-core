@@ -1,5 +1,5 @@
 /*
-* Kendo UI v#= version # (http://www.telerik.com/kendo-ui)
+* Kendo UI Professional v#= version # (http://www.telerik.com/kendo-ui)
 * Copyright #= year # Telerik AD. All rights reserved.
 *
 * The use of Kendo UI mobile and dataviz widgets in Telerik AppBuilder is governed by the Telerik End User License Agreement for Telerik AppBuilder at

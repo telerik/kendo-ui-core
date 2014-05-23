@@ -732,7 +732,7 @@ bundle :name => 'appbuilder.professional',
        }
 
 bundle :name => 'appbuilder.core',
-       :license => 'src-license-appbuilder',
+       :license => 'src-license-appbuilder-core',
        :type_script => %w(mobile),
        :contents => {
             'styles' => APP_BUILDER_CORE_MIN_CSS,
