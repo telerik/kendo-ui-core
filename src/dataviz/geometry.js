@@ -486,6 +486,17 @@
                    this.e === other.e && this.f === other.f;
         },
 
+        round: function(precision) {
+            this.a = round(this.a, precision);
+            this.b = round(this.b, precision);
+            this.c = round(this.c, precision);
+            this.d = round(this.d, precision);
+            this.e = round(this.e, precision);
+            this.f = round(this.f, precision);
+
+            return this;
+        },
+
         toArray: function(precision) {
             var arr = [this.a, this.b, this.c, this.d, this.e, this.f];
 

@@ -770,6 +770,11 @@
             compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
         });
 
+        test("round rounds members to specified precision", function() {
+            ok(new Matrix(1.555, 2.555, 3.555, 4.555, 5.555, 6.555).round(2).equals(
+               new Matrix(1.56, 2.56, 3.56, 4.56, 5.56, 6.56)));
+        });
+
         // ------------------------------------------------------------
         module("Matrix / toArray", {
             setup: function() {
