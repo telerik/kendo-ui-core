@@ -208,20 +208,29 @@
 
         geometryChange: util.mixins.geometryChange,
 
+        topLeft: function() {
+            return Point.min(this.p0, this.p1);
+        },
+
+        bottomRight: function() {
+            return Point.max(this.p0, this.p1);
+        },
+
         width: function() {
-            return this.p1.x - this.p0.x;
+            return this.bottomRight().x - this.topLeft().x;
         },
 
         height: function() {
-            return this.p1.y - this.p0.y;
+            return this.bottomRight().y - this.topLeft().y;
+        },
+
+        center: function() {
+            var tl = this.topLeft();
+            return new Point(tl.x  + this.width() / 2, tl.y  + this.height() / 2);
         },
 
         wrap: function(targetRect) {
             return new Rect(Point.min(this.p0, targetRect.p0), Point.max(this.p1, targetRect.p1));
-        },
-
-        center: function() {
-            return new Point(this.p0.x  + this.width() / 2, this.p0.y  + this.height() / 2);
         },
 
         bbox: function(matrix) {

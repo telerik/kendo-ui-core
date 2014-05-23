@@ -359,12 +359,18 @@
 
     // ------------------------------------------------------------
     var rect;
+    var invRect;
 
     module("Rect", {
         setup: function() {
             rect = new Rect(
                 new Point(0, 0),
                 new Point(10, 20)
+            );
+
+            invRect = new Rect(
+                new Point(10, 20),
+                new Point(0, 0)
             );
         }
     });
@@ -385,6 +391,39 @@
         equal(rect.height(), 20);
     });
 
+    test("returns width for any point order", function() {
+        equal(invRect.width(), 10);
+    });
+
+    test("returns height for any point order", function() {
+        equal(invRect.height(), 20);
+    });
+
+    test("center returns center", function() {
+        deepEqual(rect.center(), new Point(5,10));
+    });
+
+    test("center returns center for any point order", function() {
+        deepEqual(invRect.center(), new Point(5,10));
+    });
+
+    test("topLeft returns top left corner", function() {
+        ok(invRect.topLeft().equals(new Point(0, 0)));
+    });
+
+    test("bottomRight returns bottom right corner", function() {
+        ok(invRect.bottomRight().equals(new Point(10, 20)));
+    });
+
+    test("wrap returns new rect with minimum p0 and maximum p1", function() {
+        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
+            wrap =  rect.wrap(other);
+        equal(wrap.p0.x, -1);
+        equal(wrap.p0.y, 0);
+        equal(wrap.p1.x, 15);
+        equal(wrap.p1.y, 20);
+    });
+
     test("modifying p0 triggers geometryChange", function() {
         rect.observer = {
             geometryChange: function() {
@@ -403,19 +442,6 @@
         };
 
         rect.p1.set("x", 1);
-    });
-
-    test("wrap returns new rect with minimum p0 and maximum p1", function() {
-        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
-            wrap =  rect.wrap(other);
-        equal(wrap.p0.x, -1);
-        equal(wrap.p0.y, 0);
-        equal(wrap.p1.x, 15);
-        equal(wrap.p1.y, 20);
-    });
-
-    test("center returns center point", function() {
-        deepEqual(rect.center(), new Point(5,10));
     });
 
     test("boundingBox returns the bounding Rect", function() {
