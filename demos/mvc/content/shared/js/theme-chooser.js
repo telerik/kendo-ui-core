@@ -2,6 +2,7 @@
     var ThemeChooser,
         doc = document,
         extend = $.extend,
+        proxy = $.proxy,
         kendo = window.kendo,
         animation = {
             show: {
@@ -28,9 +29,68 @@
                 template = kendo.template(template);
             }
 
-            element.find(options.container).html(
-                template(options)
-            );
+            this._container = element.find(options.container)
+                .html(template(options))
+                .on("click", ".tc-theme", proxy(this._changeTheme, this))
+                .on("click", ".tc-size", proxy(this._changeSize, this));
+
+            this._activator = element.find(options.activator)
+                .on("click", proxy(this._toggle, this));
+
+            this.currentTheme = "Silver";
+            this.currentSize = "Standart";
+
+            this._updateState();
+        },
+        changeTheme: function(themeName) {
+            this.element.find(".tc-current").text(themeName);
+        },
+        _change: function (elementClass, value) {
+            this._container.find(elementClass)
+                .removeClass("tc-active")
+                .filter(function() {
+                    return $(this).find(".tc-name").text() == value;
+                })
+                .addClass("tc-active");
+        },
+        _updateState: function() {
+            this._change(".tc-size", this.currentSize);
+            this._change(".tc-theme", this.currentTheme);
+        },
+        _toggle: function(e) {
+            e.preventDefault();
+            this.toggle();
+        },
+        _idOf: function(theme) {
+            return theme.toLowerCase().replace(/\s/, "");
+        },
+        _changeTheme: function(e) {
+            e.preventDefault();
+
+            var newTheme = $(e.currentTarget).find(".tc-name").text();
+            var newThemeId = this._idOf(newTheme);
+
+            this.currentTheme = newTheme;
+
+            this._updateState();
+
+            ThemeChooser.changeTheme(newThemeId, true, $.noop);
+        },
+        _changeSize: function(e) {
+            e.preventDefault();
+
+            this.currentSize = $(e.currentTarget).find(".tc-name").text();
+
+            this._updateState();
+        },
+        toggle: function(e) {
+            var options = this.options;
+            var show = this._container.is(":visible");
+            var animation = kendo.fx(kendo.wrap(this._container, true)).expand("vertical");
+
+            animation.stop()[show ? "reverse" : "play"]();
+
+            this._activator.toggleClass("tc-active", !show);
         },
         options: {
             name: "ThemeChooser",

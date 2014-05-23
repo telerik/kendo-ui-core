@@ -696,12 +696,16 @@ div.submenu-box ol {
     color: #2d3e50;
     display: inline-block;
     padding: 0 20px;
-    line-height: 59px;
+    line-height: 4em;
     font-size: 1.1667em;
     text-decoration: none;
 }
 
-.themechooser .tc-activator:hover,
+.themechooser .tc-activator:hover
+{
+    background-color: #e2e4e7;
+}
+
 .themechooser .tc-active,
 .tc-theme-list
 {
@@ -712,6 +716,14 @@ div.submenu-box ol {
 {
     text-transform: uppercase;
     font-size: 1em;
+    line-height: 25px;
+}
+
+.tc-column
+{
+    display: inline-block;
+    margin-right: 30px;
+    padding-right: 5px;
 }
 
 .tc-theme-list
@@ -719,26 +731,53 @@ div.submenu-box ol {
     border: 0;
     text-align: left;
     overflow: hidden;
+    padding: 25px 87px;
 }
 
 .tc-theme-list ul
 {
     float: left;
     width: 160px;
+    margin-right: 15px;
 }
 
-.tc-theme
+.tc-column:first-child
+{
+    border-right: 1px solid #cad0d6;
+}
+
+.tc-column h4+ul
+{
+    margin-left: -10px;
+}
+
+.tc-theme,
+.tc-size
 {
     display: block;
     line-height: 26px;
     color: #2d3e50;
     padding: 0 10px;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+    transition-timing-function: ease;
 }
 
-.tc-theme:hover
+.tc-theme:hover,
+.tc-size:hover
 {
     text-decoration: none;
-    background-color: #cad0d6;
+    background-color: #e2e4e7;
+}
+
+.tc-name
+{
+    padding-left: 5px;
+}
+
+.tc-relativity
+{
+    color: #555;
 }
 
 .tc-theme-list .tc-active
@@ -753,7 +792,9 @@ div.submenu-box ol {
     display: inline-block;
     width: 10px;
     height: 10px;
+    box-shadow: 0 0 0 1px #c5c8ca;
 }
+
 #qrWrap
 {
     margin-left:14px;

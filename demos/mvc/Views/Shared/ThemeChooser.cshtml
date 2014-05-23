@@ -1,45 +1,51 @@
 <div class="themechooser" data-role="themechooser">
     <a href="#" class="tc-activator"><span class="tc-current">Silver</span><span class=""></span></a>
-    <div style="display: none" class="tc-theme-list"></div>
+    <div class="tc-theme-list"></div>
 </div>
 
 <script id="themechooser-list-template" type="text/x-kendo-template">
-    <h4>Themes</h4>
-    # var columnSize = 4; #
-    # for (var i = 0; i < themes.length; i++) { #
-        # if (i % columnSize == 0) { #
-        <ul>
+    <div class="tc-column">
+        <h4>Themes</h4>
+        # var columnSize = 4; #
+        # for (var i = 0; i < themes.length; i++) { #
+            # if (i % columnSize == 0) { #
+            <ul>
+            # } #
+            # var theme = themes[i]; #
+            # var colors = theme.colors; #
+            <li>
+                <a href="\#" class="tc-theme">
+                    # for (var c = 0; c < colors.length; c++) { #
+                        <span class="tc-color" style="background-color: #= colors[c] #"></span>
+                    # } #
+                    <span class="tc-name">#: theme.name #</span>
+                </a>
+            </li>
+            # if ((i % columnSize == columnSize - 1) || (i == themes.length - 1)) { #
+            </ul>
+            # } #
         # } #
-        # var theme = themes[i]; #
-        # var colors = theme.colors; #
-        <li>
-            <a href="\#" class="tc-theme">
-                # for (var c = 0; c < colors.length; c++) { #
-                    <span class="tc-color" style="background-color: #= colors[c] #"></span>
-                # } #
-                #: theme.name #
-            </a>
-        </li>
-        # if ((i % columnSize == columnSize - 1) || (i == themes.length - 1)) { #
         </ul>
-        # } #
-    # } #
-    </ul>
+    </div>
 
-    <h4>Widget size</h4>
-    <ul>
-    # for (var i = 0; i < sizes.length; i++) { #
-    # var size = sizes[i]; #
-        <li>
-            <a href="\#" class="tc-size">
-                #: size.name #
-                # if (typeof size.relativity != undefined) { #
-                    (#: size.relativity #)
-                # } #
-            </a>
-        </li>
-    # } #
-    </ul>
+    <div class="tc-column">
+        <h4>Widget size</h4>
+        <ul>
+        # for (var i = 0; i < sizes.length; i++) { #
+        # var size = sizes[i]; #
+            <li>
+                <a href="\#" class="tc-size">
+                    <span class="tc-name">#: size.name #</span>
+                    # if ('relativity' in size) { #
+                        <span class="tc-relativity">
+                            (#: size.relativity #)
+                        </span>
+                    # } #
+                </a>
+            </li>
+        # } #
+        </ul>
+    </div>
 </script>
 
 <script>
