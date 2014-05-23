@@ -1,11 +1,13 @@
 
-        <div id="example" class="k-content">
-            <div class="demo-section">
-                <h2>Choose country: </h2>
-                <input id="countries" style="width: 250px" accesskey="w" />
+        <div id="example">
+            <div class="demo-section k-header">
+                <h4>Choose country: </h4>
+                <input id="countries" style="width: 400px" accesskey="w" />
             </div>
 
-            <ul class="keyboard-legend">
+            <div class="box">
+	    <h4>Keyboard legend</h4>
+	    <ul class="keyboard-legend">
                 <li>
                     <span class="button-preview">
                         <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
@@ -16,10 +18,7 @@
                         focuses the widget
                     </span>
                 </li>
-            </ul>
-
-            <ul class="keyboard-legend">
-                <li>
+		<li>
                     <span class="button-preview">
                         <span class="key-button wide leftAlign">up arrow</span>
                     </span>
@@ -52,6 +51,7 @@
                     </span>
                 </li>
             </ul>
+	    </div>
 
             <script>
                 $(document).ready(function () {
@@ -119,15 +119,9 @@
             </script>
 
             <style scoped>
-                .demo-section {
-                    width: 250px;
-                    margin: 35px auto 50px;
-                    padding: 30px;
-                }
-                .demo-section h2 {
-                    text-transform: uppercase;
-                    font-size: 1.2em;
-                    margin-bottom: 10px;
+                .demo-section,
+		#example .box {
+                    width: 400px;
                 }
             </style>
         </div>
