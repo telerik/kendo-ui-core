@@ -477,5 +477,40 @@
         equal(tuples[0].members[0].children[0].members[1].measure, true);
         equal(tuples[0].members[0].children[0].members[1].children.length, 2, "two measures on second level");
     });
+
+    test("merget tuples in rows axis", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+
+        equal(axes.rows.tuples.length, 1);
+        equal(axes.rows.tuples[0].members[0].name, "level 0");
+        equal(axes.rows.tuples[0].members[1].name, "level 0");
+        equal(axes.rows.tuples[0].members[0].children.length, 1);
+        equal(axes.rows.tuples[0].members[0].children[0].members[0].name, "level 1");
+        equal(axes.rows.tuples[0].members[0].children[0].members[1].name, "level 0");
+    });
 })();
 

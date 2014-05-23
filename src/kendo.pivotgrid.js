@@ -217,31 +217,36 @@ var __meta__ = {
         }
     });
 
+    function normalizeAxis(axis) {
+        if (!axis) {
+            axis = {
+                tuples: []
+            };
+        }
+
+        if (!axis.tuples) {
+            axis.tuples = [];
+        }
+
+        return axis;
+    }
+
     function mergeAxes(target, source, measures) {
-        if (!target.columns) {
-            target.columns = {
-                tuples: []
-            };
-        }
-
-        if (!source.columns) {
-            source.columns = {
-                tuples: []
-            };
-        }
-
         var result = {
-            columns: target.columns,
-            rows: source.rows
+            columns: normalizeAxis(target.columns),
+            rows: normalizeAxis(target.rows)
         };
 
-        var columnTuples = result.columns.tuples;
-        var sourceTuples = parseSource(source.columns.tuples || [], measures);
-        result.columns.tuples = mergeTuples(columnTuples, sourceTuples);
+        source = {
+            columns: normalizeAxis(source.columns),
+            rows: normalizeAxis(source.rows)
+        };
 
-        if (source.rows) {
-            result.rows.tuples = parseSource(source.rows.tuples || [], []);
-        }
+        var sourceTuples = parseSource(source.columns.tuples, measures);
+        result.columns.tuples = mergeTuples(result.columns.tuples, sourceTuples);
+
+        sourceTuples = parseSource(source.rows.tuples, []);
+        result.rows.tuples = mergeTuples(result.rows.tuples, sourceTuples);
 
         return result;
     }
