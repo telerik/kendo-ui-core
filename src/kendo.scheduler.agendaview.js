@@ -317,13 +317,24 @@ var __meta__ = {
         },
 
         selectionByElement: function(cell) {
+            var index, event;
             cell = $(cell);
             if (cell.hasClass("k-scheduler-datecolumn")) {
                 return;
             }
 
-            var index = cell.parent().index();
-            var event = this._eventsList[index];
+            if (this._isMobile()) {
+                var parent = cell.parent();
+                index = parent.parent().children()
+                    .filter(function() {
+                        return $(this).children(":not(.k-scheduler-datecolumn)").length;
+                    })
+                    .index(parent);
+            } else {
+                index = cell.parent().index();
+            }
+
+            event = this._eventsList[index];
 
             return {
                 index: index,
