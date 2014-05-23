@@ -43,7 +43,13 @@
             this._updateState();
         },
         changeTheme: function(themeName) {
+            this.currentTheme = themeName;
+
             this.element.find(".tc-current").text(themeName);
+
+            this._updateState();
+
+            ThemeChooser.changeTheme(this._idFor(themeName), true);
         },
         _change: function (elementClass, value) {
             this._container.find(elementClass)
@@ -61,20 +67,15 @@
             e.preventDefault();
             this.toggle();
         },
-        _idOf: function(theme) {
+        _idFor: function(theme) {
             return theme.toLowerCase().replace(/\s/, "");
         },
         _changeTheme: function(e) {
             e.preventDefault();
 
             var newTheme = $(e.currentTarget).find(".tc-name").text();
-            var newThemeId = this._idOf(newTheme);
 
-            this.currentTheme = newTheme;
-
-            this._updateState();
-
-            ThemeChooser.changeTheme(newThemeId, true);
+            this.changeTheme(newTheme);
         },
         _changeSize: function(e) {
             e.preventDefault();
