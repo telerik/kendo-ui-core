@@ -128,6 +128,17 @@
         dataSource.read();
     });
 
+    test("measuresAxis is pass to the transport read", function() {
+        var dataSource = new PivotDataSource({
+            measures: { values: ["foo"], axis: "rows" },
+            transport: {
+                read: function(options) {
+                    equal(options.data.measuresAxis, "rows"); }
+            }
+        });
+        dataSource.read();
+    });
+
     test("read calls reader axes method", 1, function() {
         var dataSource = new PivotDataSource({
             schema: {
@@ -585,14 +596,56 @@
 
     test("parameterMap measure is added as column if no columns are set", function() {
         var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            rows: [{ name: "[foo]" }],
+            measures: ["[baz]"]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap multiple measures are added as row if no rows are set and axis is rows", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[baz]", "[bar]"],
+            measuresAxis: "rows"
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[baz],[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap multiple measures are added as row if no columns are set and axis is rows", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            rows: [{ name: "[foo]" }],
+            measures: ["[baz]", "[bar]"],
+            measuresAxis: "rows"
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{[baz],[bar]}})} ' +
+           'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap measures are added to the correct axis", function() {
+        var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({
            connection: { catalog: "catalogName", cube: "cubeName" },
-           rows: [{ name: "[foo]" }],
-           measures: ["[baz]"]
+           columns: [ { name: "[foo]" }],
+           rows: [ { name: "[bar]" }],
+           measures: ["[measure1]","[measure2]"],
+           measuresAxis: "rows"
        }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+       ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS,' +
+           ' NON EMPTY {CROSSJOIN({[bar].[(ALL)].MEMBERS},{{[measure1],[measure2]}})} ' +
+           'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap & is encoded", function() {

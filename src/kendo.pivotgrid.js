@@ -231,6 +231,7 @@ var __meta__ = {
 
             options = extend({
                 measures: this.measures(),
+                measuresAxis: this.measuresAxis(),
                 columns: this.columns(),
                 rows: this.rows()
             }, options);
@@ -672,19 +673,24 @@ var __meta__ = {
             var rows = options.rows || [];
 
             var measures = options.measures || [];
+            var measuresRowAxis = options.measuresAxis === "rows";
 
             if (columns.length) {
-                command += serializeMembers(columns, measures);
-            } else if (measures.length) {
+                command += serializeMembers(columns, !measuresRowAxis ? measures : []);
+            } else if (measures.length && !measuresRowAxis) {
                 command += measures.join(",");
             }
 
             command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS";
 
-            if (rows.length) {
+            if (rows.length || (measuresRowAxis && measures.length > 1)) {
                 command += ", NON EMPTY {";
 
-                command += serializeMembers(rows, []/*, measures*/);
+                if (rows.length) {
+                    command += serializeMembers(rows, measuresRowAxis ? measures : []);
+                } else {
+                    command += measures.join(",");
+                }
 
                 command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
             }
