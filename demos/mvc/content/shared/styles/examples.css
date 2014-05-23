@@ -2873,43 +2873,6 @@ a.footer-links:hover {
     margin: 2.250em 3.750em 2.500em 3.750em;
 }
 
-#learning-resources,
-#technologies {
-    display: inline-block;
-    width: 49%;
-  
-}
-
-#learning-resources {
-    border-right: 1px solid #e2e4e7;
-}
-
-#resources-technologies {
-    background-color: #f5f7f8;
-    border: 1px solid #ebecee;
-    padding: 2.500em 1.250em;
-}
-
-#resources-technologies h4,
- {
-   font-size: 12px;
-   text-transform: uppercase;
-   font-weight: bold;
-   line-height: 2.167em;
-   padding-left: 2.500em; 
-}
-
-#resources-technologies a {
-    font-size: 13px;
-    line-height: 13px;
-    padding-left: 2.308em;
-   
-}
-#resources-technologies li {
-      /*padding: 0.538em 0;*/
-       line-height: 2.250em;
-}
-
 #codeStrip .documentation-link,
 .try-kendo {
     background-color: #015991;
@@ -3180,12 +3143,7 @@ a.footer-links:hover {
 .box-col {
     display: block;
     float: left;
-    padding: 0 3em;
-    border-left: 1px solid #ebecee; 
-}
-.box-col:first-child {
-    border-left: 0;
-    padding-left: 0; 
+    padding: 0 3em 0 0;
 }
 
 .box li {
@@ -3193,4 +3151,8 @@ a.footer-links:hover {
 }
 .box li:last-child {
     margin-bottom: 0;
+}
+
+.box li a {
+    font-size: 13px;
 }
