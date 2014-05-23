@@ -577,10 +577,6 @@ var __meta__ = {
 
             context.save();
 
-            if (options.rotation !== 0) {
-                text.setRotation(context);
-            }
-
             context.font = options.font;
             context.fillStyle = options.color;
             context.globalAlpha = options.fillOpacity;
@@ -588,23 +584,6 @@ var __meta__ = {
             context.fillText(content, x, y);
 
             context.restore();
-        },
-
-        setRotation: function(context) {
-            var text = this,
-                options = text.options,
-                size = options.size,
-                cx = options.x + size.normalWidth / 2,
-                cy = options.y + size.normalHeight / 2,
-                rcx = options.x + size.width / 2,
-                rcy = options.y + size.height / 2,
-                offsetX = rcx - cx,
-                offsetY = rcy - cy;
-
-            context.translate(offsetX, offsetY);
-            context.translate(cx, cy);
-            context.rotate(options.rotation * DEG_TO_RAD);
-            context.translate(-cx, -cy);
         }
     });
 

@@ -301,7 +301,6 @@ var __meta__ = {
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
-                    "#= d.options.rotation ? d.renderRotation() : '' # " +
                     "style='font: #= d.options.font #; " +
                     "#= d.renderCursor() #' " +
                     "fill='#= d.options.color #'>" +
@@ -334,21 +333,6 @@ var __meta__ = {
         clone: function() {
             var text = this;
             return new SVGText(text.content, deepExtend({}, text.options));
-        },
-
-        renderRotation: function() {
-            var text = this,
-                options = text.options,
-                size = options.size,
-                cx = round(options.x + size.normalWidth / 2, COORD_PRECISION),
-                cy = round(options.y + size.normalHeight / 2, COORD_PRECISION),
-                rcx = round(options.x + size.width / 2, COORD_PRECISION),
-                rcy = round(options.y + size.height / 2, COORD_PRECISION),
-                offsetX = round(rcx - cx, COORD_PRECISION),
-                offsetY = round(rcy - cy, COORD_PRECISION);
-
-            return "transform='translate(" + offsetX + "," + offsetY + ") " +
-                   "rotate(" + options.rotation + "," + cx + "," + cy + ")'";
         },
 
         renderContent: function() {

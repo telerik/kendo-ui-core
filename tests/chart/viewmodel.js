@@ -1252,11 +1252,6 @@
             equal(texts[0].options.align, "left");
         });
 
-        test("sets text rotation to zero", function() {
-            createTextBox({rotation: 30});
-            equal(texts[0].options.rotation, 0);
-        });
-
         test("sets options id on text", function() {
             createTextBox({ id: "1" });
             equal(texts[0].id, "1");

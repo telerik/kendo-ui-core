@@ -976,39 +976,12 @@ var __meta__ = {
                 margin;
 
             size = options.size =
-                measureText(text.content, { font: options.font }, options.rotation);
+                measureText(text.content, { font: options.font });
 
             text.baseline = size.baseline;
 
-            if (options.align == LEFT) {
-                text.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
+            text.box = Box2D(targetBox.x1, targetBox.y1,
                     targetBox.x1 + size.width, targetBox.y1 + size.height);
-            } else if (options.align == RIGHT) {
-                text.box = new Box2D(
-                    targetBox.x2 - size.width, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + size.height);
-            } else if (options.align == CENTER) {
-                margin = (targetBox.width() - size.width) / 2;
-                text.box = new Box2D(
-                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
-                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
-            }
-
-            if (options.vAlign == CENTER) {
-                margin = (targetBox.height() - size.height) /2;
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y1 + margin,
-                    text.box.x2, targetBox.y2 - margin);
-            } else if (options.vAlign == BOTTOM) {
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y2 - size.height,
-                    text.box.x2, targetBox.y2);
-            } else if (options.vAlign == TOP) {
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y1,
-                    text.box.x2, targetBox.y1 + size.height);
-            }
         },
 
         getViewElements: function(view) {
@@ -1235,7 +1208,7 @@ var __meta__ = {
             var id = options.id;
             var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
             var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
-            var textOptions = deepExtend({ }, options, { align: LEFT, vAlign: TOP, rotation: 0});
+            var textOptions = deepExtend({ }, options);
             var hasBox = textbox.hasBox();
             var text;
             var rowIdx;
@@ -4148,9 +4121,9 @@ var __meta__ = {
             this._cache = new LRUCache(1000);
         },
 
-        measure: function(text, style, rotation) {
+        measure: function(text, style) {
             var styleHash = getHash(style),
-                cacheKey = text + styleHash + rotation,
+                cacheKey = text + styleHash,
                 cachedResult = this._cache.get(cacheKey);
 
             if (cachedResult) {
@@ -4181,18 +4154,6 @@ var __meta__ = {
                 };
             }
 
-            if (rotation) {
-                var width = size.width,
-                    height = size.height,
-                    box = Box2D(0, 0, width, height);
-                box.rotate(rotation);
-
-                size.normalWidth = width;
-                size.normalHeight = height;
-                size.width = box.width();
-                size.height = box.height();
-            }
-
             this._cache.put(cacheKey, size);
 
             measureBox.parentNode.removeChild(measureBox);
@@ -4213,8 +4174,8 @@ var __meta__ = {
 
     TextMetrics.current = new TextMetrics();
 
-    function measureText(text, style, rotation) {
-        return TextMetrics.current.measure(text, style, rotation);
+    function measureText(text, style) {
+        return TextMetrics.current.measure(text, style);
     }
 
     function autoMajorUnit(min, max) {
