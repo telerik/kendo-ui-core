@@ -29,7 +29,8 @@
     // Constants ==============================================================
     var NONE = "none",
         TRANSPARENT = "transparent",
-        COORDINATE_MULTIPLE = 100;
+        COORDINATE_MULTIPLE = 100,
+        TRANSFORM_PRECISION = 4;
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -370,7 +371,6 @@
     });
 
     var TransformNode = Node.extend({
-        MAX_PRECISION: 6,
         init: function(srcElement, transform) {
             Node.fn.init.call(this, srcElement);
             this.transform = transform;
@@ -395,17 +395,16 @@
         mapTransform: function(transform) {
             var attrs = [],
                 a, b, c, d,
-                MAX_PRECISION = this.MAX_PRECISION,
                 matrix = transformationMatrix(transform);
 
             if (matrix) {
-                a = round(matrix.a, MAX_PRECISION);
-                b = round(matrix.b, MAX_PRECISION);
-                c = round(matrix.c, MAX_PRECISION);
-                d = round(matrix.d, MAX_PRECISION);
-                attrs.push(["on", "true"], ["matrix", [a, c, b, d, 0, 0].join(",")],
+                matrix.round(TRANSFORM_PRECISION);
+                attrs.push(
+                    ["on", "true"],
+                    ["matrix", [matrix.a, matrix.c, matrix.b, matrix.d, 0, 0].join(",")],
                     ["offset", matrix.e + "px," + matrix.f + "px"],
-                    ["origin", this.transformOrigin()]);
+                    ["origin", this.transformOrigin()]
+                );
             } else {
                 attrs.push(["on", "false"]);
             }

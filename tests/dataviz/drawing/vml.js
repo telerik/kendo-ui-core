@@ -742,10 +742,10 @@
             ok(transformNode.render().indexOf("matrix='1,3,2,4,0,0'") !== -1);
         });
 
-        test("rounds matrix values to the MAX_PRECISION digit", function() {
-            var value = parseFloat("0." + new Array(TransformNode.fn.MAX_PRECISION + 1).join("5"));
+        test("rounds matrix values to the 4th digit", function() {
+            var value = 0.55555;
             transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
-            ok(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1] == dataviz.util.round(value, TransformNode.fn.MAX_PRECISION));
+            equal(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1], 0.5556);
         });
 
         test("does not render matrix attribute if there is no matrix", function() {
