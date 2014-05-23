@@ -14,10 +14,9 @@
     </div>
 </div>
 
-<div id="overview">
-    <h2>@ViewBag.Product</h2>    
+<div id="overview">    
     <div id="overview-widgets">
-  
+        <h2>@ViewBag.Product</h2>
         <ul id="most-popular">
             <li>
                 <h3>Most popular</h3>
@@ -93,86 +92,92 @@
     }
 
     </div>
-</div>
-@if (ViewBag.Product == "kendo-ui")
-{
-<div>
-<h3>Sample Applications</h3>
-<ul>
-    <li><a href="http://demos.telerik.com/kendo-ui/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/html5-diagram-sample-app">Sample Diagram Tool</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/websushi/">Single-Page Application</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/aeroviewr/">Image Gallery</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/bootstrap/">Kendo UI ♥ Bootstrap</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/sushi/">Mobile Sushi Bar</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/cuteness/">Mobile Reddit Viewer</a></li>
-    <li><a href="http://demos.telerik.com/kendo-ui/financial/stock-history">Stock History Dashboard</a></li>
-</ul>
-</div>
-}
-@if (ViewBag.Product == "aspnet-mvc")
-{
-<div>
-<h3>Sample Applications</h3>
-<ul>
-    <li><a href="http://demos.telerik.com/aspnet-mvc/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
-</ul>
-</div>
-}
-<style>
-    #overview-widgets {
-        width: auto;
-        margin:auto;
-        text-align: center;
+<div id="applications-and-tools">
+
+        @if (ViewBag.Product == "kendo-ui")
+    {
+    <div id="overview-applications">
+    <h2>Sample Applications</h2>
+    <ul>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/html5-dashboard-sample-app">
+                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <p>Telerik Northwind Dashboard</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/html5-diagram-sample-app">
+                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <p>Sample Diagram Tool</p>
+            </a>
+        </li>
+        <li class="application"><a href="http://demos.telerik.com/kendo-ui/websushi/">
+                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <p>Single-Page Application</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/aeroviewr/">
+                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <p>Image Gallery</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/bootstrap/">
+                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <p>Kendo UI ♥ Bootstrap</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/sushi/">
+                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <p>Sushi Bar</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/cuteness/">
+                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <p>Mobile Reddit Viewer</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="http://demos.telerik.com/kendo-ui/financial/stock-history">
+                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <p>Stock History Dashboard</p>
+            </a>
+        </li>
+    </ul>
+    </div>
+    }
+    @if (ViewBag.Product == "aspnet-mvc")
+    {
+    <div>
+    <h2>Sample Applications</h2>
+    <ul>
+        <li><a href="http://demos.telerik.com/aspnet-mvc/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
+    </ul>
+    </div>
     }
 
-    #overview h2 {
-        color: #000;
-        font: 400 40px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
-        text-align: left;
-        padding: 1.725em 0 0.700em;
-        margin: auto;
-        text-align: center;
-    }
-
-    #overview-widgets ul {
-        display: inline-block;
-        text-align: left;
-       padding-right: 50px;
-       vertical-align: top;
- 
-    }
-
-
-#overview-widgets > ul > li{
-    border-right: 1px solid #ebecee;
-}
-
-#overview-widgets > ul > li:last-child{
-  
-}
-
-#overview-widgets ul li {
-        font-size: 13px;
-        color: #0487c4;
-        line-height: 13px;
-        padding: 0.462em 0;
-}
-
-#overview-widgets ul li ul {
-    padding-bottom: 1.615em;
-}
-
-#overview-widgets ul h3 {
-        font-size: 12px;
-        color: #000;
-        font-weight: bold;
-        text-transform: uppercase;        
-}
-
-#most-popular a{
-    font-size: 24px;
-    line-height: 22px;
-    padding: 0.259em 0;
-}
-</style>
+    <div id="overview-tools">
+        <h2>Tools</h2>
+         <ul>
+            @if (ViewBag.Product == "kendo-ui")
+            {
+                <li>
+                    <a href="#">Interactive Dojo</a>
+                    <p>An environment designed to help you get up and running with  Kendo UI quickly.</p>
+                </li>
+            }
+            <li>
+                <a href="#">ThemeBuilder</a>
+                <p>Create and modify themes for Kendo UI widgets.</p>
+            </li>
+            <li>
+                <a href="#">Mobile ThemeBuiler</a>
+                <p>Touch optimized Kendo UI theme customizer.</p>
+            </li>
+        </ul>
+    </div>
+    </div>
+</div>
