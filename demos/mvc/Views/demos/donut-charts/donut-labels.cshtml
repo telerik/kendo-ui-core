@@ -1,10 +1,10 @@
-<div id="example" class="k-content">
-    <div class="chart-wrapper">
+<div id="example">
+    <div class="demo-section k-content">
         <div id="chart"></div>
     </div>
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Labels Configuration</span>
+    <div class="box">
+        <div class="box-col">
+            <h4>Labels Configuration</h4>
             <ul class="options">
                 <li>
                     <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
@@ -69,7 +69,7 @@
         $(document).ready(function() {
             createChart();
             $(document).bind("kendo:skinChange", createChart);
-            $(".configuration-horizontal").bind("change", refresh);
+            $(".box").bind("change", refresh);
         });
 
         function refresh() {
@@ -88,10 +88,4 @@
             chart.refresh();
         }
     </script>
-
-    <style scoped>
-        .chart-wrapper, .chart-wrapper .k-chart {
-            height: 400px;
-        }
-    </style>
 </div>
