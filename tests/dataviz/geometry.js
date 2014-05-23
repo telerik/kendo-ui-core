@@ -341,7 +341,7 @@
         equal(point.toString(1), "10.6 20.6");
     });
 
-    test("Point.min returns a new point with minmum x y", function() {
+    test("Point.min returns a new point with minimum x y", function() {
         var other = new Point(20, 10);
         var minPoint = Point.min(point, other);
 
@@ -349,11 +349,25 @@
         equal(minPoint.y, 10);
     });
 
+    test("Point.min accepts multiple arguments", function() {
+        var minPoint = Point.min(Point.maxPoint(), Point.maxPoint(), point);
+
+        equal(minPoint.x, 10);
+        equal(minPoint.y, 20);
+    });
+
     test("Point.max returns a new point with maximum x y", function() {
         var other = new Point(20, 10);
         var maxPoint = Point.max(point, other);
 
         equal(maxPoint.x, 20);
+        equal(maxPoint.y, 20);
+    });
+
+    test("Point.max accepts multiple arguments", function() {
+        var maxPoint = Point.max(Point.minPoint(), Point.minPoint(), point);
+
+        equal(maxPoint.x, 10);
         equal(maxPoint.y, 20);
     });
 

@@ -19,7 +19,9 @@
         deg = util.deg,
         round = util.round;
 
-    var PI_DIV_2 = math.PI / 2;
+    var PI_DIV_2 = math.PI / 2,
+        MIN_NUM = util.MIN_NUM,
+        MAX_NUM = util.MAX_NUM;
 
     // Geometrical primitives =================================================
     var Point = Class.extend({
@@ -178,20 +180,38 @@
         }
     };
 
-    Point.min = function(p0, p1) {
-        return new Point(math.min(p0.x, p1.x), math.min(p0.y, p1.y));
+    Point.min = function() {
+        var minX = util.MAX_NUM;
+        var minY = util.MAX_NUM;
+
+        for (var i = 0; i < arguments.length; i++) {
+            var pt = arguments[i];
+            minX = math.min(pt.x, minX);
+            minY = math.min(pt.y, minY);
+        }
+
+        return new Point(minX, minY);
     };
 
     Point.max = function(p0, p1) {
-        return new Point(math.max(p0.x, p1.x), math.max(p0.y, p1.y));
+        var maxX = util.MIN_NUM;
+        var maxY = util.MIN_NUM;
+
+        for (var i = 0; i < arguments.length; i++) {
+            var pt = arguments[i];
+            maxX = math.max(pt.x, maxX);
+            maxY = math.max(pt.y, maxY);
+        }
+
+        return new Point(maxX, maxY);
     };
 
     Point.minPoint = function() {
-        return new Point(util.MIN_NUM, util.MIN_NUM);
+        return new Point(MIN_NUM, MIN_NUM);
     };
 
     Point.maxPoint = function() {
-        return new Point(util.MAX_NUM, util.MAX_NUM);
+        return new Point(MAX_NUM, MAX_NUM);
     };
 
     Point.ZERO = new Point(0, 0);
