@@ -170,10 +170,12 @@ var __meta__ = {
 
             $(that.element)
                 .hide()
+                .attr("tabindex", "-1")
                 .removeAttr("id")
                 .off(NS);
 
             that._activeInput(input);
+            that.element.focus();
         },
 
         _activeInput: function(input) {
@@ -196,7 +198,19 @@ var __meta__ = {
                 .on("blur" + NS, function() {
                     $(this).parent().removeClass("k-state-focused");
                 })
-                .on("change" + NS, $.proxy(that._onInputChange, that));
+                .on("change" + NS, $.proxy(that._onInputChange, that))
+                .on("keydown" + NS, $.proxy(that._onInputKeyDown, that));
+        },
+
+        _onInputKeyDown: function(e) {
+            var that = this;
+            var firstButton = that.wrapper.find(".k-upload-action:first");
+
+            if (e.keyCode === kendo.keys.TAB && firstButton.length > 0) {
+                e.preventDefault();
+
+                firstButton.focus();
+            }
         },
 
         _onInputChange: function(e) {

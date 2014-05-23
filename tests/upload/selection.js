@@ -106,4 +106,21 @@ test("data-uid attribute is added to the list item when a file is selected", fun
     notEqual($(".k-file").data("uid"), undefined);
 });
 
+test("input element remains focused after selection", function() {
+    var uploadInstance = createUpload();
+    simulateFileSelect();
+
+    equal(uploadInstance.element[0], document.activeElement);
+});
+
+test("next focusable element is focused on first tab key press", function(){
+    var uploadInstance = createUpload();
+    simulateFileSelect();
+    var firstRemoveButton = uploadInstance.wrapper.find(".k-upload-action:first");
+
+    $(document.activeElement).trigger( { type: "keydown", keyCode: kendo.keys.TAB } );
+
+    equal(firstRemoveButton[0], document.activeElement);
+});
+
 }
