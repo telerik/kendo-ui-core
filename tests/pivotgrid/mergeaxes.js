@@ -478,7 +478,7 @@
         equal(tuples[0].members[0].children[0].members[1].children.length, 2, "two measures on second level");
     });
 
-    test("merget tuples in rows axis", function() {
+    test("merge tuples in rows axis", function() {
         var dataSource = new PivotDataSource({
             schema: {
                 axes: "axes",
@@ -511,6 +511,93 @@
         equal(axes.rows.tuples[0].members[0].children.length, 1);
         equal(axes.rows.tuples[0].members[0].children[0].members[0].name, "level 1");
         equal(axes.rows.tuples[0].members[0].children[0].members[1].name, "level 0");
+    });
+
+    test("measures are merged only on column axis", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var columnTuples = dataSource.axes().columns.tuples;
+        var rowTuples = dataSource.axes().rows.tuples;
+
+        equal(columnTuples.length, 1);
+        equal(columnTuples[0].members.length, 2);
+        equal(columnTuples[0].members[1].measure, true);
+
+        equal(rowTuples.length, 1);
+        equal(rowTuples[0].members.length, 1);
+    });
+
+    test("measures are merged only on row axis", function() {
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: [ "measure 1", "measure 2"],
+                axis: "rows"
+            },
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                                    { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var columnTuples = dataSource.axes().columns.tuples;
+        var rowTuples = dataSource.axes().rows.tuples;
+
+        equal(rowTuples.length, 1);
+        equal(rowTuples[0].members.length, 2);
+        equal(rowTuples[0].members[1].measure, true);
+
+        equal(columnTuples.length, 1);
+        equal(columnTuples[0].members.length, 1);
     });
 })();
 

@@ -174,9 +174,31 @@ var __meta__ = {
 
             newData = this._normalizeData(newData, axes);
 
-            this._axes = mergeAxes(this._axes, axes, this.measures());
+            this._axes = this._mergeAxes(axes);
 
             return newData;
+        },
+
+        _mergeAxes: function(source) {
+            var parsedTuples;
+            var columnMeasures = this.measuresAxis() === "columns";
+            var result = {
+                columns: normalizeAxis(this._axes.columns),
+                rows: normalizeAxis(this._axes.rows)
+            };
+
+            source = {
+                columns: normalizeAxis(source.columns),
+                rows: normalizeAxis(source.rows)
+            };
+
+            parsedTuples = parseSource(source.columns.tuples, columnMeasures ? this.measures() : []);
+            result.columns.tuples = mergeTuples(result.columns.tuples, parsedTuples);
+
+            parsedTuples = parseSource(source.rows.tuples, !columnMeasures ? this.measures() : []);
+            result.rows.tuples = mergeTuples(result.rows.tuples, parsedTuples);
+
+            return result;
         },
 
         _normalizeData: function(data, axes) {
@@ -229,26 +251,6 @@ var __meta__ = {
         }
 
         return axis;
-    }
-
-    function mergeAxes(target, source, measures) {
-        var result = {
-            columns: normalizeAxis(target.columns),
-            rows: normalizeAxis(target.rows)
-        };
-
-        source = {
-            columns: normalizeAxis(source.columns),
-            rows: normalizeAxis(source.rows)
-        };
-
-        var sourceTuples = parseSource(source.columns.tuples, measures);
-        result.columns.tuples = mergeTuples(result.columns.tuples, sourceTuples);
-
-        sourceTuples = parseSource(source.rows.tuples, []);
-        result.rows.tuples = mergeTuples(result.rows.tuples, sourceTuples);
-
-        return result;
     }
 
     function mergeTuples(target, source) {
