@@ -3117,7 +3117,7 @@ a.footer-links:hover {
 
 /* ##################### BOX ##################### */
 
-.box {
+#main > .box {
     margin: 4.5em 7.5em;
     padding: 3em;
     background-color: rgba(20,53,80,0.038);
@@ -3130,11 +3130,15 @@ a.footer-links:hover {
     height: 0;
 }
 #example .box {
-    margin: 4.5em 0; 
+    margin: 4.5em 0;
+    padding: 3em;
+    border: 1px solid rgba(20,53,80,0.05);  
+}
+.box.k-header {
+    background-position: 50% 70%;
 }
 .box h4 {
     margin-bottom: 1em;
-    color: #000;
     font-size: 12px;
     line-height: 1em;
     font-weight: bold;
