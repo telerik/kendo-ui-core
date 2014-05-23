@@ -992,8 +992,11 @@ var __meta__ = {
                 .bind("clear", function(e) {
                     that.clearSelection();
                 })
-                .bind("remove", function(e) {
+                .bind("removeTask", function(e) {
                     that.removeTask(that.dataSource.getByUid(e.uid));
+                })
+                .bind("removeDependency", function(e) {
+                    that.removeDependency(that.dependencies.getByUid(e.uid));
                 });
         },
 
@@ -1083,6 +1086,14 @@ var __meta__ = {
             this._preventDependencyRefresh = false;
 
             this.dependencies.sync();
+        },
+
+        removeDependency: function(dependency) {
+            if (!this.trigger("remove", { dependency: dependency })) {
+                if (this.dependencies.remove(dependency)) {
+                    this.dependencies.sync();
+                }
+            }
         },
 
         refresh: function(e) {

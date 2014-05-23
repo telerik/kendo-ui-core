@@ -9,6 +9,7 @@
     var GanttTask = kendo.data.GanttTask;
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
+    var GanttDependencyDataSource = kendo.data.GanttDependencyDataSource;
     var setupGanttList = function(options) {
         var dataSource = setupDataSource(options.data);
         ganttList = new GanttList(element, {
@@ -180,6 +181,100 @@
         gantt.removeTask(gantt.dataSource.at(0));
 
         ok(!gantt.dataSource.calls("remove"));
+    });
+
+    test("removeDependency() triggers remove event", 1, function() {
+        gantt = new Gantt(element, {
+            dependencies: new GanttDependencyDataSource({
+                data: [
+                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+                ],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        });
+
+        gantt.bind("remove", function() {
+            ok(true);
+        });
+
+        gantt.removeDependency(gantt.dependencies.at(0));
+    });
+
+    test("removeDependency() calls dataSource remove method", 1, function() {
+        gantt = new Gantt(element, {
+            dependencies: new GanttDependencyDataSource({
+                data: [
+                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+                ],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        });
+
+        stub(gantt.dependencies, "remove");
+
+        gantt.removeDependency(gantt.dependencies.at(0));
+
+        ok(gantt.dependencies.calls("remove"));
+    });
+
+    test("removeDependency() calls dataSource remove method with argument", 1, function() {
+        gantt = new Gantt(element, {
+            dependencies: new GanttDependencyDataSource({
+                data: [
+                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+                ],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        });
+
+        stub(gantt.dependencies, {
+            remove: function(dependency) {
+                equal(dependency.id, 1);
+            }
+        });
+
+        gantt.removeDependency(gantt.dependencies.at(0));
+    });
+
+    test("removeDependency() canceling remove event prevents calling dataSource remove method", 1, function() {
+        gantt = new Gantt(element, {
+            dependencies: new GanttDependencyDataSource({
+                data: [
+                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+                ],
+                schema: {
+                    model: {
+                        id: "id"
+                    }
+                }
+            })
+        });
+
+        gantt.bind("remove", function(e) {
+            e.preventDefault();
+        });
+
+        stub(gantt.dependencies, "remove");
+
+        gantt.removeDependency(gantt.dependencies.at(0));
+
+        ok(!gantt.dependencies.calls("remove"));
     });
 
     module("GanttList", {

@@ -274,6 +274,30 @@
         ok(gantt.calls("removeTask"));
     });
 
+    test("pressing Del key calls removeTask() if task is selected", function() {
+        ganttTimeline._render(tasks);
+
+        stub(gantt, "removeTask");
+
+        ganttTimeline.select(ganttTimeline.wrapper.find(".k-task:first"));
+        ganttTimeline.wrapper.trigger($.Event("keydown", { keyCode: kendo.keys.DELETE }));
+
+        ok(gantt.calls("removeTask"));
+    });
+
+    test("pressing Del key calls removeTask() if dependency is selected", function() {
+        ganttTimeline._render(tasks);
+        ganttTimeline._renderDependencies(dependencies);
+
+        stub(gantt, "removeDependency");
+
+        ganttTimeline.select(ganttTimeline.wrapper.find(".k-line:first"));
+        ganttTimeline.wrapper.trigger($.Event("keydown", { keyCode: kendo.keys.DELETE }));
+
+        ok(gantt.calls("removeDependency"));
+    });
+
+
     module("TaskDropDown", {
         setup: function() {
             element = $("<div/>");

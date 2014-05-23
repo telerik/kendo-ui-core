@@ -18,9 +18,11 @@ var __meta__ = {
     var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
+    var keys = kendo.keys;
     var Query = kendo.data.Query;
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
+    var KEYDOWN = "keydown";
     var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
                            '<div class="k-marquee-color"></div>' +
                        '</div>';
@@ -1845,9 +1847,30 @@ var __meta__ = {
             var that = this;
 
             if (this.options.editable === true) {
+                this._tabindex();
+
                 this.wrapper
-                    .on(CLICK + NS, ".k-task-delete", function (e) {
-                        that.trigger("remove", { uid: $(this).closest(".k-task").attr("data-uid") });
+                    .on(CLICK + NS, ".k-task-delete", function(e) {
+                        that.trigger("removeTask", { uid: $(this).closest(".k-task").attr("data-uid") });
+                    })
+                    .on(KEYDOWN + NS, function(e) {
+                        var selectedTask;
+                        var selectedDependency;
+
+                        if (e.keyCode === keys.DELETE) {
+                            selectedTask = that.select();
+
+                            if (selectedTask.length) {
+                                that.trigger("removeTask", { uid: selectedTask.attr("data-uid") });
+                                return;
+                            }
+
+                            selectedDependency = that.selectDependency();
+
+                            if (selectedDependency.length) {
+                                that.trigger("removeDependency", { uid: selectedDependency.attr("data-uid") });
+                            }
+                        }
                     });
             }
         }
