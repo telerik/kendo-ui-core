@@ -270,7 +270,7 @@ var __meta__ = {
             var sourceMembers = source[idx].members;
             for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
                 if (!targetMembers[memberIndex].measure) {
-                    [].push.apply(targetMembers[memberIndex].children, sourceMembers[memberIndex].children);
+                    targetMembers[memberIndex].children = sourceMembers[memberIndex].children;
                 }
             }
         }
