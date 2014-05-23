@@ -47,10 +47,9 @@
         return new MyDayView(container, $.extend({ majorTick: 120 }, options));
     }
 
-    function setupGroupedScheduler(element, orientation, view) {
+    function setupGroupedScheduler(element, orientation, view, options) {
         orientation = orientation || "horizontal";
-
-        new kendo.ui.Scheduler(element, {
+        options = $.extend({}, {
             date: new Date("2013/6/6"),
             startTime: new Date("2013/6/6 08:00"),
             endTime: new Date("2013/6/6 08:30"),
@@ -79,7 +78,9 @@
                 }
             ],
             views: [ view || "week" ]
-        });
+        }, options);
+
+        new kendo.ui.Scheduler(element, options);
     }
 
     module("Multi Day View rendering", {
@@ -1231,7 +1232,8 @@
 
     test("WorkWeek view name is the same case as the class name", function() {
         var viewName = "workWeek";
-        var scheduler = container.kendoScheduler({
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
             views: [viewName],
             dataSource: []
         }).data("kendoScheduler");
@@ -1242,7 +1244,8 @@
 
     test("Day view name is the same case as the class name", function() {
         var viewName = "day";
-        var scheduler = container.kendoScheduler({
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
             views: [viewName],
             dataSource: []
         }).data("kendoScheduler");
@@ -1253,13 +1256,91 @@
 
     test("Week view name is the same case as the class name", function() {
         var viewName = "week";
-        var scheduler = container.kendoScheduler({
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
             views: [viewName],
             dataSource: []
         }).data("kendoScheduler");
 
         var view = scheduler.view().name;
         equal(viewName, view);
+    });
+
+    test("Current time marker is rendered correctly", function() {
+        var viewName = "week";
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
+            views: [viewName],
+            dataSource: [],
+            date: new Date(),
+            startTime: new Date("2013/6/6 01:00"),
+            endTime: new Date("2013/6/6 00:59"),
+        }).data("kendoScheduler");
+
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,1);
+    });
+
+    test("Current time marker is not rendered when the option is set to false", function() {
+        var viewName = "week";
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
+            views: [viewName],
+            dataSource: [],
+            date: new Date(),
+            startTime: new Date("2013/6/6 01:00"),
+            endTime: new Date("2013/6/6 00:59"),
+            currentTimeMarker: false
+        }).data("kendoScheduler");
+
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,0);
+    });
+
+    test("Current time marker is not rendered when the currentTimeMarker option is not object", function() {
+        var viewName = "week";
+        var element = $("<div>").appendTo(QUnit.fixture);
+        var scheduler = element.kendoScheduler({
+            views: [viewName],
+            dataSource: [],
+            date: new Date(),
+            startTime: new Date("2013/6/6 01:00"),
+            endTime: new Date("2013/6/6 00:59"),
+            currentTimeMarker: true
+        }).data("kendoScheduler");
+
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,0);
+    });
+
+    test("Current time marker is rendered when horizontal grouping is applied", function() {
+        var viewName = "week";
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "horizontal", viewName, {
+            date: new Date(),
+            startTime: new Date("2013/6/6 01:00"),
+            endTime: new Date("2013/6/6 00:59"),
+        });
+
+        var scheduler = element.data("kendoScheduler");
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,1);
+    });
+
+    test("Current time marker is rendered when vertical grouping is applied", function() {
+        var viewName = "week";
+        var element = $("<div>").appendTo(QUnit.fixture);
+
+        setupGroupedScheduler(element, "vertical", viewName, {
+            date: new Date(),
+            startTime: new Date("2013/6/6 01:00"),
+            endTime: new Date("2013/6/6 00:59"),
+        });
+
+        var scheduler = element.data("kendoScheduler");
+        var timeElementsCount = scheduler.view().element.find(".k-current-time").length;
+        equal(timeElementsCount,4);
     });
 
     module("Multi Day View event positioning", {

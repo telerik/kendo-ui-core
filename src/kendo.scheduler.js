@@ -3009,6 +3009,8 @@ var __meta__ = {
 
             if (options.timezone && !(dataSource instanceof SchedulerDataSource)) {
                 dataSource = extend(true, dataSource, { schema: { timezone: options.timezone } });
+            } else if(dataSource instanceof SchedulerDataSource) {
+                options.timezone = dataSource.schema ? dataSource.schema.timezone : "";
             }
 
             if (that.dataSource && that._refreshHandler) {
@@ -3026,6 +3028,8 @@ var __meta__ = {
                 .bind(CHANGE, that._refreshHandler)
                 .bind("progress", that._progressHandler)
                 .bind("error", that._errorHandler);
+
+            that.options.dataSource = that.dataSource;
         },
 
         _error: function() {

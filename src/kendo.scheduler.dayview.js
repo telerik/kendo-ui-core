@@ -192,6 +192,55 @@ var __meta__ = {
             that.calculateDateRange();
 
             that._groups();
+
+            that._currentTime();
+        },
+
+        _currentTimeMarkerUpdater: function() {
+            var currentTime = new Date();
+            var options = this.options;
+
+            if(options.currentTimeMarker.useLocalTimezone === false) {
+                var timezone = options.dataSource.options.schema.timezone;
+
+                if(options.dataSource && timezone) {
+                   var timezoneOffset = kendo.timezone.offset(currentTime, timezone);
+                   currentTime = kendo.timezone.convert(currentTime, currentTime.getTimezoneOffset(), timezoneOffset);
+                }
+            }
+
+            this.times.find(".k-current-time").remove();
+
+            var groupsCount = !options.group || options.group.orientation == "horizontal" ? 1 : this.groups.length;
+
+            for(var groupIndex = 0; groupIndex < groupsCount; groupIndex++) {
+                var currentGroup = this.groups[groupIndex];
+                var ranges = currentGroup.timeSlotRanges(currentTime, new Date(currentTime.getTime() + 1));
+                if(ranges.length === 0) {
+                    return;
+                }
+                var collection = ranges[0].collection;
+                var slotElement = collection.slotByStartDate(currentTime);
+
+                if(slotElement) {
+                    var element = $("<div class='k-current-time'></div>");
+                    element.appendTo(this.times).css({
+                        top: Math.round(ranges[0].innerRect(currentTime, new Date(currentTime.getTime() + 1), false).top)
+                    });
+                }
+            }
+        },
+
+        _currentTime: function() {
+            var that = this;
+            var markerOptions = that.options.currentTimeMarker;
+
+            if (markerOptions !== false && markerOptions.updateInterval !== undefined) {
+                var updateInterval = markerOptions.updateInterval;
+
+                that._currentTimeMarkerUpdater();
+                that._currentTimeUpdateTimer = setInterval(proxy(this._currentTimeMarkerUpdater, that), updateInterval);
+            }
         },
 
         _updateResizeHint: function(event, groupIndex, startTime, endTime) {
@@ -572,6 +621,10 @@ var __meta__ = {
                 allDay: "all day",
                 showFullDay: "Show full day",
                 showWorkDay: "Show business hours"
+            },
+            currentTimeMarker: {
+                 updateInterval: 10000,
+                 useLocalTimezone: true
             }
         },
 
@@ -1027,6 +1080,10 @@ var __meta__ = {
 
         destroy: function() {
             var that = this;
+
+            if (that._currentTimeUpdateTimer) {
+                clearInterval(that._currentTimeUpdateTimer);
+            }
 
             if (that.datesHeader) {
                 that.datesHeader.off(NS);
