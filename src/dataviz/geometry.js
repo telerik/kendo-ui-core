@@ -236,6 +236,14 @@
             return Point.max(this.p0, this.p1);
         },
 
+        topRight: function() {
+            return new Point(this.bottomRight().x, this.topLeft().y);
+        },
+
+        bottomLeft: function() {
+            return new Point(this.topLeft().x, this.bottomRight().y);
+        },
+
         width: function() {
             return this.bottomRight().x - this.topLeft().x;
         },

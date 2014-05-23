@@ -429,6 +429,14 @@
         ok(invRect.bottomRight().equals(new Point(10, 20)));
     });
 
+    test("topRight returns top right corner", function() {
+        ok(invRect.topRight().equals(new Point(10, 0)));
+    });
+
+    test("bottomLeft returns bottom left corner", function() {
+        ok(invRect.bottomLeft().equals(new Point(0, 20)));
+    });
+
     test("wrap returns new rect with minimum p0 and maximum p1", function() {
         var other = new Rect(new Point(-1, 5), new Point(15, 15)),
             wrap =  rect.wrap(other);
