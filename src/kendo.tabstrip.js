@@ -869,6 +869,8 @@ var __meta__ = {
         },
 
         activateTab: function (item) {
+            if (this.tabGroup.children("[data-animating]").length) { return; }
+
             item = this.tabGroup.find(item);
 
             var that = this,
