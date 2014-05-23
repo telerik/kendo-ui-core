@@ -7278,7 +7278,7 @@ var __meta__ = {
                 return;
             }
 
-            var segmentOptions = deepExtend({}, fields.series);
+            var segmentOptions = deepExtend({}, fields.series, { index: fields.index });
             chart.evalSegmentOptions(segmentOptions, value, fields);
 
             segment = new DonutSegment(value, sector, segmentOptions);

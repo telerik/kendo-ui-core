@@ -84,6 +84,11 @@
             ok(firstSegment.seriesIx === 0);
         });
 
+        test("sets segment series index to options", function() {
+            ok(donutChart.points[0].options.index === 0);
+            ok(donutChart.points[1].options.index === 1);
+        });
+
         test("sets segment dataItem", function() {
             equal(typeof firstSegment.dataItem, "number");
         });
