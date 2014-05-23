@@ -74,7 +74,7 @@
 
             this._updateState();
 
-            ThemeChooser.changeTheme(newThemeId, true, $.noop);
+            ThemeChooser.changeTheme(newThemeId, true);
         },
         _changeSize: function(e) {
             e.preventDefault();
@@ -82,6 +82,10 @@
             this.currentSize = $(e.currentTarget).find(".tc-name").text();
 
             this._updateState();
+
+            var commonName = this.currentSize == "Standard" ? "common" : "common-bootstrap";
+
+            ThemeChooser.changeCommon(commonName, true);
         },
         toggle: function(e) {
             var options = this.options;
@@ -167,6 +171,13 @@
             }
         },
 
+        replaceCommon: function(commonName) {
+            var newCommonUrl = ThemeChooser.getCommonUrl(commonName),
+                themeLink = ThemeChooser.getCurrentCommonLink();
+
+            ThemeChooser.updateLink(themeLink, newCommonUrl);
+        },
+
         replaceWebTheme: function (themeName) {
             var newThemeUrl = ThemeChooser.getThemeUrl(themeName),
                 oldThemeName = $(doc).data("kendoSkin"),
@@ -248,6 +259,42 @@
             $(doc).data("kendoSkin", themeName);
         },
 
+        animateCssChange: function(options) {
+            options = $.extend({ complete: $.noop, replace: $.noop }, options);
+
+            ThemeChooser.preloadStylesheet(options.prefetch, function () {
+                var example = $("#example");
+
+                example.kendoStop().kendoAnimate(extend({}, animation.hide, {
+                    complete: function (element) {
+                        if (element[0] == example[0]) {
+                            example.css("visibility", "hidden");
+
+                            options.replace()
+
+                            setTimeout(function () {
+                                example
+                                    .css("visibility", "visible")
+                                    .kendoStop()
+                                    .kendoAnimate(animation.show);
+
+                                options.complete();
+                            }, 100);
+                        }
+                    }
+                }));
+            });
+        },
+
+        changeCommon: function(commonName, animate) {
+            ThemeChooser.animateCssChange({
+                prefetch: ThemeChooser.getCommonUrl(commonName),
+                replace: function() {
+                    ThemeChooser.replaceCommon(commonName);
+                }
+            });
+        },
+
         changeTheme: function (themeName, animate, complete) {
             // Set transparent background to the chart area.
             extend(kendo.dataviz.ui.themes[themeName].chart, { chartArea: { background: "transparent"} });
@@ -257,23 +304,12 @@
             }
 
             if (animate) {
-                ThemeChooser.preloadStylesheet(ThemeChooser.getThemeUrl(themeName), function () {
-                    var example = $("#example");
-
-                    example.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function (element) {
-                        if (element[0] == example[0]) {
-                            example.css("visibility", "hidden"); // Hide the element with restored opacity.
-                            ThemeChooser.replaceTheme(themeName);
-                            setTimeout(function () {
-                                example
-                                    .css("visibility", "visible")
-                                    .kendoStop()
-                                    .kendoAnimate(animation.show);
-                                complete();
-                            }, 100);
-                        }
-                    }
-                    }));
+                ThemeChooser.animateCssChange({
+                    prefetch: ThemeChooser.getThemeUrl(themeName),
+                    replace: function() {
+                        ThemeChooser.replaceTheme(themeName);
+                    },
+                    complete: complete
                 });
             } else {
                 ThemeChooser.replaceTheme(themeName);
