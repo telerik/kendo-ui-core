@@ -628,10 +628,7 @@ var __meta__ = {
 
             this._scrollable();
 
-            if (this.options.autoBind) {
-                this.dataSource.fetch();
-                this.dependencies.fetch();
-            }
+            this._dataBind();
 
             kendo.notify(this);
         },
@@ -640,7 +637,10 @@ var __meta__ = {
             "dataBinding",
             "dataBound",
             "add",
+            "edit",
             "remove",
+            "cancel",
+            "save",
             "change",
             "navigate",
             "moveStart",
@@ -899,6 +899,16 @@ var __meta__ = {
             this.list = new kendo.ui.GanttList(element, options);
 
             this.list
+                .bind("edit", function(e) {
+                    if (that.trigger("edit", { task: e.model, container: e.cell })) {
+                        e.preventDefault();
+                    }
+                })
+                .bind("cancel", function(e) {
+                    if (that.trigger("cancel", { task: e.model, container: e.cell })) {
+                        e.preventDefault();
+                    }
+                })
                 .bind("update", function(e) {
                     that.updateTask(e.task, e.updateInfo);
                 })
@@ -1070,13 +1080,15 @@ var __meta__ = {
         },
 
         updateTask: function(task, updateInfo) {
-            this._preventRefresh = true;
+            if (!this.trigger("save", { task: task, values: updateInfo })) {
+                this._preventRefresh = true;
 
-            this.dataSource.update(task, updateInfo);
+                this.dataSource.update(task, updateInfo);
 
-            this._preventRefresh = false;
+                this._preventRefresh = false;
 
-            this.dataSource.sync();
+                this.dataSource.sync();
+            }
         },
 
         removeTask: function(task) {
@@ -1146,7 +1158,13 @@ var __meta__ = {
                 return;
             }
 
+            if (this.trigger("dataBinding")) {
+                return;
+            }
+
             this.timeline._renderDependencies(this.dependencies.view());
+
+            this.trigger("dataBound");
         },
 
         _error: function() {
@@ -1204,6 +1222,26 @@ var __meta__ = {
             treeListWrapper.find(".k-grid-content").on("scroll", function(e) {
                 treeListWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
             });
+        },
+
+        _dataBind: function() {
+            var that = this;
+
+            if (that.options.autoBind) {
+                this._preventRefresh = true;
+                this._preventDependencyRefresh = true;
+
+                var promises = $.map([this.dataSource, this.dependencies], function(dataSource) {
+                    return dataSource.fetch();
+                });
+
+                $.when.apply(null, promises)
+                    .done(function() {
+                        that._preventRefresh = false;
+                        that._preventDependencyRefresh = false;
+                        that.refresh();
+                    });
+            }
         }
     });
 

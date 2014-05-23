@@ -388,25 +388,6 @@
         ok(dropDown.popup.calls("open"));
     });
 
-    test("command trigger add event", function() {
-        gantt.bind("add", function(e) {
-            ok(true);
-            ok(e.task instanceof kendo.data.GanttTask);
-        });
-
-        gantt.headerDropDown.trigger("command", { type: "add" });
-    });
-
-    test("canceling add event does not add task", function() {
-        gantt.bind("add", function(e) {
-            e.preventDefault();
-        });
-
-        gantt.headerDropDown.trigger("command", { type: "add" });
-
-        equal(gantt.dataSource.taskChildren().length, 2);
-    });
-
     test("'add' appends task to root collection", function() {
         var dropDown = gantt.headerDropDown;
 

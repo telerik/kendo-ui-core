@@ -241,6 +241,36 @@
         targetCell.trigger(event);
     });
 
+    test("ESC keydown trigger cancel event", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ESC;
+        ganttList.bind("cancel", function() {
+            ok(true);
+        });
+
+        doubleTap(targetCell);
+        targetCell.trigger(event);
+    });
+
+    test("ESC keydown does not close edit cell when 'cancel' prevented", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ESC;
+
+        ganttList.bind("cancel", function(e) {
+            e.preventDefault();
+        });
+
+        stub(ganttList, "_closeCell");
+        doubleTap(targetCell);
+        targetCell.trigger(event);
+
+        ok(!ganttList.calls("_closeCell"));
+    });
+
     test("Enter keydown closes edited cell", function() {
         var targetCell = ganttList.content.find("td").eq(0);
         var event = new $.Event('keydown');
@@ -251,6 +281,44 @@
         doubleTap(targetCell);
         targetCell.trigger(event);
 
+        ok(ganttList.calls("_closeCell"));
+    });
+
+    test("cancel event has correct parameters", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+        var event = new $.Event('keydown');
+
+        event.keyCode = kendo.keys.ESC;
+        ganttList.bind("cancel", function(e) {
+            equal(e.model, ganttList.dataSource.at(0));
+            equal(e.cell[0], targetCell[0]);
+        });
+
+        doubleTap(targetCell);
+        targetCell.trigger(event);
+    });
+
+    test("trigger edit event", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        ganttList.bind("edit", function(e) {
+            ok(true);
+            equal(e.model, ganttList.dataSource.at(0));
+            equal(e.cell[0], targetCell[0])
+        });
+
+        doubleTap(targetCell);
+    });
+
+    test("edited cell closed when 'edit' is prevented", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        stub(ganttList, "_closeCell");
+        ganttList.bind("edit", function(e) {
+            e.preventDefault();
+        });
+
+        doubleTap(targetCell);
         ok(ganttList.calls("_closeCell"));
     });
 

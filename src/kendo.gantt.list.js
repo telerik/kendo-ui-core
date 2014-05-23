@@ -404,6 +404,8 @@ var __meta__ = {
                 .on("keydown" + NS, function(e) {
                     var key = e.keyCode;
                     var active = $(activeElement());
+                    var cell;
+                    var model;
 
                     switch (key) {
                         case keys.ENTER:
@@ -420,7 +422,11 @@ var __meta__ = {
                             finishEdit();
                             break;
                         case keys.ESC:
-                            that._closeCell(true);
+                            cell = that._editableContainer;
+                            model = that._modelFromElement(cell);
+                            if (!that.trigger("cancel", { model: model, cell: cell })) {
+                                that._closeCell(true);
+                            }
                             break;
                     }
                 })
@@ -487,6 +493,10 @@ var __meta__ = {
                                     model: modelCopy,
                                     clearContainer: false
                                 }).data("kendoEditable");
+
+            if (this.trigger("edit", { model: model, cell: cell })) {
+                this._closeCell(true);
+            }
         },
 
         _closeCell: function(cancelUpdate) {
