@@ -14,6 +14,9 @@
                             Details
                         </th>
                         <th>
+                            Country
+                        </th>
+                        <th>
                             ID
                         </th>
                     </tr>
@@ -30,9 +33,11 @@
                        <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
 		            </td>
 		            <td class="details">
-			           <span class="title">#: Title #</span>
-			           <span class="description">Name : #: FirstName# #: LastName#</span>
-			           <span class="description">Country : #: Country# </span>
+			           <span class="name">#: FirstName# #: LastName# </span>
+			           <span class="title">Title: #: Title #</span>
+		            </td>
+                    <td class="country">
+			            #: Country #
 		            </td>
 		            <td class="employeeID">
 		               #: EmployeeID #
@@ -45,11 +50,13 @@
                        <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
 		            </td>
 		            <td class="details">
-			           <span class="title">#: Title #</span>
-			           <span class="description">Name : #: FirstName# #: LastName#</span>
-			           <span class="description">Country : #: Country# </span>
+			           <span class="name">#: FirstName# #: LastName# </span>
+			           <span class="title">Title: #: Title #</span>
 		            </td>
-		            <td class="employeeID">
+		            <td class="country">
+			            #: Country #
+		            </td>
+                    <td class="employeeID">
 		               #: EmployeeID #
 		            </td>
 	           </tr>
@@ -67,7 +74,7 @@
                         },
                         rowTemplate: kendo.template($("#rowTemplate").html()),
                         altRowTemplate: kendo.template($("#altRowTemplate").html()),
-                        height: 430
+                        height: 550
                     });
                });
             </script>
@@ -78,15 +85,16 @@
                 .details {
                     width: 400px;
                 }
-                .title {
+                .name {
                     display: block;
                     font-size: 1.6em;
                 }
-                .description {
+                .title {
                     display: block;
                     padding-top: 1.6em;
                 }
-                .employeeID {
+                .employeeID,
+                .country {
                     font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
                     font-size: 50px;
                     font-weight: bold;

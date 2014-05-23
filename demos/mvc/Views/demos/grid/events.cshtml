@@ -1,9 +1,7 @@
         
         <div id="example" class="k-content">
             
-            <div class="demo-section">
-                <div id="grid"></div>
-            </div>
+            <div id="grid"></div>
 
             <script>
                 function onChange(arg) {
@@ -31,15 +29,15 @@
                                     dataType: "jsonp"
                                 }
                             },
-                            pageSize: 10
+                            pageSize: 20
                         },
+                        height: 550,
                         change: onChange,
                         dataBound: onDataBound,
                         dataBinding: onDataBinding,
                         selectable: "multiple cell",
                         pageable: true,
                         sortable: true,
-                        scrollable: false,
                         columns: [
                             {
                                 field: "ProductName",
@@ -59,7 +57,7 @@
                 });
             </script>
             <div class="demo-section">
-                <h3 class="title">Console log</h3>
+                <h4>Console log</h4>
                 <div class="console"></div>
             </div>
         </div>
