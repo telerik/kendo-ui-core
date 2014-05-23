@@ -702,6 +702,7 @@ var __meta__ = {
         _createDragHint: function(element) {
             this._dragHint = element
                 .clone()
+                .addClass("k-drag-hint")
                 .css("cursor", "move");
 
             element
