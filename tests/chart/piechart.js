@@ -142,6 +142,11 @@
             equal(pieChart.legendItems.length, 2);
         });
 
+        test("set legend item point index", function() {
+            equal(pieChart.legendItems[0].pointIndex, 0);
+            equal(pieChart.legendItems[1].pointIndex, 1);
+        });
+
         test("set legend item name to category", function() {
             equal(pieChart.legendItems[0].text, "A");
         });
@@ -158,6 +163,22 @@
                     value: 2,
                     category: "B",
                     visibleInLegend: false
+                }];
+
+            setupPieChart(plotArea, { series: [ { type: "pie", data: data } ] });
+            equal(pieChart.legendItems.length, 1);
+        });
+
+        test("skip points with null or empty text", function() {
+            var data = [{
+                    value: 1,
+                    category: ""
+                }, {
+                    value: 2,
+                    category: null
+                }, {
+                    value: 3,
+                    category: "foo"
                 }];
 
             setupPieChart(plotArea, { series: [ { type: "pie", data: data } ] });
@@ -185,6 +206,73 @@
                 }
             } ] });
             equal(pieChart.legendItems[0].text, "A");
+        });
+
+        // ------------------------------------------------------------
+
+        function setupInactiveItemsPieChart(options) {
+            setupPieChart(plotArea, deepExtend({ series: [ { type: "pie", data: [{
+                    value: 1,
+                    category: "A",
+                    color: "red"
+                }, {
+                    value: 2,
+                    category: "B",
+                    color: "blue",
+                    visible: false
+                }] } ],
+                legend: {
+                    inactiveItems: {
+                        labels: {
+                            color: "foo",
+                            font: "bar"
+                        },
+                        markers: {
+                            color: "green"
+                        }
+                    }
+                }
+            }, options));
+        }
+
+        module("Pie Chart / Inactive Legend items", {
+            setup: function() {
+                plotArea = new PlotAreaStub();
+                setupInactiveItemsPieChart();
+            }
+        });
+
+        test("return legend item for each segment", function() {
+            equal(pieChart.legendItems.length, 2);
+        });
+
+        test("set legend item name to category", function() {
+            equal(pieChart.legendItems[0].text, "A");
+            equal(pieChart.legendItems[1].text, "B");
+        });
+
+        test("set legend item color", function() {
+            equal(pieChart.legendItems[0].markerColor, "red");
+            equal(pieChart.legendItems[1].markerColor, "green");
+        });
+
+        test("set legend item labels", function() {
+            var inactiveLabels = pieChart.legendItems[1].labels;
+            equal(inactiveLabels.color, "foo");
+            equal(inactiveLabels.font, "bar");
+        });
+
+        test("set legend item name with template", function() {
+            setupInactiveItemsPieChart({
+                legend: {
+                    inactiveItems: {
+                        labels: {
+                            template: "baz"
+                        }
+                    }
+                }
+            });
+            equal(pieChart.legendItems[1].text, "baz");
         });
 
     })();

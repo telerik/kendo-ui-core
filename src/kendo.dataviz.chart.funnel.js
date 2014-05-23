@@ -22,6 +22,7 @@ var __meta__ = {
         dataviz = kendo.dataviz,
         Color = dataviz.Color,
         ChartElement = dataviz.ChartElement,
+        PieChartMixin = dataviz.PieChartMixin,
         PlotAreaBase = dataviz.PlotAreaBase,
         PlotAreaFactory = dataviz.PlotAreaFactory,
         Point2D = dataviz.Point2D,
@@ -229,67 +230,6 @@ var __meta__ = {
                 return textBox;
             }
         },
-        createLegendItem: function(value, point) {
-            var chart = this,
-                labelsOptions = (chart.options.legend || {}).labels || {},
-                inactiveItems = (chart.options.legend || {}).inactiveItems || {},
-                text, labelTemplate, markerColor, labelColor;
-
-            if (point && point.visibleInLegend !== false) {
-                text = point.category || "";
-                if ((labelsOptions || {}).template) {
-                    labelTemplate = template(labelsOptions.template);
-                    text = labelTemplate({
-                        text: text,
-                        series: point.series,
-                        dataItem: point.dataItem,
-                        percentage: point.percentage,
-                        value: value
-                    });
-                }
-
-                if (point.visible === false) {
-                    markerColor = (inactiveItems.markers || {}).color;
-                    labelColor = (inactiveItems.labels || {}).color;
-                } else {
-                    markerColor = (point.series || {}).color;
-                    labelColor = labelsOptions.color;
-                }
-
-                if (text) {
-                    chart.legendItems.push({
-                        pointIndex: point.index,
-                        text: text,
-                        series: point.series,
-                        markerColor: markerColor,
-                        labelColor: labelColor
-                    });
-                }
-            }
-        },
-
-        // TODO: Same as PieChart.pointsTotal
-        // -> Extract into base class / method
-        pointsTotal: function(series) {
-            var data = series.data,
-                length = data.length,
-                sum = 0,
-                value, i, pointData;
-
-            for (i = 0; i < length; i++) {
-                pointData = SeriesBinder.current.bindPoint(series, i);
-                value = pointData.valueFields.value;
-                if (typeof value === "string") {
-                    value = parseFloat(value);
-                }
-
-                if (value && pointData.fields.visible !== false) {
-                    sum += value;
-                }
-            }
-
-            return sum;
-        },
 
         labelPadding: function() {
             var labels = this.labels,
@@ -400,6 +340,8 @@ var __meta__ = {
             }
         }
     });
+
+    deepExtend(FunnelChart.fn, PieChartMixin);
 
     var FunnelSegment = ChartElement.extend({
         init: function(value, options, segmentOptions) {

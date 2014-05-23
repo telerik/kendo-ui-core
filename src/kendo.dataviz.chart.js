@@ -1733,7 +1733,7 @@ var __meta__ = {
             for (i = 0; i < count; i++) {
                 item = items[i];
                 legend.append(new LegendLabel(item, deepExtend({},
-                    legend.options.labels, { color: item.labelColor } )));
+                    legend.options.labels, item.labels )));
             }
         },
 
@@ -6692,6 +6692,76 @@ var __meta__ = {
     });
     deepExtend(PieSegment.fn, PointEventsMixin);
 
+    var PieChartMixin = {
+        createLegendItem: function(value, point) {
+            var chart = this,
+                legendOptions = chart.options.legend || {},
+                labelsOptions = legendOptions.labels || {},
+                inactiveItems = legendOptions.inactiveItems || {},
+                inactiveItemsLabels = inactiveItems.labels || {},
+                text, labelTemplate, markerColor, itemLabelOptions,
+                pointVisible;
+
+            if (point && point.visibleInLegend !== false) {
+                pointVisible = point.visible !== false;
+                text = point.category || "";
+                labelTemplate = pointVisible ? labelsOptions.template : inactiveItemsLabels.template;
+
+                if (labelTemplate) {
+                    text = template(labelTemplate)({
+                        text: text,
+                        series: point.series,
+                        dataItem: point.dataItem,
+                        percentage: point.percentage,
+                        value: value
+                    });
+                }
+
+                if (pointVisible) {
+                    itemLabelOptions = {};
+                    markerColor = (point.series || {}).color;
+                } else {
+                    itemLabelOptions = {
+                        color: inactiveItemsLabels.color,
+                        font: inactiveItemsLabels.font
+                    };
+                    markerColor = (inactiveItems.markers || {}).color;
+                }
+
+                if (text) {
+                    chart.legendItems.push({
+                        pointIndex: point.index,
+                        text: text,
+                        series: point.series,
+                        markerColor: markerColor,
+                        labels: itemLabelOptions
+                    });
+                }
+            }
+        },
+
+        pointsTotal: function(series) {
+            var data = series.data,
+                length = data.length,
+                sum = 0,
+                value, i, pointData;
+
+            for (i = 0; i < length; i++) {
+                pointData = SeriesBinder.current.bindPoint(series, i);
+                value = pointData.valueFields.value;
+                if (typeof value === "string") {
+                    value = parseFloat(value);
+                }
+
+                if (value && pointData.fields.visible !== false) {
+                    sum += value;
+                }
+            }
+
+            return sum;
+        }
+    };
+
     var PieChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -6819,66 +6889,6 @@ var __meta__ = {
             extend(segment, fields);
             chart.append(segment);
             chart.points.push(segment);
-        },
-
-        createLegendItem: function(value, point) {
-            var chart = this,
-                labelsOptions = (chart.options.legend || {}).labels || {},
-                inactiveItems = (chart.options.legend || {}).inactiveItems || {},
-                text, labelTemplate, markerColor, labelColor;
-
-            if (point && point.visibleInLegend !== false) {
-                text = point.category || "";
-                if ((labelsOptions || {}).template) {
-                    labelTemplate = template(labelsOptions.template);
-                    text = labelTemplate({
-                        text: text,
-                        series: point.series,
-                        dataItem: point.dataItem,
-                        percentage: point.percentage,
-                        value: value
-                    });
-                }
-
-                if (point.visible === false) {
-                    markerColor = (inactiveItems.markers || {}).color;
-                    labelColor = (inactiveItems.labels || {}).color;
-                } else {
-                    markerColor = (point.series || {}).color;
-                    labelColor = labelsOptions.color;
-                }
-
-                if (text) {
-                    chart.legendItems.push({
-                        pointIndex: point.index,
-                        text: text,
-                        series: point.series,
-                        markerColor: markerColor,
-                        labelColor: labelColor
-                    });
-                }
-            }
-        },
-
-        pointsTotal: function(series) {
-            var data = series.data,
-                length = data.length,
-                sum = 0,
-                value, i, pointData;
-
-            for (i = 0; i < length; i++) {
-                pointData = SeriesBinder.current.bindPoint(series, i);
-                value = pointData.valueFields.value;
-                if (typeof value === "string") {
-                    value = parseFloat(value);
-                }
-
-                if (value && pointData.fields.visible !== false) {
-                    sum += value;
-                }
-            }
-
-            return sum;
         },
 
         reflow: function(targetBox) {
@@ -7204,6 +7214,8 @@ var __meta__ = {
             return categoryIndex * PIE_SECTOR_ANIM_DELAY;
         }
     });
+
+    deepExtend(PieChart.fn, PieChartMixin);
 
     var DonutSegment = PieSegment.extend({
         options: {
@@ -7821,17 +7833,21 @@ var __meta__ = {
                 legend = this.options.legend,
                 labels = legend.labels || {},
                 inactiveItems = legend.inactiveItems || {},
-                color, labelColor, markerColor, defaults;
+                inactiveItemsLabels = inactiveItems.labels || {},
+                color, itemLabelOptions, markerColor,
+                defaults, seriesVisible, labelTemplate;
 
             for (i = 0; i < count; i++) {
                 currentSeries = series[i];
+                seriesVisible = currentSeries.visible !== false;
                 if (currentSeries.visibleInLegend === false) {
                     continue;
                 }
 
                 text = currentSeries.name || "";
-                if (labels.template) {
-                    text = template(labels.template)({
+                labelTemplate = seriesVisible ? labels.template : inactiveItemsLabels.template;
+                if (labelTemplate) {
+                    text = template(labelTemplate)({
                         text: text,
                         series: currentSeries
                     });
@@ -7843,21 +7859,24 @@ var __meta__ = {
                     color = defaults.color;
                 }
 
-                if (currentSeries.visible === false) {
-                    labelColor = inactiveItems.labels.color;
-                    markerColor = inactiveItems.markers.color;
-                } else {
-                    labelColor = labels.color;
+                if (seriesVisible) {
+                    itemLabelOptions = {};
                     markerColor = color;
+                } else {
+                    itemLabelOptions = {
+                        color: inactiveItemsLabels.color,
+                        font: inactiveItemsLabels.font
+                    };
+                    markerColor = inactiveItems.markers.color;
                 }
 
                 if (text) {
                     data.push({
                         text: text,
-                        labelColor: labelColor,
+                        labels: itemLabelOptions,
                         markerColor: markerColor,
                         series: currentSeries,
-                        active: currentSeries.visible
+                        active: seriesVisible
                     });
                 }
             }
@@ -11568,6 +11587,7 @@ var __meta__ = {
         PieAnimation: PieAnimation,
         PieAnimationDecorator: PieAnimationDecorator,
         PieChart: PieChart,
+        PieChartMixin: PieChartMixin,
         PiePlotArea: PiePlotArea,
         PieSegment: PieSegment,
         PlotAreaBase: PlotAreaBase,

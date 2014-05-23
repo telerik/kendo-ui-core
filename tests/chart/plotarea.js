@@ -4769,6 +4769,180 @@
     })();
 
     (function() {
+        var PlotAreaStub = dataviz.PlotAreaBase.extend({
+            render: function() {
+                this.addToLegend(this.series);
+            }
+        });
+
+        var plotArea;
+        var legendItems;
+
+        function createPlotArea(series, options) {
+            plotArea = new PlotAreaStub(series || [{
+                name: "series1",
+                color: "red"
+            }, {
+                name: "series2",
+                color: "blue"
+            }], options);
+            legendItems = plotArea.options.legend.items;
+        }
+
+        // ------------------------------------------------------------
+        module("PlotArea / Legend Items", {
+            setup: function() {
+                createPlotArea();
+            },
+            teardown: moduleTeardown
+        });
+
+        test("creates legend item for each series", function() {
+            equal(legendItems.length, 2);
+        });
+
+        test("skips series with visibleInLegend equal to false", function() {
+            createPlotArea([{
+                name: "series1",
+                visibleInLegend: false
+            }, {
+                name: "series2"
+            }]);
+            equal(legendItems.length, 1);
+        });
+
+        test("skips series with no name", function() {
+            createPlotArea([{
+                name: ""
+            }, {
+                name: "foo"
+            }]);
+            equal(legendItems.length, 1);
+        });
+
+        test("set legend item series", function() {
+            equal(legendItems[0].series.name, "series1");
+            equal(legendItems[1].series.name, "series2");
+        });
+
+        test("set legend item color", function() {
+            equal(legendItems[0].markerColor, "red");
+            equal(legendItems[1].markerColor, "blue");
+        });
+
+        test("set legend item text from series name", function() {
+            equal(legendItems[0].text, "series1");
+            equal(legendItems[1].text, "series2");
+        });
+
+        test("set legend item text with template", function() {
+            createPlotArea([{
+                name: "series1"
+            }, {
+                name: "series2"
+            }], {
+                legend: {
+                    labels: {
+                        template: "#=text#foo"
+                    }
+                }
+            });
+            equal(legendItems[0].text, "series1foo");
+            equal(legendItems[1].text, "series2foo");
+        });
+
+        // ------------------------------------------------------------
+        module("PlotArea / Inactive Legend Items", {
+            setup: function() {
+                createPlotArea([{
+                    name: "series1",
+                    color: "red",
+                    visible: false
+                }, {
+                    name: "series2",
+                    color: "blue"
+                }], {
+                    legend: {
+                        inactiveItems: {
+                            labels: {
+                                color: "foo",
+                                font: "bar"
+                            },
+                            markers: {
+                                color: "green"
+                            }
+                        }
+                    }
+                });
+            },
+            teardown: moduleTeardown
+        });
+
+        test("creates legend item for each series", function() {
+            equal(legendItems.length, 2);
+        });
+
+        test("skips series with visibleInLegend equal to false", function() {
+            createPlotArea([{
+                name: "series1",
+                visibleInLegend: false,
+                visible: false
+            }, {
+                name: "series2"
+            }]);
+            equal(legendItems.length, 1);
+        });
+
+        test("skips series with null or empty name", function() {
+            createPlotArea([{
+                name: "",
+                visible: false
+            }, {
+                name: null,
+                visible: false
+            },{
+                name: "foo",
+                visible: false
+            }]);
+            equal(legendItems.length, 1);
+        });
+
+        test("set legend item series", function() {
+            equal(legendItems[0].series.name, "series1");
+            equal(legendItems[1].series.name, "series2");
+        });
+
+        test("set legend item color", function() {
+            equal(legendItems[0].markerColor, "green");
+            equal(legendItems[1].markerColor, "blue");
+        });
+
+        test("set legend item text from series name", function() {
+            equal(legendItems[0].text, "series1");
+            equal(legendItems[1].text, "series2");
+        });
+
+        test("set legend item text with template", function() {
+            createPlotArea([{
+                name: "series1",
+                visible: false
+            }, {
+                name: "series2"
+            }], {
+                legend: {
+                    inactiveItems: {
+                        labels: {
+                            template: "#=text#foo"
+                        }
+                    }
+                }
+            });
+            equal(legendItems[0].text, "series1foo");
+            equal(legendItems[1].text, "series2");
+        });
+    })();
+
+    (function() {
         var factory;
 
         function FooPlotArea() { }
