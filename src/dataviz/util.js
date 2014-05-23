@@ -148,7 +148,14 @@
     }
 
     function last(array) {
-        return array[array.length - 1];
+        if (array) {
+            return array[array.length - 1];
+        }
+    }
+
+    function append(first, second) {
+        first.push.apply(first, second);
+        return first;
     }
 
     // Template helpers =======================================================
@@ -219,6 +226,7 @@
             },
 
             alignToPixel: alignToPixel,
+            append: append,
             arrayLimits: arrayLimits,
             arrayMin: arrayMin,
             arrayMax: arrayMax,
