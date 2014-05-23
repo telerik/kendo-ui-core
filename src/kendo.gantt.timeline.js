@@ -242,6 +242,26 @@ var __meta__ = {
             var position;
             var task;
             var coordinates = this._taskCoordinates = {};
+            var milestoneWidth = Math.round(this._calculateMilestoneWidth());
+
+            var addCoordinates = function(rowIndex) {
+                var taskLeft;
+                var taskRight;
+
+                taskLeft = position.left;
+                taskRight = taskLeft + position.width;
+
+                if (task.isMilestone()) {
+                    taskLeft -= milestoneWidth / 2;
+                    taskRight = taskLeft + milestoneWidth;
+                }
+
+                coordinates[task.id] = {
+                    start: taskLeft,
+                    end: taskRight,
+                    rowIndex: rowIndex
+                };
+            };
 
             for (var i = 0, l = tasks.length; i < l; i++) {
                 task = tasks[i];
@@ -256,11 +276,7 @@ var __meta__ = {
 
                 rows.push(row);
 
-                coordinates[task.id] = {
-                    start: position.left,
-                    end: position.left + position.width,
-                    rowIndex: i
-                };
+                addCoordinates(i);
             }
 
             return this._createTable(1, rows, { className: "k-gantt-tasks" });
@@ -308,6 +324,19 @@ var __meta__ = {
             tableWidth = Math.round((totalSpan * this.options.slotSize) / maxSpan);
 
             return tableWidth;
+        },
+
+        _calculateMilestoneWidth: function() {
+            var milestoneWidth;
+            var milestone = $("<div class='k-task k-task-milestone' style='visibility: hidden; position: absolute'>");
+
+            this.content.append(milestone);
+
+            milestoneWidth = milestone[0].getBoundingClientRect().width;
+
+            milestone.remove();
+
+            return milestoneWidth;
         },
 
         _renderTask: function(task, position) {
