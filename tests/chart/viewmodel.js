@@ -1860,13 +1860,19 @@
                 items: [{
                     active: true,
                     text: "item1",
-                    labelColor: "blue",
+                    labels:  {
+                        color: "blue",
+                        font: "foo"
+                    },
                     markerColor: "red",
                     series: legendSeries
                 },{
                     active: false,
                     text: "item2",
-                    labelColor: "green",
+                    labels:  {
+                        color: "green",
+                        font: "bar"
+                    },
                     markerColor: "pink",
                     series: legendSeries
                 }],
@@ -1919,11 +1925,6 @@
             equal(legendItems[1].options.active, false);
         });
 
-        test("sets labelColor", function() {
-            equal(legendItems[0].options.labelColor, "blue");
-            equal(legendItems[1].options.labelColor, "green");
-        });
-
         test("sets markerColor", function() {
             equal(legendItems[0].options.markerColor, "red");
             equal(legendItems[1].options.markerColor, "pink");
@@ -1939,12 +1940,36 @@
             deepEqual(legendItems[1].options.series, legendSeries);
         });
 
-        test("sets labels color", function() {
+        test("sets item labels color", function() {
+            equal(legendItems[0].options.labels.color, "blue");
+            equal(legendItems[1].options.labels.color, "green");
+        });
+
+        test("sets options labels color if item has no labels color set", function() {
+            createLegendWithItems({
+                items: [{
+                    text: "item1"
+                }, {
+                    text: "item2"
+                }]
+            });
             equal(legendItems[0].options.labels.color, "cyan");
             equal(legendItems[1].options.labels.color, "cyan");
         });
 
-        test("sets labels font", function() {
+        test("sets item labels font", function() {
+            equal(legendItems[0].options.labels.font, "foo");
+            equal(legendItems[1].options.labels.font, "bar");
+        });
+
+        test("sets options labels font if item has no labels font set", function() {
+            createLegendWithItems({
+                items: [{
+                    text: "item1"
+                }, {
+                    text: "item2"
+                }]
+            });
             equal(legendItems[0].options.labels.font, SANS12);
             equal(legendItems[1].options.labels.font, SANS12);
         });
@@ -1994,7 +2019,6 @@
             legendItem = new dataviz.LegendItem($.extend({
                 active: true,
                 text: "item1",
-                labelColor: "blue",
                 markerColor: "red",
                 series: legendSeries,
                 labels: {
@@ -2072,8 +2096,8 @@
             equal(textbox.content, "item1");
         });
 
-        test("sets textbox color to labelColor", function() {
-            equal(textbox.options.color, "blue");
+        test("sets textbox color", function() {
+            equal(textbox.options.color, "cyan");
         });
 
         test("sets textbox font", function() {

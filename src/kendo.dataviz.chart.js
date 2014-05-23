@@ -1696,7 +1696,6 @@ var __meta__ = {
             var item = this,
                 options = item.options,
                 labelOptions = deepExtend({}, options.labels, {
-                        color: options.labelColor,
                         id: uniqueId()
                     }
                 );
@@ -1834,10 +1833,10 @@ var __meta__ = {
             for (i = 0; i < count; i++) {
                 item = items[i];
 
-                innerElement.append(new LegendItem(deepExtend({}, item, {
+                innerElement.append(new LegendItem(deepExtend({}, {
                     markers: options.markers,
                     labels: options.labels
-                })));
+                }, item)));
             }
             legend.container.append(innerElement);
         },
