@@ -94,7 +94,31 @@
 
     </div>
 </div>
-
+@if (ViewBag.Product == "kendo-ui")
+{
+<div>
+<h3>Sample Applications</h3>
+<ul>
+    <li><a href="http://demos.telerik.com/kendo-ui/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/html5-diagram-sample-app">Sample Diagram Tool</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/websushi/">Single-Page Application</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/aeroviewr/">Image Gallery</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/bootstrap/">Kendo UI ♥ Bootstrap</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/sushi/">Mobile Sushi Bar</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/cuteness/">Mobile Reddit Viewer</a></li>
+    <li><a href="http://demos.telerik.com/kendo-ui/financial/stock-history">Stock History Dashboard</a></li>
+</ul>
+</div>
+}
+@if (ViewBag.Product == "aspnet-mvc")
+{
+<div>
+<h3>Sample Applications</h3>
+<ul>
+    <li><a href="http://demos.telerik.com/aspnet-mvc/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
+</ul>
+</div>
+}
 <style>
     #overview-widgets {
         width: auto;

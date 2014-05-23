@@ -457,6 +457,8 @@
     <Content Include="content\web\tasksItems.gif" />
     <Content Include="content\web\validator\ticketsOnline.png" />
     <Content Include="content\web\wave.png" />
+    <Content Include="content\web\window\ajax\ajaxContent1.html" />
+    <Content Include="content\web\window\ajax\t-1000.jpg" />
     <Content Include="Global.asax" />
     <Content Include="obj\Debug\Kendo.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\Kendo.dll" />
