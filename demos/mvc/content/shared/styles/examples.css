@@ -3065,6 +3065,7 @@ a.footer-links:hover {
    position: absolute;
    right: 6px;
    top: 9px;
+   color: #000; 
 }
 
 #layout-search-wrapper .k-uniE600 {
@@ -3072,6 +3073,7 @@ a.footer-links:hover {
    position: absolute;
    top: 13px;
    right: 6px;
+   color: #000; 
 }
 
 #layout-search-wrapper .km-listview-wrapper {
