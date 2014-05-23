@@ -1,11 +1,11 @@
 
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
+        <div id="example">
+            <div class="demo-section k-content">
                 <div id="chart"></div>
             </div>
-            <div class="configuration-horizontal">
-                <div class="config-section">
-                <span class="configHead">Base date unit</span>
+            <div class="box">
+                <div class="box-col">
+                <h4>Base date unit</h4>
                 <ul class="options">
                     <li>
                         <input id="baseUnitAuto" name="baseUnit"
@@ -34,8 +34,8 @@
                     </li>
                 </ul>
                 </div>
-                <div class="config-section">
-                <span class="configHead">Aggregate function</span>
+                <div class="box-col">
+                <h4>Aggregate function</h4>
                 <ul class="options">
                     <li>
                         <input id="aggregateMax" name="aggregate"
@@ -63,7 +63,10 @@
                         <label for="aggregateCount">Count</label>
                     </li>
                 </ul>
-                <p>Custom aggregate functions are supported.</p>
+                </div>
+                <div class="box-col">
+                    <h4>&nbsp;</h4>
+                    <p>Custom aggregate functions are supported.</p>
                 </div>
             </div>
             <script>
@@ -114,7 +117,7 @@
 
                 $(document).ready(createChart);
                 $("#example").bind("kendo:skinChange", createChart);
-                $(".configuration-horizontal").bind("change", refresh);
+                $(".box").bind("change", refresh);
 
                 function refresh() {
                     var chart = $("#chart").data("kendoChart"),
@@ -131,10 +134,5 @@
 
                     chart.refresh();
                 }
-            </script>
-            <style scoped>
-                .chart-wrapper, .chart-wrapper .k-chart {
-                    height: 300px;
-                }
-            </style>
+            </script>          
         </div>

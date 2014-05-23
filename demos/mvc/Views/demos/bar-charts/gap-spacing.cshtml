@@ -1,19 +1,19 @@
-<div id="example" class="k-content">
-    <div class="chart-wrapper">
+<div id="example">
+    <div class="demo-section k-content">
         <div id="chart"></div>
     </div>
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Gap</span>
+    <div class="box">
+        <div class="box-col">
+            <h4>Gap</h4>
             <ul class="options">
                 <li>
                     <input id="gap" type="number" value="1.5" step="0.1" style="width: 60px;" />
-                    <button id="getGap" class="k-button">Set gap</button
+                    <button id="getGap" class="k-button">Set gap</button>
                 </li>
             </ul>
         </div>
-        <div class="config-section">
-            <span class="configHead">Spacing</span>
+        <div class="box-col">
+            <h4>Spacing</h4>
             <ul class="options">
                 <li>
                     <input id="spacing" type="number" value="0.4" step="0.1" style="width: 60px;" />
@@ -85,9 +85,3 @@
         }
     });
 </script>
-
-<style scoped>
-    .chart-wrapper, .chart-wrapper .k-chart {
-        height: 300px;
-    }
-</style>
