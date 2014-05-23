@@ -233,6 +233,15 @@ var __meta__ = {
             return this._dependencies("successorId", id);
         },
 
+        dependencies: function(id) {
+            var predecessors = this.predecessors(id);
+            var successors = this.successors(id);
+
+            predecessors.push.apply(predecessors, successors);
+
+            return predecessors;
+        },
+
         _dependencies: function(field, id) {
             var data = this.view();
             var filter = {
@@ -1072,6 +1081,8 @@ var __meta__ = {
 
         removeTask: function(task) {
             if (!this.trigger("remove", { task: task })) {
+                this._removeTaskDependencies(task);
+
                 if (this.dataSource.remove(task)) {
                     this.dataSource.sync();
                 }
@@ -1094,6 +1105,20 @@ var __meta__ = {
                     this.dependencies.sync();
                 }
             }
+        },
+
+        _removeTaskDependencies: function(task) {
+            var dependencies = this.dependencies.dependencies(task.id);
+
+            this._preventDependencyRefresh = true;
+
+            for (var i = 0, length = dependencies.length; i < length; i++) {
+                this.dependencies.remove(dependencies[i]);
+            }
+
+            this._preventDependencyRefresh = false;
+
+            this.dependencies.sync();
         },
 
         refresh: function(e) {

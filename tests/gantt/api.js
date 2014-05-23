@@ -21,17 +21,29 @@
         ganttList._render(dataSource.taskTree());
     };
     var setupGantt = function(options) {
-        var dataSource = setupDataSource(options.data);
+        var dataSource = setupDataSource(options.data || []);
+        var dependencies = setupDependencyDataSource(options.dependencies || []);
 
         gantt = new Gantt(element, {
             columns: options.columns,
-            dataSource: dataSource
+            dataSource: dataSource,
+            dependencies: dependencies
         });
 
         ganttList = gantt.list;
     };
     var setupDataSource = function(data) {
         return new GanttDataSource({
+            data: data,
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+    };
+    var setupDependencyDataSource = function(data) {
+        return new GanttDependencyDataSource({
             data: data,
             schema: {
                 model: {
@@ -183,19 +195,64 @@
         ok(!gantt.dataSource.calls("remove"));
     });
 
+    test("removeTask() deletes related dependency when task is predecessor", function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ],
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 3, successorId: 4, type: 2 }
+            ]
+        });
+
+        gantt.removeTask(gantt.dataSource.at(0));
+
+        equal(gantt.dependencies.total(), 1);
+    });
+
+    test("removeTask() deletes related dependency when task is successor", function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ],
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 3, successorId: 4, type: 2 }
+            ]
+        });
+
+        gantt.removeTask(gantt.dataSource.at(1));
+
+        equal(gantt.dependencies.total(), 1);
+    });
+
+    test("removeTask() deletes multiple related dependencies", function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ],
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 3, type: 2 },
+                { id: 3, predecessorId: 3, successorId: 4, type: 2 }
+            ]
+        });
+
+        gantt.removeTask(gantt.dataSource.at(1));
+
+        equal(gantt.dependencies.total(), 1);
+    });
+
     test("removeDependency() triggers remove event", 1, function() {
-        gantt = new Gantt(element, {
-            dependencies: new GanttDependencyDataSource({
-                data: [
-                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
-                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
-                ],
-                schema: {
-                    model: {
-                        id: "id"
-                    }
-                }
-            })
+        setupGantt({
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+            ]
         });
 
         gantt.bind("remove", function() {
@@ -206,18 +263,11 @@
     });
 
     test("removeDependency() calls dataSource remove method", 1, function() {
-        gantt = new Gantt(element, {
-            dependencies: new GanttDependencyDataSource({
-                data: [
-                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
-                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
-                ],
-                schema: {
-                    model: {
-                        id: "id"
-                    }
-                }
-            })
+        setupGantt({
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+            ]
         });
 
         stub(gantt.dependencies, "remove");
@@ -228,18 +278,11 @@
     });
 
     test("removeDependency() calls dataSource remove method with argument", 1, function() {
-        gantt = new Gantt(element, {
-            dependencies: new GanttDependencyDataSource({
-                data: [
-                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
-                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
-                ],
-                schema: {
-                    model: {
-                        id: "id"
-                    }
-                }
-            })
+        setupGantt({
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+            ]
         });
 
         stub(gantt.dependencies, {
@@ -252,18 +295,11 @@
     });
 
     test("removeDependency() canceling remove event prevents calling dataSource remove method", 1, function() {
-        gantt = new Gantt(element, {
-            dependencies: new GanttDependencyDataSource({
-                data: [
-                    { id: 1, predecessorId: 1, successorId: 2, type: 0 },
-                    { id: 2, predecessorId: 2, successorId: 4, type: 2 }
-                ],
-                schema: {
-                    model: {
-                        id: "id"
-                    }
-                }
-            })
+        setupGantt({
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+            ]
         });
 
         gantt.bind("remove", function(e) {

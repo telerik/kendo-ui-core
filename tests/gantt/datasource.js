@@ -954,5 +954,15 @@
         equal(predecessors[2].id, 6);
     });
 
+    test("dependencies(id) returns correct items", 5, function() {
+        var predecessors = dataSource.dependencies(5);
+
+        equal(predecessors.length, 4);
+        equal(predecessors[0].id, 4);
+        equal(predecessors[1].id, 5);
+        equal(predecessors[2].id, 6);
+        equal(predecessors[3].id, 7);
+    });
+
 
 }());
