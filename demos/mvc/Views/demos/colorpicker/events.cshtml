@@ -1,27 +1,22 @@
-<div id="example" class="k-content">
+<div id="example">
 
-    <div class="demo-section">
-        <dl>
-            <dt><label for="palette-picker">ColorPicker (palette):</label></dt>
-            <dd>
-                <input type="color" id="palette-picker" value="#cc2222" data-role="colorpicker" data-palette="basic">
-            </dd>
-
-            <dt><label for="hsv-picker">ColorPicker (HSV):</label></dt>
-            <dd>
-                <input type="color" id="hsv-picker" value="#22cc22" data-role="colorpicker">
-            </dd>
-
-            <dt>ColorPalette:</dt>
-            <dd>
-                <div id="palette" data-role="colorpalette"></div>
-            </dd>
-
-            <dt>FlatColorPicker:</dt>
-            <dd>
-                <div id="flatcolorpicker" data-role="flatcolorpicker"></div>
-            </dd>
-        </dl>
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 260px;">
+            <h4>FlatColorPicker:</h4>
+            <div id="flatcolorpicker" data-role="flatcolorpicker"></div>      
+        </div>
+        <div class="box-col">
+            <h4>ColorPicker (palette):</h4>
+            <input type="color" id="palette-picker" value="#cc2222" data-role="colorpicker" data-palette="basic">        
+        </div>
+        <div class="box-col">
+            <h4>ColorPicker (HSV):</h4>
+            <input type="color" id="hsv-picker" value="#22cc22" data-role="colorpicker">        
+        </div>
+        <div class="box-col">
+            <h4>ColorPalette:</h4>
+            <div id="palette" data-role="colorpalette"></div>        
+        </div>
     </div>
 
     <script>
@@ -59,43 +54,8 @@
         });
     </script>
 
-    <div class="demo-section">
-        <h3 class="title">Console log</h3>
+    <div class="box">                
+        <h4>Console log</h4>
         <div class="console"></div>
     </div>
-
-    <style scoped>
-        .demo-section {
-            width: 500px;
-        }
-
-        .demo-section dl {
-            display: inline-block;
-        }
-
-        .demo-section dl:after {
-            content: " ";
-            clear: both;
-            font: 0/0;
-        }
-
-        .demo-section dt,
-        .demo-section dd {
-            float: left;
-            margin: 0;
-            padding: 0 0 1em;
-        }
-
-        .demo-section dt {
-            width: 45%;
-            padding-top: .3em;
-            padding-right: 5%;
-            clear: left;
-            text-align: right;
-        }
-
-        .demo-section dd {
-            width: 50%;
-        }
-    </style>
 </div>

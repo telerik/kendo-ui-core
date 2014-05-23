@@ -1,47 +1,7 @@
 <div id="example">
-    <div class="demo-section">
-        <div class="column">
-            <div class="palette-wrapper">
-                <h3>WebSafe</h3>
-                <div id="websafe"></div>
-                <script>
-                    $("#websafe").kendoColorPalette({
-                        palette: "websafe"
-                    })
-                </script>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="palette-wrapper">
-                <h3>Basic</h3>
-                <div id="basic"></div>
-                <script>
-                    $("#basic").kendoColorPalette({
-                        palette: "basic"
-                    })
-                </script>
-            </div>
-
-            <br style="clear:both">
-
-            <div class="palette-wrapper">
-                <h3>Monochrome</h3>
-                <div id="monochrome"></div>
-                <script>
-                    $("#monochrome").kendoColorPalette({
-                        columns: 12,
-                        palette: [
-                            "#000000", "#1a1a1a", "#333333", "#4d4d4d", "#666666", "#808080",
-                            "#999999", "#b3b3b3", "#cccccc", "#e6e6e6", "#f2f2f2", "#ffffff"
-                        ]
-                    })
-                </script>
-            </div>
-        </div>
-
-        <div class="palette-wrapper">
-            <h3>Office</h3>
+    <div class="box">
+        <div class="box-col">
+            <h4>Office</h4>
             <div id="office"></div>
             <script>
                 $("#office").kendoColorPalette({
@@ -58,8 +18,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Apex</h3>
+        <div class="box-col">
+            <h4>Apex</h4>
             <div id="apex"></div>
             <script>
                 $("#apex").kendoColorPalette({
@@ -76,8 +36,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Austin</h3>
+        <div class="box-col">
+            <h4>Austin</h4>
             <div id="austin"></div>
             <script>
                 $("#austin").kendoColorPalette({
@@ -94,8 +54,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Clarity</h3>
+        <div class="box-col">
+            <h4>Clarity</h4>
             <div id="clarity"></div>
             <script>
                 $("#clarity").kendoColorPalette({
@@ -113,8 +73,8 @@
 
 
 
-        <div class="palette-wrapper">
-            <h3>SlipStream</h3>
+        <div class="box-col">
+            <h4>SlipStream</h4>
             <div id="slipstream"></div>
             <script>
                 $("#slipstream").kendoColorPalette({
@@ -130,10 +90,10 @@
             </script>
         </div>
 
+        <br style="clear:both">
 
-
-        <div class="palette-wrapper">
-            <h3>Metro</h3>
+        <div class="box-col">
+            <h4>Metro</h4>
             <div id="metro"></div>
             <script>
                 $("#metro").kendoColorPalette({
@@ -150,8 +110,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Flow</h3>
+        <div class="box-col">
+            <h4>Flow</h4>
             <div id="flow"></div>
             <script>
                 $("#flow").kendoColorPalette({
@@ -168,8 +128,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Hardcover</h3>
+        <div class="box-col">
+            <h4>Hardcover</h4>
             <div id="hardcover"></div>
             <script>
                 $("#hardcover").kendoColorPalette({
@@ -186,8 +146,8 @@
         </div>
 
 
-        <div class="palette-wrapper">
-            <h3>Trek</h3>
+        <div class="box-col">
+            <h4>Trek</h4>
             <div id="trek"></div>
             <script>
                 $("#trek").kendoColorPalette({
@@ -203,8 +163,8 @@
             </script>
         </div>
 
-        <div class="palette-wrapper">
-            <h3>Verve</h3>
+        <div class="box-col">
+            <h4>Verve</h4>
             <div id="verve"></div>
             <script>
                 $("#verve").kendoColorPalette({
@@ -219,36 +179,51 @@
                 })
             </script>
         </div>
+
+        <br style="clear:both">
+
+        <div class="box-col">
+            <h4>WebSafe</h4>
+            <div id="websafe"></div>
+            <script>
+                $("#websafe").kendoColorPalette({
+                    palette: "websafe"
+                })
+            </script>
+        </div>
+        <div class="box-col">
+            <h4>Basic</h4>
+            <div id="basic"></div>
+            <script>
+                $("#basic").kendoColorPalette({
+                    palette: "basic"
+                })
+            </script>
+        </div>
+
+        <div class="box-col">
+            <h4>Monochrome</h4>
+            <div id="monochrome"></div>
+            <script>
+                $("#monochrome").kendoColorPalette({
+                    columns: 12,
+                    palette: [
+                        "#000000", "#1a1a1a", "#333333", "#4d4d4d", "#666666", "#808080",
+                        "#999999", "#b3b3b3", "#cccccc", "#e6e6e6", "#f2f2f2", "#ffffff"
+                    ]
+                })
+            </script>
+        </div>
     </div>
 
     <style scoped>
-        .demo-section {
-            overflow: hidden;
-            padding: 40px 40px 15px;
-        }
-
-        .column {
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .palette-wrapper {
+        .box-col {
             margin-bottom: 25px;
             float: left;
             margin-right: 15px;
         }
 
-        .palette-wrapper h3 {
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: normal;
-        }
-
-        .column {
-            width: 310px;
-        }
-
-        .column .palette-wrapper {
+        .column .box-col {
             display: block;
         }
     </style>
