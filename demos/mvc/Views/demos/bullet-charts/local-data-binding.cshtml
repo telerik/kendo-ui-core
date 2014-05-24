@@ -1,5 +1,5 @@
-<div id="example" class="k-content">
-    <div class="chart-wrapper">
+<div id="example">
+    <div class="demo-section k-content">
         <div id="chart-mmHg"></div>
         <div id="chart-hPa"></div>
     </div>
@@ -138,16 +138,13 @@
         $(document).bind("kendo:skinChange", createChart);
     </script>
     <style scoped>
-        .chart-wrapper {
-            padding-top: 20px;
-        }
-        .chart-wrapper .k-chart {
-            width: 450px;
-            margin: 0 10px;
+        .k-chart {
+            width: 49%;
             display: inline-block;
         }
-        .chart-wrapper .k-tooltip {
-            text-align: left;
+
+        #chart-mmHg {
+            margin-right: 20px;
         }
     </style>
 </div>
