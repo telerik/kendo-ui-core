@@ -795,8 +795,8 @@
         },
 
         refreshTransform: function(transform) {
-            var transform = this.srcElement.currentTransform(transform);
-            this.allCss(this.mapTransform(transform));
+            var currentTransform = this.srcElement.currentTransform(transform);
+            this.allCss(this.mapTransform(currentTransform));
         },
 
         mapTransform: function(transform) {
