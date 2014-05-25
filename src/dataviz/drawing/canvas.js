@@ -7,7 +7,6 @@
     // Imports ================================================================
     var $ = jQuery,
         noop = $.noop,
-        proxy = $.proxy,
         doc = document,
         math = Math,
 
@@ -134,6 +133,8 @@
                     childNode = new CircleNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
+                } else if (srcElement instanceof d.Image) {
+                    childNode = new ImageNode(srcElement);
                 } else {
                     childNode = new Node(srcElement);
                 }
@@ -305,6 +306,50 @@
         }
     });
 
+    var ImageNode = PathNode.extend({
+        init: function(srcElement) {
+            PathNode.fn.init.call(this, srcElement);
+
+            this.onLoad = $.proxy(this.onLoad, this);
+            this._loaded = false;
+
+            this.img = new Image();
+            this.img.onload = this.onLoad;
+
+            this.img.src = srcElement.src();
+        },
+
+        renderTo: function(ctx) {
+            if (this._loaded) {
+                ctx.save();
+
+                this.setTransform(ctx);
+                this.drawImage(ctx);
+
+                ctx.restore();
+            }
+        },
+
+        contentChange: function() {
+            this._loaded = false;
+            this.img.src = this.srcElement.src();
+        },
+
+        onLoad: function() {
+            this._loaded = true;
+            this.invalidate();
+        },
+
+        drawImage: function(ctx) {
+            var rect = this.srcElement.rect();
+            var tl = rect.topLeft();
+
+            ctx.drawImage(
+                this.img, tl.x, tl.y, rect.width(), rect.height()
+            );
+        }
+    });
+
     // Exports ================================================================
     if (kendo.support.canvas) {
         d.SurfaceFactory.current.register("canvas", Surface, 20);
@@ -313,10 +358,11 @@
     deepExtend(dataviz.drawing, {
         canvas: {
             CircleNode: CircleNode,
-            Surface: Surface,
-            Node: Node,
+            ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
+            Node: Node,
             PathNode: PathNode,
+            Surface: Surface,
             TextNode: TextNode
         }
     });
