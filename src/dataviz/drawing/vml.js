@@ -743,8 +743,14 @@
             this.transform = transform;
         },
 
+        geometryChange: function() {
+            this.allCss(this.mapStyle());
+            this.invalidate();
+        },
+
         contentChange: function() {
             this.attr("src", this.srcElement.src());
+            this.invalidate();
         },
 
         optionsChange: function(e) {

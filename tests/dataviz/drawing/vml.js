@@ -1386,7 +1386,7 @@
 
         module("ImageNode", {
             setup: function() {
-                image = new d.Image("foo", new g.Rect(new g.Point(25, 50), new g.Point(100, 100)));
+                image = new d.Image("foo", new g.Rect(new g.Point(10, 20), new g.Point(100, 100)));
                 imageNode = new vml.ImageNode(image);
             }
         });
@@ -1405,11 +1405,11 @@
         });
 
         test("renders width", function() {
-            ok(imageNode.render().indexOf("width:75px;") !== -1);
+            ok(imageNode.render().indexOf("width:90px;") !== -1);
         });
 
         test("renders height", function() {
-            ok(imageNode.render().indexOf("height:50px;") !== -1);
+            ok(imageNode.render().indexOf("height:80px;") !== -1);
         });
 
         test("renders static position", function() {
@@ -1417,13 +1417,37 @@
         });
 
         test("renders padding position", function() {
-            ok(imageNode.render().indexOf("padding-left:25px;padding-top:50px;") !== -1);
+            ok(imageNode.render().indexOf("padding-left:10px;padding-top:20px;") !== -1);
         });
 
         test("renders extra padding to fit bounding box", function() {
             image.transform(g.transform().scale(2, 2));
             imageNode.transform = image.transform();
             ok(imageNode.render().indexOf("padding-right:100px;padding-bottom:100px;") !== -1);
+        });
+
+        test("geometryChange sets position", 2, function() {
+            imageNode.css = function(name, value) {
+                if (name === "padding-left") {
+                    equal(value, "20px");
+                } else if (name === "padding-top") {
+                    equal(value, "40px");
+                }
+            };
+
+            image.rect().p0.multiply(2);
+        });
+
+        test("geometryChange sets size", 2, function() {
+            imageNode.css = function(name, value) {
+                if (name === "width") {
+                    equal(value, "80px");
+                } else if (name === "height") {
+                    equal(value, "60px");
+                }
+            };
+
+            image.rect().p0.multiply(2);
         });
 
         test("contentChange sets source", function() {
