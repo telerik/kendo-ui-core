@@ -1386,6 +1386,15 @@
             ok(imageNode.render().indexOf("padding-right:100px;padding-bottom:100px;") !== -1);
         });
 
+        test("contentChange sets source", function() {
+            imageNode.attr = function(name, value) {
+                equal(name, "src");
+                equal(value, "bar");
+            };
+
+            image.src("bar");
+        });
+
         test("optionsChange sets transformation", function() {
             var group = new Group({ transform: g.transform().translate(1, 1) });
             group.append(image);
@@ -1416,9 +1425,9 @@
             var srcMatrix = new Matrix(3,3,3,3,3,3);
             var parentMatrix = new Matrix(2,2,2,2,2,2);
             var currentMatrix = parentMatrix.times(srcMatrix);
-            var group = new Group({transform: parentMatrix});
+            var group = new Group({ transform: parentMatrix });
 
-            image = new d.Image("foo", new g.Rect(), {transform: srcMatrix});
+            image = new d.Image("foo", new g.Rect(), { transform: srcMatrix });
             group.append(image);
 
             imageNode = new vml.ImageNode(image);

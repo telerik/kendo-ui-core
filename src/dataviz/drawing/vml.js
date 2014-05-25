@@ -744,6 +744,7 @@
         },
 
         contentChange: function() {
+            this.attr("src", this.srcElement.src());
         },
 
         optionsChange: function(e) {
