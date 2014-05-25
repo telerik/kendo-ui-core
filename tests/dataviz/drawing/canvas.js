@@ -15,6 +15,7 @@
             close: $.noop,
             drawImage: $.noop,
             fill: $.noop,
+            fillText: $.noop,
             lineTo: $.noop,
             moveTo: $.noop,
             restore: $.noop,
@@ -572,6 +573,28 @@
             };
 
             text.content("Bar");
+        });
+
+        test("renders transform", function() {
+            text.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
+
+            var ctx = mockContext({
+                transform: function(a, b, c, d, e, f) {
+                    deepEqual([a, b, c, d, e, f], [1e-6, 2, 3, 4, 5, 6]);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
+
+        test("does not render transform if not set", 0, function() {
+            var ctx = mockContext({
+                transform: function(mx) {
+                    ok(false);
+                }
+            });
+
+            textNode.renderTo(ctx);
         });
     })();
 
