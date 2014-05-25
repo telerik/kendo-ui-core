@@ -149,6 +149,8 @@
                     childNode = new CircleNode(srcElement);
                 } else if (srcElement instanceof d.Arc) {
                     childNode = new ArcNode(srcElement);
+                } else if (srcElement instanceof d.Image) {
+                    childNode = new ImageNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -596,6 +598,48 @@
         )
     });
 
+    var ImageNode = PathNode.extend({
+        geometryChange: function() {
+            this.allAttr(this.mapPosition());
+            this.invalidate();
+        },
+
+        contentChange: function() {
+            this.allAttr(this.mapSource());
+            this.invalidate();
+        },
+
+        mapPosition: function() {
+            var rect = this.srcElement.rect();
+            var tl = rect.topLeft();
+
+            return [
+                ["x", tl.x],
+                ["y", tl.y],
+                ["width", rect.width() + "px"],
+                ["height", rect.height() + "px"]
+            ];
+        },
+
+        renderPosition: function() {
+            return renderAllAttr(this.mapPosition());
+        },
+
+        mapSource: function() {
+            return [["xlink:href", this.srcElement.src()]];
+        },
+
+        renderSource: function() {
+            return renderAllAttr(this.mapSource());
+        },
+
+        template: renderTemplate(
+            "<image #= d.renderStyle() # " +
+            "#= d.renderPosition() # #= d.renderSource() #>" +
+            "</image>"
+        )
+    });
+
     // Helpers ================================================================
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
@@ -649,6 +693,7 @@
             ArcNode: ArcNode,
             CircleNode: CircleNode,
             GroupNode: GroupNode,
+            ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,

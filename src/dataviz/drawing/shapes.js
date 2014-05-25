@@ -200,6 +200,7 @@
     });
 
     var Text = Shape.extend({
+        // TODO: Rename origin to position
         init: function(content, origin, options) {
             Shape.fn.init.call(this, options);
 
@@ -237,13 +238,15 @@
             return metrics;
         },
 
-        bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+        rect: function() {
             var size = this.measure();
             var origin = this.origin.clone();
-            var rect = new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+            return new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+        },
 
-            return rect.bbox(transformation);
+        bbox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            return this.rect().bbox(combinedMatrix);
         }
     });
 
@@ -534,6 +537,49 @@
         }
     });
 
+    var Image = Element.extend({
+        init: function(src, rect, options) {
+            Element.fn.init.call(this, options);
+
+            this.src(src);
+            this.rect(rect || new g.Rect());
+        },
+
+        src: function(value) {
+            if (defined(value)) {
+                this._src = value;
+                this.contentChange();
+                return this;
+            } else {
+                return this._src;
+            }
+        },
+
+        rect: function(value) {
+            if (defined(value)) {
+                this._rect = value;
+                this._rect.observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._rect;
+            }
+        },
+
+        geometryChange: util.mixins.geometryChange,
+
+        contentChange: function() {
+            if (this.observer) {
+                this.observer.contentChange();
+            }
+        },
+
+        bbox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            return this._rect.bbox(combinedMatrix);
+        }
+    });
+
     // Helper functions ===========================================
     function elementsBoundingBox(elements, transformation) {
         var boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
@@ -571,15 +617,15 @@
 
     // Exports ================================================================
     deepExtend(drawing, {
-        Element: Element,
-        Group: Group,
-        Shape: Shape,
-
         Arc: Arc,
         Circle: Circle,
-        Path: Path,
+        Element: Element,
+        Group: Group,
+        Image: Image,
         MultiPath: MultiPath,
+        Path: Path,
         Segment: Segment,
+        Shape: Shape,
         Text: Text
     });
 

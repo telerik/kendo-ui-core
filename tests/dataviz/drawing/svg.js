@@ -161,6 +161,22 @@
             node.load([new MultiPath()]);
         });
 
+        test("load appends TextNode", function() {
+            node.append = function(child) {
+                ok(child instanceof svg.TextNode);
+            };
+
+            node.load([new d.Text()]);
+        });
+
+        test("load appends ImageNode", function() {
+            node.append = function(child) {
+                ok(child instanceof svg.ImageNode);
+            };
+
+            node.load([new d.Image()]);
+        });
+
         test("load appends child nodes", function() {
             var parentGroup = new Group();
             var childGroup = new Group();
@@ -767,6 +783,74 @@
             };
 
             text.content("Bar");
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var image;
+        var imageNode;
+
+        nodeTests(d.Image, svg.ImageNode, "ImageNode");
+
+        module("ImageNode", {
+            setup: function() {
+                image = new d.Image("Foo", new g.Rect(new g.Point(10, 20), new g.Point(100, 100)));
+                imageNode = new svg.ImageNode(image);
+            }
+        });
+
+        test("renders X position", function() {
+            ok(imageNode.render().indexOf("x='10'") > -1);
+        });
+
+        test("renders Y position", function() {
+            ok(imageNode.render().indexOf("y='20'") > -1);
+        });
+
+        test("renders width", function() {
+            ok(imageNode.render().indexOf("width='90px'") > -1);
+        });
+
+        test("renders height", function() {
+            ok(imageNode.render().indexOf("height='80px'") > -1);
+        });
+
+        test("renders source", function() {
+            ok(imageNode.render().indexOf("xlink:href='Foo'") > -1);
+        });
+
+        test("geometryChange sets position", 2, function() {
+            imageNode.attr = function(name, value) {
+                if (name === "x") {
+                    equal(value, 20);
+                } else if (name === "y") {
+                    equal(value, 40);
+                }
+            };
+
+            image.rect().p0.multiply(2);
+        });
+
+        test("geometryChange sets size", 2, function() {
+            imageNode.attr = function(name, value) {
+                if (name === "width") {
+                    equal(value, "80px");
+                } else if (name === "height") {
+                    equal(value, "60px");
+                }
+            };
+
+            image.rect().p0.multiply(2);
+        });
+
+        test("contentChange sets source", function() {
+            imageNode.attr = function(name, value) {
+                equal(name, "xlink:href");
+                equal(value, "Bar");
+            };
+
+            image.src("Bar");
         });
     })();
 })();

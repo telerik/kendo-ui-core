@@ -72,6 +72,29 @@
         equal(util.sparseArrayMax([1, undefined, 2]), 2);
     });
 
+    test("last returns last element in array", function() {
+        equal(util.last([0, 1]), 1);
+    });
+
+    test("last returns undefined for empty array", function() {
+        equal(util.last([]), undefined);
+    });
+
+    test("last returns undefined for undefined", function() {
+        equal(util.last(), undefined);
+    });
+
+    test("append adds array elements", function() {
+        var arr = [0];
+        util.append(arr, [1, 2]);
+
+        deepEqual(arr, [0, 1, 2]);
+    });
+
+    test("append returns target array", function() {
+        deepEqual(util.append([0], [1, 2]), [0, 1, 2]);
+    });
+
     // ------------------------------------------------------------
     module("Template helpers");
 

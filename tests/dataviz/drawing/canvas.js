@@ -13,7 +13,9 @@
         return kendo.deepExtend({
             beginPath: $.noop,
             close: $.noop,
+            drawImage: $.noop,
             fill: $.noop,
+            fillText: $.noop,
             lineTo: $.noop,
             moveTo: $.noop,
             restore: $.noop,
@@ -571,6 +573,106 @@
             };
 
             text.content("Bar");
+        });
+
+        test("renders transform", function() {
+            text.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
+
+            var ctx = mockContext({
+                transform: function(a, b, c, d, e, f) {
+                    deepEqual([a, b, c, d, e, f], [1e-6, 2, 3, 4, 5, 6]);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
+
+        test("does not render transform if not set", 0, function() {
+            var ctx = mockContext({
+                transform: function(mx) {
+                    ok(false);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var image;
+        var imageNode;
+
+        module("ImageNode", {
+            setup: function() {
+                image = new d.Image("Foo", new g.Rect(new Point(10, 20), new Point(100, 100)));
+                imageNode = new canv.ImageNode(image);
+                imageNode._loaded = true;
+            }
+        });
+
+        test("renders position", function() {
+            imageNode.renderTo(mockContext({
+                drawImage: function(img, x, y) {
+                    deepEqual([x, y], [10, 20]);
+                }
+            }));
+        });
+
+        test("renders size", function() {
+            imageNode.renderTo(mockContext({
+                drawImage: function(img, x, y, width, height) {
+                    deepEqual([width, height], [90, 80]);
+                }
+            }));
+        });
+
+        test("contentChange resets loaded state", function() {
+            image.src("Bar");
+            ok(!imageNode._loaded);
+        });
+
+        test("load handler sets loaded state", function() {
+            imageNode.onLoad();
+            ok(imageNode._loaded);
+        });
+
+        test("load handler invalidates node", function() {
+            imageNode.invalidate = function() {
+                ok(true);
+            };
+
+            imageNode.onLoad();
+        });
+
+        test("geometryChange invalidates node", function() {
+            imageNode.invalidate = function() {
+                ok(true);
+            };
+
+            image.rect().p0.set("x", 20);
+        });
+
+        test("renders transform", function() {
+            image.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
+
+            var ctx = mockContext({
+                transform: function(a, b, c, d, e, f) {
+                    deepEqual([a, b, c, d, e, f], [1e-6, 2, 3, 4, 5, 6]);
+                }
+            });
+
+            imageNode.renderTo(ctx);
+        });
+
+        test("does not render transform if not set", 0, function() {
+            var ctx = mockContext({
+                transform: function(mx) {
+                    ok(false);
+                }
+            });
+
+            imageNode.renderTo(ctx);
         });
     })();
 })();

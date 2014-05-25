@@ -6,6 +6,7 @@
 
     // Imports ================================================================
     var doc = document,
+        max = Math.max,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
@@ -29,7 +30,8 @@
     // Constants ==============================================================
     var NONE = "none",
         TRANSPARENT = "transparent",
-        COORDINATE_MULTIPLE = 100;
+        COORDINATE_MULTIPLE = 100,
+        TRANSFORM_PRECISION = 4;
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
@@ -116,7 +118,7 @@
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement);
+                    childNode = new TextNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.MultiPath) {
@@ -125,6 +127,8 @@
                     childNode = new CircleNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Arc) {
                     childNode = new ArcNode(srcElement, combinedTransform);
+                } else if (srcElement instanceof d.Image) {
+                    childNode = new ImageNode(srcElement, combinedTransform);
                 }
 
                 if (children && children.length > 0) {
@@ -370,7 +374,6 @@
     });
 
     var TransformNode = Node.extend({
-        MAX_PRECISION: 6,
         init: function(srcElement, transform) {
             Node.fn.init.call(this, srcElement);
             this.transform = transform;
@@ -395,17 +398,16 @@
         mapTransform: function(transform) {
             var attrs = [],
                 a, b, c, d,
-                MAX_PRECISION = this.MAX_PRECISION,
                 matrix = transformationMatrix(transform);
 
             if (matrix) {
-                a = round(matrix.a, MAX_PRECISION);
-                b = round(matrix.b, MAX_PRECISION);
-                c = round(matrix.c, MAX_PRECISION);
-                d = round(matrix.d, MAX_PRECISION);
-                attrs.push(["on", "true"], ["matrix", [a, c, b, d, 0, 0].join(",")],
+                matrix.round(TRANSFORM_PRECISION);
+                attrs.push(
+                    ["on", "true"],
+                    ["matrix", [matrix.a, matrix.c, matrix.b, matrix.d, 0, 0].join(",")],
                     ["offset", matrix.e + "px," + matrix.f + "px"],
-                    ["origin", this.transformOrigin()]);
+                    ["origin", this.transformOrigin()]
+                );
             } else {
                 attrs.push(["on", "false"]);
             }
@@ -658,10 +660,10 @@
         },
 
         renderData: function() {
-            var bbox = this.srcElement.bbox();
-            var center = bbox.center();
-            return "m " + printPoints([new g.Point(bbox.p0.x, center.y)]) +
-                   " l " + printPoints([new g.Point(bbox.p1.x, center.y)]);
+            var rect = this.srcElement.rect();
+            var center = rect.center();
+            return "m " + printPoints([new g.Point(rect.p0.x, center.y)]) +
+                   " l " + printPoints([new g.Point(rect.p1.x, center.y)]);
         },
 
         template: renderTemplate(
@@ -735,6 +737,95 @@
         )
     });
 
+    var ImageNode = Node.extend({
+        init: function(srcElement, transform) {
+            Node.fn.init.call(this, srcElement);
+            this.transform = transform;
+        },
+
+        geometryChange: function() {
+            this.allCss(this.mapStyle());
+            this.invalidate();
+        },
+
+        contentChange: function() {
+            this.attr("src", this.srcElement.src());
+            this.invalidate();
+        },
+
+        optionsChange: function(e) {
+            if (e.field === "visible") {
+                this.css("display", e.value ? "" : "none");
+            } else if (e.field === "transform") {
+                this.refreshTransform(this.srcElement.currentTransform());
+            }
+
+            this.invalidate();
+        },
+
+        mapStyle: function() {
+            var image = this.srcElement;
+            var rect = image.rect();
+
+            var pos = rect.topLeft();
+            var style = [
+                ["position", "absolute"],
+                ["top", "0px"],
+                ["left", "0px"],
+                ["padding-left", pos.x + "px"],
+                ["padding-top", pos.y + "px"],
+                ["width", rect.width() + "px"],
+                ["height", rect.height() + "px"],
+                ["cursor", image.options.cursor]
+            ];
+
+            if (image.options.visible === false) {
+                style.push(["display", "none"]);
+            }
+
+            if (this.transform) {
+                util.append(style, this.mapTransform(this.transform));
+            }
+
+            return style;
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        refreshTransform: function(transform) {
+            var currentTransform = this.srcElement.currentTransform(transform);
+            this.allCss(this.mapTransform(currentTransform));
+        },
+
+        mapTransform: function(transform) {
+            var style = [];
+            var matrix = transformationMatrix(transform);
+            if (matrix) {
+                matrix.round(TRANSFORM_PRECISION);
+                style.push(["filter", this.transformTemplate(matrix)]);
+
+                var bbox = this.srcElement.bbox();
+                var br = this.srcElement.rect().bottomRight();
+                style.push(["padding-right", max(bbox.p1.x - br.x, 0) + "px"],
+                           ["padding-bottom", max(bbox.p1.y - br.y, 0) + "px"]);
+            }
+
+            return style;
+        },
+
+        transformTemplate: renderTemplate(
+            "progid:DXImageTransform.Microsoft.Matrix(" +
+            "M11=${d.a}, M12=${d.c}, M21=${d.b}, M22=${d.d}, Dx=${d.e}, Dy=${d.f})"
+        ),
+
+        template: renderTemplate(
+            "<img src='#= d.srcElement.src() #' " +
+            "#= d.renderStyle() # />"
+        )
+    });
+
     // Helper functions =======================================================
     function printPoints(points) {
         var length = points.length;
@@ -762,6 +853,7 @@
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,
+            ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,

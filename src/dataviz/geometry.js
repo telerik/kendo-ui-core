@@ -19,7 +19,9 @@
         deg = util.deg,
         round = util.round;
 
-    var PI_DIV_2 = math.PI / 2;
+    var PI_DIV_2 = math.PI / 2,
+        MIN_NUM = util.MIN_NUM,
+        MAX_NUM = util.MAX_NUM;
 
     // Geometrical primitives =================================================
     var Point = Class.extend({
@@ -178,20 +180,38 @@
         }
     };
 
-    Point.min = function(p0, p1) {
-        return new Point(math.min(p0.x, p1.x), math.min(p0.y, p1.y));
+    Point.min = function() {
+        var minX = util.MAX_NUM;
+        var minY = util.MAX_NUM;
+
+        for (var i = 0; i < arguments.length; i++) {
+            var pt = arguments[i];
+            minX = math.min(pt.x, minX);
+            minY = math.min(pt.y, minY);
+        }
+
+        return new Point(minX, minY);
     };
 
     Point.max = function(p0, p1) {
-        return new Point(math.max(p0.x, p1.x), math.max(p0.y, p1.y));
+        var maxX = util.MIN_NUM;
+        var maxY = util.MIN_NUM;
+
+        for (var i = 0; i < arguments.length; i++) {
+            var pt = arguments[i];
+            maxX = math.max(pt.x, maxX);
+            maxY = math.max(pt.y, maxY);
+        }
+
+        return new Point(maxX, maxY);
     };
 
     Point.minPoint = function() {
-        return new Point(util.MIN_NUM, util.MIN_NUM);
+        return new Point(MIN_NUM, MIN_NUM);
     };
 
     Point.maxPoint = function() {
-        return new Point(util.MAX_NUM, util.MAX_NUM);
+        return new Point(MAX_NUM, MAX_NUM);
     };
 
     Point.ZERO = new Point(0, 0);
@@ -208,27 +228,46 @@
 
         geometryChange: util.mixins.geometryChange,
 
+        topLeft: function() {
+            return Point.min(this.p0, this.p1);
+        },
+
+        bottomRight: function() {
+            return Point.max(this.p0, this.p1);
+        },
+
+        topRight: function() {
+            return new Point(this.bottomRight().x, this.topLeft().y);
+        },
+
+        bottomLeft: function() {
+            return new Point(this.topLeft().x, this.bottomRight().y);
+        },
+
         width: function() {
-            return this.p1.x - this.p0.x;
+            return this.bottomRight().x - this.topLeft().x;
         },
 
         height: function() {
-            return this.p1.y - this.p0.y;
+            return this.bottomRight().y - this.topLeft().y;
+        },
+
+        center: function() {
+            var tl = this.topLeft();
+            return new Point(tl.x  + this.width() / 2, tl.y  + this.height() / 2);
         },
 
         wrap: function(targetRect) {
             return new Rect(Point.min(this.p0, targetRect.p0), Point.max(this.p1, targetRect.p1));
         },
 
-        center: function() {
-            return new Point(this.p0.x  + this.width() / 2, this.p0.y  + this.height() / 2);
-        },
-
         bbox: function(matrix) {
-            var p0 = this.p0.transformCopy(matrix);
-            var p1 = this.p1.transformCopy(matrix);
+            var tl = this.topLeft().transformCopy(matrix);
+            var tr = this.topRight().transformCopy(matrix);
+            var br = this.bottomRight().transformCopy(matrix);
+            var bl = this.bottomLeft().transformCopy(matrix);
 
-            return new Rect(Point.min(p0, p1), Point.max(p0, p1));
+            return new Rect(Point.min(tl, tr, br, bl), Point.max(tl, tr, br, bl));
         }
     });
 
@@ -484,6 +523,17 @@
             return this.a === other.a && this.b === other.b &&
                    this.c === other.c && this.d === other.d &&
                    this.e === other.e && this.f === other.f;
+        },
+
+        round: function(precision) {
+            this.a = round(this.a, precision);
+            this.b = round(this.b, precision);
+            this.c = round(this.c, precision);
+            this.d = round(this.d, precision);
+            this.e = round(this.e, precision);
+            this.f = round(this.f, precision);
+
+            return this;
         },
 
         toArray: function(precision) {

@@ -341,12 +341,19 @@
         equal(point.toString(1), "10.6 20.6");
     });
 
-    test("Point.min returns a new point with minmum x y", function() {
+    test("Point.min returns a new point with minimum x y", function() {
         var other = new Point(20, 10);
         var minPoint = Point.min(point, other);
 
         equal(minPoint.x, 10);
         equal(minPoint.y, 10);
+    });
+
+    test("Point.min accepts multiple arguments", function() {
+        var minPoint = Point.min(Point.maxPoint(), Point.maxPoint(), point);
+
+        equal(minPoint.x, 10);
+        equal(minPoint.y, 20);
     });
 
     test("Point.max returns a new point with maximum x y", function() {
@@ -357,14 +364,27 @@
         equal(maxPoint.y, 20);
     });
 
+    test("Point.max accepts multiple arguments", function() {
+        var maxPoint = Point.max(Point.minPoint(), Point.minPoint(), point);
+
+        equal(maxPoint.x, 10);
+        equal(maxPoint.y, 20);
+    });
+
     // ------------------------------------------------------------
     var rect;
+    var invRect;
 
     module("Rect", {
         setup: function() {
             rect = new Rect(
                 new Point(0, 0),
                 new Point(10, 20)
+            );
+
+            invRect = new Rect(
+                new Point(10, 20),
+                new Point(0, 0)
             );
         }
     });
@@ -383,6 +403,47 @@
 
     test("returns height", function() {
         equal(rect.height(), 20);
+    });
+
+    test("returns width for any point order", function() {
+        equal(invRect.width(), 10);
+    });
+
+    test("returns height for any point order", function() {
+        equal(invRect.height(), 20);
+    });
+
+    test("center returns center", function() {
+        deepEqual(rect.center(), new Point(5,10));
+    });
+
+    test("center returns center for any point order", function() {
+        deepEqual(invRect.center(), new Point(5,10));
+    });
+
+    test("topLeft returns top left corner", function() {
+        ok(invRect.topLeft().equals(new Point(0, 0)));
+    });
+
+    test("bottomRight returns bottom right corner", function() {
+        ok(invRect.bottomRight().equals(new Point(10, 20)));
+    });
+
+    test("topRight returns top right corner", function() {
+        ok(invRect.topRight().equals(new Point(10, 0)));
+    });
+
+    test("bottomLeft returns bottom left corner", function() {
+        ok(invRect.bottomLeft().equals(new Point(0, 20)));
+    });
+
+    test("wrap returns new rect with minimum p0 and maximum p1", function() {
+        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
+            wrap =  rect.wrap(other);
+        equal(wrap.p0.x, -1);
+        equal(wrap.p0.y, 0);
+        equal(wrap.p1.x, 15);
+        equal(wrap.p1.y, 20);
     });
 
     test("modifying p0 triggers geometryChange", function() {
@@ -405,19 +466,6 @@
         rect.p1.set("x", 1);
     });
 
-    test("wrap returns new rect with minimum p0 and maximum p1", function() {
-        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
-            wrap =  rect.wrap(other);
-        equal(wrap.p0.x, -1);
-        equal(wrap.p0.y, 0);
-        equal(wrap.p1.x, 15);
-        equal(wrap.p1.y, 20);
-    });
-
-    test("center returns center point", function() {
-        deepEqual(rect.center(), new Point(5,10));
-    });
-
     test("boundingBox returns the bounding Rect", function() {
         var bbox = rect.bbox();
         compareBoundingBox(rect, [0, 0, 10, 20]);
@@ -426,6 +474,11 @@
     test("boundingBox returns the transformed bounding Rect", function() {
         var bbox = rect.bbox(Matrix.scale(2,1));
         compareBoundingBox(bbox, [0, 0, 20, 20]);
+    });
+
+    test("boundingBox takes all corners into account", function() {
+        var bbox = rect.bbox(Matrix.rotate(45, new Point(5, 10)));
+        compareBoundingBox(bbox, [-14.1421, 0, 7.0711, 21.2132], 1e-4);
     });
 
     // ------------------------------------------------------------
@@ -768,6 +821,11 @@
         test("scale returns the identity matrix scaled by x y", function() {
             matrix = Matrix.scale(1.5, 1.1);
             compareMatrices(matrix, initMatrix(1.5,0,0,1.1,0,0));
+        });
+
+        test("round rounds members to specified precision", function() {
+            ok(new Matrix(1.555, 2.555, 3.555, 4.555, 5.555, 6.555).round(2).equals(
+               new Matrix(1.56, 2.56, 3.56, 4.56, 5.56, 6.56)));
         });
 
         // ------------------------------------------------------------

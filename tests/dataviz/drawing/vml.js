@@ -222,6 +222,7 @@
             node.append = function(child) {
                 compareMatrices(child.transform.transform.matrix(), combinedMatrix);
             };
+
             node.load([path], currentMatrix);
         });
 
@@ -239,6 +240,63 @@
             };
 
             node.load([new Circle(new g.Circle())]);
+        });
+
+        test("load appends TextNode", function() {
+            node.append = function(child) {
+                ok(child instanceof vml.TextNode);
+            };
+
+            node.load([new d.Text("foo", new g.Point())]);
+        });
+
+        test("load appends TextNode with current transformation", function() {
+            var transform = g.transform();
+            node.append = function(child) {
+                ok(child.transform.transform.matrix().equals(transform.matrix()));
+            };
+            node.load([new d.Text("foo", new g.Point())], transform);
+        });
+
+        test("load appends TextNode with combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.times(matrix),
+                text = new d.Text("foo", new g.Point(), {transform: matrix});
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
+            };
+
+            node.load([text], currentMatrix);
+        });
+
+        test("load appends ImageNode", function() {
+            node.append = function(child) {
+                ok(child instanceof vml.ImageNode);
+            };
+
+            node.load([new d.Image("foo", new g.Rect())]);
+        });
+
+        test("load appends ImageNode with current transformation", function() {
+            var transform = g.transform();
+            node.append = function(child) {
+                ok(child.transform.matrix().equals(transform.matrix()));
+            };
+            node.load([new d.Image("foo", new g.Rect())], transform);
+        });
+
+        test("load appends ImageNode with combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.times(matrix),
+                image = new d.Image("foo", new g.Rect(), {transform: matrix});
+
+            node.append = function(child) {
+                compareMatrices(child.transform.matrix(), combinedMatrix);
+            };
+            node.load([image], currentMatrix);
         });
 
         test("load appends child nodes", function() {
@@ -742,10 +800,10 @@
             ok(transformNode.render().indexOf("matrix='1,3,2,4,0,0'") !== -1);
         });
 
-        test("rounds matrix values to the MAX_PRECISION digit", function() {
-            var value = parseFloat("0." + new Array(TransformNode.fn.MAX_PRECISION + 1).join("5"));
+        test("rounds matrix values to the 4th digit", function() {
+            var value = 0.55555;
             transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
-            ok(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1] == dataviz.util.round(value, TransformNode.fn.MAX_PRECISION));
+            equal(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1], 0.5556);
         });
 
         test("does not render matrix attribute if there is no matrix", function() {
@@ -1218,6 +1276,17 @@
             ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
         });
 
+        test("renders text path w/o current transform", function() {
+            var group = new d.Group({ transform: g.transform().translate(100, 100) });
+            group.append(text);
+            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+        });
+
+        test("renders text path w/o transform", function() {
+            text.transform(g.transform().translate(100, 100));
+            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+        });
+
         test("geometryChange updates path", function() {
             textPathDataNode.attr = function(name, value) {
                 equal(name, "v");
@@ -1308,6 +1377,135 @@
         });
 
         basePathNodeTests(d.Text, vml.TextNode, "TextNode");
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var image;
+        var imageNode;
+
+        module("ImageNode", {
+            setup: function() {
+                image = new d.Image("foo", new g.Rect(new g.Point(10, 20), new g.Point(100, 100)));
+                imageNode = new vml.ImageNode(image);
+            }
+        });
+
+        test("sets observer", function() {
+            equal(image.observer, imageNode);
+        });
+
+        test("renders cursor", function() {
+            image.options.set("cursor", "hand");
+            ok(imageNode.render().indexOf("cursor:hand;") !== -1);
+        });
+
+        test("does not render cursor if not set", function() {
+            ok(imageNode.render().indexOf("cursor") === -1);
+        });
+
+        test("renders width", function() {
+            ok(imageNode.render().indexOf("width:90px;") !== -1);
+        });
+
+        test("renders height", function() {
+            ok(imageNode.render().indexOf("height:80px;") !== -1);
+        });
+
+        test("renders static position", function() {
+            ok(imageNode.render().indexOf("position:absolute;top:0px;left:0px;") !== -1);
+        });
+
+        test("renders padding position", function() {
+            ok(imageNode.render().indexOf("padding-left:10px;padding-top:20px;") !== -1);
+        });
+
+        test("renders extra padding to fit bounding box", function() {
+            image.transform(g.transform().scale(2, 2));
+            imageNode.transform = image.transform();
+            ok(imageNode.render().indexOf("padding-right:100px;padding-bottom:100px;") !== -1);
+        });
+
+        test("geometryChange sets position", 2, function() {
+            imageNode.css = function(name, value) {
+                if (name === "padding-left") {
+                    equal(value, "20px");
+                } else if (name === "padding-top") {
+                    equal(value, "40px");
+                }
+            };
+
+            image.rect().p0.multiply(2);
+        });
+
+        test("geometryChange sets size", 2, function() {
+            imageNode.css = function(name, value) {
+                if (name === "width") {
+                    equal(value, "80px");
+                } else if (name === "height") {
+                    equal(value, "60px");
+                }
+            };
+
+            image.rect().p0.multiply(2);
+        });
+
+        test("contentChange sets source", function() {
+            imageNode.attr = function(name, value) {
+                equal(name, "src");
+                equal(value, "bar");
+            };
+
+            image.src("bar");
+        });
+
+        test("optionsChange sets transformation", function() {
+            var group = new Group({ transform: g.transform().translate(1, 1) });
+            group.append(image);
+
+            imageNode.refreshTransform = function(transform) {
+                ok(transform.matrix().equals(image.currentTransform().matrix()));
+            };
+
+            image.transform(g.transform());
+        });
+
+        test("optionsChange sets transformation padding", function() {
+            var group = new Group({ transform: g.transform().translate(10, 10) });
+            group.append(image);
+
+            imageNode.css = function(name, value) {
+                if (name === "padding-right") {
+                    equal(value, "110px");
+                } else if (name === "padding-bottom") {
+                    equal(value, "210px");
+                }
+            };
+
+            image.transform(g.transform().scale(2, 3));
+        });
+
+        test("refreshTransform updates transformation", function() {
+            var srcMatrix = new Matrix(3,3,3,3,3,3);
+            var parentMatrix = new Matrix(2,2,2,2,2,2);
+            var currentMatrix = parentMatrix.times(srcMatrix);
+            var group = new Group({ transform: parentMatrix });
+
+            image = new d.Image("foo", new g.Rect(), { transform: srcMatrix });
+            group.append(image);
+
+            imageNode = new vml.ImageNode(image);
+            imageNode.css = function(name, value) {
+                if (name === "filter") {
+                    equal(value, imageNode.transformTemplate(currentMatrix));
+                }
+            };
+
+            imageNode.refreshTransform();
+            imageNode.refreshTransform(g.transform(parentMatrix));
+        });
+
+        basePathNodeTests(d.Image, vml.ImageNode, "ImageNode");
     })();
 
 })();
