@@ -118,7 +118,7 @@
                 if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
-                    childNode = new TextNode(srcElement);
+                    childNode = new TextNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement, combinedTransform);
                 } else if (srcElement instanceof d.MultiPath) {
@@ -660,10 +660,10 @@
         },
 
         renderData: function() {
-            var bbox = this.srcElement.bbox();
-            var center = bbox.center();
-            return "m " + printPoints([new g.Point(bbox.p0.x, center.y)]) +
-                   " l " + printPoints([new g.Point(bbox.p1.x, center.y)]);
+            var rect = this.srcElement.rect();
+            var center = rect.center();
+            return "m " + printPoints([new g.Point(rect.p0.x, center.y)]) +
+                   " l " + printPoints([new g.Point(rect.p1.x, center.y)]);
         },
 
         template: renderTemplate(

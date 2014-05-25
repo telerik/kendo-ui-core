@@ -242,6 +242,35 @@
             node.load([new Circle(new g.Circle())]);
         });
 
+        test("load appends TextNode", function() {
+            node.append = function(child) {
+                ok(child instanceof vml.TextNode);
+            };
+
+            node.load([new d.Text("foo", new g.Point())]);
+        });
+
+        test("load appends TextNode with current transformation", function() {
+            var transform = g.transform();
+            node.append = function(child) {
+                ok(child.transform.transform.matrix().equals(transform.matrix()));
+            };
+            node.load([new d.Text("foo", new g.Point())], transform);
+        });
+
+        test("load appends TextNode with combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.times(matrix),
+                text = new d.Text("foo", new g.Point(), {transform: matrix});
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
+            };
+
+            node.load([text], currentMatrix);
+        });
+
         test("load appends ImageNode", function() {
             node.append = function(child) {
                 ok(child instanceof vml.ImageNode);
@@ -1244,6 +1273,17 @@
         });
 
         test("renders text path", function() {
+            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+        });
+
+        test("renders text path w/o current transform", function() {
+            var group = new d.Group({ transform: g.transform().translate(100, 100) });
+            group.append(text);
+            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+        });
+
+        test("renders text path w/o transform", function() {
+            text.transform(g.transform().translate(100, 100));
             ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
         });
 

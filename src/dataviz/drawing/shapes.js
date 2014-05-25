@@ -200,6 +200,7 @@
     });
 
     var Text = Shape.extend({
+        // TODO: Rename origin to position
         init: function(content, origin, options) {
             Shape.fn.init.call(this, options);
 
@@ -237,13 +238,15 @@
             return metrics;
         },
 
-        bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+        rect: function() {
             var size = this.measure();
             var origin = this.origin.clone();
-            var rect = new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+            return new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+        },
 
-            return rect.bbox(transformation);
+        bbox: function(transformation) {
+            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            return this.rect().bbox(combinedMatrix);
         }
     });
 
