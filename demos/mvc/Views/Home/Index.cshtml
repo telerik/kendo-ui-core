@@ -16,11 +16,10 @@
 
 <div id="overview">    
     <div id="overview-widgets">
-        <h2>@ViewBag.Product</h2>
-        <ul id="most-popular">
-            <li>
+        <h2>@ViewBag.Product <strong>Components</strong></h2>
+        <div id="most-popular">            
                 <h3>Most popular</h3>
-                <ul>
+                <ul class="overview-col">
                     <li><a href="@Url.Widget("grid")">Grid</a></li>
                     <li><a href="@Url.Widget("editor")">Editor</a></li>
                     <li><a href="@Url.Widget("scheduler")">Scheduler</a></li>
@@ -36,9 +35,9 @@
                     <li><a href="@Url.Widget("financial")">Stock Charts</a></li>
                     <li><a href="@Url.Widget("drawer")">Drawer</a></li>
                     <li><a href="@Url.Widget("switch")">Switch</a></li>
-                </ul>
-            </li>
-        </ul>
+                </ul>            
+        </div>
+        <div id="widgets-all">
 
     @{
         var columns = new[] {
@@ -68,7 +67,7 @@
 
     @foreach (var column in columns)
     {
-        <ul>
+        <ul class="overview-col col-four">
         @foreach (var columnCategory in column)
         {
             var category = categories.FirstOrDefault(c => c.Key == columnCategory);
@@ -90,8 +89,8 @@
         }
         </ul>
     }
-
     </div>
+</div>
 <div id="applications-and-tools">
 
         @if (ViewBag.Product == "kendo-ui")
@@ -181,3 +180,80 @@
     </div>
     </div>
 </div>
+
+<style>
+    #overview-widgets {
+        width: 69%;
+    }
+    
+    #overview-widgets,
+    #applications-and-tools,
+    #most-popular, 
+    #widgets-all
+    {
+        display: inline-block;
+        position: relative;
+    }
+
+    #applications-and-tools {
+        width: 30%;
+    }
+
+    #widgets-all {
+        width: 77%;
+    }  
+
+    #most-popular {
+        width: 22%;
+        vertical-align: top;
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 34px;
+    }
+
+    #overview-widgets h2 {
+        text-transform: uppercase;
+    }
+
+     #overview-widgets h2 strong {
+        text-transform: none;
+        font-weight: normal;
+    }
+
+    #widgets-all .overview-col.col-four {
+        width: 24%;
+        padding: 0;
+        display: inline-block;
+        min-height: 1px;
+        /*padding-left: 15px;
+        padding-right: 15px;*/
+        font-size: 16px;
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+
+    .col-four:before{
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        display: block;
+        width: 1px;   
+        background-color: #ebecee;
+    }
+
+    .col-four ul {
+        margin-bottom: 1em;
+    }
+
+    .application {
+        margin: 0 2px 18px;
+        white-space:normal;
+    } 
+
+    .application p{
+        font-size: 13px;
+        line-height: 13px;
+        
+    }
+</style>
