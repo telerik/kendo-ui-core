@@ -17,9 +17,11 @@ var __meta__ = {
         inArray = $.inArray,
         isPlainObject = $.isPlainObject,
         dataviz = kendo.dataviz,
+        defined = dataviz.defined,
+        append = dataviz.append,
         Widget = kendo.ui.Widget,
         Box2D = dataviz.Box2D,
-        Text = dataviz.Text,
+        TextBox = dataviz.TextBox,
         DEFAULT_WIDTH = 300,
         DEFAULT_HEIGHT = 100,
         DEFAULT_QUIETZONE_LENGTH = 10,
@@ -42,15 +44,19 @@ var __meta__ = {
         },
         encode: function (value, width, height) {
             var that = this;
-            if(value!==undefined){
+            if (defined(value)) {
                 value+='';
             }
+
             that.initValue(value, width, height);
-            if(that.options.addQuietZone){
+
+            if (that.options.addQuietZone) {
                 that.addQuietZone();
             }
+
             that.addData();
-            if(that.options.addQuietZone){
+
+            if (that.options.addQuietZone) {
                 that.addQuietZone();
             }
 
@@ -1525,6 +1531,7 @@ var __meta__ = {
              that.view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
              that.setOptions(options);
         },
+
         setOptions: function (options) {
             var that = this;
             that.type = (options.type || that.options.type).toLowerCase();
@@ -1541,8 +1548,8 @@ var __meta__ = {
             }
             that.encoding = new encodings[that.type]();
 
-            that.options = $.extend(true,that.options, options);
-            if(options.value===undefined){
+            that.options = extend(true, that.options, options);
+            if (!defined(options.value)) {
                 return;
             }
             that.redraw();
@@ -1600,30 +1607,32 @@ var __meta__ = {
         _redraw: function(view) {
             var that = this,
                 options = that.options,
+                value = options.value,
                 textOptions = options.text,
+                textMargin = dataviz.getSpacing(textOptions.margin),
                 size = that._getSize(),
                 border = options.border || {},
                 encoding = that.encoding,
                 contentBox = Box2D(0, 0, size.width, size.height).unpad(border.width).unpad(options.padding),
                 barHeight = contentBox.height(),
-                result, textToDisplay;
+                result, textToDisplay,
+                textHeight;
 
             that.contentBox = contentBox;
             view.children = [];
             that._renderBackground(view, size);
-            var textHeight = dataviz.measureText( contentBox,{ font: options.text.font }).height;
 
             if (textOptions.visible) {
-                barHeight -= textHeight;
+                textHeight = dataviz.measureText(value, { font: textOptions.font }).height;
+                barHeight -= textHeight + textMargin.top + textMargin.bottom;
             }
 
-            result = encoding.encode(options.value,size.width-(options.padding.left+options.padding.right), barHeight);
+            result = encoding.encode(value, contentBox.width(), barHeight);
 
             if (textOptions.visible) {
-                textToDisplay = options.value;
-
-                if(options.checksum && encoding.checksum!==undefined){
-                    textToDisplay += " "+encoding.checksum;
+                textToDisplay = value;
+                if (options.checksum && defined(encoding.checksum)) {
+                    textToDisplay += " " + encoding.checksum;
                 }
                 that._renderTextElement(view, textToDisplay);
             }
@@ -1635,29 +1644,30 @@ var __meta__ = {
             that._renderElements(view, result.pattern, result.baseUnit);
         },
 
-        _getSize: function(){
+        _getSize: function() {
             var that = this,
                 element = that.element,
                 size = {width:DEFAULT_WIDTH,height:DEFAULT_HEIGHT};
 
-            if(element.width()>0){
+            if (element.width() > 0) {
                 size.width = element.width();
             }
-            if(element.height()>0){
+            if (element.height() > 0) {
                 size.height = element.height();
             }
-            if(that.options.width){
+            if (that.options.width) {
                size.width = that.options.width;
             }
-            if(that.options.height){
+            if (that.options.height) {
                size.height = that.options.height;
             }
 
             return size;
         },
-        value: function(value){
+
+        value: function(value) {
             var that = this;
-            if(value===undefined){
+            if (!defined(value)) {
                 return that.options.value;
             }
             that.options.value = value + '';
@@ -1666,27 +1676,26 @@ var __meta__ = {
 
         _renderElements: function (view, pattern, baseUnit) {
             var that = this,
-                position = 0 + that.options.padding.left,
+                contentBox = that.contentBox,
+                position = contentBox.x1,
                 step,
                 item;
 
             for (var i = 0; i < pattern.length; i++) {
-
                 item = isPlainObject(pattern[i]) ? pattern[i] : {
                         width: pattern[i],
                         y1: 0,
                         y2: that.barHeight
                     };
                 step = item.width * baseUnit;
-                if(i%2){
+                if (i%2) {
                     view.children.push(view.createRect(
                         new Box2D(
                             position,
-                            item.y1 + that.contentBox.y1,
+                            item.y1 + contentBox.y1,
                             position + step,
-                            item.y2 + that.contentBox.y1
-                        ),
-                        {
+                            item.y2 + contentBox.y1
+                        ), {
                             fill: that.options.color
                         }
                     ));
@@ -1713,25 +1722,18 @@ var __meta__ = {
         _renderTextElement: function (view, value) {
             var that = this,
                 textOptions = that.options.text,
-                text = new Text(value, {
+                text = new TextBox(value, {
                     font: textOptions.font,
                     color: textOptions.color,
                     align: "center",
-                    vAlign: "bottom"
+                    vAlign: "bottom",
+                    margin: textOptions.margin
                 });
 
-            that.text = text;
-
             text.reflow(that.contentBox);
-            text.box.unpad(textOptions.margin);
-            view.children.push(view.createText(value, {
-                baseline: text.baseline,
-                x: text.box.x1,
-                y: text.box.y1,
-                color: textOptions.color,
-                font: textOptions.font
-            }));
+            append(view.children, text.getViewElements(view));
         },
+
         options: {
             name: "Barcode",
             renderAs: "canvas",
