@@ -1,5 +1,5 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
             <ul id="panelbar">
                 <li class="k-state-active">
                     Metallica - Master of Puppets 1986
@@ -41,6 +41,10 @@
                     <div></div>
                 </li>
             </ul>
+            <div class="box">
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
         </div>
         <script>
             function onSelect(e) {
@@ -77,6 +81,5 @@
                 contentLoad: onContentLoad,
                 error: onError,
                 contentUrls: [ , , , "../content/web/panelbar/ajax/ajaxContent1.html", "error.html" ]
-            }).css({ width: "250px" }).css({ margin: "20px auto" });
+            }).css({ width: "300px" }).css({ margin: "0 auto" });
         </script>
-        <div class="console"></div>
