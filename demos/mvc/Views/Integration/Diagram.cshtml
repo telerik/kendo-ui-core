@@ -19,7 +19,14 @@
         <link rel="stylesheet" href="@Url.Content("~/content/integration/diagram/css/styles.css")" />
     </head>
     <body>
-    <div id="menu"></div>
+    <div id="menu">
+        <div class="header">
+            Diagram
+            <a href="">Download Source</a>
+            <a href="">About</a>
+        </div>
+        <ul></ul>
+    </div>
     <div id="splitter">
         <div id="left-pane">
             <div class="pane-content">
@@ -362,7 +369,7 @@
                 actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
             }
 
-            $("#menu").kendoMenu({
+            $("#menu ul").kendoMenu({
                 dataSource: [
                     { text: "New", spriteCssClass: "new-item", items: [
                         { text: "Blank", spriteCssClass: "blank-item" }

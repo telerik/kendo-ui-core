@@ -126,7 +126,7 @@ body
     left: 0;
     right: 0;
     height: auto;
-    top: 42px;
+    top: 92px;
     bottom: 35px;
     border-width: 0 0 1px;
 }
@@ -250,4 +250,33 @@ body
 #menu .k-item > .k-link
 {
     padding: .8em 1.4em;
+}
+
+.header
+{
+    color: #fff;
+    background: #000;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+    height: 50px;
+    line-height: 50px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.header a
+{
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    margin-right: 30px;
+    float: right;
+}
+
+.header a:hover
+{
+    text-decoration: underline;
 }
