@@ -1,19 +1,20 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
+        <div class="demo-section k-header">
         <form id="tickets">
             <h3>Book Tickets</h3>
             <ul>
                 <li>
                     <label for="fullname" class="required">Your Name</label>
-                    <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Please enter {0}" />
+                    <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
                 </li>
                 <li>
                     <label for="search" class="required">Movie</label>
-                    <input type="search" id="search" name="search" required validationMessage="Please select movie"/><span class="k-invalid-msg" data-for="search"></span>
+                    <input type="search" id="search" name="search" required validationMessage="Select movie" style="width: 200px;"/><span class="k-invalid-msg" data-for="search"></span>
                 </li>
                 <li>
                     <label for="time">Start time</label>
-                    <select name="time" id="time" required data-required-msg="Select start time">
+                    <select name="time" id="time" required data-required-msg="Select start time" style="width: 200px;">
                         <option>14:00</option>
                         <option>15:30</option>
                         <option>17:00</option>
@@ -23,20 +24,20 @@
                 </li>
                 <li>
                     <label for="amount">Amount</label>
-                    <input id="amount" name="Amount" type="text" min="1" max="10" value="1" required data-max-msg="Enter value between 1 and 10" />
+                    <input id="amount" name="Amount" type="text" min="1" max="10" value="1" required data-max-msg="Enter value between 1 and 10" style="width: 200px;" />
                     <span class="k-invalid-msg" data-for="Amount"></span>
                 </li>
                 <li>
                     <label for="email" class="required">Email</label>
-                    <input type="email" id="email" name="Email" class="k-textbox" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" />
+                    <input type="email" id="email" name="Email" class="k-textbox" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" style="width: 200px;" />
                 </li>
                 <li>
                     <label for="tel" class="required">Phone</label>
                     <input type="tel" id="tel" name="tel" class="k-textbox" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
-                        validationMessage="Please enter a ten digit phone number"/>
+                        validationMessage="Enter at least ten digits" style="width: 200px;"/>
                 </li>
                 <li  class="accept">
-                    <input type="checkbox" name="Accept" required validationMessage="Acceptance is required" /> I accept the terms and condition of service
+                    <input type="checkbox" name="Accept" required validationMessage="Acceptance is required" /> I accept the terms of service
                 </li>
                 <li  class="accept">
                     <button class="k-button" type="submit">Submit</button>
@@ -45,6 +46,7 @@
                 </li>
             </ul>
         </form>
+        </div>
 
             <style scoped>
 
@@ -52,10 +54,14 @@
                     width: 11.8em;
                 }
 
+                .demo-section {
+                    width: 700px;
+                }
+                
                 #tickets {
                     width: 510px;
                     height: 323px;
-                    margin: 30px auto;
+                    margin: 0 auto;
                     padding: 10px 20px 20px 170px;
                     background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
                 }
@@ -72,7 +78,7 @@
                     padding: 0;
                 }
                 #tickets li {
-                    margin: 10px 0 0 0;
+                    margin: 7px 0 0 0;
                 }
 
                 label {
