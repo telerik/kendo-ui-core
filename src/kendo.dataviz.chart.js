@@ -130,6 +130,7 @@ var __meta__ = {
         FADEIN = "fadeIn",
         FUNNEL = "funnel",
         GLASS = "glass",
+        HORIZONTAL = "horizontal",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
@@ -204,6 +205,7 @@ var __meta__ = {
         TOOLTIP_HIDE_DELAY = 100,
         TOOLTIP_INVERSE = "chart-tooltip-inverse",
         VALUE = "value",
+        VERTICAL = "vertical",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
@@ -1800,20 +1802,22 @@ var __meta__ = {
                 vAlign = CENTER;
 
             if (position == CUSTOM) {
-                align = RIGHT;
+                align = LEFT;
             } else if (inArray(position, [TOP, BOTTOM])) {
                 align = CENTER;
                 vAlign = position;
             }
 
-            legend.container = new BoxElement(deepExtend({}, {
+            legend.container = new BoxElement({
                 margin: options.margin,
                 padding: options.padding,
+                background: options.background,
+                border: options.border,
                 vAlign: vAlign,
                 align: align,
                 zIndex: options.zIndex,
                 shrinkToFit: true
-            }, options));
+            });
 
             legend.append(legend.container);
         },
@@ -1844,11 +1848,9 @@ var __meta__ = {
         isVertical: function() {
             var legend = this,
                 options = legend.options,
-                vertical = inArray(options.position, [ LEFT, RIGHT, CUSTOM ]);
-
-            if (defined(options.vertical)) {
-                vertical = options.vertical;
-            }
+                position = options.position,
+                vertical = inArray(position, [ LEFT, RIGHT ]) ||
+                    (position == CUSTOM && options.repeatDirection != HORIZONTAL);
 
             return vertical;
         },
@@ -1876,8 +1878,10 @@ var __meta__ = {
             container.reflow(containerBox);
 
             if (options.position === CUSTOM) {
-                legend.containerCustomReflow(targetBox);
+                legend.containerCustomReflow(containerBox);
+                legend.box = targetBox.clone();
             } else {
+                container.reflow(containerBox);
                 legend.containerReflow(targetBox);
             }
         },
@@ -1905,14 +1909,25 @@ var __meta__ = {
                 options = legend.options,
                 offsetX = options.offsetX,
                 offsetY = options.offsetY,
-                container = legend.container;
+                container = legend.container,
+                width = options.width,
+                height = options.height,
+                container = legend.container,
+                vertical = legend.isVertical(),
+                containerBox = targetBox.clone();
+
+            if (vertical && height) {
+                containerBox.y2 = containerBox.y1 + height;
+            } else if (!vertical && width){
+                containerBox.x2 = containerBox.x1 + width;
+            }
+            container.reflow(containerBox);
+            containerBox = container.box;
 
             container.reflow(Box2D(
                 offsetX, offsetY,
-                offsetX + container.box.width(), offsetY + container.box.height()
+                offsetX + containerBox.width(), offsetY + containerBox.height()
             ));
-
-            legend.box = targetBox;
         },
 
         getViewElements: function(view) {

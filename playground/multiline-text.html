@@ -25,7 +25,7 @@
     <body>
 
      <div id="chart" ></div> 
-  <--
+  <!--
   <div id="pie" style="margin-top: 100px;"></div>
 
     <div id="chart1" ></div>
@@ -96,9 +96,12 @@
                 // bottom: 200
             // },
             background: "cyan",
-             // offsetX: 200,
+            offsetX: 200,
              // offsetY: 20,
-             // position: "custom"
+            position: "custom",
+            repeatDirection: "horizontal",
+            width: 300,
+            height: 300
         },
         
         seriesDefaults: {
@@ -135,84 +138,87 @@
             }
         },
         series: [{
-            name: "Total \n Visits",
+            name: "Total \n Visits 1",
             data: [56000, 63000, 74000, 10000, 10000],
             axis: "top"
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 2",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
             },
             axis: "top"
         },{
-            name: "Total \n Visits",
-            data: [56000, 63000, 74000, 10000, 10000],
-            visibleInLegend: false,
+            name: "Total \n Visits 3",
+            data: [56000, 63000, 74000, 10000, 10000],            
             axis: "top"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 4",
             data: [56000, 63000, 74000, 10000, 10000],
             axis: "top"
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 5",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
             },
             axis: "top"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 6",
             data: [56000, 63000, 74000, 10000, 10000],
             axis: "top"
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 7",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
             },
             axis: "top"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 8",
             data: [56000, 63000, 74000, 10000, 10000]
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 9",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
             },
             axis: "bottom"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 10",
             data: [56000, 63000, 74000, 10000, 10000]
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 11",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 rotation: 30
             },
             axis: "bottom"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 12",
             data: [56000, 63000, 74000, 10000, 10000],
             axis: "bottom"
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 13",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
                 //rotation: 30
             },
             axis: "bottom"
         },{
-            name: "Total \n Visits",
+            name: "Total \n Visits 14",
             data: [56000, 63000, 74000, 10000, 10000],
             axis: "bottom"
         }, {
-            name: "Unique \n visitor",
+            name: "Unique \n visitor 15",
             data: [52000, 34000, 23000, 10000, 10000],
             labels: {
               //  rotation: 30
             },
+            axis: "bottom"
+        },{
+            name: "Total \n Visits 16",
+            data: [56000, 63000, 74000, 10000, 10000],
             axis: "bottom"
         }],   
         valueAxis: [{
