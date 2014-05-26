@@ -3380,7 +3380,8 @@ h5 {
     padding: 0 3em 1em 0;
 }
 
-.box li {
+.box li,
+.demo-section .box-col li {
     margin-bottom: .6em;
 }
 .box li:last-child {
