@@ -9,5 +9,6 @@ namespace Kendo.Models
         public string Api { get; set; }
         public bool New { get; set; }
         public bool External { get; set; }
+        public bool DisableInMobile { get; set; }
     }
 }
