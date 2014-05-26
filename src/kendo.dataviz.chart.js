@@ -1850,7 +1850,7 @@ var __meta__ = {
                 options = legend.options,
                 position = options.position,
                 vertical = inArray(position, [ LEFT, RIGHT ]) ||
-                    (position == CUSTOM && options.repeatDirection != HORIZONTAL);
+                    (position == CUSTOM && options.orientation != HORIZONTAL);
 
             return vertical;
         },
