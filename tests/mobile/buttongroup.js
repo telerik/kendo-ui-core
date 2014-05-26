@@ -300,4 +300,158 @@
 
         ok(buttongroup.badge("li:last") == "6");
     });
+
+    test("by default buttonGroup is not disabled", 1, function() {
+        var group = new ButtonGroup(dom);
+
+        ok(!group.element.hasClass("km-state-disabled"));
+    });
+
+    test("disabled buttonGroup has km-state-disabled class", 1, function() {
+        var group = new ButtonGroup(dom, { enable: false });
+
+        ok(group.element.hasClass("km-state-disabled"));
+    });
+
+    test("buttonGroup can be disabled through the API", 1, function() {
+        var group = new ButtonGroup(dom);
+
+        group.enable(false);
+        ok(group.element.hasClass("km-state-disabled"));
+    });
+
+    test("buttonGroup can be enabled through the API", 1, function() {
+        var group = new ButtonGroup(dom, { enable: false });
+
+        group.enable(true);
+        ok(!group.element.hasClass("km-state-disabled"));
+    });
+
+    test("when disabled buttonGroup does not change the selected item on tap", 1, function() {
+        var group = new ButtonGroup(dom, { index: 0, enable: false });
+
+        dom.find("li:last").trigger("mousedown");
+        equal(group.selectedIndex, 0, "Selected index did not changed");
+    });
+
+    test("when disabled buttonGroup does not change the selected item through select method", 1, function() {
+        var group = new ButtonGroup(dom, { index: 0, enable: false });
+
+        group.select(1);
+        equal(group.selectedIndex, 0, "Selected index did not changed");
+    });
+
+    test("when disabled buttonGroup does not fire select event", 0, function() {
+        var group = new ButtonGroup(dom, {
+            enable: false,
+            select: function() {
+                ok(false, "select event should not trigger");
+            }
+        });
+
+        dom.find("li:last").trigger("mousedown");
+    });
+
+    /* enabled binding */
+    test("enabled binding to false disables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="enabled:enable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            enable: false
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("enabled binding to true enables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="enabled:enable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            enable: true
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(!dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("changing enabled binding to true enables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="enabled:enable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            enable: false
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("enable", true);
+
+        ok(!dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("changing enabled binding to false disables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="enabled:enable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            enable: true
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("enable", false);
+
+        ok(dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    /* disabled binding */
+    test("disabled binding to true disables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="disabled:disable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            disable: true
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("disabled binding to false enables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="disabled:disable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            disable: false
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(!dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("changing disabled binding to false enables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="disabled:disable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            disable: true
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("disable", false);
+
+        ok(!dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
+    test("changing disabled binding to true disables the widget", function() {
+        dom = $('<ul data-role="buttongroup" data-bind="disabled:disable"><li></li></ul>');
+
+        var observable = kendo.observable({
+            disable: false
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("disable", true);
+
+        ok(dom.data("kendoMobileButtonGroup").wrapper.hasClass("km-state-disabled"));
+    });
+
 })();
