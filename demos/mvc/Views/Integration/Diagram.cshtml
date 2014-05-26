@@ -27,20 +27,63 @@
                     <li>
                         Basic Shapes
                         <div>
-                            <div class="shapeItem" style="background-position: -60px 0"></div>
-                            <span>Square</span>
+                            <div>
+                                <div class="shapeItem" data-data='{"width":120,"height":120,"type":"rectangle"}' style="background-position: 0 0"></div>
+                                <span>Square</span>
+                            </div>
+
+                            <div>
+						        <div class="shapeItem" data-data='{"type":"circle","width":120,"height":120}' style="background-position: -60px 0"></div>
+						        <span>Circle</span>
+					        </div>
+					
+					        <div>
+						        <div class="shapeItem" data-data='{"width":120,"height":80,"type":"rectangle"}' style="background-position: -120px 0"></div>
+						        <span>Rectangle</span>
+					        </div>
+					
+					        <div>
+						        <div class="shapeItem" data-data='{"type":"circle","width":120,"height":80}' style="background-position: -180px 0"></div>
+						        <span>Ellipse</span>
+					        </div>
                         </div>
                     </li>
                     <li>
                         Polygons
                         <div>
-
+                            <div>
+						        <div class="shapeItem" data-data='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}' style="background-position: -240px 0"></div>
+						        <span>Pentagon</span>
+					        </div>
+					
+					        <div>
+						        <div class="shapeItem" data-data='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}' style="background-position: -300px 0"></div>
+						        <span>Hexagon</span>
+					        </div>
+					
+					        <div>
+						        <div class="shapeItem" data-data='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}' style="background-position: -360px 0"></div>
+						        <span>Heptagon</span>
+					        </div>
+					
+					        <div>
+						        <div class="shapeItem" data-data='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}' style="background-position: -420px 0"></div>
+						        <span>Octagon</span>
+					        </div>
                         </div>
                     </li>
                     <li>
                         Arrows
                         <div>
-
+                            <div>
+							    <div class="shapeItem" data-data='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}' style="background-position: -480px 0"></div>
+							    <span>45 degree</span>
+						    </div>
+					
+						    <div>
+							    <div class="shapeItem" data-data='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}' style="background-position: -540px 0"></div>
+							    <span>60 degree</span>
+						    </div>
                         </div>
                     </li>
                 </ul>
@@ -323,16 +366,16 @@
 
             function onMenuSelect(e) {
                 var itemText = $(e.item).children(".k-link").text();
+                if (itemText === "New") {
+                    return;
+                }
                 actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
             }
 
             $("#menu").kendoMenu({
                 dataSource: [
                     { text: "New", spriteCssClass: "brazilFlag", items: [
-                        { text: "Blank", spriteCssClass: "" },
-                        { text: "OrgChart", spriteCssClass: "" },
-                        { text: "Mind Map", spriteCssClass: "" },
-                        { text: "Workflow", spriteCssClass: "" }
+                        { text: "Blank", spriteCssClass: "" }
                         ]
                     },
                     { text: "Open", spriteCssClass: "" },
@@ -380,8 +423,8 @@
                     }
                 },
                 shapeDefaults: {
-                    width: 60,
-                    height: 60
+                    width: 120,
+                    height: 120
                 },
                 layout: {
                     type: "tree",
