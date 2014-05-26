@@ -407,7 +407,8 @@
     top: .3em;
 }
 
-.k-task-wrap:hover .k-task-dot
+.k-task-wrap:hover .k-task-dot,
+.k-task-wrap-active .k-task-dot
 {
     display: block;
 }
@@ -432,7 +433,8 @@
 }
 
 .k-task-dot:hover:after,
-.k-task-dot.k-state-hover:after
+.k-task-dot.k-state-hover:after,
+.k-task-wrap-active .k-task-dot:after
 {
 	border-style: solid;
     border-width: 1px;
