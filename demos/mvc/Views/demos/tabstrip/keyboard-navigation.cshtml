@@ -1,4 +1,4 @@
-<div id="example" class="k-content">
+<div id="example">
         <div id="tabstrip" accesskey="w">
             <ul>
                 <li class="k-state-active">
@@ -54,56 +54,63 @@
             </div>
     </div>
 
-    <ul id="keyboard-nav" class="keyboard-legend">
-        <li>
-            <span class="button-preview">
-                <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
-                +
-                <span class="key-button">w</span>
-            </span>
-            <span class="button-descr">
-                focuses the widget
-            </span>
-        </li>
-    </ul>
-
-    <ul class="keyboard-legend">
-        <li>
-            <span class="button-preview">
-                <span class="key-button wider leftAlign">left arrow</span>
-            </span>
-            <span class="button-descr">
-                selects previous tab
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button wider leftAlign">right arrow</span>
-            </span>
-            <span class="button-descr">
-                selects next tab
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">home</span>
-            </span>
-            <span class="button-descr">
-                selects first tab
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">end</span>
-            </span>
-            <span class="button-descr">
-                selects last tab
-            </span>
-        </li>
-    </ul>
+    <div class="box">
+        <div class="box-col">
+            <h4>Keyboard legend</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+                        +
+                        <span class="key-button">w</span>
+                    </span>
+                    <span class="button-descr">
+                        focuses the widget
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider leftAlign">left arrow</span>
+                    </span>
+                    <span class="button-descr">
+                        selects previous tab
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button wider leftAlign">right arrow</span>
+                    </span>
+                    <span class="button-descr">
+                        selects next tab
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">home</span>
+                    </span>
+                    <span class="button-descr">
+                        selects first tab
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">end</span>
+                    </span>
+                    <span class="button-descr">
+                        selects last tab
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
 
 
     <style scoped>
+        #tabstrip {
+            width: 400px;
+            margin: 30px auto;
+        }
         .sunny, .cloudy, .rainy {
             display: inline-block;
             margin: 20px 0 20px 10px;
@@ -124,11 +131,6 @@
             width: 160px;
             padding: 40px 0 0 0;
             float: right;
-        }
-
-        #keyboard-nav
-        {
-            padding-top: 35px;
         }
     </style>
 

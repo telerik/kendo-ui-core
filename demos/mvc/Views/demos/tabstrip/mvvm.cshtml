@@ -1,7 +1,7 @@
-<div id="example" class="k-content">
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Select a tab</span>
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 500px">
+            <h4>Select a tab</h4>
             <div data-role="tabstrip"
                  data-bind="events: { select: onSelect },
                  visible: isVisible">
@@ -59,20 +59,20 @@
                 </div>
             </div>
         </div>
-        <div class="config-section console-section">
-            <div class="configHead">Console</div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
             <div class="console"></div>
         </div>
     </div>
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Configuration</span>
+    <div class="box">
+        <div class="box-col" style="width: 500px">
+            <h4>Configuration</h4>
             <div>
                 <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
             </div>
         </div>
-        <div class="config-section" style="width: 440px">
-            <span class="configHead">Information</span>
+        <div class="box-col">
+            <h4>Information</h4>
             Kendo UI TabStrip supports the
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a> and
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.

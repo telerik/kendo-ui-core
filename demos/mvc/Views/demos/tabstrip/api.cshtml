@@ -1,31 +1,50 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
 
-            <div class="configuration">
-                <span class="configHead">API Functions</span>
+            <div class="box">
+            <div class="box-col">
+                <h4>Select</h4>
                 <ul class="options">
                     <li>
                         <input type="text" value="0" id="tabIndex" class="k-textbox"/> <button class="selectTab k-button">Select</button>
                     </li>
+                    
+                </ul>
+            </div>
+            <div class="box-col">
+                <h4>Enable / Disable</h4>
+                <ul class="options">
                     <li>
                         <button class="toggleTab k-button">Enable/Disable Selected</button>
                     </li>
+                </ul>
+            </div>
+            <div class="box-col">
+                <h4>Add / Remove</h4>
+                <ul class="options">
                     <li>
                         <button class="removeItem k-button">Remove Selected</button>
                     </li>
                     <li>
                         <input type="text" value="Item" id="appendText" class="k-textbox"/> <button class="appendItem k-button">Append</button>
                     </li>
+                </ul>
+            </div>
+            <div class="box-col">
+                <h4>&nbsp;</h4>
+                <ul class="options">
                     <li>
                         <input type="text" value="Item" id="beforeText" class="k-textbox"/> <button class="beforeItem k-button">Insert Before</button>
                     </li>
                     <li>
                         <input type="text" value="Item" id="afterText" class="k-textbox"/> <button class="afterItem k-button">Insert After</button>
                     </li>
+
                 </ul>
             </div>
+            </div>
 
-            <div style="width: 500px;">
+            <div class="demo-section k-header">
                 <div id="tabstrip">
                     <ul>
                         <li class="k-state-active">
@@ -119,8 +138,11 @@
                 var tabStrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
             </script>
             <style scoped>
-                .configuration .k-textbox {
-                    width: 40px;
+                .box-col {
+                    width: 200px;
+                }
+                .box .k-textbox {
+                    width: 80px;
                 }
             </style>
         </div>
