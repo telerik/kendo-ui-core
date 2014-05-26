@@ -104,7 +104,7 @@ var __meta__ = {
         },
 
         close: function() {
-            if (!this.trigger(CLOSE)) {
+            if (this.element.is(":visible") && !this.trigger(CLOSE)) {
                 this.shim.hide();
             }
         }
