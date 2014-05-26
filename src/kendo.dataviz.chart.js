@@ -985,16 +985,21 @@ var __meta__ = {
                 crosshairs = plotArea.crosshairs,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
+                target = e.relatedTarget,
                 i;
 
-            if (e.relatedTarget && tooltip && e.relatedTarget !== tooltip.element[0]) {
+            if (target) {
                 for (i = 0; i < crosshairs.length; i++) {
                     crosshairs[i].hide();
                 }
 
-                setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
                 highlight.hide();
-                chart._tooltipCategoryIx = null;
+
+                var tooltipElement = tooltip.element[0];
+                if (target !== tooltipElement && !$.contains(tooltipElement, target)) {
+                    setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
+                    chart._tooltipCategoryIx = null;
+                }
             }
         },
 
