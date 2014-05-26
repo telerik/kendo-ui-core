@@ -1,10 +1,11 @@
-(function($, window) {
+ (function($, window) {
     var dojo = {
         postSnippet: function (snippet, baseUrl) {
             snippet = dojo.fixCDNReferences(snippet);
             snippet = dojo.addBaseRedirectTag(snippet, baseUrl);
             snippet = dojo.addConsoleScript(snippet);
             snippet = dojo.fixLineEndings(snippet);
+
             var form = $('<form method="post" action="' + dojo.configuration.url + '" target="_blank" />').hide().appendTo(document.body);
             $("<input name='snippet'>").val(snippet).appendTo(form);
 
@@ -19,8 +20,8 @@
             );
         },
         addConsoleScript: function (code) {
-            if(code.indexOf("kendoConsole") !== -1) {
-            	var styleReference = '\t<link rel="stylesheet" href="../../content/shared/styles/examples-offline.css">\n';
+            if (code.indexOf("kendoConsole") !== -1) {
+                var styleReference = '\t<link rel="stylesheet" href="../../content/shared/styles/examples-offline.css">\n';
                 var scriptReference = '\t<script src="../../content/shared/js/console.js"></script>\n';
                 code = code.replace("</head>", styleReference + scriptReference + "</head>");
             }

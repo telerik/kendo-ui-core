@@ -404,7 +404,7 @@
     <Content Include="content\shared\js\prettify.js" />
     <Content Include="content\shared\js\products.js" />
     <Content Include="content\shared\js\theme-chooser.js" />
-    <Content Include="content\shared\js\trykendo.js" />
+    <Content Include="content\shared\js\kendo-dojo.js" />
     <Content Include="content\shared\js\web-examples.js" />
     <Content Include="content\shared\styles\aeroviewr.png" />
     <Content Include="content\shared\styles\bg-glossy.png" />
