@@ -15,6 +15,7 @@ var __meta__ = {
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
         ACTIVE = "km-state-active",
+        DISABLE = "km-state-disabled",
         SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")";
 
@@ -32,7 +33,13 @@ var __meta__ = {
 
             that.element.on(that.options.selectOn, SELECTOR, "_select");
 
+            that._enable = true;
             that.select(that.options.index);
+
+            if(!that.options.enable) {
+                that._enable = false;
+                that.wrapper.addClass(DISABLE);
+            }
         },
 
         events: [
@@ -42,7 +49,8 @@ var __meta__ = {
         options: {
             name: "ButtonGroup",
             selectOn: "down",
-            index: -1
+            index: -1,
+            enable: true
         },
 
         current: function() {
@@ -53,7 +61,7 @@ var __meta__ = {
             var that = this,
                 index = -1;
 
-            if (li === undefined || li === -1) {
+            if (li === undefined || li === -1 || !that._enable) {
                 return;
             }
 
@@ -94,6 +102,22 @@ var __meta__ = {
             return badge.html();
         },
 
+        enable: function(enable) {
+            var wrapper = this.wrapper;
+
+            if(typeof enable == "undefined") {
+                enable = true;
+            }
+
+            if(enable) {
+                wrapper.removeClass(DISABLE);
+            } else {
+                wrapper.addClass(DISABLE);
+            }
+
+            this._enable = this.options.enable = enable;
+        },
+
         _button: function() {
             var button = $(this).addClass("km-button"),
                 icon = kendo.attrValue(button, "icon"),
@@ -117,7 +141,7 @@ var __meta__ = {
         },
 
         _select: function(e) {
-            if (e.which > 1 || e.isDefaultPrevented()) {
+            if (e.which > 1 || e.isDefaultPrevented() || !this._enable) {
                 return;
             }
 
