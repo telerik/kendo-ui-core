@@ -1,5 +1,7 @@
-<div id="example" class="k-content">
-        <div id="treeview" class="demo-section"></div>
+<div id="example">
+        <div class="demo-section k-header">
+            <div id="treeview"></div>
+        </div>
 
         <script id="treeview-template" type="text/kendo-ui-template">
             #: item.text #
@@ -47,6 +49,18 @@
         </script>
 
         <style scoped>
+            #example {
+                text-align: center;
+            }
+
+            .demo-section {
+                display: inline-block;
+                vertical-align: top;
+                min-width: 320px;
+                min-height: 300px;
+                text-align: left;
+                margin: 0 2em;
+            }
             #treeview {
                 width: 300px;
                 margin: 0 auto;
