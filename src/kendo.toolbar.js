@@ -218,7 +218,7 @@ var __meta__ = {
             hasIcon = (options.showIcon != "overflow") && (options.icon || options.spriteCssClass || options.imageUrl);
 
             if (hasIcon) {
-                addIcon(options, element);
+                addGraphic(options, element);
             }
 
             //user events tap
@@ -246,7 +246,7 @@ var __meta__ = {
             hasIcon = (options.showIcon != "toolbar") && (options.icon || options.spriteCssClass || options.imageUrl);
 
             if (hasIcon) {
-                addIcon(options, element);
+                addGraphic(options, element);
             }
 
             //user events tap
@@ -257,7 +257,7 @@ var __meta__ = {
             return element;
         }
 
-        function addIcon(options, element) {
+        function addGraphic(options, element) {
             var icon = options.icon,
                 spriteCssClass = options.spriteCssClass,
                 imageUrl = options.imageUrl,
