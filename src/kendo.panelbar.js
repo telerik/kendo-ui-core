@@ -892,7 +892,6 @@ var __meta__ = {
                 .parent()
                 .attr(ARIA_EXPANDED, !visibility)
                 .attr(ARIA_HIDDEN, visibility)
-                .toggleClass(defaultState, visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-icon")
                     .toggleClass("k-i-arrow-n", !visibility)
