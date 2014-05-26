@@ -45,6 +45,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "html5-diagram-sample-app",
+                "html5-diagram-sample-app",
+                new { controller = "Integration", action = "Diagram" }
+            );
+
+            routes.MapRoute(
                 "Sushi",
                 "sushi",
                 new { controller = "Integration", action = "Sushi" }

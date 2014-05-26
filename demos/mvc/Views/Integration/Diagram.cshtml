@@ -1,0 +1,491 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>About the HTML5 Diagram Sample Application by Telerik Kendo UI</title>
+
+        @foreach (string styleName in Kendo.Models.StyleGroups.All) {
+        <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+        }
+        @if (ViewBag.Debug) {
+        <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+        }
+        @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
+        <script src="@Url.Script(scriptName)"></script>
+        }
+
+        <link rel="stylesheet" href="@Url.Content("~/content/integration/diagram/css/styles.css")" />
+    </head>
+    <body>
+    <div id="menu"></div>
+    <div id="splitter">
+        <div id="left-pane">
+            <div class="pane-content">
+                <ul id="shapesPanelBar">
+                    <li>
+                        Basic Shapes
+                        <div>
+                            <div class="shapeItem" style="background-position: -60px 0"></div>
+                            <span>Square</span>
+                        </div>
+                    </li>
+                    <li>
+                        Polygons
+                        <div>
+
+                        </div>
+                    </li>
+                    <li>
+                        Arrows
+                        <div>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="center-pane">
+            <div class="pane-content">
+                <div id="diagram"></div>
+            </div>
+        </div>
+        <div id="right-pane">
+            <div class="pane-content">
+                <ul id="configurationPanelBar">
+                    <li>
+                    Canvas Properties
+                    <div id="canvasProperties">
+                        <ul>
+                            <li>
+                                <span>Background Color:</span>
+                                <input id="canvasBackgroundColorPicker" />
+                            </li>
+                            <li>
+                                <span>Layout:</span>
+                                <input id="canvasLayout" />
+                            </li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li>
+                    Shape Properties
+                    <div id="shapeProperties">
+                        <ul>
+                            <li>
+                                <span>Background Color:</span>
+                                <input id="shapeBackgroundColorPicker" />
+                            </li>
+                            <li>
+                                <span>Stroke Color:</span>
+                                <input id="shapeStrokeColorPicker" />
+                            </li>
+                            <li>
+                                <span>Stroke Width:</span>
+                                <input type="text" id="shapeStrokeWidth" class="numeric" />
+                            </li>
+                            <li>
+                                <span>Width:</span>
+                                <input type="text" id="shapeWidth" class="numeric" />
+                            </li>
+                            <li>
+                                <span>Height:</span>
+                                <input type="text" id="shapeHeight" class="numeric" />
+                            </li>
+                            <li>
+                                <span>Position X:</span>
+                                <input type="text" id="shapePositionX" class="numeric" />
+                            </li>
+                            <li>
+                                <span>Position Y:</span>
+                                <input type="text" id="shapePositionY" class="numeric" />
+                            </li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li>
+                    Connection Properties
+                    <div id="connectionProperties">
+                        <ul>
+                            <li>
+                                <span>Start Cap:</span>
+                                <input id="connectionStartCap" />
+                            </li>
+                            <li>
+                                <span>End Cap:</span>
+                                <input id="connectionEndCap" />
+                            </li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li>
+                    Align
+                    <div id="alignConfiguration" style="width: 100%; padding: 10px; box-sizing: border-box; text-align: left;">
+                        <button class="configurationButtons" data-data="top">
+                            <span class="alignTop"></span>
+                        </button><button class="configurationButtons" data-data="bottom">
+                            <span class="alignBottom"></span>
+                        </button><button class="configurationButtons" data-data="left">
+                            <span class="alignLeft"></span>
+                        </button><button class="configurationButtons" data-data="right">
+                            <span class="alignRight"></span>
+                        </button>
+                    </div>
+                    </li>
+                    <li>
+                    Arrange
+                    <div id="arrangeConfiguration">
+                        <div style="width: 100%; padding: 10px; box-sizing: border-box; text-align: left;">
+                            <button class="configurationButtons">
+                                <span class="toFront"></span>
+                            </button><button class="configurationButtons">
+                                <span class="toBack"></span>
+                            </button>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="bottom-box">
+        <input id="diagramZoom" />
+        <input type="text" id="diagramZoomIndicator" class="k-textbox" value="100" style="width: 40px; vertical-align: middle;" />
+    </div>
+    <script>
+        $(function() {
+            var Shape = kendo.dataviz.diagram.Shape,
+                Connection = kendo.dataviz.diagram.Connection,
+                Rect = kendo.dataviz.diagram.Rect;
+
+            $("#canvasProperties").on("change", canvasPropertiesChange);
+
+            var layoutMapping = {
+                "TreeDown": {
+                    type: "tree",
+                    subtype: "down"
+                },
+                "TreeUp": {
+                    type: "tree",
+                    subtype: "up"
+                },
+                "TreeLeft": {
+                    type: "tree",
+                    subtype: "left"
+                },
+                "TreeRight": {
+                    type: "tree",
+                    subtype: "right"
+                },
+                "RadialTree": {
+                    type: "tree",
+                    subtype: "radial"
+                },
+                "TipOverTree": {
+                    type: "tree",
+                    subtype: "typeover"
+                },
+                "LayeredHorizontal": {
+                    type: "layered",
+                    subtype: "horizontal"
+                },
+                "LayeredVertical": {
+                    type: "layered",
+                    subtype: "vertial"
+                },
+                "ForceDirected": {
+                    type: "force",
+                    subtype: "directed"
+                },
+                "MindmapVertical": {
+                    type: "tree",
+                    subtype: "mindmapvertical"
+                },
+                "MindmapHorizontal": {
+                    type: "tree",
+                    subtype: "mindmaphorizontal"
+                }
+            };
+
+            function canvasPropertiesChange() {
+                diagram.element.css(
+                    "background-color",
+                    $("#canvasBackgroundColorPicker").getKendoColorPicker().value());
+                var layout = layoutMapping[$("#canvasLayout").getKendoDropDownList().value()];
+
+                diagram.layout({
+                    type: layout.type,
+                    subtype: layout.subtype,
+                    animation: true
+                });
+            }
+
+            $("#shapeProperties").on("change", shapePropertiesChange);
+
+            function shapePropertiesChange() {
+                var elements = diagram.select(),
+                    options = {
+                        background: $("#shapeBackgroundColorPicker").getKendoColorPicker().value(),
+                        stroke: {
+                            color: $("#shapeStrokeColorPicker").getKendoColorPicker().value(),
+                            width: $("#shapeStrokeWidth").getKendoNumericTextBox().value()
+                        }
+                    },
+                    bounds = new Rect(
+                        $("#shapePositionX").getKendoNumericTextBox().value(),
+                        $("#shapePositionY").getKendoNumericTextBox().value(),
+                        $("#shapeWidth").getKendoNumericTextBox().value(),
+                        $("#shapeHeight").getKendoNumericTextBox().value()
+                    ),
+                    element, i;
+
+                for (i = 0; i < elements.length; i++) {
+                    element = elements[i];
+                    if (element instanceof Shape) {
+                        element.redraw(options);
+
+                        element.bounds(bounds);
+                    }
+                }
+            }
+
+            $("#connectionProperties").on("change", connectionPropertiesChange);
+
+            function connectionPropertiesChange() {
+                var elements = diagram.select(),
+                    options = {
+                        startCap: $("#connectionStartCap").getKendoDropDownList().value(),
+                        endCap: $("#connectionEndCap").getKendoDropDownList().value()
+                    },
+                    element;
+
+                for (i = 0; i < elements.length; i++) {
+                    element = elements[i];
+                    if (element instanceof Connection) {
+                        element.redraw(options);
+                    }
+                }
+            }
+
+            $("#alignConfiguration .configurationButtons").on("click", function(e) {
+                var value = $(this).data("data");
+                diagram.alignShapes(value);
+            });
+
+            $("#arrangeConfiguration .configurationButtons").on("click", function(e) {
+                var methodName = $(this).find("span").attr("class");
+                diagram[methodName]();
+            });
+
+            $("#diagramZoomIndicator").change(function() {
+                $("#diagramZoom").getKendoSlider().value($(this).val());
+            });
+
+            function reset() {
+                diagram.clear();
+            }
+
+            function save() {
+
+            }
+
+            function load() {
+
+            }
+
+            function undo() {
+                diagram.undo();
+            }
+
+            function redo() {
+                diagram.redo();
+            }
+
+            function copyItem() {
+                diagram.copy();
+            }
+
+            function pasteItem() {
+                diagram.paste();
+            }
+
+            var actions = {
+                blank: reset,
+                
+                open: load,
+                save: save,
+                undo: undo,
+                redo: redo,
+                copy: copyItem,
+                paste: pasteItem
+            };
+
+            function onMenuSelect(e) {
+                var itemText = $(e.item).children(".k-link").text();
+                actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
+            }
+
+            $("#menu").kendoMenu({
+                dataSource: [
+                    { text: "New", spriteCssClass: "brazilFlag", items: [
+                        { text: "Blank", spriteCssClass: "" },
+                        { text: "OrgChart", spriteCssClass: "" },
+                        { text: "Mind Map", spriteCssClass: "" },
+                        { text: "Workflow", spriteCssClass: "" }
+                        ]
+                    },
+                    { text: "Open", spriteCssClass: "" },
+                    { text: "Save", spriteCssClass: "" },
+                    { text: "Undo", spriteCssClass: "" },
+                    { text: "Redo", spriteCssClass: "" },
+                    { text: "Copy", spriteCssClass: "" },
+                    { text: "Paste", spriteCssClass: "" }
+                ],
+                select: onMenuSelect
+            });
+
+            $("#splitter").kendoSplitter({
+                panes: [
+                    { collapsible: true, size: "300px" },
+                    { collapsible: false, scrollable: false },
+                    { collapsible: true, size: "300px" }
+                ]
+            });
+
+            function diagramSelect(e) {
+                if (e.selected.length) {
+                    var element = e.selected[0];
+                    if (element instanceof Shape) {
+                        updateShapeProperties(element.options);
+                    } else {
+                        updateConnectionProperties(element.options);
+                    }
+                }
+            }
+
+            var diagram = $("#diagram").kendoDiagram({
+                theme: "default",
+                dataSource: {
+                    data: [{
+                        name: "0",
+                        items: [{
+                            name: "0"
+                        }]
+                    }],
+                    schema: {
+                        model: {
+                            children: "items"
+                        }
+                    }
+                },
+                shapeDefaults: {
+                    width: 60,
+                    height: 60
+                },
+                layout: {
+                    type: "tree",
+                    subtype: "right"
+                },
+                select: diagramSelect
+            }).getKendoDiagram();
+
+            $("#shapesPanelBar").kendoPanelBar({
+                expandMode: "multiple"
+            }).getKendoPanelBar().expand($("li"));
+
+            $("#configurationPanelBar").kendoPanelBar({
+                expandMode: "multiple"
+            }).getKendoPanelBar().expand($("li"));
+
+            $("#canvasBackgroundColorPicker").kendoColorPicker({
+                value: "#ffffff",
+                buttons: false
+            });
+
+            $("#shapeBackgroundColorPicker").kendoColorPicker({
+                value: "#ffffff",
+                buttons: false
+            });
+
+            $("#shapeStrokeColorPicker").kendoColorPicker({
+                value: "#ffffff",
+                buttons: false
+            });
+
+            $("#canvasLayout").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    { value: "TreeDown", text: "Tree Down" },
+                    { value: "TreeUp", text: "Tree Up" },
+                    { value: "TreeLeft", text: "Tree Left" },
+                    { value: "TreeRight", text: "Tree Right" },
+                    { value: "RadialTree", text: "Radial Tree" },
+                    { value: "TipOverTree", text: "Tip-Over Tree" },
+                    { value: "LayeredHorizontal", text: "Layered Horizontal" },
+                    { value: "LayeredVertical", text: "Layered Vertical" },
+                    { value: "ForceDirected", text: "Force directed" },
+                    { value: "MindmapVertical", text: "Mindmap Vertical" },
+                    { value: "MindmapHorizontal", text: "Mindmap Horizontal" }
+                ]
+            });
+
+            $("#connectionStartCap").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    { value: "None", text: "None" },
+                    { value: "ArrowStart", text: "Arrow Start" },
+                    { value: "ArrowEnd", text: "Arrow End" },
+                    { value: "FilledCircle", text: "Filed Circle" }
+                ]
+            });
+
+            $("#connectionEndCap").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    { value: "None", text: "None" },
+                    { value: "ArrowStart", text: "Arrow Start" },
+                    { value: "ArrowEnd", text: "Arrow End" },
+                    { value: "FilledCircle", text: "Filed Circle" }
+                ]
+            });
+
+            function updateSliderIndicator(e) {
+                $("#diagramZoomIndicator").attr("value", e.value);
+            }
+
+            $("#diagramZoom").kendoSlider({
+                min: 10,
+                max: 200,
+                value: 100,
+                smallStep: 10,
+                largeStep: 50,
+                tickPlacement: "none",
+                showButtons: false,
+                change: updateSliderIndicator,
+                slide: updateSliderIndicator
+            });
+
+            $(".numeric").kendoNumericTextBox();
+
+            function updateShapeProperties(shape) {
+                $("#shapeBackgroundColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.background));
+                $("#shapeStrokeColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.stroke.color));
+                $("#shapeStrokeWidth").getKendoNumericTextBox().value(shape.stroke.width);
+                $("#shapeWidth").getKendoNumericTextBox().value(shape.width);
+                $("#shapeHeight").getKendoNumericTextBox().value(shape.height);
+                $("#shapePositionX").getKendoNumericTextBox().value(shape.x);
+                $("#shapePositionY").getKendoNumericTextBox().value(shape.y);
+            }
+
+            function updateConnectionProperties(shape) {
+                $("#connectionStartCap").getKendoDropDownList().value(shape.startCap);
+                $("#connectionEndCap").getKendoDropDownList().value(shape.endCap);
+            }
+        });
+    </script>
+    </body>
+</html>
