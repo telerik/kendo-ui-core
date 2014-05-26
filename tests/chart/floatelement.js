@@ -95,20 +95,6 @@
         equal(floatElement.elementSpacing, 5);
     });
 
-    test("reflows children in a 1000 x 1000 box if the target box has 0 width and height", 4, function() {
-        floatElement = createFloatElement({
-            vertical: true
-        }, [{
-            reflow: function(targetBox) {
-                equal(targetBox.width(), 1000);
-                equal(targetBox.height(), 1000);
-                this.box = targetBox.clone();
-            }
-        }]);
-
-        floatElement.reflow(Box());
-    });
-
     (function() {
         var containerBox = Box(10, 10, 100, 100);
 

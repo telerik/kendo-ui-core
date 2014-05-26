@@ -1036,9 +1036,6 @@ var __meta__ = {
         },
 
         reflow: function(targetBox) {
-            if (targetBox.width() === 0 && targetBox.height() === 0) {
-                targetBox = Box2D(0, 0, 1000, 1000);
-            }
             this.box = targetBox.clone();
             this.reflowChildren();
         },
