@@ -178,7 +178,7 @@
 
     test("PivotGrid renders column header for 1 dimension with one tuple", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -197,7 +197,7 @@
 
     test("PivotGrid renders column header for 2 dimension with one tuple each", function() {
         var tuples = [
-            { members: [ { name: "dim 1", children: [] }, { name: "dim 2", children: [] }] }
+            { members: [ { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -217,10 +217,10 @@
 
     test("PivotGrid renders one expanded dimension", function() {
         var tuples = [
-            { members: [{ name: "dim 1", children: [] }] },
-            { members: [{ name: "child 1", parentName: "dim 1", children: [] }] },
-            { members: [{ name: "child 2", parentName: "dim 1", children: [] }] },
-            { members: [{ name: "child 3", parentName: "dim 1", children: [] }] }
+            { members: [{ name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [{ name: "child 1", levelNum: "1",  parentName: "dim 1", children: [] }] },
+            { members: [{ name: "child 2", levelNum: "1",  parentName: "dim 1", children: [] }] },
+            { members: [{ name: "child 3", levelNum: "1",  parentName: "dim 1", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -250,10 +250,10 @@
 
     test("PivotGrid renders one expanded dimension of two", function() {
         var tuples = [
-            { members: [{ name: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
-            { members: [{ name: "child 1", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
-            { members: [{ name: "child 2", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] },
-            { members: [{ name: "child 3", parentName: "dim 1", children: [] }, { name: "dim 2", children: [] }] }
+            { members: [{ name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [{ name: "child 1", levelNum: "1",  parentName: "dim 1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [{ name: "child 2", levelNum: "1",  parentName: "dim 1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [{ name: "child 3", levelNum: "1",  parentName: "dim 1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -292,12 +292,12 @@
 
     test("PivotGrid renders three level expanded dimension", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_1", children: [] }] },
-            { members: [ { name: "level 3", parentName: "level 2", children: [] }] }
+            { members: [ { name: "level 0",  levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2", levelNum: "2",  parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 3", levelNum: "3",  parentName: "level 2", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -348,12 +348,12 @@
 
     test("PivotGrid renders third level corretly if second parent has been expanded", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_2", children: [] }] },
-            { members: [ { name: "level 3", parentName: "level 2", children: [] }] }
+            { members: [ { name: "level 0",  levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2", levelNum: "2",  parentName: "level 1_2", children: [] }] },
+            { members: [ { name: "level 3", levelNum: "3",  parentName: "level 2", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -405,13 +405,13 @@
 
     test("PivotGrid renders second level with two expanded tuples corretly", function() {
        var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2_1", parentName: "level 1_1", children: [] }] },
-            { members: [ { name: "level 2_2", parentName: "level 1_2", children: [] }] },
-            { members: [ { name: "level 2_3", parentName: "level 1_2", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1",  parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2_1", levelNum: "2",  parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 2_2", levelNum: "2",  parentName: "level 1_2", children: [] }] },
+            { members: [ { name: "level 2_3", levelNum: "2",  parentName: "level 1_2", children: [] }] }
         ];
 
         var pivotgrid = createPivot({
@@ -433,6 +433,7 @@
 
         equal(cells_row2.eq(1).text(), "level 1_1");
         equal(cells_row2.eq(1).attr("rowspan"), 2);
+        return;
 
         equal(cells_row2.eq(2).text(), "level 1_2");
         equal(cells_row2.eq(2).attr("colspan"), 2);
@@ -454,14 +455,14 @@
 
     test("PivotGrid appends first level expanded tuple to two levels expanded sibling tuple ", function() {
        var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2_1", parentName: "level 1_1", children: [] }] },
-            { members: [ { name: "level 3_1", parentName: "level 2_1", children: [] }] },
-            { members: [ { name: "level 2_2", parentName: "level 1_2", children: [] }] },
-            { members: [ { name: "level 2_3", parentName: "level 1_2", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2_1", levelNum: "2", parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 3_1", levelNum: "3", parentName: "level 2_1", children: [] }] },
+            { members: [ { name: "level 2_2", levelNum: "2", parentName: "level 1_2", children: [] }] },
+            { members: [ { name: "level 2_3", levelNum: "2", parentName: "level 1_2", children: [] }] }
         ];
 
         var pivotgrid = createPivot({
@@ -493,11 +494,11 @@
 
     test("PivotGrid normalizes rowspan values of master row", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_1", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2", levelNum: "2", parentName: "level 1_1", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -509,7 +510,7 @@
         var tr = headerTable.find("tr").eq(1);
         var th_level1 = tr.find("th");
 
-        equal(th_level1.eq(0).attr("rowspan"), 1);
+        ok(!th_level1.eq(0).attr("rowspan"));
         equal(th_level1.eq(1).attr("rowspan"), 2);
         equal(th_level1.eq(2).attr("rowspan"), 2);
         equal(th_level1.eq(3).attr("rowspan"), 2);
@@ -517,12 +518,12 @@
 
     test("PivotGrid normalizes rowspan values of all master rows", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_1", children: [] }] },
-            { members: [ { name: "level 3", parentName: "level 2", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_2", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 1_3", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 2", levelNum: "2", parentName: "level 1_1", children: [] }] },
+            { members: [ { name: "level 3", levelNum: "3", parentName: "level 2", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -534,16 +535,41 @@
         var tr = headerTable.find("tr").eq(1);
         var th_level1 = tr.find("th");
 
-        equal(th_level1.eq(0).attr("rowspan"), 1);
+        ok(!th_level1.eq(0).attr("rowspan"));
         equal(th_level1.eq(0).attr("colspan"), 2);
         equal(th_level1.eq(1).attr("rowspan"), 3);
         equal(th_level1.eq(2).attr("rowspan"), 3);
         equal(th_level1.eq(3).attr("rowspan"), 3);
     });
 
-    test("PivotGrid does not add  master-cell attr to the ALL tuple column without children", function() {
+    test("PivotGrid normalize colspan value of all dimension rows", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] }
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_1", parentName: "dim 2", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_2", parentName: "dim 2", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_3", parentName: "dim 2", levelNum: "1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        equal(rows.length, 4);
+
+        var tr_dim0 = rows.eq(0);
+        var tr_dim1 = rows.eq(1);
+
+        equal(tr_dim0.find("th").attr("colspan"), 4);
+        equal(tr_dim1.find("th").attr("colspan"), 4);
+    });
+
+    test("PivotGrid adds tuple-all attr to the ALL tuple column without children", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -555,14 +581,14 @@
         var tr = headerTable.find("tr");
         var th = headerTable.find("th");
 
-        ok(!th.attr("data-kendo-master-cell"));
+        ok(th.attr("data-kendo-tuple-all"), "true");
     });
 
-    test("PivotGrid adds master-cell attr to the expanded ALL tuples", function() {
+    test("PivotGrid adds tuple-all attr to the expanded ALL tuples", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -575,37 +601,18 @@
         var th_level0 = tr.eq(0).find("th");
         var th_level1 = tr.eq(1).find("th");
 
-        equal(th_level0.last().attr("data-kendo-master-cell"), "true");
-        ok(!th_level1.last().attr("data-kendo-master-cell"));
+        equal(th_level0.last().attr("data-kendo-tuple-all"), "true");
+        equal(th_level1.eq(0).attr("data-kendo-tuple-all"), "true");
+        equal(th_level1.eq(1).attr("data-kendo-tuple-all"), "true");
     });
 
-    test("PivotGrid adds master-cell attr to the second level parent cell", function() {
+    test("PivotGrid adds tuple-all attr to the second level parent cell", function() {
         var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_1", children: [] }] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
-
-        var tr = headerTable.find("tr").eq(1);
-        var th_level1 = tr.find("th");
-
-        equal(th_level1.eq(1).attr("data-kendo-master-cell"), "true");
-        ok(!th_level1.last().attr("data-kendo-master-cell"));
-    });
-
-    test("PivotGrid adds master-row attr to the row with children", function() {
-        var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] }
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_3", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 2", parentName: "level 1_1", levelNum: "2", children: [] }] }
         ]
 
         var pivotgrid = createPivot({
@@ -615,76 +622,18 @@
         var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
 
         var rows = headerTable.find("tr");
-        var tr0 = rows.eq(0);
-        var tr1 = rows.eq(1);
+        var th_level0 = rows.eq(0).find("th");
+        var th_level1 = rows.eq(1).find("th");
+        var th_level2 = rows.eq(2).find("th");
 
-        equal(tr0.attr("data-kendo-master-row"), "true");
-        ok(!tr1.attr("data-kendo-master-row"));
+        ok(!th_level0.first().attr("data-kendo-tuple-all"));
+        equal(th_level0.last().attr("data-kendo-tuple-all"), "true");
+
+        ok(!th_level1.eq(0).attr("data-kendo-tuple-all"));
+        equal(th_level1.eq(1).attr("data-kendo-tuple-all"), "true");
+        equal(th_level1.eq(2).attr("data-kendo-tuple-all"), "true");
+        equal(th_level1.eq(3).attr("data-kendo-tuple-all"), "true");
+
+        equal(th_level2.eq(0).attr("data-kendo-tuple-all"), "true");
     });
-
-    test("PivotGrid adds master-row attr to every row with children", function() {
-        var tuples = [
-            { members: [ { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1", children: [] }] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
-
-        var rows = headerTable.find("tr");
-        var tr0 = rows.eq(0);
-        var tr1 = rows.eq(1);
-        var tr2 = rows.eq(2);
-
-        equal(tr0.attr("data-kendo-master-row"), "true");
-        equal(tr1.attr("data-kendo-master-row"), "true");
-        ok(!tr2.attr("data-kendo-master-row"));
-    });
-
-    test("PivotGrid adds master-row attr only to the expanded dimension", function() {
-        var tuples = [
-            { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 0", children: [] }] },
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
-
-        var rows = headerTable.find("tr");
-        var tr1 = rows.eq(1);
-        var tr2 = rows.eq(2);
-        var tr3 = rows.eq(3);
-
-        equal(tr1.attr("data-kendo-master-row"), "true");
-        ok(!tr2.attr("data-kendo-master-row"));
-        ok(!tr3.attr("data-kendo-master-row"));
-    });
-
-    /*test("PivotGrid adds master-row attr to all expanded dimensions", function() {
-        var tuples = [
-            { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-            { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
-
-        var rows = headerTable.find("tr");
-        console.log(headerTable[0]);
-    });*/
 })();
