@@ -41,14 +41,20 @@
     </style>
 </head>
 <body>
+    <h1 class="header">Telerik UI for ASP.NET MVC</h1>
     <div id="page">
-        <h2>
-            <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite"}))" class="imgPlate">Telerik UI for ASP.NET MVC Demos</a>
-        </h2>
-        <hr />
-        <h2>
-            <a href="html/web/index.html" class="imgPlate">Kendo UI Professional Demos</a>
-        </h2>
+        <div class="suites">
+            <div class="suite-column">
+                <h2>Telerik UI for ASP.NET MVC Demos</h2>
+                <img src="../../Content/shared/demos-mobile.png" />
+                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite"}))">Launch ASP.NET MVC Demos</a>
+            </div>
+            <div class="suite-column">
+                <h2>Kendo UI Professional Demos</h2>
+                <img src="../../Content/shared/demos-web.png" />
+                <a href="html/web/index.html">Launch HTML/JS Demos</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

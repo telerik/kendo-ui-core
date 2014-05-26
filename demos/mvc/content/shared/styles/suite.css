@@ -34,6 +34,18 @@ h1 {
     text-transform: uppercase;
 }
 
+h1.header {
+    margin: 0;
+    height: 200px;
+    line-height: 200px;
+    vertical-align: middle;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: #263944;
+}
+
 h2 {
     font-size: 23px;
     width: 45%;
@@ -148,13 +160,7 @@ h2+.box
     padding: 0;
 }
 
-#page > h2 {
-    float: none;
-    text-align: center;
-    width: auto;
-    padding: 5em 0 1em;
-    font-size: 3em;
-}
+
 
 #suites .imgPlate,
 #suites .box {
@@ -180,6 +186,53 @@ h2+.box
     margin-top: 1em;
 }
 
+/* Suites on Homepage */
+.suites {
+    min-width: 960px;
+    text-align: center;
+}
+
+.suite-column:first-child {
+    border-right: 1px solid #e0e0e0;
+}
+.suite-column {
+    display: inline-block;
+    min-width: 40%;
+    margin: 3em 0;
+    padding: 5em 0;
+}
+.suite-column img {
+    display: block;
+    margin: 3em auto;
+}
+
+.suite-column > h2 {
+    float: none;
+    text-align: center;
+    width: auto;
+    padding: 0;
+    font-size: 2.5em;
+}
+
+.suite-column > a {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: normal;
+    color: #fff;
+    background-color: #EE5315;
+    padding: 0.8em 0.9em 0.72em;
+    border-radius: 2px;
+    line-height: 1.2;
+    text-align: center;
+    transition-duration: 0.2s;
+    transition-property: background-color, color;
+    transition-timing-function: ease;
+}
+
+.suite-column > a:hover {
+    background-color: #d3470f;
+}
 @media screen and (min-width: 1000px) {
     #page > ul > li {
         clear: none;
