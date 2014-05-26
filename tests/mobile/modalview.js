@@ -52,6 +52,33 @@
         equal(root.find(".km-shim").css("display"), "none");
     });
 
+    test("triggers close event when closed", 1, function() {
+        modalView.bind("close", function() {
+            ok(true);
+        });
+
+        modalView.open();
+        modalView.close();
+    });
+
+    test("preventing close event prevents closing", 1, function() {
+        modalView.bind("close", function(e) {
+            e.preventDefault();
+        });
+
+        modalView.open();
+        modalView.close();
+        notEqual(root.find(".km-shim").css("display"), "none");
+    });
+
+    test("close event is not triggered if ModalView is not opened", 0, function() {
+        modalView.bind("close", function(e) {
+            ok(false);
+        });
+
+        modalView.close();
+    });
+
     test("Is hidden when closed", 1, function() {
         modalView.open();
         modalView.close();
