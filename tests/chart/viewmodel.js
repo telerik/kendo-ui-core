@@ -1792,6 +1792,97 @@
         });
 
         // ------------------------------------------------------------
+        module("Legend custom position", {});
+
+        test("sets legend box to targetBox", function() {
+            createLegend({
+                position: "custom"
+            });
+
+            equal(legend.box.x1, chartBox.x1);
+            equal(legend.box.y1, chartBox.y1);
+            equal(legend.box.x2, chartBox.x2);
+            equal(legend.box.y2, chartBox.y2);
+        });
+
+        test("positions legend container at 0,0 by default", function() {
+            createLegend({
+                position: "custom"
+            });
+            var container = legend.children[0];
+            equal(container.box.x1, 0);
+            equal(container.box.y1, 0);
+        });
+
+        test("positions legend container at specified offset", function() {
+            createLegend({
+                position: "custom",
+                offsetX: 100,
+                offsetY: 50
+            });
+            var container = legend.children[0];
+            equal(container.box.x1, 100);
+            equal(container.box.y1, 50);
+        });
+
+        test("sets inner container direction to vertical by default", function() {
+            createLegend({
+                position: "custom"
+            });
+            var innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, true);
+        });
+
+        test("sets inner container direction to based on orientation option", function() {
+            createLegend({
+                position: "custom",
+                orientation: "horizontal"
+            });
+            var innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, false);
+            createLegend({
+                position: "custom",
+                orientation: "vertical"
+            });
+            innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, true);
+        });
+
+        test("reflows container in a box with the specified width for horizontal orientation", 2, function() {
+            createLegend({
+                position: "custom",
+                orientation: "horizontal",
+                width: 100
+            });
+            legend.container = {
+                children: [{children: [1]}],
+                reflow: function(box) {
+                    this.box = box;
+
+                    equal(box.width(), 100);
+                }
+            };
+            legend.reflow(chartBox);
+        });
+
+        test("reflows container in a box with the specified height for vertical orientation", 2, function() {
+            createLegend({
+                position: "custom",
+                orientation: "vertical",
+                height: 100
+            });
+            legend.container = {
+                children: [{children: [1]}],
+                reflow: function(box) {
+                    this.box = box;
+
+                    equal(box.height(), 100);
+                }
+            };
+            legend.reflow(chartBox);
+        });
+
+        // ------------------------------------------------------------
         var legendBox,
             BORDER_WIDTH = 2,
             BORDER_COLOR = "#f00",

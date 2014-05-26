@@ -1875,8 +1875,6 @@ var __meta__ = {
                 containerBox.y1 = 0;
             }
 
-            container.reflow(containerBox);
-
             if (options.position === CUSTOM) {
                 legend.containerCustomReflow(containerBox);
                 legend.box = targetBox.clone();
