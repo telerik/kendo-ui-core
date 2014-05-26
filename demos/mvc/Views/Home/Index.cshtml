@@ -100,48 +100,48 @@
     <ul>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/html5-dashboard-sample-app">
-                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                 <p>Telerik Northwind Dashboard</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/html5-diagram-sample-app">
-                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                 <p>Sample Diagram Tool</p>
             </a>
         </li>
         <li class="application"><a href="http://demos.telerik.com/kendo-ui/websushi/">
-                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                 <p>Single-Page Application</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/aeroviewr/">
-                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                  <p>Image Gallery</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/bootstrap/">
-                <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                 <p>Kendo UI ♥ Bootstrap</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/sushi/">
-                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                  <p>Sushi Bar</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/cuteness/">
-                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                 <p>Mobile Reddit Viewer</p>
             </a>
         </li>
         <li class="application">
             <a href="http://demos.telerik.com/kendo-ui/financial/stock-history">
-                 <img src="http://demos.telerik.com/kendo-ui/content/shared/styles/kendoui-bootstrap.jpg" class="application-image"/>
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
                  <p>Stock History Dashboard</p>
             </a>
         </li>
@@ -181,11 +181,7 @@
     </div>
 </div>
 
-<style>
-    #overview-widgets {
-        width: 69%;
-    }
-    
+<style>    
     #overview-widgets,
     #applications-and-tools,
     #most-popular, 
@@ -199,16 +195,12 @@
         width: 30%;
     }
 
-    #widgets-all {
-        width: 77%;
-    }  
-
     #most-popular {
-        width: 22%;
         vertical-align: top;
         font-size: 24px;
         line-height: 28px;
         margin-bottom: 34px;
+        margin-top: 5px;
     }
 
     #overview-widgets h2 {
@@ -220,13 +212,23 @@
         font-weight: normal;
     }
 
+    .overview-col {
+        min-width: 180px;
+    }
+
+    #most-popular .overview-col {
+        padding-left: 0;
+    }
+
+    #most-popular h3 {
+        margin-left: 0;
+    }
+
     #widgets-all .overview-col.col-four {
         width: 24%;
         padding: 0;
         display: inline-block;
         min-height: 1px;
-        /*padding-left: 15px;
-        padding-right: 15px;*/
         font-size: 16px;
         vertical-align: top;
         box-sizing: border-box;
@@ -247,13 +249,13 @@
     }
 
     .application {
-        margin: 0 2px 18px;
+        margin: 0 3% 18px 0;
         white-space:normal;
     } 
 
-    .application p{
+    .application p {
         font-size: 13px;
-        line-height: 13px;
-        
+        line-height: 16px;
+        height: 32px;
     }
 </style>

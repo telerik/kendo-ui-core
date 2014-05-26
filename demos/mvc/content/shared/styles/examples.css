@@ -3129,12 +3129,7 @@ a.footer-links:hover {
 
 /* Layout page */
 .application-image {
-    /*width: 116px;
-    height: 116px;*/
-    /*width: 100%;*/
     max-width: 100%;
-    width: 100%;
-    min-width: 116px;
     height: auto;
 }
 
@@ -3142,16 +3137,14 @@ a.footer-links:hover {
     width: auto;
     margin:auto;
     text-align: center;
-    
+    margin-bottom: 3em;
 }
 
 #overview h2 {
     color: #000;
     font: 400 28px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
     text-align: left;
-    padding: 1.725em 0 0.700em 0.833em;
-    /*margin: auto;*/
-    /*text-align: center;*/
+    padding: 1.725em 0 0.700em 0;
 }
 
 #overview-widgets,
@@ -3201,21 +3194,14 @@ a.footer-links:hover {
 }
 
 #overview-widgets ul li {
-        font-size: 13px;
-        color: #0487c4;
-        line-height: 13px;
-        padding: 0.462em 0;
-          /*margin-left: 0.833em;*/ 
+    font-size: 13px;
+    color: #0487c4;
+    line-height: 13px;
+    padding: 0.462em 0;
 }
-
-/*#overview-widgets ul li ul {
-    padding-bottom: 1.615em;
-}*/
-
 
 #overview-widgets h3 {
     color: #000;   
-    /*margin: 0 0 10px;*/
     font: 700 12px/1.2 Arial,Helvetica,sans-serif;
     text-transform: uppercase;  
     margin-left: 0.833em;   
@@ -3228,16 +3214,15 @@ a.footer-links:hover {
     padding: 0.259em 0;
 }
 
-    .application {
-        float: left;
-        width: 33.33%;
-    }
-    h5 {
-        margin: 0;
-        padding: 0;
-    }
+.application {
+    float: left;
+    width: 116px;
+}
 
-
+h5 {
+    margin: 0;
+    padding: 0;
+}
 
 #applications-and-tools {
     width: 38%;
