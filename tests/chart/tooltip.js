@@ -1,8 +1,13 @@
 (function() {
     var dataviz = kendo.dataviz;
     var chartElement;
+    var plotArea;
     var tooltip;
-    var TOLERANCE = 1;
+    var pointMock;
+    var TOLERANCE = 1,
+        RED = "rgb(255,0,0)",
+        GREEN = "rgb(0,255,0)",
+        BLUE = "rgb(0,0,255)";
 
 
     function destroyTooltip() {
@@ -15,12 +20,64 @@
         }
     }
 
+    function createPoint(options) {
+        pointMock = {
+            value: 1,
+            box: new dataviz.Box2D(0, 0, 10, 10),
+            options: {
+                aboveAxis: true,
+                color: RED
+            },
+            series: {
+                name: "series",
+                labels: {
+                    color: GREEN
+                }
+            },
+            category: "category",
+            dataItem: {
+                field: "value"
+            },
+            tooltipAnchor: function() {
+                return new dataviz.Point2D();
+            },
+            owner: {
+                formatPointValue: function(value, tooltipFormat) {
+                    return kendo.dataviz.autoFormat(tooltipFormat, value);
+                }
+            },
+            formatValue: function(format) {
+                var point = this;
+
+                return point.owner.formatPointValue(point.value, format);
+            }
+        };
+
+        kendo.deepExtend(pointMock, options);
+    }
+
+    function createPlotArea() {
+        plotArea = {
+            categoryAxis: {
+                pointCategoryIndex: function() {
+                },
+
+                getCategory: function() {
+                },
+
+                getSlot: function() {
+                    return new dataviz.Box2D();
+                },
+
+                options: {
+                    vertical: false
+                }
+            }
+        };
+    }
+
     (function() {
-        var element,
-            pointMock,
-            RED = "rgb(255,0,0)",
-            GREEN = "rgb(0,255,0)",
-            BLUE = "rgb(0,0,255)";
+        var element;
 
         function createTooltip(options) {
             destroyTooltip();
@@ -32,42 +89,7 @@
 
         function showTooltip() {
             tooltip.show(pointMock);
-        }
-
-        function createPoint(options) {
-            pointMock = {
-                value: 1,
-                box: new dataviz.Box2D(0, 0, 10, 10),
-                options: {
-                    aboveAxis: true,
-                    color: RED
-                },
-                series: {
-                    name: "series",
-                    labels: {
-                        color: GREEN
-                    }
-                },
-                category: "category",
-                dataItem: {
-                    field: "value"
-                },
-                tooltipAnchor: function() {
-                    return new dataviz.Point2D();
-                },
-                owner: {
-                    formatPointValue: function(value, tooltipFormat) {
-                        return kendo.dataviz.autoFormat(tooltipFormat, value);
-                    }
-                },
-                formatValue: function(format) {
-                    var point = this;
-
-                    return point.owner.formatPointValue(point.value, format);
-                }
-            };
-
-            $.extend(pointMock, options);
+            tooltip.move();
         }
 
         // ------------------------------------------------------------
@@ -79,8 +101,14 @@
             teardown: destroyTooltip
         });
 
-        test("attaches to body", function() {
-            ok(element[0].parentNode === document.body);
+        test("does not render element initially", function() {
+            equal($(".k-chart-tooltip").length, 0);
+        });
+
+        test("attaches to body on show", function() {
+            showTooltip();
+
+            equal(tooltip.element.parent("body").length, 1);
         });
 
         test("detaches from body on destroy", function() {
@@ -362,32 +390,10 @@
     })();
 
     (function() {
-        var plotArea,
-            point;
-
-        function createPlotArea() {
-            plotArea = {
-                categoryAxis: {
-                    pointCategoryIndex: function() {
-                    },
-
-                    getCategory: function() {
-                    },
-
-                    getSlot: function() {
-                        return new dataviz.Box2D();
-                    },
-
-                    options: {
-                        vertical: false
-                    }
-                }
-            };
-        }
 
         function createTooltip(options) {
             createPlotArea();
-            createPoint();
+            createPoint({ options: { tooltip: { template: "foo" } } });
 
             destroyTooltip();
 
@@ -395,28 +401,8 @@
             tooltip = new dataviz.SharedTooltip(chartElement, plotArea, options);
         }
 
-        function createPoint(options) {
-            point = {
-                value: 1,
-                box: new dataviz.Box2D(0, 0, 10, 10),
-                options: {
-                    tooltip: {
-                        template: "foo"
-                    }
-                },
-                series: {
-                    name: "series"
-                },
-                tooltipAnchor: function() {
-                    return new dataviz.Point2D();
-                }
-            };
-
-            $.extend(point, options);
-        }
-
-        function show() {
-            tooltip.showAt([point], new dataviz.Point2D(0, 0));
+        function showTooltip() {
+            tooltip.showAt([pointMock], new dataviz.Point2D(0, 0));
         }
 
         // ------------------------------------------------------------
@@ -428,26 +414,84 @@
         });
 
         test("shows shared tooltip", function() {
-            show();
+            showTooltip();
             ok(tooltip.element.html().indexOf("foo") !== -1);
         });
 
         test("shows series name in default template", function() {
-            show();
+            showTooltip();
             equal(tooltip.element.find("td").length, 2);
             ok(tooltip.element.html().indexOf("series") !== -1);
         });
 
         test("shows shared tooltip for series w/o name", function() {
-            point.series.name = null;
-            show();
+            pointMock.series.name = null;
+            showTooltip();
             ok(tooltip.element.html().indexOf("foo") !== -1);
         });
 
         test("doesn't show empty series name in default template", function() {
-            point.series.name = null;
-            show();
+            pointMock.series.name = null;
+            showTooltip();
             equal(tooltip.element.find("td").length, 1);
         });
+
+        test("tooltip anchor accounts for tooltip height", function() {
+            createTooltip({ template: "<div style='width: 100px; height: 20px;' />"});
+            showTooltip();
+            ok(tooltip.anchor.y < -10);
+        });
+
     })();
+
+    (function() {
+        var element;
+
+        function createTooltip(options) {
+            createPlotArea();
+            createPoint();
+
+            destroyTooltip();
+
+            chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
+            tooltip = new dataviz.SparklineSharedTooltip(chartElement, plotArea, options);
+        }
+
+        function showTooltip() {
+            tooltip.showAt([pointMock], new dataviz.Point2D(0, 0));
+            tooltip.move();
+        }
+
+        // ------------------------------------------------------------
+        module("Sparkline Shared Tooltip", {
+            setup: function() {
+                createTooltip();
+            },
+            teardown: destroyTooltip
+        });
+
+        test("does not render element initially", function() {
+            equal($(".k-chart-tooltip").length, 0);
+        });
+
+        test("attaches to body on show", function() {
+            showTooltip();
+
+            equal(tooltip.element.parent("body").length, 1);
+        });
+
+        test("hides element on hide", function() {
+            showTooltip();
+            tooltip.hide();
+
+            equal(tooltip.element.css("display"), "none");
+        });
+
+        test("detaches from body on destroy", function() {
+            tooltip.destroy();
+
+            equal($(".k-chart-tooltip").length, 0);
+        });
+    })();
+
 })();

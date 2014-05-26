@@ -9563,13 +9563,11 @@ var __meta__ = {
             }
 
             offset = tooltip._offset();
-
-            tooltip.element.appendTo(document.body);
-
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
             }
 
+            tooltip._ensureElement(document.body);
             element
                 .stop(true, true)
                 .show()
@@ -9595,7 +9593,7 @@ var __meta__ = {
 
         _offset: function() {
             var tooltip = this,
-                element = tooltip.element,
+                size = tooltip._measure(),
                 anchor = tooltip.anchor,
                 chartPadding = tooltip._padding(),
                 chartOffset = tooltip.chartElement.offset(),
@@ -9606,8 +9604,8 @@ var __meta__ = {
                 scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0,
                 scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            top += tooltip._fit(top - scrollTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._fit(left - scrollLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+            top += tooltip._fit(top - scrollTop, size.height, viewport.outerHeight() / zoomLevel);
+            left += tooltip._fit(left - scrollLeft, size.width, viewport.outerWidth() / zoomLevel);
 
             return {
                 top: top,
@@ -9654,14 +9652,30 @@ var __meta__ = {
             var tooltip = this;
 
             clearTimeout(tooltip.showTimeout);
+            tooltip._hideElement();
 
             if (tooltip.visible) {
-                tooltip._hideElement();
-
                 tooltip.point = null;
                 tooltip.visible = false;
                 tooltip.index = null;
             }
+        },
+
+        _measure: function() {
+            this._ensureElement();
+
+            var size = {
+                width: this.element.outerWidth(),
+                height: this.element.outerHeight()
+            };
+
+            return size;
+        },
+
+        _ensureElement: function() {
+            this.element
+                .appendTo(document.body)
+                .bind("mouseleave", this._mouseleave);
         },
 
         _hideElement: function() {
@@ -9704,10 +9718,9 @@ var __meta__ = {
         },
 
         _pointAnchor: function(point) {
-            var tooltip = this,
-                element = tooltip.element;
+            var size = this._measure();
 
-            return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            return point.tooltipAnchor(size.width, size.height);
         },
 
         _fit: function(offset, size, viewPortSize) {
@@ -9804,7 +9817,8 @@ var __meta__ = {
                 plotArea = tooltip.plotArea,
                 axis = plotArea.categoryAxis,
                 anchor,
-                hCenter = point.y - tooltip.element.height() / 2;
+                size = this._measure(),
+                hCenter = point.y - size.height / 2;
 
             if (axis.options.vertical) {
                 anchor = Point2D(point.x, hCenter);
@@ -10013,7 +10027,7 @@ var __meta__ = {
 
             tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
-            tooltip.anchor = tooltip.getAnchor(element.outerWidth(), element.outerHeight());
+            tooltip.anchor = tooltip.getAnchor();
 
             tooltip.move();
         },
@@ -10023,6 +10037,7 @@ var __meta__ = {
                 element = tooltip.element,
                 offset = tooltip._offset();
 
+            tooltip._ensureElement();
             element.css({ top: offset.top, left: offset.left }).show();
         },
 
@@ -10051,7 +10066,7 @@ var __meta__ = {
             return content;
         },
 
-        getAnchor: function(width, height) {
+        getAnchor: function() {
             var tooltip = this,
                 options = tooltip.options,
                 position = options.position,
@@ -10059,14 +10074,15 @@ var __meta__ = {
                 points = tooltip.crosshair.points,
                 fPoint = points[0],
                 sPoint = points[1],
-                halfWidth = width / 2,
-                halfHeight = height / 2,
+                size = this._measure(),
+                halfWidth = size.width / 2,
+                halfHeight = size.height / 2,
                 padding = options.padding,
                 x, y;
 
             if (vertical) {
                 if (position === LEFT) {
-                    x = fPoint.x - width - padding;
+                    x = fPoint.x - size.width - padding;
                     y = fPoint.y - halfHeight;
                 } else {
                     x = sPoint.x + padding;
@@ -10078,7 +10094,7 @@ var __meta__ = {
                     y = sPoint.y + padding;
                 } else {
                     x = fPoint.x - halfWidth;
-                    y = fPoint.y - height - padding;
+                    y = fPoint.y - size.height - padding;
                 }
             }
 
@@ -10091,8 +10107,8 @@ var __meta__ = {
         },
 
         destroy: function() {
-            this.element.remove();
-            this.element = null;
+            BaseTooltip.fn.destroy.call(this);
+
             this.point = null;
         }
     });
