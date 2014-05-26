@@ -23,7 +23,7 @@
         <div class="header">
             Diagram
             <a href="">Download Source</a>
-            <a href="">About</a>
+            <a onclick="about.center().open();">About</a>
         </div>
         <ul></ul>
     </div>
@@ -189,6 +189,35 @@
         <input id="diagramZoom" />
         <input type="text" id="diagramZoomIndicator" class="k-textbox" value="100" style="width: 40px; vertical-align: middle;" />
     </div>
+
+    <div class="about">
+        <h2>HTML5 Diagram Sample Application by Telerik</h2>
+
+        <p>The Diagramming Tool app was built with Telerik HTML5 Kendo UI widgets and their server-side wrappers for ASP.NET MVC, PHP and JSP. Telerik UI components take care of the common functionality of your application, while leaving you with more time to work on its business logic.</p>
+        <p>The app demonstrates the Diagram widget functionality and its integration with numerous other Telerik components. The source code is available so you can use it as a base for implementing your custom scenario.</p>
+        <p>The sample app enables users to modify, add, remove and connect shapes. Once they are happy with the diagram they have created, they can save it to a file and load it back later.</p>
+        <p>Make sure you try the various built-in layouts of the Diagram control showcased in the sample.</p>
+        <h3>Featured Kendo UI Widgets</h3>
+        <ul>
+            <li><a href="">Button</a></li>
+            <li><a href="">ColorPicker</a></li>
+            <li><a href="">Diagram</a></li>
+            <li><a href="">DropDownList</a></li>
+        </ul>
+        <ul>
+            <li><a href="">Menu</a></li>
+            <li><a href="">NumericTextBox</a></li>
+            <li><a href="">PanelBar</a></li>
+            <li><a href="">Splitter</a></li>
+        </ul>
+        <ul>
+            <li><a href="">Slider</a></li>
+            <li><a href="">Toolbar</a></li>
+            <li><a href="">Upload</a></li>
+        </ul>
+        <br/><br/>
+    </div>
+
     <script>
         $(function() {
             var Shape = kendo.dataviz.diagram.Shape,
@@ -510,6 +539,13 @@
             });
 
             $(".numeric").kendoNumericTextBox();
+
+            window.about = $(".about").kendoWindow({
+                visible: false,
+                width: 800,
+                resizable: false,
+                title: "About the Sample Application"
+            }).getKendoWindow();
 
             function updateShapeProperties(shape) {
                 $("#shapeBackgroundColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.background));

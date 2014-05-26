@@ -280,3 +280,19 @@ body
 {
     text-decoration: underline;
 }
+
+.about ul
+{
+    display: inline-block;
+    vertical-align: top;
+    list-style: none;
+    padding-left: 95px;
+    margin: 0;
+    width: 160px;
+}
+
+.about h2,
+.about h3
+{
+    text-align: center;
+}
