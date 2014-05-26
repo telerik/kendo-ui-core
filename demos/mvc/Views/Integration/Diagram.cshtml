@@ -96,7 +96,7 @@
                         <ul>
                             <li>
                                 <span>Background Color:</span>
-                                <input id="canvasBackgroundColorPicker" />
+                                <input id="canvasBackgroundColorPicker" class="" />
                             </li>
                             <li>
                                 <span>Layout:</span>
@@ -222,7 +222,8 @@
         $(function() {
             var Shape = kendo.dataviz.diagram.Shape,
                 Connection = kendo.dataviz.diagram.Connection,
-                Rect = kendo.dataviz.diagram.Rect;
+                Rect = kendo.dataviz.diagram.Rect,
+                selected;
 
             $("#canvasProperties").on("change", canvasPropertiesChange);
 
@@ -289,7 +290,7 @@
             $("#shapeProperties").on("change", shapePropertiesChange);
 
             function shapePropertiesChange() {
-                var elements = diagram.select(),
+                var elements = selected || [],
                     options = {
                         background: $("#shapeBackgroundColorPicker").getKendoColorPicker().value(),
                         stroke: {
@@ -318,13 +319,13 @@
             $("#connectionProperties").on("change", connectionPropertiesChange);
 
             function connectionPropertiesChange() {
-                var elements = diagram.select(),
+                var elements = selected || [],
                     options = {
                         startCap: $("#connectionStartCap").getKendoDropDownList().value(),
                         endCap: $("#connectionEndCap").getKendoDropDownList().value()
                     },
                     element;
-
+                
                 for (i = 0; i < elements.length; i++) {
                     element = elements[i];
                     if (element instanceof Connection) {
@@ -381,7 +382,6 @@
 
             var actions = {
                 blank: reset,
-                
                 open: load,
                 save: save,
                 undo: undo,
@@ -424,6 +424,7 @@
 
             function diagramSelect(e) {
                 if (e.selected.length) {
+                    selected = e.selected;
                     var element = e.selected[0];
                     if (element instanceof Shape) {
                         updateShapeProperties(element.options);
