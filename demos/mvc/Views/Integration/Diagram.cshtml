@@ -297,14 +297,18 @@
                 }
             }
 
-            $("#alignConfiguration .configurationButtons").on("click", function(e) {
-                var value = $(this).data("data");
-                diagram.alignShapes(value);
+            $("#alignConfiguration .configurationButtons").kendoButton({
+                click: function(e) {
+                    var value = this.element.data("data");
+                    diagram.alignShapes(value);
+                }
             });
 
-            $("#arrangeConfiguration .configurationButtons").on("click", function(e) {
-                var methodName = $(this).find("span").attr("class");
-                diagram[methodName]();
+            $("#arrangeConfiguration .configurationButtons").kendoButton({
+                click: function (e) {
+                    var methodName = this.element.find("span").attr("class");
+                    diagram[methodName]();
+                }
             });
 
             $("#diagramZoomIndicator").change(function() {
