@@ -364,16 +364,16 @@
 
             $("#menu").kendoMenu({
                 dataSource: [
-                    { text: "New", spriteCssClass: "brazilFlag", items: [
-                        { text: "Blank", spriteCssClass: "" }
+                    { text: "New", spriteCssClass: "new-item", items: [
+                        { text: "Blank", spriteCssClass: "blank-item" }
                         ]
                     },
-                    { text: "Open", spriteCssClass: "" },
-                    { text: "Save", spriteCssClass: "" },
-                    { text: "Undo", spriteCssClass: "" },
-                    { text: "Redo", spriteCssClass: "" },
-                    { text: "Copy", spriteCssClass: "" },
-                    { text: "Paste", spriteCssClass: "" }
+                    { text: "Open", spriteCssClass: "open-item" },
+                    { text: "Save", spriteCssClass: "save-item" },
+                    { text: "Undo", spriteCssClass: "undo-item" },
+                    { text: "Redo", spriteCssClass: "redo-item" },
+                    { text: "Copy", spriteCssClass: "copy-item" },
+                    { text: "Paste", spriteCssClass: "paste-item" }
                 ],
                 select: onMenuSelect
             });
