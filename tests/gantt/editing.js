@@ -63,6 +63,14 @@
         ok(targetCell.hasClass("k-edit-cell"));
     });
 
+    test("applies css class to editable cell's parent on dblclick", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        doubleTap(targetCell);
+
+        ok(targetCell.parent("tr").hasClass("k-edit-row"));
+    });
+
     test("attaches model copy to the editable cell data", function() {
         var targetCell = ganttList.content.find("td").eq(0);
 
@@ -215,6 +223,15 @@
         ganttList._closeCell();
 
         ok(!targetCell.hasClass("k-edit-cell"));
+    });
+
+    test("removes cell's parent css class after cell exists edit mode", function() {
+        var targetCell = ganttList.content.find("td").eq(0);
+
+        doubleTap(targetCell);
+        ganttList._closeCell();
+
+        ok(!targetCell.parent("tr").hasClass("k-edit-row"));
     });
 
     test("ESC keydown closes edited cell", function() {

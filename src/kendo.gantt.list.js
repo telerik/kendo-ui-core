@@ -485,16 +485,19 @@ var __meta__ = {
                 };
             }
 
-            this.editable = cell.addClass("k-edit-cell")
-                                .kendoEditable({
-                                    fields: {
-                                        field: column.field,
-                                        format: column.format,
-                                        editor: column.editor || editor
-                                    },
-                                    model: modelCopy,
-                                    clearContainer: false
-                                }).data("kendoEditable");
+            this.editable = cell
+                .addClass("k-edit-cell")
+                .parent("tr").addClass("k-edit-row")
+                .end()
+                .kendoEditable({
+                    fields: {
+                        field: column.field,
+                        format: column.format,
+                        editor: column.editor || editor
+                    },
+                    model: modelCopy,
+                    clearContainer: false
+                }).data("kendoEditable");
 
             if (validation && validation.dateCompare &&
                 isFunction(validation.dateCompare) && validation.message) {
@@ -519,6 +522,8 @@ var __meta__ = {
             cell.empty()
                 .removeData("modelCopy")
                 .removeClass("k-edit-cell")
+                .parent("tr").removeClass("k-edit-row")
+                .end()
                 .append(this._editableContent);
 
             this.editable.destroy();
@@ -595,7 +600,7 @@ var __meta__ = {
                 .kendoDraggable({
                     distance: 10,
                     group: "listGroup",
-                    filter: "tr[data-uid]",
+                    filter: "tr[data-uid]:not('.k-edit-row')",
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue"/>')
                                 .css({
