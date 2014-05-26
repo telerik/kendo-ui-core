@@ -14,21 +14,21 @@
         }
     });
 
-    test("createDependency called on timeline dependencyDragEnd", function() {
+    test("_createDependency called on timeline dependencyDragEnd", function() {
         setupGantt();
 
-        stub(gantt, "createDependency");
+        stub(gantt, "_createDependency");
 
         timeline.trigger("dependencyDragEnd", { type: 0, predecessor: task1, successor: task2 });
 
-        ok(gantt.calls("createDependency"));
+        ok(gantt.calls("_createDependency"));
     });
 
-    test("createDependency called with correct parameter on timeline dependencyDragEnd", function() {
+    test("_createDependency called with correct parameter on timeline dependencyDragEnd", function() {
         setupGantt();
 
         stub(gantt, {
-            createDependency: function(dependency) {
+            _createDependency: function(dependency) {
                 equal(dependency.type, 0);
                 equal(dependency.predecessorId, task1.id);
                 equal(dependency.successorId, task2.id);
@@ -37,7 +37,7 @@
 
         timeline.trigger("dependencyDragEnd", { type: 0, predecessor: task1, successor: task2 });
 
-        ok(gantt.calls("createDependency"));
+        ok(gantt.calls("_createDependency"));
     });
 
 

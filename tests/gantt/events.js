@@ -120,7 +120,7 @@
             equal(e.values, info);
         });
 
-        gantt.updateTask(task, info);
+        gantt._updateTask(task, info);
     });
 
     test("prevent save event does not update data source", function() {
@@ -132,7 +132,7 @@
         });
 
         stub(gantt.dataSource, "update");
-        gantt.updateTask(task, info);
+        gantt._updateTask(task, info);
 
         ok(!gantt.dataSource.calls("update"));
     });

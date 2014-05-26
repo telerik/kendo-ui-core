@@ -47,35 +47,35 @@
         timeline.trigger("moveEnd", { task: task, start: new Date("2014/04/15 16:00") });
     });
 
-    test("updateTask called on timeline moveEnd", function() {
+    test("_updateTask called on timeline moveEnd", function() {
         setupGantt();
 
-        stub(gantt, "updateTask");
+        stub(gantt, "_updateTask");
 
         timeline.trigger("moveEnd", { task: task, start: new Date("2014/04/15 16:00") });
 
-        ok(gantt.calls("updateTask"));
+        ok(gantt.calls("_updateTask"));
     });
 
-    test("updateTask not called when preventDefault is called on moveEnd", function() {
+    test("_updateTask not called when preventDefault is called on moveEnd", function() {
         setupGantt();
 
         gantt.bind("moveEnd", function(e) {
             e.preventDefault();
         });
 
-        stub(gantt, "updateTask");
+        stub(gantt, "_updateTask");
 
         timeline.trigger("moveEnd", { task: task, start: new Date("2014/04/15 16:00") });
 
-        ok(!gantt.calls("updateTask"));
+        ok(!gantt.calls("_updateTask"));
     });
 
-    test("updateTask called with correct parameters on timeline moveEnd", 3, function() {
+    test("_updateTask called with correct parameters on timeline moveEnd", 3, function() {
         setupGantt();
 
         stub(gantt, {
-            updateTask: function(taskToUpdate, updateInfo) {
+            _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
                 equal(kendo.toString(updateInfo.start, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
                 equal(kendo.toString(updateInfo.end, "yyyy/MM/dd HH:mm"), "2014/04/15 10:00");

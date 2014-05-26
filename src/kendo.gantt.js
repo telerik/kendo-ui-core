@@ -945,7 +945,7 @@ var __meta__ = {
                     }
                 })
                 .bind("update", function(e) {
-                    that.updateTask(e.task, e.updateInfo);
+                    that._updateTask(e.task, e.updateInfo);
                 })
                 .bind("change", function() {
                     that.trigger("change");
@@ -998,7 +998,7 @@ var __meta__ = {
                     var end = new Date(start.getTime() + task.duration());
                     
                     if (!that.trigger("moveEnd", { task: task, start: start, end: end })) {
-                        that.updateTask(that.dataSource.getByUid(task.uid), {
+                        that._updateTask(that.dataSource.getByUid(task.uid), {
                             start: start,
                             end: end
                         });
@@ -1025,11 +1025,11 @@ var __meta__ = {
                     }
                     
                     if (!that.trigger("resizeEnd", { task: task, date: e.date })) {
-                        that.updateTask(that.dataSource.getByUid(task.uid), updateInfo);
+                        that._updateTask(that.dataSource.getByUid(task.uid), updateInfo);
                     }
                 })
                 .bind("percentResizeEnd", function(e) {
-                    that.updateTask(that.dataSource.getByUid(e.task.uid), { percentComplete: e.percentComplete });
+                    that._updateTask(that.dataSource.getByUid(e.task.uid), { percentComplete: e.percentComplete });
                 })
                 .bind("dependencyDragEnd", function(e) {
                     var dependency = new GanttDependency({
@@ -1038,7 +1038,7 @@ var __meta__ = {
                         successorId: e.successor.id
                     });
 
-                    that.createDependency(dependency);
+                    that._createDependency(dependency);
                 })
                 .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");
@@ -1114,7 +1114,7 @@ var __meta__ = {
             }
         },
 
-        updateTask: function(task, updateInfo) {
+        _updateTask: function(task, updateInfo) {
             if (!this.trigger("save", { task: task, values: updateInfo })) {
                 this._preventRefresh = true;
 
@@ -1136,7 +1136,7 @@ var __meta__ = {
             }
         },
 
-        createDependency: function(dependency) {
+        _createDependency: function(dependency) {
             this._preventDependencyRefresh = true;
 
             this.dependencies.add(dependency);

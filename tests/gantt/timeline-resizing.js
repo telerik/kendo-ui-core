@@ -47,35 +47,35 @@
         timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
     });
 
-    test("updateTask called on timeline resizeEnd", function() {
+    test("_updateTask called on timeline resizeEnd", function() {
         setupGantt();
 
-        stub(gantt, "updateTask");
+        stub(gantt, "_updateTask");
 
         timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
 
-        ok(gantt.calls("updateTask"));
+        ok(gantt.calls("_updateTask"));
     });
 
-    test("updateTask not called when preventDefault is called on resizeEnd", function() {
+    test("_updateTask not called when preventDefault is called on resizeEnd", function() {
         setupGantt();
 
         gantt.bind("resizeEnd", function(e) {
             e.preventDefault();
         });
 
-        stub(gantt, "updateTask");
+        stub(gantt, "_updateTask");
 
         timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
 
-        ok(!gantt.calls("updateTask"));
+        ok(!gantt.calls("_updateTask"));
     });
 
-    test("updateTask called with correct parameter on timeline resizeEnd from start", 3, function() {
+    test("_updateTask called with correct parameter on timeline resizeEnd from start", 3, function() {
         setupGantt();
 
         stub(gantt, {
-            updateTask: function(taskToUpdate, updateInfo) {
+            _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
                 equal(kendo.toString(updateInfo.start, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
                 equal(updateInfo.end, undefined);
@@ -85,11 +85,11 @@
         timeline.trigger("resizeEnd", { task: task, resizeStart: true, date: new Date("2014/04/15 08:00") });
     });
 
-    test("updateTask called with correct parameter on timeline resizeEnd from end", 3, function() {
+    test("_updateTask called with correct parameter on timeline resizeEnd from end", 3, function() {
         setupGantt();
 
         stub(gantt, {
-            updateTask: function(taskToUpdate, updateInfo) {
+            _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
                 equal(updateInfo.start, undefined);
                 equal(kendo.toString(updateInfo.end, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");

@@ -15,21 +15,21 @@
         }
     });
 
-    test("updateTask called on timeline percentResizeEnd", function() {
+    test("_updateTask called on timeline percentResizeEnd", function() {
         setupGantt();
 
-        stub(gantt, "updateTask");
+        stub(gantt, "_updateTask");
 
         timeline.trigger("percentResizeEnd", { task: task, percentComplete: 70 });
 
-        ok(gantt.calls("updateTask"));
+        ok(gantt.calls("_updateTask"));
     });
 
-    test("updateTask called with correct parameter on timeline percentResizeEnd", 2, function() {
+    test("_updateTask called with correct parameter on timeline percentResizeEnd", 2, function() {
         setupGantt();
 
         stub(gantt, {
-            updateTask: function(taskToUpdate, updateInfo) {
+            _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
                 equal(updateInfo.percentComplete, 70);
             }
