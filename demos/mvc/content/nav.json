@@ -5902,6 +5902,24 @@
     "pro": "true",
     "api": "dataviz/chart",
     "spriteCssClass": "chartIcon",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
     "items": [
       {
         "text": "Methods",

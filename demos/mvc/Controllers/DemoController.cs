@@ -83,19 +83,21 @@ namespace Kendo.Controllers
                 }
             }
 
-            if (ViewBag.CurrentWidget.Documentation.ContainsKey(product))
+            NavigationWidget currentWidget = ViewBag.CurrentWidget;
+
+            if (currentWidget.Documentation != null && currentWidget.Documentation.ContainsKey(product))
             {
-                ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/" + ViewBag.CurrentWidget.Documentation[product];
+                ViewBag.Documentation = "http://docs.telerik.com/kendo-ui/" + currentWidget.Documentation[product];
             }
 
-            if (ViewBag.CurrentWidget.Forum.ContainsKey(product))
+            if (currentWidget.Forum != null && currentWidget.Forum.ContainsKey(product))
             {
-                ViewBag.Forum = "http://www.telerik.com/forums/" + ViewBag.CurrentWidget.Forum[product];
+                ViewBag.Forum = "http://www.telerik.com/forums/" + currentWidget.Forum[product];
             }
 
-            if (ViewBag.CurrentWidget.CodeLibrary.ContainsKey(product))
+            if (currentWidget.CodeLibrary != null && currentWidget.CodeLibrary.ContainsKey(product))
             {
-                ViewBag.CodeLibrary = "http://www.telerik.com/support/code-library/" + ViewBag.CurrentWidget.CodeLibrary[product];
+                ViewBag.CodeLibrary = "http://www.telerik.com/support/code-library/" + currentWidget.CodeLibrary[product];
             }
 
             return View(

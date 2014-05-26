@@ -176,6 +176,8 @@
         </div>
     }
     <div id="resources-technologies" class="box">
+        @if (ViewBag.Forum != null || ViewBag.Documentation != null || ViewBag.CodeLibrary != null)
+        {
         <div id="learning-resources" class="box-col">
             <h4>Support & learning resources</h4>
             <ul>
@@ -193,6 +195,7 @@
                 }
             </ul>
         </div>
+        }
         <div id="technologies" class="box-col">
             @{
                 NavigationExample currentExample = ViewBag.CurrentExample;
