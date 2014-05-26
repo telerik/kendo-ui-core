@@ -81,7 +81,7 @@ body
     left: 0;
     right: 0;
     height: auto;
-    top: 32px;
+    top: 33px;
     bottom: 35px;
     border-width: 0 0 1px;
 }
@@ -98,6 +98,7 @@ body
 
 #diagram
 {
+    border: 0;
     width: 100%;
 }
 
@@ -123,7 +124,6 @@ body
 
 .k-panelbar .k-content
 {
-    background: #f0f0f0;
     padding-bottom: 5px;
 }
 
@@ -148,4 +148,56 @@ body
 .k-panelbar .k-content .k-selected-color
 {
     width: 100%;
+}
+
+.k-panelbar
+{
+    border-width: 0;
+}
+
+.k-panelbar,
+.k-panelbar .k-panel,
+.k-panelbar li.k-item
+{
+    background: transparent;
+}
+
+.k-panelbar .k-panel,
+.k-panelbar .k-content
+{
+    background: #f0f0f0;
+}
+
+#shapesPanelBar .k-panel .k-item
+{
+    display: inline-block;
+    width: 50%;
+}
+
+#shapesPanelBar .k-panel .k-state-hover,
+#shapesPanelBar .k-panel .k-state-selected
+{
+    color: inherit;
+    background: #fff;
+}
+
+.shapeItem
+{
+    margin-top: 10px;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url("../images/diagram-toolbox.png");
+    background-size: auto 100%;
+}
+
+#shapesPanelBar span
+{
+    text-align: center;
+    display: block;
+}
+
+#shapesPanelBar .shapeItem
+{
+    display: inline-block;
 }
