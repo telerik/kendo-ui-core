@@ -693,12 +693,13 @@ div.submenu-box ol {
 
 .themechooser .tc-activator
 {
+    outline: none;
+    cursor: pointer;
     color: #2d3e50;
     display: inline-block;
     padding: 0 20px;
     line-height: 4em;
     font-size: 1.1667em;
-    text-decoration: none;
 }
 
 .themechooser .tc-activator:hover
@@ -744,6 +745,15 @@ div.submenu-box ol {
     float: left;
     width: 160px;
     margin-right: 15px;
+    border-width: 0;
+    background: none;
+}
+
+#widget-themes {
+    -webkit-columns: 3;
+    -moz-columns: 3;
+    columns: 3;
+    width: 480px;
 }
 
 .tc-column h4+ul
@@ -751,10 +761,10 @@ div.submenu-box ol {
     margin-left: -10px;
 }
 
-.tc-theme,
-.tc-size
+.tc-item
 {
     display: block;
+    cursor: pointer;
     line-height: 26px;
     color: #2d3e50;
     padding: 0 10px;
@@ -763,8 +773,16 @@ div.submenu-box ol {
     transition-timing-function: ease;
 }
 
-.tc-theme:hover,
-.tc-size:hover
+.k-ie7 .tc-item,
+.k-ie8 .tc-item,
+.k-ie9 .tc-item
+{
+    display: inline-block;
+    width: 132px;
+}
+
+
+.tc-item:hover
 {
     text-decoration: none;
     background-color: #e2e4e7;
@@ -780,10 +798,12 @@ div.submenu-box ol {
     color: #555;
 }
 
-.tc-theme-list .tc-active
+.tc-theme-list .k-state-selected
 {
     color: #000;
     background-color: #cad0d6;
+    background-image: none;
+    box-shadow: none;
 }
 
 .tc-color

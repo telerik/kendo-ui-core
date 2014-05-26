@@ -1,59 +1,49 @@
-<div class="themechooser">
-    <a href="#" class="tc-activator"><span class="tc-current">Silver</span></a>
-    <div class="tc-theme-list"></div>
+<div class="themechooser" data-role="details">
+    <span class="tc-activator"><span class="tc-current" data-bind="text: selectedTheme"></span></span>
+
+    <div class="tc-theme-list">
+        <div class="tc-column">
+            <h4>Themes</h4>
+            <ul id="widget-themes"
+                data-role="themechooser"
+                data-template="theme-item-template"
+                data-bind="
+                    source: themes,
+                    value: selectedTheme,
+                    events: { change: updateTheme }
+                "></ul>
+        </div>
+
+        <div class="tc-column">
+            <h4>Widget size</h4>
+            <ul data-role="themechooser"
+                data-template="size-item-template"
+                data-value="Standard"
+                data-bind="
+                    source: sizes,
+                    value: selectedSize,
+                    events: { change: updateCommon }
+                "></ul>
+        </div>
+    </div>
 </div>
 
-<script id="themechooser-list-template" type="text/x-kendo-template">
-    <div class="tc-column">
-        <h4>Themes</h4>
-        # var columnSize = 4; #
-        # for (var i = 0; i < themes.length; i++) { #
-            # if (i % columnSize == 0) { #
-            <ul>
-            # } #
-            # var theme = themes[i]; #
-            # var colors = theme.colors; #
-            <li>
-                <a href="\#" class="tc-theme">
-                    # for (var c = 0; c < colors.length; c++) { #
-                        <span class="tc-color" style="background-color: #= colors[c] #"></span>
-                    # } #
-                    <span class="tc-name">#: theme.name #</span>
-                </a>
-            </li>
-            # if ((i % columnSize == columnSize - 1) || (i == themes.length - 1)) { #
-            </ul>
-            # } #
+<script id="theme-item-template" type="text/x-kendo-template">
+    <li class="tc-item">
+        # for (var i = 0; i < colors.length; i++) { #
+            <span class="tc-color" style="background-color: #= colors[i] #"></span>
         # } #
-        </ul>
-    </div>
-
-    <div class="tc-column">
-        <h4>Widget size</h4>
-        <ul>
-        # for (var i = 0; i < sizes.length; i++) { #
-        # var size = sizes[i]; #
-            <li>
-                <a href="\#" class="tc-size">
-                    <span class="tc-name">#: size.name #</span>
-                    # if ('relativity' in size) { #
-                        <span class="tc-relativity">
-                            (#: size.relativity #)
-                        </span>
-                    # } #
-                </a>
-            </li>
-        # } #
-        </ul>
-    </div>
+        <span class="tc-name">#: name #</span>
+    </li>
 </script>
 
-<script>
-    $(document).ready(function() {
-        $(".themechooser").kendoThemeChooser({
-            activator: ".tc-activator",
-            container: ".tc-theme-list",
-            template: $("#themechooser-list-template").html()
-        });
-    });
+<script id="size-item-template" type="text/x-kendo-template">
+    <li class="tc-item">
+        <span class="tc-name">#: name #</span>
+        # if ('relativity' in data) { #
+            <span class="tc-relativity">
+                (#: relativity #)
+            </span>
+        # } #
+    </li>
 </script>

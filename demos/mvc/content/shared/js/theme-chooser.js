@@ -1,6 +1,5 @@
 (function() {
-    var ThemeChooser,
-        doc = document,
+    var doc = document,
         extend = $.extend,
         proxy = $.proxy,
         kendo = window.kendo,
@@ -17,106 +16,105 @@
         skinRegex = /kendo\.[\w\-]+(\.min)?\.(less|css)/i,
         dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi;
 
-    ThemeChooser = kendo.ui.Widget.extend({
+    var Details = kendo.ui.Widget.extend({
         init: function(element, options) {
             kendo.ui.Widget.fn.init.call(this, element, options);
 
-            var element = this.element;
-            var options = this.options;
-            var template = options.template;
+            this._summary = this.element.find(".tc-activator")
+                .on("click", proxy(this.toggle, this));
 
-            if (typeof template == "string") {
-                template = kendo.template(template);
-            }
+            this._container = kendo.wrap(this._summary.next(), true);
 
-            this._container = element.find(options.container)
-                .html(template(options))
-                .on("click", ".tc-theme", proxy(this._changeTheme, this))
-                .on("click", ".tc-size", proxy(this._changeSize, this));
-
-            this._activator = element.find(options.activator)
-                .on("click", proxy(this._toggle, this));
-
-            this.currentTheme = "Silver";
-            this.currentSize = "Standard";
-
-            this._updateState();
+            this._container.css("display", "none");
         },
-        changeTheme: function(themeName) {
-            this.currentTheme = themeName;
-
-            this.element.find(".tc-current").text(themeName);
-
-            this._updateState();
-
-            ThemeChooser.changeTheme(this._idFor(themeName), true);
+        options: {
+            name: "Details"
         },
-        _change: function (elementClass, value) {
-            this._container.find(elementClass)
-                .removeClass("tc-active")
-                .filter(function() {
-                    return $(this).find(".tc-name").text() == value;
-                })
-                .addClass("tc-active");
-        },
-        _updateState: function() {
-            this._change(".tc-size", this.currentSize);
-            this._change(".tc-theme", this.currentTheme);
-        },
-        _toggle: function(e) {
-            e.preventDefault();
-            this.toggle();
-        },
-        _idFor: function(theme) {
-            return theme.toLowerCase().replace(/\s/, "");
-        },
-        _changeTheme: function(e) {
-            e.preventDefault();
-
-            var newTheme = $(e.currentTarget).find(".tc-name").text();
-
-            this.changeTheme(newTheme);
-        },
-        _changeSize: function(e) {
-            e.preventDefault();
-
-            this.currentSize = $(e.currentTarget).find(".tc-name").text();
-
-            this._updateState();
-
-            var commonName = this.currentSize == "Standard" ? "common" : "common-bootstrap";
-
-            ThemeChooser.changeCommon(commonName, true);
-        },
-        toggle: function(e) {
+        toggle: function() {
             var options = this.options;
             var show = this._container.is(":visible");
-            var animation = kendo.fx(kendo.wrap(this._container, true)).expand("vertical");
+            var animation = kendo.fx(this._container).expand("vertical");
 
             animation.stop()[show ? "reverse" : "play"]();
 
-            this._activator.toggleClass("tc-active", !show);
+            this._summary.toggleClass("tc-active", !show);
+        }
+    });
+
+    kendo.ui.plugin(Details);
+
+    var ThemeChooser = kendo.ui.ListView.extend({
+        init: function(element, options) {
+            kendo.ui.ListView.fn.init.call(this, element, options);
+
+            this.bind("change", this._changeCss);
         },
         options: {
             name: "ThemeChooser",
-            themes: [
-                { name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
-                { name: "Blue Opal", colors: [ "#076186", "#7ed3f6", "#94c0d2" ]  },
-                { name: "Bootstrap", colors: [ "#3276b1", "#67afe9", "#fff" ]  },
-                { name: "Silver", colors: [ "#298bc8", "#515967", "#eaeaec" ]  },
-                { name: "Uniform", colors: [ "#666", "#ccc", "#fff" ]  },
-                { name: "Metro", colors: [ "#8ebc00", "#787878", "#fff" ]  },
-                { name: "Black", colors: [ "#0167cc", "#4698e9", "#272727" ]  },
-                { name: "Metro Black", colors: [ "#00aba9", "#0e0e0e", "#565656" ]  },
-                { name: "High Contrast", colors: [ "#b11e9c", "#880275", "#1b141a" ]  },
-                { name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
-                { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
-            ],
-            sizes: [
-                { name: "Standard" },
-                { name: "Bootstrap", relativity: "larger" }
-            ]
+            template: "",
+            selectable: true,
+            value: ""
+        },
+        dataItem: function(element) {
+            var uid = $(element).closest("[data-uid]").attr("data-uid");
+            return this.dataSource.getByUid(uid);
+        },
+        _changeCss: function(e) {
+            // make the item available to event listeners
+            e.item = this.dataItem(this.select());
+        },
+        value: function(value) {
+            if (!arguments.length) {
+                var dataItem = this.dataItem(this.select());
+                return dataItem.name;
+            }
+
+            var data = this.dataSource.data();
+
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].name == value) {
+                    this.select(this.element.find("[data-uid='" + data[i].uid + "']"));
+                    break;
+                }
+            }
         }
+    });
+
+    var ThemeChooserViewModel = kendo.observable({
+        themes: [
+            { name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
+            { name: "Blue Opal", colors: [ "#076186", "#7ed3f6", "#94c0d2" ]  },
+            { name: "Bootstrap", colors: [ "#3276b1", "#67afe9", "#fff" ]  },
+            { name: "Silver", colors: [ "#298bc8", "#515967", "#eaeaec" ]  },
+            { name: "Uniform", colors: [ "#666", "#ccc", "#fff" ]  },
+            { name: "Metro", colors: [ "#8ebc00", "#787878", "#fff" ]  },
+            { name: "Black", colors: [ "#0167cc", "#4698e9", "#272727" ]  },
+            { name: "Metro Black", colors: [ "#00aba9", "#0e0e0e", "#565656" ]  },
+            { name: "High Contrast", colors: [ "#b11e9c", "#880275", "#1b141a" ]  },
+            { name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
+            { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
+        ],
+        selectedTheme: "Silver",
+        updateTheme: function(e) {
+            var file = e.item.name.toLowerCase().replace(/\s/, "")
+
+            ThemeChooser.changeTheme(file, true);
+        },
+
+        sizes: [
+            { name: "Standard", file: "common" },
+            { name: "Bootstrap", file: "common-bootstrap", relativity: "larger" }
+        ],
+        selectedSize: "Standard",
+        updateCommon: function(e) {
+            ThemeChooser.changeCommon(e.item.file, true);
+        }
+    });
+
+    kendo.ui.plugin(ThemeChooser);
+
+    $(document).ready(function() {
+        kendo.bind($(".themechooser"), ThemeChooserViewModel);
     });
 
     extend(ThemeChooser, {
@@ -263,6 +261,10 @@
         animateCssChange: function(options) {
             options = $.extend({ complete: $.noop, replace: $.noop }, options);
 
+            if (options.prefetch == options.link.attr("href")) {
+                return;
+            }
+
             ThemeChooser.preloadStylesheet(options.prefetch, function () {
                 var example = $("#example");
 
@@ -290,23 +292,21 @@
         changeCommon: function(commonName, animate) {
             ThemeChooser.animateCssChange({
                 prefetch: ThemeChooser.getCommonUrl(commonName),
+                link: ThemeChooser.getCurrentCommonLink(),
                 replace: function() {
                     ThemeChooser.replaceCommon(commonName);
                 }
             });
         },
 
-        changeTheme: function (themeName, animate, complete) {
+        changeTheme: function(themeName, animate, complete) {
             // Set transparent background to the chart area.
             extend(kendo.dataviz.ui.themes[themeName].chart, { chartArea: { background: "transparent"} });
-
-            if (ThemeChooser.getThemeUrl(themeName) == ThemeChooser.getCurrentThemeLink().attr("href")) {
-                return;
-            }
 
             if (animate) {
                 ThemeChooser.animateCssChange({
                     prefetch: ThemeChooser.getThemeUrl(themeName),
+                    link: ThemeChooser.getCurrentThemeLink(),
                     replace: function() {
                         ThemeChooser.replaceTheme(themeName);
                     },
@@ -317,8 +317,6 @@
             }
         },
     });
-
-    kendo.ui.plugin(ThemeChooser);
 
     window.kendoThemeChooser = ThemeChooser;
 })();
