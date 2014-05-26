@@ -1,0 +1,108 @@
+html,
+body
+{
+    font: 12px sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pane-content
+{
+    scrollable: false;
+}
+
+.configurationButtons
+{
+    padding: 4px;
+    background: #ffffff;
+    border: 1px solid #dadada;
+    margin: 0 -1px 0 0;
+}
+
+.configurationButtons span
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(diagram-sprite.png);
+    background-repeat: no-repeat;
+    -webkit-transform: translatez(0);
+    display: block;
+}
+
+#panelBar div
+{
+    background: #f4f4f4;
+}
+
+.alignLeft
+{
+    background-position: -144px 0;
+}
+
+.alignRight
+{
+    background-position: -160px 0;
+}
+
+.alignTop
+{
+    background-position: -112px 0;
+}
+
+.alignBottom
+{
+    background-position: -128px 0;
+}
+
+.toFront
+{
+    background-position: -176px 0;
+}
+
+.toBack
+{
+    background-position: -192px 0;
+}
+
+.k-slider
+{
+    vertical-align: middle;
+}
+
+.k-numerictextbox
+{
+    width: 60px;
+}
+
+#splitter
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: auto;
+    top: 28px;
+    bottom: 32px;
+    border-width: 0 0 1px;
+}
+
+#bottom-box
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3px;
+    text-align: right;
+}
+
+#diagram
+{
+    width: 100%;
+}
+
+#diagram,
+#center-pane .pane-content
+{
+    height: 100%;
+}
