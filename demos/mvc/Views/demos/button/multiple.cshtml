@@ -1,8 +1,8 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
 
-            <div class="demo-section">
-                <h3>Standard Initialization</h3>
+            <div class="demo-section k-header">
+                <h4>Standard Initialization</h4>
                 <p>
                     <button type="button" class="editButton">Edit Button 1</button>
                     <button type="button" class="closeButton">Close Button 1</button>
@@ -13,8 +13,8 @@
                 </p>
             </div>
 
-            <div class="demo-section">
-                <h3>Initialization with kendo.init</h3>
+            <div class="demo-section k-header">
+                <h4>Initialization with kendo.init</h4>
                 <div id="buttonContainer">
                     <p>
                         <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit">Edit Button 1</button>
@@ -44,7 +44,9 @@
             <style scoped>
                 .demo-section {
                     width: 400px;
-                    padding: 20px 30px 20px;
+                }
+                .demo-section p {
+                    line-height: 2.5em;
                 }
             </style>
         </div>

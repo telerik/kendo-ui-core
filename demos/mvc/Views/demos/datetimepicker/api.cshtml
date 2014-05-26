@@ -1,30 +1,47 @@
 
-        <div id="example" class="k-content">
-            <div class="configuration" style="width: 220px">
-                <span class="configHead">API Functions</span>
-                <ul class="options">
-                    <li>
-                       <button id="get" class="k-button">Get value</button>
-                   </li>
-                   <li>
-                       <input id="value" value="10/10/2000 12:00 AM" style="float:none" />
+        <div id="example">
+
+            <div class="box">
+                <div class="box-col">
+                    <h4>Set / Get Value</h4>
+                    <ul class="options">
+                        <li>
+                            <input id="value" value="10/10/2000 12:00 AM" style="float:none" />
                        <button id="set" class="k-button">Set value</button>
-                   </li>
-                    <li>
-						<button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button> or <button id="readonly" class="k-button">Readonly</button>
-                    </li>
-                    <li>
-                        <button id="openDateView" class="k-button">Open</button> or <button id="closeDateView" class="k-button">Close</button> the date view
-                    </li>
-                    <li>
-                        <button id="openTimeView" class="k-button">Open</button> or <button id="closeTimeView" class="k-button">Close</button> the time view
-                    </li>
-                </ul>
-           </div>
-            <div class="demo-section">
-                <input id="datetimepicker" />
+                        </li>
+                        <li style="text-align: right;">
+                            <button id="get" class="k-button">Get value</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-col">
+                    <h4>Open / Close</h4>
+                    <ul class="options">
+                        <li>
+                            <button id="openDateView" class="k-button">Open date view</button>
+                            <button id="closeDateView" class="k-button">Close date view</button>
+                        </li>
+                        <li>
+                            <button id="openTimeView" class="k-button">Open time view</button>
+                            <button id="closeTimeView" class="k-button">Close time view</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-col">
+                    <h4>Enable / Disable</h4>
+                    <ul class="options">
+                        <li>
+                            <button id="enable" class="k-button">Enable</button> 
+                            <button id="disable" class="k-button">Disable</button> 
+                            <button id="readonly" class="k-button">Readonly</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
+            <div class="demo-section k-header">
+                <input id="datetimepicker" />
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -79,9 +96,15 @@
            </script>
 
             <style scoped>
-                .demo-section {
-                    margin-right: 375px;
-                    width: 185px;
+	            .demo-section{
+		            width:400px;
+		            text-align: center;
+	            }
+	            .box .k-textbox {
+                    width: 80px;
+                }
+                .box .k-button {
+                    min-width: 80px;
                 }
             </style>
         </div>

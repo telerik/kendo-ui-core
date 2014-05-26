@@ -1,11 +1,14 @@
 
-        <div id="example" class="k-content">
-            <div class="demo-section" style="width:470px">
-                <label for="start">Start date:</label>
-                <input id="start" value="10/10/2011" />
+        <div id="example">
+            <div class="demo-section k-header" style="width:400px">
+                <h4>Select start and end date:</h4>
+                <p>
+                    <label for="start">Start date:</label><input id="start" style="width: 200px" value="10/10/2011" />
+                </p>
 
-                <label for="end" style="margin-left:3em">End date:</label>
-                <input id="end" value="10/10/2012"/>
+                <p>
+                    <label for="end">End date:</label><input id="end" style="width: 200px" value="10/10/2012"/>
+                </p>
             </div>
             <script>
                 $(document).ready(function() {
@@ -57,6 +60,19 @@
             </script>
 
             <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+                .demo-section p {
+                    margin-top: 1em;
+                }
+                .demo-section label {
+                    display: inline-block;
+                    width: 120px;
+                    padding-right: 5px;
+                    text-align: right;
+                }
+                
                 #example .k-datepicker {
                     vertical-align: middle;
                 }
