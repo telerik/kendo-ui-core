@@ -14,10 +14,10 @@
     </div>
 </div>
 
-<div id="overview">    
+<div id="overview">
     <div id="overview-widgets">
         <h2>@ViewBag.Product <strong>Components</strong></h2>
-        <div id="most-popular">            
+        <div id="most-popular">
                 <h3>Most popular</h3>
                 <ul class="overview-col">
                     <li><a href="@Url.Widget("grid")">Grid</a></li>
@@ -35,7 +35,7 @@
                     <li><a href="@Url.Widget("financial")">Stock Charts</a></li>
                     <li><a href="@Url.Widget("drawer")">Drawer</a></li>
                     <li><a href="@Url.Widget("switch")">Switch</a></li>
-                </ul>            
+                </ul>
         </div>
         <div id="widgets-all">
 
@@ -164,98 +164,19 @@
             @if (ViewBag.Product == "kendo-ui")
             {
                 <li>
-                    <a href="#">Interactive Dojo</a>
+                    <a href="@Html.DojoRoot()">Interactive Dojo</a>
                     <p>An environment designed to help you get up and running with  Kendo UI quickly.</p>
                 </li>
             }
             <li>
-                <a href="#">ThemeBuilder</a>
+                <a href="@Url.Action("Index", "ThemeBuilder")">ThemeBuilder</a>
                 <p>Create and modify themes for Kendo UI widgets.</p>
             </li>
             <li>
-                <a href="#">Mobile ThemeBuiler</a>
+                <a href="@Url.Action("MobileIndex", "ThemeBuilder")">Mobile ThemeBuiler</a>
                 <p>Touch optimized Kendo UI theme customizer.</p>
             </li>
         </ul>
     </div>
     </div>
 </div>
-
-<style>    
-    #overview-widgets,
-    #applications-and-tools,
-    #most-popular, 
-    #widgets-all
-    {
-        display: inline-block;
-        position: relative;
-    }
-
-    #applications-and-tools {
-        width: 30%;
-    }
-
-    #most-popular {
-        vertical-align: top;
-        font-size: 24px;
-        line-height: 28px;
-        margin-bottom: 34px;
-        margin-top: 5px;
-    }
-
-    #overview-widgets h2 {
-        text-transform: uppercase;
-    }
-
-     #overview-widgets h2 strong {
-        text-transform: none;
-        font-weight: normal;
-    }
-
-    .overview-col {
-        min-width: 180px;
-    }
-
-    #most-popular .overview-col {
-        padding-left: 0;
-    }
-
-    #most-popular h3 {
-        margin-left: 0;
-    }
-
-    #widgets-all .overview-col.col-four {
-        width: 24%;
-        padding: 0;
-        display: inline-block;
-        min-height: 1px;
-        font-size: 16px;
-        vertical-align: top;
-        box-sizing: border-box;
-    }
-
-    .col-four:before{
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        display: block;
-        width: 1px;   
-        background-color: #ebecee;
-    }
-
-    .col-four ul {
-        margin-bottom: 1em;
-    }
-
-    .application {
-        margin: 0 3% 18px 0;
-        white-space:normal;
-    } 
-
-    .application p {
-        font-size: 13px;
-        line-height: 16px;
-        height: 32px;
-    }
-</style>
