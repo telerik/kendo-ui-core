@@ -1,4 +1,4 @@
-        <div id="example" class="k-content">
+        <div id="example">
             <div id="window">
                 <p>Alvar Aalto is one of the greatest names in modern architecture and design. Glassblowers at the iittala factory still meticulously handcraft the legendary vases that are variations on one theme, fluid organic shapes that let the end user decide the use. Interpretations of the shape in new colors and materials add to the growing Alvar Aalto Collection that remains true to his original design.</p>
 
@@ -9,7 +9,9 @@
 
             <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
 
-            <div class="keyboard-nav">
+            <div class="box">
+                <div class="box-col">   
+                <h4>Focus</h4>
                 <ul class="keyboard-legend">
                     <li>
                         <span class="button-preview">
@@ -21,7 +23,10 @@
                         </span>
                     </li>
                 </ul>
-
+                </div>
+                
+                <div class="box-col">   
+                <h4>Supported keys and user actions</h4>
                 <ul class="keyboard-legend">
                     <li>
                         <span class="button-preview">
@@ -63,6 +68,10 @@
                             moves window down
                         </span>
                     </li>
+                    </div>
+                    
+                    <div class="box-col">   
+                    <h4>&nbsp;</h4>
                     <li>
                         <span class="button-preview">
                             <span class="key-button">ctrl</span>
@@ -100,6 +109,7 @@
                         </span>
                     </li>
                 </ul>
+                </div>
 
             </div>
 
@@ -132,18 +142,9 @@
             </script>
 
             <style scoped>
-                #example {
-                    min-height:500px;
-                }
-
-                #undo {
-                    position: absolute;
-                }
-
-                .keyboard-nav {
+                #example .box {
                     margin-top: 350px;
                 }
-
                 .button-container {
                     position: absolute;
                 }

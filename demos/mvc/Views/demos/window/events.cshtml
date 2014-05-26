@@ -1,9 +1,14 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
+
+            <div class="box" style="margin-bottom: 30px;">                
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
 
             <div id="window"></div>
 
-            <span id="undo" style="display:none" class="k-group">Click here to open the window.</span>
+            <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
 
             <script>
                 function onOpen(e) {
@@ -71,7 +76,7 @@
 
             <style scoped>
                 #example {
-                    min-height:400px;
+                    min-height:600px;
                 }
 
                 #undo {
@@ -85,5 +90,3 @@
                 }
             </style>
         </div>
-        <br/>
-        <div class="console"></div>
