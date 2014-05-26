@@ -9679,8 +9679,7 @@ var __meta__ = {
 
         _ensureElement: function() {
             this.element
-                .appendTo(document.body)
-                .bind("mouseleave", this._mouseleave);
+                .appendTo(document.body);
         },
 
         _hideElement: function() {
