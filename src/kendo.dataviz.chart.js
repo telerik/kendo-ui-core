@@ -9536,13 +9536,14 @@ var __meta__ = {
 
             tooltip.element = $(tooltip.template(tooltip.options));
             tooltip.move = proxy(tooltip.move, tooltip);
+            tooltip._mouseleave = proxy(tooltip._mouseleave, tooltip);
         },
 
         destroy: function() {
             clearTimeout(this.showTimeout);
 
             if (this.element) {
-                this.element.remove();
+                this.element.off(MOUSELEAVE_NS).remove();
                 this.element = null;
             }
         },
@@ -9679,13 +9680,22 @@ var __meta__ = {
 
         _ensureElement: function() {
             this.element
-                .appendTo(document.body);
+                .appendTo(document.body)
+                .on(MOUSELEAVE_NS, this._mouseleave);
+        },
+
+        _mouseleave: function(e) {
+            var target = e.relatedTarget;
+            var chart = this.chartElement[0];
+            if (target && target !== chart && !$.contains(chart, target)) {
+                this.hide();
+            }
         },
 
         _hideElement: function() {
             this.element.fadeOut({
                 always: function(){
-                    $(this).remove();
+                    $(this).off(MOUSELEAVE_NS).remove();
                 }
             });
         },

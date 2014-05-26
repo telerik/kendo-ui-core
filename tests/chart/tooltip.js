@@ -111,6 +111,10 @@
             equal(tooltip.element.parent("body").length, 1);
         });
 
+        test("tooltip is not hidden when moving over the chart", function() {
+            ok(false);
+        });
+
         test("detaches from body on destroy", function() {
             tooltip.destroy();
 
