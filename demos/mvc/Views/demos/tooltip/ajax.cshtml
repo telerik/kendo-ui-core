@@ -1,5 +1,5 @@
-        <div id="example" class="k-content">
-            <div class="demo-section">
+        <div id="example">
+            <div class="demo-section k-header">
                 <ul id="products" class="dairy-photos">
                     <li>
                         <a href="#" data-id="1"><img src="../content/web/foods/11.jpg" /></a>
@@ -24,7 +24,7 @@
                 <div class="dairy-description">
                     <h2>Dairy Products</h2>
                     <p>Queso Cabrales, Queso Manchego La Pastora, Gorgonzola Telino, Mascarpone Fabioli, Geitost, Raclette Courdavault, Camembert Pierrott, Gudbrandsdalsost, Flotemysost, Mozzarella di Giovanni</p>
-                    <p>Hover an image for details.</p>
+                    <p class="demo-hint" style="margin-top: 2em;">Hover an image for details.</p>
                 </div>
             </div>
 
@@ -51,12 +51,13 @@
 
             <style scoped>
                 .demo-section {
-                    height: 460px;
+                    height: 340px;
+                    width: 700px;
                 }
                 .dairy-photos {
                     float: left;
                     list-style-type: none;
-                    margin: 60px 0 0 60px;
+                    margin: 0;
                     padding: 0;
                     width: 330px;
                     line-height: 0;
@@ -86,15 +87,15 @@
                 }
                 .dairy-description {
                     float: right;
-                    width: 200px;
-                    margin: 80px 60px 0 0;
+                    width: 320px;
+                    margin: 80px 0 0;
                 }
                 .dairy-description h2 {
                     font-size: 2.7em;
                     font-weight: normal;
                 }
                 .dairy-description p {
-                    line-height: 2em;
+                    line-height: 1.5;
                 }
                 .dairy-details {
                     padding: 10px 0 0 0;
