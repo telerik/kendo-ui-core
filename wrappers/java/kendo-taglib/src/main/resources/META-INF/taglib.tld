@@ -33417,6 +33417,13 @@ Refer to the jQuery.ajax documentation for further info.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
+
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -33454,6 +33461,13 @@ Refer to the jQuery.ajax documentation for further info.</description>
         </attribute>
 
     </tag>
+
+    <tag>
+	    <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+	    <name>dataSource-schema-model-field-parse</name>
+	    <tag-class>com.kendoui.taglib.datasource.FieldParseFunctionTag</tag-class>
+	    <body-content>JSP</body-content>
+	</tag>
 
     <tag>
         <description>Template to be used for rendering the toolbar of the grid.</description>

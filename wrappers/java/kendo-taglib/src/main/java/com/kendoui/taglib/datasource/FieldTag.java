@@ -3,6 +3,7 @@ package com.kendoui.taglib.datasource;
 import javax.servlet.jsp.JspException;
 
 import com.kendoui.taglib.BaseTag;
+import com.kendoui.taglib.json.Function;
 
 @SuppressWarnings("serial")
 public class FieldTag extends BaseTag {
@@ -76,6 +77,22 @@ public class FieldTag extends BaseTag {
 
     public void setValidation(ValidationTag validationTag) {
         setProperty("validation", validationTag.properties());
+    }
+
+    public String getParse() {
+        Function property = ((Function)getProperty("parse"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setParse(String value) {
+        setProperty("parse", new Function(value));
+    }
+
+    public void setParse(FieldParseFunctionTag value) {
+        setEvent("parse", value.getBody());
     }
     
     public static String tagName() {
