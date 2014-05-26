@@ -126,7 +126,7 @@ body
     left: 0;
     right: 0;
     height: auto;
-    top: 33px;
+    top: 42px;
     bottom: 35px;
     border-width: 0 0 1px;
 }
@@ -245,4 +245,9 @@ body
 #shapesPanelBar .shapeItem
 {
     display: inline-block;
+}
+
+#menu .k-item > .k-link
+{
+    padding: .8em 1.4em;
 }
