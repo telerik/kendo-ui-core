@@ -35,11 +35,6 @@ namespace Kendo.Models
                 {
                     match = true;
                 }
-
-                if (packageName == "offline")
-                {
-                    return false;
-                }
             }
 
             return (!invert && match) || (invert && !match);
