@@ -158,7 +158,7 @@
                     ],
                     contentLoad: function (e) {
                         var content = $(e.contentElement);
-                        if (content.is("#HTML-1")) {
+                        if (content.is("#source-code-1")) {
                             var html = content.find('.prettyprint').text();
                             content.data("html", content.find('.prettyprint').text());
                         }
@@ -234,6 +234,10 @@
 </div>
 
 <script>
+    $(".try-kendo").click(function(e) {
+        window.dojo.postSnippet($('#source-code-1').data('html'), window.location.href);
+    });
+
     setTimeout(function(){ prettyPrint(); }, 100);
 
     @if (ViewBag.Mobile)
