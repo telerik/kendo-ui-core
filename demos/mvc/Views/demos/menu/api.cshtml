@@ -1,15 +1,36 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
 
-            <div class="configuration">
-                <span class="configHead">API Functions</span>
+            <div class="box">
+            <div class="box-col">
+                <h4>Open / Close</h4>
+                <ul class="options">
+                    <li>
+                        <input type="text" id="triggerIndex" class="k-textbox"/> <button class="triggerItem k-button">Open/Close</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-col">
+                <h4>Enable / Disable</h4>
                 <ul class="options">
                     <li>
                         <input type="text" id="toggleIndex" class="k-textbox"/> <button class="toggleItem k-button">Enable/Disable</button>
                     </li>
+
                     <li>
-                        <input type="text" id="triggerIndex" class="k-textbox"/> <button class="triggerItem k-button">Open/Close</button>
+                        <button class="toggleTextItems k-button">Enable/Disable all Sub Item 3</button>
                     </li>
+                    <li>
+                        <button class="toggleStrongItems k-button">Enable/Disable <strong>strong</strong> elements</button>
+                    </li>
+                    <li>
+                        <button class="toggleRedTextItems k-button">Enable/Disable <span class="redText">.redText</span> elements</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-col">
+                <h4>Add / Remove</h4>
+                <ul class="options">
                     <li>
                         <input type="text" id="removeIndex" class="k-textbox"/> <button class="removeItem k-button">Remove</button>
                     </li>
@@ -22,16 +43,9 @@
                     <li>
                         <input type="text" value="Item" id="afterText" class="k-textbox"/> <input type="text" value="0" id="afterIndex" class="k-textbox"/> <button class="afterItem k-button">After</button>
                     </li>
-                    <li>
-                        <button class="toggleTextItems k-button">Enable/Disable all Sub Item 3</button>
-                    </li>
-                    <li>
-                        <button class="toggleStrongItems k-button">Enable/Disable <strong>strong</strong> elements</button>
-                    </li>
-                    <li>
-                        <button class="toggleRedTextItems k-button">Enable/Disable <span class="redText">.redText</span> elements</button>
-                    </li>
+
                 </ul>
+                </div>
             </div>
             <style scoped>
                 .redText,
@@ -193,7 +207,7 @@
                             ]
                         }
                     ]
-                }).css({ marginRight: "250px" }).data("kendoMenu");
+                }).data("kendoMenu");
             </script>
             <style scoped>
                 .configuration .k-textbox {

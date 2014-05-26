@@ -1,8 +1,8 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
 
-            <div class="configuration">
-                <span class="configHead">Direction Settings</span>
+            <div class="box">
+                <h4>Direction Settings</h4>
                 <ul class="options">
                     <li>
                         <input id="default" name="direction" type="radio" checked="checked" /> <label for="default">default / bottom</label>
@@ -22,7 +22,7 @@
                     </li>
                 </ul>
                 <br />
-                <a class="k-button" id="apply" href="#" style="float: right">Apply</a>
+                <a class="k-button" id="apply" href="#" style="width: 80px;">Apply</a>
             </div>
 
             <ul id="menu">
@@ -194,9 +194,6 @@
                     var initMenu = function () {
                         $("#menu").kendoMenu({
                             direction: getDirection()
-                        })
-                        .css({
-                            marginRight: "220px"
                         });
                     };
 
