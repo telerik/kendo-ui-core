@@ -252,8 +252,6 @@
 
                 $("#mobile-application-container").removeClass("km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat").addClass("km-" + kendoMobileOS + (" km-" + kendoMobileOS.replace(/-.*/, "")));
                 $("#device-wrapper").removeClass("ios7 android blackberry wp flat").addClass(kendoMobileOS);
-                $("#deviceList .selectedThumb").removeClass("selectedThumb");
-                $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
 
                 var skin = kendoMobileOS != "flat" ? {} : {
                     platform: "ios7",

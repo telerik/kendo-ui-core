@@ -1,7 +1,29 @@
 <div class="themechooser" data-role="details">
-    <span class="tc-activator"><span class="tc-current" data-bind="text: selectedTheme"></span></span>
+        @if (ViewBag.Mobile)
+        {
+        <span class="tc-activator"><span class="tc-current" data-bind="text: selectedMobileTheme"></span></span>
+        }
+        else
+        {
+        <span class="tc-activator"><span class="tc-current" data-bind="text: selectedTheme"></span></span>
+        }
 
     <div class="tc-theme-list">
+        @if (ViewBag.Mobile)
+        {
+        <div class="tc-column">
+            <h4>Themes</h4>
+            <ul data-role="themechooser"
+                data-template="theme-item-template"
+                data-bind="
+                    source: mobileThemes,
+                    value: selectedMobileTheme,
+                    events: { change: updateMobileTheme }
+                "></ul>
+        </div>
+        }
+        else
+        {
         <div class="tc-column">
             <h4>Themes</h4>
             <ul id="widget-themes"
@@ -25,6 +47,7 @@
                     events: { change: updateCommon }
                 "></ul>
         </div>
+        }
     </div>
 </div>
 

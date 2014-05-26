@@ -80,6 +80,8 @@
         }
     });
 
+    var MOBILE_CLASSES = "km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat";
+
     var ThemeChooserViewModel = kendo.observable({
         themes: [
             { name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
@@ -94,7 +96,23 @@
             { name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
             { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
         ],
+        mobileThemes: [
+            { name: "iOS7", value:"ios7", colors: [ "#007aff", "#f5f5f5", "#ffffff" ]  },
+            { name: "iOS6", value: "ios", colors: [ "#4a86ec", "#6982a3", "#c3ccd5" ]  },
+            { name: "Android Light", value: "android-light", colors: [ "#33b5e5", "#cacaca", "#fcfcfc" ]  },
+            { name: "Android Dark", value: "android-dark", colors: [ "#33b5e5", "#000000", "#4c4c4c" ]  },
+            { name: "BlackBerry", value: "blackberry", colors: [ "#357fad", "#d9d9d9", "#ffffff" ]  },
+            { name: "WP8 Light", value: "wp-light", colors: [ "#01abaa", "#000000", "#ffffff" ]  },
+            { name: "WP8 Dark", value: "wp-dark", colors: [ "#01abaa", "#ffffff", "#000000" ]  },
+            { name: "Flat Skin", value: "flat", colors: [ "#10c4b2", "#dcdcdc", "#f4f4f4" ]  }
+        ],
         selectedTheme: "Silver",
+        selectedMobileTheme: "ios7",
+        updateMobileTheme: function(e) {
+            var themeName = e.item.value;
+            $("#mobile-application-container").removeClass(MOBILE_CLASSES).addClass("km-" + themeName + (" km-" + themeName.replace(/-.*/, "")));
+            $("#device-wrapper").removeClass("ios7 ios wp-dark wp-light android-light android-dark blackberry flat").addClass(themeName);
+        },
         updateTheme: function(e) {
             var file = e.item.name.toLowerCase().replace(/\s/, "")
 
@@ -204,7 +222,7 @@
             }
         },
 
-        updateLink: function (link, url) {
+        updateLink: function(link, url) {
             var newLink,
                 exampleElement = $("#example"),
                 less = window.less,
@@ -234,7 +252,7 @@
             }
         },
 
-        replaceTheme: function (themeName) {
+        replaceTheme: function(themeName) {
             ThemeChooser.replaceWebTheme(themeName);
             ThemeChooser.replaceWebMobileTheme(themeName);
             ThemeChooser.replaceDVTheme(themeName);
