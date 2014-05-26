@@ -451,7 +451,8 @@
                 },
                 shapeDefaults: {
                     width: 120,
-                    height: 120
+                    height: 120,
+                    background: "#8ebc00"
                 },
                 layout: {
                     type: "tree",
@@ -562,6 +563,12 @@
                 $("#connectionStartCap").getKendoDropDownList().value(shape.startCap);
                 $("#connectionEndCap").getKendoDropDownList().value(shape.endCap);
             }
+
+            $("#shapesPanelBar .shapeItem").kendoDraggable({
+                hint: function() {
+                    return this.element.clone();
+                }
+            });
         });
     </script>
     </body>
