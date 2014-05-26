@@ -71,11 +71,12 @@ body {
     color: #555;
     font: 400 12px Arial, Helvetica, sans-serif;
     min-width: 1230px;
+    position: relative;
 }
 
 body,
 html {
-   height: 100%;  
+   min-height: 100%;
 }
 
 img
@@ -102,6 +103,7 @@ a,
 html
 {
     font:75% Arial,Helvetica,sans-serif;
+    height: 100%;
 }
 
 #header, .suite-demos-nav, .demos-nav,
@@ -2773,8 +2775,14 @@ ul.keyboard-legend li a {
 #footer
 {
     background-color: #2a2d33;
-    position:relative;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
     clear: both;
+}
+
+#main #footer {
+    position: relative;
 }
 
 .footer-links {
@@ -3157,7 +3165,7 @@ a.footer-links:hover {
     width: auto;
     margin:auto;
     text-align: center;
-    margin-bottom: 3em;
+    padding-bottom: 110px;
 }
 
 #overview h2 {
@@ -3255,12 +3263,12 @@ h5 {
     margin: 4.5em 7.5em;
     padding: 3em;
     background-color: rgba(20,53,80,0.038);
-    border: 1px solid rgba(20,53,80,0.05);  
+    border: 1px solid rgba(20,53,80,0.05);
 }
 .demo-section {
     margin: 4.5em auto;
     padding: 3em;
-    border: 1px solid rgba(20,53,80,0.05);  
+    border: 1px solid rgba(20,53,80,0.05);
 }
 .box:after,
 .demo-section:after {
