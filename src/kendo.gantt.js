@@ -1290,12 +1290,12 @@ var __meta__ = {
             var treeListWrapper = this.list.element;
 
             timelineWrapper.find(".k-grid-content").on("scroll", function (e) {
-                timelineWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
-                treeListWrapper.find(".k-grid-content").scrollTop($(this).scrollTop());
+                timelineWrapper.find(".k-grid-header-wrap").scrollLeft(this.scrollLeft);
+                treeListWrapper.find(".k-grid-content").scrollTop(this.scrollTop);
             });
 
             treeListWrapper.find(".k-grid-content").on("scroll", function(e) {
-                treeListWrapper.find(".k-grid-header-wrap").scrollLeft($(this).scrollLeft());
+                treeListWrapper.find(".k-grid-header-wrap").scrollLeft(this.scrollLeft);
             });
         },
 
