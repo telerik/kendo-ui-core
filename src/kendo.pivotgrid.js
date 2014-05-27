@@ -155,18 +155,29 @@ var __meta__ = {
                 }
             }
 
-            var axes = this.axes();
-            var axis2 = this[other]() || [];
-
-            if (axes && axes[other]) {
-                axis2 = descriptorsForAxes(axes[other]);
-            }
-
             var descriptors = {};
             descriptors[origin] = members;
-            descriptors[other] = axis2;
+            descriptors[other] = this._descriptorsForAxis(other);
 
             this.read(descriptors);
+        },
+
+        _descriptorsForAxis: function(axis) {
+            var axes = this.axes();
+            var descriptors = this[axis]() || [];
+
+            if (axes && axes[axis]) {
+                descriptors = descriptorsForAxes(axes[axis]);
+            }
+            return descriptors;
+        },
+
+        columnsAxisDescriptors: function() {
+            return this._descriptorsForAxis("columns");
+        },
+
+        rowsAxisDescriptors: function() {
+            return this._descriptorsForAxis("rows");
         },
 
         _process: function (data, e) {

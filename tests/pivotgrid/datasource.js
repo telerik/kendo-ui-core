@@ -320,6 +320,122 @@
         dataSource.expandRow("baz");
     });
 
+    test("columnsAxisDescriptors returns columns state", 3, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo"],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
+                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 2);
+        equal(descriptors[0].name, "level 0");
+        equal(descriptors[1].name, "level 1");
+    });
+
+    test("columnsAxisDescriptors returns columns if no request is made", 2, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo"],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                }
+            }
+        });
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 1);
+        equal(descriptors[0].name, "foo");
+    });
+
+    test("rowsAxisDescriptors returns rows state", 3, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["foo"],
+            rows: ["baz"],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {},
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
+                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var descriptors = dataSource.rowsAxisDescriptors();
+
+        equal(descriptors.length, 2);
+        equal(descriptors[0].name, "level 0");
+        equal(descriptors[1].name, "level 1");
+    });
+
+    test("rowsAxisDescriptors returns columns if no request is made", 2, function() {
+        var dataSource = new PivotDataSource({
+            rows: ["foo"],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                }
+            }
+        });
+
+        var descriptors = dataSource.rowsAxisDescriptors();
+
+        equal(descriptors.length, 1);
+        equal(descriptors[0].name, "foo");
+    });
+
     test("expandColumn pass current columns state when expanding top member", 4, function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar"],
