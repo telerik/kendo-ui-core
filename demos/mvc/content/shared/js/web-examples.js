@@ -8,6 +8,7 @@ $(function () {
         dataTextField: "text",
         select: function (e) {
             location.href = e.item.find("a").attr("href");
-        }
+        },
+        height: 300
     });
 });

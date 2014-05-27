@@ -1,8 +1,8 @@
 @{
     ViewBag.ShowCodeStrip = false;
 }
-        <div id="example" class="k-content">
-            <div class="chart-wrapper">
+        <div id="example">
+            <div class="demo-section">
                 <div id="chart"></div>
                 <div id="canvasSelector">
                     <input id="useCanvas" type="checkbox" checked="checked" />
@@ -167,28 +167,4 @@
                 }
 
             </script>
-            <style scoped>
-                .chart-wrapper .k-chart {
-                    height: 390px;
-                }
-
-                .chart-wrapper #playButton {
-                    position: absolute;
-                    right: 15px;
-                    bottom: 15px;
-                }
-
-                .chart-wrapper #canvasSelector {
-                    position: absolute;
-                    right: 110px;
-                    bottom: 19px;
-                }
-
-                .chart-wrapper #fpsCount {
-                    position: absolute;
-                    left: 15px;
-                    bottom: 20px;
-                    white-space: nowrap;
-                }
-            </style>
         </div>
