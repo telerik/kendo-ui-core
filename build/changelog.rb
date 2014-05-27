@@ -156,16 +156,14 @@ class ChangeLog
     end
 
     def repo_by(milestone)
-        public_repo if milestone.url =~ /kendo-ui-core/
-
-        private_repo
+        milestone.url =~ /kendo-ui-core/ ? public_repo : private_repo
     end
 
     def page_issues(milestone, page)
         repo_type = milestone.url =~ /kendo-ui-core/ ? 'public' : 'private'
         repo = repo_by(milestone)
 
-        $stderr.puts "Fetching issues from #{repo_type} repo, #{milestone.title}, page #{page}..." if VERBOSE
+        $stderr.puts "Fetching issues from #{repo.repo} repo, #{milestone.title} (#{milestone.number}), page #{page}..." if VERBOSE
 
         repo.issues.list_repo nil, nil,
             :state => "closed",
