@@ -2801,7 +2801,7 @@ function pad(number, digits, end) {
         return ($.inArray(widget.attr("data-role"), ["slider", "rangeslider"]) > 0) || widget.is(":visible");
     }
 
-    kendo.resize = function(element) {
+    kendo.resize = function(element, force) {
         var widgets = $(element).find("[data-" + kendo.ns + "role]").addBack().filter(resizableWidget);
 
         if (!widgets.length) {
@@ -2816,7 +2816,7 @@ function pad(number, digits, end) {
         $.each(widgetsArray, function () {
             var widget = kendo.widgetInstance($(this));
             if (widget) {
-                widget.resize();
+                widget.resize(force);
             }
         });
     };
