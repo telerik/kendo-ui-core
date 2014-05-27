@@ -18,7 +18,7 @@ namespace Kendo.Controllers
             ViewBag.Product = CurrentProduct();
             ViewBag.NavProduct = CurrentNavProduct();
 
-            ViewBag.Theme = "Silver";
+            ViewBag.Theme = "silver";
             ViewBag.MobileTheme = "ios7";
             ViewBag.CommonFile = "common";
 
