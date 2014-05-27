@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-selection-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class SelectionController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/selection";
+        return "grid/selection";
     }
     
     @RequestMapping(value = "/selection/read", method = RequestMethod.POST)

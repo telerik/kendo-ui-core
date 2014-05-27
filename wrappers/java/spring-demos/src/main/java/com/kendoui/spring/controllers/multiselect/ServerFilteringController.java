@@ -16,7 +16,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("multiselect-serverfiltering-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class ServerFilteringController {
     @Autowired 
     private ProductDao product;
@@ -37,7 +37,7 @@ public class ServerFilteringController {
         array.add(second);
         
         model.addAttribute("value", array);
-        return "web/multiselect/serverfiltering";
+        return "multiselect/serverfiltering";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

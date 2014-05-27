@@ -1,0 +1,101 @@
+
+        <div id="example">
+            <div class="demo-section k-header" style="width:400px">
+                <h4>Select start and end date:</h4>
+                <p>
+                    <label for="start">Start date:</label><input id="start" style="width: 200px" />
+                </p>
+
+                <p>
+                    <label for="end">End date:</label><input id="end" style="width: 200px"/>
+                </p>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    function startChange() {
+                        var startDate = start.value(),
+                        endDate = end.value();
+
+                        if (startDate) {
+                            startDate = new Date(startDate);
+                            startDate.setDate(startDate.getDate());
+                            end.min(startDate);
+                        } else if (endDate) {
+                            start.max(new Date(endDate));
+                        } else {
+                            endDate = new Date();
+                            start.max(endDate);
+                            end.min(endDate);
+                        }
+                    }
+
+                    function endChange() {
+                        var endDate = end.value(),
+                        startDate = start.value();
+
+                        if (endDate) {
+                            endDate = new Date(endDate);
+                            endDate.setDate(endDate.getDate());
+                            start.max(endDate);
+                        } else if (startDate) {
+                            end.min(new Date(startDate));
+                        } else {
+                            endDate = new Date();
+                            start.max(endDate);
+                            end.min(endDate);
+                        }
+                    }
+
+                    var today = kendo.date.today();
+
+                    var start = $("#start").kendoDateTimePicker({
+                        value: today,
+                        change: startChange,
+                        parseFormats: ["MM/dd/yyyy"]
+                    }).data("kendoDateTimePicker");
+
+                    var end = $("#end").kendoDateTimePicker({
+                        value: today,
+                        change: endChange,
+                        parseFormats: ["MM/dd/yyyy"]
+                    }).data("kendoDateTimePicker");
+
+                    start.max(end.value());
+                    end.min(start.value());
+                });
+            </script>
+
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+                .demo-section p {
+                    margin-top: 1em;
+                }
+                .demo-section label {
+                    display: inline-block;
+                    width: 120px;
+                    padding-right: 5px;
+                    text-align: right;
+                }
+                #example .k-datetimepicker {
+                    vertical-align: middle;
+                }
+
+                #example h3 {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 60%;
+                    float:left;
+                    margin-bottom: 20px;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    float:left;
+                }
+            </style>
+        </div>

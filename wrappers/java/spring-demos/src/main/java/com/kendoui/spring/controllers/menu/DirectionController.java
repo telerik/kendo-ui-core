@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("menu-direction-controller")
-@RequestMapping(value="/web/menu/")
+@RequestMapping(value="/menu/")
 public class DirectionController {
     
     @RequestMapping(value = {"/direction"}, method = RequestMethod.GET)
@@ -15,7 +15,7 @@ public class DirectionController {
         model.addAttribute("direction", "bottom");
         model.addAttribute("directions", getDirections());
                
-        return "web/menu/direction";
+        return "menu/direction";
     }
     
     @RequestMapping(value = {"/direction"}, method = RequestMethod.POST)
@@ -28,7 +28,7 @@ public class DirectionController {
         model.addAttribute("direction", direction);
         model.addAttribute("directions", getDirections());
                
-        return "web/menu/direction";
+        return "menu/direction";
     }
     
     private String[] getDirections() {

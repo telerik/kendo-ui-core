@@ -1,0 +1,31 @@
+<div data-role="view" data-title="Photo viewer" data-zoom="true">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <div data-role="content">
+        <div id="zoomable-explanation">
+            The contents of this mobile view are zoomable using pinch/zoom gestures. <br />
+            To test this, open the Kendo UI demos on a mobile device, which supports multi-touch gestures.
+        </div>
+        <img src="../content/mobile/shared/faces.jpg" style="display: block" />
+    </div>
+</div>
+
+<style scoped>
+    #zoomable-explanation {
+        position: absolute;
+        width: 200px;
+        top: 50px;
+        left: 50px;
+        padding: 20px;
+        background: black;
+        color: white;
+        border: 2px solid white;
+        -webkit-border-radius: 10px;
+        -webkit-opacity: 0.5;
+    }
+</style>

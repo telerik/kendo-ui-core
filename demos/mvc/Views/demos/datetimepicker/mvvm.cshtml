@@ -1,0 +1,47 @@
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 300px">
+            <h4>Choose date and time</h4>
+            <input data-role="datetimepicker"
+                   data-bind="visible: isVisible,
+                              enabled: isEnabled,
+                              value: selectedDate,
+                              events: { change: onChange }"
+                   style="width: 200px">
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 300px">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isEnabled">Enable</label>
+            </div>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI DateTimePicker supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/value">value</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        selectedDate: null,
+        isEnabled: true,
+        isVisible: true,
+        onChange: function() {
+            kendoConsole.log("event :: change (" + kendo.toString(this.get("selectedDate"), "F") + ")");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

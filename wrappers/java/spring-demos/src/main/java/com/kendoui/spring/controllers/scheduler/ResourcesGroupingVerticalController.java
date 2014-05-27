@@ -20,14 +20,14 @@ import com.kendoui.spring.models.Meeting;
 import com.kendoui.spring.models.MeetingDao;
 
 @Controller("scheduler-resources-grouping-vertical-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class ResourcesGroupingVerticalController {
     @Autowired 
     private MeetingDao meeting;
     
     @RequestMapping(value = "/resources-grouping-vertical", method = RequestMethod.GET)
     public String resources(Locale locale, Model model) {        
-        return "web/scheduler/resources-grouping-vertical";
+        return "scheduler/resources-grouping-vertical";
     }
     
     @RequestMapping(value = "/resources-grouping-vertical/read", method = RequestMethod.POST)

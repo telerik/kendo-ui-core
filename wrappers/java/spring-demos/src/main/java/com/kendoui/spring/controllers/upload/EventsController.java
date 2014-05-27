@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller("upload-events-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 public class EventsController {
     
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index() {
-        return "web/upload/events";
+        return "upload/events";
     }
     
     @RequestMapping(value = "/events/save", method = RequestMethod.POST)

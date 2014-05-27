@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("sortable-integration-listview-controller")
-@RequestMapping(value="/web/sortable/")
+@RequestMapping(value="/sortable/")
 public class IntegrationListViewController {
     @Autowired 
     private ProductDao product;
@@ -21,7 +21,7 @@ public class IntegrationListViewController {
     public String index(Locale locale, Model model) {
         model.addAttribute("products", product.getList());
         
-        return "web/sortable/integration-listview";
+        return "sortable/integration-listview";
     }
     
 }

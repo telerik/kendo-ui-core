@@ -1,0 +1,46 @@
+<div id="example">
+    <input id="products" />
+    <div id="product-preview" class="demo-section"></div>
+</div>
+
+<script id="product-template" type="text/x-kendo-template">
+    ProductName: 
+    <div>#: ProductName #</div>
+    <img src="../content/web/foods/#= ProductID #.jpg">
+</script>
+
+<script>
+    var template = kendo.template($("#product-template").html());
+
+    function preview() {
+        var dropdown = $("#products").data("kendoDropDownList");
+
+        var product = dropdown.dataSource.get(dropdown.value());
+
+        var productPreviewHtml = template(product);
+
+        $("#product-preview").html(productPreviewHtml);
+    }
+
+    $("#products").kendoDropDownList({
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        dataSource: {
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "ProductID"
+                }
+            }
+        },
+        dataBound: preview,
+        change: preview
+    });
+</script>
+<style scoped>
+</style>

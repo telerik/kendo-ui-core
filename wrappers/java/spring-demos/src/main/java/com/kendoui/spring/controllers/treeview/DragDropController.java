@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("treeview-dragdrop-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class DragDropController {
     
     @RequestMapping(value = "/dragdrop", method = RequestMethod.GET)
     public String index() {
-        return "web/treeview/dragdrop";
+        return "treeview/dragdrop";
     }
 }
 

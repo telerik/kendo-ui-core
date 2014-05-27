@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-frozen-columns-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class FrozenColumnsController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/frozen-columns", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/frozen-columns";
+        return "grid/frozen-columns";
     }
     
     @RequestMapping(value = "/frozen-columns/read", method = RequestMethod.POST)

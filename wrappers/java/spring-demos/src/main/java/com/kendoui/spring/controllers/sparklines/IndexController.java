@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-sparklines-home-controller")
-@RequestMapping(value="/dataviz/sparklines/")
+@RequestMapping(value="/sparklines/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -45,6 +45,6 @@ public class IndexController {
             put("sun", new int[] {5, 19});
         }});
         
-        return "/dataviz/sparklines/index";
+        return "/sparklines/index";
     }
 }

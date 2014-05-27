@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("maskedtextbox-api-controller")
-@RequestMapping(value="/web/maskedtextbox/")
+@RequestMapping(value="/maskedtextbox/")
 public class ApiController {
 
     @RequestMapping(value = {"api"}, method = RequestMethod.GET)
     public String index() {
-        return "web/maskedtextbox/api";
+        return "maskedtextbox/api";
     }
 }

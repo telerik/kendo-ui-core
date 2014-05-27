@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
 @Controller("dataviz-bar_charts-plotbands-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class PlotBandsController {
     @RequestMapping(value = "/plotbands", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bar-charts/plotbands";
+        return "/bar-charts/plotbands";
     }
     
     @RequestMapping(value = "/plotbands/read", method = RequestMethod.POST)

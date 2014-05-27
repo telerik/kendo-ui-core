@@ -17,7 +17,7 @@ import com.kendoui.spring.models.Task;
 
 
 @Controller("scheduler-restriction-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class RestrictionController {
     
     @SuppressWarnings("serial")
@@ -62,6 +62,6 @@ public class RestrictionController {
         meetings.add(meeting);
         model.addAttribute("meetings", meetings);
         
-        return "web/scheduler/restriction";
+        return "scheduler/restriction";
     }
 }

@@ -1,0 +1,64 @@
+        <div id="example">
+            <div class="demo-section k-header">
+
+                <div id="treeview-left"></div>
+
+                <div id="treeview-right"></div>
+            </div>
+
+            <script>
+                $("#treeview-left").kendoTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "Furniture", expanded: true, items: [
+                            { text: "Tables & Chairs" },
+                            { text: "Sofas" },
+                            { text: "Occasional Furniture" }
+                        ] },
+                        { text: "Decor", items: [
+                            { text: "Bed Linen" },
+                            { text: "Curtains & Blinds" },
+                            { text: "Carpets" }
+                        ] }
+                    ]
+                });
+
+                $("#treeview-right").kendoTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "Storage", expanded: true, items: [
+                            { text: "Wall Shelving" },
+                            { text: "Floor Shelving" },
+                            { text: "Kids Storage" }
+                        ]
+                        },
+                        { text: "Lights", items: [
+                            { text: "Ceiling" },
+                            { text: "Table" },
+                            { text: "Floor" }
+                        ]
+                        }
+                    ]
+                });
+            </script>
+
+            <style scoped>
+                #treeview-left,
+                #treeview-right
+                {
+                    float: left;
+                    width: 220px;
+                    overflow: visible;
+                }
+                .demo-section {
+                    width: 500px;
+                }
+                .demo-section:after {
+                    content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
+                }
+            </style>
+        </div>

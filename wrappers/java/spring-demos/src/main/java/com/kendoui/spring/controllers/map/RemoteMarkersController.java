@@ -11,11 +11,11 @@ import com.kendoui.spring.models.MapDataRepository;
 import com.kendoui.spring.models.Marker;
 
 @Controller("map-remotemarkers-controller")
-@RequestMapping(value="/dataviz/map/")
+@RequestMapping(value="/map/")
 public class RemoteMarkersController {
     @RequestMapping(value = {"/remote-markers"}, method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/map/remote-markers";
+        return "/map/remote-markers";
     }
     
     @RequestMapping(value = "/remote-markers/read", method = RequestMethod.POST)

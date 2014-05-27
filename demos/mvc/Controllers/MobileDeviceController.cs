@@ -10,21 +10,23 @@ namespace Kendo.Controllers
         // GET: /m
         public ActionResult Index()
         {
+            ViewBag.Product = CurrentProduct();
+            ViewBag.NavProduct = CurrentNavProduct();
 #if DEBUG
             ViewBag.Debug = true;
 #else
             ViewBag.Debug = false;
 #endif
-            LoadNavigation("mobile");
+            LoadNavigation();
             return View();
         }
 
         //
-        // GET: /m/{section}/{example}.html
+        // GET: /m/{section}/{example}
         public ActionResult Example(string section, string example)
         {
             return View(
-                string.Format("~/Views/mobile/{0}/{1}.cshtml", section, example),
+                string.Format("~/Views/demos/{0}/{1}.cshtml", section, example),
                 "~/Views/Shared/NoLayout.cshtml"
             );
         }

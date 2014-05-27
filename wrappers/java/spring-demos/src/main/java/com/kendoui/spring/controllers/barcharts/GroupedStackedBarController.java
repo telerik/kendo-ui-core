@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
 @Controller("dataviz-bar_charts-grouped_stacked_bar-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class GroupedStackedBarController {
     @RequestMapping(value = "/grouped-stacked-bar", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bar-charts/grouped-stacked-bar";
+        return "/bar-charts/grouped-stacked-bar";
     }
     
     @RequestMapping(value = "/grouped-stacked-bar/read", method = RequestMethod.POST)

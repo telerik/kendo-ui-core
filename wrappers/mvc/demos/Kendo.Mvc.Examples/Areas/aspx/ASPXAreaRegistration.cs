@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Areas.ASPX
         public override void RegisterArea(AreaRegistrationContext context)
         {
             var aspxRoute = new Route(
-                "aspx/{suite}/{controller}/{action}",
+                "aspx/{controller}/{action}",
                 new RouteValueDictionary { { "controller", "Suite" }, { "action", "Index" } },
                 new RouteValueDictionary(),
                 // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area

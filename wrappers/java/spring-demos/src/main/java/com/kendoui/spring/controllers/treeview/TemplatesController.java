@@ -11,14 +11,14 @@ import org.springframework.ui.Model;
 import com.kendoui.spring.models.TreeViewItem;
 
 @Controller("treeview-templates-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class TemplatesController {
     
     @RequestMapping(value = {"/templates"}, method = RequestMethod.GET)
     public String index(Model model) {   
                                        
         model.addAttribute("data", getData());
-        return "web/treeview/templates";
+        return "treeview/templates";
     } 
         
     private List<TreeViewItem> getData()

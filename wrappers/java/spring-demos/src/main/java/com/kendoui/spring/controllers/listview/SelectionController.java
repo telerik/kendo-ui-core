@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("listview-selection-controller")
-@RequestMapping(value="/web/listview/")
+@RequestMapping(value="/listview/")
 public class SelectionController {
     @Autowired 
     private ProductDao product;
@@ -20,7 +20,7 @@ public class SelectionController {
     @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String index() {        
         
-        return "web/listview/selection";
+        return "listview/selection";
     }
     
     @RequestMapping(value = "/selection_read", method = RequestMethod.POST)

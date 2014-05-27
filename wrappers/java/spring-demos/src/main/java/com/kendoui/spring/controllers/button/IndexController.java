@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("button-home-controller")
-@RequestMapping(value="/web/button/")
+@RequestMapping(value="/button/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/button/index";
+        return "button/index";
     }    
 }

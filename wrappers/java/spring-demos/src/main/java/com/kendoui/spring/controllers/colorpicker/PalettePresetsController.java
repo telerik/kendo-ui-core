@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("colorpicker-palettepresets-controller")
-@RequestMapping(value="/web/colorpicker/")
+@RequestMapping(value="/colorpicker/")
 public class PalettePresetsController {
     
     @RequestMapping(value = {"/palette-presets"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/colorpicker/palette-presets";
+        return "colorpicker/palette-presets";
     }    
 }

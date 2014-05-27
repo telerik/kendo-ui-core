@@ -1,0 +1,38 @@
+﻿<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+
+        function fibonacciSequence(n) {
+            var data = [1, 1];
+            for (var i = 2; i < n; i++) {
+                data.push(data[i - 1] + data[i - 2]);
+            }
+            return data;
+        }
+
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Fibonacci sequence"
+                },
+                series: [{
+                    data: fibonacciSequence(39)
+                }],
+                tooltip: {
+                    visible: true
+                },
+                valueAxis: {
+                    type: "log",                    
+                    minorGridLines: {
+                        visible: true
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

@@ -1,0 +1,64 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo UI Online Multi-Device simulator | Kendo UI demos</title>
+    <meta content="Play with Kendo UI mobile simulator and quickly test out Kendo UI in different mobile devices." name="description" />
+
+    @foreach (string styleName in Kendo.Models.StyleGroups.Simulator) {
+    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+
+    <link rel="stylesheet" href="@Url.Content("~/content/integration/simulator/devices/ipad/styles.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/content/integration/simulator/styles/styles.css")" />
+
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
+    <script src="@Url.Script(scriptName)"></script>
+    }
+    @if (ViewBag.Debug) {
+    <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    }
+    <script>
+        if (kendo.support.mobileOS) {
+            top.location.href = "@Url.Content(String.Format("~/mobile-apps/{0}/contents", ViewBag.App))";
+        }
+    </script>
+</head>
+<body class="k-content">
+    <script>
+        $(document.body).hide();
+    </script>
+    <div class="header">
+        <div class="configurator">
+            <input id="device-selector" class="selector" style="float: right" /><span>Device:&nbsp;</span><br>
+            <span class="k-button horizontal" data-orientation="horizontal"><span></span></span><span class="k-button" data-orientation="vertical"><span></span></span><span>Orientation:&nbsp;</span>
+        </div>
+        <hr />
+        <div class="description">
+            <div class="device">
+                Apple
+                <span class="model">iPad Air</span>
+            </div>
+            <p>Kendo UI Mobile helps developers build apps and sites for mobile devices that always provide native look and feel.</p>
+            <p>On iOS, Kendo UI Mobile widgets look native to iOS. On Android, Kendo UI Mobile widgets look native to Android.</p>
+            <p>Automatically, Kendo UI Mobile tries to detect the device and applies the proper styling.</p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="device-container vertical">
+            <div class="device-skin"></div>
+            <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
+            <button id="navigate-back"></button>
+            <iframe id="simulator" src="@Url.Content(String.Format("~/mobile-apps/{0}/contents", ViewBag.App))"></iframe>
+        </div>
+    </div>
+    <div class="fake3d"></div>
+    <script src="@Url.Content("~/content/integration/simulator/js/simulator.js")"></script>
+    <script>
+        $(document.body).show();
+    </script>
+</body>
+</html>

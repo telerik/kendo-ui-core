@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("autocomplete-events-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("states", getStates());
         
-        return "web/autocomplete/events";
+        return "autocomplete/events";
     }    
     
     private String[] getStates() {

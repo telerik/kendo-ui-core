@@ -1,0 +1,67 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="stock-chart"></div>
+    </div>
+    <script>
+        var stockDataSchema = {
+            model: {
+                fields: {
+                    Date: {
+                        type: "date"
+                    }
+                }
+            }
+        };
+
+        function createChart() {
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    serverFiltering: true,
+                    transport: {
+                        read: {
+                            url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function(data) {
+                            return { filter: JSON.stringify(data.filter) };
+                        }
+                    },
+                    schema: stockDataSchema
+                },
+                title: {
+                    text: "The ACME Company"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                navigator: {
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "http://demos.telerik.com/kendo-ui/service/StockData",
+                                dataType: "jsonp"
+                            }
+                        },
+                        schema: stockDataSchema
+                    },
+                    series: {
+                        type: "area",
+                        field: "High"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

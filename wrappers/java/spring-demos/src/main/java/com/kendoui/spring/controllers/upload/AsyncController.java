@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller("upload-async-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 public class AsyncController {
     
     @RequestMapping(value = "/async", method = RequestMethod.GET)
     public String index() {
-        return "web/upload/async";
+        return "upload/async";
     }
     
     @RequestMapping(value = "/async/save", method = RequestMethod.POST)

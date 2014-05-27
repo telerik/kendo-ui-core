@@ -18,35 +18,19 @@ namespace Kendo.Extensions
             return url.Content(contentUrl);
         }
 
+        public static string Widget(this UrlHelper url, string widget)
+        {
+            return url.ExampleUrl(widget, "index");
+        }
+
+        public static string ExampleUrl(this UrlHelper url, string widget, string example)
+        {
+            return url.RouteUrl("Demo", new { section = widget, example = example });
+        }
+
         public static string Script(this UrlHelper url, string file)
         {
             return ResourceUrl(url, "js", file);
-        }
-
-        public static string Suite(this UrlHelper url, string suite)
-        {
-            suite = suite.ToLowerInvariant();
-
-            var href = "~/" + suite;
-
-            if (suite != "mobile")
-            {
-                href = "~/" + suite + "/overview/index.html";
-            }
-
-            return url.Content(url.ApplyProduct(href));
-        }
-
-        public static string ApplyProduct(this UrlHelper url, string href)
-        {
-            var product = url.RequestContext.HttpContext.Request.QueryString.ToString().Replace("&nav=true", "").Replace("nav=true", "");
-
-            if (!string.IsNullOrEmpty(product))
-            {
-                return href + "?" + product;
-            }
-
-            return href;
         }
 
         public static string Style(this UrlHelper url, string file)
@@ -57,11 +41,7 @@ namespace Kendo.Extensions
         private static string ResourceUrl(UrlHelper url, string assetType, string file)
         {
 #if DEBUG
-            return url.Content(string.Format("{0}/src/{1}/{2}",
-                HostingEnvironment.ApplicationVirtualPath,
-                assetType,
-                file
-            ));
+            return url.Content(string.Format("~/src/{0}/{1}", assetType, file));
 #else
             if (IsAbsoluteUrl(file)) {
                 return file;

@@ -89,8 +89,8 @@ MVC_DEMOS = FileList[MVC_DEMOS_ROOT + '**/*']
                         .sub(DEMO_SHARED_ROOT + 'shared/images/photos/220', MVC_DEMOS_ROOT + 'Content/shared/images/photos/220')
                 )
                 .include(
-                    FileList['demos/mvc/App_Data/{dataviz,web,mobile}.nav.json']
-                        .sub('demos/mvc/App_Data', MVC_DEMOS_ROOT + 'App_Data')
+                    FileList['demos/mvc/content/nav.json']
+                        .sub('demos/mvc/content', MVC_DEMOS_ROOT + 'Content')
                 )
                 .include(MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll')
                 .exclude('**/*.winjs.*')
@@ -133,9 +133,9 @@ namespace :mvc do
          :from => MIN_CSS_RESOURCES,
          :root => 'dist/styles'
 
-    tree :to => MVC_DEMOS_ROOT + 'App_Data',
-         :from => 'demos/mvc/App_Data/*.nav.json',
-         :root => 'demos/mvc/App_Data/'
+    tree :to => MVC_DEMOS_ROOT + 'Content',
+         :from => 'demos/mvc/content/nav.json',
+         :root => 'demos/mvc/content/'
 
     tree :to => MVC_DEMOS_ROOT + 'Content/web',
          :from => DEMO_SHARED_ROOT + 'web/**/*',

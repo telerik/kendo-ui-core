@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-qrcode-home-controller")
-@RequestMapping(value="/dataviz/qrcode/")
+@RequestMapping(value="/qrcode/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
         
-        return "/dataviz/qrcode/index";
+        return "/qrcode/index";
     }
 }

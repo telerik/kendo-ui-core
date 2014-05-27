@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("timepicker-api-controller")
-@RequestMapping(value="/web/timepicker/")
+@RequestMapping(value="/timepicker/")
 public class ApiController {
     
     @RequestMapping(value = {"/api"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/timepicker/api";
+        return "timepicker/api";
     }
 }

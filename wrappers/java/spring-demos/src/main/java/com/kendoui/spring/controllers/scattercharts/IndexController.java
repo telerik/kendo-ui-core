@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-scatter_charts-home-controller")
-@RequestMapping(value="/dataviz/scatter-charts/")
+@RequestMapping(value="/scatter-charts/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/scatter-charts/index";
+        return "/scatter-charts/index";
     }
 }

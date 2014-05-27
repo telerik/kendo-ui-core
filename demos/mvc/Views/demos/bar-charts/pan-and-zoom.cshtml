@@ -1,0 +1,101 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+        // Minimum/maximum number of visible items
+        var MIN_SIZE = 10;
+        var MAX_SIZE = 20;
+
+        // Optional sort expression
+        // var SORT = { field: "val", dir: "asc" };
+        var SORT = {};
+
+        // Minimum distance in px to start dragging
+        var DRAG_THR = 50;
+
+        // Sample data
+        var data = [];
+        for (var i = 0; i < 100; i++) {
+          var val = Math.round(Math.random() * 10);
+          data.push({
+            category: "C" + i,
+            val: val
+          });
+        }
+
+        // State variables
+        var viewStart = 0;
+        var viewSize = MIN_SIZE;
+        var newStart;
+        
+        // Drag handler
+        function onDrag(e) {
+            var chart = e.sender;
+            var ds = chart.dataSource;
+            var delta = Math.round(e.originalEvent.x.initialDelta / DRAG_THR);
+
+            if (delta != 0) {
+            newStart = Math.max(0, viewStart - delta);
+            newStart = Math.min(data.length - viewSize, newStart);
+            ds.query({
+                skip: newStart,
+                page: 0,
+                pageSize: viewSize,
+                sort: SORT
+            });
+            }
+        }
+
+        function onDragEnd() {
+            viewStart = newStart;
+        }
+
+        // Zoom handler
+        function onZoom(e) {
+            var chart = e.sender;
+            var ds = chart.dataSource;
+            viewSize = Math.min(Math.max(viewSize + e.delta, MIN_SIZE), MAX_SIZE);
+            ds.query({
+                skip: viewStart,
+                page: 0,
+                pageSize: viewSize,
+                sort: SORT
+            });
+
+            // Prevent document scrolling
+            e.originalEvent.preventDefault();
+        }
+
+        function createChart() {
+            $("#chart").kendoChart({
+              dataSource: {
+                data: data,
+                pageSize: viewSize,
+                page: 0,
+                sort: { field: "val", dir: "desc" }
+              },
+              categoryAxis: {
+                field: "category"
+              },
+              valueAxis: {
+                // Optionally set min and max
+                // to avoid axis range changes
+                min: 0,
+                max: 12
+              },
+              series: [{
+                type: "column",
+                field: "val"
+              }],
+              transitions: false,
+              drag: onDrag,
+              dragEnd: onDragEnd,
+              zoom: onZoom
+            });
+        }
+
+        $(document).ready(createChart);
+        $("#example").bind("kendo:skinChange", createChart);
+    </script>
+</div>

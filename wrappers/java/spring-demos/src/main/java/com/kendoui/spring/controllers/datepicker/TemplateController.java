@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datepicker-template-controller")
-@RequestMapping(value="/web/datepicker/")
+@RequestMapping(value="/datepicker/")
 public class TemplateController {
     
     @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index(Model model) {       
         model.addAttribute("dates", getDates());
         
-        return "web/datepicker/template";
+        return "datepicker/template";
     }
 
     private ArrayList<Date> getDates() {

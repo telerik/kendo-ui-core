@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.PieChartsBasicUsageViewModel;
 
 @Controller("dataviz-funnel_charts-home-controller")
-@RequestMapping(value="/dataviz/funnel-charts/")
+@RequestMapping(value="/funnel-charts/")
 public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -43,6 +43,6 @@ public class IndexController {
 
         model.addAttribute("decData", decData);
         
-        return "/dataviz/funnel-charts/index";
+        return "/funnel-charts/index";
     }
 }

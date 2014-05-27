@@ -15,7 +15,7 @@ import com.kendoui.spring.models.UploadInitialFile;
 
 
 @Controller("upload-initialfiles-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 @SessionAttributes({"initialFiles"})
 public class InitialfilesController {
     
@@ -30,7 +30,7 @@ public class InitialfilesController {
 
         model.addAttribute("initialFiles", initialFiles);
         
-        return "web/upload/initialfiles";
+        return "upload/initialfiles";
     }
     
     @RequestMapping(value = "/initialfiles/saveAndPersist", method = RequestMethod.POST)

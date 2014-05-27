@@ -1,0 +1,101 @@
+<div id="example" class="k-content">
+    <div class="demo-section">
+        <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
+
+        <label><select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select>src:</label>
+        <label><input type="textbox" data-bind="value: imageAlt" class="k-textbox" />alt:</label>
+        <label><input type="textbox" data-bind="value: imageTitle" class="k-textbox" />title:</label>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var viewModel = kendo.observable({
+                imageSrc: null,
+                food: [
+                    { name: "Mishi Kobe Niku", url: "../content/web/foods/9.jpg" },
+                    { name: "Chef Anton's Cajun Seasoning", url: "../content/web/foods/4.jpg" },
+                    { name: "Queso Manchego La Pastora", url: "../content/web/foods/12.jpg" }
+                ],
+                imageAlt: "Alt attribute value",
+                imageTitle: "Title attribute value"
+            });
+
+            viewModel.imageSrc = viewModel.food[0].url;
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
+    <div class="demo-section">
+    &lt;img src="<span data-bind='text: imageSrc'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
+&lt;div id=&quot;example&quot;&gt;
+    &lt;img data-bind=&quot;attr: { src: imageSrc, alt: imageAlt, title: imageTitle }&quot; /&gt;
+
+    &lt;label&gt;src:&lt;select data-text-field=&quot;name&quot; data-value-field=&quot;url&quot; data-bind=&quot;source: food, value: imageSrc&quot; &gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;label&gt;alt:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageAlt&quot; /&gt;&lt;/label&gt;
+    &lt;label&gt;title:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageTitle&quot; /&gt;&lt;/label&gt;
+&lt;/div&gt;
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
+var viewModel = kendo.observable({
+    imageSrc: null,
+    food: [
+        { name: &quot;Mishi Kobe Niku&quot;, url: &quot;../content/web/foods/9.jpg&quot; },
+        { name: &quot;Chef Anton's Cajun Seasoning&quot;, url: &quot;../content/web/foods/4.jpg&quot; },
+        { name: &quot;Queso Manchego La Pastora&quot;, url: &quot;../content/web/foods/12.jpg&quot; },
+    ],
+    imageAlt: &quot;Alt attribute value&quot;,
+    imageTitle: &quot;Title attribute value&quot;
+});
+
+viewModel.imageSrc = viewModel.food[0].url;
+
+kendo.bind($(&quot;#example&quot;), viewModel);
+        </pre>
+    </div>
+    <style scoped>
+        .demo-section
+        {
+            overflow: hidden;
+            width: 380px;
+            margin: 30px auto;
+        }
+
+        #example > div > label
+        {
+            height: 30px;
+            line-height: 30px;
+            vertical-align: middle;
+        }
+
+        #example > div > label > input,
+        #example > div > label > select
+        {
+            float: right;
+            width: 200px;
+        }
+
+        #example > div > label > select
+        {
+            width: 207px;
+        }
+
+        img {
+            float: left;
+            margin-right: 10px;
+        }
+
+        label {
+            display: block;
+        }
+
+        #example pre {
+            font-size: 12px;
+        }
+    </style>
+</div>

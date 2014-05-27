@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("autocomplete-serverfiltering-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class ServerFilteringController {
     @Autowired 
     private ProductDao product;
 
     @RequestMapping(value = "/serverfiltering", method = RequestMethod.GET)
     public String index() {
-        return "web/autocomplete/serverfiltering";
+        return "autocomplete/serverfiltering";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

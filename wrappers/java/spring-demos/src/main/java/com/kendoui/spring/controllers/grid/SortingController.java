@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-sorting-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class SortingController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/sorting", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/sorting";
+        return "grid/sorting";
     }
     
     @RequestMapping(value = "/sorting/read", method = RequestMethod.POST)

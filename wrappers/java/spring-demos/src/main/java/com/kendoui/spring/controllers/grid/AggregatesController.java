@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-aggregates-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class AggregatesController {
     @Autowired 
     private ProductDao product;
 
     @RequestMapping(value = "/aggregates", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/aggregates";
+        return "grid/aggregates";
     }
     
     @RequestMapping(value = "/aggregates/read", method = RequestMethod.POST)

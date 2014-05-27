@@ -1,0 +1,68 @@
+﻿<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/js/spain-electricity.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                },
+                title: {
+                    text: "Spain electricity production (GWh)"
+                },
+                legend: {
+                    position: "top"
+                },
+                seriesDefaults: {
+                    type: "line"
+                },
+                series: [{
+                    field: "nuclear",
+                    name: "Nuclear"
+                }, {
+                    field: "hydro",
+                    name: "Hydro"
+                }, {
+                    field: "wind",
+                    name: "Wind"
+                }],
+                categoryAxis: {
+                    field: "year",
+                    labels: {
+                        rotation: -90
+                    },
+                    crosshair: {
+                        visible: true
+                    }
+                },
+                valueAxis: {
+                    type: "log",
+                    labels: {
+                        format: "N0"
+                    },
+                    minorGridLines: {
+                        visible: true
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    shared: true,
+                    format: "N0"
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

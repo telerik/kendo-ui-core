@@ -1,0 +1,71 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="stock-chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                panes: [{
+                    title: "Value"
+                }, {
+                    name: "volumePane",
+                    title: "Volume",
+                    height: 150 // pixels
+                }],
+                categoryAxis: {
+                    pane: "volumePane"
+                },
+                valueAxes: [{
+                    // Default axis
+                    line: {
+                        visible: false
+                    }
+                }, {
+                    name: "volumeAxis",
+                    pane: "volumePane",
+                    visible: false
+                }],
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+
+                }, {
+                    type: "column",
+                    field: "Volume",
+                    axis: "volumeAxis",
+                    tooltip: {
+                        format: "{0:C0}"
+                    }
+                }],
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

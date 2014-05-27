@@ -12,45 +12,9 @@ namespace Kendo.Extensions
 {
     public static class HtmlExtensions
     {
-        public static IHtmlString SuiteLink(this HtmlHelper html, string suite, string title = "", string cssClass = "")
+        public static IHtmlString ExampleLink(this HtmlHelper html, NavigationExample example)
         {
-            title = string.IsNullOrEmpty(title) ? suite : title;
-
-            suite = suite.ToLowerInvariant();
-
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-
-            var viewBag = html.ViewContext.Controller.ViewBag;
-
-            var selectedClass = viewBag.Suite == suite ? " selected" : "";
-
-            return html.Raw(
-                string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
-                    suite,
-                    (cssClass + selectedClass).Trim(),
-                    Url.Suite(suite),
-                    title
-                )
-            );
-        }
-
-        public static IHtmlString ActiveSuiteClass(this HtmlHelper html, string title)
-        {
-            if (html.ViewContext.HttpContext.Request.Path.Contains(title.ToLowerInvariant()))
-            {
-                return html.Raw(" class=\"active\"");
-            }
-
-            return html.Raw("");
-        }
-        
-        public static IHtmlString ExampleLink(this HtmlHelper html, NavigationExample example, string suite)
-        {
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-
-            var href = Url.Content("~/" + suite + "/" + example.Url);
-
-            href = Url.ApplyProduct(href);
+            var href = html.ExampleUrl(example);
 
             return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
                     example.New ? "class=\"new-example\"" : "",
@@ -58,6 +22,22 @@ namespace Kendo.Extensions
                     href,
                     example.Text
             ));
+        }
+
+        public static string ExampleUrl(this HtmlHelper html, NavigationExample example)
+        {
+            var sectionAndExample = example.Url.Split('/');
+
+            return new UrlHelper(html.ViewContext.RequestContext).ExampleUrl(sectionAndExample[0], sectionAndExample[1]);
+        }
+
+        public static string ProductExampleUrl(this HtmlHelper html, NavigationExample example, string product)
+        {
+            var viewBag = html.ViewContext.Controller.ViewBag;
+
+            var currentProduct = (string)viewBag.Product;
+
+            return html.ExampleUrl(example).Replace(currentProduct, product);
         }
 
         public static String CdnRoot(this HtmlHelper html)
@@ -78,20 +58,13 @@ namespace Kendo.Extensions
 #endif
         }
 
-        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget, string category)
+        public static IHtmlString WidgetLink(this HtmlHelper html, NavigationWidget widget)
         {
-            var Url = new UrlHelper(html.ViewContext.RequestContext);
-
             var viewBag = html.ViewContext.Controller.ViewBag;
 
-            var href = Url.Content("~/" + (string)viewBag.Suite + "/" + widget.Items[0].Url);
-
-            href = Url.ApplyProduct(href);
-
-            category = category.ToLower();
+            var href = html.ExampleUrl(widget.Items[0]);
 
             var className = "";
-
 
             if (widget.Text == "Theme Builder")
             {
@@ -105,11 +78,6 @@ namespace Kendo.Extensions
             }
 
             var target = "";
-
-            if (category.Contains("application") || category.Contains("custom themes"))
-            {
-                target = "_blank";
-            }
 
             StringBuilder a = new StringBuilder();
 

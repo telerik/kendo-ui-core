@@ -1,0 +1,61 @@
+<div id="example">
+
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 260px;">
+            <h4>FlatColorPicker:</h4>
+            <div id="flatcolorpicker" data-role="flatcolorpicker"></div>      
+        </div>
+        <div class="box-col">
+            <h4>ColorPicker (palette):</h4>
+            <input type="color" id="palette-picker" value="#cc2222" data-role="colorpicker" data-palette="basic">        
+        </div>
+        <div class="box-col">
+            <h4>ColorPicker (HSV):</h4>
+            <input type="color" id="hsv-picker" value="#22cc22" data-role="colorpicker">        
+        </div>
+        <div class="box-col">
+            <h4>ColorPalette:</h4>
+            <div id="palette" data-role="colorpalette"></div>        
+        </div>
+    </div>
+
+    <script>
+        // initialize widgets
+        kendo.init($("#example"));
+
+        // log events
+        $("#palette-picker, #hsv-picker").each(function(){
+            var colorPicker = $(this).data("kendoColorPicker");
+
+            colorPicker.bind({
+                select: function(e) {
+                    kendoConsole.log("Select in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                change: function(e) {
+                    kendoConsole.log("Change in picker #" + this.element.attr("id") + " :: " + e.value);
+                },
+                open: function() {
+                    kendoConsole.log("Open in picker #" + this.element.attr("id"));
+                },
+                close: function() {
+                    kendoConsole.log("Close in picker #" + this.element.attr("id"));
+                }
+            });
+        });
+
+        var colorPalette = $("#palette").data("kendoColorPalette");
+        colorPalette.bind("change", function(e) {
+            kendoConsole.log("Change in color palette :: " + e.value);
+        });
+
+        var flatColorPicker = $("#flatcolorpicker").data("kendoFlatColorPicker");
+        flatColorPicker.bind("change", function(e) {
+            kendoConsole.log("Change in flat color picker :: " + e.value);
+        });
+    </script>
+
+    <div class="box">                
+        <h4>Console log</h4>
+        <div class="console"></div>
+    </div>
+</div>

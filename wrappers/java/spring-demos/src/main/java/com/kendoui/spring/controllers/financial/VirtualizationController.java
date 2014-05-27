@@ -19,7 +19,7 @@ import com.kendoui.spring.models.Intraday;
 import com.kendoui.spring.models.IntradayDao;
 
 @Controller("dataviz-financial-virtualization-controller")
-@RequestMapping(value="/dataviz/financial/")
+@RequestMapping(value="/financial/")
 public class VirtualizationController {
     @Autowired 
     private IntradayDao intraday;
@@ -31,7 +31,7 @@ public class VirtualizationController {
         Date to = (Date)formatter.parse("2011/10/07");
         model.addAttribute("from", from);
         model.addAttribute("to", to);
-        return "/dataviz/financial/virtualization";
+        return "/financial/virtualization";
     }
     
     @RequestMapping(value = "/virtualization/read", method = RequestMethod.POST)

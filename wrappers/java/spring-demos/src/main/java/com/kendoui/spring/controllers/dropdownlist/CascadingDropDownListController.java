@@ -16,7 +16,7 @@ import com.kendoui.spring.models.OrderDao;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("dropdownlist-cascadingdropdownlist-controller")
-@RequestMapping(value="/web/dropdownlist/")
+@RequestMapping(value="/dropdownlist/")
 public class CascadingDropDownListController {
     
     @Autowired 
@@ -30,7 +30,7 @@ public class CascadingDropDownListController {
     
     @RequestMapping(value = {"/cascadingdropdownlist"}, method = RequestMethod.GET)
     public String index() {
-        return "web/dropdownlist/cascadingdropdownlist";
+        return "dropdownlist/cascadingdropdownlist";
     }
     
     @RequestMapping(value = "/cascadingdropdownlist/categories", method = RequestMethod.POST)

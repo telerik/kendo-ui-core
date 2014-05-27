@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("multiselect-events-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
@@ -23,6 +23,6 @@ public class EventsController {
                 new DropDownListItem("Australia", "7")
         });
         
-        return "web/multiselect/events";
+        return "multiselect/events";
     }
 }

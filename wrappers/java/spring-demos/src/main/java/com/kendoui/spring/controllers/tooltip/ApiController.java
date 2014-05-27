@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("tooltip-api-controller")
-@RequestMapping(value="/web/tooltip/")
+@RequestMapping(value="/tooltip/")
 public class ApiController {    
     
     @SuppressWarnings("serial")
@@ -27,7 +27,7 @@ public class ApiController {
                 }});
         }});
         
-        return "web/tooltip/api";
+        return "tooltip/api";
     }
 }
 

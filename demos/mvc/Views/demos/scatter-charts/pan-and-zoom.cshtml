@@ -1,0 +1,74 @@
+
+        <div id="example">
+            <div class="demo-section k-content">
+                <div id="chart"></div>
+            </div>
+            <script>
+                // Generate sample data
+                var data = [];
+                var step = Math.PI / 4;
+                for (var x = -25; x < 25; x += step) {
+                    data.push({ x: x, y: Math.sin(x) });
+                }
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        renderAs: "canvas",
+                        dataSource: {
+                            data: data
+                        },
+                        xAxis: {
+                            name: "xAxis",
+                            min: -2,
+                            max: 2,
+                            labels: {
+                                format: "{0:N1}"
+                            }
+                        },
+                        series: [{
+                            type: "scatterLine",
+                            xField: "x",
+                            yField: "y",
+                            style: "smooth",
+                            markers: {
+                                visible: false
+                            }
+                        }],
+                        transitions: false,
+                        drag: setRange,
+                        zoom: setRange
+                    });
+
+                    function setRange(e) {
+                        var chart = e.sender;
+                        var options = chart.options;
+
+                        // Prevent document scrolling on mousewheel zoom
+                        e.originalEvent.preventDefault();
+
+                        var xRange = e.axisRanges.xAxis;
+                        if (xRange) {
+                            // Suggested axis ranges
+                            var xMin = xRange.min;
+                            var xMax = xRange.max;
+
+                            // Limit maximum zoom-in
+                            if (xMax - xMin < 2) {
+                                return;
+                            }
+
+                            // Set X axis range
+                            chart.setOptions({
+                                xAxis: {
+                                    min: xMin,
+                                    max: xMax
+                                }
+                            });
+                        }
+                    }
+                }
+
+                $(document).ready(createChart);
+                $("#example").bind("kendo:skinChange", createChart);
+            </script>
+        </div>

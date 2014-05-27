@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-area_chart-smooth_area-controller")
-@RequestMapping(value="/dataviz/area-charts/")
+@RequestMapping(value="/area-charts/")
 public class SmoothAreaController {
     @RequestMapping(value = "/smooth-area", method = RequestMethod.GET)
     public String index(Model model) {
-        return "/dataviz/area-charts/smooth-area";
+        return "/area-charts/smooth-area";
     }
 }

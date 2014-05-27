@@ -1,0 +1,593 @@
+@{
+    Layout = "~/Views/Shared/ThemeBuilderLayout.cshtml";
+}
+
+<div class="content-wrap">
+    <div id="example" class="k-content">
+    <div class="column">
+        <h3>Button</h3>
+        <button class="k-button">A button</button>
+        <button class="k-button">Another one</button>
+
+        <h3>Menu</h3>
+        <ul data-role="menu">
+            <li>First Item
+                <ul>
+                    <li>Sub Item 1</li>
+                    <li>Sub Item 2
+                        <ul>
+                            <li>Sub Item 1</li>
+                            <li>Sub Item 2</li>
+                            <li>Sub Item 3</li>
+                            <li>Sub Item 4</li>
+                        </ul>
+                    </li>
+                    <li>Sub Item 3</li>
+                    <li>Sub Item 4</li>
+                </ul>
+            </li>
+            <li disabled="disabled">Disabled</li>
+            <li>Template
+                <ul>
+                    <li>
+                        <div class="k-content" style="padding: 10px;">
+                            This is a <br />simple template item.<br /><br />
+                            <button class="k-button">With a button</button>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Grid</h3>
+        <div data-role="grid"
+            data-bind="source: sharedDataSource"
+            data-scrollable="false" data-selectable="true" data-filterable="true"
+            data-sortable="{ allowUnsort: false }"
+            data-columns="[
+                {field:'year',title:'Year',width:100},
+                {field:'value',title:'Estimated Users'}
+            ]"></div>
+
+        <h3>TabStrip</h3>
+        <div data-role="tabstrip">
+            <ul>
+                <li class="k-state-active">First Tab</li>
+                <li>Second Tab</li>
+                <li>Third Tab</li>
+            </ul>
+            <div><p>TabStrip sample content, first tab</p></div>
+            <div><p>TabStrip sample content, second tab</p></div>
+            <div><p>TabStrip sample content, third tab</p></div>
+        </div>
+
+        <h3>PanelBar</h3>
+        <ul data-role="panelbar">
+            <li class="k-state-active">Item 1
+                <ul>
+                    <li>Item 1.1</li>
+                    <li>Item 1.2</li>
+                    <li>Item 1.3</li>
+                </ul>
+            </li>
+            <li>Item 2
+                <ul>
+                    <li>Item 2.1</li>
+                    <li>Item 2.2</li>
+                    <li>Item 2.3</li>
+                </ul>
+            </li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+
+    <div class="column">
+        <h3>Pickers</h3>
+        <input data-role="autocomplete" data-bind="source: countries" />
+        <input data-role="dropdownlist" data-bind="source: countries" />
+        <input data-role="combobox" data-bind="source: countries" />
+
+        <input data-role="datepicker" data-bind="value: today" />
+        <input data-role="timepicker" data-bind="value: today" />
+
+        <input data-role="numerictextbox" type="number" min="0" max="10" value="5" />
+
+        <select data-role="multiselect" data-bind="source: countries, value: multiSelectValue" multiple="multiple"></select>
+
+        <input data-role="colorpicker" />
+
+        <h3>Slider</h3>
+        <input data-role="slider" type="number" min="0" max="10" value="5" />
+
+        <h3>TreeView</h3>
+        <ul data-role="treeview" style="height: 140px">
+            <li data-expanded="true">Item 1
+                <ul>
+                    <li>Item 1.1</li>
+                    <li>Item 1.2</li>
+                    <li>Item 1.3</li>
+                </ul>
+            </li>
+            <li>Item 2
+                <ul>
+                    <li>Item 2.1</li>
+                    <li>Item 2.2</li>
+                    <li>Item 2.3</li>
+                </ul>
+            </li>
+            <li>Item 3</li>
+        </ul>
+
+        <h3>Window</h3>
+        <div data-role="window" data-title="Sample title" data-width="140" data-height="100">Sample content</div>
+    </div>
+
+    <div class="column">
+        <h3 title="Kendo UI Tooltip" id="tooltip" style="width:10em">Tooltip</h3>
+
+        <h3>Upload</h3>
+        <input data-role="upload" type="file" />
+
+        <h3>Calendar</h3>
+        <div data-role="calendar"></div>
+
+        <h3>Splitter</h3>
+        <div data-role="splitter" style="height: 120px;">
+            <div>Left pane</div>
+            <div>Right pane</div>
+        </div>
+
+        <h3>Progress bar</h3>
+        <div data-role="progressbar" data-value="40" style="width: auto"></div>
+
+        <h3>Notifications</h3>
+        <div id="notification"></div>
+    </div>
+
+    <div id="scheduler"></div>
+
+
+    <div class="column">
+        <div id="area-chart"></div>
+
+        <div id="bubble-chart"></div>
+    </div>
+
+    <div class="column">
+        <div id="mixed-chart"></div>
+
+        <div id="linear-gauge"></div>
+    </div>
+
+    <div class="column">
+        <div id="pie-chart"></div>
+
+        <div id="radial-gauge"></div>
+    </div>
+    </div>
+
+    <div id="instructions-box" class="box">
+        <h4>Instructions</h4>
+        <ol id="instructions-list">
+            <li class="themechooser">
+                <p>Select a theme to modify:</p>
+                <ul class="tc-theme-list"
+                    data-role="themechooser"
+                    data-template="theme-item-template"
+                    data-value="Silver"
+                    data-bind="source: themes, events: { change: updateTheme }"></ul>
+
+                <script id="theme-item-template" type="text/x-kendo-template">
+                    <li class="tc-item">
+                        # for (var i = 0; i < colors.length; i++) { #
+                            <span class="tc-color" style="background-color: #= colors[i] #"></span>
+                        # } #
+                        <span class="tc-name">#: name #</span>
+                    </li>
+                </script>
+            </li>
+            <li>Start the <a class="k-button" id="bookmarklet" href="#">Kendo UI ThemeBuilder</a></li>
+            <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
+        </ol>
+    </div>
+
+    <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
+
+    <script>
+        $("#bookmarklet").attr("href", ("javascript:(function(){" +
+                "var ktb=window.kendoThemeBuilder,s,d=document;" +
+                "if(typeof ktb!='undefined'){" +
+                    "ktb.open();" +
+                    "return" +
+                "}else{" +
+                    "s=d.createElement('script');" +
+                    "s.src='@ViewBag.DeployRoot/bootstrap.js?'+(+new Date());" +
+                    "d.getElementsByTagName('body')[0].appendChild(s);" +
+                "}" +
+            "})()").replace(/\s+/g, "%20"));
+    </script>
+
+</div>
+
+<style>
+    .nav-buttons {
+        display: none;
+    }
+
+    .content-wrap {
+        width: 1200px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+    }
+
+    h3 {
+        font: normal 16px/1.5 Arial,sans-serif;
+        margin: 20px 0 13px;
+    }
+
+    #example {
+        margin-top: 400px;
+    }
+
+    #instructions-box {
+        margin: 0;
+        padding-bottom: 2em;
+        position: absolute;
+        top: 0;
+    }
+
+    #instructions-list li {
+        list-style-type: decimal;
+    }
+
+    .themechooser {
+        text-align: left;
+        border: 0;
+        background: none;
+    }
+
+    .themechooser ul {
+        border: 0;
+        background: transparent;
+        margin: 1em 0;
+        padding: .5em;
+    }
+
+    .themechooser li {
+        display: inline-block;
+        padding: .4em .5%;
+        width: 17%;
+    }
+
+    .column .k-chart,
+    .column .k-gauge {
+        display: block;
+        margin-bottom: 14px;
+    }
+
+    .column .k-gauge {
+        margin-top: 130px;
+    }
+
+    .column {
+        width: 29%;
+        padding: 0 2%;
+        margin: 0 0 2em;
+        float: left;
+    }
+
+    .column .k-widget:not(.k-colorpicker) {
+        display: block;
+    }
+
+    .column .k-widget {
+        margin-bottom: 14px;
+    }
+
+    #scheduler {
+        clear: both;
+        margin: 0 2% 3em;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        kendo.bind($("#example"), {
+            countries: [
+                "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria",
+                "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
+                "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia",
+                "Malta", "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino",
+                "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "United States",
+                "Vatican City"
+            ],
+            multiSelectValue: [ "Finland", "Estonia" ],
+            today: kendo.toString(new Date()),
+            sharedDataSource: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: '@Url.Content("~/content/web/datasource/internet-users.json")',
+                        dataType: "json"
+                    }
+                },
+                sort: {
+                    field: "year",
+                    dir: "asc"
+                },
+                filter: [
+                    { field: "country", operator: "equals", value: "United States" },
+                    { field: "year", operator: "greaterThanEqual", value: 2000 }
+                ],
+                schema: {
+                    model: {
+                        fields: {
+                            year: {
+                                type: "number"
+                            },
+                            value: {
+                                type: "string"
+                            }
+                        }
+                    }
+                }
+            })
+        });
+
+        $("#tooltip").kendoTooltip({
+            position: "top"
+        }).data("kendoTooltip").show();
+
+        var serviceBaseUrl = "http://demos.telerik.com/kendo-ui/service";
+        $("#scheduler").kendoScheduler({
+            date: new Date("2013/6/13"),
+            startTime: new Date("2013/6/13 07:00 AM"),
+            endTime: new Date("2013/6/13 08:00 PM"),
+            views: [
+                { type: "day", selected: true },
+                "week",
+                "month"
+            ],
+            editable: false,
+            timezone: "Etc/UTC",
+            dataSource: {
+                batch: true,
+                transport: {
+                    read: {
+                        url: serviceBaseUrl + "/meetings",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: serviceBaseUrl + "/meetings/update",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: serviceBaseUrl + "/meetings/create",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: serviceBaseUrl + "/meetings/destroy",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "meetingID",
+                        fields: {
+                            meetingID: { from: "MeetingID", type: "number" },
+                            title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                            start: { type: "date", from: "Start" },
+                            end: { type: "date", from: "End" },
+                            startTimezone: { from: "StartTimezone" },
+                            endTimezone: { from: "EndTimezone" },
+                            description: { from: "Description" },
+                            recurrenceId: { from: "RecurrenceID" },
+                            recurrenceRule: { from: "RecurrenceRule" },
+                            recurrenceException: { from: "RecurrenceException" },
+                            roomId: { from: "RoomID", nullable: true },
+                            atendees: { from: "Atendees", nullable: true },
+                            isAllDay: { type: "boolean", from: "IsAllDay" }
+                        }
+                    }
+                }
+            }
+        });
+
+        var notification = $("#notification").kendoNotification({
+            autoHideAfter: 0,
+            hideOnClick: false,
+            appendTo: "#notification"
+        }).data("kendoNotification");
+
+        notification.info("information");
+        notification.success("success");
+        notification.warning("warning");
+        notification.error("error");
+    });
+
+    function initialize() {
+        $("#area-chart").kendoChart({
+            transitions: false,
+            title: {
+                text: "Internet Users"
+            },
+            legend: {
+                position: "bottom"
+            },
+            seriesDefaults: {
+                type: "area"
+            },
+            series: [
+                {
+                    name: "United States",
+                    data: [67.96, 68.93, 75, 74, 78]
+                }, {
+                    name: "World",
+                    data: [15.7, 16.7, 20, 23.5, 26.6]
+                }
+            ],
+            valueAxis: {
+                labels: {
+                    format: "{0}%"
+                }
+            },
+            categoryAxis: {
+                categories: [2005, 2006, 2007, 2008, 2009]
+            },
+            tooltip: {
+                visible: true,
+                format: "{0}%"
+            }
+        });
+
+        $("#mixed-chart").kendoChart({
+            transitions: false,
+            title: {
+                text: "Hybrid car mileage report"
+            },
+            legend: {
+                position: "bottom"
+            },
+            series: [{
+                type: "column",
+                data: [20, 40, 45, 30, 50],
+                stack: true,
+                name: "on battery"
+            }, {
+                type: "column",
+                data: [20, 30, 35, 35, 40],
+                stack: true,
+                name: "on gas"
+            }, {
+                type: "line",
+                data: [7.8, 6.2, 5.9, 7.4, 5.6],
+                name: "l/100 km",
+                axis: "l100km"
+            }],
+            valueAxes: [{
+                title: { text: "miles" },
+                min: 0,
+                max: 100
+            }, {
+                name: "l100km",
+                title: { text: "liters per 100km" }
+            }],
+            categoryAxis: {
+                categories: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+                axisCrossingValues: [0, 10]
+            }
+        });
+
+
+        $("#bubble-chart").kendoChart({
+            transitions: false,
+            title: {
+                text: "Crime statistics"
+            },
+            legend: {
+                visible: false
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        url: '@Url.Content("~/content/dataviz/js/crime-stats.json")',
+                        dataType: "json"
+                    }
+                }
+            },
+            series: [{
+                type: "bubble",
+                xField: "murder",
+                yField: "burglary",
+                sizeField: "population",
+                categoryField: "state"
+            }],
+            xAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Murders per 100,000 population"
+                }
+            },
+            yAxis: {
+                labels: {
+                    format: "{0:N0}"
+                },
+                title: {
+                    text: "Burglaries per 100,000 population"
+                }
+            },
+            tooltip: {
+                visible: true,
+                format: "{3}: Population {2:N0}"
+            }
+        });
+
+        $("#pie-chart").kendoChart({
+            transitions: false,
+            title: {
+                text: "Break-up of Spain Electricity Production for 2008"
+            },
+            legend: {
+                position: "bottom",
+                labels: {
+                    template: "#= text # (#= value #%)"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    visible: true,
+                    background: "transparent"
+                }
+            },
+            series: [{
+                type: "pie",
+                data: [{
+                    category: "Hydro",
+                    value: 22
+                }, {
+                    category: "Solar",
+                    value: 2
+                }, {
+                    category: "Nuclear",
+                    value: 49
+                }, {
+                    category: "Wind",
+                    value: 27
+                }]
+            }],
+            tooltip: {
+                visible: true,
+                format: "{0}%"
+            }
+        });
+
+        $("#linear-gauge").kendoLinearGauge({
+            transitions: false,
+            pointer: {
+                value: 30
+            }
+        });
+
+        $("#radial-gauge").kendoRadialGauge({
+            transitions: false,
+            pointer: {
+                value: 40
+            },
+            scale: {
+                max: 180,
+                ranges: [
+                    { from: 160, to: 180, color: "#ff0000" }
+                ]
+            }
+        });
+    }
+
+    $(document).ready(initialize);
+    $("#example").bind("kendo:skinChange", initialize);
+</script>

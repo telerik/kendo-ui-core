@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("dataviz-bar_charts-stacked_bar-controller")
-@RequestMapping(value="/dataviz/bar-charts/")
+@RequestMapping(value="/bar-charts/")
 public class StackedBarController {
     @RequestMapping(value = "/stacked-bar", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bar-charts/stacked-bar";
+        return "/bar-charts/stacked-bar";
     }
 }

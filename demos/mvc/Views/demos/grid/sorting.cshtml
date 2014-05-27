@@ -1,0 +1,85 @@
+        <script src="../content/shared/js/orders.js"></script>
+
+        <div id="example" class="k-content">
+
+            <div class="demo-section">
+                <h3>Grid with single column sorting enabled</h3>
+                <div id="singleSort"></div>
+            </div>
+
+            <div class="demo-section">
+                <h3>Grid with multiple column sorting enabled</h3>
+                <div id="multipleSort"></div>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#singleSort").kendoGrid({
+                        dataSource: {
+                            data: orders,
+                            pageSize: 6
+                        },
+                        sortable: {
+                            mode: "single",
+                            allowUnsort: false
+                        },
+                        pageable: {
+                            buttonCount: 5
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "ShipCountry",
+                                title: "Ship Country",
+                                width: 300
+                            },
+                            {
+                                field: "Freight",
+                                width: 300
+                            },
+                            {
+                                field: "OrderDate",
+                                title: "Order Date",
+                                format: "{0:dd/MM/yyyy}"
+                            }
+                        ]
+                    });
+
+                    $("#multipleSort").kendoGrid({
+                        dataSource: {
+                            data: orders,
+                            pageSize: 6
+                        },
+                        sortable: {
+                            mode: "multiple",
+                            allowUnsort: true
+                        },
+                        pageable: {
+                            buttonCount: 5
+                        },
+                        scrollable: false,
+                        columns: [
+                            {
+                                field: "ShipCountry",
+                                title: "Ship Country",
+                                width: 300
+                            },
+                            {
+                                field: "Freight",
+                                width: 300
+                            },
+                            {
+                                field: "OrderDate",
+                                title: "Order Date",
+                                format: "{0:d}"
+                            }
+                        ]
+                    });
+                });
+            </script>
+            <style scoped>
+                .demo-section h3 {
+                    margin: 5px 0 15px 0;
+                }
+            </style>
+        </div>

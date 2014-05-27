@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.PiePoint;
 
 @Controller("dataviz-funnel_charts-funnel_labels-controller")
-@RequestMapping(value="/dataviz/funnel-charts/")
+@RequestMapping(value="/funnel-charts/")
 public class FunnelLabelsController {
     @RequestMapping(value = {"/funnel-labels"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -23,6 +23,6 @@ public class FunnelLabelsController {
         
         model.addAttribute("funnelData", funnelChartData);
         
-        return "/dataviz/funnel-charts/funnel-labels";
+        return "/funnel-charts/funnel-labels";
     }
 }

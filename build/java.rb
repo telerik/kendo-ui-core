@@ -13,7 +13,7 @@ SPRING_DEMOS_ROOT = JAVA_WRAPPERS_ROOT + 'spring-demos/'
 SPRING_DEMOS_WAR = "#{SPRING_DEMOS_ROOT}target/spring-demos-#{VERSION}.war"
 SPRING_DEMOS_SRC_ROOT = SPRING_DEMOS_ROOT + 'src/'
 SPRING_DEMOS_SHARED_CONTENT = FileList['demos/mvc/content/{dataviz,shared,web}/**/*'].exclude('**/globalization/**/*')
-SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/App_Data/{dataviz,web}.nav.json']
+SPRING_DEMOS_NAVIGATION= FileList['demos/mvc/content/nav.json']
 SPRING_DEMOS_RESOURCES = SPRING_DEMOS_SRC_ROOT + 'main/webapp/resources/'
 
 SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*')
@@ -22,7 +22,7 @@ SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*
                         .sub('demos/mvc/content/', SPRING_DEMOS_RESOURCES)
                     )
                     .include(FileList[SPRING_DEMOS_NAVIGATION]
-                         .sub('demos/mvc/App_Data/', SPRING_DEMOS_RESOURCES)
+                         .sub('demos/mvc/content/', SPRING_DEMOS_RESOURCES)
                     )
                     .include(FileList[SPRING_DEMOS_RESOURCES + '**/*'])
                     .include(FileList[COMPLETE_MIN_JS]
@@ -162,7 +162,7 @@ tree :to => SPRING_DEMOS_RESOURCES + "css",
 
 tree :to => SPRING_DEMOS_RESOURCES,
      :from => SPRING_DEMOS_NAVIGATION,
-     :root => 'demos/mvc/App_Data/'
+     :root => 'demos/mvc/content/'
 
 namespace :java do
     task :assets_js => [:js, SPRING_DEMOS_RESOURCES + "js"]

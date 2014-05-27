@@ -8,7 +8,7 @@ namespace Kendo.Models
 {
     public class AspNetMvcDescription : IFrameworkDescription
     {
-        private static readonly String[] Patterns = new[] { "~/src/{0}/views/aspx/{1}/{2}/{3}.aspx", "~/src/{0}/views/razor/{1}/{2}/{3}.cshtml" };
+        private static readonly String[] Patterns = new[] { "~/src/{0}/views/aspx/{1}/{2}.aspx", "~/src/{0}/views/razor/{1}/{2}.cshtml" };
 
         public string Name
         {
@@ -18,18 +18,18 @@ namespace Kendo.Models
             }
         }
 
-        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string suite, string section)
+        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string section)
         {
             foreach (var pattern in Patterns)
             {
                 yield return new ExampleFile
                 {
                     Name = example + Path.GetExtension(pattern),
-                    Url = String.Format(pattern, "aspnetmvc", suite, section, example)
+                    Url = String.Format(pattern, "aspnetmvc", section, example)
                 };
             }
 
-            var path = server.MapPath("~/src/aspnetmvc/controllers/" + suite + "/");
+            var path = server.MapPath("~/src/aspnetmvc/controllers/");
 
             if (Directory.Exists(path))
             {
@@ -53,7 +53,7 @@ namespace Kendo.Models
                         yield return new ExampleFile
                         {
                             Name = Path.GetFileName(controller),
-                            Url = "~/src/aspnetmvc/controllers/" + suite + "/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
+                            Url = "~/src/aspnetmvc/controllers/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
                         };
 
                         var source = File.ReadAllText(controller);

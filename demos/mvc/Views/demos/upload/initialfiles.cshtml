@@ -1,0 +1,59 @@
+﻿
+        <div id="example" class="k-content">
+            <div class="configuration k-widget k-header" style="width: 300px">
+                <span class="infoHead">Information</span>
+                <p>
+                    This example show how to persist the successfully uploaded files
+                    in the list and display them again when the page is reloaded.
+                </p>
+                <p>
+                    Please upload some files and refresh the page.
+                </p>
+            </div>
+            
+            <div style="width:45%">
+                <div class="demo-section">
+                    <input name="files" id="files" type="file" />
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    if (sessionStorage.initialFiles === undefined) {
+                        sessionStorage.initialFiles = "[]";
+                    }
+
+                    var initialFiles = JSON.parse(sessionStorage.initialFiles);
+
+                    $("#files").kendoUpload({
+                        multiple: true,
+                        async: {
+                            saveUrl: "save",
+                            removeUrl: "remove",
+                            autoUpload: true
+                        },
+                        files: initialFiles,
+                        success: onSuccess
+                    });
+
+                    function onSuccess(e) {
+                        var currentInitialFiles = JSON.parse(sessionStorage.initialFiles);
+                        for (var i = 0; i < e.files.length; i++) {
+                            var current = {
+                                name: e.files[i].name,
+                                extension: e.files[i].extension,
+                                size: e.files[i].size
+                            }
+
+                            if (e.operation == "upload") {
+                                currentInitialFiles.push(current);
+                            } else {
+                                var indexOfFile = currentInitialFiles.indexOf(current);
+                                currentInitialFiles.splice(indexOfFile, 1);
+                            }
+                        }
+                        sessionStorage.initialFiles = JSON.stringify(currentInitialFiles);
+                    }
+                });
+            </script>
+        </div>

@@ -8,12 +8,12 @@
             if (!example.ShouldInclude) { continue; }
 
             <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
-                @Html.ExampleLink(example, (string)ViewBag.Suite)
+                @Html.ExampleLink(example)
             </li>
         }
     </ul>
 
-@if (ViewBag.suite == "mobile")
+@if (ViewBag.Mobile)
 {
     <p id="qrWrap">
         Open these demos with an iOS/Android mobile device for a full experience.

@@ -1,0 +1,39 @@
+        <script src="../content/shared/js/products.js"></script>
+
+        <div id="example" class="k-content">
+            <div class="k-rtl">
+                <div id="grid"></div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            data: products,
+                            schema: {
+                                model: {
+                                    fields: {
+                                        ProductName: { type: "string" },
+                                        UnitPrice: { type: "number" },
+                                        UnitsInStock: { type: "number" },
+                                        Discontinued: { type: "boolean" }
+                                    }
+                                }
+                            },
+                            pageSize: 15
+                        },
+                        height: 430,
+                        sortable: true,
+                        groupable: true,
+                        resizable: true,
+                        pageable: true,
+                        columns: [
+                            "ProductName",
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" },
+                            { field: "UnitsInStock", title: "Units In Stock", width: "130px" },
+                            { field: "Discontinued", width: "130px" }
+                        ]
+                    });
+                });
+            </script>
+        </div>

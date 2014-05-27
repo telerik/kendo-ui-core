@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datepicker-events-controller")
-@RequestMapping(value="/web/datepicker/")
+@RequestMapping(value="/datepicker/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/datepicker/events";
+        return "datepicker/events";
     }
 }

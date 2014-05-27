@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller("upload-home-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index() {
-        return "web/upload/index";
+        return "upload/index";
     }
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
     public String save(@RequestParam List<MultipartFile> files, Model model) {
         model.addAttribute("files", files);
         
-        return "web/upload/results";
+        return "upload/results";
     }
 }

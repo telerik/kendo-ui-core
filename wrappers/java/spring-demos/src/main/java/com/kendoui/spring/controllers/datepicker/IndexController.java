@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("datepicker-home-controller")
-@RequestMapping(value="/web/datepicker/")
+@RequestMapping(value="/datepicker/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -19,6 +19,6 @@ public class IndexController {
         model.addAttribute("date", cal.getTime());
         cal.set(2011,10,1);
         model.addAttribute("month", cal.getTime());
-        return "web/datepicker/index";
+        return "datepicker/index";
     }
 }

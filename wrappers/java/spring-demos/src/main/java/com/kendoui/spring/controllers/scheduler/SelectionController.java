@@ -20,13 +20,13 @@ import com.kendoui.spring.models.Meeting;
 import com.kendoui.spring.models.MeetingDao;
 
 @Controller("scheduler-selection-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class SelectionController {
     @Autowired 
     private MeetingDao meeting;
     
     @RequestMapping(value = "/selection", method = RequestMethod.GET)
     public String selection(Locale locale, Model model) {        
-        return "web/scheduler/selection";
+        return "scheduler/selection";
     }
 }

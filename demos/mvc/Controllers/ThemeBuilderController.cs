@@ -9,26 +9,10 @@ namespace Kendo.Controllers
     public class ThemeBuilderController : BaseController
     {
         //
-        // GET: /themebuilder/index.html
-
-        private readonly Dictionary<string,string> suites =
-            new Dictionary<string, string>
-            {
-                { "web", "Web" },
-                { "dataviz", "DataViz" },
-                { "mobile", "Mobile" }
-            };
-
-        public ActionResult Index(string suite)
+        // GET: /themebuilder
+        public ActionResult Index()
         {
-            ViewBag.Suite = "themebuilder";
-
-            suite = suite.ToLower();
-
-            if (!suites.ContainsKey(suite))
-            {
-                suite = "web";
-            }
+            ViewBag.Product = "themebuilder";
 
 #if DEBUG
             ViewBag.Debug = true;
@@ -41,14 +25,24 @@ namespace Kendo.Controllers
             ViewBag.scripts = Kendo.Models.ScriptGroups.All;
             ViewBag.styles = Kendo.Models.StyleGroups.All;
 
-            ViewBag.Title = "ThemeBuilder for Kendo UI " + suites[suite];
-
-            return View(suite.ToLower());
+            return View();
         }
 
-        public ActionResult ThemeBuilderIndex()
+        // GET: /mobilethemebuilder
+        public ActionResult MobileIndex()
         {
-            return RedirectPermanent(Url.Action("Index", "ThemeBuilder", new { suite = "web" }));
+            ViewBag.Product = "mobile-themebuilder";
+
+#if DEBUG
+            ViewBag.Debug = true;
+#else
+            ViewBag.Debug = false;
+#endif
+
+            ViewBag.scripts = Kendo.Models.ScriptGroups.All;
+            ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
+
+            return View();
         }
     }
 }

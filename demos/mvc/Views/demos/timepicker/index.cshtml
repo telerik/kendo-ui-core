@@ -1,0 +1,29 @@
+
+        <div id="example" class="k-content">
+            <div id="alarm-settings">
+                <div style="margin-top: -7px; margin-left: 180px">
+                    <input id="timepicker" value="10:00 AM" />
+                </div>
+                <div style="margin-top: 59px; padding-left: 180px">
+                    <span style="" class="k-widget k-autocomplete k-header k-state-default">
+                        <input id="descr" class="k-input" type="text" value="Wake up" style="width: 100%" />
+                    </span>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    // create TimePicker from input HTML element
+                    $("#timepicker").kendoTimePicker();
+                });
+            </script>
+
+            <style scoped>
+                #alarm-settings {
+                    height: 135px;
+                    width: 395px;
+                    margin: 30px auto;
+                    padding: 110px 0 0 30px;
+                    background: url('../content/web/timepicker/alarmSettings.png') transparent no-repeat 0 0;
+                }
+            </style>
+        </div>

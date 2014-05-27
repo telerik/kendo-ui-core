@@ -14,7 +14,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-editing-popup-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class EditingPopupController {
     
     @Autowired 
@@ -22,7 +22,7 @@ public class EditingPopupController {
     
     @RequestMapping(value = "/editing-popup", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/editing-popup";
+        return "grid/editing-popup";
     }
     
     @RequestMapping(value = "/editing-popup/read", method = RequestMethod.POST)

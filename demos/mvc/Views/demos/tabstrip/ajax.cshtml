@@ -1,0 +1,74 @@
+<div id="example">
+    <div class="wrapper">
+        <div id="tabstrip">
+            <ul>
+                <li class="k-state-active">Dimensions &amp; Weights</li>
+                <li>Engine</li>
+                <li>Chassis</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var ts = $("#tabstrip").kendoTabStrip({
+            animation: { open: { effects: "fadeIn"} },
+            contentUrls: [
+                        '../content/web/tabstrip/ajax/ajaxContent1.html',
+                        '../content/web/tabstrip/ajax/ajaxContent2.html',
+                        '../content/web/tabstrip/ajax/ajaxContent3.html'
+                    ]
+        }).data('kendoTabStrip');
+        setTimeout(function () {
+            ts.reload($('#tabstrip li:last'));
+        })
+    });
+</script>
+
+<style scoped>
+    .wrapper {
+        width: 400px;
+        height: 455px;
+        margin: 20px auto;
+        padding: 20px 0 0 390px;
+        background: url('../content/web/tabstrip/bmw.png') no-repeat 40px 60px transparent;
+    }
+    #tabstrip {
+        width: 400px;
+        float: right;
+        margin-bottom: 20px;
+    }
+    #tabstrip .k-content
+    {
+        height: 320px;
+        overflow: auto;
+    }
+    .specification {
+        max-width: 670px;
+        margin: 10px 0;
+        padding: 0;
+    }
+    .specification dt, dd {
+        width: 140px;
+        float: left;
+        margin: 0;
+        padding: 5px 0 7px 0;
+        border-top: 1px solid rgba(0,0,0,0.3);
+    }
+    .specification dt {
+        clear: left;
+        width: 120px;
+        margin-right: 7px;
+        padding-right: 0;
+        text-align: right;
+        opacity: 0.7;
+    }
+    .specification:after, .wrapper:after {
+        content: ".";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+</style>

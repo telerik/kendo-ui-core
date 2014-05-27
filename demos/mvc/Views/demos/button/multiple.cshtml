@@ -1,0 +1,52 @@
+
+        <div id="example">
+
+            <div class="demo-section k-header">
+                <h4>Standard Initialization</h4>
+                <p>
+                    <button type="button" class="editButton">Edit Button 1</button>
+                    <button type="button" class="closeButton">Close Button 1</button>
+                </p>
+                <p>
+                    <button type="button" class="editButton">Edit Button 2</button>
+                    <button type="button" class="closeButton">Close Button 2</button>
+                </p>
+            </div>
+
+            <div class="demo-section k-header">
+                <h4>Initialization with kendo.init</h4>
+                <div id="buttonContainer">
+                    <p>
+                        <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit">Edit Button 1</button>
+                        <button type="button" data-role="button" data-icon="close">Close Button 1</button>
+                    </p>
+                    <p>
+                        <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit" data-enable="false">Disabled via data attribute</button>
+                        <button type="button" data-role="button" data-icon="close" disabled="disabled">Disabled via HTML attribute</button>
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $(".editButton").kendoButton({
+                        spriteCssClass: "k-icon k-edit"
+                    });
+
+                    $(".closeButton").kendoButton({
+                        icon: "close"
+                    });
+
+                    kendo.init("#buttonContainer");
+                });
+            </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+                .demo-section p {
+                    line-height: 2.5em;
+                }
+            </style>
+        </div>

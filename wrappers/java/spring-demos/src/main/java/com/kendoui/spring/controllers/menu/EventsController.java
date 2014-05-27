@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("menu-events-controller")
-@RequestMapping(value="/web/menu/")
+@RequestMapping(value="/menu/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index() {
-        return "web/menu/events";
+        return "menu/events";
     }
 }

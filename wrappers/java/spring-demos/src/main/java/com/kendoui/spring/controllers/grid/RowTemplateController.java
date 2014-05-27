@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.EmployeeDao;
 
 @Controller("grid-row-template-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class RowTemplateController {
     @Autowired 
     private EmployeeDao employee;
     
     @RequestMapping(value = "/rowtemplate", method = RequestMethod.GET)
     public String index() {                
-        return "web/grid/rowtemplate";
+        return "grid/rowtemplate";
     }
     
     @RequestMapping(value = "/rowtemplate/read", method = RequestMethod.POST)

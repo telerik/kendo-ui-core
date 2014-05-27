@@ -1,0 +1,87 @@
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 500px">
+            <h4>Add an event</h4>
+            <div data-role="scheduler"
+                 data-views="['day']"
+                 data-bind="source: tasks,
+                            visible: isVisible,
+                            events: {
+                              save: onSave
+                            }"
+                 style="width: 480px; height: 400px"></div>
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console" style="height: 400px;"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 500px">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Scheduler supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onSave: function(e) {
+            kendoConsole.log("event :: save(" + kendo.stringify(e.event, null, 4) + ")");
+        },
+        tasks: new kendo.data.SchedulerDataSource({
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "taskId",
+                    fields: {
+                        taskId: { from: "TaskID", type: "number" },
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            }
+        })
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

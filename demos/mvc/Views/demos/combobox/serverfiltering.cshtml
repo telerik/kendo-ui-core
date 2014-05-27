@@ -1,0 +1,34 @@
+
+        <div id="example">
+            <div class="demo-section k-header">
+                <h4>Products</h4>
+                <input id="products" style="width: 400px" />
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $("#products").kendoComboBox({
+                        placeholder: "Select product",
+                        dataTextField: "ProductName",
+                        dataValueField: "ProductID",
+                        filter: "contains",
+                        autoBind: false,
+                        minLength: 3,
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: {
+                                    url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+            </style>
+        </div>

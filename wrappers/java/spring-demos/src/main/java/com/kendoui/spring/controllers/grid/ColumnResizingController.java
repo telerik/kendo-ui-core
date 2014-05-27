@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
 @Controller("grid-column-resizing-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class ColumnResizingController {
     @Autowired 
     private OrderDao order;
 
     @RequestMapping(value = "/column-resizing", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/column-resizing";
+        return "grid/column-resizing";
     }
     
     @RequestMapping(value = "/column-resizing/read", method = RequestMethod.POST)

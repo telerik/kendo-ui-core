@@ -12,7 +12,7 @@ import com.kendoui.spring.models.CategoryItem;
 import com.kendoui.spring.models.TreeViewItem;
 
 @Controller("treeview-local-binding-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class LocalBindingController {
     
     @RequestMapping(value = {"/local-data"}, method = RequestMethod.GET)
@@ -20,7 +20,7 @@ public class LocalBindingController {
                                
         model.addAttribute("inlineDefault", getDefaultInlineData());
         model.addAttribute("inline", getInlineData());
-        return "web/treeview/local-data";
+        return "treeview/local-data";
     } 
     
     

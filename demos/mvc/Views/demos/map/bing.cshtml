@@ -1,0 +1,21 @@
+<div id="example">
+    <div class="demo-section k-header" style="padding: 1em;">
+        <div id="map"></div>
+    </div>
+    <script>
+        function createMap() {
+            $("#map").kendoMap({
+                center: [51.505, -0.09],
+                zoom: 3,
+                layers: [{
+                    type: "bing",
+                    // IMPORTANT: This key is locked to demos.telerik.com
+                    // Please replace with your own Bing Key
+                    key: "AjQF548guEF8MWgEspVokNny7l_GULKsZ81tR-LvPK96Bm3REkCjNHs2aC_b7nvF"
+                }]
+            });
+        }
+
+        $(document).ready(createMap);
+    </script>
+</div>

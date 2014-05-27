@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.ElectricityProduction;
 
 @Controller("dataviz-line_charts_logarithmic_axis-controller")
-@RequestMapping(value="/dataviz/line-charts/")
+@RequestMapping(value="/line-charts/")
 public class LogarithmicAxisController {
     @RequestMapping(value = "/logarithmic-axis", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/line-charts/logarithmic-axis";
+        return "/line-charts/logarithmic-axis";
     }
     
     @RequestMapping(value = "/logarithmic-axis/read", method = RequestMethod.POST)

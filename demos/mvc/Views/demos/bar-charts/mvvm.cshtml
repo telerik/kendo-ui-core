@@ -1,0 +1,63 @@
+<div id="example">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div data-role="chart"
+                 data-legend="{ position: 'bottom' }"
+                 data-series-defaults="{ type: 'column' }"
+                 data-series="[
+                                 { field: 'nuclear', name: 'Nuclear electricity' },
+                                 { field: 'hydro', name: 'Hydro electricity' },
+                                 { field: 'wind', name: 'Wind electricity' }
+                             ]"
+                 data-bind="visible: isVisible,
+                            source: electricity,
+                            events: { seriesHover: onSeriesHover }"></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 500px">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Chart supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createChart() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSeriesHover: function(e) {
+                 kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.series.name, e.value));
+            },
+            electricity: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "../content/dataviz/js/spain-electricity.json",
+                        dataType: "json"
+                    }
+                },
+                sort: {
+                    field: "year",
+                    dir: "asc"
+                }
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createChart).bind("kendo:skinChange", createChart);
+
+</script>
+</div>

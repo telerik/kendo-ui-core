@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("panelbar-animation-controller")
-@RequestMapping(value="/web/panelbar/")
+@RequestMapping(value="/panelbar/")
 public class AnimationController {
     
     @RequestMapping(value = "/animation", method = RequestMethod.GET)
     public String index(Model model) {        
-        return "web/panelbar/animation";
+        return "panelbar/animation";
     }
     
     @RequestMapping(value = "/animation", method = RequestMethod.POST)
     public String index(@RequestParam String animation, Model model) {
         model.addAttribute("animation", animation);        
-        return "web/panelbar/animation";
+        return "panelbar/animation";
     }
 }

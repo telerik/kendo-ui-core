@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("window-animation-controller")
-@RequestMapping(value="/web/window/")
+@RequestMapping(value="/window/")
 public class AnimationController {
     
     @RequestMapping(value = "/animation", method = RequestMethod.GET)
@@ -16,7 +16,7 @@ public class AnimationController {
         model.addAttribute("opacity", true);        
         model.addAttribute("animationConfigOpen", "expand:vertical fade:in");
         model.addAttribute("animationConfigClose", "expand:vertical fade:in");
-        return "web/window/animation";
+        return "window/animation";
     }     
     
     @RequestMapping(value = "/animation", method = RequestMethod.POST)
@@ -41,6 +41,6 @@ public class AnimationController {
         model.addAttribute("animationConfigClose", animationConfigClose);      
         model.addAttribute("opacity", opacity);
         
-        return "web/window/animation";
+        return "window/animation";
     } 
 }

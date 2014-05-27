@@ -1,0 +1,139 @@
+<div id="example" class="k-content">
+    <div id="panel">
+        <h2>Add images to your Lightbox</h2>
+
+        <ul id="listView"></ul>
+
+        <div id="lightbox">
+            <div id="container"></div>
+            Lightbox
+        </div>
+    </div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <li class="product">
+            <img src="../content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
+        </li>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://demos.telerik.com/kendo-ui/service/Products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    pageSize: 15
+                });
+
+            var listView = $("#listView");
+
+            listView.kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+
+            listView.on("click", ".product", function(e) {
+                var product = $(e.currentTarget);
+
+                // instantiate a transfer effect and play it
+                kendo.fx(product).transfer($("#container"))
+                    .play()
+                    .then(function() {
+                        // fade out the transferred element and remove it
+                        $(this).fadeOut("slow", function() {
+                            $(this).remove();
+
+                            if (!listView.children().length) {
+                                $("<li class='out-of-stock'>Whoa!<br/>You must really like images!</li>")
+                                    .appendTo(listView)
+                                    .fadeIn("slow");
+                            }
+                        });
+                    });
+            });
+        });
+
+    </script>
+
+    <style scoped>
+        #panel {
+            border: 1px solid #e9e9e9;
+            border-top: 3px solid #da2d7d;
+            position: relative;
+            width: 473px;
+            margin: 0 auto;
+            -webkit-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            -moz-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            -o-box-shadow: 0 0 4px rgba(0,0,0,.25);
+            box-shadow: 0 0 4px rgba(0,0,0,.25);
+            padding: 35px;
+            background-color: #ffffff;
+        }
+
+        #panel > h2 {
+            color: #4f4f4f;
+            font-size: 18px;
+            font-weight: normal;
+            width: 370px;
+            border-bottom: 1px solid #dfdfdf;
+            padding-bottom: 9px;
+        }
+
+        #lightbox {
+            position: absolute;
+            width: 69px;
+            padding-top: 69px;
+            top: 0;
+            right: 34px;
+            background: #da2d7d url(../content/web/fx/cart.png) no-repeat 50% 23px;
+            overflow: hidden;
+            font-size: 9px;
+            line-height: 20px;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        #container {
+            height: 69px;
+            width: 69px;
+            top: 0;
+            position: absolute;
+        }
+
+        #listView {
+            min-height: 510px;
+            list-style-type: none;
+            margin: 0;
+            padding: 55px 0 0;
+            border: 0;
+            background: none;
+        }
+
+        .product {
+            float: left;
+            width: 110px;
+            height: 110px;
+            margin: 0 11px 11px 0;
+            background-color: rgba(255,255,255,0.8);
+            cursor: pointer;
+        }
+
+        .product:nth-child(4n) {
+            margin: 0 0 11px 0;
+        }
+
+        .out-of-stock {
+            display: none;
+            width: 100%;
+            text-align: center;
+            color: #666;
+            font-size: 24px;
+            line-height: 36px;
+        }
+
+    </style>
+</div>

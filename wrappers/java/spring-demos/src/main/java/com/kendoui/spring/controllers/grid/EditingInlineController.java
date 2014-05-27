@@ -14,7 +14,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-editing-inline-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class EditingInlineController {
     
     @Autowired 
@@ -22,7 +22,7 @@ public class EditingInlineController {
     
     @RequestMapping(value = "/editing-inline", method = RequestMethod.GET)
     public String index() {
-        return "web/grid/editing-inline";
+        return "grid/editing-inline";
     }
     
     @RequestMapping(value = "/editing-inline/read", method = RequestMethod.POST)

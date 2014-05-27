@@ -11,11 +11,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.BudgetReportItem;
 
 @Controller("dataviz-radar_charts_smooth_radar_line-controller")
-@RequestMapping(value="/dataviz/radar-charts/")
+@RequestMapping(value="/radar-charts/")
 public class SmoothRadarLineController {
     @RequestMapping(value = "/smooth-radar-line", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/radar-charts/smooth-radar-line";
+        return "/radar-charts/smooth-radar-line";
     }
     
     @RequestMapping(value = "/smooth-radar-line/read", method = RequestMethod.POST)

@@ -13,7 +13,7 @@ namespace Kendo.Controllers
 #else
             ViewBag.Debug = false;
 #endif
-            return View();
+            return View("~/Views/demos/spa/sushi.cshtml");
         }
 
         public ActionResult Aeroviewr()
@@ -23,12 +23,12 @@ namespace Kendo.Controllers
 #else
             ViewBag.Debug = false;
 #endif
-            return View();
+            return View("~/Views/demos/spa/Aeroviewr.cshtml");
         }
 
         public ActionResult AeroviewrCallback()
         {
-            return View();
+            return View("~/Views/demos/spa/AeroviewrCallback.cshtml");
         }
     }
 }

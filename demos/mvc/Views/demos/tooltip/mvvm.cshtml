@@ -1,0 +1,44 @@
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col">
+            <h4>Tooltip</h4>
+            <span class="k-button"
+                  title="Hello!"
+                  data-role="tooltip"
+                  data-auto-hide="false"
+                  data-position="top"
+                  data-bind="events: { show: onShow, hide: onHide }"
+            >Hover me!</span>
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Tooltip supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a> binding.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        onShow: function() {
+            kendoConsole.log("event :: show");
+        },
+        onHide: function() {
+            kendoConsole.log("event :: hide");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+<style scoped>
+    .k-button {
+        margin: 40px 60px;
+        width: 300px;
+        height: 100px;
+        line-height: 100px;
+    }
+</style>
+</div>

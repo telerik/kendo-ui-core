@@ -1,0 +1,77 @@
+<div data-role="view" data-title="Tag Us!" id="popover">
+    <div data-role="header">
+        <div data-role="navbar">
+            <a id="back-button" class="nav-button" data-align="left" data-role="backbutton">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-rel="popover" href="#popover-people" data-role="button">Select people</a>
+        </div>
+    </div>
+
+    <div data-role="content">
+        <img src="../content/mobile/shared/faces.jpg" />
+    </div>
+
+    <div data-role="popover" id="popover-people" data-popup='{"height": "16em", "width": "20em"}'>
+        <div data-role="view" data-title="People">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-role="button" data-align="right" data-click="closeParentPopover">Close</a>
+                </div>
+            </div>
+            <ul data-role="listview">
+                <li><label>Isabella Anderson<input type="checkbox"></label></li>
+                <li><label>Josh Anderson<input type="checkbox"></label></li>
+                <li><label>Linda Anderson<input type="checkbox"></label></li>
+                <li><label>Oliver Anderson<input type="checkbox"></label></li>
+                <li><label>James Williams<input type="checkbox"></label></li>
+                <li><label>Barbara Williams<input type="checkbox"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="popover" id="popover-location" data-popup='{"width": "20em"}'>
+        <div data-role="view">
+            <ul data-role="listview" data-click="closeParentPopover">
+                <li><label>Sydney, Australia <input name="location" type="radio"></label></li>
+                <li><label>New York, USA <input name="location" type="radio"></label></li>
+                <li><label>Miami, USA <input name="location" type="radio"></label></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="footer">
+        <div data-role="navbar">
+            <a data-align="right" href="#popover-location" data-rel="popover" data-role="button">Select location</a>
+        </div>
+    </div>
+</div>
+
+<style scoped>
+    .km-ios #popover .km-view-title,
+    .km-ios #popover-people .km-view-title
+    {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+
+    .km-ios #popover .km-navbar,
+    .km-root > * > #popover > .km-content
+    {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.35)), color-stop(0.5, rgba(255, 255, 255, 0.1)), color-stop(0.5, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))) #000;
+    }
+
+    .km-ios #popover .km-navbar .km-button
+    {
+        background-color: #000;
+    }
+</style>
+
+<script>
+    function closeParentPopover(e) {
+
+        var popover = e.sender.element.closest('[data-role=popover]').data('kendoMobilePopOver');
+
+        popover.close();
+    }
+</script>

@@ -1,0 +1,220 @@
+<div data-role="view" id="edit-listview" data-title="Products List" data-init="listViewInit">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#/">Index</a>
+        </div>
+    </header>
+
+    <ul id="list-edit-listview"></ul>
+
+    <script id="itemTemplate" type="text/x-kendo-template">
+        <a> #=ProductName# </a>
+        <a href="\\#" data-role="button" class="delete" >Delete</a>
+    </script>
+</div>
+
+<div data-role="view" id="edit-detailview" data-show="detailShow" data-init="detailInit">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancel</a>
+            <span data-role="view-title">Details</span>
+            <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
+        </div>
+    </header>
+
+    <form>
+        <ul data-role="listview" data-style="inset" onclick="">
+            <li>
+                <label>Product Name
+                    <input type="text" data-bind="value: ProductName"/>
+                </label>
+            </li>
+            <li>
+                Discontinued
+                    <input type="checkbox" data-role="switch" data-bind="checked: Discontinued"/>
+
+            </li>
+            <li>
+                <label>Unit Price
+                    <input type="number" value="20" data-bind="value: UnitPrice"/>
+                </label>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<style scoped>
+    .km-ios #edit-listview .km-navbar,
+    .km-ios #edit-detailview .km-navbar {
+        background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0))), url(../content/shared/images/patterns/pattern1.png);
+        background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0)), url(../content/shared/images/patterns/pattern1.png);
+    }
+    .km-ios #edit-listview .km-navbar .km-button,
+    .km-ios #edit-detailview .km-navbar .km-button {
+        background-color: #000;
+    }
+    .km-ios #edit-detailview #done {
+        background-color: Green;
+    }
+    .km-tablet .km-ios #edit-listview .km-view-title,
+    .km-tablet .km-ios #edit-detailview .km-view-title {
+        color: #fff;
+        text-shadow: 0 -1px rgba(0,0,0,.5);
+    }
+    .km-ios #edit-listview .km-content,
+    .km-ios #edit-detailview .km-content,
+    .km-ios #edit-detailview .km-insetcontent,
+    .km-ios #edit-listview li,
+    .km-ios #edit-detailview li {
+        background: #373737;
+    }
+    .km-ios #edit-listview li > a,
+    .km-ios #edit-detailview li,
+    .km-ios #edit-detailview input,
+    .km-ios #edit-detailview li > a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .km-ios #edit-detailview .km-listinset > li,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li,
+    .km-ios #edit-detailview .km-listinset > li:first-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list >  li:first-child,
+    .km-ios #edit-detailview .km-listinset > li:last-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list >  li:last-child {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        border-color: #565656;
+    }
+    .km-ios #edit-detailview .km-listinset > li:first-child,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li:first-child {
+        border-width: 1px;
+    }
+    .km-ios #edit-detailview .km-listinset > li,
+    .km-ios #edit-detailview .km-listgroupinset .km-list > li {
+        border-width: 0 1px 1px;
+    }
+    #edit-listview .delete {
+        display:none;
+        position: absolute;
+        top: .15em;
+        right: .5em;
+        width: 60px;
+        background-color: #bd2729;
+        color: #fff;
+    }
+</style>
+
+<script>
+    var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+        dataSource = new kendo.data.DataSource({
+            transport: {
+                read:  {
+                    url: crudServiceBaseUrl + "/Products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/Products/Update",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Products/Destroy",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        ProductName: "ProductName",
+                        UnitPrice: { type: "number" },
+                        Discontinued: { type: "boolean" }
+                    }
+                }
+            }
+        });
+
+    function listViewInit(e) {
+        e.view.element.find("#list-edit-listview").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#itemTemplate").html()
+        })
+        .kendoTouch({
+            filter: ">li",
+            enableSwipe: true,
+            touchstart: touchstart,
+            tap: navigate,
+            swipe: swipe
+        });
+    }
+
+    function navigate(e) {
+        var itemUID = $(e.touch.currentTarget).data("uid");
+        kendo.mobile.application.navigate("#edit-detailview?uid=" + itemUID);
+    }
+
+    function swipe(e) {
+        var button = kendo.fx($(e.touch.currentTarget).find("[data-role=button]"));
+        button.expand().duration(200).play();
+    }
+
+    function touchstart(e) {
+        var target = $(e.touch.initialTouch),
+            listview = $("#list-edit-listview").data("kendoMobileListView"),
+            model,
+            button = $(e.touch.target).find("[data-role=button]:visible");
+
+        if (target.closest("[data-role=button]")[0]) {
+            model = dataSource.getByUid($(e.touch.target).attr("data-uid"));
+            dataSource.remove(model);
+
+            //prevent `swipe`
+            this.events.cancel();
+            e.event.stopPropagation();
+        } else if (button[0]) {
+            button.hide();
+
+            //prevent `swipe`
+            this.events.cancel();
+        } else {
+            listview.items().find("[data-role=button]:visible").hide();
+        }
+    }
+
+    function detailShow(e) {
+        var model = dataSource.getByUid(e.view.params.uid);
+
+        kendo.bind(e.view.element, model, kendo.mobile.ui);
+    }
+
+    function detailInit(e) {
+        var view = e.view;
+        view.element.find("#done").data("kendoMobileButton").bind("click", function() {
+            dataSource.one("change", function() {
+                view.loader.hide();
+                kendo.mobile.application.navigate("#:back");
+            });
+
+            view.loader.show();
+            dataSource.sync();
+        });
+
+        view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
+            e.preventDefault();
+            dataSource.one("change", function() {
+                view.loader.hide();
+                kendo.mobile.application.navigate("#:back");
+            });
+
+            view.loader.show();
+            dataSource.cancelChanges();
+        });
+    }
+</script>

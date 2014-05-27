@@ -1,0 +1,59 @@
+<div id="example">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div data-role="chart"
+                 data-title="{ text: 'Antenna Gain', position: 'bottom' }"
+                 data-series="[{
+                                   type: 'polarLine',
+                                   xField: 'azimuth',
+                                   yField: 'gain'
+                               }]"
+                 data-x-axis="{ majorUnit: 30 }"
+                 data-bind="visible: isVisible,
+                            source: antennaGain,
+                            events: { seriesHover: onSeriesHover }"></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 500px;">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Chart supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createChart() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSeriesHover: function(e) {
+                 kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.value.x, e.value.y));
+            },
+            antennaGain: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "../content/dataviz/js/antenna-gain.json",
+                        dataType: "json"
+                    }
+                }
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createChart).bind("kendo:skinChange", createChart);
+
+</script>
+</div>

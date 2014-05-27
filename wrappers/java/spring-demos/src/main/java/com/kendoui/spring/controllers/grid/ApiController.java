@@ -14,14 +14,14 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-api-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class ApiController {
     @Autowired 
     private ProductDao product;
     
     @RequestMapping(value = "/api", method = RequestMethod.GET)
     public String index(Locale locale, Model model) {        
-        return "web/grid/api";
+        return "grid/api";
     }
     
     @RequestMapping(value = "/api/read", method = RequestMethod.GET)

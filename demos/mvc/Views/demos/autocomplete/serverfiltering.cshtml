@@ -1,0 +1,30 @@
+
+        <div id="example">
+            <div class="demo-section k-header">
+                <h4>Products</h4>
+                <input id="products" style="width: 400px" />
+                <div class="demo-hint">Hint: type "che"</div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $("#products").kendoAutoComplete({
+                        dataTextField: "ProductName",
+                        filter: "contains",
+                        minLength: 3,
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                            }
+                        }
+                    });
+                });
+            </script>
+
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+            </style>
+        </div>

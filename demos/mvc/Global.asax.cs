@@ -25,19 +25,29 @@ namespace Kendo
 
         public static void RegisterRoutes(RouteCollection routes)
         {
-            var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
-
             routes.MapRoute(
                 "AsyncUpload",
-                "web/upload/{action}",
+                "upload/{action}",
                 new { controller = "Upload" },
                 new { action = "(save|remove|submit)" }
+            );
+
+            routes.MapRoute(
+                "SourceView",
+                "source/index",
+                new { controller = "Source", action = "Index" }
             );
 
             routes.MapRoute(
                 "Bootstrap",
                 "bootstrap",
                 new { controller = "Integration", action = "Bootstrap" }
+            );
+
+            routes.MapRoute(
+                "html5-diagram-sample-app",
+                "html5-diagram-sample-app",
+                new { controller = "Integration", action = "Diagram" }
             );
 
             routes.MapRoute(
@@ -59,6 +69,18 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "ThemeBuilder",
+                "themebuilder",
+                new { controller = "ThemeBuilder", action = "Index" }
+            );
+
+            routes.MapRoute(
+                "MobileThemeBuilder",
+                "mobilethemebuilder",
+                new { controller = "ThemeBuilder", action = "MobileIndex" }
+            );
+
+            routes.MapRoute(
                 "AeroviewrCallback",
                 "aeroviewr/callback.html",
                 new { controller = "Spa", action = "AeroviewrCallback" }
@@ -72,47 +94,32 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceIndex",
-                "mobile/m/index.html",
+                "m/{action}",
                 new { controller = "MobileDevice", action = "Index" }
             );
 
             routes.MapRoute(
                 "MobileApplication",
-                "mobile/apps/{app}",
+                "mobile-apps/{app}",
                 new { controller = "MobileApps", action = "Index" }
             );
 
             routes.MapRoute(
                 "MobileApplicationInstance",
-                "mobile/apps/{app}/contents",
+                "mobile-apps/{app}/contents",
                 new { controller = "MobileApps", action = "App" }
             );
 
             routes.MapRoute(
                 "MobileDeviceExample",
-                "mobile/m/{section}/{example}.html",
+                "m/{section}/{example}",
                 new { controller = "MobileDevice", action = "Example" }
             );
 
-           routes.MapRoute(
-               "SectionIndex.html",
-               "{suite}/index.html",
-               new { controller = "Suite", action = "SectionIndex", section = "overview" },
-               suiteConstraint
-           );
-
             routes.MapRoute(
-                "Suite",
-                "{suite}/{section}/{example}.html",
-                new { controller = "Suite", action = "Index" },
-                suiteConstraint
-            );
-
-            routes.MapRoute(
-                "SectionIndex",
-                "{suite}/{section}",
-                new { controller = "Suite", action = "SectionIndex", section = "overview" },
-                suiteConstraint
+                "Demo",
+                "{section}/{example}",
+                new { controller = "Demo", action = "Index", example = UrlParameter.Optional }
             );
 
             routes.MapRoute(
@@ -123,39 +130,9 @@ namespace Kendo
             );
 
             routes.MapRoute(
-                "ThemeBuilder",
-                "themebuilder/{suite}.html",
-                new { controller = "ThemeBuilder", action = "Index" }
-            );
-
-            routes.MapRoute(
-                "ThemeBuilderIndex",
-                "themebuilder",
-                new { controller = "ThemeBuilder", action = "ThemeBuilderIndex" }
-            );
-
-            routes.MapRoute(
-                "MobileThemeBuilder",
-                "mobilethemebuilder/index.html",
-                new { controller = "MobileThemeBuilder", action = "Index" }
-            );
-
-            routes.MapRoute(
-                "MobileThemeBuilderIndex",
-                "mobilethemebuilder",
-                new { controller = "MobileThemeBuilder", action = "MobileThemeBuilderIndex" }
-            );
-
-            routes.MapRoute(
-                "Default",
-                "{controller}/{action}",
+                "Root",
+                "",
                 new { controller = "Home", action = "Index" }
-            );
-
-            routes.MapRoute(
-                "SourceView",
-                "Source/SourceView",
-                new { controller = "Source", action = "SourceView" }
             );
         }
 

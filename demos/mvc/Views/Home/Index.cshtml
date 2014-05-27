@@ -1,333 +1,175 @@
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewBag.SuppressFooter = true;
 }
-<!DOCTYPE html>
-<!--[if IE 7]>         <html class="kd-ie7"> <![endif]-->
-<!--[if gt IE 7]><!--> <html> <!--<![endif]-->
-<head>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta content="width=device-width" name="viewport">
-    <meta charset="utf-8">
-    <title>Kendo UI Demos</title>
-    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")"/>
-    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
-
-    @Html.Partial("GoogleAnalytics")
-</head>
-<body class="overview">
- @Html.Partial("Telerik-Navigation")
-
-    <div class="suite-demos-nav">
-       <div class="demos-title active header">Kendo UI Demos</div>
-      <ul class="demos-list centerWrap floatWrap">
-            <li><a href="@Url.Content("~")">Overview</a><em></em></li>
-            <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
-            <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
-            <li@(Html.ActiveSuiteClass(Url.Content("~/DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>
-            <li><a href="http://www.telerik.com/download/kendo-ui-complete" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Download</a></li>
-      </ul>
-    </div>
-
-<div id="banner"><div id="bannerInner"><div class="centerWrap"><h1>Kendo UI Demos</h1></div></div>
-</div>
-
-<div class="section section--green">
-<div class="demos-nav">
-    <div class="centerWrap floatWrap">
-        <div class="box centerAlign">
-            <a href="@Url.Suite("web")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-web.png")" alt="Web Demos" /></a>
-            <h2><a href="@Url.Suite("web")">Web demos</a></h2>
-            <p>23 slick UI widgets plus demos of MVVM, Validation, Globalization, Templates, etc. <!--a href="web/overview/index.html" class="launchButton">Launch Demos</a--></p>
-        </div>
-        <div class="box centerAlign">
-            <a href="@Url.Suite("mobile")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-mobile.png")" alt="Mobile Demos" /></a>
-            <h2>
-            <a href="@Url.Suite("mobile")">Mobile demos</a>
-            </h2>
-            <p>See what you can do on phones &amp; tablets. Make sure to check the mobile simulator. <!--a href="mobile/" class="launchButton">Launch Demos</a--></p>
-        </div>
-        <div class="box centerAlign right-box">
-            <a href="@Url.Suite("dataviz")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
-            <h2><a href="@Url.Suite("dataviz")">DataViz demos</a></h2>
-            <p>You won't believe this is just HTML5. Rich, interactive, touch-enabled charts. <!--a href="dataviz/overview/index.html" class="launchButton">Launch Demos</a--></p>
-        </div>
-    </div>
-</div>
-</div>
-
-@*<div class="centerWrap floatWrap">*@
-
-<div class="section section--white">
-   <div class="centerWrap floatWrap">
-    <h2>Kendo UI tools and integration examples</h2>
-    <div class="integra-examples floatWrap">
-        <div class="box narrowbox">
-            <a href="http://trykendoui.telerik.com/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/kendoui-dojo.jpg")" alt="Kendo UI Dojo" /></a>
-            <h3><a href="http://trykendoui.telerik.com/">Interactive <br />Telerik Kendo UI Dojo</a></h3>
-            <p>The Kendo UI Dojo is an interactive environment designed to help you get up and running with Kendo UI quickly, no downloads needed. In this in-browser application, you'll be introduced to the basics of Kendo UI Web, DataViz and Mobile through guided tutorials and live, executable samples.</p>
-        </div>
-
-        <div class="box narrowbox">
-            <a href="@Url.Content("~/bootstrap/")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/kendoui-bootstrap.jpg")" alt="Kendo UI and Bootstrap" /></a>
-            <h3 class="centerAlign"><a href="@Url.Content("~/bootstrap/")">Telerik Kendo UI and <br />Bootstrap</a></h3>
-            <p>Explore how you can easily use Kendo UI and Twitter Bootstrap on the same page. </p>
-            <p>Preview Kendo UI widgets that are adapted to the responsive layouts of Bootstrap, see how they look and feel with different font size and dimensions.</p>
-            <!--a href="@Url.Content("~/bootstrap/")" class="launchButton">Launch!</a-->
-        </div>
-
-        <div class="box narrowbox">
-            <a href="mobilethemebuilder/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/mobile-themebuilder.jpg")" alt="ThemeBuilder for Kendo UI Mobile" /></a>
-            <h3 class="centerAlign"><a href="mobilethemebuilder/index.html">ThemeBuilder for <br />Telerik Kendo UI Mobile</a></h3>
-            <p>Quickly modify the styles of Kendo UI Mobile widgets as they exist in your apps with an easy to use standalone tool.
-            The simple and intuitive point-and-click configuration wizard makes it a breeze to transform Kendo UI Mobile themes, providing you with the CSS output
-            for use in your app.</p>
-            <!--a href="mobilethemebuilder/index.html" class="launchButton">Launch!</a-->
-        </div>
-
-        <div class="box narrowbox right-box">
-            <a href="@Url.Content("~/mobile/simulator/")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/sushi-mobile.jpg")" alt="Sushi Mobile Application" /></a>
-            <h3 class="centerAlign"><a href="@Url.Content("~/mobile/simulator/")">Sushi <br />Mobile Application</a></h3>
-            <p>Native UI widgets for building HTML5-powered apps and sites for modern mobile devices. Making your mobile user interface touch responsive and with native look and feel.</p>
-            <p><em>Only Webkit based browsers are fully supported.</em></p>
-            <!--a href="@Url.Content("~/mobile/simulator/")" class="launchButton">Launch!</a-->
-        </div>
-    </div>
-
-    </div>
-</div>
-
-<div class="section section--grey teampulse">
-   <div class="centerWrap floatWrap">
-    <div class="box clear widebox floatWrap">
-        <div class="column23">
-            <a href="http://demos.telerik.com/teampulse-demo" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/feedback-portal.png")" alt="Telerik's Project Management Software - TeamPulse" /></a>
-        </div>
-        <div class="column13">
-    <h2>Telerik's project management <br />software - TeamPulse</h2>
-        <p>TeamPulse is an end-to-end Agile project management solution based on Agile best practices. It allows you to capture ideas, manage feedback, requirements and bugs, plan releases and track progress in real time. Integrates with GIT and TFS.</p>
-    <p>TeamPulse uses the 20+ Kendo UI widgets for its fast and highly adaptable UI. The team leverages Kendo UI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the templates to decouple the UI from the business logic.</p>
-    <a href="http://demos.telerik.com/teampulse-demo" class="launchButton">Launch Demo</a>
-        </div>
-    </div>
-</div>
-</div>
-
-
-<div class="section section--white compatibility">
-   <div class="centerWrap floatWrap">
-
-    <h2 id="kendo-compatibility">Kendo UI compatibility</h2>
-
-
-    <table class="compatibilityHead">
-    <tbody>
-    <tr>
-            <td class="Pricing-head">
-                                <h4>Kendo UI</h4>
-                <h3>Web</h3>
-                <h5></h5>
-            </td>
-            <td class="Pricing-head">
-                                <h4>Kendo UI</h4>
-                <h3>Mobile</h3>
-                <h5></h5>
-            </td>
-            <td class="Pricing-head">
-                                <h4>Kendo UI</h4>
-                <h3>DataViz</h3>
-                <h5></h5>
-            </td>
-    </tr>
-    </tbody>
-    </table>
-    <table class="compatibilityTable">
-    <tbody>
-    <tr class="header">
-            <th colspan="4">
-                        Desktop Browsers
-            </th>
-        </tr>
-    <tr>
-            <td>Internet Explorer</td>
-            <td>
-        7 and above
-            </td>
-            <td>
-                10 and above
-            </td>
-        <td>
-        7 and above
-            </td>
-        </tr>
-    <tr>
-            <td>Google Chrome <br /><span class="versionInfo">Current and Previous</span></td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Firefox <a href="http://www.mozilla.org/en-US/firefox/organizations/faq/">ESR</a>+</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&nbsp;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Safari 5+ (OS X)</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Opera 15+</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr class="header">
-            <th colspan="4">
-                Mobile Browsers
-            </th>
-    </tr>
-    <tr>
-            <td>iOS 6.0+</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Android 2.3+ (default browser)</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="star">&#10033;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>BlackBerry OS 10.0+</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Windows Phone 8+</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    <tr>
-            <td>Chrome for Android</td>
-            <td>
-        <span class="dot">&#9679;</span>
-            </td>
-            <td>
-                <span class="dot">&#9679;</span>
-            </td>
-        <td>
-        <span class="dot">&#9679;</span>
-            </td>
-        </tr>
-    </tbody>
-    </table>
-
-
-    <div class="compatibilityNotes">
-
-        <p><span class="dot">&#10033;</span> In Android 2.3 Kendo UI DataViz only works in Canvas rendering mode.</p>
-
-    <p><span class="versionInfo">Current and Previous</span> means that current stable version of the browser and the previous one are supported. <br />(e.g. If the latest stable version of a browser is 21.x, Kendo UI supports the 21.x and 20.x versions.)</p>
-
-    <p>Please note that quirks mode is not supported.</p>
-
-    <p>Always specify a <a href="http://reference.sitepoint.com/html/doctypes">DOCTYPE</a> on your pages!</p>
-
-    </div>
-    </div>
-    </div>
-
-@*</div>*@
-@Html.Partial("Footer")
-
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="@Url.Content("~/content/shared/js/telerik-navigation.js")"></script>
-
 <script>
-
-// sub menu dropdowns
-
-$(document).ready(function(){
-    var dropdown = $("#header a[href=#expand]"),
-        submenus = $("#header").find(".submenu-box");
-
-    //sub menu dropdowns functionality
-    dropdown.click(function (e) {
-        var $this = $(this);
-        submenus.fadeOut(); //close all dropdowns
-        $this.toggleClass("expanded"); //set active state to dropdown link
-        dropdown.not($this).removeClass("expanded"); //for closed dropdown menus - remove active state of their link
-        $this.siblings(".submenu-box").not(":animated").fadeToggle(250); //display needed dropdown menu
-        e.stopPropagation();
-        e.preventDefault();
-    });
-
-    //on click outside of dropdowns, they disappear
-    $(document).click(function () {
-        submenus.fadeOut();
-        dropdown.removeClass("expanded");
-    });
-});
-
+    var path = "";
 </script>
+@Html.Partial("WebSearchScript")
+<div id="layout-search-wrapper" class="search-wrapper">
+    <div class="search">
+        <input id="example-search" placeholder="Search demos" />
+    </div>
+</div>
 
-<style>
+<div id="overview">
+    <div id="overview-widgets">
+        <h2>@ViewBag.Product <strong>Components</strong></h2>
+        <div id="most-popular">
+                <h3>Most popular</h3>
+                <ul class="overview-col">
+                    <li><a href="@Url.Widget("grid")">Grid</a></li>
+                    <li><a href="@Url.Widget("editor")">Editor</a></li>
+                    <li><a href="@Url.Widget("scheduler")">Scheduler</a></li>
+                    <li><a href="@Url.Widget("dropdownlist")">DropDownList</a></li>
+                    <li><a href="@Url.Widget("window")">Window</a></li>
+                    <li><a href="@Url.Widget("datepicker")">DatePicker</a></li>
+                    <li><a href="@Url.Widget("upload")">Upload</a></li>
+                    <li><a href="@Url.Widget("treeview")">TreeView</a></li>
+                    <li><a href="@Url.Widget("tabstrip")">TabStrip</a></li>
+                    <li><a href="@Url.Widget("bar-charts")">Bar Charts</a></li>
+                    <li><a href="@Url.Widget("line-charts")">Line Charts</a></li>
+                    <li><a href="@Url.Widget("bar-charts")">Pie Charts</a></li>
+                    <li><a href="@Url.Widget("financial")">Stock Charts</a></li>
+                    <li><a href="@Url.Widget("drawer")">Drawer</a></li>
+                    <li><a href="@Url.Widget("switch")">Switch</a></li>
+                </ul>
+        </div>
+        <div id="widgets-all">
 
-</style>
+    @{
+        var columns = new[] {
+            new [] {
+                "Data Management",
+                "Editors",
+                "Layout"
+            },
+            new [] {
+                "Data Visualization",
+                "Diagramming",
+                "Geo Visualization"
+            },
+            new [] {
+                "Scheduling",
+                "Navigation",
+                "Interactivity & UX",
+                "Framework"
+            },
+            new [] {
+                "Mobile"
+            }
+        };
 
-</body>
-</html>
+        var categories = (IEnumerable<IGrouping<string, NavigationWidget>>)ViewBag.Categories;
+    }
+
+    @foreach (var column in columns)
+    {
+        <ul class="overview-col col-four">
+        @foreach (var columnCategory in column)
+        {
+            var category = categories.FirstOrDefault(c => c.Key == columnCategory);
+            if (category.Any(c => c.ShouldInclude((string)ViewBag.NavProduct)))
+            {
+            <li class="widget">
+                <h3>@category.Key</h3>
+                <ul>
+                @foreach (var widget in category)
+                {
+                    if (widget.ShouldInclude((string)ViewBag.NavProduct))
+                    {
+                    <li>@Html.WidgetLink(widget)</li>
+                    }
+                }
+                </ul>
+            </li>
+            }
+        }
+        </ul>
+    }
+    </div>
+</div>
+<div id="applications-and-tools">
+    @if (ViewBag.Product == "kendo-ui")
+    {
+    <div id="overview-applications">
+    <h2>Sample Applications</h2>
+    <ul>
+        <li class="application">
+            <a href="./html5-diagram-sample-app">
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                <p>Sample Diagram Tool</p>
+            </a>
+        </li>
+        <li class="application"><a href="./websushi/">
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                <p>Single-Page Application</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="./aeroviewr/">
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                 <p>Image Gallery</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="./bootstrap/">
+                <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                <p>Kendo UI ♥ Bootstrap</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="./mobile-apps/sushi/">
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                 <p>Sushi Bar</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="./mobile-apps/cuteness/">
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                <p>Mobile Reddit Viewer</p>
+            </a>
+        </li>
+        <li class="application">
+            <a href="./financial/stock-history">
+                 <img src="@Url.Content("~/content/shared/images/dashboards/bootstrap.png")" class="application-image"/>
+                 <p>Stock History Dashboard</p>
+            </a>
+        </li>
+    </ul>
+    </div>
+    }
+    @if (ViewBag.Product == "aspnet-mvc")
+    {
+    <div>
+    <h2>Sample Applications</h2>
+    <ul>
+        <li><a href="http://demos.telerik.com/aspnet-mvc/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
+    </ul>
+    </div>
+    }
+    <div id="overview-tools">
+        <h2>Tools</h2>
+         <ul>
+            @if (ViewBag.Product == "kendo-ui")
+            {
+                <li>
+                    <a href="@Html.DojoRoot()">Interactive Dojo</a>
+                    <p>An environment designed to help you get up and running with  Kendo UI quickly.</p>
+                </li>
+            }
+            <li>
+                <a href="@Url.Action("Index", "ThemeBuilder")">ThemeBuilder</a>
+                <p>Create and modify themes for Kendo UI widgets.</p>
+            </li>
+            <li>
+                <a href="@Url.Action("MobileIndex", "ThemeBuilder")">Mobile ThemeBuiler</a>
+                <p>Touch optimized Kendo UI theme customizer.</p>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+    @Html.Partial("Footer")
+</div>

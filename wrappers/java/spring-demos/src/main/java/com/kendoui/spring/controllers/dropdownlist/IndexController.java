@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("dropdownlist-home-controller")
-@RequestMapping(value="/web/dropdownlist/")
+@RequestMapping(value="/dropdownlist/")
 public class IndexController {
     
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
@@ -26,6 +26,6 @@ public class IndexController {
             "XL - 7 5/8\""
         });
         
-        return "web/dropdownlist/index";
+        return "dropdownlist/index";
     }    
 }

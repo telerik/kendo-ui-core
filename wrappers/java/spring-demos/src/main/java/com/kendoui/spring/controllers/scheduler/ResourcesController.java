@@ -20,14 +20,14 @@ import com.kendoui.spring.models.Meeting;
 import com.kendoui.spring.models.MeetingDao;
 
 @Controller("scheduler-resources-controller")
-@RequestMapping(value="/web/scheduler/")
+@RequestMapping(value="/scheduler/")
 public class ResourcesController {
     @Autowired 
     private MeetingDao meeting;
     
     @RequestMapping(value = "/resources", method = RequestMethod.GET)
     public String resources(Locale locale, Model model) {        
-        return "web/scheduler/resources";
+        return "scheduler/resources";
     }
     
     @RequestMapping(value = "/resources/read", method = RequestMethod.POST)

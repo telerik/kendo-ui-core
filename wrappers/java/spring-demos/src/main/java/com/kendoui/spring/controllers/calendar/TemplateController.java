@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("calendar-template-controller")
-@RequestMapping(value="/web/calendar/")
+@RequestMapping(value="/calendar/")
 public class TemplateController {
     
     @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index(Model model) { 
         model.addAttribute("dates", getDates());
         
-        return "web/calendar/template";
+        return "calendar/template";
     }
 
     private ArrayList<Date> getDates() {

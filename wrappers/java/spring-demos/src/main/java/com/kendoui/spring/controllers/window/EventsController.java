@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("window-events-controller")
-@RequestMapping(value="/web/window/")
+@RequestMapping(value="/window/")
 public class EventsController {    
     
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String index() {
-        return "web/window/events";
+        return "window/events";
     }
 }
 

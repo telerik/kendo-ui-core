@@ -1,0 +1,96 @@
+<div id="example">
+
+    <div class="box">
+        <h4>Animation Settings</h4>
+        <ul class="options">
+            <li>
+                <input id="toggle" name="animation" type="radio" />
+                <label for="toggle">toggle animation</label>
+            </li>
+            <li>
+                <input id="expand" name="animation" type="radio" checked="checked" />
+                <label for="expand">expand animation</label>
+            </li>
+            <li>
+                <input id="opacity" type="checkbox" checked="checked" />
+                <label for="opacity">animate opacity</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="demo-section k-header">
+        <ul id="treeview">
+            <li>Furniture
+                <ul>
+                    <li>Tables & Chairs</li>
+                    <li>Sofas</li>
+                    <li>Occasional Furniture</li>
+                    <li>Children's Furniture</li>
+                    <li>Beds</li>
+                </ul>
+            </li>
+            <li data-expanded="true">Decor
+                <ul>
+                    <li>Bed Linen</li>
+                    <li>Throws</li>
+                    <li>Curtains & Blinds</li>
+                    <li>Rugs</li>
+                    <li>Carpets</li>
+                </ul>
+            </li>
+            <li>Storage
+                <ul>
+                    <li>Wall Shelving</li>
+                    <li>Kids Storage</li>
+                    <li>Baskets</li>
+                    <li>Multimedia Storage</li>
+                    <li>Floor Shelving</li>
+                    <li>Toilet Roll Holders</li>
+                    <li>Storage Jars</li>
+                    <li>Drawers</li>
+                    <li>Boxes</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var original = $("#treeview").clone(true);
+
+            $(".configuration input").change( function() {
+                var treeView = $("#treeview"),
+                    clone = original.clone(true);
+
+                treeView.parent().empty().remove();
+                $(".demo-section").append(clone);
+
+                initTreeView();
+            });
+
+            var initTreeView = function () {
+                $("#treeview").width(200)
+                    .kendoTreeView({
+                        animation: {
+                            expand: {
+                                effects: getEffects()
+                            }
+                        }
+                    });
+            };
+
+            var getEffects = function () {
+                return (($("#expand")[0].checked ? "expand:vertical " : "") +
+                        ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+            };
+
+            initTreeView();
+        });
+    </script>
+
+    <style scoped>
+        .demo-section {
+            width: 200px;
+        }
+    </style>
+</div>

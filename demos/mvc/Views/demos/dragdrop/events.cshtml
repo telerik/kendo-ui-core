@@ -1,0 +1,108 @@
+
+        <div id="example">
+            <div id="draggable"></div>
+            <div id="droptarget">Start dragging.</div>
+
+            <script>
+                function draggableOnDragStart(e) {
+                    kendoConsole.log("dragstart");
+
+                    $("#draggable").addClass("hollow");
+                    $("#droptarget").text("(Drop here)");
+                }
+
+                function draggableOnDrag(e) {
+                    kendoConsole.log("drag");
+                }
+
+                function draggableOnCancel(e) {
+                    kendoConsole.log("drag cancel");
+                }
+
+                function draggableOnDragEnd(e) {
+                    kendoConsole.log("dragend");
+
+                    var draggable = $("#draggable");
+
+                    if (!draggable.data("kendoDraggable").dropped) {
+                        // drag ended outside of any droptarget
+                        $("#droptarget").text("Try again!");
+                    }
+
+                    draggable.removeClass("hollow");
+                }
+
+                function droptargetOnDragEnter(e) {
+                    kendoConsole.log("dragenter");
+
+                    $("#droptarget").text("Now you can drop it.");
+                }
+
+                function droptargetOnDragLeave(e) {
+                    kendoConsole.log("dragleave");
+
+                    $("#droptarget").text("(Drop here)");
+                }
+
+                function droptargetOnDrop(e) {
+                    kendoConsole.log("drop");
+
+                    $("#droptarget").text("You did great!");
+                    $("#draggable").removeClass("hollow");
+                }
+
+                $(document).ready(function() {
+                    $("#draggable").kendoDraggable({
+                        hint: function() {
+                            return $("#draggable").clone();
+                        },
+                        dragstart: draggableOnDragStart,
+                        drag: draggableOnDrag,
+                        dragend: draggableOnDragEnd,
+                        dragcancel: draggableOnCancel
+                    });
+
+                    $("#droptarget").kendoDropTarget({
+                        dragenter: droptargetOnDragEnter,
+                        dragleave: droptargetOnDragLeave,
+                        drop: droptargetOnDrop
+                    });
+                });
+            </script>
+
+            <div class="console"></div>
+
+            <style scoped>
+                #droptarget
+                {
+                    border: 1px solid #959595;
+                    height: 198px;
+                    font-size: 36px;
+                    border-radius: 37px;
+                    text-align: center;
+                    line-height: 198px;
+                    color: #a1a1a1;
+                    text-shadow: 0 1px 1px #fff;
+                    margin: 0 0 30px 250px;
+                    cursor: default;
+
+                    background: #dddddd;
+                    background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
+                    background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                }
+
+                #example
+                {
+                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 140px 102px;
+                }
+
+                #exampleTitle
+                {
+                    color: #000;
+                }
+            </style>
+        </div>

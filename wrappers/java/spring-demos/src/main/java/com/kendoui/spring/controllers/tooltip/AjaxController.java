@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("tooltip-ajax-controller")
-@RequestMapping(value="/web/tooltip/")
+@RequestMapping(value="/tooltip/")
 public class AjaxController {    
     
     private Map<Integer, String> foods = new HashMap<Integer, String>() {{
@@ -26,7 +26,7 @@ public class AjaxController {
     
     @RequestMapping(value = {"/ajax"}, method = RequestMethod.GET)
     public String ajax() {
-        return "web/tooltip/ajax";
+        return "tooltip/ajax";
     }
     
     @RequestMapping(value = {"/ajax/details"}, method = RequestMethod.GET)
@@ -35,7 +35,7 @@ public class AjaxController {
         model.addAttribute("id", id);
         model.addAttribute("title", foods.get(id));
         
-        return "/web/tooltip/ajaxContent";
+        return "/tooltip/ajaxContent";
     }
 }
 

@@ -1,0 +1,107 @@
+<div id="example">
+    <div id="draggable"></div>
+    <div id="droptarget"><div class="test1">Start dragging.</div><div class="test2">Start dragging.</div></div>
+
+    <script>
+        function draggableOnDragStart(e) {
+            $("#draggable").addClass("hollow");
+
+            $("#droptarget").html("<div class='test1'>(Drop here)</div><div class='test2'>(Drop here)</div>");
+        }
+
+        function droptargetOnDragEnter(e) {
+            $(e.dropTarget).text("Now you can drop it.");
+        }
+
+        function droptargetOnDragLeave(e) {
+            $(e.dropTarget).text("(Drop here)");
+        }
+
+        function droptargetOnDrop(e) {
+            $(e.dropTarget).text("You did great!");
+            $("#draggable").removeClass("hollow");
+        }
+
+        function draggableOnDragEnd(e) {
+            var draggable = $("#draggable");
+
+            if (!draggable.data("kendoDraggable").dropped) {
+                // drag ended outside of any droptarget
+                $("#droptarget").html("<div class='test1'>(Try again)</div><div class='test2'>(Try again)</div>");
+            }
+
+            draggable.removeClass("hollow");
+        }
+
+        $(document).ready(function() {
+            $("#draggable").kendoDraggable({
+                hint: function() {
+                    return $("#draggable").clone();
+                },
+                dragstart: draggableOnDragStart,
+                dragend: draggableOnDragEnd
+            });
+
+            $("#droptarget").kendoDropTargetArea({
+                filter: ".test1, .test2",
+                dragenter: droptargetOnDragEnter,
+                dragleave: droptargetOnDragLeave,
+                drop: droptargetOnDrop
+            });
+        });
+    </script>
+
+    <style scoped>
+        #droptarget,
+        .test1, .test2
+        {
+            border: 1px solid #959595;
+            height: 198px;
+            font-size: 18px;
+            border-radius: 37px;
+            text-align: center;
+            line-height: 198px;
+            color: #a1a1a1;
+            text-shadow: 0 1px 0 #fff;
+            margin: 0 0 30px 215px;
+            cursor: default;
+            vertical-align: middle;
+
+            background: #dddddd;
+            background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
+            background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+            background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+        }
+
+        .test1, .test2
+        {
+            vertical-align: middle;
+            display: inline-block;
+            width: 220px;
+            height: 100px;
+            line-height: 100px;
+            margin: 0 10px 0;
+        }
+
+        *+html .test1,
+        *+html .test2
+        {
+            margin-top: 50px;
+            display: inline;
+            zoom: 1;
+        }
+
+        #example
+        {
+            background: url(../content/web/dragdrop/drag-clue.png) no-repeat 140px 102px;
+        }
+
+        #exampleTitle
+        {
+            color: #000;
+        }
+    </style>
+</div>

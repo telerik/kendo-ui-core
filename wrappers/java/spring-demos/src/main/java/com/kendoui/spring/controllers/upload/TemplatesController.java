@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("upload-templates-controller")
-@RequestMapping(value="/web/upload/")
+@RequestMapping(value="/upload/")
 public class TemplatesController {
     
     @RequestMapping(value = "/templates", method = RequestMethod.GET)
     public String index(){
         
-        return "web/upload/templates";
+        return "upload/templates";
     }
 }

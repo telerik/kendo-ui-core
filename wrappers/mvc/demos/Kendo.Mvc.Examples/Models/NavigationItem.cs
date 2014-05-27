@@ -30,7 +30,7 @@ namespace Kendo.Mvc.Examples.Models
                         name = name.Substring(1);
                     }
 
-                    if (name == "mvc")
+                    if (name == "mvc" || name == "mvc-offline")
                     {
                         match = true;
                     }

@@ -12,14 +12,14 @@ import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("combobox-serverfiltering-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class ServerFilteringController {
     @Autowired 
     private ProductDao product;
 
     @RequestMapping(value = "/serverfiltering", method = RequestMethod.GET)
     public String index() {
-        return "web/combobox/serverfiltering";
+        return "combobox/serverfiltering";
     }
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)

@@ -19,7 +19,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-foreignkeycolumn-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class ForeignKeyColumnController {
     
     @Autowired
@@ -32,7 +32,7 @@ public class ForeignKeyColumnController {
     public String index(Model model) {
         model.addAttribute("categories", populateCategories());
         
-        return "web/grid/foreignkeycolumn";
+        return "grid/foreignkeycolumn";
     }
     
     @RequestMapping(value = "/foreignkeycolumn/read", method = RequestMethod.POST)

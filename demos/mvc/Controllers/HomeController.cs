@@ -1,18 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Kendo.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        //
-        // GET: /
-
         public ActionResult Index()
         {
+            if (IsMobileDevice())
+            {
+                return Redirect(Url.RouteUrl("MobileDeviceIndex"));
+            }
+
+            ViewBag.Product = CurrentProduct();
+            ViewBag.NavProduct = CurrentNavProduct();
+            LoadNavigation();
+            LoadCategories();
+#if DEBUG
+            ViewBag.Debug = true;
+#else
+            ViewBag.Debug = false;
+#endif
             return View();
         }
-
     }
 }

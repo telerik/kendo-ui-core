@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("treeview-checkboxes-controller")
-@RequestMapping(value="/web/treeview/")
+@RequestMapping(value="/treeview/")
 public class CheckboxesController {
     
     @RequestMapping(value = "/checkboxes", method = RequestMethod.GET)
     public String index() {
-        return "web/treeview/checkboxes";
+        return "treeview/checkboxes";
     }
 }
 

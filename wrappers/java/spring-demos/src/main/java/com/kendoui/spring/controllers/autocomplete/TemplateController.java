@@ -12,7 +12,7 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 
 @Controller("autocomplete-template-controller")
-@RequestMapping(value="/web/autocomplete/")
+@RequestMapping(value="/autocomplete/")
 public class TemplateController {
     
     @Autowired 
@@ -20,7 +20,7 @@ public class TemplateController {
     
     @RequestMapping(value = {"/template"}, method = RequestMethod.GET)
     public String index() {
-        return "web/autocomplete/template";
+        return "autocomplete/template";
     }
     
     @RequestMapping(value = "/template/read", method = RequestMethod.POST)

@@ -5,7 +5,6 @@ namespace Kendo.Mvc.Examples.Models
 {
     public class NavigationWidget : NavigationItem
     {
-        public string Documentation { get; set; }
         public string ThumbnailUrl { get; set; }
         public string SpriteCssClass { get; set; }
         public bool Tablet { get; set; }

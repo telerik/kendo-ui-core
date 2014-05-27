@@ -31,5 +31,11 @@ namespace Kendo.Controllers
             SetDebug();
             return View();
         }
+
+        public ActionResult Diagram()
+        {
+            SetDebug();
+            return View();
+        }
     }
 }

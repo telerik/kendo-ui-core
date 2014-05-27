@@ -1,0 +1,42 @@
+        <div id="example">
+            <div class="demo-section k-header">
+                <div id="treeview"></div>
+            </div>
+            <script>
+                var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
+                    homogeneous = new kendo.data.HierarchicalDataSource({
+                        transport: {
+                            read: {
+                                url: serviceRoot + "/Employees",
+                                dataType: "jsonp"
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "EmployeeId",
+                                hasChildren: "HasEmployees"
+                            }
+                        }
+                    });
+
+                $("#treeview").kendoTreeView({
+                    dataSource: homogeneous,
+                    dataTextField: "FullName"
+                });
+            </script>
+
+            <style scoped>
+                #example {
+                    text-align: center;
+                }
+
+                .demo-section {
+                    display: inline-block;
+                    vertical-align: top;
+                    width: 320px;
+                    height: 300px;
+                    text-align: left;
+                    margin: 0 2em;
+                }
+            </style>
+        </div>

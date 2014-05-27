@@ -1,0 +1,298 @@
+html,
+body
+{
+    font: 14px sans-serif;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pane-content
+{
+    scrollable: false;
+}
+
+.configurationButtons
+{
+    padding: 4px;
+    background: #ffffff;
+    border: 1px solid #dadada;
+    margin: 0 -1px 0 0;
+}
+
+.configurationButtons span
+{
+    width: 16px;
+    height: 16px;
+    background-image: url("../images/diagram-sprite.png");
+    background-repeat: no-repeat;
+    -webkit-transform: translatez(0);
+    display: block;
+}
+
+#panelBar div
+{
+    background: #f4f4f4;
+}
+
+.alignLeft
+{
+    background-position: -144px 0;
+}
+
+.alignRight
+{
+    background-position: -160px 0;
+}
+
+.alignTop
+{
+    background-position: -112px 0;
+}
+
+.alignBottom
+{
+    background-position: -128px 0;
+}
+
+.toFront
+{
+    background-position: -176px 0;
+}
+
+.toBack
+{
+    background-position: -192px 0;
+}
+
+.k-menu .k-sprite
+{
+    background-image: url("../images/diagram-sprite.png");
+}
+
+.new-item
+{
+    background-position: 0 0;
+}
+
+.blank-item
+{
+    background-position: 0 0;
+}
+
+.open-item
+{
+    background-position: -32px 0;
+}
+
+.save-item
+{
+    background-position: -16px 0;
+}
+
+.undo-item
+{
+    background-position: -48px 0;
+}
+
+.redo-item
+{
+    background-position: -64px 0;
+}
+
+.copy-item
+{
+    background-position: -80px 0;
+}
+
+.paste-item
+{
+    background-position: -96px 0;
+}
+
+.k-slider
+{
+    vertical-align: middle;
+}
+
+.k-numerictextbox
+{
+    width: 60px;
+}
+
+#splitter
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: auto;
+    top: 92px;
+    bottom: 35px;
+    border-width: 0 0 1px;
+}
+
+#bottom-box
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 3px;
+    text-align: right;
+}
+
+#diagram
+{
+    border: 0;
+    width: 100%;
+}
+
+#diagram,
+#center-pane .pane-content
+{
+    height: 100%;
+}
+
+.k-panelbar .k-content ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+.k-panelbar .k-content li
+{
+    text-align: right;
+    position: relative;
+    list-style: none;
+    padding: 5px 0 0;
+}
+
+.k-panelbar .k-content
+{
+    padding-bottom: 5px;
+}
+
+.k-panelbar .k-content li > span
+{
+    position: absolute;
+    display: block;
+    left: 10px;
+    top: 10px;
+}
+
+.k-panelbar .k-content li > .k-widget
+{
+    width: 50%;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: left;
+    position: static;
+}
+
+.k-panelbar .k-content .k-selected-color
+{
+    width: 100%;
+}
+
+.k-panelbar
+{
+    border-width: 0;
+}
+
+.k-panelbar,
+.k-panelbar .k-panel,
+.k-panelbar li.k-item
+{
+    background: transparent;
+}
+
+.k-panelbar .k-panel,
+.k-panelbar .k-content
+{
+    background: #f0f0f0;
+}
+
+#shapesPanelBar .k-panel .k-item
+{
+    display: inline-block;
+    width: 50%;
+}
+
+#shapesPanelBar .k-panel .k-state-hover,
+#shapesPanelBar .k-panel .k-state-selected
+{
+    color: inherit;
+    background: #fff;
+}
+
+.shapeItem
+{
+    margin-top: 10px;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-image: url("../images/diagram-toolbox.png");
+    background-size: auto 100%;
+}
+
+#shapesPanelBar span
+{
+    text-align: center;
+    display: block;
+}
+
+#shapesPanelBar .shapeItem
+{
+    display: inline-block;
+}
+
+#menu .k-item > .k-link
+{
+    padding: .8em 1.4em;
+}
+
+.header
+{
+    color: #fff;
+    background: #000;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+    height: 50px;
+    line-height: 50px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.header a
+{
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    margin-right: 30px;
+    float: right;
+}
+
+.header a:hover
+{
+    text-decoration: underline;
+}
+
+.about ul
+{
+    display: inline-block;
+    vertical-align: top;
+    list-style: none;
+    padding-left: 95px;
+    margin: 0;
+    width: 160px;
+}
+
+.about h2,
+.about h3
+{
+    text-align: center;
+}

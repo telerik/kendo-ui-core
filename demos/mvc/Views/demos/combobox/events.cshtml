@@ -1,0 +1,68 @@
+
+        <div id="example">
+            <div class="demo-section k-header">
+                <h4>ComboBox</h4>
+                <input id="combobox" style="width: 400px;"/>
+            </div>
+            <div class="box">                
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    function onOpen() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: open");
+                        }
+                    }
+
+                    function onClose() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: close");
+                        }
+                    }
+
+                    function onChange() {
+                        if ("kendoConsole" in window) {
+                            kendoConsole.log("event :: change");
+                        }
+                    }
+
+                    function onSelect(e) {
+                        if ("kendoConsole" in window) {
+                            var dataItem = this.dataItem(e.item.index());
+                            kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")" );
+                        }
+                    };
+
+                    function onDataBound(e) {
+                        if ("kendoConsole" in window) {                            
+                            kendoConsole.log("event :: dataBound");
+                        }
+                    };
+
+                    var data = [
+                        { text: "Item 1", value:"1" },
+                        { text: "Item 2", value:"2" },
+                        { text: "Item 3", value:"3" }
+                    ];
+
+                    $("#combobox").kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: data,
+                        select: onSelect,
+                        change: onChange,
+                        close: onClose,
+                        open: onOpen,
+                        dataBound:onDataBound
+                    });
+                });
+            </script>
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                }
+            </style>                        
+        </div>
+        

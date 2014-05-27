@@ -1,0 +1,64 @@
+        
+        <div id="example" class="k-content">
+            
+            <div id="grid"></div>
+
+            <script>
+                function onChange(arg) {
+                    var selected = $.map(this.select(), function(item) {
+                        return $(item).text();
+                    });
+
+                    kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
+                }
+
+                function onDataBound(arg) {
+                    kendoConsole.log("Grid data bound");
+                }
+
+                function onDataBinding(arg) {
+                    kendoConsole.log("Grid data binding");
+                }
+
+                $(document).ready(function () {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "http://demos.telerik.com/kendo-ui/service/Products",
+                                    dataType: "jsonp"
+                                }
+                            },
+                            pageSize: 20
+                        },
+                        height: 550,
+                        change: onChange,
+                        dataBound: onDataBound,
+                        dataBinding: onDataBinding,
+                        selectable: "multiple cell",
+                        pageable: true,
+                        sortable: true,
+                        columns: [
+                            {
+                                field: "ProductName",
+                                title: "Product Name"
+                            },
+                            {
+                                field: "UnitPrice",
+                                title: "Unit Price",
+                                format: "{0:c}"
+                            },
+                            {
+                                field: "UnitsInStock",
+                                title: "Units In Stock"
+                            }
+                        ]
+                    });
+                });
+            </script>
+            <div class="demo-section">
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
+        </div>
+        

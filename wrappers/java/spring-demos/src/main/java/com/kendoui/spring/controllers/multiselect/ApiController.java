@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("multiselect-api-controller")
-@RequestMapping(value="/web/multiselect/")
+@RequestMapping(value="/multiselect/")
 public class ApiController {
     
     @RequestMapping(value = {"api"}, method = RequestMethod.GET)
@@ -26,6 +26,6 @@ public class ApiController {
                 new DropDownListItem("The Dark Knight", "10")
         });
        
-        return "web/multiselect/api";
+        return "multiselect/api";
     }
 }

@@ -1,0 +1,72 @@
+<div class="themechooser" data-role="details">
+        @if (ViewBag.Mobile)
+        {
+        <span class="tc-activator"><span class="tc-current" data-bind="text: selectedMobileTheme"></span> Theme</span>
+        }
+        else
+        {
+        <span class="tc-activator"><span class="tc-current" data-bind="text: selectedTheme"></span> Theme</span>
+        }
+
+    <div class="tc-theme-list">
+        @if (ViewBag.Mobile)
+        {
+        <div class="tc-column">
+            <h4>Themes</h4>
+            <ul data-role="themechooser"
+                data-template="theme-item-template"
+                data-bind="
+                    source: mobileThemes,
+                    value: selectedMobileTheme,
+                    events: { change: updateMobileTheme }
+                "></ul>
+        </div>
+        }
+        else
+        {
+        <div class="tc-column">
+            <h4>Themes</h4>
+            <ul id="widget-themes"
+                data-role="themechooser"
+                data-template="theme-item-template"
+                data-bind="
+                    source: themes,
+                    value: selectedTheme,
+                    events: { change: updateTheme }
+                "></ul>
+        </div>
+
+        <div class="tc-column">
+            <h4>Widget size</h4>
+            <ul data-role="themechooser"
+                data-template="size-item-template"
+                data-value="Standard"
+                data-bind="
+                    source: sizes,
+                    value: selectedSize,
+                    events: { change: updateCommon }
+                "></ul>
+        </div>
+        }
+    </div>
+</div>
+
+<script id="theme-item-template" type="text/x-kendo-template">
+    <li class="tc-item">
+        # for (var i = 0; i < colors.length; i++) { #
+            <span class="tc-color" style="background-color: #= colors[i] #"></span>
+        # } #
+        <span class="tc-name">#: name #</span>
+    </li>
+</script>
+
+<script id="size-item-template" type="text/x-kendo-template">
+    <li class="tc-item">
+        <span class="tc-name">#: name #</span>
+        # if ('relativity' in data) { #
+            <span class="tc-relativity">
+                (#: relativity #)
+            </span>
+        # } #
+    </li>
+</script>

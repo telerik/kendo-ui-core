@@ -1,0 +1,38 @@
+
+<div id="example" class="k-content">
+    <div id="wrap">
+        <img id="mathew" src="../content/web/fx/zoom/mathew.png" />
+        <img id="andreas" src="../content/web/fx/zoom/andreas.png" />
+        <img id="lysa" src="../content/web/fx/zoom/lysa.png" />
+    </div>
+
+    <script>
+        $("#wrap img").hover(function() {
+            kendo.fx(this).zoom("in").startValue(1).endValue(2).play();
+        }, function() {
+            kendo.fx(this).zoom("out").endValue(1).startValue(2).play();
+        });
+    </script>
+
+    <style>
+        #wrap {
+            background-image: url("../content/web/fx/zoom/background.png");
+            width: 655px;
+            height: 298px;
+            margin: 2.5em auto;
+            position: relative;
+            -webkit-transform: translateZ(0);
+        }
+
+        #wrap img {
+            position: absolute;
+            width: 82px;
+            bottom: 65px;
+        }
+
+        #mathew { left: 50px; }
+        #lysa { left: 450px; }
+        #andreas { left: 243px; }
+    </style>
+</div>
+

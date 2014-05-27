@@ -1,0 +1,28 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+<div class="chart-wrapper">
+    <%=Html.Kendo().Chart()
+        .Name("chart")
+        .Title("A digital signal")
+        .Legend(legend => legend.Visible(false))
+        .Series(series =>
+            series.Area(new int[]{ 20, 1, 18, 3, 15, 5, 10, 6, 9, 6, 10, 5, 13, 3, 16, 1, 19, 1, 20, 2, 18, 5, 12, 7, 10, 8 })
+                .Line(line => line.Style(ChartAreaStyle.Smooth))        
+        )
+        .CategoryAxis(categoryAxis => categoryAxis
+            .Title("time")
+            .MajorGridLines(majorGridLines => majorGridLines.Visible(false))
+            .MajorTicks(majorTicks => majorTicks.Visible(false))
+        )
+        .ValueAxis(valueAxis => valueAxis.Numeric()
+            .Max(22)
+            .Title("voltage")
+            .MajorGridLines(majorGridLines => majorGridLines.Visible(false))
+            .Visible(false)
+        )
+     %> 
+</div>
+
+</asp:Content>

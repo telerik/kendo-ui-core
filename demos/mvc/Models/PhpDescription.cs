@@ -19,9 +19,9 @@ namespace Kendo.Models
             }
         }
 
-        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string suite, string section)
+        public IEnumerable<ExampleFile> GetFiles(HttpServerUtilityBase server, string example, string section)
         {
-            var url = String.Format("~/src/php/{0}/{1}/{2}.php", suite, section, example); 
+            var url = String.Format("~/src/php/{0}/{1}.php", section, example); 
 
             yield return new ExampleFile
             {

@@ -6,16 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("tabstrip-ajax-controller")
-@RequestMapping(value="/web/tabstrip/")
+@RequestMapping(value="/tabstrip/")
 public class AjaxController {
     
     @RequestMapping(value = {"/ajax"}, method = RequestMethod.GET)
     public String index() {
-        return "web/tabstrip/ajax";
+        return "tabstrip/ajax";
     }
     
     @RequestMapping(value = "/content/{page}", method = RequestMethod.GET)
     public String content(@PathVariable int page) {       
-        return "web/tabstrip/content" + page;
+        return "tabstrip/content" + page;
     }
 }

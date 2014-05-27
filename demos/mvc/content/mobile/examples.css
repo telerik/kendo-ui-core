@@ -1,0 +1,216 @@
+@font-face {
+  font-family: 'KendoMobileDemos';
+  src: url('demos.eot');
+  src: url('demos.eot') format('embedded-opentype'), url('demos.woff') format('woff'), url('demos.ttf') format('truetype'), url('demos.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+#search-tooltip {
+    margin: 7em 2em;
+    color: #2d3e50;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    text-align: center;
+}
+
+#examples .km-content {
+    color: #2d3e50;
+}
+
+#examples .km-touch-scrollbar {
+    background: rgba(37, 39, 44, 0.3);
+}
+
+#examples .km-navbar {
+    background: #2a2d33;
+    color: #fff;
+}
+#examples .km-navbar .km-view-title,
+#examples .km-navbar .km-button {
+    color: #fff;
+}
+
+#examples .km-navbar .km-button.km-state-active {
+    color: #5ce600;
+}
+
+#examples .km-listgroup .km-group-title {
+    background-color: #f8f9fa;
+    line-height: 3em;
+}
+
+#examples .km-list > li {
+    border-image: none;
+}
+
+#demos-search {
+    visibility: visible;
+    width: 14em;
+    background: #6a6c71;
+    border: 1px solid #74767a;
+    color: white;
+    padding-left: 1em;
+    font-size: 1.2em;
+}
+
+#demos-search-container:before {
+    font: 1em/1em "Kendo UI" normal;
+    content: "\e21e";
+    position: absolute;
+    margin-top: .6em;
+    margin-left: .5em;
+}
+
+#examples .km-drawer-icon:before,
+#examples .km-drawer-icon:after {
+    font: 1em/1em "KendoMobileDemos" normal;
+    content: "\e602";
+}
+
+#examples .km-themechooser:before,
+#examples .km-themechooser:after {
+    font: 1em/1em "KendoMobileDemos" normal;
+    content: "\e601";
+}
+
+#examples .km-arrow-w:after,
+#examples .km-arrow-w:before
+{
+    content: "\e013";
+    font-size: 2em;
+    margin-left: -.5em;
+    margin-top: -.3em;
+}
+
+#examples .km-search:after,
+#examples .km-search:before
+{
+    content: "\e21e";
+    font-size: 1.4em;
+}
+
+#examples .km-state-active,
+#examples .km-state-active .km-listview-link {
+    background: #dfe3e6;
+    color: black;
+}
+
+#examples .km-button,
+#examples .km-button.k-state-active {
+    background: none;
+    border: none;
+}
+
+#search-results .section {
+    display: block;
+    font-size: .8em;
+    font-weight: normal;
+}
+
+#search-results .km-listview-link:after,
+#about .km-listview-link:after {
+    content: '';
+    box-shadow: none;
+}
+
+#about {
+    background: transparent url("backgrounds/kendo.jpg") left top no-repeat;
+}
+
+#about .km-navbar {
+    background: rgba(28, 31, 35, 0.4);
+}
+
+#about .km-content,
+#about .km-listview li,
+#about .km-listview .km-state-active a {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+#about .km-listview {
+    margin-left: 23px;
+}
+
+#about .km-listview a,
+#about .km-listview .km-state-active a {
+    color: white;
+}
+
+#about #external-resources {
+    margin-top: 2em;
+}
+
+#about #external-resources a {
+    display: inline-block;
+}
+#about #external-resources a:after {
+    font: .5em/.5em "KendoMobileDemos" normal;
+    content: "\e605";
+    color: rgba(255, 255, 255, 0.5);
+    display: inline;
+    position: absolute;
+    right: auto;
+    top: auto;
+    margin: 1.3em 0.8em;
+    -webkit-transform: none;
+}
+
+#about .km-footer .km-listview {
+    margin-bottom: 1em;
+}
+
+#about .km-footer {
+    font-size: .8em;
+    background: transparent;
+}
+
+#about .km-leftitem {
+    left: 0;
+}
+
+#logo {
+    margin-left: 33px;
+}
+
+#themechooser li {
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+#themechooser .km-content,
+#themechooser .km-listview-wrapper {
+    background: #2a2d33;
+}
+
+#themechooser a {
+    margin: 0;
+    padding:.8em 2em;
+    border-left-width: 9px;
+    border-left-style: solid;
+    color: white;
+}
+
+#themechooser .current a {
+    border-left-width: 20px;
+    background: #0f1011;
+}
+
+#themechooser a:after {
+    box-shadow: none;
+}
+
+#desktop-footer {
+    background-color: #2a2d33;
+    padding: 2em;
+}
+
+#desktop-link {
+    display: block;
+    text-align: center;
+    color: #38c0ff;
+}

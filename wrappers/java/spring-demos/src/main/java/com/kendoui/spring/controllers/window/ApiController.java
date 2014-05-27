@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("window-api-controller")
-@RequestMapping(value="/web/window/")
+@RequestMapping(value="/window/")
 public class ApiController {    
     
     @RequestMapping(value = "/api", method = RequestMethod.GET)
     public String index() {
-        return "web/window/api";
+        return "window/api";
     }
 }
 

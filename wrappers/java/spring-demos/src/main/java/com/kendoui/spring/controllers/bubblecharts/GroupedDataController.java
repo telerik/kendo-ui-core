@@ -15,11 +15,11 @@ import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.Medals;
 
 @Controller("dataviz-bubble_charts-grouped_data-controller")
-@RequestMapping(value="/dataviz/bubble-charts/")
+@RequestMapping(value="/bubble-charts/")
 public class GroupedDataController {
     @RequestMapping(value = "/grouped-data", method = RequestMethod.GET)
     public String index() {
-        return "/dataviz/bubble-charts/grouped-data";
+        return "/bubble-charts/grouped-data";
     }
     
     private Map<Integer, String> medalColors = new HashMap<Integer, String>(){{

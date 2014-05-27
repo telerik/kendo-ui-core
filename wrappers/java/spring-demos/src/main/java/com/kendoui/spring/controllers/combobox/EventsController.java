@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kendoui.spring.models.DropDownListItem;
 
 @Controller("combobox-events-controller")
-@RequestMapping(value="/web/combobox/")
+@RequestMapping(value="/combobox/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
@@ -19,6 +19,6 @@ public class EventsController {
                 new DropDownListItem("Item 3", "3")
         });
         
-        return "web/combobox/events";
+        return "combobox/events";
     }
 }

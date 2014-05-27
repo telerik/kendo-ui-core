@@ -1,0 +1,111 @@
+
+        <div id="example">
+
+            <div class="box">
+                <h4>Animation Settings</h4>
+                <ul class="options">
+                    <li>
+                        <input id="toggle" name="animation" type="radio" /> <label for="toggle">toggle animation</label>
+                    </li>
+                    <li>
+                        <input id="expand" name="animation" type="radio" checked="checked" /> <label for="expand">expand animation</label>
+                    </li>
+                    <li>
+                        <input id="opacity" type="checkbox" checked="checked" /> <label for="opacity">animate opacity</label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="history">
+                <ul id="panelbar">
+                    <li class="k-state-active">
+                        Today
+                        <ul>
+                            <li>Jane King</li>
+                            <li>Bob Fuller</li>
+                            <li>Lynda Kallahan</li>
+                            <li>Matt Sutnar</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Yesterday
+                        <ul>
+                            <li>Stewart </li>
+                            <li>Jane King</li>
+                            <li>Steven</li>
+                            <li>Ken Stone</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Wednesday, February 01, 2012
+                        <ul>
+                            <li>Jane King</li>
+                            <li>Lynda Kallahan</li>
+                            <li>Todd </li>
+                            <li>Bob Fuller</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Tuesday, January 31, 2012
+                        <ul>
+                            <li>Emily Davolio</li>
+                            <li>Matt Sutnar</li>
+                            <li>Bob Fuller</li>
+                            <li>Jenn Heinlein</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Monday, January 30, 2012
+                        <ul>
+                            <li>Matt Sutnar</li>
+                            <li>Joshua</li>
+                            <li>Michael</li>
+                            <li>Jenn Heinlein</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="bottom"></div>
+            </div>
+            <script>
+                $(document).ready(function() {
+                    var original = $("#panelbar").clone(true);
+                    original.find(".k-state-active").removeClass("k-state-active");
+
+                    $(".configuration input").change( function() {
+                        var panelBar = $("#panelbar"),
+                            clone = original.clone(true);
+
+                        panelBar.data("kendoPanelBar").collapse($("#panelbar .k-link"));
+
+                        panelBar.replaceWith(clone);
+
+                        initPanelBar();
+                    });
+
+                    var initPanelBar = function () {
+                        $("#panelbar").kendoPanelBar({ animation: { expand: { effects: getEffects()}} });
+                    };
+
+                    var getEffects = function () {
+                        return (($("#expand")[0].checked ? "expand:vertical " : "") +
+                                ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
+                    };
+
+                    initPanelBar();
+                });
+            </script>
+
+            <style scoped>
+                .history {
+                    width: 252px;
+                    margin: 20px auto;
+                    padding: 36px 0 0 0;
+                    background: url('../content/web/panelbar/history.png') transparent no-repeat 0 0;
+                }
+                .bottom {
+                    width: 252px;
+                    height: 9px;
+                    background: url('../content/web/panelbar/history.png') transparent no-repeat 0 -35px;
+                }
+            </style>
+        </div>

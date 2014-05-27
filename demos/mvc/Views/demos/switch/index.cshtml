@@ -1,0 +1,58 @@
+<div data-role="view" id="switch-home" data-init="mobileSwitchInit" data-title="User Settings">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>Profile
+            <ul>
+                <li><h2>Eduardo <span>Saavedra</span></h2><img src="../content/mobile/overview/eduardo.jpg" /></li>
+                <li>Brand Manager at Marketing Team</li>
+            </ul>
+        </li>
+
+        <li>Password
+            <ul>
+                <li>User cannot change pasword <input data-role="switch" id="email-switch" checked="checked" /></li>
+                <li>Password never expires <input id="wink-switch" /></li>
+            </ul>
+        </li>
+
+        <li>Newsletter Subscription
+            <ul>
+                <li>Subscribed <input id="subscription-switch" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function mobileSwitchInit() {
+        $("#wink-switch").kendoMobileSwitch();
+
+        $("#subscription-switch").kendoMobileSwitch({
+            checked: true,
+            onLabel: "YES",
+            offLabel: "NO"
+        });
+    }
+</script>
+
+<style scoped>
+#switch-home h2 {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 1.5em 0 0 .7em;
+}
+#switch-home h2 span {
+    display: block;
+    clear: both;
+    font-size: 1.8em;
+    margin: .1em 0 0 0;
+}
+#switch-home img {
+    width: 5em;
+    height: 5em;
+    float: left;
+    margin: 1em;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-border-radius: 4em;
+    border-radius: 4em;
+}
+</style>

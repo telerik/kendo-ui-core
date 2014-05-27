@@ -1151,6 +1151,14 @@ namespace :build do
         ].flatten
     end
 
+    namespace :update do
+        task :demos => [
+            'demos:staging'
+        ] do
+            sh "rsync -avc dist/demos/staging/ #{WEB_ROOT}/update/"
+        end
+    end
+
 end
 
 namespace :bundles do

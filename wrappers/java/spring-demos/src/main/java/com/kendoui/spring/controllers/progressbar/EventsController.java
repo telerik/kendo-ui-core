@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("progressbar-events-controller")
-@RequestMapping(value="/web/progressbar/")
+@RequestMapping(value="/progressbar/")
 public class EventsController {
     
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public String index() {       
-        return "web/progressbar/events";
+        return "progressbar/events";
     }    
 }

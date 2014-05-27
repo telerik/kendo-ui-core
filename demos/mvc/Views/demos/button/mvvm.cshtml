@@ -1,0 +1,44 @@
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 300px;">
+            <h4>Button</h4>
+            <button data-role="button"
+                    data-sprite-css-class="k-icon k-edit"
+                    data-bind="visible: isVisible, enabled: isEnabled, events: { click: onClick }"
+                    style="width: 180px"
+            >Click me</button>
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col"  style="width: 300px;">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isEnabled">Enable</label>
+            </div>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Button supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        isEnabled: true,
+        onClick: function() {
+            kendoConsole.log("event :: click");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

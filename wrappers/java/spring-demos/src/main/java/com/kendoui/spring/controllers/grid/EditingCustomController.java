@@ -18,7 +18,7 @@ import com.kendoui.spring.models.Product;
 import com.kendoui.spring.models.ProductDao;
 
 @Controller("grid-editing-custom-controller")
-@RequestMapping(value="/web/grid/")
+@RequestMapping(value="/grid/")
 public class EditingCustomController {
     
     @Autowired
@@ -31,7 +31,7 @@ public class EditingCustomController {
     public String index(Model model) {
         Category defaultCategory = category.getList().get(0);
         model.addAttribute("defaultCategory", defaultCategory);
-        return "web/grid/editing-custom";
+        return "grid/editing-custom";
     }
     
     @RequestMapping(value = "/editing-custom/read", method = RequestMethod.POST)
