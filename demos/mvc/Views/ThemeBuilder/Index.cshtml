@@ -3,8 +3,8 @@
 }
 
 <div class="content-wrap">
-    <div id="instructions-box">
-        <h3>Instructions</h3>
+    <div id="instructions-box" class="box">
+        <h4>Instructions</h4>
         <ol id="instructions-list">
             <li class="themechooser">
                 <p>Select a theme to modify:</p>
@@ -43,6 +43,7 @@
             "})()").replace(/\s+/g, "%20"));
     </script>
 
+    <div id="example">
     <div class="column">
         <h3>Button</h3>
         <button class="k-button">A button</button>
@@ -203,6 +204,7 @@
 
         <div id="radial-gauge"></div>
     </div>
+    </div>
 
 </div>
 
@@ -225,11 +227,6 @@
     #instructions-box {
         margin: 0 2% 3em;
         padding-bottom: 2em;
-        border-bottom: 2px solid #ccc;
-    }
-
-    #instructions-box h3 {
-        font-weight: bold;
     }
 
     #instructions-list li {
@@ -288,7 +285,7 @@
 </style>
 <script>
     $(document).ready(function() {
-        kendo.bind($("body"), {
+        kendo.bind($("#example"), {
             countries: [
                 "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia & Herzegovina", "Bulgaria",
                 "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece",
