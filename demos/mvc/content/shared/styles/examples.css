@@ -686,7 +686,7 @@ div.submenu-box ol {
 .themechooser
 {
     background-color: #f5f7f8;
-    border-bottom: 1px solid #ebecee;
+    border-bottom: 1px solid #e2e4e7;
     text-align: right;
 }
 
@@ -770,7 +770,8 @@ div.submenu-box ol {
     background: none;
 }
 
-#widget-themes {
+.tc-theme-list .themes-grid
+{
     -webkit-columns: 3;
     -moz-columns: 3;
     columns: 3;
@@ -2689,7 +2690,7 @@ a.footer-links:hover {
 #example-search-wrapper {
     width: 299px;
     float: left;
-    border-right: 1px solid #ebecee;
+    border-right: 1px solid #e2e4e7;
 }
 
 #layout-search-wrapper {
