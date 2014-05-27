@@ -301,7 +301,6 @@
         equal(data[9].value, 6);
     });
 
-    /*
     test("expand row axis with columns expanded", function() {
         var rowTuples = [
             {
@@ -346,9 +345,7 @@
             }
         });
 
-        debugger;
         dataSource.read();
-        debugger;
         dataSource.expandRow("level 1-0");
 
         var data = dataSource.data();
@@ -365,6 +362,5 @@
         equal(data[9].value, 6);
     });
 
-    */
 })();
 

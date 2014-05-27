@@ -258,74 +258,82 @@ var __meta__ = {
             return result.data;
         },
 
-        _mergeAxes: function(source, newData) {
-            var parsedTuples;
+        _mergeAxes: function(sourceAxes, data) {
+            debugger;
             var columnMeasures = this.measuresAxis() === "columns";
-            var result = {
+            var axes = {
                 columns: normalizeAxis(this._axes.columns),
                 rows: normalizeAxis(this._axes.rows)
             };
 
-            source = {
-                columns: normalizeAxis(source.columns),
-                rows: normalizeAxis(source.rows)
+            sourceAxes = {
+                columns: normalizeAxis(sourceAxes.columns),
+                rows: normalizeAxis(sourceAxes.rows)
             };
 
-            var columnsLength = source.columns.tuples.length;
-            var rowsLength = source.rows.tuples.length;
+            var newColumnsLength = sourceAxes.columns.tuples.length;
+            var newRowsLength = sourceAxes.rows.tuples.length;
+            var oldColumnsLength = membersCount(axes.columns.tuples);
+            var oldRowsLength = membersCount(axes.rows.tuples);
 
-            var oldLength;
-            if (columnsLength) {
-                oldLength = membersCount(result.columns.tuples);
+            var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures ? this.measures() : []);
+            var mergedColumns = mergeTuples(axes.columns.tuples, tuples);
+
+            tuples = parseSource(sourceAxes.rows.tuples, !columnMeasures ? this.measures() : []);
+            var mergedRows = mergeTuples(axes.rows.tuples, tuples);
+
+            axes.columns.tuples = mergedColumns.tuple;
+            axes.rows.tuples = mergedRows.tuple;
+
+            if (oldColumnsLength !== membersCount(axes.columns.tuples)) {
+                //columns are expanded
+                var offset = oldColumnsLength + newColumnsLength;
+                if (oldColumnsLength) {
+                    offset--;
+                }
+                data = this._mergeColumnData(data, mergedColumns.deep, newRowsLength, newColumnsLength, offset);
             } else {
-                oldLength = membersCount(result.rows.tuples);
-            }
-
-            parsedTuples = parseSource(source.columns.tuples, columnMeasures ? this.measures() : []);
-            var mergedColumns = mergeTuples(result.columns.tuples, parsedTuples);
-            result.columns.tuples = mergedColumns.tuple;
-
-            parsedTuples = parseSource(source.rows.tuples, !columnMeasures ? this.measures() : []);
-            var mergedRows = mergeTuples(result.rows.tuples, parsedTuples);
-            result.rows.tuples = mergedRows.tuple;
-
-            var columnIndex, rowIndex;
-            if (columnsLength) {
-                columnIndex = mergedColumns.deep;
-                rowIndex = mergedRows.deep;
-            } else {
-                columnIndex = mergedRows.deep;
-                rowIndex = mergedColumns.deep;
-
-                var temp = columnsLength;
-                columnsLength = rowsLength;
-                rowsLength = temp;
-            }
-
-            columnsLength = Math.max(columnsLength, 1);
-            rowsLength = Math.max(rowsLength, 1);
-
-            var data = this.data().toJSON();
-            var drop = 0;
-
-            if (data.length > 0) {
-                columnIndex--;
-                rowIndex--;
-                drop = 1;
-            }
-
-            var offset = oldLength + columnsLength;
-
-            for (var i = 0; i < rowsLength; i ++) {
-                //start = start + (i * (oldColumnsLength - start + columnsLength));
-                var index = columnIndex + (i * offset);
-                [].splice.apply(data, [index, drop].concat(newData.splice(0,columnsLength)));
+                debugger;
+                //rows are expanded
+                data = this._mergeRowData(data, mergedRows.deep, newColumnsLength);
             }
 
             return {
-                axes: result,
+                axes: axes,
                 data: data
             };
+        },
+
+        _mergeColumnData: function(newData, columnIndex, rowsLength, columnsLength, offset) {
+            var counter, index;
+            var data = this.data().toJSON();
+            var drop = 0;
+
+            rowsLength = Math.max(rowsLength, 1);
+            if (data.length > 0) {
+                columnIndex--;
+                drop = 1;
+            }
+
+            for (counter = 0; counter < rowsLength; counter ++) {
+                index = columnIndex + (counter * offset);
+                [].splice.apply(data, [index, drop].concat(newData.splice(0, columnsLength)));
+            }
+
+            return data;
+        },
+
+        _mergeRowData: function(newData, rowIndex, drop) {
+            var data = this.data().toJSON();
+
+            if (data.length > 0 && drop == 0) {
+                rowIndex--;
+                drop++;
+            }
+
+            [].splice.apply(data, [rowIndex, drop].concat(newData));
+
+            return data;
         },
 
         _normalizeData: function(data, axes) {
@@ -372,9 +380,13 @@ var __meta__ = {
     });
 
     function membersCount(tuples) {
+        if (!tuples.length) {
+            return 0;
+        }
+
         var queue = tuples.slice();
         var current = queue.shift();
-        var idx, length, result = 0;
+        var idx, length, result = 1;
 
         while (current) {
             if (current.members) {
