@@ -148,9 +148,9 @@ def demos(options)
     files = files + offline_demos(categories, suite_path).include("#{suite_path}/index.html");
 
     # Build the index.html page of the suite
-    file "#{suite_path}/index.html" => DEMOS_BULDFILES.include("build/templates/#{template_dir}/suite-index.html.erb") do |t|
+    file "#{suite_path}/index.html" => DEMOS_BULDFILES.include("build/templates/suite-index.html.erb") do |t|
 
-        template = ERB.new(File.read("build/templates/#{template_dir}/suite-index.html.erb"))
+        template = ERB.new(File.read("build/templates/suite-index.html.erb"))
 
         File.write(t.name, template.result(binding))
 
