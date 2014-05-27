@@ -1960,6 +1960,30 @@ test("aggregate max returns min value for a given field with 0", function() {
     equal(result.foo.max, 100);
 });
 
+test("aggregate max with date", function() {
+    var data = [ {foo: new Date("2013/05/06"), bar: "baz"}, {foo: new Date("2050/05/06"), bar: "bar"}, {foo: new Date("1940/05/06"), bar: "baz"}, {foo: new Date("1980/05/06"), bar: "baz"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "max" }] );
+
+    deepEqual(result.foo.max, new Date("2050/05/06"));
+});
+
+test("aggregate min with date", function() {
+    var data = [ {foo: new Date("2013/05/06"), bar: "baz"}, {foo: new Date("2050/05/06"), bar: "bar"}, {foo: new Date("1940/05/06"), bar: "baz"}, {foo: new Date("1980/05/06"), bar: "baz"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+    deepEqual(result.foo.min, new Date("1940/05/06"));
+});
+
+test("aggregate min with date and null", function() {
+    var data = [ {foo: new Date("2013/05/06"), bar: "baz"}, {foo: null, bar: "bar"}, {foo: new Date("1940/05/06"), bar: "baz"},{foo: null, bar: "bar"}, {foo: new Date("1980/05/06"), bar: "baz"} ];
+
+    var result = new Query(data).aggregate( [{ field: "foo", aggregate: "min" }] );
+
+    deepEqual(result.foo.min, new Date("1940/05/06"));
+});
+
 test("aggregate count with null", function() {
     var data = [ {foo: 10, bar: "baz"}, {foo: 100, bar: "baz"}, {foo: null, bar: "baz"},  {foo: 10, bar: "bar"}  ];
 
