@@ -119,6 +119,7 @@ a
 
 a:hover
 {
+    color: #036c9c;
     text-decoration: underline;
 }
 
@@ -2925,14 +2926,14 @@ a.footer-links:hover {
     width: auto;
     margin:auto;
     text-align: center;
-    padding-bottom: 150px;
+    padding-bottom: 180px;
 }
 
 #overview h2 {
     color: #000;
     font: 400 28px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
     text-align: left;
-    padding: 2.321em 0 0.700em 0;
+    padding: 2.5em 0 0.700em 0;
 }
 
 #overview-widgets,
@@ -2957,6 +2958,11 @@ a.footer-links:hover {
     width: 100%;
 }
 
+#overview-tools h2 {
+    padding-top: 1em;
+}
+
+
 #overview-tools li {
     padding-bottom: 1.417em
 }
@@ -2971,6 +2977,10 @@ a.footer-links:hover {
 
 #overview-applications h5 {
     display: inline-block;
+}
+
+#overview-applications ul {
+    margin-top: 14px;
 }
 
 #overview-widgets > ul > li{
@@ -2990,7 +3000,7 @@ a.footer-links:hover {
 
 #overview-widgets h3 {
     color: #000;
-    font: 700 12px/1.2 Arial,Helvetica,sans-serif;
+    font: 700 12px/2.2 Arial,Helvetica,sans-serif;
     text-transform: uppercase;
     margin-left: 0.833em;
     text-align: left;
@@ -2998,7 +3008,7 @@ a.footer-links:hover {
 
 #most-popular a{
     font-size: 24px;
-    line-height: 22px;
+    line-height: 26px;
     padding: 0.259em 0;
 }
 
@@ -3092,7 +3102,12 @@ h5 {
 .application p {
     font-size: 13px;
     line-height: 16px;
-    height: 32px;
+    height: 50px;
+    padding-top: 3px;
+}
+
+.application a:hover {
+    text-decoration: none;
 }
 
 /* ##################### BOX ##################### */
