@@ -987,6 +987,21 @@
         equal(validator.errors()[0], "Custom message");
     });
 
+    test("custom validation rule is executed in the context of the validator object", function() {
+        var input = $('<input name="Field" type="text" />'),
+            element,
+            validator = setup(input, {
+                rules: {
+                    custom: function() {
+                        ok(this === validator);
+                    }
+                },
+                messages: { custom: "Custom message" }
+            });
+
+        validator.validate();
+    });
+
     test("form submit is preveneted if container is form element and validation fails", function() {
         container.append($('<form><input type="text" required="required" title="input1 message" /></form>'));
         var validator = setup(container.find("form")),
