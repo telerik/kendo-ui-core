@@ -2,7 +2,7 @@
     var container,
         ToolBar = kendo.ui.ToolBar;
 
-    module("Toolbar: JSON rendering", {
+    module("Toolbar rendering:", {
         setup: function() {
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
         },
@@ -269,7 +269,7 @@
         }).data("kendoToolBar");
 
         ok(container.find(".k-button").length);
-        ok(toolbar.popup.element.find(".k-button").length);
+        ok(toolbar.popup.element.find(".k-link.k-overflow-button").length);
     });
 
     test("button element with overflow: never is not rendered in the overflow popup", 2, function() {
@@ -291,7 +291,7 @@
         }).data("kendoToolBar");
 
         ok(!container.find(".k-button").length);
-        ok(toolbar.popup.element.find(".k-button").length);
+        ok(toolbar.popup.element.find(".k-link.k-overflow-button").length);
     });
 
     test("button element in overflow popup has class k-overflow-button", 1, function() {
@@ -385,7 +385,7 @@
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
 
-        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+        icon = toolbar.popup.element.find(".k-link.k-overflow-button").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -403,7 +403,7 @@
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
 
-        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+        icon = toolbar.popup.element.find(".k-link.k-overflow-button").children("span.k-icon");
 
         equal(icon.length, 0);
     });
@@ -415,11 +415,11 @@
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+        var icon = toolbar.element.find(".k-overflow-button").children("span.k-icon");
 
         equal(icon.length, 0);
 
-        icon = toolbar.popup.element.find(".k-button").children("span.k-icon");
+        icon = toolbar.popup.element.find(".k-overflow-button").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -497,7 +497,7 @@
         });
 
         ok(container.children(".k-button-group").length, "ButtonGroup element is rendered");
-        equal(container.find(".k-button-group").prop("tagName"), "UL", "ButtonGroup renders UL element");
+        equal(container.find(".k-button-group").prop("tagName"), "DIV", "ButtonGroup renders DIV element");
         equal(container.find(".k-button-group").children().length, 3, "Button group contains correct amount of items");
     });
 
@@ -596,7 +596,7 @@
         ok(component.length);
     });
 
-    test("Overflow ButtonGroup renders ul list with li items", 2, function() {
+    test("Overflow ButtonGroup renders li tag with buttons", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
@@ -609,11 +609,11 @@
         }).data("kendoToolBar");
 
         component = toolbar.popup.element.find(".k-button-group");
-        equal(component.prop("tagName"), "UL");
-        equal(component.children("li").length, 3);
+        equal(component.prop("tagName"), "LI");
+        equal(component.children(".k-link.k-overflow-button").length, 3);
     });
 
-    test("Overflow ButtonGroup is wrapped in li element and has uid + overflow data", 3, function() {
+    test("Overflow ButtonGroup renders li element which has uid + overflow data", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "buttonGroup", overflow: "always", items: [
@@ -626,9 +626,9 @@
         }).data("kendoToolBar");
 
         component = toolbar.popup.element.find(".k-button-group");
-        equal(component.parent().prop("tagName"), "LI");
-        ok(component.parent().data("uid"));
-        equal(component.parent().data("overflow"), "always");
+        equal(component.prop("tagName"), "LI");
+        ok(component.data("uid"));
+        equal(component.data("overflow"), "always");
     });
 
 
@@ -765,7 +765,7 @@
         equal(splitButton.attr("data-overflow"), "never");
     });
 
-    test("Overflow SplitButton renders ul list with li items", 2, function() {
+    test("Overflow SplitButton renders li tag with buttons", 2, function() {
         var splitButton = container.kendoToolBar({
             items: [
                 { type: "splitButton", text: "foo", items: [
@@ -779,11 +779,11 @@
 
         component = splitButton.popup.element.find(".k-split-button");
 
-        equal(component.prop("tagName"), "UL");
-        equal(component.children("li").length, 4); //3 items + 1 main button
+        equal(component.prop("tagName"), "LI");
+        equal(component.children(".k-link.k-overflow-button").length, 4); //3 items + 1 main button
     });
 
-    test("Overflow SplitButton element is wrapped in a li tag and receives data-uid attribute", 2, function() {
+    test("Overflow SplitButton items are wrapped in a li tag which has data-uid attribute", 2, function() {
         var splitButton = container.kendoToolBar({
             items: [
                 { type: "splitButton", text: "foo", items: [
@@ -797,8 +797,8 @@
 
         component = splitButton.popup.element.find(".k-split-button");
 
-        equal(component.parent().prop("tagName"), "LI");
-        ok(component.parent().data("uid"));
+        equal(component.prop("tagName"), "LI");
+        ok(component.data("uid"));
     });
 
     /* SEPARATOR */
@@ -810,7 +810,7 @@
             ]
         });
 
-        ok(container.children(".k-toolbar-separator").length, "Separator element is rendered");
+        ok(container.children(".k-separator").length, "Separator element is rendered");
     });
 
     test("Overflow separator is wrapped inside a li tag and received data-uid attribute", 2, function() {
@@ -820,10 +820,10 @@
             ]
         }).data("kendoToolBar");
 
-        var separator = toolbar.popup.element.find(".k-overflow-separator");
+        var separator = toolbar.popup.element.find(".k-separator");
 
-        equal(separator.parent().prop("tagName"), "LI");
-        ok(separator.parent().data("uid"));
+        equal(separator.prop("tagName"), "LI");
+        ok(separator.data("uid"));
     });
 
     /* COMMAND OVERFLOW */
@@ -874,7 +874,7 @@
             ]
         }).data("kendoToolBar");
 
-        var wrapper = toolbar.popup.element.find(".k-button").parent();
+        var wrapper = toolbar.popup.element.children().first();
         ok(wrapper.hasClass("k-overflow-hidden"));
         ok(wrapper.is(":hidden"));
     });

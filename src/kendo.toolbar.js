@@ -23,7 +23,8 @@ var __meta__ = {
         TOGGLE_BUTTON = "k-toggle-button",
         BUTTON_GROUP = "k-button-group",
         SPLIT_BUTTON = "k-split-button",
-        SEPARATOR = "k-toolbar-separator",
+        SEPARATOR = "k-separator",
+        LINK = "k-link",
 
         RESIZABLE_TOOLBAR = "k-toolbar-resizable",
         STATE_CHECKED = "k-state-checked",
@@ -60,25 +61,23 @@ var __meta__ = {
             },
 
             buttonGroup: {
-                base: function (options, initializer) {
-                    var element = $('<ul class="' + BUTTON_GROUP + '"></ul>'),
-                        items = options.items,
+                base: function (options, initializer, element) {
+                    var items = options.items,
                         item;
 
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
                         item = initializer(items[i]);
-                        item.wrap("<li></li>").parent().appendTo(element);
+                        item.appendTo(element);
                     }
 
-                    element.find(">li ." + BUTTON).first().addClass(GROUP_START);
-                    element.find(">li ." + BUTTON).last().addClass(GROUP_END);
-
-                    return element;
+                    element.children().first().addClass(GROUP_START);
+                    element.children().last().addClass(GROUP_END);
                 },
                 toolbar: function (options) {
-                    var element = components.buttonGroup.base(options, components.button.toolbar);
+                    var element = $('<div class="' + BUTTON_GROUP + '"></div>');
+                    components.buttonGroup.base(options, components.button.toolbar, element);
 
                     if (options.id) {
                         element.attr("id", options.id);
@@ -87,7 +86,8 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function (options) {
-                    var element = components.buttonGroup.base(options, components.button.overflow);
+                    var element = $('<li class="' + BUTTON_GROUP + '"></li>');
+                    components.buttonGroup.base(options, components.button.overflow, element);
 
                     if (options.id) {
                         element.attr("id", options.id + "_overflow");
@@ -135,8 +135,8 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<ul class="' + SPLIT_BUTTON + '"></ul>'),
-                        mainButton = components.button.overflow(options).wrap("<li></li>").parent(),
+                    var element = $('<li class="' + SPLIT_BUTTON + '"></li>'),
+                        mainButton = components.button.overflow(options),
                         items = options.items,
                         item;
 
@@ -144,7 +144,7 @@ var __meta__ = {
 
                     for (var i = 0; i < items.length; i++) {
                         item = components.button.overflow(items[i]);
-                        item.wrap("<li></li>").parent().appendTo(element);
+                        item.appendTo(element);
                     }
 
                     if (options.id) {
@@ -159,12 +159,12 @@ var __meta__ = {
 
             separator: {
                 toolbar: function(options) {
-                    var element = $('<span class="k-toolbar-separator"></span>');
+                    var element = $('<div class="k-separator"></div>');
                     element.data({ type: "separator" });
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<span class="k-overflow-separator"></span>');
+                    var element = $('<li class="k-separator"></li>');
                     element.data({ type: "separator" });
                     return element;
                 }
@@ -172,20 +172,19 @@ var __meta__ = {
 
             overflowAnchor: '<div class="k-overflow-anchor"></div>',
 
-            overflowContainer: '<ul class="k-overflow-container"></ul>'
+            overflowContainer: '<ul class="k-overflow-container k-menu"></ul>'
         };
 
-        function createButton(options, button) {
-            var element = button ? $('<button class="' + BUTTON + '"></button>') : $('<a href="" class="' + BUTTON + '"></a>');
+        function createButton(options, useButtonTag) {
+            var element = useButtonTag ? $('<button></button>') : $('<a href=""></a>');
 
             element.data({ type: "button" });
 
             if (options.toggle) {
                 element.addClass(TOGGLE_BUTTON);
-            }
-
-            if (options.toggle && options.selected) {
-                element.addClass(STATE_CHECKED);
+                if (options.selected) {
+                    element.addClass(STATE_CHECKED);
+                }
             }
 
             if (options.enable === false) {
@@ -202,6 +201,8 @@ var __meta__ = {
         function createToolbarButton(options) {
             var element = components.button.base(options),
                 hasIcon;
+
+            element.addClass(BUTTON);
 
             if (options.primary) {
                 element.addClass(PRIMARY);
@@ -233,7 +234,7 @@ var __meta__ = {
             var element = components.button.base(options),
                 hasIcon;
 
-            element.addClass(OVERFLOW_BUTTON);
+            element.addClass(OVERFLOW_BUTTON + " " + LINK);
 
             if (options.id) {
                 element.attr("id", options.id + "_overflow");
@@ -396,7 +397,7 @@ var __meta__ = {
                 });
 
                 //add the command in the overflow popup
-                if (options.overflow !== OVERFLOW_NEVER) {
+                if (options.overflow !== OVERFLOW_NEVER && this.options.resizable) {
                     if (overflowTemplate) { //template command
                         overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
                     } else if (component) { //build-in command
@@ -404,9 +405,11 @@ var __meta__ = {
                     }
 
                     if (overflowElement.length) {
-                        overflowElement = overflowElement.wrap("<li></li>").parent();
+                        if(overflowElement.prop("tagName") !== "LI") {
+                            overflowElement = overflowElement.wrap("<li></li>").parent();
+                        }
                         this._attributes(overflowElement, options);
-                        overflowElement.appendTo(this.popup.element);
+                        overflowElement.addClass("k-item k-state-default").appendTo(this.popup.element);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
                             overflowElement.addClass(OVERFLOW_HIDDEN);
