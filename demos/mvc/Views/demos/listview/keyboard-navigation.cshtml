@@ -1,10 +1,10 @@
-<div id="example" class="k-content">
+<div id="example">
 
-    <div class="demo-section">
+    <div class="demo-section k-header">
         <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
     </div>
 
-    <div class="demo-section">
+    <div class="demo-section k-header">
         <div id="listView"></div>
         <div id="pager" class="k-pager-wrap"></div>
     </div>
@@ -126,108 +126,124 @@
 
     </script>
 
-    <ul class="keyboard-legend" style="padding-top: 25px">
-        <li>
-            <span class="button-preview">
-                <span class="key-button leftAlign">Alt</span>
-                +
-                <span class="key-button">W</span>
-            </span>
-            <span class="button-descr">
-                Focus the ListView
-            </span>
-        </li>
-    </ul>
+    <div class="box">
+        <div class="box-col">
+            <h4>Focus</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Alt</span>
+                        +
+                        <span class="key-button">W</span>
+                    </span>
+                    <span class="button-descr">
+                        Focus the ListView
+                    </span>
+                </li>
+            </ul>
+        </div>
 
-    <h4>Supported keys and user actions</h4>
-    <ul class="keyboard-legend">
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Right</span>
-            </span>
-            <span class="button-descr">
-                Goes to the next item (same as Down)
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Left</span>
-            </span>
-            <span class="button-descr">
-                Goes to the previous item (same as Up)
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Home</span>
-            </span>
-            <span class="button-descr">
-                Goes to the first item
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">End</span>
-            </span>
-            <span class="button-descr">
-                Goes to the last item
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Enter</span>
-            </span>
-            <span class="button-descr">
-                Enter Edit mode or Apply changes
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Esc</span>
-            </span>
-            <span class="button-descr">
-                Exit Edit mode and Cancel changes
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Tab</span>
-            </span>
-            <span class="button-descr">
-                Tabs away from the ListView on the next focusable page element
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button leftAlign">Shift</span>
-                +
-                <span class="key-button">Tab</span>
-            </span>
-            <span class="button-descr">
-                Tabs away from the ListView on the previous focusable page element
-            </span>
-        </li>
-        <li>
-            <span class="button-preview">
-                <span class="key-button">Space</span>
-            </span>
-            <span class="button-descr">
-                Select item
-            </span>
-        </li>
-    </ul>
+        <div class="box-col">
+            <h4>Supported keys and user actions</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Right</span>
+                    </span>
+                    <span class="button-descr">
+                        Goes to the next item (same as Down)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Left</span>
+                    </span>
+                    <span class="button-descr">
+                        Goes to the previous item (same as Up)
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Home</span>
+                    </span>
+                    <span class="button-descr">
+                        Goes to the first item
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">End</span>
+                    </span>
+                    <span class="button-descr">
+                        Goes to the last item
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="box-col">
+            <h4>&nbsp;</h4>
+            <ul class="keyboard-legend">
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Enter</span>
+                    </span>
+                    <span class="button-descr">
+                        Enter Edit mode or Apply changes
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Esc</span>
+                    </span>
+                    <span class="button-descr">
+                        Exit Edit mode and Cancel changes
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Tab</span>
+                    </span>
+                    <span class="button-descr">
+                        Tabs away from the ListView on the next focusable page element
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button leftAlign">Shift</span>
+                        +
+                        <span class="key-button">Tab</span>
+                    </span>
+                    <span class="button-descr">
+                        Tabs away from the ListView on the previous focusable page element
+                    </span>
+                </li>
+                <li>
+                    <span class="button-preview">
+                        <span class="key-button">Space</span>
+                    </span>
+                    <span class="button-descr">
+                        Select item
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+    
 
 
     <style scoped>
         .demo-section {
-            width: 605px;
+            width: 700px;
         }
         .product-view
         {
             float: left;
             position: relative;
-            width: 301px;
-            margin: -1px -1px 0 0;
+            width: 349px;
+            margin: 0 -1px -1px 0;
         }
 
         .product-view dl
@@ -241,9 +257,9 @@
             float: left;
             margin: 0;
             padding: 3px;
-            height: 26px;
-            width: 160px;
-            line-height: 26px;
+            height: 32px;
+            width: 180px;
+            line-height: 32px;
             overflow: hidden;
         }
         .product-view dt
@@ -275,7 +291,7 @@
             top: 0;
             right: 0;
             width: 26px;
-            height: 146px;
+            height: 170px;
             padding: 2px 2px 0 3px;
             background-color: rgba(0,0,0,0.1);
         }

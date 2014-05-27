@@ -1,7 +1,7 @@
 
-        <div id="example" class="k-content">
-            <div class="configuration">
-                <span class="infoHead">Information</span>
+        <div id="example">
+            <div class="box">
+                <h4>Information</h4>
                 <p>
                     The Upload can be used as a drop-in replacement
                     for file input elements.
@@ -11,8 +11,8 @@
                     special handling on the server.
                 </p>
             </div>
-            <form method="post" action="@Url.Action("submit", "upload")" style="width:45%">
-                <div class="demo-section">
+            <form method="post" action="@Url.Action("submit", "upload")">
+                <div class="demo-section k-header">
                     <input name="files" id="files" type="file" />
                     <p>
                         <input type="submit" value="Submit" class="k-button" />
