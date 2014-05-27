@@ -717,6 +717,7 @@ div.submenu-box ol {
     content: "\e604";
     display: inline-block;
     margin-left: .5em;
+    font-size: .8em;
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
