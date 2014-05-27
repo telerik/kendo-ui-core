@@ -1,9 +1,9 @@
-<div id="example" class="k-content">
-
+<div id="example">
+    <div class="demo-section">
     <ul id="listView"></ul>
 
     <ul id="list"></ul>
-
+    </div>
     <script type="text/x-kendo-tmpl" id="images-template">
         <li#= typeof done != "undefined" && done ? " class='done'" : "" #>
             <img src="../content/web/foods/${ProductID}.jpg" alt="${ProductName} image">
@@ -48,6 +48,14 @@
         });
     </script>
     <style>
+        .demo-section {
+            position: relative;
+            background: url(../content/web/fx/groceries.jpg) no-repeat 0 0;
+            width: 750px;
+            height: 330px;
+            padding: 0;
+        }
+        
         #listView, #list {
             position: absolute;
             border: 0;
@@ -60,7 +68,7 @@
 
         #listView {
             left: 50px;
-            width: 370px;
+            width: 380px;
         }
 
         #listView .done {
@@ -100,15 +108,11 @@
         #list {
             left: 523px;
             color: #666;
+            font-size: 12px;
         }
 
         #list .done {
             text-decoration: line-through;
-        }
-
-        #example {
-            background: url(../content/web/fx/groceries.jpg) no-repeat 0 0;
-            height: 330px;
         }
     </style>
 </div>

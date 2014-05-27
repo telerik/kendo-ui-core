@@ -1,7 +1,7 @@
 
         <div id="example">
             <div id="draggable"></div>
-            <div id="droptarget">Start dragging.</div>
+            <div id="droptarget" class="k-widget k-header">Start dragging.</div>
 
             <script>
                 function draggableOnDragStart(e) {
@@ -70,39 +70,36 @@
                 });
             </script>
 
-            <div class="console"></div>
+            <div class="box">
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
 
             <style scoped>
                 #droptarget
                 {
-                    border: 1px solid #959595;
                     height: 198px;
-                    font-size: 36px;
+                    font-size: 18px;
                     border-radius: 37px;
                     text-align: center;
                     line-height: 198px;
-                    color: #a1a1a1;
-                    text-shadow: 0 1px 1px #fff;
-                    margin: 0 0 30px 250px;
+                    margin: 0 0 30px 215px;
                     cursor: default;
-
-                    background: #dddddd;
-                    background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
-                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
-                    background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
+                    vertical-align: middle;
                 }
 
                 #example
                 {
-                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 140px 102px;
+                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 130px 80px;
                 }
 
                 #exampleTitle
                 {
                     color: #000;
+                }
+                #draggable 
+                {
+                    top: 60px;
                 }
             </style>
         </div>

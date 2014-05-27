@@ -1,8 +1,8 @@
 
         <div id="example">
 
-            <div class="configuration">
-                <span class="configHead">Configuration</span>
+            <div class="box">
+                <h4>Configuration</h4>
                 <ul class="options">
                     <li><label for="cursorOffset"><input type="checkbox" id="cursorOffset"> Enable <code>cursorOffset</code></label></li>
                     <li><label for="axis">Axis: <select id="axis">
@@ -12,8 +12,11 @@
                         </select></label></li>
                 </ul>
             </div>
-            <div id="draggable"></div>
-            <div id="droptarget">Start dragging.</div>
+
+            <div class="demo-section">
+                <div id="draggable"></div>
+                <div id="droptarget" class="k-header">Start dragging.</div>
+            </div>
 
             <script>
                 function draggableOnDragStart(e) {
@@ -80,35 +83,31 @@
             <style scoped>
                 #droptarget
                 {
-                    border: 1px solid #959595;
                     height: 198px;
                     width: 300px;
                     font-size: 36px;
                     border-radius: 37px;
                     text-align: center;
                     line-height: 198px;
-                    color: #a1a1a1;
-                    text-shadow: 0 1px 1px #fff;
                     margin: 0 0 30px 220px;
                     cursor: default;
-
-                    background: #dddddd;
-                    background: -moz-linear-gradient(top, #dddddd 0%, #c1c1c1 100%);
-                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#c1c1c1));
-                    background: -webkit-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: -o-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: -ms-linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
-                    background: linear-gradient(top, #dddddd 0%,#c1c1c1 100%);
                 }
 
-                #example
+                .demo-section
                 {
-                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 140px 102px;
+                    width: 520px;
+                    position: relative;
+                    background: url(../content/web/dragdrop/drag-clue.png) no-repeat 155px 130px;
                 }
 
                 #exampleTitle
                 {
                     color: #000;
+                }
+                
+                #draggable 
+                {
+                    top: 110px;
                 }
             </style>
         </div>
