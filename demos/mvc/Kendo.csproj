@@ -727,7 +727,6 @@
     <Content Include="Views\demos\grid\toolbar-template.cshtml" />
     <Content Include="Views\demos\grid\virtualization-local-data.cshtml" />
     <Content Include="Views\demos\grid\virtualization-remote-data.cshtml" />
-    <Content Include="Views\demos\integration\index.cshtml" />
     <Content Include="Views\demos\line-charts\date-axis.cshtml" />
     <Content Include="Views\demos\line-charts\error-bars.cshtml" />
     <Content Include="Views\demos\line-charts\grouped-data.cshtml" />
@@ -1150,7 +1149,7 @@
     <Content Include="Views\Shared\GoogleTagManager.cshtml" />
     <Content Include="Views\ThemeBuilder\MobileIndex.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
-    <Content Include="Views\demos\integration\handlebars.cshtml" />
+    <Content Include="Views\demos\integration\index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

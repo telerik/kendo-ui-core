@@ -4404,13 +4404,13 @@
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Integration",
+    "text": "Integration with JS libraries",
     "name": "integration",
     "spriteCssClass": "integrationIcon",
     "items": [
       {
         "text": "Kendo UI + Handlebars",
-        "url": "integration/handlebars",
+        "url": "integration/index",
         "title": {
             "kendo-ui": "Integrating Handlebars templates with Kendo UI Web examples"
         },
@@ -4429,7 +4429,7 @@
         }
       }
     ],
-    "category": "TBD"
+    "category": "Framework"
   },
   {
     "text": "Area Charts",
