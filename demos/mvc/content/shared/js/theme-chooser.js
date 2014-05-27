@@ -144,7 +144,7 @@
         },
 
         updateTheme: function(e) {
-            var themeName = e.item.name.toLowerCase().replace(/\s/, "")
+            var themeName = e.item.value;
             ThemeChooser.changeTheme(themeName, true);
             cookie("theme", themeName, Infinity, "/");
         },
