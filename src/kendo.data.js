@@ -1406,11 +1406,11 @@ var __meta__ = {
         max: function(accumulator, item, accessor) {
             var value = accessor.get(item);
 
-            if (!isNumber(accumulator)) {
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
                 accumulator = value;
             }
 
-            if(accumulator < value && isNumber(value)) {
+            if(accumulator < value && (isNumber(value) || isDate(value))) {
                 accumulator = value;
             }
             return accumulator;
@@ -1418,11 +1418,11 @@ var __meta__ = {
         min: function(accumulator, item, accessor) {
             var value = accessor.get(item);
 
-            if (!isNumber(accumulator)) {
+            if (!isNumber(accumulator) && !isDate(accumulator)) {
                 accumulator = value;
             }
 
-            if(accumulator > value && isNumber(value)) {
+            if(accumulator > value && (isNumber(value) || isDate(value))) {
                 accumulator = value;
             }
             return accumulator;
@@ -1431,6 +1431,10 @@ var __meta__ = {
 
     function isNumber(val) {
         return typeof val === "number" && !isNaN(val);
+    }
+
+    function isDate(val) {
+        return val && val.getTime;
     }
 
     function toJSON(array) {
