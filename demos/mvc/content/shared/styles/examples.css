@@ -800,7 +800,7 @@ div.submenu-box ol {
     color: #555;
 }
 
-.tc-theme-list .k-state-selected
+.tc-item.k-state-selected
 {
     color: #000;
     background-color: #cad0d6;
@@ -3390,6 +3390,27 @@ h5 {
 
 .box li a {
     font-size: 13px;
+}
+
+.box .k-widget {
+    background-color: #ebeef0;
+    border-color: #ccc;
+    color: #7c7c7c;
+}
+
+.box .k-button {
+    background: #015991;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 2px 6px;
+    font-size: inherit;
+    border-color: #015991;
+}
+
+.box .k-button:hover {
+    background: #013A5E;
+    color: #fff;
 }
 
 .demo-hint {

@@ -3,47 +3,7 @@
 }
 
 <div class="content-wrap">
-    <div id="instructions-box" class="box">
-        <h4>Instructions</h4>
-        <ol id="instructions-list">
-            <li class="themechooser">
-                <p>Select a theme to modify:</p>
-                <ul data-role="themechooser"
-                    data-template="theme-item-template"
-                    data-value="Silver"
-                    data-bind="source: themes, events: { change: updateTheme }"></ul>
-
-                <script id="theme-item-template" type="text/x-kendo-template">
-                    <li class="tc-item">
-                        # for (var i = 0; i < colors.length; i++) { #
-                            <span class="tc-color" style="background-color: #= colors[i] #"></span>
-                        # } #
-                        <span class="tc-name">#: name #</span>
-                    </li>
-                </script>
-            </li>
-            <li>Start the <a class="k-button" id="bookmarklet" href="#">Kendo UI ThemeBuilder</a></li>
-            <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
-        </ol>
-    </div>
-
-    <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
-
-    <script>
-        $("#bookmarklet").attr("href", ("javascript:(function(){" +
-                "var ktb=window.kendoThemeBuilder,s,d=document;" +
-                "if(typeof ktb!='undefined'){" +
-                    "ktb.open();" +
-                    "return" +
-                "}else{" +
-                    "s=d.createElement('script');" +
-                    "s.src='@ViewBag.DeployRoot/bootstrap.js?'+(+new Date());" +
-                    "d.getElementsByTagName('body')[0].appendChild(s);" +
-                "}" +
-            "})()").replace(/\s+/g, "%20"));
-    </script>
-
-    <div id="example">
+    <div id="example" class="k-content">
     <div class="column">
         <h3>Button</h3>
         <button class="k-button">A button</button>
@@ -206,6 +166,47 @@
     </div>
     </div>
 
+    <div id="instructions-box" class="box">
+        <h4>Instructions</h4>
+        <ol id="instructions-list">
+            <li class="themechooser">
+                <p>Select a theme to modify:</p>
+                <ul class="tc-theme-list"
+                    data-role="themechooser"
+                    data-template="theme-item-template"
+                    data-value="Silver"
+                    data-bind="source: themes, events: { change: updateTheme }"></ul>
+
+                <script id="theme-item-template" type="text/x-kendo-template">
+                    <li class="tc-item">
+                        # for (var i = 0; i < colors.length; i++) { #
+                            <span class="tc-color" style="background-color: #= colors[i] #"></span>
+                        # } #
+                        <span class="tc-name">#: name #</span>
+                    </li>
+                </script>
+            </li>
+            <li>Start the <a class="k-button" id="bookmarklet" href="#">Kendo UI ThemeBuilder</a></li>
+            <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
+        </ol>
+    </div>
+
+    <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
+
+    <script>
+        $("#bookmarklet").attr("href", ("javascript:(function(){" +
+                "var ktb=window.kendoThemeBuilder,s,d=document;" +
+                "if(typeof ktb!='undefined'){" +
+                    "ktb.open();" +
+                    "return" +
+                "}else{" +
+                    "s=d.createElement('script');" +
+                    "s.src='@ViewBag.DeployRoot/bootstrap.js?'+(+new Date());" +
+                    "d.getElementsByTagName('body')[0].appendChild(s);" +
+                "}" +
+            "})()").replace(/\s+/g, "%20"));
+    </script>
+
 </div>
 
 <style>
@@ -217,6 +218,7 @@
         width: 1200px;
         margin: 0 auto;
         overflow: hidden;
+        position: relative;
     }
 
     h3 {
@@ -224,9 +226,15 @@
         margin: 20px 0 13px;
     }
 
+    #example {
+        margin-top: 400px;
+    }
+
     #instructions-box {
-        margin: 0 2% 3em;
+        margin: 0;
         padding-bottom: 2em;
+        position: absolute;
+        top: 0;
     }
 
     #instructions-list li {
@@ -241,16 +249,15 @@
 
     .themechooser ul {
         border: 0;
-        -webkit-columns: 3;
-        -moz-columns: 3;
-        columns: 3;
+        background: transparent;
+        margin: 1em 0;
+        padding: .5em;
     }
 
     .themechooser li {
         display: inline-block;
-        padding: .4em 1em;
-        margin: .4em;
-        width: 160px;
+        padding: .4em .5%;
+        width: 17%;
     }
 
     .column .k-chart,
