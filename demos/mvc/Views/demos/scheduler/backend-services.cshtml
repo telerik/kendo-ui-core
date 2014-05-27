@@ -1,119 +1,113 @@
 <div id="example" class="k-content">
-        <div id="example" class="k-content">
-            <div class="demo-section">
-                <h3>What is Telerik Backend Services?</h3>
-                <p>Telerik Backend Services is a set of cloud-based services that enable developer to build and manage mobile apps in significantly faster, easier and more scalable way. Telerik Backend Services can significantly speed-up development by providing your app with data storage, user management and server-code execution. Unlike other products, Telerik Backend Services is the integrated cloud-storage provider for all Telerik products.</p>
-                <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/development/javascript-sdk/introduction" title="Getting started with Telerik Backend Services">More about Telerik Backend Services</a></p>
-                <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/what-are-telerik-backend-services" title="Introduction to Kendo UI and Everlive JavaScript integration">Integration with Kendo UI</a></p>
-            </div>
-            <!--[if gte IE 9]>-->
-            <div class="demo-section">
-                <div id="people">
-                    <input checked type="checkbox" id="alex" value="1">
-                    <input checked type="checkbox" id="bob" value="2">
-                    <input type="checkbox" id="charlie" value="3">
-                </div>
-                <div id="scheduler"></div>
-            </div>
-            <script src="../../content/shared/js/everlive.all.js"></script>
-            <script>
-                $(document).ready(function() {
-                    // initialize Everlive application with application API key
-                    var everlive = new Everlive({
-                        apiKey: "3q4sHgIqESXbpvOp",
-                        scheme: "http"
-                    });
-
-                    var dataSource = new kendo.data.SchedulerDataSource({
-                        type: "everlive",
-                        transport: {
-                            // binding to the Order type in Everlive
-                            typeName: "Task"
-                        },
-                        schema: {
-                                id: "Id",
-                                fields: {
-                                    // default Everlive fields
-                                    CreatedBy:  { type: "string" },
-                                    CreatedAt:  { type: "date" },
-                                    ModifiedAt: { type: "date" },
-
-                                    // type fields, projected to the scheduler format
-                                    title: { from: "Title", defaultValue: "No title", validation: { required: true } },
-                                    start: { type: "date", from: "Start" },
-                                    end: { type: "date", from: "End" },
-                                    startTimezone: { from: "StartTimezone" },
-                                    endTimezone: { from: "EndTimezone" },
-                                    description: { from: "Description" },
-                                    recurrenceId: { from: "RecurrenceID" },
-                                    recurrenceRule: { from: "RecurrenceRule" },
-                                    recurrenceException: { from: "RecurrenceException" },
-                                    ownerId: { from: "OwnerID", defaultValue: 1 },
-                                    isAllDay: { type: "boolean", from: "IsAllDay" }
-                                }
-                            }
-                        },
-                        // initial filter
-                        filter: {
-                            logic: "or",
-                            filters: [
-                                { field: "ownerId", operator: "eq", value: 1 },
-                                { field: "ownerId", operator: "eq", value: 2 }
-                            ]
-                        }
-                    });
-
-                    $("#scheduler").kendoScheduler({
-                        date: new Date("2013/6/13"),
-                        startTime: new Date("2013/6/13 07:00 AM"),
-                        height: 600,
-                        views: [
-                            "day",
-                            { type: "workWeek", selected: true },
-                            "week",
-                            "month",
-                            "agenda"
-                        ],
-                        dataSource: dataSource,
-                        timezone: "Etc/UTC",
-                        resources: [
-                            {
-                                field: "ownerId",
-                                title: "Owner",
-                                dataSource: [
-                                    { text: "Alex", value: 1, color: "#f8a398" },
-                                    { text: "Bob", value: 2, color: "#51a0ed" },
-                                    { text: "Charlie", value: 3, color: "#56ca85" }
-                                ]
-                            }
-                        ]
-                    });
-
-                    $("#people :checkbox").change(function(e) {
-                        var checked = $.map($("#people :checked"), function(checkbox) {
-                            return parseInt($(checkbox).val());
-                        });
-
-                        var scheduler = $("#scheduler").data("kendoScheduler");
-
-                        scheduler.dataSource.filter({
-                            operator: function(task) {
-                                return $.inArray(task.ownerId, checked) >= 0;
-                            }
-                        });
-                    });
-                });
-            </script>
-            <!--<![endif]-->
-            <div class="demo-section">
-                <p>Note: The Telerik Backend Services datasource is not supported on IE8 and below yet, because it relies on <a class="hyperlink" href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing</a>.</p>
-            </div>
+    <div class="box demo-section">
+        <h3>What is Telerik Backend Services?</h3>
+        <p>Telerik Backend Services is a set of cloud-based services that enable developer to build and manage mobile apps in significantly faster, easier and more scalable way. Telerik Backend Services can significantly speed-up development by providing your app with data storage, user management and server-code execution. Unlike other products, Telerik Backend Services is the integrated cloud-storage provider for all Telerik products.</p>
+        <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/development/javascript-sdk/introduction" title="Getting started with Telerik Backend Services">More about Telerik Backend Services</a></p>
+        <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/what-are-telerik-backend-services" title="Introduction to Kendo UI and Everlive JavaScript integration">Integration with Kendo UI</a></p>
+    </div>
+    <!--[if gte IE 9]>-->
+    <div class="demo-section">
+        <div id="people">
+            <input checked type="checkbox" id="alex" value="1">
+            <input checked type="checkbox" id="bob" value="2">
+            <input type="checkbox" id="charlie" value="3">
         </div>
+        <div id="scheduler"></div>
+    </div>
+    <script src="../content/shared/js/everlive.all.js"></script>
+    <script>
+        // initialize Backend Services (Everlive) application with application API key
+        var everlive = new Everlive({
+            apiKey: "3q4sHgIqESXbpvOp",
+            scheme: "http"
+        });
+
+        var dataSource = new kendo.data.SchedulerDataSource({
+            type: "everlive",
+            transport: {
+                // binding to the Order type in Everlive
+                typeName: "Task"
+            },
+            schema: {
+                model: {
+                    id: "Id",
+                    fields: {
+                        // default Everlive fields
+                        CreatedBy:  { type: "string" },
+                        CreatedAt:  { type: "date" },
+                        ModifiedAt: { type: "date" },
+
+                        // type fields, projected to the scheduler format
+                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                        start: { type: "date", from: "Start" },
+                        end: { type: "date", from: "End" },
+                        startTimezone: { from: "StartTimezone" },
+                        endTimezone: { from: "EndTimezone" },
+                        description: { from: "Description" },
+                        recurrenceId: { from: "RecurrenceID" },
+                        recurrenceRule: { from: "RecurrenceRule" },
+                        recurrenceException: { from: "RecurrenceException" },
+                        ownerId: { from: "OwnerID", defaultValue: 1 },
+                        isAllDay: { type: "boolean", from: "IsAllDay" }
+                    }
+                }
+            },
+            // initial filter
+            filter: {
+                logic: "or",
+                filters: [
+                    { field: "ownerId", operator: "eq", value: 1 },
+                    { field: "ownerId", operator: "eq", value: 2 }
+                ]
+            }
+        });
+
+        $("#scheduler").kendoScheduler({
+            date: new Date("2013/6/13"),
+            startTime: new Date("2013/6/13 07:00 AM"),
+            height: 600,
+            views: [
+                "day",
+                { type: "workWeek", selected: true },
+                "week",
+                "month",
+                "agenda"
+            ],
+            dataSource: dataSource,
+            timezone: "Etc/UTC",
+            resources: [
+                {
+                    field: "ownerId",
+                    title: "Owner",
+                    dataSource: [
+                        { text: "Alex", value: 1, color: "#f8a398" },
+                        { text: "Bob", value: 2, color: "#51a0ed" },
+                        { text: "Charlie", value: 3, color: "#56ca85" }
+                    ]
+                }
+            ]
+        });
+
+        $("#people :checkbox").change(function(e) {
+            var checked = $.map($("#people :checked"), function(checkbox) {
+                return parseInt($(checkbox).val());
+            });
+
+            var scheduler = $("#scheduler").data("kendoScheduler");
+
+            scheduler.dataSource.filter({
+                operator: function(task) {
+                    return $.inArray(task.ownerId, checked) >= 0;
+                }
+            });
+        });
+    </script>
+    <!--<![endif]-->
+    <div class="demo-section">
+        <p>Note: The Telerik Backend Services datasource is not supported on IE8 and below yet, because it relies on <a class="hyperlink" href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">cross-origin resource sharing</a>.</p>
+    </div>
 </div>
-<script>
-$(function() {
-});
-</script>
+
 <style scoped>
 
 .k-nav-current > .k-link span + span {
@@ -126,7 +120,7 @@ $(function() {
 }
 
 #people {
-    background: url('../../content/web/scheduler/team-schedule.png') transparent no-repeat;
+    background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
     height: 115px;
     position: relative;
 }

@@ -2619,6 +2619,21 @@
         ]
       },
       {
+        "text": "Binding to Telerik Backend Services",
+        "url": "scheduler/backend-services",
+        "title": {
+            "kendo-ui": "Binding to Telerik Backend Services | Kendo UI Scheduler demo"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how the Kendo UI Scheduler can be bound to Telerik Backend Services which will provide the backend functionality"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "Resources",
         "url": "scheduler/resources",
         "title": {
