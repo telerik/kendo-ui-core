@@ -3051,6 +3051,18 @@ a.footer-links:hover {
     border-bottom: 1px solid #ebecee;
 }
 
+#layout-search-wrapper .k-autocomplete,
+#example-search-wrapper .k-autocomplete {
+    border-radius: 0;
+}
+
+#layout-search-wrapper .k-autocomplete.k-state-hover,
+#example-search-wrapper .k-autocomplete.k-state-hover,
+#layout-search-wrapper .k-autocomplete.k-state-focused,
+#example-search-wrapper .k-autocomplete.k-state-focused {
+    background-image: none;
+}
+
 #example-search-wrapper .k-autocomplete {
     border-color: #d7dbdf;
     background-color: #fff;
@@ -3092,6 +3104,7 @@ a.footer-links:hover {
     width: 100%;
     height: 100%;
     background-color: #fff;
+    border-radius: 0;
 }
 
 #example-search-wrapper input {
@@ -3186,14 +3199,14 @@ a.footer-links:hover {
     width: auto;
     margin:auto;
     text-align: center;
-    padding-bottom: 110px;
+    padding-bottom: 150px;
 }
 
 #overview h2 {
     color: #000;
     font: 400 28px/1 "FaktSlabPro-Medium", Arial, Helvetica, sans-serif;
     text-align: left;
-    padding: 1.725em 0 0.700em 0;
+    padding: 2.321em 0 0.700em 0;
 }
 
 #overview-widgets,
