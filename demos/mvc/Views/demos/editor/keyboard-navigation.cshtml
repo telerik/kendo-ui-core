@@ -1,4 +1,4 @@
-        <div id="example" class="k-content">
+        <div id="example">
             <textarea id="editor" rows="10" cols="30" style="height:240px">
                 &lt;p&gt;&lt;img src=&quot;../content/web/editor/kendo-ui-web.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
                 &lt;p&gt;
@@ -9,7 +9,9 @@
                 &lt;/p&gt;
             </textarea>
 
-            <ul id="keyboard-nav" class="keyboard-legend">
+            <div class="box">
+            <h4>Keyboard legend</h4>
+            <ul class="keyboard-legend">
                 <li>
                     <span class="button-preview">
                         <span class="key-button">Tab</span>
@@ -29,6 +31,7 @@
                     </span>
                 </li>
             </ul>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -36,10 +39,4 @@
                     $("#editor").kendoEditor();
                 });
             </script>
-            <style scoped>
-                #keyboard-nav
-                {
-                    padding-top: 35px;
-                }
-            </style>
         </div>

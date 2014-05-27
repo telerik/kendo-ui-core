@@ -1,16 +1,20 @@
-        <div id="example" class="k-content">
-            <div class="demo-section">
-                <h2>T-shirt Size</h2>
-                <select id="select" style="width: 250px" accesskey="w">
+
+        <div id="example">
+
+            <div class="demo-section k-header">
+                <h4>T-shirt Size</h4>
+                <select id="select" placeholder="Select size..." style="width: 400px" accesskey="w">
                     <option>X-Small</option>
                     <option>Small</option>
                     <option>Medium</option>
-                    <option>Large</option>
+                    <option selected>Large</option>
                     <option>X-Large</option>
                     <option>2X-Large</option>
                 </select>
             </div>
 
+            <div class="box">
+            <h4>Keyboard legend</h4>
             <ul class="keyboard-legend">
                 <li>
                     <span class="button-preview">
@@ -22,9 +26,6 @@
                         focuses the widget
                     </span>
                 </li>
-            </ul>
-
-            <ul class="keyboard-legend">
                 <li>
                     <span class="button-preview">
                         <span class="key-button wider leftAlign">up arrow</span>
@@ -108,6 +109,7 @@
                     </span>
                 </li>
             </ul>
+            </div>
 
             <script>
                 $(document).ready(function () {
@@ -116,15 +118,9 @@
             </script>
 
             <style scoped>
-                .demo-section {
-                    width: 250px;
-                    margin: 35px auto 50px;
-                    padding: 30px;
-                }
-                .demo-section h2 {
-                    text-transform: uppercase;
-                    font-size: 1.2em;
-                    margin-bottom: 10px;
+                .demo-section,
+		        #example .box {
+                    width: 400px;
                 }
             </style>
         </div>

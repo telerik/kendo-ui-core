@@ -1,10 +1,7 @@
 
-        <div id="example" class="k-content">
-            <div class="configuration">
-                <span class="configHead">Events log</span>
-                <div class="console"></div>
-            </div>
-            <textarea id="editor" rows="10" cols="30" style="width:710px;height:400px">
+        <div id="example">
+            
+            <textarea id="editor" rows="10" cols="30" style="height: 350px;">
                     &lt;p&gt;&lt;img src=&quot;../content/web/editor/kendo-ui-web.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
                     &lt;p&gt;
                         Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.&lt;br /&gt;
@@ -26,6 +23,11 @@
                         &lt;a href=&quot;http://www.telerik.com/forums&quot;&gt;feedback&lt;/a&gt;!
                     &lt;/p&gt;
             </textarea>
+
+            <div class="box">
+                <h4>Events log</h4>
+                <div class="console"></div>
+            </div>
 
             <script>
                 function onChange(e) {
@@ -49,23 +51,3 @@
                 });
             </script>
         </div>
-
-        <style scoped>
-            .reports {
-                width: 265px;
-                height: 247px;
-                padding: 108px 0 0 20px;
-                background: url('../content/web/calendar/reports.png') transparent no-repeat 0 0;
-                margin: 30px auto 20px auto;
-            }
-            .configuration {
-                height: 376px;
-                width: 200px;
-            }
-            .configuration .console {
-                background-color: transparent;
-                border: 0;
-                height: 342px;
-                overflow: auto;
-            }
-        </style>
