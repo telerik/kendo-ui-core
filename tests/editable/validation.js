@@ -638,4 +638,52 @@
         equal(validateInput.calls("validateInput"), 1);
         equal(validateInput.args("validateInput", 0)[0].data("bind"), "checked:foo");
     });
+
+    test("changing non boolean model field validates radio inputs with checked binding", function() {
+        var MyModel = Model.define({
+            fields: {
+                foo: {
+                    type: "number"
+                }
+            }
+        }),
+        model = new MyModel({ foo: 1 }),
+        editable = new Editable(div, { fields: [{
+            field: "foo",
+            editor: function(container) {
+                container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
+                container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
+                container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
+            }
+        }], model: model }),
+        validateInput = stub(editable.validatable, "validateInput");
+
+        model.set("foo", 2);
+        equal(validateInput.calls("validateInput"), 1);
+    });
+
+    test("changing non boolean model field passes the radio input with same value to the validator", function() {
+        var MyModel = Model.define({
+            fields: {
+                foo: {
+                    type: "number"
+                }
+            }
+        }),
+        model = new MyModel({ foo: 1 }),
+        editable = new Editable(div, { fields: [{
+            field: "foo",
+            editor: function(container) {
+                container.append($('<input type="radio" data-bind="checked:foo" value="1" />'));
+                container.append($('<input type="radio" data-bind="checked:foo" value="2" />'));
+                container.append($('<input type="radio" data-bind="checked:foo" value="3" />'));
+            }
+        }], model: model }),
+        validateInput = stub(editable.validatable, "validateInput");
+
+        model.set("foo", 2);
+        var input = validateInput.args("validateInput", 0)[0];
+        equal(input.length, 1);
+        equal(input.val(), "2");
+    });
 })();
