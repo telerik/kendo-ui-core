@@ -134,10 +134,10 @@
             </div>
         </header>
 
-        <ul data-role="listview" data-source="themes" data-template="theme-template" data-click="selectTheme" data-bound="pickInitialTheme">
+        <ul data-role="listview" data-source="ThemeChooserViewModel.themes" data-template="theme-template" data-click="selectTheme" data-bound="pickInitialTheme">
         </ul>
         <script id="theme-template" type="text/x-kendo-temlate">
-            <a href="\#" style="border-color: #: color #">#: text #</a>
+            <a href="\#" style="border-color: #: colors[0] #">#: name #</a>
         </script>
     </div>
 

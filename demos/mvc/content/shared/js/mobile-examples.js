@@ -80,6 +80,7 @@ function selectTheme(e) {
         kendo.mobile.application.showLoading();
         window.kendoThemeChooser.changeTheme(e.dataItem.value, true, function() {
             kendo.mobile.application.hideLoading();
+            $("#themechooser").data("kendoMobileDrawer").hide();
         });
     }
 }

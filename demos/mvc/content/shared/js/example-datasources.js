@@ -22,20 +22,6 @@ var detailNavDataSource = new kendo.data.DataSource({
     }
 });
 
-var themes = [
-    { text: "Default", value: "default", color: "#ef6f1c" },
-    { text: "Blue Opal", value: "blueopal", color: "#076186" },
-    { text: "Bootstrap", value: "bootstrap", color: "#3276b1" },
-    { text: "Silver", value: "silver", color: "#298bc8" },
-    { text: "Uniform", value: "uniform", color: "#666666" },
-    { text: "Metro", value: "metro", color: "#8ebc00" },
-    { text: "Black", value: "black", color: "#0167cc" },
-    { text: "Metro Black", value: "metroblack", color: "#00aba9" },
-    { text: "High Contrast", value: "highcontrast", color: "#b11e9c" },
-    { text: "Moonlight", value: "moonlight", color: "#ee9f05" },
-    { text: "Flat", value: "flat", color: "#363940" }
-];
-
 var searchDataSource = new kendo.data.DataSource();
 
 function onlineExamples(section, product, reject) {
@@ -117,13 +103,13 @@ function searchExamplesFor(value, product) {
 
         for (var i = 0; i < words.length; i ++) {
             var word = words[i];
-            filter.filters.push({ 
-                logic: "or", 
+            filter.filters.push({
+                logic: "or",
                 filters: [
                     { field: "section", operator: "contains", value: word },
                     { field: "text", operator: "contains", value: word },
                     { field: "title", operator: titleContains(word) }
-                ] 
+                ]
             });
         }
 
@@ -133,8 +119,8 @@ function searchExamplesFor(value, product) {
 
 kendo.ui.plugin(kendo.ui.AutoComplete.extend({
     init: function(element, options) {
-        kendo.ui.AutoComplete.fn.init.call(this, 
-            element, 
+        kendo.ui.AutoComplete.fn.init.call(this,
+            element,
             $.extend(true, { dataSource: searchDataSource }, options)
         );
 
@@ -144,6 +130,6 @@ kendo.ui.plugin(kendo.ui.AutoComplete.extend({
         name: "ExampleSearch"
     },
     _filterSource: function() {
-       searchExamplesFor(this.value(), this.options.product); 
+       searchExamplesFor(this.value(), this.options.product);
     }
 }));
