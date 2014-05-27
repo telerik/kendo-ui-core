@@ -364,7 +364,7 @@ var __meta__ = {
             ]);
 
             if (!task.summary && !task.isMilestone()) {
-                progressHandleLeft = Math.round(position.width * task.percentComplete / 100);
+                progressHandleLeft = Math.round(position.width * task.percentComplete);
 
                 taskWrapper.children.push(kendoDomElement("div", { className: "k-task-draghandle", style: { left: progressHandleLeft + "px" } }));
             }
@@ -373,7 +373,7 @@ var __meta__ = {
         },
 
         _renderSingleTask: function(task, position) {
-            var progressWidth = Math.round(position.width * task.percentComplete / 100);
+            var progressWidth = Math.round(position.width * task.percentComplete);
 
             var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: Math.max((position.width - 2), 0) + "px" } }, [
                 kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
@@ -401,8 +401,10 @@ var __meta__ = {
         },
 
         _renderSummary: function(task, position) {
+            var progressWidth = Math.round(position.width * task.percentComplete);
+
             var element = kendoDomElement("div", { className: "k-task k-task-summary", "data-uid": task.uid, style: { width: position.width + "px" } }, [
-                kendoDomElement("div", { className: "k-task-summary-progress", style: { width: task.percentComplete + "%" } }, [
+                kendoDomElement("div", { className: "k-task-summary-progress", style: { width: progressWidth + "px" } }, [
                     kendoDomElement("div", { className: "k-task-summary-complete", style: { width: position.width + "px" } })
                 ])
             ]);
@@ -1115,17 +1117,11 @@ var __meta__ = {
         },
 
         _createSlots: function() {
-            var span = 24;
-            var options = this.options;
             var daySlots;
             var daySlot;
             var hourSlots;
             var hours;
             var slots = [];
-
-            if (options.showWorkHours) {
-                span = (options.workDayEnd.getHours() - options.workDayStart.getHours());
-            }
 
             daySlots = this._days(this.start, this.end);
             hourSlots = [];
@@ -1674,7 +1670,7 @@ var __meta__ = {
                     that.view()._updatePercentCompleteTooltip(tooltipTop, tooltipLeft, currentPercentComplete);
                 }, 15))
                 .bind("dragend", function(e) {
-                    that.trigger("percentResizeEnd", { task: task, percentComplete: currentPercentComplete });
+                    that.trigger("percentResizeEnd", { task: task, percentComplete: currentPercentComplete / 100 });
 
                     cleanUp();
                 })

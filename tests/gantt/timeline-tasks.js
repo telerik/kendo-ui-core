@@ -633,7 +633,7 @@
         renderTask({
             start: new Date("2014/05/13 10:00"),
             end: new Date("2014/05/13 11:00"),
-            percentComplete: 50
+            percentComplete: 0.5
         });
 
         progressElement = timeline.wrapper.find(".k-task-complete");
@@ -663,7 +663,7 @@
         renderTask({
             start: new Date("2014/05/13"),
             end: new Date("2014/05/14"),
-            percentComplete: 50
+            percentComplete: 0.5
         });
 
         handleElement = timeline.wrapper.find(".k-task-draghandle");
@@ -1082,7 +1082,7 @@
         renderSummary({
             start: new Date("2014/05/13 10:00"),
             end: new Date("2014/05/13 11:00"),
-            percentComplete: 50
+            percentComplete: 0.5
         });
 
         progressElement = timeline.wrapper.find(".k-task-summary-progress");

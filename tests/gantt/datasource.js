@@ -52,6 +52,7 @@
         ok(!task.isMilestone());
     });
 
+
     module("GanttDataSource", {
         setup: function() {
             dataSource = new GanttDataSource({
@@ -252,6 +253,7 @@
         equal(tasks.length, 4);
     });
 
+
     module("GanttDataSource update()", {
         setup: function() {
             dataSource = new GanttDataSource({
@@ -342,6 +344,7 @@
         equal(task.get("title"), newTitle);
     });
 
+
     module("GanttDataSource update() related tasks", {
         setup: function() {
             dataSource = new GanttDataSource({
@@ -400,7 +403,7 @@
                         id: 6,
                         title: "Child2",
                         parentId: 1,
-                        orderId: 0,
+                        orderId: 1,
                         start: new Date("2014/04/05"),
                         end: new Date("2014/04/06"),
                         percentComplete: 20,
@@ -421,11 +424,21 @@
                     title: "Parent3",
                     parentId: null,
                     orderId: 2,
-                    start: new Date("2014/03/31"),
-                    end: new Date("2014/04/06"),
-                    percentComplete: 40,
-                    summary: false
-                }],
+                    start: new Date("2014/04/02"),
+                    end: new Date("2014/04/03"),
+                    percentComplete: 60,
+                    summary: true
+                },
+                    {
+                        id: 9,
+                        title: "Child1",
+                        parentId: 8,
+                        orderId: 0,
+                        start: new Date("2014/04/02"),
+                        end: new Date("2014/04/03"),
+                        percentComplete: 60,
+                        summary: false
+                    }],
                 schema: {
                     model: {
                         id: "id"
@@ -691,49 +704,122 @@
         equal(task.get("orderId"), 1);
     });
 
+
     test("parentId updates old parent summary field", function() {
-        dataSource = new GanttDataSource({
-            data: [
-            { title: "Task1", parentId: null, id: 1, summary: true },
-                { title: "Child 1", parentId: 1, id: 2 },
-            { title: "Task2", parentId: null, id: 3 }
-            ],
-            schema: {
-                model: {
-                    id: "id"
-                }
-            }
-        });
+        var task = dataSource.get(9);
 
-        dataSource.fetch();
-        var task = dataSource.get(2);
+        dataSource.update(task, { parentId: 1 });
 
-        dataSource.update(task, { parentId: 3 });
-
-        ok(!dataSource.get(1).get("summary"));
+        ok(!dataSource.get(8).get("summary"));
     });
 
     test("parentId updates new parent summary field", function() {
-        dataSource = new GanttDataSource({
-            data: [
-            { title: "Task1", parentId: null, id: 1, summary: true },
-                { title: "Child 1", parentId: 1, id: 2 },
-            { title: "Task2", parentId: null, id: 3 }
-            ],
-            schema: {
-                model: {
-                    id: "id"
-                }
-            }
-        });
+        var task = dataSource.get(9);
 
-        dataSource.fetch();
-        var task = dataSource.get(2);
+        dataSource.update(task, { parentId: 7 });
 
-        dataSource.update(task, { parentId: 3 });
-
-        ok(dataSource.get(3).get("summary"));
+        ok(dataSource.get(7).get("summary"));
     });
+
+
+    test("parentId updates old parent start when it has remaining children", function() {
+        var task = dataSource.get(3);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(kendo.toString(dataSource.get(2).start, "yyyy/MM/dd"), "2014/04/02");
+    });
+
+    test("parentId updates old parent end when it has remaining children", function() {
+        var task = dataSource.get(5);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(kendo.toString(dataSource.get(2).end, "yyyy/MM/dd"), "2014/04/03");
+    });
+
+    test("parentId updates old parent percentComplete when it has remaining children", function() {
+        var task = dataSource.get(3);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(dataSource.get(2).get("percentComplete"), 50);
+    });
+
+    test("parentId doesn't update old parent start when it has no remaining children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(kendo.toString(dataSource.get(8).start, "yyyy/MM/dd"), "2014/04/02");
+    });
+
+    test("parentId doesn't update old parent end when it has no remaining children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(kendo.toString(dataSource.get(8).end, "yyyy/MM/dd"), "2014/04/03");
+    });
+
+    test("parentId doesn't update old parent percentComplete when it has no remaining children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 1 });
+
+        equal(dataSource.get(8).get("percentComplete"), 60);
+    });
+
+
+    test("parentId updates new parent start when it has previous children", function() {
+        var task = dataSource.get(7);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(kendo.toString(dataSource.get(8).start, "yyyy/MM/dd"), "2014/03/31");
+    });
+
+    test("parentId updates new parent end when it has previous children", function() {
+        var task = dataSource.get(7);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(kendo.toString(dataSource.get(8).end, "yyyy/MM/dd"), "2014/04/06");
+    });
+
+    test("parentId updates new parent percentComplete when it has previous children", function() {
+        var task = dataSource.get(7);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(dataSource.get(8).get("percentComplete"), 50);
+    });
+
+    test("parentId updates new parent start when it has no previous children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(kendo.toString(dataSource.get(8).start, "yyyy/MM/dd"), "2014/04/02");
+    });
+
+    test("parentId updates new parent end when it has no previous children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(kendo.toString(dataSource.get(8).end, "yyyy/MM/dd"), "2014/04/03");
+    });
+
+    test("parentId updates new parent percentComplete when it has no previous children", function() {
+        var task = dataSource.get(9);
+
+        dataSource.update(task, { parentId: 8 });
+
+        equal(dataSource.get(8).get("percentComplete"), 60);
+    });
+
+
 
     module("GanttDataSource CRUD", {
         setup: function() {
@@ -764,9 +850,9 @@
                         title: "Child2",
                         parentId: 1,
                         orderId: 1,
-                        start: new Date("2014/03/31"),
+                        start: new Date("2014/04/02"),
                         end: new Date("2014/04/04"),
-                        percentComplete: 60,
+                        percentComplete: 40,
                         summary: true
                     },
                     {
@@ -829,13 +915,70 @@
         equal(dataSource.get(4).get("orderId"), 1);
     });
 
-    test("remove() updates parent summary field", function() {
+    test("remove() only child updates parent summary field", function() {
         var task = dataSource.get(7);
 
         dataSource.remove(task);
 
         ok(!dataSource.get(6).get("summary"));
     });
+
+    test("remove() only child doesn't update parent start", function(e) {
+        var task = dataSource.get(7);
+
+        dataSource.remove(task);
+
+        equal(kendo.toString(dataSource.get(6).start, "yyyy/MM/dd"), "2014/03/31");
+    });
+
+    test("remove() only child doesn't update parent end", function(e) {
+        var task = dataSource.get(7);
+
+        dataSource.remove(task);
+
+        equal(kendo.toString(dataSource.get(6).end, "yyyy/MM/dd"), "2014/04/06");
+    });
+
+    test("remove() only child doesn't update parent percentComplete", function(e) {
+        var task = dataSource.get(7);
+
+        dataSource.remove(task);
+
+        equal(dataSource.get(6).get("percentComplete"), 40);
+    });
+
+    test("remove() sibling doesn't update parent summary field", function() {
+        var task = dataSource.get(3);
+
+        dataSource.remove(task);
+
+        ok(dataSource.get(1).get("summary"));
+    });
+
+    test("remove() sibling updates parent start", function(e) {
+        var task = dataSource.get(2);
+
+        dataSource.remove(task);
+
+        equal(kendo.toString(dataSource.get(1).start, "yyyy/MM/dd"), "2014/04/02");
+    });
+
+    test("remove() sibling updates parent end", function(e) {
+        var task = dataSource.get(4);
+
+        dataSource.remove(task);
+
+        equal(kendo.toString(dataSource.get(1).end, "yyyy/MM/dd"), "2014/04/04");
+    });
+
+    test("remove() sibling updates parent percentComplete", function(e) {
+        var task = dataSource.get(2);
+
+        dataSource.remove(task);
+
+        equal(dataSource.get(1).get("percentComplete"), 30);
+    });
+
 
     test("add(task) appends task to root collection when parentId is null", function() {
         var task = new GanttTask();
@@ -899,6 +1042,71 @@
         equal(dataSource.get(4).get("orderId"), 3);
     });
 
+    test("insert(index, task) updates new parent start when parentId points to single task", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 5);
+        task.set("start", new Date("2014/03/28"));
+        task.set("end", new Date("2014/03/29"));
+
+        dataSource.insert(0, task);
+
+        equal(kendo.toString(dataSource.get(5).start, "yyyy/MM/dd"), "2014/03/28");
+    });
+
+    test("insert(index, task) updates new parent end when parentId points to single task", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 5);
+        task.set("start", new Date("2014/03/28"));
+        task.set("end", new Date("2014/03/29"));
+
+        dataSource.insert(0, task);
+
+        equal(kendo.toString(dataSource.get(5).end, "yyyy/MM/dd"), "2014/03/29");
+    });
+
+    test("insert(index, task) updates new parent percentComplete when parentId points to single task", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 5);
+        task.set("percentComplete", 70);
+
+        dataSource.insert(0, task);
+
+        equal(dataSource.get(5).get("percentComplete"), 70);
+    });
+
+    test("insert(index, task) updates new parent start when parentId points to summary", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 6);
+        task.set("start", new Date("2014/03/28"));
+        task.set("end", new Date("2014/03/29"));
+
+        dataSource.insert(1, task);
+
+        equal(kendo.toString(dataSource.get(6).start, "yyyy/MM/dd"), "2014/03/28");
+    });
+
+    test("insert(index, task) updates new parent end when parentId points to summary", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 6);
+        task.set("start", new Date("2014/03/28"));
+        task.set("end", new Date("2014/04/29"));
+
+        dataSource.insert(1, task);
+
+        equal(kendo.toString(dataSource.get(6).end, "yyyy/MM/dd"), "2014/04/29");
+    });
+
+    test("insert(index, task) updates new parent percentComplete when parentId points to summary", function(e) {
+        var task = new GanttTask();
+        task.set("parentId", 6);
+        task.set("percentComplete", 80);
+
+        dataSource.insert(1, task);
+
+        equal(dataSource.get(6).get("percentComplete"), 60);
+    });
+
+
     module("GanttDependency", { });
 
     test("GanttDependency inherits kendo.data.Model", function() {
@@ -912,6 +1120,7 @@
 
         ok(task instanceof kendo.data.GanttDependency);
     });
+
 
     module("GanttDependencyDataSource", {
         setup: function() {

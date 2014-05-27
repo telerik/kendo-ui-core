@@ -364,7 +364,7 @@ var __meta__ = {
             task = DataSource.fn.insert.call(this, index, task);
 
             this._reorderSiblings(task, this.taskSiblings(task).length - 1);
-            this._updateSummary(this.taskParent(task));
+            this._resolveSummaryFields(this.taskParent(task));
 
             return task;
         },
@@ -468,19 +468,6 @@ var __meta__ = {
             var that = this;
             var oldValue;
 
-            var updateParents = function(task, field, callback) {
-                var parent = that.taskParent(task);
-
-                if (!parent) {
-                    return;
-                }
-
-                var value = callback(parent);
-
-                parent.set(field, value);
-                updateParents(parent, field, callback);
-            };
-
             var offsetChildren = function(parentTask, offset) {
                 var children = that.taskAllChildren(parentTask);
 
@@ -489,7 +476,70 @@ var __meta__ = {
                 }
             };
 
-            var updateStartCallback = function(parentTask) {
+            var modelChangeHandler = function(e) {
+                var field = e.field;
+                var model = e.sender;
+
+                switch (field) {
+                    case "start":
+                        that._resolveSummaryStart(that.taskParent(model));
+
+                        offsetChildren(model, model.get(field).getTime() - oldValue.getTime());
+                        break;
+                    case "end":
+                        that._resolveSummaryEnd(that.taskParent(model));
+                        break;
+                    case "percentComplete":
+                        that._resolveSummaryPercentComplete(that.taskParent(model));
+                        break;
+                    case "orderId":
+                        that._reorderSiblings(model, oldValue);
+                        break;
+                }
+            };
+
+            if (taksInfo.parentId !== undefined) {
+                oldValue = task.get("parentId");
+
+                task.set("parentId", taksInfo.parentId);
+
+                that._childRemoved(oldValue, task.get("orderId"));
+
+                task.set("orderId", that.taskSiblings(task).length - 1);
+                that._resolveSummaryFields(that.taskParent(task));
+
+                delete taksInfo.parentId;
+            }
+
+            task.bind("change", modelChangeHandler);
+
+            for (var field in taksInfo) {
+                oldValue = task.get(field);
+                task.set(field, taksInfo[field]);
+            }
+
+            task.unbind("change", modelChangeHandler);
+        },
+
+        _resolveSummaryFields: function(summary) {
+            if (!summary) {
+                return;
+            }
+
+            this._updateSummary(summary);
+
+            if (!this.taskChildren(summary).length) {
+                return;
+            }
+
+            this._resolveSummaryStart(summary);
+            this._resolveSummaryEnd(summary);
+            this._resolveSummaryPercentComplete(summary);
+        },
+
+        _resolveSummaryStart: function(summary) {
+            var that = this;
+            var getSummaryStart = function(parentTask) {
                 var children = that.taskChildren(parentTask);
                 var min = children[0].start.getTime();
                 var currentMin;
@@ -504,7 +554,12 @@ var __meta__ = {
                 return new Date(min);
             };
 
-            var updateEndCallback = function(parentTask) {
+            this._updateSummaryRecursive(summary, "start", getSummaryStart);
+        },
+
+        _resolveSummaryEnd: function(summary) {
+            var that = this;
+            var getSummaryEnd = function(parentTask) {
                 var children = that.taskChildren(parentTask);
                 var max = children[0].end.getTime();
                 var currentMax;
@@ -519,66 +574,38 @@ var __meta__ = {
                 return new Date(max);
             };
 
-            var updatePercentCompleteCallback = function(parentTask) {
+            this._updateSummaryRecursive(summary, "end", getSummaryEnd);
+        },
+
+        _resolveSummaryPercentComplete: function(summary) {
+            var that = this;
+            var getSummaryPercentComplete = function(parentTask) {
                 var children = that.taskChildren(parentTask);
                 var percentComplete = new Query(children).aggregate([{
                     field: "percentComplete",
                     aggregate: "average"
                 }]);
 
-                return percentComplete[field].average;
+                return percentComplete.percentComplete.average;
             };
 
-            var modelChangeHandler = function(e) {
-                var field = e.field;
-                var model = e.sender;
+            this._updateSummaryRecursive(summary, "percentComplete", getSummaryPercentComplete);
+        },
 
-                switch (field) {
-                    case "start":
-                        updateParents(model, field, updateStartCallback);
-                        offsetChildren(model, model.get(field).getTime() - oldValue.getTime());
-                        break;
-                    case "end":
-                        updateParents(model, field, updateEndCallback);
-                        break;
-                    case "percentComplete":
-                        updateParents(model, field, updatePercentCompleteCallback);
-                        break;
-                    case "orderId":
-                        that._reorderSiblings(model, oldValue);
-                        break;
-                }
-            };
-
-            var parentChangeHandler = function(e) {
-                var model = e.sender;
-                that._childRemoved(oldValue, model.get("orderId"));
-
-                model.set("orderId", that.taskSiblings(model).length - 1);
-
-                that._updateSummary(that.taskParent(model));
-            };
-
-            if (taksInfo.parentId !== undefined) {
-                oldValue = task.get("parentId");
-
-                task.bind("change", parentChangeHandler);
-
-                task.set("parentId", taksInfo.parentId);
-
-                delete taksInfo.parentId;
-
-                task.unbind("change", parentChangeHandler);
+        _updateSummaryRecursive: function(summary, field, callback) {
+            if (!summary) {
+                return;
             }
 
-            task.bind("change", modelChangeHandler);
+            var value = callback(summary);
 
-            for (var field in taksInfo) {
-                oldValue = task.get(field);
-                task.set(field, taksInfo[field]);
+            summary.set(field, value);
+
+            var parent = this.taskParent(summary);
+
+            if (parent) {
+                this._updateSummaryRecursive(parent, field, callback);
             }
-
-            task.unbind("change", modelChangeHandler);
         },
 
         _childRemoved: function(parentId, index) {
@@ -589,7 +616,7 @@ var __meta__ = {
                 children[i].set("orderId", i);
             }
 
-            this._updateSummary(parent);
+            this._resolveSummaryFields(parent);
         },
 
         _reorderSiblings: function(task, oldOrderId) {

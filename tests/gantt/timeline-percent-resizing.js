@@ -59,7 +59,7 @@
 
         timeline.bind("percentResizeEnd", function(e) {
             equal(e.task.uid, task.uid);
-            equal(e.percentComplete, 60);
+            equal(e.percentComplete, 0.6);
         });
 
         dragStart(timeline, handle);
@@ -87,7 +87,7 @@
         var handle = timeline.view().content.find(".k-task-wrap .k-task-draghandle");
 
         timeline.bind("percentResizeEnd", function(e) {
-            equal(e.percentComplete, 100);
+            equal(e.percentComplete, 1);
         });
 
         dragStart(timeline, handle);
@@ -306,7 +306,7 @@
     function setupGantt(userOptions) {
         task = new kendo.data.GanttTask({
             title: "Task",
-            percentComplete: 50,
+            percentComplete: 0.5,
             start: new Date("2014/04/15 12:00"),
             end: new Date("2014/04/15 14:00")
         });
@@ -328,7 +328,7 @@
         timeline.view("day");
         task = new kendo.data.GanttTask({
             title: "Task",
-            percentComplete: 50,
+            percentComplete: 0.5,
             start: new Date("2014/04/15 12:00"),
             end: new Date("2014/04/15 14:00")
         });
