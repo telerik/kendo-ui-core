@@ -159,7 +159,7 @@ var __meta__ = {
             descriptors[origin] = members;
             descriptors[other] = this._descriptorsForAxis(other);
 
-            this.read(descriptors);
+            this._query(descriptors);
         },
 
         _descriptorsForAxis: function(axis) {
@@ -189,8 +189,53 @@ var __meta__ = {
             this.trigger(CHANGE, e);
         },
 
+        _query: function(options) {
+            var that = this;
+
+            that.query(extend({}, {
+                page: that.page(),
+                pageSize: that.pageSize(),
+                sort: that.sort(),
+                filter: that.filter(),
+                group: that.group(),
+                aggregate: that.aggregate(),
+                columns: this.columnsAxisDescriptors(),
+                rows: this.rowsAxisDescriptors(),
+                measures: this.measures()
+            }, options));
+        },
+
         query: function(options) {
             this.read(this._mergeState(options));
+        },
+
+        _mergeState: function(options) {
+            options = DataSource.fn._mergeState.call(this, options);
+
+            if (options !== undefined) {
+                this._measures = options.measures || [];
+                this._columns = options.columns || [];
+                this._rows = options.rows || [];
+
+                if (options.columns) {
+                    this._columns = options.columns = normalizeMembers(options.columns);
+                }
+                if (options.rows) {
+                    this._rows = options.rows = normalizeMembers(options.rows);
+                }
+            }
+            return options;
+        },
+
+        filter: function(val) {
+            if (val === undefined) {
+                return this._filter;
+            }
+
+            this._axes = {};
+            this._data = [];
+
+            this._query({ filter: val, page: 1 });
         },
 
         expandColumn: function(path) {
