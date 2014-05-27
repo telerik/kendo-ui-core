@@ -49,7 +49,7 @@ exports.afterTestFiles = [
 
     'download-builder/scripts/script-resolver.js',
     'tests/diagram/common.js',
-    'demos/mvc/content/shared/js/trykendo.js'
+    'demos/mvc/content/shared/js/kendo-dojo.js'
 ];
 
 exports.ciFiles = [ 'dist/js/kendo.all.min.js', 'dist/js/kendo.aspnetmvc.min.js'  ];
