@@ -67,7 +67,14 @@
             e.preventDefault();
         });
 
-        $(document).ready(resizeContainers);
+        function setSearchListWidth() {
+            $("#example-search").data("kendoExampleSearch").list.width(500);
+        }
+
+        $(document).ready(function () {
+            resizeContainers();
+            setSearchListWidth();
+        });
     </script>
 </div>
 <div id="main">
