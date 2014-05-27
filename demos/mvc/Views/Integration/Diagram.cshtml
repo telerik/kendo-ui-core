@@ -35,16 +35,16 @@
                         Basic Shapes
                         <ul>
                             <li>
-                                <span class="shapeItem" data-data='{"width":120,"height":120,"type":"rectangle"}' style="background-position: 0 0"></span>
+                                <span class="shapeItem" data-shape='{"width":120,"height":120,"type":"rectangle"}' style="background-position: 0 0"></span>
                                 <span>Square</span>
                             </li><li>
-						        <span class="shapeItem" data-data='{"type":"circle","width":120,"height":120}' style="background-position: -60px 0"></span>
+						        <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":120}' style="background-position: -60px 0"></span>
 						        <span>Circle</span>
 					        </li><li>
-						        <span class="shapeItem" data-data='{"width":120,"height":80,"type":"rectangle"}' style="background-position: -120px 0"></span>
+						        <span class="shapeItem" data-shape='{"width":120,"height":80,"type":"rectangle"}' style="background-position: -120px 0"></span>
 						        <span>Rectangle</span>
 					        </li><li>
-						        <span class="shapeItem" data-data='{"type":"circle","width":120,"height":80}' style="background-position: -180px 0"></span>
+						        <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":80}' style="background-position: -180px 0"></span>
 						        <span>Ellipse</span>
 					        </li>
                         </ul>
@@ -53,16 +53,16 @@
                         Polygons
                         <ul>
                             <li>
-						        <span class="shapeItem" data-data='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}' style="background-position: -240px 0"></span>
+						        <span class="shapeItem" data-shape='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}' style="background-position: -240px 0"></span>
 						        <span>Pentagon</span>
                             </li><li>
-						        <span class="shapeItem" data-data='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}' style="background-position: -300px 0"></span>
+						        <span class="shapeItem" data-shape='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}' style="background-position: -300px 0"></span>
 						        <span>Hexagon</span>
                             </li><li>
-						        <span class="shapeItem" data-data='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}' style="background-position: -360px 0"></span>
+						        <span class="shapeItem" data-shape='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}' style="background-position: -360px 0"></span>
 						        <span>Heptagon</span>
                             </li><li>
-						        <span class="shapeItem" data-data='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}' style="background-position: -420px 0"></span>
+						        <span class="shapeItem" data-shape='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}' style="background-position: -420px 0"></span>
 						        <span>Octagon</span>
                             </li>
                        </ul>
@@ -71,10 +71,10 @@
                         Arrows
                         <ul>
                             <li>
-							    <span class="shapeItem" data-data='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}' style="background-position: -480px 0"></span>
+							    <span class="shapeItem" data-shape='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}' style="background-position: -480px 0"></span>
 							    <span>45 degree</span>
                             </li><li>
-							    <span class="shapeItem" data-data='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}' style="background-position: -540px 0"></span>
+							    <span class="shapeItem" data-shape='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}' style="background-position: -540px 0"></span>
 							    <span>60 degree</span>
                             </li>
                         </ul>
@@ -158,13 +158,13 @@
                     <li>
                     Align
                     <div id="alignConfiguration" style="width: 100%; padding: 10px; box-sizing: border-box; text-align: left;">
-                        <button class="configurationButtons" data-data="top">
+                        <button class="configurationButtons" data-position="top">
                             <span class="alignTop"></span>
-                        </button><button class="configurationButtons" data-data="bottom">
+                        </button><button class="configurationButtons" data-position="bottom">
                             <span class="alignBottom"></span>
-                        </button><button class="configurationButtons" data-data="left">
+                        </button><button class="configurationButtons" data-position="left">
                             <span class="alignLeft"></span>
-                        </button><button class="configurationButtons" data-data="right">
+                        </button><button class="configurationButtons" data-position="right">
                             <span class="alignRight"></span>
                         </button>
                     </div>
@@ -223,6 +223,7 @@
             var Shape = kendo.dataviz.diagram.Shape,
                 Connection = kendo.dataviz.diagram.Connection,
                 Rect = kendo.dataviz.diagram.Rect,
+                Point = kendo.dataviz.diagram.Point,
                 selected;
 
             $("#canvasProperties").on("change", canvasPropertiesChange);
@@ -336,7 +337,7 @@
 
             $("#alignConfiguration .configurationButtons").kendoButton({
                 click: function(e) {
-                    var value = this.element.data("data");
+                    var value = this.element.data("position");
                     diagram.alignShapes(value);
                 }
             });
@@ -567,6 +568,22 @@
             $("#shapesPanelBar .shapeItem").kendoDraggable({
                 hint: function() {
                     return this.element.clone();
+                }
+            });
+
+            $("#diagram").kendoDropTarget({
+                drop: function(e) {
+                    var item, pos, transformed;
+                    if (e.draggable.hint) {
+                        item = e.draggable.hint.data("shape");
+                        pos = e.draggable.hintOffset;
+                        pos = new Point(pos.left, pos.top);
+                        var transformed = diagram.documentToModel(pos);
+                        item.x = transformed.x;
+                        item.y = transformed.y;
+
+                        diagram.addShape(item);
+                    }
                 }
             });
         });
