@@ -167,7 +167,7 @@
                         }
                     },
                     contentUrls: [
-                        @Html.Raw(String.Join(",", examples.Select(file => "\"" + Url.Action("index", "source", new { path = file.Url } ) + "\"").ToArray()))
+                        @Html.Raw(String.Join(",", examples.Select(file => "\"" + Url.Action("Index", "Source", new { path = file.Url } ) + "\"").ToArray()))
                     ],
                     contentLoad: function (e) {
                         var content = $(e.contentElement);
