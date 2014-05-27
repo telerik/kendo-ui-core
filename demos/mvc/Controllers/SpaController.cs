@@ -13,7 +13,7 @@ namespace Kendo.Controllers
 #else
             ViewBag.Debug = false;
 #endif
-            return View("~/Views/demos/spa/sushi.cshtml");
+            return View("~/Views/demos/spa/Sushi.cshtml");
         }
 
         public ActionResult Aeroviewr()
