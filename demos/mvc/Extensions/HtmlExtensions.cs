@@ -77,6 +77,10 @@ namespace Kendo.Extensions
                 text += "(tablet)";
             }
 
+            if (widget.Pro && (widget.New || widget.Beta)) {
+                className = "multiple-tags";
+            }
+
             var target = "";
 
             StringBuilder a = new StringBuilder();
@@ -95,13 +99,12 @@ namespace Kendo.Extensions
 
             a.AppendFormat("href=\"{0}\">", href);
             a.Append(text);
-            a.Append("</a>");
 
             if (widget.Pro)
             {
                 a.Append("<span title=\"Available only in Kendo UI Professional\" class=\"pro-widget\"></span>");
             }
-            
+
             if (widget.Beta)
             {
                 a.Append("<span class=\"beta-widget\"></span>");
@@ -111,6 +114,8 @@ namespace Kendo.Extensions
             {
                 a.Append("<span class=\"new-widget\"></span>");
             }
+
+            a.Append("</a>");
 
             return html.Raw(a.ToString());
         }
