@@ -18,6 +18,10 @@
     color: #2d3e50;
 }
 
+#examples .km-loader:before {
+    background: #2a2d33;
+}
+
 #examples .km-touch-scrollbar {
     background: rgba(37, 39, 44, 0.3);
 }
