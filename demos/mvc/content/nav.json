@@ -1648,6 +1648,7 @@
         "title": {
             "kendo-ui": "Adaptive Rendering of Kendo UI Grid"
         },
+        "mobile": "true",
         "external": "true",
         "packages": [
           "!mvc",
@@ -2753,6 +2754,7 @@
         "title": {
             "kendo-ui": "Adaptive Rendering of Kendo UI Scheduler"
         },
+        "mobile": "true",
         "external": "true",
         "packages": [
           "!mvc",

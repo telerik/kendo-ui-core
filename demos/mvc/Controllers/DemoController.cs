@@ -154,7 +154,7 @@ namespace Kendo.Controllers
            }
 
            ViewBag.CurrentWidget = currentWidget;
-           ViewBag.Mobile = currentWidget.Mobile && !current.DisableInMobile;
+           ViewBag.Mobile = (currentWidget.Mobile && !current.DisableInMobile) || current.Mobile;
            ViewBag.CurrentExample = current;
 
            if (current.Title != null)
