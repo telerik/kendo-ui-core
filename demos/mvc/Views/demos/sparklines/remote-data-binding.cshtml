@@ -72,6 +72,7 @@
                 });
 
                 $(".sparkline-tmax", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     dataSource: rowDataSource,
                     autoBind:false,
                     series: [{
@@ -83,6 +84,7 @@
                 });
 
                 $(".sparkline-wnd", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     dataSource: rowDataSource,
                     autoBind:false,
                     series: [{
@@ -92,6 +94,7 @@
                 });
 
                 $(".sparkline-rain", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     dataSource: rowDataSource,
                     series: [{
                         type: "area",

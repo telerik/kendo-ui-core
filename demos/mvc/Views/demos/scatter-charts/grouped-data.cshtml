@@ -35,6 +35,7 @@
 
         function createChart() {
             $("#chart").kendoChart({
+                theme: window.kendoTheme,
                 title: { text: "Stock Prices" },
                 dataSource: stocksDataSource,
                 series: [{

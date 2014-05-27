@@ -15,7 +15,7 @@
                     <label>
                         <input id="showBorder" type="checkbox" checked="checked" /> Show border
                     </label>
-                </li>    
+                </li>
             </ul>
         </div>
         <div class="box-col">
@@ -75,6 +75,7 @@
     <script>
         function createChart() {
             $("#chart").kendoChart({
+                theme: window.kendoTheme,
                 title: {
                     text: "The AIDA model"
                 },
@@ -184,5 +185,5 @@
                 transitions : false
             })
         }
-    </script> 
+    </script>
 </div>

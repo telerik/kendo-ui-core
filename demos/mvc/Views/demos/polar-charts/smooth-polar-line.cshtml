@@ -20,6 +20,7 @@
 
         function createChart() {
             $("#chart").kendoChart({
+                theme: window.kendoTheme,
                 title: {
                     text: "Sun position at equinox"
                 },
@@ -30,7 +31,7 @@
                     type: "polarLine",
                     style: "smooth",
                     xField: "azimuth",
-                    yField: "altitude",                   
+                    yField: "altitude",
                     labels: {
                         template: "#= dataItem.time.substring(0,2) #h",
                         position: "below",

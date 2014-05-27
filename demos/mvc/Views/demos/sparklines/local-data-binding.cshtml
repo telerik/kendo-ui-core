@@ -41,6 +41,7 @@
                     .find("tr:last");
 
                 $(".bar-hourly", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     type: "bar",
                     renderAs: "canvas",
                     data: [rowData.hourly],
@@ -50,6 +51,7 @@
                 });
 
                 $(".bar-change", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     type: "bar",
                     renderAs: "canvas",
                     series: [{
@@ -69,6 +71,7 @@
                 });
 
                 $(".bar-direct", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     type: "bar",
                     renderAs: "canvas",
                     data: [rowData.direct],
@@ -78,6 +81,7 @@
                 });
 
                 $(".bar-benefits", row).kendoSparkline({
+                    theme: window.kendoTheme,
                     type: "bar",
                     renderAs: "canvas",
                     dataSource: {

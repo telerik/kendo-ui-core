@@ -61,7 +61,7 @@
                                 type="radio" value="count" autocomplete="off" />
                         <label for="aggregateCount">Count</label>
                     </li>
-                </ul>               
+                </ul>
                 </div>
                  <div class="box-col">
                     <h4>&nbsp;</h4>
@@ -91,6 +91,7 @@
 
                 function createChart() {
                     $("#chart").kendoChart({
+                        theme: window.kendoTheme,
                         title: {
                             text: "Units sold"
                         },

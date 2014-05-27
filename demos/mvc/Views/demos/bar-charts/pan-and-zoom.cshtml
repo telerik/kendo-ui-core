@@ -28,7 +28,7 @@
         var viewStart = 0;
         var viewSize = MIN_SIZE;
         var newStart;
-        
+
         // Drag handler
         function onDrag(e) {
             var chart = e.sender;
@@ -69,6 +69,7 @@
 
         function createChart() {
             $("#chart").kendoChart({
+                theme: window.kendoTheme,
               dataSource: {
                 data: data,
                 pageSize: viewSize,

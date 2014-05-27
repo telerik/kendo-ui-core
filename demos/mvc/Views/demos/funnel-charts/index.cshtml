@@ -7,12 +7,12 @@
     </div>
     <div class="box">
         <div class="box-col">
-            <h4><input type="checkbox" id="dynamicSlope"/> Dynamic Slope</h4> 
-            <i>The slope for each segment depends on the ratio between the current and the next value</i>           
+            <h4><input type="checkbox" id="dynamicSlope"/> Dynamic Slope</h4>
+            <i>The slope for each segment depends on the ratio between the current and the next value</i>
         </div>
         <div class="box-col">
             <h4><input type="checkbox" id="dynamicHeight"/> Dynamic Height</h4>
-            <i>The height of the segment is the overall percentage for that dataItem</i>  
+            <i>The height of the segment is the overall percentage for that dataItem</i>
         </div>
         <div class="box-col">
             <h4>Neck Ratio</h4>
@@ -89,9 +89,10 @@
                     value: 694137,
                     color: "#3eaee2"
                 }];
-            
+
         function createChart(chartName,data,text){
             $('#'+chartName).kendoChart({
+                theme: window.kendoTheme,
                 title: {
                     text: text,
                     position: "bottom"
@@ -126,7 +127,7 @@
 
             for (var idx in chartNames) {
                 var chart = $("#" + chartNames[idx]).data("kendoChart");
-                
+
                 var options =
                 {
                     seriesDefaults: {
@@ -168,7 +169,7 @@
             $('.box').on('click', ':checkbox', refresh);
             $(document).bind("kendo:skinChange", createCharts);
         });
-        
+
     </script>
     <style scoped>
         #chart-oct,
