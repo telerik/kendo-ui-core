@@ -32,14 +32,22 @@ function onlineExamples(section, product, reject) {
             return false;
         }
 
-        if (!item.packages) {
+        var packages = item.packages || section.packages;
+
+        if (!packages) {
             return true;
         }
 
         var invert = false, match = false;
 
-        for (var i = 0; i < item.packages.length; i++) {
-            var packageName = item.packages[i];
+        for (var i = 0; i < packages.length; i++) {
+            var packageName = packages[i];
+
+
+            if (packageName === "!" + product) {
+                return false;
+            }
+
             if (packageName[0] === "!") {
                 invert = true;
             }
@@ -53,7 +61,9 @@ function onlineExamples(section, product, reject) {
             }
         }
 
-        return (!invert && match) || (invert && !match);
+        var result = (!invert && match) || (invert && !match);
+
+        return result;
     });
 
 }
