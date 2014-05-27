@@ -1,4 +1,28 @@
 (function() {
+    function cookie(key, value, end, path, domain, secure) {
+        if (arguments.length === 1) {
+            return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        }
+
+        if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) { return false; }
+        var expires = "";
+        if (end) {
+          switch (end.constructor) {
+            case Number:
+              expires = end === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + end;
+              break;
+            case String:
+              expires = "; expires=" + end;
+              break;
+            case Date:
+              expires = "; expires=" + end.toUTCString();
+              break;
+          }
+        }
+        document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + expires + (domain ? "; domain=" + domain : "") + (path ? "; path=" + path : "") + (secure ? "; secure" : "");
+        return true;
+    }
+
     var doc = document,
         extend = $.extend,
         proxy = $.proxy,
@@ -72,7 +96,7 @@
             var data = this.dataSource.data();
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i].name == value) {
+                if (data[i].value == value) {
                     this.select(this.element.find("[data-uid='" + data[i].uid + "']"));
                     break;
                 }
@@ -84,17 +108,17 @@
 
     var ThemeChooserViewModel = kendo.observable({
         themes: [
-            { name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
-            { name: "Blue Opal", colors: [ "#076186", "#7ed3f6", "#94c0d2" ]  },
-            { name: "Bootstrap", colors: [ "#3276b1", "#67afe9", "#fff" ]  },
-            { name: "Silver", colors: [ "#298bc8", "#515967", "#eaeaec" ]  },
-            { name: "Uniform", colors: [ "#666", "#ccc", "#fff" ]  },
-            { name: "Metro", colors: [ "#8ebc00", "#787878", "#fff" ]  },
-            { name: "Black", colors: [ "#0167cc", "#4698e9", "#272727" ]  },
-            { name: "Metro Black", colors: [ "#00aba9", "#0e0e0e", "#565656" ]  },
-            { name: "High Contrast", colors: [ "#b11e9c", "#880275", "#1b141a" ]  },
-            { name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
-            { name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
+            { value: "default", name: "Default", colors: [ "#ef6f1c", "#e24b17", "#5a4b43" ]  },
+            { value: "blueopal", name: "Blue Opal", colors: [ "#076186", "#7ed3f6", "#94c0d2" ]  },
+            { value: "bootstrap", name: "Bootstrap", colors: [ "#3276b1", "#67afe9", "#fff" ]  },
+            { value: "silver", name: "Silver", colors: [ "#298bc8", "#515967", "#eaeaec" ]  },
+            { value: "uniform", name: "Uniform", colors: [ "#666", "#ccc", "#fff" ]  },
+            { value: "metro", name: "Metro", colors: [ "#8ebc00", "#787878", "#fff" ]  },
+            { value: "black", name: "Black", colors: [ "#0167cc", "#4698e9", "#272727" ]  },
+            { value: "metroblack", name: "Metro Black", colors: [ "#00aba9", "#0e0e0e", "#565656" ]  },
+            { value: "highcontrast", name: "High Contrast", colors: [ "#b11e9c", "#880275", "#1b141a" ]  },
+            { value: "moonlight", name: "Moonlight", colors: [ "#ee9f05", "#40444f", "#212a33" ]  },
+            { value: "flat", name: "Flat", colors: [ "#363940", "#2eb3a6", "#fff" ]  }
         ],
         mobileThemes: [
             { name: "iOS7", value:"ios7", colors: [ "#007aff", "#f5f5f5", "#ffffff" ]  },
@@ -106,30 +130,39 @@
             { name: "WP8 Dark", value: "wp-dark", colors: [ "#01abaa", "#ffffff", "#000000" ]  },
             { name: "Flat Skin", value: "flat", colors: [ "#10c4b2", "#dcdcdc", "#f4f4f4" ]  }
         ],
-        selectedTheme: "Silver",
-        selectedMobileTheme: "ios7",
+        sizes: [
+            { name: "Standard", value: "common" },
+            { name: "Bootstrap", value: "common-bootstrap", relativity: "larger" }
+        ],
+
+        selectedTheme: window.kendoTheme,
+        selectedMobileTheme: window.kendoMobileTheme,
+        selectedSize: window.kendoCommonFile,
+
         updateMobileTheme: function(e) {
-            var themeName = e.item.value;
+            this.setMobileTheme(e.item.value);
+        },
+
+        updateTheme: function(e) {
+            var themeName = e.item.name.toLowerCase().replace(/\s/, "")
+            ThemeChooser.changeTheme(themeName, true);
+            cookie("theme", themeName, Infinity, "/");
+        },
+
+        updateCommon: function(e) {
+            ThemeChooser.changeCommon(e.item.value, true);
+            cookie("commonFile", e.item.value, Infinity, "/");
+        },
+
+        setMobileTheme: function(themeName) {
             $("#mobile-application-container").removeClass(MOBILE_CLASSES).addClass("km-" + themeName + (" km-" + themeName.replace(/-.*/, "")));
             $("#device-wrapper").removeClass("ios7 ios wp-dark wp-light android-light android-dark blackberry flat").addClass(themeName);
+            cookie("mobileTheme", themeName, Infinity, "/");
         },
-        updateTheme: function(e) {
-            var file = e.item.name.toLowerCase().replace(/\s/, "")
-
-            ThemeChooser.changeTheme(file, true);
-        },
-
-        sizes: [
-            { name: "Standard", file: "common" },
-            { name: "Bootstrap", file: "common-bootstrap", relativity: "larger" }
-        ],
-        selectedSize: "Standard",
-        updateCommon: function(e) {
-            ThemeChooser.changeCommon(e.item.file, true);
-        }
     });
 
     kendo.ui.plugin(ThemeChooser);
+    window.ThemeChooserViewModel = ThemeChooserViewModel;
 
     $(document).ready(function() {
         kendo.bind($(".themechooser"), ThemeChooserViewModel);

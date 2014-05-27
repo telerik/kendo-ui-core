@@ -41,6 +41,14 @@ namespace Kendo.Controllers
             ViewBag.Section = section;
             ViewBag.Example = example;
             ViewBag.ExampleFiles = SourceCode(product, section, example);
+
+            var ThemeCookie = HttpContext.Request.Cookies["theme"];
+            var MobileThemeCookie = HttpContext.Request.Cookies["mobileTheme"];
+            var CommonFileCookie = HttpContext.Request.Cookies["commonFile"];
+
+            ViewBag.Theme = ThemeCookie == null ? "Silver" : ThemeCookie.Value;
+            ViewBag.MobileTheme = MobileThemeCookie == null ? "ios7" : MobileThemeCookie.Value;
+            ViewBag.CommonFile = CommonFileCookie == null ? "common" : CommonFileCookie.Value;
 #if DEBUG
             ViewBag.Debug = true;
 #else

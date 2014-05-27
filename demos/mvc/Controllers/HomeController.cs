@@ -17,6 +17,11 @@ namespace Kendo.Controllers
 
             ViewBag.Product = CurrentProduct();
             ViewBag.NavProduct = CurrentNavProduct();
+
+            ViewBag.Theme = "Silver";
+            ViewBag.MobileTheme = "ios7";
+            ViewBag.CommonFile = "common";
+
             LoadNavigation();
             LoadCategories();
 #if DEBUG

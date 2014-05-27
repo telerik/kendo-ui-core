@@ -2905,6 +2905,10 @@ a.footer-links:hover {
     margin: 4.583em 7.500em 5.000em 7.500em;
 }
 
+#exampleWrap .mobileExample {
+    background: white;
+}
+
 #exampleTitle {
     margin: 2.250em 3.750em 2.500em 3.750em;
 }

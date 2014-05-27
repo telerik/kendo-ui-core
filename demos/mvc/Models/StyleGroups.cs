@@ -60,6 +60,8 @@ namespace Kendo.Models
             "web/kendo.silver.less",
             "mobile/kendo.mobile.all.less"
 #else
+            "kendo.common.min.css",
+            "kendo.silver.min.css",
             "kendo.mobile.all.min.css"
 #endif
         };

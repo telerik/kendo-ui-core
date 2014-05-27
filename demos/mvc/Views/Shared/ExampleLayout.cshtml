@@ -5,6 +5,11 @@
 
     string navProduct = ViewBag.NavProduct;
 }
+<script>
+    window.kendoTheme = "@ViewBag.Theme";
+    window.kendoMobileTheme = "@ViewBag.MobileTheme";
+    window.kendoCommonFile = "@ViewBag.CommonFile";
+</script>
 
 <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
 
@@ -252,31 +257,25 @@
         <text>
             kendo.history.stop();
 
-            window.kendoMobileOS = "ios7";
-
             $(function() {
-                var kendoMobileOS = window.kendoMobileOS;
+                var mobileTheme = window.kendoMobileTheme;
 
-                if (window.sessionStorage) {
-                    window.kendoMobileOS = sessionStorage.getItem("kendoMobileOS") || kendoMobileOS;
-                }
+                window.ThemeChooserViewModel.setMobileTheme(mobileTheme);
 
-                $("#mobile-application-container").removeClass("km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-android-dark km-android-light km-blackberry km-wp km-wp-dark km-wp-light km-flat").addClass("km-" + kendoMobileOS + (" km-" + kendoMobileOS.replace(/-.*/, "")));
-                $("#device-wrapper").removeClass("ios7 android blackberry wp flat").addClass(kendoMobileOS);
-
-                var skin = kendoMobileOS != "flat" ? {} : {
-                    platform: "ios7",
-                    skin: "flat"
+                var options = {
+                    layout: "examples",
+                    updateDocumentTitle: false,
+                    hideAddressBar: false
                 };
 
+                if (mobileTheme === "flat") {
+                    options.skin = "flat";
+                } else {
+                    options.platform = mobileTheme;
+                }
+
                 if (!(kendo.support.browser.msie && kendo.support.browser.version < 10) && !kendo.support.browser.opera) {
-                    window.app = new kendo.mobile.Application($("#mobile-application-container"),
-                        $.extend({
-                            layout: "examples",
-                            platform: kendoMobileOS,
-                            updateDocumentTitle: false,
-                            hideAddressBar: false
-                        }, skin));
+                    window.app = new kendo.mobile.Application($("#mobile-application-container"), options);
                 }
             });
         </text>
