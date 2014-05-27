@@ -587,11 +587,11 @@
         var tr_dim0 = rows.eq(0);
         var tr_dim1 = rows.eq(1);
 
-        ok(!tr_dim0.find("th").last().attr("colspan"));
+        equal(tr_dim0.find("th").last().attr("colspan"), 1);
         ok(!tr_dim1.find("th").last().attr("colspan"));
     });
 
-    test("PivotGrid calculates colspan of all expanded dimensions", function() {
+    test("PivotGrid calculates colspan of two of three expanded dimensions", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
@@ -614,6 +614,60 @@
 
         equal(tr_dim0.find("th").last().attr("colspan"), 6);
         equal(tr_dim1.find("th").last().attr("colspan"), 4);
+    });
+
+    test("PivotGrid expands All cell of second dimension under first dimension child correctly", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        var th_level0 = rows.eq(0).find("th");
+        var th_level1 = rows.eq(1).find("th");
+        var th_level2 = rows.eq(2).find("th");
+
+        equal(th_level0.eq(0).attr("colspan"), 4);
+        equal(th_level1.eq(1).attr("colspan"), 3);
+        equal(th_level2.eq(1).attr("colspan"), 2);
+    });
+
+    test("PivotGrid expands All cell of second dimension under first dimension child when child is expanded", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0_2", levelNum: "2", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        var th_level0 = rows.eq(0).find("th");
+        var th_level1 = rows.eq(1).find("th");
+        var th_level3 = rows.eq(3).find("th");
+
+        equal(th_level0.eq(0).attr("colspan"), 6);
+        equal(th_level1.eq(2).attr("colspan"), 4);
+        equal(th_level3.eq(2).attr("colspan"), 3);
     });
 
     //data attributes decoration

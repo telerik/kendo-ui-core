@@ -1327,10 +1327,8 @@ var __meta__ = {
         },
 
         _row: function(tuple, memberIndex, parentMember) {
-            var member = tuple.members[memberIndex];
-            var parentName = parentMember ? parentMember.name : "root";
             var rootName = this.rootTuple.members[memberIndex].name;
-            var levelNum = member.levelNum;
+            var levelNum = tuple.members[memberIndex].levelNum;
             var rowKey = rootName + levelNum;
             var map = this.map;
             var parentRow;
@@ -1340,7 +1338,7 @@ var __meta__ = {
             if (!row) {
                 row = element("tr", null, []);
 
-                row.parentName = parentName;
+                row.parentMember = parentMember;
                 row.colspan = 0;
                 row.rowspan = 1;
 
@@ -1350,8 +1348,8 @@ var __meta__ = {
                 this.rows.splice(this._rowIndex(parentRow) + 1, 0, row);
             }
 
-            if (parentName !== row.parentName) {
-                row.parentName = parentName;
+            if (!row.parentMember || row.parentMember !== parentMember) {
+                row.parentMember = parentMember;
                 row.colspan = 0;
             }
 
@@ -1370,6 +1368,8 @@ var __meta__ = {
 
             var idx = 0;
             var childrenLength;
+
+            var colspan;
 
             if (parentMember) {
                 memberIndex = this._memberIndex(members, parentMember);
@@ -1394,16 +1394,25 @@ var __meta__ = {
                     childRow = this._buildRows(children[idx], 0, member);
                 }
 
-                cell.attr.colspan = childRow.colspan;
+                colspan = childRow.colspan;
+                cell.attr.colspan = colspan;
 
-                row.colspan += childRow.colspan;
+                row.colspan += colspan;
                 row.rowspan = childRow.rowspan + 1;
 
                 if (members[memberIndex + 1]) {
-                    this._buildRows(tuple, ++memberIndex);
+                    var newRow = this._buildRows(tuple, ++memberIndex);
+
+                    allCell.attr.colspan = newRow.colspan;
+                    row.colspan += newRow.colspan - 1;
                 }
             } else if (members[memberIndex + 1]) {
-                this._buildRows(tuple, ++memberIndex);
+                childRow = this._buildRows(tuple, ++memberIndex);
+
+                if (childRow.colspan > 1) {
+                    cell.attr.colspan = childRow.colspan;
+                    row.colspan += childRow.colspan - 1;
+                }
             }
 
             (allCell || cell).attr[kendo.attr("tuple-all")] = true;
