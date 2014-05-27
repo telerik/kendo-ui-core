@@ -1845,7 +1845,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width: 280px;
 }
 
-#device-wrapper [href='#/'], #back-button
+#device-wrapper [href='#/'], #back-button, .back-button
 {
     visibility: hidden;
 }
