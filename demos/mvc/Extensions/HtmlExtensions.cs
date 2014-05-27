@@ -64,60 +64,49 @@ namespace Kendo.Extensions
 
             var href = html.ExampleUrl(widget.Items[0]);
 
-            var className = "";
-
-            if (widget.Text == "Theme Builder")
-            {
-                className = "theme-builder";
-            }
-
             var text = widget.Text;
+
             if (widget.Tablet)
             {
-                text += "(tablet)";
+                text += " (tablet)";
             }
+
+            var className = "";
 
             if (widget.Pro && (widget.New || widget.Beta)) {
                 className = "multiple-tags";
             }
 
-            var target = "";
+            StringBuilder link = new StringBuilder();
 
-            StringBuilder a = new StringBuilder();
-
-            a.Append("<a ");
+            link.Append("<a ");
 
             if (!string.IsNullOrEmpty(className))
             {
-                a.AppendFormat("class=\"{0}\" ", className);
+                link.AppendFormat("class=\"{0}\" ", className);
             }
 
-            if (!string.IsNullOrEmpty(target))
-            {
-                a.AppendFormat("target=\"{0}\" ", target);
-            }
-
-            a.AppendFormat("href=\"{0}\">", href);
-            a.Append(text);
+            link.AppendFormat("href=\"{0}\">", href);
+            link.Append(text);
 
             if (widget.Pro)
             {
-                a.Append("<span title=\"Available only in Kendo UI Professional\" class=\"pro-widget\"></span>");
+                link.Append("<span title=\"Available only in Kendo UI Professional\" class=\"pro-widget\"></span>");
             }
 
             if (widget.Beta)
             {
-                a.Append("<span class=\"beta-widget\"></span>");
+                link.Append("<span class=\"beta-widget\"></span>");
             }
 
             if (widget.New)
             {
-                a.Append("<span class=\"new-widget\"></span>");
+                link.Append("<span class=\"new-widget\"></span>");
             }
 
-            a.Append("</a>");
+            link.Append("</a>");
 
-            return html.Raw(a.ToString());
+            return html.Raw(link.ToString());
         }
 
         public static bool MergesWithNext(this HtmlHelper html, string category)
