@@ -94,14 +94,14 @@
     font-size: 1.4em;
 }
 
-#examples .km-state-active,
+#examples .km-header .km-state-active,
 #examples .km-state-active .km-listview-link {
     background: #dfe3e6;
     color: black;
 }
 
-#examples .km-button,
-#examples .km-button.k-state-active {
+#examples .km-header .km-button,
+#examples .km-header .km-button.k-state-active {
     background: none;
     border: none;
 }

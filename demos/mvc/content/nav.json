@@ -7182,7 +7182,7 @@
   },
   {
     "text": "Switch",
-    "name": "Switch",
+    "name": "switch",
     "api": "switch/adaptive",
     "documentation": {
        "kendo-ui": "getting-started/mobile/switch",
@@ -7419,7 +7419,7 @@
     "items": [
       {
         "text": "Touch Events",
-        "url": "touch/index",
+        "url": "touchevents/index",
         "title": {
             "kendo-ui": "Touch Events Demo in Kendo UI jQuery-powered mobile framework"
         },

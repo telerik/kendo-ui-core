@@ -2,7 +2,9 @@ var isAndroid = kendo.support.mobileOS.android;
 
 
 function removeView(e) {
-    e.view.purge();
+    if (!e.view.element.data("persist")) {
+        e.view.purge();
+    }
 }
 
 function loadSection(e) {
@@ -56,19 +58,23 @@ function showDemoLayout(e) {
             element = e.view.element;
 
         var section = navDataSource.get(url.split("/")[0]);
-        detailNavDataSource.data(mobileExamples(section));
 
-        var item = detailNavDataSource.get(url);
-        var navBar = element.find("[data-role=navbar]").data("kendoMobileNavBar");
+        if (section) {
+            detailNavDataSource.data(mobileExamples(section));
 
-        if (navBar) {
-            navBar.title(item.text);
+            var item = detailNavDataSource.get(url);
+            var navBar = element.find("[data-role=navbar]").data("kendoMobileNavBar");
+
+            if (navBar) {
+                navBar.title(item.text);
+            }
+
+            e.view.header.find("#themechooser-button").toggle(!section.mobile);
+            e.view.footer.find("#desktop-footer").toggle(!section.mobile);
+            e.view.footer.find("#desktop-link").attr("href", "../" + url);
+
+            element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
         }
-
-        e.view.footer.find("#desktop-footer").toggle(!section.mobile);
-        e.view.footer.find("#desktop-link").attr("href", "../" + url);
-
-        element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
     });
 }
 
