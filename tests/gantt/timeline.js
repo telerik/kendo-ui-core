@@ -491,7 +491,7 @@
         view.range(range);
         view.renderLayout();
 
-        ok(view.header.find("tr:last th").eq(0).hasClass("nonWorking"));
+        ok(view.header.find("tr:last th").eq(0).hasClass("k-nonwork-hour"));
     });
 
 
@@ -639,7 +639,7 @@
         view.range(range);
         view.renderLayout();
 
-        ok(view.header.find("tr:first th").eq(2).hasClass("nonWorking"));
+        ok(view.header.find("tr:first th").eq(2).hasClass("k-nonwork-hour"));
     });
 
 
@@ -856,7 +856,7 @@
         view.range(range);
         view.renderLayout();
 
-        ok(view.header.find("tr:last th").eq(0).hasClass("nonWorking"));
+        ok(view.header.find("tr:last th").eq(0).hasClass("k-nonwork-hour"));
     });
 
 

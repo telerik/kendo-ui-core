@@ -927,7 +927,7 @@ var __meta__ = {
                     column = level[columnIndex];
 
                     headerText = kendoTextElement(column.text);
-                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " nonWorking" : "") }, [headerText]));
+                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " k-nonwork-hour" : "") }, [headerText]));
                 }
 
                 rows.push(kendoDomElement("tr", null, headers));
