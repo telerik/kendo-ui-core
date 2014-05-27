@@ -1301,7 +1301,6 @@
                 that.selector = new Selector(that);
                 // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
-                that._drop();
                 that._initEditor();
 
                 if (that.options.layout) {
@@ -1426,10 +1425,6 @@
                 that.canvas = undefined;
 
                 that.destroyScroller();
-
-                if (that.options.draggable && kendo.ui.DropTarget) {
-                    that.element.kendoDropTarget("destroy");
-                }
             },
             destroyScroller: function () {
                 var scroller = this.scroller;
@@ -2247,27 +2242,6 @@
                 var result = this._getDiagramItems(items);
                 this.mainLayer.toIndex(result.visuals, indices);
                 this._fixOrdering(result, false);
-            },
-            _drop: function () {
-                var that = this,
-                    options = that.options;
-                if (options.draggable && kendo.ui.DropTarget) {
-                    this.element.kendoDropTarget({
-                        drop: function (e) {
-                            var item, pos;
-                            if (e.draggable && e.draggable.hint) {
-                                item = e.draggable.hint.data("data");
-                                pos = e.draggable.hintOffset;
-                                pos = new Point(pos.left, pos.top);
-                                var transformed = that.documentToModel(pos);
-                                item.x = transformed.x;
-                                item.y = transformed.y;
-
-                                that.addShape(item);
-                            }
-                        }
-                    });
-                }
             },
             _fixOrdering: function (result, toFront) {
                 var shapePos = toFront ? this.shapes.length - 1 : 0,
