@@ -1833,7 +1833,7 @@
             equal(innerContainer.options.vertical, true);
         });
 
-        test("sets inner container direction to based on orientation option", function() {
+        test("sets inner container direction based on orientation option", function() {
             createLegend({
                 position: "custom",
                 orientation: "horizontal"
@@ -1917,7 +1917,7 @@
         });
 
         test("renders box with padding", function() {
-            sameBox(legendBox, new Box2D(908, 482.5, 993, 517.5), TOLERANCE);
+            sameBox(legendBox, new Box2D(912, 482.5, 993, 517.5), TOLERANCE);
         });
 
         test("renders border width", function() {
@@ -1995,10 +1995,12 @@
         test("sets float element options", function() {
             var floatElementOptions = legend.container.children[0].options;
             equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.spacing, legend.options.spacing);
             equal(floatElementOptions.vertical, true);
             createLegendWithItems({position: "top"});
             floatElementOptions = legend.container.children[0].options;
             equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.spacing, legend.options.spacing);
             equal(floatElementOptions.vertical, false);
         });
 
@@ -2092,6 +2094,11 @@
         test("sets markers type", function() {
             equal(legendItems[0].options.markers.padding, 5);
             equal(legendItems[1].options.markers.padding, 5);
+        });
+
+        test("sets item options", function() {
+            equal(legendItems[0].options.zIndex, legend.options.item.zIndex);
+            equal(legendItems[0].options.cursor.style, legend.options.item.cursor.style);
         });
 
         // ------------------------------------------------------------
@@ -2197,8 +2204,7 @@
         // ------------------------------------------------------------
         var chart,
             legend,
-            legendItemMarker,
-            legendItemLabel;
+            legendItemOverlay;
 
         function setupLegendItemEvent(options, itemIndex) {
             chart = createChart($.extend(true, {
@@ -2212,28 +2218,18 @@
 
             legend = chart._model.children[0];
             legendItem = legend.children[0].children[0].children[itemIndex || 0];
-            var legendItemElements = QUnit.fixture.find("[data-model-id='" + legendItem.modelId +"']");
-            legendItemMarker = legendItemElements.filter("path");
-            legendItemLabel = legendItemElements.filter("text");
+            legendItemOverlay = QUnit.fixture.find("[data-model-id='" + legendItem.modelId +"']").last();
         }
-
 
         module("LegendItem / Events / click", {
             teardown: destroyChart
         });
 
-        test("fires when clicking item label", 1, function() {
+        test("fires when clicking item overlay", 1, function() {
             setupLegendItemEvent({
                 legendItemClick: function() { ok(true); }
             });
-            clickChart(chart, legendItemLabel);
-        });
-
-        test("fires when clicking item marker", 1, function() {
-            setupLegendItemEvent({
-                legendItemClick: function() { ok(true); }
-            });
-            clickChart(chart, legendItemMarker);
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain DOM element", 1, function() {
@@ -2242,7 +2238,7 @@
                     equal(e.element.length, 1);
                 }
             });
-            clickChart(chart, legendItemLabel);
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain series name as text", 1, function() {
@@ -2251,7 +2247,7 @@
                     equal(e.text, "test");
                 }
             });
-            clickChart(chart, legendItemLabel);
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain series", 1, function() {
@@ -2260,7 +2256,7 @@
                     equal(e.series.type, "line");
                 }
             });
-            clickChart(chart, legendItemLabel);
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain seriesIndex", 1, function() {
@@ -2274,7 +2270,7 @@
                     equal(e.seriesIndex, 1);
                 }
             }, 1);
-            clickChart(chart, legendItemLabel);
+            clickChart(chart, legendItemOverlay);
         });
 
         // ------------------------------------------------------------
@@ -2282,18 +2278,11 @@
             teardown: destroyChart
         });
 
-        test("fires when hovering item label", 1, function() {
+        test("fires when hovering item overlay", 1, function() {
             setupLegendItemEvent({
                 legendItemHover: function() { ok(true); }
             });
-            triggerEvent("mouseover", legendItemLabel);
-        });
-
-        test("fires when hovering item marker", 1, function() {
-            setupLegendItemEvent({
-                legendItemHover: function() { ok(true); }
-            });
-            triggerEvent("mouseover", legendItemMarker);
+            triggerEvent("mouseover", legendItemOverlay);
         });
 
         test("event arguments contain DOM element", 1, function() {
@@ -2302,7 +2291,7 @@
                     equal(e.element.length, 1);
                 }
             });
-            triggerEvent("mouseover", legendItemLabel);
+            triggerEvent("mouseover", legendItemOverlay);
         });
 
         test("event arguments contain series name as text", 1, function() {
@@ -2311,7 +2300,7 @@
                     equal(e.text, "test");
                 }
             });
-            triggerEvent("mouseover", legendItemLabel);
+            triggerEvent("mouseover", legendItemOverlay);
         });
 
         test("event arguments contain series", 1, function() {
@@ -2320,7 +2309,7 @@
                     equal(e.series.type, "line");
                 }
             });
-            triggerEvent("mouseover", legendItemLabel);
+            triggerEvent("mouseover", legendItemOverlay);
         });
 
         test("event arguments contain seriesIndex", 1, function() {
@@ -2334,7 +2323,7 @@
                     equal(e.seriesIndex, 1);
                 }
             }, 1);
-            triggerEvent("mouseover", legendItemLabel);
+            triggerEvent("mouseover", legendItemOverlay);
         });
     })();
 

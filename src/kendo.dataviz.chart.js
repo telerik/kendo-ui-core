@@ -1705,6 +1705,24 @@ var __meta__ = {
             item.container.append(new TextBox(options.text, labelOptions));
         },
 
+        getViewElements: function(view) {
+            var item = this,
+                options = item.options,
+                overlayRect = view.createRect(item.container.box, {
+                    data: { modelId: item.modelId },
+                    zIndex: options.zIndex,
+                    cursor: options.cursor,
+                    fill: "#fff",
+                    fillOpacity: 0
+                }),
+                elements = [];
+
+            append(elements, ChartElement.fn.getViewElements.call(this,  view));
+            elements.push(overlayRect);
+
+            return elements;
+        },
+
         click: function(widget, e) {
             var args = this.eventArgs(e);
 
@@ -1759,8 +1777,8 @@ var __meta__ = {
             position: RIGHT,
             items: [],
             labels: {
-                cursor: {
-                    style: POINTER
+                margin: {
+                    left: 6
                 },
                 zIndex: 1
             },
@@ -1772,6 +1790,13 @@ var __meta__ = {
                 color: BLACK,
                 width: 0
             },
+            item: {
+                zIndex: 1,
+                cursor: {
+                    style: POINTER
+                }
+            },
+            spacing: 6,
             background: "",
             zIndex: 1,
             markers: {
@@ -1780,16 +1805,9 @@ var __meta__ = {
                 },
                 width: 7,
                 height: 7,
-                margin: {
-                    left: 5,
-                    right: 5
-                },
                 type: "rect",
                 align: LEFT,
                 vAlign: CENTER,
-                cursor: {
-                    style: POINTER
-                },
                 zIndex: 1
             }
         },
@@ -1831,7 +1849,8 @@ var __meta__ = {
                 innerElement, i, item;
 
             innerElement = new FloatElement({
-                vertical: vertical
+                vertical: vertical,
+                spacing: options.spacing
             });
 
             for (i = 0; i < count; i++) {
@@ -1840,7 +1859,7 @@ var __meta__ = {
                 innerElement.append(new LegendItem(deepExtend({}, {
                     markers: options.markers,
                     labels: options.labels
-                }, item)));
+                }, options.item, item)));
             }
             legend.container.append(innerElement);
         },
