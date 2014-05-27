@@ -154,9 +154,9 @@
     <Content Include="content\integration\bootstrap-integration\photos\9.jpg" />
     <Content Include="content\integration\bootstrap-integration\respond.min.js" />
     <Content Include="content\integration\bootstrap-integration\styles.css" />
-    <Content Include="content\integration\diagram-app\images\diagram-sprite.png" />
-    <Content Include="content\integration\diagram-app\images\ToolboxShapes.png" />
-    <Content Include="content\integration\diagram-app\styles.css" />
+    <Content Include="content\integration\diagram\css\styles.css" />
+    <Content Include="content\integration\diagram\images\diagram-sprite.png" />
+    <Content Include="content\integration\diagram\images\diagram-toolbox.png" />
     <Content Include="content\integration\simulator\devices\a100\images\horizontal.png" />
     <Content Include="content\integration\simulator\devices\a100\images\vertical.png" />
     <Content Include="content\integration\simulator\devices\a100\styles.css" />
@@ -727,6 +727,7 @@
     <Content Include="Views\demos\grid\toolbar-template.cshtml" />
     <Content Include="Views\demos\grid\virtualization-local-data.cshtml" />
     <Content Include="Views\demos\grid\virtualization-remote-data.cshtml" />
+    <Content Include="Views\demos\integration\index.cshtml" />
     <Content Include="Views\demos\line-charts\date-axis.cshtml" />
     <Content Include="Views\demos\line-charts\error-bars.cshtml" />
     <Content Include="Views\demos\line-charts\grouped-data.cshtml" />
@@ -1149,9 +1150,11 @@
     <Content Include="Views\Shared\GoogleTagManager.cshtml" />
     <Content Include="Views\ThemeBuilder\MobileIndex.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
-    <Content Include="Views\demos\integration\index.cshtml" />
+    <Content Include="Views\demos\integration\handlebars.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="content\integration\diagram\js\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="content\dataviz\js\price-performance.json" />
     <None Include="content\dataviz\js\spain-electricity.json" />
