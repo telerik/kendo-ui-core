@@ -123,6 +123,14 @@ test("kendo.resize resizes the given widget", 1, function() {
     kendo.resize(QUnit.fixture);
 });
 
+test("kendo.resize resizes the given widget with force", 1, function() {
+    widget.resize = function(force) {
+        ok(force);
+    };
+
+    kendo.resize(QUnit.fixture, true);
+});
+
 test("kendo.resize skips hidden widgets", 0, function() {
     widget.bind("resize", function() {
         ok(false);
