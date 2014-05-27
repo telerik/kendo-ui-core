@@ -16,11 +16,12 @@
 <script>
     var path = "../";
 </script>
+
 @Html.Partial("WebSearchScript")
+
 <div id="example-search-wrapper" class="search-wrapper">
     <div class="search">
         <input id="example-search" placeholder="Search demos"/>
-  @*      <span id="icon-search" class="k-uniE600"></span>*@
     </div>
 </div>
 
@@ -51,7 +52,7 @@
         </div>
 
         <div id="example-nav">
-            <a href="#" id="back-nav" class="k-uniE604"></a>
+            <a href="#" title="Back to all widgets" id="back-nav" class="k-uniE604"></a>
 
         <h4>@ViewBag.CurrentWidget.Text</h4>
         <ul>
