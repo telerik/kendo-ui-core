@@ -344,8 +344,8 @@ var __meta__ = {
         for (var idx = 0, len = source.length; idx < len; idx ++) {
             var sourceMembers = source[idx].members;
             for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
-                if (!targetMembers[memberIndex].measure) {
-                    [].push.apply(targetMembers[memberIndex].children, sourceMembers[memberIndex].children);
+                if (!targetMembers[memberIndex].measure && sourceMembers[memberIndex].children[0]) {
+                    targetMembers[memberIndex].children = sourceMembers[memberIndex].children;
                 }
             }
         }

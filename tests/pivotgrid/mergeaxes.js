@@ -643,5 +643,57 @@
         equal(tuples[0].members[0].children.length, 1, "one child tuple");
         equal(tuples[0].members[0].children[0].members[0].caption, "new caption");
     });
+
+    test("tuple with empty children are skipped", function() {
+        var axes = [
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "member 0", children: [] }, { name: "member 1", children: [] } ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "member 0", children: [] }, { name: "member 1", children: [] } ] },
+                        { members: [ { name: "member 0 - 0", parentName: "member 0", children: [] }, { name: "member 1", children: [] } ] }
+                    ]
+                }
+            },
+            {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "member 0", children: [] }, { name: "member 1", children: [] } ] },
+                        { members: [ { name: "member 0", children: [] }, { name: "member 1 - 0", parentName: "member 1", children: [] } ] }
+                    ]
+                }
+            }
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: axes.shift(),
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("member 0");
+        dataSource.expandColumn("member 1");
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1, "one root tuple");
+        equal(tuples[0].members[0].children.length, 1, "one child tuple in first member");
+        equal(tuples[0].members[1].children.length, 1, "one child tuple in second member");
+    });
 })();
 
