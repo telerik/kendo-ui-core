@@ -2260,19 +2260,11 @@ ul.keyboard-legend li a {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2),
        only screen and (min-device-pixel-ratio: 2) {
-    .new-widget {
-        background-image: url('tag-new@2x.png');
-        background-size: 18px 9px;
-    }
-
-    .beta-widget {
-        background-image: url('tag-beta@2x.png');
-        background-size: 18px 9px;
-    }
-
+    .new-widget,
+    .beta-widget,
     .pro-widget {
-        background-image: url('tag-pro@2x.png');
-        background-size: 18px 9px;
+        background-image: url('tags@2x.png');
+        background-size: 37px 27px;
     }
 }
 
@@ -2740,13 +2732,13 @@ a.footer-links:hover {
     top: 10px;
     height: 9px;
     width: 37px;
-    background-position: 100% 50%;
     background-repeat: no-repeat;
+    background-image: url(tags.png);
 }
 
-.new-widget { background-image: url(tag-new.png); }
-.beta-widget { background-image: url(tag-beta.png); }
-.pro-widget { background-image: url(tag-pro.png); }
+.new-widget { background-position: 100% 0; }
+.beta-widget { background-position: 100% -9px; }
+.pro-widget { background-position: 100% -18px; }
 
 .multiple-tags .pro-widget { top: 5px; }
 .multiple-tags .beta-widget,
