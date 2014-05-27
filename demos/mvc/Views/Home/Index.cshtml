@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-
+    ViewBag.SuppressFooter = true;
 }
 <script>
     var path = "";
@@ -10,7 +10,6 @@
 <div id="layout-search-wrapper" class="search-wrapper">
     <div class="search">
         <input id="example-search" placeholder="Search demos" />
-  @*      <span id="icon-search" class="k-uniE600"></span>*@
     </div>
 </div>
 
@@ -179,4 +178,6 @@
         </ul>
     </div>
     </div>
+
+    @Html.Partial("Footer")
 </div>

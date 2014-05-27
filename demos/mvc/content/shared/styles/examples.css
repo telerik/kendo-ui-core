@@ -2779,14 +2779,14 @@ ul.keyboard-legend li a {
 #footer
 {
     background-color: #2a2d33;
+    text-align: left;
+}
+
+#overview #footer {
     position:absolute;
     bottom: 0;
     width: 100%;
     clear: both;
-}
-
-#main #footer {
-    position: relative;
 }
 
 .footer-links {

@@ -6,14 +6,28 @@
     <div id="instructions-box">
         <h3>Instructions</h3>
         <ol id="instructions-list">
-            <li>
-                Select a theme to modify: <span id="themeChooser"></span>
-                <div id="themeChooser-container"></div>
+            <li class="themechooser">
+                <p>Select a theme to modify:</p>
+                <ul data-role="themechooser"
+                    data-template="theme-item-template"
+                    data-value="Silver"
+                    data-bind="source: themes, events: { change: updateTheme }"></ul>
+
+                <script id="theme-item-template" type="text/x-kendo-template">
+                    <li class="tc-item">
+                        # for (var i = 0; i < colors.length; i++) { #
+                            <span class="tc-color" style="background-color: #= colors[i] #"></span>
+                        # } #
+                        <span class="tc-name">#: name #</span>
+                    </li>
+                </script>
             </li>
             <li>Start the <a class="k-button" id="bookmarklet" href="#">Kendo UI ThemeBuilder</a></li>
             <li>Use the ThemeBuilder as a <strong>bookmarklet</strong> on your own pages! (Drag the button to your bookmarks bar)</li>
         </ol>
     </div>
+
+    <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>
 
     <script>
         $("#bookmarklet").attr("href", ("javascript:(function(){" +
@@ -200,6 +214,7 @@
     .content-wrap {
         width: 1200px;
         margin: 0 auto;
+        overflow: hidden;
     }
 
     h3 {
@@ -218,8 +233,27 @@
     }
 
     #instructions-list li {
-        padding: .4em 0;
         list-style-type: decimal;
+    }
+
+    .themechooser {
+        text-align: left;
+        border: 0;
+        background: none;
+    }
+
+    .themechooser ul {
+        border: 0;
+        -webkit-columns: 3;
+        -moz-columns: 3;
+        columns: 3;
+    }
+
+    .themechooser li {
+        display: inline-block;
+        padding: .4em 1em;
+        margin: .4em;
+        width: 160px;
     }
 
     .column .k-chart,
