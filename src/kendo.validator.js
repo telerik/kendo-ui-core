@@ -375,7 +375,7 @@ var __meta__ = {
                 rule;
 
             for (rule in rules) {
-                if (!rules[rule](input)) {
+                if (!rules[rule].call(this, input)) {
                     return { valid: false, key: rule };
                 }
             }
