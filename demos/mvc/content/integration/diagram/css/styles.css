@@ -247,6 +247,11 @@ body
     display: inline-block;
 }
 
+#menu > .k-menu
+{
+    height: 40px;
+}
+
 #menu .k-item > .k-link
 {
     padding: .8em 1.4em;
