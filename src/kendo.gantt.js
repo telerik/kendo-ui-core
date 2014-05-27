@@ -1090,14 +1090,17 @@ var __meta__ = {
             if (this.dataSource && this._refreshHandler) {
                 this.dataSource
                     .unbind("change", this._refreshHandler)
+                    .unbind("progress", this._progressHandler)
                     .unbind("error", this._errorHandler);
             } else {
                 this._refreshHandler = proxy(this.refresh, this);
+                this._progressHandler = proxy(this._requestStart, this);
                 this._errorHandler = proxy(this._error, this);
             }
 
             this.dataSource = kendo.data.GanttDataSource.create(dataSource)
                 .bind("change", this._refreshHandler)
+                .bind("progress", this._progressHandler)
                 .bind("error", this._errorHandler);
         },
 
@@ -1200,6 +1203,8 @@ var __meta__ = {
                 return;
             }
 
+            this._progress(false);
+
             var dataSource = this.dataSource;
             var taskTree = dataSource.taskTree();
 
@@ -1229,8 +1234,16 @@ var __meta__ = {
             this.trigger("dataBound");
         },
 
-        _error: function() {
+        _requestStart: function() {
+            this._progress(true);
+        },
 
+        _error: function() {
+            this._progress(false);
+        },
+
+        _progress: function(toggle) {
+            kendo.ui.progress(this.element, toggle);
         },
 
         _resizable: function() {
