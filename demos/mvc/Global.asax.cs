@@ -95,7 +95,7 @@ namespace Kendo
             routes.MapRoute(
                 "MobileDeviceIndex",
                 "m/{action}",
-                new { controller = "MobileDevice", action = "Index" }
+                new { controller = "MobileDevice" }
             );
 
             routes.MapRoute(
