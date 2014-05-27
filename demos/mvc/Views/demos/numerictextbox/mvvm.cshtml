@@ -1,7 +1,7 @@
-<div id="example" class="k-content">
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Enter a number</span>
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="width: 300px">
+            <h4>Enter a number</h4>
             <input data-role="numerictextbox"
                    data-format="c"
                    data-min="0"
@@ -12,14 +12,14 @@
                               events: { change: onChange }"
                    style="width: 180px">
         </div>
-        <div class="config-section console-section">
-            <div class="configHead">Console</div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
             <div class="console"></div>
         </div>
     </div>
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Configuration</span>
+    <div class="box">
+        <div class="box-col" style="width: 300px">
+            <h4>Configuration</h4>
             <div>
                 <label><input type="checkbox" data-bind="checked: isEnabled">Enable</label>
             </div>
@@ -27,8 +27,8 @@
                 <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
             </div>
         </div>
-        <div class="config-section" style="width: 440px">
-            <span class="configHead">Information</span>
+        <div class="box-col">
+            <h4>Information</h4>
             Kendo UI NumericTextBox supports the
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
