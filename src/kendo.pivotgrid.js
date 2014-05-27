@@ -233,7 +233,7 @@ var __meta__ = {
             }
 
             this._axes = {};
-            this._data = [];
+            this._data = this._observe([]);
 
             this._query({ filter: val, page: 1 });
         },
@@ -329,6 +329,10 @@ var __meta__ = {
         },
 
         _normalizeData: function(data, axes) {
+            if (!data.length) {
+                return data;
+            }
+
             var columns = (axes.columns || {}).tuples || [];
             var rows = (axes.rows || {}).tuples || [];
             var cell;
