@@ -4383,7 +4383,7 @@
         }
       }
     ],
-    "category": "TBD"
+    "category": "Interactivity & UX"
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
