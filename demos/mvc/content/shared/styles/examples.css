@@ -2705,18 +2705,46 @@ h5 {
 }
 
 .box .k-button {
-    background: #015991;
-    color: #fff;
     cursor: pointer;
     border-radius: 2px;
     padding: 2px 6px;
     font-size: inherit;
-    border-color: #015991;
+    color: #333;
+    background: #e1e5ea;
+    border-color: #c2ccd4;
 }
 
 .box .k-button:hover {
+    background: #c2ccd4;
+    color: #000;
+}
+
+.box .k-primary {
+    color: #fff;
+    background: #015991;
+    border-color: #015991;
+}
+
+.box .k-primary:hover {
     background: #013A5E;
     color: #fff;
+}
+
+.box .k-textbox,
+.box textarea {
+    background: #fff;
+    border-color: #ccc;
+    color: #555;
+    border-radius: 0;
+}
+
+.box .k-textbox:hover,
+.box .k-textbox:active,
+.box textarea:hover,
+.box textarea:active {
+    border-color: #999;
+    background: #fff;
+    color: #333;
 }
 
 .demo-hint {
