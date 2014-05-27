@@ -4392,13 +4392,13 @@
     "spriteCssClass": "integrationIcon",
     "items": [
       {
-        "text": "Kendo UI + jQuery templates",
-        "url": "integration/jquery-templates",
+        "text": "Kendo UI + Handlebars",
+        "url": "integration/handlebars",
         "title": {
-            "kendo-ui": "Integrating jQuery templates with Kendo UI Web examples"
+            "kendo-ui": "Integrating Handlebars templates with Kendo UI Web examples"
         },
         "meta": {
-            "kendo-ui": "This demo illustrates how jQuery templates can be integrated with the robust Kendo UI framework for web app development."
+            "kendo-ui": "This demo illustrates how Handlebars templates can be integrated with the robust Kendo UI framework for web app development."
         }
       },
       {
