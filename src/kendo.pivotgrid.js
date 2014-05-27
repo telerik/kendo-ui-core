@@ -14,6 +14,7 @@ var __meta__ = {
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        Class = kendo.Class,
         Widget = ui.Widget,
         DataSource = kendo.data.DataSource,
         toString = {}.toString,
@@ -270,7 +271,7 @@ var __meta__ = {
             var sourceMembers = source[idx].members;
             for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
                 if (!targetMembers[memberIndex].measure) {
-                    targetMembers[memberIndex].children = sourceMembers[memberIndex].children;
+                    [].push.apply(targetMembers[memberIndex].children, sourceMembers[memberIndex].children);
                 }
             }
         }
@@ -838,6 +839,8 @@ var __meta__ = {
             that._wrapper();
             that._createLayout();
 
+            that._columnBuilder = new ColumnBuilder();
+
             that._dataSource();
 
             if (that.options.autoBind) {
@@ -964,7 +967,7 @@ var __meta__ = {
 
             var data = dataSource.view();
 
-            var columnsTree = kendo_column_headers(tuples || []);
+            var columnsTree = that._columnBuilder.build(tuples || []);
             var rowsTree = kendo_row_headers(rows.tuples || []);
 
             that.columnsHeaderTree.render(columnsTree);
@@ -973,230 +976,238 @@ var __meta__ = {
         }
     });
 
+    //TODO: Rename to avoid any misunderstanding
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
-    //column headers
-    function kendo_column_headers(columns) {
-        return [ element("table", null, [kendo_columns_thead(columns)]) ];
-    }
+    var ColumnBuilder = Class.extend({
+        init: function(options) {
+            this._state(null);
+        },
 
-    var rows;
-    var hash;
-    var root;
+        build: function(tuples) {
+            return [
+                element("table", null, [this._thead(tuples)])
+            ];
+        },
 
-    function rootRowColSpan(row) {
-        var children = row.children;
-        var lastIdx = children.length - 1;
-        var cell = children[lastIdx];
-        var colspan = cell.attr.colspan || 1;
+        _cell: function(member) {
+            return element("th", null, [text(member.caption || member.name)]);
+        },
 
-        if (cell.attr.rowspan > 1) { //or check previous cell
-            colspan += children[lastIdx - 1].attr.colspan;
-        }
+        _memberIndex: function(members, parentMember) {
+            var index = 0;
+            var member = members[index];
 
-        return colspan;
-    }
+            while(member && member.parentName !== parentMember.name) {
+                index += 1;
+                member = members[index];
+            }
 
-    function kendo_columns_thead(columns) {
-        hash = {};
-        rows = [];
+            return member ? index : index - 1;
+        },
 
-        root = columns[0];
+        _normalizeRows: function() {
+            this._normalizeRowSpan();
+            this._normalizeColSpan();
+        },
 
-        if (root) {
-            render_column_header_row(root, 0);
-            normalizeRowSpan(rows);
+        _normalizeRowSpan: function() {
+            var rows = this.rows;
+            var rowsLength = rows.length;
+            var rowIdx = 0;
+            var row;
 
-            var rootMembers = root.members;
+            var cellsLength;
+            var cellIdx;
+            var cells;
+            var cell;
+            var attrName = kendo.attr("tuple-all");
+
+            for (; rowIdx < rowsLength; rowIdx++) {
+                row = rows[rowIdx];
+
+                if (row.rowspan === 1) {
+                    continue;
+                }
+
+                cells = row.children;
+
+                cellIdx = 0;
+                cellsLength = cells.length;
+
+                for (; cellIdx < cellsLength; cellIdx++) {
+                    cell = cells[cellIdx];
+
+                    if (cell.attr[attrName]) {
+                        cell.attr.rowspan = row.rowspan;
+                    }
+                }
+            }
+        },
+
+        _normalizeColSpan: function() {
+            var rootMembers = this.rootTuple.members;
             var idx = rootMembers.length - 1;
             var member = rootMembers[idx];
 
-            var row = hash[member.name + member.levelNum];
-            var colspan = rootRowColSpan(row);
+            var map = this.map;
+            var row = map[member.name + member.levelNum];
+            var colspan = this._rootRowColSpan(row);
             var currentColspan;
 
             while(idx) {
                 idx -= 1;
                 member = rootMembers[idx];
-                row = hash[member.name + member.levelNum];
+                row = map[member.name + member.levelNum];
 
                 if (colspan > 1) {
                     row.children[row.children.length - 1].attr.colspan = colspan;
                 }
 
-                colspan = rootRowColSpan(row);
+                colspan = this._rootRowColSpan(row);
             }
-        } else {
-            var row = element("tr", null, kendo_th(""));
-            rows.push(row);
-        }
+        },
 
-        return element("thead", null, rows);
-    }
+        _rootRowColSpan: function (row) {
+            var children = row.children;
+            var lastIdx = children.length - 1;
+            var cell = children[lastIdx];
+            var colspan = cell.attr.colspan || 1;
 
-    function render_column_header_row(tuple, memberIdx, parentMember) {
-        var member;
-        var row;
-
-        if (parentMember) {
-            memberIdx = findMemberIndex(tuple.members, parentMember);
-        }
-
-        member = tuple.members[memberIdx];
-
-        var rootName = root.members[memberIdx].name;
-        var level = Number(member.levelNum);
-        var rowKey = rootName + level;
-
-        row = hash[rowKey];
-        var hasRow = !!row;
-
-        if (!hasRow) {
-            row = element("tr", null, []);
-
-            row.colspan = 0;
-            row.rowspan = 1;
-            row.parentName = parentMember ? parentMember.name : "root";
-
-            hash[rowKey] = row;
-
-            //add row
-            var parent = hash[rootName + (level - 1)];
-            rows.splice(indexOfRow(parent) + 1, 0, row);
-        }
-
-        if (parentMember && parentMember.name !== row.parentName) {
-            row.parentName = parentMember.name;
-            row.colspan = 0;
-        }
-
-        var allCell;
-        var cell = kendo_th(member);
-        row.children.push(cell);
-
-        row.colspan += 1;
-
-        var children = member.children;
-        var newRows;
-
-        if (children[0]) {
-            var child;
-
-            allCell = kendo_th(member);
-            row.children.push(allCell);
-
-            for (var idx = 0, length = children.length; idx < length; idx++) {
-                child = children[idx];
-
-                childRow = render_column_header_row(child, 0, member);
+            if (cell.attr.rowspan > 1) {
+                colspan += children[lastIdx - 1].attr.colspan;
             }
 
-            var childColSpan = childRow.colspan;
+            return colspan;
+        },
 
-            cell.attr.colspan = childColSpan;
+        _rowIndex: function(row) {
+            var rows = this.rows;
+            var length = rows.length;
+            var idx = 0;
 
-            row.colspan += childColSpan;
-            row.rowspan = childRow.rowspan + 1;
-
-            if (tuple.members[memberIdx + 1]) {
-                //TODO: detect if next member has children
-                childRow = render_column_header_row(tuple, ++memberIdx);
-            }
-        } else if (tuple.members[memberIdx + 1]) {
-            render_column_header_row(tuple, ++memberIdx);
-        }
-
-        if (allCell) {
-            allCell.attr[kendo.attr("tuple-all")] = true;
-        } else {
-            cell.attr[kendo.attr("tuple-all")] = true;
-        }
-
-        return row;
-    }
-
-    function indexOfRow(row) {
-        for(var idx = 0, length = rows.length; idx < length; idx++) {
-            if (rows[idx] === row) {
-                break;
-            }
-        }
-
-        return idx;
-    }
-
-    function getCellsCount(row) {
-        if (!row) {
-            return 1;
-        }
-
-        var cells = row.children;
-        var length = cells.length;
-        var idx = 0;
-        var cell;
-
-        var count = 0;
-
-        for (; idx < length; idx++) {
-            cell = cells[idx];
-
-            count += cell.attr.colspan || 1;
-        }
-
-        return count;
-    }
-
-    function findMemberIndex(members, parentMember) {
-        var index = 0;
-        var member = members[index];
-
-        while(member && member.parentName !== parentMember.name) {
-            index++;
-            member = members[index];
-        }
-
-        return member ? index : index - 1;
-    }
-
-    function normalizeRowSpan(rows) {
-        var rowsLength = rows.length;
-        var rowIdx = 0;
-        var row;
-
-        var cellsLength;
-        var cellIdx;
-        var cells;
-        var cell;
-        var attrName = kendo.attr("tuple-all");
-
-        for (; rowIdx < rowsLength; rowIdx++) {
-            row = rows[rowIdx];
-
-            if (row.rowspan === 1) {
-                continue;
-            }
-
-            cells = row.children;
-
-            cellIdx = 0;
-            cellsLength = cells.length;
-
-            for (; cellIdx < cellsLength; cellIdx++) {
-                cell = cells[cellIdx];
-
-                if (cell.attr[attrName]) {
-                    cell.attr.rowspan = row.rowspan;
+            for(; idx < length; idx++) {
+                if (rows[idx] === row) {
+                    break;
                 }
             }
-        }
-    }
 
+            return idx;
+        },
+
+        _row: function(tuple, memberIndex, parentMember) {
+            var member = tuple.members[memberIndex];
+            var parentName = parentMember ? parentMember.name : "root";
+            var rootName = this.rootTuple.members[memberIndex].name;
+            var levelNum = member.levelNum;
+            var rowKey = rootName + levelNum;
+            var map = this.map;
+            var parentRow;
+
+            row = map[rowKey];
+
+            if (!row) {
+                row = element("tr", null, []);
+
+                row.parentName = parentName;
+                row.colspan = 0;
+                row.rowspan = 1;
+
+                map[rowKey] = row;
+                parentRow = map[rootName + (Number(levelNum) - 1)];
+
+                this.rows.splice(this._rowIndex(parentRow) + 1, 0, row);
+            }
+
+            if (parentName !== row.parentName) {
+                row.parentName = parentName;
+                row.colspan = 0;
+            }
+
+            return row;
+        },
+
+        _buildRows: function(tuple, memberIndex, parentMember) {
+            var members = tuple.members;
+            var children;
+            var childRow;
+            var member;
+            var row;
+
+            var allCell;
+            var cell;
+
+            var idx = 0;
+            var childrenLength;
+
+            if (parentMember) {
+                memberIndex = this._memberIndex(members, parentMember);
+            }
+
+            row = this._row(tuple, memberIndex, parentMember);
+
+            member = members[memberIndex];
+
+            cell = this._cell(member);
+            row.children.push(cell);
+            row.colspan += 1;
+
+            children = member.children;
+            childrenLength = children.length
+
+            if (childrenLength) {
+                allCell = this._cell(member);
+                row.children.push(allCell);
+
+                for (; idx < childrenLength; idx++) {
+                    childRow = this._buildRows(children[idx], 0, member);
+                }
+
+                cell.attr.colspan = childRow.colspan;
+
+                row.colspan += childRow.colspan;
+                row.rowspan = childRow.rowspan + 1;
+
+                if (members[memberIndex + 1]) {
+                    this._buildRows(tuple, ++memberIndex);
+                }
+            } else if (members[memberIndex + 1]) {
+                this._buildRows(tuple, ++memberIndex);
+            }
+
+            (allCell || cell).attr[kendo.attr("tuple-all")] = true;
+
+            return row;
+        },
+
+        _state: function(rootTuple) {
+            this.rows = [];
+            this.map = {};
+            this.rootTuple = rootTuple;
+        },
+
+        _thead: function(tuples) {
+            var root = tuples[0];
+
+            this._state(root);
+
+            if (root) {
+                this._buildRows(root, 0);
+                this._normalizeRows();
+            } else {
+                this.rows.push(element("tr", null, kendo_th("")));
+            }
+
+            return element("thead", null, this.rows);
+        }
+    });
+
+    //row headers
     function kendo_th(member, attr) {
         return element("th", attr, [text(member.caption || member.name)]);
     }
 
-    //row headers
     function kendo_row_headers(rows) {
         return [ element("table", null, [kendo_row_thead(rows)]) ];
     }
