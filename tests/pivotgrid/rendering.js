@@ -567,6 +567,57 @@
         equal(tr_dim1.find("th").attr("colspan"), 4);
     });
 
+    test("PivotGrid does not set colspan to the parent dimension if child was not expanded", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        equal(rows.length, 3);
+
+        var tr_dim0 = rows.eq(0);
+        var tr_dim1 = rows.eq(1);
+
+        ok(!tr_dim0.find("th").last().attr("colspan"));
+        ok(!tr_dim1.find("th").last().attr("colspan"));
+    });
+
+    test("PivotGrid calculates colspan of all expanded dimensions", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_1", parentName: "dim 2", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_2", parentName: "dim 2", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "level 1_3", parentName: "dim 2", levelNum: "1", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        var tr_dim0 = rows.eq(0);
+        var tr_dim1 = rows.eq(1);
+
+        equal(tr_dim0.find("th").last().attr("colspan"), 6);
+        equal(tr_dim1.find("th").last().attr("colspan"), 4);
+    });
+
+    //data attributes decoration
+
     test("PivotGrid adds tuple-all attr to the ALL tuple column without children", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", children: [] }] }

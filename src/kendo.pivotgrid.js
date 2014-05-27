@@ -985,6 +985,19 @@ var __meta__ = {
     var hash;
     var root;
 
+    function rootRowColSpan(row) {
+        var children = row.children;
+        var lastIdx = children.length - 1;
+        var cell = children[lastIdx];
+        var colspan = cell.attr.colspan || 1;
+
+        if (cell.attr.rowspan > 1) { //or check previous cell
+            colspan += children[lastIdx - 1].attr.colspan;
+        }
+
+        return colspan;
+    }
+
     function kendo_columns_thead(columns) {
         hash = {};
         rows = [];
@@ -995,29 +1008,29 @@ var __meta__ = {
             render_column_header_row(root, 0);
             normalizeRowSpan(rows);
 
-            //TODO: TEST this !!!
-            //Do not add colspan if any of other dimensions are not expanded!!!
-            //
             var rootMembers = root.members;
             var idx = rootMembers.length - 1;
             var member = rootMembers[idx];
 
             var row = hash[member.name + member.levelNum];
-            var colspan = row.colspan;
+            var colspan = rootRowColSpan(row);
+            var currentColspan;
 
-            idx--;
-
-            for (; idx > -1; idx--) {
+            while(idx) {
+                idx -= 1;
                 member = rootMembers[idx];
                 row = hash[member.name + member.levelNum];
-                row.children[row.children.length - 1].attr.colspan = colspan;
+
+                if (colspan > 1) {
+                    row.children[row.children.length - 1].attr.colspan = colspan;
+                }
+
+                colspan = rootRowColSpan(row);
             }
         } else {
             var row = element("tr", null, kendo_th(""));
             rows.push(row);
         }
-
-
 
         return element("thead", null, rows);
     }
