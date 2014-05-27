@@ -31,6 +31,7 @@ CORE_SRC_CSS = FileList[SRC_CSS]
     .exclude("dist/styles/web/kendo.common-bootstrap.less")
     .exclude("dist/styles/web/kendo.common.css")
     .exclude("dist/styles/web/kendo.common.less")
+	.exclude("dist/styles/web/common/gantt.less")
     .exclude("dist/styles/web/common/grid.less")
     .exclude("dist/styles/web/common/editor.less")
     .exclude("dist/styles/web/common/scheduler.less")
