@@ -1,17 +1,17 @@
 
-        <div id="example" class="k-content">
+        <div id="example">
 
 
-            <div class="configuration">
-                <span class="configHead">Configure</span>
+            <div class="box">
+                <h4>Configure</h4>
                 <ul class="options">
                     <li>
                         <label for="page">Page:</label>
-                        <input type="text" value="1" id="page" class="k-textbox" style="margin: -3px 0 3px;" />
+                        <input type="text" value="1" id="page" class="k-textbox" />
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order" style="width:115px;float:right;margin-top: -3px;">
+                        <select id="order">
                             <option value="ProductID">ID</option>
                             <option value="ProductName">Name</option>
                             <option value="UnitPrice">Price</option>
@@ -19,18 +19,18 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir" style="width:115px;float:right;margin-top: -3px;">
+                        <select id="dir">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
                     </li>
                     <li>
-                        <button class="k-button" id="apply">Apply</button>
+                        <button class="k-button" id="apply" style="margin-left: 74px;">Apply</button>
                     </li>
                 </ul>
             </div>
 
-            <div class="demo-section">
+            <div class="demo-section k-header">
                 <ul id="products"></ul>
             </div>
 
@@ -94,8 +94,11 @@
 
             <style scoped>
                 .demo-section {
-                    width: 492px;
-                    margin: 0;
+                    width: 465px;
+                }
+                .options label {
+                    display: inline-block;
+                    width: 70px;
                 }
                 #products {
                     padding: 10px;

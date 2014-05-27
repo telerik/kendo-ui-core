@@ -1,17 +1,17 @@
         <script src="../content/shared/js/people.js"></script>
 
-        <div id="example" class="k-content">
+        <div id="example">
 
-            <div class="configuration">
-                <span class="configHead">Configure</span>
+            <div class="box">
+                <h4>Configure</h4>
                 <ul class="options">
                     <li>
                         <label for="page">Page:</label>
-                        <input type="text" value="1" id="page" class="k-textbox" style="margin: -3px 0 3px;" />
+                        <input type="text" value="1" id="page" class="k-textbox" />
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order" style="width:115px;float:right;margin-top: -3px;">
+                        <select id="order">
                             <option value="Id">Id</option>
                             <option value="FirstName">First Name</option>
                             <option value="LastName">Last Name</option>
@@ -20,17 +20,18 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir" style="width:115px;float:right;margin-top: -3px;">
+                        <select id="dir">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
                     </li>
                     <li>
-                        <button class="k-button" id="apply">Apply</button>
+                        <button class="k-button" id="apply" style="margin-left: 74px;">Apply</button>
                     </li>
                 </ul>
             </div>
 
+            <div class="demo-section k-header">
             <table id="people" class="metrotable">
                 <thead>
                     <th>Id</th>
@@ -49,6 +50,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <script id="template" type="text/x-kendo-template">
                 <tr>
@@ -106,6 +108,13 @@
             </script>
 
             <style scoped>
+                .demo-section {
+                    width: 600px;
+                }
+                .options label {
+                    display: inline-block;
+                    width: 70px;
+                }
                 .metrotable {
                 	width: 520px;
                 	margin: 0 0 20px;
