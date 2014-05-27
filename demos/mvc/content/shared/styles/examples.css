@@ -1632,7 +1632,11 @@ pre.prettyprint
     line-height: 1.1em;
     padding:0.769em 1.462em;
     margin-right: 30px;
-    border-right: 1px solid #e2e4e7;
+    border-left: 1px solid #e2e4e7;
+}
+
+#codeStrip .k-link:nth-child(2) {
+    border-left: none;
 }
 
 #codeStrip li.k-state-active
@@ -2843,8 +2847,7 @@ a.footer-links:hover {
     list-style: none;
 }
 
-.root-nav-categories h3,
-#example-nav h4 {
+.root-nav-categories h3 {
     color: #000;
     font-size: 14px;
     line-height: 14px;
@@ -2856,16 +2859,21 @@ a.footer-links:hover {
 }
 
 #example-nav h4 {
-    margin-top: -1.714em;
+    color: #000;
+    font-size: 18px;
+    line-height: 15px;
+    font-weight: normal;
+    margin-top: -1.278em;
+    padding: 0.389em 0 1.222em 2.722em;
 }
 
 .root-nav-categories {
     margin-top: 1.417em;
 }
 
-#root-nav li,
-#example-nav li {
-   /*padding: 0.538em 0 0.538em 3.846em;*/
+#root-nav,
+#example-nav {
+    padding-bottom: 30px;
 }
 
 #root-nav li a,
@@ -2888,7 +2896,7 @@ a.footer-links:hover {
 
 #back-nav {
     color: #2d3e50;
-    font-size: 22px;
+    font-size: 18px;
     display: inline-block;
     margin-top: 0.818em;
     margin-left: 1.045em;
