@@ -1,7 +1,7 @@
         <div id="example" class="k-content">
-            <div class="demo-section">
-                <h3>What is Telerik Backend Services?</h3>
-                <p>Telerik Backend Services is a set of cloud-based services that enable developer to build and manage mobile apps in significantly faster, easier and more scalable way. Telerik Backend Services can significantly speed-up development by providing your app with data storage, user management and server-code execution. Unlike other products, Telerik Backend Services is the integrated cloud-storage provider for all Telerik products.</p>
+            <div class="box demo-section">
+                <h3>What are the Telerik Backend Services?</h3>
+                <p>Telerik Backend Services are a set of cloud-based services that enable developer to build and manage mobile apps in significantly faster, easier and more scalable way. Telerik Backend Services can significantly speed-up development by providing your app with data storage, user management and server-code execution. Unlike other products, Telerik Backend Services are the integrated cloud-storage provider for all Telerik products.</p>
                 <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/development/javascript-sdk/introduction" title="Getting started with Telerik Backend Services">More about Telerik Backend Services</a></p>
                 <p>&raquo; <a class="hyperlink" href="http://docs.telerik.com/platform/backend-services/what-are-telerik-backend-services" title="Introduction to Kendo UI and Everlive JavaScript integration">Integration with Kendo UI</a></p>
             </div>
@@ -11,13 +11,13 @@
             </div>
             <script src="../content/shared/js/everlive.all.js"></script>
             <script>
+                var everlive = new Everlive({
+                    apiKey: "3q4sHgIqESXbpvOp",
+                    scheme: "http"
+                });
+
                 $(document).ready(function() {
                     // initialize Everlive application with application API key
-                    var everlive = new Everlive({
-                        apiKey: "3q4sHgIqESXbpvOp",
-                        scheme: "http"
-                    });
-
                     var dataSource = new kendo.data.DataSource({
                         type: "everlive",
                         transport: {
