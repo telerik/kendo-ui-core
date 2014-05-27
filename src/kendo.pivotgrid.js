@@ -175,12 +175,13 @@ var __meta__ = {
 
             newData = this._normalizeData(newData, axes);
 
-            this._axes = this._mergeAxes(axes);
+            var result = this._mergeAxes(axes, newData);
+            this._axes = result.axes;
 
-            return newData;
+            return result.data;
         },
 
-        _mergeAxes: function(source) {
+        _mergeAxes: function(source, newData) {
             var parsedTuples;
             var columnMeasures = this.measuresAxis() === "columns";
             var result = {
@@ -193,20 +194,68 @@ var __meta__ = {
                 rows: normalizeAxis(source.rows)
             };
 
+            var columnsLength = source.columns.tuples.length;
+            var rowsLength = source.rows.tuples.length;
+
+            var oldLength;
+            if (columnsLength) {
+                oldLength = membersCount(result.columns.tuples);
+            } else {
+                oldLength = membersCount(result.rows.tuples);
+            }
+
             parsedTuples = parseSource(source.columns.tuples, columnMeasures ? this.measures() : []);
-            result.columns.tuples = mergeTuples(result.columns.tuples, parsedTuples);
+            var mergedColumns = mergeTuples(result.columns.tuples, parsedTuples);
+            result.columns.tuples = mergedColumns.tuple;
 
             parsedTuples = parseSource(source.rows.tuples, !columnMeasures ? this.measures() : []);
-            result.rows.tuples = mergeTuples(result.rows.tuples, parsedTuples);
+            var mergedRows = mergeTuples(result.rows.tuples, parsedTuples);
+            result.rows.tuples = mergedRows.tuple;
 
-            return result;
+            var columnIndex, rowIndex;
+            if (columnsLength) {
+                columnIndex = mergedColumns.deep;
+                rowIndex = mergedRows.deep;
+            } else {
+                columnIndex = mergedRows.deep;
+                rowIndex = mergedColumns.deep;
+
+                var temp = columnsLength;
+                columnsLength = rowsLength;
+                rowsLength = temp;
+            }
+
+            columnsLength = Math.max(columnsLength, 1);
+            rowsLength = Math.max(rowsLength, 1);
+
+            var data = this.data().toJSON();
+            var drop = 0;
+
+            if (data.length > 0) {
+                columnIndex--;
+                rowIndex--;
+                drop = 1;
+            }
+
+            var offset = oldLength + columnsLength;
+
+            for (var i = 0; i < rowsLength; i ++) {
+                //start = start + (i * (oldColumnsLength - start + columnsLength));
+                var index = columnIndex + (i * offset);
+                [].splice.apply(data, [index, drop].concat(newData.splice(0,columnsLength)));
+            }
+
+            return {
+                axes: result,
+                data: data
+            };
         },
 
         _normalizeData: function(data, axes) {
             var columns = (axes.columns || {}).tuples || [];
             var rows = (axes.rows || {}).tuples || [];
             var cell;
-            var axesLength = columns.length * (rows.length || 1);
+            var axesLength = (columns.length || 1) * (rows.length || 1);
             var idx, length;
 
             var result = new Array(axesLength);
@@ -241,6 +290,25 @@ var __meta__ = {
         }
     });
 
+    function membersCount(tuples) {
+        var queue = tuples.slice();
+        var current = queue.shift();
+        var idx, length, result = 0;
+
+        while (current) {
+            if (current.members) {
+                [].push.apply(queue, current.members);
+            } else if (current.children) {
+                result += current.children.length;
+                [].push.apply(queue, current.children);
+            }
+
+            current = queue.shift();
+        }
+
+        return result;
+    }
+
     function normalizeAxis(axis) {
         if (!axis) {
             axis = {
@@ -257,16 +325,22 @@ var __meta__ = {
 
     function mergeTuples(target, source) {
         if (!source[0]) {
-            return target;
+            return {
+                tuple: target,
+                deep: 0
+            };
         }
 
         var result = findExistingTuple(target, source[0]);
 
-        if (!result) {
-            return source;
+        if (!result || !result.tuple) {
+            return {
+                tuple: source,
+                deep: 0
+            };
         }
 
-        var targetMembers = result.members;
+        var targetMembers = result.tuple.members;
         for (var idx = 0, len = source.length; idx < len; idx ++) {
             var sourceMembers = source[idx].members;
             for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
@@ -276,19 +350,22 @@ var __meta__ = {
             }
         }
 
-        return target;
+        return {
+            tuple: target,
+            deep: result.deep
+        };
     }
 
     function findExistingTuple(tuples, current) {
         var members = current.members;
-        var tuple;
+        var result;
         for (var i = 0; i < members.length; i ++) {
-            tuple = findTuple(tuples, members[i].name, i);
-            if (!tuple) {
+            result = findTuple(tuples, members[i].name, i);
+            if (!result.tuple) {
                 return null;
             }
-            if (equalMembers(tuple.members, members)) {
-                return tuple;
+            if (equalMembers(result.tuple.members, members)) {
+                return result;
             }
         }
 
@@ -308,20 +385,34 @@ var __meta__ = {
     function findTuple(tuples, name, index) {
         var tuple, member;
         var idx , length;
+        var deep = 0;
+        var result;
+
         for (idx = 0, length = tuples.length; idx < length; idx ++) {
+            deep++;
             tuple = tuples[idx];
             member = tuple.members[index];
+
             if (member.name == name) {
-                return tuple;
+                return {
+                    tuple: tuple,
+                    deep: deep
+                };
             }
 
-            tuple = findTuple(member.children, name, index);
-            if (tuple) {
-                return tuple;
+            result = findTuple(member.children, name, index);
+            deep += result.deep;
+            if (result.tuple) {
+                result.deep = deep;
+                return result;
             }
         }
 
-        return tuple;
+        //return tuple;
+        return {
+            tuple: null,
+            deep: deep
+        };
     }
 
     function addMembers(members, map) {
