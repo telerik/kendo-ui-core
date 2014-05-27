@@ -2269,8 +2269,8 @@ a.footer-links:hover {
     background-image: url(tags.png);
 }
 
-.new-widget { background-position: 100% 0; }
-.beta-widget { background-position: 100% -9px; }
+.new-widget { background-position: 100% -9px; }
+.beta-widget { background-position: 100% 0; }
 .pro-widget { background-position: 100% -18px; }
 
 .multiple-tags .pro-widget { top: 5px; }
