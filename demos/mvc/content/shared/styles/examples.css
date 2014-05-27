@@ -119,7 +119,6 @@ a
 
 a:hover
 {
-    color: #036c9c;
     text-decoration: underline;
 }
 
@@ -773,7 +772,7 @@ div.submenu-box ol {
 
 #qr:hover
 {
-    color:#e26b1d;
+    color:#0487C4;
 }
 
 .k-qr
@@ -1857,7 +1856,7 @@ ul.keyboard-legend li {
 }
 
 ul.keyboard-legend li a {
-    color: #e26b1d;
+    color: #0487C4;
 }
 
 .button-preview {
@@ -2467,6 +2466,10 @@ a.footer-links:hover {
     padding: 2.5em 0 0.700em 0;
 }
 
+#overview a:hover {
+    color: #036c9c;
+}
+
 #overview-widgets,
 #applications-and-tools,
 #overview-applications,
@@ -2635,10 +2638,6 @@ h5 {
     line-height: 16px;
     height: 50px;
     padding-top: 3px;
-}
-
-.application a:hover {
-    text-decoration: none;
 }
 
 /* ##################### BOX ##################### */
