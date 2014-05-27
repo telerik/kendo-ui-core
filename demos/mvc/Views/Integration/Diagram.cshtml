@@ -16,13 +16,13 @@
         <script src="@Url.Script(scriptName)"></script>
         }
 
+        <script src="@Url.Content("~/content/integration/diagram/js/base64.js")"></script>
         <link rel="stylesheet" href="@Url.Content("~/content/integration/diagram/css/styles.css")" />
     </head>
     <body>
     <div id="menu">
         <div class="header">
             Diagram
-            <a href="">Download Source</a>
             <a onclick="about.center().open();">About</a>
         </div>
         <ul></ul>
@@ -358,12 +358,41 @@
                 diagram.clear();
             }
 
-            function save() {
-
+            function b64ToUint6 (nChr) {
+                return nChr > 64 && nChr < 91 ?
+                    nChr - 65
+                  : nChr > 96 && nChr < 123 ?
+                    nChr - 71
+                  : nChr > 47 && nChr < 58 ?
+                    nChr + 4
+                  : nChr === 43 ?
+                    62
+                  : nChr === 47 ?
+                    63
+                  :
+                    0;
             }
 
-            function load() {
+            function base64DecToArr (sBase64, nBlocksSize) {
+                var sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
+                    nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2, taBytes = new Uint8Array(nOutLen);
 
+                for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+                    nMod4 = nInIdx & 3;
+                    nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
+                    if (nMod4 === 3 || nInLen - nInIdx === 1) {
+                        for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+                            taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+                        }
+                        nUint24 = 0;
+                    }
+                }
+            
+                return taBytes;
+            }
+
+            function save() {
+                
             }
 
             function undo() {
@@ -384,8 +413,6 @@
 
             var actions = {
                 blank: reset,
-                open: load,
-                save: save,
                 undo: undo,
                 redo: redo,
                 copy: copyItem,
@@ -393,27 +420,70 @@
             };
 
             function onMenuSelect(e) {
-                var itemText = $(e.item).children(".k-link").text();
-                if (itemText === "New") {
+                var item = $(e.item),
+                    itemText = item.children(".k-link").text();
+
+                if (!item.hasClass("active")) {
                     return;
                 }
+
                 actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
             }
 
             $("#menu ul").kendoMenu({
                 dataSource: [
                     { text: "New", spriteCssClass: "new-item", items: [
-                        { text: "Blank", spriteCssClass: "blank-item" }
+                        { text: "Blank", spriteCssClass: "blank-item", cssClass: "active" }
                         ]
                     },
-                    { text: "Open", spriteCssClass: "open-item" },
-                    { text: "Save", spriteCssClass: "save-item" },
-                    { text: "Undo", spriteCssClass: "undo-item" },
-                    { text: "Redo", spriteCssClass: "redo-item" },
-                    { text: "Copy", spriteCssClass: "copy-item" },
-                    { text: "Paste", spriteCssClass: "paste-item" }
+                    { text: "Open<input id='upload' type='file' name='files' />", encoded: false, spriteCssClass: "open-item", cssClass: "upload-item" },
+                    { text: "Save<a id='export' download='diagram.json'></a>", encoded: false, spriteCssClass: "save-item" },
+                    { text: "Undo", spriteCssClass: "undo-item", cssClass: "active" },
+                    { text: "Redo", spriteCssClass: "redo-item", cssClass: "active" },
+                    { text: "Copy", spriteCssClass: "copy-item", cssClass: "active" },
+                    { text: "Paste", spriteCssClass: "paste-item", cssClass: "active" }
                 ],
                 select: onMenuSelect
+            });
+
+            $("#export").on("click", function() {
+                var json = JSON.stringify(diagram.save());
+        
+                if (navigator.msSaveBlob) {
+                    var blob = new Blob([json]);
+            
+                    navigator.msSaveBlob(blob, this.getAttribute("download"));
+                } else {
+                    this.href = 'data:text/json;charset=utf-8,' + json;
+                }
+            });
+
+            function onSelect(e) {
+                if (typeof(FileReader) !== "undefined") {
+                    var f = e.files[0].rawFile,
+                        reader = new FileReader;
+
+                    reader.onload = (function(file) {
+                        return function(e) {
+                            diagram.load(JSON.parse(e.target.result));
+                        };
+                    })(f);
+
+                    reader.readAsBinaryString(f);
+                }
+            }
+      
+            $("#upload").kendoUpload({
+                async: {
+                    saveUrl: "save",
+                    removeUrl: "remove",
+                    autoUpload: true
+                },
+                showFileList: false,
+                localization: {
+                    select: ""
+                },
+                select: onSelect
             });
 
             $("#splitter").kendoSplitter({

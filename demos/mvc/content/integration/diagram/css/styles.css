@@ -65,6 +65,49 @@ body
     background-position: -192px 0;
 }
 
+.k-menu .upload-item {
+    height: 35px;
+    overflow: hidden;
+    padding: 0;
+}
+    
+.k-menu .upload-item .k-dropzone {
+    padding: 0;
+}
+    
+.k-menu .k-upload {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+    
+.k-ie7 .k-menu .k-upload {
+    filter: alpha(opacity=0);
+}
+    
+.k-menu .upload-item .k-upload-button {
+    border-width: 0;
+    border-radius: 0;
+    height: 35px;
+    padding: 0;
+}
+
+.k-menu #export {
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+}
+
+.k-ie7 .k-menu #export {
+    filter: alpha(opacity=0);
+}
+
 .k-menu .k-sprite
 {
     background-image: url("../images/diagram-sprite.png");
