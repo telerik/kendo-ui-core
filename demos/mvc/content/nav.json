@@ -6452,7 +6452,7 @@
   {
     "text": "ActionSheet",
     "name": "actionsheet",
-    "api": "actionsheet/adaptive",
+    "api": "mobile/actionsheet",
     "documentation": {
        "kendo-ui": "getting-started/mobile/actionsheet",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
@@ -6496,7 +6496,7 @@
   {
     "text": "Button",
     "name": "mobile-button",
-    "api": "button/adaptive",
+    "api": "mobile/button",
     "documentation": {
        "kendo-ui": "getting-started/mobile/button",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebutton/overview"
@@ -6586,7 +6586,7 @@
   {
     "text": "ButtonGroup",
     "name": "buttongroup",
-    "api": "buttongroup/adaptive",
+    "api": "mobile/buttongroup",
     "documentation": {
        "kendo-ui": "getting-started/mobile/buttongroup",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilebuttongroup/overview"
@@ -6685,7 +6685,7 @@
   {
     "text": "Drawer",
     "name": "drawer",
-    "api": "drawer/adaptive",
+    "api": "mobile/drawer",
     "documentation": {
        "kendo-ui": "getting-started/mobile/drawer",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobiledrawer/overview"
@@ -6739,7 +6739,7 @@
   {
     "text": "ListView",
     "name": "mobile-listview",
-    "api": "listview/adaptive",
+    "api": "mobile/listview",
     "documentation": {
        "kendo-ui": "getting-started/mobile/listview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelistview/overview"
@@ -6919,7 +6919,7 @@
     "text": "ModalView",
     "name": "modalview",
     "packages": [ "!jsp", "!php" ],
-    "api": "modalview/adaptive",
+    "api": "mobile/modalview",
     "documentation": {
        "kendo-ui": "getting-started/mobile/modalview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilemodalview/overview"
@@ -6962,7 +6962,7 @@
   {
     "text": "NavBar",
     "name": "navbar",
-    "api": "navbar/adaptive",
+    "api": "mobile/navbar",
     "documentation": {
        "kendo-ui": "getting-started/mobile/navbar",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelanavbar/overview"
@@ -7017,7 +7017,7 @@
     "text": "PopOver",
     "name": "popover",
     "tablet": true,
-    "api": "popover/adaptive",
+    "api": "mobile/popover",
     "documentation": {
        "kendo-ui": "getting-started/mobile/popover",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilepopover/overview"
@@ -7061,7 +7061,7 @@
   {
     "text": "Scroller",
     "name": "scroller",
-    "api": "scroller/adaptive",
+    "api": "mobile/scroller",
     "documentation": {
        "kendo-ui": "getting-started/mobile/scroller",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescroller/overview"
@@ -7115,7 +7115,7 @@
   {
     "text": "ScrollView",
     "name": "scrollview",
-    "api": "scrollview/adaptive",
+    "api": "mobile/scrollview",
     "documentation": {
        "kendo-ui": "getting-started/mobile/scrollview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilescrollview/overview"
@@ -7185,7 +7185,7 @@
   {
     "text": "Switch",
     "name": "switch",
-    "api": "switch/adaptive",
+    "api": "mobile/switch",
     "documentation": {
        "kendo-ui": "getting-started/mobile/switch",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileswitch/overview"
@@ -7254,7 +7254,7 @@
   {
     "text": "TabStrip",
     "name": "mobile-tabstrip",
-    "api": "tabstrip/adaptive",
+    "api": "mobile/tabstrip",
     "documentation": {
        "kendo-ui": "getting-started/mobile/tabstrip",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobiletabstrip/overview"
@@ -7318,7 +7318,7 @@
   {
     "text": "Application",
     "name": "application",
-    "api": "application/adaptive",
+    "api": "mobile/application",
     "documentation": {
        "kendo-ui": "getting-started/mobile/application",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileapplication/overview"
@@ -7411,7 +7411,7 @@
   {
     "text": "Touch Events",
     "name": "touchevents",
-    "api": "touch/adaptive",
+    "api": "mobile/touch",
     "documentation": {
        "kendo-ui": "getting-started/mobile/touch"
     },
@@ -7435,7 +7435,7 @@
   {
     "text": "View",
     "name": "mobile-view",
-    "api": "view/adaptive",
+    "api": "mobile/view",
     "documentation": {
        "kendo-ui": "getting-started/mobile/view",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobileview/overview"
@@ -7481,7 +7481,7 @@
   {
     "text": "SplitView",
     "name": "SplitView",
-    "api": "splitview/adaptive",
+    "api": "mobile/splitview",
     "documentation": {
        "kendo-ui": "getting-started/mobile/splitview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilesplitview/overview"
@@ -7525,7 +7525,7 @@
   {
     "text": "Layout",
     "name": "mobile-layout",
-    "api": "layout/adaptive",
+    "api": "mobile/layout",
     "documentation": {
        "kendo-ui": "getting-started/mobile/layout",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/mobilelayout/overview"

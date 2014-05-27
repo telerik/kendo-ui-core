@@ -87,7 +87,7 @@ namespace Kendo.Controllers
                 }
                 else if (product == "aspnet-mvc")
                 {
-                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/wrappers/aspnet-mvc/kendo.mvc.ui.fluent" + Regex.Replace(api, "(web|dataviz|mobile)", "") + "builder";
+                    ViewBag.Api = "http://docs.telerik.com/kendo-ui/api/wrappers/aspnet-mvc/kendo.mvc.ui.fluent" + Regex.Replace(api, "(web|dataviz)", "").Replace("mobile/", "/mobile") + "builder";
                 }
             }
 
