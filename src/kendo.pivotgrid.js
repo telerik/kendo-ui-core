@@ -102,6 +102,14 @@ var __meta__ = {
             this._axes = {};
         },
 
+        options: {
+            serverSorting: true,
+            serverPaging: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true
+        },
+
         axes: function() {
             return this._axes;
         },
@@ -159,6 +167,19 @@ var __meta__ = {
             descriptors[other] = axis2;
 
             this.read(descriptors);
+        },
+
+        _process: function (data, e) {
+            this._view = data;
+
+            e = e || {};
+            e.items = e.items || this._view;
+
+            this.trigger(CHANGE, e);
+        },
+
+        query: function(options) {
+            this.read(this._mergeState(options));
         },
 
         expandColumn: function(path) {
@@ -755,6 +776,45 @@ var __meta__ = {
         return command;
     }
 
+    var filterFunctionFormats = {
+        contains: ", InStr({0}.MemberValue,\"{1}\")",
+        startswith: ", Left({0}.MemberValue,Len(\"{1}\"))=\"{1}\"",
+        endswith: ", Right({0}.MemberValue,Len(\"{1}\"))=\"{1}\""
+    }
+
+    function serializeFilters(filter) {
+        var command = "";
+
+        var filters = filter.filters;
+        for (var idx = 0; idx < filters.length; idx++) {
+            if (filters[idx].operator == "in") {
+                command += "{";
+                command += filters[idx].value;
+                command += "}";
+            } else {
+                command += "Filter("
+
+                var name = filters[idx].field;
+
+                if (name.indexOf("&") == -1) {
+                    name += ".[ALL]";
+                }
+
+                name += ".Children";
+
+                command += name;
+                command += kendo.format(filterFunctionFormats[filters[idx].operator], filters[idx].field, filters[idx].value);
+                command += ")";
+            }
+
+            if (idx < filters.length - 1) {
+                command += ",";
+            }
+        }
+
+        return command;
+    }
+
     var convertersMap = {
         read: function(options, type) {
             var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
@@ -787,7 +847,14 @@ var __meta__ = {
                 command += "} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS";
             }
 
-            command += " FROM [" + options.connection.cube + "]";
+            if (options.filter) {
+                command += " FROM ";
+                command += "(SELECT (";
+                command += serializeFilters(options.filter);
+                command += ") ON 0 FROM [" + options.connection.cube + "])";
+            } else {
+                command += " FROM [" + options.connection.cube + "]";
+            }
 
             if (measures.length == 1 && columns.length) {
                 command += " WHERE (" + measures.join(",") + ")";

@@ -139,6 +139,15 @@
         dataSource.read();
     });
 
+    test("server operations are enabled by default", function() {
+        var dataSource = new PivotDataSource({ });
+
+        ok(dataSource.options.serverFiltering);
+        ok(dataSource.options.serverPaging);
+        ok(dataSource.options.serverGrouping);
+        ok(dataSource.options.serverSorting);
+    });
+
     test("read calls reader axes method", 1, function() {
         var dataSource = new PivotDataSource({
             schema: {
@@ -793,6 +802,58 @@
 
         ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{[bar],[baz]}})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
            'FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap in filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "in", value: "[foo].&[1], [foo].&[2]" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT ({[foo].&amp;[1], [foo].&amp;[2]}) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap contains filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "contains", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, InStr([foo].MemberValue,"zoo"))) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap startswith filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "startswith", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, Left([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap endswith filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "endswith", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, Right([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
     module("XmlaDataReader initialziation", { });
