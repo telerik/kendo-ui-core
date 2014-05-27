@@ -311,6 +311,14 @@
             teardown: destroyChart
         });
 
+        test("overlay elements have same model id", function() {
+            var group = firstPoint.highlightOverlay(view);
+            for (var i = 0; i < group.children.length; i++) {
+                var element = group.children[i];
+                equal(element.options.data.modelId, firstPoint.modelId);
+            };
+        });
+
         test("highlightOverlay renders default border width", function() {
             var rect = firstPoint.highlightOverlay(view).children[0];
 

@@ -17,7 +17,8 @@
     function createHighlight() {
         viewMock = {
             renderElement: function(element) {
-                return $("<div class='" + element.type + "'></div>")[0];
+                return $("<div class='" + element.type + "'>" +
+                         element.children + "</div>")[0];
             }
         };
 
@@ -36,7 +37,7 @@
 
     var elementStub = {
         highlightOverlay: function() {
-            return { type: "overlay" };
+            return { type: "overlay", children: "" };
         },
         owner: {
             id: "ownergroup"
@@ -100,13 +101,35 @@
         });
 
         // ------------------------------------------------------------
+        module("Highlight / Overlay / isOverlay", {
+            setup: createHighlight,
+            teardown: destroyHighlight
+        });
+
+        test("returns true for overlay element", function() {
+            highlight.show(elementStub);
+            ok(highlight.isOverlay($(".overlay")[0]));
+        });
+
+        test("returns true for overlay child elements", function() {
+            highlight.show({
+                highlightOverlay: function() {
+                    return { children: "<div class='child'></div>" };
+                }
+            });
+
+            ok(highlight.isOverlay($(".child")[0]));
+        });
+
+        test("returns false for other elements", function() {
+            highlight.show(elementStub);
+            ok(!highlight.isOverlay(document.body));
+        });
+
+        // ------------------------------------------------------------
         module("Highlight / Overlay / Multiple points", {
-            setup: function() {
-                createHighlight();
-            },
-            teardown: function() {
-                QUnit.fixture.empty();
-            }
+            setup: createHighlight,
+            teardown: destroyHighlight
         });
 
         test("Retrieves overlay elements", 2, function() {

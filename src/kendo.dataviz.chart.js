@@ -854,8 +854,7 @@ var __meta__ = {
                 tooltipOptions = chart.options.tooltip,
                 point;
 
-            if (chart._suppressHover || !highlight ||
-                inArray(e.target, highlight._overlays) || chart._sharedTooltip()) {
+            if (chart._suppressHover || !highlight || highlight.isOverlay(e.target) || chart._sharedTooltip()) {
                 return;
             }
 
@@ -5821,7 +5820,7 @@ var __meta__ = {
                 border = highlight.border,
                 borderColor = point.getBorderColor(),
                 line = highlight.line,
-                data = { data: { modelId: pointOptions.modelId } },
+                data = { data: { modelId: point.modelId } },
                 rectStyle = deepExtend({}, data, options, {
                     stroke: borderColor,
                     strokeOpacity: border.opacity,
@@ -9487,6 +9486,19 @@ var __meta__ = {
             }
 
             highlight._points = [];
+        },
+
+        isOverlay: function(element) {
+            var overlays = this._overlays;
+
+            for (var i = 0; i < overlays.length; i++) {
+                var current = overlays[i];
+                if (element == current || $.contains(current, element)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     });
 
