@@ -1,6 +1,6 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
-        parent, child,
+        parent, child, third,
         datasource;
 
     function mockedDataSource() {
@@ -24,7 +24,8 @@
         setup: function() {
             kendo.ns = "kendo-";
             parent = $("<input id='parent' />").appendTo(QUnit.fixture);
-            child = $("<input />").appendTo(QUnit.fixture);
+            child = $("<input id='child' />").appendTo(QUnit.fixture);
+            third = $("<input />").appendTo(QUnit.fixture);
             datasource = mockedDataSource();
         },
 
@@ -37,8 +38,13 @@
                 child.data("kendoDropDownList").destroy();
             }
 
+            if (third.data("kendoDropDownList")) {
+                third.data("kendoDropDownList").destroy();
+            }
+
             parent.closest(".k-widget").remove();
             child.closest(".k-widget").remove();
+            third.closest(".k-widget").remove();
        }
     });
 
@@ -477,5 +483,33 @@
         parent.data("kendoDropDownList").ul.children().eq(1).click();
 
         equal(child.data("kendoDropDownList").value(), "");
+    });
+
+    test("third combo is bound when only local data is used", function() {
+        var categories = new DropDownList(parent, {
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: { data: [{"CategoryName": "Condiments", "CategoryID": 2}] },
+            value: 2
+        });
+
+        var products = new DropDownList(child, {
+            cascadeFrom: "parent",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: { data: [{"ProductName": "Chef Anton's Gumbo Mix", "ProductID": 5, "CategoryID": 2}, {"ProductName": "Aniseed Syrup", "ProductID": 3, "CategoryID": 2}] },
+            value: 5
+        });
+
+        var orders = new DropDownList(third, {
+            cascadeFrom: "child",
+            dataTextField: "ShipCity",
+            dataValueField: "OrderID",
+            dataSource: { data: [{"ShipCity": "Graz", "OrderID": 10382, "ProductID": 5}, {"ShipCity": "London", "OrderID": 10289, "ProductID": 5}] },
+            value: 10382
+        });
+
+        equal(orders.value(), "10382");
+        ok(!orders.element.is("[disabled]"));
     });
 })();

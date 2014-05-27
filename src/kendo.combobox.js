@@ -79,11 +79,11 @@ var __meta__ = {
 
             that._enable();
 
+            that._oldIndex = that.selectedIndex = -1;
+
             that._cascade();
 
             that._aria();
-
-            that._oldIndex = that.selectedIndex = -1;
 
             if (options.autoBind) {
                 that._filterSource();

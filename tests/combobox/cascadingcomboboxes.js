@@ -18,7 +18,7 @@ module("kendo.ui.ComboBox Cascading ComboBoxes", {
     setup: function() {
         kendo.effects.disable();
         parent = $("<input id='parent' />").appendTo(QUnit.fixture);
-        child = $("<input />").appendTo(QUnit.fixture);
+        child = $("<input id='child' />").appendTo(QUnit.fixture);
         third = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
@@ -339,7 +339,7 @@ test("Child on third level is disabled", function() {
         ]
     });
 
-    child.attr("id", "child").kendoComboBox({
+    child.kendoComboBox({
         cascadeFrom: "parent", //id of the parent
         dataTextField: "childID",
         dataValueField: "childID",
@@ -572,6 +572,40 @@ asyncTest("filtering child combo does not re-input the selected value", 1, funct
                 type: "keydown",
                 keyCode: kendo.keys.BACKSPACE
            });
+});
+
+test("third combo is bound when only local data is used", function() {
+    var categories = new ComboBox(parent, {
+        filter: "contains",
+        placeholder: "Select category...",
+        dataTextField: "CategoryName",
+        dataValueField: "CategoryID",
+        dataSource: { data: [{"CategoryName": "Condiments", "CategoryID": 2}] },
+        value: 2
+    });
+
+    var products = new ComboBox(child, {
+        cascadeFrom: "parent",
+        filter: "contains",
+        placeholder: "Select product...",
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        dataSource: { data: [{"ProductName": "Chef Anton's Gumbo Mix", "ProductID": 5, "CategoryID": 2}, {"ProductName": "Aniseed Syrup", "ProductID": 3, "CategoryID": 2}] },
+        value: 5
+    });
+
+    var orders = new ComboBox(third, {
+        cascadeFrom: "child",
+        filter: "contains",
+        placeholder: "Select order...",
+        dataTextField: "ShipCity",
+        dataValueField: "OrderID",
+        dataSource: { data: [{"ShipCity": "Graz", "OrderID": 10382, "ProductID": 5}, {"ShipCity": "London", "OrderID": 10289, "ProductID": 5}] },
+        value: 10382
+    });
+
+    equal(orders.value(), "10382");
+    ok(!orders.element.is("[disabled]"));
 });
 
 })();
