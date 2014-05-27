@@ -16,8 +16,22 @@ namespace Kendo.Extensions
         {
             var href = html.ExampleUrl(example);
 
+            var className = "";
+
+            if (example.New) {
+                className += "new-example";
+            }
+
+            var routeData = html.ViewContext.RouteData;
+            var currentAction = routeData.Values["section"];
+            var currentController = routeData.Values["example"];
+            if (href.EndsWith(currentAction + "/" + currentController))
+            {
+                className += " active";
+            }
+
             return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
-                    example.New ? "class=\"new-example\"" : "",
+                    !String.IsNullOrEmpty(className) ? "class=\"" + className + "\"" : "",
                     example.External ? "rel=\"external\"" : "",
                     href,
                     example.Text

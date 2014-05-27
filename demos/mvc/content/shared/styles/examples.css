@@ -2130,6 +2130,11 @@ a.footer-links:hover {
 
 }
 
+#example-nav .active {
+    background-color: #e2e4e7;
+    cursor: default;
+}
+
 #back-nav {
     color: #2d3e50;
     font-size: 18px;
