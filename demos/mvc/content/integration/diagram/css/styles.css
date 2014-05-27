@@ -272,6 +272,7 @@ body
 
 .header a
 {
+    cursor: pointer;
     font-weight: normal;
     font-size: 14px;
     text-decoration: none;
@@ -286,18 +287,66 @@ body
     text-decoration: underline;
 }
 
+div.about
+{
+    color: #333;
+    padding: 20px 30px;
+}
+
 .about ul
 {
     display: inline-block;
     vertical-align: top;
-    list-style: none;
-    padding-left: 95px;
+    padding-left: 90px;
     margin: 0;
-    width: 160px;
+    width: 130px;
+    color: #25A0DA;
+}
+
+.about a
+{
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.about a:hover
+{
+    text-decoration: underline;
 }
 
 .about h2,
 .about h3
 {
-    text-align: center;
+    color: #000;
+    font-size: 16px;
+}
+
+.about h3
+{
+    margin-top: 25px;
+    padding-top: 25px;
+    display: block;
+    border-top: 1px solid #eee;
+}
+
+.about p
+{
+    margin: 25px 0;
+}
+
+.k-window-titlebar
+{
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    padding: .6em 0;
+    text-indent: .4em;
+}
+
+.k-window-actions
+{
+    text-indent: 0;
+    margin-right: .2em;
+    margin-top: .2em;
 }
