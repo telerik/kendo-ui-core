@@ -101,7 +101,7 @@ var __meta__ = {
                 toolbar: function(options) {
                     var element = $('<div class="' + SPLIT_BUTTON + '"></div>'),
                         mainButton = components.button.toolbar(options),
-                        arrowButton = $('<a href="" class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="k-icon k-i-arrow-s"></span></a>'),
+                        arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="k-icon k-i-arrow-s"></span></a>'),
                         popupElement = $('<ul class="' + SPLIT_BUTTON_DROPDOWN + '"></ul>'),
                         popup,
                         items = options.items,
@@ -177,7 +177,7 @@ var __meta__ = {
         };
 
         function createButton(options, useButtonTag) {
-            var element = useButtonTag ? $('<button></button>') : $('<a href=""></a>');
+            var element = useButtonTag ? $('<button></button>') : $('<a></a>');
 
             element.data({ type: "button" });
 
@@ -193,7 +193,7 @@ var __meta__ = {
             }
 
             if (options.group) {
-                element.attr("data-group", options.group);
+                element.attr(kendo.attr("group"), options.group);
             }
 
             return element;
@@ -339,10 +339,6 @@ var __meta__ = {
                         tap: proxy(that._toggleOverflow, that)
                     });
 
-                    //click event cannot be prevented from the UserEvents
-                    element.on(CLICK, "." + OVERFLOW_ANCHOR, function(e) {
-                        e.preventDefault();
-                    });
                 }
 
                 if(options.items && options.items.length) {
@@ -356,19 +352,9 @@ var __meta__ = {
                     tap: proxy(that._buttonClick, that)
                 });
 
-                //click event cannot be prevented from the UserEvents
-                element.on(CLICK, "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")", function(e) {
-                    e.preventDefault();
-                });
-
                 that.splitButtonUserEvents = new kendo.UserEvents(that.element, {
                     filter: "." + SPLIT_BUTTON_ARROW,
                     tap: proxy(that._toggle, that)
-                });
-
-                //click event cannot be prevented from the UserEvents
-                element.on(CLICK, "." + SPLIT_BUTTON_ARROW, function(e) {
-                    e.preventDefault();
                 });
 
                 kendo.notify(that);
@@ -458,9 +444,21 @@ var __meta__ = {
                 }
             },
 
+            remove: function(element) {
+                var toolbarElement = $(element),
+                    type = toolbarElement.data("type"),
+                    uid = toolbarElement.attr(kendo.attr("uid"));
+
+                if (type === "splitButton") {
+                    toolbarElement.data("kendoPopup").destroy();
+                }
+
+                $("[" + kendo.attr("uid") + "='" + uid + "']").remove();
+            },
+
             _attributes: function(element, options) {
-                element.attr("data-uid", options.uid);
-                element.attr("data-overflow", options.overflow || OVERFLOW_AUTO);
+                element.attr(kendo.attr("uid"), options.uid);
+                element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);
             },
 
             _renderOverflow: function() {
