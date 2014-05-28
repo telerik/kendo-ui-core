@@ -464,7 +464,7 @@ var __meta__ = {
             return data;
         },
 
-        update: function(task, taksInfo) {
+        update: function(task, taskInfo) {
             var that = this;
             var oldValue;
 
@@ -498,24 +498,27 @@ var __meta__ = {
                 }
             };
 
-            if (taksInfo.parentId !== undefined) {
+            if (taskInfo.parentId !== undefined) {
+
                 oldValue = task.get("parentId");
 
-                task.set("parentId", taksInfo.parentId);
+                if (oldValue !== taskInfo.parentId) {
+                    task.set("parentId", taskInfo.parentId);
 
-                that._childRemoved(oldValue, task.get("orderId"));
+                    that._childRemoved(oldValue, task.get("orderId"));
 
-                task.set("orderId", that.taskSiblings(task).length - 1);
-                that._resolveSummaryFields(that.taskParent(task));
+                    task.set("orderId", that.taskSiblings(task).length - 1);
+                    that._resolveSummaryFields(that.taskParent(task));
+                }
 
-                delete taksInfo.parentId;
+                delete taskInfo.parentId;
             }
 
             task.bind("change", modelChangeHandler);
 
-            for (var field in taksInfo) {
+            for (var field in taskInfo) {
                 oldValue = task.get(field);
-                task.set(field, taksInfo[field]);
+                task.set(field, taskInfo[field]);
             }
 
             task.unbind("change", modelChangeHandler);
