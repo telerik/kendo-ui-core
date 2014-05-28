@@ -2806,6 +2806,7 @@
   },
   {
     "text": "Slider",
+    "disableInMobile": true,
     "name": "slider",
     "api": "web/slider",
     "documentation": {
@@ -3756,6 +3757,7 @@
     "text": "Window",
     "name": "window",
     "api": "web/window",
+    "disableInMobile": true,
     "documentation": {
        "kendo-ui": "getting-started/web/window/overview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/window/overview",
@@ -4145,7 +4147,7 @@
   },
   {
     "packages": [ "!mvc", "!jsp", "!php" ],
-    "text": "Effects",
+"text": "Effects",
     "name": "fx",
     "api": "framework/kendo",
     "documentation": {
