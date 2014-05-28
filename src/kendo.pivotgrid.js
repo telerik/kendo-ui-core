@@ -283,7 +283,6 @@ var __meta__ = {
             var newColumnsLength = sourceAxes.columns.tuples.length;
             var newRowsLength = sourceAxes.rows.tuples.length;
             var oldColumnsLength = membersCount(axes.columns.tuples);
-            var oldRowsLength = membersCount(axes.rows.tuples);
 
             var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures ? this.measures() : []);
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples);
@@ -303,7 +302,7 @@ var __meta__ = {
                 data = this._mergeColumnData(data, mergedColumns.deep, newRowsLength, newColumnsLength, offset);
             } else {
                 //rows are expanded
-                data = this._mergeRowData(data, mergedRows.deep, newColumnsLength, oldRowsLength);
+                data = this._mergeRowData(data, mergedRows.deep, newColumnsLength);
             }
 
             return {
