@@ -40,9 +40,11 @@ var __meta__ = {
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles#">' +
-            '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
-                '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
-            '</ul>' +
+            '#if (editable == true) {#'+
+                '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
+                    '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
+                '</ul>' +
+            '#}#' +
             '<ul class="k-reset k-header k-toolbar k-gantt-views">' +
                 '#for(var view in views){#' +
                     '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="k-link">#=views[view].title#</a></li>' +
@@ -829,7 +831,8 @@ var __meta__ = {
                 action: {
                     data: "add",
                     title: this.options.messages.actions.append
-                }
+                },
+                editable: this.options.editable
             }));
 
             this.wrapper.prepend(toolbar);
@@ -857,6 +860,10 @@ var __meta__ = {
         },
 
         _footer: function() {
+            if (this.options.editable !== true) {
+                return;
+            }
+
             var footer = $(FOOTER_TEMPLATE({
                 styles: TOOLBAR_CLASS_NAMES,
                 action: {
@@ -872,7 +879,7 @@ var __meta__ = {
         _adjustDimensions: function() {
             var element = this.element;
             var toolbarHeight = this.toolbar.outerHeight();
-            var footerHeight = this.footer.outerHeight();
+            var footerHeight = this.footer ? this.footer.outerHeight() : 0;
             var totalHeight = element.height();
             var totalWidth = element.width();
             var splitBarWidth = element.find(".k-splitbar").outerWidth();
@@ -931,6 +938,10 @@ var __meta__ = {
 
                 dataSource.sync();
             };
+
+            if (this.options.editable !== true) {
+                return;
+            }
 
             this.footerDropDown = new TaskDropDown(this.footer.children(".k-gantt-actions").eq(0), {
                 messages: {

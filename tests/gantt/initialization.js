@@ -83,6 +83,12 @@
         equal(gantt.wrapper.children(".k-gantt-toolbar")[1], gantt.footer[0]);
     });
 
+    test("footer is not created when not editable", function() {
+        var gantt = new Gantt(element, { editable: false });
+
+        ok(!gantt.footer);
+    });
+
     test("css classes added to the footer", function () {
         var gantt = new Gantt(element);
 
@@ -103,6 +109,12 @@
 
         ok(gantt.toolbar.find(".k-gantt-actions").length);
         ok(gantt.toolbar.find(".k-gantt-actions").hasClass("k-reset k-header k-toolbar"));
+    });
+
+    test("toolbar action button are not added when non editable", function() {
+        var gantt = new Gantt(element, { editable: false });
+
+        equal(gantt.toolbar.find(".k-gantt-actions").length, 0);
     });
 
     test("toolbar action button's elements are rendered", 4, function () {
@@ -187,6 +199,12 @@
         ok(gantt.headerDropDown instanceof kendo.Observable);
     });
 
+    test("toolbar action dropDown is not created when non editable", function() {
+        var gantt = new Gantt(element, { editable: false });
+
+        ok(!gantt.headerDropDown);
+    });
+
     test("toolbar action dropDown has command event handler attached", function() {
         var gantt = new Gantt(element);
 
@@ -198,6 +216,12 @@
 
         ok(gantt.footerDropDown);
         ok(gantt.footerDropDown instanceof kendo.Observable);
+    });
+
+    test("footer action dropDown is not created when non editable", function() {
+        var gantt = new Gantt(element, { editable: false });
+
+        ok(!gantt.footerDropDown);
     });
 
     test("footer action dropDown has command event handler attached", function() {
