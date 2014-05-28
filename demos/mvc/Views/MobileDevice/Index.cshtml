@@ -12,8 +12,9 @@
     <link href="@Url.Content("~/content/mobile/examples.css")" rel="stylesheet" />
 
     @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
-        <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+        <link href="@Url.Style(styleName).Replace("silver", ViewBag.Theme)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
+
     @if (ViewBag.Debug) {
         <script src="@Url.Content("~/content/shared/js/less.js")"></script>
     }
@@ -26,6 +27,10 @@
         var NAV_JSON_URL = "@Url.Content("~/content/nav.json")";
         var navProduct = "@ViewBag.NavProduct";
         var product = "@ViewBag.Product";
+
+        window.kendoTheme = "@ViewBag.Theme";
+        window.kendoMobileTheme = "@ViewBag.MobileTheme";
+        window.kendoCommonFile = "@ViewBag.CommonFile";
     </script>
 
     <script src="@Url.Content("~/content/shared/js/theme-chooser.js")"></script>

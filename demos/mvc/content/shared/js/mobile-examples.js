@@ -49,7 +49,16 @@ function checkSearch(e) {
 }
 
 function pickInitialTheme(e) {
-    e.sender.items().filter(":contains(Silver)").addClass("current");
+    var view = e.sender.dataSource.view();
+    for (var i = 0; i < view.length; i++) {
+        if (view[i].value === window.kendoTheme) {
+            e.sender.items()
+                .filter("[data-uid='" + view[i].uid + "']")
+                .addClass("current");
+
+            break;
+        }
+    }
 }
 
 function showDemoLayout(e) {

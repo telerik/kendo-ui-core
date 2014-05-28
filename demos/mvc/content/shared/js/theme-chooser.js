@@ -150,7 +150,6 @@
         updateTheme: function(e) {
             var themeName = e.item.value;
             ThemeChooser.changeTheme(themeName, true);
-            cookie("theme", themeName, Infinity, "/");
         },
 
         updateCommon: function(e) {
@@ -292,12 +291,13 @@
             ThemeChooser.replaceWebMobileTheme(themeName);
             ThemeChooser.replaceDVTheme(themeName);
             ThemeChooser.publishTheme(themeName);
+            cookie("theme", themeName, Infinity, "/");
         },
 
         publishTheme: function (themeName) {
             var themable = ["Chart", "Diagram", "StockChart", "Sparkline", "RadialGauge", "LinearGauge"];
 
-            if (kendo.dataviz) {
+            if (kendo.dataviz && themeName) {
                 for (var i = 0; i < themable.length; i++) {
                     var widget = kendo.dataviz.ui[themable[i]];
 
@@ -307,8 +307,11 @@
                 }
             }
 
+            if (themeName) {
+                $(doc).data("kendoSkin", themeName);
+            }
+
             $("#example").trigger("kendo:skinChange");
-            $(doc).data("kendoSkin", themeName);
         },
 
         animateCssChange: function(options) {

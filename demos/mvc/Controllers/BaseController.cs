@@ -99,5 +99,15 @@ namespace Kendo.Controllers
         {
             return Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
         }
+
+        protected void SetTheme() {
+            var ThemeCookie = HttpContext.Request.Cookies["theme"];
+            var MobileThemeCookie = HttpContext.Request.Cookies["mobileTheme"];
+            var CommonFileCookie = HttpContext.Request.Cookies["commonFile"];
+
+            ViewBag.Theme = ThemeCookie == null ? "silver" : ThemeCookie.Value;
+            ViewBag.MobileTheme = MobileThemeCookie == null ? "ios7" : MobileThemeCookie.Value;
+            ViewBag.CommonFile = CommonFileCookie == null ? "common" : CommonFileCookie.Value;
+        }
     }
 }

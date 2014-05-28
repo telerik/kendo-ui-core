@@ -12,12 +12,16 @@ namespace Kendo.Controllers
         {
             ViewBag.Product = CurrentProduct();
             ViewBag.NavProduct = CurrentNavProduct();
+
 #if DEBUG
             ViewBag.Debug = true;
 #else
             ViewBag.Debug = false;
 #endif
+
+            SetTheme();
             LoadNavigation();
+
             return View();
         }
 
