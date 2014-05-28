@@ -10,65 +10,99 @@
         <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
-        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
-        <style>
-            th {
-                border: 1px solid black;
-                vertical-align: top;
-            }
-        </style>
     </head>
     <body>
-        <button id="expand-one">Expand Calendar</button>
-        <button id="expand-two">Expand 2005</button>
+        <button id="expand-city">Expand City</button>
+        <button id="expand-calendar">Expand Calendar</button>
+        <button id="expand-2005">Expand 2005</button>
+        <button id="expand-2006">Expand 2006</button>
+
+        <button id="expand-2005_2">Expand 2005.[2]</button>
+        <button id="expand-2006_1">Expand 2006.[1]</button>
+        <button id="expand-2006_2">Expand 2006.[2]</button>
+
+        <button id="expand-2005-city">Expand 2005 City</button>
+        <button id="expand-2005-2-city">Expand 2005-2 City</button>
 
         <div id="pivotgrid"></div>
 
-    <script>
-        $("#expand-one").click(function() {
-            var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-
-//            dataSource.expandColumn("[Date].[Calendar].[Year].&[2005].&[2]");
-            dataSource.expandRow("[Product].[Product Name]");
-        });
-
-        $("#expand-two").click(function() {
-            var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-
-            dataSource.expandColumn("[Date].[Calendar].[Year].&[2005]");
-        });
-
-
-        $(function() {
-            $("#pivotgrid").kendoPivotGrid({
-                dataSource: {
-                    type: "xmla",
-                    columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-                    rows: [ { name: "[Product].[Category]" }, { name: "[Product].[Product Name]" }],
-                    measures: ["[Measures].[Internet Order Lines Count]"],
-                    transport: {
-                        connection: {
-                            catalog: "Adventure Works Internet Sales Model",
-                            cube: "Adventure Works Internet Sales Model"
-                        },
-                        read: {
-                            url: "http://krustev:8080/olap/msmdpump.dll",
-                            dataType: "text",
-                            contentType: "text/xml",
-                            type: "POST"
-                        }
-                    },
-                    schema: {
-                       type: "xmla"
-                    },
-                    error: function(e) {
-                       alert("error: " + kendo.stringify(e.errors[0]));
-                    }
-                }
+        <script>
+            $("#expand-city").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn(["[Date].[Calendar]", "[Geography].[City]" ]);
             });
-        });
-    </script>
+
+            $("#expand-calendar").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar]");
+            });
+
+            $("#expand-2005").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2005]");
+            });
+
+            $("#expand-2005-city").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn(["[Date].[Calendar].[Year].&[2005]", "[Geography].[City]"]);
+            });
+
+            $("#expand-2005-2-city").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn(["[Date].[Calendar].[Year].&[2005].&[2]", "[Geography].[City]"]);
+            });
+
+            $("#expand-2005_2").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2005].&[2]");
+            });
+
+            $("#expand-2006").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006]");
+            });
+
+            $("#expand-2006_1").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006].&[1]");
+            });
+
+            $("#expand-2006_2").click(function() {
+                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
+                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006].&[2]");
+            });
+
+            $(function() {
+                $("#pivotgrid").kendoPivotGrid({
+                    dataSource: {
+                        type: "xmla",
+                        columns: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
+                        rows: [ { name: "[Product].[Category]" }, { name: "[Product].[Product Name]" }],
+                        measures: ["[Measures].[Internet Order Lines Count]"],
+                        transport: {
+                            connection: {
+                                catalog: "Adventure Works Internet Sales Model",
+                                cube: "Adventure Works Internet Sales Model"
+                            },
+                            read: {
+                                url: "http://krustev:8080/olap/msmdpump.dll",
+                                dataType: "text",
+                                contentType: "text/xml",
+                                type: "POST"
+                            }
+                        },
+                        schema: {
+                            type: "xmla"
+                        },
+                        error: function(e) {
+                           alert("error: " + kendo.stringify(e.errors[0]));
+                        }
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
