@@ -11,14 +11,14 @@
                         startLoading();
                      });
 
-        loaderElement = app.pane.loader.element.find("h1");
+        loaderElement = kendo.mobile.application.pane.loader.element.find("h1");
     }
 
 
     function hideLoader() {
         clearInterval(interval);
-        app.hideLoading(); //hide loading popup
-        app.changeLoadingMessage("Loading...");
+        kendo.mobile.application.hideLoading(); //hide loading popup
+        kendo.mobile.application.changeLoadingMessage("Loading...");
         loaderElement.removeClass("loaderHeading");
     }
 
@@ -32,12 +32,12 @@
         var seconds = 5;
 
         loaderElement.addClass("loaderHeading");
-        app.changeLoadingMessage(seconds + " seconds left!");
+        kendo.mobile.application.changeLoadingMessage(seconds + " seconds left!");
 
-        app.showLoading(); //show loading popup
+        kendo.mobile.application.showLoading(); //show loading popup
 
         interval = setInterval(function() {
-            app.changeLoadingMessage(--seconds + " seconds left!"); //update text of the loading popup
+            kendo.mobile.application.changeLoadingMessage(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
                 showButton.animate({ opacity: 1 });
