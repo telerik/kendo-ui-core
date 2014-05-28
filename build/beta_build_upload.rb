@@ -89,7 +89,7 @@ end
 
 def upload_beta_build(options)
 
-    bot = TelerikReleaseBot.instance 
+    bot = TelerikBetaBot.instance 
 
     navigate_to_latest_version(bot, options)   
     prepare_beta_files(bot, options)  
@@ -236,6 +236,7 @@ def beta_build_file_copy(beta_build, name, versioned_bundle_destination_path, ve
 
     end
     if beta_build[:changelog]
+      FileUtils.mkdir_p(File.join(versioned_bundle_destination_path, "changelogs")) 
       build_path_and_copy \
       :destination =>  versioned_bundle_destination_path,
       :archive => versioned_bundle_archive_path,
