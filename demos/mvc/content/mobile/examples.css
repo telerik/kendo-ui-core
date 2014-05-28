@@ -232,6 +232,10 @@
     padding: 1em;
     border: 1px solid rgba(20,53,80,0.05);
 }
+#example * {
+    -webkit-box-sizing: initial;
+    box-sizing: initial;
+}
 .box:after,
 .demo-section:after {
     content: "";
