@@ -47,9 +47,11 @@
     test("PivotGrid renders filter section", function() {
         var pivotgrid = createPivot();
 
-        var filterFields = pivotgrid.wrapper.find(".k-pivot-filters");
+        var filterFields = pivotgrid.wrapper.children("div");
 
         ok(filterFields.is("div"));
+        ok(filterFields.hasClass("k-pivot-toolbar"));
+        ok(filterFields.hasClass("k-header"));
         equal(filterFields.text(), pivotgrid.options.messages.filterFields);
     });
 
@@ -59,84 +61,122 @@
         var layout = pivotgrid.wrapper.find(".k-pivot-layout");
 
         ok(layout[0]);
+        ok(layout.is("table"));
     });
 
-    test("PivotGrid renders measures section", function() {
+    test("PivotGrid renders left layout column wrapper", function() {
         var pivotgrid = createPivot();
 
-        var measureFields = pivotgrid.measureFields;
+        var leftLayoutColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        ok(leftLayoutColumn.is("div"));
+        ok(leftLayoutColumn.parent().is("td"));
+        equal(leftLayoutColumn.length, 1);
+    });
+
+    test("PivotGrid renders right layout column wrapper", function() {
+        var pivotgrid = createPivot();
+
+        var rightLayoutColumn = pivotgrid.wrapper.find(".k-pivot-table");
+
+        ok(rightLayoutColumn.is("div"));
+        ok(rightLayoutColumn.parent().is("td"));
+        equal(rightLayoutColumn.length, 1);
+    });
+
+    test("PivotGrid renders data fields section", function() {
+        var pivotgrid = createPivot();
+
+        var leftLayoutColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        var measureFields = leftLayoutColumn.children("div").eq(0);
 
         ok(measureFields.is("div"));
+        ok(measureFields.hasClass("k-pivot-toolbar"));
+        ok(measureFields.hasClass("k-header"));
         equal(measureFields.text(), pivotgrid.options.messages.measureFields);
-
-        ok(measureFields.closest(".k-widget")[0]);
-    });
-
-    test("PivotGrid renders column fields section", function() {
-        var pivotgrid = createPivot();
-
-        var columnFields = pivotgrid.columnFields;
-
-        ok(columnFields.is("div"));
-        equal(columnFields.text(), pivotgrid.options.messages.columnFields);
-
-        ok(pivotgrid.columnFields.closest(".k-widget")[0]);
     });
 
     test("PivotGrid renders row fields section", function() {
         var pivotgrid = createPivot();
 
-        var rowFields = pivotgrid.rowFields;
+        var leftLayoutColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        var rowFields = leftLayoutColumn.children("div").eq(1);
 
         ok(rowFields.is("div"));
+        ok(rowFields.hasClass("k-pivot-toolbar"));
+        ok(rowFields.hasClass("k-header"));
         equal(rowFields.text(), pivotgrid.options.messages.rowFields);
-
-        ok(rowFields.closest(".k-widget")[0]);
     });
 
-    test("PivotGrid renders pivot content column", 1, function() {
+    test("PivotGrid renders rows header section", function() {
         var pivotgrid = createPivot();
 
-        ok(pivotgrid.wrapper.find(".k-pivot-table")[0]);
+        var leftLayoutColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        var rowFields = leftLayoutColumn.children("div").eq(2);
+
+        ok(rowFields.is("div"));
+        ok(rowFields.hasClass("k-grid"));
+        ok(rowFields.hasClass("k-widget"));
+        ok(rowFields.hasClass("k-alt"));
     });
 
-    test("PivotGrid renders header outer wrapper", 1, function() {
+    test("PivotGrid renders column fields section", function() {
         var pivotgrid = createPivot();
 
-        var header = pivotgrid.wrapper
-                              .find(".k-pivot-table")
-                              .find(".k-pivot-header");
+        var rightLayoutColumn = pivotgrid.wrapper.find(".k-pivot-table");
 
-        ok(header[0]);
+        var columnFields = rightLayoutColumn.children("div").eq(0);
+
+        ok(columnFields.is("div"));
+        ok(columnFields.hasClass("k-pivot-toolbar"));
+        ok(columnFields.hasClass("k-header"));
+        equal(columnFields.text(), pivotgrid.options.messages.columnFields);
     });
 
-    test("PivotGrid renders header inner wrapper", 1, function() {
+    test("PivotGrid renders pivot content wrapper", function() {
         var pivotgrid = createPivot();
 
-        var header = pivotgrid.wrapper
-                              .find(".k-pivot-table")
-                              .find(".k-pivot-header")
-                              .find(".k-pivot-header-wrap");
+        var rightLayoutColumn = pivotgrid.wrapper.find(".k-pivot-table");
 
-        ok(header[0]);
+        var columnFields = rightLayoutColumn.children("div").eq(1);
+
+        ok(columnFields.is("div"));
+        ok(columnFields.hasClass("k-grid"));
+        ok(columnFields.hasClass("k-widget"));
     });
 
-    test("PivotGrid renders row header section", 2, function() {
+    test("PivotGrid renders columns header section", function() {
         var pivotgrid = createPivot();
 
-        var rowheaders = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+        var rightLayoutColumn = pivotgrid.wrapper.find(".k-pivot-table");
 
-        ok(rowheaders.is("div"));
-        ok(rowheaders.closest(".k-pivot-layout")[0]);
+        var gridWrapper = rightLayoutColumn.find(".k-grid");
+
+        var columnsHeader = gridWrapper.children("div").eq(0);
+
+        ok(columnsHeader.is("div"));
+        ok(columnsHeader.hasClass("k-grid-header"));
+
+        var columnsHeaderWrap = columnsHeader.children().eq(0);
+
+        ok(columnsHeaderWrap.is("div"));
+        ok(columnsHeaderWrap.hasClass("k-grid-header-wrap"));
     });
 
-    test("PivotGrid renders content section", 2, function() {
+    test("PivotGrid renders pivot content column", function() {
         var pivotgrid = createPivot();
 
-        var contentElement = pivotgrid.wrapper.find(".k-pivot-content");
+        var rightLayoutColumn = pivotgrid.wrapper.find(".k-pivot-table");
 
-        ok(contentElement.is("div"));
-        ok(contentElement.closest(".k-pivot-layout")[0]);
+        var gridWrapper = rightLayoutColumn.find(".k-grid");
+
+        var gridContent = gridWrapper.children("div").eq(1);
+
+        ok(gridContent.is("div"));
+        ok(gridContent.hasClass("k-grid-content"));
     });
 
     module("PivotGrid column headers rendering", {
@@ -185,7 +225,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         var th = headerTable.find("th");
@@ -204,7 +244,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         var th = headerTable.find("th");
@@ -227,7 +267,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         equal(tr.length, 2);
@@ -260,7 +300,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         equal(tr.length, 3);
@@ -304,7 +344,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         equal(tr.length, 4);
@@ -360,7 +400,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         equal(tr.length, 4);
@@ -418,7 +458,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         equal(tr.length, 3);
@@ -468,7 +508,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
         var tr = headerTable.find("tr");
 
         var row_2 = tr.eq(1);
@@ -504,7 +544,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr").eq(1);
         var th_level1 = tr.find("th");
@@ -529,7 +569,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr").eq(1);
         var th_level1 = tr.find("th");
@@ -553,7 +593,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -577,7 +617,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -604,7 +644,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -628,7 +668,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -656,7 +696,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -686,7 +726,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
 
@@ -709,8 +749,6 @@
         equal(th_level4.eq(4).attr("rowspan"), 2);
     });
 
-    //data attributes decoration
-
     test("PivotGrid adds tuple-all attr to the ALL tuple column without children", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", children: [] }] }
@@ -720,7 +758,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         var th = headerTable.find("th");
@@ -739,7 +777,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var tr = headerTable.find("tr");
         var th_level0 = tr.eq(0).find("th");
@@ -763,7 +801,7 @@
             dataSource: createDataSource(tuples)
         });
 
-        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
         var rows = headerTable.find("tr");
         var th_level0 = rows.eq(0).find("th");
@@ -779,5 +817,48 @@
         equal(th_level1.eq(3).attr("data-kendo-tuple-all"), "true");
 
         equal(th_level2.eq(0).attr("data-kendo-tuple-all"), "true");
+    });
+
+    test("PivotGrid renders k-header style to TH cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        ok(th.hasClass("k-header"));
+    });
+
+    test("PivotGrid renders k-header k-alt style to all TH cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_level0 = rows.eq(0).find("th");
+        var th_level1 = rows.eq(1).find("th");
+
+        ok(th_level0.eq(0).hasClass("k-header"));
+        ok(!th_level0.eq(0).hasClass("k-alt"));
+
+        ok(th_level0.eq(1).hasClass("k-header"));
+        ok(th_level0.eq(1).hasClass("k-alt"));
+
+        ok(th_level1.eq(0).hasClass("k-header"));
+        ok(!th_level1.eq(0).hasClass("k-alt"));
     });
 })();

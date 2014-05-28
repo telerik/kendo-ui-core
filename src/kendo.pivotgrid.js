@@ -22,7 +22,17 @@ var __meta__ = {
         map = $.map,
         extend = $.extend,
         CHANGE = "change",
-        DIV = "<div/>";
+        DIV = "<div/>",
+        LAYOUT_TABLE = '<table class="k-pivot-layout">' +
+                            '<tr>' +
+                                '<td>' +
+                                    '<div class="k-pivot-rowheaders"></div>' +
+                                '</td>' +
+                                '<td>' +
+                                    '<div class="k-pivot-table k-state-default" style="overflow:auto"></div>' +
+                                '</td>' +
+                            '</tr>' +
+                        '</table>';
 
     function normalizeMembers(member) {
         var descriptor = typeof member === "string" ? { name: member, expand: false } : member,
@@ -1115,50 +1125,51 @@ var __meta__ = {
         },
 
         _filterFields: function() {
-            var element = $(DIV).addClass("k-pivot-filters")
+            var element = $(DIV).addClass("k-pivot-toolbar k-header")
                                 .text(this.options.messages.filterFields);
 
             this.filterFields = element;
         },
 
         _measureFields: function() {
-            this.measureFields = $(DIV).text(this.options.messages.measureFields);
+            this.measureFields = $(DIV).addClass("k-pivot-toolbar k-header")
+                                       .text(this.options.messages.measureFields);
         },
 
         _columnFields: function() {
-            this.columnFields = $(DIV).text(this.options.messages.columnFields);
+            this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header")
+                                      .text(this.options.messages.columnFields);
         },
 
         _rowFields: function() {
-            this.rowFields = $(DIV).text(this.options.messages.rowFields);
+            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header")
+                                   .text(this.options.messages.rowFields);
         },
 
         _columnsHeader: function() {
-            this.columnsHeader = $('<div class="k-pivot-header" />')
-                                    .append('<div class="k-pivot-header-wrap" />');
+            this.columnsHeader = $('<div class="k-grid-header" />')
+                                    .append('<div class="k-grid-header-wrap" />');
         },
 
         _rowsHeader: function() {
-            this.rowsHeader = $('<div class="k-pivot-rowheaders"/>');
+            this.rowsHeader = $('<div class="k-grid k-widget k-alt"/>');
         },
 
         _contentTable: function() {
-            this.content = $('<div class="k-pivot-content" />');
+            this.content = $('<div class="k-grid-content" />');
         },
 
         _createLayout: function() {
             var that = this;
-            var table = $('<table class="k-pivot-layout"/>');
+            var layoutTable = $(LAYOUT_TABLE);
+            var leftContainer = layoutTable.find(".k-pivot-rowheaders");
+            var rightContainer = layoutTable.find(".k-pivot-table");
+            var gridWrapper = $(DIV).addClass("k-grid k-widget");
 
             that._filterFields();
 
             that._measureFields();
             that._columnFields();
-
-            table.append($("<tr/>")
-                            .append($("<td/>").append(that.measureFields))
-                            .append($("<td/>").append(that.columnFields))
-                        );
 
             that._rowFields();
             that._columnsHeader();
@@ -1166,17 +1177,18 @@ var __meta__ = {
             that._rowsHeader();
             that._contentTable();
 
-            var pivotTable = $('<div class="k-pivot-table" />')
-                                .append(that.columnsHeader)
-                                .append(that.content);
+            leftContainer.append(that.measureFields);
+            leftContainer.append(that.rowFields);
+            leftContainer.append(that.rowsHeader);
 
-            table.append($("<tr/>")
-                            .append($("<td/>").append(that.rowFields).append(that.rowsHeader))
-                            .append($("<td/>").append(pivotTable))
-                        );
+            gridWrapper.append(that.columnsHeader);
+            gridWrapper.append(that.content);
+
+            rightContainer.append(that.columnFields);
+            rightContainer.append(gridWrapper);
 
             that.wrapper.append(that.filterFields);
-            that.wrapper.append(table);
+            that.wrapper.append(layoutTable);
 
             //VIRTUAL DOM
             that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0].firstChild);
@@ -1204,7 +1216,6 @@ var __meta__ = {
         }
     });
 
-    //TODO: Rename to avoid any misunderstanding
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
@@ -1219,8 +1230,8 @@ var __meta__ = {
             ];
         },
 
-        _cell: function(member) {
-            return element("th", null, [text(member.caption || member.name)]);
+        _cell: function(member, attr) {
+            return element("th", attr, [text(member.caption || member.name)]);
         },
 
         _memberIndex: function(members, parentMember) {
@@ -1377,7 +1388,7 @@ var __meta__ = {
 
             member = members[memberIndex];
 
-            cell = this._cell(member);
+            cell = this._cell(member, { class: "k-header" });
             row.children.push(cell);
             row.colspan += 1;
 
@@ -1385,7 +1396,7 @@ var __meta__ = {
             childrenLength = children.length
 
             if (childrenLength) {
-                allCell = this._cell(member);
+                allCell = this._cell(member, { class: "k-header k-alt" });
                 row.children.push(allCell);
 
                 for (; idx < childrenLength; idx++) {
