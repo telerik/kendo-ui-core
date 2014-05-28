@@ -456,6 +456,20 @@ var __meta__ = {
                 $("[" + kendo.attr("uid") + "='" + uid + "']").remove();
             },
 
+            enable: function(element, enable) {
+                var uid = $(element).attr(kendo.attr("uid"));
+
+                if (typeof enable == "undefined") {
+                    enable = true;
+                }
+
+                if (enable) {
+                    $("[" + kendo.attr("uid") + "='" + uid + "']").removeClass(STATE_DISABLED);
+                } else {
+                    $("[" + kendo.attr("uid") + "='" + uid + "']").addClass(STATE_DISABLED);
+                }
+            },
+
             _attributes: function(element, options) {
                 element.attr(kendo.attr("uid"), options.uid);
                 element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);

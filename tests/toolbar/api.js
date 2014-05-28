@@ -77,4 +77,30 @@
         equal(toolbar.popup.element.find(".k-separator").length, 0, "Separator is removed from the overflow container");
     });
 
+    test("enable method enables button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", enable: false }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.enable("#foo");
+        
+        ok(!$("#foo").hasClass("k-state-disabled"), "Toolbar button does not have k-state-disabled class");
+        ok(!toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button does not have k-state-disabled class");
+    });
+
+    test("enable method disables button", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", enable: true }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.enable("#foo", false);
+        
+        ok($("#foo").hasClass("k-state-disabled"), "Toolbar button have k-state-disabled class");
+        ok(toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+    });
+
 })();
