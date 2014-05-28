@@ -3,14 +3,17 @@
 <head>
     <title><%= title %></title>
 
-    <link href="../../content/shared/styles/examples-offline.css" rel="stylesheet">
-    <link href="../../../content/web/kendo.common.min.css" rel="stylesheet">
-    <link href="../../../content/web/kendo.rtl.min.css" rel="stylesheet">
-    <link href="../../../content/web/kendo.default.min.css" rel="stylesheet">
+    <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../content/web/kendo.common.min.css" rel="stylesheet">
+    <link href="../../content/web/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../content/web/kendo.default.min.css" rel="stylesheet">
 
+<% if mobile %>
+    <link href="../../content/mobile/kendo.mobile.all.min.css" rel="stylesheet" />
+<% end %>
     <script src="../../../scripts/jquery.min.js"></script>
-    <script src="../../../scripts/kendo.web.min.js"></script>
-    <script src="../../content/shared/js/console.js"></script>
+    <script src="../../../scripts/kendo.all.min.js"></script>
+    <script src="../content/shared/js/console.js"></script>
     <script>
         <%= options[:additional_code] %>
     </script>
@@ -22,5 +25,11 @@
         <a class="offline-button" href="../index.html">Back</a>
     <% end %>
     <%= body %>
+
+    <% if mobile %>
+    <script>
+        window.kendoMobileApplication = new kendo.mobile.Application(document.body);
+    </script>
+    <% end %>
 </body>
 </html>
