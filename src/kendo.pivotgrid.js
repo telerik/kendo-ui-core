@@ -29,7 +29,7 @@ var __meta__ = {
                                     '<div class="k-pivot-rowheaders"></div>' +
                                 '</td>' +
                                 '<td>' +
-                                    '<div class="k-pivot-table k-state-default" style="overflow:auto"></div>' +
+                                    '<div class="k-pivot-table k-state-default"></div>' +
                                 '</td>' +
                             '</tr>' +
                         '</table>';
@@ -1372,7 +1372,6 @@ var __meta__ = {
             var member;
             var row;
 
-            var childCell;
             var allCell;
             var cell;
 
@@ -1405,8 +1404,7 @@ var __meta__ = {
                 }
 
                 if (row.children[0] !== cell) {
-                    childCell = childRow.children[childRow.children.length - childRow.colspan];
-                    childCell.attr.class += " k-first";
+                    childRow.children[childRow.children.length - childRow.colspan].attr.class += " k-first";
                 }
 
                 colspan = childRow.colspan;
