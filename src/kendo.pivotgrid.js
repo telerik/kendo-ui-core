@@ -1190,8 +1190,8 @@ var __meta__ = {
         },
 
         _columnsHeader: function() {
-            this.columnsHeader = $('<div class="k-grid-header" />')
-                                    .append('<div class="k-grid-header-wrap" />');
+            this.columnsHeader = $('<div class="k-grid-header-wrap" />')
+                                    .wrap('<div class="k-grid-header" />');
         },
 
         _rowsHeader: function() {
@@ -1224,7 +1224,7 @@ var __meta__ = {
             leftContainer.append(that.rowFields);
             leftContainer.append(that.rowsHeader);
 
-            gridWrapper.append(that.columnsHeader);
+            gridWrapper.append(that.columnsHeader.parent());
             gridWrapper.append(that.content);
 
             rightContainer.append(that.columnFields);
@@ -1234,9 +1234,27 @@ var __meta__ = {
             that.wrapper.append(layoutTable);
 
             //VIRTUAL DOM
-            that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0].firstChild);
+            that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
             that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
             that.contentTree = new kendo.dom.Tree(that.content[0]);
+        },
+
+        _resize: function() {
+            var contentTable = this.content.children("table");
+            var contentWidth = contentTable.width();
+
+            var rows = contentTable[0].rows;
+            var columnsLength = rows[0] ? rows[0].children.length : 1;
+
+            var calculatedWidth = columnsLength * 100;
+            var minWidth = 100;
+
+            if (contentWidth < calculatedWidth) {
+                minWidth = Math.ceil((calculatedWidth / contentWidth) * 100);
+            }
+
+            contentTable.add(this.columnsHeader.children("table"))
+                        .css("min-width", minWidth + "%");
         },
 
         refresh: function() {
@@ -1256,6 +1274,8 @@ var __meta__ = {
             that.columnsHeaderTree.render(columnsTree);
             that.rowsHeaderTree.render(rowsTree);
             that.contentTree.render(kendo_content(data, columnsTree, rowsTree));
+
+            that._resize();
         }
     });
 
