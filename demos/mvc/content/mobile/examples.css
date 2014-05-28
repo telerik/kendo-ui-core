@@ -227,15 +227,18 @@
     background-color: rgba(20,53,80,0.038);
     border: 1px solid rgba(20,53,80,0.05);
 }
+
 .demo-section {
     margin: 1em auto;
     padding: 1em;
     border: 1px solid rgba(20,53,80,0.05);
 }
+
 #example * {
     -webkit-box-sizing: initial;
     box-sizing: initial;
 }
+
 .box:after,
 .demo-section:after {
     content: "";
@@ -243,21 +246,25 @@
     clear: both;
     height: 0;
 }
+
 #example .box {
     margin: 1em auto;
 }
+
 .box.k-header,
 .demo-section.k-header {
     background-position: 50% 70%;
 }
-.box h4,
-.demo-section h4 {
-    margin-bottom: 1em;
+
+#example .box h4,
+#example .demo-section h4 {
+    margin: 0 0 1em;
     font-size: 12px;
     line-height: 1em;
     font-weight: bold;
     text-transform: uppercase;
 }
+
 .box-col {
     display: block;
     float: left;

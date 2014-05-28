@@ -55,4 +55,9 @@
 {
     font-size: 1em;
 }
+
+.demo-section .console {
+    width: 300px;
+    margin: 0;
+}
 /*configurator*/
