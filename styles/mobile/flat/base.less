@@ -28,6 +28,13 @@
     .background-clip(border-box);
 }
 
+/* Revert box/clip for Web widgets */
+.km-flat [class^=k-]
+{
+    .box-sizing(content-box);
+}
+
+
 .km-flat .km-tabstrip .km-button
 {
     background: none;
