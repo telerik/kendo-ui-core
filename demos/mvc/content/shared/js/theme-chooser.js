@@ -161,7 +161,7 @@
             $("#mobile-application-container").removeClass(MOBILE_CLASSES).addClass("km-" + themeName + (" km-" + themeName.replace(/-.*/, "")));
             $("#device-wrapper").removeClass("ios7 ios wp-dark wp-light android-light android-dark blackberry flat").addClass(themeName);
             cookie("mobileTheme", themeName, Infinity, "/");
-        },
+        }
     });
 
     kendo.ui.plugin(ThemeChooser);
@@ -329,7 +329,7 @@
                         if (element[0] == example[0]) {
                             example.css("visibility", "hidden");
 
-                            options.replace()
+                            options.replace();
 
                             setTimeout(function () {
                                 example
@@ -371,7 +371,7 @@
             } else {
                 ThemeChooser.replaceTheme(themeName);
             }
-        },
+        }
     });
 
     window.kendoThemeChooser = ThemeChooser;
