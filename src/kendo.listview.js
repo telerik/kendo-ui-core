@@ -125,6 +125,13 @@ var __meta__ = {
             return this.element.children();
         },
 
+        dataItem: function(element) {
+            var attr = kendo.attr("uid");
+            var uid = $(element).closest("[" + attr + "]").attr(attr);
+
+            return this.dataSource.getByUid(uid);
+        },
+
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
             this._dataSource();
