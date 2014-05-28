@@ -881,8 +881,13 @@ pre.prettyprint
     text-align: left;
     height: 200px;
     min-width: 300px;
-    border: 1px solid rgba(20,53,80,0.05);
+    border: 1px solid rgba(20,53,80,0.1);
     background-color: #ffffff;
+}
+
+.demo-section .box-col .console
+{
+    width: 500px;
 }
 
 .console .count,

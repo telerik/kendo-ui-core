@@ -1,5 +1,5 @@
-<div id="example" class="k-content">
-    <div class="demo-section">
+<div id="example">
+    <div class="demo-section k-header">
         <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
         <label><select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select>src:</label>
@@ -24,11 +24,11 @@
             kendo.bind($("#example"), viewModel);
         });
     </script>
-    <div class="demo-section">
+    <div class="box" style="width: 500px;">
     &lt;img src="<span data-bind='text: imageSrc'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View source code:</h4>
+    <div class="box">
+        <h4>View source code:</h4>
         <pre class="prettyprint">
 &lt;div id=&quot;example&quot;&gt;
     &lt;img data-bind=&quot;attr: { src: imageSrc, alt: imageAlt, title: imageTitle }&quot; /&gt;
@@ -39,8 +39,8 @@
 &lt;/div&gt;
         </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View model source code:</h4>
+    <div class="box">
+        <h4>View model source code:</h4>
         <pre class="prettyprint">
 var viewModel = kendo.observable({
     imageSrc: null,
@@ -62,8 +62,7 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         .demo-section
         {
             overflow: hidden;
-            width: 380px;
-            margin: 30px auto;
+            width: 500px;
         }
 
         #example > div > label

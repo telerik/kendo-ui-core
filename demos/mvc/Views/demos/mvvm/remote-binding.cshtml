@@ -1,13 +1,13 @@
-<div id="example" class="k-content">
+<div id="example">
     <div id="form-container">
-        <div class="demo-section">
+        <div class="demo-section k-header">
             Select Product: <select data-role="dropdownlist" data-option-label="Select product"
                              data-value-field="ProductID" data-text-field="ProductName"
                              data-bind="source: productsSource, value: selectedProduct"></select>
 
             <button data-bind="click: save, enabled: hasChanges" class="k-button">Submit All Changes</button>
         </div>
-        <div class="demo-section product-info" data-bind="visible: showForm">
+        <div class="demo-section k-header product-info" data-bind="visible: showForm">
             <ul>
                 <li><label>ID</label> <span data-bind="text:selectedProduct.ProductID, events: { change: change }"></span></li>
                 <li><label>Name</label> <input type="text" class="k-textbox" id="products" data-bind="value: selectedProduct.ProductName, events: { change: change }" /></li>
@@ -77,8 +77,8 @@
             kendo.bind($("#form-container"), viewModel);
         });
     </script>
-    <div class="code-sample">
-        <h4 class="code-title">View source code:</h4>
+    <div class="box">
+        <h4>View source code:</h4>
         <pre class="prettyprint">
 &lt;div id="form-container"&gt;
     &lt;div class="selector"&gt;
@@ -99,8 +99,8 @@
 &lt;/div&gt;
         </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View model source code:</h4>
+    <div class="box">
+        <h4>View model source code:</h4>
         <pre class="prettyprint">
 var viewModel = kendo.observable({
     productsSource: new kendo.data.DataSource({
@@ -172,7 +172,7 @@ kendo.bind($("#form-container"), viewModel);
         }
 
         .demo-section {
-           width: 400px;
+           width: 600px;
         }
         .demo-section button {
            float: right;

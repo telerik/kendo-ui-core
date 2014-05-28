@@ -1,15 +1,4 @@
-<div id="example" class="k-content">
-    <div class="current-state">
-        <h4>Current view model state:</h4>
-        <pre>
-    {
-        firstName: <span data-bind="text: firstName"></span>,
-        lastName: <span data-bind="text: lastName"></span>,
-        gender: <span data-bind="text: gender"></span>,
-        agreed: <span data-bind="text: agreed"></span>
-    }
-        </pre>
-    </div>
+<div id="example">
     <div class="registration">
         <form>
             <ul>
@@ -21,6 +10,17 @@
             <br /><br />
             <button data-bind="enabled: agreed, click: register" style="display: block">Register</button>
         </form>
+    </div>
+    <div class="current-state">
+        <h4>Current view model state:</h4>
+        <pre>
+    {
+        firstName: <span data-bind="text: firstName"></span>,
+        lastName: <span data-bind="text: lastName"></span>,
+        gender: <span data-bind="text: gender"></span>,
+        agreed: <span data-bind="text: agreed"></span>
+    }
+        </pre>
     </div>
     <div class="confirmation" data-bind="visible: confirmed">
         Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>
@@ -54,8 +54,8 @@
         });
     </script>
 
-    <div class="source code-sample">
-        <h4 class="code-title">View source code:</h4>
+    <div class="box">
+        <h4>View source code:</h4>
         <pre class="prettyprint">
 &lt;form&gt;
     &lt;label&gt;First Name: &lt;input data-bind=&quot;value: firstName&quot; /&gt;&lt;/label&gt;
@@ -76,8 +76,8 @@
 &lt;/form&gt;
         </pre>
     </div>
-    <div class="source code-sample">
-        <h4 class="code-title">View model source code:</h4>
+    <div class="box">
+        <h4>View model source code:</h4>
         <pre class="prettyprint">
     var viewModel = kendo.observable({
         firstName: &quot;John&quot;,
@@ -106,7 +106,7 @@
 
     <style scoped>
         .current-state {
-            float: right;
+            float: left;
             width: 200px;
             margin: 60px 85px 0 0
         }
@@ -191,8 +191,7 @@
         .code-details {
             padding: 1em;
         }
-
-        .source {
+        .box {
             clear: both;
         }
     </style>

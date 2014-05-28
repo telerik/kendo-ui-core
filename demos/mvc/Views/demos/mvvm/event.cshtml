@@ -1,5 +1,5 @@
-<div id="example" class="k-content">
-    <div class="demo-section">
+<div id="example">
+    <div class="demo-section k-header">
 
         <button class="k-button" data-bind="events: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>
 
@@ -15,17 +15,20 @@
             kendo.bind($("#example"), viewModel);
         });
     </script>
-    <div class="console"></div>
-    <div class="code-sample">
-        <h4 class="code-title">View source code</h4>
+    <div class="box">
+        <h4>Events log:</h4>
+        <div class="console"></div>
+    </div>
+    <div class="box">
+        <h4>View source code</h4>
 <pre class="prettyprint">
 &lt;div id=&quot;example&quot;&gt;
     &lt;button data-bind=&quot;events:{ click: listener, dblclick: listener, mouseover: listener, mouseout: listener }&quot;&gt;Button&lt;/button&gt;
 &lt;/div&gt;
 </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View model source code</h4>
+    <div class="box">
+        <h4>View model source code</h4>
 <pre class="prettyprint">
 var viewModel = kendo.observable({
     listener: function(e) {

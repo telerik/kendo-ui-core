@@ -1,7 +1,7 @@
-<div id="example" class="k-content">
-    <div class="demo-section">
-        <div class="configuration" style="min-width: 110px; height: 110px; margin-bottom: 15px;">
-            <span class="configHead">Slide Binding</span>
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col" style="min-width: 110px; height: 110px; margin-bottom: 15px;">
+            <h4>Slide Binding</h4>
             <label>
                 Toggle: <input type="checkbox" data-bind="checked: slideValue" />
             </label>
@@ -31,8 +31,8 @@
             kendo.bind($("#example"), viewModel);
         });
     </script>
-    <div class="code-sample">
-        <h4 class="code-title">View source code:</h4>
+    <div class="box">
+        <h4>View source code:</h4>
         <pre class="prettyprint">
 &lt;label&gt;
     Toggle: &lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: slideValue&quot; /&gt;
@@ -42,8 +42,8 @@
 &lt;/div&gt;
         </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">Custom binder source code:</h4>
+    <div class="box">
+        <h4>Custom binder source code:</h4>
         <pre class="prettyprint">
 kendo.data.binders.slide = kendo.data.Binder.extend( {
     refresh: function() {
@@ -58,8 +58,8 @@ kendo.data.binders.slide = kendo.data.Binder.extend( {
 });
         </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View model source code:</h4>
+    <div class="box">
+        <h4>View model source code:</h4>
         <pre class="prettyprint">
 var viewModel = kendo.observable({
     slideValue: true

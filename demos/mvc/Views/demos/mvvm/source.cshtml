@@ -1,16 +1,16 @@
-<div id="example" class="k-content">
-    <div class="demo-section">
-        <div class="configuration">
-            <span class="configHead">Add a product</span>
+<div id="example">
+    <div class="demo-section k-header">
+        <div class="box-col">
+            <h4>Add a product</h4>
             <ul class="options">
                 <li>
-                    <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="name k-textbox"/></label>
+                    <label>Name:</label><input type="text" placeholder="Enter name" data-bind="value: productName" class="name k-textbox"/>
                 </li>
                 <li>
-                    <label>Price:<input type="text" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
+                    <label>Price:</label><input type="text" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" />
                 </li>
                 <li>
-                    <label>Units in stock:<input type="text" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
+                    <label>Units in stock:</label><input type="text" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" />
                 </li>
                 <li>
                     <button class="k-button" data-bind="click: addProduct">Add a new product</button>
@@ -114,8 +114,8 @@
         kendo.bind($("#example"), viewModel);
     });
     </script>
-    <div class="code-sample">
-        <h4 class="code-title">View source code:</h4>
+    <div class="box">
+        <h4>View source code:</h4>
         <pre class="prettyprint">
 &lt;div id=&quot;example&quot;&gt;
     &lt;table&gt;
@@ -175,8 +175,8 @@
 &lt;/script&gt;
         </pre>
     </div>
-    <div class="code-sample">
-        <h4 class="code-title">View model source code:</h4>
+    <div class="box">
+        <h4>View model source code:</h4>
         <pre class="prettyprint">
 var viewModel = kendo.observable({
     productName: &quot;Product name&quot;,
@@ -234,7 +234,6 @@ kendo.bind($(&quot;#example&quot;), viewModel);
     </div>
     <style scoped>
         .demo-section {
-        	width: 600px;
         	min-height: 200px;
         }
         .metrotable > tbody > tr > td  {
@@ -249,19 +248,9 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         	padding-right: 10px;
         }
 
-        #example .configuration {
-            margin-bottom: 10px;
-            width: 190px;
-        }
-
-        .configuration label {
-            display: block;
-            float: none;
-        }
-
-        .configuration .name {
-            margin-top: -3px;
-            width: 130px;
+        .box-col label {
+            display: inline-block;
+            width: 95px;
         }
         .code-sample {
             clear: right;

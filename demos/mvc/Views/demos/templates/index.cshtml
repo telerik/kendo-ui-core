@@ -1,11 +1,10 @@
 <div id="example">
-    <input id="products" />
-    <div id="product-preview" class="demo-section"></div>
+    <div class="demo-section k-header"><input id="products" style="width: 400px;"/></div>
+    <div id="product-preview" class="demo-section k-header"></div>
 </div>
 
 <script id="product-template" type="text/x-kendo-template">
-    ProductName: 
-    <div>#: ProductName #</div>
+    <h4>ProductName: #: ProductName #</h4>
     <img src="../content/web/foods/#= ProductID #.jpg">
 </script>
 
@@ -43,4 +42,5 @@
     });
 </script>
 <style scoped>
+    .demo-section { width: 400px; }
 </style>
