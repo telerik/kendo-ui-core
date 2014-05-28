@@ -435,6 +435,7 @@
       {
         "text": "Events",
         "url": "colorpicker/events",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Events in Kendo UI ColorPicker widget"
         },
@@ -986,6 +987,7 @@
     "text": "Editor",
     "name": "editor",
     "pro": "true",
+    "disableInMobile": true,
     "api": "web/editor",
     "documentation": {
        "kendo-ui": "getting-started/web/editor/overview",
@@ -1010,6 +1012,7 @@
       {
         "text": "Basic usage",
         "url": "editor/index",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Demo for jQuery WYSIWYG editor in Kendo UI Web framework"
         },
@@ -1030,6 +1033,7 @@
       {
         "text": "Custom tools",
         "url": "editor/custom-tools",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Custom tools for Kendo UI WYSIWYG jQuery Editor"
         },
@@ -1040,6 +1044,7 @@
       {
         "text": "Image browser",
         "url": "editor/imagebrowser",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Image browser in Kendo UI Editor | Kendo UI demo"
         },
@@ -1056,6 +1061,7 @@
       {
         "text": "All tools",
         "url": "editor/all-tools",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "All tools demo in Kendo UI HTML5-based Editor widget"
         },
@@ -1066,6 +1072,7 @@
       {
         "text": "Snippets",
         "url": "editor/snippets",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Demo for snippets feature of Kendo UI Editor widget"
         },
@@ -1076,6 +1083,7 @@
       {
         "text": "Styles",
         "url": "editor/styles",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Style tool demo for Kendo UI HTML5-based web editor |┬áKendo UI Demos"
         },
@@ -1103,6 +1111,7 @@
       {
         "text": "API",
         "url": "editor/api",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "API demo for Kendo UI Web Editor component"
         },
@@ -1135,6 +1144,7 @@
       {
         "text": "MVVM",
         "url": "editor/mvvm",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "MVVM support in Kendo UI Editor"
         },
@@ -2604,6 +2614,7 @@
       {
         "text": "Basic usage",
         "url": "scheduler/index",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Kendo jQuery Scheduler Control Demo"
         },
@@ -2614,6 +2625,7 @@
       {
         "text": "Custom data source",
         "url": "scheduler/custom-datasource",
+        "disableInMobile": true,
         "packages": [
           "mvc-offline"
         ]
@@ -2621,6 +2633,7 @@
       {
         "text": "Binding to Telerik Backend Services",
         "url": "scheduler/backend-services",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Binding to Telerik Backend Services | Kendo UI Scheduler demo"
         },
@@ -2636,6 +2649,7 @@
       {
         "text": "Resources",
         "url": "scheduler/resources",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Resources in Kendo UI Scheduler"
         },
@@ -2646,6 +2660,7 @@
       {
         "text": "Horizontal Grouping",
         "url": "scheduler/resources-grouping-horizontal",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Horizontal resources grouping in Kendo UI Scheduler"
         },
@@ -2656,6 +2671,7 @@
       {
         "text": "Vertical Grouping",
         "url": "scheduler/resources-grouping-vertical",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Vertical resources grouping in Kendo UI Scheduler"
         },
@@ -2673,6 +2689,7 @@
       {
         "text": "Templates",
         "url": "scheduler/templates",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Templates in Kendo UI Scheduler"
         },
@@ -2683,6 +2700,7 @@
       {
         "text": "Events",
         "url": "scheduler/events",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Events in Kendo UI Scheduler"
         },
@@ -2693,6 +2711,7 @@
       {
         "text": "API",
         "url": "scheduler/api",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "API in Kendo UI Scheduler"
         },
@@ -2703,6 +2722,7 @@
       {
         "text": "Globalization",
         "url": "scheduler/globalization",
+        "disableInMobile": true,
         "packages": [
           "mvc-offline"
         ]
@@ -2710,6 +2730,7 @@
       {
         "text": "Restrictions",
         "url": "scheduler/restriction",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Restricting events resizing and moving"
         },
@@ -2720,6 +2741,7 @@
       {
         "text": "Event move & resize",
         "url": "scheduler/move-resize",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Moving and resizing events"
         },
@@ -2730,6 +2752,7 @@
       {
         "text": "Selection",
         "url": "scheduler/selection",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Selection and Keyboard navigation in Kendo UI Scheduler"
         },
@@ -2751,6 +2774,7 @@
       {
         "text": "MVVM",
         "url": "scheduler/mvvm",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "MVVM support in Kendo UI Scheduler"
         },
@@ -3940,6 +3964,7 @@
     "packages": [ "!mvc", "!jsp", "!php" ],
     "text": "Templates",
     "name": "templates",
+    "disableInMobile": true,
     "api": "framework/kendo",
     "documentation": {
        "kendo-ui": "getting-started/framework/templates/overview"
@@ -4034,6 +4059,7 @@
       {
         "text": "Style binding",
         "url": "mvvm/style",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Example of using the style binding in Kendo UI MVVM"
         },
@@ -4074,6 +4100,7 @@
       {
         "text": "Custom binding",
         "url": "mvvm/custom",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Example of creating custom bindings in Kendo UI MVVM"
         },
@@ -6443,6 +6470,7 @@
       {
         "text": "Basic usage",
         "url": "diagram/index",
+        "disableInMobile": true,
         "title": {
             "kendo-ui": "Example of Kendo UI Diagram with a simple layout"
         },
