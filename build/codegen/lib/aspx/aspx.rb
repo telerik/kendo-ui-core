@@ -15,6 +15,10 @@ module CodeGen
                 layers.autoBind
             }
 
+            COMPOSITE_PROPERTY_WITHOUT_SETTINGS = %w{
+                clientEvents
+            }
+
             TYPES_MAP = {
                 'String' => 'string',
                 'Number' => 'double',
@@ -281,7 +285,11 @@ module CodeGen
                 include Options
 
                 def csharp_name
-                    "#{name.pascalize}Settings"
+                    if COMPOSITE_PROPERTY_WITHOUT_SETTINGS.include?(name)
+                        name.pascalize
+                    else
+                        "#{name.pascalize}Settings"
+                    end
                 end
 
                 def csharp_class
