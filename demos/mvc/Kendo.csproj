@@ -396,7 +396,9 @@
     <Content Include="content\shared\js\dataloader.js" />
     <Content Include="content\shared\js\dbd26eaf.vendor.js" />
     <Content Include="content\shared\js\dropdown.js" />
+    <Content Include="content\shared\js\everlive.all.js" />
     <Content Include="content\shared\js\example-datasources.js" />
+    <Content Include="content\shared\js\handlebars.min.js" />
     <Content Include="content\shared\js\mobile-examples.js" />
     <Content Include="content\shared\js\less.js" />
     <Content Include="content\shared\js\orders.js" />
