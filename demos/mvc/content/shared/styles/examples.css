@@ -1424,7 +1424,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 #device-wrapper {
     background-image: url("iphone.png");
     background-size: cover;
-    padding: 119px 46px 112px 50px;
+    padding: 119px 47px 112px 50px;
     margin: auto;
 }
 
@@ -1496,7 +1496,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     height: 455px;
     overflow: hidden;
     position: relative;
-    width: 280px;
+    width: 282px;
 }
 
 #device-wrapper [href='#/'], #back-button, .back-button
