@@ -344,6 +344,7 @@ var __meta__ = {
         _renderTask: function(task, position) {
             var taskWrapper;
             var taskElement;
+            var editable = this.options.editable;
             var progressHandleLeft;
             var taskLeft = position.left;
             var wrapClassName = "k-task-wrap";
@@ -358,12 +359,15 @@ var __meta__ = {
             }
 
             taskWrapper = kendoDomElement("div", { className: wrapClassName, style: { left: taskLeft + "px" } }, [
-                taskElement,
-                kendoDomElement("div", { className: "k-task-dot k-task-start" }),
-                kendoDomElement("div", { className: "k-task-dot k-task-end" })
+                taskElement
             ]);
 
-            if (!task.summary && !task.isMilestone()) {
+            if (editable) {
+                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-dot k-task-start" }));
+                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-dot k-task-end" }));
+            }
+
+            if (!task.summary && !task.isMilestone() && editable) {
                 progressHandleLeft = Math.round(position.width * task.percentComplete);
 
                 taskWrapper.children.push(kendoDomElement("div", { className: "k-task-draghandle", style: { left: progressHandleLeft + "px" } }));
@@ -375,20 +379,27 @@ var __meta__ = {
         _renderSingleTask: function(task, position) {
             var progressWidth = Math.round(position.width * task.percentComplete);
 
+            var content = kendoDomElement("div", { className: "k-task-content" }, [
+                kendoDomElement("div", { className: "k-task-template" }, [
+                    kendoTextElement(task.title)
+                ])
+            ]);
+
+            if (this.options.editable) {
+                content.children.push(kendoDomElement("span", { className: "k-task-actions" }, [
+                    kendoDomElement("a", { className: "k-link k-task-delete", href: "#" }, [
+                        kendoDomElement("span", { className: "k-icon k-si-close" })
+                    ])
+                ]));
+
+                content.children.push(kendoDomElement("span", { className: "k-resize-handle k-resize-w" }));
+
+                content.children.push(kendoDomElement("span", { className: "k-resize-handle k-resize-e" }));
+            }
+
             var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: Math.max((position.width - 2), 0) + "px" } }, [
                 kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
-                kendoDomElement("div", { className: "k-task-content" }, [
-                    kendoDomElement("div", { className: "k-task-template" }, [
-                        kendoTextElement(task.title)
-                    ]),
-                    kendoDomElement("span", { className: "k-task-actions" }, [
-                        kendoDomElement("a", { className: "k-link k-task-delete", href: "#" }, [
-                            kendoDomElement("span", { className: "k-icon k-si-close" })
-                        ])
-                    ]),
-                    kendoDomElement("span", { className: "k-resize-handle k-resize-w" }),
-                    kendoDomElement("span", { className: "k-resize-handle k-resize-e" })
-                ])
+                content
             ]);
 
             return element;
