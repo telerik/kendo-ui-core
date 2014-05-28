@@ -23,6 +23,10 @@
         return true;
     }
 
+    $(document).ready(function() {
+        ThemeChooser.publishTheme(window.kendoTheme);
+    });
+
     var doc = document,
         extend = $.extend,
         proxy = $.proxy,
@@ -234,8 +238,6 @@
                 themeLink = ThemeChooser.getCurrentThemeLink();
 
             ThemeChooser.updateLink(themeLink, newThemeUrl);
-
-            ThemeChooser.publishTheme(themeName);
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
         },
 
@@ -289,8 +291,7 @@
             ThemeChooser.replaceWebTheme(themeName);
             ThemeChooser.replaceWebMobileTheme(themeName);
             ThemeChooser.replaceDVTheme(themeName);
-
-            $("#example").trigger("kendo:skinChange");
+            ThemeChooser.publishTheme(themeName);
         },
 
         publishTheme: function (themeName) {
@@ -306,6 +307,7 @@
                 }
             }
 
+            $("#example").trigger("kendo:skinChange");
             $(doc).data("kendoSkin", themeName);
         },
 

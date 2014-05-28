@@ -50,7 +50,6 @@
         function createSparklines() {
             // binding to array
             $("#press-log").kendoSparkline({
-                theme: window.kendoTheme,
                 data: [
                     936, 968, 1025, 999, 998, 1014, 1017, 1010, 1010, 1007,
                     1004, 988, 990, 988, 987, 995, 946, 954, 991, 984,
@@ -61,7 +60,6 @@
 
             // User-set Sparkline type
             $("#temp-log").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "column",
                 data: [
                     16, 17, 18, 19, 20, 21, 21, 22, 23, 22,
@@ -75,7 +73,6 @@
             });
 
             $("#hum-log").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "area",
                 data: [
                     71, 70, 69, 68, 65, 60, 55, 55, 50, 52,
@@ -89,7 +86,6 @@
             });
 
             $("#temp-range").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "bullet",
                 data: [21, 23],
                 valueAxis: {
@@ -110,43 +106,36 @@
 
             // Pie "sparklines"
             $("#stats-mon").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [14, 10]
             });
 
             $("#stats-tue").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [8, 16]
             });
 
             $("#stats-wed").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [8, 16]
             });
 
             $("#stats-thu").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [12, 12]
             });
 
             $("#stats-fri").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [6, 18]
             });
 
             $("#stats-sat").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [1, 23]
             });
 
             $("#stats-sun").kendoSparkline({
-                theme: window.kendoTheme,
                 type: "pie",
                 data: [5, 19]
             });
