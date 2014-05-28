@@ -5,10 +5,9 @@ require_once '../include/header.php';
 
 $layer = new \Kendo\Dataviz\UI\MapLayer();
 $layer->type("tile")
-      ->urlTemplate("http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png")
+      ->urlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
       ->subdomains(array('a', 'b', 'c'))
-      ->attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>." +
-                    "Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>");
+      ->attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>");
 
 $markerTooltip = new \Kendo\Dataviz\UI\MapMarkerTooltip();
 $markerTooltip->content('Austin, TX');

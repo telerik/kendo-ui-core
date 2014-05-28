@@ -6,9 +6,9 @@
 <kendo:map name="map" center="<%= new double[] {30.2681, -97.7448} %>" zoom="3">
     <kendo:map-layers>
         <kendo:map-layer type="tile"
-            urlTemplate="http://#= subdomain #.tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png"
+            urlTemplate="http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
             subdomains="<%= new String[] { \"a\", \"b\", \"c\" } %>"
-            attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>. Tiles courtesy of <a href='http://www.opencyclemap.org/'>Andy Allan</a>" />
+            attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>" />
     </kendo:map-layers>
     <kendo:map-markers>
         <kendo:map-marker location="<%= new double[] {30.2681, -97.7448} %>" shape="pinTarget">
