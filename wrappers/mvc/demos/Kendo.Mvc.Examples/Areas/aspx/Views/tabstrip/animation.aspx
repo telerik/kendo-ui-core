@@ -8,10 +8,10 @@
     <span class="configHead">Animation Settings</span>
     <ul class="options">
         <li>
-            <input name="animation" type="radio" <%= ViewBag.animation == "toggle" ? "checked=\"checked\"" : "" %> value="toggle" /> <label for="toggle">toggle animation</label>
+            <input id="toggle" name="animation" type="radio" <%= ViewBag.animation == "toggle" ? "checked=\"checked\"" : "" %> value="toggle" /> <label for="toggle">toggle animation</label>
         </li>
         <li>
-            <input name="animation" type="radio" <%= ViewBag.animation != "toggle" ? "checked=\"checked\"" : "" %> value="expand" /> <label for="expand">expand animation</label>
+            <input id="expand" name="animation" type="radio" <%= ViewBag.animation != "toggle" ? "checked=\"checked\"" : "" %> value="expand:vertical" /> <label for="expand">expand animation</label>
         </li>
         <li>            
             <%= Html.CheckBox("opacity", (bool)ViewBag.opacity) %> <label for="opacity">animate opacity</label>
@@ -28,7 +28,7 @@
     .HtmlAttributes(new { style = "width:500px" })
     .Animation(animation =>
     {
-        animation.Enable(ViewBag.animation == "expand" || ViewBag.opacity);
+        animation.Enable(ViewBag.animation == "expand:vertical" || ViewBag.opacity);
 
         animation.Open(config =>
         {
