@@ -2216,6 +2216,10 @@ a.footer-links:hover {
     clear: both;
 }
 
+#overview-applications {
+    margin-bottom: -3em;
+}
+
 #nav-wrapper {
     width: 299px;
     border-top: 1px solid #e2e4e7;
@@ -2506,11 +2510,6 @@ a.footer-links:hover {
 #overview-tools {
     width: 100%;
 }
-
-#overview-tools h2 {
-    padding-top: 1em;
-}
-
 
 #overview-tools li {
     padding-bottom: 1.417em
