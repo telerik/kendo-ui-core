@@ -433,7 +433,6 @@
 
         equal(cells_row2.eq(1).text(), "level 1_1");
         equal(cells_row2.eq(1).attr("rowspan"), 2);
-        return;
 
         equal(cells_row2.eq(2).text(), "level 1_2");
         equal(cells_row2.eq(2).attr("colspan"), 2);
@@ -668,6 +667,46 @@
         equal(th_level0.eq(0).attr("colspan"), 6);
         equal(th_level1.eq(2).attr("colspan"), 4);
         equal(th_level3.eq(2).attr("colspan"), 3);
+    });
+
+    test("PivotGrid expands child cells and all cells of both dimensions (complex expanded header)", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0_2", levelNum: "2", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-header").find("table");
+
+        var rows = headerTable.find("tr");
+
+        var th_level0 = rows.eq(0).find("th");
+        var th_level1 = rows.eq(1).find("th");
+        var th_level3 = rows.eq(3).find("th");
+        var th_level4 = rows.eq(4).find("th");
+
+        //All section of dim 0
+        equal(th_level0.eq(0).attr("colspan"), 6);
+        equal(th_level1.eq(2).attr("colspan"), 4);
+        equal(th_level3.eq(2).attr("colspan"), 3);
+
+        //All section of dim 1
+        equal(th_level0.eq(1).attr("colspan"), 3);
+        equal(th_level0.eq(1).attr("rowspan"), 3);
+        equal(th_level3.eq(4).attr("colspan"), 2);
+        equal(th_level3.eq(5).attr("rowspan"), 3);
+        equal(th_level4.eq(3).attr("rowspan"), 2);
+        equal(th_level4.eq(4).attr("rowspan"), 2);
     });
 
     //data attributes decoration
