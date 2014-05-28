@@ -65,8 +65,8 @@ namespace Kendo.Models
             "kendo.common.min.css",
             "kendo.silver.min.css",
             "kendo.mobile.all.min.css",
-            "dataviz/kendo.dataviz.min.css",
-            "dataviz/kendo.dataviz.min.silver.css"
+            "kendo.dataviz.min.css",
+            "kendo.dataviz.silver.min.css"
 #endif
         };
 
