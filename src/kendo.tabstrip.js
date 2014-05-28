@@ -502,7 +502,8 @@ var __meta__ = {
                 }
             },
             collapsible: false,
-            navigatable: true
+            navigatable: true,
+            contentUrls: false
         },
 
         destroy: function() {
