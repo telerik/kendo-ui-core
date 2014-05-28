@@ -76,7 +76,7 @@
         $(document).ready(function() {
             createChart();
             $(document).bind("kendo:skinChange", createChart);
-            $(".configuration-horizontal").bind("change", refresh);
+            $(".options").bind("change", refresh);
         });
 
         function refresh() {
