@@ -259,7 +259,6 @@ var __meta__ = {
         },
 
         _mergeAxes: function(sourceAxes, data) {
-            debugger;
             var columnMeasures = this.measuresAxis() === "columns";
             var axes = {
                 columns: normalizeAxis(this._axes.columns),
@@ -293,7 +292,6 @@ var __meta__ = {
                 }
                 data = this._mergeColumnData(data, mergedColumns.deep, newRowsLength, newColumnsLength, offset);
             } else {
-                debugger;
                 //rows are expanded
                 data = this._mergeRowData(data, mergedRows.deep, newColumnsLength);
             }
@@ -326,7 +324,7 @@ var __meta__ = {
         _mergeRowData: function(newData, rowIndex, drop) {
             var data = this.data().toJSON();
 
-            if (data.length > 0 && drop == 0) {
+            if (data.length > 0 && drop === 0) {
                 rowIndex--;
                 drop++;
             }
