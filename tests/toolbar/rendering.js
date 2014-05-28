@@ -2,6 +2,11 @@
     var container,
         ToolBar = kendo.ui.ToolBar;
 
+    function click(element) {
+        element.trigger("mousedown");
+        element.trigger("mouseup");
+    }
+
     module("Toolbar rendering:", {
         setup: function() {
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
@@ -799,6 +804,25 @@
 
         equal(component.prop("tagName"), "LI");
         ok(component.data("uid"));
+    });
+
+    test("SplitButton popup is as wide as the button wrapper", 1, function() {
+        var splitButton = container.kendoToolBar({
+            items: [
+                { type: "splitButton", text: "foo", items: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        var splitButton = container.find(".k-split-button");
+        var arrowButton = splitButton.find(".k-split-button-arrow");
+
+        click(arrowButton);
+        equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
     });
 
     /* SEPARATOR */

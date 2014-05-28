@@ -124,7 +124,8 @@ var __meta__ = {
                     popupElement.attr("id", options.id + "_optionlist");
 
                     popup = popupElement.kendoPopup({
-                        anchor: element
+                        anchor: element,
+                        open: adjustPopupWidth
                     }).data("kendoPopup");
 
                     element.data({
@@ -299,6 +300,23 @@ var __meta__ = {
                 }
                 img.attr("src", imageUrl);
             }
+        }
+
+        function adjustPopupWidth(e) {
+            var anchor = this.options.anchor,
+                computedWidth = anchor.outerWidth(),
+                width;
+
+            if (this.element.css("box-sizing") !== "border-box") {
+                width = computedWidth - (this.element.outerWidth() - this.element.width());
+            } else {
+                width = computedWidth;
+            }
+
+            this.element.css({
+                fontFamily: anchor.css("font-family"),
+                width: width
+            });
         }
 
         var ToolBar = Widget.extend({
