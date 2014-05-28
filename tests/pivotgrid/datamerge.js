@@ -3,7 +3,7 @@
 
     module("PivotDataSource merging of data", { });
 
-    test("expand of root level column axis", function() {
+    test("expand of root level column axis, without rows", function() {
         var columnTuples = [
             {
                 tuples: [
@@ -301,7 +301,7 @@
         equal(data[9].value, 6);
     });
 
-    test("expand row axis with columns expanded", function() {
+    test("initially expanded row and columns, expand row axis", function() {
         var rowTuples = [
             {
                 tuples: [
@@ -362,5 +362,110 @@
         equal(data[9].value, 6);
     });
 
+    test("expand row axis with only one column", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [] } ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [] } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 10 } ],
+            [ { value: 10 }, { value: 3 }, { value: 7 } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift(),
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow("level 0");
+
+        var data = dataSource.data();
+        equal(data.length, 3);
+        equal(data[0].value, 10);
+        equal(data[1].value, 3);
+        equal(data[2].value, 7);
+    });
+
+    test("initially expanded columns, expand row axis", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [] } ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [] } ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: 1 }, { value: 2 } ],
+            [ { value: 1 }, { value: 2 }, { value: 3 },  { value: 4 }, { value: 5 }, { value: 6 } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift(),
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "level 0", children: [] } ] },
+                                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow("level 0");
+
+        var data = dataSource.data();
+        equal(data.length, 6);
+        equal(data[0].value, 1);
+        equal(data[1].value, 2);
+        equal(data[2].value, 3);
+        equal(data[3].value, 4);
+        equal(data[4].value, 5);
+        equal(data[5].value, 6);
+    });
 })();
 

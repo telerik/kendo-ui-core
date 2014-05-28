@@ -303,7 +303,7 @@ var __meta__ = {
                 data = this._mergeColumnData(data, mergedColumns.deep, newRowsLength, newColumnsLength, offset);
             } else {
                 //rows are expanded
-                data = this._mergeRowData(data, mergedRows.deep, newColumnsLength);
+                data = this._mergeRowData(data, mergedRows.deep, newColumnsLength, oldRowsLength);
             }
 
             return {
@@ -334,12 +334,15 @@ var __meta__ = {
         _mergeRowData: function(newData, rowIndex, drop) {
             var data = this.data().toJSON();
 
-            if (data.length > 0 && drop === 0) {
+            if (data.length === 0) {
+                drop = 0;
+            } else if (drop === 0) {
+                drop = 1;
                 rowIndex--;
-                drop++;
             }
 
-            [].splice.apply(data, [rowIndex, drop].concat(newData));
+            newData.splice(0, drop);
+            [].splice.apply(data, [rowIndex + drop, 0].concat(newData));
 
             return data;
         },
