@@ -3102,6 +3102,10 @@ var __meta__ = {
                                 that.lockedContent.scrollTop(-e.sender.y);
                             }
                         });
+
+                        that.one(DATABOUND, function (e) {
+                            e.sender.wrapper.addClass("k-grid-backface");
+                        });
                     }
                 }
             }
