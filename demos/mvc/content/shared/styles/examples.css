@@ -2035,6 +2035,7 @@ ul.keyboard-legend li a {
 #overview #footer {
     position:absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
     clear: both;
 }
@@ -2494,6 +2495,8 @@ a.footer-links:hover {
 #overview-applications,
 #overview-tools {
     display: inline-block;
+    *display: inline;
+    zoom:1;
 }
 
 #applications-and-tools {
@@ -2505,6 +2508,8 @@ a.footer-links:hover {
     text-align: left;
     padding: 0 0.833em;
     vertical-align: top;
+    *display: inline;
+    zoom:1;
 }
 
 #overview-tools {
@@ -2525,6 +2530,8 @@ a.footer-links:hover {
 
 #overview-applications h5 {
     display: inline-block;
+    *display: inline;
+    zoom:1;
 }
 
 #overview-applications ul {
@@ -2582,6 +2589,8 @@ h5 {
 #widgets-all
 {
     display: inline-block;
+    *display: inline;
+    zoom:1;
     position: relative;
 }
 
@@ -2622,6 +2631,8 @@ h5 {
     width: 24%;
     padding: 0;
     display: inline-block;
+    *display: inline;
+    zoom:1;
     min-height: 1px;
     font-size: 16px;
     vertical-align: top;
