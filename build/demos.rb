@@ -182,7 +182,7 @@ def demos(options)
 
         requiresServer = item['requiresServer'].nil? ? false : item['requiresServer']
 
-        mobile = category['mobile'].nil? ? false : category['mobile']
+        mobile = (category['mobile'] && !item['disableInMobile']) || item['mobile']
 
         title = item['text'] # used by the template and passed via 'binding'
 
