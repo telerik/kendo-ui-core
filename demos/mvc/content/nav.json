@@ -6531,7 +6531,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Actionsheet may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -6620,7 +6625,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Button may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -6720,7 +6730,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile ButtonGroup may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -6774,7 +6789,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Drawer may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -6953,7 +6973,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile ListView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -6997,7 +7022,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile ModalView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7051,7 +7081,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Navbar may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7096,7 +7131,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile PopOver may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7150,7 +7190,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7220,7 +7265,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile ScrollView may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7289,7 +7339,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Switch may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7353,7 +7408,12 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -7460,7 +7520,7 @@
     },
     "spriteCssClass": "mobileAppIcon",
     "mobile": true,
-    "packages": [ "!jsp", "!php" ],
+    "packages": [ "!mvc", "!jsp", "!php" ],
     "items": [
       {
         "text": "Touch Events",
@@ -7516,7 +7576,12 @@
         },
         "meta": {
             "kendo-ui": "In this Kendo UI Mobile demo you will see how the contents of the mobile view can be zoomed by simply using pinch/zoom gestures."
-        }
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
