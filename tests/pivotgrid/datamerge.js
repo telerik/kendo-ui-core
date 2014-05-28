@@ -467,5 +467,58 @@
         equal(data[4].value, 5);
         equal(data[5].value, 6);
     });
+
+    test("expand second level on row axis without columns", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [ { name: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] },
+                    { members: [ { name: "level 1-1", parentName: "level 0", children: [] } ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [ { name: "level 1-0", parentName: "level 0", children: [] } ] },
+                    { members: [ { name: "level 2-0", parentName: "level 1-0", children: [] } ] },
+                    { members: [ { name: "level 2-1", parentName: "level 1-0", children: [] } ] }
+                ]
+            }
+        ];
+
+        var data = [
+            [ { value: 1 }, { value: 2 }, { value: 3 } ],
+            [ { value: 2 }, { value: 4 }, { value: 5 } ]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow("level 1-0");
+
+        var data = dataSource.data();
+        equal(data.length, 5);
+        equal(data[0].value, 1);
+        equal(data[1].value, 2);
+        equal(data[2].value, 4);
+        equal(data[3].value, 5);
+        equal(data[4].value, 3);
+    });
+
 })();
 
