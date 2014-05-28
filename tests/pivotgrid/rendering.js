@@ -861,4 +861,27 @@
         ok(th_level1.eq(0).hasClass("k-header"));
         ok(!th_level1.eq(0).hasClass("k-alt"));
     });
+
+    test("PivotGrid renders k-first class to first cells that are not visually first", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_3", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 2_1", parentName: "level 1_2", levelNum: "2", children: [] }] },
+            { members: [ { name: "level 2_2", parentName: "level 1_3", levelNum: "2", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_level2 = rows.eq(2).find("th");
+
+        ok(th_level2.eq(0).hasClass("k-first"));
+        ok(th_level2.eq(1).hasClass("k-first"));
+    });
 })();

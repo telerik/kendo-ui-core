@@ -1372,6 +1372,7 @@ var __meta__ = {
             var member;
             var row;
 
+            var childCell;
             var allCell;
             var cell;
 
@@ -1401,6 +1402,11 @@ var __meta__ = {
 
                 for (; idx < childrenLength; idx++) {
                     childRow = this._buildRows(children[idx], 0, member);
+                }
+
+                if (row.children[0] !== cell) {
+                    childCell = childRow.children[childRow.children.length - childRow.colspan];
+                    childCell.attr.class += " k-first";
                 }
 
                 colspan = childRow.colspan;
