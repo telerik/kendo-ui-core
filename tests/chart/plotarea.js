@@ -4940,6 +4940,23 @@
             equal(legendItems[0].text, "series1foo");
             equal(legendItems[1].text, "series2");
         });
+
+        test("set legend item text with labels template if inactive labels template is not specified", function() {
+            createPlotArea([{
+                name: "series1",
+                visible: false
+            }, {
+                name: "series2"
+            }], {
+                legend: {
+                    labels: {
+                        template: "#=text#foo"
+                    }
+                }
+            });
+            equal(legendItems[0].text, "series1foo");
+            equal(legendItems[1].text, "series2foo");
+        });
     })();
 
     (function() {

@@ -6704,7 +6704,8 @@ var __meta__ = {
             if (point && point.visibleInLegend !== false) {
                 pointVisible = point.visible !== false;
                 text = point.category || "";
-                labelTemplate = pointVisible ? labelsOptions.template : inactiveItemsLabels.template;
+                labelTemplate = pointVisible ? labelsOptions.template :
+                    (inactiveItemsLabels.template || labelsOptions.template);
 
                 if (labelTemplate) {
                     text = template(labelTemplate)({
@@ -7844,7 +7845,8 @@ var __meta__ = {
                 }
 
                 text = currentSeries.name || "";
-                labelTemplate = seriesVisible ? labels.template : inactiveItemsLabels.template;
+                labelTemplate = seriesVisible ? labels.template :
+                    (inactiveItemsLabels.template || labels.template);
                 if (labelTemplate) {
                     text = template(labelTemplate)({
                         text: text,

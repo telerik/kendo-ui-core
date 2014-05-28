@@ -262,13 +262,24 @@
             equal(inactiveLabels.font, "bar");
         });
 
-        test("set legend item name with template", function() {
+        test("set legend item text with template", function() {
             setupInactiveItemsPieChart({
                 legend: {
                     inactiveItems: {
                         labels: {
                             template: "baz"
                         }
+                    }
+                }
+            });
+            equal(pieChart.legendItems[1].text, "baz");
+        });
+
+        test("set inactive legend item text with labels template if inactive items template is not specified", function() {
+            setupInactiveItemsPieChart({
+                legend: {
+                    labels: {
+                        template: "baz"
                     }
                 }
             });
