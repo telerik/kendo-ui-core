@@ -119,7 +119,7 @@
 }
 
 #about {
-    background: transparent url("backgrounds/kendo.jpg") left top no-repeat;
+    background: transparent url("backgrounds/kendo.jpg") left -500px no-repeat;
 }
 
 #about .km-navbar {
