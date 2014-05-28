@@ -1428,6 +1428,20 @@ var __meta__ = {
             return row;
         },
 
+        _tuplePath: function(tuple) {
+            var idx = 0;
+            var path = [];
+            var members = tuple.members;
+            var member = members[idx];
+
+            while(member) {
+                path.push(member.name);
+                member = members[++idx];
+            }
+
+            return path;
+        },
+
         _buildRows: function(tuple, memberIndex, parentMember) {
             var members = tuple.members;
             var children;
@@ -1437,6 +1451,7 @@ var __meta__ = {
 
             var allCell;
             var cell;
+            var cellChildren = [];
 
             var idx = 0;
             var childrenLength;
@@ -1451,15 +1466,32 @@ var __meta__ = {
 
             member = members[memberIndex];
 
-            cell = this._cell(member, { class: "k-header" });
-            row.children.push(cell);
-            row.colspan += 1;
-
             children = member.children;
             childrenLength = children.length
 
+            if (member.hasChildren) {
+                var className = "k-icon k-i-arrow-";
+
+                if (childrenLength) {
+                    className += "s";
+                } else {
+                    className += "e";
+                }
+                var expandAttr = { class: className };
+
+                expandAttr[kendo.attr("path")] = kendo.stringify(this._tuplePath(tuple));
+
+                cellChildren.push(element("span", expandAttr, null));
+            }
+
+            cellChildren.push(text(member.caption || member.name));
+
+            cell = element("th", { class: "k-header" }, cellChildren);
+            row.children.push(cell);
+            row.colspan += 1;
+
             if (childrenLength) {
-                allCell = this._cell(member, { class: "k-header k-alt" });
+                allCell = element("th", { class: "k-header k-alt" }, [text(member.caption || member.name)]);
                 row.children.push(allCell);
 
                 for (; idx < childrenLength; idx++) {

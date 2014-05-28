@@ -885,6 +885,55 @@
         ok(th_level2.eq(1).hasClass("k-first"));
     });
 
+    test("PivotGrid renders expand button collapsed", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        var button = th.find("span");
+
+        ok(button[0]);
+        ok(button.hasClass("k-icon"));
+        ok(button.hasClass("k-i-arrow-e"));
+        ok(!button.hasClass("k-i-arrow-s"));
+        equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
+    });
+
+    test("PivotGrid renders expand button expanded", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 0_2", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 0_3", levelNum: "1", parentName: "level 0", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        var button = th.find("span");
+
+        ok(button[0]);
+        ok(button.hasClass("k-icon"));
+        ok(!button.hasClass("k-i-arrow-e"));
+        ok(button.hasClass("k-i-arrow-s"));
+        equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
+    });
+
     module("PivotGrid resize on render", {
         setup: function() {
             kendo.ns = "kendo-";
