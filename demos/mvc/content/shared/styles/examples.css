@@ -2178,16 +2178,15 @@ a.footer-links:hover {
     transition-timing-function: ease;
     border-radius: 2px;
     -webkit-appearance: none;
-    font-size: 13px;
-    font-weight: bold;
     text-align: center;
     border: none;
     margin: 0.769em;
+    font: 700 13px Arial, Helvetica, sans-serif;
 }
 
 .try-kendo{
     margin-right: 0;
-    padding: 10px 22px 9px;
+    padding: 10px 22px 10px;
 }
 
 .try-kendo .k-icon
@@ -2418,6 +2417,12 @@ a.footer-links:hover {
     line-height: 1.083em;
     min-height: 0;
     border: none;
+}
+
+#example-search-list li.k-state-focused {
+  -webkit-box-shadow: inset 0 0 0 1px #cad0d6;
+    box-shadow: inset 0 0 0 1px #cad0d6;
+  
 }
 
 #example-search-list li.k-state-hover {
