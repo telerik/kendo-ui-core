@@ -392,4 +392,17 @@ test("correct item is updated when model itemchange changes the sorting order", 
     equal(items.eq(0).attr(kendo.attr("uid")), view[1].uid);
     equal(items.eq(1).attr(kendo.attr("uid")), view[0].uid);
 });
+
+    test("dataItem returns data item for given element", function() {
+        var listView = setup({
+            dataSource: [
+                { foo: 1 }, { foo: 2 }
+            ]
+        }).data("kendoListView");
+
+        var items = listView.items();
+
+        equal(listView.dataItem(items.eq(0)).foo, 1);
+        equal(listView.dataItem(items.eq(1)).foo, 2);
+    });
 })();
