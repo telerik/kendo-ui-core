@@ -1681,14 +1681,11 @@ var __meta__ = {
                 options = item.options,
                 markerColor = options.markerColor,
                 markers = options.markers,
-                size = markers.size,
                 markerOptions = deepExtend({}, markers, {
                     background: markerColor,
                     border: {
                         color: markerColor
-                    },
-                    width: size,
-                    height: size
+                    }
                 });
 
             item.container.append(new ShapeElement(markerOptions));
@@ -1929,7 +1926,6 @@ var __meta__ = {
                 container = legend.container,
                 width = options.width,
                 height = options.height,
-                container = legend.container,
                 vertical = legend.isVertical(),
                 containerBox = targetBox.clone();
 

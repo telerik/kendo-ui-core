@@ -2123,7 +2123,8 @@
                     border: {
                         width: 2
                     },
-                    size: 10,
+                    width: 10,
+                    height: 10,
                     margin: 5,
                     type: "triangle",
                     padding: 5
@@ -2164,7 +2165,7 @@
             equal(marker.options.type, "triangle");
         });
 
-        test("sets marker width and height from size", function() {
+        test("sets marker width and height", function() {
             equal(marker.options.width, 10);
             equal(marker.options.height, 10);
         });
