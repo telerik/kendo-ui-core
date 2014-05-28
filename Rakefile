@@ -50,7 +50,7 @@ end
 
 ADMIN_PASS = 'ultra'
 ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
-SITE_DOWNLOAD_BUILDER_UPLOAD_PASS = "p75a80s"
+SITE_DOWNLOAD_BUILDER_UPLOAD_PASS = "t3l3r1kc0m"
 
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
