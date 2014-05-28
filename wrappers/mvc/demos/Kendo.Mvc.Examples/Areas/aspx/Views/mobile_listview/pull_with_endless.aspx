@@ -38,7 +38,7 @@
                     .EndlessScroll(true)                                     
                     .DataSource(dataSource => 
                         dataSource
-                            .Read("Pull", "ListView")                         
+                            .Read("Pull", "Mobile_ListView")
                             .PageSize(40)                            
                     )
             %>
@@ -123,7 +123,7 @@
         type: "aspnetmvc-ajax",
         transport: {
             create: {
-                url: '<%=Url.Action("Create", "ListView") %>'
+                url: '<%=Url.Action("Create", "Mobile_ListView") %>'
             }
         },
         schema: {
@@ -142,20 +142,25 @@
     });
 </script>
 
-<style scoped>
+<style scoped>
+
     .product-item {
         font-size: 1.2;
-    }
+    }
+
     .product-item h3 {
         float: left;
         margin: 0;
         height: 1.3em;
         overflow: hidden;
-    }
-    .product-item p {
+    }
+
+    .product-item p {
+
         float: right;
         margin: 0;
-        padding: .3em 0 0;
+        padding: .3em 0 0;
+
     }
     
     .pullImage {
@@ -164,7 +169,8 @@
         border-radius: 3px;
         float: left;
         margin-right: 10px;
-    }
+    }
+
     .addNew {
         display: block;
         text-align: center;

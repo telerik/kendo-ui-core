@@ -76,7 +76,7 @@
     var employees = new kendo.data.HierarchicalDataSource({        
         transport: {
             read: {
-                url: '<%:Url.Action("Employees", "ListView") %>'                
+                url: '<%:Url.Action("Employees", "Mobile_ListView") %>'
             }
         },
 

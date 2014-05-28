@@ -37,7 +37,7 @@
                     .PullToRefresh(true)                    
                     .DataSource(dataSource => 
                         dataSource
-                            .Read("Pull", "ListView")                         
+                            .Read("Pull", "Mobile_ListView")
                             .PageSize(40)                            
                     )
             %>
@@ -122,7 +122,7 @@
         type: "aspnetmvc-ajax",
         transport: {
             create: {
-                url: '<%=Url.Action("Create", "ListView") %>'
+                url: '<%=Url.Action("Create", "Mobile_ListView") %>'
             }
         },
         schema: {

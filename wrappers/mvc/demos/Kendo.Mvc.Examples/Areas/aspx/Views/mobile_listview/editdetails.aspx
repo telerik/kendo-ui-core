@@ -14,7 +14,7 @@
                         <%: Html.Kendo().MobileBackButton()
                                 .Name("cancel")
                                 .Text("Cancel")                                
-                                .Url("Editing", "ListView")                               
+                                .Url("Editing", "Mobile_ListView")
                                 .Align(MobileButtonAlign.Left)                                
                         %>
                         <%: navbar.ViewTitle("Details")%>
@@ -34,7 +34,7 @@
         {
             %>
 
-            <% Html.BeginForm("Editing_Update", "ListView", FormMethod.Post); %>    
+            <% Html.BeginForm("Editing_Update", "Mobile_ListView", FormMethod.Post); %>
                 <%: Html.HiddenFor(product => product.ProductID ) %>
                 <% Html.Kendo().MobileListView()
                        .Style("inset")

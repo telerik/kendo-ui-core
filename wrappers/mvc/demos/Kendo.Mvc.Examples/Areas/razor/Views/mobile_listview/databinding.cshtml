@@ -11,7 +11,7 @@
                 .Name("flat-listview")                
                 .DataSource(dataSource => 
                     dataSource
-                            .Read("FlatData", "ListView")                        
+                            .Read("FlatData", "Mobile_ListView")
                 )
         )        
 )
@@ -27,7 +27,7 @@
                 .FixedHeaders(true)
                 .DataSource(dataSource => 
                     dataSource
-                        .Read("GroupedData", "ListView")
+                        .Read("GroupedData", "Mobile_ListView")
                         .Group(group => group.Add("Letter", typeof(string)))
                 )
         )        

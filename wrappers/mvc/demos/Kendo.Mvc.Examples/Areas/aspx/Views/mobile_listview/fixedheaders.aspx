@@ -12,7 +12,7 @@
                 .FixedHeaders(true)
                 .DataSource(dataSource => 
                     dataSource
-                        .Read("FixedHeaders_Read", "ListView")
+                        .Read("FixedHeaders_Read", "Mobile_ListView")
                         .Group(group => group.Add("Letter", typeof(string)))
                 )
         )        

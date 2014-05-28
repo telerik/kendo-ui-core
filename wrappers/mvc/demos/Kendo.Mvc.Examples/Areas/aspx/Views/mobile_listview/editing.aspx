@@ -11,8 +11,8 @@
                 .Name("listview")
                 .TemplateId("itemTemplate")
                 .DataSource(dataSource => dataSource
-                    .Read("Editing_Read", "ListView")
-                    .Destroy("Editing_Destroy", "ListView")                   
+                    .Read("Editing_Read", "Mobile_ListView")
+                    .Destroy("Editing_Destroy", "Mobile_ListView")
                     .Model(model => model.Id(product => product.ProductID))
                 )                
         )
