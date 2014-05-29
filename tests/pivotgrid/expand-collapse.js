@@ -153,8 +153,7 @@
         equal(headerTable.find("th").length, 5);
     });
 
-    //Fail because of a bug in DOM.js
-    /*test("PivotGrid collapses child tuple", function() {
+    test("PivotGrid collapses child tuple", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] },
             { members: [ { name: "level 0_1", levelNum: "1", hasChildren: true, parentName: "level 0", children: [] }] },
@@ -171,10 +170,7 @@
 
         var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
 
-        var tr = headerTable.find("tr").eq(1);
-        var th = headerTable.find("th").eq(0);
-
-        var button = th.find("span");
+        var button = headerTable.find("span.k-icon").eq(1);
 
         stub(dataSource, {
             expandColumn: dataSource.expandColumn
@@ -185,5 +181,5 @@
 
         equal(dataSource.calls("expandColumn"), 0);
         equal(headerTable.find("tr").length, 2);
-    });*/
+    });
 })();
