@@ -15,7 +15,7 @@
 
 <div id="overview">
     <div id="overview-widgets">
-        <h2>@ViewBag.Product <strong>Components</strong></h2>
+        <h2>@ViewBag.Product.Replace("-", " ") <strong>Components</strong></h2>
         <div id="most-popular">
                 <h3>Most popular</h3>
                 <ul class="overview-col">
@@ -145,7 +145,12 @@
     <div>
     <h2>Sample Applications</h2>
     <ul>
-        <li><a href="http://demos.telerik.com/aspnet-mvc/html5-dashboard-sample-app">Telerik Northwind Dashboard</a></li>
+        <li>
+            <a href="./html5-dashboard-sample-app/">
+                <img src="@Url.Content("~/content/shared/images/dashboards/northwind.png")" class="application-image"/>
+                <p>Telerik Northwind Dashboard</p>
+            </a>
+        </li>
     </ul>
     </div>
     }
