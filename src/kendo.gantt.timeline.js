@@ -217,16 +217,27 @@ var __meta__ = {
             var row;
             var slots = this._timeSlots();
             var slotsCount = slots.length;
+            var slot;
             var slotSpan;
             var totalSpan = 0;
             var attributes;
 
             for (var i = 0; i < slotsCount; i++) {
-                slotSpan = slots[i].span;
+                slot = slots[i];
+
+                attributes = {};
+
+                slotSpan = slot.span;
 
                 totalSpan += slotSpan;
 
-                attributes = (slotSpan !== 1) ? { colspan: slotSpan } : null;
+                if (slotSpan !== 1) {
+                    attributes.colspan = slotSpan;
+                }
+
+                if (slot.isNonWorking) {
+                    attributes.className = "k-nonwork-hour";
+                }
 
                 cells.push(kendoDomElement("td", attributes, [
                     kendoTextElement("\u00a0")
