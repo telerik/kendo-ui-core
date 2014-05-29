@@ -269,4 +269,11 @@
         tree.render([element("div", null, [element("div")])]);
         ok(firstChild !== root.firstChild.firstChild);
     });
+
+    test("render updates children if node type has changed", function() {
+        tree.render([ element("div", null, [ text("test_1") ]) ]);
+        tree.render([ element("div", null, [ element("span", { class: "k-icon k-i-arrow-s" }), text("test_1") ]) ]);
+
+        ok(true);
+    });
 }());

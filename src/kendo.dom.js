@@ -45,6 +45,7 @@ var __meta__ = {
         if (!cached || cached.nodeName !== this.nodeName) {
             if (cached) {
                 cached.remove();
+                cached = null;
             }
 
             node = document.createElement(this.nodeName);
