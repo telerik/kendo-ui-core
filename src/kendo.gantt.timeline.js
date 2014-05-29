@@ -1488,7 +1488,7 @@ var __meta__ = {
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
                 filter: ".k-task",
-                holdToDrag: false
+                holdToDrag: kendo.support.mobileOS
             });
 
             this._moveDraggable
@@ -1840,6 +1840,10 @@ var __meta__ = {
 
                 element.addClass("k-state-selected");
 
+                if (kendo.support.mobileOS) {
+                    element.parent().addClass("k-task-wrap-active");
+                }
+
                 return;
             }
 
@@ -1867,6 +1871,12 @@ var __meta__ = {
             this.wrapper
                 .find(".k-state-selected")
                 .removeClass("k-state-selected");
+
+            if (kendo.support.mobileOS) {
+                this.wrapper
+                    .find(".k-task-wrap-active")
+                    .removeClass("k-task-wrap-active");
+            }
         },
 
         _attachEvents: function() {
