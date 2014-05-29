@@ -3382,7 +3382,7 @@ var __meta__ = {
         updateStackRange: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                axisName, limits;
+                limits;
 
             if (isStacked) {
                 for (var i = 0; i < chart.options.series.length; i++) {
@@ -3396,7 +3396,7 @@ var __meta__ = {
                     }
 
                     chart.valueAxisRanges[axisName] = limits;
-                };
+                }
             }
         },
 
