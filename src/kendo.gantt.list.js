@@ -37,7 +37,7 @@ var __meta__ = {
     };
     var NS = ".kendoGanttList";
     var CLICK = "click";
-    var DROPPOSITIONS = "k-insert-top k-insert-bottom k-add";
+    var DROPPOSITIONS = "k-insert-top k-insert-bottom k-add k-insert-middle";
 
     function createPlaceholders(level) {
         var spans = [];
@@ -79,8 +79,12 @@ var __meta__ = {
                 this._reorderDraggable.destroy();
             }
 
-            if (this._dropTargetArea) {
-                this._dropTargetArea.destroy();
+            if (this._tableDropArea) {
+                this._tableDropArea.destroy();
+            }
+
+            if (this._contentDropArea) {
+                this._contentDropArea.destroy();
             }
 
             if (this.touch) {
@@ -225,12 +229,19 @@ var __meta__ = {
             var rows = [];
             var style;
             var className = [];
+            var level;
 
             for (var i = 0, length = tasks.length; i < length; i++) {
                 task = tasks[i];
+                level = this._levels({
+                    idx: task.parentId,
+                    id: task.id,
+                    summary: task.summary
+                });
 
                 style = {
-                    "data-uid": task.uid
+                    "data-uid": task.uid,
+                    "data-level": level
                 };
 
                 if (i % 2 !== 0) {
@@ -247,7 +258,8 @@ var __meta__ = {
 
                 rows.push(this._tds({
                     task: task,
-                    style: style
+                    style: style,
+                    level: level
                 }));
 
                 className = [];
@@ -264,7 +276,7 @@ var __meta__ = {
             for (var i = 0, l = columns.length; i < l; i++) {
                 column = columns[i];
 
-                children.push(this._td({ task: options.task, column: column }));
+                children.push(this._td({ task: options.task, column: column, level: options.level }));
             }
 
             return kendoDomElement("tr", options.style, children);
@@ -276,13 +288,11 @@ var __meta__ = {
             var column = options.column;
             var value = task.get(column.field);
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
-            var isSummary;
 
             if (column.field === "title") {
-                isSummary = task.summary;
-                children = this._placeholders({ idx: task.parentId, id: task.id, summary: isSummary });
+                children = createPlaceholders(options.level);
                 children.push(kendoDomElement("span", {
-                    className: "k-icon" + (isSummary ? (task.expanded ? " k-i-collapse" : " k-i-expand")
+                    className: "k-icon" + (task.summary ? (task.expanded ? " k-i-collapse" : " k-i-expand")
                         : " k-i-none")
                 }));
             }
@@ -292,7 +302,7 @@ var __meta__ = {
             return kendoDomElement("td", null, children);
         },
 
-        _placeholders: function(options) {
+        _levels: function(options) {
             var levels = this.levels;
             var level;
             var summary = options.summary;
@@ -308,7 +318,7 @@ var __meta__ = {
                         levels.push({ field: id, value: level.value + 1 });
                     }
 
-                    return createPlaceholders(level.value);
+                    return level.value;
                 }
             }
         },
@@ -542,6 +552,7 @@ var __meta__ = {
             var draggedTask = null;
             var dropAllowed = true;
             var dropTarget;
+            var selector = 'tr[' + kendo.attr("level") + ' = 0]:last';
             var action = {};
             var clear = function() {
                 draggedTask = null;
@@ -573,13 +584,21 @@ var __meta__ = {
                 var location = coordinate.location;
                 var className = "k-add";
                 var command = "add";
+                var level = parseInt(dropTarget.attr(kendo.attr("level")), 10);
+                var sibling;
 
                 if (location <= dropTarget.beforeLimit) {
+                    sibling = dropTarget.prev();
                     className = "k-insert-top";
                     command = "insert-before";
                 } else if (location >= dropTarget.afterLimit) {
+                    sibling = dropTarget.next();
                     className = "k-insert-bottom";
                     command = "insert-after";
+                }
+
+                if (sibling && parseInt(sibling.attr(kendo.attr("level")), 10) === level) {
+                    className = "k-insert-middle";
                 }
 
                 action.className = className;
@@ -599,6 +618,7 @@ var __meta__ = {
             this._reorderDraggable = this.content
                 .kendoDraggable({
                     distance: 10,
+                    holdToDrag: kendo.support.mobileOS,
                     group: "listGroup",
                     filter: "tr[data-uid]:not('.k-edit-row')",
                     hint: function(target) {
@@ -634,7 +654,7 @@ var __meta__ = {
                     }
                 }).data("kendoDraggable");
 
-            this._dropTargetArea = this.content
+            this._tableDropArea = this.content
                 .kendoDropTargetArea({
                     distance: 0,
                     group: "listGroup",
@@ -651,6 +671,7 @@ var __meta__ = {
                     },
                     "drop": function(e) {
                         var target = that._modelFromElement(dropTarget);
+                        var orderId = target.orderId;
                         var taskInfo = {
                             parentId: target.parentId
                         };
@@ -664,7 +685,8 @@ var __meta__ = {
                                     taskInfo.orderId = target.orderId;
                                     break;
                                 case "insert-after":
-                                    taskInfo.orderId = target.orderId + 1;
+                                    taskInfo.orderId = target.parentId !== draggedTask.parentId ?
+                                        orderId + 1 : orderId;
                                     break;
                             }
                             that.trigger("update", {
@@ -674,6 +696,27 @@ var __meta__ = {
                         }
                     }
                 }).data("kendoDropTargetArea");
+
+            this._contentDropArea = this.element
+               .kendoDropTargetArea({
+                   distance: 0,
+                   group: "listGroup",
+                   filter: ".k-grid-content",
+                   "drop": function(e) {
+                       var target = that._modelFromElement(that.content.find(selector));
+                       var orderId = target.orderId;
+                       var taskInfo = {
+                           parentId: null,
+                           orderId: draggedTask.parentId !== null ?
+                                        orderId + 1 : orderId
+                       };
+
+                        that.trigger("update", {
+                            task: draggedTask,
+                            updateInfo: taskInfo
+                        });
+                   }
+               }).data("kendoDropTargetArea");
         },
 
         _modelFromElement: function(element) {

@@ -284,7 +284,10 @@
         var content = ganttList.content;
         var test = function(idx, tr) {
             tr = $(tr);
-            equal(tr.attr("data-uid"), taskTree[idx].get("uid"));
+            var task = taskTree[idx];
+            var level = dataSource.taskLevel(task);
+            equal(tr.attr("data-uid"), task.get("uid"));
+            equal(parseInt(tr.attr("data-level")), level);
         };
 
         content.find("tr").each(test);

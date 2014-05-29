@@ -6,7 +6,8 @@
     var GanttList = kendo.ui.GanttList;
     var GanttDataSource = kendo.data.GanttDataSource;
     var draggable;
-    var dropTargetArea;
+    var tableDropArea;
+    var contentDropArea;
     var data = [
         {
             id: 1,
@@ -25,7 +26,8 @@
             title: "bar",
             start: new Date("2014/04/02"),
             end: new Date("2014/04/03"),
-            summary: false
+            summary: true,
+            expanded: true
         },
         {
             id: 3,
@@ -38,7 +40,7 @@
             expanded: true
         },
         {
-            id: 5,
+            id: 4,
             parentId: 3,
             orderId: 0,
             title: "foo.bar.foo",
@@ -47,12 +49,39 @@
             summary: false
         },
         {
-            id: 4,
+            id: 5,
             parentId: 1,
             orderId: 1,
             title: "foo.foo",
             start: new Date("2014/04/02"),
             end: new Date("2014/04/05"),
+            summary: false
+        },
+        {
+            id: 6,
+            parentId: 2,
+            orderId: 0,
+            title: "bar.foo1",
+            start: new Date("2014/04/02"),
+            end: new Date("2014/04/03"),
+            summary: false
+        },
+        {
+            id: 7,
+            parentId: 2,
+            orderId: 1,
+            title: "bar.foo2",
+            start: new Date("2014/04/02"),
+            end: new Date("2014/04/03"),
+            summary: false
+        },
+        {
+            id: 8,
+            parentId: 2,
+            orderId: 3,
+            title: "bar.foo3",
+            start: new Date("2014/04/02"),
+            end: new Date("2014/04/03"),
             summary: false
         }
     ];
@@ -104,58 +133,38 @@
     }
 
     function dragenter(target) {
-        if (!dropTargetArea) {
+        if (!tableDropArea) {
             return;
         }
 
-        dropTargetArea.trigger("dragenter", {
+        tableDropArea.trigger("dragenter", {
             dropTarget: target
         });
     }
 
     function dragleave() {
-        if (!dropTargetArea) {
+        if (!tableDropArea) {
             return;
         }
 
-        dropTargetArea.trigger("dragleave", { });
+        tableDropArea.trigger("dragleave", { });
     }
 
     function drop() {
-        if (!dropTargetArea) {
+        if (!tableDropArea) {
             return;
         }
 
-        dropTargetArea.trigger("drop", {});
+        tableDropArea.trigger("drop", {});
     }
 
-    module("Moving", {
-        setup: function() {
-            element = $("<div />");
-        },
-        teardown: function() {
-            kendo.destroy(element);
-            draggable = null;
-            dropTargetArea = null;
+    function dropOnContent() {
+        if (!contentDropArea) {
+            return;
         }
-    });
 
-    //test("moving task triggers movestart event", 1, function() {
-    //    var gantt = new Gantt(element, {
-    //        dataSource: [
-    //            { start: new Date("2014/04/30 10:30"), end: new Date("2014/04/30 12:30") }
-    //        ],
-    //        moveStart: function(e) {
-    //            equal(e.task, gantt.dataSource.at(0));
-    //        }
-    //    });
-
-    //    var handle = element.find(".k-event").eq(0);
-
-    //    draggable = gantt.timeline._moveDraggable;
-
-    //    dragstart(handle);
-    //});
+        contentDropArea.trigger("drop", {});
+    }
 
     module("List Drag/Drop", {
         setup: function() {
@@ -165,20 +174,27 @@
             setup();
             draggable = ganttList.
                 content.data("kendoDraggable");
-            dropTargetArea = ganttList.
+            tableDropArea = ganttList.
                 content.data("kendoDropTargetArea");
+            contentDropArea = ganttList.
+                element.data("kendoDropTargetArea");
             createHint();
         },
         teardown: function() {
             ganttList.destroy();
             element.remove();
             draggable = null;
-            dropTargetArea = null;
+            tableDropArea = null;
+            contentDropArea = null;
         }
     });
 
-    test("list draggable and dropTargetArea have same group", function() {
-        ok(draggable.options.group === dropTargetArea.options.group);
+    test("list draggable and tableDropArea have same group", function() {
+        ok(draggable.options.group === tableDropArea.options.group);
+    });
+
+    test("list draggable and contentDropArea have same group", function() {
+        ok(draggable.options.group === contentDropArea.options.group);
     });
 
     test("drag start append task title to hint", function() {
@@ -191,7 +207,7 @@
 
     test("dragenter on possible target removes denied class", function() {
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
 
         ok(!draggable
             .hint
@@ -223,7 +239,7 @@
             ok(true);
         });
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drop();
     });
 
@@ -267,12 +283,12 @@
     });
 
     test("drag on upper part of target set drop position class", function() {
-        var target = ganttList.content.find("tr:last");
+        var target = ganttList.content.find("tr:eq(4)");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drag(target, (offsetY + height * 0.20));
 
         ok(draggable
@@ -281,8 +297,23 @@
             .hasClass("k-insert-top"));
     });
 
+    test("drag on upper part of target between two sibling set drop position class", function() {
+        var target = ganttList.content.find("tr:eq(6)");
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        dragstart(ganttList.content.find("tr:eq(7)"));
+        dragenter(ganttList.content.find("tr:eq(6)"));
+        drag(target, (offsetY + height * 0.20));
+
+        ok(draggable
+            .hint
+            .children(".k-drag-status")
+            .hasClass("k-insert-middle"));
+    });
+
     test("drag on upper part of target set update arguments", 3, function() {
-        var target = ganttList.content.find("tr:last");
+        var target = ganttList.content.find("tr:eq(4)");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -294,18 +325,18 @@
         });
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drag(target, (offsetY + height * 0.20));
         drop();
     });
 
     test("drag on middle part of target set drop position class", function() {
-        var target = ganttList.content.find("tr:last");
+        var target = ganttList.content.find("tr:eq(4)");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drag(target, (offsetY + height * 0.60));
 
         ok(draggable
@@ -315,7 +346,7 @@
     });
 
     test("drag on middle part of target set update arguments", 2, function() {
-        var target = ganttList.content.find("tr:last");
+        var target = ganttList.content.find("tr:eq(4)");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -326,18 +357,18 @@
         });
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drag(target, (offsetY + height * 0.60));
         drop();
     });
 
     test("drag on bottom part of target set drop position class", function() {
-        var target = ganttList.content.find("tr:last");
+        var target = ganttList.content.find("tr:eq(4)");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
         drag(target, (offsetY + height * 0.90));
 
         ok(draggable
@@ -346,8 +377,23 @@
             .hasClass("k-insert-bottom"));
     });
 
-    test("drag on bottom part of target set update arguments", 3, function() {
-        var target = ganttList.content.find("tr:last");
+    test("drag on bottom part of target between two sibling set drop position class", function() {
+        var target = ganttList.content.find("tr:eq(5)");
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        dragstart(ganttList.content.find("tr:eq(7)"));
+        dragenter(ganttList.content.find("tr:eq(5)"));
+        drag(target, (offsetY + height * 0.90));
+
+        ok(draggable
+            .hint
+            .children(".k-drag-status")
+            .hasClass("k-insert-middle"));
+    });
+
+    test("drag on bottom part of target with same parent set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:eq(4)");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -355,13 +401,58 @@
         ganttList.bind("update", function(e) {
             equal(e.task.get("title"), "foo");
             equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId"));
+        });
+
+        dragstart(ganttList.content.find("tr:first"));
+        dragenter(ganttList.content.find("tr:eq(4)"));
+        drag(target, (offsetY + height * 0.90));
+        drop();
+    });
+
+    test("drag on bottom part of target with different parent set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:eq(5)");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        ganttList.bind("update", function(e) {
+
+            equal(e.task.get("title"), "foo");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
             equal(e.updateInfo.orderId, targetTask.get("orderId") + 1);
         });
 
         dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:last"));
+        dragenter(ganttList.content.find("tr:eq(5)"));
         drag(target, (offsetY + height * 0.90));
         drop();
+    });
+
+    test("drop on content outside table with root item triggers update event with arguments", 3, function() {
+        var lastRoot = ganttList._modelFromElement(ganttList.content.find('tr[' + kendo.attr("level") + ' = 0]:last'));
+
+        ganttList.bind("update", function(e) {
+            ok(true);
+            equal(e.updateInfo.parentId, null);
+            equal(e.updateInfo.orderId, lastRoot.orderId);
+        });
+        dragstart(ganttList.content.find("tr:first"));
+
+        dropOnContent();
+    });
+
+    test("drop on content outside table with child item triggers update event with arguments", 3, function() {
+        var lastRoot = ganttList._modelFromElement(ganttList.content.find('tr[' + kendo.attr("level") + ' = 0]:last'));
+
+        ganttList.bind("update", function(e) {
+            ok(true);
+            equal(e.updateInfo.parentId, null);
+            equal(e.updateInfo.orderId, lastRoot.orderId + 1);
+        });
+        dragstart(ganttList.content.find("tr:eq(1)"));
+
+        dropOnContent();
     });
 
     module("Gantt non-editable", {
