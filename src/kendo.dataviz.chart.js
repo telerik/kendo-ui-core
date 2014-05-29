@@ -3355,7 +3355,7 @@ var __meta__ = {
             return [axisCrossingValue, point.value || axisCrossingValue];
         },
 
-        plotLimits: function() {
+        plotLimits: function(axisName) {
             var min = MAX_VALUE;
             var max = MIN_VALUE;
 
@@ -3365,10 +3365,12 @@ var __meta__ = {
                 for (var pIx = 0; pIx < categoryPts.length; pIx++) {
                     var point = categoryPts[pIx];
                     if (point) {
-                        var to = this.plotRange(point, 0)[1];
-                        if (defined(to)) {
-                            max = math.max(max, to);
-                            min = math.min(min, to);
+                        if (point.series.axis === axisName) {
+                            var to = this.plotRange(point, 0)[1];
+                            if (defined(to)) {
+                                max = math.max(max, to);
+                                min = math.min(min, to);
+                            }
                         }
                     }
                 }
@@ -3377,20 +3379,24 @@ var __meta__ = {
             return { min: min, max: max };
         },
 
-        computeAxisRanges: function() {
+        updateStackRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
                 axisName, limits;
 
             if (isStacked) {
-                axisName = chart.options.series[0].axis;
-                limits = chart.plotLimits();
-                if (chart.errorTotals) {
-                    limits.min = math.min(limits.min, sparseArrayMin(chart.errorTotals.negative));
-                    limits.max = math.max(limits.max, sparseArrayMax(chart.errorTotals.positive));
-                }
+                for (var i = 0; i < chart.options.series.length; i++) {
+                    var series = chart.options.series[i];
+                    var axisName = series.axis;
 
-                chart.valueAxisRanges[axisName] = limits;
+                    limits = chart.plotLimits(axisName);
+                    if (chart.errorTotals) {
+                        limits.min = math.min(limits.min, sparseArrayMin(chart.errorTotals.negative));
+                        limits.max = math.max(limits.max, sparseArrayMax(chart.errorTotals.positive));
+                    }
+
+                    chart.valueAxisRanges[axisName] = limits;
+                };
             }
         },
 
@@ -3683,7 +3689,7 @@ var __meta__ = {
             var chart = this;
 
             CategoricalChart.fn.render.apply(chart);
-            chart.computeAxisRanges();
+            chart.updateStackRanges();
         },
 
         pointType: function() {
@@ -3698,8 +3704,8 @@ var __meta__ = {
             return StackWrap;
         },
 
-        plotLimits: function() {
-            var limits = CategoricalChart.fn.plotLimits.call(this);
+        plotLimits: function(axisName) {
+            var limits = CategoricalChart.fn.plotLimits.call(this, axisName);
             limits.min = math.min(0, limits.min);
             limits.max = math.max(0, limits.max);
 
@@ -4707,7 +4713,7 @@ var __meta__ = {
 
             CategoricalChart.fn.render.apply(chart);
 
-            chart.computeAxisRanges();
+            chart.updateStackRanges();
             chart.renderSegments();
         },
 
