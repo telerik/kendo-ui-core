@@ -411,14 +411,13 @@
             });
 
             $("#export").on("click", function() {
-                var json = JSON.stringify(diagram.save());
-        
+                var json = JSON.stringify(diagram.save()),
+                    blob = new Blob([json], {type: "application\/json"});;
+
                 if (navigator.msSaveBlob) {
-                    var blob = new Blob([json]);
-            
                     navigator.msSaveBlob(blob, this.getAttribute("download"));
                 } else {
-                    this.href = 'data:text/json;charset=utf-8,' + json;
+                    this.href = window.URL.createObjectURL(blob);
                 }
             });
 
