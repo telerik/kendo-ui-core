@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using IOFile = System.IO.File;
+using Kendo.Models;
 
 namespace Kendo.Controllers
 {
@@ -60,9 +61,33 @@ namespace Kendo.Controllers
 
         private string RenderView(string path)
         {
-            string suite = Regex.Match(path, @"~/Views/([^/]*)/").Groups[1].Value;
+            string url = path.Replace("~/Views/demos/", "").Replace(".cshtml", "");
 
-            ViewData["suite"] = suite;
+            var widgets = LoadWidgets();
+
+            NavigationExample currentExample = null;
+            NavigationWidget currentWidget = null;
+
+            foreach (var widget in widgets)
+            {
+                foreach (var example in widget.Items)
+                {
+                    if (example.Url == url)
+                    {
+                        currentExample = example;
+                        currentWidget = widget;
+                        break;
+                    }
+                }
+            }
+
+            if (currentWidget == null)
+            {
+                return null;
+            }
+
+            ViewBag.Mobile = currentWidget.Mobile || currentExample.Mobile;
+            ViewBag.DisableInMobile = currentExample.DisableInMobile;
 
             var viewResult = ViewEngines.Engines.FindView(ControllerContext, path, "SourceLayout");
 

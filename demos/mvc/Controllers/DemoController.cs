@@ -13,7 +13,6 @@ namespace Kendo.Controllers
     public class DemoController : BaseController
     {
         private List<string> examplesUrl = new List<string>();
-        protected static readonly string docsURL = "http://docs.telerik.com/kendo-ui/api/{0}/{1}";
 
         protected static readonly IDictionary<String, String> Docs =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
@@ -58,9 +57,6 @@ namespace Kendo.Controllers
             {
                 return HttpNotFound();
             }
-
-            FindSiblingExamples();
-            FindEdgeExamples();
 
             if (ViewBag.Mobile) {
                 if (ViewBag.CurrentExample.Url.StartsWith("adaptive") && IsMobileDevice())
@@ -200,46 +196,6 @@ namespace Kendo.Controllers
             var components = url.Split('/');
 
             return (section == components[0] && example == components[1]) || (section == "upload" && example == "result" && components[0] == "upload" && components[1] == "index");
-        }
-
-        protected void FindSiblingExamples()
-        {
-            if (ViewBag.CurrentExample != null)
-            {
-                var url = "~/" + ViewBag.CurrentExample.Url;
-                var index = examplesUrl.IndexOf(url);
-
-                if (index > 0)
-                {
-                    ViewBag.PrevUrl = examplesUrl[index - 1];
-                }
-
-                if (index < examplesUrl.Count - 1)
-                {
-                    ViewBag.NextUrl = examplesUrl[index + 1];
-                }
-            }
-        }
-
-        protected void FindEdgeExamples()
-        {
-            if (ViewBag.CurrentWidget != null)
-            {
-                var index = -1;
-                var items = ViewBag.CurrentWidget.Items;
-                var first = "~/" + items[0].Url;
-                var last = "~/" + items[items.Length - 1].Url;
-
-                index = examplesUrl.IndexOf(first);
-                if (index > 0) {
-                    ViewBag.PrevWidgetUrl = examplesUrl[index - 1];
-                }
-
-                index = examplesUrl.IndexOf(last);
-                if (index < examplesUrl.Count - 1) {
-                    ViewBag.NextWidgetUrl = examplesUrl[index + 1];
-                }
-            }
         }
     }
 }
