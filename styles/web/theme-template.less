@@ -519,6 +519,16 @@ html .km-pane-wrapper .k-header
     background-color: @scheduler-nonwork-background-color;
 }
 
+.k-gantt .k-nonwork-hour
+{
+    background-color: rgba(0,0,0, .02);
+}
+
+.k-gantt .k-header.k-nonwork-hour
+{
+    background-color: rgba(0,0,0, .2);
+}
+
 .k-scheduler-table .k-today,
 .k-today > .k-scheduler-datecolumn,
 .k-today > .k-scheduler-groupcolumn
@@ -1262,6 +1272,11 @@ div.k-imagebrowser-dropzone em
     background-color: lighten(@event-background-color, 12%);
     border-color: @event-background-color;
     color: @event-text-color;
+}
+
+.k-state-selected .k-task-single
+{
+    border-color: @selected-border-color;
 }
 
 .k-line-h,
