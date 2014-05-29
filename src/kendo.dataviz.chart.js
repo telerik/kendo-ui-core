@@ -3355,7 +3355,7 @@ var __meta__ = {
             return [axisCrossingValue, point.value || axisCrossingValue];
         },
 
-        plotLimits: function(axisName) {
+        stackLimits: function(axisName, stackName) {
             var min = MAX_VALUE;
             var max = MIN_VALUE;
 
@@ -3365,7 +3365,7 @@ var __meta__ = {
                 for (var pIx = 0; pIx < categoryPts.length; pIx++) {
                     var point = categoryPts[pIx];
                     if (point) {
-                        if (point.series.axis === axisName) {
+                        if (point.series.stack === stackName || point.series.axis === axisName) {
                             var to = this.plotRange(point, 0)[1];
                             if (defined(to)) {
                                 max = math.max(max, to);
@@ -3379,7 +3379,7 @@ var __meta__ = {
             return { min: min, max: max };
         },
 
-        updateStackRanges: function() {
+        updateStackRange: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
                 axisName, limits;
@@ -3389,7 +3389,7 @@ var __meta__ = {
                     var series = chart.options.series[i];
                     var axisName = series.axis;
 
-                    limits = chart.plotLimits(axisName);
+                    limits = chart.stackLimits(axisName, series.stack);
                     if (chart.errorTotals) {
                         limits.min = math.min(limits.min, sparseArrayMin(chart.errorTotals.negative));
                         limits.max = math.max(limits.max, sparseArrayMax(chart.errorTotals.positive));
@@ -3689,7 +3689,7 @@ var __meta__ = {
             var chart = this;
 
             CategoricalChart.fn.render.apply(chart);
-            chart.updateStackRanges();
+            chart.updateStackRange();
         },
 
         pointType: function() {
@@ -3704,8 +3704,8 @@ var __meta__ = {
             return StackWrap;
         },
 
-        plotLimits: function(axisName) {
-            var limits = CategoricalChart.fn.plotLimits.call(this, axisName);
+        stackLimits: function(axisName, stackName) {
+            var limits = CategoricalChart.fn.stackLimits.call(this, axisName, stackName);
             limits.min = math.min(0, limits.min);
             limits.max = math.max(0, limits.max);
 
@@ -4713,7 +4713,7 @@ var __meta__ = {
 
             CategoricalChart.fn.render.apply(chart);
 
-            chart.updateStackRanges();
+            chart.updateStackRange();
             chart.renderSegments();
         },
 
