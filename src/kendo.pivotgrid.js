@@ -59,8 +59,8 @@ var __meta__ = {
                     continue;
                 }
 
-                name = members[memberIdx].name.replace(/\.\[all\]$/i, "");
-                parentName = (members[memberIdx].parentName || "").replace(/\.\[all\]$/i, "");
+                name = members[memberIdx].name/*.replace(/\.\[all\]$/i, "")*/;
+                parentName = (members[memberIdx].parentName || "")/*.replace(/\.\[all\]$/i, "")*/;
 
                 if (members[memberIdx].children.length > 0) {
                     accumulator[name] = true;
@@ -72,9 +72,7 @@ var __meta__ = {
         }
     }
 
-    function descriptorsForAxes(axes) {
-        var tuples = axes.tuples || [];
-
+    function descriptorsForAxes(tuples) {
         var result = {};
 
         accumulateMembers(result, tuples);
@@ -144,24 +142,59 @@ var __meta__ = {
             var origin = axis === "columns" ? "columns" : "rows";
             var other = axis === "columns" ? "rows" : "columns";
 
-            var members = normalizeMembers(path);
-            members[members.length - 1].expand = true;
+            var axes = this.axes();
 
+            var members = normalizeMembers(path);
+            var memberToExpand = members[members.length - 1].name;
             var axis1 = this[origin]();
 
-            if (members.length < axis1.length) {
-                for (var idx = 0; idx < axis1.length; idx++) {
-                    var found = false;
-                    for (var j = 0; j < members.length; j++) {
-                        if (members[j].name.indexOf(axis1[idx].name) === 0) {
-                            found = true;
-                            break;
+            var idx;
+            if (members.length < axis1.length && axes[origin]) {
+                var originFirstTuple = (axes[origin].tuples || [])[0];
+
+                if (originFirstTuple) {
+                    axis1 = originFirstTuple.members;
+                    for (idx = 0; idx < axis1.length; idx++) {
+                        var found = false;
+                        for (var j = 0; j < members.length; j++) {
+                            if (members[j].name.indexOf(axis1[idx].hierarchy) === 0) {
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            members.push(axis1[idx]);
                         }
                     }
+                }
+            }
 
-                    if (!found) {
-                        members.push(axis1[idx]);
-                    }
+            var measures = this.measures();
+            if (measures.length > 1) {
+                members.push({
+                    name: "Measures",
+                    measure: true,
+                    children: normalizeMembers(measures)
+                });
+            }
+
+            var tupletoSearch = {
+                members: members
+            };
+
+            var descriptors = this[origin]() || [];
+
+            if (axes && axes[origin]) {
+                var result = findExistingTuple(axes[origin].tuples, tupletoSearch);
+                if (result) {
+                    members = descriptorsForAxes([result.tuple]);
+                }
+            }
+
+            for (idx = 0; idx < members.length; idx++) {
+                if (members[idx].name === memberToExpand) {
+                    members[idx].expand = true;
                 }
             }
 
@@ -177,7 +210,7 @@ var __meta__ = {
             var descriptors = this[axis]() || [];
 
             if (axes && axes[axis]) {
-                descriptors = descriptorsForAxes(axes[axis]);
+                descriptors = descriptorsForAxes(axes[axis].tuples || []);
             }
             return descriptors;
         },
@@ -224,14 +257,15 @@ var __meta__ = {
 
             if (options !== undefined) {
                 this._measures = options.measures || [];
-                this._columns = options.columns || [];
-                this._rows = options.rows || [];
+        //        this._columns = options.columns || [];
+         //       this._rows = options.rows || [];
 
                 if (options.columns) {
-                    this._columns = options.columns = normalizeMembers(options.columns);
+                   options.columns = normalizeMembers(options.columns);
                 }
+
                 if (options.rows) {
-                    this._rows = options.rows = normalizeMembers(options.rows);
+                   options.rows = normalizeMembers(options.rows);
                 }
             }
             return options;
@@ -804,6 +838,13 @@ var __meta__ = {
         return result;
     }
 
+    function removeAllFromDescriptors(descriptors) {
+        for (var idx = 0; idx < descriptors.length; idx++) {
+            descriptors[idx].name = descriptors[idx].name.replace(/\.\[all\]$/i, "")
+        }
+        return descriptors;
+    }
+
     function serializeMembers(members, measures) {
         var command = "";
 
@@ -903,8 +944,8 @@ var __meta__ = {
 
             command += "SELECT NON EMPTY {";
 
-            var columns = options.columns || [];
-            var rows = options.rows || [];
+            var columns = removeAllFromDescriptors(options.columns || []);
+            var rows = removeAllFromDescriptors(options.rows || []);
 
             var measures = options.measures || [];
             var measuresRowAxis = options.measuresAxis === "rows";

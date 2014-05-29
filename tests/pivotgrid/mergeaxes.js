@@ -340,21 +340,22 @@
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                        { members: [ { name: "level 0", children: [] }, { name: "level 1", children: [] }  ] }
                     ]
                 }
             },
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] },
-                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                        { members: [ { name: "level 0", children: [] }, { name: "level 1", children: [] }  ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", children: [] }  ] }
                     ]
                 }
             }
         ];
 
         var dataSource = new PivotDataSource({
+            columns: ["level 0", "level 1"],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -384,21 +385,22 @@
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] }
+                        { members: [ { name: "level 0", children: [] }, { name: "level 1", children: [] }  ] }
                     ]
                 }
             },
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] }  ] },
-                        { members: [ { name: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] }  ] }
+                        { members: [ { name: "level 0", children: [] }, { name: "level 1", children: [] }  ] },
+                        { members: [ { name: "level 0", children: [] }, { name: "level 2", parentName: "level 1", children: [] }  ] }
                     ]
                 }
             }
         ];
 
         var dataSource = new PivotDataSource({
+            columns: ["level 0", "level 1"],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -424,7 +426,7 @@
         equal(tuples[0].members[0].children.length, 0, "zero tuples on second level of first memeber");
         equal(tuples[0].members[1].children.length, 1, "one tuple on second level of second member");
         equal(tuples[0].members[1].children[0].members[0].name, "level 0");
-        equal(tuples[0].members[1].children[0].members[1].name, "level 1");
+        equal(tuples[0].members[1].children[0].members[1].name, "level 2");
     });
 
     test("merge to existing axes with multuiple measures", function() {
@@ -465,6 +467,7 @@
             }
         });
 
+debugger;
         dataSource.read();
         dataSource.expandColumn("level 0");
 
@@ -672,6 +675,7 @@
         ];
 
         var dataSource = new PivotDataSource({
+            columns: ["member 0", "member 1"],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -688,7 +692,7 @@
 
         dataSource.read();
         dataSource.expandColumn("member 0");
-        dataSource.expandColumn("member 1");
+        dataSource.expandColumn(["member 0", "member 1"]);
 
         var tuples = dataSource.axes().columns.tuples;
         equal(tuples.length, 1, "one root tuple");

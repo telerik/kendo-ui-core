@@ -346,7 +346,7 @@
 
         equal(dataSource.measures().length, 0);
     });
-
+/*
     test("query clears rows", 2, function() {
         var callback = $.noop;
 
@@ -400,7 +400,7 @@
 
         equal(dataSource.columns().length, 0);
     });
-
+    */
     test("fetch pass measures", 2, function() {
         var callback = $.noop;
 
@@ -536,7 +536,7 @@
 
     test("columnsAxisDescriptors returns columns state", 3, function() {
         var dataSource = new PivotDataSource({
-            columns: ["foo"],
+            columns: [{ name: "[level 0]", expand: true }, {name: "[level 1]", expand: true }],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -547,11 +547,11 @@
                         axes: {
                             columns: {
                                 tuples: [
-                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
-                                    { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1].[level 2]", parentName: "[level 1]", children: [] } ] }
                                 ]
                             }
                         },
@@ -566,8 +566,45 @@
         var descriptors = dataSource.columnsAxisDescriptors();
 
         equal(descriptors.length, 2);
-        equal(descriptors[0].name, "level 0");
-        equal(descriptors[1].name, "level 1");
+        equal(descriptors[0].name, "[level 0]");
+        equal(descriptors[1].name, "[level 1]");
+    });
+
+    test("columnsAxisDescriptors returns columns state for expanded dimention child", 4, function() {
+        var dataSource = new PivotDataSource({
+            columns: ["[level 0]", "[level 1]"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parenName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parenName: "[level 1]", children: [] } ] },
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 3);
+        equal(descriptors[0].name, "[level 0]");
+        equal(descriptors[1].name, "[level 1]");
+        equal(descriptors[2].name, "[level 1].[level 0]");
     });
 
     test("columnsAxisDescriptors returns columns if no request is made", 2, function() {
@@ -648,29 +685,49 @@
     });
 
     test("expandColumn pass current columns state when expanding top member", 4, function() {
+        var callback = $.noop;
+
         var dataSource = new PivotDataSource({
-            columns: ["foo", "bar"],
-            rows: [{ name: "baz", expand: true }],
+            columns: ["[level 0]", "[level 1]"],
+            rows: [{ name: "[row 0]", expand: true }],
             schema: {
                 axes: "axes",
                 data: "data"
             },
             transport: {
                 read: function(options) {
-                    equal(options.data.columns.length, 2);
-                    equal(options.data.columns[0].name, "foo");
-                    ok(options.data.columns[0].expand);
-                    equal(options.data.columns[1].name, "bar");
+
+                    callback(options);
 
                     options.success({
-                        axes: { columns: {}},
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", children: [], hierarchy: "[level 1]" } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "[row 0]", children: [], hierarchy: "[row 0]" } ] },
+                                    { members: [ { name: "[row 0].[row 1]", parentName: "[row 0]", children: [] } ] },
+                                    { members: [ { name: "[row 0].[row 2]", parentName: "[row 0]", children: [] } ] },
+                                ]
+                            }
+                        },
                         data: []
                     });
                 }
             }
         });
 
-        dataSource.expandColumn("foo");
+        dataSource.read();
+        callback = function(options) {
+            equal(options.data.columns.length, 2);
+            equal(options.data.columns[0].name, "[level 0]");
+            ok(options.data.columns[0].expand);
+            equal(options.data.columns[1].name, "[level 1]");
+        };
+        dataSource.expandColumn("[level 0]");
     });
 
     test("expandColumn pass current columns state when expanding bottom member", 4, function() {
@@ -699,9 +756,130 @@
         dataSource.expandColumn(["[foo].&[1]", "[bar].&[1]"]);
     });
 
-    test("expandColumn pass current columns state when expanding bottom member multiple members", 5, function() {
+    test("expandColumn pass current columns state when expanding same level member", 3, function() {
+        var callback = $.noop;
+
         var dataSource = new PivotDataSource({
-            columns: [{ name:"[foo]", expand: true}, "[bar]", "[moo]"],
+            columns: [{ name:"[level 0]", expand: true}],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    callback(options);
+                }
+            }
+        });
+
+        callback = function(options) {
+            options.success({
+                axes: {
+                    columns: {
+                        tuples: [
+                            { members: [ { name: "[level 0]", children: [] } ] },
+                            { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] } ] },
+                            { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] } ] },
+                        ]
+                    }
+                },
+                data: []
+            });
+        }
+
+        dataSource.read();
+
+        callback = function(options) {
+            options.success({
+                axes: {
+                    columns: {
+                        tuples: [
+                            { members: [ { name: "[level 0].[level 1]", children: [] } ] },
+                            { members: [ { name: "[level 0].[level 1].[level 0]", parentName: "[level 0].[level 1]", children: [] } ] }
+                        ]
+                    }
+                },
+                data: []
+            });
+        }
+
+        dataSource.expandColumn(["[level 0].[level 1]"]);
+
+        callback = function(options) {
+            equal(options.data.columns.length, 1);
+            equal(options.data.columns[0].name, "[level 0].[level 2]");
+            ok(options.data.columns[0].expand);
+        }
+
+        dataSource.expandColumn(["[level 0].[level 2]"]);
+    });
+
+    test("expandColumn pass current columns state when expanding bottom then top dimention", 5, function() {
+        var callback = $.noop;
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[level 0]", expand: true},{ name:"[level 1]"}],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    callback(options);
+                }
+            }
+        });
+
+        callback = function(options) {
+            options.success({
+                axes: {
+                    columns: {
+                        tuples: [
+                            { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" },{ name: "[level 1]", children: [], hierarchy: "[level 1]" } ] },
+                            { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                            { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                        ]
+                    }
+                },
+                data: []
+            });
+        }
+
+        dataSource.read();
+
+        callback = function(options) {
+            options.success({
+                axes: {
+                    columns: {
+                        tuples: [
+                            { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                            { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] }
+                        ]
+                    }
+                },
+                data: []
+            });
+        }
+
+        dataSource.expandColumn(["[level 0].[level 1]","[level 1]"]);
+
+        callback = function(options) {
+            equal(options.data.columns.length, 2);
+            equal(options.data.columns[0].name, "[level 0].[level 1]");
+            ok(options.data.columns[0].expand);
+            equal(options.data.columns[1].name, "[level 1]");
+            ok(options.data.columns[1].expand);
+        }
+
+        dataSource.expandColumn(["[level 0].[level 1]"]);
+    });
+
+
+    test("expandColumn pass current columns state when expanding bottom member multiple members", 5, function() {
+        var callback = $.noop;
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[level 0]", expand: true}, { name: "[level 1]", expand: true }, "[level 2]"],
             rows: [{ name: "baz", expand: true }],
             schema: {
                 axes: "axes",
@@ -709,23 +887,57 @@
             },
             transport: {
                 read: function(options) {
-                    equal(options.data.columns.length, 3);
-                    equal(options.data.columns[0].name, "[foo].&[1]");
-                    equal(options.data.columns[1].name, "[bar].&[1]");
-                    ok(options.data.columns[1].expand);
-                    equal(options.data.columns[2].name, "[moo]");
-
+                    callback(options);
                     options.success({
-                        axes: { columns: {}},
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [
+                                        { name: "[level 0]", children: [], hierarchy: "[level 0]" },
+                                        { name: "[level 1]", children: [], hierarchy: "[level 1]" },
+                                        { name: "[level 2]", children: [], hierarchy: "[level 2]" }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0].&[1]", parentName: "[level 0]", children: [] },
+                                        { name: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0].&[2]", parentName: "[level 0]", children: [] },
+                                        { name: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0]", children: [] },
+                                        { name: "[level 1].&[1]", parentName: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0]", children: [] },
+                                        { name: "[level 1].&[2]", parentName: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]}
+                                ]
+                            }
+                        },
                         data: []
                     });
                 }
             }
         });
 
-        dataSource.expandColumn(["[foo].&[1]", "[bar].&[1]"]);
-    });
+        dataSource.read();
 
+        callback = function(options) {
+            equal(options.data.columns.length, 3);
+            equal(options.data.columns[0].name, "[level 0].&[1]");
+            equal(options.data.columns[1].name, "[level 1].&[1]");
+            ok(options.data.columns[1].expand);
+            equal(options.data.columns[2].name, "[level 2]");
+        }
+
+        dataSource.expandColumn(["[level 0].&[1]", "[level 1].&[1]"]);
+    });
 
     test("expandRow pass current columns state", 3, function() {
         var dataSource = new PivotDataSource({
@@ -754,29 +966,42 @@
     });
 
     test("expandRow pass current row state when expanding top member", 4, function() {
+        var callback = $.noop;
         var dataSource = new PivotDataSource({
-            rows: ["foo", "bar"],
-            columns: [{ name: "baz", expand: true }],
+            rows: ["[level 0]", "[level 1]"],
             schema: {
                 axes: "axes",
                 data: "data"
             },
             transport: {
                 read: function(options) {
-                    equal(options.data.rows.length, 2);
-                    equal(options.data.rows[0].name, "foo");
-                    ok(options.data.rows[0].expand);
-                    equal(options.data.rows[1].name, "bar");
+                    callback(options);
 
                     options.success({
-                        axes: { columns: {}},
+                        axes: {
+                            columns: {},
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" },{ name: "[level 1]", children: [], hierarchy: "[level 1]" } ] },
+                                ]
+                            }
+                        },
                         data: []
                     });
                 }
             }
         });
 
-        dataSource.expandRow("foo");
+        dataSource.read();
+
+        callback = function(options) {
+            equal(options.data.rows.length, 2);
+            equal(options.data.rows[0].name, "[level 0]");
+            ok(options.data.rows[0].expand);
+            equal(options.data.rows[1].name, "[level 1]");
+        }
+
+        dataSource.expandRow("[level 0]");
     });
 
     test("expandRow pass current row state when expanding bottom member", 4, function() {
@@ -806,30 +1031,68 @@
     });
 
     test("expandRow pass current row state when expanding bottom member multiple members", 5, function() {
+        var callback = $.noop;
+
         var dataSource = new PivotDataSource({
-            rows: [{ name:"[foo]", expand: true}, "[bar]", "[moo]"],
-            columns: [{ name: "baz", expand: true }],
+            rows: [{ name:"[level 0]", expand: true}, { name: "[level 1]", expand: true }, "[level 2]"],
             schema: {
                 axes: "axes",
                 data: "data"
             },
             transport: {
                 read: function(options) {
-                    equal(options.data.rows.length, 3);
-                    equal(options.data.rows[0].name, "[foo].&[1]");
-                    equal(options.data.rows[1].name, "[bar].&[1]");
-                    ok(options.data.rows[1].expand);
-                    equal(options.data.rows[2].name, "[moo]");
+                    callback(options);
 
                     options.success({
-                        axes: { columns: {}},
+                        axes: {
+                            columns: {},
+                            rows: {
+                                tuples: [
+                                    { members: [
+                                        { name: "[level 0]", children: [], hierarchy: "[level 0]" },
+                                        { name: "[level 1]", children: [], hierarchy: "[level 1]" },
+                                        { name: "[level 2]", children: [], hierarchy: "[level 2]" }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0].&[1]", parentName: "[level 0]", children: [] },
+                                        { name: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0].&[2]", parentName: "[level 0]", children: [] },
+                                        { name: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0]", children: [] },
+                                        { name: "[level 1].&[1]", parentName: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]},
+                                    { members: [
+                                        { name: "[level 0]", children: [] },
+                                        { name: "[level 1].&[2]", parentName: "[level 1]", children: [] },
+                                        { name: "[level 2]", children: [] }
+                                    ]}
+                                ]
+                            }
+                        },
                         data: []
                     });
                 }
             }
         });
 
-        dataSource.expandRow(["[foo].&[1]", "[bar].&[1]"]);
+        dataSource.read();
+
+        callback = function(options) {
+            equal(options.data.rows.length, 3);
+            equal(options.data.rows[0].name, "[level 0].&[1]");
+            equal(options.data.rows[1].name, "[level 1].&[1]");
+            ok(options.data.rows[1].expand);
+            equal(options.data.rows[2].name, "[level 2]");
+        }
+
+        dataSource.expandRow(["[level 0].&[1]", "[level 1].&[1]"]);
     });
 
     test("expandRow issue a request", 1, function() {
