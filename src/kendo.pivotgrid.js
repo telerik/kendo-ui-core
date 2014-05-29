@@ -1324,6 +1324,21 @@ var __meta__ = {
             ];
         },
 
+        _thead: function(tuples) {
+            var root = tuples[0];
+
+            this._state(root);
+
+            if (root) {
+                this._buildRows(root, 0);
+                this._normalizeRows();
+            } else {
+                this.rows.push(element("tr", null, kendo_th("")));
+            }
+
+            return element("thead", null, this.rows);
+        },
+
         _memberIdx: function(members, parentMember) {
             var index = 0;
             var member = members[index];
@@ -1431,6 +1446,7 @@ var __meta__ = {
             var rowKey = rootName + levelNum;
             var map = this.map;
             var parentRow;
+            var children;
 
             row = map[rowKey];
 
@@ -1444,7 +1460,19 @@ var __meta__ = {
                 map[rowKey] = row;
                 parentRow = map[rootName + (Number(levelNum) - 1)];
 
+                if (parentRow) {
+                    children = parentRow.children;
+
+                    if (children[1] && children[1].attr.class.indexOf("k-alt") === -1) {
+                        row.notFirst = true;
+                    } else {
+                        row.notFirst = parentRow.notFirst;
+                    }
+                }
+
                 this.rows.splice(this._rowIndex(parentRow) + 1, 0, row);
+            } else {
+                row.notFirst = false;
             }
 
             if (!row.parentMember || row.parentMember !== parentMember) {
@@ -1509,7 +1537,7 @@ var __meta__ = {
             }
 
             cellChildren.push(text(member.caption || member.name));
-            cell = element("th", { class: "k-header" }, cellChildren);
+            cell = element("th", { class: "k-header" + (row.notFirst ? " k-first" : "") }, cellChildren);
 
             row.children.push(cell);
             row.colspan += 1;
@@ -1522,9 +1550,15 @@ var __meta__ = {
                     childRow = this._buildRows(children[idx], 0, member);
                 }
 
-                if (row.children[0] !== cell) {
-                    childRow.children[childRow.children.length - childRow.colspan].attr.class += " k-first";
-                }
+                /*if (row.children[0] !== cell) {
+                    var childIndex = childRow.children.length - childRow.colspan;
+
+                    if (childIndex < 0) {
+                        childIndex = 0;
+                    }
+
+                    childRow.children[childIndex].attr.class += " k-first";
+                }*/
 
                 colspan = childRow.colspan;
                 cell.attr.colspan = colspan;
@@ -1556,21 +1590,6 @@ var __meta__ = {
             this.rows = [];
             this.map = {};
             this.rootTuple = rootTuple;
-        },
-
-        _thead: function(tuples) {
-            var root = tuples[0];
-
-            this._state(root);
-
-            if (root) {
-                this._buildRows(root, 0);
-                this._normalizeRows();
-            } else {
-                this.rows.push(element("tr", null, kendo_th("")));
-            }
-
-            return element("thead", null, this.rows);
         }
     });
 
