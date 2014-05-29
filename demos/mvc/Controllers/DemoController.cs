@@ -53,6 +53,12 @@ namespace Kendo.Controllers
             LoadCategories();
 
             FindCurrentExample(product);
+
+            if (ViewBag.CurrentWidget == null)
+            {
+                return HttpNotFound();
+            }
+
             FindSiblingExamples();
             FindEdgeExamples();
 
@@ -148,6 +154,12 @@ namespace Kendo.Controllers
            }
 
            ViewBag.CurrentWidget = currentWidget;
+
+           if (currentWidget == null)
+           {
+               return;
+           }
+
            ViewBag.Mobile = (currentWidget.Mobile && !current.DisableInMobile) || current.Mobile;
            ViewBag.CurrentExample = current;
 
