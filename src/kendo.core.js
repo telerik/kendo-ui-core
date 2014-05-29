@@ -3435,7 +3435,7 @@ function pad(number, digits, end) {
             var zone = info.zone;
             var rule = info.rule;
 
-            return rule? zone[0] - rule[6] : zone[0];
+            return kendo.parseFloat(rule? zone[0] - rule[6] : zone[0]);
         }
 
         function abbr(utcTime, timezone) {
