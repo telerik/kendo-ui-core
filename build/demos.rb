@@ -218,7 +218,7 @@ SPRING_VIEWS = FileList['wrappers/java/spring-demos/src/main/webapp/WEB-INF/view
 
 SPRING_CONTROLLERS = FileList['wrappers/java/spring-demos/src/main/java/com/kendoui/spring/controllers/**/*.java']
 
-PHP = FileList['wrappers/php/{web,dataviz}/**/*.php'].include('wrappers/php/lib/*.php')
+PHP = FileList['wrappers/php/**/*.php']
 
 %w{production staging}.each do |flavor|
 
