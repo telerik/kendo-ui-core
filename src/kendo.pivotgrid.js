@@ -1561,16 +1561,6 @@ var __meta__ = {
                     childRow = this._buildRows(children[idx], 0, member);
                 }
 
-                /*if (row.children[0] !== cell) {
-                    var childIndex = childRow.children.length - childRow.colspan;
-
-                    if (childIndex < 0) {
-                        childIndex = 0;
-                    }
-
-                    childRow.children[childIndex].attr.class += " k-first";
-                }*/
-
                 colspan = childRow.colspan;
                 cell.attr.colspan = colspan;
 
