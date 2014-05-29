@@ -330,6 +330,9 @@ var __meta__ = {
 
                 element.addClass(TOOLBAR);
 
+                this.uid = kendo.guid();
+                element.attr(kendo.attr("uid"), this.uid);
+
                 if(options.resizable) {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
@@ -348,7 +351,9 @@ var __meta__ = {
                 }
 
                 that.userEvents = new kendo.UserEvents(document, {
-                    filter: "." + BUTTON + ", " + "." + OVERFLOW_BUTTON,
+                    filter:
+                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", "
+                        + "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that)
                 });
 
@@ -478,6 +483,8 @@ var __meta__ = {
                 this.popup = new kendo.ui.Popup(components.overflowContainer, {
                     anchor: overflowAnchor
                 });
+
+                this.popup.element.attr(kendo.attr("uid"), this.uid);
             },
 
             _buttonClick: function(e) {

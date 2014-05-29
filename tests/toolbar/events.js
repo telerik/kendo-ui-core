@@ -19,6 +19,10 @@
             if (container.data("kendoToolBar")) {
                 container.kendoToolBar("destroy");
             }
+
+            if ($("#toolbar2").data("kendoToolBar")) {
+                $("#toolbar2").kendoToolBar("destroy");
+            }
         }
     });
 
@@ -385,6 +389,30 @@
         }).data("kendoToolBar");
 
         click(toolbar.popup.element.find("#foo"));
+    });
+
+    test("click event is fired only for the current widget instance when more than one widget is added to the page", 1, function() {
+        var toolbar1 = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" }
+            ],
+            click: function() {
+                ok(true, "Click event is fired");
+            }
+        }).data("kendoToolBar");
+
+        $("<div id='toolbar2' />").appendTo(QUnit.fixture);
+
+        var toolbar2 = $("#toolbar2").kendoToolBar({
+            items: [
+                { type: "button", id: "bar", text: "bar" }
+            ],
+            click: function() {
+                ok(false, "Click event should not be fired");
+            }
+        }).data("kendoToolBar");
+
+        click(container.find("#foo"));
     });
 
 })();
