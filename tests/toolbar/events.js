@@ -129,7 +129,7 @@
                 ok(true, "Toggle event is clicked");
             }
         });
-        
+
         var button = container.find("#foo");
 
         click(button);
@@ -144,7 +144,7 @@
                 e.preventDefault();
             }
         });
-        
+
         var button = container.find("#foo");
 
         click(button);
@@ -165,7 +165,7 @@
 
         ok(buttons.eq(0).hasClass("k-state-checked"), "First button is selected");
         ok(!buttons.eq(1).hasClass("k-state-checked"), "Second button is deselected");
-        
+
         click(buttons.eq(1));
 
         ok(!buttons.eq(0).hasClass("k-state-checked"), "First button is deselected");
@@ -341,6 +341,50 @@
         click(button); //close
 
         ok(popup.visible());
+    });
+
+    /* OVERFLOW CONTAINER */
+
+    test("clicking a button inside action overflow triggers the click event", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" }
+            ],
+            click: function(e) {
+                ok(true, "Click event is triggered");
+            }
+        }).data("kendoToolBar");
+
+        var button = toolbar.popup.element.find("#foo_overflow");
+
+        click(button);
+    });
+
+    test("click on toggleButton (overflow) changes its state", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", toggle: true, id: "foo", text: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.popup.element.find("#foo_overflow");
+
+        ok(!button.hasClass("k-state-checked"));
+        click(button);
+        ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
+    });
+
+    test("click event is not fired for disabled buttons (overflow)", 0, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", enable: false }
+            ],
+            click: function() {
+                ok(false, "Click event should not be fired for disabled button.");
+            }
+        }).data("kendoToolBar");
+
+        click(toolbar.popup.element.find("#foo"));
     });
 
 })();

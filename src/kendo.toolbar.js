@@ -347,14 +347,9 @@ var __meta__ = {
                     }
                 }
 
-                that.userEvents = new kendo.UserEvents(that.element, {
-                    filter: "." + BUTTON + ":not(." + SPLIT_BUTTON_ARROW + ")",
+                that.userEvents = new kendo.UserEvents(document, {
+                    filter: "." + BUTTON + ", " + "." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that)
-                });
-
-                that.splitButtonUserEvents = new kendo.UserEvents(that.element, {
-                    filter: "." + SPLIT_BUTTON_ARROW,
-                    tap: proxy(that._toggle, that)
                 });
 
                 kendo.notify(that);
@@ -379,7 +374,7 @@ var __meta__ = {
                 });
 
                 this.userEvents.destroy();
-                this.splitButtonUserEvents.destroy();
+                //this.splitButtonUserEvents.destroy();
 
                 if (this.options.resizable) {
                     this.overflowUserEvents.destroy();
@@ -486,15 +481,28 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var target = $(e.target).closest("." + BUTTON),
-                    isDisabled = target.hasClass(STATE_DISABLED),
+                var target,
+                    isDisabled,
                     isChecked,
                     group,
                     current;
 
                 e.preventDefault();
 
+                target = $(e.target).closest("." + BUTTON, this.element);
+
+                if (!target.length && this.popup) {
+                    target = $(e.target).closest("." + OVERFLOW_BUTTON, this.popup.element);
+                }
+
+                isDisabled = target.hasClass(STATE_DISABLED);
+
                 if (isDisabled) {
+                    return;
+                }
+
+                if (e.target.closest("." + SPLIT_BUTTON_ARROW).length) {
+                    this._toggle(e);
                     return;
                 }
 
