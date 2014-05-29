@@ -1038,6 +1038,42 @@
         });
 
         // ------------------------------------------------------------
+        module("Bar Chart / Grouped Stack / Multiple Axes", {
+            setup: function() {
+                var smallSeries = { stack: "a", data: [1, 2], axis: "A" };
+                var largeSeries = { stack: "b", data: [10, 20], axis: "B" };
+                setupBarChart($.extend(true, {
+                    namedValueAxes: { "A": plotArea.valueAxis, "B": plotArea.valueAxis }
+                }, plotArea), {
+                    series: [
+                        smallSeries,
+                        smallSeries,
+                        largeSeries,
+                        largeSeries
+                    ],
+                    isStacked: true
+                });
+            }
+        });
+
+        test("reports stacked minumum value for first axis", function() {
+            equal(series.valueAxisRanges["A"].min, 0);
+        });
+
+        test("reports stacked maximum value for first axis", function() {
+            equal(series.valueAxisRanges["A"].max, 4);
+        });
+
+        test("reports stacked minumum value for second axis", function() {
+            equal(series.valueAxisRanges["B"].min, 0);
+        });
+
+        test("reports stacked maximum value for second axis", function() {
+            equal(series.valueAxisRanges["B"].max, 40);
+        });
+
+
+        // ------------------------------------------------------------
         module("Bar Chart / Stacked / Panes", {
             teardown: destroyChart
         });
