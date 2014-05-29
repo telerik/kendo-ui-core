@@ -534,6 +534,81 @@
         equal(dataSource.data().length, 0);
     });
 
+    test("filter current columns and rows state is send to the server", 7, function() {
+        var result = {
+            axes: {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", children: [], hierarchy: "[level 1]" } ] }
+                    ]
+                },
+                rows: {
+                    tuples: [
+                        { members: [ { name: "[row 0]", children: [], hierarchy: "[row 0]" } ] },
+                        { members: [ { name: "[row 0].&[1]", parentName: "[row 0]", children: [] } ] },
+                        { members: [ { name: "[row 0].&[2]", parentName: "[row 0]", children: [] } ] }
+                    ]
+                }
+            },
+            data: []
+        };
+
+        var callback = $.noop;
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[level 0]", expand: false}, "[level 1]"],
+            rows: [{ name: "[row 0]", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    callback(options);
+                    options.success(result);
+                }
+            }
+        });
+
+        dataSource.read();
+
+        result = {
+            axes: {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", children: [], hierarchy: "[level 1]" } ] },
+                        { members: [ { name: "[level 0].&[1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                        { members: [ { name: "[level 0].&[2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] }
+                    ]
+                },
+                rows: {
+                    tuples: [
+                        { members: [ { name: "[row 0]", children: [], hierarchy: "[row 0]" } ] },
+                        { members: [ { name: "[row 0].&[1]", parentName: "[row 0]", children: [] } ] },
+                        { members: [ { name: "[row 0].&[2]", parentName: "[row 0]", children: [] } ] }
+                    ]
+                }
+            },
+            data: []
+        };
+
+
+        dataSource.expandColumn("[level 0]");
+
+        callback = function(options) {
+            equal(options.data.columns.length, 2);
+            equal(options.data.columns[0].name, "[level 0]");
+            ok(options.data.columns[0].expand);
+            equal(options.data.columns[1].name, "[level 1]");
+
+            equal(options.data.rows.length, 1);
+            equal(options.data.rows[0].name, "[row 0]");
+            ok(options.data.rows[0].expand);
+        }
+
+        dataSource.filter({ field: "foo", operator: "eq", value: "bar" });
+    });
+
     test("columnsAxisDescriptors returns columns state", 3, function() {
         var dataSource = new PivotDataSource({
             columns: [{ name: "[level 0]", expand: true }, {name: "[level 1]", expand: true }],

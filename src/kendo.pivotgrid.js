@@ -287,9 +287,7 @@ var __meta__ = {
                 return this._filter;
             }
 
-            this._axes = {};
-            this._data = this._observe([]);
-
+            this._clearAxesData = true;
             this._query({ filter: val, page: 1 });
         },
 
@@ -421,6 +419,12 @@ var __meta__ = {
         },
 
         _params: function(data) {
+            if (this._clearAxesData) {
+                this._axes = {};
+                this._data = this._observe([]);
+                this._clearAxesData = false;
+            }
+
             var options = DataSource.fn._params.call(this, data);
 
             options = extend({
