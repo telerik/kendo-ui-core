@@ -1,6 +1,11 @@
-bash "install_forever" do
+bash "Install forever" do
     code "npm install -g forever"
     creates "/usr/bin/forever"
+end
+
+bash "Install nodemon" do
+    code "npm install -g nodemon"
+    creates "/usr/bin/nodemon"
 end
 
 services = [
