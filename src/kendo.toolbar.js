@@ -352,8 +352,8 @@ var __meta__ = {
 
                 that.userEvents = new kendo.UserEvents(document, {
                     filter:
-                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", "
-                        + "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
+                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", " +
+                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that)
                 });
 
