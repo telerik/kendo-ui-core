@@ -908,6 +908,25 @@
         equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
     });
 
+    test("PivotGrid renders expand button with correct path", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_0 = rows.eq(0).find("th");
+        var th_1 = rows.eq(1).find("th");
+
+        equal(th_0.find("span").attr(kendo.attr("path")), kendo.stringify(["dim 0"]));
+        equal(th_1.find("span").attr(kendo.attr("path")), kendo.stringify(["dim 0", "dim 1"]));
+    });
+
     test("PivotGrid renders expand button expanded", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] },

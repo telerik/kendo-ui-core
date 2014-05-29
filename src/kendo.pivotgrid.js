@@ -23,6 +23,8 @@ var __meta__ = {
         extend = $.extend,
         CHANGE = "change",
         DIV = "<div/>",
+        STATE_EXPANDED = "k-i-arrow-s",
+        STATE_COLLAPSED = "k-i-arrow-e",
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -480,9 +482,9 @@ var __meta__ = {
         var targetMembers = result.tuple.members;
         for (var idx = 0, len = source.length; idx < len; idx ++) {
             var sourceMembers = source[idx].members;
-            for (var memberIndex = 0, memberLen = targetMembers.length; memberIndex < memberLen; memberIndex ++) {
-                if (!targetMembers[memberIndex].measure && sourceMembers[memberIndex].children[0]) {
-                    targetMembers[memberIndex].children = sourceMembers[memberIndex].children;
+            for (var memberIdx = 0, memberLen = targetMembers.length; memberIdx < memberLen; memberIdx ++) {
+                if (!targetMembers[memberIdx].measure && sourceMembers[memberIdx].children[0]) {
+                    targetMembers[memberIdx].children = sourceMembers[memberIdx].children;
                 }
             }
         }
@@ -1114,15 +1116,34 @@ var __meta__ = {
     var PivotGrid = Widget.extend({
         init: function(element, options) {
             var that = this;
+            var columnBuilder;
 
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
             that._createLayout();
 
-            that._columnBuilder = new ColumnBuilder();
+            that._columnBuilder = columnBuilder = new ColumnBuilder();
 
             that._dataSource();
+
+            that.columnsHeader.on("click", "span.k-icon", function() {
+                var button = $(this);
+                var path = button.attr(kendo.attr("path"));
+                var expanded = button.hasClass(STATE_EXPANDED);
+                var expandState = columnBuilder.expandState[path];
+
+                columnBuilder.expandState[path] = !expanded;
+
+                button.toggleClass(STATE_EXPANDED, !expanded)
+                      .toggleClass(STATE_COLLAPSED, expanded);
+
+                if (!expanded && expandState === undefined) {
+                    that.dataSource.expandColumn($.parseJSON(path));
+                } else {
+                    that.refresh();
+                }
+            });
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -1285,6 +1306,7 @@ var __meta__ = {
     var ColumnBuilder = Class.extend({
         init: function(options) {
             this._state(null);
+            this.expandState = {};
         },
 
         build: function(tuples) {
@@ -1293,11 +1315,7 @@ var __meta__ = {
             ];
         },
 
-        _cell: function(member, attr) {
-            return element("th", attr, [text(member.caption || member.name)]);
-        },
-
-        _memberIndex: function(members, parentMember) {
+        _memberIdx: function(members, parentMember) {
             var index = 0;
             var member = members[index];
 
@@ -1398,9 +1416,9 @@ var __meta__ = {
             return idx;
         },
 
-        _row: function(tuple, memberIndex, parentMember) {
-            var rootName = this.rootTuple.members[memberIndex].name;
-            var levelNum = tuple.members[memberIndex].levelNum;
+        _row: function(tuple, memberIdx, parentMember) {
+            var rootName = this.rootTuple.members[memberIdx].name;
+            var levelNum = tuple.members[memberIdx].levelNum;
             var rowKey = rootName + levelNum;
             var map = this.map;
             var parentRow;
@@ -1428,21 +1446,18 @@ var __meta__ = {
             return row;
         },
 
-        _tuplePath: function(tuple) {
-            var idx = 0;
+        _tuplePath: function(tuple, index) {
             var path = [];
-            var members = tuple.members;
-            var member = members[idx];
+            var idx = 0;
 
-            while(member) {
-                path.push(member.name);
-                member = members[++idx];
+            for(; idx <= index; idx++) {
+                path.push(tuple.members[idx].name);
             }
 
             return path;
         },
 
-        _buildRows: function(tuple, memberIndex, parentMember) {
+        _buildRows: function(tuple, memberIdx, parentMember) {
             var members = tuple.members;
             var children;
             var childRow;
@@ -1451,7 +1466,9 @@ var __meta__ = {
 
             var allCell;
             var cell;
+            var cellAttr;
             var cellChildren = [];
+            var path;
 
             var idx = 0;
             var childrenLength;
@@ -1459,34 +1476,32 @@ var __meta__ = {
             var colspan;
 
             if (parentMember) {
-                memberIndex = this._memberIndex(members, parentMember);
+                memberIdx = this._memberIdx(members, parentMember);
             }
 
-            row = this._row(tuple, memberIndex, parentMember);
+            row = this._row(tuple, memberIdx, parentMember);
 
-            member = members[memberIndex];
+            member = members[memberIdx];
 
             children = member.children;
             childrenLength = children.length
 
             if (member.hasChildren) {
-                var className = "k-icon k-i-arrow-";
+                path = kendo.stringify(this._tuplePath(tuple, memberIdx));
 
-                if (childrenLength) {
-                    className += "s";
-                } else {
-                    className += "e";
+                if (this.expandState[path] === false) {
+                    childrenLength = 0;
                 }
-                var expandAttr = { class: className };
 
-                expandAttr[kendo.attr("path")] = kendo.stringify(this._tuplePath(tuple));
+                cellAttr = { class: "k-icon " + (childrenLength ? STATE_EXPANDED : STATE_COLLAPSED) };
+                cellAttr[kendo.attr("path")] = path;
 
-                cellChildren.push(element("span", expandAttr, null));
+                cellChildren.push(element("span", cellAttr));
             }
 
             cellChildren.push(text(member.caption || member.name));
-
             cell = element("th", { class: "k-header" }, cellChildren);
+
             row.children.push(cell);
             row.colspan += 1;
 
@@ -1508,14 +1523,14 @@ var __meta__ = {
                 row.colspan += colspan;
                 row.rowspan = childRow.rowspan + 1;
 
-                if (members[memberIndex + 1]) {
-                    var newRow = this._buildRows(tuple, ++memberIndex);
+                if (members[memberIdx + 1]) {
+                    var newRow = this._buildRows(tuple, ++memberIdx);
 
                     allCell.attr.colspan = newRow.colspan;
                     row.colspan += newRow.colspan - 1;
                 }
-            } else if (members[memberIndex + 1]) {
-                childRow = this._buildRows(tuple, ++memberIndex);
+            } else if (members[memberIdx + 1]) {
+                childRow = this._buildRows(tuple, ++memberIdx);
 
                 if (childRow.colspan > 1) {
                     cell.attr.colspan = childRow.colspan;
