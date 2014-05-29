@@ -355,11 +355,12 @@
 {
 	position: absolute;
     padding: 0 20px 5px;
-    margin: 0 -20px;
+    margin: -1px -20px 0;
     z-index: 2;
 }
 
-.k-task-wrap:hover
+.k-task-wrap:hover,
+.k-line.k-state-selected
 {
     z-index: 3;
 }
@@ -464,7 +465,7 @@
 
 .k-task-template
 {
-    padding: .3em 1.4em .3em .6em;
+    padding: .2em 1.4em .2em .6em;
     line-height: normal;
 }
 
@@ -584,6 +585,11 @@
 .k-task-wrap-active .k-task-draghandle
 {
     display: block;
+}
+
+.k-dependency-hint
+{
+    z-index: 4;
 }
 
 /* Gantt Chart end */
