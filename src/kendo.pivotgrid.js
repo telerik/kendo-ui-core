@@ -87,6 +87,60 @@ var __meta__ = {
         return descriptors;
     }
 
+    function addMissingPathMembers(members, axis) {
+        var tuples = axis.tuples || [];
+        var firstTuple = tuples[0];
+
+        if (firstTuple && members.length < firstTuple.members.length) {
+            var tupleMembers = firstTuple.members;
+
+            for (var idx = 0; idx < tupleMembers.length; idx++) {
+                if (tupleMembers[idx].measure) {
+                    continue;
+                }
+
+                var found = false;
+                for (var j = 0; j < members.length; j++) {
+                    if (members[j].name.indexOf(tupleMembers[idx].hierarchy) === 0) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    members.push(tupleMembers[idx]);
+                }
+            }
+        }
+    }
+
+    function descriptorsForMembers(axis, members, measures) {
+        var axis = axis || {};
+
+        addMissingPathMembers(members, axis);
+
+        if (measures.length > 1) {
+            members.push({
+                name: "Measures",
+                measure: true,
+                children: normalizeMembers(measures)
+            });
+        }
+
+        var tupletoSearch = {
+            members: members
+        };
+
+        if (axis.tuples) {
+            var result = findExistingTuple(axis.tuples, tupletoSearch);
+            if (result) {
+                members = descriptorsForAxes([result.tuple]);
+            }
+        }
+
+        return members;
+    }
+
     var PivotDataSource = DataSource.extend({
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, {
@@ -144,57 +198,12 @@ var __meta__ = {
             var origin = axis === "columns" ? "columns" : "rows";
             var other = axis === "columns" ? "rows" : "columns";
 
-            var axes = this.axes();
-
             var members = normalizeMembers(path);
             var memberToExpand = members[members.length - 1].name;
-            var axis1 = this[origin]();
 
-            var idx;
-            if (members.length < axis1.length && axes[origin]) {
-                var originFirstTuple = (axes[origin].tuples || [])[0];
+            members = descriptorsForMembers(this.axes()[origin], members, this.measures());
 
-                if (originFirstTuple) {
-                    axis1 = originFirstTuple.members;
-                    for (idx = 0; idx < axis1.length; idx++) {
-                        var found = false;
-                        for (var j = 0; j < members.length; j++) {
-                            if (members[j].name.indexOf(axis1[idx].hierarchy) === 0) {
-                                found = true;
-                                break;
-                            }
-                        }
-
-                        if (!found) {
-                            members.push(axis1[idx]);
-                        }
-                    }
-                }
-            }
-
-            var measures = this.measures();
-            if (measures.length > 1) {
-                members.push({
-                    name: "Measures",
-                    measure: true,
-                    children: normalizeMembers(measures)
-                });
-            }
-
-            var tupletoSearch = {
-                members: members
-            };
-
-            var descriptors = this[origin]() || [];
-
-            if (axes && axes[origin]) {
-                var result = findExistingTuple(axes[origin].tuples, tupletoSearch);
-                if (result) {
-                    members = descriptorsForAxes([result.tuple]);
-                }
-            }
-
-            for (idx = 0; idx < members.length; idx++) {
+            for (var idx = 0; idx < members.length; idx++) {
                 if (members[idx].name === memberToExpand) {
                     members[idx].expand = true;
                 }

@@ -722,11 +722,12 @@
 
         dataSource.read();
         callback = function(options) {
-            equal(options.data.columns.length, 2);
+            equal(options.data.columns.length, 2, "Number of columns does not match");
             equal(options.data.columns[0].name, "[level 0]");
             ok(options.data.columns[0].expand);
             equal(options.data.columns[1].name, "[level 1]");
         };
+
         dataSource.expandColumn("[level 0]");
     });
 

@@ -434,7 +434,7 @@
             {
                 columns: {
                     tuples: [
-                        { members: [ { name: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+                        { members: [ { name: "level 0", children: [], hierarchy: "level 0" }, { name: "measure 1", children: [] } ] },
                         { members: [ { name: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
                     ]
                 }
@@ -467,7 +467,6 @@
             }
         });
 
-debugger;
         dataSource.read();
         dataSource.expandColumn("level 0");
 
