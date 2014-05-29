@@ -504,7 +504,8 @@
     display: none;
 }
 
-.k-task-wrap:hover .k-task-delete
+.k-task-wrap:hover .k-task-delete,
+.k-task-wrap-active .k-task-delete
 {
     display: inline-block;
 }
@@ -517,7 +518,8 @@
 	height: auto;
 }
 
-.k-task-single:hover .k-resize-handle
+.k-task-single:hover .k-resize-handle,
+.k-task-wrap-active .k-resize-handle
 {
     visibility: visible;
 }
@@ -578,7 +580,8 @@
     cursor: e-resize;
 }
 
-.k-task-wrap:hover .k-task-draghandle
+.k-task-wrap:hover .k-task-draghandle,
+.k-task-wrap-active .k-task-draghandle
 {
     display: block;
 }
