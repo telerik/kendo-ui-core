@@ -205,6 +205,9 @@ var __meta__ = {
 
             for (var idx = 0; idx < members.length; idx++) {
                 if (members[idx].name === memberToExpand) {
+                    if (members[idx].expand) {
+                        return;
+                    }
                     members[idx].expand = true;
                 }
             }
@@ -245,6 +248,10 @@ var __meta__ = {
 
         _query: function(options) {
             var that = this;
+
+            if (!options) {
+                this._clearAxesData = true;
+            }
 
             that.query(extend({}, {
                 page: that.page(),

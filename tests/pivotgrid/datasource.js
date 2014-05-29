@@ -253,6 +253,39 @@
         dataSource.expandColumn("foo");
     });
 
+    test("expandColumn doesn't issue a request on already expadned member", 0, function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "foo", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "foo", children: [] } ] },
+                                    { members: [ { name: "bar", parentName: "foo", children: [] } ] },
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.bind("requestStart", function() {
+            ok(false);
+        });
+
+        dataSource.expandColumn(["foo"]);
+    });
+
     test("expandColumn pass current row state", 2, function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar"],
@@ -482,6 +515,56 @@
         };
 
         dataSource.fetch();
+    });
+
+    test("fetch without options clears current axes data", 3, function() {
+        var result = {
+            axes: {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                    ]
+                },
+                rows: {
+                    tuples: [
+                        { members: [ { name: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 1", parentName: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 1", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 2", parentName: "row level 1", children: [] } ] }
+                    ]
+                }
+            },
+            data: [1,2,3,4,5,6,7,8,9,0]// some data
+        };
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success(result);
+                }
+            }
+        });
+
+        dataSource.read();
+
+        result = { axes: { }, data: [] };
+
+        dataSource.fetch();
+
+        equal(dataSource.axes().columns.tuples.length, 0);
+        equal(dataSource.axes().rows.tuples.length, 0);
+        equal(dataSource.data().length, 0);
     });
 
     test("filter clears current axes data", 3, function() {

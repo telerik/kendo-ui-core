@@ -416,10 +416,7 @@
         });
 
         dataSource.read();
-        dataSource.expandColumn([
-            {name: "level 0", expand: false },
-            {name: "level 0", expand: true }
-        ]);
+        dataSource.expandColumn(["level 0", "level 1"]);
 
         var tuples = dataSource.axes().columns.tuples;
         equal(tuples.length, 1, "one root tuple");
@@ -600,50 +597,6 @@
 
         equal(columnTuples.length, 1);
         equal(columnTuples[0].members.length, 1);
-    });
-
-    test("expand aready existing tuple, overrides existing", function() {
-        var axes = [
-            {
-                columns: {
-                    tuples: [
-                        { members: [ { name: "level 0", children: [] } ] },
-                        { members: [ { name: "level 1", parentName: "level 0", children: [] } ] }
-                    ]
-                }
-            },
-            {
-                columns: {
-                    tuples: [
-                        { members: [ { name: "level 0", children: [] } ] },
-                        { members: [ { name: "level 1", caption: "new caption", parentName: "level 0", children: [] } ] }
-                    ]
-                }
-            }
-        ];
-
-        var dataSource = new PivotDataSource({
-            schema: {
-                axes: "axes",
-                data: "data"
-            },
-            transport: {
-                read: function(options) {
-                    options.success({
-                        axes: axes.shift(),
-                        data: []
-                    });
-                }
-            }
-        });
-
-        dataSource.read();
-        dataSource.expandColumn("level 0");
-
-        var tuples = dataSource.axes().columns.tuples;
-        equal(tuples.length, 1, "one root tuple");
-        equal(tuples[0].members[0].children.length, 1, "one child tuple");
-        equal(tuples[0].members[0].children[0].members[0].caption, "new caption");
     });
 
     test("tuple with empty children are skipped", function() {
