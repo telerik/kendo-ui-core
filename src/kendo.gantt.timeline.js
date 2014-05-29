@@ -1905,6 +1905,7 @@ var __meta__ = {
 
                             if (selectedDependency.length) {
                                 that.trigger("removeDependency", { uid: selectedDependency.attr("data-uid") });
+                                that.clearSelection();
                             }
                         }
                     });

@@ -285,16 +285,27 @@
         ok(gantt.calls("removeTask"));
     });
 
-    test("pressing Del key calls removeTask() if dependency is selected", function() {
+    test("pressing Del key calls removeDependency() if dependency is selected", function() {
         ganttTimeline._render(tasks);
         ganttTimeline._renderDependencies(dependencies);
 
         stub(gantt, "removeDependency");
 
-        ganttTimeline.select(ganttTimeline.wrapper.find(".k-line:first"));
+        ganttTimeline.selectDependency(ganttTimeline.wrapper.find(".k-line:first"));
         ganttTimeline.wrapper.trigger($.Event("keydown", { keyCode: kendo.keys.DELETE }));
 
         ok(gantt.calls("removeDependency"));
+    });
+
+    test("pressing Del key leaves no selected dependencies", function() {
+        // This tests a quirk of the virtual DOM
+        ganttTimeline._render(tasks);
+        ganttTimeline._renderDependencies(dependencies);
+
+        ganttTimeline.selectDependency(ganttTimeline.wrapper.find(".k-line:first"));
+        ganttTimeline.wrapper.trigger($.Event("keydown", { keyCode: kendo.keys.DELETE }));
+
+        ok(!ganttTimeline.selectDependency().length);
     });
 
 
