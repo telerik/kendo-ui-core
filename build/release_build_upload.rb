@@ -105,6 +105,7 @@ end
 def create_version(bot, options)
       product_name = options[:product]
       return if bot.version_created(product_name)
+      return if (product_name == "Kendo UI Core") && (defined? SERVICE_PACK_NUMBER)
       bot.add_product(product_name)
 
       bot.click_and_wait("Administration", "administration")
@@ -182,9 +183,11 @@ def set_release_fields_data(bot, file_fields)
 
 end
 def prepare_release_files(bot, options)
-
   release_config = options[:params]
   file_metadata = release_config[:file_metadata]
+  p_name = options[:product]
+
+  return if (p_name == "Kendo UI Core") && (defined? SERVICE_PACK_NUMBER)
 
   #zip files
   if file_metadata[:zip]
@@ -271,6 +274,7 @@ def upload_release_file(bot, upload_id, full_path)
     bot.wait_for_element("##{upload_id} .ruRemove")
 end
 def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
+    return if (name == "core") && (defined? SERVICE_PACK_NUMBER)
     release_build_config = release_build[:file_metadata]
 
     if release_build_config[:zip]
