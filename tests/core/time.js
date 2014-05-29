@@ -123,6 +123,13 @@ test("offset detects DST for Asia/Jerusalem", function () {
     equal(kendo.timezone.offset(new Date('2009/09/27 03:00:01'), 'Asia/Jerusalem'),-120);
 });
 
+test("offset always returns number", function(){
+    var date = new Date(2012, 2, 1, 0, 0, 0, 0);
+    var oldDate = new Date(1944,6,1,1,0,0);
+    equal(typeof kendo.timezone.offset(date, "Asia/Tokyo"), "number");
+    equal(typeof kendo.timezone.offset(oldDate, "America/New_York"), "number");
+});
+
 test("convert with fractional offset", function() {
     // http://www.wolframalpha.com/input/?i=convert+1912%2F02%2F12+00%3A00+VET+to+GMT
     equal(kendo.toString(kendo.timezone.convert(new Date(1912, 1, 12, 0, 0), "America/Caracas", "Etc/UTC"), "MMM dd yyyy HH:mm:ss"), "Feb 12 1912 04:27:40");
