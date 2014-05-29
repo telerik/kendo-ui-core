@@ -11372,7 +11372,11 @@ var __meta__ = {
 
         for (groupIx = 0; groupIx < dataLength; groupIx++) {
             seriesClone = deepExtend({}, series);
-            seriesClone.color = undefined;
+
+            if (!isFn(seriesClone.color)) {
+                seriesClone.color = undefined;
+            }
+
             seriesClone._groupIx = groupIx;
             result.push(seriesClone);
 

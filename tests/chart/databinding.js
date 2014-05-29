@@ -833,6 +833,17 @@
             });
         });
 
+        asyncTest("does not alter cloned series color function", 1, function() {
+            createGroupedChart(function() {
+                ok($.isFunction(this.options.series[0].color));
+                start();
+            }, [{
+                name: "Sales",
+                field: "sales",
+                color: function() { return "foo"; }
+            }]);
+        });
+
         asyncTest("evaluates name as group name template", 1, function() {
             createGroupedChart(function() {
                 equal(this.options.series[1].name, "Sales for product Bar");
