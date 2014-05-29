@@ -682,11 +682,20 @@ var __meta__ = {
                                     taskInfo.parentId = target.id;
                                     break;
                                 case "insert-before":
-                                    taskInfo.orderId = target.orderId;
+                                    if (target.parentId === draggedTask.parentId && 
+                                        target.orderId > draggedTask.orderId) {
+                                            taskInfo.orderId = orderId - 1;
+                                    } else {
+                                        taskInfo.orderId = orderId;
+                                    }
                                     break;
                                 case "insert-after":
-                                    taskInfo.orderId = target.parentId !== draggedTask.parentId ?
-                                        orderId + 1 : orderId;
+                                    if (target.parentId === draggedTask.parentId && 
+                                        target.orderId > draggedTask.orderId) {
+                                            taskInfo.orderId = orderId;
+                                    } else {
+                                        taskInfo.orderId = orderId + 1;
+                                    }
                                     break;
                             }
                             that.trigger("update", {

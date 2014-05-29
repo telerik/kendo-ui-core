@@ -284,11 +284,12 @@
 
     test("drag on upper part of target set drop position class", function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.20));
 
         ok(draggable
@@ -299,11 +300,12 @@
 
     test("drag on upper part of target between two sibling set drop position class", function() {
         var target = ganttList.content.find("tr:eq(6)");
+        var task = ganttList.content.find("tr:eq(7)");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
-        dragstart(ganttList.content.find("tr:eq(7)"));
-        dragenter(ganttList.content.find("tr:eq(6)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.20));
 
         ok(draggable
@@ -312,8 +314,47 @@
             .hasClass("k-insert-middle"));
     });
 
-    test("drag on upper part of target set update arguments", 3, function() {
+    test("drag on upper part of target with greater orderId & same parent set update arguments", 3, function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "foo");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId") - 1);
+        });
+
+        dragstart(task);
+        dragenter(target);
+        drag(target, (offsetY + height * 0.20));
+        drop();
+    });
+
+    test("drag on upper part of target with smaller orderId & same parent set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:first");
+        var task = ganttList.content.find("tr:eq(4)");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "bar");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId"));
+        });
+
+        dragstart(task);
+        dragenter(target);
+        drag(target, (offsetY + height * 0.20));
+        drop();
+    });
+
+    test("drag on upper part of target with different parent set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:eq(5)");
+        var task = ganttList.content.find("tr:first");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -324,19 +365,20 @@
             equal(e.updateInfo.orderId, targetTask.get("orderId"));
         });
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.20));
         drop();
     });
 
     test("drag on middle part of target set drop position class", function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.60));
 
         ok(draggable
@@ -347,6 +389,7 @@
 
     test("drag on middle part of target set update arguments", 2, function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -356,19 +399,20 @@
             equal(e.updateInfo.parentId, targetTask.get("id"));
         });
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.60));
         drop();
     });
 
     test("drag on bottom part of target set drop position class", function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first")
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.90));
 
         ok(draggable
@@ -379,11 +423,12 @@
 
     test("drag on bottom part of target between two sibling set drop position class", function() {
         var target = ganttList.content.find("tr:eq(5)");
+        var task = ganttList.content.find("tr:eq(7)");
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
-        dragstart(ganttList.content.find("tr:eq(7)"));
-        dragenter(ganttList.content.find("tr:eq(5)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.90));
 
         ok(draggable
@@ -392,8 +437,9 @@
             .hasClass("k-insert-middle"));
     });
 
-    test("drag on bottom part of target with same parent set update arguments", 3, function() {
+    test("drag on bottom part of target with greater orderId & same parent set update arguments", 3, function() {
         var target = ganttList.content.find("tr:eq(4)");
+        var task = ganttList.content.find("tr:first");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
@@ -404,27 +450,46 @@
             equal(e.updateInfo.orderId, targetTask.get("orderId"));
         });
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(4)"));
+        dragstart(task);
+        dragenter(target);
+        drag(target, (offsetY + height * 0.90));
+        drop();
+    });
+
+    test("drag on bottom part of target with smaller orderId & same parent set update arguments", 3, function() {
+        var target = ganttList.content.find("tr:first");
+        var task = ganttList.content.find("tr:eq(4)");
+        var targetTask = ganttList._modelFromElement(target);
+        var height = target.height();
+        var offsetY = kendo.getOffset(target).top;
+
+        ganttList.bind("update", function(e) {
+            equal(e.task.get("title"), "bar");
+            equal(e.updateInfo.parentId, targetTask.get("parentId"));
+            equal(e.updateInfo.orderId, targetTask.get("orderId") + 1);
+        });
+
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.90));
         drop();
     });
 
     test("drag on bottom part of target with different parent set update arguments", 3, function() {
         var target = ganttList.content.find("tr:eq(5)");
+        var task = ganttList.content.find("tr:first");
         var targetTask = ganttList._modelFromElement(target);
         var height = target.height();
         var offsetY = kendo.getOffset(target).top;
 
         ganttList.bind("update", function(e) {
-
             equal(e.task.get("title"), "foo");
             equal(e.updateInfo.parentId, targetTask.get("parentId"));
             equal(e.updateInfo.orderId, targetTask.get("orderId") + 1);
         });
 
-        dragstart(ganttList.content.find("tr:first"));
-        dragenter(ganttList.content.find("tr:eq(5)"));
+        dragstart(task);
+        dragenter(target);
         drag(target, (offsetY + height * 0.90));
         drop();
     });
