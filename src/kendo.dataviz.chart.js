@@ -2946,7 +2946,8 @@ var __meta__ = {
                 gradient: GLASS
             },
             labels: {
-                visible: false
+                visible: false,
+                format: "{0}",
             },
             animation: {
                 type: BAR
@@ -2958,47 +2959,53 @@ var __meta__ = {
         },
 
         render: function() {
-            var bar = this,
-                value = bar.value,
-                options = bar.options,
-                labels = options.labels,
-                labelText = value !== null ? value : "",
-                labelTemplate;
-
-            if (bar._rendered) {
+            if (this._rendered) {
                 return;
             } else {
-                bar._rendered = true;
+                this._rendered = true;
             }
+
+            this.createLabel();
+            this.createNote();
+
+            if (this.errorBar) {
+                this.append(this.errorBar);
+            }
+        },
+
+        createLabel: function() {
+            var value = this.value;
+            var options = this.options;
+            var labels = options.labels;
+            var labelText;
 
             if (labels.visible) {
                 if (labels.template) {
-                    labelTemplate = template(labels.template);
+                    var labelTemplate = template(labels.template);
                     labelText = labelTemplate({
-                        dataItem: bar.dataItem,
-                        category: bar.category,
-                        value: bar.value,
-                        percentage: bar.percentage,
-                        series: bar.series
+                        dataItem: this.dataItem,
+                        category: this.category,
+                        value: this.value,
+                        percentage: this.percentage,
+                        series: this.series
                     });
-                } else if (labels.format) {
-                    labelText = autoFormat(labels.format, labelText);
+                } else {
+                    labelText = this.formatValue(labels.format);
                 }
-                bar.label = new BarLabel(labelText,
+
+                this.label = new BarLabel(labelText,
                         deepExtend({
                             vertical: options.vertical,
                             id: uniqueId()
                         },
                         options.labels
                     ));
-                bar.append(bar.label);
+                this.append(this.label);
             }
+        },
 
-            bar.createNote();
-
-            if (bar.errorBar) {
-                bar.append(bar.errorBar);
-            }
+        formatValue: function(format) {
+            return this.owner.formatPointValue(this, format);
         },
 
         reflow: function(targetBox) {
@@ -3682,6 +3689,10 @@ var __meta__ = {
         },
 
         formatPointValue: function(point, format) {
+            if (point.value === null) {
+                return "";
+            }
+
             return autoFormat(format, point.value);
         },
 
@@ -3737,7 +3748,6 @@ var __meta__ = {
 
         createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
-                // TODO: Range Column value is an object
                 value = chart.pointValue(data),
                 options = chart.options,
                 children = chart.children,
@@ -3852,9 +3862,32 @@ var __meta__ = {
         }
     });
 
+    var RangeBar = Bar.extend({
+        defaults: {
+            labels: {
+                format: "{0} - {1}"
+            },
+            tooltip: {
+                format: "{1}"
+            }
+        }
+    });
+
     var RangeBarChart = BarChart.extend({
+        pointType: function() {
+            return RangeBar;
+        },
+
         pointValue: function(data) {
             return data.valueFields;
+        },
+
+        formatPointValue: function(point, format) {
+            if (point.value.from === null && point.value.to === null) {
+                return "";
+            }
+
+            return autoFormat(format, point.value.from, point.value.to);
         },
 
         plotLimits: CategoricalChart.fn.plotLimits,
@@ -11750,6 +11783,7 @@ var __meta__ = {
         PlotAreaBase: PlotAreaBase,
         PlotAreaFactory: PlotAreaFactory,
         PointEventsMixin: PointEventsMixin,
+        RangeBar: RangeBar,
         RangeBarChart: RangeBarChart,
         ScatterChart: ScatterChart,
         ScatterErrorBar: ScatterErrorBar,

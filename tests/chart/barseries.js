@@ -2221,7 +2221,8 @@
                     clipBox: function(){
                         return clipBox || new Box2D(0, 0, 100, 100);
                     }
-                }
+                },
+                formatPointValue: function() { return "foo"; }
             };
 
             root = new dataviz.RootElement();
