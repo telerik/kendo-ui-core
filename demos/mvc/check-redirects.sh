@@ -9,6 +9,10 @@ count=0
 
 #List of URLs to check: <from> <to>
 urls="/kendo-ui/web/drag-and-drop/index.html /kendo-ui/dragdrop/index
+/kendo-ui/themebuilder/dataviz.html /kendo-ui/themebuilder/
+/kendo-ui/themebuilder/web.html /kendo-ui/themebuilder/
+/kendo-ui/themebuilder/mobile.html /kendo-ui/mobilethemebuilder/
+/kendo-ui/mobilethemebuilder/index.html /kendo-ui/mobilethemebuilder/
 /kendo-ui/web/grid/rtl.html /kendo-ui/grid/right-to-left-support
 /kendo-ui/web/grid/remote-data.html /kendo-ui/grid/remote-data-binding
 /kendo-ui/web/grid/local-data.html /kendo-ui/grid/local-data-binding
