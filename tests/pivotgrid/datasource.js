@@ -732,6 +732,57 @@
         equal(descriptors[1].name, "[level 1]");
     });
 
+    test("columnsAxisDescriptors multiple members and expanded child result in correct ordered members", 4, function() {
+        var result = [{
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", hierarchy: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    },
+                    {
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0].[level 2].[level 1]", parentName: "[level 0].[level 2]", children: [] }, { name: "[level 1]", children: [] } ] }
+                                ]
+                            }
+                        },
+                        data: []
+                    }
+        ];
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "[level 0]", expand: true }, {name: "[level 1]"}],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success(result.shift());
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.expandColumn("[level 0].[level 2]");
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 3);
+        equal(descriptors[0].name, "[level 0]");
+        equal(descriptors[1].name, "[level 0].[level 2]");
+        equal(descriptors[2].name, "[level 1]");
+    });
+
     test("columnsAxisDescriptors returns columns state for expanded dimention child", 4, function() {
         var dataSource = new PivotDataSource({
             columns: ["[level 0]", "[level 1]"],
@@ -746,10 +797,11 @@
                             columns: {
                                 tuples: [
                                     { members: [ { name: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parenName: "[level 1]", children: [] } ] },
-                                    { members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parenName: "[level 1]", children: [] } ] },
+                                    //{ members: [ { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    //{ members: [ { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] }, { name: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 0]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 1]", parentName: "[level 1]", children: [] } ] },
+                                    { members: [ { name: "[level 0]", parentName: "[level 0]", children: [] }, { name: "[level 1].[level 1].[level 1]", parentName: "[level 1].[level 1]", children: [] } ] },
                                 ]
                             }
                         },
@@ -766,7 +818,7 @@
         equal(descriptors.length, 3);
         equal(descriptors[0].name, "[level 0]");
         equal(descriptors[1].name, "[level 1]");
-        equal(descriptors[2].name, "[level 1].[level 0]");
+        equal(descriptors[2].name, "[level 1].[level 1]");
     });
 
     test("columnsAxisDescriptors returns columns if no request is made", 2, function() {

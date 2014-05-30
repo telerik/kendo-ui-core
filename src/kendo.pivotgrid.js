@@ -48,28 +48,21 @@ var __meta__ = {
         });
     }
 
-    function accumulateMembers(accumulator, tuples) {
-        var members;
+    function accumulateMembers(accumulator, tuples, level) {
+        var member;
         var name;
         var parentName;
 
         for (var idx = 0; idx < tuples.length; idx++) {
-            members = tuples[idx].members;
+            member = tuples[idx].members[level]
+            name = member.name;
+            parentName = member.parentName || "";
 
-            for (var memberIdx = 0; memberIdx < members.length; memberIdx++) {
-                if (members[memberIdx].measure) {
-                    continue;
-                }
-
-                name = members[memberIdx].name;
-                parentName = (members[memberIdx].parentName || "");
-
-                if (members[memberIdx].children.length > 0) {
-                    accumulator[name] = true;
-                    accumulateMembers(accumulator, members[memberIdx].children);
-                } else if (!(parentName in accumulator)) {
-                    accumulator[name] = false;
-                }
+            if (member.children.length > 0) {
+                accumulator[name] = true;
+                accumulateMembers(accumulator, member.children, level);
+            } else if (!(parentName in accumulator)) {
+                accumulator[name] = false;
             }
         }
     }
@@ -77,7 +70,14 @@ var __meta__ = {
     function descriptorsForAxes(tuples) {
         var result = {};
 
-        accumulateMembers(result, tuples);
+        if (tuples.length) {
+            var members = tuples[0].members || [];
+            for (var idx = 0; idx < members.length; idx++) {
+                if (!members[idx].measure) {
+                    accumulateMembers(result, tuples, idx);
+                }
+            }
+        }
 
         var descriptors = [];
         for (var k in result) {
