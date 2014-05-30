@@ -338,6 +338,30 @@
         });
 
         // ------------------------------------------------------------
+        module("Line Chart / 100% Stacked / Zero", {
+            setup: function() {
+                setupLineChart(plotArea, {
+                    series: [{
+                        data: [0, 1],
+                        labels: {}
+                    }, {
+                        data: [0, 2],
+                        labels: {}
+                    }],
+                    isStacked: true, isStacked100: true }
+                );
+            }
+        });
+
+        test("reports minumum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].min, 0);
+        });
+
+        test("reports maximum value for default axis", function() {
+            equal(lineChart.valueAxisRanges[undefined].max, 1);
+        });
+
+        // ------------------------------------------------------------
         module("Line Chart / Rendering", {
             setup: function() {
                 setupLineChart(plotArea, {

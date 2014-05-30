@@ -3301,7 +3301,9 @@ var __meta__ = {
                     }
                 }
 
-                return point.value / categorySum;
+                if (categorySum > 0) {
+                    return point.value / categorySum;
+                }
             }
 
             return point.value;
