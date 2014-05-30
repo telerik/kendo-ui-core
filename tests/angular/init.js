@@ -24,6 +24,16 @@
             { text: "Foo", id: 1 },
             { text: "Bar", id: 2 }
         ]);
+        $scope.hello = "Hello World!";
+    });
+
+    $.mockjaxSettings.responseTime = 0;
+
+    $.mockjax({
+        url: "ajax-template.html",
+        response: function() {
+            this.responseText = '{{ hello }}';
+        }
     });
 
     function runTest(name, test){
@@ -292,8 +302,28 @@
         $("<ul kendo-menu='menu' k-options='options'></ul>").appendTo(dom);
         expect(1);
         $scope.$on("kendoRendered", function(){
-            ok($scope.menu.wrapper.find("li:first").text(), "6");
+            ok($scope.menu.wrapper.find("li:first").text() == "6");
             start();
+        });
+    });
+
+    runTest("PanelBar -- compile template loaded from server", function(dom){
+        $scope.options = {
+            contentUrls: [
+                "ajax-template.html"
+            ],
+            contentLoad: function(ev) {
+                var contentElement = ev.contentElement;
+                ok(dom.find("div.content").text() == $scope.hello);
+                start();
+            }
+        };
+        $("<ul kendo-panelbar='panelbar' k-options='options'>" +
+          "  <li><a>Title</a><div class='content'></div></li>" +
+          "</ul>").appendTo(dom);
+        expect(1);
+        $scope.$on("kendoRendered", function(){
+            $scope.panelbar.expand(dom.find("li:first"));
         });
     });
 
