@@ -82,6 +82,7 @@ module CodeGen
 
             TRACK_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).TrackViewState();')
 
+            SETDIRTY_VIEWSTATE_TEMPLATE = ERB.new('<%= csharp_name%>.SetDirty(true);')
 
             module Options
 
@@ -339,6 +340,10 @@ module CodeGen
                     TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
                 end
 
+                def to_setdirtyviewstate
+                    SETDIRTY_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
+
                 def get_binding
                     binding
                 end
@@ -465,6 +470,9 @@ module CodeGen
                     TRACK_VIEWSTATE_TEMPLATE.result(get_binding)
                 end
 
+                def to_setdirtyviewstate
+                    SETDIRTY_VIEWSTATE_TEMPLATE.result(get_binding)
+                end
 
                 def script_resource_path
                     "#{csharp_namespace}.#{csharp_name}.Scripts.#{csharp_class}.js"
@@ -729,9 +737,11 @@ module CodeGen
                     load_viewstate_content = write_viewstate_content(options, 'load')
                     save_viewstate_content = write_viewstate_content(options, 'save')
                     track_viewstate_content = write_viewstate_content(options, 'track')
+                    setdirty_viewstate_content = write_viewstate_content(options, 'setdirty')
 
                     file_name = File.join(@path, "#{owner.csharp_class}.cs")
 
+                    Generator.write_file(file_name, setdirty_viewstate_content, '[ SetDirty ]')
                     Generator.write_file(file_name, load_viewstate_content, '[ LoadViewState ]')
                     Generator.write_file(file_name, save_viewstate_content, '[ SaveViewState ]')
                     Generator.write_file(file_name, track_viewstate_content, '[ TrackViewState ]')

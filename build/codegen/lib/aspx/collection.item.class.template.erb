@@ -20,6 +20,13 @@ namespace <%= csharp_namespace %>
 
         #region [ ViewState ]
 
+        internal override void SetDirty()
+        {
+            base.SetDirty();
+            #region [ SetDirty ]
+            #endregion [ SetDirty ]
+        }
+
         protected override void LoadViewState(object state)
         {
             object[] viewState = (object[])state;
