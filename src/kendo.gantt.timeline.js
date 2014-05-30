@@ -902,7 +902,7 @@ var __meta__ = {
                 angle += Math.PI;
             }
 
-            $("<div class='k-line-h k-dependency-hint'></div>")
+            $("<div class='k-line k-line-h k-dependency-hint'></div>")
                 .css({
                     "top": from.y,
                     "left": from.x,
