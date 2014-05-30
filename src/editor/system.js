@@ -458,10 +458,12 @@ var Clipboard = Class.extend({
                         className:'k-paste-container',
                         innerHTML: "\ufeff"
                     });
+                var browser = kendo.support.browser;
 
                 editor.body.appendChild(clipboardNode);
 
-                if (editor.body.createTextRange) {
+                // text ranges are slow in IE10-, DOM ranges are buggy in IE9-10
+                if (browser.msie && browser.version < 11) {
                     e.preventDefault();
                     var r = editor.createRange();
                     r.selectNodeContents(clipboardNode);
