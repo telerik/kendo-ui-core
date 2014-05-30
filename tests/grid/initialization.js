@@ -1535,4 +1535,19 @@
             });
         });
     });
+
+    test("itemsContents returns the grid items", function() {
+        var grid = new Grid(table, {
+            dataSource: [
+                { foo: "foo", bar: "bar" }
+            ],
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.itemsContents().length, 2);
+    });
+
 })();

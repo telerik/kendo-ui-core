@@ -180,6 +180,10 @@ var __meta__ = {
             return this.ul[0].children;
         },
 
+        itemsContents: function() {
+            return this.items();
+        },
+
         current: function(candidate) {
             var that = this,
                 id = that._optionID;
@@ -236,8 +240,11 @@ var __meta__ = {
         dataItem: function(index) {
             var that = this;
 
+
             if (index === undefined) {
                 index = that.selectedIndex;
+            } else if (typeof index !== "number") {
+                index = $(that.items()).index(index);
             }
 
             return that._data()[index];

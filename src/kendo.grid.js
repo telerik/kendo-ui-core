@@ -955,10 +955,22 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.tbody.children().filter(function() {
+            return this._items(this.tbody);
+        },
+
+        _items: function(container) {
+            return container.children().filter(function() {
                 var tr = $(this);
                 return !tr.hasClass("k-grouping-row") && !tr.hasClass("k-detail-row") && !tr.hasClass("k-group-footer");
             });
+        },
+
+        itemsContents: function() {
+            if (this.lockedContent) {
+                return this.items().add(this._items(this.lockedTable.children("tbody")));
+            } else {
+                return this.items();
+            }
         },
 
         _destroyColumnAttachments: function() {

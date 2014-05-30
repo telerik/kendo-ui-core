@@ -158,4 +158,13 @@
             }
         });
     });
+
+    test("itemsContents returns the flattened items elements", 1, function() {
+        var dom = treeFromHtml("<ul>" +
+            "<li>foo<ul><li>baz</li></ul></li>" +
+            "<li data-expanded='true'>bar<ul><li>qux</li></ul></li>" +
+        "</ul>");
+
+        equal(dom.data("kendoTreeView").itemsContents().length, 4);
+    });
 })();

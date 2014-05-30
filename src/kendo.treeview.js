@@ -510,6 +510,10 @@ var __meta__ = {
             return this.element.find(".k-item");
         },
 
+        itemsContents: function() {
+            return this.element.find(".k-item div:first-child");
+        },
+
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
 

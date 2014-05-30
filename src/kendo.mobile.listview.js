@@ -990,6 +990,10 @@ var __meta__ = {
             }
         },
 
+        itemsContents: function() {
+            return this.items();
+        },
+
         scroller: function() {
             if (!this._scrollerInstance) {
                 this._scrollerInstance = this.element.closest(".km-scroll-wrapper").data("kendoMobileScroller");

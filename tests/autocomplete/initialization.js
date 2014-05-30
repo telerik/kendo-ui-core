@@ -152,7 +152,31 @@ test("dataItem() returns dataItem depending on passed index", function() {
         dataSource:[{text: 1, value: 1}, {text:2, value:2}]
     });
 
+    autocomplete.dataSource.read();
+
     equal(autocomplete.dataItem(1), autocomplete.dataSource.view()[1]);
+});
+
+test("itemsContents returns the items", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+    });
+
+    autocomplete.dataSource.read();
+
+    equal(autocomplete.itemsContents().length, 2);
+});
+
+test("dataItem() returns dataItem depending on passed dom elements", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataTextField: "text",
+        dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+    });
+
+    autocomplete.dataSource.read();
+
+    equal(autocomplete.dataItem(autocomplete.items()[1]), autocomplete.dataSource.view()[1]);
 });
 
 test("dataItem() returns null if no argument", function() {
