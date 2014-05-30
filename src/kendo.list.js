@@ -557,7 +557,7 @@ var __meta__ = {
             }
         },
 
-       _triggerCascade: function(userTriggered) {
+        _triggerCascade: function(userTriggered) {
             var that = this,
                 value = that.value();
 
@@ -566,7 +566,7 @@ var __meta__ = {
             }
         },
 
-       _unbindDataSource: function() {
+        _unbindDataSource: function() {
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)
@@ -577,15 +577,13 @@ var __meta__ = {
 
         _notifyDomUpdate: function(type) {
             var that = this;
-            var elements = $(that.items()).get();
-            var dataItems = elements.map(function(el, i){
-                return that.dataItem(i);
+            that.domUpdate(type, function(){
+                var elements = $(that.items()).get();
+                var dataItems = elements.map(function(el, i){
+                    return that.dataItem(i);
+                });
+                return { elements: elements, dataItems: dataItems };
             });
-            if (type == "before") {
-                that.beforeDomUpdate(elements, dataItems);
-            } else {
-                that.afterDomUpdate(elements, dataItems);
-            }
         }
     });
 

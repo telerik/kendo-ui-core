@@ -2621,8 +2621,7 @@ function pad(number, digits, end) {
             that.unbind();
         },
 
-        beforeDomUpdate: function(elements, dataItems) {},
-        afterDomUpdate: function(elements, dataItems) {}
+        domUpdate: function(){}
     });
 
     kendo.dimensions = function(element, dimensions) {

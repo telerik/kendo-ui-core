@@ -509,30 +509,28 @@
 
   /* -----[ Customize widgets for Angular ]----- */
 
-  defadvice("ui.Widget", "beforeDomUpdate", function(elements, dataItems){
+  defadvice("ui.Widget", "domUpdate", function(type, get){
     var self = this.self;
     var scope = angular.element(self.element).scope();
     if (scope) {
-      angular.forEach(elements, function(el){
-        var itemScope = angular.element(el).scope();
-        if (itemScope && itemScope !== scope) {
-          destroyScope(itemScope);
+      var x = get(), elements = x.elements, dataItems = x.dataItems;
+      if (elements.length > 0) {
+        if (type == "before") {
+          angular.forEach(elements, function(el){
+            var itemScope = angular.element(el).scope();
+            if (itemScope && itemScope !== scope) {
+              destroyScope(itemScope);
+            }
+          });
+        } else {
+          angular.forEach(elements, function(el, i){
+            var itemScope = scope.$new();
+            itemScope.dataItem = dataItems[i];
+            compile(el)(itemScope);
+          });
+          digest(scope);
         }
-      });
-    }
-    this.next();
-  });
-
-  defadvice("ui.Widget", "afterDomUpdate", function(elements, dataItems){
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      angular.forEach(elements, function(el, i){
-        var itemScope = scope.$new();
-        itemScope.dataItem = dataItems[i];
-        compile(el)(itemScope);
-        digest(itemScope);
-      });
+      }
     }
     this.next();
   });
