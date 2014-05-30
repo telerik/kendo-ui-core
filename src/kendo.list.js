@@ -580,19 +580,6 @@ var __meta__ = {
                            .unbind(PROGRESS, that._progressHandler)
                            .unbind(REQUESTEND, that._requestEndHandler)
                            .unbind("error", that._errorHandler);
-        },
-
-        _notifyDomUpdate: function(type) {
-            var that = this;
-            that.domUpdate(type, function(){
-                var elements = $(that.items()).get();
-                return {
-                    elements: elements,
-                    data: elements.map(function(el, i){
-                        return { dataItem: that.dataItem(i) };
-                    })
-                };
-            });
         }
     });
 

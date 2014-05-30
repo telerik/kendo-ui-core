@@ -2632,6 +2632,19 @@ function pad(number, digits, end) {
 
         dataItems: function() {
             return this.dataSource.view();
+        },
+
+        _notifyDomUpdate: function(type) {
+            var that = this;
+            that.domUpdate(type, function(){
+                var elements = $(that.itemsContents()).get();
+                return {
+                    elements: elements,
+                    data: elements.map(function(el, i){
+                        return { dataItem: that.dataItem(i) };
+                    })
+                };
+            });
         }
     });
 
