@@ -677,7 +677,7 @@
     }
   });
 
-  defadvice([ "ui.ListView", "mobile.ui.ListView", "ui.TreeView" ], "$angular_itemsToCompile", function(){
+  defadvice([ "mobile.ui.ListView", "ui.TreeView" ], "$angular_itemsToCompile", function(){
     return this.self.items();
   });
 
@@ -685,10 +685,7 @@
     return this.self.element.find(".k-item div:first-child");
   });
 
-  // for ListView and TreeView, provide a dataBound handler that
-  // recompiles Angular templates.  We need to do this before the
-  // widget is initialized so that we catch the first dataBound event.
-  defadvice([ "ui.ListView", "mobile.ui.ListView", "ui.TreeView" ], BEFORE, function(element, options){
+  defadvice([ "mobile.ui.ListView", "ui.TreeView" ], BEFORE, function(element, options){
     this.next();
     var scope = angular.element(element).scope();
     if (!scope) return;
@@ -718,7 +715,7 @@
     };
   });
 
-  defadvice([ "ui.ListView", "mobile.ui.ListView" ], AFTER, function(){
+  defadvice([ "mobile.ui.ListView" ], AFTER, function(){
     this.next();
     var self = this.self;
     var scope = angular.element(self.element).scope();

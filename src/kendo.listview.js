@@ -222,6 +222,8 @@ var __meta__ = {
                 return;
             }
 
+            that._notifyDomUpdate("before");
+
             that._destroyEditable();
 
             for (idx = 0, length = view.length; idx < length; idx++) {
@@ -244,6 +246,8 @@ var __meta__ = {
             if (that.element[0] === active && that.options.navigatable) {
                 that.current(items.eq(0));
             }
+
+            that._notifyDomUpdate("after");
 
             that.trigger(DATABOUND);
         },
