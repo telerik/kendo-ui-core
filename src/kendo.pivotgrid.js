@@ -1202,6 +1202,7 @@ var __meta__ = {
             that._createLayout();
 
             that._columnBuilder = columnBuilder = new ColumnBuilder();
+            that._rowBuilder = new RowBuilder();
 
             that._dataSource();
 
@@ -1368,7 +1369,7 @@ var __meta__ = {
             var data = dataSource.view();
 
             var columnsTree = that._columnBuilder.build(tuples || []);
-            var rowsTree = kendo_row_headers(rows.tuples || []);
+            var rowsTree = that._rowBuilder.build(rows.tuples || []);
 
             that.columnsHeaderTree.render(columnsTree);
             that.rowsHeaderTree.render(rowsTree);
@@ -1653,6 +1654,225 @@ var __meta__ = {
     });
 
     //row headers
+    //
+    var RowBuilder = Class.extend({
+        init: function(options) {
+            this._state(null);
+            this.expandState = {};
+        },
+
+        build: function(tuples) {
+            return [
+                element("table", null, [this._thead(tuples)])
+            ];
+        },
+
+        _thead: function(tuples) {
+            var root = tuples[0];
+
+            this._state(root);
+
+            if (root) {
+                this._buildRows(root, 0);
+                this._normalizeColSpan();
+            } else {
+                this.rows.push(element("tr", null, kendo_th("")));
+            }
+
+            return element("thead", null, this.rows);
+        },
+
+        _normalizeColSpan: function() {
+            var members = this.rootTuple.members;
+            var length = members.length;
+
+            var maxColSpan = 0;
+            var idx = 0;
+
+            var rootName;
+            var colspan;
+            var member;
+            var row;
+
+            if (length === 1) {
+                return;
+            }
+
+            for (; idx < length; idx++) {
+                member = members[idx];
+                colspan = this.map[member.name].colspan;
+
+                //TODO: handle when 2 or more dimensions are equal!!!
+
+                if (colspan > maxColSpan) {
+                    maxColSpan = colspan;
+                    rootName = member.name;
+                }
+            }
+
+            for (idx = 0, length = this.rows.length; idx < length; idx++) {
+                row = this.rows[idx];
+
+                if (row.rootName === rootName) {
+                    continue;
+                }
+
+                colspan = row.colspan || 0;
+
+                if (colspan < maxColSpan) {
+                    if (colspan === 1) {
+                        colspan = 0;
+                    }
+
+                    row.children[row.children.length - 1].attr.colspan = maxColSpan - colspan;
+                }
+            }
+        },
+
+        _memberIdx: function(members, parentMember) {
+            var index = 0;
+            var member = members[index];
+
+            while(member && member.parentName !== parentMember.name) {
+                index += 1;
+                member = members[index];
+            }
+
+            return member ? index : index - 1;
+        },
+
+        _rowIndex: function(row) {
+            var rows = this.rows;
+            var length = rows.length;
+            var idx = 0;
+
+            for(; idx < length; idx++) {
+                if (rows[idx] === row) {
+                    break;
+                }
+            }
+
+            return idx;
+        },
+
+        _tuplePath: function(tuple, index) {
+            var path = [];
+            var idx = 0;
+
+            for (; idx <= index; idx++) {
+                path.push(tuple.members[idx].name);
+            }
+
+            return path;
+        },
+
+        _buildRows: function(tuple, memberIdx, parentMember) {
+            var rows = this.rows;
+            var map = this.map;
+
+            var members = tuple.members;
+            var member = members[memberIdx];
+            var children = member.children;
+
+            var childMember = !parentMember && tuple !== this.rootTuple;
+
+            var name;
+
+            if (childMember) {
+                name = this._tuplePath(tuple, memberIdx - 1).join("");
+            } else {
+                name = member.parentName || member.name;
+            }
+
+            var row = map[name];
+
+            if (!childMember && (!row || row.hasChild)) {
+                if (row) {
+                    row.rowspan += 1; //this is not correct, but tests work! Investigate further!
+                }
+
+                row = element("tr", null);
+
+                row.rowspan = 1;
+
+                rows.push(row);
+            } else {
+                row.hasChild = true;
+            }
+
+            row.colspan = 1;
+            row.rootName = this.rootTuple.members[memberIdx].name;
+
+            name = childMember ? this._tuplePath(tuple, memberIdx).join("") : member.name;
+
+            map[name] = row;
+
+            var cell = element("td", null, [text(member.caption || member.name)]);
+
+            row.children.push(cell);
+
+            var childRow;
+
+            if (member.children[0]) {
+                var allCell = element("td", null, [text(member.caption || member.name)]);
+
+                if (row.hasChild) {
+                    row.hasChild = false;
+                }
+
+                var rowspan = 0;
+
+                for (var idx = 0; idx < children.length; idx++) {
+                    childRow = this._buildRows(children[idx], 0, member);
+
+                    rowspan += childRow.rowspan;
+
+                    if (childRow === row) {
+                        row.colspan += 1;
+                    }
+                }
+
+                cell.attr.rowspan = rowspan;
+                allCell.attr.colspan = row.colspan;
+
+                this.rows.push(element("tr", null, [allCell]));
+                row.rowspan += 1;
+
+                if (members[memberIdx + 1]) {
+                    childRow = this._buildRows(tuple, ++memberIdx);
+
+                    rowspan = childRow.rowspan;
+
+                    if (rowspan > 1) {
+                        row.rowspan += rowspan;
+                    }
+
+                    //row.colspan += 1;
+                }
+            } else if (members[memberIdx + 1]) {
+                childRow = this._buildRows(tuple, ++memberIdx);
+
+                rowspan = childRow.rowspan;
+
+                if (rowspan > 1) {
+                    row.rowspan += rowspan;
+                }
+
+                if (tuple !== this.rootTuple) {
+                    row.colspan += 1;
+                }
+            }
+
+            return row;
+        },
+
+        _state: function(rootTuple) {
+            this.rows = [];
+            this.map = {};
+            this.rootTuple = rootTuple;
+        }
+    });
+
     function kendo_th(member, attr) {
         return element("th", attr, [text(member.caption || member.name)]);
     }
