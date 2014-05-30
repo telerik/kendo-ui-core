@@ -34,20 +34,20 @@ var __meta__ = {
             position: "bottom center"
         }
     };
-    var TOOLBAR_CLASS_NAMES = "k-floatwrap k-header k-gantt-toolbar";
+    var DOT = ".";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
-    var HEADER_TEMPLATE = kendo.template('<div class="#=styles#">' +
+    var HEADER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
             '#if (editable == true) {#'+
-                '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
-                    '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
+                '<ul class="#=styles.actions#">' +
+                    '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
                 '</ul>' +
             '#}#' +
-            '<ul class="k-reset k-header k-toolbar k-gantt-views">' +
+            '<ul class="#=styles.views#">' +
                 '#for(var view in views){#' +
-                    '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="k-link">#=views[view].title#</a></li>' +
+                    '<li class="#=styles.viewButton# k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
                 '#}#' +
             '</ul>' +
         '</div>');
@@ -58,11 +58,41 @@ var __meta__ = {
                 '#}#' +
             '</ul>' +
         '</div>');
-    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles#">' +
-            '<ul class="k-reset k-header k-toolbar k-gantt-actions">' +
-                '<li class="k-button k-button-icontext" data-action="#=action.data#"><span class="k-icon k-i-plus"></span>#=action.title#</li>' +
+    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
+            '<ul class="#=styles.actions#">' +
+                '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
             '</ul>' +
         '</div>');
+
+    var ganttStyles = {
+        wrapper: "k-widget k-gantt",
+        layout: "k-gantt-layout",
+        listWrapper: "k-gantt-treelist",
+        timelineWrapper: "k-gantt-timeline",
+        splitBarWrapper: "k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout",
+        splitBar: "k-splitbar",
+        splitBarHover: "k-splitbar-horizontal-hover",
+        resizeHandle: "k-resize-handle",
+        icon: "k-icon",
+        item: "k-item",
+        hovered: "k-state-hover",
+        selected: "k-state-selected",
+        gridHeader: "k-grid-header",
+        gridHeaderWrap: "k-grid-header-wrap",
+        gridContent: "k-grid-content",
+        toolbar: {
+            wrapper: "k-floatwrap k-header k-gantt-toolbar",
+            toolbar: "k-toolbar",
+            viewsWrapper: "k-gantt-views",
+            views: "k-reset k-header k-toolbar k-gantt-views",
+            actionsWrapper: "k-gantt-actions",
+            actions: "k-reset k-header k-toolbar k-gantt-actions",
+            button: "k-button k-button-icontext",
+            iconPlus: "k-icon k-i-plus",
+            viewButton: "k-state-default",
+            link: "k-link"
+        }
+    };
 
     function trimOptions(options) {
         delete options.name;
@@ -116,6 +146,8 @@ var __meta__ = {
 
         _popup: function() {
             var that = this;
+            var ganttStyles = Gantt.styles;
+            var itemSelector = "li" + DOT + ganttStyles.item;
             var actions = this.options.messages.actions;
 
             this.list = $(TASK_DROPDOWN_TEMPLATE({
@@ -160,14 +192,14 @@ var __meta__ = {
             });
 
             this.list
-                .find("li.k-item")
+                .find(itemSelector)
                 .hover(function() {
-                    $(this).addClass("k-state-hover");
+                    $(this).addClass(ganttStyles.hovered);
                 }, function() {
-                    $(this).removeClass("k-state-hover");
+                    $(this).removeClass(ganttStyles.hovered);
                 })
                 .end()
-                .on("click" + NS, "li.k-item", function (e) {
+                .on("click" + NS, itemSelector, function(e) {
                     that.trigger("command", { type: $(this).attr(kendo.attr("action")) });
                     that.popup.close();
                 });
@@ -801,17 +833,21 @@ var __meta__ = {
         },
 
         _wrapper: function() {
+            var ganttStyles = Gantt.styles;
+            var listWrapperClassName = [ganttStyles.layout, ganttStyles.listWrapper].join(" ");
+            var timelineWrapperClassName = [ganttStyles.layout, ganttStyles.timelineWrapper].join(" ");
+            var splitBarHandleClassName = [ganttStyles.icon, ganttStyles.resizeHandle].join(" ");
             var options = this.options;
             var height = options.height;
             var width = options.width;
 
             this.wrapper = this.element
-                            .addClass("k-widget k-gantt")
-                            .append("<div class='k-gantt-layout k-gantt-treelist'><div></div></div>")
-                            .append("<div class='k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout' role='separator'><div class='k-icon k-resize-handle'></div></div>")
-                            .append("<div class='k-gantt-layout k-gantt-timeline'><div></div></div>");
+                            .addClass(ganttStyles.wrapper)
+                            .append("<div class='" + listWrapperClassName + "'><div></div></div>")
+                            .append("<div class='" + ganttStyles.splitBarWrapper + "'><div class='" + splitBarHandleClassName + "'></div></div>")
+                            .append("<div class='" + timelineWrapperClassName + "'><div></div></div>");
 
-            this.wrapper.find(".k-gantt-treelist").width(options.listWidth);
+            this.wrapper.find(DOT + ganttStyles.listWrapper).width(options.listWidth);
 
             if (height) {
                 this.wrapper.height(height);
@@ -824,10 +860,13 @@ var __meta__ = {
 
         _toolbar: function() {
             var that = this;
+            var ganttStyles = Gantt.styles;
+            var viewsSelector = DOT + ganttStyles.toolbar.viewsWrapper + " > li";
+            var hoveredClassName = ganttStyles.hovered;
             var toolbar = $(HEADER_TEMPLATE({
                 ns: kendo.ns,
                 views: this.timeline.views,
-                styles: TOOLBAR_CLASS_NAMES,
+                styles: Gantt.styles.toolbar,
                 action: {
                     data: "add",
                     title: this.options.messages.actions.append
@@ -839,7 +878,7 @@ var __meta__ = {
             this.toolbar = toolbar;
 
             toolbar
-                .on(CLICK + NS, ".k-gantt-views li", function(e) {
+                .on(CLICK + NS, viewsSelector, function(e) {
                     e.preventDefault();
 
                     var name = $(this).attr(kendo.attr("name"));
@@ -851,11 +890,11 @@ var __meta__ = {
                 });
 
             toolbar
-                .find(".k-toolbar li")
+                .find(DOT + ganttStyles.toolbar.toolbar + " li")
                 .hover(function() {
-                    $(this).addClass("k-state-hover");
+                    $(this).addClass(hoveredClassName);
                 }, function() {
-                    $(this).removeClass("k-state-hover");
+                    $(this).removeClass(hoveredClassName);
                 });
         },
 
@@ -865,7 +904,7 @@ var __meta__ = {
             }
 
             var footer = $(FOOTER_TEMPLATE({
-                styles: TOOLBAR_CLASS_NAMES,
+                styles: Gantt.styles.toolbar,
                 action: {
                     data: "add",
                     title: this.options.messages.actions.append
@@ -878,23 +917,28 @@ var __meta__ = {
 
         _adjustDimensions: function() {
             var element = this.element;
+            var ganttStyles = Gantt.styles;
+            var listSelector = DOT + ganttStyles.listWrapper;
+            var timelineSelector = DOT + ganttStyles.timelineWrapper;
+            var splitBarSelector = DOT + ganttStyles.splitBar;
             var toolbarHeight = this.toolbar.outerHeight();
             var footerHeight = this.footer ? this.footer.outerHeight() : 0;
             var totalHeight = element.height();
             var totalWidth = element.width();
-            var splitBarWidth = element.find(".k-splitbar").outerWidth();
-            var treeListWidth = element.find(".k-gantt-treelist").outerWidth();
+            var splitBarWidth = element.find(splitBarSelector).outerWidth();
+            var treeListWidth = element.find(listSelector).outerWidth();
 
             element
-                .children(".k-gantt-treelist, .k-splitbar, .k-gantt-timeline")
+                .children([listSelector, timelineSelector, splitBarSelector].join(","))
                 .height(totalHeight - (toolbarHeight + footerHeight))
                 .end()
-                .children(".k-gantt-timeline")
+                .children(timelineSelector)
                 .width(totalWidth - (splitBarWidth + treeListWidth));
         },
 
         _dropDowns: function() {
             var that = this;
+            var actionsSelector = DOT + Gantt.styles.toolbar.actionsWrapper;
             var actionMessages = this.options.messages.actions;
             var dataSource = this.dataSource;
             var timeline = this.timeline;
@@ -943,14 +987,14 @@ var __meta__ = {
                 return;
             }
 
-            this.footerDropDown = new TaskDropDown(this.footer.children(".k-gantt-actions").eq(0), {
+            this.footerDropDown = new TaskDropDown(this.footer.children(actionsSelector).eq(0), {
                 messages: {
                     actions: actionMessages
                 },
                 direction: "up"
             });
 
-            this.headerDropDown = new TaskDropDown(this.toolbar.children(".k-gantt-actions").eq(0), {
+            this.headerDropDown = new TaskDropDown(this.toolbar.children(actionsSelector).eq(0), {
                 messages: {
                     actions: actionMessages
                 }
@@ -962,8 +1006,9 @@ var __meta__ = {
 
         _list: function() {
             var that = this;
-            var element = this.wrapper.find(".k-gantt-treelist > div");
-            var toggleButtons = this.wrapper.find(".k-gantt-actions > li");
+            var ganttStyles = Gantt.styles;
+            var element = this.wrapper.find(DOT + ganttStyles.listWrapper + " > div");
+            var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actionsWrapper + " > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
@@ -1005,19 +1050,20 @@ var __meta__ = {
 
         _timeline: function() {
             var that = this;
+            var ganttStyles = Gantt.styles;
             var options = trimOptions(extend(true, {}, this.options));
-            var element = this.wrapper.find(".k-gantt-timeline > div");
+            var element = this.wrapper.find(DOT + ganttStyles.timelineWrapper + " > div");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
 
             this.timeline
                 .bind("navigate", function(e) {
                     that.toolbar
-                        .find(".k-gantt-views > li")
-                        .removeClass("k-state-selected")
+                        .find(DOT + ganttStyles.toolbar.viewsWrapper +" > li")
+                        .removeClass(ganttStyles.selected)
                         .end()
                         .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
-                        .addClass("k-state-selected");
+                        .addClass(ganttStyles.selected);
                 })
                 .bind("moveStart", function(e) {
                     if (that.trigger("moveStart", { task: e.task })) {
@@ -1262,28 +1308,30 @@ var __meta__ = {
 
         _resizable: function() {
             var wrapper = this.wrapper;
-            var treeListWrapper = wrapper.find(".k-gantt-treelist");
-            var timelineWrapper = wrapper.find(".k-gantt-timeline");
+            var ganttStyles = Gantt.styles;
+            var contentSelector = DOT + ganttStyles.gridContent;
+            var treeListWrapper = wrapper.find(DOT + ganttStyles.listWrapper);
+            var timelineWrapper = wrapper.find(DOT + ganttStyles.timelineWrapper);
             var treeListWidth;
             var timelineWidth;
             var timelineScroll;
 
             this._resizeDraggable = wrapper
-                .find(".k-splitbar")
+                .find(DOT + ganttStyles.splitBar)
                 .height(treeListWrapper.height())
                 .hover(function (e) {
-                    $(this).addClass("k-splitbar-horizontal-hover");
+                    $(this).addClass(ganttStyles.splitBarHover);
                 }, function (e) {
-                    $(this).removeClass("k-splitbar-horizontal-hover");
+                    $(this).removeClass(ganttStyles.splitBarHover);
                 })
                 .end()
                 .kendoResizable({
                     orientation: "horizontal",
-                    handle: ".k-splitbar",
+                    handle: DOT + ganttStyles.splitBar,
                     "start": function (e) {
                         treeListWidth = treeListWrapper.width();
                         timelineWidth = timelineWrapper.width();
-                        timelineScroll = timelineWrapper.find(".k-grid-content").scrollLeft();
+                        timelineScroll = timelineWrapper.find(contentSelector).scrollLeft();
                     },
                     "resize": function(e) {
                         var delta = e.x.initialDelta;
@@ -1294,22 +1342,25 @@ var __meta__ = {
 
                         treeListWrapper.width(treeListWidth + delta);
                         timelineWrapper.width(timelineWidth - delta);
-                        timelineWrapper.find(".k-grid-content").scrollLeft(timelineScroll + delta);
+                        timelineWrapper.find(contentSelector).scrollLeft(timelineScroll + delta);
                     }
                 }).data("kendoResizable");
         },
 
         _scrollable: function() {
+            var ganttStyles = Gantt.styles;
+            var contentSelector = DOT + ganttStyles.gridContent;
+            var headerSelector = DOT + ganttStyles.gridHeaderWrap;
             var timelineWrapper = this.timeline.element;
             var treeListWrapper = this.list.element;
 
-            timelineWrapper.find(".k-grid-content").on("scroll", function (e) {
-                timelineWrapper.find(".k-grid-header-wrap").scrollLeft(this.scrollLeft);
-                treeListWrapper.find(".k-grid-content").scrollTop(this.scrollTop);
+            timelineWrapper.find(contentSelector).on("scroll", function(e) {
+                timelineWrapper.find(headerSelector).scrollLeft(this.scrollLeft);
+                treeListWrapper.find(contentSelector).scrollTop(this.scrollTop);
             });
 
-            treeListWrapper.find(".k-grid-content").on("scroll", function(e) {
-                treeListWrapper.find(".k-grid-header-wrap").scrollLeft(this.scrollLeft);
+            treeListWrapper.find(contentSelector).on("scroll", function(e) {
+                treeListWrapper.find(headerSelector).scrollLeft(this.scrollLeft);
             });
         },
 
@@ -1335,6 +1386,8 @@ var __meta__ = {
     });
 
     kendo.ui.plugin(Gantt);
+
+    extend(true, Gantt, { styles: ganttStyles });
 
 })(window.kendo.jQuery);
 

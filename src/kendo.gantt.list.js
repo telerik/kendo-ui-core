@@ -37,7 +37,33 @@ var __meta__ = {
     };
     var NS = ".kendoGanttList";
     var CLICK = "click";
-    var DROPPOSITIONS = "k-insert-top k-insert-bottom k-add k-insert-middle";
+    var DOT = ".";
+
+    var listStyles = {
+        wrapper: "k-treelist k-grid k-widget",
+        header: "k-header",
+        alt: "k-alt",
+        editRow: "k-edit-row",
+        editCell: "k-edit-cell",
+        group: "k-treelist-group",
+        gridHeader: "k-grid-header",
+        gridHeaderWrap: "k-grid-header-wrap",
+        gridContent: "k-grid-content",
+        selected: "k-state-selected",
+        icon: "k-icon",
+        iconCollapse: "k-i-collapse",
+        iconExpand: "k-i-expand",
+        iconHidden: "k-i-none",
+        dropPositions: "k-insert-top k-insert-bottom k-add k-insert-middle",
+        dropTop: "k-insert-top",
+        dropBottom: "k-insert-bottom",
+        dropAdd: "k-add",
+        dropMiddle: "k-insert-middle",
+        dropDenied: "k-denied",
+        dragStatus: "k-drag-status",
+        dragClue: "k-drag-clue",
+        dragClueText: "k-clue-text"
+    };
 
     function createPlaceholders(level) {
         var spans = [];
@@ -49,7 +75,7 @@ var __meta__ = {
         return spans;
     }
 
-    ui.GanttList = Widget.extend({
+    var GanttList = ui.GanttList = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
@@ -146,14 +172,15 @@ var __meta__ = {
 
         _layout: function () {
             var element = this.element;
+            var listStyles = GanttList.styles;
 
             element
-                .addClass("k-treelist k-grid k-widget")
-                .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
-                .append("<div class='k-grid-content'></div>");
+                .addClass(listStyles.wrapper)
+                .append("<div class='" + listStyles.gridHeader + "'><div class='" + listStyles.gridHeaderWrap + "'></div></div>")
+                .append("<div class='" + listStyles.gridContent + "'></div>");
 
-            this.header = element.find(".k-grid-header-wrap");
-            this.content = element.find(".k-grid-content");
+            this.header = element.find(DOT + listStyles.gridHeaderWrap);
+            this.content = element.find(DOT + listStyles.gridContent);
         },
 
         _header: function() {
@@ -191,11 +218,7 @@ var __meta__ = {
 
             for (var i = 0, length = columns.length; i < length; i++) {
                 column = columns[i];
-                style = { "data-field": column.field, "data-title": column.title, className: "k-header" };
-
-                if (column.sortable) {
-                    extend(style, { "data-role": "columnsorter" });
-                }
+                style = { "data-field": column.field, "data-title": column.title, className: GanttList.styles.header };
 
                 ths.push(kendoDomElement("th", style, [kendoTextElement(column.title)]));
             }
@@ -230,6 +253,7 @@ var __meta__ = {
             var style;
             var className = [];
             var level;
+            var listStyles = GanttList.styles;
 
             for (var i = 0, length = tasks.length; i < length; i++) {
                 task = tasks[i];
@@ -245,11 +269,11 @@ var __meta__ = {
                 };
 
                 if (i % 2 !== 0) {
-                    className.push("k-alt");
+                    className.push(listStyles.alt);
                 }
 
                 if (task.summary) {
-                    className.push("k-treelist-group");
+                    className.push(listStyles.group);
                 }
 
                 if (className.length) {
@@ -284,6 +308,7 @@ var __meta__ = {
 
         _td: function(options) {
             var children = [];
+            var listStyles = GanttList.styles;
             var task = options.task;
             var column = options.column;
             var value = task.get(column.field);
@@ -292,8 +317,8 @@ var __meta__ = {
             if (column.field === "title") {
                 children = createPlaceholders(options.level);
                 children.push(kendoDomElement("span", {
-                    className: "k-icon" + (task.summary ? (task.expanded ? " k-i-collapse" : " k-i-expand")
-                        : " k-i-none")
+                    className: listStyles.icon + " " + (task.summary ? (task.expanded ? listStyles.iconCollapse : listStyles.iconExpand)
+                        : listStyles.iconHidden)
                 }));
             }
 
@@ -369,31 +394,34 @@ var __meta__ = {
 
         select: function(value) {
             var element = this.content.find(value);
+            var selectedClassName = GanttList.styles.selected;
 
             if (element.length) {
                 element
-                    .addClass("k-state-selected")
-                    .siblings(".k-state-selected")
-                    .removeClass("k-state-selected");
+                    .addClass(selectedClassName)
+                    .siblings(DOT + selectedClassName)
+                    .removeClass(selectedClassName);
 
                 this.trigger("change");
 
                 return;
             }
 
-            return this.content.find(".k-state-selected");
+            return this.content.find(DOT + selectedClassName);
         },
 
         clearSelection: function() {
             var selected = this.select();
 
-            selected.removeClass("k-state-selected");
+            selected.removeClass(GanttList.styles.selected);
 
             this.trigger("change");
         },
 
         _editable: function() {
             var that = this;
+            var listStyles = GanttList.styles;
+            var iconSelector = "span." + listStyles.icon + ":not(" + listStyles.iconHidden +")";
             var finishEdit = function() {
                 if (that.editable && that.editable.end()) {
                     that._closeCell();
@@ -446,7 +474,7 @@ var __meta__ = {
                     doubletap: function(e) {
                         var event = e.touch;
 
-                        if ($(event.initialTouch).is("span.k-icon:not(.k-i-none)")) {
+                        if ($(event.initialTouch).is(iconSelector)) {
                             return;
                         }
 
@@ -465,6 +493,7 @@ var __meta__ = {
         },
 
         _editCell: function(options) {
+            var listStyles = GanttList.styles;
             var cell = options.cell;
             var column = options.column;
             var model = this._modelFromElement(cell);
@@ -496,8 +525,8 @@ var __meta__ = {
             }
 
             this.editable = cell
-                .addClass("k-edit-cell")
-                .parent("tr").addClass("k-edit-row")
+                .addClass(listStyles.editCell)
+                .parent("tr").addClass(listStyles.editRow)
                 .end()
                 .kendoEditable({
                     fields: {
@@ -521,6 +550,7 @@ var __meta__ = {
         },
 
         _closeCell: function(cancelUpdate) {
+            var listStyles = GanttList.styles;
             var cell = this._editableContainer;
             var model = this._modelFromElement(cell);
             var column = this._columnFromElement(cell);
@@ -531,8 +561,8 @@ var __meta__ = {
 
             cell.empty()
                 .removeData("modelCopy")
-                .removeClass("k-edit-cell")
-                .parent("tr").removeClass("k-edit-row")
+                .removeClass(listStyles.editCell)
+                .parent("tr").removeClass(listStyles.editRow)
                 .end()
                 .append(this._editableContent);
 
@@ -552,6 +582,7 @@ var __meta__ = {
             var draggedTask = null;
             var dropAllowed = true;
             var dropTarget;
+            var listStyles = GanttList.styles;
             var selector = 'tr[' + kendo.attr("level") + ' = 0]:last';
             var action = {};
             var clear = function() {
@@ -582,23 +613,23 @@ var __meta__ = {
             };
             var defineAction = function(coordinate) {
                 var location = coordinate.location;
-                var className = "k-add";
+                var className = listStyles.dropAdd;
                 var command = "add";
                 var level = parseInt(dropTarget.attr(kendo.attr("level")), 10);
                 var sibling;
 
                 if (location <= dropTarget.beforeLimit) {
                     sibling = dropTarget.prev();
-                    className = "k-insert-top";
+                    className = listStyles.dropTop;
                     command = "insert-before";
                 } else if (location >= dropTarget.afterLimit) {
                     sibling = dropTarget.next();
-                    className = "k-insert-bottom";
+                    className = listStyles.dropBottom;
                     command = "insert-after";
                 }
 
                 if (sibling && parseInt(sibling.attr(kendo.attr("level")), 10) === level) {
-                    className = "k-insert-middle";
+                    className = listStyles.dropMiddle;
                 }
 
                 action.className = className;
@@ -607,8 +638,8 @@ var __meta__ = {
             var status = function() {
                 return that._reorderDraggable
                             .hint
-                            .children(".k-drag-status")
-                            .removeClass(DROPPOSITIONS);
+                            .children(DOT + listStyles.dragStatus)
+                            .removeClass(listStyles.dropPositions);
             };
 
             if (this.options.editable !== true) {
@@ -620,9 +651,9 @@ var __meta__ = {
                     distance: 10,
                     holdToDrag: kendo.support.mobileOS,
                     group: "listGroup",
-                    filter: "tr[data-uid]:not('.k-edit-row')",
+                    filter: "tr[data-uid]:not('." + listStyles.editRow + "')",
                     hint: function(target) {
-                        return $('<div class="k-header k-drag-clue"/>')
+                        return $('<div class="' + listStyles.header + " " + listStyles.dragClue + '"/>')
                                 .css({
                                     width: 300,
                                     paddingLeft: target.css("paddingLeft"),
@@ -631,13 +662,13 @@ var __meta__ = {
                                     paddingTop: target.css("paddingTop"),
                                     paddingBottom: target.css("paddingBottom")
                                 })
-                                .append('<span class="k-icon k-drag-status" /><span class="k-clue-text"/>');
+                                .append('<span class="' + listStyles.icon + " " + listStyles.dragStatus +'" /><span class="' + listStyles.dragClueText + '"/>');
                     },
                     cursorOffset: { top: -20, left: 0 },
                     container: this.content,
                     "dragstart": function(e) {
                         draggedTask = that._modelFromElement(e.currentTarget);
-                        this.hint.children(".k-clue-text")
+                        this.hint.children(DOT + listStyles.dragClueText)
                             .text(draggedTask.get("title"));
                     },
                     "drag": function(e) {
@@ -663,7 +694,7 @@ var __meta__ = {
                         dropTarget = e.dropTarget;
                         allowDrop(that._modelFromElement(dropTarget));
                         defineLimits();
-                        status().toggleClass("k-denied", !dropAllowed);
+                        status().toggleClass(listStyles.dropDenied, !dropAllowed);
                     },
                     "dragleave": function(e) {
                         dropAllowed = true;
@@ -710,7 +741,7 @@ var __meta__ = {
                .kendoDropTargetArea({
                    distance: 0,
                    group: "listGroup",
-                   filter: ".k-grid-content",
+                   filter: DOT + listStyles.gridContent,
                    "drop": function(e) {
                        var target = that._modelFromElement(that.content.find(selector));
                        var orderId = target.orderId;
@@ -743,6 +774,8 @@ var __meta__ = {
             return this.columns[idx];
         }
     });
+
+    extend(true, ui.GanttList, { styles: listStyles });
 
 })(window.kendo.jQuery);
 
