@@ -167,7 +167,7 @@ var __meta__ = {
         }
     }
 
-    TreeView = Widget.extend({
+    TreeView = kendo.ui.DataBoundWidget.extend({
         init: function (element, options) {
             var that = this,
                 dataInit,

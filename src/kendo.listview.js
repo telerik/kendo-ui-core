@@ -46,7 +46,7 @@ var __meta__ = {
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
 
-    var ListView = Widget.extend( {
+    var ListView = kendo.ui.DataBoundWidget.extend( {
         init: function(element, options) {
             var that = this;
 

@@ -2624,6 +2624,17 @@ function pad(number, digits, end) {
         domUpdate: function(){}
     });
 
+    var DataBoundWidget = Widget.extend({
+        // Angular consumes these.
+        itemsContents: function() {
+            return this.items();
+        },
+
+        dataItems: function() {
+            return this.dataSource.view();
+        }
+    });
+
     kendo.dimensions = function(element, dimensions) {
         var domElement = element[0];
 
@@ -2827,6 +2838,7 @@ function pad(number, digits, end) {
 
     extend(kendo.ui, {
         Widget: Widget,
+        DataBoundWidget: DataBoundWidget,
         roles: {},
         progress: function(container, toggle) {
             var mask = container.find(".k-loading-mask"),
@@ -2957,6 +2969,7 @@ function pad(number, digits, end) {
 
         ui: {
             Widget: MobileWidget,
+            DataBoundWidget: DataBoundWidget.extend(MobileWidget.prototype),
             roles: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");

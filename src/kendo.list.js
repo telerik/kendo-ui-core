@@ -42,7 +42,7 @@ var __meta__ = {
             "DropDownList": "ComboBox"
         };
 
-    var List = Widget.extend({
+    var List = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this,
                 ns = that.ns,

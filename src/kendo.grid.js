@@ -707,7 +707,7 @@ var __meta__ = {
         return width;
     }
 
-    var Grid = Widget.extend({
+    var Grid = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
 
