@@ -237,6 +237,7 @@ var __meta__ = {
             length = data.length,
             action;
 
+            that._notifyDomUpdate("before");
             that.trigger("dataBinding");
 
             ul.innerHTML = kendo.render(that.template, data);
@@ -276,6 +277,7 @@ var __meta__ = {
             that._makeUnselectable();
 
             that._hideBusy();
+            that._notifyDomUpdate("after");
             that.trigger("dataBound");
         },
 

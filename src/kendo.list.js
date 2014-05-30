@@ -573,6 +573,19 @@ var __meta__ = {
                            .unbind(PROGRESS, that._progressHandler)
                            .unbind(REQUESTEND, that._requestEndHandler)
                            .unbind("error", that._errorHandler);
+        },
+
+        _notifyDomUpdate: function(type) {
+            var that = this;
+            var elements = $(that.items()).get();
+            var dataItems = elements.map(function(el, i){
+                return that.dataItem(i);
+            });
+            if (type == "before") {
+                that.beforeDomUpdate(elements, dataItems);
+            } else {
+                that.afterDomUpdate(elements, dataItems);
+            }
         }
     });
 

@@ -2619,7 +2619,10 @@ function pad(number, digits, end) {
             that.element.removeData("kendo" + that.options.prefix + that.options.name);
             that.element.removeData("handler");
             that.unbind();
-        }
+        },
+
+        beforeDomUpdate: function(elements, dataItems) {},
+        afterDomUpdate: function(elements, dataItems) {}
     });
 
     kendo.dimensions = function(element, dimensions) {

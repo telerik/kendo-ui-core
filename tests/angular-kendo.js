@@ -509,6 +509,34 @@
 
   /* -----[ Customize widgets for Angular ]----- */
 
+  defadvice("ui.Widget", "beforeDomUpdate", function(elements, dataItems){
+    var self = this.self;
+    var scope = angular.element(self.element).scope();
+    if (scope) {
+      angular.forEach(elements, function(el){
+        var itemScope = angular.element(el).scope();
+        if (itemScope && itemScope !== scope) {
+          destroyScope(itemScope);
+        }
+      });
+    }
+    this.next();
+  });
+
+  defadvice("ui.Widget", "afterDomUpdate", function(elements, dataItems){
+    var self = this.self;
+    var scope = angular.element(self.element).scope();
+    if (scope) {
+      angular.forEach(elements, function(el, i){
+        var itemScope = scope.$new();
+        itemScope.dataItem = dataItems[i];
+        compile(el)(itemScope);
+        digest(itemScope);
+      });
+    }
+    this.next();
+  });
+
   // XXX: notice we can't override `init` in general for any widget,
   // because kendo.ui.Widget === kendo.ui.Widget.prototype.init.
   // Hence we resort to the beforeCreate/afterCreate hack.
@@ -786,47 +814,6 @@
       digest(itemScope);
     }
     return ret;
-  });
-
-  // templates for autocomplete and combo box
-  defadvice([ "ui.AutoComplete", "ui.ComboBox" ], BEFORE, function(element, options){
-    this.next();
-    var scope = angular.element(element).scope();
-    if (!scope) return;
-    var self = this.self;
-    var prev_dataBound = options.dataBound;
-    options.dataBound = function(ev) {
-      var widget = ev.sender;
-      var dataSource = widget.dataSource;
-      var dirty = false;
-      $(widget.items()).each(function(){
-        var el = $(this);
-        if (!el.hasClass("ng-scope")) {
-          var item = widget.dataItem(el.index());
-          var itemScope = scope.$new();
-          itemScope.dataItem = item;
-          compile(el)(itemScope);
-          dirty = true;
-        }
-      });
-      try {
-        if (prev_dataBound) return prev_dataBound.apply(this, arguments);
-      } finally {
-        if (dirty) digest(scope);
-      }
-    };
-  });
-
-  defadvice([ "ui.AutoComplete", "ui.ComboBox" ], AFTER, function(){
-    this.next();
-    this.self.bind("dataBinding", function(ev){
-      $(ev.sender.items()).each(function(){
-        var scope = angular.element(this).scope();
-        if (scope) {
-          destroyScope(scope, this);
-        }
-      });
-    });
   });
 
   defadvice("ui.Grid", "_toolbar", function(){
