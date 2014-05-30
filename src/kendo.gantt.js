@@ -41,11 +41,11 @@ var __meta__ = {
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
             '#if (editable == true) {#'+
-                '<ul class="#=styles.actions#">' +
+                '<ul class="#=styles.actionsWrapper#">' +
                     '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
                 '</ul>' +
             '#}#' +
-            '<ul class="#=styles.views#">' +
+            '<ul class="#=styles.viewsWrapper#">' +
                 '#for(var view in views){#' +
                     '<li class="#=styles.viewButton# k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
                 '#}#' +
@@ -59,7 +59,7 @@ var __meta__ = {
             '</ul>' +
         '</div>');
     var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
-            '<ul class="#=styles.actions#">' +
+            '<ul class="#=styles.actionsWrapper#">' +
                 '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
             '</ul>' +
         '</div>');
@@ -83,10 +83,10 @@ var __meta__ = {
         toolbar: {
             wrapper: "k-floatwrap k-header k-gantt-toolbar",
             toolbar: "k-toolbar",
-            viewsWrapper: "k-gantt-views",
-            views: "k-reset k-header k-toolbar k-gantt-views",
-            actionsWrapper: "k-gantt-actions",
-            actions: "k-reset k-header k-toolbar k-gantt-actions",
+            views: "k-gantt-views",
+            viewsWrapper: "k-reset k-header k-toolbar k-gantt-views",
+            actions: "k-gantt-actions",
+            actionsWrapper: "k-reset k-header k-toolbar k-gantt-actions",
             button: "k-button k-button-icontext",
             iconPlus: "k-icon k-i-plus",
             viewButton: "k-state-default",
@@ -861,7 +861,7 @@ var __meta__ = {
         _toolbar: function() {
             var that = this;
             var ganttStyles = Gantt.styles;
-            var viewsSelector = DOT + ganttStyles.toolbar.viewsWrapper + " > li";
+            var viewsSelector = DOT + ganttStyles.toolbar.views + " > li";
             var hoveredClassName = ganttStyles.hovered;
             var toolbar = $(HEADER_TEMPLATE({
                 ns: kendo.ns,
@@ -938,7 +938,7 @@ var __meta__ = {
 
         _dropDowns: function() {
             var that = this;
-            var actionsSelector = DOT + Gantt.styles.toolbar.actionsWrapper;
+            var actionsSelector = DOT + Gantt.styles.toolbar.actions;
             var actionMessages = this.options.messages.actions;
             var dataSource = this.dataSource;
             var timeline = this.timeline;
@@ -1008,7 +1008,7 @@ var __meta__ = {
             var that = this;
             var ganttStyles = Gantt.styles;
             var element = this.wrapper.find(DOT + ganttStyles.listWrapper + " > div");
-            var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actionsWrapper + " > li");
+            var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actions + " > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
@@ -1059,7 +1059,7 @@ var __meta__ = {
             this.timeline
                 .bind("navigate", function(e) {
                     that.toolbar
-                        .find(DOT + ganttStyles.toolbar.viewsWrapper +" > li")
+                        .find(DOT + ganttStyles.toolbar.views +" > li")
                         .removeClass(ganttStyles.selected)
                         .end()
                         .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
