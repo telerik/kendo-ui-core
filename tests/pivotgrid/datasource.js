@@ -310,7 +310,9 @@
         dataSource.expandColumn("foo");
     });
 
-    test("expandRow does not add measures to columns state", 8, function() {
+    test("expandRow does not add measures to columns state", 4, function() {
+        var callback = $.noop;
+
         var dataSource = new PivotDataSource({
             columns: ["foo"],
             rows: ["baz"],
@@ -321,12 +323,7 @@
             },
             transport: {
                 read: function(options) {
-                    equal(options.data.rows.length, 1);
-                    equal(options.data.rows[0].name, "baz");
-
-                    equal(options.data.columns.length, 1);
-                    equal(options.data.columns[0].name, "foo");
-
+                    callback(options);
                     options.success({
                         axes: {
                             columns: {
@@ -337,7 +334,6 @@
                             },
                             rows: {
                                 tuples: [
-                                    { members: [ { name: "baz", children: [] } ] },
                                     { members: [ { name: "baz", children: [] } ] }
                                 ]
                             }
@@ -349,6 +345,14 @@
         });
 
         dataSource.read();
+
+        callback = function(options) {
+            equal(options.data.rows.length, 1);
+            equal(options.data.rows[0].name, "baz");
+
+            equal(options.data.columns.length, 1);
+            equal(options.data.columns[0].name, "foo");
+        }
 
         dataSource.expandRow("baz");
     });
@@ -842,6 +846,106 @@
         equal(descriptors[0].name, "foo");
     });
 
+    test("columns pass current rows state", 6, function() {
+        var callback = $.noop;
+
+        var dataSource = new PivotDataSource({
+            columns: ["[level 0]", "[level 1]"],
+            rows: [{ name: "[row 0]", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+
+                    callback(options);
+
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", children: [], hierarchy: "[level 1]" } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "[row 0]", children: [], hierarchy: "[row 0]" } ] },
+                                    { members: [ { name: "[row 0].[row 1]", parentName: "[row 0]", children: [] } ] },
+                                    { members: [ { name: "[row 0].[row 2]", parentName: "[row 0]", children: [] } ] },
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        callback = function(options) {
+            equal(options.data.columns.length, 1, "Number of columns does not match");
+            equal(options.data.columns[0].name, "[level 0]");
+            ok(!options.data.columns[0].expand);
+
+            equal(options.data.rows.length, 1, "Number of rows does not match");
+            equal(options.data.rows[0].name, "[row 0]");
+            ok(options.data.rows[0].expand);
+        };
+
+        dataSource.columns("[level 0]");
+    });
+
+    test("rows pass current columns state", 5, function() {
+        var callback = $.noop;
+
+        var dataSource = new PivotDataSource({
+            columns: ["[level 0]", "[level 1]"],
+            rows: [{ name: "[row 0]", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+
+                    callback(options);
+
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [ { name: "[level 0]", children: [], hierarchy: "[level 0]" }, { name: "[level 1]", children: [], hierarchy: "[level 1]" } ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [ { name: "[row 0]", children: [], hierarchy: "[row 0]" } ] },
+                                    { members: [ { name: "[row 0].[row 1]", parentName: "[row 0]", children: [] } ] },
+                                    { members: [ { name: "[row 0].[row 2]", parentName: "[row 0]", children: [] } ] },
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        callback = function(options) {
+            equal(options.data.columns.length, 2, "Number of columns does not match");
+            equal(options.data.columns[0].name, "[level 0]");
+            ok(!options.data.columns[0].expand);
+            equal(options.data.columns[1].name, "[level 1]");
+            ok(!options.data.columns[1].expand);
+        };
+
+        dataSource.rows("[row 0]");
+    });
+
     test("expandColumn pass current columns state when expanding top member", 4, function() {
         var callback = $.noop;
 
@@ -1027,7 +1131,7 @@
             equal(options.data.columns[0].name, "[level 0].[level 1]");
             ok(options.data.columns[0].expand);
             equal(options.data.columns[1].name, "[level 1]");
-            ok(options.data.columns[1].expand);
+            ok(!options.data.columns[1].expand);
         }
 
         dataSource.expandColumn(["[level 0].[level 1]"]);

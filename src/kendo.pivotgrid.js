@@ -61,8 +61,8 @@ var __meta__ = {
                     continue;
                 }
 
-                name = members[memberIdx].name/*.replace(/\.\[all\]$/i, "")*/;
-                parentName = (members[memberIdx].parentName || "")/*.replace(/\.\[all\]$/i, "")*/;
+                name = members[memberIdx].name;
+                parentName = (members[memberIdx].parentName || "");
 
                 if (members[memberIdx].children.length > 0) {
                     accumulator[name] = true;
@@ -114,6 +114,20 @@ var __meta__ = {
         }
     }
 
+    function tupleToDescriptors(tuple) {
+        var result = [];
+        var members = tuple.members;
+
+        for (var idx = 0; idx < members.length; idx++) {
+            if (members[idx].measure) {
+                continue;
+            }
+            result.push({ name: members[idx].name, expand: members[idx].children.length > 0});
+        }
+
+        return result;
+    }
+
     function descriptorsForMembers(axis, members, measures) {
         var axis = axis || {};
 
@@ -134,7 +148,7 @@ var __meta__ = {
         if (axis.tuples) {
             var result = findExistingTuple(axis.tuples, tupletoSearch);
             if (result) {
-                members = descriptorsForAxes([result.tuple]);
+                members = tupleToDescriptors(result.tuple);
             }
         }
 
@@ -178,16 +192,43 @@ var __meta__ = {
             return this._axes;
         },
 
-        columns: function() {
-            return this._columns;
+        columns: function(val) {
+            if (val === undefined) {
+                return this._columns;
+            }
+
+            this._clearAxesData = true;
+            this.query({
+                columns: val,
+                rows: this.rowsAxisDescriptors(),
+                measures: this.measures()
+            });
         },
 
-        rows: function() {
-            return this._rows;
+        rows: function(val) {
+            if (val === undefined) {
+                return this._rows;
+            }
+
+            this._clearAxesData = true;
+            this.query({
+                columns: this.columnsAxisDescriptors(),
+                rows: val,
+                measures: this.measures()
+            });
         },
 
-        measures: function() {
-            return this._measures;
+        measures: function(val) {
+            if (val === undefined) {
+                return this._measures;
+            }
+
+            this._clearAxesData = true;
+            this.query({
+                columns: this.columnsAxisDescriptors(),
+                rows: this.rowsAxisDescriptors(),
+                measures: val
+            });
         },
 
         measuresAxis: function() {
@@ -209,6 +250,8 @@ var __meta__ = {
                         return;
                     }
                     members[idx].expand = true;
+                } else {
+                    members[idx].expand = false;
                 }
             }
 
@@ -275,15 +318,15 @@ var __meta__ = {
 
             if (options !== undefined) {
                 this._measures = options.measures || [];
-        //        this._columns = options.columns || [];
-         //       this._rows = options.rows || [];
+                this._columns = options.columns || [];
+                this._rows = options.rows || [];
 
                 if (options.columns) {
-                   options.columns = normalizeMembers(options.columns);
+                  this._columns =  options.columns = normalizeMembers(options.columns);
                 }
 
                 if (options.rows) {
-                   options.rows = normalizeMembers(options.rows);
+                   this._rows = options.rows = normalizeMembers(options.rows);
                 }
             }
             return options;
