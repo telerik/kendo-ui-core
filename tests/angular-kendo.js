@@ -513,22 +513,27 @@
     var self = this.self;
     var scope = angular.element(self.element).scope();
     if (scope) {
-      var x = get(), elements = x.elements, dataItems = x.dataItems;
+      var x = get(), elements = x.elements, data = x.data;
       if (elements.length > 0) {
-        if (type == "before") {
+        switch (type) {
+
+         case "before":
           angular.forEach(elements, function(el){
             var itemScope = angular.element(el).scope();
             if (itemScope && itemScope !== scope) {
               destroyScope(itemScope);
             }
           });
-        } else {
+          break;
+
+         case "after":
           angular.forEach(elements, function(el, i){
             var itemScope = scope.$new();
-            itemScope.dataItem = dataItems[i];
+            itemScope.dataItem = data[i].dataItem;
             compile(el)(itemScope);
           });
           digest(scope);
+          break;
         }
       }
     }

@@ -579,10 +579,12 @@ var __meta__ = {
             var that = this;
             that.domUpdate(type, function(){
                 var elements = $(that.items()).get();
-                var dataItems = elements.map(function(el, i){
-                    return that.dataItem(i);
-                });
-                return { elements: elements, dataItems: dataItems };
+                return {
+                    elements: elements,
+                    data: elements.map(function(el, i){
+                        return { dataItem: that.dataItem(i) };
+                    })
+                };
             });
         }
     });
