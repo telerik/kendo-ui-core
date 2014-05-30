@@ -82,7 +82,7 @@
         function createTooltip(options) {
             destroyTooltip();
 
-            chartElement = $("<div id='chart'></div>").appendTo(QUnit.fixture);
+            chartElement = $("<div id='chart' style='height: 50px;'></div>").appendTo(QUnit.fixture);
             tooltip = new dataviz.Tooltip(chartElement, options);
             element = tooltip.element;
         }
@@ -111,8 +111,34 @@
             equal(tooltip.element.parent("body").length, 1);
         });
 
-        test("tooltip is not hidden when moving over the chart", function() {
-            ok(false);
+        test("tooltip is not hidden when moving over the chart", 0, function() {
+            showTooltip();
+
+            tooltip.hide = function() {
+                ok(false);
+            }
+
+            element.trigger($.Event("mouseout", { relatedTarget: chartElement[0] }));
+        });
+
+        test("tooltip is not hidden when moving over chart child element", 0, function() {
+            showTooltip();
+
+            tooltip.hide = function() {
+                ok(false);
+            }
+
+            element.trigger($.Event("mouseout", { relatedTarget: $("<div>").appendTo(chartElement)[0] }));
+        });
+
+        test("tooltip is hidden when moving out of the chart", function() {
+            showTooltip();
+
+            tooltip.hide = function() {
+                ok(true);
+            }
+
+            element.trigger($.Event("mouseout", { relatedTarget: document.body }));
         });
 
         test("detaches from body on destroy", function() {
