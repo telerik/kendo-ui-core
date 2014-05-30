@@ -41,6 +41,7 @@
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
+            CurrentTimeMarker = new SchedulerCurrentTimeMarkerSettings();
         }
 
         public DataSource DataSource
@@ -265,6 +266,12 @@
             set;
         }
 
+        public SchedulerCurrentTimeMarkerSettings CurrentTimeMarker
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -460,6 +467,19 @@
             if (group.Count > 0)
             {
                 options["group"] = group;
+            }
+
+            if (CurrentTimeMarker.Enabled == false)
+            {
+                options["currentTimeMarker"] = false;
+            }
+            else
+            {
+                IDictionary<string, object> currentTimeMarker = CurrentTimeMarker.ToJson();
+                if (currentTimeMarker.Count > 0)
+                {
+                    options["currentTimeMarker"] = currentTimeMarker;
+                }
             }
 
             if (Mobile != MobileMode.Disabled)

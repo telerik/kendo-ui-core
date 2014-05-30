@@ -1293,6 +1293,7 @@
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\DataSource\Fluent\SchedulerAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerFilterDescriptorFactory.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerCurrentTimeMarkerSettingsBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerCustomViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditorMessagesBuilder.cs" />
@@ -1322,6 +1323,7 @@
     <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
     <Compile Include="UI\Scheduler\SchedulerModelDescriptor.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerCurrentTimeMarkerSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerGroupSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerEditableSettingsBase.cs" />

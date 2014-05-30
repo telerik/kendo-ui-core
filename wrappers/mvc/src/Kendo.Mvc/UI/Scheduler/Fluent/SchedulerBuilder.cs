@@ -937,5 +937,59 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the currentTimeMarker configuration of the scheduler.
+        /// </summary>
+        /// <param name="configurator">The lambda which configures the currentTimeMarker</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .CurrentTimeMarker(marker =&gt;
+        ///     {
+        ///         marker.UpdateInterval(100);
+        ///         marker.UseLocalTimezone(false);
+        ///     })
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> CurrentTimeMarker(Action<SchedulerCurrentTimeMarkerSettingsBuilder> configurator)
+        {
+            configurator(new SchedulerCurrentTimeMarkerSettingsBuilder(Component.CurrentTimeMarker));
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false the "current time" marker would be disabled.
+        /// </summary>
+        /// <param name="enabled">The enabled</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .CurrentTimeMarker(false)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> CurrentTimeMarker(bool enabled)
+        {
+            Component.CurrentTimeMarker.Enabled = enabled;
+            return this;
+        }
     }
 }

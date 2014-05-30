@@ -1,13 +1,11 @@
 ﻿namespace Kendo.Mvc.UI.Fluent.Tests
 {
+    using Moq;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using UI.Tests;
-    using Moq;
-    using System.Web.UI;
     using System.IO;
+    using System.Web.UI;
+    using UI.Tests;
     using Xunit;
 
     public class SchedulerBuilderTests
@@ -341,6 +339,24 @@
             builder.Mobile(mobile);
 
             Assert.Equal(mobile, scheduler.Mobile);
+        }
+
+        [Fact]
+        public void CurrentTimeMarker_sets_the_corresponding_property()
+        {
+            var showCurrentTimeMarker = false;
+            builder.CurrentTimeMarker(showCurrentTimeMarker);
+
+            Assert.Equal(showCurrentTimeMarker, scheduler.CurrentTimeMarker.Enabled);
+        }
+
+        [Fact]
+        public void Editable_sets_the_corresponding_property()
+        {
+            var enablEditable = false;
+            builder.Editable(enablEditable);
+
+            Assert.Equal(enablEditable, scheduler.Editable.Enabled);
         }
     }
 }
