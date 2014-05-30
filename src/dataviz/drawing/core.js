@@ -17,6 +17,11 @@
 
     // Base surface ==========================================================
     var Surface = kendo.Observable.extend({
+        options: {
+            width: "100%",
+            height: "100%"
+        },
+
         clear: noop,
 
         destroy: function() {

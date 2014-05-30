@@ -50,11 +50,6 @@
             this._appendTo(container);
         },
 
-        options: {
-            width: "100%",
-            height: "100%"
-        },
-
         events: [],
 
         draw: function(element) {
