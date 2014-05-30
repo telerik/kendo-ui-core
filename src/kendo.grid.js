@@ -4874,6 +4874,8 @@ var __meta__ = {
                 return;
             }
 
+            that._notifyDomUpdate("before");
+
             if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
@@ -4931,6 +4933,8 @@ var __meta__ = {
             if (that.touchScroller) {
                 that.touchScroller.contentResized();
             }
+
+            that._notifyDomUpdate("after");
 
             that.trigger(DATABOUND);
        },

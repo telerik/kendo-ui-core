@@ -2640,8 +2640,8 @@ function pad(number, digits, end) {
                 var elements = $(that.itemsContents()).get();
                 return {
                     elements: elements,
-                    data: elements.map(function(el, i){
-                        return { dataItem: that.dataItem(i) };
+                    data: elements.map(function(el){
+                        return { dataItem: that.dataItem(el) };
                     })
                 };
             });

@@ -685,16 +685,10 @@
     return this.self.element.find(".k-item div:first-child");
   });
 
-  defadvice([ "ui.Grid" ], "$angular_itemsToCompile", function(){
-    var self = this.self;
-    if (!self.lockedContent) return self.items();
-    return self.items().add("tr[" + _UID_ + "]", self.lockedContent);
-  });
-
-  // for Grid, ListView and TreeView, provide a dataBound handler that
+  // for ListView and TreeView, provide a dataBound handler that
   // recompiles Angular templates.  We need to do this before the
   // widget is initialized so that we catch the first dataBound event.
-  defadvice([ "ui.Grid", "ui.ListView", "mobile.ui.ListView", "ui.TreeView" ], BEFORE, function(element, options){
+  defadvice([ "ui.ListView", "mobile.ui.ListView", "ui.TreeView" ], BEFORE, function(element, options){
     this.next();
     var scope = angular.element(element).scope();
     if (!scope) return;
@@ -724,7 +718,7 @@
     };
   });
 
-  defadvice([ "ui.Grid", "ui.ListView", "mobile.ui.ListView" ], AFTER, function(){
+  defadvice([ "ui.ListView", "mobile.ui.ListView" ], AFTER, function(){
     this.next();
     var self = this.self;
     var scope = angular.element(self.element).scope();
