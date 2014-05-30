@@ -45,9 +45,11 @@ namespace Kendo.Controllers
 
                 if (mappedPath.EndsWith(".php"))
                 {
-                    ViewData["source"] = source;
+                    ViewBag.Source = source;
+                    ViewBag.Mobile = false;
+                    ViewBag.DisableInMobile = false;
 
-                    source = RenderView("SourceCode");
+                    source = ViewResult("SourceCode");
                 }
 
                 foreach (var filter in Filters)
@@ -89,6 +91,11 @@ namespace Kendo.Controllers
             ViewBag.Mobile = currentWidget.Mobile || currentExample.Mobile;
             ViewBag.DisableInMobile = currentExample.DisableInMobile;
 
+            return ViewResult(path);
+        }
+
+        private string ViewResult(string path)
+        {
             var viewResult = ViewEngines.Engines.FindView(ControllerContext, path, "SourceLayout");
 
             using (var writer = new StringWriter())
