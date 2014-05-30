@@ -335,8 +335,20 @@ var __meta__ = {
             var that = this;
 
             if (options.dataSource) {
+                that.domUpdate("before", function(){
+                    return {
+                        elements: that.element.children().get(),
+                        data: []
+                    };
+                });
                 that.element.empty();
                 that.append(options.dataSource, that.element);
+                that.domUpdate("after", function(){
+                    return {
+                        elements: that.element.children().get(),
+                        data: []
+                    };
+                });
             }
         },
 

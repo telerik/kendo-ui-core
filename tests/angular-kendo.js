@@ -528,9 +528,12 @@
 
          case "after":
           angular.forEach(elements, function(el, i){
-            var itemScope = scope.$new();
-            itemScope.dataItem = data[i].dataItem;
-            compile(el)(itemScope);
+            var x = data[i], itemScope;
+            if (x) {
+              itemScope = scope.$new();
+              itemScope.dataItem = data[i].dataItem;
+            }
+            compile(el)(itemScope || scope);
           });
           digest(scope);
           break;
