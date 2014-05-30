@@ -985,16 +985,21 @@ var __meta__ = {
                 crosshairs = plotArea.crosshairs,
                 tooltip = chart._tooltip,
                 highlight = chart._highlight,
+                target = e.relatedTarget,
                 i;
 
-            if (e.relatedTarget && tooltip && e.relatedTarget !== tooltip.element[0]) {
+            if (target) {
                 for (i = 0; i < crosshairs.length; i++) {
                     crosshairs[i].hide();
                 }
 
-                setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
                 highlight.hide();
-                chart._tooltipCategoryIx = null;
+
+                var tooltipElement = tooltip.element[0];
+                if (target !== tooltipElement && !$.contains(tooltipElement, target)) {
+                    setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
+                    chart._tooltipCategoryIx = null;
+                }
             }
         },
 
@@ -9529,15 +9534,16 @@ var __meta__ = {
                 );
             }
 
-            tooltip.element = $(tooltip.template(tooltip.options)).appendTo(document.body);
-            tooltip._moveProxy = proxy(tooltip.move, tooltip);
+            tooltip.element = $(tooltip.template(tooltip.options));
+            tooltip.move = proxy(tooltip.move, tooltip);
+            tooltip._mouseleave = proxy(tooltip._mouseleave, tooltip);
         },
 
         destroy: function() {
             clearTimeout(this.showTimeout);
 
             if (this.element) {
-                this.element.remove();
+                this.element.off(MOUSELEAVE_NS).remove();
                 this.element = null;
             }
         },
@@ -9563,11 +9569,11 @@ var __meta__ = {
             }
 
             offset = tooltip._offset();
-
             if (!tooltip.visible) {
                 element.css({ top: offset.top, left: offset.left });
             }
 
+            tooltip._ensureElement(document.body);
             element
                 .stop(true, true)
                 .show()
@@ -9593,7 +9599,7 @@ var __meta__ = {
 
         _offset: function() {
             var tooltip = this,
-                element = tooltip.element,
+                size = tooltip._measure(),
                 anchor = tooltip.anchor,
                 chartPadding = tooltip._padding(),
                 chartOffset = tooltip.chartElement.offset(),
@@ -9604,8 +9610,8 @@ var __meta__ = {
                 scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0,
                 scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
 
-            top += tooltip._fit(top - scrollTop, element.outerHeight(), viewport.outerHeight() / zoomLevel);
-            left += tooltip._fit(left - scrollLeft, element.outerWidth(), viewport.outerWidth() / zoomLevel);
+            top += tooltip._fit(top - scrollTop, size.height, viewport.outerHeight() / zoomLevel);
+            left += tooltip._fit(left - scrollLeft, size.width, viewport.outerWidth() / zoomLevel);
 
             return {
                 top: top,
@@ -9645,25 +9651,53 @@ var __meta__ = {
         show: function() {
             var tooltip = this;
 
-            tooltip.showTimeout = setTimeout(tooltip._moveProxy, TOOLTIP_SHOW_DELAY);
+            tooltip.showTimeout = setTimeout(tooltip.move, TOOLTIP_SHOW_DELAY);
         },
 
         hide: function() {
             var tooltip = this;
 
             clearTimeout(tooltip.showTimeout);
+            tooltip._hideElement();
 
             if (tooltip.visible) {
-                tooltip._hideElement();
-
                 tooltip.point = null;
                 tooltip.visible = false;
                 tooltip.index = null;
             }
         },
 
+        _measure: function() {
+            this._ensureElement();
+
+            var size = {
+                width: this.element.outerWidth(),
+                height: this.element.outerHeight()
+            };
+
+            return size;
+        },
+
+        _ensureElement: function() {
+            this.element
+                .appendTo(document.body)
+                .on(MOUSELEAVE_NS, this._mouseleave);
+        },
+
+        _mouseleave: function(e) {
+            var target = e.relatedTarget;
+            var chart = this.chartElement[0];
+            if (target && target !== chart && !$.contains(chart, target)) {
+                this.hide();
+            }
+        },
+
         _hideElement: function() {
-            this.element.fadeOut();
+            this.element.fadeOut({
+                always: function(){
+                    $(this).off(MOUSELEAVE_NS).remove();
+                }
+            });
         },
 
         _pointContent: function(point) {
@@ -9698,10 +9732,9 @@ var __meta__ = {
         },
 
         _pointAnchor: function(point) {
-            var tooltip = this,
-                element = tooltip.element;
+            var size = this._measure();
 
-            return point.tooltipAnchor(element.outerWidth(), element.outerHeight());
+            return point.tooltipAnchor(size.width, size.height);
         },
 
         _fit: function(offset, size, viewPortSize) {
@@ -9798,7 +9831,8 @@ var __meta__ = {
                 plotArea = tooltip.plotArea,
                 axis = plotArea.categoryAxis,
                 anchor,
-                hCenter = point.y - tooltip.element.height() / 2;
+                size = this._measure(),
+                hCenter = point.y - size.height / 2;
 
             if (axis.options.vertical) {
                 anchor = Point2D(point.x, hCenter);
@@ -10007,7 +10041,7 @@ var __meta__ = {
 
             tooltip.point = point;
             tooltip.element.html(tooltip.content(point));
-            tooltip.anchor = tooltip.getAnchor(element.outerWidth(), element.outerHeight());
+            tooltip.anchor = tooltip.getAnchor();
 
             tooltip.move();
         },
@@ -10017,6 +10051,7 @@ var __meta__ = {
                 element = tooltip.element,
                 offset = tooltip._offset();
 
+            tooltip._ensureElement();
             element.css({ top: offset.top, left: offset.left }).show();
         },
 
@@ -10045,7 +10080,7 @@ var __meta__ = {
             return content;
         },
 
-        getAnchor: function(width, height) {
+        getAnchor: function() {
             var tooltip = this,
                 options = tooltip.options,
                 position = options.position,
@@ -10053,14 +10088,15 @@ var __meta__ = {
                 points = tooltip.crosshair.points,
                 fPoint = points[0],
                 sPoint = points[1],
-                halfWidth = width / 2,
-                halfHeight = height / 2,
+                size = this._measure(),
+                halfWidth = size.width / 2,
+                halfHeight = size.height / 2,
                 padding = options.padding,
                 x, y;
 
             if (vertical) {
                 if (position === LEFT) {
-                    x = fPoint.x - width - padding;
+                    x = fPoint.x - size.width - padding;
                     y = fPoint.y - halfHeight;
                 } else {
                     x = sPoint.x + padding;
@@ -10072,7 +10108,7 @@ var __meta__ = {
                     y = sPoint.y + padding;
                 } else {
                     x = fPoint.x - halfWidth;
-                    y = fPoint.y - height - padding;
+                    y = fPoint.y - size.height - padding;
                 }
             }
 
@@ -10085,8 +10121,8 @@ var __meta__ = {
         },
 
         destroy: function() {
-            this.element.remove();
-            this.element = null;
+            BaseTooltip.fn.destroy.call(this);
+
             this.point = null;
         }
     });

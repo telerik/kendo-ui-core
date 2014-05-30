@@ -250,15 +250,17 @@ var __meta__ = {
                 duration: 0
             }
         },
+
         _anchor: function(point, slot) {
             var anchor = SharedTooltip.fn._anchor.call(this, point, slot);
-            anchor.y = -this.element.height() - this.options.offset;
+            var size = this._measure();
+            anchor.y = -size.height - this.options.offset;
 
             return anchor;
         },
 
         _hideElement: function() {
-            this.element.hide();
+            this.element.hide().remove();
         }
     });
 
@@ -271,6 +273,7 @@ var __meta__ = {
     dataviz.ui.plugin(Sparkline);
 
     deepExtend(dataviz, {
+        SparklineSharedTooltip: SparklineSharedTooltip
     });
 
 })(window.kendo.jQuery);
