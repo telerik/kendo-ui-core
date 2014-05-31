@@ -1,5 +1,4 @@
 (function() {
-
     module("new FX API");
 
     function getTransform(element) {
@@ -35,7 +34,7 @@
         ok($.isFunction(fx.fooRight));
     });
 
-    module("FX integration tests")
+    module("FX integration tests");
 
     function verifyEffect(effectName, before, after, withEffect) {
         withEffect = withEffect || $.noop;
@@ -142,7 +141,7 @@
     });
 
     asyncTest("page turn turns the two pages, hiding the first one", 2, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
             foo = container.find("#foo"),
             bar = container.find("#bar"),
             effect = kendo.fx(container).pageturn("horizontal", foo, bar);
@@ -157,7 +156,7 @@
     });
 
     asyncTest("flip flips the two pages, hiding the first one", 2, function() {
-        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>");
+        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
             foo = container.find("#foo"),
             bar = container.find("#bar"),
             effect = kendo.fx(container).flip("horizontal", foo, bar);

@@ -1557,7 +1557,7 @@ var __meta__ = {
     };
 
     fx.fillScale = function(inner, outer) {
-        return Math.max(outer.width / inner.width, outer.height / inner.height);
+        return Math.max(inner.width / outer.width, inner.height / outer.height);
     };
 
 })(window.kendo.jQuery);
