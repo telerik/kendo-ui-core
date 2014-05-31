@@ -12,6 +12,7 @@
         "./editor/linebreak",
         "./editor/lists",
         "./editor/link",
+        "./editor/file",
         "./editor/image",
         "./editor/components",
         "./editor/indent",

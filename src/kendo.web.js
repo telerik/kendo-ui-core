@@ -36,6 +36,7 @@
         "./kendo.columnsorter",
         "./kendo.grid",
         "./kendo.listview",
+        "./kendo.filebrowser",
         "./kendo.imagebrowser",
         "./kendo.editor",
         "./kendo.numerictextbox",

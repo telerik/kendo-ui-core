@@ -99,6 +99,7 @@
         createLink: "Insert hyperlink",
         unlink: "Remove hyperlink",
         insertImage: "Insert image",
+        insertFile: "Insert file",
         insertHtml: "Insert HTML",
         viewHtml: "View HTML",
         fontName: "Select font family",
@@ -123,6 +124,8 @@
         imageAltText: "Alternate text",
         imageWidth: "Width (px)",
         imageHeight: "Height (px)",
+        fileWebAddress: "Web address",
+        fileTitle: "Title",
         linkWebAddress: "Web address",
         linkText: "Text",
         linkToolTip: "ToolTip",
@@ -588,7 +591,7 @@
                 toolGroups.lists,
                 toolGroups.indenting,
                 toolGroups.links,
-                ["insertImage"],
+                ["insertImage", "insertFile"],
                 toolGroups.tables
             )
         },
