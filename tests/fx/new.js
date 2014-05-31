@@ -137,6 +137,7 @@
             var transformOrigin = foo.css("transformOrigin").match(/(\d+)\.?\d+px/g).map(function(px) { return parseInt(px) });
             equal(transformOrigin[0], 616);
             equal(transformOrigin[1], 16);
+            foo.remove();
         });
     });
 
@@ -169,4 +170,46 @@
             equal(bar.css("display"), "block");
         });
     });
-});
+
+    asyncTest("replace replaces one of the elements with the other", 2, function() {
+        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
+            foo = container.find("#foo"),
+            bar = container.find("#bar"),
+            effect = kendo.fx(bar).replace(foo, "zoom");
+
+        QUnit.fixture.append(container);
+
+        effect.run().then(function() {
+            start();
+            equal(foo.css("display"), "none");
+            equal(bar.css("display"), "block");
+            QUnit.fixture.empty();
+        });
+    });
+
+    asyncTest("Triggers before/after callbacks", 6, function() {
+        var container = $("<div><div id='foo'>Foo</div><div id='bar'>Bar</div></div>"),
+            foo = container.find("#foo"),
+            bar = container.find("#bar"),
+            effect = kendo.fx(bar).replace(foo, "zoom");
+
+        QUnit.fixture.append(container);
+
+        effect
+        .beforeTransition(function(previous, next) {
+            equal(previous[0], foo[0]);
+            equal(next[0], bar[0]);
+            ok(container.hasClass("k-fx-start"));
+        })
+        .afterTransition(function(previous, next) {
+            equal(previous[0], foo[0]);
+            equal(next[0], bar[0]);
+            ok(container.hasClass("k-fx-end"));
+        })
+        .run()
+        .then(function() {
+            start();
+            QUnit.fixture.empty();
+        });
+    });
+})();

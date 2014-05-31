@@ -25,6 +25,8 @@ var __meta__ = {
         SHOW = "show",
         AFTER_SHOW = "afterShow",
         BEFORE_HIDE = "beforeHide",
+        TRANSITION_END = "transitionEnd",
+        TRANSITION_START = "transitionStart",
         HIDE = "hide",
         DESTROY = "destroy",
         Z_INDEX = "z-index",
@@ -166,6 +168,14 @@ var __meta__ = {
             if (that.layout) {
                 that.layout.trigger(HIDE, { view : that, layout: that.layout });
             }
+        },
+
+        beforeTransition: function(type){
+            this.trigger(TRANSITION_START, { type: type });
+        },
+
+        afterTransition: function(type){
+            this.trigger(TRANSITION_END, { type: type });
         },
 
         _padIfNativeScrolling: function() {

@@ -18,6 +18,8 @@ var __meta__ = {
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
+        TRANSITION_START = "transitionStart",
+        TRANSITION_END = "transitionEnd",
 
         ATTACH = "attach",
         DETACH = "detach",
@@ -37,7 +39,7 @@ var __meta__ = {
             this._evalTemplate = options.evalTemplate || false;
             that._fragments = {};
 
-            that.bind([ INIT, SHOW, HIDE ], options);
+            that.bind([ INIT, SHOW, HIDE, TRANSITION_START, TRANSITION_END ], options);
         },
 
         render: function(container) {
@@ -87,6 +89,14 @@ var __meta__ = {
 
         hideEnd: function() {
             this.hide();
+        },
+
+        beforeTransition: function(type){
+            this.trigger(TRANSITION_START, { type: type });
+        },
+
+        afterTransition: function(type){
+            this.trigger(TRANSITION_END, { type: type });
         },
 
         hide: function() {
@@ -305,7 +315,6 @@ var __meta__ = {
                 history.pop();
             }
 
-
             if (!current) {
                 view.showStart();
                 view.showEnd();
@@ -329,6 +338,14 @@ var __meta__ = {
                 }
 
                 that.effect = kendo.fx(view.element).replace(current.element, transitionData.type)
+                    .beforeTransition(function() {
+                        view.beforeTransition("show");
+                        current.beforeTransition("hide");
+                    })
+                    .afterTransition(function() {
+                        view.afterTransition("show");
+                        current.afterTransition("hide");
+                    })
                     .direction(transitionData.direction)
                     .setReverse(transitionData.reverse);
 
