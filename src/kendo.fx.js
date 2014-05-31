@@ -1319,6 +1319,8 @@ var __meta__ = {
     var IGNORE_TRANSITION_EVENT_SELECTOR = ".km-touch-scrollbar";
 
     createEffect("replace", {
+        _before: $.noop,
+        _after: $.noop,
         init: function(element, previous, transitionClass) {
             Effect.prototype.init.call(this, element);
             this._previous = $(previous);
@@ -1327,6 +1329,16 @@ var __meta__ = {
 
         duration: function() {
             throw new Error("The replace effect does not support duration setting; the effect duration may be customized through the transition class rule");
+        },
+
+        beforeTransition: function(callback) {
+            this._before = callback;
+            return this;
+        },
+
+        afterTransition: function(callback) {
+            this._after = callback;
+            return this;
         },
 
         _both: function() {
@@ -1420,9 +1432,10 @@ var __meta__ = {
                 kendo.animationFrame(function() {
                     element.removeClass("k-fx-hidden").addClass("k-fx-next");
                     previous.css("display", "").addClass("k-fx-current");
-
+                    that._before(previous, element);
                     kendo.animationFrame(function() {
                         container.removeClass("k-fx-start").addClass("k-fx-end");
+                        that._after(previous, element);
                     });
                 });
             }
