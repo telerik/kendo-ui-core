@@ -362,7 +362,22 @@ var __meta__ = {
         },
 
         _mergeAxes: function(sourceAxes, data) {
-            var columnMeasures = this.measuresAxis() === "columns";
+            var measures = this.measures();
+            var columnMeasures = rowMeasures = [];
+            if (this.measuresAxis() === "columns") {
+                if (this.columns().length === 0) {
+                    columnMeasures = measures;
+                } else if (measures.length > 1) {
+                    columnMeasures = measures;
+                }
+            } else {
+                if (this.rows().length === 0) {
+                    columnMeasures = measures;
+                } else if (measures.length > 1) {
+                    rowMeasures = measures;
+                }
+            }
+
             var axes = {
                 columns: normalizeAxis(this._axes.columns),
                 rows: normalizeAxis(this._axes.rows)
@@ -377,10 +392,10 @@ var __meta__ = {
             var newRowsLength = sourceAxes.rows.tuples.length;
             var oldColumnsLength = membersCount(axes.columns.tuples);
 
-            var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures ? this.measures() : []);
+            var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples);
 
-            tuples = parseSource(sourceAxes.rows.tuples, !columnMeasures ? this.measures() : []);
+            tuples = parseSource(sourceAxes.rows.tuples, rowMeasures);
             var mergedRows = mergeTuples(axes.rows.tuples, tuples);
 
             axes.columns.tuples = mergedColumns.tuple;
@@ -670,7 +685,7 @@ var __meta__ = {
     }
 
     function measurePosition(tuple, measures) {
-        if (measures.length < 2) {
+        if (measures.length === 0) {
             return -1;
         }
 

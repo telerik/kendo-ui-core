@@ -5,6 +5,7 @@
 
     test("add children to the first member of root level tuple", function() {
         var dataSource = new PivotDataSource({
+            columns: [ "dim 0", "dim 1" ],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -15,8 +16,8 @@
                         axes: {
                             columns: {
                                 tuples: [
-                                    { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
-                                    { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] }
+                                    { members: [ { name: "dim 0", children: [] }, { name: "dim 1", children: [] } ] },
+                                    { members: [ { name: "dim 0 - 1", parentName: "dim 0", children: [] }, { name: "dim 1", children: [] } ] }
                                 ]
                             }
                         },
@@ -31,11 +32,11 @@
         var axes = dataSource.axes();
 
         equal(axes.columns.tuples.length, 1);
-        equal(axes.columns.tuples[0].members[0].name, "level 0");
-        equal(axes.columns.tuples[0].members[1].name, "level 0");
+        equal(axes.columns.tuples[0].members[0].name, "dim 0");
+        equal(axes.columns.tuples[0].members[1].name, "dim 1");
         equal(axes.columns.tuples[0].members[0].children.length, 1);
-        equal(axes.columns.tuples[0].members[0].children[0].members[0].name, "level 1");
-        equal(axes.columns.tuples[0].members[0].children[0].members[1].name, "level 0");
+        equal(axes.columns.tuples[0].members[0].children[0].members[0].name, "dim 0 - 1");
+        equal(axes.columns.tuples[0].members[0].children[0].members[1].name, "dim 1");
     });
 
     test("add children to the second member of root level tuple", function() {
@@ -477,6 +478,37 @@
         equal(tuples[0].members[0].children[0].members[1].children.length, 2, "two measures on second level");
     });
 
+    test("create measure tuple with single measure descriptor and no axis", function() {
+        var dataSource = new PivotDataSource({
+            measures: [ "measure 1" ],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [{ name: "measure 1", children: [] }] }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var tuples = dataSource.axes().columns.tuples;
+        equal(tuples.length, 1);
+        equal(tuples[0].members[0].measure, true);
+        equal(tuples[0].members[0].children.length, 1);
+    });
+
     test("merge tuples in rows axis", function() {
         var dataSource = new PivotDataSource({
             schema: {
@@ -556,6 +588,8 @@
 
     test("measures are merged only on row axis", function() {
         var dataSource = new PivotDataSource({
+            columns: [ "level 0" ],
+            rows: [ "level 0" ],
             measures: {
                 values: [ "measure 1", "measure 2"],
                 axis: "rows"
