@@ -3602,6 +3602,22 @@ var __meta__ = {
             }
         },
 
+        _rowFilter: function() {
+            var hasRowFiltering = this._hasRowFiltering();
+            var rowheader = this.thead.find("[role=rowfilter]");
+            if (hasRowFiltering) {
+                var columns = this.columns;
+                for (var i = 0; i < columns.length; i++) {
+                    var col = columns[i];
+                    var th = $("<th/>");
+                    if (col.field) {
+                        th.attr("data-field", col.field);
+                    }
+                    rowheader.append(th);
+                }
+            }
+        },
+
         _sortable: function() {
             var that = this,
                 columns = that.columns,
@@ -3994,6 +4010,20 @@ var __meta__ = {
 
             return that.options.detailTemplate !== null  || (that._events[DETAILINIT] || []).length;
         },
+        _hasRowFiltering: function() {
+            var filterable = this.options.filterable;
+            var hasFiltering = filterable && filterable.row;
+            var columns = this.options.columns;
+            var columnsWithoutFiltering = $.grep(columns, function(col, idx) {
+                return col.filterable === false;
+            });
+
+            if (columnsWithoutFiltering.length == columns.length) {
+                hasFiltering = false;
+            }
+
+            return hasFiltering;
+        },
 
         _details: function() {
             var that = this;
@@ -4218,6 +4248,7 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 hasDetails = that._hasDetails() && columns.length,
+                hasRowFiltering = that._hasRowFiltering(),
                 idx,
                 length,
                 html = "",
@@ -4246,6 +4277,16 @@ var __meta__ = {
                 }
             }
 
+            if (hasRowFiltering) {
+                var rowfilter = $("<tr/>")
+                rowfilter.attr("role", "rowfilter");
+                if (hasDetails) {
+                    rowfilter.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
+                }
+
+                thead.append(rowfilter);
+            }
+
             if (!tr.children().length) {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
@@ -4263,7 +4304,7 @@ var __meta__ = {
                 thead.addClass("k-grid-header");
             }
 
-            tr.find("script").remove().end().appendTo(thead);
+            tr.find("script").remove().end().prependTo(thead);
 
             if (that.thead) {
                 that._destroyColumnAttachments();
@@ -4274,6 +4315,8 @@ var __meta__ = {
             that._sortable();
 
             that._filterable();
+
+            that._rowFilter();
 
             that._scrollable();
 

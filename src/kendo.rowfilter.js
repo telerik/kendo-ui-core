@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.autcomplete" ], f);
+    define([ "./kendo.autcomplete", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.dropdownlist" ], f);
 })(function(){
 
 var __meta__ = {
@@ -15,16 +15,18 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         CHANGE = "change",
-        NS = ".kendoRowfilter",
+        NS = ".kendoRowFilter",
         proxy = $.proxy;
 
-    var Rowfilter = Widget.extend( {
+    var RowFilter = Widget.extend( {
         init: function(element, options) {
             var that = this, page, totalPages;
 
             Widget.fn.init.call(that, element, options);
 
             options = that.options;
+
+            element.addClass("grid-filter-header");
             //that.dataSource = kendo.data.DataSource.create(options.dataSource);
             //that.linkTemplate = kendo.template(that.options.linkTemplate);
             //that.selectTemplate = kendo.template(that.options.selectTemplate);
@@ -59,7 +61,7 @@ var __meta__ = {
         ],
 
         options: {
-            name: "Rowfilter",
+            name: "RowFilter",
             autoBind: true
         },
 
@@ -79,7 +81,7 @@ var __meta__ = {
         }
     });
 
-    ui.plugin(Rowfilter);
+    ui.plugin(RowFilter);
 })(window.kendo.jQuery);
 
 return window.kendo;

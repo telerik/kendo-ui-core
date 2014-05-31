@@ -545,6 +545,165 @@
         ok(grid.thead.find("th").data("kendoFilterMenu"));
     });
 
+    test("rowfilter does not get rendered by default", function() {
+        $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
+        var grid = new Grid(table, {
+            filterable: true
+        });
+
+        equal(grid.thead.find("th").length, 1);
+        equal(grid.thead.find("tr").length, 1);
+    });
+
+    test("rowfilter header row gets rendered when grid filterable is set to true", function() {
+        $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
+        var grid = new Grid(table, {
+            filterable: {
+                row: true
+            },
+            columns: ["foo"],
+        });
+
+        equal(grid.thead.find("tr").length, 2);
+    });
+
+    test("rowfilter row is rendered when filterable true and initialized from div", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: ["foo"],
+        });
+
+        equal(grid.thead.find("tr").length, 2);
+    });
+
+    test("rowfilter header row is inserted second", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: ["foo"],
+        });
+
+        equal(grid.thead.find("tr:eq(1)").attr("role"), "rowfilter");
+    });
+
+    test("rowfilter with detailTemplate renders detail cell th", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            detailTemplate: "foo",
+            dataSource: [{foo: 1, filterable: true}],
+            columns: ["foo"],
+            filterable: {
+                row: true
+            }
+        });
+
+        equal(grid.thead.find("[role=rowfilter]").find(".k-hierarchy-cell").length, 1);
+    });
+
+    test("rowfilter with detail cell is not rendered when no details", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: [{foo: 1}],
+            columns: ["foo"],
+            filterable: {
+                row: true
+            }
+        });
+
+        equal(grid.thead.find("[role=rowfilter]").find(".k-hierarchy-cell").length, 0);
+    });
+
+    test("rowfilter creates group cells when grid has groups", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: {
+                data: [
+                    { foo: 1 },
+                    { foo: 1 },
+                    { foo: 2 },
+                ],
+                group: {
+                    field: "foo"
+                }
+            },
+            columns: ["foo"],
+            filterable: {
+                row: true
+            }
+        });
+
+        equal(grid.thead.find("[role=rowfilter]").find(".k-group-cell").length, 1);
+    });
+
+    test("rowfilter creates th cells for each column", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: {
+                data: [
+                    { foo: 1, bar: 1, baz: 1},
+                ]
+            },
+            columns: ["foo", "bar", { template: "foo" }],
+            filterable: {
+                row: true
+            }
+        });
+
+        equal(grid.thead.find("[role=rowfilter]").find("th").length, 3);
+    });
+
+    test("rowfilter creates th cells and sets attributes for bound columns", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: {
+                data: [
+                    { foo: 1, bar: 1, baz: 1},
+                ]
+            },
+            columns: ["foo", "bar", { template: "foo" }],
+            filterable: {
+                row: true
+            }
+        });
+
+        var rowfilter = grid.thead.find("[role=rowfilter]");
+        var ths = rowfilter.find("th");
+        equal(ths.length, 3);
+        equal(ths.eq(0).attr("data-field"), "foo");
+        equal(ths.eq(1).attr("data-field"), "bar");
+    });
+
+    test("rowfilter is not rendered when grid filterable is set to true and columns filterable to false", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                {
+                    field: "col1",
+                    filterable: false
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {}
+                        }
+                    }
+                }
+            },
+        });
+
+        equal(grid.thead.find("tr").length, 1);
+    });
+
     test("grid filterable options propagate to the filter menu", function() {
         var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             filterable: {
