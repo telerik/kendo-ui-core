@@ -2519,7 +2519,7 @@ function pad(number, digits, end) {
         logToConsole: function(message) {
             var console = window.console;
 
-            if (typeof(console) != "undefined" && console.log) {
+            if (!kendo.suppressLog && typeof(console) != "undefined" && console.log) {
                 console.log(message);
             }
         }
