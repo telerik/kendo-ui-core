@@ -1430,6 +1430,10 @@ var __meta__ = {
 
                 isSettings = isPlainObject(view);
 
+                if (isSettings && view.selectable === false) {
+                    continue;
+                }
+
                 name = isSettings ? view.type : view;
 
                 defaultView = defaultViews[name];

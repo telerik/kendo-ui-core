@@ -105,6 +105,17 @@
         equal(timeline.views.invalidView, undefined);
     });
 
+    test("views with selectable false are not set", function() {
+        timeline = new Timeline(element, {
+            views: [
+                { type: "day", selectable: false },
+                { type: "week" }
+            ]
+        });
+
+        equal(timeline.views.day, undefined);
+    });
+
     test("view initialized with wrapper element", function() {
         timeline = new Timeline(element, {
             views: ["day"]
