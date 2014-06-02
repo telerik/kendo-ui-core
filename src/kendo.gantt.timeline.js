@@ -967,7 +967,7 @@ var __meta__ = {
                 angle += Math.PI;
             }
 
-            $("<div class='" + styles.lineHorizontal + " " + styles.dependencyHint + "'></div>")
+            $("<div class='" + styles.line + " " + styles.lineHorizontal + " " + styles.dependencyHint + "'></div>")
                 .css({
                     "top": from.y,
                     "left": from.x,
