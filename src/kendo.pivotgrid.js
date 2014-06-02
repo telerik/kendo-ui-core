@@ -1806,10 +1806,9 @@ var __meta__ = {
                 row.rowspan += 1;
 
                 rows.push(allRow);
-                map[tuplePath + member.name] = allRow;
+                map[tuplePath + member.name + "all"] = allRow; //TODO: Test this!
 
                 if (members[memberIdx + 1]) {
-                    row.hasChild = false;
                     childRow = this._buildRows(tuple, memberIdx + 1);
 
                     allCell.attr.rowspan = childRow.rowspan;

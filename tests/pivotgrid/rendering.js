@@ -1278,6 +1278,48 @@
         equal(td_level4.eq(1).text(), "dim 1");
     });
 
+    test("PivotGrid renders row header for 2 dimensions with three level children", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0_1", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+        var td_level1 = rows.eq(1).find("td");
+        var td_level2 = rows.eq(2).find("td");
+        var td_level3 = rows.eq(3).find("td");
+
+        equal(rows.length, 4);
+
+        equal(td_level0.length, 4);
+        equal(td_level1.length, 2);
+        equal(td_level2.length, 2);
+        equal(td_level3.length, 2);
+
+        equal(td_level0.eq(0).text(), "dim 0");
+        equal(td_level0.eq(1).text(), "dim 0_1");
+        equal(td_level0.eq(2).text(), "dim 0_3");
+        equal(td_level0.eq(3).text(), "dim 1");
+
+        equal(td_level1.eq(0).text(), "dim 0_1");
+        equal(td_level1.eq(1).text(), "dim 1");
+
+        equal(td_level2.eq(0).text(), "dim 0_2");
+        equal(td_level2.eq(1).text(), "dim 1");
+
+        equal(td_level3.eq(0).text(), "dim 0");
+        equal(td_level3.eq(1).text(), "dim 1");
+    });
+
     test("PivotGrid renders row header for 3 dimension with a child in 1st and 2nd dimension", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
