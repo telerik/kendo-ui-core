@@ -1674,7 +1674,7 @@ var __meta__ = {
 
             if (root) {
                 this._buildRows(root, 0);
-                this._normalizeColSpan();
+                //this._normalizeColSpan();
             } else {
                 this.rows.push(element("tr", null, kendo_th("")));
             }
@@ -1685,46 +1685,17 @@ var __meta__ = {
         _normalizeColSpan: function() {
             var members = this.rootTuple.members;
             var length = members.length;
-
-            var maxColSpan = 0;
+            var map = this.map;
             var idx = 0;
-
-            var rootName;
-            var colspan;
-            var member;
-            var row;
-
-            if (length === 1) {
-                return;
-            }
+            var cell;
+            var name;
 
             for (; idx < length; idx++) {
-                member = members[idx];
-                colspan = this.map[member.name].colspan;
+                name = members[idx].name;
+                cell = (map[name + "all"] || map[name]).children[0];
 
-                //TODO: handle when 2 or more dimensions are equal!!!
-
-                if (colspan > maxColSpan) {
-                    maxColSpan = colspan;
-                    rootName = member.name;
-                }
-            }
-
-            for (idx = 0, length = this.rows.length; idx < length; idx++) {
-                row = this.rows[idx];
-
-                if (row.rootName === rootName) {
-                    continue;
-                }
-
-                colspan = row.colspan || 0;
-
-                if (colspan < maxColSpan) {
-                    if (colspan === 1) {
-                        colspan = 0;
-                    }
-
-                    row.children[row.children.length - 1].attr.colspan = maxColSpan - colspan;
+                if (cell.colspan < this._maxColSpan) {
+                    cell.colspan = this._maxColSpan;
                 }
             }
         },
@@ -1759,14 +1730,69 @@ var __meta__ = {
             var path = [];
             var idx = 0;
 
-            for (; idx <= index; idx++) {
+            for(; idx <= index; idx++) {
                 path.push(tuple.members[idx].name);
             }
 
             return path;
         },
 
-        _buildRows: function(tuple, memberIdx, parentMember) {
+        _buildRows: function(tuple, memberIdx) {
+            var rows = this.rows;
+            var map = this.map;
+
+            var members = tuple.members;
+            var member = members[memberIdx];
+            var children = member.children;
+
+            var tuplePath = this._tuplePath(tuple, memberIdx - 1).join("");
+
+            var parentName = tuplePath + (member.parentName || "");
+            var row = map[parentName + "all"] || map[parentName];
+            var allRow;
+
+            if (!row || row.hasChild) {
+                row = element("tr", null);
+                rows.push(row);
+            } else {
+                row.hasChild = true;
+            }
+
+            map[tuplePath + member.name] = row;
+
+            var allCell;
+            var cell = element("td", null, [text(member.caption || member.name)]);
+
+            row.children.push(cell);
+
+            if (children[0]) {
+                row.hasChild = false; //add to the all row instead of the other one
+
+                for (var idx = 0; idx < children.length; idx++) {
+                    this._buildRows(children[idx], memberIdx);
+                }
+
+                allCell = element("td", null, [text(member.caption || member.name)]);
+                allRow = element("tr", null, [allCell]);
+
+                map[tuplePath + member.name] = allRow;
+
+                rows.push(allRow);
+
+                if (members[memberIdx + 1]) {
+                    row.hasChild = false; //add to the all row instead of the other one
+                    this._buildRows(tuple, memberIdx + 1);
+                }
+
+            } else if (members[memberIdx + 1]) {
+                row.hasChild = false;
+                this._buildRows(tuple, memberIdx + 1);
+            }
+
+            return row;
+        },
+
+        /*_buildRows: function(tuple, memberIdx, parentMember) {
             var rows = this.rows;
             var map = this.map;
 
@@ -1775,16 +1801,22 @@ var __meta__ = {
             var children = member.children;
 
             var childMember = !parentMember && tuple !== this.rootTuple;
+            //var rootLevel = this._memberIdx(this.rootTuple, this.rootIndex, memberIdx);
+
+            if (!parentMember && !childMember) {
+                this.rootIndex = memberIdx;
+            }
 
             var name;
+            var row;
 
             if (childMember) {
-                name = this._tuplePath(tuple, memberIdx - 1).join("");
+                name = this._tuplePath(tuple, this.rootIndex, memberIdx - 1).join("");
             } else {
                 name = member.parentName || member.name;
             }
 
-            var row = map[name];
+            row = map[name + "all"] || map[name];
 
             if (!childMember && (!row || row.hasChild)) {
                 if (row) {
@@ -1803,7 +1835,7 @@ var __meta__ = {
             row.colspan = 1;
             row.rootName = this.rootTuple.members[memberIdx].name;
 
-            name = childMember ? this._tuplePath(tuple, memberIdx).join("") : member.name;
+            name = childMember ? this._tuplePath(tuple, this.rootIndex, memberIdx).join("") : member.name;
 
             map[name] = row;
 
@@ -1812,9 +1844,10 @@ var __meta__ = {
             row.children.push(cell);
 
             var childRow;
+            var allCell;
 
             if (member.children[0]) {
-                var allCell = element("td", null, [text(member.caption || member.name)]);
+                allCell = element("td", null, [text(member.caption || member.name)]);
 
                 if (row.hasChild) {
                     row.hasChild = false;
@@ -1835,41 +1868,62 @@ var __meta__ = {
                 cell.attr.rowspan = rowspan;
                 allCell.attr.colspan = row.colspan;
 
-                this.rows.push(element("tr", null, [allCell]));
+                var allRow = element("tr", null, [allCell]);
+                this.rows.push(allRow);
+
+                //if (this.rootTuple !== tuple) {
+                    map[name + "all"] = allRow;
+                //}
+
+                if (!parentMember && !childMember) {
+                    //colspan = this._rowLength(row);
+                    //allCell.attr.colspan = colspan;
+                    //this._maxColSpan = Math.max(this._maxColSpan, colspan);
+                }
+
                 row.rowspan += 1;
 
                 if (members[memberIdx + 1]) {
-                    childRow = this._buildRows(tuple, ++memberIdx);
+                    childRow = this._buildRows(tuple, memberIdx + 1);
 
                     rowspan = childRow.rowspan;
 
                     if (rowspan > 1) {
-                        row.rowspan += rowspan;
+                        row.rowspan = rowspan;
                     }
-
-                    //row.colspan += 1;
                 }
             } else if (members[memberIdx + 1]) {
-                childRow = this._buildRows(tuple, ++memberIdx);
+                childRow = this._buildRows(tuple, memberIdx + 1);
 
                 rowspan = childRow.rowspan;
 
                 if (rowspan > 1) {
                     row.rowspan += rowspan;
                 }
-
-                if (tuple !== this.rootTuple) {
-                    row.colspan += 1;
-                }
             }
 
             return row;
-        },
+        },*/
 
         _state: function(rootTuple) {
             this.rows = [];
             this.map = {};
+            this.mapCells = {};
             this.rootTuple = rootTuple;
+            this.rootIndex = 0;
+        },
+
+        _rowLength: function(row) {
+            var idx = 0;
+            var rowLength = 0;
+            var children = row.children;
+            var length = children.length;
+
+            for (; idx < length; idx++) {
+                rowLength += (children[idx].attr.colspan || 1);
+            }
+
+            return rowLength;
         }
     });
 
