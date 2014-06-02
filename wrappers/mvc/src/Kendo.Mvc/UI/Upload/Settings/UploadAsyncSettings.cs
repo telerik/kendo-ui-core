@@ -56,6 +56,11 @@ namespace Kendo.Mvc.UI
         public bool? Batch { get; set; }
 
         /// <summary>
+        /// Gets or sets a value whether to send credentials as part of XHR requests
+        /// </summary>
+        public bool? WithCredentials { get; set; }
+
+        /// <summary>
         /// Serializes the asynchronous uploading settings to the writer.
         /// </summary>
         /// <param name="key">The serialization key.</param>
@@ -73,7 +78,8 @@ namespace Kendo.Mvc.UI
                     .Add("saveField", SaveField, () => SaveField.HasValue())
                     .Add("removeField", RemoveField, () => RemoveField.HasValue())
                     .Add("autoUpload", AutoUpload, () => AutoUpload.HasValue)
-                    .Add("batch", Batch, () => Batch.HasValue);
+                    .Add("batch", Batch, () => Batch.HasValue)
+                    .Add("withCredentials", WithCredentials, () => WithCredentials.HasValue);
 
                 if (Remove.HasValue())
                 {

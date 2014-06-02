@@ -333,5 +333,18 @@ namespace Kendo.Mvc.UI.Tests.Upload
         {
             builder.Remove<UploadStubController>(c => c.Index()).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void WithCredentials_should_set_WithCredentials()
+        {
+            builder.WithCredentials(false);
+            settingsMock.VerifySet(s => s.WithCredentials = false);
+        }
+
+        [Fact]
+        public void WithCredentials_should_return_builder()
+        {
+            builder.WithCredentials(false).ShouldBeSameAs(builder);
+        }
     }
 }
