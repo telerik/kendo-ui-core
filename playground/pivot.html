@@ -32,55 +32,55 @@
         <script>
             $("#expand-city").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn(["[Date].[Calendar]", "[Geography].[City]" ]);
+                dataSource.expandRow(["[Date].[Calendar]", "[Geography].[City]" ]);
             });
 
             $("#expand-calendar").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar]");
+                dataSource.expandRow("[Date].[Calendar]");
             });
 
             $("#expand-2005").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar].[Year].&[2005]");
+                dataSource.expandRow("[Date].[Calendar].[Year].&[2005]");
             });
 
             $("#expand-2005-city").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn(["[Date].[Calendar].[Year].&[2005]", "[Geography].[City]"]);
+                dataSource.expandRow(["[Date].[Calendar].[Year].&[2005]", "[Geography].[City]"]);
             });
 
             $("#expand-2005-2-city").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn(["[Date].[Calendar].[Year].&[2005].&[2]", "[Geography].[City]"]);
+                dataSource.expandRow(["[Date].[Calendar].[Year].&[2005].&[2]", "[Geography].[City]"]);
             });
 
             $("#expand-2005_2").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar].[Year].&[2005].&[2]");
+                dataSource.expandRow("[Date].[Calendar].[Year].&[2005].&[2]");
             });
 
             $("#expand-2006").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006]");
+                dataSource.expandRow("[Date].[Calendar].[Year].&[2006]");
             });
 
             $("#expand-2006_1").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006].&[1]");
+                dataSource.expandRow("[Date].[Calendar].[Year].&[2006].&[1]");
             });
 
             $("#expand-2006_2").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandColumn("[Date].[Calendar].[Year].&[2006].&[2]");
+                dataSource.expandRow("[Date].[Calendar].[Year].&[2006].&[2]");
             });
 
             $(function() {
                 $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
                         type: "xmla",
-                        columns: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
-                        rows: [ { name: "[Product].[Category]" }, { name: "[Product].[Product Name]" }],
+                        rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
+                        columns: [ { name: "[Product].[Category]" }, { name: "[Product].[Product Name]" }],
                         measures: ["[Measures].[Internet Order Lines Count]"],
                         transport: {
                             connection: {
