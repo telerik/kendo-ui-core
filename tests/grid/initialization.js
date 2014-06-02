@@ -623,13 +623,14 @@
         var grid = new Grid(div, {
             dataSource: {
                 data: [
-                    { foo: 1 },
-                    { foo: 1 },
-                    { foo: 2 },
+                    { foo: 1, bar: 2 },
+                    { foo: 1, bar: 2 },
+                    { foo: 2, bar: 2 },
                 ],
-                group: {
-                    field: "foo"
-                }
+                group: [
+                    { field: "foo" },
+                    { field: "bar" }
+                ]
             },
             columns: ["foo"],
             filterable: {
@@ -637,7 +638,7 @@
             }
         });
 
-        equal(grid.thead.find("[role=rowfilter]").find(".k-group-cell").length, 1);
+        equal(grid.thead.find("[role=rowfilter]").find(".k-group-cell").length, 2);
     });
 
     test("rowfilter creates th cells for each column", function() {

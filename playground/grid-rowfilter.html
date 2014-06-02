@@ -6,6 +6,9 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
         <script src="../src/kendo.grid.js"></script>
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.list.js"></script>
@@ -14,11 +17,12 @@
         <script src="../src/kendo.calendar.js"></script>
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.datepicker.js"></script>
-        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.numerictextbox.js"></script>
+
 
         <script src="../src/kendo.filtermenu.js"></script>
         <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.rowfilter.js"></script>
 
         <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css"/>
         <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css"/>
@@ -28,6 +32,8 @@
         <div id="standard-filterable-grid"></div>
         <h3>experiment filtering</h3>
         <div id="grid"></div>
+        <h3>feature grid</h3>
+        <div id="feature"></div>
         <script>
             var standart = $("#standard-filterable-grid").kendoGrid({
                 filterable: true,
@@ -186,6 +192,48 @@
 
                 grid.thead.append(tr);
 
+                var feature = $("#feature").kendoGrid({
+                    filterable: {
+                        row: true
+                    },
+                    groupable:true,
+                    detailTemplate: "foo",
+                    dataSource: {
+                        data: [
+                            {
+                                Id: 1,
+                                Name: "foo",
+                                Position: 1 ,
+                                ContractDate : new Date('1996/12/12')
+                            },
+                            {
+                                Id: 2,
+                                Name: "bar",
+                                Position: 2 ,
+                                ContractDate : new Date('2012/5/4')
+                            },
+                            {
+                                Id: 3,
+                                Name: "baz",
+                                Position: 3 ,
+                                ContractDate : new Date()
+                            }
+                        ],
+                        schema: {
+                            model: {
+                                fields: {
+                                    Id: {
+                                        type : "number"
+                                    },
+                                    ContractDate: {
+                                        type : "date"
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }).data("kendoGrid");
             });
         </script>
         </body>

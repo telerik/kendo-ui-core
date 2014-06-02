@@ -4013,12 +4013,12 @@ var __meta__ = {
         _hasRowFiltering: function() {
             var filterable = this.options.filterable;
             var hasFiltering = filterable && filterable.row;
-            var columns = this.options.columns;
+            var columns = this.columns;
             var columnsWithoutFiltering = $.grep(columns, function(col, idx) {
                 return col.filterable === false;
             });
 
-            if (columnsWithoutFiltering.length == columns.length) {
+            if (columns.length && columnsWithoutFiltering.length == columns.length) {
                 hasFiltering = false;
             }
 
@@ -4574,14 +4574,15 @@ var __meta__ = {
         _updateHeader: function(groups) {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
-                cells = container.find("th.k-group-cell"),
-                length = cells.length;
+                length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
                 $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
             } else if(groups < length) {
-                length = length - groups;
-                $(grep(cells, function(item, index) { return length > index; } )).remove();
+                container.find("tr").each(function(){
+                    $(this).find("th.k-group-cell")
+                        .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
+                });
             }
         },
 
