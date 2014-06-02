@@ -53,13 +53,13 @@
         equal(origin.y, 0);
     });
 
-    test("fillScale picks the smaller scale from the two dimensions", function() {
+    test("fillScale picks the larger scale from the two dimensions", function() {
         var outer = createElement(0, 0, 300, 300);
-        var inner = createElement(0, 0, 100, 300);
-        equal(fillScale(box(inner), box(outer)), 3);
+        var inner = createElement(0, 0, 150, 300);
+        equal(fillScale(box(inner), box(outer)), .5);
 
         outer = createElement(0, 0, 300, 300);
-        inner = createElement(0, 0, 300, 100);
-        equal(fillScale(box(inner), box(outer)), 3);
+        inner = createElement(0, 0, 300, 150);
+        equal(fillScale(box(inner), box(outer)), .5);
     });
 })();
