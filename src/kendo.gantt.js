@@ -47,7 +47,7 @@ var __meta__ = {
             '#}#' +
             '<ul class="#=styles.viewsWrapper#">' +
                 '#for(var view in views){#' +
-                    '<li class="#=styles.viewButton# k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
+                    '<li class="#=styles.viewButtonDefault# #=styles.viewButton#-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a href="\\#" class="#=styles.link#">#=views[view].title#</a></li>' +
                 '#}#' +
             '</ul>' +
         '</div>');
@@ -90,7 +90,8 @@ var __meta__ = {
             actionsWrapper: "k-reset k-header k-toolbar k-gantt-actions",
             button: "k-button k-button-icontext",
             iconPlus: "k-icon k-i-plus",
-            viewButton: "k-state-default",
+            viewButtonDefault: "k-state-default",
+            viewButton: "k-view",
             link: "k-link"
         }
     };
@@ -1061,7 +1062,7 @@ var __meta__ = {
                         .find(DOT + ganttStyles.toolbar.views +" > li")
                         .removeClass(ganttStyles.selected)
                         .end()
-                        .find(".k-view-" + e.view.replace(/\./g, "\\.").toLowerCase())
+                        .find(DOT + ganttStyles.toolbar.viewButton + "-" + e.view.replace(/\./g, "\\.").toLowerCase())
                         .addClass(ganttStyles.selected);
                 })
                 .bind("moveStart", function(e) {
