@@ -32451,6 +32451,13 @@ containing one or more fields with the same name as the original input name.</de
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>Controls whether or not to send the credentials such as cookies or authorization headers.
+This option will be ignored if the browser doesn't support File API.</description>
+            <name>withCredentials</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 

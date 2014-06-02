@@ -106,6 +106,14 @@ public class AsyncTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("saveUrl", value);
     }
 
+    public boolean getWithCredentials() {
+        return (boolean)getProperty("withCredentials");
+    }
+
+    public void setWithCredentials(boolean value) {
+        setProperty("withCredentials", value);
+    }
+
 //<< Attributes
 
 }
