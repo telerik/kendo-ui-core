@@ -171,6 +171,27 @@ namespace Kendo.Mvc.UI.Tests.Upload
         }
 
         [Fact]
+        public void WithCredentials_should_be_serialized_when_set()
+        {
+            upload.Async.Save.ActionName = "Index";
+            upload.Async.Save.ControllerName = "Home";
+            upload.Async.WithCredentials = true;
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("{\"async\":{\"saveUrl\":\"Home/Index\",\"withCredentials\":true}}");
+        }
+
+        [Fact]
+        public void WithCredentials_should_not_be_serialized_when_not_set()
+        {
+            upload.Async.Save.ActionName = "Index";
+            upload.Async.Save.ControllerName = "Home";
+            upload.WriteInitializationScript(textWriter.Object);
+
+            output.ShouldContain("jQuery(\"#Upload\").kendoUpload({\"async\":{\"saveUrl\":\"Home/Index\"}});");
+        }
+
+        [Fact]
         public void Select_client_side_event_serialized()
         {
             upload.Events["select"] = new ClientHandlerDescriptor() { HandlerName = "selectHandler" };

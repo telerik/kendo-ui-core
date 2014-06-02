@@ -72,6 +72,16 @@ containing one or more fields with the same name as the original input name.
         return $this->setProperty('saveUrl', $value);
     }
 
+    /**
+    * Controls whether to send credentials (cookies, headers) for cross-site requests.
+This option will be ignored if the browser doesn't support File API.
+    * @param boolean $value
+    * @return \Kendo\UI\UploadAsync
+    */
+    public function withCredentials($value) {
+        return $this->setProperty('withCredentials', $value);
+    }
+
 //<< Properties
 }
 

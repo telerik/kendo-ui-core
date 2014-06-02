@@ -97,7 +97,8 @@ var __meta__ = {
             files: [],
             async: {
                 removeVerb: "POST",
-                autoUpload: true
+                autoUpload: true,
+                withCredentials: true
             },
             localization: {
                 "select": "Select files...",
@@ -1066,7 +1067,7 @@ var __meta__ = {
         performUpload: function(fileEntry) {
             var upload = this.upload,
                 formData = this.createFormData(),
-                xhr = new XMLHttpRequest(),
+                xhr = this.createXHR(),
                 e = {
                     files: fileEntry.data("fileNames"),
                     XMLHttpRequest: xhr
@@ -1127,6 +1128,10 @@ var __meta__ = {
             }
         },
 
+        createXHR: function() {
+            return new XMLHttpRequest();
+        },
+
         postFormData: function(url, data, fileEntry, xhr) {
             var module = this;
 
@@ -1145,7 +1150,7 @@ var __meta__ = {
             }, false);
 
             xhr.open("POST", url, true);
-            xhr.withCredentials = "true";
+            xhr.withCredentials = this.upload.options.async.withCredentials;
             xhr.send(data);
         },
 

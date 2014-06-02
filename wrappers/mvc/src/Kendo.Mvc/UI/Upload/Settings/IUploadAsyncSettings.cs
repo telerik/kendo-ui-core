@@ -33,5 +33,10 @@ namespace Kendo.Mvc.UI
         /// Gets or sets a value indicating whether to upload selected files in one batch (request)
         /// </summary>
         bool? Batch { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value whether to send credentials as part of XHR requests
+        /// </summary>
+        bool? WithCredentials { get; set; }
     }
 }

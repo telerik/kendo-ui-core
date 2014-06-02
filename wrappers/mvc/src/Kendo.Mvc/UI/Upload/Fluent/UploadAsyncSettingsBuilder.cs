@@ -492,5 +492,15 @@ namespace Kendo.Mvc.UI.Fluent
             settings.RemoveField = fieldName;
             return this;
         }
+
+        /// <summary>
+        /// Sets a value indicating whether to send credentials (cookies, headers) for cross-site requests.
+        /// </summary>
+        /// <param name="value">true if credentials should be sent, false otherwise; true by default</param>
+        public UploadAsyncSettingsBuilder WithCredentials(bool withCredentials)
+        {
+            settings.WithCredentials = withCredentials;
+            return this;
+        }
     }
 }
