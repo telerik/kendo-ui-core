@@ -29,8 +29,8 @@ var __meta__ = {
                        '</div>');
     var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#">' +
                                    '<div class="#=styles.tooltipContent#">' +
-                                        '<div class="#=styles.start#">Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
-                                        '<div class="#=styles.end#">End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
+                                        '<div>Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
+                                        '<div>End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
                                    '</div>' +
                               '</div>');
     var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#" >' +
@@ -119,8 +119,6 @@ var __meta__ = {
         tooltipContent: "k-tooltip-content",
         tooltipCallout: "k-callout k-callout-s",
         callout: "k-callout",
-        start: "k-start",
-        end: "k-end",
         marquee: "k-marquee k-gantt-marquee",
         marqueeColor: "k-marquee-color"
     };

@@ -66,9 +66,10 @@ var __meta__ = {
 
     var ganttStyles = {
         wrapper: "k-widget k-gantt",
-        layout: "k-gantt-layout",
-        listWrapper: "k-gantt-treelist",
-        timelineWrapper: "k-gantt-timeline",
+        listWrapper: "k-gantt-layout k-gantt-treelist",
+        list: "k-gantt-treelist",
+        timelineWrapper: "k-gantt-layout k-gantt-timeline",
+        timeline: "k-gantt-timeline",
         splitBarWrapper: "k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout",
         splitBar: "k-splitbar",
         splitBarHover: "k-splitbar-horizontal-hover",
@@ -834,8 +835,6 @@ var __meta__ = {
 
         _wrapper: function() {
             var ganttStyles = Gantt.styles;
-            var listWrapperClassName = [ganttStyles.layout, ganttStyles.listWrapper].join(" ");
-            var timelineWrapperClassName = [ganttStyles.layout, ganttStyles.timelineWrapper].join(" ");
             var splitBarHandleClassName = [ganttStyles.icon, ganttStyles.resizeHandle].join(" ");
             var options = this.options;
             var height = options.height;
@@ -843,11 +842,11 @@ var __meta__ = {
 
             this.wrapper = this.element
                             .addClass(ganttStyles.wrapper)
-                            .append("<div class='" + listWrapperClassName + "'><div></div></div>")
+                            .append("<div class='" + ganttStyles.listWrapper + "'><div></div></div>")
                             .append("<div class='" + ganttStyles.splitBarWrapper + "'><div class='" + splitBarHandleClassName + "'></div></div>")
-                            .append("<div class='" + timelineWrapperClassName + "'><div></div></div>");
+                            .append("<div class='" + ganttStyles.timelineWrapper + "'><div></div></div>");
 
-            this.wrapper.find(DOT + ganttStyles.listWrapper).width(options.listWidth);
+            this.wrapper.find(DOT + ganttStyles.list).width(options.listWidth);
 
             if (height) {
                 this.wrapper.height(height);
@@ -918,8 +917,8 @@ var __meta__ = {
         _adjustDimensions: function() {
             var element = this.element;
             var ganttStyles = Gantt.styles;
-            var listSelector = DOT + ganttStyles.listWrapper;
-            var timelineSelector = DOT + ganttStyles.timelineWrapper;
+            var listSelector = DOT + ganttStyles.list;
+            var timelineSelector = DOT + ganttStyles.timeline;
             var splitBarSelector = DOT + ganttStyles.splitBar;
             var toolbarHeight = this.toolbar.outerHeight();
             var footerHeight = this.footer ? this.footer.outerHeight() : 0;
@@ -1007,7 +1006,7 @@ var __meta__ = {
         _list: function() {
             var that = this;
             var ganttStyles = Gantt.styles;
-            var element = this.wrapper.find(DOT + ganttStyles.listWrapper + " > div");
+            var element = this.wrapper.find(DOT + ganttStyles.list + " > div");
             var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actions + " > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
@@ -1052,7 +1051,7 @@ var __meta__ = {
             var that = this;
             var ganttStyles = Gantt.styles;
             var options = trimOptions(extend(true, {}, this.options));
-            var element = this.wrapper.find(DOT + ganttStyles.timelineWrapper + " > div");
+            var element = this.wrapper.find(DOT + ganttStyles.timeline + " > div");
 
             this.timeline = new kendo.ui.GanttTimeline(element, options);
 
@@ -1310,8 +1309,8 @@ var __meta__ = {
             var wrapper = this.wrapper;
             var ganttStyles = Gantt.styles;
             var contentSelector = DOT + ganttStyles.gridContent;
-            var treeListWrapper = wrapper.find(DOT + ganttStyles.listWrapper);
-            var timelineWrapper = wrapper.find(DOT + ganttStyles.timelineWrapper);
+            var treeListWrapper = wrapper.find(DOT + ganttStyles.list);
+            var timelineWrapper = wrapper.find(DOT + ganttStyles.timeline);
             var treeListWidth;
             var timelineWidth;
             var timelineScroll;

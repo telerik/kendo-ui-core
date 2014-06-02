@@ -503,10 +503,10 @@
         dragStart(timeline, handle);
         drag(timeline, targetSlot.offsetLeft);
 
-        tooltip = content.find(".k-tooltip");
+        tooltip = content.find(".k-tooltip-content");
 
-        equal(tooltip.find(".k-start").text(), "Start: Tue 4/15 12:00");
-        equal(tooltip.find(".k-end").text(), "End: Tue 4/15 16:00");
+        equal(tooltip.children().eq(0).text(), "Start: Tue 4/15 12:00");
+        equal(tooltip.children().eq(1).text(), "End: Tue 4/15 16:00");
     });
 
 
