@@ -50,8 +50,6 @@
             this._appendTo(container);
         },
 
-        events: [],
-
         draw: function(element) {
             this._root.load([element]);
         },

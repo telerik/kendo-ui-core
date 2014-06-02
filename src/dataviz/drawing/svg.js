@@ -52,11 +52,6 @@
             this._appendTo(container);
         },
 
-        options: {
-            width: "100%",
-            height: "100%"
-        },
-
         events: [
             "click",
             "mouseenter",

@@ -15,19 +15,15 @@
 
         dataviz = kendo.dataviz;
 
-    // Base surface ==========================================================
+    // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
         options: {
             width: "100%",
             height: "100%"
         },
 
+        draw: noop,
         clear: noop,
-
-        destroy: function() {
-            this.clear();
-            $(this.element).kendoDestroy();
-        },
 
         resize: function(force) {
             var size = this.getSize(),
@@ -77,7 +73,7 @@
         return SurfaceFactory.current.create(element, options, preferred);
     };
 
-    // Stage node ============================================================
+    // Base surface node =====================================================
     var BaseNode = Class.extend({
         init: function(srcElement) {
             this.childNodes = [];
