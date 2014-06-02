@@ -142,6 +142,9 @@ function mousewheel(element, delta) {
     $(element).trigger($.Event("mousewheel", { originalEvent: { detail: delta * 3 } }));
 }
 
+// Silence logging for the tests
+kendo.suppressLog = true;
+
 (function() {
     var domContentsLength;
 
@@ -224,4 +227,3 @@ QUnit.config.reorder = false;
 
 var close = QUnit.close,
     notClose = QUnit.notClose;
-
