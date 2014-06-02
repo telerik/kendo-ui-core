@@ -49,6 +49,29 @@
         ok(!header.find(".k-grid-header-locked").length);
     });
 
+    test("rowfilter tr is append to locked header", function() {
+        var grid = setup({
+            filterable: {
+                row: true
+            },
+            columns: [{ field: "foo", locked: true }, "bar", "baz"]
+        });
+
+        var header = grid.lockedHeader;
+        equal(header.find("tr").length, 2);
+        equal(header.find("tr[role=rowfilter]").length, 1);
+    });
+
+    test("rowfilter tr is append to locked header", function() {
+        var grid = setup({
+            columns: [{ field: "foo", locked: true }, "bar", "baz"]
+        });
+
+        var header = grid.lockedHeader;
+        equal(header.find("tr").length, 1);
+        equal(header.find("tr[role=rowfilter]").length, 0);
+    });
+
     test("th elements are added to the locked header table", function() {
         var grid = setup({
             columns: [{ field: "foo", locked: true }, "bar", "baz"]

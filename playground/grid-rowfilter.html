@@ -23,6 +23,8 @@
         <script src="../src/kendo.filtermenu.js"></script>
         <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.rowfilter.js"></script>
+        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.columnmenu.js"></script>
 
         <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css"/>
         <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css"/>
@@ -196,34 +198,49 @@
                     filterable: {
                         row: true
                     },
+                    columns: [
+                        { field: "Id", locked: false, width: 300 },
+                        { field: "Name", locked: false, width: 300 },
+                        { field: "Position", locked: true, width: 300 },
+                        { field: "ContractDate", width: 400 }
+                    ],
                     groupable:true,
-                    detailTemplate: "foo",
+                    columnMenu: true,
+                    scrollable:true,
+                    //detailTemplate: "foo",
                     dataSource: {
-                        data: [
-                            {
-                                Id: 1,
-                                Name: "foo",
-                                Position: 1 ,
-                                ContractDate : new Date('1996/12/12')
-                            },
-                            {
-                                Id: 2,
-                                Name: "bar",
-                                Position: 2 ,
-                                ContractDate : new Date('2012/5/4')
-                            },
-                            {
-                                Id: 3,
-                                Name: "baz",
-                                Position: 3 ,
-                                ContractDate : new Date()
+                        transport: {
+                            read: function(options) {
+                                options.success([
+                                    {
+                                        Id: 1,
+                                        Name: "foo",
+                                        Position: 1 ,
+                                        ContractDate : new Date('1996/12/12')
+                                    },
+                                    {
+                                        Id: 2,
+                                        Name: "bar",
+                                        Position: 2 ,
+                                        ContractDate : new Date('2012/5/4')
+                                    },
+                                    {
+                                        Id: 3,
+                                        Name: "baz",
+                                        Position: 3 ,
+                                        ContractDate : new Date()
+                                    }
+                                ])
                             }
-                        ],
+                        },
                         schema: {
                             model: {
                                 fields: {
                                     Id: {
                                         type : "number"
+                                    },
+                                    Name: {
+                                        type : "string"
                                     },
                                     ContractDate: {
                                         type : "date"

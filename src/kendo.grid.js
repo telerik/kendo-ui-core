@@ -3510,7 +3510,7 @@ var __meta__ = {
                     columnMenu = {};
                 }
 
-                cells = that.thead.find("th:not(.k-hierarchy-cell):not(.k-group-cell)");
+                cells = that.thead.find("tr:first th:not(.k-hierarchy-cell):not(.k-group-cell)");
 
                 for (var idx = 0, length = cells.length; idx < length; idx++) {
                     column = columns[idx];
@@ -4200,6 +4200,7 @@ var __meta__ = {
                 header,
                 skipHiddenCount = 0,
                 cols = $(),
+                hasRowFiltering = that._hasRowFiltering(),
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
@@ -4218,7 +4219,7 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr>' +
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr>' + (hasRowFiltering ? '<tr role="rowfilter" />' : '') +
                     '</tr></thead></table></div>';
 
                 table = $(html);
