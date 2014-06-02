@@ -32,6 +32,8 @@ function createUpload(options) {
                 lastFormData[name] = value;
             }
         } };
+
+    uploadInstance._module._postFormData = uploadInstance._module.postFormData;
     uploadInstance._module.postFormData = function(url, data, fileEntry) {
         fileEntry.data("request", { abort: function() { } });
     };
@@ -967,7 +969,6 @@ test("k-upload-pct text is '100%'  for each initially rendered file entry", func
 });
 
 // -----------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------
 module("Upload / FormDataUpload / Files prior to initialization", {
     setup: function() {
         moduleSetup();
@@ -1047,5 +1048,53 @@ test("files selected prior to initialization issue postFormData", function(){
 
     ok(postFormDataCalled);
 });
+
+// ------------------------------------------------------------
+(function() {
+    var xhr;
+
+    function stubXHR(options) {
+        var uploadInstance = createUpload(options);
+        uploadInstance._module.postFormData = uploadInstance._module._postFormData;
+        uploadInstance._module.createXHR = function() {
+            xhr = {
+                append: $.noop,
+                addEventListener: $.noop,
+                upload: {
+                    addEventListener: $.noop
+                },
+                open: $.noop,
+                send: $.noop
+            };
+
+            return xhr;
+        };
+    }
+
+    module("Upload / FormDataUpload / withCredentials", {
+        setup: moduleSetup,
+        teardown: moduleTeardown
+    });
+
+    test("default values is true", function() {
+        stubXHR();
+        simulateFileSelect();
+
+        ok(xhr.withCredentials);
+    });
+
+    test("sets withCredentials to false", function() {
+        stubXHR({
+            async: {
+                saveUrl:"javascript:;",
+                autoUpload:true,
+                withCredentials: false
+            }
+        });
+        simulateFileSelect();
+
+        ok(!xhr.withCredentials);
+    });
+})();
 
 })();
