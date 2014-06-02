@@ -395,8 +395,9 @@ div.submenu-box ol {
     border-color: #ebecee;
 }
 
-#source-code .k-content {
+#source-code > div.k-content {
     font-size: 14px;
+    overflow-x: auto;
 }
 
 #source-code .k-item {
@@ -1115,11 +1116,18 @@ pre.prettyprint
 }
 
 #codeStrip a.documentation-link,
-#codeStrip .try-kendo {
+#codeStrip .try-kendo
+{
     display: block;
     float: right;
     position: relative;
     z-index: 2;
+}
+
+#codeStrip .try-kendo::-moz-focus-inner
+{
+    padding: 0;
+    border: 0;
 }
 
 #codeStrip .k-content,
@@ -2181,7 +2189,7 @@ a.footer-links:hover {
     -webkit-appearance: none;
     text-align: center;
     border: none;
-    margin: 0.769em;
+    margin: 0.769em 0.769em 0;
     font: 700 13px Arial, Helvetica, sans-serif;
 }
 
