@@ -28,6 +28,19 @@
         ok(!dataSource.columns()[1].expand);
     });
 
+    test("discover calls the transport discover", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function() {
+                    ok(true);
+                }
+            }
+        });
+
+        dataSource.discover();
+    });
+
+
     test("columns descriptors are normalized during initialization", function() {
         var dataSource = new PivotDataSource({
             columns: ["foo", "bar"]
@@ -383,61 +396,7 @@
 
         equal(dataSource.measures().length, 0);
     });
-/*
-    test("query clears rows", 2, function() {
-        var callback = $.noop;
 
-        var dataSource = new PivotDataSource({
-            rows: [{ name:"[foo]", expand: true}, "[bar]"],
-            measures: ["baz"],
-            schema: {
-                axes: "axes",
-                data: "data"
-            },
-            transport: {
-                read: function(options) {
-                    equal(options.data.rows.length, 0);
-
-                    options.success({
-                        axes: { },
-                        data: []
-                    });
-                }
-            }
-        });
-
-        dataSource.query({});
-
-        equal(dataSource.rows().length, 0);
-    });
-
-    test("query clears columns", 2, function() {
-        var callback = $.noop;
-
-        var dataSource = new PivotDataSource({
-            columns: [{ name:"[foo]", expand: true}, "[bar]"],
-            measures: ["baz"],
-            schema: {
-                axes: "axes",
-                data: "data"
-            },
-            transport: {
-                read: function(options) {
-                    equal(options.data.columns.length, 0);
-
-                    options.success({
-                        axes: { },
-                        data: []
-                    });
-                }
-            }
-        });
-
-        dataSource.query({});
-
-        equal(dataSource.columns().length, 0);
-    });
-    */
     test("fetch pass measures", 2, function() {
         var callback = $.noop;
 
@@ -1441,6 +1400,40 @@
 
         transport.read({success: $.noop, data: {}});
     });
+
+    test("discover use read settings if not set", function() {
+        var transport = new kendo.data.XmlaTransport({ read: "foo" });
+
+        equal(transport.options.discover.url, "foo");
+    });
+
+    test("discover as string", function() {
+        var transport = new kendo.data.XmlaTransport({ discover: "foo" });
+
+        equal(transport.options.discover.url, "foo");
+    });
+
+    test("discover as function", 1, function() {
+        var transport = new kendo.data.XmlaTransport({
+            discover: function() {
+                ok(true);
+            }
+        });
+
+        transport.discover();
+    });
+
+    test("discover pass correct type to the parameterMap", function() {
+        var transport = new kendo.data.XmlaTransport({
+            discover: {},
+            parameterMap: function(options, type) {
+                equal(type, "discover");
+            }
+        });
+
+        transport.discover({success: $.noop, data: {}});
+    });
+
 
     test("parameterMap create empty statment wrap", function() {
         var transport = new kendo.data.XmlaTransport({ });

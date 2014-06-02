@@ -155,6 +155,35 @@ var __meta__ = {
         return members;
     }
 
+    var PivotTransport = Class.extend({
+        init: function(options, transport) {
+            this.transport = transport;
+
+            if (!this.transport.discover) {
+                if ($.isFunction(options.discover)) {
+                    this.discover = options.discover;
+                } else {
+                    this.discover = $.noop;
+                }
+            }
+        },
+        read: function(options) {
+            return this.transport.read(options);
+        },
+        update: function(options) {
+            return this.transport.update(options);
+        },
+        create: function(options) {
+            return this.transport.create(options);
+        },
+        destroy: function(options) {
+            return this.transport.destroy(options);
+        },
+        discover: function(options) {
+            return this.transport.discover(options);
+        },
+    });
+
     var PivotDataSource = DataSource.extend({
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, {
@@ -162,6 +191,8 @@ var __meta__ = {
                     axes: identity
                 }
             }, options));
+
+            this.transport = new PivotTransport(this.options.transport || {}, this.transport);
 
             this._columns = normalizeMembers(this.options.columns);
             this._rows = normalizeMembers(this.options.rows);
@@ -481,6 +512,23 @@ var __meta__ = {
             }
 
             return result;
+        },
+
+        discover: function(options) {
+            var that = this,
+                transport = that.transport;
+
+            return $.Deferred(function(deferred) {
+                transport.discover(extend({
+                    success: function(response) {
+                        deferred.resolve({ });
+                    },
+                    error: function(response, status, error) {
+                        deferred.reject(response);
+                        that.error(response, status, error);
+                    }
+                }, options));
+            }).promise();
         },
 
         _params: function(data) {
@@ -1065,11 +1113,28 @@ var __meta__ = {
 
             command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
             return command.replace(/\&/g, "&amp;");
+        },
+        discover: function(options, type) {
+            return options;
         }
     };
 
     var XmlaTransport = kendo.data.RemoteTransport.extend({
+        init: function(options) {
+            kendo.data.RemoteTransport.call(this, options);
+
+            if ($.isFunction(options.discover)) {
+                this.discover = options.discover;
+            } else if (typeof options.discover === "string") {
+                this.options.discover = {
+                    url: options.discover
+                };
+            } else if (!options.discover) {
+                this.options.discover = this.options.read;
+            }
+        },
         setup: function(options, type) {
+            options.data = options.data || {};
             $.extend(true, options.data, { connection: this.options.connection });
 
             return kendo.data.RemoteTransport.fn.setup.call(this, options, type);
@@ -1078,6 +1143,9 @@ var __meta__ = {
             parameterMap: function(options, type) {
                 return convertersMap[type](options,type);
             }
+        },
+        discover: function(options) {
+            return $.ajax(this.setup(options, "discover"));
         }
     });
 
