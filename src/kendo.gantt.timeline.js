@@ -23,18 +23,19 @@ var __meta__ = {
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
     var KEYDOWN = "keydown";
-    var RESIZE_HINT = '<div class="k-marquee k-gantt-marquee">' +
-                           '<div class="k-marquee-color"></div>' +
-                       '</div>';
-    var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div role="tooltip" style="z-index: 100002;" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
-                                   '<div class="k-tooltip-content">' +
-                                        '<div class="k-start">Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
-                                        '<div class="k-end">End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
+    var DOT = ".";
+    var RESIZE_HINT = kendo.template('<div class="#=styles.marquee#">' +
+                           '<div class="#=styles.marqueeColor#"></div>' +
+                       '</div>');
+    var RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#">' +
+                                   '<div class="#=styles.tooltipContent#">' +
+                                        '<div class="#=styles.start#">Start: #=kendo.toString(start, "ddd M/dd HH:mm")#</div>' +
+                                        '<div class="#=styles.end#">End: #=kendo.toString(end, "ddd M/dd HH:mm")#</div>' +
                                    '</div>' +
                               '</div>');
-    var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div role="tooltip" style="z-index: 100002;" class="k-widget k-tooltip k-popup k-group k-reset" data-role="popup" aria-hidden="true">' +
-                                   '<div class="k-tooltip-content">#=text#%</div>' +
-                                   '<div class="k-callout k-callout-s" style="left:13px;"></div>' +
+    var PERCENT_RESIZE_TOOLTIP_TEMPLATE = kendo.template('<div style="z-index: 100002;" class="#=styles.tooltipWrapper#" >' +
+                                   '<div class="#=styles.tooltipContent#">#=text#%</div>' +
+                                   '<div class="#=styles.tooltipCallout#" style="left:13px;"></div>' +
                               '</div>');
 
     var defaultViews = {
@@ -74,15 +75,65 @@ var __meta__ = {
         return workDays;
     }
 
-    var GanttView = Widget.extend({
+    var viewStyles = {
+        alt: "k-alt",
+        nonWorking: "k-nonwork-hour",
+        header: "k-header",
+        gridHeader: "k-grid-header",
+        gridHeaderWrap: "k-grid-header-wrap",
+        gridContent: "k-grid-content",
+        rowsTable: "k-gantt-rows",
+        columnsTable: "k-gantt-columns",
+        tasksTable: "k-gantt-tasks",
+        task: "k-task",
+        taskSingle: "k-task-single",
+        taskMilestone: "k-task-milestone",
+        taskSummary: "k-task-summary",
+        taskWrap: "k-task-wrap",
+        taskMilestoneWrap: "k-milestone-wrap",
+        taskDot: "k-task-dot",
+        taskDotStart: "k-task-start",
+        taskDotEnd: "k-task-end",
+        taskDragHandle: "k-task-draghandle",
+        taskContent: "k-task-content",
+        taskTemplate: "k-task-template",
+        taskActions: "k-task-actions",
+        taskDelete: "k-task-delete",
+        taskComplete: "k-task-complete",
+        link: "k-link",
+        icon: "k-icon",
+        iconDelete: "k-si-close",
+        taskResizeHandle: "k-resize-handle",
+        taskResizeHandleWest: "k-resize-w",
+        taskResizeHandleEast: "k-resize-e",
+        taskSummaryProgress: "k-task-summary-progress",
+        taskSummaryComplete: "k-task-summary-complete",
+        line: "k-line",
+        lineHorizontal: "k-line-h",
+        lineVertical: "k-line-v",
+        arrowWest: "k-arrow-w",
+        arrowEast: "k-arrow-e",
+        dragHint: "k-drag-hint",
+        dependencyHint: "k-dependency-hint",
+        tooltipWrapper: "k-widget k-tooltip k-popup k-group k-reset",
+        tooltipContent: "k-tooltip-content",
+        tooltipCallout: "k-callout k-callout-s",
+        callout: "k-callout",
+        start: "k-start",
+        end: "k-end",
+        marquee: "k-marquee k-gantt-marquee",
+        marqueeColor: "k-marquee-color"
+    };
+
+    var GanttView = kendo.ui.GanttView = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
             this.title = this.options.title || this.options.name;
 
-            this.header = this.element.find(".k-grid-header");
+            this.header = this.element.find(DOT + GanttView.styles.gridHeader);
 
-            this.content = this.element.find(".k-grid-content");
+            this.content = this.element.find(DOT + GanttView.styles.gridContent);
 
             this.contentWidth = this.content.width();
 
@@ -181,23 +232,28 @@ var __meta__ = {
 
         render: function(tasks) {
             var taskCount = tasks.length;
+            var styles = GanttView.styles;
 
+            var contentTable;
             var rowsTable = this._rowsTable(taskCount);
             var columnsTable = this._columnsTable(taskCount);
             var tasksTable = this._tasksTable(tasks);
 
             this._taskTree.render([rowsTable, columnsTable, tasksTable]);
 
-            this._contentHeight = this.content.find(".k-gantt-rows").height();
-            this._rowHeight = this.content.find(".k-gantt-rows tr").height();
+            contentTable = this.content.find(DOT + styles.rowsTable);
 
-            this.content.find(".k-gantt-columns").height(this._contentHeight);
+            this._contentHeight = contentTable.height();
+            this._rowHeight = contentTable.find("tr").height();
+
+            this.content.find(DOT + styles.columnsTable).height(this._contentHeight);
         },
 
         _rowsTable: function(rowCount) {
             var rows = [];
             var row;
-            var attributes = [null, { className: "k-alt" }];
+            var styles = GanttView.styles;
+            var attributes = [null, { className: styles.alt }];
 
             for (var i = 0; i < rowCount; i++) {
                 row = kendoDomElement("tr", attributes[i % 2], [
@@ -209,12 +265,13 @@ var __meta__ = {
                 rows.push(row);
             }
 
-            return this._createTable(1, rows, { className: "k-gantt-rows" });
+            return this._createTable(1, rows, { className: styles.rowsTable });
         },
 
         _columnsTable: function(rowCount) {
             var cells = [];
             var row;
+            var styles = GanttView.styles;
             var slots = this._timeSlots();
             var slotsCount = slots.length;
             var slot;
@@ -236,7 +293,7 @@ var __meta__ = {
                 }
 
                 if (slot.isNonWorking) {
-                    attributes.className = "k-nonwork-hour";
+                    attributes.className = styles.nonWorking;
                 }
 
                 cells.push(kendoDomElement("td", attributes, [
@@ -246,7 +303,7 @@ var __meta__ = {
 
             row = kendoDomElement("tr", null, cells);
 
-            return this._createTable(totalSpan, [row], { className: "k-gantt-columns" });
+            return this._createTable(totalSpan, [row], { className: styles.columnsTable});
         },
 
         _tasksTable: function(tasks) {
@@ -292,7 +349,7 @@ var __meta__ = {
                 addCoordinates(i);
             }
 
-            return this._createTable(1, rows, { className: "k-gantt-tasks" });
+            return this._createTable(1, rows, { className: GanttView.styles.tasksTable });
         },
 
         _createTable: function(colspan, rows, styles) {
@@ -341,7 +398,8 @@ var __meta__ = {
 
         _calculateMilestoneWidth: function() {
             var milestoneWidth;
-            var milestone = $("<div class='k-task k-task-milestone' style='visibility: hidden; position: absolute'>");
+            var className = GanttView.styles.task + " " + GanttView.styles.taskMilestone;
+            var milestone = $("<div class='" + className + "' style='visibility: hidden; position: absolute'>");
 
             this.content.append(milestone);
 
@@ -358,13 +416,14 @@ var __meta__ = {
             var editable = this.options.editable;
             var progressHandleLeft;
             var taskLeft = position.left;
-            var wrapClassName = "k-task-wrap";
+            var styles = GanttView.styles;
+            var wrapClassName = styles.taskWrap;
 
             if (task.summary) {
                 taskElement = this._renderSummary(task, position);
             } else if (task.isMilestone()) {
                 taskElement = this._renderMilestone(task, position);
-                wrapClassName += " k-milestone-wrap";
+                wrapClassName += " " + styles.taskMilestoneWrap;
             } else {
                 taskElement = this._renderSingleTask(task, position);
             }
@@ -374,42 +433,43 @@ var __meta__ = {
             ]);
 
             if (editable) {
-                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-dot k-task-start" }));
-                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-dot k-task-end" }));
+                taskWrapper.children.push(kendoDomElement("div", { className: styles.taskDot + " " + styles.taskDotStart }));
+                taskWrapper.children.push(kendoDomElement("div", { className: styles.taskDot + " " + styles.taskDotEnd }));
             }
 
             if (!task.summary && !task.isMilestone() && editable) {
                 progressHandleLeft = Math.round(position.width * task.percentComplete);
 
-                taskWrapper.children.push(kendoDomElement("div", { className: "k-task-draghandle", style: { left: progressHandleLeft + "px" } }));
+                taskWrapper.children.push(kendoDomElement("div", { className: styles.taskDragHandle, style: { left: progressHandleLeft + "px" } }));
             }
 
             return taskWrapper;
         },
 
         _renderSingleTask: function(task, position) {
+            var styles = GanttView.styles;
             var progressWidth = Math.round(position.width * task.percentComplete);
 
-            var content = kendoDomElement("div", { className: "k-task-content" }, [
-                kendoDomElement("div", { className: "k-task-template" }, [
+            var content = kendoDomElement("div", { className: styles.taskContent }, [
+                kendoDomElement("div", { className: styles.taskTemplate }, [
                     kendoTextElement(task.title)
                 ])
             ]);
 
             if (this.options.editable) {
-                content.children.push(kendoDomElement("span", { className: "k-task-actions" }, [
-                    kendoDomElement("a", { className: "k-link k-task-delete", href: "#" }, [
-                        kendoDomElement("span", { className: "k-icon k-si-close" })
+                content.children.push(kendoDomElement("span", { className: styles.taskActions }, [
+                    kendoDomElement("a", { className: styles.link + " " + styles.taskDelete, href: "#" }, [
+                        kendoDomElement("span", { className: styles.icon + " " + styles.iconDelete })
                     ])
                 ]));
 
-                content.children.push(kendoDomElement("span", { className: "k-resize-handle k-resize-w" }));
+                content.children.push(kendoDomElement("span", { className: styles.taskResizeHandle + " " + styles.taskResizeHandleWest }));
 
-                content.children.push(kendoDomElement("span", { className: "k-resize-handle k-resize-e" }));
+                content.children.push(kendoDomElement("span", { className: styles.taskResizeHandle + " " + styles.taskResizeHandleEast }));
             }
 
-            var element = kendoDomElement("div", { className: "k-task k-task-single", "data-uid": task.uid, style: { width: Math.max((position.width - 2), 0) + "px" } }, [
-                kendoDomElement("div", { className: "k-task-complete", style: { width: progressWidth + "px" } }),
+            var element = kendoDomElement("div", { className: styles.task + " " + styles.taskSingle, "data-uid": task.uid, style: { width: Math.max((position.width - 2), 0) + "px" } }, [
+                kendoDomElement("div", { className: styles.taskComplete, style: { width: progressWidth + "px" } }),
                 content
             ]);
 
@@ -417,17 +477,19 @@ var __meta__ = {
         },
 
         _renderMilestone: function(task, position) {
-            var element = kendoDomElement("div", { className: "k-task k-task-milestone", "data-uid": task.uid });
+            var styles = GanttView.styles;
+            var element = kendoDomElement("div", { className: styles.task + " " + styles.taskMilestone, "data-uid": task.uid });
 
             return element;
         },
 
         _renderSummary: function(task, position) {
+            var styles = GanttView.styles;
             var progressWidth = Math.round(position.width * task.percentComplete);
 
-            var element = kendoDomElement("div", { className: "k-task k-task-summary", "data-uid": task.uid, style: { width: position.width + "px" } }, [
-                kendoDomElement("div", { className: "k-task-summary-progress", style: { width: progressWidth + "px" } }, [
-                    kendoDomElement("div", { className: "k-task-summary-complete", style: { width: position.width + "px" } })
+            var element = kendoDomElement("div", { className: styles.task + " " + styles.taskSummary, "data-uid": task.uid, style: { width: position.width + "px" } }, [
+                kendoDomElement("div", { className: styles.taskSummaryProgress, style: { width: progressWidth + "px" } }, [
+                    kendoDomElement("div", { className: styles.taskSummaryComplete, style: { width: position.width + "px" } })
                 ])
             ]);
 
@@ -590,12 +652,13 @@ var __meta__ = {
             var minLineLength = Math.floor(rowHeight / 2);
             var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
             var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
+            var styles = GanttView.styles;
 
             var addHorizontal = function() {
-                lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line(styles.line + " " + styles.lineHorizontal, { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line("k-line k-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line(styles.line + " " + styles.lineVertical, { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from[dir];
@@ -656,12 +719,13 @@ var __meta__ = {
             var arrowOverlap = 1;
             var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
             var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
+            var styles = GanttView.styles;
 
             var addHorizontal = function() {
-                lines.push(that._line("k-line k-line-h", { left: left + "px", top: top + "px", width: width + "px" }));
+                lines.push(that._line(styles.line + " " + styles.lineHorizontal, { left: left + "px", top: top + "px", width: width + "px" }));
             };
             var addVertical = function() {
-                lines.push(that._line("k-line k-line-v", { left: left + "px", top: top + "px", height: height + "px" }));
+                lines.push(that._line(styles.line + " " + styles.lineVertical, { left: left + "px", top: top + "px", height: height + "px" }));
             };
 
             left = from.end;
@@ -737,7 +801,7 @@ var __meta__ = {
         },
 
         _arrow: function(direction) {
-            return kendoDomElement("span", { className: direction ? "k-arrow-w" : "k-arrow-e" });
+            return kendoDomElement("span", { className: direction ? GanttView.styles.arrowWest : GanttView.styles.arrowEast });
         },
 
         _colgroup: function() {
@@ -757,7 +821,7 @@ var __meta__ = {
         _createDragHint: function(element) {
             this._dragHint = element
                 .clone()
-                .addClass("k-drag-hint")
+                .addClass(GanttView.styles.dragHint)
                 .css("cursor", "move");
 
             element
@@ -780,18 +844,19 @@ var __meta__ = {
         },
 
         _createResizeHint: function(task) {
+            var styles = GanttView.styles;
             var taskTop = this._taskCoordinates[task.id].rowIndex * this._rowHeight;
             var tooltipHeight;
             var tooltipTop;
 
-            this._resizeHint = $(RESIZE_HINT).css({
+            this._resizeHint = $(RESIZE_HINT({ styles: styles })).css({
                 "top": 0,
                 "height": this._contentHeight
             });
 
             this.content.append(this._resizeHint);
-
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ start: task.start, end: task.end }))
+            
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: styles, start: task.start, end: task.end }))
                 .css({
                     "top": 0,
                     "left": 0
@@ -837,7 +902,7 @@ var __meta__ = {
                 tooltipLeft = tablesWidth - tooltipWidth;
             }
 
-            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ start: start, end: end }))
+            this._resizeTooltip = $(RESIZE_TOOLTIP_TEMPLATE({ styles: GanttView.styles, start: start, end: end }))
                 .css({
                     "top": this._resizeTooltipTop,
                     "left": tooltipLeft,
@@ -858,11 +923,11 @@ var __meta__ = {
         _updatePercentCompleteTooltip: function(top, left, text) {
             this._removePercentCompleteTooltip();
 
-            var tooltip = this._percentCompleteResizeTooltip = $(PERCENT_RESIZE_TOOLTIP_TEMPLATE({ text: text }))
+            var tooltip = this._percentCompleteResizeTooltip = $(PERCENT_RESIZE_TOOLTIP_TEMPLATE({ styles: GanttView.styles, text: text }))
                 .appendTo(this.element);
 
             var tooltipMiddle = Math.round(tooltip.outerWidth() / 2);
-            var arrow = tooltip.find('.k-callout');
+            var arrow = tooltip.find(DOT + GanttView.styles.callout);
             var arrowHeight = Math.round(arrow.outerWidth() / 2);
 
             tooltip.css({
@@ -892,6 +957,8 @@ var __meta__ = {
         },
 
         _creteDependencyDragHint: function(from, to) {
+            var styles = GanttView.styles;
+
             var deltaX = to.x - from.x;
             var deltaY = to.y - from.y;
 
@@ -902,7 +969,7 @@ var __meta__ = {
                 angle += Math.PI;
             }
 
-            $("<div class='k-line k-line-h k-dependency-hint'></div>")
+            $("<div class='" + styles.lineHorizontal + " " + styles.dependencyHint + "'></div>")
                 .css({
                     "top": from.y,
                     "left": from.x,
@@ -918,7 +985,7 @@ var __meta__ = {
         },
 
         _creteVmlDependencyDragHint: function(from, to) {
-            var hint = $("<kvml:line class='k-dependency-hint' style='position:absolute; top: 0px;' strokecolor='black' strokeweight='2px' from='" +
+            var hint = $("<kvml:line class='" + GanttView.styles.dependencyHint + "' style='position:absolute; top: 0px;' strokecolor='black' strokeweight='2px' from='" +
                 from.x + "px," + from.y + "px' to='" + to.x + "px," + to.y + "px'" + "></kvml:line>")
                 .appendTo(this.content);
 
@@ -927,7 +994,7 @@ var __meta__ = {
         },
 
         _removeDependencyDragHint: function() {
-            this.content.find(".k-dependency-hint").remove();
+            this.content.find(DOT + GanttView.styles.dependencyHint).remove();
         },
 
         _timeSlots: function() {
@@ -940,6 +1007,7 @@ var __meta__ = {
             var headers;
             var column;
             var headerText;
+            var styles = GanttView.styles;
 
             for (var levelIndex = 0, levelCount = columnLevels.length; levelIndex < levelCount; levelIndex++) {
                 level = columnLevels[levelIndex];
@@ -949,7 +1017,7 @@ var __meta__ = {
                     column = level[columnIndex];
 
                     headerText = kendoTextElement(column.text);
-                    headers.push(kendoDomElement("th", { colspan: column.span, className: "k-header" + (column.isNonWorking ? " k-nonwork-hour" : "") }, [headerText]));
+                    headers.push(kendoDomElement("th", { colspan: column.span, className: styles.header + (column.isNonWorking ? (" " + styles.nonWorking) : "") }, [headerText]));
                 }
 
                 rows.push(kendoDomElement("tr", null, headers));
@@ -1126,6 +1194,8 @@ var __meta__ = {
         }
     });
 
+    extend(true, GanttView, { styles: viewStyles });
+
     kendo.ui.GanttDayView = GanttView.extend({
         name: "day",
 
@@ -1230,7 +1300,31 @@ var __meta__ = {
         }
     });
 
-    kendo.ui.GanttTimeline = Widget.extend({
+    var timelineStyles = {
+        wrapper: "k-timeline k-grid k-widget",
+        gridHeader: "k-grid-header",
+        gridHeaderWrap: "k-grid-header-wrap",
+        gridContent: "k-grid-content",
+        tasksWrapper: "k-gantt-tables",
+        dependenciesWrapper: "k-gantt-dependencies",
+        task: "k-task",
+        line: "k-line",
+        taskResizeHandle: "k-resize-handle",
+        taskResizeHandleWest: "k-resize-w",
+        taskDragHandle: "k-task-draghandle",
+        taskComplete: "k-task-complete",
+        taskDelete: "k-task-delete",
+        taskWrapActive: "k-task-wrap-active",
+        taskWrap: "k-task-wrap",
+        taskDot: "k-task-dot",
+        taskDotStart: "k-task-start",
+        taskDotEnd: "k-task-end",
+        hovered: "k-state-hover",
+        selected: "k-state-selected",
+        origin: "k-origin"
+    };
+
+    var GanttTimeline = kendo.ui.GanttTimeline = Widget.extend({
         init: function(element, options) {
 
             Widget.fn.init.call(this, element, options);
@@ -1302,22 +1396,25 @@ var __meta__ = {
             kendo.destroy(this.wrapper);
         },
 
-        _wrapper: function () {
+        _wrapper: function() {
+            var styles = GanttTimeline.styles;
+
             this.wrapper = this.element
-                .addClass("k-timeline k-grid k-widget")
-                .append("<div class='k-grid-header'><div class='k-grid-header-wrap'></div></div>")
-                .append("<div class='k-grid-content'><div class='k-gantt-tables'></div><div class='k-gantt-dependencies'></div></div>");
+                .addClass(styles.wrapper)
+                .append("<div class='" + styles.gridHeader + "'><div class='" + styles.gridHeaderWrap + "'></div></div>")
+                .append("<div class='" + styles.gridContent + "'><div class='" + styles.tasksWrapper + "'></div><div class='" + styles.dependenciesWrapper + "'></div></div>");
         },
 
         _domTrees: function() {
+            var styles = GanttTimeline.styles;
             var tree = kendo.dom.Tree;
             var wrapper = this.wrapper;
 
-            this._headerTree = new tree(wrapper.find(".k-grid-header-wrap")[0]);
+            this._headerTree = new tree(wrapper.find(DOT + styles.gridHeaderWrap)[0]);
 
-            this._taskTree = new tree(wrapper.find(".k-gantt-tables")[0]);
+            this._taskTree = new tree(wrapper.find(DOT + styles.tasksWrapper)[0]);
 
-            this._dependencyTree = new tree(wrapper.find(".k-gantt-dependencies")[0]);
+            this._dependencyTree = new tree(wrapper.find(DOT + styles.dependenciesWrapper)[0]);
         },
 
         _views: function() {
@@ -1487,7 +1584,7 @@ var __meta__ = {
 
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-task",
+                filter: DOT + GanttTimeline.styles.task,
                 holdToDrag: kendo.support.mobileOS
             });
 
@@ -1544,6 +1641,7 @@ var __meta__ = {
             var resizeStart;
             var snap = this.options.snap;
             var dragInProgress;
+            var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 that.view()._removeResizeHint();
@@ -1558,15 +1656,15 @@ var __meta__ = {
 
             this._resizeDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-resize-handle",
+                filter: DOT + styles.taskResizeHandle,
                 holdToDrag: false
             });
 
             this._resizeDraggable
                 .bind("dragstart", function(e) {
-                    resizeStart = e.currentTarget.hasClass("k-resize-w");
+                    resizeStart = e.currentTarget.hasClass(styles.taskResizeHandleWest);
 
-                    element = e.currentTarget.closest(".k-task");
+                    element = e.currentTarget.closest(DOT + styles.task);
 
                     task = that._taskByUid(element.attr("data-uid"));
 
@@ -1632,6 +1730,7 @@ var __meta__ = {
             var tooltipTop;
             var tooltipLeft;
             var dragInProgress;
+            var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 that.view()._removePercentCompleteTooltip();
@@ -1642,10 +1741,10 @@ var __meta__ = {
 
             var updateElement = function(width) {
                 taskElement
-                    .find(".k-task-complete")
+                    .find(DOT + styles.taskComplete)
                     .width(width)
                     .end()
-                    .siblings(".k-task-draghandle")
+                    .siblings(DOT + styles.taskDragHandle)
                     .css("left", width);
             };
 
@@ -1655,13 +1754,13 @@ var __meta__ = {
 
             this._percentDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-task-draghandle",
+                filter: DOT + styles.taskDragHandle,
                 holdToDrag: false
             });
 
             this._percentDraggable
                 .bind("dragstart", function(e) {
-                    taskElement = e.currentTarget.siblings(".k-task");
+                    taskElement = e.currentTarget.siblings(DOT + styles.task);
 
                     task = that._taskByUid(taskElement.attr("data-uid"));
 
@@ -1670,7 +1769,7 @@ var __meta__ = {
                     taskElementOffset = taskElement.offset();
                     timelineOffset = this.element.offset();
 
-                    originalPercentWidth = taskElement.find(".k-task-complete").width();
+                    originalPercentWidth = taskElement.find(DOT + styles.taskComplete).width();
                     maxPercentWidth = taskElement.outerWidth();
 
                     dragInProgress = true;
@@ -1702,7 +1801,7 @@ var __meta__ = {
                     cleanUp();
                 });
         },
-        
+
         _createDependencyDraggable: function() {
             var that = this;
             var originalHandle;
@@ -1714,13 +1813,14 @@ var __meta__ = {
             var content;
             var contentOffset;
             var useVML = kendo.support.browser.msie && kendo.support.browser.version < 9;
+            var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 originalHandle
                     .css("display", "")
-                    .removeClass("k-state-hover");
+                    .removeClass(styles.hovered);
 
-                originalHandle.parent().removeClass("k-origin");
+                originalHandle.parent().removeClass(styles.origin);
                 originalHandle = null;
 
                 toggleHandles(false);
@@ -1734,9 +1834,9 @@ var __meta__ = {
             };
 
             var toggleHandles = function(value) {
-                if (!hoveredTask.hasClass("k-origin")) {
-                    hoveredTask.find(".k-task-dot").css("display", value ? "block" : "");
-                    hoveredHandle.toggleClass("k-state-hover", value);
+                if (!hoveredTask.hasClass(styles.origin)) {
+                    hoveredTask.find(DOT + styles.taskDot).css("display", value ? "block" : "");
+                    hoveredHandle.toggleClass(styles.hovered, value);
                 }
             };
 
@@ -1750,7 +1850,7 @@ var __meta__ = {
 
             this._dependencyDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: ".k-task-dot",
+                filter: DOT + styles.taskDot,
                 holdToDrag: false
             });
 
@@ -1758,9 +1858,9 @@ var __meta__ = {
                 .bind("dragstart", function(e) {
                     originalHandle = e.currentTarget
                         .css("display", "block")
-                        .addClass("k-state-hover");
+                        .addClass(styles.hovered);
 
-                    originalHandle.parent().addClass("k-origin");
+                    originalHandle.parent().addClass(styles.origin);
 
                     var elementOffset = originalHandle.offset();
 
@@ -1785,20 +1885,20 @@ var __meta__ = {
 
                     toggleHandles(false);
 
-                    hoveredHandle = (target.hasClass("k-task-dot")) ? target : $();
-                    hoveredTask = target.closest(".k-task-wrap");
+                    hoveredHandle = (target.hasClass(styles.taskDot)) ? target : $();
+                    hoveredTask = target.closest(DOT + styles.taskWrap);
 
                     toggleHandles(true);
                 }, 15))
                 .bind("dragend", function(e) {
                     if (hoveredHandle.length) {
-                        var fromStart = originalHandle.hasClass("k-task-start");
-                        var toStart = hoveredHandle.hasClass("k-task-start");
+                        var fromStart = originalHandle.hasClass(styles.taskDotStart);
+                        var toStart = hoveredHandle.hasClass(styles.taskDotStart);
 
                         var type = fromStart ? (toStart ? 3 : 2) : (toStart ? 1 : 0);
 
-                        var predecessor = that._taskByUid(originalHandle.siblings(".k-task").attr("data-uid"));
-                        var successor = that._taskByUid(hoveredHandle.siblings(".k-task").attr("data-uid"));
+                        var predecessor = that._taskByUid(originalHandle.siblings(DOT + styles.task).attr("data-uid"));
+                        var successor = that._taskByUid(hoveredHandle.siblings(DOT + styles.task).attr("data-uid"));
 
                         if (predecessor !== successor) {
                             that.trigger("dependencyDragEnd", { type: type, predecessor: predecessor, successor: successor });
@@ -1814,17 +1914,18 @@ var __meta__ = {
 
         _selectable: function() {
             var that = this;
+            var styles = GanttTimeline.styles;
 
             if (this.options.selectable) {
                 this.wrapper
-                    .on(CLICK + NS, ".k-task", function(e) {
+                    .on(CLICK + NS, DOT + styles.task, function(e) {
                         e.stopPropagation();
                         that.trigger("select", { uid: $(this).attr("data-uid") });
                     })
-                    .on(CLICK + NS, ".k-gantt-tables", function(e) {
+                    .on(CLICK + NS, DOT + styles.tasksWrapper, function(e) {
                         that.trigger("clear");
                     })
-                    .on(CLICK + NS, ".k-line", function(e) {
+                    .on(CLICK + NS, DOT + styles.line, function(e) {
                         e.stopPropagation();
 
                         that.selectDependency(this);
@@ -1834,60 +1935,65 @@ var __meta__ = {
 
         select: function(value) {
             var element = this.wrapper.find(value);
+            var styles = GanttTimeline.styles;
 
             if (element.length) {
                 this.clearSelection();
 
-                element.addClass("k-state-selected");
+                element.addClass(styles.selected);
 
                 if (kendo.support.mobileOS) {
-                    element.parent().addClass("k-task-wrap-active");
+                    element.parent().addClass(styles.taskWrapActive);
                 }
 
                 return;
             }
 
-            return this.wrapper.find(".k-task.k-state-selected");
+            return this.wrapper.find(DOT + styles.task + DOT + styles.selected);
         },
 
         selectDependency: function(value) {
             var element = this.wrapper.find(value);
             var uid;
+            var styles = GanttTimeline.styles;
 
             if (element.length) {
                 this.trigger("clear");
 
                 uid = $(element).attr("data-uid");
 
-                this.wrapper.find(".k-line[data-uid='" + uid + "']").addClass("k-state-selected");
+                this.wrapper.find(DOT + styles.line + "[data-uid='" + uid + "']").addClass(styles.selected);
 
                 return;
             }
 
-            return this.wrapper.find(".k-line.k-state-selected");
+            return this.wrapper.find(DOT + styles.line + DOT + styles.selected);
         },
 
         clearSelection: function() {
+            var styles = GanttTimeline.styles;
+
             this.wrapper
-                .find(".k-state-selected")
-                .removeClass("k-state-selected");
+                .find(DOT + styles.selected)
+                .removeClass(styles.selected);
 
             if (kendo.support.mobileOS) {
                 this.wrapper
-                    .find(".k-task-wrap-active")
-                    .removeClass("k-task-wrap-active");
+                    .find(DOT + styles.taskWrapActive)
+                    .removeClass(styles.taskWrapActive);
             }
         },
 
         _attachEvents: function() {
             var that = this;
+            var styles = GanttTimeline.styles;
 
             if (this.options.editable === true) {
                 this._tabindex();
 
                 this.wrapper
-                    .on(CLICK + NS, ".k-task-delete", function(e) {
-                        that.trigger("removeTask", { uid: $(this).closest(".k-task").attr("data-uid") });
+                    .on(CLICK + NS, DOT + styles.taskDelete, function(e) {
+                        that.trigger("removeTask", { uid: $(this).closest(DOT + styles.task).attr("data-uid") });
                     })
                     .on(KEYDOWN + NS, function(e) {
                         var selectedTask;
@@ -1912,6 +2018,8 @@ var __meta__ = {
             }
         }
     });
+
+    extend(true, GanttTimeline, { styles: timelineStyles });
 
 })(window.kendo.jQuery);
 
