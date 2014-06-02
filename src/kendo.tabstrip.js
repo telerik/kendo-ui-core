@@ -658,7 +658,7 @@ var __meta__ = {
                         });
 
                 contents = map( tab, function (value, idx) {
-                            if (value.content || value.contentUrl) {
+                            if (typeof value.content == "string" || value.contentUrl) {
                                 return $(TabStrip.renderContent({
                                     item: extend(value, { index: idx })
                                 }));
