@@ -1753,12 +1753,15 @@ var __meta__ = {
 
             if (!row || row.hasChild) {
                 row = element("tr", null);
+                row.rowspan = 1;
                 rows.push(row);
             } else {
                 row.hasChild = true;
             }
 
             map[tuplePath + member.name] = row;
+
+            var childRow;
 
             var allCell;
             var cell = element("td", null, [text(member.caption || member.name)]);
@@ -1769,24 +1772,40 @@ var __meta__ = {
                 row.hasChild = false; //add to the all row instead of the other one
 
                 for (var idx = 0; idx < children.length; idx++) {
-                    this._buildRows(children[idx], memberIdx);
+                    childRow = this._buildRows(children[idx], memberIdx);
+
+                    if (row !== childRow) {
+                        row.rowspan += childRow.rowspan;
+                    }
+                }
+
+                if (row.rowspan > 1) {
+                    cell.attr.rowspan = row.rowspan;
                 }
 
                 allCell = element("td", null, [text(member.caption || member.name)]);
                 allRow = element("tr", null, [allCell]);
 
+                allRow.rowspan = 1;
+
                 map[tuplePath + member.name] = allRow;
 
                 rows.push(allRow);
 
+                row.rowspan += 1;
+
                 if (members[memberIdx + 1]) {
                     row.hasChild = false; //add to the all row instead of the other one
-                    this._buildRows(tuple, memberIdx + 1);
+                    childRow = this._buildRows(tuple, memberIdx + 1);
+
+                    allCell.attr.rowspan = childRow.rowspan;
                 }
 
             } else if (members[memberIdx + 1]) {
                 row.hasChild = false;
                 this._buildRows(tuple, memberIdx + 1);
+
+                (allCell || cell).attr.rowspan = row.rowspan;
             }
 
             return row;

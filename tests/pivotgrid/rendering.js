@@ -1399,4 +1399,235 @@
 
         equal(td_level3.eq(0).text(), "dim 2");
     });
+
+    test("PivotGrid renders rowspan for header of 1 dimension with one child", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        ok(!td_level0.eq(0).attr("rowspan"));
+    });
+
+    test("PivotGrid renders rowspan for header of 1 dimension with two children", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 2);
+    });
+
+    test("PivotGrid renders rowspan for header of 1 dimension with two level children", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 2);
+    });
+
+    test("PivotGrid renders rowspan for header of 1 dimension with two level children (two children on first level)", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0_1", levelNum: "2", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 3);
+    });
+
+    test("PivotGrid renders rowspan for header of 1 dimension with three level children (with two children on each level)", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0_4", parentName: "dim 0_3", levelNum: "3", children: [] }] },
+            { members: [ { name: "dim 0_5", parentName: "dim 0_3", levelNum: "3", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 5);
+        equal(td_level0.eq(1).attr("rowspan"), 3);
+        equal(td_level0.eq(2).attr("rowspan"), 2);
+    });
+
+    test("PivotGrid renders rowspan for header of 2 dimension with a child in second dimension", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 2);
+    });
+
+    test("PivotGrid renders rowspan for header of 2 dimension with two children in second dimension", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 3);
+    });
+
+    test("PivotGrid renders rowspan for header of 2 dimension with three level children and with two children in each level", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_2", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+        var td_level2 = rows.eq(2).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 6);
+        equal(td_level0.eq(1).attr("rowspan"), 5);
+
+        equal(td_level2.eq(0).attr("rowspan"), 2);
+    });
+
+    test("PivotGrid renders rowspan for header of 2 dimension with three level children and with two children in each level", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_2", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] } ] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+        var td_level2 = rows.eq(2).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 2);
+        equal(td_level2.eq(0).attr("rowspan"), 6);
+        equal(td_level2.eq(1).attr("rowspan"), 5);
+    });
+
+    test("PivotGrid renders rowspan for header of 2 dimension - fully expanded", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_2", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level0 = rows.eq(0).find("td");
+        var td_level3 = rows.eq(3).find("td");
+        var td_level6 = rows.eq(6).find("td");
+        var td_level8 = rows.eq(8).find("td");
+
+        equal(td_level0.eq(0).attr("rowspan"), 6);
+        equal(td_level0.eq(1).attr("rowspan"), 3);
+        equal(td_level0.eq(2).attr("rowspan"), 2);
+
+        equal(td_level3.eq(0).attr("rowspan"), 3);
+        equal(td_level3.eq(1).attr("rowspan"), 2);
+
+        equal(td_level6.eq(0).attr("rowspan"), 6);
+        equal(td_level6.eq(1).attr("rowspan"), 5);
+
+        equal(td_level8.eq(0).attr("rowspan"), 2);
+    });
 })();
