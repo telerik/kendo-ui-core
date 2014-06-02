@@ -1570,9 +1570,12 @@ var __meta__ = {
     };
 
     fx.fillScale = function(inner, outer) {
-        return Math.max(inner.width / outer.width, inner.height / outer.height);
+        return Math.min(inner.width / outer.width, inner.height / outer.height);
     };
 
+    fx.fitScale = function(inner, outer) {
+        return Math.max(inner.width / outer.width, inner.height / outer.height);
+    };
 })(window.kendo.jQuery);
 
 return window.kendo;
