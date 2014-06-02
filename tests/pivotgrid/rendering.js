@@ -1630,4 +1630,38 @@
 
         equal(td_level8.eq(0).attr("rowspan"), 2);
     });
+
+    test("PivotGrid renders colspan for header of 2 dimension - fully expanded", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_2", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_level6 = rows.eq(6).find("td");
+        var td_level7 = rows.eq(7).find("td");
+        var td_level10 = rows.eq(10).find("td");
+        var td_level11 = rows.eq(11).find("td");
+
+        equal(td_level6.eq(0).attr("colspan"), 2);
+        equal(td_level7.eq(0).attr("colspan"), 2);
+        equal(td_level10.eq(0).attr("colspan"), 2);
+        equal(td_level11.eq(0).attr("colspan"), 3);
+    });
 })();

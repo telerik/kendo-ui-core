@@ -1759,20 +1759,34 @@ var __meta__ = {
                 row.hasChild = true;
             }
 
+            var colspanName = this.rootTuple.members[memberIdx].name + "_colspan";
+
+            if (!row[colspanName]) {
+                row[colspanName] = 0;
+            }
+
             map[tuplePath + member.name] = row;
 
             var childRow;
 
             var allCell;
+            var colspan;
+
             var cell = element("td", null, [text(member.caption || member.name)]);
 
             row.children.push(cell);
 
+            colspan = row[colspanName];
+
+            row[colspanName] += 1;
+
             if (children[0]) {
-                row.hasChild = false; //add to the all row instead of the other one
+                row.hasChild = false;
 
                 for (var idx = 0; idx < children.length; idx++) {
                     childRow = this._buildRows(children[idx], memberIdx);
+
+                    //row[colspanName] = childRow[colspanName];
 
                     if (row !== childRow) {
                         row.rowspan += childRow.rowspan;
@@ -1784,18 +1798,18 @@ var __meta__ = {
                 }
 
                 allCell = element("td", null, [text(member.caption || member.name)]);
+
+                allCell.attr.colspan = row[colspanName] - colspan;
+
                 allRow = element("tr", null, [allCell]);
-
                 allRow.rowspan = 1;
-
-                map[tuplePath + member.name] = allRow;
-
-                rows.push(allRow);
-
                 row.rowspan += 1;
 
+                rows.push(allRow);
+                map[tuplePath + member.name] = allRow;
+
                 if (members[memberIdx + 1]) {
-                    row.hasChild = false; //add to the all row instead of the other one
+                    row.hasChild = false;
                     childRow = this._buildRows(tuple, memberIdx + 1);
 
                     allCell.attr.rowspan = childRow.rowspan;
@@ -1810,119 +1824,6 @@ var __meta__ = {
 
             return row;
         },
-
-        /*_buildRows: function(tuple, memberIdx, parentMember) {
-            var rows = this.rows;
-            var map = this.map;
-
-            var members = tuple.members;
-            var member = members[memberIdx];
-            var children = member.children;
-
-            var childMember = !parentMember && tuple !== this.rootTuple;
-            //var rootLevel = this._memberIdx(this.rootTuple, this.rootIndex, memberIdx);
-
-            if (!parentMember && !childMember) {
-                this.rootIndex = memberIdx;
-            }
-
-            var name;
-            var row;
-
-            if (childMember) {
-                name = this._tuplePath(tuple, this.rootIndex, memberIdx - 1).join("");
-            } else {
-                name = member.parentName || member.name;
-            }
-
-            row = map[name + "all"] || map[name];
-
-            if (!childMember && (!row || row.hasChild)) {
-                if (row) {
-                    row.rowspan += 1; //this is not correct, but tests work! Investigate further!
-                }
-
-                row = element("tr", null);
-
-                row.rowspan = 1;
-
-                rows.push(row);
-            } else {
-                row.hasChild = true;
-            }
-
-            row.colspan = 1;
-            row.rootName = this.rootTuple.members[memberIdx].name;
-
-            name = childMember ? this._tuplePath(tuple, this.rootIndex, memberIdx).join("") : member.name;
-
-            map[name] = row;
-
-            var cell = element("td", null, [text(member.caption || member.name)]);
-
-            row.children.push(cell);
-
-            var childRow;
-            var allCell;
-
-            if (member.children[0]) {
-                allCell = element("td", null, [text(member.caption || member.name)]);
-
-                if (row.hasChild) {
-                    row.hasChild = false;
-                }
-
-                var rowspan = 0;
-
-                for (var idx = 0; idx < children.length; idx++) {
-                    childRow = this._buildRows(children[idx], 0, member);
-
-                    rowspan += childRow.rowspan;
-
-                    if (childRow === row) {
-                        row.colspan += 1;
-                    }
-                }
-
-                cell.attr.rowspan = rowspan;
-                allCell.attr.colspan = row.colspan;
-
-                var allRow = element("tr", null, [allCell]);
-                this.rows.push(allRow);
-
-                //if (this.rootTuple !== tuple) {
-                    map[name + "all"] = allRow;
-                //}
-
-                if (!parentMember && !childMember) {
-                    //colspan = this._rowLength(row);
-                    //allCell.attr.colspan = colspan;
-                    //this._maxColSpan = Math.max(this._maxColSpan, colspan);
-                }
-
-                row.rowspan += 1;
-
-                if (members[memberIdx + 1]) {
-                    childRow = this._buildRows(tuple, memberIdx + 1);
-
-                    rowspan = childRow.rowspan;
-
-                    if (rowspan > 1) {
-                        row.rowspan = rowspan;
-                    }
-                }
-            } else if (members[memberIdx + 1]) {
-                childRow = this._buildRows(tuple, memberIdx + 1);
-
-                rowspan = childRow.rowspan;
-
-                if (rowspan > 1) {
-                    row.rowspan += rowspan;
-                }
-            }
-
-            return row;
-        },*/
 
         _state: function(rootTuple) {
             this.rows = [];
