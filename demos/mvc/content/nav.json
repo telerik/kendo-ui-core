@@ -2803,6 +2803,45 @@
     "category": "Scheduling"
   },
   {
+    "text": "Gantt Chart",
+    "name": "gantt",
+    "api": "web/gantt",
+    "new": true,
+    "pro": "true",
+    "documentation": {
+       "kendo-ui": "getting-started/web/gantt/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/gantt/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/gantt/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/gantt/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/gantt",
+       "aspnet-mvc": "aspnet-mvc/gantt",
+       "jsp-ui": "jsp/gantt",
+       "php-ui": "php/gantt"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/gantt",
+       "aspnet-mvc": "aspnet-mvc/gantt",
+       "jsp-ui": "jsp/gantt",
+       "php-ui": "php/gantt"
+    },
+    "spriteCssClass": "ganttIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "gantt/index",
+        "title": {
+            "kendo-ui": "Example of Kendo UI jQuery-based Gantt chart"
+        },
+        "meta": {
+            "kendo-ui": "Explore the example of HTML5 gantt chart widget, included in Kendo UI Web, to find how easy it is to add a gantt chart to your website or web app."
+        }
+      }
+    ],
+    "category": "Scheduling"
+  },
+  {
     "text": "Slider",
     "disableInMobile": true,
     "name": "slider",

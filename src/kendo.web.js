@@ -4,6 +4,7 @@
         "./kendo.router",
         "./kendo.view",
         "./kendo.fx",
+        "./kendo.dom",
         "./kendo.data.odata",
         "./kendo.data.xml",
         "./kendo.data",
@@ -57,7 +58,10 @@
         "./kendo.scheduler.agendaview",
         "./kendo.scheduler.monthview",
         "./kendo.scheduler.recurrence",
-        "./kendo.scheduler"
+        "./kendo.scheduler",
+        "./kendo.gantt.list",
+        "./kendo.gantt.timeline",
+        "./kendo.gantt"
     ], f);
 })(function(){
     "bundle all";
