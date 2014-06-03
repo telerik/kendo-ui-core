@@ -40,6 +40,128 @@
         dataSource.discover();
     });
 
+    test("discover returns a promise", 1, function() {
+        var dataSource = new PivotDataSource({ });
+
+        equal(typeof dataSource.discover().done, "function");
+    });
+
+    test("discover promise is resolved with default transport", 1, function() {
+        var dataSource = new PivotDataSource({ });
+
+        var promise = dataSource.discover();
+
+        equal(promise.state(), "resolved");
+    });
+
+    test("discover promise is resolved with custom transport", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.success({});
+                }
+            }
+        });
+
+        var promise = dataSource.discover();
+
+        equal(promise.state(), "resolved");
+    });
+
+    test("discover response is passed on success", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.success({ foo: "bar" });
+                }
+            }
+        });
+
+        var promise = dataSource.discover();
+
+        promise.done(function(data) {
+            equal(data.foo, "bar");
+        });
+    });
+
+    test("discover calls the converter passing the response", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.success({ foo: "bar" });
+                }
+            }
+        });
+
+        dataSource.discover({}, function(data) {
+            equal(data.foo, "bar");
+        });
+    });
+
+    test("discover converted response is passed to the promise success", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.success({ foo: "bar" });
+                }
+            }
+        });
+
+        var promise = dataSource.discover({}, function(data) {
+            return { baz: "moo" };
+        });
+
+        promise.done(function(data) {
+            equal(data.baz, "moo");
+        });
+    });
+
+    test("discover error event is called", 2, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.error({});
+                }
+            },
+            error: function() {
+                ok(true);
+            }
+        });
+
+       var promise = dataSource.discover();
+
+        equal(promise.state(), "rejected");
+    });
+
+    test("schemaCubes calls the transport discover", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    equal(options.data.command, "schemaCubes");
+                }
+            }
+        });
+
+        dataSource.schemaCubes();
+    });
+
+    test("schemaCubes calls reader cubes methed", 1, function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                cubes: function() {
+                    ok(true);
+                }
+            }
+        });
+
+        dataSource.schemaCubes();
+    });
+
+    test("schemaCubes returns a promise", 1, function() {
+        var dataSource = new PivotDataSource({ });
+
+        equal(typeof dataSource.schemaCubes().done, "function");
+    });
 
     test("columns descriptors are normalized during initialization", function() {
         var dataSource = new PivotDataSource({

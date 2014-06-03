@@ -162,8 +162,6 @@ var __meta__ = {
             if (!this.transport.discover) {
                 if ($.isFunction(options.discover)) {
                     this.discover = options.discover;
-                } else {
-                    this.discover = $.noop;
                 }
             }
         },
@@ -180,7 +178,10 @@ var __meta__ = {
             return this.transport.destroy(options);
         },
         discover: function(options) {
-            return this.transport.discover(options);
+            if (this.transport.discover) {
+                return this.transport.discover(options);
+            }
+            options.success({});
         },
     });
 
@@ -188,7 +189,8 @@ var __meta__ = {
         init: function(options) {
             DataSource.fn.init.call(this, extend(true, {}, {
                 schema: {
-                    axes: identity
+                    axes: identity,
+                    cubes: identity
                 }
             }, options));
 
@@ -514,14 +516,17 @@ var __meta__ = {
             return result;
         },
 
-        discover: function(options) {
+        discover: function(options, converter) {
             var that = this,
                 transport = that.transport;
 
             return $.Deferred(function(deferred) {
                 transport.discover(extend({
                     success: function(response) {
-                        deferred.resolve({ });
+                        if (converter) {
+                            response = converter(response);
+                        }
+                        deferred.resolve(response);
                     },
                     error: function(response, status, error) {
                         deferred.reject(response);
@@ -529,6 +534,16 @@ var __meta__ = {
                     }
                 }, options));
             }).promise();
+        },
+
+        schemaCubes: function() {
+            var that = this;
+
+            return that.discover({
+                data: { command: "schemaCubes" }
+            }, function(response) {
+                that.reader.cubes(that.reader.parse(response));
+            });
         },
 
         _params: function(data) {
@@ -1066,6 +1081,10 @@ var __meta__ = {
         return command;
     }
 
+    var xmlaDiscoverCommands = {
+        schemaCubes: "MDSCHEMA_CUBES"
+    };
+
     var convertersMap = {
         read: function(options, type) {
             var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>';
@@ -1116,6 +1135,16 @@ var __meta__ = {
         },
         discover: function(options, type) {
             return options;
+           // var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"> <Header/> <Body> <Discover xmlns="urn:schemas-microsoft-com:xml-analysis">';
+           // command += "<RequestType>" + xmlaDiscoverCommands[options.command] + "</RequestType>";
+
+           // command += "<Restrictions><RestrictionList/></Restrictions>";
+
+           // command += "<Properties>";
+           // command += "<PropertyList><Catalog>" + options.connection.catalog + "</Catalog></PropertyList>";
+           // command += "</Properties>";
+           // command += '</Discover></Body></Envelope>';
+           // return command;
         }
     };
 
@@ -1144,6 +1173,7 @@ var __meta__ = {
                 return convertersMap[type](options,type);
             }
         },
+
         discover: function(options) {
             return $.ajax(this.setup(options, "discover"));
         }
@@ -1244,7 +1274,12 @@ var __meta__ = {
             }
 
             return result;
-        }
+        }/*,
+        cubes: function(root) {
+            root = kendo.getter("DiscoverResponse.return.root", true)(root);
+            var rows = kendo.getter("row", true)(root);
+            return rows;
+        }*/
     });
 
     extend(true, kendo.data, {
