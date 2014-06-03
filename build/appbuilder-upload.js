@@ -6,8 +6,11 @@ var subProcess = require('child_process'),
 
 var everliveConfiguration = {
     url: 'http://api.everlive.com/v1',
-    apiKey: 'xtHQnSO9us8WwznQ',
-    masterKey: '1o71N1LipdrX9aqGpxeknUpjaXZbq5C1',
+    url: 'http://api.everlive.com/v1',
+    // apiKey: 'xtHQnSO9us8WwznQ',
+    // masterKey: '1o71N1LipdrX9aqGpxeknUpjaXZbq5C1',
+    apiKey: 'T1zJXvnrJFQYX22O',
+    masterKey: 'I5ZgLrd5bgJyzrJHNggkPm4I8hykDZQ3',
 
     buildFilesUploadUrl: function () {
         return this._createApplicationUrl() + '/' + 'Files';
