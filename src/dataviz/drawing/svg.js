@@ -559,17 +559,14 @@
         },
 
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if (e.field === "font") {
                 this.attr("style", util.renderStyle(this.mapStyle()));
                 this.geometryChange();
+            } else if (e.field === "content") {
+                this.content(this.srcElement.content());
             }
 
             PathNode.fn.optionsChange.call(this, e);
-        },
-
-        contentChange: function() {
-            this.content(this.srcElement.content());
-            this.invalidate();
         },
 
         mapStyle: function() {
@@ -600,9 +597,12 @@
             this.invalidate();
         },
 
-        contentChange: function() {
-            this.allAttr(this.mapSource());
-            this.invalidate();
+        optionsChange: function(e) {
+            if (e.field === "src") {
+                this.allAttr(this.mapSource());
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
         },
 
         mapPosition: function() {

@@ -677,17 +677,14 @@
 
     var TextPathNode = Node.extend({
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if (e.field === "font") {
                 this.allCss(this.mapStyle());
                 this.geometryChange();
+            } if (e.field === "content") {
+                this.attr("string", this.srcElement.content());
             }
 
-            this.invalidate();
-        },
-
-        contentChange: function() {
-            this.attr("string", this.srcElement.content());
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         mapStyle: function() {
@@ -718,16 +715,12 @@
         },
 
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if(e.field === "font" || e.field === "content") {
                 this.path.optionsChange(e);
                 this.pathData.geometryChange(e);
             }
 
             PathNode.fn.optionsChange.call(this, e);
-        },
-
-        contentChange: function() {
-            this.path.contentChange();
         }
     });
 
@@ -742,19 +735,16 @@
             this.invalidate();
         },
 
-        contentChange: function() {
-            this.attr("src", this.srcElement.src());
-            this.invalidate();
-        },
-
         optionsChange: function(e) {
-            if (e.field === "visible") {
+            if (e.field === "src") {
+                this.attr("src", this.srcElement.src());
+            } else if (e.field === "visible") {
                 this.css("display", e.value ? "" : "none");
             } else if (e.field === "transform") {
                 this.refreshTransform(this.srcElement.currentTransform());
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         mapStyle: function() {

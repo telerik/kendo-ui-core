@@ -483,9 +483,9 @@
             text.origin.set("x", 5);
         });
 
-        test("setting content triggers contentChange", function() {
+        test("setting content triggers optionsChange", function() {
             text.observer = {
-                contentChange: function() { ok(true); }
+                optionsChange: function() { ok(true); }
             };
 
             text.content("Bar");
@@ -1136,9 +1136,9 @@
             equal(image.src(), "foo");
         });
 
-        test("src setter triggers contentChange", function() {
+        test("src setter triggers optionsChange", function() {
             image.observer = {
-                contentChange: function() {
+                optionsChange: function() {
                     ok(true);
                 }
             };

@@ -292,10 +292,6 @@
             ctx.fillText(text.content(), origin.x, origin.y + size.baseline);
 
             ctx.restore();
-        },
-
-        contentChange: function() {
-            this.invalidate();
         }
     });
 
@@ -323,9 +319,13 @@
             }
         },
 
-        contentChange: function() {
-            this._loaded = false;
-            this.img.src = this.srcElement.src();
+        optionsChange: function(e) {
+            if (e.field === "src") {
+                this._loaded = false;
+                this.img.src = this.srcElement.src();
+            } else {
+                PathNode.fn.optionsChange.call(this, e);
+            }
         },
 
         onLoad: function() {

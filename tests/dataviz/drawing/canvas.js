@@ -567,7 +567,7 @@
             textNode.renderTo(ctx);
         });
 
-        test("contentChange invalidates node", function() {
+        test("setting content invalidates node", function() {
             textNode.invalidate = function() {
                 ok(true);
             };
@@ -627,7 +627,7 @@
             }));
         });
 
-        test("contentChange resets loaded state", function() {
+        test("setting src resets loaded state", function() {
             image.src("Bar");
             ok(!imageNode._loaded);
         });

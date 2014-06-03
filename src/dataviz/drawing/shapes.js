@@ -199,7 +199,7 @@
         init: function(content, origin, options) {
             Element.fn.init.call(this, options);
 
-            this._content = content;
+            this.content(content);
 
             this.origin = origin || new g.Point();
             this.origin.observer = this;
@@ -211,18 +211,10 @@
 
         content: function(value) {
             if (defined(value)) {
-                this._content = value;
-                this.contentChange();
+                this.options.set("content", value);
                 return this;
             } else {
-                return this._content;
-            }
-        },
-
-        // TODO: Store content in options, fold with optionsChange
-        contentChange: function() {
-            if (this.observer) {
-                this.observer.contentChange();
+                return this.options.get("content");
             }
         },
 
@@ -572,11 +564,10 @@
 
         src: function(value) {
             if (defined(value)) {
-                this._src = value;
-                this.contentChange();
+                this.options.set("src", value);
                 return this;
             } else {
-                return this._src;
+                return this.options.get("src");
             }
         },
 
@@ -588,13 +579,6 @@
                 return this;
             } else {
                 return this._rect;
-            }
-        },
-
-        // TODO: Store src in options, fold with optionsChange
-        contentChange: function() {
-            if (this.observer) {
-                this.observer.contentChange();
             }
         },
 

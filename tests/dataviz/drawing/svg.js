@@ -782,7 +782,7 @@
             text.options.set("font", "foo");
         });
 
-        test("contentChange sets content", function() {
+        test("optionsChange sets content", function() {
             textNode.content = function(value) {
                 equal(value, "Bar");
             };
@@ -854,7 +854,7 @@
             image.rect().p0.multiply(2);
         });
 
-        test("contentChange sets source", function() {
+        test("optionsChange sets source", function() {
             imageNode.attr = function(name, value) {
                 equal(name, "xlink:href");
                 equal(value, "Bar");

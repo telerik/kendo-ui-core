@@ -1401,7 +1401,7 @@
             text.options.set("font", "10pt Arial");
         });
 
-        test("contentChange updates string", function() {
+        test("optionsChange updates string", function() {
             textPathNode.attr = function(name, value) {
                 equal(name, "string");
                 equal(value, "Bar");
@@ -1433,8 +1433,8 @@
             text.options.set("font", "10pt Arial");
         });
 
-        test("forwards contentChange to path node", function() {
-            textNode.path.contentChange = function() { ok(true); };
+        test("forwards optionsChange to path node", function() {
+            textNode.path.optionsChange = function() { ok(true); };
             text.content("Bar");
         });
 
@@ -1517,7 +1517,7 @@
             image.rect().p0.multiply(2);
         });
 
-        test("contentChange sets source", function() {
+        test("optionsChange sets source", function() {
             imageNode.attr = function(name, value) {
                 equal(name, "src");
                 equal(value, "bar");
