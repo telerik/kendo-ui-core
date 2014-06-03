@@ -392,7 +392,7 @@ div.submenu-box ol {
 
 #source-code {
     background: #fff;
-    border-color: #ebecee;
+    border: 1px solid #ebecee;
 }
 
 #source-code > div.k-content {
