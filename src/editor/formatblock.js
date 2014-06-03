@@ -310,7 +310,7 @@ var listElements = ["ul","ol","li"];
 registerFormat("justifyLeft", [
     { tags: dom.nonListBlockElements, attr: { style: { textAlign: "left" }} },
     { tags: ["img"], attr: { style: { "float": "left", display: "", marginLeft: "", marginRight: "" }} },
-    { tags: listElements, attr: { style: { textAlign: "left", listStylePosition: "" }} },
+    { tags: listElements, attr: { style: { textAlign: "left", listStylePosition: "" }} }
 ]);
 registerTool("justifyLeft", new BlockFormatTool({
     format: formats.justifyLeft,
