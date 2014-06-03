@@ -981,8 +981,13 @@ var __meta__ = {
                 },
 
                 success: function (data) {
+                    function getElements(){
+                        return { elements: contentElement.get() };
+                    }
                     try {
+                        that.domUpdate("before", getElements);
                         contentElement.html(data);
+                        that.domUpdate("after", getElements);
                     } catch (e) {
                         var console = window.console;
 

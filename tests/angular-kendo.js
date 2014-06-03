@@ -533,8 +533,8 @@
 
          case "after":
           angular.forEach(elements, function(el, i){
-            var x = data[i], itemScope;
-            if (x) {
+            var x = data && data[i], itemScope;
+            if (x !== undefined) {
               itemScope = scope.$new();
               itemScope.dataItem = data[i].dataItem;
             }
@@ -639,7 +639,7 @@
 
   // for PanelBar, TabStrip and Splitter, hook on `contentLoad` to
   // compile Angular templates.
-  defadvice([ "ui.PanelBar", "ui.TabStrip", "ui.Splitter" ], AFTER, function() {
+  defadvice([ "ui.TabStrip", "ui.Splitter" ], AFTER, function() {
     this.next();
     var self = this.self;
     var scope = angular.element(self.element).scope();
