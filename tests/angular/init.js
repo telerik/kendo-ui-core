@@ -341,6 +341,21 @@
         expect(1);
     });
 
+    runTest("Splitter -- compile template loaded from server", function(dom){
+        $scope.options = {
+            panes: [ null, { contentUrl: "ajax-template.html" } ],
+            contentLoad: function(ev) {
+                ok(dom.find("div.content").text() == $scope.hello);
+                start();
+            }
+        };
+        $("<div kendo-splitter k-options='options'>" +
+          "  <div></div>" +
+          "  <div class='content'></div>" +
+          "</div>").appendTo(dom);
+        expect(1);
+    });
+
     /// mobile
 
     runTest("Mobile ListView -- compiles templates in data source", function(dom){

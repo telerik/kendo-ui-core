@@ -637,20 +637,6 @@
     };
   });
 
-  // for PanelBar, TabStrip and Splitter, hook on `contentLoad` to
-  // compile Angular templates.
-  defadvice([ "ui.Splitter" ], AFTER, function() {
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) bindBefore(self, "contentLoad", function(ev){
-      //                   tabstrip/panelbar    splitter
-      var contentElement = ev.contentElement || ev.pane;
-      compile(contentElement)(scope);
-      digest(scope);
-    });
-  });
-
   // on Draggable::_start compile the content as Angular template, if
   // an $angular_scope method is provided.
   defadvice("ui.Draggable", "_start", function(){
