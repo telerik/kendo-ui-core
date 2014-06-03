@@ -776,7 +776,7 @@
             dataSource: [
                 { text: "foo", selected: true },
             ],
-            checkboxTemplate: "<input type='checkbox' />"
+            checkboxes: true
         });
 
         treeview.focus();

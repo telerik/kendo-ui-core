@@ -183,30 +183,6 @@
         equal(treeview.find(".mycheck_bar").length, 1);
     });
 
-    test("checkboxTemplate renders k-checkbox wrappers around the template", function() {
-        createTreeView({
-            dataSource: [
-                { text: "bar" }
-            ],
-            checkboxTemplate: kendo.template("<input class='mycheckboxclass' type='checkbox' />")
-        });
-
-        equal(treeviewObject.options.checkboxTemplate, treeviewObject.options.checkboxes.template);
-    });
-
-    test("checkboxTemplate as string", function() {
-        createTreeView({
-            dataSource: [
-                { text: "bar" }
-            ],
-            checkboxTemplate: "<input type='checkbox' value='#= item.text #' />"
-        });
-
-        var checkboxes = treeview.find(":checkbox");
-
-        equal(checkboxes.length, 1);
-    });
-
     test("checkboxes.checkChildren checks child nodes", function() {
         createTreeView({
             dataSource: [

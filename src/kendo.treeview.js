@@ -1088,33 +1088,28 @@ var __meta__ = {
         },
 
         _checkboxes: function() {
-            var options = this.options,
-                checkboxOptions = options.checkboxes,
-                checkboxTemplate;
+            var options = this.options;
+            var checkboxes = options.checkboxes;
+            var defaultTemplate;
 
-            if (checkboxOptions || options.checkboxTemplate) {
+            if (checkboxes) {
+                defaultTemplate = "<input type='checkbox' #= (item.enabled === false) ? 'disabled' : '' # #= item.checked ? 'checked' : '' #";
 
-                if (options.checkboxTemplate) {
-                    checkboxTemplate = options.checkboxTemplate;
-                } else {
-                    checkboxTemplate = "<input type='checkbox' #= (item.enabled === false) ? 'disabled' : '' # #= item.checked ? 'checked' : '' #";
-
-                    if (checkboxOptions.name) {
-                        checkboxTemplate += " name='" + checkboxOptions.name + "'";
-                    }
-
-                    checkboxTemplate += " />";
+                if (checkboxes.name) {
+                    defaultTemplate += " name='" + checkboxes.name + "'";
                 }
 
-                checkboxOptions = extend({
-                    template: checkboxTemplate
+                defaultTemplate += " />";
+
+                checkboxes = extend({
+                    template: defaultTemplate
                 }, options.checkboxes);
 
-                if (typeof checkboxOptions.template == STRING) {
-                    checkboxOptions.template = template(checkboxOptions.template);
+                if (typeof checkboxes.template == STRING) {
+                    checkboxes.template = template(checkboxes.template);
                 }
 
-                options.checkboxes = checkboxOptions;
+                options.checkboxes = checkboxes;
             }
         },
 

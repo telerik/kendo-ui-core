@@ -527,7 +527,7 @@
             dataSource: [
                 { text: "foo" }
             ],
-            checkboxTemplate: "<input type='checkbox' />"
+            checkboxes: true
         });
 
         treeview.find(":checkbox").attr("checked", "checked").trigger("change");
