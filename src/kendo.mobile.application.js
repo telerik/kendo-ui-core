@@ -258,7 +258,7 @@ var __meta__ = {
             if (os.wp) {
                 if (!that.refreshBackgroundColorProxy) {
                     that.refreshBackgroundColorProxy = $.proxy(function () {
-                        if (that.os.variant && ((that.os.skin && that.os.skin === that.os.name) || !that.os.skin)) {
+                        if ((that.os.variant && ((that.os.skin && that.os.skin === that.os.name)) || !that.os.skin)) {
                             that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
                         }
                     }, that);
