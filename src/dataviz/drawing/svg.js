@@ -577,9 +577,9 @@
         },
 
         pos: function() {
-            var origin = this.srcElement.origin;
+            var pos = this.srcElement.position();
             var size = this.srcElement.measure();
-            return origin.clone().set("y", origin.y + size.baseline);
+            return pos.clone().set("y", pos.y + size.baseline);
         },
 
         template: renderTemplate(

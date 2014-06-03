@@ -280,7 +280,7 @@
     var TextNode = PathNode.extend({
         renderTo: function(ctx) {
             var text = this.srcElement;
-            var origin = text.origin;
+            var pos = text.position();
             var size = text.measure();
 
             ctx.save();
@@ -289,7 +289,7 @@
             this.setTransform(ctx);
 
             ctx.font = text.options.font;
-            ctx.fillText(text.content(), origin.x, origin.y + size.baseline);
+            ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
 
             ctx.restore();
         }

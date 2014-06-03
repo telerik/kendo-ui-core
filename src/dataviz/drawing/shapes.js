@@ -195,14 +195,11 @@
     });
 
     var Text = Element.extend({
-        // TODO: Rename origin to position
-        init: function(content, origin, options) {
+        init: function(content, position, options) {
             Element.fn.init.call(this, options);
 
             this.content(content);
-
-            this.origin = origin || new g.Point();
-            this.origin.observer = this;
+            this.position(position || new g.Point());
 
             if (!this.options.font) {
                 this.options.font = "12px sans-serif";
@@ -218,6 +215,17 @@
             }
         },
 
+        position: function(value) {
+            if (defined(value)) {
+                this._position = value;
+                this._position.observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._position;
+            }
+        },
+
         measure: function() {
             var metrics = util.measureText(this.content(), {
                 font: this.options.get("font")
@@ -228,8 +236,8 @@
 
         rect: function() {
             var size = this.measure();
-            var origin = this.origin.clone();
-            return new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+            var pos = this.position().clone();
+            return new g.Rect(pos, pos.clone().add(new g.Point(size.width, size.height)));
         },
 
         bbox: function(transformation) {

@@ -743,7 +743,7 @@
             }
         });
 
-        test("renders origin accounting for baseline", function() {
+        test("renders position accounting for baseline", function() {
             ok(textNode.render().indexOf("x='10' y='35'") > -1);
         });
 
@@ -760,7 +760,7 @@
             ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
         });
 
-        test("geometryChange sets origin", 2, function() {
+        test("geometryChange sets position", 2, function() {
             textNode.attr = function(name, value) {
                 if (name === "x") {
                     equal(value, 20);
@@ -769,7 +769,7 @@
                 }
             };
 
-            text.origin.multiply(2);
+            text.position().multiply(2);
         });
 
         test("optionsChange sets font", function() {

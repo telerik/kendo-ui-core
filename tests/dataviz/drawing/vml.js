@@ -1360,7 +1360,7 @@
                 equal(value, "m 0,11000 l 4000,11000");
             };
 
-            text.origin.set("x", 0);
+            text.position().set("x", 0);
         });
 
         test("rounds path coordinates", function() {
@@ -1368,7 +1368,7 @@
                 equal(value, "m 10001,11001 l 14001,11001");
             };
 
-            text.origin.add(new g.Point(0.005, 0.005));
+            text.position().add(new g.Point(0.005, 0.005));
         });
     })();
 
@@ -1440,7 +1440,7 @@
 
         test("geometryChange is forwarded to path data node", function() {
             textNode.pathData.geometryChange = function() { ok(true); };
-            text.origin.set("x", 1);
+            text.position().set("x", 1);
         });
 
         shapeTests(d.Text, vml.TextNode, "TextNode");

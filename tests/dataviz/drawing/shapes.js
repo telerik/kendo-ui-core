@@ -448,10 +448,12 @@
     // ------------------------------------------------------------
     (function() {
         var text;
+        var position;
 
         module("Text", {
             setup: function() {
-                text = new Text("Foo", new g.Point(100, 100));
+                position = new g.Point(100, 100);
+                text = new Text("Foo", position);
             }
         });
 
@@ -459,8 +461,8 @@
             equal(text.content(), "Foo");
         });
 
-        test("sets initial origin", function() {
-            equal(text.origin.x, 100);
+        test("sets initial position", function() {
+            equal(text.position().x, 100);
         });
 
         test("sets initial options", function() {
@@ -473,14 +475,14 @@
             equal(text.options.font, "12px sans-serif");
         });
 
-        test("changing the origin triggers geometryChange", function() {
+        test("changing the position triggers geometryChange", function() {
             text.observer = {
                 geometryChange: function() {
                     ok(true);
                 }
             };
 
-            text.origin.set("x", 5);
+            text.position().set("x", 5);
         });
 
         test("setting content triggers optionsChange", function() {
@@ -500,6 +502,24 @@
             equal(text.content("Bar"), text);
         });
 
+        test("position returns current position", function() {
+            equal(text.position(), position);
+        });
+
+        test("position setter triggers geometryChange", function() {
+            text.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            text.position(new g.Point());
+        });
+
+        test("position setter is chainable", function() {
+            equal(text.position(new g.Point()), text);
+        });
+
         test("bbox returns text bounding box", function() {
             text.measure = function() {
                 return { width: 20, height: 10 };
@@ -509,9 +529,9 @@
             compareBoundingBox(bbox, [100, 100, 120, 110]);
         });
 
-        test("retrieving bbox doesn't change origin observer", function() {
+        test("retrieving bbox doesn't change position observer", function() {
             text.bbox();
-            equal(text.origin.observer, text);
+            equal(text.position().observer, text);
         });
 
         test("bbox returns transformed bounding box", function() {
@@ -519,7 +539,7 @@
                 return { width: 20, height: 10 };
             };
 
-            var bbox = text.bbox(g.transform().scale(2, 1, text.origin));
+            var bbox = text.bbox(g.transform().scale(2, 1, text.position()));
             compareBoundingBox(bbox, [100, 100, 140, 110]);
         });
 
