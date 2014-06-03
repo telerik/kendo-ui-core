@@ -148,6 +148,20 @@ def bundle(options)
         task "internal_builds:bundles:all" => "internal_builds:bundles:#{name}"
     end
 
+    if options[:upload_to_appbuilder]
+        versioned_bundle_path = File.join(ARCHIVE_ROOT, 'AppBuilder/Uploads', VERSION, versioned_bundle_name(name) + ".zip")
+
+        file_copy :to => versioned_bundle_path, :from => "#{path}.zip"
+
+        desc "Upload #{name} in AppBuidler"
+        task "appbuilder_builds:bundles:#{name}" => [versioned_bundle_path, changelog_path] do
+            sh  "./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, options[:appbuilder_features]
+        end
+
+        desc "Upload bundles in AppBuidler"
+        task "appbuilder_builds:bundles:all" => "appbuilder_builds:bundles:#{name}"
+    end
+
     if options[:release_build]
       if defined? SERVICE_PACK_NUMBER
         release_destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
@@ -160,8 +174,8 @@ def bundle(options)
 
       desc "Copy #{name} as release build on telerik.com"
       task "release_builds:copy:#{name}" do
-          FileUtils.mkdir_p(versioned_bundle_release_destination_path) 
-          release_build_file_copy(options[:release_build], name, versioned_bundle_release_destination_path, versioned_bundle_release_archive_path) 
+          FileUtils.mkdir_p(versioned_bundle_release_destination_path)
+          release_build_file_copy(options[:release_build], name, versioned_bundle_release_destination_path, versioned_bundle_release_archive_path)
 
       end
 
@@ -171,7 +185,7 @@ def bundle(options)
                   :title => name,
                   :product => options[:product],
                   :params => options[:release_build],
-                  :archive_path => versioned_bundle_release_destination_path  
+                  :archive_path => versioned_bundle_release_destination_path
       end
 
       # add bundle to bundles:all
@@ -192,7 +206,7 @@ def bundle(options)
       task "beta_builds:copy:#{name}" do
           FileUtils.mkdir_p(versioned_bundle_beta_destination_path)
 
-          beta_build_file_copy(options[:beta_build], name, versioned_bundle_beta_destination_path, versioned_bundle_beta_archive_path) 
+          beta_build_file_copy(options[:beta_build], name, versioned_bundle_beta_destination_path, versioned_bundle_beta_archive_path)
 
       end
 
@@ -203,13 +217,13 @@ def bundle(options)
                   :title => name,
                   :product => options[:product],
                   :params => options[:beta_build],
-                  :archive_path => versioned_bundle_beta_destination_path         
+                  :archive_path => versioned_bundle_beta_destination_path
       end
 
       # add bundle to bundles:all
       task "beta_builds:bundles:all" => "beta_builds:upload:#{name}"
 
     end
-    
+
 end
 

@@ -725,20 +725,28 @@ bundle :name => 'winjs.commercial',
 bundle :name => 'appbuilder.professional',
        :license => 'src-license-appbuilder',
        :type_script => %w(dataviz.mobile),
+       :changelog => %w(dataviz mobile framework),
+       :product => 'AppBuilder Professional',
        :contents => {
             'styles' => APP_BUILDER_MIN_CSS,
             'js' => APP_BUILDER_MIN_JS + JQUERY_MAP,
             'typescript' => FileList['resources/typescript/jquery.d.ts']
-       }
+       },
+       :upload_to_appbuilder => true,
+       :appbuilder_features => "Kendo UI DataViz"
 
 bundle :name => 'appbuilder.core',
        :license => 'src-license-appbuilder-core',
        :type_script => %w(mobile),
+       :changelog => %w(mobile framework),
+       :product => 'AppBuilder Core',
        :contents => {
             'styles' => APP_BUILDER_CORE_MIN_CSS,
             'js' => APP_BUILDER_CORE_MIN_JS + JQUERY_MAP,
             'typescript' => FileList['resources/typescript/jquery.d.ts']
-       }
+       },
+       :upload_to_appbuilder => true
+
 # UI for JSP
 bundle :name => 'jsp.trial',
        :license => 'src-license-complete',
