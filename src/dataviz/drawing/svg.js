@@ -680,6 +680,11 @@
     }
 
     // Exports ================================================================
+    kendo.support.svg = (function() {
+        return doc.implementation.hasFeature(
+            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    })();
+
     if (kendo.support.svg) {
         d.SurfaceFactory.current.register("svg", Surface, 10);
     }

@@ -344,6 +344,10 @@
     });
 
     // Exports ================================================================
+    kendo.support.canvas = (function() {
+        return !!doc.createElement("canvas").getContext;
+    })();
+
     if (kendo.support.canvas) {
         d.SurfaceFactory.current.register("canvas", Surface, 20);
     }

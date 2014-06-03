@@ -266,15 +266,6 @@
 
     SurfaceFactory.current = new SurfaceFactory();
 
-    kendo.support.svg = (function() {
-        return doc.implementation.hasFeature(
-            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
-    })();
-
-    kendo.support.canvas = (function() {
-        return !!doc.createElement("canvas").getContext;
-    })();
-
     // Exports ================================================================
     deepExtend(dataviz, {
         drawing: {
