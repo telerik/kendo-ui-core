@@ -35,9 +35,7 @@
     // Drawing primitives =====================================================
     var Element = Class.extend({
         init: function(options) {
-            this.observer = null;
             this._initOptions(options);
-            this.options.observer = this;
         },
 
         _initOptions: function(options) {
@@ -49,6 +47,7 @@
             }
 
             this.options = new OptionsStore(options);
+            this.options.observer = this;
         },
 
         optionsChange: function(e) {
@@ -325,7 +324,6 @@
 
             this.anchor = anchor || new Point();
             this.anchor.observer = this;
-            this.observer = null;
 
             if (controlIn) {
                 this.controlIn = controlIn;
@@ -431,7 +429,6 @@
             var path = this;
 
             path.segments = [];
-            path.observer = null;
 
             Element.fn.init.call(path, options);
         },

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([], f);
+    define([ "./core" ], f);
 })(function(){
 
 (function ($) {

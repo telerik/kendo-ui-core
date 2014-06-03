@@ -28,8 +28,6 @@
         init: function(x, y) {
             this.x = x || 0;
             this.y = y || 0;
-
-            this.observer = null;
         },
 
         geometryChange: util.mixins.geometryChange,
@@ -221,7 +219,6 @@
             this.p0 = p0 || new Point();
             this.p1 = p1 || new Point();
 
-            this.observer = null;
             this.p0.observer = this;
             this.p1.observer = this;
         },
@@ -276,7 +273,6 @@
             this.center = center || new Point();
             this.radius = radius || 0;
 
-            this.observer = null;
             this.center.observer = this;
         },
 
@@ -338,7 +334,6 @@
     var Arc = Class.extend({
         init: function(center, options) {
             this.center = center || new Point();
-            this.observer = null;
             this.center.observer = this;
 
             options = options || {};
@@ -582,7 +577,6 @@
     var Transformation = Class.extend({
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();
-            this.observer = null;
         },
 
         _optionsChange: function() {
