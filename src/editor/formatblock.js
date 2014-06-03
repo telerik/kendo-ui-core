@@ -305,9 +305,12 @@ extend(Editor, {
     BlockFormatTool: BlockFormatTool
 });
 
+var listElements = ["ul","ol","li"];
+
 registerFormat("justifyLeft", [
-    { tags: dom.blockElements, attr: { style: { textAlign: "left", listStylePosition: "" }} },
-    { tags: ["img"], attr: { style: { "float": "left", display: "", marginLeft: "", marginRight: "" }} }
+    { tags: dom.nonListBlockElements, attr: { style: { textAlign: "left" }} },
+    { tags: ["img"], attr: { style: { "float": "left", display: "", marginLeft: "", marginRight: "" }} },
+    { tags: listElements, attr: { style: { textAlign: "left", listStylePosition: "" }} },
 ]);
 registerTool("justifyLeft", new BlockFormatTool({
     format: formats.justifyLeft,
@@ -320,7 +323,7 @@ registerTool("justifyLeft", new BlockFormatTool({
 registerFormat("justifyCenter", [
     { tags: dom.nonListBlockElements, attr: { style: { textAlign: "center" }} },
     { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto", "float": "" }} },
-    { tags: ["ul","ol","li"], attr: { style: { textAlign: "center", listStylePosition: "inside" }} }
+    { tags: listElements, attr: { style: { textAlign: "center", listStylePosition: "inside" }} }
 ]);
 registerTool("justifyCenter", new BlockFormatTool({
     format: formats.justifyCenter,
@@ -333,7 +336,7 @@ registerTool("justifyCenter", new BlockFormatTool({
 registerFormat("justifyRight", [
     { tags: dom.nonListBlockElements, attr: { style: { textAlign: "right" }} },
     { tags: ["img"], attr: { style: { "float": "right", display: "", marginLeft: "", marginRight: "" }} },
-    { tags: ["ul","ol","li"], attr: { style: { textAlign: "right", listStylePosition: "inside" }} }
+    { tags: listElements, attr: { style: { textAlign: "right", listStylePosition: "inside" }} }
 ]);
 registerTool("justifyRight", new BlockFormatTool({
     format: formats.justifyRight,
@@ -344,7 +347,9 @@ registerTool("justifyRight", new BlockFormatTool({
 }));
 
 registerFormat("justifyFull", [
-    { tags: dom.blockElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} }
+    { tags: dom.nonListBlockElements, attr: { style: { textAlign: "justify" }} },
+    { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto", "float": "" }} },
+    { tags: listElements, attr: { style: { textAlign: "justify", listStylePosition: "" }} }
 ]);
 registerTool("justifyFull", new BlockFormatTool({
     format: formats.justifyFull,
