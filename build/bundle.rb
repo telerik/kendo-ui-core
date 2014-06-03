@@ -155,7 +155,7 @@ def bundle(options)
 
         desc "Upload #{name} in AppBuidler"
         task "appbuilder_builds:bundles:#{name}" => [versioned_bundle_path, changelog_path] do
-            sh  "./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, options[:appbuilder_features]
+            sh  "./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, (options[:appbuilder_features] || "")
         end
 
         desc "Upload bundles in AppBuidler"
