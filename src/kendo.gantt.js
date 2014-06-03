@@ -39,7 +39,7 @@ var __meta__ = {
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
-    var HEADER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
+    var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
             '#if (editable == true) {#'+
                 '<ul class="#=styles.actionsWrapper#">' +
                     '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
@@ -51,14 +51,14 @@ var __meta__ = {
                 '#}#' +
             '</ul>' +
         '</div>');
-    var TASK_DROPDOWN_TEMPLATE = kendo.template('<div class="k-list-container">' +
-            '<ul class="k-list k-reset">' +
+    var TASK_DROPDOWN_TEMPLATE = kendo.template('<div class="#=styles.popupWrapper#">' +
+            '<ul class="#=styles.popupList#">' +
                 '#for(var i = 0, l = actions.length; i < l; i++){#' +
-                    '<li class="k-item" data-action="#=actions[i].data#">#=actions[i].text#</span>' +
+                    '<li class="#=styles.item#" data-action="#=actions[i].data#">#=actions[i].text#</span>' +
                 '#}#' +
             '</ul>' +
         '</div>');
-    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.wrapper#">' +
+    var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.footerWrapper#">' +
             '<ul class="#=styles.actionsWrapper#">' +
                 '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
             '</ul>' +
@@ -73,6 +73,8 @@ var __meta__ = {
         splitBarWrapper: "k-splitbar k-state-default k-splitbar-horizontal k-splitbar-draggable-horizontal k-gantt-layout",
         splitBar: "k-splitbar",
         splitBarHover: "k-splitbar-horizontal-hover",
+        popupWrapper: "k-list-container",
+        popupList: "k-list k-reset",
         resizeHandle: "k-resize-handle",
         icon: "k-icon",
         item: "k-item",
@@ -82,7 +84,8 @@ var __meta__ = {
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
         toolbar: {
-            wrapper: "k-floatwrap k-header k-gantt-toolbar",
+            headerWrapper: "k-floatwrap k-header k-gantt-toolbar",
+            footerWrapper: "k-floatwrap k-header k-gantt-toolbar",
             toolbar: "k-toolbar",
             views: "k-gantt-views",
             viewsWrapper: "k-reset k-header k-toolbar k-gantt-views",
@@ -153,6 +156,7 @@ var __meta__ = {
             var actions = this.options.messages.actions;
 
             this.list = $(TASK_DROPDOWN_TEMPLATE({
+                styles: ganttStyles,
                 actions: [
                     {
                         data: "add",

@@ -54,6 +54,7 @@ var __meta__ = {
         iconCollapse: "k-i-collapse",
         iconExpand: "k-i-expand",
         iconHidden: "k-i-none",
+        iconPlaceHolder: "k-icon k-i-none",
         dropPositions: "k-insert-top k-insert-bottom k-add k-insert-middle",
         dropTop: "k-insert-top",
         dropBottom: "k-insert-bottom",
@@ -65,11 +66,12 @@ var __meta__ = {
         dragClueText: "k-clue-text"
     };
 
-    function createPlaceholders(level) {
+    function createPlaceholders(options) {
         var spans = [];
+        var className = options.className;
 
-        for (var i = 0; i < level; i++) {
-            spans.push(kendoDomElement("span", { className: "k-icon k-i-none" }));
+        for (var i = 0, level = options.level; i < level; i++) {
+            spans.push(kendoDomElement("span", { className: className }));
         }
 
         return spans;
@@ -315,7 +317,7 @@ var __meta__ = {
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
 
             if (column.field === "title") {
-                children = createPlaceholders(options.level);
+                children = createPlaceholders({ level: options.level, className: listStyles.iconPlaceHolder });
                 children.push(kendoDomElement("span", {
                     className: listStyles.icon + " " + (task.summary ? (task.expanded ? listStyles.iconCollapse : listStyles.iconExpand)
                         : listStyles.iconHidden)
