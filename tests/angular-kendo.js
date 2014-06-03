@@ -668,64 +668,6 @@
     }
   });
 
-  // DropDownList
-  defadvice("ui.DropDownList", BEFORE, function(element, options){
-    this.next();
-    var scope = angular.element(element).scope();
-    if (!scope) return;
-    var self = this.self;
-
-    // compile {{angular}} on dataBound
-    var prev_dataBound = options.dataBound;
-    options.dataBound = function(ev) {
-      var widget = ev.sender;
-      widget.ul.find("li").each(function(idx){
-        var itemScope = scope.$new();
-        itemScope.dataItem = widget.dataItem(idx);
-        compile(this)(itemScope);
-      });
-      try {
-        if (prev_dataBound)
-          return prev_dataBound.apply(this, arguments);
-      } finally {
-        digest(scope);
-      }
-    };
-
-    // destroy scopes on dataBinding
-    var prev_dataBinding = options.dataBinding;
-    options.dataBinding = function(ev) {
-      var widget = ev.sender;
-      widget.ul.find("li").each(function(){
-        var itemScope = angular.element(this).scope();
-        if (itemScope && itemScope !== scope) {
-          destroyScope(itemScope);
-        }
-      });
-      if (prev_dataBinding)
-        return prev_dataBinding.apply(this, arguments);
-    };
-  });
-
-  defadvice("ui.DropDownList", "_textAccessor", function(text){
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope && text !== undefined) {
-      var itemScope = angular.element(self.span).scope();
-      if (itemScope && itemScope !== scope) {
-        destroyScope(itemScope);
-      }
-    }
-    var ret = this.next();
-    if (scope && text !== undefined) {
-      var itemScope = scope.$new();
-      itemScope.dataItem = text;
-      compile(self.span)(itemScope);
-      digest(itemScope);
-    }
-    return ret;
-  });
-
   defadvice("ui.Grid", "_toolbar", function(){
     this.next();
     var self = this.self;

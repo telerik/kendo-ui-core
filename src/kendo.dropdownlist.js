@@ -190,7 +190,10 @@ var __meta__ = {
                 that.current(null);
             }
 
+            this._notifyDomUpdate("before");
             that.ul[0].innerHTML = kendo.render(that.template, data);
+            this._notifyDomUpdate("after");
+
             that._height(length);
 
             if (that.popup.visible()) {
@@ -728,7 +731,15 @@ var __meta__ = {
                     }
                 }
 
+                var getElements = function(){
+                    return {
+                        elements: span.get(),
+                        data: [ { dataItem: dataItem } ]
+                    };
+                };
+                this.domUpdate("before", getElements);
                 span.html(this.valueTemplate(dataItem));
+                this.domUpdate("after", getElements);
             } else {
                 return span.text();
             }
