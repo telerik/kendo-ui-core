@@ -79,7 +79,7 @@ GEM
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
     rubyntlm (0.1.1)
-    rubyzip (1.1.0)
+    rubyzip (1.1.4)
     savon (0.9.5)
       akami (~> 1.0)
       builder (>= 2.1.2)

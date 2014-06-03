@@ -155,6 +155,11 @@ def bundle(options)
 
         desc "Upload #{name} in AppBuidler"
         task "appbuilder_builds:bundles:#{name}" => [versioned_bundle_path, changelog_path] do
+            if options[:skip_changelog_in_zip]
+                Zip::File.open(versioned_bundle_path, Zip::File::CREATE) do |file|
+                    file.remove("changelog.html")
+                end
+            end
             sh  "./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, (options[:appbuilder_features] || "")
         end
 
