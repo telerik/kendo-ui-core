@@ -57,6 +57,8 @@
             }
         },
 
+        geometryChange: util.mixins.geometryChange,
+
         transform: function(transform) {
             if (defined(transform)) {
                 this.options.set("transform", g.transform(transform));
@@ -217,8 +219,7 @@
             }
         },
 
-        geometryChange: util.mixins.geometryChange,
-
+        // TODO: Store content in options, fold with optionsChange
         contentChange: function() {
             if (this.observer) {
                 this.observer.contentChange();
@@ -259,8 +260,6 @@
             circle.geometry.observer = this;
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         bbox: function(transformation) {
             var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
             var rect = this.geometry.bbox(combinedMatrix);
@@ -286,8 +285,6 @@
             arc.geometry = geometry || new g.Arc();
             arc.geometry.observer = this;
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         bbox: function(transformation) {
             var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
@@ -481,8 +478,6 @@
             return this;
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         bbox: function(transformation) {
             var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
             var boundingBox = this._bbox(combinedMatrix);
@@ -557,8 +552,6 @@
             return this;
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         bbox: function(transformation) {
             return elementsBoundingBox(this.paths, true, this.currentTransform(transformation));
         },
@@ -598,8 +591,7 @@
             }
         },
 
-        geometryChange: util.mixins.geometryChange,
-
+        // TODO: Store src in options, fold with optionsChange
         contentChange: function() {
             if (this.observer) {
                 this.observer.contentChange();
