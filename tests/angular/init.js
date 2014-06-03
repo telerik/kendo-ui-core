@@ -313,7 +313,6 @@
                 "ajax-template.html"
             ],
             contentLoad: function(ev) {
-                var contentElement = ev.contentElement;
                 ok(dom.find("div.content").text() == $scope.hello);
                 start();
             }
@@ -325,6 +324,21 @@
         $scope.$on("kendoRendered", function(){
             $scope.panelbar.expand(dom.find("li:first"));
         });
+    });
+
+    runTest("TabStrip -- compile template loaded from server", function(dom){
+        $scope.options = {
+            contentUrls: [ "ajax-template.html" ],
+            contentLoad: function(ev) {
+                ok(dom.find("div.content").text() == $scope.hello);
+                start();
+            }
+        };
+        $("<div kendo-tabstrip k-options='options'>" +
+          "  <ul><li class='k-state-active'>AJAX</li></ul>" +
+          "  <div class='content'></div>" +
+          "</div>").appendTo(dom);
+        expect(1);
     });
 
     /// mobile

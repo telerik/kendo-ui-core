@@ -639,7 +639,7 @@
 
   // for PanelBar, TabStrip and Splitter, hook on `contentLoad` to
   // compile Angular templates.
-  defadvice([ "ui.TabStrip", "ui.Splitter" ], AFTER, function() {
+  defadvice([ "ui.Splitter" ], AFTER, function() {
     this.next();
     var self = this.self;
     var scope = angular.element(self.element).scope();
