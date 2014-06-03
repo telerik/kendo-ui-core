@@ -11,7 +11,6 @@
         Element = d.Element,
         Group = d.Group,
         Segment = d.Segment,
-        Shape = d.Shape,
         Text = d.Text,
         Circle = d.Circle,
         MultiPath = d.MultiPath,
@@ -444,20 +443,6 @@
         test("currentTransform returns null if group has no matrix and there is no parent matrix", function() {
             ok(group.currentTransform() === null);
         });
-    })();
-
-    // ------------------------------------------------------------
-    (function() {
-        var shape;
-
-        module("Shape");
-
-        test("sets initial options", function() {
-            shape = new Shape({ foo: true });
-            ok(shape.options.foo);
-        });
-
-        shapeBaseTests(Shape, "Shape");
     })();
 
     // ------------------------------------------------------------

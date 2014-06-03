@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core", "../text-metrics" ], f);
+    define([ "./core", "./mixins", "../text-metrics" ], f);
 })(function(){
 
 (function ($) {
@@ -35,11 +35,9 @@
     // Drawing primitives =====================================================
     var Element = Class.extend({
         init: function(options) {
-            var shape = this;
-
-            shape.observer = null;
-            shape._initOptions(options);
-            shape.options.observer = this;
+            this.observer = null;
+            this._initOptions(options);
+            this.options.observer = this;
         },
 
         _initOptions: function(options) {
@@ -194,38 +192,10 @@
         }
     });
 
-    var Shape = Element.extend({
-        geometryChange: util.mixins.geometryChange,
-
-        fill: function(color, opacity) {
-            this.options.set("fill.color", color);
-
-            if (defined(opacity)) {
-                this.options.set("fill.opacity", opacity);
-            }
-
-            return this;
-        },
-
-        stroke: function(color, width, opacity) {
-            this.options.set("stroke.color", color);
-
-            if (defined(width)) {
-               this.options.set("stroke.width", width);
-            }
-
-            if (defined(opacity)) {
-               this.options.set("stroke.opacity", opacity);
-            }
-
-            return this;
-        }
-    });
-
-    var Text = Shape.extend({
+    var Text = Element.extend({
         // TODO: Rename origin to position
         init: function(content, origin, options) {
-            Shape.fn.init.call(this, options);
+            Element.fn.init.call(this, options);
 
             this._content = content;
 
@@ -246,6 +216,8 @@
                 return this._content;
             }
         },
+
+        geometryChange: util.mixins.geometryChange,
 
         contentChange: function() {
             if (this.observer) {
@@ -276,15 +248,18 @@
             return this.rect().bbox();
         }
     });
+    deepExtend(Text.fn, drawing.mixins.Paintable);
 
-    var Circle = Shape.extend({
+    var Circle = Element.extend({
         init: function(geometry, options) {
             var circle = this;
-            Shape.fn.init.call(circle, options);
+            Element.fn.init.call(circle, options);
 
             circle.geometry = geometry || new g.Circle();
             circle.geometry.observer = this;
         },
+
+        geometryChange: util.mixins.geometryChange,
 
         bbox: function(transformation) {
             var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
@@ -301,15 +276,18 @@
             return this.geometry.bbox();
         }
     });
+    deepExtend(Circle.fn, drawing.mixins.Paintable);
 
-    var Arc = Shape.extend({
+    var Arc = Element.extend({
         init: function(geometry, options) {
             var arc = this;
-            Shape.fn.init.call(arc, options);
+            Element.fn.init.call(arc, options);
 
             arc.geometry = geometry || new g.Arc();
             arc.geometry.observer = this;
         },
+
+        geometryChange: util.mixins.geometryChange,
 
         bbox: function(transformation) {
             var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
@@ -342,6 +320,7 @@
             return path;
         }
     });
+    deepExtend(Arc.fn, drawing.mixins.Paintable);
 
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
@@ -450,14 +429,14 @@
         }
     });
 
-    var Path = Shape.extend({
+    var Path = Element.extend({
         init: function(options) {
             var path = this;
 
             path.segments = [];
             path.observer = null;
 
-            Shape.fn.init.call(path, options);
+            Element.fn.init.call(path, options);
         },
 
         moveTo: function(x, y) {
@@ -502,6 +481,8 @@
             return this;
         },
 
+        geometryChange: util.mixins.geometryChange,
+
         bbox: function(transformation) {
             var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
             var boundingBox = this._bbox(combinedMatrix);
@@ -534,11 +515,12 @@
             return boundingBox;
         }
     });
+    deepExtend(Path.fn, drawing.mixins.Paintable);
 
-    var MultiPath = Shape.extend({
+    var MultiPath = Element.extend({
         init: function(options) {
             this.paths = [];
-            Shape.fn.init.call(this, options);
+            Element.fn.init.call(this, options);
         },
 
         moveTo: function(x, y) {
@@ -575,6 +557,8 @@
             return this;
         },
 
+        geometryChange: util.mixins.geometryChange,
+
         bbox: function(transformation) {
             return elementsBoundingBox(this.paths, true, this.currentTransform(transformation));
         },
@@ -583,6 +567,7 @@
             return elementsBoundingBox(this.paths, false);
         }
     });
+    deepExtend(MultiPath.fn, drawing.mixins.Paintable);
 
     var Image = Element.extend({
         init: function(src, rect, options) {
@@ -676,7 +661,6 @@
         MultiPath: MultiPath,
         Path: Path,
         Segment: Segment,
-        Shape: Shape,
         Text: Text
     });
 
