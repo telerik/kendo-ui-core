@@ -3,6 +3,7 @@
         "./kendo.data", "./kendo.userevents", "./kendo.tooltip", "./kendo.dataviz.core", "./kendo.mobile.scroller",
 
         "./dataviz/drawing",
+        "./dataviz/geometry",
         "./dataviz/map/location",
         "./dataviz/map/attribution",
         "./dataviz/map/navigator",
