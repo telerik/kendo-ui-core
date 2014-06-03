@@ -300,6 +300,14 @@
         ok(application.element.hasClass("km-wp-light"));
     });
 
+    test("Setting the the platform variant sets at least one variant", 1, function() {
+        setup('<div data-role="view" />', {
+            platform: "wp"
+        });
+
+        ok(application.element.hasClass("km-wp-light") || application.element.hasClass("km-wp-dark"));
+    });
+
     /*
     if (navigator.__defineGetter__ && !kendo.support.browser.safari) {
         test("Forcing platform layout still reports correct device", 1, function() {
