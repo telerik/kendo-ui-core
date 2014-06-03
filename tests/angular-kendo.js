@@ -1,6 +1,6 @@
 (function(f, define){
   define([ "jquery", "angular", "kendo" ], f);
-})(function($, angular, kendo) {
+})(function($) {
 
   "use strict";
 
@@ -514,7 +514,7 @@
 
   /* -----[ Customize widgets for Angular ]----- */
 
-  defadvice("ui.Widget", "domUpdate", function(type, get){
+  defadvice([ "ui.Widget", "mobile.ui.Widget" ], "domUpdate", function(type, get){
     var self = this.self;
     var scope = angular.element(self.element).scope();
     if (scope) {
@@ -682,15 +682,11 @@
     }
   });
 
-  defadvice([ "mobile.ui.ListView", "ui.TreeView" ], "$angular_itemsToCompile", function(){
-    return this.self.items();
-  });
-
   defadvice("ui.TreeView", "$angular_itemsToCompile", function(){
     return this.self.element.find(".k-item div:first-child");
   });
 
-  defadvice([ "mobile.ui.ListView", "ui.TreeView" ], BEFORE, function(element, options){
+  defadvice([ "ui.TreeView" ], BEFORE, function(element, options){
     this.next();
     var scope = angular.element(element).scope();
     if (!scope) return;
@@ -718,46 +714,6 @@
         if (dirty) digest(scope);
       }
     };
-  });
-
-  defadvice([ "mobile.ui.ListView" ], AFTER, function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (!scope) return;
-
-    // itemChange triggers when a single item is changed through our
-    // DataSource mechanism.
-    self.bind("itemChange", function(ev) {
-      var dataSource = ev.sender.dataSource;
-      var itemElement = ev.item[0];
-      var item = ev.item;
-      if ($.isArray(item)) item = item[0];
-      item = $(item);
-      var itemScope = angular.element(item).scope();
-      if (!itemScope || itemScope === scope) {
-        itemScope = scope.$new();
-      }
-      itemScope.dataItem = dataSource.getByUid(item.attr(_UID_));
-      compile(itemElement)(itemScope);
-      digest(itemScope);
-    });
-
-    // dataBinding triggers when new data is loaded.  We use this to
-    // destroy() each item's scope.
-    self.bind("dataBinding", function(ev) {
-      ev.sender.$angular_itemsToCompile().each(function(){
-        var el = $(this);
-        if (el.attr(_UID_)) {
-          var rowScope = angular.element(this).scope();
-          // avoid destroying the widget's own scope
-          // no idea why we get it, but we do.... :(
-          if (rowScope && rowScope !== scope) {
-            destroyScope(rowScope, el);
-          }
-        }
-      });
-    });
   });
 
   // DropDownList
@@ -942,6 +898,7 @@
     });
   });
 
+  // XXX: is this necessary any longer?
   defadvice("mobile.ui.ListView", "destroy", function(){
     var self = this.self;
     if (self._itemBinder && self._itemBinder.dataSource) {

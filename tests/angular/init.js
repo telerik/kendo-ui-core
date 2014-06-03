@@ -327,4 +327,21 @@
         });
     });
 
+    /// mobile
+
+    runTest("Mobile ListView -- compiles templates in data source", function(dom){
+        $scope.options = {
+            template   : "<div class='my-item'>{{ dataItem.id }}/{{ dataItem.text }}</div>",
+            dataSource : $scope.data
+        };
+        $("<ul kendo-mobilelistview='list' k-options='options'></ul>").appendTo(dom);
+        expect(2);
+        $scope.$on("kendoRendered", function(){
+            var items = $scope.list.element.find(".my-item");
+            ok(items.eq(0).text() == "1/Foo");
+            ok(items.eq(1).text() == "2/Bar");
+            start();
+        });
+    });
+
 })();
