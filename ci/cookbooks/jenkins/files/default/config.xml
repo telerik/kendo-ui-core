@@ -90,6 +90,7 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
+        <string>production-upload-appbuilder</string>
         <string>stable-upload-release</string>
         <string>sync-from-core-production</string>
         <string>update-demos</string>
@@ -184,9 +185,13 @@
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[5]/jobNames/comparator"/>
         <string>internal-build-upload</string>
+        <string>production-bundles</string>
+        <string>production-cdn</string>
         <string>production-upload-download-builder</string>
         <string>production-upload-release</string>
         <string>production-upload-release-notes</string>
+        <string>stable-bundles</string>
+        <string>stable-cdn</string>
         <string>stable-themebuilder-upload</string>
         <string>stable-upload-release</string>
       </jobNames>
