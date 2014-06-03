@@ -47,9 +47,23 @@ http {
         }
 
         location /demos/ {
+            rewrite ^/demos/src/js/(.*)$ /kendo/src/$1 last;
+            rewrite ^/demos/src/styles/(.*)$ /kendo/styles/$1 last;
+
             fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
             fastcgi_pass   mono;
             include        fastcgi_params;
         }
+
+        location ~ /demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc) {
+            rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/js/(.*)$ /kendo/src/$2 last;
+            rewrite ^/demos-(kendo-ui|php-ui|jsp-ui|aspnet-mvc)/src/styles/(.*)$ /kendo/styles/$2 last;
+
+            fastcgi_param  HTTP_X_KENDO $1;
+            fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_pass   mono;
+            include        fastcgi_params;
+        }
+
     }
 }

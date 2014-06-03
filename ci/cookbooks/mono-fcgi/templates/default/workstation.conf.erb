@@ -8,7 +8,16 @@ stop on shutdown
 
 respawn
 
-exec start-stop-daemon --start --make-pidfile --pidfile /var/run/mono-fcgi.pid --exec /usr/bin/fastcgi-mono-server4 /applications="/demos:<%= @kendo_dir %>/demos/mvc/" /socket=tcp:127.0.0.1:9000 2>&1
+script
+    DEMOS="<%= @kendo_dir %>/demos/mvc/"
+
+    exec start-stop-daemon --start \
+        --make-pidfile --pidfile /var/run/mono-fcgi.pid \
+        --exec /usr/bin/fastcgi-mono-server4 \
+        /applications="/demos:$DEMOS,/demos-kendo-ui:$DEMOS,/demos-php-ui:$DEMOS,/demos-jsp-ui:$DEMOS,/demos-aspnet-mvc:$DEMOS" \
+        /socket=tcp:127.0.0.1:9000 2>&1
+
+end script
 
 pre-start script
     echo "[`date`] (sys) Starting" >> /var/log/mono-fcgi.log
