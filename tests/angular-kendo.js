@@ -682,40 +682,6 @@
     }
   });
 
-  defadvice("ui.TreeView", "$angular_itemsToCompile", function(){
-    return this.self.element.find(".k-item div:first-child");
-  });
-
-  defadvice([ "ui.TreeView" ], BEFORE, function(element, options){
-    this.next();
-    var scope = angular.element(element).scope();
-    if (!scope) return;
-    var self = this.self;
-    var role = self.options.name;
-    var prev_dataBound = options.dataBound;
-    options.dataBound = function(ev) {
-      var widget = ev.sender;
-      var dataSource = widget.dataSource;
-      var dirty = false;
-      widget.$angular_itemsToCompile().each(function(){
-        var elementToCompile = $(this);
-        if (!elementToCompile.hasClass("ng-scope")) {
-          var itemUid = $(this).closest("[" + _UID_ + "]").attr(_UID_);
-          var item = dataSource.getByUid(itemUid);
-          var itemScope = scope.$new();
-          itemScope.dataItem = item;
-          compile(elementToCompile)(itemScope);
-          dirty = true;
-        }
-      });
-      try {
-        if (prev_dataBound) return prev_dataBound.apply(this, arguments);
-      } finally {
-        if (dirty) digest(scope);
-      }
-    };
-  });
-
   // DropDownList
   defadvice("ui.DropDownList", BEFORE, function(element, options){
     this.next();

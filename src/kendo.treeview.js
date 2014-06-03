@@ -1202,6 +1202,15 @@ var __meta__ = {
                 return;
             }
 
+            that.domUpdate("after", function(){
+                return {
+                    elements: node.get(),
+                    data: nodeData.map(function(item){
+                        return { dataItem: item };
+                    })
+                };
+            });
+
             if (!group.length) {
                 group = $(that._renderGroup({
                     group: groupData
@@ -1409,6 +1418,9 @@ var __meta__ = {
                         });
 
                     if (that.root.length) {
+
+                        this._notifyDomUpdate("before");
+                        
                         var group = $(groupHtml);
 
                         that.root
@@ -1418,6 +1430,8 @@ var __meta__ = {
                     } else {
                         that.root = that.wrapper.html(groupHtml).children("ul");
                     }
+
+                    this._notifyDomUpdate("after");
                 }
             }
 
@@ -1788,6 +1802,10 @@ var __meta__ = {
                 prevSibling, nextSibling;
 
             node = $(node, that.element);
+
+            this.domUpdate("before", function(){
+                return { elements: node.get() };
+            });
 
             parentNode = node.parent().parent();
             prevSibling = node.prev();
