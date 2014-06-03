@@ -282,7 +282,11 @@
         createElement: function() {
             this.element = $("<img style='position: absolute; display: block; visibility: visible;' />")
                             .error(proxy(function(e) {
-                                e.target.setAttribute("src", this.errorUrl());
+                                if (this.errorUrl()) {
+                                    e.target.setAttribute("src", this.errorUrl());
+                                } else {
+                                    e.target.removeAttribute("src");
+                                }
                             }, this));
         },
 
