@@ -74,7 +74,9 @@ var __meta__ = {
             AFTER_SHOW,
             BEFORE_HIDE,
             HIDE,
-            DESTROY
+            DESTROY,
+            TRANSITION_START,
+            TRANSITION_END
         ],
 
         options: {
