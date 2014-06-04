@@ -11138,7 +11138,10 @@ var __meta__ = {
                 }
             } else if (unit === MINUTES) {
                 result = new Date(date.getTime() + value * TIME_PER_MINUTE);
-                result.setSeconds(0);
+
+                if (result.getSeconds() > 0) {
+                    result.setSeconds(0);
+                }
             } else if (unit === SECONDS) {
                 result = new Date(date.getTime() + value * TIME_PER_SECOND);
             }

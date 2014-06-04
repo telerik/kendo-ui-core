@@ -816,6 +816,54 @@
         });
 
         // ------------------------------------------------------------
+        module("Date Category Axis / Base unit / Minutes");
+
+        test("Base unit is determined by series delta", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2012/02/05 23:55:00"), new Date("2012/02/06 00:00:00")
+                ]
+            });
+
+            equal(dateAxis.options.baseUnit, "minutes");
+        });
+
+        test("Base unit is determined by series delta (DST boundary)", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2013/10/27 02:45:00"), new Date("2013/10/27 03:00:00")
+                ]
+            });
+
+            equal(dateAxis.options.baseUnit, "minutes");
+        });
+
+        test("automatic base unit step is chosen according to maxDateGroups", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2012/02/05 10:00:00"), new Date("2012/02/05 10:11:00")
+                ],
+                baseUnitStep: "auto",
+                maxDateGroups: 10
+            });
+
+            equal(dateAxis.options.baseUnitStep, 2);
+        });
+
+        test("maxDateGroups takes priority over preferred base unit step", function() {
+            createDateCategoryAxis({
+                categories: [
+                    new Date("2012/02/05 10:00:00"), new Date("2012/02/05 10:11:00")
+                ],
+                baseUnitStep: "auto",
+                autoBaseUnitSteps: { minutes: [1] },
+                maxDateGroups: 10
+            });
+
+            equal(dateAxis.options.baseUnitStep, 2);
+        });
+
+        // ------------------------------------------------------------
         module("Date Category Axis / Base unit / Hours");
 
         test("Base unit is determined by series delta (day boundary)", function() {
