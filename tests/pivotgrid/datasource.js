@@ -145,6 +145,23 @@
         dataSource.schemaCubes();
     });
 
+    test("schemaCubes return response to the promise on success", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    options.success({ foo: "bar" });
+                }
+            }
+        });
+
+        var promise = dataSource.schemaCubes();
+
+        promise.done(function(data) {
+            equal(data.foo, "bar");
+        });
+    });
+
+
     test("schemaCubes calls reader cubes methed", 1, function() {
         var dataSource = new PivotDataSource({
             schema: {
@@ -1874,6 +1891,52 @@
         }, "read");
 
         ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, Right([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap create empty discover statment wrap", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({ connection: { catalog: "catalogName" } }, "discover");
+
+       ok(params.indexOf('<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Discover xmlns="urn:schemas-microsoft-com:xml-analysis">') == 0);
+       ok(params.indexOf('</Discover></Body></Envelope>') > -1);
+    });
+
+    test("parameterMap discover command is set as request type", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { catalog: "catalogName" },
+           command: "schemaCubes"
+       }, "discover");
+
+       ok(params.indexOf('<RequestType>MDSCHEMA_CUBES</RequestType>') > -1);
+    });
+
+    test("parameterMap discover custom command is set as request type", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { catalog: "catalogName" },
+           command: "myCustomCommand"
+       }, "discover");
+
+       ok(params.indexOf('<RequestType>myCustomCommand</RequestType>') > -1);
+    });
+
+    test("parameterMap discover empty restrictionlist is added if no restrictions are set", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { catalog: "catalogName" }
+       }, "discover");
+
+       ok(params.indexOf("<Restrictions><RestrictionList/></Restrictions>") > -1);
+    });
+
+    test("parameterMap discover empty properties is added if no properties are set", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { }
+       }, "discover");
+
+       ok(params.indexOf('<Properties><PropertyList/></Properties>') > -1);
     });
 
     module("XmlaDataReader initialziation", { });

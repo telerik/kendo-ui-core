@@ -542,7 +542,7 @@ var __meta__ = {
             return that.discover({
                 data: { command: "schemaCubes" }
             }, function(response) {
-                that.reader.cubes(that.reader.parse(response));
+                return that.reader.cubes(that.reader.parse(response));
             });
         },
 
@@ -1134,17 +1134,16 @@ var __meta__ = {
             return command.replace(/\&/g, "&amp;");
         },
         discover: function(options, type) {
-            return options;
-           // var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"> <Header/> <Body> <Discover xmlns="urn:schemas-microsoft-com:xml-analysis">';
-           // command += "<RequestType>" + xmlaDiscoverCommands[options.command] + "</RequestType>";
+            var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Discover xmlns="urn:schemas-microsoft-com:xml-analysis">';
+            command += "<RequestType>" + (xmlaDiscoverCommands[options.command] || options.command) + "</RequestType>";
 
-           // command += "<Restrictions><RestrictionList/></Restrictions>";
+            command += "<Restrictions><RestrictionList/></Restrictions>";
 
-           // command += "<Properties>";
-           // command += "<PropertyList><Catalog>" + options.connection.catalog + "</Catalog></PropertyList>";
-           // command += "</Properties>";
-           // command += '</Discover></Body></Envelope>';
-           // return command;
+            command += "<Properties><PropertyList/>";
+            //command += "<PropertyList><Catalog>" + options.connection.catalog + "</Catalog></PropertyList>";
+            command += "</Properties>";
+            command += '</Discover></Body></Envelope>';
+            return command;
         }
     };
 
@@ -1274,12 +1273,12 @@ var __meta__ = {
             }
 
             return result;
-        }/*,
+        },
         cubes: function(root) {
-            root = kendo.getter("DiscoverResponse.return.root", true)(root);
-            var rows = kendo.getter("row", true)(root);
-            return rows;
-        }*/
+        //    root = kendo.getter("DiscoverResponse.return.root", true)(root);
+         //   var rows = kendo.getter("row", true)(root);
+          //  return rows;
+        }
     });
 
     extend(true, kendo.data, {
