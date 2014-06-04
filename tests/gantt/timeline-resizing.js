@@ -25,26 +25,28 @@
         timeline.trigger("resizeStart", { task: task });
     });
 
-    test("resize event triggered on timeline resize", 2, function() {
+    test("resize event triggered on timeline resize", 3, function() {
         setupGantt();
 
         gantt.bind("resize", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/16 16:00");
         });
 
-        timeline.trigger("resize", { task: task, date: new Date("2014/04/15 16:00") });
+        timeline.trigger("resize", { task: task, start: new Date("2014/04/15 16:00"), end: new Date("2014/04/16 16:00") });
     });
 
-    test("resizeEnd event triggered on timeline resizeEnd", 2, function() {
+    test("resizeEnd event triggered on timeline resizeEnd", 3, function() {
         setupGantt();
 
         gantt.bind("resizeEnd", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/16 16:00");
         });
 
-        timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
+        timeline.trigger("resizeEnd", { task: task, start: new Date("2014/04/15 16:00"), end: new Date("2014/04/16 16:00") });
     });
 
     test("_updateTask called on timeline resizeEnd", function() {
@@ -52,7 +54,7 @@
 
         stub(gantt, "_updateTask");
 
-        timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
+        timeline.trigger("resizeEnd", { task: task, start: new Date("2014/04/15 12:00"), end: new Date("2014/04/15 18:00") });
 
         ok(gantt.calls("_updateTask"));
     });
@@ -66,7 +68,7 @@
 
         stub(gantt, "_updateTask");
 
-        timeline.trigger("resizeEnd", { task: task, date: new Date("2014/04/15 16:00") });
+        timeline.trigger("resizeEnd", { task: task, start: new Date("2014/04/15 12:00"), end: new Date("2014/04/15 18:00") });
 
         ok(!gantt.calls("_updateTask"));
     });
@@ -77,12 +79,12 @@
         stub(gantt, {
             _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
-                equal(kendo.toString(updateInfo.start, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+                equal(kendo.toString(updateInfo.start, "yyyy/MM/dd HH:mm"), "2014/04/15 10:00");
                 equal(updateInfo.end, undefined);
             }
         });
 
-        timeline.trigger("resizeEnd", { task: task, resizeStart: true, date: new Date("2014/04/15 08:00") });
+        timeline.trigger("resizeEnd", { task: task, resizeStart: true, start: new Date("2014/04/15 10:00"), end: new Date("2014/04/15 18:00") });
     });
 
     test("_updateTask called with correct parameter on timeline resizeEnd from end", 3, function() {
@@ -92,11 +94,11 @@
             _updateTask: function(taskToUpdate, updateInfo) {
                 equal(taskToUpdate.uid, task.uid);
                 equal(updateInfo.start, undefined);
-                equal(kendo.toString(updateInfo.end, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+                equal(kendo.toString(updateInfo.end, "yyyy/MM/dd HH:mm"), "2014/04/15 18:00");
             }
         });
 
-        timeline.trigger("resizeEnd", { task: task, resizeStart: false, date: new Date("2014/04/15 08:00") });
+        timeline.trigger("resizeEnd", { task: task, resizeStart: false, start: new Date("2014/04/15 10:00"), end: new Date("2014/04/15 18:00") });
     });
 
 
@@ -137,42 +139,45 @@
         dragStart(timeline, handle);
     });
 
-    test("dragging the east resize handle triggers resize with correct parameters", 2, function() {
+    test("dragging the east resize handle triggers resize with correct parameters", 3, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-e");
 
         timeline.bind("resize", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 12:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
         });
 
         dragStart(timeline, handle);
         drag(timeline, timeline.view()._timeSlots()[16].offsetLeft);
     });
 
-    test("dragging the west resize handle triggers resize with correct parameters", 2, function() {
+    test("dragging the west resize handle triggers resize with correct parameters", 3, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-w");
 
         timeline.bind("resize", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 14:00");
         });
 
         dragStart(timeline, handle);
         drag(timeline, timeline.view()._timeSlots()[8].offsetLeft);
     });
 
-    test("dragging and dropping the east resize handle triggers resizeEnd with correct parameters", 3, function() {
+    test("dragging and dropping the east resize handle triggers resizeEnd with correct parameters", 4, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-e");
 
         timeline.bind("resizeEnd", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 12:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 16:00");
             ok(!e.resizeStart);
         });
 
@@ -181,14 +186,15 @@
         dragEnd(timeline);
     });
 
-    test("dragging and dropping the west resize handle triggers resizeEnd with correct parameters", 3, function() {
+    test("dragging and dropping the west resize handle triggers resizeEnd with correct parameters", 4, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-w");
 
         timeline.bind("resizeEnd", function(e) {
             equal(e.task.uid, task.uid);
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 08:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 14:00");
             ok(e.resizeStart);
         });
 
@@ -198,13 +204,14 @@
     });
 
 
-    test("dragging and dropping the east resize handle before the west resize handle", function() {
+    test("dragging and dropping the east resize handle before the west resize handle", 2, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-e");
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 12:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 12:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 12:00");
         });
 
         dragStart(timeline, handle);
@@ -212,13 +219,14 @@
         dragEnd(timeline);
     });
 
-    test("dragging and dropping the west resize handle after the east resize handle", function() {
+    test("dragging and dropping the west resize handle after the east resize handle", 2, function() {
         setupTimeline();
 
         var handle = timeline.view().content.find(".k-task .k-resize-w");
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 14:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 14:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 14:00");
         });
 
         dragStart(timeline, handle);
@@ -234,7 +242,7 @@
         var targetSlot = timeline.view()._timeSlots()[16];
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 16:30");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 16:30");
         });
 
         dragStart(timeline, handle);
@@ -249,7 +257,7 @@
         var targetSlot = timeline.view()._timeSlots()[16];
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 17:00");
+            equal(kendo.toString(e.end, "yyyy/MM/dd HH:mm"), "2014/04/15 17:00");
         });
 
         dragStart(timeline, handle);
@@ -264,7 +272,7 @@
         var targetSlot = timeline.view()._timeSlots()[7];
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 07:30");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 07:30");
         });
 
         dragStart(timeline, handle);
@@ -279,7 +287,7 @@
         var targetSlot = timeline.view()._timeSlots()[7];
 
         timeline.bind("resizeEnd", function(e) {
-            equal(kendo.toString(e.date, "yyyy/MM/dd HH:mm"), "2014/04/15 07:00");
+            equal(kendo.toString(e.start, "yyyy/MM/dd HH:mm"), "2014/04/15 07:00");
         });
 
         dragStart(timeline, handle);

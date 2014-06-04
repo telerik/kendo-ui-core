@@ -1704,14 +1704,14 @@ var __meta__ = {
                         }
                     }
 
-                    if (!that.trigger("resize", { task: task, date: resizeStart ? currentStart : currentEnd })) {
+                    if (!that.trigger("resize", { task: task, start: currentStart, end: currentEnd })) {
                         view._updateResizeHint(currentStart, currentEnd, resizeStart);
                     }
                 }, 15))
                 .bind("dragend", function(e) {
                     var date = resizeStart ? currentStart : currentEnd;
 
-                    that.trigger("resizeEnd", { task: task, resizeStart: resizeStart, date: date });
+                    that.trigger("resizeEnd", { task: task, resizeStart: resizeStart, start: currentStart, end: currentEnd });
 
                     cleanUp();
                 })

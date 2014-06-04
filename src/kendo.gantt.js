@@ -1101,7 +1101,7 @@ var __meta__ = {
                     }
                 })
                 .bind("resize", function(e) {
-                    if (that.trigger("resize", { task: e.task, date: e.date })) {
+                    if (that.trigger("resize", { task: e.task, start: e.start, end: e.end })) {
                         e.preventDefault();
                     }
                 })
@@ -1110,12 +1110,12 @@ var __meta__ = {
                     var updateInfo = {};
 
                     if (e.resizeStart) {
-                        updateInfo.start = e.date;
+                        updateInfo.start = e.start;
                     } else {
-                        updateInfo.end = e.date;
+                        updateInfo.end = e.end;
                     }
                     
-                    if (!that.trigger("resizeEnd", { task: task, date: e.date })) {
+                    if (!that.trigger("resizeEnd", { task: task, start: e.start, end: e.end })) {
                         that._updateTask(that.dataSource.getByUid(task.uid), updateInfo);
                     }
                 })
