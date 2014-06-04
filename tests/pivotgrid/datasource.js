@@ -1939,6 +1939,26 @@
        ok(params.indexOf('<Properties><PropertyList/></Properties>') > -1);
     });
 
+    test("parameterMap discover properties are added to PropertyList", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { },
+           properties: { foo: "fooValue", bar: "barValue"}
+       }, "discover");
+
+       ok(params.indexOf('<Properties><PropertyList><foo>fooValue</foo><bar>barValue</bar></PropertyList></Properties>') > -1);
+    });
+
+    test("parameterMap discover restrictions are added to RestrictionList", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { },
+           restrictions: { foo: "fooValue", bar: "barValue"}
+       }, "discover");
+
+       ok(params.indexOf('<Restrictions><RestrictionList><foo>fooValue</foo><bar>barValue</bar></RestrictionList></Restrictions>') > -1);
+    });
+
     module("XmlaDataReader initialziation", { });
 
     test("parse returns the body tag content", function() {

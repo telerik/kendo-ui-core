@@ -1081,6 +1081,21 @@ var __meta__ = {
         return command;
     }
 
+    function serializeOptions(parentTagName, options) {
+        var result = "";
+
+        if (options) {
+            result += "<" + parentTagName + ">";
+            for (var key in options) {
+                result += "<" + key + ">" + options[key] + "</" + key + ">";
+            }
+            result += "</" + parentTagName + ">";
+        } else {
+            result += "<" + parentTagName + "/>";
+        }
+        return result;
+    }
+
     var xmlaDiscoverCommands = {
         schemaCubes: "MDSCHEMA_CUBES"
     };
@@ -1137,11 +1152,9 @@ var __meta__ = {
             var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Discover xmlns="urn:schemas-microsoft-com:xml-analysis">';
             command += "<RequestType>" + (xmlaDiscoverCommands[options.command] || options.command) + "</RequestType>";
 
-            command += "<Restrictions><RestrictionList/></Restrictions>";
+            command += "<Restrictions>" + serializeOptions("RestrictionList", options.restrictions) + "</Restrictions>";
+            command += "<Properties>" + serializeOptions("PropertyList", options.properties) + "</Properties>";
 
-            command += "<Properties><PropertyList/>";
-            //command += "<PropertyList><Catalog>" + options.connection.catalog + "</Catalog></PropertyList>";
-            command += "</Properties>";
             command += '</Discover></Body></Envelope>';
             return command;
         }
