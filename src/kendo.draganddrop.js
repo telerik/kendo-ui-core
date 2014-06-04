@@ -607,7 +607,6 @@ var __meta__ = {
             that.userEvents = new UserEvents(that.element, {
                 global: true,
                 allowSelection: true,
-                stopPropagation: true,
                 filter: that.options.filter,
                 threshold: that.options.distance,
                 start: proxy(that._start, that),

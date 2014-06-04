@@ -16,7 +16,6 @@ var __meta__ = {
         document = window.document,
         Class = kendo.Class,
         Observable = kendo.Observable,
-        SELECT_START = "onselectstart" in document.documentElement && support.browser.msie,
         now = $.now,
         extend = $.extend,
         OS = support.mobileOS,
@@ -327,11 +326,7 @@ var __meta__ = {
                 element.on(kendo.applyEventMap("dragstart", ns), kendo.preventDefault);
             }
 
-            if (SELECT_START) {
-                element.on(kendo.applyEventMap("selectstart", ns), filter, { root: element }, "_select");
-            } else {
-                element.on(kendo.applyEventMap("mousedown", ns), filter, { root: element }, "_select");
-            }
+            element.on(kendo.applyEventMap("mousedown", ns), filter, { root: element }, "_select");
 
             if (that.captureUpIfMoved && support.eventCapture) {
                 var surfaceElement = that.surface[0],
@@ -422,10 +417,6 @@ var __meta__ = {
                 extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
-            if (!SELECT_START && (eventName == CANCEL || eventName == END)) {
-                $(document.body).css("userSelect", "");
-            }
-
             return this.trigger(eventName, data);
         },
 
@@ -465,11 +456,7 @@ var __meta__ = {
 
         _select: function(e) {
            if (!this.allowSelection || this.trigger(SELECT, { event: e })) {
-                if (SELECT_START) {
-                    e.preventDefault();
-                } else {
-                    $(document.body).css("userSelect", "none");
-                }
+               e.preventDefault();
            }
         },
 
@@ -483,11 +470,7 @@ var __meta__ = {
                 touch,
                 which = e.which;
 
-            if (which && which > 1){
-                return;
-            }
-
-            if (that._maxTouchesReached()) {
+            if ((which && which > 1) || (that._maxTouchesReached())){
                 return;
             }
 
