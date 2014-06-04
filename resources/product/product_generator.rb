@@ -133,7 +133,7 @@ def start_product_creation()
 
       bot.click_and_wait "New subproduct", "administration"
 
-      create_product(bot, product_name, tname)
+      create_product(bot, product_name,suite_alias, tname)
 
 end
 def navigate_to_section(suite_alias)
@@ -172,7 +172,7 @@ def navigate_to_forum(suite_alias)
     end
   return tname
 end
-def create_product(bot, product_name, tname)
+def create_product(bot, product_name, suite_alias, tname)
     product_icon_path = String.new
 
     if tname == "Kendo UI"
