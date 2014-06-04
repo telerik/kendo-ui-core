@@ -248,17 +248,37 @@
         });
     });
 
-    runTest("Grid toolbar template", function(dom){
+    runTest("Grid toolbar/header/footer templates", function(dom){
         $scope.options = {
-            dataSource: $scope.data,
-            columns: [ { field: "text" }, { field: "id" } ],
-            toolbar: "<div class='my-toolbar'>{{3 + 3}}</div>"
+            dataSource: {
+                data: $scope.data,
+                aggregate: [
+                    { field: "id", aggregate: "sum" },
+                ]
+            },
+            columns: [
+                { field: "text",
+                  headerTemplate: "<div class='my-header'>{{ column.field }}</div>",
+                  footerTemplate: "<div class='my-footer'>{{ column.field }}</div>"
+                },
+                { field: "id",
+                  headerTemplate: "<div class='my-header'>{{ column.field }}</div>",
+                  footerTemplate: "<div class='my-footer'>{{ aggregate.sum }}</div>"
+                }
+            ],
+            toolbar: "<div class='my-toolbar'>{{3 + 3}}</div>",
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
-        expect(1);
+        expect(5);
         $scope.$on("kendoRendered", function(){
             var toolbar = $scope.grid.element.find(".k-grid-toolbar .my-toolbar");
+            var header = $scope.grid.element.find(".k-grid-header");
+            var footer = $scope.grid.element.find(".k-grid-footer");
             ok(toolbar.text() == "6");
+            ok(header.find(".my-header").eq(0).text() == "text");
+            ok(header.find(".my-header").eq(1).text() == "id");
+            ok(footer.find(".my-footer").eq(0).text() == "text");
+            ok(footer.find(".my-footer").eq(1).text() == "3");
             start();
         });
     });

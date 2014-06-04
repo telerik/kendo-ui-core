@@ -982,6 +982,10 @@ var __meta__ = {
                 return;
             }
 
+            this.domUpdate("before", function(){
+                return { elements: that.thead.get() };
+            });
+
             that.thead.find("th").each(function(){
                 var th = $(this),
                     filterMenu = th.data("kendoFilterMenu"),
@@ -2356,6 +2360,10 @@ var __meta__ = {
                     container = $('<div class="k-toolbar k-grid-toolbar" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
+
+                    that.domUpdate("after", function(){
+                        return { elements: container.get() };
+                    });
                 }
 
                 if (editable && editable.create !== false) {
@@ -3442,6 +3450,10 @@ var __meta__ = {
                 if (footer.length) {
                     var tmp = html;
 
+                    that.domUpdate("before", function(){
+                        return { elements: footer.get() };
+                    });
+
                     footer.replaceWith(tmp);
                     footer = that.footer = tmp;
                 } else {
@@ -3451,6 +3463,19 @@ var __meta__ = {
                         footer = that.footer = html.insertBefore(that.tbody);
                     }
                 }
+
+                that.domUpdate("after", function(){
+                    return {
+                        elements: footer.find("td").get(),
+                        data: that.columns.map(function(col, i){
+                            return {
+                                column: col,
+                                aggregate: aggregates[col.field]
+                            };
+                        })
+                    };
+                });
+
             } else if (footer && !that.footer) {
                 that.footer = footer;
             }
@@ -4324,7 +4349,7 @@ var __meta__ = {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
-                html += that._createHeaderCells(that.columns);
+                html += that._createHeaderCells(columns);
 
                 tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
@@ -4342,6 +4367,13 @@ var __meta__ = {
             if (that.thead) {
                 that._destroyColumnAttachments();
             }
+
+            this.domUpdate("after", function(){
+                return {
+                    elements: thead.find("th").get(),
+                    data: columns.map(function(col){ return { column: col }})
+                };
+            });
 
             that.thead = thead.attr("role", "rowgroup");
 

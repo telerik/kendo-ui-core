@@ -535,8 +535,7 @@
           angular.forEach(elements, function(el, i){
             var x = data && data[i], itemScope;
             if (x !== undefined) {
-              itemScope = scope.$new();
-              itemScope.dataItem = data[i].dataItem;
+              itemScope = $.extend(scope.$new(), x);
             }
             compile(el)(itemScope || scope);
           });
@@ -665,36 +664,6 @@
             + kendo.expr(col.field, settings.paramName) + "#</span>";
         }
       });
-    }
-  });
-
-  defadvice("ui.Grid", "_toolbar", function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      compile(self.wrapper.find(".k-grid-toolbar").first())(scope);
-      digest(scope);
-    }
-  });
-
-  defadvice("ui.Grid", "_thead", function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      compile(self.thead)(scope);
-      digest(scope);
-    }
-  });
-
-  defadvice("ui.Grid", "_footer", function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      compile(self.footer)(scope);
-      digest(scope);
     }
   });
 
