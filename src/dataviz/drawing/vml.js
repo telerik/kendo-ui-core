@@ -424,7 +424,7 @@
         )
     });
 
-    var PathNode = Node.extend({
+    var ShapeNode = Node.extend({
         init: function(srcElement, transform) {
             this.fill = new FillNode(srcElement);
             this.stroke = new StrokeNode(srcElement);
@@ -439,11 +439,6 @@
 
         createTransformNode: function(srcElement, transform) {
             return new TransformNode(srcElement, transform);
-        },
-
-        geometryChange: function() {
-            this.attr("v", this.renderData());
-            this.invalidate();
         },
 
         optionsChange: function(e) {
@@ -462,55 +457,6 @@
 
         refreshTransform: function(transform) {
             this.transform.refresh(this.srcElement.currentTransform(transform));
-        },
-
-        renderData: function() {
-            return this.printPath(this.srcElement);
-        },
-
-        printPath: function(path, open) {
-            var segments = path.segments,
-                length = segments.length;
-            if (length > 0) {
-                var parts = [],
-                    output,
-                    segmentType,
-                    currentType,
-                    i;
-
-                for (i = 1; i < length; i++) {
-                    segmentType = this.segmentType(segments[i - 1], segments[i]);
-                    if (segmentType !== currentType) {
-                        currentType = segmentType;
-                        parts.push(segmentType);
-                    }
-
-                    if (segmentType === "l") {
-                        parts.push(printPoints([segments[i].anchor]));
-                    } else {
-                        parts.push(printPoints([
-                            segments[i - 1].controlOut,
-                            segments[i].controlIn,
-                            segments[i].anchor
-                        ]));
-                    }
-                }
-
-                output = "m " + printPoints([segments[0].anchor]) + " " + parts.join(" ");
-                if (path.options.closed) {
-                    output += " x";
-                }
-
-                if (open !== true) {
-                    output += " e";
-                }
-
-                return output;
-            }
-        },
-
-        segmentType: function(segmentStart, segmentEnd) {
-            return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
         },
 
         mapFill: function(fill) {
@@ -576,12 +522,45 @@
             "#= d.renderStyle() # " +
             "coordorigin='0 0' #= d.renderCoordsize() #>" +
                 "#= d.renderChildren() #" +
-                "<kvml:path #= kendo.dataviz.util.renderAttr('v', d.renderData()) # />" +
             "</kvml:shape>"
         )
     });
 
-    var MultiPathNode = PathNode.extend({
+    var PathDataNode = Node.extend({
+        renderData: function() {
+            return printPath(this.srcElement);
+        },
+
+        geometryChange: function() {
+            this.attr("v", this.renderData());
+            Node.fn.geometryChange.call(this);
+        },
+
+        template: renderTemplate(
+            "<kvml:path #= kendo.dataviz.util.renderAttr('v', d.renderData()) #></kvml:path>"
+        )
+    });
+
+    var PathNode = ShapeNode.extend({
+        init: function(srcElement, transform) {
+            this.pathData = this.createDataNode(srcElement);
+
+            ShapeNode.fn.init.call(this, srcElement, transform);
+
+            this.append(this.pathData);
+        },
+
+        createDataNode: function(srcElement) {
+            return new PathDataNode(srcElement);
+        },
+
+        geometryChange: function() {
+            this.pathData.geometryChange();
+            ShapeNode.fn.geometryChange.call(this);
+        }
+    });
+
+    var MultiPathDataNode = PathDataNode.extend({
         renderData: function() {
             var paths = this.srcElement.paths;
 
@@ -592,11 +571,17 @@
 
                 for (i = 0; i < paths.length; i++) {
                     open = i < paths.length - 1;
-                    result.push(this.printPath(paths[i], open));
+                    result.push(printPath(paths[i], open));
                 }
 
                 return result.join(" ");
             }
+        }
+    });
+
+    var MultiPathNode = PathNode.extend({
+        createDataNode: function(srcElement) {
+            return new MultiPathDataNode(srcElement);
         }
     });
 
@@ -610,7 +595,7 @@
         }
     });
 
-    var CircleNode = PathNode.extend({
+    var CircleNode = ShapeNode.extend({
         createTransformNode: function(srcElement, transform) {
             return new CircleTransformNode(srcElement, transform);
         },
@@ -648,9 +633,15 @@
         )
     });
 
-    var ArcNode = PathNode.extend({
+    var ArcDataNode = PathDataNode.extend({
         renderData: function() {
-            return this.printPath(this.srcElement.toPath());
+            return printPath(this.srcElement.toPath());
+        }
+    });
+
+    var ArcNode = PathNode.extend({
+        createDataNode: function(srcElement) {
+            return new ArcDataNode(srcElement);
         }
     });
 
@@ -702,17 +693,15 @@
 
     var TextNode = PathNode.extend({
         init: function(srcElement, transform) {
-            this.pathData = new TextPathDataNode(srcElement);
             this.path = new TextPathNode(srcElement);
 
             PathNode.fn.init.call(this, srcElement, transform);
 
-            this.append(this.pathData);
             this.append(this.path);
         },
 
-        geometryChange: function() {
-            this.pathData.geometryChange();
+        createDataNode: function(srcElement) {
+            return new TextPathDataNode(srcElement);
         },
 
         optionsChange: function(e) {
@@ -726,15 +715,7 @@
 
         contentChange: function() {
             this.path.contentChange();
-        },
-
-        template: renderTemplate(
-            "<kvml:shape " +
-            "#= d.renderStyle() # " +
-            "stroked='false' coordorigin='0 0' #= d.renderCoordsize() #>" +
-                "#= d.renderChildren() #" +
-            "</kvml:shape>"
-        )
+        }
     });
 
     var ImageNode = Node.extend({
@@ -841,6 +822,52 @@
         return result.join(" ");
     }
 
+    function printPath(path, open) {
+        var segments = path.segments,
+            length = segments.length;
+
+        if (length > 0) {
+            var parts = [],
+                output,
+                type,
+                currentType,
+                i;
+
+            for (i = 1; i < length; i++) {
+                type = segmentType(segments[i - 1], segments[i]);
+                if (type !== currentType) {
+                    currentType = type;
+                    parts.push(type);
+                }
+
+                if (type === "l") {
+                    parts.push(printPoints([segments[i].anchor]));
+                } else {
+                    parts.push(printPoints([
+                        segments[i - 1].controlOut,
+                        segments[i].controlIn,
+                        segments[i].anchor
+                    ]));
+                }
+            }
+
+            output = "m " + printPoints([segments[0].anchor]) + " " + parts.join(" ");
+            if (path.options.closed) {
+                output += " x";
+            }
+
+            if (open !== true) {
+                output += " e";
+            }
+
+            return output;
+        }
+    }
+
+    function segmentType(segmentStart, segmentEnd) {
+        return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
+    }
+
     // Exports ================================================================
     if (kendo.support.browser.msie) {
         d.SurfaceFactory.current.register("vml", Surface, 30);
@@ -848,14 +875,17 @@
 
     deepExtend(d, {
         vml: {
+            ArcDataNode: ArcDataNode,
             ArcNode: ArcNode,
             CircleTransformNode: CircleTransformNode,
             CircleNode: CircleNode,
             FillNode: FillNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
+            MultiPathDataNode: MultiPathDataNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
+            PathDataNode: PathDataNode,
             PathNode: PathNode,
             RootNode: RootNode,
             StrokeNode: StrokeNode,
