@@ -283,6 +283,30 @@
         });
     });
 
+    runTest("Grid detailTemplate", function(dom){
+        var count = 2;
+        expect(count);
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [
+                { field: "text" },
+                { field: "id" }
+            ],
+            detailTemplate: "<div class='my-detail'>{{ dataItem.text }}/{{ dataItem.id }}</div>",
+            detailInit: function(ev) {
+                var div = ev.detailCell.find(".my-detail");
+                ok( div.text() == (ev.data.text + "/" + ev.data.id) );
+                if (--count == 0) start();
+            },
+            dataBound: function() {
+                var rows = this.tbody.find("tr.k-master-row");
+                this.expandRow(rows.eq(0));
+                this.expandRow(rows.eq(1));
+            }
+        };
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+    });
+
     runTest("TreeView item template", function(dom){
         $scope.options = {
             dataSource: $scope.data,

@@ -4093,16 +4093,24 @@ var __meta__ = {
                 button.toggleClass("k-plus", !expanding)
                     .toggleClass("k-minus", expanding);
 
-                if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
+                detailRow = masterRow.next();
+
+                if (hasDetails && !detailRow.hasClass("k-detail-row")) {
                     data = that.dataItem(masterRow);
-                    $(detailTemplate(data))
+
+                    detailRow = $(detailTemplate(data))
                         .addClass(masterRow.hasClass("k-alt") ? "k-alt" : "")
                         .insertAfter(masterRow);
 
-                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: masterRow.next(), data: data, detailCell: masterRow.next().find(".k-detail-cell") });
-                }
+                    that.domUpdate("after", function(){
+                        return {
+                            elements: detailRow.get(),
+                            data: [ { dataItem: data } ]
+                        };
+                    });
 
-                detailRow = masterRow.next();
+                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: detailRow, data: data, detailCell: detailRow.find(".k-detail-cell") });
+                }
 
                 that.trigger(expanding ? DETAILEXPAND : DETAILCOLLAPSE, { masterRow: masterRow, detailRow: detailRow});
                 detailRow.toggle(expanding);

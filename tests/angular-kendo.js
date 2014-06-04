@@ -677,20 +677,6 @@
     }
   });
 
-  defadvice("ui.Grid", AFTER, function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      if (self.options.detailTemplate) bindBefore(self, "detailInit", function(ev){
-        var detailScope = scope.$new();
-        detailScope.dataItem = ev.data;
-        compile(ev.detailCell)(detailScope);
-        digest(detailScope);
-      });
-    }
-  });
-
   defadvice("ui.Grid", "cancelRow", function(){
     var self = this.self;
     var scope = angular.element(self.element).scope();
