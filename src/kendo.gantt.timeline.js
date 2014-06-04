@@ -24,6 +24,10 @@ var __meta__ = {
     var CLICK = "click";
     var KEYDOWN = "keydown";
     var DOT = ".";
+    var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
+    var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
+    var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
+    var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var RESIZE_HINT = kendo.template('<div class="#=styles.marquee#">' +
                            '<div class="#=styles.marqueeColor#"></div>' +
                        '</div>');
@@ -143,8 +147,6 @@ var __meta__ = {
 
             this._dependencyTree = options.dependencyTree;
 
-            this._templates();
-
             this._taskCoordinates = {};
         },
 
@@ -166,10 +168,6 @@ var __meta__ = {
         },
 
         options: {
-            timeHeaderTemplate: "",
-            dayHeaderTemplate: "",
-            weekHeaderTemplate: "",
-            monthHeaderTemplate: "",
             showWorkHours: false,
             showWorkDays: false,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
@@ -178,15 +176,6 @@ var __meta__ = {
             workWeekEnd: 5,
             hourSpan: 1,
             slotSize: 100
-        },
-
-        _templates: function() {
-            var options = this.options;
-
-            this.timeHeaderTemplate = kendo.template(options.timeHeaderTemplate);
-            this.dayHeaderTemplate = kendo.template(options.dayHeaderTemplate);
-            this.weekHeaderTemplate = kendo.template(options.weekHeaderTemplate);
-            this.monthHeaderTemplate = kendo.template(options.monthHeaderTemplate);
         },
 
         renderLayout: function() {
@@ -1197,6 +1186,11 @@ var __meta__ = {
     kendo.ui.GanttDayView = GanttView.extend({
         name: "day",
 
+        options: {
+            timeHeaderTemplate: TIME_HEADER_TEMPLATE,
+            dayHeaderTemplate: DAY_HEADER_TEMPLATE
+        },
+
         range: function(range) {
             this.start = kendo.date.getDate(range.start);
             this.end = kendo.date.getDate(range.end);
@@ -1233,9 +1227,10 @@ var __meta__ = {
 
         _layout: function() {
             var rows = [];
+            var options = this.options;
 
-            rows.push(this._slotHeaders(this._slots[0], this.dayHeaderTemplate));
-            rows.push(this._slotHeaders(this._slots[1], this.timeHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[0], kendo.template(options.dayHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[1], kendo.template(options.timeHeaderTemplate)));
 
             return rows;
         }
@@ -1243,6 +1238,11 @@ var __meta__ = {
 
     kendo.ui.GanttWeekView = GanttView.extend({
         name: "week",
+
+        options: {
+            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
+            weekHeaderTemplate: WEEK_HEADER_TEMPLATE
+        },
 
         range: function(range) {
             var calendarInfo = this.calendarInfo();
@@ -1263,9 +1263,10 @@ var __meta__ = {
 
         _layout: function() {
             var rows = [];
+            var options = this.options;
 
-            rows.push(this._slotHeaders(this._slots[0], this.weekHeaderTemplate));
-            rows.push(this._slotHeaders(this._slots[1], this.dayHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[0], kendo.template(options.weekHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[1], kendo.template(options.dayHeaderTemplate)));
 
             return rows;
         }
@@ -1273,6 +1274,11 @@ var __meta__ = {
 
     kendo.ui.GanttMonthView = GanttView.extend({
         name: "month",
+
+        options: {
+            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE
+        },
 
         range: function(range) {
             this.start = kendo.date.firstDayOfMonth(range.start);
@@ -1290,9 +1296,10 @@ var __meta__ = {
 
         _layout: function() {
             var rows = [];
+            var options = this.options;
 
-            rows.push(this._slotHeaders(this._slots[0], this.monthHeaderTemplate));
-            rows.push(this._slotHeaders(this._slots[1], this.weekHeaderTemplate));
+            rows.push(this._slotHeaders(this._slots[0], kendo.template(options.monthHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[1], kendo.template(options.weekHeaderTemplate)));
 
             return rows;
         }

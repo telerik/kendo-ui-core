@@ -35,10 +35,6 @@ var __meta__ = {
         }
     };
     var DOT = ".";
-    var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
-    var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
-    var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
-    var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
             '#if (editable == true) {#'+
                 '<ul class="#=styles.actionsWrapper#">' +
@@ -775,10 +771,6 @@ var __meta__ = {
                     insetAfter: "Add Below"
                 }
             },
-            timeHeaderTemplate: TIME_HEADER_TEMPLATE,
-            dayHeaderTemplate: DAY_HEADER_TEMPLATE,
-            weekHeaderTemplate: WEEK_HEADER_TEMPLATE,
-            monthHeaderTemplate: MONTH_HEADER_TEMPLATE,
             showWorkHours: true,
             showWorkDays: true,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),

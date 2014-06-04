@@ -128,8 +128,7 @@
 
     test("view initialized with merged options", function() {
         timeline = new Timeline(element, {
-            views: [{ type: "day" }],
-            dayHeaderTemplate: "customTemplate"
+            views: [{ type: "day", dayHeaderTemplate: "customTemplate" }]
         });
 
         timeline.view("day");
@@ -342,9 +341,7 @@
 
 
     test("renderLayout() creates hour headers with correct text", function() {
-        view = dayView({
-            timeHeaderTemplate: kendo.template("#=kendo.toString(start, 't')#")
-        });
+        view = dayView();
         var range = {
             start: new Date("2014/04/15"),
             end: new Date("2014/04/17")
@@ -512,9 +509,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = dayView({
-            dayHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')#")
-        });
+        view = dayView();
         view.range(range);
         view.renderLayout();
 
@@ -790,9 +785,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = weekView({
-            dayHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')#")
-        });
+        view = weekView();
         view.range(range);
         view.renderLayout();
 
@@ -877,9 +870,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = weekView({
-            weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
-        });
+        view = weekView();
         view.range(range);
         view.renderLayout();
 
@@ -893,7 +884,6 @@
         };
 
         view = weekView({
-            weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#"),
             showWorkDays: true
         });
         view.range(range);
@@ -1080,9 +1070,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = monthView({
-            weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
-        });
+        view = monthView();
         view.range(range);
         view.renderLayout();
 
@@ -1095,9 +1083,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = monthView({
-            weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
-        });
+        view = monthView();
         view.range(range);
         view.renderLayout();
 
@@ -1110,9 +1096,7 @@
             end: new Date("2014/04/23")
         };
 
-        view = monthView({
-            weekHeaderTemplate: kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#")
-        });
+        view = monthView();
         view.range(range);
         view.renderLayout();
 
@@ -1210,9 +1194,7 @@
             end: new Date("2014/08/23")
         };
 
-        view = monthView({
-            monthHeaderTemplate: kendo.template("#=kendo.toString(start, 'MMM')#")
-        });
+        view = monthView();
         view.range(range);
         view.renderLayout();
 
