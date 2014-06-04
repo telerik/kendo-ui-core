@@ -73,6 +73,9 @@ module CodeGen
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
+            CONVERTER_SCRIPT_TEMPLATE = ERB.new('
+            AddScript(state, "<%= name %>", convertable.<%= csharp_name %>);')
+
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), <%= csharp_default %>.ToString());')
 
@@ -243,6 +246,7 @@ module CodeGen
 
                 def to_converter
                     return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
+                    return CONVERTER_SCRIPT_TEMPLATE.result(get_binding) if type.instance_of?([].class) && type.length == 1 && type.include?("Function")
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
                 end
 
@@ -615,7 +619,7 @@ module CodeGen
                         component.add_option({name: 'clientEvents', type: 'Object', description: 'Defines the client events handlers.' })
 
                         component.events.each do |event|
-                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: 'String', description: event.description, remove_existing: true })
+                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: ['Function'], description: event.description, remove_existing: true })
                         end
 
                         component.options.find{|o| o.name == 'clientEvents'}.type = "kendo.#{component.name.pascalize}ClientEvents"
