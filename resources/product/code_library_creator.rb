@@ -2,7 +2,7 @@ require 'selenium-webdriver'
 require 'singleton'
 require 'version'
 
-class TelerikReleaseNotesBot
+class TelerikCodeLibraryBot
     include Singleton
 
     attr_reader :driver
@@ -15,8 +15,6 @@ class TelerikReleaseNotesBot
         driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
         driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
         click_and_wait("Log in with Telerik", "Legacy Dashboard")
-
-        @products = ["Kendo UI", "UI for ASP.NET MVC", "UI for JSP", "UI for PHP"]
 
     end
 
@@ -50,6 +48,7 @@ class TelerikReleaseNotesBot
         rescue
         screenshot("Browser_Timeout_On_Element_Wait")
     end
+    #not used
     def wait_for_validation(element_path)
         Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:xpath, element_path) }
         rescue
@@ -71,121 +70,63 @@ class TelerikReleaseNotesBot
       rescue 
       screenshot("Script_Execution_Failed_In_" + file_name + "_line_" + caller_array[2])
     end
-    def set_upload_path(element, path)
-      element.send_keys(path)
-      rescue
-      screenshot("Upload_Path_Setting_Failed_For_" + path)
-    end
+    #?
     def get_select(title)
         element = driver.find_element(:xpath, "//label[text()='#{title}']/..//select")  
         select_element = Selenium::WebDriver::Support::Select.new(element)
         return select_element
     end
-    def fetch_product()
-      return @products.pop()
-    end
-    def products()
-      return @products
+    def click_checkbox(bot, tname)
+        element = driver.find_element(:xpath, "//a[text()='#{tname}']/../../..//input")
+        bot.execute_script 'arguments[0].click()'
     end
 end
 
-def set_path_and_upload()
+def create_code_library(bot, product_name, tname)
+    bot = TelerikCodeLibraryBot.instance
+    navigate_to_cl_section(bot)
+    create_cl_thread(bot, product_name, tname)
 
-    bot = TelerikReleaseNotesBot.instance
-
-    #Beta release
-    if defined? Beta
-      if ENV["DRY_RUN"]
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/DRY_RUN_BETA/changelogs"
-      else
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/BETA/changelogs"
-      end    
-    else
-      #official release
-      if defined? SERVICE_PACK_NUMBER
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}/changelogs"
-      else
-        archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}/changelogs"
-      end
-    end 
-
-    archive_path = File.join(RELEASE_ROOT, VERSION_YEAR.to_s, archive_folder_name)
-
-    upload_release_notes(bot, archive_path) 
+    bot.driver.quit
 end
-def upload_release_notes(bot, archive_path)
-    if bot.products.size > 0
-      navigate_to_import_form(bot)
-      upload_files_and_validate(bot, archive_path, bot.fetch_product)
-    else
-       bot.driver.quit
-    end
-end
-def navigate_to_import_form(bot)
-    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Administration')]"))
-    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Import Release Notes')]"))
-    bot.wait_for_title("Import Release Notes")
-end
-def upload_files_and_validate(bot, archive_path, productName)
+def navigate_to_cl_section(bot)
+    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Content')]"))
+    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Forums')]"))
+    bot.wait_for_title("Forums")
 
-    set_fields_data(bot, productName)
-    full_path = String.new
-
-    case productName
-      when "Kendo UI"
-         full_path = File.expand_path(archive_path + "/telerik.kendoui.professional.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
-      when "UI for ASP.NET MVC"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.aspnetmvc.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
-      when "UI for JSP"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.jsp.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
-      when "UI for PHP"
-        full_path = File.expand_path(archive_path + "/telerik.ui.for.php.#{VERSION}.trial.xml", File.join(File.dirname(__FILE__), ".."))
-    end
+    bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Code Library')]"))
+    bot.wait_for_title("Forums")
+end
+def create_cl_thread(bot, product_name, tname)
     
-    element = bot.driver.find_element(:xpath, "//input[contains(@id,'ReleaseNoteFileUploader')]")
-    upload_id = element.attribute("id")
-    upload_relnotes_file(bot, upload_id, full_path)
-    
-    sleep(5)
+    if bot.driver.find_element(:xpath, "//a[contains(text(), #{tname})]") != nil
+      p "product found>>#{tname}"
+      click_checkbox(bot, tname)
+      bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create a forum in selected group')]"))
+      bot.wait_for_title("Forums")
 
-    bot.click_element(bot.driver.find_element(:xpath, "//a[contains(@id,'ImportReleaseNotesButton')]"))
+      set_cl_fields(bot, product_name)
 
-    sleep(3)
-    bot.wait_for_validation("//div[contains(text(), 'successfully')]")
-
-    upload_release_notes(bot, archive_path)
-
+      bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create this forum')]"))
+      sleep(3)
+      #bot.wait_for_validation("//div[contains(text(), 'successfully')]")
+    end
 end
-def set_fields_data(bot, productName)
-    #Beta release notes
-    if defined? Beta
-      bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} Beta')")
-      #due to mandatory non-empty value requirement (form validation bug)
-      bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
-      bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_2\"]').click()")  
-    else
-    #official release notes
-      if defined? SERVICE_PACK_NUMBER
-        bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}')")
-        bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('#{SERVICE_PACK_NUMBER}')")
-        bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_1\"]').click()")
+def set_cl_fields(bot, product_name)
+      bot.execute_script("$('[id$=\"titleFieldControl_0_ctl00_0_ctl00_0_textBox_write_0\"]').val('#{product_name}')")
+      bot.execute_script("$('[id$=\"_pageUrl\"]').className('sfSelectedItem')")
+      bot.execute_script("$('[id$=\"_pageUrl\"]').text('Code Library')")
+
+      if product_name.index("Mobile") == nil
+        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('"+ product_name.downcase + "')")
       else
-        bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR}')")
-        #due to mandatory non-empty value requirement (form validation bug)
-        bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
-        bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_0\"]').click()")
+        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('mobile-"+ product_name.downcase.sub " (mobile)","" + "')")
       end
-    end 
-    bot.execute_script("$('[id$=\"_ReleaseVersionTb\"]').val('#{VERSION}')") 
+      
 
-    date = DateTime.now.strftime('%m/%d/%Y')
-    bot.execute_script("$find($telerik.$('[id$=\"_ReleaseDateDatePicker_dateInput\"]').attr('id')).set_value('#{date}')")
-
-    option_select = bot.get_select("Product")
-    option_select.select_by(:text, productName)
-
-end
-def upload_relnotes_file(bot, upload_id, full_path)
-    full_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
-    bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id}"), full_path)
+      bot.execute_script("$('[id$=\"_singleCheckBox_0\"]').click()")
+      sleep(1)
+      bot.execute_script("$('[id$=\"radioButtons_radiobuttons_0_1_0\"]').click()")
+      sleep(1)
+      bot.execute_script("$('[id$=\"AllowedAttachmentExtensionsText_0_ctl00_0_ctl00_0_textBox_write_0\"]').val('.zip, .rar')")
 end
