@@ -730,7 +730,7 @@ bundle :name => 'appbuilder.professional',
        :product => 'Kendo UI Professional',
        :contents => {
             'styles' => APP_BUILDER_MIN_CSS,
-            'js' => APP_BUILDER_MIN_JS + JQUERY_MAP,
+            'js' => APP_BUILDER_MIN_JS,
             'typescript' => FileList['resources/typescript/jquery.d.ts']
        },
        :upload_to_appbuilder => true,
@@ -744,7 +744,7 @@ bundle :name => 'appbuilder.core',
        :product => 'Kendo UI Core',
        :contents => {
             'styles' => APP_BUILDER_CORE_MIN_CSS,
-            'js' => APP_BUILDER_CORE_MIN_JS + JQUERY_MAP,
+            'js' => APP_BUILDER_CORE_MIN_JS,
             'typescript' => FileList['resources/typescript/jquery.d.ts']
        },
        :upload_to_appbuilder => true
