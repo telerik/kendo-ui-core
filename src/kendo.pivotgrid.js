@@ -1153,6 +1153,13 @@ var __meta__ = {
             command += "<RequestType>" + (xmlaDiscoverCommands[options.command] || options.command) + "</RequestType>";
 
             command += "<Restrictions>" + serializeOptions("RestrictionList", options.restrictions) + "</Restrictions>";
+
+            if (options.connection.catalog) {
+                options.properties = $.extend({}, {
+                    Catalog: options.connection.catalog
+                }, options.properties);
+            }
+
             command += "<Properties>" + serializeOptions("PropertyList", options.properties) + "</Properties>";
 
             command += '</Discover></Body></Envelope>';

@@ -1939,6 +1939,16 @@
        ok(params.indexOf('<Properties><PropertyList/></Properties>') > -1);
     });
 
+    test("parameterMap discover connection catalog is added to PropertyList", function() {
+       var transport = new kendo.data.XmlaTransport({ });
+       var params = transport.parameterMap({
+           connection: { cube: "myCube", catalog: "myCatalog" },
+           properties: { foo: "fooValue", bar: "barValue"}
+       }, "discover");
+
+       ok(params.indexOf('<Properties><PropertyList><Catalog>myCatalog</Catalog><foo>fooValue</foo><bar>barValue</bar></PropertyList></Properties>') > -1);
+    });
+
     test("parameterMap discover properties are added to PropertyList", function() {
        var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({
