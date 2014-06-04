@@ -178,7 +178,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: "styles",
-                    src: ["**/*.less", "**/*.woff", "**/*.ttf", "**/*.png", "**/*.gif", "**/*.css" ],
+                    src: ["**/*.less", "**/*.woff", "**/*.ttf", "**/*.png", "**/*.gif", "**/*.css", "**/*.svg" ],
                     dest: '<%= kendo.options.stylesDestDir %>/',
                 }]
             }
