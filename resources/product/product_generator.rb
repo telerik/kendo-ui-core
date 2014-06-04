@@ -1,6 +1,5 @@
 require 'selenium-webdriver'
 require 'singleton'
-require 'version'
 
 class TelerikProductCreateBot
     include Singleton
