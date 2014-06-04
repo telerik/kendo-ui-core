@@ -43,17 +43,6 @@ class TelerikCodeLibraryBot
         rescue
         screenshot("Browser_Timeout_On_Page_Title_Wait")
     end
-    def wait_for_element(css)
-        Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:css, css) }
-        rescue
-        screenshot("Browser_Timeout_On_Element_Wait")
-    end
-    #not used
-    def wait_for_validation(element_path)
-        Selenium::WebDriver::Wait.new(:timeout => 30).until { driver.find_element(:xpath, element_path) }
-        rescue
-        screenshot("Browser_Timeout_On_Validation")
-    end
     def screenshot(failed_operation)
       if failed_operation.nil?
         failed_operation = "null"
@@ -69,12 +58,6 @@ class TelerikCodeLibraryBot
       driver.execute_script(script)
       rescue 
       screenshot("Script_Execution_Failed_In_" + file_name + "_line_" + caller_array[2])
-    end
-    #?
-    def get_select(title)
-        element = driver.find_element(:xpath, "//label[text()='#{title}']/..//select")  
-        select_element = Selenium::WebDriver::Support::Select.new(element)
-        return select_element
     end
     def click_checkbox(bot, tname)
         element = driver.find_element(:xpath, "//a[text()='#{tname}']/../../..//input")
