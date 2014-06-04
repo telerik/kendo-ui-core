@@ -88,7 +88,7 @@
     var setup = function(options) {
         var dataSource = setupDataSource(options ? options.data : data);
         ganttList = new GanttList(element, {
-            columns: options ? options.columns : [],
+            columns: options ? options.columns : [{ field: "title", editable: true }],
             dataSource: dataSource
         });
 
@@ -203,6 +203,19 @@
             .hint
             .children(".k-clue-text")
             .text(), "foo");
+    });
+
+    test("drag start is prevented when cell in edit", 1, function() {
+        var targetRow = ganttList.content.find("tr:first");
+        var targetCell = targetRow.children("td:first");
+
+        draggable.bind("dragstart", function(e) {
+            ok(e.isDefaultPrevented());
+        });
+
+        tap(targetCell);
+        tap(targetCell);
+        dragstart(targetRow);
     });
 
     test("dragenter on possible target removes denied class", function() {

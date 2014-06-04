@@ -528,8 +528,6 @@ var __meta__ = {
 
             this.editable = cell
                 .addClass(listStyles.editCell)
-                .parent("tr").addClass(listStyles.editRow)
-                .end()
                 .kendoEditable({
                     fields: {
                         field: column.field,
@@ -564,8 +562,6 @@ var __meta__ = {
             cell.empty()
                 .removeData("modelCopy")
                 .removeClass(listStyles.editCell)
-                .parent("tr").removeClass(listStyles.editRow)
-                .end()
                 .append(this._editableContent);
 
             this.editable.destroy();
@@ -653,7 +649,7 @@ var __meta__ = {
                     distance: 10,
                     holdToDrag: kendo.support.mobileOS,
                     group: "listGroup",
-                    filter: "tr[data-uid]:not('." + listStyles.editRow + "')",
+                    filter: "tr[data-uid]",
                     hint: function(target) {
                         return $('<div class="' + listStyles.header + " " + listStyles.dragClue + '"/>')
                                 .css({
@@ -669,6 +665,9 @@ var __meta__ = {
                     cursorOffset: { top: -20, left: 0 },
                     container: this.content,
                     "dragstart": function(e) {
+                        if (that.editable) {
+                            e.preventDefault();
+                        }
                         draggedTask = that._modelFromElement(e.currentTarget);
                         this.hint.children(DOT + listStyles.dragClueText)
                             .text(draggedTask.get("title"));
