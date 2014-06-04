@@ -209,6 +209,44 @@
         });
     });
 
+    runTest("Grid cell templates after edit", function(dom){
+        $scope.options = {
+            dataSource: new kendo.data.DataSource({
+                data: $scope.data
+            }),
+            columns: [
+                { field: "text", template: "|{{dataItem.text}}|" },
+                { field: "id", template: "|{{dataItem.id}}|" },
+                { command: [ "edit",
+                             { template: "<div class='command-template'>{{dataItem.text}}/{{dataItem.id}}</div>" } ]
+                }
+            ],
+            editable: true
+        };
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(5);
+        $scope.$on("kendoRendered", function(){
+            var grid = $scope.grid;
+            var el = grid.element;
+            var tbody = grid.tbody;
+            var rows = tbody.find("tr");
+
+            ok(el.find('.command-template').eq(0).text() == "Foo/1");
+            ok(el.find('.command-template').eq(1).text() == "Bar/2");
+
+            grid.editRow(rows.eq(0));
+            grid.cancelRow();
+            ok(rows.eq(0).find("td").eq(0).text() == "|Foo|");
+            ok(rows.eq(0).find("td").eq(1).text() == "|1|");
+
+            grid.editCell(rows.eq(0).find("td").eq(0));
+            grid.closeCell();
+            ok(rows.eq(0).find("td").eq(0).text() == "|Foo|");
+
+            start();
+        });
+    });
+
     runTest("Grid rowTemplate", function(dom){
         $scope.options = {
             dataSource: $scope.data,

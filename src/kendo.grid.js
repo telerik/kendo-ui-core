@@ -1798,6 +1798,12 @@ var __meta__ = {
             }
 
             cell.empty().html(tmpl(dataItem));
+            that.domUpdate("after", function(){
+                return {
+                    elements: cell.get(),
+                    useParentScope: true
+                };
+            })
         },
 
         removeRow: function(row) {
@@ -2187,8 +2193,17 @@ var __meta__ = {
                     that._relatedRow(row.last()).replaceWith(related);
                 }
 
+                that.domUpdate("before", function(){ return { elements: row.get() }; });
+
                 newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
                 row.replaceWith(newRow);
+
+                that.domUpdate("after", function(){
+                    return {
+                        elements: newRow.get(),
+                        data: [ { dataItem: model } ]
+                    };
+                });
 
                 if (related) {
                     adjustRowHeight(newRow[0], related[0]);

@@ -533,9 +533,14 @@
 
          case "after":
           angular.forEach(elements, function(el, i){
-            var x = data && data[i], itemScope;
-            if (x !== undefined) {
-              itemScope = $.extend(scope.$new(), x);
+            var itemScope;
+            if (x.useParentScope) {
+              itemScope = angular.element(el).scope();
+            } else {
+              var vars = data && data[i];
+              if (vars !== undefined) {
+                itemScope = $.extend(scope.$new(), vars);
+              }
             }
             compile(el)(itemScope || scope);
           });
@@ -673,28 +678,6 @@
     var scope = angular.element(self.element).scope();
     if (scope) {
       compile(self.element)(scope);
-      digest(scope);
-    }
-  });
-
-  defadvice("ui.Grid", "cancelRow", function(){
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    var cont = self._editContainer;
-    if (cont) {
-      var model = self._modelForContainer(cont);
-      var uid = model.uid;
-      var prevScope = angular.element(cont).scope();
-      if (prevScope && prevScope !== scope) {
-        destroyScope(prevScope, cont);
-      }
-    }
-    this.next();
-    if (uid) {
-      var row = self.items().filter("[" + _UID_ + "=" + uid + "]");
-      var rowScope = scope.$new();
-      rowScope.dataItem = model;
-      compile(row)(rowScope);
       digest(scope);
     }
   });
