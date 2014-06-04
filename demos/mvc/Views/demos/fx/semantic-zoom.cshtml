@@ -1,0 +1,214 @@
+<div id="example">
+        <div id="container">
+            <div id="view"></div>
+        </div>
+
+        <script id="index" type="text/x-kendo-template">
+            <div id="tiles" data-role="listview" data-bind="source: artistDS" data-template="album-template">
+            </div>
+        </script>
+
+        <script id="album-template" type="text/x-kendo-template">
+            <a href="\#/detail?id=#: collectionId #" class="large" style="background-image: url(#: artworkUrl100 #)">#: collectionName # (#: releaseDate.getFullYear() #)</a>
+        </script>
+
+        <script id="detail" type="text/x-kendo-template">
+            <div id="detail-view" data-bind="style: { backgroundImage: largeAlbumCover }">
+            <a href="#">Back</a>
+            <h2><span data-bind="text: album.collectionName"></span></h2>
+            <ol id="tracks" data-role="listview" data-bind="source: albumDS, events: { dataBound: fadeTracks }" data-template="track-template" data-auto-bind="false">
+            </ol>
+            </div>
+        </script>
+
+        <script id="track-template" type="text/x-kendo-template">
+            <li>#: trackName #</li>
+        </script>
+
+        <style scoped>
+            #view {
+                position: relative;
+                width: 600px;
+                height: 600px;
+                overflow: hidden;
+            }
+
+            .k-fx-szoom.k-fx-end .k-fx-next {
+                position: relative;
+            }
+
+            #tiles {
+                overflow: auto;
+                width: 600px;
+                height: 600px;
+            }
+
+            #tiles a {
+                background: none none left top no-repeat;
+                box-sizing: border-box;
+                width: 100px;
+                height: 100px;
+                margin: 0 20px 20px 0;
+                float: left;
+                background: #e4e4e4;
+            }
+
+            #detail-view {
+                width: 600px;
+                height: 600px;
+                background: #e4e4e4;
+            }
+        </style>
+
+        <script type="text/javascript" charset="utf-8">
+
+            function scaleElement(element, origin, scale) {
+                element.css({
+                    transformOrigin: origin.x + "px " + origin.y + "px",
+                    transform: "scale(" + scale + ")"
+                });
+            }
+
+            var origin = "0 0";
+            var scale = 1;
+
+            var router = new kendo.Router();
+
+            router.route("/", function() {
+                layout.showIn("#view", index);
+            });
+
+            router.route("/detail", function(params) {
+                detail.model.set("albumID", params.id);
+                layout.showIn("#view", detail, "szoom");
+            });
+
+            var artistID = '372976'; // Massive Attack
+
+            var layout = new kendo.Layout("#container");
+
+            var scrollTop = 0;
+
+            var artistDS = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "https://itunes.apple.com/lookup?id=" + artistID + "&entity=album",
+                            dataType: "jsonp"
+                        },
+                    },
+                    schema: {
+                        data: "results",
+                        model: {
+                            id: "collectionId",
+                            fields: {
+                                releaseDate: {
+                                    type: "date"
+                                }
+                            }
+                        }
+                    },
+                filter: { field: "wrapperType", operator: "equals", value: "collection" }
+            });
+
+            var index = new kendo.View("index", {
+                wrap: false,
+                model: {
+                    artistDS: artistDS,
+                },
+                init: function() {
+                    var element = this.element;
+
+                    element.on("click", "a", function(e) {
+                        var targetBox = kendo.effects.box(e.target);
+                        var viewBox = kendo.effects.box(element);
+
+                        origin = kendo.effects.transformOrigin(targetBox, viewBox);
+                        scale = kendo.effects.fitScale(targetBox, viewBox);
+                    });
+                },
+
+                transitionStart: function(e) {
+                    if (e.type === "show") {
+                        scaleElement(this.element, origin, 1 / scale);
+                    } else {
+                        scaleElement(this.element, origin, 1);
+                    }
+                },
+
+                transitionEnd: function(e) {
+                    if (e.type === "show") {
+                        scaleElement(this.element, origin, 1);
+                        this.element[0].scrollTop = scrollTop;
+                    } else {
+                        scaleElement(this.element, origin, 1 / scale);
+                        scrollTop = this.element[0].scrollTop;
+                    }
+                }
+            });
+
+            var detail = new kendo.View("detail", {
+                wrap: false,
+                model: kendo.observable({
+                    albumID: null,
+                    album: null,
+                    largeAlbumCover: function() {
+                        if (this.get("album")) {
+                            return "url(" + this.get("album").artworkUrl100.replace("100x100", "600x600") + ")";
+                        } else {
+                            return "none";
+                        }
+                    },
+                    albumDS: new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: function() {
+                                    return "https://itunes.apple.com/lookup?id=" + detail.model.get("albumID") + "&entity=song";
+                                },
+                                dataType: "jsonp"
+                            },
+                        },
+                        schema: {
+                            data: "results",
+                            model: {
+                                fields: {
+                                    releaseDate: {
+                                        type: "date"
+                                    }
+                                }
+                            }
+                        },
+                        filter: { field: "wrapperType", operator: "equals", value: "track" }
+                    }),
+
+                    fadeTracks: function(e) {
+                        e.sender.element.show();
+                        kendo.fx(e.sender.element).expand("vertical").play();
+                    }
+                }),
+
+                transitionStart: function(e) {
+                    if (e.type === "show") {
+                        scaleElement(this.element, origin, scale);
+                    } else {
+                        scaleElement(this.element, origin, 1);
+                    }
+                },
+
+                transitionEnd: function(e) {
+                    if (e.type === "show") {
+                        scaleElement(this.element, origin, 1);
+                    } else {
+                        scaleElement(this.element, origin, scale);
+                    }
+                },
+
+                show: function() {
+                    this.model.set("album", artistDS.get(this.model.get("albumID")));
+                    this.element.find("#tracks").hide();
+                    this.model.albumDS.read();
+                }
+            });
+
+            router.start();
+        </script>
+</div>

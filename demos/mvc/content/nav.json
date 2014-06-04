@@ -4284,7 +4284,6 @@
         "title": {
             "kendo-ui": "Replace effect"
         },
-        "new": true,
         "meta": {
             "kendo-ui": "This demo showcases how to create custom CSS class based transition between two HTML elements using Kendo UI Replace effect"
         }
@@ -4297,6 +4296,17 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how different combined effects can be used while building apps with Kendo UI Web framework in order to deliver rich end-user experience."
+        }
+      },
+      {
+        "text": "Semantic Zoom",
+        "url": "fx/semantic-zoom",
+        "title": {
+            "kendo-ui": "Semantic Zoom effect"
+        },
+        "new": true,
+        "meta": {
+            "kendo-ui": "This demo showcases how to implement semantic zoom between views in a single-page Kendo UI application"
         }
       }
     ],
