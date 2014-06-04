@@ -133,7 +133,7 @@ def start_product_creation()
 
       bot.click_and_wait "New subproduct", "administration"
 
-      create_product(bot, product_name, suite_alias, tname)
+      create_product(bot, product_name, tname)
 
 end
 def navigate_to_section(suite_alias)
@@ -172,7 +172,7 @@ def navigate_to_forum(suite_alias)
     end
   return tname
 end
-def create_product(bot, product_name, suite_alias, tname)
+def create_product(bot, product_name, tname)
     product_icon_path = String.new
 
     if tname == "Kendo UI"
@@ -214,7 +214,7 @@ def create_product(bot, product_name, suite_alias, tname)
     bot.click_and_wait "Save", "administration"
     #sort new product accordingly
 
-    #assign_team(bot)
+    #assign_team(bot, product_name, suite_alias, tname)
     #create_forum(bot, product_name, suite_alias, tname)   
     #create_code_library(bot, product_name, suite_alias, tname)
 end
@@ -253,9 +253,9 @@ def create_forum(bot, product_name, suite_alias, tname)
   
   bot.click_element(bot.find("[value='New Subforum']"))
 
-  fill_forum_fields(bot, product_name, suite_alias, tname)
+  fill_forum_fields(bot, product_name, tname)
 end
-def fill_forum_fields(bot, product_name, suite_alias, tname)
+def fill_forum_fields(bot, product_name, tname)
     bot.execute_script("$('[id$=\"_txtTitle\"]').val('#{product_name}')")
     bot.execute_script("$('[id$=\"_txtPageTitle\"]').val('#{product_name}')")
     
