@@ -144,12 +144,12 @@ var __meta__ = {
             }
 
             if (typeof content === "string") {
+                content = content.replace(/^\s+|\s+$/g, '');
                 if (that._evalTemplate) {
                     content = kendo.template(content)(that.model || {});
                 }
 
                 element = $(wrapper).append(content);
-                kendo.stripWhitespace(element[0]);
                 // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like this one for instance:
                 // <script id="my-template">
                 // foo
