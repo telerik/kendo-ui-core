@@ -682,40 +682,6 @@
     }
   });
 
-  defadvice("ui.Editable", "refresh", function(){
-    this.next();
-    var self = this.self;
-    var model = self.options.model;
-    var scope = angular.element(self.element).scope();
-    if (!scope || !model) return;
-
-    if (self.$angular_scope) {
-      destroyScope(self.$angular_scope, self.element);
-    }
-
-    scope = self.$angular_scope = scope.$new();
-    scope.dataItem = model;
-
-    // XXX: we need to disable the timeout here, or else the widget is
-    // created but immediately destroyed (focus lost).
-    immediately(function(){
-      compile(self.element)(scope);
-      digest(scope);
-    });
-
-    // and we still need to focus it.
-    self.element.find(":kendoFocusable").eq(0).focus();
-  });
-
-  defadvice("ui.Editable", "destroy", function(){
-    var self = this.self;
-    if (self.$angular_scope) {
-      destroyScope(self.$angular_scope, self.element);
-      self.$angular_scope = null;
-    }
-    this.next();
-  });
-
   defadvice("ui.Window", AFTER, function(){
     this.next();
     var self = this.self;

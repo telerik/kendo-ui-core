@@ -241,6 +241,10 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
+            that.domUpdate("before", function(){
+                return { elements: that.element.get() };
+            });
+
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
@@ -298,6 +302,13 @@ var __meta__ = {
             }
 
             kendo.bind(container, that.options.model);
+
+            that.domUpdate("after", function(){
+                return {
+                    elements: container.get(),
+                    data: [ { dataItem: that.options.model } ]
+                };
+            });
 
             that.options.model.unbind("set", that._validateProxy);
             that.options.model.bind("set", that._validateProxy);

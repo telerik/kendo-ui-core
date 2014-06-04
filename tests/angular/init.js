@@ -247,6 +247,34 @@
         });
     });
 
+    // XXX: for some reason this fails, though I *know* that the feature works as expected. :-\
+    runTest("Grid popup editable template", function(dom){
+        $scope.options = {
+            dataSource: new kendo.data.DataSource({
+                data: $scope.data
+            }),
+            columns: [
+                { field: "text" },
+                { field: "id" },
+                { command: [ "edit" ] }
+            ],
+            editable: {
+                mode: "popup",
+                template: "<div class='my-editable'>{{dataItem.text}}/{{dataItem.id}}</div>"
+            }
+        };
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(1);
+        $scope.$on("kendoRendered", function(){
+            var grid = $scope.grid;
+            grid.editRow(grid.tbody.find("tr:first"));
+            var el = grid._editContainer.find(".my-editable");
+            ok(el.text() == "Foo/1");
+            grid.cancelRow();
+            start();
+        });
+    });
+
     runTest("Grid rowTemplate", function(dom){
         $scope.options = {
             dataSource: $scope.data,
