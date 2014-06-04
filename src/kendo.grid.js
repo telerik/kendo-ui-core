@@ -1422,6 +1422,9 @@ var __meta__ = {
             }
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            if (that._hasRowFiltering()) {
+                reorder(that.wrapper.find("[role=rowfilter] th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            }
 
             if (footer && footer.length) {
                 reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before);
@@ -4196,15 +4199,19 @@ var __meta__ = {
                 length,
                 colgroup,
                 tr,
+                trFilter,
                 table,
                 header,
+                rowfilterCells,
                 skipHiddenCount = 0,
                 cols = $(),
                 hasRowFiltering = that._hasRowFiltering(),
+                filterCells = $(),
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
+            rowfilterCells = that.thead.find("[role=rowfilter]").find("th");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
@@ -4212,6 +4219,7 @@ var __meta__ = {
                         cols = cols.add(colgroup.eq(idx - skipHiddenCount));
                     }
                     cells = cells.add(header.eq(idx));
+                    filterCells = filterCells.add(rowfilterCells.eq(idx));
                 }
                 if (columns[idx].hidden) {
                     skipHiddenCount++;
@@ -4219,16 +4227,18 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr>' + (hasRowFiltering ? '<tr role="rowfilter" />' : '') +
-                    '</tr></thead></table></div>';
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasRowFiltering ? '<tr role="rowfilter" />' : '') +
+                    '</thead></table></div>';
 
                 table = $(html);
 
                 colgroup = table.find("colgroup");
-                tr = table.find("thead tr");
+                tr = table.find("thead tr:first");
+                trFilter = table.find("[role=rowfilter]");
 
                 colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
-                tr.append(that.thead.find(".k-group-cell").add(cells));
+                tr.append(that.thead.find("tr:first .k-group-cell").add(cells));
+                trFilter.append(that.thead.find("[role=rowfilter] .k-group-cell").add(filterCells));
 
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();

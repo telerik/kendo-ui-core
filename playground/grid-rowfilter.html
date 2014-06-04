@@ -200,7 +200,7 @@
                     },
                     columns: [
                         { field: "Id", locked: false, width: 300 },
-                        { field: "Name", locked: false, width: 300 },
+                        { field: "Name", locked: true, width: 300 },
                         { field: "Position", locked: true, width: 300 },
                         { field: "ContractDate", width: 400 }
                     ],
@@ -247,6 +247,9 @@
                                     }
                                 }
                             }
+                        },
+                        group: {
+                            field: "Name"
                         }
 
                     }
