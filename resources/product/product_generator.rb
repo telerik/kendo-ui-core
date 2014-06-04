@@ -129,9 +129,16 @@ def start_product_creation()
 
       bot.go_to_products
 
-      tname = String.new
+      tname = nagivate_to_section(suite_alias)
 
-      case suite
+      bot.click_and_wait "New subproduct", "administration"
+
+      create_product(bot, product_name, suite_alias, tname)
+
+end
+def navigate_to_section(suite_alias)
+  tname = String.new
+      case suite_alias
         when "KUI"
           bot.click_and_wait "Kendo UI Professional", "administration"
           tname = "Kendo UI"
@@ -145,24 +152,38 @@ def start_product_creation()
           bot.click_and_wait "UI for PHP", "administration"
           tname = "PHP"
       end
-
-      bot.click_and_wait "New subproduct", "administration"
-
-      create_product(bot, product_name, suite_alias, tname)
-
+   return tname
+end
+def navigate_to_forum(suite_alias)
+  tname = String.new
+    case suite_alias
+        when "KUI"
+          bot.click_and_wait "Kendo UI", "Support"
+          tname = "Kendo UI"
+        when "MVC"
+          bot.click_and_wait "UI for ASP.NET MVC", "Support"
+          tname = "ASP.NET MVC"
+        when "JSP"
+          bot.click_and_wait "UI for JSP", "Support"
+          tname = "JSP"
+        when "PHP"  
+          bot.click_and_wait "UI for PHP", "Support"
+          tname = "PHP"
+    end
+  return tname
 end
 def create_product(bot, product_name, suite_alias, tname)
     product_icon_path = String.new
 
     if tname == "Kendo UI"
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('#{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\24\\" + product_name.downcase + "_kendoui.png"
+       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui.png"
     elsif tname == "JSP"
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\24\\" + product_name.downcase + "_kendoui_java.png" 
+       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_java.png" 
     else
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\24\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
     end
 
     bot.execute_script("$('[id$=\"_tfShortName_txtFieldText\"]').val('#{product_name}')")
@@ -193,9 +214,9 @@ def create_product(bot, product_name, suite_alias, tname)
     bot.click_and_wait "Save", "administration"
     #sort new product accordingly
 
-    assign_team(bot)
-    create_forum(bot, product_name, suite_alias, tname)   
-
+    #assign_team(bot)
+    #create_forum(bot, product_name, suite_alias, tname)   
+    #create_code_library(bot, product_name, suite_alias, tname)
 end
 def set_product_icon_path(product_icon_path)
   element = bot.driver.find_element(:xpath, "//div[contains(@id,'_ruIconPicfile0')]")
@@ -221,29 +242,54 @@ def upload_file(bot, upload_id, product_icon_path)
 =end
     product_icon_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
     bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), product_icon_path)
+    sleep (1)
     #bot.wait_for_element("##{upload_id} .ruRemove")
 end
 def create_forum(bot, product_name, suite_alias, tname)
+  bot.go_to_support
+  bot.click_and_wait ("Forums", "forums")
+
+  tname = navigate_to_forum(suite_alias)
   
+  bot.click_element(bot.find("[value='New Subforum']"))
+
+  fill_forum_fields(bot, product_name, suite_alias, tname)
+end
+def fill_forum_fields(bot, product_name, suite_alias, tname)
+    bot.execute_script("$('[id$=\"_txtTitle\"]').val('#{product_name}')")
+    bot.execute_script("$('[id$=\"_txtPageTitle\"]').val('#{product_name}')")
+    
+    if product_name.index("Mobile") == nil
+      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('"+ product_name.downcase +"')")
+    else
+      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('mobile-"+ product_name.downcase.sub " (mobile)", "" + "')")
+    end
+
+    if tname == "Kendo UI"
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('#{product_name} for #{tname}')")
+    elsif product_name.index("Mobile") == nil
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI #{product_name} for #{tname}')")
+    else
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile " + product_name.sub " (Mobile)", "" +  " for #{tname}')")
+    end
+
+
+    bot.execute_script("$('[id$=\"_txtDefaultPriority\"]').val('48')")
+    
+    bot.execute_script("$('[id$=\"_cbPublic\"]').prop('checked', true)")
+    bot.execute_script("$('[id$=\"_cbVisible\"]').prop('checked', true)")
+
+    bot.execute_script("$('[id$=\"_cbAllowAttachments\"]').prop('checked', true)")
+    bot.execute_script("$find($telerik.$('[id$=\"_rcbFileExtensions\"]').attr('id')).set_text('.jpg, .jpeg, .gif, .png,.zip')")
+
+    bot.click_and_wait "Save", "Support"
 end
 def assign_team(bot, product_name, suite_alias, tname)
   bot.go_to_teams
   bot.click_and_wait("Kendo", "administration")
   
-  case suite_alias
-        when "KUI"
-          bot.click_and_wait "Kendo UI Professional", "administration"
-          tname = "Kendo UI"
-        when "MVC"
-          bot.click_and_wait "UI for ASP.NET MVC", "administration"
-          tname = "ASP.NET MVC"
-        when "JSP"
-          bot.click_and_wait "UI for JSP", "administration"
-          tname = "JSP"
-        when "PHP"  
-          bot.click_and_wait "UI for PHP", "administration"
-          tname = "PHP"
-  end
+  tname = navigate_to_section(suite_alias)
+
   rows_length = bot.driver.find_elements(:css, ".rgMasterTable tbody tr").length
 
     1.upto(rows_length) do |index|
@@ -260,6 +306,7 @@ def assign_team(bot, product_name, suite_alias, tname)
           
           1.upto(detail_table_rows_length) do |dindex|
               inner_tcell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(1)")
+              p "cell found>>" if inner_tcell.text.include? product_name
 
               if inner_tcell.text.include? product_name
                   checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
@@ -272,12 +319,7 @@ def assign_team(bot, product_name, suite_alias, tname)
     end
 
     bot.click_element(bot.find("[value='Save']"))
+
+    sleep (5)
     #save
-=begin    
-    1.upto(rows_length) do |index|
-        checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2) input[type=checkbox]")
-        bot.driver.execute_script 'arguments[0].click()', checkbox if checkbox.selected?
-        Thread.current.send :sleep, 1
-    end
-=end
 end
