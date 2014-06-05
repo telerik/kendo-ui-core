@@ -30,9 +30,12 @@
         <button id="expand-2005-city">Expand 2005 City</button>
         <button id="expand-2005-2-city">Expand 2005-2 City</button>
 
-        <div id="pivotgrid"></div>
+        <fieldset style="margin: 10px">
+            catalog: <select id="catalogs"></select>
+            cube: <select id="cubes"></select>
+        </fieldset>
 
-        <select></select>
+        <div id="pivotgrid"></div>
 
         <script>
             $("#expand-city").click(function() {
@@ -108,7 +111,7 @@
                     }
                 }).data("kendoPivotGrid");
 
-                var cubes = $("select").kendoDropDownList({
+                var cubes = $("#cubes").kendoDropDownList({
                     dataTextField: "caption",
                     dataValueField: "name",
                     change: function() {
@@ -119,6 +122,19 @@
                 pivot.dataSource.schemaCubes().done(function(data) {
                    cubes.dataSource.data(data);
                 });
+
+                var catalogs = $("#catalogs").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "name",
+                    change: function() {
+                        pivot.dataSource.catalog(this.value());
+                    }
+                }).data("kendoDropDownList");
+
+                pivot.dataSource.schemaCatalogs().done(function(data) {
+                   catalogs.dataSource.data(data);
+                });
+
             });
         </script>
     </body>

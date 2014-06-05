@@ -218,7 +218,8 @@ var __meta__ = {
             DataSource.fn.init.call(this, extend(true, {}, {
                 schema: {
                     axes: identity,
-                    cubes: identity
+                    cubes: identity,
+                    catalogs: identity
                 }
             }, options));
 
@@ -604,6 +605,18 @@ var __meta__ = {
                 }
             }, function(response) {
                 return that.reader.cubes(response);
+            });
+        },
+
+        schemaCatalogs: function() {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaCatalogs"
+                }
+            }, function(response) {
+                return that.reader.catalogs(response);
             });
         },
 
@@ -1163,7 +1176,8 @@ var __meta__ = {
     }
 
     var xmlaDiscoverCommands = {
-        schemaCubes: "MDSCHEMA_CUBES"
+        schemaCubes: "MDSCHEMA_CUBES",
+        schemaCatalogs: "DBSCHEMA_CATALOGS"
     };
 
     var convertersMap = {
@@ -1311,6 +1325,19 @@ var __meta__ = {
         return result;
     }
 
+    var schemaDataReaderMap = {
+        cubes: {
+            name: kendo.getter("CUBE_NAME['#text']", true),
+            caption: kendo.getter("CUBE_CAPTION['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true),
+            type: kendo.getter("CUBE_TYPE['#text']", true)
+        },
+        catalogs: {
+            name: kendo.getter("CATALOG_NAME['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true)
+        }
+    };
+
     var XmlaDataReader = kendo.data.XmlDataReader.extend({
         parse: function(xml) {
             var result = kendo.data.XmlDataReader.fn.parse(xml);
@@ -1362,27 +1389,27 @@ var __meta__ = {
 
             return result;
         },
-        cubes: function(root) {
+        _mapSchema: function(root, getters) {
             root = kendo.getter("DiscoverResponse.return.root", true)(root);
             var rows = asArray(kendo.getter("row", true)(root));
 
             var result = [];
 
-            var nameGetter = kendo.getter("CUBE_NAME['#text']", true);
-            var captionGetter = kendo.getter("CUBE_CAPTION['#text']", true);
-            var descriptionGetter = kendo.getter("DESCRIPTION['#text']", true);
-            var typeGetter = kendo.getter("CUBE_TYPE['#text']", true);
-
             for (var idx = 0; idx < rows.length; idx++) {
-                result.push({
-                    name: nameGetter(rows[idx]),
-                    caption: captionGetter(rows[idx]),
-                    description: descriptionGetter(rows[idx]) || "",
-                    cubeType: typeGetter(rows[idx])
-                });
+                var obj = {};
+                for (var key in getters) {
+                    obj[key] = getters[key](rows[idx]);
+                }
+                result.push(obj);
             }
 
             return result;
+        },
+        cubes: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.cubes);
+        },
+        catalogs: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.catalogs);
         }
     });
 

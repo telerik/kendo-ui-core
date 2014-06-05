@@ -145,6 +145,36 @@
         dataSource.schemaCubes();
     });
 
+    test("schemaCatalogs calls the transport discover", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    equal(options.data.command, "schemaCatalogs");
+                }
+            }
+        });
+
+        dataSource.schemaCatalogs();
+    });
+
+    test("schemaCubes calls reader cubes method", 1, function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                cubes: function() {
+                    ok(true);
+                }
+            }
+        });
+
+        dataSource.schemaCubes();
+    });
+
+    test("schemaCubes returns a promise", 1, function() {
+        var dataSource = new PivotDataSource({ });
+
+        equal(typeof dataSource.schemaCubes().done, "function");
+    });
+
     test("schemaCubes return response to the promise on success", 1, function() {
         var dataSource = new PivotDataSource({
             transport: {
@@ -161,23 +191,16 @@
         });
     });
 
-
-    test("schemaCubes calls reader cubes methed", 1, function() {
+    test("schemaCatalogs calls reader catalogs method", 1, function() {
         var dataSource = new PivotDataSource({
             schema: {
-                cubes: function() {
+                catalogs: function() {
                     ok(true);
                 }
             }
         });
 
-        dataSource.schemaCubes();
-    });
-
-    test("schemaCubes returns a promise", 1, function() {
-        var dataSource = new PivotDataSource({ });
-
-        equal(typeof dataSource.schemaCubes().done, "function");
+        dataSource.schemaCatalogs();
     });
 
     test("columns descriptors are normalized during initialization", function() {

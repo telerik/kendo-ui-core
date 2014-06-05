@@ -115,8 +115,20 @@
 
         equal(cubes.length, 1);
         equal(cubes[0].caption, "Adventure Works Internet Sales Model");
-        equal(cubes[0].cubeType, "CUBE");
-        equal(cubes[0].description, "");
+        equal(cubes[0].type, "CUBE");
+        equal(cubes[0].description, undefined);
+        equal(cubes[0].name, "Adventure Works Internet Sales Model");
+    });
+
+    test("catalogs read for response", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <DiscoverResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla"><row> <CATALOG_NAME>Adventure Works Internet Sales Model</CATALOG_NAME> <DESCRIPTION /> <ROLES>anonymous</ROLES> <DATE_MODIFIED>2014-04-10T12:22:34.086667</DATE_MODIFIED> </row></root> </return> </DiscoverResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var cubes = reader.catalogs(body);
+
+        equal(cubes.length, 1);
+        equal(cubes[0].description, undefined);
         equal(cubes[0].name, "Adventure Works Internet Sales Model");
     });
 
