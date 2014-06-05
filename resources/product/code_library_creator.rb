@@ -100,9 +100,10 @@ def set_cl_fields(bot, product_name)
       bot.execute_script("$('[id$=\"_pageUrl\"]').text('Code Library')")
 
       if product_name.index("Mobile") == nil
-        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('"+ product_name.downcase + "')")
+        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text("+ product_name.downcase + ")")
       else
-        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('mobile-"+ product_name.downcase.sub " (mobile)","" + "')")
+        product_name_mod = product_name.downcase.sub " (mobile)",""
+        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('mobile-#{product_name_mod}')")
       end
       
 
