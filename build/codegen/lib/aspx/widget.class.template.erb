@@ -32,9 +32,10 @@ namespace <%= csharp_namespace %>
 
         protected override void DescribeComponent(IScriptDescriptor descriptor)
         {
+            <% debugger %>
             base.DescribeComponent(descriptor);
             descriptor.AddScriptProperty("_options", serializer.Serialize(this));<% if events.count > 0 %>
-            descriptor.AddScriptProperty("_widgetEvents", serializer.Serialize(ClientEventsSettings));<% end %>
+            descriptor.AddScriptProperty("_widgetEvents", serializer.Serialize(<%= csharp_name %>ClientEvents));<% end %>
         }
 
         protected override void OnPreRender(EventArgs e)

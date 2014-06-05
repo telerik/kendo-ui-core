@@ -26,7 +26,8 @@ module CodeGen
                 'Object' => 'object',
                 'Function' => 'string',
                 'Date' => 'DateTime',
-                'stringArray' => 'string[]'
+                'stringArray' => 'string[]',
+                'ClientEvent' => 'string'
             }
 
             TYPES_DEFAULT_MAP = {
@@ -95,6 +96,12 @@ module CodeGen
                     Component
                 end
 
+                def name
+                    #debugger if @name.include?("OnClient")
+                    return @name.sub('OnClient', '').camelize if type.respond_to?('include?') && type.include?('ClientEvent')
+                    @name
+                end
+
                 def composite_option_class
                     CompositeOption
                 end
@@ -112,7 +119,7 @@ module CodeGen
                 end
 
                 def csharp_name
-                    name.pascalize
+                    @name.pascalize
                 end
 
                 def csharp_namespace
@@ -246,7 +253,7 @@ module CodeGen
 
                 def to_converter
                     return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
-                    return CONVERTER_SCRIPT_TEMPLATE.result(get_binding) if type.instance_of?([].class) && type.length == 1 && type.include?("Function")
+                    return CONVERTER_SCRIPT_TEMPLATE.result(get_binding) if type.instance_of?([].class) && type.length == 1 && (type.include?("Function") || type.include?("ClientEvent"))
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
                 end
 
@@ -619,7 +626,7 @@ module CodeGen
                         component.add_option({name: 'clientEvents', type: 'Object', description: 'Defines the client events handlers.' })
 
                         component.events.each do |event|
-                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: ['Function'], description: event.description, remove_existing: true })
+                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: ['ClientEvent'], description: event.description, remove_existing: true })
                         end
 
                         component.options.find{|o| o.name == 'clientEvents'}.type = "kendo.#{component.name.pascalize}ClientEvents"
