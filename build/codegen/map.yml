@@ -9,7 +9,7 @@
           - marker
     - :name: layers.imagerySet
       :type: String
-      :description: The bing map tile types. Possible options:
+      :description: The bing map tile types. Possible options.
       :values:
           - aerial
           - aerialWithLabels
@@ -46,7 +46,7 @@
           - pinTarget
     - :name: layerDefaults.bing.imagerySet
       :type: String
-      :description: The bing map tile types. Possible options:
+      :description: The bing map tile types. Possible options.
       :values:
           - aerial
           - aerialWithLabels
