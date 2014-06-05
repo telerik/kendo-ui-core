@@ -65,6 +65,8 @@ namespace Kendo.Mvc.UI
         
         public MapLayerType? Type { get; set; }
         
+        public MapLayersImagerySet? ImagerySet { get; set; }
+        
         public MapMarkersShape? Shape { get; set; }
         
         //<< Fields
@@ -138,6 +140,11 @@ namespace Kendo.Mvc.UI
             if (Type.HasValue)
             {
                 json["type"] = Type;
+            }
+                
+            if (ImagerySet.HasValue)
+            {
+                json["imagerySet"] = ImagerySet;
             }
                 
         //<< Serialization

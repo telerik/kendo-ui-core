@@ -52,6 +52,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The bing map tile types. Possible options.
+        /// </summary>
+        /// <param name="value">The value that configures the imageryset.</param>
+        public MapLayerDefaultsBingSettingsBuilder ImagerySet(MapLayersImagerySet value)
+        {
+            container.ImagerySet = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }

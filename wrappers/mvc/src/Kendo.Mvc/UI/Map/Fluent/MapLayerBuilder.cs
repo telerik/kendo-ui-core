@@ -158,6 +158,17 @@ using System.Web.Mvc;
         }
         
         /// <summary>
+        /// The bing map tile types. Possible options.
+        /// </summary>
+        /// <param name="value">The value that configures the imageryset.</param>
+        public MapLayerBuilder ImagerySet(MapLayersImagerySet value)
+        {
+            container.ImagerySet = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The marker shape. Supported shapes are "pin" and "pinTarget".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>

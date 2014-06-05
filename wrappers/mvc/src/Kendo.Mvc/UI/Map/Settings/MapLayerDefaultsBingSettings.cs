@@ -23,6 +23,8 @@ namespace Kendo.Mvc.UI
         
         public string Key { get; set; }
         
+        public MapLayersImagerySet? ImagerySet { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -44,6 +46,11 @@ namespace Kendo.Mvc.UI
                 json["key"] = Key;
             }
             
+            if (ImagerySet.HasValue)
+            {
+                json["imagerySet"] = ImagerySet;
+            }
+                
         //<< Serialization
         }
     }
