@@ -159,5 +159,11 @@ namespace Kendo.Mvc.UI.Tests
 
             serializer.Serialize().ContainsKey("plotBands").ShouldBeTrue();
         }
+
+        [Fact]
+        public void Should_serialize_Type()
+        {
+            serializer.Serialize()["type"].ShouldEqual("date");
+        }
     }
 }
