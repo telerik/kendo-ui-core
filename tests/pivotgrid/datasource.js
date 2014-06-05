@@ -1521,4 +1521,165 @@
         dataSource.expandRow("foo");
     });
 
+    test("catalog returns the transport current catalog", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "myCatalog"
+                }
+            }
+        });
+
+        equal(dataSource.catalog(),"myCatalog");
+    });
+
+    test("catalog sets the transport current catalog", 2, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "myCatalog"
+                }
+            }
+        });
+
+        dataSource.catalog("newCatalog");
+
+        equal(dataSource.catalog(),"newCatalog");
+        equal(dataSource.transport.options.connection.catalog, "newCatalog");
+    });
+
+    test("cube returns the transport current cube", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    cube: "myCube"
+                }
+            }
+        });
+
+        equal(dataSource.cube(),"myCube");
+    });
+
+    test("cube sets the transport current cube", 2, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    cube: "myCube"
+                }
+            }
+        });
+
+        dataSource.cube("newCube");
+
+        equal(dataSource.cube(),"newCube");
+        equal(dataSource.transport.options.connection.cube, "newCube");
+    });
+
+    test("setting cube clears datasource state", 3, function() {
+        var result = [{
+            axes: {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                    ]
+                },
+                rows: {
+                    tuples: [
+                        { members: [ { name: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 1", parentName: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 1", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 2", parentName: "row level 1", children: [] } ] }
+                    ]
+                }
+            },
+            data: [1,2,3,4,5,6,7,8,9,0]// some data
+        }, {
+            axes: { },
+            data: []
+        }];
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success(result.shift());
+                },
+                connection: {
+                    cube: "myCube"
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.cube("newCube");
+
+        ok(!dataSource.axes().columns);
+        ok(!dataSource.axes().rows);
+        equal(dataSource.data().length, 0);
+    });
+
+    test("setting catalog clears datasource state", 3, function() {
+        var result = [{
+            axes: {
+                columns: {
+                    tuples: [
+                        { members: [ { name: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 0", children: [] } ] },
+                        { members: [ { name: "level 1", parentName: "level 0", children: [] }, { name: "level 1", parentName: "level 0", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 1", children: [] } ] },
+                        { members: [ { name: "level 2", parentName: "level 1", children: [] }, { name: "level 2", parentName: "level 1", children: [] } ] }
+                    ]
+                },
+                rows: {
+                    tuples: [
+                        { members: [ { name: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 1", parentName: "row level 0", children: [] }, { name: "row level 1", parentName: "row level 0", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 1", children: [] } ] },
+                        { members: [ { name: "row level 2", parentName: "row level 1", children: [] }, { name: "row level 2", parentName: "row level 1", children: [] } ] }
+                    ]
+                }
+            },
+            data: [1,2,3,4,5,6,7,8,9,0]// some data
+        }, {
+            axes: { },
+            data: []
+        }];
+
+        var dataSource = new PivotDataSource({
+            columns: [{ name:"[foo]", expand: true}, "[bar]"],
+            rows: [{ name: "baz", expand: true }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success(result.shift());
+                },
+                connection: {
+                    catalog: "myCatalog"
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.catalog("newCatalog");
+
+        ok(!dataSource.axes().columns);
+        ok(!dataSource.axes().rows);
+        equal(dataSource.data().length, 0);
+    });
 })();

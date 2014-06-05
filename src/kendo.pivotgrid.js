@@ -158,7 +158,7 @@ var __meta__ = {
     var PivotTransport = Class.extend({
         init: function(options, transport) {
             this.transport = transport;
-            this.options = transport.options;
+            this.options = transport.options || {};
 
             if (!this.transport.discover) {
                 if ($.isFunction(options.discover)) {
@@ -184,13 +184,32 @@ var __meta__ = {
             }
             options.success({});
         },
-        catalog: function() {
+        catalog: function(val) {
             var options = this.options || {};
-            return (options.connection || {}).catalog;
+
+            if (val === undefined) {
+                return (options.connection || {}).catalog;
+
+            }
+
+            connection = options.connection || {};
+            connection.catalog = val;
+
+            this.options.connection = connection;
+            $.extend(this.transport.options, { connection: connection });
         },
-        cube: function() {
+        cube: function(val) {
             var options = this.options || {};
-            return (options.connection || {}).cube;
+
+            if (val === undefined) {
+                return (options.connection || {}).cube;
+            }
+
+            connection = options.connection || {};
+            connection.cube = val;
+
+            this.options.connection = connection;
+            extend(true, this.transport.options, { connection: connection });
         }
     });
 
@@ -228,6 +247,28 @@ var __meta__ = {
             serverFiltering: true,
             serverGrouping: true,
             serverAggregates: true
+        },
+
+        catalog: function(val) {
+            if (val === undefined) {
+                return this.transport.catalog();
+            }
+
+            this.transport.catalog(val);
+            this._mergeState({});// clears current state
+            this._axes = {};
+            this.data([]);
+        },
+
+        cube: function(val) {
+            if (val === undefined) {
+                return this.transport.cube();
+            }
+
+            this.transport.cube(val);
+            this._axes = {};
+            this._mergeState({});// clears current state
+            this.data([]);
         },
 
         axes: function() {

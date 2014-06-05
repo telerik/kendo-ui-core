@@ -109,7 +109,11 @@
                 }).data("kendoPivotGrid");
 
                 var cubes = $("select").kendoDropDownList({
-                    dataTextField: "caption"
+                    dataTextField: "caption",
+                    dataValueField: "name",
+                    change: function() {
+                        pivot.dataSource.cube(this.value());
+                    }
                 }).data("kendoDropDownList");
 
                 pivot.dataSource.schemaCubes().done(function(data) {

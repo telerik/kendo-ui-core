@@ -449,5 +449,4 @@
 
        ok(params.indexOf('<Restrictions><RestrictionList><FOO>fooValue</FOO><BAR>barValue</BAR></RestrictionList></Restrictions>') > -1);
     });
-
 })();
