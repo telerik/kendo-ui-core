@@ -1068,7 +1068,7 @@ var __meta__ = {
 
         remove: function(dataItems) {
             var items = this.findByDataItem(dataItems);
-            this.angular(function(){
+            this.angular("cleanup", function(){
                 return { elements: items };
             });
             kendo.destroy(items);
