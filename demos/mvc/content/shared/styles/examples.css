@@ -60,6 +60,31 @@
     content: "\e605";
 }
 
+/* Widgets icons font */
+@font-face {
+  font-family: 'widgets';
+  src: url('fonts/widgets.eot?585921');
+  src: url('fonts/widgets.eot?585921#iefix') format('embedded-opentype'),
+       url('fonts/widgets.woff?585921') format('woff'),
+       url('fonts/widgets.ttf?585921') format('truetype'),
+       url('fonts/widgets.svg?585921#widgets') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class$="Icon"]:after {
+  font-family: "widgets";
+  speak: none; 
+  display: inline-block;
+  width: 1em;
+  margin-right: .2em;
+  font-variant: normal;
+  text-transform: none;     
+  line-height: 1em; 
+  margin-left: .2em;
+  color: #00B312;
+}
+
 body,h1,h2,h3,h4,p,ul,li,a,button,.main-nav,.kendo-nav,#banner p,.browsers,#nav-pager,#examples-list
 {
     margin:0;
@@ -498,7 +523,7 @@ div.submenu-box ol {
    font-weight: 400;
 }
 
-.exampleIcon
+/*.exampleIcon
 {
     width:20px;
     height:20px;
@@ -581,7 +606,76 @@ div.submenu-box ol {
 .maskedtextboxIcon{background-position:-40px -160px;}
 .sortableIcon{background-position:-60px -160px;}
 .notificationIcon{background-position:-80px -160px;}
-.mobileIcon{background-position:-100px -160px;}
+.mobileIcon{background-position:-100px -160px;}*/
+
+.overviewIcon{display:none;}
+.mobileActionSheetIcon:after { content: '\e800'; }
+.mobileAppIcon:after { content: '\e801'; }
+.chartAreaIcon:after { content: '\e802'; }
+.autoCompleteIcon:after { content: '\e803'; }
+.chartBarIcon:after { content: '\e804'; }
+.barcodeIcon:after { content: '\e805'; }
+.chartBoxPlotIcon:after { content: '\e806'; }
+.chartBubbleIcon:after { content: '\e807'; }
+.chartBulletIcon:after { content: '\e808'; }
+.buttonIcon:after { content: '\e809'; }
+.mobileButtonGroupIcon:after { content: '\e80a'; }
+.calendarIcon:after { content: '\e80b'; }
+.colorPickerIcon:after { content: '\e80c'; }
+.dataSourceIcon:after { content: '\e80d'; }
+.datePickerIcon:after, .dateTimePickerIcon:after { content: '\e80e'; }
+.diagramIcon:after { content: '\e80f'; }
+.chartDonutIcon:after { content: '\e810'; }
+.dragDropIcon:after { content: '\e811'; }
+.mobileDrawerIcon:after { content: '\e812'; }
+.dropDownListIcon:after { content: '\e813'; }
+.editorIcon:after { content: '\e814'; }
+.effectsIcon:after { content: '\e815'; }
+.mvvmIcon:after { content: '\e822'; }
+.chartFunnelIcon:after { content: '\e816'; }
+.globalizationIcon:after { content: '\e817'; }
+.gridIcon:after { content: '\e818'; }
+.i-layout:after { content: '\e819'; }  /*....................*/
+.gaugeLinearIcon:after { content: '\e81a'; }
+.chartLineIcon:after { content: '\e81b'; }
+.mobileListViewIcon:after { content: '\e81c'; }
+.mapIcon:after { content: '\e81d'; }
+.maskedtextboxIcon:after { content: '\e81e'; }
+.menuIcon:after { content: '\e81f'; }
+.mobileModalViewIcon:after { content: '\e820'; }
+.multiselectIcon:after { content: '\e821'; }
+.mobileNavBarIcon:after { content: '\e823'; }
+.notificationIcon:after { content: '\e824'; }
+.numericTextBoxIcon:after { content: '\e825'; }
+.panelBarIcon:after { content: '\e826'; }
+.chartPieIcon:after { content: '\e827'; }
+.chartPolarIcon:after { content: '\e828'; }
+.mobilePopOverIcon:after { content: '\e829'; }
+.progressBarIcon:after { content: '\e82a'; }
+.qrcodeIcon:after { content: '\e82b'; }
+.chartRadarIcon:after { content: '\e82c'; }
+.gaugeRadialIcon:after { content: '\e82d'; }
+.chartScatterIcon:after { content: '\e82e'; }
+.schedulerIcon:after { content: '\e82f'; }
+.mobileScrollerIcon:after { content: '\e830'; }
+.mobileScrollViewIcon:after { content: '\e831'; }
+.spaIcon:after { content: '\e832'; }
+.sliderIcon:after { content: '\e833'; }
+.sortableIcon:after { content: '\e834'; } 
+.sparklineIcon:after { content: '\e835'; }
+.splitterIcon:after { content: '\e836'; }
+.mobileSplitViewIcon:after { content: '\e837'; }
+.chartStockIcon:after { content: '\e838'; }
+.mobileSwitchIcon:after { content: '\e839'; }
+.tabStripIcon:after { content: '\e83a'; }
+.mobileTabStripIcon:after { content: '\e83b'; }
+.templatesIcon:after { content: '\e83c'; }
+.timePickerIcon:after { content: '\e83d'; }
+.tooltipIcon:after { content: '\e83e'; }
+.treeViewIcon:after { content: '\e83f'; }
+.uploadIcon:after { content: '\e840'; }
+.validatorIcon:after { content: '\e841'; }
+.windowIcon:after { content: '\e842'; }
 
 .mobile + .widgetOverview #exampleTitle
 {

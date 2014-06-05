@@ -4196,7 +4196,7 @@
     "codelibrary": {
        "kendo-ui": "kendo-ui/effects"
     },
-    "spriteCssClass": "mvvmIcon",
+    "spriteCssClass": "effectsIcon",
     "items": [
       {
         "text": "Expand",
