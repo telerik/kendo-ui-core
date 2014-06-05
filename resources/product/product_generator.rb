@@ -58,12 +58,6 @@ class TelerikProductCreateBot
         rescue
         screenshot("Browser_Timeout_On_Page_Title_Wait")
     end
-    #not used
-    def wait_for_element(css)
-        Selenium::WebDriver::Wait.new(:timeout => 1000).until { driver.find_element(:css, css) }
-        rescue
-        screenshot("Browser_Timeout_On_Element_Wait")
-    end
     def screenshot(failed_operation)
       if failed_operation.nil?
         failed_operation = "null"
@@ -72,7 +66,6 @@ class TelerikProductCreateBot
       Dir.mkdir("build/screenshots") if !File.directory?("build/screenshots")
       @driver.save_screenshot(File.join("build/screenshots", "#{failed_operation}.jpg"))
     end
-
     def execute_script(script)
       #output filename and code line number as part of the screenshot name
       caller_array = caller.first.split(":")
@@ -113,6 +106,7 @@ class TelerikProductCreateBot
           @PHP_existing_products.push(product)
       end
     end
+end
 def start_product_creation()
       bot = TelerikProductCreateBot.instance
       product_name = ENV["ProductName"]
@@ -133,7 +127,6 @@ def start_product_creation()
       bot.click_and_wait "New subproduct", "administration"
 
       create_product(bot, product_name,suite_alias, tname)
-
 end
 def navigate_to_section(suite_alias)
   tname = String.new
@@ -224,21 +217,6 @@ def set_product_icon_path(product_icon_path)
   upload_file(bot, upload_id, product_icon_path)
 end
 def upload_file(bot, upload_id, product_icon_path)
-=begin    bot.execute_script("
-                (function (module, $) {
-                    var upload = $find('#{upload_id}');
-                    var plugins = ['Flash', 'Silverlight', 'FileApi'];
-
-                    $('##{upload_id}ListContainer').remove();
-                    $(upload.get_element()).off();
-                    upload._uploadModule.dispose();
-
-                    for (var i = 0; i < plugins.length; i++) {
-                        module[plugins[i]].isAvailable = function () { return false; };
-                    }
-                    upload.initialize();
-                })(Telerik.Web.UI.RadAsyncUpload.Modules, $telerik.$);")
-=end
     product_icon_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
     bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), product_icon_path)
     sleep (1)
@@ -246,7 +224,7 @@ def upload_file(bot, upload_id, product_icon_path)
 end
 def create_forum(bot, product_name, suite_alias, tname)
   bot.go_to_support
-  bot.click_and_wait ("Forums", "forums")
+  bot.click_and_wait "Forums", "forums"
 
   tname = navigate_to_forum(suite_alias)
   
@@ -259,9 +237,10 @@ def fill_forum_fields(bot, product_name, tname)
     bot.execute_script("$('[id$=\"_txtPageTitle\"]').val('#{product_name}')")
     
     if product_name.index("Mobile") == nil
-      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('"+ product_name.downcase +"')")
+      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val(" + product_name.downcase + ")")
     else
-      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('mobile-"+ product_name.downcase.sub " (mobile)", "" + "')")
+      product_name_mod = product_name.downcase.sub " (mobile)", ""
+      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('mobile-#{product_name_mod}')")
     end
 
     if tname == "Kendo UI"
@@ -269,7 +248,8 @@ def fill_forum_fields(bot, product_name, tname)
     elsif product_name.index("Mobile") == nil
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI #{product_name} for #{tname}')")
     else
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile " + product_name.sub " (Mobile)", "" +  " for #{tname}')")
+       product_name_mod = product_name.sub " (Mobile)", ""
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
     end
 
 
@@ -285,7 +265,7 @@ def fill_forum_fields(bot, product_name, tname)
 end
 def assign_team(bot, product_name, suite_alias, tname)
   bot.go_to_teams
-  bot.click_and_wait("Kendo", "administration")
+  bot.click_and_wait "Kendo", "administration"
   
   tname = navigate_to_section(suite_alias)
 
@@ -293,7 +273,7 @@ def assign_team(bot, product_name, suite_alias, tname)
 
     1.upto(rows_length) do |index|
         tcell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2)")
-        p "cell found>>" if tcell.text.include? tname
+        p "cell found>>#{tname}" if tcell.text.include? tname
 
         if tcell.text.include? tname
           expand_cell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(1)")
@@ -305,7 +285,7 @@ def assign_team(bot, product_name, suite_alias, tname)
           
           1.upto(detail_table_rows_length) do |dindex|
               inner_tcell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(1)")
-              p "cell found>>" if inner_tcell.text.include? product_name
+              p "cell found>>#{product_name}" if inner_tcell.text.include? product_name
 
               if inner_tcell.text.include? product_name
                   checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
