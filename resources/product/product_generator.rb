@@ -122,13 +122,14 @@ def start_product_creation()
 
       bot.go_to_products
 
-      tname = nagivate_to_section(suite_alias)
+      tname = nagivate_to_section(bot, suite_alias)
 
       bot.click_and_wait "New subproduct", "administration"
 
+      p "creating product>>#{product_name}"
       create_product(bot, product_name,suite_alias, tname)
 end
-def navigate_to_section(suite_alias)
+def nagivate_to_section(bot, suite_alias)
   tname = String.new
       case suite_alias
         when "KUI"
@@ -146,7 +147,7 @@ def navigate_to_section(suite_alias)
       end
    return tname
 end
-def navigate_to_forum(suite_alias)
+def navigate_to_forum(bot, suite_alias)
   tname = String.new
     case suite_alias
         when "KUI"
@@ -226,7 +227,7 @@ def create_forum(bot, product_name, suite_alias, tname)
   bot.go_to_support
   bot.click_and_wait "Forums", "forums"
 
-  tname = navigate_to_forum(suite_alias)
+  tname = navigate_to_forum(bot, suite_alias)
   
   bot.click_element(bot.find("[value='New Subforum']"))
 
@@ -267,7 +268,7 @@ def assign_team(bot, product_name, suite_alias, tname)
   bot.go_to_teams
   bot.click_and_wait "Kendo", "administration"
   
-  tname = navigate_to_section(suite_alias)
+  tname = navigate_to_section(bot, suite_alias)
 
   rows_length = bot.driver.find_elements(:css, ".rgMasterTable tbody tr").length
 
