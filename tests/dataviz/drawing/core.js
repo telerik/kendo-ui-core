@@ -194,4 +194,73 @@
     test("get returns nested field", function() {
         equal(options.get("foo.baz"), true);
     });
+
+    // ------------------------------------------------------------
+    (function() {
+        var factory;
+
+        module("SurfaceFactory", {
+            setup: function() {
+                factory = new d.SurfaceFactory();
+            }
+        });
+
+        test("registers surfaces in ascending order", function() {
+            factory.register("bar", $.noop, 1);
+            factory.register("foo", $.noop, 0);
+
+            equal(factory._items[0].name, "foo");
+        });
+
+        test("instantiates surface with options", function() {
+            factory.register("foo", function(e, o) { ok(o.bar); }, 0);
+
+            factory.create(null, { bar: true });
+        });
+
+        test("instantiates default surface", function() {
+            factory.register("foo", function() { ok(true); }, 0);
+            factory.register("bar", function() { ok(false); }, 1);
+
+            factory.create();
+        });
+
+        test("instantiates preferred surface", function() {
+            factory.register("foo", function() { ok(false); }, 0);
+            factory.register("bar", function() { ok(true); }, 1);
+
+            factory.create(null, {}, "bar");
+        });
+
+        test("instantiates preferred surface w/o options", function() {
+            factory.register("foo", function() { ok(false); }, 0);
+            factory.register("bar", function() { ok(true); }, 1);
+
+            factory.create(null, "bar");
+        });
+
+        test("ignores case of preferred surface", function() {
+            factory.register("foo", function() { ok(false); }, 0);
+            factory.register("bar", function() { ok(true); }, 1);
+
+            factory.create(null, {}, "Bar");
+        });
+
+        test("instantiates default surface if the preferred is unavailable", function() {
+            factory.register("foo", function() { ok(true); }, 0);
+            factory.register("bar", function() { ok(false); }, 1);
+
+            factory.create(null, {}, "baz");
+        });
+
+        asyncTest("logs warning if no surfaces are registered", 1, function() {
+            stubMethod(kendo, "logToConsole", function(message) {
+                ok(message.indexOf("Warning: Unable to create Kendo UI Drawing Surface.") > -1);
+                start();
+            }, function() {
+                factory.create();
+            });
+        });
+
+    })();
 })();

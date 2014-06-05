@@ -219,35 +219,40 @@
     });
 
     var SurfaceFactory = function() {
-        this._views = [];
+        this._items = [];
     };
 
     SurfaceFactory.prototype = {
         register: function(name, type, order) {
-            var views = this._views,
-                defaultView = views[0],
+            var items = this._items,
+                first = items[0],
                 entry = {
                     name: name,
                     type: type,
                     order: order
                 };
 
-            if (!defaultView || order < defaultView.order) {
-                views.unshift(entry);
+            if (!first || order < first.order) {
+                items.unshift(entry);
             } else {
-                views.push(entry);
+                items.push(entry);
             }
         },
 
         create: function(element, options, preferred) {
-            var views = this._views,
-                match = views[0];
+            var items = this._items,
+                match = items[0];
+
+            if (typeof options === "string") {
+                preferred = options;
+                options = null;
+            }
 
             if (preferred) {
                 preferred = preferred.toLowerCase();
-                for (var i = 0; i < views.length; i++) {
-                    if (views[i].name === preferred) {
-                        match = views[i];
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].name === preferred) {
+                        match = items[i];
                         break;
                     }
                 }
@@ -258,7 +263,7 @@
             }
 
             kendo.logToConsole(
-                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "Warning: Unable to create Kendo UI Drawing Surface. Possible causes:\n" +
                 "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
                 "- The Kendo UI scripts are not fully loaded");
         }
