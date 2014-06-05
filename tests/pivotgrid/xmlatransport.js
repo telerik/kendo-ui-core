@@ -447,7 +447,7 @@
            restrictions: { foo: "fooValue", bar: "barValue"}
        }, "discover");
 
-       ok(params.indexOf('<Restrictions><RestrictionList><foo>fooValue</foo><bar>barValue</bar></RestrictionList></Restrictions>') > -1);
+       ok(params.indexOf('<Restrictions><RestrictionList><FOO>fooValue</FOO><BAR>barValue</BAR></RestrictionList></Restrictions>') > -1);
     });
 
 })();

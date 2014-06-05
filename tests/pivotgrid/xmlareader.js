@@ -106,4 +106,18 @@
         equal(data[1].fmtValue, "1014");
     });
 
+    test("cubes read for response", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <DiscoverResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla"><row> <CATALOG_NAME>Adventure Works Internet Sales Model</CATALOG_NAME> <CUBE_NAME>Adventure Works Internet Sales Model</CUBE_NAME> <CUBE_TYPE>CUBE</CUBE_TYPE> <LAST_SCHEMA_UPDATE>2014-04-03T14:29:44.573333</LAST_SCHEMA_UPDATE> <LAST_DATA_UPDATE>2014-04-03T14:30:07.106667</LAST_DATA_UPDATE> <DESCRIPTION /> <IS_DRILLTHROUGH_ENABLED>true</IS_DRILLTHROUGH_ENABLED> <IS_LINKABLE>true</IS_LINKABLE> <IS_WRITE_ENABLED>false</IS_WRITE_ENABLED> <IS_SQL_ENABLED>true</IS_SQL_ENABLED> <CUBE_CAPTION>Adventure Works Internet Sales Model</CUBE_CAPTION> <CUBE_SOURCE>1</CUBE_SOURCE> <PREFERRED_QUERY_PATTERNS>1</PREFERRED_QUERY_PATTERNS> </row> </root> </return> </DiscoverResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var cubes = reader.cubes(body);
+
+        equal(cubes.length, 1);
+        equal(cubes[0].caption, "Adventure Works Internet Sales Model");
+        equal(cubes[0].cubeType, "CUBE");
+        equal(cubes[0].description, "");
+        equal(cubes[0].name, "Adventure Works Internet Sales Model");
+    });
+
 })();

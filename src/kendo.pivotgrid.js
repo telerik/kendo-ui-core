@@ -158,6 +158,7 @@ var __meta__ = {
     var PivotTransport = Class.extend({
         init: function(options, transport) {
             this.transport = transport;
+            this.options = transport.options;
 
             if (!this.transport.discover) {
                 if ($.isFunction(options.discover)) {
@@ -183,6 +184,14 @@ var __meta__ = {
             }
             options.success({});
         },
+        catalog: function() {
+            var options = this.options || {};
+            return (options.connection || {}).catalog;
+        },
+        cube: function() {
+            var options = this.options || {};
+            return (options.connection || {}).cube;
+        }
     });
 
     var PivotDataSource = DataSource.extend({
@@ -523,6 +532,12 @@ var __meta__ = {
             return $.Deferred(function(deferred) {
                 transport.discover(extend({
                     success: function(response) {
+                       response = that.reader.parse(response);
+
+                        if (that._handleCustomErrors(response)) {
+                            return;
+                        }
+
                         if (converter) {
                             response = converter(response);
                         }
@@ -540,9 +555,14 @@ var __meta__ = {
             var that = this;
 
             return that.discover({
-                data: { command: "schemaCubes" }
+                data: {
+                    command: "schemaCubes",
+                    restrictions: {
+                        catalogName: that.transport.cube()
+                    }
+                }
             }, function(response) {
-                return that.reader.cubes(that.reader.parse(response));
+                return that.reader.cubes(response);
             });
         },
 
@@ -1081,13 +1101,18 @@ var __meta__ = {
         return command;
     }
 
-    function serializeOptions(parentTagName, options) {
+    function serializeOptions(parentTagName, options, capitalize) {
         var result = "";
 
         if (options) {
             result += "<" + parentTagName + ">";
+            var value;
             for (var key in options) {
-                result += "<" + key + ">" + options[key] + "</" + key + ">";
+                value = options[key] ;
+                if (capitalize) {
+                    key = key.replace(/([A-Z]+(?=$|[A-Z][a-z])|[A-Z]?[a-z]+)/g, "$1_").toUpperCase().replace(/_$/, "");
+                }
+                result += "<" + key + ">" + value + "</" + key + ">";
             }
             result += "</" + parentTagName + ">";
         } else {
@@ -1149,12 +1174,14 @@ var __meta__ = {
             return command.replace(/\&/g, "&amp;");
         },
         discover: function(options, type) {
+            options = options || {};
+
             var command = '<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Discover xmlns="urn:schemas-microsoft-com:xml-analysis">';
             command += "<RequestType>" + (xmlaDiscoverCommands[options.command] || options.command) + "</RequestType>";
 
-            command += "<Restrictions>" + serializeOptions("RestrictionList", options.restrictions) + "</Restrictions>";
+            command += "<Restrictions>" + serializeOptions("RestrictionList", options.restrictions, true) + "</Restrictions>";
 
-            if (options.connection.catalog) {
+            if (options.connection && options.connection.catalog) {
                 options.properties = $.extend({}, {
                     Catalog: options.connection.catalog
                 }, options.properties);
@@ -1295,9 +1322,26 @@ var __meta__ = {
             return result;
         },
         cubes: function(root) {
-        //    root = kendo.getter("DiscoverResponse.return.root", true)(root);
-         //   var rows = kendo.getter("row", true)(root);
-          //  return rows;
+            root = kendo.getter("DiscoverResponse.return.root", true)(root);
+            var rows = asArray(kendo.getter("row", true)(root));
+
+            var result = [];
+
+            var nameGetter = kendo.getter("CUBE_NAME['#text']", true);
+            var captionGetter = kendo.getter("CUBE_CAPTION['#text']", true);
+            var descriptionGetter = kendo.getter("DESCRIPTION['#text']", true);
+            var typeGetter = kendo.getter("CUBE_TYPE['#text']", true);
+
+            for (var idx = 0; idx < rows.length; idx++) {
+                result.push({
+                    name: nameGetter(rows[idx]),
+                    caption: captionGetter(rows[idx]),
+                    description: descriptionGetter(rows[idx]) || "",
+                    cubeType: typeGetter(rows[idx])
+                });
+            }
+
+            return result;
         }
     });
 
