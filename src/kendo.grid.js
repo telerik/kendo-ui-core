@@ -78,6 +78,7 @@ var __meta__ = {
         isArray = $.isArray,
         inArray = $.inArray,
         push = Array.prototype.push,
+        concat = Array.prototype.concat,
         proxy = $.proxy,
         isFunction = kendo.isFunction,
         isEmptyObject = $.isEmptyObject,
@@ -971,6 +972,15 @@ var __meta__ = {
             } else {
                 return this.items();
             }
+        },
+
+        dataItems: function() {
+            var dataItems = kendo.ui.DataBoundWidget.fn.dataItems.call(this);
+            if (this.lockedContent) {
+                dataItems = concat.call(dataItems, dataItems);
+            }
+
+            return dataItems;
         },
 
         _destroyColumnAttachments: function() {
