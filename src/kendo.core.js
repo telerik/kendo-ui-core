@@ -2621,7 +2621,7 @@ function pad(number, digits, end) {
             that.unbind();
         },
 
-        domUpdate: function(){}
+        angular: function(){}
     });
 
     var DataBoundWidget = Widget.extend({
@@ -2634,9 +2634,9 @@ function pad(number, digits, end) {
             return this.dataSource.view();
         },
 
-        _notifyDomUpdate: function(type) {
+        _angularItems: function(cmd) {
             var that = this;
-            that.domUpdate(type, function(){
+            that.angular(cmd, function(){
                 var elements = $(that.itemsContents()).get();
                 return {
                     elements: elements,

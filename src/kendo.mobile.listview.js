@@ -1026,7 +1026,7 @@ var __meta__ = {
                 for (var idx = 0; idx < items.length; idx ++) {
                     listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
                 }
-                listView.domUpdate("after", function(){
+                listView.angular("compile", function(){
                     return {
                         elements: items,
                         data: dataItems.map(function(data){
@@ -1047,7 +1047,7 @@ var __meta__ = {
 
         replace: function(dataItems) {
             this.options.type = "flat";
-            this._notifyDomUpdate("before");
+            this._angularItems("cleanup");
             this.element.empty();
             this._style();
             return this.insertAt(dataItems, 0);
@@ -1055,20 +1055,20 @@ var __meta__ = {
 
         replaceGrouped: function(groups) {
             this.options.type = "group";
-            this._notifyDomUpdate("before");
+            this._angularItems("cleanup");
             this.element.empty();
             var items = $(kendo.render(this.groupTemplate, groups));
 
             this._enhanceItems(items.children("ul").children("li"));
             this.element.append(items);
             mobile.init(items);
-            this._notifyDomUpdate("after");
+            this._angularItems("compile");
             this._style();
         },
 
         remove: function(dataItems) {
             var items = this.findByDataItem(dataItems);
-            this.domUpdate(function(){
+            this.angular(function(){
                 return { elements: items };
             });
             kendo.destroy(items);

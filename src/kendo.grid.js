@@ -982,7 +982,7 @@ var __meta__ = {
                 return;
             }
 
-            this.domUpdate("before", function(){
+            this.angular("cleanup", function(){
                 return { elements: that.thead.get() };
             });
 
@@ -1798,7 +1798,7 @@ var __meta__ = {
             }
 
             cell.empty().html(tmpl(dataItem));
-            that.domUpdate("after", function(){
+            that.angular("compile", function(){
                 return {
                     elements: cell.get(),
                     scopeFrom: cell.parent()
@@ -2048,7 +2048,7 @@ var __meta__ = {
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 
-            that.domUpdate("after", function(){
+            that.angular("compile", function(){
                 return {
                     elements: container.get(),
                     scopeFrom: that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
@@ -2200,12 +2200,12 @@ var __meta__ = {
                     that._relatedRow(row.last()).replaceWith(related);
                 }
 
-                that.domUpdate("before", function(){ return { elements: row.get() }; });
+                that.angular("cleanup", function(){ return { elements: row.get() }; });
 
                 newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
                 row.replaceWith(newRow);
 
-                that.domUpdate("after", function(){
+                that.angular("compile", function(){
                     return {
                         elements: newRow.get(),
                         data: [ { dataItem: model } ]
@@ -2383,7 +2383,7 @@ var __meta__ = {
                         .html(toolbar({}))
                         .prependTo(wrapper);
 
-                    that.domUpdate("after", function(){
+                    that.angular("compile", function(){
                         return { elements: container.get() };
                     });
                 }
@@ -3472,7 +3472,7 @@ var __meta__ = {
                 if (footer.length) {
                     var tmp = html;
 
-                    that.domUpdate("before", function(){
+                    that.angular("cleanup", function(){
                         return { elements: footer.get() };
                     });
 
@@ -3486,7 +3486,7 @@ var __meta__ = {
                     }
                 }
 
-                that.domUpdate("after", function(){
+                that.angular("compile", function(){
                     return {
                         elements: footer.find("td").get(),
                         data: that.columns.map(function(col, i){
@@ -4124,7 +4124,7 @@ var __meta__ = {
                         .addClass(masterRow.hasClass("k-alt") ? "k-alt" : "")
                         .insertAfter(masterRow);
 
-                    that.domUpdate("after", function(){
+                    that.angular("compile", function(){
                         return {
                             elements: detailRow.get(),
                             data: [ { dataItem: data } ]
@@ -4398,7 +4398,7 @@ var __meta__ = {
                 that._destroyColumnAttachments();
             }
 
-            this.domUpdate("after", function(){
+            this.angular("compile", function(){
                 return {
                     elements: thead.find("th").get(),
                     data: columns.map(function(col){ return { column: col }})
@@ -4936,7 +4936,7 @@ var __meta__ = {
                 return;
             }
 
-            that._notifyDomUpdate("before");
+            that._angularItems("cleanup");
 
             if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
@@ -4996,7 +4996,7 @@ var __meta__ = {
                 that.touchScroller.contentResized();
             }
 
-            that._notifyDomUpdate("after");
+            that._angularItems("compile");
 
             that.trigger(DATABOUND);
        },

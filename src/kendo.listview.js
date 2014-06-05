@@ -222,7 +222,7 @@ var __meta__ = {
                 return;
             }
 
-            that._notifyDomUpdate("before");
+            that._angularItems("cleanup");
 
             that._destroyEditable();
 
@@ -247,7 +247,7 @@ var __meta__ = {
                 that.current(items.eq(0));
             }
 
-            that._notifyDomUpdate("after");
+            that._angularItems("compile");
 
             that.trigger(DATABOUND);
         },

@@ -1165,9 +1165,9 @@ var __meta__ = {
                             }, 40);
                         }
 
-                        that.domUpdate("before", function(){ return { elements: content.get() }});
+                        that.angular("cleanup", function(){ return { elements: content.get() }});
                         content.html(data);
-                        that.domUpdate("after", function(){ return { elements: content.get() }});
+                        that.angular("compile", function(){ return { elements: content.get() }});
                     } catch (e) {
                         var console = window.console;
 

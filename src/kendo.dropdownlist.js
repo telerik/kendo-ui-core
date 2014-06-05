@@ -190,9 +190,9 @@ var __meta__ = {
                 that.current(null);
             }
 
-            this._notifyDomUpdate("before");
+            this._angularItems("cleanup");
             that.ul[0].innerHTML = kendo.render(that.template, data);
-            this._notifyDomUpdate("after");
+            this._angularItems("compile");
 
             that._height(length);
 
@@ -737,9 +737,9 @@ var __meta__ = {
                         data: [ { dataItem: dataItem } ]
                     };
                 };
-                this.domUpdate("before", getElements);
+                this.angular("cleanup", getElements);
                 span.html(this.valueTemplate(dataItem));
-                this.domUpdate("after", getElements);
+                this.angular("compile", getElements);
             } else {
                 return span.text();
             }

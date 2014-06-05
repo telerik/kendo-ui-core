@@ -242,9 +242,9 @@ var __meta__ = {
                         type: "GET",
                         dataType: "html",
                         success: function (data) {
-                            that.domUpdate("before", function(){ return { elements: pane.get() }; });
+                            that.angular("cleanup", function(){ return { elements: pane.get() }; });
                             pane.html(data);
-                            that.domUpdate("after", function(){ return { elements: pane.get() }; });
+                            that.angular("compile", function(){ return { elements: pane.get() }; });
 
                             that.trigger(CONTENTLOAD, { pane: pane[0] });
                         },

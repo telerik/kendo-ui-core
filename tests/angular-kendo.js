@@ -514,15 +514,15 @@
 
   /* -----[ Customize widgets for Angular ]----- */
 
-  defadvice([ "ui.Widget", "mobile.ui.Widget" ], "domUpdate", function(type, get){
+  defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, get){
     var self = this.self;
     var scope = angular.element(self.element).scope();
     if (scope) {
       var x = get(), elements = x.elements, data = x.data;
       if (elements.length > 0) {
-        switch (type) {
+        switch (cmd) {
 
-         case "before":
+         case "cleanup":
           angular.forEach(elements, function(el){
             var itemScope = angular.element(el).scope();
             if (itemScope && itemScope !== scope) {
@@ -531,7 +531,7 @@
           });
           break;
 
-         case "after":
+         case "compile":
           angular.forEach(elements, function(el, i){
             var itemScope;
             if (x.scopeFrom) {

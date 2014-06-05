@@ -335,7 +335,7 @@ var __meta__ = {
             var that = this;
 
             if (options.dataSource) {
-                that.domUpdate("before", function(){
+                that.angular("cleanup", function(){
                     return {
                         elements: that.element.children().get(),
                         data: []
@@ -343,7 +343,7 @@ var __meta__ = {
                 });
                 that.element.empty();
                 that.append(options.dataSource, that.element);
-                that.domUpdate("after", function(){
+                that.angular("compile", function(){
                     return {
                         elements: that.element.children().get(),
                         data: []

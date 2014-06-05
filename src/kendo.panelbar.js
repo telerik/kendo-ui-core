@@ -985,9 +985,9 @@ var __meta__ = {
                         return { elements: contentElement.get() };
                     }
                     try {
-                        that.domUpdate("before", getElements);
+                        that.angular("cleanup", getElements);
                         contentElement.html(data);
-                        that.domUpdate("after", getElements);
+                        that.angular("compile", getElements);
                     } catch (e) {
                         var console = window.console;
 

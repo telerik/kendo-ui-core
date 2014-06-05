@@ -1202,7 +1202,7 @@ var __meta__ = {
                 return;
             }
 
-            that.domUpdate("after", function(){
+            that.angular("compile", function(){
                 return {
                     elements: node.get(),
                     data: nodeData.map(function(item){
@@ -1419,7 +1419,7 @@ var __meta__ = {
 
                     if (that.root.length) {
 
-                        this._notifyDomUpdate("before");
+                        this._angularItems("cleanup");
                         
                         var group = $(groupHtml);
 
@@ -1431,7 +1431,7 @@ var __meta__ = {
                         that.root = that.wrapper.html(groupHtml).children("ul");
                     }
 
-                    this._notifyDomUpdate("after");
+                    this._angularItems("compile");
                 }
             }
 
@@ -1803,7 +1803,7 @@ var __meta__ = {
 
             node = $(node, that.element);
 
-            this.domUpdate("before", function(){
+            this.angular("cleanup", function(){
                 return { elements: node.get() };
             });
 
