@@ -50,6 +50,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to false the "current time" marker of the scheduler would not be displayed.
+    * @param boolean|\Kendo\UI\SchedulerCurrentTimeMarker|array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function currentTimeMarker($value) {
+        return $this->setProperty('currentTimeMarker', $value);
+    }
+
+    /**
     * Sets the data source of the Scheduler.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\Scheduler

@@ -51,6 +51,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         return "scheduler";
     }
 
+    public void setCurrentTimeMarker(com.kendoui.taglib.scheduler.CurrentTimeMarkerTag value) {
+        setProperty("currentTimeMarker", value);
+    }
+
     public void setEditable(com.kendoui.taglib.scheduler.EditableTag value) {
         setProperty("editable", value);
     }
@@ -161,6 +165,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setAutoBind(boolean value) {
         setProperty("autoBind", value);
+    }
+
+    public boolean getCurrentTimeMarker() {
+        return (boolean)getProperty("currentTimeMarker");
+    }
+
+    public void setCurrentTimeMarker(boolean value) {
+        setProperty("currentTimeMarker", value);
     }
 
     public void setDataSource(DataSourceTag dataSource) {

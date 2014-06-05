@@ -83,6 +83,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("extent", value);
     }
 
+    public java.lang.String getImagerySet() {
+        return (java.lang.String)getProperty("imagerySet");
+    }
+
+    public void setImagerySet(java.lang.String value) {
+        setProperty("imagerySet", value);
+    }
+
     public java.lang.String getKey() {
         return (java.lang.String)getProperty("key");
     }

@@ -142,6 +142,15 @@ Alternating between different subdomains allows more requests to be executed in 
     }
 
     /**
+    * The bing map tile types. Possible options.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function imagerySet($value) {
+        return $this->setProperty('imagerySet', $value);
+    }
+
+    /**
     * The marker shape. Supported shapes are "pin" and "pinTarget".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer

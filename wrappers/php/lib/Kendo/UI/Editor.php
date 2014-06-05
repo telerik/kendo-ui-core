@@ -72,7 +72,8 @@ This property has been introduced in internal builds after 2014.1.319.
     }
 
     /**
-    * Allows custom stylesheets to be included within the editing area.
+    * Allows custom stylesheets to be included within the editing area. This setting is applicable only when the Editor is initialized from a textarea
+and a contenteditable iframe is generated.
     * @param array $value
     * @return \Kendo\UI\Editor
     */

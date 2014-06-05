@@ -32,6 +32,15 @@ class MapLayerDefaultsBing extends \Kendo\SerializableObject {
         return $this->setProperty('key', $value);
     }
 
+    /**
+    * The bing map tile types. Possible options.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaultsBing
+    */
+    public function imagerySet($value) {
+        return $this->setProperty('imagerySet', $value);
+    }
+
 //<< Properties
 }
 
