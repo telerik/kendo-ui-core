@@ -38,7 +38,7 @@ var FormattingTool = DelayedExecutionTool.extend({
             { text: "Heading 5", value: "h5" },
             { text: "Heading 6", value: "h6" }
         ],
-        width: 90
+        width: 110
     },
 
     toFormattingItem: function(item) {
