@@ -108,6 +108,10 @@
         });
     };
 
+    function trigger(type, el, e) {
+        el.trigger($.Event(type, e));
+    }
+
     /* -----[ support for {{angular}} expressions in customizable templates ]----- */
 
     runTest("AutoComplete templates", function(dom){
@@ -383,6 +387,27 @@
             var items = $scope.tree.items();
             ok(items.eq(0).text() == "Foo | 1");
             ok(items.eq(1).text() == "Bar | 2");
+            start();
+        });
+    });
+
+    runTest("Draggable hint is compiled in scope of dragged element", function(dom){
+        $scope.options = {
+            dataSource: $scope.data,
+            template: "{{dataItem.text}}/{{dataItem.id}}",
+            dragAndDrop: true,
+        };
+        $("<div kendo-treeview='tree' k-options='options'></div>").appendTo(dom);
+        expect(1);
+        $scope.$on("kendoRendered", function(){
+            var item = $scope.tree.items().eq(0).find(".k-in:first");
+            var pos = item.offset();
+            trigger("mousedown", item, { pageX: pos.left, pageY: pos.top });
+            trigger("mousemove", $(document.documentElement), {
+                pageX: pos.left + 50,
+                pageY: pos.top + 50
+            });
+            ok($scope.tree.dragging._draggable.hint.text() == "Foo/1");
             start();
         });
     });

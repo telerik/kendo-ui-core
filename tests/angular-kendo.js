@@ -641,20 +641,6 @@
     };
   });
 
-  // on Draggable::_start compile the content as Angular template, if
-  // an $angular_scope method is provided.
-  defadvice("ui.Draggable", "_start", function(){
-    this.next();
-    var self = this.self;
-    if (self.hint) {
-      var scope = angular.element(self.currentTarget).scope();
-      if (scope) {
-        compile(self.hint)(scope);
-        digest(scope);
-      }
-    }
-  });
-
   // If no `template` is supplied for Grid columns, provide an Angular
   // template.  The reason is that in this way AngularJS will take
   // care to update the view as the data in scope changes.
