@@ -58,6 +58,7 @@
         kOptions    : true,
         kRebind     : true,
         kNgModel    : true,
+        kNgDelay    : true,
       };
       return function(scope, element, attrs, widget, origAttr) {
         var role = widget.replace(/^kendo/, '');
@@ -183,7 +184,19 @@
 
           ++KENDO_COUNT;
 
-          timeout(function() {
+          var kNgDelay = attrs.kNgDelay;
+
+          timeout(function createIt() {
+            if (kNgDelay) return (function(){
+              var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
+                if (newValue !== oldValue) {
+                  unregister();
+                  kNgDelay = null;
+                  timeout(createIt); // XXX: won't work without `timeout` ;-\
+                }
+              }, true);
+            })();
+
             // if k-rebind attribute is provided, rebind the kendo widget when
             // the watched value changes
             if (attrs.kRebind) {
@@ -723,7 +736,7 @@
         });
         var destroy = function(ev){
           var editScope = self.$editScope;
-          if (editScope !== scope) {
+          if (editScope && editScope !== scope) {
             destroyScope(editScope, ev.container);
             self.$editScope = null;
           }
