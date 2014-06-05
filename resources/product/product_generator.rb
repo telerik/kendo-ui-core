@@ -182,7 +182,7 @@ def create_product(bot, product_name, suite_alias, tname)
     bot.execute_script("$('[id$=\"_tfShortName_txtFieldText\"]').val('#{product_name}')")
 
     #set product icon
-    set_product_icon_path(product_icon_path)
+    set_product_icon_path(bot, product_icon_path)
 
     sleep(1)
 
@@ -211,15 +211,15 @@ def create_product(bot, product_name, suite_alias, tname)
     #create_forum(bot, product_name, suite_alias, tname)   
     #create_code_library(bot, product_name, suite_alias, tname)
 end
-def set_product_icon_path(product_icon_path)
-  element = bot.driver.find_element(:xpath, "//div[contains(@id,'_ruIconPicfile0')]")
+def set_product_icon_path(bot, product_icon_path)
+  element = bot.driver.find_element(:xpath, "//input[contains(@id,'_ruIconPicfile0')]")
   upload_id = element.attribute("id")
 
   upload_file(bot, upload_id, product_icon_path)
 end
 def upload_file(bot, upload_id, product_icon_path)
     product_icon_path.gsub!('/', '\\') unless PLATFORM =~ /linux|darwin/
-    bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id} input[type=file]"), product_icon_path)
+    bot.set_upload_path(bot.driver.find_element(:css, "##{upload_id}"), product_icon_path)
     sleep (1)
     #bot.wait_for_element("##{upload_id} .ruRemove")
 end
