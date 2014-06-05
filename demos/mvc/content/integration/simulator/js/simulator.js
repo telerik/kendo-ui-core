@@ -157,10 +157,6 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                     preview.open();
                     preview.write(fileContent);
                     preview.close();
-
-                    frame.contentWindow.addEventListener("hashchange", function (e) {
-                        window.scrollTo(0,0);
-                    }, true);
                 }
             });
         }
