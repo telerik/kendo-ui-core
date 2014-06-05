@@ -167,7 +167,7 @@
                 if (e.shape) {
                     var args = {
                         layer: layer,
-                        shape: e.shape,
+                        shape: e.element,
                         originalEvent: e.originalEvent
                     };
 

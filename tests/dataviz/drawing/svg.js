@@ -117,10 +117,10 @@
             $(surface._root.childNodes[0].element).trigger("click");
         });
 
-        test("click has reference to shape", function() {
+        test("click has reference to element", function() {
             var group = new Group();
             surface.draw(group);
-            surface.bind("click", function(e) { deepEqual(e.shape, group); });
+            surface.bind("click", function(e) { deepEqual(e.element, group); });
 
             $(surface._root.childNodes[0].element)
                 .trigger("click", { toElement: surface._root.childNodes[0].element });

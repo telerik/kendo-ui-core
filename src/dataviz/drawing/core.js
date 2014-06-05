@@ -61,7 +61,7 @@
                 var node = e.target._kendoNode;
                 if (node) {
                     surface.trigger(event, {
-                        shape: node.srcElement,
+                        element: node.srcElement,
                         originalEvent: e
                     });
                 }
