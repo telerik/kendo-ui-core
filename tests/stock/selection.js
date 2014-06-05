@@ -113,7 +113,7 @@
                 }
             });
 
-            deepEqual(sOpts.max, new Date("2012/01/11 00:00"));
+            deepEqual(sOpts.max, new Date("2012/01/10 02:00"));
         });
 
         test("last category is not collapsed", function() {

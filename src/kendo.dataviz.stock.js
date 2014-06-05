@@ -674,7 +674,7 @@ var __meta__ = {
             autoBind: !naviOptions.dataSource,
             autoBaseUnitSteps: {
                 minutes: [1],
-                hours: [1],
+                hours: [1, 2],
                 days: [1, 2],
                 weeks: [],
                 months: [1],
