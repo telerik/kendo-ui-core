@@ -38,26 +38,6 @@
 
     // SVG rendering surface ==================================================
     var Surface = d.Surface.extend({
-        init: function(container, options) {
-            d.Surface.fn.init.call(this);
-
-            this.options = deepExtend({}, this.options, options);
-            this.bind(this.events, this.options);
-
-            this._root = new RootNode();
-            this._click = this._handler("click");
-            this._mouseenter = this._handler("mouseenter");
-            this._mouseleave = this._handler("mouseleave");
-
-            this._appendTo(container);
-        },
-
-        events: [
-            "click",
-            "mouseenter",
-            "mouseleave"
-        ],
-
         translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
@@ -102,6 +82,8 @@
         ),
 
         _appendTo: function(container) {
+            this._root = new RootNode();
+
             renderSVG(container, this._template(this));
             this.element = container.firstElementChild;
             alignToScreen(this.element);

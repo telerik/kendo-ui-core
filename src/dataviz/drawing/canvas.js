@@ -42,14 +42,6 @@
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
-        init: function(container, options) {
-            d.Surface.fn.init.call(this);
-
-            this.options = deepExtend({}, this.options, options);
-
-            this._appendTo(container);
-        },
-
         draw: function(element) {
             this._root.load([element]);
         },

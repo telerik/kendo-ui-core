@@ -17,10 +17,29 @@
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
+        init: function(container, options) {
+            kendo.Observable.fn.init.call(this);
+
+            this.options = deepExtend({}, this.options, options);
+            this.bind(this.events, this.options);
+
+            this._click = this._handler("click");
+            this._mouseenter = this._handler("mouseenter");
+            this._mouseleave = this._handler("mouseleave");
+
+            this._appendTo(container);
+        },
+
         options: {
             width: "100%",
             height: "100%"
         },
+
+        events: [
+            "click",
+            "mouseenter",
+            "mouseleave"
+        ],
 
         draw: noop,
         clear: noop,
@@ -53,6 +72,7 @@
         },
 
         _resize: noop,
+        _appendTo: noop,
 
         _handler: function(event) {
             var surface = this;
