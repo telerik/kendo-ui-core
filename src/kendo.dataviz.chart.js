@@ -5600,6 +5600,7 @@ var __meta__ = {
             );
 
             point = new Bubble(value, pointOptions);
+            point.color = pointOptions.color;
 
             chart.append(point);
 
