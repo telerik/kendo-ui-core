@@ -534,8 +534,8 @@
          case "after":
           angular.forEach(elements, function(el, i){
             var itemScope;
-            if (x.useParentScope) {
-              itemScope = angular.element(el).scope();
+            if (x.scopeFrom) {
+              itemScope = angular.element(x.scopeFrom).scope();
             } else {
               var vars = data && data[i];
               if (vars !== undefined) {

@@ -1801,7 +1801,7 @@ var __meta__ = {
             that.domUpdate("after", function(){
                 return {
                     elements: cell.get(),
-                    useParentScope: true
+                    scopeFrom: cell.parent()
                 };
             })
         },
@@ -2047,6 +2047,13 @@ var __meta__ = {
                     '</div>');
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
+
+            that.domUpdate("after", function(){
+                return {
+                    elements: container.get(),
+                    scopeFrom: that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                };
+            });
 
             that.editable = that._editContainer
                 .kendoEditable({

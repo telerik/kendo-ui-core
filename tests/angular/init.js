@@ -247,7 +247,6 @@
         });
     });
 
-    // XXX: for some reason this fails, though I *know* that the feature works as expected. :-\
     runTest("Grid popup editable template", function(dom){
         $scope.options = {
             dataSource: new kendo.data.DataSource({
@@ -256,7 +255,7 @@
             columns: [
                 { field: "text" },
                 { field: "id" },
-                { command: [ "edit" ] }
+                { command: "edit" }
             ],
             editable: {
                 mode: "popup",
