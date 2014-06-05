@@ -658,16 +658,6 @@
     }
   });
 
-  defadvice("ui.editor.Toolbar", "render", function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      compile(self.element)(scope);
-      digest(scope);
-    }
-  });
-
   defadvice("ui.Window", AFTER, function(){
     this.next();
     var self = this.self;
