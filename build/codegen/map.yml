@@ -7,6 +7,15 @@
           - tile
           - shape
           - marker
+	- :name: layers.imagerySet
+      :type: String
+      :description: The bing map tile types. Possible options:
+      :values:
+          - aerial
+          - aerialWithLabels
+          - birdseye
+          - birdseyeWithLabels
+          - road
     - :name: markers.shape
       :type: String
       :enum_type: MapMarkersShape
@@ -35,6 +44,15 @@
       :values:
           - pin
           - pinTarget
+	- :name: layerDefaults.bing.imagerySet
+      :type: String
+      :description: The bing map tile types. Possible options:
+      :values:
+          - aerial
+          - aerialWithLabels
+          - birdseye
+          - birdseyeWithLabels
+          - road
     - :name: markers.tooltip.position
       :type: String
       :description: The position relative to the target element, at which tlhe tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
