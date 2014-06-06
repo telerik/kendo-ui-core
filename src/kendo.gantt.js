@@ -1200,6 +1200,10 @@ var __meta__ = {
             }
         },
 
+        items: function() {
+            return this.wrapper.children(".k-task");
+        },
+
         _updateTask: function(task, updateInfo) {
             if (!this.trigger("save", { task: task, values: updateInfo })) {
                 this._preventRefresh = true;

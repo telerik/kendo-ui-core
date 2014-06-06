@@ -2837,6 +2837,21 @@
         "meta": {
             "kendo-ui": "Explore the example of HTML5 gantt chart widget, included in Kendo UI Web, to find how easy it is to add a gantt chart to your website or web app."
         }
+      },
+      {
+        "text": "MVVM",
+        "url": "gantt/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "Events, source and visible MVVM binding support in Kendo UI Gantt"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Scheduling"
