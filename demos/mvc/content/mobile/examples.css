@@ -210,13 +210,32 @@
 
 #desktop-footer {
     background-color: #2a2d33;
-    padding: 2em;
+    padding: 1.3em;
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) {
+    #desktop-footer {
+      display: none;
+  }
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) 
+and (orientation : landscape) {
+    #desktop-footer {
+      display: none;
+  }
 }
 
 #desktop-link {
     display: block;
     text-align: center;
     color: #38c0ff;
+    text-decoration: none;
 }
 
 /* BOX */
