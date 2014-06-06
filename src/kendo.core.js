@@ -2637,11 +2637,10 @@ function pad(number, digits, end) {
         _angularItems: function(cmd) {
             var that = this;
             that.angular(cmd, function(){
-                var elements = $(that.itemsContents()).get();
                 return {
-                    elements: elements,
-                    data: elements.map(function(el){
-                        return { dataItem: that.dataItem(el) };
+                    elements: that.itemsContents(),
+                    data: that.dataItems().map(function(dataItem){
+                        return { dataItem: dataItem };
                     })
                 };
             });
