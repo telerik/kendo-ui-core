@@ -64,7 +64,7 @@
     - :name: controls.attribution.position
       :type: String
       :description: The position of the attribution control. Predefined values are "topLeft", "topRight", "left", "bottomRight", "bottomLeft".
-      :default: AttributionPosition.TopLeft
+      :default: AttributionPosition.BottomRight
       :values:
           - topLeft
           - topRight

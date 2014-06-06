@@ -87,7 +87,7 @@ module CodeGen
 
             TRACK_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).TrackViewState();')
 
-            SETDIRTY_VIEWSTATE_TEMPLATE = ERB.new('<%= csharp_name%>.SetDirty(true);')
+            SETDIRTY_VIEWSTATE_TEMPLATE = ERB.new('<%= csharp_name%>.SetDirty();')
 
             module Options
 
