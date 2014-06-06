@@ -704,23 +704,6 @@
     }
   });
 
-  defadvice("ui.Menu", "_initData", function(options){
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (!scope) {
-      return this.next();
-    }
-    if (options.dataSource) {
-      if (self.$angular_scope)
-        destroyScope(self.$angular_scope);
-    }
-    this.next();
-    if (options.dataSource) {
-      self.$angular_scope = scope.$new();
-      compile(self.element.children())(self.$angular_scope);
-    }
-  });
-
   // scheduler
   {
     defadvice("ui.Scheduler", AFTER, function(){

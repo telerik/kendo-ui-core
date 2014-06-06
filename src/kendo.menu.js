@@ -337,16 +337,14 @@ var __meta__ = {
             if (options.dataSource) {
                 that.angular("cleanup", function(){
                     return {
-                        elements: that.element.children().get(),
-                        data: []
+                        elements: that.element.children()
                     };
                 });
                 that.element.empty();
                 that.append(options.dataSource, that.element);
                 that.angular("compile", function(){
                     return {
-                        elements: that.element.children().get(),
-                        data: []
+                        elements: that.element.children()
                     };
                 });
             }
