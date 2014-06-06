@@ -163,6 +163,19 @@
         ok(diagramFn.layout.called, "the layout method of the diagram should be called");
     });
 
+    test("connection is created with 'to' reference to a shape", function() {
+        diagram = $("#canvas").kendoDiagram({
+            shapes: [{id: "s1"}, {id: "s2"}],
+            connections: [{
+                from: { shapeId: "s1", connector: "auto" },
+                to: "s2"
+            }]
+        }).getKendoDiagram();
+
+        equal(diagram.connections.length, 1, "diagram should have a single connection");
+        equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
+    });
+
     module("shape creation options", {
         setup: function() {
             QUnit.fixture.html('<div id=canvas />');

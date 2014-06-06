@@ -1408,9 +1408,10 @@
             },
 
             _findConnectionShape: function(options) {
-                var diagram = this;
+                var diagram = this,
+                    shapeId = isString(options) ? options : options.shapeId;
 
-                var shape = diagram.getShapeById(options.shapeId);
+                var shape = diagram.getShapeById(shapeId);
 
                 return shape.getConnector(options.connector || AUTO);
             },
