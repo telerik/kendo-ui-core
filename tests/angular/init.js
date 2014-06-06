@@ -490,6 +490,17 @@
         expect(1);
     });
 
+    runTest("Tooltip -- compile template", function(dom){
+        $scope.text = "{{3 + 3}}";
+        var div = $("<div kendo-tooltip='tooltip' k-content='text'>foo</div>").appendTo(dom);
+        expect(1);
+        $scope.$on("kendoRendered", function(){
+            $scope.tooltip.show(div);
+            equal($scope.tooltip.content.text(), "6");
+            start();
+        });
+    });
+
     /// mobile
 
     runTest("Mobile ListView -- compiles templates in data source", function(dom){

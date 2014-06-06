@@ -694,16 +694,6 @@
     this.next();
   });
 
-  defadvice("ui.Tooltip", "_appendContent", function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (scope) {
-      compile(self.content)(scope);
-      digest(scope);
-    }
-  });
-
   // scheduler
   {
     defadvice("ui.Scheduler", AFTER, function(){

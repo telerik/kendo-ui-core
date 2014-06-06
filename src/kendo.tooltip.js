@@ -188,6 +188,10 @@ var __meta__ = {
                 showIframe = that.options.iframe,
                 iframe;
 
+            that.angular("cleanup", function(){
+                return { elements: element };
+            });
+
             if (isPlainObject(contentOptions) && contentOptions.url) {
                 if (!("iframe" in that.options)) {
                     showIframe = !isLocalUrl(contentOptions.url);
@@ -222,10 +226,14 @@ var __meta__ = {
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
                 contentOptions = contentOptions({ sender: this, target: target });
-                that.content.html(contentOptions || "");
+                element.html(contentOptions || "");
             } else {
-                that.content.html(contentOptions);
+                element.html(contentOptions);
             }
+
+            that.angular("compile", function(){
+                return { elements: element };
+            });
         },
 
         _ajaxRequest: function(options) {
