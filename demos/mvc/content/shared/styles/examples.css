@@ -523,91 +523,6 @@ div.submenu-box ol {
    font-weight: 400;
 }
 
-/*.exampleIcon
-{
-    width:20px;
-    height:20px;
-    float:left;
-    margin:0 11px 0 0;
-    background:no-repeat url(sprite.widgets.png);
-    -webkit-transform: translatez(0);
-}
-
-.overviewIcon{display:none;}
-.applicationIcon{background-position:0 0;}
-.autoCompleteIcon{background-position:-20px 0;}
-.mobileButtonIcon{background-position:-40px 0;}
-.mobileButtonGroupIcon{background-position:-60px 0;}
-.calendarIcon{background-position:-80px 0;}
-.chartIcon{background-position:-100px 0;}
-.chartAreaIcon{background-position:-120px 0;}
-.chartBarIcon{background-position:-140px 0;}
-.chartLineIcon{background-position:0px -20px;}
-.chartPieIcon{background-position:-20px -20px;}
-.chartScatterIcon{background-position:-40px -20px;}
-.chartDonutIcon{background-position:-140px -99px;}
-.chartBubbleIcon{background-position:0 -120px;}
-.chartStockIcon{background-position:-20px -120px;}
-.comboBoxIcon{background-position:-60px -20px;}
-.dataSourceIcon{background-position:-80px -20px;}
-.datePickerIcon{background-position:-100px -20px;}
-.dragDropIcon{background-position:-120px -20px;}
-.dropDownListIcon{background-position:-140px -20px;}
-.editorIcon{background-position:0px -40px;}
-.gaugeLinearIcon{background-position:-20px -40px;}
-.gaugeRadialIcon{background-position:-40px -40px;}
-.globalizationIcon{background-position:-60px -40px;}
-.gridIcon{background-position:-80px -40px;}
-.mobileHistoryIcon{background-position:-100px -40px;}
-.integrationIcon{background-position:-120px -40px;}
-.mobileListViewIcon{background-position:-20px -60px;}
-.listViewIcon{background-position:0 -60px;}
-.menuIcon{background-position:-20px -60px;}
-.mvvmIcon{background-position:-40px -60px;}
-.mobileNavBarIcon{background-position:-60px -60px;}
-.numericTextBoxIcon{background-position:-80px -60px;}
-.panelBarIcon{background-position:-100px -60px;}
-.mobileScrollerIcon{background-position:-120px -60px;}
-.mobileScrollViewIcon{background-position:-140px -60px;}
-.mobileSwitchIcon{background-position:-120px -80px;}
-.sliderIcon{background-position:0 -80px;}
-.splitterIcon{background-position:-20px -80px;}
-.mobileTabStripIcon{background-position:-40px -80px;}
-.tabStripIcon{background-position:-60px -80px;}
-.templatesIcon{background-position:-80px -80px;}
-.timePickerIcon{background-position:-100px -80px;}
-.mobileToggleButtonIcon{background-position:-120px -80px;}
-.treeViewIcon{background-position:-140px -80px;}
-.uploadIcon{background-position:0 -100px;}
-.validatorIcon{background-position:-20px -100px;}
-.windowIcon{background-position:-40px -100px;}
-.mobilePopOverIcon{background-position:-60px -100px;}
-.mobileSplitViewIcon{background-position:-80px -100px;}
-.mobileActionSheetIcon{background-position:-100px -100px;}
-.mobileModalViewIcon{background-position:-120px -100px;}
-.mobileDrawerIcon{background-position:-140px -40px;}
-.colorPickerIcon{background-position:-60px -120px;}
-.multiselectIcon{background-position:-140px -120px;}
-.tooltipIcon{background-position:-40px -120px;}
-.spaIcon{background-position:-120px -120px;}
-.sparklineIcon{background-position:-80px -120px;}
-.chartBulletIcon{background-position:-100px -120px;}
-.schedulerIcon{background-position:0 -140px;}
-.barcodeIcon{background-position:-20px -140px;}
-.qrcodeIcon{background-position:-40px -140px;}
-.chartRadarIcon{background-position:-60px -140px;}
-.chartPolarIcon{background-position:-80px -140px;}
-.buttonIcon{background-position:-40px 0;}
-.progressBarIcon{background-position:-120px -140px;}
-.chartFunnelIcon{background-position:-100px -140px;}
-.chartBoxPlotIcon{background-position:-140px -140px;}
-.mapIcon{background-position:0 -160px;}
-.diagramIcon{background-position:-20px -160px;}
-.maskedtextboxIcon{background-position:-40px -160px;}
-.sortableIcon{background-position:-60px -160px;}
-.notificationIcon{background-position:-80px -160px;}
-.mobileIcon{background-position:-100px -160px;}*/
-
 .overviewIcon{display:none;}
 .mobileActionSheetIcon:after { content: '\e800'; }
 .mobileAppIcon:after { content: '\e801'; }
@@ -2767,7 +2682,7 @@ h5 {
     padding-top: 3px;
 }
 
-/* ##################### BOX ##################### */
+/* Box Styles */
 
 .box {
     margin: 4.5em 7.5em;
