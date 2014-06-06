@@ -213,6 +213,30 @@
         });
     });
 
+    runTest("Grid item scopes are destroyed when page is changed", function(dom){
+        $scope.options = {
+            dataSource: {
+                data: $scope.data,
+                pageSize: 1
+            },
+            columns: [ { field: "text" }, { field: "id" } ],
+            pageable: true
+        };
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(2);
+        $scope.$on("kendoRendered", function(){
+            var grid = $scope.grid;
+            function firstRow() {
+                return grid.items().eq(0);
+            }
+            firstRow().scope().$on("$destroy", function(){ ok(true) });
+            grid.wrapper.find(".k-pager-wrap li:last > a").click();
+            firstRow().scope().$on("$destroy", function(){ ok(true) });
+            grid.wrapper.find(".k-pager-wrap li:first > a").click();
+            start();
+        });
+    });
+
     runTest("Grid cell templates after edit", function(dom){
         $scope.options = {
             dataSource: new kendo.data.DataSource({
