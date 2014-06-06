@@ -78,7 +78,6 @@ var __meta__ = {
         isArray = $.isArray,
         inArray = $.inArray,
         push = Array.prototype.push,
-        concat = Array.prototype.concat,
         proxy = $.proxy,
         isFunction = kendo.isFunction,
         isEmptyObject = $.isEmptyObject,
@@ -977,7 +976,11 @@ var __meta__ = {
         dataItems: function() {
             var dataItems = kendo.ui.DataBoundWidget.fn.dataItems.call(this);
             if (this.lockedContent) {
-                dataItems = concat.call(dataItems, dataItems);
+                var n = dataItems.length, tmp = new Array(2 * n);
+                for (var i = n; --i >= 0;) {
+                    tmp[i] = tmp[i + n] = dataItems[i];
+                }
+                dataItems = tmp;
             }
 
             return dataItems;
