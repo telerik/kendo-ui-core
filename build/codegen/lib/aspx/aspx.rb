@@ -38,7 +38,8 @@ module CodeGen
                 'Function' => '""',
                 'Date' => 'null',
                 'Array' => 'null',
-                'stringArray' => 'null'
+                'stringArray' => 'null',
+                'ClientEvent' => '""'
             }
 
             CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/class.template.erb'))

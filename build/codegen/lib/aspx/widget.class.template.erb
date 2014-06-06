@@ -32,10 +32,9 @@ namespace <%= csharp_namespace %>
 
         protected override void DescribeComponent(IScriptDescriptor descriptor)
         {
-            <% debugger %>
             base.DescribeComponent(descriptor);
             descriptor.AddScriptProperty("_options", serializer.Serialize(this));<% if events.count > 0 %>
-            descriptor.AddScriptProperty("_widgetEvents", serializer.Serialize(<%= csharp_name %>ClientEvents));<% end %>
+            descriptor.AddScriptProperty("_widgetEvents", serializer.Serialize(ClientEvents));<% end %>
         }
 
         protected override void OnPreRender(EventArgs e)
@@ -79,14 +78,6 @@ namespace <%= csharp_namespace %>
             }
         }
 
-        [DefaultValue(false)]
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public override bool EnableEmbeddedBaseStylesheet
-        {
-            get { return false; }
-        }
         #endregion [ RadWebControl Overrides ]
     <% if has_composite_options? %>
 
