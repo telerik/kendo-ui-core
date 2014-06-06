@@ -518,4 +518,21 @@
         });
     });
 
+    runTest("Mobile ScrollView -- compiles templates in data source", function(dom){
+        expect(2);
+        $scope.options = {
+            template   : "<div class='my-item'>{{ dataItem.id }}/{{ dataItem.text }}</div>",
+            dataSource : $scope.data
+        };
+        $("<ul kendo-mobilescrollview='list' k-options='options'></ul>").appendTo(dom);
+        expect(2);
+
+        $scope.$on("kendoRendered", function(){
+            var items = $scope.list.element.find(".my-item");
+            equal(items.eq(0).text(), "1/Foo");
+            equal(items.eq(1).text(), "2/Bar");
+            start();
+        });
+    });
+
 })();
