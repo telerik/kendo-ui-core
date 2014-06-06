@@ -78,6 +78,9 @@ module CodeGen
             CONVERTER_SCRIPT_TEMPLATE = ERB.new('
             AddScript(state, "<%= name %>", convertable.<%= csharp_name %>);')
 
+            CONVERTER_EVENT_TEMPLATE = ERB.new('
+            AddScript(state, "<%= name %>", convertable.ClientEvents.<%= csharp_name %>);')
+
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), <%= csharp_default %>.ToString());')
 
@@ -97,12 +100,6 @@ module CodeGen
                     Component
                 end
 
-                def name
-                    #debugger if @name.include?("OnClient")
-                    return @name.sub('OnClient', '').camelize if type.respond_to?('include?') && type.include?('ClientEvent')
-                    @name
-                end
-
                 def composite_option_class
                     CompositeOption
                 end
@@ -115,11 +112,16 @@ module CodeGen
                     ArrayOption
                 end
 
+                def event_class
+                    Event
+                end
+
                 def has_composite_options?
                     composite? && @options.select { |o| o.composite? }.count > 0
                 end
 
                 def csharp_name
+                    return "On" + @name.pascalize if type.respond_to?('include?') && type.include?('ClientEvent')
                     @name.pascalize
                 end
 
@@ -412,6 +414,16 @@ module CodeGen
                 end
             end
 
+            class Event < CodeGen::Event
+                def to_converter
+                    CONVERTER_EVENT_TEMPLATE.result(binding)
+                end
+
+                def csharp_name
+                    return "On" + @name.pascalize
+                end
+            end
+
             class Component < CodeGen::Component
                 include Options
 
@@ -627,7 +639,7 @@ module CodeGen
                         component.add_option({name: 'clientEvents', type: 'Object', description: 'Defines the client events handlers.' })
 
                         component.events.each do |event|
-                            component.add_option({name: "clientEvents.OnClient#{event.name.pascalize}", type: ['ClientEvent'], description: event.description, remove_existing: true })
+                            component.add_option({name: "clientEvents.#{event.name}", type: ['ClientEvent'], description: event.description, remove_existing: true })
                         end
 
                         component.options.find{|o| o.name == 'clientEvents'}.type = "kendo.#{component.name.pascalize}ClientEvents"
@@ -676,7 +688,7 @@ module CodeGen
 
                     write_viewstate(composite)
 
-                    write_composite_option_converter_file(composite)
+                    write_composite_option_converter_file(composite) unless composite.name.include?('clientEvents')
                 end
 
                 def write_is_default(options)
@@ -723,6 +735,9 @@ module CodeGen
                     @@converters[key] << composite.csharp_converter_class unless @@converters[key].include?(composite.csharp_converter_class)
 
                     composite_content = write_converter_options(composite.options)
+                    if composite.instance_of?(Component) && composite.widget? && composite.events
+                       composite_content += write_converter_options(composite.events)
+                    end
 
                     Generator.write_file(filename, composite_content, '[ SerializedProperties ]')
                 end
