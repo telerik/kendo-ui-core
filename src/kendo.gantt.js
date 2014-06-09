@@ -963,20 +963,12 @@ var __meta__ = {
                     return;
                 }
 
-                that._preventRefresh = true;
-
-                if (type === "add") {
-                    dataSource.add(task);
-                } else {
+                if (type !== "add") {
                     orderId = selected.get("orderId");
                     orderId = type === "insert-before" ? orderId : orderId + 1;
-
-                    dataSource.insert(orderId, task);
                 }
 
-                that._preventRefresh = false;
-
-                dataSource.sync();
+                that._createTask(task, orderId);
             };
 
             if (this.options.editable !== true) {
@@ -1115,7 +1107,7 @@ var __meta__ = {
                     that._updateTask(that.dataSource.getByUid(e.task.uid), { percentComplete: e.percentComplete });
                 })
                 .bind("dependencyDragEnd", function(e) {
-                    var dependency = new GanttDependency({
+                    var dependency = that.dependencies._createNewModel({
                         type: e.type,
                         predecessorId: e.predecessor.id,
                         successorId: e.successor.id
@@ -1224,6 +1216,22 @@ var __meta__ = {
                     this.dataSource.sync();
                 }
             }
+        },
+
+        _createTask: function(task, index) {
+            var dataSource = this.dataSource;
+
+            this._preventRefresh = true;
+
+            if (index === undefined) {
+                dataSource.add(task);
+            } else {
+                dataSource.insert(index, task);
+            }
+
+            this._preventRefresh = false;
+
+            dataSource.sync();
         },
 
         _createDependency: function(dependency) {
