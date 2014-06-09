@@ -157,6 +157,80 @@
         dataSource.schemaCatalogs();
     });
 
+    test("schemaMeasures calls the transport discover", 3, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaMeasures");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                }
+            }
+        });
+
+        dataSource.schemaMeasures();
+    });
+
+    test("schemaDimensions calls the transport discover", 3, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaDimensions");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                }
+            }
+        });
+
+        dataSource.schemaDimensions();
+    });
+
+    test("schemaHierarchies calls the transport discover", 4, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaHierarchies");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                    equal(options.data.restrictions.dimensionUniqueName, "dimensionName");
+                }
+            }
+        });
+
+        dataSource.schemaHierarchies("dimensionName");
+    });
+
+    test("schemaLevels calls the transport discover", 4, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaLevels");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                    equal(options.data.restrictions.hierarchyUniqueName, "hierarchyName");
+                }
+            }
+        });
+
+        dataSource.schemaLevels("hierarchyName");
+    });
+
     test("schemaCubes calls reader cubes method", 1, function() {
         var dataSource = new PivotDataSource({
             schema: {

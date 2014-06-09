@@ -13,6 +13,7 @@
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
         <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -32,13 +33,14 @@
 
         <fieldset style="margin: 10px">
             catalog: <select id="catalogs"></select>
-            cube: <select id="cubes"></select>
+            cube: <select id="cubes"></select> <br/>
+            <ul id="treeview"></ul>
         </fieldset>
 
         <div id="pivotgrid"></div>
 
         <script>
-            $("#expand-city").click(function() {
+           /* $("#expand-city").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
                 dataSource.expandRow(["[Date].[Calendar]", "[Geography].[City]" ]);
             });
@@ -81,7 +83,7 @@
             $("#expand-2006_2").click(function() {
                 var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
                 dataSource.expandRow("[Date].[Calendar].[Year].&[2006].&[2]");
-            });
+            });*/
 
             $(function() {
                 var pivot = $("#pivotgrid").kendoPivotGrid({
@@ -116,26 +118,99 @@
                     dataValueField: "name",
                     change: function() {
                         pivot.dataSource.cube(this.value());
+                        treeview.dataSource.read();
                     }
                 }).data("kendoDropDownList");
-
-                pivot.dataSource.schemaCubes().done(function(data) {
-                   cubes.dataSource.data(data);
-                });
 
                 var catalogs = $("#catalogs").kendoDropDownList({
                     dataTextField: "name",
                     dataValueField: "name",
+                    optionLabel: "None",
                     change: function() {
                         pivot.dataSource.catalog(this.value());
                     }
                 }).data("kendoDropDownList");
 
+                var treeview = $("#treeview").kendoTreeView({
+                    dataTextField: "name",
+                    checkboxes: true,
+                    autoBind: false,
+                    dataSource: {
+                        schema: {
+                            model: {
+                                id: "uniqueName",
+                                hasChildren: function() {
+                                    return true;
+                                }
+                            }
+                        },
+                        transport: {
+                            read: function(options) {
+                                if ($.isEmptyObject(options.data)) {
+                                    pivot.dataSource.schemaDimensions().done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName == "[Measures]") {
+                                    pivot.dataSource.schemaMeasures().done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName.indexOf(".") > 1) {
+                                    pivot.dataSource.schemaLevels(options.data.uniqueName).done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName) {
+                                    pivot.dataSource.schemaHierarchies(options.data.uniqueName).done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else {
+                                    options.success([]);
+                                }
+                            }
+                        }
+                    }
+                }).data("kendoTreeView");
+
+                catalogs.bind("change", function() {
+                    populate(pivot.dataSource);
+                });
+
                 pivot.dataSource.schemaCatalogs().done(function(data) {
                    catalogs.dataSource.data(data);
                 });
-
             });
+
+            function populate(pivotDataSource) {
+                var cubes = $("#cubes").data("kendoDropDownList");
+                var treeview = $("#treeview").data("kendoTreeView");
+
+                pivotDataSource.schemaCubes().done(function(data) {
+                    cubes.dataSource.data(data);
+                    treeview.dataSource.fetch();
+
+                    treeview.dataSource.bind("change", function() {
+                        var checkedNodes = [],
+                        treeView = $("#treeview").data("kendoTreeView");
+
+                        checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+
+                        pivotDataSource.columns(checkedNodes);
+                    });
+                });
+            }
+
+            // function that gathers IDs of checked nodes
+            function checkedNodeIds(nodes, checkedNodes) {
+                for (var i = 0; i < nodes.length; i++) {
+                    if (nodes[i].checked) {
+                        checkedNodes.push(nodes[i].id);
+                    }
+
+                    if (nodes[i].hasChildren) {
+                        checkedNodeIds(nodes[i].children.view(), checkedNodes);
+                    }
+                }
+            }
+
         </script>
     </body>
 </html>

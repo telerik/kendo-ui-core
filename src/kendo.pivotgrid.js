@@ -219,7 +219,11 @@ var __meta__ = {
                 schema: {
                     axes: identity,
                     cubes: identity,
-                    catalogs: identity
+                    catalogs: identity,
+                    measures: identity,
+                    dimensions: identity,
+                    hierarchies: identity,
+                    levels: identity
                 }
             }, options));
 
@@ -590,7 +594,75 @@ var __meta__ = {
                         that.error(response, status, error);
                     }
                 }, options));
-            }).promise();
+            }).promise().done(function() {
+                that.trigger("schemaChange");
+            });
+        },
+
+        schemaMeasures: function() {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaMeasures",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube()
+                    }
+                }
+            }, function(response) {
+                return that.reader.measures(response);
+            });
+        },
+
+        schemaDimensions: function() {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaDimensions",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube()
+                    }
+                }
+            }, function(response) {
+                return that.reader.dimensions(response);
+            });
+        },
+
+        schemaHierarchies: function(dimensionName) {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaHierarchies",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube(),
+                        dimensionUniqueName: dimensionName
+                    }
+                }
+            }, function(response) {
+                return that.reader.hierarchies(response);
+            });
+        },
+
+        schemaLevels: function(hierarchyName) {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaLevels",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube(),
+                        hierarchyUniqueName: hierarchyName
+                    }
+                }
+            }, function(response) {
+                return that.reader.levels(response);
+            });
         },
 
         schemaCubes: function() {
@@ -600,7 +672,7 @@ var __meta__ = {
                 data: {
                     command: "schemaCubes",
                     restrictions: {
-                        catalogName: that.transport.cube()
+                        catalogName: that.transport.catalog()
                     }
                 }
             }, function(response) {
@@ -1177,7 +1249,11 @@ var __meta__ = {
 
     var xmlaDiscoverCommands = {
         schemaCubes: "MDSCHEMA_CUBES",
-        schemaCatalogs: "DBSCHEMA_CATALOGS"
+        schemaCatalogs: "DBSCHEMA_CATALOGS",
+        schemaMeasures: "MDSCHEMA_MEASURES",
+        schemaDimensions: "MDSCHEMA_DIMENSIONS",
+        schemaHierarchies: "MDSCHEMA_HIERARCHIES",
+        schemaLevels: "MDSCHEMA_LEVELS"
     };
 
     var convertersMap = {
@@ -1335,6 +1411,44 @@ var __meta__ = {
         catalogs: {
             name: kendo.getter("CATALOG_NAME['#text']", true),
             description: kendo.getter("DESCRIPTION['#text']", true)
+        },
+        measures: {
+            name: kendo.getter("MEASURE_NAME['#text']", true),
+            caption: kendo.getter("MEASURE_CAPTION['#text']", true),
+            uniqueName: kendo.getter("MEASURE_UNIQUE_NAME['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true),
+            aggregator: kendo.getter("MEASURE_AGGREGATOR['#text']", true),
+            groupName: kendo.getter("MEASUREGROUP_NAME['#text']", true),
+            displayFolder: kendo.getter("MEASURE_DISPLAY_FOLDER['#text']", true),
+            defaultFormat: kendo.getter("DEFAULT_FORMAT_STRING['#text']", true)
+        },
+        dimensions: {
+            name: kendo.getter("DIMENSION_NAME['#text']", true),
+            caption: kendo.getter("DIMENSION_CAPTION['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true),
+            uniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+            type: kendo.getter("DIMENSION_TYPE['#text']", true)
+        },
+        hierarchies: {
+            name: kendo.getter("HIERARCHY_NAME['#text']", true),
+            caption: kendo.getter("HIERARCHY_CAPTION['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true),
+            uniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true),
+            dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+            displayFolder: kendo.getter("HIERARCHY_DISPLAY_FOLDER['#text']", true),
+            origin: kendo.getter("HIERARCHY_ORIGIN['#text']", true),
+            defaultMember: kendo.getter("DEFAULT_MEMBER['#text']", true)
+        },
+        levels: {
+            name: kendo.getter("LEVEL_NAME['#text']", true),
+            caption: kendo.getter("LEVEL_CAPTION['#text']", true),
+            description: kendo.getter("DESCRIPTION['#text']", true),
+            uniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
+            dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+            displayFolder: kendo.getter("LEVEL_DISPLAY_FOLDER['#text']", true),
+            orderingProperty: kendo.getter("LEVEL_ORDERING_PROPERTY['#text']", true),
+            origin: kendo.getter("LEVEL_ORIGIN['#text']", true),
+            hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true)
         }
     };
 
@@ -1404,6 +1518,18 @@ var __meta__ = {
             }
 
             return result;
+        },
+        measures: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.measures);
+        },
+        hierarchies: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.hierarchies);
+        },
+        levels: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.levels);
+        },
+        dimensions: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.dimensions);
         },
         cubes: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.cubes);
