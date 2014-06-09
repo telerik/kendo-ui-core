@@ -132,6 +132,7 @@ require 'nuget'
 require 'winrm_tools' unless RUBY_PLATFORM =~ /darwin/
 require 'playground'
 require 'vs_plugin'
+require './build/localization'
 
 MVC_BINARIES = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
