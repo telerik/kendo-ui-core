@@ -10,7 +10,7 @@
         }
     });
 
-    test("ScrollView binds with MVVM", 2, function() {
+    test("supports binding", 2, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-tmp"></div> </div></div>').appendTo(QUnit.fixture);
 
         window.scrollViewViewModel = kendo.observable({
@@ -23,7 +23,7 @@
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
     });
 
-    test("ScrollView binds contents", 2, function() {
+    test("binds contents", 2, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
 
         window.scrollViewViewModel = kendo.observable({
@@ -35,7 +35,7 @@
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
     });
 
-    test("ScrollView rebinds to a new DataSource", 3, function() {
+    test("rebinds to a new DataSource", 3, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
 
         window.scrollViewViewModel = kendo.observable({
@@ -63,7 +63,7 @@
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "3");
     });
 
-    test("ScrollView binds with MVVM and initial content", 3, function() {
+    test("binds with MVVM and initial content", 3, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-tmp"><div>foo</div></div> </div></div>').appendTo(QUnit.fixture);
 
         window.scrollViewViewModel = kendo.observable({
@@ -77,7 +77,7 @@
         ok($("#scrollview").data("kendoMobileScrollView")._content instanceof kendo.mobile.ui.ScrollViewContent);
     });
 
-    test("ScrollView pager gets updated when the dataSource changes", 1, function() {
+    test("pager gets updated when the dataSource changes", 1, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
 
         window.scrollViewViewModel = kendo.observable({
