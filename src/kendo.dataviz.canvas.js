@@ -146,6 +146,10 @@ var __meta__ = {
             return new CanvasText(content, options);
         },
 
+        createTextBox: function(options) {
+             return new CanvasTextBox(options);
+        },
+
         createRect: function(box, style) {
             return new CanvasLine(box.points(), true, this.setDefaults(style));
         },
@@ -573,10 +577,6 @@ var __meta__ = {
 
             context.save();
 
-            if (options.rotation !== 0) {
-                text.setRotation(context);
-            }
-
             context.font = options.font;
             context.fillStyle = options.color;
             context.globalAlpha = options.fillOpacity;
@@ -584,24 +584,26 @@ var __meta__ = {
             context.fillText(content, x, y);
 
             context.restore();
+        }
+    });
+
+    var CanvasTextBox = ViewElement.extend({
+        render: function(context) {
+            var matrix = this.options.matrix;
+
+            if (matrix) {
+                context.save();
+                context.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
+            }
+
+            this.renderContent(context);
+
+            if (matrix) {
+                context.restore();
+            }
         },
 
-        setRotation: function(context) {
-            var text = this,
-                options = text.options,
-                size = options.size,
-                cx = options.x + size.normalWidth / 2,
-                cy = options.y + size.normalHeight / 2,
-                rcx = options.x + size.width / 2,
-                rcy = options.y + size.height / 2,
-                offsetX = rcx - cx,
-                offsetY = rcy - cy;
-
-            context.translate(offsetX, offsetY);
-            context.translate(cx, cy);
-            context.rotate(options.rotation * DEG_TO_RAD);
-            context.translate(-cx, -cy);
-        }
+        renderContent: CanvasView.fn.renderContent
     });
 
     // Helpers ================================================================
@@ -643,6 +645,7 @@ var __meta__ = {
         CanvasPath: CanvasPath,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,
+        CanvasTextBox: CanvasTextBox,
         CanvasView: CanvasView
     });
 

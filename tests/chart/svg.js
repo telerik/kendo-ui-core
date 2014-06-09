@@ -68,6 +68,11 @@
             ok(text instanceof dataviz.SVGText);
         });
 
+        test("createTextBox returns SVGTextBox", function() {
+            var textbox = view.createTextBox();
+            ok(textbox instanceof dataviz.SVGTextBox);
+        });
+
         test("createText sets content", function() {
             var text = view.createText("Text");
             equal(text.content, "Text");
@@ -548,74 +553,6 @@
             ok(text.render().indexOf("cursor: pointer;") > -1);
         });
 
-        test("sets rotation transform for 45 degrees", function() {
-            createText({
-                rotation: 45,
-                size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
-                }
-            });
-            ok(text.render().indexOf(
-                "transform='translate(0.5,7) rotate(45,13.5,7)'")
-                != -1
-            );
-        });
-
-        test("sets rotation transform for 90 degrees", function() {
-            createText({
-                rotation: 90,
-                size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
-                }
-            });
-            ok(text.render().indexOf(
-                "transform='translate(-6.5,6.5) rotate(90,13.5,7)'")
-                != -1
-            );
-        });
-
-        test("sets rotation transform for -45 degrees", function() {
-            createText({
-                rotation: -45,
-                size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
-                }
-            });
-            ok(text.render().indexOf(
-                "transform='translate(0.5,7) rotate(-45,13.5,7)'")
-                != -1
-            );
-        });
-
-        test("sets rotation transform for -90 degrees", function() {
-            createText({
-                rotation: -90,
-                size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
-                }
-            });
-            ok(text.render().indexOf(
-                "transform='translate(-6.5,6.5) rotate(-90,13.5,7)'")
-                != -1
-            );
-        });
-
         test("sets color", function() {
             text.options.color = "#cf0";
             ok(text.render().indexOf("fill='" + text.options.color + "'") > -1);
@@ -660,6 +597,39 @@
             equal(domElement.attr("fill-opacity"), "0.4");
         });
 
+    })();
+
+    (function() {
+        var TextBox = dataviz.SVGTextBox;
+        var matrix = new dataviz.Matrix(1,1,1,1,1,1);
+        var textbox;
+
+        module("SVGTextBox", {});
+
+        test("renders group with transformation when transformation matrix is passed", function() {
+            textbox = new TextBox({matrix: matrix});
+            equal(textbox.render(), "<g transform='matrix(1,1,1,1,1,1)'></g>");
+        });
+
+        test("renders children in group group with transformation when transformation matrix is passed", function() {
+            textbox = new TextBox({matrix: matrix});
+            textbox.children = [{
+                render: function() {
+                    return "foo";
+                }
+            }];
+            equal(textbox.render(), "<g transform='matrix(1,1,1,1,1,1)'>foo</g>");
+        });
+
+        test("renders only children when no transformation matrix is passed", function() {
+            textbox = new TextBox();
+            textbox.children = [{
+                render: function() {
+                    return "foo";
+                }
+            }];
+            equal(textbox.render(), "foo");
+        });
     })();
 
     (function() {

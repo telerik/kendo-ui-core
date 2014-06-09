@@ -735,17 +735,17 @@
         });
 
         test("sets label text", function() {
-            equal(label.children[0].content, VALUE);
+            equal(label.content, VALUE);
         });
 
         test("applies full label format", function() {
             createPoint({ labels: { visible: true, format: "{0}%" }});
-            equal(label.children[0].content, VALUE + "%");
+            equal(label.content, VALUE + "%");
         });
 
         test("applies simple label format", function() {
             createPoint({ labels: { visible: true, format: "p0" }});
-            equal(label.children[0].content, VALUE * 100 + " %");
+            equal(label.content, VALUE * 100 + " %");
         });
 
         test("sets label color", function() {
@@ -815,7 +815,7 @@
 
         function assertTemplate(template, value, format) {
             createPoint({ labels: { visible: true, template: template, format: format } });
-            equal(label.children[0].content, value);
+            equal(label.content, value);
         }
 
         test("renders template", function() {

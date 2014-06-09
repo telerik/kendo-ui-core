@@ -2,6 +2,7 @@
     var dataviz = kendo.dataviz,
         IDPool = dataviz.IDPool,
         Box2D = dataviz.Box2D,
+        Point2D = dataviz.Point2D,
         getElement = dataviz.getElement,
         chartBox = new Box2D(5, 5, 1000, 1000),
         uniqueId = dataviz.uniqueId,
@@ -340,6 +341,14 @@
             boxElement,
             childElements;
 
+        function ChildElementStub() {
+            this.boxes = []
+            this.reflow = function(box) {
+                this.box = box;
+                this.boxes.push(box.clone());
+            }
+        };
+
         // ------------------------------------------------------------
         module("BoxElement", {
             setup: function() {
@@ -465,6 +474,18 @@
             equal(boxElement.contentBox.height(), HEIGHT);
         });
 
+        test("reflows children in box with the actual size", function() {
+            boxElement.options.padding = PADDING;
+            boxElement.options.border.width = BORDER;
+            boxElement.options.margin = MARGIN;
+            var stubElement = new ChildElementStub();
+            boxElement.children = [stubElement];
+            boxElement.reflow(targetBox);
+
+            equal(stubElement.boxes[0].width(), WIDTH);
+            equal(stubElement.boxes[0].height(), HEIGHT);
+        });
+
         // ------------------------------------------------------------
         module("BoxElement / Shrink to fit", {
             setup: function() {
@@ -536,6 +557,20 @@
 
             equal(boxElement.contentBox.width(), WIDTH - nonContent);
             equal(boxElement.contentBox.height(), HEIGHT - nonContent);
+        });
+
+        test("reflows children in box with the actual size", function() {
+            boxElement.options.padding = PADDING;
+            boxElement.options.border.width = BORDER;
+            boxElement.options.margin = MARGIN;
+            boxElement.options.width = 50;
+            boxElement.options.height = 50;
+            var stubElement = new ChildElementStub();
+            boxElement.children = [stubElement];
+            boxElement.reflow(targetBox);
+
+            equal(stubElement.boxes[0].width(), 38);
+            equal(stubElement.boxes[0].height(), 38);
         });
 
         // ------------------------------------------------------------
@@ -844,6 +879,16 @@
             equal(view.log.rect[0].style.zIndex, 100);
         });
 
+        test("renders cursor", function() {
+            boxElement.options.cursor = {
+                style: "pointer"
+            };
+            boxElement.reflow(targetBox);
+            boxElement.getViewElements(view);
+
+            equal(view.log.rect[0].style.cursor.style, "pointer");
+        });
+
     })();
 
     (function() {
@@ -864,7 +909,7 @@
                 padding: PADDING }, options));
             title.reflow(chartBox);
             titleTextBox = title.children[0],
-            titleText = titleTextBox.children[0];
+            titleText = titleTextBox.children[0].children[0];
         }
 
         module("Title", {
@@ -1138,42 +1183,432 @@
 
     (function() {
         var textBox,
-            TEXT = "text";
+            TextBox = dataviz.TextBox,
+            FloatElement = dataviz.FloatElement,
+            Text = dataviz.Text,
+            TEXT = "text",
+            floatElement,
+            floatElementStub,
+            targetBox = Box2D(0, 0, 100, 100),
+            texts,
+            rect;
 
-        function createTextBox(options) {
-            textBox = new dataviz.TextBox(TEXT, options);
-            textBox.reflow(new Box2D());
-            textBox.getViewElements(view);
+        function createTextBox(options, text) {
+            textBox = new TextBox(text || TEXT, options);
+            floatElement = textBox.children[0];
+            texts = floatElement.children;
         }
 
         // ------------------------------------------------------------
-        module("TextBox", {
-            setup: function() {
-                moduleSetup();
-                createTextBox();
-            }
-        });
-
-        test("sets unique id on text", function() {
-            notEqual(textBox.children[0].id, "");
-        });
+        module("TextBox", {});
 
         test("retains id", function() {
             createTextBox({ id: "1" });
             equal(textBox.id, "1");
         });
 
-        test("moves id to box when background or border are set", function() {
-            createTextBox({ id: "1", border: { width: 1 }});
-            equal(view.log.rect[0].style.id, "1");
+        test("appends float element", function() {
+            createTextBox();
+            ok(floatElement instanceof FloatElement);
+            ok(floatElement.parent === textBox);
+        });
+
+        test("sets align to float element from its options", function() {
+            createTextBox({align: "right"});
+            equal(floatElement.options.align, "right");
+        });
+
+        test("sets float element wrap to false", function() {
+            createTextBox();
+            equal(floatElement.options.wrap, false);
+        });
+
+        test("sets float element direction to vertical", function() {
+            createTextBox();
+            equal(floatElement.options.vertical, true);
+        });
+
+        test("appends text to float element", function() {
+            createTextBox();
+            ok(texts[0] instanceof Text);
+            ok(texts[0].parent === floatElement);
+        });
+
+        test("passes text options", function() {
+            createTextBox({font: "foo", color: "bar", cursor: {style: "baz"}});
+            var options = texts[0].options;
+            equal(options.font, "foo");
+            equal(options.color, "bar");
+            equal(options.cursor.style, "baz");
+        });
+
+        test("sets text vertical align to top", function() {
+            createTextBox();
+            equal(texts[0].options.vAlign, "top");
+        });
+
+        test("sets text align to left", function() {
+            createTextBox();
+            equal(texts[0].options.align, "left");
+        });
+
+        test("sets options id on text", function() {
+            createTextBox({ id: "1" });
+            equal(texts[0].id, "1");
         });
 
         test("assigns unique id to text when background or border is set", function() {
             createTextBox({ id: "1", border: { width: 1 }});
 
-            var id = textBox.children[0].id;
+            var id = texts[0].id;
             notEqual(id, "1");
-            notEqual(id, "");
+            ok(id);
+        });
+
+        test("creates text when passed content is a number", function() {
+            createTextBox({}, 1);
+            ok(texts[0]);
+        });
+
+        test("splits text by line feed and creates a appends text to float element for each line", function() {
+            createTextBox({}, "line1 \n line2");
+            ok(texts[0] instanceof Text);
+            equal(texts[0].content, "line1");
+            ok(texts[1] instanceof Text);
+            equal(texts[1].content, "line2");
+        });
+
+        test("multiline text assigns unique id to each text if textbox has box", function() {
+            createTextBox({id: "1", background: "red"}, "line1 \n line2");
+            ok(texts[0].id);
+            notEqual(texts[0].id, "1");
+            ok(texts[1].id);
+            notEqual(texts[1].id, "1");
+        });
+
+        test("multiline assigns id from options to first text and a unique one to each subsequent text when textbox has no box", function() {
+            createTextBox({id: "1"}, "line1 \n line2");
+            equal(texts[0].id, "1");
+            ok(texts[1].id);
+            notEqual(texts[1].id, "1");
+        });
+
+        test("has box after the initialization", function() {
+            textBox = new TextBox(TEXT, {});
+            ok(textBox.box);
+        });
+
+        // ------------------------------------------------------------
+
+        function FloatElementStub(box) {
+            this.box = box;
+            this.reflow = function(target) {
+                //this.box = target.clone();
+            };
+            this.getViewElements = function() {
+                return [];
+            };
+            this.options = {};
+        }
+
+        function createTextBoxMock(options, floatBox) {
+            createTextBox($.extend({
+                align: "left",
+                vAlign: "top"
+            }, options));
+            floatElementStub = new FloatElementStub(floatBox || Box2D(0,0,30,30));
+            textBox.children = [floatElementStub];
+            textBox.container = floatElementStub;
+        }
+
+        function compareBoxes(box1, box2) {
+            equal(box1.x1, box2.x1);
+            equal(box1.x2, box2.x2);
+            equal(box1.y1, box2.y1);
+            equal(box1.y2, box2.y2);
+        }
+
+        module("TextBox / reflow", {});
+
+        test("updates float element align option", function() {
+            createTextBoxMock();
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.options.align, "right");
+        });
+
+        test("applies margin", function() {
+            createTextBoxMock({margin: 5});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(5));
+        });
+
+        test("applies padding", function() {
+            createTextBoxMock({padding: 10});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(10));
+        });
+
+        test("applies border", function() {
+            createTextBoxMock({border: {width: 15}});
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, floatElementStub.box.pad(15));
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / align", {
+            setup: function() {
+                createTextBoxMock();
+            }
+        });
+
+        test("top", function() {
+            textBox.options.vAlign = "top";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 0);
+            equal(floatElementStub.box.y2, 30);
+            equal(textBox.box.y1, 0);
+            equal(textBox.box.y2, 30);
+        });
+
+        test("bottom", function() {
+            textBox.options.vAlign = "bottom";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 70);
+            equal(floatElementStub.box.y2, 100);
+            equal(textBox.box.y1, 70);
+            equal(textBox.box.y2, 100);
+        });
+
+        test("vertical center", function() {
+            textBox.options.vAlign = "center";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.y1, 35);
+            equal(floatElementStub.box.y2, 65);
+            equal(textBox.box.y1, 35);
+            equal(textBox.box.y2, 65);
+        });
+
+        test("left", function() {
+            textBox.options.align = "left";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 0);
+            equal(floatElementStub.box.x2, 30);
+            equal(textBox.box.x1, 0);
+            equal(textBox.box.x2, 30);
+        });
+
+        test("right", function() {
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 70);
+            equal(floatElementStub.box.x2, 100);
+            equal(textBox.box.x1, 70);
+            equal(textBox.box.x2, 100);
+        });
+
+        test("horizontal center", function() {
+            textBox.options.align = "center";
+            textBox.reflow(targetBox);
+            equal(floatElementStub.box.x1, 35);
+            equal(floatElementStub.box.x2, 65);
+            equal(textBox.box.x1, 35);
+            equal(textBox.box.x2, 65);
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / rotation", {
+            setup: function() {
+                createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            }
+        });
+
+        test("rotates box", function() {
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, Box2D(0,0, 30, 20));
+        });
+
+        test("sets normal box to box prior to rotation", function() {
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.normalBox, Box2D(0,0, 20, 30));
+        });
+
+        test("sets normal box to box prior to rotation without margin", function() {
+            textBox.options.margin = 5;
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.normalBox, Box2D(5,5, 25, 35));
+        });
+
+        test("rotates box without margin and applies margin to the rotated box", function() {
+            textBox.options.margin = 5;
+            textBox.reflow(targetBox);
+            compareBoxes(textBox.box, Box2D(0,0, 40, 30));
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / reflow / rotation / align", {
+            setup: function() {
+                createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            }
+        });
+
+        test("top", function() {
+            textBox.options.vAlign = "top";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 0);
+            equal(textBox.box.y2, 20);
+        });
+
+        test("bottom", function() {
+            textBox.options.vAlign = "bottom";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 80);
+            equal(textBox.box.y2, 100);
+        });
+
+        test("vertical center", function() {
+            textBox.options.vAlign = "center";
+            textBox.reflow(targetBox);
+            equal(textBox.box.y1, 40);
+            equal(textBox.box.y2, 60);
+        });
+
+        test("left", function() {
+            textBox.options.align = "left";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 0);
+            equal(textBox.box.x2, 30);
+        });
+
+        test("right", function() {
+            textBox.options.align = "right";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 70);
+            equal(textBox.box.x2, 100);
+        });
+
+        test("horizontal center", function() {
+            textBox.options.align = "center";
+            textBox.reflow(targetBox);
+            equal(textBox.box.x1, 35);
+            equal(textBox.box.x2, 65);
+        });
+
+        // ------------------------------------------------------------
+        function setupViewElementsTextBox(options, text) {
+            createTextBox(options, text);
+            textBox.modelId = "modelId";
+            textBox.getViewElements(view);
+        }
+
+        module("TextBox / view elements", {
+            setup: function() {
+                moduleSetup();
+            }
+        });
+
+        test("creates a TextBox", function() {
+            setupViewElementsTextBox();
+            equal(view.log.textbox.length, 1);
+        });
+
+        test("sets a matrix if rotation is set", function() {
+            moduleSetup();
+            createTextBoxMock({rotation: 90}, Box2D(0,0,20,30));
+            textBox.reflow(targetBox);
+            textBox.getViewElements(view);
+            var matrix = view.log.textbox[0].options.matrix;
+            var tolerance = 0.01;
+            close(matrix.a, 0, tolerance);
+            close(matrix.b, 1, tolerance);
+            close(matrix.c, -1, tolerance);
+            close(matrix.d, 0, tolerance);
+            close(matrix.e, 30, tolerance);
+            close(matrix.f, 0, tolerance);
+        });
+
+        test("assigns zIndex from the options to textbox", function() {
+            setupViewElementsTextBox({zIndex: 1});
+            equal(view.log.textbox[0].options.zIndex, 1);
+        });
+
+        test("creates rect when background is set", function() {
+            setupViewElementsTextBox({background: "foo"});
+            equal(view.log.rect.length, 1);
+        });
+
+        test("creates rect when border is set", function() {
+            setupViewElementsTextBox({border: { width: 1 }});
+            equal(view.log.rect.length, 1);
+        });
+
+        test("creates text", function() {
+            setupViewElementsTextBox();
+            equal(view.log.text.length, 1);
+        });
+
+        test("creates text for each line", function() {
+            setupViewElementsTextBox({}, "line1 \n line2");
+            equal(view.log.text.length, 2);
+        });
+
+        test("sets zIndex from the options to text", function() {
+            setupViewElementsTextBox({ zIndex: 1});
+            equal(view.log.text[0].style.zIndex, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("TextBox / view elements / rect options", {
+            setup: function() {
+                moduleSetup();
+                setupViewElementsTextBox({
+                    id: "1",
+                    zIndex: 1,
+                    border: {
+                        width: 2,
+                        color: "red",
+                        opacity: 0.5,
+                        dashType: "foo"
+                    },
+                    background: "green",
+                    opacity: 0.7,
+                    animation: {
+                        type: "foo",
+                        duration: 100
+                    }
+                });
+
+                rect = view.log.rect[0];
+            }
+        });
+
+        test("sets id", function() {
+            equal(rect.style.id, "1");
+        });
+
+        test("sets zIndex", function() {
+            equal(rect.style.zIndex, 1);
+        });
+
+        test("sets stroke options", function() {
+            equal(rect.style.stroke, "red");
+            equal(rect.style.strokeWidth, 2);
+            equal(rect.style.strokeOpacity, 0.5);
+            equal(rect.style.dashType, "foo");
+        });
+
+        test("sets fill", function() {
+            equal(rect.style.fill, "green");
+            equal(rect.style.fillOpacity, 0.7);
+        });
+
+        test("sets animation", function() {
+            equal(rect.style.animation.type, "foo");
+            equal(rect.style.animation.duration, 100);
+        });
+
+        test("sets model id", function() {
+            equal(rect.style.data.modelId, "modelId");
         });
 
     })();
@@ -1184,7 +1619,7 @@
             MARGIN = 10;
 
         function createLegend(options) {
-            legend = new dataviz.Legend($.extend(true,{
+            legend = new dataviz.Legend($.extend({
                 items: [ { text: "Series 1" } ],
                 labels: {
                     font: SANS12
@@ -1209,6 +1644,17 @@
             equal(view.log.group.length, 1);
         });
 
+        test("renders no elements if legend has no items", function() {
+            moduleSetup();
+
+            createLegend({items: []});
+            legend.getViewElements(view);
+
+            equal(view.log.group.length, 0);
+            equal(view.log.textbox.length, 0);
+            equal(view.log.path.length, 0);
+        });
+
         test("sets zIndex on group", function() {
             createLegend({
                 zIndex: 10
@@ -1220,45 +1666,6 @@
 
         test("default zIndex is 1", function() {
             equal(legend.options.zIndex, 1);
-        });
-
-        test("creates labels for series", 1, function() {
-            legend.getViewElements(view);
-            equal(view.log.text[0].content, "Series 1");
-        });
-
-        test("second label is below the first", function() {
-            createLegend({
-                items: [
-                    { text: "Series 1" },
-                    { text: "Series 2" }
-                ]
-            });
-
-            var label1 = legend.children[0],
-                label2 = legend.children[1];
-
-            equal(label2.box.y1, label1.box.y2);
-        });
-
-        test("labels have set font", function() {
-            createLegend({
-                labels: {
-                    font: "10px sans-serif"
-                }
-            });
-
-            equal(legend.children[0].options.font, legend.options.labels.font);
-        });
-
-        test("labels have set color", function() {
-            createLegend({
-                labels: {
-                    color: "#cf0"
-                }
-            });
-
-            equal(legend.children[0].options.color, legend.options.labels.color);
         });
 
         test("positions legend to absolute vertical center (relative to y=0)", function() {
@@ -1328,7 +1735,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(485, 975, 531.75, 990), TOLERANCE);
+            sameBox(legendBox, new Box2D(460, 965, 545, 1000), TOLERANCE);
         });
 
         test("positions legend to the top should have correct box", function() {
@@ -1338,7 +1745,7 @@
 
             var legendBox = legend.children[0].box;
 
-            sameBox(legendBox, new Box2D(485.75, 15, 532.75, 30), TOLERANCE);
+            sameBox(legendBox, new Box2D(460, 5, 545, 40), TOLERANCE);
         });
 
         test("positions legend to the bottom", function() {
@@ -1384,55 +1791,95 @@
             equal(legend.box.y1, chartBox.y2 - baseHeight - 2 * MARGIN);
         });
 
+        // ------------------------------------------------------------
+        module("Legend custom position", {});
 
-        //--------------------------------------------------------------
-        var marker, label;
-        module("Legend / Markers", {
-            setup: function() {
-                moduleSetup();
+        test("sets legend box to targetBox", function() {
+            createLegend({
+                position: "custom"
+            });
 
-                legend = new dataviz.Legend({
-                    items: [ { text: "Series 1", markerColor: "#f00", labelColor: "#f00" } ],
-                    labels: {
-                        font: SANS12
-                    }
-                });
-
-                legend.reflow(chartBox);
-                legend.getViewElements(view);
-
-                marker = view.log.rect[0];
-                label = view.log.text[0];
-            },
-            teardown: moduleTeardown
+            equal(legend.box.x1, chartBox.x1);
+            equal(legend.box.y1, chartBox.y1);
+            equal(legend.box.x2, chartBox.x2);
+            equal(legend.box.y2, chartBox.y2);
         });
 
-        test("creates markers for series", function() {
-            equal(view.log.rect.length, 2);
+        test("positions legend container at 0,0 by default", function() {
+            createLegend({
+                position: "custom"
+            });
+            var container = legend.children[0];
+            equal(container.box.x1, 0);
+            equal(container.box.y1, 0);
         });
 
-        test("sets marker color", function() {
-            equal(marker.style.fill, "#f00");
+        test("positions legend container at specified offset", function() {
+            createLegend({
+                position: "custom",
+                offsetX: 100,
+                offsetY: 50
+            });
+            var container = legend.children[0];
+            equal(container.box.x1, 100);
+            equal(container.box.y1, 50);
         });
 
-        test("markers have margin on the left", function() {
-            close(marker.x1, legend.box.x1 + MARGIN, TOLERANCE);
+        test("sets inner container direction to vertical by default", function() {
+            createLegend({
+                position: "custom"
+            });
+            var innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, true);
         });
 
-        test("markers have set width", function() {
-            close(marker.x2 - marker.x1, MARKER_SIZE, TOLERANCE);
+        test("sets inner container direction based on orientation option", function() {
+            createLegend({
+                position: "custom",
+                orientation: "horizontal"
+            });
+            var innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, false);
+            createLegend({
+                position: "custom",
+                orientation: "vertical"
+            });
+            innerContainer = legend.children[0].children[0];
+            equal(innerContainer.options.vertical, true);
         });
 
-        test("markers have margin on the right", function() {
-            close(marker.x2, label.style.x - MARKER_MARGIN, TOLERANCE);
+        test("reflows container in a box with the specified width for horizontal orientation", 2, function() {
+            createLegend({
+                position: "custom",
+                orientation: "horizontal",
+                width: 100
+            });
+            legend.container = {
+                children: [{children: [1]}],
+                reflow: function(box) {
+                    this.box = box;
+
+                    equal(box.width(), 100);
+                }
+            };
+            legend.reflow(chartBox);
         });
 
-        test("markers are aligned to text center", function() {
-            close(marker.y1, label.style.y + MARKER_SIZE / 2, TOLERANCE);
-        });
+        test("reflows container in a box with the specified height for vertical orientation", 2, function() {
+            createLegend({
+                position: "custom",
+                orientation: "vertical",
+                height: 100
+            });
+            legend.container = {
+                children: [{children: [1]}],
+                reflow: function(box) {
+                    this.box = box;
 
-        test("markers are 1/2 of label size", function() {
-            equal(marker.y2 - marker.y1, legend.children[0].box.height() / 2);
+                    equal(box.height(), 100);
+                }
+            };
+            legend.reflow(chartBox);
         });
 
         // ------------------------------------------------------------
@@ -1464,13 +1911,13 @@
                 legend.reflow(chartBox);
                 legend.getViewElements(view);
 
-                legendBox = view.log.rect[1];
+                legendBox = view.log.rect[0];
             },
             teardown: moduleTeardown
         });
 
         test("renders box with padding", function() {
-            sameBox(legendBox, new Box2D(919, 482, 1000, 517), TOLERANCE);
+            sameBox(legendBox, new Box2D(912, 482.5, 993, 517.5), TOLERANCE);
         });
 
         test("renders border width", function() {
@@ -1489,53 +1936,396 @@
             deepEqual(legendBox.style.fill, BACKGROUND);
         });
 
-        var chart,s
-            label,
-            legend;
+        // ------------------------------------------------------------
 
-        function legendItemClick(clickHandler, options) {
+        var legendSeries = [{name: "item1"}, {name: "item2"}],
+            legendItems;
+
+        function createLegendWithItems(options) {
+            createLegend($.extend({
+                items: [{
+                    active: true,
+                    text: "item1",
+                    labels:  {
+                        color: "blue",
+                        font: "foo"
+                    },
+                    markerColor: "red",
+                    series: legendSeries
+                },{
+                    active: false,
+                    text: "item2",
+                    labels:  {
+                        color: "green",
+                        font: "bar"
+                    },
+                    markerColor: "pink",
+                    series: legendSeries
+                }],
+                labels: {
+                    color: "cyan",
+                    font: SANS12,
+                    margin: 5
+                },
+                markers: {
+                    border: {
+                        width: 2,
+                        color: "yellow"
+                    },
+                    size: 10,
+                    margin: 5,
+                    type: "circle",
+                    padding: 5
+                }
+            }, options));
+            legendItems = legend.container.children[0].children;
+        }
+
+        module("Legend / items", {
+            setup: function() {
+                createLegendWithItems();
+            },
+            teardown: destroyChart
+        });
+
+        test("uses float element to align items", function() {
+            ok(legend.container.children[0] instanceof dataviz.FloatElement);
+        });
+
+        test("sets float element options", function() {
+            var floatElementOptions = legend.container.children[0].options;
+            equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.spacing, legend.options.spacing);
+            equal(floatElementOptions.vertical, true);
+            createLegendWithItems({position: "top"});
+            floatElementOptions = legend.container.children[0].options;
+            equal(floatElementOptions.wrap, true);
+            equal(floatElementOptions.spacing, legend.options.spacing);
+            equal(floatElementOptions.vertical, false);
+        });
+
+        test("appends items to float element", function() {
+            equal(legendItems.length, 2);
+        });
+
+        test("sets active state", function() {
+            equal(legendItems[0].options.active, true);
+            equal(legendItems[1].options.active, false);
+        });
+
+        test("sets markerColor", function() {
+            equal(legendItems[0].options.markerColor, "red");
+            equal(legendItems[1].options.markerColor, "pink");
+        });
+
+        test("sets text", function() {
+            equal(legendItems[0].options.text, "item1");
+            equal(legendItems[1].options.text, "item2");
+        });
+
+        test("sets series", function() {
+            deepEqual(legendItems[0].options.series, legendSeries);
+            deepEqual(legendItems[1].options.series, legendSeries);
+        });
+
+        test("sets item labels color", function() {
+            equal(legendItems[0].options.labels.color, "blue");
+            equal(legendItems[1].options.labels.color, "green");
+        });
+
+        test("sets options labels color if item has no labels color set", function() {
+            createLegendWithItems({
+                items: [{
+                    text: "item1"
+                }, {
+                    text: "item2"
+                }]
+            });
+            equal(legendItems[0].options.labels.color, "cyan");
+            equal(legendItems[1].options.labels.color, "cyan");
+        });
+
+        test("sets item labels font", function() {
+            equal(legendItems[0].options.labels.font, "foo");
+            equal(legendItems[1].options.labels.font, "bar");
+        });
+
+        test("sets options labels font if item has no labels font set", function() {
+            createLegendWithItems({
+                items: [{
+                    text: "item1"
+                }, {
+                    text: "item2"
+                }]
+            });
+            equal(legendItems[0].options.labels.font, SANS12);
+            equal(legendItems[1].options.labels.font, SANS12);
+        });
+
+        test("sets labels margin", function() {
+            equal(legendItems[0].options.labels.margin, 5);
+            equal(legendItems[1].options.labels.margin, 5);
+        });
+
+       test("sets markers border", function() {
+            var border = legendItems[0].options.markers.border;
+            equal(border.width, 2);
+            equal(border.color, "yellow");
+            border = legendItems[1].options.markers.border;
+            equal(border.width, 2);
+            equal(border.color, "yellow");
+        });
+
+        test("sets markers size", function() {
+            equal(legendItems[0].options.markers.size, 10);
+            equal(legendItems[1].options.markers.size, 10);
+        });
+
+        test("sets markers margin", function() {
+            equal(legendItems[0].options.markers.margin, 5);
+            equal(legendItems[1].options.markers.margin, 5);
+        });
+
+        test("sets markers padding", function() {
+            equal(legendItems[0].options.markers.padding, 5);
+            equal(legendItems[1].options.markers.padding, 5);
+        });
+
+        test("sets markers type", function() {
+            equal(legendItems[0].options.markers.padding, 5);
+            equal(legendItems[1].options.markers.padding, 5);
+        });
+
+        test("sets item options", function() {
+            equal(legendItems[0].options.zIndex, legend.options.item.zIndex);
+            equal(legendItems[0].options.cursor.style, legend.options.item.cursor.style);
+        });
+
+        // ------------------------------------------------------------
+
+        var legendItem,
+            container,
+            marker,
+            textbox;
+
+        function createLegendItem(options) {
+            legendItem = new dataviz.LegendItem($.extend({
+                active: true,
+                text: "item1",
+                markerColor: "red",
+                series: legendSeries,
+                labels: {
+                    color: "cyan",
+                    font: SANS12,
+                    margin: 5
+                },
+                markers: {
+                    border: {
+                        width: 2
+                    },
+                    width: 10,
+                    height: 10,
+                    margin: 5,
+                    type: "triangle",
+                    padding: 5
+                }
+            }, options));
+
+            container = legendItem.children[0];
+            marker = container.children[0];
+            textbox = container.children[1];
+        }
+
+        module("LegendItem", {
+            setup: function() {
+                createLegendItem();
+            }
+        });
+
+        test("uses float element to align children", function() {
+            ok(container instanceof dataviz.FloatElement);
+        });
+
+        test("sets float element options", function() {
+            equal(container.options.wrap, false);
+            equal(container.options.vertical, false);
+            equal(container.options.align, "center");
+        });
+
+        test("appends marker to container", function() {
+            ok(marker instanceof dataviz.ShapeElement);
+        });
+
+        test("sets marker color to border color and background", function() {
+            equal(marker.options.border.color, "red");
+            equal(marker.options.background, "red");
+        });
+
+        test("sets marker type", function() {
+            equal(marker.options.type, "triangle");
+        });
+
+        test("sets marker width and height", function() {
+            equal(marker.options.width, 10);
+            equal(marker.options.height, 10);
+        });
+
+        test("sets marker border width", function() {
+            equal(marker.options.border.width, 2);
+        });
+
+        test("sets marker margin", function() {
+            equal(marker.options.margin, 5);
+        });
+
+        test("sets marker padding", function() {
+            equal(marker.options.padding, 5);
+        });
+
+        test("appends textbox to container", function() {
+            ok(textbox instanceof dataviz.TextBox);
+        });
+
+        test("sets textbox text", function() {
+            equal(textbox.content, "item1");
+        });
+
+        test("sets textbox color", function() {
+            equal(textbox.options.color, "cyan");
+        });
+
+        test("sets textbox font", function() {
+            equal(textbox.options.font, SANS12);
+        });
+
+        test("sets textbox margin", function() {
+            equal(textbox.options.margin, 5);
+        });
+
+        // ------------------------------------------------------------
+        var chart,
+            legend,
+            legendItemOverlay;
+
+        function setupLegendItemEvent(options, itemIndex) {
             chart = createChart($.extend(true, {
                 series: [{
                     type: "line",
                     data: [1,2,3],
                     name: "test",
                     color: "color"
-                }],
-                legendItemClick: clickHandler
+                }]
             }, options));
 
             legend = chart._model.children[0];
-            label = legend.children[0];
-            clickChart(chart, getElement(label.id));
+            legendItem = legend.children[0].children[0].children[itemIndex || 0];
+            legendItemOverlay = QUnit.fixture.find("[data-model-id='" + legendItem.modelId +"']").last();
         }
 
-        // ------------------------------------------------------------
-        module("Legend / Events / legendItemClick", {
+        module("LegendItem / Events / click", {
             teardown: destroyChart
         });
 
-        test("fires when clicking axis labels", 1, function() {
-            legendItemClick(function() { ok(true); });
+        test("fires when clicking item overlay", 1, function() {
+            setupLegendItemEvent({
+                legendItemClick: function() { ok(true); }
+            });
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain DOM element", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.element.length, 1);
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.element.length, 1);
+                }
             });
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain series name as text", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.text, "test");
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.text, "test");
+                }
             });
+            clickChart(chart, legendItemOverlay);
         });
 
         test("event arguments contain series", 1, function() {
-            legendItemClick(function(e) {
-                equal(e.series.type, "line");
+            setupLegendItemEvent({
+                legendItemClick: function(e) {
+                    equal(e.series.type, "line");
+                }
             });
+            clickChart(chart, legendItemOverlay);
         });
 
+        test("event arguments contain seriesIndex", 1, function() {
+            setupLegendItemEvent({
+                series: [{
+                    name: "series1"
+                }, {
+                    name: "series2"
+                }],
+                legendItemClick: function(e) {
+                    equal(e.seriesIndex, 1);
+                }
+            }, 1);
+            clickChart(chart, legendItemOverlay);
+        });
+
+        // ------------------------------------------------------------
+        module("LegendItem / Events / hover", {
+            teardown: destroyChart
+        });
+
+        test("fires when hovering item overlay", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function() { ok(true); }
+            });
+            triggerEvent("mouseover", legendItemOverlay);
+        });
+
+        test("event arguments contain DOM element", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.element.length, 1);
+                }
+            });
+            triggerEvent("mouseover", legendItemOverlay);
+        });
+
+        test("event arguments contain series name as text", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.text, "test");
+                }
+            });
+            triggerEvent("mouseover", legendItemOverlay);
+        });
+
+        test("event arguments contain series", 1, function() {
+            setupLegendItemEvent({
+                legendItemHover: function(e) {
+                    equal(e.series.type, "line");
+                }
+            });
+            triggerEvent("mouseover", legendItemOverlay);
+        });
+
+        test("event arguments contain seriesIndex", 1, function() {
+            setupLegendItemEvent({
+                series: [{
+                    name: "series1"
+                }, {
+                    name: "series2"
+                }],
+                legendItemHover: function(e) {
+                    equal(e.seriesIndex, 1);
+                }
+            }, 1);
+            triggerEvent("mouseover", legendItemOverlay);
+        });
     })();
 
     (function() {
@@ -1931,6 +2721,21 @@
             deepEqual(circle.c.x, SIZE / 2);
             deepEqual(circle.c.y, SIZE / 2);
             deepEqual(circle.r, SIZE / 2);
+        });
+
+        test("renders cross", function() {
+            createShape({ type: "cross" });
+            var cross1 = view.log.path[0];
+            var cross2 = view.log.path[1];
+            deepEqual(cross1.points, [Point2D(0, 0), Point2D(SIZE, SIZE)]);
+            deepEqual(cross2.points, [Point2D(0, SIZE), Point2D(SIZE, 0)]);
+            equal(view.log.group.length, 1);
+        });
+
+        test("sets cross group zIndex", function() {
+            createShape({ type: "cross", zIndex: 1 });
+
+            equal(view.log.group[0].options.zIndex, 1);
         });
 
         test("renders id", function() {

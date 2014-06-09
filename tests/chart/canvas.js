@@ -131,6 +131,17 @@
             equal(text.content, "Text");
         });
 
+        test("createTextBox returns CanvasTextBox", function() {
+            var textbox = view.createTextBox();
+            ok(textbox instanceof dataviz.CanvasTextBox);
+        });
+
+        test("createTextBox sets options", function() {
+            var matrix = dataviz.Matrix.unit();
+            var text = view.createTextBox({matrix: matrix});
+            ok(text.options.matrix);
+        });
+
         test("createRect returns CanvasLine", function() {
             var rect = view.createRect(new Box2D(10, 20, 110, 120));
             ok(rect instanceof dataviz.CanvasLine);
@@ -528,78 +539,6 @@
             equal(ctx.font, text.options.font);
         });
 
-        test("sets rotation transform for 45 degrees", function() {
-            createText({
-                rotation: 45,
-                size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
-                }
-            });
-            text.render(ctx);
-
-            equal(ctx.log.translate[0].x, 0.5);
-            equal(ctx.log.translate[0].y, 7);
-            equal(ctx.log.rotate[0].angle, 45 * DEG_TO_RAD);
-        });
-
-        test("sets rotation transform for 90 degrees", function() {
-            createText({
-                rotation: 90,
-                size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
-                }
-            });
-            text.render(ctx);
-
-            equal(ctx.log.translate[0].x, -6.5);
-            equal(ctx.log.translate[0].y, 6.5);
-            equal(ctx.log.rotate[0].angle, 90 * DEG_TO_RAD);
-        });
-
-        test("sets rotation transform for -45 degrees", function() {
-            createText({
-                rotation: -45,
-                size: {
-                    baseline: 12,
-                    height: 28,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 28
-                }
-            });
-            text.render(ctx);
-
-            equal(ctx.log.translate[0].x, 0.5);
-            equal(ctx.log.translate[0].y, 7);
-            equal(ctx.log.rotate[0].angle, -45 * DEG_TO_RAD);
-        });
-
-        test("sets rotation transform for -90 degrees", function() {
-            createText({
-                rotation: -90,
-                size: {
-                    baseline: 12,
-                    height: 27,
-                    normalHeight: 14,
-                    normalWidth: 27,
-                    width: 14
-                }
-            });
-            text.render(ctx);
-
-            equal(ctx.log.translate[0].x, -6.5);
-            equal(ctx.log.translate[0].y, 6.5);
-            equal(ctx.log.rotate[0].angle, -90 * DEG_TO_RAD);
-        });
-
         test("sets color", function() {
             text.options.color = "#cf0";
             text.render(ctx);
@@ -620,6 +559,61 @@
             equal(ctx.log.restore.length, 1);
         });
 
+    })();
+
+    (function() {
+        var CanvasTextBox = dataviz.CanvasTextBox,
+            textbox;
+
+        module("CanvasTextBox", {});
+
+        test("renders content", function() {
+            textbox = new CanvasTextBox();
+            textbox.children = [{
+                render: function(context) {
+                    ok(context);
+                }
+            }];
+
+            textbox.render(new ContextStub());
+        });
+
+        test("applies transformation to children", function() {
+            var matrix = new dataviz.Matrix(1,1,1,1,1,1);
+
+            var savedContext = false;
+            var setTransform = false;
+            var renderedChildren = false;
+            var appliedTransformation = false;
+
+            textbox = new CanvasTextBox({matrix: matrix});
+            textbox.children = [{
+                render: function(context) {
+                    renderedChildren = appliedTransform;
+                }
+            }];
+            var context = {
+                save: function() {
+                    savedContext = true;
+                },
+                transform: function(a,b,c,d,e,f) {
+                    equal(a, matrix.a);
+                    equal(b, matrix.b);
+                    equal(c, matrix.c);
+                    equal(d, matrix.d);
+                    equal(e, matrix.e);
+                    equal(f, matrix.f);
+                    appliedTransform = savedContext;
+                },
+                restore: function() {
+                   appliedTransformation = renderedChildren;
+                }
+            };
+
+            textbox.render(context);
+
+            ok(appliedTransformation);
+        });
     })();
 
     (function() {

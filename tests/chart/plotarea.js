@@ -3204,7 +3204,7 @@
             });
 
             var textBox = plotArea.panes[0].title.children[0];
-            equal(textBox.children[0].content, "Title");
+            equal(textBox.content, "Title");
         });
 
         // ------------------------------------------------------------

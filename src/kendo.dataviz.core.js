@@ -22,6 +22,7 @@ var __meta__ = {
         map = $.map,
         noop = $.noop,
         indexOf = $.inArray,
+        trim = $.trim,
         math = Math,
         deepExtend = kendo.deepExtend;
 
@@ -220,12 +221,13 @@ var __meta__ = {
         },
 
         transform: function(mx) {
-            var point = this;
+            var x = this.x,
+                y = this.y;
 
-            point.x = mx.a * point.x + mx.c * point.y + mx.e;
-            point.y = mx.b * point.x + mx.d * point.y + mx.f;
+            this.x = mx.a * x + mx.c * y + mx.e;
+            this.y = mx.b * x + mx.d * y + mx.f;
 
-            return point;
+            return this;
         }
     };
 
@@ -428,6 +430,25 @@ var __meta__ = {
 
         overlaps: function(box) {
             return !(box.y2 < this.y1 || this.y2 < box.y1 || box.x2 < this.x1 || this.x2 < box.x1);
+        },
+
+        rotate: function(rotation) {
+            var box = this;
+            var width = box.width();
+            var height = box.height();
+            var center = box.center();
+            var cx = center.x;
+            var cy = center.y;
+            var r1 = rotatePoint(0, 0, cx, cy, rotation);
+            var r2 = rotatePoint(width, 0, cx, cy, rotation);
+            var r3 = rotatePoint(width, height, cx, cy, rotation);
+            var r4 = rotatePoint(0, height, cx, cy, rotation);
+            width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
+            height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
+            box.x2 =  box.x1 + width;
+            box.y2 = box.y1 + height;
+
+            return box;
         }
     };
 
@@ -806,6 +827,10 @@ var __meta__ = {
                 box,
                 contentBox,
                 options = element.options,
+                width = options.width,
+                height = options.height,
+                hasSetSize = width && height,
+                shrinkToFit = options.shrinkToFit,
                 margin = getSpacing(options.margin),
                 padding = getSpacing(options.padding),
                 borderWidth = options.border.width,
@@ -818,15 +843,25 @@ var __meta__ = {
                 element.paddingBox = box.clone().unpad(margin).unpad(borderWidth);
             }
 
-            ChartElement.fn.reflow.call(element, targetBox);
+            contentBox = targetBox.clone();
+            if (hasSetSize) {
+                contentBox.x2 = contentBox.x1 + width;
+                contentBox.y2 = contentBox.y1 + height;
+            }
 
-            if (options.width && options.height) {
-                box = element.box = new Box2D(0, 0, options.width, options.height);
+            if (shrinkToFit) {
+                contentBox.unpad(margin).unpad(borderWidth).unpad(padding);
+            }
+
+            ChartElement.fn.reflow.call(element, contentBox);
+
+            if (hasSetSize) {
+                box = element.box = Box2D(0, 0, width, height);
             } else {
                 box = element.box;
             }
 
-            if (options.shrinkToFit) {
+            if (shrinkToFit && hasSetSize) {
                 reflowPaddingBox();
                 contentBox = element.contentBox = element.paddingBox.clone().unpad(padding);
             } else {
@@ -909,6 +944,7 @@ var __meta__ = {
                 fillOpacity: options.opacity,
                 animation: options.animation,
                 zIndex: options.zIndex,
+                cursor: options.cursor,
                 data: { modelId: boxElement.modelId }
             };
         }
@@ -940,39 +976,12 @@ var __meta__ = {
                 margin;
 
             size = options.size =
-                measureText(text.content, { font: options.font }, options.rotation);
+                measureText(text.content, { font: options.font });
 
             text.baseline = size.baseline;
 
-            if (options.align == LEFT) {
-                text.box = new Box2D(
-                    targetBox.x1, targetBox.y1,
+            text.box = Box2D(targetBox.x1, targetBox.y1,
                     targetBox.x1 + size.width, targetBox.y1 + size.height);
-            } else if (options.align == RIGHT) {
-                text.box = new Box2D(
-                    targetBox.x2 - size.width, targetBox.y1,
-                    targetBox.x2, targetBox.y1 + size.height);
-            } else if (options.align == CENTER) {
-                margin = (targetBox.width() - size.width) / 2;
-                text.box = new Box2D(
-                    round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
-                    round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
-            }
-
-            if (options.vAlign == CENTER) {
-                margin = (targetBox.height() - size.height) /2;
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y1 + margin,
-                    text.box.x2, targetBox.y2 - margin);
-            } else if (options.vAlign == BOTTOM) {
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y2 - size.height,
-                    text.box.x2, targetBox.y2);
-            } else if (options.vAlign == TOP) {
-                text.box = new Box2D(
-                    text.box.x1, targetBox.y1,
-                    text.box.x2, targetBox.y1 + size.height);
-            }
         },
 
         getViewElements: function(view) {
@@ -994,24 +1003,290 @@ var __meta__ = {
         }
     });
 
-    var TextBox = BoxElement.extend({
-        init: function(content, options) {
-            var textBox = this,
-                text;
+    var FloatElement = ChartElement.extend({
+        init: function(options) {
+            ChartElement.fn.init.call(this, options);
+            this._initDirection();
+        },
 
-            BoxElement.fn.init.call(textBox, options);
-            options = textBox.options;
+        _initDirection: function() {
+            var options = this.options;
+            if (options.vertical) {
+                this.groupAxis = X;
+                this.elementAxis = Y;
+                this.groupSizeField = WIDTH;
+                this.elementSizeField = HEIGHT;
+                this.groupSpacing = options.spacing;
+                this.elementSpacing = options.vSpacing;
+            } else {
+                this.groupAxis = Y;
+                this.elementAxis = X;
+                this.groupSizeField = HEIGHT;
+                this.elementSizeField = WIDTH;
+                this.groupSpacing = options.vSpacing;
+                this.elementSpacing = options.spacing;
+            }
+        },
 
-            text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
-            textBox.append(text);
-            textBox.content = content;
+        options: {
+            vertical: true,
+            wrap: true,
+            vSpacing: 0,
+            spacing: 0
+        },
 
-            if (textBox.hasBox()) {
-                text.id = uniqueId();
+        reflow: function(targetBox) {
+            this.box = targetBox.clone();
+            this.reflowChildren();
+        },
+
+        reflowChildren: function() {
+            var floatElement = this;
+            var box = floatElement.box;
+            var options = floatElement.options;
+            var elementSpacing = floatElement.elementSpacing;
+            var groupSpacing = floatElement.groupSpacing;
+
+            var elementAxis = floatElement.elementAxis;
+            var groupAxis = floatElement.groupAxis;
+            var elementSizeField = floatElement.elementSizeField;
+            var groupSizeField = floatElement.groupSizeField;
+
+            var groupOptions = floatElement.groupOptions();
+            var groups = groupOptions.groups;
+            var groupsCount = groups.length;
+
+            var groupsStart = box[groupAxis + 1] +
+                floatElement.alignStart(groupOptions.groupsSize, box[groupSizeField]());
+
+            var groupStart = groupsStart;
+            var elementStart;
+            var groupElementStart;
+
+            var group;
+            var groupElements;
+            var groupElementsCount;
+
+            var idx;
+            var groupIdx;
+
+            var element;
+            var elementBox;
+            var elementSize;
+
+            if (groupsCount) {
+                for (groupIdx = 0; groupIdx < groupsCount; groupIdx++) {
+                    group = groups[groupIdx];
+                    groupElements = group.groupElements;
+                    groupElementsCount = groupElements.length;
+                    elementStart = box[elementAxis + 1];
+                    for (idx = 0; idx < groupElementsCount; idx++) {
+                        element = groupElements[idx];
+                        elementSize = floatElement.elementSize(element);
+                        groupElementStart = groupStart +
+                            floatElement.alignStart(elementSize[groupSizeField], group.groupSize);
+
+                        elementBox = Box2D();
+                        elementBox[groupAxis + 1] = groupElementStart;
+                        elementBox[groupAxis + 2] = groupElementStart + elementSize[groupSizeField];
+                        elementBox[elementAxis + 1] = elementStart;
+                        elementBox[elementAxis + 2] = elementStart + elementSize[elementSizeField];
+
+                        element.reflow(elementBox);
+
+                        elementStart += elementSize[elementSizeField] + floatElement.elementSpacing;
+                    }
+                    groupStart += group.groupSize + floatElement.groupSpacing;
+                }
+                box[groupAxis + 1] = groupsStart;
+                box[groupAxis + 2] = groupsStart + groupOptions.groupsSize;
+                box[elementAxis + 2] = box[elementAxis + 1] + groupOptions.maxGroupElementsSize;
+            }
+        },
+
+        alignStart: function(size, maxSize) {
+            var start = 0;
+            var align = this.options.align;
+            if (align == RIGHT || align == BOTTOM) {
+                start = maxSize - size;
+            } else if (align == CENTER){
+                start = (maxSize - size) / 2;
+            }
+            return start;
+        },
+
+        groupOptions: function() {
+            var floatElement = this;
+            var box = floatElement.box;
+            var children = floatElement.children;
+            var childrenCount = children.length;
+            var elementSizeField = this.elementSizeField;
+            var groupSizeField = this.groupSizeField;
+            var elementSpacing = this.elementSpacing;
+            var groupSpacing = this.groupSpacing;
+            var maxSize = round(box[elementSizeField]());
+            var idx = 0;
+            var groupSize = 0;
+            var elementSize;
+            var element;
+            var groupElementsSize = 0;
+            var groupsSize = 0;
+            var groups = [];
+            var groupElements = [];
+            var maxGroupElementsSize = 0;
+
+            for (idx = 0; idx < childrenCount; idx++) {
+                element = children[idx];
+                if (!element.box) {
+                    element.reflow(box);
+                }
+
+                elementSize = this.elementSize(element);
+                if (floatElement.options.wrap && round(groupElementsSize + elementSpacing + elementSize[elementSizeField]) > maxSize) {
+                    groups.push({
+                        groupElements: groupElements,
+                        groupSize: groupSize,
+                        groupElementsSize: groupElementsSize
+                    });
+                    maxGroupElementsSize = math.max(maxGroupElementsSize, groupElementsSize);
+                    groupsSize += groupSpacing + groupSize;
+                    groupSize = 0;
+                    groupElementsSize = 0;
+                    groupElements = [];
+                }
+                groupSize = math.max(groupSize, elementSize[groupSizeField]);
+                if (groupElementsSize > 0) {
+                    groupElementsSize += elementSpacing;
+                }
+                groupElementsSize += elementSize[elementSizeField];
+                groupElements.push(element);
             }
 
-            // Calculate size
-            textBox.reflow(new Box2D());
+            groups.push({
+                groupElements: groupElements,
+                groupSize: groupSize,
+                groupElementsSize: groupElementsSize
+            });
+            maxGroupElementsSize = math.max(maxGroupElementsSize, groupElementsSize);
+            groupsSize += groupSize;
+
+            return {
+                groups: groups,
+                groupsSize: groupsSize,
+                maxGroupElementsSize: maxGroupElementsSize
+            };
+        },
+
+        elementSize: function(element) {
+            return {
+                width: element.box.width(),
+                height: element.box.height()
+            };
+        }
+    });
+
+    var TextBox = BoxElement.extend({
+        ROWS_SPLIT_REGEX: /\n/m,
+
+        init: function(content, options) {
+            var textbox = this;
+            textbox.content = content;
+
+            BoxElement.fn.init.call(textbox, options);
+
+            textbox._initContainer();
+
+            textbox.reflow(Box2D());
+        },
+
+        _initContainer: function() {
+            var textbox = this;
+            var options = textbox.options;
+            var id = options.id;
+            var rows = (textbox.content + "").split(textbox.ROWS_SPLIT_REGEX);
+            var floatElement = new FloatElement({vertical: true, align: options.align, wrap: false});
+            var textOptions = deepExtend({ }, options);
+            var hasBox = textbox.hasBox();
+            var text;
+            var rowIdx;
+
+            textbox.container = floatElement;
+            textbox.append(floatElement);
+
+            for (rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+                text = new Text(trim(rows[rowIdx]), textOptions);
+                if (hasBox || (id && rowIdx > 0)) {
+                    text.id = uniqueId();
+                }
+                floatElement.append(text);
+            }
+        },
+
+        reflow: function(targetBox) {
+            var textbox = this;
+            var options = textbox.options;
+            var align = options.align;
+            var rotation = options.rotation;
+            textbox.container.options.align = align;
+            BoxElement.fn.reflow.call(textbox, targetBox);
+            if (rotation) {
+                var margin = options.margin;
+                var box = textbox.box.unpad(margin);
+                textbox.normalBox = box.clone();
+                box.rotate(rotation);
+                box.pad(margin);
+                textbox.align(targetBox, X, align);
+                textbox.align(targetBox, Y, options.vAlign);
+            }
+        },
+
+        getViewElements: function(view, renderOptions) {
+            var textbox = this;
+            var options = textbox.options;
+            var boxOptions = deepExtend(textbox.elementStyle(), renderOptions);
+            var elements = [];
+            var zIndex = boxOptions.zIndex;
+            var matrix;
+            var element;
+
+            if (!options.visible) {
+                return [];
+            }
+
+            if (textbox.hasBox()) {
+                elements.push(
+                    view.createRect(textbox.paddingBox, boxOptions)
+                );
+            }
+
+            if (options.rotation) {
+                matrix = textbox.rotationMatrix();
+            }
+
+            element = view.createTextBox({
+                matrix: matrix,
+                zIndex: zIndex
+            });
+
+            element.children = elements.concat(ChartElement.fn.getViewElements.call(textbox, view));
+
+            return [element];
+        },
+
+        rotationMatrix: function() {
+            var textbox = this;
+            var options = textbox.options;
+            var normalBox = textbox.normalBox;
+            var center = normalBox.center();
+            var cx = center.x;
+            var cy = center.y;
+            var boxCenter = textbox.box.center();
+            var offsetX = boxCenter.x - cx;
+            var offsetY = boxCenter.y - cy;
+            var matrix = Matrix.translate(offsetX, offsetY)
+                    .times(Matrix.rotate(options.rotation, cx, cy));
+
+            return matrix;
         }
     });
 
@@ -2015,7 +2290,10 @@ var __meta__ = {
                     Point2D(box.x2, box.y2)
                 ];
             } else if (type === CROSS) {
-                element = view.createGroup();
+                element = view.createGroup({
+                    zIndex: elementOptions.zIndex
+                });
+
                 element.children.push(view.createPolyline(
                     [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
                 ));
@@ -3840,9 +4118,9 @@ var __meta__ = {
             this._cache = new LRUCache(1000);
         },
 
-        measure: function(text, style, rotation) {
+        measure: function(text, style) {
             var styleHash = getHash(style),
-                cacheKey = text + styleHash + rotation,
+                cacheKey = text + styleHash,
                 cachedResult = this._cache.get(cacheKey);
 
             if (cachedResult) {
@@ -3873,22 +4151,6 @@ var __meta__ = {
                 };
             }
 
-            if (rotation) {
-                var width = size.width,
-                    height = size.height,
-                    cx = width / 2,
-                    cy = height / 2,
-                    r1 = rotatePoint(0, 0, cx, cy, rotation),
-                    r2 = rotatePoint(width, 0, cx, cy, rotation),
-                    r3 = rotatePoint(width, height, cx, cy, rotation),
-                    r4 = rotatePoint(0, height, cx, cy, rotation);
-
-                size.normalWidth = width;
-                size.normalHeight = height;
-                size.width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
-                size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
-            }
-
             this._cache.put(cacheKey, size);
 
             measureBox.parentNode.removeChild(measureBox);
@@ -3909,8 +4171,8 @@ var __meta__ = {
 
     TextMetrics.current = new TextMetrics();
 
-    function measureText(text, style, rotation) {
-        return TextMetrics.current.measure(text, style, rotation);
+    function measureText(text, style) {
+        return TextMetrics.current.measure(text, style);
     }
 
     function autoMajorUnit(min, max) {
@@ -4477,6 +4739,7 @@ var __meta__ = {
         BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
+        FloatElement: FloatElement,
         IDPool: IDPool,
         LogarithmicAxis: LogarithmicAxis,
         LRUCache: LRUCache,

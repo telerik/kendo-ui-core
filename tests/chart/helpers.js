@@ -269,6 +269,14 @@
         ]);
     });
 
+    test("rotate rotates box", function() {
+        box = Box2D(10, 10, 30, 40).rotate(45);
+        equal(box.x1, 10);
+        equal(box.y1, 10);
+        close(box.x2, 45.4, 0.1);
+        close(box.y2, 45.4, 0.1);
+    });
+
     // ------------------------------------------------------------
     var point;
 
@@ -345,8 +353,9 @@
     });
 
     test("transform applies matrix", function() {
-        deepEqual(point.transform(Matrix.translate(10, 10)), new Point2D(20, 30));
+        deepEqual(point.transform(new Matrix(1,1,1,1,1,1)), new Point2D(31, 31));
     });
+
 
     test("transform returns point", function() {
         deepEqual(point.transform(Matrix.unit), point);

@@ -149,9 +149,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.text[0].style.rotation, 42.5);
+            equal(categoryAxis.labels[0].options.rotation, 42.5);
         });
 
         test("labels have set background", 1, function() {
@@ -489,9 +487,7 @@
                 }
             });
 
-            categoryAxis.getViewElements(view);
-
-            equal(view.log.text[0].style.rotation, 42.5);
+            equal(categoryAxis.labels[0].options.rotation, 42.5);
         });
 
         test("labels are distributed vertically", function() {

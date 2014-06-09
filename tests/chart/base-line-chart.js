@@ -745,7 +745,7 @@ function baseLineChartTests(seriesName, TChart) {
         });
 
         test("dataItem sent to label template", function() {
-            equal(label.children[0].content, "Alpha");
+            equal(label.content, "Alpha");
         });
 
     })();

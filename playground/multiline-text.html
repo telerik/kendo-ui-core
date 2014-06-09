@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>MultiLine Text</title>
+        <link href="../dist/styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../dist/styles/web/kendo.default.min.css" rel="stylesheet" />
+        <link href="../dist/styles/dataviz/kendo.dataviz.min.css" rel="stylesheet" />        
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+         <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.sparkline.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+    </head>
+    <body>
+
+     <div id="chart" ></div> 
+  <!--
+  <div id="pie" style="margin-top: 100px;"></div>
+
+    <div id="chart1" ></div>
+    <div id="dateChart"></div>
+    
+    
+<div id="stock" style="height:500px;"></div>
+
+    <div id="chart2" style="margin-top:100px; width: 800px;"></div>
+    <div id="bubble" style="width: 700px;margin-left:200px;"></div>
+    <div id="radarColumn"></div>  
+    <div id="radarChart"></div> 
+    <div id="polarChart"></div> 
+    <div id="stock-chart"></div>
+    <div id="sparkline" style="width:400px;height:300px;margin-top:200px;"></div>
+    <div id="multipleAxis" style="width: 500px;margin:0 auto;"></div>
+    <div id="multiplePanes"></div>
+    <div id="testRange" style="height: 500px;margin-top:200px;"></div>
+    <div id="scatterChart"></div>    
+     -->
+    <script>
+        dateChart();
+    $("#chart").kendoChart({
+       // renderAs: "canvas",
+        title: {
+            text: "Site Visitors",// \n Stats /thousands/ \n asdasdas \n asdasdasd \n aaaaaaaaaaaa",
+            //rotation: 45,
+            position: "top",
+            //font: "30px arial",
+            padding: 10,
+            margin: {
+                bottom: 20
+            },
+            border: {
+                width: 3,
+                color: "red"  
+            }
+        },
+        
+        legend: {
+            visible: true,                
+            labels: {
+                border: {
+                    width: 1,
+                    color: "blue"
+                },
+               // font: "15px arial, sans-serif",
+
+                //rotation: 30
+            },
+            inactiveItems: {
+                labels: {                    
+                    color: "yellow",
+                    font: "30px arial, sans-serif",
+                    template: "KUR"                    
+                }
+            },      
+            markers: {
+              //  size: 15
+            },
+            border: {
+                width: 5,
+                color: "blue"
+            },
+            // padding: 5,
+            // margin: {
+                // bottom: 200
+            // },
+            background: "cyan",
+            offsetX: 200,
+             // offsetY: 20,
+            position: "custom",
+            orientation: "vertical",
+            width: 300,
+            height: 300
+        },
+        
+        seriesDefaults: {
+            labels: {
+                visible: true,               
+                background: "green"
+            }
+        },
+        panes: [{
+            name: "top",
+            border: {
+                color: "red",
+                width: 2
+            },
+            //height: 200,
+            margin: 10,
+            //padding: 50,
+            title: {
+                text: "center",
+                border: {
+                  color: "red",
+                  width: 2
+                },
+                 margin: 10,
+                 position: "center"
+            }
+        }, {
+            name: "bottom",
+        }],
+        chartArea: {
+            border: {
+                width: 1,
+                color: "blue"
+            }
+        },
+        series: [{
+            name: "Total \n Visits 1",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
+        }, {
+            name: "Unique \n visitor 2",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "top"
+        },{
+            name: "Total \n Visits 3",
+            data: [56000, 63000, 74000, 10000, 10000],            
+            axis: "top"
+        },{
+            name: "Total \n Visits 4",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
+        }, {
+            name: "Unique \n visitor 5",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "top"
+        },{
+            name: "Total \n Visits 6",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "top"
+        }, {
+            name: "Unique \n visitor 7",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "top"
+        },{
+            name: "Total \n Visits 8",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor 9",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "bottom"
+        },{
+            name: "Total \n Visits 10",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor 11",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                rotation: 30
+            },
+            axis: "bottom"
+        },{
+            name: "Total \n Visits 12",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "bottom"
+        }, {
+            name: "Unique \n visitor 13",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+                //rotation: 30
+            },
+            axis: "bottom"
+        },{
+            name: "Total \n Visits 14",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "bottom"
+        }, {
+            name: "Unique \n visitor 15",
+            data: [52000, 34000, 23000, 10000, 10000],
+            labels: {
+              //  rotation: 30
+            },
+            axis: "bottom"
+        },{
+            name: "Total \n Visits 16",
+            data: [56000, 63000, 74000, 10000, 10000],
+            axis: "bottom"
+        }],   
+        valueAxis: [{
+            pane: "top",
+            name: "top"                      
+        }, {
+            pane: "bottom",
+            name: "bottom"
+        }],
+        categoryAxis: {
+            visible: true,
+            categories: ["ggggggggggGgggggggg \n bbbbbbbbbbbbb", "cccccccc \n ddddddddddd \n eeeeee", "fffffff", "aaaaaaaaaa \n bbbbbbbbbbbbb", "aaaaaaaaaa \n bbbbbbbbbbbbb" ],
+            majorGridLines: {
+                visible: false
+            },
+            labels: {
+                //rotation: -30,
+               // font: "15px arial",
+                padding: 0,
+                margin: 0,
+                border: {
+                    width: 3,
+                    color: "red"  
+                }
+            }
+        }
+    });
+    
+    $("#chart1").kendoChart({
+        legend: {
+            visible: true,                
+            labels: {
+                //rotation: 30
+            },
+            border: {
+                width: 5,
+                color: "blue"
+            },
+            position: "bottom",
+            padding: 5,
+            margin: 5
+        },
+        
+        seriesDefaults: {
+            labels: {
+                visible: false,
+                rotation: 30
+            }
+        },
+        panes: [{
+            title: {
+                text: "center",
+                border: {
+                  color: "red",
+                  width: 2
+                },
+                 margin: 10,
+                 position: "center"
+            }
+        }],
+        series: [{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitor",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        },{
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        },{
+            name: "Total \n Visits",
+            data: [56000, 63000, 74000, 10000, 10000]
+        }, {
+            name: "Unique \n visitors",
+            data: [52000, 34000, 23000, 10000, 10000]
+        }],   
+        valueAxis: {
+           visible: true
+        }       
+    });
+    
+    $("#pie").kendoChart({
+        title: {
+            position: "bottom",
+            text: "Share of Internet Population Growth, 2007 - 2012"
+        },
+        legend: {
+            visible: true
+        },
+        chartArea: {
+            background: "",
+            border: {
+                width: 1,
+                color: "black"
+            }
+        },      
+        seriesDefaults: {
+            labels: {
+                visible: true,
+                background: "transparent",
+                template: "#= category #: \n #= value#%",
+                rotation:45
+            }
+        },
+        series: [{
+            type: "pie",
+            startAngle: 150,
+            data: [{
+                category: "Asia",
+                value: 53.8,
+                color: "#9de219"
+            },{
+                category: "Europe",
+                value: 16.1,
+                color: "#90cc38"
+            },{
+                category: "Latin America",
+                value: 11.3,
+                color: "#068c35"
+            },{
+                category: "Africa",
+                value: 9.6,
+                color: "#006634"
+            },{
+                category: "Middle East",
+                value: 5.2,
+                color: "#004d38"
+            },{
+                category: "North America",
+                value: 3.6,
+                color: "#033939"
+            }]
+        }],
+        tooltip: {
+            visible: true,
+            format: "{0}%"
+        }
+    });
+    
+    function dateChart() {
+     var stats = [
+            { value: 30, date: new Date("2011/12/20") },
+            { value: 50, date: new Date("2011/12/21") },
+            { value: 45, date: new Date("2011/12/22") },
+            { value: 40, date: new Date("2011/12/23") },
+            { value: 35, date: new Date("2011/12/24") },
+            { value: 40, date: new Date("2011/12/25") },
+            { value: 42, date: new Date("2011/12/26") },
+            { value: 40, date: new Date("2011/12/27") },
+            { value: 35, date: new Date("2011/12/28") },
+            { value: 43, date: new Date("2011/12/29") },
+            { value: 38, date: new Date("2011/12/30") },
+            { value: 30, date: new Date("2011/12/31") },
+            { value: 48, date: new Date("2012/01/01") },
+            { value: 50, date: new Date("2012/01/02") },
+            { value: 55, date: new Date("2012/01/03") },
+            { value: 35, date: new Date("2012/01/04") },
+            { value: 30, date: new Date("2012/01/05") }
+        ];
+
+        $("#dateChart").kendoChart({
+            title: {
+                text: "aaaaaaaaaaaaa\n bbbbbbbbbbbb \n dddddddddddddddd"
+            },
+            dataSource: {
+                data: stats
+            },
+            series: [{
+                type: "line",
+                aggregate: "avg",
+                field: "value",
+                categoryField: "date"
+            }],
+            panes: [{
+                border: {
+                    color: "red",
+                    width: 2
+                },
+                margin: 3,
+                padding: 5
+            }],
+            categoryAxis: {                
+                labels: {
+                    template: "#:kendo.toString(value, 'd')# \n  text"
+                }
+            }
+        });
+
+    }
+initAdditional();
+        function initAdditional() {
+        
+    var start = new Date().getTime();
+    var opt = kendo.dataviz.ui.Chart.fn.options;
+      opt.plotArea.margin = 15;
+    $.extend(opt.seriesDefaults, {
+            column: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            bar: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            labels: {
+                visible: true,
+                position: "above",
+                background: "none"
+            }        
+      });
+    
+    var sopt = kendo.dataviz.ui.StockChart.fn.options;
+     sopt.plotArea.margin = 15;
+    $.extend(sopt.seriesDefaults, {
+            column: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            bar: {
+                labels: {
+                    visible: true,
+                    position: "outsideEnd",
+                    background: "none"
+                }
+            },
+            labels: {
+                visible: true,
+                position: "above",
+                background: "none"
+            }        
+      });
+
+      var renderAs = "svg";
+      
+     $("#chart2").kendoChart({
+         seriesDefaults: {
+            labels: {
+                visible: true,
+                position: "outsideEnd",
+                padding: 10,
+                margin: 4
+            },
+            stack: true
+         },
+         legend: {
+            position: "top"
+        },
+        seriesClick: function(e) {
+         debugger;
+        },
+        plotAreaClick: function(e) {
+            debugger;
+        },
+        series: [
+        {
+            type: "column", 
+            name: "line",
+            data: [1, 100, 1, 50, 80],
+            labels: {
+                visible: true,
+                position: "above"
+            }
+        }
+        , 
+        {
+            type: "column",
+            name: "column",
+            data: [1, 90, 1, 80, 40]
+        }
+        ],
+        categoryAxis: {
+            categories: ["a","b","c","d","e"]
+        },
+        plotArea: {
+            margin: 15
+        },
+
+        panes: [{
+            clip: false,
+            border: {
+                color: "red",
+                width: 2
+            },
+            height: 200,
+            margin: 3,
+            padding: 5,
+            title: {
+                text: "center",
+                border: {
+                  color: "red",
+                  width: 2
+                },
+                rotation: 30,
+                 //margin: 10,
+                 position: "center"
+            }
+        }],
+        valueAxis: {
+            max: 80,
+            min: 30           
+        },      
+        tooltip: {
+            visible: true
+        },
+        renderAs: renderAs
+    });  
+      
+   $("#stock-chart").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                series: [{
+                    type: "ohlc",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close"
+                }],
+                panes: [{
+                    clip: false,
+                    border: {
+                        color: "red",
+                        width: 2
+                    },
+                    height: 200,
+                    margin: 3,
+                    padding: 5,
+                    title: {
+                        text: "center",
+                        border: {
+                          color: "red",
+                          width: 2
+                        },
+                         margin: 10,
+                         position: "center"
+                    }
+                }],                
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    },
+                    pane: {
+                        border: {
+                                color: "red",
+                                width: 2
+                            },
+                          title: {
+                                text: "Top",
+                                border: {
+                                  color: "red",
+                                  width: 2
+                                },
+                                 margin: 10,
+                                 position: "top"
+                            }  
+                        }
+                },
+                categoryAxis: {
+                    notes: {
+                        data: [{
+                            value: "2001/01/01",
+                            label: {
+                                text: "01"
+                            }
+                        }, {
+                            value: "2002/01/01",
+                            label: {
+                                text: "02"
+                            }
+                        }, {
+                            value: "2003/01/01",
+                            label: {
+                                text: "03"
+                            }
+                        }, {
+                            value: "2004/01/01",
+                            label: {
+                                text: "04"
+                            }
+                        }, {
+                            value: "2005/01/01",
+                            label: {
+                                text: "05"
+                            }
+                        }, {
+                            value: "2006/01/01",
+                            label: {
+                                text: "06"
+                            }
+                        }, {
+                            value: "2007/01/01",
+                            label: {
+                                text: "07"
+                            }
+                        }, {
+                            value: "2008/01/01",
+                            label: {
+                                text: "08"
+                            }
+                        }, {
+                            value: "2009/01/01",
+                            label: {
+                                text: "09"
+                            }
+                        }, {
+                            value: "2010/01/01",
+                            label: {
+                                text: "10"
+                            }
+                        }, {
+                            value: "2011/01/01",
+                            label: {
+                                text: "11"
+                            }
+                        }, {
+                            value: "2012/01/01",
+                            label: {
+                                text: "12"
+                            }
+                        }]
+                    }
+                },
+                renderAs: renderAs
+            });
+    $("#sparkline").kendoSparkline({
+        data: [
+            936, 968, 1025, 999, 998, 1014, 1017, 1010, 1010, 1007,
+            1004, 988, 990, 988, 987, 995, 946, 954, 991, 984,
+            974, 956, 986, 936, 955, 1021, 1013, 1005, 958, 953,
+            952, 940, 937, 980, 966, 965, 928, 916, 910, 980
+        ],
+        type: "area",
+        valueAxis: {
+            max: 950
+        },
+        renderAs: renderAs
+    });
+    $("#chart-mmHg").kendoChart({
+        legend: {
+            visible: false
+        },
+        series: [{
+            type: "bullet",
+            data: [[750, 762.5]]
+        }],
+        chartArea: {
+            margin: {
+                left: 0
+            }
+        },
+        categoryAxis: {
+            majorGridLines: {
+                visible: false
+            },
+            majorTicks: {
+                visible: false
+            }
+        },
+        valueAxis: [{
+            plotBands: [{
+                from: 715, to: 752, color: "#ccc", opacity: .6
+            }, {
+                from: 752, to: 772, color: "#ccc", opacity: .3
+            }],
+            majorGridLines: {
+                visible: false
+            },
+            min: 715,
+            max: 730,
+            minorTicks: {
+                visible: true
+            }
+        }],
+        tooltip: {
+            visible: true,
+            template: "Maximum: #= value.target # <br /> Average: #= value.current #"
+        },
+        renderAs: renderAs
+    });  
+
+   $("#multipleAxis").kendoChart({  
+        seriesDefaults: {
+            stack:true
+        },
+        series: [{
+            type: "bar",
+            data: [60,25,80],
+            axis: "top"
+        },{
+            type: "verticalLine",
+            data: [60,1,100],
+            axis: "top"
+        },{
+             type: "verticalLine",
+             data: [100,1,100, 50, 60],
+             axis: "bottom"
+        },{
+            type: "bar",
+            data: [60,1,100, 50, 60],
+            axis: "bottom"
+        }],
+        valueAxis: [{
+            min: 40,
+            max: 80,
+            name: "top"
+        }, {
+            min: 40,
+            max: 80,
+            name: "bottom"
+        }],
+          categoryAxis: [
+          {
+            categories: ["a", "b", "c"],
+            pane: "top"
+          }, 
+          {
+            categories: ["d", "e", "f", "g", "e"]
+          }],
+        panes: [{
+            name: "top"
+        }, {
+            name: "bottom"
+        }],
+        tooltip: {
+            visible: true
+        },
+        renderAs: renderAs
+    });
+   $("#radarColumn").kendoChart({
+            title: {
+                text: "Nutrient balance: Apples, raw"
+            },
+            legend: {
+                visible: false
+            },
+            series: [{
+                type: "radarColumn",
+                name: "Nutrients",
+                data: [
+                    5, 1, 1, 5, 0, 1,
+                    1, 2, 1, 2, 1, 0,
+                    0, 2, 1, 0, 3, 1,
+                    1, 1, 0, 0, 0
+                ]
+            }],
+            categoryAxis: {
+                categories: [
+                    "Df", "Pr", "A", "C", "D", "E",
+                    "Th", "Ri", "Ni", "B", "F", "B",
+                    "Se", "Mn", "Cu", "Zn", "K", "P",
+                    "Fe", "Ca", "Na", "Ch", "Sf"
+                ]
+            },
+            tooltip: {
+                visible: true
+            },
+            valueAxis: {
+                visible: false,
+                plotBands: [{
+                    from: 3,
+                    to: 10,
+                    color: "red",
+                    opacity: 0.1
+                }]
+            }
+        });
+
+   
+    
+    $("#testRange").kendoChart({
+        series: [{
+            type: "column",            
+            data: [1, 100, -100, 5]
+        }, {
+            type: "line",
+            style: "smooth",            
+            data: [1, 100, -100, 5]
+        }],
+        tooltip: {
+            visible: true//,
+            //shared: true
+        },
+        categoryAxis: {
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }
+        },
+        valueAxis: {
+            min: -5,
+            max: 5,
+            crosshair: {
+                visible: true,
+                tooltip: {
+                    visible: true,
+                    format: "n1"
+                }
+            }
+        },
+        renderAs: renderAs
+        
+    });
+    window.testID = 0;
+        $("#stock").kendoStockChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../demos/mvc/content/dataviz/js/boeing-stock.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: "The Boeing Company (NYSE:BA)"
+                },
+                dateField: "Date",
+                panes: [{
+                    name: "volumePane",
+                    title: "Volume",
+                    height: 150, 
+                    margin: 10
+                },{
+                    title: "Value",
+                    name: "stock",
+                    margin: 10
+                }],
+                categoryAxis: {
+                    pane: "volumePane"
+                },
+                valueAxes: [{
+                    // Default axis
+                    line: {
+                        visible: false
+                    },
+                    name: "stock",
+                    pane: "stock",
+                    min: 50,
+                    max: 80
+                    
+                }, {
+                    name: "volumeAxis",
+                    pane: "volumePane",
+                    visible: false,
+                    min: 3000000,
+                    max: 15000000
+                }],
+                series: [{
+                    type: "candlestick",
+                    openField: "Open",
+                    highField: "High",
+                    lowField: "Low",
+                    closeField: "Close",
+                    axis: "stock"
+
+                }, {
+                    type: "column",
+                    field: "Volume",
+                    axis: "volumeAxis",
+                    tooltip: {
+                        format: "{0:C0}"
+                    }
+                }]
+                ,
+                navigator: {
+                    series: {
+                        type: "area",
+                        field: "Close"
+                    },
+                    select: {
+                        from: "2009/02/05",
+                        to: "2011/10/07"
+                    }
+                }
+            });
+    
+    $("#scatterChart").kendoChart({
+        series: [{
+            type: "scatterLine",
+            data: [{x:30,y: 20},{ x:40, y: 25},{ x:50, y: 30},{x: 1, y: 1}, {x: 50, y: 40}],
+            xAxis: "top",
+            yAxis: "top"
+        }, {
+            type: "scatterLine",
+            data: [{x:1,y: 20},{ x:40, y: 25},{ x:50, y: 30},{x: 55, y: 41}, {x: 50, y: 50}],
+            xAxis: "bottom",
+            yAxis: "bottom"
+        }],
+        panes: [{
+            margin: 10,
+            name: "top"
+        }, {
+            margin: 10,
+            name: "bottom"
+        }],        
+        xAxis: [{
+            max: 80,
+            min: 30,
+            pane: "top",
+            name: "top"
+        },{
+            max: 80,
+            min: 30,
+            pane: "bottom",
+            name: "bottom"
+        }],
+        yAxis: [{
+            min: 20,
+            max: 40,
+            pane: "top",
+            name: "top"
+        },{
+            min: 20,
+            max: 40,
+            pane: "bottom",
+            name: "bottom"
+        }],
+        tooltip: {
+            visible: true
+        },
+        renderAs: renderAs
+    });    
+    
+    $("#multiplePanes").kendoChart({                
+        series: [{
+            type: "column",
+            data: [60,25,80],
+            axis: "top"
+        },{
+            type: "column",
+            data: [60,1,100],
+            axis: "top"
+        },{
+             type: "column",
+             data: [100,1,100, 50, 60],
+             axis: "bottom"
+        },{
+            type: "column",
+            data: [60,1,100, 50, 60],
+            axis: "bottom"
+        }],
+        seriesDefaults: {
+            stack:true
+        },
+        valueAxis: [{
+            min: 40,
+            max: 80,
+            pane: "top",
+            name: "top"
+        }, {
+            min: 40,
+            max: 80,
+             pane: "bottom",
+            name: "bottom"
+        }],
+          categoryAxis: [{
+            categories: ["a", "b", "c"],
+            pane: "top"
+          }, {
+            categories: ["d", "e", "f", "g", "e"],
+            pane: "bottom"
+          }],
+        panes: [{
+            margin: 10,
+            name: "top"
+        }, {
+            margin: 10,
+            name: "bottom"
+        }],
+        tooltip: {
+            visible: true
+        },
+        renderAs: renderAs
+    });
+    
+    $("#radarChart").kendoChart({
+        title: {
+            text: "Market Value of Major Banks"
+        },
+        legend: {
+            position: "bottom"
+        },
+        seriesDefaults: {
+            type: "radarLine",
+            style: "smooth"
+        },
+        series: [{
+            name: "Market value as of 2007",
+            data: [116, 165, 215, 75, 100, 49, 80, 116, 108, 90, 67, 76, 91, 255, 120]
+        },{
+            name: "Market value as of 2009",
+            data: [64, 85, 97, 27, 16, 26, 35, 32, 26, 17, 10, 7, 19, 5]
+        }],
+        categoryAxis: {
+            categories: ["Santander", "JP Morgan", "HSBC", "Credit Suisse",
+                "Goldman Sachs", "Morgan Stanley", "Societe Generale", "UBS",
+                "BNP Paribas", "Unicredit", "Credit Agricole", "Deutsche Bank",
+                "Barclays", "Citigroup", "RBS"]
+        },
+        valueAxis: {
+            labels: {
+                format: "${0}"
+            },
+                plotBands: [{
+                    from: 60,
+                    to: 300,
+                    color: "blue",
+                    opacity: 0.1
+                }]
+        },
+        tooltip: {
+            visible: true,
+            format: "${0} bln"
+        }
+    });
+    
+      $("#polarChart").kendoChart({
+            title: {
+                text: "Polar plot"
+            },
+            seriesDefaults: {
+                type: "polarLine"
+            },
+            series: [{
+                data: [
+                    [20, 15], [30, 25], [40, 30],
+                    [45, 35], [60, 40], [75, 45]
+                ]                
+            }],
+            xAxis: [{
+                max: 80,
+                min: 30,
+                plotBands: [{
+                    from: 60,
+                    to: 100,
+                    color: "blue",
+                    opacity: 0.1
+                }]
+            }],
+            yAxis: [{
+                min: 20,
+                max: 40,
+                plotBands: [{
+                    from: 30,
+                    to: 50,
+                    color: "red",
+                    opacity: 0.1
+                }]
+            }],
+            tooltip: {
+                visible: true
+            },
+            renderAs: renderAs
+        });
+        
+            $("#bubble").kendoChart({
+                title: {
+                    text: "Job Growth for 2011"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bubble"
+                },
+                series: [{
+                    data: [{
+                        x: -2500,
+                        y: 50000,
+                        size: 500000,
+                        category: "Microsoft"
+                    }, {
+                        x: 500,
+                        y: 110000,
+                        size: 7600000,
+                        category: "Starbucks"
+                    }, {
+                        x: 7000,
+                        y: 19000,
+                        size: 700000,
+                        category: "Google"
+                    }, {
+                        x: 1400,
+                        y: 150000,
+                        size: 700000,
+                        category: "Publix Super Markets"
+                    }, {
+                        x: 2400,
+                        y: 30000,
+                        size: 300000,
+                        category: "PricewaterhouseCoopers"
+                    }, {
+                        x: 2450,
+                        y: 34000,
+                        size: 90000,
+                        category: "Cisco"
+                    }, {
+                        x: 2700,
+                        y: 34000,
+                        size: 400000,
+                        category: "Accenture"
+                    }, {
+                        x: 2900,
+                        y: 40000,
+                        size: 450000,
+                        category: "Deloitte"
+                    }, {
+                        x: 3000,
+                        y: 55000,
+                        size: 900000,
+                        category: "Whole Foods Market"
+                    }]
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}",
+                        skip: 1
+                    },
+                    axisCrossingValue: -5000,
+                    majorUnit: 2000,
+                    plotBands: [{
+                        from: -5000,
+                        to: 0,
+                        color: "#00f",
+                        opacity: 0.05
+                    }]
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    line: {
+                        width: 0
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: {2:N0} applications",
+                    opacity: 1
+                }
+            });               
+        
+        }
+
+    </script>
+    </body>
+</html>
