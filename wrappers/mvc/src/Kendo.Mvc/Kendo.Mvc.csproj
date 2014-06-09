@@ -408,6 +408,7 @@
     <Compile Include="UI\Chart\Enums\ChartPolarLineStyle.cs" />
     <Compile Include="UI\Chart\ChartAreaLine.cs" />
     <Compile Include="UI\Chart\Enums\ChartStackType.cs" />
+    <Compile Include="UI\Chart\Enums\ChartLegendOrientation.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLogarithmicAxisSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />

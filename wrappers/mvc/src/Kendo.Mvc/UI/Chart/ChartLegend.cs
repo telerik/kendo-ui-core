@@ -121,6 +121,33 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the legend orientation
+        /// </summary>
+        public ChartLegendOrientation? Orientation
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the legend width
+        /// </summary>
+        public int? Width
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the legend height
+        /// </summary>
+        public int? Height
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartLegendSerializer(this);

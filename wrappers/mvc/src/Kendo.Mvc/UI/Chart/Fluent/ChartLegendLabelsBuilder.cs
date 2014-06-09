@@ -86,5 +86,31 @@ namespace Kendo.Mvc.UI.Fluent
             labels.Template = template;
             return this;
         }
+
+        /// <summary>
+        /// Sets the labels padding
+        /// </summary>
+        /// <param name="top">The labels top padding.</param>
+        /// <param name="right">The labels right padding.</param>
+        /// <param name="bottom">The labels bottom padding.</param>
+        /// <param name="left">The labels left padding.</param>     
+        public ChartLegendLabelsBuilder Padding(int top, int right, int bottom, int left)
+        {
+            labels.Padding.Top = top;
+            labels.Padding.Right = right;
+            labels.Padding.Bottom = bottom;
+            labels.Padding.Left = left;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the labels padding
+        /// </summary>
+        /// <param name="padding">The labels padding.</param>      
+        public ChartLegendLabelsBuilder Padding(int padding)
+        {
+            labels.Padding = new ChartSpacing(padding);
+            return this;
+        }
     }
 }

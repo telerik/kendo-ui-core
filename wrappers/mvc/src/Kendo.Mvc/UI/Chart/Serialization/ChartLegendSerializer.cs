@@ -31,7 +31,10 @@ namespace Kendo.Mvc.UI
                 .Add("padding", legend.Padding.CreateSerializer().Serialize(), ShouldSerializePadding)
                 .Add("border", legend.Border.CreateSerializer().Serialize(), ShouldSerializeBorder)
                 .Add("background", legend.Background, () => legend.Background.HasValue())
-                .Add("visible", legend.Visible, () => legend.Visible.HasValue);
+                .Add("visible", legend.Visible, () => legend.Visible.HasValue)
+                .Add("orientation", legend.Orientation.ToString().ToLowerInvariant(), () => legend.Orientation.HasValue)
+                .Add("width", legend.Width, () => legend.Width.HasValue)
+                .Add("height", legend.Height, () => legend.Height.HasValue);
 
             return result;
         }

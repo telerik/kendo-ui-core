@@ -110,5 +110,47 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Border(b => b.Opacity(0.5)).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Width_should_return_builder()
+        {
+            builder.Width(100).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Width_sets_width()
+        {
+            builder.Width(100);
+
+            legend.Width.ShouldEqual(100);
+        }
+
+        [Fact]
+        public void Height_should_return_builder()
+        {
+            builder.Height(100).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Height_sets_height()
+        {
+            builder.Height(100);
+
+            legend.Height.ShouldEqual(100);
+        }
+
+        [Fact]
+        public void Orientation_should_return_builder()
+        {
+            builder.Orientation(ChartLegendOrientation.Horizontal).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Orientation_sets_orientationt()
+        {
+            builder.Orientation(ChartLegendOrientation.Horizontal);
+
+            legend.Orientation.ShouldEqual(ChartLegendOrientation.Horizontal);
+        }
     }
 }

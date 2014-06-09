@@ -262,5 +262,35 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new ChartLegendLabelsBuilder(legend.Labels));
             return this;
         }
+
+        /// <summary>
+        /// Sets the legend orientation
+        /// </summary>
+        /// <param name="orientation">The legend orientation.</param>
+        public ChartLegendBuilder Orientation(ChartLegendOrientation orientation)
+        {
+            legend.Orientation = orientation;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the legend width
+        /// </summary>
+        /// <param name="width">The legend width.</param>
+        public ChartLegendBuilder Width(int width)
+        {
+            legend.Width = width;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the legend height
+        /// </summary>
+        /// <param name="height">The legend height.</param>
+        public ChartLegendBuilder Height(int height)
+        {
+            legend.Height = height;
+            return this;
+        }
     }
 }

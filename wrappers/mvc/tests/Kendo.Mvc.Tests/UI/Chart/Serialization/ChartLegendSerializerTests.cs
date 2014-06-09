@@ -157,5 +157,44 @@ namespace Kendo.Mvc.UI.Tests
         {
             return legend.CreateSerializer().Serialize();
         }
+
+        [Fact]
+        public void Serializes_width()
+        {
+            legend.Width = 100;
+            GetJson()["width"].ShouldEqual(100);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_width()
+        {
+            GetJson().ContainsKey("width").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_height()
+        {
+            legend.Height = 100;
+            GetJson()["height"].ShouldEqual(100);
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_height()
+        {
+            GetJson().ContainsKey("height").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_orientation()
+        {
+            legend.Orientation = ChartLegendOrientation.Horizontal;
+            GetJson()["orientation"].ShouldEqual("horizontal");
+        }
+
+        [Fact]
+        public void Does_not_serialize_default_orientation()
+        {
+            GetJson().ContainsKey("orientation").ShouldBeFalse();
+        }
     }
 }
