@@ -58,6 +58,17 @@
                 type: "rangeColumn",
                 data: [[10, 11], [20, 22], [30, 33]]
             }],
+            rangeBarSeriesData = [{
+                name: "Value A",
+                type: "rangeBar",
+                data: [[100, 110], [200, 220], [300, 330]],
+                gap: GAP,
+                spacing: SPACING
+            }, {
+                name: "Value B",
+                type: "rangeBar",
+                data: [[10, 11], [20, 22], [30, 33]]
+            }],
             lineSeriesData = [{
                 name: "Value A",
                 type: "line",
@@ -1142,6 +1153,41 @@
         test("applies spacing from first series", function() {
             equal(chartSeries.options.spacing, SPACING);
         });
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / Range Bar series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea(rangeBarSeriesData);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("value axis is horizontal", function() {
+            ok(!valueAxis.options.vertical);
+        });
+
+        test("category axis is vertical", function() {
+            ok(categoryAxis.options.vertical);
+        });
+
+        test("creates range bar chart", function() {
+            ok(chartSeries instanceof dataviz.RangeBarChart);
+        });
+
+        test("groups range column series into range bar chart", function() {
+            equal(chartSeries.options.series.length, 2);
+        });
+
+        test("applies gap from first series", function() {
+            equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Line series", {

@@ -158,6 +158,10 @@ var __meta__ = {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
                 },
+                rangeBar: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING
+                },
                 bullet: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING,

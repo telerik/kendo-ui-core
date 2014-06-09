@@ -170,6 +170,7 @@ var __meta__ = {
         PIE_SECTOR_ANIM_DELAY = 70,
         PLOT_AREA_CLICK = "plotAreaClick",
         POINTER = "pointer",
+        RANGE_BAR = "rangeBar",
         RANGE_COLUMN = "rangeColumn",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -229,7 +230,7 @@ var __meta__ = {
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR
         ];
 
     var DateLabelFormats = {
@@ -8527,7 +8528,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA]
+                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA, RANGE_BAR]
                 );
 
                 for (var i = 0; i < series.length; i++) {
@@ -8608,7 +8609,7 @@ var __meta__ = {
                 );
 
                 plotArea.createRangeBarChart(
-                    filterSeriesByType(filteredSeries, [RANGE_COLUMN]),
+                    filterSeriesByType(filteredSeries, [RANGE_COLUMN, RANGE_BAR]),
                     pane
                 );
 
@@ -11658,7 +11659,7 @@ var __meta__ = {
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT,
-        RANGE_COLUMN
+        RANGE_COLUMN, RANGE_BAR
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -11674,7 +11675,7 @@ var __meta__ = {
     );
 
     SeriesBinder.current.register(
-        [RANGE_COLUMN],
+        [RANGE_COLUMN, RANGE_BAR],
         [FROM, TO], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
@@ -11684,7 +11685,7 @@ var __meta__ = {
     );
 
     DefaultAggregates.current.register(
-        [RANGE_COLUMN],
+        [RANGE_COLUMN, RANGE_BAR],
         { from: MIN, to: MAX, color: FIRST, noteText: FIRST }
     );
 
