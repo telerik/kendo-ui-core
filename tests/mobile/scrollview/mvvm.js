@@ -46,9 +46,6 @@
 
         var widget = $("#scrollview").data("kendoMobileScrollView");
         var oldDataSource = widget.dataSource;
-        oldDataSource.bind("change", function() {
-            console.log("change");
-        });
 
         var newDataSource = new kendo.data.DataSource({
             data: [ {foo: 3}, {foo: 4} ]
