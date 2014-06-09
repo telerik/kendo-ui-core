@@ -777,6 +777,16 @@ var __meta__ = {
            this.pane.refresh();
         },
 
+        value: function(item) {
+            var dataSource = this.dataSource;
+
+            if (item) {
+                this.scrollTo(dataSource.indexOf(item), true);
+            } else {
+                return dataSource.at(this.page);
+            }
+        },
+
         scrollTo: function(page, instant) {
             this._content.scrollTo(page, instant);
             this._syncWithContent();

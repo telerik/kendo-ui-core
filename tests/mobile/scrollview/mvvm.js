@@ -35,6 +35,32 @@
         equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
     });
 
+    test("supports value binding", 2, function() {
+        var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds, value: selectedItem" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
+
+        var ds = new kendo.data.DataSource({
+            data: [
+                { foo: 1 },
+                { foo: 2 },
+                { foo: 3 },
+                { foo: 4 }
+            ]
+        });
+
+
+        window.scrollViewViewModel = kendo.observable({
+            ds: ds,
+            selectedItem: function() {
+                return this.get("ds").at(2);
+            }
+        });
+
+        var app = new kendo.mobile.Application(appContent);
+
+        equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "3");
+        equal($("#scrollview").data("kendoMobileScrollView").value(), ds.at(2));
+    });
+
     test("rebinds to a new DataSource", 3, function() {
         var appContent = $('<div><div data-role="view" data-model="scrollViewViewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div></div>').appendTo(QUnit.fixture);
 

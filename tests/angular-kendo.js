@@ -764,19 +764,6 @@
     });
   }
 
-  {
-    // same for mobile/ScrollView, except that we don't need the
-    // "change" event.
-
-    defadvice("mobile.ui.ScrollView", "value", function(mew){
-      var self = this.self;
-      if (mew != null) {
-        self.scrollTo(mew);
-      }
-      return self.page;
-    });
-  }
-
   // XXX: add value() so that ng-model / k-ng-model works with mobile Switch
   //      should go in Kendo.
   defadvice("mobile.ui.Switch", "value", function(){
