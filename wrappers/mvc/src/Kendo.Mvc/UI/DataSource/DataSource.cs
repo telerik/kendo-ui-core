@@ -314,7 +314,7 @@ namespace Kendo.Mvc.UI
         public Transport Transport
         {
             get;
-            private set;
+            protected set;
         }
 
         public IDictionary<string, object> CustomTransport
