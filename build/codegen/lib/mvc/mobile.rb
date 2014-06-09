@@ -32,6 +32,11 @@ module CodeGen::MVC::Wrappers::Mobile
         'Date' => 'DateTime'
     }
 
+    FIELD_TYPES = {
+        'drawer.swipetoopenviews' => 'string[]'
+    }
+
+
         FIELD_DECLARATION = ERB.new(%{
         public <%= csharp_type %> <%= csharp_name %> { get; set; }
         })
@@ -43,7 +48,7 @@ module CodeGen::MVC::Wrappers::Mobile
             if values
                 "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
             else
-                TYPES[type[0]]
+                FIELD_TYPES[full_name] || TYPES[type[0]]
             end
         end
 

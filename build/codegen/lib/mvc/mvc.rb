@@ -128,7 +128,7 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="value">The value that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
+        public <%= csharp_builder_name %> <%= csharp_name %>(<%= is_csharp_array ? 'params ' : '' %><%= csharp_type %> value)
         {
             container.<%= csharp_name %> = value;
 
@@ -241,6 +241,16 @@ module CodeGen::MVC::Wrappers
 
         def to_declaration
             declaration_template.result(binding)
+        end
+
+        def csharp_builder_name
+            if owner.respond_to?('csharp_item_class')
+                producedType = owner.csharp_item_class
+            else
+                producedType = owner.csharp_class
+            end
+
+            "#{producedType}Builder"
         end
 
         def to_fluent
