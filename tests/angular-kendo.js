@@ -686,15 +686,6 @@
     });
   });
 
-  // XXX: is this necessary any longer?
-  defadvice("mobile.ui.ListView", "destroy", function(){
-    var self = this.self;
-    if (self._itemBinder && self._itemBinder.dataSource) {
-      this.self._itemBinder._unbindDataSource();
-    }
-    this.next();
-  });
-
   // scheduler
   {
     defadvice("ui.Scheduler", AFTER, function(){
