@@ -406,7 +406,7 @@ function createLink(range, text, url, newWindow) {
     $(".k-dialog-insert").click();
 }
 
-test("inserting links squentially does not render invalid markup", function() {
+test("inserting links sequentially does not render invalid markup", function() {
     editor.value("");
 
     createLink(editor.getRange(), "foo", "foo");
@@ -506,6 +506,16 @@ test("exec over image selection", function() {
     $(".k-dialog-insert").click();
 
     equal(editor.value(), '<a href="baz"><img /></a>');
+});
+
+test("change link text does not leave ghost nodes", function() {
+    var range = createRangeFromText(editor, "<a href='#top'>f||oo</a>");
+    execLinkCommandOnRange(range);
+
+    $("#k-editor-link-text").val("bar");
+    $(".k-dialog-insert").click();
+
+    equal(editor.value(), '<a href="#top">bar</a>');
 });
 
 }());

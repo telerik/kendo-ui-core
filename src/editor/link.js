@@ -32,9 +32,12 @@ var LinkFormatter = Class.extend({
     },
 
     apply: function (range, attributes) {
-        var nodes = textNodes(range),
-            markers, doc,
-            formatter, a;
+        var nodes = textNodes(range);
+        var markers;
+        var doc;
+        var formatter;
+        var a;
+        var parent;
 
         if (attributes.innerHTML) {
             markers = RangeUtils.getMarkers(range);
@@ -45,8 +48,13 @@ var LinkFormatter = Class.extend({
             a = dom.create(doc, "a", attributes);
             range.insertNode(a);
 
-            if (dom.name(a.parentNode) == "a") {
-                dom.insertAfter(a, a.parentNode);
+            parent = a.parentNode;
+            if (dom.name(parent) == "a") {
+                dom.insertAfter(a, parent);
+            }
+
+            if (dom.emptyNode(parent)) {
+                dom.remove(parent);
             }
 
             if (markers.length > 1) {
