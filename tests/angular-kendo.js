@@ -740,14 +740,6 @@
       this.self.trigger("change");
     });
   }
-
-  // XXX: add value() so that ng-model / k-ng-model works with mobile Switch
-  //      should go in Kendo.
-  defadvice("mobile.ui.Switch", "value", function(){
-    var self = this.self;
-    return self.check.apply(self, arguments);
-  });
-
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery, angular, kendo); });
 
 // Local Variables:
