@@ -468,7 +468,7 @@ var Clipboard = Class.extend({
                     var r = editor.createRange();
                     r.selectNodeContents(clipboardNode);
                     editor.selectRange(r);
-                    var textRange = editor.body.createTextRange();
+                    var textRange = editor.document.body.createTextRange();
                     textRange.moveToElementText(clipboardNode);
                     $(editor.body).unbind('paste');
                     textRange.execCommand('Paste');
