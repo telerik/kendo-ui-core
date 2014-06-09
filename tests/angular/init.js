@@ -525,6 +525,48 @@
         });
     });
 
+    runTest("Scheduler -- compile customizable templates", function(dom){
+        $scope.options = {
+            date: new Date("2013/6/6"),
+            eventTemplate: "<div class='my-event'>|{{dataItem.title}}|</div>",
+            allDayEventTemplate: "<div class='my-allday-event'>|{{dataItem.title}}|</div>",
+            dataSource: [
+                {
+                    id: 1,
+                    start: new Date("2013/6/6 08:00 AM"),
+                    end: new Date("2013/6/6 09:00 AM"),
+                    isAllDay: true,
+                    title: "Interview",
+                    attendees: [1,2]
+                },{
+                    id: 2,
+                    start: new Date("2013/6/6 10:00 AM"),
+                    end: new Date("2013/6/6 11:00 AM"),
+                    title: "Foo",
+                    isAllDay: false
+                }
+            ],
+            resources: [
+                {
+                    field: "attendees",
+                    dataSource: [
+                        { value: 1, text: "Alex" },
+                        { value: 2, text: "Bob" }
+                    ],
+                    multiple: true
+                }
+            ]
+        };
+        $("<div kendo-scheduler='scheduler' k-options='options'></div>").appendTo(dom);
+        expect(2);
+        $scope.$on("kendoRendered", function(){
+            var scheduler = $scope.scheduler;
+            equal(scheduler.element.find(".my-event").text(), "|Foo|");
+            equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
+            start();
+        });
+    });
+
     /// mobile
 
     runTest("Mobile ListView -- compiles templates in data source", function(dom){
