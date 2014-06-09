@@ -24,6 +24,15 @@ class ChartLegend extends \Kendo\SerializableObject {
     }
 
     /**
+    * The legend height when the legend.position is set to "custom" and the legend.orientation is set to "vertical".
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function height($value) {
+        return $this->setProperty('height', $value);
+    }
+
+    /**
     * The chart inactive legend items configuration.
     * @param \Kendo\Dataviz\UI\ChartLegendInactiveItems|array $value
     * @return \Kendo\Dataviz\UI\ChartLegend
@@ -73,6 +82,24 @@ A negative value will move the legend upwards from its current position.
     }
 
     /**
+    * The orientation of the legend items when the position legend.position is set to "custom".The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function orientation($value) {
+        return $this->setProperty('orientation', $value);
+    }
+
+    /**
+    * The padding of the chart legend. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartLegendPadding|array $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function padding($value) {
+        return $this->setProperty('padding', $value);
+    }
+
+    /**
     * The positions of the chart legend.The supported values are:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartLegend
@@ -88,6 +115,15 @@ A negative value will move the legend upwards from its current position.
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
+    }
+
+    /**
+    * The legend width when the legend.position is set to "custom" and the legend.orientation is set to "horizontal".
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartLegend
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
     }
 
 //<< Properties

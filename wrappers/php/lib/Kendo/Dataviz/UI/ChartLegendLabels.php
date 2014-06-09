@@ -33,6 +33,15 @@ class ChartLegendLabels extends \Kendo\SerializableObject {
     }
 
     /**
+    * The padding of the labels. A numeric value will set all paddings.
+    * @param float|\Kendo\Dataviz\UI\ChartLegendLabelsPadding|array $value
+    * @return \Kendo\Dataviz\UI\ChartLegendLabels
+    */
+    public function padding($value) {
+        return $this->setProperty('padding', $value);
+    }
+
+    /**
     * Sets the template option of the ChartLegendLabels.
     * The template which renders the labels.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.

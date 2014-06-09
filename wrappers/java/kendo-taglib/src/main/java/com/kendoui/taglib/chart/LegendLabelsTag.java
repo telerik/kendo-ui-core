@@ -55,6 +55,10 @@ public class LegendLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
         setProperty("margin", value);
     }
 
+    public void setPadding(com.kendoui.taglib.chart.LegendLabelsPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public void setTemplate(LegendLabelsTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
@@ -81,6 +85,14 @@ public class LegendLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
 
     public void setMargin(float value) {
         setProperty("margin", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
     }
 
     public java.lang.String getTemplate() {

@@ -69,12 +69,24 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("margin", value);
     }
 
+    public void setPadding(com.kendoui.taglib.chart.LegendPaddingTag value) {
+        setProperty("padding", value);
+    }
+
     public java.lang.String getBackground() {
         return (java.lang.String)getProperty("background");
     }
 
     public void setBackground(java.lang.String value) {
         setProperty("background", value);
+    }
+
+    public float getHeight() {
+        return (float)getProperty("height");
+    }
+
+    public void setHeight(float value) {
+        setProperty("height", value);
     }
 
     public float getMargin() {
@@ -101,6 +113,22 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("offsetY", value);
     }
 
+    public java.lang.String getOrientation() {
+        return (java.lang.String)getProperty("orientation");
+    }
+
+    public void setOrientation(java.lang.String value) {
+        setProperty("orientation", value);
+    }
+
+    public float getPadding() {
+        return (float)getProperty("padding");
+    }
+
+    public void setPadding(float value) {
+        setProperty("padding", value);
+    }
+
     public java.lang.String getPosition() {
         return (java.lang.String)getProperty("position");
     }
@@ -115,6 +143,14 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

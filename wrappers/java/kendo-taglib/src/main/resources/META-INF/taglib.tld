@@ -2332,6 +2332,12 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The legend height when the legend.position is set to "custom" and the legend.orientation is set to "vertical".</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The margin of the chart legend. A numeric value will set all paddings.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2354,6 +2360,18 @@ A negative value will move the legend upwards from its current position.</descri
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The orientation of the legend items when the position legend.position is set to "custom".The supported values are:</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the chart legend. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The positions of the chart legend.The supported values are:</description>
             <name>position</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2364,6 +2382,12 @@ A negative value will move the legend upwards from its current position.</descri
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The legend width when the legend.position is set to "custom" and the legend.orientation is set to "horizontal".</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -2465,6 +2489,12 @@ A negative value will move the legend upwards from its current position.</descri
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The padding of the labels. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The template which renders the labels.The fields which can be used in the template are:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
@@ -2507,6 +2537,40 @@ A negative value will move the legend upwards from its current position.</descri
     </tag>
 
 
+    <tag>
+        <description>The padding of the labels. A numeric value will set all paddings.</description>
+        <name>chart-legend-labels-padding</name>
+        <tag-class>com.kendoui.taglib.chart.LegendLabelsPaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the labels.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the labels.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the labels.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the labels.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
 
     <tag>
         <description>The template which renders the labels.The fields which can be used in the template are:</description>
@@ -2540,6 +2604,40 @@ A negative value will move the legend upwards from its current position.</descri
         </attribute>
         <attribute>
             <description>The top margin of the chart legend.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The padding of the chart legend. A numeric value will set all paddings.</description>
+        <name>chart-legend-padding</name>
+        <tag-class>com.kendoui.taglib.chart.LegendPaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the chart legend.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the chart legend.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the chart legend.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the chart legend.</description>
             <name>top</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
