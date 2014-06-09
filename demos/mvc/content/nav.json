@@ -2803,7 +2803,7 @@
     "category": "Scheduling"
   },
   {
-    "text": "Gantt Chart",
+    "text": "Gantt",
     "name": "gantt",
     "api": "web/gantt",
     "new": true,
@@ -2836,6 +2836,16 @@
         },
         "meta": {
             "kendo-ui": "Explore the example of HTML5 gantt chart widget, included in Kendo UI Web, to find how easy it is to add a gantt chart to your website or web app."
+        }
+      },
+      {
+        "text": "Events",
+        "url": "gantt/events",
+        "title": {
+            "kendo-ui": "Example of using events in Kendo UI Gantt control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates different events which are available in KendoGantt widget and the code explains how you can use them for your project."
         }
       },
       {
