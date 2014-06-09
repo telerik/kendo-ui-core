@@ -64,21 +64,10 @@
             return new Point(this.x, this.y);
         },
 
-        rotate: function(center, degrees) {
-            var theta = rad(degrees);
-            var cosT = math.cos(theta);
-            var sinT = math.sin(theta);
-            var cx = center.x;
-            var cy = center.y;
-            var x = this.x;
-            var y = this.y;
-
-            this.x = cx + (x - cx) * cosT + (y - cy) * sinT;
-            this.y = cy + (y - cy) * cosT - (x - cx) * sinT;
-
-            this.geometryChange();
-
-            return this;
+        rotate: function(angle, origin) {
+            return this.transform(
+                transform().rotate(angle, origin)
+            );
         },
 
         multiply: function(a) {

@@ -144,13 +144,19 @@
     });
 
     test("rotate rotates x and y around center", function() {
-        point.rotate(new Point(0, 0), 90);
-        close(point.x, 20, 1, 0.1);
-        close(point.y, -10, 1, 0.1);
+        point.rotate(90, new Point(100, 100));
+        close(point.x, 180, 1);
+        close(point.y, 10, 1);
+    });
+
+    test("rotate rotates x and y around center (array)", function() {
+        point.rotate(90, [100, 100]);
+        close(point.x, 180, 1);
+        close(point.y, 10, 1);
     });
 
     test("rotate returns point", function() {
-        deepEqual(point.rotate(new Point(0, 0), 90), point);
+        deepEqual(point.rotate(90), point);
     });
 
     test("rotate triggers geometryChange", function() {
@@ -160,7 +166,7 @@
             }
         };
 
-        point.rotate(new Point(0, 0), 90)
+        point.rotate(90)
     });
 
     test("equals is true for same coordinates", function() {
