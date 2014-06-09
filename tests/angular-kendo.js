@@ -702,7 +702,6 @@
       var self = this.self;
       var scope = angular.element(self.element).scope();
       if (scope) {
-        self.$eventsScope = scope.$new();
         bindBefore(self, "edit", function(ev){
           var editScope = self.$editScope = scope.$new();
           editScope.dataItem = ev.model;
@@ -718,29 +717,7 @@
         bindBefore(self, "cancel", destroy);
         bindBefore(self, "save", destroy);
         bindBefore(self, "remove", destroy);
-        bindBefore(self, "navigate", function(){
-          self.$eventsScope.$destroy();
-          self.$eventsScope = scope.$new();
-        });
       }
-    });
-
-    defadvice("ui.Scheduler", "destroy", function(){
-      if (this.$eventsScope) {
-        this.$eventsScope.$destroy();
-      }
-      this.next();
-    });
-
-    defadvice([ "ui.MultiDayView", "ui.MonthView" ], "_createEventElement", function(event){
-      var element = this.next();
-      var self = this.self;
-      var scope = angular.element(self.element).scope();
-      var itemScope = scope.$new();
-      itemScope.dataItem = event;
-      compile(element)(itemScope);
-      digest(itemScope);
-      return element;
     });
   }
 

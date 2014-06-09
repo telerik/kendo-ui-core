@@ -1318,7 +1318,7 @@ var __meta__ = {
                 eventEndDate = kendo.timezone.apply(eventEndDate, "Etc/UTC");
             }
 
-            return $(template(extend({}, {
+            var data = extend({}, {
                 ns: kendo.ns,
                 resizable: resizable,
                 showDelete: showDelete,
@@ -1331,7 +1331,18 @@ var __meta__ = {
             }, event, {
                 start: eventStartDate,
                 end: eventEndDate
-            })));
+            });
+
+            var element = $(template(data));
+
+            this.angular("compile", function(){
+                return {
+                    elements: element,
+                    data: [ { dataItem: data } ]
+                };
+            });
+
+            return element;
         },
 
         _isInTimeSlot: function(event) {

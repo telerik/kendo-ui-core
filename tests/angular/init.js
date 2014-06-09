@@ -233,7 +233,7 @@
             grid.wrapper.find(".k-pager-wrap li:last > a").click();
             firstRow().scope().$on("$destroy", function(){ ok(true) });
             grid.wrapper.find(".k-pager-wrap li:first > a").click();
-            start();
+            setTimeout(start, 100);
         });
     });
 
@@ -558,12 +558,21 @@
             ]
         };
         $("<div kendo-scheduler='scheduler' k-options='options'></div>").appendTo(dom);
-        expect(2);
+        expect(4);
         $scope.$on("kendoRendered", function(){
             var scheduler = $scope.scheduler;
+            function shouldDestroy(sel) {
+                var scope = scheduler.element.find(sel).scope();
+                scope.$on("$destroy", function(){
+                    ok(true);
+                });
+            }
             equal(scheduler.element.find(".my-event").text(), "|Foo|");
             equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
-            start();
+            shouldDestroy(".my-event");
+            shouldDestroy(".my-allday-event");
+            scheduler.date(new Date("2014/6/6 10:00 AM"));
+            setTimeout(start, 100);
         });
     });
 

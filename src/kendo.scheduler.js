@@ -3226,9 +3226,14 @@ var __meta__ = {
         },
 
         refresh: function(e) {
+            var that = this;
             var view = this.view();
 
             this._progress(false);
+
+            this.angular("cleanup", function(){
+                return { elements: that.items() };
+            });
 
             e = e || {};
 

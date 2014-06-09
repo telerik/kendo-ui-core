@@ -464,7 +464,16 @@ var __meta__ = {
             event.resources = this.eventResources(event);
             event.inverseColor = event.resources && event.resources[0] ? this._shouldInverseResourceColor(event.resources[0]) : false;
 
-            return $(this.eventTemplate(event));
+            var element = $(this.eventTemplate(event));
+
+            this.angular("compile", function(){
+                return {
+                    elements: element,
+                    data: [ { dataItem: event } ]
+                };
+            });
+
+            return element;
         },
        _isInDateSlot: function(event) {
             var groups = this.groups[0];
