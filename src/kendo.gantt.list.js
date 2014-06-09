@@ -415,9 +415,11 @@ var __meta__ = {
         clearSelection: function() {
             var selected = this.select();
 
-            selected.removeClass(GanttList.styles.selected);
+            if (selected.length) {
+                selected.removeClass(GanttList.styles.selected);
 
-            this.trigger("change");
+                this.trigger("change");
+            }
         },
 
         _editable: function() {

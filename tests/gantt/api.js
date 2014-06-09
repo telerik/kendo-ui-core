@@ -419,7 +419,24 @@
         ok(!ganttList.content.find("tr:first").hasClass("k-state-selected"));
     });
 
-    test("clearSelection() triggers change event", function() {
+    test("clearSelection() triggers change event when deselecting items", function() {
+        setupGanttList({
+            columns: [],
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        ganttList.select("tr:first");
+
+        ganttList.bind("change", function() {
+            ok(true);
+        });
+        ganttList.clearSelection();
+    });
+
+    test("clearSelection() does not trigger the change event if no item is selected", 0, function() {
         setupGanttList({
             columns: [],
             data: [
@@ -429,7 +446,7 @@
         });
 
         ganttList.bind("change", function() {
-            ok(true);
+            ok(false);
         });
         ganttList.clearSelection();
     });
