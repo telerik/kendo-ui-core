@@ -162,6 +162,17 @@ var __meta__ = {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
                 },
+                waterfall: {
+                    gap: BAR_GAP,
+                    spacing: BAR_SPACING,
+                    line: {
+                        width: 1,
+                        color: BLACK
+                    },
+                    labels: {
+                        position: "insideEnd"
+                    }
+                },
                 bullet: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING,
@@ -422,6 +433,11 @@ var __meta__ = {
                         background: "#3d3d3d"
                     }
                 },
+                waterfall: {
+                    line: {
+                        color: "#8e8e8e"
+                    }
+                },
                 candlestick: {
                     downColor: "#555",
                     line: {
@@ -599,6 +615,11 @@ var __meta__ = {
                 },
                 candlestick: {
                     downColor: "#c4d0d5",
+                    line: {
+                        color: "#9aabb2"
+                    }
+                },
+                waterfall: {
                     line: {
                         color: "#9aabb2"
                     }
@@ -809,6 +830,11 @@ var __meta__ = {
                 area: {
                     opacity: 0.5
                 },
+                waterfall: {
+                    line: {
+                        color: "#ffffff"
+                    }
+                },
                 candlestick: {
                     downColor: "#664e62",
                     line: {
@@ -989,6 +1015,11 @@ var __meta__ = {
                     downColor: "#dedede",
                     line: {
                         color: "#8d8d8d"
+                    }
+                },
+                waterfall: {
+                    line: {
+                        color: "#8e8e8e"
                     }
                 },
                 notes: {
@@ -1196,6 +1227,11 @@ var __meta__ = {
                         color: "#A6B1C0"
                     }
                 },
+                waterfall: {
+                    line: {
+                        color: "#a6b1c0"
+                    }
+                },
                 candlestick: {
                     downColor: "#a6afbe"
                 }
@@ -1370,6 +1406,11 @@ var __meta__ = {
                     downColor: "#c7c7c7",
                     line: {
                         color: "#787878"
+                    }
+                },
+                waterfall: {
+                    line: {
+                        color: "#c7c7c7"
                     }
                 },
                 overlay: {
@@ -1567,6 +1608,11 @@ var __meta__ = {
                     downColor: "#828282",
                     line: {
                         color: "#ffffff"
+                    }
+                },
+                waterfall: {
+                    line: {
+                        color: "#cecece"
                     }
                 },
                 overlay: {
@@ -1784,6 +1830,11 @@ var __meta__ = {
                             color: WHITE,
                             opacity: 0.2
                         }
+                    }
+                },
+                waterfall: {
+                    line: {
+                        color: "#8c909e"
                     }
                 },
                 ohlc: {
@@ -2008,6 +2059,11 @@ var __meta__ = {
                             color: "#cccccc",
                             opacity: 0.2
                         }
+                    }
+                },
+                waterfall: {
+                    line: {
+                        color: "#9e9e9e"
                     }
                 },
                 ohlc: {
@@ -2238,6 +2294,11 @@ var __meta__ = {
                         }
                     }
                 },
+                waterfall: {
+                    line: {
+                        color: "#cccccc"
+                    }
+                },
                 ohlc: {
                     line: {
                         color: "#333333"
@@ -2426,6 +2487,11 @@ var __meta__ = {
                 },
                 area: {
                     opacity: 0.9
+                },
+                waterfall: {
+                    line: {
+                        color: "#cdcdcd"
+                    }
                 },
                 overlay: {
                     gradient: "none"

@@ -188,6 +188,7 @@ var __meta__ = {
         STD_ERR = "stderr",
         STD_DEV = "stddev",
         STRING = "string",
+        SUMMARY_TYPE_FIELD = "summaryType",
         TIME_PER_SECOND = 1000,
         TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
@@ -216,6 +217,7 @@ var __meta__ = {
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
+        WATERFALL = "waterfall",
         WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
@@ -230,7 +232,7 @@ var __meta__ = {
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR, WATERFALL
         ];
 
     var DateLabelFormats = {
@@ -7488,6 +7490,170 @@ var __meta__ = {
         }
     });
 
+    var WaterfallChart = BarChart.extend({
+        pointType: function() {
+            return Bar;
+        },
+
+        aboveAxis: function(point) {
+            return point.value >= 0;
+        },
+
+        render: function() {
+            BarChart.fn.render.call(this);
+            this.createSegments();
+        },
+
+        addValue: function(data, fields) {
+            var value = data.valueFields.value;
+            var summaryType = data.fields.summaryType;
+            var prevPoint;
+
+            var prevIx = fields.categoryIx - 1;
+            if (prevIx >= 0) {
+                var seriesPoints = this.seriesPoints[fields.seriesIx];
+                prevPoint = seriesPoints[prevIx];
+            }
+
+
+            if (defined(value) && value !== null) {
+                var sum = value;
+                var partialSum = value;
+
+                if (prevPoint) {
+                    sum += prevPoint.sum;
+                    partialSum += prevPoint.partialSum;
+                }
+
+                fields.sum = sum;
+                fields.partialSum = partialSum;
+            } else if (summaryType && prevPoint) {
+                if (summaryType.toLowerCase() === "partialSum") {
+                    data.valueFields.value = prevPoint.partialSum;
+                    fields.sum = prevPoint.sum;
+                    fields.partialSum = 0;
+                } else {
+                    data.valueFields.value = prevPoint.sum;
+                    fields.sum = prevPoint.sum;
+                    fields.partialSum = 0;
+                }
+
+                fields.isSum = true;
+            }
+
+            console.log(kendo.format("sum: {0}, partial sum: {1}, value: {2}",
+                                     fields.sum, fields.partialSum, data.valueFields.value));
+
+            BarChart.fn.addValue.call(this, data, fields);
+        },
+
+        plotRange: function(point) {
+            var categoryIx = point.categoryIx;
+            var seriesIx = point.seriesIx;
+            var seriesPoints = this.seriesPoints[seriesIx];
+
+            if (categoryIx === 0 || point.isSum) {
+                return BarChart.fn.plotRange.call(this, point);
+            }
+
+            var prevPoint = seriesPoints[categoryIx - 1];
+            var from = prevPoint.sum;
+            var to = from + point.value;
+
+            return [from, to];
+        },
+
+        updateRange: function(value, fields) {
+            var prevIx = fields.categoryIx - 1;
+            if (prevIx >= 0) {
+                var seriesPoints = this.seriesPoints[fields.seriesIx];
+                prevPoint = seriesPoints[prevIx];
+                BarChart.fn.updateRange.call(this, { value: prevPoint.sum }, fields);
+            } else {
+                BarChart.fn.updateRange.call(this, value, fields);
+            }
+        },
+
+        createSegments: function() {
+            var series = this.options.series;
+            var seriesPoints = this.seriesPoints;
+
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx];
+                var points = seriesPoints[seriesIx];
+
+                var prevPoint;
+                for (var pointIx = 0; pointIx < points.length; pointIx++) {
+                    var point = points[pointIx];
+                    if (point && prevPoint) {
+                        var segment = new WaterfallSegment(prevPoint, point, currentSeries);
+                        this.append(segment);
+                    }
+
+                    prevPoint = point;
+                }
+            }
+        }
+    });
+
+    var WaterfallSegment = ChartElement.extend({
+        init: function(first, second, series) {
+            var segment = this;
+
+            ChartElement.fn.init.call(segment);
+
+            segment.first = first;
+            segment.second = second;
+            segment.series = series;
+            segment.id = uniqueId();
+
+            segment.enableDiscovery();
+        },
+
+        linePoints: function() {
+            var points = [];
+            var first = this.first;
+            var firstBox = first.box;
+            var secondBox = this.second.box;
+
+            var y = first.aboveAxis ? firstBox.y1 : firstBox.y2;
+
+            points.push(
+                Point2D(firstBox.x1, y),
+                Point2D(secondBox.x2, y)
+            );
+
+            return points;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                options = segment.options,
+                series = segment.series,
+                defaults = series._defaults,
+                color = series.color;
+
+            ChartElement.fn.getViewElements.call(segment, view);
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            var line = series.line || {};
+            return [
+                view.createPolyline(segment.linePoints(), false, {
+                    id: segment.id,
+                    stroke: line.color || color,
+                    strokeWidth: line.width,
+                    strokeOpacity: line.opacity,
+                    fill: "",
+                    dashType: line.dashType,
+                    data: { modelId: segment.modelId }
+                })
+            ];
+        }
+    });
+
     var Pane = BoxElement.extend({
         init: function(options) {
             var pane = this;
@@ -8666,6 +8832,11 @@ var __meta__ = {
                     filterSeriesByType(filteredSeries, OHLC),
                     pane
                 );
+
+                plotArea.createWaterfallChart(
+                    filterSeriesByType(filteredSeries, [WATERFALL]),
+                    pane
+                );
             }
         },
 
@@ -8936,6 +9107,23 @@ var __meta__ = {
                 });
 
             plotArea.appendChart(chart, pane);
+        },
+
+        createWaterfallChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                waterfallChart = new WaterfallChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing,
+                });
+
+            plotArea.appendChart(waterfallChart, pane);
         },
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
@@ -11088,6 +11276,7 @@ var __meta__ = {
         delete seriesDefaults.polarLine;
         delete seriesDefaults.radarArea;
         delete seriesDefaults.radarLine;
+        delete seriesDefaults.waterfall;
     }
 
     function applySeriesColors(options) {
@@ -11688,7 +11877,7 @@ var __meta__ = {
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT,
-        RANGE_COLUMN, RANGE_BAR
+        RANGE_COLUMN, RANGE_BAR, WATERFALL
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -11708,8 +11897,13 @@ var __meta__ = {
         [FROM, TO], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
+    SeriesBinder.current.register(
+        [WATERFALL],
+        [VALUE], [CATEGORY, COLOR, NOTE_TEXT, SUMMARY_TYPE_FIELD]
+    );
+
     DefaultAggregates.current.register(
-        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, WATERFALL],
         { value: MAX, color: FIRST, noteText: FIRST, errorLow: MIN, errorHigh: MAX }
     );
 
