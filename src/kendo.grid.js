@@ -2061,18 +2061,12 @@ var __meta__ = {
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 
-            that.angular("compile", function(){
-                return {
-                    elements: container.get(),
-                    scopeFrom: that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
-                };
-            });
-
             that.editable = that._editContainer
                 .kendoEditable({
                     fields: fields,
                     model: model,
-                    clearContainer: false
+                    clearContainer: false,
+                    editingFor: that,
                 }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"

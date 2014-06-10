@@ -1192,12 +1192,13 @@ var __meta__ = {
             var container = this.container = view.element;
 
             this.editable = container.kendoEditable({
-                    fields: editableFields,
-                    model: model,
-                    clearContainer: false,
+                fields: editableFields,
+                model: model,
+                clearContainer: false,
+                editingFor: that.options.editingFor,
 
-                    validateOnBlur: true
-                }).data("kendoEditable");
+                validateOnBlur: true
+            }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"
             container.find("input[type=checkbox],input[type=radio]")
@@ -1419,11 +1420,12 @@ var __meta__ = {
                 }, options));
 
             var editableWidget = container.kendoEditable({
-                        fields: editableFields,
-                        model: model,
-                        clearContainer: false,
-                        validateOnBlur: true
-                    }).data("kendoEditable");
+                fields: editableFields,
+                model: model,
+                clearContainer: false,
+                validateOnBlur: true,
+                editingFor: that.options.editingFor,
+            }).data("kendoEditable");
 
             if (!that.trigger(EDIT, { container: container, model: model })) {
 
@@ -2623,12 +2625,14 @@ var __meta__ = {
 
             if (this._isMobile() && kendo.mobile.ui.Pane) {
                 editor = that._editor = new MobileEditor(this.wrapper, extend({}, this.options, {
+                    editingFor: this,
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources,
                     createButton: proxy(this._createButton, this)
                 }));
             } else {
                 editor = that._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
+                    editingFor: this,
                     createButton: proxy(this._createButton, this),
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources

@@ -671,32 +671,6 @@
     }
   });
 
-  // scheduler
-  {
-    defadvice("ui.Scheduler", AFTER, function(){
-      this.next();
-      var self = this.self;
-      var scope = self.$angular_scope;
-      if (scope) {
-        bindBefore(self, "edit", function(ev){
-          var editScope = self.$editScope = scope.$new();
-          editScope.dataItem = ev.model;
-          compile(ev.container)(editScope);
-        });
-        var destroy = function(ev){
-          var editScope = self.$editScope;
-          if (editScope && editScope !== scope) {
-            destroyScope(editScope, ev.container);
-            self.$editScope = null;
-          }
-        };
-        bindBefore(self, "cancel", destroy);
-        bindBefore(self, "save", destroy);
-        bindBefore(self, "remove", destroy);
-      }
-    });
-  }
-
   {
     // mobile/ButtonGroup does not have a "value" method, but looks
     // like it would be useful.  We provide it here.

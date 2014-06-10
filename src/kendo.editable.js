@@ -160,6 +160,9 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
 
+            if (options.editingFor) {
+                options.$angular = options.editingFor.options.$angular;
+            }
             Widget.fn.init.call(that, element, options);
             that._validateProxy = $.proxy(that._validate, that);
             that.refresh();
@@ -268,6 +271,15 @@ var __meta__ = {
                 fieldName,
                 modelField,
                 modelFields;
+
+            if (that.options.editingFor) {
+                that.angular("compile", function(){
+                    return {
+                        elements: container,
+                        scopeFrom: that.options.editingFor.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                    };
+                });
+            }
 
             if (!$.isArray(fields)) {
                 fields = [fields];
