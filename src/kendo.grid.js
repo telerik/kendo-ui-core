@@ -3614,7 +3614,7 @@ var __meta__ = {
                     var col = columns[i];
                     var th = $("<th/>");
                     if (col.field) {
-                        th.attr("data-field", col.field);
+                        th.attr(kendo.attr("field"), col.field);
                     }
                     rowheader.append(th);
                 }
