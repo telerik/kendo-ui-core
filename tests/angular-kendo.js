@@ -21,87 +21,85 @@
 
   var OPTIONS_NOW;
 
-  var factories = {
-    dataSource: (function() {
-      var types = {
-        TreeView  : 'HierarchicalDataSource',
-        Scheduler : 'SchedulerDataSource',
-        PanelBar  : '$PLAIN',
-        Menu      : "$PLAIN",
-      };
-      var toDataSource = function(dataSource, type) {
-        if (type == '$PLAIN')
-          return dataSource;
-        return kendo.data[type].create(dataSource);
-      };
-      return function(scope, element, attrs, role) {
-        var type = types[role] || 'DataSource';
-        var ds = toDataSource(scope.$eval(attrs.kDataSource), type);
+  var createDataSource = (function() {
+    var types = {
+      TreeView  : 'HierarchicalDataSource',
+      Scheduler : 'SchedulerDataSource',
+      PanelBar  : '$PLAIN',
+      Menu      : "$PLAIN",
+    };
+    var toDataSource = function(dataSource, type) {
+      if (type == '$PLAIN')
+        return dataSource;
+      return kendo.data[type].create(dataSource);
+    };
+    return function(scope, element, attrs, role) {
+      var type = types[role] || 'DataSource';
+      var ds = toDataSource(scope.$eval(attrs.kDataSource), type);
 
-        // not recursive -- this triggers when the whole data source changed
-        scope.$watch(attrs.kDataSource, function(mew, old){
-          if (mew !== old) {
-            var ds = toDataSource(mew, type);
-            var widget = kendoWidgetInstance(element);
-            if (widget && typeof widget.setDataSource == "function") {
-              widget.setDataSource(ds);
-            }
+      // not recursive -- this triggers when the whole data source changed
+      scope.$watch(attrs.kDataSource, function(mew, old){
+        if (mew !== old) {
+          var ds = toDataSource(mew, type);
+          var widget = kendoWidgetInstance(element);
+          if (widget && typeof widget.setDataSource == "function") {
+            widget.setDataSource(ds);
           }
-        });
-        return ds;
-      };
-    }()),
-
-    widget: (function() {
-      var ignoredAttributes = {
-        kDataSource : true,
-        kOptions    : true,
-        kRebind     : true,
-        kNgModel    : true,
-        kNgDelay    : true,
-      };
-      return function(scope, element, attrs, widget, origAttr) {
-        var role = widget.replace(/^kendo/, '');
-        var options = angular.extend({}, scope.$eval(attrs.kOptions));
-        $.each(attrs, function(name, value) {
-          if (!ignoredAttributes[name]) {
-            var match = name.match(/^k(On)?([A-Z].*)/);
-            if (match) {
-              var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
-              if (match[1]
-                  && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
-                 ) {
-                options[optionName] = value;
-              } else {
-                if (name == "kOnLabel")
-                  optionName = "onLabel"; // XXX: that's awful.
-                options[optionName] = angular.copy(scope.$eval(value));
-                if (options[optionName] === undefined && value.match(/^\w*$/)) {
-                  log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
-                }
-              }
-            }
-          }
-        });
-
-        // parse the datasource attribute
-        if (attrs.kDataSource) {
-          options.dataSource = factories.dataSource(scope, element, attrs, role);
         }
+      });
+      return ds;
+    };
+  }());
 
-        options.$angular = true;
-        var ctor = $(element)[widget];
-        if (!ctor) {
-          console.error("Could not find: " + widget);
-          return null;
-        }
-        var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
-        exposeWidget(object, scope, attrs, widget, origAttr);
-        scope.$emit("kendoWidgetCreated", object);
-        return object;
-      };
-    }())
+  var ignoredAttributes = {
+    kDataSource : true,
+    kOptions    : true,
+    kRebind     : true,
+    kNgModel    : true,
+    kNgDelay    : true,
   };
+
+  function createWidget(scope, element, attrs, widget, origAttr) {
+    var role = widget.replace(/^kendo/, '');
+    var options = angular.extend({}, scope.$eval(attrs.kOptions));
+    $.each(attrs, function(name, value) {
+      if (!ignoredAttributes[name]) {
+        var match = name.match(/^k(On)?([A-Z].*)/);
+        if (match) {
+          var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
+          if (match[1]
+              && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
+             ) {
+            options[optionName] = value;
+          } else {
+            if (name == "kOnLabel")
+              optionName = "onLabel"; // XXX: that's awful.
+            options[optionName] = angular.copy(scope.$eval(value));
+            if (options[optionName] === undefined && value.match(/^\w*$/)) {
+              log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
+            }
+          }
+        }
+      }
+    });
+
+    // parse the datasource attribute
+    if (attrs.kDataSource) {
+      options.dataSource = createDataSource(scope, element, attrs, role);
+    }
+
+    options.$angular = [ scope ]; // deepExtend in kendo.core (used in Editor) will fail with stack
+                                  // overflow if we don't put it in an array :-\
+    var ctor = $(element)[widget];
+    if (!ctor) {
+      console.error("Could not find: " + widget);
+      return null;
+    }
+    var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
+    exposeWidget(object, scope, attrs, widget, origAttr);
+    scope.$emit("kendoWidgetCreated", object);
+    return object;
+  }
 
   function exposeWidget(widget, scope, attrs, kendoWidget, origAttr) {
     if (attrs[origAttr]) {
@@ -230,7 +228,7 @@
               }, true); // watch for object equality. Use native or simple values.
             }
 
-            var widget = factories.widget(scope, element, attrs, role, origAttr);
+            var widget = createWidget(scope, element, attrs, role, origAttr);
             setupBindings();
 
             var prev_destroy = null;
@@ -529,7 +527,7 @@
 
   defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, get){
     var self = this.self;
-    var scope = angular.element(self.element).scope();
+    var scope = self.$angular_scope || angular.element(self.element).scope();
     if (scope) {
       var x = get(), elements = x.elements, data = x.data;
       if (elements.length > 0) {
@@ -574,6 +572,7 @@
     OPTIONS_NOW = null;
     var self = this.self;
     if (options && options.$angular) {
+      self.$angular_scope = options.$angular[0];
       // call before/after hooks only for widgets instantiated by angular-kendo
       self.$angular_beforeCreate(element, options);
       this.next();
@@ -587,7 +586,7 @@
   defadvice("ui.Widget", BEFORE, function(element, options) {
     var self = this.self;
     if (options && !$.isArray(options)) {
-      var scope = angular.element(element).scope();
+      var scope = self.$angular_scope;
       for (var i = self.events.length; --i >= 0;) {
         var event = self.events[i];
         var handler = options[event];
@@ -672,26 +671,12 @@
     }
   });
 
-  defadvice("ui.Window", AFTER, function(){
-    this.next();
-    var self = this.self;
-    var scope = angular.element(self.element).scope();
-    if (!scope) return;
-    bindBefore(self, "refresh", function(){
-      var content = self.wrapper.children(".k-window-content");
-      var scrollContainer = content.children(".km-scroll-container");
-      content = scrollContainer[0] ? scrollContainer : content;
-      compile(content.children())(scope);
-      digest(scope);
-    });
-  });
-
   // scheduler
   {
     defadvice("ui.Scheduler", AFTER, function(){
       this.next();
       var self = this.self;
-      var scope = angular.element(self.element).scope();
+      var scope = self.$angular_scope;
       if (scope) {
         bindBefore(self, "edit", function(ev){
           var editScope = self.$editScope = scope.$new();
