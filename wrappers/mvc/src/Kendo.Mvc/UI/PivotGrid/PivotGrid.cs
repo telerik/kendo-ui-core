@@ -24,6 +24,8 @@
             DataSource.Type = DataSourceType.Custom;
 
             UrlGenerator = urlGenerator;
+
+            AutoBind = true;
         }
 
         public PivotGridDataSource DataSource
@@ -38,17 +40,15 @@
             private set;
         }
 
-        public bool? AutoBind { get; set; }
+        public bool AutoBind { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
 
-            var autoBind = DataSource.Type != DataSourceType.Server && AutoBind.GetValueOrDefault(true);
-
-            if (autoBind == false)
+            if (AutoBind == false)
             {
-                options["autoBind"] = autoBind;
+                options["autoBind"] = AutoBind;
             }
 
             options["dataSource"] = DataSource.ToJson();

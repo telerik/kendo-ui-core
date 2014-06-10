@@ -33,37 +33,6 @@
         }
 
         /// <summary>
-        /// Sets the total number of records in the data source. Required during Custom binding.
-        /// </summary>
-        /// <param name="total">Number of records</param>
-        public PivotGridXmlaDataSourceBuilder Total(int total)
-        {
-            dataSource.Total = total;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the number of records displayed on a single page.
-        /// </summary>
-        /// <param name="pageSize"></param>
-        public PivotGridXmlaDataSourceBuilder PageSize(int pageSize)
-        {
-            dataSource.PageSize = pageSize;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the page of the DataSource.
-        /// </summary>
-        /// <param name="page"></param>
-        public PivotGridXmlaDataSourceBuilder Page(int page)
-        {
-            dataSource.Page = page;
-            return this;
-        }
-
-        /// <summary>
         /// Configures the transport of the Xmla DataSource
         /// </summary>
         public PivotGridXmlaDataSourceBuilder Transport(Action<PivotGridDataSourceTransportBuilder> configurator)
