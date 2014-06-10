@@ -70,4 +70,15 @@
 
         equal(buttonObject.options.enable, false);
     });
+
+    test("enable(false) blurs the à span button", function () {
+        var buttonObject = getSpanButton().kendoButton({
+            enable: true
+        }).data("kendoButton");
+
+        buttonObject.element[0].focus();
+        buttonObject.enable(false);
+
+        notEqual(document.activeElement, buttonObject.element[0]);
+    });
 })();
