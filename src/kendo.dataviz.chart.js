@@ -3513,12 +3513,10 @@ var __meta__ = {
 
             chart.updateRange(data.valueFields, categoryIx, series);
 
-            var point = chart.createPoint(data, category, categoryIx, series, seriesIx);
+            var point = chart.createPoint(data, fields);
             if (point) {
-                point.category = category;
-                point.categoryIx = categoryIx;
-                point.series = series;
-                point.seriesIx = seriesIx;
+                $.extend(point, fields);
+
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
                 point.noteText = data.fields.noteText;
@@ -3753,17 +3751,21 @@ var __meta__ = {
             return limits;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = chart.pointValue(data),
-                options = chart.options,
-                children = chart.children,
-                isStacked = chart.options.isStacked,
-                point,
-                pointType = chart.pointType(),
-                pointOptions,
-                cluster,
-                clusterType = chart.clusterType();
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = chart.pointValue(data);
+            var options = chart.options;
+            var children = chart.children;
+            var isStacked = chart.options.isStacked;
+            var point;
+            var pointType = chart.pointType();
+            var pointOptions;
+            var cluster;
+            var clusterType = chart.clusterType();
 
             pointOptions = this.pointOptions(series, seriesIx);
 
@@ -3972,14 +3974,18 @@ var __meta__ = {
             return [axisCrossingValue, point.value.current || axisCrossingValue];
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields,
-                options = chart.options,
-                children = chart.children,
-                bullet,
-                bulletOptions,
-                cluster;
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields;
+            var options = chart.options;
+            var children = chart.children;
+            var bullet;
+            var bulletOptions;
+            var cluster;
 
             bulletOptions = deepExtend({
                 vertical: !options.invertAxes,
@@ -4824,18 +4830,22 @@ var __meta__ = {
             return LinePoint;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields.value,
-                options = chart.options,
-                isStacked = options.isStacked,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                missingValues = chart.seriesMissingValues(series),
-                stackPoint,
-                plotValue = 0,
-                fields = data.fields,
-                point,
-                pointOptions;
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields.value;
+            var options = chart.options;
+            var isStacked = options.isStacked;
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var missingValues = chart.seriesMissingValues(series);
+            var stackPoint;
+            var plotValue = 0;
+            var fields = data.fields;
+            var point;
+            var pointOptions;
 
             if (!defined(value) || value === null) {
                 if (missingValues === ZERO) {
@@ -6009,8 +6019,7 @@ var __meta__ = {
                 }
 
                 point = chart.createPoint(
-                    data, category, categoryIx,
-                    deepExtend({}, series, { color: pointColor })
+                    data, deepExtend(fields, { series: { color: pointColor } })
                 );
             }
 
@@ -6046,11 +6055,15 @@ var __meta__ = {
             return Candlestick;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields,
-                pointOptions = deepExtend({}, series),
-                pointType = chart.pointType();
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields;
+            var pointOptions = deepExtend({}, series);
+            var pointType = chart.pointType();
 
             pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
@@ -6215,8 +6228,7 @@ var __meta__ = {
 
             if (hasValue) {
                 point = chart.createPoint(
-                    data, category, categoryIx,
-                    deepExtend({}, series, { color: pointColor })
+                    data, deepExtend(fields, { series: { color: pointColor } })
                 );
             }
 
