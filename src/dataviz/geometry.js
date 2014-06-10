@@ -70,6 +70,15 @@
             );
         },
 
+        translate: function(x, y) {
+            this.x += x;
+            this.y += y;
+
+            this.geometryChange();
+
+            return this;
+        },
+
         multiply: function(a) {
             this.x *= a;
             this.y *= a;

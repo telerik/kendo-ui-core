@@ -216,36 +216,20 @@
         deepEqual(point.multiplyCopy(2), new Point(20, 40));
     });
 
-    test("subtract x and y", function() {
-        deepEqual(point.subtract(new Point(5, 10)), new Point(5, 10));
+    test("translates x and y", function() {
+        deepEqual(point.translate(5, 10), new Point(15, 30));
     });
 
-    test("subtract returns point", function() {
-        deepEqual(point.subtract(new Point(5, 10)), point);
+    test("translate returns point", function() {
+        deepEqual(point.translate(5, 10), point);
     });
 
-    test("subtract triggers geometryChange", function() {
+    test("translate triggers geometryChange", function() {
         point.observer = {
             geometryChange: function() { ok(true); }
         };
 
-        point.subtract(new Point(5, 10));
-    });
-
-    test("add x and y", function() {
-        deepEqual(point.add(new Point(5, 10)), new Point(15, 30));
-    });
-
-    test("add returns point", function() {
-        deepEqual(point.add(new Point(5, 10)), point);
-    });
-
-    test("add triggers geometryChange", function() {
-        point.observer = {
-            geometryChange: function() { ok(true); }
-        };
-
-        point.add(new Point(5, 10));
+        point.translate(5, 10);
     });
 
     test("transform applies matrix", function() {
