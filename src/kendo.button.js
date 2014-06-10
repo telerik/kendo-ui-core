@@ -163,6 +163,7 @@ var __meta__ = {
             element.toggleClass(DISABLEDSTATE, !enable)
                    .attr("aria-disabled", !enable)
                    .attr(DISABLED, !enable);
+            element.blur();
         }
     });
 
