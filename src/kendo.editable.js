@@ -244,6 +244,10 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
+            that.angular("cleanup", function(){
+                return { elements: that.element }
+            });
+
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
@@ -276,7 +280,7 @@ var __meta__ = {
                 that.angular("compile", function(){
                     return {
                         elements: container,
-                        scopeFrom: that.options.target.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                        data: [ { dataItem: model } ],
                     };
                 });
             }

@@ -168,14 +168,19 @@
         $scope.options = {
             dataSource: $scope.data,
             template: "<span>{{dataItem.text}} {{dataItem.id}}</span>",
-            altTemplate: "<span>{{dataItem.id}} {{dataItem.text}}</span>"
+            altTemplate: "<span>{{dataItem.id}} {{dataItem.text}}</span>",
+            editTemplate: "<div class='my-editable'>|{{dataItem.text}}|</div>",
+            edit: function(e) {
+                equal(e.item.text(), "|Foo|");
+            }
         };
         $("<div kendo-listview='list' k-options='options'></div>").appendTo(dom);
-        expect(2);
+        expect(3);
         $scope.$on("kendoRendered", function(){
             var items = $scope.list.items();
             equal(items.eq(0).text(), "Foo 1");
             equal(items.eq(1).text(), "2 Bar");
+            $scope.list.edit(items.eq(0));
             start();
         });
     });

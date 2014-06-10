@@ -559,7 +559,12 @@ var __meta__ = {
             index = item.index();
             item.replaceWith(that.editTemplate(data));
             container = that.items().eq(index).addClass(KEDITITEM).attr(kendo.attr("uid"), data.uid);
-            that.editable = container.kendoEditable({ model: data, clearContainer: false, errorTemplate: false }).data("kendoEditable");
+            that.editable = container.kendoEditable({
+                model: data,
+                clearContainer: false,
+                errorTemplate: false,
+                target: that,
+            }).data("kendoEditable");
 
             that.trigger(EDIT, { model: data, item: container });
        },
