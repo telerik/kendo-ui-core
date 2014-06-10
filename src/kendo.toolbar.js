@@ -541,9 +541,9 @@ var __meta__ = {
                 e.preventDefault();
 
                 if (popup.visible()) {
-                    isDefaultPrevented = this.trigger(CLOSE, { target: splitButton, popup: popup });
+                    isDefaultPrevented = this.trigger(CLOSE, { target: splitButton });
                 } else {
-                    isDefaultPrevented = this.trigger(OPEN, { target: splitButton, popup: popup });
+                    isDefaultPrevented = this.trigger(OPEN, { target: splitButton });
                 }
 
                 if (!isDefaultPrevented) {
