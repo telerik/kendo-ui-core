@@ -107,6 +107,7 @@
     - :name: center
       :default: 'null'
       :type: kendo.dataviz.map.Location
+      :serialize_to_array: true
 
     - :name: markers.marker
       :type: kendo.dataviz.map.Marker
@@ -123,6 +124,7 @@
 
     - :name: markers.location
       :type: kendo.dataviz.map.Location
+      :serialize_to_array: true
 
     - :name: layers.subdomains
       :type: stringArray
@@ -134,6 +136,7 @@
 
     - :name: layers.extent
       :type: kendo.dataviz.map.Extent
+      :serialize_to_array: true
 
     - :name: layers.minZoom
       :type: Number

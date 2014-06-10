@@ -68,6 +68,10 @@ module CodeGen
             if (!convertable.<%= csharp_name %>.IsDefault)
                 AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
+            CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE = ERB.new('
+            if (!convertable.<%= csharp_name %>.IsDefault)
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToArray(), null);')
+
             CONVERTER_ARRAY_TEMPLATE = ERB.new('
             if (convertable.<%= csharp_name %>.Count != 0)
                 AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ItemsList, null);')
@@ -299,6 +303,8 @@ module CodeGen
             class CompositeOption < CodeGen::CompositeOption
                 include Options
 
+                attr_accessor :serialize_to_array
+
                 def csharp_name
                     if COMPOSITE_PROPERTY_WITHOUT_SETTINGS.include?(name)
                         name.pascalize
@@ -327,7 +333,11 @@ module CodeGen
                 end
 
                 def to_converter
-                    CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
+                    if (serialize_to_array)
+                      CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding)
+                    else
+                      CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
+                    end
                 end
 
                 def to_declaration
@@ -457,6 +467,7 @@ module CodeGen
                             existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
                             existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
                             existing_option.csharp_datafield = option[:default] unless option[:datafield].nil? || option[:datafield] == ''
+                            existing_option.serialize_to_array = option[:serialize_to_array] unless option[:serialize_to_array].nil?
                         else
                             option[:remove_existing] = existing_option.nil?
                             add_option(option)
@@ -685,10 +696,14 @@ module CodeGen
 
                     Generator.write_file(filename, composite_content, '[ Properties ]')
                     Generator.write_file(filename, is_default_content, '[ IsDefault ]')
+                    if (composite.serialize_to_array)
+                      to_array_content = write_to_array(composite.options)
+                      Generator.write_file(filename, to_array_content, '[ ToArray ]')
+                    end
 
                     write_viewstate(composite)
 
-                    write_composite_option_converter_file(composite) unless composite.name.include?('clientEvents')
+                    write_composite_option_converter_file(composite) unless composite.name.include?('clientEvents') || composite.serialize_to_array
                 end
 
                 def write_is_default(options)
@@ -703,6 +718,17 @@ module CodeGen
                         result += index < options.length - 1 ? " &&\n" : ';'
                     end
                     result
+                end
+
+                def write_to_array(options)
+                  result = "        internal double[] ToArray()\n        {\n            return new double[] {"
+                  options.each_index do |index|
+                    option = options[index]
+                    result += " #{option.csharp_name}"
+                    result += ", " unless index == options.length - 1
+                  end
+                  result += " };\n        }"
+                  result
                 end
 
                 def write_converter_options(options)

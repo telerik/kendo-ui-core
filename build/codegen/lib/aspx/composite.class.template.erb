@@ -62,6 +62,9 @@ namespace <%= csharp_namespace %>
                     #region [ IsDefault ]
                     #endregion [ IsDefault ]
             }
-        }
+        }<% if serialize_to_array %>
+
+        #region [ ToArray ]
+        #endregion [ ToArray ]<% end %>
     }
 }
