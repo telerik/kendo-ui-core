@@ -13,15 +13,31 @@
 
                 if (selection.length) {
                     var dataItem = gantt.dataItem(selection);
-                    kendoConsole.log("Gantt change :: " + dataItem.title);
+                    kendoConsole.log("Gantt selection change :: " + dataItem.title);
                 }
             }
 
-            function onDataBound(arg) {
+            function onAdd() {
+                kendoConsole.log("Task added");
+            }
+
+            function onEdit(arg) {
+                kendoConsole.log("Task about to be edited :: " + arg.task.title);
+            }
+
+            function onRemove(arg) {
+                kendoConsole.log("Task removed :: " + arg.task.title);
+            }
+
+            function onSave(arg) {
+                kendoConsole.log("Task saved :: " + arg.task.title);
+            }
+
+            function onDataBound() {
                 kendoConsole.log("Gantt data bound");
             }
 
-            function onDataBinding(arg) {
+            function onDataBinding() {
                 kendoConsole.log("Gantt data binding");
             }
 
@@ -116,9 +132,9 @@
                 ],
                 columns: [
                     { field: "id", title: "ID", width: 50 },
-                    { field: "title", title: "Title" },
-                    { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy HH:mm}" },
-                    { field: "end", title: "End Time", format: "{0:MM/dd/yyyy HH:mm}" }
+                    { field: "title", title: "Title", editable: true },
+                    { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100 },
+                    { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100 }
                 ],
                 height: 700,
 
@@ -128,11 +144,12 @@
                 showWorkDays: false,
                 hourSpan: 1,
 
-                snap: false,
-
                 dataBound: onDataBound,
                 dataBinding: onDataBinding,
-                change: onChange
+                change: onChange,
+                add: onAdd,
+                edit: onEdit,
+                remove: onRemove
             }).data("kendoGantt");
             });
         </script>
