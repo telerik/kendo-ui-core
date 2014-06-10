@@ -76,7 +76,7 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             ok($scope.window instanceof kendo.ui.Window);
-            ok($scope.window.title() == "Reference");
+            equal($scope.window.title(), "Reference");
             start();
         });
     });
@@ -88,8 +88,8 @@
         $scope.$on("kendoRendered", function(){
             w1 = w1.data("kendoWindow");
             w2 = w2.data("kendoWindow");
-            ok(w1.title() === $scope.windowOptions.title);
-            ok(w2.title() === $scope.windowOptions.title);
+            equal(w1.title(), $scope.windowOptions.title);
+            equal(w2.title(), $scope.windowOptions.title);
             start();
         });
     });
@@ -140,8 +140,8 @@
             $scope.autocomplete.search();
             input.press(kendo.keys.DOWN);
             input.press(kendo.keys.ENTER);
-            ok(input.val() == "Bar");
-            ok($scope.autocomplete.ul.children(":first").text() == "| Bar |");
+            equal(input.val(), "Bar");
+            equal($scope.autocomplete.ul.children(":first").text(), "| Bar |");
             start();
         });
     });
@@ -158,8 +158,8 @@
         $scope.$on("kendoRendered", function(){
             $scope.combobox.open();
             var items = $scope.combobox.items();
-            ok($(items[0]).text() == "| Foo |");
-            ok($(items[1]).text() == "| Bar |");
+            equal($(items[0]).text(), "| Foo |");
+            equal($(items[1]).text(), "| Bar |");
             start();
         });
     });
@@ -174,8 +174,8 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             var items = $scope.list.items();
-            ok(items.eq(0).text() == "Foo 1");
-            ok(items.eq(1).text() == "2 Bar");
+            equal(items.eq(0).text(), "Foo 1");
+            equal(items.eq(1).text(), "2 Bar");
             start();
         });
     });
@@ -191,10 +191,10 @@
         expect(3);
         $scope.$on("kendoRendered", function(){
             var items = $scope.list.items();
-            ok($(items[0]).text() == "Foo 1");
-            ok($(items[1]).text() == "Bar 2");
+            equal($(items[0]).text(), "Foo 1");
+            equal($(items[1]).text(), "Bar 2");
             $scope.list.value(2);
-            ok($scope.list.span.text() == "2 Bar");
+            equal($scope.list.span.text(), "2 Bar");
             start();
         });
     });
@@ -217,10 +217,10 @@
         expect(4);
         $scope.$on("kendoRendered", function(){
             var rows = $("tr", $scope.grid.tbody);
-            ok($($scope.grid.thead[0].rows[0].cells[0]).text() == "6");
-            ok($($scope.grid.element.find(".k-footer-template")[0].cells[0]).text() == "8");
-            ok(rows.eq(0).text() == "|Foo||1|");
-            ok(rows.eq(1).text() == "|Bar||2|");
+            equal($($scope.grid.thead[0].rows[0].cells[0]).text(), "6");
+            equal($($scope.grid.element.find(".k-footer-template")[0].cells[0]).text(), "8");
+            equal(rows.eq(0).text(), "|Foo||1|");
+            equal(rows.eq(1).text(), "|Bar||2|");
             start();
         });
     });
@@ -271,17 +271,17 @@
             var tbody = grid.tbody;
             var rows = tbody.find("tr");
 
-            ok(el.find('.command-template').eq(0).text() == "Foo/1");
-            ok(el.find('.command-template').eq(1).text() == "Bar/2");
+            equal(el.find('.command-template').eq(0).text(), "Foo/1");
+            equal(el.find('.command-template').eq(1).text(), "Bar/2");
 
             grid.editRow(rows.eq(0));
             grid.cancelRow();
-            ok(rows.eq(0).find("td").eq(0).text() == "|Foo|");
-            ok(rows.eq(0).find("td").eq(1).text() == "|1|");
+            equal(rows.eq(0).find("td").eq(0).text(), "|Foo|");
+            equal(rows.eq(0).find("td").eq(1).text(), "|1|");
 
             grid.editCell(rows.eq(0).find("td").eq(0));
             grid.closeCell();
-            ok(rows.eq(0).find("td").eq(0).text() == "|Foo|");
+            equal(rows.eq(0).find("td").eq(0).text(), "|Foo|");
 
             start();
         });
@@ -308,7 +308,7 @@
             var grid = $scope.grid;
             grid.editRow(grid.tbody.find("tr:first"));
             var el = grid._editContainer.find(".my-editable");
-            ok(el.text() == "Foo/1");
+            equal(el.text(), "Foo/1");
             grid.cancelRow();
             start();
         });
@@ -324,8 +324,8 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             var items = $scope.grid.items();
-            ok(items.eq(0).text() == "1. Foo");
-            ok(items.eq(1).text() == "2. Bar");
+            equal(items.eq(0).text(), "1. Foo");
+            equal(items.eq(1).text(), "2. Bar");
             start();
         });
     });
@@ -347,8 +347,8 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             var items = $scope.grid.items();
-            ok($scope.grid.tbody.text() == "|1||2|");
-            ok($scope.grid.lockedContent.text() == "|Foo||Bar|");
+            equal($scope.grid.tbody.text(), "|1||2|");
+            equal($scope.grid.lockedContent.text(), "|Foo||Bar|");
             start();
         });
     });
@@ -379,11 +379,11 @@
             var toolbar = $scope.grid.element.find(".k-grid-toolbar .my-toolbar");
             var header = $scope.grid.element.find(".k-grid-header");
             var footer = $scope.grid.element.find(".k-grid-footer");
-            ok(toolbar.text() == "6");
-            ok(header.find(".my-header").eq(0).text() == "text");
-            ok(header.find(".my-header").eq(1).text() == "id");
-            ok(footer.find(".my-footer").eq(0).text() == "text");
-            ok(footer.find(".my-footer").eq(1).text() == "3");
+            equal(toolbar.text(), "6");
+            equal(header.find(".my-header").eq(0).text(), "text");
+            equal(header.find(".my-header").eq(1).text(), "id");
+            equal(footer.find(".my-footer").eq(0).text(), "text");
+            equal(footer.find(".my-footer").eq(1).text(), "3");
             start();
         });
     });
@@ -400,7 +400,7 @@
             detailTemplate: "<div class='my-detail'>{{ dataItem.text }}/{{ dataItem.id }}</div>",
             detailInit: function(ev) {
                 var div = ev.detailCell.find(".my-detail");
-                ok( div.text() == (ev.data.text + "/" + ev.data.id) );
+                equal( div.text(), (ev.data.text + "/" + ev.data.id) );
                 if (--count == 0) start();
             },
             dataBound: function() {
@@ -421,8 +421,8 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             var items = $scope.tree.items();
-            ok(items.eq(0).text() == "Foo | 1");
-            ok(items.eq(1).text() == "Bar | 2");
+            equal(items.eq(0).text(), "Foo | 1");
+            equal(items.eq(1).text(), "Bar | 2");
             start();
         });
     });
@@ -443,7 +443,7 @@
                 pageX: pos.left + 50,
                 pageY: pos.top + 50
             });
-            ok($scope.tree.dragging._draggable.hint.text() == "Foo/1");
+            equal($scope.tree.dragging._draggable.hint.text(), "Foo/1");
             start();
         });
     });
@@ -458,7 +458,7 @@
         expect(1);
         $scope.$on("kendoRendered", function(){
             var el = $scope.editor.toolbar.element.find(".my-toolbar");
-            ok(el.text() == "6");
+            equal(el.text(), "6");
             start();
         });
     });
@@ -472,7 +472,7 @@
         $("<ul kendo-menu='menu' k-options='options'></ul>").appendTo(dom);
         expect(1);
         $scope.$on("kendoRendered", function(){
-            ok($scope.menu.wrapper.find("li:first").text() == "6");
+            equal($scope.menu.wrapper.find("li:first").text(), "6");
             start();
         });
     });
@@ -483,7 +483,7 @@
                 "ajax-template.html"
             ],
             contentLoad: function(ev) {
-                ok(dom.find("div.content").text() == $scope.hello);
+                equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
         };
@@ -500,7 +500,7 @@
         $scope.options = {
             contentUrls: [ "ajax-template.html" ],
             contentLoad: function(ev) {
-                ok(dom.find("div.content").text() == $scope.hello);
+                equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
         };
@@ -515,7 +515,7 @@
         $scope.options = {
             panes: [ null, { contentUrl: "ajax-template.html" } ],
             contentLoad: function(ev) {
-                ok(dom.find("div.content").text() == $scope.hello);
+                equal(dom.find("div.content").text(), $scope.hello);
                 start();
             }
         };
@@ -542,6 +542,12 @@
             date: new Date("2013/6/6"),
             eventTemplate: "<div class='my-event'>|{{dataItem.title}}|</div>",
             allDayEventTemplate: "<div class='my-allday-event'>|{{dataItem.title}}|</div>",
+            editable: {
+                template: "<div class='my-editable'>{{dataItem.title}}</div>"
+            },
+            edit: function(e) {
+                equal(e.container.find(".my-editable").text(), "Interview");
+            },
             dataSource: [
                 {
                     id: 1,
@@ -570,7 +576,7 @@
             ]
         };
         $("<div kendo-scheduler='scheduler' k-options='options'></div>").appendTo(dom);
-        expect(4);
+        expect(5);
         $scope.$on("kendoRendered", function(){
             var scheduler = $scope.scheduler;
             function shouldDestroy(sel) {
@@ -581,6 +587,7 @@
             }
             equal(scheduler.element.find(".my-event").text(), "|Foo|");
             equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
+            scheduler.editEvent(scheduler.dataSource.at(0));
             shouldDestroy(".my-event");
             shouldDestroy(".my-allday-event");
             scheduler.date(new Date("2014/6/6 10:00 AM"));
@@ -629,8 +636,8 @@
         expect(2);
         $scope.$on("kendoRendered", function(){
             var items = $scope.list.element.find(".my-item");
-            ok(items.eq(0).text() == "1/Foo");
-            ok(items.eq(1).text() == "2/Bar");
+            equal(items.eq(0).text(), "1/Foo");
+            equal(items.eq(1).text(), "2/Bar");
             start();
         });
     });
