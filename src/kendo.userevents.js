@@ -556,6 +556,10 @@ var __meta__ = {
         }
     });
 
+    UserEvents.defaultThreshold = function(value) {
+        DEFAULT_THRESHOLD = value;
+    }
+
     UserEvents.minHold = function(value) {
         DEFAULT_MIN_HOLD = value;
     };
