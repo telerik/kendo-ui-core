@@ -7541,9 +7541,6 @@ var __meta__ = {
                 fields.isSum = true;
             }
 
-            console.log(kendo.format("sum: {0}, partial sum: {1}, value: {2}",
-                                     fields.sum, fields.partialSum, data.valueFields.value));
-
             BarChart.fn.addValue.call(this, data, fields);
         },
 
@@ -7606,8 +7603,13 @@ var __meta__ = {
             segment.second = second;
             segment.series = series;
             segment.id = uniqueId();
+        },
 
-            segment.enableDiscovery();
+        options: {
+            animation: {
+                type: FADEIN,
+                delay: INITIAL_ANIMATION_DURATION
+            }
         },
 
         linePoints: function() {
@@ -7643,12 +7645,12 @@ var __meta__ = {
             return [
                 view.createPolyline(segment.linePoints(), false, {
                     id: segment.id,
+                    animation: options.animation,
                     stroke: line.color || color,
                     strokeWidth: line.width,
                     strokeOpacity: line.opacity,
                     fill: "",
-                    dashType: line.dashType,
-                    data: { modelId: segment.modelId }
+                    dashType: line.dashType
                 })
             ];
         }
