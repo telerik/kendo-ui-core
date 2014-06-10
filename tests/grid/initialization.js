@@ -588,7 +588,7 @@
             columns: ["foo"],
         });
 
-        equal(grid.thead.find("tr:eq(1)").attr("role"), "rowfilter");
+        equal(grid.thead.find("tr:eq(1)").attr("class"), "k-rowfilter");
     });
 
     test("rowfilter with detailTemplate renders detail cell th", function() {
@@ -602,7 +602,7 @@
             }
         });
 
-        equal(grid.thead.find("[role=rowfilter]").find(".k-hierarchy-cell").length, 1);
+        equal(grid.thead.find(".k-rowfilter").find(".k-hierarchy-cell").length, 1);
     });
 
     test("rowfilter with detail cell is not rendered when no details", function() {
@@ -615,7 +615,7 @@
             }
         });
 
-        equal(grid.thead.find("[role=rowfilter]").find(".k-hierarchy-cell").length, 0);
+        equal(grid.thead.find(".k-rowfilter").find(".k-hierarchy-cell").length, 0);
     });
 
     test("rowfilter creates group cells when grid has groups", function() {
@@ -638,7 +638,7 @@
             }
         });
 
-        equal(grid.thead.find("[role=rowfilter]").find(".k-group-cell").length, 2);
+        equal(grid.thead.find(".k-rowfilter").find(".k-group-cell").length, 2);
     });
 
     test("rowfilter creates th cells for each column", function() {
@@ -655,7 +655,7 @@
             }
         });
 
-        equal(grid.thead.find("[role=rowfilter]").find("th").length, 3);
+        equal(grid.thead.find(".k-rowfilter").find("th").length, 3);
     });
 
     test("rowfilter creates th cells and sets attributes for bound columns", function() {
@@ -672,7 +672,7 @@
             }
         });
 
-        var rowfilter = grid.thead.find("[role=rowfilter]");
+        var rowfilter = grid.thead.find(".k-rowfilter");
         var ths = rowfilter.find("th");
         equal(ths.length, 3);
         equal(ths.eq(0).attr("data-field"), "foo");

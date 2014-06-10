@@ -195,7 +195,7 @@
 
         grid.reorderColumn(0, grid.columns[1]);
 
-        var th = grid.thead.find("[role=rowfilter] th");
+        var th = grid.thead.find(".k-rowfilter th");
         equal(th.length, 2);
         equal(th.eq(0).data("field"), "bar");
         equal(th.eq(1).data("field"), "foo");
@@ -657,7 +657,7 @@
 
         var th = div.find("th");
         equal(th.length, 8, "4 standard headers and 4 rowfilter headers");
-        var rowheadercells = div.find("[role=rowfilter] th");
+        var rowheadercells = div.find(".k-rowfilter th");
         equal(rowheadercells.eq(0).data("field"), "bax");
         equal(rowheadercells.eq(1).data("field"), "bar");
         equal(rowheadercells.eq(2).data("field"), "foo");
@@ -861,8 +861,8 @@
         });
 
         grid.reorderColumn(0, grid.columns[1], false);
-        equal(grid.element.find(".k-grid-header-locked [role=rowfilter] th[data-field]").length, 2);
-        equal(grid.element.find(".k-grid-header-wrap").find("[role=rowfilter] th[data-field]").length,  2);
+        equal(grid.element.find(".k-grid-header-locked .k-rowfilter th[data-field]").length, 2);
+        equal(grid.element.find(".k-grid-header-wrap").find(".k-rowfilter th[data-field]").length,  2);
     });
 
     test("move grouping header cell to locked header when grouping is enabled", function() {
@@ -883,8 +883,8 @@
         });
 
         grid.reorderColumn(0, grid.columns[1], false);
-        equal(grid.element.find(".k-grid-header-locked [role=rowfilter] th.k-group-cell").length, 1);
-        equal(grid.element.find(".k-grid-header-wrap [role=rowfilter] th.k-group-cell").length,  0);
+        equal(grid.element.find(".k-grid-header-locked .k-rowfilter th.k-group-cell").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap .k-rowfilter th.k-group-cell").length,  0);
     });
 
     test("move to non-locked columns with grouping", function() {

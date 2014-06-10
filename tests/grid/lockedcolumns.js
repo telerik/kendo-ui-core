@@ -59,7 +59,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 2);
-        equal(header.find("tr[role=rowfilter]").length, 1);
+        equal(header.find("tr.k-rowfilter").length, 1);
     });
 
     test("rowfilter tr is not append to locked header when rowfilter is not enabled", function() {
@@ -69,7 +69,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 1);
-        equal(header.find("tr[role=rowfilter]").length, 0);
+        equal(header.find("tr.k-rowfilter").length, 0);
     });
 
     test("rowfilter tr is append to locked header when rowfilter is enabled", function() {
@@ -82,7 +82,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 2);
-        equal(header.find("tr[role=rowfilter]").length, 1);
+        equal(header.find("tr.k-rowfilter").length, 1);
     });
 
     test("th elements are added to the locked header table", function() {
@@ -106,12 +106,12 @@
             }
         });
 
-        equal(grid.element.find(".k-grid-header-locked tr[role=rowfilter]").length, 1);
-        equal(grid.element.find(".k-grid-header-locked tr[role=rowfilter] th[data-field=foo]").length, 1);
+        equal(grid.element.find(".k-grid-header-locked tr.k-rowfilter").length, 1);
+        equal(grid.element.find(".k-grid-header-locked tr.k-rowfilter th[data-field=foo]").length, 1);
 
-        equal(grid.element.find(".k-grid-header-wrap tr[role=rowfilter] th").length, 2);
-        ok(grid.element.find(".k-grid-header-wrap tr[role=rowfilter] th[data-field=bar]").length);
-        ok(grid.element.find(".k-grid-header-wrap tr[role=rowfilter] th[data-field=baz]").length);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-rowfilter th").length, 2);
+        ok(grid.element.find(".k-grid-header-wrap tr.k-rowfilter th[data-field=bar]").length);
+        ok(grid.element.find(".k-grid-header-wrap tr.k-rowfilter th[data-field=baz]").length);
     });
 
     test("th elements when header already exists", function() {
