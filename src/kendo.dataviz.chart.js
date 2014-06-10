@@ -188,7 +188,7 @@ var __meta__ = {
         STD_ERR = "stderr",
         STD_DEV = "stddev",
         STRING = "string",
-        SUMMARY_TYPE_FIELD = "summaryType",
+        SUMMARY_FIELD = "summary",
         TIME_PER_SECOND = 1000,
         TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
@@ -7506,7 +7506,7 @@ var __meta__ = {
 
         addValue: function(data, fields) {
             var value = data.valueFields.value;
-            var summaryType = data.fields.summaryType;
+            var summaryType = data.fields.summary;
             var prevPoint;
 
             var prevIx = fields.categoryIx - 1;
@@ -7518,24 +7518,24 @@ var __meta__ = {
 
             if (defined(value) && value !== null) {
                 var sum = value;
-                var partialSum = value;
+                var runningTotal = value;
 
                 if (prevPoint) {
                     sum += prevPoint.sum;
-                    partialSum += prevPoint.partialSum;
+                    runningTotal += prevPoint.runningTotal;
                 }
 
                 fields.sum = sum;
-                fields.partialSum = partialSum;
+                fields.runningTotal = runningTotal;
             } else if (summaryType && prevPoint) {
-                if (summaryType.toLowerCase() === "partialSum") {
-                    data.valueFields.value = prevPoint.partialSum;
+                if (summaryType.toLowerCase() === "runningTotal") {
+                    data.valueFields.value = prevPoint.runningTotal;
                     fields.sum = prevPoint.sum;
-                    fields.partialSum = 0;
+                    fields.runningTotal = 0;
                 } else {
                     data.valueFields.value = prevPoint.sum;
                     fields.sum = prevPoint.sum;
-                    fields.partialSum = 0;
+                    fields.runningTotal = 0;
                 }
 
                 fields.isSum = true;
@@ -11901,7 +11901,7 @@ var __meta__ = {
 
     SeriesBinder.current.register(
         [WATERFALL],
-        [VALUE], [CATEGORY, COLOR, NOTE_TEXT, SUMMARY_TYPE_FIELD]
+        [VALUE], [CATEGORY, COLOR, NOTE_TEXT, SUMMARY_FIELD]
     );
 
     DefaultAggregates.current.register(
