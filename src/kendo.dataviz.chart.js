@@ -3610,7 +3610,7 @@ var __meta__ = {
                     if (valueSlot) {
                         var pointSlot = chart.pointSlot(categorySlot, valueSlot);
 
-                        point.aboveAxis = chart.aboveAxis(value, valueAxis);
+                        point.aboveAxis = chart.aboveAxis(point, valueAxis);
                         if (chart.options.isStacked100) {
                             point.percentage = chart.plotValue(point);
                         }
@@ -3627,8 +3627,9 @@ var __meta__ = {
             chart.box = targetBox;
         },
 
-        aboveAxis: function(value, valueAxis) {
+        aboveAxis: function(point, valueAxis) {
             var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+            var value = point.value;
 
             return valueAxis.options.reverse ?
                 value < axisCrossingValue : value >= axisCrossingValue;
@@ -3928,7 +3929,8 @@ var __meta__ = {
             }
         },
 
-        aboveAxis: function(value){
+        aboveAxis: function(point){
+            var value = point.value;
             return value.from < value.to;
         }
     });
