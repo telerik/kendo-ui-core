@@ -1195,7 +1195,7 @@ var __meta__ = {
                 fields: editableFields,
                 model: model,
                 clearContainer: false,
-                editingFor: that.options.editingFor,
+                target: that.options.target,
 
                 validateOnBlur: true
             }).data("kendoEditable");
@@ -1424,7 +1424,7 @@ var __meta__ = {
                 model: model,
                 clearContainer: false,
                 validateOnBlur: true,
-                editingFor: that.options.editingFor,
+                target: that.options.target,
             }).data("kendoEditable");
 
             if (!that.trigger(EDIT, { container: container, model: model })) {
@@ -2625,14 +2625,14 @@ var __meta__ = {
 
             if (this._isMobile() && kendo.mobile.ui.Pane) {
                 editor = that._editor = new MobileEditor(this.wrapper, extend({}, this.options, {
-                    editingFor: this,
+                    target: this,
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources,
                     createButton: proxy(this._createButton, this)
                 }));
             } else {
                 editor = that._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
-                    editingFor: this,
+                    target: this,
                     createButton: proxy(this._createButton, this),
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources

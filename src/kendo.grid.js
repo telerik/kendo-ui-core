@@ -2066,7 +2066,7 @@ var __meta__ = {
                     fields: fields,
                     model: model,
                     clearContainer: false,
-                    editingFor: that,
+                    target: that,
                 }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"

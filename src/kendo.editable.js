@@ -160,8 +160,8 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
 
-            if (options.editingFor) {
-                options.$angular = options.editingFor.options.$angular;
+            if (options.target) {
+                options.$angular = options.target.options.$angular;
             }
             Widget.fn.init.call(that, element, options);
             that._validateProxy = $.proxy(that._validate, that);
@@ -272,11 +272,11 @@ var __meta__ = {
                 modelField,
                 modelFields;
 
-            if (that.options.editingFor) {
+            if (that.options.target) {
                 that.angular("compile", function(){
                     return {
                         elements: container,
-                        scopeFrom: that.options.editingFor.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                        scopeFrom: that.options.target.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]")
                     };
                 });
             }
