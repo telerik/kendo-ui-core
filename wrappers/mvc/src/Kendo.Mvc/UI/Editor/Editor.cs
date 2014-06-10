@@ -37,9 +37,16 @@ namespace Kendo.Mvc.UI
             TagName = "textarea";
 
             ImageBrowserSettings = new EditorImageBrowserSettings(Messages.ImageBrowserMessages);
+            FileBrowserSettings = new EditorFileBrowserSettings(Messages.FileBrowserMessages);
         }
 
         internal IUrlGenerator UrlGenerator
+        {
+            get;
+            private set;
+        }
+
+        public EditorFileBrowserSettings FileBrowserSettings
         {
             get;
             private set;
@@ -220,10 +227,16 @@ namespace Kendo.Mvc.UI
                 options["stylesheets"] = StyleSheets;
             }
 
-            var fileSettings = ImageBrowserSettings.ToJson();
+            var imageSettings = ImageBrowserSettings.ToJson();
+            if (imageSettings.Any())
+            {
+                options["imageBrowser"] = imageSettings;
+            }
+
+            var fileSettings = FileBrowserSettings.ToJson();
             if (fileSettings.Any())
             {
-                options["imageBrowser"] = fileSettings;
+                options["fileBrowser"] = fileSettings;
             }
 
             writer.Write(Initializer.Initialize(Selector, "Editor", options));

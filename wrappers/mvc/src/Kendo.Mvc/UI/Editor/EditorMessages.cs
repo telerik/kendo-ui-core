@@ -26,6 +26,7 @@ namespace Kendo.Mvc.UI
             CreateLink = Messages.Editor_CreateLink;
             Unlink = Messages.Editor_Unlink;
             InsertImage = Messages.Editor_InsertImage;
+            InsertFile = Messages.Editor_InsertFile;
             InsertHtml = Messages.Editor_InsertHtml;
             FontName = Messages.Editor_FontName;
             FontNameInherit = Messages.Editor_FontNameInherit;
@@ -56,6 +57,7 @@ namespace Kendo.Mvc.UI
             DeleteColumn = Messages.Editor_DeleteColumn;
 
             ImageBrowserMessages = new EditorImageBrowserMessages();
+            FileBrowserMessages = new EditorFileBrowserMessages();
         }
 
         public string Bold { get; set; }
@@ -75,6 +77,7 @@ namespace Kendo.Mvc.UI
         public string CreateLink { get; set; }
         public string Unlink { get; set; }
         public string InsertImage { get; set; }
+        public string InsertFile { get; set; }
         public string InsertHtml { get; set; }
         public string FontName { get; set; }
         public string FontNameInherit { get; set; }
@@ -105,6 +108,7 @@ namespace Kendo.Mvc.UI
         public string DeleteColumn { get; set; }
 
         public EditorImageBrowserMessages ImageBrowserMessages { get; set; }
+        public EditorFileBrowserMessages FileBrowserMessages { get; set; }
 
         private const string DefaultBold = "Bold";
         private const string DefaultItalic = "Italic";
@@ -123,6 +127,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultCreateLink = "Insert hyperlink";
         private const string DefaultUnlink = "Remove hyperlink";
         private const string DefaultInsertImage = "Insert image";
+        private const string DefaultInsertFile = "Insert file";
         private const string DefaultInsertHtml = "Insert HTML";
         private const string DefaultFontName = "Select font family";
         private const string DefaultFontNameInherit = "(inherited font)";
@@ -242,6 +247,11 @@ namespace Kendo.Mvc.UI
             if (InsertImage != DefaultInsertImage)
             {
                 json["insertImage"] = InsertImage;
+            }
+
+            if (InsertFile != DefaultInsertFile)
+            {
+                json["insertFile"] = InsertFile;
             }
 
             if (InsertHtml != DefaultInsertHtml)

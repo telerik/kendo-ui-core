@@ -714,4 +714,7 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Dosyaları Yükle</value>
   </data>
+  <data name="Editor_InsertFile" xml:space="preserve">
+    <value>Insert file</value>
+  </data>
 </root>

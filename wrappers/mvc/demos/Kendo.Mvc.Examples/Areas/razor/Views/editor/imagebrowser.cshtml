@@ -1,7 +1,7 @@
 @(Html.Kendo().Editor()
       .Name("editor")
       .HtmlAttributes(new { style = "width: 740px;height:440px" })
-      .Tools(tools => tools.Clear().InsertImage())
+      .Tools(tools => tools.Clear().InsertImage().InsertFile())
       .Value(@<text>
             <p>
                <img src="@Url.Content("~/content/web/editor/kendo-ui-web.png")" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" />
@@ -27,10 +27,17 @@
             </p>
       </text>)
  .ImageBrowser(imageBrowser => imageBrowser
-    .Image("~/Content/UserFiles/Images/{0}")    
+    .Image("~/Content/UserFiles/Images/{0}")
     .Read("Read", "ImageBrowser")
     .Create("Create", "ImageBrowser")
     .Destroy("Destroy", "ImageBrowser")
     .Upload("Upload", "ImageBrowser")
-    .Thumbnail("Thumbnail", "ImageBrowser"))    
+    .Thumbnail("Thumbnail", "ImageBrowser"))
+ .FileBrowser(fileBrowser => fileBrowser
+     .File("~/Content/UserFiles/Images/{0}")
+     .Read("Read", "ImageBrowser")
+     .Create("Create", "ImageBrowser")
+     .Destroy("Destroy", "ImageBrowser")
+     .Upload("Upload", "ImageBrowser")
+  )
 )

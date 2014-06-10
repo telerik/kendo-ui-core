@@ -103,6 +103,11 @@ namespace Kendo.Mvc.UI.Fluent
             return Button("insertImage");
         }
 
+        public EditorToolFactory InsertFile()
+        {
+            return Button("insertFile");
+        }
+
         public EditorToolFactory CreateLink()
         {
             return Button("createLink");

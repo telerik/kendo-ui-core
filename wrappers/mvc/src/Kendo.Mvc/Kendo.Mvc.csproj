@@ -722,6 +722,12 @@
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
     <Compile Include="UI\Gantt\Html\GanttHtmlBuilder.cs" />
     <Compile Include="UI\Gantt\IGanttTask.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserMessages.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserOperation.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserSettings.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorFileBrowserMessagesBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorFileBrowserOperationBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorFileBrowserSettingsBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceSchemaBuilder.cs" />
