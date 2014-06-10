@@ -2628,10 +2628,6 @@ function pad(number, digits, end) {
 
     var DataBoundWidget = Widget.extend({
         // Angular consumes these.
-        _itemsContents: function() {
-            return this.items();
-        },
-
         dataItems: function() {
             return this.dataSource.view();
         },
@@ -2640,7 +2636,7 @@ function pad(number, digits, end) {
             var that = this;
             that.angular(cmd, function(){
                 return {
-                    elements: that._itemsContents(),
+                    elements: that.items(),
                     data: that.dataItems().map(function(dataItem){
                         return { dataItem: dataItem };
                     })

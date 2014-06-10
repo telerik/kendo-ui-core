@@ -828,10 +828,6 @@ var __meta__ = {
             return this.element.find("." + VIRTUAL_PAGE_CLASS);
         },
 
-        _itemsContents: function() {
-            return this.items();
-        },
-
         _syncWithContent: function() {
             var pages = this._content.pages,
                 buffer = this._content.buffer,

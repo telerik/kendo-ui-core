@@ -1536,7 +1536,7 @@
         });
     });
 
-    test("_itemsContents returns the grid items twice in frozen columns mode", function() {
+    test("items returns the grid items twice in frozen columns mode", function() {
         var grid = new Grid(table, {
             dataSource: [
                 { foo: "foo", bar: "bar" }
@@ -1547,7 +1547,7 @@
             ]
         });
 
-        equal(grid._itemsContents().length, 2);
+        equal(grid.items().length, 2);
     });
 
     test("dataItems returns the datasource view", function() {

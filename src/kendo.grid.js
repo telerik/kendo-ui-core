@@ -955,7 +955,11 @@ var __meta__ = {
         },
 
         items: function() {
-            return this._items(this.tbody);
+            if (this.lockedContent) {
+                return this._items(this.tbody).add(this._items(this.lockedTable.children("tbody")));
+            } else {
+                return this._items(this.tbody);
+            }
         },
 
         _items: function(container) {
@@ -963,14 +967,6 @@ var __meta__ = {
                 var tr = $(this);
                 return !tr.hasClass("k-grouping-row") && !tr.hasClass("k-detail-row") && !tr.hasClass("k-group-footer");
             });
-        },
-
-        _itemsContents: function() {
-            if (this.lockedContent) {
-                return this.items().add(this._items(this.lockedTable.children("tbody")));
-            } else {
-                return this.items();
-            }
         },
 
         dataItems: function() {
@@ -2061,6 +2057,13 @@ var __meta__ = {
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 
+            that.angular("compile", function(){
+                return {
+                    elements: container.get(),
+                    scopeFrom: that.tbody.find("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                };
+            });
+
             that.editable = that._editContainer
                 .kendoEditable({
                     fields: fields,
@@ -2174,7 +2177,7 @@ var __meta__ = {
                 if (that._editMode() !== "popup") {
                     that._displayRow(container);
                 } else {
-                    that._displayRow(that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]"));
+                    that._displayRow(that.tbody.find("[" + kendo.attr("uid") + "=" + model.uid + "]"));
                 }
             }
         },
@@ -3306,7 +3309,7 @@ var __meta__ = {
 
         _averageRowHeight: function() {
             var that = this,
-                itemsCount = that.items().length,
+                itemsCount = that._items(that.tbody).length,
                 rowHeight = that._rowHeight;
 
             if (itemsCount === 0) {
@@ -3373,6 +3376,7 @@ var __meta__ = {
 
         _modelChange: function(e) {
             var that = this,
+                tbody = that.tbody,
                 model = e.model,
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 relatedRow,
@@ -3380,7 +3384,7 @@ var __meta__ = {
                 column,
                 isAlt = row.hasClass("k-alt"),
                 tmp,
-                idx = that.items().index(row),
+                idx = that._items(tbody).index(row),
                 isLocked = that.lockedContent,
                 length;
 
@@ -3415,7 +3419,7 @@ var __meta__ = {
 
                 row.replaceWith(tmp);
 
-                tmp = that.items().eq(idx);
+                tmp = that._items(tbody).eq(idx);
 
                 if (isLocked) {
                     relatedRow = that._relatedRow(tmp)[0];

@@ -159,12 +159,12 @@
         });
     });
 
-    test("_itemsContents returns the flattened items elements", 1, function() {
+    test("items returns the flattened items elements", 1, function() {
         var dom = treeFromHtml("<ul>" +
             "<li>foo<ul><li>baz</li></ul></li>" +
             "<li data-expanded='true'>bar<ul><li>qux</li></ul></li>" +
         "</ul>");
 
-        equal(dom.data("kendoTreeView")._itemsContents().length, 4);
+        equal(dom.data("kendoTreeView").items().length, 4);
     });
 })();

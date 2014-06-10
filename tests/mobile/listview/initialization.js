@@ -246,16 +246,6 @@
         equal(listView.items()[0], dom.find("ul > li")[0]);
     });
 
-    test("_itemsContents wraps items", 1, function() {
-        dom = $('<ul>\
-            <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
-        </ul>');
-
-        var listView = new ListView(dom, { type: "group" });
-
-        equal(listView._itemsContents()[0], listView.items()[0]);
-    });
-
     test("ListView renders button at the bottom of the widget", 4, function() {
         dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
         wrapper = dom.wrap("<div />").parent(),

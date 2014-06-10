@@ -180,10 +180,6 @@ var __meta__ = {
             return this.ul[0].children;
         },
 
-        _itemsContents: function() {
-            return this.items();
-        },
-
         current: function(candidate) {
             var that = this,
                 id = that._optionID;

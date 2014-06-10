@@ -1,5 +1,6 @@
 (function() {
-    test("ScrollView _itemsContents returns the current items", function() {
+    module("scrollview utils")
+    test("items returns the current items", function() {
         var div = $("<div />");
 
         var scrollview = new kendo.mobile.ui.ScrollView(div, {
@@ -7,7 +8,7 @@
             template: "#: data #"
         });
 
-        equal(scrollview._itemsContents().length, 3);
+        equal(scrollview.items().length, 3);
         scrollview.destroy();
     });
 })();

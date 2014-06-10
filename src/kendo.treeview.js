@@ -507,10 +507,6 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.element.find(".k-item");
-        },
-
-        _itemsContents: function() {
             return this.element.find(".k-item div:first-child");
         },
 
@@ -1420,7 +1416,7 @@ var __meta__ = {
                     if (that.root.length) {
 
                         this._angularItems("cleanup");
-                        
+
                         var group = $(groupHtml);
 
                         that.root
