@@ -54,8 +54,15 @@
         ok(dom.is(".grid-filter-header"));
     });
 
-    test("dataSource is always instance of the DataSource class", function() {
+    test("dataSource remains the same instance when set to an instance of the DataSource class", function() {
         rowFilter = setup(dom, { dataSource: dataSource });
+
+        ok(rowFilter.dataSource instanceof kendo.data.DataSource);
+        ok(rowFilter.dataSource === dataSource);
+    });
+
+    test("dataSource is instance of the DataSource class when set with options", function() {
+        rowFilter = setup(dom, { dataSource: { transport: { read: function () {} } } });
 
         ok(rowFilter.dataSource instanceof kendo.data.DataSource);
     });

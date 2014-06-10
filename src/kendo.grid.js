@@ -3612,7 +3612,6 @@ var __meta__ = {
                 var rowheader = this.thead.find(".k-rowfilter");
                 var columns = this.columns;
                 var dsOptions = rowFilterOptions.dataSource || this.dataSource.options;
-                console.log('rowFilterDs', dsOptions);
                 for (var i = 0; i < columns.length; i++) {
                     var col = columns[i];
                     var th = $("<th/>");
