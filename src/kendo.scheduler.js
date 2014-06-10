@@ -2031,7 +2031,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.wrapper.children(".k-event, .k-task");
+            return this.wrapper.find(".k-event, .k-task");
         },
 
         _movable: function() {
