@@ -124,16 +124,16 @@
             return this;
         },
 
-        distanceTo: function(other) {
-            var dx = this.x - other.x;
-            var dy = this.y - other.y;
+        distanceTo: function(point) {
+            var dx = this.x - point.x;
+            var dy = this.y - point.y;
 
             return math.sqrt(dx * dx + dy * dy);
         },
 
-        round: function(precision) {
-            this.x = round(this.x, precision);
-            this.y = round(this.y, precision);
+        round: function(digits) {
+            this.x = round(this.x, digits);
+            this.y = round(this.y, digits);
 
             this.geometryChange();
 
@@ -142,13 +142,13 @@
     });
 
     // IE < 9 doesn't allow to override toString on definition
-    Point.fn.toString = function(precision, separator) {
+    Point.fn.toString = function(digits, separator) {
         var x = this.x,
             y = this.y;
 
-        if (defined(precision)) {
-            x = round(x, precision);
-            y = round(y, precision);
+        if (defined(digits)) {
+            x = round(x, digits);
+            y = round(y, digits);
         }
 
         separator = separator || " ";
