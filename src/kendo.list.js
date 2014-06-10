@@ -180,7 +180,7 @@ var __meta__ = {
             return this.ul[0].children;
         },
 
-        itemsContents: function() {
+        _itemsContents: function() {
             return this.items();
         },
 

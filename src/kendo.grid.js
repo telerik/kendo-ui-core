@@ -965,7 +965,7 @@ var __meta__ = {
             });
         },
 
-        itemsContents: function() {
+        _itemsContents: function() {
             if (this.lockedContent) {
                 return this.items().add(this._items(this.lockedTable.children("tbody")));
             } else {

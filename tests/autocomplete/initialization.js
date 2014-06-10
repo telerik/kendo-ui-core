@@ -157,7 +157,7 @@ test("dataItem() returns dataItem depending on passed index", function() {
     equal(autocomplete.dataItem(1), autocomplete.dataSource.view()[1]);
 });
 
-test("itemsContents returns the items", function() {
+test("_itemsContents returns the items", function() {
     var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource:[{text: 1, value: 1}, {text:2, value:2}]
@@ -165,7 +165,7 @@ test("itemsContents returns the items", function() {
 
     autocomplete.dataSource.read();
 
-    equal(autocomplete.itemsContents().length, 2);
+    equal(autocomplete._itemsContents().length, 2);
 });
 
 test("dataItem() returns dataItem depending on passed dom elements", function() {

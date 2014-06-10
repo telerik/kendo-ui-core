@@ -125,7 +125,7 @@ var __meta__ = {
             return this.element.children();
         },
 
-        itemsContents: function() {
+        _itemsContents: function() {
             return this.items();
         },
 

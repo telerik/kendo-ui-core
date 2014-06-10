@@ -828,7 +828,7 @@ var __meta__ = {
             return this.element.find("." + VIRTUAL_PAGE_CLASS);
         },
 
-        itemsContents: function() {
+        _itemsContents: function() {
             return this.items();
         },
 

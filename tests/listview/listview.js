@@ -360,14 +360,14 @@ test("uid is set to item wrapper", function() {
     equal(items.eq(1).attr(kendo.attr("uid")), view[1].uid);
 });
 
-test("itemsContents returns items", function() {
+test("_itemsContents returns items", function() {
     var listView =  setup({
         dataSource: {
             data: [{ foo: 1 }, { foo: 2 }]
         }
     }).data("kendoListView");
 
-    equal(listView.itemsContents().length, 2);
+    equal(listView._itemsContents().length, 2);
 
 });
 
