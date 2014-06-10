@@ -100,11 +100,11 @@ class TelerikInternalBuildBot
         1.upto(rows_length) do |index|
             checkbox = find(".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2) input[type=checkbox]")
             name_anchor = find(".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(3) a")
-
-            if name_anchor.text.index("#{VERSION_YEAR}.#{VERSION_Q}") != nil && checkbox.selected?
-                uncheck_version(checkbox)
+            
+            if name_anchor.text.index("#{VERSION}") == nil && name_anchor.text.index("#{VERSION_YEAR}.#{VERSION_Q}") != nil && checkbox.selected?
+                 uncheck_version(checkbox)
+                 Thread.current.send :sleep, 2
             end
-            Thread.current.send :sleep, 2
         end
     end
     def quit
@@ -171,3 +171,4 @@ task "internal_builds:uncheck_previous" do
 end
 
 task "internal_builds:upload" => [ "internal_builds:bundles:all" ]
+task "internal_builds:uncheck_previous" => ["internal_builds:upload"]
