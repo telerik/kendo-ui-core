@@ -33,6 +33,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_MeetingAttendee_Meeting", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Meeting), "MeetingAttendee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.MeetingAttendee), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Meetings_Meetings", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Meeting), "Meeting1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Meeting), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Tasks_Tasks", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Task), "Task1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Task), true)]
+[assembly: EdmRelationshipAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.GanttTask), "GanttTask1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.GanttTask), true)]
 
 #endregion
 
@@ -339,6 +340,38 @@ namespace KendoCRUDService.Models.EF
             }
         }
         private ObjectSet<Task> _Tasks;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GanttDependency> GanttDependencies
+        {
+            get
+            {
+                if ((_GanttDependencies == null))
+                {
+                    _GanttDependencies = base.CreateObjectSet<GanttDependency>("GanttDependencies");
+                }
+                return _GanttDependencies;
+            }
+        }
+        private ObjectSet<GanttDependency> _GanttDependencies;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GanttTask> GanttTasks
+        {
+            get
+            {
+                if ((_GanttTasks == null))
+                {
+                    _GanttTasks = base.CreateObjectSet<GanttTask>("GanttTasks");
+                }
+                return _GanttTasks;
+            }
+        }
+        private ObjectSet<GanttTask> _GanttTasks;
 
         #endregion
 
@@ -470,6 +503,22 @@ namespace KendoCRUDService.Models.EF
         public void AddToTasks(Task task)
         {
             base.AddObject("Tasks", task);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GanttDependencies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGanttDependencies(GanttDependency ganttDependency)
+        {
+            base.AddObject("GanttDependencies", ganttDependency);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GanttTasks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGanttTasks(GanttTask ganttTask)
+        {
+            base.AddObject("GanttTasks", ganttTask);
         }
 
         #endregion
@@ -1684,6 +1733,442 @@ namespace KendoCRUDService.Models.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Territory>("SampleModel.EmployeeTerritories", "Territories", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="GanttDependency")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GanttDependency : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GanttDependency object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="predecessorID">Initial value of the PredecessorID property.</param>
+        /// <param name="successorID">Initial value of the SuccessorID property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        public static GanttDependency CreateGanttDependency(global::System.Int32 id, global::System.Int32 predecessorID, global::System.Int32 successorID, global::System.Int32 type)
+        {
+            GanttDependency ganttDependency = new GanttDependency();
+            ganttDependency.ID = id;
+            ganttDependency.PredecessorID = predecessorID;
+            ganttDependency.SuccessorID = successorID;
+            ganttDependency.Type = type;
+            return ganttDependency;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PredecessorID
+        {
+            get
+            {
+                return _PredecessorID;
+            }
+            set
+            {
+                OnPredecessorIDChanging(value);
+                ReportPropertyChanging("PredecessorID");
+                _PredecessorID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PredecessorID");
+                OnPredecessorIDChanged();
+            }
+        }
+        private global::System.Int32 _PredecessorID;
+        partial void OnPredecessorIDChanging(global::System.Int32 value);
+        partial void OnPredecessorIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SuccessorID
+        {
+            get
+            {
+                return _SuccessorID;
+            }
+            set
+            {
+                OnSuccessorIDChanging(value);
+                ReportPropertyChanging("SuccessorID");
+                _SuccessorID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SuccessorID");
+                OnSuccessorIDChanged();
+            }
+        }
+        private global::System.Int32 _SuccessorID;
+        partial void OnSuccessorIDChanging(global::System.Int32 value);
+        partial void OnSuccessorIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.Int32 _Type;
+        partial void OnTypeChanging(global::System.Int32 value);
+        partial void OnTypeChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="GanttTask")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GanttTask : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GanttTask object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="orderID">Initial value of the OrderID property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="start">Initial value of the Start property.</param>
+        /// <param name="end">Initial value of the End property.</param>
+        /// <param name="percentComplete">Initial value of the PercentComplete property.</param>
+        /// <param name="expanded">Initial value of the Expanded property.</param>
+        public static GanttTask CreateGanttTask(global::System.Int32 id, global::System.Int32 orderID, global::System.String title, global::System.DateTime start, global::System.DateTime end, global::System.Decimal percentComplete, global::System.Boolean expanded)
+        {
+            GanttTask ganttTask = new GanttTask();
+            ganttTask.ID = id;
+            ganttTask.OrderID = orderID;
+            ganttTask.Title = title;
+            ganttTask.Start = start;
+            ganttTask.End = end;
+            ganttTask.PercentComplete = percentComplete;
+            ganttTask.Expanded = expanded;
+            return ganttTask;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ParentID
+        {
+            get
+            {
+                return _ParentID;
+            }
+            set
+            {
+                OnParentIDChanging(value);
+                ReportPropertyChanging("ParentID");
+                _ParentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ParentID");
+                OnParentIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ParentID;
+        partial void OnParentIDChanging(Nullable<global::System.Int32> value);
+        partial void OnParentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderID
+        {
+            get
+            {
+                return _OrderID;
+            }
+            set
+            {
+                OnOrderIDChanging(value);
+                ReportPropertyChanging("OrderID");
+                _OrderID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderID");
+                OnOrderIDChanged();
+            }
+        }
+        private global::System.Int32 _OrderID;
+        partial void OnOrderIDChanging(global::System.Int32 value);
+        partial void OnOrderIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Start
+        {
+            get
+            {
+                return _Start;
+            }
+            set
+            {
+                OnStartChanging(value);
+                ReportPropertyChanging("Start");
+                _Start = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Start");
+                OnStartChanged();
+            }
+        }
+        private global::System.DateTime _Start;
+        partial void OnStartChanging(global::System.DateTime value);
+        partial void OnStartChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime End
+        {
+            get
+            {
+                return _End;
+            }
+            set
+            {
+                OnEndChanging(value);
+                ReportPropertyChanging("End");
+                _End = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("End");
+                OnEndChanged();
+            }
+        }
+        private global::System.DateTime _End;
+        partial void OnEndChanging(global::System.DateTime value);
+        partial void OnEndChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal PercentComplete
+        {
+            get
+            {
+                return _PercentComplete;
+            }
+            set
+            {
+                OnPercentCompleteChanging(value);
+                ReportPropertyChanging("PercentComplete");
+                _PercentComplete = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PercentComplete");
+                OnPercentCompleteChanged();
+            }
+        }
+        private global::System.Decimal _PercentComplete;
+        partial void OnPercentCompleteChanging(global::System.Decimal value);
+        partial void OnPercentCompleteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Expanded
+        {
+            get
+            {
+                return _Expanded;
+            }
+            set
+            {
+                OnExpandedChanging(value);
+                ReportPropertyChanging("Expanded");
+                _Expanded = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Expanded");
+                OnExpandedChanged();
+            }
+        }
+        private global::System.Boolean _Expanded;
+        partial void OnExpandedChanging(global::System.Boolean value);
+        partial void OnExpandedChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask1")]
+        public EntityCollection<GanttTask> GanttTasks1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_GanttTasks_GanttTasks", "GanttTask")]
+        public GanttTask GanttTask1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GanttTask> GanttTask1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GanttTask>("SampleModel.FK_GanttTasks_GanttTasks", "GanttTask", value);
                 }
             }
         }

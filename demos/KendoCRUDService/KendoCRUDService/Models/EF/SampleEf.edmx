@@ -12,6 +12,8 @@
           <EntitySet Name="Customers" EntityType="SampleModel.Store.Customers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Employees" EntityType="SampleModel.Store.Employees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EmployeeTerritories" EntityType="SampleModel.Store.EmployeeTerritories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GanttDependencies" EntityType="SampleModel.Store.GanttDependencies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GanttTasks" EntityType="SampleModel.Store.GanttTasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Intraday" EntityType="SampleModel.Store.Intraday" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MeetingAttendees" EntityType="SampleModel.Store.MeetingAttendees" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Meetings" EntityType="SampleModel.Store.Meetings" store:Type="Tables" Schema="dbo" />
@@ -57,7 +59,11 @@
             <End Role="Territories" EntitySet="Territories" />
             <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
           </AssociationSet>
-          <AssociationSet Name="FK_MeetingAttendee_Meeting" Association="SampleModel.Store.FK_MeetingAttendee_Meeting">
+          <AssociationSet Name="FK_GanttTasks_GanttTasks" Association="SampleModel.Store.FK_GanttTasks_GanttTasks">
+            <End Role="GanttTasks" EntitySet="GanttTasks" />
+            <End Role="GanttTasks1" EntitySet="GanttTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MeetingAtendee_Meeting" Association="SampleModel.Store.FK_MeetingAtendee_Meeting">
             <End Role="Meetings" EntitySet="Meetings" />
             <End Role="MeetingAttendees" EntitySet="MeetingAttendees" />
           </AssociationSet>
@@ -173,6 +179,28 @@
           </Key>
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="TerritoryID" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GanttDependencies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PredecessorID" Type="int" Nullable="false" />
+          <Property Name="SuccessorID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GanttTasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="ntext" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="PercentComplete" Type="decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Expanded" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Intraday">
           <Key>
@@ -398,7 +426,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MeetingAttendee_Meeting">
+        <Association Name="FK_GanttTasks_GanttTasks">
+          <End Role="GanttTasks" Type="SampleModel.Store.GanttTasks" Multiplicity="0..1" />
+          <End Role="GanttTasks1" Type="SampleModel.Store.GanttTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GanttTasks">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GanttTasks1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MeetingAtendee_Meeting">
           <End Role="Meetings" Type="SampleModel.Store.Meetings" Multiplicity="1" />
           <End Role="MeetingAttendees" Type="SampleModel.Store.MeetingAttendees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -607,6 +647,12 @@
             <End Role="Task" EntitySet="Tasks" />
             <End Role="Task1" EntitySet="Tasks" />
           </AssociationSet>
+          <EntitySet Name="GanttDependencies" EntityType="SampleModel.GanttDependency" />
+          <EntitySet Name="GanttTasks" EntityType="SampleModel.GanttTask" />
+          <AssociationSet Name="FK_GanttTasks_GanttTasks" Association="SampleModel.FK_GanttTasks_GanttTasks">
+            <End Role="GanttTask" EntitySet="GanttTasks" />
+            <End Role="GanttTask1" EntitySet="GanttTasks" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -654,8 +700,8 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
           <Property Name="Title" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
           <Property Name="TitleOfCourtesy" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
-          <Property Name="BirthDate" Type="DateTime" />
-          <Property Name="HireDate" Type="DateTime" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="HireDate" Type="DateTime" Precision="3" />
           <Property Name="Address" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
           <Property Name="City" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
           <Property Name="Region" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
@@ -678,7 +724,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Symbol" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Open" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="High" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
           <Property Name="Low" Type="Decimal" Nullable="false" Precision="9" Scale="3" />
@@ -705,9 +751,9 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="String" MaxLength="5" Unicode="true" FixedLength="true" />
           <Property Name="EmployeeID" Type="Int32" />
-          <Property Name="OrderDate" Type="DateTime" />
-          <Property Name="RequiredDate" Type="DateTime" />
-          <Property Name="ShippedDate" Type="DateTime" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippedDate" Type="DateTime" Precision="3" />
           <Property Name="ShipVia" Type="Int32" />
           <Property Name="Freight" Type="Decimal" Precision="6" Scale="2" />
           <Property Name="ShipName" Type="String" MaxLength="40" Unicode="true" FixedLength="false" />
@@ -796,7 +842,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Station" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TMax" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="TMin" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="Wind" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
@@ -935,8 +981,8 @@
             <PropertyRef Name="MeetingID" />
           </Key>
           <Property Type="Int32" Name="MeetingID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="Start" Nullable="false" />
-          <Property Type="DateTime" Name="End" Nullable="false" />
+          <Property Type="DateTime" Name="Start" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="End" Nullable="false" Precision="3" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="RoomID" />
@@ -955,8 +1001,8 @@
             <PropertyRef Name="TaskID" />
           </Key>
           <Property Type="Int32" Name="TaskID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="DateTime" Name="Start" Nullable="false" />
-          <Property Type="DateTime" Name="End" Nullable="false" />
+          <Property Type="DateTime" Name="Start" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="End" Nullable="false" Precision="3" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="OwnerID" />
@@ -1002,6 +1048,42 @@
             </Principal>
             <Dependent Role="Task1">
               <PropertyRef Name="RecurrenceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GanttDependency">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PredecessorID" Nullable="false" />
+          <Property Type="Int32" Name="SuccessorID" Nullable="false" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GanttTask">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ParentID" />
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Start" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="End" Nullable="false" Precision="3" />
+          <Property Type="Decimal" Name="PercentComplete" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="Boolean" Name="Expanded" Nullable="false" />
+          <NavigationProperty Name="GanttTasks1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask" ToRole="GanttTask1" />
+          <NavigationProperty Name="GanttTask1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask1" ToRole="GanttTask" />
+        </EntityType>
+        <Association Name="FK_GanttTasks_GanttTasks">
+          <End Type="SampleModel.GanttTask" Role="GanttTask" Multiplicity="0..1" />
+          <End Type="SampleModel.GanttTask" Role="GanttTask1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GanttTask">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GanttTask1">
+              <PropertyRef Name="ParentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1252,6 +1334,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="GanttDependencies">
+            <EntityTypeMapping TypeName="SampleModel.GanttDependency">
+              <MappingFragment StoreEntitySet="GanttDependencies">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SuccessorID" ColumnName="SuccessorID" />
+                <ScalarProperty Name="PredecessorID" ColumnName="PredecessorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GanttTasks">
+            <EntityTypeMapping TypeName="SampleModel.GanttTask">
+              <MappingFragment StoreEntitySet="GanttTasks">
+                <ScalarProperty Name="Expanded" ColumnName="Expanded" />
+                <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1365,6 +1471,9 @@
           <ConnectorPoint PointX="11.353461538461538" PointY="13.710999348958332" />
           <ConnectorPoint PointX="11.353461538461538" PointY="13.460999348958334" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="8.625" PointY="20.5" />
+        <EntityTypeShape EntityType="SampleModel.GanttTask" Width="1.5" PointX="10.875" PointY="20.5" />
+        <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
         </Diagram>
     </Diagrams>
   </Designer>
