@@ -3494,23 +3494,26 @@ var __meta__ = {
             return {low: low, high: high};
         },
 
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                seriesPoints = chart.seriesPoints[seriesIx],
-                point;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
 
+            var categoryPoints = chart.categoryPoints[categoryIx];
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
             }
 
+            var seriesPoints = chart.seriesPoints[seriesIx];
             if (!seriesPoints) {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
             chart.updateRange(data.valueFields, categoryIx, series);
 
-            point = chart.createPoint(data, category, categoryIx, series, seriesIx);
+            var point = chart.createPoint(data, category, categoryIx, series, seriesIx);
             if (point) {
                 point.category = category;
                 point.categoryIx = categoryIx;
@@ -3587,7 +3590,11 @@ var __meta__ = {
                 value, valueAxis,
                 point;
 
-            chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
+            chart.traverseDataPoints(function(data, fields) {
+                var category = fields.category;
+                var categoryIx = fields.categoryIx;
+                var currentSeries = fields.series;
+
                 value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
@@ -3678,7 +3685,12 @@ var __meta__ = {
                     currentCategory = categories[categoryIx];
                     pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
 
-                    callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
+                    callback(pointData, {
+                        category: currentCategory,
+                        categoryIx: categoryIx,
+                        series: currentSeries,
+                        seriesIx: seriesIx
+                    });
                 }
             }
         },
@@ -5969,17 +5981,21 @@ var __meta__ = {
             }
         },
 
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                options = chart.options,
-                value = data.valueFields,
-                children = chart.children,
-                pointColor = data.fields.color || series.color,
-                valueParts = this.splitValue(value),
-                hasValue = areNumbers(valueParts),
-                categoryPoints = chart.categoryPoints[categoryIx],
-                dataItem = series.data[categoryIx],
-                point, cluster;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var options = chart.options;
+            var value = data.valueFields;
+            var children = chart.children;
+            var pointColor = data.fields.color || series.color;
+            var valueParts = chart.splitValue(value);
+            var hasValue = areNumbers(valueParts);
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var dataItem = series.data[categoryIx];
+            var point, cluster;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -6177,17 +6193,21 @@ var __meta__ = {
     });
 
     var BoxPlotChart = CandlestickChart.extend({
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                options = chart.options,
-                children = chart.children,
-                pointColor = data.fields.color || series.color,
-                value = data.valueFields,
-                valueParts = chart.splitValue(value),
-                hasValue = areNumbers(valueParts),
-                categoryPoints = chart.categoryPoints[categoryIx],
-                dataItem = series.data[categoryIx],
-                point, cluster;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var options = chart.options;
+            var children = chart.children;
+            var pointColor = data.fields.color || series.color;
+            var value = data.valueFields;
+            var valueParts = chart.splitValue(value);
+            var hasValue = areNumbers(valueParts);
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var dataItem = series.data[categoryIx];
+            var point, cluster;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
