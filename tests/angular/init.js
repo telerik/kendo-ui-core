@@ -36,6 +36,18 @@
         }
     });
 
+    $.mockjax({
+        url: "data.json",
+        response: function() {
+            this.responseText = JSON.stringify({
+                user: {
+                    firstName: "John",
+                    lastName: "Doe"
+                }
+            });
+        }
+    });
+
     function runTest(name, test){
         asyncTest(name, function(){
             var dom = $("<div></div>").appendTo(QUnit.fixture);
@@ -574,6 +586,36 @@
             scheduler.date(new Date("2014/6/6 10:00 AM"));
             setTimeout(start, 100);
         });
+    });
+
+    runTest("Window -- compile content through Angular", function(dom){
+        $scope.options = {
+            content: "ajax-template.html",
+            refresh: function() {
+                var el = this.element;
+                equal(el.text(), $scope.hello);
+                start();
+            }
+        };
+        $("<div kendo-window k-options='options'></div>").appendTo(dom);
+        expect(1);
+    });
+
+    runTest("Window -- dataItem is available", function(dom){
+        $scope.options = {
+            content: {
+                url: "data.json",
+                dataType: "json",
+                template: "{{ dataItem.user.firstName }} {{ dataItem.user.lastName }}"
+            },
+            refresh: function() {
+                var el = this.element;
+                equal(el.text(), "John Doe");
+                start();
+            }
+        };
+        $("<div kendo-window k-options='options'></div>").appendTo(dom);
+        expect(1);
     });
 
     /// mobile
