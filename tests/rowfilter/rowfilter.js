@@ -48,9 +48,15 @@
         return menu;
     }
 
-    test("rowFilter has the filter-header class", function() {
+    test("wrap element has the filter-header class", function() {
         rowFilter = setup(dom, { dataSource: dataSource });
 
         ok(dom.is(".grid-filter-header"));
+    });
+
+    test("dataSource is always instance of the DataSource class", function() {
+        rowFilter = setup(dom, { dataSource: dataSource });
+
+        ok(rowFilter.dataSource instanceof kendo.data.DataSource);
     });
 })();

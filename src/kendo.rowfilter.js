@@ -13,6 +13,7 @@ var __meta__ = {
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         CHANGE = "change",
         NS = ".kendoRowFilter",
@@ -20,13 +21,23 @@ var __meta__ = {
 
     var RowFilter = Widget.extend( {
         init: function(element, options) {
-            var that = this, page, totalPages;
+            var element = $(element),
+                    that = this,
+                    options,
+                    dataSource,
+                    input = that.input = $("<input/>");
 
             Widget.fn.init.call(that, element, options);
-
             options = that.options;
 
+            if (!(options.dataSource instanceof DataSource)) {
+                options.dataSource = DataSource.create(options.dataSource);
+            }
+            dataSource = that.dataSource = options.dataSource;
+
+
             element.addClass("grid-filter-header");
+            element.append(input);
             //that.dataSource = kendo.data.DataSource.create(options.dataSource);
             //that.linkTemplate = kendo.template(that.options.linkTemplate);
             //that.selectTemplate = kendo.template(that.options.selectTemplate);

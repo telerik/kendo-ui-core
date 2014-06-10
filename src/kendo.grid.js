@@ -3607,14 +3607,22 @@ var __meta__ = {
 
         _rowFilter: function() {
             var hasRowFiltering = this._hasRowFiltering();
-            var rowheader = this.thead.find(".k-rowfilter");
             if (hasRowFiltering) {
+                var rowFilterOptions = this.options.filterable.row;
+                var rowheader = this.thead.find(".k-rowfilter");
                 var columns = this.columns;
+                var dsOptions = rowFilterOptions.dataSource || this.dataSource.options;
+                console.log('rowFilterDs', dsOptions);
                 for (var i = 0; i < columns.length; i++) {
                     var col = columns[i];
                     var th = $("<th/>");
-                    if (col.field) {
-                        th.attr(kendo.attr("field"), col.field);
+                    var field = col.field;
+                    if (field) {
+                        th.attr(kendo.attr("field"), field);
+                        th.kendoRowFilter({
+                            dataSource: dsOptions,
+                            field: field
+                        });
                     }
                     rowheader.append(th);
                 }
