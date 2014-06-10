@@ -3465,8 +3465,9 @@ var __meta__ = {
                 low = stackedErrorRange.low;
                 high = stackedErrorRange.high;
             } else {
-                chart.updateRange({value: low}, categoryIx, series);
-                chart.updateRange({value: high}, categoryIx, series);
+                var fields = { categoryIx: categoryIx, series: series };
+                chart.updateRange({value: low}, fields);
+                chart.updateRange({value: high}, fields);
             }
 
             errorBar = new CategoricalErrorBar(low, high, isVertical, chart, series, options);
@@ -3511,8 +3512,6 @@ var __meta__ = {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(data.valueFields, categoryIx, series);
-
             var point = chart.createPoint(data, fields);
             if (point) {
                 $.extend(point, fields);
@@ -3526,6 +3525,8 @@ var __meta__ = {
             chart.points.push(point);
             seriesPoints.push(point);
             categoryPoints.push(point);
+
+            chart.updateRange(data.valueFields, fields);
         },
 
         evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
@@ -3550,9 +3551,9 @@ var __meta__ = {
             return options;
         },
 
-        updateRange: function(data, categoryIx, series) {
+        updateRange: function(data, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 value = data.value,
                 axisRange = chart.valueAxisRanges[axisName];
 
@@ -3910,9 +3911,9 @@ var __meta__ = {
             return [point.value.from, point.value.to];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 from = value.from,
                 to = value.to,
                 axisRange = chart.valueAxisRanges[axisName];
@@ -4017,9 +4018,9 @@ var __meta__ = {
             return bullet;
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 current = value.current,
                 target = value.target,
                 axisRange = chart.valueAxisRanges[axisName];
@@ -6036,7 +6037,7 @@ var __meta__ = {
             }
 
             if (point) {
-                chart.updateRange(value, categoryIx, series);
+                chart.updateRange(value, fields);
 
                 cluster.append(point);
 
@@ -6078,9 +6079,9 @@ var __meta__ = {
             return [value.low, value.open, value.close, value.high];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 axisRange = chart.valueAxisRanges[axisName],
                 parts = chart.splitValue(value);
 
@@ -6245,7 +6246,7 @@ var __meta__ = {
             }
 
             if (point) {
-                chart.updateRange(value, categoryIx, series);
+                chart.updateRange(value, fields);
 
                 cluster.append(point);
 
@@ -6272,9 +6273,9 @@ var __meta__ = {
             ];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 axisRange = chart.valueAxisRanges[axisName],
                 parts = chart.splitValue(value).concat(
                     chart.filterOutliers(value.outliers));
