@@ -2071,7 +2071,8 @@ ul.keyboard-legend li a {
     padding-left: 0;
 }
 
-a.footer-links:hover {
+a.footer-links:hover,
+#overview a.footer-links:hover {
     color: #49c3fb;
     text-decoration: underline;
 }
