@@ -2623,12 +2623,7 @@ h5 {
     margin-top: 5px;
 }
 
-#overview-widgets h2 {
-    text-transform: uppercase;
-}
-
  #overview-widgets h2 strong {
-    text-transform: none;
     font-weight: normal;
 }
 

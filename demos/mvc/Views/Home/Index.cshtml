@@ -15,7 +15,21 @@
 
 <div id="overview">
     <div id="overview-widgets">
-        <h2>@ViewBag.Product.Replace("-", " ") <strong>Components</strong></h2>
+        @switch ((string)ViewBag.Product)
+        {
+            case "kendo-ui":
+        <h2>Kendo UI <strong>Components</strong></h2>
+                break;
+            case "aspnet-mvc":
+        <h2>ASP.NET MVC <strong>Components</strong></h2>
+                break;
+            case "php-ui":
+        <h2>PHP <strong>Components</strong></h2>
+                break;
+            case "jsp-ui":
+        <h2>JSP <strong>Components</strong></h2>
+                break;
+        }
         <div id="most-popular">
                 <h3>Most popular</h3>
                 <ul class="overview-col">
