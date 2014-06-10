@@ -1310,6 +1310,7 @@ var __meta__ = {
         gridHeader: "k-grid-header",
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
+        gridContentWrap: "k-grid-content",
         tasksWrapper: "k-gantt-tables",
         dependenciesWrapper: "k-gantt-dependencies",
         task: "k-task",
@@ -1407,7 +1408,7 @@ var __meta__ = {
             this.wrapper = this.element
                 .addClass(styles.wrapper)
                 .append("<div class='" + styles.gridHeader + "'><div class='" + styles.gridHeaderWrap + "'></div></div>")
-                .append("<div class='" + styles.gridContent + "'><div class='" + styles.tasksWrapper + "'></div><div class='" + styles.dependenciesWrapper + "'></div></div>");
+                .append("<div class='" + styles.gridContentWrap + "'><div class='" + styles.tasksWrapper + "'></div><div class='" + styles.dependenciesWrapper + "'></div></div>");
         },
 
         _domTrees: function() {

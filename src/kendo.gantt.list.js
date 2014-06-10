@@ -49,6 +49,7 @@ var __meta__ = {
         gridHeader: "k-grid-header",
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
+        gridContentWrap: "k-grid-content",
         selected: "k-state-selected",
         icon: "k-icon",
         iconCollapse: "k-i-collapse",
@@ -179,7 +180,7 @@ var __meta__ = {
             element
                 .addClass(listStyles.wrapper)
                 .append("<div class='" + listStyles.gridHeader + "'><div class='" + listStyles.gridHeaderWrap + "'></div></div>")
-                .append("<div class='" + listStyles.gridContent + "'></div>");
+                .append("<div class='" + listStyles.gridContentWrap + "'></div>");
 
             this.header = element.find(DOT + listStyles.gridHeaderWrap);
             this.content = element.find(DOT + listStyles.gridContent);
