@@ -4,14 +4,14 @@
 
 .k-gantt
 {
-	white-space: nowrap
+    white-space: nowrap
 }
 
 .k-gantt-layout
 {
-	display: inline-block;
-	white-space: normal;
-	vertical-align: top;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
 }
 
 .k-gantt .k-splitbar
@@ -25,13 +25,14 @@
 
 .k-gantt .k-gantt-layout th
 {
-	vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 .k-gantt td
 {
-	overflow: visible;
-	vertical-align: top;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: top;
 }
 
 .k-gantt .k-grid .k-edit-cell
@@ -98,14 +99,14 @@
 .k-gantt-toolbar li:first-child,
 .k-gantt-toolbar li:first-child > .k-link
 {
-	border-top-left-radius: 4px;
+    border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
 }
 
 .k-gantt-toolbar li:last-child,
 .k-gantt-toolbar li:last-child > .k-link
 {
-	border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
 
@@ -120,71 +121,71 @@
 
 .k-gantt-treelist .k-grid-header tr
 {
-	height: 5em;
+    height: 5em;
 }
 
 .k-gantt .k-treelist .k-grid-header
 {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 .k-gantt .k-treelist .k-grid-content
 {
-	overflow-y: hidden;
+    overflow-y: hidden;
     overflow-x: scroll;
 }
 
 .k-treelist-group > tr > span
 {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .k-treelist-group .k-widget
 {
-	font-weight: normal;
+    font-weight: normal;
 }
 
 /* Gantt TimeLine */
 
 .k-gantt-timeline .k-grid-header tr
 {
-	height: 2.5em;
+    height: 2.5em;
 }
 
 .k-gantt-rows tr,
 .k-gantt-tasks tr,
 .k-gantt .k-grid-content tr
 {
-	height: 2.3em;
+    height: 2.3em;
 }
 
 .k-gantt-timeline
 {
-	background: transparent;
+    background: transparent;
 }
 
 .k-gantt-rows,
 .k-gantt-columns,
 .k-gantt-dependencies
 {
-	position: absolute;
+    position: absolute;
     top: 0;
     left: 0;
 }
 
 .k-gantt-tables
 {
-	position: relative;
+    position: relative;
 }
 
 .k-gantt .k-gantt-timeline th
 {
-	text-align: center;
+    text-align: center;
 }
 
 .k-gantt .k-gantt-timeline tr:first-child th
 {
-	border-bottom-width: 1px;
+    border-bottom-width: 1px;
 }
 
 /* Gantt TimeLine objects */
@@ -246,42 +247,42 @@
 .k-line-h,
 .k-line-v
 {
-	position: absolute;
+    position: absolute;
 }
 
 .k-line-h
 {
-	height: 2px;
+    height: 2px;
 }
 
 .k-line-v
 {
-	width: 2px;
+    width: 2px;
 }
 
 .k-arrow-e,
 .k-arrow-w
 {
-	position: absolute;
-	top: -4px;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 5px;
+    position: absolute;
+    top: -4px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px;
 }
 
 .k-arrow-e
 {
-	right: -6px;
-	border-top-color: transparent;
+    right: -6px;
+    border-top-color: transparent;
     border-bottom-color: transparent;
     border-right-color: transparent;
 }
 
 .k-arrow-w
 {
-	left: -6px;
-	border-top-color: transparent;
+    left: -6px;
+    border-top-color: transparent;
     border-bottom-color: transparent;
     border-left-color: transparent;
 }
@@ -290,19 +291,19 @@
 
 .k-task-milestone
 {
-	width: 13px;
-	height: 13px;
+    width: 13px;
+    height: 13px;
     margin-top: 3px;
-	border-style: solid;
+    border-style: solid;
     border-width: 1px;
-	-webkit-transform: rotate(45deg);
-	transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .k-ie8 .k-task-milestone,
 .k-ie7 .k-task-milestone
 {
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 /* Button */
@@ -310,51 +311,51 @@
 .k-gantt .k-gantt-treelist .k-button,
 .k-gantt .k-gantt-tasks .k-button-icon
 {
-	padding-top: 0;
-	padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .k-gantt .k-gantt-tasks .k-button-icon
 {
-	margin-top: 4px;
+    margin-top: 4px;
 }
 
 .k-gantt .k-gantt-treelist .k-button
 {
-	margin-top: -4px;
-	margin-bottom: -2px;
+    margin-top: -4px;
+    margin-bottom: -2px;
 }
 
 .k-gantt .k-gantt-tasks .k-button-icon
 {
-	padding-left: 2px;
-	padding-right: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .k-gantt .k-gantt-treelist .k-button .k-icon,
 .k-gantt .k-gantt-tasks .k-button .k-icon
 {
-	vertical-align: text-top;
+    vertical-align: text-top;
 }
 
 .k-rel .k-button-icon
 {
-	position: absolute;
-	left: 200px;
+    position: absolute;
+    left: 200px;
 }
 
 /* Tasks */
 
 .k-rel
 {
-	position: relative;
-	height: 0;
-	top: -.3em;
+    position: relative;
+    height: 0;
+    top: -.3em;
 }
 
 .k-task-wrap
 {
-	position: absolute;
+    position: absolute;
     padding: 0 20px 5px;
     margin: -1px -20px 0;
     z-index: 2;
@@ -389,11 +390,11 @@
 
 .k-task-dot
 {
-	position: absolute;
+    position: absolute;
     top: 0;
-	width: 16px;
-	height: 16px;
-	line-height: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
     display: none;
     cursor: pointer;
 }
@@ -420,27 +421,27 @@
     content: "\a0";
     display: inline-block;
     width: 0;
-	height: 16px;
+    height: 16px;
 }
 
 .k-task-dot:after
 {
-	content: "";
-	display: inline-block;
-	vertical-align: middle;
-	width: 7px;
-	height: 7px;
-	border-radius: 4px;
-	margin-left: 4px;
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 7px;
+    height: 7px;
+    border-radius: 4px;
+    margin-left: 4px;
 }
 
 .k-task-dot:hover:after,
 .k-task-dot.k-state-hover:after,
 .k-task-wrap-active .k-task-dot:after
 {
-	border-style: solid;
+    border-style: solid;
     border-width: 1px;
-	margin-left: 3px;
+    margin-left: 3px;
 }
 
 .k-task-start
@@ -517,7 +518,7 @@
     position: absolute;
     visibility: hidden;
     z-index: 2;
-	height: auto;
+    height: auto;
 }
 
 .k-task-single:hover .k-resize-handle,
@@ -575,7 +576,7 @@
     margin-left: 16px;
     border-width: 5px;
     border-style: solid;
-	border-top-color: transparent;
+    border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
     display: none;
