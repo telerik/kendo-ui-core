@@ -187,6 +187,9 @@
     <Compile Include="UI\Map\Serialization\ZoomSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridBuilderTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridXmlaDataSourceBuilderTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridTestHelper.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorHtmlBuilderTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerBuilderTests.cs" />
@@ -533,6 +536,9 @@
     <None Include="..\..\src\shared\Kendo.snk">
       <Link>Kendo.snk</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\PivotGridDataSource\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
