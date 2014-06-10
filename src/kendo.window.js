@@ -626,7 +626,7 @@ var __meta__ = {
             return that;
         },
 
-        content: function (html) {
+        content: function (html, data) {
             var content = this.wrapper.children(KWINDOWCONTENT),
                 scrollContainer = content.children(".km-scroll-container");
 
@@ -636,9 +636,21 @@ var __meta__ = {
                 return content.html();
             }
 
+            this.angular("cleanup", function(){
+                return { elements: content };
+            });
+
             kendo.destroy(this.element.children());
 
             content.empty().html(html);
+
+            this.angular("compile", function(){
+                return {
+                    elements: content,
+                    data: [ { dataItem: data || {} } ]
+                };
+            });
+
             return this;
         },
 
@@ -1056,11 +1068,12 @@ var __meta__ = {
 
         _ajaxSuccess: function (contentTemplate) {
             return function (data) {
+                var html = data;
                 if (contentTemplate) {
-                    data = template(contentTemplate)(data || {});
+                    html = template(contentTemplate)(data || {});
                 }
 
-                this.content(data);
+                this.content(html, data);
                 this.element.prop("scrollTop", 0);
 
                 this.trigger(REFRESH);
