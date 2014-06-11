@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": ".",
+            ",": " ",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,7 +18,7 @@
             currency: {
                 pattern: ["-n $","n $"],
                 decimals: 2,
-                ",": ".",
+                ",": " ",
                 ".": ",",
                 groupSize: [3],
                 symbol: "€"
@@ -32,19 +32,19 @@
                     namesShort: ["D","S","T","Q","Q","S","S"]
                 },
                 months: {
-                    names: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro",""],
-                    namesAbbr: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez",""]
+                    names: ["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro",""],
+                    namesAbbr: ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez",""]
                 },
                 AM: [""],
                 PM: [""],
                 patterns: {
-                    d: "dd-MM-yyyy",
-                    D: "dddd, d' de 'MMMM' de 'yyyy",
-                    F: "dddd, d' de 'MMMM' de 'yyyy HH:mm:ss",
-                    g: "dd-MM-yyyy HH:mm",
-                    G: "dd-MM-yyyy HH:mm:ss",
-                    m: "d/M",
-                    M: "d/M",
+                    d: "dd/MM/yyyy",
+                    D: "d' de 'MMMM' de 'yyyy",
+                    F: "d' de 'MMMM' de 'yyyy HH:mm:ss",
+                    g: "dd/MM/yyyy HH:mm",
+                    G: "dd/MM/yyyy HH:mm:ss",
+                    m: "d' de 'MMMM",
+                    M: "d' de 'MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",
@@ -52,9 +52,9 @@
                     y: "MMMM' de 'yyyy",
                     Y: "MMMM' de 'yyyy"
                 },
-                "/": "-",
+                "/": "/",
                 ":": ":",
-                firstDay: 1
+                firstDay: 0
             }
         }
     }
