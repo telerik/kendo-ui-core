@@ -69,16 +69,15 @@ body
 
 .console
 {
-    background-color: #fff;
-    border:solid #ccc;
-    border-width:1px 0;
     color: #333;
     font: 11px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-    height: 200px;
-    margin: 1.4em 0;
+    margin: 0;
     overflow-x: hidden;
-    overflow-y: scroll;
     text-align: left;
+    height: 200px;
+    min-width: 300px;
+    border: 1px solid rgba(20,53,80,0.1);
+    background-color: #ffffff;
 }
 
 .console .count,
@@ -100,7 +99,6 @@ body
     border-bottom: 1px solid #DDD;
     padding: 5px 5px 4px 24px;
 }
-
 .console .error
 {
     background-position: 6px -135px;
@@ -112,10 +110,10 @@ body
 .configuration,
 .configuration-horizontal
 {
-    margin: 0;
-    padding: 0;
-    border: 1px solid rgba(0,0,0,0.05);
-    background-color: rgba(0,0,0,0.01);
+    margin: 4.5em auto;
+    padding: 3em;
+    background-color: rgba(20,53,80,0.038);
+    border: 1px solid rgba(20,53,80,0.05);
 }
 
 .absConf .configuration
@@ -153,11 +151,11 @@ body
 .configuration-horizontal .infoHead
 {
     display: block;
-    font-size: 13px;
+    margin-bottom: 1em;
+    font-size: 12px;
+    line-height: 1em;
     font-weight: bold;
-    text-indent: 0;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    text-transform: uppercase;
 }
 
 
@@ -333,9 +331,10 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 ul.keyboard-legend {
     list-style-type: none;
-    margin: 0 auto;
-    width: 690px;
-    padding: 0;
+    margin: 1em 0;
+    padding: 3em;
+    background-color: rgba(20,53,80,0.038);
+    border: 1px solid rgba(20,53,80,0.05);
 }
 
 ul.keyboard-legend li {
@@ -450,7 +449,6 @@ ul.keyboard-legend li a {
     margin-top: 1em;
 }
 #example h4 {
-    width: 690px;
     margin: 20px auto 10px;
 }
 
