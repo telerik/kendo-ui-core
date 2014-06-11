@@ -1239,12 +1239,15 @@ var __meta__ = {
         },
 
         _closeHandler: function (e) {
-            var that = this;
+            var that = this,
+                containment = contains(e.currentTarget, e.relatedTarget || e.target);
 
-            if (that.popup.visible() && e.which !== 3) {
-                DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
+            if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
+                !((pointers || msPointers) && e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) &&
+                containment) || (!that.options.closeOnClick && !containment))) {
+                    DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
-                that.popup.close();
+                    that.popup.close();
             }
         },
 
