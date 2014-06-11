@@ -1192,6 +1192,16 @@ var __meta__ = {
             }
         },
 
+        setDependenciesDataSource: function(dependencies) {
+            this.options.dependencies = dependencies;
+
+            this._dependencies();
+
+            if (this.options.autoBind) {
+                dependencies.fetch();
+            }
+        },
+
         items: function() {
             return this.wrapper.children(".k-task");
         },
