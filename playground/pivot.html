@@ -258,7 +258,7 @@
                     dragAndDrop: true,
                     dragstart: function(e) {
                         var dataItem = this.dataItem(e.sourceNode);
-                        if (dataItem.level() == 0 || !dataItem.hasChildren) {
+                        if (!dataItem.hasChildren) {
                             e.preventDefault();
                         }
                     },
@@ -279,7 +279,7 @@
                             console.log(node);
                             container
                                 .data("kendoSettingsTarget")
-                                .add(node.uniqueName);
+                                .add(node.defaultHierarchy || node.uniqueName);
                         }
                     },
                     dataSource: {

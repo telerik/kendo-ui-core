@@ -1404,6 +1404,7 @@ var __meta__ = {
             caption: kendo.getter("DIMENSION_CAPTION['#text']", true),
             description: kendo.getter("DESCRIPTION['#text']", true),
             uniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+            defaultHierarchy: kendo.getter("DEFAULT_HIERARCHY['#text']", true),
             type: kendo.getter("DIMENSION_TYPE['#text']", true)
         },
         hierarchies: {
