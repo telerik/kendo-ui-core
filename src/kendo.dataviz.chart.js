@@ -7507,21 +7507,24 @@ var __meta__ = {
                     pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
                     var value = pointData.valueFields.value;
                     var summary = pointData.fields.summary;
-                    var isSum = false;
                     var from = to;
+                    var pointTo;
+                    var isSum = false;
                     if (summary) {
                         if (summary.toLowerCase() === "runningtotal") {
                             pointData.valueFields.value = runningTotal;
+                            pointTo = from - runningTotal;
                             runningTotal = 0;
                         } else {
                             pointData.valueFields.value = sum;
+                            from = 0;
+                            pointTo = sum;
+                            isSum = true;
                         }
-
-                        isSum = true;
-                        from = 0;
                     } else if (isNumber(value)) {
                         runningTotal += value;
                         to += value;
+                        pointTo = to;
                     }
 
                     callback(pointData, {
@@ -7533,18 +7536,14 @@ var __meta__ = {
                         runningTotal: runningTotal,
                         isSum: isSum,
                         from: from,
-                        to: to
+                        to: pointTo
                     });
                 }
             }
         },
 
         updateRange: function(value, fields) {
-            if (fields.isSum) {
-                BarChart.fn.updateRange.call(this, value, fields);
-            } else {
-                BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
-            }
+            BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
         },
 
         fromValue: function(point) {
@@ -7557,14 +7556,6 @@ var __meta__ = {
         },
 
         plotRange: function(point) {
-            var seriesIx = point.seriesIx;
-            var seriesPoints = this.seriesPoints[seriesIx];
-
-            var prevIx = point.categoryIx - 1;
-            if (prevIx < 0 || point.isSum) {
-                return BarChart.fn.plotRange.call(this, point);
-            }
-
             return [point.from, point.to];
         },
 
@@ -7579,6 +7570,11 @@ var __meta__ = {
                 var prevPoint;
                 for (var pointIx = 0; pointIx < points.length; pointIx++) {
                     var point = points[pointIx];
+
+                    if (point.isSum) {
+                        continue;
+                    }
+
                     if (point && prevPoint) {
                         var segment = new WaterfallSegment(prevPoint, point, currentSeries);
                         this.append(segment);

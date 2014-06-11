@@ -182,33 +182,38 @@
             setup: function() {
                 createChart(makeSeries([
                    { value: 1 }, { value: 3 }, { summary: "runningTotal" },
-                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                   { value: -1 }, { value: -2 }, { summary: "runningTotal" },
+                   { summary: "sum" }
                 ]));
             }
         });
 
-        test("first point starts at 0", function() {
+        test("point #1 starts at 0", function() {
             assertPlotRange(0, [0, 1]);
         });
 
-        test("second point starts at prev. point end", function() {
+        test("point #2 starts point #1 end", function() {
             assertPlotRange(1, [1, 4]);
         });
 
-        test("running total starts at 0", function() {
-            assertPlotRange(2, [0, 4]);
+        test("point #3 shows running total from point #2 end", function() {
+            assertPlotRange(2, [4, 0]);
         });
 
-        test("point after running total starts at its value", function() {
+        test("point #4 starts from point #2", function() {
             assertPlotRange(3, [4, 3]);
         });
 
-        test("negative point starts from prev. point", function() {
+        test("point #5 starts from point #4 end", function() {
             assertPlotRange(4, [3, 1]);
         });
 
-        test("sum starts at 0", function() {
-            assertPlotRange(5, [0, 1]);
+        test("point #6 shows running total starting from point #5 end", function() {
+            assertPlotRange(5, [1, 4]);
+        });
+
+        test("point #7 shows sum starting from 0", function() {
+            assertPlotRange(6, [0, 1]);
         });
 
         test("negative running total", function() {
@@ -216,7 +221,7 @@
                { value: -1 }, { value: -2 }, { summary: "runningTotal" }
             ]));
 
-            assertPlotRange(2, [0, -3]);
+            assertPlotRange(2, [-3, 0]);
         });
 
         test("negative sum", function() {
@@ -240,7 +245,7 @@
         });
 
         test("Reports minimum value for default axis", function() {
-            equal(chart.valueAxisRanges[undefined].min, 1);
+            equal(chart.valueAxisRanges[undefined].min, 0);
         });
 
         test("Reports maximum value for default axis", function() {
@@ -253,7 +258,7 @@
                { value: -1 }, { summary: "runningTotal" }
             ]));
 
-            equal(chart.valueAxisRanges[undefined].min, -1);
+            equal(chart.valueAxisRanges[undefined].min, 0);
         });
     })();
 })();
