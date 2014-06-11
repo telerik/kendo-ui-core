@@ -1066,7 +1066,7 @@
             });
 
             deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["1.feb", "2.feb", "3.feb"]);
+                 ["1.feb.", "2.feb.", "3.feb."]);
         });
 
         test("creates labels with custom template", function() {
@@ -1945,7 +1945,7 @@
             });
 
             deepEqual($.map(view.log.text, function(text) { return text.content }),
-                 ["31.ene", "1.feb", "2.feb", "3.feb"]);
+                 ["31.ene.", "1.feb.", "2.feb.", "3.feb."]);
         });
 
         test("creates labels with custom template", function() {
