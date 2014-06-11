@@ -30,6 +30,7 @@ namespace KendoCRUDService.Models
                 Start = Start,
                 End = End,
                 PercentComplete = PercentComplete,
+                Summary = Summary,
                 Expanded = Expanded
             };
         }

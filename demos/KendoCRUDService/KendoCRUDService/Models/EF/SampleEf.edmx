@@ -201,6 +201,7 @@
           <Property Name="End" Type="datetime" Nullable="false" />
           <Property Name="PercentComplete" Type="decimal" Nullable="false" Precision="5" Scale="2" />
           <Property Name="Expanded" Type="bit" Nullable="false" />
+          <Property Name="Summary" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Intraday">
           <Key>
@@ -1074,6 +1075,7 @@
           <Property Type="Boolean" Name="Expanded" Nullable="false" />
           <NavigationProperty Name="GanttTasks1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask" ToRole="GanttTask1" />
           <NavigationProperty Name="GanttTask1" Relationship="SampleModel.FK_GanttTasks_GanttTasks" FromRole="GanttTask1" ToRole="GanttTask" />
+          <Property Type="Boolean" Name="Summary" Nullable="false" />
         </EntityType>
         <Association Name="FK_GanttTasks_GanttTasks">
           <End Type="SampleModel.GanttTask" Role="GanttTask" Multiplicity="0..1" />
@@ -1347,6 +1349,7 @@
           <EntitySetMapping Name="GanttTasks">
             <EntityTypeMapping TypeName="SampleModel.GanttTask">
               <MappingFragment StoreEntitySet="GanttTasks">
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
                 <ScalarProperty Name="Expanded" ColumnName="Expanded" />
                 <ScalarProperty Name="PercentComplete" ColumnName="PercentComplete" />
                 <ScalarProperty Name="End" ColumnName="End" />

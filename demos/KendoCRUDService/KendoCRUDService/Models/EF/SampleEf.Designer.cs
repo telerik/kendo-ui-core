@@ -1896,7 +1896,8 @@ namespace KendoCRUDService.Models.EF
         /// <param name="end">Initial value of the End property.</param>
         /// <param name="percentComplete">Initial value of the PercentComplete property.</param>
         /// <param name="expanded">Initial value of the Expanded property.</param>
-        public static GanttTask CreateGanttTask(global::System.Int32 id, global::System.Int32 orderID, global::System.String title, global::System.DateTime start, global::System.DateTime end, global::System.Decimal percentComplete, global::System.Boolean expanded)
+        /// <param name="summary">Initial value of the Summary property.</param>
+        public static GanttTask CreateGanttTask(global::System.Int32 id, global::System.Int32 orderID, global::System.String title, global::System.DateTime start, global::System.DateTime end, global::System.Decimal percentComplete, global::System.Boolean expanded, global::System.Boolean summary)
         {
             GanttTask ganttTask = new GanttTask();
             ganttTask.ID = id;
@@ -1906,6 +1907,7 @@ namespace KendoCRUDService.Models.EF
             ganttTask.End = end;
             ganttTask.PercentComplete = percentComplete;
             ganttTask.Expanded = expanded;
+            ganttTask.Summary = summary;
             return ganttTask;
         }
 
@@ -2107,6 +2109,30 @@ namespace KendoCRUDService.Models.EF
         private global::System.Boolean _Expanded;
         partial void OnExpandedChanging(global::System.Boolean value);
         partial void OnExpandedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Summary
+        {
+            get
+            {
+                return _Summary;
+            }
+            set
+            {
+                OnSummaryChanging(value);
+                ReportPropertyChanging("Summary");
+                _Summary = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Summary");
+                OnSummaryChanged();
+            }
+        }
+        private global::System.Boolean _Summary;
+        partial void OnSummaryChanging(global::System.Boolean value);
+        partial void OnSummaryChanged();
 
         #endregion
 

@@ -29,7 +29,7 @@ namespace KendoCRUDService.Models
                             Start = p.Start,
                             End = p.End,
                             PercentComplete = p.PercentComplete,
-                            Summary = context.GanttTasks.Count(t => t.ParentID.Value == p.ID) > 0,
+                            Summary = p.Summary,
                             Expanded = p.Expanded
                         })
                         .ToList();
