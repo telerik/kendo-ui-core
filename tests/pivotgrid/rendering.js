@@ -1673,6 +1673,41 @@
         equal(td_level8.eq(0).attr("rowspan"), 2);
     });
 
+    test("PivotGrid renders colspan for header of one dimension with 4 levels", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_3", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 1_1", parentName: "dim 0_1", levelNum: "2", children: [] } ] },
+            { members: [ { name: "dim 2_1", parentName: "dim 1_1", levelNum: "3", children: [] } ] },
+            { members: [ { name: "dim 3_1", parentName: "dim 2_1", levelNum: "4", children: [] } ] },
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td");
+        var td_1 = rows.eq(1).find("td");
+        var td_2 = rows.eq(2).find("td");
+        var td_3 = rows.eq(3).find("td");
+        var td_4 = rows.eq(4).find("td");
+        var td_5 = rows.eq(5).find("td");
+        var td_6 = rows.eq(6).find("td");
+
+        equal(td_0.eq(1).attr("colspan"), 4);
+        ok(!td_1.eq(3).attr("colspan"));
+        equal(td_2.eq(0).attr("colspan"), 2);
+        equal(td_3.eq(0).attr("colspan"), 3);
+        equal(td_4.eq(0).attr("colspan"), 4);
+        equal(td_5.eq(0).attr("colspan"), 4);
+        equal(td_6.eq(0).attr("colspan"), 5);
+    });
+
     test("PivotGrid renders colspan for header of 2 dimension - fully expanded", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
