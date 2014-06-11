@@ -1991,8 +1991,6 @@ var __meta__ = {
         }
     });
 
-    //row headers
-    //
     var RowBuilder = Class.extend({
         init: function(options) {
             this._state(null);
@@ -2090,7 +2088,25 @@ var __meta__ = {
             var childRow;
 
             var allCell;
-            var cell = element("td", null, [text(member.caption || member.name)]);
+            var cellChildren = [];
+            var childrenLength = children.length;
+
+            if (member.hasChildren) {
+                var path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+
+                if (this.expandState[path] === false) {
+                    childrenLength = 0;
+                }
+
+                var cellAttr = { class: "k-icon " + (childrenLength ? STATE_EXPANDED : STATE_COLLAPSED) };
+                cellAttr[kendo.attr("path")] = path;
+
+                cellChildren.push(element("span", cellAttr));
+            }
+
+            cellChildren.push(text(member.caption || member.name));
+
+            var cell = element("td", null, cellChildren);
 
             row.children.push(cell);
 
@@ -2107,10 +2123,10 @@ var __meta__ = {
             cell.levelNum = levelNum;
             //
 
-            if (children[0]) {
+            if (childrenLength) {
                 row.hasChild = false;
 
-                for (var idx = 0; idx < children.length; idx++) {
+                for (var idx = 0; idx < childrenLength; idx++) {
                     childRow = this._buildRows(children[idx], memberIdx);
 
                     if (row !== childRow) {

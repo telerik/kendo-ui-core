@@ -1789,7 +1789,7 @@
         ok(!td_1.eq(1).hasClass("k-first"));
     });
 
-    test("PivotGrid renders k-", function() {
+    test("PivotGrid renders k-grid-footer to all rows", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
@@ -1809,5 +1809,71 @@
 
         ok(rows.eq(3).hasClass("k-grid-footer"));
         ok(rows.eq(5).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders expand button collapsed of the row headers", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var td = headerTable.find("td");
+
+        var button = td.find("span");
+
+        ok(button[0]);
+        ok(button.hasClass("k-icon"));
+        ok(button.hasClass("k-i-arrow-e"));
+        ok(!button.hasClass("k-i-arrow-s"));
+        equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
+    });
+
+    test("PivotGrid renders expand button with correct path", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td").eq(0);
+        var td_1 = rows.eq(0).find("td").eq(1);
+
+        equal(td_0.find("span").attr(kendo.attr("path")), kendo.stringify(["dim 0"]));
+        equal(td_1.find("span").attr(kendo.attr("path")), kendo.stringify(["dim 0", "dim 1"]));
+    });
+
+    test("PivotGrid renders expand button expanded", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 0_2", levelNum: "1", parentName: "level 0", children: [] }] },
+            { members: [ { name: "level 0_3", levelNum: "1", parentName: "level 0", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var td = headerTable.find("td");
+
+        var button = td.find("span");
+
+        ok(button[0]);
+        ok(button.hasClass("k-icon"));
+        ok(!button.hasClass("k-i-arrow-e"));
+        ok(button.hasClass("k-i-arrow-s"));
+        equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
     });
 })();
