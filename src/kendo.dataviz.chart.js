@@ -7500,6 +7500,7 @@ var __meta__ = {
                 currentSeries = series[seriesIx];
                 var sum = seriesTotal(currentSeries);
                 var runningTotal = 0;
+                var to = 0;
 
                 for (categoryIx = 0; categoryIx < count; categoryIx++) {
                     currentCategory = categories[categoryIx];
@@ -7507,16 +7508,20 @@ var __meta__ = {
                     var value = pointData.valueFields.value;
                     var summary = pointData.fields.summary;
                     var isSum = false;
+                    var from = to;
                     if (summary) {
                         if (summary.toLowerCase() === "runningtotal") {
                             pointData.valueFields.value = runningTotal;
                             runningTotal = 0;
                         } else {
                             pointData.valueFields.value = sum;
-                            isSum = true;
                         }
+
+                        isSum = true;
+                        from = 0;
                     } else if (isNumber(value)) {
                         runningTotal += value;
+                        to += value;
                     }
 
                     callback(pointData, {
@@ -7526,37 +7531,41 @@ var __meta__ = {
                         seriesIx: seriesIx,
                         sum: sum,
                         runningTotal: runningTotal,
-                        isSum: isSum
+                        isSum: isSum,
+                        from: from,
+                        to: to
                     });
                 }
             }
         },
 
-        plotRange: function(point) {
-            var categoryIx = point.categoryIx;
+        updateRange: function(value, fields) {
+            if (fields.isSum) {
+                BarChart.fn.updateRange.call(this, value, fields);
+            } else {
+                BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
+            }
+        },
+
+        fromValue: function(point) {
             var seriesIx = point.seriesIx;
             var seriesPoints = this.seriesPoints[seriesIx];
 
-            if (categoryIx === 0 || point.isSum) {
+            for (var i = 0; i < seriesPoints.length; i++) {
+                seriesPoints[i]
+            };
+        },
+
+        plotRange: function(point) {
+            var seriesIx = point.seriesIx;
+            var seriesPoints = this.seriesPoints[seriesIx];
+
+            var prevIx = point.categoryIx - 1;
+            if (prevIx < 0 || point.isSum) {
                 return BarChart.fn.plotRange.call(this, point);
             }
 
-            var prevPoint = seriesPoints[categoryIx - 1];
-            var from = prevPoint.sum;
-            var to = from + point.value;
-
-            return [from, to];
-        },
-
-        updateRange: function(value, fields) {
-            var prevIx = fields.categoryIx - 1;
-            if (prevIx >= 0) {
-                var seriesPoints = this.seriesPoints[fields.seriesIx];
-                prevPoint = seriesPoints[prevIx];
-                BarChart.fn.updateRange.call(this, { value: prevPoint.sum }, fields);
-            } else {
-                BarChart.fn.updateRange.call(this, value, fields);
-            }
+            return [point.from, point.to];
         },
 
         createSegments: function() {

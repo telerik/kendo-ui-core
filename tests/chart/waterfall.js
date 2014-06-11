@@ -171,4 +171,89 @@
             assertFields("sum", [3, 3, 3, 3]);
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        function assertPlotRange(index, range) {
+            deepEqual(chart.plotRange(chart.points[index]), range);
+        }
+
+        module("Waterfall / Plot Range /", {
+            setup: function() {
+                createChart(makeSeries([
+                   { value: 1 }, { value: 3 }, { summary: "runningTotal" },
+                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                ]));
+            }
+        });
+
+        test("first point starts at 0", function() {
+            assertPlotRange(0, [0, 1]);
+        });
+
+        test("second point starts at prev. point end", function() {
+            assertPlotRange(1, [1, 4]);
+        });
+
+        test("running total starts at 0", function() {
+            assertPlotRange(2, [0, 4]);
+        });
+
+        test("point after running total starts at its value", function() {
+            assertPlotRange(3, [4, 3]);
+        });
+
+        test("negative point starts from prev. point", function() {
+            assertPlotRange(4, [3, 1]);
+        });
+
+        test("sum starts at 0", function() {
+            assertPlotRange(5, [0, 1]);
+        });
+
+        test("negative running total", function() {
+            createChart(makeSeries([
+               { value: -1 }, { value: -2 }, { summary: "runningTotal" }
+            ]));
+
+            assertPlotRange(2, [0, -3]);
+        });
+
+        test("negative sum", function() {
+            createChart(makeSeries([
+               { value: -1 }, { value: -2 }, { summary: "sum" }
+            ]));
+
+            assertPlotRange(2, [0, -3]);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Waterfall / Axis Range /", {
+            setup: function() {
+                createChart(makeSeries([
+                   { value: 1 }, { value: 3 }, { summary: "runningTotal" },
+                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                ]));
+            }
+        });
+
+        test("Reports minimum value for default axis", function() {
+            equal(chart.valueAxisRanges[undefined].min, 1);
+        });
+
+        test("Reports maximum value for default axis", function() {
+            equal(chart.valueAxisRanges[undefined].max, 4);
+        });
+
+        test("negative running total", function() {
+            createChart(makeSeries([
+               { value: 1 }, { value: 2 }, { summary: "runningTotal" },
+               { value: -1 }, { summary: "runningTotal" }
+            ]));
+
+            equal(chart.valueAxisRanges[undefined].min, -1);
+        });
+    })();
 })();
