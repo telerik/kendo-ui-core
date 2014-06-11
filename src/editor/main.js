@@ -591,7 +591,7 @@
                 toolGroups.lists,
                 toolGroups.indenting,
                 toolGroups.links,
-                ["insertImage", "insertFile"],
+                ["insertImage"],
                 toolGroups.tables
             )
         },

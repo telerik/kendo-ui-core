@@ -92,8 +92,7 @@ var FileCommand = Command.extend({
         var that = this,
             range = that.lockRange();
 
-        // formatter is a LinkFormatter
-        //this.formatter.apply(range, this.attributes);
+        this.formatter.apply(range, this.attributes);
         that.releaseRange(range);
     },
 
