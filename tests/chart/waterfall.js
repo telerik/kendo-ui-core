@@ -78,7 +78,7 @@
                { value: 1 }, { value: null }, { value: 2 }, { summary: "runningTotal" }
             ]));
 
-            assertFields("runningTotal", [1, 3, 0]);
+            assertFields("runningTotal", [1, 1, 3, 0]);
         });
 
         test("ignores undefined values", function() {
@@ -86,7 +86,7 @@
                { value: 1 }, {}, { value: 2 }, { summary: "runningTotal" }
             ]));
 
-            assertFields("runningTotal", [1, 3, 0]);
+            assertFields("runningTotal", [1, 1, 3, 0]);
         });
 
         test("ignores NaN values", function() {
@@ -94,7 +94,7 @@
                { value: 1 }, { value: NaN }, { value: 2 }, { summary: "runningTotal" }
             ]));
 
-            assertFields("runningTotal", [1, 3, 0]);
+            assertFields("runningTotal", [1, 1, 3, 0]);
         });
 
         test("ignores other values", function() {
@@ -102,7 +102,7 @@
                { value: 1 }, { value: "foo" }, { value: 2 }, { summary: "runningTotal" }
             ]));
 
-            assertFields("runningTotal", [1, 3, 0]);
+            assertFields("runningTotal", [1, 1, 3, 0]);
         });
     })();
 

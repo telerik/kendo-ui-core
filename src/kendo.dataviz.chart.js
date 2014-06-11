@@ -7483,44 +7483,53 @@ var __meta__ = {
             this.createSegments();
         },
 
-        addValue: function(data, fields) {
-            var value = data.valueFields.value;
-            var summaryType = data.fields.summary;
-            var prevPoint;
+        traverseDataPoints: function(callback) {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                categories = chart.categoryAxis.options.categories || [],
+                count = categoriesCount(series),
+                categoryIx,
+                seriesIx,
+                pointData,
+                currentCategory,
+                currentSeries,
+                seriesCount = series.length;
 
-            var prevIx = fields.categoryIx - 1;
-            if (prevIx >= 0) {
-                var seriesPoints = this.seriesPoints[fields.seriesIx];
-                prevPoint = seriesPoints[prevIx];
-            }
+            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
+                currentSeries = series[seriesIx];
+                var sum = seriesTotal(currentSeries);
+                var runningTotal = 0;
 
+                for (categoryIx = 0; categoryIx < count; categoryIx++) {
+                    currentCategory = categories[categoryIx];
+                    pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                    var value = pointData.valueFields.value;
+                    var summary = pointData.fields.summary;
+                    var isSum = false;
+                    if (summary) {
+                        if (summary.toLowerCase() === "runningtotal") {
+                            pointData.valueFields.value = runningTotal;
+                            runningTotal = 0;
+                        } else {
+                            pointData.valueFields.value = sum;
+                            isSum = true;
+                        }
+                    } else if (isNumber(value)) {
+                        runningTotal += value;
+                    }
 
-            if (defined(value) && value !== null) {
-                var sum = value;
-                var runningTotal = value;
-
-                if (prevPoint) {
-                    sum += prevPoint.sum;
-                    runningTotal += prevPoint.runningTotal;
+                    callback(pointData, {
+                        category: currentCategory,
+                        categoryIx: categoryIx,
+                        series: currentSeries,
+                        seriesIx: seriesIx,
+                        sum: sum,
+                        runningTotal: runningTotal,
+                        isSum: isSum
+                    });
                 }
-
-                fields.sum = sum;
-                fields.runningTotal = runningTotal;
-            } else if (summaryType && prevPoint) {
-                if (summaryType.toLowerCase() === "runningTotal") {
-                    data.valueFields.value = prevPoint.runningTotal;
-                    fields.sum = prevPoint.sum;
-                    fields.runningTotal = 0;
-                } else {
-                    data.valueFields.value = prevPoint.sum;
-                    fields.sum = prevPoint.sum;
-                    fields.runningTotal = 0;
-                }
-
-                fields.isSum = true;
             }
-
-            BarChart.fn.addValue.call(this, data, fields);
         },
 
         plotRange: function(point) {
