@@ -2995,7 +2995,7 @@ var __meta__ = {
                         value: this.value,
                         percentage: this.percentage,
                         runningTotal: this.runningTotal,
-                        sum: point.sum,
+                        sum: this.sum,
                         series: this.series
                     });
                 } else {
@@ -6873,27 +6873,6 @@ var __meta__ = {
                     });
                 }
             }
-        },
-
-        pointsTotal: function(series) {
-            var data = series.data,
-                length = data.length,
-                sum = 0,
-                value, i, pointData;
-
-            for (i = 0; i < length; i++) {
-                pointData = SeriesBinder.current.bindPoint(series, i);
-                value = pointData.valueFields.value;
-                if (typeof value === "string") {
-                    value = parseFloat(value);
-                }
-
-                if (value && pointData.fields.visible !== false) {
-                    sum += value;
-                }
-            }
-
-            return sum;
         }
     };
 
@@ -6943,7 +6922,7 @@ var __meta__ = {
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                total = chart.pointsTotal(currentSeries);
+                total = seriesTotal(currentSeries);
                 anglePerValue = 360 / total;
 
                 if (defined(currentSeries.startAngle)) {
@@ -11875,6 +11854,26 @@ var __meta__ = {
         }
     }
 
+    function seriesTotal(series) {
+        var data = series.data;
+        var sum = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            var pointData = SeriesBinder.current.bindPoint(series, i);
+            var value = pointData.valueFields.value;
+
+            if (typeof value === STRING) {
+                value = parseFloat(value);
+            }
+
+            if (isNumber(value) && pointData.fields.visible !== false) {
+                sum += value;
+            }
+        }
+
+        return sum;
+    }
+
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
@@ -12044,6 +12043,7 @@ var __meta__ = {
         filterSeriesByType: filterSeriesByType,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
+        seriesTotal: seriesTotal,
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,
