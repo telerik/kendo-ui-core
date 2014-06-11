@@ -11,13 +11,13 @@
              data-views="[ 'day', { type: 'week', selected: true }, 'month' ]"
              data-show-work-hours="false"
              data-show-work-days="false"
+             data-height="500"
              data-bind="source: tasks,
                         dependencies: dependencies,
                         visible: isVisible,
                         events: {
                           save: onSave
-                        }"
-             style="height: 200px"></div>
+                        }"></div>
     </div>
     <div class="box">
         <div class="box-col console-section">
@@ -35,7 +35,8 @@
             Kendo UI Gantt supports the
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
             <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
-            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings,
+            <br> as well as a source binding for dependencies.
         </div>
     </div>
 <script>
@@ -45,9 +46,7 @@
         isVisible: true,
         onSave: function(e) {
             kendoConsole.log(
-                "event :: save(" +
-                    kendo.stringify({ task: e.task, values: e.values }, null, 4) +
-                ")"
+                "Task saved :: " + e.task.title
             );
         },
         tasks: new kendo.data.GanttDataSource({

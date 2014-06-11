@@ -757,7 +757,10 @@ var __meta__ = {
             autoBind: true,
             selectable: true,
             editable: true,
+            columns: [],
             views: [],
+            dataSource: {},
+            dependencies: {},
             messages: {
                 views: {
                     day: "Day",
