@@ -1533,6 +1533,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
             var columnBuilder;
+            var rowBuilder;
 
             Widget.fn.init.call(that, element, options);
 
@@ -1540,7 +1541,7 @@ var __meta__ = {
             that._createLayout();
 
             that._columnBuilder = columnBuilder = new ColumnBuilder();
-            that._rowBuilder = new RowBuilder();
+            that._rowBuilder = rowBuilder = new RowBuilder();
 
             that._dataSource();
 
@@ -1557,6 +1558,24 @@ var __meta__ = {
 
                 if (!expanded && expandState === undefined) {
                     that.dataSource.expandColumn($.parseJSON(path));
+                } else {
+                    that.refresh();
+                }
+            });
+
+            that.rowsHeader.on("click", "span.k-icon", function() {
+                var button = $(this);
+                var path = button.attr(kendo.attr("path"));
+                var expanded = button.hasClass(STATE_EXPANDED);
+                var expandState = rowBuilder.expandState[path];
+
+                rowBuilder.expandState[path] = !expanded;
+
+                button.toggleClass(STATE_EXPANDED, !expanded)
+                      .toggleClass(STATE_COLLAPSED, expanded);
+
+                if (!expanded && expandState === undefined) {
+                    that.dataSource.expandRow($.parseJSON(path));
                 } else {
                     that.refresh();
                 }
