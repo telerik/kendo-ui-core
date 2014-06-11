@@ -2889,7 +2889,7 @@ var __meta__ = {
                 series: point.series,
                 dataItem: point.dataItem,
                 runningTotal: point.runningTotal,
-                sum: point.sum,
+                total: point.total,
                 element: $(e.target)
             });
         },
@@ -2904,7 +2904,7 @@ var __meta__ = {
                 series: point.series,
                 dataItem: point.dataItem,
                 runningTotal: point.runningTotal,
-                sum: point.sum,
+                total: point.total,
                 element: $(e.target)
             });
         }
@@ -2995,7 +2995,7 @@ var __meta__ = {
                         value: this.value,
                         percentage: this.percentage,
                         runningTotal: this.runningTotal,
-                        sum: this.sum,
+                        total: this.total,
                         series: this.series
                     });
                 } else {
@@ -7482,7 +7482,7 @@ var __meta__ = {
 
             for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 var currentSeries = series[seriesIx];
-                var sum = seriesTotal(currentSeries);
+                var total = seriesTotal(currentSeries);
                 var runningTotal = 0;
                 var baseline = 0;
 
@@ -7493,17 +7493,17 @@ var __meta__ = {
 
                     var from = baseline;
                     var to;
-                    var isSum = false;
+                    var isTotal = false;
                     if (summary) {
-                        if (summary.toLowerCase() === "runningtotal") {
+                        if (summary.toLowerCase() === "total") {
+                            data.valueFields.value = total;
+                            from = 0;
+                            to = total;
+                            isTotal = true;
+                        } else {
                             data.valueFields.value = runningTotal;
                             to = from - runningTotal;
                             runningTotal = 0;
-                        } else {
-                            data.valueFields.value = sum;
-                            from = 0;
-                            to = sum;
-                            isSum = true;
                         }
                     } else if (isNumber(value)) {
                         runningTotal += value;
@@ -7516,9 +7516,9 @@ var __meta__ = {
                         categoryIx: categoryIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        sum: sum,
+                        total: total,
                         runningTotal: runningTotal,
-                        isSum: isSum,
+                        isTotal: isTotal,
                         from: from,
                         to: to
                     });
@@ -7551,7 +7551,7 @@ var __meta__ = {
                 for (var pointIx = 0; pointIx < points.length; pointIx++) {
                     var point = points[pointIx];
 
-                    if (point.isSum) {
+                    if (point.isTotal) {
                         continue;
                     }
 
@@ -10020,7 +10020,7 @@ var __meta__ = {
                     dataItem: point.dataItem,
                     percentage: point.percentage,
                     runningTotal: point.runningTotal,
-                    sum: point.sum,
+                    total: point.total,
                     low: point.low,
                     high: point.high,
                     xLow: point.xLow,

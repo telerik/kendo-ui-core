@@ -31,8 +31,8 @@
             }
         });
 
-        test("sum field is set on all points", function() {
-            assertFields("sum", [10, 10, 10, 10]);
+        test("total field is set on all points", function() {
+            assertFields("total", [10, 10, 10, 10]);
         });
 
         test("runningTotal field is set on all points", function() {
@@ -108,67 +108,67 @@
 
     // ------------------------------------------------------------
     (function() {
-        module("Waterfall / Sum /", {
+        module("Waterfall / Total /", {
             setup: function() {
                 createChart(makeSeries([
-                   { summary: "sum" },
-                   { value: 1 }, { value: 2 }, { summary: "sum" },
-                   { value: 3 }, { value: 4 }, { summary: "sum" }
+                   { summary: "total" },
+                   { value: 1 }, { value: 2 }, { summary: "total" },
+                   { value: 3 }, { value: 4 }, { summary: "total" }
                 ]));
             }
         });
 
-        test("sum field is set on all points", function() {
-            assertFields("sum", [10, 10, 10, 10, 10, 10, 10]);
+        test("total field is set on all points", function() {
+            assertFields("total", [10, 10, 10, 10, 10, 10, 10]);
         });
 
-        test("sum #1 is set as value", function() {
+        test("total #1 is set as value", function() {
             equal(chart.points[0].value, 10);
         });
 
-        test("sum #2 is set as value", function() {
+        test("total #2 is set as value", function() {
             equal(chart.points[3].value, 10);
         });
 
-        test("sum #3 is set as value", function() {
+        test("total #3 is set as value", function() {
             equal(chart.points[6].value, 10);
         });
     })();
 
     // ------------------------------------------------------------
     (function() {
-        module("Waterfall / Sum / Missing Values /");
+        module("Waterfall / Total / Missing Values /");
 
         test("ignores null values", function() {
             createChart(makeSeries([
-               { value: 1 }, { value: null }, { value: 2 }, { summary: "sum" }
+               { value: 1 }, { value: null }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("sum", [3, 3, 3, 3]);
+            assertFields("total", [3, 3, 3, 3]);
         });
 
         test("ignores undefined values", function() {
             createChart(makeSeries([
-               { value: 1 }, {}, { value: 2 }, { summary: "sum" }
+               { value: 1 }, {}, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("sum", [3, 3, 3, 3]);
+            assertFields("total", [3, 3, 3, 3]);
         });
 
         test("ignores NaN values", function() {
             createChart(makeSeries([
-               { value: 1 }, { value: NaN }, { value: 2 }, { summary: "sum" }
+               { value: 1 }, { value: NaN }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("sum", [3, 3, 3, 3]);
+            assertFields("total", [3, 3, 3, 3]);
         });
 
         test("ignores other values", function() {
             createChart(makeSeries([
-               { value: 1 }, { value: "foo" }, { value: 2 }, { summary: "sum" }
+               { value: 1 }, { value: "foo" }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("sum", [3, 3, 3, 3]);
+            assertFields("total", [3, 3, 3, 3]);
         });
     })();
 
@@ -183,7 +183,7 @@
                 createChart(makeSeries([
                    { value: 1 }, { value: 3 }, { summary: "runningTotal" },
                    { value: -1 }, { value: -2 }, { summary: "runningTotal" },
-                   { summary: "sum" }
+                   { summary: "total" }
                 ]));
             }
         });
@@ -212,7 +212,7 @@
             assertPlotRange(5, [1, 4]);
         });
 
-        test("point #7 shows sum starting from 0", function() {
+        test("point #7 shows total starting from 0", function() {
             assertPlotRange(6, [0, 1]);
         });
 
@@ -224,9 +224,9 @@
             assertPlotRange(2, [-3, 0]);
         });
 
-        test("negative sum", function() {
+        test("negative total", function() {
             createChart(makeSeries([
-               { value: -1 }, { value: -2 }, { summary: "sum" }
+               { value: -1 }, { value: -2 }, { summary: "total" }
             ]));
 
             assertPlotRange(2, [0, -3]);
@@ -239,7 +239,7 @@
             setup: function() {
                 createChart(makeSeries([
                    { value: 1 }, { value: 3 }, { summary: "runningTotal" },
-                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                   { value: -1 }, { value: -2 }, { summary: "total" }
                 ]));
             }
         });
@@ -273,7 +273,7 @@
             setup: function() {
                 createChart(makeSeries([
                    { value: 1 }, { value: 3 }, { summary: "runningTotal" },
-                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                   { value: -1 }, { value: -2 }, { summary: "total" }
                 ]));
             }
         });
@@ -288,7 +288,7 @@
             assertSegment(2, 2, 3);
         });
 
-        test("doesn't create segment to sums", function() {
+        test("doesn't create segment to total", function() {
             equal(chart.segments.length, 4);
         });
     })();
