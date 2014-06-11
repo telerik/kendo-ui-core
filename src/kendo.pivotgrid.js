@@ -410,7 +410,7 @@ var __meta__ = {
                 this._rows = options.rows || [];
 
                 if (options.columns) {
-                  this._columns =  options.columns = normalizeMembers(options.columns);
+                  this._columns = options.columns = normalizeMembers(options.columns);
                 }
 
                 if (options.rows) {
@@ -1050,13 +1050,7 @@ var __meta__ = {
             }
 
             if (member.expand && found) {
-                if (name.indexOf("&") == -1) {
-                    name += ".[ALL]";
-                }
                 name += ".Children";
-
-            } else if (name.indexOf("&") == -1) {
-                name += ".[(ALL)].MEMBERS";
             }
 
             return name;
@@ -1068,12 +1062,7 @@ var __meta__ = {
             var name = member.name;
 
             if (member.expand) {
-                if (name.indexOf("&") == -1) {
-                    name += ".[ALL]";
-                }
                 name += ".Children";
-            } else if (name.indexOf("&") == -1) {
-                name += ".[(ALL)].MEMBERS";
             }
             return name;
         });
@@ -1081,13 +1070,7 @@ var __meta__ = {
 
     function convertMemberDescriptors(members) {
         return transformDescriptors(members, function(member) {
-            var name = member.name;
-
-            if (name.indexOf("&") == -1) {
-                name += ".[(ALL)].MEMBERS";
-            }
-
-            return name;
+            return member.name;
         });
     }
 
@@ -1125,13 +1108,6 @@ var __meta__ = {
         }
 
         return result;
-    }
-
-    function removeAllFromDescriptors(descriptors) {
-        for (var idx = 0; idx < descriptors.length; idx++) {
-            descriptors[idx].name = descriptors[idx].name.replace(/\.\[all\]$/i, "")
-        }
-        return descriptors;
     }
 
     function serializeMembers(members, measures) {
@@ -1208,10 +1184,6 @@ var __meta__ = {
 
                 var name = filters[idx].field;
 
-                if (name.indexOf("&") == -1) {
-                    name += ".[ALL]";
-                }
-
                 name += ".Children";
 
                 command += name;
@@ -1262,8 +1234,8 @@ var __meta__ = {
 
             command += "SELECT NON EMPTY {";
 
-            var columns = removeAllFromDescriptors(options.columns || []);
-            var rows = removeAllFromDescriptors(options.rows || []);
+            var columns = options.columns || [];
+            var rows = options.rows || [];
 
             var measures = options.measures || [];
             var measuresRowAxis = options.measuresAxis === "rows";

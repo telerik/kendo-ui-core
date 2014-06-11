@@ -71,17 +71,18 @@
     });
 
     test("parameterMap create single column select query", function() {
-        var transport = new kendo.data.XmlaTransport({ });
+       var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo]" }] }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+
+       ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
     test("parameterMap columns are expanded", function() {
         var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[foo]", expand: true }] }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS,[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+       ok(params.indexOf('SELECT NON EMPTY {[foo],[foo].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
     test("parameterMap row is expanded", function() {
@@ -89,7 +90,7 @@
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }] }, "read");
 
        ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS,[foo].[ALL].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+           'NON EMPTY {[foo],[foo].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap create empty column and single row select query", function() {
@@ -97,15 +98,15 @@
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]" }] }, "read");
 
        ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap create column and row select query", function() {
         var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, columns: [{ name: "[bar]" }], rows: [{ name: "[foo]" }] }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[bar].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap create single measure is added to the where", function() {
@@ -117,8 +118,8 @@
            measures: ["[baz]"]
        }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[bar].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName] WHERE ([baz])') > -1);
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName] WHERE ([baz])') > -1);
     });
 
     test("parameterMap measure is added as column if no columns are set", function() {
@@ -130,7 +131,7 @@
         }, "read");
 
         ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+           'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap multiple measures are added as row if no rows are set and axis is rows", function() {
@@ -142,7 +143,7 @@
             measuresAxis: "rows"
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+        ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
            'NON EMPTY {[baz],[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
@@ -156,7 +157,7 @@
         }, "read");
 
         ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{[baz],[bar]}})} ' +
+           'NON EMPTY {CROSSJOIN({[foo]},{{[baz],[bar]}})} ' +
            'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
@@ -170,8 +171,8 @@
            measuresAxis: "rows"
        }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS,' +
-           ' NON EMPTY {CROSSJOIN({[bar].[(ALL)].MEMBERS},{{[measure1],[measure2]}})} ' +
+       ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS,' +
+           ' NON EMPTY {CROSSJOIN({[bar]},{{[measure1],[measure2]}})} ' +
            'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
@@ -196,7 +197,7 @@
             columns: [{ name: "[foo]" }, { name: "[bar]" }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
            'FROM [cubeName]') > -1);
     });
 
@@ -208,8 +209,8 @@
             columns: [{ name: "[foo]", expand: true }, { name: "[bar]" }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].[ALL].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
@@ -221,8 +222,8 @@
             columns: [{ name: "[foo].&[baz]", expand: true }, { name: "[bar]" }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].&amp;[baz]},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].&amp;[baz].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].&amp;[baz]},{[bar]}),' +
+            'CROSSJOIN({[foo].&amp;[baz].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
@@ -234,8 +235,8 @@
             columns: [{ name: "[foo]" }, { name: "[bar]", expand: true }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[ALL].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo]},{[bar].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
@@ -247,10 +248,10 @@
             columns: [{ name: "[foo]", expand: true }, { name: "[bar]", expand: true }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].[ALL].Children},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[ALL].Children}),' +
-            'CROSSJOIN({[foo].[ALL].Children},{[bar].[ALL].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo].Children},{[bar]}),' +
+            'CROSSJOIN({[foo]},{[bar].Children}),' +
+            'CROSSJOIN({[foo].Children},{[bar].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
@@ -262,9 +263,9 @@
             columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }, { name: "[bar]", expand: false }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].[ALL].Children},{[bar].[(ALL)].MEMBERS}),' +
-            'CROSSJOIN({[foo].&amp;[1].Children},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
+            'CROSSJOIN({[foo].Children},{[bar]}),' +
+            'CROSSJOIN({[foo].&amp;[1].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
     test("parameterMap same hierarchy members are not cross joined - 2 members", function() {
@@ -275,8 +276,8 @@
             columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {[foo].[(ALL)].MEMBERS,' +
-            '[foo].[ALL].Children,' +
+        ok(params.indexOf('SELECT NON EMPTY {[foo],' +
+            '[foo].Children,' +
             '[foo].&amp;[1].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
@@ -289,7 +290,7 @@
             measures: [ "measure1", "measure2"]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{measure1,measure2}}),CROSSJOIN({[foo].[ALL].Children},{{measure1,measure2}}),'+
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{{measure1,measure2}}),CROSSJOIN({[foo].Children},{{measure1,measure2}}),'+
             'CROSSJOIN({[foo].&amp;[1].Children},{{measure1,measure2}})}' +
             ' DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
@@ -305,7 +306,7 @@
         }, "read");
 
         ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-            'NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{[bar].[(ALL)].MEMBERS})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS ' +
+            'NON EMPTY {CROSSJOIN({[foo]},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS ' +
            'FROM [cubeName]') > -1);
     });
 
@@ -318,7 +319,7 @@
             measures: ["[bar]", "[baz]"]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[(ALL)].MEMBERS},{{[bar],[baz]}})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{{[bar],[baz]}})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
            'FROM [cubeName]') > -1);
     });
 
@@ -345,7 +346,7 @@
             filter: { filters: [{ operator: "contains", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, InStr([foo].MemberValue,"zoo"))) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, InStr([foo].MemberValue,"zoo"))) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap startswith filter is generated", function() {
@@ -358,7 +359,7 @@
             filter: { filters: [{ operator: "startswith", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, Left([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Left([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap endswith filter is generated", function() {
@@ -371,7 +372,7 @@
             filter: { filters: [{ operator: "endswith", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].[ALL].Children, Right([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Right([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap create empty discover statment wrap", function() {
