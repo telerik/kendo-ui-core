@@ -7484,51 +7484,43 @@ var __meta__ = {
         },
 
         traverseDataPoints: function(callback) {
-            var chart = this,
-                options = chart.options,
-                series = options.series,
-                categories = chart.categoryAxis.options.categories || [],
-                count = categoriesCount(series),
-                categoryIx,
-                seriesIx,
-                pointData,
-                currentCategory,
-                currentSeries,
-                seriesCount = series.length;
+            var series = this.options.series;
+            var categories = this.categoryAxis.options.categories || [];
+            var totalCategories = categoriesCount(series);
 
-            for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
-                currentSeries = series[seriesIx];
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx];
                 var sum = seriesTotal(currentSeries);
                 var runningTotal = 0;
-                var to = 0;
+                var baseline = 0;
 
-                for (categoryIx = 0; categoryIx < count; categoryIx++) {
-                    currentCategory = categories[categoryIx];
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
-                    var value = pointData.valueFields.value;
-                    var summary = pointData.fields.summary;
-                    var from = to;
-                    var pointTo;
+                for (var categoryIx = 0; categoryIx < totalCategories; categoryIx++) {
+                    var data = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                    var value = data.valueFields.value;
+                    var summary = data.fields.summary;
+
+                    var from = baseline;
+                    var to;
                     var isSum = false;
                     if (summary) {
                         if (summary.toLowerCase() === "runningtotal") {
-                            pointData.valueFields.value = runningTotal;
-                            pointTo = from - runningTotal;
+                            data.valueFields.value = runningTotal;
+                            to = from - runningTotal;
                             runningTotal = 0;
                         } else {
-                            pointData.valueFields.value = sum;
+                            data.valueFields.value = sum;
                             from = 0;
-                            pointTo = sum;
+                            to = sum;
                             isSum = true;
                         }
                     } else if (isNumber(value)) {
                         runningTotal += value;
-                        to += value;
-                        pointTo = to;
+                        baseline += value;
+                        to = baseline;
                     }
 
-                    callback(pointData, {
-                        category: currentCategory,
+                    callback(data, {
+                        category: categories[categoryIx],
                         categoryIx: categoryIx,
                         series: currentSeries,
                         seriesIx: seriesIx,
@@ -7536,7 +7528,7 @@ var __meta__ = {
                         runningTotal: runningTotal,
                         isSum: isSum,
                         from: from,
-                        to: pointTo
+                        to: to
                     });
                 }
             }
@@ -7544,15 +7536,6 @@ var __meta__ = {
 
         updateRange: function(value, fields) {
             BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
-        },
-
-        fromValue: function(point) {
-            var seriesIx = point.seriesIx;
-            var seriesPoints = this.seriesPoints[seriesIx];
-
-            for (var i = 0; i < seriesPoints.length; i++) {
-                seriesPoints[i]
-            };
         },
 
         plotRange: function(point) {
