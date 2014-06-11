@@ -229,7 +229,7 @@ var __meta__ = {
             },
             transport: {},
             path: "/",
-            fileTypes: "*.png,*.gif,*.jpg,*.jpeg"
+            fileTypes: "*.*"
         },
 
         events: [ERROR, CHANGE, APPLY],
