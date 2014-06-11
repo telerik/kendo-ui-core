@@ -7470,14 +7470,6 @@ var __meta__ = {
     });
 
     var WaterfallChart = BarChart.extend({
-        pointType: function() {
-            return Bar;
-        },
-
-        aboveAxis: function(point) {
-            return point.value >= 0;
-        },
-
         render: function() {
             BarChart.fn.render.call(this);
             this.createSegments();
@@ -7538,6 +7530,10 @@ var __meta__ = {
             BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
         },
 
+        aboveAxis: function(point) {
+            return point.value >= 0;
+        },
+
         plotRange: function(point) {
             return [point.from, point.to];
         },
@@ -7545,6 +7541,7 @@ var __meta__ = {
         createSegments: function() {
             var series = this.options.series;
             var seriesPoints = this.seriesPoints;
+            var segments = this.segments = [];
 
             for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 var currentSeries = series[seriesIx];
@@ -7560,6 +7557,7 @@ var __meta__ = {
 
                     if (point && prevPoint) {
                         var segment = new WaterfallSegment(prevPoint, point, currentSeries);
+                        segments.push(segment);
                         this.append(segment);
                     }
 
@@ -7570,13 +7568,13 @@ var __meta__ = {
     });
 
     var WaterfallSegment = ChartElement.extend({
-        init: function(first, second, series) {
+        init: function(from, to, series) {
             var segment = this;
 
             ChartElement.fn.init.call(segment);
 
-            segment.first = first;
-            segment.second = second;
+            segment.from = from;
+            segment.to = to;
             segment.series = series;
             segment.id = uniqueId();
         },
@@ -7590,15 +7588,15 @@ var __meta__ = {
 
         linePoints: function() {
             var points = [];
-            var first = this.first;
-            var firstBox = first.box;
-            var secondBox = this.second.box;
+            var from = this.from;
+            var fromBox = from.box;
+            var toBox = this.to.box;
 
-            var y = first.aboveAxis ? firstBox.y1 : firstBox.y2;
+            var y = from.aboveAxis ? fromBox.y1 : fromBox.y2;
 
             points.push(
-                Point2D(firstBox.x1, y),
-                Point2D(secondBox.x2, y)
+                Point2D(fromBox.x1, y),
+                Point2D(toBox.x2, y)
             );
 
             return points;
@@ -7607,22 +7605,16 @@ var __meta__ = {
         getViewElements: function(view) {
             var segment = this,
                 options = segment.options,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color;
+                series = segment.series;
 
             ChartElement.fn.getViewElements.call(segment, view);
-
-            if (isFn(color) && defaults) {
-                color = defaults.color;
-            }
 
             var line = series.line || {};
             return [
                 view.createPolyline(segment.linePoints(), false, {
                     id: segment.id,
                     animation: options.animation,
-                    stroke: line.color || color,
+                    stroke: line.color,
                     strokeWidth: line.width,
                     strokeOpacity: line.opacity,
                     fill: "",

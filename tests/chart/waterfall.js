@@ -261,4 +261,103 @@
             equal(chart.valueAxisRanges[undefined].min, 0);
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        function assertSegment(segmentIx, fromIx, toIx) {
+            equal(chart.segments[segmentIx].from, chart.points[fromIx]);
+            equal(chart.segments[segmentIx].to, chart.points[toIx]);
+        }
+
+        module("Waterfall / Segments /", {
+            setup: function() {
+                createChart(makeSeries([
+                   { value: 1 }, { value: 3 }, { summary: "runningTotal" },
+                   { value: -1 }, { value: -2 }, { summary: "sum" }
+                ]));
+            }
+        });
+
+        test("creates segments between regular points", function() {
+            assertSegment(0, 0, 1);
+            assertSegment(3, 3, 4);
+        });
+
+        test("creates segments between regular points and running totals", function() {
+            assertSegment(1, 1, 2);
+            assertSegment(2, 2, 3);
+        });
+
+        test("doesn't create segment to sums", function() {
+            equal(chart.segments.length, 4);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var segment;
+        var view;
+        var polyline;
+
+        module("WaterfallSegment", {
+            setup: function() {
+                segment = new dataviz.WaterfallSegment({
+                    // From point
+                    aboveAxis: true,
+                    box: new dataviz.Box2D(0, 0, 10, 100)
+                }, {
+                    // To point
+                    aboveAxis: true,
+                    box: new dataviz.Box2D(20, 0, 30, 100)
+                }, {
+                    // Series
+                    line: {
+                        color: "blue",
+                        width: 2,
+                        opacity: 0.5,
+                        dashType: "dot"
+                    }
+                });
+
+                view = new ViewStub();
+                polyline = segment.getViewElements(view)[0];
+            }
+        });
+
+        test("connects point end to next point start", function() {
+            ok(polyline.points[0].equals(new dataviz.Point2D(0, 0)));
+            ok(polyline.points[1].equals(new dataviz.Point2D(30, 0)));
+        });
+
+        test("connects point end to next point start (negative values)", function() {
+            segment.from.aboveAxis = segment.to.aboveAxis = false;
+            polyline = segment.getViewElements(view)[0];
+            ok(polyline.points[0].equals(new dataviz.Point2D(0, 100)));
+            ok(polyline.points[1].equals(new dataviz.Point2D(30, 100)));
+        });
+
+        test("renders open polyline", function() {
+            ok(!polyline.closed);
+        });
+
+        test("sets default animation", function() {
+            equal(polyline.options.animation.type, "fadeIn");
+        });
+
+        test("sets color", function() {
+            equal(polyline.options.stroke, "blue");
+        });
+
+        test("sets width", function() {
+            equal(polyline.options.strokeWidth, 2);
+        });
+
+        test("sets opacity", function() {
+            equal(polyline.options.strokeOpacity, 0.5);
+        });
+
+        test("sets dashType", function() {
+            equal(polyline.options.dashType, "dot");
+        });
+    })();
 })();
