@@ -170,13 +170,34 @@ def create_product(bot, product_name, suite_alias, tname)
 
     if tname == "Kendo UI"
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('#{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui.png"
+
+       if product_name.index("Mobile") == nil
+         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui.png"
+       else
+        product_name_mod = product_name.downcase.sub " (mobile)", ""
+        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui.png"
+       end
+
     elsif tname == "JSP"
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_java.png" 
+
+       if product_name.index("Mobile") == nil
+         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_java.png"
+       else
+        product_name_mod = product_name.downcase.sub " (mobile)", ""
+        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_java.png"
+       end
+
     else
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-       product_icon_path = "R:\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+
+       if product_name.index("Mobile") == nil
+         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+       else
+        product_name_mod = product_name.downcase.sub " (mobile)", ""
+        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+       end
+
     end
 
     bot.execute_script("$('[id$=\"_tfShortName_txtFieldText\"]').val('#{product_name}')")
@@ -191,7 +212,12 @@ def create_product(bot, product_name, suite_alias, tname)
     random_code = Random.rand(1...10000000000).to_s
     bot.execute_script("$('[id$=\"_tfProductCode_txtFieldText\"]').val('#{random_code}')")
 
-    bot.execute_script("$('[id$=\"_tfUrlTitle_txtFieldText\"]').val('" + product_name.downcase + "')")
+    if product_name.index("Mobile") == nil
+       bot.execute_script("$('[id$=\"_tfUrlTitle_txtFieldText\"]').val('" + product_name.downcase + "')")
+    else
+      product_name_mod = product_name.downcase.sub " (mobile)", ""
+      bot.execute_script("$('[id$=\"_tfUrlTitle_txtFieldText\"]').val('mobile-#{product_name_mod}')")
+    end
     
     bot.execute_script("$('[id$=\"_cbVisible\"]').prop('checked', true)")
 
@@ -204,7 +230,7 @@ def create_product(bot, product_name, suite_alias, tname)
 
     bot.execute_script("$find($telerik.$('[id$=\"_cfProductType_rcbField\"]').attr('id')).set_text('Telerik')")
 
-    bot.click_and_wait "Save", "administration"
+    bot.click_element(bot.find("[value='Save']"))
     #sort new product accordingly
 
     #assign_team(bot, product_name, suite_alias, tname)
@@ -290,7 +316,7 @@ def assign_team(bot, product_name, suite_alias, tname)
 
               if inner_tcell.text.include? product_name
                   checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
-                  bot.execute_script 'arguments[0].click()', checkbox if checkbox.selected?
+                  bot.execute_script 'arguments[0].click()', checkbox if !checkbox.selected?
                   Thread.current.send :sleep, 1
                   return
               end
