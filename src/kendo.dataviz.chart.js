@@ -5543,7 +5543,7 @@ var __meta__ = {
         },
 
         addValue: function(value, fields) {
-            if (value.size >= 0 || fields.series.negativeValues.visible) {
+            if ((value.size != null && value.size >= 0) || fields.series.negativeValues.visible) {
                 ScatterChart.fn.addValue.call(this, value, fields);
             }
         },

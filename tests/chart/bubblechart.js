@@ -520,6 +520,18 @@
             equal(points[0].color, "red");
         });
 
+        test("point with size null should be hidden", function() {
+            createBubbleChart({
+                series: [{
+                    type: "bubble",
+                    name: "series 1",
+                    data: [[1, 10, null]]
+                }]
+            });
+
+            equal(points.length, 0);
+        });
+
     })();
 
     (function() {
