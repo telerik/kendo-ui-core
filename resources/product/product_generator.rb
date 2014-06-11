@@ -34,7 +34,7 @@ class TelerikProductCreateBot
     end
     def go_to_teams
         click_and_wait "Administration", "administration"
-        click_and_wait "Telerik Teams", "Telerik"
+        click_and_wait "Telerik Teams", "Telerik Teams"
     end
     def go_to_support
         click_and_wait "Support", "threads"
@@ -106,6 +106,62 @@ class TelerikProductCreateBot
           @PHP_existing_products.push(product)
       end
     end
+    def navigate_to_section(suite_alias)
+     tname = String.new
+      case suite_alias
+        when "KUI"
+          click_and_wait "Kendo UI Professional", "administration"
+          tname = "Kendo UI"
+        when "MVC"
+          click_and_wait "UI for ASP.NET MVC", "administration"
+          tname = "ASP.NET MVC"
+        when "JSP"
+          click_and_wait "UI for JSP", "administration"
+          tname = "JSP"
+        when "PHP"  
+          click_and_wait "UI for PHP", "administration"
+          tname = "PHP"
+      end
+     return tname
+    end
+    def navigate_to_forum(suite_alias)
+     tname = String.new
+      case suite_alias
+        when "KUI"
+          click_and_wait "Kendo UI", "Support"
+          tname = "Kendo UI"
+        when "MVC"
+          click_and_wait "UI for ASP.NET MVC", "Support"
+          tname = "ASP.NET MVC"
+        when "JSP"
+          click_and_wait "UI for JSP", "Support"
+          tname = "JSP"
+        when "PHP"  
+          click_and_wait "UI for PHP", "Support"
+          tname = "PHP"
+      end
+     return tname
+    end
+    def get_full_product_name(suite_alias)
+     full_name = String.new
+      case suite_alias
+        when "KUI"
+          full_name = "Kendo UI Professional"
+        when "MVC"
+          full_name = "UI for ASP.NET MVC"
+        when "JSP"
+          full_name = "UI for JSP"
+        when "PHP"  
+          full_name = "UI for PHP"
+      end
+     return full_name
+    end
+    def check_or_expand(element)
+      driver.execute_script 'arguments[0].click()', element
+      p "click or expand processed>>"
+      rescue
+      screenshot("Click_Or_Expand_Failed_For_Element_" + element.attribute("id"))
+    end
 end
 def start_product_creation()
       bot = TelerikProductCreateBot.instance
@@ -122,48 +178,12 @@ def start_product_creation()
 
       bot.go_to_products
 
-      tname = nagivate_to_section(bot, suite_alias)
+      tname = bot.navigate_to_section(suite_alias)
 
       bot.click_and_wait "New subproduct", "administration"
 
       p "creating product>>#{product_name}"
       create_product(bot, product_name,suite_alias, tname)
-end
-def nagivate_to_section(bot, suite_alias)
-  tname = String.new
-      case suite_alias
-        when "KUI"
-          bot.click_and_wait "Kendo UI Professional", "administration"
-          tname = "Kendo UI"
-        when "MVC"
-          bot.click_and_wait "UI for ASP.NET MVC", "administration"
-          tname = "ASP.NET MVC"
-        when "JSP"
-          bot.click_and_wait "UI for JSP", "administration"
-          tname = "JSP"
-        when "PHP"  
-          bot.click_and_wait "UI for PHP", "administration"
-          tname = "PHP"
-      end
-   return tname
-end
-def navigate_to_forum(bot, suite_alias)
-  tname = String.new
-    case suite_alias
-        when "KUI"
-          bot.click_and_wait "Kendo UI", "Support"
-          tname = "Kendo UI"
-        when "MVC"
-          bot.click_and_wait "UI for ASP.NET MVC", "Support"
-          tname = "ASP.NET MVC"
-        when "JSP"
-          bot.click_and_wait "UI for JSP", "Support"
-          tname = "JSP"
-        when "PHP"  
-          bot.click_and_wait "UI for PHP", "Support"
-          tname = "PHP"
-    end
-  return tname
 end
 def create_product(bot, product_name, suite_alias, tname)
     product_icon_path = String.new
@@ -208,7 +228,8 @@ def create_product(bot, product_name, suite_alias, tname)
     sleep(1)
 
     bot.execute_script("$('[id$=\"_tfProductCssClass_txtFieldText\"]').val('-')")
-
+    
+    #need to generate random product code due to admin limitation
     random_code = Random.rand(1...10000000000).to_s
     bot.execute_script("$('[id$=\"_tfProductCode_txtFieldText\"]').val('#{random_code}')")
 
@@ -232,10 +253,15 @@ def create_product(bot, product_name, suite_alias, tname)
 
     bot.click_element(bot.find("[value='Save']"))
     #sort new product accordingly
+    sleep(5)
 
-    #assign_team(bot, product_name, suite_alias, tname)
-    #create_forum(bot, product_name, suite_alias, tname)   
-    #create_code_library(bot, product_name, suite_alias, tname)
+    p "assigning team for this product>>"
+    assign_team(bot, product_name, suite_alias)
+    p "creating forum for this product>>"
+    create_forum(bot, product_name, suite_alias, tname)
+    p "creating code library for this product>>"
+    create_code_library(bot, product_name, tname)
+    bot.quit
 end
 def set_product_icon_path(bot, product_icon_path)
   element = bot.driver.find_element(:xpath, "//input[contains(@id,'_ruIconPicfile0')]")
@@ -251,20 +277,20 @@ def upload_file(bot, upload_id, product_icon_path)
 end
 def create_forum(bot, product_name, suite_alias, tname)
   bot.go_to_support
-  bot.click_and_wait "Forums", "forums"
 
-  tname = navigate_to_forum(bot, suite_alias)
+  tname = bot.navigate_to_forum(suite_alias)
   
   bot.click_element(bot.find("[value='New Subforum']"))
 
   fill_forum_fields(bot, product_name, tname)
+
 end
 def fill_forum_fields(bot, product_name, tname)
     bot.execute_script("$('[id$=\"_txtTitle\"]').val('#{product_name}')")
     bot.execute_script("$('[id$=\"_txtPageTitle\"]').val('#{product_name}')")
     
     if product_name.index("Mobile") == nil
-      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val(" + product_name.downcase + ")")
+      bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('" + product_name.downcase + "')")
     else
       product_name_mod = product_name.downcase.sub " (mobile)", ""
       bot.execute_script("$('[id$=\"_txtUrlTitle\"]').val('mobile-#{product_name_mod}')")
@@ -288,35 +314,44 @@ def fill_forum_fields(bot, product_name, tname)
     bot.execute_script("$('[id$=\"_cbAllowAttachments\"]').prop('checked', true)")
     bot.execute_script("$find($telerik.$('[id$=\"_rcbFileExtensions\"]').attr('id')).set_text('.jpg, .jpeg, .gif, .png,.zip')")
 
-    bot.click_and_wait "Save", "Support"
+    bot.click_element(bot.find("[value='Save']"))
+    sleep (6)
 end
-def assign_team(bot, product_name, suite_alias, tname)
+def assign_team(bot, product_name, suite_alias)
   bot.go_to_teams
   bot.click_and_wait "Kendo", "administration"
-  
-  tname = navigate_to_section(bot, suite_alias)
 
-  rows_length = bot.driver.find_elements(:css, ".rgMasterTable tbody tr").length
+  grid_element = bot.driver.find_element(:xpath, "//div[contains(@id,'radGridProductSubscripts')]")
+  grid_id = grid_element.attribute("id")
+
+  full_name = bot.get_full_product_name(suite_alias)
+
+  rows_length = bot.driver.find_elements(:css, "##{grid_id} tbody tr").length
+  p "rows length>>#{rows_length}. Processing..."
 
     1.upto(rows_length) do |index|
-        tcell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(2)")
-        p "cell found>>#{tname}" if tcell.text.include? tname
+        tcell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{index}) td:nth-child(2)")
+        p "cell text>>" + tcell.text
+        p "cell found>>#{full_name}" if tcell.text.include? full_name
 
-        if tcell.text.include? tname
-          expand_cell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{index}) td:nth-child(1)")
-          bot.execute_script 'arguments[0].click()'
+        if tcell.text.include? full_name
+          expand_cell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{index}) td:nth-child(1) input[type=submit]")
+          p "expanding>>"
+          bot.check_or_expand(expand_cell)
           Thread.current.send :sleep, 1
 
           next_row_index = index + 1
-          detail_table_rows_length = bot.driver.find_elements(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr").length
+          detail_table_rows_length = bot.driver.find_elements(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr").length
+          p "detail table rows length>>#{detail_table_rows_length}. Processing..."
           
           1.upto(detail_table_rows_length) do |dindex|
-              inner_tcell = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(1)")
+              inner_tcell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(1)")
               p "cell found>>#{product_name}" if inner_tcell.text.include? product_name
 
               if inner_tcell.text.include? product_name
-                  checkbox = bot.driver.find_element(:css, ".rgMasterTable tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
-                  bot.execute_script 'arguments[0].click()', checkbox if !checkbox.selected?
+                  checkbox = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
+                  p "checking checkbox>>"
+                  bot.check_or_expand(checkbox) if !checkbox.selected?
                   Thread.current.send :sleep, 1
                   return
               end

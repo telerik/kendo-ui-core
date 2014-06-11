@@ -58,9 +58,11 @@ class TelerikCodeLibraryBot
       rescue 
       screenshot("Script_Execution_Failed_In_" + file_name + "_line_" + caller_array[2])
     end
-    def click_checkbox(bot, tname)
-        element = driver.find_element(:xpath, "//a[text()='#{tname}']/../../..//input")
-        bot.execute_script 'arguments[0].click()'
+    def click_checkbox(tname)
+        element = driver.find_element(:xpath, "//a[contains(text(),'#{tname}']/..//input")
+        driver.execute_script 'arguments[0].click()', element
+        rescue
+        screenshot("Clicking_CheckBox_Failed_For_" + element.attribute("id"))
     end
 end
 
@@ -81,9 +83,9 @@ def navigate_to_cl_section(bot)
 end
 def create_cl_thread(bot, product_name, tname)
     
-    if bot.driver.find_element(:xpath, "//a[contains(text(), #{tname})]") != nil
+    if bot.driver.find_element(:xpath, "//a[contains(text(), '#{tname}')]") != nil
       p "product found>>#{tname}"
-      click_checkbox(bot, tname)
+      bot.click_checkbox(tname)
       bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create a forum in selected group')]"))
       bot.wait_for_title("Forums")
 
