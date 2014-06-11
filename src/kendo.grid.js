@@ -3616,7 +3616,8 @@ var __meta__ = {
                     var col = columns[i];
                     var th = $("<th/>");
                     var field = col.field;
-                    if (field) {
+
+                    if (field && col.filterable !== false) {
                         th.attr(kendo.attr("field"), field);
                         th.kendoRowFilter({
                             dataSource: dsOptions,

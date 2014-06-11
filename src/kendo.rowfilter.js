@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Row filter",
     category: "framework",
     depends: [ "autocomplete" ],
-    advanced: true //should I set this?
+    advanced: true
 };
 
 (function($, undefined) {
@@ -17,6 +17,8 @@ var __meta__ = {
         Widget = ui.Widget,
         CHANGE = "change",
         NS = ".kendoRowFilter",
+        EQ = "Is equal to",
+        NEQ = "Is not equal to",
         proxy = $.proxy;
 
     var RowFilter = Widget.extend( {
@@ -34,19 +36,12 @@ var __meta__ = {
                 options.dataSource = DataSource.create(options.dataSource);
             }
             dataSource = that.dataSource = options.dataSource;
+            //gets the type from the dataSource or sets default to string
+            that.options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || "string";
 
 
             element.addClass("grid-filter-header");
             element.append(input);
-            //that.dataSource = kendo.data.DataSource.create(options.dataSource);
-            //that.linkTemplate = kendo.template(that.options.linkTemplate);
-            //that.selectTemplate = kendo.template(that.options.selectTemplate);
-
-            //that.dataSource.bind(CHANGE, that._refreshHandler);
-
-            //that.element
-                //.on(CLICK + NS , "a", proxy(that._click, that))
-                //.addClass("k-pager-wrap k-widget");
 
             kendo.notify(that);
         },
@@ -60,10 +55,6 @@ var __meta__ = {
 
             Widget.fn.destroy.call(that);
 
-            //that.element.off(NS);
-            //that.dataSource.unbind(CHANGE, that._refreshHandler);
-            //that._refreshHandler = null;
-
             kendo.destroy(that.element);
         },
 
@@ -73,7 +64,50 @@ var __meta__ = {
 
         options: {
             name: "RowFilter",
-            autoBind: true
+            autoBind: true,
+            field: "",
+            type: "string",
+            operators: {
+                string: {
+                    eq: EQ,
+                    neq: NEQ,
+                    startswith: "Starts with",
+                    contains: "Contains",
+                    doesnotcontain: "Does not contain",
+                    endswith: "Ends with"
+                },
+                number: {
+                    eq: EQ,
+                    neq: NEQ,
+                    gte: "Is greater than or equal to",
+                    gt: "Is greater than",
+                    lte: "Is less than or equal to",
+                    lt: "Is less than"
+                },
+                date: {
+                    eq: EQ,
+                    neq: NEQ,
+                    gte: "Is after or equal to",
+                    gt: "Is after",
+                    lte: "Is before or equal to",
+                    lt: "Is before"
+                },
+                enums: {
+                    eq: EQ,
+                    neq: NEQ
+                }
+            },
+            messages: {
+                isTrue: "is true",
+                isFalse: "is false",
+                filter: "Filter",
+                clear: "Clear",
+                and: "And",
+                or: "Or",
+                operator: "Operator",
+                value: "Value",
+                cancel: "Cancel"
+            },
         },
 
         setDataSource: function(dataSource) {

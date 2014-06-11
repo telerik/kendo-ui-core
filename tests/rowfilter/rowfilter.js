@@ -62,8 +62,25 @@
     });
 
     test("dataSource is instance of the DataSource class when set with options", function() {
-        rowFilter = setup(dom, { dataSource: { transport: { read: function () {} } } });
+        var dsOptions = { transport: { read: function () {} } };
+        rowFilter = setup(dom, { dataSource: dsOptions });
 
         ok(rowFilter.dataSource instanceof kendo.data.DataSource);
+        ok(rowFilter.dataSource.transport.read === dsOptions.transport.read);
+    });
+
+    test("type is retrieved from dataSource when it is instance of the DataSource class ", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(rowFilter.options.type, "string");
+    });
+
+    test("uses default type when dataSource is instance of the DataSource class and field type is not defined", function() {
+        delete dataSource.options.schema.model.fields.bar.type;
+        rowFilter = setup(dom, { dataSource: dataSource, field: "bar" });
+        equal(rowFilter.options.type, "string");
+    });
+    test("type is retrieved from dataSource when it is instance of the DataSource class ", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, field: "bar" });
+        equal(rowFilter.options.type, "number");
     });
 })();

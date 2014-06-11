@@ -679,7 +679,7 @@
         equal(ths.eq(1).attr(kendo.attr("field")), "bar");
     });
 
-    test("rowfilter is not rendered when grid filterable is set to true and columns filterable to false", function() {
+    test("rowfilter tr is not rendered when grid filterable is set to true and columns filterable to false", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -703,6 +703,75 @@
         });
 
         equal(grid.thead.find("tr").length, 1);
+    });
+
+    test("rowfilter widgets are not rendered when grid filterable is set to true and columns filterable to false", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                {
+                    field: "col1",
+                    filterable: true
+                },
+                {
+                    field: "col2",
+                    filterable: false
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {}
+                        }
+                    }
+                }
+            },
+        });
+
+        var rowfilter = grid.thead.find(".k-rowfilter");
+        var widgetSelector = "["+ kendo.attr("role") +"=rowfilter]"
+        var widgets = rowfilter.find(widgetSelector);
+        equal(widgets.length, 1);
+    });
+
+    test("rowfilter widgets are initialized with type according to the column field", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                {
+                    field: "col1",
+                    filterable: true
+                },
+                {
+                    field: "col2",
+                    filterable: true
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "number"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=rowfilter]");
+        var firstWidget = widgets.eq(0).data("kendoRowFilter");
+        equal(firstWidget.options.type, "number");
+        var secondWindget = widgets.eq(1).data("kendoRowFilter");
+        equal(secondWindget.options.type, "string");
     });
 
     test("grid filterable options propagate to the filter menu", function() {
