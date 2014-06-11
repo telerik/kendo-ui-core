@@ -1168,6 +1168,20 @@ var __meta__ = {
             DEACTIVATE
         ],
 
+        setOptions: function(options) {
+            var that = this;
+
+            that.target.off(that.showOn + NS, that._showProxy);
+            if (that.events) {
+                that.events.destroy();
+            }
+
+            that.target = $(that.options.target);
+            that._wire();
+
+            Menu.fn.setOptions.call(this, options);
+        },
+
         destroy: function() {
             var that = this;
 
@@ -1202,15 +1216,15 @@ var __meta__ = {
         },
 
         _showHandler: function (e) {
-            var ev = e;
+            var ev = e,
+                that = this,
+                options = that.options;
+
             if (e.event) {
                 ev = e.event;
                 ev.pageX = e.x.location;
                 ev.pageY = e.y.location;
             }
-
-            var that = this,
-                options = that.options;
 
             ev.preventDefault();
             ev.stopImmediatePropagation();
