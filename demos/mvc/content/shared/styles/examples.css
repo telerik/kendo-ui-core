@@ -2452,14 +2452,19 @@ a.footer-links:hover,
     background: #cad0d6;
 }
 
-#example-search-list a{
+#example-search-list li.k-state-hover a {
+      color: #000;
+      text-decoration: none;
+}
+
+#example-search-list a{   
     font-size: 13px;
     line-height: 13px;
     color: #2d3e50;
 }
 
-#example-search-list a:hover {
-    text-decoration: none;
+#example-search-list .demo-name {
+    font-weight: bold;
 }
 
 #search-results {
