@@ -2128,8 +2128,6 @@ var __meta__ = {
                 allRow.colspan = {};
                 allRow.colspan["dim" + memberIdx] = allCell;
 
-                row.rowspan += 1;
-
                 rows.push(allRow);
                 map[tuplePath + member.name + "all"] = allRow;
 
@@ -2138,6 +2136,9 @@ var __meta__ = {
 
                     allCell.attr.rowspan = childRow.rowspan;
                 }
+
+                row.rowspan += allRow.rowspan;
+
             } else if (members[memberIdx + 1]) {
                 row.hasChild = false;
                 this._buildRows(tuple, memberIdx + 1);
