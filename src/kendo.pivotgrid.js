@@ -2001,26 +2001,26 @@ var __meta__ = {
 
         build: function(tuples) {
             return [
-                element("table", null, [this._thead(tuples)])
+                element("table", null, [this._tbody(tuples)])
             ];
         },
 
-        _thead: function(tuples) {
+        _tbody: function(tuples) {
             var root = tuples[0];
 
             this._state(root);
 
             if (root) {
                 this._buildRows(root, 0);
-                this._normalizeColSpan();
+                this._normalize();
             } else {
                 this.rows.push(element("tr", null, kendo_th("")));
             }
 
-            return element("thead", null, this.rows);
+            return element("tbody", null, this.rows);
         },
 
-        _normalizeColSpan: function() {
+        _normalize: function() {
             var rows = this.rows;
             var rowsLength = rows.length;
             var rowIdx = 0;
@@ -2045,6 +2045,9 @@ var __meta__ = {
                     }
                 }
             }
+
+            rows[0].children[0].attr.class = "k-first";
+            rows[rowsLength - 1].children[0].attr.class = "k-first";
         },
 
         _tuplePath: function(tuple, index) {
@@ -2122,7 +2125,7 @@ var __meta__ = {
                 allCell = element("td", null, [text(member.caption || member.name)]);
                 allCell.levelNum = levelNum;
 
-                allRow = element("tr", null, [allCell]);
+                allRow = element("tr", { class: "k-grid-footer" }, [allCell]);
                 allRow.rowspan = 1;
 
                 allRow.colspan = {};

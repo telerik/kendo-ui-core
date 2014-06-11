@@ -1764,4 +1764,50 @@
         equal(td_level10.eq(0).attr("colspan"), 2);
         equal(td_level11.eq(0).attr("colspan"), 3);
     });
+
+    test("PivotGrid renders k-first cell to the first root cell", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td");
+        var td_1 = rows.eq(1).find("td");
+
+        ok(td_0.eq(0).hasClass("k-first"));
+        ok(!td_0.eq(1).hasClass("k-first"));
+        ok(!td_0.eq(2).hasClass("k-first"));
+
+        ok(td_1.eq(0).hasClass("k-first"));
+        ok(!td_1.eq(1).hasClass("k-first"));
+    });
+
+    test("PivotGrid renders k-", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "1", children: [] }] },
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+
+        ok(rows.eq(3).hasClass("k-grid-footer"));
+        ok(rows.eq(5).hasClass("k-grid-footer"));
+    });
 })();
