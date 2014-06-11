@@ -252,7 +252,7 @@ var __meta__ = {
                                         });
 
                 if (support.mobileOS.android) {
-                    wrapper.add(anchor).css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
+                    wrapper.css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
                 }
 
                 wrapper.css(POSITION);
