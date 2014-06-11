@@ -3124,9 +3124,9 @@ var __meta__ = {
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
             if (data.length) {
-                if (that._requestInProgress) {
-                    that._skipRequestsInProgress = true;
-                }
+
+                that._skipRequestsInProgress = true;
+                that._pending = undefined;
 
                 that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
