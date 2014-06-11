@@ -137,6 +137,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GanttDependenciesController.cs" />
+    <Compile Include="Controllers\GanttTasksController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -168,6 +170,10 @@
     <Compile Include="Models\FileBrowser\FitImageResizer.cs" />
     <Compile Include="Models\FileBrowser\ImageSize.cs" />
     <Compile Include="Models\FileBrowser\ThumbnailCreator.cs" />
+    <Compile Include="Models\Gantt\GanttDependencyModel.cs" />
+    <Compile Include="Models\Gantt\GanttDependencyRepository.cs" />
+    <Compile Include="Models\Gantt\GanttTaskModel.cs" />
+    <Compile Include="Models\Gantt\GanttTaskRepository.cs" />
     <Compile Include="Models\ProductSignalR.cs" />
     <Compile Include="Models\Sample.designer.cs">
       <AutoGen>True</AutoGen>
