@@ -2,7 +2,17 @@
     <div class="demo-section k-header">
         <h4>Add or update a record</h4>
         <div data-role="gantt"
+             data-columns="[
+                 { field: 'id', title: 'ID', width: 50 },
+                 { field: 'title', title: 'Title', editable: true },
+                 { field: 'start', title: 'Start Time', format: '{0:MM/dd/yyyy}', width: 100 },
+                 { field: 'end', title: 'End Time', format: '{0:MM/dd/yyyy}', width: 100 }
+             ]"
+             data-views="[ 'day', { type: 'week', selected: true }, 'month' ]"
+             data-show-work-hours="false"
+             data-show-work-days="false"
              data-bind="source: tasks,
+                        dependencies: dependencies,
                         visible: isVisible,
                         events: {
                           save: onSave
@@ -29,7 +39,7 @@
         </div>
     </div>
 <script>
-    var serviceRoot = "http://ivanchev/KendoCRUDService";
+    var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
 
     var viewModel = kendo.observable({
         isVisible: true,
@@ -76,7 +86,7 @@
                         end: { from: "End", type: "date" },
                         title: { from: "Title", defaultValue: "", type: "string" },
                         percentComplete: { from: "PercentComplete", type: "number" },
-                        summary: { from: "IsSummary" },
+                        summary: { from: "Summary" },
                         expanded: { from: "Expanded" }
                     }
                 }

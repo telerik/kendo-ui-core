@@ -3,7 +3,7 @@
 
         <script>
             $(document).ready(function() {
-                var serviceRoot = "http://ivanchev/KendoCRUDService";
+                var serviceRoot = "http://demos.telerik.com/kendo-ui/service";
                 var tasksDataSource = new kendo.data.GanttDataSource({
                     batch: false,
                     transport: {
@@ -40,7 +40,7 @@
                                 end: { from: "End", type: "date" },
                                 title: { from: "Title", defaultValue: "", type: "string" },
                                 percentComplete: { from: "PercentComplete", type: "number" },
-                                summary: { from: "IsSummary" },
+                                summary: { from: "Summary" },
                                 expanded: { from: "Expanded" }
                             }
                         }
@@ -83,30 +83,27 @@
                     }
                 });
 
-            var gantt = $("#gantt").kendoGantt({
-                dataSource: tasksDataSource,
-                dependencies: dependenciesDataSource,
-                views: [
-                    { type: "day", selected: false, slotSize: 70 },
-                    { type: "week", selected: true, slotSize: 80 },
-                    { type: "month", selected: false, slotSize: 150 }
-                ],
-                columns: [
-                    { field: "id", title: "ID", width: 50 },
-                    { field: "title", title: "Title" },
-                    { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy HH:mm}" },
-                    { field: "end", title: "End Time", format: "{0:MM/dd/yyyy HH:mm}" }
-                ],
-                height: 700,
+                var gantt = $("#gantt").kendoGantt({
+                    dataSource: tasksDataSource,
+                    dependencies: dependenciesDataSource,
+                    views: [
+                        "day",
+                        { type: "week", selected: true },
+                        "month"
+                    ],
+                    columns: [
+                        { field: "id", title: "ID", width: 50 },
+                        { field: "title", title: "Title", editable: true },
+                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100 },
+                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100 }
+                    ],
+                    height: 700,
 
-                workWeekStart: 1,
-                workWeekEnd: 4,
-                showWorkHours: false,
-                showWorkDays: false,
-                hourSpan: 1,
+                    showWorkHours: false,
+                    showWorkDays: false,
 
-                snap: false
-            }).data("kendoGantt");
+                    snap: false
+                }).data("kendoGantt");
             });
         </script>
     </div>
