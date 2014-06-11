@@ -2888,6 +2888,8 @@ var __meta__ = {
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
+                runningTotal: point.runningTotal,
+                sum: point.sum,
                 element: $(e.target)
             });
         },
@@ -2901,6 +2903,8 @@ var __meta__ = {
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
+                runningTotal: point.runningTotal,
+                sum: point.sum,
                 element: $(e.target)
             });
         }
@@ -2990,6 +2994,8 @@ var __meta__ = {
                         category: this.category,
                         value: this.value,
                         percentage: this.percentage,
+                        runningTotal: this.runningTotal,
+                        sum: point.sum,
                         series: this.series
                     });
                 } else {
@@ -3722,12 +3728,6 @@ var __meta__ = {
     });
 
     var BarChart = CategoricalChart.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            CategoricalChart.fn.init.call(chart, plotArea, options);
-        },
-
         render: function() {
             var chart = this;
 
@@ -10051,6 +10051,8 @@ var __meta__ = {
                     series: point.series,
                     dataItem: point.dataItem,
                     percentage: point.percentage,
+                    runningTotal: point.runningTotal,
+                    sum: point.sum,
                     low: point.low,
                     high: point.high,
                     xLow: point.xLow,
@@ -12024,6 +12026,8 @@ var __meta__ = {
         Tooltip: Tooltip,
         OHLCChart: OHLCChart,
         OHLCPoint: OHLCPoint,
+        WaterfallChart: WaterfallChart,
+        WaterfallSegment: WaterfallSegment,
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
