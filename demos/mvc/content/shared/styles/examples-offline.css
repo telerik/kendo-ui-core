@@ -17,32 +17,33 @@ html
     left: 0;
     overflow-y:scroll;
     font:75% Arial, Helvetica, sans-serif;
-    background: #FFFFFF;
+    background: #f5f7f8;
 }
 body
 {
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .page
 {
-    width:960px;
-    margin:30px auto;
-    padding:30px;
-    background:#fff;
-    box-shadow: 1px 1px 7px 1px #999;
+    width:72%;
+    min-width: 960px;
+    margin: 2% auto;
+    padding: 3% 5% 0;
+    background: #fff;
+    border: 1px solid #e2e4e7;
 }
 
 .offline-button {
     display: inline-block;
-    margin: 30px 0;
+    margin: 0 0 30px;
     padding: 9px 23px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #015991;
     border-radius: 2px;
     color: #fff;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
     line-height: 1.2;
     transition-duration: 0.2s;
@@ -51,23 +52,16 @@ body
 }
 
 .offline-button:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #013a5e;
     color: #fff;
     text-decoration: none;
 }
 
-
-.page .offline-button
-{
-    margin-top:0;
-}
-
 #example
 {
-    margin: 20px auto;
-    padding: 20px 0;
+    margin: 2em 0 5em;
+    padding: 0;
     border: 0;
-    max-width: 1180px;
     background: transparent;
 }
 
@@ -118,13 +112,10 @@ body
 .configuration,
 .configuration-horizontal
 {
-    float: right;
-    margin: 0 0 0 15px;
-    padding: 0 10px 10px 10px;
+    margin: 0;
+    padding: 0;
     border: 1px solid rgba(0,0,0,0.05);
     background-color: rgba(0,0,0,0.01);
-    min-width: 170px;
-    max-width: 300px;
 }
 
 .absConf .configuration
@@ -142,9 +133,7 @@ body
     position: static;
     height: auto;
     min-height: 0;
-    max-width: 948px;
     margin: 0 auto;
-    float:none;
     zoom: 1;
 }
 
@@ -259,9 +248,30 @@ body
 }
 
 /* Code Viewer */
-.source a.selected
-{
-    text-decoration: underline;
+.source {
+    background-color: #f5f7f8;
+    margin: 0 0 5em;
+    border: 1px solid rgba(20,53,80,0.05);
+}
+.source .code {
+    background-color: #fff;
+    border-top: 1px solid rgba(20,53,80,0.08);
+    padding: 20px 0 0;
+}
+.source .code pre {
+    margin: 0;
+    padding: 0 20px 20px;
+}
+.source .offline-button {
+    background: none;
+    text-decoration: none;
+    color: #0487c4;
+    margin: 10px 0 10px 14px;
+    padding: 10px;
+}
+
+.source .offline-button.selected {
+    color: #000;
 }
 
 .source .code .controller {

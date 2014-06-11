@@ -15,7 +15,7 @@ a:hover {
 
 html {
     font: 75% Arial, Helvetica, sans-serif;
-    background: #fff;
+    background: #f5f7f8;
     height: 100%;
     line-height: 1.5;
 }
@@ -36,10 +36,10 @@ h1 {
 
 h1.header {
     margin: 0;
-    height: 200px;
-    line-height: 200px;
+    height: 150px;
+    line-height: 150px;
     vertical-align: middle;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     text-align: center;
     color: #fff;
@@ -56,20 +56,23 @@ h2 {
 }
 
 #page {
-    margin: 0;
-    padding: 0 7%;
-    width: 86%;
+    width:72%;
+    min-width: 960px;
+    margin: 2% auto;
+    padding: 3% 5% 0;
+    background: #fff;
+    border: 1px solid #e2e4e7;
 }
 
 .offline-button {
     display: inline-block;
-    margin: 30px 0;
+    margin: 0 0 30px;
     padding: 9px 23px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #015991;
     border-radius: 2px;
     color: #fff;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
     line-height: 1.2;
     transition-duration: 0.2s;
@@ -78,7 +81,7 @@ h2 {
 }
 
 .offline-button:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #013a5e;
     color: #fff;
     text-decoration: none;
 }
@@ -99,7 +102,7 @@ li {
     clear: left;
     width: 30%;
     min-width: 375px;
-    padding: 30px 0;
+    padding: 20px 0 40px;
     margin: 0 3% 0 0;
     border-top: 1px solid #dfdfdf;
 }
@@ -190,6 +193,7 @@ h2+.box
 .suites {
     min-width: 960px;
     text-align: center;
+    margin: 0 -5% 3%;
 }
 
 .suite-column:first-child {
@@ -197,7 +201,7 @@ h2+.box
 }
 .suite-column {
     display: inline-block;
-    min-width: 40%;
+    min-width: 49.6%;
     margin: 3em 0;
     padding: 5em 0;
 }
