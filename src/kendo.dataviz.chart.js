@@ -4848,7 +4848,6 @@ var __meta__ = {
             var missingValues = chart.seriesMissingValues(series);
             var stackPoint;
             var plotValue = 0;
-            var fields = data.fields;
             var point;
             var pointOptions;
 
@@ -9090,7 +9089,7 @@ var __meta__ = {
                     series: series,
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
-                    spacing: firstSeries.spacing,
+                    spacing: firstSeries.spacing
                 });
 
             plotArea.appendChart(waterfallChart, pane);
