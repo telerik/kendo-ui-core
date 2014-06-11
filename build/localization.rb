@@ -130,18 +130,22 @@ rule /src\/l10n\/(.+)\.js/ => lambda { |target| target.sub( "src/l10n/", "wrappe
             elsif key == "FilterMenuOperators"
                 file.write(
                     "\n\n/* Filter menu operator messages */\n\n" +
-                    "kendo.ui.FilterMenu.prototype.options." + LOCALIZATION_OPTION_NAMES[key] + " =\n" +
-                    "$.extend(true, kendo.ui.FilterMenu.prototype.options." + LOCALIZATION_OPTION_NAMES[key] + "," +
-                        JSON.pretty_generate(options) +
-                    ");"
+                    "if (kendo.ui.FilterMenu) {\n" +
+                        "kendo.ui.FilterMenu.prototype.options." + LOCALIZATION_OPTION_NAMES[key] + " =\n" +
+                        "$.extend(true, kendo.ui.FilterMenu.prototype.options." + LOCALIZATION_OPTION_NAMES[key] + "," +
+                            JSON.pretty_generate(options) +
+                        ");\n" +
+                    "}"
                 )
             else
                 file.write(
                     "\n\n/* " + key + " messages */\n\n" +
-                    "kendo.ui." + key + ".prototype.options." + LOCALIZATION_OPTION_NAMES[key] + " =\n" +
-                    "$.extend(true, kendo.ui." + key + ".prototype.options." + LOCALIZATION_OPTION_NAMES[key] + "," +
-                        JSON.pretty_generate(options) +
-                    ");"
+                    "if (kendo.ui." + key + ") {\n" +
+                        "kendo.ui." + key + ".prototype.options." + LOCALIZATION_OPTION_NAMES[key] + " =\n" +
+                        "$.extend(true, kendo.ui." + key + ".prototype.options." + LOCALIZATION_OPTION_NAMES[key] + "," +
+                            JSON.pretty_generate(options) +
+                        ");\n" +
+                    "}"
                 )
             end
 
