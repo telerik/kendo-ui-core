@@ -28,6 +28,59 @@
         ok(!dataSource.columns()[1].expand);
     });
 
+    test("setting columns", function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "foo", expand: true }, "bar"]
+        });
+
+        dataSource.columns("baz");
+
+        equal(dataSource.columns().length, 1)
+        equal(dataSource.columns()[0].name, "baz");
+        ok(!dataSource.columns()[0].expand);
+    });
+
+    test("setting columns to empty array", function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "foo", expand: true }, "bar"]
+        });
+
+        dataSource.columns([]);
+        equal(dataSource.columns().length, 0)
+    });
+
+    test("setting rows", function() {
+        var dataSource = new PivotDataSource({
+            rows: [{ name: "foo", expand: true }, "bar"]
+        });
+
+        dataSource.rows("baz");
+
+        equal(dataSource.rows().length, 1)
+        equal(dataSource.rows()[0].name, "baz");
+        ok(!dataSource.rows()[0].expand);
+    });
+
+    test("setting rows to empty array", function() {
+        var dataSource = new PivotDataSource({
+            rows: [{ name: "foo", expand: true }, "bar"]
+        });
+
+        dataSource.rows([]);
+        equal(dataSource.rows().length, 0)
+    });
+
+    test("setting measures", function() {
+        var dataSource = new PivotDataSource({
+            measures: ["foo", "bar"]
+        });
+
+        dataSource.measures("baz");
+
+        equal(dataSource.measures().length, 1)
+        equal(dataSource.measures()[0], "baz");
+    });
+
     test("discover calls the transport discover", 1, function() {
         var dataSource = new PivotDataSource({
             transport: {

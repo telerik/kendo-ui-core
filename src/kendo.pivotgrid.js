@@ -286,6 +286,7 @@ var __meta__ = {
             }
 
             this._clearAxesData = true;
+            this._columns = normalizeMembers(val);
             this.query({
                 columns: val,
                 rows: this.rowsAxisDescriptors(),
@@ -299,6 +300,8 @@ var __meta__ = {
             }
 
             this._clearAxesData = true;
+            this._rows = normalizeMembers(val);
+
             this.query({
                 columns: this.columnsAxisDescriptors(),
                 rows: val,
@@ -405,16 +408,18 @@ var __meta__ = {
             options = DataSource.fn._mergeState.call(this, options);
 
             if (options !== undefined) {
-                this._measures = options.measures || [];
-                this._columns = options.columns || [];
-                this._rows = options.rows || [];
+                this._measures = asArray(options.measures);
 
                 if (options.columns) {
-                  this._columns = options.columns = normalizeMembers(options.columns);
+                    options.columns = normalizeMembers(options.columns);
+                } else if (!options.columns) {
+                    this._columns = [];
                 }
 
                 if (options.rows) {
-                   this._rows = options.rows = normalizeMembers(options.rows);
+                    options.rows = normalizeMembers(options.rows);
+                } else if (!options.rows) {
+                    this._rows = [];
                 }
             }
             return options;
