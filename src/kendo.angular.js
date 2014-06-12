@@ -501,6 +501,30 @@
         }
     }
 
+    var origPlugin = kendo.ui.plugin;
+    var pendingPatches = [];
+    kendo.ui.plugin = function() {
+        origPlugin.apply(kendo.ui, Array.prototype.slice.call(arguments));
+
+        for (var i = 0; i < pendingPatches.length; i ++) {
+            var patch = pendingPatches[i];
+            if (patch()) {
+                pendingPatches.splice(i, 1);
+                i --;
+            }
+        }
+    }
+
+    function resolveClass(klass) {
+        var a = klass.split(".");
+        var x = kendo;
+        while (x && a.length > 0) {
+            x = x[a.shift()];
+        }
+
+        return x;
+    }
+
     // defadvice will patch a class' method with another function.  That
     // function will be called in a context containing `next` (to call
     // the next method) and `object` (a reference to the original
@@ -511,28 +535,33 @@
                 defadvice(klass, methodName, func);
             });
         }
-        if (typeof klass == "string") {
-            var a = klass.split(".");
-            var x = kendo;
-            while (x && a.length > 0) {
-                x = x[a.shift()];
-            }
-            if (!x) {
-                //console.log("Can't advice " + klass + "::" + methodName);
-                return;
-            }
-            klass = x;
-        }
-        var origMethod = klass.prototype[methodName];
-        klass.prototype[methodName] = function() {
-            var self = this, args = arguments;
-            return func.apply({
-                self: self,
-                next: function() {
-                    return origMethod.apply(self, arguments.length > 0 ? arguments : args);
+
+        var patch = function() {
+            var resolvedClass = klass;
+            if (typeof resolvedClass == "string") {
+                resolvedClass = resolveClass(resolvedClass);
+                if (!resolvedClass) {
+                    return false;
                 }
-            }, args);
-        };
+            }
+
+            var origMethod = resolvedClass.prototype[methodName];
+            resolvedClass.prototype[methodName] = function() {
+                var self = this, args = arguments;
+                return func.apply({
+                    self: self,
+                    next: function() {
+                        return origMethod.apply(self, arguments.length > 0 ? arguments : args);
+                    }
+                }, args);
+            };
+
+            return true;
+        }
+
+        if (!patch()) {
+            pendingPatches.push(patch);
+        }
     }
 
     /* -----[ Customize widgets for Angular ]----- */
