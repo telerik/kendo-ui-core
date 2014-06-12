@@ -2051,6 +2051,7 @@ var __meta__ = {
                 that._moveDraggable = new kendo.ui.Draggable(that.element, {
                     distance: 0,
                     filter: ".k-event",
+                    ignore: ".k-resize-handle",
                     holdToDrag: isMobile
                 });
 
