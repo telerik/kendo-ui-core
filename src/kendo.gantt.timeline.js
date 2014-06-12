@@ -2006,6 +2006,7 @@ var __meta__ = {
                 this.wrapper
                     .on(CLICK + NS, DOT + styles.taskDelete, function(e) {
                         that.trigger("removeTask", { uid: $(this).closest(DOT + styles.task).attr("data-uid") });
+                        e.preventDefault();
                     })
                     .on(KEYDOWN + NS, function(e) {
                         var selectedTask;
