@@ -338,6 +338,7 @@ var __meta__ = {
                     element.addClass(RESIZABLE_TOOLBAR);
 
                     that.overflowUserEvents = new kendo.UserEvents(that.element, {
+                        threshold: 5,
                         filter: "." + OVERFLOW_ANCHOR,
                         tap: proxy(that._toggleOverflow, that)
                     });
@@ -351,6 +352,7 @@ var __meta__ = {
                 }
 
                 that.userEvents = new kendo.UserEvents(document, {
+                    threshold: 5,
                     filter:
                         "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", " +
                         "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
