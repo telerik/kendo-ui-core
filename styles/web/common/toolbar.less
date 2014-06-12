@@ -1,66 +1,94 @@
 /* Toolbar */
 
-.k-toolbar {
+.k-toolbar
+{
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    padding-right: 2em;
 }
 
-.k-toolbar-resizable {
+.k-toolbar .k-button .k-icon
+{
+    vertical-align: middle;
+    margin-top: -1px;
+}
+
+.k-toolbar-resizable
+{
     overflow: hidden;
     white-space: nowrap;
 }
 
-.k-toolbar > * {
+.k-toolbar > *
+{
     display: inline-block;
+    vertical-align: middle;
 }
 
-.k-toolbar .k-button-group {
+.k-toolbar .k-button-group
+{
     list-style-type: none;
-    padding: 0 0.5em;
-    margin: 0;
 }
 
-.k-toolbar .k-button-group > li {
+.k-toolbar .k-button-group > li
+{
     display: inline-block;
 }
 
-.k-toolbar .k-button-group .k-button {
-    margin: 0;
+.k-toolbar .k-button-group .k-button
+{
+    margin: 0 0 0 -1px;
     border-radius: 0;
 }
 
-.k-toolbar .k-button-group .k-group-start {
+.k-toolbar .k-button-group .k-group-start
+{
+    margin: 0;
     border-radius: 4px 0 0 4px;
 }
 
-.k-toolbar .k-button-group .k-group-end {
+.k-toolbar .k-button-group .k-group-end
+{
     border-radius: 0 4px 4px 0;
 }
 
-.k-toolbar .k-button {
-    margin: 0.4em;
+.k-toolbar .k-button,
+.k-toolbar .k-split-button,
+.k-toolbar .k-button-group
+{
+    margin: .4em .2em;
 }
 
-.k-toolbar .k-split-button {
+.k-toolbar .k-split-button
+{
     padding-left: 0;
 }
 
-.k-toolbar .k-split-button .k-button {
+.k-toolbar .k-split-button .k-button
+{
     border-radius: 4px 0 0 4px;
     margin: 0;
 }
 
-.k-toolbar .k-split-button .k-split-button-arrow {
+.k-toolbar .k-split-button .k-split-button-arrow
+{
     margin: 0 0 0 -1px;
     border-radius: 0 4px 4px 0;
 }
 
-.k-toolbar .k-overflow-anchor {
+.k-toolbar .k-overflow-anchor
+{
     background-color: #FF0000;
-    height: 52px;
-    width: 20px;
-    float: right;
+    height: 100%;
+    width: 1em;
+    padding: 0 1em;
+    position: absolute;
+    right: 0;
 }
 
-.k-overflow-container .k-item {
+.k-overflow-container .k-item
+{
     float: none;
 }
 
@@ -76,23 +104,28 @@
     background-color: transparent;
 }
 
-.k-overflow-container .k-button-group {
+.k-overflow-container .k-button-group
+{
     padding: 0;
 }
 
-.k-overflow-container .k-button-group > li {
+.k-overflow-container .k-button-group > li
+{
     display: block;
 }
 
-.k-overflow-container .k-group-start {
+.k-overflow-container .k-group-start
+{
     border-top: 2px solid orange;
 }
 
-.k-overflow-container .k-group-end {
+.k-overflow-container .k-group-end
+{
     border-bottom: 2px solid orange;
 }
 
-.k-overflow-hidden {
+.k-overflow-hidden
+{
     display: none;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
