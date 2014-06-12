@@ -13,7 +13,8 @@ module CodeGen
              'String',
              'Number',
              'Boolean',
-             'Function']
+             'Function',
+             'jQuery']
 
     class Component
         include Options
