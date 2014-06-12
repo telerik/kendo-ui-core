@@ -1815,11 +1815,16 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-column-menu,
-.k-column-menu .k-item
+.k-column-menu .k-item,
+.k-overflow-container .k-button-group
 {
     border-color: @secondary-border-color;
 }
 
+.k-overflow-container .k-button-group
+{
+    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+}
 
 .k-column-menu .k-separator
 {
@@ -1870,7 +1875,8 @@ html .km-pane-wrapper .km-widget,
 }
 
 //Primary buttons
-.k-primary
+.k-primary,
+.k-overflow-container .k-primary
 {
     color: @primary-button-text-color;
     border-color: @primary-button-border-color;

@@ -24,7 +24,6 @@ var __meta__ = {
         BUTTON_GROUP = "k-button-group",
         SPLIT_BUTTON = "k-split-button",
         SEPARATOR = "k-separator",
-        LINK = "k-link",
 
         RESIZABLE_TOOLBAR = "k-toolbar-resizable",
         STATE_ACTIVE = "k-state-active",
@@ -173,7 +172,7 @@ var __meta__ = {
 
             overflowAnchor: '<div class="k-overflow-anchor k-button"></div>',
 
-            overflowContainer: '<ul class="k-overflow-container k-menu"></ul>'
+            overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
         function createButton(options, useButtonTag) {
@@ -235,7 +234,11 @@ var __meta__ = {
             var element = components.button.base(options),
                 hasIcon;
 
-            element.addClass(OVERFLOW_BUTTON + " " + LINK);
+            element.addClass(OVERFLOW_BUTTON + " " + BUTTON);
+
+            if (options.primary) {
+                element.addClass(PRIMARY);
+            }
 
             if (options.id) {
                 element.attr("id", options.id + "_overflow");

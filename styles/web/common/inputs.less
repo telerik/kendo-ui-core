@@ -385,12 +385,23 @@ body .k-datetimepicker .k-select
     height: 100%;
 }
 
-.k-popup .k-list .k-item,
-.k-overflow-container .k-item
+.k-popup .k-list .k-item
 {
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
     min-height: 1.8em;
+}
+
+.k-overflow-container .k-item
+{
+    padding: 1px;
+}
+
+.k-overflow-container .k-button.k-state-disabled,
+.k-overflow-container .k-button.k-state-disabled:hover
+{
+    border: 0 ;
+    background: none;
 }
 
 .k-popup .k-list .k-state-hover,
