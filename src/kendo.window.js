@@ -646,7 +646,7 @@ var __meta__ = {
 
             this.angular("compile", function(){
                 return {
-                    elements: content.children(),
+                    elements: content,
                     data: [ { dataItem: data || {} } ]
                 };
             });
