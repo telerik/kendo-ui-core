@@ -7,15 +7,15 @@
     var _UID_ = kendo.attr("uid");
 
     var module = angular.module('kendo.directives', []);
-    var parse, timeout, compile = function compile(){ return compile }, log;
+    var $parse, $timeout, $compile = function compile(){ return compile }, $log;
 
     function immediately(f) {
-        var save_timeout = timeout;
-        timeout = function(f) { return f() };
+        var save_timeout = $timeout;
+        $timeout = function(f) { return f() };
         try {
             return f();
         } finally {
-            timeout = save_timeout;
+            $timeout = save_timeout;
         }
     }
 
@@ -76,7 +76,7 @@
                             optionName = "onLabel"; // XXX: that's awful.
                         options[optionName] = angular.copy(scope.$eval(value));
                         if (options[optionName] === undefined && value.match(/^\w*$/)) {
-                            log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
+                            $log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
                         }
                     }
                 }
@@ -106,7 +106,7 @@
     function exposeWidget(widget, scope, attrs, kendoWidget, origAttr) {
         if (attrs[origAttr]) {
             // expose the widget object
-            var set = parse(attrs[origAttr]).assign;
+            var set = $parse(attrs[origAttr]).assign;
             if (set) {
                 // set the value of the expression to the kendo widget object to expose its api
                 set(scope, widget);
@@ -120,12 +120,12 @@
         return /^kendo/i.test(element.prop("tagName"));
     }
 
-    module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function($timeout, $parse, $compile, $log) {
+    module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, parse, compile, log) {
 
-        timeout = $timeout;
-        parse = $parse;
-        compile = $compile;
-        log = $log;
+        $timeout = timeout;
+        $parse = parse;
+        $compile = compile;
+        $log = log;
 
         var KENDO_COUNT = 0;
 
@@ -186,13 +186,13 @@
 
                     var kNgDelay = attrs.kNgDelay;
 
-                    timeout(function createIt() {
+                    $timeout(function createIt() {
                         if (kNgDelay) return (function(){
                             var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
                                 if (newValue !== oldValue) {
                                     unregister();
                                     kNgDelay = null;
-                                    timeout(createIt); // XXX: won't work without `timeout` ;-\
+                                    $timeout(createIt); // XXX: won't work without `timeout` ;-\
                                 }
                             }, true);
                         })();
@@ -225,7 +225,7 @@
                                         $(element).replaceWith(clone);
                                         element = $(clone);
                                     }
-                                    compile(element)(scope);
+                                    $compile(element)(scope);
                                 }
                             }, true); // watch for object equality. Use native or simple values.
                         }
@@ -290,7 +290,7 @@
                                 var onChange = function(pristine){
                                     return function(){
                                         haveChangeOnElement = false;
-                                        timeout(function(){
+                                        $timeout(function(){
                                             if (haveChangeOnElement) return;
                                             if (pristine && ngForm) {
                                                 var formPristine = ngForm.$pristine;
@@ -326,10 +326,10 @@
                             // kNgModel is used for the "logical" value
                             OUT: if (attrs.kNgModel) {
                                 if (typeof widget.value != "function") {
-                                    log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
+                                    $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
                                     break OUT;
                                 }
-                                var getter = parse(attrs.kNgModel);
+                                var getter = $parse(attrs.kNgModel);
                                 var setter = getter.assign;
                                 var updating = false;
                                 widget.value(getter(scope));
@@ -556,7 +556,7 @@
                             }
                         }
 
-                        compile(el)(itemScope || scope);
+                        $compile(el)(itemScope || scope);
                     });
                     digest(scope);
                     break;
@@ -602,7 +602,7 @@
 
     // most handers will only contain a kendoEvent in the scope.
     defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
-        handler = parse(handler);
+        handler = $parse(handler);
         return function(e) {
             if (/^\$(apply|digest)$/.test(scope.$root.$$phase)) {
                 handler(scope, { kendoEvent: e });
@@ -615,7 +615,7 @@
     // for the Grid and ListView we add `data` and `selected` too.
     defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView" ], "$angular_makeEventHandler", function(event, scope, handler){
         if (event != "change") return this.next();
-        handler = parse(handler);
+        handler = $parse(handler);
         return function(ev) {
             var widget = ev.sender;
             var options = widget.options;
