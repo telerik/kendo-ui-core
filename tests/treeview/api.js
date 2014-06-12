@@ -2,6 +2,14 @@
     var createTreeView = TreeViewHelpers.fromOptions;
     var treeFromHtml = TreeViewHelpers.fromHtml;
 
+    function get(id) {
+        return treeviewObject.dataSource.get(id);
+    }
+
+    function getByText(text) {
+        return treeviewObject.dataItem(treeviewObject.findByText(text));
+    }
+
     module("API", TreeViewHelpers.basicModule);
 
     test("enable(node, false) disables node", function() {
@@ -1006,7 +1014,7 @@
 
         treeviewObject.expandPath([ 1 ]);
 
-        ok(treeviewObject.dataSource.get(1).expanded);
+        ok(get(1).expanded);
     });
 
     test("expandPath expands multiple levels", 2, function() {
@@ -1019,9 +1027,8 @@
         ]);
 
         treeviewObject.expandPath([ 1, 2 ], function() {
-            var ds = treeviewObject.dataSource;
-            ok(ds.get(1).expanded);
-            ok(ds.get(2).expanded);
+            ok(get(1).expanded);
+            ok(get(2).expanded);
         });
     });
 
@@ -1035,10 +1042,39 @@
         ]);
 
         treeviewObject.expandPath([ 1, 2 ], function() {
-            var ds = treeviewObject.dataSource;
-            ok(ds.get(1).expanded);
-            ok(ds.get(2).expanded);
+            ok(get(1).expanded);
+            ok(get(2).expanded);
         });
+    });
+
+    test("expandTo expands up to model", function() {
+        createTreeView([
+            { text: "foo", items: [
+                { text: "bar", items: [
+                    { text: "baz" }
+                ] }
+            ] }
+        ]);
+
+        treeviewObject.expandTo(getByText("baz"));
+
+        ok(getByText("foo").expanded);
+        ok(getByText("bar").expanded);
+    });
+
+    test("expandTo expands up to ID", function() {
+        createTreeView([
+            { id: 1, text: "foo", items: [
+                { id: 2, text: "bar", items: [
+                    { id: 3, text: "baz" }
+                ] }
+            ] }
+        ]);
+
+        treeviewObject.expandTo(3);
+
+        ok(get(1).expanded);
+        ok(get(2).expanded);
     });
 
     module("expandPath async", {
@@ -1073,8 +1109,7 @@
             clearTimeout(timeout);
             start();
 
-            var root = treeviewObject.dataSource.get(1);
-            ok(root.expanded);
+            ok(get(1).expanded);
         });
     });
 
@@ -1085,8 +1120,7 @@
             clearTimeout(timeout);
             start();
 
-            var inner = treeviewObject.dataSource.get(3);
-            ok(inner.expanded);
+            ok(get(3).expanded);
         });
     });
 })();

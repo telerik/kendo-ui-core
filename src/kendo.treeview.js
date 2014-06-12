@@ -1859,6 +1859,29 @@ var __meta__ = {
             node.set("expanded", true);
         },
 
+        _parents: function(node) {
+            var parent = node && node.parentNode();
+            var parents = [];
+            while (parent) {
+                parents.push(parent);
+                parent = parent.parentNode();
+            }
+
+            return parents;
+        },
+
+        expandTo: function(node) {
+            if (!(node instanceof kendo.data.Node)) {
+                node = this.dataSource.get(node);
+            }
+
+            var parents = this._parents(node);
+
+            for (var i = 0; i < parents.length; i++) {
+                parents[i].set("expanded", true);
+            }
+        },
+
         _renderItem: function (options) {
             if (!options.group) {
                 options.group = {};
