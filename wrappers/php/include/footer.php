@@ -8,7 +8,6 @@
 ?>
             </div>
             <div class="source">
-                Source:
                 <a href="#" class="offline-button view selected">PHP</a>
 <?php
     foreach ($knownFiles as $name => $path) {
