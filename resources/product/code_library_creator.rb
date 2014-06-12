@@ -99,8 +99,8 @@ end
 def set_cl_fields(bot, product_name)
       p "setting code library fields>>"
       bot.execute_script("$('[id*=\"titleFieldControl\"]').val('#{product_name}')")
-      bot.execute_script("$('[id$=\"_pageUrl\"]').className('sfSelectedItem')")
-      bot.execute_script("$('[id$=\"_pageUrl\"]').text('Code Library')")
+      bot.execute_script("$('[id*=\"pageUrl\"]').className('sfSelectedItem')")
+      bot.execute_script("$('[id*=\"pageUrl\"]').text('Code Library')")
 
       if product_name.index("Mobile") == nil
         bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
