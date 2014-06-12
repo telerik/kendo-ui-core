@@ -242,6 +242,16 @@ bundle :name => 'professional.commercial',
               :websites => ["Telerik"],
               :download_message => 'You successfully downloaded the Kendo UI Professional installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.',
               :whats_included_message => "<strong>Installer EXE package</strong>"
+             },
+             :nuget => {
+              :label => "Kendo UI Professional NuGet package",
+              :download_name => "telerik.kendoui.professional.#{VERSION}.commercial.nupkg.zip",
+              :file_category => "Other Setup Files",
+              :file_type => "Paid Files",
+              :extension => "ZIP",
+              :websites => ["Telerik"],
+              :download_message => "You successfully downloaded Kendo UI Professional Commercial NuGet package.",
+              :whats_included_message => "<strong>Commercial NuGet package for Kendo UI Professional</strong>"
              }
            },
            :download_builder => true,
@@ -292,6 +302,16 @@ bundle :name => 'professional.trial',
               :file_markers => ["Default File For Common Installer"],
               :websites => ["Telerik"],
               :download_message => 'You successfully downloaded the Kendo UI Professional Trial installer. See <a href="http://docs.telerik.com/kendo-ui/getting-started/introduction">this article</a> on how to get started.'
+             },
+             :nuget => {
+              :label => "Kendo UI Professional NuGet package",
+              :download_name => "telerik.kendoui.professional.#{VERSION}.trial.nupkg.zip",
+              :file_category => "Other Setup Files",
+              :file_type => "Trial Files",
+              :extension => "ZIP",
+              :websites => ["Telerik"],
+              :download_message => "You successfully downloaded Kendo UI Professional Trial NuGet package.",
+              :whats_included_message => "<strong>Trial NuGet package for Kendo UI Professional</strong>"
              }
            },
            :changelog => true,
