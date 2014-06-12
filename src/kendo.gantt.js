@@ -1391,9 +1391,23 @@ var __meta__ = {
                 treeListWrapper.find(contentSelector).scrollTop(this.scrollTop);
             });
 
-            treeListWrapper.find(contentSelector).on("scroll", function(e) {
-                treeListWrapper.find(headerSelector).scrollLeft(this.scrollLeft);
-            });
+            treeListWrapper.find(contentSelector)
+                .on("scroll", function(e) {
+                    treeListWrapper.find(headerSelector).scrollLeft(this.scrollLeft);
+                })
+                .on("DOMMouseScroll" + NS + " mousewheel" + NS, function(e) {
+                    var content = timelineWrapper.find(contentSelector);
+                    var scrollTop = content.scrollTop();
+                    var delta = kendo.wheelDeltaY(e);
+
+                    if (delta) {
+                        e.preventDefault();
+                        //In Firefox DOMMouseScroll event cannot be canceled
+                        $(e.currentTarget).one("wheel" + NS, false);
+
+                        content.scrollTop(scrollTop + (-delta));
+                    }
+                });
         },
 
         _dataBind: function() {
