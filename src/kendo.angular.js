@@ -4,6 +4,8 @@
 
     "use strict";
 
+    /*jshint eqnull:true,loopfunc:true,-W052,-W028  */
+
     var module = angular.module('kendo.directives', []);
     var $parse, $timeout, $compile, $log;
 
@@ -14,11 +16,12 @@
             TreeView  : 'HierarchicalDataSource',
             Scheduler : 'SchedulerDataSource',
             PanelBar  : '$PLAIN',
-            Menu      : "$PLAIN",
+            Menu      : "$PLAIN"
         };
         var toDataSource = function(dataSource, type) {
-            if (type == '$PLAIN')
+            if (type == '$PLAIN') {
                 return dataSource;
+            }
             return kendo.data[type].create(dataSource);
         };
         return function(scope, element, attrs, role) {
@@ -44,7 +47,7 @@
         kOptions    : true,
         kRebind     : true,
         kNgModel    : true,
-        kNgDelay    : true,
+        kNgDelay    : true
     };
 
     function createWidget(scope, element, attrs, widget, origAttr) {
@@ -55,13 +58,13 @@
                 var match = name.match(/^k(On)?([A-Z].*)/);
                 if (match) {
                     var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
-                    if (match[1]
-                        && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
+                    if (match[1] && name != "kOnLabel" // XXX: k-on-label can be used on MobileSwitch :-\
                        ) {
                         options[optionName] = value;
                     } else {
-                        if (name == "kOnLabel")
+                        if (name == "kOnLabel") {
                             optionName = "onLabel"; // XXX: that's awful.
+                        }
                         options[optionName] = angular.copy(scope.$eval(value));
                         if (options[optionName] === undefined && value.match(/^\w*$/)) {
                             $log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
@@ -82,7 +85,7 @@
 
         var ctor = $(element)[widget];
         if (!ctor) {
-            console.error("Could not find: " + widget);
+            window.console.error("Could not find: " + widget);
             return null;
         }
         var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
@@ -105,7 +108,7 @@
     }
 
     function hasKendoTag(element) {
-        return /^kendo/i.test(element.prop("tagName"));
+        return (/^kendo/i).test(element.prop("tagName"));
     }
 
     module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, parse, compile, log) {
@@ -128,7 +131,7 @@
                 transclude: true,
                 controller: [ '$scope', '$attrs', '$element', '$transclude', function($scope, $attrs, $element, $transclude) {
 
-                    if (hasKendoTag($element)) (function(){
+                    if (hasKendoTag($element)) {(function(){
                         var element = $element[0];
                         $attrs.$kendoOrigElement = element.cloneNode(true);
                         var attributes = Array.prototype.slice.call(element.attributes); // guess why we need that. :-\
@@ -148,7 +151,7 @@
                                 element.removeAttribute(orig);
                             }
                         }
-                    })();
+                    })();}
 
                     // Make the element's contents available to the kendo widget to allow creating some widgets from existing elements.
                     $transclude($scope, function(clone){
@@ -175,15 +178,17 @@
                     var kNgDelay = attrs.kNgDelay;
 
                     $timeout(function createIt() {
-                        if (kNgDelay) return (function(){
-                            var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
-                                if (newValue !== oldValue) {
-                                    unregister();
-                                    kNgDelay = null;
-                                    $timeout(createIt); // XXX: won't work without `timeout` ;-\
-                                }
-                            }, true);
-                        })();
+                        if (kNgDelay) {
+                            return (function(){
+                                var unregister = scope.$watch(kNgDelay, function(newValue, oldValue){
+                                    if (newValue !== oldValue) {
+                                        unregister();
+                                        kNgDelay = null;
+                                        $timeout(createIt); // XXX: won't work without `timeout` ;-\
+                                    }
+                                }, true);
+                            })();
+                        }
 
                         // if k-rebind attribute is provided, rebind the kendo widget when
                         // the watched value changes
@@ -226,8 +231,9 @@
 
                             var isFormField = /^(input|select|textarea)$/i.test(element[0].tagName);
                             function formValue(el) {
-                                if (/checkbox|radio/i.test(element.attr("type")))
+                                if (/checkbox|radio/i.test(element.attr("type"))) {
                                     return element.prop("checked");
+                                }
                                 return element.val();
                             }
                             function value() {
@@ -260,7 +266,9 @@
                                     // delaying with setTimout for cases where the datasource is set thereafter.
                                     // https://github.com/kendo-labs/angular-kendo/issues/304
                                     var val = ngModel.$viewValue;
-                                    if (val === undefined) val = ngModel.$modelValue;
+                                    if (val === undefined) {
+                                        val = ngModel.$modelValue;
+                                    }
                                     setTimeout(function(){
                                         widget.value(val);
                                     }, 0);
@@ -279,9 +287,12 @@
                                     return function(){
                                         haveChangeOnElement = false;
                                         $timeout(function(){
-                                            if (haveChangeOnElement) return;
+                                            var formPristine;
+                                            if (haveChangeOnElement) {
+                                                return;
+                                            }
                                             if (pristine && ngForm) {
-                                                var formPristine = ngForm.$pristine;
+                                                formPristine = ngForm.$pristine;
                                             }
                                             ngModel.$setViewValue(value());
                                             if (pristine) {
@@ -303,7 +314,7 @@
                                 if (currentVal != ngModel.$viewValue) {
                                     if (!ngModel.$isEmpty(ngModel.$viewValue)) {
                                         widget.value(ngModel.$viewValue);
-                                    } else if (currentVal != null && currentVal != "" && currentVal != ngModel.$viewValue) {
+                                    } else if (currentVal != null && currentVal !== "" && currentVal != ngModel.$viewValue) {
                                         ngModel.$setViewValue(currentVal);
                                     }
                                 }
@@ -312,10 +323,10 @@
                             }
 
                             // kNgModel is used for the "logical" value
-                            OUT: if (attrs.kNgModel) {
+                            OUT2: if (attrs.kNgModel) {
                                 if (typeof widget.value != "function") {
                                     $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
-                                    break OUT;
+                                    break OUT2;
                                 }
                                 var getter = $parse(attrs.kNgModel);
                                 var setter = getter.assign;
@@ -324,8 +335,12 @@
 
                                 // keep in sync
                                 scope.$watch(attrs.kNgModel, function(newValue, oldValue){
-                                    if (updating) return;
-                                    if (newValue === oldValue) return;
+                                    if (updating) {
+                                        return;
+                                    }
+                                    if (newValue === oldValue) {
+                                        return;
+                                    }
                                     widget.value(newValue);
                                 });
                                 bindBefore(widget, "change", function(){
@@ -349,7 +364,9 @@
 
                             var mo = new MutationObserver(function(changes, mo){
                                 suspend();    // make sure we don't trigger a loop
-                                if (!widget) return;
+                                if (!widget) {
+                                    return;
+                                }
 
                                 changes.forEach(function(chg){
                                     var w = $(widget.wrapper)[0];
@@ -399,7 +416,7 @@
                         })();
 
                         --KENDO_COUNT;
-                        if (KENDO_COUNT == 0) {
+                        if (KENDO_COUNT === 0) {
                             scope.$emit("kendoRendered");
                         }
 
@@ -436,7 +453,7 @@
                         }
                     }
                 });
-            }
+            };
         }
         angular.forEach([ kendo.ui, kendo.dataviz && kendo.dataviz.ui ], createDirectives(""));
         angular.forEach([ kendo.mobile && kendo.mobile.ui ], createDirectives("Mobile"));
@@ -491,7 +508,9 @@
         if (typeof klass == "string") {
             var a = klass.split(".");
             var x = kendo;
-            while (x && a.length > 0) x = x[a.shift()];
+            while (x && a.length > 0) {
+                x = x[a.shift()];
+            }
             if (!x) {
                 //console.log("Can't advice " + klass + "::" + methodName);
                 return;
@@ -518,7 +537,9 @@
             // `arg` here should be the widget options.
             // the Chart doesn't send the options to Widget::init in constructor
             // hence the OPTIONS_NOW hack (initialized in createWidget).
-            if (!arg && OPTIONS_NOW) arg = OPTIONS_NOW;
+            if (!arg && OPTIONS_NOW) {
+                arg = OPTIONS_NOW;
+            }
             OPTIONS_NOW = null;
             if (arg && arg.$angular) {
                 self.$angular_scope = arg.$angular[0];
@@ -570,8 +591,9 @@
             for (var i = self.events.length; --i >= 0;) {
                 var event = self.events[i];
                 var handler = options[event];
-                if (handler && typeof handler == "string")
+                if (handler && typeof handler == "string") {
                     options[event] = self.$angular_makeEventHandler(event, scope, handler);
+                }
             }
         }
     });
@@ -583,14 +605,16 @@
             if (/^\$(apply|digest)$/.test(scope.$root.$$phase)) {
                 handler(scope, { kendoEvent: e });
             } else {
-                scope.$apply(function() { handler(scope, { kendoEvent: e }) });
+                scope.$apply(function() { handler(scope, { kendoEvent: e }); });
             }
         };
     });
 
     // for the Grid and ListView we add `data` and `selected` too.
     defadvice([ "ui.Grid", "ui.ListView", "ui.TreeView" ], "$angular_makeEventHandler", function(event, scope, handler){
-        if (event != "change") return this.next();
+        if (event != "change") {
+            return this.next();
+        }
         handler = $parse(handler);
         return function(ev) {
             var widget = ev.sender;
@@ -626,7 +650,7 @@
                 locals.selected = elems[0];
             }
 
-            scope.$apply(function() { handler(scope, locals) });
+            scope.$apply(function() { handler(scope, locals); });
         };
     });
 
@@ -639,9 +663,9 @@
             var settings = $.extend({}, kendo.Template, options.templateSettings);
             angular.forEach(options.columns, function(col){
                 if (col.field && !col.template && !col.format && !col.values) {
-                    col.template = "<span ng-bind='"
-                        + kendo.expr(col.field, "dataItem") + "'>#: "
-                        + kendo.expr(col.field, settings.paramName) + "#</span>";
+                    col.template = "<span ng-bind='" +
+                        kendo.expr(col.field, "dataItem") + "'>#: " +
+                        kendo.expr(col.field, settings.paramName) + "#</span>";
                 }
             });
         }
@@ -666,4 +690,4 @@
             this.self.trigger("change");
         });
     }
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery, angular, kendo); });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery, window.angular, kendo); });

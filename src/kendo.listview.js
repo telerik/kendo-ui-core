@@ -563,7 +563,7 @@ var __meta__ = {
                 model: data,
                 clearContainer: false,
                 errorTemplate: false,
-                target: that,
+                target: that
             }).data("kendoEditable");
 
             that.trigger(EDIT, { model: data, item: container });

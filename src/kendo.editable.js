@@ -245,7 +245,7 @@ var __meta__ = {
             var that = this;
 
             that.angular("cleanup", function(){
-                return { elements: that.element }
+                return { elements: that.element };
             });
 
             Widget.fn.destroy.call(that);
@@ -280,7 +280,7 @@ var __meta__ = {
                 that.angular("compile", function(){
                     return {
                         elements: container,
-                        data: [ { dataItem: model } ],
+                        data: [ { dataItem: model } ]
                     };
                 });
             }

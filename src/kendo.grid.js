@@ -1816,7 +1816,7 @@ var __meta__ = {
                     elements: cell.get(),
                     scopeFrom: cell.parent()
                 };
-            })
+            });
         },
 
         removeRow: function(row) {
@@ -2066,7 +2066,7 @@ var __meta__ = {
                     fields: fields,
                     model: model,
                     clearContainer: false,
-                    target: that,
+                    target: that
                 }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"
@@ -4408,7 +4408,7 @@ var __meta__ = {
             this.angular("compile", function(){
                 return {
                     elements: thead.find("th").get(),
-                    data: columns.map(function(col){ return { column: col }})
+                    data: columns.map(function(col){ return { column: col }; })
                 };
             });
 

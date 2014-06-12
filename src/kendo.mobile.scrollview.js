@@ -705,13 +705,13 @@ var __meta__ = {
                 that.trigger(ITEM_CHANGE, e);
 
                 that.angular("compile", function() {
-                    return { elements: e.item, data: [ { dataItem: e.data } ] }
+                    return { elements: e.item, data: [ { dataItem: e.data } ] };
                 });
             });
 
             that._content.bind(CLEANUP, function(e) {
                 that.angular("cleanup", function() {
-                    return { elements: e.item }
+                    return { elements: e.item };
                 });
             });
 

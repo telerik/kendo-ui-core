@@ -1424,7 +1424,7 @@ var __meta__ = {
                 model: model,
                 clearContainer: false,
                 validateOnBlur: true,
-                target: that.options.target,
+                target: that.options.target
             }).data("kendoEditable");
 
             if (!that.trigger(EDIT, { container: container, model: model })) {
