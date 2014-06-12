@@ -276,4 +276,48 @@
 
         ok(true);
     });
+
+    test("render persists the order of table rows", function() {
+        var initial = [element("table", null, [
+            element("thead", null, [
+                element("tr", null, [
+                    element("td", null, [text("all")])
+                ]),
+                element("tr", null, [
+                    element("td", null, [text("2005")]),
+                    element("td", null, [text("2006")]),
+                    element("td", null, [text("2007")]),
+                    element("td", null, [text("2008")])
+                ]),
+                element("tr", null, [
+                    element("td", null, [text("m1")])
+                ])
+            ])
+        ])];
+
+        tree.render(initial);
+
+        var updated = [element("table", null, [
+            element("thead", null, [
+                element("tr", null, [
+                    element("td", null, [text("all")])
+                ]),
+                element("tr", null, [
+                    element("td", null, [text("all")])
+                ]),
+                element("tr", null, [
+                    element("td", null, [text("m1")]),
+                    element("td", null, [text("m3")])
+                ]),
+            ])
+        ])];
+
+        tree.render(updated);
+
+        var rows = root.firstChild.firstChild.childNodes;
+
+        equal(rows[0].childNodes.length, 1);
+        equal(rows[1].childNodes.length, 1);
+        equal(rows[2].childNodes.length, 2);
+    });
 }());
