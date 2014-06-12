@@ -1522,6 +1522,108 @@
         });
 
         // ------------------------------------------------------------
+        module("Categorical PlotArea / Waterfall series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea([{
+                    type: "waterfall",
+                    data: [1, 2, 3],
+                    gap: GAP,
+                    spacing: SPACING
+                }, {
+                    type: "waterfall",
+                    data: [1, 2, 3]
+                }]);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("value axis is vertical", function() {
+            ok(valueAxis.options.vertical);
+        });
+
+        test("category axis is horizontal", function() {
+            ok(!categoryAxis.options.vertical);
+        });
+
+        test("creates waterfall chart", function() {
+            ok(chartSeries instanceof dataviz.WaterfallChart);
+        });
+
+        test("groups waterfall series into waterfall chart", function() {
+            equal(chartSeries.options.series.length, 2);
+        });
+
+        test("sets axis min/max to series limits", 2, function() {
+            stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                function() {
+                    equal(this.valueAxisRangeTracker.query().min, 1);
+                    equal(this.valueAxisRangeTracker.query().max, 6);
+                },
+                function() {
+                    createPlotArea([{
+                        type: "waterfall",
+                        data: [1, 2, 3]
+                    }, {
+                        type: "waterfall",
+                        data: [1, 2, 3]
+                    }]);
+                }
+            );
+        });
+
+        test("applies gap from first series", function() {
+            equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / Horizontal Waterfall series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea([{
+                    type: "horizontalWaterfall",
+                    data: [1, 2, 3],
+                    gap: GAP,
+                    spacing: SPACING
+                }, {
+                    type: "horizontalWaterfall",
+                    data: [1, 2, 3]
+                }]);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("value axis is horizontal", function() {
+            ok(!valueAxis.options.vertical);
+        });
+
+        test("category axis is vertical", function() {
+            ok(categoryAxis.options.vertical);
+        });
+
+        test("creates waterfall chart", function() {
+            ok(chartSeries instanceof dataviz.WaterfallChart);
+        });
+
+        test("groups horizontal waterfall series into waterfall chart", function() {
+            equal(chartSeries.options.series.length, 2);
+        });
+
+        test("applies gap from first series", function() {
+            equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
+        // ------------------------------------------------------------
         var dateCategoryAxis = {
             type: "date",
             categories: ["2012/02/01 00:00", "2012/02/02 00:00", "2012/02/04 00:00"]

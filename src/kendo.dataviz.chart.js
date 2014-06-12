@@ -133,6 +133,7 @@ var __meta__ = {
         FUNNEL = "funnel",
         GLASS = "glass",
         HORIZONTAL = "horizontal",
+        HORIZONTAL_WATERFALL = "horizontalWaterfall",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
@@ -232,7 +233,7 @@ var __meta__ = {
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR, WATERFALL
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR, WATERFALL, HORIZONTAL_WATERFALL
         ];
 
     var DateLabelFormats = {
@@ -7478,6 +7479,7 @@ var __meta__ = {
             var series = this.options.series;
             var categories = this.categoryAxis.options.categories || [];
             var totalCategories = categoriesCount(series);
+            var isVertical = !this.options.invertAxes;
 
             for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 var currentSeries = series[seriesIx];
@@ -7515,7 +7517,8 @@ var __meta__ = {
                         total: total,
                         runningTotal: runningTotal,
                         from: from,
-                        to: to
+                        to: to,
+                        isVertical: isVertical
                     });
                 }
             }
@@ -7585,12 +7588,19 @@ var __meta__ = {
             var fromBox = from.box;
             var toBox = this.to.box;
 
-            var y = from.aboveAxis ? fromBox.y1 : fromBox.y2;
-
-            points.push(
-                Point2D(fromBox.x1, y),
-                Point2D(toBox.x2, y)
-            );
+            if (from.isVertical) {
+                var y = from.aboveAxis ? fromBox.y1 : fromBox.y2;
+                points.push(
+                    Point2D(fromBox.x1, y),
+                    Point2D(toBox.x2, y)
+                );
+            } else {
+                var x = from.aboveAxis ? fromBox.x2 : fromBox.x1;
+                points.push(
+                    Point2D(x, fromBox.y1),
+                    Point2D(x, toBox.y2)
+                );
+            }
 
             return points;
         },
@@ -8686,7 +8696,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA, RANGE_BAR]
+                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA, RANGE_BAR, HORIZONTAL_WATERFALL]
                 );
 
                 for (var i = 0; i < series.length; i++) {
@@ -8797,7 +8807,7 @@ var __meta__ = {
                 );
 
                 plotArea.createWaterfallChart(
-                    filterSeriesByType(filteredSeries, [WATERFALL]),
+                    filterSeriesByType(filteredSeries, [WATERFALL, HORIZONTAL_WATERFALL]),
                     pane
                 );
             }
@@ -11862,7 +11872,7 @@ var __meta__ = {
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT,
-        RANGE_COLUMN, RANGE_BAR, WATERFALL
+        RANGE_COLUMN, RANGE_BAR, WATERFALL, HORIZONTAL_WATERFALL
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -11883,12 +11893,12 @@ var __meta__ = {
     );
 
     SeriesBinder.current.register(
-        [WATERFALL],
+        [WATERFALL, HORIZONTAL_WATERFALL],
         [VALUE], [CATEGORY, COLOR, NOTE_TEXT, SUMMARY_FIELD]
     );
 
     DefaultAggregates.current.register(
-        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, WATERFALL],
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, WATERFALL, HORIZONTAL_WATERFALL],
         { value: MAX, color: FIRST, noteText: FIRST, errorLow: MIN, errorHigh: MAX }
     );
 

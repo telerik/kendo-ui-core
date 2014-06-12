@@ -315,10 +315,12 @@
                 segment = new dataviz.WaterfallSegment({
                     // From point
                     aboveAxis: true,
+                    isVertical: true,
                     box: new dataviz.Box2D(0, 0, 10, 100)
                 }, {
                     // To point
                     aboveAxis: true,
+                    isVertical: true,
                     box: new dataviz.Box2D(20, 0, 30, 100)
                 }, {
                     // Series
@@ -369,6 +371,40 @@
 
         test("sets dashType", function() {
             equal(polyline.options.dashType, "dot");
+        });
+
+        // ------------------------------------------------------------
+        module("WaterfallSegment / Horizontal", {
+            setup: function() {
+                segment = new dataviz.WaterfallSegment({
+                    // From point
+                    aboveAxis: true,
+                    isVertical: false,
+                    box: new dataviz.Box2D(0, 0, 100, 10)
+                }, {
+                    // To point
+                    aboveAxis: true,
+                    isVertical: false,
+                    box: new dataviz.Box2D(0, 20, 100, 30)
+                }, {
+                    // Series
+                });
+
+                view = new ViewStub();
+                polyline = segment.getViewElements(view)[0];
+            }
+        });
+
+        test("connects point end to next point start", function() {
+            ok(polyline.points[0].equals(new dataviz.Point2D(100, 0)));
+            ok(polyline.points[1].equals(new dataviz.Point2D(100, 30)));
+        });
+
+        test("connects point end to next point start (negative values)", function() {
+            segment.from.aboveAxis = segment.to.aboveAxis = false;
+            polyline = segment.getViewElements(view)[0];
+            ok(polyline.points[0].equals(new dataviz.Point2D(0, 0)));
+            ok(polyline.points[1].equals(new dataviz.Point2D(0, 30)));
         });
     })();
 })();
