@@ -2849,6 +2849,16 @@
         }
       },
       {
+        "text": "API",
+        "url": "gantt/api",
+        "title": {
+            "kendo-ui": "Kendo UI Gantt API Functions Example"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows API Functions of KendoGantt. Demo Source Code will show you how to call methods on the widget instance to script its behavior."
+        }
+      },
+      {
         "text": "MVVM",
         "url": "gantt/mvvm",
         "title": {
