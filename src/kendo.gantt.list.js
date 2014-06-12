@@ -136,13 +136,14 @@ var __meta__ = {
 
         _attachEvents: function() {
             var that = this;
+            var listStyles = GanttList.styles;
 
             that.content
-                .on(CLICK + NS, "td > span.k-icon:not(.k-i-none)", function(e) {
+                .on(CLICK + NS, "td > span." + listStyles.icon + ":not(." + listStyles.iconHidden + ")", function(e) {
                     var element = $(this);
                     var model = that._modelFromElement(element);
 
-                    element.toggleClass("k-i-collapse k-i-expand");
+                    element.toggleClass(listStyles.iconCollapse + " "  + listStyles.iconExpand);
                     model.set("expanded", !model.get("expanded"));
 
                     e.stopPropagation();
