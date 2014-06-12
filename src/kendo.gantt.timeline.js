@@ -1575,6 +1575,7 @@ var __meta__ = {
             var startOffset;
             var snap = this.options.snap;
             var dragInProgress;
+            var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
                 that.view()._removeDragHint();
@@ -1594,8 +1595,9 @@ var __meta__ = {
 
             this._moveDraggable = new kendo.ui.Draggable(this.wrapper, {
                 distance: 0,
-                filter: DOT + GanttTimeline.styles.task,
-                holdToDrag: kendo.support.mobileOS
+                filter: DOT + styles.task,
+                holdToDrag: kendo.support.mobileOS,
+                ignore: DOT + styles.taskResizeHandle
             });
 
             this._moveDraggable
