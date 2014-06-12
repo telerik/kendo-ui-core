@@ -16,7 +16,7 @@
     });
 
     test("buttons with overflow: auto are hidden upon initialization if there is not enough space", 4, function() {
-        container.width(110);
+        container.width(130);
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", id: "foo", text: "foooooo" },
@@ -187,7 +187,7 @@
             ]
         }).data("kendoToolBar");
 
-        container.width(110);
+        container.width(130);
         toolbar.resize();
 
         ok($("#bar_overflow").parent().hasClass("k-overflow-first-visible"), "#bar is the first visible button in the command overflow popup");
