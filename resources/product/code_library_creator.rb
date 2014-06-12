@@ -59,7 +59,7 @@ class TelerikCodeLibraryBot
       screenshot("Script_Execution_Failed_In_" + file_name + "_line_" + caller_array[2])
     end
     def click_checkbox(tname)
-        element = driver.find_element(:xpath, "//a[contains(text(),'#{tname}']/..//input")
+        element = driver.find_element(:xpath, "//strong[contains(text(),'#{tname}')]/../../../../input")
         driver.execute_script 'arguments[0].click()', element
         rescue
         screenshot("Clicking_CheckBox_Failed_For_" + element.attribute("id"))
@@ -83,7 +83,7 @@ def navigate_to_cl_section(bot)
 end
 def create_cl_thread(bot, product_name, tname)
     
-    if bot.driver.find_element(:xpath, "//a[contains(text(), '#{tname}')]") != nil
+    if bot.driver.find_element(:xpath, "//strong[contains(text(), '#{tname}')]") != nil
       p "product found>>#{tname}"
       bot.click_checkbox(tname)
       bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create a forum in selected group')]"))
@@ -97,21 +97,22 @@ def create_cl_thread(bot, product_name, tname)
     end
 end
 def set_cl_fields(bot, product_name)
-      bot.execute_script("$('[id$=\"titleFieldControl_0_ctl00_0_ctl00_0_textBox_write_0\"]').val('#{product_name}')")
+      p "setting code library fields>>"
+      bot.execute_script("$('[id*=\"titleFieldControl\"]').val('#{product_name}')")
       bot.execute_script("$('[id$=\"_pageUrl\"]').className('sfSelectedItem')")
       bot.execute_script("$('[id$=\"_pageUrl\"]').text('Code Library')")
 
       if product_name.index("Mobile") == nil
-        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text("+ product_name.downcase + ")")
+        bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
       else
         product_name_mod = product_name.downcase.sub " (mobile)",""
-        bot.execute_script("$('[id$=\"urlName_3_ctl00_3_ctl00_3_mirroredValueLabel_write_3\"]').text('mobile-#{product_name_mod}')")
+        bot.execute_script("$('[id*=\"urlName\"]').text('mobile-#{product_name_mod}')")
       end
       
 
-      bot.execute_script("$('[id$=\"_singleCheckBox_0\"]').click()")
+      bot.execute_script("$('[id*=\"_singleCheckBox\"]').click()")
       sleep(1)
-      bot.execute_script("$('[id$=\"radioButtons_radiobuttons_0_1_0\"]').click()")
+      bot.execute_script("$('[id*=\"radioButtons\"]').click()")
       sleep(1)
-      bot.execute_script("$('[id$=\"AllowedAttachmentExtensionsText_0_ctl00_0_ctl00_0_textBox_write_0\"]').val('.zip, .rar')")
+      bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
 end
