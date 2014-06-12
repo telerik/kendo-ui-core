@@ -1,8 +1,14 @@
 (function(f, define){
-    define([ "jquery", "angular", "kendo" ], f);
-})(function($) {
+    define([ "./kendo.core" ], f);
+})(function() {
 
+
+(function ($, angular, undefined) {
     "use strict";
+
+    if (!angular) {
+        return;
+    }
 
     /*jshint eqnull:true,loopfunc:true,-W052,-W028  */
 
@@ -690,4 +696,9 @@
             this.self.trigger("change");
         });
     }
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(jQuery, window.angular, kendo); });
+
+ })(window.kendo.jQuery, window.angular);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

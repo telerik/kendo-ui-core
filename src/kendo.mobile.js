@@ -1,6 +1,7 @@
 (function(f, define){
     define([
         "./kendo.core",
+        "./kendo.angular",
         "./kendo.fx",
         "./kendo.data.odata",
         "./kendo.data.xml",
