@@ -1897,6 +1897,10 @@ var __meta__ = {
             var idx = rootMembers.length - 1;
             var member = rootMembers[idx];
 
+            if (member.measure) {
+                member = rootMembers[--idx];
+            }
+
             var map = this.map;
             var row = map[member.name + member.levelNum];
             var colspan = this._rootRowColSpan(row);
@@ -1996,12 +2000,33 @@ var __meta__ = {
             return path;
         },
 
+        _measures: function(measures) {
+            var map = this.map;
+            var row = map["measureRow"];
+            var measure;
+
+            if (!row) {
+                row = element("tr", null, []);
+                map["measureRow"] = row;
+                this.rows.push(row);
+            }
+
+            for (var idx = 0, length = measures.length; idx < length; idx++) {
+                measure = measures[idx];
+                row.children.push(element("th", { class: "k-header" }, [text(measure.caption || measure.name)]));
+            }
+
+            return length;
+        },
+
         _buildRows: function(tuple, memberIdx, parentMember) {
             var members = tuple.members;
             var children;
             var childRow;
             var member;
             var row;
+
+            var nextMember;
 
             var allCell;
             var cell;
@@ -2015,7 +2040,7 @@ var __meta__ = {
             var colspan;
 
             if (parentMember) {
-                memberIdx = this._memberIdx(members, parentMember);
+                memberIdx = this._memberIdx(members, parentMember); //we do not need this func
             }
 
             row = this._row(tuple, memberIdx, parentMember);
@@ -2044,6 +2069,9 @@ var __meta__ = {
             row.children.push(cell);
             row.colspan += 1;
 
+
+            nextMember = members[memberIdx + 1];
+
             if (childrenLength) {
                 allCell = element("th", { class: "k-header k-alt" }, [text(member.caption || member.name)]);
                 row.children.push(allCell);
@@ -2058,18 +2086,26 @@ var __meta__ = {
                 row.colspan += colspan;
                 row.rowspan = childRow.rowspan + 1;
 
-                if (members[memberIdx + 1]) {
-                    var newRow = this._buildRows(tuple, ++memberIdx);
+                if (nextMember) {
+                    if (nextMember.measure) {
+                        colspan = this._measures(nextMember.children);
+                    } else {
+                        colspan = this._buildRows(tuple, memberIdx + 1).colspan;
+                    }
 
-                    allCell.attr.colspan = newRow.colspan;
-                    row.colspan += newRow.colspan - 1;
+                    allCell.attr.colspan = colspan;
+                    row.colspan += colspan - 1;
                 }
-            } else if (members[memberIdx + 1]) {
-                childRow = this._buildRows(tuple, ++memberIdx);
+            } else if (nextMember) {
+                if (nextMember.measure) {
+                    colspan = this._measures(nextMember.children);
+                } else {
+                    colspan = this._buildRows(tuple, memberIdx + 1).colspan;
+                }
 
-                if (childRow.colspan > 1) {
-                    cell.attr.colspan = childRow.colspan;
-                    row.colspan += childRow.colspan - 1;
+                if (colspan > 1) {
+                    cell.attr.colspan = colspan;
+                    row.colspan += colspan - 1;
                 }
             }
 

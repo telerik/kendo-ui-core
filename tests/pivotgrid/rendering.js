@@ -195,8 +195,9 @@
         }
     });
 
-    function createDataSource(tuples, data) {
+    function createDataSource(tuples, data, measures) {
         return new PivotDataSource({
+            measures: measures || [],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -972,6 +973,55 @@
         ok(!button.hasClass("k-i-arrow-e"));
         ok(button.hasClass("k-i-arrow-s"));
         equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
+    });
+
+    test("PivotGrid renders one dimension with two measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_1 = rows.eq(1).find("th");
+
+        equal(rows.eq(0).find("th").attr("colspan"), 2);
+        equal(th_1.eq(0).text(), "measure 1");
+        equal(th_1.eq(1).text(), "measure 2");
+
+        ok(th_1.eq(0).hasClass("k-header"));
+    });
+
+    test("PivotGrid renders child tuple with two measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_0 = rows.eq(0).find("th");
+        var th_1 = rows.eq(1).find("th");
+
+        equal(th_0.eq(0).attr("colspan"), 2);
+        equal(th_0.eq(1).attr("colspan"), 2);
+        equal(th_1.eq(0).attr("colspan"), 2);
     });
 
     module("PivotGrid resize on render", {
