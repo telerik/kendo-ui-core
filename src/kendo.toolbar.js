@@ -435,9 +435,7 @@ var __meta__ = {
 
                         var containerWidth = this.element.innerWidth();
 
-                        if(containerWidth < this._childrenWidth()) {
-                            this._hideItem(element);
-                        }
+                        this._shrink(containerWidth);
 
                         element.css("visibility", "visible");
                     }
@@ -556,25 +554,12 @@ var __meta__ = {
             },
 
             _resize: function(e) {
-                var containerWidth = e.width,
-                    commandElement;
+                var containerWidth = e.width;
 
                 this.popup.close();
 
-                while (containerWidth < this._childrenWidth()) {
-                    commandElement = this.element.children(":visible:not(." + OVERFLOW_ANCHOR + ")").last();
-                    if (!commandElement.length) {
-                        break;
-                    }
-                    this._hideItem(commandElement);
-                }
-
-                while (containerWidth > this._childrenWidth()) {
-                    commandElement = this.element.children(":hidden").first();
-                    if (!commandElement.length || !this._showItem(commandElement, containerWidth)) {
-                        break;
-                    }
-                }
+                this._shrink(containerWidth);
+                this._stretch(containerWidth);
             },
 
             _childrenWidth: function() {
@@ -587,13 +572,34 @@ var __meta__ = {
                 return Math.ceil(childrenWidth);
             },
 
-            _hideItem: function(item, append) {
-                if (item.data("overflow") !== OVERFLOW_NEVER) {
-                    item.hide();
-                    this.popup.element
-                        .find(">li[data-uid='" + item.data("uid") + "']")
-                        .removeClass(OVERFLOW_HIDDEN);
+            _shrink: function(containerWidth) {
+                var commandElement;
+
+                while (containerWidth < this._childrenWidth()) {
+                    commandElement = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")").last();
+                    if (!commandElement.length) {
+                        break;
+                    }
+                    this._hideItem(commandElement);
                 }
+            },
+
+            _stretch: function(containerWidth) {
+                var commandElement;
+
+                while (containerWidth > this._childrenWidth()) {
+                    commandElement = this.element.children(":hidden").first();
+                    if (!commandElement.length || !this._showItem(commandElement, containerWidth)) {
+                        break;
+                    }
+                }
+            },
+
+            _hideItem: function(item) {
+                item.hide();
+                this.popup.element
+                    .find(">li[data-uid='" + item.data("uid") + "']")
+                    .removeClass(OVERFLOW_HIDDEN);
             },
 
             _showItem: function(item, containerWidth) {

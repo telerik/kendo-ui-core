@@ -153,4 +153,26 @@
         ok(listItems.eq(1).hasClass("k-overflow-hidden") && listItems.eq(2).hasClass("k-overflow-hidden"));
     });
 
+    test("Commands with overflow: never is not necessary to be defined first", 3, function() {
+        container.width(400);
+
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foooooo" },
+                { type: "button", text: "baaaaar" },
+                { type: "button", text: "baaaaaz", overflow: "never" }
+            ]
+        }).data("kendoToolBar");
+
+        container.width(100);
+        toolbar.resize();
+
+        var buttons = toolbar.element.find(".k-button");
+
+        ok(buttons.eq(0).is(":hidden") && buttons.eq(1).is(":hidden"), "Buttons with overflow: auto are hidden");
+        ok(buttons.eq(2).is(":visible"), "3rd button (that have overflow: never) is visible");
+
+        ok(!toolbar.popup.element.children("li").hasClass("k-overflow-hidden"), "Commands in the popup are visible");
+    });
+
 })();
