@@ -426,26 +426,6 @@ html .km-pane-wrapper .k-header
     background-color: @button-background-color;
 }
 
-.k-button:focus,
-.k-button.k-state-focused
-{
-    border-color: @button-focused-border-color;
-}
-
-.k-button:hover
-{
-    color: @button-hover-text-color;
-    border-color: @button-hover-border-color;
-    background-color: @button-hover-background-color;
-}
-
-.k-button:active
-{
-    color: @selected-text-color;
-    background-color:@button-active-background;
-    border-color: @button-active-border-color;
-}
-
 .k-button[disabled],
 .k-button.k-state-disabled,
 .k-state-disabled .k-button,
@@ -612,6 +592,36 @@ html .km-pane-wrapper .k-header
     color: @active-text-color;
 }
 
+.k-button:focus,
+.k-button.k-state-focused
+{
+    border-color: @button-focused-border-color;
+}
+
+.k-button:hover,
+.k-button.k-state-hover
+{
+    color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
+}
+
+.k-button:active,
+.k-button.k-state-active
+{
+    color: @selected-text-color;
+    background-color: @button-active-background;
+    border-color: @button-active-border-color;
+}
+
+.k-button:active:hover,
+.k-button.k-state-active:hover
+{
+    color: @primary-hover-text-color;
+    border-color: @primary-hover-border-color;
+    background-color: @primary-hover-background-color;
+}
+
 .k-menu .k-state-hover>.k-state-active
 {
     background-color: transparent;
@@ -765,19 +775,6 @@ td.k-state-focused.k-state-selected
     color: @selected-text-color;
 }
 
-.k-state-selected,
-.k-button:active,
-.k-draghandle.k-state-selected:hover
-{
-    .composite-background(@selected-gradient);
-}
-
-.k-button:active,
-.k-draghandle.k-state-selected:hover
-{
-    background-position: 50% 50%;
-}
-
 .k-state-hover,
 .k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
@@ -818,6 +815,7 @@ td.k-state-focused.k-state-selected
 }
 
 .k-button:hover,
+.k-button.k-state-hover,
 .k-button:focus,
 .k-button.k-state-focused,
 .k-textbox:hover,
@@ -848,6 +846,21 @@ div.k-filebrowser-dropzone em,
 .k-panelbar>.k-item>.k-state-focused
 {
     .composite-background(@active-gradient);
+}
+
+.k-state-selected,
+.k-button:active,
+.k-button.k-state-active,
+.k-draghandle.k-state-selected:hover
+{
+    .composite-background(@selected-gradient);
+}
+
+.k-button:active,
+.k-button.k-state-active,
+.k-draghandle.k-state-selected:hover
+{
+    background-position: 50% 50%;
 }
 
 .k-tool-icon

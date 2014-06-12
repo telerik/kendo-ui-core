@@ -61,9 +61,9 @@
 
         var button = container.find("#foo");
 
-        ok(!button.hasClass("k-state-checked"));
+        ok(!button.hasClass("k-state-active"));
         click(button);
-        ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
+        ok(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
     });
 
     test("click on a toggleButton's icon changes the button state", 2, function() {
@@ -74,10 +74,10 @@
         });
 
         var button = container.find("#foo");
-        ok(!button.hasClass("k-state-checked"));
+        ok(!button.hasClass("k-state-active"));
 
         click(container.find("span.k-i-foo"));
-        ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
+        ok(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
     });
 
     test("click on selected toggleButton deselects it", 2, function() {
@@ -90,10 +90,10 @@
         var button = container.find("#foo");
 
         click(button);
-        ok(button.hasClass("k-state-checked"));
+        ok(button.hasClass("k-state-active"));
 
         click(button);
-        ok(!button.hasClass("k-state-checked"));
+        ok(!button.hasClass("k-state-active"));
     });
 
     test("click on disabled toggleButton does not change its state", 1, function() {
@@ -106,7 +106,7 @@
         var button = container.find("#foo");
 
         click(button);
-        ok(!button.hasClass("k-state-checked"), "Button state is not changed");
+        ok(!button.hasClass("k-state-active"), "Button state is not changed");
     });
 
     test("click on disabled toggleButton does not trigger the toggle event", 0, function() {
@@ -152,7 +152,7 @@
         var button = container.find("#foo");
 
         click(button);
-        ok(!button.hasClass("k-state-checked"));
+        ok(!button.hasClass("k-state-active"));
     });
 
     test("selecting toggle button that belongs to a group will deselect other buttons from the same group", 4, function() {
@@ -167,13 +167,13 @@
 
         click(buttons.eq(0));
 
-        ok(buttons.eq(0).hasClass("k-state-checked"), "First button is selected");
-        ok(!buttons.eq(1).hasClass("k-state-checked"), "Second button is deselected");
+        ok(buttons.eq(0).hasClass("k-state-active"), "First button is selected");
+        ok(!buttons.eq(1).hasClass("k-state-active"), "Second button is deselected");
 
         click(buttons.eq(1));
 
-        ok(!buttons.eq(0).hasClass("k-state-checked"), "First button is deselected");
-        ok(buttons.eq(1).hasClass("k-state-checked"), "Second button is selected");
+        ok(!buttons.eq(0).hasClass("k-state-active"), "First button is deselected");
+        ok(buttons.eq(1).hasClass("k-state-active"), "Second button is selected");
     });
 
     test("click on splitButton triggers click event", 1, function() {
@@ -373,9 +373,9 @@
 
         var button = toolbar.popup.element.find("#foo_overflow");
 
-        ok(!button.hasClass("k-state-checked"));
+        ok(!button.hasClass("k-state-active"));
         click(button);
-        ok(button.hasClass("k-state-checked"), "Button receives k-state-checked class after click");
+        ok(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
     });
 
     test("click event is not fired for disabled buttons (overflow)", 0, function() {

@@ -27,7 +27,7 @@ var __meta__ = {
         LINK = "k-link",
 
         RESIZABLE_TOOLBAR = "k-toolbar-resizable",
-        STATE_CHECKED = "k-state-checked",
+        STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
@@ -36,7 +36,7 @@ var __meta__ = {
         BUTTON_ICON = "k-button-icon",
         BUTTON_ICON_TEXT = "k-button-icontext",
 
-        SPLIT_BUTTON_DROPDOWN = "k-split-button-dropdown",
+        LIST_CONTAINER = "k-list-container k-split-container",
         SPLIT_BUTTON_ARROW = "k-split-button-arrow",
 
         OVERFLOW_ANCHOR = "k-overflow-anchor",
@@ -102,7 +102,7 @@ var __meta__ = {
                     var element = $('<div class="' + SPLIT_BUTTON + '"></div>'),
                         mainButton = components.button.toolbar(options),
                         arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="k-icon k-i-arrow-s"></span></a>'),
-                        popupElement = $('<ul class="' + SPLIT_BUTTON_DROPDOWN + '"></ul>'),
+                        popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>'),
                         popup,
                         items = options.items,
                         item;
@@ -184,7 +184,7 @@ var __meta__ = {
             if (options.toggle) {
                 element.addClass(TOGGLE_BUTTON);
                 if (options.selected) {
-                    element.addClass(STATE_CHECKED);
+                    element.addClass(STATE_ACTIVE);
                 }
             }
 
@@ -328,7 +328,7 @@ var __meta__ = {
                 options = that.options;
                 element = that.wrapper = that.element;
 
-                element.addClass(TOOLBAR);
+                element.addClass(TOOLBAR + " k-widget");
 
                 this.uid = kendo.guid();
                 element.attr(kendo.attr("uid"), this.uid);
@@ -516,19 +516,19 @@ var __meta__ = {
                 }
 
                 if (target.hasClass(TOGGLE_BUTTON)) {
-                    isChecked = target.hasClass(STATE_CHECKED);
+                    isChecked = target.hasClass(STATE_ACTIVE);
                     group = target.data("group");
 
                     if (group) { //find all buttons from the same group
-                        current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_CHECKED);
+                        current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
                     }
 
                     if (!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
                         if(current && current.length) {
-                            current.removeClass(STATE_CHECKED);
+                            current.removeClass(STATE_ACTIVE);
                         }
 
-                        target.toggleClass(STATE_CHECKED);
+                        target.toggleClass(STATE_ACTIVE);
                     }
                 } else {
                     this.trigger(CLICK, { target: target });

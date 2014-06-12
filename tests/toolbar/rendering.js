@@ -450,7 +450,7 @@
             ]
         });
 
-        ok(!container.find(".k-toggle-button.k-state-checked").length);
+        ok(!container.find(".k-toggle-button.k-state-active").length);
     });
 
     test("toggleButton with selected: true receives k-state-selected class", 1, function() {
@@ -460,7 +460,7 @@
             ]
         });
 
-        ok(container.find(".k-toggle-button.k-state-checked").length);
+        ok(container.find(".k-toggle-button.k-state-active").length);
     });
 
     test("by default toggleButton does not have group", 1, function() {
@@ -653,7 +653,7 @@
         });
 
         ok(container.children("div.k-split-button").length, "SplitButton element is rendered");
-        equal($(document.body).find(".k-split-button-dropdown").children().length, 4, "SplitButton dropdown contains correct amount of items");
+        equal($(document.body).find(".k-split-container.k-list-container").children().length, 4, "SplitButton dropdown contains correct amount of items");
     });
 
     test("initializes kendoPopup", 1, function() {
@@ -669,7 +669,7 @@
             ]
         });
 
-        ok($(document.body).find(".k-split-button-dropdown").data("kendoPopup") instanceof kendo.ui.Popup);
+        ok($(document.body).find(".k-split-container.k-list-container").data("kendoPopup") instanceof kendo.ui.Popup);
     });
 
     test("splitButton holds reference to its popup", 1, function() {
