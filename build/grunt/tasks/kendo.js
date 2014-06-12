@@ -107,7 +107,16 @@ module.exports = function(grunt) {
 
     grunt.registerTask("custom", "Custom Kendo build", function(){
         var task = this;
-        var files = task.args[0].trim().split(/\s*,\s*/);
+        var files;
+        if (task.args.length === 0) {
+            grunt.log.writeln("No components specified for the custom task; assuming all components...");
+            files = META.loadAll().map(function (c){
+                return c.split("kendo.")[1].split(".js")[0];
+            });
+        }
+        else {
+            files = task.args[0].trim().split(/\s*,\s*/);
+        }
         files = files.map(function(c){
             var name = "kendo." + c + ".js";
             var comp = META.getKendoFile(name);
