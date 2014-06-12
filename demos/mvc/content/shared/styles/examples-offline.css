@@ -520,6 +520,13 @@ ul.keyboard-legend li a {
     padding: 0 3em 1em 0;
 }
 
+.box ul,
+.demo-section .box-col ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
 .box li,
 .demo-section .box-col li {
     margin-bottom: .6em;
