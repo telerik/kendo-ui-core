@@ -260,12 +260,12 @@
 
         var params = transport.parameterMap({
             connection: { catalog: "catalogName", cube: "cubeName" },
-            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }, { name: "[bar]", expand: false }]
+            columns: [{ name: "[foo].[foo1].[all]", expand: true }, { name: "[foo].[foo1].&[1]", expand: true }, { name: "[bar]", expand: false }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
-            'CROSSJOIN({[foo].Children},{[bar]}),' +
-            'CROSSJOIN({[foo].&amp;[1].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[foo1].[all]},{[bar]}),' +
+            'CROSSJOIN({[foo].[foo1].[all].Children},{[bar]}),' +
+            'CROSSJOIN({[foo].[foo1].&amp;[1].Children},{[bar]})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
     test("parameterMap same hierarchy members are not cross joined - 2 members", function() {
@@ -273,12 +273,12 @@
 
         var params = transport.parameterMap({
             connection: { catalog: "catalogName", cube: "cubeName" },
-            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }]
+            columns: [{ name: "[foo].[foo1].[all]", expand: true }, { name: "[foo].[foo1].&[1]", expand: true }]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {[foo],' +
-            '[foo].Children,' +
-            '[foo].&amp;[1].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
+        ok(params.indexOf('SELECT NON EMPTY {[foo].[foo1].[all],' +
+            '[foo].[foo1].[all].Children,' +
+            '[foo].[foo1].&amp;[1].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 
     test("parameterMap same hierarchy members are not cross joined - 2 members and 2 measures", function() {
@@ -286,12 +286,12 @@
 
         var params = transport.parameterMap({
             connection: { catalog: "catalogName", cube: "cubeName" },
-            columns: [{ name: "[foo]", expand: true }, { name: "[foo].&[1]", expand: true }],
+            columns: [{ name: "[foo].[foo1].[all]", expand: true }, { name: "[foo].[foo1].&[1]", expand: true }],
             measures: [ "measure1", "measure2"]
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{{measure1,measure2}}),CROSSJOIN({[foo].Children},{{measure1,measure2}}),'+
-            'CROSSJOIN({[foo].&amp;[1].Children},{{measure1,measure2}})}' +
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo].[foo1].[all]},{{measure1,measure2}}),CROSSJOIN({[foo].[foo1].[all].Children},{{measure1,measure2}}),'+
+            'CROSSJOIN({[foo].[foo1].&amp;[1].Children},{{measure1,measure2}})}' +
             ' DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS FROM [cubeName]') > -1);
     });
 

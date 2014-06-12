@@ -1057,23 +1057,27 @@ var __meta__ = {
         return result;
     }
 
+    function baseHierarchyPath(memberName) {
+        var parts = memberName.split(".");
+        if (parts.length > 2) {
+            return parts[0] + "." + parts[1];
+        }
+        return memberName;
+    }
+
     function trimSameHierarchyChildDescriptors(members) {
-        var result = [];
+        var result = members.slice(0);
 
         for (var idx = 0; idx < members.length; idx++) {
-            var found = false;
-            var name = members[idx].name;
+            var hierarchyName = baseHierarchyPath(members[idx].name);
 
-            for (var j = 0; j < members.length; j++) {
-                var memberName = members[j].name;
-                if (name.indexOf(memberName) === 0 && memberName !== name) {
-                    found = true;
-                    break;
+            var j = idx + 1;
+            while(j < result.length) {
+                if (result[j].name.indexOf(hierarchyName) === 0) {
+                    result.splice(j, 1);
+                } else {
+                    j++;
                 }
-            }
-
-            if (!found) {
-                result.push(members[idx]);
             }
         }
 
@@ -1085,8 +1089,9 @@ var __meta__ = {
 
         for (var idx = 0; idx < members.length; idx++) {
             var name = members[idx].name;
+            var hierarchyName = baseHierarchyPath(memberName);
 
-            if (memberName == name || !(name.indexOf(memberName) === 0 || memberName.indexOf(name) === 0)) {
+            if (memberName == name || !(name.indexOf(hierarchyName) === 0)) {
                 result.push(members[idx]);
             }
         }
@@ -1099,10 +1104,11 @@ var __meta__ = {
 
         for (var idx = 0; idx < members.length; idx++) {
             var name = members[idx].name;
+            var hierarchyName = baseHierarchyPath(name);
 
             for (var j = 0; j < members.length; j++) {
                 var memberName = members[j].name;
-                if ((memberName.indexOf(name) === 0 || name.indexOf(memberName) === 0) && memberName !== name) {
+                if (memberName.indexOf(hierarchyName) === 0 && memberName !== name) {
                     same[name] = members[idx];
                 }
             }
