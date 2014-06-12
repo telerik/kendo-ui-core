@@ -171,7 +171,7 @@ var __meta__ = {
                 }
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor"></div>',
+            overflowAnchor: '<div class="k-overflow-anchor k-button"></div>',
 
             overflowContainer: '<ul class="k-overflow-container k-menu"></ul>'
         };
