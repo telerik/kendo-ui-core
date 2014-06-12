@@ -47,11 +47,11 @@
     test("button element has a k-button class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         });
 
-        ok(container.find(".k-button").length);
+        ok(container.find("#foo").length);
     });
 
     test("button applies ID and text options", 2, function() {
@@ -70,11 +70,11 @@
     test("by default the button does not have k-state-disabled class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(!button.hasClass("k-state-disabled"));
     });
@@ -82,11 +82,11 @@
     test("button with enable: false receives k-state-disabled class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", enable: false }
+                { type: "button", id: "foo", text: "foo", enable: false }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-state-disabled"));
     });
@@ -94,11 +94,11 @@
     test("by default button does not have k-primary class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(!button.hasClass("k-primary"));
     });
@@ -106,11 +106,11 @@
     test("button with primary: true received k-primary class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", primary: true }
+                { type: "button", id: "foo", text: "foo", primary: true }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-primary"));
     });
@@ -119,6 +119,7 @@
         container.kendoToolBar({
             items: [{ 
                 type: "button",
+                id: "foo",
                 text: "foo",
                 click: function() {
                     ok(true, "click event is fired"); 
@@ -126,18 +127,18 @@
             }]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
         button.trigger("click");
     });
 
     test("spriteCssClass prepends a span element with corresponding class(es) to the button element", 3, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", spriteCssClass: "foo bar" }
+                { type: "button", id: "foo", text: "foo", spriteCssClass: "foo bar" }
             ]
         });
 
-        var icon = container.find(".k-button").eq(0).children("span.k-sprite");
+        var icon = container.find("#foo").children("span.k-sprite");
 
         equal(icon.length, 1);
         ok(icon.hasClass("foo"));
@@ -147,11 +148,11 @@
     test("spriteCssClass adds a k-button-icon class to empty button element", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", spriteCssClass: "foo bar" }
+                { type: "button", id: "foo", spriteCssClass: "foo bar" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icon"));
     });
@@ -159,11 +160,11 @@
     test("spriteCssClass adds a k-button-icontext class if button element has text", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "content", spriteCssClass: "foo bar" }
+                { type: "button", id: "foo", text: "content", spriteCssClass: "foo bar" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icontext"));
     });
@@ -171,11 +172,11 @@
     test("icon prepends a span element with corresponding class(es) to the button element", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", icon: "foo" }
+                { type: "button", id: "foo", icon: "foo" }
             ]
         });
 
-        var icon = container.find(".k-button").children("span.k-icon");
+        var icon = container.find("#foo").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -184,11 +185,11 @@
     test("icon adds a k-button-icon class to button with no text", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", icon: "foo" }
+                { type: "button", id: "foo", icon: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icon"));
     });
@@ -196,11 +197,11 @@
     test("icon adds a k-button-icontext class if button has text", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", icon: "foo" }
+                { type: "button", id: "foo", text: "foo", icon: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icontext"));
     });
@@ -208,11 +209,11 @@
     test("imageUrl prepends an img element with src attribute to the button element", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", imageUrl: "foo" }
+                { type: "button", id: "foo", imageUrl: "foo" }
             ]
         });
 
-        var image = container.find(".k-button").children("img.k-image");
+        var image = container.find("#foo").children("img.k-image");
 
         equal(image.length, 1);
         equal(image.attr("src"), "foo");
@@ -221,11 +222,11 @@
     test("imageUrl adds a k-button-icon class to empty button element", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", imageUrl: "foo" }
+                { type: "button", id: "foo", imageUrl: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icon"));
     });
@@ -233,11 +234,11 @@
     test("imageUrl adds a k-button-icontext class if button has text", function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", imageUrl: "foo" }
+                { type: "button", id: "foo", text: "foo", imageUrl: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         ok(button.hasClass("k-button-icontext"));
     });
@@ -245,11 +246,11 @@
     test("button receives data-overflow='auto' attribute if no overflow is specified", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         equal(button.attr("data-overflow"), "auto");
     });
@@ -257,11 +258,11 @@
     test("button overflow is set as data attribute to the HTML element", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", overflow: "never" }
+                { type: "button", id: "foo", text: "foo", overflow: "never" }
             ]
         });
 
-        var button = container.find(".k-button");
+        var button = container.find("#foo");
 
         equal(button.attr("data-overflow"), "never");
     });
@@ -269,40 +270,40 @@
     test("button element with overflow: auto is rendered both in the toolbar and in the overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         }).data("kendoToolBar");
 
-        ok(container.find(".k-button").length);
-        ok(toolbar.popup.element.find(".k-link.k-overflow-button").length);
+        ok(container.find("#foo").length);
+        ok(toolbar.popup.element.find("#foo_overflow").length);
     });
 
     test("button element with overflow: never is not rendered in the overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", overflow: "never" }
+                { type: "button", id: "foo", text: "foo", overflow: "never" }
             ]
         }).data("kendoToolBar");
 
-        ok(container.find(".k-button").length);
-        ok(!toolbar.popup.element.find(".k-button").length);
+        ok(container.find("#foo").length);
+        ok(!toolbar.popup.element.find("#foo_overflow").length);
     });
 
     test("button element with overflow: always is not rendered in the toolbar container", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", overflow: "always" }
+                { type: "button", id: "foo", text: "foo", overflow: "always" }
             ]
         }).data("kendoToolBar");
 
-        ok(!container.find(".k-button").length);
-        ok(toolbar.popup.element.find(".k-link.k-overflow-button").length);
+        ok(!container.find("#foo").length);
+        ok(toolbar.popup.element.find("#foo_overflow").length);
     });
 
     test("button element in overflow popup has class k-overflow-button", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", overflow: "always" }
+                { type: "button", id: "foo", text: "foo", overflow: "always" }
             ]
         }).data("kendoToolBar");
 
@@ -324,11 +325,11 @@
     test("button receives data-uid attribute", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.element.find(".k-button");
+        var button = toolbar.element.find("#foo");
         var overflowButton = toolbar.popup.element.children().eq(0);
 
         ok(button.data("uid"));
@@ -339,11 +340,11 @@
     test("button with showText: both has text both in toolbar and overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", showText: "both" }
+                { type: "button", id: "foo", text: "foo", showText: "both" }
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.element.find(".k-button");
+        var button = toolbar.element.find("#foo");
         var overflowButton = toolbar.popup.element.children().eq(0);
 
         equal(button.text(), "foo");
@@ -353,11 +354,11 @@
     test("button with showText: toolbar has text only in toolbar", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", showText: "toolbar" }
+                { type: "button", id: "foo", text: "foo", showText: "toolbar" }
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.element.find(".k-button");
+        var button = toolbar.element.find("#foo");
         var overflowButton = toolbar.popup.element.children().eq(0);
 
         equal(button.text(), "foo");
@@ -367,11 +368,11 @@
     test("button with showText: overflow has text only in overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo", showText: "overflow" }
+                { type: "button", id: "foo", text: "foo", showText: "overflow" }
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.element.find(".k-button");
+        var button = toolbar.element.find("#foo");
         var overflowButton = toolbar.popup.element.children().eq(0);
 
         equal(button.text(), "");
@@ -381,16 +382,16 @@
     test("button with showIcon: both has icon both in toolbar and overflow popup", 4, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", icon: "foo", showIcon: "both" }
+                { type: "button", id: "foo", icon: "foo", showIcon: "both" }
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+        var icon = toolbar.element.find("#foo").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
 
-        icon = toolbar.popup.element.find(".k-link.k-overflow-button").children("span.k-icon");
+        icon = toolbar.popup.element.find("#foo_overflow").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -399,11 +400,11 @@
     test("button with showIcon: toolbar has icon only in toolbar", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", icon: "foo", showIcon: "toolbar" }
+                { type: "button", id: "foo", icon: "foo", showIcon: "toolbar" }
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find(".k-button").children("span.k-icon");
+        var icon = toolbar.element.find("#foo").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -416,15 +417,15 @@
     test("button with showIcon: overflow has icon only in overflow container", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", icon: "foo", showIcon: "overflow" }
+                { type: "button", id: "foo", icon: "foo", showIcon: "overflow" }
             ]
         }).data("kendoToolBar");
 
-        var icon = toolbar.element.find(".k-overflow-button").children("span.k-icon");
+        var icon = toolbar.element.find("#foo").children("span.k-icon");
 
         equal(icon.length, 0);
 
-        icon = toolbar.popup.element.find(".k-overflow-button").children("span.k-icon");
+        icon = toolbar.popup.element.find("#foo_overflow").children("span.k-icon");
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
@@ -522,32 +523,32 @@
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
-                        { id: "btn1", text: "Btn1" },
-                        { id: "btn2", text: "Btn2" },
-                        { id: "btn3", text: "Btn3" }
+                        { id: "btn1", id: "btn1", text: "Btn1" },
+                        { id: "btn2", id: "btn2", text: "Btn2" },
+                        { id: "btn3", id: "btn3", text: "Btn3" }
                     ]
                 }
             ]
         });
 
-        var buttons = container.find(".k-button");
-        ok(buttons.first().hasClass("k-group-start"));
+        var button = container.find("#btn1");
+        ok(button.hasClass("k-group-start"));
     });
 
     test("last button in the group receives k-group-end class", 1, function() {
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
-                        { id: "btn1", text: "Btn1" },
-                        { id: "btn2", text: "Btn2" },
-                        { id: "btn3", text: "Btn3" }
+                        { id: "btn1", id: "btn1", text: "Btn1" },
+                        { id: "btn2", id: "btn2", text: "Btn2" },
+                        { id: "btn3", id: "btn3", text: "Btn3" }
                     ]
                 }
             ]
         });
 
-        var buttons = container.find(".k-button");
-        ok(buttons.last().hasClass("k-group-end"));
+        var button = container.find("#btn3");
+        ok(button.hasClass("k-group-end"));
     });
 
     test("ButtonGroup element receives data-overflow attribute with default value", 1, function() {
@@ -615,7 +616,7 @@
 
         component = toolbar.popup.element.find(".k-button-group");
         equal(component.prop("tagName"), "LI");
-        equal(component.children(".k-link.k-overflow-button").length, 3);
+        equal(component.children(".k-overflow-button").length, 3);
     });
 
     test("Overflow ButtonGroup renders li element which has uid + overflow data", 3, function() {
@@ -785,7 +786,7 @@
         component = splitButton.popup.element.find(".k-split-button");
 
         equal(component.prop("tagName"), "LI");
-        equal(component.children(".k-link.k-overflow-button").length, 4); //3 items + 1 main button
+        equal(component.children(".k-overflow-button").length, 4); //3 items + 1 main button
     });
 
     test("Overflow SplitButton items are wrapped in a li tag which has data-uid attribute", 2, function() {
@@ -917,11 +918,11 @@
     test("Same uid is attached to the toolbar component and corresponding overflow popup element", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" }
+                { type: "button", id: "foo", text: "foo" }
             ]
         }).data("kendoToolBar");
 
-        var button = toolbar.element.find(".k-button");
+        var button = toolbar.element.find("#foo");
         var overflowButton = toolbar.popup.element.find(">li:first");
 
         ok(button.data("uid") === overflowButton.data("uid"));

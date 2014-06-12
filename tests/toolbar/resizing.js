@@ -19,12 +19,12 @@
         container.width(110);
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foooooo" },
-                { type: "button", text: "baaaaar" }
+                { type: "button", id: "foo", text: "foooooo" },
+                { type: "button", id: "bar", text: "baaaaar" }
             ]
         }).data("kendoToolBar");
 
-        var toolbarButtons = container.find(".k-button");
+        var toolbarButtons = container.find("#foo, #bar");
         ok(toolbarButtons.eq(0).is(":visible"), "First button is visible");
         ok(toolbarButtons.eq(1).is(":hidden"), "Second button is hidden");
 
@@ -36,12 +36,12 @@
     test("buttons with overflow: always are always hidden upon initialization", 4, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foo" },
-                { type: "button", text: "bar", overflow: "always" }
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar", overflow: "always" }
             ]
         }).data("kendoToolBar");
 
-        var toolbarButton = container.find(".k-button");
+        var toolbarButton = container.find("#foo, #bar");
         equal(toolbarButton.length, 1);
         ok(toolbarButton.is(":visible"), "Foo button is visible");
 
@@ -113,16 +113,16 @@
         container.width(400);
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foooooo" },
-                { type: "button", text: "baaaaar" },
-                { type: "button", text: "baaaaaz" }
+                { type: "button", id: "foo", text: "foooooo" },
+                { type: "button", id: "bar", text: "baaaaar" },
+                { type: "button", id: "baz", text: "baaaaaz" }
             ]
         }).data("kendoToolBar");
 
         container.width(100);
         toolbar.resize();
 
-        var buttons = toolbar.element.find(".k-button");
+        var buttons = toolbar.element.find("#foo, #bar, #baz");
 
         ok(buttons.eq(1).is(":hidden") && buttons.eq(2).is(":hidden"));
 
@@ -158,16 +158,16 @@
 
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", text: "foooooo" },
-                { type: "button", text: "baaaaar" },
-                { type: "button", text: "baaaaaz", overflow: "never" }
+                { type: "button", id: "foo", text: "foooooo" },
+                { type: "button", id: "bar", text: "baaaaar" },
+                { type: "button", id: "baz", text: "baaaaaz", overflow: "never" }
             ]
         }).data("kendoToolBar");
 
         container.width(100);
         toolbar.resize();
 
-        var buttons = toolbar.element.find(".k-button");
+        var buttons = toolbar.element.find("#foo, #bar, #baz");
 
         ok(buttons.eq(0).is(":hidden") && buttons.eq(1).is(":hidden"), "Buttons with overflow: auto are hidden");
         ok(buttons.eq(2).is(":visible"), "3rd button (that have overflow: never) is visible");

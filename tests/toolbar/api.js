@@ -2,7 +2,7 @@
     var container,
         ToolBar = kendo.ui.ToolBar;
 
-    module("Toolbar: Events: ", {
+    module("Toolbar: API: ", {
         setup: function() {
             kendo.effects.disable();
             container = $("<div id='toolbar' />").appendTo(QUnit.fixture);
@@ -24,7 +24,7 @@
 
         toolbar.remove("#foo");
 
-        equal(toolbar.element.find(".k-button").length, 0, "Button is removed from the toolbar");
+        equal(toolbar.element.find("#foo").length, 0, "Button is removed from the toolbar");
         equal(toolbar.popup.element.children("li").length, 0, "Button is removed from the overflow container");
     });
 
