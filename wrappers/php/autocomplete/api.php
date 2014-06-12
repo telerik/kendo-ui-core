@@ -2,22 +2,7 @@
 require_once '../lib/Kendo/Autoload.php';
 require_once '../include/header.php';
 ?>
-<div class="configuration k-widget k-header">
-    <span class="configHead">API Functions</span>
-    <ul class="options">
-        <li>
-            <input id="value" type="text" class="k-textbox" />
-            <button id="set" class="k-button">Set value</button>
-        </li>
-        <li>
-            <button id="get" class="k-button">Get value</button>
-        </li>
-        <li>
-            <input id="word" value="B" class="k-textbox" />
-            <button id="search" class="k-button">Find starting with</button>
-        </li>
-    </ul>
-</div>
+
 <div id="colors">
    <label for="input">Primary color</label>
 <?php
@@ -32,6 +17,30 @@ $autoComplete->dataSource($dataSource);
 
 echo $autoComplete->render();
 ?>
+</div>
+
+<div class="box">
+    <div class="box-col">
+        <h4>Set / Get Value</h4>
+        <ul class="options">
+            <li>
+                <input id="value" type="text" class="k-textbox" />
+                <button id="set" class="k-button">Set value</button>
+            </li>
+            <li style="text-align: right;">
+                <button id="get" class="k-button">Get value</button>
+            </li>
+        </ul>
+    </div>
+    <div class="box-col">
+        <h4>Find item</h4>
+        <ul class="options">
+            <li>
+                <input id="word" value="B" class="k-textbox" />
+                <button id="search" class="k-button">Search</button>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <script>
@@ -62,23 +71,22 @@ echo $autoComplete->render();
         height: 180px;
         padding: 114px 0 0 0;
         background: url('../content/web/autocomplete/palette.png') transparent no-repeat right 0;
-        margin: 30px 0 30px 120px;
+        margin: 30px auto;
         text-align: center;
-    }
+                    }
     #colors label {
         display: block;
         color: #333;
         padding-bottom: 5px;
-    }
-    #input  {
+                    }
+    #input {
         margin-right: 50px;
     }
-    .configuration {
-        height: 410px;
-        margin-bottom: -21px;
+    .box .k-textbox {
+        width: 80px;
     }
-    .configuration .k-textbox {
-        width: 40px;
+    .box .k-button {
+        min-width: 80px;
     }
 </style>
 
