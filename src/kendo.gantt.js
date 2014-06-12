@@ -1215,9 +1215,7 @@ var __meta__ = {
 
                 this.dataSource.update(task, updateInfo);
 
-                this._preventRefresh = false;
-
-                this.dataSource.sync();
+                this._syncDataSource();
             }
         },
 
@@ -1225,9 +1223,13 @@ var __meta__ = {
             if (!this.trigger("remove", { task: task })) {
                 this._removeTaskDependencies(task);
 
+                this._preventRefresh = true;
+
                 if (this.dataSource.remove(task)) {
-                    this.dataSource.sync();
+                    this._syncDataSource();
                 }
+
+                this._preventRefresh = false;
             }
         },
 
@@ -1242,9 +1244,7 @@ var __meta__ = {
                 dataSource.insert(index, task);
             }
 
-            this._preventRefresh = false;
-
-            dataSource.sync();
+            this._syncDataSource();
         },
 
         _createDependency: function(dependency) {
@@ -1313,6 +1313,12 @@ var __meta__ = {
             this.timeline._renderDependencies(this.dependencies.view());
 
             this.trigger("dataBound");
+        },
+
+        _syncDataSource: function() {
+            this._preventRefresh = false;
+            this._requestStart();
+            this.dataSource.sync();
         },
 
         _requestStart: function() {
