@@ -478,3 +478,112 @@ ul.keyboard-legend li a {
     background: #ececec;
     border-color: #cbcbcb;
 }
+
+/* Box Styles */
+
+.box {
+    margin: 4.5em 7.5em;
+    padding: 3em;
+    background-color: rgba(20,53,80,0.038);
+    border: 1px solid rgba(20,53,80,0.05);
+}
+.demo-section {
+    margin: 4.5em auto;
+    padding: 3em;
+    border: 1px solid rgba(20,53,80,0.05);
+}
+.box:after,
+.demo-section:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+}
+#example .box {
+    margin: 4.5em auto;
+}
+.box.k-header,
+.demo-section.k-header {
+    background-position: 50% 70%;
+}
+.box h4,
+.demo-section h4 {
+    margin-bottom: 1em;
+    font-size: 12px;
+    line-height: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.box-col {
+    display: block;
+    float: left;
+    padding: 0 3em 1em 0;
+}
+
+.box li,
+.demo-section .box-col li {
+    margin-bottom: .6em;
+}
+.box li:last-child {
+    margin-bottom: 0;
+}
+
+.box li a {
+    font-size: 13px;
+}
+
+.box .k-widget {
+    background-color: #ebeef0;
+    border-color: #ccc;
+    color: #7c7c7c;
+}
+
+.box .k-button {
+    cursor: pointer;
+    border-radius: 2px;
+    padding: 2px 6px;
+    font-size: inherit;
+    color: #333;
+    background: #e1e5ea;
+    border-color: #c2ccd4;
+}
+
+.box .k-button:hover {
+    background: #c2ccd4;
+    color: #000;
+}
+
+.box .k-primary {
+    color: #fff;
+    background: #015991;
+    border-color: #015991;
+}
+
+.box .k-primary:hover {
+    background: #013A5E;
+    color: #fff;
+}
+
+.box .k-textbox,
+.box textarea {
+    background: #fff;
+    border-color: #ccc;
+    color: #555;
+    border-radius: 0;
+}
+
+.box .k-textbox:hover,
+.box .k-textbox:active,
+.box textarea:hover,
+.box textarea:active {
+    border-color: #999;
+    background: #fff;
+    color: #333;
+}
+
+.demo-hint {
+    line-height: 22px;
+    color: #aaa;
+    font-style: italic;
+    font-size: .9em;
+}
