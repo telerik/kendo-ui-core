@@ -1,6 +1,6 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    public interface IChartRangeBarSeries : IBarSeries
+    public interface IChartRangeBarSeries : IChartBarSeries
     {
         string FromField { get; set; }
 

@@ -176,9 +176,20 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual ChartRangeBarSeriesBuilder<TModel> RangeBar<TValue, TCategory>(
             Expression<Func<TModel, TValue>> fromExpression,
             Expression<Func<TModel, TValue>> toExpression,
-            Expression<Func<TModel, TCategory>> categoryExpression = null)
+            Expression<Func<TModel, TCategory>> categoryExpression)
         {
             var rangeBarSeries = new ChartRangeBarSeries<TModel, TValue, TCategory>(fromExpression, toExpression, categoryExpression);
+
+            Container.Series.Add(rangeBarSeries);
+
+            return new ChartRangeBarSeriesBuilder<TModel>(rangeBarSeries);
+        }
+
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeBar<TValue>(
+            Expression<Func<TModel, TValue>> fromExpression,
+            Expression<Func<TModel, TValue>> toExpression)
+        {
+            var rangeBarSeries = new ChartRangeBarSeries<TModel, TValue, string>(fromExpression, toExpression, null);
 
             Container.Series.Add(rangeBarSeries);
 
@@ -197,7 +208,7 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn<TValue, TCategory>(
             Expression<Func<TModel, TValue>> fromExpression,
             Expression<Func<TModel, TValue>> toExpression,
-            Expression<Func<TModel, TCategory>> categoryExpression = null)
+            Expression<Func<TModel, TCategory>> categoryExpression)
         {
             var builder = RangeBar(fromExpression, toExpression, categoryExpression);
 
@@ -205,6 +216,17 @@ namespace Kendo.Mvc.UI.Fluent
 
             return builder;
         }
+
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn<TValue>(
+            Expression<Func<TModel, TValue>> fromExpression,
+            Expression<Func<TModel, TValue>> toExpression)
+        {
+            var builder = RangeBar(fromExpression, toExpression);
+
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        } 
 
         public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn(IEnumerable data)
         {

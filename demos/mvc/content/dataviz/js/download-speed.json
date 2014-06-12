@@ -1,0 +1,45 @@
+[
+	{
+		"WiFiFrom": 30,
+		"WiFiTo": 35,
+		"OpticalFrom": 80,
+		"OpticalTo": 90,
+		"day": "Monday"
+	},{
+		"WiFiFrom": 60,
+		"WiFiTo": 70,
+		"OpticalFrom": 60,
+		"OpticalTo": 70,
+		"day": "Tuesday"
+	},{
+		"WiFiFrom": 50,
+		"WiFiTo": 60,
+		"OpticalFrom": 70,
+		"OpticalTo": 100,
+		"day": "Wednesday"
+	},{
+		"WiFiFrom": 30,
+		"WiFiTo": 50,
+		"OpticalFrom": 100,
+		"OpticalTo": 140,
+		"day": "Thursday"
+	},{
+		"WiFiFrom": 40,
+		"WiFiTo": 50,
+		"OpticalFrom": 90,
+		"OpticalTo": 110,
+		"day": "Friday"
+	},{
+		"WiFiFrom": 50,
+		"WiFiTo": 60,
+		"OpticalFrom": 80,
+		"OpticalTo": 100,
+		"day": "Saturday"
+	},{
+		"WiFiFrom": 30,
+		"WiFiTo": 40,
+		"OpticalFrom": 50,
+		"OpticalTo": 70,
+		"day": "Sunday"
+	}
+]

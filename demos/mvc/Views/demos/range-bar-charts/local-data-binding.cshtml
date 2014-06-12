@@ -47,19 +47,23 @@
                 dataSource: {
                     data: taskCompleteness
                 },
+                seriesDefaults: {
+                    type: "rangeBar"
+                },
                 series: [{
-                    type: "rangeColumn",
                     name: "Task A",
                     fromField: "fromA",
                     toField: "toA"
                 }, {
-                    type: "rangeColumn",
                     name: "Task B",
                     fromField: "fromB",
                     toField: "toB"
                 }],
                 categoryAxis: {
-                    field: "day"
+                    field: "day",
+                    majorGridLines: {
+                        visible: false
+                    }
                 },
                 valueAxis: {
                     max: 100

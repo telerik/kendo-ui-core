@@ -802,5 +802,19 @@ namespace Kendo.Mvc.Examples.Models
                 new DatePoint(30, DateTime.Parse("2012/01/05"))  
             };
         }
+
+        public static IList<DownloadSpeed> DownloadSpeeds()
+        {
+            return new DownloadSpeed[]
+            {
+                new DownloadSpeed(30, 35, 80, 90, "Monday"),
+                new DownloadSpeed(60, 70, 60, 70, "Tuesday"),
+                new DownloadSpeed(50, 60, 70, 100, "Wednesday"),
+                new DownloadSpeed(30, 50, 100, 140, "Thursday"),
+                new DownloadSpeed(40, 50, 90, 110, "Friday"),
+                new DownloadSpeed(50, 60, 80, 100, "Saturday"),
+                new DownloadSpeed(30, 40, 50, 70, "Sunday")
+            };
+        }
     }
 }

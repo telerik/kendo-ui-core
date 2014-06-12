@@ -44,16 +44,22 @@
             get;
             set;
         }
+
+        public CategoricalErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
     }
 
     public class ChartRangeBarSeries<TModel, TValue> : ChartRangeBarSeries<TModel, TValue, string> where TModel : class
     {
-        public ChartRangeBarSeries(Expression<Func<TModel, TValue>> fromExpression,
-                                   Expression<Func<TModel, TValue>> toExpression, 
-                                   Expression<Func<TModel, string>> colorExpression)
-            : base(fromExpression, toExpression, null)
-        {
-        }
+        //public ChartRangeBarSeries(Expression<Func<TModel, TValue>> fromExpression,
+        //                           Expression<Func<TModel, TValue>> toExpression, 
+        //                           Expression<Func<TModel, string>> colorExpression)
+        //    : base(fromExpression, toExpression, null)
+        //{
+        //}
 
         public ChartRangeBarSeries(IEnumerable data)
             : base(data)

@@ -12,13 +12,12 @@
         )
         .Series(series =>
         {
-            series.RangeColumn(model => model.FromA, model => model.ToA).Name("Task A");
-            series.RangeColumn(model => model.FromB, model => model.ToB).Name("Task B");
+            series.RangeBar(model => model.FromA, model => model.ToA).Name("Task A");
+            series.RangeBar(model => model.FromB, model => model.ToB).Name("Task B");
         })
         .CategoryAxis(axis => axis
             .Categories(model => model.Day)
-            //.MajorGridLines(lines => lines.Visible(false))
-            //.Line(line => line.Visible(false))
+            .MajorGridLines(lines => lines.Visible(false))
         )
         .ValueAxis(axis => axis.Numeric()
             .Max(100)
