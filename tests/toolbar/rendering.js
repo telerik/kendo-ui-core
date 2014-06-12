@@ -927,5 +927,28 @@
         ok(button.data("uid") === overflowButton.data("uid"));
     });
 
+    test("If a template command does not have overflowTemplate it is considered as overflow: never", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>' }
+            ]
+        }).data("kendoToolBar");
+
+        equal($("#template").data("overflow"), "never");
+    });
+
+    test("When a template command without overflowTemplate is defined no JS error is thrown", 1, function() {
+        try {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    { template: '<span id="template"></span>' }
+                ]
+            }).data("kendoToolBar");
+        } catch(error) {
+            ok(false, "JS error is thrown");
+        }
+
+        ok(true, "No JS error is thrown");
+    });
 
 })();

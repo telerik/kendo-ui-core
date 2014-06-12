@@ -400,6 +400,10 @@ var __meta__ = {
                     uid: kendo.guid()
                 });
 
+                if (template && !overflowTemplate) {
+                    options.overflow = OVERFLOW_NEVER;
+                }
+
                 //add the command in the overflow popup
                 if (options.overflow !== OVERFLOW_NEVER && this.options.resizable) {
                     if (overflowTemplate) { //template command
@@ -408,7 +412,7 @@ var __meta__ = {
                         overflowElement = (component.overflow || $.noop)(options);
                     }
 
-                    if (overflowElement.length) {
+                    if (overflowElement && overflowElement.length) {
                         if(overflowElement.prop("tagName") !== "LI") {
                             overflowElement = overflowElement.wrap("<li></li>").parent();
                         }
@@ -429,7 +433,7 @@ var __meta__ = {
                         element = (component.toolbar || $.noop)(options);
                     }
 
-                    if (element.length) {
+                    if (element && element.length) {
                         this._attributes(element, options);
                         element.appendTo(this.element).css("visibility", "hidden");
 
