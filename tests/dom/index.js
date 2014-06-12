@@ -277,47 +277,37 @@
         ok(true);
     });
 
-    test("render persists the order of table rows", function() {
-        var initial = [element("table", null, [
-            element("thead", null, [
-                element("tr", null, [
-                    element("td", null, [text("all")])
-                ]),
-                element("tr", null, [
-                    element("td", null, [text("2005")]),
-                    element("td", null, [text("2006")]),
-                    element("td", null, [text("2007")]),
-                    element("td", null, [text("2008")])
-                ]),
-                element("tr", null, [
-                    element("td", null, [text("m1")])
-                ])
+    test("render persists the order of elements", function() {
+        var initial = [
+            element("div", null, [
+                element("div", null, [text("1")]),
+                element("div", null, [text("2")]),
+                element("div", null, [text("3")]),
+                element("div", null, [text("4")])
+            ]),
+            element("div", null, [
+                element("div", null, [text("5")]),
+                element("div", null, [text("6")])
             ])
-        ])];
+        ];
 
         tree.render(initial);
 
-        var updated = [element("table", null, [
-            element("thead", null, [
-                element("tr", null, [
-                    element("td", null, [text("all")])
-                ]),
-                element("tr", null, [
-                    element("td", null, [text("all")])
-                ]),
-                element("tr", null, [
-                    element("td", null, [text("m1")]),
-                    element("td", null, [text("m3")])
-                ]),
+        var updated = [
+            element("div", null, [
+                element("div", null, [text("1")])
+            ]),
+            element("div", null, [
+                element("div", null, [text("2")]),
+                element("div", null, [text("3")])
             ])
-        ])];
+        ];
 
         tree.render(updated);
 
-        var rows = root.firstChild.firstChild.childNodes;
+        var rows = root.childNodes;
 
         equal(rows[0].childNodes.length, 1);
-        equal(rows[1].childNodes.length, 1);
-        equal(rows[2].childNodes.length, 2);
+        equal(rows[1].childNodes.length, 2);
     });
 }());

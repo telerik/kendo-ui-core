@@ -61,8 +61,12 @@ var __meta__ = {
             var cachedChildren = cached.children;
 
             if (Math.abs(cachedChildren.length - length) > 2) {
-                cached.remove();
-                this.render(parent, null);
+                this.render({
+                    appendChild: function(node) {
+                        parent.replaceChild(node, cached.node);
+                    }
+                }, null);
+
                 return;
             }
 
