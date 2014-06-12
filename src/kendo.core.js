@@ -2531,6 +2531,8 @@ function pad(number, digits, end) {
 
             that.element = kendo.jQuery(element).handler(that);
 
+            that.angular("init", options);
+
             Observable.fn.init.call(that);
 
             options = that.options = extend(true, {}, that.options, options);

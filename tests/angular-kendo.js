@@ -522,15 +522,25 @@
         };
     }
 
-    var BEFORE = "$angular_beforeCreate";
-
     /* -----[ Customize widgets for Angular ]----- */
 
-    defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, get){
+    defadvice([ "ui.Widget", "mobile.ui.Widget" ], "angular", function(cmd, arg){
         var self = this.self;
+        if (cmd == "init") {
+            // `arg` here should be the widget options.
+            // the Chart doesn't send the options to Widget::init in constructor
+            // hence the OPTIONS_NOW hack (initialized in createWidget).
+            if (!arg && OPTIONS_NOW) arg = OPTIONS_NOW;
+            OPTIONS_NOW = null;
+            if (arg && arg.$angular) {
+                self.$angular_scope = arg.$angular[0];
+                self.$angular_init(self.element, arg);
+            }
+            return;
+        }
         var scope = self.$angular_scope || angular.element(self.element).scope();
         if (scope) {
-            var x = get(), elements = x.elements, data = x.data;
+            var x = arg(), elements = x.elements, data = x.data;
             if (elements.length > 0) {
                 switch (cmd) {
 
@@ -562,26 +572,10 @@
                 }
             }
         }
-        this.next();
-    });
-
-    // XXX: notice we can't override `init` in general for any widget,
-    // because kendo.ui.Widget === kendo.ui.Widget.prototype.init.
-    // Hence we resort to the beforeCreate/afterCreate hack.
-    defadvice("ui.Widget", "init", function(element, options){
-        if (!options && OPTIONS_NOW) options = OPTIONS_NOW;
-        OPTIONS_NOW = null;
-        var self = this.self;
-        if (options && options.$angular) {
-            self.$angular_scope = options.$angular[0];
-            // call before/after hooks only for widgets instantiated by angular-kendo
-            self.$angular_beforeCreate(element, options);
-        }
-        this.next();
     });
 
     // All event handlers that are strings are compiled the Angular way.
-    defadvice("ui.Widget", BEFORE, function(element, options) {
+    defadvice("ui.Widget", "$angular_init", function(element, options) {
         var self = this.self;
         if (options && !$.isArray(options)) {
             var scope = self.$angular_scope;
@@ -653,7 +647,7 @@
     // If no `template` is supplied for Grid columns, provide an Angular
     // template.  The reason is that in this way AngularJS will take
     // care to update the view as the data in scope changes.
-    defadvice("ui.Grid", BEFORE, function(element, options){
+    defadvice("ui.Grid", "$angular_init", function(element, options){
         this.next();
         if (options.columns) {
             var settings = $.extend({}, kendo.Template, options.templateSettings);
