@@ -2174,8 +2174,13 @@ var __meta__ = {
                 }
             }
 
-            rows[0].children[0].attr.class = "k-first";
-            rows[rowsLength - 1].children[0].attr.class = "k-first";
+            var name = members[0].name;
+
+            this.map[name].children[0].attr.class = "k-first";
+
+            if (this.map[name + "all"]) {
+                this.map[name + "all"].children[0].attr.class = "k-first";
+            }
         },
 
         _tuplePath: function(tuple, index) {
@@ -2196,6 +2201,7 @@ var __meta__ = {
             var members = tuple.members;
             var member = members[memberIdx];
             var children = member.children;
+            var childrenLength = children.length;
 
             var tuplePath = this._tuplePath(tuple, memberIdx - 1).join("");
 
@@ -2213,13 +2219,32 @@ var __meta__ = {
                 row.hasChild = true;
             }
 
+            if (member.measure) {
+                member = children[0];
+
+                row.children.push(element("td", null, [text(member.caption || member.name)]));
+
+                for (var idx = 1; idx < childrenLength; idx++) {
+                    member = children[idx];
+
+                    var measureRow = element("tr", row.attr, [ element("td", null, [text(member.caption || member.name)] )] );
+
+                    measureRow.colspan = {};
+
+                    rows.push(measureRow);
+                }
+
+                row.rowspan = childrenLength;
+
+                return row;
+            }
+
             map[tuplePath + member.name] = row;
 
             var childRow;
 
             var allCell;
             var cellChildren = [];
-            var childrenLength = children.length;
 
             if (member.hasChildren) {
                 var path = kendo.stringify(this._tuplePath(tuple, memberIdx));

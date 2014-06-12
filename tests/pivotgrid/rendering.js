@@ -1097,8 +1097,13 @@
         }
     });
 
-    function createDataSourceRows(tuples, data) {
+    function createDataSourceRows(tuples, data, measures) {
         return new PivotDataSource({
+            measures: {
+                values: measures || [],
+                axis: "rows"
+            },
+            rows: [ { name: "level 0" } ],
             schema: {
                 axes: "axes",
                 data: "data"
@@ -1925,5 +1930,116 @@
         ok(!button.hasClass("k-i-arrow-e"));
         ok(button.hasClass("k-i-arrow-s"));
         equal(button.attr(kendo.attr("path")), kendo.stringify(["level 0"]));
+    });
+
+    test("PivotGrid renders one dimension with two measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td");
+        var td_1 = rows.eq(1).find("td");
+
+        equal(rows.length, 2);
+
+        equal(td_0.eq(0).text(), "level 0");
+        equal(td_0.eq(0).attr("rowspan"), 2);
+
+        equal(td_0.eq(1).text(), "measure 1");
+        equal(td_1.eq(0).text(), "measure 2");
+    });
+
+    test("PivotGrid renders child tuple with two measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td");
+        var td_1 = rows.eq(1).find("td");
+        var td_2 = rows.eq(2).find("td");
+        var td_3 = rows.eq(3).find("td");
+
+        equal(td_0.eq(0).text(), "level 0");
+        equal(td_0.eq(0).attr("rowspan"), 2);
+
+        equal(td_0.eq(1).text(), "level 0_1");
+        equal(td_0.eq(1).attr("rowspan"), 2);
+
+        equal(td_0.eq(2).text(), "measure 1");
+        equal(td_1.eq(0).text(), "measure 2");
+
+        equal(td_2.eq(0).text(), "level 0");
+        equal(td_2.eq(0).attr("rowspan"), 2);
+
+        equal(td_2.eq(1).text(), "measure 1");
+        equal(td_3.eq(0).text(), "measure 2");
+    });
+
+    test("PivotGrid renders k-grid-footer class to all footer rows with multiple measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+
+        ok(rows.eq(2).hasClass("k-grid-footer"));
+        ok(rows.eq(3).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders k-first class to the first root cell when multiple measures are used", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", levelNum: "1", parentName: "level 0", children: [] }, { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_2 = rows.eq(2).find("td");
+        var td_3 = rows.eq(3).find("td");
+
+        ok(td_2.eq(0).hasClass("k-first"));
+        ok(!td_3.eq(0).hasClass("k-first"));
     });
 })();
