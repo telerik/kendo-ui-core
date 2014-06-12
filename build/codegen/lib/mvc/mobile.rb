@@ -29,7 +29,8 @@ module CodeGen::MVC::Wrappers::Mobile
         'Boolean' => 'bool',
         'Object' => 'object',
         'Function' => 'string',
-        'Date' => 'DateTime'
+        'Date' => 'DateTime',
+        'jQuery' => 'string'
     }
 
     FIELD_TYPES = {
