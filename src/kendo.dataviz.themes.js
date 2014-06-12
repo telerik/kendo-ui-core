@@ -163,7 +163,7 @@ var __meta__ = {
                     spacing: BAR_SPACING
                 },
                 waterfall: {
-                    gap: BAR_GAP,
+                    gap: 0.5,
                     spacing: BAR_SPACING,
                     line: {
                         width: 1,
