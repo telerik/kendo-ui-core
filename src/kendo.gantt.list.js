@@ -43,7 +43,6 @@ var __meta__ = {
         wrapper: "k-treelist k-grid k-widget",
         header: "k-header",
         alt: "k-alt",
-        editRow: "k-edit-row",
         editCell: "k-edit-cell",
         group: "k-treelist-group",
         gridHeader: "k-grid-header",

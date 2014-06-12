@@ -731,6 +731,9 @@ var __meta__ = {
 
             this._dataBind();
 
+            this._resizeHandler = proxy(this.resize, this);
+            $(window).on("resize" + NS, this._resizeHandler);
+
             kendo.notify(this);
         },
 
@@ -828,6 +831,8 @@ var __meta__ = {
             }
 
             this.toolbar.off(NS);
+
+            $(window).off("resize" + NS, this._resizeHandler);
 
             this.toolbar = null;
             this.footer = null;
@@ -1409,6 +1414,10 @@ var __meta__ = {
                         that.refresh();
                     });
             }
+        },
+
+        _resize: function() {
+            this._adjustDimensions();
         }
     });
 

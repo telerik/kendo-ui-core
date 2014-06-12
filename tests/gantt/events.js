@@ -16,6 +16,14 @@
         }
     });
 
+    test("window resizing adjust content dimensions", function() {
+        stub(gantt, "_adjustDimensions");
+        
+        $(window).resize();
+
+        ok(gantt.calls("_adjustDimensions"));
+    });
+
     test("trigger add event", 1, function() {
         gantt.bind("add", function() {
             ok(true);
