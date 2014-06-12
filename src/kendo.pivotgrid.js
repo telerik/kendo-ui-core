@@ -1628,41 +1628,33 @@ var __meta__ = {
 
             that._dataSource();
 
-            that.columnsHeader.on("click", "span.k-icon", function() {
-                var button = $(this);
-                var path = button.attr(kendo.attr("path"));
-                var expanded = button.hasClass(STATE_EXPANDED);
-                var expandState = columnBuilder.expandState[path];
+            that.columnsHeader
+                .add(that.rowsHeader)
+                .on("click", "span.k-icon", function() {
+                    var button = $(this);
+                    var builder = columnBuilder;
+                    var action = "expandColumn";
 
-                columnBuilder.expandState[path] = !expanded;
+                    if (button.parent().is("td")) {
+                        builder = rowBuilder;
+                        action = "expandRow";
+                    }
 
-                button.toggleClass(STATE_EXPANDED, !expanded)
-                      .toggleClass(STATE_COLLAPSED, expanded);
+                    var path = button.attr(kendo.attr("path"));
+                    var expanded = button.hasClass(STATE_EXPANDED);
+                    var expandState = builder.expandState[path];
 
-                if (!expanded && expandState === undefined) {
-                    that.dataSource.expandColumn($.parseJSON(path));
-                } else {
-                    that.refresh();
-                }
-            });
+                    builder.expandState[path] = !expanded;
 
-            that.rowsHeader.on("click", "span.k-icon", function() {
-                var button = $(this);
-                var path = button.attr(kendo.attr("path"));
-                var expanded = button.hasClass(STATE_EXPANDED);
-                var expandState = rowBuilder.expandState[path];
+                    button.toggleClass(STATE_EXPANDED, !expanded)
+                          .toggleClass(STATE_COLLAPSED, expanded);
 
-                rowBuilder.expandState[path] = !expanded;
-
-                button.toggleClass(STATE_EXPANDED, !expanded)
-                      .toggleClass(STATE_COLLAPSED, expanded);
-
-                if (!expanded && expandState === undefined) {
-                    that.dataSource.expandRow($.parseJSON(path));
-                } else {
-                    that.refresh();
-                }
-            });
+                    if (!expanded && expandState === undefined) {
+                        that.dataSource[action]($.parseJSON(path));
+                    } else {
+                        that.refresh();
+                    }
+                });
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -2254,7 +2246,6 @@ var __meta__ = {
 
                 if (members[memberIdx + 1]) {
                     childRow = this._buildRows(tuple, memberIdx + 1);
-
                     allCell.attr.rowspan = childRow.rowspan;
                 }
 
@@ -2271,10 +2262,9 @@ var __meta__ = {
         },
 
         _state: function(rootTuple) {
+            this.rootTuple = rootTuple;
             this.rows = [];
             this.map = {};
-            this.rootTuple = rootTuple;
-            this.rootIndex = 0;
         }
     });
 
