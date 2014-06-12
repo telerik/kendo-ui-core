@@ -2643,6 +2643,126 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartBoxPlotSeriesBuilder<TModel>(boxPlotSeries);
         }
 
+        /// <summary>
+        /// Defines bound waterfall series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        /// <param name="summaryExpression">
+        /// The expression used to extract the point summary type from the chart model
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> summaryExpression = null)
+        {
+            var series = new ChartWaterfallSeries<TModel, TValue, TCategory>(valueExpression, categoryExpression, summaryExpression);
+            Container.Series.Add(series);
+
+            return new ChartWaterfallSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines bound waterfall series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="summaryExpression">
+        /// The expression used to extract the point summary type from the chart model
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall<TValue>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, string>> summaryExpression = null)
+        {
+            var series = new ChartWaterfallSeries<TModel, TValue, string>(valueExpression, null, summaryExpression);
+            Container.Series.Add(series);
+
+            return new ChartWaterfallSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines bound waterfall series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="summaryMemberName">
+        /// The name of the note summary type member.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall(
+            string valueMemberName,
+            string categoryMemberName = null,
+            string summaryMemberName = null)
+        {
+            return Waterfall(null, valueMemberName, categoryMemberName, summaryMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound waterfall series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="summaryMemberName">
+        /// The name of the note summary type member.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall(
+            Type memberType,
+            string valueMemberName,
+            string categoryMemberName = null,
+            string summaryMemberName = null)
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+
+            var summaryExprs = summaryMemberName.HasValue() ? BuildMemberExpression(typeof(string), summaryMemberName) : null;
+            var seriesType = typeof(ChartWaterfallSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+            var series = (IWaterfallSeries)BuildSeries(seriesType, valueExpr, categoryExpr, summaryExprs);
+
+            series.Member = valueMemberName;
+            series.CategoryMember = categoryMemberName;
+            series.SummaryMember = summaryMemberName;
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartWaterfallSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines waterfall series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall(IEnumerable data)
+        {
+            var series = new ChartWaterfallSeries<TModel, object>(data);
+            Container.Series.Add(series);
+
+            return new ChartWaterfallSeriesBuilder<TModel>(series);
+        }
+
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;
