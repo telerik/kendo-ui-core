@@ -21,13 +21,37 @@ var __meta__ = {
         NEQ = "Is not equal to",
         proxy = $.proxy;
 
+    function findFilterForField(filter, field) {
+        var filters = [];
+        if ($.isPlainObject(filter)) {
+            if (filter.hasOwnProperty("filters")) {
+                filters = filter.filters;
+            } else if(filter.field == field) {
+                return filter.value;
+            }
+        }
+        if (($.isArray(filter))) {
+           filters = filter;
+        }
+
+        for (var i = 0; i < filters.length; i++) {
+          var result = findFilterForField(filters[i], field);
+          if (result) {
+             return result;
+          }
+        }
+    }
+
     var RowFilter = Widget.extend( {
         init: function(element, options) {
             var element = $(element),
                     that = this,
                     options,
                     dataSource,
-                    input = that.input = $("<input/>");
+                    viewModel,
+                    input = that.input = $("<input/>")
+                        .attr(kendo.attr("bind"), "value: value")
+                        .appendTo(element);
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -41,17 +65,45 @@ var __meta__ = {
 
 
             element.addClass("grid-filter-header");
-            element.append(input);
 
-            kendo.notify(that);
+            that.viewModel = viewModel = kendo.observable({
+                operator: options.operator || that._defaultOperatorForType(options.type),
+                value: null
+            });
+
+            kendo.bind(element, viewModel);
+
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource.bind("change", that._refreshHandler);
+
+            that.refresh();
         },
 
-        _refreshHandler: function() {
-            
+        _defaultOperatorForType: function(type) {
+            //TODO
+            return "eq";
+        },
+
+        refresh: function() {
+            var that = this;
+            that._bind()
+        },
+
+        _bind: function() {
+            var that = this,
+                filter = that.dataSource.filter(),
+                viewModel = that.viewModel,
+                valueFromFilter = findFilterForField(filter, this.options.field);
+
+            viewModel.set("value", valueFromFilter);
+            viewModel.set("operator", that.options.operator);
         },
 
         destroy: function() {
             var that = this;
+
+            that.filterModel = null;
 
             Widget.fn.destroy.call(that);
 
@@ -119,10 +171,6 @@ var __meta__ = {
             if (that.options.autoBind) {
                 dataSource.fetch();
             }
-        },
-
-        refresh: function(e) {
-
         }
     });
 

@@ -3618,8 +3618,8 @@ var __meta__ = {
                     var field = col.field;
 
                     if (field && col.filterable !== false) {
-                        th.attr(kendo.attr("field"), field);
-                        th.kendoRowFilter({
+                        th.attr(kendo.attr("field"), field)
+                        .kendoRowFilter({
                             dataSource: dsOptions,
                             field: field
                         });

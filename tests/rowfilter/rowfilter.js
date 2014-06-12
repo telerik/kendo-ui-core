@@ -83,4 +83,44 @@
         rowFilter = setup(dom, { dataSource: dataSource, field: "bar" });
         equal(rowFilter.options.type, "number");
     });
+
+    test("creates input element by default", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, field: "bar" });
+        equal(dom.find("input").length, 1);
+    });
+
+    test("sets the value of the input element when there is default filter", function() {
+        dataSource.filter({ field:"foo", operator:"eq", value:"baz" })
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(rowFilter.element.find("input").val(), "baz");
+    });
+
+    test("sets the value of the input element when there is array as filter", function() {
+        dataSource.filter([{ field:"foo", operator:"eq", value:"baz" }]);
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(dom.find("input").val(), "baz");
+    });
+
+    test("sets the value of the input element when there is composite filter", function() {
+        dataSource.filter({ filters: [{ field:"foo", operator:"eq", value:"baz" }] });
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(dom.find("input").val(), "baz");
+    });
+
+    test("sets the value of the input element when there is complex composite filter", function() {
+        dataSource.filter({ filters: [{ field:"faz", operator:"eq", value:"gaz" }, { field:"foo", operator:"eq", value:"baz" }] });
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(dom.find("input").val(), "baz");
+    });
+
+    test("updates the values of the filter when filter is cleared and then set", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(dom.find("input").val(), "");
+        dataSource.filter({ filters: [{ field:"faz", operator:"eq", value:"gaz" }, { field:"foo", operator:"eq", value:"baz" }] });
+        equal(dom.find("input").val(), "baz");
+        dataSource.filter({});
+        equal(dom.find("input").val(), "");
+        dataSource.filter({ field:"foo", operator:"eq", value:"gaz" });
+        equal(dom.find("input").val(), "gaz");
+    });
 })();
