@@ -5868,6 +5868,7 @@
 		}
 	],
 	"spriteCssClass": "chartRangeBarIcon",
+	"name": "range-bar-charts",
 	"category": "Data Visualization"
   },
   {

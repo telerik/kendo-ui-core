@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Kendo.Mvc.Examples.Models.RangeBarChartsLocalDataViewModel>
+
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart(Model)
+        .Name("chart")
+        .Title(title => title
+            .Text("Task Completeness")
+        )
+        .Legend(legend => legend
+            .Visible(true)
+            .Position(ChartLegendPosition.Top)
+        )
+        .Series(series =>
+        {
+            series.RangeColumn(model => model.FromA, model => model.ToA).Name("Task A");
+            series.RangeColumn(model => model.FromB, model => model.ToB).Name("Task B");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(model => model.Day)
+            //.MajorGridLines(lines => lines.Visible(false))
+            //.Line(line => line.Visible(false))
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Max(100)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Template("#= value.from # - #= value.to #"))
+    ) 
+</div>

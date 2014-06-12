@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Stack(bool stacked)
+        public virtual TSeriesBuilder Stack(bool stacked)
         {
             Series.Stacked = stacked;
 
@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Stack(string stackGroup)
+        public virtual TSeriesBuilder Stack(string stackGroup)
         {
             Series.StackGroup = stackGroup;
 
@@ -69,7 +69,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Stack(ChartStackType stackType, string stackGroup = null)
+        public virtual TSeriesBuilder Stack(ChartStackType stackType, string stackGroup = null)
         {
             Series.StackType = stackType;
 
@@ -93,7 +93,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Aggregate(ChartSeriesAggregate aggregate)
+        public virtual TSeriesBuilder Aggregate(ChartSeriesAggregate aggregate)
         {
             Series.Aggregate = aggregate;
 

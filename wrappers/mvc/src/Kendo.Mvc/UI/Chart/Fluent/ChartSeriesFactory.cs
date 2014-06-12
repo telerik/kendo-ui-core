@@ -173,6 +173,50 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartBarSeriesBuilder<TModel>(barSeries);
         }
 
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeBar<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> fromExpression,
+            Expression<Func<TModel, TValue>> toExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
+        {
+            var rangeBarSeries = new ChartRangeBarSeries<TModel, TValue, TCategory>(fromExpression, toExpression, categoryExpression);
+
+            Container.Series.Add(rangeBarSeries);
+
+            return new ChartRangeBarSeriesBuilder<TModel>(rangeBarSeries);
+        }
+
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeBar(IEnumerable data)
+        {
+            ChartRangeBarSeries<TModel, object> rangeBarSeries = new ChartRangeBarSeries<TModel, object>(data);
+
+            Container.Series.Add(rangeBarSeries);
+
+            return new ChartRangeBarSeriesBuilder<TModel>(rangeBarSeries);
+        }
+
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> fromExpression,
+            Expression<Func<TModel, TValue>> toExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null)
+        {
+            var builder = RangeBar(fromExpression, toExpression, categoryExpression);
+
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn(IEnumerable data)
+        {
+            ChartRangeBarSeries<TModel, object> rangeBarSeries = new ChartRangeBarSeries<TModel, object>(data);
+
+            rangeBarSeries.Orientation = ChartSeriesOrientation.Vertical;
+
+            Container.Series.Add(rangeBarSeries);
+
+            return new ChartRangeBarSeriesBuilder<TModel>(rangeBarSeries);
+        }
+
         /// <summary>
         /// Defines bound column series.
         /// </summary>
