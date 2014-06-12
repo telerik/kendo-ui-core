@@ -56,6 +56,38 @@
         });
     };
 
+    /* -----[ utils ]----- */
+
+    $.fn.press = function(key) {
+        return this.trigger({ type: "keydown", keyCode: key } );
+    };
+
+    $.fn.selectedText = function() {
+        var that = this[0];
+
+        if (document.selection) {
+            return document.selection.createRange().text;
+        } else {
+            return that.value.substring(that.selectionStart, that.selectionEnd);
+        }
+    };
+
+    $.fn.type = function(value) {
+        return this.val(value).each(function() {
+            if (this.createTextRange) {
+                var textRange = this.createTextRange();
+                textRange.collapse(false);
+                textRange.select();
+            }
+        });
+    };
+
+    function trigger(type, el, e) {
+        el.trigger($.Event(type, e));
+    }
+
+    /* -----[ initialization ]----- */
+
     runTest("create widgets", function(dom){
         var slider = $("<input kendo-slider />").appendTo(dom);
         var numericTextBox = $("<input kendo-numerictextbox />").appendTo(dom);
@@ -93,36 +125,6 @@
             start();
         });
     });
-
-    /* -----[ utils ]----- */
-
-    $.fn.press = function(key) {
-        return this.trigger({ type: "keydown", keyCode: key } );
-    };
-
-    $.fn.selectedText = function() {
-        var that = this[0];
-
-        if (document.selection) {
-            return document.selection.createRange().text;
-        } else {
-            return that.value.substring(that.selectionStart, that.selectionEnd);
-        }
-    };
-
-    $.fn.type = function(value) {
-        return this.val(value).each(function() {
-            if (this.createTextRange) {
-                var textRange = this.createTextRange();
-                textRange.collapse(false);
-                textRange.select();
-            }
-        });
-    };
-
-    function trigger(type, el, e) {
-        el.trigger($.Event(type, e));
-    }
 
     /* -----[ support for {{angular}} expressions in customizable templates ]----- */
 
@@ -628,6 +630,50 @@
         };
         $("<div kendo-window k-options='options'></div>").appendTo(dom);
         expect(1);
+    });
+
+    /// k-on-change handlers
+
+    runTest("Grid k-on-change puts the right information in scope", function(dom){
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [ { field: "text" }, { field: "id" } ],
+            selectable: true
+        };
+        $scope.check = function(kendoEvent, selected, data, dataItem) {
+            var grid = $scope.grid;
+            equal(kendoEvent.sender, grid);
+            equal($(selected)[0], grid.items()[0]);
+            equal(data, dataItem);
+            equal(dataItem.id, $scope.data[0].id);
+            start();
+        };
+        $("<div kendo-grid='grid' k-options='options' k-on-change='check(kendoEvent, selected, data, dataItem)'></div>").appendTo(dom);
+        expect(4);
+        $scope.$on("kendoRendered", function(){
+            $scope.grid.select($scope.grid.items().eq(0));
+        });
+    });
+
+    runTest("Grid (multiple selection) k-on-change puts the right information in scope", function(dom){
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [ { field: "text" }, { field: "id" } ],
+            selectable: "multiple"
+        };
+        $scope.check = function(selected, data) {
+            var grid = $scope.grid;
+            equal(selected[0], grid.items()[0]);
+            equal(selected[1], grid.items()[1]);
+            equal(data[0].id, $scope.data[0].id);
+            equal(data[1].id, $scope.data[1].id);
+            start();
+        };
+        $("<div kendo-grid='grid' k-options='options' k-on-change='check(selected, data)'></div>").appendTo(dom);
+        expect(4);
+        $scope.$on("kendoRendered", function(){
+            $scope.grid.select($scope.grid.items());
+        });
     });
 
     /// mobile
