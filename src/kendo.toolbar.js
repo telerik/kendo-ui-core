@@ -582,24 +582,35 @@ var __meta__ = {
             },
 
             _shrink: function(containerWidth) {
-                var commandElement;
+                var commandElement,
+                    visibleCommands;
 
-                while (containerWidth < this._childrenWidth()) {
-                    commandElement = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")").last();
-                    if (!commandElement.length) {
-                        break;
+                if (containerWidth < this._childrenWidth()) {
+                    visibleCommands = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")");
+
+                    for (var i = visibleCommands.length - 1; i >= 0; i--) {
+                        commandElement = visibleCommands.eq(i);
+                        if (containerWidth > this._childrenWidth()) {
+                            break;
+                        } else {
+                            this._hideItem(commandElement);
+                        }
                     }
-                    this._hideItem(commandElement);
                 }
             },
 
             _stretch: function(containerWidth) {
-                var commandElement;
+                var commandElement,
+                    hiddenCommands;
 
-                while (containerWidth > this._childrenWidth()) {
-                    commandElement = this.element.children(":hidden").first();
-                    if (!commandElement.length || !this._showItem(commandElement, containerWidth)) {
-                        break;
+                if (containerWidth > this._childrenWidth()) {
+                    hiddenCommands = this.element.children(":hidden");
+
+                    for (var i = 0; i < hiddenCommands.length ; i++) {
+                        commandElement = hiddenCommands.eq(i);
+                        if (containerWidth < this._childrenWidth() || !this._showItem(commandElement, containerWidth)) {
+                            break;
+                        }
                     }
                 }
             },
