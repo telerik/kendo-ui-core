@@ -1,0 +1,30 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Inventory"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "waterfall",
+                    data: [180, -42, -2, 23],
+                    labels: {
+                        visible: true
+                    }
+                }],
+                categoryAxis: {
+                    categories: ["In stock", "Damaged", "Reserved", "Refurbished"]
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script> 
+</div>
