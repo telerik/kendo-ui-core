@@ -1,7 +1,6 @@
 (function(f, define){
     define([
         "./kendo.core",
-        "./kendo.angular",
         "./kendo.fx",
         "./kendo.data.odata",
         "./kendo.data.xml",
@@ -32,7 +31,8 @@
         "./kendo.mobile.navbar",
         "./kendo.mobile.scrollview",
         "./kendo.mobile.switch",
-        "./kendo.mobile.tabstrip"
+        "./kendo.mobile.tabstrip",
+        "./kendo.angular"
     ], f);
 })(function(){
     "bundle all";
