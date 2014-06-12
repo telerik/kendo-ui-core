@@ -40,6 +40,8 @@ var __meta__ = {
 
         OVERFLOW_ANCHOR = "k-overflow-anchor",
         OVERFLOW_CONTAINER = "k-overflow-container",
+        FIRST_OVERFLOW_VISIBLE = "k-overflow-first-visible",
+        LAST_OVERFLOW_VISIBLE = "k-overflow-last-visible",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -569,6 +571,8 @@ var __meta__ = {
 
                 this._shrink(containerWidth);
                 this._stretch(containerWidth);
+
+                this._markVisibles();
             },
 
             _childrenWidth: function() {
@@ -633,6 +637,15 @@ var __meta__ = {
                 }
 
                 return false;
+            },
+
+            _markVisibles: function() {
+                var items = this.popup.element.children(),
+                    visibleItems = items.filter(":not(." + OVERFLOW_HIDDEN + ")");
+
+                items.removeClass(FIRST_OVERFLOW_VISIBLE + " " + LAST_OVERFLOW_VISIBLE);
+                visibleItems.first().addClass(FIRST_OVERFLOW_VISIBLE);
+                visibleItems.last().addClass(LAST_OVERFLOW_VISIBLE);
             }
 
         });
