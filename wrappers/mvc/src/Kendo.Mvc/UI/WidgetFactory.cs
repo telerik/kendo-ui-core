@@ -1292,6 +1292,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Creates a <see cref="Gantt"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Gantt()
+        ///             .Name("Gantt")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual GanttBuilder Gantt()
+        {
+            return new GanttBuilder(new Gantt(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="Map"/>
         /// </summary>
         /// <example>

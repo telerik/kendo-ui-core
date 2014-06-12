@@ -2023,4 +2023,4 @@
     <Compile Include="UI\Diagram\Settings\DiagramEditableSelectStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableSelectStrokeSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\Gantt\Gantt.cs" /><Compile Include="UI\Gantt\Fluent\GanttBuilder.cs" /><Compile Include="UI\Gantt\Fluent\GanttEventBuilder.cs" /></ItemGroup></Project>

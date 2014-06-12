@@ -74,6 +74,7 @@ module CodeGen::MVC::Wrappers
         'scrollview.bouncevelocitythreshold',
         'scrollview.datasource',
         'drawer.views',
+        'gantt.datasource',
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
 		'diagram.datasource'

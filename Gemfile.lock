@@ -122,6 +122,6 @@ DEPENDENCIES
   nokogiri
   rake
   rb-inotify (~> 0.8.8)
-  rubyzip
+  rubyzip (~> 1.1.4)
   selenium-webdriver (~> 2.38.0)
   winrm
