@@ -7546,21 +7546,23 @@ var __meta__ = {
                 var currentSeries = series[seriesIx];
                 var points = seriesPoints[seriesIx];
 
-                var prevPoint;
-                for (var pointIx = 0; pointIx < points.length; pointIx++) {
-                    var point = points[pointIx];
+                if (points) {
+                    var prevPoint;
+                    for (var pointIx = 0; pointIx < points.length; pointIx++) {
+                        var point = points[pointIx];
 
-                    if (point.isTotal) {
-                        continue;
+                        if (point.isTotal) {
+                            continue;
+                        }
+
+                        if (point && prevPoint) {
+                            var segment = new WaterfallSegment(prevPoint, point, currentSeries);
+                            segments.push(segment);
+                            this.append(segment);
+                        }
+
+                        prevPoint = point;
                     }
-
-                    if (point && prevPoint) {
-                        var segment = new WaterfallSegment(prevPoint, point, currentSeries);
-                        segments.push(segment);
-                        this.append(segment);
-                    }
-
-                    prevPoint = point;
                 }
             }
         }

@@ -291,6 +291,11 @@
         test("doesn't create segment to total", function() {
             equal(chart.segments.length, 4);
         });
+
+        test("doesn't fail with no points", function() {
+            createChart(makeSeries([]));
+            ok(true);
+        });
     })();
 
     // ------------------------------------------------------------
