@@ -7,16 +7,6 @@
     var module = angular.module('kendo.directives', []);
     var $parse, $timeout, $compile, $log;
 
-    function immediately(f) {
-        var save_timeout = $timeout;
-        $timeout = function(f) { return f() };
-        try {
-            return f();
-        } finally {
-            $timeout = save_timeout;
-        }
-    }
-
     var OPTIONS_NOW;
 
     var createDataSource = (function() {
