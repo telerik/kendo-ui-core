@@ -13,13 +13,21 @@
                 },
                 series: [{
                     type: "waterfall",
-                    data: [180, -42, -2, 23],
+                    data: [180, -60, -20, 10, 30],
                     labels: {
                         visible: true
                     }
                 }],
                 categoryAxis: {
-                    categories: ["In stock", "Damaged", "Reserved", "Refurbished"]
+                    categories: ["In stock", "Damaged", "Reserved", "In transit", "Refurbished"],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    majorGridLines: {
+                        visible: false
+                    }
                 }
             });
         }
