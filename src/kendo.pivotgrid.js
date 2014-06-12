@@ -486,9 +486,11 @@ var __meta__ = {
             var oldColumnsLength = membersCount(axes.columns.tuples);
 
             var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
+            data = prepareDataOnColumns(tuples, data);
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples);
 
             tuples = parseSource(sourceAxes.rows.tuples, rowMeasures);
+            data = prepareDataOnRows(tuples, data);
             var mergedRows = mergeTuples(axes.rows.tuples, tuples);
 
             axes.columns.tuples = mergedColumns.tuple;
@@ -919,11 +921,14 @@ var __meta__ = {
         var member = {
             name: "Measures",
             measure: true,
+            members: [],
+            dataIndex: tuple.dataIndex,
             children: [
-                tuple.members[index]
+                $.extend({ members: [], dataIndex: tuple.dataIndex }, tuple.members[index])
             ]
         };
         tuple.members.splice(index, 1, member);
+        tuple.dataIndex = undefined;
     }
 
     function parseSource(tuples, measures) {
@@ -936,6 +941,10 @@ var __meta__ = {
 
         for (var i = 0; i < tuples.length; i++) {
             var tuple = tuples[i];
+
+            //keep the old data index of the tuple
+            tuple.dataIndex = i;
+
             normalizeMeasures(tuple, measureIndex);
             var parentMember = findParentMember(tuple, map);
 
@@ -950,6 +959,74 @@ var __meta__ = {
             }
 
             addMembers(tuple.members, map);
+        }
+
+        return result;
+    }
+
+    function prepareDataOnRows(tuples, data) {
+        if (!tuples || !tuples.length) {
+            return data;
+        }
+
+        var result = [];
+        var indices = buildDataIndices(tuples);
+        var rowsLength = indices.length;
+        var columnsLength = Math.max(data.length / rowsLength, 1);
+        var rowIndex, columnIndex, targetIndex, sourceIndex;
+
+        for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
+            targetIndex = columnsLength * rowIndex;
+            sourceIndex = columnsLength * indices[rowIndex];
+            for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
+                result[targetIndex + columnIndex] = data[sourceIndex + columnIndex];
+            }
+        }
+
+        return result;
+    }
+
+    function prepareDataOnColumns(tuples, data) {
+        if (!tuples || !tuples.length) {
+            return data;
+        }
+
+        var result = [];
+        var indices = buildDataIndices(tuples);
+        var columnsLength = indices.length;
+        var rowsLength = Math.max(data.length / columnsLength, 1);
+        var columnIndex, rowIndex, dataIndex;
+
+        for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
+            dataIndex = columnsLength * rowIndex;
+            for (columnIndex = 0; columnIndex < columnsLength; columnIndex++) {
+                result[dataIndex + columnIndex] = data[indices[columnIndex] + dataIndex];
+            }
+        }
+
+        return result;
+    }
+
+    function buildDataIndices(tuples) {
+        tuples = tuples.slice();
+        var result = [];
+        var tuple = tuples.shift();
+        var idx, length, spliceIndex, children;
+
+        while (tuple) {
+            //required for multiple measures
+            if (tuple.dataIndex !== undefined) {
+                result.push(tuple.dataIndex);
+            }
+
+            spliceIndex = 0;
+            for (idx = 0, length = tuple.members.length; idx < length; idx++) {
+                children = tuple.members[idx].children;
+                [].splice.apply(tuples, [spliceIndex, 0].concat(children));
+                spliceIndex += children.length;
+            }
+
+            tuple = tuples.shift();
         }
 
         return result;

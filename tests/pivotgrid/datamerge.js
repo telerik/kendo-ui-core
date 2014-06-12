@@ -520,5 +520,259 @@
         equal(data[4].value, 3);
     });
 
+    test("initially expanded multiple members on column axis", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                ]
+                            }
+                        },
+                        data: [
+                            { value: "dim 0 level 0" },
+                            { value: "dim 0 level 1-0" },
+                            { value: "dim 1 level 1-0" },
+                            { value: "dim 2 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 2 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" }
+                        ]
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+        equal(data.length, 7);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-0, dim 1 level 1-0");
+        equal(data[3].value, "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0");
+        equal(data[4].value, "dim 0 level 1-0, dim 2 level 1-0");
+        equal(data[5].value, "dim 1 level 1-0");
+        equal(data[6].value, "dim 2 level 1-0");
+    });
+
+    test("initially expanded multiple members on row axis", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: {
+                                tuples: [
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                ]
+                            }
+                        },
+                        data: [
+                            { value: "dim 0 level 0" },
+                            { value: "dim 0 level 1-0" },
+                            { value: "dim 1 level 1-0" },
+                            { value: "dim 2 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 2 level 1-0" },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" }
+                        ]
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+        equal(data.length, 7);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-0, dim 1 level 1-0");
+        equal(data[3].value, "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0");
+        equal(data[4].value, "dim 0 level 1-0, dim 2 level 1-0");
+        equal(data[5].value, "dim 1 level 1-0");
+        equal(data[6].value, "dim 2 level 1-0");
+    });
+
+    test("initially expanded multiple members on row axis and multuple columns", function() {
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] }
+                                    ] }
+                                ]
+                            },
+                            rows: {
+                                tuples: [
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                    { members: [
+                                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] },
+                                        { name: "dim 2 level 1-0", parentName: "dim 2 level 0", children: [] }
+                                    ] },
+                                ]
+                            }
+                        },
+                        data: [
+                            { value: "col 0 dim 0 level 0" },
+                            { value: "col 1 dim 0 level 0" },
+                            { value: "col 0 dim 0 level 1-0" },
+                            { value: "col 1 dim 0 level 1-0" },
+                            { value: "col 0 dim 1 level 1-0" },
+                            { value: "col 1 dim 1 level 1-0" },
+                            { value: "col 0 dim 2 level 1-0" },
+                            { value: "col 1 dim 2 level 1-0" },
+                            { value: "col 0 dim 0 level 1-0, dim 1 level 1-0" },
+                            { value: "col 1 dim 0 level 1-0, dim 1 level 1-0" },
+                            { value: "col 0 dim 0 level 1-0, dim 2 level 1-0" },
+                            { value: "col 1 dim 0 level 1-0, dim 2 level 1-0" },
+                            { value: "col 0 dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" },
+                            { value: "col 1 dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" }
+                        ]
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var data = dataSource.data();
+        equal(data.length, 14);
+        equal(data[0].value, "col 0 dim 0 level 0");
+        equal(data[1].value, "col 1 dim 0 level 0");
+        equal(data[2].value, "col 0 dim 0 level 1-0");
+        equal(data[3].value, "col 1 dim 0 level 1-0");
+        equal(data[4].value, "col 0 dim 0 level 1-0, dim 1 level 1-0");
+        equal(data[5].value, "col 1 dim 0 level 1-0, dim 1 level 1-0");
+        equal(data[6].value, "col 0 dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0");
+        equal(data[7].value, "col 1 dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0");
+        equal(data[8].value, "col 0 dim 0 level 1-0, dim 2 level 1-0");
+        equal(data[9].value, "col 1 dim 0 level 1-0, dim 2 level 1-0");
+        equal(data[10].value, "col 0 dim 1 level 1-0");
+        equal(data[11].value, "col 1 dim 1 level 1-0");
+        equal(data[12].value, "col 0 dim 2 level 1-0");
+        equal(data[13].value, "col 1 dim 2 level 1-0");
+    });
 })();
 

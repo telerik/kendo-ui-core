@@ -161,7 +161,7 @@
         equal(result[0].name, "Customer");
         equal(result[0].caption, "Customer");
         equal(result[0].uniqueName, "[Customer]");
-        equal(result[0].defaultHierarchy, "[Customer]");
+        equal(result[0].defaultHierarchy, "[Customer].[Commute Distance]");
         ok(!result[0].description);
         equal(result[0].type, 3);
     });
