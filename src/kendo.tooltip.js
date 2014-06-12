@@ -188,10 +188,6 @@ var __meta__ = {
                 showIframe = that.options.iframe,
                 iframe;
 
-            that.angular("cleanup", function(){
-                return { elements: element };
-            });
-
             if (isPlainObject(contentOptions) && contentOptions.url) {
                 if (!("iframe" in that.options)) {
                     showIframe = !isLocalUrl(contentOptions.url);
