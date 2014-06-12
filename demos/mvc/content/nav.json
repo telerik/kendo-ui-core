@@ -5905,6 +5905,16 @@
             }
         },
         {
+            "text": "Horizontal Waterfall",
+            "url": "waterfall-charts/horizontal",
+            "title": {
+                "kendo-ui": "Demo for horizontal Kendo UI Waterfall Chart"
+            },
+            "meta": {
+                "kendo-ui": "This example illustrates how to set the Kendo UI Waterfall Chart orientation."
+            }
+        },
+        {
             "text": "Binding to local data",
             "url": "waterfall-charts/local-data-binding",
             "title": {

@@ -1,0 +1,66 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+        var requestData = [{
+            caption: "DNS Lookup",
+            elapsed: 20,
+            color: "#95c3cd"
+        }, {
+            caption: "Connecting",
+            elapsed: 122,
+            color: "#abc75b"
+        }, {
+            caption: "Sending",
+            elapsed: 30,
+            color: "#c6816f"
+        }, {
+            caption: "Waiting",
+            elapsed: 421,
+            color: "#968cb2"
+        }, {
+            caption: "Receiving",
+            elapsed: 357,
+            color: "#c0c0c0"
+        }, {
+            caption: "Total",
+            summary: "total",
+            color: "#2ba6ff"
+        }];
+
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    data: requestData
+                },
+                title: {
+                    text: "Request latency breakdown"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "horizontalWaterfall",
+                    field: "elapsed",
+                    categoryField: "caption",
+                    summaryField: "summary",
+                    colorField: "color"
+                }],
+                axisDefaults: {
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        format: "{0} ms"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
