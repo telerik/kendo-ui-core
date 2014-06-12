@@ -7481,24 +7481,21 @@ var __meta__ = {
 
             for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 var currentSeries = series[seriesIx];
-                var total = seriesTotal(currentSeries);
+                var total = 0;
                 var runningTotal = 0;
-                var baseline = 0;
 
                 for (var categoryIx = 0; categoryIx < totalCategories; categoryIx++) {
                     var data = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
                     var value = data.valueFields.value;
                     var summary = data.fields.summary;
 
-                    var from = baseline;
+                    var from = total;
                     var to;
-                    var isTotal = false;
                     if (summary) {
                         if (summary.toLowerCase() === "total") {
                             data.valueFields.value = total;
                             from = 0;
                             to = total;
-                            isTotal = true;
                         } else {
                             data.valueFields.value = runningTotal;
                             to = from - runningTotal;
@@ -7506,8 +7503,8 @@ var __meta__ = {
                         }
                     } else if (isNumber(value)) {
                         runningTotal += value;
-                        baseline += value;
-                        to = baseline;
+                        total += value;
+                        to = total;
                     }
 
                     callback(data, {
@@ -7517,7 +7514,6 @@ var __meta__ = {
                         seriesIx: seriesIx,
                         total: total,
                         runningTotal: runningTotal,
-                        isTotal: isTotal,
                         from: from,
                         to: to
                     });
@@ -7550,10 +7546,6 @@ var __meta__ = {
                     var prevPoint;
                     for (var pointIx = 0; pointIx < points.length; pointIx++) {
                         var point = points[pointIx];
-
-                        if (point.isTotal) {
-                            continue;
-                        }
 
                         if (point && prevPoint) {
                             var segment = new WaterfallSegment(prevPoint, point, currentSeries);

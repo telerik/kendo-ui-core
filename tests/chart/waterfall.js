@@ -32,7 +32,7 @@
         });
 
         test("total field is set on all points", function() {
-            assertFields("total", [10, 10, 10, 10]);
+            assertFields("total", [1, 3, 6, 10]);
         });
 
         test("runningTotal field is set on all points", function() {
@@ -119,19 +119,28 @@
         });
 
         test("total field is set on all points", function() {
-            assertFields("total", [10, 10, 10, 10, 10, 10, 10]);
+            assertFields("total", [0, 1, 3, 3, 6, 10, 10]);
         });
 
         test("total #1 is set as value", function() {
-            equal(chart.points[0].value, 10);
+            equal(chart.points[0].value, 0);
         });
 
         test("total #2 is set as value", function() {
-            equal(chart.points[3].value, 10);
+            equal(chart.points[3].value, 3);
         });
 
         test("total #3 is set as value", function() {
             equal(chart.points[6].value, 10);
+        });
+
+        test("total is not reset by running total", function() {
+            createChart(makeSeries([
+               { value: 1 }, { value: 2 }, { summary: "runningTotal" },
+               { value: 3 }, { value: 4 }, { summary: "total" }
+            ]));
+
+            equal(chart.points[5].value, 10);
         });
     })();
 
@@ -144,7 +153,7 @@
                { value: 1 }, { value: null }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("total", [3, 3, 3, 3]);
+            assertFields("total", [1, 1, 3, 3]);
         });
 
         test("ignores undefined values", function() {
@@ -152,7 +161,7 @@
                { value: 1 }, {}, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("total", [3, 3, 3, 3]);
+            assertFields("total", [1, 1, 3, 3]);
         });
 
         test("ignores NaN values", function() {
@@ -160,7 +169,7 @@
                { value: 1 }, { value: NaN }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("total", [3, 3, 3, 3]);
+            assertFields("total", [1, 1, 3, 3]);
         });
 
         test("ignores other values", function() {
@@ -168,7 +177,7 @@
                { value: 1 }, { value: "foo" }, { value: 2 }, { summary: "total" }
             ]));
 
-            assertFields("total", [3, 3, 3, 3]);
+            assertFields("total", [1, 1, 3, 3]);
         });
     })();
 
@@ -283,13 +292,10 @@
             assertSegment(3, 3, 4);
         });
 
-        test("creates segments between regular points and running totals", function() {
+        test("creates segments between regular points and totals", function() {
             assertSegment(1, 1, 2);
             assertSegment(2, 2, 3);
-        });
-
-        test("doesn't create segment to total", function() {
-            equal(chart.segments.length, 4);
+            assertSegment(4, 4, 5);
         });
 
         test("doesn't fail with no points", function() {
