@@ -637,7 +637,7 @@ var __meta__ = {
             }
 
             this.angular("cleanup", function(){
-                return { elements: content };
+                return { elements: content.children() };
             });
 
             kendo.destroy(this.element.children());
@@ -646,7 +646,7 @@ var __meta__ = {
 
             this.angular("compile", function(){
                 return {
-                    elements: content,
+                    elements: content.children(),
                     data: [ { dataItem: data || {} } ]
                 };
             });
