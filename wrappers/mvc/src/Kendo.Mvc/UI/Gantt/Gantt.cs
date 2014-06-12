@@ -12,9 +12,7 @@ namespace Kendo.Mvc.UI
     /// <summary>
     /// The server side wrapper for Kendo UI Gantt
     /// </summary>
-    /// <typeparam name="TModel"></typeparam>
-    public class Gantt<TModel> : WidgetBase
-        where TModel : class
+    public class Gantt : WidgetBase
     {
         private readonly IUrlGenerator urlGenerator;
 
