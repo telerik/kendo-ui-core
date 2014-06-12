@@ -523,7 +523,6 @@
     }
 
     var BEFORE = "$angular_beforeCreate";
-    var AFTER = "$angular_afterCreate";
 
     /* -----[ Customize widgets for Angular ]----- */
 
@@ -577,11 +576,8 @@
             self.$angular_scope = options.$angular[0];
             // call before/after hooks only for widgets instantiated by angular-kendo
             self.$angular_beforeCreate(element, options);
-            this.next();
-            self.$angular_afterCreate();
-        } else {
-            this.next();
         }
+        this.next();
     });
 
     // All event handlers that are strings are compiled the Angular way.
@@ -597,8 +593,6 @@
             }
         }
     });
-
-    defadvice("ui.Widget", AFTER, function(){});
 
     // most handers will only contain a kendoEvent in the scope.
     defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
