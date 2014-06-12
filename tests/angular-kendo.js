@@ -4,10 +4,8 @@
 
     "use strict";
 
-    var _UID_ = kendo.attr("uid");
-
     var module = angular.module('kendo.directives', []);
-    var $parse, $timeout, $compile = function compile(){ return compile }, $log;
+    var $parse, $timeout, $compile, $log;
 
     function immediately(f) {
         var save_timeout = $timeout;
@@ -607,7 +605,6 @@
         return function(ev) {
             var widget = ev.sender;
             var options = widget.options;
-            var dataSource = widget.dataSource;
             var cell, multiple, locals = { kendoEvent: ev }, elems, items, columns, colIdx;
 
             if (angular.isString(options.selectable)) {
@@ -620,8 +617,7 @@
             columns = locals.columns = [];
             for (var i = 0; i < elems.length; i++) {
                 var item = cell ? elems[i].parentNode : elems[i];
-                var itemUid = $(item).attr(_UID_);
-                var dataItem = dataSource.getByUid(itemUid);
+                var dataItem = widget.dataItem(item);
                 if (cell) {
                     if (angular.element.inArray(dataItem, items) < 0) {
                         items.push(dataItem);
