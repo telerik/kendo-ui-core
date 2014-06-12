@@ -168,9 +168,6 @@ var __meta__ = {
                     line: {
                         width: 1,
                         color: BLACK
-                    },
-                    labels: {
-                        position: "insideEnd"
                     }
                 },
                 bullet: {
