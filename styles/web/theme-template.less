@@ -426,30 +426,6 @@ html .km-pane-wrapper .k-header
     background-color: @button-background-color;
 }
 
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-	.composite-background(@disabled-gradient);
-}
-
-.k-button:focus:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-shadow);
-}
-
-.k-button:focus:active:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-active-shadow);
-}
-
 .k-draghandle
 {
     border-color: @draghandle-border-color;
@@ -620,6 +596,30 @@ html .km-pane-wrapper .k-header
     color: @primary-hover-text-color;
     border-color: @primary-hover-border-color;
     background-color: @primary-hover-background-color;
+}
+
+.k-button[disabled],
+.k-button.k-state-disabled,
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:active,
+.k-button.k-state-disabled:active
+{
+    color: @disabled-text-color;
+    border-color: @disabled-border-color;
+    background-color: @disabled-background-color;
+	.composite-background(@disabled-gradient);
+}
+
+.k-button:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-shadow);
+}
+
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-active-shadow);
 }
 
 .k-menu .k-state-hover>.k-state-active
