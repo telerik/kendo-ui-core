@@ -1835,7 +1835,7 @@ var __meta__ = {
                 this._buildRows(root, 0);
                 this._normalizeRows();
             } else {
-                this.rows.push(element("tr", null, kendo_th("")));
+                this.rows.push(element("tr", null, [ element("th", null) ]));
             }
 
             return element("thead", null, this.rows);
@@ -2142,7 +2142,7 @@ var __meta__ = {
                 this._buildRows(root, 0);
                 this._normalize();
             } else {
-                this.rows.push(element("tr", null, kendo_th("")));
+                this.rows.push(element("tr", null, [ element("td", null) ]));
             }
 
             return element("tbody", null, this.rows);
