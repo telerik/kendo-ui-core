@@ -5,37 +5,31 @@
     <script>
         var cashFlowData = [{
             period: "Beginning\nBalance",
-            amount: 5000
+            amount: 50000
         }, {
             period: "Jan",
-            amount: 2100
+            amount: 17000
         }, {
             period: "Feb",
-            amount: 1400
+            amount: 14000
         }, {
             period: "Mar",
-            amount: -1200
+            amount: -12000
         }, {
             period: "Q1\nFY13",
             summary: "runningTotal"
         }, {
             period: "Apr",
-            amount: -2200
+            amount: -22000
         }, {
             period: "May",
-            amount: 1000
+            amount: -18000
         }, {
             period: "Jun",
-            amount: -1800
+            amount: 10000
         }, {
             period: "Q2\nFY13",
             summary: "runningTotal"
-        }, {
-            period: "Jul",
-            amount: 1500
-        }, {
-            period: "Aug",
-            amount: 2000
         }, {
             period: "Ending\nBalance",
             summary: "total"
@@ -71,12 +65,12 @@
                     },
                     labels: {
                         visible: true,
-                        format: "{0:C0}"
+                        format: "C0"
                     }
                 }],
                 valueAxis: {
                     labels: {
-                        format: "{0:C0}"
+                        format: "C0"
                     }
                 }
             });
