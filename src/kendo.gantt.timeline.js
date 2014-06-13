@@ -984,6 +984,18 @@ var __meta__ = {
             this.content.find(DOT + GanttView.styles.dependencyHint).remove();
         },
 
+        _scrollTo: function(element) {
+            var elementOffset = element.offset();
+            var content = this.content;
+            var contentOffset = content.offset();
+            var scrollTop = elementOffset.top + content.scrollTop() - contentOffset.top;
+            var scrollLeft = elementOffset.left + content.scrollLeft() - contentOffset.left;
+
+            content
+                .scrollTop(scrollTop)
+                .scrollLeft(scrollLeft);
+        },
+
         _timeSlots: function() {
             return this._slots[this._slots.length - 1];
         },

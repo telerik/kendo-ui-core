@@ -1250,6 +1250,8 @@ var __meta__ = {
                 dataSource.insert(index, task);
             }
 
+            this._scrollToUid = task.uid;
+
             this._syncDataSource();
         },
 
@@ -1294,6 +1296,8 @@ var __meta__ = {
 
             var dataSource = this.dataSource;
             var taskTree = dataSource.taskTree();
+            var view;
+            var selector;
 
             if (this.trigger("dataBinding")) {
                 return;
@@ -1303,6 +1307,16 @@ var __meta__ = {
             this.list._render(taskTree);
             this.timeline._render(taskTree);
             this.timeline._renderDependencies(this.dependencies.view());
+
+            if (this._scrollToUid) {
+                view = this.timeline.view();
+                selector = "[data-uid='" + this._scrollToUid + "']";
+
+                view._scrollTo(view.content.find(selector));
+                this.select(selector);
+            }
+
+            this._scrollToUid = null;
 
             this.trigger("dataBound");
         },
