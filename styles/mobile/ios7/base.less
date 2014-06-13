@@ -23,6 +23,7 @@
 }
 
 .km-ios7 .km-navbar,
+.km-ios7 .k-toolbar,
 .km-ios7 .km-tabstrip
 {
     background-clip: border-box;
@@ -61,7 +62,7 @@
 }
 
 .km-ios7 .km-navbar,
-.km-ios7 .km-toolbar,
+.km-ios7 .k-toolbar,
 .km-ios7 .km-tabstrip
 {
     border-style: solid;
@@ -69,14 +70,14 @@
 }
 
 .km-ios7 .km-footer .km-navbar,
-.km-ios7 .km-footer .km-toolbar,
+.km-ios7 .km-footer .k-toolbar,
 .km-ios7 .km-tabstrip
 {
     border-width: @ios7-border-width 0 0;
 }
 
 .km-ios7 .km-navbar,
-.km-ios7 .km-toolbar,
+.km-ios7 .k-toolbar,
 .km-ios7 .km-tabstrip,
 .km-ios7 .km-tabstrip .km-button
 {
@@ -365,6 +366,7 @@
 .km-ios7 .km-tabstrip .km-state-active,
 .km-ios7 li.km-state-active .km-listview-link,
 .km-ios7 li.km-state-active .km-listview-label,
+.km-ios7 .k-toolbar > .km-state-active,
 .km-ios7 .km-leftitem .km-button.km-state-active,
 .km-ios7 .km-rightitem .km-button.km-state-active
 {
@@ -376,6 +378,12 @@
 {
     background: none;
     opacity: .4;
+}
+
+.km-ios7 .k-toolbar > .km-state-active
+{
+    background: none;
+    -webkit-text-stroke: .5px currentcolor ;
 }
 
 /* transitions */

@@ -32,6 +32,8 @@ var __meta__ = {
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
 
+        ICON = "k-icon",
+        ICON_PREFIX = "k-i-",
         BUTTON_ICON = "k-button-icon",
         BUTTON_ICON_TEXT = "k-button-icontext",
 
@@ -173,7 +175,7 @@ var __meta__ = {
                 }
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor k-button"></div>',
+            overflowAnchor: '<div class="k-overflow-anchor k-button km-icon"></div>',
 
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
@@ -274,7 +276,7 @@ var __meta__ = {
             if (spriteCssClass || imageUrl || icon) {
                 isEmpty = true;
 
-                element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
+                element.contents().not("span.k-sprite,span." + ICON + ",img.k-image").each(function(idx, el){
                     if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
                     }
@@ -288,11 +290,11 @@ var __meta__ = {
             }
 
             if (icon) {
-                span = element.children("span.k-icon").first();
+                span = element.children("span." + ICON).first();
                 if (!span[0]) {
-                    span = $('<span class="k-icon"></span>').prependTo(element);
+                    span = $('<span class="' + ICON + '"></span>').prependTo(element);
                 }
-                span.addClass("k-i-" + icon);
+                span.addClass(ICON_PREFIX + icon);
             } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {
@@ -339,7 +341,18 @@ var __meta__ = {
                 this.uid = kendo.guid();
                 element.attr(kendo.attr("uid"), this.uid);
 
-                that.animation = !!that.element.closest(".km-root")[0] ? { open: { effects: "fade" } } : {};
+                that.isMobile = !!that.element.closest(".km-root")[0];
+                that.animation = that.isMobile ? { open: { effects: "fade" } } : {};
+
+                if (that.isMobile) {
+                    element.addClass("km-widget");
+                    ICON = "km-icon";
+                    ICON_PREFIX = "km-";
+                    BUTTON = "km-button";
+                    BUTTON_GROUP = "km-buttongroup km-widget";
+                    STATE_ACTIVE = "km-state-active";
+                    STATE_DISABLED = "km-state-disabled";
+                }
 
                 if(options.resizable) {
                     that._renderOverflow();
@@ -409,7 +422,8 @@ var __meta__ = {
 
                 $.extend(options, {
                     uid: kendo.guid(),
-                    animation: that.animation
+                    animation: that.animation,
+                    mobile: that.isMobile
                 });
 
                 if (template && !overflowTemplate) {
