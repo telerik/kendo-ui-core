@@ -97,7 +97,7 @@
 }
 
 .k-overflow-container .k-button,
-.k-list-container .k-button
+.k-split-container .k-button
 {
     text-align: left;
     display: block;
@@ -115,8 +115,7 @@
     display: block;
 }
 
-.k-overflow-container .k-button-group,
-.k-overflow-container .k-split-button
+.k-overflow-container .k-overflow-group
 {
     border-width: 1px 0;
     border-style: solid;
@@ -125,15 +124,13 @@
     margin: 1px 0;
 }
 
-.k-overflow-hidden
+.k-overflow-container .k-overflow-hidden
 {
     display: none;
 }
 
 .k-overflow-container .k-overflow-first-visible,
-.k-overflow-container .k-button-group + .k-button-group,
-.k-overflow-container .k-split-button + .k-button-group,
-.k-overflow-container .k-button-group + .k-split-button
+.k-overflow-container .k-overflow-group + .k-overflow-group
 {
     border-top: 0;
     margin-top: 0;

@@ -87,7 +87,7 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function (options) {
-                    var element = $('<li class="' + BUTTON_GROUP + '"></li>');
+                    var element = $('<li class="' + BUTTON_GROUP + ' k-overflow-group"></li>');
                     components.buttonGroup.base(options, components.button.overflow, element);
 
                     if (options.id) {
