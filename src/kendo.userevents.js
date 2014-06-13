@@ -43,7 +43,7 @@ var __meta__ = {
         "touch": 0,
         "mouse": 9,
         "pointer": 9
-    }
+    };
 
     function touchDelta(touch1, touch2) {
         var x1 = touch1.x.location,
