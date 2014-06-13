@@ -256,6 +256,16 @@
         ok(panelbar.element.find(".cssClass")[0]);
     });
 
+    test("clearSelection removes the PanelBar selection", 2, function () {
+        panelbar = new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
+
+        panelbar.select("li");
+        ok(panelbar.select());
+
+        panelbar.clearSelection();
+        ok(!panelbar.select()[0]);
+    });
+
     test("Adding dynamic content element renders properly on root and inner levels", function () {
         panelbar = new PanelBar(empty_panelbar);
 
