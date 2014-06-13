@@ -645,9 +645,12 @@ var __meta__ = {
             content.empty().html(html);
 
             this.angular("compile", function(){
+                var a = [];
+                for (var i = content.length; --i >= 0;)
+                    a.push({ dataItem: data });
                 return {
-                    elements: content,
-                    data: [ { dataItem: data || {} } ]
+                    elements: content.children(),
+                    data: a
                 };
             });
 

@@ -32,7 +32,7 @@
     $.mockjax({
         url: "ajax-template.html",
         response: function() {
-            this.responseText = '{{ hello }}';
+            this.responseText = '<div>{{ hello }}</div>';
         }
     });
 
@@ -620,7 +620,7 @@
             content: {
                 url: "data.json",
                 dataType: "json",
-                template: "{{ dataItem.user.firstName }} {{ dataItem.user.lastName }}"
+                template: "<div>{{ dataItem.user.firstName }} {{ dataItem.user.lastName }}</div>"
             },
             refresh: function() {
                 var el = this.element;
