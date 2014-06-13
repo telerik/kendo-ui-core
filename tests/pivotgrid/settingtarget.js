@@ -427,4 +427,20 @@
         equal(children.first().text(), "foo");
     });
 
+    test("clicking delete button on the item removes it", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource
+        });
+
+        var children = $(div).children().find(".k-group-delete:first").click();
+
+        equal(dataSource.columns().length, 1);
+        equal(dataSource.columns()[0].name, "bar");
+    });
+
+
 })();

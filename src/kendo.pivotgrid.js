@@ -23,6 +23,7 @@ var __meta__ = {
         extend = $.extend,
         CHANGE = "change",
         DIV = "<div/>",
+        NS = ".kendoPivotGrid",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
@@ -1647,13 +1648,23 @@ var __meta__ = {
             this.dataSource.bind("change", $.proxy(this.refresh, this));
 
             if (!options.template) {
-                this.options.template = "<div data-" + kendo.ns + "name='${data.name || data}'>${data.name || data}</div>";
+                this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
+                    '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-group-delete"></span></a></div>';
             }
 
             this.template = kendo.template(this.options.template);
             this.emptyTemplate = kendo.template(this.options.emptyTemplate);
 
             this._sortable();
+
+            var that = this;
+
+            this.element.on("click" + NS, ".k-group-delete", function() {
+                var name = $(this).closest("[" + kendo.attr("name") + "]").attr(kendo.attr("name"));
+                if (name) {
+                    that.remove(name);
+                }
+            });
 
             this.refresh();
         },
