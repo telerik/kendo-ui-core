@@ -436,33 +436,44 @@
         };
     }]);
 
-    // create directives for every widget.
-    (function(){
-        function createDirectives(prefix) {
-            function make(name, widget) {
-                module.directive(name, [
-                    "directiveFactory",
-                    function(directiveFactory) {
-                        return directiveFactory.create(widget, name);
-                    }
-                ]);
-            }
-            return function(namespace) {
-                angular.forEach(namespace, function(value, key) {
-                    if (key.match(/^[A-Z]/) && key !== 'Widget') {
-                        var widget = "kendo" + prefix + key;
-                        var shortcut = (prefix + key).toLowerCase();
-                        shortcut = "kendo" + shortcut.charAt(0).toUpperCase() + shortcut.substr(1);
-                        make(widget, widget);
-                        if (shortcut != widget) {
-                            make(shortcut, widget);
-                        }
-                    }
-                });
-            };
+    //throw "WAT";
+
+    function createDirectives(klass, isMobile) {
+        function make(directiveName, widgetName) {
+            module.directive(directiveName, [
+                "directiveFactory",
+                function(directiveFactory) {
+                    return directiveFactory.create(widgetName, directiveName);
+                }
+            ]);
         }
-        angular.forEach([ kendo.ui, kendo.dataviz && kendo.dataviz.ui ], createDirectives(""));
-        angular.forEach([ kendo.mobile && kendo.mobile.ui ], createDirectives("Mobile"));
+
+        var name = isMobile ? "Mobile" : "";
+        name += klass.fn.options.name;
+        var shortcut = "kendo" + name.charAt(0) + name.substr(1).toLowerCase();
+        name = "kendo" + name;
+
+        // here name should be like kendoMobileListView so kendo-mobile-list-view works,
+        // and shortcut like kendoMobilelistview, for kendo-mobilelistview
+
+        make(name, name);
+        if (shortcut != name) {
+            make(shortcut, name);
+        }
+    }
+
+    (function(){
+        function doAll(isMobile) {
+            return function(namespace) {
+                angular.forEach(namespace, function(value) {
+                    if (value.fn && value.fn.options && value.fn.options.name && (/^[A-Z]/).test(value.fn.options.name)) {
+                        createDirectives(value, isMobile);
+                    }
+                })
+            }
+        }
+        angular.forEach([ kendo.ui, kendo.dataviz && kendo.dataviz.ui ], doAll(false));
+        angular.forEach([ kendo.mobile && kendo.mobile.ui ], doAll(true));
     })();
 
     /* -----[ utils ]----- */
@@ -501,6 +512,8 @@
         }
     }
 
+    var pendingPatches = [];
+
     // defadvice will patch a class' method with another function.  That
     // function will be called in a context containing `next` (to call
     // the next method) and `object` (a reference to the original
@@ -518,13 +531,13 @@
                 x = x[a.shift()];
             }
             if (!x) {
-                //console.log("Can't advice " + klass + "::" + methodName);
-                return;
+                pendingPatches.push([ klass, methodName, func ]);
+                return false;
             }
-            klass = x;
+            klass = x.prototype;
         }
-        var origMethod = klass.prototype[methodName];
-        klass.prototype[methodName] = function() {
+        var origMethod = klass[methodName];
+        klass[methodName] = function() {
             var self = this, args = arguments;
             return func.apply({
                 self: self,
@@ -533,7 +546,16 @@
                 }
             }, args);
         };
+        return true;
     }
+
+    defadvice(kendo.ui, "plugin", function(klass, register, prefix){
+        this.next();
+        pendingPatches = $.grep(pendingPatches, function(args){
+            return !defadvice.apply(null, args);
+        });
+        createDirectives(klass, prefix == "Mobile");
+    });
 
     /* -----[ Customize widgets for Angular ]----- */
 

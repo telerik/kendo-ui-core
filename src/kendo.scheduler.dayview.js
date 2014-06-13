@@ -1630,12 +1630,14 @@ var __meta__ = {
         MultiDayView: MultiDayView,
         DayView: MultiDayView.extend({
             options: {
+                name: "DayView",
                 title: "Day"
             },
             name: "day"
         }),
         WeekView: MultiDayView.extend({
             options: {
+                name: "WeekView",
                 title: "Week",
                 selectedDateFormat: "{0:D} - {1:D}"
             },
@@ -1655,6 +1657,7 @@ var __meta__ = {
         }),
         WorkWeekView: MultiDayView.extend({
             options: {
+                name: "WorkWeekView",
                 title: "Work Week",
                 selectedDateFormat: "{0:D} - {1:D}"
             },
