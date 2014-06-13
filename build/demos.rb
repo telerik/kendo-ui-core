@@ -399,7 +399,7 @@ namespace :demos do
         patched_web_config('dist/demos/production/Web.config', 'demos/mvc/Web.config', {
             :cdn_root => CDN_ROOT + VERSION,
             :themebuilder_root => THEME_BUILDER_ROOT,
-            :dojo_root => 'http://trykendoui.telerik.com/',
+            :dojo_root => 'http://dojo.telerik.com/',
             :dojo_runner => 'http://runner.telerik.io'
         })
     ]
