@@ -713,6 +713,7 @@
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
     <Compile Include="UI\Gantt\Html\GanttHtmlBuilder.cs" />
+    <Compile Include="UI\Gantt\IGanttTask.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceSchemaBuilder.cs" />

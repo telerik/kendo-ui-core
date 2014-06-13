@@ -199,6 +199,7 @@
     <Compile Include="Controllers\Financial\IndexController.cs" />
     <Compile Include="Controllers\Financial\PanesController.cs" />
     <Compile Include="Controllers\Financial\VirtualizationController.cs" />
+    <Compile Include="Controllers\Gantt\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Linear_Gauge\Scale_OptoinsController.cs" />
     <Compile Include="Controllers\Line_Charts\Logarithmic_AxisController.cs" />
@@ -618,6 +619,13 @@
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Diagram\DiagramNode.cs" />
+    <Compile Include="Models\GanttDependency.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GanttTask.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gantt\TaskViewModel.cs" />
     <Compile Include="Models\Map\Marker.cs" />
     <Compile Include="Models\Map\MapDataRepository.cs" />
     <Compile Include="Models\MeetingAttendee.cs">
@@ -2469,6 +2477,7 @@
     <Content Include="Views\Shared\_MobileNavigation.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Source.cshtml" />
+    <Content Include="Areas\razor\Views\gantt\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

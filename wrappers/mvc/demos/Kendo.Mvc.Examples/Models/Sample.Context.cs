@@ -42,5 +42,7 @@ namespace Kendo.Mvc.Examples.Models
         public DbSet<Territory> Territories { get; set; }
         public DbSet<Weather> Weathers { get; set; }
         public DbSet<Stock> Stocks { get; set; }
+        public DbSet<GanttDependency> GanttDependencies { get; set; }
+        public DbSet<GanttTask> GanttTasks { get; set; }
     }
 }

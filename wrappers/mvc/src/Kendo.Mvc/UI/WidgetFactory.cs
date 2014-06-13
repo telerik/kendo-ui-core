@@ -1301,9 +1301,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual GanttBuilder Gantt()
+        public virtual GanttBuilder<T> Gantt<T>() where T : class, IGanttTask
         {
-            return new GanttBuilder(new Gantt(ViewContext, Initializer, UrlGenerator));
+            return new GanttBuilder<T>(new Gantt<T>(ViewContext, Initializer, UrlGenerator));
         }
         
         /// <summary>

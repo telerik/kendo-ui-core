@@ -7,14 +7,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the Kendo Gantt for ASP.NET MVC.
     /// </summary>
-    public class GanttBuilder: WidgetBuilderBase<Gantt, GanttBuilder>, IHideObjectMembers
+    public class GanttBuilder<TModel> : WidgetBuilderBase<Gantt<TModel>, GanttBuilder<TModel>> where TModel : class, IGanttTask
     {
-        private readonly Gantt container;
+        private readonly Gantt<TModel> container;
         /// <summary>
         /// Initializes a new instance of the <see cref="Gantt"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public GanttBuilder(Gantt component)
+        public GanttBuilder(Gantt<TModel> component)
             : base(component)
         {
             container = component;
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// data source is fired. By default the widget will bind to the data source specified in the configuration.
         /// </summary>
         /// <param name="value">The value that configures the autobind.</param>
-        public GanttBuilder AutoBind(bool value)
+        public GanttBuilder<TModel> AutoBind(bool value)
         {
             container.AutoBind = value;
 
@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GanttBuilder Events(Action<GanttEventBuilder> configurator)
+        public GanttBuilder<TModel> Events(Action<GanttEventBuilder> configurator)
         {
 
             configurator(new GanttEventBuilder(Component.Events));

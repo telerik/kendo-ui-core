@@ -36,6 +36,9 @@
         <AssociationConnector Association="SampleModel.CustomerCustomerDemo" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.EmployeeTerritories" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SampleModel.Stock" Width="1.5" PointX="10.431285386174583" PointY="20.458878616084753" />
+        <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="8.375" PointY="15.5" />
+        <EntityTypeShape EntityType="SampleModel.GanttTask" Width="1.5" PointX="10.125" PointY="15.5" />
+        <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
