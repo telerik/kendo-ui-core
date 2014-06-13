@@ -786,7 +786,7 @@ var __meta__ = {
             hourSpan: 1,
             snap: true,
             height: 600,
-            listWidth: 500
+            listWidth: "30%"
         },
 
         select: function(value) {
@@ -1003,14 +1003,15 @@ var __meta__ = {
         _list: function() {
             var that = this;
             var ganttStyles = Gantt.styles;
-            var element = this.wrapper.find(DOT + ganttStyles.list + " > div");
+            var listWrapper = this.wrapper.find(DOT + ganttStyles.list);
+            var element = listWrapper.find("> div");
             var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actions + " > li");
             var options = extend({}, {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
                 selectable: this.options.selectable,
                 editable: this.options.editable,
-                listWidth: this.options.listWidth
+                listWidth: listWrapper.outerWidth()
             });
 
             this.list = new kendo.ui.GanttList(element, options);

@@ -276,7 +276,7 @@
     test("list's wrapper is created with default width", function () {
         var gantt = new Gantt(element);
 
-        equal(gantt.wrapper.find(".k-gantt-treelist").width(), gantt.options.listWidth);
+        equal(gantt.wrapper.find(".k-gantt-treelist").css("width"), gantt.options.listWidth);
     });
 
     test("list's wrapper is created with width from options", function () {
