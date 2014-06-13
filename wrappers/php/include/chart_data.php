@@ -690,4 +690,27 @@ function ozone_oncentration_remote() {
     );
 }
 
+function task_completeness() {
+    return array(
+        array('fromA' => 0, 'toA' => 10, 'fromB' => 0, 'toB' => 30, 'day' => 'Monday'),
+        array('fromA' => 10, 'toA' => 30, 'fromB' => 30, 'toB' => 45, 'day' => 'Tuesday'),
+        array('fromA' => 30, 'toA' => 40, 'fromB' => 45, 'toB' => 60, 'day' => 'Wednesday'),
+        array('fromA' => 40, 'toA' => 60, 'fromB' => 60, 'toB' => 80, 'day' => 'Thursday'),
+        array('fromA' => 60, 'toA' => 100, 'fromB' => 80, 'toB' => 100, 'day' => 'Friday'),
+    );
+}
+
+function download_speeds() {
+    return array(
+        array('wifiFrom' => 30, 'wifiTo' => 35, 'opticalFrom' => 80, 'opticalTo' => 90, 'day' => 'Monday'),
+        array('wifiFrom' => 60, 'wifiTo' => 70, 'opticalFrom' => 60, 'opticalTo' => 70, 'day' => 'Tuesday'),
+        array('wifiFrom' => 50, 'wifiTo' => 60, 'opticalFrom' => 70, 'opticalTo' => 100, 'day' => 'Wednesday'),
+        array('wifiFrom' => 30, 'wifiTo' => 50, 'opticalFrom' => 100, 'opticalTo' => 140, 'day' => 'Thursday'),
+        array('wifiFrom' => 40, 'wifiTo' => 50, 'opticalFrom' => 90, 'opticalTo' => 110, 'day' => 'Friday'),
+        array('wifiFrom' => 50, 'wifiTo' => 60, 'opticalFrom' => 80, 'opticalTo' => 100, 'day' => 'Saturday'),
+        array('wifiFrom' => 30, 'wifiTo' => 40, 'opticalFrom' => 50, 'opticalTo' => 70, 'day' => 'Sunday'),
+
+    );
+}
+
 ?>
