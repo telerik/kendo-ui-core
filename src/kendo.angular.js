@@ -2,7 +2,6 @@
     define([ "./kendo.core" ], f);
 })(function() {
 
-
 (function ($, angular, undefined) {
     "use strict";
 
@@ -467,8 +466,8 @@
                     if (value.fn && value.fn.options && value.fn.options.name && (/^[A-Z]/).test(value.fn.options.name)) {
                         createDirectives(value, isMobile);
                     }
-                })
-            }
+                });
+            };
         }
         angular.forEach([ kendo.ui, kendo.dataviz && kendo.dataviz.ui ], doAll(false));
         angular.forEach([ kendo.mobile && kendo.mobile.ui ], doAll(true));
@@ -717,7 +716,7 @@
         });
     }
 
- })(window.kendo.jQuery, window.angular);
+})(window.kendo.jQuery, window.angular);
 
 return window.kendo;
 

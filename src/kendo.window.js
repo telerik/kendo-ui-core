@@ -646,8 +646,9 @@ var __meta__ = {
 
             this.angular("compile", function(){
                 var a = [];
-                for (var i = content.length; --i >= 0;)
+                for (var i = content.length; --i >= 0;) {
                     a.push({ dataItem: data });
+                }
                 return {
                     elements: content.children(),
                     data: a
