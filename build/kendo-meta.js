@@ -406,7 +406,40 @@ function cachedProperty(name, fetcher) {
 }
 
 function cloneAST(ast) {
-    return ast.transform(new U2.TreeTransformer(null, function(){}));
+    var labels = [];
+    var tw = new U2.TreeTransformer(function(node, descend) {
+        if (node instanceof U2.AST_Label) {
+            return node;
+        }
+        var clone = node.clone();
+        if (node instanceof U2.AST_LabeledStatement) {
+            clone.label = node.label.clone();
+            clone.label.references = node.label.references;
+            labels.push(clone.label);
+            descend(clone, this);
+            labels.pop();
+            return clone;
+        }
+        if ((node instanceof U2.AST_Break ||
+             node instanceof U2.AST_Continue) && node.label) {
+            clone.label = clone.label.clone();
+            for (var i = labels.length; --i >= 0;) {
+                var target = labels[i];
+                if (target.name == clone.label.name) {
+                    clone.label.thedef = target;
+                    target.references.forEach(function(ref, i){
+                        if (ref === node) {
+                            target.references[i] = clone;
+                        }
+                    });
+                }
+            }
+            return clone;
+        }
+        descend(clone, this);
+        return clone;
+    });
+    return ast.transform(tw);
 }
 
 function walkAST(ast, walker) {
