@@ -242,6 +242,9 @@
     <Compile Include="Controllers\Radar_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Radial_Gauge\IndexController.cs" />
     <Compile Include="Controllers\Radial_Gauge\Scale_OptionsController.cs" />
+    <Compile Include="Controllers\Range_Bar_Charts\IndexController.cs" />
+    <Compile Include="Controllers\Range_Bar_Charts\Local_Data_BindingController.cs" />
+    <Compile Include="Controllers\Range_Bar_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Scatter_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\Scatter_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\Scatter_Charts\IndexController.cs" />
@@ -600,6 +603,7 @@
     <Compile Include="Models\Chart\ChartDataRepository.Radar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Stock.cs" />
     <Compile Include="Models\Chart\CorporateData.cs" />
+    <Compile Include="Models\Chart\DownloadSpeed.cs" />
     <Compile Include="Models\Diagram\DiagramDataRepository.cs" />
     <Compile Include="Models\Chart\SiteOmptimizationItem.cs" />
     <Compile Include="Models\Chart\DatePoint.cs" />
@@ -631,6 +635,7 @@
     <Compile Include="Models\MeetingAttendee.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RangeBarChartsLocalDataViewModel.cs" />
     <Compile Include="Models\Stock.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
@@ -1131,6 +1136,7 @@
     <Content Include="Areas\aspx\Views\window\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\window\right_to_left_support.aspx" />
     <Content Include="Areas\aspx\Views\diagram\layout.aspx" />
+    <Content Include="Areas\razor\Views\range_bar_charts\index.cshtml" />
     <None Include="Areas\razor\Views\diagram\index.cshtml" />
     <None Include="Areas\razor\Views\diagram\layout.cshtml" />
     <Content Include="Content\dataviz\dashboards\area-chart.png" />
@@ -2478,6 +2484,8 @@
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_Source.cshtml" />
     <Content Include="Areas\razor\Views\gantt\index.cshtml" />
+    <Content Include="Areas\razor\Views\range_bar_charts\local_data_binding.cshtml" />
+    <Content Include="Areas\razor\Views\range_bar_charts\remote_data_binding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

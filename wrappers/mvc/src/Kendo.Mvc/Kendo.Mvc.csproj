@@ -410,12 +410,15 @@
     <Compile Include="UI\Chart\Enums\ChartStackType.cs" />
     <Compile Include="UI\Chart\Enums\ChartLegendOrientation.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartRangeBarSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLogarithmicAxisSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartRangeBarSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartRadarAreaSeries.cs" />
     <Compile Include="UI\Chart\Serialization\ChartRadarAreaSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ChartRangeBarSeries.cs" />
     <Compile Include="UI\Chart\Series\ICategoricalErrorBarsSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeriesBase.cs" />
@@ -449,6 +452,7 @@
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializerBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartRadarLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Series\IChartRadarLineSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartRangeBarSeries.cs" />
     <Compile Include="UI\Chart\Series\ILineSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartScatterLineSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartScatterLineSeriesBuilder.cs" />

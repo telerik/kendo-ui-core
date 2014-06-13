@@ -1139,6 +1139,9 @@
     <Content Include="Views\ThemeBuilder\MobileIndex.cshtml" />
     <Content Include="Views\Shared\Navigation.cshtml" />
     <Content Include="Views\demos\integration\handlebars.cshtml" />
+    <Content Include="Views\demos\range-bar-charts\index.cshtml" />
+    <Content Include="Views\demos\range-bar-charts\local-data-binding.cshtml" />
+    <Content Include="Views\demos\range-bar-charts\remote-data-binding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />

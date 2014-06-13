@@ -1,0 +1,32 @@
+﻿<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Average Weather Conditions"
+                },
+                series: [{
+                    type: "rangeColumn",
+                    data: [[5, 11], [5, 13], [7, 15], [10, 19], [13, 23], [17, 28],
+                           [20, 30], [20, 30], [17, 26], [13, 22], [9, 16], [6, 13]]
+                }],
+                categoryAxis: {
+                    categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                },
+                tooltip: {
+                    visible: true,
+                    template: "Avg Min Temp : #= value.from # °C <br>" +
+                              "Avg Max Temp : #= value.to # °C"
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

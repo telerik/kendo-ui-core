@@ -5813,6 +5813,65 @@
     "category": "Data Visualization"
   },
   {
+	"text": "Range Bar Charts",
+    "pro": "true",
+    "api": "dataviz/chart",
+	"documentation": {
+       "kendo-ui": "getting-started/dataviz/chart/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/chart/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/chart/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/chart/overview"
+    },
+	"forum": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/charts",
+       "aspnet-mvc": "aspnet-mvc/chart",
+       "jsp-ui": "jsp/chart",
+       "php-ui": "php/chart"
+    },
+	"items": [
+		{
+			"text": "Basic usage",
+			"url": "range-bar-charts/index",
+			"title": {
+				"kendo-ui": "Demo for Kendo UI Range Bar Chart"
+			},
+			"meta": {
+				"kendo-ui": "This example illustrates the basic usage of Kendo UI Range Bar Chart which enables the user to show customized range bar charts."
+			}
+		},
+		{
+			"text": "Binding to local data",
+			"url": "range-bar-charts/local-data-binding",
+			"title": {
+				"kendo-ui": "Local data-binding example | Kendo UI Range Bar Charts"
+			},
+			"meta": {
+				"kendo-ui": "This demo shows how the local data-binding is supported in Kendo UI Range Bar Charts. Use the demo source code to try the feature of the widget."
+			}
+		},
+		{
+			"text": "Binding to remote data",
+			"url": "range-bar-charts/remote-data-binding",
+			"title": {
+				"kendo-ui": "Binding to remote data demo | Kendo UI HTML5 jQuery Range Bar Charts"
+			},
+			"meta": {
+				"kendo-ui": "This demo shows how Kendo UI Range Bar Chart widget can be bound to remote data to produce high-performance report in your business app."
+			},
+			"requiresServer": "true"
+		}
+	],
+	"spriteCssClass": "chartRangeBarIcon",
+	"name": "range-bar-charts",
+	"category": "Data Visualization"
+  },
+  {
     "text": "Scatter Charts",
     "pro": "true",
     "api": "dataviz/chart",

@@ -7,6 +7,7 @@
         TOLERANCE = 1,
         MARGIN = 10,
         GAP = 4,
+        SPACING = 1,
         chartSeries;
 
     function moduleSetup() {
@@ -28,7 +29,8 @@
                 name: "Value A",
                 type: "bar",
                 data: [100, 200, 300],
-                gap: GAP
+                gap: GAP,
+                spacing: SPACING
             }, {
                 name: "Value B",
                 type: "bar",
@@ -38,11 +40,34 @@
                 name: "Value A",
                 type: "column",
                 data: [100, 200, 300],
-                gap: GAP
+                gap: GAP,
+                spacing: SPACING
             }, {
                 name: "Value B",
                 type: "column",
                 data: [10, 20, 30]
+            }],
+            rangeColumnSeriesData = [{
+                name: "Value A",
+                type: "rangeColumn",
+                data: [[100, 110], [200, 220], [300, 330]],
+                gap: GAP,
+                spacing: SPACING
+            }, {
+                name: "Value B",
+                type: "rangeColumn",
+                data: [[10, 11], [20, 22], [30, 33]]
+            }],
+            rangeBarSeriesData = [{
+                name: "Value A",
+                type: "rangeBar",
+                data: [[100, 110], [200, 220], [300, 330]],
+                gap: GAP,
+                spacing: SPACING
+            }, {
+                name: "Value B",
+                type: "rangeBar",
+                data: [[10, 11], [20, 22], [30, 33]]
             }],
             lineSeriesData = [{
                 name: "Value A",
@@ -1027,7 +1052,142 @@
             equal(chartSeries.options.gap, GAP);
         });
 
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
         assertStackedSeries("column");
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / Range Column series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea(rangeColumnSeriesData);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("value axis is vertical", function() {
+            ok(valueAxis.options.vertical);
+        });
+
+        test("category axis is horizontal", function() {
+            ok(!categoryAxis.options.vertical);
+        });
+
+        test("creates range bar chart", function() {
+            ok(chartSeries instanceof dataviz.RangeBarChart);
+        });
+
+        test("groups range column series into range bar chart", function() {
+            equal(chartSeries.options.series.length, 2);
+        });
+
+        test("sets axis min/max to series limits", 2, function() {
+            stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                function() {
+                    equal(this.valueAxisRangeTracker.query().min, 10);
+                    equal(this.valueAxisRangeTracker.query().max, 330);
+                },
+                function() {
+                    createPlotArea(rangeColumnSeriesData);
+                }
+            );
+        });
+
+        test("sets named default axis min/max to series limits (expl. axis)", 2, function() {
+            assertAxisRange("valueAxis", 0, 120,
+                [{ type: "rangeColumn", data: [[10, 100]], axis: "A" }],
+                { valueAxis: { name: "A" } }
+            );
+        });
+
+        test("sets named primary axis min/max to series limits (impl. axis)", function() {
+            assertAxisRange("valueAxis", 0, 120,
+                [{ type: "rangeColumn", data: [[10, 100]] }],
+                { valueAxis: { name: "A" } }
+            );
+        });
+
+        test("sets named default axis min/max to series limits (expl. axis, 0 < value < 1)", 2, function() {
+            assertAxisRange("valueAxis", 0, .12,
+                [{ type: "rangeColumn", data: [[0, .1]], axis: "A" }],
+                { valueAxis: { name: "A" } }
+            );
+        });
+
+        test("sets named primary axis min/max to series limits (impl. axis, 0 < value < 1)", 2, function() {
+            assertAxisRange("valueAxis", 0, .12,
+                [{ type: "rangeColumn", data: [[0, .1]] }],
+                { valueAxis: { name: "A" } }
+            );
+        });
+
+        test("sets named primary axis min/max to series limits (implicit axis)", 2, function() {
+            assertAxisRange("valueAxis", 0, 350,
+                rangeColumnSeriesData,
+                { valueAxis: { name: "A" } }
+            );
+        });
+
+        test("NaN values are ignored when tracking axis range", 2, function() {
+            stubMethod(dataviz.CategoricalPlotArea.fn, "createValueAxes",
+                function() {
+                    equal(this.valueAxisRangeTracker.query().min, 10);
+                    equal(this.valueAxisRangeTracker.query().max, 300);
+                },
+                function() {
+                    createPlotArea([{
+                        type: "rangeColumn",
+                        data: [[10, 100], [NaN, NaN], [200, 300]]
+                    }]);
+                }
+            );
+        });
+
+        test("applies gap from first series", function() {
+            equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
+        // ------------------------------------------------------------
+        module("Categorical PlotArea / Range Bar series", {
+            setup: function() {
+                moduleSetup();
+
+                createPlotArea(rangeBarSeriesData);
+            },
+            teardown: moduleTeardown
+        });
+
+        test("value axis is horizontal", function() {
+            ok(!valueAxis.options.vertical);
+        });
+
+        test("category axis is vertical", function() {
+            ok(categoryAxis.options.vertical);
+        });
+
+        test("creates range bar chart", function() {
+            ok(chartSeries instanceof dataviz.RangeBarChart);
+        });
+
+        test("groups range column series into range bar chart", function() {
+            equal(chartSeries.options.series.length, 2);
+        });
+
+        test("applies gap from first series", function() {
+            equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
+        });
+
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Line series", {
@@ -1187,6 +1347,10 @@
 
         test("applies gap from first series", function() {
             equal(chartSeries.options.gap, GAP);
+        });
+
+        test("applies spacing from first series", function() {
+            equal(chartSeries.options.spacing, SPACING);
         });
 
         test("aligns axes at default crossing values", function() {
