@@ -236,7 +236,7 @@
                         function setupBindings() {
 
                             var isFormField = /^(input|select|textarea)$/i.test(element[0].tagName);
-                            function formValue(el) {
+                            function formValue(element) {
                                 if (/checkbox|radio/i.test(element.attr("type"))) {
                                     return element.prop("checked");
                                 }
@@ -368,7 +368,7 @@
 
                             var prevClassList = [].slice.call($(element)[0].classList);
 
-                            var mo = new MutationObserver(function(changes, mo){
+                            var mo = new MutationObserver(function(changes){
                                 suspend();    // make sure we don't trigger a loop
                                 if (!widget) {
                                     return;
@@ -435,8 +435,6 @@
             create: create
         };
     }]);
-
-    //throw "WAT";
 
     function createDirectives(klass, isMobile) {
         function make(directiveName, widgetName) {
