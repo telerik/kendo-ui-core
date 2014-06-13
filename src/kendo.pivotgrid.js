@@ -7,7 +7,7 @@ var __meta__ = {
     name: "PivotGrid",
     category: "web",
     description: "The PivotGrid widget is a data summarization tool.",
-    depends: [ "dom", "data" ]
+    depends: [ "dom", "data", "sortable" ]
 };
 
 /*jshint eqnull: true*/
@@ -1636,6 +1636,114 @@ var __meta__ = {
        readers: {
            xmla: XmlaDataReader
        }
+    });
+
+    kendo.ui.PivotSettingTarget = Widget.extend({
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+
+            this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
+
+            this.dataSource.bind("change", $.proxy(this.refresh, this));
+
+            if (!options.template) {
+                this.options.template = "<div data-" + kendo.ns + "name='${data.name || data}'>${data.name || data}</div>";
+            }
+
+            this.template = kendo.template(this.options.template);
+            this.emptyTemplate = kendo.template(this.options.emptyTemplate);
+
+            this._sortable();
+
+            this.refresh();
+        },
+
+        options: {
+            name: "PivotSettingTarget",
+            template: null,
+            emptyTemplate: "<div class='k-empty'>${data}</div>",
+            setting: "columns",
+            messages: {
+                empty: "Drop Fields Here"
+            }
+        },
+
+        _sortable: function() {
+            var that = this;
+
+            this.sortable = this.element.kendoSortable({
+                connectWith: this.options.connectWith,
+                ignore: ".k-empty",
+                disabled: ".k-empty",
+                change: function(e) {
+                    var name = e.item.attr(kendo.attr("name"));
+
+                    if (e.action == "receive") {
+                        that.add(name);
+                    } else if (e.action == "remove") {
+                        that.remove(name);
+                    } else if (e.action == "sort") {
+                        that.move(name, e.newIndex);
+                    }
+                }
+            }).data("kendoSortable");
+        },
+
+        _indexOf: function(name, items) {
+            var idx, length, index = -1;
+
+            for (idx = 0, length = items.length; idx < length; idx++) {
+                if (items[idx].name === name || items[idx] === name) {
+                    index = idx;
+                    break;
+                }
+            }
+            return index;
+        },
+
+        add: function(name) {
+            var items = this.dataSource[this.options.setting]();
+            var idx = this._indexOf(name, items);
+
+            if (idx == -1) {
+                items.push(name);
+                this.dataSource[this.options.setting](items);
+            }
+        },
+
+        move: function(name, index) {
+            var items = this.dataSource[this.options.setting]();
+
+            var idx = this._indexOf(name, items);
+
+            if (idx > -1) {
+                items.splice(idx, 1);
+                items.splice(index, 0, name);
+                this.dataSource[this.options.setting](items);
+            }
+        },
+
+        remove: function(name) {
+            var items = this.dataSource[this.options.setting]();
+
+            var idx = this._indexOf(name, items);
+            if (idx > -1) {
+                items.splice(idx, 1);
+                this.dataSource[this.options.setting](items);
+            }
+        },
+
+        refresh: function() {
+            var items = this.dataSource[this.options.setting]();
+
+            var html = this.emptyTemplate(this.options.messages.empty);
+
+            if (items.length) {
+                html = kendo.render(this.template, items);
+            }
+
+            this.element.html(html);
+        }
     });
 
     var PivotGrid = Widget.extend({

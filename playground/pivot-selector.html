@@ -37,7 +37,7 @@
         </style>
     </head>
     <body>
-        <script>
+        <!--script>
             var SettingsTarget = kendo.ui.Widget.extend({
                 init: function(element, options) {
                     kendo.ui.Widget.fn.init.call(this, element, options);
@@ -86,23 +86,13 @@
                },
 
                refresh: function() {
-                    this.items = $.map(this.dataSource[this.options.setting](), function(item) { return item.name });
+                    this.items = $.map(this.dataSource[this.options.setting](), function(item) { return item.name || item });
                     this.element.html(kendo.render(this.itemTemplate, this.items));
                }
            });
-            kendo.ui.plugin(SettingsTarget);
-        </script>
-        <button id="expand-city">Expand City</button>
-        <button id="expand-calendar">Expand Calendar</button>
-        <button id="expand-2005">Expand 2005</button>
-        <button id="expand-2006">Expand 2006</button>
 
-        <button id="expand-2005_2">Expand 2005.[2]</button>
-        <button id="expand-2006_1">Expand 2006.[1]</button>
-        <button id="expand-2006_2">Expand 2006.[2]</button>
-
-        <button id="expand-2005-city">Expand 2005 City</button>
-        <button id="expand-2005-2-city">Expand 2005-2 City</button>
+//           kendo.ui.plugin(SettingsTarget);
+        </script-->
 
         <fieldset style="margin: 10px; width: 700px">
             <div style="width: 60%; float:left;">
@@ -116,17 +106,17 @@
             <div style="float:left;">
                 <fieldset class="target-container">
                     <legend>columns</legend>
-                    <ul class="settings-target columns-target"></ul>
+                    <ul class="columns-target"></ul>
                 </fieldset>
 
                 <fieldset class="target-container">
                     <legend>rows</legend>
-                    <ul class="settings-target rows-target"></ul>
+                    <ul class="rows-target"></ul>
                 </fieldset>
 
                 <fieldset class="target-container">
                     <legend>measures</legend>
-                    <ul class="settings-target measures-target"></ul>
+                    <ul class="measures-target"></ul>
                 </fieldset>
             </div>
         </fieldset>
@@ -134,50 +124,6 @@
         <div id="pivotgrid"></div>
 
         <script>
-           /* $("#expand-city").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow(["[Date].[Calendar]", "[Geography].[City]" ]);
-            });
-
-            $("#expand-calendar").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar]");
-            });
-
-            $("#expand-2005").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar].[Year].&[2005]");
-            });
-
-            $("#expand-2005-city").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow(["[Date].[Calendar].[Year].&[2005]", "[Geography].[City]"]);
-            });
-
-            $("#expand-2005-2-city").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow(["[Date].[Calendar].[Year].&[2005].&[2]", "[Geography].[City]"]);
-            });
-
-            $("#expand-2005_2").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar].[Year].&[2005].&[2]");
-            });
-
-            $("#expand-2006").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar].[Year].&[2006]");
-            });
-
-            $("#expand-2006_1").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar].[Year].&[2006].&[1]");
-            });
-
-            $("#expand-2006_2").click(function() {
-                var dataSource = $("#pivotgrid").data("kendoPivotGrid").dataSource;
-                dataSource.expandRow("[Date].[Calendar].[Year].&[2006].&[2]");
-            });*/
 
             $(function() {
                 var pivot = $("#pivotgrid").kendoPivotGrid({
@@ -264,7 +210,7 @@
                     },
                     drag: function(e) {
                         var target = $(e.dropTarget);
-                        if (target.hasClass("settings-target")) {
+                        if (target.hasClass("k-settings-target")) {
                             e.setStatusClass("k-add");
                         } else {
                             e.setStatusClass("k-denied");
@@ -274,11 +220,11 @@
                         e.preventDefault();
                         var target = $(e.dropTarget);
                         var node = this.dataItem(e.sourceNode);
-                        var container = target.closest(".settings-target")
+                        var container = target.closest(".k-settings-target")
                         if (container.length) {
                             console.log(node);
                             container
-                                .data("kendoSettingsTarget")
+                                .data("kendoPivotSettingTarget")
                                 .add(node.defaultHierarchy || node.uniqueName);
                         }
                     },
@@ -320,20 +266,39 @@
                     }
                 }).data("kendoTreeView");
 
-                $(".columns-target").kendoSettingsTarget({
+                new kendo.ui.PivotSettingTarget($(".columns-target").addClass("k-settings-target"), {
                     dataSource: pivot.dataSource,
                     setting: "columns"
                 });
 
-                $(".rows-target").kendoSettingsTarget({
+                new kendo.ui.PivotSettingTarget($(".rows-target").addClass("k-settings-target"),{
                     dataSource: pivot.dataSource,
                     setting: "rows"
                 });
 
-                $(".measures-target").kendoSettingsTarget({
+                new kendo.ui.PivotSettingTarget($(".measures-target").addClass("k-settings-target"), {
                     dataSource: pivot.dataSource,
                     setting: "measures"
                 });
+
+                new kendo.ui.PivotSettingTarget($("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-table > .k-pivot-toolbar.k-header").empty()), {
+                    dataSource: pivot.dataSource,
+                    connectWith: ".k-pivot .k-settings-target",
+                    setting: "columns"
+                });
+
+                new kendo.ui.PivotSettingTarget( $("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-rowheaders > .k-pivot-toolbar.k-header:first").empty()),{
+                    dataSource: pivot.dataSource,
+                    connectWith: ".k-pivot .k-settings-target",
+                    setting: "measures"
+                });
+
+                new kendo.ui.PivotSettingTarget($("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-rowheaders > .k-pivot-toolbar.k-header:last").empty()), {
+                    dataSource: pivot.dataSource,
+                    connectWith: ".k-pivot .k-settings-target",
+                    setting: "rows"
+                });
+
             });
 
         </script>
