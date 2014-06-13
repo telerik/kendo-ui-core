@@ -242,6 +242,24 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
+    * The data item field which contains the series from value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function fromField($value) {
+        return $this->setProperty('fromField', $value);
+    }
+
+    /**
+    * The data item field which contains the series to value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function toField($value) {
+        return $this->setProperty('toField', $value);
+    }
+
+    /**
     * The data item field which contains the series note text.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
