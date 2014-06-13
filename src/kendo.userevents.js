@@ -38,6 +38,13 @@ var __meta__ = {
         GESTUREEND = "gestureend",
         GESTURETAP = "gesturetap";
 
+    var THRESHOLD = {
+        "api": 0,
+        "touch": 0,
+        "mouse": 9,
+        "pointer": 9
+    }
+
     function touchDelta(touch1, touch2) {
         var x1 = touch1.x.location,
             y1 = touch1.y.location,
@@ -70,7 +77,8 @@ var __meta__ = {
                 event: e,
                 target: e.target,
                 currentTarget: e.target,
-                location: e
+                location: e,
+                type: "api"
             });
         }
         else if (e.type.match(/touch/)) {
@@ -82,7 +90,8 @@ var __meta__ = {
                     event: e,
                     target: touch.target,
                     currentTarget: currentTarget,
-                    id: touch.identifier
+                    id: touch.identifier,
+                    type: "touch"
                 });
             }
         }
@@ -92,7 +101,8 @@ var __meta__ = {
                 event: e,
                 target: e.target,
                 currentTarget: currentTarget,
-                id: originalEvent.pointerId
+                id: originalEvent.pointerId,
+                type: "pointer"
             });
         } else {
             touches.push({
@@ -100,7 +110,8 @@ var __meta__ = {
                 event: e,
                 target: e.target,
                 currentTarget: currentTarget,
-                location: e
+                location: e,
+                type: "mouse"
             });
         }
 
@@ -153,6 +164,8 @@ var __meta__ = {
             extend(this, {
                 x: new TouchAxis("X", touchInfo.location),
                 y: new TouchAxis("Y", touchInfo.location),
+                type: touchInfo.type,
+                threshold: userEvents.threshold || THRESHOLD[touchInfo.type],
                 userEvents: userEvents,
                 target: target,
                 currentTarget: touchInfo.currentTarget,
@@ -272,7 +285,7 @@ var __meta__ = {
             var xDelta = this.x.initialDelta,
                 yDelta = this.y.initialDelta;
 
-            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.userEvents.threshold;
+            return Math.sqrt(xDelta * xDelta + yDelta * yDelta) <= this.threshold;
         }
     });
 
