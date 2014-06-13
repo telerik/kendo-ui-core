@@ -5,29 +5,31 @@
     <script>
         var requestData = [{
             caption: "DNS Lookup",
-            elapsed: 20,
-            color: "#95c3cd"
+            elapsed: 20
         }, {
             caption: "Connecting",
-            elapsed: 122,
-            color: "#abc75b"
+            elapsed: 122
         }, {
             caption: "Sending",
-            elapsed: 30,
-            color: "#c6816f"
+            elapsed: 30
         }, {
             caption: "Waiting",
-            elapsed: 421,
-            color: "#968cb2"
+            elapsed: 421
         }, {
             caption: "Receiving",
-            elapsed: 357,
-            color: "#c0c0c0"
+            elapsed: 357
         }, {
             caption: "Total",
-            summary: "total",
-            color: "#2ba6ff"
+            summary: "total"
         }];
+
+        var palette = [
+            "#95c3cd", "#abc75b", "#c6816f", "#968cb2", "#c0c0c0", "#2ba6ff"
+        ];
+
+        function pointColor(point) {
+            return palette[point.index % palette.length];
+        }
 
         function createChart() {
             $("#chart").kendoChart({
@@ -45,7 +47,9 @@
                     field: "elapsed",
                     categoryField: "caption",
                     summaryField: "summary",
-                    colorField: "color"
+                    color: function pointColor(point) {
+                        return palette[point.index % palette.length];
+                    }
                 }],
                 axisDefaults: {
                     majorGridLines: {
@@ -59,7 +63,6 @@
                 }
             });
         }
-
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);
     </script>
