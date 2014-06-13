@@ -386,22 +386,31 @@ var __meta__ = {
                 return that.element.find(selectableItems).parent();
             }
 
-            that.element
-                .find(element)
-                .each(function () {
-                    var item = $(this),
-                        link = item.children(LINKSELECTOR);
+            element = that.element.find(element);
 
-                    if (item.hasClass(DISABLEDCLASS)) {
-                        return that;
-                    }
+            if (!element.length) {
+                this._updateSelected(element);
+            } else {
+                element
+                    .each(function () {
+                        var item = $(this),
+                            link = item.children(LINKSELECTOR);
 
-                    if (!that._triggerEvent(SELECT, item)) {
-                        that._updateSelected(link);
-                    }
-                });
+                        if (item.hasClass(DISABLEDCLASS)) {
+                            return that;
+                        }
+
+                        if (!that._triggerEvent(SELECT, item)) {
+                            that._updateSelected(link);
+                        }
+                    });
+            }
 
             return that;
+        },
+
+        clearSelection: function() {
+            this.select($());
         },
 
         enable: function (element, state) {
@@ -1013,7 +1022,7 @@ var __meta__ = {
 
             link.addClass(SELECTEDCLASS);
             link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
-            that._current(item);
+            that._current(item[0] ? item : null);
         },
 
         _animations: function(options) {
