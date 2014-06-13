@@ -257,6 +257,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("field", value);
     }
 
+    public java.lang.String getFromField() {
+        return (java.lang.String)getProperty("fromField");
+    }
+
+    public void setFromField(java.lang.String value) {
+        setProperty("fromField", value);
+    }
+
     public float getGap() {
         return (float)getProperty("gap");
     }
@@ -503,6 +511,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setTargetField(java.lang.String value) {
         setProperty("targetField", value);
+    }
+
+    public java.lang.String getToField() {
+        return (java.lang.String)getProperty("toField");
+    }
+
+    public void setToField(java.lang.String value) {
+        setProperty("toField", value);
     }
 
     public java.lang.String getType() {

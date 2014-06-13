@@ -3170,6 +3170,12 @@ The last element is always created like a rectangle since there is no following 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the series from value.</description>
+            <name>fromField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The distance between the category clusters.</description>
             <name>gap</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3354,6 +3360,12 @@ Summary columns are optional and can be one of two types:</description>
         <attribute>
             <description>The data item field containing the target value.</description>
             <name>targetField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series to value.</description>
+            <name>toField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
