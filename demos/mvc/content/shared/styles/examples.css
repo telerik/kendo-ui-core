@@ -2392,7 +2392,6 @@ a.footer-links:hover,
     color: #2d3e50;
     border: none;
     width: 100%;
-    height: 100%;
     background-color: #fff;
     border-radius: 0;
 }
@@ -2401,12 +2400,14 @@ a.footer-links:hover,
     padding: 0.5em 0;
     font-size: 14px;
     line-height: 14px;
+    height: 1.143em;
 }
 
 #layout-search-wrapper input {
     padding: 0.750em 0;
     font-size: 16px;
     line-height: 16px;
+    height: 1.188em;
 }
 
 #example-search-wrapper .k-uniE600 {
