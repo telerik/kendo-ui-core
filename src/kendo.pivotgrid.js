@@ -1912,10 +1912,10 @@ var __meta__ = {
 
         _resize: function() {
             var contentTable = this.content.children("table");
-            var contentWidth = contentTable.width();
+            var contentWidth = this.content.width();
 
-            var rows = contentTable[0].rows;
-            var columnsLength = rows[0] ? rows[0].children.length : 1;
+            var row = contentTable[0].rows[0];
+            var columnsLength = row ? row.children.length : 1;
 
             var calculatedWidth = columnsLength * 100;
             var minWidth = 100;
