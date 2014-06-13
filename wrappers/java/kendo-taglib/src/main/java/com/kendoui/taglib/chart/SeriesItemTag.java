@@ -489,6 +489,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("style", value);
     }
 
+    public java.lang.String getSummaryField() {
+        return (java.lang.String)getProperty("summaryField");
+    }
+
+    public void setSummaryField(java.lang.String value) {
+        setProperty("summaryField", value);
+    }
+
     public java.lang.String getTargetField() {
         return (java.lang.String)getProperty("targetField");
     }
