@@ -125,6 +125,21 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "autocomplete/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI AutoComplete"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI AutoComplete"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Editors"
@@ -236,6 +251,21 @@
         },
         "meta": {
             "kendo-ui": "Enabled, events, visible MVVM binding support in Kendo UI AutoComplete"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "button/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Button"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI Button"
         },
         "packages": [
           "!mvc",

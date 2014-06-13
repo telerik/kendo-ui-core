@@ -1,0 +1,34 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <p>
+            <kendo-button class="k-primary" ng-click="onClick1()">Primary Button</kendo-button>
+            <kendo-button on-click="onClick2()">Button</kendo-button>
+        </p>
+        <p>
+            <kendo-button enable="false" class="k-primary">Disabled Primary Button</kendo-button>
+            <kendo-button enable="false">Disabled Button</kendo-button>
+        </p>
+        <p>
+            <kendo-button ng-disabled="disabled">Support for ngDisabled</kendo-button>
+            <label><input type="checkbox" ng-model="disabled" /> Disable</label>
+        </p>
+        <p>
+            <kendo-button sprite-css-class="'k-icon k-i-funnel'">Filter</kendo-button>
+            <kendo-button icon="'funnel-clear'">Clear Filter</kendo-button>
+            <kendo-button sprite-css-class="'k-icon k-i-refresh'"><span class="k-sprite">Refresh</span></kendo-button>
+        </p>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+
+  function MyCtrl($scope) {
+      $scope.onClick1 = function() {
+        alert("Primary button click");
+      };
+      $scope.onClick2 = function() {
+        alert("Second button click");
+      };
+  }
+</script>
