@@ -42,17 +42,6 @@
     border-radius: 0;
 }
 
-.k-toolbar .k-button-group .k-group-start
-{
-    margin: 0;
-    border-radius: 4px 0 0 4px;
-}
-
-.k-toolbar .k-button-group .k-group-end
-{
-    border-radius: 0 4px 4px 0;
-}
-
 .k-toolbar .k-button,
 .k-toolbar .k-split-button,
 .k-toolbar .k-button-group
@@ -65,16 +54,15 @@
     padding-left: 0;
 }
 
-.k-toolbar .k-split-button .k-button
+.k-toolbar .k-split-button .k-button,
+.k-toolbar .k-button-group .k-group-start
 {
-    border-radius: 4px 0 0 4px;
     margin: 0;
 }
 
 .k-toolbar .k-split-button .k-split-button-arrow
 {
     margin: 0 0 0 -1px;
-    border-radius: 0 4px 4px 0;
 }
 
 .k-toolbar .k-overflow-anchor
@@ -96,13 +84,14 @@
     border: 0;
 }
 
-.k-overflow-container .k-button,
+.k-overflow-container .k-overflow-button,
 .k-split-container .k-button
 {
     text-align: left;
     display: block;
     background: none;
     border-color: transparent;
+    white-space: nowrap;
 }
 
 .k-overflow-container .k-button-group
