@@ -1816,14 +1816,31 @@ html .km-pane-wrapper .km-widget,
 
 .k-column-menu,
 .k-column-menu .k-item,
-.k-overflow-container .k-button-group
+.k-overflow-container .k-button-group,
+.k-overflow-container .k-split-button
 {
     border-color: @secondary-border-color;
 }
 
-.k-overflow-container .k-button-group
+.k-overflow-container .k-button-group,
+.k-overflow-container .k-split-button
 {
     box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-overflow-first-visible.k-button-group,
+.k-overflow-first-visible.k-split-button,
+.k-overflow-container .k-button-group + .k-button-group,
+.k-overflow-container .k-split-button + .k-button-group,
+.k-overflow-container .k-button-group + .k-split-button
+{
+    box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-overflow-last-visible.k-button-group,
+.k-overflow-last-visible.k-split-button
+{
+    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
 .k-column-menu .k-separator
