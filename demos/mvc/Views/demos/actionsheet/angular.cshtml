@@ -1,0 +1,37 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <ul kendo-mobile-action-sheet="actions" k-type="'tablet'" k-cancel="'Dismiss'" k-on-command="onCommand(kendoEvent)">
+    <li><a href="#" data-command="view">View</a></li>
+    <li><a href="#" data-command="rename">Rename</a></li>
+    <li><a href="#" data-command="delete">Delete</a></li>
+    <li><a href="#" data-command="perms">Set permissions ...</a></li>
+  </ul>
+  <div ng-show="command">Selected: {{command}}</div>
+  <div kendo-grid k-options="gridOptions" k-on-change="actions.open(selected)"></div>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  var data = new kendo.data.ObservableArray([
+    { name: "index.html", type: "HTML", size: "1 KB" },
+    { name: "services.html", type: "HTML", size: "1 KB" },
+    { name: "about.html", type: "HTML", size: "1 KB" },
+    { name: "logo.png", type: "PNG", size: "15 KB" },
+  ]);
+  $scope.gridOptions = {
+    dataSource: data,
+    columns: [
+      { field: "name", title: "Name" },
+      { field: "type", title: "Type" },
+      { field: "size", title: "Size" }
+    ],
+    selectable: true,
+    sortable: true,
+  };
+  $scope.onCommand = function(kendoEvent) {
+    $scope.command = kendoEvent.currentTarget.data("command");
+  };
+}
+</script>

@@ -1,0 +1,44 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div class="demo-section">
+    <div class="todo-head">Simple to-do</div>
+    <div kendo-mobile-scroller style="height: 200px">
+      <ul kendo-mobile-list-view k-data-source="todo"></ul>
+    </div>
+  </div>
+  <style scoped>
+    .demo-section {
+      width: 400px;
+      padding: 0;
+      border: 1px solid #999;
+    }
+    .todo-head {
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      font-size: 120%;
+      background: #fff;
+    }
+  </style>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  $scope.todo = [
+    "Determine project scope",
+    "Define preliminary resources",
+    "Conduct needs analysis",
+    "Draft preliminary specifications",
+    "Develop delivery timeline",
+    "Obtain approvals to proceed",
+    "Secure reuired resources",
+    "Develop functional specifications",
+    "Develop prototype",
+    "Review functional specifications",
+    "Identify design parameters",
+    "Assign development staff"
+  ];
+}
+</script>

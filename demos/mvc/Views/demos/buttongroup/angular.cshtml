@@ -1,0 +1,34 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl" class="demo-section">
+  <ul kendo-mobile-button-group k-on-select="selected(kendoEvent.index)">
+    <li>
+      Month
+    </li>
+    <li>
+      Quarter
+    </li>
+    <li>
+      Year
+    </li>
+  </ul>
+</div>
+<style>
+  .demo-section {
+    width: 500px;
+    text-align: center;
+  }
+  .demo-section .km-buttongroup {
+    margin: 0 auto;
+  }
+</style>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+function MyCtrl($scope) {
+  $scope.selected = function(index) {
+    alert("Selected index: " + index);
+  };
+}
+
+</script>

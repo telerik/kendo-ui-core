@@ -1,0 +1,30 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <p>
+    <label>Select date and time:
+      <input kendo-date-time-picker
+             ng-model="str"
+             k-ng-model="obj" />
+    </label>
+  </p>
+  <pre>
+    str: {{ str }}
+    obj: {{ obj }}
+    typeof obj: {{ getType(obj) }}
+    obj instanceof Date: {{ isDate(obj) }}
+  </pre>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+
+  function MyCtrl($scope) {
+      $scope.getType = function(x) {
+          return typeof x;
+      };
+      $scope.isDate = function(x) {
+          return x instanceof Date;
+      };
+  }
+</script>

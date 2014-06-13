@@ -1,0 +1,44 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div class="demo-section">
+    <p><button kendo-mobile-button ng-click="popover.open($event.target)">Tag People</button></p>
+    <img src="http://demos.telerik.com/kendo-ui/content/web/popover/tag-people.jpg" alt="My teammates" />
+  </div>
+
+
+  <div kendo-mobile-pop-over="popover" k-popup="{ height: '15em', width: '20em' }">
+    <div kendo-mobile-view k-title="'People'">
+      <div data-role="header">
+        <div data-role="navbar">
+          <span data-role="view-title"></span>
+          <a kendo-mobile-button data-align="right" ng-click="popover.close()">Close</a>
+        </div>
+      </div>
+      <ul kendo-mobile-list-view>
+        <li><label>Isabella Anderson<input type="checkbox" /></label></li>
+        <li><label>Josh Anderson<input type="checkbox" /></label></li>
+        <li><label>Linda Anderson<input type="checkbox" /></label></li>
+        <li><label>Oliver Anderson<input type="checkbox" /></label></li>
+        <li><label>James Williams<input type="checkbox" /></label></li>
+        <li><label>Barbara Williams<input type="checkbox" /></label></li>
+      </ul>
+    </div>
+  </div>
+
+  <style scoped>
+    .demo-section {
+      width: 600px;
+    }
+    .demo-section p {
+      margin-bottom: 10px;
+      text-align: right;
+    }
+  </style>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope){
+  }
+</script>

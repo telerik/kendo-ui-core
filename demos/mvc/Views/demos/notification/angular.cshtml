@@ -1,0 +1,25 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl" style="overflow: auto; width: 400px">
+        <div id="container" style="width: 200px; float: right; height: 200px; padding: 5px; border: 1px solid #aaa;"></div>
+        <span kendo-notification="notf1"></span>
+        <span kendo-notification="notf2" k-append-to="'#container'"></span>
+        <button class="k-button" ng-click="notf1.show('This is a notice', 'error')">Popup bottom-right</button><br />
+        <button class="k-button" ng-click="showInContainer()">Show in container</button><br />
+        <button class="k-button" ng-click="dismissAll()">Dismiss all</button>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+      $scope.showInContainer = function() {
+          var date = new Date();
+          date = kendo.toString(date, "HH:MM:ss.") + kendo.toString(date.getMilliseconds(), "000");
+          $scope.notf2.show(date, "info");
+      };
+      $scope.dismissAll = function() {
+          $scope.notf1.hide();
+          $scope.notf2.hide();
+      };
+  }
+</script>

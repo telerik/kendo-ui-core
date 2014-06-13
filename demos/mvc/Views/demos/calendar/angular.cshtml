@@ -1,0 +1,28 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <!-- remember good ol' tables? -->
+        <table><tr style="vertical-align: top">
+                <td>
+                    <p><b>Start date: </b><code ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</code></p>
+                    <kendo-calendar ng-model="startDate" rebind="endDate" max="endDate"></kendo-calendar>
+                </td>
+                <td ng-show="startDate">
+                    <p><b>End date: </b><code ng-show="endDate">{{endDate | date:"MMM d, yyyy"}}</code></p>
+                    <kendo-calendar ng-model="endDate" rebind="startDate" min="startDate" max="maxEndDate"></kendo-calendar>
+                </td>
+        </tr></table>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+
+  function MyCtrl($scope) {
+      $scope.$watch("startDate", function(val){
+          var maxEndDate = new Date(val);
+          maxEndDate.setDate(maxEndDate.getDate() + 14);
+          $scope.maxEndDate = maxEndDate;
+          delete $scope.endDate;
+      });
+  }
+</script>

@@ -1,0 +1,20 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div style="width: 300px; text-align: center">
+    <p>
+      <input kendo-numeric-text-box k-min="0" k-max="100" k-ng-model="value" />
+    </p>
+    <p>
+      Value: {{value}}
+    </p>
+    <div kendo-slider k-min="0" k-max="100" k-ng-model="value"></div>
+  </div>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+      $scope.value = 50;
+  }
+</script>

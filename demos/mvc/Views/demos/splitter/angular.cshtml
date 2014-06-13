@@ -1,0 +1,35 @@
+<div class="example" ng-app="KendoDemos">
+<div ng-controller="MyCtrl">
+  <p>
+    <label>Orientation:
+      <select kendo-drop-down-list k-ng-model="orientation">
+        <option value="horizontal">Horizontal</option>
+        <option value="vertical">Vertical</option>
+      </select>
+    </label>
+  </p>
+
+  <div kendo-splitter
+       k-panes="[ null, { contentUrl: 'doc/web/loremIpsum.html' }]"
+       k-orientation="orientation"
+       k-rebind="orientation">
+    <div>
+      <p>Content on the left.</p>
+      <p>On the other side we have remote-loaded content.</p>
+    </div>
+    <div>
+      <!-- AJAX content -->
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  $scope.orientation = "horizontal";
+  $scope.hello = "Hello from Controller!";
+}
+</script>

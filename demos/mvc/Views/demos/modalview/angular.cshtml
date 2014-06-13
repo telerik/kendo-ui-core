@@ -1,0 +1,80 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div class="demo-section">
+    <button type="button" kendo-button ng-click="modal.open()">Open ModalView</button>
+  </div>
+
+  <div id="modalview-login" kendo-mobile-modal-view="modal" style="width: 50%;">
+    <div data-role="header">
+      <div data-role="navbar">
+        <span>Login</span>
+      </div>
+    </div>
+    <ul>
+      <li><label for="username">Username: </label><input type="text" id="username" /></li>
+      <li><label for="password">Password: </label><input type="password" id="password" /></li>
+    </ul>
+    <a ng-click="modal.close()" id="modalview-login-button" type="button">Login</a>
+    <a ng-click="modal.close()" id="modalview-reg-button" type="button">Register</a>
+  </div>
+
+  <style>
+    .demo-section {
+      width: 400px;
+      margin-top: 50px;
+      padding: 30px 10px;
+      text-align: center;
+    }
+
+    #modalview-login ul {
+      width: 90%;
+      margin: 30px auto 20px;
+      padding: 0;
+      list-style-type: none;
+    }
+    #modalview-login ul label {
+      display: block;
+      width: 50%px;
+      padding: 0 5px 0 0;
+    }
+    #modalview-login ul input {
+      display: block;
+      width: 100%;
+      height: 36px;
+      line-height: 26px;
+      vertical-align: middle;
+      border: 1px solid #e7e7e7;
+      padding: 5px;
+      margin: 5px 0 10px;
+    }
+    #modalview-login-button,
+    #modalview-reg-button {
+      display: block;
+      margin: 0 auto 20px;
+      text-align: center;
+      font-weight: bold;
+      width: 90%;
+      height: 36px;
+      line-height: 36px;
+      vertical-align: middle;
+      background-color: #015991;
+      color: #ffffff;
+    }
+    #modalview-reg-button {
+      margin-bottom: 30px;
+      background-color: #929394;
+    }
+    #modalview-login-button:hover ,
+    #modalview-reg-button:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  }
+</script>

@@ -1,0 +1,51 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <div class="demo-section">
+            <div class="todo-head">Products</div>
+            <div kendo-mobile-scroller style="height: 200px">
+                <ul kendo-mobile-list-view k-data-source="products"></ul>
+            </div>
+        </div>
+        <style scoped>
+            .demo-section {
+                border: 1px solid #999;
+                width: 400px;
+                padding: 0;
+            }
+            .todo-head {
+                text-align: center;
+                padding: 10px 0;
+                font-weight: bold;
+                font-size: 120%;
+                background: #fff;
+            }
+        </style>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  $scope.products = [
+    "Sashimi salad",
+    "Chirashi sushi",
+    "Seaweed salad",
+    "Edamame",
+    "Miso soup",
+    "Maguro",
+    "Shake",
+    "Shiromi",
+    "Tekka maki",
+    "Hosomaki Mix",
+    "California rolls",
+    "Seattle rolls",
+    "Spicy Tuna rolls",
+    "Ebi rolls",
+    "Chicken Teriyaki",
+    "Salmon Teriyaki",
+    "Gohan",
+    "Tori Katsu",
+    "Yaki Udon"
+  ];
+}
+</script>

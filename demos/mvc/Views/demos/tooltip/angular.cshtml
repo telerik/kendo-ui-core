@@ -1,0 +1,32 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <div kendo-tooltip k-content="'The <b>tooltip</b><br />Time is: {{time}}'" class="tooltip">
+            I have a tooltip.
+        </div>
+
+        <div kendo-tooltip k-content="theContent" class="tooltip">
+            I also have a tooltip.
+        </div>
+
+        <style>
+            .tooltip {
+                border: 1px solid red;
+                background: #fea;
+                padding: 1em;
+                margin: 1em
+            }
+        </style>
+    </div>
+</div>
+
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+    function MyCtrl($scope, $timeout) {
+        function updateTime() {
+            $scope.time = kendo.toString(new Date(), "H:mm:ss.fff tt");
+            $timeout(updateTime, 78);
+        };
+        $scope.theContent = "The <b>tooltip</b><br />Time is: {{time}}";
+        updateTime();
+    }
+</script>

@@ -1,0 +1,37 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div style="position: relative; width: 400px; height: 100px">
+    <button class="k-button" ng-show="!win1visible" ng-click="win1.open()">Open calendar</button>
+    <button class="k-button" ng-show="!win2visible" ng-click="win2.open()">Open Lorem Ipsum</button>
+
+    <div kendo-window="win1" k-title="'Calendar'"
+         k-on-open="win1visible = true" k-on-close="win1visible = false">
+      <div kendo-calendar></div>
+    </div>
+
+    <div kendo-window="win2" k-title="'AJAX content'"
+         k-width="600" k-height="200" k-visible="false"
+         k-content="{ url: 'doc/web/loremIpsum.html' }"
+         k-on-open="win2visible = true" k-on-close="win2visible = false"></div>
+  </div>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  $scope.movies = [
+    "12 Angry Men",
+    "Il buono, il brutto, il cattivo.",
+    "Inception",
+    "One Flew Over the Cuckoo's Nest",
+    "Pulp Fiction",
+    "Schindler's List",
+    "The Dark Knight",
+    "The Godfather",
+    "The Godfather: Part II",
+    "The Shawshank Redemption"
+  ];
+}
+
+</script>

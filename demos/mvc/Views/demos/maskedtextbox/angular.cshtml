@@ -1,0 +1,44 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <ul>
+    <li>
+      <label>Phone number:
+        <input kendo-masked-text-box ng-model="phone"
+               k-mask="'(999) 000-0000'" />
+      </label>
+      {{phone}}
+    </li>
+    <li>
+      <label>Credit Card number:
+        <input kendo-masked-text-box ng-model="cc"
+               k-mask="'0000 0000 0000 0000'" />
+      </label>
+      {{cc}}
+    </li>
+    <li>
+      <label>Social security number:
+        <input kendo-masked-text-box ng-model="ssn"
+               k-mask="'000-00-0000'" />
+      </label>
+      {{ssn}}
+    </li>
+    <li>
+      <label>UK postcode:
+        <input kendo-masked-text-box ng-model="post"
+               k-mask="'L0L 0LL'" />
+      </label>
+      {{post}}
+    </li>
+  </ul>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+      $scope.phone = "555 123 4567";
+      $scope.cc = "1234 1234 1234 1234"
+      $scope.ssn = "003-12-3456";
+      $scope.post = "W1N 1AC";
+  }
+</script>
