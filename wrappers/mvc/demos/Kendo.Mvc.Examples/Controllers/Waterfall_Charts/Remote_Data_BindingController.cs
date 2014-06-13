@@ -23,7 +23,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 },
                 new PriceData
                 {
-                    Name = "Discount",
+                    Name = "List\nDiscount",
                     Value = -5
                 },
                 new PriceData
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 },
                 new PriceData
                 {
-                    Name = "Discount",
+                    Name = "Invoice\nDiscount",
                     Value = -6
                 },
                 new PriceData
