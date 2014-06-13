@@ -1024,63 +1024,6 @@
         equal(th_1.eq(0).attr("colspan"), 2);
     });
 
-    module("PivotGrid resize on render", {
-        setup: function() {
-            kendo.ns = "kendo-";
-            div = document.createElement("div");
-            QUnit.fixture[0].appendChild(div);
-        },
-        teardown: function() {
-            var component = $(div).data("kendoPivotGrid");
-            if (component) {
-                component.destroy();
-            }
-            kendo.destroy(QUnit.fixture);
-            kendo.ns = "";
-        }
-    });
-
-    test("PivotGrid sets width of 100 percents if content table is narrow than pivot", function() {
-        var tuples = [
-            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 2_1", parentName: "level 1_2", levelNum: "2", children: [] }] },
-            { members: [ { name: "level 2_2", parentName: "level 1_3", levelNum: "2", children: [] }] }
-        ];
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
-        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
-
-        equal(headerTable.css("min-width"), "100%");
-        equal(contentTable.css("min-width"), "100%");
-    });
-
-    test("PivotGrid sets width of 100 percents if content table is narrow than pivot", function() {
-        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
-        var data = [];
-
-        for (var idx = 0; idx < 100; idx++) {
-            tuples.push({ members: [ { name: "tuple " + idx, parentName: "dim 0", levelNum: "1", children: [] }] });
-            data.push(idx);
-        }
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples, data)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
-        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
-
-        ok(parseInt(headerTable.css("min-width")) > 100);
-        ok(parseInt(contentTable.css("min-width")) > 100);
-    });
-
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";
@@ -2041,5 +1984,73 @@
 
         ok(td_2.eq(0).hasClass("k-first"));
         ok(!td_3.eq(0).hasClass("k-first"));
+    });
+
+    module("PivotGrid resize on render", {
+        setup: function() {
+            kendo.ns = "kendo-";
+            div = document.createElement("div");
+            QUnit.fixture[0].appendChild(div);
+        },
+        teardown: function() {
+            var component = $(div).data("kendoPivotGrid");
+            if (component) {
+                component.destroy();
+            }
+            kendo.destroy(QUnit.fixture);
+            kendo.ns = "";
+        }
+    });
+
+    test("PivotGrid sets width of 100 percents if content table is narrow than pivot", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
+            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 1_3", parentName: "level 0", levelNum: "1", children: [] }] },
+            { members: [ { name: "level 2_1", parentName: "level 1_2", levelNum: "2", children: [] }] },
+            { members: [ { name: "level 2_2", parentName: "level 1_3", levelNum: "2", children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        equal(headerTable.css("min-width"), "100%");
+        equal(contentTable.css("min-width"), "100%");
+    });
+
+    test("PivotGrid sets width of 100 percents if content table is narrow than pivot", function() {
+        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
+        var data = [];
+
+        for (var idx = 0; idx < 100; idx++) {
+            tuples.push({ members: [ { name: "tuple " + idx, parentName: "dim 0", levelNum: "1", children: [] }] });
+            data.push(idx);
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        ok(parseInt(headerTable.css("min-width")) > 100);
+        ok(parseInt(contentTable.css("min-width")) > 100);
+    });
+
+    test("PivotGrid sets height to the column header if rows-field section is higher", function() {
+        var pivotgrid = createPivot({
+            dataSource: createDataSource()
+        });
+
+        var columnHeaderWrap = pivotgrid.wrapper.find(".k-grid-header-wrap");
+        var rowsField = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-header:last");
+
+        equal(rowsField.innerHeight(), columnHeaderWrap.height());
     });
 })();

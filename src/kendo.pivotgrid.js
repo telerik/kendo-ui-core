@@ -1790,6 +1790,11 @@ var __meta__ = {
                     }
                 });
 
+            that.content.scroll(function() {
+                that.columnsHeader[0].scrollLeft = this.scrollLeft;
+                console.log(that.columnsHeader[0].scrollLeft);
+            });
+
             if (that.options.autoBind) {
                 that.dataSource.fetch();
             }
@@ -1920,7 +1925,19 @@ var __meta__ = {
             }
 
             contentTable.add(this.columnsHeader.children("table"))
-                        .css("min-width", minWidth + "%");
+                        .css("min-width", minWidth + "%")
+                        .css("height", "100%");
+
+            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
+            var rowFieldsHeight = this.rowFields.height("100%").innerHeight();
+            var rowFieldsPadding;
+
+            if (columnsHeight > rowFieldsHeight) {
+                rowFieldsPadding = rowFieldsHeight - this.rowFields.height();
+                this.rowFields.height(columnsHeight - rowFieldsPadding);
+            } else {
+                this.columnsHeader.height(rowFieldsHeight);
+            }
         },
 
         refresh: function() {
