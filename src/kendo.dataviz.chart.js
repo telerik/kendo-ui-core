@@ -2948,7 +2948,7 @@ var __meta__ = {
             },
             labels: {
                 visible: false,
-                format: "{0}",
+                format: "{0}"
             },
             animation: {
                 type: BAR
@@ -3124,12 +3124,6 @@ var __meta__ = {
             }
 
             return new Point2D(x, y);
-        },
-
-        formatValue: function(format) {
-            var point = this;
-
-            return point.owner.formatPointValue(point, format);
         }
     });
     deepExtend(Bar.fn, PointEventsMixin);
@@ -8801,7 +8795,7 @@ var __meta__ = {
                     series: series,
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
-                    spacing: firstSeries.spacing,
+                    spacing: firstSeries.spacing
                 });
 
             plotArea.appendChart(rangeColumnChart, pane);
