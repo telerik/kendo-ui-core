@@ -712,6 +712,7 @@
     <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
+    <Compile Include="UI\Gantt\Html\GanttHtmlBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceSchemaBuilder.cs" />
@@ -2023,4 +2024,9 @@
     <Compile Include="UI\Diagram\Settings\DiagramEditableSelectStrokeSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEditableSelectStrokeSettingsBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Gantt\Gantt.cs" /><Compile Include="UI\Gantt\Fluent\GanttBuilder.cs" /><Compile Include="UI\Gantt\Fluent\GanttEventBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Gantt.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttBuilder.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttEventBuilder.cs" />
+  </ItemGroup>
+</Project>
