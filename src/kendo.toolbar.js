@@ -126,6 +126,7 @@ var __meta__ = {
 
                     popup = popupElement.kendoPopup({
                         anchor: element,
+                        animation: options.animation,
                         open: adjustPopupWidth
                     }).data("kendoPopup");
 
@@ -338,6 +339,8 @@ var __meta__ = {
                 this.uid = kendo.guid();
                 element.attr(kendo.attr("uid"), this.uid);
 
+                that.animation = !!that.element.closest(".km-root")[0] ? { open: { effects: "fade" } } : {};
+
                 if(options.resizable) {
                     that._renderOverflow();
                     element.addClass(RESIZABLE_TOOLBAR);
@@ -347,7 +350,6 @@ var __meta__ = {
                         filter: "." + OVERFLOW_ANCHOR,
                         tap: proxy(that._toggleOverflow, that)
                     });
-
                 }
 
                 if(options.items && options.items.length) {
@@ -381,30 +383,33 @@ var __meta__ = {
             },
 
             destroy: function() {
-                this.element.find("." + SPLIT_BUTTON).each(function(idx, element) {
+                var that = this;
+
+                that.element.find("." + SPLIT_BUTTON).each(function(idx, element) {
                     $(element).data("kendoPopup").destroy();
                 });
 
-                this.userEvents.destroy();
-                //this.splitButtonUserEvents.destroy();
+                that.userEvents.destroy();
+                //that.splitButtonUserEvents.destroy();
 
-                if (this.options.resizable) {
-                    this.overflowUserEvents.destroy();
-                    this.popup.destroy();
+                if (that.options.resizable) {
+                    that.overflowUserEvents.destroy();
+                    that.popup.destroy();
                 }
 
-                Widget.fn.destroy.call(this);
+                Widget.fn.destroy.call(that);
             },
 
             add: function(options) {
                 var component = components[options.type],
                     template = options.template,
-                    element,
+                    element, that = this,
                     overflowTemplate = options.overflowTemplate,
                     overflowElement;
 
                 $.extend(options, {
-                    uid: kendo.guid()
+                    uid: kendo.guid(),
+                    animation: that.animation
                 });
 
                 if (template && !overflowTemplate) {
@@ -412,7 +417,7 @@ var __meta__ = {
                 }
 
                 //add the command in the overflow popup
-                if (options.overflow !== OVERFLOW_NEVER && this.options.resizable) {
+                if (options.overflow !== OVERFLOW_NEVER && that.options.resizable) {
                     if (overflowTemplate) { //template command
                         overflowElement = isFunction(overflowTemplate) ? $(overflowTemplate(options)) : $(overflowTemplate);
                     } else if (component) { //build-in command
@@ -423,8 +428,8 @@ var __meta__ = {
                         if(overflowElement.prop("tagName") !== "LI") {
                             overflowElement = overflowElement.wrap("<li></li>").parent();
                         }
-                        this._attributes(overflowElement, options);
-                        overflowElement.addClass("k-item k-state-default").appendTo(this.popup.element);
+                        that._attributes(overflowElement, options);
+                        overflowElement.addClass("k-item k-state-default").appendTo(that.popup.element);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
                             overflowElement.addClass(OVERFLOW_HIDDEN);
@@ -441,12 +446,12 @@ var __meta__ = {
                     }
 
                     if (element && element.length) {
-                        this._attributes(element, options);
-                        element.appendTo(this.element).css("visibility", "hidden");
+                        that._attributes(element, options);
+                        element.appendTo(that.element).css("visibility", "hidden");
 
-                        var containerWidth = this.element.innerWidth();
+                        var containerWidth = that.element.innerWidth();
 
-                        this._shrink(containerWidth);
+                        that._shrink(containerWidth);
 
                         element.css("visibility", "visible");
                     }
@@ -494,6 +499,7 @@ var __meta__ = {
                     origin: "bottom right",
                     position: "top right",
                     anchor: overflowAnchor,
+                    animation: that.animation,
                     open: function() {
                         kendo.wrap(that.popup.element)
                             .addClass("k-overflow-wrapper")
