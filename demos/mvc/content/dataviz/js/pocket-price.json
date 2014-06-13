@@ -1,0 +1,42 @@
+[
+    {
+        "name": "List",
+        "value": 100
+    },
+    {
+        "name": "List\nDiscount",
+        "value": -5
+    },
+    {
+        "name": "Invoice",
+        "summary": "total"
+    },
+    {
+        "name": "Invoice\nDiscount",
+        "value": -6
+    },
+    {
+        "name": "Rebates",
+        "value": -3
+    },
+    {
+        "name": "Errors",
+        "value": -1.1
+    },
+    {
+        "name": "Pocket\nPrice",
+        "summary": "total"
+    },
+    {
+        "name": "Cost",
+        "value": -57.1
+    },
+    {
+        "name": "Handling",
+        "value": -0.5
+    },
+    {
+        "name": "Pocket\nMargin",
+        "summary": "total"
+    }
+]

@@ -133,6 +133,16 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The data item field which contains the summary type for waterfall series.
+Summary columns are optional and can be one of two types:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function summaryField($value) {
+        return $this->setProperty('summaryField', $value);
+    }
+
+    /**
     * specifies the ratio top-base/bottom-base of the whole chart. neckRatio set to three means the top base is three times smaller than the bottom base.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
@@ -476,7 +486,7 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
-    * The color to use for bar or column series with negative values. Accepts a valid CSS color string, including hex and rgb.
+    * The color to use for bar, column or waterfall series with negative values. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */

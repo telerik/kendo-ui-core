@@ -133,6 +133,7 @@ var __meta__ = {
         FUNNEL = "funnel",
         GLASS = "glass",
         HORIZONTAL = "horizontal",
+        HORIZONTAL_WATERFALL = "horizontalWaterfall",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
         INSIDE_BASE = "insideBase",
@@ -188,6 +189,7 @@ var __meta__ = {
         STD_ERR = "stderr",
         STD_DEV = "stddev",
         STRING = "string",
+        SUMMARY_FIELD = "summary",
         TIME_PER_SECOND = 1000,
         TIME_PER_MINUTE = 60 * TIME_PER_SECOND,
         TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
@@ -216,6 +218,7 @@ var __meta__ = {
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
         VERTICAL_LINE = "verticalLine",
+        WATERFALL = "waterfall",
         WEEKS = "weeks",
         WHITE = "#fff",
         X = "x",
@@ -230,7 +233,7 @@ var __meta__ = {
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET, RANGE_COLUMN, RANGE_BAR, WATERFALL, HORIZONTAL_WATERFALL
         ];
 
     var DateLabelFormats = {
@@ -2886,6 +2889,8 @@ var __meta__ = {
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
+                runningTotal: point.runningTotal,
+                total: point.total,
                 element: $(e.target)
             });
         },
@@ -2899,6 +2904,8 @@ var __meta__ = {
                 category: point.category,
                 series: point.series,
                 dataItem: point.dataItem,
+                runningTotal: point.runningTotal,
+                total: point.total,
                 element: $(e.target)
             });
         }
@@ -2988,6 +2995,8 @@ var __meta__ = {
                         category: this.category,
                         value: this.value,
                         percentage: this.percentage,
+                        runningTotal: this.runningTotal,
+                        total: this.total,
                         series: this.series
                     });
                 } else {
@@ -3465,8 +3474,9 @@ var __meta__ = {
                 low = stackedErrorRange.low;
                 high = stackedErrorRange.high;
             } else {
-                chart.updateRange({value: low}, categoryIx, series);
-                chart.updateRange({value: high}, categoryIx, series);
+                var fields = { categoryIx: categoryIx, series: series };
+                chart.updateRange({value: low}, fields);
+                chart.updateRange({value: high}, fields);
             }
 
             errorBar = new CategoricalErrorBar(low, high, isVertical, chart, series, options);
@@ -3494,28 +3504,27 @@ var __meta__ = {
             return {low: low, high: high};
         },
 
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                seriesPoints = chart.seriesPoints[seriesIx],
-                point;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
 
+            var categoryPoints = chart.categoryPoints[categoryIx];
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
             }
 
+            var seriesPoints = chart.seriesPoints[seriesIx];
             if (!seriesPoints) {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(data.valueFields, categoryIx, series);
-
-            point = chart.createPoint(data, category, categoryIx, series, seriesIx);
+            var point = chart.createPoint(data, fields);
             if (point) {
-                point.category = category;
-                point.categoryIx = categoryIx;
-                point.series = series;
-                point.seriesIx = seriesIx;
+                $.extend(point, fields);
+
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
                 point.noteText = data.fields.noteText;
@@ -3525,6 +3534,8 @@ var __meta__ = {
             chart.points.push(point);
             seriesPoints.push(point);
             categoryPoints.push(point);
+
+            chart.updateRange(data.valueFields, fields);
         },
 
         evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
@@ -3549,9 +3560,9 @@ var __meta__ = {
             return options;
         },
 
-        updateRange: function(data, categoryIx, series) {
+        updateRange: function(data, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 value = data.value,
                 axisRange = chart.valueAxisRanges[axisName];
 
@@ -3587,7 +3598,11 @@ var __meta__ = {
                 value, valueAxis,
                 point;
 
-            chart.traverseDataPoints(function(data, category, categoryIx, currentSeries) {
+            chart.traverseDataPoints(function(data, fields) {
+                var category = fields.category;
+                var categoryIx = fields.categoryIx;
+                var currentSeries = fields.series;
+
                 value = chart.pointValue(data);
 
                 valueAxis = chart.seriesValueAxis(currentSeries);
@@ -3605,7 +3620,7 @@ var __meta__ = {
                     if (valueSlot) {
                         var pointSlot = chart.pointSlot(categorySlot, valueSlot);
 
-                        point.aboveAxis = chart.aboveAxis(value, valueAxis);
+                        point.aboveAxis = chart.aboveAxis(point, valueAxis);
                         if (chart.options.isStacked100) {
                             point.percentage = chart.plotValue(point);
                         }
@@ -3622,8 +3637,9 @@ var __meta__ = {
             chart.box = targetBox;
         },
 
-        aboveAxis: function(value, valueAxis) {
+        aboveAxis: function(point, valueAxis) {
             var axisCrossingValue = this.categoryAxisCrossingValue(valueAxis);
+            var value = point.value;
 
             return valueAxis.options.reverse ?
                 value < axisCrossingValue : value >= axisCrossingValue;
@@ -3678,7 +3694,12 @@ var __meta__ = {
                     currentCategory = categories[categoryIx];
                     pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
 
-                    callback(pointData, currentCategory, categoryIx, currentSeries, seriesIx);
+                    callback(pointData, {
+                        category: currentCategory,
+                        categoryIx: categoryIx,
+                        series: currentSeries,
+                        seriesIx: seriesIx
+                    });
                 }
             }
         },
@@ -3708,12 +3729,6 @@ var __meta__ = {
     });
 
     var BarChart = CategoricalChart.extend({
-        init: function(plotArea, options) {
-            var chart = this;
-
-            CategoricalChart.fn.init.call(chart, plotArea, options);
-        },
-
         render: function() {
             var chart = this;
 
@@ -3741,17 +3756,21 @@ var __meta__ = {
             return limits;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = chart.pointValue(data),
-                options = chart.options,
-                children = chart.children,
-                isStacked = chart.options.isStacked,
-                point,
-                pointType = chart.pointType(),
-                pointOptions,
-                cluster,
-                clusterType = chart.clusterType();
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = chart.pointValue(data);
+            var options = chart.options;
+            var children = chart.children;
+            var isStacked = chart.options.isStacked;
+            var point;
+            var pointType = chart.pointType();
+            var pointOptions;
+            var cluster;
+            var clusterType = chart.clusterType();
 
             pointOptions = this.pointOptions(series, seriesIx);
 
@@ -3895,9 +3914,9 @@ var __meta__ = {
             return [point.value.from, point.value.to];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 from = value.from,
                 to = value.to,
                 axisRange = chart.valueAxisRanges[axisName];
@@ -3914,7 +3933,8 @@ var __meta__ = {
             }
         },
 
-        aboveAxis: function(value){
+        aboveAxis: function(point){
+            var value = point.value;
             return value.from < value.to;
         }
     });
@@ -3960,14 +3980,18 @@ var __meta__ = {
             return [axisCrossingValue, point.value.current || axisCrossingValue];
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields,
-                options = chart.options,
-                children = chart.children,
-                bullet,
-                bulletOptions,
-                cluster;
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields;
+            var options = chart.options;
+            var children = chart.children;
+            var bullet;
+            var bulletOptions;
+            var cluster;
 
             bulletOptions = deepExtend({
                 vertical: !options.invertAxes,
@@ -3997,9 +4021,9 @@ var __meta__ = {
             return bullet;
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 current = value.current,
                 target = value.target,
                 axisRange = chart.valueAxisRanges[axisName];
@@ -4812,18 +4836,21 @@ var __meta__ = {
             return LinePoint;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields.value,
-                options = chart.options,
-                isStacked = options.isStacked,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                missingValues = chart.seriesMissingValues(series),
-                stackPoint,
-                plotValue = 0,
-                fields = data.fields,
-                point,
-                pointOptions;
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields.value;
+            var options = chart.options;
+            var isStacked = options.isStacked;
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var missingValues = chart.seriesMissingValues(series);
+            var stackPoint;
+            var plotValue = 0;
+            var point;
+            var pointOptions;
 
             if (!defined(value) || value === null) {
                 if (missingValues === ZERO) {
@@ -5969,17 +5996,21 @@ var __meta__ = {
             }
         },
 
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                options = chart.options,
-                value = data.valueFields,
-                children = chart.children,
-                pointColor = data.fields.color || series.color,
-                valueParts = this.splitValue(value),
-                hasValue = areNumbers(valueParts),
-                categoryPoints = chart.categoryPoints[categoryIx],
-                dataItem = series.data[categoryIx],
-                point, cluster;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var options = chart.options;
+            var value = data.valueFields;
+            var children = chart.children;
+            var pointColor = data.fields.color || series.color;
+            var valueParts = chart.splitValue(value);
+            var hasValue = areNumbers(valueParts);
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var dataItem = series.data[categoryIx];
+            var point, cluster;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -5993,8 +6024,7 @@ var __meta__ = {
                 }
 
                 point = chart.createPoint(
-                    data, category, categoryIx,
-                    deepExtend({}, series, { color: pointColor })
+                    data, deepExtend(fields, { series: { color: pointColor } })
                 );
             }
 
@@ -6009,7 +6039,7 @@ var __meta__ = {
             }
 
             if (point) {
-                chart.updateRange(value, categoryIx, series);
+                chart.updateRange(value, fields);
 
                 cluster.append(point);
 
@@ -6030,11 +6060,15 @@ var __meta__ = {
             return Candlestick;
         },
 
-        createPoint: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                value = data.valueFields,
-                pointOptions = deepExtend({}, series),
-                pointType = chart.pointType();
+        createPoint: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var value = data.valueFields;
+            var pointOptions = deepExtend({}, series);
+            var pointType = chart.pointType();
 
             pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
@@ -6047,9 +6081,9 @@ var __meta__ = {
             return [value.low, value.open, value.close, value.high];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 axisRange = chart.valueAxisRanges[axisName],
                 parts = chart.splitValue(value);
 
@@ -6177,17 +6211,21 @@ var __meta__ = {
     });
 
     var BoxPlotChart = CandlestickChart.extend({
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                options = chart.options,
-                children = chart.children,
-                pointColor = data.fields.color || series.color,
-                value = data.valueFields,
-                valueParts = chart.splitValue(value),
-                hasValue = areNumbers(valueParts),
-                categoryPoints = chart.categoryPoints[categoryIx],
-                dataItem = series.data[categoryIx],
-                point, cluster;
+        addValue: function(data, fields) {
+            var chart = this;
+            var categoryIx = fields.categoryIx;
+            var category = fields.category;
+            var series = fields.series;
+            var seriesIx = fields.seriesIx;
+            var options = chart.options;
+            var children = chart.children;
+            var pointColor = data.fields.color || series.color;
+            var value = data.valueFields;
+            var valueParts = chart.splitValue(value);
+            var hasValue = areNumbers(valueParts);
+            var categoryPoints = chart.categoryPoints[categoryIx];
+            var dataItem = series.data[categoryIx];
+            var point, cluster;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -6195,8 +6233,7 @@ var __meta__ = {
 
             if (hasValue) {
                 point = chart.createPoint(
-                    data, category, categoryIx,
-                    deepExtend({}, series, { color: pointColor })
+                    data, deepExtend(fields, { series: { color: pointColor } })
                 );
             }
 
@@ -6211,7 +6248,7 @@ var __meta__ = {
             }
 
             if (point) {
-                chart.updateRange(value, categoryIx, series);
+                chart.updateRange(value, fields);
 
                 cluster.append(point);
 
@@ -6238,9 +6275,9 @@ var __meta__ = {
             ];
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(value, fields) {
             var chart = this,
-                axisName = series.axis,
+                axisName = fields.series.axis,
                 axisRange = chart.valueAxisRanges[axisName],
                 parts = chart.splitValue(value).concat(
                     chart.filterOutliers(value.outliers));
@@ -6836,27 +6873,6 @@ var __meta__ = {
                     });
                 }
             }
-        },
-
-        pointsTotal: function(series) {
-            var data = series.data,
-                length = data.length,
-                sum = 0,
-                value, i, pointData;
-
-            for (i = 0; i < length; i++) {
-                pointData = SeriesBinder.current.bindPoint(series, i);
-                value = pointData.valueFields.value;
-                if (typeof value === "string") {
-                    value = parseFloat(value);
-                }
-
-                if (value && pointData.fields.visible !== false) {
-                    sum += value;
-                }
-            }
-
-            return sum;
         }
     };
 
@@ -6906,7 +6922,7 @@ var __meta__ = {
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                 currentSeries = series[seriesIx];
                 data = currentSeries.data;
-                total = chart.pointsTotal(currentSeries);
+                total = seriesTotal(currentSeries);
                 anglePerValue = 360 / total;
 
                 if (defined(currentSeries.startAngle)) {
@@ -7450,6 +7466,164 @@ var __meta__ = {
         animationDelay: function(categoryIndex, seriesIndex, seriesCount) {
             return categoryIndex * DONUT_SECTOR_ANIM_DELAY +
                 (INITIAL_ANIMATION_DURATION * (seriesIndex + 1) / (seriesCount + 1));
+        }
+    });
+
+    var WaterfallChart = BarChart.extend({
+        render: function() {
+            BarChart.fn.render.call(this);
+            this.createSegments();
+        },
+
+        traverseDataPoints: function(callback) {
+            var series = this.options.series;
+            var categories = this.categoryAxis.options.categories || [];
+            var totalCategories = categoriesCount(series);
+            var isVertical = !this.options.invertAxes;
+
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx];
+                var total = 0;
+                var runningTotal = 0;
+
+                for (var categoryIx = 0; categoryIx < totalCategories; categoryIx++) {
+                    var data = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                    var value = data.valueFields.value;
+                    var summary = data.fields.summary;
+
+                    var from = total;
+                    var to;
+                    if (summary) {
+                        if (summary.toLowerCase() === "total") {
+                            data.valueFields.value = total;
+                            from = 0;
+                            to = total;
+                        } else {
+                            data.valueFields.value = runningTotal;
+                            to = from - runningTotal;
+                            runningTotal = 0;
+                        }
+                    } else if (isNumber(value)) {
+                        runningTotal += value;
+                        total += value;
+                        to = total;
+                    }
+
+                    callback(data, {
+                        category: categories[categoryIx],
+                        categoryIx: categoryIx,
+                        series: currentSeries,
+                        seriesIx: seriesIx,
+                        total: total,
+                        runningTotal: runningTotal,
+                        from: from,
+                        to: to,
+                        isVertical: isVertical
+                    });
+                }
+            }
+        },
+
+        updateRange: function(value, fields) {
+            BarChart.fn.updateRange.call(this, { value: fields.to }, fields);
+        },
+
+        aboveAxis: function(point) {
+            return point.value >= 0;
+        },
+
+        plotRange: function(point) {
+            return [point.from, point.to];
+        },
+
+        createSegments: function() {
+            var series = this.options.series;
+            var seriesPoints = this.seriesPoints;
+            var segments = this.segments = [];
+
+            for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                var currentSeries = series[seriesIx];
+                var points = seriesPoints[seriesIx];
+
+                if (points) {
+                    var prevPoint;
+                    for (var pointIx = 0; pointIx < points.length; pointIx++) {
+                        var point = points[pointIx];
+
+                        if (point && prevPoint) {
+                            var segment = new WaterfallSegment(prevPoint, point, currentSeries);
+                            segments.push(segment);
+                            this.append(segment);
+                        }
+
+                        prevPoint = point;
+                    }
+                }
+            }
+        }
+    });
+
+    var WaterfallSegment = ChartElement.extend({
+        init: function(from, to, series) {
+            var segment = this;
+
+            ChartElement.fn.init.call(segment);
+
+            segment.from = from;
+            segment.to = to;
+            segment.series = series;
+            segment.id = uniqueId();
+        },
+
+        options: {
+            animation: {
+                type: FADEIN,
+                delay: INITIAL_ANIMATION_DURATION
+            }
+        },
+
+        linePoints: function() {
+            var points = [];
+            var from = this.from;
+            var fromBox = from.box;
+            var toBox = this.to.box;
+
+            if (from.isVertical) {
+                var y = from.aboveAxis ? fromBox.y1 : fromBox.y2;
+                points.push(
+                    Point2D(fromBox.x1, y),
+                    Point2D(toBox.x2, y)
+                );
+            } else {
+                var x = from.aboveAxis ? fromBox.x2 : fromBox.x1;
+                points.push(
+                    Point2D(x, fromBox.y1),
+                    Point2D(x, toBox.y2)
+                );
+            }
+
+            return points;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                options = segment.options,
+                series = segment.series;
+
+            ChartElement.fn.getViewElements.call(segment, view);
+
+            var line = series.line || {};
+            return [
+                view.createPolyline(segment.linePoints(), false, {
+                    id: segment.id,
+                    animation: options.animation,
+                    stroke: line.color,
+                    strokeWidth: line.width,
+                    strokeOpacity: line.opacity,
+                    fill: "",
+                    dashType: line.dashType
+                })
+            ];
         }
     });
 
@@ -8522,7 +8696,7 @@ var __meta__ = {
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
-                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA, RANGE_BAR]
+                    series[0].type, [BAR, BULLET, VERTICAL_LINE, VERTICAL_AREA, RANGE_BAR, HORIZONTAL_WATERFALL]
                 );
 
                 for (var i = 0; i < series.length; i++) {
@@ -8629,6 +8803,11 @@ var __meta__ = {
 
                 plotArea.createOHLCChart(
                     filterSeriesByType(filteredSeries, OHLC),
+                    pane
+                );
+
+                plotArea.createWaterfallChart(
+                    filterSeriesByType(filteredSeries, [WATERFALL, HORIZONTAL_WATERFALL]),
                     pane
                 );
             }
@@ -8901,6 +9080,23 @@ var __meta__ = {
                 });
 
             plotArea.appendChart(chart, pane);
+        },
+
+        createWaterfallChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                waterfallChart = new WaterfallChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                });
+
+            plotArea.appendChart(waterfallChart, pane);
         },
 
         axisRequiresRounding: function(categoryAxisName, categoryAxisIndex) {
@@ -9826,6 +10022,8 @@ var __meta__ = {
                     series: point.series,
                     dataItem: point.dataItem,
                     percentage: point.percentage,
+                    runningTotal: point.runningTotal,
+                    total: point.total,
                     low: point.low,
                     high: point.high,
                     xLow: point.xLow,
@@ -11053,6 +11251,7 @@ var __meta__ = {
         delete seriesDefaults.polarLine;
         delete seriesDefaults.radarArea;
         delete seriesDefaults.radarLine;
+        delete seriesDefaults.waterfall;
     }
 
     function applySeriesColors(options) {
@@ -11647,13 +11846,33 @@ var __meta__ = {
         }
     }
 
+    function seriesTotal(series) {
+        var data = series.data;
+        var sum = 0;
+
+        for (var i = 0; i < data.length; i++) {
+            var pointData = SeriesBinder.current.bindPoint(series, i);
+            var value = pointData.valueFields.value;
+
+            if (typeof value === STRING) {
+                value = parseFloat(value);
+            }
+
+            if (isNumber(value) && pointData.fields.visible !== false) {
+                sum += value;
+            }
+        }
+
+        return sum;
+    }
+
     // Exports ================================================================
     dataviz.ui.plugin(Chart);
 
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
         CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT,
-        RANGE_COLUMN, RANGE_BAR
+        RANGE_COLUMN, RANGE_BAR, WATERFALL, HORIZONTAL_WATERFALL
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -11673,8 +11892,13 @@ var __meta__ = {
         [FROM, TO], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
+    SeriesBinder.current.register(
+        [WATERFALL, HORIZONTAL_WATERFALL],
+        [VALUE], [CATEGORY, COLOR, NOTE_TEXT, SUMMARY_FIELD]
+    );
+
     DefaultAggregates.current.register(
-        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA, WATERFALL, HORIZONTAL_WATERFALL],
         { value: MAX, color: FIRST, noteText: FIRST, errorLow: MIN, errorHigh: MAX }
     );
 
@@ -11793,6 +12017,8 @@ var __meta__ = {
         Tooltip: Tooltip,
         OHLCChart: OHLCChart,
         OHLCPoint: OHLCPoint,
+        WaterfallChart: WaterfallChart,
+        WaterfallSegment: WaterfallSegment,
         XYPlotArea: XYPlotArea,
 
         addDuration: addDuration,
@@ -11809,6 +12035,7 @@ var __meta__ = {
         filterSeriesByType: filterSeriesByType,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
+        seriesTotal: seriesTotal,
         singleItemOrArray: singleItemOrArray,
         sortDates: sortDates,
         sparseArrayLimits: sparseArrayLimits,

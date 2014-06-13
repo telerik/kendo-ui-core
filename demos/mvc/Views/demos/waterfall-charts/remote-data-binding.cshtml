@@ -1,0 +1,57 @@
+<div id="example">
+    <div class="demo-section k-content">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/js/pocket-price.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                title: {
+                    text: '"Pocket price" waterfall'
+                },
+                legend: {
+                    visible: false
+                },
+                series:
+                [{
+                    type: "waterfall",
+                    field: "value",
+                    summaryField: "summary",
+                    categoryField: "name",
+                    labels: {
+                        visible: true,
+                        position: "outsideEnd",
+                        format: "C"
+                    },
+                    color: function(point) {
+                        var summary = point.dataItem.summary;
+                        if (summary) {
+                            return summary == "total" ? "#555" : "gray";
+                        }
+
+                        if (point.value > 0) {
+                            return "green";
+                        } else {
+                            return "red";
+                        }
+                    }
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "C"
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

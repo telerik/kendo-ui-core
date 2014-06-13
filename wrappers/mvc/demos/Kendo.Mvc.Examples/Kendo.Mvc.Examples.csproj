@@ -184,6 +184,10 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\Waterfall_Charts\HorizontalController.cs" />
+    <Compile Include="Controllers\Waterfall_Charts\IndexController.cs" />
+    <Compile Include="Controllers\Waterfall_Charts\Local_Data_BindingController.cs" />
+    <Compile Include="Controllers\Waterfall_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Diagram\LayoutController.cs" />
     <Compile Include="Controllers\Diagram\IndexController.cs" />
     <Compile Include="Controllers\Funnel_Charts\IndexController.cs" />
@@ -602,6 +606,9 @@
     <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Radar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Stock.cs" />
+    <Compile Include="Models\Chart\CashFlowData.cs" />
+    <Compile Include="Models\Chart\PriceData.cs" />
+    <Compile Include="Models\Chart\RequestDetail.cs" />
     <Compile Include="Models\Chart\CorporateData.cs" />
     <Compile Include="Models\Chart\DownloadSpeed.cs" />
     <Compile Include="Models\Diagram\DiagramDataRepository.cs" />
@@ -775,6 +782,10 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\waterfall_charts\horizontal.aspx" />
+    <Content Include="Areas\aspx\Views\waterfall_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\waterfall_charts\local_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\waterfall_charts\remote_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\dashboards\car_dashboard.aspx" />
     <Content Include="Areas\aspx\Views\diagram\index.aspx" />
     <Content Include="Areas\aspx\Views\donut_charts\donut_labels.aspx" />
@@ -2486,6 +2497,10 @@
     <Content Include="Areas\razor\Views\gantt\index.cshtml" />
     <Content Include="Areas\razor\Views\range_bar_charts\local_data_binding.cshtml" />
     <Content Include="Areas\razor\Views\range_bar_charts\remote_data_binding.cshtml" />
+    <Content Include="Areas\razor\Views\waterfall_charts\index.cshtml" />
+    <Content Include="Areas\razor\Views\waterfall_charts\local_data_binding.cshtml" />
+    <Content Include="Areas\razor\Views\waterfall_charts\remote_data_binding.cshtml" />
+    <Content Include="Areas\razor\Views\waterfall_charts\horizontal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

@@ -33,6 +33,7 @@ var __meta__ = {
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
         limitValue = dataviz.limitValue,
+        seriesTotal = dataviz.seriesTotal,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -117,7 +118,7 @@ var __meta__ = {
                 return;
             }
 
-            var total = chart.pointsTotal(series),
+            var total = seriesTotal(series),
                 value,
                 i;
 
