@@ -184,7 +184,10 @@ var __meta__ = {
 
         hideEnd: function() {
             this.element.remove();
-        }
+        },
+
+        beforeTransition: $.noop,
+        afterTransition: $.noop
     });
 
     var Layout = View.extend({
