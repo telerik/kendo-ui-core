@@ -774,5 +774,277 @@
         equal(data[12].value, "col 0 dim 2 level 1-0");
         equal(data[13].value, "col 1 dim 2 level 1-0");
     });
+
+    test("expand first member on node with alreay expanded second member on column axis", function() {
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-1", parentName: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ],
+            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn(["dim 0 level 0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 5);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-1");
+        equal(data[3].value, "dim 1 level 1-0");
+        equal(data[4].value, "dim 1 level 1-1");
+    });
+
+    test("expand second member on node with alreay expanded first member on column axis", function() {
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-1", parentName: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ],
+            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn(["dim 0 level 0", "dim 1 level 0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 5);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-1");
+        equal(data[3].value, "dim 1 level 1-0");
+        equal(data[4].value, "dim 1 level 1-1");
+    });
+
+    test("expand first member on node with alreay expanded second member on row axis", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-1", parentName: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ],
+            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 5);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-1");
+        equal(data[3].value, "dim 1 level 1-0");
+        equal(data[4].value, "dim 1 level 1-1");
+    });
+
+    test("expand second member on node with alreay expanded first member on rows axis", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-0", parentName: "dim 1 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "dim 1 level 1-1", parentName: "dim 1 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+        var data = [
+            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ],
+            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ]
+        ];
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 0", "dim 1 level 0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 5);
+        equal(data[0].value, "dim 0 level 0");
+        equal(data[1].value, "dim 0 level 1-0");
+        equal(data[2].value, "dim 0 level 1-1");
+        equal(data[3].value, "dim 1 level 1-0");
+        equal(data[4].value, "dim 1 level 1-1");
+    });
 })();
 
