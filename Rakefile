@@ -34,7 +34,6 @@ ARCHIVE_ROOT = File.join(RELEASE_ROOT, "Builds")
 
 if ENV['DRY_RUN']
     ADMIN_URL = 'http://integrationadmin.telerik.com/'
-    ADMIN_LOGIN = 'petyo.ivanov@telerik.local'
     ADMIN_RELEASE_UPLOAD_LOGIN = 'stefan.rahnev@telerik.local'
 
     SITE_URL = "http://wwwsit.telerik.com"
