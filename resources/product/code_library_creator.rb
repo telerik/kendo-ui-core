@@ -71,7 +71,7 @@ def create_code_library(bot, product_name, tname)
     navigate_to_cl_section(bot)
     create_cl_thread(bot, product_name, tname)
 
-    bot.driver.quit
+    #bot.driver.quit
 end
 def navigate_to_cl_section(bot)
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Content')]"))
@@ -87,20 +87,23 @@ def create_cl_thread(bot, product_name, tname)
       p "product found>>#{tname}"
       bot.click_checkbox(tname)
       bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create a forum in selected group')]"))
-      bot.wait_for_title("Forums")
+      sleep(3)
+      #bot.wait_for_title("Forums")
 
       set_cl_fields(bot, product_name)
 
-      bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Create this forum')]"))
+      bot.execute_script("$('[id*=\"saveButton\"]').click()")
       sleep(3)
-      #bot.wait_for_validation("//div[contains(text(), 'successfully')]")
     end
 end
 def set_cl_fields(bot, product_name)
-      p "setting code library fields>>"
+      p "setting code library fields>>#{product_name}"
       bot.execute_script("$('[id*=\"titleFieldControl\"]').val('#{product_name}')")
-      bot.execute_script("$('[id*=\"pageUrl\"]').className('sfSelectedItem')")
+      sleep(3)
+      bot.execute_script("$('[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
+      sleep(3)
       bot.execute_script("$('[id*=\"pageUrl\"]').text('Code Library')")
+      sleep(3)
 
       if product_name.index("Mobile") == nil
         bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
@@ -108,11 +111,12 @@ def set_cl_fields(bot, product_name)
         product_name_mod = product_name.downcase.sub " (mobile)",""
         bot.execute_script("$('[id*=\"urlName\"]').text('mobile-#{product_name_mod}')")
       end
-      
+      sleep(3)
 
       bot.execute_script("$('[id*=\"_singleCheckBox\"]').click()")
-      sleep(1)
+      sleep(3)
       bot.execute_script("$('[id*=\"radioButtons\"]').click()")
-      sleep(1)
+      sleep(3)
       bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
+      sleep(3)
 end
