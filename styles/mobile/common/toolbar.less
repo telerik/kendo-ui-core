@@ -1,0 +1,135 @@
+@import "button.less";
+
+/* Toolbar */
+
+.k-toolbar
+{
+    position: relative;
+    display: block;
+    vertical-align: middle;
+}
+
+.k-toolbar .k-button .k-icon
+{
+    vertical-align: middle;
+    margin-top: -1px;
+}
+
+.k-toolbar-resizable
+{
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.k-toolbar > *
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.k-toolbar .k-button-group
+{
+    list-style-type: none;
+}
+
+.k-toolbar .k-button-group > li
+{
+    display: inline-block;
+}
+
+.k-toolbar .k-button-group .k-button
+{
+    margin: 0 0 0 -1px;
+    border-radius: 0;
+}
+
+.k-toolbar .k-button,
+.k-toolbar .k-split-button,
+.k-toolbar .k-button-group
+{
+    margin: .4em .2em;
+}
+
+.k-toolbar .k-split-button
+{
+    padding-left: 0;
+}
+
+.k-toolbar .k-split-button .k-button,
+.k-toolbar .k-button-group .k-group-start
+{
+    margin: 0;
+}
+
+.k-toolbar .k-split-button .k-split-button-arrow
+{
+    margin: 0 0 0 -1px;
+}
+
+.k-toolbar .k-overflow-anchor
+{
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    height: 3em;
+    width: 3em;
+    padding: 0 1em;
+    margin: 0 ;
+    position: relative;
+    float: right;
+    border-radius: 0;
+}
+
+.k-overflow-container .k-item
+{
+    float: none;
+    border: 0;
+}
+
+.k-overflow-container .k-overflow-button,
+.k-split-container .k-button
+{
+    text-align: left;
+    display: block;
+    background: none;
+    border-color: transparent;
+    white-space: nowrap;
+}
+
+.k-overflow-container .k-button-group
+{
+    padding: 0;
+}
+
+.k-overflow-container .k-button-group > li
+{
+    display: block;
+}
+
+.k-overflow-container .k-overflow-group
+{
+    border-width: 1px 0;
+    border-style: solid;
+    border-radius: 0;
+    padding: 2px 0;
+    margin: 1px 0;
+}
+
+.k-overflow-container .k-overflow-hidden
+{
+    display: none;
+}
+
+.k-overflow-container .k-overflow-first-visible,
+.k-overflow-container .k-overflow-group + .k-overflow-group
+{
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 1px;
+}
+
+.k-overflow-container .k-overflow-last-visible
+{
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 1px;
+}
