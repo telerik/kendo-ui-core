@@ -61,6 +61,12 @@ namespace Kendo.Mvc.UI
         {
             return new ChartWaterfallSeriesSerializer(this);
         }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Orientation = ChartSeriesOrientation.Vertical;
+        }
     }
 
     public class ChartWaterfallSeries<TModel, TValue> : ChartWaterfallSeries<TModel, TValue, string> where TModel : class

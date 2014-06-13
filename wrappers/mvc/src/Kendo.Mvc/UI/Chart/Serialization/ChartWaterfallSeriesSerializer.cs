@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             FluentDictionary.For(result)
+                .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "horizontalWaterfall" : "waterfall")
                 .Add("summaryField", series.SummaryMember, () => series.SummaryMember != null);
 
             return result;

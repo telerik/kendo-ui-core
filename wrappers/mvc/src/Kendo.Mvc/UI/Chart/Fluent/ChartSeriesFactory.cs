@@ -2672,14 +2672,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="valueExpression">
         /// The expression used to extract the point value from the chart model
         /// </param>
-        /// <param name="summaryExpression">
-        /// The expression used to extract the point summary type from the chart model
-        /// </param>
         public virtual ChartWaterfallSeriesBuilder<TModel> Waterfall<TValue>(
-            Expression<Func<TModel, TValue>> valueExpression,
-            Expression<Func<TModel, string>> summaryExpression = null)
+            Expression<Func<TModel, TValue>> valueExpression)
         {
-            var series = new ChartWaterfallSeries<TModel, TValue, string>(valueExpression, null, summaryExpression);
+            var series = new ChartWaterfallSeries<TModel, TValue, string>(valueExpression, null, null);
             Container.Series.Add(series);
 
             return new ChartWaterfallSeriesBuilder<TModel>(series);
@@ -2762,6 +2758,102 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartWaterfallSeriesBuilder<TModel>(series);
         }
 
+        /// <summary>
+        /// Defines bound horizontal waterfall series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        /// <param name="summaryExpression">
+        /// The expression used to extract the point summary type from the chart model
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> HorizontalWaterfall<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> summaryExpression = null)
+        {
+            var builder = Waterfall(valueExpression, categoryExpression, summaryExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Horizontal;
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound horizontal waterfall series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> HorizontalWaterfall<TValue>(
+            Expression<Func<TModel, TValue>> valueExpression)
+        {
+            var builder = Waterfall(valueExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Horizontal;
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound horizontal waterfall series.
+        /// </summary>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="summaryMemberName">
+        /// The name of the note summary type member.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> HorizontalWaterfall(
+            string valueMemberName,
+            string categoryMemberName = null,
+            string summaryMemberName = null)
+        {
+            var builder = Waterfall(valueMemberName, categoryMemberName, summaryMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Horizontal;
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound horizontal waterfall series.
+        /// </summary>
+        /// <param name="memberType">
+        /// The type of the value member.
+        /// </param>
+        /// <param name="valueMemberName">
+        /// The name of the value member.
+        /// </param>
+        /// <param name="categoryMemberName">
+        /// The name of the category member.
+        /// </param>
+        /// <param name="summaryMemberName">
+        /// The name of the note summary type member.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> HorizontalWaterfall(
+            Type memberType,
+            string valueMemberName,
+            string categoryMemberName = null,
+            string summaryMemberName = null)
+        {
+            var builder = Waterfall(memberType, valueMemberName, categoryMemberName, summaryMemberName);
+            builder.Series.Orientation = ChartSeriesOrientation.Horizontal;
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines horizontal waterfall series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to.
+        /// </param>
+        public virtual ChartWaterfallSeriesBuilder<TModel> HorizontalWaterfall(IEnumerable data)
+        {
+            var builder = Waterfall(data);
+            builder.Series.Orientation = ChartSeriesOrientation.Horizontal;
+            return builder;
+        }
 
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {

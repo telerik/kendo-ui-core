@@ -139,6 +139,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAreaLineSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartFunnelSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBoxPlotSeriesSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartWaterfallSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramShapeBuilderTests.cs" />

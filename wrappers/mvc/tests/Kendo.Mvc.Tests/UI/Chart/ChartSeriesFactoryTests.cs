@@ -1012,5 +1012,223 @@ namespace Kendo.Mvc.UI.Tests.Chart
             var builder = factory.Bullet(new int[] { 1 });
             builder.Series.ShouldBeType<ChartBulletSeries<SalesData, object, string>>();
         }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_expression()
+        {
+            var builder = factory.Waterfall(s => s.RepSales);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_set_name_from_expression()
+        {
+            var builder = factory.Waterfall(s => s.RepSales);
+            builder.Series.Name.ShouldEqual("Rep Sales");
+        }
+
+        [Fact]
+        public void Waterfall_should_not_override_name_from_expression()
+        {
+            var builder = factory.Waterfall(s => s.RepSales).Name("Foo");
+            builder.Series.Name.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_expression_and_category_expression()
+        {
+            var builder = factory.Waterfall(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_expressions()
+        {
+            var builder = factory.Waterfall(s => s.RepSales, s => s.Date, s => s.Color);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_series_with_vertical_orientation()
+        {
+            var builder = factory.Waterfall(s => s.RepSales);
+            ((ChartWaterfallSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Vertical);
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_type_and_member_name()
+        {
+            var builder = factory.Waterfall(typeof(decimal), "RepSales");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.Waterfall(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_type_member_and_summary_member_name()
+        {
+            var builder = factory.Waterfall(typeof(decimal), "RepSales", null, "Color");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Waterfall_with_type_should_set_the_member_names()
+        {
+            var builder = factory.Waterfall(typeof(decimal), "RepSales", "Date", "RepName");
+            builder.Series.Member.ShouldEqual("RepSales");
+            builder.Series.CategoryMember.ShouldEqual("Date");
+            builder.Series.SummaryMember.ShouldEqual("RepName");
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_member_name()
+        {
+            var builder = factory.Waterfall("RepSales");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_member_and_summary_member_name()
+        {
+            var builder = factory.Waterfall("RepSales", null, "Color");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void Waterfall_should_create_bound_series_from_member_and_category_member_name()
+        {
+            var builder = factory.Waterfall("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void Waterfall_without_type_should_set_the_member_names()
+        {
+            var builder = factory.Waterfall("RepSales", "Date", "RepName");
+            builder.Series.Member.ShouldEqual("RepSales");
+            builder.Series.CategoryMember.ShouldEqual("Date");
+            builder.Series.SummaryMember.ShouldEqual("RepName");
+        }
+
+        [Fact]
+        public void Waterfall_should_create_unbound_bar_series_from_data()
+        {
+            var builder = factory.Waterfall(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, object>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_expression()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_set_name_from_expression()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales);
+            builder.Series.Name.ShouldEqual("Rep Sales");
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_not_override_name_from_expression()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales).Name("Foo");
+            builder.Series.Name.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_expression_and_category_expression()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales, s => s.Date);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_expressions()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales, s => s.Date, s => s.Color);
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_series_with_horizontal_orientation()
+        {
+            var builder = factory.HorizontalWaterfall(s => s.RepSales);
+            ((ChartWaterfallSeries<SalesData, decimal, string>)builder.Series).Orientation.ShouldEqual(ChartSeriesOrientation.Horizontal);
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_type_and_member_name()
+        {
+            var builder = factory.HorizontalWaterfall(typeof(decimal), "RepSales");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_type_member_and_category_member_name()
+        {
+            var builder = factory.HorizontalWaterfall(typeof(decimal), "RepSales", "Date");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_type_member_and_summary_member_name()
+        {
+            var builder = factory.HorizontalWaterfall(typeof(decimal), "RepSales", null, "Color");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_with_type_should_set_the_member_names()
+        {
+            var builder = factory.HorizontalWaterfall(typeof(decimal), "RepSales", "Date", "RepName");
+            builder.Series.Member.ShouldEqual("RepSales");
+            builder.Series.CategoryMember.ShouldEqual("Date");
+            builder.Series.SummaryMember.ShouldEqual("RepName");
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_member_name()
+        {
+            var builder = factory.HorizontalWaterfall("RepSales");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_member_and_summary_member_name()
+        {
+            var builder = factory.HorizontalWaterfall("RepSales", null, "Color");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, string>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_bound_series_from_member_and_category_member_name()
+        {
+            var builder = factory.HorizontalWaterfall("RepSales", "Date");
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, decimal, DateTime>>();
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_without_type_should_set_the_member_names()
+        {
+            var builder = factory.HorizontalWaterfall("RepSales", "Date", "RepName");
+            builder.Series.Member.ShouldEqual("RepSales");
+            builder.Series.CategoryMember.ShouldEqual("Date");
+            builder.Series.SummaryMember.ShouldEqual("RepName");
+        }
+
+        [Fact]
+        public void HorizontalWaterfall_should_create_unbound_bar_series_from_data()
+        {
+            var builder = factory.HorizontalWaterfall(new int[] { 1 });
+            builder.Series.ShouldBeType<ChartWaterfallSeries<SalesData, object>>();
+        }
     }
 }
