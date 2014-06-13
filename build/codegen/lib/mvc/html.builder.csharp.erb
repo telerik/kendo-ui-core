@@ -4,15 +4,15 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Extensions;
 
-    public class <%= csharp_class %>HtmlBuilder
+    public class <%= csharp_html_builder_class %><%= csharp_generic_constraints %>
     {
-        private readonly <%= csharp_class %> component;
+        private readonly <%= csharp_full_class %> component;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="<%= csharp_class %>HtmlBuilder" /> class.
         /// </summary>
         /// <param name="component">The <%= csharp_class %> component.</param>
-        public <%= csharp_class %>HtmlBuilder(<%= csharp_class %> component)
+        public <%= csharp_class %>HtmlBuilder(<%= csharp_full_class %> component)
         {
             this.component = component;
         }

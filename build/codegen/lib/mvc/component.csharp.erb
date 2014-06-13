@@ -9,7 +9,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    public class <%= csharp_class %> : WidgetBase
+    public class <%= csharp_class %><%= csharp_generic_args %> : WidgetBase<%= csharp_generic_constraints %>
     {
         private readonly IUrlGenerator urlGenerator;
 
@@ -38,7 +38,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            var html = new <%= csharp_class %>HtmlBuilder(this).Build();
+            var html = new <%= csharp_class %>HtmlBuilder<%= csharp_generic_args %>(this).Build();
 
             html.WriteTo(writer);
 

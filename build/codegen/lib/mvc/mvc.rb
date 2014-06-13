@@ -177,9 +177,9 @@ module CodeGen::MVC::Wrappers
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual <%= csharp_class %>Builder <%= csharp_class %>()
+        public virtual <%= csharp_class %>Builder<%= csharp_generic_args %> <%= csharp_class %><%= csharp_generic_args %>()<%= csharp_generic_constraints %>
         {
-            return new <%= csharp_class %>Builder(new <%= csharp_class %>(ViewContext, Initializer, UrlGenerator));
+            return new <%= csharp_class %>Builder<%= csharp_generic_args %>(new <%= csharp_class %><%= csharp_generic_args %>(ViewContext, Initializer, UrlGenerator));
         }
         })
 
@@ -196,6 +196,9 @@ module CodeGen::MVC::Wrappers
         def csharp_name
             postfix = name[/template$/i].nil? ? "" : "Id"
             name.slice(0,1).capitalize + name.slice(1..-1) + postfix
+        end
+
+        def csharp_generic_args
         end
 
         def full_name
@@ -251,7 +254,7 @@ module CodeGen::MVC::Wrappers
                 producedType = owner.csharp_class
             end
 
-            "#{producedType}Builder"
+            "#{producedType}Builder#{owner.csharp_generic_args}"
         end
 
         def to_fluent
@@ -350,6 +353,10 @@ module CodeGen::MVC::Wrappers
         end
     end
 
+    GENERIC_ARGS = {
+        'gantt' => 'class, IGanttTask'
+    }
+
     class Component < CodeGen::Component
         include Options
 
@@ -367,6 +374,28 @@ module CodeGen::MVC::Wrappers
 
         def csharp_class
             name
+        end
+
+        def csharp_full_class
+            csharp_class + csharp_generic_args
+        end
+
+        def csharp_builder_class
+            csharp_class + 'Builder' + csharp_generic_args
+        end
+
+        def csharp_html_builder_class
+            csharp_class + 'HtmlBuilder' + csharp_generic_args
+        end
+
+        def csharp_generic_args
+            GENERIC_ARGS[full_name] ? '<T>' : ""
+        end
+
+        def csharp_generic_constraints
+            return unless GENERIC_ARGS[full_name]
+
+            ' where T : ' + GENERIC_ARGS[full_name]
         end
 
         def component_template

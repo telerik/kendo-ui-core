@@ -9,11 +9,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    /// <summary>
-    /// The server side wrapper for Kendo UI Gantt
-    /// </summary>
-    public class Gantt<TModel> : WidgetBase
-        where TModel : class, IGanttTask
+    public class Gantt<T> : WidgetBase where T : class, IGanttTask
     {
         private readonly IUrlGenerator urlGenerator;
 
@@ -52,7 +48,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            var html = new GanttHtmlBuilder<TModel>(this).Build();
+            var html = new GanttHtmlBuilder<T>(this).Build();
 
             html.WriteTo(writer);
 

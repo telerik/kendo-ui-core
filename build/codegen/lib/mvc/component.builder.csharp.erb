@@ -7,14 +7,14 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the Kendo <%= csharp_class %> for ASP.NET MVC.
     /// </summary>
-    public class <%= csharp_class %>Builder: WidgetBuilderBase<<%= csharp_class %>, <%= csharp_class %>Builder>, IHideObjectMembers
+    public class <%= csharp_builder_class %>: WidgetBuilderBase<<%= csharp_full_class %>, <%= csharp_builder_class %>><%= csharp_generic_constraints %>
     {
-        private readonly <%= csharp_class %> container;
+        private readonly <%= csharp_full_class %> container;
         /// <summary>
         /// Initializes a new instance of the <see cref="<%= csharp_class %>"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public <%= csharp_class %>Builder(<%= csharp_class %> component)
+        public <%= csharp_class %>Builder(<%= csharp_full_class %> component)
             : base(component)
         {
             container = component;
@@ -39,7 +39,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public <%= csharp_class %>Builder Events(Action<<%= csharp_class %>EventBuilder> configurator)
+        public <%= csharp_builder_class %> Events(Action<<%= csharp_class %>EventBuilder> configurator)
         {
 
             configurator(new <%= csharp_class %>EventBuilder(Component.Events));
