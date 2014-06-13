@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Kendo.Mvc.UI
 {
-    public enum ImageBrowserEntryType
+    public enum FileBrowserEntryType
     {
         File = 0,
         Directory

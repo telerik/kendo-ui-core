@@ -760,11 +760,7 @@ var __meta__ = {
             html += '#if(' + TYPEFIELD + ' == "d") { #';
             html += '<div class="k-thumb"><span class="k-icon k-folder"></span></div>';
             html += "#}else{#";
-            //if (that.options.transport && that.options.transport.thumbnailUrl) {
-            //    html += '<div class="k-thumb"><span class="k-icon k-loading"></span></div>';
-            //} else {
-                html += '<div class="k-thumb"><span class="k-icon k-file"></span></div>';
-            //}
+            html += '<div class="k-thumb"><span class="k-icon k-file"></span></div>';
             html += "#}#";
             html += '<strong>${' + NAMEFIELD + '}</strong>';
             html += '#if(' + TYPEFIELD + ' == "f") { # <span class="k-filesize">${this.sizeFormatter(' + SIZEFIELD + ')}</span> #}#';

@@ -5,9 +5,9 @@ namespace Kendo.Mvc.UI
 {
     public interface IDirectoryBrowser
     {
-        IEnumerable<ImageBrowserEntry> GetFiles(string path, string filter);
+        IEnumerable<FileBrowserEntry> GetFiles(string path, string filter);
 
-        IEnumerable<ImageBrowserEntry> GetDirectories(string path);
+        IEnumerable<FileBrowserEntry> GetDirectories(string path);
 
         HttpServerUtilityBase Server
         {

@@ -63,7 +63,7 @@ var FileCommand = Command.extend({
         return kendo.template(
             '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container">' +
                 '# if (showBrowser) { #' +
-                    '<div class="k-imagebrowser"></div>' +
+                    '<div class="k-filebrowser"></div>' +
                 '# } #' +
                 "<div class='k-edit-label'>" +
                     '<label for="k-editor-file-url">#: messages.fileWebAddress #</label>' +
@@ -106,7 +106,13 @@ var FileCommand = Command.extend({
             options = that.editor.options,
             messages = options.messages,
             fileBrowser = options.fileBrowser,
-            showBrowser = !!(kendo.ui.FileBrowser && fileBrowser && fileBrowser.transport && fileBrowser.transport.read !== undefined);
+            showBrowser = !!(kendo.ui.FileBrowser && fileBrowser && fileBrowser.transport && fileBrowser.transport.read !== undefined),
+            dialogOptions = {
+                title: messages.insertFile,
+                close: close,
+                visible: false,
+                resizable: showBrowser
+            };
 
         function apply(e) {
             var element = dialog.element,
@@ -145,13 +151,12 @@ var FileCommand = Command.extend({
             }
         }
 
-        dialog = this.createDialog(that._dialogTemplate(showBrowser), {
-            title: messages.insertFile,
-            close: close,
-            visible: false,
-            resizable: showBrowser
-        })
-            .toggleClass("k-imagebrowser-dialog", showBrowser)
+        if (showBrowser) {
+            dialogOptions.width = 750;
+        }
+
+        dialog = this.createDialog(that._dialogTemplate(showBrowser), dialogOptions)
+            .toggleClass("k-filebrowser-dialog", showBrowser)
             .find(".k-dialog-insert").click(apply).end()
             .find(".k-dialog-close").click(close).end()
             .find(".k-edit-field input").keydown(keyDown).end()
@@ -162,7 +167,7 @@ var FileCommand = Command.extend({
 
         if (showBrowser) {
             new kendo.ui.FileBrowser(
-                dialog.element.find(".k-imagebrowser"),
+                dialog.element.find(".k-filebrowser"),
                 extend({}, fileBrowser, {
                     change: function() {
                         dialog.element.find(KEDITORFILEURL).val(this.value());

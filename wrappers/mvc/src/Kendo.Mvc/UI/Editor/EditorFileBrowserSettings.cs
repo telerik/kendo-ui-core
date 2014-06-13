@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI
                 json["transport"] = transport;
 
                 transport["read"] = read;
-                transport["type"] = "imagebrowser-aspnetmvc";
+                transport["type"] = "filebrowser-aspnetmvc";
 
                 var upload = Upload.ToJson();
                 if (upload.Any())
