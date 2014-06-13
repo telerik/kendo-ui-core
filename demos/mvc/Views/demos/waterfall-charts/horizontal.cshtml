@@ -27,10 +27,6 @@
             "#95c3cd", "#abc75b", "#c6816f", "#968cb2", "#c0c0c0", "#2ba6ff"
         ];
 
-        function pointColor(point) {
-            return palette[point.index % palette.length];
-        }
-
         function createChart() {
             $("#chart").kendoChart({
                 dataSource: {
@@ -47,7 +43,7 @@
                     field: "elapsed",
                     categoryField: "caption",
                     summaryField: "summary",
-                    color: function pointColor(point) {
+                    color: function(point) {
                         return palette[point.index % palette.length];
                     }
                 }],
