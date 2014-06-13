@@ -4,7 +4,7 @@
         "value": 100
     },
     {
-        "name": "Discount",
+        "name": "List\nDiscount",
         "value": -5
     },
     {
@@ -12,7 +12,7 @@
         "summary": "total"
     },
     {
-        "name": "Discount",
+        "name": "Invoice\nDiscount",
         "value": -6
     },
     {
