@@ -485,15 +485,23 @@ var __meta__ = {
             },
 
             _renderOverflow: function() {
-                var overflowAnchor = $(components.overflowAnchor);
+                var overflowAnchor = $(components.overflowAnchor),
+                    that = this;
 
-                this.element.append(overflowAnchor);
+                that.element.append(overflowAnchor);
 
-                this.popup = new kendo.ui.Popup(components.overflowContainer, {
-                    anchor: overflowAnchor
+                that.popup = new kendo.ui.Popup(components.overflowContainer, {
+                    origin: "bottom right",
+                    position: "top right",
+                    anchor: overflowAnchor,
+                    open: function() {
+                        kendo.wrap(that.popup.element)
+                            .addClass("k-overflow-wrapper")
+                            .css("margin-left", "3px");
+                    }
                 });
 
-                this.popup.element.attr(kendo.attr("uid"), this.uid);
+                that.popup.element.attr(kendo.attr("uid"), this.uid);
             },
 
             _buttonClick: function(e) {
