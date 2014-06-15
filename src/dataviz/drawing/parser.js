@@ -162,6 +162,7 @@
         s: function(path, options) {
             var parameters = options.parameters;
             var position = options.position;
+            var previousCommand = options.previousCommand;
             var controlOut, endPoint, lastPath, lastSegment, controlIn;
 
             for (var i = 0; i < parameters.length; i += 4) {
@@ -171,14 +172,19 @@
                     controlIn.add(position);
                     endPoint.add(position);
                 }
-                lastPath = last(path.paths);
-                lastSegment = last(lastPath.segments);
-                controlOut = reflectionPoint(lastSegment.controlIn, position) || position.clone();
+                if (previousCommand == "s" || previousCommand == "c") {
+                    lastPath = last(path.paths);
+                    lastSegment = last(lastPath.segments);
+                    controlOut = reflectionPoint(lastSegment.controlIn, position);
+                } else {
+                    controlOut = position.clone();
+                }
 
                 path.curveTo(controlOut, controlIn, endPoint);
 
                 position.x = endPoint.x;
                 position.y = endPoint.y;
+                previousCommand = "s";
             }
         },
 

@@ -233,7 +233,7 @@
         }
     });
 
-    test("parses current position as controlOut if previous segment does not have controlIn point", function() {
+    test("parses current position as controlOut if previous segment is not a cubic curve", function() {
         var controlOut = path.segments[0].controlOut;
 
         equal(controlOut.x, 100);
