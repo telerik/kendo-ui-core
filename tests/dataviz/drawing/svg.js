@@ -755,6 +755,11 @@
             ok(textNode.render().indexOf("font:arial;") > -1);
         });
 
+        test("renders transformation", function() {
+            text.transform(g.transform(new Matrix(1,1,1,1,1,1)));
+            ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
+        });
+
         test("geometryChange sets origin", 2, function() {
             textNode.attr = function(name, value) {
                 if (name === "x") {

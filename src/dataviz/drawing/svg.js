@@ -594,6 +594,7 @@
             "<text #= d.renderStyle() # " +
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
+            "#=  d.renderTransform() # " +
             "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )
     });
