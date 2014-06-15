@@ -92,7 +92,8 @@
         },
 
         remove: function(index, count) {
-            for (var i = index; i < count; i++) {
+            var end = index + count;
+            for (var i = index; i < end; i++) {
                 this.childNodes[i].clear();
             }
             this.childNodes.splice(index, count);

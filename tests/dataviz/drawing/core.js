@@ -54,6 +54,23 @@
         equal(child.parent, null);
     });
 
+    test("remove clears child nodes", 2, function() {
+        var clear = function() {
+            ok(true);
+        };
+        var clearFalse = function() {
+            ok(false);
+        };
+        var child2 = new BaseNode();
+        var child3 = new BaseNode();
+        var child4 = new BaseNode();
+        node.append(child2);node.append(child3);node.append(child4);
+        child.clear = child4.clear = clearFalse;
+        child2.clear = child3.clear = clear;
+
+        node.remove(1, 2);
+    });
+
     test("remove clears nested nodes", function() {
         var grandChild = new BaseNode();
         grandChild.clear = function() { ok(true); };
