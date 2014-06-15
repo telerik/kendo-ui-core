@@ -19,7 +19,7 @@
         pow = math.pow;
 
     var SEGMENT_REGEX = /([a-z]{1})([^a-z]*)(z)?/gi,
-        SPLIT_REGEX = /,|\s/g,
+        SPLIT_REGEX = /[,\s]?(-?(?:\d+\.)?\d+)/g,
         MOVE = "m",
         CLOSE = "z";
 
@@ -32,7 +32,7 @@
             str.replace(SEGMENT_REGEX, function(match, element, params, closePath) {
                 var command = element.toLowerCase();
                 var isRelative = command === element;
-                var parameters = trim(params).split(SPLIT_REGEX);
+                var parameters = parseParameters(trim(params));
                 var length = parameters.length;
 
                 for (var i = 0; i < length; i++) {
@@ -154,6 +154,15 @@
     };
 
     // Helper functions =======================================================
+
+    function parseParameters(str) {
+        var parameters = [];
+        str.replace(SPLIT_REGEX, function(match, number) {
+            parameters.push(parseFloat(number));
+        });
+        return parameters;
+    }
+
     function toLineParamaters(parameters, isVertical, value) {
         var insertPosition = isVertical ? 0 : 1;
 
