@@ -29,6 +29,7 @@
             var parser = this;
             var multiPath = new drawing.MultiPath(options);
             var position = new Point();
+            var previousCommand;
 
             str.replace(SEGMENT_REGEX, function(match, element, params, closePath) {
                 var command = element.toLowerCase();
@@ -47,11 +48,14 @@
                     multiPath.moveTo(position.x, position.y);
                 } else if (ShapeMap[command]) {
                     ShapeMap[command](
-                        multiPath,
-                        parameters,
-                        position,
-                        isRelative
+                        multiPath, {
+                            parameters: parameters,
+                            position: position,
+                            isRelative: isRelative,
+                            previousCommand: previousCommand
+                        }
                     );
+                    previousCommand = command;
 
                     if (closePath && closePath.toLowerCase() === CLOSE) {
                         multiPath.close();
@@ -66,11 +70,13 @@
     });
 
     var ShapeMap = {
-        l: function(path, parameters, position, isRelative) {
+        l: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
             for (var i = 0; i < parameters.length; i+=2){
                 var point = new Point(parameters[i], parameters[i + 1]);
 
-                if (isRelative) {
+                if (options.isRelative) {
                     point.add(position);
                 }
 
@@ -81,12 +87,15 @@
             }
         },
 
-        c: function(path, parameters, position, isRelative) {
+        c: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
+
             for (var i = 0; i < parameters.length; i += 6) {
                 var controlOut = new Point(parameters[i], parameters[i + 1]);
                 var controlIn = new Point(parameters[i + 2], parameters[i + 3]);
                 var point = new Point(parameters[i + 4], parameters[i + 5]);
-                if (isRelative) {
+                if (options.isRelative) {
                     controlIn.add(position);
                     controlOut.add(position);
                     point.add(position);
@@ -99,21 +108,23 @@
             }
         },
 
-        v: function(path, parameters, position, isRelative) {
-            var value = isRelative ? 0 : position.x;
+        v: function(path, options) {
+            var value = options.isRelative ? 0 : options.position.x;
 
-            toLineParamaters(parameters, true, value);
-            this.l(path, parameters, position, isRelative);
+            toLineParamaters(options.parameters, true, value);
+            this.l(path, options);
         },
 
-        h: function(path, parameters, position, isRelative) {
-            var value = isRelative ? 0 : position.y;
+        h: function(path, options) {
+            var value = options.isRelative ? 0 : options.position.y;
 
-            toLineParamaters(parameters, false, value);
-            this.l(path, parameters, position, isRelative);
+            toLineParamaters(options.parameters, false, value);
+            this.l(path, options);
         },
 
-        a: function(path, parameters, position, isRelative) {
+        a: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
             for (var i = 0; i < parameters.length; i += 7) {
                 var radiusX = parameters[i];
                 var radiusY = parameters[i + 1];
@@ -121,7 +132,7 @@
                 var swipe = parameters[i + 4];
                 var endPoint = new Point(parameters[i + 5], parameters[i + 6]);
 
-                if (isRelative) {
+                if (options.isRelative) {
                     endPoint.add(position);
                 }
 
@@ -148,13 +159,15 @@
             }
         },
 
-        s: function(path, parameters, position, isRelative) {
+        s: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
             var controlOut, endPoint, lastPath, lastSegment, controlIn;
 
             for (var i = 0; i < parameters.length; i += 4) {
                 controlIn = new Point(parameters[i], parameters[i + 1]);
                 endPoint = new Point(parameters[i + 2], parameters[i + 3]);
-                if (isRelative) {
+                if (options.isRelative) {
                     controlIn.add(position);
                     endPoint.add(position);
                 }
@@ -169,13 +182,15 @@
             }
         },
 
-        q: function(path, parameters, position, isRelative) {
+        q: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
             var controlOut, endPoint, controlIn, controlPoint;
             var third = 1 / 3;
             for (var i = 0; i < parameters.length; i += 4) {
                 controlPoint = new Point(parameters[i], parameters[i + 1]);
                 endPoint = new Point(parameters[i + 2], parameters[i + 3]);
-                if (isRelative) {
+                if (options.isRelative) {
                     controlPoint.add(position);
                     endPoint.add(position);
                 }
