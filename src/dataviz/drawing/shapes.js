@@ -165,6 +165,15 @@
             }
         },
 
+        removeAt: function(index) {
+            if (0 <= index && index < this.children.length) {
+                var shape = this.children[index];
+                this.children.splice(index, 1);
+                shape.parent = null;
+                this.childrenChange("remove", [shape], index);
+            }
+        },
+
         clear: function() {
             var items = this.children;
             this.children = [];

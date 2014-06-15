@@ -254,6 +254,53 @@
             group.remove(toRemove);
         });
 
+        test("removeAt removes child at specified index", function() {
+            var child = new Group();
+            var toRemove = new Group();
+            group.append(child);
+            group.append(toRemove);
+            group.removeAt(1);
+            equal(group.children.length, 1);
+            ok(group.children[0] === child);
+        });
+
+        test("removeAt sets child parent to null", function() {
+            var toRemove = new Group();
+            group.append(toRemove);
+            group.removeAt(0);
+            equal(toRemove.parent, null);
+        });
+
+        test("removeAt triggers childrenChange", function() {
+            var child = new Group();
+            var toRemove = new Group();
+            group.append(child);
+            group.append(toRemove);
+            group.observer = {
+                childrenChange: function(args) {
+                    equal(args.action, "remove");
+                    ok(args.items[0] === toRemove);
+                    equal(args.index, 1);
+                }
+            };
+
+            group.removeAt(1);
+        });
+
+        test("removeAt does not trigger childrenChange if index is out of range", 0, function() {
+            var child = new Group();
+            group.append(child);
+
+            group.observer = {
+                childrenChange: function(args) {
+                    ok(false);
+                }
+            };
+
+            group.removeAt(-1);
+            group.removeAt(1);
+        });
+
         test("clear triggers childrenChange", function() {
             var child = new Group();
             group.append(child);
