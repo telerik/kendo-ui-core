@@ -869,6 +869,14 @@
             compareBoundingBox(boundingBox, [-10.7,-4.1,32.5,52.5], TOLERANCE);
         });
 
+        test("rawBBox returns the bounding rect without transformation", function() {
+            path.moveTo(0, 0);
+            path.lineTo(100, 100);
+            path.transform(g.transform().scale(2,2));
+            compareBoundingBox(path.rawBBox(), [0, 0, 100, 100]);
+        });
+
+
         shapeBaseTests(Path, "Path");
     })();
 

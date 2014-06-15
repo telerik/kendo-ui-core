@@ -480,23 +480,31 @@
         },
 
         bbox: function(transformation) {
+            var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
+            var boundingBox = this._bbox(combinedMatrix);
+            var strokeWidth = this.options.get("stroke.width");
+            if (strokeWidth) {
+                expandRect(boundingBox, strokeWidth / 2);
+            }
+            return boundingBox;
+        },
+
+        rawBBox: function() {
+            return this._bbox();
+        },
+
+        _bbox: function(matrix) {
             var segments = this.segments;
             var length = segments.length;
-            var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
             var boundingBox;
 
             if (length === 1) {
-                var anchor = segments[0].anchor.transformCopy(combinedMatrix);
+                var anchor = segments[0].anchor.transformCopy(matrix);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
                 for (var i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].bboxTo(segments[i], combinedMatrix));
-                }
-
-                var strokeWidth = this.options.get("stroke.width");
-                if (strokeWidth) {
-                    expandRect(boundingBox, strokeWidth / 2);
+                    boundingBox = boundingBox.wrap(segments[i - 1].bboxTo(segments[i], matrix));
                 }
             }
 
