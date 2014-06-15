@@ -733,7 +733,13 @@ var __meta__ = {
             name = typeof (field.field) === STRING ? field.field : name;
 
             if (!field.nullable) {
-                value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+                var defaultValueResult = defaultValues[type.toLowerCase()];
+
+                if (field.defaultValue !== undefined) {
+                    defaultValueResult = typeof field.defaultValue === "function" ? field.defaultValue() : field.defaultValue;
+                }
+
+                value = proto.defaults[originalName !== name ? originalName : name] = defaultValueResult;
             }
 
             if (options.id === name) {
