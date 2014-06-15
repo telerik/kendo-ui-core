@@ -114,8 +114,7 @@
                 this.options.set("visible", visible);
                 return this;
             } else {
-                visible = this.options.get("visible");
-                return defined(visible) ? visible : true;
+                return this.options.get("visible") !== false;
             }
         }
     });

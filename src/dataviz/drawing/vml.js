@@ -230,6 +230,10 @@
             for (var i = 0; i < styles.length; i++) {
                 this.css(styles[i][0], styles[i][1]);
             }
+        },
+
+        renderStyle: function() {
+            return renderAttr("style", util.renderStyle(this.mapStyle()));
         }
     });
 
@@ -243,12 +247,25 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<div>#= d.renderChildren() #</div>"
+            "<div#= d.renderStyle() #>#= d.renderChildren() #</div>"
         ),
+
+        mapStyle: function() {
+            var style = [];
+            if (this.srcElement && this.srcElement.options.visible === false) {
+                style.push([
+                    "display", "none"
+                ]);
+            }
+
+            return style;
+        },
 
         optionsChange: function(e) {
             if (e.field === "transform") {
                 this.refreshTransform();
+            } else if (e.field == "visible"){
+                this.css("display", e.value !== false ? "" : "none");
             }
 
             this.invalidate();
@@ -488,10 +505,6 @@
             }
 
             return style;
-        },
-
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
         },
 
         renderCursor: function() {

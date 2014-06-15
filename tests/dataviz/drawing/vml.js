@@ -434,6 +434,15 @@
             equal(groupNode.render(), "<div></div>");
         });
 
+        test("renders visibility", function() {
+            groupNode = new GroupNode(new Group({visible: false}));
+            ok(groupNode.render().indexOf("display:none;") !== -1);
+        });
+
+        test("does not render visibility if not set", function() {
+            ok(groupNode.render().indexOf("display:none;") === -1);
+        });
+
         test("refreshTransform method calls childNodes refreshTransform method", function() {
             var group = new Group(),
                 path = new Path(),
@@ -509,6 +518,16 @@
             };
 
             group.options.set("foo", 1);
+        });
+
+        test("options change for visible updates display css style", function() {
+            var group = new Group();
+            groupNode = new GroupNode(group);
+            groupNode.css = function(style, value) {
+                equal(style, "display");
+                equal(value, "none");
+            };
+            group.visible(false);
         });
     })();
 
