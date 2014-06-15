@@ -22,6 +22,7 @@
         ok(parser.parse("") instanceof d.MultiPath);
     });
 
+    // ------------------------------------------------------------
     module("Parser / Move", {
         setup: function() {
             multiPath = parser.parse("M 100 100 m 50 50");
@@ -63,6 +64,7 @@
         equal(point.y, -100);
     });
 
+    // ------------------------------------------------------------
     module("Parser / Line", {
         setup: function() {
             multiPath = parser.parse("M 100 100 L 300 300 l 50 -50 0 30 H 400 V 300 h 50 v 50");
@@ -144,6 +146,7 @@
         equal(point.y, 300);
     });
 
+    // ------------------------------------------------------------
     var endSegment;
 
     module("Parser / Curve", {
@@ -222,6 +225,58 @@
         ok(endSegment.anchor.equals(anchor));
     });
 
+    // ------------------------------------------------------------
+    module("Parser / Smooth curve", {
+        setup: function() {debugger;
+            multiPath = parser.parse("M100,100S 200,200 300 100s-50,250 150,50");
+            path = multiPath.paths[0];
+        }
+    });
+
+    test("parses current position as controlOut if previous segment does not have controlIn point", function() {
+        var controlOut = path.segments[0].controlOut;
+
+        equal(controlOut.x, 100);
+        equal(controlOut.y, 100);
+    });
+
+    test("parses controlIn", function() {
+        var controlIn = path.segments[1].controlIn;
+
+        equal(controlIn.x, 200);
+        equal(controlIn.y, 200);
+    });
+
+    test("parses anchor", function() {
+        var anchor = path.segments[1].anchor;
+
+        equal(anchor.x, 300);
+        equal(anchor.y, 100);
+    });
+
+    test("parses controlOut as the reflected point of the previous segment controlIn point", function() {
+        var controlOut = path.segments[1].controlOut;
+
+        equal(controlOut.x, 400);
+        equal(controlOut.y, 0);
+    });
+
+    test("parses relative controlIn", function() {
+        var controlIn = path.segments[2].controlIn;
+
+        equal(controlIn.x, 250);
+        equal(controlIn.y, 350);
+    });
+
+    test("parses relative anchor", function() {
+        var anchor = path.segments[2].anchor;
+
+        equal(anchor.x, 450);
+        equal(anchor.y, 150);
+    });
+
+
+    // ------------------------------------------------------------
     function closePoints(point1, point2, tolerance) {
         if (point1) {
             if (!point2) {

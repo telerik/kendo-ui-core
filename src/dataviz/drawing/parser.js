@@ -16,7 +16,8 @@
         round = dataviz.round,
         trim = $.trim,
         math = Math,
-        pow = math.pow;
+        pow = math.pow,
+        last = dataviz.last;
 
     var SEGMENT_REGEX = /([a-z]{1})([^a-z]*)(z)?/gi,
         SPLIT_REGEX = /[,\s]?(-?(?:\d+\.)?\d+)/g,
@@ -33,11 +34,6 @@
                 var command = element.toLowerCase();
                 var isRelative = command === element;
                 var parameters = parseParameters(trim(params));
-                var length = parameters.length;
-
-                for (var i = 0; i < length; i++) {
-                    parameters[i] = parseFloat(parameters[i]);
-                }
 
                 if (command === MOVE) {
                     if (isRelative) {
@@ -150,6 +146,27 @@
                 position.x = endPoint.x;
                 position.y = endPoint.y;
             }
+        },
+
+        s: function(path, parameters, position, isRelative) {
+            var controlOut, endPoint, lastPath, lastSegment, controlIn;
+
+            for (var i = 0; i < parameters.length; i += 4) {
+                controlIn = new Point(parameters[i], parameters[i + 1]);
+                endPoint = new Point(parameters[i + 2], parameters[i + 3]);
+                if (isRelative) {
+                    controlIn.add(position);
+                    endPoint.add(position);
+                }
+                lastPath = last(path.paths);
+                lastSegment = last(lastPath.segments);
+                controlOut = reflectionPoint(lastSegment.controlIn, position) || position.clone();
+
+                path.curveTo(controlOut, controlIn, endPoint);
+
+                position.x = endPoint.x;
+                position.y = endPoint.y;
+            }
         }
     };
 
@@ -240,6 +257,12 @@
             startAngle: start,
             endAngle: end
         };
+    }
+
+    function reflectionPoint(point, center) {
+        if (point && center) {
+            return center.multiplyCopy(2).subtract(point);
+        }
     }
 
     // Exports ================================================================
