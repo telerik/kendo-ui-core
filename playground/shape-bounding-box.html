@@ -23,19 +23,21 @@
         <--
             <textarea id="pathString" cols="40" rows="5" data-bind="value:path"></textarea>
             <div data-bind="text:drawPath"></div>
-           
+
          -->
           <div id="container" style="top:100px;"></div>
+       <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;">
             <g>
                 <path data-bind="attr: {d: path}" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
-            </g>           
+            </g>
         </svg>
+      -->
         <!--
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1200px" height="1200px" style="position:absolute;left: 300px;">
             <g transform = "translate(0, 300)">
                 <path d="M100,100 C200,200 300,200 400,100 L500,150 C450,200 200,300 100,200 z" transform = "rotate(-45 100 100) scale(1.1, 0.7)" stroke="red" stroke-width="2" stroke-linecap="square" fill="none" stroke-linejoin="round"></path>
-            </g>           
+            </g>
         </svg>
           -->
          <!--
@@ -69,7 +71,7 @@
                 geometry = dataviz.geometry,
                 transform = geometry.transform,
                 Point = geometry.Point,
-                Circle = geometry.Circle,                
+                Circle = geometry.Circle,
                 drawing = dataviz.drawing,
                 Path = drawing.Path,
                 Group = drawing.Group,
@@ -102,19 +104,35 @@
                 drawPath: function() {
                     var pathString = this.get("path");
                     if (pathString) {
-                        var multiPath = Path.parse(pathString, strokeOptions),
-                            multiPathGroup =  new drawing.Group(),
-                            multiPathBoundingRect = multiPath.bbox();
+                        // var multiPath = Path.parse(pathString, strokeOptions),
+                            // multiPathGroup =  new drawing.Group(),
+                            // multiPathBoundingRect = multiPath.bbox();
 
-                       multiPathGroup.append(multiPath);//, rectPath(multiPathBoundingRect, strokeOptions));
-                       surface.clear();
-                       surface.draw(multiPathGroup);
+                       // multiPathGroup.append(multiPath);//, rectPath(multiPathBoundingRect, strokeOptions));
+                       // surface.clear();
+                       // surface.draw(multiPathGroup);
                     }
 
                     return pathString;
                 }
             });
-            
+
+            removeTest();
+            function removeTest() {
+                var group = new drawing.Group({});
+                var options = {fill: {color: "lightgreen"}, stroke: {color: "black", width: 1}};
+                for (var i = 0; i <= 5; i++) {
+                    var rect = new geometry.Rect(new Point(i * 10, i * 10), new Point(i * 10 + 100, i * 10 + 100));
+                    group.append(rectPath(rect, options));
+                }
+
+                surface.draw(group);
+
+                window.removeChild = function(index) {
+                    group.remove(group.children[index]);
+                };
+            }
+
             //arcTransformTest();
             function arcTransformTest() {
                 arcGeometry = new geometry.Arc(Point.create(200, 500), {
@@ -130,7 +148,7 @@
                 surface.clear();
                 surface.draw(group);
             }
-            
+
           //  parentTransformationsTest();
             function parentTransformationsTest() {
                 var group = new Group({transform: transform().scale(2,1).matrix()}),
@@ -142,7 +160,7 @@
                // debugger;
                 group.bbox();
             }
-            
+
            // multipathTransformTest();
             function multipathTransformTest() {
                 var curveTransform = new MultiPath($.extend({transform: transform().translate(100,400).scale(1.5,1).rotate(-90, 100, 100).matrix()}, strokeOptions));
@@ -160,12 +178,12 @@
                 curveTransform.lineTo(50, 200);
                 var group = new drawing.Group();
                 group.append(curveTransform, rectPath(curveTransform.bbox(), strokeOptions));
-                
+
                 surface.clear();
                 surface.draw(group);
             }
-            
-            
+
+
             //circleTransformTest();
             function circleTransformTest() {
                 var m = transform().scale(1,2).rotate(30).translate(500,-500).matrix();
@@ -178,12 +196,12 @@
                 group.append(circle);
                 mainGroup = new drawing.Group();
                 mainGroup.append(group, rectPath(group.bbox(), strokeOptions), original);
-                
+
                 surface.clear();
                 surface.draw(mainGroup);
             }
-            
-            //curveTransformTest();            
+
+            //curveTransformTest();
             function curveTransformTest() {
                 var curveTransform = new Path($.extend({transform: transform().translate(0, 100).scale(1,2).rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions)),
                     original = new Path({stroke: {color: "blue", width: 1}});
@@ -193,21 +211,21 @@
                 curveTransform.lineTo(500, 150);
                 curveTransform.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
                 curveTransform.close();
-                
+
                 original.moveTo(100, 100);
                 original.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
                 original.lineTo(500, 150);
                 original.curveTo(Point.create(450, 200), Point.create(200, 300), Point.create(100, 200));
-                original.close(); 
+                original.close();
                 group = new drawing.Group({transform: transform().translate(0, 300).matrix()});
                 group.append(curveTransform, rectPath(curveTransform.bbox(), strokeOptions));
                 surface.clear();
-               
+
                 mainGroup = new drawing.Group();
                 mainGroup.append(group, original);
                 surface.draw(mainGroup);
             }
-            
+
             kendo.bind($("body"), viewModel);
 
             function rectPath(rect, options) {
@@ -235,10 +253,10 @@
                     arc = new drawing.Arc(arcGeometry, {stroke: {color: "red", width: 20}});
                 //var circ  =new drawing.Circle(new geometry.Circle(Point.create(300, 300), 100), {stroke: {color: "red", width: 100}});
                 var group = new drawing.Group();
-                
+
                 //group.append(arc, rectPath(arc.bbox(), {stroke: {color: "black", width: 1}}));
                // group.append(circ, rectPath(circ.bbox(), {stroke: {color: "black", width: 1}}));
-               
+
                 var path = new Path({stroke: {color: "red", width: 1}});
                 path.moveTo(0, 0);
                 path.curveTo(new Point(-10, -10), new Point(-20, 30), new Point(30, 50));
@@ -249,7 +267,7 @@
                 // path2.curveTo(new Point(150, 150), new Point(200, 150), new Point(300, 100));
                 // path2.curveTo(new Point(310, 50), new Point(400, 150), new Point(200, 300));
                 // path2.close();
-                
+
                // group.append(path, rectPath(path.bbox(), {stroke: {color: "black", width: 1}}));//, path2);
                // surface.draw(group);
             }

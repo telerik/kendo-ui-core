@@ -210,6 +210,50 @@
             group.append(child);
         });
 
+        test("remove removes child", function() {
+            var toRemove = new Group();
+            group.append(toRemove);
+            group.remove(toRemove);
+            equal(group.children.length, 0);
+        });
+
+        test("remove sets child parent to null", function() {
+            var toRemove = new Group();
+            group.append(toRemove);
+            group.remove(toRemove);
+            equal(toRemove.parent, null);
+        });
+
+        test("remove triggers childrenChange", function() {
+            var child = new Group();
+            var toRemove = new Group();
+            group.append(child);
+            group.append(toRemove);
+            group.observer = {
+                childrenChange: function(args) {
+                    equal(args.action, "remove");
+                    ok(args.items[0] === toRemove);
+                    equal(args.index, 1);
+                }
+            };
+
+            group.remove(toRemove);
+        });
+
+        test("remove does not trigger childrenChange if shape is not from group children", 0, function() {
+            var child = new Group();
+            var toRemove = new Group();
+            group.append(child);
+
+            group.observer = {
+                childrenChange: function(args) {
+                    ok(false);
+                }
+            };
+
+            group.remove(toRemove);
+        });
+
         test("clear triggers childrenChange", function() {
             var child = new Group();
             group.append(child);

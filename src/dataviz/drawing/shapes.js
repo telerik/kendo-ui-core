@@ -2,7 +2,7 @@
     define([ "./core", "../text-metrics" ], f);
 })(function(){
 
-(function () {
+(function ($) {
 
     // Imports ================================================================
     var kendo = window.kendo,
@@ -28,7 +28,9 @@
         util = dataviz.util,
         arrayLimits = util.arrayLimits,
         defined = util.defined,
-        last = util.last;
+        last = util.last,
+
+        inArray = $.inArray;
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
@@ -152,6 +154,15 @@
             updateElementsParent(arguments, this);
 
             this.childrenChange("add", arguments);
+        },
+
+        remove: function(shape) {
+            var index = inArray(shape, this.children);
+            if (index >= 0) {
+                this.children.splice(index, 1);
+                shape.parent = null;
+                this.childrenChange("remove", [shape], index);
+            }
         },
 
         clear: function() {
