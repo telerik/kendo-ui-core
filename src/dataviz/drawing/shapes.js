@@ -300,6 +300,10 @@
             return rect;
         },
 
+        rawBBox: function() {
+            return this.geometry.bbox();
+        },
+
         toPath: function() {
             var path = new Path();
             var curvePoints = this.geometry.curvePoints();

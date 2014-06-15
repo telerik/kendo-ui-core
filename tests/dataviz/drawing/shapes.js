@@ -610,6 +610,12 @@
             arcMatrix = arc.options.transform;
             arc.bbox();
         });
+
+        test("rawBBox returns geometry bounding box with no transformation applied", function() {
+            arc.transform(g.transform().scale(2,2));
+
+            compareBoundingBox(arc.rawBBox(), [50, 100, 150, 200]);
+        });
     })();
 
     // ------------------------------------------------------------
