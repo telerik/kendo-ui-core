@@ -527,6 +527,12 @@
             circle.bbox();
         });
 
+        test("rawBBox returns geometry bounding box with no transformation applied", function() {
+            circle.transform(g.transform().scale(2,2));
+
+            compareBoundingBox(circle.rawBBox(), [-10, -10, 10, 10]);
+        });
+
         shapeBaseTests(Circle, "Circle");
     })();
 

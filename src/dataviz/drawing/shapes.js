@@ -272,6 +272,10 @@
             }
 
             return rect;
+        },
+
+        rawBBox: function() {
+            return this.geometry.bbox();
         }
     });
 
