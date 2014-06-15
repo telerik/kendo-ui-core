@@ -825,6 +825,11 @@
             ok(imageNode.render().indexOf("xlink:href='Foo'") > -1);
         });
 
+        test("renders transformation", function() {
+            image.transform(g.transform(new Matrix(1,1,1,1,1,1)));
+            ok(imageNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
+        });
+
         test("geometryChange sets position", 2, function() {
             imageNode.attr = function(name, value) {
                 if (name === "x") {

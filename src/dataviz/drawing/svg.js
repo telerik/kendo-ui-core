@@ -635,7 +635,7 @@
         },
 
         template: renderTemplate(
-            "<image #= d.renderStyle() # " +
+            "<image #= d.renderStyle() # #= d.renderTransform()# " +
             "#= d.renderPosition() # #= d.renderSource() #>" +
             "</image>"
         )
