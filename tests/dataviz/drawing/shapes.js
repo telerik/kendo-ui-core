@@ -1100,6 +1100,11 @@
             image.transform(transform);
             image.bbox();
         });
+
+        test("rawBBox returns bounding box without transformation", function() {
+            image.transform(g.transform().scale(2, 2));
+            compareBoundingBox(image.rawBBox(), [0, 0, 100, 100]);
+        });
     })();
 
 })();
