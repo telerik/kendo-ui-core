@@ -14,6 +14,7 @@
         "./dataviz/map/layers/tile",
         "./dataviz/map/layers/bing",
         "./dataviz/map/layers/marker",
+        "./dataviz/map/layers/bubble",
         "./dataviz/map/main"
     ], f);
 })(function(){
