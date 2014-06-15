@@ -247,6 +247,10 @@
         bbox: function(transformation) {
             var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
             return this.rect().bbox(combinedMatrix);
+        },
+
+        rawBBox: function() {
+            return this.rect().bbox();
         }
     });
 

@@ -439,6 +439,15 @@
             compareBoundingBox(bbox, [100, 100, 140, 110]);
         });
 
+        test("rawBBox returns bounding box without transformation", function() {
+            text.measure = function() {
+                return { width: 20, height: 10 };
+            };
+
+            text.transform(g.transform().scale(2, 2));
+            compareBoundingBox(text.rawBBox(), [100, 100, 120, 110]);
+        });
+
         test("measure returns text metrics", function() {
             deepEqual(text.measure(), util.measureText("Foo"));
         });
