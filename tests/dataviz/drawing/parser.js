@@ -227,7 +227,7 @@
 
     // ------------------------------------------------------------
     module("Parser / Smooth curve", {
-        setup: function() {debugger;
+        setup: function() {
             multiPath = parser.parse("M100,100S 200,200 300 100s-50,250 150,50");
             path = multiPath.paths[0];
         }
@@ -273,6 +273,56 @@
 
         equal(anchor.x, 450);
         equal(anchor.y, 150);
+    });
+
+    // ------------------------------------------------------------
+    module("Parser / quadratic curve", {
+        setup: function() {
+            multiPath = parser.parse("M100,100Q200,200 300,100q-50,200 100,300");
+            path = multiPath.paths[0];
+        }
+    });
+
+    test("calculates controlOut", function() {
+        var controlOut = path.segments[0].controlOut;
+
+        close(controlOut.x, 166.6, TOLERANCE);
+        close(controlOut.y, 166.6, TOLERANCE);
+    });
+
+    test("calculates controlIn", function() {
+        var controlIn = path.segments[1].controlIn;
+
+        close(controlIn.x, 233.3, TOLERANCE);
+        close(controlIn.y, 166.6, TOLERANCE);
+    });
+
+    test("parses anchor", function() {
+        var anchor = path.segments[1].anchor;
+
+        equal(anchor.x, 300);
+        equal(anchor.y, 100);
+    });
+
+    test("calculates relative controlOut", function() {
+        var controlOut = path.segments[1].controlOut;
+
+        close(controlOut.x, 266.6, TOLERANCE);
+        close(controlOut.y, 233.3, TOLERANCE);
+    });
+
+    test("calculates relative controlIn", function() {
+        var controlIn = path.segments[2].controlIn;
+
+        equal(controlIn.x, 300);
+        close(controlIn.y, 333.3, TOLERANCE);
+    });
+
+    test("parses relative anchor", function() {
+        var anchor = path.segments[2].anchor;
+
+        equal(anchor.x, 400);
+        equal(anchor.y, 400);
     });
 
 

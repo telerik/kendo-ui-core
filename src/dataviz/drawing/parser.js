@@ -167,6 +167,27 @@
                 position.x = endPoint.x;
                 position.y = endPoint.y;
             }
+        },
+
+        q: function(path, parameters, position, isRelative) {
+            var controlOut, endPoint, controlIn, controlPoint;
+            var third = 1 / 3;
+            for (var i = 0; i < parameters.length; i += 4) {
+                controlPoint = new Point(parameters[i], parameters[i + 1]);
+                endPoint = new Point(parameters[i + 2], parameters[i + 3]);
+                if (isRelative) {
+                    controlPoint.add(position);
+                    endPoint.add(position);
+                }
+                controlPoint.multiply(2 / 3);
+                controlOut = controlPoint.clone().add(position.multiplyCopy(third));
+                controlIn = controlPoint.add(endPoint.multiplyCopy(third));
+
+                path.curveTo(controlOut, controlIn, endPoint);
+
+                position.x = endPoint.x;
+                position.y = endPoint.y;
+            }
         }
     };
 
