@@ -55,7 +55,6 @@
                             previousCommand: previousCommand
                         }
                     );
-                    previousCommand = command;
 
                     if (closePath && closePath.toLowerCase() === CLOSE) {
                         multiPath.close();
@@ -63,6 +62,8 @@
                 } else {
                     throw new Error("Unsupported command: " + command);
                 }
+
+                previousCommand = command;
             });
 
             return multiPath;
@@ -90,11 +91,12 @@
         c: function(path, options) {
             var parameters = options.parameters;
             var position = options.position;
+            var controlOut, controlIn, point;
 
             for (var i = 0; i < parameters.length; i += 6) {
-                var controlOut = new Point(parameters[i], parameters[i + 1]);
-                var controlIn = new Point(parameters[i + 2], parameters[i + 3]);
-                var point = new Point(parameters[i + 4], parameters[i + 5]);
+                controlOut = new Point(parameters[i], parameters[i + 1]);
+                controlIn = new Point(parameters[i + 2], parameters[i + 3]);
+                point = new Point(parameters[i + 4], parameters[i + 5]);
                 if (options.isRelative) {
                     controlIn.add(position);
                     controlOut.add(position);
@@ -163,7 +165,11 @@
             var parameters = options.parameters;
             var position = options.position;
             var previousCommand = options.previousCommand;
-            var controlOut, endPoint, lastPath, lastSegment, controlIn;
+            var controlOut, endPoint, controlIn, lastControlIn;
+
+            if (previousCommand == "s" || previousCommand == "c") {
+                lastControlIn = last(last(path.paths).segments).controlIn;
+            }
 
             for (var i = 0; i < parameters.length; i += 4) {
                 controlIn = new Point(parameters[i], parameters[i + 1]);
@@ -172,27 +178,25 @@
                     controlIn.add(position);
                     endPoint.add(position);
                 }
-                if (previousCommand == "s" || previousCommand == "c") {
-                    lastPath = last(path.paths);
-                    lastSegment = last(lastPath.segments);
-                    controlOut = reflectionPoint(lastSegment.controlIn, position);
+
+                if (lastControlIn) {
+                    controlOut = reflectionPoint(lastControlIn, position);
                 } else {
                     controlOut = position.clone();
                 }
+                lastControlIn = controlIn;
 
                 path.curveTo(controlOut, controlIn, endPoint);
 
                 position.x = endPoint.x;
                 position.y = endPoint.y;
-                previousCommand = "s";
             }
         },
 
         q: function(path, options) {
             var parameters = options.parameters;
             var position = options.position;
-            var controlOut, endPoint, controlIn, controlPoint;
-            var third = 1 / 3;
+            var cubicControlPoints, endPoint, controlPoint;
             for (var i = 0; i < parameters.length; i += 4) {
                 controlPoint = new Point(parameters[i], parameters[i + 1]);
                 endPoint = new Point(parameters[i + 2], parameters[i + 3]);
@@ -200,11 +204,43 @@
                     controlPoint.add(position);
                     endPoint.add(position);
                 }
-                controlPoint.multiply(2 / 3);
-                controlOut = controlPoint.clone().add(position.multiplyCopy(third));
-                controlIn = controlPoint.add(endPoint.multiplyCopy(third));
+                cubicControlPoints = quadraticToCubicControlPoints(position, controlPoint, endPoint);
 
-                path.curveTo(controlOut, controlIn, endPoint);
+                path.curveTo(cubicControlPoints.controlOut, cubicControlPoints.controlIn, endPoint);
+
+                position.x = endPoint.x;
+                position.y = endPoint.y;
+            }
+        },
+
+        t: function(path, options) {
+            var parameters = options.parameters;
+            var position = options.position;
+            var previousCommand = options.previousCommand;
+            var cubicControlPoints, controlPoint, endPoint;
+
+            if (previousCommand == "q" || previousCommand == "t") {
+                var lastSegment = last(last(path.paths).segments);
+                controlPoint = lastSegment.controlIn.clone()
+                    .add(position.multiplyCopy(-1 / 3))
+                    .multiply(3 / 2);
+            }
+
+            for (var i = 0; i < parameters.length; i += 2) {
+                endPoint = new Point(parameters[i], parameters[i + 1]);
+                if (options.isRelative) {
+                    endPoint.add(position);
+                }
+
+                if (controlPoint) {
+                    controlPoint = reflectionPoint(controlPoint, position);
+                } else {
+                    controlPoint = position.clone();
+                }
+
+                cubicControlPoints = quadraticToCubicControlPoints(position, controlPoint, endPoint);
+
+                path.curveTo(cubicControlPoints.controlOut, cubicControlPoints.controlIn, endPoint);
 
                 position.x = endPoint.x;
                 position.y = endPoint.y;
@@ -305,6 +341,15 @@
         if (point && center) {
             return center.multiplyCopy(2).subtract(point);
         }
+    }
+
+    function quadraticToCubicControlPoints(position, controlPoint, endPoint) {
+        var third = 1 / 3;
+        controlPoint = controlPoint.clone().multiply(2 / 3);
+        return {
+            controlOut: controlPoint.clone().add(position.multiplyCopy(third)),
+            controlIn: controlPoint.add(endPoint.multiplyCopy(third))
+        };
     }
 
     // Exports ================================================================

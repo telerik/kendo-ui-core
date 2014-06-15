@@ -98,7 +98,7 @@
             //group.append(arc, new drawing.Circle(new geometry.Circle(Point.create(300, 300), 3), strokeOptions), rectPath(arc.bbox(), strokeOptions));//circle, circleBoundingPath, curve, curveBoundingRect);
             //surface.draw(group);
             var viewModel = kendo.observable({
-                path: "M100,100Q 200,200 300,100q-50,200 100,300",//"M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100",//"M 300 300 A 50 100 0 1 1 350 300"
+                path: "M100,100T 200,200 t50,0 -100,100",//"M 300 300 v 86.6 h-25 A 50 100 0 1 1 350 300 c -5 100 100 100 100 -100 10 -70 50 100 50 100",//"M 300 300 A 50 100 0 1 1 350 300"
                 drawPath: function() {
                     var pathString = this.get("path");
                     if (pathString) {

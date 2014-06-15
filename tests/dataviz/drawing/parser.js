@@ -325,6 +325,77 @@
         equal(anchor.y, 400);
     });
 
+    // ------------------------------------------------------------
+
+    module("Parser / Smooth quadratic curve", {
+        setup: function() {
+            multiPath = parser.parse("M100,100T 200,200 t50,0 -100,100");
+            path = multiPath.paths[0];
+        }
+    });
+
+    test("uses current position as control point if previous segment is not a quadratic curve", function() {
+        var controlOut = path.segments[0].controlOut;
+
+        close(controlOut.x, 100, TOLERANCE);
+        close(controlOut.y, 100, TOLERANCE);
+    });
+
+    test("calculates controlIn", function() {
+        var controlIn = path.segments[1].controlIn;
+
+        close(controlIn.x, 133.3, TOLERANCE);
+        close(controlIn.y, 133.3, TOLERANCE);
+    });
+
+    test("parses anchor", function() {
+        var anchor = path.segments[1].anchor;
+
+        equal(anchor.x, 200);
+        equal(anchor.y, 200);
+    });
+
+    test("calculates control point as the reflected point of the previous segment control point", function() {
+        var controlOut = path.segments[1].controlOut;
+
+        close(controlOut.x, 266.6, TOLERANCE);
+        close(controlOut.y, 266.6, TOLERANCE);
+    });
+
+    test("calculates relative controlIn", function() {
+        var controlIn = path.segments[2].controlIn;
+
+        close(controlIn.x, 283.3, TOLERANCE);
+        close(controlIn.y, 266.6, TOLERANCE);
+    });
+
+    test("calculates relative anchor", function() {
+        var anchor = path.segments[2].anchor;
+
+        equal(anchor.x, 250);
+        equal(anchor.y, 200);
+    });
+
+    test("calculates controlOut when specifying multiple segments", function() {
+        var controlOut = path.segments[2].controlOut;
+
+        close(controlOut.x, 216.6, TOLERANCE);
+        close(controlOut.y, 133.3, TOLERANCE);
+    });
+
+    test("calculates controlIn when specifying multiple segments", function() {
+        var controlIn = path.segments[3].controlIn;
+
+        close(controlIn.x, 183.3, TOLERANCE);
+        close(controlIn.y, 166.6, TOLERANCE);
+    });
+
+    test("calculates anchor when specifying multiple segments", function() {
+        var anchor = path.segments[3].anchor;
+
+        equal(anchor.x, 150);
+        equal(anchor.y, 300);
+    });
 
     // ------------------------------------------------------------
     function closePoints(point1, point2, tolerance) {
