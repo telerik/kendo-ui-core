@@ -342,7 +342,15 @@
             group.bbox();
         });
 
-        test("currentTransform returns null group has no matrix and there is no parent matrix", function() {
+        test("rawBBox returns bounding box without transformation", function() {
+            var circle = new Circle(new g.Circle(new Point(), 10));
+            group.append(circle);
+            group.transform(g.transform().scale(2,2));
+
+            compareBoundingBox(group.rawBBox(), [-10, -10, 10, 10]);
+        });
+
+        test("currentTransform returns null if group has no matrix and there is no parent matrix", function() {
             ok(group.currentTransform() === null);
         });
     })();
@@ -1009,6 +1017,15 @@
             multiPath.moveTo(20, 70);
             var boundingBox = multiPath.bbox(Matrix.scale(1, 2));
             compareBoundingBox(boundingBox, [-16.3,-3.2,60,140], TOLERANCE);
+        });
+
+        test("rawBBox return bounding box without transformation", function() {
+            multiPath.moveTo(50, 50);
+            multiPath.lineTo(100, 100);
+            multiPath.moveTo(200, 200);
+            multiPath.transform(g.transform(Matrix.scale(2, 2)));
+
+            compareBoundingBox(multiPath.rawBBox(), [50, 50, 200, 200]);
         });
 
         shapeBaseTests(MultiPath, "MultiPath");

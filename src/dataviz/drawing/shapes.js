@@ -163,7 +163,11 @@
         },
 
         bbox: function(transformation) {
-            return elementsBoundingBox(this.children, this.currentTransform(transformation));
+            return elementsBoundingBox(this.children, true, this.currentTransform(transformation));
+        },
+
+        rawBBox: function() {
+            return elementsBoundingBox(this.children, false);
         },
 
         currentTransform: function(transformation) {
@@ -553,7 +557,11 @@
         },
 
         bbox: function(transformation) {
-            return elementsBoundingBox(this.paths, this.currentTransform(transformation));
+            return elementsBoundingBox(this.paths, true, this.currentTransform(transformation));
+        },
+
+        rawBBox: function() {
+            return elementsBoundingBox(this.paths, false);
         }
     });
 
@@ -605,14 +613,14 @@
     });
 
     // Helper functions ===========================================
-    function elementsBoundingBox(elements, transformation) {
+    function elementsBoundingBox(elements, applyTransform, transformation) {
         var boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
         var hasBoundingBox = false;
 
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
             if (element.visible()) {
-                var elementBoundingBox = element.bbox(transformation);
+                var elementBoundingBox = applyTransform ? element.bbox(transformation) : element.rawBBox();
                 if (elementBoundingBox) {
                     hasBoundingBox = true;
                     boundingBox = boundingBox.wrap(elementBoundingBox);
