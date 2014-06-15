@@ -363,4 +363,53 @@ test("accept does not wrap field with underscore", function() {
     equal(model._foo.foo, "foo1");
 });
 
+test("defaultValue can be set to a function", function () {
+    var seed = 2;
+    var getForeignKey = function () {
+        return seed;
+    }
+
+    var dataSource = new kendo.data.DataSource({
+        data: [{ id: 1, foreignKey: 1, someOtherValue: "test" }],
+        schema: {
+            model: {
+                id: "id",
+                fields: {
+                    id: { type: "number", defaultValue: "" },
+                    foreignKey: { type: "number", defaultValue: getForeignKey },
+                    someOtherValue: { type: "string" },
+                }
+            }
+        },
+    });
+
+    dataSource.read();
+    var model = dataSource.get(1);
+
+    equal(getForeignKey(), 2);
+
+    equal(model.id, 1);
+
+    dataSource.add({
+        id: 2,
+        foreignKey: getForeignKey(),
+        someOtherValue: "test 2"
+    });
+    var model2 = dataSource.get(2);
+    equal(model2.id, 2);
+    equal(model2.foreignKey, 2);
+
+    seed++;
+
+    dataSource.add({
+        id: 3,
+        foreignKey: getForeignKey(),
+        someOtherValue: "test 2"
+    });
+
+    var model3 = dataSource.get(3);
+    equal(model3.id, 3);
+    equal(model3.foreignKey, 3);
+});
+
 }());
