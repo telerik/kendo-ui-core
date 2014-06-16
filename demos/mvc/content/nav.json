@@ -4423,7 +4423,7 @@
           "!php"
         ]
       },
-{
+      {
         "text": "AngularJS",
         "url": "window/angular",
         "title": {
@@ -4929,6 +4929,21 @@
         "meta": {
             "kendo-ui": "This demo illustrates how to implement a custom validation rule for the Kendo UI Validator component in Kendo UI Web framework."
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "validator/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Validator"
+        },
+        "meta": {
+            "kendo-ui": "Events and visible AngularJS binding support in Kendo UI Validator"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Editors"
