@@ -46,6 +46,94 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Sets the start of the work day.
+        /// </summary>
+        /// <param name="value">The value that configures the workdaystart.</param>
+        public GanttBuilder<T> WorkDayStart(DateTime value)
+        {
+            container.WorkDayStart = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Sets the end of the work day.
+        /// </summary>
+        /// <param name="value">The value that configures the workdayend.</param>
+        public GanttBuilder<T> WorkDayEnd(DateTime value)
+        {
+            container.WorkDayEnd = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The start of working week (index based).
+        /// </summary>
+        /// <param name="value">The value that configures the workweekstart.</param>
+        public GanttBuilder<T> WorkWeekStart(double value)
+        {
+            container.WorkWeekStart = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The end of working week (index based).
+        /// </summary>
+        /// <param name="value">The value that configures the workweekend.</param>
+        public GanttBuilder<T> WorkWeekEnd(double value)
+        {
+            container.WorkWeekEnd = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The span of an hour slot.
+        /// </summary>
+        /// <param name="value">The value that configures the hourspan.</param>
+        public GanttBuilder<T> HourSpan(double value)
+        {
+            container.HourSpan = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// If true, tasks snap to time slots, otherwise tasks can have arbitrary duration.
+        /// </summary>
+        /// <param name="value">The value that configures the snap.</param>
+        public GanttBuilder<T> Snap(bool value)
+        {
+            container.Snap = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The height of the widget. Numeric values are treated as pixels.
+        /// </summary>
+        /// <param name="value">The value that configures the height.</param>
+        public GanttBuilder<T> Height(double value)
+        {
+            container.Height = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The width of the task list. Numeric values are treated as pixels.
+        /// </summary>
+        /// <param name="value">The value that configures the listwidth.</param>
+        public GanttBuilder<T> ListWidth(string value)
+        {
+            container.ListWidth = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The configuration of the gantt messages. Use this option to customize or localize the gantt messages.
         /// </summary>
         /// <param name="configurator">The action that configures the messages.</param>

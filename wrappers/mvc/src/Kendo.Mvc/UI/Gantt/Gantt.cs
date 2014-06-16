@@ -30,6 +30,22 @@ namespace Kendo.Mvc.UI
         
         public bool? Editable { get; set; }
         
+        public DateTime? WorkDayStart { get; set; }
+        
+        public DateTime? WorkDayEnd { get; set; }
+        
+        public double? WorkWeekStart { get; set; }
+        
+        public double? WorkWeekEnd { get; set; }
+        
+        public double? HourSpan { get; set; }
+        
+        public bool? Snap { get; set; }
+        
+        public double? Height { get; set; }
+        
+        public string ListWidth { get; set; }
+        
         public GanttMessagesSettings Messages
         {
             get;
@@ -60,6 +76,46 @@ namespace Kendo.Mvc.UI
                 json["editable"] = Editable;
             }
                 
+            if (WorkDayStart.HasValue)
+            {
+                json["workDayStart"] = WorkDayStart;
+            }
+                
+            if (WorkDayEnd.HasValue)
+            {
+                json["workDayEnd"] = WorkDayEnd;
+            }
+                
+            if (WorkWeekStart.HasValue)
+            {
+                json["workWeekStart"] = WorkWeekStart;
+            }
+                
+            if (WorkWeekEnd.HasValue)
+            {
+                json["workWeekEnd"] = WorkWeekEnd;
+            }
+                
+            if (HourSpan.HasValue)
+            {
+                json["hourSpan"] = HourSpan;
+            }
+                
+            if (Snap.HasValue)
+            {
+                json["snap"] = Snap;
+            }
+                
+            if (Height.HasValue)
+            {
+                json["height"] = Height;
+            }
+                
+            if (ListWidth.HasValue())
+            {
+                json["listWidth"] = ListWidth;
+            }
+            
             var messages = Messages.ToJson();
             if (messages.Any())
             {
