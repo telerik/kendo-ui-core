@@ -3403,6 +3403,21 @@
         "meta": {
             "kendo-ui": "This example demonstrates Kendo UI TabStrip integration with Sortable Component."
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "sortable/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Sortable"
+        },
+        "meta": {
+            "kendo-ui": "Events and visible AngularJS binding support in Kendo UI Sortable"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Interactivity & UX"
@@ -4890,6 +4905,21 @@
         "meta": {
             "kendo-ui": "Learn more about draggable interaction with this events example for Kendo UI Draggable in Kendo UI MVVM."
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "dragdrop/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Drag & Drop"
+        },
+        "meta": {
+            "kendo-ui": "Events and visible AngularJS binding support in Kendo UI Drag & Drop"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Interactivity & UX"
@@ -7306,6 +7336,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "actionsheet/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile Actionsheet"
@@ -7398,21 +7429,6 @@
         ]
       },
       {
-        "text": "AngularJS",
-        "url": "mobile-button/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile Button"
-        },
-        "meta": {
-            "kendo-ui": "Enabled, events and visible AngularJS binding support in Kendo UI Mobile Button"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "button/adaptive",
@@ -7430,6 +7446,23 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "mobile-button/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Button"
+        },
+        "meta": {
+            "kendo-ui": "Enabled, events and visible AngularJS binding support in Kendo UI Mobile Button"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
         "url": "drawer/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile Drawer"
@@ -7534,6 +7567,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "buttongroup/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile ButtonGroup"
@@ -7639,6 +7673,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "navbar/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile NavBar"
@@ -7821,21 +7856,6 @@
         ]
       },
       {
-        "text": "AngularJS",
-        "url": "mobile-listview/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile ListView"
-        },
-        "meta": {
-            "kendo-ui": "Source, events and visible AngularJS binding support in Kendo UI Mobile ListView"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "listview/adaptive",
@@ -7853,6 +7873,23 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "mobile-listview/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile ListView"
+        },
+        "meta": {
+            "kendo-ui": "Source, events and visible AngularJS binding support in Kendo UI Mobile ListView"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
         "url": "popover/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile PopOver"
@@ -7917,6 +7954,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "scroller/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile Scroller"
@@ -8051,6 +8089,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "mobile-tabstrip/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Mobile TabStrip"
@@ -8257,21 +8296,6 @@
         ]
       },
       {
-        "text": "AngularJS",
-        "url": "switch/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile Switch"
-        },
-        "meta": {
-            "kendo-ui": "Checked, enabled, events and visible AngularJS binding support in Kendo UI Mobile Switch"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "switch/adaptive",
@@ -8280,6 +8304,22 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Switch may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "switch/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Switch"
+        },
+        "meta": {
+            "kendo-ui": "Checked, enabled, events and visible AngularJS binding support in Kendo UI Mobile Switch"
         },
         "packages": [
           "!mvc",
