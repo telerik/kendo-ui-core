@@ -28,7 +28,8 @@ var __meta__ = {
         CHANGE = "change",
         DATA_BOUND = "dataBound",
         MAX_VALUE = Number.MAX_VALUE,
-        MIN_VALUE = -Number.MAX_VALUE;
+        MIN_VALUE = -Number.MAX_VALUE,
+        UNDEFINED = "undefined";
 
     var TreeMap = Widget.extend({
         init: function(element, options) {
@@ -162,7 +163,7 @@ var __meta__ = {
             };
         },
 
-        plot: function(data) {
+        _plot: function(data) {
             var rootCoord = data.coord || this.createRoot(),
                 html = "",
                 children = data.children,
@@ -178,9 +179,45 @@ var __meta__ = {
                     coord = item.coord;
 
                     if (coord.width * coord.height > 1) {
-                        html+= this.plot(item);
+                        html += this.plot(item);
                     }
                 }
+
+                return this.createBox(data, rootCoord, html);
+            }
+        },
+
+        plot: function(data) {
+            var rootCoord = data.coord || this.createRoot(),
+                html = "",
+                children = data.children,
+                item, coord, i;
+
+
+            if (this.leaf(data)) {
+                var options = {
+                    dataItem: data,
+                    coord: rootCoord,
+                    titleText: data.name,
+                    isLeaf: true
+                };
+
+                var treeMapItem = new TreeMapItem(options);
+
+                return treeMapItem.render()[0].outerHTML;
+            }
+
+            if (children) {
+                for (i = 0; i< children.length; i++) {
+                    item = children[i];
+                    coord = item.coord;
+
+                    if (coord.width * coord.height > 1) {
+                        html += this.plot(item);
+                    }
+                }
+
+                var treeMapItem = new TreeMapItem();
 
                 return this.createBox(data, rootCoord, html);
             }
@@ -209,8 +246,8 @@ var __meta__ = {
                 c[i] = coord[i] + "px";
             }
 
-            return "<div class=\"content\" style=\"" + this.toStyle(c)
-            + "\" id=\"" + item.id + "\">" + html + "</div>";
+            return "<div class='content' style='" + this.toStyle(c)
+            + "' id='" + item.id + "'>" + html + "</div>";
         },
 
         leafBox: function(item, coord) {
@@ -234,7 +271,6 @@ var __meta__ = {
             return "<div class=\"leaf\" style=\"" + this.toStyle(c) + "\">"
             + item.name + "</div>";
         },
-
 
         toStyle: function(obj) {
             var ans = "";
@@ -484,6 +520,97 @@ var __meta__ = {
             return total;
         }
     });
+
+    var TreeMapItem = Class.extend({
+        init: function(options) {
+            this.options = deepExtend({}, this.options, options);
+        },
+
+        options: {
+            isLeaf: false,
+            titleHeight: 16
+        },
+
+        hover: function() {
+
+        },
+
+        render: function() {
+            this.element = this._createRoot();
+
+            if (defined(this.options.template)) {
+                var rootTemplate = template(this.options.template);
+                this.element.append($(rootTemplate({
+                    dataItem: this.dataItem,
+                    title: this.titleText
+                })));
+            } else {
+                if (this.options.isLeaf) {
+                    this.element.text(this._getTitleText()).css("background-color", getRandomColor());
+                } else {
+                    this.element
+                        .append(this._createTitle())
+                        .append(this.createWrap());
+                }
+            }
+
+            return this.element;
+        },
+
+        _createRoot: function() {
+            this._root = $("<div class='k-treemap-tile k-state-default k-tile-left k-tile-top'></div>")
+                .width(this.options.coord.width)
+                .height(this.options.coord.height)
+                .offset({
+                    left: this.options.coord.left,
+                    top: this.options.coord.top
+                });
+
+            if (this.options.uid) {
+                this._wrap.attr("uid", this.options.uid);
+            }
+
+            return this._root;
+        },
+
+        _getTitleText: function() {
+            var text = this.options.titleText;
+
+            if (this.options.titleTemplate) {
+                var titleTemplate = template(this.options.titleTemplate);
+                text = titleTemplate({
+                    dataItem: this.options.dataItem,
+                    title: this.options.titleText
+                });
+            }
+
+            return text;
+        },
+
+        _createTitle: function() {
+            if (this.options.titleHeight) {
+
+                this._title = $("<div class='k-treemap-title k-state-default'></div>")
+                    .text(this._getTitleText());
+
+                return this._title;
+            }
+        },
+
+        _createWrap: function() {
+            this._wrap = $("<div class='k-treemap-tile k-state-default'></div>")
+                .width(this.options.coord.width)
+                .height(this.options.coord.height)
+                .left(this.options.coord.left)
+                .top(this.options.coord.top);
+
+            return this._wrap;
+        }
+    });
+
+    function defined(value) {
+        return typeof value !== UNDEFINED;
+    }
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF'.split('');
