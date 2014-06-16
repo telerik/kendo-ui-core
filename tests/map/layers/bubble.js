@@ -272,42 +272,106 @@
     })();
 
     // ------------------------------------------------------------
-    module("Bubble Layer / Data binding", {
-        setup: function() {
-            map = new MapMock();
-            layer = new BubbleLayer(map, {
-                dataSource: {
-                    data: [{
-                        "lat": 42, "lng": 45, "value": 10
-                    }]
-                }
-            });
-        }
-    });
-
-    test("binds to empty data source", 0, function() {
-        layer = new BubbleLayer(map, {
-            dataSource: {
-                data: []
+    (function() {
+        module("Bubble Layer / Data binding", {
+            setup: function() {
+                map = new MapMock();
+                layer = new BubbleLayer(map, {
+                    dataSource: {
+                        data: [{
+                            "lat": 42, "lng": 45, "value": 10
+                        }]
+                    }
+                });
             }
         });
-    });
 
-    test("re-draws symbols on reset", function() {
-        layer.surface.draw = function() {
-            ok(true);
-        };
+        test("binds to empty data source", 0, function() {
+            layer = new BubbleLayer(map, {
+                dataSource: {
+                    data: []
+                }
+            });
+        });
 
-        map.trigger("reset");
-    });
+        test("re-draws symbols on reset", function() {
+            layer.surface.draw = function() {
+                ok(true);
+            };
 
-    test("re-draws all symbols on incremental change", function() {
-        layer._load = function(data) {
-            equal(data.length, 2);
-        };
+            map.trigger("reset");
+        });
 
-        layer.dataSource.add({});
-    });
+        test("re-draws all symbols on incremental change", function() {
+            layer._load = function(data) {
+                equal(data.length, 2);
+            };
+
+            layer.dataSource.add({});
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Bubble Layer / Events", {
+            setup: function() {
+                map = new MapMock();
+                layer = new BubbleLayer(map);
+            }
+        });
+
+        test("fires shapeCreated", function() {
+            map.bind("shapeCreated", function(e) {
+                ok(true);
+            });
+
+            load();
+        });
+
+        test("cancelling shapeCreated prevents shape from being drawn", 0, function() {
+            layer.surface.draw = function() {
+                ok(false);
+            };
+
+            map.bind("shapeCreated", function(e) {
+                e.preventDefault();
+            });
+
+            load();
+        });
+
+        test("event has layer", function() {
+            map.bind("shapeCreated", function(e) {
+                equal(e.layer, layer);
+            });
+
+            load();
+        });
+
+        test("shape has dataItem", function() {
+            map.bind("shapeCreated", function(e) {
+                ok(e.shape.dataItem);
+            });
+
+            load();
+        });
+
+        test("shape has location", function() {
+            map.bind("shapeCreated", function(e) {
+                ok(e.shape.location.equals(new m.Location(42, 45)));
+            });
+
+            load();
+        });
+
+        test("shape has value", function() {
+            map.bind("shapeCreated", function(e) {
+                ok(e.shape.value);
+            });
+
+            load();
+        });
+    })();
 
     baseLayerTests("Bubble Layer", BubbleLayer);
 })();

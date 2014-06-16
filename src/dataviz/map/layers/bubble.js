@@ -74,15 +74,6 @@
                     symbol.location = loc;
                     symbol.value = value;
 
-                    /*
-                console.log(kendo.format(
-                    "{0:N3} | {1} | {2}",
-                    (Math.PI * (size / 2) * (size / 2)) / symbol.value,
-                    size,
-                    symbol.value
-                ));
-               */
-
                     this._drawSymbol(symbol);
                 }
             }
