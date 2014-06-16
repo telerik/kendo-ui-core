@@ -46,6 +46,21 @@
         release(element);
     });
 
+    test("fires release, then tap", 1, function(){
+        var releaseFired = false;
+
+        userEvents.bind("release", function(e) {
+            releaseFired = true;
+        });
+
+        userEvents.bind("tap", function(e) {
+            ok(releaseFired);
+        });
+
+        press(element, 10, 20);
+        release(element);
+    });
+
     asyncTest("resets velocity on direction change", 2, function(){
         userEvents.bind("end", function(e) {
             start();
