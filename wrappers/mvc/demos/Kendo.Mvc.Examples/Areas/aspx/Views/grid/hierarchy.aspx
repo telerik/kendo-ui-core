@@ -37,7 +37,7 @@
                 })
                 .DataSource(dataSource => dataSource
                     .Ajax()
-                    .PageSize(5)
+                    .PageSize(10)
                     .Read(read => read.Action("HierarchyBinding_Orders", "Grid", new { employeeID = "#=EmployeeID#" }))
                 )
                 .Pageable()

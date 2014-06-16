@@ -45,7 +45,7 @@
 			<kendo:grid-column title="Ship Address" field="shipAddress" />
 			<kendo:grid-column title="Ship Name" field="shipName" width="200px" />            
 		</kendo:grid-columns>		
-		<kendo:dataSource pageSize="5" serverPaging="true" serverSorting="true">
+		<kendo:dataSource pageSize="10" serverPaging="true" serverSorting="true">
 			<kendo:dataSource-schema data="data" total="total"></kendo:dataSource-schema>             
 			<kendo:dataSource-transport>
 				<kendo:dataSource-transport-read url="${transportNestedReadUrl}" data="<%=data %>" type="POST" contentType="application/json"/>

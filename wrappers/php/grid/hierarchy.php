@@ -110,7 +110,7 @@ echo $grid->render();
             ->value('#=EmployeeID#');
 
         $dataSource->transport($transport)
-           ->pageSize(5)
+           ->pageSize(10)
            ->schema($schema)
            ->addFilterItem($filter)
            ->serverSorting(true)
