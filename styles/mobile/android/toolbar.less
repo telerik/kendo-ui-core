@@ -9,12 +9,20 @@
     border: 0;
 }
 
-.km-android .k-button-icon .km-icon,
-.km-android .k-button-icontext .km-icon
+.km-android .k-toolbar .k-button-icon .km-icon,
+.km-android .k-toolbar .k-button-icontext .km-icon
 {
+    width: 1em;
+    height: 1em;
     font-size: 2em;
     margin-right: 0;
     vertical-align: middle;
+}
+
+.km-android .k-toolbar .km-button
+{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .km-android .k-toolbar .km-text
@@ -28,5 +36,20 @@
 
 .km-android .k-toolbar .km-buttongroup
 {
+    border-width: 0 1px;
+    border-style: solid;
+    padding: 0 .5em;
+}
 
+.km-android .k-toolbar .km-buttongroup + .km-buttongroup
+{
+    padding-left: 0;
+    border-left: 0;
+    margin-left: 0;
+}
+
+.km-android .k-split-button .km-arrowdown
+{
+    font-size: 2em;
+    margin: 0;
 }

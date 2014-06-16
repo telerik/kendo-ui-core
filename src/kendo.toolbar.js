@@ -104,7 +104,7 @@ var __meta__ = {
                 toolbar: function(options) {
                     var element = $('<div class="' + SPLIT_BUTTON + '"></div>'),
                         mainButton = components.button.toolbar(options),
-                        arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="k-icon k-i-arrow-s"></span></a>'),
+                        arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>'),
                         popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>'),
                         popup,
                         items = options.items,
@@ -175,7 +175,7 @@ var __meta__ = {
                 }
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor k-button km-icon"></div>',
+            overflowAnchor: '<div class="k-overflow-anchor k-button km-icon km-button"></div>',
 
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
