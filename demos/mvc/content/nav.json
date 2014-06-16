@@ -2463,7 +2463,7 @@
         "meta": {
             "kendo-ui": "Demo about the RTL support of the Kendo UI Notification component."
         }
-      }
+      },
       {
         "text": "AngularJS",
         "url": "notification/angular",
