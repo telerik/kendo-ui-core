@@ -1790,6 +1790,19 @@
         ]
       },
       {
+        "text": "Adaptive Rendering",
+        "url": "grid/adaptive",
+        "title": {
+            "kendo-ui": "Adaptive Rendering of Kendo UI Grid"
+        },
+        "mobile": "true",
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "AngularJS",
         "url": "grid/angular",
         "title": {
@@ -1798,19 +1811,6 @@
         "meta": {
             "kendo-ui": "Events, source and visible AngularJS binding support in Kendo UI Grid"
         },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
-        "text": "Adaptive Rendering",
-        "url": "grid/adaptive",
-        "title": {
-            "kendo-ui": "Adaptive Rendering of Kendo UI Grid"
-        },
-        "mobile": "true",
         "packages": [
           "!mvc",
           "!jsp",
@@ -2041,6 +2041,16 @@
         ]
       },
       {
+        "text": "Validation",
+        "url": "maskedtextbox/validation",
+        "title": {
+            "kendo-ui": "Validation Demo for Kendo UI MaskedTextBox"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how to validate an incomplete widget value"
+        }
+      },
+      {
         "text": "AngularJS",
         "url": "maskedtextbox/angular",
         "title": {
@@ -2054,16 +2064,6 @@
           "!jsp",
           "!php"
         ]
-      },
-      {
-        "text": "Validation",
-        "url": "maskedtextbox/validation",
-        "title": {
-            "kendo-ui": "Validation Demo for Kendo UI MaskedTextBox"
-        },
-        "meta": {
-            "kendo-ui": "This demo shows how to validate an incomplete widget value"
-        }
       }
     ],
     "category": "Editors"
