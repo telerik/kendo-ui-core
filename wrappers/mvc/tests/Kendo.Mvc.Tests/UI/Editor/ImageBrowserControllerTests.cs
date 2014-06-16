@@ -37,10 +37,10 @@ namespace Kendo.Mvc.UI.Tests
             controller.ControllerContext = context.Object;
 
             browser.Setup(b => b.GetFiles(It.IsAny<string>(), It.IsAny<string>()))
-                .Returns(new[] { new ImageBrowserEntry { EntryType = ImageBrowserEntryType.File } });
+                .Returns(new[] { new FileBrowserEntry { EntryType = FileBrowserEntryType.File } });
 
             browser.Setup(b => b.GetDirectories(It.IsAny<string>()))
-                .Returns(new[] { new ImageBrowserEntry { EntryType = ImageBrowserEntryType.Directory } });
+                .Returns(new[] { new FileBrowserEntry { EntryType = FileBrowserEntryType.Directory } });
 
             permission.Setup(p => p.CanAccess(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
 
@@ -55,9 +55,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             var result = controller.Read("");
 
-            var browseResult = result.Data as IEnumerable<ImageBrowserEntry>;
+            var browseResult = result.Data as IEnumerable<FileBrowserEntry>;
 
-            browseResult.Count(i => i.EntryType == ImageBrowserEntryType.File).ShouldEqual(1);
+            browseResult.Count(i => i.EntryType == FileBrowserEntryType.File).ShouldEqual(1);
         }
 
         [Fact]
@@ -65,9 +65,9 @@ namespace Kendo.Mvc.UI.Tests
         {
             var result = controller.Read("");
 
-            var browseResult = result.Data as IEnumerable<ImageBrowserEntry>;
+            var browseResult = result.Data as IEnumerable<FileBrowserEntry>;
 
-            browseResult.Count(i => i.EntryType == ImageBrowserEntryType.Directory).ShouldEqual(1);
+            browseResult.Count(i => i.EntryType == FileBrowserEntryType.Directory).ShouldEqual(1);
         }
 
         //[Fact]
@@ -141,13 +141,13 @@ namespace Kendo.Mvc.UI.Tests
         {
             controllerMock.Setup(c => c.AuthorizeDeleteFile(It.IsAny<string>())).Returns(false);
 
-            Assert.Throws<HttpException>(() => controller.Destroy("", new ImageBrowserEntry()));
+            Assert.Throws<HttpException>(() => controller.Destroy("", new FileBrowserEntry()));
         }
 
         [Fact]
         public void Destroy_returns_empty_content()
         {
-            var result = controller.Destroy("", new ImageBrowserEntry());
+            var result = controller.Destroy("", new FileBrowserEntry());
             Assert.IsType<JsonResult>(result);
         }
 
@@ -156,13 +156,13 @@ namespace Kendo.Mvc.UI.Tests
         {
             controllerMock.Setup(c => c.AuthorizeDeleteDirectory(It.IsAny<string>())).Returns(false);
 
-            Assert.Throws<HttpException>(() => controller.Destroy("", new ImageBrowserEntry { EntryType = ImageBrowserEntryType.Directory }));
+            Assert.Throws<HttpException>(() => controller.Destroy("", new FileBrowserEntry { EntryType = FileBrowserEntryType.Directory }));
         }
 
         [Fact]
         public void DeleteDirectory_returns_empty_content()
         {
-            var result = controller.Destroy("", new ImageBrowserEntry { EntryType = ImageBrowserEntryType.Directory });
+            var result = controller.Destroy("", new FileBrowserEntry { EntryType = FileBrowserEntryType.Directory });
             Assert.IsType<JsonResult>(result);
         }
 

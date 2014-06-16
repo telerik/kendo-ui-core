@@ -717,4 +717,7 @@
   <data name="Scheduler_Recurrence_Editor_End_MobileLabel" xml:space="preserve">
     <value>Край</value>
   </data>
+  <data name="Editor_InsertFile" xml:space="preserve">
+    <value>Вмъкни файл</value>
+  </data>
 </root>

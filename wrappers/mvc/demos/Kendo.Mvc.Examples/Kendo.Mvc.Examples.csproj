@@ -190,6 +190,7 @@
     <Compile Include="Controllers\Waterfall_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Diagram\LayoutController.cs" />
     <Compile Include="Controllers\Diagram\IndexController.cs" />
+    <Compile Include="Controllers\Editor\FileBrowserController.cs" />
     <Compile Include="Controllers\Funnel_Charts\IndexController.cs" />
     <Compile Include="Controllers\Funnel_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Funnel_Charts\Funnel_LabelsController.cs" />

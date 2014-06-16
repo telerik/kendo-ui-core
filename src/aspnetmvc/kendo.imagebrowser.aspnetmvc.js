@@ -27,6 +27,12 @@
     });
 
     extend(true, kendo.data, {
+        schemas: {
+            "filebrowser-aspnetmvc": kendo.data.schemas["imagebrowser-aspnetmvc"]
+        }
+    });
+
+    extend(true, kendo.data, {
         transports: {
             "imagebrowser-aspnetmvc": kendo.data.RemoteTransport.extend({
                 init: function(options) {
@@ -77,6 +83,11 @@
         }
     });
 
+    extend(true, kendo.data, {
+        transports: {
+            "filebrowser-aspnetmvc": kendo.data.transports["imagebrowser-aspnetmvc"]
+        }
+    });
 
 })(window.kendo.jQuery);
 

@@ -189,6 +189,31 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Configure the file browser dialog.
+        /// </summary>
+        /// <param name="configurator">An action that configures the dialog.</param>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Editor()
+        ///             .Name("Editor")
+        ///             .FileBrowser(fileBrowser => fileBrowser
+        ///                 .File("~/Content/UserFiles/{0}")
+        ///                 .Read("Read", "FileBrowser")
+        ///                 .Create("Create", "FileBrowser")
+        ///                 .Destroy("Destroy", "FileBrowser")
+        ///                 .Upload("Upload", "FileBrowser"))
+        ///             )
+        /// %&gt;
+        /// </code>
+        public EditorBuilder FileBrowser(Action<EditorFileBrowserSettingsBuilder> configurator)
+        {
+            var builder = new EditorFileBrowserSettingsBuilder(Component.FileBrowserSettings, Component.ViewContext, Component.UrlGenerator);
+
+            configurator(builder);
+
+            return this;
+        }
+
+        /// <summary>
         /// Configure the image browser dialog.
         /// </summary>
         /// <param name="configurator">An action that configures the dialog.</param>

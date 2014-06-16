@@ -825,4 +825,7 @@
   <data name="Scheduler_Recurrence_Editor_End_MobileLabel" xml:space="preserve">
     <value>Ends</value>
   </data>
+  <data name="Editor_InsertFile" xml:space="preserve">
+    <value>Insert file</value>
+  </data>
 </root>

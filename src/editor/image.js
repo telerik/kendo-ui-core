@@ -80,7 +80,7 @@ var ImageCommand = Command.extend({
         return kendo.template(
             '<div class="k-editor-dialog k-popup-edit-form k-edit-form-container">' +
                 '# if (showBrowser) { #' +
-                    '<div class="k-imagebrowser"></div>' +
+                    '<div class="k-filebrowser k-imagebrowser"></div>' +
                 '# } #' +
                 "<div class='k-edit-label'>" +
                     '<label for="k-editor-image-url">#: messages.imageWebAddress #</label>' +
@@ -137,7 +137,12 @@ var ImageCommand = Command.extend({
             options = that.editor.options,
             messages = options.messages,
             imageBrowser = options.imageBrowser,
-            showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined);
+            showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined),
+            dialogOptions = {
+                title: messages.insertImage,
+                visible: false,
+                resizable: showBrowser
+            };
 
         function apply(e) {
             var element = dialog.element,
@@ -187,13 +192,14 @@ var ImageCommand = Command.extend({
             }
         }
 
-        dialog = this.createDialog(that._dialogTemplate(showBrowser), {
-            title: messages.insertImage,
-            close: close,
-            visible: false,
-            resizable: showBrowser
-        })
-            .toggleClass("k-imagebrowser-dialog", showBrowser)
+        dialogOptions.close = close;
+
+        if (showBrowser) {
+            dialogOptions.width = 750;
+        }
+
+        dialog = this.createDialog(that._dialogTemplate(showBrowser), dialogOptions)
+            .toggleClass("k-filebrowser-dialog", showBrowser)
             .find(".k-dialog-insert").click(apply).end()
             .find(".k-dialog-close").click(close).end()
             .find(".k-edit-field input").keydown(keyDown).end()

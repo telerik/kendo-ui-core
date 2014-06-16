@@ -2,7 +2,7 @@
 
 namespace Kendo.Mvc.UI.Html
 {
-    static class ImageBrowserDependencyBootstrapper
+    static class FileDependencyBootstrapper
     {
         public static void Setup()
         {

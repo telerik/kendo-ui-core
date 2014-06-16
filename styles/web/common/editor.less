@@ -173,6 +173,7 @@ table.k-editor
 .k-createLink { .editor-icon(-288px, -48px); }
 .k-unlink { .editor-icon(-288px, -72px); }
 .k-insertImage { .editor-icon(-288px, -96px); }
+.k-insertFile { .editor-icon(-288px, -96px); }
 .k-subscript { .editor-icon(-288px, -144px); }
 .k-superscript { .editor-icon(-288px, -168px); }
 .k-cleanFormatting { .editor-icon(-288px, -192px); }
@@ -332,27 +333,28 @@ table.k-editor
     width: auto;
 }
 
-.k-imagebrowser-dialog
+.k-filebrowser-dialog
 {
-    width: 740px;
+    width: auto;
+    min-width: 350px;
 
-    .k-imagebrowser
+    .k-filebrowser
     {
         margin: 0 1em 0;
     }
 
     .k-edit-label
     {
-        width: 13%;
+        width: 18%;
     }
 
     .k-edit-field
     {
-        width: 81%;
+        width: 75%;
 
         .k-textbox
         {
-            width: 50%;
+            width: 70%;
         }
     }
 }

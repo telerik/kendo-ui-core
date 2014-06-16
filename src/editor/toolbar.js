@@ -36,7 +36,7 @@
             basic: ["bold", "italic", "underline", "strikethrough"],
             scripts: ["subscript", "superscript" ],
             alignment: ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
-            links: ["insertImage", "createLink", "unlink"],
+            links: ["insertImage", "insertFile", "createLink", "unlink"],
             lists: ["insertUnorderedList", "insertOrderedList", "indent", "outdent"],
             tables: [ "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn" ],
             advanced: [ "viewHtml", "cleanFormatting" ]

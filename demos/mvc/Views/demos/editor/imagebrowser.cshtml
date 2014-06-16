@@ -26,7 +26,8 @@
                     // create Editor from textarea HTML element with default set of tools
                     $("#editor").kendoEditor({
                         tools: [
-                            "insertImage"
+                            "insertImage",
+                            "insertFile"
                         ],
                         imageBrowser: {
                            messages: {
@@ -44,8 +45,26 @@
                                 },
                                 thumbnailUrl: "/kendo-ui/service/ImageBrowser/Thumbnail",
                                 uploadUrl: "/kendo-ui/service/ImageBrowser/Upload",
-                                imageUrl: "/kendo-ui/service/ImageBrowser/Image?path={0}"
+                                imageUrl: "http://dimov/kendo-ui/service/ImageBrowser/Image?path={0}"
                            }
+                        },
+                        fileBrowser: {
+                            messages: {
+                                dropFilesHere: "Drop files here"
+                            },
+                            transport: {
+                                read: "/kendo-ui/service/ImageBrowser/Read",
+                                destroy: {
+                                    url: "/kendo-ui/service/ImageBrowser/Destroy",
+                                    type: "POST"
+                                },
+                                create: {
+                                    url: "/kendo-ui/service/ImageBrowser/Create",
+                                    type: "POST"
+                                },
+                                uploadUrl: "/kendo-ui/service/ImageBrowser/Upload",
+                                fileUrl: "/myCustomFileFolder/{0}"
+                            }
                         }
                     });
                 });

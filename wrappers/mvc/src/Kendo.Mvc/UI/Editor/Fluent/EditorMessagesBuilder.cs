@@ -187,6 +187,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorMessagesBuilder FileBrowser(Action<EditorFileBrowserMessagesBuilder> configurator)
+        {
+            configurator(new EditorFileBrowserMessagesBuilder(messages.FileBrowserMessages));
+
+            return this;
+        }
+
         public EditorMessagesBuilder ImageWebAddress(string message)
         {
             messages.ImageWebAddress = message;
