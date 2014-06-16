@@ -69,7 +69,14 @@
                     var center = this.map.locationToView(loc);
                     var size = scale.map(value);
 
-                    var symbol = this._createSymbol(center, size, opt.style);
+                    var symbol = this._createSymbol({
+                        center: center,
+                        size: size,
+                        style: opt.style,
+                        dataItem: dataItem,
+                        location: loc
+                    });
+
                     symbol.dataItem = dataItem;
                     symbol.location = loc;
                     symbol.value = value;
@@ -89,13 +96,13 @@
             return dataviz.map.scales[scale];
         },
 
-        _createSymbol: function(center, size, style) {
+        _createSymbol: function(args) {
             var symbol = this.options.symbol;
             if (!kendo.isFunction(symbol)) {
                 symbol = dataviz.map.symbols[symbol];
             }
 
-            return symbol(center, size, style);
+            return symbol(args);
         },
 
         _drawSymbol: function(shape) {
@@ -124,14 +131,15 @@
     });
 
     var Symbols = {
-        circle: function (center, size, style) {
-            var geo = new g.Circle(center, size / 2);
-            return new d.Circle(geo, style);
+        circle: function (args) {
+            var geo = new g.Circle(args.center, args.size / 2);
+            return new d.Circle(geo, args.style);
         },
 
-        square: function(center, size, style) {
-            var path = new d.Path(style);
-            var halfSize = size / 2;
+        square: function(args) {
+            var path = new d.Path(args.style);
+            var halfSize = args.size / 2;
+            var center = args.center;
 
             path.moveTo(center.x - halfSize, center.y - halfSize)
                 .lineTo(center.x + halfSize, center.y - halfSize)

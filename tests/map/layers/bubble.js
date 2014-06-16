@@ -165,9 +165,9 @@
         });
 
         test("sets symbol center", function() {
-            m.symbols.foo = function(center) {
-                equal(center.x, 45);
-                equal(center.y, 42);
+            m.symbols.foo = function(args) {
+                equal(args.center.x, 45);
+                equal(args.center.y, 42);
 
                 return new d.Group();
             };
@@ -177,8 +177,8 @@
 
         test("sets symbol size", function() {
             var sizes = [];
-            m.symbols.foo = function(center, size) {
-                sizes.push(Math.round(size));
+            m.symbols.foo = function(args) {
+                sizes.push(Math.round(args.size));
 
                 return new d.Group();
             };
@@ -189,8 +189,28 @@
         });
 
         test("sets symbol style", function() {
-            m.symbols.foo = function(center, size, style) {
-                equal(style, "bar");
+            m.symbols.foo = function(args) {
+                equal(args.style, "bar");
+
+                return new d.Group();
+            };
+
+            load();
+        });
+
+        test("sets symbol dataItem", function() {
+            m.symbols.foo = function(args) {
+                ok(args.dataItem);
+
+                return new d.Group();
+            };
+
+            load();
+        });
+
+        test("sets symbol location", function() {
+            m.symbols.foo = function(args) {
+                ok(args.location.equals(new m.Location(42, 45)));
 
                 return new d.Group();
             };
