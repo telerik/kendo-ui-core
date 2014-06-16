@@ -469,10 +469,12 @@ var __meta__ = {
                     adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, newData);
                 }
             } else if (this._lastExpanded == "columns") {
+                tuples = axes.rows.tuples;
                 resultAxis = validateAxis(axes.rows, this._axes.rows);
 
                 if (resultAxis) {
                     axes.rows = resultAxis;
+                    adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, newData);
                 }
             }
 
@@ -755,6 +757,7 @@ var __meta__ = {
         var root, tuples = newAxis.tuples;
 
         if (tuples.length < membersCount(axis.tuples)) {
+
             root = mergeTuples(axis.tuples.slice(), tuples);
 
             newAxis.tuples = tuples.slice(0, 1).concat(unflattenTuple(root.parsedRoot));
@@ -775,6 +778,19 @@ var __meta__ = {
                 dataIdx = tupleIndex(sourceTuples[columnIdx], targetTuples);
 
                 data[rowIdx * columnsLength + columnIdx].ordinal = rowIdx * targetColumnsLength + dataIdx;
+            }
+        }
+    }
+
+    function adjustDataByRow(sourceTuples, targetTuples, columnsLength, data) {
+        var columnIdx, rowIdx, dataIdx;
+        var rowsLength = sourceTuples.length;
+        var targetRowsLength = targetTuples.length;
+
+        for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
+            dataIdx = tupleIndex(sourceTuples[rowIdx], targetTuples);
+            for (columnIdx = 0; columnIdx < columnsLength; columnIdx++) {
+                data[rowIdx * columnsLength + columnIdx].ordinal = dataIdx * columnsLength + columnIdx;
             }
         }
     }
