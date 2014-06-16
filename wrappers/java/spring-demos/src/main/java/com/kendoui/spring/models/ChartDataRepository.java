@@ -4022,4 +4022,29 @@ public class ChartDataRepository {
         return result;
     }  
 
+    public static List<RangeBarChartsLocalDataViewModel> TaskCompleteness() {
+        List<RangeBarChartsLocalDataViewModel> result = new ArrayList<RangeBarChartsLocalDataViewModel>();
+
+        result.add(new RangeBarChartsLocalDataViewModel(0, 10, 0, 30, "Monday"));
+        result.add(new RangeBarChartsLocalDataViewModel(10, 30, 30, 45, "Tuesday"));
+        result.add(new RangeBarChartsLocalDataViewModel(30, 40, 45, 60, "Wednesday"));
+        result.add(new RangeBarChartsLocalDataViewModel(40, 60, 60, 80, "Thursday"));
+        result.add(new RangeBarChartsLocalDataViewModel(60, 100, 80, 100, "Friday"));
+
+        return result;
+    }
+
+    public static List<DownloadSpeed> DownloadSpeeds() {
+        List<DownloadSpeed> result = new ArrayList<DownloadSpeed>();
+
+        result.add(new DownloadSpeed(30, 35, 80, 90, "Monday"));
+        result.add(new DownloadSpeed(60, 70, 60, 70, "Tuesday"));
+        result.add(new DownloadSpeed(50, 60, 70, 100, "Wednesday"));
+        result.add(new DownloadSpeed(30, 50, 100, 140, "Thursday"));
+        result.add(new DownloadSpeed(40, 50, 90, 110, "Friday"));
+        result.add(new DownloadSpeed(50, 60, 80, 100, "Saturday"));
+        result.add(new DownloadSpeed(30, 40, 50, 70, "Sunday"));
+
+        return result;
+    }
 }
