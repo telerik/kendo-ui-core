@@ -2014,7 +2014,7 @@ var __meta__ = {
 
             for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
                 var obj = {
-                    text: kendo.getter(resource.dataTextField)(data[dataIndex]),
+                    text: kendo.htmlEncode(kendo.getter(resource.dataTextField)(data[dataIndex])),
                     className: "k-slot-cell"
                 };
                 obj[name] = createLayoutConfiguration(name, resources.slice(1), inner);

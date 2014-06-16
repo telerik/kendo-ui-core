@@ -782,6 +782,31 @@
         equal(headerRows.eq(3).find("td").length, 6);
     });
 
+    test("header text is encoded", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            group: {
+                resources: [ "ResourceName1" ]
+            },
+            resources: [
+                {
+                    field: "bar",
+                    name: "ResourceName1",
+                    dataSource: [
+                        { text: "<script>alert(1)<\/script>", value: 1, color: "red" }
+                    ]
+                }
+            ],
+            dataSource: [],
+            views: ["day"]
+        });
+
+        var view = scheduler.view();
+        var headerRows = view.datesHeader.find("tr");
+
+        equal(headerRows.eq(0).find("th").text(), "<script>alert(1)<\/script>");
+    });
+
     test("row headers are rendered for groups in day view", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2013/6/6"),
