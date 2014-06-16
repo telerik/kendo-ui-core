@@ -123,4 +123,57 @@
         dataSource.filter({ field:"foo", operator:"eq", value:"gaz" });
         equal(dom.find("input").val(), "gaz");
     });
+
+    test("updates the viewmodel operator when the dataSource is initially filtered", function() {
+        dataSource.filter({ filters: [{ field:"faz", operator:"eq", value:"gaz" }, { field:"foo", operator:"neq", value:"baz" }] });
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(rowFilter.viewModel.operator, "neq");
+    });
+
+    test("when viewModel is changed the filter of the dataSource is updated", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(rowFilter.viewModel.set("value", "someValue"));
+        var filter = dataSource.filter();
+        equal(filter.value, "someValue");
+        equal(filter.field, "foo");
+        equal(filter.operator, "eq");
+    });
+
+    test("when viewModel is changed the filter of the dataSource is updated and other filters are preserved", function() {
+        dataSource.filter({ field: "bar", value: "someBarvalue", operator: "neq"});
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(rowFilter.viewModel.set("value", "someValue"));
+        var filter = dataSource.filter();
+        ok(filter.filters);
+        equal(filter.logic, "and");
+        var filters = filter.filters;
+        equal(filters[0].value, "someBarvalue");
+        equal(filters[0].field, "bar");
+        equal(filters[0].operator, "neq");
+        equal(filters[1].value, "someValue");
+        equal(filters[1].field, "foo");
+        equal(filters[1].operator, "eq");
+    });
+
+    test("when viewModel is changed to empty value, filter of the dataSource is cleared if there are no other filters", function() {
+        dataSource.filter([{ field: "foo", value: "soneFooValue", operator: "neq" }]);
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        rowFilter.viewModel.set("value", "");
+        var filter = dataSource.filter();
+        equal(filter, null);
+    });
+
+    test("when viewModel is changed to empty value, filter of the dataSource is cleared and other filters are preserved", function() {
+        dataSource.filter([{ field: "bar", value: "someBarvalue", operator: "neq" }, { field: "foo", value: "soneFooValue", operator: "neq" }]);
+        rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
+        rowFilter.viewModel.set("value", "");
+        var filter = dataSource.filter();
+        ok(filter.filters);
+        equal(filter.logic, "and");
+        var filters = filter.filters;
+        equal(filters.length, 1);
+        equal(filters[0].value, "someBarvalue");
+        equal(filters[0].field, "bar");
+        equal(filters[0].operator, "neq");
+    });
 })();

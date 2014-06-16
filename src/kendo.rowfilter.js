@@ -27,7 +27,7 @@ var __meta__ = {
             if (filter.hasOwnProperty("filters")) {
                 filters = filter.filters;
             } else if(filter.field == field) {
-                return filter.value;
+                return filter;
             }
         }
         if (($.isArray(filter))) {
@@ -67,22 +67,21 @@ var __meta__ = {
             element.addClass("grid-filter-header");
 
             that.viewModel = viewModel = kendo.observable({
-                operator: options.operator || that._defaultOperatorForType(options.type),
+                operator: options.operator || "eq",
                 value: null
             });
+
+            if (typeof (options.template) == "function") {
+                options.template.call(viewModel, input);
+            }
 
             kendo.bind(element, viewModel);
 
             that._refreshHandler = proxy(that.refresh, that);
 
-            that.dataSource.bind("change", that._refreshHandler);
+            that.dataSource.bind(CHANGE, that._refreshHandler);
 
             that.refresh();
-        },
-
-        _defaultOperatorForType: function(type) {
-            //TODO
-            return "eq";
         },
 
         refresh: function() {
@@ -92,12 +91,11 @@ var __meta__ = {
 
         _bind: function() {
             var that = this,
-                filter = that.dataSource.filter(),
-                viewModel = that.viewModel,
-                valueFromFilter = findFilterForField(filter, this.options.field);
+                filter = findFilterForField(that.dataSource.filter(), this.options.field) || {},
+                viewModel = that.viewModel;
 
-            viewModel.set("value", valueFromFilter);
-            viewModel.set("operator", that.options.operator);
+            viewModel.set("value", filter.value);
+            viewModel.set("operator", filter.operator);
         },
 
         destroy: function() {
@@ -119,6 +117,8 @@ var __meta__ = {
             autoBind: true,
             field: "",
             type: "string",
+            operator: "eq",
+            template: null,
             operators: {
                 string: {
                     eq: EQ,
