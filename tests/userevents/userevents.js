@@ -19,6 +19,14 @@
         press(element, 10, 20);
     });
 
+    test("includes event type in event data", 1, function(){
+        userEvents.bind("press", function(e) {
+            equal(e.type, "press");
+        });
+
+        press(element, 10, 20);
+    });
+
     test("raises start on first mouse move", 2, function(){
         userEvents.bind("start", function(e) {
             equal(e.x.location, 15);

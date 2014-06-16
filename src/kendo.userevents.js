@@ -430,7 +430,7 @@ var __meta__ = {
                 extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
-            return this.trigger(eventName, data);
+            return this.trigger(eventName, extend(data, {type: eventName}));
         },
 
         // API
