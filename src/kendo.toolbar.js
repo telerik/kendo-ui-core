@@ -331,6 +331,10 @@ var __meta__ = {
             });
         }
 
+        function toggleActive(e) {
+            e.target.toggleClass(STATE_ACTIVE, e.type == "press");
+        }
+
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this;
@@ -380,7 +384,9 @@ var __meta__ = {
                     filter:
                         "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", " +
                         "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
-                    tap: proxy(that._buttonClick, that)
+                    tap: proxy(that._buttonClick, that),
+                    press: toggleActive,
+                    release: toggleActive
                 });
 
                 kendo.notify(that);
