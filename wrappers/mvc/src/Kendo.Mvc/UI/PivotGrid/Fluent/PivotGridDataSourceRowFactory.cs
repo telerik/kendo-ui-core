@@ -1,17 +1,18 @@
-﻿namespace Kendo.Mvc.UI.Fluent
+﻿using System.Collections.Generic;
+namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
     /// Creates rows for the <see cref="PivotGridDataSource" /> class.
     /// </summary>
     public class PivotGridDataSourceRowFactory : IHideObjectMembers
     {
-         private readonly PivotGridDataSource container;
+         private readonly IList<PivotGridDataSourceRow> container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PivotGridDataSourceRowFactory"/> class.
         /// </summary>
         /// <param name="container">The container</param>
-         public PivotGridDataSourceRowFactory(PivotGridDataSource container)
+         public PivotGridDataSourceRowFactory(IList<PivotGridDataSourceRow> container)
         {
             this.container = container;
         }
@@ -24,7 +25,7 @@
         {
             PivotGridDataSourceRow resource = new PivotGridDataSourceRow();
             resource.Name = name;
-            container.Rows.Add(resource);
+            container.Add(resource);
 
             return new PivotGridDataSourceRowBuilder(resource);
         }
