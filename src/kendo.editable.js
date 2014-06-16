@@ -293,6 +293,10 @@ var __meta__ = {
 
             convertToValueBinding(container);
 
+            if (that.validatable) {
+                that.validatable.destroy();
+            }
+
             kendo.bind(container, that.options.model);
 
             that.options.model.unbind("set", that._validateProxy);

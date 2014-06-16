@@ -23,6 +23,17 @@
         ok(element.data("kendoEditable") instanceof Editable);
     });
 
+    test("destroys existing validator on refresh", function() {
+        var editable = div.kendoEditable( { model: defaultModel }).data("kendoEditable");
+        var validatable = editable.validatable;
+        var destroy = validatable.destroy;
+        validatable.destroy = function() {
+            destroy.call(this);
+            ok(true);
+        };
+        editable.refresh();
+    });
+
     test("renders input element for field", function() {
         var editable = setup({ fields: "foo", model: defaultModel });
 
