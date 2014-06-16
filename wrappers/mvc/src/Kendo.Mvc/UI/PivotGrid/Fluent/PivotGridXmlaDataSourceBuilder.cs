@@ -47,7 +47,7 @@
         /// </summary>
         public PivotGridXmlaDataSourceBuilder Columns(Action<PivotGridDataSourceColumnFactory> addColumnAction)
         {
-            PivotGridDataSourceColumnFactory factory = new PivotGridDataSourceColumnFactory(dataSource);
+            PivotGridDataSourceColumnFactory factory = new PivotGridDataSourceColumnFactory(dataSource.Columns);
 
             addColumnAction(factory);
 
@@ -59,7 +59,7 @@
         /// </summary>
         public PivotGridXmlaDataSourceBuilder Rows(Action<PivotGridDataSourceRowFactory> addRowAction)
         {
-            PivotGridDataSourceRowFactory factory = new PivotGridDataSourceRowFactory(dataSource);
+            PivotGridDataSourceRowFactory factory = new PivotGridDataSourceRowFactory(dataSource.Rows);
 
             addRowAction(factory);
 
