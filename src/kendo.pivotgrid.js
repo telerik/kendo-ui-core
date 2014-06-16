@@ -945,7 +945,7 @@ var __meta__ = {
 
     function findExistingTuple(tuples, toFind) {
         var idx, length, tuple, found, counter = 0;
-        var memberIndex, membersLength;
+        var memberIndex, membersLength, member;
 
         for (idx = 0, length = tuples.length; idx < length; idx++) {
             tuple = tuples[idx];
@@ -959,7 +959,12 @@ var __meta__ = {
             counter ++;
 
             for (memberIndex = 0, membersLength = tuple.members.length; memberIndex < membersLength; memberIndex++) {
-                found = findExistingTuple(tuple.members[memberIndex].children, toFind);
+                member = tuple.members[memberIndex];
+                if (member.measure) {
+                    counter += member.children.length;
+                    continue;
+                }
+                found = findExistingTuple(member.children, toFind);
                 counter += found.index;
                 if (found.tuple) {
                     return {

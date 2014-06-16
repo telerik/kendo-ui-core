@@ -1089,6 +1089,104 @@
         equal(descriptors[0].name, "foo");
     });
 
+    test("expand of nested tuple with multiple measures", 3, function() {
+        var columnTuples = [
+            [
+                {
+                    members: [
+                        { name: "[level 0]", children: [] },
+                        { name: "measure 1", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0]", children: [] },
+                        { name: "measure 2", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] },
+                        { name: "measure 1", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 1]", parentName: "[level 0]", children: [] },
+                        { name: "measure 2", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] },
+                        { name: "measure 1", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] },
+                        { name: "measure 2", children: [] }
+                    ]
+                }
+            ],
+            [
+                {
+                    members: [
+                        { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] },
+                        { name: "measure 1", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 2]", parentName: "[level 0]", children: [] },
+                        { name: "measure 2", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 2].[level 0]", parentName: "[level 0].[level 2]", children: [] },
+                        { name: "measure 1", children: [] }
+                    ]
+                },
+                {
+                    members: [
+                        { name: "[level 0].[level 2].[level 0]", parentName: "[level 0].[level 2]", children: [] },
+                        { name: "measure 2", children: [] }
+                    ]
+                }
+            ]
+        ];
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "[level 0]", expand: true }],
+            measures: ["measure 1", "measure 2"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: columnTuples.shift()
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandColumn("[level 0].[level 2]");
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 2);
+        equal(descriptors[0].name, "[level 0]");
+        equal(descriptors[1].name, "[level 0].[level 2]");
+    });
+
     test("rowsAxisDescriptors returns rows state", 3, function() {
         var dataSource = new PivotDataSource({
             rows: ["level 0"],
