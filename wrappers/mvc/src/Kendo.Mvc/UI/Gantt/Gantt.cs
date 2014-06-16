@@ -19,12 +19,28 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
 //>> Initialization
         
+            Messages = new GanttMessagesSettings();
+                
         //<< Initialization
         }
 
 //>> Fields
         
         public bool? AutoBind { get; set; }
+        
+        public bool? Editable { get; set; }
+        
+        public GanttMessagesSettings Messages
+        {
+            get;
+            set;
+        }
+        
+        public bool? Selectable { get; set; }
+        
+        public bool? ShowWorkDays { get; set; }
+        
+        public bool? ShowWorkHours { get; set; }
         
         //<< Fields
 
@@ -37,6 +53,32 @@ namespace Kendo.Mvc.UI
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
+            }
+                
+            if (Editable.HasValue)
+            {
+                json["editable"] = Editable;
+            }
+                
+            var messages = Messages.ToJson();
+            if (messages.Any())
+            {
+                json["messages"] = messages;
+            }
+                
+            if (Selectable.HasValue)
+            {
+                json["selectable"] = Selectable;
+            }
+                
+            if (ShowWorkDays.HasValue)
+            {
+                json["showWorkDays"] = ShowWorkDays;
+            }
+                
+            if (ShowWorkHours.HasValue)
+            {
+                json["showWorkHours"] = ShowWorkHours;
             }
                 
         //<< Serialization
