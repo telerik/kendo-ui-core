@@ -55,7 +55,7 @@ var __meta__ = {
         var parentName;
 
         for (var idx = 0; idx < tuples.length; idx++) {
-            member = tuples[idx].members[level]
+            member = tuples[idx].members[level];
             name = member.name;
             parentName = member.parentName || "";
 
@@ -130,7 +130,7 @@ var __meta__ = {
     }
 
     function descriptorsForMembers(axis, members, measures) {
-        var axis = axis || {};
+        axis = axis || {};
 
         addMissingPathMembers(members, axis);
 
@@ -488,8 +488,10 @@ var __meta__ = {
 
         _mergeAxes: function(sourceAxes, data) {
             var measures = this.measures();
-            var columnMeasures = rowMeasures = [];
+            var columnMeasures = [];
+            var rowMeasures = [];
             var axes = this.axes();
+            var startIndex;
 
             if (this.measuresAxis() === "columns") {
                 if (this.columns().length === 0) {
@@ -522,12 +524,12 @@ var __meta__ = {
 
             if (oldColumnsLength !== membersCount(axes.columns.tuples)) {
                 //columns are expanded
-                var startIndex = mergedColumns.index + findDataIndex(mergedColumns.parsedRoot, mergedColumns.memberIndex);
+                startIndex = mergedColumns.index + findDataIndex(mergedColumns.parsedRoot, mergedColumns.memberIndex);
                 var offset = oldColumnsLength + newColumnsLength;
                 data = this._mergeColumnData(data, startIndex, newRowsLength, newColumnsLength, offset);
             } else {
                 //rows are expanded
-                var startIndex = mergedRows.index + findDataIndex(mergedRows.parsedRoot, mergedRows.memberIndex);
+                startIndex = mergedRows.index + findDataIndex(mergedRows.parsedRoot, mergedRows.memberIndex);
                 data = this._mergeRowData(data, startIndex, newRowsLength, newColumnsLength);
             }
 
