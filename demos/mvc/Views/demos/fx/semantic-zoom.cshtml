@@ -9,15 +9,17 @@
         </script>
 
         <script id="album-template" type="text/x-kendo-template">
-            <a href="\#/detail?id=#: collectionId #" class="large" style="background-image: url(#: artworkUrl100 #)">#: collectionName # (#: releaseDate.getFullYear() #)</a>
+            <a href="\#/detail?id=#: collectionId #" class="large" style="background-image: url(#: artworkUrl100 #)"></a>
         </script>
 
         <script id="detail" type="text/x-kendo-template">
             <div id="detail-view" data-bind="style: { backgroundImage: largeAlbumCover }">
-            <a href="#">Back</a>
-            <h2><span data-bind="text: album.collectionName"></span></h2>
-            <ol id="tracks" data-role="listview" data-bind="source: albumDS, events: { dataBound: fadeTracks }" data-template="track-template" data-auto-bind="false">
-            </ol>
+                <div>
+                    <a href="#" class="back-link"><span>&laquo;</span> Back</a>
+                    <h2><span data-bind="text: album.collectionName"></span></h2>
+                    <ol id="tracks" data-role="listview" data-bind="source: albumDS, events: { dataBound: fadeTracks }" data-template="track-template" data-auto-bind="false">
+                    </ol>
+                </div>
             </div>
         </script>
 
@@ -30,7 +32,10 @@
                 position: relative;
                 width: 600px;
                 height: 600px;
+                padding: 10px;
+                margin: 0 auto;
                 overflow: hidden;
+                background-color: #000;
             }
 
             .k-fx-szoom.k-fx-end .k-fx-next {
@@ -41,6 +46,8 @@
                 overflow: auto;
                 width: 600px;
                 height: 600px;
+                border: 0;
+                background-color: #000;
             }
 
             #tiles a {
@@ -48,15 +55,60 @@
                 box-sizing: border-box;
                 width: 100px;
                 height: 100px;
-                margin: 0 20px 20px 0;
+                margin: 10px;
+                border: 3px solid #000;
                 float: left;
                 background: #e4e4e4;
+            }
+            
+            #tiles a:hover {
+                border: 3px solid #ff0;
             }
 
             #detail-view {
                 width: 600px;
                 height: 600px;
-                background: #e4e4e4;
+                background: #000;
+            }
+            
+            #detail-view div {
+                width: 600px;
+                height: 600px;
+                background: rgba(0,0,0,.65);
+                overflow: auto;
+            }
+            
+            #detail-view h2 {
+                padding: 30px 30px 0 30px;
+                font-size: 3.5em;
+                font-weight: normal;
+                line-height: 1em;
+                color: #fff;
+            }
+            
+            #tracks {
+                border: 0;
+                padding: 0 0 0 30px;
+                background: none;
+                color: #fff;
+            }
+            
+            .back-link {
+                display: inline-block;
+                margin: 30px 0 0 30px;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: bold;
+                color: #ff0;
+            }
+            
+            .back-link:hover {
+                text-decoration: none;
+                color: #fff;
+            }
+            
+            .back-link span {
+                font-size: 1.3em;
             }
         </style>
 
