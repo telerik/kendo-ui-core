@@ -71,7 +71,7 @@ var __meta__ = {
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
-                        item = initializer(items[i]);
+                        item = initializer($.extend(options, items[i]));
                         item.appendTo(element);
                     }
 
@@ -218,7 +218,11 @@ var __meta__ = {
             }
 
             if (options.showText != "overflow" && options.text) {
-                element.text(options.text);
+                if (options.mobile) {
+                    element.html('<span class="km-text">' + options.text + "</span>");
+                } else {
+                    element.text(options.text);
+                }
             }
 
             hasIcon = (options.showIcon != "overflow") && (options.icon || options.spriteCssClass || options.imageUrl);
