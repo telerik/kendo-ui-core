@@ -10,7 +10,7 @@
   </p>
 
   <div kendo-splitter
-       k-panes="[ null, { contentUrl: 'doc/web/loremIpsum.html' }]"
+       k-panes="[ null, { contentUrl: '../content/web/loremIpsum.html' }]"
        k-orientation="orientation"
        k-rebind="orientation">
     <div>
@@ -28,8 +28,9 @@
 
 <script>
   angular.module("KendoDemos", [ "kendo.directives" ]);
+
   function MyCtrl($scope) {
-  $scope.orientation = "horizontal";
-  $scope.hello = "Hello from Controller!";
-}
+      $scope.orientation = "horizontal";
+      $scope.hello = "Hello from Controller!";
+  }
 </script>
