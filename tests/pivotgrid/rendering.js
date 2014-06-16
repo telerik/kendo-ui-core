@@ -1024,7 +1024,7 @@
         equal(th_1.eq(0).attr("colspan"), 2);
     });
 
-    test("PivotGrid renders measures as a dimension", function() {
+    test("PivotGrid renders measures as a single dimension", function() {
         var tuples = [
             { members: [ { name: "measure 1", children: [] } ] },
             { members: [ { name: "measure 2", children: [] } ] }
@@ -2006,6 +2006,29 @@
 
         ok(td_2.eq(0).hasClass("k-first"));
         ok(!td_3.eq(0).hasClass("k-first"));
+    });
+
+    test("PivotGrid renders measures as a single dimension", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var rows = headerTable.find("tr");
+        var td_0 = rows.eq(0).find("td");
+        var td_1 = rows.eq(1).find("td");
+
+        equal(rows.length, 2);
+        equal(td_0.eq(0).text(), "measure 1");
+        equal(td_1.eq(0).text(), "measure 2");
     });
 
     module("PivotGrid resize on render", {

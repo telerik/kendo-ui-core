@@ -2507,8 +2507,12 @@ var __meta__ = {
                 }
             }
 
-            map[firstMemberName].children[0].attr.className = "k-first";
+            row = map[firstMemberName];
             allRow = map[firstMemberName + "all"];
+
+            if (row) {
+                row.children[0].attr.className = "k-first";
+            }
 
             if (allRow) {
                 allRow.children[0].attr.className = "k-first";
