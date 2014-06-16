@@ -42,8 +42,8 @@ var __meta__ = {
 
         OVERFLOW_ANCHOR = "k-overflow-anchor",
         OVERFLOW_CONTAINER = "k-overflow-container",
-        FIRST_OVERFLOW_VISIBLE = "k-overflow-first-visible",
-        LAST_OVERFLOW_VISIBLE = "k-overflow-last-visible",
+        FIRST_TOOLBAR_VISIBLE = "k-toolbar-first-visible",
+        LAST_TOOLBAR_VISIBLE = "k-toolbar-last-visible",
 
         CLICK = "click",
         TOGGLE = "toggle",
@@ -71,7 +71,7 @@ var __meta__ = {
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
-                        item = initializer($.extend(options, items[i]));
+                        item = initializer($.extend({}, options, items[i]));
                         item.appendTo(element);
                     }
 
@@ -332,7 +332,9 @@ var __meta__ = {
         }
 
         function toggleActive(e) {
-            e.target.toggleClass(STATE_ACTIVE, e.type == "press");
+            if (!e.target.is(".k-toggle-button")) {
+                e.target.toggleClass(STATE_ACTIVE, e.type == "press");
+            }
         }
 
         var ToolBar = Widget.extend({
@@ -683,12 +685,14 @@ var __meta__ = {
             },
 
             _markVisibles: function() {
-                var items = this.popup.element.children(),
-                    visibleItems = items.filter(":not(." + OVERFLOW_HIDDEN + ")");
+                var overflowItems = this.popup.element.children(),
+                    toolbarItems = this.element.children(":not(.k-overflow-anchor)"),
+                    visibleOverflowItems = overflowItems.filter(":not(.k-overflow-hidden)"),
+                    visibleToolbarItems = toolbarItems.filter(":visible");
 
-                items.removeClass(FIRST_OVERFLOW_VISIBLE + " " + LAST_OVERFLOW_VISIBLE);
-                visibleItems.first().addClass(FIRST_OVERFLOW_VISIBLE);
-                visibleItems.last().addClass(LAST_OVERFLOW_VISIBLE);
+                overflowItems.add(toolbarItems).removeClass(FIRST_TOOLBAR_VISIBLE + " " + LAST_TOOLBAR_VISIBLE);
+                visibleOverflowItems.first().add(visibleToolbarItems.first()).addClass(FIRST_TOOLBAR_VISIBLE);
+                visibleOverflowItems.last().add(visibleToolbarItems.last()).addClass(LAST_TOOLBAR_VISIBLE);
             }
 
         });

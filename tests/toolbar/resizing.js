@@ -175,6 +175,31 @@
         ok(!toolbar.popup.element.children("li").hasClass("k-overflow-hidden"), "Commands in the popup are visible");
     });
 
+    test("First and last visible items in the ToolBar receive classes", 4, function() {
+        container.width(400);
+
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foooooo" },
+                { type: "button", id: "bar", text: "baaaaar" },
+                { type: "button", id: "baz", text: "baaaaaz" },
+                { type: "button", id: "qux", text: "quuuuux" }
+            ]
+        }).data("kendoToolBar");
+
+        container.width(130);
+        toolbar.resize();
+
+        ok($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
+        ok($("#foo").hasClass("k-toolbar-last-visible"), "#foo is the last visible button in the toolbar");
+
+        container.width(220);
+        toolbar.resize();
+
+        ok($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
+        ok($("#bar").hasClass("k-toolbar-last-visible"), "#bar is the last visible button in the toolbar");
+    });
+
     test("First and last visible items in the command overflow popup receive classes", 4, function() {
         container.width(400);
 
@@ -190,14 +215,14 @@
         container.width(130);
         toolbar.resize();
 
-        ok($("#bar_overflow").parent().hasClass("k-overflow-first-visible"), "#bar is the first visible button in the command overflow popup");
-        ok($("#qux_overflow").parent().hasClass("k-overflow-last-visible"), "#qux is the last visible button in the command overflow popup");
+        ok($("#bar_overflow").parent().hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
+        ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
 
         container.width(220);
         toolbar.resize();
 
-        ok($("#baz_overflow").parent().hasClass("k-overflow-first-visible"), "#baz is the first visible button in the command overflow popup");
-        ok($("#qux_overflow").parent().hasClass("k-overflow-last-visible"), "#qux is the last visible button in the command overflow popup");
+        ok($("#baz_overflow").parent().hasClass("k-toolbar-first-visible"), "#baz is the first visible button in the command overflow popup");
+        ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
     });
 
 })();

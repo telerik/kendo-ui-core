@@ -523,9 +523,9 @@
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
-                        { id: "btn1", id: "btn1", text: "Btn1" },
-                        { id: "btn2", id: "btn2", text: "Btn2" },
-                        { id: "btn3", id: "btn3", text: "Btn3" }
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
                     ]
                 }
             ]
@@ -539,9 +539,9 @@
         container.kendoToolBar({
             items: [
                 { type: "buttonGroup", items: [
-                        { id: "btn1", id: "btn1", text: "Btn1" },
-                        { id: "btn2", id: "btn2", text: "Btn2" },
-                        { id: "btn3", id: "btn3", text: "Btn3" }
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
                     ]
                 }
             ]
