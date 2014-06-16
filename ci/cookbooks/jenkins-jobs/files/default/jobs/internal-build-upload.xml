@@ -18,8 +18,6 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name></name>
-        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -29,10 +27,7 @@
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <gitTool>Default</gitTool>
-    <browser class="hudson.plugins.git.browser.GithubWeb">
-      <url>https://github.com/telerik/kendo/</url>
-    </browser>
+    <browser class="hudson.plugins.git.browser.GithubWeb"/>
     <submoduleCfg class="list"/>
     <extensions>
       <hudson.plugins.git.extensions.impl.SubmoduleOption>
@@ -50,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>DOCS_BRANCH=master xvfb-run -e xvfb-run.log -a ./build/run-build-task internal_builds:upload</command>
+      <command>DOCS_BRANCH=master xvfb-run -e xvfb-run.log -a ./build/run-build-task internal_builds:uncheck_previous</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
