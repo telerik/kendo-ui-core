@@ -137,13 +137,28 @@
             }
         });
 
-        test("draws custom symbol", function() {
+        test("uses custom named symbol", function() {
             layer.surface.draw = function(shape) {
                 ok(shape.foo);
             };
 
             m.symbols.foo = function() {
                 return { foo: true };
+            };
+
+            load();
+        });
+
+        test("uses custom symbol function", function() {
+            layer = new BubbleLayer(map, {
+                symbol: function() {
+                    return { foo: true };
+                },
+                style: "bar"
+            });
+
+            layer.surface.draw = function(shape) {
+                ok(shape.foo);
             };
 
             load();
@@ -208,7 +223,7 @@
             load();
         });
 
-        test("initializes custom scale", function() {
+        test("initializes custom named scale", function() {
             m.scales.foo = function(domain, range) {
                 deepEqual(domain, [0, 10]);
                 deepEqual(range, [0, 100]);
@@ -220,6 +235,21 @@
 
             layer = new BubbleLayer(map, {
                 scale: "foo"
+            });
+
+            load();
+        });
+
+        test("initializes custom scale", function() {
+            layer = new BubbleLayer(map, {
+                scale: function(domain, range) {
+                    deepEqual(domain, [0, 10]);
+                    deepEqual(range, [0, 100]);
+
+                    this.map = function() {
+                        return 1;
+                    };
+                }
             });
 
             load();

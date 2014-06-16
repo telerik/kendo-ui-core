@@ -52,8 +52,7 @@
             });
 
             var maxValue = getValue(data[0]);
-            var createSymbol = dataviz.map.symbols[opt.symbol];
-            var scaleType = dataviz.map.scales[opt.scale];
+            var scaleType = this._scaleType();
             var scale;
             for (var i = 0; i < data.length; i++) {
                 var dataItem = data[i];
@@ -70,7 +69,7 @@
                     var center = this.map.locationToView(loc);
                     var size = scale.map(value);
 
-                    var symbol = createSymbol(center, size, opt.style);
+                    var symbol = this._createSymbol(center, size, opt.style);
                     symbol.dataItem = dataItem;
                     symbol.location = loc;
                     symbol.value = value;
@@ -87,6 +86,25 @@
                     this._drawSymbol(symbol);
                 }
             }
+        },
+
+        _scaleType: function() {
+            var scale = this.options.scale;
+
+            if (kendo.isFunction(scale)) {
+                return scale;
+            }
+
+            return dataviz.map.scales[scale];
+        },
+
+        _createSymbol: function(center, size, style) {
+            var symbol = this.options.symbol;
+            if (!kendo.isFunction(symbol)) {
+                symbol = dataviz.map.symbols[symbol];
+            }
+
+            return symbol(center, size, style);
         },
 
         _drawSymbol: function(shape) {
