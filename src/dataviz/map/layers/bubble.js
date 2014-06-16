@@ -29,8 +29,7 @@
     var BubbleLayer = ShapeLayer.extend({
         options: {
             autoBind: true,
-            latField: "lat",
-            longField: "lng",
+            locationField: "location",
             valueField: "value",
             minSize: 0,
             maxSize: 100,
@@ -56,17 +55,16 @@
             var scale;
             for (var i = 0; i < data.length; i++) {
                 var dataItem = data[i];
-                var lat = getter(opt.latField)(dataItem);
-                var lng = getter(opt.longField)(dataItem);
+                var location = getter(opt.locationField)(dataItem);
                 var value = getter(opt.valueField)(dataItem);
 
-                if (defined(lat) && defined(lng) && defined(value)) {
+                if (defined(location) && defined(value)) {
                     if (!scale) {
                         scale = new scaleType([0, value], [opt.minSize, opt.maxSize]);
                     }
 
-                    var loc = new Location(lat, lng);
-                    var center = this.map.locationToView(loc);
+                    location = Location.create(location);
+                    var center = this.map.locationToView(location);
                     var size = scale.map(value);
 
                     var symbol = this._createSymbol({
@@ -74,11 +72,11 @@
                         size: size,
                         style: opt.style,
                         dataItem: dataItem,
-                        location: loc
+                        location: location
                     });
 
                     symbol.dataItem = dataItem;
-                    symbol.location = loc;
+                    symbol.location = location;
                     symbol.value = value;
 
                     this._drawSymbol(symbol);

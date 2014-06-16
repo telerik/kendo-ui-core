@@ -11,11 +11,11 @@
 
     function load() {
         layer._load([{
-            "lat": 42, "lng": 45, "value": 10
+            "location": [42, 45], "value": 10
         }, {
-            "lat": 42, "lng": 45, "value": 50
+            "location": [42, 45], "value": 50
         }, {
-            "lat": 42, "lng": 45, "value": 100
+            "location": [42, 45], "value": 100
         }])
     }
 
@@ -224,7 +224,7 @@
         function load() {
             layer._load([{
             }, {
-                "lat": 42, "lng": 45, "value": 10
+                "location": [42, 45], "value": 10
             }, {
             }]);
         }
@@ -299,7 +299,7 @@
                 layer = new BubbleLayer(map, {
                     dataSource: {
                         data: [{
-                            "lat": 42, "lng": 45, "value": 10
+                            "location": [42, 45], "value": 10
                         }]
                     }
                 });
