@@ -140,7 +140,6 @@ var ImageCommand = Command.extend({
             showBrowser = !!(kendo.ui.ImageBrowser && imageBrowser && imageBrowser.transport && imageBrowser.transport.read !== undefined),
             dialogOptions = {
                 title: messages.insertImage,
-                close: close,
                 visible: false,
                 resizable: showBrowser
             };
@@ -192,6 +191,8 @@ var ImageCommand = Command.extend({
                 close(e);
             }
         }
+
+        dialogOptions.close = close;
 
         if (showBrowser) {
             dialogOptions.width = 750;

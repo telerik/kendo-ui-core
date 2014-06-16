@@ -109,7 +109,6 @@ var FileCommand = Command.extend({
             showBrowser = !!(kendo.ui.FileBrowser && fileBrowser && fileBrowser.transport && fileBrowser.transport.read !== undefined),
             dialogOptions = {
                 title: messages.insertFile,
-                close: close,
                 visible: false,
                 resizable: showBrowser
             };
@@ -150,6 +149,8 @@ var FileCommand = Command.extend({
                 close(e);
             }
         }
+
+        dialogOptions.close = close;
 
         if (showBrowser) {
             dialogOptions.width = 750;
