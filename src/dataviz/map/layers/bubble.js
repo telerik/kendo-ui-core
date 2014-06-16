@@ -46,7 +46,7 @@
             var opt = this.options;
             var getValue = getter(opt.valueField);
 
-            var data = data.slice(0);
+            data = data.slice(0);
             data.sort(function(a, b) {
                 return getValue(b) - getValue(a);
             });
@@ -107,7 +107,7 @@
 
         _drawSymbol: function(shape) {
             var args = { layer: this, shape: shape };
-            cancelled = this.map.trigger("shapeCreated", args);
+            var cancelled = this.map.trigger("shapeCreated", args);
             if (!cancelled) {
                 this.surface.draw(shape);
             }
