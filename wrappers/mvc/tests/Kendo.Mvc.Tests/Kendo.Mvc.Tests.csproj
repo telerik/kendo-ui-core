@@ -119,6 +119,7 @@
     <Compile Include="UI\Chart\CategoricalErrorBarsBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAreaLineBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartLineBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartRangeBarSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
