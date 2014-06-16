@@ -334,6 +334,8 @@ var __meta__ = {
             var members = normalizeMembers(path);
             var memberToExpand = members[members.length - 1].name;
 
+            this._lastExpanded = origin;
+
             members = descriptorsForMembers(this.axes()[origin], members, this.measures());
 
             for (var idx = 0; idx < members.length; idx++) {
@@ -447,6 +449,35 @@ var __meta__ = {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
 
+            this._axes = {
+                columns: normalizeAxis(this._axes.columns),
+                rows: normalizeAxis(this._axes.rows)
+            };
+
+            axes = {
+                columns: normalizeAxis(axes.columns),
+                rows: normalizeAxis(axes.rows)
+            };
+
+            var tuples, resultAxis;
+            if (this._lastExpanded == "rows") {
+                tuples = axes.columns.tuples;
+                resultAxis = validateAxis(axes.columns, this._axes.columns);
+
+                if (resultAxis) {
+                    axes.columns = resultAxis;
+                    adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, newData);
+                }
+            } else if (this._lastExpanded == "columns") {
+                resultAxis = validateAxis(axes.rows, this._axes.rows);
+
+                if (resultAxis) {
+                    axes.rows = resultAxis;
+                }
+            }
+
+            this._lastExpanded = null;
+
             newData = this._normalizeData(newData, axes);
 
             var result = this._mergeAxes(axes, newData);
@@ -458,6 +489,8 @@ var __meta__ = {
         _mergeAxes: function(sourceAxes, data) {
             var measures = this.measures();
             var columnMeasures = rowMeasures = [];
+            var axes = this.axes();
+
             if (this.measuresAxis() === "columns") {
                 if (this.columns().length === 0) {
                     columnMeasures = measures;
@@ -471,16 +504,6 @@ var __meta__ = {
                     rowMeasures = measures;
                 }
             }
-
-            var axes = {
-                columns: normalizeAxis(this._axes.columns),
-                rows: normalizeAxis(this._axes.rows)
-            };
-
-            sourceAxes = {
-                columns: normalizeAxis(sourceAxes.columns),
-                rows: normalizeAxis(sourceAxes.rows)
-            };
 
             var newColumnsLength = sourceAxes.columns.tuples.length;
             var newRowsLength = sourceAxes.rows.tuples.length;
@@ -726,6 +749,64 @@ var __meta__ = {
         }
     });
 
+    function validateAxis(newAxis, axis) {
+        var root, tuples = newAxis.tuples;
+
+        if (tuples.length < membersCount(axis.tuples)) {
+            root = mergeTuples(axis.tuples.slice(), tuples);
+
+            newAxis.tuples = tuples.slice(0, 1).concat(unflattenTuple(root.parsedRoot));
+
+            return newAxis;
+        }
+
+        return;
+    }
+
+    function adjustDataByColumn(sourceTuples, targetTuples, rowsLength, data) {
+        var columnIdx, rowIdx, dataIdx;
+        var columnsLength = sourceTuples.length;
+        var targetColumnsLength = targetTuples.length;
+
+        for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
+            for (columnIdx = 0; columnIdx < columnsLength; columnIdx++) {
+                dataIdx = tupleIndex(sourceTuples[columnIdx], targetTuples);
+
+                data[rowIdx * columnsLength + columnIdx].ordinal = rowIdx * targetColumnsLength + dataIdx;
+            }
+        }
+    }
+
+    function tupleIndex(tuple, collection) {
+        var idx, length = collection.length;
+        for (idx = 0; idx < length; idx++) {
+            if (equalTuples(tuple, collection[idx])) {
+                return idx;
+            }
+        }
+
+        return -1;
+    }
+
+    function unflattenTuple(tuple) {
+        var result = [];
+
+        var members = tuple.members.slice();
+        var current = members.shift();
+        var idx, length, child, children;
+        while (current) {
+            children = current.children;
+            for (idx = 0, length = children.length; idx < length; idx ++) {
+                child = children[idx];
+                result.push(child);
+                [].push.apply(result, unflattenTuple(child));
+            }
+            current = members.shift();
+        }
+
+        return result;
+    }
+
     function membersCount(tuples) {
         if (!tuples.length) {
             return 0;
@@ -817,6 +898,7 @@ var __meta__ = {
                 if (memberIndex == -1 && sourceMembers[idx].children.length) {
                     memberIndex = idx;
                 }
+
                 targetMembers[idx].children = sourceMembers[idx].children;
             }
         }
