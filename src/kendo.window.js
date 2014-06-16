@@ -1221,8 +1221,8 @@ var __meta__ = {
             var wnd = that.owner;
             var wrapper = wnd.wrapper;
 
-            that.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
-            that.initialCursorPosition = kendo.getOffset(wrapper, "position");
+            that.elementPadding = parseInt(wrapper.css("padding-top"), 10);
+            that.initialPosition = kendo.getOffset(wrapper, "position");
 
             that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
@@ -1231,7 +1231,7 @@ var __meta__ = {
                 height: wrapper.height()
             };
 
-            that.containerOffset = kendo.getOffset(wnd.appendTo);
+            that.containerOffset = kendo.getOffset(wnd.appendTo, "position");
 
             wrapper
                 .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
@@ -1245,7 +1245,7 @@ var __meta__ = {
                 options = wnd.options,
                 direction = that.resizeDirection,
                 containerOffset = that.containerOffset,
-                initialPosition = that.initialCursorPosition,
+                initialPosition = that.initialPosition,
                 initialSize = that.initialSize,
                 newWidth, newHeight,
                 windowBottom, windowRight,
@@ -1303,7 +1303,7 @@ var __meta__ = {
                wnd.touchScroller.reset();
             }
             if (e.keyCode == 27) {
-                wrapper.css(that.initialCursorPosition)
+                wrapper.css(that.initialPosition)
                     .css(that.initialSize);
             }
 
