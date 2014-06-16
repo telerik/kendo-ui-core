@@ -44,7 +44,7 @@
         /// </summary>
         public PivotGridDataSourceTransportBuilder Discovery(Action<CustomCrudOperationBuilder> configurator)
         {
-            configurator(new CustomCrudOperationBuilder(transport.Read, viewContext, urlGenerator));
+            configurator(new CustomCrudOperationBuilder(transport.Discovery, viewContext, urlGenerator));
 
             return this;
         }
