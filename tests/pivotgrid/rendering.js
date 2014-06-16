@@ -1024,6 +1024,28 @@
         equal(th_1.eq(0).attr("colspan"), 2);
     });
 
+    test("PivotGrid renders measures as a dimension", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_0 = rows.eq(0).find("th");
+
+        equal(rows.length, 1);
+        equal(th_0.eq(0).text(), "measure 1");
+        equal(th_0.eq(1).text(), "measure 2");
+    });
+
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";

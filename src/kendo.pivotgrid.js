@@ -2220,6 +2220,10 @@ var __meta__ = {
 
             if (member.measure) {
                 member = rootMembers[--idx];
+
+                if (!member) {
+                    return;
+                }
             }
 
             var map = this.map;
@@ -2364,9 +2368,14 @@ var __meta__ = {
                 memberIdx = this._memberIdx(members, parentMember); //we do not need this func
             }
 
-            row = this._row(tuple, memberIdx, parentMember);
-
             member = members[memberIdx];
+
+            if (member.measure) {
+                this._measures(member.children);
+                return;
+            }
+
+            row = this._row(tuple, memberIdx, parentMember);
 
             children = member.children;
             childrenLength = children.length;
