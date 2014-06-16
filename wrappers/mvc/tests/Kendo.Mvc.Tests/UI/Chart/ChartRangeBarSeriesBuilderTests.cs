@@ -28,7 +28,7 @@
         [Fact]
         public void ToFieldExpression_should_set_toField()
         {
-            series.FromField.ShouldEqual("RepSalesHigh");
+            series.ToField.ShouldEqual("RepSalesHigh");
         }
     }
 }
