@@ -1648,7 +1648,7 @@ var __meta__ = {
             this.dataSource.bind("change", $.proxy(this.refresh, this));
 
             if (!options.template) {
-                this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
+                this.options.template = "<div class='k-pivotsetting-indicator' data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
                     '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-group-delete"></span></a></div>';
             }
 
@@ -1686,6 +1686,7 @@ var __meta__ = {
                 connectWith: this.options.connectWith,
                 ignore: ".k-empty",
                 disabled: ".k-empty",
+                cursor: "move",
                 change: function(e) {
                     var name = e.item.attr(kendo.attr("name"));
 
@@ -1765,13 +1766,13 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
+            that._dataSource();
+
             that._wrapper();
             that._createLayout();
 
             that._columnBuilder = columnBuilder = new ColumnBuilder();
             that._rowBuilder = rowBuilder = new RowBuilder();
-
-            that._dataSource();
 
             that.columnsHeader
                 .add(that.rowsHeader)
@@ -1857,18 +1858,42 @@ var __meta__ = {
         },
 
         _measureFields: function() {
-            this.measureFields = $(DIV).addClass("k-pivot-toolbar k-header")
-                                       .text(this.options.messages.measureFields);
+            this.measureFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-measures");
+
+            this.measuresTarget = new kendo.ui.PivotSettingTarget(this.measureFields, {
+                dataSource: this.dataSource,
+                setting: "measures",
+                messages: {
+                    empty: this.options.messages.measureFields
+                }
+            });
         },
 
         _columnFields: function() {
-            this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header")
-                                      .text(this.options.messages.columnFields);
+            this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-columns");
+
+            this.columnsTarget = new kendo.ui.PivotSettingTarget(this.columnFields, {
+                connectWith: ".k-pivot-toolbar.k-header.k-settings-rows",
+                dataSource: this.dataSource,
+                setting: "columns",
+                messages: {
+                    empty: this.options.messages.columnFields
+                }
+            });
         },
 
         _rowFields: function() {
-            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header")
-                                   .text(this.options.messages.rowFields);
+            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-rows");
+
+            this.rowsTarget = new kendo.ui.PivotSettingTarget(this.rowFields, {
+                connectWith: ".k-pivot-toolbar.k-header.k-settings-columns",
+                dataSource: this.dataSource,
+                setting: "rows",
+                messages: {
+                    empty: this.options.messages.rowFields
+                }
+            });
+
         },
 
         _columnsHeader: function() {

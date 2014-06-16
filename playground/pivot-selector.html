@@ -34,6 +34,21 @@
                 width: 200px;
                 height: 200px;
             }
+            .k-pivotsetting-indicator {
+                border-style: solid;
+                border-width: 1px;
+                margin: 0 3px;
+                padding: .15em .15em .15em .4em;
+                line-height: 1.5em;
+                border-radius: 4px;
+            }
+            .k-pivot-table .k-pivotsetting-indicator {
+                display: inline-block;
+            }
+
+            .k-pivotsetting-indicator a {
+                vertical-align: middle;
+            }
         </style>
     </head>
     <body>
@@ -281,6 +296,7 @@
                     setting: "measures"
                 });
 
+/*
                 new kendo.ui.PivotSettingTarget($("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-table > .k-pivot-toolbar.k-header").empty()), {
                     dataSource: pivot.dataSource,
                     connectWith: ".k-pivot .k-settings-target",
@@ -297,7 +313,7 @@
                     connectWith: ".k-pivot .k-settings-target",
                     setting: "rows"
                 });
-
+*/
             });
 
         </script>

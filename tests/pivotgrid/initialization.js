@@ -91,4 +91,63 @@
 
         ok(pivotgrid.contentTree instanceof kendo.dom.Tree);
     });
+
+    test("column setting target is attached to the column fields header", function() {
+        var pivotgrid = createPivot();
+
+        ok(pivotgrid.columnFields.data("kendoPivotSettingTarget") instanceof kendo.ui.PivotSettingTarget);
+        ok(pivotgrid.columnsTarget instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("column setting target shares same datasource", function() {
+        var pivotgrid = createPivot();
+
+        deepEqual(pivotgrid.columnsTarget.dataSource, pivotgrid.dataSource);
+    });
+
+    test("column setting target handles columns settings", function() {
+        var pivotgrid = createPivot();
+
+        equal(pivotgrid.columnsTarget.options.setting, "columns");
+    });
+
+    test("rows setting target is attached to the row fields header", function() {
+        var pivotgrid = createPivot();
+
+        ok(pivotgrid.rowFields.data("kendoPivotSettingTarget") instanceof kendo.ui.PivotSettingTarget);
+        ok(pivotgrid.rowsTarget instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("rows setting target shares same datasource", function() {
+        var pivotgrid = createPivot();
+
+        deepEqual(pivotgrid.rowsTarget.dataSource, pivotgrid.dataSource);
+    });
+
+    test("rows setting target handles rows settings", function() {
+        var pivotgrid = createPivot();
+
+        equal(pivotgrid.rowsTarget.options.setting, "rows");
+    });
+
+    test("measures setting target is attached to the measure fields header", function() {
+        var pivotgrid = createPivot();
+
+        ok(pivotgrid.measureFields.data("kendoPivotSettingTarget") instanceof kendo.ui.PivotSettingTarget);
+        ok(pivotgrid.measuresTarget instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("measures setting target shares same datasource", function() {
+        var pivotgrid = createPivot();
+
+        deepEqual(pivotgrid.measuresTarget.dataSource, pivotgrid.dataSource);
+    });
+
+    test("measures setting target handles rows settings", function() {
+        var pivotgrid = createPivot();
+
+        equal(pivotgrid.measuresTarget.options.setting, "measures");
+    });
+
+
 })();
