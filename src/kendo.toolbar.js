@@ -126,11 +126,21 @@ var __meta__ = {
                     element.attr("id", options.id);
                     popupElement.attr("id", options.id + "_optionlist");
 
-                    popup = popupElement.kendoPopup({
-                        anchor: element,
-                        animation: options.animation,
-                        open: adjustPopupWidth
-                    }).data("kendoPopup");
+                    if (options.mobile && kendo.mobile.ui.ActionSheet) {
+                        popup = new kendo.mobile.ui.ActionSheet(popupElement, {
+                            tablet: true,
+                            open: function () {
+                                kendo.wrap(popup.shim.wrapper)
+                                    .addClass("k-split-wrapper");
+                            }
+                        });
+                    } else {
+                        popup = popupElement.kendoPopup({
+                            anchor: element,
+                            animation: options.animation,
+                            open: adjustPopupWidth
+                        }).data("kendoPopup");
+                    }
 
                     element.data({
                         type: "splitButton",
@@ -337,6 +347,18 @@ var __meta__ = {
             }
         }
 
+        function toggleOverflow(popup, anchor, mobile) {
+            if (mobile) {
+                if (!popup.element.is(":visible")) {
+                    popup.openFor(anchor);
+                } else {
+                    popup.close();
+                }
+            } else {
+                popup.toggle();
+            }
+        }
+
         var ToolBar = Widget.extend({
             init: function(element, options) {
                 var that = this;
@@ -429,6 +451,7 @@ var __meta__ = {
                 var component = components[options.type],
                     template = options.template,
                     element, that = this,
+                    itemClasses = that.isMobile ? "" : "k-item k-state-default",
                     overflowTemplate = options.overflowTemplate,
                     overflowElement;
 
@@ -455,7 +478,7 @@ var __meta__ = {
                             overflowElement = overflowElement.wrap("<li></li>").parent();
                         }
                         that._attributes(overflowElement, options);
-                        overflowElement.addClass("k-item k-state-default").appendTo(that.popup.element);
+                        overflowElement.addClass(itemClasses).appendTo(that.popup.element);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
                             overflowElement.addClass(OVERFLOW_HIDDEN);
@@ -516,27 +539,38 @@ var __meta__ = {
             },
 
             _renderOverflow: function() {
-                var overflowAnchor = $(components.overflowAnchor),
-                    that = this;
+                var that = this;
 
-                that.element.append(overflowAnchor);
+                that.overflowAnchor = $(components.overflowAnchor);
+
+                that.element.append(that.overflowAnchor);
 
                 if (that.isMobile) {
-                    overflowAnchor.append('<span class="km-icon km-more"></span>');
+                    that.overflowAnchor.append('<span class="km-icon km-more"></span>');
                 }
 
-                that.popup = new kendo.ui.Popup(components.overflowContainer, {
-                    origin: "bottom right",
-                    position: "top right",
-                    anchor: overflowAnchor,
-                    animation: that.animation,
-                    copyAnchorStyles: false,
-                    open: function() {
-                        kendo.wrap(that.popup.element)
-                            .addClass("k-overflow-wrapper")
-                            .css("margin-left", "3px");
-                    }
-                });
+                if (that.isMobile && kendo.mobile.ui.ActionSheet) {
+                    that.popup = new kendo.mobile.ui.ActionSheet(components.overflowContainer, {
+                        tablet: true,
+                        open: function () {
+                            kendo.wrap(that.popup.shim.wrapper)
+                                .addClass("k-overflow-wrapper");
+                        }
+                    });
+                } else {
+                    that.popup = new kendo.ui.Popup(components.overflowContainer, {
+                        origin: "bottom right",
+                        position: "top right",
+                        anchor: that.overflowAnchor,
+                        animation: that.animation,
+                        copyAnchorStyles: false,
+                        open: function () {
+                            kendo.wrap(that.popup.element)
+                                .addClass("k-overflow-wrapper")
+                                .css("margin-left", "3px");
+                        }
+                    });
+                }
 
                 that.popup.element.attr(kendo.attr("uid"), this.uid);
             },
@@ -594,19 +628,19 @@ var __meta__ = {
 
                 e.preventDefault();
 
-                if (popup.visible()) {
+                if (popup.element.is(":visible")) {
                     isDefaultPrevented = this.trigger(CLOSE, { target: splitButton });
                 } else {
                     isDefaultPrevented = this.trigger(OPEN, { target: splitButton });
                 }
 
                 if (!isDefaultPrevented) {
-                    popup.toggle();
+                    toggleOverflow(popup, splitButton, this.isMobile);
                 }
             },
 
             _toggleOverflow: function() {
-                this.popup.toggle();
+                toggleOverflow(this.popup, this.overflowAnchor, this.isMobile);
             },
 
             _resize: function(e) {
