@@ -204,6 +204,21 @@ var __meta__ = {
             fileTypes: "*.png,*.gif,*.jpg,*.jpeg"
         },
 
+        value: function () {
+            var that = this,
+                selected = that._selectedItem(),
+                path,
+                imageUrl = that.options.transport.imageUrl;
+
+            if (selected && selected.get(TYPEFIELD) === "f") {
+                path = concatPaths(that.path(), selected.get(NAMEFIELD)).replace(trimSlashesRegExp, "");
+                if (imageUrl) {
+                    path = isFunction(imageUrl) ? imageUrl(path) : kendo.format(imageUrl, encodeURIComponent(path));
+                }
+                return path;
+            }
+        },
+
         _fileUpload: function(e) {
             var that = this,
                 options = that.options,
