@@ -1616,6 +1616,8 @@ var __meta__ = {
             uniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
             defaultHierarchy: kendo.getter("DEFAULT_HIERARCHY['#text']", true),
             type: kendo.getter("DIMENSION_TYPE['#text']", true)
+//unknown = 0; time = 1; measure = 2; other = 3; quantitative = 5; accounts = 6; customers = 7; products = 8; scenario = 9; utility = 10; currency = 11; rates = 12; channel = 13; promotion = 14; organization = 15; billOfMaterials = 16; geography = 17;
+
         },
         hierarchies: {
             name: kendo.getter("HIERARCHY_NAME['#text']", true),
@@ -1784,7 +1786,6 @@ var __meta__ = {
 
             this.sortable = this.element.kendoSortable({
                 connectWith: this.options.connectWith,
-                ignore: ".k-empty",
                 disabled: ".k-empty",
                 cursor: "move",
                 change: function(e) {

@@ -17,6 +17,8 @@
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivot.configurator.js" type="text/javascript" charset="utf-8"></script>
+
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
         <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -52,63 +54,6 @@
         </style>
     </head>
     <body>
-        <!--script>
-            var SettingsTarget = kendo.ui.Widget.extend({
-                init: function(element, options) {
-                    kendo.ui.Widget.fn.init.call(this, element, options);
-
-                    var that = this;
-                    this.element.addClass("k-settings-target");
-
-                    this.sortable = this.element.kendoSortable({
-                        connectWith: ".k-settings-target",
-                        change: function(e) {
-                            if (e.action == "receive") {
-                                that.add(e.item.data("name"));
-                            } else if (e.action == "remove") {
-                                that.remove(e.item.data("name"));
-                            }
-                        }
-                    });
-
-                    this.dataSource = options.dataSource;
-                    this.dataSource.bind("change", $.proxy(this.refresh, this));
-                    this.itemTemplate = kendo.template("<li data-name='${name || data}'>${name || data}</li>");
-                    this.items = [];
-               },
-
-               options: {
-                   name: "SettingsTarget"
-               },
-
-               add: function(item) {
-                    this.items.push(item);
-                    this.dataSource[this.options.setting](this.items);
-               },
-               remove: function(item) {
-                 var found;
-                 for (var idx = 0; idx < this.items.length; idx++) {
-                        if (this.items[idx] == item) {
-                            found = true;
-                            break;
-                        }
-                 }
-
-                 if (found) {
-                     this.items.splice(idx, 1);
-                     this.dataSource[this.options.setting](this.items);
-                 }
-               },
-
-               refresh: function() {
-                    this.items = $.map(this.dataSource[this.options.setting](), function(item) { return item.name || item });
-                    this.element.html(kendo.render(this.itemTemplate, this.items));
-               }
-           });
-
-//           kendo.ui.plugin(SettingsTarget);
-        </script-->
-
         <fieldset style="margin: 10px; width: 700px">
             <div style="width: 60%; float:left;">
                 <ul>
@@ -137,7 +82,7 @@
         </fieldset>
 
         <div id="pivotgrid"></div>
-
+        <div id="configurator"></div>
         <script>
 
             $(function() {
@@ -171,7 +116,11 @@
                     }
                 }).data("kendoPivotGrid");
 
-                var catalogs = $("#catalogs").kendoDropDownList({
+                $("#configurator").kendoPivotConfigurator({
+                    dataSource: pivot.dataSource
+                });
+
+/*                var catalogs = $("#catalogs").kendoDropDownList({
                     dataSource: {
                         transport: {
                             read: function(options) {
@@ -295,25 +244,8 @@
                     dataSource: pivot.dataSource,
                     setting: "measures"
                 });
-
-/*
-                new kendo.ui.PivotSettingTarget($("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-table > .k-pivot-toolbar.k-header").empty()), {
-                    dataSource: pivot.dataSource,
-                    connectWith: ".k-pivot .k-settings-target",
-                    setting: "columns"
-                });
-
-                new kendo.ui.PivotSettingTarget( $("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-rowheaders > .k-pivot-toolbar.k-header:first").empty()),{
-                    dataSource: pivot.dataSource,
-                    setting: "measures"
-                });
-
-                new kendo.ui.PivotSettingTarget($("<div></div>").addClass("k-settings-target").appendTo($(".k-pivot-rowheaders > .k-pivot-toolbar.k-header:last").empty()), {
-                    dataSource: pivot.dataSource,
-                    connectWith: ".k-pivot .k-settings-target",
-                    setting: "rows"
-                });
 */
+
             });
 
         </script>
