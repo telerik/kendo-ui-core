@@ -118,6 +118,19 @@
         circle: function (center, size, style) {
             var geo = new g.Circle(center, size / 2);
             return new d.Circle(geo, style);
+        },
+
+        square: function(center, size, style) {
+            var path = new d.Path(style);
+            var halfSize = size / 2;
+
+            path.moveTo(center.x - halfSize, center.y - halfSize)
+                .lineTo(center.x + halfSize, center.y - halfSize)
+                .lineTo(center.x + halfSize, center.y + halfSize)
+                .lineTo(center.x - halfSize, center.y + halfSize)
+                .close();
+
+            return path;
         }
     };
 

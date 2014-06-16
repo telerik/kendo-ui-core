@@ -73,6 +73,60 @@
 
     // ------------------------------------------------------------
     (function() {
+        module("Bubble Layer / Squares", {
+            setup: function() {
+                map = new MapMock();
+                layer = new BubbleLayer(map, {
+                    symbol: "square",
+                    style: {
+                        fill: {
+                            color: "foo"
+                        }
+                    }
+                });
+            }
+        });
+
+        test("creates square symbols", function() {
+            layer.surface.draw = function(shape) {
+                ok(shape instanceof d.Path);
+            };
+
+            load();
+        });
+
+        test("sets square center", function() {
+            layer.surface.draw = function(shape) {
+                var center = shape.bbox().center();
+                equal(center.x, 45);
+                equal(center.y, 42);
+            };
+
+            load();
+        });
+
+        test("sets square size to make area proportional", function() {
+            var sizes = [];
+            layer.surface.draw = function(shape) {
+                sizes.push(Math.round(shape.bbox().width()));
+            };
+
+            load();
+
+            deepEqual(sizes, [100, 71, 32]);
+        });
+
+        test("sets square style", function() {
+            layer.surface.draw = function(shape) {
+                equal(shape.options.fill.color, "foo");
+            };
+
+            load();
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
         module("Bubble Layer / Custom Symbol", {
             setup: function() {
                 map = new MapMock();
