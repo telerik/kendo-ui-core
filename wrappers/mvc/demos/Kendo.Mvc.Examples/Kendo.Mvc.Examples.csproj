@@ -783,6 +783,9 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\range_bar_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\range_bar_charts\local_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\range_bar_charts\remote_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\horizontal.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\local_data_binding.aspx" />
