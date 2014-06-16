@@ -9,10 +9,7 @@ using Kendo.Mvc.Infrastructure;
 namespace Kendo.Mvc.UI
 {
     public abstract class EditorImageBrowserController : FileBrowserController, IImageBrowserController
-    {
-        private readonly IDirectoryBrowser directoryBrowser;
-        private readonly IDirectoryPermission permission;
-        private readonly IVirtualPathProvider pathProvider;
+    {       
         private readonly IThumbnailCreator thumbnailCreator;
 
         private const int ThumbnailHeight = 80;
@@ -29,11 +26,9 @@ namespace Kendo.Mvc.UI
         protected EditorImageBrowserController(IDirectoryBrowser directoryBrowser,
             IDirectoryPermission permission,
             IVirtualPathProvider pathProvider,
-            IThumbnailCreator thumbnailCreator)
+            IThumbnailCreator thumbnailCreator) 
+            : base(directoryBrowser, permission, pathProvider)
         {
-            this.directoryBrowser = directoryBrowser;
-            this.permission = permission;
-            this.pathProvider = pathProvider;
             this.thumbnailCreator = thumbnailCreator;
         }
 
