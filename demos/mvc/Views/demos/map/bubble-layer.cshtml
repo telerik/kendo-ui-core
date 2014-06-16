@@ -1,0 +1,81 @@
+<div id="example">
+    <div id="info" class="box"></div>
+    <div class="demo-section k-header" style="padding: 1em;">
+        <div id="map"></div>
+    </div>
+    <script id="info-template" type="text/x-kendo-template">
+        <h4>#: City #, #= Country #</h4>
+        <p class="info">Population #= kendo.toString(Pop2010 * 1000, "N0") #</p>
+    </script>
+    <script id="empty-info-template" type="text/x-kendo-template">
+        <h4>Hover over urban areas</h4>
+        <p>&nbsp;</p>
+    </script>
+    <script>
+    function createMap() {
+        var template = kendo.template($("#info-template").html());
+        var emptyTemplate = kendo.template($("#empty-info-template").html());
+        var activeShape;
+
+        $("#map").kendoMap({
+            center: [45, 45],
+            zoom: 4,
+            layers: [{
+                type: "tile",
+                urlTemplate: "http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png",
+                attribution: "Tiles &copy; <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a>"
+            }, {
+                type: "bubble",
+                style: {
+                    fill: {
+                        color: "#fff",
+                        opacity: 0.4
+                    },
+                    stroke: null
+                },
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../content/dataviz/map/urban-areas.json",
+                            dataType: "json"
+                        }
+                    }
+                },
+                latField: "Latitude",
+                longField: "Longitude",
+                valueField: "Pop2010"
+            }],
+            shapeMouseEnter: onShapeMouseEnter,
+            reset: onReset
+        });
+
+        function onShapeMouseEnter(e) {
+            if (activeShape) {
+                activeShape.options.set("stroke", null);
+            }
+
+            activeShape = e.shape;
+            activeShape.options.set("stroke", { width: 1.5, color: "#fff" });
+
+            $(".box").html(template(e.shape.dataItem));
+        }
+
+        function onReset() {
+            $(".box").html(emptyTemplate({}));
+            activeShape = null;
+        }
+    }
+
+    $(document).ready(createMap);
+    </script>
+    <style scoped>
+        .box {
+            text-align: center;
+        }
+
+        #example .box,
+       .demo-section {
+            margin: 1em auto;
+        }
+    </style>
+</div>
