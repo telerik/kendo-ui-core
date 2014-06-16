@@ -175,7 +175,7 @@ var __meta__ = {
                 }
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor k-button km-icon km-button"></div>',
+            overflowAnchor: '<div class="k-overflow-anchor k-button km-button"></div>',
 
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
@@ -519,11 +519,16 @@ var __meta__ = {
 
                 that.element.append(overflowAnchor);
 
+                if (that.isMobile) {
+                    overflowAnchor.append('<span class="km-icon km-more"></span>');
+                }
+
                 that.popup = new kendo.ui.Popup(components.overflowContainer, {
                     origin: "bottom right",
                     position: "top right",
                     anchor: overflowAnchor,
                     animation: that.animation,
+                    copyAnchorStyles: false,
                     open: function() {
                         kendo.wrap(that.popup.element)
                             .addClass("k-overflow-wrapper")
