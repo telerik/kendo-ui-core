@@ -193,7 +193,7 @@ var __meta__ = {
 
             }
 
-            connection = options.connection || {};
+            var connection = options.connection || {};
             connection.catalog = val;
 
             this.options.connection = connection;
@@ -206,7 +206,7 @@ var __meta__ = {
                 return (options.connection || {}).cube;
             }
 
-            connection = options.connection || {};
+            var connection = options.connection || {};
             connection.cube = val;
 
             this.options.connection = connection;
@@ -1202,7 +1202,7 @@ var __meta__ = {
             var name = members[idx].name;
             var hierarchyName = baseHierarchyPath(memberName);
 
-            if (memberName == name || !(name.indexOf(hierarchyName) === 0)) {
+            if (memberName == name || name.indexOf(hierarchyName) !== 0) {
                 result.push(members[idx]);
             }
         }
@@ -1367,7 +1367,7 @@ var __meta__ = {
         contains: ", InStr({0}.MemberValue,\"{1}\")",
         startswith: ", Left({0}.MemberValue,Len(\"{1}\"))=\"{1}\"",
         endswith: ", Right({0}.MemberValue,Len(\"{1}\"))=\"{1}\""
-    }
+    };
 
     function serializeFilters(filter) {
         var command = "";
@@ -1379,7 +1379,7 @@ var __meta__ = {
                 command += filters[idx].value;
                 command += "}";
             } else {
-                command += "Filter("
+                command += "Filter(";
 
                 var name = filters[idx].field;
 
@@ -1888,7 +1888,6 @@ var __meta__ = {
 
             that.content.scroll(function() {
                 that.columnsHeader[0].scrollLeft = this.scrollLeft;
-                console.log(that.columnsHeader[0].scrollLeft);
             });
 
             if (that.options.autoBind) {
