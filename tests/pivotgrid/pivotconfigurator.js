@@ -181,6 +181,100 @@
         equal(method.calls("schemaLevels"), 1);
     });
 
+    test("create columns setting target", function() {
+        var configurator = createConfigurator();
 
+        ok(configurator.columns instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("column setting target shares same datasource", function() {
+        var configurator = createConfigurator();
+
+        deepEqual(configurator.columns.dataSource, configurator.dataSource);
+    });
+
+    test("column setting target handles columns settings", function() {
+        var configurator = createConfigurator();
+
+        equal(configurator.columns.options.setting, "columns");
+    });
+
+    test("column setting empty message is read from the options", function() {
+        var configurator = createConfigurator({
+            messages: {
+                columns: "Custom message"
+            }
+        });
+
+        equal(configurator.columns.element.text(), "Custom message");
+    });
+
+    test("create rows setting target", function() {
+        var configurator = createConfigurator();
+
+        ok(configurator.rows instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("rows setting target shares same datasource", function() {
+        var configurator = createConfigurator();
+
+        deepEqual(configurator.rows.dataSource, configurator.dataSource);
+    });
+
+    test("rows setting target handles columns settings", function() {
+        var configurator = createConfigurator();
+
+        equal(configurator.rows.options.setting, "rows");
+    });
+
+    test("rows setting target is connected with the columns target", function() {
+        var configurator = createConfigurator();
+
+        deepEqual(configurator.rows.options.connectWith[0], configurator.columns.element[0]);
+    });
+
+    test("rows setting empty message is read from the options", function() {
+        var configurator = createConfigurator({
+            messages: {
+                rows: "Custom message"
+            }
+        });
+
+        equal(configurator.rows.element.text(), "Custom message");
+    });
+
+    test("columns setting target is connected with the rows target", function() {
+        var configurator = createConfigurator();
+
+        deepEqual(configurator.columns.options.connectWith[0], configurator.rows.element[0]);
+    });
+
+    test("create measures setting target", function() {
+        var configurator = createConfigurator();
+
+        ok(configurator.measures instanceof kendo.ui.PivotSettingTarget);
+    });
+
+    test("measures setting target shares same datasource", function() {
+        var configurator = createConfigurator();
+
+        deepEqual(configurator.measures.dataSource, configurator.dataSource);
+    });
+
+    test("measures setting target handles columns settings", function() {
+        var configurator = createConfigurator();
+
+        equal(configurator.measures.options.setting, "measures");
+    });
+
+    test("measures setting empty message is read from the options", function() {
+        var configurator = createConfigurator({
+            messages: {
+                measures: "Custom message"
+            }
+        });
+
+        equal(configurator.measures.element.text(), "Custom message");
+    });
 
 })();

@@ -1781,7 +1781,8 @@ var __meta__ = {
 
             this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
 
-            this.dataSource.bind("change", $.proxy(this.refresh, this));
+            this._refreshHandler = $.proxy(this.refresh, this);
+            this.dataSource.bind("change", this._refreshHandler);
 
             if (!options.template) {
                 this.options.template = "<div class='k-pivotsetting-indicator' data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
@@ -1890,6 +1891,16 @@ var __meta__ = {
             }
 
             this.element.html(html);
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.dataSource.unbind(CHANGE, this._refreshHandler);
+            this.element.off(NS);
+
+            this.element = null;
+            this._refreshHandler = null;
         }
     });
 
