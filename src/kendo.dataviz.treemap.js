@@ -457,25 +457,12 @@ var __meta__ = {
             var children = data.children;
             if (children && children.length > 0) {
                 var newRootCoord = {
-                    width: rootCoord.width,
-                    height: rootCoord.height,
+                    width: rootCoord.width - options.offset,
+                    height: rootCoord.height - (options.titleHeight + options.offset),
                     top: 0,
                     left: 0
                 };
                 this.layoutChildren(data, children, newRootCoord);
-
-                for(var i = 0; i< children.length; i++) {
-                    var coord = children[i].coord,
-                    height = coord.height - (options.titleHeight + options.offset),
-                    width = coord.width - options.offset;
-                    rootCoord = {
-                        width: width,
-                        height: height,
-                        top: 0,
-                        left: 0
-                    };
-                    this.compute(children[i], rootCoord);
-                }
             }
         },
 
@@ -587,7 +574,9 @@ var __meta__ = {
                     rootWrap.append(this._createLeaf(leaf));
                 }
 
-                rootElement.append(rootWrap);
+                rootElement
+                    .append(this._createTitle(root))
+                    .append(rootWrap);
             }
         },
 
@@ -598,6 +587,7 @@ var __meta__ = {
 
         _createLeaf: function(item) {
             var element = this._createTile(item);
+            element.addClass("k-leaf");
 
             if (defined(this.options.template)) {
                 var rootTemplate = template(this.options.template);
@@ -615,7 +605,7 @@ var __meta__ = {
         },
 
         _createTile: function(item) {
-            var root = $("<div class='k-treemap-tile k-state-default k-tile-left k-tile-top'></div>")
+            var root = $("<div class='k-treemap-tile k-state-default'></div>")
                 .width(item.coord.width)
                 .height(item.coord.height)
                 .offset({
@@ -652,13 +642,7 @@ var __meta__ = {
         },
 
         _createWrap: function(item) {
-            return $("<div class='k-treemap-tile k-state-default'></div>")
-                        .width(item.coord.width)
-                        .height(item.coord.height);
-                        //.offset({
-                        //    left: item.coord.left,
-                        //    top: item.coord.top
-                        //});
+            return $("<div class='k-treemap-wrap k-state-default'></div>");
         }
     });
 
