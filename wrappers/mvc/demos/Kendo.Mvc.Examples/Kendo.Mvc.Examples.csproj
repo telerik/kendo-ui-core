@@ -638,6 +638,7 @@
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Gantt\TaskViewModel.cs" />
+    <Compile Include="Models\Map\UrbanArea.cs" />
     <Compile Include="Models\Map\Marker.cs" />
     <Compile Include="Models\Map\MapDataRepository.cs" />
     <Compile Include="Models\MeetingAttendee.cs">
@@ -731,6 +732,9 @@
     </Compile>
     <Compile Include="Models\TreeViewRepository.cs" />
     <Compile Include="Models\UploadInitialFile.cs" />
+    <Compile Include="Models\UrbanArea.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Weather.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
