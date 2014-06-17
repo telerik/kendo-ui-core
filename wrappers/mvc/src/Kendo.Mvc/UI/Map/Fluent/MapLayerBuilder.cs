@@ -181,7 +181,7 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The layer type. Supported types are "tile" and "shape".
+        /// The layer type. Supported types are "tile", "bing", "shape", "marker" and "bubble".
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
         public MapLayerBuilder Type(MapLayerType value)
