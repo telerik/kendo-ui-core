@@ -38,23 +38,13 @@ var __meta__ = {
 
             this.bind(this.events, this.options);
 
-            this.src = new Squarified(this.options);
             this.view = new SquarifiedView(element, this.options);
-            //options.data[0].coords = {
-            //    width: 960,
-            //    height: 500,
-            //    left: 0,
-            //    top: 0
-            //};
 
-            //this.src.compute(options.data[0], {
-            //    width: 960,
-            //    height: 500,
-            //    left: 0,
-            //    top: 0
-            //});
+            if (this.options.title.visible) {
+                this.options.title._height = this.view._getTitleHeight();
+            }
 
-            //this.element[0].innerHTML = this.src.plot(options.data[0]);
+            this.src = new Squarified(this.options);
 
             this._initDataSource();
 
@@ -64,7 +54,10 @@ var __meta__ = {
         options: {
             name: "TreeMap",
             autoBind: true,
-            maxViewDepth: 2
+            maxViewDepth: 2,
+            title: {
+                visible: true
+            }
         },
 
         events: [DATA_BOUND, "itemCreated", "zoom"],
@@ -174,13 +167,12 @@ var __meta__ = {
     });
 
     var Squarified = Class.extend({
-        init: function() {
-            this.items = [];
+        init: function(options) {
+            this.options = deepExtend({}, this.options, options);
         },
 
         options: {
-            offset: 0,
-            titleHeight: 16
+            offset: 0
         },
 
         createRoot: function() {
@@ -192,156 +184,8 @@ var __meta__ = {
             };
         },
 
-        _plot: function(data) {
-            var rootCoord = data.coord || this.createRoot(),
-                html = "",
-                children = data.children,
-                item, coord, i;
-
-            if (this.leaf(data)) {
-                return this.createBox(data, rootCoord, null);
-            }
-
-            if (children) {
-                for (i = 0; i< children.length; i++) {
-                    item = children[i];
-                    coord = item.coord;
-
-                    if (coord.width * coord.height > 1) {
-                        html += this.plot(item);
-                    }
-                }
-
-                return this.createBox(data, rootCoord, html);
-            }
-        },
-
-        plot: function(data) {
-            var rootCoord = data.coord || this.createRoot(),
-                html = "",
-                children = data.children,
-                item, coord, i;
-
-
-            if (this.leaf(data)) {
-                var options = {
-                    dataItem: data,
-                    coord: rootCoord,
-                    titleText: data.name,
-                    isLeaf: true
-                };
-
-                var treeMapItem = new TreeMapItem(options);
-
-                return treeMapItem.render()[0].outerHTML;
-            }
-
-            if (children) {
-                for (i = 0; i< children.length; i++) {
-                    item = children[i];
-                    coord = item.coord;
-
-                    if (coord.width * coord.height > 1) {
-                        html += this.plot(item);
-                    }
-                }
-
-                var treeMapItem = new TreeMapItem();
-
-                return this.createBox(data, rootCoord, html);
-            }
-        },
-
         leaf: function(tree) {
             return !tree.children;
-        },
-
-        createBox: function(item, coord, html) {
-            var box;
-
-            if (!this.leaf(item)) {
-                box = this.headBox(item, coord) + this.bodyBox(html, coord);
-            } else {
-                box = this.leafBox(item, coord);
-            }
-
-            return this.contentBox(item, coord, box);
-        },
-
-        contentBox: function(item, coord, html) {
-            var c = {};
-
-            for (var i in coord) {
-                c[i] = coord[i] + "px";
-            }
-
-            return "<div class='content' style='" + this.toStyle(c)
-            + "' id='" + item.id + "'>" + html + "</div>";
-        },
-
-        leafBox: function(item, coord) {
-            var options = this.options;
-            var backgroundColor = getRandomColor(),
-                offset = options.offset,
-                width = coord.width - offset,
-                height = coord.height - offset;
-
-            var c = {
-                top: (offset / 2)  + "px",
-                height: height + "px",
-                width: width + "px",
-                left: (offset / 2) + "px"
-            };
-
-            if (backgroundColor) {
-                c["background-color"] = backgroundColor;
-            }
-
-            return "<div class=\"leaf\" style=\"" + this.toStyle(c) + "\">"
-            + item.name + "</div>";
-        },
-
-        toStyle: function(obj) {
-            var ans = "";
-            for (var s in obj) {
-                ans += s + ":" + obj[s] + ";";
-            }
-
-            return ans;
-        },
-
-        headBox: function(item, coord) {
-            var options = this.options,
-                offset = options.offset;
-
-            if (options.titleHeight) {
-                var c = {
-                    height: options.titleHeight + "px",
-                    width: (coord.width - offset) + "px",
-                    left:  offset / 2 + "px"
-                };
-
-                return "<div class=\"k-treemap-title\" style=\"" + this.toStyle(c) + "\">"
-                + item.name + "</div>";
-            }
-
-            return [];
-        },
-
-        bodyBox: function(html, coord) {
-            var options = this.options,
-                titleHeight = options.titleHeight,
-                offset = options.offset;
-
-            var c = {
-                width: (coord.width - offset) + "px",
-                height: (coord.height - offset - titleHeight) + "px",
-                top: (titleHeight + offset / 2) +  "px",
-                left: (offset / 2) + "px"
-            };
-
-            return "<div class=\"body\" style=\""
-            + this.toStyle(c) +"\">" + html + "</div>";
         },
 
         layoutChildren: function(parent, items, coord) {
@@ -458,10 +302,14 @@ var __meta__ = {
             if (children && children.length > 0) {
                 var newRootCoord = {
                     width: rootCoord.width - options.offset,
-                    height: rootCoord.height - (options.titleHeight + options.offset),
+                    height: rootCoord.height - options.offset,
                     top: 0,
                     left: 0
                 };
+
+                if (options.title.visible) {
+                    newRootCoord.height -= options.title._height;
+                }
                 this.layoutChildren(data, children, newRootCoord);
             }
         },
@@ -549,8 +397,20 @@ var __meta__ = {
             this.element = $(element);
         },
 
-        options: {
-            titleHeight: 16
+        _getTitleHeight: function() {
+            var leaf = this._createLeaf({
+                coord: {}
+            });
+            leaf.css({
+                visibility: "hidden",
+                position: "absolute"
+            }).append(this._createTitle({
+                title: "a"
+            }));
+            this.element.append(leaf);
+            var titleHeight = leaf.children().height();
+            this.element.empty();
+            return titleHeight;
         },
 
         _getByUid: function(uid) {
@@ -624,7 +484,7 @@ var __meta__ = {
             var text = item.title;
 
             if (this.options.titleTemplate) {
-                var titleTemplate = template(this.options.titleTemplate);
+                var titleTemplate = template(this.options.title.template);
                 text = titleTemplate({
                     dataItem: item.dataItem,
                     title: item.title
@@ -635,7 +495,7 @@ var __meta__ = {
         },
 
         _createTitle: function(item) {
-            if (this.options.titleHeight) {
+            if (this.options.title.visible) {
                 return $("<div class='k-treemap-title k-state-default'></div>")
                                 .text(this._getTitleText(item));
             }
