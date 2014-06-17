@@ -43,6 +43,7 @@
 
         draw: noop,
         clear: noop,
+        destroy: noop,
 
         resize: function(force) {
             var size = this.getSize(),
