@@ -1183,12 +1183,15 @@ var __meta__ = {
             return this.timeline.view(type);
         },
 
-        dataItem: function(element) {
-            if (!element) {
+        dataItem: function(value) {
+            if (!value) {
                 return null;
             }
 
-            return this.list._modelFromElement(element);
+            var list = this.list;
+            var element = list.content.find(value);
+
+            return list._modelFromElement(element);
         },
 
         setDataSource: function(dataSource) {
