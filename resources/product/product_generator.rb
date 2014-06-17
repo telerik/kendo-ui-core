@@ -14,11 +14,12 @@ class TelerikProductCreateBot
         driver.find_element(:name, "txtEmail").send_keys ADMIN_RELEASE_UPLOAD_LOGIN
         driver.find_element(:name, "txtPassword").send_keys ADMIN_RELEASE_UPLOAD_PASS
         driver.find_element(:name, "btnLogin").click
-
-        @KUI_existing_products = []
-        @MVC_existing_products = []
-        @JSP_existing_products = []
-        @PHP_existing_products = []
+        
+        #retrieve existing products for a product line from a service
+        #@KUI_existing_products = invoke service with KUI as param
+        #@MVC_existing_products = invoke service with MVC as param
+        #@JSP_existing_products = invoke service with JSP as param 
+        #@PHP_existing_products = invoke service with PHP as param
     end
 
     def find(selector)
@@ -172,9 +173,10 @@ def start_product_creation()
         p "Please provide valid product name for the new product!"
         return
       end
-
-      return if bot.product_created(product_name, suite_alias)
-      bot.add_product(product_name, suite_alias)
+      
+      #cancel product creation if such a product already exists
+      #return if bot.product_created(product_name, suite_alias)
+      #bot.add_product(product_name, suite_alias)
 
       bot.go_to_products
 
