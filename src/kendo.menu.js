@@ -1165,7 +1165,8 @@ var __meta__ = {
             OPEN,
             CLOSE,
             ACTIVATE,
-            DEACTIVATE
+            DEACTIVATE,
+            SELECT
         ],
 
         setOptions: function(options) {
@@ -1229,13 +1230,18 @@ var __meta__ = {
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
-            if ((options.filter && kendo.support.matchesSelector.call(ev.target, options.filter)) || !options.filter) {
+            if ((options.filter && kendo.support.matchesSelector.call(ev.currentTarget, options.filter)) || !options.filter) {
                 if (options.alignToAnchor) {
-                    that.show(ev.target);
+                    that.show(ev.currentTarget);
                 } else {
                     that.show(ev.pageX, ev.pageY);
                 }
             }
+        },
+
+        _close: function() {
+            this.popup.close();
+            this.unbind(SELECT, this._closeTimeoutProxy);
         },
 
         _closeHandler: function (e) {
@@ -1247,7 +1253,7 @@ var __meta__ = {
                 containment) || !containment)) {
                     DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
-                    that.popup.close();
+                    that.bind(SELECT, that._closeTimeoutProxy);
             }
         },
 
@@ -1258,6 +1264,7 @@ var __meta__ = {
 
             that._showProxy = proxy(that._showHandler, that);
             that._closeProxy = proxy(that._closeHandler, that);
+            that._closeTimeoutProxy = proxy(that._close, that);
 
             if (target) {
                 if (kendo.support.mobileOS && options.showOn == "contextmenu") {
