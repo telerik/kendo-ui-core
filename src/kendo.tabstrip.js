@@ -25,6 +25,7 @@ var __meta__ = {
         IMG = "img",
         HREF = "href",
         PREV = "prev",
+        SHOW = "show",
         LINK = "k-link",
         LAST = "k-last",
         CLICK = "click",
@@ -473,6 +474,7 @@ var __meta__ = {
         events: [
             SELECT,
             ACTIVATE,
+            SHOW,
             ERROR,
             CONTENTLOAD,
             "change",
@@ -979,10 +981,11 @@ var __meta__ = {
                         .kendoStop(true, true)
                         .attr("aria-expanded", true)
                         .kendoAnimate( extend({ init: function () {
-                            that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
+                            that.trigger(SHOW, { item: item[0], contentElement: contentHolder[0] });
                         } }, animation, {
                             complete: function () {
                                 item.removeAttr("data-animating");
+                                that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
                                 that.scrollWrap.css("height", "").css("height");
                             }
                         } ) );
