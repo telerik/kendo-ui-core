@@ -3,36 +3,28 @@
 <html>
 <head>
     <title></title>
-    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
-    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
-    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+    <link type="text/css" href="../styles/web/kendo.common.less" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.default.less" rel="stylesheet"/>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
 
     <script type="text/javascript" src="../src/jquery.js"></script>
     <script type="text/javascript" src="../src/kendo.core.js"></script>
     <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.userevents.js"></script>
     <script type="text/javascript" src="../src/kendo.popup.js"></script>
     <script type="text/javascript" src="../src/kendo.menu.js"></script>
     <script type="text/javascript" src="../src/kendo.data.js"></script>
     <script type="text/javascript" src="../src/kendo.treeview.js"></script>
-    <style type="text/css">
-        body
-        {
-            font: 12px Arial, Helvetica, sans-serif;
-        }
-
-        .k-context-menu .k-link
-        {
-            padding: 0.4em 2em 0.3em 0.9em;
-        }
-
-        .k-context-menu
-        {
-            border: 0;
+    <style>
+        html .k-treeview {
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
         }
     </style>
 </head>
 <body>
-    <ul id="target">
+    <ul id="target1">
         <li>
             Item 1
             <ul>
@@ -58,58 +50,89 @@
             </ul>
         </li>
     </ul>
-    <div id="popup">
-        <ul id="context">
-            <li>
-                Item 1
-                <ul>
-                    <li>Sub Item 1</li>
-                    <li>Sub Item 2</li>
-                    <li>Sub Item 3</li>
-                </ul>
-            </li>
-            <li>
-                Item 2
-                <ul>
-                    <li>Sub Item 1</li>
-                    <li>Sub Item 2</li>
-                    <li>Sub Item 3</li>
-                </ul>
-            </li>
-            <li>
-                Item 3
-                <ul>
-                    <li>Sub Item 1</li>
-                    <li>Sub Item 2</li>
-                    <li>Sub Item 3</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+    <ul id="target2">
+        <li>
+            Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 3
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="context1">
+        <li>
+            Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 3
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="context2">
+        <li>
+            Item 1
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 2
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+        <li>
+            Item 3
+            <ul>
+                <li>Sub Item 1</li>
+                <li>Sub Item 2</li>
+                <li>Sub Item 3</li>
+            </ul>
+        </li>
+    </ul>
     <script type="text/javascript">
-        //var menu = $("#context").kendoContextMenu({ target: "#target" }).data("kendoContextMenu");
-
-        //menu.show(20, 20);
-        var target = $("#target"),
-            menu = $("#context")
-                        .addClass("k-context-menu")
-                        .kendoMenu({ orientation: "vertical" })
-                        .data("kendoMenu"),
-            popup = $("#popup").kendoPopup({
-                anchor: target,
-                collision: "fit flip"
-            }).data("kendoPopup"),
-            tree = target.kendoTreeView().data("kendoTreeView");
-
-        target.on("contextmenu", ".k-in", function (e) {
-            tree.select($(e.target).closest(".k-item"));
-            popup.options.anchor = e.target;
-            popup.wrapper.hide();
-            popup.open(e.pageX, e.pageY);
-            e.preventDefault();
-            e.stopPropagation();
-        });
-
+        var treeview1 = $("#target1").kendoTreeView();
+        var treeview2 = $("#target2").kendoTreeView();
+        var menu1 = $("#context1").kendoContextMenu({ filter: "#target1 .k-in" }).data("kendoContextMenu");
+        var menu2 = $("#context2").kendoContextMenu({ filter: "#target2 .k-in", alignToAnchor: true }).data("kendoContextMenu");
     </script>
 </body>
 </html>
