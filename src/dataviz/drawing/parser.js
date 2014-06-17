@@ -339,7 +339,7 @@
 
     function reflectionPoint(point, center) {
         if (point && center) {
-            return center.multiplyCopy(2).subtract(point);
+            return center.multiplyCopy(2).translateWith(point.scaleCopy(-1));
         }
     }
 
