@@ -157,7 +157,7 @@
 
             if (this.surface.translate) {
                 this.surface.translate(nw);
-                this.movable.moveTo(nw);
+                this.movable.moveTo({ x: nw.x, y: nw.y });
             }
         },
 
