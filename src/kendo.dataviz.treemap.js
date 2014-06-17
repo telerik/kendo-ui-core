@@ -21,6 +21,7 @@ var __meta__ = {
         template = kendo.template,
         deepExtend = kendo.deepExtend,
         HierarchicalDataSource = kendo.data.HierarchicalDataSource,
+        getter = kendo.getter,
 
         dataviz = kendo.dataviz;
 
@@ -38,21 +39,21 @@ var __meta__ = {
             this.bind(this.events, this.options);
 
             this.src = new Squarified(this.options);
-            options.data[0].coords = {
-                width: 960,
-                height: 500,
-                left: 0,
-                top: 0
-            };
+            //options.data[0].coords = {
+            //    width: 960,
+            //    height: 500,
+            //    left: 0,
+            //    top: 0
+            //};
 
-            this.src.compute(options.data[0], {
-                width: 960,
-                height: 500,
-                left: 0,
-                top: 0
-            });
+            //this.src.compute(options.data[0], {
+            //    width: 960,
+            //    height: 500,
+            //    left: 0,
+            //    top: 0
+            //});
 
-            this.element[0].innerHTML = this.src.plot(options.data[0]);
+            //this.element[0].innerHTML = this.src.plot(options.data[0]);
 
             this._initDataSource();
 
@@ -72,8 +73,6 @@ var __meta__ = {
                 options = that.options,
                 dataSource = options.dataSource;
 
-            that._items = [];
-
             that._dataChangeHandler = proxy(that._onDataChange, that);
 
             that.dataSource = HierarchicalDataSource
@@ -89,8 +88,6 @@ var __meta__ = {
                         node.children.fetch();
 
                         recursiveRead(node.children.view());
-
-                        //that.src.compute(that._items, { width: 600, height: 400 });
                     }
                 }
             }
@@ -109,38 +106,67 @@ var __meta__ = {
             var items = e.items;
             var options = this.options;
 
-            //this._append(node, items);
-
             if (!node) {
-                this._root = this.src.createRoot();
-            }
-
-            if (items) {
-                this.src.compute(items, this._root);
+                this._items = [];
+                var item = this._wrapItem(items[0]);
+                item.coord = this.src.createRoot(900, 500);
+                this._items.push(item);
+                this._root = item;
+            } else {
+                if (items) {
+                    var root = this._getByUid(node.uid);
+                    root.children = [];
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        root.children.push(this._wrapItem(item));
+                    }
+                    //this.src.compute(this._items, root.coord);
+                }
             }
 
             this.trigger(DATA_BOUND);
         },
 
-        _append: function(parent, children) {
-            this._addItem(parent);
-            for (var i = 0; i < children.length; i++) {
-                var node = children[i];
-                this._addItem(node);
+        _wrapItem: function(item) {
+            var wrap = {};
+
+            if (defined(this.options.valueField)) {
+                wrap.value = getField(this.options.valueField, item);
             }
+
+            if (defined(this.options.colorField)) {
+                wrap.color = getField(this.options.colorField, item);
+            }
+
+            if (defined(this.options.titleField)) {
+                wrap.title = getField(this.options.titleField, item);
+            }
+
+            wrap.dataItem = item;
+
+            return wrap;
         },
 
-        _addItem: function(item) {
-            if (item) {
-                for (var i = 0; i < this._items.length; i++) {
-                    var currentItem = this._items[i];
-                    if (currentItem.uid === item.uid) {
-                        return;
+        _getByUid: function(uid) {
+            function recursiveGetByUid(root) {
+                if (root.dataItem.uid === uid) {
+                    return root;
+                } else {
+                    var children = root.children;
+                    if (children) {
+                        for (var i = 0; i < children.length; i++) {
+                            var item = children[i];
+                            if (item.dataItem.uid === uid) {
+                                return item;
+                            } else {
+                                recursiveGetByUid(item);
+                            }
+                        }
                     }
                 }
-
-                this._items.push(item);
             }
+
+            return recursiveGetByUid(this._root);
         }
     });
 
@@ -607,6 +633,15 @@ var __meta__ = {
             return this._wrap;
         }
     });
+
+    function getField(field, row) {
+        if (row === null) {
+            return row;
+        }
+
+        var get = getter(field, true);
+        return get(row);
+    }
 
     function defined(value) {
         return typeof value !== UNDEFINED;
