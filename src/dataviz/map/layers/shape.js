@@ -164,7 +164,7 @@
         _handler: function(event) {
             var layer = this;
             return function(e) {
-                if (e.shape) {
+                if (e.element) {
                     var args = {
                         layer: layer,
                         shape: e.element,
