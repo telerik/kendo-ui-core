@@ -4,6 +4,7 @@
     var gantt;
     var Gantt = kendo.ui.Gantt;
     var GanttTask = kendo.data.GanttTask;
+    var GanttDependency = kendo.data.GanttDependency;
 
     module("Gantt events", {
         setup: function() {
@@ -24,23 +25,54 @@
         ok(gantt.calls("_adjustDimensions"));
     });
 
-    test("trigger add event", 1, function() {
-        gantt.bind("add", function() {
+    test("trigger add event '_createTask'", function() {
+        var task = new GanttTask();
+
+        gantt.bind("add", function(e) {
             ok(true);
+            equal(e.task, task);
+            ok(!e.dependency);
         });
 
-        gantt.headerDropDown.trigger("command", { type: "add"});
+        gantt._createTask(task);
     });
 
-    test("prevent 'add' event does not add to data source", 1, function() {
+    test("prevent 'add' event '_createTask' does not add to data source", 1, function() {
+        var task = new GanttTask();
+
         gantt.bind("add", function(e) {
             e.preventDefault();
         });
 
         stub(gantt.dataSource, "add");
-        gantt.headerDropDown.trigger("command", { type: "add" });
+        gantt._createTask(task);
 
         ok(!gantt.dataSource.calls("add"));
+    });
+
+    test("trigger add event '_createDependency'", function() {
+        var dependency = new GanttDependency();
+
+        gantt.bind("add", function(e) {
+            ok(true);
+            equal(e.dependency, dependency);
+            ok(!e.task);
+        });
+
+        gantt._createDependency(dependency);
+    });
+
+    test("prevent 'add' event '_createDependency' does not add to data source", 1, function() {
+        var dependency = new GanttDependency();
+
+        gantt.bind("add", function(e) {
+            e.preventDefault();
+        });
+
+        stub(gantt.dependencies, "add");
+        gantt._createDependency(dependency);
+
+        ok(!gantt.dependencies.calls("add"));
     });
 
     test("trigger edit event", 3, function() {
@@ -69,18 +101,31 @@
         }
     });
 
-    test("trigger remove event", function() {
+    test("trigger remove event 'removeTask'", function() {
         var task = new GanttTask();
 
         gantt.bind("remove", function(e) {
             ok(true);
             equal(e.task, task);
+            ok(!e.dependency);
         });
 
         gantt.removeTask(task);
     });
 
-    test("prevent remove event does not remove from data source", function() {
+    test("trigger remove event 'removeDependency'", function() {
+        var dependency = new GanttDependency();
+
+        gantt.bind("remove", function(e) {
+            ok(true);
+            equal(e.dependency, dependency);
+            ok(!e.task);
+        });
+
+        gantt.removeDependency(dependency);
+    });
+
+    test("prevent remove event 'removeTask' does not remove from data source", function() {
         var task = new GanttTask();
 
         gantt.bind("remove", function(e) {
@@ -91,6 +136,19 @@
         gantt.removeTask(task);
 
         ok(!gantt.dataSource.calls("remove"));
+    });
+
+    test("prevent remove event 'removeDependency' does not remove from data source", function() {
+        var dependency = new GanttDependency();
+
+        gantt.bind("remove", function(e) {
+            e.preventDefault();
+        });
+
+        stub(gantt.dependencies, "remove");
+        gantt.removeDependency(dependency);
+
+        ok(!gantt.dependencies.calls("remove"));
     });
 
     test("trigger cancel event", 3, function() {

@@ -1233,7 +1233,10 @@ var __meta__ = {
         removeTask: function(uid) {
             var task = typeof uid === "string" ? this.dataSource.getByUid(uid) : uid;
 
-            if (!this.trigger("remove", { task: task })) {
+            if (!this.trigger("remove", {
+                task: task,
+                dependency: null
+            })) {
                 this._removeTaskDependencies(task);
 
                 this._preventRefresh = true;
@@ -1247,35 +1250,48 @@ var __meta__ = {
         },
 
         _createTask: function(task, index) {
-            var dataSource = this.dataSource;
+            if (!this.trigger("add", {
+                task: task,
+                dependency: null
+            })) {
+                var dataSource = this.dataSource;
 
-            this._preventRefresh = true;
+                this._preventRefresh = true;
 
-            if (index === undefined) {
-                dataSource.add(task);
-            } else {
-                dataSource.insert(index, task);
+                if (index === undefined) {
+                    dataSource.add(task);
+                } else {
+                    dataSource.insert(index, task);
+                }
+
+                this._scrollToUid = task.uid;
+
+                this._syncDataSource();
             }
-
-            this._scrollToUid = task.uid;
-
-            this._syncDataSource();
         },
 
         _createDependency: function(dependency) {
-            this._preventDependencyRefresh = true;
+            if (!this.trigger("add", {
+                task: null,
+                dependency: dependency
+            })) {
+                this._preventDependencyRefresh = true;
 
-            this.dependencies.add(dependency);
+                this.dependencies.add(dependency);
 
-            this._preventDependencyRefresh = false;
+                this._preventDependencyRefresh = false;
 
-            this.dependencies.sync();
+                this.dependencies.sync();
+            }
         },
 
         removeDependency: function(uid) {
             var dependency = typeof uid === "string" ? this.dependencies.getByUid(uid) : uid;
 
-            if (!this.trigger("remove", { dependency: dependency })) {
+            if (!this.trigger("remove", {
+                task: null,
+                dependency: dependency
+            })) {
                 if (this.dependencies.remove(dependency)) {
                     this.dependencies.sync();
                 }
