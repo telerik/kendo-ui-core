@@ -423,6 +423,7 @@ var __meta__ = {
 
             options: {
                 name: "ToolBar",
+                items: [],
                 resizable: true
                 //option list
             },
