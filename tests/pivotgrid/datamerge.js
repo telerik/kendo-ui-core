@@ -1488,5 +1488,269 @@
         equal(data[5].value, "level 2, measure 2");
     });
 
+    test("expand row with multiple measures", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            }
+        ];
+
+        var data = [
+            [{ value: "level 0, measure 1" }, { value: "level 0, measure 2" }],
+            [
+                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
+                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+            ],
+        ];
+
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: ["measure 1", "measure 2"],
+                axis: "rows"
+            },
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 4);
+        equal(data[0].value, "level 0, measure 1");
+        equal(data[1].value, "level 0, measure 2");
+        equal(data[2].value, "level 1, measure 1");
+        equal(data[3].value, "level 1, measure 2");
+    });
+
+    test("expand second nested row with multiple measures", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 2-0", parentName: "dim 0 level 1-1", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 2-0", parentName: "dim 0 level 1-1", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            }
+        ];
+
+        var data = [
+            [
+                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
+                { value: "level 1-0, measure 1" }, { value: "level 1-0, measure 2" },
+                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" }
+            ],
+            [
+                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" },
+                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+            ],
+        ];
+
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: ["measure 1", "measure 2"],
+                axis: "rows"
+            },
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 1-0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 8);
+        equal(data[0].value, "level 0, measure 1");
+        equal(data[1].value, "level 0, measure 2");
+        equal(data[2].value, "level 1-0, measure 1");
+        equal(data[3].value, "level 1-0, measure 2");
+        equal(data[4].value, "level 1-1, measure 1");
+        equal(data[5].value, "level 1-1, measure 2");
+        equal(data[6].value, "level 2, measure 1");
+        equal(data[7].value, "level 2, measure 2");
+    });
+
+    test("expand nested row with multiple measures", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 2-0", parentName: "dim 0 level 1-0", children: [] },
+                        { name: "measure 1", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 2-0", parentName: "dim 0 level 1-0", children: [] },
+                        { name: "measure 2", children: [] }
+                    ] }
+                ]
+            }
+        ];
+
+        var data = [
+            [
+                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
+                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+            ],
+            [
+                { value: "level 1, measure 1" }, { value: "level 1, measure 2" },
+                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+            ],
+        ];
+
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: ["measure 1", "measure 2"],
+                axis: "rows"
+            },
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 1-0"]);
+
+        var data = dataSource.data();
+        equal(data.length, 6);
+        equal(data[0].value, "level 0, measure 1");
+        equal(data[1].value, "level 0, measure 2");
+        equal(data[2].value, "level 1, measure 1");
+        equal(data[3].value, "level 1, measure 2");
+        equal(data[4].value, "level 2, measure 1");
+        equal(data[5].value, "level 2, measure 2");
+    });
 })();
 

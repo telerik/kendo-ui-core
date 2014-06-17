@@ -552,11 +552,12 @@ var __meta__ = {
         _mergeRowData: function(newData, rowIndex, rowsLength, columnsLength) {
             var data = this.data().toJSON();
             var idx, dataIndex, toAdd;
+            var measures = Math.max(this._rowMeasures().length, 1);
 
-            columnsLength = Math.max(columnsLength, 1);
+            columnsLength = Math.max(columnsLength, 1) * measures;
             if (data.length > 0) {
                 //if there is already data, drop the first new data item
-                rowsLength--;
+                rowsLength -= measures;
                 newData.splice(0, columnsLength);
             }
 
