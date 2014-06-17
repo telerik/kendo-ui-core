@@ -51,38 +51,18 @@
             .k-pivotsetting-indicator a {
                 vertical-align: middle;
             }
+            .k-pivot-configurator-settings {
+                height: 150px;
+                border-style: solid;
+                border-width: 1px;
+                border-radius: 4px;
+            }
         </style>
     </head>
     <body>
-        <fieldset style="margin: 10px; width: 700px">
-            <div style="width: 60%; float:left;">
-                <ul>
-                    <li>catalog: <select id="catalogs"></select></li>
-                    <li>cube: <select id="cubes"></select> </li>
-                    <li><ul id="treeview"></ul><li>
-                </ul>
-            </div>
-
-            <div style="float:left;">
-                <fieldset class="target-container">
-                    <legend>columns</legend>
-                    <ul class="columns-target"></ul>
-                </fieldset>
-
-                <fieldset class="target-container">
-                    <legend>rows</legend>
-                    <ul class="rows-target"></ul>
-                </fieldset>
-
-                <fieldset class="target-container">
-                    <legend>measures</legend>
-                    <ul class="measures-target"></ul>
-                </fieldset>
-            </div>
-        </fieldset>
+        <div id="configurator"></div>
 
         <div id="pivotgrid"></div>
-        <div id="configurator"></div>
         <script>
 
             $(function() {
@@ -120,49 +100,7 @@
                     dataSource: pivot.dataSource
                 });
 
-/*                var catalogs = $("#catalogs").kendoDropDownList({
-                    dataSource: {
-                        transport: {
-                            read: function(options) {
-                                pivot.dataSource.schemaCatalogs().done(function(data) {
-                                    options.success(data);
-                                });
-                            }
-                        },
-                        change: function() {
-                            pivot.dataSource.schemaCubes().done(function(data) {
-                                treeview.dataSource.fetch();
-                            });
-                        }
-                    },
-                    dataTextField: "name",
-                    dataValueField: "name",
-                    optionLabel: "None",
-                    value: pivot.dataSource.catalog(),
-                    change: function() {
-                        pivot.dataSource.catalog(this.value());
-                    }
-                }).data("kendoDropDownList");
-
-                var cubes = $("#cubes").kendoDropDownList({
-                    dataSource: {
-                        transport: {
-                            read: function(options) {
-                                pivot.dataSource.schemaCubes().done(function(data) {
-                                    options.success(data);
-                                });
-                            }
-                        }
-                    },
-                    dataTextField: "caption",
-                    dataValueField: "name",
-                    change: function() {
-                        pivot.dataSource.cube(this.value());
-                        treeview.dataSource.read();
-                    }
-                }).data("kendoDropDownList");
-
-                var treeview = $("#treeview").kendoTreeView({
+/*              var treeview = $("#treeview").kendoTreeView({
                     dataTextField: "name",
                     autoBind: false,
                     dragAndDrop: true,
@@ -229,21 +167,6 @@
                         }
                     }
                 }).data("kendoTreeView");
-
-                new kendo.ui.PivotSettingTarget($(".columns-target").addClass("k-settings-target"), {
-                    dataSource: pivot.dataSource,
-                    setting: "columns"
-                });
-
-                new kendo.ui.PivotSettingTarget($(".rows-target").addClass("k-settings-target"),{
-                    dataSource: pivot.dataSource,
-                    setting: "rows"
-                });
-
-                new kendo.ui.PivotSettingTarget($(".measures-target").addClass("k-settings-target"), {
-                    dataSource: pivot.dataSource,
-                    setting: "measures"
-                });
 */
 
             });

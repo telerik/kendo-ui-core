@@ -80,9 +80,7 @@ var __meta__ = {
         },
 
         _layout: function() {
-            var element = this.element;
-
-            this.treeView = $("<div/>").appendTo(element)
+            this.treeView = $("<div/>").appendTo(this.element)
                 .kendoTreeView({
                     dataTextField: "name",
                     autoBind: false,
@@ -90,9 +88,15 @@ var __meta__ = {
                  })
                 .data("kendoTreeView");
 
-            var columns = $('<div class="k-pivot-configurator-columns" />').appendTo(element);
-            var rows = $('<div class="k-pivot-configurator-rows" />').appendTo(element);
-            var measures = $('<div class="k-pivot-configurator-measures" />').appendTo(element);
+            this._targets();
+        },
+
+        _targets: function() {
+            var element = this.element;
+
+            var columns = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
+            var rows = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
+            var measures = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
 
             this.columns = new kendo.ui.PivotSettingTarget(columns, {
                 dataSource: this.dataSource,

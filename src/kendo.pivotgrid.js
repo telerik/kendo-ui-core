@@ -1821,7 +1821,10 @@ var __meta__ = {
 
             this.sortable = this.element.kendoSortable({
                 connectWith: this.options.connectWith,
-                disabled: ".k-empty",
+                filter: ">:not(.k-empty)",
+                placeholder: function(element) {
+                    return element.clone().hide();
+                },
                 cursor: "move",
                 change: function(e) {
                     var name = e.item.attr(kendo.attr("name"));
