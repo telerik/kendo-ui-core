@@ -484,4 +484,32 @@
         ok(!setting.validate({ name: "foo" }));
     });
 
+    test("validate returns false if setting is already added", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource
+        });
+
+        ok(!setting.validate({ uniqueName: "foo" }));
+        ok(!setting.validate({ defaultHierarchy: "bar" }));
+    });
+
+    test("validate returns false if setting is already added as another type", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            setting: "rows"
+        });
+
+        ok(!setting.validate({ uniqueName: "foo" }));
+        ok(!setting.validate({ defaultHierarchy: "bar" }));
+    });
+
+
 })();

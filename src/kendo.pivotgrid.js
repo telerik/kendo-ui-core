@@ -1890,6 +1890,17 @@ var __meta__ = {
                 return isMeasure;
             }
 
+            var items = this.dataSource[this.options.setting]();
+            var name = data.defaultHierarchy || data.uniqueName;
+            if (this._indexOf(name, items) > -1) {
+                return false;
+            }
+
+            items = this.dataSource[this.options.setting === "columns" ? "rows" : "columns"]();
+            if (this._indexOf(name, items) > -1) {
+                return false;
+            }
+
             return true;
         },
 
