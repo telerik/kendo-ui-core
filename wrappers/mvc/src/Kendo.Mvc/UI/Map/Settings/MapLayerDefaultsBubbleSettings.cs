@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
         }
         
         public MapSymbol? Symbol { get; set; }
-
+        
         //<< Fields
 
         public string SymbolName { get; set; }
@@ -70,8 +70,8 @@ namespace Kendo.Mvc.UI
             {
                 json["style"] = style;
             }
-
-            //<< Serialization
+                
+        //<< Serialization
 
             if (SymbolHandler != null)
             {
