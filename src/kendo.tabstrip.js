@@ -985,7 +985,10 @@ var __meta__ = {
                         } }, animation, {
                             complete: function () {
                                 item.removeAttr("data-animating");
+
                                 that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
+                                kendo.resize(contentHolder);
+
                                 that.scrollWrap.css("height", "").css("height");
                             }
                         } ) );
