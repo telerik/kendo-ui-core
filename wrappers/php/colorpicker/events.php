@@ -5,10 +5,21 @@ require_once '../lib/Kendo/Autoload.php';
 
 ?>
 
+
+
 <div class="demo-section">
-    <dl>
-        <dt><label for="palette-picker">ColorPicker (palette):</label></dt>
-        <dd>
+    <div class="box-col" style="width: 260px;">
+        <h4>FlatColorPicker:</h4>
+<?php
+    $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
+
+    $flatcolorpicker->change('flatcolorpickerChange');
+
+    echo $flatcolorpicker->render();
+?>   
+    </div>
+    <div class="box-col">
+        <h4>ColorPicker (palette):</h4>
 <?php
     $palettePicker = new \Kendo\UI\ColorPicker('palette-picker');
 
@@ -21,11 +32,10 @@ require_once '../lib/Kendo/Autoload.php';
         ->close('pickerClose');
 
     echo $palettePicker->render();
-?>
-        </dd>
-
-        <dt><label for="hsv-picker">ColorPicker (HSV):</label></dt>
-        <dd>
+?>     
+    </div>
+    <div class="box-col">
+        <h4>ColorPicker (HSV):</h4>
 <?php
     $hsvPicker = new \Kendo\UI\ColorPicker('hsv-picker');
 
@@ -37,31 +47,18 @@ require_once '../lib/Kendo/Autoload.php';
         ->close('pickerClose');
 
     echo $hsvPicker->render();
-?>
-        </dd>
-
-        <dt>ColorPalette:</dt>
-        <dd>
+?>       
+    </div>
+    <div class="box-col">
+        <h4>ColorPalette:</h4>
 <?php
     $palette = new \Kendo\UI\ColorPalette('palette');
 
     $palette->change('paletteChange');
 
     echo $palette->render();
-?>
-        </dd>
-
-        <dt>FlatColorPicker:</dt>
-        <dd>
-<?php
-    $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
-
-    $flatcolorpicker->change('flatcolorpickerChange');
-
-    echo $flatcolorpicker->render();
-?>
-        </dd>
-    </dl>
+?>       
+    </div>
 </div>
 
 <script>
@@ -90,45 +87,10 @@ require_once '../lib/Kendo/Autoload.php';
     }
 </script>
 
-<div class="demo-section">
-    <h3 class="title">Console log</h3>
+<div class="box">
+    <h4>Console log</h4>
     <div class="console"></div>
 </div>
-
-<style scoped>
-    .demo-section {
-        width: 500px;
-    }
-
-    .demo-section dl {
-        display: inline-block;
-    }
-
-    .demo-section dl:after {
-        content: " ";
-        clear: both;
-        font: 0/0;
-    }
-
-    .demo-section dt,
-    .demo-section dd {
-        float: left;
-        margin: 0;
-        padding: 0 0 1em;
-    }
-
-    .demo-section dt {
-        width: 45%;
-        padding-top: .3em;
-        padding-right: 5%;
-        clear: left;
-        text-align: right;
-    }
-
-    .demo-section dd {
-        width: 50%;
-    }
-</style>
 
 <?php require_once '../include/footer.php'; ?>
 
