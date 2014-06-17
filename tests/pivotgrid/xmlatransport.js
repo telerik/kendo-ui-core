@@ -171,6 +171,18 @@
            ' FROM [cubeName]') > -1);
     });
 
+    test("parameterMap measures are added as columns if no columns and rows are set and axis is rows", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            measures: [ "[baz]" ],
+            measuresAxis: "rows"
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS' +
+           ' FROM [cubeName]') > -1);
+    });
+
     test("parameterMap measures are added to the correct axis", function() {
         var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({
