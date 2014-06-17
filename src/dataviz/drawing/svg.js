@@ -317,7 +317,7 @@
                     if (e.value) {
                         this.allAttr(this.mapFill(e.value));
                     } else {
-                        this.removeAttr("fill")
+                        this.removeAttr("fill");
                     }
                     break;
 

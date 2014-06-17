@@ -21,7 +21,7 @@
         "browser": true,
         "jquery": true,
         "globals": {
-            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true,
+            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true, "stubMethod": true,
             "kendo": true,
             "define": true,
             "compareMatrices": true, "compareBoundingBox": true
