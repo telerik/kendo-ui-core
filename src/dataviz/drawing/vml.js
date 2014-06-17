@@ -798,7 +798,7 @@
 
         for (var i = 0; i < length; i++) {
             result.push(points[i]
-                .multiplyCopy(COORDINATE_MULTIPLE)
+                .scaleCopy(COORDINATE_MULTIPLE)
                 .toString(0, ",")
            );
         }

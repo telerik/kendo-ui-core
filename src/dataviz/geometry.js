@@ -100,19 +100,6 @@
             return this.clone().scale(scaleX, scaleY);
         },
 
-        multiply: function(a) {
-            this.x *= a;
-            this.y *= a;
-
-            this.geometryChange();
-
-            return this;
-        },
-
-        multiplyCopy: function(a) {
-            return new Point(this.x * a, this.y * a);
-        },
-
         transform: function(transformation) {
             var mx = transformationMatrix(transformation),
                 x = this.x,

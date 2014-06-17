@@ -222,7 +222,7 @@
             if (previousCommand == "q" || previousCommand == "t") {
                 var lastSegment = last(last(path.paths).segments);
                 controlPoint = lastSegment.controlIn.clone()
-                    .translateWith(position.multiplyCopy(-1 / 3))
+                    .translateWith(position.scaleCopy(-1 / 3))
                     .scale(3 / 2);
             }
 
@@ -339,7 +339,7 @@
 
     function reflectionPoint(point, center) {
         if (point && center) {
-            return center.multiplyCopy(2).translateWith(point.scaleCopy(-1));
+            return center.scaleCopy(2).translateWith(point.scaleCopy(-1));
         }
     }
 
@@ -347,8 +347,8 @@
         var third = 1 / 3;
         controlPoint = controlPoint.clone().scale(2 / 3);
         return {
-            controlOut: controlPoint.clone().translateWith(position.multiplyCopy(third)),
-            controlIn: controlPoint.translateWith(endPoint.multiplyCopy(third))
+            controlOut: controlPoint.clone().translateWith(position.scaleCopy(third)),
+            controlIn: controlPoint.translateWith(endPoint.scaleCopy(third))
         };
     }
 
