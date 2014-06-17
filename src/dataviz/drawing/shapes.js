@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./core", "../text-metrics" ], f);
+    define([ "./core", "./mixins", "../text-metrics" ], f);
 })(function(){
 
 (function ($) {
@@ -35,11 +35,7 @@
     // Drawing primitives =====================================================
     var Element = Class.extend({
         init: function(options) {
-            var shape = this;
-
-            shape.observer = null;
-            shape._initOptions(options);
-            shape.options.observer = this;
+            this._initOptions(options);
         },
 
         _initOptions: function(options) {
@@ -51,6 +47,7 @@
             }
 
             this.options = new OptionsStore(options);
+            this.options.observer = this;
         },
 
         optionsChange: function(e) {
@@ -58,6 +55,8 @@
                 this.observer.optionsChange(e);
             }
         },
+
+        geometryChange: util.mixins.geometryChange,
 
         transform: function(transform) {
             if (defined(transform)) {
@@ -194,43 +193,12 @@
         }
     });
 
-    var Shape = Element.extend({
-        geometryChange: util.mixins.geometryChange,
+    var Text = Element.extend({
+        init: function(content, position, options) {
+            Element.fn.init.call(this, options);
 
-        fill: function(color, opacity) {
-            this.options.set("fill.color", color);
-
-            if (defined(opacity)) {
-                this.options.set("fill.opacity", opacity);
-            }
-
-            return this;
-        },
-
-        stroke: function(color, width, opacity) {
-            this.options.set("stroke.color", color);
-
-            if (defined(width)) {
-               this.options.set("stroke.width", width);
-            }
-
-            if (defined(opacity)) {
-               this.options.set("stroke.opacity", opacity);
-            }
-
-            return this;
-        }
-    });
-
-    var Text = Shape.extend({
-        // TODO: Rename origin to position
-        init: function(content, origin, options) {
-            Shape.fn.init.call(this, options);
-
-            this._content = content;
-
-            this.origin = origin || new g.Point();
-            this.origin.observer = this;
+            this.content(content);
+            this.position(position || new g.Point());
 
             if (!this.options.font) {
                 this.options.font = "12px sans-serif";
@@ -239,17 +207,21 @@
 
         content: function(value) {
             if (defined(value)) {
-                this._content = value;
-                this.contentChange();
+                this.options.set("content", value);
                 return this;
             } else {
-                return this._content;
+                return this.options.get("content");
             }
         },
 
-        contentChange: function() {
-            if (this.observer) {
-                this.observer.contentChange();
+        position: function(value) {
+            if (defined(value)) {
+                this._position = value;
+                this._position.observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._position;
             }
         },
 
@@ -263,8 +235,8 @@
 
         rect: function() {
             var size = this.measure();
-            var origin = this.origin.clone();
-            return new g.Rect(origin, origin.clone().add(new g.Point(size.width, size.height)));
+            var pos = this.position().clone();
+            return new g.Rect(pos, pos.clone().translate(size.width, size.height));
         },
 
         bbox: function(transformation) {
@@ -276,11 +248,12 @@
             return this.rect().bbox();
         }
     });
+    deepExtend(Text.fn, drawing.mixins.Paintable);
 
-    var Circle = Shape.extend({
+    var Circle = Element.extend({
         init: function(geometry, options) {
             var circle = this;
-            Shape.fn.init.call(circle, options);
+            Element.fn.init.call(circle, options);
 
             circle.geometry = geometry || new g.Circle();
             circle.geometry.observer = this;
@@ -301,11 +274,12 @@
             return this.geometry.bbox();
         }
     });
+    deepExtend(Circle.fn, drawing.mixins.Paintable);
 
-    var Arc = Shape.extend({
+    var Arc = Element.extend({
         init: function(geometry, options) {
             var arc = this;
-            Shape.fn.init.call(arc, options);
+            Element.fn.init.call(arc, options);
 
             arc.geometry = geometry || new g.Arc();
             arc.geometry.observer = this;
@@ -342,6 +316,7 @@
             return path;
         }
     });
+    deepExtend(Arc.fn, drawing.mixins.Paintable);
 
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
@@ -349,7 +324,6 @@
 
             this.anchor = anchor || new Point();
             this.anchor.observer = this;
-            this.observer = null;
 
             if (controlIn) {
                 this.controlIn = controlIn;
@@ -450,14 +424,13 @@
         }
     });
 
-    var Path = Shape.extend({
+    var Path = Element.extend({
         init: function(options) {
             var path = this;
 
             path.segments = [];
-            path.observer = null;
 
-            Shape.fn.init.call(path, options);
+            Element.fn.init.call(path, options);
         },
 
         moveTo: function(x, y) {
@@ -534,11 +507,12 @@
             return boundingBox;
         }
     });
+    deepExtend(Path.fn, drawing.mixins.Paintable);
 
-    var MultiPath = Shape.extend({
+    var MultiPath = Element.extend({
         init: function(options) {
             this.paths = [];
-            Shape.fn.init.call(this, options);
+            Element.fn.init.call(this, options);
         },
 
         moveTo: function(x, y) {
@@ -583,6 +557,7 @@
             return elementsBoundingBox(this.paths, false);
         }
     });
+    deepExtend(MultiPath.fn, drawing.mixins.Paintable);
 
     var Image = Element.extend({
         init: function(src, rect, options) {
@@ -594,11 +569,10 @@
 
         src: function(value) {
             if (defined(value)) {
-                this._src = value;
-                this.contentChange();
+                this.options.set("src", value);
                 return this;
             } else {
-                return this._src;
+                return this.options.get("src");
             }
         },
 
@@ -610,14 +584,6 @@
                 return this;
             } else {
                 return this._rect;
-            }
-        },
-
-        geometryChange: util.mixins.geometryChange,
-
-        contentChange: function() {
-            if (this.observer) {
-                this.observer.contentChange();
             }
         },
 
@@ -676,7 +642,6 @@
         MultiPath: MultiPath,
         Path: Path,
         Segment: Segment,
-        Shape: Shape,
         Text: Text
     });
 

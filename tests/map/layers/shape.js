@@ -184,5 +184,12 @@
         map.trigger("reset");
     });
 
+    test("surface events are forwarded to map", function() {
+        map.bind("shapeClick", function() { ok(true) });
+        layer.surface.trigger("click", {
+            element: { }
+        });
+    });
+
     baseLayerTests("Shape Layer", ShapeLayer);
 })();

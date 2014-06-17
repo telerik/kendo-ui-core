@@ -144,13 +144,19 @@
     });
 
     test("rotate rotates x and y around center", function() {
-        point.rotate(new Point(0, 0), 90);
-        close(point.x, 20, 1, 0.1);
-        close(point.y, -10, 1, 0.1);
+        point.rotate(90, new Point(100, 100));
+        close(point.x, 180, 1);
+        close(point.y, 10, 1);
+    });
+
+    test("rotate rotates x and y around center (array)", function() {
+        point.rotate(90, [100, 100]);
+        close(point.x, 180, 1);
+        close(point.y, 10, 1);
     });
 
     test("rotate returns point", function() {
-        deepEqual(point.rotate(new Point(0, 0), 90), point);
+        deepEqual(point.rotate(90), point);
     });
 
     test("rotate triggers geometryChange", function() {
@@ -160,7 +166,7 @@
             }
         };
 
-        point.rotate(new Point(0, 0), 90)
+        point.rotate(90)
     });
 
     test("equals is true for same coordinates", function() {
@@ -183,63 +189,71 @@
         equal(new Point(1, 1).distanceTo(new Point(2, 2)), Math.sqrt(2));
     });
 
-    test("multiply applies to x and y", function() {
-        deepEqual(point.multiply(2), new Point(20, 40));
+    test("scale applies to x and y", function() {
+        deepEqual(point.scale(2, 3), new Point(20, 60));
     });
 
-    test("multiply returns point", function() {
-        deepEqual(point.multiply(2), point);
+    test("scale uses first parameter as default", function() {
+        deepEqual(point.scale(2), new Point(20, 40));
     });
 
-    test("multiplyCopy does not change point", function() {
+    test("scale returns point", function() {
+        deepEqual(point.scale(2), point);
+    });
+
+    test("scaleCopy does not change point", function() {
         var original = point.clone();
-        point.multiplyCopy(2);
+        point.scaleCopy(2);
         deepEqual(point, original);
     });
 
-    test("multiplyCopy does not trigger geometry change", 0, function() {
+    test("scaleCopy does not trigger geometry change", 0, function() {
         point.observer = {
             geometryChange: function() {
                 ok(false);
             }
         };
-        point.multiplyCopy(2);
+        point.scaleCopy(2);
     });
 
-    test("multiplyCopy returns point with x and y multiplied", function() {
-        deepEqual(point.multiplyCopy(2), new Point(20, 40));
+    test("scaleCopy returns point with x and y multiplied", function() {
+        deepEqual(point.scaleCopy(2, 3), new Point(20, 60));
     });
 
-    test("subtract x and y", function() {
-        deepEqual(point.subtract(new Point(5, 10)), new Point(5, 10));
+    test("scaleCopy uses first parameter as default", function() {
+        deepEqual(point.scaleCopy(2), new Point(20, 40));
     });
 
-    test("subtract returns point", function() {
-        deepEqual(point.subtract(new Point(5, 10)), point);
+    test("translates x and y", function() {
+        deepEqual(point.translate(5, 10), new Point(15, 30));
     });
 
-    test("subtract triggers geometryChange", function() {
+    test("translate returns point", function() {
+        deepEqual(point.translate(5, 10), point);
+    });
+
+    test("translate triggers geometryChange", function() {
         point.observer = {
             geometryChange: function() { ok(true); }
         };
 
-        point.subtract(new Point(5, 10));
+        point.translate(5, 10);
     });
 
-    test("add x and y", function() {
-        deepEqual(point.add(new Point(5, 10)), new Point(15, 30));
+    test("translateWith translates x and y", function() {
+        deepEqual(point.translateWith(new Point(5, 10)), new Point(15, 30));
     });
 
-    test("add returns point", function() {
-        deepEqual(point.add(new Point(5, 10)), point);
+    test("translateWith returns point", function() {
+        deepEqual(point.translateWith(new Point(5, 10)), point);
     });
 
-    test("add triggers geometryChange", function() {
+    test("translate triggers geometryChange", function() {
         point.observer = {
             geometryChange: function() { ok(true); }
         };
 
-        point.add(new Point(5, 10));
+        point.translateWith(new Point(5, 10));
     });
 
     test("transform applies matrix", function() {

@@ -78,7 +78,7 @@
                 var point = new Point(parameters[i], parameters[i + 1]);
 
                 if (options.isRelative) {
-                    point.add(position);
+                    point.translateWith(position);
                 }
 
                 path.lineTo(point.x, point.y);
@@ -98,9 +98,9 @@
                 controlIn = new Point(parameters[i + 2], parameters[i + 3]);
                 point = new Point(parameters[i + 4], parameters[i + 5]);
                 if (options.isRelative) {
-                    controlIn.add(position);
-                    controlOut.add(position);
-                    point.add(position);
+                    controlIn.translateWith(position);
+                    controlOut.translateWith(position);
+                    point.translateWith(position);
                 }
 
                 path.curveTo(controlOut, controlIn, point);
@@ -135,7 +135,7 @@
                 var endPoint = new Point(parameters[i + 5], parameters[i + 6]);
 
                 if (options.isRelative) {
-                    endPoint.add(position);
+                    endPoint.translateWith(position);
                 }
 
                 var arcParameters = normalizeArcParameters(
@@ -175,8 +175,8 @@
                 controlIn = new Point(parameters[i], parameters[i + 1]);
                 endPoint = new Point(parameters[i + 2], parameters[i + 3]);
                 if (options.isRelative) {
-                    controlIn.add(position);
-                    endPoint.add(position);
+                    controlIn.translateWith(position);
+                    endPoint.translateWith(position);
                 }
 
                 if (lastControlIn) {
@@ -201,8 +201,8 @@
                 controlPoint = new Point(parameters[i], parameters[i + 1]);
                 endPoint = new Point(parameters[i + 2], parameters[i + 3]);
                 if (options.isRelative) {
-                    controlPoint.add(position);
-                    endPoint.add(position);
+                    controlPoint.translateWith(position);
+                    endPoint.translateWith(position);
                 }
                 cubicControlPoints = quadraticToCubicControlPoints(position, controlPoint, endPoint);
 
@@ -222,14 +222,14 @@
             if (previousCommand == "q" || previousCommand == "t") {
                 var lastSegment = last(last(path.paths).segments);
                 controlPoint = lastSegment.controlIn.clone()
-                    .add(position.multiplyCopy(-1 / 3))
-                    .multiply(3 / 2);
+                    .translateWith(position.scaleCopy(-1 / 3))
+                    .scale(3 / 2);
             }
 
             for (var i = 0; i < parameters.length; i += 2) {
                 endPoint = new Point(parameters[i], parameters[i + 1]);
                 if (options.isRelative) {
-                    endPoint.add(position);
+                    endPoint.translateWith(position);
                 }
 
                 if (controlPoint) {
@@ -339,16 +339,16 @@
 
     function reflectionPoint(point, center) {
         if (point && center) {
-            return center.multiplyCopy(2).subtract(point);
+            return center.scaleCopy(2).translateWith(point.scaleCopy(-1));
         }
     }
 
     function quadraticToCubicControlPoints(position, controlPoint, endPoint) {
         var third = 1 / 3;
-        controlPoint = controlPoint.clone().multiply(2 / 3);
+        controlPoint = controlPoint.clone().scale(2 / 3);
         return {
-            controlOut: controlPoint.clone().add(position.multiplyCopy(third)),
-            controlIn: controlPoint.add(endPoint.multiplyCopy(third))
+            controlOut: controlPoint.clone().translateWith(position.scaleCopy(third)),
+            controlIn: controlPoint.translateWith(endPoint.scaleCopy(third))
         };
     }
 

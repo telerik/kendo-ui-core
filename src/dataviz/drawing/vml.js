@@ -35,26 +35,6 @@
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
-        init: function(container, options) {
-            d.Surface.fn.init.call(this);
-
-            this.options = deepExtend({}, this.options, options);
-            this.bind(this.events, this.options);
-
-            this._root = new RootNode();
-            this._click = this._handler("click");
-            this._mouseenter = this._handler("mouseenter");
-            this._mouseleave = this._handler("mouseleave");
-
-            this._appendTo(container);
-        },
-
-        events: [
-            "click",
-            "mouseenter",
-            "mouseleave"
-        ],
-
         draw: function(element) {
             var surface = this;
             surface._root.load([element], null);
@@ -87,6 +67,7 @@
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
             }
 
+            this._root = new RootNode();
             container.innerHTML = this._template(this);
             this.element = container.firstChild;
 
@@ -677,17 +658,14 @@
 
     var TextPathNode = Node.extend({
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if (e.field === "font") {
                 this.allCss(this.mapStyle());
                 this.geometryChange();
+            } if (e.field === "content") {
+                this.attr("string", this.srcElement.content());
             }
 
-            this.invalidate();
-        },
-
-        contentChange: function() {
-            this.attr("string", this.srcElement.content());
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         mapStyle: function() {
@@ -718,16 +696,12 @@
         },
 
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if(e.field === "font" || e.field === "content") {
                 this.path.optionsChange(e);
                 this.pathData.geometryChange(e);
             }
 
             PathNode.fn.optionsChange.call(this, e);
-        },
-
-        contentChange: function() {
-            this.path.contentChange();
         }
     });
 
@@ -742,19 +716,16 @@
             this.invalidate();
         },
 
-        contentChange: function() {
-            this.attr("src", this.srcElement.src());
-            this.invalidate();
-        },
-
         optionsChange: function(e) {
-            if (e.field === "visible") {
+            if (e.field === "src") {
+                this.attr("src", this.srcElement.src());
+            } else if (e.field === "visible") {
                 this.css("display", e.value ? "" : "none");
             } else if (e.field === "transform") {
                 this.refreshTransform(this.srcElement.currentTransform());
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         mapStyle: function() {
@@ -827,7 +798,7 @@
 
         for (var i = 0; i < length; i++) {
             result.push(points[i]
-                .multiplyCopy(COORDINATE_MULTIPLE)
+                .scaleCopy(COORDINATE_MULTIPLE)
                 .toString(0, ",")
            );
         }

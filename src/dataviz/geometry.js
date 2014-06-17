@@ -28,8 +28,6 @@
         init: function(x, y) {
             this.x = x || 0;
             this.y = y || 0;
-
-            this.observer = null;
         },
 
         geometryChange: util.mixins.geometryChange,
@@ -66,34 +64,40 @@
             return new Point(this.x, this.y);
         },
 
-        rotate: function(center, degrees) {
-            var theta = rad(degrees);
-            var cosT = math.cos(theta);
-            var sinT = math.sin(theta);
-            var cx = center.x;
-            var cy = center.y;
-            var x = this.x;
-            var y = this.y;
+        rotate: function(angle, origin) {
+            return this.transform(
+                transform().rotate(angle, origin)
+            );
+        },
 
-            this.x = cx + (x - cx) * cosT + (y - cy) * sinT;
-            this.y = cy + (y - cy) * cosT - (x - cx) * sinT;
+        translate: function(x, y) {
+            this.x += x;
+            this.y += y;
 
             this.geometryChange();
 
             return this;
         },
 
-        multiply: function(a) {
-            this.x *= a;
-            this.y *= a;
+        translateWith: function(point) {
+            return this.translate(point.x, point.y);
+        },
+
+        scale: function(scaleX, scaleY) {
+            if (!defined(scaleY)) {
+                scaleY = scaleX;
+            }
+
+            this.x *= scaleX;
+            this.y *= scaleY;
 
             this.geometryChange();
 
             return this;
         },
 
-        multiplyCopy: function(a) {
-            return new Point(this.x * a, this.y * a);
+        scaleCopy: function(scaleX, scaleY) {
+            return this.clone().scale(scaleX, scaleY);
         },
 
         transform: function(transformation) {
@@ -119,34 +123,16 @@
             return point;
         },
 
-        add: function(other) {
-            this.x += other.x;
-            this.y += other.y;
-
-            this.geometryChange();
-
-            return this;
-        },
-
-        subtract: function(other) {
-            this.x -= other.x;
-            this.y -= other.y;
-
-            this.geometryChange();
-
-            return this;
-        },
-
-        distanceTo: function(other) {
-            var dx = this.x - other.x;
-            var dy = this.y - other.y;
+        distanceTo: function(point) {
+            var dx = this.x - point.x;
+            var dy = this.y - point.y;
 
             return math.sqrt(dx * dx + dy * dy);
         },
 
-        round: function(precision) {
-            this.x = round(this.x, precision);
-            this.y = round(this.y, precision);
+        round: function(digits) {
+            this.x = round(this.x, digits);
+            this.y = round(this.y, digits);
 
             this.geometryChange();
 
@@ -155,13 +141,13 @@
     });
 
     // IE < 9 doesn't allow to override toString on definition
-    Point.fn.toString = function(precision, separator) {
+    Point.fn.toString = function(digits, separator) {
         var x = this.x,
             y = this.y;
 
-        if (defined(precision)) {
-            x = round(x, precision);
-            y = round(y, precision);
+        if (defined(digits)) {
+            x = round(x, digits);
+            y = round(y, digits);
         }
 
         separator = separator || " ";
@@ -221,7 +207,6 @@
             this.p0 = p0 || new Point();
             this.p1 = p1 || new Point();
 
-            this.observer = null;
             this.p0.observer = this;
             this.p1.observer = this;
         },
@@ -276,7 +261,6 @@
             this.center = center || new Point();
             this.radius = radius || 0;
 
-            this.observer = null;
             this.center.observer = this;
         },
 
@@ -338,7 +322,6 @@
     var Arc = Class.extend({
         init: function(center, options) {
             this.center = center || new Point();
-            this.observer = null;
             this.center.observer = this;
 
             options = options || {};
@@ -582,7 +565,6 @@
     var Transformation = Class.extend({
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();
-            this.observer = null;
         },
 
         _optionsChange: function() {

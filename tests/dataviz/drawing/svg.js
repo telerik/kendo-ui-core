@@ -117,10 +117,10 @@
             $(surface._root.childNodes[0].element).trigger("click");
         });
 
-        test("click has reference to shape", function() {
+        test("click has reference to element", function() {
             var group = new Group();
             surface.draw(group);
-            surface.bind("click", function(e) { deepEqual(e.shape, group); });
+            surface.bind("click", function(e) { deepEqual(e.element, group); });
 
             $(surface._root.childNodes[0].element)
                 .trigger("click", { toElement: surface._root.childNodes[0].element });
@@ -597,6 +597,14 @@
             path.options.set("fill", { color: "red", opacity: 0.4 });
         });
 
+        test("optionsChange clears stroke", function() {
+            pathNode.removeAttr = function(name) {
+                equal(name, "fill");
+            };
+
+            path.options.set("fill", null);
+        });
+
         test("optionsChange sets stroke color", function() {
             pathNode.attr = function(name, value) {
                 equal(name, "stroke");
@@ -636,6 +644,14 @@
             };
 
             path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
+        });
+
+        test("optionsChange clears stroke", function() {
+            pathNode.removeAttr = function(name) {
+                equal(name, "stroke");
+            };
+
+            path.options.set("stroke", null);
         });
 
         test("options change renders transform", function() {
@@ -709,7 +725,7 @@
                 }
             };
 
-            circle.geometry.center.multiply(2);
+            circle.geometry.center.scale(2);
         });
 
         test("geometryChange sets radius", 1, function() {
@@ -743,7 +759,7 @@
             }
         });
 
-        test("renders origin accounting for baseline", function() {
+        test("renders position accounting for baseline", function() {
             ok(textNode.render().indexOf("x='10' y='35'") > -1);
         });
 
@@ -760,7 +776,7 @@
             ok(textNode.render().indexOf("transform='matrix(1,1,1,1,1,1)'") > -1);
         });
 
-        test("geometryChange sets origin", 2, function() {
+        test("geometryChange sets position", 2, function() {
             textNode.attr = function(name, value) {
                 if (name === "x") {
                     equal(value, 20);
@@ -769,7 +785,7 @@
                 }
             };
 
-            text.origin.multiply(2);
+            text.position().scale(2);
         });
 
         test("optionsChange sets font", function() {
@@ -782,7 +798,7 @@
             text.options.set("font", "foo");
         });
 
-        test("contentChange sets content", function() {
+        test("optionsChange sets content", function() {
             textNode.content = function(value) {
                 equal(value, "Bar");
             };
@@ -839,7 +855,7 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
         test("geometryChange sets size", 2, function() {
@@ -851,10 +867,10 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
-        test("contentChange sets source", function() {
+        test("optionsChange sets source", function() {
             imageNode.attr = function(name, value) {
                 equal(name, "xlink:href");
                 equal(value, "Bar");

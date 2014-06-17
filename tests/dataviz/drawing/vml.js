@@ -114,10 +114,10 @@
             $(surface._root.childNodes[0].element).trigger("click");
         });
 
-        test("click has reference to shape", function() {
+        test("click has reference to element", function() {
             var group = new Group();
             surface.draw(group);
-            surface.bind("click", function(e) { deepEqual(e.shape, group); });
+            surface.bind("click", function(e) { deepEqual(e.element, group); });
 
             $(surface._root.childNodes[0].element)
                 .trigger("click", { toElement: surface._root.childNodes[0].element });
@@ -1218,7 +1218,7 @@
                 }
             };
 
-            circle.geometry.center.multiply(2);
+            circle.geometry.center.scale(2);
         });
 
         test("geometryChange sets radius", 2, function() {
@@ -1360,7 +1360,7 @@
                 equal(value, "m 0,11000 l 4000,11000");
             };
 
-            text.origin.set("x", 0);
+            text.position().set("x", 0);
         });
 
         test("rounds path coordinates", function() {
@@ -1368,7 +1368,7 @@
                 equal(value, "m 10001,11001 l 14001,11001");
             };
 
-            text.origin.add(new g.Point(0.005, 0.005));
+            text.position().translate(0.005, 0.005);
         });
     })();
 
@@ -1401,7 +1401,7 @@
             text.options.set("font", "10pt Arial");
         });
 
-        test("contentChange updates string", function() {
+        test("optionsChange updates string", function() {
             textPathNode.attr = function(name, value) {
                 equal(name, "string");
                 equal(value, "Bar");
@@ -1433,14 +1433,14 @@
             text.options.set("font", "10pt Arial");
         });
 
-        test("forwards contentChange to path node", function() {
-            textNode.path.contentChange = function() { ok(true); };
+        test("forwards optionsChange to path node", function() {
+            textNode.path.optionsChange = function() { ok(true); };
             text.content("Bar");
         });
 
         test("geometryChange is forwarded to path data node", function() {
             textNode.pathData.geometryChange = function() { ok(true); };
-            text.origin.set("x", 1);
+            text.position().set("x", 1);
         });
 
         shapeTests(d.Text, vml.TextNode, "TextNode");
@@ -1502,7 +1502,7 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
         test("geometryChange sets size", 2, function() {
@@ -1514,10 +1514,10 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
-        test("contentChange sets source", function() {
+        test("optionsChange sets source", function() {
             imageNode.attr = function(name, value) {
                 equal(name, "src");
                 equal(value, "bar");

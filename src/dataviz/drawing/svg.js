@@ -38,31 +38,6 @@
 
     // SVG rendering surface ==================================================
     var Surface = d.Surface.extend({
-        init: function(container, options) {
-            d.Surface.fn.init.call(this);
-
-            this.options = deepExtend({}, this.options, options);
-            this.bind(this.events, this.options);
-
-            this._root = new RootNode();
-            this._click = this._handler("click");
-            this._mouseenter = this._handler("mouseenter");
-            this._mouseleave = this._handler("mouseleave");
-
-            this._appendTo(container);
-        },
-
-        options: {
-            width: "100%",
-            height: "100%"
-        },
-
-        events: [
-            "click",
-            "mouseenter",
-            "mouseleave"
-        ],
-
         translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
@@ -82,7 +57,7 @@
         },
 
         svg: function() {
-            return this._template(this);
+            return "<?xml version='1.0' ?>" + this._template(this);
         },
 
         setSize: function(size) {
@@ -98,8 +73,6 @@
         },
 
         _template: renderTemplate(
-            // TODO: Append XML prefix only during export
-            "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
             "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
@@ -107,6 +80,8 @@
         ),
 
         _appendTo: function(container) {
+            this._root = new RootNode();
+
             renderSVG(container, this._template(this));
             this.element = container.firstElementChild;
             alignToScreen(this.element);
@@ -339,7 +314,11 @@
         optionsChange: function(e) {
             switch(e.field) {
                 case "fill":
-                    this.allAttr(this.mapFill(e.value));
+                    if (e.value) {
+                        this.allAttr(this.mapFill(e.value));
+                    } else {
+                        this.removeAttr("fill");
+                    }
                     break;
 
                 case "fill.color":
@@ -347,7 +326,11 @@
                     break;
 
                 case "stroke":
-                    this.allAttr(this.mapStroke(e.value));
+                    if (e.value) {
+                        this.allAttr(this.mapStroke(e.value));
+                    } else {
+                        this.removeAttr("stroke");
+                    }
                     break;
 
                 case TRANSFORM:
@@ -564,17 +547,14 @@
         },
 
         optionsChange: function(e) {
-            if(e.field == "font") {
+            if (e.field === "font") {
                 this.attr("style", util.renderStyle(this.mapStyle()));
                 this.geometryChange();
+            } else if (e.field === "content") {
+                this.content(this.srcElement.content());
             }
 
             PathNode.fn.optionsChange.call(this, e);
-        },
-
-        contentChange: function() {
-            this.content(this.srcElement.content());
-            this.invalidate();
         },
 
         mapStyle: function() {
@@ -585,9 +565,9 @@
         },
 
         pos: function() {
-            var origin = this.srcElement.origin;
+            var pos = this.srcElement.position();
             var size = this.srcElement.measure();
-            return origin.clone().set("y", origin.y + size.baseline);
+            return pos.clone().set("y", pos.y + size.baseline);
         },
 
         template: renderTemplate(
@@ -605,9 +585,12 @@
             this.invalidate();
         },
 
-        contentChange: function() {
-            this.allAttr(this.mapSource());
-            this.invalidate();
+        optionsChange: function(e) {
+            if (e.field === "src") {
+                this.allAttr(this.mapSource());
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
         },
 
         mapPosition: function() {
@@ -685,6 +668,11 @@
     }
 
     // Exports ================================================================
+    kendo.support.svg = (function() {
+        return doc.implementation.hasFeature(
+            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    })();
+
     if (kendo.support.svg) {
         d.SurfaceFactory.current.register("svg", Surface, 10);
     }

@@ -157,17 +157,17 @@
 
             if (this.surface.translate) {
                 this.surface.translate(nw);
-                this.movable.moveTo(nw);
+                this.movable.moveTo({ x: nw.x, y: nw.y });
             }
         },
 
         _handler: function(event) {
             var layer = this;
             return function(e) {
-                if (e.shape) {
+                if (e.element) {
                     var args = {
                         layer: layer,
-                        shape: e.shape,
+                        shape: e.element,
                         originalEvent: e.originalEvent
                     };
 

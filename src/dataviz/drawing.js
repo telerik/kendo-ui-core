@@ -5,6 +5,7 @@
         "./util",
         "./geometry",
         "./drawing/core",
+        "./drawing/mixins",
         "./drawing/shapes",
         "./drawing/parser",
         "./drawing/svg",

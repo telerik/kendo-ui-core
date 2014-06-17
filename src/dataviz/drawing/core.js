@@ -15,14 +15,35 @@
 
         dataviz = kendo.dataviz;
 
-    // Base surface ==========================================================
+    // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
-        clear: noop,
+        init: function(container, options) {
+            kendo.Observable.fn.init.call(this);
 
-        destroy: function() {
-            this.clear();
-            $(this.element).kendoDestroy();
+            this.options = deepExtend({}, this.options, options);
+            this.bind(this.events, this.options);
+
+            this._click = this._handler("click");
+            this._mouseenter = this._handler("mouseenter");
+            this._mouseleave = this._handler("mouseleave");
+
+            this._appendTo(container);
         },
+
+        options: {
+            width: "100%",
+            height: "100%"
+        },
+
+        events: [
+            "click",
+            "mouseenter",
+            "mouseleave"
+        ],
+
+        draw: noop,
+        clear: noop,
+        destroy: noop,
 
         resize: function(force) {
             var size = this.getSize(),
@@ -52,6 +73,7 @@
         },
 
         _resize: noop,
+        _appendTo: noop,
 
         _handler: function(event) {
             var surface = this;
@@ -60,7 +82,7 @@
                 var node = e.target._kendoNode;
                 if (node) {
                     surface.trigger(event, {
-                        shape: node.srcElement,
+                        element: node.srcElement,
                         originalEvent: e
                     });
                 }
@@ -72,7 +94,7 @@
         return SurfaceFactory.current.create(element, options, preferred);
     };
 
-    // Stage node ============================================================
+    // Base surface node =====================================================
     var BaseNode = Class.extend({
         init: function(srcElement) {
             this.childNodes = [];
@@ -218,35 +240,40 @@
     });
 
     var SurfaceFactory = function() {
-        this._views = [];
+        this._items = [];
     };
 
     SurfaceFactory.prototype = {
         register: function(name, type, order) {
-            var views = this._views,
-                defaultView = views[0],
+            var items = this._items,
+                first = items[0],
                 entry = {
                     name: name,
                     type: type,
                     order: order
                 };
 
-            if (!defaultView || order < defaultView.order) {
-                views.unshift(entry);
+            if (!first || order < first.order) {
+                items.unshift(entry);
             } else {
-                views.push(entry);
+                items.push(entry);
             }
         },
 
         create: function(element, options, preferred) {
-            var views = this._views,
-                match = views[0];
+            var items = this._items,
+                match = items[0];
+
+            if (typeof options === "string") {
+                preferred = options;
+                options = null;
+            }
 
             if (preferred) {
                 preferred = preferred.toLowerCase();
-                for (var i = 0; i < views.length; i++) {
-                    if (views[i].name === preferred) {
-                        match = views[i];
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].name === preferred) {
+                        match = items[i];
                         break;
                     }
                 }
@@ -257,22 +284,13 @@
             }
 
             kendo.logToConsole(
-                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "Warning: Unable to create Kendo UI Drawing Surface. Possible causes:\n" +
                 "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
                 "- The Kendo UI scripts are not fully loaded");
         }
     };
 
     SurfaceFactory.current = new SurfaceFactory();
-
-    kendo.support.svg = (function() {
-        return doc.implementation.hasFeature(
-            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
-    })();
-
-    kendo.support.canvas = (function() {
-        return !!doc.createElement("canvas").getContext;
-    })();
 
     // Exports ================================================================
     deepExtend(dataviz, {

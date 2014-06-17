@@ -221,13 +221,13 @@
             var origin = this.locationToLayer(this._viewOrigin);
             var point = this.locationToLayer(location);
 
-            return point.subtract(origin);
+            return point.translateWith(origin.scale(-1));
         },
 
         viewToLocation: function(point, zoom) {
             var origin = this.locationToLayer(this._getOrigin(), zoom);
             point = Point.create(point);
-            point = point.clone().add(origin);
+            point = point.clone().translateWith(origin);
             return this.layerToLocation(point, zoom);
         },
 
@@ -461,7 +461,7 @@
             var origin = this.locationToLayer(this._viewOrigin).round();
             var movable = e.sender.movable;
 
-            var offset = new g.Point(movable.x, movable.y).multiply(-1).multiply(1/movable.scale);
+            var offset = new g.Point(movable.x, movable.y).scale(-1).scale(1/movable.scale);
             origin.x += offset.x;
             origin.y += offset.y;
 
@@ -496,7 +496,7 @@
             var gestureCenter = new g.Point(e.center.x, e.center.y);
             var centerLocation = this.viewToLocation(gestureCenter, zoom);
             var centerPoint = this.locationToLayer(centerLocation, zoom);
-            var originPoint = centerPoint.subtract(gestureCenter);
+            var originPoint = centerPoint.translateWith(gestureCenter.scaleCopy(-1));
 
             this._zoomAround(originPoint, zoom);
             this.trigger("zoomEnd", { originalEvent: e });
@@ -603,7 +603,7 @@
                     var cursor = this.eventOffset(e);
                     var location = this.viewToLocation(cursor);
                     var postZoom = this.locationToLayer(location, toZoom);
-                    var origin = postZoom.subtract(cursor);
+                    var origin = postZoom.translateWith(cursor.scaleCopy(-1));
                     this._zoomAround(origin, toZoom);
 
                     this.trigger("zoomEnd", { originalEvent: e });
