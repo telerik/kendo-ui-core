@@ -2646,6 +2646,13 @@ h5 {
     margin-left: 0;
 }
 
+#overview-widgets h2,
+#most-popular h3,
+#most-popular .overview-col {
+    padding-left: 20px;
+    padding-right: 0;
+}
+
 #widgets-all .overview-col.col-four {
     width: 24%;
     padding: 0;
