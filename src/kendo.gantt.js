@@ -967,10 +967,6 @@ var __meta__ = {
                     task.set("end", firstSlot.end);
                 }
 
-                if (that.trigger("add", { task: task })) {
-                    return;
-                }
-
                 if (type !== "add") {
                     orderId = selected.get("orderId");
                     orderId = type === "insert-before" ? orderId : orderId + 1;
