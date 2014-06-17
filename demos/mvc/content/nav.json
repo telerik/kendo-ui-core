@@ -5240,6 +5240,22 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "area-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
     ],
     "category": "Data Visualization"
