@@ -1806,6 +1806,8 @@ var __meta__ = {
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
+            this.element.addClass("k-pivot-setting");
+
             this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
 
             this._refreshHandler = $.proxy(this.refresh, this);
@@ -2072,29 +2074,30 @@ var __meta__ = {
 
         _columnFields: function() {
             this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-columns");
+        },
 
+        _initSettingTargets: function() {
             this.columnsTarget = new kendo.ui.PivotSettingTarget(this.columnFields, {
-                connectWith: ".k-pivot-toolbar.k-header.k-settings-rows",
+                connectWith: this.rowFields,
                 dataSource: this.dataSource,
                 setting: "columns",
                 messages: {
                     empty: this.options.messages.columnFields
                 }
             });
-        },
-
-        _rowFields: function() {
-            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-rows");
 
             this.rowsTarget = new kendo.ui.PivotSettingTarget(this.rowFields, {
-                connectWith: ".k-pivot-toolbar.k-header.k-settings-columns",
+                connectWith: this.columnFields,
                 dataSource: this.dataSource,
                 setting: "rows",
                 messages: {
                     empty: this.options.messages.rowFields
                 }
             });
+        },
 
+        _rowFields: function() {
+            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-rows");
         },
 
         _columnsHeader: function() {
@@ -2145,6 +2148,8 @@ var __meta__ = {
             that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
             that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
             that.contentTree = new kendo.dom.Tree(that.content[0]);
+
+            that._initSettingTargets();
         },
 
         _resize: function() {

@@ -18,7 +18,7 @@ var __meta__ = {
 
 
     function settingTargetFromNode(node) {
-        var target = $(node).closest(".k-pivot-configurator-settings");
+        var target = $(node).closest(".k-pivot-setting");
 
         if (target.length) {
             return target.data("kendoPivotSettingTarget");
