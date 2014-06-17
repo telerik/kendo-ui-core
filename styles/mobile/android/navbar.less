@@ -31,31 +31,38 @@
 }
 
 .km-root .km-android .km-navbar,
-.km-root .km-android .km-toolbar
+.km-root .km-android .k-toolbar
 {
     font-size: .8em;
 }
 
-.km-android .km-navbar,
-.km-android .km-toolbar
+.km-android .km-navbar
 {
     padding: 0 .5em;
 }
 
 .km-android .km-navbar .km-button,
-.km-android .km-toolbar .km-button
+.km-android .k-toolbar .km-button
 {
-    display: inline;
     margin: 0;
-    border: 0;
+    border-style: none;
     .box-shadow(none);
     background: none;
 }
 
-.km-android .km-navbar [class*=item] .km-button,
-.km-android .km-toolbar > .km-button
+.km-android .km-navbar .km-button
+{
+    display: inline;
+}
+
+.km-android .km-navbar [class*=item] .km-button
 {
     padding: .95em 0;
+    text-transform: uppercase;
+}
+
+.km-android .k-toolbar > .km-button
+{
     text-transform: uppercase;
 }
 
@@ -75,9 +82,14 @@
 }
 
 html .km-android .km-navbar .km-state-active,
-html .km-android .km-toolbar .km-state-active
+html .km-android .k-toolbar .km-state-active
 {
     background: currentcolor;
     opacity: .6;
+}
+
+html .km-android .k-toolbar .km-state-active
+{
+    opacity: 1;
 }
 

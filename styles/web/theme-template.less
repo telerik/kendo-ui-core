@@ -426,50 +426,6 @@ html .km-pane-wrapper .k-header
     background-color: @button-background-color;
 }
 
-.k-button:focus,
-.k-button.k-state-focused
-{
-    border-color: @button-focused-border-color;
-}
-
-.k-button:hover
-{
-    color: @button-hover-text-color;
-    border-color: @button-hover-border-color;
-    background-color: @button-hover-background-color;
-}
-
-.k-button:active
-{
-    color: @selected-text-color;
-    background-color:@button-active-background;
-    border-color: @button-active-border-color;
-}
-
-.k-button[disabled],
-.k-button.k-state-disabled,
-.k-state-disabled .k-button,
-.k-state-disabled .k-button:hover,
-.k-button.k-state-disabled:hover,
-.k-state-disabled .k-button:active,
-.k-button.k-state-disabled:active
-{
-    color: @disabled-text-color;
-    border-color: @disabled-border-color;
-    background-color: @disabled-background-color;
-	.composite-background(@disabled-gradient);
-}
-
-.k-button:focus:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-shadow);
-}
-
-.k-button:focus:active:not(.k-state-disabled):not([disabled])
-{
-    .box-shadow(@button-focused-active-shadow);
-}
-
 .k-draghandle
 {
     border-color: @draghandle-border-color;
@@ -610,6 +566,60 @@ html .km-pane-wrapper .k-header
     background-color: @active-background-color;
     border-color: @active-border-color;
     color: @active-text-color;
+}
+
+.k-button:focus,
+.k-button.k-state-focused
+{
+    border-color: @button-focused-border-color;
+}
+
+.k-button:hover,
+.k-button.k-state-hover
+{
+    color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
+}
+
+.k-button:active,
+.k-button.k-state-active
+{
+    color: @selected-text-color;
+    background-color: @button-active-background;
+    border-color: @button-active-border-color;
+}
+
+.k-button:active:hover,
+.k-button.k-state-active:hover
+{
+    color: @primary-hover-text-color;
+    border-color: @primary-hover-border-color;
+    background-color: @primary-hover-background-color;
+}
+
+.k-button[disabled],
+.k-button.k-state-disabled,
+.k-state-disabled .k-button,
+.k-state-disabled .k-button:hover,
+.k-button.k-state-disabled:hover,
+.k-state-disabled .k-button:active,
+.k-button.k-state-disabled:active
+{
+    color: @disabled-text-color;
+    border-color: @disabled-border-color;
+    background-color: @disabled-background-color;
+	.composite-background(@disabled-gradient);
+}
+
+.k-button:focus:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-shadow);
+}
+
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
+{
+    .box-shadow(@button-focused-active-shadow);
 }
 
 .k-menu .k-state-hover>.k-state-active
@@ -765,19 +775,6 @@ td.k-state-focused.k-state-selected
     color: @selected-text-color;
 }
 
-.k-state-selected,
-.k-button:active,
-.k-draghandle.k-state-selected:hover
-{
-    .composite-background(@selected-gradient);
-}
-
-.k-button:active,
-.k-draghandle.k-state-selected:hover
-{
-    background-position: 50% 50%;
-}
-
 .k-state-hover,
 .k-state-hover:hover,
 .k-splitbar-horizontal-hover:hover,
@@ -818,6 +815,7 @@ td.k-state-focused.k-state-selected
 }
 
 .k-button:hover,
+.k-button.k-state-hover,
 .k-button:focus,
 .k-button.k-state-focused,
 .k-textbox:hover,
@@ -848,6 +846,21 @@ div.k-filebrowser-dropzone em,
 .k-panelbar>.k-item>.k-state-focused
 {
     .composite-background(@active-gradient);
+}
+
+.k-state-selected,
+.k-button:active,
+.k-button.k-state-active,
+.k-draghandle.k-state-selected:hover
+{
+    .composite-background(@selected-gradient);
+}
+
+.k-button:active,
+.k-button.k-state-active,
+.k-draghandle.k-state-selected:hover
+{
+    background-position: 50% 50%;
 }
 
 .k-tool-icon
@@ -1340,7 +1353,9 @@ div.k-filebrowser-dropzone em
     vertical-align: middle;
 }
 
-.k-tool.k-group-start
+.k-tool.k-group-start,
+.k-toolbar .k-split-button .k-button,
+.k-toolbar .k-button-group .k-group-start
 {
     border-radius: @main-border-radius 0 0 @main-border-radius;
 }
@@ -1350,7 +1365,9 @@ div.k-filebrowser-dropzone em
     border-radius: 0 @main-border-radius @main-border-radius 0;
 }
 
-.k-tool.k-group-end
+.k-tool.k-group-end,
+.k-toolbar .k-button-group .k-group-end,
+.k-toolbar .k-split-button .k-split-button-arrow
 {
     border-radius: 0 @main-border-radius @main-border-radius 0;
 }
@@ -1406,6 +1423,26 @@ div.k-filebrowser-dropzone em
 .k-numeric-wrap.k-state-border-down
 {
     border-radius: @main-border-radius @main-border-radius 0 0;
+}
+
+.k-split-button.k-state-border-down > .k-button
+{
+    border-radius: @main-border-radius 0 0 0;
+}
+
+.k-split-button.k-state-border-up > .k-button
+{
+    border-radius: 0 0 0 @main-border-radius;
+}
+
+.k-split-button.k-state-border-down > .k-split-button-arrow
+{
+    border-radius: 0 @main-border-radius 0 0;
+}
+
+.k-split-button.k-state-border-up > .k-split-button-arrow
+{
+    border-radius: 0 0 @main-border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -1802,11 +1839,27 @@ html .km-pane-wrapper .km-widget,
 }
 
 .k-column-menu,
-.k-column-menu .k-item
+.k-column-menu .k-item,
+.k-overflow-container .k-overflow-group
 {
     border-color: @secondary-border-color;
 }
 
+.k-overflow-container .k-overflow-group
+{
+    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-toolbar-first-visible.k-overflow-group,
+.k-overflow-container .k-overflow-group + .k-overflow-group
+{
+    box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
+}
+
+.k-toolbar-last-visible.k-overflow-group
+{
+    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
+}
 
 .k-column-menu .k-separator
 {
@@ -1857,7 +1910,8 @@ html .km-pane-wrapper .km-widget,
 }
 
 //Primary buttons
-.k-primary
+.k-primary,
+.k-overflow-container .k-primary
 {
     color: @primary-button-text-color;
     border-color: @primary-button-border-color;

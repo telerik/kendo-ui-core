@@ -48,7 +48,7 @@ html .km-android .km-stretched-view
 }
 
 .km-android .km-navbar,
-.km-android .km-toolbar,
+.km-android .k-toolbar,
 .km-android .km-button,
 .km-android .km-switch,
 .km-android .km-buttongroup,
@@ -75,7 +75,7 @@ html .km-android .km-stretched-view
 }
 
 .km-android .km-navbar .km-button:last-child .km-text,
-.km-android .km-toolbar .km-button:last-child .km-text,
+.km-android .k-toolbar .km-button:last-child .km-text,
 .km-android .km-tabstrip .km-button:last-child .km-text
 {
     border-right: 0;
@@ -83,13 +83,15 @@ html .km-android .km-stretched-view
 
 /* Icons */
 
-.km-android .km-icon
+.km-android .km-icon,
+.km-android .k-button-icontext .km-icon
 {
     text-indent: 0;
     z-index: 1;
 }
 
-.km-android .km-notext
+.km-android .km-notext,
+.km-android .k-buttonicon .km-icon
 {
     margin-left: 0;
     margin-right: 0;
@@ -276,7 +278,9 @@ html .km-android .km-navbar .km-notext
 }
 
 .km-android .km-navbar .km-state-active:after,
-.km-android .km-toolbar .km-state-active:after,
+.km-android .k-toolbar .km-state-active:after,
+.km-android .k-split-container .km-state-active:after,
+.km-android .k-overflow-container .km-state-active:after,
 .km-android .km-tabstrip .km-state-active:after,
 .km-android2 .km-buttongroup .km-state-active:after
 {

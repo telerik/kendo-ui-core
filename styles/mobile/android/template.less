@@ -55,7 +55,7 @@
 }
 
 .km-android .km-navbar,
-.km-android .km-toolbar,
+.km-android .k-toolbar,
 .km-android .km-button,
 .km-android .km-switch,
 .km-android .km-buttongroup,
@@ -69,7 +69,7 @@
 }
 
 .km-android-light .km-navbar,
-.km-android-light .km-toolbar,
+.km-android-light .k-toolbar,
 .km-android-light .km-button,
 .km-android-light .km-switch,
 .km-android-light .km-buttongroup,
@@ -83,7 +83,7 @@
 }
 
 .km-android-light .km-navbar,
-.km-android-light .km-toolbar,
+.km-android-light .k-toolbar,
 .km-android-light .km-switch,
 .km-android-light .km-tabstrip,
 .km-android-light .km-popup .k-item,
@@ -110,7 +110,7 @@
 }
 
 .km-android .km-navbar,
-.km-android .km-toolbar,
+.km-android .k-toolbar,
 .km-android .km-tabstrip
 {
     .box-shadow(~"0 0 1px @{android-gray}, 0 0 4px @{android-gray}");
@@ -175,11 +175,13 @@
 
 /* TabStrip */
 
+.km-android .k-toolbar,
 .km-android .km-tabstrip
 {
     border-bottom-color: fade(@android-main-color, 40%);
 }
 
+.km-android-light .k-toolbar,
 .km-android-light .km-tabstrip
 {
     border-bottom-color: fade(@android-light-main-color, 40%);
@@ -394,7 +396,8 @@
 }
 
 .km-android .km-left .km-popup-arrow:before,
-.km-android .km-right .km-popup-arrow:before
+.km-android .km-right .km-popup-arrow:before,
+.km-android .k-toolbar .km-buttongroup
 {
     border-color: transparent @android-border-color;
 }
@@ -588,6 +591,15 @@
     text-shadow: 5000px 0 1px @android-active-color;
 }
 
+.km-android .k-split-container > li > a:focus,
+.km-android .k-split-container > li > a:active,
+.km-android .k-overflow-container > li > a:focus,
+.km-android .k-overflow-container > li > a:active
+{
+    text-indent: 0;
+    text-shadow: none;
+}
+
 .km-android .km-actionsheet > li > a:focus > *,
 .km-android .km-actionsheet > li > a:active > *,
 .km-android .km-popup .k-state-hover > *,
@@ -637,9 +649,29 @@
 .km-android .km-contactadd:before,
 .km-android .km-rowdelete:before,
 .km-android .km-rowinsert:before,
-.km-android .km-detaildisclose:before
+.km-android .km-detaildisclose:before,
+.km-android .k-overflow-container .km-state-disabled
 {
     display: block;
+    color: @android-gray;
+}
+
+.km-android .k-overflow-container a.km-state-disabled
+{
+    color: @android-gray;
+    background-color: @android-background-color;
+    border-color: @android-border-color;
+}
+
+.km-android-light .k-overflow-container a.km-state-disabled
+{
+    color: @android-gray;
+    background-color: darken(@android-light-background-color, 7.5%);;
+    border-color: @android-light-border-color;
+}
+
+.km-android .km-state-active.km-state-disabled .km-text
+{
     color: @android-gray;
 }
 

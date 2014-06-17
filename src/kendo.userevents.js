@@ -222,6 +222,8 @@ var __meta__ = {
             // Mark the object as finished if there are blocking operations in the event handlers (alert/confirm)
             that._finished = true;
 
+            that._trigger(RELEASE, touchInfo); // Release should be fired before TAP (as click is after mouseup/touchend)
+
             if (that._moved) {
                 that._trigger(END, touchInfo);
             } else {
@@ -229,7 +231,6 @@ var __meta__ = {
             }
 
             clearTimeout(that._holdTimeout);
-            that._trigger(RELEASE, touchInfo);
 
             that.dispose();
         },
@@ -430,7 +431,7 @@ var __meta__ = {
                 extend(data, {touches: touches}, touchDelta(touches[0], touches[1]));
             }
 
-            return this.trigger(eventName, data);
+            return this.trigger(eventName, extend(data, {type: eventName}));
         },
 
         // API

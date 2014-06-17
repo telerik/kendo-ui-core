@@ -22,6 +22,7 @@
         "./kendo.popup",
         "./kendo.notification",
         "./kendo.tooltip",
+        "./kendo.toolbar",
         "./kendo.list",
         "./kendo.calendar",
         "./kendo.datepicker",

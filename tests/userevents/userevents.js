@@ -19,6 +19,14 @@
         press(element, 10, 20);
     });
 
+    test("includes event type in event data", 1, function(){
+        userEvents.bind("press", function(e) {
+            equal(e.type, "press");
+        });
+
+        press(element, 10, 20);
+    });
+
     test("raises start on first mouse move", 2, function(){
         userEvents.bind("start", function(e) {
             equal(e.x.location, 15);
@@ -32,6 +40,21 @@
     test("raises tap on tap", 1, function(){
         userEvents.bind("tap", function(e) {
             ok(true);
+        });
+
+        press(element, 10, 20);
+        release(element);
+    });
+
+    test("fires release, then tap", 1, function(){
+        var releaseFired = false;
+
+        userEvents.bind("release", function(e) {
+            releaseFired = true;
+        });
+
+        userEvents.bind("tap", function(e) {
+            ok(releaseFired);
         });
 
         press(element, 10, 20);
