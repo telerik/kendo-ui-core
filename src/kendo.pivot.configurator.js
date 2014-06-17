@@ -100,7 +100,7 @@ var __meta__ = {
                     dataSource: this._treeViewDataSource(),
                     dragstart: function(e) {
                         var dataItem = this.dataItem(e.sourceNode);
-                        if (!dataItem.hasChildren) {
+                        if (!dataItem.hasChildren && !dataItem.aggregator) {
                             e.preventDefault();
                         }
                     },
