@@ -1489,6 +1489,11 @@ var __meta__ = {
             var measures = options.measures || [];
             var measuresRowAxis = options.measuresAxis === "rows";
 
+            if (!columns.length && rows.length && !measures.length) {
+                columns = rows;
+                rows = [];
+            }
+
             if (columns.length) {
                 command += serializeMembers(columns, !measuresRowAxis ? measures : []);
             } else if (measures.length && !measuresRowAxis) {

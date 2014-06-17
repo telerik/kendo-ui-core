@@ -87,17 +87,17 @@
 
     test("parameterMap row is expanded", function() {
        var transport = new kendo.data.XmlaTransport({ });
-       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }] }, "read");
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]", expand: true }], columns: [ { name: "[bar]", expand: false }] }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
            'NON EMPTY {[foo],[foo].Children} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
     test("parameterMap create empty column and single row select query", function() {
         var transport = new kendo.data.XmlaTransport({ });
-       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]" }] }, "read");
+       var params = transport.parameterMap({ connection: { catalog: "catalogName", cube: "cubeName" }, rows: [{ name: "[foo]" }], columns: [{ name: "[bar]" }] }, "read");
 
-       ok(params.indexOf('SELECT NON EMPTY {} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
+       ok(params.indexOf('SELECT NON EMPTY {[bar]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
            'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
     });
 
@@ -132,6 +132,17 @@
 
         ok(params.indexOf('SELECT NON EMPTY {[baz]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
            'NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+    });
+
+    test("parameterMap rows are added as column if no columns are set", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            rows: [{ name: "[foo]" }]
+        }, "read");
+
+        ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS' +
+           ' FROM [cubeName]') > -1);
     });
 
     test("parameterMap multiple measures are added as row if no rows are set and axis is rows", function() {
