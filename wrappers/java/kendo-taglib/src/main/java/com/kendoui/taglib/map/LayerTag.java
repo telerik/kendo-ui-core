@@ -107,6 +107,22 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("locationField", value);
     }
 
+    public float getMaxSize() {
+        return (float)getProperty("maxSize");
+    }
+
+    public void setMaxSize(float value) {
+        setProperty("maxSize", value);
+    }
+
+    public float getMinSize() {
+        return (float)getProperty("minSize");
+    }
+
+    public void setMinSize(float value) {
+        setProperty("minSize", value);
+    }
+
     public float getOpacity() {
         return (float)getProperty("opacity");
     }
@@ -131,6 +147,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("subdomains", value);
     }
 
+    public java.lang.String getSymbol() {
+        return (java.lang.String)getProperty("symbol");
+    }
+
+    public void setSymbol(java.lang.String value) {
+        setProperty("symbol", value);
+    }
+
     public java.lang.String getTitleField() {
         return (java.lang.String)getProperty("titleField");
     }
@@ -153,6 +177,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
 
     public void setUrlTemplate(java.lang.String value) {
         setProperty("urlTemplate", value);
+    }
+
+    public java.lang.String getValueField() {
+        return (java.lang.String)getProperty("valueField");
+    }
+
+    public void setValueField(java.lang.String value) {
+        setProperty("valueField", value);
     }
 
 //<< Attributes
