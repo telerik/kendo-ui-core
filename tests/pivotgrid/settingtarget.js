@@ -311,15 +311,11 @@
     });
 
     test("attach sortable width to the element",  function() {
-        var dataSource = new kendo.data.PivotDataSource({ });
-
         var setting = new PivotSettingTarget($(div), {});
         ok($(div).data("kendoSortable"));
     });
 
     test("connectWith is set to the sortable",  function() {
-        var dataSource = new kendo.data.PivotDataSource({ });
-
         var setting = new PivotSettingTarget($(div), {
             connectWith: "foo"
         });
@@ -328,8 +324,6 @@
     });
 
     test("adding item via sortable calls the add method",  function() {
-        var dataSource = new kendo.data.PivotDataSource({ });
-
         var setting = new PivotSettingTarget($(div), {});
 
         var method = stub(setting, "add");
@@ -344,8 +338,6 @@
     });
 
     test("removing item via sortable calls the remove method",  function() {
-        var dataSource = new kendo.data.PivotDataSource({ });
-
         var setting = new PivotSettingTarget($(div), {});
 
         var method = stub(setting, "remove");
@@ -442,5 +434,54 @@
         equal(dataSource.columns()[0].name, "bar");
     });
 
+    test("validate returns true for measures setting and measure(dimension)", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "measures"
+        });
+
+        ok(setting.validate({ type: 2 }));
+    });
+
+    test("validate returns true for columns setting and non measure", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "columns"
+        });
+
+        ok(setting.validate({ name: "foo" }));
+    });
+
+    test("validate returns false for columns setting and measure", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "columns"
+        });
+
+        ok(!setting.validate({ type: 2 }));
+        ok(!setting.validate({ aggregator: 2 }));
+    });
+
+    test("validate returns false for rows setting and measure", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "rows"
+        });
+
+        ok(!setting.validate({ type: 2 }));
+        ok(!setting.validate({ aggregator: 2 }));
+    });
+
+    test("validate returns true for measures setting and measure", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "measures"
+        });
+
+        ok(setting.validate({ aggregator: 2 }));
+    });
+
+    test("validate returns false for measures setting and non measure", function() {
+        var setting = new PivotSettingTarget($(div), {
+            setting: "measures"
+        });
+
+        ok(!setting.validate({ name: "foo" }));
+    });
 
 })();

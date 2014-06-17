@@ -1879,6 +1879,20 @@ var __meta__ = {
             return index;
         },
 
+        validate: function(data) {
+            var isMeasure = (data.type == 2 || "aggregator" in data);
+
+            if (isMeasure) {
+                return this.options.setting === "measures";
+            }
+
+            if (this.options.setting === "measures") {
+                return isMeasure;
+            }
+
+            return true;
+        },
+
         add: function(name) {
             var items = this.dataSource[this.options.setting]();
             var idx = this._indexOf(name, items);
