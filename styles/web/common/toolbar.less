@@ -5,13 +5,38 @@
     position: relative;
     display: block;
     vertical-align: middle;
-    line-height: 2.8em;
+    line-height: 2.9em;
 }
 
-.k-toolbar .k-button .k-icon
+.k-toolbar .k-button .k-icon,
+.k-toolbar .k-button .k-sprite,
+.k-overflow-container .k-icon,
+.k-overflow-container .k-sprite
 {
     vertical-align: middle;
-    margin-top: -1px;
+    margin-top: -7px;
+    margin-bottom: -5px;
+}
+
+.k-toolbar .k-input
+{
+    line-height: inherit;
+    height: inherit;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.k-toolbar .k-combobox .k-dropdown-wrap:before,
+.k-toolbar .k-picker-wrap:before,
+.k-toolbar .k-numeric-wrap:before
+{
+    display: none;
+}
+
+.k-toolbar .k-button .k-sprite,
+.k-overflow-container .k-sprite
+{
+    margin-left: -4px;
 }
 
 .k-toolbar-resizable
@@ -20,11 +45,20 @@
     white-space: nowrap;
 }
 
-.k-toolbar > *
+.k-toolbar > *,
+.k-toolbar .k-button
 {
     display: inline-block;
     vertical-align: middle;
-    line-height: 1.65em;
+    line-height: 1.72em;
+}
+
+.k-toolbar .k-separator
+{
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    width: 1px;
+    line-height: inherit;
 }
 
 .k-toolbar .k-button-group
@@ -45,7 +79,11 @@
 
 .k-toolbar .k-button,
 .k-toolbar .k-split-button,
-.k-toolbar .k-button-group
+.k-toolbar .k-button-group,
+.k-toolbar .k-widget,
+.k-toolbar .k-textbox,
+.k-toolbar label,
+.k-toolbar .k-separator
 {
     margin: 0 .2em;
 }
@@ -86,6 +124,16 @@
     border: 0;
 }
 
+.k-overflow-container .k-separator
+{
+    border-width: 0 0 1px;
+    border-style: solid;
+    height: 1px;
+    line-height: 0;
+    font-size: 0;
+    padding: 0;
+}
+
 .k-overflow-container .k-overflow-button,
 .k-split-container .k-button
 {
@@ -94,6 +142,11 @@
     background: none;
     border-color: transparent;
     white-space: nowrap;
+}
+
+.k-split-container
+{
+    margin-top: -1px;
 }
 
 .k-overflow-container .k-button-group
@@ -121,11 +174,17 @@
 }
 
 .k-overflow-container .k-toolbar-first-visible,
-.k-overflow-container .k-overflow-group + .k-overflow-group
+.k-overflow-container .k-overflow-group + .k-overflow-group,
+.k-overflow-container .k-separator + .k-overflow-group
 {
     border-top: 0;
     margin-top: 0;
     padding-top: 1px;
+}
+
+.k-overflow-container .k-overflow-group + .k-separator
+{
+    display: none;
 }
 
 .k-overflow-container .k-toolbar-last-visible
