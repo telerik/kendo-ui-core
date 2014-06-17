@@ -125,25 +125,20 @@ var __meta__ = {
                     }
 
                     element.attr("id", options.id);
-                    popupElement.attr("id", options.id + "_optionlist");
+                    popupElement.attr("id", options.id + "_optionlist")
+                                .attr(kendo.attr("uid"), options.rootUid);
 
-                    if (options.mobile && kendo.mobile.ui.ActionSheet) {
-                        popup = new kendo.mobile.ui.ActionSheet(popupElement, {
-                            type: "tablet",
-                            open: function () {
-                                kendo.wrap(popup.shim.wrapper)
-                                    .addClass("k-split-wrapper");
-                            }
-                        });
-                    } else {
-                        popup = popupElement.kendoPopup({
-                            anchor: element,
-                            animation: options.animation,
-                            open: adjustPopupWidth
-                        }).data("kendoPopup");
+                    if (options.mobile) {
+                        popupElement = popupElement.addClass("km-widget km-actionsheet")
+                                  .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
+                                  .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
                     }
 
-                    popupElement.parent().attr(kendo.attr("uid"), options.rootUid);
+                    popup = popupElement.kendoPopup({
+                        anchor: element,
+                        animation: options.animation,
+                        open: adjustPopupWidth
+                    }).data("kendoPopup");
 
                     element.data({
                         type: "splitButton",
@@ -355,15 +350,7 @@ var __meta__ = {
         }
 
         function toggleOverflow(popup, anchor, mobile) {
-            if (mobile) {
-                if (!popup.element.is(":visible")) {
-                    popup.openFor(anchor);
-                } else {
-                    popup.close();
-                }
-            } else {
-                popup.toggle();
-            }
+            popup.toggle();
         }
 
         var ToolBar = Widget.extend({
@@ -490,7 +477,7 @@ var __meta__ = {
                             overflowElement = overflowElement.wrap("<li></li>").parent();
                         }
                         that._attributes(overflowElement, options);
-                        overflowElement.addClass(itemClasses).appendTo(that.popup.element);
+                        overflowElement.addClass(itemClasses).appendTo(that.popup.container);
 
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
                             overflowElement.addClass(OVERFLOW_HIDDEN);
@@ -561,46 +548,49 @@ var __meta__ = {
                     that.overflowAnchor.append('<span class="km-icon km-more"></span>');
                 }
 
-                if (that.isMobile && kendo.mobile.ui.ActionSheet) {
-                    that.popup = new kendo.mobile.ui.ActionSheet(components.overflowContainer, {
-                        type: "tablet",
-                        popup: { autosize: false },
-                        open: function () {
-                            kendo.wrap(that.popup.shim.wrapper)
-                                .addClass("k-overflow-wrapper");
-                        }
-                    });
-                } else {
-                    that.popup = new kendo.ui.Popup(components.overflowContainer, {
-                        origin: "bottom right",
-                        position: "top right",
-                        anchor: that.overflowAnchor,
-                        animation: that.animation,
-                        copyAnchorStyles: false,
-                        open: function () {
-                            kendo.wrap(that.popup.element)
-                                .addClass("k-overflow-wrapper")
-                                .css("margin-left", "3px");
-                        }
-                    });
+                if (that.isMobile) {
+                    components.overflowContainer = $(components.overflowContainer).addClass("km-widget km-actionsheet")
+                              .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
+                              .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
                 }
 
-                that.popup.element.attr(kendo.attr("uid"), this.uid);
+                that.popup = new kendo.ui.Popup(components.overflowContainer, {
+                    origin: "bottom right",
+                    position: "top right",
+                    anchor: that.overflowAnchor,
+                    animation: that.animation,
+                    copyAnchorStyles: false,
+                    open: function () {
+                        var wrapper = kendo.wrap(that.popup.element)
+                            .addClass("k-overflow-wrapper");
+
+                        if (!that.isMobile) {
+                            wrapper.css("margin-left", "3px");
+                        }
+                    }
+                });
+
+                if (that.isMobile) {
+                    that.popup.container = that.popup.element.find("." + OVERFLOW_CONTAINER);
+                } else {
+                    that.popup.container = that.popup.element;
+                }
+
+                that.popup.container.attr(kendo.attr("uid"), this.uid);
             },
 
             _buttonClick: function(e) {
-                var target,
-                    isDisabled,
-                    isChecked,
-                    group,
-                    current;
+                var that = this,
+                    target, splitContainer,
+                    isDisabled, isChecked,
+                    group, current;
 
                 e.preventDefault();
 
-                target = $(e.target).closest("." + BUTTON, this.element);
+                target = $(e.target).closest("." + BUTTON, that.element);
 
-                if (!target.length && this.popup) {
-                    target = $(e.target).closest("." + OVERFLOW_BUTTON, this.popup.element);
+                if (!target.length && that.popup) {
+                    target = $(e.target).closest("." + OVERFLOW_BUTTON, that.popup.container);
                 }
 
                 isDisabled = target.hasClass(STATE_DISABLED);
@@ -610,7 +600,7 @@ var __meta__ = {
                 }
 
                 if (e.target.closest("." + SPLIT_BUTTON_ARROW).length) {
-                    this._toggle(e);
+                    that._toggle(e);
                     return;
                 }
 
@@ -619,10 +609,10 @@ var __meta__ = {
                     group = target.data("group");
 
                     if (group) { //find all buttons from the same group
-                        current = $("[" + kendo.attr("uid") + "='" + this.uid + "']").find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
+                        current = $("[" + kendo.attr("uid") + "='" + that.uid + "']").find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
                     }
 
-                    if (!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
+                    if (!that.trigger(TOGGLE, { target: target, checked: isChecked })) {
                         if(current && current.length) {
                             current.removeClass(STATE_ACTIVE);
                         }
@@ -630,7 +620,16 @@ var __meta__ = {
                         target.toggleClass(STATE_ACTIVE);
                     }
                 } else {
-                    this.trigger(CLICK, { target: target });
+                    that.trigger(CLICK, { target: target });
+                }
+
+                if (target.hasClass(OVERFLOW_BUTTON)) {
+                    that.popup.close();
+                }
+
+                splitContainer = target.closest(".k-split-container");
+                if (splitContainer[0]) {
+                    splitContainer.parents(".km-popup-wrapper").data("kendoPopup").close();
                 }
             },
 
@@ -713,7 +712,7 @@ var __meta__ = {
 
             _hideItem: function(item) {
                 item.hide();
-                this.popup.element
+                this.popup.container
                     .find(">li[data-uid='" + item.data("uid") + "']")
                     .removeClass(OVERFLOW_HIDDEN);
             },
@@ -721,7 +720,7 @@ var __meta__ = {
             _showItem: function(item, containerWidth) {
                 if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
-                    this.popup.element
+                    this.popup.container
                         .find(">li[data-uid='" + item.data("uid") + "']")
                         .addClass(OVERFLOW_HIDDEN);
 
@@ -732,7 +731,7 @@ var __meta__ = {
             },
 
             _markVisibles: function() {
-                var overflowItems = this.popup.element.children(),
+                var overflowItems = this.popup.container.children(),
                     toolbarItems = this.element.children(":not(.k-overflow-anchor)"),
                     visibleOverflowItems = overflowItems.filter(":not(.k-overflow-hidden)"),
                     visibleToolbarItems = toolbarItems.filter(":visible");
