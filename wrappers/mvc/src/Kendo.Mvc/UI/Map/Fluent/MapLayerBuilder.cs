@@ -91,8 +91,8 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The data item field which contains the marker location.
-		/// The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.
+        /// The data item field which contains the marker (symbol) location.
+		/// The field should be an array with two numbers - latitude and longitude in decimal degrees.Requires the dataSource option to be set.Only applicable to "marker" and "bubble" layers.
         /// </summary>
         /// <param name="value">The value that configures the locationfield.</param>
         public MapLayerBuilder LocationField(string value)
@@ -110,6 +110,28 @@ using System.Web.Mvc;
         public MapLayerBuilder TitleField(string value)
         {
             container.TitleField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The maximum symbol size for bubble layer symbols.
+        /// </summary>
+        /// <param name="value">The value that configures the maxsize.</param>
+        public MapLayerBuilder MaxSize(double value)
+        {
+            container.MaxSize = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The minimum symbol size for bubble layer symbols.
+        /// </summary>
+        /// <param name="value">The value that configures the minsize.</param>
+        public MapLayerBuilder MinSize(double value)
+        {
+            container.MinSize = value;
 
             return this;
         }
@@ -147,6 +169,18 @@ using System.Web.Mvc;
         }
         
         /// <summary>
+        /// The value field for bubble layer symbols.
+		/// The data item field should be a number.
+        /// </summary>
+        /// <param name="value">The value that configures the valuefield.</param>
+        public MapLayerBuilder ValueField(string value)
+        {
+            container.ValueField = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The layer type. Supported types are "tile" and "shape".
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
@@ -179,6 +213,17 @@ using System.Web.Mvc;
             return this;
         }
         
+        /// <summary>
+        /// The bubble layer symbol type. Supported symbols are "circle" and "square".
+        /// </summary>
+        /// <param name="value">The value that configures the symbol.</param>
+        public MapLayerBuilder Symbol(MapSymbol value)
+        {
+            container.Symbol = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>
@@ -188,6 +233,28 @@ using System.Web.Mvc;
         public MapLayerBuilder Shape(string name)
         {
             container.ShapeName = name;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The bubble layer symbol type. The "circle" and "square" symbols are predefined.
+        /// </summary>
+        /// <param name="value">The value that configures the symbol.</param>
+        public MapLayerBuilder Symbol(string symbol)
+        {
+            container.SymbolName = symbol;
+
+            return this;
+        }
+
+        /// <summary>
+        /// A client-side function to invoke that will draw the symbol.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will draw the symbol.</param>
+        public MapLayerBuilder SymbolHandler(string handler)
+        {
+            container.SymbolHandler = new ClientHandlerDescriptor { HandlerName = handler };
 
             return this;
         }

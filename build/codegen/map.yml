@@ -95,3 +95,17 @@
           - topRight
           - bottomRight
           - bottomLeft
+    - :name: layers.symbol
+      :type: String
+      :enum_type: MapSymbol
+      :description: The bubble layer symbol type. Supported symbols are "circle" and "square".
+      :values:
+          - circle
+          - square
+    - :name: layerDefaults.bubble.symbol
+      :type: String
+      :enum_type: MapSymbol
+      :description: The bubble layer symbol type. Supported symbols are "circle" and "square".
+      :values:
+          - circle
+          - square

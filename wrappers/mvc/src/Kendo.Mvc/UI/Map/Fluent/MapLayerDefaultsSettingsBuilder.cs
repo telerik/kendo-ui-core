@@ -40,6 +40,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The default configuration for bubble layers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the bubble.</param>
+        public MapLayerDefaultsSettingsBuilder Bubble(Action<MapLayerDefaultsBubbleSettingsBuilder> configurator)
+        {
+            configurator(new MapLayerDefaultsBubbleSettingsBuilder(container.Bubble));
+            return this;
+        }
+        
+        /// <summary>
         /// The default configuration for tile layers.
         /// </summary>
         /// <param name="configurator">The action that configures the tile.</param>

@@ -171,6 +171,7 @@
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSourceTests.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptorBuilderTests.cs" />
     <Compile Include="UI\DataSource\ModelDescriptorTests.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsBubbleSettingsBuilderTests.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerBuilderTests.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDefaultsMarkerSettingsBuilderTests.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerDefaultsSettingsBuilderTests.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="UI\Map\MapTestHelper.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerBuilderTests.cs" />
     <Compile Include="UI\Map\Serialization\AttributionSettingsTests.cs" />
+    <Compile Include="UI\Map\Serialization\MapLayerDefaultsBubbleSettings.cs" />
     <Compile Include="UI\Map\Serialization\MapLayerTests.cs" />
     <Compile Include="UI\Map\Serialization\MapLayerDefaultsMarkerSettings.cs" />
     <Compile Include="UI\Map\Serialization\MapMarkerDefaultSettingsTests.cs" />

@@ -53,5 +53,44 @@ namespace Kendo.Mvc.UI.Tests.Map.Fluent
         {
             builder.Tooltip(tooltip => tooltip.Content("foo")).ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Sets_layer_symbol()
+        {
+            builder.Symbol(MapSymbol.Circle);
+            layer.Symbol.ShouldEqual(MapSymbol.Circle);
+        }
+
+        [Fact]
+        public void Setting_layer_symbol_returns_builder()
+        {
+            builder.Symbol(MapSymbol.Circle).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Sets_layer_symbol_name()
+        {
+            builder.Symbol("Foo");
+            layer.SymbolName.ShouldEqual("Foo");
+        }
+
+        [Fact]
+        public void Setting_layer_symbol_name_returns_builder()
+        {
+            builder.Symbol("Foo").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Sets_settings_symbol_handler()
+        {
+            builder.SymbolHandler("foo");
+            layer.SymbolHandler.HandlerName.ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Setting_settings_symbol_handler_returns_builder()
+        {
+            builder.SymbolHandler("foo").ShouldBeSameAs(builder);
+        }
     }
 }
