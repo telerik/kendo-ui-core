@@ -1368,7 +1368,7 @@
                 equal(value, "m 10001,11001 l 14001,11001");
             };
 
-            text.position().add(new g.Point(0.005, 0.005));
+            text.position().translate(0.005, 0.005);
         });
     })();
 
