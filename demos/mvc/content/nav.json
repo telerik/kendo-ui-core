@@ -3448,6 +3448,53 @@
     "category": "Editors"
   },
   {
+    "text": "ToolBar",
+    "name": "toolbar",
+    "api": "web/toolbar",
+    "documentation": {
+       "kendo-ui": "getting-started/web/toolbar/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/toolbar/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/toolbar/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/toolbar/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/toolbar",
+       "aspnet-mvc": "aspnet-mvc/toolbar",
+       "jsp-ui": "jsp/toolbar",
+       "php-ui": "php/toolbar"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/toolbar",
+       "aspnet-mvc": "aspnet-mvc/toolbar",
+       "jsp-ui": "jsp/toobar",
+       "php-ui": "php/toolbar"
+    },
+    "spriteCssClass": "toolbarIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "toolbar/index",
+        "title": {
+            "kendo-ui": "Basic usage of Kendo UI ToolBar Widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "Play with this Kendo UI ToolBar demo to get familiar with the supported commands and core functionality."
+        }
+      },
+      {
+        "text": "Resizing",
+        "url": "toolbar/resizing",
+        "title": {
+            "kendo-ui": "Resizing demo of Kendo UI ToolBar Widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "Play with this Kendo UI ToolBar demo to get familiar with the resizing functionality."
+        }
+      }
+    ],
+    "category": "Navigation"
+  },
+  {
     "text": "Tooltip",
     "name": "tooltip",
     "api": "web/tooltip",
