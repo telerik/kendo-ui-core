@@ -1908,6 +1908,7 @@ var __meta__ = {
 
             that._columnBuilder = columnBuilder = new ColumnBuilder();
             that._rowBuilder = rowBuilder = new RowBuilder();
+            that._contentBuilder = new ContentBuilder();
 
             that.columnsHeader
                 .add(that.rowsHeader)
@@ -2121,12 +2122,11 @@ var __meta__ = {
 
             var data = dataSource.view();
 
-            var columnsTree = that._columnBuilder.build(tuples || []);
             var rowsTree = that._rowBuilder.build(rows.tuples || []);
 
-            that.columnsHeaderTree.render(columnsTree);
+            that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
             that.rowsHeaderTree.render(rowsTree);
-            that.contentTree.render(kendo_content(data, columnsTree, rowsTree));
+            that.contentTree.render(that._contentBuilder.build(data, that._columnBuilder.metadata, rowsTree));
 
             that._resize();
         }
@@ -2150,6 +2150,7 @@ var __meta__ = {
         _thead: function(tuples) {
             var root = tuples[0];
 
+            this.metadata = [];
             this._state(root);
 
             if (root) {
@@ -2399,6 +2400,19 @@ var __meta__ = {
             row.children.push(cell);
             row.colspan += 1;
 
+            var metadata = {
+                expand: !!childrenLength,
+                children: 0,
+                allChildren: 0
+            };
+
+            if (parentMember || (childrenLength && !this.rootMember)) {
+                if (!this.rootMember) {
+                    this.rootMember = tuple === this.rootTuple;
+                }
+
+                this.metadata.push(metadata);
+            }
 
             nextMember = members[memberIdx + 1];
 
@@ -2413,8 +2427,12 @@ var __meta__ = {
                 colspan = childRow.colspan;
                 cell.attr.colspan = colspan;
 
+                metadata.children = colspan;
+
                 row.colspan += colspan;
                 row.rowspan = childRow.rowspan + 1;
+
+                metadata.allChildren = 1;
 
                 if (nextMember) {
                     if (nextMember.measure) {
@@ -2425,6 +2443,8 @@ var __meta__ = {
 
                     allCell.attr.colspan = colspan;
                     row.colspan += colspan - 1;
+
+                    metadata.allChildren = colspan;
                 }
             } else if (nextMember) {
                 if (nextMember.measure) {
@@ -2434,6 +2454,7 @@ var __meta__ = {
                 }
 
                 if (colspan > 1) {
+                    metadata.children = colspan;
                     cell.attr.colspan = colspan;
                     row.colspan += colspan - 1;
                 }
@@ -2448,6 +2469,7 @@ var __meta__ = {
             this.rows = [];
             this.map = {};
             this.rootTuple = rootTuple;
+            this.rootMember = false;
         }
     });
 
@@ -2662,49 +2684,68 @@ var __meta__ = {
         }
     });
 
-    function kendo_th(member, attr) {
-        return element("th", attr, [text(member.caption || member.name)]);
-    }
+    var ContentBuilder = Class.extend({
+        init: function(options) {
+            this.expandState = {};
+        },
 
-    function kendo_row_headers(rows) {
-        return [ element("table", null, [kendo_row_thead(rows)]) ];
-    }
+        build: function(data, columns, rows) {
+            return [
+                element("table", null, [this._thead(data, columns, rows)])
+            ];
+        },
 
-    function kendo_row_thead(rows) {
-        return element("thead", null, kendo_row_thead_rows(rows));
-    }
+        _thead: function(data, columns, rows) {
+            var dataItem = data[0];
+            var tupleInfo = columns[0];
+            this.rows = [];
 
-    function kendo_row_thead_rows(rows) {
-        var elements = [];
-        var length = rows.length || 1;
+            this.rowIdx = 0;
+            this.rowLength = tupleInfo ? tupleInfo.children + tupleInfo.allChildren : 1;
 
-        for (var j = 0; j < length; j++) {
-            var cells = [];
-
-            var tuple = rows[j];
-            var member;
-
-            if (tuple) {
-                for (var i = 0; i < tuple.members.length; i++) {
-                    member = tuple.members[i];
-
-                    cells.push(kendo_th(member));
-                }
+            if (dataItem && tupleInfo) {
+                this._buildRows(data, columns, rows);
             } else {
-                member = {
-                    caption: ""
-                };
-
-                cells.push(kendo_th(member));
+                this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
             }
 
-            elements.push(element("tr", null, cells));
+            return element("thead", null, this.rows);
+        },
+
+        _buildRows: function(data, columns, rows) {
+            var row = element("tr", null);
+            var rowData = data.slice(this.rowIdx, this.rowLength);
+
+            this._shuffle(row, rowData, 0, this.rowLength, columns);
+
+            this.rows.push(row);
+        },
+
+        _shuffle: function(row, data, start, end, columns) {
+            var tupleInfo = columns[start];
+            var dataItem;
+
+            while(start < end) {
+                dataItem = data[start];
+
+                if (tupleInfo.children) {
+                    this._shuffle(row, data, start + 1, start + tupleInfo.children + 1, columns);
+                }
+
+                start += tupleInfo.children + 1;
+
+                if (tupleInfo.allChildren > 1) {
+                    this._shuffle(row, data, start, end, columns);
+                    start += tupleInfo.allChildren;
+                }
+
+                row.children.push(element("td", null, [ text(dataItem.value) ]));
+
+                tupleInfo = columns[start];
+            }
         }
+    });
 
-        return elements;
-    }
-
-    //content
     function kendo_content(data, columnsTree, rowsTree) {
         return [ element("table", null, [kendo_tbody(data, columnsTree, rowsTree)]) ];
     }
