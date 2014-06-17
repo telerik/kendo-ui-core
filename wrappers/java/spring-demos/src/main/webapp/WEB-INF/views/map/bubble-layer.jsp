@@ -9,8 +9,8 @@
 <div id="info" class="box"></div>
 
 <script id="info-template" type="text/x-kendo-template">
-    <h4>#: City #, #= Country #</h4>
-    <p class="info">Population #= kendo.toString(Pop2010 * 1000, "N0") #</p>
+    <h4>#: city #, #= country #</h4>
+    <p class="info">Population #= kendo.toString(pop2010 * 1000, "N0") #</p>
 </script>
 <script id="empty-info-template" type="text/x-kendo-template">
     <h4>Hover over urban areas</h4>
