@@ -236,7 +236,7 @@
         rect: function() {
             var size = this.measure();
             var pos = this.position().clone();
-            return new g.Rect(pos, pos.clone().add(new g.Point(size.width, size.height)));
+            return new g.Rect(pos, pos.clone().translate(size.width, size.height));
         },
 
         bbox: function(transformation) {

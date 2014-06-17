@@ -136,24 +136,6 @@
             return point;
         },
 
-        add: function(other) {
-            this.x += other.x;
-            this.y += other.y;
-
-            this.geometryChange();
-
-            return this;
-        },
-
-        subtract: function(other) {
-            this.x -= other.x;
-            this.y -= other.y;
-
-            this.geometryChange();
-
-            return this;
-        },
-
         distanceTo: function(point) {
             var dx = this.x - point.x;
             var dy = this.y - point.y;

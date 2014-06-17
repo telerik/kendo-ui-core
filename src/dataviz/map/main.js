@@ -227,7 +227,7 @@
         viewToLocation: function(point, zoom) {
             var origin = this.locationToLayer(this._getOrigin(), zoom);
             point = Point.create(point);
-            point = point.clone().add(origin);
+            point = point.clone().translateWith(origin);
             return this.layerToLocation(point, zoom);
         },
 
