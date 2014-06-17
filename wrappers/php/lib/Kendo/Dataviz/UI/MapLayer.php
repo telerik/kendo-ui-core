@@ -54,8 +54,8 @@ North-West lat, longitude, South-East latitude, longitude.If not specified, the 
     }
 
     /**
-    * The data item field which contains the marker location.
-The field should be an array with two numbers - latitude and longitude.Requires the dataSource option to be set.
+    * The data item field which contains the marker (symbol) location.
+The field should be an array with two numbers - latitude and longitude in decimal degrees.Requires the dataSource option to be set.Only applicable to "marker" and "bubble" layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
@@ -80,6 +80,24 @@ Requires the dataSource option to be set.
     */
     public function tooltip($value) {
         return $this->setProperty('tooltip', $value);
+    }
+
+    /**
+    * The maximum symbol size for bubble layer symbols.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function maxSize($value) {
+        return $this->setProperty('maxSize', $value);
+    }
+
+    /**
+    * The minimum symbol size for bubble layer symbols.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function minSize($value) {
+        return $this->setProperty('minSize', $value);
     }
 
     /**
@@ -133,7 +151,17 @@ Alternating between different subdomains allows more requests to be executed in 
     }
 
     /**
-    * The layer type. Supported types are "tile" and "shape".
+    * The value field for bubble layer symbols.
+The data item field should be a number.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function valueField($value) {
+        return $this->setProperty('valueField', $value);
+    }
+
+    /**
+    * The layer type. Supported types are "tile", "bing", "shape", "marker" and "bubble".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
@@ -157,6 +185,15 @@ Alternating between different subdomains allows more requests to be executed in 
     */
     public function shape($value) {
         return $this->setProperty('shape', $value);
+    }
+
+    /**
+    * The bubble layer symbol type. Supported symbols are "circle" and "square".
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function symbol($value) {
+        return $this->setProperty('symbol', $value);
     }
 
 //<< Properties
