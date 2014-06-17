@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\Map\BubbleLayerController.cs" />
     <Compile Include="Controllers\Waterfall_Charts\HorizontalController.cs" />
     <Compile Include="Controllers\Waterfall_Charts\IndexController.cs" />
     <Compile Include="Controllers\Waterfall_Charts\Local_Data_BindingController.cs" />
@@ -787,6 +788,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\remote_data_binding.aspx" />
@@ -2509,6 +2511,7 @@
     <Content Include="Areas\razor\Views\waterfall_charts\local_data_binding.cshtml" />
     <Content Include="Areas\razor\Views\waterfall_charts\remote_data_binding.cshtml" />
     <Content Include="Areas\razor\Views\waterfall_charts\horizontal.cshtml" />
+    <Content Include="Areas\razor\Views\map\bubble_layer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
