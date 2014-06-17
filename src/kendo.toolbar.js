@@ -615,7 +615,7 @@ var __meta__ = {
                     group = target.data("group");
 
                     if (group) { //find all buttons from the same group
-                        current = this.element.find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
+                        current = $("[" + kendo.attr("uid") + "='" + this.uid + "']").find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
                     }
 
                     if (!this.trigger(TOGGLE, { target: target, checked: isChecked })) {
