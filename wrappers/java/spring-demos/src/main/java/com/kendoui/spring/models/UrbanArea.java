@@ -2,10 +2,9 @@ package com.kendoui.spring.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -18,6 +17,9 @@ public class UrbanArea {
     private double latitude;
     private double longitude;
     private int pop2010;
+    
+    @Transient
+    private double[] location;
     
     @Id
     @Column(name="ID")
@@ -49,6 +51,7 @@ public class UrbanArea {
     }
 
     @Column(name="Latitude")
+    @JsonIgnore
     public double getLatitude() {
         return latitude;
     }
@@ -58,6 +61,7 @@ public class UrbanArea {
     }
 
     @Column(name="Longitude")
+    @JsonIgnore
     public double getLongitude() {
         return longitude;
     }
@@ -75,6 +79,7 @@ public class UrbanArea {
         this.pop2010 = pop2010;
     }
     
+    @Transient
     public double[] getLocation() {
         return new double[] { this.getLatitude(), this.getLongitude() };
     }

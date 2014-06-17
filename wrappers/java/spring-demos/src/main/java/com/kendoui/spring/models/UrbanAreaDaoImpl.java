@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,8 +13,9 @@ public class UrbanAreaDaoImpl implements UrbanAreaDao {
     @Autowired
     private SessionFactory sessionFactory;
     
+    @SuppressWarnings("unchecked")
     @Override
-    public DataSourceResult getList(DataSourceRequest request) {
-        return request.toDataSourceResult(sessionFactory.getCurrentSession(), UrbanArea.class);
+    public List<UrbanArea> getList() {
+        return sessionFactory.getCurrentSession().createCriteria(UrbanArea.class).list();
     }
 }

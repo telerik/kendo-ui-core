@@ -1,14 +1,14 @@
 package com.kendoui.spring.controllers.map;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kendoui.spring.models.DataSourceRequest;
-import com.kendoui.spring.models.DataSourceResult;
+import com.kendoui.spring.models.UrbanArea;
 import com.kendoui.spring.models.UrbanAreaDao;
 
 @Controller("map-bubblelayer-controller")
@@ -23,8 +23,8 @@ public class BubbleLayerController {
     }
     
     @RequestMapping(value = "/bubble-layer/read", method = RequestMethod.POST)
-    public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
-        return urbanArea.getList(request);
+    public @ResponseBody List<UrbanArea> read() {
+        return urbanArea.getList();
     }
 }
 

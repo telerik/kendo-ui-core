@@ -1,5 +1,7 @@
 package com.kendoui.spring.models;
 
+import java.util.List;
+
 public interface UrbanAreaDao {
-    public DataSourceResult getList(DataSourceRequest request);
+    public List<UrbanArea> getList();
 }
