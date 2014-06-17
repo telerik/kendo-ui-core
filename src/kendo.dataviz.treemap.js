@@ -39,6 +39,7 @@ var __meta__ = {
             this.bind(this.events, this.options);
 
             this.src = new Squarified(this.options);
+            this.view = new SquarifiedView(element, this.options);
             //options.data[0].coords = {
             //    width: 960,
             //    height: 500,
@@ -111,6 +112,7 @@ var __meta__ = {
                 var item = this._wrapItem(items[0]);
                 item.coord = this.src.createRoot(900, 500);
                 this._items.push(item);
+                // Reference of the root
                 this._root = item;
             } else {
                 if (items) {
@@ -120,7 +122,8 @@ var __meta__ = {
                         var item = items[i];
                         root.children.push(this._wrapItem(item));
                     }
-                    //this.src.compute(this._items, root.coord);
+                    this.src.compute(root, root.coord);
+                    this.view.render(root);
                 }
             }
 
@@ -547,92 +550,115 @@ var __meta__ = {
         }
     });
 
-    var TreeMapItem = Class.extend({
-        init: function(options) {
+    var SquarifiedView = Class.extend({
+        init: function(element, options) {
             this.options = deepExtend({}, this.options, options);
+            this.element = $(element);
         },
 
         options: {
-            isLeaf: false,
             titleHeight: 16
         },
 
-        hover: function() {
-
+        _getByUid: function(uid) {
+            return this.element.find("[uid='" + uid + "']");
         },
 
-        render: function() {
-            this.element = this._createRoot();
+        render: function(root) {
+            var rootElement = this._getByUid(root.dataItem.uid);
+            if (!rootElement.length) {
+                rootElement = this._createLeaf(root);
+                this.element.append(rootElement);
+            }
+
+            var children = root.children;
+            if (children) {
+                this._clean(rootElement);
+                var rootWrap = this._createWrap(root);
+
+                for (var i = 0; i < children.length; i++) {
+                    var leaf = children[i];
+                    rootWrap.append(this._createLeaf(leaf));
+                }
+
+                rootElement.append(rootWrap);
+            }
+        },
+
+        _clean: function(root) {
+            root.css("background-color", "");
+            root.empty();
+        },
+
+        _createLeaf: function(item) {
+            var element = this._createTile(item);
 
             if (defined(this.options.template)) {
                 var rootTemplate = template(this.options.template);
-                this.element.append($(rootTemplate({
-                    dataItem: this.dataItem,
-                    title: this.titleText
+                element.append($(rootTemplate({
+                    dataItem: item.dataItem,
+                    title: item.title
                 })));
             } else {
-                if (this.options.isLeaf) {
-                    this.element.text(this._getTitleText()).css("background-color", getRandomColor());
-                } else {
-                    this.element
-                        .append(this._createTitle())
-                        .append(this.createWrap());
-                }
+                element
+                    .text(this._getTitleText(item))
+                    .css("background-color", valueOrDefault(item.color, getRandomColor()));
             }
 
-            return this.element;
+            return element;
         },
 
-        _createRoot: function() {
-            this._root = $("<div class='k-treemap-tile k-state-default k-tile-left k-tile-top'></div>")
-                .width(this.options.coord.width)
-                .height(this.options.coord.height)
+        _createTile: function(item) {
+            var root = $("<div class='k-treemap-tile k-state-default k-tile-left k-tile-top'></div>")
+                .width(item.coord.width)
+                .height(item.coord.height)
                 .offset({
-                    left: this.options.coord.left,
-                    top: this.options.coord.top
+                    left: item.coord.left,
+                    top: item.coord.top
                 });
 
-            if (this.options.uid) {
-                this._wrap.attr("uid", this.options.uid);
+            if (defined(item.dataItem) && defined(item.dataItem.uid)) {
+                root.attr("uid", item.dataItem.uid);
             }
 
-            return this._root;
+            return root;
         },
 
-        _getTitleText: function() {
-            var text = this.options.titleText;
+        _getTitleText: function(item) {
+            var text = item.title;
 
             if (this.options.titleTemplate) {
                 var titleTemplate = template(this.options.titleTemplate);
                 text = titleTemplate({
-                    dataItem: this.options.dataItem,
-                    title: this.options.titleText
+                    dataItem: item.dataItem,
+                    title: item.title
                 });
             }
 
             return text;
         },
 
-        _createTitle: function() {
+        _createTitle: function(item) {
             if (this.options.titleHeight) {
-
-                this._title = $("<div class='k-treemap-title k-state-default'></div>")
-                    .text(this._getTitleText());
-
-                return this._title;
+                return $("<div class='k-treemap-title k-state-default'></div>")
+                                .text(this._getTitleText(item));
             }
         },
 
-        _createWrap: function() {
-            this._wrap = $("<div class='k-treemap-tile k-state-default'></div>")
-                .width(this.options.coord.width)
-                .height(this.options.coord.height)
-                .left(this.options.coord.left)
-                .top(this.options.coord.top);
-
-            return this._wrap;
+        _createWrap: function(item) {
+            return $("<div class='k-treemap-tile k-state-default'></div>")
+                        .width(item.coord.width)
+                        .height(item.coord.height);
+                        //.offset({
+                        //    left: item.coord.left,
+                        //    top: item.coord.top
+                        //});
         }
     });
+
+    function valueOrDefault(value, defaultValue) {
+        return defined(value) ? value : defaultValue;
+    }
 
     function getField(field, row) {
         if (row === null) {
