@@ -48,6 +48,7 @@
         "./kendo.progressbar",
         "./kendo.tabstrip",
         "./kendo.timepicker",
+        "./kendo.toolbar",
         "./kendo.datetimepicker",
         "./kendo.treeview",
         "./kendo.slider",
