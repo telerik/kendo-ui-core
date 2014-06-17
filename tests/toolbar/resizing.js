@@ -187,7 +187,7 @@
             ]
         }).data("kendoToolBar");
 
-        container.width(130);
+        container.width(150);
         toolbar.resize();
 
         ok($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
@@ -212,7 +212,7 @@
             ]
         }).data("kendoToolBar");
 
-        container.width(130);
+        container.width(150);
         toolbar.resize();
 
         ok($("#bar_overflow").parent().hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
