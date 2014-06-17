@@ -715,7 +715,12 @@ var __meta__ = {
 
             this._adjustDimensions();
 
-            this.timeline.view(this.timeline._selectedViewName);
+            // Prevent extra refresh from setting the view
+            this._preventRefresh = true;
+
+            this.view(this.timeline._selectedViewName);
+
+            this._preventRefresh = false;
 
             this._dataSource();
 
@@ -888,8 +893,7 @@ var __meta__ = {
                     var name = $(this).attr(kendo.attr("name"));
 
                     if (!that.trigger("navigate", { view: name })) {
-                        that.timeline.view(name);
-                        that.refresh();
+                        that.view(name);
                     }
                 });
 
@@ -1057,6 +1061,8 @@ var __meta__ = {
                         .end()
                         .find(DOT + ganttStyles.toolbar.viewButton + "-" + e.view.replace(/\./g, "\\.").toLowerCase())
                         .addClass(ganttStyles.selected);
+
+                    that.refresh();
                 })
                 .bind("moveStart", function(e) {
                     if (that.trigger("moveStart", { task: e.task })) {

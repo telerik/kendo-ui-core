@@ -120,13 +120,11 @@
     test("view('name') calls timeline's view method", function() {
         gantt = new Gantt(element);
 
-        stub(gantt.timeline, {
-            view: function(name) {
-                ok(name);
-            }
-        });
+        stub(gantt.timeline, "view");
 
-        gantt.view("day");
+        gantt.view("week");
+
+        ok(gantt.timeline.calls("view"));
     });
 
     test("removeTask() triggers remove event", 1, function() {
