@@ -176,6 +176,23 @@
         gantt.removeTask(gantt.dataSource.at(0));
     });
 
+    test("removeTask() calls dataSource remove method with argument when uid passed as argument", 1, function() {
+        setupGantt({
+            data: [
+                { title: "foo", parentId: null, id: 1, summary: false },
+                { title: "bar", parentId: null, id: 2, summary: false }
+            ]
+        });
+
+        stub(gantt.dataSource, {
+            remove: function(task) {
+                equal(task.title, "foo");
+            }
+        });
+
+        gantt.removeTask(gantt.dataSource.at(0).uid);
+    });
+
     test("removeTask() canceling remove event prevents calling dataSource remove method", 1, function() {
         setupGantt({
             data: [
@@ -292,6 +309,23 @@
         });
 
         gantt.removeDependency(gantt.dependencies.at(0));
+    });
+
+    test("removeDependency() calls dataSource remove method with argument when uid passed as argument", 1, function() {
+        setupGantt({
+            dependencies: [
+                { id: 1, predecessorId: 1, successorId: 2, type: 0 },
+                { id: 2, predecessorId: 2, successorId: 4, type: 2 }
+            ]
+        });
+
+        stub(gantt.dependencies, {
+            remove: function(dependency) {
+                equal(dependency.id, 1);
+            }
+        });
+
+        gantt.removeDependency(gantt.dependencies.at(0).uid);
     });
 
     test("removeDependency() canceling remove event prevents calling dataSource remove method", 1, function() {
