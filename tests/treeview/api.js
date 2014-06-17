@@ -1047,6 +1047,32 @@
         });
     });
 
+    test("expandPath does not modify array parameter", function() {
+        createTreeView([
+            { id: 1, text: "foo", items: [
+                { id: 2, text: "bar" }
+            ] }
+        ]);
+
+        var path = [ 1 ];
+
+        treeviewObject.expandPath(path);
+
+        equal(path.length, 1);
+    });
+
+    test("expandPath callback uses treeview as context", function() {
+        createTreeView([
+            { id: 1, text: "foo", items: [
+                { id: 2, text: "bar" }
+            ] }
+        ]);
+
+        treeviewObject.expandPath([ 1 ], function() {
+            equal(this, treeviewObject);
+        });
+    });
+
     test("expandTo expands up to model", function() {
         createTreeView([
             { text: "foo", items: [
@@ -1102,25 +1128,27 @@
         teardown: TreeViewHelpers.destroy
     });
 
-    asyncTest("expandPath loads async nodes", 1, function() {
-        var timeout = setTimeout(start, 200);
-
+    asyncTest("expandPath loads async nodes", function() {
         treeviewObject.expandPath([ 1 ], function() {
-            clearTimeout(timeout);
             start();
 
             ok(get(1).expanded);
         });
     });
 
-    asyncTest("expandPath loads multiple async nodes", 1, function() {
-        var timeout = setTimeout(start, 200);
-
+    asyncTest("expandPath loads multiple async nodes", function() {
         treeviewObject.expandPath([ 1, 2, 3 ], function() {
-            clearTimeout(timeout);
             start();
 
             ok(get(3).expanded);
+        });
+    });
+
+    asyncTest("expandPath loads async nodes", function() {
+        treeviewObject.expandPath([ 1 ], function() {
+            start();
+
+            equal(this, treeviewObject);
         });
     });
 })();

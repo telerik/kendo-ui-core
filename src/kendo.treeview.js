@@ -1824,6 +1824,8 @@ var __meta__ = {
         },
 
         expandPath: function(path, complete) {
+            path = path.slice(0);
+            var treeview = this;
             var dataSource = this.dataSource;
             var node = dataSource.get(path[0]);
             complete = complete || $.noop;
@@ -1836,7 +1838,7 @@ var __meta__ = {
             }
 
             if (!path.length) {
-                return complete();
+                return complete.call(treeview);
             }
 
             // expand async nodes
@@ -1851,7 +1853,7 @@ var __meta__ = {
                     if (path.length) {
                         dataSource.get(path[0]).set("expanded", true);
                     } else {
-                        complete();
+                        complete.call(treeview);
                     }
                 }
             });
