@@ -597,6 +597,14 @@
             path.options.set("fill", { color: "red", opacity: 0.4 });
         });
 
+        test("optionsChange clears stroke", function() {
+            pathNode.removeAttr = function(name) {
+                equal(name, "fill");
+            };
+
+            path.options.set("fill", null);
+        });
+
         test("optionsChange sets stroke color", function() {
             pathNode.attr = function(name, value) {
                 equal(name, "stroke");
@@ -636,6 +644,14 @@
             };
 
             path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
+        });
+
+        test("optionsChange clears stroke", function() {
+            pathNode.removeAttr = function(name) {
+                equal(name, "stroke");
+            };
+
+            path.options.set("stroke", null);
         });
 
         test("options change renders transform", function() {

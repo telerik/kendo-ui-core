@@ -314,7 +314,11 @@
         optionsChange: function(e) {
             switch(e.field) {
                 case "fill":
-                    this.allAttr(this.mapFill(e.value));
+                    if (e.value) {
+                        this.allAttr(this.mapFill(e.value));
+                    } else {
+                        this.removeAttr("fill")
+                    }
                     break;
 
                 case "fill.color":
@@ -322,7 +326,11 @@
                     break;
 
                 case "stroke":
-                    this.allAttr(this.mapStroke(e.value));
+                    if (e.value) {
+                        this.allAttr(this.mapStroke(e.value));
+                    } else {
+                        this.removeAttr("stroke");
+                    }
                     break;
 
                 case TRANSFORM:
