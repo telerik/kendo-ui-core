@@ -16362,6 +16362,13 @@ Requires the dataSource option to be set.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>The value field for bubble layer symbols.
+The data item field should be a number.</description>
+            <name>valueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -16720,13 +16727,6 @@ will disable all animations in the widget.</description>
         <attribute>
             <description>The marker title. Displayed as browser tooltip.</description>
             <name>title</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The value field for bubble layer symbols.
-The data item field should be a number.</description>
-            <name>valueField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
