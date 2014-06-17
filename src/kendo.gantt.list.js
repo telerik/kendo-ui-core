@@ -438,6 +438,10 @@ var __meta__ = {
             }
         },
 
+        _setDataSource: function(dataSource) {
+            this.dataSource = dataSource;
+        },
+
         _editable: function() {
             var that = this;
             var listStyles = GanttList.styles;

@@ -1199,6 +1199,8 @@ var __meta__ = {
 
             this._dataSource();
 
+            this.list._setDataSource(this.dataSource);
+
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
