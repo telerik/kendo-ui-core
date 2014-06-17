@@ -1489,7 +1489,7 @@ var __meta__ = {
             var measures = options.measures || [];
             var measuresRowAxis = options.measuresAxis === "rows";
 
-            if (!columns.length && rows.length && !measures.length) {
+            if (!columns.length && rows.length && (!measures.length || (measures.length && measuresRowAxis))) {
                 columns = rows;
                 rows = [];
             }
