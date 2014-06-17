@@ -53,6 +53,10 @@
                     kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
                 }
 
+                function onShow(e) {
+                    kendoConsole.log("Shown: " + $(e.item).find("> .k-link").text());
+                }
+
                 function onActivate(e) {
                     kendoConsole.log("Activated: " + $(e.item).find("> .k-link").text());
                 }
@@ -68,6 +72,7 @@
                 $("#tabstrip").kendoTabStrip({
                     select: onSelect,
                     activate: onActivate,
+                    show: onShow,
                     contentLoad: onContentLoad,
                     error: onError,
                     contentUrls: [ , , , , , "../content/web/tabstrip/ajax/ajaxContent1.html", "error.html" ]
