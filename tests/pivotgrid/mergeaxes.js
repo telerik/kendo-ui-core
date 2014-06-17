@@ -686,7 +686,7 @@
         equal(tuples[0].members[1].children.length, 1, "one child tuple in second member");
     });
 
-    test("move column axis tuples to row axis", function() {
+    test("move column axis tuples to row axis if row descriptors", function() {
         var dataSource = new PivotDataSource({
             rows: ["member 0"],
             schema: {
@@ -720,6 +720,45 @@
         equal(axes.columns.tuples.length, 0);
         equal(axes.rows.tuples.length, 1);
         equal(axes.rows.tuples[0].members[0].name, "member 0");
+    });
+
+    test("move column axis tuples to row axis if measures on row axis", function() {
+        var dataSource = new PivotDataSource({
+            measures: {
+                values: [ "measure 1" ],
+                axis: "rows"
+            },
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    {
+                                        members: [
+                                            { name: "measure 1", children: [] }
+                                        ]
+                                    }
+                                ]
+                            },
+                            rows: { }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        equal(axes.columns.tuples.length, 0);
+        equal(axes.rows.tuples.length, 1);
+        equal(axes.rows.tuples[0].members[0].measure, true);
     });
 })();
 

@@ -449,8 +449,18 @@ var __meta__ = {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
             var tuples, resultAxis;
+            var columnDescriptors = this.columns().length;
+            var rowDescriptors = this.rows().length;
+            var hasColumnTuples = axes.columns && axes.columns.tuples;
 
-            if (!this.columns().length && this.rows().length && axes.columns && axes.columns.tuples) {
+            if (!columnDescriptors && rowDescriptors && hasColumnTuples) {
+                axes = {
+                    columns: {},
+                    rows: axes.columns
+                };
+            }
+
+            if (!columnDescriptors && !rowDescriptors && this.measuresAxis() === "rows" && hasColumnTuples) {
                 axes = {
                     columns: {},
                     rows: axes.columns
@@ -1499,6 +1509,10 @@ var __meta__ = {
             if (!columns.length && rows.length && (!measures.length || (measures.length && measuresRowAxis))) {
                 columns = rows;
                 rows = [];
+                measuresRowAxis = false;
+            }
+
+            if (!columns.length && !rows.length) {
                 measuresRowAxis = false;
             }
 
