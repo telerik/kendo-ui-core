@@ -6,7 +6,7 @@ $/ = "\r\n"
 
 puts %Q{
     CREATE TABLE UrbanAreas (
-        [ID] INT IDENTITY(1,1) NOT NULL,
+        [ID] INTEGER PRIMARY KEY AUTOINCREMENT,
         [City] NVARCHAR(256) NOT NULL,
         [Country] NVARCHAR(256) NOT NULL,
         [Latitude] DECIMAL(9,6) NOT NULL,
@@ -29,12 +29,9 @@ puts %Q{
         [Pop2020] INT NOT NULL,
         [Pop2025] INT NOT NULL,
         [Pop2050] INT NOT NULL
+    );
 
-        CONSTRAINT PK_UrbanAreas PRIMARY KEY CLUSTERED (ID)
-    )
-    GO
-
-    BEGIN TRANSACTION
+    BEGIN TRANSACTION;
 }
 
 CSV.foreach('urban-areas.tsv', { :headers => true, :col_sep => "\t" }) do |row|
@@ -48,7 +45,7 @@ CSV.foreach('urban-areas.tsv', { :headers => true, :col_sep => "\t" }) do |row|
         ('#{row['City'].gsub("'","''")}', '#{row['Country'].gsub("'","''")}', #{row['Latitude']}, #{row['Longitude']}, '#{row['Country_ISO3']}',
          #{row['Pop1950']}, #{row['Pop1955']}, #{row['Pop1960']}, #{row['Pop1965']}, #{row['Pop1970']}, #{row['Pop1975']},
          #{row['Pop1980']}, #{row['Pop1985']}, #{row['Pop1990']}, #{row['Pop1995']}, #{row['Pop2000']}, #{row['Pop2005']},
-         #{row['Pop2010']}, #{row['Pop2015']}, #{row['Pop2020']}, #{row['Pop2025']}, #{row['Pop2050']})
+         #{row['Pop2010']}, #{row['Pop2015']}, #{row['Pop2020']}, #{row['Pop2025']}, #{row['Pop2050']});
     }
 end
 
