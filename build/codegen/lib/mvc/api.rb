@@ -8,23 +8,27 @@ module CodeGen::MVC
     ]
 
     COMPONENT = ERB.new(%{---
-title:<%= name %>
-slug:aspnetmvc-<%= full_name.downcase %>
-publish:true
+title: <%= name %>
 ---
 
 # <%= full_name %>
 <%= summary %>
 <% if !fields.empty? %>
+
 ## Fields
+
 <%= fields.map { |field| field.to_markdown }.join %>
 <% end %>
 <% if !properties.empty? %>
+
 ## Properties
+
 <%= properties.map { |property| property.to_markdown }.join %>
 <% end %>
 <% if !methods.empty? %>
+
 ## Methods
+
 <%= methods.map { |method| method.to_markdown }.join %>
 <% end %>
 })
@@ -60,7 +64,7 @@ METHOD = ERB.new(%{
 ### <%= method_name %>
 <%= summary %>
 <% if owner.name.include?('EventBuilder') %>
-For additional information check the [<%= js_name %>](/kendo-ui/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
+For additional information check the [<%= js_name %>](/api/<%= suite %>/<%= owner.js_name %>#events-<%= js_name %>) event documentation.
 <% end %>
 <% if !parameters.empty? %>
 #### Parameters
@@ -87,7 +91,7 @@ For additional information check the [<%= js_name %>](/kendo-ui/api/<%= suite %>
         end
 
         def method_name
-            name.gsub('|', ',').gsub(/\((.*)\)/, '(`\1`)').sub(/(.*)T\d\(/, '\1(')
+            name.gsub('|', ',').gsub(/</,'\\<').gsub(/>/, '\\>').gsub(/\((.*)\)/, '(\1)').sub(/(.*)T\d\(/, '\1(')
         end
 
         def suite
@@ -109,7 +113,7 @@ PARAMETER = ERB.new(%{
                 if type.include?(namespace)
                     known = true
 
-                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/kendo-ui/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
+                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
                     break
                 end
             end
@@ -189,18 +193,20 @@ PARAMETER = ERB.new(%{
         end
     end
 
-    PROPERTY = ERB.new(%{### <%= name %>
+    PROPERTY = ERB.new(%{
+### <%= name %>
+
 <%= summary %>
 })
     class Property < Struct.new(:name, :summary)
         def to_markdown
             PROPERTY.result(binding)
         end
-
-
     end
 
-    FIELD = ERB.new(%{### <%= name %>
+    FIELD = ERB.new(%{
+### <%= name %>
+#
 <%= summary %>
 })
     class Field < Struct.new(:name, :summary)
