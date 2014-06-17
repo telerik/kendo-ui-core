@@ -581,7 +581,7 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var that = this,
+                var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
                     group, current;
@@ -630,7 +630,8 @@ var __meta__ = {
 
                 splitContainer = target.closest(".k-split-container");
                 if (splitContainer[0]) {
-                    splitContainer.parents(".km-popup-wrapper").data("kendoPopup").close();
+                    popup = splitContainer.data("kendoPopup");
+                    (popup ? popup : splitContainer.parents(".km-popup-wrapper").data("kendoPopup")).close();
                 }
             },
 
