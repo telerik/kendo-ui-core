@@ -456,7 +456,13 @@ var __meta__ = {
 
             var children = data.children;
             if (children && children.length > 0) {
-                this.layoutChildren(data, children, rootCoord);
+                var newRootCoord = {
+                    width: rootCoord.width,
+                    height: rootCoord.height,
+                    top: 0,
+                    left: 0
+                };
+                this.layoutChildren(data, children, newRootCoord);
 
                 for(var i = 0; i< children.length; i++) {
                     var coord = children[i].coord,
