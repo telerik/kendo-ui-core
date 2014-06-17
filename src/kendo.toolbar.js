@@ -402,6 +402,10 @@ var __meta__ = {
                         filter: "." + OVERFLOW_ANCHOR,
                         tap: proxy(that._toggleOverflow, that)
                     });
+
+                    kendo.onResize(function() {
+                        that.resize();
+                    });
                 }
 
                 if(options.items && options.items.length) {
