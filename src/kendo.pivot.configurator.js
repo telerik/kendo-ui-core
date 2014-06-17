@@ -98,6 +98,12 @@ var __meta__ = {
                     dragAndDrop: true,
                     autoBind: false,
                     dataSource: this._treeViewDataSource(),
+                    dragstart: function(e) {
+                        var dataItem = this.dataItem(e.sourceNode);
+                        if (!dataItem.hasChildren) {
+                            e.preventDefault();
+                        }
+                    },
                     drag: function(e) {
                         var status = "k-denied";
 
