@@ -337,7 +337,7 @@ var __meta__ = {
 
             this.element.css({
                 fontFamily: anchor.css("font-family"),
-                width: width
+                "min-width": width
             });
         }
 
