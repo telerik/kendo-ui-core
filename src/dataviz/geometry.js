@@ -79,6 +79,27 @@
             return this;
         },
 
+        translateWith: function(point) {
+            return this.translate(point.x, point.y);
+        },
+
+        scale: function(scaleX, scaleY) {
+            if (!defined(scaleY)) {
+                scaleY = scaleX;
+            }
+
+            this.x *= scaleX;
+            this.y *= scaleY;
+
+            this.geometryChange();
+
+            return this;
+        },
+
+        scaleCopy: function(scaleX, scaleY) {
+            return this.clone().scale(scaleX, scaleY);
+        },
+
         multiply: function(a) {
             this.x *= a;
             this.y *= a;
