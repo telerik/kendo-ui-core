@@ -1253,7 +1253,11 @@ var __meta__ = {
                 containment) || !containment)) {
                     DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
-                    that.bind(SELECT, that._closeTimeoutProxy);
+                    if (containment) {
+                        that.bind(SELECT, that._closeTimeoutProxy);
+                    } else {
+                        this.popup.close();
+                    }
             }
         },
 
