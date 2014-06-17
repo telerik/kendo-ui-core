@@ -450,6 +450,13 @@ var __meta__ = {
             var newData = this.reader.data(data);
             var tuples, resultAxis;
 
+            if (!this.columns().length && this.rows().length && axes.columns && axes.columns.tuples) {
+                axes = {
+                    columns: {},
+                    rows: axes.columns
+                };
+            }
+
             this._axes = {
                 columns: normalizeAxis(this._axes.columns),
                 rows: normalizeAxis(this._axes.rows)

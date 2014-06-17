@@ -685,5 +685,41 @@
         equal(tuples[0].members[0].children.length, 1, "one child tuple in first member");
         equal(tuples[0].members[1].children.length, 1, "one child tuple in second member");
     });
+
+    test("move column axis tuples to row axis", function() {
+        var dataSource = new PivotDataSource({
+            rows: ["member 0"],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    {
+                                        members: [
+                                            { name: "member 0", children: [] }
+                                        ]
+                                    }
+                                ]
+                            },
+                            rows: { }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+        equal(axes.columns.tuples.length, 0);
+        equal(axes.rows.tuples.length, 1);
+        equal(axes.rows.tuples[0].members[0].name, "member 0");
+    });
 })();
 
