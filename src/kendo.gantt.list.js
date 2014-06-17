@@ -77,6 +77,21 @@ var __meta__ = {
         return spans;
     }
 
+    function blurActiveElement() {
+        var active = $(activeElement());
+
+        if (browser.opera || oldIE) {
+            active.change().triggerHandler("blur");
+        } else {
+            active.blur();
+            if (isIE) {
+                //IE10 with jQuery 1.9.x does not trigger blur handler
+                //numeric textbox does trigger change
+                active.blur();
+            }
+        }
+    }
+
     var GanttList = ui.GanttList = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -447,22 +462,12 @@ var __meta__ = {
                 })
                 .on("keydown" + NS, function(e) {
                     var key = e.keyCode;
-                    var active = $(activeElement());
                     var cell;
                     var model;
 
                     switch (key) {
                         case keys.ENTER:
-                            if (browser.opera || oldIE) {
-                                active.change().triggerHandler("blur");
-                            } else {
-                                active.blur();
-                                if (isIE) {
-                                    //IE10 with jQuery 1.9.x does not trigger blur handler
-                                    //numeric textbox does trigger change
-                                    active.blur();
-                                }
-                            }
+                            blurActiveElement();
                             finishEdit();
                             break;
                         case keys.ESC:
@@ -476,6 +481,13 @@ var __meta__ = {
                 })
                 .kendoTouch({
                     filter: "td",
+                    touchstart: function(e) {
+                        var currentTarget = $(e.touch.currentTarget);
+
+                        if (!currentTarget.hasClass(listStyles.editCell)) {
+                            blurActiveElement();
+                        }
+                    },
                     doubletap: function(e) {
                         var event = e.touch;
 

@@ -18,6 +18,10 @@ var __meta__ = {
     var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
+    var activeElement = kendo._activeElement;
+    var browser = kendo.support.browser;
+    var isIE = browser.msie;
+    var oldIE = isIE && browser.version < 9;
     var keys = kendo.keys;
     var Query = kendo.data.Query;
     var NS = ".kendoGanttTimeline";
@@ -77,6 +81,21 @@ var __meta__ = {
             workDays.push(dayIndex);
         }
         return workDays;
+    }
+
+    function blurActiveElement() {
+        var active = $(activeElement());
+
+        if (browser.opera || oldIE) {
+            active.change().triggerHandler("blur");
+        } else {
+            active.blur();
+            if (isIE) {
+                //IE10 with jQuery 1.9.x does not trigger blur handler
+                //numeric textbox does trigger change
+                active.blur();
+            }
+        }
     }
 
     var viewStyles = {
@@ -1653,6 +1672,9 @@ var __meta__ = {
                 })
                 .bind("dragcancel", function(e) {
                     cleanUp();
+                })
+                .userEvents.bind("select", function(e) {
+                    blurActiveElement();
                 });
         },
 
@@ -1739,6 +1761,9 @@ var __meta__ = {
                 })
                 .bind("dragcancel", function(e) {
                     cleanUp();
+                })
+                .userEvents.bind("select", function(e) {
+                    blurActiveElement();
                 });
         },
 
@@ -1823,6 +1848,9 @@ var __meta__ = {
                     updateElement(originalPercentWidth);
 
                     cleanUp();
+                })
+                .userEvents.bind("select", function(e) {
+                    blurActiveElement();
                 });
         },
 
@@ -1933,6 +1961,9 @@ var __meta__ = {
                 })
                 .bind("dragcancel", function(e) {
                     cleanUp();
+                })
+                .userEvents.bind("select", function(e) {
+                    blurActiveElement();
                 });
         },
 
