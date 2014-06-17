@@ -16,6 +16,16 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget;
 
+
+    function settingTargetFromNode(node) {
+        var target = $(node).closest(".k-pivot-configurator-settings");
+
+        if (target.length) {
+            return target.data("kendoPivotSettingTarget");
+        }
+        return null;
+    }
+
     var PivotConfigurator = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
@@ -80,11 +90,34 @@ var __meta__ = {
         },
 
         _layout: function() {
+            var that = this;
+
             this.treeView = $("<div/>").appendTo(this.element)
                 .kendoTreeView({
                     dataTextField: "name",
+                    dragAndDrop: true,
                     autoBind: false,
-                    dataSource: this._treeViewDataSource()
+                    dataSource: this._treeViewDataSource(),
+                    drag: function(e) {
+                        var status = "k-denied";
+
+                        var setting = settingTargetFromNode(e.dropTarget);
+                        if (setting && setting.validate(this.dataItem(e.sourceNode))) {
+                            status = "k-add";
+                        }
+
+                        e.setStatusClass(status);
+                    },
+                    drop: function(e) {
+                        e.preventDefault();
+
+                        var setting = settingTargetFromNode(e.dropTarget);
+                        var node = this.dataItem(e.sourceNode);
+
+                        if (setting && setting.validate(node)) {
+                            setting.add(node.defaultHierarchy || node.uniqueName);
+                        }
+                    }
                  })
                 .data("kendoTreeView");
 
