@@ -39,6 +39,7 @@
         <EntityTypeShape EntityType="SampleModel.GanttDependency" Width="1.5" PointX="8.375" PointY="15.5" />
         <EntityTypeShape EntityType="SampleModel.GanttTask" Width="1.5" PointX="10.125" PointY="15.5" />
         <AssociationConnector Association="SampleModel.FK_GanttTasks_GanttTasks" />
+        <EntityTypeShape EntityType="SampleModel.UrbanArea" Width="1.5" PointX="1.4793553787653127" PointY="15.978519208719265" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

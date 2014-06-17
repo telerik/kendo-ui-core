@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Bing = new MapLayerDefaultsBingSettings();
                 
+            Bubble = new MapLayerDefaultsBubbleSettings();
+                
             Shape = new MapLayerDefaultsShapeSettings();
                 
             Tile = new MapLayerDefaultsTileSettings();
@@ -34,6 +36,12 @@ namespace Kendo.Mvc.UI
         }
         
         public MapLayerDefaultsShapeSettings Shape
+        {
+            get;
+            set;
+        }
+        
+        public MapLayerDefaultsBubbleSettings Bubble
         {
             get;
             set;
@@ -67,6 +75,12 @@ namespace Kendo.Mvc.UI
             if (shape.Any())
             {
                 json["shape"] = shape;
+            }
+                
+            var bubble = Bubble.ToJson();
+            if (bubble.Any())
+            {
+                json["bubble"] = bubble;
             }
                 
             var tile = Tile.ToJson();

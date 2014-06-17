@@ -48,7 +48,6 @@
             this._mouseleave = this._handler("shapeMouseLeave");
             this.surface.bind("mouseleave", this._mouseleave);
 
-            this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
         },
 
@@ -95,12 +94,16 @@
         },
 
         _dataChange: function(e) {
-            this._load(e.sender.view());
+            this._data = e.sender.view();
+            this._load(this._data);
         },
 
         _load: function(data) {
-            this._data = data;
             this._clearMarkers();
+
+            if (!this._loader) {
+                this._loader = new GeoJSONLoader(this.map, this.options.style, this);
+            }
 
             for (var i = 0; i < data.length; i++) {
                 var shape = this._loader.parse(data[i]);

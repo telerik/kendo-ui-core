@@ -60,5 +60,49 @@ namespace Kendo.Mvc.UI.Tests.Map.Serialization
         {
             layer.ToJson().ContainsKey("tooltip").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Serializes_symbol_type()
+        {
+            layer.Symbol = MapSymbol.Circle;
+            layer.ToJson()["symbol"].ShouldEqual("circle");
+        }
+
+        [Fact]
+        public void Serializes_symbol_name()
+        {
+            layer.SymbolName = "foo";
+            layer.ToJson()["symbol"].ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Serializes_symbol_handler()
+        {
+            layer.SymbolHandler = new ClientHandlerDescriptor { HandlerName = "foo" };
+            layer.ToJson()["symbol"].ShouldEqual(layer.SymbolHandler);
+        }
+
+        [Fact]
+        public void Serializes_symbol_name_over_symbol()
+        {
+            layer.SymbolName = "foo";
+            layer.Symbol = MapSymbol.Circle;
+            layer.ToJson()["symbol"].ShouldEqual("foo");
+        }
+
+        [Fact]
+        public void Serializes_symbol_handler_over_symbol_and_name()
+        {
+            layer.SymbolHandler = new ClientHandlerDescriptor { HandlerName = "foo" };
+            layer.SymbolName = "bar";
+            layer.Symbol = MapSymbol.Circle;
+            layer.ToJson()["symbol"].ShouldEqual(layer.SymbolHandler);
+        }
+
+        [Fact]
+        public void Does_not_serialize_symbol()
+        {
+            layer.ToJson().ContainsKey("symbol").ShouldBeFalse();
+        }
     }
 }

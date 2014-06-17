@@ -44,5 +44,6 @@ namespace Kendo.Mvc.Examples.Models
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<GanttDependency> GanttDependencies { get; set; }
         public DbSet<GanttTask> GanttTasks { get; set; }
+        public DbSet<UrbanArea> UrbanAreas { get; set; }
     }
 }

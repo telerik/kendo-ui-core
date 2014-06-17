@@ -24,6 +24,15 @@ class MapLayerDefaults extends \Kendo\SerializableObject {
     }
 
     /**
+    * The default configuration for bubble layers.
+    * @param \Kendo\Dataviz\UI\MapLayerDefaultsBubble|array $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaults
+    */
+    public function bubble($value) {
+        return $this->setProperty('bubble', $value);
+    }
+
+    /**
     * The default configuration for tile layers.
     * @param \Kendo\Dataviz\UI\MapLayerDefaultsTile|array $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaults

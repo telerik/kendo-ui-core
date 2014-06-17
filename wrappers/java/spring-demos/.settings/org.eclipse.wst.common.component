@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="spring-demos">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <dependent-module archiveName="kendo-taglib-2014.1.224.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/kendo-taglib/kendo-taglib">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="spring-demos"/>
         <property name="java-output-path" value="/spring-demos/target/classes"/>
     </wb-module>

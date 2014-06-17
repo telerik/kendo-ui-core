@@ -90,6 +90,18 @@
                         }
                     }
                 },
+                bubble: {
+                    style: {
+                        fill: {
+                            color: "#fff",
+                            opacity: 0.5
+                        },
+                        stroke: {
+                            color: "#aaa",
+                            width: 0.5
+                        }
+                    }
+                },
                 marker: {
                     shape: "pinTarget",
                     tooltip: {

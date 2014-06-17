@@ -6612,8 +6612,20 @@
         }
       },
       {
-        "text": "Bing",
+        "text": "Bing tile layer",
         "url": "map/bing"
+      },
+      {
+        "text": "Bubble layer",
+        "url": "map/bubble-layer",
+        "title": {
+            "kendo-ui": "Displaying Bubble Kendo UI map layer"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how to bind a Kendo UI bubble map layer to remote data."
+        },
+        "new": true,
+        "requiresServer": "true"
       },
       {
         "text": "Binding to GeoJSON",

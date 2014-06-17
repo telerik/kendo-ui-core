@@ -11,6 +11,7 @@
         "./dataviz/map/crs",
         "./dataviz/map/layers/base",
         "./dataviz/map/layers/shape",
+        "./dataviz/map/layers/bubble",
         "./dataviz/map/layers/tile",
         "./dataviz/map/layers/bing",
         "./dataviz/map/layers/marker",

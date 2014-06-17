@@ -26,6 +26,7 @@
           <EntitySet Name="Suppliers" EntityType="SampleModel.Store.Suppliers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tasks" EntityType="SampleModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Territories" EntityType="SampleModel.Store.Territories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UrbanAreas" EntityType="SampleModel.Store.UrbanAreas" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Weather" EntityType="SampleModel.Store.Weather" store:Type="Tables" store:Schema="dbo" store:Name="Weather">
             <DefiningQuery>SELECT 
       [Weather].[ID] AS [ID], 
@@ -357,6 +358,34 @@
           <Property Name="TerritoryDescription" Type="nchar" Nullable="false" MaxLength="50" />
           <Property Name="RegionID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UrbanAreas">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Country" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Latitude" Type="decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Country_ISO3" Type="char" Nullable="false" MaxLength="3" />
+          <Property Name="Pop1950" Type="int" Nullable="false" />
+          <Property Name="Pop1955" Type="int" Nullable="false" />
+          <Property Name="Pop1960" Type="int" Nullable="false" />
+          <Property Name="Pop1965" Type="int" Nullable="false" />
+          <Property Name="Pop1970" Type="int" Nullable="false" />
+          <Property Name="Pop1975" Type="int" Nullable="false" />
+          <Property Name="Pop1980" Type="int" Nullable="false" />
+          <Property Name="Pop1985" Type="int" Nullable="false" />
+          <Property Name="Pop1990" Type="int" Nullable="false" />
+          <Property Name="Pop1995" Type="int" Nullable="false" />
+          <Property Name="Pop2000" Type="int" Nullable="false" />
+          <Property Name="Pop2005" Type="int" Nullable="false" />
+          <Property Name="Pop2010" Type="int" Nullable="false" />
+          <Property Name="Pop2015" Type="int" Nullable="false" />
+          <Property Name="Pop2020" Type="int" Nullable="false" />
+          <Property Name="Pop2025" Type="int" Nullable="false" />
+          <Property Name="Pop2050" Type="int" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'C:\WORK\KENDO\WRAPPERS\MVC\DEMOS\KENDO.MVC.EXAMPLES\APP_DATA\SAMPLE.MDF.dbo.Weather' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
@@ -669,6 +698,7 @@
             <End Role="GanttTask" EntitySet="GanttTasks" />
             <End Role="GanttTask1" EntitySet="GanttTasks" />
           </AssociationSet>
+          <EntitySet Name="UrbanAreas" EntityType="SampleModel.UrbanArea" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -1117,6 +1147,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UrbanArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Latitude" Nullable="false" Precision="9" Scale="6" />
+          <Property Type="Decimal" Name="Longitude" Nullable="false" Precision="9" Scale="6" />
+          <Property Type="String" Name="Country_ISO3" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="Pop1950" Nullable="false" />
+          <Property Type="Int32" Name="Pop1955" Nullable="false" />
+          <Property Type="Int32" Name="Pop1960" Nullable="false" />
+          <Property Type="Int32" Name="Pop1965" Nullable="false" />
+          <Property Type="Int32" Name="Pop1970" Nullable="false" />
+          <Property Type="Int32" Name="Pop1975" Nullable="false" />
+          <Property Type="Int32" Name="Pop1980" Nullable="false" />
+          <Property Type="Int32" Name="Pop1985" Nullable="false" />
+          <Property Type="Int32" Name="Pop1990" Nullable="false" />
+          <Property Type="Int32" Name="Pop1995" Nullable="false" />
+          <Property Type="Int32" Name="Pop2000" Nullable="false" />
+          <Property Type="Int32" Name="Pop2005" Nullable="false" />
+          <Property Type="Int32" Name="Pop2010" Nullable="false" />
+          <Property Type="Int32" Name="Pop2015" Nullable="false" />
+          <Property Type="Int32" Name="Pop2020" Nullable="false" />
+          <Property Type="Int32" Name="Pop2025" Nullable="false" />
+          <Property Type="Int32" Name="Pop2050" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1399,6 +1457,35 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UrbanAreas">
+            <EntityTypeMapping TypeName="SampleModel.UrbanArea">
+              <MappingFragment StoreEntitySet="UrbanAreas">
+                <ScalarProperty Name="Pop2050" ColumnName="Pop2050" />
+                <ScalarProperty Name="Pop2025" ColumnName="Pop2025" />
+                <ScalarProperty Name="Pop2020" ColumnName="Pop2020" />
+                <ScalarProperty Name="Pop2015" ColumnName="Pop2015" />
+                <ScalarProperty Name="Pop2010" ColumnName="Pop2010" />
+                <ScalarProperty Name="Pop2005" ColumnName="Pop2005" />
+                <ScalarProperty Name="Pop2000" ColumnName="Pop2000" />
+                <ScalarProperty Name="Pop1995" ColumnName="Pop1995" />
+                <ScalarProperty Name="Pop1990" ColumnName="Pop1990" />
+                <ScalarProperty Name="Pop1985" ColumnName="Pop1985" />
+                <ScalarProperty Name="Pop1980" ColumnName="Pop1980" />
+                <ScalarProperty Name="Pop1975" ColumnName="Pop1975" />
+                <ScalarProperty Name="Pop1970" ColumnName="Pop1970" />
+                <ScalarProperty Name="Pop1965" ColumnName="Pop1965" />
+                <ScalarProperty Name="Pop1960" ColumnName="Pop1960" />
+                <ScalarProperty Name="Pop1955" ColumnName="Pop1955" />
+                <ScalarProperty Name="Pop1950" ColumnName="Pop1950" />
+                <ScalarProperty Name="Country_ISO3" ColumnName="Country_ISO3" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

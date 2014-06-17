@@ -2047,4 +2047,17 @@
     <Compile Include="UI\Gantt\Fluent\GanttBuilder.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttEventBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Gantt\Settings\GanttMessagesSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesSettingsBuilder.cs" /><Compile Include="UI\Gantt\Settings\GanttMessagesActionsSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesActionsSettingsBuilder.cs" /><Compile Include="UI\Gantt\Settings\GanttMessagesViewsSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesViewsSettingsBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Gantt\GanttType.cs" /><Compile Include="UI\Gantt\Fluent\GanttViewFactory.cs" /><Compile Include="UI\Gantt\GanttView.cs" /><Compile Include="UI\Gantt\Fluent\GanttViewBuilder.cs" /></ItemGroup></Project>
+<ItemGroup><Compile Include="UI\Gantt\Settings\GanttMessagesSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesSettingsBuilder.cs" /><Compile Include="UI\Gantt\Settings\GanttMessagesActionsSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesActionsSettingsBuilder.cs" /><Compile Include="UI\Gantt\Settings\GanttMessagesViewsSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttMessagesViewsSettingsBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Gantt\GanttType.cs" /><Compile Include="UI\Gantt\Fluent\GanttViewFactory.cs" /><Compile Include="UI\Gantt\GanttView.cs" /><Compile Include="UI\Gantt\Fluent\GanttViewBuilder.cs" /></ItemGroup>
+
+<ItemGroup>
+  <Compile Include="UI\Map\MapSymbol.cs" />
+  <Compile Include="UI\Map\Settings\MapLayerDefaultsBubbleSettings.cs" />
+  <Compile Include="UI\Map\Fluent\MapLayerDefaultsBubbleSettingsBuilder.cs" />
+  <Compile Include="UI\Map\Settings\MapLayerDefaultsBubbleStyleSettings.cs" />
+  <Compile Include="UI\Map\Fluent\MapLayerDefaultsBubbleStyleSettingsBuilder.cs" />
+  <Compile Include="UI\Map\Settings\MapLayerDefaultsBubbleStyleFillSettings.cs" />
+  <Compile Include="UI\Map\Fluent\MapLayerDefaultsBubbleStyleFillSettingsBuilder.cs" />
+  <Compile Include="UI\Map\Settings\MapLayerDefaultsBubbleStyleStrokeSettings.cs" />
+  <Compile Include="UI\Map\Fluent\MapLayerDefaultsBubbleStyleStrokeSettingsBuilder.cs" />
+</ItemGroup>
+</Project>

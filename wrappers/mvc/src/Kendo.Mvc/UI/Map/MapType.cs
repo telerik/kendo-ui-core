@@ -9,7 +9,9 @@ namespace Kendo.Mvc.UI
         
         Shape ,
         
-        Marker 
+        Marker ,
+        
+        Bubble 
         
     }
 }

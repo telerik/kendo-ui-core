@@ -38,11 +38,6 @@ namespace Kendo.Mvc.UI
                 json["opacity"] = Opacity;
             }
                 
-            if (Shape.HasValue)
-            {
-                json["shape"] = Shape;
-            }
-                
         //<< Serialization
 
             var tooltip = Tooltip.ToJson();
