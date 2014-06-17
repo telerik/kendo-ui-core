@@ -21,6 +21,8 @@ namespace Kendo.Mvc.UI
         
             Messages = new GanttMessagesSettings();
                 
+            Views = new List<GanttView>();
+                
         //<< Initialization
         }
 
@@ -57,6 +59,12 @@ namespace Kendo.Mvc.UI
         public bool? ShowWorkDays { get; set; }
         
         public bool? ShowWorkHours { get; set; }
+        
+        public List<GanttView> Views
+        {
+            get;
+            set;
+        }
         
         //<< Fields
 
@@ -135,6 +143,12 @@ namespace Kendo.Mvc.UI
             if (ShowWorkHours.HasValue)
             {
                 json["showWorkHours"] = ShowWorkHours;
+            }
+                
+            var views = Views.ToJson();
+            if (views.Any())
+            {
+                json["views"] = views;
             }
                 
         //<< Serialization

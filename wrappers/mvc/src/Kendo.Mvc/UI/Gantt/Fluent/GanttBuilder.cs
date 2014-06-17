@@ -176,6 +176,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+		/// By default the Kendo UI Gantt widget displays the "day" and "week" views.
+        /// </summary>
+        /// <param name="configurator">The action that configures the views.</param>
+        public GanttBuilder<T> Views(Action<GanttViewFactory> configurator)
+        {
+            configurator(new GanttViewFactory(container.Views));
+            return this;
+        }
+        
         //<< Fields
 
 

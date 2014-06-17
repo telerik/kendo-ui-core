@@ -1,0 +1,9 @@
+:options:
+    - :name: views.type
+      :type: String
+      :description: The view type. Supported types are "day", "week", and "month".
+      :values:
+          - day
+          - week
+          - month
+
