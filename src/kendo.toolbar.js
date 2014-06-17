@@ -71,7 +71,7 @@ var __meta__ = {
                     element.data({ type: "buttonGroup" });
 
                     for (var i = 0; i < items.length; i++) {
-                        item = initializer($.extend({}, options, items[i]));
+                        item = initializer($.extend({mobile: options.mobile}, items[i]));
                         item.appendTo(element);
                     }
 
@@ -89,7 +89,7 @@ var __meta__ = {
                     return element;
                 },
                 overflow: function (options) {
-                    var element = $('<li class="' + BUTTON_GROUP + ' k-overflow-group"></li>');
+                    var element = $('<li class="' + (options.mobile ? "" : BUTTON_GROUP) + ' k-overflow-group"></li>');
                     components.buttonGroup.base(options, components.button.overflow, element);
 
                     if (options.id) {
@@ -104,7 +104,8 @@ var __meta__ = {
                 toolbar: function(options) {
                     var element = $('<div class="' + SPLIT_BUTTON + '"></div>'),
                         mainButton = components.button.toolbar(options),
-                        arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' + (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>'),
+                        arrowButton = $('<a class="' + BUTTON + " " + SPLIT_BUTTON_ARROW + '"><span class="' +
+                                       (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>'),
                         popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>'),
                         popup,
                         items = options.items,
@@ -115,7 +116,7 @@ var __meta__ = {
                     popupElement.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
-                        item = components.button.toolbar(items[i]);
+                        item = components.button.toolbar($.extend({mobile: options.mobile}, items[i]));
                         item.wrap("<li></li>").parent().appendTo(popupElement);
                     }
 
@@ -128,7 +129,7 @@ var __meta__ = {
 
                     if (options.mobile && kendo.mobile.ui.ActionSheet) {
                         popup = new kendo.mobile.ui.ActionSheet(popupElement, {
-                            tablet: true,
+                            type: "tablet",
                             open: function () {
                                 kendo.wrap(popup.shim.wrapper)
                                     .addClass("k-split-wrapper");
@@ -141,6 +142,8 @@ var __meta__ = {
                             open: adjustPopupWidth
                         }).data("kendoPopup");
                     }
+
+                    popupElement.parent().attr(kendo.attr("uid"), options.rootUid);
 
                     element.data({
                         type: "splitButton",
@@ -158,7 +161,7 @@ var __meta__ = {
                     mainButton.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
-                        item = components.button.overflow(items[i]);
+                        item = components.button.overflow($.extend({mobile: options.mobile}, items[i]));
                         item.appendTo(element);
                     }
 
@@ -264,7 +267,11 @@ var __meta__ = {
             }
 
             if (options.showText != "toolbar" && options.text) {
-                element.text(options.text);
+                if (options.mobile) {
+                    element.html('<span class="km-text">' + options.text + "</span>");
+                } else {
+                    element.text(options.text);
+                }
             }
 
             hasIcon = (options.showIcon != "toolbar") && (options.icon || options.spriteCssClass || options.imageUrl);
@@ -458,7 +465,8 @@ var __meta__ = {
                 $.extend(options, {
                     uid: kendo.guid(),
                     animation: that.animation,
-                    mobile: that.isMobile
+                    mobile: that.isMobile,
+                    rootUid: that.uid
                 });
 
                 if (template && !overflowTemplate) {
@@ -551,7 +559,8 @@ var __meta__ = {
 
                 if (that.isMobile && kendo.mobile.ui.ActionSheet) {
                     that.popup = new kendo.mobile.ui.ActionSheet(components.overflowContainer, {
-                        tablet: true,
+                        type: "tablet",
+                        popup: { autosize: false },
                         open: function () {
                             kendo.wrap(that.popup.shim.wrapper)
                                 .addClass("k-overflow-wrapper");
