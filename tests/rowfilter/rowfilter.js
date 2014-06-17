@@ -179,4 +179,5 @@
         equal(filters[0].field, "bar");
         equal(filters[0].operator, "neq");
     });
+
 })();

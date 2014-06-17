@@ -62,6 +62,7 @@ var __meta__ = {
                     options,
                     dataSource,
                     viewModel,
+                    field,
                     input = that.input = $("<input/>")
                         .attr(kendo.attr("bind"), "value: value")
                         .appendTo(element);
@@ -74,10 +75,26 @@ var __meta__ = {
             }
             dataSource = that.dataSource = options.dataSource;
             //gets the type from the dataSource or sets default to string
+            that.model = dataSource.options.schema.model;
             options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || "string";
 
 
             element.addClass("grid-filter-header");
+
+            that._parse = function(value) {
+                 return value + "";
+            };
+
+            if (that.model && that.model.fields) {
+                field = that.model.fields[options.field];
+
+                if (field) {
+                    type = field.type || "string";
+                    if (field.parse) {
+                        that._parse = proxy(field.parse, field);
+                    }
+                }
+            }
 
             that.viewModel = viewModel = kendo.observable({
                 operator: options.operator || "eq",
@@ -90,7 +107,7 @@ var __meta__ = {
                 options.template.call(viewModel, input);
             }
 
-            kendo.bind(element, viewModel);
+            kendo.bind(input, viewModel);
             that.refreshUI();
 
             that._refreshHandler = proxy(that.refreshUI, that);
@@ -155,6 +172,11 @@ var __meta__ = {
             filters = $.grep(filters, function(filter) {
                 return filter.value !== "" && filter.value != null;
             });
+
+            for (idx = 0, length = filters.length; idx < length; idx++) {
+                filter = filters[idx];
+                filter.value = that._parse(filter.value);
+            }
 
             if (filters.length) {
                 if (result.filters.length) {
