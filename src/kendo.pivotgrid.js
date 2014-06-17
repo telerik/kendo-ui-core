@@ -448,6 +448,7 @@ var __meta__ = {
         _readData: function(data) {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
+            var tuples, resultAxis;
 
             this._axes = {
                 columns: normalizeAxis(this._axes.columns),
@@ -459,10 +460,9 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
-            var tuples, resultAxis;
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
-                resultAxis = validateAxis(axes.columns, this._axes.columns);
+                resultAxis = validateAxis(axes.columns, this._axes.columns, this._columnMeasures());
 
                 if (resultAxis) {
                     axes.columns = resultAxis;
@@ -470,7 +470,7 @@ var __meta__ = {
                 }
             } else if (this._lastExpanded == "columns") {
                 tuples = axes.rows.tuples;
-                resultAxis = validateAxis(axes.rows, this._axes.rows);
+                resultAxis = validateAxis(axes.rows, this._axes.rows, this._rowMeasures());
 
                 if (resultAxis) {
                     axes.rows = resultAxis;
@@ -489,49 +489,34 @@ var __meta__ = {
         },
 
         _mergeAxes: function(sourceAxes, data) {
-            var measures = this.measures();
-            var columnMeasures = [];
-            var rowMeasures = [];
+            var columnMeasures = this._columnMeasures();
+            var rowMeasures = this._rowMeasures();
             var axes = this.axes();
             var startIndex;
 
-            if (this.measuresAxis() === "columns") {
-                if (this.columns().length === 0) {
-                    columnMeasures = measures;
-                } else if (measures.length > 1) {
-                    columnMeasures = measures;
-                }
-            } else {
-                if (this.rows().length === 0) {
-                    columnMeasures = measures;
-                } else if (measures.length > 1) {
-                    rowMeasures = measures;
-                }
-            }
-
             var newColumnsLength = sourceAxes.columns.tuples.length;
             var newRowsLength = sourceAxes.rows.tuples.length;
-            var oldColumnsLength = membersCount(axes.columns.tuples);
+            var oldColumnsLength = membersCount(axes.columns.tuples, columnMeasures);
 
             var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
             data = prepareDataOnColumns(tuples, data);
-            var mergedColumns = mergeTuples(axes.columns.tuples, tuples);
+            var mergedColumns = mergeTuples(axes.columns.tuples, tuples, columnMeasures);
 
             tuples = parseSource(sourceAxes.rows.tuples, rowMeasures);
             data = prepareDataOnRows(tuples, data);
-            var mergedRows = mergeTuples(axes.rows.tuples, tuples);
+            var mergedRows = mergeTuples(axes.rows.tuples, tuples, rowMeasures);
 
             axes.columns.tuples = mergedColumns.tuples;
             axes.rows.tuples = mergedRows.tuples;
 
-            if (oldColumnsLength !== membersCount(axes.columns.tuples)) {
+            if (oldColumnsLength !== membersCount(axes.columns.tuples, columnMeasures)) {
                 //columns are expanded
-                startIndex = mergedColumns.index + findDataIndex(mergedColumns.parsedRoot, mergedColumns.memberIndex);
+                startIndex = mergedColumns.index + findDataIndex(mergedColumns.parsedRoot, mergedColumns.memberIndex, columnMeasures);
                 var offset = oldColumnsLength + newColumnsLength;
                 data = this._mergeColumnData(data, startIndex, newRowsLength, newColumnsLength, offset);
             } else {
                 //rows are expanded
-                startIndex = mergedRows.index + findDataIndex(mergedRows.parsedRoot, mergedRows.memberIndex);
+                startIndex = mergedRows.index + findDataIndex(mergedRows.parsedRoot, mergedRows.memberIndex, rowMeasures);
                 data = this._mergeRowData(data, startIndex, newRowsLength, newColumnsLength);
             }
 
@@ -544,13 +529,14 @@ var __meta__ = {
         _mergeColumnData: function(newData, columnIndex, rowsLength, columnsLength, offset) {
             var data = this.data().toJSON();
             var rowIndex, index, drop = 0, toAdd;
+            var measures = Math.max(this._columnMeasures().length, 1);
 
             rowsLength = Math.max(rowsLength, 1);
 
             if (data.length > 0) {
                 //if there is already data, drop the first new data item
-                drop = 1;
-                offset--;
+                drop = measures;
+                offset -= measures;
             }
 
             for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
@@ -581,6 +567,36 @@ var __meta__ = {
             }
 
             return data;
+        },
+
+        _columnMeasures: function() {
+            var measures = this.measures();
+            var columnMeasures = [];
+
+            if (this.measuresAxis() === "columns") {
+                if (this.columns().length === 0) {
+                    columnMeasures = measures;
+                } else if (measures.length > 1) {
+                    columnMeasures = measures;
+                }
+            }
+
+            return columnMeasures;
+        },
+
+        _rowMeasures: function() {
+            var measures = this.measures();
+            var rowMeasures = [];
+
+            if (this.measuresAxis() === "rows") {
+                if (this.rows().length === 0) {
+                    rowMeasures = measures;
+                } else if (measures.length > 1) {
+                    rowMeasures = measures;
+                }
+            }
+
+            return rowMeasures;
         },
 
         _normalizeData: function(data, axes) {
@@ -753,12 +769,12 @@ var __meta__ = {
         }
     });
 
-    function validateAxis(newAxis, axis) {
+    function validateAxis(newAxis, axis, measures) {
         var root, tuples = newAxis.tuples;
 
-        if (tuples.length < membersCount(axis.tuples)) {
+        if (tuples.length < membersCount(axis.tuples, measures)) {
 
-            root = mergeTuples(axis.tuples.slice(), tuples);
+            root = mergeTuples(axis.tuples.slice(), tuples, measures);
 
             newAxis.tuples = tuples.slice(0, 1).concat(unflattenTuple(root.parsedRoot));
 
@@ -808,10 +824,10 @@ var __meta__ = {
 
     function unflattenTuple(tuple) {
         var result = [];
-
         var members = tuple.members.slice();
         var current = members.shift();
         var idx, length, child, children;
+
         while (current) {
             children = current.children;
             for (idx = 0, length = children.length; idx < length; idx ++) {
@@ -825,7 +841,7 @@ var __meta__ = {
         return result;
     }
 
-    function membersCount(tuples) {
+    function membersCount(tuples, measures) {
         if (!tuples.length) {
             return 0;
         }
@@ -838,11 +854,17 @@ var __meta__ = {
             if (current.members) {
                 [].push.apply(queue, current.members);
             } else if (current.children) {
-                result += current.children.length;
+                if (!current.measure) {
+                    result += current.children.length;
+                }
                 [].push.apply(queue, current.children);
             }
 
             current = queue.shift();
+        }
+
+        if (measures.length) {
+            result = result * measures.length;
         }
 
         return result;
@@ -862,14 +884,15 @@ var __meta__ = {
         return axis;
     }
 
-    function findDataIndex(tuple, memberIndex) {
+    function findDataIndex(tuple, memberIndex, measures) {
         if (!tuple) {
             return 0;
         }
 
-        var counter = 1;
+        var counter = Math.max(measures.length, 1);
         var tuples = tuple.members.slice(0, memberIndex);
         var current = tuples.shift();
+
         while (current) {
             if (current.children) {
                 //is member
@@ -886,7 +909,7 @@ var __meta__ = {
         return counter;
     }
 
-    function mergeTuples(target, source) {
+    function mergeTuples(target, source, measures) {
         if (!source[0]) {
             return {
                 parsedRoot: null,
@@ -921,9 +944,11 @@ var __meta__ = {
             }
         }
 
+        measures = Math.max(measures.length, 1);
+
         return {
             parsedRoot: result.tuple,
-            index: result.index,
+            index: result.index * measures,
             memberIndex: memberIndex,
             tuples: target
         };
@@ -961,7 +986,7 @@ var __meta__ = {
             for (memberIndex = 0, membersLength = tuple.members.length; memberIndex < membersLength; memberIndex++) {
                 member = tuple.members[memberIndex];
                 if (member.measure) {
-                    counter += member.children.length;
+                    //counter += member.children.length;
                     continue;
                 }
                 found = findExistingTuple(member.children, toFind);
@@ -1053,8 +1078,6 @@ var __meta__ = {
         var member = {
             name: "Measures",
             measure: true,
-            members: [],
-            dataIndex: tuple.dataIndex,
             children: [
                 $.extend({ members: [], dataIndex: tuple.dataIndex }, tuple.members[index])
             ]
@@ -1143,7 +1166,7 @@ var __meta__ = {
         tuples = tuples.slice();
         var result = [];
         var tuple = tuples.shift();
-        var idx, length, spliceIndex, children;
+        var idx, length, spliceIndex, children, member;
 
         while (tuple) {
             //required for multiple measures
@@ -1153,8 +1176,13 @@ var __meta__ = {
 
             spliceIndex = 0;
             for (idx = 0, length = tuple.members.length; idx < length; idx++) {
-                children = tuple.members[idx].children;
-                [].splice.apply(tuples, [spliceIndex, 0].concat(children));
+                member = tuple.members[idx];
+                children = member.children;
+                if (member.measure) {
+                    [].splice.apply(tuples, [0, 0].concat(children));
+                } else {
+                    [].splice.apply(tuples, [spliceIndex, 0].concat(children));
+                }
                 spliceIndex += children.length;
             }
 
