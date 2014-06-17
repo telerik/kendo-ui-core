@@ -1492,6 +1492,7 @@ var __meta__ = {
             if (!columns.length && rows.length && (!measures.length || (measures.length && measuresRowAxis))) {
                 columns = rows;
                 rows = [];
+                measuresRowAxis = false;
             }
 
             if (columns.length) {

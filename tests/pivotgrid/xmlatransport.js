@@ -167,9 +167,8 @@
             measuresAxis: "rows"
         }, "read");
 
-        ok(params.indexOf('SELECT NON EMPTY {[foo]} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS, ' +
-           'NON EMPTY {[baz],[bar]} ' +
-           'DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON ROWS FROM [cubeName]') > -1);
+        ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{{[baz],[bar]}})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS' +
+           ' FROM [cubeName]') > -1);
     });
 
     test("parameterMap measures are added to the correct axis", function() {
