@@ -223,7 +223,7 @@
                 var lastSegment = last(last(path.paths).segments);
                 controlPoint = lastSegment.controlIn.clone()
                     .translateWith(position.multiplyCopy(-1 / 3))
-                    .multiply(3 / 2);
+                    .scale(3 / 2);
             }
 
             for (var i = 0; i < parameters.length; i += 2) {
@@ -345,7 +345,7 @@
 
     function quadraticToCubicControlPoints(position, controlPoint, endPoint) {
         var third = 1 / 3;
-        controlPoint = controlPoint.clone().multiply(2 / 3);
+        controlPoint = controlPoint.clone().scale(2 / 3);
         return {
             controlOut: controlPoint.clone().translateWith(position.multiplyCopy(third)),
             controlIn: controlPoint.translateWith(endPoint.multiplyCopy(third))

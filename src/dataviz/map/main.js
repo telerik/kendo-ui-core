@@ -461,7 +461,7 @@
             var origin = this.locationToLayer(this._viewOrigin).round();
             var movable = e.sender.movable;
 
-            var offset = new g.Point(movable.x, movable.y).multiply(-1).multiply(1/movable.scale);
+            var offset = new g.Point(movable.x, movable.y).scale(-1).scale(1/movable.scale);
             origin.x += offset.x;
             origin.y += offset.y;
 

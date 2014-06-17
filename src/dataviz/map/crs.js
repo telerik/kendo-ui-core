@@ -183,13 +183,13 @@
 
             return point
                 .transform(this._tm)
-                .multiply(scale || 1);
+                .scale(scale || 1);
         },
 
         toLocation: function(point, scale, clamp) {
             point = point
                 .clone()
-                .multiply(1 / (scale || 1))
+                .scale(1 / (scale || 1))
                 .transform(this._itm);
 
             return this._proj.inverse(point, clamp);

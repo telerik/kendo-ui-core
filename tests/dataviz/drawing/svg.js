@@ -725,7 +725,7 @@
                 }
             };
 
-            circle.geometry.center.multiply(2);
+            circle.geometry.center.scale(2);
         });
 
         test("geometryChange sets radius", 1, function() {
@@ -785,7 +785,7 @@
                 }
             };
 
-            text.position().multiply(2);
+            text.position().scale(2);
         });
 
         test("optionsChange sets font", function() {
@@ -855,7 +855,7 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
         test("geometryChange sets size", 2, function() {
@@ -867,7 +867,7 @@
                 }
             };
 
-            image.rect().p0.multiply(2);
+            image.rect().p0.scale(2);
         });
 
         test("optionsChange sets source", function() {
