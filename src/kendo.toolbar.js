@@ -129,9 +129,7 @@ var __meta__ = {
                                 .attr(kendo.attr("uid"), options.rootUid);
 
                     if (options.mobile) {
-                        popupElement = popupElement.addClass("km-widget km-actionsheet")
-                                  .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
-                                  .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
+                        popupElement = actionSheetWrap(popupElement);
                     }
 
                     popup = popupElement.kendoPopup({
@@ -349,8 +347,10 @@ var __meta__ = {
             }
         }
 
-        function toggleOverflow(popup, anchor, mobile) {
-            popup.toggle();
+        function actionSheetWrap(element) {
+            return $(element).addClass("km-widget km-actionsheet")
+                             .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
+                             .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
         }
 
         var ToolBar = Widget.extend({
@@ -549,9 +549,7 @@ var __meta__ = {
                 }
 
                 if (that.isMobile) {
-                    components.overflowContainer = $(components.overflowContainer).addClass("km-widget km-actionsheet")
-                              .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
-                              .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
+                    components.overflowContainer = actionSheetWrap(components.overflowContainer);
                 }
 
                 that.popup = new kendo.ui.Popup(components.overflowContainer, {
@@ -647,12 +645,12 @@ var __meta__ = {
                 }
 
                 if (!isDefaultPrevented) {
-                    toggleOverflow(popup, splitButton, this.isMobile);
+                    popup.toggle();
                 }
             },
 
             _toggleOverflow: function() {
-                toggleOverflow(this.popup, this.overflowAnchor, this.isMobile);
+                this.popup.toggle();
             },
 
             _resize: function(e) {
