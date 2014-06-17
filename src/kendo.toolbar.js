@@ -564,6 +564,8 @@ var __meta__ = {
 
                         if (!that.isMobile) {
                             wrapper.css("margin-left", "3px");
+                        } else {
+                            that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
                         }
                     }
                 });
