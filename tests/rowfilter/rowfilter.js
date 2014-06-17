@@ -54,19 +54,20 @@
         ok(dom.is(".grid-filter-header"));
     });
 
-    test("dataSource remains the same instance when set to an instance of the DataSource class", function() {
-        rowFilter = setup(dom, { dataSource: dataSource });
+    test("dataSource remains the same instance when set to an instance of the DataSource class, acDS creates new one", function() {
+        rowFilter = setup(dom, { dataSource: dataSource, acDataSource: dataSource });
 
         ok(rowFilter.dataSource instanceof kendo.data.DataSource);
         ok(rowFilter.dataSource === dataSource);
+        ok(rowFilter.acDataSource !== dataSource);
     });
 
-    test("dataSource is instance of the DataSource class when set with options", function() {
+    test("acDataSource is instance of the DataSource class when set with options", function() {
         var dsOptions = { transport: { read: function () {} } };
-        rowFilter = setup(dom, { dataSource: dsOptions });
+        rowFilter = setup(dom, { acDataSource: dsOptions, dataSource: new kendo.data.DataSource() });
 
-        ok(rowFilter.dataSource instanceof kendo.data.DataSource);
-        ok(rowFilter.dataSource.transport.read === dsOptions.transport.read);
+        ok(rowFilter.acDataSource instanceof kendo.data.DataSource);
+        ok(rowFilter.acDataSource.transport.read === dsOptions.transport.read);
     });
 
     test("type is retrieved from dataSource when it is instance of the DataSource class ", function() {
@@ -134,6 +135,8 @@
         rowFilter = setup(dom, { dataSource: dataSource, field: "foo" });
         equal(rowFilter.viewModel.set("value", "someValue"));
         var filter = dataSource.filter();
+        equal(filter.filters.length, 1);
+        filter = filter.filters[0];
         equal(filter.value, "someValue");
         equal(filter.field, "foo");
         equal(filter.operator, "eq");
