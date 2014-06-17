@@ -3490,6 +3490,16 @@
         "meta": {
             "kendo-ui": "Play with this Kendo UI ToolBar demo to get familiar with the resizing functionality."
         }
+      },
+      {
+        "text": "Events",
+        "url": "toolbar/events",
+        "title": {
+            "kendo-ui": "Resizing demo of Kendo UI ToolBar Widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "Play with this Kendo UI ToolBar demo to get familiar with supported events."
+        }
       }
     ],
     "category": "Navigation"
