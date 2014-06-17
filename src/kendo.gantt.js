@@ -1232,12 +1232,13 @@ var __meta__ = {
 
         removeTask: function(uid) {
             var task = typeof uid === "string" ? this.dataSource.getByUid(uid) : uid;
+            var dependencies = this.dependencies.dependencies(task.id);
 
             if (!this.trigger("remove", {
                 task: task,
-                dependency: null
+                dependencies: dependencies
             })) {
-                this._removeTaskDependencies(task);
+                this._removeTaskDependencies(task, dependencies);
 
                 this._preventRefresh = true;
 
@@ -1290,7 +1291,7 @@ var __meta__ = {
 
             if (!this.trigger("remove", {
                 task: null,
-                dependency: dependency
+                dependencies: [dependency]
             })) {
                 if (this.dependencies.remove(dependency)) {
                     this.dependencies.sync();
@@ -1298,9 +1299,7 @@ var __meta__ = {
             }
         },
 
-        _removeTaskDependencies: function(task) {
-            var dependencies = this.dependencies.dependencies(task.id);
-
+        _removeTaskDependencies: function(task, dependencies) {
             this._preventDependencyRefresh = true;
 
             for (var i = 0, length = dependencies.length; i < length; i++) {

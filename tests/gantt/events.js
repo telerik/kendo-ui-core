@@ -107,7 +107,7 @@
         gantt.bind("remove", function(e) {
             ok(true);
             equal(e.task, task);
-            ok(!e.dependency);
+            equal(e.dependencies.length, 0);
         });
 
         gantt.removeTask(task);
@@ -118,7 +118,8 @@
 
         gantt.bind("remove", function(e) {
             ok(true);
-            equal(e.dependency, dependency);
+            equal(e.dependencies.length, 1);
+            equal(e.dependencies[0], dependency);
             ok(!e.task);
         });
 
