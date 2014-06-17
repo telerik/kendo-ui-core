@@ -16,48 +16,37 @@
 
     <ul id="menu">
         <li>
-            First Item
+            Reply
             <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-                <li>Sub Item 4</li>
+                <li>Reply to Sender</li>
+                <li>Reply to All</li>
+            </ul>
+        </li>
+        <li class="k-separator"></li>
+        <li>
+            Forward
+        </li>
+        <li class="k-separator"></li>
+        <li>
+            Mark as
+            <ul>
+                <li>Unread</li>
+                <li class="k-separator"></li>
+                <li>Important</li>
+                <li>Junk</li>
             </ul>
         </li>
         <li>
-            Second Item
+            Label
             <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-                <li>Sub Item 4</li>
-            </ul>
-        </li>
-        <li>
-            Third Item
-            <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-                <li>Sub Item 4</li>
-            </ul>
-        </li>
-        <li>
-            Fourth Item
-            <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-                <li>Sub Item 4</li>
-            </ul>
-        </li>
-        <li>
-            Fifth Item
-            <ul>
-                <li>Sub Item 1</li>
-                <li>Sub Item 2</li>
-                <li>Sub Item 3</li>
-                <li>Sub Item 4</li>
+                <li>None</li>
+                <li class="k-separator"></li>
+                <li>Important</li>
+                <li>Work</li>
+                <li>Personal</li>
+                <li>To Do</li>
+                <li class="k-separator"></li>
+                <li>New Label</li>
             </ul>
         </li>
     </ul>
@@ -66,7 +55,7 @@
     $(document).ready(function() {
         var dataSource = new kendo.data.DataSource({
             data: products,
-            pageSize: 21
+            pageSize: 5
         });
 
         $("#pager").kendoPager({
@@ -77,7 +66,14 @@
             dataSource: dataSource,
             template: kendo.template($("#template").html())
         });
-        $("#menu").kendoContextMenu({ target: "#listview-context-menu" });
+
+        $("#menu").kendoContextMenu({
+            target: "#listview-context-menu",
+            filter: ".product",
+            select: function(e) {
+
+            }
+        });
     });
 </script>
 
@@ -91,7 +87,7 @@
     #listview-context-menu {
         padding: 10px 5px;
         margin-bottom: -1px;
-        min-height: 510px;
+        min-height: 300px;
     }
     .product {
         position: relative;
