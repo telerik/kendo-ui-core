@@ -1995,6 +1995,16 @@
         }
       },
       {
+        "text": "Context Menu",
+        "url": "menu/context-menu",
+        "title": {
+            "kendo-ui": "Kendo UI Context Menu example"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates how to use a Kendo UI ContextMenu widget."
+        }
+      },
+      {
         "text": "RTL support",
         "disableInMobile": true,
         "url": "menu/right-to-left-support",
