@@ -982,6 +982,7 @@ var __meta__ = {
                         .attr("aria-expanded", true)
                         .kendoAnimate( extend({ init: function () {
                             that.trigger(SHOW, { item: item[0], contentElement: contentHolder[0] });
+                            kendo.resize(contentHolder);
                         } }, animation, {
                             complete: function () {
                                 item.removeAttr("data-animating");
