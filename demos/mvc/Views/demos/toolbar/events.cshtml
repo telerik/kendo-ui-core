@@ -10,13 +10,15 @@
                     $("#toolbar").kendoToolBar({
                         resizable: false,
                         items: [
-                            { template: "<label>Shape type:</label>&nbsp;<input id='shape' />" },
-                            { template: "<label>Background color:</label>&nbsp;<input type='color' id='background-picker' />" },
-                            { template: "<label>Border style:</label>&nbsp;<input id='border-style' style='width: 80px;' />" },
-                            { template: "<label>Border color:</label>&nbsp;<input type='color' id='border-picker' />" },
-                            { template: "<label>Height:</label>&nbsp;<input id='height' class='k-input' style='width: 50px;' type='text' />" },
-                            { template: "<label>Width:</label>&nbsp;<input id='height' class='k-input' style='width: 50px;' type='text' />" },
-                            { 
+                            { template: "<label>Shape type:</label><input id='shape' />" },
+                            { type: "separator" },
+                            { template: "<label>Background color:</label><input type='color' id='background-picker' />" },
+                            { template: "<label>Border style:</label><input id='border-style' style='width: 80px;' />" },
+                            { template: "<label>Border color:</label><input type='color' id='border-picker' />" },
+                            { template: "<label>Height:</label><input id='height' class='k-textbox' style='width: 50px;' type='text' />" },
+                            { template: "<label>Width:</label><input id='height' class='k-textbox' style='width: 50px;' type='text' />" },
+                            { type: "separator" },
+                            {
                                 type: "buttonGroup",
                                 items: [
                                     { text: "Left" },

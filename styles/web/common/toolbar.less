@@ -53,6 +53,14 @@
     line-height: 1.72em;
 }
 
+.k-toolbar .k-separator
+{
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    width: 1px;
+    line-height: inherit;
+}
+
 .k-toolbar .k-button-group
 {
     list-style-type: none;
@@ -72,7 +80,10 @@
 .k-toolbar .k-button,
 .k-toolbar .k-split-button,
 .k-toolbar .k-button-group,
-.k-toolbar .k-widget
+.k-toolbar .k-widget,
+.k-toolbar .k-textbox,
+.k-toolbar label,
+.k-toolbar .k-separator
 {
     margin: 0 .2em;
 }
@@ -110,6 +121,16 @@
 {
     float: none;
     border: 0;
+}
+
+.k-overflow-container .k-separator
+{
+    border-width: 0 0 1px;
+    border-style: solid;
+    height: 1px;
+    line-height: 0;
+    font-size: 0;
+    padding: 0;
 }
 
 .k-overflow-container .k-overflow-button,
@@ -152,11 +173,17 @@
 }
 
 .k-overflow-container .k-toolbar-first-visible,
-.k-overflow-container .k-overflow-group + .k-overflow-group
+.k-overflow-container .k-overflow-group + .k-overflow-group,
+.k-overflow-container .k-separator + .k-overflow-group
 {
     border-top: 0;
     margin-top: 0;
     padding-top: 1px;
+}
+
+.k-overflow-container .k-overflow-group + .k-separator
+{
+    display: none;
 }
 
 .k-overflow-container .k-toolbar-last-visible

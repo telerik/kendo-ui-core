@@ -170,12 +170,12 @@ var __meta__ = {
 
             separator: {
                 toolbar: function(options) {
-                    var element = $('<div class="k-separator"></div>');
+                    var element = $('<div class="k-separator">&nbsp;</div>');
                     element.data({ type: "separator" });
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<li class="k-separator"></li>');
+                    var element = $('<li class="k-separator">&nbsp;</li>');
                     element.data({ type: "separator" });
                     return element;
                 }
