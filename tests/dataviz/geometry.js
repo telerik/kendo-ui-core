@@ -56,29 +56,25 @@
     });
 
     test("sets x", function() {
-        point.set("x", 10);
+        point.setX(10);
         equal(point.x, 10);
     });
 
     test("sets y", function() {
-        point.set("y", 10);
+        point.setY(10);
         equal(point.y, 10);
     });
 
     test("set is chainable", function() {
-        equal(point.set("x", 10), point);
+        equal(point.setX(10), point);
     });
 
     test("gets x", function() {
-        equal(point.get("x"), 10);
+        equal(point.getX(), 10);
     });
 
     test("gets y", function() {
-        equal(point.get("y"), 20);
-    });
-
-    test("returns undefined for other fields", function() {
-        equal(point.get("foo"), undefined);
+        equal(point.getY(), 20);
     });
 
     test("changing x triggers geometryChange", function() {
@@ -88,7 +84,7 @@
             }
         };
 
-        point.set("x", 1);
+        point.setX(1);
     });
 
     test("changing y triggers geometryChange", function() {
@@ -98,17 +94,7 @@
             }
         };
 
-        point.set("y", 1);
-    });
-
-    test("changing any other field does not trigger geometryChange", 0, function() {
-        point.observer = {
-            geometryChange: function() {
-                ok(false);
-            }
-        };
-
-        point.set("foo", 1);
+        point.setY(1);
     });
 
     test("setting x to same value does not trigger geometryChange", 0, function() {
@@ -118,7 +104,7 @@
             }
         };
 
-        point.set("x", 10);
+        point.setX(10);
     });
 
     test("setting y to same value does not trigger geometryChange", 0, function() {
@@ -128,7 +114,7 @@
             }
         };
 
-        point.set("y", 20);
+        point.setY(20);
     });
 
     test("clone returns new point instance", function() {
@@ -147,6 +133,26 @@
         point.rotate(90, new Point(100, 100));
         close(point.x, 180, 1);
         close(point.y, 10, 1);
+    });
+
+    test("move sets x and y", function() {
+        point.move(90, 100);
+        equal(point.x, 90);
+        equal(point.y, 100);
+    });
+
+    test("move returns point", function() {
+        equal(point.move(90, 100), point);
+    });
+
+    test("move triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        point.move(90, 100)
     });
 
     test("rotate rotates x and y around center (array)", function() {
@@ -467,7 +473,7 @@
             }
         };
 
-        rect.p0.set("x", 1);
+        rect.p0.setX(1);
     });
 
     test("modifying p1 triggers geometryChange", function() {
@@ -477,7 +483,7 @@
             }
         };
 
-        rect.p1.set("x", 1);
+        rect.p1.setX(1);
     });
 
     test("boundingBox returns the bounding Rect", function() {
@@ -519,16 +525,16 @@
             }
         };
 
-        circle.center.set("x", 1);
+        circle.center.setX(1);
     });
 
     test("sets radius", function() {
-        circle.set("radius", 1);
+        circle.setRadius(1);
         equal(circle.radius, 1);
     });
 
     test("gets radius", function() {
-        equal(circle.get("radius"), 10);
+        equal(circle.getRadius(), 10);
     });
 
     test("setting radius triggers geometryChange", function() {
@@ -538,17 +544,7 @@
             }
         };
 
-        circle.set("radius", 1);
-    });
-
-    test("setting any other field does not trigger geometryChange", 0, function() {
-        circle.observer = {
-            geometryChange: function() {
-                ok(false);
-            }
-        };
-
-        circle.set("foo", 1);
+        circle.setRadius(1);
     });
 
     test("setting radius to same value does not trigger geometryChange", 0, function() {
@@ -558,7 +554,7 @@
             }
         };
 
-        circle.set("radius", 10);
+        circle.setRadius(10);
     });
 
     test("equals is true for same center and radius", function() {
@@ -651,15 +647,15 @@
             }
         };
 
-        arc.center.set("x", 1);
+        arc.center.setX(1);
     });
 
     test("sets fields", function() {
-        arc.set("radiusX", 10);
-        arc.set("radiusY", 20);
-        arc.set("startAngle", 30);
-        arc.set("endAngle", 40);
-        arc.set("counterClockwise", true);
+        arc.setRadiusX(10);
+        arc.setRadiusY(20);
+        arc.setStartAngle(30);
+        arc.setEndAngle(40);
+        arc.setCounterClockwise(true);
 
         equal(arc.radiusX, 10);
         equal(arc.radiusY, 20);
@@ -675,7 +671,7 @@
             }
         };
 
-        arc.set("radiusX", 10);
+        arc.setRadiusX(10);
     });
 
     test("setting a field to the same value does not trigger geometryChange", 0, function() {
@@ -685,25 +681,15 @@
             }
         };
 
-        arc.set("radiusX", 50);
-    });
-
-    test("setting an invalid field does not trigger geometryChange", 0, function() {
-        arc.observer = {
-            geometryChange: function() {
-                ok(false);
-            }
-        };
-
-        arc.set("foo", 10);
+        arc.setRadiusX(50);
     });
 
     test("gets fields", function() {
-        equal(arc.get("radiusX"), 50);
-        equal(arc.get("radiusY"), 100);
-        equal(arc.get("startAngle"), 0);
-        equal(arc.get("endAngle"), 180);
-        equal(arc.get("counterClockwise"), false);
+        equal(arc.getRadiusX(), 50);
+        equal(arc.getRadiusY(), 100);
+        equal(arc.getStartAngle(), 0);
+        equal(arc.getEndAngle(), 180);
+        equal(arc.getCounterClockwise(), false);
     });
 
     test("pointAt returns the point on the elipse for a given angle", function() {

@@ -1228,7 +1228,7 @@
                 }
             };
 
-            circle.geometry.set("radius", 60);
+            circle.geometry.setRadius(60);
         });
 
         test("optionsChange is forwarded to transform", function() {
@@ -1280,7 +1280,7 @@
                 equal(value, "m 15000,10000 c 15000,15236 12618,20000 10000,20000 7382,20000 5000,15236 5000,10000 e");
             };
 
-            arc.geometry.set("endAngle", 180);
+            arc.geometry.setEndAngle(180);
         });
 
     })();
@@ -1317,7 +1317,7 @@
                 ok(true);
             };
 
-            arc.geometry.set("endAngle", 180);
+            arc.geometry.setEndAngle(180);
         });
 
         shapeTests(d.Arc, vml.ArcNode, "ArcNode");
@@ -1360,7 +1360,7 @@
                 equal(value, "m 0,11000 l 4000,11000");
             };
 
-            text.position().set("x", 0);
+            text.position().setX(0);
         });
 
         test("rounds path coordinates", function() {
@@ -1440,7 +1440,7 @@
 
         test("geometryChange is forwarded to path data node", function() {
             textNode.pathData.geometryChange = function() { ok(true); };
-            text.position().set("x", 1);
+            text.position().setX(1);
         });
 
         shapeTests(d.Text, vml.TextNode, "TextNode");

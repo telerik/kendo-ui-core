@@ -482,7 +482,7 @@
                 }
             };
 
-            text.position().set("x", 5);
+            text.position().setX(5);
         });
 
         test("setting content triggers optionsChange", function() {
@@ -593,7 +593,7 @@
                 }
             };
 
-            circle.geometry.center.set("x", 5);
+            circle.geometry.center.setX(5);
         });
 
         test("changing the radius triggers geometryChange", function() {
@@ -603,7 +603,7 @@
                 }
             };
 
-            circle.geometry.set("radius", 5);
+            circle.geometry.setRadius(5);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -675,7 +675,7 @@
                 }
             };
 
-            arc.geometry.center.set("x", 5);
+            arc.geometry.center.setX(5);
         });
 
         test("changing a geometry field triggers geometryChange", 2, function() {
@@ -685,8 +685,8 @@
                 }
             };
 
-            arc.geometry.set("radiusX", 100);
-            arc.geometry.set("counterClockwise", true);
+            arc.geometry.setRadiusX(100);
+            arc.geometry.setCounterClockwise(true);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -747,7 +747,7 @@
                 }
             };
 
-            segment.anchor.set("x", 5);
+            segment.anchor.setX(5);
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
@@ -757,7 +757,7 @@
                 }
             };
 
-            segment.controlIn.set("x", 5);
+            segment.controlIn.setX(5);
         });
 
         test("changing the control point (out) triggers geometryChange", function() {
@@ -767,7 +767,7 @@
                 }
             };
 
-            segment.controlOut.set("x", 5);
+            segment.controlOut.setX(5);
         });
 
         test("boundingBoxTo returns the line bounding box to the passed segment if all control points are not specified", function() {
@@ -865,8 +865,8 @@
                 }
             };
 
-            controlOut.set("x", 20);
-            controlIn.set("y", 30);
+            controlOut.setX(20);
+            controlIn.setY(30);
         });
 
         test("sets initial options", function() {
@@ -1066,8 +1066,8 @@
                 }
             };
 
-            controlOut.set("x", 20);
-            controlIn.set("y", 30);
+            controlOut.setX(20);
+            controlIn.setY(30);
         });
 
         test("close closes last path", function() {
@@ -1195,7 +1195,7 @@
                 }
             };
 
-            image.rect().p0.set("x", 5);
+            image.rect().p0.setX(5);
         });
 
         test("boundingBox returns bounding rect", function() {

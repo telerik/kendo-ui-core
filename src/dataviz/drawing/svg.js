@@ -567,7 +567,7 @@
         pos: function() {
             var pos = this.srcElement.position();
             var size = this.srcElement.measure();
-            return pos.clone().set("y", pos.y + size.baseline);
+            return pos.clone().setY(pos.y + size.baseline);
         },
 
         template: renderTemplate(

@@ -32,30 +32,6 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        set: function(field, value) {
-            if (field === "x") {
-                if (this.x !== value) {
-                    this.x = value;
-                    this.geometryChange();
-                }
-            } else if (field === "y") {
-                if (this.y !== value) {
-                    this.y = value;
-                    this.geometryChange();
-                }
-            }
-
-            return this;
-        },
-
-        get: function(field) {
-            if (field === "x") {
-                return this.x;
-            } else if (field === "y") {
-                return this.y;
-            }
-        },
-
         equals: function(point) {
             return point && point.x === this.x && point.y === this.y;
         },
@@ -83,6 +59,11 @@
             return this.translate(point.x, point.y);
         },
 
+        move: function(x, y) {
+            this.x = this.y = 0;
+            return this.translate(x, y);
+        },
+
         scale: function(scaleX, scaleY) {
             if (!defined(scaleY)) {
                 scaleY = scaleX;
@@ -101,7 +82,7 @@
         },
 
         transform: function(transformation) {
-            var mx = transformationMatrix(transformation),
+            var mx = toMatrix(transformation),
                 x = this.x,
                 y = this.y;
 
@@ -139,6 +120,7 @@
             return this;
         }
     });
+    defineAccessors(Point.fn, ["x", "y"]);
 
     // IE < 9 doesn't allow to override toString on definition
     Point.fn.toString = function(digits, separator) {
@@ -276,17 +258,6 @@
             return new Circle(this.center.clone(), this.radius);
         },
 
-        set: function(field, value) {
-            if (field === "radius" && this.radius !== value) {
-                this.radius = value;
-                this.geometryChange();
-            }
-        },
-
-        get: function() {
-            return this.radius;
-        },
-
         pointAt: function(angle) {
             return this._pointAt(rad(angle));
         },
@@ -318,6 +289,7 @@
             );
         }
     });
+    defineAccessors(Circle.fn, ["radius"]);
 
     var Arc = Class.extend({
         init: function(center, options) {
@@ -334,20 +306,7 @@
 
         MAX_INTERVAL: 90,
 
-        _fields: ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"],
-
         geometryChange: util.mixins.geometryChange,
-
-        get: function(field) {
-            return this[field];
-        },
-
-        set: function(field, value) {
-            if ($.inArray(field, this._fields) !== -1 && this[field] !== value) {
-                this[field] = value;
-                this.geometryChange();
-            }
-        },
 
         pointAt: function(angle) {
             var center = this.center;
@@ -463,8 +422,8 @@
             return new Point(-arc.radiusX * math.sin(radian), arc.radiusY * math.cos(radian));
         }
     });
+    defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"]);
 
-    // TODO: Consider renaming to TransformMatrix or Transform
     var Matrix = Class.extend({
         /* Transformation matrix
          *
@@ -613,7 +572,7 @@
         },
 
         multiply: function(transformation) {
-            var matrix = transformationMatrix(transformation);
+            var matrix = toMatrix(transformation);
 
             this._matrix = this._matrix.times(matrix);
 
@@ -638,12 +597,12 @@
         return new Transformation(matrix);
     }
 
-    function transformationMatrix(transformation) {
-        if (transformation && kendo.isFunction(transformation.matrix)) {
-            return transformation.matrix();
+    function toMatrix(value) {
+        if (value && kendo.isFunction(value.matrix)) {
+            return value.matrix();
         }
 
-        return transformation;
+        return value;
     }
 
     // Helper functions =======================================================
@@ -672,6 +631,34 @@
         return angle;
     }
 
+    function defineAccessors(fn, fields) {
+        for (var i = 0; i < fields.length; i++) {
+            var name = fields[i];
+            var capitalized = name.charAt(0).toUpperCase() +
+                              name.substring(1, name.length);
+
+            fn["set" + capitalized] = setAccessor(name);
+            fn["get" + capitalized] = getAccessor(name);
+        }
+    }
+
+    function setAccessor(field) {
+        return function(value) {
+            if (this[field] !== value) {
+                this[field] = value;
+                this.geometryChange();
+            }
+
+            return this;
+        };
+    }
+
+    function getAccessor(field) {
+        return function() {
+            return this[field];
+        };
+    }
+
     // Exports ================================================================
     deepExtend(dataviz, {
         geometry: {
@@ -680,9 +667,9 @@
             Matrix: Matrix,
             Point: Point,
             Rect: Rect,
-            transform: transform,
             Transformation: Transformation,
-            transformationMatrix: transformationMatrix
+            transform: transform,
+            toMatrix: toMatrix
         }
     });
 

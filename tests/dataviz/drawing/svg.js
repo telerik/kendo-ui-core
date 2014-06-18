@@ -735,7 +735,7 @@
                 }
             };
 
-            circle.geometry.set("radius", 60);
+            circle.geometry.setRadius(60);
         });
     })();
 
