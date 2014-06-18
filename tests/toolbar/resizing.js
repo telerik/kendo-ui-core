@@ -180,12 +180,14 @@
 
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foooooo" },
-                { type: "button", id: "bar", text: "baaaaar" },
-                { type: "button", id: "baz", text: "baaaaaz" },
-                { type: "button", id: "qux", text: "quuuuux" }
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" },
+                { type: "button", id: "qux", text: "qux" }
             ]
         }).data("kendoToolBar");
+
+        $(".k-button").width(120);
 
         container.width(150);
         toolbar.resize();
@@ -193,7 +195,7 @@
         ok($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
         ok($("#foo").hasClass("k-toolbar-last-visible"), "#foo is the last visible button in the toolbar");
 
-        container.width(220);
+        container.width(260);
         toolbar.resize();
 
         ok($("#foo").hasClass("k-toolbar-first-visible"), "#foo is the first visible button in the toolbar");
@@ -205,12 +207,14 @@
 
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foooooo" },
-                { type: "button", id: "bar", text: "baaaaar" },
-                { type: "button", id: "baz", text: "baaaaaz" },
-                { type: "button", id: "qux", text: "quuuuux" }
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" },
+                { type: "button", id: "qux", text: "qux" }
             ]
         }).data("kendoToolBar");
+
+        $(".k-button").width(120);
 
         container.width(150);
         toolbar.resize();
@@ -218,7 +222,7 @@
         ok($("#bar_overflow").parent().hasClass("k-toolbar-first-visible"), "#bar is the first visible button in the command overflow popup");
         ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
 
-        container.width(220);
+        container.width(260);
         toolbar.resize();
 
         ok($("#baz_overflow").parent().hasClass("k-toolbar-first-visible"), "#baz is the first visible button in the command overflow popup");
