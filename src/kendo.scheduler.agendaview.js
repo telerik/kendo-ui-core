@@ -261,10 +261,21 @@ var __meta__ = {
                 }
             }
 
-            this._eventsList = flattenTaskGroups(groups);
+            var items = this._eventsList = flattenTaskGroups(groups);
+            this._angularItems(table, items);
 
             this.refreshLayout();
             this.trigger("activate");
+        },
+
+        _angularItems: function(table, items) {
+            this.angular("compile", function(){
+                var data = [], elements = items.map(function(item){
+                    data.push({ dataItem: item });
+                    return table.find(".k-task[" + kendo.attr("uid") + "=" + item.uid + "]");
+                });
+                return { elements: elements, data: data };
+            });
         },
 
         _renderGroups: function(groups, table, parentGroups) {
