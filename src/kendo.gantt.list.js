@@ -17,6 +17,7 @@ var __meta__ = {
     var kendoDomElement = kendoDom.element;
     var kendoTextElement = kendoDom.text;
     var browser = kendo.support.browser;
+    var mobileOS = kendo.support.mobileOS;
     var isIE = browser.msie;
     var oldIE = isIE && browser.version < 9;
     var ui = kendo.ui;
@@ -444,12 +445,35 @@ var __meta__ = {
                     that._closeCell();
                 }
             };
+            var dblclick = function(e) {
+                if ($(e.initialTouch).is(iconSelector)) {
+                    return;
+                }
+
+                var td = $(e.currentTarget);
+                var column = that._columnFromElement(td);
+
+                if (that.editable) {
+                    return;
+                }
+
+                if (column.editable) {
+                    that._editCell({ cell: td, column: column });
+                }
+            };
+            var mousedown = function(e) {
+                var currentTarget = $(e.currentTarget);
+
+                if (!currentTarget.hasClass(listStyles.editCell)) {
+                    blurActiveElement();
+                }
+            };
 
             if (this.options.editable !== true) {
                 return;
             }
 
-            that.touch = that.content
+            that.content
                 .on("focusin" + NS, function() {
                     clearTimeout(that.timer);
                     that.timer = null;
@@ -475,35 +499,29 @@ var __meta__ = {
                             }
                             break;
                     }
-                })
-                .kendoTouch({
-                    filter: "td",
-                    touchstart: function(e) {
-                        var currentTarget = $(e.touch.currentTarget);
+                });
 
-                        if (!currentTarget.hasClass(listStyles.editCell)) {
-                            blurActiveElement();
+            if (!mobileOS) {
+                that.content
+                    .on("mousedown" + NS, "td", function(e) {
+                        mousedown(e);
+                    })
+                    .on("dblclick" + NS, "td", function(e) {
+                        e.initialTouch = e.target;
+                        dblclick(e);
+                    });
+            } else {
+                that.touch = that.content
+                    .kendoTouch({
+                        filter: "td",
+                        touchstart: function(e) {
+                            mousedown(e.touch);
+                        },
+                        doubletap: function(e) {
+                            dblclick(e.touch);
                         }
-                    },
-                    doubletap: function(e) {
-                        var event = e.touch;
-
-                        if ($(event.initialTouch).is(iconSelector)) {
-                            return;
-                        }
-
-                        var td = $(event.currentTarget);
-                        var column = that._columnFromElement(td);
-
-                        if (that.editable) {
-                            return;
-                        }
-
-                        if (column.editable) {
-                            that._editCell({ cell: td, column: column });
-                        }
-                    }
-                }).data("kendoTouch");
+                    }).data("kendoTouch");
+            }
         },
 
         _editCell: function(options) {
@@ -659,7 +677,7 @@ var __meta__ = {
             this._reorderDraggable = this.content
                 .kendoDraggable({
                     distance: 10,
-                    holdToDrag: kendo.support.mobileOS,
+                    holdToDrag: mobileOS,
                     group: "listGroup",
                     filter: "tr[data-uid]",
                     ignore: DOT + listStyles.input,

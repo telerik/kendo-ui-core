@@ -217,8 +217,7 @@
             ok(e.isDefaultPrevented());
         });
 
-        tap(targetCell);
-        tap(targetCell);
+        targetCell.trigger("dblclick");
         dragstart(targetRow);
     });
 

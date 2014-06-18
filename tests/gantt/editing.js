@@ -8,8 +8,7 @@
     var columns;
     var extend = $.extend;
     var doubleTap = function(target) {
-        tap(target);
-        tap(target);
+        target.trigger("dblclick");
     };
 
     module("Gantt inline editing", {
@@ -41,10 +40,6 @@
             kendo.destroy(QUnit.fixture);
             element.remove();
         }
-    });
-
-    test("attaches touch widget to the list content", function() {
-        ok(ganttList.content.data("kendoTouch"));
     });
 
     test("attaches editable widget to editable cell on dblclick", function() {
