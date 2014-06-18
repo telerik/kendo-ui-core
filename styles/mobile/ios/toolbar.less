@@ -4,11 +4,19 @@
 
 /* ToolBar */
 
+.km-ios .k-toolbar .km-button,
+.km-ios .k-toolbar .km-buttongroup,
+.km-ios .k-toolbar .k-split-button
+{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 1em;
+    line-height: 2.2em;
+}
+
 .km-ios .k-toolbar .km-buttongroup .km-button
 {
-    padding-top: 0;
-    padding-bottom: 0;
-    line-height: 2em;
+    padding: 0 .8em;
 }
 
 .km-ios .k-toolbar .k-button-icon .km-icon,
@@ -18,14 +26,33 @@
     width: 1em;
     height: 1em;
     font-size: 1.2em;
-    margin-top: -3px;
+    margin-top: -8px;
+    margin-bottom: -5px;
     vertical-align: middle;
+}
+
+.km-ios .k-split-button .km-arrowdown
+{
+    margin-left: 2px;
+    margin-right: 1px;
+}
+
+.km-ios .k-split-button .k-button-icontext
+{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.km-ios .k-split-button-arrow
+{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .km-ios.km-pane .k-toolbar .k-overflow-anchor
 {
-    font-size: 2em;
-    line-height: 1.65em;
+    font-size: 1.85em;
+    line-height: 2em;
 }
 
 .km-ios .km-actionsheet.k-split-container > li > .km-button,
@@ -54,4 +81,10 @@ html .km-ios .k-overflow-container.km-actionsheet > li
 {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.km-ios .k-split-container.km-actionsheet,
+.km-ios .k-overflow-container.km-actionsheet
+{
+    border-top: 0;
 }
