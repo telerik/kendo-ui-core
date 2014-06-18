@@ -187,7 +187,8 @@
             ]
         }).data("kendoToolBar");
 
-        $(".k-button").width(120);
+        container.find(".k-overflow-anchor").width(28);
+        container.find(".k-button:not(.k-overflow-anchor)").width(68);
 
         container.width(150);
         toolbar.resize();
@@ -214,7 +215,8 @@
             ]
         }).data("kendoToolBar");
 
-        $(".k-button").width(120);
+        container.find(".k-overflow-anchor").width(28);
+        container.find(".k-button:not(.k-overflow-anchor)").width(68);
 
         container.width(150);
         toolbar.resize();
