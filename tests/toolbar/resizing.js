@@ -231,4 +231,39 @@
         ok($("#qux_overflow").parent().hasClass("k-toolbar-last-visible"), "#qux is the last visible button in the command overflow popup");
     });
 
+    test("Overflow anchor is not shown when the overflow container is empty", 1, function() {
+        container.width(600);
+
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" },
+                { type: "button", id: "qux", text: "qux" }
+            ]
+        }).data("kendoToolBar");
+
+        equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is not visible when there are no items in the overflow popup container");
+    });
+
+    test("Overflow anchor is shown after resize if the overflow popup container is NOT empty", 2, function() {
+        container.width(600);
+
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { type: "button", id: "baz", text: "baz" },
+                { type: "button", id: "qux", text: "qux" }
+            ]
+        }).data("kendoToolBar");
+
+        equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
+
+        container.width(150);
+        toolbar.resize();
+
+        equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
+    });
+
 })();
