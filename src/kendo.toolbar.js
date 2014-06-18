@@ -170,12 +170,12 @@ var __meta__ = {
 
             separator: {
                 toolbar: function(options) {
-                    var element = $('<div class="k-separator"></div>');
+                    var element = $('<div class="k-separator">&nbsp;</div>');
                     element.data({ type: "separator" });
                     return element;
                 },
                 overflow: function(options) {
-                    var element = $('<li class="k-separator"></li>');
+                    var element = $('<li class="k-separator">&nbsp;</li>');
                     element.data({ type: "separator" });
                     return element;
                 }
@@ -328,6 +328,8 @@ var __meta__ = {
             var anchor = this.options.anchor,
                 computedWidth = anchor.outerWidth(),
                 width;
+
+            kendo.wrap(this.element).addClass("k-split-wrapper");
 
             if (this.element.css("box-sizing") !== "border-box") {
                 width = computedWidth - (this.element.outerWidth() - this.element.width());
@@ -580,7 +582,7 @@ var __meta__ = {
             },
 
             _buttonClick: function(e) {
-                var that = this,
+                var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
                     group, current;
@@ -629,7 +631,8 @@ var __meta__ = {
 
                 splitContainer = target.closest(".k-split-container");
                 if (splitContainer[0]) {
-                    splitContainer.parents(".km-popup-wrapper").data("kendoPopup").close();
+                    popup = splitContainer.data("kendoPopup");
+                    (popup ? popup : splitContainer.parents(".km-popup-wrapper").data("kendoPopup")).close();
                 }
             },
 

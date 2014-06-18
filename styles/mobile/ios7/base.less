@@ -358,7 +358,11 @@
 
 .km-ios7 .km-state-active,
 .km-ios7 .k-slider-selection,
-.km-ios7 .km-pages .km-current-page
+.km-ios7 .km-pages .km-current-page,
+.km-ios7 .k-split-container .km-state-active,
+.km-ios7 .k-overflow-container .km-state-active,
+.km-ios7 .k-split-container li > a:active,
+.km-ios7 .k-overflow-container li > a:active
 {
     background: currentcolor;
 }
@@ -380,10 +384,12 @@
     opacity: .4;
 }
 
-.km-ios7 .k-toolbar > .km-state-active
+.km-ios7 .k-toolbar > .km-state-active,
+.km-ios7 .k-toolbar .k-split-button .km-state-active
 {
     background: none;
-    -webkit-text-stroke: .5px currentcolor ;
+    -webkit-text-stroke: .5px currentcolor;
+    -webkit-text-fill-color: initial;
 }
 
 /* transitions */
