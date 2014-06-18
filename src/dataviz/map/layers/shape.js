@@ -1,7 +1,5 @@
 (function(f, define){
-    define(["./base", "../location",
-            "../../geometry", "../../util", "../../drawing/shapes",
-            "../../../kendo.data", "../../../kendo.draganddrop" ], f);
+    define([ ], f);
 })(function(){
 
 (function ($, undefined) {
