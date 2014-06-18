@@ -49,6 +49,8 @@ var __meta__ = {
         TOGGLE = "toggle",
         OPEN = "open",
         CLOSE = "close",
+        EXPAND = "expand",
+        COLLAPSE = "collapse",
 
         OVERFLOW_NEVER = "never",
         OVERFLOW_AUTO = "auto",
@@ -422,7 +424,9 @@ var __meta__ = {
                 CLICK,
                 TOGGLE,
                 OPEN,
-                CLOSE
+                CLOSE,
+                EXPAND,
+                COLLAPSE
             ],
 
             options: {
@@ -562,7 +566,7 @@ var __meta__ = {
                     anchor: that.overflowAnchor,
                     animation: that.animation,
                     copyAnchorStyles: false,
-                    open: function () {
+                    open: function (e) {
                         var wrapper = kendo.wrap(that.popup.element)
                             .addClass("k-overflow-wrapper");
 
@@ -570,6 +574,15 @@ var __meta__ = {
                             wrapper.css("margin-left", (wrapper.outerWidth() - wrapper.width()) / 2 + 1);
                         } else {
                             that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
+                        }
+
+                        if (that.trigger(EXPAND)) {
+                            e.preventDefault();
+                        }
+                    },
+                    close: function (e) {
+                        if (that.trigger(COLLAPSE)) {
+                            e.preventDefault();
                         }
                     }
                 });

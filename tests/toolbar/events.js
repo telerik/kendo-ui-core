@@ -498,7 +498,7 @@
     test("click event is NOT fired when overflow anchor is pressed", 0, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foo" },
+                { type: "button", text: "foo" },
                 { type: "button", text: "always", overflow: "always" }
             ],
             click: function() {
@@ -510,5 +510,77 @@
 
         click(overflowAnchor);
     });
+
+    test("clicking the overflow anchor fires expand event", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" },
+                { type: "button", text: "always", overflow: "always" }
+            ],
+            expand: function() {
+                ok(true, "Expand event is fired");
+            }
+        }).data("kendoToolBar");
+
+        var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+
+        click(overflowAnchor);
+    });
+
+    test("expand event can be prevented", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" },
+                { type: "button", text: "always", overflow: "always" }
+            ],
+            expand: function(e) {
+                e.preventDefault();
+            }
+        }).data("kendoToolBar");
+
+        var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+
+        click(overflowAnchor);
+
+        ok(toolbar.popup.element.is(":hidden"));
+    });
+
+    test("closing the overflow popup container fires collapse event", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" },
+                { type: "button", text: "always", overflow: "always" }
+            ],
+            collapse: function() {
+                ok(true, "Collapse event is fired");
+            }
+        }).data("kendoToolBar");
+
+        var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+
+        toolbar.popup.toggle();
+
+        click(overflowAnchor);
+    });
+
+    test("collapse event can be prevented", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", text: "foo" },
+                { type: "button", text: "always", overflow: "always" }
+            ],
+            collapse: function(e) {
+                e.preventDefault();
+            }
+        }).data("kendoToolBar");
+
+        var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+
+        toolbar.popup.toggle();
+        click(overflowAnchor);
+
+        ok(toolbar.popup.element.is(":visible"));
+    });
+
 
 })();
