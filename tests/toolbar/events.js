@@ -495,4 +495,20 @@
         click(container.find("#foo"));
     });
 
+    test("click event is NOT fired when overflow anchor is pressed", 0, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", text: "always", overflow: "always" }
+            ],
+            click: function() {
+                ok(false, "Click event is fired");
+            }
+        }).data("kendoToolBar");
+
+        var overflowAnchor = toolbar.element.find(".k-overflow-anchor");
+
+        click(overflowAnchor);
+    });
+
 })();

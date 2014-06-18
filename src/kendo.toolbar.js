@@ -404,7 +404,7 @@ var __meta__ = {
                 that.userEvents = new kendo.UserEvents(document, {
                     threshold: 5,
                     filter:
-                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ", " +
+                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ":not(." + OVERFLOW_ANCHOR + "), " +
                         "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that),
                     press: toggleActive,
