@@ -639,7 +639,7 @@
 
             fn["set" + capitalized] = setAccessor(name);
             fn["get" + capitalized] = getAccessor(name);
-        };
+        }
     }
 
     function setAccessor(field) {
