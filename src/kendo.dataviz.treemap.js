@@ -161,6 +161,17 @@ var __meta__ = {
             }
 
             return recursiveGetByUid(this._root);
+        },
+
+        dataItem: function(node) {
+            var uid = $(node).attr(kendo.attr("uid")),
+                dataSource = this.dataSource;
+
+            return dataSource && dataSource.getByUid(uid);
+        },
+
+        findByUid: function(uid) {
+            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "=" + uid + "]");
         }
     });
 
@@ -413,7 +424,7 @@ var __meta__ = {
         },
 
         _getByUid: function(uid) {
-            return this.element.find("[uid='" + uid + "']");
+            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "=" + uid + "]");
         },
 
         render: function(root) {
@@ -474,7 +485,7 @@ var __meta__ = {
                 });
 
             if (defined(item.dataItem) && defined(item.dataItem.uid)) {
-                root.attr("uid", item.dataItem.uid);
+                root.attr(kendo.attr("uid"), item.dataItem.uid);
             }
 
             return root;
