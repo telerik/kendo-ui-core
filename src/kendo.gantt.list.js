@@ -55,6 +55,7 @@ var __meta__ = {
         iconExpand: "k-i-expand",
         iconHidden: "k-i-none",
         iconPlaceHolder: "k-icon k-i-none",
+        input: "k-input",
         dropPositions: "k-insert-top k-insert-bottom k-add k-insert-middle",
         dropTop: "k-insert-top",
         dropBottom: "k-insert-bottom",
@@ -669,6 +670,7 @@ var __meta__ = {
                     holdToDrag: kendo.support.mobileOS,
                     group: "listGroup",
                     filter: "tr[data-uid]",
+                    ignore: DOT + listStyles.input,
                     hint: function(target) {
                         return $('<div class="' + listStyles.header + " " + listStyles.dragClue + '"/>')
                                 .css({

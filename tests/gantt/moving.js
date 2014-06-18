@@ -197,6 +197,10 @@
         ok(draggable.options.group === contentDropArea.options.group);
     });
 
+    test("list draggable ignores input elements", function() {
+        equal(draggable.options.ignore, ".k-input");
+    });
+
     test("drag start append task title to hint", function() {
         dragstart(ganttList.content.find("tr:first"));
         equal(draggable
