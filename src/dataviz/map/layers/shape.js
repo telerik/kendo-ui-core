@@ -60,8 +60,8 @@
             this.dataSource.unbind("change", this._dataChange);
         },
 
-        reset: function() {
-            Layer.fn.reset.call(this);
+        _reset: function() {
+            Layer.fn._reset.call(this);
             this._translateSurface();
 
             if (this._data) {

@@ -33,7 +33,7 @@
                .appendTo(map.scrollElement);
 
             this._beforeReset = proxy(this._beforeReset, this);
-            this._reset = proxy(this.reset, this);
+            this._reset = proxy(this._reset, this);
             this._resize = proxy(this._resize, this);
             this._panEnd = proxy(this._panEnd, this);
             this._activate();
@@ -57,6 +57,11 @@
         },
 
         reset: function() {
+            this._beforeReset();
+            this._reset();
+        },
+
+        _reset: function() {
             this._applyExtent();
         },
 
