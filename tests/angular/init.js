@@ -552,6 +552,7 @@
             editable: {
                 template: "<div class='my-editable'>{{dataItem.title}}</div>"
             },
+            views: [ "day", "week", "month", "agenda" ],
             edit: function(e) {
                 equal(e.container.find(".my-editable").text(), "Interview");
             },
@@ -583,7 +584,7 @@
             ]
         };
         $("<div kendo-scheduler='scheduler' k-options='options'></div>").appendTo(dom);
-        expect(5);
+        expect(9);
         $scope.$on("kendoRendered", function(){
             var scheduler = $scope.scheduler;
             function shouldDestroy(sel) {
@@ -592,13 +593,31 @@
                     ok(true);
                 });
             }
+
+            scheduler.view("day");
             equal(scheduler.element.find(".my-event").text(), "|Foo|");
             equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
+
+            scheduler.view("week");
+            equal(scheduler.element.find(".my-event").text(), "|Foo|");
+            equal(scheduler.element.find(".my-allday-event").text(), "|Interview|");
+
+            // month and agenda views will use eventTemplate for all-day events too
+            // so both events will be displayed in a <div class="my-event">
+
+            scheduler.view("month");
+            equal(scheduler.element.find(".my-event").text(), "|Interview||Foo|");
+
+            scheduler.view("agenda");
+            equal(scheduler.element.find(".my-event").text(), "|Interview||Foo|");
+
+            scheduler.view("day");
             scheduler.editEvent(scheduler.dataSource.at(0));
             shouldDestroy(".my-event");
             shouldDestroy(".my-allday-event");
             scheduler.date(new Date("2014/6/6 10:00 AM"));
-            setTimeout(start, 100);
+
+            setTimeout(start, 10);
         });
     });
 
