@@ -4259,6 +4259,7 @@ var __meta__ = {
                 .add(this.lockedContent)
                 .add(this.lockedFooter);
 
+            kendo.destroy(elements);
             elements.off(NS).remove();
 
             this.lockedHeader = this.lockedContent = this.lockedFooter = null;
