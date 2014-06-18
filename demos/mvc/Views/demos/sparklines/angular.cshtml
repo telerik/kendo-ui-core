@@ -1,0 +1,40 @@
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section" ng-controller="MyCtrl">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div kendo-sparkline
+                 k-series="[{
+                                   type: 'column',
+                                   field: 'TMax',
+                                   color: '#ff0000',
+                                   negativeColor: '#0099ff'
+                               }]"
+                 k-tooltip="{ visible: false, shared: false }"
+                 k-series-hover="onSeriesHover"
+                 k-data-source="weather"
+                 style="height:30px"></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+
+    function MyCtrl($scope) {
+        $scope.onSeriesHover = function(e) {
+             kendoConsole.log(kendo.format("event :: seriesHover ({0})", e.value));
+        };
+
+        $scope.weather = new kendo.data.DataSource({
+            transport: {
+                read: {
+                     url: "http://demos.telerik.com/kendo-ui/service/Weather/SOFIA/2012/1",
+                     dataType: "jsonp"
+                }
+            }
+        });
+    }
+</script>
+</div>

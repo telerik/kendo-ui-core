@@ -6885,7 +6885,24 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "sparklines/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Sparkline"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Sparkline"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -7008,6 +7025,21 @@
         },
         "meta": {
             "kendo-ui": "Value and visible MVVM binding support in Kendo UI Linear Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "linear-gauge/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Linear Gauge"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Linear Gauge"
         },
         "packages": [
           "!mvc",

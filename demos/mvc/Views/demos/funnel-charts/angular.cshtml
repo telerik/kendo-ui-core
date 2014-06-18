@@ -1,17 +1,17 @@
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
     <div class="demo-section">
-        <div class="box-col" style="width: 600px;">
+        <div class="box-col" style="width: 500px;">
             <h4>Hover some series</h4>
             <div kendo-chart
-                 k-legend="{ position: 'bottom' }"
+                 k-title="{ text: '1024x768 screen resolution trends for 2009', position: 'bottom' }"
                  k-series-defaults="{ type: 'funnel' }"
-                 k-series="[
-                                 { field: 'nuclear', name: 'Nuclear electricity' },
-                                 { field: 'hydro', name: 'Hydro electricity' },
-                                 { field: 'wind', name: 'Wind electricity' }
-                             ]"
-                 k-data-source="electricity"
+                 k-series="[{
+                                field: 'share',
+                                categoryField: 'resolution',
+                                padding: 0
+                              }]"
+                 k-data-source="screenResolution"
                  k-series-hover="onSeriesHover"
                  ></div>
         </div>
@@ -25,20 +25,21 @@
 <script>
     angular.module("KendoDemos", [ "kendo.directives" ]);
     function MyCtrl($scope) {
-        $scope.onSeriesHover = function(e) {
-            kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.series.name, e.value));
+        $scope.onSeriesHover = function (e) {
+            kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.category, e.value));
         };
 
-        $scope.electricity = new kendo.data.DataSource({
+        $scope.screenResolution = new kendo.data.DataSource({
             transport: {
                 read: {
-                    url: "../content/dataviz/js/spain-electricity.json",
+                    url: "../content/dataviz/js/screen_resolution.json",
                     dataType: "json"
                 }
             },
-            sort: {
+            filter: {
                 field: "year",
-                dir: "asc"
+                operator: "eq",
+                value: 2009
             }
         });
     }
