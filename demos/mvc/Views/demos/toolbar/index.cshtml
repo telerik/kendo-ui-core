@@ -7,7 +7,7 @@
                     $("#toolbar").kendoToolBar({
                         items: [
                             { type: "button", text: "Button" },
-                            { type: "button", text: "Toggle Button", toggle: true },
+                            { type: "button", text: "Toggle Button", toggable: true },
                             {
                                 type: "splitButton",
                                 text: "Split Button",
@@ -24,17 +24,17 @@
                             {
                                 type: "buttonGroup",
                                 items: [
-                                    { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggle: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Middle", toggle: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", toggle: true }
+                                    { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggable: true },
+                                    { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Middle", toggable: true },
+                                    { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", toggable: true }
                                 ]
                             },
                             {
                                 type: "buttonGroup",
                                 items: [
-                                    { text: "Radio 1", toggle: true, group: "radio" },
-                                    { text: "Radio 2", toggle: true, group: "radio" },
-                                    { text: "Radio 3", toggle: true, group: "radio" }
+                                    { text: "Radio 1", toggable: true, group: "radio" },
+                                    { text: "Radio 2", toggable: true, group: "radio" },
+                                    { text: "Radio 3", toggable: true, group: "radio" }
                                 ]
                             },
                             {

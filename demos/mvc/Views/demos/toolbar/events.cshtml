@@ -11,7 +11,7 @@
                 $("#toolbar").kendoToolBar({
                     items: [
                         { type: "button", text: "Button" },
-                        { type: "button", text: "Toggle Button", toggle: true, selected: true },
+                        { type: "button", text: "Toggle Button", toggable: true, selected: true },
                         {
                             type: "splitButton",
                             text: "Split Button",
@@ -24,17 +24,17 @@
                         {
                             type: "buttonGroup",
                             items: [
-                                { text: "Left", toggle: true },
-                                { text: "Middle", toggle: true },
-                                { text: "Right", toggle: true }
+                                { text: "Left", toggable: true },
+                                { text: "Middle", toggable: true },
+                                { text: "Right", toggable: true }
                             ]
                         },
                         {
                             type: "buttonGroup",
                             items: [
-                                { text: "Radio 1", toggle: true, group: "radio" },
-                                { text: "Radio 2", toggle: true, group: "radio" },
-                                { text: "Radio 3", toggle: true, group: "radio" }
+                                { text: "Radio 1", toggable: true, group: "radio" },
+                                { text: "Radio 2", toggable: true, group: "radio" },
+                                { text: "Radio 3", toggable: true, group: "radio" }
                             ]
                         },
                         {
