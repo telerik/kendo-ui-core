@@ -6,6 +6,7 @@
         <link href="../content/css/web/kendo.common.min.css" rel="stylesheet" />
         <link href="../content/css/web/kendo.rtl.min.css" rel="stylesheet" />
         <link href="../content/css/web/kendo.default.min.css" rel="stylesheet" />
+        <link href="../content/css/web/kendo.default.mobile.min.css" rel="stylesheet" />
         <link href="../content/css/dataviz/kendo.dataviz.min.css" rel="stylesheet" />
         <link href="../content/css/dataviz/kendo.dataviz.default.min.css" rel="stylesheet" />
         <link href="../content/shared/styles/examples-offline.css" rel="stylesheet">

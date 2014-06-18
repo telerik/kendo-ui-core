@@ -6,7 +6,17 @@
 
 <demo:header />
 
-<div id="info" class="box"></div>
+<div class="box">
+    <div id="info" class="box-col"></div>
+    <div class="box-col select-col">
+        <h4>Bubble symbol</h4>
+        <ul id="select-symbol">
+            <li>Circle</li>
+            <li>Square</li>
+        </ul>
+    </div>
+</div>
+
 
 <script id="info-template" type="text/x-kendo-template">
     <h4>#: city #, #= country #</h4>
@@ -49,20 +59,29 @@
         activeShape = e.shape;
         activeShape.options.set("stroke", { width: 1.5, color: "#fff" });
 
-        $(".box").html(template(e.shape.dataItem));
+        $("#info").html(template(e.shape.dataItem));
     }
 
     function onReset() {
-        $(".box").html(emptyTemplate({}));
+        $("#info").html(emptyTemplate({}));
         activeShape = null;
     }
+    
+    $("#select-symbol").kendoMobileButtonGroup({
+        select: function(e) {
+            var layer = $("#map").data("kendoMap").layers[1];
+            layer.options.symbol = e.index === 0 ? "circle" : "square";
+            layer.reset();
+        },
+        index: 0
+    });
 </script>
 
 <style>
-    .box {
-        text-align: center;
+    .select-col {
+        float: right;
     }
-
+    
     #example .box,
    .demo-section {
         margin: 1em auto;
