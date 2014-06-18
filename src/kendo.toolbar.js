@@ -584,7 +584,7 @@ var __meta__ = {
             },
 
             _toggleOverflowAnchor: function() {
-                if (this.popup.element.children(":not(.k-overflow-hidden)").length > 0) {
+                if (this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ")").length > 0) {
                     this.overflowAnchor.css("visibility", "visible");
                 } else {
                     this.overflowAnchor.css("visibility", "hidden");
