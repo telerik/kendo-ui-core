@@ -488,6 +488,8 @@
 /* PopOver */
 
 .km-blackberry .km-popup.km-pane,
+.km-blackberry .k-split-wrapper div.km-actionsheet-wrapper,
+.km-blackberry .k-overflow-wrapper div.km-actionsheet-wrapper,
 .km-tablet .km-blackberry .km-actionsheet-wrapper:not(.km-actionsheet-phone)
 {
     background: @blackberry-navbar-background;
@@ -512,6 +514,8 @@
     border-color: transparent @blackberry-navbar-background;
 }
 
+.km-blackberry .k-split-container.km-actionsheet,
+.km-blackberry .k-overflow-container.km-actionsheet,
 .km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet,
 .km-blackberry .km-popup.km-pane .km-content
 {
@@ -564,7 +568,8 @@
 
 .km-blackberry .km-actionsheet > li > a:hover,
 .km-blackberry .km-actionsheet > li > a:focus,
-.km-blackberry .km-actionsheet > li > a:active
+.km-blackberry .km-actionsheet > li > a:active,
+.km-blackberry .km-actionsheet > li > .km-state-active
 {
     background: @blackberry-active-background;
     color: @blackberry-active-color;
@@ -588,6 +593,8 @@
     border-color: transparent #cfd1d3;
 }
 
+.km-blackberry .k-split-container > li > a,
+.km-blackberry .k-overflow-container > li > a,
 .km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a
 {
     color: @blackberry-main-color;
@@ -595,7 +602,8 @@
 
 .km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover,
 .km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
-.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active,
+.km-tablet .km-blackberry *:not(.km-actionsheet-phone) > .km-actionsheet > li:not(.km-actionsheet-cancel) > .km-state-active
 {
     color: @blackberry-active-color;
     background: @blackberry-active-background;
