@@ -176,7 +176,8 @@ var __meta__ = {
                     anchor: this.element,
                     open: function (e) {
                         that._adjustListWidth();
-                    }
+                    },
+                    animation: this.options.animation
                 }, DIRECTIONS[this.options.direction])
             );
 
@@ -987,7 +988,12 @@ var __meta__ = {
                 messages: {
                     actions: actionMessages
                 },
-                direction: "up"
+                direction: "up",
+                animation: {
+                    open: {
+                        effects: "slideIn:up"
+                    }
+                }
             });
 
             this.headerDropDown = new TaskDropDown(this.toolbar.children(actionsSelector).eq(0), {

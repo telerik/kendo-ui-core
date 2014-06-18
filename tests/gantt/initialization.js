@@ -4,9 +4,7 @@
     var ui = kendo.ui;
     var Gantt = ui.Gantt;
     var setup = function(options) {
-        var gantt = new Gantt(element, options || {});
-
-        return gantt.headerDropDown;
+        return new Gantt(element, options || {});
     };
 
     module("Gantt initialization", {
@@ -349,33 +347,52 @@
     });
 
     test("initialize Popup widget", 2, function() {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
 
         ok(dropDown.popup);
         ok(dropDown.popup instanceof kendo.ui.Popup);
     });
 
     test("default direction is 'down'", function() {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
 
         equal(dropDown.options.direction, "down");
     });
 
+    test("footer's drop down direction is down", function() {
+        var gantt = setup();
+        var dropDown = gantt.footerDropDown;
+
+        equal(dropDown.options.direction, "up");
+    });
+
+    test("footer's drop down open animation is slideIn:up", function() {
+        var gantt = setup();
+        var dropDown = gantt.footerDropDown;
+
+        equal(dropDown.options.animation.open.effects, "slideIn:up");
+    });
+
     test("css classes added to popup container", function () {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
 
         ok(dropDown.list.hasClass("k-list-container"));
     });
 
     test("renders popup content list", 2, function() {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
 
         ok(dropDown.list.children("ul").length);
         ok(dropDown.list.children("ul").hasClass("k-list k-reset"));
     });
 
     test("renders popup list's content", 7, function () {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
         var actions = dropDown.options.messages.actions;
 
         equal(dropDown.list.find("li").length, 3);
@@ -391,7 +408,8 @@
     });
 
     test("renders list's item data attributes", 3, function() {
-        var dropDown = setup();
+        var gantt = setup();
+        var dropDown = gantt.headerDropDown;
 
         equal(dropDown.list.find("li").eq(0).attr("data-action"), "add");
 
