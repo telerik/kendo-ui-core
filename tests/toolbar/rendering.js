@@ -115,20 +115,21 @@
         ok(button.hasClass("k-primary"));
     });
 
-    test("button attaches click event handler", 1, function() {
+    test("click event handler of the button is stored in the data of the rendered element", 2, function() {
         container.kendoToolBar({
             items: [{ 
                 type: "button",
                 id: "foo",
                 text: "foo",
-                click: function() {
-                    ok(true, "click event is fired"); 
-                }
+                click: function() { }
             }]
         });
 
-        var button = container.find("#foo");
-        button.trigger("click");
+        var button = $("#foo");
+        var overflowButton = $("#foo_overflow");
+
+        ok(kendo.isFunction(button.data("click")), "Click event handler is saved in the data of the button element");
+        ok(kendo.isFunction(overflowButton.data("click")), "Click event handler is saved in the data of the overflowButton element");
     });
 
     test("spriteCssClass prepends a span element with corresponding class(es) to the button element", 3, function() {
@@ -486,6 +487,24 @@
 
         equal(buttons.eq(0).data("group"), "foo");
         equal(buttons.eq(1).data("group"), "foo");
+    });
+
+    test("toggle event handler of the button is stored in the data of the rendered element", 2, function() {
+        container.kendoToolBar({
+            items: [{ 
+                type: "button",
+                toggle: true,
+                id: "foo",
+                text: "foo",
+                onToggle: function() { }
+            }]
+        });
+
+        var button = $("#foo");
+        var overflowButton = $("#foo_overflow");
+
+        ok(kendo.isFunction(button.data("toggle")), "Toggle event handler is saved in the data of the button element");
+        ok(kendo.isFunction(overflowButton.data("toggle")), "Toggle event handler is saved in the data of the overflowButton element");
     });
 
     /* BUTTON GROUP */

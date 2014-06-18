@@ -206,6 +206,14 @@ var __meta__ = {
                 element.attr(kendo.attr("group"), options.group);
             }
 
+            if (!options.toggle && options.click && isFunction(options.click)) {
+                element.data("click", options.click);
+            }
+
+            if (options.toggle && options.onToggle && isFunction(options.onToggle)) {
+                element.data("toggle", options.onToggle);
+            }
+
             return element;
         }
 
@@ -237,11 +245,6 @@ var __meta__ = {
                 addGraphic(options, element);
             }
 
-            //user events tap
-            if (options.click && kendo.isFunction(options.click)) {
-                element.on(CLICK, options.click);
-            }
-
             return element;
         }
 
@@ -271,11 +274,6 @@ var __meta__ = {
 
             if (hasIcon) {
                 addGraphic(options, element);
-            }
-
-            //user events tap
-            if (options.click && kendo.isFunction(options.click)) {
-                element.on(CLICK, options.click);
             }
 
             return element;
@@ -597,7 +595,7 @@ var __meta__ = {
                 var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
-                    group, current;
+                    group, current, handler;
 
                 e.preventDefault();
 
@@ -619,21 +617,29 @@ var __meta__ = {
                 }
 
                 if (target.hasClass(TOGGLE_BUTTON)) {
-                    isChecked = target.hasClass(STATE_ACTIVE);
                     group = target.data("group");
+                    handler = isFunction(target.data("toggle")) ? target.data("toggle") : null;
 
                     if (group) { //find all buttons from the same group
                         current = $("[" + kendo.attr("uid") + "='" + that.uid + "']").find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
+                        current.removeClass(STATE_ACTIVE);
                     }
 
-                    if (!that.trigger(TOGGLE, { target: target, checked: isChecked })) {
-                        if(current && current.length) {
-                            current.removeClass(STATE_ACTIVE);
-                        }
+                    target.toggleClass(STATE_ACTIVE);
+                    isChecked = target.hasClass(STATE_ACTIVE);
 
-                        target.toggleClass(STATE_ACTIVE);
+                    if (handler) {
+                        handler.call(that, { target: target, group: group, checked: isChecked });
                     }
+
+                    that.trigger(TOGGLE, { target: target, group: group, checked: isChecked });
                 } else {
+                    handler = isFunction(target.data("click")) ? target.data("click") : null;
+
+                    if (handler) {
+                        handler.call(that, { target: target });
+                    }
+
                     that.trigger(CLICK, { target: target });
                 }
 
