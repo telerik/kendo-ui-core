@@ -3,7 +3,7 @@
 })(function(){
 
 var __meta__ = {
-    id: "rowfilter",
+    id: "filtercell",
     name: "Row filter",
     category: "framework",
     depends: [ "autocomplete" ],
@@ -16,7 +16,7 @@ var __meta__ = {
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         CHANGE = "change",
-        NS = ".kendoRowFilter",
+        NS = ".kendoFilterCell",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
         proxy = $.proxy;
@@ -55,7 +55,7 @@ var __meta__ = {
         }
     }
 
-    var RowFilter = Widget.extend( {
+    var FilterCell = Widget.extend( {
         init: function(element, options) {
             var that = this,
                 dataSource,
@@ -214,7 +214,7 @@ var __meta__ = {
         ],
 
         options: {
-            name: "RowFilter",
+            name: "FilterCell",
             autoBind: true,
             field: "",
             type: "string",
@@ -276,7 +276,7 @@ var __meta__ = {
         }
     });
 
-    ui.plugin(RowFilter);
+    ui.plugin(FilterCell);
 })(window.kendo.jQuery);
 
 return window.kendo;

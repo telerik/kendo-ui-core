@@ -545,7 +545,7 @@
         ok(grid.thead.find("th").data("kendoFilterMenu"));
     });
 
-    test("rowfilter does not get rendered by default", function() {
+    test("filtercell does not get rendered by default", function() {
         $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
         var grid = new Grid(table, {
             filterable: true
@@ -555,7 +555,7 @@
         equal(grid.thead.find("tr").length, 1);
     });
 
-    test("rowfilter header row gets rendered when grid filterable is set to true", function() {
+    test("filtercell header row gets rendered when grid filterable is set to true", function() {
         $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
         var grid = new Grid(table, {
             filterable: {
@@ -567,7 +567,7 @@
         equal(grid.thead.find("tr").length, 2);
     });
 
-    test("rowfilter row is rendered when filterable true and initialized from div", function() {
+    test("filtercell row is rendered when filterable true and initialized from div", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -579,7 +579,7 @@
         equal(grid.thead.find("tr").length, 2);
     });
 
-    test("rowfilter header row is inserted second", function() {
+    test("filtercell header row is inserted second", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -588,10 +588,10 @@
             columns: ["foo"],
         });
 
-        equal(grid.thead.find("tr:eq(1)").attr("class"), "k-rowfilter");
+        equal(grid.thead.find("tr:eq(1)").attr("class"), "k-filtercell");
     });
 
-    test("rowfilter with detailTemplate renders detail cell th", function() {
+    test("filtercell with detailTemplate renders detail cell th", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             detailTemplate: "foo",
@@ -602,10 +602,10 @@
             }
         });
 
-        equal(grid.thead.find(".k-rowfilter").find(".k-hierarchy-cell").length, 1);
+        equal(grid.thead.find(".k-filtercell").find(".k-hierarchy-cell").length, 1);
     });
 
-    test("rowfilter with detail cell is not rendered when no details", function() {
+    test("filtercell with detail cell is not rendered when no details", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             dataSource: [{foo: 1}],
@@ -615,10 +615,10 @@
             }
         });
 
-        equal(grid.thead.find(".k-rowfilter").find(".k-hierarchy-cell").length, 0);
+        equal(grid.thead.find(".k-filtercell").find(".k-hierarchy-cell").length, 0);
     });
 
-    test("rowfilter creates group cells when grid has groups", function() {
+    test("filtercell creates group cells when grid has groups", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             dataSource: {
@@ -638,10 +638,10 @@
             }
         });
 
-        equal(grid.thead.find(".k-rowfilter").find(".k-group-cell").length, 2);
+        equal(grid.thead.find(".k-filtercell").find(".k-group-cell").length, 2);
     });
 
-    test("rowfilter creates th cells for each column", function() {
+    test("filtercell creates th cells for each column", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             dataSource: {
@@ -655,10 +655,10 @@
             }
         });
 
-        equal(grid.thead.find(".k-rowfilter").find("th").length, 3);
+        equal(grid.thead.find(".k-filtercell").find("th").length, 3);
     });
 
-    test("rowfilter creates th cells and sets attributes for bound columns", function() {
+    test("filtercell creates th cells and sets attributes for bound columns", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             dataSource: {
@@ -672,14 +672,14 @@
             }
         });
 
-        var rowfilter = grid.thead.find(".k-rowfilter");
-        var ths = rowfilter.find("th");
+        var filtercell = grid.thead.find(".k-filtercell");
+        var ths = filtercell.find("th");
         equal(ths.length, 3);
         equal(ths.eq(0).attr(kendo.attr("field")), "foo");
         equal(ths.eq(1).attr(kendo.attr("field")), "bar");
     });
 
-    test("rowfilter tr is not rendered when grid filterable is set to true and columns filterable to false", function() {
+    test("filtercell tr is not rendered when grid filterable is set to true and columns filterable to false", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -705,7 +705,7 @@
         equal(grid.thead.find("tr").length, 1);
     });
 
-    test("rowfilter widgets are not rendered when grid filterable is set to true and columns filterable to false", function() {
+    test("filtercell widgets are not rendered when grid filterable is set to true and columns filterable to false", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -732,13 +732,13 @@
             },
         });
 
-        var rowfilter = grid.thead.find(".k-rowfilter");
-        var widgetSelector = "["+ kendo.attr("role") +"=rowfilter]"
-        var widgets = rowfilter.find(widgetSelector);
+        var filtercell = grid.thead.find(".k-filtercell");
+        var widgetSelector = "["+ kendo.attr("role") +"=filtercell]"
+        var widgets = filtercell.find(widgetSelector);
         equal(widgets.length, 1);
     });
 
-    test("rowfilter widgets are initialized with type according to the column field", function() {
+    test("filtercell widgets are initialized with type according to the column field", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -767,10 +767,10 @@
             }
         });
 
-        var widgets = grid.thead.find("["+ kendo.attr("role") +"=rowfilter]");
-        var firstWidget = widgets.eq(0).data("kendoRowFilter");
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        var firstWidget = widgets.eq(0).data("kendoFilterCell");
         equal(firstWidget.options.type, "number");
-        var secondWindget = widgets.eq(1).data("kendoRowFilter");
+        var secondWindget = widgets.eq(1).data("kendoFilterCell");
         equal(secondWindget.options.type, "string");
     });
 

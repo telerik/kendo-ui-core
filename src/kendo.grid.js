@@ -29,10 +29,10 @@ var __meta__ = {
         description: "Support for grid grouping",
         depends: [ "groupable" ]
     }, {
-        id: "grid-rowfilter",
+        id: "grid-filtercell",
         name: "Row filter",
         description: "Support for grid header filtering",
-        depends: [ "rowfilter" ]
+        depends: [ "filtercell" ]
     }, {
         id: "grid-paging",
         name: "Paging",
@@ -1422,8 +1422,8 @@ var __meta__ = {
             }
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            if (that._hasRowFiltering()) {
-                reorder(that.wrapper.find(".k-rowfilter th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            if (that._hasFilterCelling()) {
+                reorder(that.wrapper.find(".k-filtercell th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
             if (footer && footer.length) {
@@ -3605,13 +3605,13 @@ var __meta__ = {
             }
         },
 
-        _rowFilter: function() {
-            var hasRowFiltering = this._hasRowFiltering();
-            if (hasRowFiltering) {
-                var rowFilterOptions = this.options.filterable.row;
-                var rowheader = this.thead.find(".k-rowfilter");
+        _filterCell: function() {
+            var hasFilterCelling = this._hasFilterCelling();
+            if (hasFilterCelling) {
+                var filterCellOptions = this.options.filterable.row;
+                var rowheader = this.thead.find(".k-filtercell");
                 var columns = this.columns;
-                var dsOptions = rowFilterOptions.dataSource || this.dataSource.options;
+                var dsOptions = filterCellOptions.dataSource || this.dataSource.options;
                 for (var i = 0; i < columns.length; i++) {
                     var col = columns[i];
                     var th = $("<th/>");
@@ -3619,7 +3619,7 @@ var __meta__ = {
 
                     if (field && col.filterable !== false) {
                         th.attr(kendo.attr("field"), field)
-                        .kendoRowFilter({
+                        .kendoFilterCell({
                             dataSource: this.dataSource,
                             acDataSource: dsOptions,
                             field: field
@@ -4022,7 +4022,7 @@ var __meta__ = {
 
             return that.options.detailTemplate !== null  || (that._events[DETAILINIT] || []).length;
         },
-        _hasRowFiltering: function() {
+        _hasFilterCelling: function() {
             var filterable = this.options.filterable;
             var hasFiltering = filterable && filterable.row;
             var columns = this.columns;
@@ -4211,16 +4211,16 @@ var __meta__ = {
                 trFilter,
                 table,
                 header,
-                rowfilterCells,
+                filtercellCells,
                 skipHiddenCount = 0,
                 cols = $(),
-                hasRowFiltering = that._hasRowFiltering(),
+                hasFilterCelling = that._hasFilterCelling(),
                 filterCells = $(),
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
-            rowfilterCells = that.thead.find(".k-rowfilter").find("th");
+            filtercellCells = that.thead.find(".k-filtercell").find("th");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
@@ -4228,7 +4228,7 @@ var __meta__ = {
                         cols = cols.add(colgroup.eq(idx - skipHiddenCount));
                     }
                     cells = cells.add(header.eq(idx));
-                    filterCells = filterCells.add(rowfilterCells.eq(idx));
+                    filterCells = filterCells.add(filtercellCells.eq(idx));
                 }
                 if (columns[idx].hidden) {
                     skipHiddenCount++;
@@ -4236,18 +4236,18 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasRowFiltering ? '<tr class="k-rowfilter" />' : '') +
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterCelling ? '<tr class="k-filtercell" />' : '') +
                     '</thead></table></div>';
 
                 table = $(html);
 
                 colgroup = table.find("colgroup");
                 tr = table.find("thead tr:first");
-                trFilter = table.find(".k-rowfilter");
+                trFilter = table.find(".k-filtercell");
 
                 colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
                 tr.append(that.thead.find("tr:first .k-group-cell").add(cells));
-                trFilter.append(that.thead.find(".k-rowfilter .k-group-cell").add(filterCells));
+                trFilter.append(that.thead.find(".k-filtercell .k-group-cell").add(filterCells));
 
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();
@@ -4268,7 +4268,7 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 hasDetails = that._hasDetails() && columns.length,
-                hasRowFiltering = that._hasRowFiltering(),
+                hasFilterCelling = that._hasFilterCelling(),
                 idx,
                 length,
                 html = "",
@@ -4297,14 +4297,14 @@ var __meta__ = {
                 }
             }
 
-            if (hasRowFiltering) {
-                var rowfilter = $("<tr/>");
-                rowfilter.addClass("k-rowfilter");
+            if (hasFilterCelling) {
+                var filtercell = $("<tr/>");
+                filtercell.addClass("k-filtercell");
                 if (hasDetails) {
-                    rowfilter.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
+                    filtercell.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
                 }
 
-                thead.append(rowfilter);
+                thead.append(filtercell);
             }
 
             if (!tr.children().length) {
@@ -4336,7 +4336,7 @@ var __meta__ = {
 
             that._filterable();
 
-            that._rowFilter();
+            that._filterCell();
 
             that._scrollable();
 

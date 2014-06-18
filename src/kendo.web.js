@@ -44,6 +44,7 @@
         "./kendo.menu",
         "./kendo.editable",
         "./kendo.filtermenu",
+        "./kendo.filtercell",
         "./kendo.panelbar",
         "./kendo.progressbar",
         "./kendo.tabstrip",

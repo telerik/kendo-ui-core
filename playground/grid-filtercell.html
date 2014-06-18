@@ -23,7 +23,7 @@
         <script src="../src/kendo.filtermenu.js"></script>
         <script src="../src/kendo.reorderable.js"></script>
         <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.rowfilter.js"></script>
+        <script src="../src/kendo.filtercell.js"></script>
         <script src="../src/kendo.menu.js"></script>
         <script src="../src/kendo.columnmenu.js"></script>
 
@@ -126,7 +126,7 @@
                 function doFiltering(){
 
                     var filters = [];
-                    grid.thead.find(".rowfilter>[data-field]").each(function() {
+                    grid.thead.find(".filtercell>[data-field]").each(function() {
                         var field = $(this).data("field");
                         var input = $(this).find("[data-role]"); //this will be retrieved through MVVM
                         if (!input.length) {
@@ -155,7 +155,7 @@
                     gridDs.filter(filter);
                 }
 
-                var tr = $("<tr class='rowfilter'></tr>");
+                var tr = $("<tr class='filtercell'></tr>");
 
                 for (var i = 0; i < columns.length; i++) {
                     var col = columns[i];
