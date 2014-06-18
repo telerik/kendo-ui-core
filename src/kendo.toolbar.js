@@ -547,10 +547,9 @@ var __meta__ = {
 
                 if (that.isMobile) {
                     that.overflowAnchor.append('<span class="km-icon km-more"></span>');
-                }
-
-                if (that.isMobile) {
                     components.overflowContainer = actionSheetWrap(components.overflowContainer);
+                } else {
+                    that.overflowAnchor.append('<span class="k-icon k-i-more"></span>');
                 }
 
                 that.popup = new kendo.ui.Popup(components.overflowContainer, {
