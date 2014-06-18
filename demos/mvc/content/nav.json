@@ -3449,6 +3449,7 @@
   },
   {
     "text": "ToolBar",
+    "disableInMobile": true,
     "name": "toolbar",
     "api": "web/toolbar",
     "documentation": {
