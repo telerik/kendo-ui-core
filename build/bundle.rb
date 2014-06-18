@@ -160,8 +160,8 @@ def bundle(options)
                     file.remove("changelog.html")
                 end
             end
-            sh  "./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, (options[:appbuilder_features] || "")
-        end
+            sh  *["./build/appbuilder-upload.js", options[:product], VERSION, versioned_bundle_path, changelog_path, options[:appbuilder_features]].compact
+            end
 
         desc "Upload bundles in AppBuidler"
         task "appbuilder_builds:bundles:all" => "appbuilder_builds:bundles:#{name}"
