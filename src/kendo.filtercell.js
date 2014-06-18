@@ -108,6 +108,8 @@ var __meta__ = {
 
             that._setInputType(options, type);
 
+            that._createClearIcon();
+
             kendo.bind(input, viewModel);
 
             that.setACDataSource(acDataSource);
@@ -227,6 +229,19 @@ var __meta__ = {
             }
 
             return result;
+        },
+
+        _createClearIcon: function() {
+            var that = this;
+
+            $("<span/>")
+                .addClass("k-icon k-i-close")
+                .click(proxy(that.clearFilter, that))
+                .appendTo(that.element);
+        },
+
+        clearFilter: function() {
+            this.viewModel.set("value", null);
         },
 
         destroy: function() {

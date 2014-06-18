@@ -208,4 +208,23 @@
         equal(groups, null);
     });
 
+    test("creates clear icon", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(filterCell.element.find(".k-icon.k-i-close").length, 1);
+    });
+
+    test("clear icon clears the filter", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(filterCell.element.find(".k-icon.k-i-close").length, 1);
+    });
+
+    test("clear icon clears the filter", function() {
+        dataSource.filter({field: "foo", value: "someVal"})
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        equal(filterCell.input.val(), "someVal");
+        filterCell.element.find(".k-icon.k-i-close").click();
+        equal(filterCell.input.val(), "");
+    });
+
+
 })();
