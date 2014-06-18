@@ -496,7 +496,7 @@
             var gestureCenter = new g.Point(e.center.x, e.center.y);
             var centerLocation = this.viewToLocation(gestureCenter, zoom);
             var centerPoint = this.locationToLayer(centerLocation, zoom);
-            var originPoint = centerPoint.translateWith(gestureCenter.scaleCopy(-1));
+            var originPoint = centerPoint.translate(-gestureCenter.x, -gestureCenter.y);
 
             this._zoomAround(originPoint, zoom);
             this.trigger("zoomEnd", { originalEvent: e });
@@ -603,7 +603,7 @@
                     var cursor = this.eventOffset(e);
                     var location = this.viewToLocation(cursor);
                     var postZoom = this.locationToLayer(location, toZoom);
-                    var origin = postZoom.translateWith(cursor.scaleCopy(-1));
+                    var origin = postZoom.translate(-cursor.x, -cursor.y);
                     this._zoomAround(origin, toZoom);
 
                     this.trigger("zoomEnd", { originalEvent: e });

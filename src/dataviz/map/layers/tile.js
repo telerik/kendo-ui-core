@@ -156,8 +156,8 @@
         tileCount: function() {
             var size = this.size(),
                 firstTileIndex = this.pointToTileIndex(this._extent.nw),
-                nwOffset = this._extent.nw.scaleCopy(-1),
-                point = this.indexToPoint(firstTileIndex).translateWith(nwOffset);
+                nw = this._extent.nw,
+                point = this.indexToPoint(firstTileIndex).translate(-nw.x, -nw.y);
 
             return {
                 x: math.ceil((math.abs(point.x) + size.width) / this.options.tileSize),
@@ -168,7 +168,7 @@
         size: function() {
             var nw = this._extent.nw,
                 se = this._extent.se,
-                diff = se.clone().translateWith(nw.scaleCopy(-1));
+                diff = se.clone().translate(-nw.x, -nw.y);
 
             return {
                 width: diff.x,
@@ -231,7 +231,8 @@
         tileOptions: function(currentIndex) {
             var index = this.wrapIndex(currentIndex),
                 point = this.indexToPoint(currentIndex),
-                offset = point.clone().translateWith(this.basePoint.scaleCopy(-1));
+                base = this.basePoint,
+                offset = point.clone().translate(-base.x, -base.y);
 
             return {
                 index: index,
