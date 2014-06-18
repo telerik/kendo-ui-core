@@ -1420,7 +1420,9 @@ var __meta__ = {
                         }
                     }
                     start++;
+
                     expandedMemberNames.push(expandedColumns[idx].name);
+                    expandedMemberNames.shift();
                 }
             }
         } else {

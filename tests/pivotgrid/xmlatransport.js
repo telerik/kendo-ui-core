@@ -272,8 +272,8 @@
 
         ok(params.indexOf('SELECT NON EMPTY {CROSSJOIN({[foo]},{[bar]}),' +
             'CROSSJOIN({[foo].Children},{[bar]}),' +
-            'CROSSJOIN({[foo]},{[bar].Children}),' +
-            'CROSSJOIN({[foo].Children},{[bar].Children})} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
+            'CROSSJOIN({[foo]},{[bar].Children})' +
+            '} DIMENSION PROPERTIES CHILDREN_CARDINALITY, PARENT_UNIQUE_NAME ON COLUMNS ' +
             'FROM [cubeName]') > -1);
     });
 
