@@ -356,7 +356,10 @@ module CodeGen::MVC::Wrappers
     end
 
     GENERIC_ARGS = {
-        'gantt' => 'class, IGanttTask'
+        'gantt' => {
+            'TTaskModel' => 'class, IGanttTask',
+            'TDependenciesModel' => 'class, IGanttDependency'
+        }
     }
 
     class Component < CodeGen::Component
@@ -391,13 +394,19 @@ module CodeGen::MVC::Wrappers
         end
 
         def csharp_generic_args
-            GENERIC_ARGS[full_name] ? '<T>' : ""
+            args = GENERIC_ARGS[full_name]
+
+            return '' unless args
+
+            '<' + args.map { |name, type| name } .join(',') + '>'
         end
 
         def csharp_generic_constraints
-            return unless GENERIC_ARGS[full_name]
+            args = GENERIC_ARGS[full_name]
 
-            ' where T : ' + GENERIC_ARGS[full_name]
+            return unless args
+
+            args.map { |name, type| " where #{name} : #{type}" } .join(' ')
         end
 
         def component_template

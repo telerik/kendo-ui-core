@@ -25,12 +25,12 @@
         }
 
 
-        public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
+        public virtual JsonResult ReadTasks([DataSourceRequest] DataSourceRequest request)
         {
             return Json(taskService.GetAll().ToDataSourceResult(request));
         }
 
-        public virtual JsonResult Destroy([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        public virtual JsonResult DestroyTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
         {
             if (ModelState.IsValid)
             {
@@ -40,7 +40,7 @@
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-        public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        public virtual JsonResult CreateTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));
         }
 
-        public virtual JsonResult Update([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
+        public virtual JsonResult UpdateTask([DataSourceRequest] DataSourceRequest request, TaskViewModel task)
         {
             if (ModelState.IsValid)
             {

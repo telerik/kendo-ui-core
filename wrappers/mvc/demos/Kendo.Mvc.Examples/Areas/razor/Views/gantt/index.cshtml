@@ -22,19 +22,19 @@
             m.Id(f => f.TaskID);
             m.ParentId(f => f.ParentID);
         })
-        .Read("Read", "Gantt")
-        .Create("Create", "Gantt")
-        .Destroy("Destroy", "Gantt")
-        .Update("Update", "Gantt")
+        .Read("ReadTasks", "Gantt")
+        .Create("CreateTask", "Gantt")
+        .Destroy("DestroyTask", "Gantt")
+        .Update("UpdateTask", "Gantt")
+    )
+    .DependenciesDataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.OrderID);
+        })
+        .Read("ReadTasks", "Gantt")
+        .Create("CreateDependency", "Gantt")
+        .Destroy("DestroyDependency", "Gantt")
+        .Update("UpdateDependency", "Gantt")
     )
 )
-
-<style scoped>
-    #clientsDb {
-        width: 952px;
-        height: 396px;
-        margin: 20px auto 0;
-        padding: 51px 4px 0 4px;
-        background: url('@Url.Content("~/content/web/grid/clientsDb.png")') no-repeat 0 0;
-    }
-</style>

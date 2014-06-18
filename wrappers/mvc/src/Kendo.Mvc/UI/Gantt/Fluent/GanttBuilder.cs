@@ -38,10 +38,34 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        /// , GanttModelDescriptor, DataSourceSchedulerModelDescriptorFactory<T>
         public GanttBuilder<T> DataSource(Action<GanttDataSourceBuilder<T>> configurator)
         {
             configurator(new GanttDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the dependencies DataSource options.
+        /// </summary>
+        /// <param name="configurator">The DataSource configurator action.</param>
+        /// <example>
+        /// <code lang="ASPX">
+        ///  &lt;%= Html.Kendo().Gantt&lt;Task&gt;()
+        ///             .Name("Gantt")
+        ///             .DependenciesDataSource(source =&gt;
+        ///             {
+        ///                 source.Read(read =&gt;
+        ///                 {
+        ///                     read.Action("Read", "Gantt");
+        ///                 });
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GanttBuilder<T> DependenciesDataSource(Action<GanttDependenciesDataSourceBuilder<T>> configurator)
+        {
+            configurator(new GanttDependenciesDataSourceBuilder<T>(Component.DependenciesDataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }

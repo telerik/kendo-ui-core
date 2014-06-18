@@ -19,10 +19,12 @@ namespace Kendo.Mvc.UI
             this.UrlGenerator = urlGenerator;
 
             DataSource = new DataSource();
-
             DataSource.Type = DataSourceType.Ajax;
-
             DataSource.Schema.Model = new GanttModelDescriptor(typeof(T));
+
+            DependenciesDataSource = new DataSource();
+            DependenciesDataSource.Type = DataSourceType.Ajax;
+            DependenciesDataSource.Schema.Model = new GanttDependenciesModelDescriptor(typeof(T));
 
 //>> Initialization
         
@@ -36,6 +38,12 @@ namespace Kendo.Mvc.UI
         }
 
         public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+        public DataSource DependenciesDataSource
         {
             get;
             private set;
@@ -181,9 +189,9 @@ namespace Kendo.Mvc.UI
                 
         //<< Serialization
 
-            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
+            json["dataSource"] = (Dictionary<string, object>)DataSource.ToJson();
 
-            json["dataSource"] = dataSource;
+            json["dependencies"] = (Dictionary<string, object>)DependenciesDataSource.ToJson();
 
             writer.Write(Initializer.Initialize(Selector, "Gantt", json));
 
