@@ -565,7 +565,7 @@ var __meta__ = {
                             .addClass("k-overflow-wrapper");
 
                         if (!that.isMobile) {
-                            wrapper.css("margin-left", "3px");
+                            wrapper.css("margin-left", (wrapper.outerWidth() - wrapper.width()) / 2 + 1);
                         } else {
                             that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
                         }
