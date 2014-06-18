@@ -1,0 +1,125 @@
+        <div id="example">
+            <p>Cutomize the element</p>
+            <div id="toolbar"></div>
+            <div id="container">
+                <div id="target"></div>
+            </div>
+
+            <script>
+                var target;
+                $(document).ready(function() {
+                    target = $("#target");
+                    $("#toolbar").kendoToolBar({
+                        resizable: false,
+                        items: [
+                            { template: "<label>Shape type:</label><input id='shape' />" },
+                            { type: "separator" },
+                            { template: "<label>Background color:</label><div type='color' id='background-picker'></div>" },
+                            { type: "separator" },
+                            { template: "<label>Border style:</label><input id='border-style' style='width: 100px;' />" },
+                            { type: "separator" },
+                            { template: "<label>Border color:</label><div type='color' id='border-picker'></div>" },
+                            { type: "separator" },
+                            { template: "<label>Height:</label><input id='height' style='width: 70px;' type='text' />" },
+                            { type: "separator" },
+                            { template: "<label>Width:</label><input id='width' style='width: 70px;' type='text' />" },
+                            { type: "separator" },
+                            { template: "<label>Position:</label>" },
+                            {
+                                type: "buttonGroup",
+                                items: [
+                                    { text: "Left", toggle: true, group: "position" },
+                                    { text: "Center", toggle: true, group: "position", selected: true },
+                                    { text: "Right", toggle: true, group: "position" }
+                                ]
+                            }
+                        ],
+                        toggle: function(e) {
+                            var position = e.target.text().toLowerCase();
+
+                            if (position == "center") {
+                                position = "none";
+                            }
+
+                            target.css("float", position);
+                        }
+                    });
+
+                    $("#shape").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [
+                            { text: "Rectangle", value: 0 },
+                            { text: "Rounded rectangle", value: 30 },
+                            { text: "Circle/Ellipse", value: 300 }
+                        ],
+                        change: function() {
+                            target.css("border-radius", parseInt(this.value()));
+                        }
+                    });
+
+                    $("#border-style").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [
+                            { text: "Solid", value: "solid" },
+                            { text: "Dashed", value: "dashed" },
+                            { text: "Dotted", value: "dotted" }
+                        ],
+                        change: function() {
+                            target.css("border-style", this.value());
+                        }
+                    });
+
+                    $("#background-picker").kendoColorPicker({
+                        palette: "basic",
+                        value: "#22b14c",
+                        change: function() {
+                            target.css("background-color", this.value());
+                        }
+                    });
+
+                    $("#border-picker").kendoColorPicker({
+                        palette: "basic",
+                        value: "#ff7f27",
+                        change: function() {
+                            target.css("border-color", this.value());
+                        }
+                    });
+
+                    $("#height, #width").kendoNumericTextBox({
+                        value: 150,
+                        decimals: 0,
+                        format: "n0",
+                        max: 300,
+                        min: 50,
+                        change: function() {
+                            var dimension = this.element.attr("id");
+
+                            target.css(dimension, this.value());
+                        }
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #toolbar {
+                    margin: 1em 0;
+                }
+
+                #container {
+                    padding: 5px 20px;
+                    overflow: hidden;
+                }
+
+                #target {
+                    border: 3px solid #ff7f27;
+                    border-radius: 0;
+                    background-color: #22b14c;
+                    height: 150px;
+                    width: 150px;
+                    margin: 0 auto;
+                }
+            </style>
+
+        </div>

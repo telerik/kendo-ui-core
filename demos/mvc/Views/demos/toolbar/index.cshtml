@@ -20,14 +20,6 @@
                                 overflow: "never"
                             },
                             {
-                                template: "<input id='combo' style='width: 150px;' />",
-                                overflow: "never"
-                            },
-                            {
-                                template: "<input id='masked' style='width: 150px;' />",
-                                overflow: "never"
-                            },
-                            {
                                 type: "buttonGroup",
                                 items: [
                                     { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggle: true },
@@ -72,19 +64,6 @@
                             { text: "Option 4", value: 4 }
                         ]
                     });
-
-                    $("#combo").kendoComboBox({
-                        dataTextField: "text",
-                        dataValueField: "value",
-                        dataSource: [
-                            { text: "Option 1", value: 1 },
-                            { text: "Option 2", value: 2 },
-                            { text: "Option 3", value: 3 },
-                            { text: "Option 4", value: 4 }
-                        ]
-                    });
-
-                    $("#masked").kendoNumericTextBox();
                 });
             </script>
 

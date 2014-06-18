@@ -3497,10 +3497,20 @@
         "text": "Events",
         "url": "toolbar/events",
         "title": {
-            "kendo-ui": "Resizing demo of Kendo UI ToolBar Widget | Kendo UI Web demo"
+            "kendo-ui": "Events demo of Kendo UI ToolBar Widget | Kendo UI Web demo"
         },
         "meta": {
             "kendo-ui": "Play with this Kendo UI ToolBar demo to get familiar with supported events."
+        }
+      },
+      {
+        "text": "Integration with Editors",
+        "url": "toolbar/integration",
+        "title": {
+            "kendo-ui": "Integration demo of Kendo UI ToolBar Widget | Kendo UI Web demo"
+        },
+        "meta": {
+            "kendo-ui": "Play with this Kendo UI ToolBar demo to learn how to include Kendo UI Editor widgets in the ToolBar."
         }
       }
     ],
