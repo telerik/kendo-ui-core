@@ -82,7 +82,7 @@
         },
 
         transform: function(transformation) {
-            var mx = transformationMatrix(transformation),
+            var mx = toMatrix(transformation),
                 x = this.x,
                 y = this.y;
 
@@ -572,7 +572,7 @@
         },
 
         multiply: function(transformation) {
-            var matrix = transformationMatrix(transformation);
+            var matrix = toMatrix(transformation);
 
             this._matrix = this._matrix.times(matrix);
 
@@ -597,12 +597,12 @@
         return new Transformation(matrix);
     }
 
-    function transformationMatrix(transformation) {
-        if (transformation && kendo.isFunction(transformation.matrix)) {
-            return transformation.matrix();
+    function toMatrix(value) {
+        if (value && kendo.isFunction(value.matrix)) {
+            return value.matrix();
         }
 
-        return transformation;
+        return value;
     }
 
     // Helper functions =======================================================
@@ -667,9 +667,9 @@
             Matrix: Matrix,
             Point: Point,
             Rect: Rect,
-            transform: transform,
             Transformation: Transformation,
-            transformationMatrix: transformationMatrix
+            transform: transform,
+            toMatrix: toMatrix
         }
     });
 

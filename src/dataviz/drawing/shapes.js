@@ -17,7 +17,7 @@
         Point = g.Point,
         Rect = g.Rect,
         Matrix = g.Matrix,
-        transformationMatrix = g.transformationMatrix,
+        toMatrix = g.toMatrix,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
@@ -87,7 +87,7 @@
 
         currentTransform: function(parentTransform) {
             var elementTransform = this.transform(),
-                elementMatrix = transformationMatrix(elementTransform),
+                elementMatrix = toMatrix(elementTransform),
                 parentMatrix,
                 combinedMatrix;
 
@@ -95,7 +95,7 @@
                 parentTransform = this.parentTransform();
             }
 
-            parentMatrix = transformationMatrix(parentTransform);
+            parentMatrix = toMatrix(parentTransform);
 
             if (elementMatrix && parentMatrix) {
                 combinedMatrix = parentMatrix.times(elementMatrix);
@@ -240,7 +240,7 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var combinedMatrix = toMatrix(this.currentTransform(transformation));
             return this.rect().bbox(combinedMatrix);
         },
 
@@ -260,7 +260,7 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var rect = this.geometry.bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -286,7 +286,7 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var rect = this.geometry.bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
 
@@ -476,7 +476,7 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = g.transformationMatrix(this.currentTransform(transformation));
+            var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var boundingBox = this._bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
@@ -588,7 +588,7 @@
         },
 
         bbox: function(transformation) {
-            var combinedMatrix = transformationMatrix(this.currentTransform(transformation));
+            var combinedMatrix = toMatrix(this.currentTransform(transformation));
             return this._rect.bbox(combinedMatrix);
         },
 

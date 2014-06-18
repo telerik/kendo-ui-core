@@ -20,7 +20,7 @@
 
         g = dataviz.geometry,
         Matrix = g.Matrix,
-        transformationMatrix = g.transformationMatrix,
+        toMatrix = g.toMatrix,
 
         util = dataviz.util,
         renderAttr = util.renderAttr,
@@ -396,7 +396,7 @@
         mapTransform: function(transform) {
             var attrs = [],
                 a, b, c, d,
-                matrix = transformationMatrix(transform);
+                matrix = toMatrix(transform);
 
             if (matrix) {
                 matrix.round(TRANSFORM_PRECISION);
@@ -766,7 +766,7 @@
 
         mapTransform: function(transform) {
             var style = [];
-            var matrix = transformationMatrix(transform);
+            var matrix = toMatrix(transform);
             if (matrix) {
                 matrix.round(TRANSFORM_PRECISION);
                 style.push(["filter", this.transformTemplate(matrix)]);
