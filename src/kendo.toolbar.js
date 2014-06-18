@@ -116,7 +116,7 @@ var __meta__ = {
                     popupElement.appendTo(element);
 
                     for (var i = 0; i < items.length; i++) {
-                        item = components.button.toolbar($.extend({mobile: options.mobile}, items[i]));
+                        item = components.button.toolbar($.extend({mobile: options.mobile, click: options.click}, items[i]));
                         item.wrap("<li></li>").parent().appendTo(popupElement);
                     }
 
