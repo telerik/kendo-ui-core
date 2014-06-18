@@ -758,4 +758,85 @@ test("group items are translated", function() {
 
     equal(dataSource.data()[0].Salary, undefined);
 });
+
+test("group items are translated if model is not defined", function() {
+    var dataSource = new kendo.data.DataSource({
+        "type":"aspnetmvc-ajax",
+        "transport":{
+            "read":{
+                "url":"/Home/Read"
+            },
+            "prefix":""
+        },
+        "serverPaging":true,
+        "serverSorting":true,
+        "serverFiltering":true,
+        "serverGrouping":true,
+        "serverAggregates":true,
+        "group":[
+            {
+                "field":"Salary.Amount",
+                "dir":"asc"
+            }
+        ],
+        "filter":[
+
+        ],
+        "schema":{
+            "data":"Data",
+            "total":"Total",
+            "errors":"Errors"
+        },
+        "data":{
+            "Data":[
+                {
+                    "Aggregates":{
+
+                    },
+                    "HasSubgroups":false,
+                    "Member":"Salary.Amount",
+                    "Subgroups":[
+
+                    ],
+                    "Items":[
+                        {
+                            "Id":1,
+                            "Name":"John Smith",
+                            "Salary":{
+                                "Amount":2000
+                            }
+                        }
+                    ],
+                    "Key":2000
+                },
+                {
+                    "Key":3000,
+                    "HasSubgroups":false,
+                    "Member":"Salary.Amount",
+                    "Items":[
+                        {
+                            "Id":2,
+                            "Name":"Jane Rottencrotch",
+                            "Salary":{
+                                "Amount":3000
+                            }
+                        }
+                    ],
+                    "Aggregates":{
+
+                    },
+                    "Subgroups":[
+
+                    ]
+                }
+            ],
+            "Total":2
+        }
+    });
+
+    dataSource.read();
+
+    equal(dataSource.data()[0].Salary, undefined);
+});
+
 }());
