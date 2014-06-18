@@ -20,7 +20,7 @@
         [Fact]
         public void Webapi_should_return_webapi_datasource_builder()
         {
-            builder.WebApi().ShouldBeType(typeof(SchedulerWebApiDataSourceBuilder<Customer>));
+            builder.WebApi().ShouldBeType(typeof(FilterableWebApiDataSourceBuilder<Customer>));
         }
 
         [Fact]

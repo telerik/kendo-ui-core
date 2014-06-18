@@ -16,16 +16,17 @@
     .Height(400)
     .ShowWorkHours(false)
     .ShowWorkDays(false)
-    //.DataSource(d => d
-    //    .Model(m => {
-    //        m.Id(f => f.TaskID);
-    //        m.ParentID(f => f.ParentID);
-    //    })
-    //    .Read("Read", "GanttTasks")
-    //    .Create("Create", "GanttTasks")
-    //    .Destroy("Destroy", "GanttTasks")
-    //    .Update("Update", "GanttTasks")
-    //)
+    .DataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.TaskID);
+            m.ParentId(f => f.ParentID);
+        })
+        .Read("Read", "Gantt")
+        .Create("Create", "Gantt")
+        .Destroy("Destroy", "Gantt")
+        .Update("Update", "Gantt")
+    )
 )
 
 <style scoped>

@@ -16,15 +16,6 @@ namespace Kendo.Mvc.UI.Fluent
             this.container = container;
         }
 
-        public virtual GanttViewBuilder Add()
-        {
-            var item = new GanttView();
-
-            container.Add(item);
-
-            return new GanttViewBuilder(item);
-        }
-
         private GanttViewBuilder Add(GanttViewType type)
         {
             var view = new GanttView { Type = type };

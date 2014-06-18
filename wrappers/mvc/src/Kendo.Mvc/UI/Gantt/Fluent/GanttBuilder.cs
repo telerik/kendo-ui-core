@@ -20,6 +20,32 @@ namespace Kendo.Mvc.UI.Fluent
             container = component;
         }
 
+        /// <summary>
+        /// Configures the DataSource options.
+        /// </summary>
+        /// <param name="configurator">The DataSource configurator action.</param>
+        /// <example>
+        /// <code lang="ASPX">
+        ///  &lt;%= Html.Kendo().Gantt&lt;Task&gt;()
+        ///             .Name("Gantt")
+        ///             .DataSource(source =&gt;
+        ///             {
+        ///                 source.Read(read =&gt;
+        ///                 {
+        ///                     read.Action("Read", "Gantt");
+        ///                 });
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        /// , GanttModelDescriptor, DataSourceSchedulerModelDescriptorFactory<T>
+        public GanttBuilder<T> DataSource(Action<GanttDataSourceBuilder<T>> configurator)
+        {
+            configurator(new GanttDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+
+            return this;
+        }
+
         //>> Fields
         
         /// <summary>
@@ -31,6 +57,17 @@ namespace Kendo.Mvc.UI.Fluent
         {
             container.AutoBind = value;
 
+            return this;
+        }
+        
+        /// <summary>
+        /// The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+		/// field to which the column is bound. The gantt will create a column for every item of the array.
+        /// </summary>
+        /// <param name="configurator">The action that configures the columns.</param>
+        public GanttBuilder<T> Columns(Action<GanttColumnFactory> configurator)
+        {
+            configurator(new GanttColumnFactory(container.Columns));
             return this;
         }
         

@@ -11,14 +11,23 @@ namespace Kendo.Mvc.UI
 
     public class Gantt<T> : WidgetBase where T : class, IGanttTask
     {
-        private readonly IUrlGenerator urlGenerator;
+        public readonly IUrlGenerator UrlGenerator;
 
         public Gantt(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
-            this.urlGenerator = urlGenerator;
+            this.UrlGenerator = urlGenerator;
+
+            DataSource = new DataSource();
+
+            DataSource.Type = DataSourceType.Ajax;
+
+            DataSource.Schema.Model = new GanttModelDescriptor(typeof(T));
+
 //>> Initialization
         
+            Columns = new List<GanttColumn>();
+                
             Messages = new GanttMessagesSettings();
                 
             Views = new List<GanttView>();
@@ -26,9 +35,22 @@ namespace Kendo.Mvc.UI
         //<< Initialization
         }
 
+        public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
+
 //>> Fields
         
         public bool? AutoBind { get; set; }
+        
+        public List<GanttColumn> Columns
+        {
+            get;
+            set;
+        }
         
         public bool? Editable { get; set; }
         
@@ -77,6 +99,12 @@ namespace Kendo.Mvc.UI
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
+            }
+                
+            var columns = Columns.ToJson();
+            if (columns.Any())
+            {
+                json["columns"] = columns;
             }
                 
             if (Editable.HasValue)
@@ -152,6 +180,10 @@ namespace Kendo.Mvc.UI
             }
                 
         //<< Serialization
+
+            Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
+
+            json["dataSource"] = dataSource;
 
             writer.Write(Initializer.Initialize(Selector, "Gantt", json));
 

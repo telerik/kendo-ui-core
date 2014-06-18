@@ -8,18 +8,18 @@
     public class SchedulerCustomDataSourceBuilderTests
     {
         private readonly DataSource dataSource;
-        private readonly SchedulerCustomDataSourceBuilder<Customer> builder;
+        private readonly FilterableCustomDataSourceBuilder<Customer> builder;
 
         public SchedulerCustomDataSourceBuilderTests()
         {
             dataSource = new DataSource();
-            builder = new SchedulerCustomDataSourceBuilder<Customer>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
+            builder = new FilterableCustomDataSourceBuilder<Customer>(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
         public void Filter_should_return_webapi_datasource_builder()
         {
-            builder.Filter(f => f.Add(m => m.Name).Contains("SomeVal")).ShouldBeType(typeof(SchedulerCustomDataSourceBuilder<Customer>));
+            builder.Filter(f => f.Add(m => m.Name).Contains("SomeVal")).ShouldBeType(typeof(FilterableCustomDataSourceBuilder<Customer>));
         }
 
         [Fact]

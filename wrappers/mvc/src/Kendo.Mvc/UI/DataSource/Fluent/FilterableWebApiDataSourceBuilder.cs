@@ -4,10 +4,10 @@
     using System.ComponentModel;
     using System.Web.Mvc;
 
-    public class SchedulerWebApiDataSourceBuilder<TModel> : WebApiDataSourceBuilder<TModel>, IHideObjectMembers
+    public class FilterableWebApiDataSourceBuilder<TModel> : WebApiDataSourceBuilder<TModel>, IHideObjectMembers
          where TModel : class
     {
-        public SchedulerWebApiDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public FilterableWebApiDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
             : base(dataSource, viewContext, urlGenerator)
         {
         }

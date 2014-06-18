@@ -2,29 +2,30 @@
 {
     using System;
     using System.ComponentModel;
+    using System.Web.Mvc;
 
-    public class SchedulerSignalRDataSourceBuilder<TModel> : SignalRDataSourceBuilder<TModel>
+    public class FilterableCustomDataSourceBuilder<TModel> : CustomDataSourceBuilder<TModel>
         where TModel : class
     {
-        public SchedulerSignalRDataSourceBuilder(DataSource dataSource)
-            : base(dataSource)
+        public FilterableCustomDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+            : base(dataSource, viewContext, urlGenerator)
         {
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override SignalRDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
+        public override CustomDataSourceBuilder<TModel> Sort(Action<DataSourceSortDescriptorFactory<TModel>> configurator)
         {
             throw new MethodAccessException("Sort method is not available for Scheduler DataSource.");
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override SignalRDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
+        public override CustomDataSourceBuilder<TModel> Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
         {
             throw new MethodAccessException("Group method is not available for Scheduler DataSource.");
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override SignalRDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
+        public override CustomDataSourceBuilder<TModel> Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
         {
             throw new MethodAccessException("Aggregates method is not available for Scheduler DataSource.");
         }
