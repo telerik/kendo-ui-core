@@ -1,19 +1,19 @@
         <div id="example">
+            <div class="box">
+                <h4>Info</h4>
+                <p>Resize the window and watch how ToolBar's items show or hide according to the available space.</p>
+                <p>More information regarding the resizable functionality can be found in the <a href="">Getting Started topic</a>.</p>
+                <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
+            </div>
             <div id="window">
                 <div id="toolbar"></div>
-                <div class="content">
-                    <p>Resize the window and watch how ToolBar's items show or hide according to the available space.</p>
-                    <p>More information regarding the resizable functionality can be found in the <a href="">Getting Started topic</a>.</p>
-                </div>
             </div>
-
-            <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
-
             <script>
                 $(document).ready(function() {
                     $("#window").kendoWindow({
                         resizable: true,
                         width: 800,
+                        height: 120,
                         minWidth: 400,
                         maxWidth: 1200,
                         title: "Toolbar - resizing",
@@ -114,14 +114,11 @@
                 #toolbar {
                     border-width: 0 0 1px;
                 }
-
-                .logo {
-                    margin: 0 1em;
+                #example {
+                    height: 350px;
                 }
-
-                .content {
-                    padding: .58em;
-                    margin-top: 2em;
+                #example .box p {
+                    padding-bottom: 5px;
                 }
             </style>
 
