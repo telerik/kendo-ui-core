@@ -2889,8 +2889,8 @@
   },
   {
     "text": "Slider",
-    "disableInMobile": true,
     "name": "slider",
+    "disableInMobile": true,
     "api": "web/slider",
     "documentation": {
        "kendo-ui": "getting-started/web/slider/overview",
@@ -3450,9 +3450,9 @@
   },
   {
     "text": "ToolBar",
+    "name": "toolbar",
     "disableInMobile": true,
     "new": true,
-    "name": "toolbar",
     "api": "web/toolbar",
     "documentation": {
        "kendo-ui": "getting-started/web/toolbar/overview",
@@ -3612,8 +3612,8 @@
   },
   {
     "text": "TreeView",
-    "pro": "true",
     "name": "treeview",
+    "pro": "true",
     "api": "web/treeview",
     "documentation": {
        "kendo-ui": "getting-started/web/treeview/overview",
@@ -4624,6 +4624,7 @@
   },
   {
     "text": "Area Charts",
+    "name": "area-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -4788,11 +4789,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "area-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Bar Charts",
+    "name": "bar-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5001,11 +5002,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "bar-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Box Plot Charts",
+    "name": "box-plot-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5067,13 +5068,12 @@
         "requiresServer": "true"
       }
     ],
-    "name": "pie-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Bubble Charts",
-    "pro": "true",
     "name": "bubble-charts",
+    "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
        "kendo-ui": "getting-started/dataviz/chart/overview",
@@ -5158,6 +5158,7 @@
   },
   {
     "text": "Bullet Charts",
+    "name": "bullet-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5232,6 +5233,7 @@
   },
   {
     "text": "Donut Charts",
+    "name": "donut-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5312,11 +5314,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "donut-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Funnel Charts",
+    "name": "funnel-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5403,11 +5405,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "funnel-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Line Charts",
+    "name": "line-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5582,11 +5584,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "line-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Pie Charts",
+    "name": "pie-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5667,11 +5669,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "pie-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Polar Charts",
+    "name": "polar-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5772,11 +5774,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "polar-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Radar Charts",
+    "name": "radar-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -5889,7 +5891,6 @@
         "requiresServer": "true"
       }
     ],
-    "name": "radar-charts",
     "category": "Data Visualization"
   },
   {
@@ -5953,6 +5954,7 @@
   },
   {
     "text": "Waterfall Charts",
+    "name": "waterfall-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -6021,6 +6023,7 @@
   },
   {
     "text": "Scatter Charts",
+    "name": "scatter-charts",
     "pro": "true",
     "api": "dataviz/chart",
     "documentation": {
@@ -6156,11 +6159,11 @@
         "requiresServer": "true"
       }
     ],
-    "name": "scatter-charts",
     "category": "Data Visualization"
   },
   {
     "text": "Sparklines",
+    "name": "sparklines",
     "pro": "true",
     "api": "dataviz/sparkline",
     "documentation": {
@@ -6229,11 +6232,11 @@
         ]
       }
     ],
-    "name": "sparklines",
     "category": "Data Visualization"
   },
   {
     "text": "Chart API",
+    "name": "chart-api",
     "pro": "true",
     "api": "dataviz/chart",
     "spriteCssClass": "chartIcon",
@@ -6295,11 +6298,11 @@
         "url": "chart-api/benchmark"
       }
     ],
-    "name": "api",
     "category": "Data Visualization"
   },
   {
     "text": "Linear Gauge",
+    "name": "linear-gauge",
     "pro": "true",
     "spriteCssClass": "gaugeLinearIcon",
     "api": "dataviz/lineargauge",
@@ -6358,11 +6361,11 @@
         ]
       }
     ],
-    "name": "linear-gauge",
     "category": "Data Visualization"
   },
   {
     "text": "Radial Gauge",
+    "name": "radial-gauge",
     "pro": "true",
     "spriteCssClass": "gaugeRadialIcon",
     "api": "dataviz/radialgauge",
@@ -6436,11 +6439,11 @@
         ]
       }
     ],
-    "name": "radial-gauge",
     "category": "Data Visualization"
   },
   {
     "text": "Barcode",
+    "name": "barcode",
     "pro": "true",
     "spriteCssClass": "barcodeIcon",
     "api": "dataviz/barcode",
@@ -6502,11 +6505,11 @@
         ]
       }
     ],
-    "name": "barcode",
     "category": "Data Visualization"
   },
   {
     "text": "QR code",
+    "name": "qrcode",
     "pro": "true",
     "spriteCssClass": "qrcodeIcon",
     "api": "dataviz/qrcode",
@@ -6568,11 +6571,11 @@
         ]
       }
     ],
-    "name": "qrcode",
     "category": "Data Visualization"
   },
   {
     "text": "Stock Chart",
+    "name": "financial",
     "pro": "true",
     "api": "dataviz/stock-chart",
     "documentation": {
@@ -6643,7 +6646,6 @@
         ]
       }
     ],
-    "name": "financial",
     "category": "Data Visualization"
   },
   {
@@ -6686,8 +6688,8 @@
   },
   {
     "text": "Map",
-    "pro": "true",
     "name": "map",
+    "pro": "true",
     "api": "dataviz/map",
     "documentation": {
        "kendo-ui": "getting-started/dataviz/map/overview",
@@ -6784,8 +6786,8 @@
   },
   {
     "text": "Diagram",
+    "name": "diagram",
     "pro": "true",
-    "name": "Diagram",
     "beta": "true",
     "api": "dataviz/diagram",
     "documentation": {
