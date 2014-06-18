@@ -55,14 +55,20 @@
     line-height: 2em;
 }
 
+.km-ios .k-toolbar .k-overflow-anchor .km-icon
+{
+    margin: 0;
+}
+
 .km-ios .km-actionsheet.k-split-container > li > .km-button,
 .km-ios .km-actionsheet.k-overflow-container > li > .km-button
 {
     min-width: 10em;
     text-align: center;
     font-size: 1.1em;
-    border: 0;
-    border-radius: 0;
+    border-radius: @ios-button-border-radius;
+    margin: .4em 0;
+    padding: .35em .6em
 }
 
 .km-ios .km-actionsheet.k-split-container > li > .km-button
@@ -70,10 +76,17 @@
     min-width: 5em;
 }
 
+.km-ios .k-split-wrapper .km-popup-wrapper,
+.km-ios .k-overflow-wrapper .km-popup-wrapper
+{
+    padding: 7px;
+}
+
 .km-ios .k-split-wrapper .km-actionsheet-wrapper,
 .km-ios .k-overflow-wrapper .km-actionsheet-wrapper
 {
-    padding: 1px;
+    border-radius: @ios-border-radius;
+    padding: .4em 1em .7em;
 }
 
 html .km-ios .k-split-container.km-actionsheet > li,
@@ -87,4 +100,6 @@ html .km-ios .k-overflow-container.km-actionsheet > li
 .km-ios .k-overflow-container.km-actionsheet
 {
     border-top: 0;
+    background: none;
+    padding: 0;
 }
