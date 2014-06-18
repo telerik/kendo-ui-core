@@ -32,7 +32,7 @@
         function resizeContainers() {
             var headerHeight = $("#header").height(),
                 searchWrapper = $("#example-search-wrapper").height(),
-                htmlHeight = $('html').height();
+                htmlHeight = (kendo.support.mobileOS) ? parseFloat(window.innerHeight) : $('html').height();
             navHeight = htmlHeight - (headerHeight + searchWrapper);
             $("#nav-wrapper").height(navHeight - 1);
             $("#main").height(navHeight + searchWrapper);
