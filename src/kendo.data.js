@@ -1764,9 +1764,12 @@ var __meta__ = {
                 that.model = model = base.define(that.model);
             }
 
+            var dataFunction = proxy(that.data, that);
+
+            that._dataAccessFunction = dataFunction;
+
             if (that.model) {
-                var dataFunction = proxy(that.data, that),
-                    groupsFunction = proxy(that.groups, that),
+                var groupsFunction = proxy(that.groups, that),
                     serializeFunction = proxy(that.serialize, that),
                     originalFieldNames = {},
                     getters = {},
@@ -2511,7 +2514,7 @@ var __meta__ = {
 
         _readData: function(data) {
             var read = !this._isServerGrouped() ? this.reader.data : this.reader.groups;
-            return read(data);
+            return read.call(this.reader, data);
         },
 
         _eachPristineItem: function(callback) {
