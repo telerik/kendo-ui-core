@@ -56,7 +56,9 @@
 .km-ios .km-view-title,
 .km-ios .km-dialog-title,
 .km-ios .km-popup .k-item,
-.km-ios .km-actionsheet > li > a
+.km-ios .km-actionsheet > li > a,
+.km-ios .k-split-container > li > .km-button,
+.km-ios .k-overflow-container > li > .km-button
 {
     color: @ios-widget-color;
     text-shadow: 0 -1px rgba(0,0,0,.3);
@@ -563,7 +565,9 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 }
 
 .km-ios .km-popup .k-item,
-.km-ios .km-actionsheet > li > a
+.km-ios .km-actionsheet > li > a,
+.km-ios .k-split-container.km-actionsheet > li > .km-button,
+.km-ios .k-overflow-container.km-actionsheet > li > .km-button
 {
     color: #000;
     .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(255,255,255,.3)");
@@ -578,6 +582,7 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 }
 
 .km-ios .km-actionsheet > li > a:active,
+.km-ios .km-actionsheet-wrapper .km-actionsheet > li > .km-state-active,
 .km-ios .km-actionsheet > li > a:hover,
 .km-ios li.km-actionsheet-cancel > a
 {
@@ -588,6 +593,7 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 .km-ios .km-popup .k-state-focused,
 .km-ios .km-popup .k-state-selected,
 .km-ios .km-actionsheet > li > a:active,
+.km-ios .km-actionsheet-wrapper .km-actionsheet > li > .km-state-active,
 .km-ios .km-actionsheet > li > a:hover,
 .km-ios li.km-actionsheet-cancel > a
 {
@@ -609,6 +615,8 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 }
 
 .km-ios .km-actionsheet-wrapper,
+.km-ios .k-split-wrapper .km-actionsheet-wrapper,
+.km-ios .k-overflow-wrapper .km-actionsheet-wrapper,
 .km-ios .km-popup .k-list-container
 {
     color: #fff;
@@ -621,6 +629,12 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 .km-phone .km-ios .km-popup .k-list-container
 {
     .box-shadow(~"0 -1px 2px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.5)");
+}
+
+.km-root .km-ios .k-split-container.km-actionsheet,
+.km-root .km-ios .k-overflow-container.km-actionsheet
+{
+    .box-shadow(none);
 }
 
 .km-ios .km-shim
@@ -709,6 +723,8 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 /* PopOver */
 
 .km-ios .km-popup.km-pane,
+.km-ios .k-split-wrapper .km-actionsheet-wrapper,
+.km-ios .k-overflow-wrapper .km-actionsheet-wrapper,
 .km-tablet .km-ios .km-actionsheet-wrapper
 {
     .box-shadow(~"0 0 15px rgba(0,0,0,.5), 0 0 2px rgba(0,0,0,.5)");
@@ -721,6 +737,8 @@ html .km-ios .km-tabstrip .km-button:active:last-child
 }
 
 .km-ios .km-popup.km-pane,
+.km-ios .k-split-wrapper .km-actionsheet-wrapper,
+.km-ios .k-overflow-wrapper .km-actionsheet-wrapper,
 .km-tablet .km-ios .km-actionsheet-wrapper,
 .km-ios .km-popup.km-pane .km-navbar .km-button
 {
