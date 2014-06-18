@@ -186,7 +186,7 @@ var __meta__ = {
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);
 
-            this.eventTemplate = this._eventTmpl(options.eventTemplate);
+            this.eventTemplate = this._eventTmpl(options.eventTemplate, EVENT_WRAPPER_STRING);
             this.dayTemplate = kendo.template(options.dayTemplate, settings);
         },
 
@@ -451,30 +451,6 @@ var __meta__ = {
                 rows: rows
             };
         },
-
-        _eventTmpl: function(template) {
-           var options = this.options,
-               settings = extend({}, kendo.Template, options.templateSettings),
-               paramName = settings.paramName,
-               html = "",
-               type = typeof template,
-               state = { storage: {}, count: 0 };
-
-            if (type === "function") {
-                state.storage["tmpl" + state.count] = template;
-                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
-                state.count ++;
-            } else if (type === "string") {
-                html += template;
-            }
-
-            var tmpl = kendo.template(kendo.format(EVENT_WRAPPER_STRING, html), settings);
-
-            if (state.count > 0) {
-                tmpl = proxy(tmpl, state.storage);
-            }
-            return tmpl;
-       },
 
        _createEventElement: function(event) {
             var options = this.options;

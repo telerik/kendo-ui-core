@@ -38,6 +38,22 @@
         equal(eventHeaderCell.text(), "Event");
     });
 
+    test("eventTemplate is wrapped in a div with class k-task", function() {
+        var agenda = agendaView({
+            date: new Date("2013/06/06 00:00"),
+            eventTemplate: "<strong>#: title #</strong>"
+        });
+        agenda.render([
+            new Event({
+                start: new Date("2013/06/06 00:00"),
+                end: new Date("2013/06/06 00:00"),
+                title: "foo"
+            })
+        ]);
+
+        ok(agenda.element.find("strong").parent().is("div.k-task"));
+    });
+
     test("agenda renders a cell for the event date", function() {
         var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 

@@ -1441,6 +1441,31 @@ var __meta__ = {
             return (resourceColorIsDark == currentColorIsDark);
         },
 
+       _eventTmpl: function(template, wrapper) {
+           var options = this.options,
+               settings = $.extend({}, kendo.Template, options.templateSettings),
+               paramName = settings.paramName,
+               html = "",
+               type = typeof template,
+               state = { storage: {}, count: 0 };
+
+            if (type === "function") {
+                state.storage["tmpl" + state.count] = template;
+                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
+                state.count ++;
+            } else if (type === "string") {
+                html += template;
+            }
+
+            var tmpl = kendo.template(kendo.format(wrapper, html), settings);
+
+            if (state.count > 0) {
+                tmpl = $.proxy(tmpl, state.storage);
+            }
+
+            return tmpl;
+       },
+
         eventResources: function(event) {
             var resources = [],
                 options = this.options;

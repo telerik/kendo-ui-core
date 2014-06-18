@@ -16,6 +16,21 @@ var __meta__ = {
         ui = kendo.ui,
         NS = ".kendoAgendaView";
 
+    var EVENT_WRAPPER_FORMAT = '<div class="k-task" title="#:title.replace(/"/g,"\'")#" data-#=kendo.ns#uid="#=uid#">' +
+                               '# if (resources[0]) {#' +
+                               '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
+                               "# } #" +
+                               "# if (data.isException()) { #" +
+                               '<span class="k-icon k-i-exception"></span>' +
+                               '# } else if (data.isRecurring()) {#' +
+                               '<span class="k-icon k-i-refresh"></span>' +
+                               "# } #" +
+                               '{0}' +
+                               '#if (showDelete) {#' +
+                                   '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                               '#}#' +
+                           '</div>';
+
     ui.AgendaView = ui.SchedulerView.extend({
         init: function(element, options) {
             ui.SchedulerView.fn.init.call(this, element, options);
@@ -34,7 +49,7 @@ var __meta__ = {
 
             this.name = "agenda";
 
-            this._eventTemplate = kendo.template(options.eventTemplate);
+            this._eventTemplate = this._eventTmpl(options.eventTemplate, EVENT_WRAPPER_FORMAT);
             this._dateTemplate = kendo.template(options.eventDateTemplate);
             this._groupTemplate = kendo.template(options.eventGroupTemplate);
             this._timeTemplate = kendo.template(options.eventTimeTemplate);
@@ -416,20 +431,7 @@ var __meta__ = {
             name: "agenda",
             editable: true,
             selectedDateFormat: "{0:D}-{1:D}",
-            eventTemplate: '<div class="k-task" title="#:title.replace(/"/g,"\'")#" data-#=kendo.ns#uid="#=uid#">' +
-                               '# if (resources[0]) {#' +
-                               '<span class="k-scheduler-mark" style="background-color:#=resources[0].color#"></span>' +
-                               "# } #" +
-                               "# if (data.isException()) { #" +
-                               '<span class="k-icon k-i-exception"></span>' +
-                               '# } else if (data.isRecurring()) {#' +
-                               '<span class="k-icon k-i-refresh"></span>' +
-                               "# } #" +
-                               '#:title#' +
-                               '#if (showDelete) {#' +
-                                   '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
-                               '#}#' +
-                           '</div>',
+            eventTemplate: "#:title#",
             eventTimeTemplate: "#if(data.isAllDay) {#" +
                             '#=this.options.messages.allDay#' +
                           "#} else { #" +

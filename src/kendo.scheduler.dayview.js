@@ -1265,31 +1265,6 @@ var __meta__ = {
             this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
        },
 
-       _eventTmpl: function(template, wrapper) {
-           var options = this.options,
-               settings = extend({}, kendo.Template, options.templateSettings),
-               paramName = settings.paramName,
-               html = "",
-               type = typeof template,
-               state = { storage: {}, count: 0 };
-
-            if (type === "function") {
-                state.storage["tmpl" + state.count] = template;
-                html += "#=this.tmpl" + state.count + "(" + paramName + ")#";
-                state.count ++;
-            } else if (type === "string") {
-                html += template;
-            }
-
-            var tmpl = kendo.template(kendo.format(wrapper, html), settings);
-
-            if (state.count > 0) {
-                tmpl = proxy(tmpl, state.storage);
-            }
-
-            return tmpl;
-       },
-
        _createEventElement: function(event, isOneDayEvent, head, tail) {
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
