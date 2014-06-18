@@ -413,6 +413,10 @@ var __meta__ = {
                     release: toggleActive
                 });
 
+                if (options.resizable) {
+                    this._toggleOverflowAnchor();
+                }
+
                 kendo.notify(that);
             },
 
@@ -581,6 +585,14 @@ var __meta__ = {
                 that.popup.container.attr(kendo.attr("uid"), this.uid);
             },
 
+            _toggleOverflowAnchor: function() {
+                if (this.popup.element.children(":not(.k-overflow-hidden)").length > 0) {
+                    this.overflowAnchor.css("visibility", "visible");
+                } else {
+                    this.overflowAnchor.css("visibility", "hidden");
+                }
+            },
+
             _buttonClick: function(e) {
                 var that = this, popup,
                     target, splitContainer,
@@ -667,6 +679,8 @@ var __meta__ = {
                 this._stretch(containerWidth);
 
                 this._markVisibles();
+
+                this._toggleOverflowAnchor();
             },
 
             _childrenWidth: function() {
