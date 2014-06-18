@@ -1,16 +1,16 @@
 (function(f, define){
     define([
-        "../kendo.dataviz.core",
+        "./kendo.dataviz.core",
 
-        "./util",
-        "./geometry",
-        "./drawing/core",
-        "./drawing/mixins",
-        "./drawing/shapes",
-        "./drawing/parser",
-        "./drawing/svg",
-        "./drawing/canvas",
-        "./drawing/vml"
+        "./dataviz/util",
+        "./dataviz/geometry",
+        "./dataviz/drawing/core",
+        "./dataviz/drawing/mixins",
+        "./dataviz/drawing/shapes",
+        "./dataviz/drawing/parser",
+        "./dataviz/drawing/svg",
+        "./dataviz/drawing/canvas",
+        "./dataviz/drawing/vml"
     ], f);
 })(function(){
 

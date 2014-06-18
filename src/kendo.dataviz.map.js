@@ -1,9 +1,8 @@
 (function(f, define){
     define([
         "./kendo.data", "./kendo.userevents", "./kendo.tooltip", "./kendo.dataviz.core", "./kendo.mobile.scroller",
+        "./kendo.dataviz.drawing",
 
-        "./dataviz/drawing",
-        "./dataviz/geometry",
         "./dataviz/map/location",
         "./dataviz/map/attribution",
         "./dataviz/map/navigator",
