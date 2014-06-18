@@ -60,7 +60,7 @@ var __meta__ = {
             }
         },
 
-        events: [DATA_BOUND, "itemCreated", "zoom"],
+        events: [DATA_BOUND, "itemCreated"],
 
         _initDataSource: function() {
             var that = this,
@@ -99,10 +99,11 @@ var __meta__ = {
             var node = e.node;
             var items = e.items;
             var options = this.options;
+            var item;
 
             if (!node) {
                 this._items = [];
-                var item = this._wrapItem(items[0]);
+                item = this._wrapItem(items[0]);
                 item.coord = this.src.createRoot(900, 500);
                 this._items.push(item);
                 // Reference of the root
@@ -112,7 +113,7 @@ var __meta__ = {
                     var root = this._getByUid(node.uid);
                     root.children = [];
                     for (var i = 0; i < items.length; i++) {
-                        var item = items[i];
+                        item = items[i];
                         root.children.push(this._wrapItem(item));
                     }
                     this.src.compute(root, root.coord);
@@ -221,12 +222,12 @@ var __meta__ = {
                 return;
             }
 
-            if (tail.length >= 2 && initElement.length == 0) {
+            if (tail.length >= 2 && initElement.length === 0) {
                 initElement = [tail[0]];
                 tail = tail.slice(1);
             }
 
-            if (tail.length == 0) {
+            if (tail.length === 0) {
                 if (initElement.length > 0) {
                     this.layoutRow(initElement, width, coord);
                 }
@@ -270,7 +271,7 @@ var __meta__ = {
         },
 
         worstAspectRatio: function(items, width) {
-            if (!items || items.length == 0) {
+            if (!items || items.length === 0) {
                 return MAX_VALUE;
             }
 
@@ -315,9 +316,10 @@ var __meta__ = {
         },
 
         layoutV: function(items, width, coord) {
-            var totalArea = this._totalArea(items);
-            var width = math.round(totalArea / width),
+            var totalArea = this._totalArea(items),
                 top =  0;
+
+            width = math.round(totalArea / width);
 
             for (var i = 0; i < items.length; i++) {
                 var height = math.round(items[i]._area / width);
