@@ -2818,6 +2818,7 @@
     "api": "web/gantt",
     "new": true,
     "pro": "true",
+	"disableInMobile" : true,
     "documentation": {
        "kendo-ui": "getting-started/web/gantt/overview",
        "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/gantt/overview",
