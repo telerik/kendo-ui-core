@@ -64,7 +64,17 @@ $map->center(array(45, 45))
     ->reset('onReset');
 
 ?>
-<div id="info" class="box"></div>
+<div class="box">
+    <div id="info" class="box-col"></div>
+    <div class="box-col select-col">
+        <h4>Bubble symbol</h4>
+        <ul id="select-symbol">
+            <li>Circle</li>
+            <li>Square</li>
+        </ul>
+    </div>
+</div>
+
 <?php echo $map->render(); ?>
 
 <script id="info-template" type="text/x-kendo-template">
@@ -88,17 +98,26 @@ function onShapeMouseEnter(e) {
     activeShape = e.shape;
     activeShape.options.set("stroke", { width: 1.5, color: "#fff" });
 
-    $(".box").html(template(e.shape.dataItem));
+    $("#info").html(template(e.shape.dataItem));
 }
 
 function onReset() {
-    $(".box").html(emptyTemplate({}));
+    $("#info").html(emptyTemplate({}));
     activeShape = null;
 }
+
+$("#select-symbol").kendoMobileButtonGroup({
+    select: function(e) {
+        var layer = $("#map").data("kendoMap").layers[1];
+        layer.options.symbol = e.index === 0 ? "circle" : "square";
+        layer.reset();
+    },
+    index: 0
+});
 </script>
 <style scoped>
-    .box {
-        text-align: center;
+    .select-col {
+        float: right;
     }
 
     #example .box,

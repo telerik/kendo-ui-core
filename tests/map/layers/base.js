@@ -253,4 +253,22 @@ function baseLayerTests(name, TLayer) {
             map.trigger("reset");
         });
     });
+
+    // ------------------------------------------------------------
+    module(name + " / reset", {
+        setup: function() {
+            map = new MapMock();
+            layer = new TLayer(map);
+        }
+    });
+
+    test("reset triggers _beforeReset handler", function() {
+        layer._beforeReset = function() { ok(true) };
+        layer.reset();
+    });
+
+    test("reset triggers _reset handler", function() {
+        layer._reset = function() { ok(true) };
+        layer.reset();
+    });
 }

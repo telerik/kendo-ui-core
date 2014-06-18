@@ -24,6 +24,7 @@ namespace Kendo.Mvc.Examples
                         "~/Content/web/kendo.common.min.css",
                         "~/Content/web/kendo.rtl.min.css",
                         "~/Content/web/kendo.default.min.css",
+                        "~/Content/web/kendo.default.mobile.min.css",
                         "~/Content/dataviz/kendo.dataviz.min.css",
                         "~/Content/dataviz/kendo.dataviz.default.min.css",
                         "~/Content/mobile/kendo.mobile.all.min.css"));

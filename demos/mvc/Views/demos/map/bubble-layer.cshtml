@@ -1,5 +1,14 @@
 <div id="example">
-    <div id="info" class="box"></div>
+    <div class="box">
+        <div id="info" class="box-col"></div>
+        <div class="box-col select-col">
+            <h4>Bubble symbol</h4>
+            <ul id="select-symbol">
+                <li>Circle</li>
+                <li>Square</li>
+            </ul>
+        </div>
+    </div>
     <div class="demo-section k-header" style="padding: 1em;">
         <div id="map"></div>
     </div>
@@ -57,20 +66,29 @@
             activeShape = e.shape;
             activeShape.options.set("stroke", { width: 1.5, color: "#fff" });
 
-            $(".box").html(template(e.shape.dataItem));
+            $("#info").html(template(e.shape.dataItem));
         }
 
         function onReset() {
-            $(".box").html(emptyTemplate({}));
+            $("#info").html(emptyTemplate({}));
             activeShape = null;
         }
+
+        $("#select-symbol").kendoMobileButtonGroup({
+            select: function(e) {
+                var layer = $("#map").data("kendoMap").layers[1];
+                layer.options.symbol = e.index === 0 ? "circle" : "square";
+                layer.reset();
+            },
+            index: 0
+        });
     }
 
     $(document).ready(createMap);
     </script>
     <style scoped>
-        .box {
-            text-align: center;
+        .select-col {
+            float: right;
         }
 
         #example .box,
