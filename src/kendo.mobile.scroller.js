@@ -242,9 +242,9 @@ var __meta__ = {
                 size = Math.round(paneSize * sizeRatio);
 
                 if (sizeRatio >= 1) {
-                    this.element.hide();
+                    this.element.css("display", "none");
                 } else {
-                    this.element.show();
+                    this.element.css("display", "");
                 }
 
                 if (position + size > paneSize) {
