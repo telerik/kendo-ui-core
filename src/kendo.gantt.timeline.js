@@ -18,7 +18,6 @@ var __meta__ = {
     var kendoTextElement = kendo.dom.text;
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
-    var activeElement = kendo._activeElement;
     var browser = kendo.support.browser;
     var isIE = browser.msie;
     var oldIE = isIE && browser.version < 9;
@@ -84,17 +83,10 @@ var __meta__ = {
     }
 
     function blurActiveElement() {
-        var active = $(activeElement());
+        var activeElement = kendo._activeElement();
 
-        if (browser.opera || oldIE) {
-            active.change().triggerHandler("blur");
-        } else {
-            active.blur();
-            if (isIE) {
-                //IE10 with jQuery 1.9.x does not trigger blur handler
-                //numeric textbox does trigger change
-                active.blur();
-            }
+        if (activeElement.nodeName.toLowerCase() !== "body") {
+            $(activeElement).blur();
         }
     }
 
