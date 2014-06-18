@@ -54,7 +54,6 @@ var __meta__ = {
         options: {
             name: "TreeMap",
             autoBind: true,
-            maxViewDepth: 2,
             title: {
                 visible: true
             }
@@ -76,13 +75,11 @@ var __meta__ = {
             function recursiveRead(data) {
                 for (var i = 0; i < data.length; i++) {
                     var node = data[i];
-                    if (node.level() < options.maxViewDepth) {
-                        node._initChildren();
+                    node._initChildren();
 
-                        node.children.fetch();
+                    node.children.fetch();
 
-                        recursiveRead(node.children.view());
-                    }
+                    recursiveRead(node.children.view());
                 }
             }
 
@@ -109,7 +106,7 @@ var __meta__ = {
                 // Reference of the root
                 this._root = item;
             } else {
-                if (items) {
+                if (items.length) {
                     var root = this._getByUid(node.uid);
                     root.children = [];
                     for (var i = 0; i < items.length; i++) {
