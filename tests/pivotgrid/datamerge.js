@@ -1752,5 +1752,96 @@
         equal(data[4].value, "level 2, measure 1");
         equal(data[5].value, "level 2, measure 2");
     });
+
+    test("return less column tuples with nulls on row expand", function() {
+        var rowTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+
+        var columnTuples = [
+            {
+                tuples: [
+                    { members: [
+                        { name: "dim 0 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-0", parentName: "dim 0 level 0", children: [] }
+                    ] },
+                    { members: [
+                        { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] }
+                    ] }
+                ]
+            },
+            {
+                tuples: [
+                { members: [
+                    { name: "dim 0 level 0", children: [] }
+                    ] },
+                { members: [
+                    { name: "dim 0 level 1-1", parentName: "dim 0 level 0", children: [] }
+                    ] }
+                ]
+            }
+        ];
+
+        var data = [
+            [{ value: "col 0, row 0", ordinal: 0 }, { value: "col 1, row 0", ordinal: 1}, { value: "col 2, row 0", ordinal: 2 }],
+            [{ value: "col 0, row 0", ordinal: 0 }, { value: "col 2, row 0", ordinal: 1 }, { value: "col 2, row 1", ordinal: 3 }]
+        ];
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: columnTuples.shift(),
+                            rows: rowTuples.shift()
+                        },
+                        data: data.shift()
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+        dataSource.expandRow(["dim 0 level 0"]);
+
+        var columns = dataSource.axes().columns.tuples;
+        equal(columns.length, 1);
+        equal(columns[0].members[0].children.length, 2);
+
+        var rows = dataSource.axes().rows.tuples;
+        equal(rows.length, 1);
+        equal(rows[0].members[0].children.length, 1);
+
+        var data = dataSource.data();
+        equal(data.length, 6);
+        equal(data[0].value, "col 0, row 0");
+        equal(data[1].value, "col 1, row 0");
+        equal(data[2].value, "col 2, row 0");
+        equal(data[3].value, "", "col 0, row 1 is not empty");
+        equal(data[4].value, "", "col 1, row 1 is not empty");
+        equal(data[5].value, "col 2, row 1");
+    });
 })();
 

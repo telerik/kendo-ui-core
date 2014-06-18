@@ -468,6 +468,8 @@ var __meta__ = {
                 };
             }
 
+            newData = this._normalizeData(newData, axes);
+
             this._axes = {
                 columns: normalizeAxis(this._axes.columns),
                 rows: normalizeAxis(this._axes.rows)
