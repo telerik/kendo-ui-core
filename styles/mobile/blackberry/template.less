@@ -17,7 +17,7 @@
 }
 
 .km-blackberry .km-navbar,
-.km-blackberry .km-toolbar,
+.km-blackberry .k-toolbar,
 .km-blackberry .km-button,
 .km-blackberry .km-buttongroup,
 .km-blackberry .km-tabstrip,
@@ -43,7 +43,8 @@
     .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.2), inset 0 0 0 2px rgba(0,0,0,.1)");
 }
 
-.km-blackberry .km-navbar .km-button
+.km-blackberry .km-navbar .km-button,
+.km-blackberry .k-toolbar .km-button
 {
     color: @blackberry-active-color;
     .linear-gradient-image(top, rgba(255,255,255,.2), rgba(255,255,255,0));
@@ -89,7 +90,7 @@
     background-color: #B01B1A;
 }
 
-.km-blackberry .km-toolbar,
+.km-blackberry .k-toolbar,
 .km-blackberry .km-navbar,
 .km-blackberry .km-popup.km-pane .km-header
 {
@@ -184,8 +185,8 @@
 }
 
 .km-blackberry .km-content .km-button .km-icon,
-.km-blackberry .km-buttongroup .km-button:active .km-icon,
-.km-blackberry .km-buttongroup .km-state-active .km-icon
+.km-blackberry .km-content .km-buttongroup .km-button:active .km-icon,
+.km-blackberry .km-content .km-buttongroup .km-state-active .km-icon
 {
     color: #057fe4;
 }
@@ -548,6 +549,11 @@
 {
     .box-shadow(inset 0 0 0 2px @blackberry-active-background);
     background: fade(@blackberry-active-background, 50%);
+}
+
+.km-blackberry .k-toolbar .km-buttongroup .km-state-active
+{
+    .box-shadow(inset 0 0 1000px rgba(0,0,0,.1));
 }
 
 .km-blackberry *:not(.km-buttongroup) > .km-button:active .km-text,
