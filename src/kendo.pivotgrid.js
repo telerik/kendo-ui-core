@@ -1816,7 +1816,8 @@ var __meta__ = {
 
             if (!options.template) {
                 this.options.template = "<div class='k-pivotsetting-indicator' data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
-                    '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-group-delete"></span></a></div>';
+                    (this.options.enabled ?
+                    '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-group-delete"></span></a>' : "") + '</div>';
             }
 
             this.template = kendo.template(this.options.template);
@@ -1841,6 +1842,7 @@ var __meta__ = {
             template: null,
             emptyTemplate: "<div class='k-empty'>${data}</div>",
             setting: "columns",
+            enabled: true,
             messages: {
                 empty: "Drop Fields Here"
             }
@@ -1849,25 +1851,27 @@ var __meta__ = {
         _sortable: function() {
             var that = this;
 
-            this.sortable = this.element.kendoSortable({
-                connectWith: this.options.connectWith,
-                filter: ">:not(.k-empty)",
-                placeholder: function(element) {
-                    return element.clone().hide();
-                },
-                cursor: "move",
-                change: function(e) {
-                    var name = e.item.attr(kendo.attr("name"));
+            if (that.options.enabled) {
+                this.sortable = this.element.kendoSortable({
+                    connectWith: this.options.connectWith,
+                    filter: ">:not(.k-empty)",
+                    placeholder: function(element) {
+                        return element.clone().hide();
+                    },
+                    cursor: "move",
+                    change: function(e) {
+                        var name = e.item.attr(kendo.attr("name"));
 
-                    if (e.action == "receive") {
-                        that.add(name);
-                    } else if (e.action == "remove") {
-                        that.remove(name);
-                    } else if (e.action == "sort") {
-                        that.move(name, e.newIndex);
+                        if (e.action == "receive") {
+                            that.add(name);
+                        } else if (e.action == "remove") {
+                            that.remove(name);
+                        } else if (e.action == "sort") {
+                            that.move(name, e.newIndex);
+                        }
                     }
-                }
-            }).data("kendoSortable");
+                }).data("kendoSortable");
+            }
         },
 
         _indexOf: function(name, items) {
@@ -2023,6 +2027,7 @@ var __meta__ = {
         options: {
             name: "PivotGrid",
             autoBind: true,
+            reorderable: true,
             messages: {
                 filterFields: "Drop Filter Fields Here",
                 measureFields: "Drop Data Fields Here",
@@ -2066,6 +2071,7 @@ var __meta__ = {
 
             this.measuresTarget = new kendo.ui.PivotSettingTarget(this.measureFields, {
                 dataSource: this.dataSource,
+                enabled: this.options.reorderable,
                 setting: "measures",
                 messages: {
                     empty: this.options.messages.measureFields
@@ -2081,6 +2087,7 @@ var __meta__ = {
             this.columnsTarget = new kendo.ui.PivotSettingTarget(this.columnFields, {
                 connectWith: this.rowFields,
                 dataSource: this.dataSource,
+                enabled: this.options.reorderable,
                 setting: "columns",
                 messages: {
                     empty: this.options.messages.columnFields
@@ -2090,6 +2097,7 @@ var __meta__ = {
             this.rowsTarget = new kendo.ui.PivotSettingTarget(this.rowFields, {
                 connectWith: this.columnFields,
                 dataSource: this.dataSource,
+                enabled: this.options.reorderable,
                 setting: "rows",
                 messages: {
                     empty: this.options.messages.rowFields

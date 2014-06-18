@@ -310,9 +310,17 @@
         setting.remove("moo");
     });
 
-    test("attach sortable width to the element",  function() {
+    test("attach sortable to the element",  function() {
         var setting = new PivotSettingTarget($(div), {});
         ok($(div).data("kendoSortable"));
+    });
+
+    test("enabled false does not attach sortable",  function() {
+        var setting = new PivotSettingTarget($(div), {
+            enabled: false
+        });
+
+        ok(!$(div).data("kendoSortable"));
     });
 
     test("connectWith is set to the sortable",  function() {
@@ -510,6 +518,5 @@
         ok(!setting.validate({ uniqueName: "foo" }));
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
-
 
 })();
