@@ -60,6 +60,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this,
                 dataSource,
+                acDataSource,
                 viewModel,
                 type,
                 input = that.input = $("<input/>")
@@ -133,9 +134,9 @@ var __meta__ = {
                         .attr(kendo.attr("text-field"), that.options.field)
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
-                input.attr(kendo.attr("role"), "datepicker")
+                input.attr(kendo.attr("role"), "datepicker");
             } else if (type == "number") {
-                input.attr(kendo.attr("role"), "numerictextbox")
+                input.attr(kendo.attr("role"), "numerictextbox");
             } //TODO enums
         },
 
