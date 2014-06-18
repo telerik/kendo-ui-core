@@ -19,8 +19,8 @@
             }
         ];
         var data = [
-            [ { value: 10 } ],
-            [ { value: 10 }, { value: 3 }, { value: 7 } ]
+            [ { value: 10, ordinal: 0 } ],
+            [ { value: 10, ordinal: 0 }, { value: 3, ordinal: 1 }, { value: 7, ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -67,8 +67,8 @@
             }
         ];
         var data = [
-            [ { value: 10 }, { value: 3 }, { value: 7 } ],
-            [ { value: 3 }, { value: 2 }, { value: 1 } ]
+            [ { value: 10, ordinal: 0 }, { value: 3, ordinal: 1 }, { value: 7, ordinal: 2 } ],
+            [ { value: 3, ordinal: 0 }, { value: 2, ordinal: 1 }, { value: 1, ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -115,8 +115,8 @@
             }
         ];
         var data = [
-            [ { value: 10 } ],
-            [ { value: 10 }, { value: 3 }, { value: 7 } ]
+            [ { value: 10, ordinal: 0 } ],
+            [ { value: 10, ordinal: 0 }, { value: 3, ordinal: 1 }, { value: 7, ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -163,8 +163,8 @@
             }
         ];
         var data = [
-            [ { value: 10 }, { value: 3 }, { value: 7 } ],
-            [ { value: 3 }, { value: 2 }, { value: 1 } ]
+            [ { value: 10, ordinal: 0 }, { value: 3, ordinal: 1 }, { value: 7, ordinal: 2 } ],
+            [ { value: 3, ordinal: 0 }, { value: 2, ordinal: 1 }, { value: 1, ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -487,8 +487,8 @@
         ];
 
         var data = [
-            [ { value: 1 }, { value: 2 }, { value: 3 } ],
-            [ { value: 2 }, { value: 4 }, { value: 5 } ]
+            [ { value: 1, ordinal: 0 }, { value: 2, ordinal: 1 }, { value: 3, ordinal: 2 } ],
+            [ { value: 2, ordinal: 0 }, { value: 4, ordinal: 1 }, { value: 5, ordinal: 2 } ]
         ];
 
         var dataSource = new PivotDataSource({
@@ -571,13 +571,13 @@
                             }
                         },
                         data: [
-                            { value: "dim 0 level 0" },
-                            { value: "dim 0 level 1-0" },
-                            { value: "dim 1 level 1-0" },
-                            { value: "dim 2 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 1 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 2 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" }
+                            { value: "dim 0 level 0", ordinal: 0 },
+                            { value: "dim 0 level 1-0", ordinal: 1 },
+                            { value: "dim 1 level 1-0", ordinal: 2 },
+                            { value: "dim 2 level 1-0", ordinal: 3 },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0", ordinal: 4 },
+                            { value: "dim 0 level 1-0, dim 2 level 1-0", ordinal: 5 },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0", ordinal: 6 }
                         ]
                     });
                 }
@@ -648,13 +648,13 @@
                             }
                         },
                         data: [
-                            { value: "dim 0 level 0" },
-                            { value: "dim 0 level 1-0" },
-                            { value: "dim 1 level 1-0" },
-                            { value: "dim 2 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 1 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 2 level 1-0" },
-                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0" }
+                            { value: "dim 0 level 0", ordinal: 0 },
+                            { value: "dim 0 level 1-0", ordinal: 1 },
+                            { value: "dim 1 level 1-0", ordinal: 2 },
+                            { value: "dim 2 level 1-0", ordinal: 3 },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0", ordinal: 4 },
+                            { value: "dim 0 level 1-0, dim 2 level 1-0", ordinal: 5 },
+                            { value: "dim 0 level 1-0, dim 1 level 1-0, dim 2 level 1-0", ordinal: 6 }
                         ]
                     });
                 }
@@ -811,8 +811,8 @@
             }
         ];
         var data = [
-            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ],
-            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ]
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 1 level 1-0", ordinal: 1 }, { value: "dim 1 level 1-1", ordinal: 2 } ],
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 0 level 1-0", ordinal: 1 }, { value: "dim 0 level 1-1", ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -879,8 +879,8 @@
             }
         ];
         var data = [
-            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ],
-            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ]
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 0 level 1-0", ordinal: 1 }, { value: "dim 0 level 1-1", ordinal: 2 } ],
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 1 level 1-0", ordinal: 1 }, { value: "dim 1 level 1-1", ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -947,8 +947,8 @@
             }
         ];
         var data = [
-            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ],
-            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ]
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 1 level 1-0", ordinal: 1 }, { value: "dim 1 level 1-1", ordinal: 2 } ],
+            [ { value: "dim 0 level 0", ordinal: 0 }, { value: "dim 0 level 1-0", ordinal: 1 }, { value: "dim 0 level 1-1", ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -1015,8 +1015,8 @@
             }
         ];
         var data = [
-            [ { value: "dim 0 level 0" }, { value: "dim 0 level 1-0" }, { value: "dim 0 level 1-1" } ],
-            [ { value: "dim 0 level 0" }, { value: "dim 1 level 1-0" }, { value: "dim 1 level 1-1" } ]
+            [ { value: "dim 0 level 0", ordinal: 0}, { value: "dim 0 level 1-0", ordinal: 1 }, { value: "dim 0 level 1-1", ordinal: 2 } ],
+            [ { value: "dim 0 level 0", ordinal: 0}, { value: "dim 1 level 1-0", ordinal: 1 }, { value: "dim 1 level 1-1", ordinal: 2 } ]
         ];
         var dataSource = new PivotDataSource({
             schema: {
@@ -1138,7 +1138,7 @@
         equal(data[5].value, "col 2, row 1");
     });
 
-    test("return less rows tuples on column expand", function() {
+    test("return less row tuples on column expand", function() {
         var columnTuples = [
             {
                 tuples: [
@@ -1186,10 +1186,16 @@
         ];
 
         var data = [
-            [{ value: "col 0, row 0" }, { value: "col 0, row 1" }, { value: "col 0, row 2" }],
             [
-                { value: "col 0, row 0" }, { value: "col 1, row 0" },
-                { value: "col 0, row 2" }, { value: "col 1, row 2" }
+                { value: "col 0, row 0", ordinal: 0 },
+                { value: "col 0, row 1", ordinal: 1 },
+                { value: "col 0, row 2", ordinal: 2 }
+            ],
+            [
+                { value: "col 0, row 0", ordinal: 0 },
+                { value: "col 1, row 0", ordinal: 1 },
+                { value: "col 0, row 2", ordinal: 2 },
+                { value: "col 1, row 2", ordinal: 3 }
             ]
         ];
 
@@ -1269,10 +1275,10 @@
         ];
 
         var data = [
-            [{ value: "level 0, measure 1" }, { value: "level 0, measure 2" }],
+            [{ value: "level 0, measure 1", ordinal: 0 }, { value: "level 0, measure 2", ordinal: 1 }],
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0}, { value: "level 0, measure 2", ordinal: 1 },
+                { value: "level 1, measure 1", ordinal: 2}, { value: "level 1, measure 2", ordinal: 3 }
             ],
         ];
 
@@ -1359,13 +1365,18 @@
 
         var data = [
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1-0, measure 1" }, { value: "level 1-0, measure 2" },
-                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0},
+                { value: "level 0, measure 2", ordinal: 1},
+                { value: "level 1-0, measure 1", ordinal: 2},
+                { value: "level 1-0, measure 2", ordinal: 3},
+                { value: "level 1-1, measure 1", ordinal: 4},
+                { value: "level 1-1, measure 2", ordinal: 5}
             ],
             [
-                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" },
-                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+                { value: "level 1-1, measure 1", ordinal: 0 },
+                { value: "level 1-1, measure 2", ordinal: 1 },
+                { value: "level 2, measure 1", ordinal: 2 },
+                { value: "level 2, measure 2", ordinal: 3 }
             ],
         ];
 
@@ -1448,12 +1459,16 @@
 
         var data = [
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0 },
+                { value: "level 0, measure 2", ordinal: 1 },
+                { value: "level 1, measure 1", ordinal: 2 },
+                { value: "level 1, measure 2", ordinal: 3 }
             ],
             [
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" },
-                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+                { value: "level 1, measure 1", ordinal: 0},
+                { value: "level 1, measure 2", ordinal: 1},
+                { value: "level 2, measure 1", ordinal: 2},
+                { value: "level 2, measure 2", ordinal: 3}
             ],
         ];
 
@@ -1525,10 +1540,15 @@
         ];
 
         var data = [
-            [{ value: "level 0, measure 1" }, { value: "level 0, measure 2" }],
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0},
+                { value: "level 0, measure 2", ordinal: 1}
+            ],
+            [
+                { value: "level 0, measure 1", ordinal: 0 },
+                { value: "level 0, measure 2", ordinal: 1 },
+                { value: "level 1, measure 1", ordinal: 2 },
+                { value: "level 1, measure 2", ordinal: 3 }
             ],
         ];
 
@@ -1618,13 +1638,18 @@
 
         var data = [
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1-0, measure 1" }, { value: "level 1-0, measure 2" },
-                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0 },
+                { value: "level 0, measure 2", ordinal: 1 },
+                { value: "level 1-0, measure 1", ordinal: 2 },
+                { value: "level 1-0, measure 2", ordinal: 3 },
+                { value: "level 1-1, measure 1", ordinal: 4 },
+                { value: "level 1-1, measure 2", ordinal: 5 }
             ],
             [
-                { value: "level 1-1, measure 1" }, { value: "level 1-1, measure 2" },
-                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+                { value: "level 1-1, measure 1", ordinal: 0 },
+                { value: "level 1-1, measure 2", ordinal: 1 },
+                { value: "level 2, measure 1", ordinal: 2 },
+                { value: "level 2, measure 2", ordinal: 3 }
             ],
         ];
 
@@ -1710,12 +1735,16 @@
 
         var data = [
             [
-                { value: "level 0, measure 1" }, { value: "level 0, measure 2" },
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" }
+                { value: "level 0, measure 1", ordinal: 0 },
+                { value: "level 0, measure 2", ordinal: 1 },
+                { value: "level 1, measure 1", ordinal: 2 },
+                { value: "level 1, measure 2", ordinal: 3 }
             ],
             [
-                { value: "level 1, measure 1" }, { value: "level 1, measure 2" },
-                { value: "level 2, measure 1" }, { value: "level 2, measure 2" }
+                { value: "level 1, measure 1", ordinal: 4 },
+                { value: "level 1, measure 2", ordinal: 5 },
+                { value: "level 2, measure 1", ordinal: 6 },
+                { value: "level 2, measure 2", ordinal: 7 }
             ],
         ];
 

@@ -519,7 +519,12 @@
                     options.success({
                         axes: {
                             columns: {
-                                tuples: [ { members: [ { caption: "foo", children: [] } ] },  { members: [ { caption: "bar", children: [] } ] }, { members: [ { caption: "baz", children: [] } ] }, { members: [ { caption: "moo", children: [] } ] }]
+                                tuples: [
+                                    { members: [ { caption: "foo", children: [] } ] },
+                                    { members: [ { caption: "bar", children: [] } ] },
+                                    { members: [ { caption: "baz", children: [] } ] },
+                                    { members: [ { caption: "moo", children: [] } ] }
+                                ]
                             }
                         },
                         data: [ { ordinal: 0, value: 0, fmtValue: "0" }, { ordinal: 2, value: 2, fmtValue: "2" } ]

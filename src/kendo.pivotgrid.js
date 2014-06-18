@@ -449,7 +449,7 @@ var __meta__ = {
         _readData: function(data) {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
-            var tuples, resultAxis;
+            var tuples, resultAxis, measures, axisToSkip;
             var columnDescriptors = this.columns().length;
             var rowDescriptors = this.rows().length;
             var hasColumnTuples = axes.columns && axes.columns.tuples;
@@ -468,8 +468,6 @@ var __meta__ = {
                 };
             }
 
-            newData = this._normalizeData(newData, axes);
-
             this._axes = {
                 columns: normalizeAxis(this._axes.columns),
                 rows: normalizeAxis(this._axes.rows)
@@ -480,50 +478,66 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
+            newData = this._normalizeData(newData, axes.columns.tuples.length, axes.rows.tuples.length);
+
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
-                resultAxis = validateAxis(axes.columns, this._axes.columns, this._columnMeasures());
+                measures = this._columnMeasures();
+                resultAxis = validateAxis(axes.columns, this._axes.columns, measures);
 
                 if (resultAxis) {
+                    axisToSkip = "columns";
                     axes.columns = resultAxis;
-                    adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, newData);
+                    adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, newData);
+                    newData = this._normalizeData(newData, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
                 }
             } else if (this._lastExpanded == "columns") {
                 tuples = axes.rows.tuples;
-                resultAxis = validateAxis(axes.rows, this._axes.rows, this._rowMeasures());
+                measures = this._rowMeasures();
+                resultAxis = validateAxis(axes.rows, this._axes.rows, measures);
 
                 if (resultAxis) {
+                    axisToSkip = "rows";
                     axes.rows = resultAxis;
-                    adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, newData);
+                    adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, newData);
+                    newData = this._normalizeData(newData, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
                 }
             }
 
             this._lastExpanded = null;
 
-            newData = this._normalizeData(newData, axes);
-
-            var result = this._mergeAxes(axes, newData);
+            var result = this._mergeAxes(axes, newData, axisToSkip);
             this._axes = result.axes;
 
             return result.data;
         },
 
-        _mergeAxes: function(sourceAxes, data) {
+        _mergeAxes: function(sourceAxes, data, axisToSkip) {
             var columnMeasures = this._columnMeasures();
             var rowMeasures = this._rowMeasures();
             var axes = this.axes();
-            var startIndex;
+            var startIndex, tuples;
 
-            var newColumnsLength = sourceAxes.columns.tuples.length;
             var newRowsLength = sourceAxes.rows.tuples.length;
             var oldColumnsLength = membersCount(axes.columns.tuples, columnMeasures);
+            var newColumnsLength = sourceAxes.columns.tuples.length;
 
-            var tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
-            data = prepareDataOnColumns(tuples, data);
+            if (axisToSkip == "columns") {
+                newColumnsLength = oldColumnsLength;
+                tuples = sourceAxes.columns.tuples;
+            } else {
+                tuples = parseSource(sourceAxes.columns.tuples, columnMeasures);
+                data = prepareDataOnColumns(tuples, data);
+            }
             var mergedColumns = mergeTuples(axes.columns.tuples, tuples, columnMeasures);
 
-            tuples = parseSource(sourceAxes.rows.tuples, rowMeasures);
-            data = prepareDataOnRows(tuples, data);
+            if (axisToSkip == "rows") {
+                newRowsLength = membersCount(sourceAxes.rows.tuples, rowMeasures);
+                tuples = sourceAxes.rows.tuples;
+            } else {
+                tuples = parseSource(sourceAxes.rows.tuples, rowMeasures);
+                data = prepareDataOnRows(tuples, data);
+            }
             var mergedRows = mergeTuples(axes.rows.tuples, tuples, rowMeasures);
 
             axes.columns.tuples = mergedColumns.tuples;
@@ -620,17 +634,13 @@ var __meta__ = {
             return rowMeasures;
         },
 
-        _normalizeData: function(data, axes) {
+        _normalizeData: function(data, columns, rows) {
             if (!data.length) {
                 return data;
             }
 
-            var columns = (axes.columns || {}).tuples || [];
-            var rows = (axes.rows || {}).tuples || [];
-            var cell;
-            var axesLength = (columns.length || 1) * (rows.length || 1);
-            var idx, length;
-
+            var cell, idx, length;
+            var axesLength = (columns || 1) * (rows || 1);
             var result = new Array(axesLength);
 
             if (data.length === axesLength) {
@@ -791,24 +801,18 @@ var __meta__ = {
     });
 
     function validateAxis(newAxis, axis, measures) {
-        var root, tuples = newAxis.tuples;
+        if (newAxis.tuples.length < membersCount(axis.tuples, measures)) {
 
-        if (tuples.length < membersCount(axis.tuples, measures)) {
-
-            root = mergeTuples(axis.tuples.slice(), tuples, measures);
-
-            newAxis.tuples = tuples.slice(0, 1).concat(unflattenTuple(root.parsedRoot));
-
-            return newAxis;
+            return axis;
         }
 
         return;
     }
 
-    function adjustDataByColumn(sourceTuples, targetTuples, rowsLength, data) {
+    function adjustDataByColumn(sourceTuples, targetTuples, rowsLength, measures, data) {
         var columnIdx, rowIdx, dataIdx;
         var columnsLength = sourceTuples.length;
-        var targetColumnsLength = targetTuples.length;
+        var targetColumnsLength = membersCount(targetTuples, measures);
 
         for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
             for (columnIdx = 0; columnIdx < columnsLength; columnIdx++) {
@@ -819,10 +823,10 @@ var __meta__ = {
         }
     }
 
-    function adjustDataByRow(sourceTuples, targetTuples, columnsLength, data) {
+    function adjustDataByRow(sourceTuples, targetTuples, columnsLength, measures, data) {
         var columnIdx, rowIdx, dataIdx;
         var rowsLength = sourceTuples.length;
-        var targetRowsLength = targetTuples.length;
+        var targetRowsLength = membersCount(targetTuples, measures);
 
         for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
             dataIdx = tupleIndex(sourceTuples[rowIdx], targetTuples);
@@ -833,33 +837,7 @@ var __meta__ = {
     }
 
     function tupleIndex(tuple, collection) {
-        var idx, length = collection.length;
-        for (idx = 0; idx < length; idx++) {
-            if (equalTuples(tuple, collection[idx])) {
-                return idx;
-            }
-        }
-
-        return -1;
-    }
-
-    function unflattenTuple(tuple) {
-        var result = [];
-        var members = tuple.members.slice();
-        var current = members.shift();
-        var idx, length, child, children;
-
-        while (current) {
-            children = current.children;
-            for (idx = 0, length = children.length; idx < length; idx ++) {
-                child = children[idx];
-                result.push(child);
-                [].push.apply(result, unflattenTuple(child));
-            }
-            current = members.shift();
-        }
-
-        return result;
+        return findExistingTuple(collection, tuple).index;
     }
 
     function membersCount(tuples, measures) {
