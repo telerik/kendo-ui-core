@@ -329,6 +329,8 @@ var __meta__ = {
                 computedWidth = anchor.outerWidth(),
                 width;
 
+            kendo.wrap(this.element).addClass("k-split-wrapper");
+
             if (this.element.css("box-sizing") !== "border-box") {
                 width = computedWidth - (this.element.outerWidth() - this.element.width());
             } else {

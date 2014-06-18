@@ -108,6 +108,13 @@
     text-align: left;
     display: block;
     white-space: nowrap;
+    margin: 0 0 1px;
+}
+
+.km-root .k-overflow-container li:last-child .k-overflow-button,
+.km-root .k-split-container li:last-child .km-button
+{
+    margin: 0;
 }
 
 .km-root .k-overflow-container .km-buttongroup
@@ -129,6 +136,11 @@
     margin: 0 0 1px;
 }
 
+.km-root .k-overflow-container .km-state-disabled
+{
+    opacity: 1;
+}
+
 .km-root .k-overflow-container .k-overflow-hidden
 {
     display: none;
@@ -146,4 +158,10 @@
 {
     border-bottom: 0;
     margin-bottom: 0;
+}
+
+.km-root .k-overflow-wrapper .km-actionsheet-wrapper .km-actionsheet
+{
+    overflow: hidden;
+    overflow-y: auto;
 }

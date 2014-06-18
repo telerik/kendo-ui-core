@@ -226,6 +226,12 @@
     .box-shadow(0 0 0 1px @ios7-second-border-color);
 }
 
+.km-ios7 .k-split-wrapper .km-popup,
+.km-ios7 .k-overflow-wrapper .km-popup
+{
+    .box-shadow(0 0 5px @ios7-second-border-color);
+}
+
 .km-ios7 .km-popup-arrow:after
 {
     border-color: @ios7-actionsheet-background transparent;
@@ -240,7 +246,9 @@
 /* Loader */
 
 .km-ios7.km-pane > .km-loader,
-.km-ios7 .km-pane > .km-loader
+.km-ios7 .km-pane > .km-loader,
+.km-ios7 .k-split-wrapper .km-actionsheet-wrapper,
+.km-ios7 .k-overflow-wrapper .km-actionsheet-wrapper
 {
     background: rgba(0,0,0,.2);
 }
