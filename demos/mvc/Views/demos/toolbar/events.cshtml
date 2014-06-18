@@ -8,53 +8,96 @@
             </div>
 
             <script>
-                $("#toolbar").kendoToolBar({
-                    items: [
-                        { type: "button", text: "Button" },
-                        { type: "button", text: "Toggle Button", toggable: true, selected: true },
-                        {
-                            type: "splitButton",
-                            text: "Split Button",
-                            items: [
-                                { text: "Action 1" },
-                                { text: "Action 2" },
-                                { text: "Action 3" }
-                            ]
+                function buttonClickHandler(e) {
+                    kendoConsole.log(e.target.text() + " 'click' event is fired.");
+                }
+
+                function buttonToggleHandler(e) {
+                    kendoConsole.log(e.target.text() + " 'toggle' event is fired.");
+                }
+
+                function splitButtonClickHandler(e) {
+                    kendoConsole.log("SplitButton event: " + e.target.attr("id") + " is clicked.");
+                }
+
+                $(document).ready(function() {
+                    $("#toolbar").kendoToolBar({
+                        items: [
+                            {
+                                type: "button",
+                                id: "button1",
+                                text: "Button 1",
+                                click: buttonClickHandler
+                            },
+                            {
+                                type: "button",
+                                id: "button2",
+                                text: "Button 2",
+                                click: buttonClickHandler
+                            },
+                            { type: "separator" },
+                            {
+                                type: "button",
+                                id: "toggle1",
+                                text: "Toggle 1",
+                                toggable: true,
+                                toggle: buttonToggleHandler
+                            },
+                            {
+                                type: "button",
+                                id: "toggle1",
+                                text: "Toggle 2",
+                                toggable: true,
+                                toggle: buttonToggleHandler
+                            },
+                            { type: "separator" },
+                            {
+                                type: "splitButton",
+                                id: "mainButton",
+                                text: "Split Button",
+                                click: splitButtonClickHandler,
+                                items: [
+                                    { text: "Action 1", id: "action1" },
+                                    { text: "Action 2", id: "action2" },
+                                    { text: "Action 3", id: "action3" }
+                                ]
+                            },
+                            { type: "separator" },
+                            {
+                                type: "buttonGroup",
+                                items: [
+                                    { text: "Radio 1", id: "radio1", toggable: true, group: "radio", toggle: buttonToggleHandler },
+                                    { text: "Radio 2", id: "radio2", toggable: true, group: "radio", toggle: buttonToggleHandler },
+                                    { text: "Radio 3", id: "radio3", toggable: true, group: "radio", toggle: buttonToggleHandler }
+                                ]
+                            },
+                            {
+                                type: "button",
+                                id: "overflowButton",
+                                text: "Overflow button",
+                                overflow: "always"
+                            }
+                        ],
+                        click: function(e) {
+                            var id = e.target.attr("id");
+                            kendoConsole.log("ToolBar 'click' event is fired for element with id: " + id);
                         },
-                        {
-                            type: "buttonGroup",
-                            items: [
-                                { text: "Left", toggable: true },
-                                { text: "Middle", toggable: true },
-                                { text: "Right", toggable: true }
-                            ]
+                        toggle: function(e) {
+                            var id = e.target.attr("id");
+
+                            if(e.group == "radio") {
+                                kendoConsole.log("Toolbar 'toggle' event: " + id + " button is selected from group: " + e.group);
+                            } else {
+                                kendoConsole.log("ToolBar 'toggle' event: " + id + " button is changed");
+                            }
                         },
-                        {
-                            type: "buttonGroup",
-                            items: [
-                                { text: "Radio 1", toggable: true, group: "radio" },
-                                { text: "Radio 2", toggable: true, group: "radio" },
-                                { text: "Radio 3", toggable: true, group: "radio" }
-                            ]
+                        open: function(e) {
+                            kendoConsole.log("open");
                         },
-                        {
-                            type: "button",
-                            text: "Overflow button",
-                            overflow: "always"
+                        close: function(e) {
+                            kendoConsole.log("close");
                         }
-                    ],
-                    click: function(e) {
-                        kendoConsole.log("click");
-                    },
-                    toggle: function(e) {
-                        kendoConsole.log("toggle");
-                    },
-                    open: function(e) {
-                        kendoConsole.log("open");
-                    },
-                    close: function(e) {
-                        kendoConsole.log("close");
-                    }
-                })
+                    });
+                });
             </script>
         </div>
