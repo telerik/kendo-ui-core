@@ -1,0 +1,100 @@
+<div id="example">
+    <div class="demo-section k-header" style="padding: 1em;">
+        <div id="treeMap"></div>
+    </div>
+    <script>
+        function treeMap() {
+            var data = [{
+                name: "Population in USA",
+                value: 316128839,
+                items: [{
+                    name: "Alabama",
+                    value: 4833722,
+                    items: [{
+                        name: "Birmingham",
+                        value: 212113
+                    },
+                    {
+                        name: "Montgomery",
+                        value: 201332
+                    },
+                    {
+                        name: "Mobile",
+                        value: 194899
+                    },
+                    {
+                        name: "Huntsville",
+                        value: 186254
+                    },
+                    {
+                        name: "Tuscaloosa",
+                        value: 95334
+                    },
+                    {
+                        name: "Hoover",
+                        value: 84126
+                    },
+                    {
+                        name: "Dothan",
+                        value: 68001
+                    },
+                    {
+                        name: "Auburn",
+                        value: 58582
+                    },
+                    {
+                        name: "Decatur",
+                        value: 55816
+                    }]
+                }, {
+                    name: "Alaska",
+                    value: 735132,
+                    items: [{
+                        name: "Anchorage",
+                        value: 300950
+                    },
+                    {
+                        name: "Badger",
+                        value: 20200
+                    },
+                    {
+                        name: "College",
+                        value: 13400
+                    },
+                    {
+                        name: "Fairbanks",
+                        value: 32324
+                    },
+                    {
+                        name: "Juneau",
+                        value: 32660
+                    },
+                    {
+                        name: "Ketchikan",
+                        value: 8214
+                    },
+                    {
+                        name: "Sitka",
+                        value: 9020
+                    }]
+                }]
+            }];
+
+            $("#treeMap").kendoTreeMap({
+                dataSource: {
+                    data: data,
+                    schema: {
+                        model: {
+                            children: "items"
+                        }
+                    }
+                },
+                valueField: "value",
+                titleField: "name",
+                colorField: "color"
+            });
+        }
+
+        $(document).ready(treeMap);
+    </script>
+</div>

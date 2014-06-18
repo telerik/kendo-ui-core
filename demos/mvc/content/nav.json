@@ -6646,6 +6646,44 @@
     "category": "Data Visualization"
   },
   {
+    "text": "TreeMap",
+    "pro": "true",
+    "spriteCssClass": "treeMapIcon",
+    "api": "dataviz/treemap",
+    "documentation": {
+       "kendo-ui": "getting-started/dataviz/treemap/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/treemap/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/treemap/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/treemap/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/treemap",
+       "aspnet-mvc": "aspnet-mvc/treemap",
+       "jsp-ui": "jsp/treemap",
+       "php-ui": "php/treemap"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/treemap",
+       "aspnet-mvc": "aspnet-mvc/treemap",
+       "jsp-ui": "jsp/treemap",
+       "php-ui": "php/treemap"
+    },
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "treemap/index",
+        "title": {
+            "kendo-ui": "Kendo UI TreeMap Demo"
+        },
+        "meta": {
+            "kendo-ui": ""
+        }
+      }
+    ],
+    "name": "treemap",
+    "category": "Data Visualization"
+  },
+  {
     "text": "Map",
     "pro": "true",
     "name": "map",

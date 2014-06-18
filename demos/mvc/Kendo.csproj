@@ -1142,6 +1142,7 @@
     <Content Include="Views\demos\range-bar-charts\index.cshtml" />
     <Content Include="Views\demos\range-bar-charts\local-data-binding.cshtml" />
     <Content Include="Views\demos\range-bar-charts\remote-data-binding.cshtml" />
+    <Content Include="Views\demos\treemap\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />

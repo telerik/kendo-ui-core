@@ -29,7 +29,8 @@
         "./kendo.dataviz.canvas",
         "./kendo.dataviz.drawing",
         "./kendo.dataviz.map",
-        "./kendo.dataviz.diagram"
+        "./kendo.dataviz.diagram",
+        "./kendo.dataviz.treemap"
     ], f);
 })(function(){
     "bundle all";
