@@ -120,6 +120,7 @@
             return this;
         }
     });
+    defineAccessors(Point.fn, ["x", "y"]);
 
     // IE < 9 doesn't allow to override toString on definition
     Point.fn.toString = function(digits, separator) {
@@ -134,8 +135,6 @@
         separator = separator || " ";
         return x + separator + y;
     };
-
-    defineAccessors(Point.fn, ["x", "y"]);
 
     Point.create = function(arg0, arg1) {
         if (defined(arg0)) {
@@ -290,7 +289,6 @@
             );
         }
     });
-
     defineAccessors(Circle.fn, ["radius"]);
 
     var Arc = Class.extend({
@@ -308,20 +306,7 @@
 
         MAX_INTERVAL: 90,
 
-        _fields: ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"],
-
         geometryChange: util.mixins.geometryChange,
-
-        get: function(field) {
-            return this[field];
-        },
-
-        set: function(field, value) {
-            if ($.inArray(field, this._fields) !== -1 && this[field] !== value) {
-                this[field] = value;
-                this.geometryChange();
-            }
-        },
 
         pointAt: function(angle) {
             var center = this.center;
@@ -437,8 +422,8 @@
             return new Point(-arc.radiusX * math.sin(radian), arc.radiusY * math.cos(radian));
         }
     });
+    defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"]);
 
-    // TODO: Consider renaming to TransformMatrix or Transform
     var Matrix = Class.extend({
         /* Transformation matrix
          *

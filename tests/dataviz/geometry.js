@@ -651,11 +651,11 @@
     });
 
     test("sets fields", function() {
-        arc.set("radiusX", 10);
-        arc.set("radiusY", 20);
-        arc.set("startAngle", 30);
-        arc.set("endAngle", 40);
-        arc.set("counterClockwise", true);
+        arc.setRadiusX(10);
+        arc.setRadiusY(20);
+        arc.setStartAngle(30);
+        arc.setEndAngle(40);
+        arc.setCounterClockwise(true);
 
         equal(arc.radiusX, 10);
         equal(arc.radiusY, 20);
@@ -671,7 +671,7 @@
             }
         };
 
-        arc.set("radiusX", 10);
+        arc.setRadiusX(10);
     });
 
     test("setting a field to the same value does not trigger geometryChange", 0, function() {
@@ -681,25 +681,15 @@
             }
         };
 
-        arc.set("radiusX", 50);
-    });
-
-    test("setting an invalid field does not trigger geometryChange", 0, function() {
-        arc.observer = {
-            geometryChange: function() {
-                ok(false);
-            }
-        };
-
-        arc.set("foo", 10);
+        arc.setRadiusX(50);
     });
 
     test("gets fields", function() {
-        equal(arc.get("radiusX"), 50);
-        equal(arc.get("radiusY"), 100);
-        equal(arc.get("startAngle"), 0);
-        equal(arc.get("endAngle"), 180);
-        equal(arc.get("counterClockwise"), false);
+        equal(arc.getRadiusX(), 50);
+        equal(arc.getRadiusY(), 100);
+        equal(arc.getStartAngle(), 0);
+        equal(arc.getEndAngle(), 180);
+        equal(arc.getCounterClockwise(), false);
     });
 
     test("pointAt returns the point on the elipse for a given angle", function() {

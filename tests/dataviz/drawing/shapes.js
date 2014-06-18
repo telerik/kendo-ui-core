@@ -685,8 +685,8 @@
                 }
             };
 
-            arc.geometry.set("radiusX", 100);
-            arc.geometry.set("counterClockwise", true);
+            arc.geometry.setRadiusX(100);
+            arc.geometry.setCounterClockwise(true);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
