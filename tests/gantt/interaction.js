@@ -222,6 +222,21 @@
         target.click();
     });
 
+    test("clicking with Ctrl on a task calls clearSelection()", function() {
+        ganttTimeline._render(tasks);
+
+        var e = new $.Event("click");
+        var target = ganttTimeline.wrapper.find(".k-task:first")
+            .addClass(".k-state-selected");
+
+        e.ctrlKey = true;
+        stub(gantt, "clearSelection");
+
+        target.trigger(e);
+
+        ok(gantt.calls("clearSelection"));
+    });
+
     test("clicking on a dependency calls selectDependency(':selector')", function() {
         ganttTimeline._render(tasks);
         ganttTimeline._renderDependencies(dependencies);

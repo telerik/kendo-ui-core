@@ -1975,7 +1975,12 @@ var __meta__ = {
                 this.wrapper
                     .on(CLICK + NS, DOT + styles.task, function(e) {
                         e.stopPropagation();
-                        that.trigger("select", { uid: $(this).attr("data-uid") });
+
+                        if (!e.ctrlKey) {
+                            that.trigger("select", { uid: $(this).attr("data-uid") });
+                        } else {
+                            that.trigger("clear");
+                        }
                     })
                     .on(CLICK + NS, DOT + styles.tasksWrapper, function(e) {
                         that.trigger("clear");
