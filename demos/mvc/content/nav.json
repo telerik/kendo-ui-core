@@ -3450,6 +3450,7 @@
   {
     "text": "ToolBar",
     "disableInMobile": true,
+    "new": true,
     "name": "toolbar",
     "api": "web/toolbar",
     "documentation": {
