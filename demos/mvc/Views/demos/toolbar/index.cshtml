@@ -10,31 +10,34 @@
                             { type: "button", text: "Toggle Button", toggable: true },
                             {
                                 type: "splitButton",
-                                text: "Split Button",
+                                text: "Insert",
                                 items: [
                                     { text: "Insert above", icon: "insert-n" },
                                     { text: "Insert between", icon: "insert-m" },
                                     { text: "Insert below", icon: "insert-s" }
                                 ]
                             },
+                            { type: "separator" },
+                            { template: "<label>Format:</label>" },
                             {
                                 template: "<input id='dropdown' style='width: 150px;' />",
                                 overflow: "never"
                             },
+                            { type: "separator" },
                             {
                                 type: "buttonGroup",
                                 items: [
-                                    { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggable: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Middle", toggable: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", toggable: true }
+                                    { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggle: true, group: "text-align" },
+                                    { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Center", toggle: true, group: "text-align" },
+                                    { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", toggle: true, group: "text-align" }
                                 ]
                             },
                             {
                                 type: "buttonGroup",
                                 items: [
-                                    { text: "Radio 1", toggable: true, group: "radio" },
-                                    { text: "Radio 2", toggable: true, group: "radio" },
-                                    { text: "Radio 3", toggable: true, group: "radio" }
+                                    { spriteCssClass: "k-tool-icon k-bold", text: "Bold", toggle: true, showText: "overflow" },
+                                    { spriteCssClass: "k-tool-icon k-italic", text: "Italic", toggle: true, showText: "overflow" },
+                                    { spriteCssClass: "k-tool-icon k-underline", text: "Underline", toggle: true, showText: "overflow" }
                                 ]
                             },
                             {
@@ -56,14 +59,15 @@
                     });
 
                     $("#dropdown").kendoDropDownList({
-                        optionLabel: "Drop Down",
+                        optionLabel: "Paragraph",
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [
-                            { text: "Option 1", value: 1 },
-                            { text: "Option 2", value: 2 },
-                            { text: "Option 3", value: 3 },
-                            { text: "Option 4", value: 4 }
+                            { text: "Heading 1", value: 1 },
+                            { text: "Heading 2", value: 2 },
+                            { text: "Heading 3", value: 3 },
+                            { text: "Title", value: 4 },
+                            { text: "Subtitle", value: 5 },
                         ]
                     });
                 });
