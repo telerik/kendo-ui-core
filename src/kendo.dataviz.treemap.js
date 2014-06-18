@@ -38,6 +38,8 @@ var __meta__ = {
 
             this.bind(this.events, this.options);
 
+            this.element.addClass("k-widget k-treemap");
+
             this.view = new SquarifiedView(element, this.options);
 
             if (this.options.title.visible) {
@@ -101,7 +103,12 @@ var __meta__ = {
             if (!node) {
                 this._items = [];
                 item = this._wrapItem(items[0]);
-                item.coord = this.src.createRoot(900, 500);
+                item.coord = {
+                    width: this.element.innerWidth(),
+                    height: this.element.innerHeight(),
+                    top: 0,
+                    left: 0
+                };
                 this._items.push(item);
                 // Reference of the root
                 this._root = item;
@@ -182,15 +189,6 @@ var __meta__ = {
 
         options: {
             offset: 0
-        },
-
-        createRoot: function() {
-            return {
-                width: 960,
-                height: 500,
-                left: 0,
-                top: 0
-            };
         },
 
         leaf: function(tree) {
