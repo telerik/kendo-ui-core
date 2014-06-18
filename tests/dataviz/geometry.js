@@ -135,6 +135,26 @@
         close(point.y, 10, 1);
     });
 
+    test("move sets x and y", function() {
+        point.move(90, 100);
+        equal(point.x, 90);
+        equal(point.y, 100);
+    });
+
+    test("move returns point", function() {
+        equal(point.move(90, 100), point);
+    });
+
+    test("move triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        point.move(90, 100)
+    });
+
     test("rotate rotates x and y around center (array)", function() {
         point.rotate(90, [100, 100]);
         close(point.x, 180, 1);

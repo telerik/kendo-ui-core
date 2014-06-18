@@ -59,6 +59,11 @@
             return this.translate(point.x, point.y);
         },
 
+        move: function(x, y) {
+            this.x = this.y = 0;
+            return this.translate(x, y);
+        },
+
         scale: function(scaleX, scaleY) {
             if (!defined(scaleY)) {
                 scaleY = scaleX;
