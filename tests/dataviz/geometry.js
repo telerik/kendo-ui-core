@@ -529,12 +529,12 @@
     });
 
     test("sets radius", function() {
-        circle.set("radius", 1);
+        circle.setRadius(1);
         equal(circle.radius, 1);
     });
 
     test("gets radius", function() {
-        equal(circle.get("radius"), 10);
+        equal(circle.getRadius(), 10);
     });
 
     test("setting radius triggers geometryChange", function() {
@@ -544,17 +544,7 @@
             }
         };
 
-        circle.set("radius", 1);
-    });
-
-    test("setting any other field does not trigger geometryChange", 0, function() {
-        circle.observer = {
-            geometryChange: function() {
-                ok(false);
-            }
-        };
-
-        circle.set("foo", 1);
+        circle.setRadius(1);
     });
 
     test("setting radius to same value does not trigger geometryChange", 0, function() {
@@ -564,7 +554,7 @@
             }
         };
 
-        circle.set("radius", 10);
+        circle.setRadius(10);
     });
 
     test("equals is true for same center and radius", function() {

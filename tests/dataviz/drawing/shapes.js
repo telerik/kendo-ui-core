@@ -603,7 +603,7 @@
                 }
             };
 
-            circle.geometry.set("radius", 5);
+            circle.geometry.setRadius(5);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {

@@ -259,17 +259,6 @@
             return new Circle(this.center.clone(), this.radius);
         },
 
-        set: function(field, value) {
-            if (field === "radius" && this.radius !== value) {
-                this.radius = value;
-                this.geometryChange();
-            }
-        },
-
-        get: function() {
-            return this.radius;
-        },
-
         pointAt: function(angle) {
             return this._pointAt(rad(angle));
         },
@@ -301,6 +290,8 @@
             );
         }
     });
+
+    defineAccessors(Circle.fn, ["radius"]);
 
     var Arc = Class.extend({
         init: function(center, options) {

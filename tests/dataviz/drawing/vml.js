@@ -1228,7 +1228,7 @@
                 }
             };
 
-            circle.geometry.set("radius", 60);
+            circle.geometry.setRadius(60);
         });
 
         test("optionsChange is forwarded to transform", function() {
