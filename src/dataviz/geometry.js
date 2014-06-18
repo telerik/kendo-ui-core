@@ -32,30 +32,6 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        set: function(field, value) {
-            if (field === "x") {
-                if (this.x !== value) {
-                    this.x = value;
-                    this.geometryChange();
-                }
-            } else if (field === "y") {
-                if (this.y !== value) {
-                    this.y = value;
-                    this.geometryChange();
-                }
-            }
-
-            return this;
-        },
-
-        get: function(field) {
-            if (field === "x") {
-                return this.x;
-            } else if (field === "y") {
-                return this.y;
-            }
-        },
-
         equals: function(point) {
             return point && point.x === this.x && point.y === this.y;
         },
@@ -153,6 +129,8 @@
         separator = separator || " ";
         return x + separator + y;
     };
+
+    defineAccessors(Point.fn, ["x", "y"]);
 
     Point.create = function(arg0, arg1) {
         if (defined(arg0)) {
@@ -670,6 +648,34 @@
         }
 
         return angle;
+    }
+
+    function defineAccessors(fn, fields) {
+        for (var i = 0; i < fields.length; i++) {
+            var name = fields[i];
+            var capitalized = name.charAt(0).toUpperCase() +
+                              name.substring(1, name.length);
+
+            fn["set" + capitalized] = setAccessor(name);
+            fn["get" + capitalized] = getAccessor(name);
+        };
+    }
+
+    function setAccessor(field) {
+        return function(value) {
+            if (this[field] !== value) {
+                this[field] = value;
+                this.geometryChange();
+            }
+
+            return this;
+        };
+    }
+
+    function getAccessor(field) {
+        return function() {
+            return this[field];
+        };
     }
 
     // Exports ================================================================

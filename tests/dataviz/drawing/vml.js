@@ -1360,7 +1360,7 @@
                 equal(value, "m 0,11000 l 4000,11000");
             };
 
-            text.position().set("x", 0);
+            text.position().setX(0);
         });
 
         test("rounds path coordinates", function() {
@@ -1440,7 +1440,7 @@
 
         test("geometryChange is forwarded to path data node", function() {
             textNode.pathData.geometryChange = function() { ok(true); };
-            text.position().set("x", 1);
+            text.position().setX(1);
         });
 
         shapeTests(d.Text, vml.TextNode, "TextNode");

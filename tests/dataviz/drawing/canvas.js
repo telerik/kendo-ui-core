@@ -650,7 +650,7 @@
                 ok(true);
             };
 
-            image.rect().p0.set("x", 20);
+            image.rect().p0.setX(20);
         });
 
         test("renders transform", function() {
