@@ -1975,7 +1975,11 @@ var __meta__ = {
                         }
                     })
                     .on(CLICK + NS, DOT + styles.tasksWrapper, function(e) {
-                        that.trigger("clear");
+                        if (that.selectDependency().length > 0) {
+                            that.clearSelection();
+                        } else {
+                            that.trigger("clear");
+                        }
                     })
                     .on(CLICK + NS, DOT + styles.line, function(e) {
                         e.stopPropagation();
