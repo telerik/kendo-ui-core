@@ -39,6 +39,43 @@
         click(container.find("#foo"));
     });
 
+    test("click event defined at button level is fired", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { 
+                    type: "button",
+                    id: "foo",
+                    text: "foo",
+                    click: function() {
+                        ok(true, "Click event is fired");
+                    }
+                }
+            ]
+        });
+
+        click(container.find("#foo"));
+    });
+
+    test("both click events (toolbar and button level) are fired", 2, function() {
+        container.kendoToolBar({
+            items: [
+                { 
+                    type: "button",
+                    id: "foo",
+                    text: "foo",
+                    click: function() {
+                        ok(true, "Click event (button level) is fired");
+                    }
+                }
+           ],
+           click: function() {
+               ok(true, "Click event (toolbar level) is fired");
+           }
+        });
+
+        click(container.find("#foo"));
+    });
+
     test("click event is not fired for disabled buttons", 0, function() {
         container.kendoToolBar({
             items: [
@@ -47,6 +84,24 @@
             click: function() {
                 ok(false, "Click event should not be fired for disabled button.");
             }
+        });
+
+        click(container.find("#foo"));
+    });
+
+    test("click event (button level) is not fired for disabled buttons", 0, function() {
+        container.kendoToolBar({
+            items: [
+                { 
+                    type: "button",
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    click: function() {
+                        ok(false, "Click event should not be fired for disabled button.");
+                    }
+                }
+            ]
         });
 
         click(container.find("#foo"));
@@ -124,6 +179,27 @@
         click(button);
     });
 
+    test("click on disabled toggleButton does not trigger the toggle event (button level)", 0, function() {
+        container.kendoToolBar({
+            items: [
+                { 
+                    type: "button",
+                    toggle: true,
+                    id: "foo",
+                    text: "foo",
+                    enable: false,
+                    onToggle: function(e) {
+                        ok(false, "Toggle event should not fire for disabled buttons");
+                    }
+                }
+            ]
+        });
+
+        var button = container.find("#foo");
+
+        click(button);
+    });
+
     test("click on toggleButton triggers toggle event", 1, function() {
         container.kendoToolBar({
             items: [
@@ -139,20 +215,24 @@
         click(button);
     });
 
-    test("preventng the toggle event does not change button state", 1, function() {
+    test("click on toggleButton triggers toggle event (button level)", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggle: true, id: "foo", text: "foo" }
-            ],
-            toggle: function(e) {
-                e.preventDefault();
-            }
+                { 
+                    type: "button",
+                    toggle: true,
+                    id: "foo",
+                    text: "foo",
+                    onToggle: function(e) {
+                        ok(true, "Toggle event is clicked");
+                    }
+                }
+            ]
         });
 
         var button = container.find("#foo");
 
         click(button);
-        ok(!button.hasClass("k-state-active"));
     });
 
     test("selecting toggle button that belongs to a group will deselect other buttons from the same group", 4, function() {
