@@ -735,17 +735,21 @@ var __meta__ = {
 
             _hideItem: function(item) {
                 item.hide();
-                this.popup.container
-                    .find(">li[data-uid='" + item.data("uid") + "']")
-                    .removeClass(OVERFLOW_HIDDEN);
+                if (this.popup) {
+                    this.popup.container
+                        .find(">li[data-uid='" + item.data("uid") + "']")
+                        .removeClass(OVERFLOW_HIDDEN);
+                }
             },
 
             _showItem: function(item, containerWidth) {
                 if (item.length && containerWidth > this._childrenWidth() + item.outerWidth(true)) {
                     item.show();
-                    this.popup.container
-                        .find(">li[data-uid='" + item.data("uid") + "']")
-                        .addClass(OVERFLOW_HIDDEN);
+                    if (this.popup) {
+                        this.popup.container
+                            .find(">li[data-uid='" + item.data("uid") + "']")
+                            .addClass(OVERFLOW_HIDDEN);
+                    }
 
                     return true;
                 }
