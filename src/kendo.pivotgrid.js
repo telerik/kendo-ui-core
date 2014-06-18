@@ -21,6 +21,7 @@ var __meta__ = {
         identity = function(o) { return o; },
         map = $.map,
         extend = $.extend,
+        isFunction = kendo.isFunction,
         CHANGE = "change",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
@@ -162,7 +163,7 @@ var __meta__ = {
             this.options = transport.options || {};
 
             if (!this.transport.discover) {
-                if ($.isFunction(options.discover)) {
+                if (isFunction(options.discover)) {
                     this.discover = options.discover;
                 }
             }
@@ -1577,7 +1578,7 @@ var __meta__ = {
         init: function(options) {
             kendo.data.RemoteTransport.call(this, options);
 
-            if ($.isFunction(options.discover)) {
+            if (isFunction(options.discover)) {
                 this.discover = options.discover;
             } else if (typeof options.discover === "string") {
                 this.options.discover = {
