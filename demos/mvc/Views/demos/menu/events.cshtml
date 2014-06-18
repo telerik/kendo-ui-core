@@ -1,52 +1,80 @@
 
         <div id="example">                    
-                <ul id="menu">
-                    <li>
-                        First Item
-                        <ul>
-                            <li>Sub Item 1</li>
-                            <li>Sub Item 2</li>
-                            <li>Sub Item 3</li>
-                            <li>Sub Item 4</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Second Item
-                        <ul>
-                            <li>Sub Item 1</li>
-                            <li>Sub Item 2</li>
-                            <li>Sub Item 3</li>
-                            <li>Sub Item 4</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Third Item
-                        <ul>
-                            <li>Sub Item 1</li>
-                            <li>Sub Item 2</li>
-                            <li>Sub Item 3</li>
-                            <li>Sub Item 4</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Fourth Item
-                        <ul>
-                            <li>Sub Item 1</li>
-                            <li>Sub Item 2</li>
-                            <li>Sub Item 3</li>
-                            <li>Sub Item 4</li>
-                        </ul>
-                    </li>
-                    <li>
-                        Fifth Item
-                        <ul>
-                            <li>Sub Item 1</li>
-                            <li>Sub Item 2</li>
-                            <li>Sub Item 3</li>
-                            <li>Sub Item 4</li>
-                        </ul>
-                    </li>
-                </ul>
+            <ul id="menu">
+                <li>
+                    First Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Second Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Third Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fourth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+                <li>
+                    Fifth Item
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                        <li>Sub Item 4</li>
+                    </ul>
+                </li>
+            </ul>
+            <br/><br/>
+            <ul id="context-menu-events">
+                <li>Item 1
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                    </ul>
+                </li>
+                <li>Item 2
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                    </ul>
+                </li>
+                <li>Item 3
+                    <ul>
+                        <li>Sub Item 1</li>
+                        <li>Sub Item 2</li>
+                        <li>Sub Item 3</li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="context-target">
+                Context Menu Target
+            </div>
+
             <div class="box">
                 <h4>Console log</h4>
                 <div class="console"></div>
@@ -55,11 +83,11 @@
         <script>
             $(document).ready(function() {
                 function onOpen(e) {
-                    kendoConsole.log("Opened: " + $(e.item).children(".k-link").text());
+                    kendoConsole.log("Opened: " + ($(e.item).children(".k-link").text() || "ContextMenu"));
                 }
 
                 function onClose(e) {
-                    kendoConsole.log("Closed: " + $(e.item).children(".k-link").text());
+                    kendoConsole.log("Closed: " + ($(e.item).children(".k-link").text() || "ContextMenu"));
                 }
 
                 function onSelect(e) {
@@ -67,11 +95,11 @@
                 }
 
                 function onActivate(e) {
-                    kendoConsole.log("Activated: " + $(e.item).children(".k-link").text());
+                    kendoConsole.log("Activated: " + ($(e.item).children(".k-link").text() || "ContextMenu"));
                 }
 
                 function onDeactivate(e) {
-                    kendoConsole.log("Deactivated: " + $(e.item).children(".k-link").text());
+                    kendoConsole.log("Deactivated: " + ($(e.item).children(".k-link").text() || "ContextMenu"));
                 }
 
                 $("#menu").kendoMenu({
@@ -81,6 +109,22 @@
                     activate: onActivate,
                     deactivate: onDeactivate
                 });
+
+                $("#context-menu-events").kendoContextMenu({
+                    target: "#context-target",
+                    select: onSelect,
+                    open: onOpen,
+                    close: onClose,
+                    activate: onActivate,
+                    deactivate: onDeactivate
+                });
             });
         </script>
 
+        <style scoped>
+            #context-target
+            {
+                height: 50px;
+                border: 1px solid red;
+            }
+        </style>
