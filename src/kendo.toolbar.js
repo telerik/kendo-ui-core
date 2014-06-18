@@ -433,7 +433,6 @@ var __meta__ = {
                 name: "ToolBar",
                 items: [],
                 resizable: true
-                //option list
             },
 
             destroy: function() {
@@ -444,7 +443,6 @@ var __meta__ = {
                 });
 
                 that.userEvents.destroy();
-                //that.splitButtonUserEvents.destroy();
 
                 if (that.options.resizable) {
                     that.overflowUserEvents.destroy();
@@ -608,7 +606,7 @@ var __meta__ = {
                 var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
-                    group, current, handler;
+                    group, current, handler, eventData;
 
                 e.preventDefault();
 
@@ -640,20 +638,16 @@ var __meta__ = {
 
                     target.toggleClass(STATE_ACTIVE);
                     isChecked = target.hasClass(STATE_ACTIVE);
+                    eventData = { target: target, group: group, checked: isChecked, id: target.attr("id") };
 
-                    if (handler) {
-                        handler.call(that, { target: target, group: group, checked: isChecked });
-                    }
-
-                    that.trigger(TOGGLE, { target: target, group: group, checked: isChecked });
+                    if (handler) { handler.call(that, eventData); }
+                    that.trigger(TOGGLE, eventData);
                 } else {
                     handler = isFunction(target.data("click")) ? target.data("click") : null;
+                    eventData = { target: target, id: target.attr("id") };
 
-                    if (handler) {
-                        handler.call(that, { target: target });
-                    }
-
-                    that.trigger(CLICK, { target: target });
+                    if (handler) { handler.call(that, eventData); }
+                    that.trigger(CLICK, eventData);
                 }
 
                 if (target.hasClass(OVERFLOW_BUTTON)) {
