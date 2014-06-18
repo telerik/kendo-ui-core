@@ -5469,7 +5469,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "bar-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -5535,7 +5552,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "box-plot-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -5621,7 +5655,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "bubble-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -5696,7 +5747,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "bullet-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -5781,7 +5849,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "donut-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -5872,7 +5957,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "funnel-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -6051,7 +6153,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "line-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -6136,7 +6255,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "pie-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -6241,7 +6377,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "polar-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -6358,7 +6511,24 @@
           "!php"
         ],
         "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "radar-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
       }
+
     ],
     "category": "Data Visualization"
   },
@@ -6619,6 +6789,22 @@
         },
         "meta": {
             "kendo-ui": "Events, source and visible MVVM binding support in Kendo UI Chart"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ],
+        "requiresServer": "true"
+      },
+      {
+        "text": "AngularJS",
+        "url": "scatter-charts/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Chart"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Chart"
         },
         "packages": [
           "!mvc",
