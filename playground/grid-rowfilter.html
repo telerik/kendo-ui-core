@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
+
+        <script src="../src/kendo.calendar.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+
+
+        <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.reorderable.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.rowfilter.js"></script>
+        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.columnmenu.js"></script>
+
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css"/>
+        <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css"/>
+    </head>
+    <body>
+        <h3>standard grid</h3>
+        <div id="standard-filterable-grid"></div>
+        <h3>experiment filtering</h3>
+        <div id="grid"></div>
+        <h3>feature grid</h3>
+        <div id="feature"></div>
+        <script>
+            var standart = $("#standard-filterable-grid").kendoGrid({
+                filterable: true,
+                dataSource: {
+                    data: [
+                        {
+                            Id: 1,
+                            Name: "foo",
+                            Position: 1 ,
+                            ContractDate : new Date('1996/12/12')
+                        },
+                        {
+                            Id: 2,
+                            Name: "bar",
+                            Position: 2 ,
+                            ContractDate : new Date('2012/5/4')
+                        },
+                        {
+                            Id: 3,
+                            Name: "baz",
+                            Position: 3 ,
+                            ContractDate : new Date()
+                        }
+                    ],
+                    schema: {
+                        model: {
+                            fields: {
+                                //Id: {
+                                    //type : "number"
+                                //},
+                                ContractDate: {
+                                    type : "date"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }).data("kendoGrid");
+
+            var grid = $("#grid").kendoGrid({
+                sortable: true,
+                dataSource: {
+                    data: [
+                        {
+                            Id: 1,
+                            Name: "foo",
+                            Position: 1 ,
+                            ContractDate : new Date('1996/12/12')
+                        },
+                        {
+                            Id: 2,
+                            Name: "bar",
+                            Position: 2 ,
+                            ContractDate : new Date('2012/5/4')
+                        },
+                        {
+                            Id: 3,
+                            Name: "baz",
+                            Position: 3 ,
+                            ContractDate : new Date('1998/12/30')
+                        }
+                    ],
+                    schema: {
+                        model: {
+                            fields: {
+                                Id: {
+                                    type : "number"
+                                },
+                                ContractDate: {
+                                    type : "date"
+                                },
+                                Position: {
+                                    type : "number"
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }).data("kendoGrid");
+
+            $(function() {
+                var columns = grid.columns;
+                gridDs = grid.dataSource;
+
+                function doFiltering(){
+
+                    var filters = [];
+                    grid.thead.find(".rowfilter>[data-field]").each(function() {
+                        var field = $(this).data("field");
+                        var input = $(this).find("[data-role]"); //this will be retrieved through MVVM
+                        if (!input.length) {
+                            input = $(this).find('input:first');
+                        }
+                        var val = input.val();
+                        var widget = kendo.widgetInstance(input);
+                        var operator = "contains"; //there will be input operator or default operator for different types;
+                        if (widget) {
+                           val = widget.value();
+                           operator = "eq";
+                        }
+
+                        if (field && val) {
+                            filters.push({
+                                field: field,
+                                operator: operator,
+                                value: val
+                            });
+                        }
+                    });
+                    var filter = {
+                        logic: "and",
+                        filters: filters
+                    };
+                    gridDs.filter(filter);
+                }
+
+                var tr = $("<tr class='rowfilter'></tr>");
+
+                for (var i = 0; i < columns.length; i++) {
+                    var col = columns[i];
+                    var field = col.field;
+                    if (!field) {
+                       continue;
+                    }
+
+                    var model = gridDs.reader.model; //these should be retrieved from reader model 
+                    var type = model.fields[col.field] && model.fields[col.field].type;
+                    var th = $("<th></th>").attr('data-field', col.field);
+
+                    var input = $("<input />").width('100%');//should I give any styles like this one?
+                    th.append(input);
+                    if (type == "number") {
+                        input.kendoNumericTextBox({
+                            change: doFiltering
+                        });
+                    } else if(type == "date") {
+                        input.kendoDatePicker({
+                            change: doFiltering
+                        });
+                    } else {
+                        input.addClass('k-textbox');
+                        var acDS = kendo.data.DataSource.create(gridDs.options);
+
+                        input.kendoAutoComplete({
+                            dataTextField: field,
+                            change: doFiltering,
+                            dataSource: acDS
+                        });
+                    }
+                    var widget = kendo.widgetInstance(input);
+
+                    tr.append(th);
+                }
+
+                grid.thead.append(tr);
+
+                var feature = $("#feature").kendoGrid({
+                    filterable: {
+                        row: true
+                    },
+                    columns: [
+                        { field: "Id", locked: false, width: 300 },
+                        { field: "Name", locked: true, width: 300 },
+                        { field: "Position", locked: true, width: 300 },
+                        { field: "ContractDate", width: 400 }
+                    ],
+                    groupable:true,
+                    reorderable: true,
+                    columnMenu: false,
+                    scrollable:true,
+                    //detailTemplate: "foo",
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                options.success([
+                                    {
+                                        Id: 1,
+                                        Name: "foo",
+                                        Position: 1 ,
+                                        ContractDate : new Date('1996/12/12')
+                                    },
+                                    {
+                                        Id: 2,
+                                        Name: "bar",
+                                        Position: 2 ,
+                                        ContractDate : new Date('2012/5/4')
+                                    },
+                                    {
+                                        Id: 3,
+                                        Name: "baz",
+                                        Position: 3 ,
+                                        ContractDate : new Date()
+                                    }
+                                ])
+                            }
+                        },
+                        schema: {
+                            model: {
+                                fields: {
+                                    Id: {
+                                        type : "number"
+                                    },
+                                    Position: {
+                                        type : "number"
+                                    },
+                                    Name: {
+                                        type : "string"
+                                    },
+                                    ContractDate: {
+                                        type : "date"
+                                    }
+                                }
+                            }
+                        },
+                        group: {
+                            field: "Name"
+                        }
+
+                    }
+                }).data("kendoGrid");
+            });
+        </script>
+        </body>
+    </html>

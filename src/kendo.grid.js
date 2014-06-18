@@ -29,9 +29,14 @@ var __meta__ = {
         description: "Support for grid grouping",
         depends: [ "groupable" ]
     }, {
+        id: "grid-rowfilter",
+        name: "Row filter",
+        description: "Support for grid header filtering",
+        depends: [ "rowfilter" ]
+    }, {
         id: "grid-paging",
         name: "Paging",
-        description: "Suppot for grid paging",
+        description: "Support for grid paging",
         depends: [ "pager" ]
     }, {
         id: "grid-selection",
@@ -1417,6 +1422,9 @@ var __meta__ = {
             }
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            if (that._hasRowFiltering()) {
+                reorder(that.wrapper.find(".k-rowfilter th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+            }
 
             if (footer && footer.length) {
                 reorder(elements(that.lockedFooter, footer.find(".k-grid-footer-wrap"), ">table>colgroup>col:not(.k-group-col,.k-hierarchy-col)"), colSourceIndex, footerCol, before);
@@ -3505,7 +3513,7 @@ var __meta__ = {
                     columnMenu = {};
                 }
 
-                cells = that.thead.find("th:not(.k-hierarchy-cell):not(.k-group-cell)");
+                cells = that.thead.find("tr:first th:not(.k-hierarchy-cell):not(.k-group-cell)");
 
                 for (var idx = 0, length = cells.length; idx < length; idx++) {
                     column = columns[idx];
@@ -3593,6 +3601,31 @@ var __meta__ = {
 
                         cell.kendoFilterMenu(options);
                     }
+                }
+            }
+        },
+
+        _rowFilter: function() {
+            var hasRowFiltering = this._hasRowFiltering();
+            if (hasRowFiltering) {
+                var rowFilterOptions = this.options.filterable.row;
+                var rowheader = this.thead.find(".k-rowfilter");
+                var columns = this.columns;
+                var dsOptions = rowFilterOptions.dataSource || this.dataSource.options;
+                for (var i = 0; i < columns.length; i++) {
+                    var col = columns[i];
+                    var th = $("<th/>");
+                    var field = col.field;
+
+                    if (field && col.filterable !== false) {
+                        th.attr(kendo.attr("field"), field)
+                        .kendoRowFilter({
+                            dataSource: this.dataSource,
+                            acDataSource: dsOptions,
+                            field: field
+                        });
+                    }
+                    rowheader.append(th);
                 }
             }
         },
@@ -3989,6 +4022,20 @@ var __meta__ = {
 
             return that.options.detailTemplate !== null  || (that._events[DETAILINIT] || []).length;
         },
+        _hasRowFiltering: function() {
+            var filterable = this.options.filterable;
+            var hasFiltering = filterable && filterable.row;
+            var columns = this.columns;
+            var columnsWithoutFiltering = $.grep(columns, function(col, idx) {
+                return col.filterable === false;
+            });
+
+            if (columns.length && columnsWithoutFiltering.length == columns.length) {
+                hasFiltering = false;
+            }
+
+            return hasFiltering;
+        },
 
         _details: function() {
             var that = this;
@@ -4161,14 +4208,19 @@ var __meta__ = {
                 length,
                 colgroup,
                 tr,
+                trFilter,
                 table,
                 header,
+                rowfilterCells,
                 skipHiddenCount = 0,
                 cols = $(),
+                hasRowFiltering = that._hasRowFiltering(),
+                filterCells = $(),
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
+            rowfilterCells = that.thead.find(".k-rowfilter").find("th");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
@@ -4176,6 +4228,7 @@ var __meta__ = {
                         cols = cols.add(colgroup.eq(idx - skipHiddenCount));
                     }
                     cells = cells.add(header.eq(idx));
+                    filterCells = filterCells.add(rowfilterCells.eq(idx));
                 }
                 if (columns[idx].hidden) {
                     skipHiddenCount++;
@@ -4183,16 +4236,18 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr>' +
-                    '</tr></thead></table></div>';
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasRowFiltering ? '<tr class="k-rowfilter" />' : '') +
+                    '</thead></table></div>';
 
                 table = $(html);
 
                 colgroup = table.find("colgroup");
-                tr = table.find("thead tr");
+                tr = table.find("thead tr:first");
+                trFilter = table.find(".k-rowfilter");
 
                 colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
-                tr.append(that.thead.find(".k-group-cell").add(cells));
+                tr.append(that.thead.find("tr:first .k-group-cell").add(cells));
+                trFilter.append(that.thead.find(".k-rowfilter .k-group-cell").add(filterCells));
 
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();
@@ -4213,6 +4268,7 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 hasDetails = that._hasDetails() && columns.length,
+                hasRowFiltering = that._hasRowFiltering(),
                 idx,
                 length,
                 html = "",
@@ -4241,6 +4297,16 @@ var __meta__ = {
                 }
             }
 
+            if (hasRowFiltering) {
+                var rowfilter = $("<tr/>")
+                rowfilter.addClass("k-rowfilter");
+                if (hasDetails) {
+                    rowfilter.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
+                }
+
+                thead.append(rowfilter);
+            }
+
             if (!tr.children().length) {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
@@ -4258,7 +4324,7 @@ var __meta__ = {
                 thead.addClass("k-grid-header");
             }
 
-            tr.find("script").remove().end().appendTo(thead);
+            tr.find("script").remove().end().prependTo(thead);
 
             if (that.thead) {
                 that._destroyColumnAttachments();
@@ -4269,6 +4335,8 @@ var __meta__ = {
             that._sortable();
 
             that._filterable();
+
+            that._rowFilter();
 
             that._scrollable();
 
@@ -4526,14 +4594,15 @@ var __meta__ = {
         _updateHeader: function(groups) {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
-                cells = container.find("th.k-group-cell"),
-                length = cells.length;
+                length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
                 $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
             } else if(groups < length) {
-                length = length - groups;
-                $(grep(cells, function(item, index) { return length > index; } )).remove();
+                container.find("tr").each(function(){
+                    $(this).find("th.k-group-cell")
+                        .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
+                });
             }
         },
 

@@ -183,6 +183,24 @@
         equal(th.eq(1).data("field"), "foo");
     });
 
+    test("columnReorder reorder column rowfilter headers", function() {
+        var grid = new Grid(div, {
+            reorderable: true,
+            filterable: {
+                row: true
+            },
+            columns: ["foo", "bar"],
+            dataSource: data
+        });
+
+        grid.reorderColumn(0, grid.columns[1]);
+
+        var th = grid.thead.find(".k-rowfilter th");
+        equal(th.length, 2);
+        equal(th.eq(0).data("field"), "bar");
+        equal(th.eq(1).data("field"), "foo");
+    });
+
     test("columnReorder skips group and detail column headers", function() {
         var grid = new Grid(div, {
             reorderable: true,
@@ -622,6 +640,30 @@
         equal(th.eq(3).text(), "baz");
     });
 
+    test("reorder rowfilter headers with locked columns", function() {
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                { field: "bax", locked: true },
+                "foo",
+                "bar",
+                "baz"
+            ]
+        });
+
+        grid.reorderColumn(1, grid.columns[2], true);
+
+        var th = div.find("th");
+        equal(th.length, 8, "4 standard headers and 4 rowfilter headers");
+        var rowheadercells = div.find(".k-rowfilter th");
+        equal(rowheadercells.eq(0).data("field"), "bax");
+        equal(rowheadercells.eq(1).data("field"), "bar");
+        equal(rowheadercells.eq(2).data("field"), "foo");
+        equal(rowheadercells.eq(3).data("field"), "baz");
+    });
+
     test("non locked header is moved to locked headers", function() {
         var grid = new Grid(div, {
             columns: [
@@ -799,6 +841,50 @@
 
         equal(grid.lockedTable.find(".k-grouping-row>td:first").attr("colspan"), 3, "colspan in locked table");
         equal(grid.table.find(".k-grouping-row>td:first").attr("colspan"), 2, "colspan in non-locked table");
+    });
+
+    test("move rowfilter header cell to locked header when grouping is enabled", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", locked: true },
+                "foo",
+                "bar",
+                "baz"
+            ],
+            filterable: {
+                row: true
+            },
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1], false);
+        equal(grid.element.find(".k-grid-header-locked .k-rowfilter th[data-field]").length, 2);
+        equal(grid.element.find(".k-grid-header-wrap").find(".k-rowfilter th[data-field]").length,  2);
+    });
+
+    test("move grouping header cell to locked header when grouping is enabled", function() {
+        var grid = new Grid(div, {
+            columns: [
+                { field: "bax", locked: true },
+                "foo",
+                "bar",
+                "baz"
+            ],
+            filterable: {
+                row: true
+            },
+            dataSource: {
+                data: data,
+                group: { field: "foo" }
+            }
+        });
+
+        grid.reorderColumn(0, grid.columns[1], false);
+        equal(grid.element.find(".k-grid-header-locked .k-rowfilter th.k-group-cell").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap .k-rowfilter th.k-group-cell").length,  0);
     });
 
     test("move to non-locked columns with grouping", function() {
