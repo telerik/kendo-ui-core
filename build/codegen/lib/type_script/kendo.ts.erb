@@ -566,6 +566,39 @@ declare module kendo.data {
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof SchedulerEvent;
     }
 
+    class GanttTask extends Model {
+        constructor(data?: any);
+        init(data?: any): void;
+
+        id: any;
+		parentId: number;
+		orderId: number;
+		title: string;
+		start: Date;
+		end: Date;
+		percentComplete: number;
+		summary: boolean;
+		expanded: boolean;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttTask;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttTask;
+    }
+
+    class GanttDependency extends Model {
+        constructor(data?: any);
+        init(data?: any): void;
+
+        id: any;
+		predecessorId: number;
+		successorId: number;
+		type: number;
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttDependency;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttDependency;
+    }
+
     class Node extends Model {
         children: HierarchicalDataSource;
 
@@ -588,6 +621,32 @@ declare module kendo.data {
         insert(index: number, model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
         insert(index: number, model: Object): kendo.data.SchedulerEvent;
         remove(model: kendo.data.SchedulerEvent): void;
+    }
+
+    class GanttDataSource extends DataSource {
+        add(model: Object): kendo.data.GanttTask;
+        add(model: kendo.data.GanttTask): kendo.data.GanttTask;
+        at(index: number): kendo.data.GanttTask;
+        cancelChanges(model?: kendo.data.GanttTask): void;
+        get(id: any): kendo.data.GanttTask;
+        getByUid(uid: string): kendo.data.GanttTask;
+        indexOf(value: kendo.data.GanttTask): number;
+        insert(index: number, model: Object): kendo.data.GanttTask;
+        insert(index: number, model: kendo.data.GanttTask): kendo.data.GanttTask;
+        remove(model: kendo.data.GanttTask): void;
+    }
+
+    class GanttDependencyDataSource extends DataSource {
+        add(model: Object): kendo.data.GanttDependency;
+        add(model: kendo.data.GanttDependency): kendo.data.GanttDependency;
+        at(index: number): kendo.data.GanttDependency;
+        cancelChanges(model?: kendo.data.GanttDependency): void;
+        get(id: any): kendo.data.GanttDependency;
+        getByUid(uid: string): kendo.data.GanttDependency;
+        indexOf(value: kendo.data.GanttDependency): number;
+        insert(index: number, model: Object): kendo.data.GanttDependency;
+        insert(index: number, model: kendo.data.GanttDependency): kendo.data.GanttDependency;
+        remove(model: kendo.data.GanttDependency): void;
     }
 
     class HierarchicalDataSource extends DataSource {
