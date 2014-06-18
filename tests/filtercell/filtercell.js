@@ -43,7 +43,7 @@
         }
     });
 
-    function setup(dom, options, init) {
+    function setup(dom, options) {
         var menu = new FilterCell(dom, options);
         return menu;
     }
@@ -59,6 +59,11 @@
 
         ok(filterCell.dataSource instanceof kendo.data.DataSource);
         ok(filterCell.dataSource === dataSource);
+    });
+
+    test("ac dataSource is different instance when acDataSource is not specified", function() {
+        filterCell = setup(dom, { dataSource: dataSource });
+
         ok(filterCell.acDataSource !== dataSource);
     });
 
@@ -87,7 +92,7 @@
 
     test("creates input element by default", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "bar" });
-        equal(dom.find("input").length, 1);
+        equal(dom.find("input[" + kendo.attr("bind") + "]").length, 1);
     });
 
     test("sets the value of the input element when there is default filter", function() {
@@ -178,6 +183,29 @@
         equal(filters[0].value, "someBarvalue");
         equal(filters[0].field, "bar");
         equal(filters[0].operator, "neq");
+    });
+
+    test("creates autocomplete widget for the string type", function() {
+        var acDataSource = new kendo.data.DataSource({
+            data: ["a", "b"]
+        });
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", acDataSource: acDataSource });
+        var ac = filterCell.element.find("input").data("kendoAutoComplete");
+        ok(ac);
+    });
+
+    test("autocomplete dataSource do not have any groups set if there are defined for main dataSource", function() {
+        var acDataSource = new kendo.data.DataSource({
+            data: [
+                { foo: "1", bar: "some value" },
+                { foo: "1", bar: "some other" },
+                { foo: "2", bar: "some third" }
+            ],
+            group: { field: "foo" }
+        });
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", acDataSource: acDataSource });
+        var groups = filterCell.acDataSource.filter();
+        equal(groups, null);
     });
 
 })();

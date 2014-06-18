@@ -16,6 +16,7 @@ var __meta__ = {
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         CHANGE = "change",
+        STRING = "string",
         NS = ".kendoFilterCell",
         EQ = "Is equal to",
         NEQ = "Is not equal to",
@@ -60,21 +61,26 @@ var __meta__ = {
             var that = this,
                 dataSource,
                 viewModel,
-                field,
+                type,
                 input = that.input = $("<input/>")
                     .attr(kendo.attr("bind"), "value: value")
                     .appendTo(element);
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
-
-            if (!(options.acDataSource instanceof DataSource)) {
-                that.acDataSource = options.acDataSource = DataSource.create(options.acDataSource);
-            }
             dataSource = that.dataSource = options.dataSource;
+            that.acDataSource = acDataSource = options.acDataSource || dataSource.options;
+
+            if (!(acDataSource instanceof DataSource)) {
+                acDataSource = that.acDataSource = options.acDataSource = DataSource.create(acDataSource);
+            }
+
+            if (acDataSource.group()) {
+                acDataSource.group([]);
+            }
             //gets the type from the dataSource or sets default to string
             that.model = dataSource.options.schema.model;
-            options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || "string";
+            type = options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
 
 
             element = $(element);
@@ -85,7 +91,7 @@ var __meta__ = {
             };
 
             if (that.model && that.model.fields) {
-                field = that.model.fields[options.field];
+                var field = that.model.fields[options.field];
 
                 if (field) {
                     if (field.parse) {
@@ -100,12 +106,12 @@ var __meta__ = {
             });
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
 
-
-            if (typeof (options.template) == "function") {
-                options.template.call(viewModel, input);
-            }
+            that._setInputType(options, type);
 
             kendo.bind(input, viewModel);
+
+            that.setACDataSource(acDataSource);
+
             that.refreshUI();
 
             that._refreshHandler = proxy(that.refreshUI, that);
@@ -114,7 +120,31 @@ var __meta__ = {
 
         },
 
-        //CLEAR/RESET filter could be copied from filtermenu.js
+        _setInputType: function(options, type) {
+            var that = this,
+                input = that.input;
+
+            if (typeof (options.template) == "function") {
+                options.template.call(that.viewModel, that.input);
+            } else if (type == STRING) {
+                input.attr(kendo.attr("role"), "autocomplete")
+                        .attr(kendo.attr("text-field"), that.options.field)
+                        .attr(kendo.attr("value-primitive"), true);
+            } else if (type == "date") {
+                input.attr(kendo.attr("role"), "datepicker")
+            } else if (type == "number") {
+                input.attr(kendo.attr("role"), "numerictextbox")
+            } //TODO enums
+        },
+
+        setACDataSource: function(dataSource) {
+            var ac = this.input.data("kendoAutoComplete");
+            if (ac) {
+                ac.setDataSource(dataSource);
+            }
+        },
+
+        //CLEAR/RESET filter could be the same from filtermenu.js
 
         refreshUI: function() {
             var that = this;
