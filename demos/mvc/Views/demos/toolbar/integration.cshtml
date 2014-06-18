@@ -1,7 +1,9 @@
         <div id="example">
-            <p>Cutomize the element</p>
-            <div id="toolbar"></div>
-            <div id="container">
+            <div class="demo-section k-header">
+                <h4>Cutomize the element</h4>
+                <div id="toolbar"></div>
+            </div>
+            <div class="box">
                 <div id="target"></div>
             </div>
 
@@ -12,19 +14,12 @@
                     $("#toolbar").kendoToolBar({
                         resizable: false,
                         items: [
-                            { template: "<label>Shape type:</label><input id='shape' />" },
+                            { template: "<label>SHAPE:</label><input id='shape' />" },
                             { type: "separator" },
-                            { template: "<label>Background color:</label><div type='color' id='background-picker'></div>" },
+                            { template: "<label>H:</label><input id='height' style='width: 70px;' type='text' />" },
+                            { template: "<label>W:</label><input id='width' style='width: 70px;' type='text' />" },
                             { type: "separator" },
-                            { template: "<label>Border style:</label><input id='border-style' style='width: 100px;' />" },
-                            { type: "separator" },
-                            { template: "<label>Border color:</label><div type='color' id='border-picker'></div>" },
-                            { type: "separator" },
-                            { template: "<label>Height:</label><input id='height' style='width: 70px;' type='text' />" },
-                            { type: "separator" },
-                            { template: "<label>Width:</label><input id='width' style='width: 70px;' type='text' />" },
-                            { type: "separator" },
-                            { template: "<label>Position:</label>" },
+                            { template: "<label>POSITION:</label>" },
                             {
                                 type: "buttonGroup",
                                 items: [
@@ -32,7 +27,12 @@
                                     { text: "Center", toggle: true, group: "position", selected: true },
                                     { text: "Right", toggle: true, group: "position" }
                                 ]
-                            }
+                            },
+                            { type: "separator" },
+                            { template: "<label>BACKGROUND:</label><div type='color' id='background-picker'></div>" },
+                            { type: "separator" },
+                            { template: "<label>BORDER:</label><div type='color' id='border-picker'></div>" },
+                            { template: "<input id='border-style' style='width: 100px;' />" },
                         ],
                         toggle: function(e) {
                             var position = e.target.text().toLowerCase();
@@ -72,16 +72,16 @@
                     });
 
                     $("#background-picker").kendoColorPicker({
-                        palette: "basic",
-                        value: "#22b14c",
+                        value: "#ffffff",
+                        buttons: false,
                         change: function() {
                             target.css("background-color", this.value());
                         }
                     });
 
                     $("#border-picker").kendoColorPicker({
-                        palette: "basic",
-                        value: "#ff7f27",
+                        value: "#333333",
+                        buttons: false,
                         change: function() {
                             target.css("border-color", this.value());
                         }
@@ -105,17 +105,20 @@
             <style scoped>
                 #toolbar {
                     margin: 1em 0;
+                    padding: 0 .9em;
                 }
-
-                #container {
-                    padding: 5px 20px;
-                    overflow: hidden;
+                
+                #toolbar label {
+                    font-size: .85em;
+                    font-weight: bold;
                 }
-
+                #toolbar .k-separator {
+                    margin: 0 .9em;
+                }
                 #target {
-                    border: 3px solid #ff7f27;
+                    border: 3px solid #333333;
                     border-radius: 0;
-                    background-color: #22b14c;
+                    background-color: #ffffff;
                     height: 150px;
                     width: 150px;
                     margin: 0 auto;
