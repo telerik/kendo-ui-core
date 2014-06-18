@@ -27,6 +27,7 @@
         "./kendo.dataviz.svg",
         "./kendo.dataviz.vml",
         "./kendo.dataviz.canvas",
+        "./kendo.dataviz.drawing",
         "./kendo.dataviz.map",
         "./kendo.dataviz.diagram"
     ], f);

@@ -23,7 +23,7 @@
         name: "Map",
         category: "dataviz",
         description: "The Kendo DataViz Map displays spatial data",
-        depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
+        depends: [ "data", "userevents", "tooltip", "dataviz.core", "dataviz.drawing", "mobile.scroller" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
