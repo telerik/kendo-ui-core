@@ -57,15 +57,13 @@ var __meta__ = {
 
     var RowFilter = Widget.extend( {
         init: function(element, options) {
-            var element = $(element),
-                    that = this,
-                    options,
-                    dataSource,
-                    viewModel,
-                    field,
-                    input = that.input = $("<input/>")
-                        .attr(kendo.attr("bind"), "value: value")
-                        .appendTo(element);
+            var that = this,
+                dataSource,
+                viewModel,
+                field,
+                input = that.input = $("<input/>")
+                    .attr(kendo.attr("bind"), "value: value")
+                    .appendTo(element);
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
@@ -79,6 +77,7 @@ var __meta__ = {
             options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || "string";
 
 
+            element = $(element);
             element.addClass("grid-filter-header");
 
             that._parse = function(value) {
@@ -89,7 +88,6 @@ var __meta__ = {
                 field = that.model.fields[options.field];
 
                 if (field) {
-                    type = field.type || "string";
                     if (field.parse) {
                         that._parse = proxy(field.parse, field);
                     }
@@ -141,7 +139,7 @@ var __meta__ = {
                 model = that.viewModel;
 
             if (that.manuallyUpdatingVM) {
-                return
+                return;
             }
 
             var currentFilter = $.extend({}, that.viewModel.toJSON(), { field: that.options.field });
@@ -149,7 +147,7 @@ var __meta__ = {
             var expression = {
                 logic: "and",
                 filters: [currentFilter]
-            }
+            };
             var mergeResult = that._merge(expression);
             if (mergeResult.filters.length) {
                 that.dataSource.filter(mergeResult);
@@ -170,7 +168,7 @@ var __meta__ = {
             removeFiltersForField(result, that.options.field);
 
             filters = $.grep(filters, function(filter) {
-                return filter.value !== "" && filter.value != null;
+                return filter.value !== "" && filter.value !== null;
             });
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
@@ -263,13 +261,13 @@ var __meta__ = {
                 operator: "Operator",
                 value: "Value",
                 cancel: "Cancel"
-            },
+            }
         },
 
         setDataSource: function(dataSource) {
-
-            this.dataSource.unbind(CHANGE, that._refreshHandler);
-            this.dataSource = that.options.dataSource = dataSource;
+            var that = this;
+            that.dataSource.unbind(CHANGE, that._refreshHandler);
+            that.dataSource = that.options.dataSource = dataSource;
             dataSource.bind(CHANGE, that._refreshHandler);
 
             if (that.options.autoBind) {

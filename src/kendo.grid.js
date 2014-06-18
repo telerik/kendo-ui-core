@@ -4298,7 +4298,7 @@ var __meta__ = {
             }
 
             if (hasRowFiltering) {
-                var rowfilter = $("<tr/>")
+                var rowfilter = $("<tr/>");
                 rowfilter.addClass("k-rowfilter");
                 if (hasDetails) {
                     rowfilter.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
