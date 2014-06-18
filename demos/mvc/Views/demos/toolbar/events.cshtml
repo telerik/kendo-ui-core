@@ -1,3 +1,60 @@
         <div id="example">
 
+            <div id="toolbar"></div>
+
+            <div class="box">
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
+
+            <script>
+                $("#toolbar").kendoToolBar({
+                    items: [
+                        { type: "button", text: "Button" },
+                        { type: "button", text: "Toggle Button", toggle: true, selected: true },
+                        {
+                            type: "splitButton",
+                            text: "Split Button",
+                            items: [
+                                { text: "Action 1" },
+                                { text: "Action 2" },
+                                { text: "Action 3" }
+                            ]
+                        },
+                        {
+                            type: "buttonGroup",
+                            items: [
+                                { text: "Left", toggle: true },
+                                { text: "Middle", toggle: true },
+                                { text: "Right", toggle: true }
+                            ]
+                        },
+                        {
+                            type: "buttonGroup",
+                            items: [
+                                { text: "Radio 1", toggle: true, group: "radio" },
+                                { text: "Radio 2", toggle: true, group: "radio" },
+                                { text: "Radio 3", toggle: true, group: "radio" }
+                            ]
+                        },
+                        {
+                            type: "button",
+                            text: "Overflow button",
+                            overflow: "always"
+                        }
+                    ],
+                    click: function(e) {
+                        kendoConsole.log("click");
+                    },
+                    toggle: function(e) {
+                        kendoConsole.log("toggle");
+                    },
+                    open: function(e) {
+                        kendoConsole.log("open");
+                    },
+                    close: function(e) {
+                        kendoConsole.log("close");
+                    }
+                })
+            </script>
         </div>
