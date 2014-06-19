@@ -3688,12 +3688,12 @@ var __meta__ = {
                     var field = col.field;
 
                     if (field && col.filterable !== false) {
-                        th.attr(kendo.attr("field"), field)
+                        $("<span/>").attr(kendo.attr("field"), field)
                         .kendoFilterCell({
                             dataSource: this.dataSource,
                             acDataSource: dsOptions,
                             field: field
-                        });
+                        }).appendTo(th);
                     }
                     rowheader.append(th);
                 }
