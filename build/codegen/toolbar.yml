@@ -1,0 +1,207 @@
+:options:
+    - :name: items
+      :type: Array
+      :description: Contains the items configuration of the ToolBar widget.
+
+    - :name: items.type
+      :type: String
+      :description: Specifies the type of the item.
+      :enum_type: CommandType
+      :values:
+          - button
+          - splitButton
+          - buttonGroup
+          - separator
+
+    - :name: items.text
+      :type: String
+      :description: Specifies the text of the button.
+
+    - :name: items.showText
+      :type: String
+      :description: Specifies where the text will be displayed.
+      :enum_type: ShowIn
+      :values:
+          - toolbar
+          - overflow
+          - both
+
+    - :name: items.icon
+      :type: String
+      :description: Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.
+
+    - :name: items.imageUrl
+      :type: String
+      :description: If set, the ToolBar will render an image with the specified URL in the button.
+
+    - :name: items.spriteCssClass
+      :type: String
+      :description: Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.
+
+    - :name: items.showIcon
+      :type: String
+      :description: Specifies where the icon will be displayed.
+      :enum_type: ShowIn
+      :values:
+          - toolbar
+          - overflow
+          - both
+
+    - :name: items.id
+      :type: String
+      :description: Specifies the ID of the button.
+
+    - :name: items.toggable
+      :type: Boolean
+      :description: Specifies if the button is toggable, e.g. has a selected and unselected state.
+
+    - :name: items.selected
+      :type: Boolean
+      :description: Specifies if the toggle button is initially selected. Applicable only for buttons with toggable true.
+
+    - :name: items.enable
+      :type: Boolean
+      :description: Specifies whether the control is initially enabled or disabled.
+
+    - :name: items.primary
+      :type: Boolean
+      :description: Specifies whether the button is primary. Primary buttons receive different styling.
+
+    - :name: items.overflow
+      :type: String
+      :description: Specifies how the button behaves when the ToolBar is resized.
+      :enum_type: ShowInOverflowPopup
+      :values:
+          - never
+          - always
+          - auto
+
+    - :name: items.group
+      :type: String
+      :description: Assigns the button to a group. Applicable only for buttons with toggable true.
+
+    - :name: items.url
+      :type: String
+      :description: Specifies the url to navigate to.
+
+    - :name: items.click
+      :type: Function
+      :description: Specifies the click event handler of the button. Applicable only for commands of type Button and SplitButton.
+
+    - :name: items.toggle
+      :type: Function
+      :description: Specifies the toggle event handler of the button. Applicable only for commands of type Button and toggable true.
+
+    - :name: items.template
+      :type: String
+      :description: Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
+
+    - :name: items.overflowTemplate
+      :type: String
+      :description: Specifies what element will be added in the command overflow popup. Applicable only for items that have a template.
+
+    # SplitButton's menuButtons
+
+    - :name: items.menuButtons
+      :type: Array
+      :description: Specifies the menu buttons of a SplitButton.
+
+    - :name: items.menuButtons.id
+      :type: String
+      :description: Specifies the ID of the menu buttons.
+
+    - :name: items.menuButtons.text
+      :type: String
+      :description: Specifies the text of the menu buttons.
+
+    - :name: items.menuButtons.icon
+      :type: String
+      :description: Sets icon for the menu buttons. The icon should be one of the existing in the Kendo UI theme sprite.
+
+    - :name: items.menuButtons.imageUrl
+      :type: String
+      :description: If set, the ToolBar will render an image with the specified URL in the menu button.
+
+    - :name: items.menuButtons.spriteCssClass
+      :type: String
+      :description: Defines a CSS class (or multiple classes separated by spaces) which will be used for menu button icon.
+
+    - :name: items.menuButtons.enable
+      :type: Boolean
+      :description: Specifies whether the menu button is initially enabled or disabled.
+
+     - :name: items.menuButtons.url
+      :type: String
+      :description: Specifies the url of the menu button to navigate to.
+
+    # ButtonGroup's buttons
+
+    - :name: items.buttons
+      :type: Array
+      :description: Specifies the buttons of ButtonGroup.
+
+    - :name: items.buttons.id
+      :type: String
+      :description: Specifies the ID of the button.
+
+    - :name: items.buttons.text
+      :type: String
+      :description: Specifies the text of the menu button.
+
+    - :name: items.buttons.showText
+      :type: String
+      :description: Specifies where the text of the menu button will be displayed. Applicable only for the buttons of a ButtonGroup.
+      :enum_type: ShowIn
+      :values:
+          - toolbar
+          - overflow
+          - both
+
+    - :name: items.buttons.icon
+      :type: String
+      :description: Sets icon for the menu button. The icon should be one of the existing in the Kendo UI theme sprite.
+
+    - :name: items.buttons.imageUrl
+      :type: String
+      :description: If set, the ToolBar will render an image with the specified URL in the button.
+
+    - :name: items.buttons.spriteCssClass
+      :type: String
+      :description: Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.
+
+    - :name: items.buttons.showIcon
+      :type: String
+      :description: Specifies where the icon of the button will be displayed. Applicable only for the children of a ButtonGroup.
+      :enum_type: ShowIn
+      :values:
+          - toolbar
+          - overflow
+          - both
+
+    - :name: items.buttons.enable
+      :type: Boolean
+      :description: Specifies whether the button is initially enabled or disabled.
+
+     - :name: items.buttons.url
+      :type: String
+      :description: Specifies the url of the button to navigate to.
+
+    - :name: items.buttons.toggable
+      :type: Boolean
+      :description: Specifies if the button is toggable, e.g. has a selected and unselected state. Applicable only for the children of a ButtonGroup.
+
+    - :name: items.buttons.selected
+      :type: Boolean
+      :description: Specifies if the toggle button is initially selected. Applicable only for the children of a ButtonGroup that has toggable true.
+
+    - :name: items.buttons.group
+      :type: String
+      :description: Assigns the button to a group. Applicable only for the children of a ButtonGroup that has toggable true.
+
+    - :name: items.buttons.click
+      :type: Function
+      :description: Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.
+
+    - :name: items.buttons.toggle
+      :type: Function
+      :description: Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.
