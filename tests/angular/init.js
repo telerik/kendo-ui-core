@@ -93,13 +93,15 @@
         var numericTextBox = $("<input kendo-numerictextbox />").appendTo(dom);
         var colorPicker = $("<input kendo-color-picker />").appendTo(dom);
         var grid = $("<div kendo-grid></div>").appendTo(dom);
-        expect(4);
+
         $scope.$on("kendoRendered", function(){
+            start();
             ok(slider.data("kendoSlider") instanceof kendo.ui.Slider);
             ok(numericTextBox.data("kendoNumericTextBox") instanceof kendo.ui.NumericTextBox);
             ok(colorPicker.data("kendoColorPicker") instanceof kendo.ui.ColorPicker);
-            ok(grid.data("kendoGrid") instanceof kendo.ui.Grid);
-            start();
+            if (kendo.ui.Grid) {
+                ok(grid.data("kendoGrid") instanceof kendo.ui.Grid);
+            }
         });
     });
 
@@ -205,6 +207,8 @@
             start();
         });
     });
+
+    if (kendo.ui.Grid) {
 
     runTest("Grid cell templates", function(dom){
         $scope.options = {
@@ -419,6 +423,10 @@
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
     });
 
+    }
+
+    if (kendo.ui.TreeView) {
+
     runTest("TreeView item template", function(dom){
         $scope.options = {
             dataSource: $scope.data,
@@ -454,21 +462,24 @@
             start();
         });
     });
+    }
 
-    runTest("Editor toolbar template", function(dom){
-        $scope.options = {
-            tools: [
-                { template: "<div class='my-toolbar'>{{3 + 3}}</div>" }
-            ]
-        };
-        $("<textarea kendo-editor='editor' k-options='options'></textarea>").appendTo(dom);
-        expect(1);
-        $scope.$on("kendoRendered", function(){
-            var el = $scope.editor.toolbar.element.find(".my-toolbar");
-            equal(el.text(), "6");
-            start();
+    if (kendo.ui.Editor) {
+        runTest("Editor toolbar template", function(dom){
+            $scope.options = {
+                tools: [
+                    { template: "<div class='my-toolbar'>{{3 + 3}}</div>" }
+                ]
+            };
+            $("<textarea kendo-editor='editor' k-options='options'></textarea>").appendTo(dom);
+            expect(1);
+            $scope.$on("kendoRendered", function(){
+                var el = $scope.editor.toolbar.element.find(".my-toolbar");
+                equal(el.text(), "6");
+                start();
+            });
         });
-    });
+    }
 
     runTest("Menu + dataSource with {{angular}}", function(dom){
         $scope.options = {
@@ -543,6 +554,8 @@
             start();
         });
     });
+
+    if (kendo.ui.Scheduler) {
 
     runTest("Scheduler -- compile customizable templates", function(dom){
         $scope.options = {
@@ -622,6 +635,8 @@
         });
     });
 
+    }
+
     runTest("Window -- compile content through Angular", function(dom){
         $scope.options = {
             content: "ajax-template.html",
@@ -653,6 +668,8 @@
     });
 
     /// k-on-change handlers
+
+    if (kendo.ui.Grid) {
 
     runTest("Grid k-on-change puts the right information in scope", function(dom){
         $scope.options = {
@@ -695,6 +712,7 @@
             $scope.grid.select($scope.grid.items());
         });
     });
+    }
 
     /// mobile
 
