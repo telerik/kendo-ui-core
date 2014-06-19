@@ -563,14 +563,14 @@ var __meta__ = {
         _mergeColumnData: function(newData, columnIndex, rowsLength, columnsLength, offset) {
             var data = this.data().toJSON();
             var rowIndex, index, drop = 0, toAdd;
-            var measures = Math.max(this._columnMeasures().length, 1);
+            var columnMeasures = Math.max(this._columnMeasures().length, 1);
 
             rowsLength = Math.max(rowsLength, 1);
 
             if (data.length > 0) {
                 //if there is already data, drop the first new data item
-                drop = measures;
-                offset -= measures;
+                drop = columnMeasures;
+                offset -= columnMeasures;
             }
 
             for (rowIndex = 0; rowIndex < rowsLength; rowIndex++) {
@@ -829,9 +829,13 @@ var __meta__ = {
         var columnIdx, rowIdx, dataIdx;
         var rowsLength = sourceTuples.length;
         var targetRowsLength = membersCount(targetTuples, measures);
+        var measuresLength = measures.length || 1;
 
         for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
             dataIdx = tupleIndex(sourceTuples[rowIdx], targetTuples);
+            dataIdx *= measuresLength;
+            dataIdx += rowIdx % measuresLength;
+
             for (columnIdx = 0; columnIdx < columnsLength; columnIdx++) {
                 data[rowIdx * columnsLength + columnIdx].ordinal = dataIdx * columnsLength + columnIdx;
             }
