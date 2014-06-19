@@ -53,7 +53,11 @@ var __meta__ = {
             messages: {
                 measures: "Drop Data Fields Here",
                 columns: "Drop Column Fields Here",
-                rows: "Drop Rows Fields Here"
+                rows: "Drop Rows Fields Here",
+                measuresLabel: "Measures",
+                columnsLabel: "Columns",
+                rowsLabel: "Rows",
+                fieldsLabel: "Fields"
             }
         },
 
@@ -100,7 +104,7 @@ var __meta__ = {
         },
 
         _fields: function() {
-            var container = $('<div class="k-state-default"><p class="k-reset"><span class="k-icon k-i-group"></span>Fields</p></div>').appendTo(this.form);
+            var container = $('<div class="k-state-default"><p class="k-reset"><span class="k-icon k-i-group"></span>' + this.options.messages.fieldsLabel + '</p></div>').appendTo(this.form);
 
             var that = this;
 
@@ -151,13 +155,13 @@ var __meta__ = {
         _targets: function() {
             var container = $('<div class="k-state-default"/>').appendTo(this.form);
 
-            var columnsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Columns" })).appendTo(container);
+            var columnsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.columnsLabel })).appendTo(container);
             var columns = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(columnsContainer.last());
 
-            var rowsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Rows" })).appendTo(container);
+            var rowsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.rowsLabel })).appendTo(container);
             var rows = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(rowsContainer.last());
 
-            var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Measures" })).appendTo(container);
+            var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.measuresLabel })).appendTo(container);
             var measures = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(measuresContainer.last());
 
             this.columns = this._createTarget(columns, {
