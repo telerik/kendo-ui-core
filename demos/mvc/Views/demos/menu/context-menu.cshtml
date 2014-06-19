@@ -1,39 +1,42 @@
 <div id="example">
-    <script src="../content/shared/js/products.js"></script>
+    <script src="../content/shared/js/webmail.js"></script>
 
-    <div class="demo-section">
+    <div class="demo-section k-header">
+        <h4>WebMail</h4>
         <div id="listview-context-menu"></div>
         <div id="pager" class="k-pager-wrap"></div>
     </div>
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
-            <h3>#:ProductName#</h3>
-            <p>#:kendo.toString(UnitPrice, "c")#</p>
+            <img src="../content/shared/images/employees/#= FromID #.png" alt="#: From #" />
+            
+            <h3>#:Title#</h3>
+            <p class="date">#:Date#</p>
+            <p>#:From#</p>
         </div>
     </script>
 
     <ul id="menu">
         <li>
-            Reply
+            <img src="../content/web/toolbar/reply.png" /> Reply
             <ul>
-                <li>Reply to Sender</li>
-                <li>Reply to All</li>
+                <li><img src="../content/web/toolbar/reply.png" /> Reply to Sender</li>
+                <li><img src="../content/web/toolbar/reply.png" /> Reply to All</li>
             </ul>
         </li>
         <li class="k-separator"></li>
         <li>
-            Forward
+            <img src="../content/web/toolbar/forward.png" />  Forward
         </li>
         <li class="k-separator"></li>
         <li>
             Mark as
             <ul>
-                <li>Unread</li>
+                <li><img src="../content/web/toolbar/todo.png" />  Unread</li>
                 <li class="k-separator"></li>
-                <li>Important</li>
-                <li>Junk</li>
+                <li><img src="../content/web/toolbar/important.png" />  Important</li>
+                <li><img src="../content/web/toolbar/done.png" />  Read</li>
             </ul>
         </li>
         <li>
@@ -54,7 +57,7 @@
 <script>
     $(document).ready(function() {
         var dataSource = new kendo.data.DataSource({
-            data: products,
+            data: mails,
             pageSize: 5
         });
 
@@ -80,36 +83,41 @@
 <style scoped>
     .demo-section {
             width: 860px;
-            margin: 20px auto;
-            border: 0;
-            background: none;
         }
     #listview-context-menu {
-        padding: 10px 5px;
+        padding: 0;
         margin-bottom: -1px;
         min-height: 300px;
     }
     .product {
         position: relative;
-        height: 60px;
-        margin: 0 5px;
+        height: 62px;
+        margin: 0;
         padding: 0;
+        border-bottom: 1px solid rgba(128,128,128,.3);
     }
     .product img {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        margin: 10px;
+        border: 1px solid #000;
         float: left;
     }
     .product h3 {
         margin: 0;
-        padding: 3px 5px 0 0;
+        padding: 15px 5px 1px 0;
         overflow: hidden;
-        line-height: 1.1em;
+        line-height: 1em;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .product p {
         font-size: .9em;
-        font-weight: normal;
-        text-transform: uppercase;
-        color: #999;
-        vertical-align: top;
+    }
+    .product .date {
+        float: right;
+        margin: -8px 15px 0 0;
     }
     .k-listview:after {
         content: ".";
