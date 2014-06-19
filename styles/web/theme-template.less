@@ -570,6 +570,11 @@ html .km-pane-wrapper .k-header
     color: @active-text-color;
 }
 
+.k-fieldselector .k-list-container
+{
+    background-color: @active-background-color;
+}
+
 .k-button:focus,
 .k-button.k-state-focused
 {
@@ -1538,6 +1543,7 @@ div.k-filebrowser-dropzone em
 .k-list .k-state-focused,
 .k-list .k-state-highlight,
 .k-list .k-state-selected,
+.k-fieldselector .k-list .k-item,
 .k-dropzone
 {
     .guarded-border-radius(@list-border-radius);
