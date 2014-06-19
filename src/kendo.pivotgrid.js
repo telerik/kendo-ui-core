@@ -2192,8 +2192,12 @@ var __meta__ = {
 
             that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
             that.rowsHeaderTree.render(rowsTree);
+
+            var firstTuple
+            var measures = 1;
+
             var columnAxis = {
-                columns: columns,
+                measures: dataSource._columnMeasures().length || 1,
                 indexes: that._columnBuilder._columnIndexes,
                 metadata: that._columnBuilder.metadata
             };
@@ -2467,8 +2471,9 @@ var __meta__ = {
                     children: 0,
                     maxMembers: 0,
                     members: 0,
+                    measures: 1,
                     levelNum: Number(member.levelNum),
-                    parentName: kendo.stringify(this._tuplePath(tuple, memberIdx - 1))
+                    parentMember: !parentMember && memberIdx !== 0
                 };
 
                 this.metadata[path] = metadata;
@@ -2829,6 +2834,7 @@ var __meta__ = {
         _buildRow: function(data) {
             var cells = [];
             var indexes = this.columnAxis.indexes;
+            var measures = this.columnAxis.measures;
 
             var firstEmpty = 0;
             var dataIdx = 0;
@@ -2836,33 +2842,33 @@ var __meta__ = {
 
             for (var idx = 0, length = indexes.length; idx < length; idx++) {
                 var metadata = this.columnAxis.metadata[indexes[idx]];
-                var parent = this.columnAxis.metadata[metadata.parentName];
                 var children = metadata.children + metadata.members;
                 var skipChildren = 0;
 
                 if (children) {
-                    children -= 1;
+                    children -= measures;
                 }
 
                 if (metadata.expanded === false && metadata.children !== metadata.maxChildren) {
                     skipChildren = metadata.maxChildren;
                 }
 
-                if (parent && metadata.levelNum === 0) {
+                if (metadata.parentMember && metadata.levelNum === 0) {
                     children = -1;
                 }
 
                 if (children > -1) {
-                    cells[children + firstEmpty] = element("td", null, [text(data[dataIdx - offset].value)]);
+                    for (var i = 0, l = measures; i < l; i++) {
+                        cells[children + firstEmpty + i] = element("td", null, [text(data[dataIdx - offset].value)]);
+                        dataIdx += 1;
+                    }
 
                     while(cells[firstEmpty] !== undefined) {
                         firstEmpty += 1;
                     }
-                } else {
-                    offset += 1;
                 }
 
-                dataIdx += skipChildren + 1;
+                dataIdx += skipChildren;
             }
 
             return element("tr", null, cells);

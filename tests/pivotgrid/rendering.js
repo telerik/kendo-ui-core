@@ -1024,6 +1024,32 @@
         equal(th_1.eq(0).attr("colspan"), 2);
     });
 
+    test("PivotGrid renders two dimensions with three measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var rows = headerTable.find("tr");
+        var th_2 = rows.eq(2).find("th");
+
+        equal(rows.eq(0).find("th").attr("colspan"), 3);
+        equal(rows.eq(1).find("th").attr("colspan"), 3);
+
+        equal(th_2.eq(0).text(), "measure 1");
+        equal(th_2.eq(1).text(), "measure 2");
+        equal(th_2.eq(2).text(), "measure 3");
+    });
+
     test("PivotGrid renders measures as a single dimension", function() {
         var tuples = [
             { members: [ { name: "measure 1", children: [] } ] },
@@ -2345,6 +2371,251 @@
         equal(cells.eq(5).text(), "3");
         equal(cells.eq(6).text(), "1");
     });
+
+    test("PivotGrid renders one dimension with three measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "1");
+        equal(cells.eq(1).text(), "2");
+        equal(cells.eq(2).text(), "3");
+    });
+
+    test("PivotGrid renders parent and child of one dimension with three measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 3", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 },
+            { value: 6 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "4");
+        equal(cells.eq(1).text(), "5");
+        equal(cells.eq(2).text(), "6");
+
+        equal(cells.eq(3).text(), "1");
+        equal(cells.eq(4).text(), "2");
+        equal(cells.eq(5).text(), "3");
+    });
+
+    test("PivotGrid renders collapsed parent with three measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 3", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 },
+            { value: 6 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        //collapse root member
+        pivotgrid._columnBuilder.metadata["[\"level 0\"]"].expanded = false;
+        pivotgrid.refresh();
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "1");
+        equal(cells.eq(1).text(), "2");
+        equal(cells.eq(2).text(), "3");
+    });
+
+    test("PivotGrid renders two dimensions with 3 measures", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "1");
+        equal(cells.eq(1).text(), "2");
+        equal(cells.eq(2).text(), "3");
+    });
+
+    test("PivotGrid renders two expanded dimensions with 3 measures", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 3", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 1 },
+            { value: 1 },
+            { value: 2 },
+            { value: 2 },
+            { value: 2 },
+            { value: 3 },
+            { value: 3 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "2");
+        equal(cells.eq(1).text(), "2");
+        equal(cells.eq(2).text(), "2");
+
+        equal(cells.eq(3).text(), "3");
+        equal(cells.eq(4).text(), "3");
+        equal(cells.eq(5).text(), "3");
+
+        equal(cells.eq(6).text(), "1");
+        equal(cells.eq(7).text(), "1");
+        equal(cells.eq(8).text(), "1");
+    });
+
+    test("PivotGrid renders two collapsed dimensions with 3 measures", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", hasChildren: true, children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "measure 3", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "measure 3", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2", "measure 3"];
+
+        var data = [
+            { value: 1 },
+            { value: 1 },
+            { value: 1 },
+            { value: 2 },
+            { value: 2 },
+            { value: 2 },
+            { value: 3 },
+            { value: 3 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        //collapse root member
+        pivotgrid._columnBuilder.metadata["[\"dim 0\"]"].expanded = false;
+        pivotgrid._columnBuilder.metadata["[\"dim 0\",\"dim 1\"]"].expanded = false;
+        pivotgrid.refresh();
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+        equal(cells.length, 3);
+
+        equal(cells.eq(0).text(), "1");
+        equal(cells.eq(1).text(), "1");
+        equal(cells.eq(2).text(), "1");
+    });
+
 
     module("PivotGrid resize on render", {
         setup: function() {
