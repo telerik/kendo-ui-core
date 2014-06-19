@@ -2051,9 +2051,7 @@ var __meta__ = {
         _measureFields: function() {
             this.measureFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-measures");
 
-            this.measuresTarget = new kendo.ui.PivotSettingTarget(this.measureFields, {
-                dataSource: this.dataSource,
-                enabled: this.options.reorderable,
+            this.measuresTarget = this._createSettingTarget(this.measureFields, {
                 setting: "measures",
                 messages: {
                     empty: this.options.messages.measureFields
@@ -2065,21 +2063,26 @@ var __meta__ = {
             this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-columns");
         },
 
-        _initSettingTargets: function() {
-            this.columnsTarget = new kendo.ui.PivotSettingTarget(this.columnFields, {
-                connectWith: this.rowFields,
-                dataSource: this.dataSource,
+        _createSettingTarget: function(element, options) {
+            return new kendo.ui.PivotSettingTarget(element, $.extend({
+                template: '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}</span>',
+                emptyTemplate: '<span class="k-empty">${data}</span>',
                 enabled: this.options.reorderable,
+                dataSource: this.dataSource
+            }, options));
+        },
+
+        _initSettingTargets: function() {
+            this.columnsTarget = this._createSettingTarget(this.columnFields, {
+                connectWith: this.rowFields,
                 setting: "columns",
                 messages: {
                     empty: this.options.messages.columnFields
                 }
             });
 
-            this.rowsTarget = new kendo.ui.PivotSettingTarget(this.rowFields, {
+            this.rowsTarget = this._createSettingTarget(this.rowFields, {
                 connectWith: this.columnFields,
-                dataSource: this.dataSource,
-                enabled: this.options.reorderable,
                 setting: "rows",
                 messages: {
                     empty: this.options.messages.rowFields
