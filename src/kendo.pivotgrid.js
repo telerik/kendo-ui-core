@@ -1979,14 +1979,15 @@ var __meta__ = {
 
                     var path = button.attr(kendo.attr("path"));
                     var expanded = button.hasClass(STATE_EXPANDED);
-                    var expandState = builder.expandState[path];
+                    var metadata = builder.metadata[path];
+                    var request = metadata.expanded === undefined;
 
-                    builder.expandState[path] = !expanded;
+                    builder.metadata[path].expanded = !expanded;
 
                     button.toggleClass(STATE_EXPANDED, !expanded)
                           .toggleClass(STATE_COLLAPSED, expanded);
 
-                    if (!expanded && expandState === undefined) {
+                    if (!expanded && request) {
                         that.dataSource[action]($.parseJSON(path));
                     } else {
                         that.refresh();
@@ -2191,7 +2192,13 @@ var __meta__ = {
 
             that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
             that.rowsHeaderTree.render(rowsTree);
-            that.contentTree.render(that._contentBuilder.build(data, that._columnBuilder.metadata, rowsTree));
+            var columnAxis = {
+                columns: columns,
+                indexes: that._columnBuilder._columnIndexes,
+                metadata: that._columnBuilder.metadata
+            };
+
+            that.contentTree.render(that._contentBuilder.build(data, columnAxis, rowsTree));
 
             that._resize();
         }
@@ -2204,6 +2211,8 @@ var __meta__ = {
         init: function(options) {
             this._state(null);
             this.expandState = {};
+
+            this.metadata = {};
         },
 
         build: function(tuples) {
@@ -2215,8 +2224,8 @@ var __meta__ = {
         _thead: function(tuples) {
             var root = tuples[0];
 
-            this.metadata = [];
             this._state(root);
+            this._columnIndexes = [];
 
             if (root) {
                 this._buildRows(root, 0);
@@ -2446,11 +2455,29 @@ var __meta__ = {
             children = member.children;
             childrenLength = children.length;
 
-            if (member.hasChildren) {
-                path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
 
-                if (this.expandState[path] === false) {
+            this._columnIndexes.push(path);
+
+            var metadata = this.metadata[path];
+
+            if (!metadata) {
+                metadata = {
+                    maxChildren: 0,
+                    children: 0,
+                    maxMembers: 0,
+                    members: 0,
+                    levelNum: Number(member.levelNum),
+                    parentName: kendo.stringify(this._tuplePath(tuple, memberIdx - 1))
+                };
+
+                this.metadata[path] = metadata;
+            }
+
+            if (member.hasChildren) {
+                if (metadata.expanded === false) {
                     childrenLength = 0;
+                    metadata.children = 0;
                 }
 
                 cellAttr = { className: "k-icon " + (childrenLength ? STATE_EXPANDED : STATE_COLLAPSED) };
@@ -2464,20 +2491,6 @@ var __meta__ = {
 
             row.children.push(cell);
             row.colspan += 1;
-
-            var metadata = {
-                expand: !!childrenLength,
-                children: 0,
-                allChildren: 0
-            };
-
-            if (parentMember || (childrenLength && !this.rootMember)) {
-                if (!this.rootMember) {
-                    this.rootMember = tuple === this.rootTuple;
-                }
-
-                this.metadata.push(metadata);
-            }
 
             nextMember = members[memberIdx + 1];
 
@@ -2493,11 +2506,10 @@ var __meta__ = {
                 cell.attr.colspan = colspan;
 
                 metadata.children = colspan;
+                metadata.members = 1;
 
                 row.colspan += colspan;
                 row.rowspan = childRow.rowspan + 1;
-
-                metadata.allChildren = 1;
 
                 if (nextMember) {
                     if (nextMember.measure) {
@@ -2507,9 +2519,10 @@ var __meta__ = {
                     }
 
                     allCell.attr.colspan = colspan;
-                    row.colspan += colspan - 1;
+                    colspan -= 1;
 
-                    metadata.allChildren = colspan;
+                    metadata.members += colspan;
+                    row.colspan += colspan;
                 }
             } else if (nextMember) {
                 if (nextMember.measure) {
@@ -2518,11 +2531,20 @@ var __meta__ = {
                     colspan = this._buildRows(tuple, memberIdx + 1).colspan;
                 }
 
+                metadata.members = colspan;
+
                 if (colspan > 1) {
-                    metadata.children = colspan;
                     cell.attr.colspan = colspan;
                     row.colspan += colspan - 1;
                 }
+            }
+
+            if (metadata.maxChildren < metadata.children) {
+                metadata.maxChildren = metadata.children;
+            }
+
+            if (metadata.maxMembers < metadata.members) {
+                metadata.maxMembers = metadata.members;
             }
 
             (allCell || cell).attr[kendo.attr("tuple-all")] = true;
@@ -2754,22 +2776,29 @@ var __meta__ = {
             this.expandState = {};
         },
 
-        build: function(data, columns, rows) {
+        build: function(data, columnAxis, rows) {
+            this.columnAxis = columnAxis;
+            this.rows = rows;
+
             return [
-                element("table", null, [this._thead(data, columns, rows)])
+                element("table", null, [this._thead(data)])
             ];
         },
 
-        _thead: function(data, columns, rows) {
+        _thead: function(data) {
             var dataItem = data[0];
-            var tupleInfo = columns[0];
             this.rows = [];
 
-            this.rowIdx = 0;
-            this.rowLength = tupleInfo ? tupleInfo.children + tupleInfo.allChildren : 1;
+            var metadata = this.columnAxis.metadata[this.columnAxis.indexes[0]];
 
-            if (dataItem && tupleInfo) {
-                this._buildRows(data, columns, rows);
+            this.rowIdx = 0;
+            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : 1; //measure count should be used here instead of 1
+            if (!this.rowLength) {
+                this.rowLength = 1;
+            }
+
+            if (dataItem) {
+                this._buildRows(data);
             } else {
                 this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
             }
@@ -2777,82 +2806,68 @@ var __meta__ = {
             return element("thead", null, this.rows);
         },
 
-        _buildRows: function(data, columns, rows) {
-            var row = element("tr", null);
+        _tuplePath: function(tuple, index) {
+            var path = [];
+            var idx = 0;
+
+            for(; idx <= index; idx++) {
+                path.push(tuple.members[idx].name);
+            }
+
+            return path;
+        },
+
+        _buildRows: function(data) {
+            var row;
             var rowData = data.slice(this.rowIdx, this.rowLength);
 
-            this._shuffle(row, rowData, 0, this.rowLength, columns);
+            row = this._buildRow(rowData);
 
             this.rows.push(row);
         },
 
-        _shuffle: function(row, data, start, end, columns) {
-            var tupleInfo = columns[start];
-            var dataItem;
+        _buildRow: function(data) {
+            var cells = [];
+            var indexes = this.columnAxis.indexes;
 
-            while(start < end) {
-                dataItem = data[start];
+            var firstEmpty = 0;
+            var dataIdx = 0;
+            var offset = 0;
 
-                if (tupleInfo.children) {
-                    this._shuffle(row, data, start + 1, start + tupleInfo.children + 1, columns);
+            for (var idx = 0, length = indexes.length; idx < length; idx++) {
+                var metadata = this.columnAxis.metadata[indexes[idx]];
+                var parent = this.columnAxis.metadata[metadata.parentName];
+                var children = metadata.children + metadata.members;
+                var skipChildren = 0;
+
+                if (children) {
+                    children -= 1;
                 }
 
-                start += tupleInfo.children + 1;
-
-                if (tupleInfo.allChildren > 1) {
-                    this._shuffle(row, data, start, end, columns);
-                    start += tupleInfo.allChildren;
+                if (metadata.expanded === false && metadata.children !== metadata.maxChildren) {
+                    skipChildren = metadata.maxChildren;
                 }
 
-                row.children.push(element("td", null, [ text(dataItem.value) ]));
+                if (parent && metadata.levelNum === 0) {
+                    children = -1;
+                }
 
-                tupleInfo = columns[start];
+                if (children > -1) {
+                    cells[children + firstEmpty] = element("td", null, [text(data[dataIdx - offset].value)]);
+
+                    while(cells[firstEmpty] !== undefined) {
+                        firstEmpty += 1;
+                    }
+                } else {
+                    offset += 1;
+                }
+
+                dataIdx += skipChildren + 1;
             }
+
+            return element("tr", null, cells);
         }
     });
-
-    function kendo_content(data, columnsTree, rowsTree) {
-        return [ element("table", null, [kendo_tbody(data, columnsTree, rowsTree)]) ];
-    }
-
-    function kendo_tbody(data, columnsTree, rowsTree) {
-        return element("tbody", null, kendo_rows(data, columnsTree, rowsTree));
-    }
-
-    function kendo_rows(data, columnsTree, rowsTree) {
-        var columnRows = columnsTree[0].children[0].children;
-
-        var columnLastRow = columnRows[columnRows.length - 1];
-
-        var columnsLength = columnLastRow ? columnLastRow.children.length : 1;
-
-        var length = Math.ceil((data.length || 1) / columnsLength);
-        var rows = [];
-
-        for (var i = 0; i < length; i++) {
-            rows.push(kendo_row(data, i, columnLastRow));
-        }
-        return rows;
-    }
-
-    function kendo_row(data, rowIndex, columnLastRow) {
-        //render cells
-        var cells = [];
-
-        var columns = columnLastRow ? columnLastRow.children : [];
-        var columnsLength = columns.length;
-
-        var start = rowIndex * columnsLength;
-        var end = start + columnsLength;
-        var dataItem;
-
-        for (; start < end; start++) {
-            dataItem = data[start];
-            cells.push(element("td", null, [text(dataItem ? dataItem.value : "")]));
-        }
-
-        return element("tr", null, cells);
-    }
 
     ui.plugin(PivotGrid);
 })(window.kendo.jQuery);
