@@ -9,13 +9,14 @@
     display: block;
     vertical-align: middle;
     text-align: right;
-    line-height: 3.6em;
+    line-height: 3.2em;
     border-style: solid;
+    padding-left: .5em;
 }
 
-.km-root .k-overflow-anchor + *
+.km-root .km-widget.k-toolbar
 {
-    float: left;
+    .box-sizing(border-box);
 }
 
 .km-root .k-toolbar span.km-icon
@@ -39,6 +40,17 @@
 .km-root .k-toolbar .km-button
 {
     line-height: 2.5em;
+}
+
+.km-root div.k-toolbar > .k-align-left
+{
+    float: left;
+    line-height: inherit;
+}
+
+.km-root div.k-toolbar > .k-align-right
+{
+    float: none;
 }
 
 .km-root .k-toolbar > .km-button,
@@ -90,7 +102,7 @@
     padding: 0;
     margin: 0;
     font-size: 2.3em;
-    line-height: 1.65em;
+    line-height: inherit;
     position: relative;
     float: right;
     border-radius: 0;
