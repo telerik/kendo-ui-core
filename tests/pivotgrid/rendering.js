@@ -44,17 +44,6 @@
         ok(wrapper.hasClass("k-pivot"));
     });
 
-    test("PivotGrid renders filter section", function() {
-        var pivotgrid = createPivot();
-
-        var filterFields = pivotgrid.wrapper.children("div");
-
-        ok(filterFields.is("div"));
-        ok(filterFields.hasClass("k-pivot-toolbar"));
-        ok(filterFields.hasClass("k-header"));
-        equal(filterFields.text(), pivotgrid.options.messages.filterFields);
-    });
-
     test("PivotGrid renders layout table", function() {
         var pivotgrid = createPivot();
 

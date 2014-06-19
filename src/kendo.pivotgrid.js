@@ -2021,7 +2021,6 @@ var __meta__ = {
             autoBind: true,
             reorderable: true,
             messages: {
-                filterFields: "Drop Filter Fields Here",
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
                 rowFields: "Drop Rows Fields Here"
@@ -2049,13 +2048,6 @@ var __meta__ = {
 
         _wrapper: function() {
             this.wrapper = this.element.addClass("k-widget k-pivot");
-        },
-
-        _filterFields: function() {
-            var element = $(DIV).addClass("k-pivot-toolbar k-header")
-                                .text(this.options.messages.filterFields);
-
-            this.filterFields = element;
         },
 
         _measureFields: function() {
@@ -2124,8 +2116,6 @@ var __meta__ = {
             var rightContainer = layoutTable.find(".k-pivot-table");
             var gridWrapper = $(DIV).addClass("k-grid k-widget");
 
-            that._filterFields();
-
             that._measureFields();
             that._columnFields();
 
@@ -2145,7 +2135,6 @@ var __meta__ = {
             rightContainer.append(that.columnFields);
             rightContainer.append(gridWrapper);
 
-            that.wrapper.append(that.filterFields);
             that.wrapper.append(layoutTable);
 
             //VIRTUAL DOM
