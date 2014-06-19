@@ -27,7 +27,8 @@
     <p>&nbsp;</p>
 </script>
 
-<kendo:map name="map" center="<%= new double[] {45, 45} %>" zoom="4" shapeMouseEnter="onShapeMouseEnter" reset="onReset">
+<kendo:map name="map" center="<%= new double[] {45, 45} %>" zoom="4" minZoom="3" wraparound="false"
+           shapeMouseEnter="onShapeMouseEnter" reset="onReset">
     <kendo:map-layers>
         <kendo:map-layer type="tile"
             urlTemplate="http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png"
@@ -39,8 +40,8 @@
                  </kendo:dataSource-transport>
              </kendo:dataSource>
              <kendo:map-layer-style>
-             	<kendo:map-layer-style-fill color="#fff" opacity="0.4"/>
-             	<kendo:map-layer-style-stroke width="0" />
+                <kendo:map-layer-style-fill color="#fff" opacity="0.4"/>
+                <kendo:map-layer-style-stroke width="0" />
              </kendo:map-layer-style>
         </kendo:map-layer>
     </kendo:map-layers>

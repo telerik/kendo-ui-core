@@ -28,7 +28,9 @@
 
         $("#map").kendoMap({
             center: [45, 45],
+            minZoom: 3,
             zoom: 4,
+            wraparound: false,
             layers: [{
                 type: "tile",
                 urlTemplate: "http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png",
