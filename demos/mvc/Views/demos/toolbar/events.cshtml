@@ -8,18 +8,6 @@
             </div>
 
             <script>
-                function buttonClickHandler(e) {
-                    kendoConsole.log(e.target.text() + " 'click' event is fired.");
-                }
-
-                function buttonToggleHandler(e) {
-                    kendoConsole.log(e.target.text() + " 'toggle' event is fired.");
-                }
-
-                function splitButtonClickHandler(e) {
-                    kendoConsole.log("SplitButton event: " + e.target.attr("id") + " is clicked.");
-                }
-
                 $(document).ready(function() {
                     $("#toolbar").kendoToolBar({
                         items: [
@@ -78,26 +66,53 @@
                                 overflow: "always"
                             }
                         ],
-                        click: function(e) {
-                            var id = e.target.attr("id");
-                            kendoConsole.log("ToolBar 'click' event is fired for element with id: " + id);
-                        },
-                        toggle: function(e) {
-                            var id = e.target.attr("id");
-
-                            if(e.group == "radio") {
-                                kendoConsole.log("Toolbar 'toggle' event: " + id + " button is selected from group: " + e.group);
-                            } else {
-                                kendoConsole.log("ToolBar 'toggle' event: " + id + " button is changed");
-                            }
-                        },
-                        open: function(e) {
-                            kendoConsole.log("open");
-                        },
-                        close: function(e) {
-                            kendoConsole.log("close");
-                        }
+                        click: onClick,
+                        toggle: onToggle,
+                        overflowOpen: onOverflowOpen,
+                        overflowClose: onOverflowClose,
+                        open: onOpen,
+                        close: onClose
                     });
                 });
+
+                function buttonClickHandler(e) {
+                    kendoConsole.log(e.target.text() + " 'click' event is fired.");
+                }
+
+                function buttonToggleHandler(e) {
+                    kendoConsole.log(e.target.text() + " 'toggle' event is fired.");
+                }
+
+                function splitButtonClickHandler(e) {
+                    kendoConsole.log("SplitButton event: " + e.id + " is clicked.");
+                }
+
+                function onClick(e) {
+                    kendoConsole.log("ToolBar 'click' event is fired for element with id: " + e.id);
+                }
+
+                function onToggle(e) {
+                    if(e.group == "radio") {
+                        kendoConsole.log("Toolbar 'toggle' event: " + e.id + " button is selected from group: " + e.group);
+                    } else {
+                        kendoConsole.log("ToolBar 'toggle' event: " + e.id + " button is changed");
+                    }
+                }
+
+                function onOverflowOpen(e) {
+                    kendoConsole.log("Overflow container open");
+                }
+
+                function onOverflowClose(e) {
+                    kendoConsole.log("Overflow container close");
+                }
+
+                function onOpen(e) {
+                    kendoConsole.log("SplitButton popup open");
+                }
+
+                function onClose(e) {
+                    kendoConsole.log("SplitButton popup close");
+                }
             </script>
         </div>
