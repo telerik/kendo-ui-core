@@ -1,5 +1,5 @@
 ﻿(function(f, define) {
-    define(["./kendo.core", "./kendo.touch", "./kendo.columnsorter", "./kendo.editable"], f);
+    define([ "./kendo.dom", "./kendo.touch", "./kendo.draganddrop", "./kendo.columnsorter", "./kendo.datetimepicker", "./kendo.editable" ], f);
 })(function() {
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt List",
     category: "web",
     description: "The Gantt List",
-    depends: [ "core", "touch" , "columnsorter", "editable" ],
+    depends: [ "dom", "touch", "draganddrop", "columnsorter", "datetimepicker", "editable" ],
     hidden: true
 };
 

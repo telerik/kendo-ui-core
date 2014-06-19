@@ -1,5 +1,5 @@
 ﻿(function(f, define){
-    define([ "./kendo.core" ], f);
+    define([ "./kendo.dom", "./kendo.draganddrop" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt Timeline",
     category: "web",
     description: "The Gantt Timeline",
-    depends: [ "core" ],
+    depends: [ "dom", "draganddrop" ],
     hidden: true
 };
 
