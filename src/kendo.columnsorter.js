@@ -6,7 +6,8 @@ var __meta__ = {
     id: "columnsorter",
     name: "Column Sorter",
     category: "framework",
-    depends: ["core"]
+    depends: ["core"],
+    advanced: true
 };
 
 (function ($, undefined) {

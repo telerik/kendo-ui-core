@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Virtual DOM",
     category: "framework",
     depends: [ "core" ],
-    hidden: true
+    advanced: true
 };
 
 (function(kendo) {
