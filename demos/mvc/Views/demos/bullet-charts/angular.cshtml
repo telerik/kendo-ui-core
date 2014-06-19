@@ -1,0 +1,46 @@
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div kendo-chart
+                 k-title="{ text: 'April sales per day', position: 'bottom' }"
+                 k-legend="{ visible: false }"
+                 k-series="[{
+                                  type: 'verticalBullet',
+                                  currentField: 'current',
+                                  targetField: 'target',
+                                  target: {
+                                      color: '#aaaaaa'
+                                  },
+                                  gap: 4,
+                                  border: 0
+                               }]"
+                k-data-source="aprilSalesDataSource"
+                k-series-hover="onSeriesHover"
+                ></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    </div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+    function MyCtrl($scope) {
+        $scope.onSeriesHover = function(e) {
+             kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.value.current, e.value.target));
+         };
+
+        $scope.aprilSalesDataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "../content/dataviz/js/april-sales.json",
+                    dataType: "json"
+                }
+            }
+        });
+    }
+</script>
+</div>

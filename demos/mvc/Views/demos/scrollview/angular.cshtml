@@ -1,0 +1,104 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div class="demo-section">
+    <div kendo-mobile-scroll-view="scrollview"
+         k-data-source="photos"
+         k-content-height="'440px'"
+         k-enable-pager="false"
+         k-template="template"></div>
+    <a id="prev-img" title="Previous Image" ng-click="scrollview.prev()"></a>
+    <a id="next-img" title="Next Image" ng-click="scrollview.next()"></a>
+    <p>Photos via <a href="http://www.500px.com">500px.com</a></p>
+  </div>
+  <style scoped>
+    .demo-section {
+      width: 600px;
+      position: relative;
+    }
+    .demo-section > p {
+      text-align: right;
+      margin-top: 10px;
+      font-size: .8em;
+    }
+    #prev-img,
+    #next-img {
+      display: block;
+      position: absolute;
+      top: 10px;
+      z-idex: 1;
+      height: 400px;
+      width: 100px;
+      opacity: 0.2;
+    }
+    #prev-img {
+      left: 10px;
+      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-left.png") no-repeat 50% 50%;
+    }
+    #next-img {
+      left: auto;
+      right: 10px;
+      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-right.png") no-repeat 50% 50%;
+    }
+    a#prev-img:hover {
+      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-left.png") no-repeat 50% 50% rgba(0,0,0,.3);
+      opacity: 1;
+    }
+    a#next-img:hover  {
+      background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-right.png") no-repeat 50% 50% rgba(0,0,0,.3);
+      opacity: 1;
+    }
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0;
+      padding: 1em;
+      background-color: #222;
+      color: #fff;
+    }
+    .image {
+      display: block;
+      height: 400px;
+      width: 600px;
+      background-size: cover;
+    }
+  </style>
+  <script id="template" type="text/x-kendo-template">
+    <div>
+      <div class="image" style="background-image: url({{dataItem.image_url}});"></div>
+      <p class="title">{{dataItem.name}}</p>
+    </div>
+  </script>
+</div>
+
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+  $scope.photos = new kendo.data.DataSource({
+    transport: {
+      read: function(options) {
+        var params = {
+          feature: "popular",
+          exclude: "Nude",
+          image_size: 4,
+          page: options.data.page,
+          rpp: options.data.pageSize
+        };
+
+        _500px.api("/photos", params, function(response) {
+          options.success(response.data);
+        });
+      }
+    },
+    serverPaging: true,
+    pageSize: 30,
+    schema: {
+      data: "photos",
+      total: "total_items"
+    }
+  });
+  $scope.template = $("#template").html();
+}
+</script>

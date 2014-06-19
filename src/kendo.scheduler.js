@@ -1192,12 +1192,13 @@ var __meta__ = {
             var container = this.container = view.element;
 
             this.editable = container.kendoEditable({
-                    fields: editableFields,
-                    model: model,
-                    clearContainer: false,
+                fields: editableFields,
+                model: model,
+                clearContainer: false,
+                target: that.options.target,
 
-                    validateOnBlur: true
-                }).data("kendoEditable");
+                validateOnBlur: true
+            }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"
             container.find("input[type=checkbox],input[type=radio]")
@@ -1419,11 +1420,12 @@ var __meta__ = {
                 }, options));
 
             var editableWidget = container.kendoEditable({
-                        fields: editableFields,
-                        model: model,
-                        clearContainer: false,
-                        validateOnBlur: true
-                    }).data("kendoEditable");
+                fields: editableFields,
+                model: model,
+                clearContainer: false,
+                validateOnBlur: true,
+                target: that.options.target
+            }).data("kendoEditable");
 
             if (!that.trigger(EDIT, { container: container, model: model })) {
 
@@ -2031,7 +2033,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.wrapper.children(".k-event, .k-task");
+            return this.wrapper.find(".k-event, .k-task");
         },
 
         _movable: function() {
@@ -2623,12 +2625,14 @@ var __meta__ = {
 
             if (this._isMobile() && kendo.mobile.ui.Pane) {
                 editor = that._editor = new MobileEditor(this.wrapper, extend({}, this.options, {
+                    target: this,
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources,
                     createButton: proxy(this._createButton, this)
                 }));
             } else {
                 editor = that._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
+                    target: this,
                     createButton: proxy(this._createButton, this),
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources
@@ -3226,9 +3230,14 @@ var __meta__ = {
         },
 
         refresh: function(e) {
+            var that = this;
             var view = this.view();
 
             this._progress(false);
+
+            this.angular("cleanup", function(){
+                return { elements: that.items() };
+            });
 
             e = e || {};
 

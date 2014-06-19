@@ -1,0 +1,37 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <ol class="playlist" kendo-sortable>
+    <li>Papercut <span>3:04</span></li>
+    <li>One Step Closer <span>2:35</span></li>
+    <li>With You <span>3:23</span></li>
+    <li>Points of Authority <span>3:20</span></li>
+    <li>Crawling <span>3:29</span></li>
+    <li>Runaway <span>3:03</span></li>
+    <li>By Myself <span>3:09</span></li>
+    <li>In the End <span>3:36</span></li>
+    <li>A Place for My Head <span>3:04</span></li>
+    <li>Forgotten <span>3:14</span></li>
+    <li>Cure for the Itch <span>2:37</span></li>
+    <li>Pushing Me Away <span>3:11</span></li>
+  </ol>
+</div>
+<style>
+  .playlist {
+    width: 15em;
+  }
+  .playlist li {
+    cursor: pointer;
+    position: relative;
+  }
+  .playlist li span {
+    position: absolute;
+    right: 5px;
+  }
+</style>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope){
+  }
+</script>

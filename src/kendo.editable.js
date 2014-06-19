@@ -160,6 +160,9 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
 
+            if (options.target) {
+                options.$angular = options.target.options.$angular;
+            }
             Widget.fn.init.call(that, element, options);
             that._validateProxy = $.proxy(that._validate, that);
             that.refresh();
@@ -241,6 +244,10 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
+            that.angular("cleanup", function(){
+                return { elements: that.element };
+            });
+
             Widget.fn.destroy.call(that);
 
             that.options.model.unbind("set", that._validateProxy);
@@ -268,6 +275,15 @@ var __meta__ = {
                 fieldName,
                 modelField,
                 modelFields;
+
+            if (that.options.target) {
+                that.angular("compile", function(){
+                    return {
+                        elements: container,
+                        data: [ { dataItem: model } ]
+                    };
+                });
+            }
 
             if (!$.isArray(fields)) {
                 fields = [fields];

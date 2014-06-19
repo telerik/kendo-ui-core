@@ -402,7 +402,11 @@
                 that.window.wrapper.find("*").attr("unselectable", "on");
             }
 
-            this.updateGroups();
+            that.updateGroups();
+
+            that.angular("compile", function(){
+                return { elements: that.element };
+            });
         },
 
         updateGroups: function() {

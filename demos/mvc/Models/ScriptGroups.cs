@@ -19,9 +19,16 @@ namespace Kendo.Models
             ConfigurationManager.AppSettings["JQUERY_VERSION"]
         );
 
+        private static readonly string AngularPath = string.Format(
+            "http://ajax.googleapis.com/ajax/libs/angularjs/{0}/angular.js",
+            ConfigurationManager.AppSettings["ANGULAR_VERSION"]
+        );
+
+
         public static IList<string> All = new string[]
         {
             jQueryPath,
+            AngularPath,
             "kendo.all.min.js",
             "kendo.timezones.min.js"
         };

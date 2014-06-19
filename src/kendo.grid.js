@@ -707,7 +707,7 @@ var __meta__ = {
         return width;
     }
 
-    var Grid = Widget.extend({
+    var Grid = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -955,10 +955,31 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.tbody.children().filter(function() {
+            if (this.lockedContent) {
+                return this._items(this.tbody).add(this._items(this.lockedTable.children("tbody")));
+            } else {
+                return this._items(this.tbody);
+            }
+        },
+
+        _items: function(container) {
+            return container.children().filter(function() {
                 var tr = $(this);
                 return !tr.hasClass("k-grouping-row") && !tr.hasClass("k-detail-row") && !tr.hasClass("k-group-footer");
             });
+        },
+
+        dataItems: function() {
+            var dataItems = kendo.ui.DataBoundWidget.fn.dataItems.call(this);
+            if (this.lockedContent) {
+                var n = dataItems.length, tmp = new Array(2 * n);
+                for (var i = n; --i >= 0;) {
+                    tmp[i] = tmp[i + n] = dataItems[i];
+                }
+                dataItems = tmp;
+            }
+
+            return dataItems;
         },
 
         _destroyColumnAttachments: function() {
@@ -969,6 +990,10 @@ var __meta__ = {
             if (!that.thead) {
                 return;
             }
+
+            this.angular("cleanup", function(){
+                return { elements: that.thead.get() };
+            });
 
             that.thead.find("th").each(function(){
                 var th = $(this),
@@ -1782,6 +1807,12 @@ var __meta__ = {
             }
 
             cell.empty().html(tmpl(dataItem));
+            that.angular("compile", function(){
+                return {
+                    elements: cell.get(),
+                    scopeFrom: cell.parent()
+                };
+            });
         },
 
         removeRow: function(row) {
@@ -2026,11 +2057,19 @@ var __meta__ = {
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 
+            that.angular("compile", function(){
+                return {
+                    elements: container.get(),
+                    scopeFrom: that.tbody.find("[" + kendo.attr("uid") + "=" + model.uid + "]")
+                };
+            });
+
             that.editable = that._editContainer
                 .kendoEditable({
                     fields: fields,
                     model: model,
-                    clearContainer: false
+                    clearContainer: false,
+                    target: that
                 }).data("kendoEditable");
 
             // TODO: Replace this code with labels and for="ID"
@@ -2138,7 +2177,7 @@ var __meta__ = {
                 if (that._editMode() !== "popup") {
                     that._displayRow(container);
                 } else {
-                    that._displayRow(that.items().filter("[" + kendo.attr("uid") + "=" + model.uid + "]"));
+                    that._displayRow(that.tbody.find("[" + kendo.attr("uid") + "=" + model.uid + "]"));
                 }
             }
         },
@@ -2171,8 +2210,17 @@ var __meta__ = {
                     that._relatedRow(row.last()).replaceWith(related);
                 }
 
+                that.angular("cleanup", function(){ return { elements: row.get() }; });
+
                 newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
                 row.replaceWith(newRow);
+
+                that.angular("compile", function(){
+                    return {
+                        elements: newRow.get(),
+                        data: [ { dataItem: model } ]
+                    };
+                });
 
                 if (related) {
                     adjustRowHeight(newRow[0], related[0]);
@@ -2344,6 +2392,10 @@ var __meta__ = {
                     container = $('<div class="k-toolbar k-grid-toolbar" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
+
+                    that.angular("compile", function(){
+                        return { elements: container.get() };
+                    });
                 }
 
                 if (editable && editable.create !== false) {
@@ -3257,7 +3309,7 @@ var __meta__ = {
 
         _averageRowHeight: function() {
             var that = this,
-                itemsCount = that.items().length,
+                itemsCount = that._items(that.tbody).length,
                 rowHeight = that._rowHeight;
 
             if (itemsCount === 0) {
@@ -3324,6 +3376,7 @@ var __meta__ = {
 
         _modelChange: function(e) {
             var that = this,
+                tbody = that.tbody,
                 model = e.model,
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 relatedRow,
@@ -3331,7 +3384,7 @@ var __meta__ = {
                 column,
                 isAlt = row.hasClass("k-alt"),
                 tmp,
-                idx = that.items().index(row),
+                idx = that._items(tbody).index(row),
                 isLocked = that.lockedContent,
                 length;
 
@@ -3366,7 +3419,7 @@ var __meta__ = {
 
                 row.replaceWith(tmp);
 
-                tmp = that.items().eq(idx);
+                tmp = that._items(tbody).eq(idx);
 
                 if (isLocked) {
                     relatedRow = that._relatedRow(tmp)[0];
@@ -3430,6 +3483,10 @@ var __meta__ = {
                 if (footer.length) {
                     var tmp = html;
 
+                    that.angular("cleanup", function(){
+                        return { elements: footer.get() };
+                    });
+
                     footer.replaceWith(tmp);
                     footer = that.footer = tmp;
                 } else {
@@ -3439,6 +3496,19 @@ var __meta__ = {
                         footer = that.footer = html.insertBefore(that.tbody);
                     }
                 }
+
+                that.angular("compile", function(){
+                    return {
+                        elements: footer.find("td").get(),
+                        data: that.columns.map(function(col, i){
+                            return {
+                                column: col,
+                                aggregate: aggregates[col.field]
+                            };
+                        })
+                    };
+                });
+
             } else if (footer && !that.footer) {
                 that.footer = footer;
             }
@@ -4056,16 +4126,24 @@ var __meta__ = {
                 button.toggleClass("k-plus", !expanding)
                     .toggleClass("k-minus", expanding);
 
-                if(hasDetails && !masterRow.next().hasClass("k-detail-row")) {
+                detailRow = masterRow.next();
+
+                if (hasDetails && !detailRow.hasClass("k-detail-row")) {
                     data = that.dataItem(masterRow);
-                    $(detailTemplate(data))
+
+                    detailRow = $(detailTemplate(data))
                         .addClass(masterRow.hasClass("k-alt") ? "k-alt" : "")
                         .insertAfter(masterRow);
 
-                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: masterRow.next(), data: data, detailCell: masterRow.next().find(".k-detail-cell") });
-                }
+                    that.angular("compile", function(){
+                        return {
+                            elements: detailRow.get(),
+                            data: [ { dataItem: data } ]
+                        };
+                    });
 
-                detailRow = masterRow.next();
+                    that.trigger(DETAILINIT, { masterRow: masterRow, detailRow: detailRow, data: data, detailCell: detailRow.find(".k-detail-cell") });
+                }
 
                 that.trigger(expanding ? DETAILEXPAND : DETAILCOLLAPSE, { masterRow: masterRow, detailRow: detailRow});
                 detailRow.toggle(expanding);
@@ -4312,7 +4390,7 @@ var __meta__ = {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
-                html += that._createHeaderCells(that.columns);
+                html += that._createHeaderCells(columns);
 
                 tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
@@ -4330,6 +4408,13 @@ var __meta__ = {
             if (that.thead) {
                 that._destroyColumnAttachments();
             }
+
+            this.angular("compile", function(){
+                return {
+                    elements: thead.find("th").get(),
+                    data: columns.map(function(col){ return { column: col }; })
+                };
+            });
 
             that.thead = thead.attr("role", "rowgroup");
 
@@ -4862,6 +4947,8 @@ var __meta__ = {
                 return;
             }
 
+            that._angularItems("cleanup");
+
             if (navigatable && (that._isActiveInTable() || (that._editContainer && that._editContainer.data("kendoWindow")))) {
                 isCurrentInHeader = current.is("th");
                 currentIndex = 0;
@@ -4919,6 +5006,8 @@ var __meta__ = {
             if (that.touchScroller) {
                 that.touchScroller.contentResized();
             }
+
+            that._angularItems("compile");
 
             that.trigger(DATABOUND);
        },

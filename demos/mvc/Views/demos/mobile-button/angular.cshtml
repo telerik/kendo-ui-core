@@ -1,0 +1,20 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <p>
+    <button kendo-mobile-button k-on-click="click()">Regular button</button>
+  </p>
+  <p>
+    <button kendo-mobile-button k-icon="'home'" k-on-click="click()">Icon button</button>
+  </p>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+function MyCtrl($scope) {
+  $scope.click = function() {
+    alert("Clicked");
+  };
+}
+
+</script>

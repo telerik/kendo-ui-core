@@ -2531,6 +2531,8 @@ function pad(number, digits, end) {
 
             that.element = kendo.jQuery(element).handler(that);
 
+            that.angular("init", options);
+
             Observable.fn.init.call(that);
 
             options = that.options = extend(true, {}, that.options, options);
@@ -2619,6 +2621,27 @@ function pad(number, digits, end) {
             that.element.removeData("kendo" + that.options.prefix + that.options.name);
             that.element.removeData("handler");
             that.unbind();
+        },
+
+        angular: function(){}
+    });
+
+    var DataBoundWidget = Widget.extend({
+        // Angular consumes these.
+        dataItems: function() {
+            return this.dataSource.view();
+        },
+
+        _angularItems: function(cmd) {
+            var that = this;
+            that.angular(cmd, function(){
+                return {
+                    elements: that.items(),
+                    data: that.dataItems().map(function(dataItem){
+                        return { dataItem: dataItem };
+                    })
+                };
+            });
         }
     });
 
@@ -2825,6 +2848,7 @@ function pad(number, digits, end) {
 
     extend(kendo.ui, {
         Widget: Widget,
+        DataBoundWidget: DataBoundWidget,
         roles: {},
         progress: function(container, toggle) {
             var mask = container.find(".k-loading-mask"),
@@ -2955,6 +2979,7 @@ function pad(number, digits, end) {
 
         ui: {
             Widget: MobileWidget,
+            DataBoundWidget: DataBoundWidget.extend(MobileWidget.prototype),
             roles: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");

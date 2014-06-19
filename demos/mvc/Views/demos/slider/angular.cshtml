@@ -1,0 +1,27 @@
+
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <div style="position: relative; width: 300px; height: 250px; overflow: visible; margin: 0 auto;">
+
+            <div kendo-slider ng-model="width" k-tooltip="{ enabled: false }"
+                style="position: absolute; left: 25px; bottom: 0; width: 275px;"></div>
+
+            <div kendo-slider ng-model="height" k-tooltip="{ enabled: false }" k-orientation="'vertical'"
+                style="position: absolute; bottom: 25px; left: 0; height: 225px;"></div>
+
+            <img style="position: absolute; left: 50px; bottom: 50px;
+            width: {{133 + width * 10}}px;
+            height: {{95 + height * 10}}px;"
+            src="doc/angular-kendo.png" />
+
+        </div>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+      $scope.width = 0;
+      $scope.height = 0;
+  }
+</script>

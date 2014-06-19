@@ -64,7 +64,8 @@
         "./kendo.scheduler",
         "./kendo.gantt.list",
         "./kendo.gantt.timeline",
-        "./kendo.gantt"
+        "./kendo.gantt",
+        "./kendo.angular"
     ], f);
 })(function(){
     "bundle all";

@@ -1,0 +1,31 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <table style="width: 100%"><tr style="vertical-align: top"><td style="width: 50%">
+                    <p>
+                        <input kendo-color-picker k-palette="'websafe'" ng-model="color1" />
+                        Value: {{color1}}
+                    </p>
+                    <p>
+                        <input kendo-color-picker ng-model="color2" k-buttons="false" k-preview="false" k-input="false" />
+                        Value: {{color2}}
+                    </p>
+                    </td><td style="width: 50%">
+                    <p>
+                        <div style="border: 1px solid #555; padding: 5px"
+                            kendo-color-palette ng-model="color3" k-opacity="true"></div>
+                    </p>
+                    <p>
+                        <div style="border: 1px solid #555; padding: 5px"
+                            kendo-flat-color-picker ng-model="color3" k-opacity="true"></div>
+                        Value: {{color3}}
+                    </p>
+        </td></tr></table>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+
+  function MyCtrl($scope){
+  }
+</script>

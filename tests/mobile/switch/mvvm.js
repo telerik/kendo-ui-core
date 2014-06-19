@@ -53,6 +53,19 @@
         equal(observable.checked, dom.prop("checked"));
     });
 
+    test("(Angular) changing the value updates the view model", function() {
+        dom = $('<input data-role="switch" data-bind="value: checked" />');
+
+        var observable = kendo.observable({ checked: false });
+
+        kendo.bind(dom, observable, kendo.mobile.ui );
+
+        dom.data("kendoMobileSwitch").toggle();
+        dom.data("kendoMobileSwitch").trigger("change");
+
+        equal(observable.checked, dom.prop("checked"));
+    });
+
     test("binding switch initialized before binding", function() {
         var checked = true;
         var observable = kendo.observable({ checked: checked });

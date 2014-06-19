@@ -34,6 +34,9 @@ module.exports = function(grunt) {
 
     TESTS.beforeTestFiles.push(jquery);
     TESTS.beforeTestFiles.push('tests/jquery.mockjax.js');
+    TESTS.beforeTestFiles.push('tests/angular.js');
+    TESTS.beforeTestFiles.push('tests/angular-route.js');
+    TESTS.afterTestFiles.push('src/kendo.angular.js');
 
     if (browserOption) {
         browsers = [ browserOption ];
@@ -155,6 +158,14 @@ module.exports = function(grunt) {
                     dest: '<%= kendo.options.jsDestDir %>/',
                 }]
             },
+            angular: {
+                files: [{
+                    expand: true,
+                    cwd: "src/",
+                    src: [ "angular.*" ],
+                    dest: '<%= kendo.options.jsDestDir %>/',
+                }]
+            },
             timezones: {
                 files: [{
                     expand: true,
@@ -238,8 +249,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['karma:unit']);
     grunt.registerTask('tests', [ 'styles', 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
-    grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:timezones' ]);
-    grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'styles', 'license' ]);
+    grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:angular', 'copy:timezones' ]);
+    grunt.registerTask('build', [ 'kendo', 'copy:jquery', 'copy:angular', 'styles', 'license' ]);
 
     grunt.registerTask('ci', [ "all", 'styles', 'karma:jenkins' ]);
     grunt.registerTask("travis", [ 'jshint', 'build', 'karma:travis' ]);

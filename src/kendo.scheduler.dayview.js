@@ -1318,7 +1318,7 @@ var __meta__ = {
                 eventEndDate = kendo.timezone.apply(eventEndDate, "Etc/UTC");
             }
 
-            return $(template(extend({}, {
+            var data = extend({}, {
                 ns: kendo.ns,
                 resizable: resizable,
                 showDelete: showDelete,
@@ -1331,7 +1331,18 @@ var __meta__ = {
             }, event, {
                 start: eventStartDate,
                 end: eventEndDate
-            })));
+            });
+
+            var element = $(template(data));
+
+            this.angular("compile", function(){
+                return {
+                    elements: element,
+                    data: [ { dataItem: data } ]
+                };
+            });
+
+            return element;
         },
 
         _isInTimeSlot: function(event) {
@@ -1619,12 +1630,14 @@ var __meta__ = {
         MultiDayView: MultiDayView,
         DayView: MultiDayView.extend({
             options: {
+                name: "DayView",
                 title: "Day"
             },
             name: "day"
         }),
         WeekView: MultiDayView.extend({
             options: {
+                name: "WeekView",
                 title: "Week",
                 selectedDateFormat: "{0:D} - {1:D}"
             },
@@ -1644,6 +1657,7 @@ var __meta__ = {
         }),
         WorkWeekView: MultiDayView.extend({
             options: {
+                name: "WorkWeekView",
                 title: "Work Week",
                 selectedDateFormat: "{0:D} - {1:D}"
             },

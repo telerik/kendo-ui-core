@@ -1535,4 +1535,47 @@
             });
         });
     });
+
+    test("items returns the grid items twice in frozen columns mode", function() {
+        var grid = new Grid(table, {
+            dataSource: [
+                { foo: "foo", bar: "bar" }
+            ],
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.items().length, 2);
+    });
+
+    test("dataItems returns the datasource view", function() {
+        var grid = new Grid(table, {
+            dataSource: [
+                { foo: "foo", bar: "bar" }
+            ],
+            columns: [
+                { field: "foo" },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.dataItems().length, 1);
+    });
+
+    test("dataItems returns the datasource view twice in frozen columns mode", function() {
+        var grid = new Grid(table, {
+            dataSource: [
+                { foo: "foo", bar: "bar" }
+            ],
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar" }
+            ]
+        });
+
+        equal(grid.dataItems().length, 2);
+    });
+
 })();

@@ -1,0 +1,56 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <div class="demo-section">
+    <div class="settings-head"></div>
+    <dl>
+      <dt>Notifications</dt><dd><input kendo-mobile-switch type="checkbox" checked="checked" /></dd>
+      <dt>Send notifications via mail</dt><dd><input kendo-mobile-switch k-on-label="'YES'" k-off-label="'NO'" /></dd>
+      <dt>Always visible to everyone</dt><dd><input kendo-mobile-switch k-checked="true" /></dd>
+      <dt>Display real name</dt><dd><input kendo-mobile-switch /></dd>
+    </dl>
+  </div>
+
+  <style scoped>
+    .demo-section dl {
+      margin: 0;
+      padding: 0;
+    }
+    .demo-section dl dt,
+    .demo-section dl dd {
+      display: inline-block;
+      margin: 0;
+      padding: 0 0 0 20px;
+      height: 40px;
+      line-height: 40px;
+      vertical-align: middle;
+      border-top: 1px solid rgba(128,128,128,.5);
+    }
+    .demo-section dl dt {
+      width: 185px;
+      clear: left;
+      text-align: left;
+    }
+    .demo-section dl dd {
+      width: 80px;
+      text-align: right;
+      padding-right: 10px;
+    }
+    .demo-section {
+      width: 315px;
+      margin-top: 50px;
+      padding: 0;
+      text-align: center;
+    }
+    .settings-head {
+      height: 66px;
+      background: url("http://demos.telerik.com/kendo-ui/content/web/switch/settings-title.png") no-repeat 20px 50% #2db245;
+    }
+  </style>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope){
+  }
+</script>

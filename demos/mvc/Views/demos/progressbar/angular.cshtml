@@ -1,0 +1,33 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+        <div>{{status}}</div>
+        <div kendo-progress-bar="progressBar" k-min="0" k-max="100" ng-model="progress"></div>
+    </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope, $timeout) {
+  $scope.status = "Working...";
+  $scope.progress = 0;
+  $scope.labels = [
+    "Installing start menu items",
+    "Registering components",
+    "Having a coffee"
+  ];
+  var i = -1;
+  function update() {
+    $scope.progress += random(0, 10);
+    if ($scope.progress > random(70, 90)) {
+      $scope.progress = random(5, 50);
+      i = (i + 1) % $scope.labels.length;
+      $scope.status = $scope.labels[i];
+    }
+    $timeout(update, 200);
+  }
+  function random(a, b) {
+    return a + Math.floor(Math.random() * (b - a));
+  }
+  update();
+}
+</script>

@@ -30,7 +30,8 @@
         "./kendo.dataviz.drawing",
         "./kendo.dataviz.map",
         "./kendo.dataviz.diagram",
-        "./kendo.dataviz.treemap"
+        "./kendo.dataviz.treemap",
+        "./kendo.angular"
     ], f);
 })(function(){
     "bundle all";

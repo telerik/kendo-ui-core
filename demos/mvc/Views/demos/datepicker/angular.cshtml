@@ -1,0 +1,42 @@
+<div class="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+  <p>
+    <label>Select date:
+      <input kendo-date-picker
+             ng-model="dateString"
+             k-ng-model="dateObject" />
+    </label>
+  </p>
+
+  <pre>
+    dateString: {{ dateString }}
+    dateObject: {{ dateObject | date:"EEEE, MMMM d, yyyy" }}
+    typeof dateObject: {{ getType(dateObject) }}
+    dateObject instanceof Date: {{ isDate(dateObject) }}
+  </pre>
+
+  <p>
+    <label>Select month:
+      <input kendo-date-picker
+             k-options="monthSelectorOptions"
+             k-format="'MMMM yyyy'" />
+    </label>
+  </p>
+</div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+  function MyCtrl($scope) {
+      $scope.monthSelectorOptions = {
+        start: "year",
+        depth: "year"
+      };
+      $scope.getType = function(x) {
+        return typeof x;
+      };
+      $scope.isDate = function(x) {
+        return x instanceof Date;
+      };
+  }
+</script>

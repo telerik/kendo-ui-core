@@ -1879,13 +1879,20 @@ var __meta__ = {
     }
 
     function flattenGroups(data) {
-        var idx, length, result = [];
+        var idx,
+            result = [],
+            length,
+            items,
+            itemIndex;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             if (data[idx].hasSubgroups) {
                 result = result.concat(flattenGroups(data[idx].items));
             } else {
-                result = result.concat(data[idx].items.slice());
+                items = data[idx].items;
+                for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
+                    result.push(items[itemIndex]);
+                }
             }
         }
         return result;
@@ -2201,6 +2208,16 @@ var __meta__ = {
 
         view: function() {
             return this._view;
+        },
+
+        flatView: function() {
+            var groups = this.group() || [];
+
+            if (groups.length) {
+                return flattenGroups(this._view);
+            } else {
+                return this._view;
+            }
         },
 
         add: function(model) {

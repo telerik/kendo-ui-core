@@ -1,0 +1,51 @@
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div kendo-chart
+                 k-legend="{ position: 'top' }"
+                 k-series-defaults="{ type: 'donut', startAngle: 270 }"
+                 k-series="[{
+                                field: 'share',
+                                categoryField: 'resolution',
+                                visibleInLegendField: 'visibleInLegend',
+                                padding: 10
+                              }]"
+                 k-data-source="screenResolution"
+                 k-series-hover="onSeriesHover"
+                 ></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+
+    </div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+
+    function MyCtrl($scope) {
+        $scope.onSeriesHover = function(e) {
+            kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.series.name, e.value));
+        };
+
+        $scope.screenResolution = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "../content/dataviz/js/screen_resolution.json",
+                    dataType: "json"
+                }
+            },
+            sort: {
+                field: "order",
+                dir: "asc"
+            },
+            group: {
+                field: "year"
+            }
+        });
+    }
+</script>
+</div>

@@ -167,7 +167,7 @@ var __meta__ = {
         }
     }
 
-    TreeView = Widget.extend({
+    TreeView = kendo.ui.DataBoundWidget.extend({
         init: function (element, options) {
             var that = this,
                 dataInit,
@@ -507,7 +507,7 @@ var __meta__ = {
         },
 
         items: function() {
-            return this.element.find(".k-item");
+            return this.element.find(".k-item div:first-child");
         },
 
         setDataSource: function(dataSource) {
@@ -1198,6 +1198,15 @@ var __meta__ = {
                 return;
             }
 
+            that.angular("compile", function(){
+                return {
+                    elements: node.get(),
+                    data: nodeData.map(function(item){
+                        return { dataItem: item };
+                    })
+                };
+            });
+
             if (!group.length) {
                 group = $(that._renderGroup({
                     group: groupData
@@ -1405,6 +1414,9 @@ var __meta__ = {
                         });
 
                     if (that.root.length) {
+
+                        this._angularItems("cleanup");
+
                         var group = $(groupHtml);
 
                         that.root
@@ -1414,6 +1426,8 @@ var __meta__ = {
                     } else {
                         that.root = that.wrapper.html(groupHtml).children("ul");
                     }
+
+                    this._angularItems("compile");
                 }
             }
 
@@ -1784,6 +1798,10 @@ var __meta__ = {
                 prevSibling, nextSibling;
 
             node = $(node, that.element);
+
+            this.angular("cleanup", function(){
+                return { elements: node.get() };
+            });
 
             parentNode = node.parent().parent();
             prevSibling = node.prev();
