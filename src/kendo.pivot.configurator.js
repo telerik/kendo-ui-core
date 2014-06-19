@@ -15,7 +15,7 @@ var __meta__ = {
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
-        SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon k-i-vbars"></span>${name}</p>' +
+        SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon #=icon#"></span>${name}</p>' +
                 '<div class="k-list-container k-group k-reset"/>');
 
 
@@ -155,13 +155,13 @@ var __meta__ = {
         _targets: function() {
             var container = $('<div class="k-state-default"/>').appendTo(this.form);
 
-            var columnsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.columnsLabel })).appendTo(container);
+            var columnsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.columnsLabel, icon: "k-i-vbars" })).appendTo(container);
             var columns = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(columnsContainer.last());
 
-            var rowsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.rowsLabel })).appendTo(container);
+            var rowsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.rowsLabel, icon: "k-i-hbars" })).appendTo(container);
             var rows = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(rowsContainer.last());
 
-            var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.measuresLabel })).appendTo(container);
+            var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: this.options.messages.measuresLabel, icon: "k-i-sum"})).appendTo(container);
             var measures = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(measuresContainer.last());
 
             this.columns = this._createTarget(columns, {
