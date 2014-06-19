@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.gantt.popup", "./kendo.gantt.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline" ], f);
+    define([ "./kendo.data", "./kendo.popup", "./kendo.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt",
     category: "web",
     description: "The Gantt component.",
-    depends: [ "data", "gantt.popup", "gantt.resizable", "gantt.list", "gantt.timeline" ]
+    depends: [ "data", "popup", "resizable", "gantt.list", "gantt.timeline" ]
 };
 
 (function($, undefined) {
