@@ -106,10 +106,10 @@ def set_cl_fields(bot, product_name)
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
       bot.execute_script("$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
       sleep(3)
-      #bot.execute_script("$('[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
-      #sleep(3)
-      #bot.execute_script("$('[id*=\"pageUrl\"]').text('Code Library')")
-      #sleep(3)
+      bot.execute_script("$('span[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
+      sleep(3)
+      bot.execute_script("$('span[id*=\"pageUrl\"]').text('Code Library')")
+      sleep(3)
 
       if product_name.index("Mobile") == nil
         bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
@@ -124,6 +124,6 @@ def set_cl_fields(bot, product_name)
       bot.execute_script("$('[id*=\"radioButtons\"]').click()")
       sleep(3)
       p "fields settings done>>"
-      #bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
+      bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
       #sleep(3)
 end
