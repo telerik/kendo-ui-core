@@ -727,6 +727,13 @@ var __meta__ = {
                     top: offset.top
                 })
                 .appendTo(document.body);
+
+                that.angular("compile", function(){
+                    return {
+                        elements: that.hint.get(),
+                        scopeFrom: e.target
+                    };
+                });
             }
 
             draggables[options.group] = that;

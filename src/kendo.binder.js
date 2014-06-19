@@ -805,15 +805,12 @@ var __meta__ = {
                     widget = this.widget,
                     items = widget.items(),
                     dataSource = widget[fieldName],
-                    view = dataSource.view(),
+                    view,
                     parents,
                     groups = dataSource.group() || [];
 
                 if (items.length) {
-                    if (groups.length) {
-                        view = flattenGroups(view);
-                    }
-
+                    view = dataSource.flatView();
                     parents = this.bindings[bindingName]._parents();
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
@@ -1407,26 +1404,6 @@ var __meta__ = {
             }
         }
     });
-
-    function flattenGroups(data) {
-        var idx,
-            result = [],
-            length,
-            items,
-            itemIndex;
-
-        for (idx = 0, length = data.length; idx < length; idx++) {
-            if (data[idx].hasSubgroups) {
-                result = result.concat(flattenGroups(data[idx].items));
-            } else {
-                items = data[idx].items;
-                for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
-                    result.push(items[itemIndex]);
-                }
-            }
-        }
-        return result;
-    }
 
     function bindingTargetForRole(element, roles) {
         var widget = kendo.initWidget(element, {}, roles);

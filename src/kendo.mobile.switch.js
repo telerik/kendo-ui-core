@@ -122,6 +122,11 @@ var __meta__ = {
                 .toggleClass(SWITCHOFF, !check);
         },
 
+        // alias for check, NG support
+        value: function() {
+            return this.check.apply(this, arguments);
+        },
+
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.userEvents.destroy();

@@ -16,7 +16,7 @@ var __meta__ = {
         mobile = kendo.mobile,
         ui = mobile.ui,
         DataSource = kendo.data.DataSource,
-        Widget = ui.Widget,
+        Widget = ui.DataBoundWidget,
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
         HIGHLIGHT_SELECTOR = ".km-listview-link, .km-listview-label",
         ICON_SELECTOR = "[" + kendo.attr("icon") + "]",
@@ -1014,7 +1014,7 @@ var __meta__ = {
 
         insertAt: function(dataItems, index) {
             var listView = this;
-            return this._renderItems(dataItems, function(items) {
+            return listView._renderItems(dataItems, function(items) {
                 if (index === 0) {
                     listView.element.prepend(items);
                 }
@@ -1026,6 +1026,14 @@ var __meta__ = {
                 for (var idx = 0; idx < items.length; idx ++) {
                     listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
                 }
+                listView.angular("compile", function(){
+                    return {
+                        elements: items,
+                        data: dataItems.map(function(data){
+                            return { dataItem: data };
+                        })
+                    };
+                });
             });
         },
 
@@ -1039,6 +1047,7 @@ var __meta__ = {
 
         replace: function(dataItems) {
             this.options.type = "flat";
+            this._angularItems("cleanup");
             this.element.empty();
             this._style();
             return this.insertAt(dataItems, 0);
@@ -1046,17 +1055,22 @@ var __meta__ = {
 
         replaceGrouped: function(groups) {
             this.options.type = "group";
+            this._angularItems("cleanup");
             this.element.empty();
             var items = $(kendo.render(this.groupTemplate, groups));
 
             this._enhanceItems(items.children("ul").children("li"));
             this.element.append(items);
             mobile.init(items);
+            this._angularItems("compile");
             this._style();
         },
 
         remove: function(dataItems) {
             var items = this.findByDataItem(dataItems);
+            this.angular("cleanup", function(){
+                return { elements: items };
+            });
             kendo.destroy(items);
             items.remove();
         },

@@ -256,6 +256,7 @@ var __meta__ = {
                 keepState = true,
                 hasChild, custom;
 
+            that._angularItems("cleanup");
             that.trigger("dataBinding");
 
             ul.innerHTML = kendo.render(that.template, data);
@@ -317,6 +318,7 @@ var __meta__ = {
 
             that._hideBusy();
             that._bound = true;
+            that._angularItems("compile");
             that.trigger("dataBound");
         },
 

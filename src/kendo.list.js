@@ -42,7 +42,7 @@ var __meta__ = {
             "DropDownList": "ComboBox"
         };
 
-    var List = Widget.extend({
+    var List = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this,
                 ns = that.ns,
@@ -236,8 +236,11 @@ var __meta__ = {
         dataItem: function(index) {
             var that = this;
 
+
             if (index === undefined) {
                 index = that.selectedIndex;
+            } else if (typeof index !== "number") {
+                index = $(that.items()).index(index);
             }
 
             return that._data()[index];
@@ -557,7 +560,7 @@ var __meta__ = {
             }
         },
 
-       _triggerCascade: function(userTriggered) {
+        _triggerCascade: function(userTriggered) {
             var that = this,
                 value = that.value();
 
@@ -566,7 +569,7 @@ var __meta__ = {
             }
         },
 
-       _unbindDataSource: function() {
+        _unbindDataSource: function() {
             var that = this;
 
             that.dataSource.unbind(CHANGE, that._refreshHandler)

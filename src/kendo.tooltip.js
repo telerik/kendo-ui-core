@@ -222,10 +222,14 @@ var __meta__ = {
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
                 contentOptions = contentOptions({ sender: this, target: target });
-                that.content.html(contentOptions || "");
+                element.html(contentOptions || "");
             } else {
-                that.content.html(contentOptions);
+                element.html(contentOptions);
             }
+
+            that.angular("compile", function(){
+                return { elements: element };
+            });
         },
 
         _ajaxRequest: function(options) {

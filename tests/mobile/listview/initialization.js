@@ -241,9 +241,9 @@
             <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
         </ul>');
 
-    var listView = new ListView(dom, { type: "group" });
+        var listView = new ListView(dom, { type: "group" });
 
-    equal(listView.items()[0], dom.find("ul > li")[0]);
+        equal(listView.items()[0], dom.find("ul > li")[0]);
     });
 
     test("ListView renders button at the bottom of the widget", 4, function() {

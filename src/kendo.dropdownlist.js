@@ -190,7 +190,10 @@ var __meta__ = {
                 that.current(null);
             }
 
+            this._angularItems("cleanup");
             that.ul[0].innerHTML = kendo.render(that.template, data);
+            this._angularItems("compile");
+
             that._height(length);
 
             if (that.popup.visible()) {
@@ -728,7 +731,15 @@ var __meta__ = {
                     }
                 }
 
+                var getElements = function(){
+                    return {
+                        elements: span.get(),
+                        data: [ { dataItem: dataItem } ]
+                    };
+                };
+                this.angular("cleanup", getElements);
                 span.html(this.valueTemplate(dataItem));
+                this.angular("compile", getElements);
             } else {
                 return span.text();
             }

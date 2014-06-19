@@ -18,7 +18,7 @@ var __meta__ = {
         Transition = kendo.effects.Transition,
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,
-        Widget = ui.Widget,
+        Widget = ui.DataBoundWidget,
         DataSource = kendo.data.DataSource,
         Buffer = kendo.data.Buffer,
         BatchBuffer = kendo.data.BatchBuffer,
@@ -39,6 +39,7 @@ var __meta__ = {
         VIRTUAL_PAGE_CLASS = "km-virtual-page",
         FUNCTION = "function",
         ITEM_CHANGE = "itemChange",
+        CLEANUP = "cleanup",
 
         VIRTUAL_PAGE_COUNT = 3,
         LEFT_PAGE = -1,
@@ -611,6 +612,8 @@ var __meta__ = {
                 }
             }
 
+            this.trigger(CLEANUP, { item: page.element });
+
             if(view) {
                 page.content(template(view));
             } else {
@@ -700,6 +703,16 @@ var __meta__ = {
 
             that._content.bind(ITEM_CHANGE, function(e) {
                 that.trigger(ITEM_CHANGE, e);
+
+                that.angular("compile", function() {
+                    return { elements: e.item, data: [ { dataItem: e.data } ] };
+                });
+            });
+
+            that._content.bind(CLEANUP, function(e) {
+                that.angular("cleanup", function() {
+                    return { elements: e.item };
+                });
             });
 
             that.setDataSource(options.dataSource);
@@ -762,6 +775,16 @@ var __meta__ = {
            this.element.children().first().html(html);
            this._content._getPages();
            this.pane.refresh();
+        },
+
+        value: function(item) {
+            var dataSource = this.dataSource;
+
+            if (item) {
+                this.scrollTo(dataSource.indexOf(item), true);
+            } else {
+                return dataSource.at(this.page);
+            }
         },
 
         scrollTo: function(page, instant) {
