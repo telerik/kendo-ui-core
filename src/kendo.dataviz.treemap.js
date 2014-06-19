@@ -30,6 +30,8 @@ var __meta__ = {
         DATA_BOUND = "dataBound",
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
+        MOUSEOVER_NS = "mouseover" + NS,
+        MOUSELEAVE_NS = "mouseleave" + NS,
         UNDEFINED = "undefined";
 
     var TreeMap = Widget.extend({
@@ -50,6 +52,8 @@ var __meta__ = {
 
             this._initDataSource();
 
+            this._attachEvents();
+
             kendo.notify(this, dataviz.ui);
         },
 
@@ -62,6 +66,12 @@ var __meta__ = {
         },
 
         events: [DATA_BOUND, "itemCreated"],
+
+        _attachEvents: function() {
+            this.element
+                .on(MOUSEOVER_NS, proxy(this._mouseover, this))
+                .on(MOUSELEAVE_NS, proxy(this._mouseleave, this));
+        },
 
         _initDataSource: function() {
             var that = this,
@@ -179,6 +189,26 @@ var __meta__ = {
 
         findByUid: function(uid) {
             return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "=" + uid + "]");
+        },
+
+        _mouseover: function(e) {
+            var target = $(e.target);
+            if (target.hasClass("k-leaf")) {
+                this._removeActiveState();
+                target
+                    .removeClass("k-state-active")
+                    .addClass("k-state-active");
+            }
+        },
+
+        _removeActiveState: function() {
+            this.element
+                .find(".k-state-active")
+                .removeClass("k-state-active");
+        },
+
+        _mouseleave: function() {
+            this._removeActiveState();
         }
     });
 
