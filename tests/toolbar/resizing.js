@@ -14,15 +14,21 @@
             }
         }
     });
+    
+
+
 
     test("buttons with overflow: auto are hidden upon initialization if there is not enough space", 4, function() {
-        container.width(140);
+        container.width(120);
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foooooo" },
-                { type: "button", id: "bar", text: "baaaaar" }
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" }
             ]
         }).data("kendoToolBar");
+
+        container.find(".k-overflow-anchor").width(28);
+        container.find(".k-button:not(.k-overflow-anchor)").width(68);
 
         var toolbarButtons = container.find("#foo, #bar");
         ok(toolbarButtons.eq(0).is(":visible"), "First button is visible");
