@@ -7,16 +7,24 @@
             </div>
             <div id="window">
                 <div id="toolbar"></div>
+                <div id="content">
+                    <div class="demo-section k-header">
+                        <ul>
+                            <li><label>To:</label> <input type="text" class="k-textbox" id="to"/></li>
+                            <li><label>Title:</label> <input type="text" class="k-textbox" id="title"/></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <script>
                 $(document).ready(function() {
                     $("#window").kendoWindow({
                         resizable: true,
-                        width: 920,
-                        height: 120,
-                        minWidth: 400,
+                        width: 820,
+                        height: 250,
+                        minWidth: 410,
                         maxWidth: 1200,
-                        title: "Toolbar - resizing",
+                        title: "Message",
                         close: function() {
                             $("#undo").show();
                         }
@@ -29,60 +37,75 @@
 
                     $("#toolbar").kendoToolBar({
                         items: [
-                            { type: "button", text: "Send", primary: true },
+                            {
+                                template: "<img src='../content/web/toolbar/user.png' class='user-image' />",
+                                overflow: "never"
+                            },
+                            { type: "button", text: "Send", primary: true, overflow: "never" },
+                            { type: "button", text: "Discard", overflow: "never" },
+                            { type: "separator" },
                             {
                                 type: "splitButton",
+                                imageUrl: "../content/web/toolbar/save.png",
                                 text: "Save",
                                 items: [
-                                    { text: "Save as" },
-                                    { text: "Upload to drive" }
+                                    { imageUrl: "../content/web/toolbar/save.png", text: "Save as" },
+                                    { imageUrl: "../content/web/toolbar/upload.png", text: "Upload to drive" }
                                 ]
                             },
-                            { type: "button", text: "Toggle Button", toggable: true },
+                            {
+                                type: "splitButton",
+                                imageUrl: "../content/web/toolbar/reply.png",
+                                text: "Reply",
+                                items: [
+                                    { imageUrl: "../content/web/toolbar/save.png",  text: "Reply All" },
+                                    { imageUrl: "../content/web/toolbar/forward.png", text: "Forward" },
+                                    { imageUrl: "../content/web/toolbar/reply.png", text: "Reply & Delete" }
+                                ]
+                            },
+                            { type: "separator" },
 
                             {
-                                template: "<input id='dropdown' style='width: 150px;' />",
+                                template: "<span><label>Contacts:</label><input id='contacts' style='width: 150px;' /></span>",
                                 overflow: "never"
                             },
                             {
-                                type: "buttonGroup",
-                                items: [
-                                    { spriteCssClass: "k-tool-icon k-justifyLeft", text: "Left", toggable: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyCenter", text: "Middle", toggable: true },
-                                    { spriteCssClass: "k-tool-icon k-justifyRight", text: "Right", toggable: true }
-                                ]
+                                template: "<div><label>Labels:</label><input id='labels' style='width: 150px;' /></div>",
+                                overflowTemplate: "<span></span>"
                             },
+                            { type: "separator" },
                             {
                                 type: "buttonGroup",
                                 items: [
-                                    { text: "Radio 1", toggable: true, group: "radio" },
-                                    { text: "Radio 2", toggable: true, group: "radio" },
-                                    { text: "Radio 3", toggable: true, group: "radio" }
+                                    { imageUrl: "../content/web/toolbar/done.png", text: "Done", toggable: true, group: "category" },
+                                    { imageUrl: "../content/web/toolbar/todo.png", text: "To Do", toggable: true, group: "category" },
+                                    { imageUrl: "../content/web/toolbar/important.png", text: "Important", toggable: true, group: "category" }
                                 ]
-                            }
+                            },
                         ]
                     });
 
-                    $("#dropdown").kendoDropDownList({
-                        optionLabel: "Drop Down",
+                    $("#contacts").kendoDropDownList({
+                        optionLabel: "Ann Devon",
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [
-                            { text: "Option 1", value: 1 },
-                            { text: "Option 2", value: 2 },
-                            { text: "Option 3", value: 3 },
-                            { text: "Option 4", value: 4 }
+                            { text: "Ana Trujillo", value: 1 },
+                            { text: "Antonio Moreno", value: 2 },
+                            { text: "Christina Berglund", value: 3 },
+                            { text: "Felipe Izquierdo", value: 4 }
                         ]
                     });
 
-                    $("#combo").kendoComboBox({
+                    $("#labels").kendoDropDownList({
+                        optionLabel: "Forums",
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [
-                            { text: "Option 1", value: 1 },
-                            { text: "Option 2", value: 2 },
-                            { text: "Option 3", value: 3 },
-                            { text: "Option 4", value: 4 }
+                            { text: "Follow up", value: 1 },
+                            { text: "Misc", value: 2 },
+                            { text: "Priority", value: 3 },
+                            { text: "Deleted Messages", value: 4 }
                         ]
                     });
 
@@ -99,11 +122,29 @@
                 #toolbar {
                     border-width: 0 0 1px;
                 }
+                .user-image {
+                    margin: 0 .5em;
+                }
                 #example {
-                    height: 350px;
+                    height: 500px;
                 }
                 #example .box p {
                     padding-bottom: 5px;
+                }
+                #content .demo-section {
+                    margin: 0;
+                    padding: 10px;
+                    border-width: 0 0 1px 0;
+                }
+                #content .demo-section label {
+                    display: inline-block;
+                    width: 40px;
+                    text-align: right;
+                    line-height: 2.5em;
+                    vertical-align: middle;
+                }
+                #content .demo-section input {
+                    width: 80%;
                 }
             </style>
 
