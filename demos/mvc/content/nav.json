@@ -4294,21 +4294,6 @@
           "!jsp",
           "!php"
         ]
-      },
-{
-        "text": "AngularJS",
-        "url": "upload/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Upload"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Upload"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
       }
     ],
     "category": "Editors"
