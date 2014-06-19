@@ -511,14 +511,14 @@
         click(overflowAnchor);
     });
 
-    test("clicking the overflow anchor fires expand event", 1, function() {
+    test("clicking the overflow anchor fires overflowOpen event", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", text: "foo" },
                 { type: "button", text: "always", overflow: "always" }
             ],
-            expand: function() {
-                ok(true, "Expand event is fired");
+            overflowOpen: function() {
+                ok(true, "overflowOpen event is fired");
             }
         }).data("kendoToolBar");
 
@@ -527,13 +527,13 @@
         click(overflowAnchor);
     });
 
-    test("expand event can be prevented", 1, function() {
+    test("overflowOpen event can be prevented", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", text: "foo" },
                 { type: "button", text: "always", overflow: "always" }
             ],
-            expand: function(e) {
+            overflowOpen: function(e) {
                 e.preventDefault();
             }
         }).data("kendoToolBar");
@@ -545,14 +545,14 @@
         ok(toolbar.popup.element.is(":hidden"));
     });
 
-    test("closing the overflow popup container fires collapse event", 1, function() {
+    test("closing the overflow popup container fires overflowClose event", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", text: "foo" },
                 { type: "button", text: "always", overflow: "always" }
             ],
-            collapse: function() {
-                ok(true, "Collapse event is fired");
+            overflowClose: function() {
+                ok(true, "overflowClose event is fired");
             }
         }).data("kendoToolBar");
 
@@ -563,13 +563,13 @@
         click(overflowAnchor);
     });
 
-    test("collapse event can be prevented", 1, function() {
+    test("overflowClose event can be prevented", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
                 { type: "button", text: "foo" },
                 { type: "button", text: "always", overflow: "always" }
             ],
-            collapse: function(e) {
+            overflowClose: function(e) {
                 e.preventDefault();
             }
         }).data("kendoToolBar");
