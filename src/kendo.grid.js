@@ -1448,7 +1448,7 @@ var __meta__ = {
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             if (that._hasFilterCelling()) {
-                reorder(that.wrapper.find(".k-filtercell th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
+                reorder(that.wrapper.find(".k-filterrow th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
             if (footer && footer.length) {
@@ -3679,7 +3679,7 @@ var __meta__ = {
             var hasFilterCelling = this._hasFilterCelling();
             if (hasFilterCelling) {
                 var filterCellOptions = this.options.filterable.row;
-                var rowheader = this.thead.find(".k-filtercell");
+                var rowheader = this.thead.find(".k-filterrow");
                 var columns = this.columns;
                 var dsOptions = filterCellOptions.dataSource || this.dataSource.options;
                 for (var i = 0; i < columns.length; i++) {
@@ -4298,7 +4298,7 @@ var __meta__ = {
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
-            filtercellCells = that.thead.find(".k-filtercell").find("th");
+            filtercellCells = that.thead.find(".k-filterrow").find("th");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
@@ -4314,18 +4314,18 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterCelling ? '<tr class="k-filtercell" />' : '') +
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterCelling ? '<tr class="k-filterrow" />' : '') +
                     '</thead></table></div>';
 
                 table = $(html);
 
                 colgroup = table.find("colgroup");
                 tr = table.find("thead tr:first");
-                trFilter = table.find(".k-filtercell");
+                trFilter = table.find(".k-filterrow");
 
                 colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
                 tr.append(that.thead.find("tr:first .k-group-cell").add(cells));
-                trFilter.append(that.thead.find(".k-filtercell .k-group-cell").add(filterCells));
+                trFilter.append(that.thead.find(".k-filterrow .k-group-cell").add(filterCells));
 
                 this.lockedHeader = table.prependTo(container);
                 this._syncLockedHeaderHeight();
@@ -4377,13 +4377,13 @@ var __meta__ = {
             }
 
             if (hasFilterCelling) {
-                var filtercell = $("<tr/>");
-                filtercell.addClass("k-filtercell");
+                var filterRow = $("<tr/>");
+                filterRow.addClass("k-filterrow");
                 if (hasDetails) {
-                    filtercell.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
+                    filterRow.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
                 }
 
-                thead.append(filtercell);
+                thead.append(filterRow);
             }
 
             if (!tr.children().length) {
