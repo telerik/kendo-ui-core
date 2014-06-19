@@ -2190,23 +2190,22 @@ var __meta__ = {
             var tuples = columns.tuples || [];
             var rows = axes.rows || {};
 
-            var data = dataSource.view();
-
-            var rowsTree = that._rowBuilder.build(rows.tuples || []);
-
             that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
-            that.rowsHeaderTree.render(rowsTree);
-
-            var firstTuple;
-            var measures = 1;
+            that.rowsHeaderTree.render(that._rowBuilder.build(rows.tuples || []));
 
             var columnAxis = {
                 measures: dataSource._columnMeasures().length || 1,
-                indexes: that._columnBuilder._columnIndexes,
+                indexes: that._columnBuilder._indexes,
                 metadata: that._columnBuilder.metadata
             };
 
-            that.contentTree.render(that._contentBuilder.build(data, columnAxis, rowsTree));
+            var rowAxis = {
+                measures: dataSource._rowMeasures().length || 1,
+                indexes: that._rowBuilder._indexes,
+                metadata: that._rowBuilder.metadata
+            };
+
+            that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
 
             that._resize();
         }
@@ -2218,8 +2217,6 @@ var __meta__ = {
     var ColumnBuilder = Class.extend({
         init: function(options) {
             this._state(null);
-            this.expandState = {};
-
             this.metadata = {};
         },
 
@@ -2233,7 +2230,7 @@ var __meta__ = {
             var root = tuples[0];
 
             this._state(root);
-            this._columnIndexes = [];
+            this._indexes = [];
 
             if (root) {
                 this._buildRows(root, 0);
@@ -2446,6 +2443,7 @@ var __meta__ = {
             var childrenLength;
 
             var colspan;
+            var metadata;
 
             if (parentMember) {
                 memberIdx = this._memberIdx(members, parentMember); //we do not need this func
@@ -2464,10 +2462,9 @@ var __meta__ = {
             childrenLength = children.length;
 
             path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            metadata = this.metadata[path];
 
-            this._columnIndexes.push(path);
-
-            var metadata = this.metadata[path];
+            this._indexes.push(path);
 
             if (!metadata) {
                 metadata = {
@@ -2477,7 +2474,7 @@ var __meta__ = {
                     members: 0,
                     measures: 1,
                     levelNum: Number(member.levelNum),
-                    parentMember: !parentMember && memberIdx !== 0
+                    parentMember: memberIdx !== 0
                 };
 
                 this.metadata[path] = metadata;
@@ -2572,7 +2569,7 @@ var __meta__ = {
     var RowBuilder = Class.extend({
         init: function(options) {
             this._state(null);
-            this.expandState = {};
+            this.metadata = {};
         },
 
         build: function(tuples) {
@@ -2585,6 +2582,7 @@ var __meta__ = {
             var root = tuples[0];
 
             this._state(root);
+            this._indexes = [];
 
             if (root) {
                 this._buildRows(root, 0);
@@ -2683,6 +2681,7 @@ var __meta__ = {
             var childRow;
             var allRow;
 
+            var metadata;
             var expandIconAttr;
             var cellChildren = [];
             var allCell;
@@ -2709,11 +2708,29 @@ var __meta__ = {
 
             map[tuplePath + member.name] = row;
 
-            if (member.hasChildren) {
-                path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            metadata = this.metadata[path];
 
-                if (this.expandState[path] === false) {
+            this._indexes.push(path);
+
+            if (!metadata) {
+                metadata = {
+                    maxChildren: 0,
+                    children: 0,
+                    maxMembers: 0,
+                    members: 0,
+                    measures: 1,
+                    levelNum: levelNum - 1,
+                    parentMember: memberIdx !== 0
+                };
+
+                this.metadata[path] = metadata;
+            }
+
+            if (member.hasChildren) {
+                if (metadata.expanded === false) {
                     childrenLength = 0;
+                    metadata.children = 0;
                 }
 
                 expandIconAttr = { className: "k-icon " + (childrenLength ? STATE_EXPANDED : STATE_COLLAPSED) };
@@ -2748,6 +2765,8 @@ var __meta__ = {
                     cell.attr.rowspan = row.rowspan;
                 }
 
+                metadata.children = row.rowspan;
+
                 allCell = element("td", null, [this._text(member)]);
                 allCell.levelNum = levelNum;
 
@@ -2763,11 +2782,23 @@ var __meta__ = {
 
                 row.rowspan += allRow.rowspan;
 
+                metadata.members = allRow.rowspan;
+
             } else if (nextMember) {
                 row.hasChild = false;
                 this._buildRows(tuple, memberIdx + 1);
 
                 (allCell || cell).attr.rowspan = row.rowspan;
+
+                metadata.members = row.rowspan;
+            }
+
+            if (metadata.maxChildren < metadata.children) {
+                metadata.maxChildren = metadata.children;
+            }
+
+            if (metadata.maxMembers < metadata.members) {
+                metadata.maxMembers = metadata.members;
             }
 
             return row;
@@ -2785,9 +2816,9 @@ var __meta__ = {
             this.expandState = {};
         },
 
-        build: function(data, columnAxis, rows) {
+        build: function(data, columnAxis, rowAxis) {
             this.columnAxis = columnAxis;
-            this.rows = rows;
+            this.rowAxis = rowAxis;
 
             return [
                 element("table", null, [this._thead(data)])
@@ -2802,12 +2833,15 @@ var __meta__ = {
 
             this.rowIdx = 0;
             this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : 1; //measure count should be used here instead of 1
+
             if (!this.rowLength) {
                 this.rowLength = 1;
             }
 
             if (dataItem) {
-                this.columnIndexes = this._columnIndexes();
+                this.columnIndexes = this._indexes(this.columnAxis);
+                this.rowIndexes = this._indexes(this.rowAxis);
+
                 this._buildRows(data);
             } else {
                 this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
@@ -2816,11 +2850,11 @@ var __meta__ = {
             return element("thead", null, this.rows);
         },
 
-        _columnIndexes: function() {
+        _indexes: function(axisInfo) {
             var result = [];
-            var indexes = this.columnAxis.indexes;
-            var measures = this.columnAxis.measures;
-            var metadata = this.columnAxis.metadata;
+            var indexes = axisInfo.indexes;
+            var measures = axisInfo.measures;
+            var metadata = axisInfo.metadata;
 
             var current;
             var dataIdx = 0;
@@ -2832,6 +2866,14 @@ var __meta__ = {
 
             var children;
             var skipChildren;
+
+            if (!length) { //TODO: test when there is no axisInfo
+                for (measureIdx = 0; measureIdx < measures; measureIdx++) {
+                    result[measureIdx] = measureIdx;
+                }
+
+                return result;
+            }
 
             for (; idx < length; idx++) {
                 current = metadata[indexes[idx]];
@@ -2868,15 +2910,21 @@ var __meta__ = {
         },
 
         _buildRows: function(data) {
-            var row;
-            var rowData = data.slice(this.rowIdx, this.rowLength);
+            var cells = [];
+            var rowIndexes = this.rowIndexes;
+            var rowLength = this.rowLength;
+            var length = rowIndexes.length;
+            var idx = 0;
 
-            row = this._buildRow(rowData);
+            var currentIdx;
 
-            this.rows.push(row);
+            for (; idx < length; idx++) {
+                currentIdx = rowIndexes[idx];
+                this.rows.push(this._buildRow(data, currentIdx * rowLength));
+            }
         },
 
-        _buildRow: function(data) {
+        _buildRow: function(data, startIdx) {
             var cells = [];
             var columnIndexes = this.columnIndexes;
             var length = columnIndexes.length;
@@ -2886,7 +2934,7 @@ var __meta__ = {
 
             for (; idx < length; idx++) {
                 currentIdx = columnIndexes[idx];
-                cells.push(element("td", null, [ text(data[currentIdx].value) ]));
+                cells.push(element("td", null, [ text(data[startIdx + currentIdx].value) ]));
             }
 
             return element("tr", null, cells);
