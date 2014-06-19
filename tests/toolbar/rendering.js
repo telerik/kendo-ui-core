@@ -132,6 +132,33 @@
         ok(kendo.isFunction(overflowButton.data("click")), "Click event handler is saved in the data of the overflowButton element");
     });
 
+    test("url sets a href to the button element if it is an anchor", function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", url: "http://www.kendoui.com" }
+            ]
+        });
+
+        var button = container.find("#foo");
+
+        ok(button.attr("href") == "http://www.kendoui.com");
+    });
+
+    test("align sets a class to the button element to define its alignment", function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", align: "left" },
+                { type: "button", id: "faa", align: "right" }
+            ]
+        });
+
+        var button1 = container.find("#foo"),
+            button2 = container.find("#faa");
+
+        ok(button1.hasClass("k-align-left"));
+        ok(button2.hasClass("k-align-right"));
+    });
+
     test("spriteCssClass prepends a span element with corresponding class(es) to the button element", 3, function() {
         container.kendoToolBar({
             items: [
@@ -181,18 +208,6 @@
 
         equal(icon.length, 1);
         ok(icon.hasClass("k-i-foo"));
-    });
-
-    test("url sets a href to the button element if it is an anchor", function() {
-        container.kendoToolBar({
-            items: [
-                { type: "button", id: "foo", url: "http://www.kendoui.com" }
-            ]
-        });
-
-        var button = container.find("#foo");
-
-        ok(button.attr("href") == "http://www.kendoui.com");
     });
 
     test("icon adds a k-button-icon class to button with no text", function() {

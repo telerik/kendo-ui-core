@@ -84,6 +84,10 @@ var __meta__ = {
                     var element = $('<div class="' + BUTTON_GROUP + '"></div>');
                     components.buttonGroup.base(options, components.button.toolbar, element);
 
+                    if (options.align) {
+                        element.addClass("k-align-" + options.align);
+                    }
+
                     if (options.id) {
                         element.attr("id", options.id);
                     }
@@ -120,6 +124,10 @@ var __meta__ = {
                     for (var i = 0; i < items.length; i++) {
                         item = components.button.toolbar($.extend({mobile: options.mobile, click: options.click}, items[i]));
                         item.wrap("<li></li>").parent().appendTo(popupElement);
+                    }
+
+                    if (options.align) {
+                        element.addClass("k-align-" + options.align);
                     }
 
                     if (!options.id) {
@@ -234,6 +242,10 @@ var __meta__ = {
 
             if (options.primary) {
                 element.addClass(PRIMARY);
+            }
+
+            if (options.align) {
+                element.addClass("k-align-" + options.align);
             }
 
             if (options.id) {
@@ -607,9 +619,15 @@ var __meta__ = {
 
             _toggleOverflowAnchor: function() {
                 if (this.popup.element.children(":not(." + OVERFLOW_HIDDEN + ")").length > 0) {
-                    this.overflowAnchor.css("visibility", "visible");
+                    this.overflowAnchor.css({
+                        visibility: "visible",
+                        width: ""
+                    });
                 } else {
-                    this.overflowAnchor.css("visibility", "hidden");
+                    this.overflowAnchor.css({
+                        visibility: "hidden",
+                        width: "1px"
+                    });
                 }
             },
 
