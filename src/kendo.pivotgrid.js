@@ -586,13 +586,13 @@ var __meta__ = {
         _mergeRowData: function(newData, rowIndex, rowsLength, columnsLength) {
             var data = this.data().toJSON();
             var idx, dataIndex, toAdd;
-            var measures = Math.max(this._rowMeasures().length, 1);
+            var rowMeasures = Math.max(this._rowMeasures().length, 1);
 
-            columnsLength = Math.max(columnsLength, 1) * measures;
+            columnsLength = Math.max(columnsLength, 1);
             if (data.length > 0) {
                 //if there is already data, drop the first new data item
-                rowsLength -= measures;
-                newData.splice(0, columnsLength);
+                rowsLength -= rowMeasures;
+                newData.splice(0, columnsLength * rowMeasures);
             }
 
             for (idx = 0; idx < rowsLength; idx++) {
@@ -813,10 +813,12 @@ var __meta__ = {
         var columnIdx, rowIdx, dataIdx;
         var columnsLength = sourceTuples.length;
         var targetColumnsLength = membersCount(targetTuples, measures);
+        var measuresLength = measures.length || 1;
 
         for (rowIdx = 0; rowIdx < rowsLength; rowIdx++) {
             for (columnIdx = 0; columnIdx < columnsLength; columnIdx++) {
-                dataIdx = tupleIndex(sourceTuples[columnIdx], targetTuples);
+                dataIdx = tupleIndex(sourceTuples[columnIdx], targetTuples) * measuresLength;
+                dataIdx += columnIdx % measuresLength;
 
                 data[rowIdx * columnsLength + columnIdx].ordinal = rowIdx * targetColumnsLength + dataIdx;
             }
@@ -961,6 +963,9 @@ var __meta__ = {
         second = second.members;
 
         for (idx = 0, length = first.length; idx < length; idx++) {
+            if (first[idx].measure || second[idx].measure) {
+                continue;
+            }
             equal = equal && (first[idx].name === second[idx].name);
         }
 
