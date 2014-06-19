@@ -259,7 +259,7 @@
     test("click on splitButton triggers click event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -277,7 +277,7 @@
     test("click on arrow button opens the popup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -295,7 +295,7 @@
     test("second click at the arrow button closes the popup", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -315,7 +315,7 @@
     test("click on the splitButton does NOT open the popup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -332,7 +332,7 @@
     test("click on the arrow button does NOT fire the click event", 0, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -350,7 +350,7 @@
     test("opening the splitButton popup triggers open event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -368,7 +368,7 @@
     test("open event can be prevented", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -389,7 +389,7 @@
     test("closing the splitButton popup triggers close event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
@@ -408,7 +408,7 @@
     test("close event can be prevented", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "foo", text: "foo", items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
                     { id: "option1", text: "option1" },
                     { id: "option2", text: "option2" }
                 ] }
