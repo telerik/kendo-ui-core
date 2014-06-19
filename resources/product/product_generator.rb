@@ -300,11 +300,23 @@ def fill_forum_fields(bot, product_name, tname)
 
     if tname == "Kendo UI"
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('#{product_name} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('#{product_name} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
+       sleep(1)
     elsif product_name.index("Mobile") == nil
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI #{product_name} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('Kendo UI #{product_name} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
+       sleep(1)
     else
        product_name_mod = product_name.sub " (Mobile)", ""
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
+       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
+       sleep(1)
     end
 
 

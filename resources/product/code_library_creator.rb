@@ -11,10 +11,12 @@ class TelerikCodeLibraryBot
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.get(SITE_URL + "/sitefinity")
 
-        driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
-        driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
-        click_and_wait("Log in with Telerik", "Legacy Dashboard")
-
+        #driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
+        #driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        #click_and_wait("Log in with Telerik", "Legacy Dashboard")
+        driver.find_element(:xpath, "//input[contains(@id,'username')]").send_keys SITE_LOGIN
+        driver.find_element(:xpath, "//input[contains(@id,'password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        click_element(find("[id='LoginButton']"))
     end
 
     def find(selector)
@@ -91,19 +93,23 @@ def create_cl_thread(bot, product_name, tname)
       #bot.wait_for_title("Forums")
 
       set_cl_fields(bot, product_name)
-
+      
+      p "saving>>"
       bot.execute_script("$('[id*=\"saveButton\"]').click()")
       sleep(3)
     end
 end
 def set_cl_fields(bot, product_name)
       p "setting code library fields>>#{product_name}"
-      bot.execute_script("$('[id*=\"titleFieldControl\"]').val('#{product_name}')")
       sleep(3)
-      bot.execute_script("$('[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
+      #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys '#{product_name}' 
+      #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
+      bot.execute_script("$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
       sleep(3)
-      bot.execute_script("$('[id*=\"pageUrl\"]').text('Code Library')")
-      sleep(3)
+      #bot.execute_script("$('[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
+      #sleep(3)
+      #bot.execute_script("$('[id*=\"pageUrl\"]').text('Code Library')")
+      #sleep(3)
 
       if product_name.index("Mobile") == nil
         bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
@@ -117,6 +123,7 @@ def set_cl_fields(bot, product_name)
       sleep(3)
       bot.execute_script("$('[id*=\"radioButtons\"]').click()")
       sleep(3)
-      bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
-      sleep(3)
+      p "fields settings done>>"
+      #bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
+      #sleep(3)
 end
