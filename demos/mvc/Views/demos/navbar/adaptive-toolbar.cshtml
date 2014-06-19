@@ -10,7 +10,7 @@
                             url: "#:back"
                         },
                         {
-                            type: "splitButton", icon: "refresh", id: "splitButton", name: "splitButton", text: "Split Button", items: [
+                            type: "splitButton", id: "viewName", name: "viewName", text: "ToolBar as ActionBar", items: [
                                 { id: "option1", text: "Option 1" },
                                 { id: "option2", text: "Option 2" },
                                 { id: "option3", text: "Option 3" },
@@ -46,11 +46,20 @@
 </div>
 
 <style scoped>
-    #back .km-icon {
+    #back .km-icon
+    {
         font-size: 1em;
     }
 
-    #splitButton {
-        float: left; /* temporary, until align works */
+    #back
+    {
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    #viewName
+    {
+        margin-left: 0;
+        padding-left: 0;
     }
 </style>
