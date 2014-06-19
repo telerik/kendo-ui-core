@@ -546,6 +546,10 @@ var __meta__ = {
                 }
             },
 
+            getSelectedFromGroup: function(groupName) {
+                return this.element.find("." + TOGGLE_BUTTON + "[data-group='" + groupName + "']").filter("." + STATE_ACTIVE);
+            },
+
             _attributes: function(element, options) {
                 element.attr(kendo.attr("uid"), options.uid);
                 element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);
