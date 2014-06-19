@@ -26,7 +26,9 @@
     background: rgba(37, 39, 44, 0.3);
 }
 
-#examples .km-navbar {
+#examples .km-navbar,
+#examples .k-toolbar
+{
     background: #2a2d33;
     color: #fff;
 }
@@ -35,7 +37,9 @@
     color: #fff;
 }
 
-#examples .km-navbar .km-button.km-state-active {
+#examples .km-navbar .km-button.km-state-active,
+#examples .k-toolbar .km-button.km-state-active
+{
     color: #5ce600;
 }
 

@@ -7416,6 +7416,16 @@
         }
       },
       {
+        "text": "ToolBar as ActionBar",
+        "url": "navbar/adaptive-toolbar",
+        "title": {
+            "kendo-ui": "Example of using the ToolBar web widget as an ActionBar"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how the ToolBar web widget when used in a mobile app transforms in an ActionBar widget (Android inspired scenario)."
+        }
+      },
+      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "navbar/adaptive",

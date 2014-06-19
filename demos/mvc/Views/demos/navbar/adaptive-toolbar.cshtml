@@ -1,0 +1,56 @@
+<div data-role="view" id="toolbar-mobile">
+    <header data-role="header">
+        <div data-role="toolbar" data-items='[
+                        {
+                            id: "back",
+                            type: "button",
+                            icon: "arrow-w",
+                            overflow: "never",
+                            align: "left",
+                            url: "#:back"
+                        },
+                        {
+                            type: "splitButton", icon: "refresh", id: "splitButton", name: "splitButton", text: "Split Button", items: [
+                                { id: "option1", text: "Option 1" },
+                                { id: "option2", text: "Option 2" },
+                                { id: "option3", text: "Option 3" },
+                                { id: "option4", text: "Option 4" }
+                            ],
+                            overflow: "never",
+                            align: "left"
+                        },
+
+                        { type: "buttonGroup", id: "btnGroup", items: [
+                            { id: "btn1", showText: "overflow", showIcon: "toolbar", text: "seek-w", icon: "rewind"  },
+                            { id: "btn2", showText: "overflow", showIcon: "toolbar", text: "arrow-w", icon: "pause" },
+                            { id: "btn3", showText: "overflow", showIcon: "toolbar", text: "arrow-w", icon: "play" },
+                            { id: "btn4", showText: "overflow", showIcon: "toolbar", text: "seek-e", icon: "fastforward"  }
+                        ] },
+
+                        { type: "button", id: "iconButton", text: "Folder Add", icon: "refresh" },
+                        { type: "button", id: "primaryBtn", text: "Primary Button", primary: true },
+                        { type: "button", id: "regularBtn", text: "Regular Button" },
+                        { type: "button", id: "disabledBtn", text: "Disabled", enable: false },
+                        { type: "button", id: "toggleBtn", toggle: true, text: "Toggle Button", selected: true },
+
+                        { type: "button", text: "Always", overflow: "always" }
+                    ]'>
+        </div>
+    </header>
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-role="button" data-icon="favorites">Favorites</a>
+            <a data-role="button" data-icon="home">Favorites</a>
+        </div>
+    </footer>
+</div>
+
+<style scoped>
+    #back .km-icon {
+        font-size: 1em;
+    }
+
+    #splitButton {
+        float: left; /* temporary, until align works */
+    }
+</style>
