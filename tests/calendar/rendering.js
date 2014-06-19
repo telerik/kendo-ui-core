@@ -273,7 +273,7 @@ test("month view renders anchor in td with title depending on the options.cultur
     equal(div.find("tbody").find("a").attr("title"), kendo.toString(firstVisibleDay, "D", "bg-BG"));
 });
 
-test("month view renders empty string if date is not in range", function() {
+tzTest("Sofia", "month view renders empty string if date is not in range", function() {
     var today = new Date(2011, 9, 10),
     max = new Date(2011, 9, 19);
 
