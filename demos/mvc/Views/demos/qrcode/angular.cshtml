@@ -1,0 +1,26 @@
+<div id="example" ng-app="KendoDemos">
+    <div ng-controller="MyCtrl">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>QR code</h4>
+            <span kendo-qrcode
+                  k-error-correction="'M'"
+                  ng-model="qrcode"
+                  style="width: 180px"></span>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 500px;">
+            <h4>Value</h4>
+            <input ng-model="qrcode">
+        </div>
+    </div>
+    </div>
+<script>
+    angular.module("KendoDemos", [ "kendo.directives" ]);
+
+    function MyCtrl($scope) {
+        $scope.qrcode = "http://www.example.com";
+    }
+</script>
+</div>

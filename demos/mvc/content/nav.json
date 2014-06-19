@@ -7111,6 +7111,21 @@
         ]
       },
       {
+        "text": "AngularJS",
+        "url": "radial-gauge/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Radial Gauge"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directives support in Kendo UI Radial Gauge"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "Car Dashboard",
         "url": "radial-gauge/car-dashboard",
         "title": {
@@ -7190,6 +7205,21 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "barcode/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Barcode"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI Barcode"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Data Visualization"
@@ -7250,6 +7280,21 @@
         },
         "meta": {
             "kendo-ui": "Value MVVM binding support in Kendo UI QR code"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "qrcode/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI QR code"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI QR code"
         },
         "packages": [
           "!mvc",
