@@ -34,9 +34,8 @@ module.exports = function(grunt) {
 
     TESTS.beforeTestFiles.push(jquery);
     TESTS.beforeTestFiles.push('tests/jquery.mockjax.js');
-    TESTS.beforeTestFiles.push('tests/angular.js');
+    TESTS.beforeTestFiles.push('src/angular.js');
     TESTS.beforeTestFiles.push('tests/angular-route.js');
-    TESTS.afterTestFiles.push('src/kendo.angular.js');
 
     if (browserOption) {
         browsers = [ browserOption ];
