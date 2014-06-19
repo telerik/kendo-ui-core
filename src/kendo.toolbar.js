@@ -49,8 +49,8 @@ var __meta__ = {
         TOGGLE = "toggle",
         OPEN = "open",
         CLOSE = "close",
-        EXPAND = "expand",
-        COLLAPSE = "collapse",
+        OVERFLOW_OPEN = "overflowOpen",
+        OVERFLOW_CLOSE = "overflowClose",
 
         OVERFLOW_NEVER = "never",
         OVERFLOW_AUTO = "auto",
@@ -425,8 +425,8 @@ var __meta__ = {
                 TOGGLE,
                 OPEN,
                 CLOSE,
-                EXPAND,
-                COLLAPSE
+                OVERFLOW_OPEN,
+                OVERFLOW_CLOSE
             ],
 
             options: {
@@ -574,12 +574,12 @@ var __meta__ = {
                             that.popup.container.css("max-height", (parseFloat($(".km-content:visible").innerHeight()) - 15) + "px");
                         }
 
-                        if (that.trigger(EXPAND)) {
+                        if (that.trigger(OVERFLOW_OPEN)) {
                             e.preventDefault();
                         }
                     },
                     close: function (e) {
-                        if (that.trigger(COLLAPSE)) {
+                        if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         }
                     }
