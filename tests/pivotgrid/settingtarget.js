@@ -436,7 +436,7 @@
             dataSource: dataSource
         });
 
-        var children = $(div).children().find(".k-group-delete:first").click();
+        var children = $(div).children().find(".k-setting-delete:first").click();
 
         equal(dataSource.columns().length, 1);
         equal(dataSource.columns()[0].name, "bar");

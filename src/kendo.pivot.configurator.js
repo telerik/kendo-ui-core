@@ -15,6 +15,8 @@ var __meta__ = {
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget;
+        SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon k-i-vbars"></span>${name}</p>' +
+                '<div class="k-list-container k-group k-reset"/>');
 
 
     function settingTargetFromNode(node) {
@@ -29,6 +31,8 @@ var __meta__ = {
     var PivotConfigurator = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
+
+            this.element.addClass("k-widget k-fieldselector k-alt k-edit-form-container");
 
             this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
 
@@ -90,9 +94,17 @@ var __meta__ = {
         },
 
         _layout: function() {
+            this.form = $('<div class="k-columns k-state-default k-floatwrap"/>').appendTo(this.element);
+            this._fields();
+            this._targets();
+        },
+
+        _fields: function() {
+            var container = $('<div class="k-state-default"><p class="k-reset"><span class="k-icon k-i-group"></span>Fields</p></div>').appendTo(this.form);
+
             var that = this;
 
-            this.treeView = $("<div/>").appendTo(this.element)
+            this.treeView = $("<div/>").appendTo(container)
                 .kendoTreeView({
                     dataTextField: "name",
                     dragAndDrop: true,
@@ -126,27 +138,36 @@ var __meta__ = {
                     }
                  })
                 .data("kendoTreeView");
+        },
 
-            this._targets();
+        _createTarget: function(element, options) {
+            return new kendo.ui.PivotSettingTarget(element, $.extend({
+                dataSource: this.dataSource,
+                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-icon k-si-close k-setting-delete"></span></li>',
+                emptyTemplate: '<li class="k-item k-empty">${data}</li>'
+            }, options));
         },
 
         _targets: function() {
-            var element = this.element;
+            var container = $('<div class="k-state-default"/>').appendTo(this.form);
 
-            var columns = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
-            var rows = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
-            var measures = $('<div class="k-pivot-configurator-settings" />').appendTo(element);
+            var columnsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Columns" })).appendTo(container);
+            var columns = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(columnsContainer.last());
 
-            this.columns = new kendo.ui.PivotSettingTarget(columns, {
-                dataSource: this.dataSource,
+            var rowsContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Rows" })).appendTo(container);
+            var rows = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(rowsContainer.last());
+
+            var measuresContainer = $(SETTING_CONTAINER_TEMPLATE({ name: "Measures" })).appendTo(container);
+            var measures = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(measuresContainer.last());
+
+            this.columns = this._createTarget(columns, {
                 connectWith: rows,
                 messages: {
                     empty: this.options.messages.columns
                 }
             });
 
-            this.rows = new kendo.ui.PivotSettingTarget(rows, {
-                dataSource: this.dataSource,
+            this.rows = this._createTarget(rows, {
                 setting: "rows",
                 connectWith: columns,
                 messages: {
@@ -154,8 +175,7 @@ var __meta__ = {
                 }
             });
 
-            this.measures = new kendo.ui.PivotSettingTarget(measures, {
-                dataSource: this.dataSource,
+            this.measures = this._createTarget(measures, {
                 setting: "measures",
                 messages: {
                     empty: this.options.messages.measures

@@ -1797,9 +1797,9 @@ var __meta__ = {
             this.dataSource.bind("change", this._refreshHandler);
 
             if (!options.template) {
-                this.options.template = "<div class='k-pivotsetting-indicator' data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
+                this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
                     (this.options.enabled ?
-                    '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-group-delete"></span></a>' : "") + '</div>';
+                    '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-setting-delete"></span></a>' : "") + '</div>';
             }
 
             this.template = kendo.template(this.options.template);
@@ -1809,7 +1809,7 @@ var __meta__ = {
 
             var that = this;
 
-            this.element.on("click" + NS, ".k-group-delete", function() {
+            this.element.on("click" + NS, ".k-setting-delete", function() {
                 var name = $(this).closest("[" + kendo.attr("name") + "]").attr(kendo.attr("name"));
                 if (name) {
                     that.remove(name);
