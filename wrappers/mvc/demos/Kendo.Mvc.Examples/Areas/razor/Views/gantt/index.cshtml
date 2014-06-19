@@ -1,4 +1,4 @@
-@(Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel>()
+@(Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
     .Name("gantt")
     //.Columns(columns =>
     //{
@@ -30,9 +30,12 @@
     .DependenciesDataSource(d => d
         .Model(m =>
         {
-            m.Id(f => f.OrderID);
+            m.Id(f => f.DependencyID);
+            m.PredecessorId(f => f.PredecessorID);
+            m.SuccessorId(f => f.SuccessorID);
+            m.Type(f => f.Type);
         })
-        .Read("ReadTasks", "Gantt")
+        .Read("ReadDependencies", "Gantt")
         .Create("CreateDependency", "Gantt")
         .Destroy("DestroyDependency", "Gantt")
         .Update("UpdateDependency", "Gantt")

@@ -7,14 +7,16 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the Kendo Gantt for ASP.NET MVC.
     /// </summary>
-    public class GanttBuilder<T>: WidgetBuilderBase<Gantt<T>, GanttBuilder<T>> where T : class, IGanttTask
+    public class GanttBuilder<TTaskModel, TDependenciesModel> : WidgetBuilderBase<Gantt<TTaskModel, TDependenciesModel>, GanttBuilder<TTaskModel, TDependenciesModel>>
+        where TTaskModel : class, IGanttTask
+        where TDependenciesModel : class, IGanttDependency
     {
-        private readonly Gantt<T> container;
+        private readonly Gantt<TTaskModel, TDependenciesModel> container;
         /// <summary>
         /// Initializes a new instance of the <see cref="Gantt"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public GanttBuilder(Gantt<T> component)
+        public GanttBuilder(Gantt<TTaskModel, TDependenciesModel> component)
             : base(component)
         {
             container = component;
@@ -38,9 +40,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GanttBuilder<T> DataSource(Action<GanttDataSourceBuilder<T>> configurator)
+        public GanttBuilder<TTaskModel, TDependenciesModel> DataSource(Action<GanttDataSourceBuilder<TTaskModel>> configurator)
         {
-            configurator(new GanttDataSourceBuilder<T>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new GanttDataSourceBuilder<TTaskModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
@@ -63,9 +65,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GanttBuilder<T> DependenciesDataSource(Action<GanttDependenciesDataSourceBuilder<T>> configurator)
+        public GanttBuilder<TTaskModel, TDependenciesModel> DependenciesDataSource(Action<GanttDependenciesDataSourceBuilder<TDependenciesModel>> configurator)
         {
-            configurator(new GanttDependenciesDataSourceBuilder<T>(Component.DependenciesDataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new GanttDependenciesDataSourceBuilder<TDependenciesModel>(Component.DependenciesDataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
@@ -77,7 +79,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// data source is fired. By default the widget will bind to the data source specified in the configuration.
         /// </summary>
         /// <param name="value">The value that configures the autobind.</param>
-        public GanttBuilder<T> AutoBind(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> AutoBind(bool value)
         {
             container.AutoBind = value;
 
@@ -89,7 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// field to which the column is bound. The gantt will create a column for every item of the array.
         /// </summary>
         /// <param name="configurator">The action that configures the columns.</param>
-        public GanttBuilder<T> Columns(Action<GanttColumnFactory> configurator)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Columns(Action<GanttColumnFactory> configurator)
         {
             configurator(new GanttColumnFactory(container.Columns));
             return this;
@@ -99,7 +101,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the user would be able to create new tasks and modify or delete existing ones.
         /// </summary>
         /// <param name="value">The value that configures the editable.</param>
-        public GanttBuilder<T> Editable(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Editable(bool value)
         {
             container.Editable = value;
 
@@ -110,7 +112,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the start of the work day.
         /// </summary>
         /// <param name="value">The value that configures the workdaystart.</param>
-        public GanttBuilder<T> WorkDayStart(DateTime value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> WorkDayStart(DateTime value)
         {
             container.WorkDayStart = value;
 
@@ -121,7 +123,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Sets the end of the work day.
         /// </summary>
         /// <param name="value">The value that configures the workdayend.</param>
-        public GanttBuilder<T> WorkDayEnd(DateTime value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> WorkDayEnd(DateTime value)
         {
             container.WorkDayEnd = value;
 
@@ -132,7 +134,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The start of working week (index based).
         /// </summary>
         /// <param name="value">The value that configures the workweekstart.</param>
-        public GanttBuilder<T> WorkWeekStart(double value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> WorkWeekStart(double value)
         {
             container.WorkWeekStart = value;
 
@@ -143,7 +145,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The end of working week (index based).
         /// </summary>
         /// <param name="value">The value that configures the workweekend.</param>
-        public GanttBuilder<T> WorkWeekEnd(double value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> WorkWeekEnd(double value)
         {
             container.WorkWeekEnd = value;
 
@@ -154,7 +156,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The span of an hour slot.
         /// </summary>
         /// <param name="value">The value that configures the hourspan.</param>
-        public GanttBuilder<T> HourSpan(double value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> HourSpan(double value)
         {
             container.HourSpan = value;
 
@@ -165,7 +167,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If true, tasks snap to time slots, otherwise tasks can have arbitrary duration.
         /// </summary>
         /// <param name="value">The value that configures the snap.</param>
-        public GanttBuilder<T> Snap(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Snap(bool value)
         {
             container.Snap = value;
 
@@ -176,7 +178,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The height of the widget. Numeric values are treated as pixels.
         /// </summary>
         /// <param name="value">The value that configures the height.</param>
-        public GanttBuilder<T> Height(double value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Height(double value)
         {
             container.Height = value;
 
@@ -187,7 +189,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The width of the task list. Numeric values are treated as pixels.
         /// </summary>
         /// <param name="value">The value that configures the listwidth.</param>
-        public GanttBuilder<T> ListWidth(string value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> ListWidth(string value)
         {
             container.ListWidth = value;
 
@@ -198,7 +200,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The configuration of the gantt messages. Use this option to customize or localize the gantt messages.
         /// </summary>
         /// <param name="configurator">The action that configures the messages.</param>
-        public GanttBuilder<T> Messages(Action<GanttMessagesSettingsBuilder> configurator)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Messages(Action<GanttMessagesSettingsBuilder> configurator)
         {
             configurator(new GanttMessagesSettingsBuilder(container.Messages));
             return this;
@@ -208,7 +210,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to true the user would be able to select tasks in the gantt. This triggers the change event.
         /// </summary>
         /// <param name="value">The value that configures the selectable.</param>
-        public GanttBuilder<T> Selectable(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Selectable(bool value)
         {
             container.Selectable = value;
 
@@ -219,7 +221,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to false, the week and month views will show all days of the week. By default these views display only business days.
         /// </summary>
         /// <param name="value">The value that configures the showworkdays.</param>
-        public GanttBuilder<T> ShowWorkDays(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> ShowWorkDays(bool value)
         {
             container.ShowWorkDays = value;
 
@@ -230,7 +232,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// If set to false, the day view will show all hours of the day. By default the view displays only business hours.
         /// </summary>
         /// <param name="value">The value that configures the showworkhours.</param>
-        public GanttBuilder<T> ShowWorkHours(bool value)
+        public GanttBuilder<TTaskModel,TDependenciesModel> ShowWorkHours(bool value)
         {
             container.ShowWorkHours = value;
 
@@ -242,7 +244,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// By default the Kendo UI Gantt widget displays the "day" and "week" views.
         /// </summary>
         /// <param name="configurator">The action that configures the views.</param>
-        public GanttBuilder<T> Views(Action<GanttViewFactory> configurator)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
         {
             configurator(new GanttViewFactory(container.Views));
             return this;
@@ -266,7 +268,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public GanttBuilder<T> Events(Action<GanttEventBuilder> configurator)
+        public GanttBuilder<TTaskModel, TDependenciesModel> Events(Action<GanttEventBuilder> configurator)
         {
 
             configurator(new GanttEventBuilder(Component.Events));

@@ -13,10 +13,12 @@
     public partial class GanttController : Controller
     {
         private GanttTaskService taskService;
+        private GanttDependencyService dependencyService;
 
         public GanttController()
         {
             this.taskService = new GanttTaskService();
+            this.dependencyService = new GanttDependencyService();
         }
 
         public ActionResult Index()
@@ -55,6 +57,41 @@
             if (ModelState.IsValid)
             {
                 taskService.Update(task, ModelState);
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        public virtual JsonResult ReadDependencies([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(dependencyService.GetAll().ToDataSourceResult(request));
+        }
+
+        public virtual JsonResult DestroyDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                dependencyService.Delete(task, ModelState);
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        public virtual JsonResult CreateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                dependencyService.Insert(task, ModelState);
+            }
+
+            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+        }
+
+        public virtual JsonResult UpdateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        {
+            if (ModelState.IsValid)
+            {
+                dependencyService.Update(task, ModelState);
             }
 
             return Json(new[] { task }.ToDataSourceResult(request, ModelState));

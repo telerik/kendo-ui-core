@@ -4,15 +4,17 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Extensions;
 
-    public class GanttHtmlBuilder<T> where T : class, IGanttTask
+    public class GanttHtmlBuilder<TTaskModel, TDependenciesModel>
+        where TTaskModel : class, IGanttTask
+        where TDependenciesModel : class, IGanttDependency
     {
-        private readonly Gantt<T> component;
+        private readonly Gantt<TTaskModel, TDependenciesModel> component;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GanttHtmlBuilder" /> class.
         /// </summary>
         /// <param name="component">The Gantt component.</param>
-        public GanttHtmlBuilder(Gantt<T> component)
+        public GanttHtmlBuilder(Gantt<TTaskModel, TDependenciesModel> component)
         {
             this.component = component;
         }

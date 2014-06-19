@@ -638,6 +638,8 @@
     <Compile Include="Models\GanttTask.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Gantt\GanttDependencyService.cs" />
+    <Compile Include="Models\Gantt\DependencyViewModel.cs" />
     <Compile Include="Models\Gantt\GanttTaskService.cs" />
     <Compile Include="Models\Gantt\TaskViewModel.cs" />
     <Compile Include="Models\Map\UrbanArea.cs" />

@@ -721,6 +721,7 @@
     <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
+    <Compile Include="UI\Gantt\IGanttDependency.cs" />
     <Compile Include="UI\Gantt\GanttDependenciesModelDescriptor.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttDependenciesModelDescriptorFactory.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttDependenciesDataSourceBuilder.cs" />

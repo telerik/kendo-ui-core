@@ -9,7 +9,9 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    public class Gantt<T> : WidgetBase where T : class, IGanttTask
+    public class Gantt<TTaskModel, TDependenciesModel> : WidgetBase
+        where TTaskModel : class, IGanttTask
+        where TDependenciesModel : class, IGanttDependency
     {
         public readonly IUrlGenerator UrlGenerator;
 
@@ -20,11 +22,11 @@ namespace Kendo.Mvc.UI
 
             DataSource = new DataSource();
             DataSource.Type = DataSourceType.Ajax;
-            DataSource.Schema.Model = new GanttModelDescriptor(typeof(T));
+            DataSource.Schema.Model = new GanttModelDescriptor(typeof(TTaskModel));
 
             DependenciesDataSource = new DataSource();
             DependenciesDataSource.Type = DataSourceType.Ajax;
-            DependenciesDataSource.Schema.Model = new GanttDependenciesModelDescriptor(typeof(T));
+            DependenciesDataSource.Schema.Model = new GanttDependenciesModelDescriptor(typeof(TDependenciesModel));
 
 //>> Initialization
         
@@ -200,7 +202,7 @@ namespace Kendo.Mvc.UI
 
         protected override void WriteHtml(HtmlTextWriter writer)
         {
-            var html = new GanttHtmlBuilder<T>(this).Build();
+            var html = new GanttHtmlBuilder<TTaskModel, TDependenciesModel>(this).Build();
 
             html.WriteTo(writer);
 
