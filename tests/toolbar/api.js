@@ -103,4 +103,18 @@
         ok(toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
     });
 
+    test("get selected item from group returns the selected toggle button", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", toggable: true, group: "foo" },
+                { type: "button", id: "bar", text: "bar", toggable: true, group: "foo", selected: true },
+                { type: "button", id: "baz", text: "baz", toggable: true, group: "foo" }
+            ]
+        }).data("kendoToolBar");
+
+        var selected = toolbar.getSelectedFromGroup("foo");
+
+        equal(selected.attr("id"), "bar");
+    });
+
 })();
