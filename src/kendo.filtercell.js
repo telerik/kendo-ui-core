@@ -147,8 +147,6 @@ var __meta__ = {
             }
         },
 
-        //CLEAR/RESET filter could be the same from filtermenu.js
-
         refreshUI: function() {
             var that = this;
             that._bind();
@@ -235,8 +233,8 @@ var __meta__ = {
         _createClearIcon: function() {
             var that = this;
 
-            $("<span/>")
-                .addClass("k-icon k-i-close")
+            $("<button class='k-button k-button-icon'/>")
+                .html("<span class='k-icon k-i-close'/>")
                 .click(proxy(that.clearFilter, that))
                 .appendTo(that.element);
         },
