@@ -28,6 +28,8 @@
         .Name("map")
         .Center(45, 45)
         .Zoom(4)
+        .MinZoom(3)
+        .Wraparound(false)
         .Layers(layers =>
         {
             layers.Add()

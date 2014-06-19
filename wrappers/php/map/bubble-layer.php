@@ -58,6 +58,8 @@ $bubble_layer->type('bubble')
 $map = new \Kendo\Dataviz\UI\Map('map');
 $map->center(array(45, 45))
     ->zoom(4)
+    ->minZoom(3)
+    ->wraparound(false)
     ->addLayer($tile_layer)
     ->addLayer($bubble_layer)
     ->shapeMouseEnter('onShapeMouseEnter')
