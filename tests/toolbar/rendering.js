@@ -539,7 +539,7 @@
     test("renders ButtonGroup from JSON", 3, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -556,7 +556,7 @@
     test("ButtonGroup applies ID option", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", id: "foo", items: [] }
+                { type: "buttonGroup", id: "foo", buttons: [] }
             ]
         });
 
@@ -568,7 +568,7 @@
     test("first button in the group receives k-group-start class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -584,7 +584,7 @@
     test("last button in the group receives k-group-end class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -600,7 +600,7 @@
     test("ButtonGroup element receives data-overflow attribute with default value", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -616,7 +616,7 @@
     test("ButtonGroup element receives data-overflow attribute with set value", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "buttonGroup", overflow: "never", items: [
+                { type: "buttonGroup", overflow: "never", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -632,7 +632,7 @@
     test("ButtonGroup with overflow auto is rendered both in toolbar and in overflow container", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "buttonGroup", overflow: "auto", items: [
+                { type: "buttonGroup", overflow: "auto", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -651,7 +651,7 @@
     test("Overflow ButtonGroup renders li tag with buttons", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -668,7 +668,7 @@
     test("Overflow ButtonGroup renders li element which has uid + overflow data", 3, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "buttonGroup", overflow: "always", items: [
+                { type: "buttonGroup", overflow: "always", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -689,7 +689,7 @@
     test("renders splitButton from JSON", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "Split Button", items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
@@ -706,7 +706,7 @@
     test("initializes kendoPopup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "Split Button", items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
@@ -722,7 +722,7 @@
     test("splitButton holds reference to its popup", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "Split Button", items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
@@ -739,7 +739,7 @@
     test("splitButton applies ID and text options", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "foo", items: [
+                { type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" }
                     ]
@@ -756,7 +756,7 @@
     test("SplitButton sets id to the popup element", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "foo", items: [
+                { type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" }
                     ]
@@ -772,7 +772,7 @@
     test("SplitButton and its popup receive auto generated ID if ID is not explicitly set", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", text: "foo", items: [
+                { type: "splitButton", text: "foo", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" }
                     ]
@@ -790,7 +790,7 @@
     test("SplitButton element receives data-overflow attribute with default value", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", text: "foo", items: [
+                { type: "splitButton", text: "foo", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" }
                     ]
@@ -805,7 +805,7 @@
     test("SplitButton element receives data-overflow attribute with set value", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "splitButton", overflow: "never", text: "foo", items: [
+                { type: "splitButton", overflow: "never", text: "foo", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" }
                     ]
@@ -820,7 +820,7 @@
     test("Overflow SplitButton renders li tag with buttons", 2, function() {
         var splitButton = container.kendoToolBar({
             items: [
-                { type: "splitButton", text: "foo", items: [
+                { type: "splitButton", text: "foo", menuButtons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -838,7 +838,7 @@
     test("Overflow SplitButton items are wrapped in a li tag which has data-uid attribute", 2, function() {
         var splitButton = container.kendoToolBar({
             items: [
-                { type: "splitButton", text: "foo", items: [
+                { type: "splitButton", text: "foo", menuButtons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -856,7 +856,7 @@
     test("SplitButton popup is as wide as the button wrapper", 1, function() {
         var splitButton = container.kendoToolBar({
             items: [
-                { type: "splitButton", text: "foo", items: [
+                { type: "splitButton", text: "foo", menuButtons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }

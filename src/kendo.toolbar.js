@@ -67,7 +67,7 @@ var __meta__ = {
 
             buttonGroup: {
                 base: function (options, initializer, element) {
-                    var items = options.items,
+                    var items = options.buttons,
                         item;
 
                     element.data({ type: "buttonGroup" });
@@ -114,7 +114,7 @@ var __meta__ = {
                                        (options.mobile ? "km-icon km-arrowdown" : "k-icon k-i-arrow-s") + '"></span></a>'),
                         popupElement = $('<ul class="' + LIST_CONTAINER + '"></ul>'),
                         popup,
-                        items = options.items,
+                        items = options.menuButtons,
                         item;
 
                     mainButton.appendTo(element);
@@ -158,7 +158,7 @@ var __meta__ = {
                 overflow: function(options) {
                     var element = $('<li class="' + SPLIT_BUTTON + '"></li>'),
                         mainButton = components.button.overflow(options),
-                        items = options.items,
+                        items = options.menuButtons,
                         item;
 
                     mainButton.appendTo(element);

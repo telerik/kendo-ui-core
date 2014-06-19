@@ -31,7 +31,7 @@
     test("remove method removes buttonGroup", 2, function() {
        var toolbar = container.kendoToolBar({
             items: [
-                { type: "buttonGroup", items: [
+                { type: "buttonGroup", buttons: [
                         { id: "btn1", text: "Btn1" },
                         { id: "btn2", text: "Btn2" },
                         { id: "btn3", text: "Btn3" }
@@ -48,7 +48,7 @@
     test("remove method removes splitButton", 2, function() {
        var toolbar = container.kendoToolBar({
             items: [
-                { type: "splitButton", id: "splitButton", text: "Split Button", items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
                         { id: "option1", text: "Option 1" },
                         { id: "option2", text: "Option 2" },
                         { id: "option3", text: "Option 3" },
