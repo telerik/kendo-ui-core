@@ -2066,8 +2066,14 @@ var __meta__ = {
         },
 
         _createSettingTarget: function(element, options) {
+            var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            if (this.options.reorderable) {
+                template += '<span class="k-icon k-si-close k-setting-delete"></span>';
+            }
+            template += '</span>';
+
             return new kendo.ui.PivotSettingTarget(element, $.extend({
-                template: '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}</span>',
+                template: template,
                 emptyTemplate: '<span class="k-empty">${data}</span>',
                 enabled: this.options.reorderable,
                 dataSource: this.dataSource
