@@ -1266,7 +1266,7 @@
         equal(viewName, view);
     });
 
-    test("Current time marker is rendered correctly", function() {
+    tzTest("Sofia", "Current time marker is rendered correctly", function() {
         var viewName = "week";
         var element = $("<div>").appendTo(QUnit.fixture);
         var scheduler = element.kendoScheduler({

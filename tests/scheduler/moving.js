@@ -376,7 +376,7 @@
         equal(scheduler.dataSource.at(0).start.getDate(), 6);
     });
 
-    test("moving event in day view honours DST", function() {
+    tzTest("Sofia", "moving event in day view honours DST", function() {
         var scheduler = new kendo.ui.Scheduler(div, {
             date: new Date("2014/3/30"),
             startTime: new Date("2014/3/30"),

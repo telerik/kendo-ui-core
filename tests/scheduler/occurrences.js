@@ -297,7 +297,7 @@
         deepEqual(events[2].start, new Date(2014, 2, 30, 12));
     });
 
-    brazilTimezoneTest("Hourly method honours DST in Brasilia", function() {
+    tzTest("Brazil", "Hourly method honours DST", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -1072,9 +1072,7 @@
         deepEqual(events[0].end, new Date(2000, 10, 11, 8));
     });
 
-    /*
-    //Uncomment when timezone is Brasilia (-06:00).
-    test("DAILY method honours DST in Brasilia", function() {
+    tzTest("Brazil", "DAILY method honours DST", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -1102,7 +1100,7 @@
         equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
     });
 
-    test("DAILY method honours DST when use BYMONTHDAY", function() {
+    tzTest("Brazil", "DAILY method honours DST when use BYMONTHDAY", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -1128,7 +1126,7 @@
 
         equal(events[1].end.getHours(), 1);
         equal(events[1].endTime, startTime + kendo.date.MS_PER_HOUR);
-    });*/
+    });
 
     module("WEEKLY Occurrences");
     test("WEEKLY occurrences method returns one event for each new week", function() {
@@ -1466,7 +1464,7 @@
         equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
     });
 
-    test("WEEKLY occurrence sets startTime correctly", function() {
+    tzTest("Sofia", "WEEKLY occurrence sets startTime correctly", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -1843,7 +1841,7 @@
         equal(events[1].end.getTime(), +new Date(2013, 10, 15, 14, 50, 30));
     });
 
-    test("MONTHLY occurrence sets startTime correctly", function() {
+    tzTest("Sofia", "MONTHLY occurrence sets startTime correctly", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -1928,7 +1926,7 @@
         deepEqual(events[2].start, new Date(1997, 10, 27, 9));
     });
 
-    test("MONTHLY occurrence supports bysetpos rule and no timezone", function() {
+    tzTest("Sofia", "MONTHLY occurrence supports bysetpos rule and no timezone", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -2255,7 +2253,7 @@
         deepEqual(events[1].start, new Date(2015, 2, 29));
     });
 
-    test("YEARLY occurrence sets startTime correctly", function() {
+    tzTest("Sofia", "YEARLY occurrence sets startTime correctly", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -2285,9 +2283,7 @@
         equal(events[2].endTime, startTime + (4 * kendo.date.MS_PER_HOUR));
     });
 
-    /*
-    //Uncomment when timezone is Brasilia (-06:00)
-    test("YEARLY occurrence honours Brasil DST when BYYEARDAY is defined", function() {
+    tzTest("Brazil", "YEARLY occurrence honours DST when BYYEARDAY is defined", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
             title: "Title",
@@ -2313,7 +2309,7 @@
 
         equal(events[2].end.getHours(), 1);
         equal(events[2].endTime, startTime + kendo.date.MS_PER_HOUR);
-    });*/
+    });
 
     test("YEARLY occurrences method starts expand from event start", function() {
         var schedulerEvent = new SchedulerEvent({

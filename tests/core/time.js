@@ -81,7 +81,7 @@ test("offset detects new DST rules for America/Chicago", function() {
     testDst(["2011/03/13 00:00", "2011/03/14 00:00", "2011/11/06 00:00", "2011/11/07 00:00"]);
 });
 
-test("offset detects DST for America/Sao_Paulo", function () {
+tzTest("Sofia", "offset detects DST for America/Sao_Paulo", function () {
     // http://www.timeanddate.com/worldclock/clockchange.html?n=233
     // Standard: GMT-3 from Feb 16 - Nov 1
     // Daylight: GMT-2 from Nov 2 - Feb 16

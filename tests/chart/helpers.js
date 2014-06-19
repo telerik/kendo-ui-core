@@ -790,7 +790,7 @@
         equal(duration(dateA, dateB, "days"), 424);
     });
 
-    test("calculates duration in days during DST transition", function() {
+    tzTest("Sofia", "calculates duration in days during DST transition", function() {
         equal(duration(
             new Date("2012/03/24 GMT+0200 (FLE Standard Time)"),
             new Date("2012/03/26 GMT+0300 (FLE Daylight Time)"),
@@ -799,11 +799,11 @@
         );
     });
 
-    test("calculates duration in hours", function() {
+    tzTest("Sofia", "calculates duration in hours", function() {
         equal(duration(dateA, dateB, "hours"), 10181);
     });
 
-    test("calculates duration in hours during DST transition", function() {
+    tzTest("Sofia", "calculates duration in hours during DST transition", function() {
         equal(duration(
             new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
             new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)"),
@@ -812,11 +812,11 @@
         );
     });
 
-    test("calculates duration in minutes", function() {
+    tzTest("Sofia", "calculates duration in minutes", function() {
         equal(duration(dateA, dateB, "minutes"), 610860);
     });
 
-    test("calculates duration in seconds", function() {
+    tzTest("Sofia", "calculates duration in seconds", function() {
         equal(duration(dateA, dateB, "seconds"), 610860 * 60);
     });
 
@@ -853,7 +853,7 @@
         deepEqual(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
     });
 
-    test("rounds to days during DST transition", function() {
+    tzTest("Sofia", "rounds to days during DST transition", function() {
         deepEqual(addDuration(
                 new Date("2012/03/25 GMT+0200 (FLE Standard Time)"),
                 2,
@@ -866,7 +866,7 @@
         deepEqual(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
     });
 
-    test("rounds to hours during DST transition", function() {
+    tzTest("Sofia", "rounds to hours during DST transition", function() {
         deepEqual(addDuration(
                 new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
                 6,
@@ -875,37 +875,37 @@
         );
     });
 
-    test("Adding hours skips DST start", function() {
+    tzTest("Sofia", "Adding hours skips DST start", function() {
         deepEqual(addDuration(new Date("2012/03/25 02:00"), 1, "hours"),
              new Date("2012/03/25 04:00:00")
         );
     });
 
-    test("Adding minutes skips DST start", function() {
+    tzTest("Sofia", "Adding minutes skips DST start", function() {
         deepEqual(addDuration(new Date("2012/03/25 02:00"), 60, "minutes"),
              new Date("2012/03/25 04:00:00")
         );
     });
 
-    test("Adding seconds skips DST start", function() {
+    tzTest("Sofia", "Adding seconds skips DST start", function() {
         deepEqual(addDuration(new Date("2012/03/25 02:59"), 60, "seconds"),
              new Date("2012/03/25 04:00:00")
         );
     });
 
-    test("Adding hours skips DST end", function() {
+    tzTest("Sofia", "Adding hours skips DST end", function() {
         deepEqual(addDuration(new Date("2012/10/28 02:00"), 2, "hours"),
              new Date("2012/10/28 04:00:00")
         );
     });
 
-    test("Adding minutes includes duplicate DST end", function() {
+    tzTest("Sofia", "Adding minutes includes duplicate DST end", function() {
         deepEqual(addDuration(new Date("2012/10/28 02:00"), 180, "minutes"),
              new Date("2012/10/28 04:00:00")
         );
     });
 
-    test("Adding seconds includes duplicate DST end", function() {
+    tzTest("Sofia", "Adding seconds includes duplicate DST end", function() {
         deepEqual(addDuration(new Date("2012/10/28 02:00"), 180 * 60, "seconds"),
              new Date("2012/10/28 04:00:00")
         );
@@ -919,12 +919,12 @@
         deepEqual(addDuration(dateA, 75.1, "seconds"), new Date("2010/01/01 10:01:15"));
     });
 
-    brazilTimezoneTest("Adding days skips Brazil DST transition", function() {
+    tzTest("Brazil", "Adding days skips DST transition", function() {
         deepEqual(addDuration(new Date("2013/10/19"), 1, "days"),
                   new Date("2013/10/20 01:00:00"));
     });
 
-    brazilTimezoneTest("Adding weeks skips Brazil DST transition", function() {
+    tzTest("Brazil", "Adding weeks skips DST transition", function() {
         deepEqual(addDuration(new Date("2013/10/13"), 1, "weeks"),
                   new Date("2013/10/20 01:00:00"));
     });
@@ -976,13 +976,13 @@
         deepEqual([new Date(times[0]), new Date(times[1])], toDate(times));
     });
 
-    test("Converts MS JSON string to date", function() {
+    tzTest("Sofia", "Converts MS JSON string to date", function() {
         var jsonDate = "/Date(1325368800000)/";
 
         deepEqual(new Date("2012/01/01 00:00"), toDate(jsonDate));
     });
 
-    test("Converts array of MS JSON strings to dates", function() {
+    tzTest("Sofia", "Converts array of MS JSON strings to dates", function() {
         var jsonDates = ["/Date(1325368800000)/", "/Date(1325455200000)/"];
 
         deepEqual([new Date("2012/01/01 00:00"), new Date("2012/01/02 00:00")], toDate(jsonDates));

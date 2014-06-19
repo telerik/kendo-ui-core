@@ -77,21 +77,37 @@ function arrayClose(a, b, tolerance) {
     }
 }
 
-function isBrazilTimezone() {
-    var d = new Date().toString();
-    return d.indexOf("BRST") !== -1 ||
-           d.indexOf("BRT") != -1 ||
-           d.indexOf("South America Daylight Time") != -1 ||
-           d.indexOf("South America Standard Time") != -1;
-}
+function tzTest(tzAlias, testName, expected, callback ) {
+    var TZ_NAMES = {
+        "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time"]
+    };
 
-function brazilTimezoneTest(testName, expected, callback ) {
-    if ( arguments.length === 2 ) {
+    function tzMatch(alias) {
+        var names = TZ_NAMES[alias];
+
+        var d = new Date().toString();
+        for (var i = 0; i < names.length; i++) {
+            if (d.indexOf(names[i]) !== -1) {
+                return true;
+            }
+        };
+
+        return false;
+    }
+
+    if (arguments.length === 3) {
         callback = expected;
         expected = null;
     }
 
-    if (isBrazilTimezone()) {
+    if (!TZ_NAMES[tzAlias]) {
+        QUnit.test(testName, null, function() {
+            ok(false, testName + "\n" + "Unknown timezone alias: " + tzAlias + "\n" +
+               "Valid values are: " + Object.keys(TZ_NAMES).join(", "));
+        });
+    } else if (tzMatch(tzAlias)) {
+        testName = testName + " (Timezone: " + tzAlias + ")";
         QUnit.test(testName, expected, callback);
     }
 }
@@ -221,7 +237,6 @@ QUnit.extend( QUnit, {
     }
 });
 
-QUnit.brazilTimezoneTest = brazilTimezoneTest;
 QUnit.config.testTimeout = 2500;
 QUnit.config.reorder = false;
 
