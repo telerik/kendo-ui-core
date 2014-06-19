@@ -14,7 +14,7 @@ var __meta__ = {
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
         SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon k-i-vbars"></span>${name}</p>' +
                 '<div class="k-list-container k-group k-reset"/>');
 

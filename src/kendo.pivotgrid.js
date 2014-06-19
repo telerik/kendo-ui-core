@@ -2202,7 +2202,7 @@ var __meta__ = {
             that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
             that.rowsHeaderTree.render(rowsTree);
 
-            var firstTuple
+            var firstTuple;
             var measures = 1;
 
             var columnAxis = {
