@@ -2803,6 +2803,7 @@ var __meta__ = {
             }
 
             if (dataItem) {
+                this.columnIndexes = this._columnIndexes();
                 this._buildRows(data);
             } else {
                 this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
@@ -2811,15 +2812,55 @@ var __meta__ = {
             return element("thead", null, this.rows);
         },
 
-        _tuplePath: function(tuple, index) {
-            var path = [];
-            var idx = 0;
+        _columnIndexes: function() {
+            var result = [];
+            var indexes = this.columnAxis.indexes;
+            var measures = this.columnAxis.measures;
+            var metadata = this.columnAxis.metadata;
 
-            for(; idx <= index; idx++) {
-                path.push(tuple.members[idx].name);
+            var current;
+            var dataIdx = 0;
+            var firstEmpty = 0;
+
+            var idx = 0;
+            var length = indexes.length;
+            var measureIdx;
+
+            var children;
+            var skipChildren;
+
+            for (; idx < length; idx++) {
+                current = metadata[indexes[idx]];
+                children = current.children + current.members;
+                skipChildren = 0;
+
+                if (children) {
+                    children -= measures;
+                }
+
+                if (current.expanded === false && current.children !== current.maxChildren) {
+                    skipChildren = current.maxChildren;
+                }
+
+                if (current.parentMember && current.levelNum === 0) {
+                    children = -1;
+                }
+
+                if (children > -1) {
+                    for (measureIdx = 0; measureIdx < measures; measureIdx++) {
+                        result[children + firstEmpty + measureIdx] = dataIdx;
+                        dataIdx += 1;
+                    }
+
+                    while(result[firstEmpty] !== undefined) {
+                        firstEmpty += 1;
+                    }
+                }
+
+                dataIdx += skipChildren;
             }
 
-            return path;
+            return result;
         },
 
         _buildRows: function(data) {
@@ -2833,42 +2874,15 @@ var __meta__ = {
 
         _buildRow: function(data) {
             var cells = [];
-            var indexes = this.columnAxis.indexes;
-            var measures = this.columnAxis.measures;
+            var columnIndexes = this.columnIndexes;
+            var length = columnIndexes.length;
+            var idx = 0;
 
-            var firstEmpty = 0;
-            var dataIdx = 0;
-            var offset = 0;
+            var currentIdx;
 
-            for (var idx = 0, length = indexes.length; idx < length; idx++) {
-                var metadata = this.columnAxis.metadata[indexes[idx]];
-                var children = metadata.children + metadata.members;
-                var skipChildren = 0;
-
-                if (children) {
-                    children -= measures;
-                }
-
-                if (metadata.expanded === false && metadata.children !== metadata.maxChildren) {
-                    skipChildren = metadata.maxChildren;
-                }
-
-                if (metadata.parentMember && metadata.levelNum === 0) {
-                    children = -1;
-                }
-
-                if (children > -1) {
-                    for (var i = 0, l = measures; i < l; i++) {
-                        cells[children + firstEmpty + i] = element("td", null, [text(data[dataIdx - offset].value)]);
-                        dataIdx += 1;
-                    }
-
-                    while(cells[firstEmpty] !== undefined) {
-                        firstEmpty += 1;
-                    }
-                }
-
-                dataIdx += skipChildren;
+            for (; idx < length; idx++) {
+                currentIdx = columnIndexes[idx];
+                cells.push(element("td", null, [ text(data[currentIdx].value) ]));
             }
 
             return element("tr", null, cells);
