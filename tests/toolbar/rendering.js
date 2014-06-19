@@ -183,6 +183,18 @@
         ok(icon.hasClass("k-i-foo"));
     });
 
+    test("url sets a href to the button element if it is an anchor", function() {
+        container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", url: "http://www.kendoui.com" }
+            ]
+        });
+
+        var button = container.find("#foo");
+
+        ok(button.attr("href") == "http://www.kendoui.com");
+    });
+
     test("icon adds a k-button-icon class to button with no text", function() {
         container.kendoToolBar({
             items: [
