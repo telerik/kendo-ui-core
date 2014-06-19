@@ -51,7 +51,7 @@
                         items: [
                             { 
                                 type: "buttonGroup",
-                                items: [
+                                buttons: [
                                     { id: "play", text: "play", toggable: true, group: "player" },
                                     { id: "pause", text: "pause", toggable: true, group: "player", selected: true },
                                     { id: "stop", text: "stop", toggable: true, group: "player" }
@@ -62,7 +62,7 @@
                                 type: "splitButton",
                                 id: "save",
                                 text: "save",
-                                items: [
+                                menuButtons: [
                                     { id: "favourites", text: "add to favourites" },
                                     { id: "later", text: "listen later" },
                                     { id: "download", text: "download" }
@@ -110,7 +110,7 @@
                         toolbar.add({
                             type: "splitButton",
                             text: "New SplitButton",
-                            items: [
+                            menuButtons: [
                                 { text: "Option 1" },
                                 { text: "Option 2" }
                             ]
@@ -122,7 +122,7 @@
 
                         toolbar.add({
                             type: "buttonGroup",
-                            items: [
+                            buttons: [
                                 { text: "Left" },
                                 { text: "Middle" },
                                 { text: "Right" }
