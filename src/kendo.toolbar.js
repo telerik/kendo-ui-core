@@ -204,6 +204,13 @@ var __meta__ = {
                 element.addClass(STATE_DISABLED);
             }
 
+            if (options.url !== undefined && !useButtonTag) {
+                element.attr("href", options.url);
+                if (options.mobile) {
+                    element.attr(kendo.attr("role"), "button");
+                }
+            }
+
             if (options.group) {
                 element.attr(kendo.attr("group"), options.group);
             }
