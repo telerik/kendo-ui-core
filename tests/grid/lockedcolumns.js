@@ -107,11 +107,11 @@
         });
 
         equal(grid.element.find(".k-grid-header-locked tr.k-filterrow").length, 1);
-        equal(grid.element.find(".k-grid-header-locked tr.k-filterrow th[data-field=foo]").length, 1);
+        equal(grid.element.find(".k-grid-header-locked tr.k-filterrow [data-field=foo]").length, 1);
 
         equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow th").length, 2);
-        ok(grid.element.find(".k-grid-header-wrap tr.k-filterrow th[data-field=bar]").length);
-        ok(grid.element.find(".k-grid-header-wrap tr.k-filterrow th[data-field=baz]").length);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow [data-field=bar]").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow [data-field=baz]").length, 1);
     });
 
     test("th elements when header already exists", function() {
