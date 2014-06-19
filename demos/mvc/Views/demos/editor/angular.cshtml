@@ -1,3 +1,5 @@
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-sanitize.js"></script>
+
 <div class="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
   <textarea kendo-editor ng-model="html"></textarea>
@@ -6,7 +8,7 @@
 </div>
 
 <script>
-  angular.module("KendoDemos", [ "kendo.directives" ]);
+  angular.module("KendoDemos", [ "kendo.directives", "ngSanitize" ]);
   function MyCtrl($scope) {
       $scope.html = "<h1>Kendo Editor</h1>\n\n" +
       "<p>Note that “change” is triggered when the editor loses focus.\n" +
