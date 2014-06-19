@@ -170,10 +170,12 @@ $scheduler->timezone("Etc/UTC")
         ->dataSource($dataSource);
 
 ?>
-<div id="people">
-    <input checked type="checkbox" id="alex" value="1">
-    <input checked type="checkbox" id="bob" value="2">
-    <input type="checkbox" id="charlie" value="3">
+<div id="team-schedule">
+    <div id="people">
+        <input checked type="checkbox" id="alex" value="1">
+        <input checked type="checkbox" id="bob" value="2">
+        <input type="checkbox" id="charlie" value="3">
+    </div>
 </div>
 
 <?php
@@ -204,24 +206,35 @@ echo $scheduler->render();
 </script>
 
 <style scoped>
-    #people {
+    #scheduler {
+        font-size: 14px;    
+    }
+    #team-schedule {
         background: url('../content/web/scheduler/team-schedule.png') transparent no-repeat;
         height: 115px;
         position: relative;
     }
+    
+    #people {
+        background: url('../content/web/scheduler/scheduler-people.png') no-repeat;
+        width: 345px;
+        height: 115px;
+        position: absolute;
+        right: 0;
+    }
     #alex {
         position: absolute;
-        left: 630px;
+        left: 4px;
         top: 81px;
     }
     #bob {
         position: absolute;
-        left: 745px;
+        left: 119px;
         top: 81px;
     }
     #charlie {
         position: absolute;
-        left: 860px;
+        left: 234px;
         top: 81px;
     }
 </style>
