@@ -383,11 +383,17 @@
                                         currClassList.forEach(function(cls){
                                             if (prevClassList.indexOf(cls) < 0) {
                                                 w.classList.add(cls);
+                                                if (widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
+                                                    widget.input[0].classList.add(cls);
+                                                }
                                             }
                                         });
                                         prevClassList.forEach(function(cls){
                                             if (currClassList.indexOf(cls) < 0) {
                                                 w.classList.remove(cls);
+                                                if (widget instanceof kendo.ui.ComboBox) { // https://github.com/kendo-labs/angular-kendo/issues/356
+                                                    widget.input[0].classList.remove(cls);
+                                                }
                                             }
                                         });
                                         prevClassList = currClassList;
