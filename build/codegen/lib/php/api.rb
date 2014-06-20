@@ -28,12 +28,6 @@ module CodeGen::PHP::API
             "new #{php_type}()"
         end
 
-        def slug
-            slug = php_type.sub('\\Kendo\\', '').gsub('\\', '-').downcase
-
-            "php-#{slug}"
-        end
-
         def sample_option
             option = simple_options.find { |o| o.type[0] =~ /Number|String|Boolean/ && !o.name.end_with?('Template') }
 
@@ -81,10 +75,7 @@ module CodeGen::PHP::API
     end
 
 METADATA = ERB.new(%{---
-title: <%= php_class %>
-slug: <%= slug %>
-tags: api, php
-publish: true
+nav_title: <%= php_class %>
 ---
 })
 

@@ -8,7 +8,7 @@ module CodeGen::MVC
     ]
 
     COMPONENT = ERB.new(%{---
-title: <%= name %>
+nav_title: <%= name %>
 ---
 
 # <%= full_name %>

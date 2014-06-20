@@ -46,10 +46,7 @@ module CodeGen::Java::API
     end
 
 METADATA = ERB.new(%{---
-title: <%= tag_name %>
-slug: jsp-<%= tag_name %>
-tags: api, java
-publish: true
+nav_title: <%= tag_name %>
 ---
 })
 
