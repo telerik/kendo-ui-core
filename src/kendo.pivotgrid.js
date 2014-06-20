@@ -454,7 +454,7 @@ var __meta__ = {
             var rowDescriptors = this.rows().length;
             var hasColumnTuples = axes.columns && axes.columns.tuples;
 
-            if (!columnDescriptors && rowDescriptors && hasColumnTuples) {
+            if (!columnDescriptors && rowDescriptors && hasColumnTuples && this._rowMeasures().length) {
                 axes = {
                     columns: {},
                     rows: axes.columns
