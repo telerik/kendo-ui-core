@@ -361,6 +361,8 @@ var __meta__ = {
                 this._initData(options);
             }
 
+            this._updateClasses();
+
             Widget.fn.setOptions.call(this, options);
         },
 
@@ -712,6 +714,7 @@ var __meta__ = {
             var element = this.element,
                 items;
 
+            element.removeClass("k-menu-horizontal k-menu-vertical");
             element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             element.find("li > ul")
@@ -1182,12 +1185,19 @@ var __meta__ = {
         setOptions: function(options) {
             var that = this;
 
+            Menu.fn.setOptions.call(that, options);
+
             that.target.off(that.showOn + NS, that._showProxy);
-            if (that.events) {
-                that.events.destroy();
+
+            if (that.userEvents) {
+                that.userEvents.destroy();
             }
 
             that.target = $(that.options.target);
+            if (options.orientation && that.popup.wrapper[0]) {
+                that.popup.element.unwrap();
+            }
+
             that._wire();
 
             Menu.fn.setOptions.call(this, options);
@@ -1201,9 +1211,12 @@ var __meta__ = {
             that.target.off(that.showOn + NS, that._showProxy);
             DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
-            if (that.popup) {
-                kendo.destroy(that.popup.wrapper);
+            if (that.userEvents) {
+                that.userEvents.destroy();
             }
+
+            that.element.data("kendoPopup").destroy();
+            that.element.remove();
         },
 
         show: function(x, y) {
@@ -1215,6 +1228,7 @@ var __meta__ = {
 
             if (y !== undefined) {
                 that.popup.wrapper.hide();
+                debugger;
                 that.popup.open(x, y);
             } else {
                 that.popup.options.anchor = x ? x[0] || x : that.popup.anchor;
@@ -1264,6 +1278,7 @@ var __meta__ = {
                     DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
                     if (containment) {
+                        this.unbind(SELECT, this._closeTimeoutProxy);
                         that.bind(SELECT, that._closeTimeoutProxy);
                     } else {
                         this.popup.close();
@@ -1280,15 +1295,15 @@ var __meta__ = {
             that._closeProxy = proxy(that._closeHandler, that);
             that._closeTimeoutProxy = proxy(that._close, that);
 
-            if (target) {
+            if (target[0]) {
                 if (kendo.support.mobileOS && options.showOn == "contextmenu") {
-                    that.events = new kendo.UserEvents(target, {
+                    that.userEvents = new kendo.UserEvents(target, {
                         filter: options.filter,
                         allowSelection: false
                     });
 
                     $(target).on(options.showOn + NS, false);
-                    that.events.bind("hold", that._showProxy);
+                    that.userEvents.bind("hold", that._showProxy);
                 } else {
                     if (options.filter) {
                         $(target).on(options.showOn + NS, options.filter, that._showProxy);
@@ -1308,7 +1323,7 @@ var __meta__ = {
 
             that._triggerProxy = proxy(that._triggerEvent, that);
 
-            that.popup = that.element
+            this.popup = that.element
                             .addClass("k-context-menu")
                             .kendoPopup({
                                 anchor: that.target || "body",
@@ -1319,8 +1334,6 @@ var __meta__ = {
                                 activate: that._triggerProxy,
                                 deactivate: that._triggerProxy
                             }).data("kendoPopup");
-
-            that.wrapper = that.popup.wrapper;
         }
     });
 
