@@ -130,7 +130,7 @@
       :type: Boolean
       :description: Specifies whether the menu button is initially enabled or disabled.
 
-     - :name: items.menuButtons.url
+    - :name: items.menuButtons.url
       :type: String
       :description: Specifies the url of the menu button to navigate to.
 
@@ -182,7 +182,7 @@
       :type: Boolean
       :description: Specifies whether the button is initially enabled or disabled.
 
-     - :name: items.buttons.url
+    - :name: items.buttons.url
       :type: String
       :description: Specifies the url of the button to navigate to.
 
