@@ -8,11 +8,11 @@
         <div kendo-pager k-data-source="source"></div>
     </div>
 
-    <script type="text/x-kendo-template" id="template">
+    <script type="text/x-kendo-angular-template" id="template">
         <div class="product">
-            <img src="../content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
-            <h3>#:ProductName#</h3>
-            <p>#:kendo.toString(UnitPrice, "c")#</p>
+            <img src="../content/web/foods/{{dataItem.ProductID}}.jpg" alt=" {{dataItem.ProductName}} image" />
+            <h3>{{ dataItem.ProductName }}</h3>
+            <p>{{ kendo.toString(dataItem.UnitPrice, "c") }}</p>
         </div>
     </script>
 
