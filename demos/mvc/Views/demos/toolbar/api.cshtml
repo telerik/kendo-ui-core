@@ -31,7 +31,7 @@
                             <button class="addItem k-button">Add new button</button>
                             <label>Text: <input type="text" value="New Button" id="btnText" class="k-textbox"/></label>
                             <label>ID: <input type="text" value="newButton" id="btnID" class="k-textbox"/></label>
-                            <label>Toggable: <input type="checkbox" id="btnToggable"/></label>
+                            <label>Togglable: <input type="checkbox" id="btnTogglable"/></label>
                         </li>
                         <li>
                             <button class="addSplitButton k-button">Add new SplitButton</button>
@@ -52,12 +52,12 @@
                             { 
                                 type: "buttonGroup",
                                 buttons: [
-                                    { id: "play", text: "play", toggable: true, group: "player" },
-                                    { id: "pause", text: "pause", toggable: true, group: "player", selected: true },
-                                    { id: "stop", text: "stop", toggable: true, group: "player" }
+                                    { id: "play", text: "play", togglable: true, group: "player" },
+                                    { id: "pause", text: "pause", togglable: true, group: "player", selected: true },
+                                    { id: "stop", text: "stop", togglable: true, group: "player" }
                                 ]
                             },
-                            { type: "button", toggable: true, id: "repeat", text: "repeat" },
+                            { type: "button", togglable: true, id: "repeat", text: "repeat" },
                             { 
                                 type: "splitButton",
                                 id: "save",
@@ -99,9 +99,9 @@
                         var toolbar = $("#toolbar").data("kendoToolBar"),
                             text = $("#btnText").val(),
                             id = $("#btnID").val(),
-                            toggable = $("#btnToggable").prop("checked");
+                            togglable = $("#btnTogglable").prop("checked");
 
-                        toolbar.add({ type: "button", text: text, id: id, toggable: toggable });
+                        toolbar.add({ type: "button", text: text, id: id, togglable: togglable });
                     });
 
                     $(".addSplitButton").click(function() {
