@@ -110,7 +110,7 @@
     test("click on toggleButton changes its state", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo" }
+                { type: "button", togglable: true, id: "foo", text: "foo" }
             ]
         });
 
@@ -124,7 +124,7 @@
     test("click on a toggleButton's icon changes the button state", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", icon: "foo" }
+                { type: "button", togglable: true, id: "foo", icon: "foo" }
             ]
         });
 
@@ -138,7 +138,7 @@
     test("click on selected toggleButton deselects it", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo" }
+                { type: "button", togglable: true, id: "foo", text: "foo" }
             ]
         });
 
@@ -154,7 +154,7 @@
     test("click on disabled toggleButton does not change its state", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo", enable: false }
+                { type: "button", togglable: true, id: "foo", text: "foo", enable: false }
             ]
         });
 
@@ -167,7 +167,7 @@
     test("click on disabled toggleButton does not trigger the toggle event", 0, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo", enable: false }
+                { type: "button", togglable: true, id: "foo", text: "foo", enable: false }
             ],
             toggle: function(e) {
                 ok(false, "Toggle event should not fire for disabled buttons");
@@ -184,7 +184,7 @@
             items: [
                 { 
                     type: "button",
-                    toggable: true,
+                    togglable: true,
                     id: "foo",
                     text: "foo",
                     enable: false,
@@ -203,7 +203,7 @@
     test("click on toggleButton triggers toggle event", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo" }
+                { type: "button", togglable: true, id: "foo", text: "foo" }
             ],
             toggle: function(e) {
                 ok(true, "Toggle event is clicked");
@@ -220,7 +220,7 @@
             items: [
                 { 
                     type: "button",
-                    toggable: true,
+                    togglable: true,
                     id: "foo",
                     text: "foo",
                     toggle: function(e) {
@@ -238,8 +238,8 @@
     test("selecting toggle button that belongs to a group will deselect other buttons from the same group", 4, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo", group: "foo" },
-                { type: "button", toggable: true, text: "bar", group: "foo", selected: true }
+                { type: "button", togglable: true, text: "foo", group: "foo" },
+                { type: "button", togglable: true, text: "bar", group: "foo", selected: true }
             ]
         });
 
@@ -447,7 +447,7 @@
     test("click on toggleButton (overflow) changes its state", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, id: "foo", text: "foo" }
+                { type: "button", togglable: true, id: "foo", text: "foo" }
             ]
         }).data("kendoToolBar");
 
