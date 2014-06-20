@@ -2933,11 +2933,11 @@ var __meta__ = {
             this.rowAxis = rowAxis;
 
             return [
-                element("table", null, [this._thead(data)])
+                element("table", null, [this._tbody(data)])
             ];
         },
 
-        _thead: function(data) {
+        _tbody: function(data) {
             var columnAxis = this.columnAxis;
             var dataItem = data[0];
             this.rows = [];
@@ -2960,7 +2960,7 @@ var __meta__ = {
                 this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
             }
 
-            return element("thead", null, this.rows);
+            return element("tbody", null, this.rows);
         },
 
         _indexes: function(axisInfo) {
