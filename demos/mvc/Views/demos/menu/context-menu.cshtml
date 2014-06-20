@@ -72,8 +72,12 @@
         $("#menu").kendoContextMenu({
             target: "#listview-context-menu",
             filter: ".product",
+            animation: {
+                open: { effects: "fadeIn" },
+                duration: 500
+            },
             select: function(e) {
-
+                // Do something on select
             }
         });
     });
