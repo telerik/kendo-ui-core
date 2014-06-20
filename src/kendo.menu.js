@@ -1313,6 +1313,7 @@ var __meta__ = {
                             .kendoPopup({
                                 anchor: that.target || "body",
                                 collision: that.popupCollision,
+                                animation: that.options.animation,
                                 open: that._triggerProxy,
                                 close: that._triggerProxy,
                                 activate: that._triggerProxy,
