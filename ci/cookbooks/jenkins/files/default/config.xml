@@ -184,6 +184,7 @@
       <properties class="hudson.model.View$PropertyList"/>
       <jobNames>
         <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../listView[5]/jobNames/comparator"/>
+        <string>documentation-upload</string>
         <string>internal-build-upload</string>
         <string>production-bundles</string>
         <string>production-cdn</string>
