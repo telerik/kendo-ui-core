@@ -70,10 +70,10 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
             options = that.options;
             dataSource = that.dataSource = options.dataSource;
-            that.acDataSource = acDataSource = options.acDataSource || dataSource.options;
+            that.acDataSource = options.acDataSource;
 
             if (!(acDataSource instanceof DataSource)) {
-                acDataSource = that.acDataSource = options.acDataSource = DataSource.create(acDataSource);
+                acDataSource = that.acDataSource = DataSource.create(acDataSource);
             }
 
             if (acDataSource.group()) {

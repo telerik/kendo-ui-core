@@ -774,6 +774,48 @@
         equal(secondWindget.options.type, "string");
     });
 
+    test("filtercell widgets are initialized with the provided filterable options - acDataSource", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                {
+                    field: "col1",
+                    filterable: {
+                        cell: {
+                            dataSource: {
+                                transport: {
+                                    read: $.noop
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    field: "col2",
+                    filterable: true
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "number"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        var firstWidget = widgets.eq(0).data("kendoFilterCell");
+        ok(firstWidget.acDataSource.transport.read === $.noop);
+    });
+
     test("grid filterable options propagate to the filter menu", function() {
         var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             filterable: {

@@ -1447,7 +1447,7 @@ var __meta__ = {
             }
 
             reorder(elements(that.lockedHeader, that.thead, "th.k-header:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
-            if (that._hasFilterCelling()) {
+            if (that._hasFilterRow()) {
                 reorder(that.wrapper.find(".k-filterrow th:not(.k-group-cell,.k-hierarchy-cell)"), sourceIndex, destIndex, before);
             }
 
@@ -3675,9 +3675,9 @@ var __meta__ = {
             }
         },
 
-        _filterCell: function() {
-            var hasFilterCelling = this._hasFilterCelling();
-            if (hasFilterCelling) {
+        _filterRow: function() {
+            var hasFilterRow = this._hasFilterRow();
+            if (hasFilterRow) {
                 var filterCellOptions = this.options.filterable.row;
                 var rowheader = this.thead.find(".k-filterrow");
                 var columns = this.columns;
@@ -4092,7 +4092,7 @@ var __meta__ = {
 
             return that.options.detailTemplate !== null  || (that._events[DETAILINIT] || []).length;
         },
-        _hasFilterCelling: function() {
+        _hasFilterRow: function() {
             var filterable = this.options.filterable;
             var hasFiltering = filterable && filterable.row;
             var columns = this.columns;
@@ -4292,7 +4292,7 @@ var __meta__ = {
                 filtercellCells,
                 skipHiddenCount = 0,
                 cols = $(),
-                hasFilterCelling = that._hasFilterCelling(),
+                hasFilterRow = that._hasFilterRow(),
                 filterCells = $(),
                 cells = $();
 
@@ -4314,7 +4314,7 @@ var __meta__ = {
             }
 
             if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterCelling ? '<tr class="k-filterrow" />' : '') +
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterRow ? '<tr class="k-filterrow" />' : '') +
                     '</thead></table></div>';
 
                 table = $(html);
@@ -4347,7 +4347,7 @@ var __meta__ = {
             var that = this,
                 columns = that.columns,
                 hasDetails = that._hasDetails() && columns.length,
-                hasFilterCelling = that._hasFilterCelling(),
+                hasFilterRow = that._hasFilterRow(),
                 idx,
                 length,
                 html = "",
@@ -4376,7 +4376,7 @@ var __meta__ = {
                 }
             }
 
-            if (hasFilterCelling) {
+            if (hasFilterRow) {
                 var filterRow = $("<tr/>");
                 filterRow.addClass("k-filterrow");
                 if (hasDetails) {
@@ -4422,7 +4422,7 @@ var __meta__ = {
 
             that._filterable();
 
-            that._filterCell();
+            that._filterRow();
 
             that._scrollable();
 
