@@ -1,10 +1,18 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-      <input kendo-auto-complete ng-model="country" k-data-source="countryNames" />
-      <p>
-        Your selection: {{ country }}
-      </p>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <h4>Select Country</h4>
+        <p>Start typing the name of an European country, e.g., Armenia.</p>
+        <input kendo-auto-complete ng-model="country" k-data-source="countryNames"  style="width: 400px" />
+        <p>Your selection: {{ country }}</p>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+        }
+        .demo-section p {
+            padding: 5px 0;
+        }
+    </style>
 </div>
 
 <script>

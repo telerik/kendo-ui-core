@@ -1,74 +1,76 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <fieldset>
-    <legend>Static data</legend>
-    Country in Europe:
-    <select kendo-combo-box>
-      <option>Albania</option>
-      <option>Andorra</option>
-      <option>Armenia</option>
-      <option>Austria</option>
-      <option>Azerbaijan</option>
-      <option>Belarus</option>
-      <option>Belgium</option>
-      <option>Bosnia & Herzegovina</option>
-      <option>Bulgaria</option>
-      <option>Croatia</option>
-      <option>Cyprus</option>
-      <option>Czech Republic</option>
-      <option>Denmark</option>
-      <option>Estonia</option>
-      <option>Finland</option>
-      <option>France</option>
-      <option>Georgia</option>
-      <option>Germany</option>
-      <option>Greece</option>
-      <option>Hungary</option>
-      <option>Iceland</option>
-      <option>Ireland</option>
-      <option>Italy</option>
-      <option>Kosovo</option>
-      <option>Latvia</option>
-      <option>Liechtenstein</option>
-      <option>Lithuania</option>
-      <option>Luxembourg</option>
-      <option>Macedonia</option>
-      <option>Malta</option>
-      <option>Moldova</option>
-      <option>Monaco</option>
-      <option>Montenegro</option>
-      <option>Netherlands</option>
-      <option>Norway</option>
-      <option>Poland</option>
-      <option>Portugal</option>
-      <option>Romania</option>
-      <option>Russia</option>
-      <option>San Marino</option>
-      <option>Serbia</option>
-      <option>Slovakia</option>
-      <option>Slovenia</option>
-      <option>Spain</option>
-      <option>Sweden</option>
-      <option>Switzerland</option>
-      <option>Turkey</option>
-      <option>Ukraine</option>
-      <option>United Kingdom</option>
-      <option>Vatican City</option>
-    </select>
-  </fieldset>
-
-  <fieldset>
-    <legend>Remote data</legend>
-    Product:
-    <select kendo-combo-box
-            k-placeholder="'Select product'"
-            k-data-text-field="'ProductName'"
-            k-data-value-field="'ProductID'"
-            k-filter="contains"
-            k-auto-bind="false"
-            k-min-length="3"
-            k-data-source="productsDataSource"></select>
-  </fieldset>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+    <div class="box-col">
+        <h4>Static data</h4>
+        <label>Country in Europe:</label>
+        <select kendo-combo-box 
+                style="width: 300px;" >
+          <option>Albania</option>
+          <option>Andorra</option>
+          <option>Armenia</option>
+          <option>Austria</option>
+          <option>Azerbaijan</option>
+          <option>Belarus</option>
+          <option>Belgium</option>
+          <option>Bosnia & Herzegovina</option>
+          <option>Bulgaria</option>
+          <option>Croatia</option>
+          <option>Cyprus</option>
+          <option>Czech Republic</option>
+          <option>Denmark</option>
+          <option>Estonia</option>
+          <option>Finland</option>
+          <option>France</option>
+          <option>Georgia</option>
+          <option>Germany</option>
+          <option>Greece</option>
+          <option>Hungary</option>
+          <option>Iceland</option>
+          <option>Ireland</option>
+          <option>Italy</option>
+          <option>Kosovo</option>
+          <option>Latvia</option>
+          <option>Liechtenstein</option>
+          <option>Lithuania</option>
+          <option>Luxembourg</option>
+          <option>Macedonia</option>
+          <option>Malta</option>
+          <option>Moldova</option>
+          <option>Monaco</option>
+          <option>Montenegro</option>
+          <option>Netherlands</option>
+          <option>Norway</option>
+          <option>Poland</option>
+          <option>Portugal</option>
+          <option>Romania</option>
+          <option>Russia</option>
+          <option>San Marino</option>
+          <option>Serbia</option>
+          <option>Slovakia</option>
+          <option>Slovenia</option>
+          <option>Spain</option>
+          <option>Sweden</option>
+          <option>Switzerland</option>
+          <option>Turkey</option>
+          <option>Ukraine</option>
+          <option>United Kingdom</option>
+          <option>Vatican City</option>
+        </select>
+    </div>
+    <div class="boxc-col">
+        <h4>Remote data</h4>
+        <label>Product:</label>
+        <select kendo-combo-box
+                k-placeholder="'Select product'"
+                k-data-text-field="'ProductName'"
+                k-data-value-field="'ProductID'"
+                k-filter="contains"
+                k-auto-bind="false"
+                k-min-length="3"
+                k-data-source="productsDataSource"
+                style="width: 300px;" >
+        </select>
+    </div>
 </div>
 </div>
 

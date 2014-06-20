@@ -1,26 +1,32 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-        <table style="width: 100%"><tr style="vertical-align: top"><td style="width: 50%">
-                    <p>
-                        <input kendo-color-picker k-palette="'websafe'" ng-model="color1" />
-                        Value: {{color1}}
-                    </p>
-                    <p>
-                        <input kendo-color-picker ng-model="color2" k-buttons="false" k-preview="false" k-input="false" />
-                        Value: {{color2}}
-                    </p>
-                    </td><td style="width: 50%">
-                    <p>
-                        <div style="border: 1px solid #555; padding: 5px"
-                            kendo-color-palette ng-model="color3" k-opacity="true"></div>
-                    </p>
-                    <p>
-                        <div style="border: 1px solid #555; padding: 5px"
-                            kendo-flat-color-picker ng-model="color3" k-opacity="true"></div>
-                        Value: {{color3}}
-                    </p>
-        </td></tr></table>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div class="box-col">
+            <h4>Color value 1: {{color1}}</h4>
+            <ul>
+                <li><div style="border: 1px solid #555; padding: 5px"
+                    kendo-color-palette ng-model="color1" k-opacity="true"></div></li>
+                <li><div style="border: 1px solid #555; padding: 5px"
+                    kendo-flat-color-picker ng-model="color1" k-opacity="true"></div></li>
+            </ul>    
+        </div>
+        <div class="box-col">
+            <h4>Color value 2: {{color2}}</h4>
+            <ul>
+                <li><input kendo-color-picker k-palette="'websafe'" ng-model="color2" /></li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Color value 3: {{color3}}</h4>
+            <ul>
+                <li><input kendo-color-picker ng-model="color3" k-buttons="false" k-preview="false" k-input="false" /></li>
+            </ul>
+        </div>
     </div>
+    <style scoped>
+        .box-col {
+            width: 300px;
+        }
+    </style>
 </div>
 
 <script>
