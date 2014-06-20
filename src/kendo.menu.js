@@ -1228,7 +1228,6 @@ var __meta__ = {
 
             if (y !== undefined) {
                 that.popup.wrapper.hide();
-                debugger;
                 that.popup.open(x, y);
             } else {
                 that.popup.options.anchor = x ? x[0] || x : that.popup.anchor;
