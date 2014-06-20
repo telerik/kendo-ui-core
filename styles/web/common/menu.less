@@ -103,10 +103,25 @@ ul.k-menu-vertical > .k-item
     .box-sizing(content-box);
 }
 
-.k-context-menu > .k-item > .k-link,
+.k-context-menu.k-menu-vertical > .k-item > .k-link,
 .k-menu .k-group .k-item > .k-link
 {
     padding: .28em 1.8em .38em .9em;
+}
+
+.k-context-menu.k-menu-horizontal > .k-separator
+{
+    display: none;
+}
+
+.k-context-menu.k-menu-horizontal > .k-item
+{
+    .box-sizing(border-box);
+}
+
+.k-context-menu.k-menu-horizontal > .k-last
+{
+    border: 0;
 }
 
 .k-ie7 .k-menu .k-group .k-link

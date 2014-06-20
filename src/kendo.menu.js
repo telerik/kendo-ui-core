@@ -1312,7 +1312,7 @@ var __meta__ = {
                             .addClass("k-context-menu")
                             .kendoPopup({
                                 anchor: that.target || "body",
-                                collision: that.popupCollision,
+                                collision: that.options.popupCollision || "fit",
                                 animation: that.options.animation,
                                 open: that._triggerProxy,
                                 close: that._triggerProxy,
