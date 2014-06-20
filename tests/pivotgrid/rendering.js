@@ -2878,6 +2878,87 @@
         equal(cells_4.eq(0).text(), "1");
     });
 
+    test("PivotGrid renders data for measures on column axis", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "1");
+        equal(cells.eq(1).text(), "2");
+    });
+
+    test("PivotGrid renders formatted value if any", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1, fmtValue: "$1" },
+            { value: 2, fmtValue: "$2" }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "$1");
+        equal(cells.eq(1).text(), "$2");
+    });
+
+    test("PivotGrid renders data for measures on column axis when one of measures has no data", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+        var cells = rows.find("td");
+
+        equal(rows.length, 1);
+
+        equal(cells.eq(0).text(), "1");
+    });
+
     module("PivotGrid resize on render", {
         setup: function() {
             kendo.ns = "kendo-";

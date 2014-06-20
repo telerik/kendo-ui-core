@@ -2187,22 +2187,53 @@ var __meta__ = {
 
             var axes = dataSource.axes();
             var columns = axes.columns || {};
-            var tuples = columns.tuples || [];
             var rows = axes.rows || {};
 
-            that.columnsHeaderTree.render(that._columnBuilder.build(tuples || []));
-            that.rowsHeaderTree.render(that._rowBuilder.build(rows.tuples || []));
+            var columnDescriptors = dataSource.columnsAxisDescriptors();
+            var rowDescriptors = dataSource.rowsAxisDescriptors();
 
-            var columnAxis = {
-                measures: dataSource._columnMeasures().length || 1,
-                indexes: that._columnBuilder._indexes,
-                metadata: that._columnBuilder.metadata
+            var contentBuilder = that._contentBuilder;
+            var columnBuilder = that._columnBuilder;
+            var rowBuilder = that._rowBuilder;
+
+            var columnAxis = contentBuilder.columnAxis;
+            var rowAxis = contentBuilder.rowAxis;
+
+            var columnMeasures = dataSource._columnMeasures().length || 1;
+            var rowMeasures = dataSource._rowMeasures().length || 1;
+            var oldColumnMeasures = columnAxis.measures || columnMeasures;
+            var oldRowMeasures = rowAxis.measures || rowMeasures;
+
+            //reset metadata
+            if (descriptorsChanged(that._columnDescriptors, columnDescriptors) || oldColumnMeasures !== columnMeasures)
+            {
+                columnBuilder.metadata = {};
+            }
+
+            //reset metadata
+            if (descriptorsChanged(that._rowDescriptors, rowDescriptors) || oldRowMeasures !== rowMeasures)
+            {
+                rowBuilder.metadata = {};
+            }
+
+            that._columnDescriptors = columnDescriptors;
+            that._rowDescriptors = rowDescriptors;
+
+            //render headers
+            that.columnsHeaderTree.render(columnBuilder.build(columns.tuples || []));
+            that.rowsHeaderTree.render(rowBuilder.build(rows.tuples || []));
+
+            //render content
+            columnAxis = {
+                measures: columnMeasures,
+                indexes: columnBuilder._indexes,
+                metadata: columnBuilder.metadata
             };
 
-            var rowAxis = {
-                measures: dataSource._rowMeasures().length || 1,
-                indexes: that._rowBuilder._indexes,
-                metadata: that._rowBuilder.metadata
+            rowAxis = {
+                measures: rowMeasures,
+                indexes: rowBuilder._indexes,
+                metadata: rowBuilder.metadata
             };
 
             that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
@@ -2210,6 +2241,26 @@ var __meta__ = {
             that._resize();
         }
     });
+
+    function descriptorsChanged(old, current) {
+        var length = current.length;
+
+        if (!old) {
+            return false;
+        }
+
+        if (old.length !== length) {
+            return true;
+        }
+
+        for (var idx = 0; idx < length; idx++) {
+            if (old[idx].name !== current[idx].name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     var element = kendo.dom.element;
     var text = kendo.dom.text;
@@ -2813,7 +2864,8 @@ var __meta__ = {
 
     var ContentBuilder = Class.extend({
         init: function(options) {
-            this.expandState = {};
+            this.columnAxis = {};
+            this.rowAxis = {};
         },
 
         build: function(data, columnAxis, rowAxis) {
@@ -2826,13 +2878,14 @@ var __meta__ = {
         },
 
         _thead: function(data) {
+            var columnAxis = this.columnAxis;
             var dataItem = data[0];
             this.rows = [];
 
-            var metadata = this.columnAxis.metadata[this.columnAxis.indexes[0]];
+            var metadata = columnAxis.metadata[columnAxis.indexes[0]];
 
             this.rowIdx = 0;
-            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : 1; //measure count should be used here instead of 1
+            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures;
 
             if (!this.rowLength) {
                 this.rowLength = 1;
@@ -2867,7 +2920,7 @@ var __meta__ = {
             var children;
             var skipChildren;
 
-            if (!length) { //TODO: test when there is no axisInfo
+            if (!length) {
                 for (measureIdx = 0; measureIdx < measures; measureIdx++) {
                     result[measureIdx] = measureIdx;
                 }
@@ -2930,11 +2983,14 @@ var __meta__ = {
             var length = columnIndexes.length;
             var idx = 0;
 
-            var currentIdx;
+            var dataItem;
 
             for (; idx < length; idx++) {
-                currentIdx = columnIndexes[idx];
-                cells.push(element("td", null, [ text(data[startIdx + currentIdx].value) ]));
+                dataItem = data[startIdx + columnIndexes[idx]];
+
+                if (dataItem) {
+                    cells.push(element("td", null, [ text(dataItem.fmtValue || dataItem.value) ]));
+                }
             }
 
             return element("tr", null, cells);
