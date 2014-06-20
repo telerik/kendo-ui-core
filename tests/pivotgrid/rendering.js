@@ -3026,4 +3026,49 @@
 
         equal(rowsField.innerHeight(), columnHeaderWrap.height());
     });
+
+    test("PivotGrid sets height to the measure-fields section if column descriptors", function() {
+        var pivotgrid = createPivot({
+            dataSource: createDataSource()
+        });
+
+        var measureFields = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("div:first");
+        var columnFields = pivotgrid.wrapper.find(".k-pivot-table").find("div:first");
+
+        columnFields.height("100px");
+
+        pivotgrid.refresh();
+
+        equal(measureFields.height(), columnFields.height());
+    });
+
+    test("PivotGrid sets height to the column-fields section if measures", function() {
+        var pivotgrid = createPivot({
+            dataSource: createDataSource()
+        });
+
+        var measureFields = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("div:first");
+        var columnFields = pivotgrid.wrapper.find(".k-pivot-table").find("div:first");
+
+        measureFields.height("100px");
+
+        pivotgrid.refresh();
+
+        equal(columnFields.height(), measureFields.height());
+    });
+
+    test("PivotGrid sets height of the rows header", function() {
+        var pivotgrid = createPivot({
+            dataSource: createDataSource()
+        });
+
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        content.height("100px");
+
+        pivotgrid.refresh();
+
+        equal(rowsHeader.height(), content.height());
+    });
 })();

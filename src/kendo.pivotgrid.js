@@ -1803,7 +1803,7 @@ var __meta__ = {
             this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
 
             this._refreshHandler = $.proxy(this.refresh, this);
-            this.dataSource.bind("change", this._refreshHandler);
+            this.dataSource.first("change", this._refreshHandler);
 
             if (!options.template) {
                 this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
@@ -2005,6 +2005,7 @@ var __meta__ = {
 
             that.content.scroll(function() {
                 that.columnsHeader[0].scrollLeft = this.scrollLeft;
+                that.rowsHeader[0].scrollTop = this.scrollTop;
             });
 
             if (that.options.autoBind) {
@@ -2020,6 +2021,7 @@ var __meta__ = {
             name: "PivotGrid",
             autoBind: true,
             reorderable: true,
+            height: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
@@ -2152,6 +2154,33 @@ var __meta__ = {
         },
 
         _resize: function() {
+            var columnFieldsHeight = this.columnFields.height("100%").height();
+            var measureFieldsHeight = this.measureFields.height("100%").height();
+            var height;
+
+            if (columnFieldsHeight > measureFieldsHeight) {
+                height = columnFieldsHeight;
+            } else {
+                height = measureFieldsHeight;
+            }
+
+            this.measureFields.height(height);
+            this.columnFields.height(height);
+
+            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
+            var rowFieldsHeight = this.rowFields.height("100%").innerHeight();
+
+            var padding = rowFieldsHeight - this.rowFields.height();
+
+            if (columnsHeight > rowFieldsHeight) {
+                height = columnsHeight;
+            } else {
+                height = rowFieldsHeight;
+            }
+
+            this.rowFields.height(height - padding);
+            this.columnsHeader.height(height);
+
             var contentTable = this.content.children("table");
             var contentWidth = this.content.width();
 
@@ -2169,16 +2198,22 @@ var __meta__ = {
                         .css("min-width", minWidth + "%")
                         .css("height", "100%");
 
-            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
-            var rowFieldsHeight = this.rowFields.height("100%").innerHeight();
-            var rowFieldsPadding;
 
-            if (columnsHeight > rowFieldsHeight) {
-                rowFieldsPadding = rowFieldsHeight - this.rowFields.height();
-                this.rowFields.height(columnsHeight - rowFieldsPadding);
+            var contentHeight = this.content.height("100%").height();
+            var rowsHeaderHeight = this.rowsHeader.height("100%").height();
+
+            if (contentHeight > rowsHeaderHeight) {
+                height = contentHeight;
             } else {
-                this.columnsHeader.height(rowFieldsHeight);
+                height = rowsHeaderHeight;
             }
+
+            if (this.options.height && height > this.options.height) {
+                height = this.options.height;
+            }
+
+            this.content.height(height);
+            this.rowsHeader.height(height - (this.content[0].offsetHeight - this.content[0].clientHeight));
         },
 
         refresh: function() {
@@ -2984,13 +3019,14 @@ var __meta__ = {
             var idx = 0;
 
             var dataItem;
+            var cellValue;
 
             for (; idx < length; idx++) {
                 dataItem = data[startIdx + columnIndexes[idx]];
 
-                if (dataItem) {
-                    cells.push(element("td", null, [ text(dataItem.fmtValue || dataItem.value) ]));
-                }
+                cellValue = dataItem ? (dataItem.fmtValue || dataItem.value) : "";
+
+                cells.push(element("td", null, [ text(cellValue) ]));
             }
 
             return element("tr", null, cells);
