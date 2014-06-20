@@ -519,4 +519,72 @@
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
 
+    test("setDataSource changes the dataSource instance", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource
+        });
+
+        dataSource = new kendo.data.PivotDataSource({
+            columns: ["baz"]
+        });
+
+        setting.setDataSource(dataSource);
+
+        var children = $(div).children();
+
+        equal(children.length, 1);
+        ok(children.eq(0).is("div"));
+        equal(children.eq(0).text(), "baz");
+    });
+
+    test("setDataSource reflects changes of new dataSource", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource
+        });
+
+        dataSource = new kendo.data.PivotDataSource({ });
+
+        setting.setDataSource(dataSource);
+
+        dataSource.columns(["baz"]);
+
+        var children = $(div).children();
+
+        equal(children.length, 1);
+        ok(children.eq(0).is("div"));
+        equal(children.eq(0).text(), "baz");
+    });
+
+    test("setDataSource changes to the old dataSource are not reflected", function() {
+        var old = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: old
+        });
+
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["moo"]
+        });
+
+        setting.setDataSource(dataSource);
+
+        old.columns(["baz"]);
+
+        var children = $(div).children();
+
+        equal(children.length, 1);
+        ok(children.eq(0).is("div"));
+        equal(children.eq(0).text(), "moo");
+    });
+
 })();

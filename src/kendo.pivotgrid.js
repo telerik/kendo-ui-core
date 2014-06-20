@@ -1838,6 +1838,13 @@ var __meta__ = {
                 empty: "Drop Fields Here"
             }
         },
+        setDataSource: function(dataSource) {
+            this.dataSource.unbind("change", this._refreshHandler);
+            this.dataSource = this.options.dataSource = dataSource;
+            dataSource.first("change", this._refreshHandler);
+
+            this.refresh();
+        },
 
         _sortable: function() {
             var that = this;
