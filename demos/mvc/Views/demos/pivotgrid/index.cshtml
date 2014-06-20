@@ -1,0 +1,35 @@
+
+        <div id="example">
+            <div id="pivotgrid"></div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#pivotgrid").kendoPivotGrid({
+                        dataSource: {
+                            type: "xmla",
+                            rows: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                            columns: [{ name: "[Product].[Product Name].[All]" }],
+                            measures: ["[Measures].[Internet Order Lines Count]"],
+                            transport: {
+                                connection: {
+                                    catalog: "Adventure Works Internet Sales Model",
+                                    cube: "Adventure Works Internet Sales Model"
+                                },
+                                read: {
+                                    url: "http://krustev:8080/olap/msmdpump.dll",
+                                    dataType: "text",
+                                    contentType: "text/xml",
+                                    type: "POST"
+                                }
+                            },
+                            schema: {
+                                type: "xmla"
+                            },
+                            error: function (e) {
+                                alert("error: " + kendo.stringify(e.errors[0]));
+                            }
+                        }
+                    });
+                });
+            </script>
+        </div>

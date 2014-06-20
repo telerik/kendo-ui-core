@@ -1821,6 +1821,44 @@
     "category": "Data Management"
   },
   {
+    "text": "PivotGrid",
+    "name": "pivotgrid",
+    "pro": "true",
+    "api": "web/pivotgrid",
+    "documentation": {
+       "kendo-ui": "getting-started/web/pivotgrid/overview",
+       "aspnet-mvc": "getting-started/using-kendo-with/aspnet-mvc/helpers/pivotgrid/overview",
+       "jsp-ui": "getting-started/using-kendo-with/jsp/tags/pivotgrid/overview",
+       "php-ui": "getting-started/using-kendo-with/php/widgets/pivotgrid/overview"
+    },
+    "forum": {
+       "kendo-ui": "kendo-ui/pivotgrid",
+       "aspnet-mvc": "aspnet-mvc/pivotgrid",
+       "jsp-ui": "jsp/pivotgrid",
+       "php-ui": "php/pivotgrid"
+    },
+    "codelibrary": {
+       "kendo-ui": "kendo-ui/pivotgrid",
+       "aspnet-mvc": "aspnet-mvc/pivotgrid",
+       "jsp-ui": "jsp/pivotgrid",
+       "php-ui": "php/pivotgrid"
+    },
+    "spriteCssClass": "pivotGridIcon",
+    "items": [
+      {
+        "text": "Basic usage",
+        "url": "pivotgrid/index",
+        "title": {
+            "kendo-ui": "jQuery PivotGrid control example | Kendo UI PivotGrid Demos"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can make a data summarization tool."
+        }
+      }
+	],
+    "category": "Data Management"
+  },
+  {
     "text": "ListView",
     "name": "listview",
     "api": "web/listview",

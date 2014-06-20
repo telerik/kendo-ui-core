@@ -1390,6 +1390,21 @@
                 }
             ]
         },
+		{
+            "text": "PivotGrid",
+            "name": "pivotgrid",
+            "pro": "true",
+            "documentation": "web/pivotgrid",
+            "spriteCssClass": "pivotGridIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "pivotgrid/index.html",
+                    "title": "jQuery PivotGrid control example | Kendo UI PivotGrid Demos",
+                    "meta": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can create a data summarization tool."
+                },
+			]
+		},
         {
              "text": "ProgressBar",
              "name": "progressbar",
