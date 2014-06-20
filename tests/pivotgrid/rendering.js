@@ -3057,7 +3057,7 @@
         equal(columnFields.height(), measureFields.height());
     });
 
-    test("PivotGrid sets height of the rows header", function() {
+    test("PivotGrid sets height of rows header", function() {
         var pivotgrid = createPivot({
             dataSource: createDataSource()
         });
@@ -3069,6 +3069,6 @@
 
         pivotgrid.refresh();
 
-        equal(rowsHeader.height(), content.height());
+        equal(rowsHeader.height(), content.height() - kendo.support.scrollbar());
     });
 })();

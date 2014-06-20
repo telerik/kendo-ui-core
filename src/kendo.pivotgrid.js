@@ -2223,22 +2223,32 @@ var __meta__ = {
                         .css("min-width", minWidth + "%")
                         .css("height", "100%");
 
+            this._setContentHeight();
+        },
 
-            var contentHeight = this.content.height("100%").height();
-            var rowsHeaderHeight = this.rowsHeader.height("100%").height();
+        _setContentHeight: function() {
+            var that = this;
+            var content = that.content;
+            var rowsHeader = that.rowsHeader;
+            var height = that.options.height;
+            var scrollbar = kendo.support.scrollbar();
 
-            if (contentHeight > rowsHeaderHeight) {
-                height = contentHeight;
-            } else {
-                height = rowsHeaderHeight;
+            if (that.wrapper.is(":visible")) {
+                if (!height) {
+                    rowsHeader.height(content.height() - scrollbar);
+                    return;
+                }
+
+                height -= that.columnFields.outerHeight();
+                height -= that.columnsHeader.outerHeight();
+
+                if (height <= scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                    height = scrollbar * 2 + 1;
+                }
+
+                content.height(height);
+                rowsHeader.height(height - scrollbar);
             }
-
-            if (this.options.height && height > this.options.height) {
-                height = this.options.height;
-            }
-
-            this.content.height(height);
-            this.rowsHeader.height(height - (this.content[0].offsetHeight - this.content[0].clientHeight));
         },
 
         refresh: function() {
