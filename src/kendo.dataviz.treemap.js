@@ -44,10 +44,6 @@ var __meta__ = {
 
             this.view = new SquarifiedView(element, this.options);
 
-            if (this.options.title.visible) {
-                this.options.title._height = this.view._getTitleHeight();
-            }
-
             this.src = new Squarified(this.options);
 
             this._initDataSource();
@@ -59,10 +55,7 @@ var __meta__ = {
 
         options: {
             name: "TreeMap",
-            autoBind: true,
-            title: {
-                visible: true
-            }
+            autoBind: true
         },
 
         events: [DATA_BOUND, "itemCreated"],
@@ -120,6 +113,7 @@ var __meta__ = {
                     left: 0
                 };
                 this._items.push(item);
+                this.view.createRoot(item);
                 // Reference of the root
                 this._root = item;
             } else {
@@ -130,12 +124,19 @@ var __meta__ = {
                         item = items[i];
                         root.children.push(this._wrapItem(item));
                     }
-                    this.src.compute(root, root.coord);
+                    var htmlSize = this.view.htmlSize(root);
+
+                    this.src.compute(root, root.coord, htmlSize);
+
                     this.view.render(root);
                 }
             }
 
             this.trigger(DATA_BOUND);
+        },
+
+        _contentSize: function(root) {
+            this.view.renderHeight(root);
         },
 
         _wrapItem: function(item) {
@@ -149,8 +150,8 @@ var __meta__ = {
                 wrap.color = getField(this.options.colorField, item);
             }
 
-            if (defined(this.options.titleField)) {
-                wrap.title = getField(this.options.titleField, item);
+            if (defined(this.options.textField)) {
+                wrap.text = getField(this.options.textField, item);
             }
 
             wrap.dataItem = item;
@@ -328,9 +329,7 @@ var __meta__ = {
             );
         },
 
-        compute: function(data, rootCoord) {
-            var options = this.options;
-
+        compute: function(data, rootCoord, htmlSize) {
             if (!(rootCoord.width >= rootCoord.height && this.layoutHorizontal())) {
                 this.layoutChange();
             }
@@ -338,15 +337,12 @@ var __meta__ = {
             var children = data.children;
             if (children && children.length > 0) {
                 var newRootCoord = {
-                    width: rootCoord.width - options.offset,
-                    height: rootCoord.height - options.offset,
+                    width: rootCoord.width - htmlSize.offset,
+                    height: rootCoord.height - htmlSize.offset - htmlSize.text,
                     top: 0,
                     left: 0
                 };
 
-                if (options.title.visible) {
-                    newRootCoord.height -= options.title._height;
-                }
                 this.layoutChildren(data, children, newRootCoord);
             }
         },
@@ -435,20 +431,29 @@ var __meta__ = {
             this.element = $(element);
         },
 
-        _getTitleHeight: function() {
-            var leaf = this._createLeaf({
-                coord: {}
-            });
-            leaf.css({
-                visibility: "hidden",
-                position: "absolute"
-            }).append(this._createTitle({
-                title: "a"
-            }));
-            this.element.append(leaf);
-            var titleHeight = leaf.children().height();
-            this.element.empty();
-            return titleHeight;
+        htmlSize: function(root) {
+            var rootElement = this._getByUid(root.dataItem.uid);
+            var htmlSize = {
+                text: 0,
+                offset: 0
+            };
+
+            if (root.children) {
+                this._clean(rootElement);
+
+                var text = this._getText(root);
+                if (text) {
+                    var title = this._createTitle(root);
+                    rootElement
+                        .append(title);
+
+                    htmlSize.text = title.height();
+                }
+
+                rootElement.append(this._createWrap);
+            }
+
+            return htmlSize;
         },
 
         _getByUid: function(uid) {
@@ -457,25 +462,19 @@ var __meta__ = {
 
         render: function(root) {
             var rootElement = this._getByUid(root.dataItem.uid);
-            if (!rootElement.length) {
-                rootElement = this._createLeaf(root);
-                this.element.append(rootElement);
-            }
-
             var children = root.children;
             if (children) {
-                this._clean(rootElement);
-                var rootWrap = this._createWrap(root);
+                var rootWrap = rootElement.find(".k-treemap-wrap");
 
                 for (var i = 0; i < children.length; i++) {
                     var leaf = children[i];
                     rootWrap.append(this._createLeaf(leaf));
                 }
-
-                rootElement
-                    .append(this._createTitle(root))
-                    .append(rootWrap);
             }
+        },
+
+        createRoot: function(root) {
+            this.element.append(this._createLeaf(root));
         },
 
         _clean: function(root) {
@@ -489,14 +488,10 @@ var __meta__ = {
             element.addClass("k-leaf");
 
             if (defined(this.options.template)) {
-                var rootTemplate = template(this.options.template);
-                element.append($(rootTemplate({
-                    dataItem: item.dataItem,
-                    title: item.title
-                })));
+                element.append($(this._renderTemplate(item)));
             } else {
                 element
-                    .text(this._getTitleText(item))
+                    .text(this._getText(item))
                     .css("background-color", valueOrDefault(item.color, getRandomColor()));
             }
 
@@ -519,25 +514,27 @@ var __meta__ = {
             return root;
         },
 
-        _getTitleText: function(item) {
-            var text = item.title;
+        _getText: function(item) {
+            var text = item.text;
 
-            if (this.options.titleTemplate) {
-                var titleTemplate = template(this.options.title.template);
-                text = titleTemplate({
-                    dataItem: item.dataItem,
-                    title: item.title
-                });
+            if (this.options.template) {
+                text = this._renderTemplate(item);
             }
 
             return text;
         },
 
+        _renderTemplate: function(item) {
+            var titleTemplate = template(this.options.template);
+            return titleTemplate({
+                dataItem: item.dataItem,
+                text: item.text
+            });
+        },
+
         _createTitle: function(item) {
-            if (this.options.title.visible) {
-                return $("<div class='k-treemap-title k-state-default'></div>")
-                                .text(this._getTitleText(item));
-            }
+            return $("<div class='k-treemap-title k-state-default'></div>")
+                .text(this._getText(item));
         },
 
         _createWrap: function(item) {
