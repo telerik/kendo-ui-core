@@ -189,6 +189,7 @@ def start_product_creation()
 end
 def create_product(bot, product_name, suite_alias, tname)
     product_icon_path = String.new
+    product_name_trim = String.new
 
     if tname == "Kendo UI"
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('#{product_name} for #{tname}')")
@@ -201,22 +202,24 @@ def create_product(bot, product_name, suite_alias, tname)
        end
 
     elsif tname == "JSP"
-       bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-
        if product_name.index("Mobile") == nil
+         bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
          product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_java.png"
        else
         product_name_mod = product_name.downcase.sub " (mobile)", ""
+        product_name_trim = product_name.sub " (Mobile)", ""
+        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI Mobile #{product_name_trim} for #{tname}')")
         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_java.png"
        end
 
     else
-       bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-
        if product_name.index("Mobile") == nil
+         bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
          product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
        else
         product_name_mod = product_name.downcase.sub " (mobile)", ""
+        product_name_trim = product_name.sub " (Mobile)", ""
+        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI Mobile #{product_name_trim} for #{tname}')")
         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_" + suite_alias.downcase + ".png"
        end
 
@@ -258,7 +261,11 @@ def create_product(bot, product_name, suite_alias, tname)
     sleep(5)
 
     p "assigning team for this product>>"
-    assign_team(bot, product_name, suite_alias)
+    if product_name_trim == ""
+      assign_team(bot, product_name, suite_alias)
+    else
+      assign_team(bot, "Mobile " + product_name_trim, suite_alias)
+    end
     p "creating forum for this product>>"
     create_forum(bot, product_name, suite_alias, tname)
     p "creating code library for this product>>"
@@ -299,23 +306,29 @@ def fill_forum_fields(bot, product_name, tname)
     end
 
     if tname == "Kendo UI"
+       #bot.driver.execute_script <<-SCRIPT
+         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("#{product_name} for #{tname}");
+         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
+         #$telerik.$(textElement).click()
+       #SCRIPT
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('#{product_name} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('#{product_name} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
        sleep(1)
     elsif product_name.index("Mobile") == nil
+       #bot.driver.execute_script <<-SCRIPT
+         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI #{product_name} for #{tname}");
+         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
+         #$telerik.$(textElement).click()
+       #SCRIPT
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI #{product_name} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('Kendo UI #{product_name} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
        sleep(1)
     else
        product_name_mod = product_name.sub " (Mobile)", ""
+       #bot.driver.execute_script <<-SCRIPT
+         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI Mobile #{product_name_mod} for #{tname}");
+         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0];
+         #$telerik.$(textElement).click();
+       #SCRIPT
        bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).trackChanges()")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).get_items().getItem(0).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).commitChanges()")
        sleep(1)
     end
 
