@@ -269,4 +269,45 @@
         tree.render([element("div", null, [element("div")])]);
         ok(firstChild !== root.firstChild.firstChild);
     });
+
+    test("render updates children if node type has changed", function() {
+        tree.render([ element("div", null, [ text("test_1") ]) ]);
+        tree.render([ element("div", null, [ element("span", { class: "k-icon k-i-arrow-s" }), text("test_1") ]) ]);
+
+        ok(true);
+    });
+
+    test("render persists the order of elements", function() {
+        var initial = [
+            element("div", null, [
+                element("div", null, [text("1")]),
+                element("div", null, [text("2")]),
+                element("div", null, [text("3")]),
+                element("div", null, [text("4")])
+            ]),
+            element("div", null, [
+                element("div", null, [text("5")]),
+                element("div", null, [text("6")])
+            ])
+        ];
+
+        tree.render(initial);
+
+        var updated = [
+            element("div", null, [
+                element("div", null, [text("1")])
+            ]),
+            element("div", null, [
+                element("div", null, [text("2")]),
+                element("div", null, [text("3")])
+            ])
+        ];
+
+        tree.render(updated);
+
+        var rows = root.childNodes;
+
+        equal(rows[0].childNodes.length, 1);
+        equal(rows[1].childNodes.length, 2);
+    });
 }());

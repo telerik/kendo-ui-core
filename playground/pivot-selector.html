@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>pivot columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivot.configurator.js" type="text/javascript" charset="utf-8"></script>
+
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+<style>
+
+html
+{
+    font: 12px sans-serif;
+}
+
+.k-pivot-table .k-grid table
+{
+    width: 150%;
+}
+
+/* selector */
+
+.k-fieldselector .k-edit-buttons
+{
+    bottom: auto;
+}
+
+.k-fieldselector .k-edit-label
+{
+    width: 16%;
+}
+
+.k-fieldselector .k-edit-field
+{
+    width: 77%;
+}
+
+.k-fieldselector .k-edit-field > .k-widget,
+.k-fieldselector .k-edit-field > .k-textbox
+{
+    width: 99%;
+}
+
+.k-fieldselector .k-edit-buttons > input,
+.k-fieldselector .k-edit-buttons > label
+{
+    float: left;
+    margin-top: .4em;
+}
+
+.k-fieldselector p
+{
+    text-transform: uppercase;
+}
+
+.k-fieldselector p .k-icon
+{
+    margin: 0 5px;
+}
+
+.k-fieldselector .k-columns
+{
+    border-style: solid;
+    border-width: 1px 0 0;
+}
+
+.k-fieldselector .k-columns > div
+{
+    padding: .6em 0;
+    border-style: solid;
+}
+
+.k-fieldselector .k-columns > div
+{
+    border-width: 0 0 0 1px;
+    width: 49%;
+    float: left;
+}
+
+.k-fieldselector .k-columns > div:first-child
+{
+    border-width: 0 1px 0 0;
+    margin-right: -1px;
+}
+
+.k-fieldselector .k-list-container
+{
+    margin-left: .5em;
+    padding: .2em 0 2em;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.k-fieldselector .k-list .k-item
+{
+    margin: 0 .2em.2em;
+    position: relative;
+}
+
+.k-fieldselector .k-list .k-item .k-si-close
+{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.k-fieldselector .k-list .k-item
+{
+    padding: 1px 5px 1px 5px;
+    line-height: 1.8em;
+    min-height: 1.8em;
+}
+
+.k-fieldselector .k-list .k-item
+{
+    padding: 0 4px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+</style>
+    </head>
+    <body>
+        <div id="configurator"></div>
+
+        <div id="pivotgrid"></div>
+        <script>
+
+            $(function() {
+                var pivot = $("#pivotgrid").kendoPivotGrid({
+                    dataSource: {
+                        type: "xmla",
+                    //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
+                        columns: [ { name: "[Date].[Calendar]" }/*, { name: "[Product].[Product Name].[All]" }*/],
+                        //measures: ["[Measures].[Internet Order Lines Count]"],
+                        transport: {
+                            connection: {
+                      //          catalog: "Adventure Works DW Standard Edition",
+                       //         cube: "Adventure Works"
+                                catalog: "Adventure Works Internet Sales Model",
+                                cube: "Adventure Works Internet Sales Model"
+                            },
+                            read: {
+                              //  url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
+                                url: "http://krustev:8080/olap/msmdpump.dll",
+                                dataType: "text",
+                                contentType: "text/xml",
+                                type: "POST"
+                            }
+                        },
+                        schema: {
+                            type: "xmla"
+                        },
+                        error: function(e) {
+                           alert("error: " + kendo.stringify(e.errors[0]));
+                        }
+                    }
+                }).data("kendoPivotGrid");
+
+                $("#configurator, #configurator2").kendoPivotConfigurator({
+                    dataSource: pivot.dataSource
+                });
+
+/*              var treeview = $("#treeview").kendoTreeView({
+                    dataTextField: "name",
+                    autoBind: false,
+                    dragAndDrop: true,
+                    dragstart: function(e) {
+                        var dataItem = this.dataItem(e.sourceNode);
+                        if (!dataItem.hasChildren) {
+                            e.preventDefault();
+                        }
+                    },
+                    drag: function(e) {
+                        var target = $(e.dropTarget);
+                        if (target.hasClass("k-settings-target")) {
+                            e.setStatusClass("k-add");
+                        } else {
+                            e.setStatusClass("k-denied");
+                        }
+                    },
+                    drop: function(e) {
+                        e.preventDefault();
+                        var target = $(e.dropTarget);
+                        var node = this.dataItem(e.sourceNode);
+                        var container = target.closest(".k-settings-target")
+                        if (container.length) {
+                            console.log(node);
+                            container
+                                .data("kendoPivotSettingTarget")
+                                .add(node.defaultHierarchy || node.uniqueName);
+                        }
+                    },
+                    dataSource: {
+                        schema: {
+                            model: {
+                                id: "uniqueName",
+                                hasChildren: function(item) {
+                                    if (item.hierarchyUniqueName) {
+                                        return false;
+                                    }
+                                    return true;
+                                }
+                            }
+                        },
+                        transport: {
+                            read: function(options) {
+                                if ($.isEmptyObject(options.data)) {
+                                    pivot.dataSource.schemaDimensions().done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName == "[Measures]") {
+                                    pivot.dataSource.schemaMeasures().done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName.indexOf(".") > 1) {
+                                    pivot.dataSource.schemaLevels(options.data.uniqueName).done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else if (options.data.uniqueName) {
+                                    pivot.dataSource.schemaHierarchies(options.data.uniqueName).done(function(response) {
+                                        options.success(response);
+                                    });
+                                } else {
+                                    options.success([]);
+                                }
+                            }
+                        }
+                    }
+                }).data("kendoTreeView");
+*/
+
+            });
+
+        </script>
+
+
+
+    </body>
+</html>
