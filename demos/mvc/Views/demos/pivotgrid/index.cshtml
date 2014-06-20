@@ -6,6 +6,7 @@
             <script>
                 $(document).ready(function () {
                     var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+                        height: 550,
                         dataSource: {
                             type: "xmla",
                             columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],

@@ -1824,6 +1824,7 @@
     "text": "PivotGrid",
     "name": "pivotgrid",
     "pro": "true",
+    "beta": "true",
     "api": "web/pivotgrid",
     "documentation": {
        "kendo-ui": "getting-started/web/pivotgrid/overview",
