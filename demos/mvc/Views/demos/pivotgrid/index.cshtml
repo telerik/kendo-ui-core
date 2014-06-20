@@ -1,14 +1,15 @@
 
         <div id="example">
             <div id="pivotgrid"></div>
+            <div id="configurator"></div>
 
             <script>
                 $(document).ready(function () {
-                    $("#pivotgrid").kendoPivotGrid({
+                    var pivotgrid = $("#pivotgrid").kendoPivotGrid({
                         dataSource: {
                             type: "xmla",
-                            rows: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-                            columns: [{ name: "[Product].[Product Name].[All]" }],
+                            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                            rows: [{ name: "[Product].[Product Name].[All]" }],
                             measures: ["[Measures].[Internet Order Lines Count]"],
                             transport: {
                                 connection: {
@@ -29,6 +30,10 @@
                                 alert("error: " + kendo.stringify(e.errors[0]));
                             }
                         }
+                    }).data("kendoPivotGrid");
+
+                    $("#configurator").kendoPivotConfigurator({
+                        dataSource: pivotgrid.dataSource
                     });
                 });
             </script>
