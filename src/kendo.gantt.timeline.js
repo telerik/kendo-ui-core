@@ -996,15 +996,39 @@ var __meta__ = {
         },
 
         _scrollTo: function(element) {
-            var elementOffset = element.offset();
+            var elementLeft = element.offset().left;
+            var elementWidth = element.width();
+            var elementRight = elementLeft + elementWidth;
+
+            var row = element.closest("tr");
+            var rowTop = row.offset().top;
+            var rowHeight = row.height();
+            var rowBottom = rowTop + rowHeight;
+
             var content = this.content;
             var contentOffset = content.offset();
-            var scrollTop = elementOffset.top + content.scrollTop() - contentOffset.top;
-            var scrollLeft = elementOffset.left + content.scrollLeft() - contentOffset.left;
+            var contentTop = contentOffset.top;
+            var contentHeight = content.height();
+            var contentBottom = contentTop + contentHeight;
+            var contentLeft = contentOffset.left;
+            var contentWidth = content.width();
+            var contentRight = contentLeft + contentWidth;
 
-            content
-                .scrollTop(scrollTop)
-                .scrollLeft(scrollLeft);
+            var scrollbarWidth = kendo.support.scrollbar();
+
+            if (rowTop < contentTop) {
+                content.scrollTop(content.scrollTop() + (rowTop - contentTop));
+            } else if (rowBottom > contentBottom) {
+                content.scrollTop(content.scrollTop() + (rowBottom + scrollbarWidth - contentBottom));
+            }
+
+            if (elementLeft < contentLeft && elementWidth > contentWidth && elementRight < contentRight ||
+                elementRight > contentRight && elementWidth < contentWidth) {
+                content.scrollLeft(content.scrollLeft() + (elementRight + scrollbarWidth - contentRight));
+            } else if (elementRight > contentRight && elementWidth > contentWidth && elementLeft > contentLeft ||
+                elementLeft < contentLeft && elementWidth < contentWidth) {
+                content.scrollLeft(content.scrollLeft() + (elementLeft - contentLeft));
+            }
         },
 
         _timeSlots: function() {
