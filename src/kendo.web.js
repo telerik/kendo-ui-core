@@ -66,7 +66,7 @@
         "./kendo.gantt.timeline",
         "./kendo.gantt",
         "./kendo.pivotgrid",
-        "./kendo.pivot.selector",
+        "./kendo.pivot.configurator",
         "./kendo.angular"
     ], f);
 })(function(){
