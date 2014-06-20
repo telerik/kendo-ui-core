@@ -35,6 +35,7 @@ var __meta__ = {
         "id": "ID",
         "orderId": "Order ID"
     };
+    var STRING = "string";
     var NS = ".kendoGanttList";
     var CLICK = "click";
     var DOT = ".";
@@ -242,13 +243,15 @@ var __meta__ = {
             var columns = this.columns;
             var column;
             var style;
+            var width;
             var cols = [];
 
             for (var i = 0, length = columns.length; i < length; i++) {
                 column = columns[i];
+                width = column.width;
 
-                if (column.width) {
-                    style = { style: { width: column.width + "px" } };
+                if (width && parseInt(width, 10) !== 0) {
+                    style = { style: { width: typeof width === STRING ? width : width + "px" } };
                 } else {
                     style = null;
                 }

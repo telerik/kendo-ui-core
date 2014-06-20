@@ -196,7 +196,7 @@
             columns = [
                 { field: "title", title: "Title", sortable: false },
                 { field: "start", title: "Start Time", sortable: true, width: 150 },
-                { field: "end", title: "End Time", sortable: true, width: 150 },
+                { field: "end", title: "End Time", sortable: true, width: "150px" },
                 { field: "percentComplete", title: "Task Percentage" }
             ];
 
@@ -266,6 +266,14 @@
         ok(cols.eq(1).attr("style"));
         ok(cols.eq(2).attr("style"));
         ok(!cols.eq(3).attr("style"));
+    });
+
+    test("table col elements width set", function() {
+        var content = ganttList.content;
+        var cols = content.find("col");
+
+        equal(cols.eq(1).width(), 150);
+        equal(cols.eq(2).width(), 150);
     });
 
     test("table body", function() {
