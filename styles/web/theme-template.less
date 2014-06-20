@@ -738,8 +738,7 @@ html .km-pane-wrapper .k-header
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
 td.k-state-focused,
-.k-button.k-state-focused,
-.k-treemap-tile.k-state-hover
+.k-button.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
 }
@@ -1174,6 +1173,11 @@ div.k-filebrowser-dropzone em
 .k-tooltip
 {
     .box-shadow(0 2px 2px 0 @shadow-color);
+}
+
+.k-treemap-tile.k-state-hover
+{
+    .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
 
 /* Window */
