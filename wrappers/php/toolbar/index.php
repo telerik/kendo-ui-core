@@ -19,7 +19,7 @@ $toolbar->addItem(
     ),
     array("type" => "separator"),
     array("template" => "<label>Format:</label>"),
-    array("templateId" => "dropdown-template", "overflow" => "never"),
+    array("template" => "<input id='dropdown' style='width: 150px;' />", "overflow" => "never"),
     array("type" => "separator"),
     array(
         "type" => "buttonGroup",
@@ -43,18 +43,23 @@ $toolbar->addItem(
 );
 
 echo $toolbar->render();
-
-$dropDownList = new \Kendo\UI\DropDownList('dropdown');
 ?>
 
-<script id="dropdown-template" type="x-kendo-template">
-    <?php
-        $dropDownList = new \Kendo\UI\DropDownList('dropdown');
-        echo $dropDownList->renderInTemplate();
-    ?>
+<script>
+    $(document).ready(function() {
+        $("#dropdown").kendoDropDownList({
+            optionLabel: "Paragraph",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Heading 1", value: 1 },
+                { text: "Heading 2", value: 2 },
+                { text: "Heading 3", value: 3 },
+                { text: "Title", value: 4 },
+                { text: "Subtitle", value: 5 }
+            ]
+        });
+    });
 </script>
 
-<style scoped="scoped">
-
-</style>
 <?php require_once '../include/footer.php'; ?>

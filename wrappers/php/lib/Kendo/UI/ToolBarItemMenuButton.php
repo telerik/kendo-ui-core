@@ -6,21 +6,12 @@ class ToolBarItemMenuButton extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies the ID of the menu buttons.
-    * @param string $value
+    * Specifies whether the menu button is initially enabled or disabled.
+    * @param boolean $value
     * @return \Kendo\UI\ToolBarItemMenuButton
     */
-    public function id($value) {
-        return $this->setProperty('id', $value);
-    }
-
-    /**
-    * Specifies the text of the menu buttons.
-    * @param string $value
-    * @return \Kendo\UI\ToolBarItemMenuButton
-    */
-    public function text($value) {
-        return $this->setProperty('text', $value);
+    public function enable($value) {
+        return $this->setProperty('enable', $value);
     }
 
     /**
@@ -30,6 +21,15 @@ class ToolBarItemMenuButton extends \Kendo\SerializableObject {
     */
     public function icon($value) {
         return $this->setProperty('icon', $value);
+    }
+
+    /**
+    * Specifies the ID of the menu buttons.
+    * @param string $value
+    * @return \Kendo\UI\ToolBarItemMenuButton
+    */
+    public function id($value) {
+        return $this->setProperty('id', $value);
     }
 
     /**
@@ -51,12 +51,12 @@ class ToolBarItemMenuButton extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies whether the menu button is initially enabled or disabled.
-    * @param boolean $value
+    * Specifies the text of the menu buttons.
+    * @param string $value
     * @return \Kendo\UI\ToolBarItemMenuButton
     */
-    public function enable($value) {
-        return $this->setProperty('enable', $value);
+    public function text($value) {
+        return $this->setProperty('text', $value);
     }
 
     /**
