@@ -464,7 +464,7 @@
     test("toggleButton has k-toggle-button class", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo" }
+                { type: "button", togglable: true, text: "foo" }
             ]
         });
 
@@ -475,7 +475,7 @@
     test("by default toggleButton does not have k-state-selected class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo" }
+                { type: "button", togglable: true, text: "foo" }
             ]
         });
 
@@ -485,7 +485,7 @@
     test("toggleButton with selected: true receives k-state-selected class", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo", selected: true }
+                { type: "button", togglable: true, text: "foo", selected: true }
             ]
         });
 
@@ -495,7 +495,7 @@
     test("by default toggleButton does not have group", 1, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo" }
+                { type: "button", togglable: true, text: "foo" }
             ]
         });
 
@@ -505,8 +505,8 @@
     test("toggle button with group has data-group attribute set", 2, function() {
         container.kendoToolBar({
             items: [
-                { type: "button", toggable: true, text: "foo", group: "foo" },
-                { type: "button", toggable: true, text: "bar", group: "foo" }
+                { type: "button", togglable: true, text: "foo", group: "foo" },
+                { type: "button", togglable: true, text: "bar", group: "foo" }
             ]
         });
 
@@ -520,7 +520,7 @@
         container.kendoToolBar({
             items: [{ 
                 type: "button",
-                toggable: true,
+                togglable: true,
                 id: "foo",
                 text: "foo",
                 toggle: function() { }

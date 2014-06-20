@@ -106,9 +106,9 @@
     test("get selected item from group returns the selected toggle button", 1, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foo", toggable: true, group: "foo" },
-                { type: "button", id: "bar", text: "bar", toggable: true, group: "foo", selected: true },
-                { type: "button", id: "baz", text: "baz", toggable: true, group: "foo" }
+                { type: "button", id: "foo", text: "foo", togglable: true, group: "foo" },
+                { type: "button", id: "bar", text: "bar", togglable: true, group: "foo", selected: true },
+                { type: "button", id: "baz", text: "baz", togglable: true, group: "foo" }
             ]
         }).data("kendoToolBar");
 

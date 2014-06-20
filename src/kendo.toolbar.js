@@ -201,7 +201,7 @@ var __meta__ = {
 
             element.data({ type: "button" });
 
-            if (options.toggable) {
+            if (options.togglable) {
                 element.addClass(TOGGLE_BUTTON);
                 if (options.selected) {
                     element.addClass(STATE_ACTIVE);
@@ -223,11 +223,11 @@ var __meta__ = {
                 element.attr(kendo.attr("group"), options.group);
             }
 
-            if (!options.toggable && options.click && isFunction(options.click)) {
+            if (!options.togglable && options.click && isFunction(options.click)) {
                 element.data("click", options.click);
             }
 
-            if (options.toggable && options.toggle && isFunction(options.toggle)) {
+            if (options.togglable && options.toggle && isFunction(options.toggle)) {
                 element.data("toggle", options.toggle);
             }
 
