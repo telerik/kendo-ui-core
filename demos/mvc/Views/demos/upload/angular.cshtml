@@ -1,0 +1,27 @@
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div class="box-col" style="width: 340px">
+            <h4>Upload files</h4>
+            <input name="files"
+                   type="file"
+                   kendo-upload
+                   k-async="{ saveUrl: 'save', removeUrl: 'remove', autoUpload: true }"
+                   k-select="onSelect"
+                   />
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+<script>
+    angular.module("KendoDemos", ["kendo.directives"]);
+
+    function MyCtrl($scope) {
+        $scope.onSelect = function(e) {
+            var message = $.map(e.files, function(file) { return file.name; }).join(", ");
+            kendoConsole.log("event :: select (" + message + ")");
+        }
+    }
+</script>
+</div>
