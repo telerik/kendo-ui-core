@@ -2189,8 +2189,8 @@ var __meta__ = {
             var columns = axes.columns || {};
             var rows = axes.rows || {};
 
-            var columnDescriptors = dataSource.columnsAxisDescriptors();
-            var rowDescriptors = dataSource.rowsAxisDescriptors();
+            var columnDescriptors = dataSource.columns();
+            var rowDescriptors = dataSource.rows();
 
             var contentBuilder = that._contentBuilder;
             var columnBuilder = that._columnBuilder;
