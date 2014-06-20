@@ -51,13 +51,13 @@
       :type: String
       :description: Specifies the ID of the button.
 
-    - :name: items.toggable
+    - :name: items.togglable
       :type: Boolean
-      :description: Specifies if the button is toggable, e.g. has a selected and unselected state.
+      :description: Specifies if the button is togglable, e.g. has a selected and unselected state.
 
     - :name: items.selected
       :type: Boolean
-      :description: Specifies if the toggle button is initially selected. Applicable only for buttons with toggable true.
+      :description: Specifies if the toggle button is initially selected. Applicable only for buttons with togglable true.
 
     - :name: items.enable
       :type: Boolean
@@ -78,7 +78,7 @@
 
     - :name: items.group
       :type: String
-      :description: Assigns the button to a group. Applicable only for buttons with toggable true.
+      :description: Assigns the button to a group. Applicable only for buttons with togglable true.
 
     - :name: items.url
       :type: String
@@ -90,7 +90,7 @@
 
     - :name: items.toggle
       :type: Function
-      :description: Specifies the toggle event handler of the button. Applicable only for commands of type Button and toggable true.
+      :description: Specifies the toggle event handler of the button. Applicable only for commands of type Button and togglable true.
 
     - :name: items.template
       :type: String
@@ -186,17 +186,17 @@
       :type: String
       :description: Specifies the url of the button to navigate to.
 
-    - :name: items.buttons.toggable
+    - :name: items.buttons.togglable
       :type: Boolean
-      :description: Specifies if the button is toggable, e.g. has a selected and unselected state. Applicable only for the children of a ButtonGroup.
+      :description: Specifies if the button is togglable, e.g. has a selected and unselected state. Applicable only for the children of a ButtonGroup.
 
     - :name: items.buttons.selected
       :type: Boolean
-      :description: Specifies if the toggle button is initially selected. Applicable only for the children of a ButtonGroup that has toggable true.
+      :description: Specifies if the toggle button is initially selected. Applicable only for the children of a ButtonGroup that has togglable true.
 
     - :name: items.buttons.group
       :type: String
-      :description: Assigns the button to a group. Applicable only for the children of a ButtonGroup that has toggable true.
+      :description: Assigns the button to a group. Applicable only for the children of a ButtonGroup that has togglable true.
 
     - :name: items.buttons.click
       :type: Function
