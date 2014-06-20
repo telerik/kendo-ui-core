@@ -514,7 +514,11 @@ var __meta__ = {
                 //add the command in the toolbar container
                 if (options.overflow !== OVERFLOW_ALWAYS) {
                     if (template) { //template command
-                        element = isFunction(template) ? $(template(options)) : $(template);
+                        element = isFunction(template) ? template(options) : template;
+
+                        if (!(element instanceof jQuery)) {
+                            element = $(element.replace(/^\s+|\s+$/g, ''));
+                        }
                     } else if (component) { //build-in command
                         element = (component.toolbar || $.noop)(options);
                     }
