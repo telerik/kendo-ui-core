@@ -2036,8 +2036,26 @@ var __meta__ = {
             }
         },
 
-        setDataSource: function() {
-            //
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            if (this.measuresTarget) {
+                this.measuresTarget.setDataSource(dataSource);
+            }
+
+            if (this.rowsTarget) {
+                this.rowsTarget.setDataSource(dataSource);
+            }
+
+            if (this.columnsTarget) {
+                this.columnsTarget.setDataSource(dataSource);
+            }
+
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
         },
 
         _dataSource: function() {

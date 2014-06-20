@@ -74,6 +74,41 @@
         ok(!fetch.calls("fetch"));
     });
 
+    test("setDataSource attach new datasource", function() {
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var pivotgrid = new PivotGrid(div, { dataSource: dataSource });
+
+        dataSource = new kendo.data.PivotDataSource();
+
+        var fetch = stub(dataSource, "fetch");
+
+        pivotgrid.setDataSource(dataSource);
+
+        deepEqual(pivotgrid.dataSource, dataSource);
+
+        ok(fetch.calls("fetch"));
+    });
+
+    test("setDataSource updates setting targets datasource", function() {
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var pivotgrid = new PivotGrid(div, { dataSource: dataSource });
+
+        dataSource = new kendo.data.PivotDataSource();
+
+        var measuresTarget = stub(pivotgrid.measuresTarget, "setDataSource");
+        var columnsTarget = stub(pivotgrid.columnsTarget, "setDataSource");
+        var rowsTarget = stub(pivotgrid.rowsTarget, "setDataSource");
+
+        pivotgrid.setDataSource(dataSource);
+
+        ok(measuresTarget.calls("setDataSource"));
+        ok(columnsTarget.calls("setDataSource"));
+        ok(rowsTarget.calls("setDataSource"));
+    });
+
+
     test("PivotGrid creates column header virtual DOM node", function() {
         var pivotgrid = createPivot();
 
