@@ -165,7 +165,7 @@ var __meta__ = {
                     },
                     {
                         data: "insert-after",
-                        text: actions.insetAfter
+                        text: actions.insertAfter
                     }
                 ]
             }));
@@ -780,7 +780,7 @@ var __meta__ = {
                     append: "Add Task",
                     addChild: "Add Child",
                     insertBefore: "Add Above",
-                    insetAfter: "Add Below"
+                    insertAfter: "Add Below"
                 }
             },
             showWorkHours: true,

@@ -404,7 +404,7 @@
         equal(dropDown.list.find("li").eq(1).text(), actions.insertBefore);
 
         ok(dropDown.list.find("li").eq(2).hasClass("k-item"));
-        equal(dropDown.list.find("li").eq(2).text(), actions.insetAfter);
+        equal(dropDown.list.find("li").eq(2).text(), actions.insertAfter);
     });
 
     test("renders list's item data attributes", 3, function() {
