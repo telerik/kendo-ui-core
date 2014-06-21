@@ -1206,17 +1206,14 @@ var __meta__ = {
         destroy: function() {
             var that = this;
 
-            Menu.fn.destroy.call(that);
-
-            that.target.off(that.showOn + NS, that._showProxy);
+            that.target.off(that.options.showOn + NS);
             DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
             if (that.userEvents) {
                 that.userEvents.destroy();
             }
 
-            that.element.data("kendoPopup").destroy();
-            that.element.remove();
+            Menu.fn.destroy.call(that);
         },
 
         show: function(x, y) {
@@ -1301,13 +1298,13 @@ var __meta__ = {
                         allowSelection: false
                     });
 
-                    $(target).on(options.showOn + NS, false);
+                    target.on(options.showOn + NS, false);
                     that.userEvents.bind("hold", that._showProxy);
                 } else {
                     if (options.filter) {
-                        $(target).on(options.showOn + NS, options.filter, that._showProxy);
+                        target.on(options.showOn + NS, options.filter, that._showProxy);
                     } else {
-                        $(target).on(options.showOn + NS, that._showProxy);
+                        target.on(options.showOn + NS, that._showProxy);
                     }
                 }
             }
@@ -1322,7 +1319,7 @@ var __meta__ = {
 
             that._triggerProxy = proxy(that._triggerEvent, that);
 
-            this.popup = that.element
+            that.popup = that.element
                             .addClass("k-context-menu")
                             .kendoPopup({
                                 anchor: that.target || "body",
