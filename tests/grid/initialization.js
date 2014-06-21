@@ -775,6 +775,7 @@
     });
 
     test("filtercell widgets are initialized with the provided filterable options - acDataSource", function() {
+        var readInvoked;
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
@@ -787,7 +788,9 @@
                         cell: {
                             dataSource: {
                                 transport: {
-                                    read: $.noop
+                                    read: function() {
+                                        readInvoked = true;
+                                    }
                                 }
                             }
                         }
@@ -813,7 +816,8 @@
 
         var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
         var firstWidget = widgets.eq(0).data("kendoFilterCell");
-        ok(firstWidget.acDataSource.transport.read === $.noop);
+        firstWidget.acDataSource.read();
+        ok(readInvoked);
     });
 
     test("grid filterable options propagate to the filter menu", function() {

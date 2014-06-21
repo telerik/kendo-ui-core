@@ -3676,27 +3676,34 @@ var __meta__ = {
         },
 
         _filterRow: function() {
-            var hasFilterRow = this._hasFilterRow();
-            if (hasFilterRow) {
-                var filterCellOptions = this.options.filterable.row;
-                var rowheader = this.thead.find(".k-filterrow");
-                var columns = this.columns;
-                var dsOptions = filterCellOptions.dataSource || this.dataSource.options;
-                for (var i = 0; i < columns.length; i++) {
-                    var col = columns[i];
-                    var th = $("<th/>");
-                    var field = col.field;
+            var that = this;
+            if (!this._hasFilterRow()) {
+               return;
+            }
 
-                    if (field && col.filterable !== false) {
-                        $("<span/>").attr(kendo.attr("field"), field)
+            var columns = that.columns,
+                rowheader = that.thead.find(".k-filterrow");
+
+            for (var i = 0; i < columns.length; i++) {
+                var acDsOptions,
+                    col = columns[i],
+                    th = $("<th/>"),
+                    field = col.field;
+
+                if (field && col.filterable !== false) {
+                    acDsOptions = that.dataSource.options;
+                    if (col.filterable && isPlainObject(col.filterable.cell) && col.filterable.cell.dataSource) {
+                        acDsOptions = col.filterable.cell.dataSource;
+                    }
+
+                    $("<span/>").attr(kendo.attr("field"), field)
                         .kendoFilterCell({
-                            dataSource: this.dataSource,
-                            acDataSource: dsOptions,
+                            dataSource: that.dataSource,
+                            acDataSource: acDsOptions,
                             field: field
                         }).appendTo(th);
-                    }
-                    rowheader.append(th);
                 }
+                rowheader.append(th);
             }
         },
 
