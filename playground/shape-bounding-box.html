@@ -13,6 +13,7 @@
          <script src="../src/dataviz/util.js"></script>
          <script src="../src/dataviz/geometry.js"></script>
          <script src="../src/dataviz/drawing/core.js"></script>
+         <script src="../src/dataviz/drawing/mixins.js"></script>
          <script src="../src/dataviz/drawing/shapes.js"></script>
          <script src="../src/dataviz/drawing/parser.js"></script>
          <script src="../src/dataviz/drawing/svg.js"></script>
@@ -121,7 +122,7 @@
 
             function imageTest() {
                 var group = new Group();
-                var image = new drawing.Image("rainbow-colors.jpg", new geometry.Rect(new Point(100, 100), new Point(200, 200)));
+                var image = new drawing.Image("telerik.jpg", new geometry.Rect(new Point(100, 100), new Point(200, 200)));
                 group.append(image);
                 image.transform(transform().rotate(-45, 200, 200));
                 var bbox = image.bbox();

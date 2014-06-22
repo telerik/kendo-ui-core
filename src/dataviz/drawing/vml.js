@@ -762,6 +762,7 @@
         refreshTransform: function(transform) {
             var currentTransform = this.srcElement.currentTransform(transform);
             this.allCss(this.mapTransform(currentTransform));
+            this.element.style.cssText = this.element.style.cssText;
         },
 
         mapTransform: function(transform) {
