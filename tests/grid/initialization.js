@@ -806,7 +806,7 @@
                     model: {
                         fields: {
                             col1: {
-                                type: "number"
+                                type: "string"
                             }
                         }
                     }
