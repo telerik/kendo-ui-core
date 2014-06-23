@@ -7,7 +7,7 @@
 <c:url value="/tabstrip/content/1" var="ajaxContent1" />
 <c:url value="/tabstrip/content/error" var="error" />
 
-<kendo:tabStrip name="tabstrip" select="onSelect" activate="onActivate" contentLoad="onContentLoad" error="onError">
+<kendo:tabStrip name="tabstrip" show="onShow" select="onSelect" activate="onActivate" contentLoad="onContentLoad" error="onError">
     <kendo:tabStrip-items>
         <kendo:tabStrip-item text="First Tab" selected="true">
             <kendo:tabStrip-item-content>
@@ -30,6 +30,10 @@
 </kendo:tabStrip>
 
 <script>
+    function onShow(e) {
+        kendoConsole.log("Shown: " + $(e.item).find("> .k-link").text());
+    }
+
 	function onSelect(e) {
 	    kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
 	}

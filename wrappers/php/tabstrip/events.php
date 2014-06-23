@@ -12,6 +12,7 @@ require_once '../lib/Kendo/Autoload.php';
     // attach events
     $tabstrip
         ->select("onSelect")
+        ->show("onShow")
         ->activate("onActivate")
         ->contentLoad("onContentLoad")
         ->error("onError");
@@ -87,6 +88,10 @@ require_once '../lib/Kendo/Autoload.php';
 ?>
 
 <script>
+    function onShow(e) {
+        kendoConsole.log("Shown: " + $(e.item).find("> .k-link").text());
+    }
+
     function onSelect(e) {
         kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
     }

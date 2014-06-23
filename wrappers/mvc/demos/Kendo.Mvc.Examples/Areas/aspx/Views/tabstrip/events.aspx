@@ -5,6 +5,10 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <script>
+    function onShow(e) {
+        kendoConsole.log("Shown: " + $(e.item).find("> .k-link").text());
+    }
+
     function onSelect(e) {
         kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
     }
@@ -25,6 +29,7 @@
 <% Html.Kendo().TabStrip()
         .Name("tabstrip")
         .Events(events => events
+            .Show("onShow")
             .Select("onSelect")
             .Activate("onActivate")
             .ContentLoad("onContentLoad")
