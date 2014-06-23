@@ -84,6 +84,104 @@
         deepEqual(dataSource.args("expandColumn")[0], ["level 0"]);
     });
 
+    test("expandMember is triggered on column header expand", 1 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            expandMember: function(e) {
+                ok(true);
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        headerTable.find("th span").click();
+    });
+
+    test("expandMember arguments on column header expand", 2 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            expandMember: function(e) {
+                equal(e.axis, "columns");
+                equal(e.path, "level 0");
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        headerTable.find("th span").click();
+    });
+
+    test("prevent expandMember on column header expand", 1 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            expandMember: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        var button = headerTable.find("th span").click();
+
+        ok(button.hasClass("k-i-arrow-e"));
+    });
+
+    test("collapseMember is triggered on column header collapse", 1 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            collapseMember: function(e) {
+                ok(true);
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        headerTable.find("th span").click().click();
+    });
+
+    test("collapseMember arguments on column header collapse", 2 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            collapseMember: function(e) {
+                equal(e.axis, "columns");
+                equal(e.path, "level 0");
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        headerTable.find("th span").click().click();
+    });
+
+    test("prevent collapseMember on column header collapse", 1 , function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            collapseMember: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+        var button = headerTable.find("th span").click().click();
+
+        ok(button.hasClass("k-i-arrow-s"));
+    });
+
     test("PivotGrid collapases tuple", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] },
@@ -245,6 +343,108 @@
 
         equal(dataSource.calls("expandRow"), 1);
         deepEqual(dataSource.args("expandRow")[0], ["level 0"]);
+    });
+
+    test("expandMember is triggered on row expand", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            expandMember: function() {
+                ok(true);
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        headerTable.find("td").find("span").click();
+    });
+
+    test("expandMember arguments on row expand", 2, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            expandMember: function(e) {
+                equal(e.axis, "rows");
+                equal(e.path, "level 0");
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        headerTable.find("td").find("span").click();
+    });
+
+    test("prevent expandMember on row expand", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            expandMember: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        var button = headerTable.find("td").find("span").click();
+
+        ok(button.hasClass("k-i-arrow-e"));
+    });
+
+    test("collapseMember is triggered on row collapse", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            collapseMember: function() {
+                ok(true);
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        headerTable.find("td").find("span").click().click();
+    });
+
+    test("collapseMember arguments on row collapse", 2, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            collapseMember: function(e) {
+                equal(e.axis, "rows");
+                equal(e.path, "level 0");
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        headerTable.find("td").find("span").click().click();
+    });
+
+    test("prevent collapseMember on row collapse", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: true, children: [] }] }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            collapseMember: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+        var button = headerTable.find("td").find("span").click().click();
+
+        ok(button.hasClass("k-i-arrow-s"));
     });
 
     test("PivotGrid collapases tuple", function() {

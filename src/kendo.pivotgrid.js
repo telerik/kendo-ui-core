@@ -29,6 +29,8 @@ var __meta__ = {
         NS = ".kendoPivotGrid",
         DATABINDING = "dataBinding",
         DATABOUND = "dataBound",
+        EXPANDMEMBER = "expandMember",
+        COLLAPSEMEMBER = "collapseMember",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
@@ -1991,16 +1993,27 @@ var __meta__ = {
                     var button = $(this);
                     var builder = columnBuilder;
                     var action = "expandColumn";
+                    var eventName;
+                    var path = button.attr(kendo.attr("path"));
+                    var eventArgs = {
+                        axis: "columns",
+                        path: $.parseJSON(path)
+                    };
 
                     if (button.parent().is("td")) {
                         builder = rowBuilder;
                         action = "expandRow";
+                        eventArgs.axis = "rows";
                     }
 
-                    var path = button.attr(kendo.attr("path"));
                     var expanded = button.hasClass(STATE_EXPANDED);
                     var metadata = builder.metadata[path];
                     var request = metadata.expanded === undefined;
+
+                    eventName = expanded ? COLLAPSEMEMBER : EXPANDMEMBER;
+                    if (that.trigger(eventName, eventArgs)) {
+                        return;
+                    }
 
                     builder.metadata[path].expanded = !expanded;
 
@@ -2008,7 +2021,7 @@ var __meta__ = {
                           .toggleClass(STATE_COLLAPSED, expanded);
 
                     if (!expanded && request) {
-                        that.dataSource[action]($.parseJSON(path));
+                        that.dataSource[action](eventArgs.path);
                     } else {
                         that.refresh();
                     }
@@ -2028,7 +2041,9 @@ var __meta__ = {
 
         events: [
             DATABINDING,
-            DATABOUND
+            DATABOUND,
+            EXPANDMEMBER,
+            COLLAPSEMEMBER
         ],
 
         options: {
