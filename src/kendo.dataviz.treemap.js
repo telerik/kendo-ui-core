@@ -123,11 +123,17 @@ var __meta__ = {
                     var colors = colorsByLength("#0c81c5", "#c5dceb", items.length);
                     for (var i = 0; i < items.length; i++) {
                         item = items[i];
-                        root.children.push(this._wrapItem(item, colors[i]));
+                        root.children.push(this._wrapItem(item));
                     }
                     var htmlSize = this.view.htmlSize(root);
-
                     this.src.compute(root, root.coord, htmlSize);
+
+                    for (var i = 0; i < root.children.length; i++) {
+                        item = root.children[i];
+                        if (!defined(item.color)) {
+                            item.color = colors[i];
+                        }
+                    }
 
                     this.view.render(root);
                 }
@@ -140,7 +146,7 @@ var __meta__ = {
             this.view.renderHeight(root);
         },
 
-        _wrapItem: function(item, color) {
+        _wrapItem: function(item) {
             var wrap = {};
 
             if (defined(this.options.valueField)) {
@@ -149,9 +155,6 @@ var __meta__ = {
 
             if (defined(this.options.colorField)) {
                 wrap.color = getField(this.options.colorField, item);
-                if (!defined(wrap.color)) {
-                    wrap.color = color;
-                }
             }
 
             if (defined(this.options.textField)) {
