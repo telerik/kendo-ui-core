@@ -436,6 +436,8 @@ var __meta__ = {
         init: function(element, options) {
             this.options = deepExtend({}, this.options, options);
             this.element = $(element);
+
+            this.offset = 0;
         },
 
         htmlSize: function(root) {
@@ -457,7 +459,9 @@ var __meta__ = {
                     htmlSize.text = title.height();
                 }
 
-                rootElement.append(this._createWrap);
+                rootElement.append(this._createWrap());
+
+                this.offset = (rootElement.outerWidth() - rootElement.innerWidth()) / 2;
             }
 
             return htmlSize;
@@ -506,19 +510,40 @@ var __meta__ = {
         },
 
         _createTile: function(item) {
-            var root = $("<div class='k-treemap-tile'></div>")
-                .width(item.coord.width)
-                .height(item.coord.height)
-                .offset({
-                    left: item.coord.left,
-                    top: item.coord.top
+            var newCoord = {
+                width: item.coord.width,
+                height: item.coord.height,
+                left: item.coord.left,
+                top: item.coord.top
+            };
+
+            if (newCoord.left && this.offset) {
+                newCoord.left -= this.offset;
+                newCoord.width += this.offset * 2;
+            } else {
+                newCoord.width += this.offset;
+            }
+
+            if (newCoord.top) {
+                newCoord.top -= this.offset;
+                newCoord.height += this.offset * 2;
+            } else {
+                newCoord.height += this.offset;
+            }
+
+            var tile = $("<div class='k-treemap-tile'></div>")
+                .css({
+                    width: newCoord.width,
+                    height: newCoord.height,
+                    left: newCoord.left,
+                    top: newCoord.top
                 });
 
             if (defined(item.dataItem) && defined(item.dataItem.uid)) {
-                root.attr(kendo.attr("uid"), item.dataItem.uid);
+                tile.attr(kendo.attr("uid"), item.dataItem.uid);
             }
 
-            return root;
+            return tile;
         },
 
         _getText: function(item) {
@@ -544,7 +569,7 @@ var __meta__ = {
                 .text(this._getText(item));
         },
 
-        _createWrap: function(item) {
+        _createWrap: function() {
             return $("<div class='k-treemap-wrap'></div>");
         }
     });
