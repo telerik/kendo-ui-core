@@ -81,11 +81,11 @@ public class NotificationTag extends WidgetTag /* interfaces *//* interfaces */ 
         setProperty("animation", value);
     }
 
-    public java.lang.String getAppendTo() {
-        return (java.lang.String)getProperty("appendTo");
+    public java.lang.Object getAppendTo() {
+        return (java.lang.Object)getProperty("appendTo");
     }
 
-    public void setAppendTo(java.lang.String value) {
+    public void setAppendTo(java.lang.Object value) {
         setProperty("appendTo", value);
     }
 
