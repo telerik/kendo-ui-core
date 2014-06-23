@@ -1218,7 +1218,7 @@
                 }
             };
 
-            circle.geometry.center.scale(2);
+            circle.geometry().center.scale(2);
         });
 
         test("geometryChange sets radius", 2, function() {
@@ -1228,7 +1228,7 @@
                 }
             };
 
-            circle.geometry.setRadius(60);
+            circle.geometry().setRadius(60);
         });
 
         test("optionsChange is forwarded to transform", function() {

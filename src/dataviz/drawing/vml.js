@@ -581,7 +581,7 @@
 
     var CircleTransformNode = TransformNode.extend({
         transformOrigin: function() {
-            var boundingBox = this.srcElement.geometry.bbox(),
+            var boundingBox = this.srcElement.geometry().bbox(),
                 center = boundingBox.center(),
                 originX = -center.x / boundingBox.width(),
                 originY = -center.y / boundingBox.height();
@@ -607,11 +607,11 @@
         },
 
         center: function() {
-            return this.srcElement.geometry.center;
+            return this.srcElement.geometry().center;
         },
 
         radius: function() {
-            return this.srcElement.geometry.radius;
+            return this.srcElement.geometry().radius;
         },
 
         template: renderTemplate(

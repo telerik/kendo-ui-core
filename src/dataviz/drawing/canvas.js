@@ -261,7 +261,7 @@
 
     var CircleNode = PathNode.extend({
         renderPoints: function(ctx) {
-            var geometry = this.srcElement.geometry;
+            var geometry = this.srcElement.geometry();
             var c = geometry.center;
             var r = geometry.radius;
 

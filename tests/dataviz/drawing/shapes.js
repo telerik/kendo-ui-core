@@ -577,7 +577,7 @@
         });
 
         test("sets initial geometry", function() {
-            deepEqual(circle.geometry, circleGeometry);
+            deepEqual(circle.geometry(), circleGeometry);
         });
 
         test("sets initial options", function() {
@@ -593,7 +593,7 @@
                 }
             };
 
-            circle.geometry.center.setX(5);
+            circle.geometry().center.setX(5);
         });
 
         test("changing the radius triggers geometryChange", function() {
@@ -603,7 +603,21 @@
                 }
             };
 
-            circle.geometry.setRadius(5);
+            circle.geometry().setRadius(5);
+        });
+
+        test("changing the geometry triggers geometryChange", function() {
+            circle.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            circle.geometry(new Point(10, 10));
+        });
+
+        test("geometry setter is chainable", function() {
+            equal(circle.geometry(new Point(10, 10)), circle);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {

@@ -252,16 +252,24 @@
 
     var Circle = Element.extend({
         init: function(geometry, options) {
-            var circle = this;
-            Element.fn.init.call(circle, options);
+            Element.fn.init.call(this, options);
+            this.geometry(geometry || new g.Circle());
+        },
 
-            circle.geometry = geometry || new g.Circle();
-            circle.geometry.observer = this;
+        geometry: function(value) {
+            if (defined(value)) {
+                this._geometry = value;
+                this._geometry.observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this._geometry;
+            }
         },
 
         bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
-            var rect = this.geometry.bbox(combinedMatrix);
+            var rect = this._geometry.bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
             if (strokeWidth) {
                 expandRect(rect, strokeWidth / 2);
@@ -271,7 +279,7 @@
         },
 
         rawBBox: function() {
-            return this.geometry.bbox();
+            return this._geometry.bbox();
         }
     });
     deepExtend(Circle.fn, drawing.mixins.Paintable);

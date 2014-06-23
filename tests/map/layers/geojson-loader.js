@@ -334,7 +334,7 @@
 
         test("default radius", function() {
             result = loader.parse(item);
-            equal(result.geometry.radius, 10);
+            equal(result.geometry().radius, 10);
         });
 
         test("default style", function() {
