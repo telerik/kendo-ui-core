@@ -102,32 +102,31 @@ require_once '../include/header.php';
 <?php
     $contextMenu = new \Kendo\UI\ContextMenu('menu');
 
-    $first = new \Kendo\UI\ContextMenuItem("Item 1");
+    $first = new \Kendo\UI\ContextMenuItem("Reply");
+    $first->imageUrl("../content/web/toolbar/reply.png");
     $first->addItem(
-        new \Kendo\UI\ContextMenuItem("Sub Item 1"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 2"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 3"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 4")
+        array("text" => "Reply to Sender", "imageUrl" => "../content/web/toolbar/reply.png"),
+        array("text" => "Reply to All", "imageUrl" => "../content/web/toolbar/reply.png")
     );
-    $contextMenu->addItem($first);
 
-    $second = new \Kendo\UI\ContextMenuItem("Item 2");
-    $second->addItem(
-        new \Kendo\UI\ContextMenuItem("Sub Item 1"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 2"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 3"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 4")
-    );
-    $contextMenu->addItem($second);
+    $second = new \Kendo\UI\ContextMenuItem("Forward");
+    $second->imageUrl("../content/web/toolbar/forward.png");
 
-    $third = new \Kendo\UI\ContextMenuItem("Item 3");
+    $third = new \Kendo\UI\ContextMenuItem("Mark as");
     $third->addItem(
-        new \Kendo\UI\ContextMenuItem("Sub Item 1"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 2"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 3"),
-        new \Kendo\UI\ContextMenuItem("Sub Item 4")
+        array("text" => "Unread"),
+        array("text" => "Important"),
+        array("text" => "Read")
     );
-    $contextMenu->addItem($third);
+
+    $fourth = new \Kendo\UI\ContextMenuItem("Label as");
+    $fourth->addItem(
+        array("text" => "None"),
+        array("text" => "Important", "imageUrl" => "../content/web/toolbar/important.png"),
+        array("text" => "Work", "imageUrl" => "../content/web/toolbar/todo.png"),
+        array("text" => "Personal", "imageUrl" => "../content/web/toolbar/done.png"),
+        array("text" => "New Label")
+    );
 
     $open = new \Kendo\UI\ContextMenuAnimationOpen();
     $open->effects("fade:in")
@@ -136,7 +135,10 @@ require_once '../include/header.php';
     $animation = new \Kendo\UI\ContextMenuAnimation();
     $animation->open($open);
 
-    $contextMenu->target('#listview-context-menu')
+    $contextMenu->dataSource(array(
+                    $first, $second, $third, $fourth
+                ))
+                ->target('#listview-context-menu')
                 ->orientation("horizontal")
                 ->filter(".product")
                 ->animation($animation);
