@@ -60,7 +60,7 @@
        var params = transport.parameterMap({ connection: { catalog: "catalogName" } }, "read");
 
        ok(params.indexOf('<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"><Header/><Body><Execute xmlns="urn:schemas-microsoft-com:xml-analysis"><Command><Statement>') == 0);
-       ok(params.indexOf('</Statement></Command><Properties><PropertyList><Catalog>catalogName</Catalog></PropertyList></Properties></Execute></Body></Envelope>') > -1);
+       ok(params.indexOf('</Statement></Command><Properties><PropertyList><Catalog>catalogName</Catalog><Format>Multidimensional</Format></PropertyList></Properties></Execute></Body></Envelope>') > -1);
     });
 
     test("parameterMap create empty select query", function() {

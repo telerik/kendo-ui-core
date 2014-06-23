@@ -1543,7 +1543,7 @@ var __meta__ = {
                 command += " WHERE (" + measures.join(",") + ")";
             }
 
-            command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog></PropertyList></Properties></Execute></Body></Envelope>';
+            command += '</Statement></Command><Properties><PropertyList><Catalog>' + options.connection.catalog + '</Catalog><Format>Multidimensional</Format></PropertyList></Properties></Execute></Body></Envelope>';
             return command.replace(/\&/g, "&amp;");
         },
         discover: function(options, type) {
@@ -1699,11 +1699,11 @@ var __meta__ = {
 
     var XmlaDataReader = kendo.data.XmlDataReader.extend({
         parse: function(xml) {
-            var result = kendo.data.XmlDataReader.fn.parse(xml);
-            return kendo.getter("['soap:Envelope']['soap:Body']", true)(result);
+            var result = kendo.data.XmlDataReader.fn.parse(xml.replace(/<(\/?)(\w|-)+:/g, "<$1"));
+            return kendo.getter("['Envelope']['Body']", true)(result);
         },
         errors: function(root) {
-            var fault = kendo.getter("['soap:Fault']", true)(root);
+            var fault = kendo.getter("['Fault']", true)(root);
             if (fault) {
                 return [{
                     faultstring: kendo.getter("faultstring['#text']", true)(fault),
