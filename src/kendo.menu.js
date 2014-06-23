@@ -1234,6 +1234,8 @@ var __meta__ = {
             DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
             DOCUMENT_ELEMENT
                 .on(kendo.support.mousedown + NS, that._closeProxy);
+
+            return that;
         },
 
         _showHandler: function (e) {
