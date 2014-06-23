@@ -16,7 +16,12 @@
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
         isUndefined = Utils.isUndefined,
-        MatrixVector = diagram.MatrixVector;
+        MatrixVector = diagram.MatrixVector,
+
+        g = dataviz.geometry,
+        d = dataviz.drawing,
+
+        defined = dataviz.defined;
 
     // Constants ==============================================================
     var SVGNS = "http://www.w3.org/2000/svg",
@@ -189,80 +194,75 @@
     }
 
     var Element = Class.extend({
-        init: function (domElement, options) {
+        init: function (options) {
             var element = this;
-            this._originSize = Rect.empty();
-            this._visible = true;
-            this._transform = new CompositeTransform();
-            element.domElement = domElement;
             element.options = deepExtend({}, element.options, options);
-            element.redraw();
+            element.id = element.options.id;
+            this._originSize = Rect.empty();
+            this._transform = new CompositeTransform();
         },
+
         visible: function (value) {
-            if (isUndefined(value)) {
-                return this._visible;
-            } else {
-                this._visible = value;
-                this.domElement.setAttribute("visibility", (value ? "visible" : "hidden"));
-            }
+            return this.drawingElement.visible(value);
         },
-        setAtr: function (atr, prop) {
-            if (isUndefined(prop) || isUndefined(this.options[prop])) {
-                return;
-            }
-            if (this.options[prop] !== undefined) {
-                this.domElement.setAttribute(atr, this.options[prop]);
-            }
-        },
+
         redraw: function (options) {
             if (options) {
                 deepExtend(this.options, options);
+                if (defined(options.id)) {
+                    this.id = options.id;
+                }
             }
-            this.setAtr("id", "id");
         },
+
         position: function (x, y) {
-            if (y !== undefined) {
-                this.options.x = x;
-                this.options.y = y;
-                this._pos = new Point(x, y);
+            var options = this.options;
+            if (!defined(x)) {
+               return new Point(options.x, options.y);
             }
-            else if (x instanceof Point) {
-                this._pos = x;
-                this.options.x = this._pos.x;
-                this.options.y = this._pos.y;
+
+            if (defined(y)) {
+                options.x = x;
+                options.y = y;
+            } else if (x instanceof Point) {
+                options.x = x.x;
+                options.y = x.y;
             }
-            this._transform.translate = new Translation(this.options.x, this.options.y);
+
+            this._transform.translate = new Translation(options.x, options.y);
             this._renderTransform();
-            return this._pos;
         },
+
         rotate: function (angle, center) {
-            if (angle !== undefined) {
+            if (defined(angle)) {
                 this._transform.rotate = new Rotation(angle, center.x, center.y);
                 this._renderTransform();
             }
             return this._transform.rotate || new Rotation(0);
         },
+
         _renderTransform: function () {
-            this._transform.render(this.domElement);
+            var matrix = this._transform.toMatrix();
+            this.drawingElement.transform(new g.Matrix(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f));
         },
-        _hover: function () {
-        },
+
+        _hover: function () {},
+
         _measure: function (force) {
-            var box, n = this.domElement;
+            var rect;
             if (!this._measured || force) {
-                try {
-                    box = n.getBBox();
-                    if (box.width && box.height) {
-                        this._originSize = new Rect(box.left, box.right, box.width, box.height);
-                        this._originWidth = box.width;
-                        this._originHeight = box.height;
-                        this._measured = true;
-                        return this._originSize;
-                    }
-                }
-                catch (e) {
-                }
+                var drawingElement = this.drawingElement;
+                var box = drawingElement.rawBBox();
+                var startPoint = box.topLeft();
+                rect =  new Rect(startPoint.x, startPoint.y, box.width(), box.height());
+                this._originSize = rect;
+                this._originWidth = rect.width;
+                this._originHeight = rect.height;
+                this._measured = true;
+            } else {
+                rect = this._originSize;
             }
+            return rect;
         }
     });
 
@@ -1038,6 +1038,7 @@
         init: function (element) {
             kendo.init(element, diagram.ui);
         },
+        Element: Element,
         Scale: Scale,
         Translation: Translation,
         Rotation: Rotation,
