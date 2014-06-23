@@ -207,11 +207,8 @@
         },
 
         redraw: function (options) {
-            if (options) {
-                deepExtend(this.options, options);
-                if (defined(options.id)) {
-                    this.id = options.id;
-                }
+            if (options && options.id) {
+                 this.id = options.id;
             }
         },
 
@@ -268,73 +265,88 @@
 
     // Visual but with no size.
     var VisualBase = Element.extend({
-        init: function (domElement, options) {
-            var that = this;
-            Element.fn.init.call(that, domElement, options);
-            domElement._kendoElement = this;
+        init: function(options) {
+            Element.fn.init.call(this, options);
+            options = this.options;
+            this._fillOptions();
+            this._strokeOptions();
         },
+
         options: {
             stroke: {
                 color: "gray",
                 width: 1,
-                dashType: "none"
+                dashType: "solid"
             }
         },
-        background: function (value) {
-            if (value !== undefined) {
-                this.options.background = value;
-            }
-            this._background(this.options.background);
-        },
-        redraw: function (options) {
-            var that = this;
-            Element.fn.redraw.call(that, options);
-            that._setStroke();
-            that.setAtr("fill-opacity", "fillOpacity");
-            that.background();
-        },
-        _setStroke: function() {
-            var stroke = this.options.stroke || {};
-            this.domElement.setAttribute("stroke", stroke.color);
-            this.domElement.setAttribute("stroke-dasharray", this._renderDashType());
-            this.domElement.setAttribute("stroke-width", stroke.width);
-        },
-        _renderDashType: function() {
-            var stroke = this.options.stroke || {},
-                width = stroke.width || 1,
-                dashType = stroke.dashType;
 
-            if (dashType && dashType != "solid") {
-                var dashArray = dataviz.DASH_ARRAYS[dashType.toLowerCase()] || [],
-                    result = [],
-                    i;
-
-                for (i = 0; i < dashArray.length; i++) {
-                    result.push(dashArray[i] * width);
+        fill: function(color, opacity) {
+            deepExtend(this.options, {
+                fill: {
+                    color: color,
+                    opacity: opacity
                 }
+            });
 
-                return result.join(" ");
+            var fillOptions = this._fillOptions();
+            this.drawingElement.fill(fillOptions.color, fillOptions.opacity);
+        },
+
+        _fillOptions: function() {
+            var fillOptions = this.options.fill || {};
+            fillOptions.color = this._getColor(fillOptions.color);
+            return fillOptions;
+        },
+
+        stroke: function(color, width, opacity) {
+             deepExtend(this.options, {
+                stroke: {
+                    color: color,
+                    width: width,
+                    opacity: opacity
+                }
+            });
+            var strokeOptions = this._strokeOptions();
+            this.drawingElement.stroke(strokeOptions.color, strokeOptions.width, strokeOptions.opacity);
+        },
+
+        _strokeOptions: function() {
+            var strokeOptions = this.options.stroke || {};
+            strokeOptions.color = this._getColor(strokeOptions.color);
+            return strokeOptions;
+        },
+
+        redraw: function (options) {
+            options = options || {};
+            var stroke = options.stroke;
+            var fill = options.fill;
+            if (stroke) {
+                this.stroke(stroke.color, stroke.width, stroke.opacity);
+            }
+            if (fill) {
+                this.fill(fill.color, fill.opacity);
+            }
+
+            Element.fn.redraw.call(this, options);
+        },
+
+        _hover: function (show) {
+            var drawingElement = this.drawingElement;
+            var options = this.options;
+            var hover = options.hover;
+
+            if (hover && hover.fill) {
+                var fill = show ? hover.fill : options.fill;
+                drawingElement.fill(fill.color, fill.opacity);
             }
         },
-        _hover: function (value) {
-            var color = this.options.background;
 
-            if (value && Utils.isDefined(this.options.hover.background)) {
-                color = this.options.hover.background;
-            }
-
-            this._background(color);
-        },
-        _background: function (value) {
-            this.domElement.setAttribute("fill", this._getColor(value));
-        },
         _getColor: function (value) {
             var bg;
-            if (value != "none") {
+            if (value != "none" && value != "transparent") {
                 var color = new dataviz.Color(value);
                 bg = color.toHex();
-            }
-            else {
+            } else {
                 bg = value;
             }
             return bg;

@@ -58,15 +58,6 @@
             equal(drawingElement.visible(), false);
         });
 
-        test("redraw extends current options", function() {
-            element.redraw({
-                foo: "baz",
-                bar: "bar"
-            });
-            equal(element.options.foo, "baz");
-            equal(element.options.bar, "bar");
-        });
-
         test("redraw sets id", function() {
             element.redraw({
                 id: "test"
@@ -196,6 +187,235 @@
             };
             var rect = element._measure(true);
             ok(rect.equals(new Rect(50, 60, 50, 40)));
+        });
+
+    })();
+
+    (function() {
+        var VisualBase = diagram.VisualBase;
+        var visualBase;
+        var drawingElement;
+
+        var ShapeMock = d.Element.extend({
+            stroke: function(color, width, opacity) {
+                var stroke = this.options.stroke = this.options.stroke || {};
+                if (color) {
+                    stroke.color = color;
+                }
+                if (width) {
+                    stroke.width = width;
+                }
+                if (opacity) {
+                    stroke.opacity = opacity
+                }
+            },
+
+            fill: function(color, opacity) {
+                var fill = this.options.fill = this.options.fill || {};
+                if (color) {
+                    fill.color = color;
+                }
+                if (opacity) {
+                    fill.opacity = opacity
+                }
+            }
+        });
+
+        module("VisualBase", {
+            setup: function() {
+                visual = new VisualBase({
+                    fill: {
+                        color: "red"
+                    },
+                    stroke: {
+                        color: "green"
+                    }
+                });
+            }
+        });
+
+        test("inits fill color", function() {
+            equal(visual.options.fill.color, new dataviz.Color("red").toHex());
+        });
+
+        test("inits stroke color", function() {
+            equal(visual.options.stroke.color, new dataviz.Color("green").toHex());
+        });
+
+        // ------------------------------------------------------------
+        module("VisualBase / api", {
+            setup: function() {
+                visual = new VisualBase({
+                    fill: {
+                        color: "blue",
+                        opacity: 1
+                    },
+                    stroke: {
+                        color: "blue",
+                        width: 1,
+                        opacity: 1
+                    }
+                });
+                drawingElement = new ShapeMock();
+                visual.drawingElement = drawingElement;
+            }
+        });
+
+        test("fill updates fill options", function() {
+            visual.fill("red", 0.5);
+            var fill =  visual.options.fill;
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.5);
+        });
+
+        test("fill renders new fill options", function() {
+            visual.fill("red", 0.5);
+            var fill =  drawingElement.options.fill;
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.5);
+        });
+
+        test("stroke updates stroke options", function() {
+            visual.stroke("red", 2, 0.5);
+            var stroke =  visual.options.stroke;
+            equal(stroke.color, "#ff0000");
+            equal(stroke.width, 2);
+            equal(stroke.opacity, 0.5);
+        });
+
+        test("stroke renders new stroke options", function() {
+            visual.stroke("red", 2, 0.5);
+            var stroke =  drawingElement.options.stroke;
+
+            equal(stroke.color, "#ff0000");
+            equal(stroke.width, 2);
+            equal(stroke.opacity, 0.5);
+        });
+
+        test("redraw sets fill options", function() {
+            visual.redraw({
+                fill: {
+                    color: "red",
+                    opacity: 0.5
+                }
+            });
+            var fill = visual.options.fill;
+
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.5);
+        });
+
+        test("redraw renders fill options", function() {
+            visual.redraw({
+                fill: {
+                    color: "red",
+                    opacity: 0.5
+                }
+            });
+            var fill = drawingElement.options.fill;
+
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.5);
+        });
+
+        test("redraw does not render fill if no fill options are passed", 0, function() {
+            drawingElement.fill = function() {
+                ok(false);
+            };
+            visual.redraw();
+        });
+
+        test("redraw sets stroke options", function() {
+            visual.redraw({
+                stroke: {
+                    color: "red",
+                    width: 2,
+                    opacity: 0.5
+                }
+            });
+            var stroke = visual.options.stroke;
+
+            equal(stroke.color, "#ff0000");
+            equal(stroke.width, 2);
+            equal(stroke.opacity, 0.5);
+        });
+
+        test("redraw renders stroke options", function() {
+            visual.redraw({
+                stroke: {
+                    color: "red",
+                    width: 2,
+                    opacity: 0.5
+                }
+            });
+            var stroke = drawingElement.options.stroke;
+
+            equal(stroke.color, "#ff0000");
+            equal(stroke.width, 2);
+            equal(stroke.opacity, 0.5);
+        });
+
+        test("redraw does not render stroke if no stroke options are passed", 0, function() {
+            drawingElement.stroke = function() {
+                ok(false);
+            };
+            visual.redraw();
+        });
+
+        test("_hover renders hover fill if true is passed as parameter and visual has hover fill options", function() {
+            visual.options.hover = {
+                fill: {
+                    color: "#ff0000",
+                    opacity: 0.7
+                }
+            };
+            visual._hover(true);
+            var fill = drawingElement.options.fill;
+
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.7);
+        });
+
+        test("_hover does not update fill options", function() {
+            visual.options.hover = {
+                fill: {
+                    color: "red",
+                    opacity: 0.7
+                }
+            };
+            visual._hover(true);
+            var fill = visual.options.fill;
+
+            equal(fill.color, "#0000ff");
+            equal(fill.opacity, 1);
+        });
+
+        test("_hover does not render fill if true is passed as parameter but visual has no hover fill options", 0, function() {
+            drawingElement.fill = function() {
+                ok(false);
+            };
+            visual._hover(true);
+        });
+
+        test("_hover renders visual fill options if false is passed as parameter and visual has hover fill options", function() {
+            visual.options.hover = {
+                fill: {
+                    color: "#ff0000",
+                    opacity: 0.7
+                }
+            };
+            drawingElement.fill = function(color, opacity) {
+                equal(color, "#0000ff");
+                equal(opacity, 1);
+            };
+            visual._hover(false);
+        });
+
+        test("_hover does not render fill if false is passed as parameter and visual has no hover fill options", 0, function() {
+            drawingElement.fill = function() {
+                ok(false);
+            };
+            visual._hover(false);
         });
 
     })();
