@@ -724,6 +724,12 @@
     <Compile Include="UI\Diagram\Fluent\DiagramBuilder.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramEventBuilder.cs" />
     <Compile Include="UI\Diagram\Html\DiagramHtmlBuilder.cs" />
+    <Compile Include="UI\Gantt\Columns\GanttBoundColumn.cs" />
+    <Compile Include="UI\Gantt\Columns\GanttColumnBase.cs" />
+    <Compile Include="UI\Gantt\Columns\IGanttBoundColumn.cs" />
+    <Compile Include="UI\Gantt\Columns\IGanttColumn.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttBoundColumnBuilder.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttColumnBuilderBase.cs" />
     <Compile Include="UI\Gantt\IGanttDependency.cs" />
     <Compile Include="UI\Gantt\GanttDependenciesModelDescriptor.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttDependenciesModelDescriptorFactory.cs" />
@@ -741,6 +747,7 @@
     <Compile Include="UI\Editor\Fluent\EditorFileBrowserOperationBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorFileBrowserSettingsBuilder.cs" />
     <Compile Include="UI\Gantt\GanttModelDescriptor.cs" />
+    <Compile Include="UI\Gantt\Settings\GanttColumnSettings.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceModelDescriptorFactory.cs" />
     <Compile Include="UI\HierarchicalDataSource\Fluent\CustomHierarchicalDataSourceSchemaBuilder.cs" />

@@ -28,9 +28,9 @@ namespace Kendo.Mvc.UI
             DependenciesDataSource.Type = DataSourceType.Ajax;
             DependenciesDataSource.Schema.Model = new GanttDependenciesModelDescriptor(typeof(TDependenciesModel));
 
+            Columns = new List<GanttColumnBase<TTaskModel>>();
+
 //>> Initialization
-        
-            Columns = new List<GanttColumn>();
                 
             Messages = new GanttMessagesSettings();
                 
@@ -51,16 +51,16 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-
-//>> Fields
-        
-        public bool? AutoBind { get; set; }
-        
-        public List<GanttColumn> Columns
+        public List<GanttColumnBase<TTaskModel>> Columns
         {
             get;
             set;
         }
+
+
+//>> Fields
+        
+        public bool? AutoBind { get; set; }
         
         public bool? Editable { get; set; }
         

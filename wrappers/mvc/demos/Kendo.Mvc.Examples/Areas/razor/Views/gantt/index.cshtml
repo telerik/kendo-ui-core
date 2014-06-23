@@ -1,12 +1,12 @@
 @(Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
     .Name("gantt")
-    //.Columns(columns =>
-    //{
-    //    columns.Bound(c => c.ID).Width(50);
-    //    columns.Bound(c => c.Title).Editable(true);
-    //    columns.Bound(c => c.Start).Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100);
-    //    columns.Bound(c => c.End).Title("End Time").Format("{0:MM/dd/yyyy}").Width(100);
-    //})
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.TaskID).Title("ID").Width(50);
+        columns.Bound("title").Editable(true);
+        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100);
+        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100);
+    })
     .Views(views =>
     {
         views.DayView();

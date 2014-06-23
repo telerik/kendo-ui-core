@@ -91,9 +91,9 @@ namespace Kendo.Mvc.UI.Fluent
 		/// field to which the column is bound. The gantt will create a column for every item of the array.
         /// </summary>
         /// <param name="configurator">The action that configures the columns.</param>
-        public GanttBuilder<TTaskModel,TDependenciesModel> Columns(Action<GanttColumnFactory> configurator)
+        public GanttBuilder<TTaskModel,TDependenciesModel> Columns(Action<GanttColumnFactory<TTaskModel, TDependenciesModel>> configurator)
         {
-            configurator(new GanttColumnFactory(container.Columns));
+            configurator(new GanttColumnFactory<TTaskModel, TDependenciesModel>(container));
             return this;
         }
         

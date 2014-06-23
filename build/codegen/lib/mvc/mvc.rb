@@ -77,6 +77,8 @@ module CodeGen::MVC::Wrappers
         'scrollview.datasource',
         'drawer.views',
         'gantt.datasource',
+        'gantt.dependencies',
+        'gantt.columns',
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
 		'diagram.datasource'
