@@ -154,11 +154,13 @@ var __meta__ = {
 
         _bind: function() {
             var that = this,
-                viewModel = that.viewModel,
-                filter = findFilterForField(that.dataSource.filter(), this.options.field) || viewModel;
+                filter = findFilterForField(that.dataSource.filter(), this.options.field) || {},
+                viewModel = that.viewModel;
 
             that.manuallyUpdatingVM = true;
-            viewModel.set("operator", filter.operator);
+            if (filter.operator) {
+                viewModel.set("operator", filter.operator);
+            }
             viewModel.set("value", filter.value);
             that.manuallyUpdatingVM = false;
         },
