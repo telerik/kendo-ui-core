@@ -494,7 +494,7 @@ var __meta__ = {
             } else {
                 element
                     .text(this._getText(item))
-                    .css("background-color", valueOrDefault(item.color, getRandomColor()));
+                    .css("background-color", item.color);
             }
 
             return element;
@@ -649,15 +649,6 @@ var __meta__ = {
 
     function rgbToHex(rgb) {
         return parseInt(rgb.toString(16), 16);
-    }
-
-    function getRandomColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[math.floor(math.random() * 16)];
-        }
-        return color;
     }
 
     dataviz.ui.plugin(TreeMap);
