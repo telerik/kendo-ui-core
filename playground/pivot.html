@@ -183,19 +183,13 @@
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
                         type: "xmla",
-                    //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
-                        columns: [ { name: "[Date].[Calendar]" }/*, { name: "[Product].[Product Name].[All]" }*/],
-                        //measures: ["[Measures].[Internet Order Lines Count]"],
                         transport: {
                             connection: {
-                                catalog: "Adventure Works DW Standard Edition",
+                                catalog: "Adventure Works DW 2008R2",
                                 cube: "Adventure Works"
-                              //  catalog: "Adventure Works Internet Sales Model",
-                              //  cube: "Adventure Works Internet Sales Model"
                             },
                             read: {
-                                url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
-                                //url: "http://krustev:8080/olap/msmdpump.dll",
+                                url: "http://testolap.telerik.com/msmdpump.dll",
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"
