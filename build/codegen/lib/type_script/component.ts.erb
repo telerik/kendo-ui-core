@@ -11,7 +11,7 @@
 % end
         options: <%= type_script_options_type %>;
 % if options.any? { |o| o.name == 'dataSource' }
-% unless name =~ /Menu|PanelBar/
+% unless name =~ /Menu|ContextMenu|PanelBar/
         dataSource: kendo.data.DataSource;
 % end
 % end

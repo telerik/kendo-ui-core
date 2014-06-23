@@ -3,9 +3,27 @@
 namespace Kendo\UI;
 
 class ContextMenu extends \Kendo\UI\Widget {
+    protected $ignore = array('items');
+
     public function name() {
         return 'ContextMenu';
     }
+
+    protected function createElement() {
+        $items = $this->getProperty('items');
+
+        if ($items) {
+            $element = new \Kendo\Html\Element('ul');
+            foreach ($items as $item) {
+                $element->append($item->createElement());
+            }
+        } else {
+            $element = new \Kendo\Html\Element('div');
+        }
+
+        return $element;
+    }
+
 //>> Properties
 
     /**
@@ -37,8 +55,9 @@ by setting the close animation. Each animation also has a direction which can be
     }
 
     /**
-    * Sets the data source of the ContextMenu.
-    * @param array|\Kendo\Data\DataSource $value
+    * The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.
+    * @param |array $value
     * @return \Kendo\UI\ContextMenu
     */
     public function dataSource($value) {
