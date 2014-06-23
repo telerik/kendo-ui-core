@@ -11,6 +11,30 @@
         Rotation = diagram.Rotation,
         CompositeTransform = diagram.CompositeTransform;
 
+    var ShapeMock = d.Element.extend({
+        stroke: function(color, width, opacity) {
+            var stroke = this.options.stroke = this.options.stroke || {};
+            if (color) {
+                stroke.color = color;
+            }
+            if (width) {
+                stroke.width = width;
+            }
+            if (opacity) {
+                stroke.opacity = opacity
+            }
+        },
+
+        fill: function(color, opacity) {
+            var fill = this.options.fill = this.options.fill || {};
+            if (color) {
+                fill.color = color;
+            }
+            if (opacity) {
+                fill.opacity = opacity
+            }
+        }
+    });
 
     (function() {
         var Element = diagram.Element;
@@ -193,33 +217,8 @@
 
     (function() {
         var VisualBase = diagram.VisualBase;
-        var visualBase;
+        var visual;
         var drawingElement;
-
-        var ShapeMock = d.Element.extend({
-            stroke: function(color, width, opacity) {
-                var stroke = this.options.stroke = this.options.stroke || {};
-                if (color) {
-                    stroke.color = color;
-                }
-                if (width) {
-                    stroke.width = width;
-                }
-                if (opacity) {
-                    stroke.opacity = opacity
-                }
-            },
-
-            fill: function(color, opacity) {
-                var fill = this.options.fill = this.options.fill || {};
-                if (color) {
-                    fill.color = color;
-                }
-                if (opacity) {
-                    fill.opacity = opacity
-                }
-            }
-        });
 
         module("VisualBase", {
             setup: function() {
@@ -416,6 +415,73 @@
                 ok(false);
             };
             visual._hover(false);
+        });
+
+    })();
+
+    (function() {
+        var Visual = diagram.Visual;
+        var visual;
+        var drawingElement;
+
+        module("Visual", {
+            setup: function() {
+                visual = new Visual({});
+            }
+        });
+
+        test("redraw updates visual position if x and y are passed", function() {
+            visual.position = function(x, y) {
+                equal(x, 10);
+                equal(y, 20);
+            };
+            visual.redraw({
+                x: 10,
+                y: 20
+            });
+        });
+
+        test("redraw does not update visual position if x and y are not passed", 0, function() {
+            visual.position = function(x, y) {
+                ok(false);
+            };
+            visual.redraw();
+        });
+
+        test("redraw sets visual size if width and height are passed with the options", function() {
+            visual.redraw({
+                width: 100,
+                height: 200
+            });
+
+            equal(visual.options.width, 100);
+            equal(visual.options.height, 200);
+        });
+
+        test("redraw does not set size if width and height are not passed with the options", 0, function() {
+            visual.size = function() {
+                ok(false);
+            };
+            visual.redraw();
+        });
+
+        test("size sets size", function() {
+             visual.size({
+                width: 100,
+                height: 200
+            });
+
+            equal(visual.options.width, 100);
+            equal(visual.options.height, 200);
+        });
+
+        test("size returns current size", function() {
+            visual.options.width = 100;
+            visual.options.height = 200;
+            var size = visual.size();
+
+            equal(size.width, 100);
+            equal(size.height, 200);
         });
 
     })();

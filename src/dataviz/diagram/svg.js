@@ -354,29 +354,30 @@
     });
 
     var Visual = VisualBase.extend({
-        init: function (domElement, options) {
-            var that = this;
-            VisualBase.fn.init.call(that, domElement, options);
-        },
         redraw: function (options) {
-            var that = this;
-            VisualBase.fn.redraw.call(that, options);
+            options = options || {};
+            if (defined(options.x) && defined(options.y)) {
+                this.position(options.x, options.y);
+            }
 
-            if (that.options.x !== undefined && that.options.y !== undefined) {
-                that.position(that.options.x, that.options.y);
+            if (defined(options.width) && defined(options.height)) {
+                this.size(options);
             }
-            that.size();
+
+            VisualBase.fn.redraw.call(this, options);
         },
-        size: function (value) {
-            if (value !== undefined) {
-                this.options.width = value.width;
-                this.options.height = value.height;
+
+        size: function (size) {
+            var options = this.options;
+            if (size) {
+                options.width = size.width;
+                options.height = size.height;
+            } else {
+                return {
+                    width: options.width,
+                    height: options.height
+                };
             }
-            this._sz = { width: this.options.width, height: this.options.height };
-            this.setAtr("width", "width");
-            this.setAtr("height", "height");
-            this.setAtr("background", "background");
-            return this._sz;
         }
     });
 
