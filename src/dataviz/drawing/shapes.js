@@ -256,17 +256,6 @@
             this.geometry(geometry || new g.Circle());
         },
 
-        geometry: function(value) {
-            if (defined(value)) {
-                this._geometry = value;
-                this._geometry.observer = this;
-                this.geometryChange();
-                return this;
-            } else {
-                return this._geometry;
-            }
-        },
-
         bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             var rect = this._geometry.bbox(combinedMatrix);
@@ -283,6 +272,7 @@
         }
     });
     deepExtend(Circle.fn, drawing.mixins.Paintable);
+    defineGeometryAccessors(Circle.fn, ["geometry"]);
 
     var Arc = Element.extend({
         init: function(geometry, options) {
@@ -328,33 +318,22 @@
 
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
-            var segment = this;
-
-            this.anchor = anchor || new Point();
-            this.anchor.observer = this;
-
-            if (controlIn) {
-                this.controlIn = controlIn;
-                this.controlIn.observer = this;
-            }
-
-            if (controlOut) {
-                this.controlOut = controlOut;
-                this.controlOut.observer = this;
-            }
+            this.anchor(anchor || new Point());
+            this.controlIn(controlIn);
+            this.controlOut(controlOut);
         },
 
         geometryChange: util.mixins.geometryChange,
 
         bboxTo: function(toSegment, matrix) {
             var rect;
-            var segmentAnchor = this.anchor.transformCopy(matrix);
-            var toSegmentAnchor = toSegment.anchor.transformCopy(matrix);
+            var segmentAnchor = this.anchor().transformCopy(matrix);
+            var toSegmentAnchor = toSegment.anchor().transformCopy(matrix);
 
-            if (this.controlOut && toSegment.controlIn) {
+            if (this.controlOut() && toSegment.controlIn()) {
                 rect = this._curveBoundingBox(
-                    segmentAnchor, this.controlOut.transformCopy(matrix),
-                    toSegment.controlIn.transformCopy(matrix), toSegmentAnchor
+                    segmentAnchor, this.controlOut().transformCopy(matrix),
+                    toSegment.controlIn().transformCopy(matrix), toSegmentAnchor
                 );
             } else {
                 rect = this._lineBoundingBox(segmentAnchor, toSegmentAnchor);
@@ -431,6 +410,7 @@
             };
         }
     });
+    defineGeometryAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"])
 
     var Path = Element.extend({
         init: function(options) {
@@ -464,11 +444,9 @@
             if (this.segments.length > 0) {
                 var lastSegment = last(this.segments);
                 var segment = new Segment(point, controlIn);
-
                 segment.observer = this;
 
-                lastSegment.controlOut = controlOut;
-                controlOut.observer = lastSegment;
+                lastSegment.controlOut(controlOut);
 
                 this.segments.push(segment);
             }
@@ -503,7 +481,7 @@
             var boundingBox;
 
             if (length === 1) {
-                var anchor = segments[0].anchor.transformCopy(matrix);
+                var anchor = segments[0].anchor().transformCopy(matrix);
                 boundingBox = new Rect(anchor, anchor);
             } else if (length > 0) {
                 boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
@@ -584,17 +562,6 @@
             }
         },
 
-        rect: function(value) {
-            if (defined(value)) {
-                this._rect = value;
-                this._rect.observer = this;
-                this.geometryChange();
-                return this;
-            } else {
-                return this._rect;
-            }
-        },
-
         bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
             return this._rect.bbox(combinedMatrix);
@@ -604,6 +571,7 @@
             return this._rect.bbox();
         }
     });
+    defineGeometryAccessors(Image.fn, ["rect"]);
 
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
@@ -639,6 +607,25 @@
         rect.p1.y += value;
     }
 
+    function defineGeometryAccessors(fn, names) {
+        for (var i = 0; i < names.length; i++) {
+            fn[names[i]] = geometryAccessor(names[i]);
+        };
+    }
+
+    function geometryAccessor(name) {
+        var fieldName = "_" + name;
+        return function(value) {
+            if (defined(value)) {
+                this[fieldName] = value;
+                this[fieldName].observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this[fieldName];
+            }
+        };
+    }
 
     // Exports ================================================================
     deepExtend(drawing, {

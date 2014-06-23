@@ -31,35 +31,35 @@
 
     test("moves path", function() {
         path = multiPath.paths[0];
-        point = path.segments[0].anchor;
+        point = path.segments[0].anchor();
         equal(point.x, 100);
         equal(point.y, 100);
     });
 
     test("moves path with relative coordinates", function() {
         path = multiPath.paths[1];
-        point = path.segments[0].anchor;
+        point = path.segments[0].anchor();
         equal(point.x, 150);
         equal(point.y, 150);
     });
 
     test("parses move with comma as separator", function() {
         multiPath = parser.parse("M 100,100");
-        point = multiPath.paths[0].segments[0].anchor;
+        point = multiPath.paths[0].segments[0].anchor();
         equal(point.x, 100);
         equal(point.y, 100);
     });
 
     test("parses move without space between the command and the coordinates", function() {
         multiPath = parser.parse("M100,100");
-        point = multiPath.paths[0].segments[0].anchor;
+        point = multiPath.paths[0].segments[0].anchor();
         equal(point.x, 100);
         equal(point.y, 100);
     });
 
     test("parses move sign as separator between the coordinates", function() {
         multiPath = parser.parse("M100-100");
-        point = multiPath.paths[0].segments[0].anchor;
+        point = multiPath.paths[0].segments[0].anchor();
         equal(point.x, 100);
         equal(point.y, -100);
     });
@@ -74,56 +74,56 @@
 
     test("parses line", function() {
         segment = path.segments[1];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 300);
         equal(point.y, 300);
     });
 
     test("parses line with relative coordinates", function() {
         segment = path.segments[2];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 350);
         equal(point.y, 250);
     });
 
     test("parses multiple coordinates", function() {
         segment = path.segments[3];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 350);
         equal(point.y, 280);
     });
 
     test("parses horizontal line", function() {
         segment = path.segments[4];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 400);
         equal(point.y, 280);
     });
 
     test("parses vertical line", function() {
         segment = path.segments[5];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 400);
         equal(point.y, 300);
     });
 
     test("parses horizontal line with relative coordinates", function() {
         segment = path.segments[6];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 450);
         equal(point.y, 300);
     });
 
     test("parses vertical line with relative coordinates", function() {
         segment = path.segments[7];
-        point = segment.anchor;
+        point = segment.anchor();
         equal(point.x, 450);
         equal(point.y, 350);
     });
 
     test("parses line with comma as separator", function() {
         multiPath = parser.parse("M 100,100 L 300,300");
-        point = multiPath.paths[0].segments[1].anchor;
+        point = multiPath.paths[0].segments[1].anchor();
         equal(point.x, 300);
         equal(point.y, 300);
     });
@@ -131,17 +131,17 @@
     test("parses line with sign as separator", function() {
         multiPath = parser.parse("M100,100l100-50+20-40");
         var segments = multiPath.paths[0].segments;
-        point = segments[1].anchor;
+        point = segments[1].anchor();
         equal(point.x, 200);
         equal(point.y, 50);
-        point = segments[2].anchor;
+        point = segments[2].anchor();
         equal(point.x, 220);
         equal(point.y, 10);
     });
 
     test("parses line without spaces between the command and the coordinates", function() {
         multiPath = parser.parse("M 100,100 L300,300");
-        point = multiPath.paths[0].segments[1].anchor;
+        point = multiPath.paths[0].segments[1].anchor();
         equal(point.x, 300);
         equal(point.y, 300);
     });
@@ -164,9 +164,9 @@
         segment = path.segments[0];
         endSegment = path.segments[1];
 
-        ok(segment.controlOut.equals(controlOut));
-        ok(endSegment.controlIn.equals(controlIn));
-        ok(endSegment.anchor.equals(anchor));
+        ok(segment.controlOut().equals(controlOut));
+        ok(endSegment.controlIn().equals(controlIn));
+        ok(endSegment.anchor().equals(anchor));
     });
 
     test("parses curve with relative coordinates", function() {
@@ -177,9 +177,9 @@
         segment = path.segments[1];
         endSegment = path.segments[2];
 
-        ok(segment.controlOut.equals(controlOut));
-        ok(endSegment.controlIn.equals(controlIn));
-        ok(endSegment.anchor.equals(anchor));
+        ok(segment.controlOut().equals(controlOut));
+        ok(endSegment.controlIn().equals(controlIn));
+        ok(endSegment.anchor().equals(anchor));
     });
 
     test("parses multiple coordinates", function() {
@@ -190,9 +190,9 @@
         segment = path.segments[2];
         endSegment = path.segments[3];
 
-        ok(segment.controlOut.equals(controlOut));
-        ok(endSegment.controlIn.equals(controlIn));
-        ok(endSegment.anchor.equals(anchor));
+        ok(segment.controlOut().equals(controlOut));
+        ok(endSegment.controlIn().equals(controlIn));
+        ok(endSegment.anchor().equals(anchor));
     });
 
     test("parses curve with comma as separator", function() {
@@ -205,9 +205,9 @@
             controlIn = Point.create(200, 300),
             anchor = Point.create(150, 100);
 
-        ok(segment.controlOut.equals(controlOut));
-        ok(endSegment.controlIn.equals(controlIn));
-        ok(endSegment.anchor.equals(anchor));
+        ok(segment.controlOut().equals(controlOut));
+        ok(endSegment.controlIn().equals(controlIn));
+        ok(endSegment.anchor().equals(anchor));
     });
 
     test("parses curve without spaces between the command and the coordinates", function() {
@@ -220,9 +220,9 @@
             controlIn = Point.create(200, 300),
             anchor = Point.create(150, 100);
 
-        ok(segment.controlOut.equals(controlOut));
-        ok(endSegment.controlIn.equals(controlIn));
-        ok(endSegment.anchor.equals(anchor));
+        ok(segment.controlOut().equals(controlOut));
+        ok(endSegment.controlIn().equals(controlIn));
+        ok(endSegment.anchor().equals(anchor));
     });
 
     // ------------------------------------------------------------
@@ -234,42 +234,42 @@
     });
 
     test("parses current position as controlOut if previous segment is not a cubic curve", function() {
-        var controlOut = path.segments[0].controlOut;
+        var controlOut = path.segments[0].controlOut();
 
         equal(controlOut.x, 100);
         equal(controlOut.y, 100);
     });
 
     test("parses controlIn", function() {
-        var controlIn = path.segments[1].controlIn;
+        var controlIn = path.segments[1].controlIn();
 
         equal(controlIn.x, 200);
         equal(controlIn.y, 200);
     });
 
     test("parses anchor", function() {
-        var anchor = path.segments[1].anchor;
+        var anchor = path.segments[1].anchor();
 
         equal(anchor.x, 300);
         equal(anchor.y, 100);
     });
 
     test("parses controlOut as the reflected point of the previous segment controlIn point", function() {
-        var controlOut = path.segments[1].controlOut;
+        var controlOut = path.segments[1].controlOut();
 
         equal(controlOut.x, 400);
         equal(controlOut.y, 0);
     });
 
     test("parses relative controlIn", function() {
-        var controlIn = path.segments[2].controlIn;
+        var controlIn = path.segments[2].controlIn();
 
         equal(controlIn.x, 250);
         equal(controlIn.y, 350);
     });
 
     test("parses relative anchor", function() {
-        var anchor = path.segments[2].anchor;
+        var anchor = path.segments[2].anchor();
 
         equal(anchor.x, 450);
         equal(anchor.y, 150);
@@ -284,42 +284,42 @@
     });
 
     test("calculates controlOut", function() {
-        var controlOut = path.segments[0].controlOut;
+        var controlOut = path.segments[0].controlOut();
 
         close(controlOut.x, 166.6, TOLERANCE);
         close(controlOut.y, 166.6, TOLERANCE);
     });
 
     test("calculates controlIn", function() {
-        var controlIn = path.segments[1].controlIn;
+        var controlIn = path.segments[1].controlIn();
 
         close(controlIn.x, 233.3, TOLERANCE);
         close(controlIn.y, 166.6, TOLERANCE);
     });
 
     test("parses anchor", function() {
-        var anchor = path.segments[1].anchor;
+        var anchor = path.segments[1].anchor();
 
         equal(anchor.x, 300);
         equal(anchor.y, 100);
     });
 
     test("calculates relative controlOut", function() {
-        var controlOut = path.segments[1].controlOut;
+        var controlOut = path.segments[1].controlOut();
 
         close(controlOut.x, 266.6, TOLERANCE);
         close(controlOut.y, 233.3, TOLERANCE);
     });
 
     test("calculates relative controlIn", function() {
-        var controlIn = path.segments[2].controlIn;
+        var controlIn = path.segments[2].controlIn();
 
         equal(controlIn.x, 300);
         close(controlIn.y, 333.3, TOLERANCE);
     });
 
     test("parses relative anchor", function() {
-        var anchor = path.segments[2].anchor;
+        var anchor = path.segments[2].anchor();
 
         equal(anchor.x, 400);
         equal(anchor.y, 400);
@@ -335,63 +335,63 @@
     });
 
     test("uses current position as control point if previous segment is not a quadratic curve", function() {
-        var controlOut = path.segments[0].controlOut;
+        var controlOut = path.segments[0].controlOut();
 
         close(controlOut.x, 100, TOLERANCE);
         close(controlOut.y, 100, TOLERANCE);
     });
 
     test("calculates controlIn", function() {
-        var controlIn = path.segments[1].controlIn;
+        var controlIn = path.segments[1].controlIn();
 
         close(controlIn.x, 133.3, TOLERANCE);
         close(controlIn.y, 133.3, TOLERANCE);
     });
 
     test("parses anchor", function() {
-        var anchor = path.segments[1].anchor;
+        var anchor = path.segments[1].anchor();
 
         equal(anchor.x, 200);
         equal(anchor.y, 200);
     });
 
     test("calculates control point as the reflected point of the previous segment control point", function() {
-        var controlOut = path.segments[1].controlOut;
+        var controlOut = path.segments[1].controlOut();
 
         close(controlOut.x, 266.6, TOLERANCE);
         close(controlOut.y, 266.6, TOLERANCE);
     });
 
     test("calculates relative controlIn", function() {
-        var controlIn = path.segments[2].controlIn;
+        var controlIn = path.segments[2].controlIn();
 
         close(controlIn.x, 283.3, TOLERANCE);
         close(controlIn.y, 266.6, TOLERANCE);
     });
 
     test("calculates relative anchor", function() {
-        var anchor = path.segments[2].anchor;
+        var anchor = path.segments[2].anchor();
 
         equal(anchor.x, 250);
         equal(anchor.y, 200);
     });
 
     test("calculates controlOut when specifying multiple segments", function() {
-        var controlOut = path.segments[2].controlOut;
+        var controlOut = path.segments[2].controlOut();
 
         close(controlOut.x, 216.6, TOLERANCE);
         close(controlOut.y, 133.3, TOLERANCE);
     });
 
     test("calculates controlIn when specifying multiple segments", function() {
-        var controlIn = path.segments[3].controlIn;
+        var controlIn = path.segments[3].controlIn();
 
         close(controlIn.x, 183.3, TOLERANCE);
         close(controlIn.y, 166.6, TOLERANCE);
     });
 
     test("calculates anchor when specifying multiple segments", function() {
-        var anchor = path.segments[3].anchor;
+        var anchor = path.segments[3].anchor();
 
         equal(anchor.x, 150);
         equal(anchor.y, 300);
@@ -419,9 +419,9 @@
         }
 
         for (i = 0; i < length; i++) {
-            closePoints(segments1[i].anchor, segments2[i].anchor, tolerance);
-            closePoints(segments1[i].controlOut, segments2[i].controlOut, tolerance);
-            closePoints(segments1[i].controlIn, segments2[i].controlIn, tolerance);
+            closePoints(segments1[i].anchor(), segments2[i].anchor(), tolerance);
+            closePoints(segments1[i].controlOut(), segments2[i].controlOut(), tolerance);
+            closePoints(segments1[i].controlIn(), segments2[i].controlIn(), tolerance);
         }
     }
 

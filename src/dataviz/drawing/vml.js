@@ -829,17 +829,17 @@
                 }
 
                 if (type === "l") {
-                    parts.push(printPoints([segments[i].anchor]));
+                    parts.push(printPoints([segments[i].anchor()]));
                 } else {
                     parts.push(printPoints([
-                        segments[i - 1].controlOut,
-                        segments[i].controlIn,
-                        segments[i].anchor
+                        segments[i - 1].controlOut(),
+                        segments[i].controlIn(),
+                        segments[i].anchor()
                     ]));
                 }
             }
 
-            output = "m " + printPoints([segments[0].anchor]) + " " + parts.join(" ");
+            output = "m " + printPoints([segments[0].anchor()]) + " " + parts.join(" ");
             if (path.options.closed) {
                 output += " x";
             }
@@ -853,7 +853,7 @@
     }
 
     function segmentType(segmentStart, segmentEnd) {
-        return segmentStart.controlOut && segmentEnd.controlIn ? "c" : "l";
+        return segmentStart.controlOut() && segmentEnd.controlIn() ? "c" : "l";
     }
 
     // Exports ================================================================

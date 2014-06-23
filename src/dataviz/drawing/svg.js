@@ -383,13 +383,13 @@
                     }
 
                     if (segmentType === "L") {
-                        parts.push(this.printPoints(segments[i].anchor));
+                        parts.push(this.printPoints(segments[i].anchor()));
                     } else {
-                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                        parts.push(this.printPoints(segments[i - 1].controlOut(), segments[i].controlIn(), segments[i].anchor()));
                     }
                 }
 
-                output = "M" + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
+                output = "M" + this.printPoints(segments[0].anchor()) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += "Z";
                 }
@@ -411,7 +411,7 @@
         },
 
         segmentType: function(segmentStart, segmentEnd) {
-            return segmentStart.controlOut && segmentEnd.controlIn ? "C" : "L";
+            return segmentStart.controlOut() && segmentEnd.controlIn() ? "C" : "L";
         },
 
         mapStroke: function(stroke) {
