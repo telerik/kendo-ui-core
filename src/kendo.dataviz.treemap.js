@@ -101,7 +101,7 @@ var __meta__ = {
             var node = e.node;
             var items = e.items;
             var options = this.options;
-            var item;
+            var item, i;
 
             if (!node) {
                 this._items = [];
@@ -121,14 +121,14 @@ var __meta__ = {
                     var root = this._getByUid(node.uid);
                     root.children = [];
                     var colors = colorsByLength("#0c81c5", "#c5dceb", items.length);
-                    for (var i = 0; i < items.length; i++) {
+                    for (i = 0; i < items.length; i++) {
                         item = items[i];
                         root.children.push(this._wrapItem(item));
                     }
                     var htmlSize = this.view.htmlSize(root);
                     this.src.compute(root, root.coord, htmlSize);
 
-                    for (var i = 0; i < root.children.length; i++) {
+                    for (i = 0; i < root.children.length; i++) {
                         item = root.children[i];
                         if (!defined(item.color)) {
                             item.color = colors[i];
@@ -578,7 +578,7 @@ var __meta__ = {
                 r: colorByIndex(minRGBtoDecimal.r, maxRGBtoDecimal.r, i, length),
                 g: colorByIndex(minRGBtoDecimal.g, maxRGBtoDecimal.g, i, length),
                 b: colorByIndex(minRGBtoDecimal.b, maxRGBtoDecimal.b, i, length)
-            }
+            };
             colors.push(buildColorFromRGB(rgbColor));
         }
 
