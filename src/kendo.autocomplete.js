@@ -381,7 +381,7 @@ var __meta__ = {
         value: function (value) {
             if (value !== undefined) {
                 this._accessor(value);
-                this._old = value;
+                this._old = this._accessor();
             } else {
                 return this._accessor();
             }
