@@ -60,7 +60,7 @@ public abstract class BaseItemTag extends BaseTag {
         
         String imageUrl = getImageUrl();
         
-        if (imageUrl != null && imageUrl.isEmpty()) {
+        if (imageUrl != null && !imageUrl.isEmpty()) {
             Img image = new Img();
             image.attr("class", "k-image");
             image.attr("alt", "");
