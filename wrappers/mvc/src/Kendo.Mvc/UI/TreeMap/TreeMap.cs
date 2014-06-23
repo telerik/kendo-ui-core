@@ -11,20 +11,26 @@ namespace Kendo.Mvc.UI
 
     public class TreeMap : WidgetBase
     {
-        private readonly IUrlGenerator urlGenerator;
+        public IUrlGenerator urlGenerator;
 
         public TreeMap(ViewContext viewContext, IJavaScriptInitializer initializer, IUrlGenerator urlGenerator)
             : base(viewContext, initializer)
         {
             this.urlGenerator = urlGenerator;
+            DataSource = new DataSource();
+            DataSource.ModelType(typeof(object));
 //>> Initialization
         
         //<< Initialization
         }
 
+        public DataSource DataSource
+        {
+            get;
+            private set;
+        }
+
 //>> Fields
-        
-        public object? DataSource { get; set; }
         
         public bool? AutoBind { get; set; }
         
@@ -46,12 +52,16 @@ namespace Kendo.Mvc.UI
         {
             var json = new Dictionary<string, object>(Events);
 
-//>> Serialization
-        
-            if (DataSource.HasValue)
+            if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url) || DataSource.Type == DataSourceType.Custom)
             {
-                json["dataSource"] = DataSource;
+                json["dataSource"] = DataSource.ToJson();
             }
+            else if (DataSource.Data != null)
+            {
+                json["dataSource"] = DataSource.Data;
+            }
+
+//>> Serialization
                 
             if (AutoBind.HasValue)
             {

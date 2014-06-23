@@ -23,18 +23,6 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The data source of the treeMap which is used to display the tiles and titles. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.HierarchicalDataSource
-		/// instance.If the HierarchicalDataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.HierarchicalDataSource instance using that value as data source configuration.If the HierarchicalDataSource option is an existing kendo.data.HierarchicalDataSource instance the widget will use that instance and will not initialize a new one.
-        /// </summary>
-        /// <param name="value">The value that configures the datasource.</param>
-        public TreeMapBuilder DataSource(object value)
-        {
-            container.DataSource = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 		/// data source is fired. By default the widget will bind to the data source specified in the configuration.
         /// </summary>
@@ -114,7 +102,28 @@ namespace Kendo.Mvc.UI.Fluent
         
         //<< Fields
 
+        /// <summary>
+        /// Configure the DataSource of the component
+        /// </summary>
+        /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeMap()
+        ///     .Name("treeMap")
+        ///     .DataSource(dataSource => dataSource
+        ///         .Read(read => read
+        ///             .Action("_PopulationUS", "TreeMap")
+        ///         )
+        ///     )
+        ///  %&gt;
+        /// </code>
+        /// </example>
+        public TreeMapBuilder DataSource(Action<HierarchicalDataSourceBuilder<object>> configurator)
+        {
+            configurator(new HierarchicalDataSourceBuilder<object>(Component.DataSource, this.Component.ViewContext, this.Component.urlGenerator));
 
+            return this;
+        }
         
         /// <summary>
         /// Configures the client-side events.
