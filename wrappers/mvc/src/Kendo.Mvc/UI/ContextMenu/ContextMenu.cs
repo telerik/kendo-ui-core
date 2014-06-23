@@ -38,8 +38,6 @@ namespace Kendo.Mvc.UI
         
         public bool? CloseOnClick { get; set; }
         
-        public object? DataSource { get; set; }
-        
         public string Direction { get; set; }
         
         public string Filter { get; set; }
@@ -82,11 +80,6 @@ namespace Kendo.Mvc.UI
             if (CloseOnClick.HasValue)
             {
                 json["closeOnClick"] = CloseOnClick;
-            }
-                
-            if (DataSource.HasValue)
-            {
-                json["dataSource"] = DataSource;
             }
                 
             if (Direction.HasValue())

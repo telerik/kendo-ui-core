@@ -56,18 +56,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
-		/// Refer to the example below for a list of the supported properties.
-        /// </summary>
-        /// <param name="value">The value that configures the datasource.</param>
-        public ContextMenuBuilder DataSource(object value)
-        {
-            container.DataSource = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Specifies ContextMenu sub menu opening direction. Can be "top", "bottom", "left", "right".
 		/// The example below will initialize the sub menus to open to the left.
         /// </summary>
