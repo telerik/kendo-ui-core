@@ -19,14 +19,14 @@
             )
             : base(viewContext, initializer)
         {
-            DataSource = new PivotGridDataSource();
+            DataSource = new PivotDataSource();
 
             UrlGenerator = urlGenerator;
 
             AutoBind = true;
         }
 
-        public PivotGridDataSource DataSource
+        public PivotDataSource DataSource
         {
             get;
             private set;

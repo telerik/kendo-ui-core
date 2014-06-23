@@ -31,9 +31,9 @@
         /// Sets the data source configuration of the grid.
         /// </summary>
         /// <param name="configurator">The lambda which configures the data source</param>
-        public PivotGridBuilder DataSource(Action<PivotGridDataSourceBuilder> configurator)
+        public PivotGridBuilder DataSource(Action<PivotDataSourceBuilder> configurator)
         {
-            configurator(new PivotGridDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new PivotDataSourceBuilder(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }
