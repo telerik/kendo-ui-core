@@ -77,22 +77,9 @@ var __meta__ = {
                 .create(dataSource)
                 .bind(CHANGE, that._dataChangeHandler);
 
-            function recursiveRead(data) {
-                for (var i = 0; i < data.length; i++) {
-                    var node = data[i];
-                    node._initChildren();
-
-                    node.children.fetch();
-
-                    recursiveRead(node.children.view());
-                }
-            }
-
             if (dataSource) {
                 if (that.options.autoBind) {
                     that.dataSource.fetch();
-
-                    recursiveRead(that.dataSource.view());
                 }
             }
         },
@@ -137,6 +124,10 @@ var __meta__ = {
 
                     this.view.render(root);
                 }
+            }
+
+            for (i = 0; i < items.length; i++) {
+                items[i].load();
             }
 
             this.trigger(DATA_BOUND);

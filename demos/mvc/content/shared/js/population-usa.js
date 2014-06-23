@@ -1,7 +1,7 @@
 {
 name: "Alabama",
 value: 4833722,
-children: [{
+items: [{
     name: "Birmingham",
     value: 212113
     },
@@ -41,7 +41,7 @@ children: [{
 {
 name: "Alaska",
 value: 735132,
-children: [{
+items: [{
     name: "Anchorage",
     value: 300950
     },
@@ -73,7 +73,7 @@ children: [{
 {
 name: "Arizona",
 value: 6626624,
-children: [{
+items: [{
     name: "Phoenix",
     value: 1513367
     },
@@ -117,7 +117,7 @@ children: [{
 {
 name: "Arkansas",
 value: 2959373,
-children: [{
+items: [{
     name: "Little Rock",
     value: 197357
     },
@@ -161,7 +161,7 @@ children: [{
 {
 name: "California",
 value: 38332521,
-children: [{
+items: [{
     name: "Los Angeles",
     value: 3884307
     },
@@ -209,7 +209,7 @@ children: [{
 {
 name: "Colorado",
 value: 5268367,
-children: [{
+items: [{
     name: "Denver",
     value: 649495
     },
@@ -261,7 +261,7 @@ children: [{
 {
 name: "Connecticut",
 value: 3596080,
-children: [{
+items: [{
     name: "Bridgeport",
     value: 147216
     },
@@ -309,7 +309,7 @@ children: [{
 {
 name: "Delaware",
 value: 925749,
-children: [{
+items: [{
     name: "Bear",
     value: 19700
     },
@@ -333,7 +333,7 @@ children: [{
 {
 name: "District of Columbia",
 value: 646449,
-children: [{
+items: [{
     name: "Washington",
     value: 646449
     }]
@@ -341,7 +341,7 @@ children: [{
 {
 name: "Florida",
 value: 19552860,
-children: [{
+items: [{
     name: "Jacksonville",
     value: 842583
     },
@@ -389,7 +389,7 @@ children: [{
 {
 name: "Georgia",
 value: 9992167,
-children: [{
+items: [{
     name: "Atlanta",
     value: 447841
     },
@@ -433,7 +433,7 @@ children: [{
 {
 name: "Hawaii",
 value: 1404054,
-children: [{
+items: [{
     name: "Honolulu (Urban Honolulu CDP)",
     value: 347884
     }]
@@ -441,7 +441,7 @@ children: [{
 {
 name: "Idaho",
 value: 1612136,
-children: [{
+items: [{
     name: "Boise City",
     value: 214237
     },
@@ -481,7 +481,7 @@ children: [{
 {
 name: "Illinois",
 value: 12882135,
-children: [{
+items: [{
     name: "Chicago",
     value: 2718782
     },
@@ -529,7 +529,7 @@ children: [{
 {
 name: "Indiana",
 value: 6570902,
-children: [{
+items: [{
     name: "Indianapolis",
     value: 843393
     },
@@ -577,7 +577,7 @@ children: [{
 {
 name: "Iowa",
 value: 3090416,
-children: [{
+items: [{
     name: "Des Moines",
     value: 207510
     },
@@ -625,7 +625,7 @@ children: [{
 {
 name: "Kansas",
 value: 2893957,
-children: [{
+items: [{
     name: "Wichita",
     value: 386552
     },
@@ -669,7 +669,7 @@ children: [{
 {
 name: "Kentucky",
 value: 4395295,
-children: [{
+items: [{
     name: "Louisville",
     value: 609893
     },
@@ -713,7 +713,7 @@ children: [{
 {
 name: "Louisiana",
 value: 4625470,
-children: [{
+items: [{
     name: "New Orleans",
     value: 378715
     },
@@ -757,7 +757,7 @@ children: [{
 {
 name: "Maine",
 value: 1328302,
-children: [{
+items: [{
     name: "Portland",
     value: 66318
     },
@@ -773,7 +773,7 @@ children: [{
 {
 name: "Maryland",
 value: 5928814,
-children: [{
+items: [{
     name: "Baltimore",
     value: 622104
     },
@@ -785,7 +785,7 @@ children: [{
 {
 name: "Massachusetts",
 value: 6692824,
-children: [{
+items: [{
     name: "Boston",
     value: 645966
     },
@@ -833,7 +833,7 @@ children: [{
 {
 name: "Michigan",
 value: 9895622,
-children: [{
+items: [{
     name: "Detroit",
     value: 688701
     },
@@ -877,7 +877,7 @@ children: [{
 {
 name: "Minnesota",
 value: 5420380,
-children: [{
+items: [{
     name: "Minneapolis",
     value: 400070
     },
@@ -925,7 +925,7 @@ children: [{
 {
 name: "Mississippi",
 value: 2991207,
-children: [{
+items: [{
     name: "Jackson",
     value: 172638
     },
@@ -965,7 +965,7 @@ children: [{
 {
 name: "Missouri",
 value: 6044171,
-children: [{
+items: [{
     name: "Kansas City",
     value: 467007
     },
@@ -1005,7 +1005,7 @@ children: [{
 {
 name: "Montana",
 value: 1015165,
-children: [{
+items: [{
     name: "Billings",
     value: 109059
     },
@@ -1037,7 +1037,7 @@ children: [{
 {
 name: "Nebraska",
 value: 1868516,
-children: [{
+items: [{
     name: "Bellevue",
     value: 53663
     },
@@ -1093,7 +1093,7 @@ children: [{
 {
 name: "Nevada",
 value: 2790136,
-children: [{
+items: [{
     name: "Las Vegas",
     value: 603488
     },
@@ -1133,7 +1133,7 @@ children: [{
 {
 name: "New Hampshire",
 value: 1323459,
-children: [{
+items: [{
     name: "Concord",
     value: 42419
     },
@@ -1173,7 +1173,7 @@ children: [{
 {
 name: "New Jersey",
 value: 8899339,
-children: [{
+items: [{
     name: "Newark",
     value: 278427
     },
@@ -1217,7 +1217,7 @@ children: [{
 {
 name: "New Mexico",
 value: 2085287,
-children: [{
+items: [{
     name: "Albuquerque",
     value: 556495
     },
@@ -1261,7 +1261,7 @@ children: [{
 {
 name: "New York",
 value: 19651127,
-children: [    {
+items: [    {
     name: "New York",
     value: 8405837
     },
@@ -1305,7 +1305,7 @@ children: [    {
 {
 name: "North Carolina",
 value: 9848060,
-children: [{
+items: [{
     name: "Charlotte",
     value: 792862
     },
@@ -1349,7 +1349,7 @@ value: 723393
 {
 name: "Ohio",
 value: 11570808,
-children: [{
+items: [{
     name: "Columbus",
     value: 822553
     },
@@ -1393,7 +1393,7 @@ children: [{
 {
 name: "Oklahoma",
 value: 3850568,
-children: [{
+items: [{
     name: "Oklahoma City",
     value: 610613
     },
@@ -1437,7 +1437,7 @@ children: [{
 {
 name: "Oregon",
 value: 3930065,
-children: [{
+items: [{
     name: "Portland",
     value: 609456
     },
@@ -1481,7 +1481,7 @@ children: [{
 {
 name: "Pennsylvania",
 value: 12773801,
-children: [{
+items: [{
     name: "Philadelphia",
     value: 1553165
     },
@@ -1525,7 +1525,7 @@ children: [{
 {
 name: "Rhode Island",
 value: 1051511,
-children: [{
+items: [{
     name: "Providence",
     value: 177994
     },
@@ -1545,7 +1545,7 @@ children: [{
 {
 name: "South Carolina",
 value: 4774839,
-children: [{
+items: [{
     name: "Columbia",
     value: 133358
     },
@@ -1593,7 +1593,7 @@ value: 844877
 {
 name: "Tennessee",
 value: 6495978,
-children: [{
+items: [{
     name: "Memphis",
     value: 653450
     },
@@ -1637,7 +1637,7 @@ children: [{
 {
 name: "Texas",
 value: 26448193,
-children: [{
+items: [{
     name: "Houston",
     value: 2195914
     },
@@ -1677,7 +1677,7 @@ children: [{
 {
 name: "Utah",
 value: 2900872,
-children: [{
+items: [{
     name: "Salt Lake City",
     value: 191180
     },
@@ -1717,7 +1717,7 @@ children: [{
 {
 name: "Vermont",
 value: 626630,
-children: [{
+items: [{
     name: "Burlington",
     value: 42284
     },
@@ -1737,7 +1737,7 @@ children: [{
 {
 name: "Virginia",
 value: 8260405,
-children: [{
+items: [{
     name: "Virginia Beach",
     value: 448479
     },
@@ -1781,7 +1781,7 @@ children: [{
 {
 name: "Washington",
 value: 6971406,
-children: [{
+items: [{
     name: "Seattle",
     value: 652405
     },
@@ -1829,7 +1829,7 @@ children: [{
 {
 name: "West Virginia",
 value: 1854304,
-children: [{
+items: [{
     name: "Beckley  17607
     },
     {
@@ -1872,7 +1872,7 @@ children: [{
 {
 name: "Wisconsin",
 value: 5742713,
-children: [{
+items: [{
     name: "Milwaukee",
     value: 599164
     },
