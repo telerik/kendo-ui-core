@@ -208,6 +208,17 @@ var __meta__ = {
 
         _mouseleave: function() {
             this._removeActiveState();
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+            this.element.off(NS);
+
+            if (this.dataSource) {
+                this.dataSource.unbind(CHANGE, this._dataChangeHandler);
+            }
+
+            kendo.destroy(this.element);
         }
     });
 
