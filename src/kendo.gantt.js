@@ -13,7 +13,6 @@ var __meta__ = {
 (function($, undefined) {
 
     var kendo = window.kendo;
-    var document = window.document;
     var Observable = kendo.Observable;
     var Widget = kendo.ui.Widget;
     var DataSource = kendo.data.DataSource;
@@ -837,31 +836,16 @@ var __meta__ = {
             }
 
             this.toolbar.off(NS);
-            this.wrapper.off(NS);
 
             $(window).off("resize" + NS, this._resizeHandler);
-            $(document).off("click" + NS, this._clickHandler);
 
             this.toolbar = null;
             this.footer = null;
         },
 
         _attachEvents: function() {
-            var that = this;
-
             this._resizeHandler = proxy(this.resize, this);
             $(window).on("resize" + NS, this._resizeHandler);
-
-            this._clickHandler = function(e) {
-                if (that.timeline.selectDependency().length > 0) {
-                    that.timeline.clearSelection();
-                } else {
-                    that.clearSelection();
-                }
-            };
-
-            $(document).on("click" + NS, this._clickHandler);
-            $(this.wrapper).on("click" + NS, function(e) { e.stopPropagation(); });
         },
 
         _wrapper: function() {
