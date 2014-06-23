@@ -107,8 +107,8 @@ var __meta__ = {
                 this._items = [];
                 item = this._wrapItem(items[0]);
                 item.coord = {
-                    width: this.element.innerWidth(),
-                    height: this.element.innerHeight(),
+                    width: this.element.outerWidth(),
+                    height: this.element.outerHeight(),
                     top: 0,
                     left: 0
                 };
