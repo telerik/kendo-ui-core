@@ -710,18 +710,17 @@ var __meta__ = {
                 groupedMode = groups && groups[0],
                 item;
 
-            if (listView.trigger(DATABINDING, { action: action || "rebind", items: dataItems, index: e && e.index })) {
-                if (this._shouldShowLoading()) {
-                    listView.hideLoading();
+            if (action === "itemchange") {
+                item = listView.findByDataItem(dataItems)[0];
+                if (item) {
+                    listView.setDataItem(item, dataItems[0]);
                 }
                 return;
             }
 
-            if (action === "itemchange") {
-                // the itemchange may come from a child collection
-                item = listView.findByDataItem(dataItems)[0];
-                if (item) {
-                    listView.setDataItem(item, dataItems[0]);
+            if (listView.trigger(DATABINDING, { action: action || "rebind", items: dataItems, index: e && e.index })) {
+                if (this._shouldShowLoading()) {
+                    listView.hideLoading();
                 }
                 return;
             }
