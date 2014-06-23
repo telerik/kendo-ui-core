@@ -39,21 +39,26 @@
     vertical-align: top;
 }
 
-.k-pivot-rowheaders .k-grid,
-.k-pivot-table .k-grid
+.k-pivot-rowheaders > .k-grid,
+.k-pivot-table > .k-grid
 {
     border-width: 0;
 }
 
-.k-pivot-rowheaders .k-grid td:first-child,
+.k-pivot-rowheaders > .k-grid td:first-child,
 .k-pivot-table .k-grid-header .k-header.k-first
 {
     border-left-width: 1px;
 }
 
-.k-pivot-rowheaders .k-grid td.k-first
+.k-pivot-rowheaders > .k-grid td.k-first
 {
     border-left-width: 0;
+}
+
+.k-pivot-rowheaders > .k-grid
+{
+    overflow: hidden;
 }
 
 .k-pivot-table
@@ -106,7 +111,7 @@ td.k-alt
     width: 99%;
 }
 
-.k-fieldselector .k-edit-buttons > input, 
+.k-fieldselector .k-edit-buttons > input,
 .k-fieldselector .k-edit-buttons > label
 {
     float: left;
