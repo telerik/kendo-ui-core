@@ -185,7 +185,10 @@
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
+    <Compile Include="Controllers\ToolBar\ApiController.cs" />
+    <Compile Include="Controllers\ToolBar\EventsController.cs" />
     <Compile Include="Controllers\ToolBar\IndexController.cs" />
+    <Compile Include="Controllers\ToolBar\IntegrationController.cs" />
     <Compile Include="Controllers\ToolBar\ResizingController.cs" />
     <Compile Include="Controllers\Waterfall_Charts\HorizontalController.cs" />
     <Compile Include="Controllers\Waterfall_Charts\IndexController.cs" />
@@ -797,6 +800,7 @@
     <Content Include="Areas\aspx\Views\range_bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\toolbar\index.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\horizontal.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\waterfall_charts\local_data_binding.aspx" />
@@ -2519,6 +2523,9 @@
     <Content Include="Areas\razor\Views\map\bubble_layer.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\index.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\resizing.cshtml" />
+    <Content Include="Areas\razor\Views\toolbar\events.cshtml" />
+    <Content Include="Areas\razor\Views\toolbar\api.cshtml" />
+    <Content Include="Areas\razor\Views\toolbar\integration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

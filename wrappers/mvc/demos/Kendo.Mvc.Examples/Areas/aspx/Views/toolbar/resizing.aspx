@@ -1,11 +1,18 @@
-﻿<div class="box">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+<div class="box">
     <h4>Info</h4>
     <p>Resize the window and watch how ToolBar's items show or hide according to the available space.</p>
     <p>More information regarding the resizable functionality can be found in the <a href="#">Getting Started topic</a>.</p>
     <span id="undo" style="display:none" class="k-button">Click here to open the window.</span>
 </div>
 <div id="window">
-    @(Html.Kendo().ToolBar()
+    <%= Html.Kendo().ToolBar()
         .Name("ToolBar")
         .Items(items => 
         {
@@ -35,7 +42,7 @@
                 buttons.Add().Text("Important").Togglable(true).ImageUrl("/Content/web/toolbar/important.png").Group("category");
             });
         })
-    )
+    %>
     <div id="content">
         <div class="demo-section k-header">
             <ul>
@@ -130,3 +137,5 @@
         width: 80%;
     }
 </style>
+
+</asp:Content>
