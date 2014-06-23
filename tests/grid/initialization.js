@@ -774,7 +774,7 @@
         equal(secondWindget.options.type, "string");
     });
 
-    test("filtercell widgets are initialized with the provided filterable options - acDataSource", function() {
+    test("filtercell widgets are initialized with the provided filterable options - suggestDataSource", function() {
         var readInvoked;
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
@@ -816,7 +816,7 @@
 
         var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
         var firstWidget = widgets.eq(0).data("kendoFilterCell");
-        firstWidget.acDataSource.read();
+        firstWidget.suggestDataSource.read();
         ok(readInvoked);
     });
 
