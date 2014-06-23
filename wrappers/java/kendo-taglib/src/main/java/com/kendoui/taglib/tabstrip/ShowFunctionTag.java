@@ -1,25 +1,25 @@
 
-package com.kendoui.taglib.menu;
+package com.kendoui.taglib.tabstrip;
 
 import com.kendoui.taglib.FunctionTag;
 
-import com.kendoui.taglib.MenuTag;
+import com.kendoui.taglib.TabStripTag;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ActivateFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ShowFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        MenuTag parent = (MenuTag)findParentWithClass(MenuTag.class);
+        TabStripTag parent = (TabStripTag)findParentWithClass(TabStripTag.class);
 
 
-        parent.setActivate(this);
+        parent.setShow(this);
 
 //<< doEndTag
 
@@ -45,7 +45,7 @@ public class ActivateFunctionTag extends FunctionTag /* interfaces */ /* interfa
 //>> Attributes
 
     public static String tagName() {
-        return "menu-activate";
+        return "tabStrip-show";
     }
 
 //<< Attributes

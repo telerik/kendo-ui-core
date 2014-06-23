@@ -43,6 +43,11 @@ public class DeactivateFunctionTag extends FunctionTag /* interfaces */ /* inter
     }
 
 //>> Attributes
+
+    public static String tagName() {
+        return "menu-deactivate";
+    }
+
 //<< Attributes
 
 }

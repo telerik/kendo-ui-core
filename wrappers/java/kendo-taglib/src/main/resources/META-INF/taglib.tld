@@ -10262,6 +10262,233 @@ The supported filter values are startswith, endswith and contains.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>ContextMenu</description>
+        <name>contextMenu</name>
+        <tag-class>com.kendoui.taglib.ContextMenuTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies that ContextMenu should be shown aligned to the target or the filter element if specified.</description>
+            <name>alignToAnchor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies that sub menus should close after item selection (provided they won't navigate).</description>
+            <name>closeOnClick</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+Refer to the example below for a list of the supported properties.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Specifies ContextMenu sub menu opening direction. Can be "top", "bottom", "left", "right".
+The example below will initialize the sub menus to open to the left.</description>
+            <name>direction</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies ContextMenu filter selector - the ContextMenu will only be shown on items that satisfy the provided selector.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay in ms before the sub menus are opened/closed - used to avoid accidental closure on leaving.</description>
+            <name>hoverDelay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Root menu orientation. Could be horizontal or vertical.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies how ContextMenu should adjust to screen boundaries. By default the strategy is "fit" for a sub menu with a horizontal parent or the root menu,
+meaning it will move to fit in screen boundaries in all directions, and "fit flip" for a sub menu with vertical parent, meaning it will fit vertically and flip over
+its parent horizontally. You can also switch off the screen boundary detection completely if you set the popupCollision to false.</description>
+            <name>popupCollision</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the event or events on which ContextMenu should open. By default ContextMenu will show on contextmenu event on desktop and hold event on touch devices.
+Could be any pointer/mouse/touch event, also several, separated by spaces.</description>
+            <name>showOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the element on which ContextMenu should open. The default element is the document body.</description>
+            <name>target</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu.</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a sub menu or the ContextMenu gets opened and its animation finished.</description>
+            <name>activate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a sub menu or the ContextMenu gets closed and its animation finished.</description>
+            <name>deactivate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when a menu item gets selected.</description>
+            <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>A collection of Animation objects, used to change default animations. A value of false will disable all animations in the widget.Available animations for the ContextMenu are listed below.  Each animation has a reverse options which is used for the close effect by default, but can be over-ridden
+by setting the close animation. Each animation also has a direction which can be set off the animation (i.e. slideIn:Down).</description>
+        <name>contextMenu-animation</name>
+        <tag-class>com.kendoui.taglib.contextmenu.AnimationTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The animation that will be used when closing sub menus.</description>
+        <name>contextMenu-animation-close</name>
+        <tag-class>com.kendoui.taglib.contextmenu.AnimationCloseTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Defines the close animation duration in milliseconds.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used when closing the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>The animation that will be used when opening sub menus.</description>
+        <name>contextMenu-animation-open</name>
+        <tag-class>com.kendoui.taglib.contextmenu.AnimationOpenTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Defines the open animation duration in milliseconds.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Effect to be used when opening the popup.</description>
+            <name>effects</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Contains the items of the menu widget</description>
+        <name>contextMenu-items</name>
+        <tag-class>com.kendoui.taglib.contextmenu.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Contains the items of the menu widget</description>
+        <name>contextMenu-item</name>
+        <tag-class>com.kendoui.taglib.contextmenu.ItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies whether the item is initially enabled</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the URL of the image displayed by the item</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the item is initially selected</description>
+            <name>selected</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the class name for the sprite image displayed by the item</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text displayed by the item</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the URL that the item links to</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    <tag>
+        <description>Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.</description>
+        <name>contextMenu-close</name>
+        <tag-class>com.kendoui.taglib.contextmenu.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires before a sub menu or the ContextMenu gets opened. You can cancel this event to prevent opening the sub menu.</description>
+        <name>contextMenu-open</name>
+        <tag-class>com.kendoui.taglib.contextmenu.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a sub menu or the ContextMenu gets opened and its animation finished.</description>
+        <name>contextMenu-activate</name>
+        <tag-class>com.kendoui.taglib.contextmenu.ActivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a sub menu or the ContextMenu gets closed and its animation finished.</description>
+        <name>contextMenu-deactivate</name>
+        <tag-class>com.kendoui.taglib.contextmenu.DeactivateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when a menu item gets selected.</description>
+        <name>contextMenu-select</name>
+        <tag-class>com.kendoui.taglib.contextmenu.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>DataSource</description>
         <name>dataSource</name>
         <tag-class>com.kendoui.taglib.DataSourceTag</tag-class>
@@ -17474,7 +17701,7 @@ The supported filter values are startswith, endswith and contains.</description>
             <description>Defines the element to which the notifications will be appended or prepended (depending on the stacking direction).</description>
             <name>appendTo</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>Indicates the period in milliseconds after which a notification disappears automatically. Setting a zero value disables this behavior.</description>
@@ -31692,7 +31919,7 @@ tab.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Triggered just after a tab is being made visible, but before the end of the animation</description>
+            <description>Triggered after a tab is being made visible and its animation complete. Before Q2 2014 this event was invoked after tab show, but before the end of the animation.</description>
             <name>activate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -31709,6 +31936,11 @@ tab.</description>
         <attribute>
             <description>Triggered before a tab is selected.</description>
             <name>select</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered just after a tab is being made visible, but before the end of the animation. Before Q2 2014 this event was called activate.</description>
+            <name>show</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
@@ -31832,7 +32064,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Triggered just after a tab is being made visible, but before the end of the animation</description>
+        <description>Triggered after a tab is being made visible and its animation complete. Before Q2 2014 this event was invoked after tab show, but before the end of the animation.</description>
         <name>tabStrip-activate</name>
         <tag-class>com.kendoui.taglib.tabstrip.ActivateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -31853,6 +32085,12 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <description>Triggered before a tab is selected.</description>
         <name>tabStrip-select</name>
         <tag-class>com.kendoui.taglib.tabstrip.SelectFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered just after a tab is being made visible, but before the end of the animation. Before Q2 2014 this event was called activate.</description>
+        <name>tabStrip-show</name>
+        <tag-class>com.kendoui.taglib.tabstrip.ShowFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

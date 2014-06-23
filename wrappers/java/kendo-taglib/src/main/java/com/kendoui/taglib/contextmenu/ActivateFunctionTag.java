@@ -1,9 +1,9 @@
 
-package com.kendoui.taglib.menu;
+package com.kendoui.taglib.contextmenu;
 
 import com.kendoui.taglib.FunctionTag;
 
-import com.kendoui.taglib.MenuTag;
+import com.kendoui.taglib.ContextMenuTag;
 
 
 import javax.servlet.jsp.JspException;
@@ -16,7 +16,7 @@ public class ActivateFunctionTag extends FunctionTag /* interfaces */ /* interfa
 //>> doEndTag
 
 
-        MenuTag parent = (MenuTag)findParentWithClass(MenuTag.class);
+        ContextMenuTag parent = (ContextMenuTag)findParentWithClass(ContextMenuTag.class);
 
 
         parent.setActivate(this);
@@ -45,7 +45,7 @@ public class ActivateFunctionTag extends FunctionTag /* interfaces */ /* interfa
 //>> Attributes
 
     public static String tagName() {
-        return "menu-activate";
+        return "contextMenu-activate";
     }
 
 //<< Attributes

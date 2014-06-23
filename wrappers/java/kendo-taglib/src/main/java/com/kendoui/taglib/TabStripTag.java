@@ -83,6 +83,10 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         setEvent("select", value.getBody());
     }
 
+    public void setShow(ShowFunctionTag value) {
+        setEvent("show", value.getBody());
+    }
+
     public boolean getAnimation() {
         return (boolean)getProperty("animation");
     }
@@ -209,6 +213,18 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
 
     public void setSelect(String value) {
         setProperty("select", new Function(value));
+    }
+
+    public String getShow() {
+        Function property = ((Function)getProperty("show"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setShow(String value) {
+        setProperty("show", new Function(value));
     }
 
 //<< Attributes
