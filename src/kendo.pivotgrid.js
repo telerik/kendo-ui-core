@@ -2246,8 +2246,7 @@ var __meta__ = {
             }
 
             contentTable.add(this.columnsHeader.children("table"))
-                        .css("min-width", minWidth + "%")
-                        .css("height", "100%");
+                        .css("min-width", minWidth + "%");
 
             this._setContentHeight();
         },
