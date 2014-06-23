@@ -988,6 +988,16 @@
         equal(task.get("orderId"), 3);
     });
 
+    test("add({}) appends task to root collection when parentId is null", function() {
+        dataSource.add({ title: "task" });
+
+        var children = dataSource.taskChildren();
+
+        equal(children[0].get("orderId"), 0);
+        equal(children[1].get("orderId"), 1);
+        equal(children[2].get("orderId"), 2);
+    });
+
     test("add(task) appends task to child collection when parentId is set", function() {
         var task = new GanttTask();
         task.set("parentId", 6);
@@ -995,6 +1005,16 @@
         dataSource.add(task);
 
         equal(task.get("orderId"), 1);
+    });
+
+    test("add({}) appends task to child collection when parentId is set", function() {
+        dataSource.add({ parentId: 6 });
+
+        var parent = dataSource.get("6");
+        var children = dataSource.taskChildren(parent);
+
+        equal(children[0].get("orderId"), 0);
+        equal(children[1].get("orderId"), 1);
     });
 
     test("add(task) updates parent summary field", function() {

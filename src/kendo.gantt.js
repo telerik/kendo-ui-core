@@ -388,6 +388,12 @@ var __meta__ = {
         },
 
         add: function(task) {
+            if (!task) {
+                return;
+            }
+
+            task = this._toGanttTask(task);
+
             return this.insert(this.taskSiblings(task).length, task);
         },
 
@@ -395,6 +401,8 @@ var __meta__ = {
             if (!task) {
                 return;
             }
+
+            task = this._toGanttTask(task);
 
             task.set("orderId", index);
 
@@ -686,6 +694,17 @@ var __meta__ = {
 
                 task.set("summary", childCount > 0);
             }
+        },
+
+        _toGanttTask: function(task) {
+            if (!(task instanceof GanttTask)) {
+                var taskInfo = task;
+
+                task = this._createNewModel();
+                task.accept(taskInfo);
+            }
+
+            return task;
         }
     });
 
