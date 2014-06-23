@@ -7682,7 +7682,7 @@
     "category": "Mobile"
   },
   {
-    "text": "Button",
+    "text": "Mobile Button",
     "name": "mobile-button",
     "api": "mobile/button",
     "documentation": {
@@ -7787,22 +7787,6 @@
           "!jsp",
           "!php"
         ]
-      },
-      {
-        "text": "AngularJS",
-        "disableInMobile": true,
-        "url": "drawer/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile Drawer"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Drawer"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
       }
     ],
     "category": "Mobile"
@@ -7894,22 +7878,6 @@
         ]
       },
       {
-        "text": "AngularJS",
-        "disableInMobile": true,
-        "url": "buttongroup/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile ButtonGroup"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile ButtonGroup"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
-      },
-      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "buttongroup/adaptive",
@@ -7927,12 +7895,13 @@
       },
       {
         "text": "AngularJS",
-        "url": "modalview/angular",
+        "disableInMobile": true,
+        "url": "buttongroup/angular",
         "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile ModalView"
+            "kendo-ui": "AngularJS support in Kendo UI Mobile ButtonGroup"
         },
         "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile ModalView"
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile ButtonGroup"
         },
         "packages": [
           "!mvc",
@@ -8002,12 +7971,12 @@
       {
         "text": "AngularJS",
         "disableInMobile": true,
-        "url": "navbar/angular",
+        "url": "drawer/angular",
         "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile NavBar"
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Drawer"
         },
         "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile NavBar"
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Drawer"
         },
         "packages": [
           "!mvc",
@@ -8214,22 +8183,6 @@
           "!jsp",
           "!php"
         ]
-      },
-      {
-        "text": "AngularJS",
-        "disableInMobile": true,
-        "url": "popover/angular",
-        "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile PopOver"
-        },
-        "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile PopOver"
-        },
-        "packages": [
-          "!mvc",
-          "!jsp",
-          "!php"
-        ]
       }
     ],
     "category": "Mobile"
@@ -8283,12 +8236,12 @@
       {
         "text": "AngularJS",
         "disableInMobile": true,
-        "url": "scroller/angular",
+        "url": "modalview/angular",
         "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile Scroller"
+            "kendo-ui": "AngularJS support in Kendo UI Mobile ModalView"
         },
         "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Scroller"
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile ModalView"
         },
         "packages": [
           "!mvc",
@@ -8364,6 +8317,22 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "navbar/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile NavBar"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile NavBar"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
@@ -8418,12 +8387,12 @@
       {
         "text": "AngularJS",
         "disableInMobile": true,
-        "url": "mobile-tabstrip/angular",
+        "url": "popover/angular",
         "title": {
-            "kendo-ui": "AngularJS support in Kendo UI Mobile TabStrip"
+            "kendo-ui": "AngularJS support in Kendo UI Mobile PopOver"
         },
         "meta": {
-            "kendo-ui": "AngularJS directive support for Kendo UI Mobile TabStrip"
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile PopOver"
         },
         "packages": [
           "!mvc",
@@ -8483,6 +8452,22 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Scroller may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "scroller/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile Scroller"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile Scroller"
         },
         "packages": [
           "!mvc",
@@ -8717,6 +8702,22 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates how the Mobile Tabstrip may be used outside of a Kendo UI Mobile Application alongside Kendo UI Web Widgets"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "mobile-tabstrip/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Mobile TabStrip"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile TabStrip"
         },
         "packages": [
           "!mvc",
