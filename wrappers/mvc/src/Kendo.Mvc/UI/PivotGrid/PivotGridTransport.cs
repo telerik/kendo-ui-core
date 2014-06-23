@@ -1,5 +1,6 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     public class PivotGridTransport : Transport
@@ -8,10 +9,15 @@
             : base()
         {
             Connection = new PivotGridTransportConnection();
-            Discovery = new CrudOperation();
+            Discover = new CrudOperation();
+            FunctionDiscover = new ClientHandlerDescriptor();
         }
 
-        public CrudOperation Discovery { get; private set; }
+        public CrudOperation Discover { get; private set; }
+
+        public IDictionary<string, object> CustomDiscover { get; set; }
+
+        public ClientHandlerDescriptor FunctionDiscover { get; set; }
 
         public PivotGridTransportConnection Connection 
         { 
@@ -29,11 +35,22 @@
                 json["connection"] = connection;
             }
 
-            var discovery = Discovery.ToJson();
-
-            if (discovery.Keys.Any())
+            if (CustomDiscover != null)
             {
-                json["discovery"] = discovery;
+                json["discover"] = CustomDiscover;
+            }
+            else if (FunctionDiscover.HasValue())
+            {
+                json["discover"] = FunctionDiscover;
+            }
+            else
+            {
+                var discover = Discover.ToJson();
+
+                if (discover.Keys.Any())
+                {
+                    json["discover"] = discover;
+                }
             }
         }
     }

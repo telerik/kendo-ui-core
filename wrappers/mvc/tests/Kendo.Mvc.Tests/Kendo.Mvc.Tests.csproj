@@ -188,6 +188,9 @@
     <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
     <Compile Include="UI\PivotGrid\PivotGridBuilderTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridCustomDataSourceBuilderTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridCustomDataSourceSchemaBuilderTests.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridCustomDataSourceTransportTests.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceColumnBuilderTests.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceColumnFactoryTests.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceMeasureBuilderTests.cs" />
@@ -544,9 +547,7 @@
       <Link>Kendo.snk</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\PivotGridDataSource\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

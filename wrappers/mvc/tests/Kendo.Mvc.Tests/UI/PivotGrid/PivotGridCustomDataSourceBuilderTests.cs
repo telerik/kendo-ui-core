@@ -2,15 +2,15 @@
 {
     using Xunit;
 
-    public class PivotGridXmlaDataSourceBuilderTests
+    public class PivotGridCustomDataSourceBuilderTests
     {
-        private readonly PivotGridDataSource dataSource;
-        private readonly PivotGridXmlaDataSourceBuilder builder;
+         private readonly PivotGridDataSource dataSource;
+        private readonly PivotGridCustomDataSourceBuilder builder;
 
-        public PivotGridXmlaDataSourceBuilderTests()
+        public PivotGridCustomDataSourceBuilderTests()
         {
             dataSource = new PivotGridDataSource();
-            builder = new PivotGridXmlaDataSourceBuilder(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
+            builder = new PivotGridCustomDataSourceBuilder(dataSource, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
@@ -56,5 +56,25 @@
             builder.Measures(m => m.Axis(PivotGridDataSourceMeasureAxis.Rows));
             dataSource.Measure.Axis.ShouldEqual(PivotGridDataSourceMeasureAxis.Rows);
         }
-    }   
+
+        [Fact]
+        public void Schema_should_return_builder()
+        {
+            builder.Schema(e => { }).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Schema_should_configure_the_schema()
+        {
+            string axesValue = "axes";
+            builder.Schema(s => s.Axes(axesValue));
+            Assert.Equal(dataSource.Schema.Axes, axesValue);
+        }
+
+        [Fact]
+        public void Schema_Type_is_empty_string()
+        {
+            Assert.Equal(dataSource.Schema.Type, null);
+        }
+    }
 }

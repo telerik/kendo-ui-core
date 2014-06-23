@@ -6,13 +6,13 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PivotGridDataSource"/> component.
     /// </summary>
-    public class PivotGridXmlaDataSourceBuilder : IHideObjectMembers
+    public class PivotGridCustomDataSourceBuilder
     {
         protected readonly PivotGridDataSource dataSource;
         protected readonly IUrlGenerator urlGenerator;
         protected readonly ViewContext viewContext;
 
-        public PivotGridXmlaDataSourceBuilder(PivotGridDataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public PivotGridCustomDataSourceBuilder(PivotGridDataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             this.viewContext = viewContext;
             this.urlGenerator = urlGenerator;
@@ -23,7 +23,7 @@
         /// <summary>
         /// Configures the client-side events
         /// </summary>                
-        public PivotGridXmlaDataSourceBuilder Events(Action<DataSourceEventBuilder> configurator)
+        public PivotGridCustomDataSourceBuilder Events(Action<DataSourceEventBuilder> configurator)
         {
             configurator(new DataSourceEventBuilder(dataSource.Events));
 
@@ -31,19 +31,29 @@
         }
 
         /// <summary>
-        /// Configures the transport of the Xmla DataSource
+        /// Configures the schema of the Custom DataSource
         /// </summary>
-        public PivotGridXmlaDataSourceBuilder Transport(Action<PivotGridDataSourceTransportBuilder> configurator)
+        public PivotGridCustomDataSourceBuilder Schema(Action<PivotGridCustomDataSourceSchemaBuilder> configurator)
         {
-            configurator(new PivotGridDataSourceTransportBuilder((PivotGridTransport)dataSource.Transport, viewContext, urlGenerator));
+            configurator(new PivotGridCustomDataSourceSchemaBuilder((PivotGridDataSourceSchema)dataSource.Schema));
 
             return this;
         }
 
         /// <summary>
-        /// Sets the columns of the Xmla DataSource.
+        /// Configures the transport of the Custom DataSource
         /// </summary>
-        public PivotGridXmlaDataSourceBuilder Columns(Action<PivotGridDataSourceColumnFactory> addColumnAction)
+        public PivotGridCustomDataSourceBuilder Transport(Action<PivotGridCustomDataSourceTransportBuilder> configurator)
+        {
+            configurator(new PivotGridCustomDataSourceTransportBuilder((PivotGridTransport)dataSource.Transport, viewContext, urlGenerator));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the columns of the Custom DataSource.
+        /// </summary>
+        public PivotGridCustomDataSourceBuilder Columns(Action<PivotGridDataSourceColumnFactory> addColumnAction)
         {
             PivotGridDataSourceColumnFactory factory = new PivotGridDataSourceColumnFactory(dataSource.Columns);
 
@@ -53,9 +63,9 @@
         }
 
         /// <summary>
-        /// Sets the rows of the Xmla DataSource.
+        /// Sets the rows of the Custom DataSource.
         /// </summary>
-        public PivotGridXmlaDataSourceBuilder Rows(Action<PivotGridDataSourceRowFactory> addRowAction)
+        public PivotGridCustomDataSourceBuilder Rows(Action<PivotGridDataSourceRowFactory> addRowAction)
         {
             PivotGridDataSourceRowFactory factory = new PivotGridDataSourceRowFactory(dataSource.Rows);
 
@@ -65,9 +75,9 @@
         }
 
         /// <summary>
-        /// Sets the measures of the Xmla DataSource.
+        /// Sets the measures of the Custom DataSource.
         /// </summary>
-        public PivotGridXmlaDataSourceBuilder Measures(Action<PivotGridDataSourceMeasureBuilder> configurator)
+        public PivotGridCustomDataSourceBuilder Measures(Action<PivotGridDataSourceMeasureBuilder> configurator)
         {
             configurator(new PivotGridDataSourceMeasureBuilder(dataSource.Measure));
 

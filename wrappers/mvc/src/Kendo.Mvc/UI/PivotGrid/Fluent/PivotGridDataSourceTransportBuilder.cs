@@ -40,11 +40,11 @@
         }
 
         /// <summary>
-        /// Configures the discovery operation.
+        /// Configures the discover operation.
         /// </summary>
-        public PivotGridDataSourceTransportBuilder Discovery(Action<CustomCrudOperationBuilder> configurator)
+        public PivotGridDataSourceTransportBuilder Discover(Action<CustomCrudOperationBuilder> configurator)
         {
-            configurator(new CustomCrudOperationBuilder(transport.Discovery, viewContext, urlGenerator));
+            configurator(new CustomCrudOperationBuilder(transport.Discover, viewContext, urlGenerator));
 
             return this;
         }

@@ -92,7 +92,7 @@
         }
 
         /// <summary>
-        /// Sets JavaScript function which to return additional parameters which to be sent the server.
+        /// Sets the Read operation to JavaScript function or object.
         /// </summary>
         /// <param name="handler">JavaScript function name</param>
         public TTransportBuilder Read(string handler)

@@ -25,10 +25,18 @@
         /// </summary>
         public PivotGridXmlaDataSourceBuilder Xmla()
         {
-            dataSource.Type = DataSourceType.Custom;
-            dataSource.CustomType = "xmla";
+            dataSource.Type = PivotGridDataSourceType.Xmla;
             dataSource.Schema.Type = "xmla";
             return new PivotGridXmlaDataSourceBuilder(dataSource, viewContext, urlGenerator);
+        }
+
+        /// <summary>
+        /// Use it to configure Custom binding.
+        /// </summary>
+        public PivotGridCustomDataSourceBuilder Custom()
+        {
+            dataSource.Type = PivotGridDataSourceType.Custom;
+            return new PivotGridCustomDataSourceBuilder(dataSource, viewContext, urlGenerator);
         }
     }
 }

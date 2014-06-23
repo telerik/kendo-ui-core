@@ -2,15 +2,15 @@
 {
     using Xunit;
 
-    public class PivotGridDataSourceTransportBuilderTests
+    public class PivotGridCustomDataSourceTransportTests
     {
         private readonly PivotGridTransport transport;
-        private readonly PivotGridDataSourceTransportBuilder builder;
+        private readonly PivotGridCustomDataSourceTransportBuilder builder;
 
-        public PivotGridDataSourceTransportBuilderTests()
+        public PivotGridCustomDataSourceTransportTests()
         {
             transport = new PivotGridTransport();
-            builder = new PivotGridDataSourceTransportBuilder(transport, TestHelper.CreateViewContext(), new UrlGenerator());
+            builder = new PivotGridCustomDataSourceTransportBuilder(transport, TestHelper.CreateViewContext(), new UrlGenerator());
         }
 
         [Fact]
@@ -53,6 +53,20 @@
             string discover = "discoverName";
             builder.Discover(c => c.Url(discover));
             transport.Discover.Url.ShouldEqual(discover);
+        }
+
+        [Fact]
+        public void ParameterMap_should_return_builder()
+        {
+            builder.ParameterMap("parameterMap").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ParameterMap_should_configure_corresponding_property()
+        {
+            string parameterMap = "parameterMap";
+            builder.ParameterMap(parameterMap);
+            Assert.Equal(transport.ParameterMap.HandlerName, parameterMap);
         }
     }
 }

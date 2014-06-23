@@ -704,6 +704,8 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\PivotGrid\Fluent\PivotGridCustomDataSourceBuilder.cs" />
+    <Compile Include="UI\PivotGrid\Fluent\PivotGridCustomDataSourceTransportBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceSortDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlySignalRCrudOperationsBuilder.cs" />
@@ -1304,6 +1306,7 @@
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceMeasureBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceRowBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceRowFactory.cs" />
+    <Compile Include="UI\PivotGrid\Fluent\PivotGridCustomDataSourceSchemaBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceTransportBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridDataSourceTransportConnectionBuilder.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridXmlaDataSourceBuilder.cs" />
@@ -1313,6 +1316,8 @@
     <Compile Include="UI\PivotGrid\PivotGridDataSourceColumn.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceMeasure.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceMeasureAxis.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridDataSourceSchema.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridDataSourceType.cs" />
     <Compile Include="UI\PivotGrid\PivotGridTransport.cs" />
     <Compile Include="UI\PivotGrid\PivotGridDataSourceRow.cs" />
     <Compile Include="UI\PivotGrid\PivotGridTransportConnection.cs" />

@@ -21,8 +21,6 @@
         {
             DataSource = new PivotGridDataSource();
 
-            DataSource.Type = DataSourceType.Custom;
-
             UrlGenerator = urlGenerator;
 
             AutoBind = true;
