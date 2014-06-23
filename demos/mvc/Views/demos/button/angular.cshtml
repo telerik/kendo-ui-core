@@ -1,23 +1,39 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-        <p>
-            <kendo-button class="k-primary" ng-click="onClick1()">Primary Button</kendo-button>
-            <kendo-button on-click="onClick2()">Button</kendo-button>
-        </p>
-        <p>
-            <kendo-button enable="false" class="k-primary">Disabled Primary Button</kendo-button>
-            <kendo-button enable="false">Disabled Button</kendo-button>
-        </p>
-        <p>
-            <kendo-button ng-disabled="disabled">Support for ngDisabled</kendo-button>
-            <label><input type="checkbox" ng-model="disabled" /> Disable</label>
-        </p>
-        <p>
-            <kendo-button sprite-css-class="'k-icon k-i-funnel'">Filter</kendo-button>
-            <kendo-button icon="'funnel-clear'">Clear Filter</kendo-button>
-            <kendo-button sprite-css-class="'k-icon k-i-refresh'"><span class="k-sprite">Refresh</span></kendo-button>
-        </p>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div>
+            <h4>Basic Button</h4>
+            <p>
+                <kendo-button class="k-primary" ng-click="onClick1()">Primary Button</kendo-button>
+                <kendo-button on-click="onClick2()">Button</kendo-button>
+            </p>
+            
+            <h4>Disabled buttons</h4>
+            <p>
+                <kendo-button enable="false" class="k-primary">Disabled Primary Button</kendo-button>
+                <kendo-button enable="false">Disabled Button</kendo-button>
+            </p>
+            <p>
+                <kendo-button ng-disabled="disabled">Support for ngDisabled</kendo-button>
+                <label><input type="checkbox" ng-model="disabled" /> Disable</label>
+            </p>
+            
+            <h4>Buttons with icons</h4>
+            <p>
+                <kendo-button sprite-css-class="'k-icon k-i-funnel'">Filter</kendo-button>
+                <kendo-button icon="'funnel-clear'">Clear Filter</kendo-button>
+                <kendo-button sprite-css-class="'k-icon k-i-refresh'"><span class="k-sprite">Refresh</span></kendo-button>
+            </p>
     </div>
+        
+    <style scoped>
+        .demo-section {
+            width: 400px;
+        }
+        .demo-section p {
+            margin: 0 0 20px;
+            line-height: 30px;
+        }            
+    </style>
 </div>
 
 <script>

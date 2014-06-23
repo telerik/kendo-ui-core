@@ -1,18 +1,15 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <p>
-    <label>Select time:
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+    <h4>Select time:</h4>
       <input kendo-time-picker
              ng-model="str"
              k-ng-model="obj" />
-    </label>
-  </p>
-  <pre>
-    str: {{ str }}
-    obj: {{ obj }}
-    typeof obj: {{ getType(obj) }}
-    obj instanceof Date: {{ isDate(obj) }}
-  </pre>
+<pre>
+  str: {{ str }}
+  obj: {{ obj }}
+  typeof obj: {{ getType(obj) }}
+  obj instanceof Date: {{ isDate(obj) }}
+</pre>
 </div>
 </div>
 

@@ -1,142 +1,155 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <select kendo-drop-down-list k-ng-model="menuOrientation">
-    <option value="horizontal">Horizontal</option>
-    <option value="vertical">Vertical</option>
-  </select>
-  <p></p>
-  <ul kendo-menu style="display: inline-block"
-      k-orientation="menuOrientation"
-      k-rebind="menuOrientation"
-      k-on-select="onSelect(kendoEvent)">
-    <li>
-      Men's
-      <ul>
-        <li>Footwear
-          <ul>
-            <li>Leisure Trainers</li>
-            <li>Running Shoes</li>
-            <li>Outdoor Footwear</li>
-            <li>Sandals/Flip Flops</li>
-            <li>Footwear Accessories</li>
-          </ul>
-        </li>
-        <li>Leisure Clothing
-          <ul>
-            <li>T-Shirts</li>
-            <li>Hoodies &amp; Sweatshirts</li>
-            <li>Jackets</li>
-            <li>Pants</li>
-            <li>Shorts</li>
-          </ul>
-        </li>
-        <li>Sports Clothing
-          <ul>
-            <li>Football</li>
-            <li>Basketball</li>
-            <li>Golf</li>
-            <li>Tennis</li>
-            <li>Swimwear</li>
-          </ul>
-        </li>
-        <li>Accessories</li>
-      </ul>
-    </li>
-    <li>
-      Women's
-      <ul>
-        <li>Footwear
-          <ul>
-            <li>Leisure Trainers</li>
-            <li>Running Shoes</li>
-            <li>Outdoor Footwear</li>
-            <li>Sandals/Flip Flops</li>
-            <li>Footwear Accessories</li>
-          </ul>
-        </li>
-        <li>Leisure Clothing
-          <ul>
-            <li>T-Shirts</li>
-            <li>Jackets</li>
-          </ul>
-        </li>
-        <li>Sports Clothing
-          <ul>
-            <li>Basketball</li>
-            <li>Golf</li>
-            <li>Tennis</li>
-            <li>Swimwear</li>
-          </ul>
-        </li>
-        <li>Accessories</li>
-      </ul>
-    </li>
-    <li>
-      Boy's
-      <ul>
-        <li>Footwear
-          <ul>
-            <li>Leisure Trainers</li>
-            <li>Running Shoes</li>
-            <li>Outdoor Footwear</li>
-            <li>Sandals/Flip Flops</li>
-            <li>Footwear Accessories</li>
-          </ul>
-        </li>
-        <li>Leisure Clothing
-          <ul>
-            <li>T-Shirts</li>
-            <li>Hoodies &amp; Sweatshirts</li>
-            <li>Jackets</li>
-            <li>Pants</li>
-            <li>Shorts</li>
-          </ul>
-        </li>
-        <li>Sports Clothing
-          <ul>
-            <li>Football</li>
-            <li>Basketball</li>
-            <li>Rugby</li>
-            <li>Tennis</li>
-            <li>Swimwear</li>
-          </ul>
-        </li>
-        <li>Accessories</li>
-      </ul>
-    </li>
-    <li>
-      Girl's
-      <ul>
-        <li>Footwear
-          <ul>
-            <li>Leisure Trainers</li>
-            <li>Running Shoes</li>
-            <li>Fitness Trainers</li>
-            <li>Sandals/Flip Flops</li>
-            <li>Footwear Accessories</li>
-          </ul>
-        </li>
-        <li>Leisure Clothing
-          <ul>
-            <li>T-Shirts</li>
-            <li>Hoodies &amp; Sweatshirts</li>
-            <li>Jackets</li>
-            <li>Pants</li>
-            <li>Shorts</li>
-          </ul>
-        </li>
-        <li>Sports Clothing
-          <ul>
-            <li>Basketball</li>
-            <li>Tennis</li>
-            <li>Swimwear</li>
-          </ul>
-        </li>
-        <li>Accessories</li>
-      </ul>
-    </li>
-  </ul>
-</div>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div class="box-col">
+            <h4>Menu orientation</h4>
+            <select kendo-drop-down-list k-ng-model="menuOrientation">
+                <option value="horizontal">Horizontal</option>
+                <option value="vertical">Vertical</option>
+            </select>
+        </div>
+        <div class="box-col">
+            <h4>Preview</h4>
+              <ul kendo-menu style="display: inline-block; min-width: 150px;"
+                k-orientation="menuOrientation"
+                k-rebind="menuOrientation"
+                k-on-select="onSelect(kendoEvent)">
+              <li>
+                Men's
+                <ul>
+                  <li>Footwear
+                    <ul>
+                      <li>Leisure Trainers</li>
+                      <li>Running Shoes</li>
+                      <li>Outdoor Footwear</li>
+                      <li>Sandals/Flip Flops</li>
+                      <li>Footwear Accessories</li>
+                    </ul>
+                  </li>
+                  <li>Leisure Clothing
+                    <ul>
+                      <li>T-Shirts</li>
+                      <li>Hoodies &amp; Sweatshirts</li>
+                      <li>Jackets</li>
+                      <li>Pants</li>
+                      <li>Shorts</li>
+                    </ul>
+                  </li>
+                  <li>Sports Clothing
+                    <ul>
+                      <li>Football</li>
+                      <li>Basketball</li>
+                      <li>Golf</li>
+                      <li>Tennis</li>
+                      <li>Swimwear</li>
+                    </ul>
+                  </li>
+                  <li>Accessories</li>
+                </ul>
+              </li>
+              <li>
+                Women's
+                <ul>
+                  <li>Footwear
+                    <ul>
+                      <li>Leisure Trainers</li>
+                      <li>Running Shoes</li>
+                      <li>Outdoor Footwear</li>
+                      <li>Sandals/Flip Flops</li>
+                      <li>Footwear Accessories</li>
+                    </ul>
+                  </li>
+                  <li>Leisure Clothing
+                    <ul>
+                      <li>T-Shirts</li>
+                      <li>Jackets</li>
+                    </ul>
+                  </li>
+                  <li>Sports Clothing
+                    <ul>
+                      <li>Basketball</li>
+                      <li>Golf</li>
+                      <li>Tennis</li>
+                      <li>Swimwear</li>
+                    </ul>
+                  </li>
+                  <li>Accessories</li>
+                </ul>
+              </li>
+              <li>
+                Boy's
+                <ul>
+                  <li>Footwear
+                    <ul>
+                      <li>Leisure Trainers</li>
+                      <li>Running Shoes</li>
+                      <li>Outdoor Footwear</li>
+                      <li>Sandals/Flip Flops</li>
+                      <li>Footwear Accessories</li>
+                    </ul>
+                  </li>
+                  <li>Leisure Clothing
+                    <ul>
+                      <li>T-Shirts</li>
+                      <li>Hoodies &amp; Sweatshirts</li>
+                      <li>Jackets</li>
+                      <li>Pants</li>
+                      <li>Shorts</li>
+                    </ul>
+                  </li>
+                  <li>Sports Clothing
+                    <ul>
+                      <li>Football</li>
+                      <li>Basketball</li>
+                      <li>Rugby</li>
+                      <li>Tennis</li>
+                      <li>Swimwear</li>
+                    </ul>
+                  </li>
+                  <li>Accessories</li>
+                </ul>
+              </li>
+              <li>
+                Girl's
+                <ul>
+                  <li>Footwear
+                    <ul>
+                      <li>Leisure Trainers</li>
+                      <li>Running Shoes</li>
+                      <li>Fitness Trainers</li>
+                      <li>Sandals/Flip Flops</li>
+                      <li>Footwear Accessories</li>
+                    </ul>
+                  </li>
+                  <li>Leisure Clothing
+                    <ul>
+                      <li>T-Shirts</li>
+                      <li>Hoodies &amp; Sweatshirts</li>
+                      <li>Jackets</li>
+                      <li>Pants</li>
+                      <li>Shorts</li>
+                    </ul>
+                  </li>
+                  <li>Sports Clothing
+                    <ul>
+                      <li>Basketball</li>
+                      <li>Tennis</li>
+                      <li>Swimwear</li>
+                    </ul>
+                  </li>
+                  <li>Accessories</li>
+                </ul>
+              </li>
+            </ul>
+        </div>
+    </div>
+    <style scoped>
+        .demo-section {
+            min-height: 200px;
+        }
+        .demo-section .box-col li {
+            margin: 0;
+        }
+    </style>
 </div>
 
 <script>

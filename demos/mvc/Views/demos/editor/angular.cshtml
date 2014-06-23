@@ -2,16 +2,21 @@
 
 <div class="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
-  <textarea kendo-editor ng-model="html"></textarea>
-  <textarea ng-bind-html="html" style="width: 100%; height: 5em"></textarea>
-</div>
+        <div class="box">
+            <textarea kendo-editor ng-model="html"></textarea>
+        </div>
+        
+        <div class="box">
+            <textarea ng-bind-html="html" style="width: 100%; height: 5em"></textarea>
+        </div>
+    </div>
 </div>
 
 <script>
   angular.module("KendoDemos", [ "kendo.directives", "ngSanitize" ]);
   function MyCtrl($scope) {
       $scope.html = "<h1>Kendo Editor</h1>\n\n" +
-      "<p>Note that “change” is triggered when the editor loses focus.\n" +
+      "<p>Note that 'change' is triggered when the editor loses focus.\n" +
           "<br /> That's when the Angular scope gets updated.</p>";
   }
 

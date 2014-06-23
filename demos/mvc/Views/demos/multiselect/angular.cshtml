@@ -1,7 +1,8 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <h4>Select product</h4>
         <select kendo-multi-select k-options="selectOptions" k-ng-model="selectedIds"></select>
-        <p ng-show="selectedIds.length">Selected: {{ selectedIds }}</p>
+        <p ng-show="selectedIds.length"><br />Selected: {{ selectedIds }}</p>
     </div>
 </div>
 

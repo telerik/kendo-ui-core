@@ -1,8 +1,8 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <fieldset>
-    <legend>Static data</legend>
-    <select kendo-drop-down-list>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+  <div class="box-col">
+    <h4>Static data</h4>
+    <select kendo-drop-down-list  style="width: 200px">
       <option>Albania</option>
       <option>Andorra</option>
       <option>Armenia</option>
@@ -54,22 +54,23 @@
       <option>United Kingdom</option>
       <option>Vatican City</option>
     </select>
-  </fieldset>
+  </div>
 
-  <fieldset>
-    <legend>Remote data</legend>
+  <div class="box-col">
+    <h4>Remote data</h4>
     <select kendo-drop-down-list
             k-data-text-field="'ProductName'"
             k-data-value-field="'ProductID'"
-            k-data-source="productsDataSource"></select>
-  </fieldset>
+            k-data-source="productsDataSource"
+            style="width: 200px"></select>
+  </div>
 
-  <fieldset>
-    <legend>Custom item template</legend>
+  <div class="box-col">
+    <h4>Custom item template</h4>
     <select id="customers"
             kendo-drop-down-list style="width: 400px"
             k-options="customOptions"></select>
-  </fieldset>
+  </div>
 
   <style>
     .dropdown-header {
@@ -91,16 +92,6 @@
     .dropdown-header > span:first-child {
       width: 82px;
       border-left-width: 0;
-    }
-
-    .demo-section {
-      width: 400px;
-      padding: 30px;
-    }
-    .demo-section h2 {
-      text-transform: uppercase;
-      font-size: 1.2em;
-      margin-bottom: 10px;
     }
 
     .selected-value {

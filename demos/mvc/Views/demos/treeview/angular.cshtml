@@ -1,26 +1,24 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <div style="position: relative">
-    <div kendo-tree-view="tree"
-         k-data-source="treeData"
-         k-template="itemTemplate"
-         k-on-change="selectedItem = dataItem"></div>
-    <div class="sidepane" ng-show="selectedItem">
-      Selected: {{selectedItem.text}}
-      <br /><br />
-      <button class="k-button" ng-click="addAfter(selectedItem)">Add after</button>
-      <button class="k-button" ng-click="addBelow(selectedItem)">Add below</button>
-      <button class="k-button" ng-click="remove(selectedItem)">Delete</button>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div class="box-col">
+            <h4>TreeView</h4>
+            <div kendo-tree-view="tree"
+             k-data-source="treeData"
+             k-template="itemTemplate"
+             k-on-change="selectedItem = dataItem"></div>
+        </div>
+        <div class="box-col" ng-show="selectedItem">
+          <h4>Selected: {{selectedItem.text}}</h4>
+          <button class="k-button" ng-click="addAfter(selectedItem)">Add item below</button>
+          <button class="k-button" ng-click="addBelow(selectedItem)">Add child item</button>
+          <button class="k-button" ng-click="remove(selectedItem)">Delete</button>
+        </div>
     </div>
-  </div>
-  <style>
-    .sidepane {
-      position: absolute;
-      left: 200px;
-      top: 0;
-    }
-  </style>
-</div>
+    <style scoped>
+        .k-treeview .k-in {
+            padding: 5px;
+        }
+    </style>
 </div>
 
 <script>
@@ -35,7 +33,7 @@ function MyCtrl($scope) {
     { text: "Item 3" }
   ]});
 
-  $scope.itemTemplate = "{{dataItem.text}} <button ng-click='click(dataItem)'>Click</button>";
+  $scope.itemTemplate = "{{dataItem.text}} <button class='k-button' ng-click='click(dataItem)'>Select</button>";
 
   $scope.click = function(dataItem) {
     alert(dataItem.text);

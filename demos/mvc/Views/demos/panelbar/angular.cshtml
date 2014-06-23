@@ -1,47 +1,52 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <ul kendo-panel-bar style="width: 300px" k-options="panelBarOptions">
-    <li>
-      Metallica - Master of Puppets 1986
-      <ul>
-        <li>Battery</li>
-        <li>Master of Puppets</li>
-        <li>The Thing That Should Not Be</li>
-        <li>Welcome Home (Sanitarium)</li>
-        <li>Disposable Heroes</li>
-        <li>Leper Messiah</li>
-        <li>Orion (Instrumental)</li>
-        <li>Damage, Inc.</li>
-      </ul>
-    </li>
-    <li>
-      Iron Maiden - Brave New World 2000
-      <ul>
-        <li>The Wicker Man</li>
-        <li>Ghost Of The Navigator</li>
-        <li>Brave New World</li>
-        <li>Blood Brothers</li>
-        <li>The Mercenary</li>
-        <li>Dream Of Mirrors</li>
-        <li>The Fallen Angel</li>
-        <li>The Nomad</li>
-        <li>Out Of The Silent Planet</li>
-        <li>The Thin Line Between Love And Hate</li>
-      </ul>
-    </li>
-    <li>
-      Ajax Item
-      <div style="padding: 0 1em"></div>
-    </li>
-  </ul>
-</div>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+    <ul kendo-panel-bar k-options="panelBarOptions">
+      <li>
+        Metallica - Master of Puppets 1986
+        <ul>
+          <li>Battery</li>
+          <li>Master of Puppets</li>
+          <li>The Thing That Should Not Be</li>
+          <li>Welcome Home (Sanitarium)</li>
+          <li>Disposable Heroes</li>
+          <li>Leper Messiah</li>
+          <li>Orion (Instrumental)</li>
+          <li>Damage, Inc.</li>
+        </ul>
+      </li>
+      <li>
+        Iron Maiden - Brave New World 2000
+        <ul>
+          <li>The Wicker Man</li>
+          <li>Ghost Of The Navigator</li>
+          <li>Brave New World</li>
+          <li>Blood Brothers</li>
+          <li>The Mercenary</li>
+          <li>Dream Of Mirrors</li>
+          <li>The Fallen Angel</li>
+          <li>The Nomad</li>
+          <li>Out Of The Silent Planet</li>
+          <li>The Thin Line Between Love And Hate</li>
+        </ul>
+      </li>
+      <li>
+        Ajax Item
+        <div style="padding: 0 1em"></div>
+      </li>
+    </ul>
+    </div>
+    <style scoped>
+        .demo-section {
+            width: 400px;
+        }
+    </style>
 </div>
 
 <script>
   angular.module("KendoDemos", [ "kendo.directives" ]);
   function MyCtrl($scope) {
   $scope.panelBarOptions = {
-    contentUrls: [ null, null, "doc/web/loremIpsum.html" ]
+    contentUrls: [ null, null, "../content/web/loremIpsum.html" ]
   };
   $scope.hello = "Hello from controller";
 }

@@ -1,21 +1,26 @@
 
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-        <div style="position: relative; width: 300px; height: 250px; overflow: visible; margin: 0 auto;">
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <div style="position: relative; width: 300px; height: 300px; overflow: visible; margin: 0 auto;">
 
             <div kendo-slider ng-model="width" k-tooltip="{ enabled: false }"
-                style="position: absolute; left: 25px; bottom: 0; width: 275px;"></div>
+                style="position: absolute; left: 25px; bottom: 0; width: 270px;"></div>
 
             <div kendo-slider ng-model="height" k-tooltip="{ enabled: false }" k-orientation="'vertical'"
-                style="position: absolute; bottom: 25px; left: 0; height: 225px;"></div>
+                style="position: absolute; bottom: 25px; left: 0; height: 270px;"></div>
 
-            <img style="position: absolute; left: 50px; bottom: 50px;
-            width: {{133 + width * 10}}px;
-            height: {{95 + height * 10}}px;"
-            src="doc/angular-kendo.png" />
+            <img style="position: absolute; left: 60px; bottom: 60px;
+            width: {{100 + width * 10}}px;
+            height: {{100 + height * 10}}px;"
+            src="../content/shared/images/foods/200/72.jpg" />
 
         </div>
     </div>
+    <style scoped>
+        .demo-section {
+            width: 300px;
+        }
+    </style>
 </div>
 
 <script>

@@ -1,36 +1,54 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <ul>
-    <li>
-      <label>Phone number:
-        <input kendo-masked-text-box ng-model="phone"
-               k-mask="'(999) 000-0000'" />
-      </label>
-      {{phone}}
-    </li>
-    <li>
-      <label>Credit Card number:
-        <input kendo-masked-text-box ng-model="cc"
-               k-mask="'0000 0000 0000 0000'" />
-      </label>
-      {{cc}}
-    </li>
-    <li>
-      <label>Social security number:
-        <input kendo-masked-text-box ng-model="ssn"
-               k-mask="'000-00-0000'" />
-      </label>
-      {{ssn}}
-    </li>
-    <li>
-      <label>UK postcode:
-        <input kendo-masked-text-box ng-model="post"
-               k-mask="'L0L 0LL'" />
-      </label>
-      {{post}}
-    </li>
-  </ul>
-</div>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <ul class="textboxes">
+          <li>
+            <label>Phone number:</label>
+              <input kendo-masked-text-box ng-model="phone"
+                     k-mask="'(999) 000-0000'" />
+            {{phone}}
+          </li>
+          <li>
+            <label>Credit Card number:</label>
+              <input kendo-masked-text-box ng-model="cc"
+                     k-mask="'0000 0000 0000 0000'" />
+            {{cc}}
+          </li>
+          <li>
+            <label>Social security number:</label>
+              <input kendo-masked-text-box ng-model="ssn"
+                     k-mask="'000-00-0000'" />
+            {{ssn}}
+          </li>
+          <li>
+            <label>UK postcode:</label>
+              <input kendo-masked-text-box ng-model="post"
+                     k-mask="'L0L 0LL'" />
+            {{post}}
+          </li>
+        </ul>
+    </div>
+    <style>
+        .demo-section {
+            width: 500px;
+        }
+
+        .textboxes {
+            margin:0;
+            padding:0;
+        }
+
+        .textboxes li {
+            list-style:none;
+            padding:10px 0;
+        }
+
+        .textboxes label {
+            display: inline-block;
+            width: 150px;
+            margin-right: 5px;
+            text-align: right;
+        }
+    </style>
 </div>
 
 <script>
