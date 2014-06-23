@@ -25,6 +25,8 @@ var __meta__ = {
         CHANGE = "change",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
+        DATABINDING = "dataBinding",
+        DATABOUND = "dataBound",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
@@ -2022,7 +2024,10 @@ var __meta__ = {
             kendo.notify(that);
         },
 
-        events: [],
+        events: [
+            DATABINDING,
+            DATABOUND
+        ],
 
         options: {
             name: "PivotGrid",
@@ -2274,6 +2279,10 @@ var __meta__ = {
             var oldColumnMeasures = columnAxis.measures || columnMeasures;
             var oldRowMeasures = rowAxis.measures || rowMeasures;
 
+            if (that.trigger(DATABINDING, { action: "rebind" } )) {
+                return;
+            }
+
             //reset metadata
             if (descriptorsChanged(that._columnDescriptors, columnDescriptors) || oldColumnMeasures !== columnMeasures)
             {
@@ -2309,6 +2318,8 @@ var __meta__ = {
             that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
 
             that._resize();
+
+            that.trigger(DATABOUND);
         }
     });
 

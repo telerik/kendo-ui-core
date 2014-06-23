@@ -54,6 +54,46 @@
         ok(pivotgrid.dataSource instanceof kendo.data.PivotDataSource);
     });
 
+    test("dataBinding event is triggered", function() {
+        var wasCalled = false;
+        var pivotgrid = createPivot({
+            dataBinding: function() {
+                wasCalled = true;
+            }
+        });
+
+        ok(wasCalled);
+    });
+
+    test("dataBinding action argument", 1, function() {
+        var pivotgrid = createPivot({
+            dataBinding: function(e) {
+                equal(e.action, "rebind");
+            }
+        });
+    });
+
+    test("prevent dataBinding event, prevents refresh", function() {
+        var pivotgrid = createPivot({
+            dataBinding: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        equal(pivotgrid.content.find("tr").length, 0);
+    });
+
+    test("dataBound event is triggered", function() {
+        var wasCalled = false;
+        var pivotgrid = createPivot({
+            dataBound: function() {
+                wasCalled = true;
+            }
+        });
+
+        ok(wasCalled);
+    });
+
     test("dataSource fetch is called", function() {
         var dataSource = new kendo.data.PivotDataSource();
 
