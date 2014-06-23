@@ -204,15 +204,15 @@ var __meta__ = {
             if (target.hasClass("k-leaf")) {
                 this._removeActiveState();
                 target
-                    .removeClass("k-state-active")
-                    .addClass("k-state-active");
+                    .removeClass("k-state-hover")
+                    .addClass("k-state-hover");
             }
         },
 
         _removeActiveState: function() {
             this.element
-                .find(".k-state-active")
-                .removeClass("k-state-active");
+                .find(".k-state-hover")
+                .removeClass("k-state-hover");
         },
 
         _mouseleave: function() {
@@ -506,7 +506,7 @@ var __meta__ = {
         },
 
         _createTile: function(item) {
-            var root = $("<div class='k-treemap-tile k-state-default'></div>")
+            var root = $("<div class='k-treemap-tile'></div>")
                 .width(item.coord.width)
                 .height(item.coord.height)
                 .offset({
@@ -540,12 +540,12 @@ var __meta__ = {
         },
 
         _createTitle: function(item) {
-            return $("<div class='k-treemap-title k-state-default'></div>")
+            return $("<div class='k-treemap-title'></div>")
                 .text(this._getText(item));
         },
 
         _createWrap: function(item) {
-            return $("<div class='k-treemap-wrap k-state-default'></div>");
+            return $("<div class='k-treemap-wrap'></div>");
         }
     });
 
