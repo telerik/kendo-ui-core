@@ -2137,4 +2137,19 @@
     <Compile Include="UI\ToolBar\Fluent\ToolBarEventBuilder.cs" />
     <Compile Include="UI\ToolBar\Html\ToolBarHtmlBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\ContextMenu\ContextMenu.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationSettings.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationSettingsBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationCloseSettings.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationCloseSettingsBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationOpenSettings.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationOpenSettingsBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuItemFactory.cs" />
+    <Compile Include="UI\ContextMenu\ContextMenuItem.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuItemBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Fluent\ContextMenuEventBuilder.cs" />
+    <Compile Include="UI\ContextMenu\Html\ContextMenuHtmlBuilder.cs" />
+  </ItemGroup>
 </Project>

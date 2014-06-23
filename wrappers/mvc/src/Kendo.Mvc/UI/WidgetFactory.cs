@@ -1308,6 +1308,21 @@ namespace Kendo.Mvc.UI.Fluent
 
         //>> DataVizComponents 
         /// <summary>
+        /// Creates a <see cref="ContextMenu"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ContextMenuBuilder ContextMenu()
+        {
+            return new ContextMenuBuilder(new ContextMenu(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
         /// Creates a <see cref="Diagram"/>
         /// </summary>
         /// <example>
