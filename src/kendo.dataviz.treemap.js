@@ -120,9 +120,10 @@ var __meta__ = {
                 if (items.length) {
                     var root = this._getByUid(node.uid);
                     root.children = [];
+                    var colors = colorsByLength("#0c81c5", "#c5dceb", items.length);
                     for (var i = 0; i < items.length; i++) {
                         item = items[i];
-                        root.children.push(this._wrapItem(item));
+                        root.children.push(this._wrapItem(item, colors[i]));
                     }
                     var htmlSize = this.view.htmlSize(root);
 
@@ -139,7 +140,7 @@ var __meta__ = {
             this.view.renderHeight(root);
         },
 
-        _wrapItem: function(item) {
+        _wrapItem: function(item, color) {
             var wrap = {};
 
             if (defined(this.options.valueField)) {
@@ -148,6 +149,9 @@ var __meta__ = {
 
             if (defined(this.options.colorField)) {
                 wrap.color = getField(this.options.colorField, item);
+                if (!defined(wrap.color)) {
+                    wrap.color = color;
+                }
             }
 
             if (defined(this.options.textField)) {
@@ -557,6 +561,75 @@ var __meta__ = {
 
     function defined(value) {
         return typeof value !== UNDEFINED;
+    }
+
+    function colorsByLength(min, max, length) {
+        var minRGBtoDecimal = rgbToDecimal(min);
+        var maxRGBtoDecimal = rgbToDecimal(max);
+        var colors = [];
+
+        colors.push(min);
+
+        for (var i = 0; i < length; i++) {
+            var rgbColor = {
+                r: colorByIndex(minRGBtoDecimal.r, maxRGBtoDecimal.r, i, length),
+                g: colorByIndex(minRGBtoDecimal.g, maxRGBtoDecimal.g, i, length),
+                b: colorByIndex(minRGBtoDecimal.b, maxRGBtoDecimal.b, i, length)
+            }
+            colors.push(buildColorFromRGB(rgbColor));
+        }
+
+        colors.push(max);
+
+        return colors;
+    }
+
+    function colorByIndex(min, max, index, length) {
+        min = math.min(math.abs(min), math.abs(max));
+        max = math.max(math.abs(min), math.abs(max));
+        var step = (max - min) / (length + 1);
+        var currentStep = step * (index + 1);
+
+        return min + currentStep;
+    }
+
+    function buildColorFromRGB(color) {
+        return "#" + decimalToRgb(color.r) + decimalToRgb(color.g) + decimalToRgb(color.b);
+    }
+
+    function rgbToDecimal(color) {
+        color = color.replace("#", "");
+        var rgbColor = colorToRGB(color);
+
+        return {
+            r: rgbToHex(rgbColor.r),
+            g: rgbToHex(rgbColor.g),
+            b: rgbToHex(rgbColor.b)
+        };
+    }
+
+    function decimalToRgb(number) {
+        return math.round(number).toString(16).toUpperCase();
+    }
+
+    function colorToRGB(color) {
+        var colorLength = color.length;
+        var rgbColor = {};
+        if (colorLength === 3) {
+            rgbColor.r = color[0];
+            rgbColor.g = color[1];
+            rgbColor.b = color[2];
+        } else {
+            rgbColor.r = color.substring(0, 2);
+            rgbColor.g = color.substring(2, 4);
+            rgbColor.b = color.substring(4, 6);
+        }
+
+        return rgbColor;
+    }
+
+    function rgbToHex(rgb) {
+        return parseInt(rgb.toString(16), 16);
     }
 
     function getRandomColor() {
