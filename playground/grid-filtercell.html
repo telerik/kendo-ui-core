@@ -218,6 +218,9 @@
                     scrollable:true,
                     //detailTemplate: "foo",
                     dataSource: {
+                        requestStart: function() {
+                            console.log("RS")
+                        },
                         transport: {
                             read: function(options) {
                                 options.success([

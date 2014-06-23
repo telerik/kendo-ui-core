@@ -55,24 +55,24 @@
     });
 
     test("dataSource remains the same instance when set to an instance of the DataSource class, acDS creates new one", function() {
-        filterCell = setup(dom, { dataSource: dataSource, acDataSource: dataSource });
+        filterCell = setup(dom, { dataSource: dataSource, suggestDataSource: dataSource });
 
         ok(filterCell.dataSource instanceof kendo.data.DataSource);
         ok(filterCell.dataSource === dataSource);
     });
 
-    test("ac dataSource is different instance when acDataSource is not specified", function() {
+    test("ac dataSource is different instance when suggestDataSource is not specified", function() {
         filterCell = setup(dom, { dataSource: dataSource });
 
-        ok(filterCell.acDataSource !== dataSource);
+        ok(filterCell.suggestDataSource !== dataSource);
     });
 
-    test("acDataSource is instance of the DataSource class when set with options", function() {
+    test("suggestDataSource is instance of the DataSource class when set with options", function() {
         var dsOptions = { transport: { read: function () {} } };
-        filterCell = setup(dom, { acDataSource: dsOptions, dataSource: new kendo.data.DataSource() });
+        filterCell = setup(dom, { suggestDataSource: dsOptions, dataSource: new kendo.data.DataSource() });
 
-        ok(filterCell.acDataSource instanceof kendo.data.DataSource);
-        ok(filterCell.acDataSource.transport.read === dsOptions.transport.read);
+        ok(filterCell.suggestDataSource instanceof kendo.data.DataSource);
+        ok(filterCell.suggestDataSource.transport.read === dsOptions.transport.read);
     });
 
     test("type is retrieved from dataSource when it is instance of the DataSource class ", function() {
@@ -186,26 +186,45 @@
     });
 
     test("creates autocomplete widget for the string type", function() {
-        var acDataSource = new kendo.data.DataSource({
+        var suggestDataSource = new kendo.data.DataSource({
             data: ["a", "b"]
         });
-        filterCell = setup(dom, { dataSource: dataSource, field: "foo", acDataSource: acDataSource });
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", suggestDataSource: suggestDataSource });
         var ac = filterCell.element.find("input").data("kendoAutoComplete");
         ok(ac);
     });
 
     test("autocomplete dataSource do not have any groups set if there are defined for main dataSource", function() {
-        var acDataSource = new kendo.data.DataSource({
+        var suggestDataSource = {
             data: [
                 { foo: "1", bar: "some value" },
                 { foo: "1", bar: "some other" },
                 { foo: "2", bar: "some third" }
             ],
             group: { field: "foo" }
+        };
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", suggestDataSource: suggestDataSource });
+        var groups = filterCell.suggestDataSource.group();
+        equal(groups.length, 0);
+    });
+
+    test("suggestDS does not trigger a request until it is needed", function() {
+        var counter = 0;
+        var suggestDataSource = new kendo.data.DataSource({
+            transport: {
+                read: function (options) {
+                    options.success( [ { foo: "1", bar: "some value" },
+                        { foo: "1", bar: "some other" },
+                        { foo: "2", bar: "some third" } ])
+                }
+            },
+            requestEnd: function() {
+                counter++;
+            },
+            group: { field: "foo" }
         });
-        filterCell = setup(dom, { dataSource: dataSource, field: "foo", acDataSource: acDataSource });
-        var groups = filterCell.acDataSource.filter();
-        equal(groups, null);
+        filtercell = setup(dom, { dataSource: dataSource, field: "foo", suggestDataSource: suggestDataSource });
+        equal(counter, 0);
     });
 
     test("creates clear icon", function() {

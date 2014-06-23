@@ -3699,7 +3699,7 @@ var __meta__ = {
                     $("<span/>").attr(kendo.attr("field"), field)
                         .kendoFilterCell({
                             dataSource: that.dataSource,
-                            acDataSource: acDsOptions,
+                            suggestDataSource: acDsOptions,
                             field: field
                         }).appendTo(th);
                 }

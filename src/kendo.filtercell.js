@@ -60,7 +60,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this,
                 dataSource,
-                acDataSource,
+                suggestDataSource,
                 viewModel,
                 type,
                 input = that.input = $("<input/>")
@@ -70,15 +70,8 @@ var __meta__ = {
             Widget.fn.init.call(that, element, options);
             options = that.options;
             dataSource = that.dataSource = options.dataSource;
-            acDataSource = that.acDataSource = options.acDataSource;
 
-            if (!(acDataSource instanceof DataSource)) {
-                acDataSource = that.acDataSource = DataSource.create(acDataSource);
-            }
 
-            if (acDataSource.group()) {
-                acDataSource.group([]);
-            }
             //gets the type from the dataSource or sets default to string
             that.model = dataSource.options.schema.model;
             type = options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
@@ -113,7 +106,17 @@ var __meta__ = {
 
             kendo.bind(input, viewModel);
 
-            that.setACDataSource(acDataSource);
+            if (type == STRING) {
+                suggestDataSource = that.suggestDataSource = options.suggestDataSource;
+
+                if (!(suggestDataSource instanceof DataSource)) {
+                    suggestDataSource =
+                        that.suggestDataSource =
+                            DataSource.create($.extend(suggestDataSource, { group: [] }));
+                }
+
+                that.setSuggestDataSource(suggestDataSource);
+            }
 
             that.refreshUI();
 
@@ -140,7 +143,7 @@ var __meta__ = {
             } //TODO enums
         },
 
-        setACDataSource: function(dataSource) {
+        setSuggestDataSource: function(dataSource) {
             var ac = this.input.data("kendoAutoComplete");
             if (ac) {
                 ac.setDataSource(dataSource);
@@ -262,7 +265,7 @@ var __meta__ = {
             autoBind: true,
             field: "",
             type: "string",
-            acDataSource: null,
+            suggestDataSource: null,
             operator: "eq",
             template: null,
             operators: {
