@@ -2330,8 +2330,8 @@ var __meta__ = {
                 rowBuilder.metadata = {};
             }
 
-            that._columnDescriptors = columnDescriptors;
-            that._rowDescriptors = rowDescriptors;
+            that._columnDescriptors = columnDescriptors.slice(0);
+            that._rowDescriptors = rowDescriptors.slice(0);
 
             //render headers
             that.columnsHeaderTree.render(columnBuilder.build(columns.tuples || []));
