@@ -108,7 +108,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies what element will be added in the command overflow popup. Applicable only for items that have a template.
         /// </summary>
-        /// <param name="value">The value that configures the overflowtemplateid.</param>
+        /// <param name="value">The value that configures the overflowtemplate.</param>
+        public ToolBarItemBuilder OverflowTemplate(string value)
+        {
+            container.OverflowTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies what element will be added in the command overflow popup. Applicable only for items that have a template.
+        /// </summary>
+        /// <param name="value">The value that configures the overflowtemplate.</param>
         public ToolBarItemBuilder OverflowTemplateId(string value)
         {
             container.OverflowTemplateId = value;
@@ -152,7 +163,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
         /// </summary>
-        /// <param name="value">The value that configures the templateid.</param>
+        /// <param name="value">The value that configures the template.</param>
+        public ToolBarItemBuilder Template(string value)
+        {
+            container.Template = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
         public ToolBarItemBuilder TemplateId(string value)
         {
             container.TemplateId = value;

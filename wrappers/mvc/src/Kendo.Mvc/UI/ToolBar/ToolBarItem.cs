@@ -45,6 +45,8 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public string OverflowTemplate { get; set; }
+
         public string OverflowTemplateId { get; set; }
         
         public bool? Primary { get; set; }
@@ -53,6 +55,8 @@ namespace Kendo.Mvc.UI
         
         public string SpriteCssClass { get; set; }
         
+        public string Template { get; set; }
+
         public string TemplateId { get; set; }
         
         public string Text { get; set; }
@@ -119,11 +123,20 @@ namespace Kendo.Mvc.UI
                 json["menuButtons"] = menuButtons;
             }
                 
-            if (OverflowTemplateId.HasValue())
+            if (!string.IsNullOrEmpty(OverflowTemplateId))
             {
-                json["overflowTemplate"] = OverflowTemplateId;
+                json["overflowTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        OverflowTemplateId
+                    )
+                };
             }
-            
+            else if (!string.IsNullOrEmpty(OverflowTemplate))
+            {
+                json["overflowTemplate"] = OverflowTemplate;
+            }
+                
             if (Primary.HasValue)
             {
                 json["primary"] = Primary;
@@ -139,11 +152,20 @@ namespace Kendo.Mvc.UI
                 json["spriteCssClass"] = SpriteCssClass;
             }
             
-            if (TemplateId.HasValue())
+            if (!string.IsNullOrEmpty(TemplateId))
             {
-                json["template"] = TemplateId;
+                json["template"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        TemplateId
+                    )
+                };
             }
-            
+            else if (!string.IsNullOrEmpty(Template))
+            {
+                json["template"] = Template;
+            }
+                
             if (Text.HasValue())
             {
                 json["text"] = Text;

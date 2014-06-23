@@ -10,8 +10,8 @@
             menuButtons.Add().Text("Insert below").Icon("insert-s");
         });
         items.Add().Type(CommandType.Separator);
-        items.Add().TemplateId("<label>Format:</label>");
-        items.Add().TemplateId("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
+        items.Add().Template("<label>Format:</label>");
+        items.Add().Template("<input id='dropdown' style='width: 150px;' />").Overflow(ShowInOverflowPopup.Never);
         items.Add().Type(CommandType.Separator);
         items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
         {
