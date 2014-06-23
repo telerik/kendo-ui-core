@@ -82,7 +82,8 @@ module CodeGen::MVC::Wrappers
         'gantt.columns',
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
-		'diagram.datasource'
+		'diagram.datasource',
+		'treemap.datasource'
     ]
 
     CSPROJ = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
