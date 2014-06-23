@@ -55,10 +55,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The text similar to "Add below" displayed as gantt "add below" buttons.
         /// </summary>
-        /// <param name="value">The value that configures the insetafter.</param>
-        public GanttMessagesActionsSettingsBuilder InsetAfter(string value)
+        /// <param name="value">The value that configures the insertafter.</param>
+        public GanttMessagesActionsSettingsBuilder InsertAfter(string value)
         {
-            container.InsetAfter = value;
+            container.InsertAfter = value;
 
             return this;
         }

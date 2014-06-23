@@ -72,6 +72,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+        /// field to which the column is bound. The gantt will create a column for every item of the array.
+        /// </summary>
+        /// <param name="configurator">The action that configures the columns.</param>
+        public GanttBuilder<TTaskModel, TDependenciesModel> Columns(Action<GanttColumnFactory<TTaskModel, TDependenciesModel>> configurator)
+        {
+            configurator(new GanttColumnFactory<TTaskModel, TDependenciesModel>(container));
+            return this;
+        }
+
         //>> Fields
         
         /// <summary>
@@ -87,18 +98,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-		/// field to which the column is bound. The gantt will create a column for every item of the array.
-        /// </summary>
-        /// <param name="configurator">The action that configures the columns.</param>
-        public GanttBuilder<TTaskModel,TDependenciesModel> Columns(Action<GanttColumnFactory<TTaskModel, TDependenciesModel>> configurator)
-        {
-            configurator(new GanttColumnFactory<TTaskModel, TDependenciesModel>(container));
-            return this;
-        }
-        
-        /// <summary>
-        /// If set to true the user would be able to create new tasks and modify or delete existing ones.
+        /// If set to false the user won't be able to create, modify or delete tasks and dependencies.
         /// </summary>
         /// <param name="value">The value that configures the editable.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Editable(bool value)
@@ -164,7 +164,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If true, tasks snap to time slots, otherwise tasks can have arbitrary duration.
+        /// If set to true the gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.
         /// </summary>
         /// <param name="value">The value that configures the snap.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Snap(bool value)
@@ -207,7 +207,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to true the user would be able to select tasks in the gantt. This triggers the change event.
+        /// If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.
         /// </summary>
         /// <param name="value">The value that configures the selectable.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Selectable(bool value)
@@ -218,7 +218,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to false, the week and month views will show all days of the week. By default these views display only business days.
+        /// If set to false, gantt views will show all days of the week. By default the views display only business days.
         /// </summary>
         /// <param name="value">The value that configures the showworkdays.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> ShowWorkDays(bool value)
@@ -241,7 +241,7 @@ namespace Kendo.Mvc.UI.Fluent
         
         /// <summary>
         /// The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
-		/// By default the Kendo UI Gantt widget displays the "day" and "week" views.
+		/// By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.
         /// </summary>
         /// <param name="configurator">The action that configures the views.</param>
         public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)

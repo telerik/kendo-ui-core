@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI
             Columns = new List<GanttColumnBase<TTaskModel>>();
 
 //>> Initialization
-                
+        
             Messages = new GanttMessagesSettings();
                 
             Views = new List<GanttView>();
@@ -104,17 +104,17 @@ namespace Kendo.Mvc.UI
         {
             var json = new Dictionary<string, object>(Events);
 
+            var columns = Columns.ToJson();
+            if (columns.Any())
+            {
+                json["columns"] = columns;
+            }
+
 //>> Serialization
         
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
-            }
-                
-            var columns = Columns.ToJson();
-            if (columns.Any())
-            {
-                json["columns"] = columns;
             }
                 
             if (Editable.HasValue)

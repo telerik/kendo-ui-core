@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
         
         public string InsertBefore { get; set; }
         
-        public string InsetAfter { get; set; }
+        public string InsertAfter { get; set; }
         
         //<< Fields
 
@@ -46,9 +46,9 @@ namespace Kendo.Mvc.UI
                 json["insertBefore"] = InsertBefore;
             }
             
-            if (InsetAfter.HasValue())
+            if (InsertAfter.HasValue())
             {
-                json["insetAfter"] = InsetAfter;
+                json["insertAfter"] = InsertAfter;
             }
             
         //<< Serialization
