@@ -1,6 +1,6 @@
 <div class="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
-        <div class="demo-section">
+        <div class="demo-section k-header">
             <div class="todo-head">Products</div>
             <div kendo-mobile-scroller style="height: 200px">
                 <ul kendo-mobile-list-view k-data-source="products"></ul>
@@ -8,16 +8,13 @@
         </div>
         <style scoped>
             .demo-section {
-                border: 1px solid #999;
                 width: 400px;
                 padding: 0;
             }
             .todo-head {
-                text-align: center;
-                padding: 10px 0;
+                padding: 10px 7px;
                 font-weight: bold;
                 font-size: 120%;
-                background: #fff;
             }
         </style>
     </div>

@@ -1,14 +1,34 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-  <ul kendo-mobile-action-sheet="actions" k-type="'tablet'" k-cancel="'Dismiss'" k-on-command="onCommand(kendoEvent)">
-    <li><a href="#" data-command="view">View</a></li>
-    <li><a href="#" data-command="rename">Rename</a></li>
-    <li><a href="#" data-command="delete">Delete</a></li>
-    <li><a href="#" data-command="perms">Set permissions ...</a></li>
-  </ul>
-  <div ng-show="command">Selected: {{command}}</div>
-  <div kendo-grid k-options="gridOptions" k-on-change="actions.open(selected)"></div>
-</div>
+    <div class="demo-section k-header" ng-controller="MyCtrl">
+        <h4>Select a file to edit</h4>
+        <ul kendo-mobile-action-sheet="actions" k-type="'tablet'" k-cancel="'Dismiss'" k-on-command="onCommand(kendoEvent)">
+            <li><a href="#" data-command="view">View</a></li>
+            <li><a href="#" data-command="rename">Rename</a></li>
+            <li><a href="#" data-command="delete">Delete</a></li>
+            <li><a href="#" data-command="perms">Set permissions ...</a></li>
+        </ul>
+        <div kendo-grid k-options="gridOptions" k-on-change="actions.open(selected)"></div>
+        <h4 id="action-result" ng-show="command">Selected: {{command}}</h4>
+    </div>
+    <style scoped>
+        .demo-section {
+            width: 600px;
+        }
+        .head {
+            height: 30px;
+        }
+        #action-result {
+            color: #ff0000;
+            padding-top: 20px;
+        }
+        .k-group {
+            background-color: transparent;
+        }
+        .k-popup {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+        }
+    </style>
 </div>
 
 <script>
