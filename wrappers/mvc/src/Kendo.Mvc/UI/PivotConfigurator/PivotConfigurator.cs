@@ -8,27 +8,17 @@
     using System.Web.Mvc;
 
     /// <summary>
-    /// The server side wrapper for Kendo UI PivotGrid
+    /// The server side wrapper for Kendo UI PivotConfigurator
     /// </summary>
-    public class PivotGrid : WidgetBase
+    public class PivotConfigurator : WidgetBase
     {
-        public PivotGrid(ViewContext viewContext,
+        public PivotConfigurator(ViewContext viewContext,
                     IJavaScriptInitializer initializer,
                     IUrlGenerator urlGenerator
             )
             : base(viewContext, initializer)
         {
-            DataSource = new PivotDataSource();
-
             UrlGenerator = urlGenerator;
-
-            AutoBind = true;
-        }
-
-        public PivotDataSource DataSource
-        {
-            get;
-            private set;
         }
 
         public IUrlGenerator UrlGenerator
@@ -37,20 +27,11 @@
             private set;
         }
 
-        public bool AutoBind { get; set; }
-
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
 
-            if (AutoBind == false)
-            {
-                options["autoBind"] = AutoBind;
-            }
-
-            options["dataSource"] = DataSource.ToJson();
-
-            writer.Write(Initializer.Initialize(Selector, "PivotGrid", options));
+            writer.Write(Initializer.Initialize(Selector, "PivotConfigurator", options));
 
             base.WriteInitializationScript(writer);
         }
@@ -64,7 +45,7 @@
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            PivotGridHtmlBuilder builder = new PivotGridHtmlBuilder(this);
+            PivotConfiguratorHtmlBuilder builder = new PivotConfiguratorHtmlBuilder(this);
 
             builder.Build().WriteTo(writer);
 

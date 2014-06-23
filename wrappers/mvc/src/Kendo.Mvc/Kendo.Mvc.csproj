@@ -704,6 +704,8 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />
+    <Compile Include="UI\PivotConfigurator\Html\PivotConfiguratorHtmlBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotCustomDataSourceBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotCustomDataSourceTransportBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceBuilder.cs" />
@@ -1307,6 +1309,7 @@
     <Compile Include="Infrastructure\Implementation\ControllerAuthorization.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
+    <Compile Include="UI\PivotConfigurator\PivotConfigurator.cs" />
     <Compile Include="UI\PivotGrid\Fluent\PivotGridBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceColumnBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceColumnFactory.cs" />

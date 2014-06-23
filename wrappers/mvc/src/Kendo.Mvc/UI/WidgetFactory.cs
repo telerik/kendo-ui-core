@@ -593,6 +593,22 @@ namespace Kendo.Mvc.UI.Fluent
             return new PivotGridBuilder(new PivotGrid(ViewContext, Initializer, UrlGenerator));
         }
 
+
+        /// <summary>
+        /// Creates a new <see cref="PivotConfigurator"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PivotConfigurator()
+        ///             .Name("PivotConfigurator")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual PivotConfiguratorBuilder PivotConfigurator()
+        {
+            return new PivotConfiguratorBuilder(new PivotConfigurator(ViewContext, Initializer, UrlGenerator));
+        }
+
         /// <summary>
         /// Creates a <see cref="TreeView"/>
         /// </summary>

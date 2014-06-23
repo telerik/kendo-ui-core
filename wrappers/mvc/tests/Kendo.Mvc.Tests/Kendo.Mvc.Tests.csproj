@@ -195,7 +195,7 @@
     <Compile Include="UI\PivotDataSource\PivotDataSourceColumnFactoryTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceMeasureBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceRowBuilderTests.cs" />
-    <Compile Include="UI\PivotDataSource\PivotDataSourceRowFactoryTests.cs.cs" />
+    <Compile Include="UI\PivotDataSource\PivotDataSourceRowFactoryTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceTransportBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceTransportConnectionBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotXmlaDataSourceBuilderTests.cs" />
