@@ -23,6 +23,8 @@ var __meta__ = {
         extend = $.extend,
         isFunction = kendo.isFunction,
         CHANGE = "change",
+        ERROR = "error",
+        PROGRESS = "progress",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
         DATABINDING = "dataBinding",
@@ -1805,7 +1807,7 @@ var __meta__ = {
             this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
 
             this._refreshHandler = $.proxy(this.refresh, this);
-            this.dataSource.first("change", this._refreshHandler);
+            this.dataSource.first(CHANGE, this._refreshHandler);
 
             if (!options.template) {
                 this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
@@ -1841,9 +1843,9 @@ var __meta__ = {
             }
         },
         setDataSource: function(dataSource) {
-            this.dataSource.unbind("change", this._refreshHandler);
+            this.dataSource.unbind(CHANGE, this._refreshHandler);
             this.dataSource = this.options.dataSource = dataSource;
-            dataSource.first("change", this._refreshHandler);
+            dataSource.first(CHANGE, this._refreshHandler);
 
             this.refresh();
         },
@@ -2064,18 +2066,33 @@ var __meta__ = {
         },
 
         _dataSource: function() {
-            var dataSource = this.options.dataSource;
+            var that = this;
+            var dataSource = that.options.dataSource;
 
             dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
 
-            if (this.dataSource && this._refreshHandler) {
-                this.dataSource.unbind("change", this._refreshHandler);
+            if (that.dataSource && this._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler)
+                                .unbind(PROGRESS, that._progressHandler)
+                                .unbind(ERROR, that._errorHandler);
             } else {
-                this._refreshHandler = $.proxy(this.refresh, this);
+                that._refreshHandler = $.proxy(that.refresh, that);
+                that._progressHandler = $.proxy(that._requestStart, that);
+                that._errorHandler = $.proxy(that._error, that);
             }
 
-            this.dataSource = kendo.data.PivotDataSource.create(dataSource)
-                .bind("change", this._refreshHandler);
+            that.dataSource = kendo.data.PivotDataSource.create(dataSource)
+                                   .bind(CHANGE, that._refreshHandler)
+                                   .bind(PROGRESS, that._progressHandler)
+                                   .bind(ERROR, that._errorHandler);
+        },
+
+        _error: function() {
+            this._progress(false);
+        },
+
+        _requestStart: function() {
+            this._progress(true);
         },
 
         _wrapper: function() {
@@ -2181,6 +2198,10 @@ var __meta__ = {
             that.contentTree = new kendo.dom.Tree(that.content[0]);
 
             that._initSettingTargets();
+        },
+
+        _progress: function(toggle) {
+            kendo.ui.progress(this.wrapper, toggle);
         },
 
         _resize: function() {
@@ -2318,6 +2339,8 @@ var __meta__ = {
             that.contentTree.render(that._contentBuilder.build(dataSource.view(), columnAxis, rowAxis));
 
             that._resize();
+
+            that._progress(false);
 
             that.trigger(DATABOUND);
         }

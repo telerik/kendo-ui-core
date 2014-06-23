@@ -148,6 +148,34 @@
         ok(rowsTarget.calls("setDataSource"));
     });
 
+    test("PivotGrid shows progress on request start", function() {
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var pivotgrid = new PivotGrid(div, { dataSource: dataSource });
+
+        dataSource.trigger("progress");
+
+        ok(pivotgrid.wrapper.find(".k-loading-mask")[0]);
+    });
+
+    test("PivotGrid hides progress on refresh", function() {
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var pivotgrid = new PivotGrid(div, { dataSource: dataSource });
+
+        ok(!pivotgrid.wrapper.find(".k-loading-mask")[0]);
+    });
+
+    test("PivotGrid hides progress on request error", function() {
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var pivotgrid = new PivotGrid(div, { dataSource: dataSource });
+
+        dataSource.trigger("progress");
+        dataSource.trigger("error");
+
+        ok(!pivotgrid.wrapper.find(".k-loading-mask")[0]);
+    });
 
     test("PivotGrid creates column header virtual DOM node", function() {
         var pivotgrid = createPivot();
@@ -223,6 +251,4 @@
 
         equal(pivotgrid.measuresTarget.options.setting, "measures");
     });
-
-
 })();
