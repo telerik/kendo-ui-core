@@ -108,6 +108,18 @@ test("_prev is initialzed on focus", function() {
     equal(autocomplete._prev, "foo");
 });
 
+test("change is not triggered on blur with empty value", 0, function() {
+    var autocomplete = new AutoComplete(input, {
+            change: function() {
+                ok(false);
+            }
+        });
+
+    autocomplete.value(null);
+    input.focus();
+    input.blur();
+});
+
 test("select does not raise the change event", function() {
     var changeWasCalled = false, autocomplete = new AutoComplete(input, {
         change: function() {
