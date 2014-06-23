@@ -44,7 +44,7 @@ var __meta__ = {
 
             this.view = new SquarifiedView(element, this.options);
 
-            this.src = new Squarified(this.options);
+            this.src = new Squarified();
 
             this._initDataSource();
 
@@ -223,14 +223,6 @@ var __meta__ = {
     });
 
     var Squarified = Class.extend({
-        init: function(options) {
-            this.options = deepExtend({}, this.options, options);
-        },
-
-        options: {
-            offset: 0
-        },
-
         leaf: function(tree) {
             return !tree.children;
         },
@@ -346,8 +338,8 @@ var __meta__ = {
             var children = data.children;
             if (children && children.length > 0) {
                 var newRootCoord = {
-                    width: rootCoord.width - htmlSize.offset,
-                    height: rootCoord.height - htmlSize.offset - htmlSize.text,
+                    width: rootCoord.width,
+                    height: rootCoord.height - htmlSize.text,
                     top: 0,
                     left: 0
                 };
