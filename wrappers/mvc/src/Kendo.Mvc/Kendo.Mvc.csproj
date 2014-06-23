@@ -2104,4 +2104,22 @@
     <Compile Include="UI\Gantt\GanttColumn.cs" />
     <Compile Include="UI\Gantt\Fluent\GanttColumnBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\ToolBar\ToolBar.cs" />
+    <Compile Include="UI\ToolBar\CommandType.cs" />
+    <Compile Include="UI\ToolBar\ShowInOverflowPopup.cs" />
+    <Compile Include="UI\ToolBar\ShowIn.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarBuilder.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemFactory.cs" />
+    <Compile Include="UI\ToolBar\ToolBarItem.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemBuilder.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemButtonFactory.cs" />
+    <Compile Include="UI\ToolBar\ToolBarItemButton.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemButtonBuilder.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemMenuButtonFactory.cs" />
+    <Compile Include="UI\ToolBar\ToolBarItemMenuButton.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarItemMenuButtonBuilder.cs" />
+    <Compile Include="UI\ToolBar\Fluent\ToolBarEventBuilder.cs" />
+    <Compile Include="UI\ToolBar\Html\ToolBarHtmlBuilder.cs" />
+  </ItemGroup>
 </Project>

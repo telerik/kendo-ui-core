@@ -110,7 +110,8 @@ namespace :generate do
                 markdown = FileList[
                     'docs/api/dataviz/map.md',
                     'docs/api/dataviz/diagram.md',
-                    'docs/api/web/gantt.md'
+                    'docs/api/web/gantt.md',
+                    'docs/api/web/toolbar.md'
                 ]
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
