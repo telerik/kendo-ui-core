@@ -2152,4 +2152,4 @@
     <Compile Include="UI\ContextMenu\Fluent\ContextMenuEventBuilder.cs" />
     <Compile Include="UI\ContextMenu\Html\ContextMenuHtmlBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\TreeMap\TreeMap.cs" /><Compile Include="UI\TreeMap\Fluent\TreeMapBuilder.cs" /><Compile Include="UI\TreeMap\Fluent\TreeMapEventBuilder.cs" /></ItemGroup></Project>

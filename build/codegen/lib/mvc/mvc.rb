@@ -17,7 +17,8 @@ module CodeGen::MVC::Wrappers
 
     FIELD_TYPES = {
         'map.layers.extent' => 'double[]',
-        'map.markers.location' => 'double[]'
+        'map.markers.location' => 'double[]',
+        'treemap.colors' => 'string[]'
     }
 
     SERIALIZATION_SKIP_LIST = [
@@ -543,6 +544,7 @@ module CodeGen::MVC::Wrappers
             filename = "#{@path}/#{component.path}/#{component.csharp_class}.cs"
 
             write_file(filename, component.to_class(filename))
+
         end
 
         def write_html_builder(component)
