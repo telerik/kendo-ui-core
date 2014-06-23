@@ -92,6 +92,16 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
+    * If set to true and the grid is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
+The grid uses same layout for both phone and tablet.
+    * @param boolean|string $value
+    * @return \Kendo\UI\Grid
+    */
+    public function mobile($value) {
+        return $this->setProperty('mobile', $value);
+    }
+
+    /**
     * If set to true the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
     * @param boolean $value
     * @return \Kendo\UI\Grid
@@ -161,16 +171,6 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     */
     public function addToolbarItem($value) {
         return $this->add('toolbar', func_get_args());
-    }
-
-    /**
-    * If set to true and the grid is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
-The grid uses same layout for both phone and tablet.
-    * @param boolean|string $value
-    * @return \Kendo\UI\Grid
-    */
-    public function mobile($value) {
-        return $this->setProperty('mobile', $value);
     }
 
     /**

@@ -163,7 +163,7 @@ tab.
 
     /**
     * Sets the activate event of the TabStrip.
-    * Triggered just after a tab is being made visible, but before the end of the animation
+    * Triggered after a tab is being made visible and its animation complete. Before Q2 2014 this event was invoked after tab show, but before the end of the animation.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\TabStrip
     */
@@ -215,6 +215,20 @@ tab.
         }
 
         return $this->setProperty('select', $value);
+    }
+
+    /**
+    * Sets the show event of the TabStrip.
+    * Triggered just after a tab is being made visible, but before the end of the animation. Before Q2 2014 this event was called activate.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TabStrip
+    */
+    public function show($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('show', $value);
     }
 
 

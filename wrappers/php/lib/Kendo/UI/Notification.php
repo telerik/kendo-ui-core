@@ -28,7 +28,7 @@ class Notification extends \Kendo\UI\Widget {
 
     /**
     * Defines the element to which the notifications will be appended or prepended (depending on the stacking direction).
-    * @param string $value
+    * @param string| $value
     * @return \Kendo\UI\Notification
     */
     public function appendTo($value) {

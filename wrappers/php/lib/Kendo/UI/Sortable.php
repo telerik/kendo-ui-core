@@ -112,7 +112,7 @@ By default, the hint is initially positioned on top of the draggable source offs
     /**
     * Provides a way for customization of the sortable item hint. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If hint function is not provided the widget will clone dragged item and use it as a hint.
-    * @param \Kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string| $value
     * @return \Kendo\UI\Sortable
     */
     public function hint($value) {
@@ -141,7 +141,7 @@ The item will also be activated by pressing, holding and lifting the finger with
     /**
     * Provides a way for customization of the sortable item placeholder. If a function is supplied, it receives one argument - the draggable element's jQuery object.
 If placeholder function is not provided the widget will clone dragged item, remove its ID attribute, set its visibility to hidden and use it as a placeholder.
-    * @param \Kendo\JavaScriptFunction|string $value
+    * @param \Kendo\JavaScriptFunction|string| $value
     * @return \Kendo\UI\Sortable
     */
     public function placeholder($value) {
