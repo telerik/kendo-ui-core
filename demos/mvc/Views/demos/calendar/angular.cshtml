@@ -1,16 +1,13 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl">
-        <!-- remember good ol' tables? -->
-        <table><tr style="vertical-align: top">
-                <td>
-                    <p><b>Start date: </b><code ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</code></p>
-                    <kendo-calendar ng-model="startDate" rebind="endDate" max="endDate"></kendo-calendar>
-                </td>
-                <td ng-show="startDate">
-                    <p><b>End date: </b><code ng-show="endDate">{{endDate | date:"MMM d, yyyy"}}</code></p>
-                    <kendo-calendar ng-model="endDate" rebind="startDate" min="startDate" max="maxEndDate"></kendo-calendar>
-                </td>
-        </tr></table>
+    <div class="demo-section k-header" style="width: 500px;" ng-controller="MyCtrl">
+        <div class="box-col">
+            <h4>Start date: <span ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</span></h4>
+            <kendo-calendar ng-model="startDate" rebind="endDate" max="endDate"></kendo-calendar>
+        </div>
+        <div class="box-col" ng-show="startDate">
+            <h4>End date: <span ng-show="endDate">{{endDate | date:"MMM d, yyyy"}}</span></h4>
+            <kendo-calendar ng-model="endDate" rebind="startDate" min="startDate" max="maxEndDate"></kendo-calendar>
+        </div>
     </div>
 </div>
 

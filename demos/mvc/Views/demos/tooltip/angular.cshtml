@@ -1,21 +1,25 @@
 <div class="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
-        <div kendo-tooltip k-content="'The <b>tooltip</b><br />Time is: {{time}}'" class="tooltip">
+        <div kendo-tooltip k-content="'The <b>tooltip</b><br />Time is: {{time}}'" class="k-group">
             I have a tooltip.
         </div>
 
-        <div kendo-tooltip k-content="theContent" class="tooltip">
+        <div kendo-tooltip k-content="theContent" class="k-group">
             I also have a tooltip.
         </div>
 
-        <style>
-            .tooltip {
-                border: 1px solid red;
-                background: #fea;
-                padding: 1em;
-                margin: 1em
-            }
-        </style>
+        <style scoped>
+                .k-group {
+                    display: inline-block;
+                    text-align: center;
+                    width: 200px;
+                    white-space: nowrap;
+                    border-width: 1px;
+                    border-style: solid;
+                    padding: 2em;
+                    margin: 10px;
+                }
+            </style>
     </div>
 </div>
 

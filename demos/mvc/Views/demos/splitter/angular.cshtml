@@ -1,29 +1,29 @@
 <div class="example" ng-app="KendoDemos">
-<div ng-controller="MyCtrl">
-  <p>
-    <label>Orientation:
+  <div class="demo-section k-header" ng-controller="MyCtrl" style="width: 700px;">
+    <div class="box-col">
+      <h4>Orientation:</h4>
       <select kendo-drop-down-list k-ng-model="orientation">
         <option value="horizontal">Horizontal</option>
         <option value="vertical">Vertical</option>
       </select>
-    </label>
-  </p>
-
-  <div kendo-splitter
-       k-panes="[ null, { contentUrl: '../content/web/loremIpsum.html' }]"
-       k-orientation="orientation"
-       k-rebind="orientation">
-    <div>
-      <p>Content on the left.</p>
-      <p>On the other side we have remote-loaded content.</p>
     </div>
-    <div>
-      <!-- AJAX content -->
+  
+    <div class="box-col" style="width: 450px;">
+      <h4>Splitter</h4>
+      <div kendo-splitter
+           k-panes="[ null, { contentUrl: '../content/web/loremIpsum.html' }]"
+           k-orientation="orientation"
+           k-rebind="orientation">
+        <div>
+          <p>Content on the left.</p>
+          <p>On the other side we have remote-loaded content.</p>
+        </div>
+        <div>
+          <!-- AJAX content -->
+        </div>
+      </div>
     </div>
   </div>
-
-</div>
-
 </div>
 
 <script>

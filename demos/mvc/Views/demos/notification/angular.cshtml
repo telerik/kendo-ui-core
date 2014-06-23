@@ -1,12 +1,40 @@
 <div class="example" ng-app="KendoDemos">
-    <div ng-controller="MyCtrl" style="overflow: auto; width: 400px">
-        <div id="container" style="width: 200px; float: right; height: 200px; padding: 5px; border: 1px solid #aaa;"></div>
+    <div class="demo-section k-header" ng-controller="MyCtrl" style="overflow: auto;">
+        <div id="container" class="k-block"></div>
+        <h4>Show notification:</h4>
+        <p>
+            <button class="k-button" ng-click="notf1.show('This is a notice', 'error')">Popup bottom-right</button><br />
+            <button class="k-button" ng-click="showInContainer()">Show in container</button><br />
+            <button class="k-button" ng-click="dismissAll()">Dismiss all</button>
+        </p>
         <span kendo-notification="notf1"></span>
         <span kendo-notification="notf2" k-append-to="'#container'"></span>
-        <button class="k-button" ng-click="notf1.show('This is a notice', 'error')">Popup bottom-right</button><br />
-        <button class="k-button" ng-click="showInContainer()">Show in container</button><br />
-        <button class="k-button" ng-click="dismissAll()">Dismiss all</button>
     </div>
+    <style>
+        .demo-section {
+            width: 600px;
+        }
+        .demo-section:after {
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+        }
+        .demo-section p {
+            margin: 3px 0 20px;
+            line-height: 40px;
+        }
+        .demo-section .k-button {
+            width: 200px;
+        }
+        #container {
+            float: right;
+            width: 300px;
+            height: 170px;
+            margin: 1em 0;
+            overflow: auto;
+        }
+    </style>
 </div>
 
 <script>
