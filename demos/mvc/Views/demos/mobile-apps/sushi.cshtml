@@ -137,7 +137,7 @@
             href="\#!details?id=#:id#">
             <img src="#: window.contentPath #/images/75/#:image#" />
             <h2>#:name#</h2>
-            <span class="added" data-bind="visible: ordered">Item added to cart #= data.ordered # times.</span>
+            <span class="added" data-bind="visible: visibleMessage">Item added to cart <span data-bind="text: ordered"></span> times.</span>
         </a>
     </script>
 

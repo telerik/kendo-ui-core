@@ -68,7 +68,7 @@
             ordered;
 
         if(e.data.id) {
-            item = e.data
+            item = e.data;
         } else {
             item = this.get("currentItem");
         }
@@ -79,6 +79,7 @@
         item.set("ordered", ordered);
 
         if (ordered === 1) {
+            item.set("visibleMessage", true);
             this.added.push(item);
         }
 
