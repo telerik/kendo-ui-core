@@ -22,5 +22,15 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Configures Model properties
+        /// </summary>
+        public virtual CustomDataSourceSchemaBuilder<TModel> Model(object settings)
+        {
+            schema.FunctionModel = settings;
+
+            return this;
+        }
     }
 }

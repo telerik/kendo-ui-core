@@ -31,6 +31,8 @@ namespace Kendo.Mvc.UI
 
         public ClientHandlerDescriptor Parse { get; set; }
 
+        public object FunctionModel { get; set; }
+
         public ModelDescriptor Model
         {
             get;
@@ -98,7 +100,11 @@ namespace Kendo.Mvc.UI
                 FluentDictionary.For(json).Add("groups", Groups, string.Empty);
             }
 
-            if (Model != null)
+            if (FunctionModel != null)
+            {
+                json.Add("model", FunctionModel);
+            }
+            else if (Model != null)
             {
                 json.Add("model", Model.ToJson());
             }

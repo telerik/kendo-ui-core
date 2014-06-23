@@ -165,7 +165,10 @@ namespace Kendo.Mvc.UI
                     var property = typeof(T).GetProperty(f.Member, BindingFlags.Public | BindingFlags.Instance);
                     if (property != null && property.CanWrite)
 	                {
-                        property.SetValue(instance, f.DefaultValue, null);
+                        if (f.DefaultValue == null || f.DefaultValue.GetType() != typeof(ClientHandlerDescriptor))
+                        {
+                            property.SetValue(instance, f.DefaultValue, null);
+                        }
 	                }                     
                 });
             }
