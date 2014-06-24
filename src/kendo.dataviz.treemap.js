@@ -28,6 +28,7 @@ var __meta__ = {
     var NS = ".kendoTreeMap",
         CHANGE = "change",
         DATA_BOUND = "dataBound",
+        ITEM_CREATED = "itemCreated",
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         MOUSEOVER_NS = "mouseover" + NS,
@@ -42,7 +43,7 @@ var __meta__ = {
 
             this.element.addClass("k-widget k-treemap");
 
-            this.view = new SquarifiedView(element, this.options);
+            this.view = new SquarifiedView(this, this.options);
 
             this.src = new Squarified();
 
@@ -59,7 +60,7 @@ var __meta__ = {
             colors: []
         },
 
-        events: [DATA_BOUND, "itemCreated"],
+        events: [DATA_BOUND, ITEM_CREATED],
 
         _attachEvents: function() {
             this.element
@@ -444,9 +445,10 @@ var __meta__ = {
     });
 
     var SquarifiedView = Class.extend({
-        init: function(element, options) {
+        init: function(treeMap, options) {
             this.options = deepExtend({}, this.options, options);
-            this.element = $(element);
+            this.treeMap = treeMap;
+            this.element = $(treeMap.element);
 
             this.offset = 0;
         },
@@ -490,7 +492,11 @@ var __meta__ = {
 
                 for (var i = 0; i < children.length; i++) {
                     var leaf = children[i];
-                    rootWrap.append(this._createLeaf(leaf));
+                    var htmlElement = this._createLeaf(leaf);
+                    rootWrap.append(htmlElement);
+                    this.treeMap.trigger(ITEM_CREATED, {
+                        element: htmlElement
+                    });
                 }
             }
         },
