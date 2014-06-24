@@ -32358,6 +32358,420 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <tag-class>com.kendoui.taglib.timepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+
+    <tag>
+        <description>ToolBar</description>
+        <name>toolBar</name>
+        <tag-class>com.kendoui.taglib.ToolBarTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If resizable is set to true the widget will detect changes in the viewport width and hides the overflowing controls in the command overflow popup.</description>
+            <name>resizable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Fires when the user clicks a command button.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the SplitButton's popup closes.</description>
+            <name>close</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the Split Button's popup opens.</description>
+            <name>open</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the user changes the checked state of a toggle button.</description>
+            <name>toggle</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the overflow popup container is about to close.</description>
+            <name>overflowClose</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires when the overflow popup container is about to open.</description>
+            <name>overflowOpen</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>A JavaScript array that contains the ToolBar's commands configuration.</description>
+        <name>toolBar-items</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>A JavaScript array that contains the ToolBar's commands configuration.</description>
+        <name>toolBar-item</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the control is initially enabled or disabled. Default value is "true".</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Assigns the button to a group. Applicable only for buttons with togglable: true.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets icon for the item. The icon should be one of the existing in the Kendo UI theme sprite.</description>
+            <name>icon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the ID of the button.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set, the ToolBar will render an image with the specified URL in the button.</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies how the button behaves when the ToolBar is resized.</description>
+            <name>overflow</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies what element will be added in the command overflow popup. Applicable only for items that have a template.</description>
+            <name>overflowTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the button is primary. Primary buttons receive different styling.</description>
+            <name>primary</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the toggle button is initially selected. Applicable only for buttons with togglable: true.</description>
+            <name>selectable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies where the icon will be displayed.</description>
+            <name>showIcon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies where the text will be displayed.</description>
+            <name>showText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the text of the button.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the button is togglable, e.g. has a selected and unselected state.</description>
+            <name>togglable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the toggle event handler of the button. Applicable only for commands of type button and togglable: true.</description>
+            <name>toggle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the type of the item.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the url to navigate to.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>Specifies the buttons of ButtonGroup.</description>
+        <name>toolBar-item-buttons</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemButtonsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the buttons of ButtonGroup.</description>
+        <name>toolBar-item-button</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemButtonTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the button is initially enabled or disabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Assigns the button to a group. Applicable only for the children of a ButtonGroup that has togglable true.</description>
+            <name>group</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets icon for the menu button. The icon should be one of the existing in the Kendo UI theme sprite.</description>
+            <name>icon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the ID of the button.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set, the ToolBar will render an image with the specified URL in the button.</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the toggle button is initially selected. Applicable only for the children of a ButtonGroup that has togglable true.</description>
+            <name>selected</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies where the icon of the button will be displayed. Applicable only for the children of a ButtonGroup.</description>
+            <name>showIcon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies where the text of the menu button will be displayed. Applicable only for the buttons of a ButtonGroup.</description>
+            <name>showText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines a CSS class (or multiple classes separated by spaces) which will be used for button icon.</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text of the menu button.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the button is togglable, e.g. has a selected and unselected state. Applicable only for the children of a ButtonGroup.</description>
+            <name>togglable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.</description>
+            <name>toggle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the url of the button to navigate to.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.</description>
+        <name>toolBar-item-button-click</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemButtonClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.</description>
+        <name>toolBar-item-button-toggle</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemButtonToggleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies the menu buttons of a SplitButton.</description>
+        <name>toolBar-item-menuButtons</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemMenuButtonsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Specifies the menu buttons of a SplitButton.</description>
+        <name>toolBar-item-menuButton</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemMenuButtonTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Specifies whether the menu button is initially enabled or disabled.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Sets icon for the menu buttons. The icon should be one of the existing in the Kendo UI theme sprite.</description>
+            <name>icon</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the ID of the menu buttons.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set, the ToolBar will render an image with the specified URL in the menu button.</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines a CSS class (or multiple classes separated by spaces) which will be used for menu button icon.</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the text of the menu buttons.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the url of the menu button to navigate to.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.</description>
+        <name>toolBar-item-click</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies what element will be added in the command overflow popup. Applicable only for items that have a template.</description>
+        <name>toolBar-item-overflowTemplate</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemOverflowTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.</description>
+        <name>toolBar-item-template</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Specifies the toggle event handler of the button. Applicable only for commands of type button and togglable: true.</description>
+        <name>toolBar-item-toggle</name>
+        <tag-class>com.kendoui.taglib.toolbar.ItemToggleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Fires when the user clicks a command button.</description>
+        <name>toolBar-click</name>
+        <tag-class>com.kendoui.taglib.toolbar.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the SplitButton's popup closes.</description>
+        <name>toolBar-close</name>
+        <tag-class>com.kendoui.taglib.toolbar.CloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the Split Button's popup opens.</description>
+        <name>toolBar-open</name>
+        <tag-class>com.kendoui.taglib.toolbar.OpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the user changes the checked state of a toggle button.</description>
+        <name>toolBar-toggle</name>
+        <tag-class>com.kendoui.taglib.toolbar.ToggleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the overflow popup container is about to close.</description>
+        <name>toolBar-overflowClose</name>
+        <tag-class>com.kendoui.taglib.toolbar.OverflowCloseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires when the overflow popup container is about to open.</description>
+        <name>toolBar-overflowOpen</name>
+        <tag-class>com.kendoui.taglib.toolbar.OverflowOpenFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
     <tag>
         <description>Tooltip</description>
         <name>tooltip</name>
