@@ -5011,6 +5011,7 @@
       },
       {
         "text": "AngularJS",
+        "disableInMobile": true,
         "url": "validator/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Validator"
