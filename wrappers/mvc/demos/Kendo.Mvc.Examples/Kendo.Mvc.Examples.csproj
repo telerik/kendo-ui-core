@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
     <Compile Include="Controllers\ToolBar\ApiController.cs" />
     <Compile Include="Controllers\ToolBar\EventsController.cs" />
@@ -657,6 +658,8 @@
     <Compile Include="Models\Stock.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TreeMap\PopulationUSA.cs" />
+    <Compile Include="Models\TreeMap\TreeMapDataRepository.cs" />
     <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />
@@ -796,6 +799,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\range_bar_charts\local_data_binding.aspx" />

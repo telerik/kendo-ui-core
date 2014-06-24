@@ -1381,6 +1381,21 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ToolBarBuilder(new ToolBar(ViewContext, Initializer, UrlGenerator));
         }
+        
+        /// <summary>
+        /// Creates a <see cref="TreeMap"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeMap()
+        ///             .Name("TreeMap")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TreeMapBuilder TreeMap()
+        {
+            return new TreeMapBuilder(new TreeMap(ViewContext, Initializer, UrlGenerator));
+        }
         //<< DataVizComponents
 
         //>> MobileComponents 
