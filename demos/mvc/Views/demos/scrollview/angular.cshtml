@@ -24,19 +24,19 @@
     #next-img {
       display: block;
       position: absolute;
-      top: 10px;
+      top: 36px;
       z-idex: 1;
       height: 400px;
       width: 100px;
       opacity: 0.2;
     }
     #prev-img {
-      left: 10px;
+      left: 36px;
       background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-left.png") no-repeat 50% 50%;
     }
     #next-img {
       left: auto;
-      right: 10px;
+      right: 36px;
       background: url("http://demos.telerik.com/kendo-ui/content/web/scrollview/arrow-right.png") no-repeat 50% 50%;
     }
     a#prev-img:hover {
@@ -73,32 +73,39 @@
 
 </div>
 
+<script src="../content/spa/aeroviewr/js/500px.js"></script>
+
 <script>
   angular.module("KendoDemos", [ "kendo.directives" ]);
-  function MyCtrl($scope) {
-  $scope.photos = new kendo.data.DataSource({
-    transport: {
-      read: function(options) {
-        var params = {
-          feature: "popular",
-          exclude: "Nude",
-          image_size: 4,
-          page: options.data.page,
-          rpp: options.data.pageSize
-        };
 
-        _500px.api("/photos", params, function(response) {
-          options.success(response.data);
-        });
-      }
-    },
-    serverPaging: true,
-    pageSize: 30,
-    schema: {
-      data: "photos",
-      total: "total_items"
-    }
+  _500px.init({
+      sdk_key: 'a3be03a8a98d6e05af17f60d2cf4bf696eb47555'
   });
-  $scope.template = $("#template").html();
-}
+
+  function MyCtrl($scope) {
+      $scope.photos = new kendo.data.DataSource({
+        transport: {
+          read: function(options) {
+            var params = {
+              feature: "popular",
+              exclude: "Nude",
+              image_size: 4,
+              page: options.data.page,
+              rpp: options.data.pageSize
+            };
+
+            _500px.api("/photos", params, function(response) {
+              options.success(response.data);
+            });
+          }
+        },
+        serverPaging: true,
+        pageSize: 30,
+        schema: {
+          data: "photos",
+          total: "total_items"
+        }
+      });
+      $scope.template = $("#template").html();
+  }
 </script>

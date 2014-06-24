@@ -8550,6 +8550,22 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "scrollview/angular",
+        "title": {
+            "kendo-ui": "AngularJS support for Kendo UI Mobile ScrollView"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Mobile ScrollView"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Mobile"
