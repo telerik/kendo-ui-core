@@ -86,6 +86,20 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the itemCreated event of the TreeMap.
+    * Fired when a tile has been created.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\TreeMap
+    */
+    public function itemCreated($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('itemCreated', $value);
+    }
+
+    /**
     * Sets the dataBound event of the TreeMap.
     * Fired when the widget is bound to data from its dataSource.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
