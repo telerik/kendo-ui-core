@@ -809,47 +809,64 @@
 
     var Polyline = VisualBase.extend({
         init: function (options) {
-            var that = this;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "polyline"), options);
-            if (Utils.isDefined(options) && options.points !== null) {
-                this.points(that.options.points);
+            VisualBase.fn.init.call(this, options);
+
+            options = this.options;
+
+            this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            if (options.points) {
+                this._updatePath();
+            }
+        },
+
+        points: function (points) {
+            var options = this.options;
+            if (points) {
+                options.points = points;
+                this._updatePath();
+            } else {
+                return options.points;
+            }
+        },
+
+        redraw: function (options) {
+            if (options && options.points) {
+                this.points(options.points);
             }
 
-            this.background("none");
+            VisualBase.fn.redraw.call(this, options);
+        },
 
-        },
-        refresh: function () {
-            if (this._points === null || this._points.length === 0) {
-                return;
+        _updatePath: function() {
+            var drawingElement = this.drawingElement;
+            var options = this.options;
+            var points = options.points;
+            var segments = drawingElement.segments = [];
+            var point, segment;
+            for (var i = 0; i < points.length; i++) {
+                point = points[i];
+                segment = new d.Segment(new g.Point(point.x, point.y));
+                segment.observer = drawingElement;
+                segments.push(segment);
             }
-            var pointsString = "", i;
-            for (i = 0; i < this._points.length; i++) {
-                // todo: toArray and fromArray to allow Point and Tuple
-                pointsString += " " + this._points[i].x + "," + this._points[i].y;
-            }
-            this.domElement.setAttribute("points", pointsString.trim());
-            this.domElement.setAttribute("stroke", "Orange");
-            this.domElement.setAttribute("stroke-width", "5");
 
+            drawingElement.geometryChange();
         },
-        points: function (value) {
-            if (isUndefined(value)) {
-                return this._points;
-            }
-            else {
-                this._points = value;
-                this.refresh();
-            }
-        },
-        redraw: function () {
-            this.refresh();
-        },
+
         options: {
             stroke: {
                 color: "gray",
                 width: 1
             },
-            backgrounds: "none",
+
+            fill: {
+                color: "none"
+            },
+
             points: []
         }
     });

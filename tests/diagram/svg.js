@@ -873,6 +873,75 @@
             });
         });
 
+        test("redraw dose not trigger geometry change if from or to are not passed", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            line.redraw({
+                stroke: {
+                    color: "red"
+                }
+            });
+        });
+
+    })();
+
+    (function() {
+        var Polyline = diagram.Polyline;
+        var polyline;
+        var drawingElement;
+
+
+        module("Polyline", {
+            setup: function() {
+                polyline = new Polyline({
+                    points: [
+                        new Point(10, 20),
+                        new Point(30, 40),
+                        new Point(15, 10)
+                    ]
+                });
+                drawingElement = polyline.drawingElement;
+            }
+        });
+
+        test("inits path", function() {
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 10, y: 20}));
+            ok(segments[1].anchor.equals({x: 30, y: 40}));
+            ok(segments[2].anchor.equals({x: 15, y: 10}));
+        });
+
+        test("redraw updates path", function() {
+            polyline.redraw({
+                points: [new Point(15, 30), new Point(35, 35)]
+            });
+            var segments = drawingElement.segments;
+            equal(segments.length, 2);
+            ok(segments[0].anchor.equals({x: 15, y: 30}));
+            ok(segments[1].anchor.equals({x: 35, y: 35}));
+        });
+
+        test("redraw trigger geometry change once", 1, function() {
+                drawingElement.geometryChange = function() {
+                ok(true);
+            };
+            polyline.redraw({
+                points: [new Point(15, 30), new Point(35, 35)]
+            });
+        });
+
+        test("redraw dose not trigger geometry change if points are not passed ", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            polyline.redraw({
+                stroke: {
+                    color: "red"
+                }
+            });
+        });
+
     })();
 
 })();
