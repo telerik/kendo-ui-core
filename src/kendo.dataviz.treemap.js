@@ -502,7 +502,12 @@ var __meta__ = {
         },
 
         createRoot: function(root) {
-            this.element.append(this._createLeaf(root));
+            var htmlElement = this._createLeaf(root);
+            this.element.append(htmlElement);
+
+            this.treeMap.trigger(ITEM_CREATED, {
+                element: htmlElement
+            });
         },
 
         _clean: function(root) {
