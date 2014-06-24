@@ -168,12 +168,12 @@ def start_product_creation()
       bot = TelerikProductCreateBot.instance
       product_names = ENV["ProductNames"].split(',')
 
-      p "number of products to create>>" + product_names.length
+      p "number of products to create>>" + product_names.length.to_s
 
       suite_alias = ENV["SuiteAlias"] || "KUI"
       
-      if product_name == nil
-        p "Please provide valid product name for the new product!"
+      if product_names == nil
+        p "Please provide valid product names for the new products!"
         return
       end
       
@@ -181,14 +181,34 @@ def start_product_creation()
       #return if bot.product_created(product_name, suite_alias)
       #bot.add_product(product_name, suite_alias)
 
-      bot.go_to_products
+      product_names.each do |product_name|
+        bot.go_to_products
 
-      tname = bot.navigate_to_section(suite_alias)
+        tname = bot.navigate_to_section(suite_alias)
 
-      bot.click_and_wait "New subproduct", "administration"
+        bot.click_and_wait "New subproduct", "administration"
 
-      p "creating product>>#{product_name}"
-      create_product(bot, product_name,suite_alias, tname)
+        p "creating product>>#{product_name}"
+        create_product(bot, product_name,suite_alias, tname)
+      end
+
+      tname = String.new
+          case suite_alias
+            when "KUI"
+              tname = "Kendo UI"
+            when "MVC"
+              tname = "ASP.NET MVC"
+            when "JSP"
+              tname = "JSP"
+            when "PHP"  
+              tname = "PHP"
+          end
+
+      product_names.each do |product_name|
+        p "creating code library for this product>>"
+        create_code_library(bot, product_name, tname)
+      end
+      bot.quit
 end
 def create_product(bot, product_name, suite_alias, tname)
     product_icon_path = String.new
@@ -271,9 +291,6 @@ def create_product(bot, product_name, suite_alias, tname)
     end
     p "creating forum for this product>>"
     create_forum(bot, product_name, suite_alias, tname)
-    p "creating code library for this product>>"
-    create_code_library(bot, product_name, tname)
-    bot.quit
 end
 def set_product_icon_path(bot, product_icon_path)
   element = bot.driver.find_element(:xpath, "//input[contains(@id,'_ruIconPicfile0')]")

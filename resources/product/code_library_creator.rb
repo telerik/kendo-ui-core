@@ -104,26 +104,30 @@ def set_cl_fields(bot, product_name)
       sleep(3)
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys '#{product_name}' 
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
-      bot.execute_script("$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
-      sleep(3)
-      bot.execute_script("$('span[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
-      sleep(3)
-      bot.execute_script("$('span[id*=\"pageUrl\"]').text('Code Library')")
-      sleep(3)
+      bot.execute_script("window.frames[0].$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
+      sleep(1)
+      bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
+      sleep(1)
+      bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').innerHTML = 'Code Library'")
+      #bot.driver.find_element(:xpath, "//span[contains(@id,'pageUrl')]")
+      sleep(1)
 
       if product_name.index("Mobile") == nil
-        bot.execute_script("$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
+        bot.execute_script("window.frames[0].$('[id*=\"urlName\"]').text('"+ product_name.downcase + "')")
       else
         product_name_mod = product_name.downcase.sub " (mobile)",""
-        bot.execute_script("$('[id*=\"urlName\"]').text('mobile-#{product_name_mod}')")
+        bot.execute_script("window.frames[0].$('[id*=\"urlName\"]').text('mobile-#{product_name_mod}')")
       end
-      sleep(3)
+      sleep(1)
 
-      bot.execute_script("$('[id*=\"_singleCheckBox\"]').click()")
-      sleep(3)
-      bot.execute_script("$('[id*=\"radioButtons\"]').click()")
-      sleep(3)
+      #bot.driver.find_element(:xpath, "//label[contains(text(),'Allow users to upload file attachments in posts')]").click
+      bot.execute_script("window.frames[0].$('label:contains(\"Allow users to upload file attachments in posts\")').click()")
+      sleep(1)
+      bot.execute_script("window.frames[0].$('label:contains(\"Define Manually\")').click()")
+      #bot.driver.find_element(:xpath, "//label[contains(text(),\"Define Manually\"]')").click
+      sleep(1)
       p "fields settings done>>"
-      bot.execute_script("$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
+      #bot.driver.find_element(:xpath, "//textarea[contains(@id,'AllowedAttachmentExtensionsText')]").type ".zip, .rar"
+      bot.execute_script("window.frames[0].$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
       #sleep(3)
 end
