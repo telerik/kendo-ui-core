@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Grid",
     category: "web",
     description: "The Grid widget displays tabular data and offers rich support for interacting with data,including paging, sorting, grouping, and selection.",
-    depends: [ "data" ],
+    depends: [ "data", "columnsorter" ],
     features: [ {
         id: "grid-editing",
         name: "Editing",
