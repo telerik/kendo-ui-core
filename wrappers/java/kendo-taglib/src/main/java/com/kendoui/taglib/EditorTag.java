@@ -51,6 +51,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "editor";
     }
 
+    public void setFileBrowser(com.kendoui.taglib.editor.FileBrowserTag value) {
+        setProperty("fileBrowser", value);
+    }
+
     public void setImageBrowser(com.kendoui.taglib.editor.ImageBrowserTag value) {
         setProperty("imageBrowser", value);
     }

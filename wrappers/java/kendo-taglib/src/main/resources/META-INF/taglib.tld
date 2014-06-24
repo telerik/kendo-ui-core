@@ -10372,12 +10372,16 @@ by setting the close animation. Each animation also has a direction which can be
         <name>contextMenu-animation</name>
         <tag-class>com.kendoui.taglib.contextmenu.AnimationTag</tag-class>
         <body-content>JSP</body-content>
+
+
     </tag>
+
     <tag>
         <description>The animation that will be used when closing sub menus.</description>
         <name>contextMenu-animation-close</name>
         <tag-class>com.kendoui.taglib.contextmenu.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
+
         <attribute>
             <description>Defines the close animation duration in milliseconds.</description>
             <name>duration</name>
@@ -10390,12 +10394,16 @@ by setting the close animation. Each animation also has a direction which can be
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
     </tag>
+
+
     <tag>
         <description>The animation that will be used when opening sub menus.</description>
         <name>contextMenu-animation-open</name>
         <tag-class>com.kendoui.taglib.contextmenu.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
+
         <attribute>
             <description>Defines the open animation duration in milliseconds.</description>
             <name>duration</name>
@@ -10408,13 +10416,19 @@ by setting the close animation. Each animation also has a direction which can be
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+
     </tag>
+
+
+
+
     <tag>
         <description>Contains the items of the menu widget</description>
         <name>contextMenu-items</name>
         <tag-class>com.kendoui.taglib.contextmenu.ItemsTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+
     <tag>
         <description>Contains the items of the menu widget</description>
         <name>contextMenu-item</name>
@@ -10458,6 +10472,9 @@ by setting the close animation. Each animation also has a direction which can be
             <type>java.lang.String</type>
         </attribute>
     </tag>
+
+
+
     <tag>
         <description>Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.</description>
         <name>contextMenu-close</name>
@@ -13049,6 +13066,454 @@ and a contenteditable iframe is generated.</description>
     </tag>
 
     <tag>
+        <description>Configuration for file browser dialog.</description>
+        <name>editor-fileBrowser</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the allowed file extensions.</description>
+            <name>fileTypes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the initial folder to display, relative to the root.</description>
+            <name>path</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Defines texts shown within the file browser.</description>
+        <name>editor-fileBrowser-messages</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines text for dialog shown when the file or directory is deleted.</description>
+            <name>deleteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for dialog shown when the directory not found error occurs.</description>
+            <name>directoryNotFound</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text displayed when folder does not contain items.</description>
+            <name>emptyFolder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for dialog shown when an invalid file is set for upload.</description>
+            <name>invalidFileType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for order by label.</description>
+            <name>orderBy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for Name item of order by drop down list.</description>
+            <name>orderByName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for Size item of order by drop down list.</description>
+            <name>orderBySize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for dialog shown when an already existing file is set for upload.</description>
+            <name>overwriteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for search box pleaceholder.</description>
+            <name>search</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines text for upload button.</description>
+            <name>uploadFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Set the object responsible for describing the file raw data format.</description>
+        <name>editor-fileBrowser-schema</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Set the object which describes the file/directory entry fields. Note that a name, type and size fields should be set.</description>
+        <name>editor-fileBrowser-schema-model</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field which acts as an identifier.</description>
+            <name>id</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description></description>
+        <name>editor-fileBrowser-schema-model-fields</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The field which contains the name of the file/directory</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field which contains the size of file.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field which contains the type of the entry. Either f for file or d for directory.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The field which contains the name of the file/directory</description>
+        <name>editor-fileBrowser-schema-model-fields-name</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsNameTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+        <name>editor-fileBrowser-schema-model-fields-name-parse</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsNameParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field which contains the size of file.</description>
+        <name>editor-fileBrowser-schema-model-fields-size</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsSizeTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+        <name>editor-fileBrowser-schema-model-fields-size-parse</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsSizeParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field which contains the type of the entry. Either f for file or d for directory.</description>
+        <name>editor-fileBrowser-schema-model-fields-type</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsTypeTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The name of the field.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Specifies the function which will parse the field value. If not set default parsers will be used.</description>
+        <name>editor-fileBrowser-schema-model-fields-type-parse</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserSchemaModelFieldsTypeParseFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+
+    <tag>
+        <description>Specifies the settings for loading and saving data.</description>
+        <name>editor-fileBrowser-transport</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.</description>
+            <name>create</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL responsible for serving the original file. A file name placeholder should be specified.</description>
+            <name>fileUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Options or URL for remote file retrieval.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL which will handle the upload of the new files. If not specified the Upload button will not be displayed.</description>
+            <name>uploadUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Options or URL which will handle the directory creation. If not specified that create new folder button will not be present.</description>
+        <name>editor-fileBrowser-transport-create</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportCreateTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-fileBrowser-transport-create-data</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportCreateDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when creating a new record.</description>
+        <name>editor-fileBrowser-transport-create-url</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportCreateUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Options or URL which will handle the file and directory deletion. If not specified the delete button will not be present.</description>
+        <name>editor-fileBrowser-transport-destroy</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportDestroyTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when creating a new record.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-fileBrowser-transport-destroy-data</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportDestroyDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when creating a new record.</description>
+        <name>editor-fileBrowser-transport-destroy-url</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportDestroyUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Options or URL for remote file retrieval.</description>
+        <name>editor-fileBrowser-transport-read</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportReadTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of data that you're expecting back from the server. Commonly used values are "json" and "jsonp".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The remote url to call when fetching list of items.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Data to be send to the server.
+Refer to the jQuery.ajax documentation for further info.</description>
+        <name>editor-fileBrowser-transport-read-data</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportReadDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The remote url to call when fetching list of items.</description>
+        <name>editor-fileBrowser-transport-read-url</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportReadUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The URL responsible for serving the original file. A file name placeholder should be specified.</description>
+        <name>editor-fileBrowser-transport-fileUrl</name>
+        <tag-class>com.kendoui.taglib.editor.FileBrowserTransportFileUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+
+    <tag>
         <description>Configuration for image browser dialog.</description>
         <name>editor-imageBrowser</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTag</tag-class>
@@ -13713,6 +14178,494 @@ current color and the input field.</description>
         <description>Triggers when a new color has been selected.</description>
         <name>flatColorPicker-change</name>
         <tag-class>com.kendoui.taglib.flatcolorpicker.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Gantt</description>
+        <name>gantt</name>
+        <tag-class>com.kendoui.taglib.GanttTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which contains the tasks. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.GanttDataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.GanttDataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.GanttDataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.GanttDependencyDataSource
+instance.If the dependencies option is set to a JavaScript object or array the widget will initialize a new kendo.data.GanttDependencyDataSource instance using that value as data source configuration.If the dependencies option is an existing kendo.data.GanttDependencyDataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dependencies</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the user won't be able to create, modify or delete tasks and dependencies.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The height of the widget. Numeric values are treated as pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The span of an hour slot.</description>
+            <name>hourSpan</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The width of the task list. Numeric values are treated as pixels.</description>
+            <name>listWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the user won't be able to select tasks in the gantt. By default selection is enabled and triggers the change event.</description>
+            <name>selectable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to false, gantt views will show all days of the week. By default the views display only business days.</description>
+            <name>showWorkDays</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to false, the day view will show all hours of the day. By default the view displays only business hours.</description>
+            <name>showWorkHours</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the gantt will snap tasks to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of tasks.</description>
+            <name>snap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Sets the end of the work day.</description>
+            <name>workDayEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>Sets the start of the work day.</description>
+            <name>workDayStart</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>The end of working week (index based).</description>
+            <name>workWeekEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The start of working week (index based).</description>
+            <name>workWeekStart</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>dataBinding</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a new task or a new dependency is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>add</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user starts task edit upon double click on a cell.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>edit</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a task or a dependency is about to be removed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>remove</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user cancels tasks's cell editing by pressing the 'Esc' key.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a task field is updated upon user interaction.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>navigate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user starts to drag a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>moveStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user is moving a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>move</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user stops moving a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>moveEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user starts to resize a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resizeStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user is resizing a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resize</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the user releases the mouse after resizing a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>resizeEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The gantt will create a column for every item of the array.</description>
+        <name>gantt-columns</name>
+        <tag-class>com.kendoui.taglib.gantt.ColumnsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration of the gantt columns. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+field to which the column is bound. The gantt will create a column for every item of the array.</description>
+        <name>gantt-column</name>
+        <tag-class>com.kendoui.taglib.gantt.ColumnTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>Specifies whether this column can be edited by the user.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The field to which the column is bound. The value of this field is displayed by the column during data binding.
+The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a standard number format,
+custom number format, standard date format or a custom date format.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the user could sort this column by clicking its header cells. By default sorting is disabled.</description>
+            <name>sortable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The text that is displayed in the column header cell. If not set the field is used.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the column. Numeric values are treated as pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>The configuration of the gantt messages. Use this option to customize or localize the gantt messages.</description>
+        <name>gantt-messages</name>
+        <tag-class>com.kendoui.taglib.gantt.MessagesTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The configuration of the gantt action messages. Use this option to customize or localize the gantt action messages.</description>
+        <name>gantt-messages-actions</name>
+        <tag-class>com.kendoui.taglib.gantt.MessagesActionsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Add child" displayed as gantt "add child" buttons.</description>
+            <name>addChild</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Append" displayed as gantt "append" buttons.</description>
+            <name>append</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Add below" displayed as gantt "add below" buttons.</description>
+            <name>insertAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Add above" displayed as gantt "add above" buttons.</description>
+            <name>insertBefore</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the gantt view messages. Use this option to customize or localize the gantt view messages.</description>
+        <name>gantt-messages-views</name>
+        <tag-class>com.kendoui.taglib.gantt.MessagesViewsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Day" displayed as gantt "day" view title.</description>
+            <name>day</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Month" displayed as gantt "month" view title.</description>
+            <name>month</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Week" displayed as gantt "week" view title.</description>
+            <name>week</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
+        <name>gantt-views</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The views displayed by the gantt and their configuration. The array items can be either objects specifying the view configuration or strings representing the view types (assuming default configuration).
+By default the Kendo UI Gantt widget displays all three ("day", "week", and "month") views.</description>
+        <name>gantt-view</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.</description>
+            <name>dayHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the month slots in "month" views.</description>
+            <name>monthHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the view will be initially selected by the gantt widget. The default selected view is "day".</description>
+            <name>selected</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The size of the time slot headers. Values are treated as pixels.</description>
+            <name>slotSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the time slots in "day" view</description>
+            <name>timeHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The view type. Supported types are "day", "week", and "month".</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.</description>
+            <name>weekHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the time slots in "day" view</description>
+        <name>gantt-view-timeHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewTimeHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.</description>
+        <name>gantt-view-dayHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewDayHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.</description>
+        <name>gantt-view-weekHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewWeekHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The [template](/kendo-ui/api/framework/kendo#methods-template used to render the month slots in "month" views.</description>
+        <name>gantt-view-monthHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewMonthHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-dataBinding</name>
+        <tag-class>com.kendoui.taglib.gantt.DataBindingFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-dataBound</name>
+        <tag-class>com.kendoui.taglib.gantt.DataBoundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a new task or a new dependency is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-add</name>
+        <tag-class>com.kendoui.taglib.gantt.AddFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user starts task edit upon double click on a cell.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-edit</name>
+        <tag-class>com.kendoui.taglib.gantt.EditFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a task or a dependency is about to be removed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-remove</name>
+        <tag-class>com.kendoui.taglib.gantt.RemoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user cancels tasks's cell editing by pressing the 'Esc' key.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-cancel</name>
+        <tag-class>com.kendoui.taglib.gantt.CancelFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a task field is updated upon user interaction.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-save</name>
+        <tag-class>com.kendoui.taglib.gantt.SaveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user selects a task in the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-change</name>
+        <tag-class>com.kendoui.taglib.gantt.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user changes the selected view of the gantt.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-navigate</name>
+        <tag-class>com.kendoui.taglib.gantt.NavigateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user starts to drag a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-moveStart</name>
+        <tag-class>com.kendoui.taglib.gantt.MoveStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user is moving a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-move</name>
+        <tag-class>com.kendoui.taglib.gantt.MoveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user stops moving a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-moveEnd</name>
+        <tag-class>com.kendoui.taglib.gantt.MoveEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user starts to resize a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-resizeStart</name>
+        <tag-class>com.kendoui.taglib.gantt.ResizeStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user is resizing a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-resize</name>
+        <tag-class>com.kendoui.taglib.gantt.ResizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user releases the mouse after resizing a task.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>gantt-resizeEnd</name>
+        <tag-class>com.kendoui.taglib.gantt.ResizeEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -32433,7 +33386,6 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <tag-class>com.kendoui.taglib.timepicker.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
-
     <tag>
         <description>ToolBar</description>
         <name>toolBar</name>
@@ -32846,7 +33798,6 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <tag-class>com.kendoui.taglib.toolbar.OverflowOpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
-
     <tag>
         <description>Tooltip</description>
         <name>tooltip</name>
@@ -33025,6 +33976,77 @@ will disable all animations in the widget.</description>
         <description>Triggered when an AJAX request for content fails.</description>
         <name>tooltip-error</name>
         <tag-class>com.kendoui.taglib.tooltip.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>TreeMap</description>
+        <name>treeMap</name>
+        <tag-class>com.kendoui.taglib.TreeMapTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the tile color.</description>
+            <name>colorField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default colors for the treemap tiles. When all colors are used, new colors are pulled from the start again.</description>
+            <name>colors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the treeMap which is used to display the tiles and titles. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.HierarchicalDataSource
+instance.If the HierarchicalDataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.HierarchicalDataSource instance using that value as data source configuration.If the HierarchicalDataSource option is an existing kendo.data.HierarchicalDataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the treeMap tile content.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the tile title.</description>
+            <name>textField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the tile value.</description>
+            <name>valueField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the widget is bound to data from its dataSource.</description>
+            <name>dataBound</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Fired when the widget is bound to data from its dataSource.</description>
+        <name>treeMap-dataBound</name>
+        <tag-class>com.kendoui.taglib.treemap.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

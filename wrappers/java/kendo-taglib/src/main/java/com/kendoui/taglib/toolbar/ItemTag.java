@@ -50,14 +50,6 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
         return "toolBar-item";
     }
 
-    public boolean getEnabled() {
-        return (boolean)getProperty("enabled");
-    }
-
-    public void setEnabled(boolean value) {
-        setProperty("enabled", value);
-    }
-
     public void setButtons(ItemButtonsTag value) {
 
         setProperty("buttons", value.buttons());
@@ -245,21 +237,6 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
     public void setUrl(java.lang.String value) {
         setProperty("url", value);
     }
-
-    @Override
-    protected boolean getExpanded() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    public boolean getSelected() {
-        return (boolean)getProperty("selected");
-    }
-
-    public void setSelected(boolean value) {
-        setProperty("selected", value);
-    }
-
 
 //<< Attributes
 
