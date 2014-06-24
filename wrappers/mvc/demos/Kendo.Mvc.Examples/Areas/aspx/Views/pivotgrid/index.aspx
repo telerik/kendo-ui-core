@@ -17,6 +17,10 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <%= Html.Kendo().PivotConfigurator()
+        .Name("configurator")
+    %>
+
     <%= Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .Height(550)
@@ -42,10 +46,6 @@
             )
             .Events(e => e.Error("onError"))
         )
-    %>
-
-    <%= Html.Kendo().PivotConfigurator()
-        .Name("configurator")
     %>
 
 <script>

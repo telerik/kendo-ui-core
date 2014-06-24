@@ -1,4 +1,8 @@
-﻿@(Html.Kendo().PivotGrid()
+﻿@(Html.Kendo().PivotConfigurator()
+    .Name("configurator")
+)
+
+@(Html.Kendo().PivotGrid()
     .Name("pivotgrid")
     .Height(550)
     .Configurator("#configurator")
@@ -23,10 +27,6 @@
         )
         .Events(e => e.Error("onError"))
     )
-)
-
-@(Html.Kendo().PivotConfigurator()
-    .Name("configurator")
 )
 
 <script>
