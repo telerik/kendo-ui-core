@@ -306,29 +306,26 @@ def fill_forum_fields(bot, product_name, tname)
     end
 
     if tname == "Kendo UI"
-       #bot.driver.execute_script <<-SCRIPT
-         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("#{product_name} for #{tname}");
-         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
-         #$telerik.$(textElement).click()
-       #SCRIPT
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('#{product_name} for #{tname}')")
+       bot.execute_script <<-SCRIPT
+         var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("#{product_name} for #{tname}");
+         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
+         $telerik.$(textElement).click()
+       SCRIPT
        sleep(1)
     elsif product_name.index("Mobile") == nil
-       #bot.driver.execute_script <<-SCRIPT
-         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI #{product_name} for #{tname}");
-         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
-         #$telerik.$(textElement).click()
-       #SCRIPT
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI #{product_name} for #{tname}')")
+       bot.execute_script <<-SCRIPT
+         var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI #{product_name} for #{tname}");
+         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
+         $telerik.$(textElement).click()
+       SCRIPT
        sleep(1)
     else
        product_name_mod = product_name.sub " (Mobile)", ""
-       #bot.driver.execute_script <<-SCRIPT
-         #var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI Mobile #{product_name_mod} for #{tname}");
-         #var textElement = $telerik.$(node.get_element()).find('.rtIn')[0];
-         #$telerik.$(textElement).click();
-       #SCRIPT
-       bot.execute_script("$find($telerik.$('[id$=\"_rcbProducts\"]').attr('id')).set_text('Kendo UI Mobile #{product_name_mod} for #{tname}')")
+       bot.execute_script <<-SCRIPT
+         var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI Mobile #{product_name_mod} for #{tname}");
+         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0];
+         $telerik.$(textElement).click();
+       SCRIPT
        sleep(1)
     end
 
