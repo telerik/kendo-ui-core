@@ -29,10 +29,23 @@ class ContextMenuItem extends \Kendo\UI\NavigationalItem {
             $element->attr('disabled', 'disabled');
         }
 
-        $this->renderContent($element);
+        if ($this->getProperty('separator')) {
+            $element->attr('class', 'k-separator');
+        } else {
+            $this->renderContent($element);
+        }
 
         return $element;
     }
+
+    /**
+    * Specifies the item should render separator
+    * @return \Kendo\UI\ContextMenuItem
+    */
+    public function separator() {
+        return $this->setProperty('separator', $value);
+    }
+
 //>> Properties
 
     /**
