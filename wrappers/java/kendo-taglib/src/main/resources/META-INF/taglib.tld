@@ -34035,6 +34035,11 @@ instance.If the HierarchicalDataSource option is set to a JavaScript object or a
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Fired when a tile has been created.</description>
+            <name>itemCreated</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the widget is bound to data from its dataSource.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
@@ -34043,6 +34048,12 @@ instance.If the HierarchicalDataSource option is set to a JavaScript object or a
     </tag>
 
 
+    <tag>
+        <description>Fired when a tile has been created.</description>
+        <name>treeMap-itemCreated</name>
+        <tag-class>com.kendoui.taglib.treemap.ItemCreatedFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fired when the widget is bound to data from its dataSource.</description>
         <name>treeMap-dataBound</name>

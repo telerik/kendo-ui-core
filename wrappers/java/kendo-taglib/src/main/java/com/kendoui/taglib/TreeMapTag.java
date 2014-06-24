@@ -7,6 +7,7 @@ import com.kendoui.taglib.json.Function;
 
 
 import com.kendoui.taglib.treemap.DataBoundFunctionTag;
+import com.kendoui.taglib.treemap.ItemCreatedFunctionTag;
 
 import javax.servlet.jsp.JspException;
 
@@ -49,6 +50,10 @@ public class TreeMapTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setDataBound(DataBoundFunctionTag value) {
         setEvent("dataBound", value.getBody());
+    }
+
+    public void setItemCreated(ItemCreatedFunctionTag value) {
+        setEvent("itemCreated", value.getBody());
     }
 
     public boolean getAutoBind() {
@@ -113,6 +118,18 @@ public class TreeMapTag extends WidgetTag /* interfaces */implements DataBoundWi
 
     public void setDataBound(String value) {
         setProperty("dataBound", new Function(value));
+    }
+
+    public String getItemCreated() {
+        Function property = ((Function)getProperty("itemCreated"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setItemCreated(String value) {
+        setProperty("itemCreated", new Function(value));
     }
 
 //<< Attributes
