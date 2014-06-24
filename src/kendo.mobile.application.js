@@ -251,6 +251,10 @@ var __meta__ = {
                 os = $.extend({}, os, { skin: split[0], variant: split[1] });
             }
 
+            if (!os.variant) {
+                os.variant = "dark";
+            }
+
             that.os = os;
 
             that.osCssClass = osCssClass(that.os, that.options);
