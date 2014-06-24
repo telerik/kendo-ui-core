@@ -873,18 +873,51 @@
 
     var Image = Element.extend({
         init: function (options) {
-            Element.fn.init.call(this, document.createElementNS(SVGNS, "image"), options);
+            Element.fn.init.call(this, options);
+
+            this._initImage();
         },
-        options: {
-            autoSize: true
-        },
+
         redraw: function (options) {
+            options = options || {};
+            if (options.source) {
+                this.drawingElement.src(options.source);
+            }
+
+            if (defined(options.x) || defined(options.y) ||
+                defined(options.width) || defined(options.height)) {
+                deepExtend(this.options, {
+                    x: options.x,
+                    y: options.y,
+                    width: options.width,
+                    height: options.height
+                });
+                this.drawingElement.rect(this._rect());
+            }
+
             Element.fn.redraw.call(this, options);
-            this.domElement.setAttributeNS(SVGXLINK, "href", this.options.source);
-            this.setAtr("width", "width");
-            this.setAtr("height", "height");
-            this.setAtr("x", "x");
-            this.setAtr("y", "y");
+        },
+
+        _initImage: function() {
+            var options = this.options;
+            var rect = this._rect();
+
+            this.drawingElement = new d.Image(options.source, rect, {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
+        _rect: function() {
+            var options = this.options;
+            var width = options.width || 0;
+            var height = options.height || 0;
+            var x = options.x || 0;
+            var y = options.y || 0;
+            var p0 = new g.Point(x, y);
+            var p1 = p0.clone().translate(width, height);
+
+            return new g.Rect(p0, p1);
         }
     });
 

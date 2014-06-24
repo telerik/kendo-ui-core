@@ -944,4 +944,72 @@
 
     })();
 
+    (function() {
+        var Image = diagram.Image;
+        var image;
+        var drawingElement;
+
+        module("Image", {
+            setup: function() {
+                image = new Image({
+                    source: "foo",
+                    x: 10,
+                    y: 10,
+                    width: 30,
+                    height: 40
+                });
+                drawingElement = image.drawingElement;
+            }
+        });
+
+        test("inits source", function() {
+            equal(drawingElement.src(), "foo");
+        });
+
+        test("inits rectangle", function() {
+            var rect = drawingElement.rect();
+            ok(rect.p0.equals({x: 10, y: 10}));
+            ok(rect.p1.equals({x: 40, y: 50}));
+        });
+
+        test("redraw updates source", function() {
+            image.redraw({
+                source: "bar"
+            });
+            equal(drawingElement.src(), "bar");
+        });
+
+        test("redraw updates rectangle", function() {
+            image.redraw({
+                width: 100,
+                height:  50,
+                x: 50,
+                y: 50
+            });
+            var rect = drawingElement.rect();
+            ok(rect.p0.equals({x: 50, y: 50}));
+            ok(rect.p1.equals({x: 150, y: 100}));
+        });
+
+        test("redraw triggers geometry change once", 1, function() {
+            drawingElement.geometryChange = function() {
+                ok(true);
+            };
+            image.redraw({
+                width: 100,
+                height:  50,
+                x: 50,
+                y: 50
+            });
+        });
+
+        test("redraw does not trigger geometry change if non of the x, y, width, height options are passed", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            image.redraw();
+        });
+
+    })();
+
 })();
