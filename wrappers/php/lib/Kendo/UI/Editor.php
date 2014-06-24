@@ -100,6 +100,15 @@ and a contenteditable iframe is generated.
     }
 
     /**
+    * Configuration for file browser dialog.
+    * @param \Kendo\UI\EditorFileBrowser|array $value
+    * @return \Kendo\UI\Editor
+    */
+    public function fileBrowser($value) {
+        return $this->setProperty('fileBrowser', $value);
+    }
+
+    /**
     * The tag that will be rendered. Defaults to "textarea". Triggers the inline edit mode if different.
     * @param string $value
     * @return \Kendo\UI\Editor
