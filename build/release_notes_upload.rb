@@ -94,7 +94,7 @@ def set_path_and_upload()
     bot = TelerikReleaseNotesBot.instance
 
     #Beta release
-    if defined? Beta
+    if defined? BETA
       if ENV["DRY_RUN"]
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/DRY_RUN_BETA/changelogs"
       else
@@ -158,7 +158,7 @@ def upload_files_and_validate(bot, archive_path, productName)
 end
 def set_fields_data(bot, productName)
     #Beta release notes
-    if defined? Beta
+    if defined? BETA
       bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} Beta')")
       #due to mandatory non-empty value requirement (form validation bug)
       bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('11')")
