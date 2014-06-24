@@ -79,10 +79,6 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("dataSource", dataSource);
     }
 
-    public void setDataSource(PivotDataSourceTag dataSource) {
-        setProperty("dataSource", dataSource);
-    }
-    
     public java.lang.Object getHeight() {
         return (java.lang.Object)getProperty("height");
     }

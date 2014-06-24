@@ -18339,6 +18339,81 @@ is closed. Options include "fadeOut".</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>PivotConfigurator</description>
+        <name>pivotConfigurator</name>
+        <tag-class>com.kendoui.taglib.PivotConfiguratorTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing kendo.data.PivotDataSource
+instance.If the dataSource option is set to a JavaScript object the widget will initialize a new kendo.data.PivotDataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.PivotDataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>The text messages displayed in the fields sections.</description>
+        <name>pivotConfigurator-messages</name>
+        <tag-class>com.kendoui.taglib.pivotconfigurator.MessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text messages displayed in the column fields sections.</description>
+            <name>columns</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed for column label.</description>
+            <name>columnsLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed for fields label.</description>
+            <name>fieldsLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed in the measure fields sections.</description>
+            <name>measures</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed for measure label.</description>
+            <name>measuresLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed in the row fields sections.</description>
+            <name>rows</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed for rows label.</description>
+            <name>rowsLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>PivotGrid</description>
         <name>pivotGrid</name>
         <tag-class>com.kendoui.taglib.PivotGridTag</tag-class>
