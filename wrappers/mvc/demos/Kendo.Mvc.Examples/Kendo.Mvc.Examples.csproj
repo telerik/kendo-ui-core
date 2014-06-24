@@ -1173,6 +1173,7 @@
     <Content Include="Areas\razor\Views\range_bar_charts\index.cshtml" />
     <None Include="Areas\razor\Views\diagram\index.cshtml" />
     <None Include="Areas\razor\Views\diagram\layout.cshtml" />
+    <None Include="Areas\razor\Views\treemap\index.cshtml" />
     <Content Include="Content\dataviz\dashboards\area-chart.png" />
     <Content Include="Content\dataviz\dashboards\car-dashboard.png" />
     <Content Include="Content\dataviz\dashboards\car.gif" />
@@ -2530,6 +2531,7 @@
     <Content Include="Areas\razor\Views\toolbar\events.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\api.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\integration.cshtml" />
+    <Content Include="Content\dataviz\js\population-usa.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />
