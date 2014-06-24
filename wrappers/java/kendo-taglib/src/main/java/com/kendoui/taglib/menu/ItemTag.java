@@ -123,4 +123,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
 //<< Attributes
 
+    public boolean getSeparator() {
+        return (boolean)getProperty("separator");
+    }
+
+    public void setSeparator(boolean value) {
+        setProperty("separator", value);
+    }
+
 }
