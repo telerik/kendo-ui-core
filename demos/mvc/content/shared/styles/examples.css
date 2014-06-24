@@ -2151,7 +2151,11 @@ a.footer-links:hover,
     color: #000;
     text-decoration: none;
     background-color: #e2e4e7;
+}
 
+.k-hover-enabled #root-nav li a:hover,
+.k-hover-enabled #example-nav li a:hover {
+    background-color: transparent;
 }
 
 #example-nav .active {

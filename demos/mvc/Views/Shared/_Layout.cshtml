@@ -38,6 +38,12 @@
             $("#main").height(navHeight + searchWrapper);
         }
 
+        $(function () {
+            if (kendo.support.mobileOS) {
+                $(document.documentElement).addClass("k-hover-enabled");
+            }
+        });
+
         $(document).ready(resizeContainers);
         $(window).resize(resizeContainers);
     </script>
