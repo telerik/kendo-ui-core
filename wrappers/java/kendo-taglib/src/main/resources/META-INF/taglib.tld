@@ -36272,5 +36272,17 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <tag-class>com.kendoui.taglib.datasource.TransportReadUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
-        
+    
+    <tag>
+        <description>The name of PivotConfigurator widget</description>
+        <name>pivotGrid-configurator</name>
+        <tag-class>com.kendoui.taglib.pivotgrid.ConfiguratorTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of PivotConfigurator widget</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>    
 </taglib>

@@ -145,4 +145,7 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
 
 //<< Attributes
 
+    public void setConfigurator(com.kendoui.taglib.pivotgrid.ConfiguratorTag value) {
+        setProperty("configurator", "#" + value.getName());
+    }
 }
