@@ -486,4 +486,177 @@
 
     })();
 
+    (function() {
+        var TextBlock = diagram.TextBlock;
+        var textblock;
+        var drawingElement;
+        var SANS = "sans-serif";
+        var ARIAL = "arial";
+
+        module("TextBlock", {
+            setup: function() {
+                textblock = new TextBlock({
+                    color: "red",
+                    fontSize: 10,
+                    fontFamily: SANS,
+                    text: "foo",
+                    fill: {
+                        opacity: 0.7
+                    },
+                    stroke: {
+                        color: "red",
+                        width: 2,
+                        opacity: 0.5,
+                        dashType: "dotted"
+                    }
+                });
+                drawingElement = textblock.drawingElement;
+            }
+        });
+
+        test("inits color", function() {
+            equal(textblock.options.fill.color, "#ff0000");
+        });
+
+        test("inits font", function() {
+            equal(textblock.options.font, "10px " + SANS);
+        });
+
+        test("sets drawing text", function() {
+            equal(drawingElement.content(), "foo");
+        });
+
+        test("sets empty string for text if text is undefined", function() {
+            textblock = new TextBlock({});
+            equal(textblock.drawingElement.content(), "");
+        });
+
+        test("sets drawing font", function() {
+            equal(drawingElement.options.font, "10px " + SANS);
+        });
+
+        test("sets drawing fill", function() {
+            var fill = drawingElement.options.fill;
+            equal(fill.color, "#ff0000");
+            equal(fill.opacity, 0.7);
+        });
+
+        test("sets drawing stroke", function() {
+            var stroke = drawingElement.options.stroke;
+            equal(stroke.color, "#ff0000");
+            equal(stroke.width, 2);
+            equal(stroke.opacity, 0.5);
+            equal(stroke.dashType, "dotted");
+        });
+
+        test("content returns drawing text", function() {
+            equal(textblock.content(), "foo");
+        });
+
+        test("content sets drawing text", function() {
+            textblock.content("bar");
+            equal(drawingElement.content(), "bar");
+        });
+
+        test("redraw sets color", function() {
+            textblock.redraw({color: "blue"});
+            equal(textblock.options.fill.color, "#0000ff");
+        });
+
+        test("redraw renders color", function() {
+            textblock.redraw({color: "blue"});
+            equal(drawingElement.options.fill.color, "#0000ff");
+        });
+
+        test("redraw sets font", function() {
+            textblock.redraw({fontFamily: ARIAL});
+            equal(textblock.options.font, "10px " + ARIAL);
+            textblock.redraw({fontSize: 15});
+            equal(textblock.options.font, "15px " + ARIAL);
+        });
+
+        test("redraw renders font", function() {
+            textblock.redraw({fontFamily: ARIAL});
+            equal(drawingElement.options.font, "10px " + ARIAL);
+            textblock.redraw({fontSize: 15});
+            equal(drawingElement.options.font, "15px " + ARIAL);
+        });
+
+        test("redraw renders text", function() {
+            textblock.redraw({text: "bar"});
+            equal(drawingElement.content(), "bar");
+        });
+
+        test("redraw transforms text to fit new width and height", function() {
+            textblock.drawingElement.measure = function() {
+                return {
+                    height: 10,
+                    width: 20
+                };
+            };
+
+            textblock.redraw({
+                height: 50,
+                width: 200
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 10);
+            equal(matrix.d, 5);
+        });
+
+        test("redraw transforms text to fit width and height based on new text", function() {
+            textblock.drawingElement.measure = function() {
+                return {
+                    height: 10,
+                    width: 20
+                };
+            };
+            textblock.options.width = 200;
+            textblock.options.height = 50;
+
+            textblock.redraw({
+                text: "bar"
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 10);
+            equal(matrix.d, 5);
+        });
+
+        test("redraw transforms text to fit width and height based on new font", function() {
+            textblock.drawingElement.measure = function() {
+                return {
+                    height: 10,
+                    width: 20
+                };
+            };
+            textblock.options.width = 200;
+            textblock.options.height = 50;
+
+            textblock.redraw({
+                fontSize: 15
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 10);
+            equal(matrix.d, 5);
+        });
+
+        test("redraw does not transform text if size has not changed", function() {
+            textblock.drawingElement.measure = function() {
+                return {
+                    height: 10,
+                    width: 20
+                };
+            };
+            textblock.options.width = 100;
+            textblock.options.height = 50;
+
+            textblock.redraw({
+                color: "green"
+            });
+
+            equal(drawingElement.transform(), undefined);
+        });
+
+    })();
+
 })();

@@ -251,7 +251,7 @@
                 var drawingElement = this.drawingElement;
                 var box = drawingElement.rawBBox();
                 var startPoint = box.topLeft();
-                rect =  new Rect(startPoint.x, startPoint.y, box.width(), box.height());
+                rect = new Rect(startPoint.x, startPoint.y, box.width(), box.height());
                 this._originSize = rect;
                 this._originWidth = rect.width;
                 this._originHeight = rect.height;
@@ -360,11 +360,15 @@
                 this.position(options.x, options.y);
             }
 
-            if (defined(options.width) && defined(options.height)) {
+            if (this._hasSize(options)) {
                 this.size(options);
             }
 
             VisualBase.fn.redraw.call(this, options);
+        },
+
+        _hasSize: function(options) {
+            return defined(options.width) && defined(options.height);
         },
 
         size: function (size) {
@@ -381,70 +385,95 @@
         }
     });
 
-    var TextBlock = VisualBase.extend({
+    var TextBlock = Visual.extend({
         init: function (options) {
-            var that = this;
-            Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
-            this.domElement.setAttribute("dominant-baseline", "hanging");
+            this._textColor(options);
+            Visual.fn.init.call(this, options);
+            this._font();
+
+            options = this.options;
+
+            this.drawingElement = new d.Text(defined(options.text) ? options.text : "", new g.Point(), {
+                fill: options.fill,
+                stroke: options.stroke,
+                font: options.font
+            });
+
+            this._size();
         },
+
         options: {
             stroke: {
                 color: "none",
                 width: 0,
-                dashType: "none"
+                dashType: "solid"
             },
             fontSize: 15,
-            fontVariant: "normal",
-            fontWeight: "normal",
-            anchor: "middle",
-            background: "black",
-            align: ""
+            fill: {
+                color: "black"
+            }
         },
+
+        _textColor: function(options) {
+            if (options && options.color) {
+                deepExtend(options, {
+                    fill: {
+                        color: options.color
+                    }
+                });
+            }
+        },
+
+        _font: function() {
+            var options = this.options;
+            if (options.fontFamily && defined(options.fontSize)) {
+                options.font = options.fontSize + "px " + options.fontFamily;
+            }
+        },
+
         content: function (text) {
-            if (text !== undefined) {
-                this.domElement.textContent = this.options.text = text;
-                this._align();
-            }
-
-            return this.options.text;
+            return this.drawingElement.content(text);
         },
+
         redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            this.setAtr("font-family", "fontFamily");
-            this.setAtr("font-variant", "fontVariant");
-            this.setAtr("font-size", "fontSize");
-            this.setAtr("font-weight", "fontWeight");
-            this.setAtr("font-style", "fontStyle");
-            this.setAtr("text-decoration", "textDecoration");
-            this.setAtr("fill", "color");
-            this.content(this.options.text);
-        },
-        size: function () {
-            sizeTransform(this);
-        },
-        bounds: function () {
-            var o = this.options,
-                containerRect = new Rect(0, 0, o.width, o.height);
-            return containerRect;
-        },
-        align: function (alignment) {
-            this.options.align = alignment;
-            this._align(alignment);
-        },
-        _align: function () {
-            if (!this.options.align) {
-                return;
-            }
-            this._measure(true);
-            var o = this.options,
-                containerRect = this.bounds(),
-                aligner = new RectAlign(containerRect),
-                contentBounds = aligner.align(this._originSize, o.align);
+            var sizeChanged = false;
+            var textOptions = this.options;
+            options = options || {};
+            this._textColor(options);
 
-            this.position(contentBounds.topLeft());
-            o.width = contentBounds.width;
-            o.height = contentBounds.height;
-            this.size();
+            Visual.fn.redraw.call(this, options);
+
+            if (options.fontFamily || defined(options.fontSize)) {
+                deepExtend(textOptions, {
+                    fontFamily: options.fontFamily,
+                    fontSize: options.fontSize
+                });
+                this._font();
+                this.drawingElement.options.set("font", textOptions.font);
+                sizeChanged = true;
+            }
+
+            if (options.text) {
+                this.content(options.text);
+                sizeChanged = true;
+            }
+
+            if (sizeChanged || this._hasSize(options)) {
+                this._size();
+            }
+        },
+
+        _size: function() {
+            if (this._hasSize(this.options)) {
+                this._measure(true);
+                sizeTransform(this);
+            }
+        },
+
+        bounds: function () {
+            var options = this.options,
+                rect = new Rect(0, 0, options.width, options.height);
+            return rect;
         }
     });
 
@@ -537,12 +566,14 @@
 
     var Rectangle = Visual.extend({
         init: function (options) {
-            Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
+            Visual.fn.init.call(this, options);
         },
+
         options: {
             stroke: {},
             background: "none"
         },
+
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);
             this.setAtr("rx", "cornerRadius");
