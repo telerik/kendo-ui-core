@@ -8,7 +8,7 @@
     <div class="demo-section k-header">
         <h4>Customize the element</h4>
         
-        <kendo:toolBar name="toolbar" toggle="onToggle">
+        <kendo:toolBar name="toolbar" toggle="onToggle" resizable="false">
 		   	<kendo:toolBar-items>
 		   		<kendo:toolBar-item template="<label>SHAPE:</label><input id='shape' />"></kendo:toolBar-item>
 		   		<kendo:toolBar-item type="separator"></kendo:toolBar-item>
