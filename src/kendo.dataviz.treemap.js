@@ -126,7 +126,7 @@ var __meta__ = {
                         item = root.children[i];
                         if (!defined(item.color)) {
                             if (typeof(colors[0]) === "string") {
-                                item.color = colors[i];
+                                item.color = colors[i % colors.length];
                             } else {
                                 var currentColors = colors[i % colors.length];
                                 item.color = currentColors[0];
