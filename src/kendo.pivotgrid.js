@@ -2275,10 +2275,10 @@ var __meta__ = {
             contentTable.add(this.columnsHeader.children("table"))
                         .css("min-width", minWidth + "%");
 
-            this._setContentHeight();
+            this._setContentHeight(minWidth);
         },
 
-        _setContentHeight: function() {
+        _setContentHeight: function(minWidth) {
             var that = this;
             var content = that.content;
             var rowsHeader = that.rowsHeader;
@@ -2287,6 +2287,10 @@ var __meta__ = {
 
             if (that.wrapper.is(":visible")) {
                 if (!height) {
+                    if (minWidth > 100) {
+                        scrollbar = 0;
+                    }
+
                     rowsHeader.height(content.height() - scrollbar);
                     return;
                 }
