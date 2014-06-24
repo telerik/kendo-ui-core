@@ -37,5 +37,24 @@
         {
             ganttModel.ParentId = fieldName;
         }
+
+        /// <summary>
+        /// Specify the member used for the orderId.
+        /// </summary>
+        /// <typeparam name="TValue">Type of the field</typeparam>
+        /// <param name="expression">Member access expression which describes the member</param>
+        public void OrderId<TValue>(Expression<Func<TModel, TValue>> expression)
+        {
+            ganttModel.OrderId = expression.MemberWithoutInstance();
+        }
+
+        /// <summary>
+        /// Specify the member used for the orderId.
+        /// </summary>
+        /// <param name="fieldName">The member name.</param>
+        public void OrderId(string fieldName)
+        {
+            ganttModel.OrderId = fieldName;
+        }
     }
 }

@@ -40,7 +40,7 @@
             set;
         }
 
-        int OrderID
+        int OrderId
         {
             get;
             set;

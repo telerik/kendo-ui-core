@@ -31,7 +31,7 @@
                 End = DateTime.SpecifyKind(task.End, DateTimeKind.Utc),
                 ParentID = task.ParentID,
                 PercentComplete = task.PercentComplete,
-                OrderID = task.OrderID,
+                OrderId = task.OrderID,
                 Expanded = task.Expanded,
                 Summary = task.Summary
             }).AsQueryable();  

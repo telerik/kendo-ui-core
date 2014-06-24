@@ -13,6 +13,8 @@
 
         public string ParentId { get; set; }
 
+        public string OrderId { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Id != null)
@@ -40,6 +42,11 @@
                 else if (ParentId.HasValue() && currentMember == ParentId)
                 {
                     fields["parentId"] = field;
+                    field["from"] = currentMember;
+                }
+                else if (OrderId.HasValue() && currentMember == OrderId)
+                {
+                    fields["orderId"] = field;
                     field["from"] = currentMember;
                 }
                 else

@@ -42,7 +42,7 @@
         public bool Summary { get; set; }
         public bool Expanded { get; set; }
         public decimal PercentComplete { get; set; }
-        public int OrderID { get; set; }
+        public int OrderId { get; set; }
 
         public GanttTask ToEntity()
         {
@@ -56,7 +56,7 @@
                 Summary = Summary,
                 Expanded = Expanded,
                 PercentComplete = PercentComplete,
-                OrderID = OrderID
+                OrderID = OrderId
             };
         }
     }

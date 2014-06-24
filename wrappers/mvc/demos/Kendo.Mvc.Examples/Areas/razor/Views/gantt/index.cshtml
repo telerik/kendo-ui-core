@@ -21,6 +21,7 @@
         {
             m.Id(f => f.TaskID);
             m.ParentId(f => f.ParentID);
+            m.OrderId(f => f.OrderId);
         })
         .Read("ReadTasks", "Gantt")
         .Create("CreateTask", "Gantt")
