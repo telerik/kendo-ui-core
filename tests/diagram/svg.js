@@ -659,4 +659,64 @@
 
     })();
 
+    (function() {
+        var Rectangle = diagram.Rectangle;
+        var rectangle;
+        var drawingElement;
+
+
+        module("Rectangle", {
+            setup: function() {
+                rectangle = new Rectangle({
+                    width: 200,
+                    height: 100
+                });
+                drawingElement = rectangle.drawingElement;
+            }
+        });
+
+        test("inits path", function() {
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 0, y: 0}));
+            ok(segments[1].anchor.equals({x: 200, y: 0}));
+            ok(segments[2].anchor.equals({x: 200, y: 100}));
+            ok(segments[3].anchor.equals({x: 0, y: 100}));
+            equal(drawingElement.options.closed, true);
+        });
+
+        test("updates path", function() {
+            rectangle.redraw({
+                width: 300,
+                height: 50
+            });
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 0, y: 0}));
+            ok(segments[1].anchor.equals({x: 300, y: 0}));
+            ok(segments[2].anchor.equals({x: 300, y: 50}));
+            ok(segments[3].anchor.equals({x: 0, y: 50}));
+        });
+
+        test("triggers geometry change once on update", 1, function() {
+            drawingElement.geometryChange = function() {
+                ok(true);
+            };
+            rectangle.redraw({
+                width: 300,
+                height: 50
+            });
+        });
+
+        test("does not trigger geometry change if width and height are not changed", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            rectangle.redraw({
+                stroke: {
+                    color: "green"
+                }
+            });
+        });
+
+    })();
+
 })();

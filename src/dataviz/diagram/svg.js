@@ -567,18 +567,57 @@
     var Rectangle = Visual.extend({
         init: function (options) {
             Visual.fn.init.call(this, options);
+            this._initPath();
+        },
+
+        _initPath: function() {
+            var options = this.options;
+            var width = options.width;
+            var height = options.height;
+
+            var drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            var points = [new g.Point(),
+                new g.Point(width, 0),
+                new g.Point(width, height),
+                new g.Point(0, height)];
+
+            drawingElement.moveTo(points[0]);
+            for (var i = 1; i < 4; i++) {
+                drawingElement.lineTo(points[i]);
+            }
+
+            drawingElement.close();
+            this.drawingElement = drawingElement;
+            this._points = points;
         },
 
         options: {
             stroke: {},
-            background: "none"
+            fill: {
+                color: "none"
+            }
         },
 
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);
-            this.setAtr("rx", "cornerRadius");
-            this.setAtr("ry", "cornerRadius");
-            this._setStroke();
+            if (this._hasSize(options || {})) {
+                this._updatePath();
+            }
+        },
+
+        _updatePath: function() {
+            var points = this._points;
+            var options = this.options;
+            var width = options.width;
+            var height = options.height;
+
+            points[1].x = width;
+            points[3].y = height;
+            points[2].move(width, height);
         }
     });
 
