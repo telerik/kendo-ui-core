@@ -95,7 +95,7 @@ def create_cl_thread(bot, product_name, tname)
       set_cl_fields(bot, product_name)
       
       p "saving>>"
-      bot.execute_script("$('[id*=\"saveButton\"]').click()")
+      bot.execute_script("window.frames[0].$('[id*=\"saveButton\"]').click()")
       sleep(3)
     end
 end
@@ -108,7 +108,7 @@ def set_cl_fields(bot, product_name)
       sleep(1)
       bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
       sleep(1)
-      bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').innerHTML = 'Code Library'")
+      bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').text('Code Library')")
       #bot.driver.find_element(:xpath, "//span[contains(@id,'pageUrl')]")
       sleep(1)
 
