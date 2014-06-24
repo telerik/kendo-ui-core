@@ -1,7 +1,7 @@
 namespace Kendo.Mvc.UI
 {
+    using System;
     using System.Linq;
-
     using Infrastructure;
 
     public class ContextMenuHtmlBuilder : NavigationHtmlBuilderBase<ContextMenu, ContextMenuItem>, INavigationComponentHtmlBuilder<ContextMenuItem>
@@ -27,17 +27,27 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode ItemTag(ContextMenuItem item)
         {
-            return ListItemTag(item, li =>
+            if (item.Separator)
             {
-                if (item.Selected)
+                IHtmlNode li = new HtmlElement("li")
+                    .Attributes(item.HtmlAttributes);
+
+                return li.PrependClass("k-separator").PrependClass(UIPrimitives.Item);
+            }
+            else
+            {
+                return ListItemTag(item, li =>
                 {
-                    li.AddClass(UIPrimitives.SelectedState);
-                }
-                else
-                {
-                    li.AddClass(UIPrimitives.DefaultState);
-                }
-            });
+                    if (item.Selected)
+                    {
+                        li.AddClass(UIPrimitives.SelectedState);
+                    }
+                    else
+                    {
+                        li.AddClass(UIPrimitives.DefaultState);
+                    }
+                });
+            }
         }
 
         public IHtmlNode ItemContentTag(ContextMenuItem item)
@@ -48,15 +58,8 @@ namespace Kendo.Mvc.UI
                 .AddClass(UIPrimitives.Item)
                 .AppendTo(ul);
 
-            if (item.Separator)
-            {
-                li.AddClass("k-separator");
-            }
-            else
-            {
-                ContentTag(item)
-                    .AppendTo(li);
-            }
+            ContentTag(item)
+                .AppendTo(li);
 
             return ul;
         }

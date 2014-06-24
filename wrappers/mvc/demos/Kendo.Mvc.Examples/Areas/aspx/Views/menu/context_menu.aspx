@@ -59,10 +59,11 @@
         {
             items.Add()
                 .Text("Reply")
+                .ImageUrl(Url.Content("~/content/web/toolbar/reply.png"))
                 .Items(children =>
                 {
-                    children.Add().Text("Reply To Sender");
-                    children.Add().Text("Reply To All");
+                    children.Add().Text("Reply To Sender").ImageUrl(Url.Content("~/content/web/toolbar/reply.png"));
+                    children.Add().Text("Reply To All").ImageUrl(Url.Content("~/content/web/toolbar/reply.png"));
                 });
 
             items.Add()
@@ -76,6 +77,19 @@
                     children.Add().Separator(true);
                     children.Add().Text("Important");
                     children.Add().Text("Read");
+                });
+
+            items.Add()
+                .Text("Label as")
+                .Items(children =>
+                {
+                    children.Add().Text("None");
+                    children.Add().Separator(true);
+                    children.Add().Text("Important").ImageUrl(Url.Content("~/content/web/toolbar/important.png"));
+                    children.Add().Text("Work").ImageUrl(Url.Content("~/content/web/toolbar/todo.png"));
+                    children.Add().Text("Personal").ImageUrl(Url.Content("~/content/web/toolbar/done.png"));
+                    children.Add().Separator(true);
+                    children.Add().Text("New Label");
                 });
         })
     %>

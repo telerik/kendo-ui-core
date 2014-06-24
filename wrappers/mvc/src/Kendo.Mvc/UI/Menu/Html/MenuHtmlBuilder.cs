@@ -27,17 +27,27 @@ namespace Kendo.Mvc.UI
 
         public IHtmlNode ItemTag(MenuItem item)
         {
-            return ListItemTag(item, li =>
+            if (item.Separator)
             {
-                if (item.Selected)
+                IHtmlNode li = new HtmlElement("li")
+                    .Attributes(item.HtmlAttributes);
+
+                return li.PrependClass("k-separator").PrependClass(UIPrimitives.Item);
+            }
+            else
+            {
+                return ListItemTag(item, li =>
                 {
-                    li.AddClass(UIPrimitives.SelectedState);
-                }
-                else
-                {
-                    li.AddClass(UIPrimitives.DefaultState);
-                }
-            });
+                    if (item.Selected)
+                    {
+                        li.AddClass(UIPrimitives.SelectedState);
+                    }
+                    else
+                    {
+                        li.AddClass(UIPrimitives.DefaultState);
+                    }
+                });
+            }
         }
 
         public IHtmlNode ItemContentTag(MenuItem item)

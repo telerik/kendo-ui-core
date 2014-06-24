@@ -17,5 +17,11 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
+
+        public bool Separator
+        {
+            get;
+            set;
+        }
     }
 }

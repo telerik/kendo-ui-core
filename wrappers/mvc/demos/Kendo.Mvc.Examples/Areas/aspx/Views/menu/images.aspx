@@ -18,6 +18,7 @@
                    {
                        children.Add().Text("Top News").ImageUrl(Url.Content("~/Content/shared/icons/16/star.png"));
                        children.Add().Text("Photo Galleries").ImageUrl(Url.Content("~/Content/shared/icons/16/photo.png"));
+                       children.Add().Separator(true);
                        children.Add().Text("Videos Records").ImageUrl(Url.Content("~/Content/shared/icons/16/video.png"));
                        children.Add().Text("Radio Records").ImageUrl(Url.Content("~/Content/shared/icons/16/speaker.png"));
                    });
@@ -28,6 +29,7 @@
                    {
                       children.Add().Text("Top News").ImageUrl(Url.Content("~/Content/shared/icons/16/star.png"));
                       children.Add().Text("Photo Galleries").ImageUrl(Url.Content("~/Content/shared/icons/16/photo.png"));
+                      children.Add().Separator(true);
                       children.Add().Text("Videos Records").ImageUrl(Url.Content("~/Content/shared/icons/16/video.png"));
                       children.Add().Text("Radio Records").ImageUrl(Url.Content("~/Content/shared/icons/16/speaker.png"));
                    });
