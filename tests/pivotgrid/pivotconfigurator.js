@@ -277,4 +277,32 @@
         equal(configurator.measures.element.text(), "Custom message");
     });
 
+    test("setDataSource attach new datasource", function() {
+        var configurator = createConfigurator();
+
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var catalog = stub(dataSource, "catalog");
+
+        configurator.setDataSource(dataSource);
+
+        deepEqual(configurator.dataSource, dataSource);
+
+        ok(catalog.calls("catalog"));
+    });
+
+    test("setDataSource updates setting targets datasource", function() {
+        var configurator = createConfigurator();
+        var dataSource = new kendo.data.PivotDataSource();
+
+        var measuresTarget = stub(configurator.measures, "setDataSource");
+        var columnsTarget = stub(configurator.columns, "setDataSource");
+        var rowsTarget = stub(configurator.rows, "setDataSource");
+
+        configurator.setDataSource(dataSource);
+
+        ok(measuresTarget.calls("setDataSource"));
+        ok(columnsTarget.calls("setDataSource"));
+        ok(rowsTarget.calls("setDataSource"));
+    });
 })();

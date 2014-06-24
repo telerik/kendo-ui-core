@@ -34,10 +34,7 @@ var __meta__ = {
 
             this.element.addClass("k-widget k-fieldselector k-alt k-edit-form-container");
 
-            this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
-
-            this._refreshHandler = $.proxy(this.refresh, this);
-            this.dataSource.bind("change", this._refreshHandler);
+            this._dataSource();
 
             this._layout();
 
@@ -60,6 +57,38 @@ var __meta__ = {
                 fieldsLabel: "Fields"
             }
         },
+
+        _dataSource: function() {
+            if (this.dataSource && this._refreshHandler) {
+                this.dataSource.unbind("change", this._refreshHandler)
+            } else {
+                this._refreshHandler = $.proxy(this.refresh, this);
+            }
+
+            this.dataSource = kendo.data.PivotDataSource.create(this.options.dataSource);
+            this.dataSource.bind("change", this._refreshHandler);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            if (this.measures) {
+                this.measures.setDataSource(dataSource);
+            }
+
+            if (this.rows) {
+                this.rows.setDataSource(dataSource);
+            }
+
+            if (this.columns) {
+                this.columns.setDataSource(dataSource);
+            }
+
+            this.refresh();
+        },
+
 
         _treeViewDataSource: function() {
             var that = this;
