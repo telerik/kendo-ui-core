@@ -185,7 +185,7 @@ EVENT_SETTER = ERB.new(%{
     * @param string|\\Kendo\\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return <%= owner.php_type %>
     */
-    public function <%= name %>($value) {
+    public function <%= php_event_method %>($value) {
         if (is_string($value)) {
             $value = new \\Kendo\\JavaScriptFunction($value);
         }
@@ -196,6 +196,14 @@ EVENT_SETTER = ERB.new(%{
     class Event < CodeGen::PHP::Event
         def to_setter
             EVENT_SETTER.result(binding)
+        end
+
+        def php_event_method
+            if (name == "add")
+                "addEvent"
+            else
+                name
+            end
         end
     end
 

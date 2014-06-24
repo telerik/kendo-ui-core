@@ -206,7 +206,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Gantt
     */
-    public function add($value) {
+    public function addEvent($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
