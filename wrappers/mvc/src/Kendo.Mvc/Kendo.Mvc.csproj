@@ -1536,6 +1536,7 @@
     <Compile Include="UI\Tooltip\Fluent\TooltipBuilder.cs" />
     <Compile Include="UI\Tooltip\Tooltip.cs" />
     <Compile Include="UI\Tooltip\TooltipPosition.cs" />
+    <Compile Include="UI\TreeMap\Html\TreeMapHtmlBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewCheckboxesBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
@@ -2152,4 +2153,9 @@
     <Compile Include="UI\ContextMenu\Fluent\ContextMenuEventBuilder.cs" />
     <Compile Include="UI\ContextMenu\Html\ContextMenuHtmlBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\TreeMap\TreeMap.cs" /><Compile Include="UI\TreeMap\Fluent\TreeMapBuilder.cs" /><Compile Include="UI\TreeMap\Fluent\TreeMapEventBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\TreeMap\TreeMap.cs" />
+    <Compile Include="UI\TreeMap\Fluent\TreeMapBuilder.cs" />
+    <Compile Include="UI\TreeMap\Fluent\TreeMapEventBuilder.cs" />
+  </ItemGroup>
+</Project>
