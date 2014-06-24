@@ -25,7 +25,8 @@ namespace Kendo.Mvc.UI
         {
             var html = CreateElement();
             html.Attribute("data-role", "treemap")
-                .Attribute("id", component.Id);
+                .Attribute("id", component.Id)
+                .Attributes(component.HtmlAttributes);
 
             return html;
         }

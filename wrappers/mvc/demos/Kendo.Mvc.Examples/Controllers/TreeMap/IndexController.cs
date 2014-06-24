@@ -12,10 +12,9 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult _PopulationUSA()
         {
-            return Json(TreeMapDataRepository.PopulationUSAData());
+            return Json(TreeMapDataRepository.PopulationUSAData(), JsonRequestBehavior.AllowGet);
         }
     }
 }
