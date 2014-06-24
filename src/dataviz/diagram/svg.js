@@ -267,7 +267,6 @@
     var VisualBase = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            options = this.options;
             this._fillOptions();
             this._strokeOptions();
         },
@@ -979,39 +978,40 @@
         }
     });
 
+    //Should width and height be considered?
     var Circle = VisualBase.extend({
         init: function (options) {
-            var that = this;
-            if (options && options.radius) {
-                options.width = options.radius * 2;
-                options.height = options.radius * 2;
-            }
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "ellipse"), options);
+            VisualBase.fn.init.call(this, options);
+            this._initCircle();
         },
+
+        _initCircle: function() {
+            var options = this.options;
+            var radius = options.radius || 0;
+            var center = options.center || {};
+            this._center = new g.Point(center.x, center.y);
+            this._circle = new g.Circle(this._center, radius);
+            this.drawingElement = new d.Circle(this._circle, {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
         redraw: function (options) {
-            if (options && Utils.isNumber(options.width) && Utils.isNumber(options.height)) {
-                options.center = new Point(options.width / 2, options.height / 2);
+            var circleOptions = this.options;
+            options = options || {};
+
+            if (options.center) {
+                deepExtend(circleOptions, {
+                    center: options.center
+                });
+                this._center.move(circleOptions.center.x, circleOptions.center.y);
+            }
+
+            if (options.radius) {
+                this._circle.setRadius(options.radius);
             }
             VisualBase.fn.redraw.call(this, options);
-            var n = this.domElement,
-                o = this.options,
-                rx = o.width / 2 || o.rx, ry = o.height / 2 || o.rx;
-
-            if (rx && ry) {
-                n.rx.baseVal.value = rx;
-                n.ry.baseVal.value = ry;
-            }
-
-            if (o.center) {
-                n.cx.baseVal.value = o.center.x;
-                n.cy.baseVal.value = o.center.y;
-            } else if (Utils.isDefined(o.x) && Utils.isDefined(o.y)) {
-                n.cx.baseVal.value = o.x + rx;
-                n.cy.baseVal.value = o.y + ry;
-            } else {
-                n.cx.baseVal.value = rx;
-                n.cy.baseVal.value = ry;
-            }
         }
     });
 

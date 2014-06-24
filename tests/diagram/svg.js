@@ -1012,4 +1012,69 @@
 
     })();
 
+
+    (function() {
+        var Circle = diagram.Circle;
+        var circle;
+        var circleGeometry;
+        var drawingElement;
+
+        module("Circle", {
+            setup: function() {
+                circle = new Circle({
+                    center: {
+                        x: 30,
+                        y: 40
+                    },
+                    radius: 10
+                });
+                drawingElement = circle.drawingElement;
+                circleGeometry = drawingElement.geometry;
+            }
+        });
+
+        test("inits circle", function() {
+            equal(circleGeometry.getRadius(), 10);
+            equal(circleGeometry.center.x, 30);
+            equal(circleGeometry.center.y, 40);
+        });
+
+        test("redraw updates circle radius", function() {
+            circle.redraw({
+                radius: 20
+            });
+            equal(circleGeometry.getRadius(), 20);
+        });
+
+        test("redraw updates circle center", function() {
+            circle.redraw({
+                center: {
+                    x: 5,
+                    y: 10
+                }
+            });
+            equal(circleGeometry.center.x, 5);
+            equal(circleGeometry.center.y, 10);
+        });
+
+        test("redraw updates circle center x or y", function() {
+            circle.redraw({
+                center: {
+                    x: 5
+                }
+            });
+            equal(circleGeometry.center.x, 5);
+            equal(circleGeometry.center.y, 40);
+
+            circle.redraw({
+                center: {
+                    y: 5
+                }
+            });
+            equal(circleGeometry.center.x, 5);
+            equal(circleGeometry.center.y, 5);
+        });
+
+    })();
+
 })();
