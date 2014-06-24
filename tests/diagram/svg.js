@@ -719,4 +719,108 @@
 
     })();
 
+    (function() {
+        var Path = diagram.Path;
+        var path;
+        var drawingElement;
+
+
+        module("Path", {
+            setup: function() {
+                path = new Path({
+                    data: "M100,100L200,200",
+                    width: 300,
+                    height: 200
+                });
+                drawingElement = path.drawingElement;
+            }
+        });
+
+        test("inits path", function() {
+            var segments = drawingElement.paths[0].segments;
+            ok(segments[0].anchor.equals({x: 100, y: 100}));
+            ok(segments[1].anchor.equals({x: 200, y: 200}));
+        });
+
+        test("inits transformation", function() {
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 3);
+            equal(matrix.d, 2);
+        });
+
+        test("does not init transformation if path has not width and heigth", function() {
+            path = new Path({
+                data: "M100,100L200,200"
+            });
+            equal(path.drawingElement.transform(), undefined);
+        });
+
+        test("redraw updates path", function() {
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+            var segments = drawingElement.paths[0].segments;
+            ok(segments[0].anchor.equals({x: 100, y: 100}));
+            ok(segments[1].anchor.equals({x: 300, y: 200}));
+        });
+
+        test("redraw triggers geometry change once", 1, function() {
+            drawingElement.geometryChange = function() {
+                ok(true);
+            };
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+        });
+
+        test("redraw does not trigger geometry change if no data is passed", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            path.redraw({
+                stroke: {
+                    color: "red"
+                }
+            });
+        });
+
+        test("redraw does not trigger geometry change if passed data is the same", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            path.redraw({
+                data: "M100,100L200,200"
+            });
+        });
+
+        test("redraw updates transformation", function() {
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 1.5);
+            equal(matrix.d, 2);
+        });
+
+        test("redraw updates transformation", function() {
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 1.5);
+            equal(matrix.d, 2);
+        });
+
+        test("redraw updates transformation if width and height are passed", function() {
+            path.redraw({
+                width: 200,
+                height: 300
+            });
+            var matrix = drawingElement.transform().matrix();
+            equal(matrix.a, 2);
+            equal(matrix.d, 3);
+        });
+
+    })();
+
 })();

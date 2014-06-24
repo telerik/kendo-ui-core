@@ -621,46 +621,61 @@
         }
     });
 
-    var Path = VisualBase.extend({
+    var Path = Visual.extend({
         init: function (options) {
-            var that = this;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
+            Visual.fn.init.call(this, options);
+            options = this.options;
+
+            this.drawingElement = d.Path.parse(options.data || "", {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            this._size();
         },
-        options: {
-            autoSize: true
-        },
+
         data: function (value) {
             if (value) {
-                this.options.data = value;
-            }
-            else {
+               this._setData(value);
+            } else {
                 return this.options.data;
             }
         },
-        size: function () {
-            sizeTransform(this);
-        },
-        redraw: function (options) {
-            var that = this;
-            VisualBase.fn.redraw.call(that, options);
-            that.size();
-            that.setAtr("d", "data");
-            if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-start");
-            }
-            if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-end");
-            }
 
-            // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
+        redraw: function (options) {
+            Visual.fn.redraw.call(this, options);
+            if (options && options.data) {
+                this._setData(options.data);
+            } else if (this._hasSize(options)) {
+                this._size();
+            }
+        },
+
+        _setData: function(data) {
+            var options = this.options;
+            var drawingElement = this.drawingElement;
+            if (options.data != data) {
+                var path = d.Path.parse(data || "", {
+                    fill: options.fill,
+                    stroke: options.stroke
+                });
+                drawingElement.paths = path.paths;
+                for (var i = 0; i < path.paths.length; i++)  {
+                    path.paths[i].observer = drawingElement;
+                }
+
+                drawingElement.geometryChange();
+
+                options.data = data;
+
+                this._size();
+            }
+        },
+
+        _size: function() {
+            if (this._hasSize(this.options)) {
+                this._measure(true);
+                sizeTransform(this);
             }
         }
     });
