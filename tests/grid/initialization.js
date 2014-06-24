@@ -588,7 +588,7 @@
             columns: ["foo"],
         });
 
-        equal(grid.thead.find("tr:eq(1)").attr("class"), "k-filterrow");
+        equal(grid.thead.find("tr:eq(1)").attr("class"), "k-filter-row");
     });
 
     test("filtercell with detailTemplate renders detail cell th", function() {
@@ -602,7 +602,7 @@
             }
         });
 
-        equal(grid.thead.find(".k-filterrow").find(".k-hierarchy-cell").length, 1);
+        equal(grid.thead.find(".k-filter-row").find(".k-hierarchy-cell").length, 1);
     });
 
     test("filtercell with detail cell is not rendered when no details", function() {
@@ -615,7 +615,7 @@
             }
         });
 
-        equal(grid.thead.find(".k-filterrow").find(".k-hierarchy-cell").length, 0);
+        equal(grid.thead.find(".k-filter-row").find(".k-hierarchy-cell").length, 0);
     });
 
     test("filtercell creates group cells when grid has groups", function() {
@@ -638,7 +638,7 @@
             }
         });
 
-        equal(grid.thead.find(".k-filterrow").find(".k-group-cell").length, 2);
+        equal(grid.thead.find(".k-filter-row").find(".k-group-cell").length, 2);
     });
 
     test("filtercell creates th cells for each column", function() {
@@ -655,7 +655,7 @@
             }
         });
 
-        equal(grid.thead.find(".k-filterrow").find("th").length, 3);
+        equal(grid.thead.find(".k-filter-row").find("th").length, 3);
     });
 
     test("filtercell creates th cells and sets attributes for bound columns", function() {
@@ -672,7 +672,7 @@
             }
         });
 
-        var filterrow = grid.thead.find(".k-filterrow");
+        var filterrow = grid.thead.find(".k-filter-row");
         var ths = filterrow.find("th");
         equal(ths.length, 3);
         //equal(ths.eq(0).attr(kendo.attr("field")), "foo");
@@ -732,7 +732,7 @@
             },
         });
 
-        var filterrow = grid.thead.find(".k-filterrow");
+        var filterrow = grid.thead.find(".k-filter-row");
         var widgetSelector = "["+ kendo.attr("role") +"=filtercell]"
         var widgets = filterrow.find(widgetSelector);
         equal(widgets.length, 1);

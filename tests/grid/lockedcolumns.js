@@ -59,7 +59,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 2);
-        equal(header.find("tr.k-filterrow").length, 1);
+        equal(header.find("tr.k-filter-row").length, 1);
     });
 
     test("filtercell tr is not append to locked header when filtercell is not enabled", function() {
@@ -69,7 +69,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 1);
-        equal(header.find("tr.k-filterrow").length, 0);
+        equal(header.find("tr.k-filter-row").length, 0);
     });
 
     test("filtercell tr is append to locked header when filtercell is enabled", function() {
@@ -82,7 +82,7 @@
 
         var header = grid.lockedHeader;
         equal(header.find("tr").length, 2);
-        equal(header.find("tr.k-filterrow").length, 1);
+        equal(header.find("tr.k-filter-row").length, 1);
     });
 
     test("th elements are added to the locked header table", function() {
@@ -106,12 +106,12 @@
             }
         });
 
-        equal(grid.element.find(".k-grid-header-locked tr.k-filterrow").length, 1);
-        equal(grid.element.find(".k-grid-header-locked tr.k-filterrow [data-field=foo]").length, 1);
+        equal(grid.element.find(".k-grid-header-locked tr.k-filter-row").length, 1);
+        equal(grid.element.find(".k-grid-header-locked tr.k-filter-row [data-field=foo]").length, 1);
 
-        equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow th").length, 2);
-        equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow [data-field=bar]").length, 1);
-        equal(grid.element.find(".k-grid-header-wrap tr.k-filterrow [data-field=baz]").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-filter-row th").length, 2);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-filter-row [data-field=bar]").length, 1);
+        equal(grid.element.find(".k-grid-header-wrap tr.k-filter-row [data-field=baz]").length, 1);
     });
 
     test("th elements when header already exists", function() {
