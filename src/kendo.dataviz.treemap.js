@@ -55,7 +55,8 @@ var __meta__ = {
 
         options: {
             name: "TreeMap",
-            autoBind: true
+            autoBind: true,
+            colors: []
         },
 
         events: [DATA_BOUND, "itemCreated"],
@@ -129,9 +130,11 @@ var __meta__ = {
                                 item.color = colors[i % colors.length];
                             } else {
                                 var currentColors = colors[i % colors.length];
-                                item.color = currentColors[0];
-                                item.minColor = currentColors[0];
-                                item.maxColor = currentColors[1];
+                                if (currentColors) {
+                                    item.color = currentColors[0];
+                                    item.minColor = currentColors[0];
+                                    item.maxColor = currentColors[1];
+                                }
                             }
                         }
                     }
