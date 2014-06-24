@@ -6,6 +6,7 @@
     using System.IO;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
+    using Kendo.Mvc.Extensions;
 
     /// <summary>
     /// The server side wrapper for Kendo UI PivotGrid
@@ -23,6 +24,7 @@
             UrlGenerator = urlGenerator;
 
             AutoBind = true;
+            Reorderable = true;
         }
 
         public PivotDataSource DataSource
@@ -37,6 +39,24 @@
             private set;
         }
 
+        public string Configurator
+        {
+            get;
+            set;
+        }
+
+        public int Height
+        {
+            get;
+            set;
+        }
+
+        public bool Reorderable
+        {
+            get;
+            set;
+        }
+
         public bool AutoBind { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -46,6 +66,21 @@
             if (AutoBind == false)
             {
                 options["autoBind"] = AutoBind;
+            }
+
+            if (!string.IsNullOrEmpty(Configurator))
+            {
+                options["configurator"] = Configurator;
+            }
+
+            if (Height != 0)
+            {
+                options["height"] = Height;
+            }
+
+            if (Reorderable == false)
+            {
+                options["reorderable"] = Reorderable;
             }
 
             options["dataSource"] = DataSource.ToJson();

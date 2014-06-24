@@ -1322,6 +1322,7 @@
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceTransportBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceTransportConnectionBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotXmlaDataSourceBuilder.cs" />
+    <Compile Include="UI\PivotGrid\Fluent\PivotGridEventBuilder.cs" />
     <Compile Include="UI\PivotGrid\Html\PivotGridHtmlBuilder.cs" />
     <Compile Include="UI\PivotGrid\PivotGrid.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSource.cs" />
