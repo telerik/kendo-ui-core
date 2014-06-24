@@ -10,8 +10,8 @@
                 )
                 .Model(m => m.Children("Items"))
             )
-            .ValueField("value")
-            .TextField("text")
+            .ValueField("Value")
+            .TextField("Name")
             .HtmlAttributes(new { style = "height:600px" })
     %>
 </div>
