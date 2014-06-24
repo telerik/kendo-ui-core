@@ -88,7 +88,7 @@ var __meta__ = {
             var node = e.node;
             var items = e.items;
             var options = this.options;
-            var item, i;
+            var item, i, colors;
 
             if (!node) {
                 this._items = [];
@@ -107,18 +107,32 @@ var __meta__ = {
                 if (items.length) {
                     var root = this._getByUid(node.uid);
                     root.children = [];
-                    var colors = colorsByLength("#0c81c5", "#c5dceb", items.length);
+
+                    if (!defined(root.minColor) && !defined(root.maxColor)) {
+                        colors = options.colors;
+                    } else {
+                        colors = colorsByLength(root.minColor, root.maxColor, items.length);
+                    }
+
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         root.children.push(this._wrapItem(item));
                     }
+
                     var htmlSize = this.view.htmlSize(root);
                     this.src.compute(root, root.coord, htmlSize);
 
                     for (i = 0; i < root.children.length; i++) {
                         item = root.children[i];
                         if (!defined(item.color)) {
-                            item.color = colors[i];
+                            if (typeof(colors[0]) === "string") {
+                                item.color = colors[i];
+                            } else {
+                                var currentColors = colors[i % colors.length];
+                                item.color = currentColors[0];
+                                item.minColor = currentColors[0];
+                                item.maxColor = currentColors[1];
+                            }
                         }
                     }
 
@@ -631,7 +645,13 @@ var __meta__ = {
     }
 
     function decimalToRgb(number) {
-        return math.round(number).toString(16).toUpperCase();
+        var result = math.round(number).toString(16).toUpperCase();
+
+        if (result.length === 1) {
+            result = "0" + result;
+        }
+
+        return result;
     }
 
     function colorToRGB(color) {
