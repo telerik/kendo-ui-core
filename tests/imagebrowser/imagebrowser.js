@@ -61,7 +61,7 @@
 
     test("toolbar is rendered", function() {
         setup();
-        ok(container.children("div.k-toolbar").length);
+        ok(container.children("div.k-filebrowser-toolbar").length);
     });
 
     test("toolbar texts", function() {
