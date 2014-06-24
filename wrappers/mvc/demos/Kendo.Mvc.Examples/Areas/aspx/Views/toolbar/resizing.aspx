@@ -16,20 +16,20 @@
         .Name("ToolBar")
         .Items(items => 
         {
-            items.Add().Template("<img src='/Content/web/toolbar/user.png' class='user-image' />").Overflow(ShowInOverflowPopup.Never);
+            items.Add().Template("<img src='" + Url.Content("~/Content/web/toolbar/user.png") + "' class='user-image' />").Overflow(ShowInOverflowPopup.Never);
             items.Add().Type(CommandType.Button).Text("Send").Primary(true).Overflow(ShowInOverflowPopup.Never);
             items.Add().Type(CommandType.Button).Text("Discard").Overflow(ShowInOverflowPopup.Never);
             items.Add().Type(CommandType.Separator);
-            items.Add().Type(CommandType.SplitButton).Text("Save").ImageUrl("/Content/web/toolbar/save.png").MenuButtons(menuButtons =>
+            items.Add().Type(CommandType.SplitButton).Text("Save").ImageUrl(Url.Content("~/Content/web/toolbar/save.png")).MenuButtons(menuButtons =>
             {
-                menuButtons.Add().Text("Save as").ImageUrl("/Content/web/toolbar/save.png");
-                menuButtons.Add().Text("Upload to drive").Icon("/Content/web/toolbar/upload.png");
+                menuButtons.Add().Text("Save as").ImageUrl(Url.Content("~/Content/web/toolbar/save.png"));
+                menuButtons.Add().Text("Upload to drive").ImageUrl(Url.Content("~/Content/web/toolbar/upload.png"));
             });
-            items.Add().Type(CommandType.SplitButton).Text("Reply").ImageUrl("/Content/web/toolbar/reply.png").MenuButtons(menuButtons =>
+            items.Add().Type(CommandType.SplitButton).Text("Reply").ImageUrl(Url.Content("~/Content/web/toolbar/reply.png")).MenuButtons(menuButtons =>
             {
-                menuButtons.Add().Text("Reply all").ImageUrl("/Content/web/toolbar/save.png");
-                menuButtons.Add().Text("Forward").ImageUrl("/Content/web/toolbar/forward.png");
-                menuButtons.Add().Text("Reply & Delete").ImageUrl("/Content/web/toolbar/reply.png");
+                menuButtons.Add().Text("Reply all").ImageUrl(Url.Content("~/Content/web/toolbar/save.png"));
+                menuButtons.Add().Text("Forward").ImageUrl(Url.Content("~/Content/web/toolbar/forward.png"));
+                menuButtons.Add().Text("Reply & Delete").ImageUrl(Url.Content("~/Content/web/toolbar/reply.png"));
             });
             items.Add().Type(CommandType.Separator);
             items.Add().Template("<span><label>Contacts:</label><input id='contacts' style='width: 150px;' /></span>").Overflow(ShowInOverflowPopup.Never);
@@ -37,9 +37,9 @@
             items.Add().Type(CommandType.Separator);
             items.Add().Type(CommandType.ButtonGroup).Buttons(buttons =>
             {
-                buttons.Add().Text("Done").Togglable(true).ImageUrl("/Content/web/toolbar/done.png").Group("category");
-                buttons.Add().Text("To Do").Togglable(true).ImageUrl("/Content/web/toolbar/todo.png").Group("category");
-                buttons.Add().Text("Important").Togglable(true).ImageUrl("/Content/web/toolbar/important.png").Group("category");
+                buttons.Add().Text("Done").Togglable(true).ImageUrl(Url.Content("~/Content/web/toolbar/done.png")).Group("category");
+                buttons.Add().Text("To Do").Togglable(true).ImageUrl(Url.Content("~/Content/web/toolbar/todo.png")).Group("category");
+                buttons.Add().Text("Important").Togglable(true).ImageUrl(Url.Content("~/Content/web/toolbar/important.png")).Group("category");
             });
         })
     %>
