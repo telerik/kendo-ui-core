@@ -1,4 +1,10 @@
         <div id="example">
+
+            <div class="box">
+                <p>Allowed file types for the Image browser are: jpg, jpeg, gif, png</p>
+                <p>Allowed file types for the File browser for this demo are: doc, docx, xls, xlsx, ppt, pptx, zip, rar, jpg, jpeg, gif, png</p>
+            </div>
+
             <textarea id="editor" rows="10" cols="30" style="height:440px">
                     &lt;p&gt;&lt;img src=&quot;../content/web/editor/kendo-ui-web.png&quot; alt=&quot;Editor for ASP.NET MVC logo&quot; style=&quot;display:block;margin-left:auto;margin-right:auto;&quot; /&gt;&lt;/p&gt;
                     &lt;p&gt;
@@ -45,7 +51,7 @@
                                 },
                                 thumbnailUrl: "/kendo-ui/service/ImageBrowser/Thumbnail",
                                 uploadUrl: "/kendo-ui/service/ImageBrowser/Upload",
-                                imageUrl: "http://dimov/kendo-ui/service/ImageBrowser/Image?path={0}"
+                                imageUrl: "/kendo-ui/service/ImageBrowser/Image?path={0}"
                            }
                         },
                         fileBrowser: {
@@ -53,17 +59,17 @@
                                 dropFilesHere: "Drop files here"
                             },
                             transport: {
-                                read: "/kendo-ui/service/ImageBrowser/Read",
+                                read: "/kendo-ui/service/FileBrowser/Read",
                                 destroy: {
-                                    url: "/kendo-ui/service/ImageBrowser/Destroy",
+                                    url: "/kendo-ui/service/FileBrowser/Destroy",
                                     type: "POST"
                                 },
                                 create: {
-                                    url: "/kendo-ui/service/ImageBrowser/Create",
+                                    url: "/kendo-ui/service/FileBrowser/Create",
                                     type: "POST"
                                 },
-                                uploadUrl: "/kendo-ui/service/ImageBrowser/Upload",
-                                fileUrl: "/myCustomFileFolder/{0}"
+                                uploadUrl: "/kendo-ui/service/FileBrowser/Upload",
+                                fileUrl: "/kendo-ui/service/FileBrowser/File?path={0}"
                             }
                         }
                     });

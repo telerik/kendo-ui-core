@@ -1163,11 +1163,11 @@
         }
       },
       {
-        "text": "Image browser",
+        "text": "File and image browser",
         "url": "editor/imagebrowser",
         "disableInMobile": true,
         "title": {
-            "kendo-ui": "Image browser in Kendo UI Editor | Kendo UI demo"
+            "kendo-ui": "File and image browser in Kendo UI Editor | Kendo UI demo"
         },
         "meta": {
             "kendo-ui": "In this demo we will see how the sleek image browser is nicely implemented in Kendo UI Editor widget."

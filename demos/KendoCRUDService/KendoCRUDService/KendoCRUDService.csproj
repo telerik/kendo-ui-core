@@ -137,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FileBrowserController.cs" />
     <Compile Include="Controllers\GanttDependenciesController.cs" />
     <Compile Include="Controllers\GanttTasksController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />

@@ -16,6 +16,7 @@
         .Outdent().Indent()
         .CreateLink().Unlink()
         .InsertImage()
+        .InsertFile()
         .SubScript()
         .SuperScript()
         .TableEditing()
