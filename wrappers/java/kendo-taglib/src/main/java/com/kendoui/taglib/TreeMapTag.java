@@ -6,6 +6,8 @@ package com.kendoui.taglib;
 import com.kendoui.taglib.json.Function;
 
 
+import com.kendoui.taglib.treemap.DataBoundFunctionTag;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
