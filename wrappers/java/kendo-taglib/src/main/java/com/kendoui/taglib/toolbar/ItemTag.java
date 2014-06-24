@@ -240,4 +240,26 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
 
 //<< Attributes
 
+    public boolean getEnabled() {
+        return (boolean)getProperty("enabled");
+    }
+    
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
+    }
+
+    @Override
+    protected boolean getExpanded() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean getSelected() {
+        return (boolean)getProperty("selected");
+    }
+
+    public void setSelected(boolean value) {
+        setProperty("selected", value);
+    }
+
 }
