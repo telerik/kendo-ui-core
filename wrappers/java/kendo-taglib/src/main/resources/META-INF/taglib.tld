@@ -34718,4 +34718,462 @@ Refer to the jQuery.ajax documentation for further info.</description>
         <body-content>JSP</body-content>
     </tag>
 
+	<tag>
+        <description>PivotDataSource</description>
+        <name>pivotDataSource</name>
+        <tag-class>com.kendoui.taglib.PivotDataSourceTag</tag-class>        
+        <body-content>JSP</body-content>           
+             
+        <attribute>
+            <description>If set the data source will use a predefined transport and/or schema.
+The supported values are "odata" which supports the OData v.2 protocol and "signalr".</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>requestEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+            <name>requestStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+	<tag>
+        <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>pivotDataSource-change</name>
+        <tag-class>com.kendoui.taglib.datasource.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a request to the remote service fails.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>pivotDataSource-error</name>
+        <tag-class>com.kendoui.taglib.datasource.ErrorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+	<tag>
+        <description>Fired when a remote service request is finished.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>pivotDataSource-requestEnd</name>
+        <tag-class>com.kendoui.taglib.datasource.RequestEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the data source makes a remote service request.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
+        <name>pivotDataSource-requestStart</name>
+        <tag-class>com.kendoui.taglib.datasource.RequestStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
+    <tag>
+        <description>The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchal name of the member.</description>
+        <name>pivotDataSource-columns</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.ColumnsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchal name of the member.</description>
+        <name>pivotDataSource-column</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.ColumnTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>If set to true the member will be exapnded.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The hierarchal name of the column</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>The configuration of measures. An string array which values are interpreted as the name of the measures to be loaded.</description>
+        <name>pivotDataSource-measures</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.MeasuresTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The name of the axis on which the measures will be displayed. Supported values are rows or columns. This option is applicable if multiple measures are used.</description>
+            <name>axis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The configuration of measures. An string array which values are interpreted as the name of the measures to be loaded.</description>
+        <name>pivotDataSource-measure</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.MeasureTag</tag-class>
+
+        <body-content>empty</body-content>        
+        <attribute>
+            <description>Measure to be loaded.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchal name of the member.</description>
+        <name>pivotDataSource-rows</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.RowsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchal name of the member.</description>
+        <name>pivotDataSource-row</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.RowTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>If set to true the member will be exapnded.</description>
+            <name>expand</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The hierarchal name of the rows</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+
+
+    <tag>
+        <description>The schema configuration of the PivotDataSource.</description>
+        <name>pivotDataSource-schema</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaTag</tag-class>
+        <body-content>JSP</body-content>
+
+		<attribute>
+            <description>If set the data source will use a predefined transport and/or schema.
+The supported values are "odata" which supports the OData v.2 protocol and "signalr".</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains server-side errors. Can be set to a function which is called to
+return the errors for response. If there are any errors the error event will be fired.</description>
+            <name>errors</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+		<attribute>
+            <description>Executed before the server response is used. Use it to preprocess or parse the server response.</description>
+            <name>parse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the columns and rows axes data. Can be set to a function which is called to
+return the columns and rows axes data for the response.</description>
+            <name>axes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the list of catalogs available on the server. Can be set to a function which is called to
+return the catalogs schema information for the response. It is executed during the schema discover.</description>
+            <name>catalogs</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the list of cubes available in the catalog. Can be set to a function which is called to
+return the cubes schema information for the response. It is executed during the schema discover.</description>
+            <name>cubes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the cells data. Can be set to a function which is called to
+return the cells data for the response.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the dimensions schema information. Can be set to a function which is called to
+return the dimensions schema information for the response. It is executed during the schema discover.</description>
+            <name>dimensions</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the hierarchies schema information. Can be set to a function which is called to
+return the hierarchies schema information for the response. It is executed during the schema discover requests.</description>
+            <name>hierarchies</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the levels schema information. Can be set to a function which is called to
+return the levels schema information for the response. It is executed during the schema discover.</description>
+            <name>levels</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The field from the server response which contains the measures schema information. Can be set to a function which is called to
+return the measures schema information for the response. It is executed during the schema discover.</description>
+            <name>measures</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The field from the server response which contains the columns and rows axes data. Can be set to a function which is called to
+return the columns and rows axes data for the response.</description>
+        <name>pivotDataSource-schema-axes</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaAxesFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the list of catalogs available on the server. Can be set to a function which is called to
+return the catalogs schema information for the response. It is executed during the schema discover.</description>
+        <name>pivotDataSource-schema-catalogs</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCatalogsFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the list of cubes available in the catalog. Can be set to a function which is called to
+return the cubes schema information for the response. It is executed during the schema discover.</description>
+        <name>pivotDataSource-schema-cubes</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubesFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the cells data. Can be set to a function which is called to
+return the cells data for the response.</description>
+        <name>pivotDataSource-schema-data</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the dimensions schema information. Can be set to a function which is called to
+return the dimensions schema information for the response. It is executed during the schema discover.</description>
+        <name>pivotDataSource-schema-dimensions</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaDimensionsFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the hierarchies schema information. Can be set to a function which is called to
+return the hierarchies schema information for the response. It is executed during the schema discover requests.</description>
+        <name>pivotDataSource-schema-hierarchies</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaHierarchiesFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the levels schema information. Can be set to a function which is called to
+return the levels schema information for the response. It is executed during the schema discover.</description>
+        <name>pivotDataSource-schema-levels</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaLevelsFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The field from the server response which contains the measures schema information. Can be set to a function which is called to
+return the measures schema information for the response. It is executed during the schema discover.</description>
+        <name>pivotDataSource-schema-measures</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaMeasuresFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration used to load data items and discover schema information.</description>
+        <name>pivotDataSource-transport</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.TransportTag</tag-class>
+        <body-content>JSP</body-content>		
+        
+        <attribute>
+            <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
+            <name>read</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>The configuration used when the data source discovers schema information about the current cube.If the value of transport.discover is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.discover is a string the data source uses this string as the URL of the remote service.If the value of transport.discover is ommited the data source uses transport.read for schema discover.</description>
+            <name>discover</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The configuration used for setting connection options.</description>
+        <name>pivotDataSource-transport-connection</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.TransportConnectionTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The catalog name.</description>
+            <name>catalog</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The cube name in the current data source.</description>
+            <name>cube</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+	<tag>
+        <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
+        <name>pivotDataSource-transport-read</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+	<tag>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
+        <name>pivotDataSource-transport-read-data</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
+        <name>pivotDataSource-transport-read-url</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+	<tag>
+        <description>The function which converts the request parameters to a format suitable for the remote service. By default
+the data source sends the parameters using jQuery's conventions.</description>
+        <name>pivotDataSource-transport-parameterMap</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportParameterMapFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+	
+	<tag>
+        <description>The configuration used when the data source loads data items from a remote service.If the value of transport.read is a function, the data source invokes that function instead of jQuery.ajax.If the value of transport.read is a string the data source uses this string as the URL of the remote service.</description>
+        <name>pivotDataSource-transport-discover</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>If set to false the request result will not be cached by the browser. Setting cache to false will only work correctly with HEAD and GET requests. It works by appending "_={timestamp}" to the GET parameters.
+By default "jsonp" requests are not cached.Refer to the jQuery.ajax documentation for further info.</description>
+            <name>cache</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+Refer to the jQuery.ajax documentation for further info.</description>
+            <name>contentType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The type of result expected from the server. Commonly used values are "json" and "jsonp".Refer to the jQuery.ajax documentation for further info.</description>
+            <name>dataType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The type of request to make ("POST", "GET", "PUT" or "DELETE"), default is "GET".Refer to the jQuery.ajax documentation for further info.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+	<tag>
+        <description>Additional parameters which are sent to the remote service.Refer to the jQuery.ajax documentation for further info.</description>
+        <name>pivotDataSource-transport-discover-data</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadDataFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The URL to which the request is sent.If set to function the data source will invoke it and use the result as the URL.</description>
+        <name>pivotDataSource-transport-discover-url</name>
+        <tag-class>com.kendoui.taglib.datasource.TransportReadUrlFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+        
 </taglib>
