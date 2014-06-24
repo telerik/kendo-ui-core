@@ -31,6 +31,11 @@ $treeMap = new \Kendo\Dataviz\UI\TreeMap('treeMap');
 $treeMap->dataSource($dataSource)
         ->valueField('value')
         ->textField('name')
+        ->colors(array(
+                    array("#0c81c5", "#c5dceb"), array("#3aa2de", "#d8ecf8"),
+                    array("#449000", "#dae9cc"), array("#76b800", "#dae7c3"),
+                    array("#ffae00", "#f5e5c3"), array("#ef4c00", "#f1b092"),
+                    array("#9e0a61", "#eccedf")))
         ->attr('style', 'height: 600px;');
 
 echo $treeMap->render();
