@@ -514,7 +514,11 @@ var __meta__ = {
             } else {
                 element
                     .text(this._getText(item))
-                    .css("background-color", item.color);
+                    .css("background-color", item.color)
+                    .toggleClass(
+                        "k-treemap-title-inverse",
+                        this._tileColorBrightness(item) > 180
+                    );
             }
 
             return element;
@@ -577,11 +581,25 @@ var __meta__ = {
 
         _createTitle: function(item) {
             return $("<div class='k-treemap-title'></div>")
-                .text(this._getText(item));
+                .text(this._getText(item))
+                .toggleClass(
+                    "k-treemap-title-inverse",
+                    this._tileColorBrightness(item) > 180
+                );
         },
 
         _createWrap: function() {
             return $("<div class='k-treemap-wrap'></div>");
+        },
+
+        _tileColorBrightness: function(item) {
+            var brightness = 0;
+            if (item.color) {
+                var color = rgbToDecimal(item.color);
+                brightness = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
+            }
+
+            return brightness;
         }
     });
 
