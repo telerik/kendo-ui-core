@@ -368,4 +368,14 @@ test("toJSON skips the id if id field is not default", function() {
    equal(typeof model.toJSON().id, "undefined");
 });
 
+test("defaultValue support functions", function() {
+    var MyModel = Model.define({
+        fields: [ { field: "foo", defaultValue: function() {return "bar"} } ]
+    });
+
+    var model = new MyModel();
+
+    ok(model.foo === "bar");
+});
+
 }());

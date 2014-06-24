@@ -590,6 +590,13 @@ var __meta__ = {
 
             if (!data || $.isEmptyObject(data)) {
                 data = $.extend({}, that.defaults, data);
+
+                if (that._initializers) {
+                    for (var idx = 0; idx < that._initializers.length; idx++) {
+                         var name = that._initializers[idx];
+                         data[name] = that.defaults[name]();
+                    }
+                }
             }
 
             ObservableObject.fn.init.call(that, data);
@@ -698,7 +705,8 @@ var __meta__ = {
             length,
             fields = {},
             originalName,
-            id = proto.id;
+            id = proto.id,
+            functionFields = [];
 
         if (id) {
             proto.idField = id;
@@ -734,6 +742,10 @@ var __meta__ = {
 
             if (!field.nullable) {
                 value = proto.defaults[originalName !== name ? originalName : name] = field.defaultValue !== undefined ? field.defaultValue : defaultValues[type.toLowerCase()];
+
+                if (typeof value === "function") {
+                    functionFields.push(name);
+                }
             }
 
             if (options.id === name) {
@@ -743,6 +755,10 @@ var __meta__ = {
             proto.defaults[originalName !== name ? originalName : name] = value;
 
             field.parse = field.parse || parsers[type];
+        }
+
+        if (functionFields.length > 0) {
+            proto._initializers = functionFields;
         }
 
         model = base.extend(proto);
