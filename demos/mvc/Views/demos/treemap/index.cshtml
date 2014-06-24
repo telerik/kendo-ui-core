@@ -1,6 +1,16 @@
 <div id="example">
     <div class="demo-section k-header" style="padding: 1em;">
-        <div id="treeMap" style="height: 600px;"></div>
+        <div id="treeMap" style="height: 600px; font-size: 12px;"></div>
+        <style scoped>
+            .k-leaf {
+                color: #fff;
+            }
+            .k-leaf:hover {
+                border: 0;
+                color: #fff;
+                padding: .7em;
+            }
+        </style>
     </div>
     <script>
         function treeMap() {
