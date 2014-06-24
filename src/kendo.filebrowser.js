@@ -33,7 +33,7 @@ var __meta__ = {
         TYPEFIELD = "type",
         DEFAULTSORTORDER = { field: TYPEFIELD, dir: "asc" },
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
-        TOOLBARTMPL = '<div class="k-widget k-toolbar k-header k-floatwrap">' +
+        TOOLBARTMPL = '<div class="k-widget k-filebrowser-toolbar k-header k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
                                 '# if (showUpload) { # ' +
                                     '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
@@ -200,8 +200,8 @@ var __meta__ = {
             that.element.addClass("k-filebrowser");
 
             that.element
-                .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
-                .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-addfolder)", proxy(that._addClick, that))
+                .on(CLICK + NS, ".k-filebrowser-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
+                .on(CLICK + NS, ".k-filebrowser-toolbar button:not(.k-state-disabled):has(.k-addfolder)", proxy(that._addClick, that))
                 .on("keydown" + NS, "li.k-state-selected input", proxy(that._directoryKeyDown, that))
                 .on("blur" + NS, "li.k-state-selected input", proxy(that._directoryBlur, that));
 

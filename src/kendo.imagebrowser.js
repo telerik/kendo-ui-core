@@ -32,7 +32,7 @@ var __meta__ = {
         TYPEFIELD = "type",
         DEFAULTSORTORDER = { field: TYPEFIELD, dir: "asc" },
         EMPTYTILE = kendo.template('<li class="k-tile-empty"><strong>${text}</strong></li>'),
-        TOOLBARTMPL = '<div class="k-widget k-toolbar k-header k-floatwrap">' +
+        TOOLBARTMPL = '<div class="k-widget k-filebrowser-toolbar k-header k-floatwrap">' +
                             '<div class="k-toolbar-wrap">' +
                                 '# if (showUpload) { # ' +
                                     '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
