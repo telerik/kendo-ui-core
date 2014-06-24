@@ -166,7 +166,10 @@ class TelerikProductCreateBot
 end
 def start_product_creation()
       bot = TelerikProductCreateBot.instance
-      product_name = ENV["ProductName"]
+      product_names = ENV["ProductNames"].split(',')
+
+      p "number of products to create>>" + product_names.length
+
       suite_alias = ENV["SuiteAlias"] || "KUI"
       
       if product_name == nil
