@@ -823,4 +823,56 @@
 
     })();
 
+    (function() {
+        var Line = diagram.Line;
+        var line;
+        var drawingElement;
+
+
+        module("Line", {
+            setup: function() {
+                line = new Line({
+                    from: new Point(10, 20),
+                    to: new Point(20, 40)
+                });
+                drawingElement = line.drawingElement;
+            }
+        });
+
+        test("inits path", function() {
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 10, y: 20}));
+            ok(segments[1].anchor.equals({x: 20, y: 40}));
+        });
+
+        test("redraw updates path if from point is passed", function() {
+            line.redraw({
+                from: new Point(5, 25)
+            });
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 5, y: 25}));
+            ok(segments[1].anchor.equals({x: 20, y: 40}));
+        });
+
+        test("redraw updates path if to point is passed", function() {
+            line.redraw({
+                to: new Point(30, 50)
+            });
+            var segments = drawingElement.segments;
+            ok(segments[0].anchor.equals({x: 10, y: 20}));
+            ok(segments[1].anchor.equals({x: 30, y: 50}));
+        });
+
+        test("redraw triggers geometry change once", 1, function() {
+            drawingElement.geometryChange = function() {
+                ok(true);
+            };
+            line.redraw({
+                from: new Point(5, 25),
+                to: new Point(30, 50)
+            });
+        });
+
+    })();
+
 })();

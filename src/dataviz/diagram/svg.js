@@ -750,37 +750,60 @@
 
     var Line = VisualBase.extend({
         init: function (options) {
-            VisualBase.fn.init.call(this, document.createElementNS(SVGNS, "line"), options);
-            this.options.from = this.options.from || new Point();
-            this.options.to = this.options.to || new Point();
+            VisualBase.fn.init.call(this, options);
+            this._initPath();
         },
+
+        options: {
+            stroke: {
+                color: "gray",
+                width: 1
+            },
+            fill: {
+                color: "none"
+            }
+        },
+
         redraw: function (options) {
-            VisualBase.fn.redraw.call(this, options);
-            if (this.options.from) {
-                this.domElement.setAttribute("x1", this.options.from.x.toString());
-                this.domElement.setAttribute("y1", this.options.from.y.toString());
-            }
-            if (this.options.to) {
-                this.domElement.setAttribute("x2", this.options.to.x.toString());
-                this.domElement.setAttribute("y2", this.options.to.y.toString());
-            }
-            if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-start");
-            }
-            if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-end");
+            options = options || {};
+            var from = options.from;
+            var to = options.to;
+            if (from) {
+                this.options.from = from;
             }
 
-            // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
+            if (to) {
+                this.options.to = to;
             }
+
+            if (from || to) {
+                this._updatePath();
+            }
+
+            VisualBase.fn.redraw.call(this, options);
+        },
+
+        _initPath: function() {
+            var options = this.options;
+            var from = options.from || new Point();
+            var to = options.to || new Point();
+            this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+            this._from = new g.Point(from.x, from.y);
+            this._to = new g.Point(to.x, to.y);
+            this.drawingElement.moveTo(this._from);
+            this.drawingElement.lineTo(this._to);
+        },
+
+        _updatePath: function() {
+            var options = this.options;
+            var from = options.from;
+            var to = options.to;
+            this._from.x = from.x;
+            this._from.y = from.y;
+            this._to.move(to.x, to.y);
         }
     });
 
