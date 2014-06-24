@@ -245,5 +245,69 @@
         equal(filterCell.input.val(), "");
     });
 
+    test("suggest dataSource shows only unique records when inherited", function() {
+        var ds = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    fields: {
+                        foo: {
+                            type: "string"
+                        }
+                    }
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { foo: "1" },
+                        { foo: "1" },
+                        { foo: "2" }
+                    ]);
+                }
+            }
+        });
+
+        filterCell = setup(dom, { dataSource: ds, field: "foo", suggestDataSource: ds.options });
+        filterCell.suggestDataSource.read();
+        var suggestedItems = filterCell.suggestDataSource.data();
+        equal(suggestedItems.length, 2);
+    });
+
+    test("suggest dataSource shows all records when using inherited dataSource options", function() {
+        var ds = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    fields: {
+                        foo: {
+                            type: "string"
+                        }
+                    }
+                }
+            },
+            pageSize: 2,
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { foo: "1" },
+                        { foo: "1" },
+                        { foo: "1" },
+                        { foo: "2" },
+                        { foo: "3" },
+                        { foo: "3" }
+                    ]);
+                }
+            }
+        });
+
+        filterCell = setup(dom, {
+            dataSource: ds,
+            field: "foo",
+            suggestDataSource: ds.options
+        });
+
+        filterCell.suggestDataSource.read();
+        var suggestedItems = filterCell.suggestDataSource.view();
+        equal(suggestedItems.length, 3);
+    });
 
 })();

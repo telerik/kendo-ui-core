@@ -3687,6 +3687,7 @@ var __meta__ = {
             for (var i = 0; i < columns.length; i++) {
                 var acDsOptions,
                     col = columns[i],
+                    customDataSource = false,
                     th = $("<th/>"),
                     field = col.field;
 
@@ -3694,12 +3695,14 @@ var __meta__ = {
                     acDsOptions = that.dataSource.options;
                     if (col.filterable && isPlainObject(col.filterable.cell) && col.filterable.cell.dataSource) {
                         acDsOptions = col.filterable.cell.dataSource;
+                        customDataSource = true;
                     }
 
                     $("<span/>").attr(kendo.attr("field"), field)
                         .kendoFilterCell({
                             dataSource: that.dataSource,
                             suggestDataSource: acDsOptions,
+                            customDataSource: customDataSource,
                             field: field
                         }).appendTo(th);
                 }

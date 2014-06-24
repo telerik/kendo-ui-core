@@ -56,6 +56,26 @@ var __meta__ = {
         }
     }
 
+    function removeDuplicates (dataSelector, dataTextField) {
+        return function(e) {
+            var items = dataSelector(e),
+                result = [],
+                index = 0,
+                seen = {};
+
+            while (index < items.length) {
+                var item = items[index++],
+                    text = item[dataTextField];
+                if(!seen.hasOwnProperty(text)){
+                    result.push(item);
+                    seen[text] = true;
+                }
+            }
+
+            return result;
+        };
+    }
+
     var FilterCell = Widget.extend( {
         init: function(element, options) {
             var that = this,
@@ -95,7 +115,7 @@ var __meta__ = {
             }
 
             that.viewModel = viewModel = kendo.observable({
-                operator: options.operator || "eq",
+                operator: options.operator,
                 value: null
             });
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
@@ -144,6 +164,11 @@ var __meta__ = {
         },
 
         setSuggestDataSource: function(dataSource) {
+            if (!this.options.customDataSource) {
+                dataSource._pageSize = undefined;
+                dataSource.reader.data = removeDuplicates(dataSource.reader.data, this.options.field);
+            }
+            this.suggestDataSource = dataSource;
             var ac = this.input.data("kendoAutoComplete");
             if (ac) {
                 ac.setDataSource(dataSource);
@@ -263,6 +288,7 @@ var __meta__ = {
         options: {
             name: "FilterCell",
             autoBind: true,
+            customDataSource: false,
             field: "",
             type: "string",
             suggestDataSource: null,
@@ -308,17 +334,6 @@ var __meta__ = {
                 operator: "Operator",
                 value: "Value",
                 cancel: "Cancel"
-            }
-        },
-
-        setDataSource: function(dataSource) {
-            var that = this;
-            that.dataSource.unbind(CHANGE, that._refreshHandler);
-            that.dataSource = that.options.dataSource = dataSource;
-            dataSource.bind(CHANGE, that._refreshHandler);
-
-            if (that.options.autoBind) {
-                dataSource.fetch();
             }
         }
     });

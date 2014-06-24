@@ -25,6 +25,7 @@
 
 
         <script src="../src/kendo.filtermenu.js"></script>
+        <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.reorderable.js"></script>
         <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.filtercell.js"></script>
@@ -47,6 +48,7 @@
         <script>
             var standart = $("#standard-filterable-grid").kendoGrid({
                 filterable: true,
+                pageable: true,
                 dataSource: {
                     data: [
                         {
@@ -221,9 +223,10 @@
                         requestStart: function() {
                             console.log("RS")
                         },
+                        pageSize:2,
                         transport: {
                             read: function(options) {
-                                options.success([
+                                options.success({ dd:[
                                     {
                                         Id: 1,
                                         Name: "foo",
@@ -241,11 +244,24 @@
                                         Name: "baz",
                                         Position: 3 ,
                                         ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 4,
+                                        Name: "baz",
+                                        Position: 3 ,
+                                        ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 4,
+                                        Name: "bat",
+                                        Position: 3 ,
+                                        ContractDate : new Date()
                                     }
-                                ])
+                                ] })
                             }
                         },
                         schema: {
+                            data: "dd",
                             model: {
                                 fields: {
                                     Id: {
