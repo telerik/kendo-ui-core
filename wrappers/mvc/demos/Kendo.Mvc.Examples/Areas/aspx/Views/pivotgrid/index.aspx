@@ -6,6 +6,7 @@
     {
         display: inline-block;
         vertical-align: top;
+        width: 60%;
     }
 
     #configurator
