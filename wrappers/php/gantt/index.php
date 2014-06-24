@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     switch($operation) {
         case 'create':
-            $result = $result->create($table, $columns, $request->models, 'ID');
+            $result = $result->create($table, $columns, $request, 'ID');
             break;
         case 'update':
-            $result = $result->update($table, $columns, $request->models, 'ID');
+            $result = $result->update($table, $columns, $request, 'ID');
             break;
         case 'destroy':
-            $result = $result->destroy($table, $request->models, 'ID');
+            $result = $result->destroy($table, $request, 'ID');
             break;
         default:
             $result = $result->read($table, $columns, $request);
@@ -76,10 +76,8 @@ $transport->create($create)
           ->read($read)
           ->update($update)
           ->destroy($destroy)
-          ->parameterMap('function(options, operation) {
-              if (operation !== "read") {
-                  return { models: kendo.stringify(options.models || [options]) };
-              }
+          ->parameterMap('function(data) {
+              return kendo.stringify(data);
           }');
 
 $taskModel = new \Kendo\Data\DataSourceSchemaModel();
@@ -174,10 +172,8 @@ $transport->create($create)
           ->read($read)
           ->update($update)
           ->destroy($destroy)
-          ->parameterMap('function(options, operation) {
-              if (operation !== "read" && options.models) {
-                  return { models: kendo.stringify(options.models || [options]) };
-              }
+          ->parameterMap('function(data) {
+              return kendo.stringify(data);
           }');
 
 $dependenciesModel = new \Kendo\Data\DataSourceSchemaModel();
