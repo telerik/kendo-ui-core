@@ -48,8 +48,15 @@ namespace Kendo.Mvc.UI
                 .AddClass(UIPrimitives.Item)
                 .AppendTo(ul);
 
-            ContentTag(item)
-                .AppendTo(li);
+            if (item.Separator)
+            {
+                li.AddClass("k-separator");
+            }
+            else
+            {
+                ContentTag(item)
+                    .AppendTo(li);
+            }
 
             return ul;
         }

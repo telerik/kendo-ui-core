@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
     <Compile Include="Controllers\PivotGrid\IndexController.cs" />
@@ -606,6 +607,8 @@
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryItem.cs" />
+    <Compile Include="Models\WebMail.cs" />
+    <Compile Include="Models\WebMailDataRepository.cs" />
     <Compile Include="Models\Chart\AntennaGainItem.cs" />
     <Compile Include="Models\Chart\AprilSales.cs" />
     <Compile Include="Models\Chart\BlogComments.cs" />
@@ -800,6 +803,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\index.aspx" />
@@ -2536,6 +2540,7 @@
     <Content Include="Content\dataviz\js\population-usa.json" />
     <Content Include="Areas\razor\Views\menu\context-menu.cshtml" />
     <Content Include="Areas\razor\Views\pivotgrid\index.cshtml" />
+    <Content Include="Areas\razor\Views\menu\context_menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

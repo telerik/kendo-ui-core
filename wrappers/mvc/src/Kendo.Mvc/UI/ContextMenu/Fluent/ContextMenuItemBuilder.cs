@@ -79,5 +79,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Renders a separator item
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Separator(true);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuItemBuilder Separator(bool value)
+        {
+            item.Separator = value;
+
+            return this;
+        }
+
     }
 }
