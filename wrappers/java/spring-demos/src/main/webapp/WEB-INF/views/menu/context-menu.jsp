@@ -19,12 +19,14 @@
     </div>
 </script>
 
+<div class="demo-section k-header">
+    <h4>WebMail</h4>
     <kendo:listView name="listview-context-menu" template="template">
         <kendo:dataSource pageSize="5" data="${users}">
         </kendo:dataSource>
     </kendo:listView>
 
-    <kendo:contextMenu name="context-menu" target="#listview-context-menu" filter=".product">
+    <kendo:contextMenu name="context-menu" target="#listview-context-menu" filter=".product" orientation="horizontal">
    	    <kendo:contextMenu-items>
    		    <kendo:contextMenu-item text="Reply" imageUrl="${reply}">
    		        <kendo:contextMenu-items>
@@ -37,6 +39,7 @@
    	        <kendo:contextMenu-item text="Mark As">
    	            <kendo:contextMenu-items>
    	                <kendo:contextMenu-item text="Unread" />
+                    <kendo:contextMenu-item separator="true" />
    	                <kendo:contextMenu-item text="Important" />
    	                <kendo:contextMenu-item text="Read" />
    	            </kendo:contextMenu-items>
@@ -44,14 +47,17 @@
             <kendo:contextMenu-item text="Label As">
                 <kendo:contextMenu-items>
                     <kendo:contextMenu-item text="None" />
+                    <kendo:contextMenu-item separator="true" />
                     <kendo:contextMenu-item text="Important" imageUrl="${important}" />
                     <kendo:contextMenu-item text="Work" imageUrl="${todo}" />
                     <kendo:contextMenu-item text="Personal" imageUrl="${done}" />
+                    <kendo:contextMenu-item separator="true" />
                     <kendo:contextMenu-item text="New Label" />
                 </kendo:contextMenu-items>
             </kendo:contextMenu-item>
    	    </kendo:contextMenu-items>
    	</kendo:contextMenu>
+</div>
 
     <style scoped>
         .demo-section {

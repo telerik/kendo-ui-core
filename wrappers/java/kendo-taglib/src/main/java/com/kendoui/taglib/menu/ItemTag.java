@@ -37,6 +37,10 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     protected void addAttributes(Li element){
         super.addAttributes(element);
         
+        if (isSet("separator")) {
+            element.attr("class", "k-separator");
+        }
+
         if (isSet("selected") && getSelected()) {
             element.attr("class", "k-state-selected");
         }
