@@ -60,7 +60,7 @@ var __meta__ = {
 
         _dataSource: function() {
             if (this.dataSource && this._refreshHandler) {
-                this.dataSource.unbind("change", this._refreshHandler)
+                this.dataSource.unbind("change", this._refreshHandler);
             } else {
                 this._refreshHandler = $.proxy(this.refresh, this);
             }

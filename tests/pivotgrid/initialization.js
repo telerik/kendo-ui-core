@@ -251,4 +251,28 @@
 
         equal(pivotgrid.measuresTarget.options.setting, "measures");
     });
+
+    test("datasource of configurator is set", function() {
+        var configurator = $("<div id='configurator'/>").kendoPivotConfigurator();
+
+        $(QUnit.fixture).append(configurator);
+
+        var pivotgrid = createPivot({ configurator: "#configurator"});
+
+        deepEqual(configurator.data("kendoPivotConfigurator").dataSource, pivotgrid.dataSource);
+    });
+
+    test("setDataSource updates configurator", function() {
+        var configuratorElement = $("<div />").kendoPivotConfigurator();
+
+        $(QUnit.fixture).append(configuratorElement);
+
+        var pivotgrid = createPivot({ configurator: configuratorElement });
+        var configurator = configuratorElement.data("kendoPivotConfigurator");
+        var method = stub(configurator, "setDataSource");
+
+        pivotgrid.setDataSource(new kendo.data.PivotDataSource());
+
+        ok(method.calls("setDataSource"));
+    });
 })();

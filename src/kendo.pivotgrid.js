@@ -1980,6 +1980,8 @@ var __meta__ = {
 
             that._dataSource();
 
+            that._bindConfigurator();
+
             that._wrapper();
             that._createLayout();
 
@@ -2051,10 +2053,18 @@ var __meta__ = {
             autoBind: true,
             reorderable: true,
             height: null,
+            configurator: "",
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
                 rowFields: "Drop Rows Fields Here"
+            }
+        },
+
+        _bindConfigurator: function() {
+            var configurator = this.options.configurator;
+            if (configurator) {
+                $(configurator).kendoPivotConfigurator("setDataSource", this.dataSource);
             }
         },
 
@@ -2074,6 +2084,8 @@ var __meta__ = {
             if (this.columnsTarget) {
                 this.columnsTarget.setDataSource(dataSource);
             }
+
+            this._bindConfigurator();
 
             if (this.options.autoBind) {
                 dataSource.fetch();

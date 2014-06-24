@@ -37,23 +37,28 @@
         <script>
 
             $(function() {
+
+                $("#configurator, #configurator2").kendoPivotConfigurator({
+                    //dataSource: pivot.dataSource
+                });
+
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
                         type: "xmla",
                     //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
                         //columns: [ { name: "[Date].[Calendar]" }/*, { name: "[Product].[Product Name].[All]" }*/],
                         //measures: ["[Measures].[Internet Order Lines Count]"],
-                        columns: ["[Department]"],
+                        //columns: ["[Department]"],
                         transport: {
                             connection: {
-                       //         catalog: "Adventure Works DW Standard Edition",
-                      ///         cube: "Adventure Works"
-                                catalog: "FoodMart",
-                                cube: "HR"
+                               catalog: "Adventure Works DW Standard Edition",
+                              cube: "Adventure Works"
+                             //   catalog: "FoodMart",
+                              //  cube: "HR"
                             },
                             read: {
-                              //  url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
-                                url: "http://korchev:8080/foodmart/xmla",
+                                url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
+                            //    url: "http://korchev:8080/foodmart/xmla",
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"
@@ -67,10 +72,6 @@
                         }
                     }
                 }).data("kendoPivotGrid");
-
-                $("#configurator, #configurator2").kendoPivotConfigurator({
-                    dataSource: pivot.dataSource
-                });
 
 /*              var treeview = $("#treeview").kendoTreeView({
                     dataTextField: "name",
