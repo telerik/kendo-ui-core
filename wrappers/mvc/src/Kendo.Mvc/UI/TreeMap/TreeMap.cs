@@ -62,7 +62,7 @@ namespace Kendo.Mvc.UI
             }
 
 //>> Serialization
-                
+        
             if (AutoBind.HasValue)
             {
                 json["autoBind"] = AutoBind;
