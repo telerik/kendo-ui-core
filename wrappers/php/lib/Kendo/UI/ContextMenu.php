@@ -12,13 +12,11 @@ class ContextMenu extends \Kendo\UI\Widget {
     protected function createElement() {
         $items = $this->getProperty('items');
 
+        $element = new \Kendo\Html\Element('ul');
         if ($items) {
-            $element = new \Kendo\Html\Element('ul');
             foreach ($items as $item) {
                 $element->append($item->createElement());
             }
-        } else {
-            $element = new \Kendo\Html\Element('div');
         }
 
         return $element;
