@@ -5,10 +5,10 @@ require_once '../lib/Kendo/Autoload.php';
 
 ?>
 
+<div class="demo-section k-header">
+    <h4>Menu</h4>
 <?php
     $menu = new \Kendo\UI\Menu('menu');
-
-    $menu->attr('style', 'margin-bottom: 200px');
 
     $first = new \Kendo\UI\MenuItem("First Item");
     $first->addItem(
@@ -62,13 +62,10 @@ require_once '../lib/Kendo/Autoload.php';
          ->deactivate('onDeactivate');
 
     echo $menu->render();
-
 ?>
-
-<div id="context-target">
-    Context Menu Target
 </div>
-
+<div class="demo-section k-header">
+    <h4>Context Menu</h4>
 <?php
     $contextMenu = new \Kendo\UI\ContextMenu('context-menu-events');
 
@@ -100,6 +97,8 @@ require_once '../lib/Kendo/Autoload.php';
     $contextMenu->addItem($third);
 
     $contextMenu->target('#context-target')
+                ->showOn('click')
+                ->alignToAnchor(true)
                 ->select('onSelect')
                 ->open('onOpen')
                 ->close('onClose')
@@ -107,8 +106,9 @@ require_once '../lib/Kendo/Autoload.php';
                 ->deactivate('onDeactivate');
 
     echo $contextMenu->render();
-
 ?>
+    <p>A collection of <span id="context-target">Animation (?)</span> objects, used to change default animations. A value of false will disable all animations in the widget.</p>
+</div>
 
 <script>
     function onOpen(e) {
@@ -132,14 +132,21 @@ require_once '../lib/Kendo/Autoload.php';
     }
 </script>
 
-<div class="console"></div>
+<div class="box">
+    <h4>Console log</h4>
+    <div class="console"></div>
+</div>
 
 <style scoped>
-    #context-target
-    {
-        height: 50px;
-        border: 1px solid red;
-        margin-bottom: 20px;
+    .demo-section .box-col li {
+        margin-bottom: 0;
+    }
+    #context-target {
+        cursor: pointer;
+        color: red;
+    }
+    #context-target:hover {
+        text-decoration: underline;
     }
 </style>
 
