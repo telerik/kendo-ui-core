@@ -69,51 +69,53 @@
 </div>
 <script>
     $(document).ready(function() {
-        var dataSource = new kendo.data.DataSource({
-            data: mails,
-            pageSize: 5
-        });
+        setTimeout(function () {
+            var dataSource = new kendo.data.DataSource({
+                data: window.mails,
+                pageSize: 5
+            });
 
-        $("#listview-context-menu").kendoListView({
-            dataSource: dataSource,
-            template: kendo.template($("#template").html())
-        });
+            $("#listview-context-menu").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
 
-        $("#orientation").kendoDropDownList();
+            $("#orientation").kendoDropDownList();
 
-        var menu = $("#menu"),
-            original = menu.clone(true);
+            var menu = $("#menu"),
+                original = menu.clone(true);
 
-        original.find(".k-state-active").removeClass("k-state-active");
+            original.find(".k-state-active").removeClass("k-state-active");
 
-        $("#apply").click(function (e) {
-            e.preventDefault();
-            var clone = original.clone(true);
+            $("#apply").click(function (e) {
+                e.preventDefault();
+                var clone = original.clone(true);
 
-            menu.getKendoContextMenu().destroy();
-            clone.appendTo("#example");
+                menu.getKendoContextMenu().destroy();
+                clone.appendTo("#example");
+
+                initMenu();
+            });
+
+            var initMenu = function () {
+                var orientation = $("#orientation").data("kendoDropDownList").value();
+
+                menu = $("#menu").kendoContextMenu({
+                    orientation: orientation,
+                    target: "#listview-context-menu",
+                    filter: ".product",
+                    animation: {
+                        open: { effects: "fadeIn" },
+                        duration: 500
+                    },
+                    select: function(e) {
+                        // Do something on select
+                    }
+                });
+            };
 
             initMenu();
-        });
-
-        var initMenu = function () {
-            var orientation = $("#orientation").data("kendoDropDownList").value();
-
-            menu = $("#menu").kendoContextMenu({
-                orientation: orientation,
-                target: "#listview-context-menu",
-                filter: ".product",
-                animation: {
-                    open: { effects: "fadeIn" },
-                    duration: 500
-                },
-                select: function(e) {
-                    // Do something on select
-                }
-            });
-        };
-
-        initMenu();
+        }, 0);
     });
 </script>
 
