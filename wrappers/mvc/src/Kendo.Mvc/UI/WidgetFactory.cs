@@ -1306,22 +1306,23 @@ namespace Kendo.Mvc.UI.Fluent
             return MvcHtmlString.Empty;
         }
 
-        //>> DataVizComponents 
         /// <summary>
-        /// Creates a <see cref="ContextMenu"/>
+        /// Creates a <see cref="Menu"/>
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ContextMenu()
-        ///             .Name("ContextMenu")
+        ///  &lt;%= Html.Kendo().Menu()
+        ///             .Name("Menu")
+        ///             .Items(items => { /* add items here */ });
         /// %&gt;
         /// </code>
         /// </example>
         public virtual ContextMenuBuilder ContextMenu()
         {
-            return new ContextMenuBuilder(new ContextMenu(ViewContext, Initializer, UrlGenerator));
+            return new ContextMenuBuilder(new ContextMenu(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>()));
         }
-        
+
+        //>> DataVizComponents 
         /// <summary>
         /// Creates a <see cref="Diagram"/>
         /// </summary>

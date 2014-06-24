@@ -2532,6 +2532,7 @@
     <Content Include="Areas\razor\Views\toolbar\api.cshtml" />
     <Content Include="Areas\razor\Views\toolbar\integration.cshtml" />
     <Content Include="Content\dataviz\js\population-usa.json" />
+    <Content Include="Areas\razor\Views\menu\context-menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\map\api.cshtml" />

@@ -1,71 +1,21 @@
 namespace Kendo.Mvc.UI
 {
-    using System;
-    using System.Linq;
     using System.Collections.Generic;
-    using System.Web.Routing;
-    using Kendo.Mvc.Extensions;
 
-    public class ContextMenuItem : JsonObject
+    /// <summary>
+    /// Represents an item from Kendo ContextMenu for ASP.NET MVC
+    /// </summary>
+    public class ContextMenuItem : NavigationItem<ContextMenuItem>, INavigationItemContainer<ContextMenuItem>
     {
         public ContextMenuItem()
         {
-            //>> Initialization
-        
-        //<< Initialization
+            Items = new LinkedObjectCollection<ContextMenuItem>(this);
         }
 
-        //>> Fields
-        
-        public string Text { get; set; }
-        
-        public string Url { get; set; }
-        
-        public string ImageUrl { get; set; }
-        
-        public string SpriteCssClass { get; set; }
-        
-        public bool? Enabled { get; set; }
-        
-        public bool? Selected { get; set; }
-        
-        //<< Fields
-
-        protected override void Serialize(IDictionary<string, object> json)
+        public IList<ContextMenuItem> Items
         {
-            //>> Serialization
-        
-            if (Text.HasValue())
-            {
-                json["text"] = Text;
-            }
-            
-            if (Url.HasValue())
-            {
-                json["url"] = Url;
-            }
-            
-            if (ImageUrl.HasValue())
-            {
-                json["imageUrl"] = ImageUrl;
-            }
-            
-            if (SpriteCssClass.HasValue())
-            {
-                json["spriteCssClass"] = SpriteCssClass;
-            }
-            
-            if (Enabled.HasValue)
-            {
-                json["enabled"] = Enabled;
-            }
-                
-            if (Selected.HasValue)
-            {
-                json["selected"] = Selected;
-            }
-                
-        //<< Serialization
+            get;
+            private set;
         }
     }
 }

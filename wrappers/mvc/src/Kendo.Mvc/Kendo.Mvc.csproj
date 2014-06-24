@@ -702,6 +702,8 @@
     <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
     <Compile Include="UI\ClientHandlerDescriptor.cs" />
     <Compile Include="UI\ComboBox\Fluent\ComboBoxEventBuilder.cs" />
+    <Compile Include="UI\ContextMenu\ContextMenuDirection.cs" />
+    <Compile Include="UI\ContextMenu\ContextMenuOrientation.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />
@@ -2141,12 +2143,6 @@
   <ItemGroup>
     <Compile Include="UI\ContextMenu\ContextMenu.cs" />
     <Compile Include="UI\ContextMenu\Fluent\ContextMenuBuilder.cs" />
-    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationSettings.cs" />
-    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationSettingsBuilder.cs" />
-    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationCloseSettings.cs" />
-    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationCloseSettingsBuilder.cs" />
-    <Compile Include="UI\ContextMenu\Settings\ContextMenuAnimationOpenSettings.cs" />
-    <Compile Include="UI\ContextMenu\Fluent\ContextMenuAnimationOpenSettingsBuilder.cs" />
     <Compile Include="UI\ContextMenu\Fluent\ContextMenuItemFactory.cs" />
     <Compile Include="UI\ContextMenu\ContextMenuItem.cs" />
     <Compile Include="UI\ContextMenu\Fluent\ContextMenuItemBuilder.cs" />

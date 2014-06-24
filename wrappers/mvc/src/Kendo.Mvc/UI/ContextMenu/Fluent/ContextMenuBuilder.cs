@@ -1,177 +1,474 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System.Collections.Generic;
-    using System.Collections;
     using System;
-
+    using System.Linq;
+    using System.Collections;
+    using System.Collections.Generic;
     /// <summary>
-    /// Defines the fluent API for configuring the Kendo ContextMenu for ASP.NET MVC.
+    /// Defines the fluent interface for configuring the <see cref="ContextMenu"/> component.
     /// </summary>
-    public class ContextMenuBuilder: WidgetBuilderBase<ContextMenu, ContextMenuBuilder>
+    public class ContextMenuBuilder : WidgetBuilderBase<ContextMenu, ContextMenuBuilder>, IHideObjectMembers
     {
-        private readonly ContextMenu container;
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContextMenu"/> class.
+        /// Initializes a new instance of the <see cref="ContextMenuBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
         public ContextMenuBuilder(ContextMenu component)
             : base(component)
         {
-            container = component;
         }
 
-        //>> Fields
-        
-        /// <summary>
-        /// Specifies that ContextMenu should be shown aligned to the target or the filter element if specified.
-        /// </summary>
-        /// <param name="value">The value that configures the aligntoanchor.</param>
-        public ContextMenuBuilder AlignToAnchor(bool value)
+        public ContextMenuBuilder Animation(bool enable)
         {
-            container.AlignToAnchor = value;
+            Component.Animation.Enabled = enable;
 
             return this;
         }
-        
-        /// <summary>
-        /// A collection of Animation objects, used to change default animations. A value of false will disable all animations in the widget.Available animations for the ContextMenu are listed below.  Each animation has a reverse options which is used for the close effect by default, but can be over-ridden
-		/// by setting the close animation. Each animation also has a direction which can be set off the animation (i.e. slideIn:Down).
-        /// </summary>
-        /// <param name="configurator">The action that configures the animation.</param>
-        public ContextMenuBuilder Animation(Action<ContextMenuAnimationSettingsBuilder> configurator)
+
+        public ContextMenuBuilder Animation(Action<PopupAnimationBuilder> animationAction)
         {
-            configurator(new ContextMenuAnimationSettingsBuilder(container.Animation));
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies that sub menus should close after item selection (provided they won't navigate).
-        /// </summary>
-        /// <param name="value">The value that configures the closeonclick.</param>
-        public ContextMenuBuilder CloseOnClick(bool value)
-        {
-            container.CloseOnClick = value;
+            animationAction(new PopupAnimationBuilder(Component.Animation));
 
             return this;
         }
-        
-        /// <summary>
-        /// Specifies ContextMenu sub menu opening direction. Can be "top", "bottom", "left", "right".
-		/// The example below will initialize the sub menus to open to the left.
-        /// </summary>
-        /// <param name="value">The value that configures the direction.</param>
-        public ContextMenuBuilder Direction(string value)
-        {
-            container.Direction = value;
 
-            return this;
-        }
-        
         /// <summary>
-        /// Specifies ContextMenu filter selector - the ContextMenu will only be shown on items that satisfy the provided selector.
+        /// Defines the items in the menu
         /// </summary>
-        /// <param name="value">The value that configures the filter.</param>
-        public ContextMenuBuilder Filter(string value)
-        {
-            container.Filter = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the delay in ms before the sub menus are opened/closed - used to avoid accidental closure on leaving.
-        /// </summary>
-        /// <param name="value">The value that configures the hoverdelay.</param>
-        public ContextMenuBuilder HoverDelay(double value)
-        {
-            container.HoverDelay = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Root menu orientation. Could be horizontal or vertical.
-        /// </summary>
-        /// <param name="value">The value that configures the orientation.</param>
-        public ContextMenuBuilder Orientation(string value)
-        {
-            container.Orientation = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies how ContextMenu should adjust to screen boundaries. By default the strategy is "fit" for a sub menu with a horizontal parent or the root menu,
-		/// meaning it will move to fit in screen boundaries in all directions, and "fit flip" for a sub menu with vertical parent, meaning it will fit vertically and flip over
-		/// its parent horizontally. You can also switch off the screen boundary detection completely if you set the popupCollision to false.
-        /// </summary>
-        /// <param name="value">The value that configures the popupcollision.</param>
-        public ContextMenuBuilder PopupCollision(string value)
-        {
-            container.PopupCollision = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the event or events on which ContextMenu should open. By default ContextMenu will show on contextmenu event on desktop and hold event on touch devices.
-		/// Could be any pointer/mouse/touch event, also several, separated by spaces.
-        /// </summary>
-        /// <param name="value">The value that configures the showon.</param>
-        public ContextMenuBuilder ShowOn(string value)
-        {
-            container.ShowOn = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the element on which ContextMenu should open. The default element is the document body.
-        /// </summary>
-        /// <param name="value">The value that configures the target.</param>
-        public ContextMenuBuilder Target(string value)
-        {
-            container.Target = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Contains the items of the menu widget
-        /// </summary>
-        /// <param name="configurator">The action that configures the items.</param>
-        public ContextMenuBuilder Items(Action<ContextMenuItemFactory> configurator)
-        {
-            configurator(new ContextMenuItemFactory(container.Items));
-            return this;
-        }
-        
-        //<< Fields
-
-
-        
-        /// <summary>
-        /// Configures the client-side events.
-        /// </summary>
-        /// <param name="configurator">The client events action.</param>
+        /// <param name="addAction">The add action.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().ContextMenu()
         ///             .Name("ContextMenu")
-        ///             .Events(events => events
-        ///                 .Close("onClose")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("First Item");
+        ///                 items.Add().Text("Second Item");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Items(Action<ContextMenuItemFactory> addAction)
+        {
+            ContextMenuItemFactory factory = new ContextMenuItemFactory(Component, Component.ViewContext);
+
+            addAction(factory);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the client-side events.
+        /// </summary>
+        /// <param name="clientEventsAction">The client events action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Events(events =>
+        ///                 events.Open("onOpen").OnClose("onClose")
         ///             )
         /// %&gt;
         /// </code>
         /// </example>
-        public ContextMenuBuilder Events(Action<ContextMenuEventBuilder> configurator)
+        public ContextMenuBuilder Events(Action<ContextMenuEventBuilder> clientEventsAction)
         {
-
-            configurator(new ContextMenuEventBuilder(Component.Events));
+            clientEventsAction(new ContextMenuEventBuilder(Component.Events));
 
             return this;
         }
-        
+
+        /// <summary>
+        /// Specifies ContextMenu opening direction.
+        /// </summary>
+        /// <param name="value">The desired direction.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Direction(ContextMenuDirection.Left)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Direction(ContextMenuDirection value)
+        {
+            Component.Direction = value.ToString().ToLower();
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies ContextMenu opening direction.
+        /// </summary>
+        /// <param name="value">The desired direction.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Direction("top")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Direction(string value)
+        {
+            Component.Direction = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies ContextMenu target to bind to.
+        /// </summary>
+        /// <param name="value">The desired target.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Target("#target")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Target(string value)
+        {
+            Component.Target = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies ContextMenu filter selector - would filter elements inside the target to bind to.
+        /// </summary>
+        /// <param name="value">The desired filter.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Filter(".item")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Filter(string value)
+        {
+            Component.Filter = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies ContextMenu triggering event.
+        /// </summary>
+        /// <param name="value">The desired event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .ShowOn("click")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder ShowOn(string value)
+        {
+            Component.ShowOn = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the menu orientation.
+        /// </summary>
+        /// <param name="value">The desired orientation.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Orientation(ContextMenuOrientation.Vertical)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder Orientation(ContextMenuOrientation value)
+        {
+            Component.Orientation = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enables or disables the "open-on-click" feature.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .OpenOnClick(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder OpenOnClick(bool value)
+        {
+            Component.OpenOnClick = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies that sub menus should close after item selection (provided they won't navigate).
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .CloseOnClick(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder CloseOnClick(bool value)
+        {
+            Component.CloseOnClick = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies that context menu would align to its anchor (target or filter).
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .AlignToAnchor(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder AlignToAnchor(bool value)
+        {
+            Component.AlignToAnchor = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the delay in ms before the menu is opened/closed - used to avoid accidental closure on leaving.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .HoverDelay(300)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder HoverDelay(int value)
+        {
+            Component.HoverDelay = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Binds the menu to a sitemap
+        /// </summary>
+        /// <param name="viewDataKey">The view data key.</param>
+        /// <param name="siteMapAction">The action to configure the item.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .BindTo("examples", (item, siteMapNode) =>
+        ///             {
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder BindTo(string viewDataKey, Action<ContextMenuItem, SiteMapNode> siteMapAction)
+        {
+            Component.BindTo(viewDataKey, siteMapAction);
+
+            return this;
+        }
+
+
+        /// <summary>
+        /// Binds the menu to a sitemap.
+        /// </summary>
+        /// <param name="viewDataKey">The view data key.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .BindTo("examples")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder BindTo(string viewDataKey)
+        {
+            Component.BindTo(viewDataKey);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Binds the menu to a list of objects. The menu will be "flat" which means a menu item will be created for
+        /// every item in the data source.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="dataSource">The data source.</param>
+        /// <param name="itemDataBound">The action executed for every data bound item.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .BindTo(new []{"First", "Second"}, (item, value) =>
+        ///             {
+        ///                item.Text = value;
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder BindTo<T>(IEnumerable<T> dataSource, Action<ContextMenuItem, T> itemDataBound)
+        {
+            Component.BindTo(dataSource, itemDataBound);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Binds the menu to a list of objects. The menu will create a hierarchy of items using the specified mappings.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="dataSource">The data source.</param>
+        /// <param name="factoryAction">The action which will configure the mappings</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .BindTo(Model, mapping => mapping
+        ///                     .For&lt;Customer&gt;(binding => binding
+        ///                         .Children(c => c.Orders) // The "child" items will be bound to the the "Orders" property
+        ///                         .ItemDataBound((item, c) => item.Text = c.ContactName) // Map "Customer" properties to ContextMenuItem properties
+        ///                     )
+        ///                     .For&lt;Order&lt;(binding => binding
+        ///                         .Children(o => null) // "Orders" do not have child objects so return "null"
+        ///                         .ItemDataBound((item, o) => item.Text = o.OrderID.ToString()) // Map "Order" properties to ContextMenuItem properties
+        ///                     )
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder BindTo(IEnumerable dataSource, Action<NavigationBindingFactory<ContextMenuItem>> factoryAction)
+        {
+            Component.BindTo(dataSource, factoryAction);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Binds the menu to a list of items.
+        /// Use if the menu items are being sent from the controller.
+        /// To bind the ContextMenu declaratively, use the <seealso cref="Items(Action<ContextMenuItemFactory>)"> method.
+        /// </summary>
+        /// <param name="items">The list of items</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("TreeView")
+        ///             .BindTo(model)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder BindTo(IEnumerable<ContextMenuItem> items)
+        {
+            Component.Items.Clear();
+
+            foreach (ContextMenuItem item in items)
+            {
+                Component.Items.Add(item);
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Callback for each item.
+        /// </summary>
+        /// <param name="action">Action, which will be executed for each item.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .ItemAction(item =>
+        ///             {
+        ///                 item
+        ///                     .Text(...)
+        ///                     .HtmlAttributes(...);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder ItemAction(Action<ContextMenuItem> action)
+        {
+            Component.ItemAction = action;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Select item depending on the current URL.
+        /// </summary>
+        /// <param name="value">If true the item will be highlighted.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .HighlightPath(true)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder HighlightPath(bool value)
+        {
+            Component.HighlightPath = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Enable/disable security trimming functionality of the component.
+        /// </summary>
+        /// <param name="value">If true security trimming is enabled.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .SecurityTrimming(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder SecurityTrimming(bool value)
+        {
+            Component.SecurityTrimming.Enabled = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the security trimming functionality of the component
+        /// </summary>
+        /// <param name="securityTrimmingAction">The securityTrimming action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .SecurityTrimming(builder =>
+        ///             {
+        ///                 builder.Enabled(true).HideParent(true);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ContextMenuBuilder SecurityTrimming(Action<SecurityTrimmingBuilder> securityTrimmingAction)
+        {
+            securityTrimmingAction(new SecurityTrimmingBuilder(Component.SecurityTrimming));
+
+            return this;
+        }
     }
 }
-

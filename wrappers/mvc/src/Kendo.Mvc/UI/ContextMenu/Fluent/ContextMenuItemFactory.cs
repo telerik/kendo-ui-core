@@ -1,28 +1,29 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System.Web.Mvc;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Defines the fluent API for adding items to Kendo ContextMenu for ASP.NET MVC
     /// </summary>
     public class ContextMenuItemFactory : IHideObjectMembers
     {
-        private readonly List<ContextMenuItem> container;
+        private readonly INavigationItemContainer<ContextMenuItem> container;
+        private readonly ViewContext viewContext;
 
-        public ContextMenuItemFactory(List<ContextMenuItem> container)
+        public ContextMenuItemFactory(INavigationItemContainer<ContextMenuItem> container, ViewContext viewContext)
         {
+
             this.container = container;
+            this.viewContext = viewContext;
         }
 
-        public virtual ContextMenuItemBuilder Add()
+        public ContextMenuItemBuilder Add()
         {
-            var item = new ContextMenuItem();
+            ContextMenuItem item = new ContextMenuItem();
 
-            container.Add(item);
+            container.Items.Add(item);
 
-            return new ContextMenuItemBuilder(item);
+            return new ContextMenuItemBuilder(item, viewContext);
         }
     }
 }
-

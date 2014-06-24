@@ -1,91 +1,83 @@
 namespace Kendo.Mvc.UI.Fluent
 {
-    using System.Collections.Generic;
-    using System.Collections;
     using System;
-    using Kendo.Mvc.Extensions;
+    using System.Web.Mvc;
+    using Infrastructure;
+    using System.Collections.Generic;
 
     /// <summary>
-    /// Defines the fluent API for configuring the ContextMenuItem settings.
+    /// Defines the fluent interface for configuring child menu items.
     /// </summary>
-    public class ContextMenuItemBuilder: IHideObjectMembers
+    public class ContextMenuItemBuilder : NavigationItemBuilder<ContextMenuItem, ContextMenuItemBuilder>, IHideObjectMembers
     {
-        private readonly ContextMenuItem container;
+        private readonly ContextMenuItem item;
+        private readonly ViewContext viewContext;
 
-        public ContextMenuItemBuilder(ContextMenuItem settings)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContextMenuItemBuilder"/> class.
+        /// </summary>
+        /// <param name="item">The item.</param>
+        public ContextMenuItemBuilder(ContextMenuItem item, ViewContext viewContext)
+            : base(item, viewContext)
         {
-            container = settings;
+
+            this.item = item;
+            this.viewContext = viewContext;
         }
 
-        //>> Fields
-        
         /// <summary>
-        /// Specifies the text displayed by the item
+        /// Configures the child items of a <see cref="ContextMenuItem"/>.
         /// </summary>
-        /// <param name="value">The value that configures the text.</param>
-        public ContextMenuItemBuilder Text(string value)
+        /// <param name="addAction">The add action.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("First Item").Items(firstItemChildren => 
+        ///                 {
+        ///                     firstItemChildren.Add().Text("Child Item 1");
+        ///                     firstItemChildren.Add().Text("Child Item 2");
+        ///                 });
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ContextMenuItemBuilder Items(Action<ContextMenuItemFactory> addAction)
         {
-            container.Text = value;
+
+            ContextMenuItemFactory factory = new ContextMenuItemFactory(item, viewContext);
+
+            addAction(factory);
 
             return this;
         }
-        
+
         /// <summary>
-        /// Specifies the URL that the item links to
+        /// Configures the child items of a <see cref="ContextMenuItem"/>.
+        /// When declaratively binding the menu item, use <see cref="Items(Action<ContextMenuItemFactory>)"/>.
         /// </summary>
-        /// <param name="value">The value that configures the url.</param>
-        public ContextMenuItemBuilder Url(string value)
+        /// <param name="items">items</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ContextMenu()
+        ///             .Name("ContextMenu")
+        ///             .Items(items =>
+        ///             {
+        ///                 items.Add().Text("First Item").Items(model);
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ContextMenuItemBuilder Items(IEnumerable<ContextMenuItem> items)
         {
-            container.Url = value;
+
+            item.Items.Clear();
+
+            (items as List<ContextMenuItem>).ForEach(menuItem => item.Items.Add(menuItem));
 
             return this;
         }
-        
-        /// <summary>
-        /// Specifies the URL of the image displayed by the item
-        /// </summary>
-        /// <param name="value">The value that configures the imageurl.</param>
-        public ContextMenuItemBuilder ImageUrl(string value)
-        {
-            container.ImageUrl = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies the class name for the sprite image displayed by the item
-        /// </summary>
-        /// <param name="value">The value that configures the spritecssclass.</param>
-        public ContextMenuItemBuilder SpriteCssClass(string value)
-        {
-            container.SpriteCssClass = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies whether the item is initially enabled
-        /// </summary>
-        /// <param name="value">The value that configures the enabled.</param>
-        public ContextMenuItemBuilder Enabled(bool value)
-        {
-            container.Enabled = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Specifies whether the item is initially selected
-        /// </summary>
-        /// <param name="value">The value that configures the selected.</param>
-        public ContextMenuItemBuilder Selected(bool value)
-        {
-            container.Selected = value;
-
-            return this;
-        }
-        
-        //<< Fields
     }
 }
-
