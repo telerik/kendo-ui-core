@@ -19,8 +19,8 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Build()
         {
             IHtmlNode rootTag = ComponentTag("ul")
-                .PrependClass(UIPrimitives.Widget, UIPrimitives.ResetStyle, UIPrimitives.Header, "k-menu k-context-menu")
-                .ToggleClass("k-menu-horizontal", Component.Orientation == ContextMenuOrientation.Horizontal);
+                .PrependClass(UIPrimitives.Widget, UIPrimitives.ResetStyle, UIPrimitives.Header, "k-menu k-context-menu",
+                Component.Orientation == ContextMenuOrientation.Horizontal ? "k-menu-horizontal" : "k-menu-vertical");
 
             return rootTag;
         }

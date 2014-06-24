@@ -161,17 +161,17 @@ namespace Kendo.Mvc.UI
                 options["alignToAnchor"] = true;
             }
 
-            if (!Target.HasValue())
+            if (Target.HasValue())
             {
                 options["target"] = Target;
             }
 
-            if (!Filter.HasValue())
+            if (Filter.HasValue())
             {
                 options["filter"] = Filter;
             }
 
-            if (!ShowOn.HasValue())
+            if (ShowOn.HasValue())
             {
                 options["showOn"] = ShowOn;
             }

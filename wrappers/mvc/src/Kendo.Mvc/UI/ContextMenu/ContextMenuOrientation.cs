@@ -8,11 +8,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Items are oredered horizontally
         /// </summary>
-        Horizontal = 0,
+        Vertical = 0,
 
         /// <summary>
         /// Items are oredered vertically
         /// </summary>
-        Vertical = 1
+        Horizontal = 1
     }
 }

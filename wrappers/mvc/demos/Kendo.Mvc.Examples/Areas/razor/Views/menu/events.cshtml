@@ -61,6 +61,7 @@
         .Events(e => e.Open("open").Close("close").Select("select").Activate("activate").Deactivate("deactivate"))
     )
 
+    <br />
     <div id="context-target">
         Context Menu Target
     </div>
@@ -71,58 +72,30 @@
         .Items(items =>
         {
             items.Add()
-                .Text("First Item")
+                .Text("Item 1")
                 .Items(children =>
                 {
                     children.Add().Text("Sub Item 1");
                     children.Add().Text("Sub Item 2");
                     children.Add().Text("Sub Item 3");
-                    children.Add().Text("Sub Item 4");
-                    children.Add().Text("Sub Item 5");
                 });
 
             items.Add()
-                 .Text("Second Item")
+                 .Text("Item 2")
                  .Items(children =>
                  {
                      children.Add().Text("Sub Item 1");
                      children.Add().Text("Sub Item 2");
                      children.Add().Text("Sub Item 3");
-                     children.Add().Text("Sub Item 4");
-                     children.Add().Text("Sub Item 5");
                  });
 
             items.Add()
-                .Text("Third Item")
+                .Text("Item 3")
                 .Items(children =>
                 {
                     children.Add().Text("Sub Item 1");
                     children.Add().Text("Sub Item 2");
                     children.Add().Text("Sub Item 3");
-                    children.Add().Text("Sub Item 4");
-                    children.Add().Text("Sub Item 5");
-                });
-
-            items.Add()
-                 .Text("Fourth Item")
-                 .Items(children =>
-                 {
-                     children.Add().Text("Sub Item 1");
-                     children.Add().Text("Sub Item 2");
-                     children.Add().Text("Sub Item 3");
-                     children.Add().Text("Sub Item 4");
-                     children.Add().Text("Sub Item 5");
-                 });
-
-            items.Add()
-                .Text("Fifth Item")
-                .Items(children =>
-                {
-                    children.Add().Text("Sub Item 1");
-                    children.Add().Text("Sub Item 2");
-                    children.Add().Text("Sub Item 3");
-                    children.Add().Text("Sub Item 4");
-                    children.Add().Text("Sub Item 5");
                 });
         })
         .Events(e => e.Open("open").Close("close").Select("select").Activate("activate").Deactivate("deactivate"))
@@ -154,3 +127,10 @@
         kendoConsole.log("Deactivated: " + ($(e.item).children(".k-link").text() || "ContextMenu"));
     }
 </script>
+
+<style scoped>
+    #context-target {
+        height: 50px;
+        border: 1px solid red;
+    }
+</style>
