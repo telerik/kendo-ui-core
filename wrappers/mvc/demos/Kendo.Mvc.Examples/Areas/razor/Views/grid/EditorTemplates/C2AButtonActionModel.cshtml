@@ -1,0 +1,27 @@
+﻿<p>C2AButtonActionModel</p>
+
+<select id="products"></select>
+
+<script>
+    $(document).ready(function() {
+        $("\\#products").kendoMultiSelect({
+            placeholder: "Select products...",
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            autoBind: false,
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                transport: {
+                    read: {
+                        url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                    }
+                }
+            },
+            value: [
+                { ProductName: "Chang", ProductID: 2 },
+                { ProductName: "Uncle Bob's Organic Dried Pears", ProductID: 7 }
+            ]
+        });
+    });
+</script>
