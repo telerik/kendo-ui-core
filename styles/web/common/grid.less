@@ -31,6 +31,11 @@
     text-align: left;
 }
 
+.k-filter-row > th
+{
+    border-top-width: 1px;
+}
+
 .k-ie10 .k-grid-header a:active
 {
     background-color: transparent; /*remove gray background*/
@@ -117,7 +122,8 @@ div.k-grid-footer
     zoom: 1;
 }
 
-div.k-grid-header th.k-header
+div.k-grid-header th.k-header,
+tr.k-filter-row > th
 {
     border-bottom-width: 0;
 }
@@ -227,7 +233,8 @@ div.k-grid-header th.k-header
 
 .k-grid-header th.k-header:first-child,
 .k-grid tbody td:first-child,
-.k-grid tfoot td:first-child
+.k-grid tfoot td:first-child,
+.k-filter-row > th:first-child
 {
     border-left-width: 0;
 }
