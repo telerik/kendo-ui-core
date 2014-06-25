@@ -106,7 +106,7 @@
         var gantt = new Gantt(element);
 
         ok(gantt.toolbar.find(".k-gantt-actions").length);
-        ok(gantt.toolbar.find(".k-gantt-actions").hasClass("k-reset k-header k-toolbar"));
+        ok(gantt.toolbar.find(".k-gantt-actions").hasClass("k-reset k-header"));
     });
 
     test("toolbar action button are not added when non editable", function() {
@@ -141,7 +141,7 @@
         var gantt = new Gantt(element);
 
         ok(gantt.footer.find(".k-gantt-actions").length);
-        ok(gantt.footer.find(".k-gantt-actions").hasClass("k-reset k-header k-toolbar"));
+        ok(gantt.footer.find(".k-gantt-actions").hasClass("k-reset k-header"));
     });
 
     test("footer action button's elements are rendered", 4, function () {

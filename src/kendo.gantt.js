@@ -82,11 +82,11 @@ var __meta__ = {
         toolbar: {
             headerWrapper: "k-floatwrap k-header k-gantt-toolbar",
             footerWrapper: "k-floatwrap k-header k-gantt-toolbar",
-            toolbar: "k-toolbar",
+            toolbar: "k-gantt-toolbar",
             views: "k-gantt-views",
-            viewsWrapper: "k-reset k-header k-toolbar k-gantt-views",
+            viewsWrapper: "k-reset k-header k-gantt-views",
             actions: "k-gantt-actions",
-            actionsWrapper: "k-reset k-header k-toolbar k-gantt-actions",
+            actionsWrapper: "k-reset k-header k-gantt-actions",
             button: "k-button k-button-icontext",
             iconPlus: "k-icon k-i-plus",
             viewButtonDefault: "k-state-default",
@@ -921,7 +921,7 @@ var __meta__ = {
                     }
                 });
 
-            toolbar
+            this.wrapper
                 .find(DOT + ganttStyles.toolbar.toolbar + " li")
                 .hover(function() {
                     $(this).addClass(hoveredClassName);
