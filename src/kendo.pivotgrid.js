@@ -2321,56 +2321,33 @@ var __meta__ = {
             var dataSource = that.dataSource;
 
             var axes = dataSource.axes();
-            var columns = axes.columns || {};
-            var rows = axes.rows || {};
+            var columns = (axes.columns || {}).tuples || [];
+            var rows = (axes.rows || {}).tuples || [];
 
-            var columnDescriptors = dataSource.columns();
-            var rowDescriptors = dataSource.rows();
-
-            var contentBuilder = that._contentBuilder;
             var columnBuilder = that._columnBuilder;
             var rowBuilder = that._rowBuilder;
 
-            var columnAxis = contentBuilder.columnAxis;
-            var rowAxis = contentBuilder.rowAxis;
-
-            var columnMeasures = dataSource._columnMeasures().length || 1;
-            var rowMeasures = dataSource._rowMeasures().length || 1;
-            var oldColumnMeasures = columnAxis.measures || columnMeasures;
-            var oldRowMeasures = rowAxis.measures || rowMeasures;
+            var columnAxis = {};
+            var rowAxis = {};
 
             if (that.trigger(DATABINDING, { action: "rebind" } )) {
                 return;
             }
 
-            //reset metadata
-            if (descriptorsChanged(that._columnDescriptors, columnDescriptors) || oldColumnMeasures !== columnMeasures)
-            {
-                columnBuilder.metadata = {};
-            }
+            columnBuilder.reset(columns[0]);
+            rowBuilder.reset(rows[0]);
 
-            //reset metadata
-            if (descriptorsChanged(that._rowDescriptors, rowDescriptors) || oldRowMeasures !== rowMeasures)
-            {
-                rowBuilder.metadata = {};
-            }
+            that.columnsHeaderTree.render(columnBuilder.build(columns));
+            that.rowsHeaderTree.render(rowBuilder.build(rows));
 
-            that._columnDescriptors = columnDescriptors.slice(0);
-            that._rowDescriptors = rowDescriptors.slice(0);
-
-            //render headers
-            that.columnsHeaderTree.render(columnBuilder.build(columns.tuples || []));
-            that.rowsHeaderTree.render(rowBuilder.build(rows.tuples || []));
-
-            //render content
             columnAxis = {
-                measures: columnMeasures,
+                measures: dataSource._columnMeasures().length || 1,
                 indexes: columnBuilder._indexes,
                 metadata: columnBuilder.metadata
             };
 
             rowAxis = {
-                measures: rowMeasures,
+                measures: dataSource._rowMeasures().length || 1,
                 indexes: rowBuilder._indexes,
                 metadata: rowBuilder.metadata
             };
@@ -2384,6 +2361,7 @@ var __meta__ = {
             that.trigger(DATABOUND);
         }
     });
+
 
     function descriptorsChanged(old, current) {
         var length = current.length;
@@ -2405,12 +2383,30 @@ var __meta__ = {
         return false;
     }
 
+    function tupleChanged(old, current) {
+        var oldMembers = old.members;
+        var currentMembers = current.members;
+        var length = currentMembers.length;
+        var idx = 0;
+
+        if (oldMembers.length !== length) {
+            return true;
+        }
+
+        for (; idx < length; idx++) {
+            if (oldMembers[idx].name !== currentMembers[idx].name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
     var ColumnBuilder = Class.extend({
         init: function(options) {
-            this._state(null);
             this.metadata = {};
         },
 
@@ -2420,10 +2416,21 @@ var __meta__ = {
             ];
         },
 
+        reset: function(tuple) {
+            var root = this.rootTuple;
+
+            if (!tuple || root && tupleChanged(root, tuple)) {
+                this.metadata = {};
+            }
+        },
+
         _thead: function(tuples) {
             var root = tuples[0];
 
-            this._state(root);
+            this.map = {};
+            this.rows = [];
+            this.rootTuple = root;
+
             this._indexes = [];
 
             if (root) {
@@ -2750,19 +2757,11 @@ var __meta__ = {
             (allCell || cell).attr[kendo.attr("tuple-all")] = true;
 
             return row;
-        },
-
-        _state: function(rootTuple) {
-            this.rows = [];
-            this.map = {};
-            this.rootTuple = rootTuple;
-            this.rootMember = false;
         }
     });
 
     var RowBuilder = Class.extend({
         init: function(options) {
-            this._state(null);
             this.metadata = {};
         },
 
@@ -2772,10 +2771,21 @@ var __meta__ = {
             ];
         },
 
+        reset: function(tuple) {
+            var root = this.rootTuple;
+
+            if (!tuple || root && tupleChanged(root, tuple)) {
+                this.metadata = {};
+            }
+        },
+
         _tbody: function(tuples) {
             var root = tuples[0];
 
-            this._state(root);
+            this.rootTuple = root;
+            this.rows = [];
+            this.map = {};
+
             this._indexes = [];
 
             if (root) {
@@ -2996,12 +3006,6 @@ var __meta__ = {
             }
 
             return row;
-        },
-
-        _state: function(rootTuple) {
-            this.rootTuple = rootTuple;
-            this.rows = [];
-            this.map = {};
         }
     });
 
