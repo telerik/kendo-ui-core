@@ -1077,4 +1077,94 @@
 
     })();
 
+    (function() {
+        var Group = diagram.Group;
+        var group;
+        var drawingElement;
+
+        module("Group", {
+            setup: function() {
+                group = new Group();
+                drawingElement = group.drawingElement;
+            }
+        });
+
+        test("inits group", function() {
+            ok(drawingElement);
+        });
+
+        test("appends visual drawing element", function() {
+            var childGroup = new Group();
+            group.append(childGroup);
+            ok(childGroup.drawingElement === drawingElement.children[0]);
+        });
+
+        test("removes visual drawing element", function() {
+            var childGroup = new Group();
+            group.append(childGroup);
+            group.remove(childGroup);
+            equal(drawingElement.children.length, 0);
+        });
+
+        test("clear clears children", function() {
+            group.append(new Group());
+            group.append(new Group());
+            group.clear();
+            equal(drawingElement.children.length, 0);
+        });
+
+        test("redraw transforms group to fit specified width and height", function() {
+            var rect = new diagram.Rectangle({width: 100, height: 100});
+            group.append(rect);
+            group.redraw({
+                width: 200,
+                height: 300
+            });
+
+            var matrix = group.drawingElement.transform().matrix();
+            equal(matrix.a, 2);
+            equal(matrix.d, 3);
+        });
+
+        // ------------------------------------------------------------
+        var child1;
+        var child2;
+        var child3;
+
+        module("Group / reordering", {
+            setup: function() {
+                group = new Group();
+                child1 = new Group();
+                child2 = new Group();
+                child3 = new Group();
+
+                group.append(child1);
+                group.append(child2);
+                group.append(child3);
+
+                drawingElement = group.drawingElement;
+            }
+        });
+
+        test("toFront moves elements to the end", function() {
+            group.toFront([child1, child2]);
+            ok(child1.drawingElement === drawingElement.children[1]);
+            ok(child2.drawingElement === drawingElement.children[2]);
+        });
+
+        test("toBack moves elements to the start", function() {
+            group.toBack([child3, child2]);
+            ok(child2.drawingElement === drawingElement.children[0]);
+            ok(child3.drawingElement === drawingElement.children[1]);
+        });
+
+        test("toIndex moves elements to the specified indices", function() {
+            group.toIndex([child3, child2], [0, 1]);
+
+            ok(child3.drawingElement === drawingElement.children[0]);
+            ok(child2.drawingElement === drawingElement.children[1]);
+        });
+
+    })();
+
 })();

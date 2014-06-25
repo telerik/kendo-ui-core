@@ -21,7 +21,9 @@
         g = dataviz.geometry,
         d = dataviz.drawing,
 
-        defined = dataviz.defined;
+        defined = dataviz.defined,
+
+        inArray = $.inArray;
 
     // Constants ==============================================================
     var SVGNS = "http://www.w3.org/2000/svg",
@@ -359,15 +361,11 @@
                 this.position(options.x, options.y);
             }
 
-            if (this._hasSize(options)) {
+            if (hasSizeOptions(options)) {
                 this.size(options);
             }
 
             VisualBase.fn.redraw.call(this, options);
-        },
-
-        _hasSize: function(options) {
-            return defined(options.width) && defined(options.height);
         },
 
         size: function (size) {
@@ -457,17 +455,12 @@
                 sizeChanged = true;
             }
 
-            if (sizeChanged || this._hasSize(options)) {
+            if (sizeChanged || hasSizeOptions(options)) {
                 this._size();
             }
         },
 
-        _size: function() {
-            if (this._hasSize(this.options)) {
-                this._measure(true);
-                sizeTransform(this);
-            }
-        },
+        _size: autoSizeElement,
 
         bounds: function () {
             var options = this.options,
@@ -603,7 +596,7 @@
 
         redraw: function (options) {
             Visual.fn.redraw.call(this, options);
-            if (this._hasSize(options || {})) {
+            if (hasSizeOptions(options || {})) {
                 this._updatePath();
             }
         },
@@ -645,7 +638,7 @@
             Visual.fn.redraw.call(this, options);
             if (options && options.data) {
                 this._setData(options.data);
-            } else if (this._hasSize(options)) {
+            } else if (hasSizeOptions(options)) {
                 this._size();
             }
         },
@@ -671,12 +664,7 @@
             }
         },
 
-        _size: function() {
-            if (this._hasSize(this.options)) {
-                this._measure(true);
-                sizeTransform(this);
-            }
-        }
+        _size: autoSizeElement
     });
 
     var Marker = Element.extend({
@@ -901,10 +889,7 @@
             var options = this.options;
             var rect = this._rect();
 
-            this.drawingElement = new d.Image(options.source, rect, {
-                fill: options.fill,
-                stroke: options.stroke
-            });
+            this.drawingElement = new d.Image(options.source, rect, {});
         },
 
         _rect: function() {
@@ -922,59 +907,80 @@
 
     var Group = Element.extend({
         init: function (options) {
-            Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
-            this.width = this.options.width;
-            this.height = this.options.height;
+            Element.fn.init.call(this, options);
+            this.drawingElement = new d.Group();
         },
+
+        size: Visual.fn.size,
+
+        _size: autoSizeElement,
+
         options: {
             autoSize: true
         },
+
         append: function (visual) {
-            this.domElement.appendChild(visual.domElement);
+            this.drawingElement.append(visual.drawingElement);
             visual.canvas = this.canvas;
         },
+
         remove: function (visual) {
-            if (visual.domElement) {
-                this.domElement.removeChild(visual.domElement);
-            }
-            else {
-                this.domElement.removeChild(visual);
-            }
+            this.drawingElement.remove(visual.drawingElement);
         },
+
         clear: function () {
-            while (this.domElement.lastChild) {
-                this.domElement.removeChild(this.domElement.lastChild);
+            this.drawingElement.clear();
+        },
+
+        toFront: function (visuals) {
+            var drawingElement = this.drawingElement;
+            var visual;
+
+            for (var i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                drawingElement.remove(visual.drawingElement);
+                drawingElement.append(visual.drawingElement);
             }
         },
-        toFront: function (visuals) {
-            var visual, i, n = this.domElement;
+        //TO DO: add drawing group support for moving and inserting children
+        toBack: function (visuals) {
+            this._reorderChildren(visuals, 0);
+        },
+
+        toIndex: function (visuals, indices) {
+            this._reorderChildren(visuals, indices);
+        },
+
+        _reorderChildren: function(visuals, indices) {
+            var group = this.drawingElement;
+            var children = group.children.slice(0);
+            var fixedPosition = Utils.isNumber(indices);
+            var i, index, toIndex, drawingElement;
 
             for (i = 0; i < visuals.length; i++) {
-                visual = visuals[i];
-                n.appendChild(visual.domElement);
+                drawingElement = visuals[i].drawingElement;
+                index = inArray(drawingElement, children);
+                if (index >= 0) {
+                    children.splice(index, 1);
+                    toIndex = fixedPosition ? indices : indices[i];
+                    children.splice(toIndex, 0, drawingElement);
+                }
             }
+            group.clear();
+            group.append.apply(group, children);
         },
-        toBack: function (visuals) {
-            var visual, i;
-            for (i = 0; i < visuals.length; i++) {
-                visual = visuals[i];
-                this.domElement.insertBefore(visual.domElement, this.domElement.firstChild);
-            }
-        },
-        toIndex: function (visuals, indices) { // bring the items to the following index
-            var visual, i, index;
-            for (i = 0; i < visuals.length; i++) {
-                visual = visuals[i];
-                index = indices[i];
-                this.domElement.insertBefore(visual.domElement, this.domElement.children[index]);
-            }
-        },
-        size: function () {
-            sizeTransform(this);
-        },
+
         redraw: function (options) {
+            options = options || {};
+            deepExtend(this.options, {
+                width: options.width,
+                height: options.height,
+                x: options.x,
+                y: options.y
+            });
+            this._size();
+
             Element.fn.redraw.call(this, options);
-            this.size();
         }
     });
 
@@ -1204,6 +1210,17 @@
             }
         }
     });
+
+    function hasSizeOptions(options) {
+        return options && defined(options.width) && defined(options.height);
+    }
+
+    function autoSizeElement() {
+        if (hasSizeOptions(this.options)) {
+            this._measure(true);
+            sizeTransform(this);
+        }
+    }
 
     kendo.deepExtend(diagram, {
         init: function (element) {
