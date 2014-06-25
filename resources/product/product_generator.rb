@@ -108,40 +108,42 @@ class TelerikProductCreateBot
       end
     end
     def navigate_to_section(suite_alias)
-     tname = String.new
       case suite_alias
         when "KUI"
           click_and_wait "Kendo UI Professional", "administration"
-          tname = "Kendo UI"
         when "MVC"
           click_and_wait "UI for ASP.NET MVC", "administration"
-          tname = "ASP.NET MVC"
         when "JSP"
           click_and_wait "UI for JSP", "administration"
-          tname = "JSP"
         when "PHP"  
           click_and_wait "UI for PHP", "administration"
-          tname = "PHP"
       end
-     return tname
     end
     def navigate_to_forum(suite_alias)
-     tname = String.new
       case suite_alias
         when "KUI"
           click_and_wait "Kendo UI", "Support"
-          tname = "Kendo UI"
         when "MVC"
           click_and_wait "UI for ASP.NET MVC", "Support"
-          tname = "ASP.NET MVC"
         when "JSP"
           click_and_wait "UI for JSP", "Support"
-          tname = "JSP"
         when "PHP"  
           click_and_wait "UI for PHP", "Support"
-          tname = "PHP"
       end
-     return tname
+    end
+    def get_tname(suite_alias)
+      tname = String.new
+          case suite_alias
+            when "KUI"
+              tname = "Kendo UI"
+            when "MVC"
+              tname = "ASP.NET MVC"
+            when "JSP"
+              tname = "JSP"
+            when "PHP"  
+              tname = "PHP"
+          end
+      return tname
     end
     def get_full_product_name(suite_alias)
      full_name = String.new
@@ -180,30 +182,18 @@ def start_product_creation()
       #cancel product creation if such a product already exists
       #return if bot.product_created(product_name, suite_alias)
       #bot.add_product(product_name, suite_alias)
+      tname = get_tname(suite_alias)
 
       product_names.each do |product_name|
         bot.go_to_products
 
-        tname = bot.navigate_to_section(suite_alias)
+        bot.navigate_to_section(suite_alias)
 
         bot.click_and_wait "New subproduct", "administration"
 
         p "creating product>>#{product_name}"
         create_product(bot, product_name,suite_alias, tname)
       end
-
-      tname = String.new
-          case suite_alias
-            when "KUI"
-              tname = "Kendo UI"
-            when "MVC"
-              tname = "ASP.NET MVC"
-            when "JSP"
-              tname = "JSP"
-            when "PHP"  
-              tname = "PHP"
-          end
-
       product_names.each do |product_name|
         p "creating code library for this product>>"
         create_code_library(bot, product_name, tname)
@@ -296,7 +286,9 @@ end
 def create_forum(bot, product_name, suite_alias, tname)
   bot.go_to_support
 
-  tname = bot.navigate_to_forum(suite_alias)
+  bot.navigate_to_forum(suite_alias)
+
+  tname = get_tname(suite_alias)
   
   bot.click_element(bot.find("[value='New Subforum']"))
 
