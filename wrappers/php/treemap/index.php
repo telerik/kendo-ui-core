@@ -40,4 +40,18 @@ $treeMap->dataSource($dataSource)
 
 echo $treeMap->render();
 ?>
+<style scoped>
+    .k-leaf {
+        color: #fff;
+    }
+    .k-leaf:hover {
+        border: 0;
+        color: #fff;
+        padding: .7em;
+    }
+    .k-tile-inverse,
+    .k-tile-inverse:hover {
+        color: #000;
+    }
+</style>
 <?php require_once '../include/footer.php'; ?>
