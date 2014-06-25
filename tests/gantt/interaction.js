@@ -61,12 +61,7 @@
     };
     var setupDataSource = function(data) {
         return new GanttDataSource({
-            data: data,
-            schema: {
-                model: {
-                    id: "id"
-                }
-            }
+            data: data
         });
     };
 
@@ -418,7 +413,6 @@
         var dropDown = gantt.headerDropDown;
 
         dropDown.trigger("command", { type: "add" });
-
         equal(gantt.dataSource.taskChildren().length, 3);
     });
 

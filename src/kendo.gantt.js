@@ -978,7 +978,7 @@ var __meta__ = {
             var handler = function(e) {
                 var type = e.type;
                 var orderId;
-                var task = new GanttTask();
+                var task = dataSource._createNewModel();
                 var selected = that.dataItem(that.select());
                 var parent = dataSource.taskParent(selected);
                 var firstSlot = timeline.view()._timeSlots()[0];
