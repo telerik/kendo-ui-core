@@ -12,6 +12,12 @@
             )
             .ValueField("Value")
             .TextField("Name")
+            .Colors(new string[] {
+                "#0c81c5","#3aa2de",
+                "#449000", "#76b800",
+                "#ffae00", "#ef4c00",
+                "#9e0a61"
+            })
             .HtmlAttributes(new { style = "height:600px" })
     %>
 </div>
