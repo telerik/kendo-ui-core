@@ -101,7 +101,7 @@ def create_cl_thread(bot, product_name, tname)
 end
 def set_cl_fields(bot, product_name)
       p "setting code library fields>>#{product_name}"
-      sleep(3)
+      sleep(1)
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys '#{product_name}' 
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
       bot.execute_script("window.frames[0].$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
@@ -123,11 +123,11 @@ def set_cl_fields(bot, product_name)
       #bot.driver.find_element(:xpath, "//label[contains(text(),'Allow users to upload file attachments in posts')]").click
       bot.execute_script("window.frames[0].$('label:contains(\"Allow users to upload file attachments in posts\")').click()")
       sleep(1)
-      bot.execute_script("window.frames[0].$('label:contains(\"Define Manually\")').click()")
+      bot.execute_script("window.frames[0].$('label:contains(\"Define Manually...\")').click()")
       #bot.driver.find_element(:xpath, "//label[contains(text(),\"Define Manually\"]')").click
       sleep(1)
       p "fields settings done>>"
       #bot.driver.find_element(:xpath, "//textarea[contains(@id,'AllowedAttachmentExtensionsText')]").type ".zip, .rar"
-      bot.execute_script("window.frames[0].$('[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
+      bot.execute_script("window.frames[0].$('textarea[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
       #sleep(3)
 end
