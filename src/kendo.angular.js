@@ -325,6 +325,9 @@
                                 }
 
                                 ngModel.$setPristine();
+                                if (ngForm) {
+                                    ngForm.$setPristine();
+                                }
                             }
 
                             // kNgModel is used for the "logical" value
