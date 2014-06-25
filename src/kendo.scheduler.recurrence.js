@@ -2273,7 +2273,7 @@ var __meta__ = {
     );
 
     var RECURRENCE_GROUP_BUTTON_TEMPLATE = kendo.template(
-        '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+        '<ul class="k-reset k-header k-scheduler-navigation">' +
             '#for (var i = 0, length = dataSource.length; i < length; i++) {#' +
                 '<li class="k-state-default #= value === dataSource[i].value ? \"k-state-selected\" : \"\" #">' +
                     '<a role="button" href="\\#" class="k-link" data-#=ns#value="#=dataSource[i].value#">#:dataSource[i].text#</a>' +

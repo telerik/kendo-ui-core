@@ -68,30 +68,30 @@ var __meta__ = {
         EDITRECURRING = "Do you want to edit only this event occurrence or the whole series?",
         COMMANDBUTTONTMPL = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>',
         TOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
-            '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+            '<ul class="k-reset k-header k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a role="button" href="\\#" class="k-link">${messages.today}</a></li>' +
                '<li class="k-state-default k-nav-prev"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
                '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
                '<li class="k-state-default k-nav-current"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-calendar"></span><span data-#=ns#bind="text: formattedDate"></span></a></li>' +
             '</ul>' +
-            '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
+            '<ul class="k-reset k-header k-scheduler-views">' +
                 '#for(var view in views){#' +
                     '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
             '</div>'),
         MOBILETOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar">' +
-            '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+            '<ul class="k-reset k-header k-scheduler-navigation">' +
                '<li class="k-state-default k-nav-today"><a role="button" href="\\#" class="k-link">${messages.today}</a></li>' +
             '</ul>' +
-            '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
+            '<ul class="k-reset k-header k-scheduler-views">' +
                 '#for(var view in views){#' +
                     '<li class="k-state-default k-view-#= view.toLowerCase() #" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
                 '#}#'  +
             '</ul>' +
             '</div>'+
             '<div class="k-floatwrap k-header k-scheduler-toolbar">' +
-                '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+                '<ul class="k-reset k-header k-scheduler-navigation">' +
                    '<li class="k-state-default k-nav-prev"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
                    '<li class="k-state-default k-nav-current"><span data-#=ns#bind="text: formattedDate"></span></li>' +
                    '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
