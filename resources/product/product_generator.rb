@@ -317,15 +317,15 @@ def fill_forum_fields(bot, product_name, tname)
     if tname == "Kendo UI"
        bot.execute_script <<-SCRIPT
          var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("#{product_name} for #{tname}");
-         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
-         $telerik.$(textElement).click()
+         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0];
+         $telerik.$(textElement).click();
        SCRIPT
        sleep(1)
     elsif product_name.index("Mobile") == nil
        bot.execute_script <<-SCRIPT
          var node = $find($telerik.$('[id$=\"treeViewProductHierarchy\"]').attr('id')).findNodeByText("Kendo UI #{product_name} for #{tname}");
-         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0]
-         $telerik.$(textElement).click()
+         var textElement = $telerik.$(node.get_element()).find('.rtIn')[0];
+         $telerik.$(textElement).click();
        SCRIPT
        sleep(1)
     else
