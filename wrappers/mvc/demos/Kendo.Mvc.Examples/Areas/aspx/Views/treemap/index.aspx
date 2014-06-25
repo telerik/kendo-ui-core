@@ -1,5 +1,24 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<style>
+    .k-leaf {
+        color: #fff;
+    }
+
+    .k-leaf:hover {
+        border: 0;
+        color: #fff;
+        padding: .7em;
+    }
+    
+    .k-tile-inverse,
+    .k-tile-inverse:hover {
+        color: #000;
+    }
+</style>
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <div class="treeMap-wrapper" style="margin: auto;">
     <%= Html.Kendo().TreeMap()
