@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI
             this.urlGenerator = urlGenerator;
             DataSource = new DataSource();
             DataSource.ModelType(typeof(object));
+
+            ColorRanges = new List<string[]>();
 //>> Initialization
         
         //<< Initialization
@@ -29,6 +31,8 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
+
+        public List<string[]> ColorRanges { get; set; }
 
 //>> Fields
         
@@ -59,6 +63,11 @@ namespace Kendo.Mvc.UI
             else if (DataSource.Data != null)
             {
                 json["dataSource"] = DataSource.Data;
+            }
+
+            if (ColorRanges.Any())
+            {
+                json["colors"] = ColorRanges;
             }
 
 //>> Serialization

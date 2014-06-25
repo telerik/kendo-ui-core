@@ -9,11 +9,12 @@
           )
           .ValueField("Value")
           .TextField("Name")
-          .Colors(new string[] {
-              "#0c81c5","#3aa2de",
-              "#449000", "#76b800",
-              "#ffae00", "#ef4c00",
-              "#9e0a61"
+          .Colors(c =>
+          {
+              c.AddRange("#0c81c5", "#c5dceb"); c.AddRange("#3aa2de", "#d8ecf8");
+              c.AddRange("#449000", "#dae9cc"); c.AddRange("#76b800", "#dae7c3");
+              c.AddRange("#ffae00", "#f5e5c3"); c.AddRange("#ef4c00", "#f1b092");
+              c.AddRange("#9e0a61", "#eccedf");
           })
           .HtmlAttributes(new { style = "height:600px" })
     )
