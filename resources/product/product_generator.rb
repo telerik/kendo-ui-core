@@ -182,7 +182,7 @@ def start_product_creation()
       #cancel product creation if such a product already exists
       #return if bot.product_created(product_name, suite_alias)
       #bot.add_product(product_name, suite_alias)
-      tname = get_tname(suite_alias)
+      tname = bot.get_tname(suite_alias)
 
       product_names.each do |product_name|
         bot.go_to_products
@@ -288,7 +288,7 @@ def create_forum(bot, product_name, suite_alias, tname)
 
   bot.navigate_to_forum(suite_alias)
 
-  tname = get_tname(suite_alias)
+  tname = bot.get_tname(suite_alias)
   
   bot.click_element(bot.find("[value='New Subforum']"))
 
