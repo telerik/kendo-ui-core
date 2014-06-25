@@ -136,9 +136,9 @@ echo $grid->render();
 </script>
 
 <style scoped="scoped">
-    #grid .k-toolbar
+    #grid .k-grid-toolbar
     {
-        min-height: 27px;
+        padding: .6em 1.3em;
     }
     .category-label
     {
