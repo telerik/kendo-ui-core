@@ -202,7 +202,11 @@ var __meta__ = {
                                         .bind("scroll" + NS, proxy(that._scroll, that));
         },
 
-        _wheelScroll: function(e) {
+        _wheelScroll: function (e) {
+            if (e.ctrlKey) {
+                return;
+            }
+
             var scrollTop = this.verticalScrollbar.scrollTop(),
                 delta = kendo.wheelDeltaY(e);
 
@@ -4462,7 +4466,11 @@ var __meta__ = {
             }
         },
 
-        _wheelScroll: function(e) {
+        _wheelScroll: function (e) {
+            if (e.ctrlKey) {
+                return;
+            }
+
             var content = this.content;
 
             if (this.options.scrollable.virtual) {
