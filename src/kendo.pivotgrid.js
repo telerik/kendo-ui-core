@@ -2296,7 +2296,7 @@ var __meta__ = {
 
             if (that.wrapper.is(":visible")) {
                 if (!height) {
-                    if (minWidth > 100) {
+                    if (minWidth <= 100) {
                         scrollbar = 0;
                     }
 

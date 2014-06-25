@@ -3048,6 +3048,29 @@
 
         pivotgrid.refresh();
 
+        equal(rowsHeader.height(), content.height());
+    });
+
+    test("PivotGrid sets height of rows header without scrollbar if horizontal content scrollbar", function() {
+        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
+        var data = [];
+
+        for (var idx = 0; idx < 100; idx++) {
+            tuples.push({ members: [ { name: "tuple " + idx, parentName: "dim 0", levelNum: "1", children: [] }] });
+            data.push(idx);
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        content.height("100px");
+
+        pivotgrid.refresh();
+
         equal(rowsHeader.height(), content.height() - kendo.support.scrollbar());
     });
 })();
