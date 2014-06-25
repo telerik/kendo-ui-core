@@ -760,5 +760,45 @@
         equal(axes.rows.tuples.length, 1);
         equal(axes.rows.tuples[0].members[0].measure, true);
     });
+
+    test("reset root tuple if its members change", function() {
+        var members = [ { name: "dim 0", children: [] } ];
+        var dataSource = new PivotDataSource({
+            columns: [ "dim 0" ],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                    { members: members }
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        //change root members
+        members = [ { name: "dim 0", children: [] }, { name: "dim 1", children: [] } ];
+
+        dataSource.read();
+
+        var axes = dataSource.axes();
+
+        equal(axes.columns.tuples.length, 1);
+        equal(axes.columns.tuples[0].members.length, 2);
+        equal(axes.columns.tuples[0].members[0].name, "dim 0");
+        equal(axes.columns.tuples[0].members[1].name, "dim 1");
+    });
+
 })();
 

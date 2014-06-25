@@ -945,6 +945,15 @@ var __meta__ = {
         var sourceMembers = source[0].members;
         var memberIndex = -1;
 
+        if (targetMembers.length !== sourceMembers.length) {
+            return {
+                parsedRoot: null,
+                tuples: source,
+                memberIndex: 0,
+                index: 0
+            };
+        }
+
         for (var idx = 0, length = targetMembers.length; idx < length; idx++) {
             if (!targetMembers[idx].measure && sourceMembers[idx].children[0]) {
                 if (memberIndex == -1 && sourceMembers[idx].children.length) {
