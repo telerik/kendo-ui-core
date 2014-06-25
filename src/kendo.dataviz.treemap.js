@@ -592,11 +592,7 @@ var __meta__ = {
 
         _createTitle: function(item) {
             return $("<div class='k-treemap-title'></div>")
-                .text(this._getText(item))
-                .toggleClass(
-                    "k-treemap-title-inverse",
-                    this._tileColorBrightness(item) > 180
-                );
+                .text(this._getText(item));
         },
 
         _createWrap: function() {
