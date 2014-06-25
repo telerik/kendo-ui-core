@@ -326,7 +326,12 @@
 
                                 ngModel.$setPristine();
                                 if (ngForm) {
-                                    ngForm.$setPristine();
+                                    var form = element, top;
+                                    while (form.controller("form")) {
+                                        top = form.controller("form");
+                                        form = form.parent();
+                                    }
+                                    top.$setPristine();
                                 }
                             }
 
