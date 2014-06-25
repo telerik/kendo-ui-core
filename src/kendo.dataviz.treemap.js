@@ -527,7 +527,7 @@ var __meta__ = {
                     .text(this._getText(item))
                     .css("background-color", item.color)
                     .toggleClass(
-                        "k-treemap-title-inverse",
+                        "k-tile-inverse",
                         this._tileColorBrightness(item) > 180
                     );
             }
