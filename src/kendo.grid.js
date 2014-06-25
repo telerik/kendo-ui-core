@@ -2389,7 +2389,7 @@ var __meta__ = {
                         toolbar = proxy(kendo.template(toolbar), that);
                     }
 
-                    container = $('<div class="k-toolbar k-grid-toolbar" />')
+                    container = $('<div class="k-header k-grid-toolbar" />')
                         .html(toolbar({}))
                         .prependTo(wrapper);
 

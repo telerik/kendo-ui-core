@@ -25,7 +25,7 @@
         dataSource = options.dataSource;
 
         var grid = table.kendoGrid(options).data("kendoGrid");
-        toolbar = grid.wrapper.find(".k-toolbar");
+        toolbar = grid.wrapper.find(".k-grid-toolbar");
 
         return grid;
     }
@@ -47,18 +47,18 @@
         var grid = setup({ toolbar: true }),
             wrapper = grid.wrapper;
 
-        equal(wrapper.find(".k-toolbar").length, 1);
+        equal(wrapper.find(".k-grid-toolbar").length, 1);
 
-        ok(wrapper.children().first().hasClass("k-toolbar"));
+        ok(wrapper.children().first().hasClass("k-grid-toolbar"));
     });
 
     test("div is appended before the table when toolbar is enabled without scrolling", function() {
         var grid = setup({ toolbar: true, scrollable: false }),
             wrapper = grid.wrapper;
 
-        equal(wrapper.find(".k-toolbar").length, 1);
+        equal(wrapper.find(".k-grid-toolbar").length, 1);
 
-        ok(wrapper.children().first().hasClass("k-toolbar"));
+        ok(wrapper.children().first().hasClass("k-grid-toolbar"));
     });
 
     test("toolbar template", function() {
