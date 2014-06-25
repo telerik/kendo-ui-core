@@ -218,32 +218,21 @@ def create_product(bot, product_name, suite_alias, tname)
        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('#{product_name} for #{tname}')")
 
        if product_name.index("Mobile") == nil
-         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui.png"
+         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\" + product_name.downcase + "_kendoui.png"
        else
         product_name_mod = product_name.downcase.sub " (mobile)", ""
-        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui.png"
-       end
-
-    elsif tname == "JSP"
-       if product_name.index("Mobile") == nil
-         bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_java.png"
-       else
-        product_name_mod = product_name.downcase.sub " (mobile)", ""
-        product_name_trim = product_name.sub " (Mobile)", ""
-        bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI Mobile #{product_name_trim} for #{tname}')")
-        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_java.png"
+        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\mobile_" + product_name_mod.downcase + "_kendoui.png"
        end
 
     else
        if product_name.index("Mobile") == nil
          bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI #{product_name} for #{tname}')")
-         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+         product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\" + product_name.downcase + "_kendoui_" + suite_alias.downcase + ".png"
        else
         product_name_mod = product_name.downcase.sub " (mobile)", ""
         product_name_trim = product_name.sub " (Mobile)", ""
         bot.execute_script("$('[id$=\"_tfName_txtFieldText\"]').val('Kendo UI Mobile #{product_name_trim} for #{tname}')")
-        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\16\\mobile_" + product_name_mod.downcase + "_kendoui_" + suite_alias.downcase + ".png"
+        product_icon_path = "\\\\telerik.com\\resources\\UX\\KendoUI\\Icons\\#{suite_alias}\\mobile_" + product_name_mod.downcase + "_kendoui_" + suite_alias.downcase + ".png"
        end
 
     end
