@@ -1991,7 +1991,6 @@
   {
     "text": "MaskedTextBox",
     "name": "maskedtextbox",
-    "new": "true",
     "api": "web/maskedtextbox",
     "documentation": {
        "kendo-ui": "getting-started/web/maskedtextbox/overview",
@@ -2420,7 +2419,6 @@
   {
     "text": "Notification",
     "name": "notification",
-    "new": true,
     "api": "web/notification",
     "documentation": {
        "kendo-ui": "getting-started/web/notification/overview",
@@ -3351,7 +3349,6 @@
        "php-ui": "php/sortable"
     },
     "spriteCssClass": "sortableIcon",
-    "new": true,
     "items": [
       {
         "text": "Basic usage",
@@ -6648,6 +6645,7 @@
 		}
 	],
 	"spriteCssClass": "chartRangeBarIcon",
+        "new": "true",
 	"name": "range-bar-charts",
 	"category": "Data Visualization"
   },
@@ -6655,6 +6653,7 @@
     "text": "Waterfall Charts",
     "name": "waterfall-charts",
     "pro": "true",
+    "new": "true",
     "api": "dataviz/chart",
     "documentation": {
        "kendo-ui": "getting-started/dataviz/chart/overview",
@@ -7443,6 +7442,7 @@
   {
     "text": "TreeMap",
     "pro": "true",
+    "new": "true",
     "spriteCssClass": "treeMapIcon",
     "api": "dataviz/treemap",
     "documentation": {
