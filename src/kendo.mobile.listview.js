@@ -215,15 +215,11 @@ var __meta__ = {
             this.dataSource = dataSource;
 
             dataSource.bind("change", function() {
-                setTimeout(function() {
-                    handler._change();
-                }, 100);
+                handler._change();
             });
 
             dataSource.bind("error", function() {
-                setTimeout(function() {
-                    handler._change();
-                }, 100);
+                handler._change();
             });
         },
 
