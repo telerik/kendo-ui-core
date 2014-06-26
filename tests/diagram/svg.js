@@ -210,14 +210,13 @@
         });
     }
 
-    (function() {
-        var VisualBase = diagram.VisualBase;
+    function visualBaseTests(name, type) {
         var visual;
         var drawingElement;
 
-        module("VisualBase", {
+        module(name + " / VisualBase", {
             setup: function() {
-                visual = new VisualBase({
+                visual = new type({
                     fill: {
                         color: "red"
                     },
@@ -237,9 +236,9 @@
         });
 
         // ------------------------------------------------------------
-        module("VisualBase / api", {
+        module(name + " / VisualBase / api", {
             setup: function() {
-                visual = new VisualBase({
+                visual = new type({
                     fill: {
                         color: "blue",
                         opacity: 1
@@ -250,8 +249,7 @@
                         opacity: 1
                     }
                 });
-                drawingElement = new ShapeMock();
-                visual.drawingElement = drawingElement;
+                drawingElement = visual.drawingElement;
             }
         });
 
@@ -411,8 +409,7 @@
             };
             visual._hover(false);
         });
-
-    })();
+    }
 
     (function() {
         var Visual = diagram.Visual;
@@ -653,7 +650,7 @@
         });
 
         elementTests("TextBlock", TextBlock);
-
+        visualBaseTests("TextBlock", TextBlock);
     })();
 
     (function() {
@@ -715,7 +712,7 @@
         });
 
         elementTests("Rectangle", Rectangle);
-
+        visualBaseTests("Rectangle", Rectangle);
     })();
 
     (function() {
@@ -821,6 +818,7 @@
         });
 
         elementTests("Path", Path);
+        visualBaseTests("Path", Path);
     })();
 
     (function() {
@@ -885,6 +883,7 @@
         });
 
         elementTests("Line", Line);
+        visualBaseTests("Line", Line);
     })();
 
     (function() {
@@ -944,7 +943,7 @@
         });
 
         elementTests("Polyline", Polyline);
-
+        visualBaseTests("Polyline", Polyline);
     })();
 
     (function() {
@@ -1080,6 +1079,7 @@
         });
 
         elementTests("Circle", Circle);
+        visualBaseTests("Circle", Circle);
     })();
 
     (function() {
