@@ -2147,10 +2147,6 @@ var __meta__ = {
             });
         },
 
-        _columnFields: function() {
-            this.columnFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-columns");
-        },
-
         _createSettingTarget: function(element, options) {
             var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
             if (this.options.reorderable) {
@@ -2184,23 +2180,6 @@ var __meta__ = {
             });
         },
 
-        _rowFields: function() {
-            this.rowFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-rows");
-        },
-
-        _columnsHeader: function() {
-            this.columnsHeader = $('<div class="k-grid-header-wrap" />')
-                                    .wrap('<div class="k-grid-header" />');
-        },
-
-        _rowsHeader: function() {
-            this.rowsHeader = $('<div class="k-grid k-widget k-alt"/>');
-        },
-
-        _contentTable: function() {
-            this.content = $('<div class="k-grid-content" />');
-        },
-
         _createLayout: function() {
             var that = this;
             var layoutTable = $(LAYOUT_TABLE);
@@ -2209,13 +2188,14 @@ var __meta__ = {
             var gridWrapper = $(DIV).addClass("k-grid k-widget");
 
             that._measureFields();
-            that._columnFields();
+            that.columnFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-columns");
 
-            that._rowFields();
-            that._columnsHeader();
+            that.rowFields = $(DIV).addClass("k-pivot-toolbar k-header k-settings-rows");
+            that.columnsHeader = $('<div class="k-grid-header-wrap" />')
+                                    .wrap('<div class="k-grid-header" />');
 
-            that._rowsHeader();
-            that._contentTable();
+            that.rowsHeader = $('<div class="k-grid k-widget k-alt"/>');
+            that.content = $('<div class="k-grid-content" />');
 
             leftContainer.append(that.measureFields);
             leftContainer.append(that.rowFields);
@@ -2242,39 +2222,37 @@ var __meta__ = {
         },
 
         _resize: function() {
-            var columnFieldsHeight = this.columnFields.height("100%").height();
-            var measureFieldsHeight = this.measureFields.height("100%").height();
-            var height;
-
-            if (columnFieldsHeight > measureFieldsHeight) {
-                height = columnFieldsHeight;
-            } else {
-                height = measureFieldsHeight;
+            if (this.content[0].firstChild) {
+                this._setSectionsHeight();
+                this._setContentWidth();
+                this._setContentHeight();
             }
+        },
 
-            this.measureFields.height(height);
-            this.columnFields.height(height);
-
-            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
+        _setSectionsHeight: function() {
+            var measureFieldsHeight = this.measureFields.height("100%").height();
+            var columnFieldsHeight = this.columnFields.height("100%").height();
             var rowFieldsHeight = this.rowFields.height("100%").innerHeight();
+            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
 
             var padding = rowFieldsHeight - this.rowFields.height();
 
-            if (columnsHeight > rowFieldsHeight) {
-                height = columnsHeight;
-            } else {
-                height = rowFieldsHeight;
-            }
+            var firstRowHeight = columnFieldsHeight > measureFieldsHeight ? columnFieldsHeight : measureFieldsHeight;
+            var secondRowHeight = columnsHeight > rowFieldsHeight ? columnsHeight : rowFieldsHeight;
 
-            this.rowFields.height(height - padding);
-            this.columnsHeader.height(height);
+            this.measureFields.height(firstRowHeight);
+            this.columnFields.height(firstRowHeight);
+            this.rowFields.height(secondRowHeight - padding);
+            this.columnsHeader.height(secondRowHeight);
+        },
 
+        _setContentWidth: function() {
             var contentTable = this.content.children("table");
             var contentWidth = this.content.width();
 
             var rowLength = contentTable.children("colgroup").children().length;
 
-            var minWidth = 100; //percents
+            var minWidth = 100;
             var calculatedWidth = rowLength * this.options.columnWidth;
 
             if (contentWidth < calculatedWidth) {
@@ -2284,16 +2262,15 @@ var __meta__ = {
             contentTable.add(this.columnsHeader.children("table"))
                         .css("min-width", minWidth + "%");
 
-            this._setContentHeight(minWidth);
         },
 
-        _setContentHeight: function(minWidth) {
+        _setContentHeight: function() {
             var that = this;
             var content = that.content;
             var rowsHeader = that.rowsHeader;
             var height = that.options.height;
             var scrollbar = kendo.support.scrollbar();
-            var skipScrollbar = minWidth <= 100;
+            var skipScrollbar = content[0].offsetHeight === content[0].clientHeight;
 
             if (that.wrapper.is(":visible")) {
                 if (!height) {
