@@ -9,15 +9,15 @@
 
 	<kendo:pivotConfigurator name="configurator">
 	</kendo:pivotConfigurator>
-	
-	<kendo:pivotGrid name="pivotgrid" height="550px">
-		<kendo:pivotGrid-configurator name="configurator" />	
+
+	<kendo:pivotGrid name="pivotgrid" columnWidth="200" height="550px">
+		<kendo:pivotGrid-configurator name="configurator" />
 		<kendo:pivotDataSource type="xmla">
-			<kendo:pivotDataSource-columns>				
+			<kendo:pivotDataSource-columns>
 				<kendo:pivotDataSource-column name="[Date].[Calendar]" expand="true"/>
 				<kendo:pivotDataSource-column name="[Geography].[City]"/>
 			</kendo:pivotDataSource-columns>
-			<kendo:pivotDataSource-rows>				
+			<kendo:pivotDataSource-rows>
 				<kendo:pivotDataSource-row name="[Product].[Product]"/>
 			</kendo:pivotDataSource-rows>
 			<kendo:pivotDataSource-measures>
@@ -27,14 +27,14 @@
 			</kendo:pivotDataSource-schema>
 			<kendo:pivotDataSource-transport>
 				<kendo:pivotDataSource-transport-connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"/>
-				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+				<kendo:pivotDataSource-transport-discover url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
 				</kendo:pivotDataSource-transport-discover>
-				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">					
+				<kendo:pivotDataSource-transport-read url="${transportReadUrl}" dataType="text" contentType="text/xml" type="POST">
 				</kendo:pivotDataSource-transport-read>
 			</kendo:pivotDataSource-transport>
-		</kendo:pivotDataSource>		
+		</kendo:pivotDataSource>
 	</kendo:pivotGrid>
-	
+
 	 <style>
 	     #pivotgrid
 	     {
@@ -42,12 +42,12 @@
 	         vertical-align: top;
 	         width: 60%;
 	     }
-	
+
 	     #configurator
 	     {
 	         display: inline-block;
 	         vertical-align: top;
 	     }
       </style>
-	
+
 <demo:footer />
