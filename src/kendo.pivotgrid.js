@@ -2363,6 +2363,8 @@ var __meta__ = {
                 rowsHeader.scrollTop(this.scrollTop);
             });
 
+            rowsHeader.bind("DOMMouseScroll" + NS + " mousewheel" + NS, $.proxy(that._wheelScroll, that));
+
             if (touchScroller && touchScroller.movable) {
                 that.touchScroller = touchScroller;
 
@@ -2370,6 +2372,24 @@ var __meta__ = {
                     columnsHeader.scrollLeft(-e.sender.x);
                     rowsHeader.scrollTop(-e.sender.y);
                 });
+            }
+        },
+
+        _wheelScroll: function (e) {
+            if (e.ctrlKey) {
+                return;
+            }
+
+            var delta = kendo.wheelDeltaY(e);
+            var scrollTop = this.content.scrollTop();
+
+            if (delta) {
+                e.preventDefault();
+                //In Firefox DOMMouseScroll event cannot be canceled
+                $(e.currentTarget).one("wheel" + NS, false);
+
+                this.rowsHeader.scrollTop(scrollTop + (-delta));
+                this.content.scrollTop(scrollTop + (-delta));
             }
         }
     });
