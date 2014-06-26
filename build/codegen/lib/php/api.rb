@@ -75,7 +75,7 @@ module CodeGen::PHP::API
     end
 
 METADATA = ERB.new(%{---
-nav_title: <%= php_class %>
+title: <%= php_class %>
 ---
 })
 
@@ -84,12 +84,12 @@ COMPONENT_DESCRIPTION = ERB.new(%{
 
 A PHP wrapper for Kendo UI [<%= name %>](<%= api_link %>).
 <% if widget? %>
-Inherits from [\\Kendo\\UI\\Widget\](/kendo-ui/api/wrappers/php/Kendo/UI/Widget).
+Inherits from [\\Kendo\\UI\\Widget\](/api/wrappers/php/Kendo/UI/Widget).
 
 ## Usage
 
 To use <%= php_class %> in a PHP page instantiate a new instance, configure it via the available
-configuration [methods](#methods) and output it by `echo`-ing the result of the [render](/kendo-ui/api/wrappers/php/Kendo/UI/Widget#render) method.
+configuration [methods](#methods) and output it by `echo`-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
 
 ### Using Kendo <%= php_class %>
 
@@ -146,7 +146,7 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
 <% if simple %>
 <%= simple.examples %>
 <% end %>
-#### Example - using [<%= php_type %>](/kendo-ui<%= root %><%= path %>/<%= php_class %>)
+#### Example - using [<%= php_type %>](<%= root %><%= path %>/<%= php_class %>)
     <?php
     <%= owner.variable %> = <%= owner.value %>;
     <%= variable %> = <%= value %>;
@@ -266,7 +266,7 @@ Sets the data source of the <%= name %>.
 
 ##### $value `\\Kendo\\Data\\DataSource|array`
 
-#### Example - using [\\Kendo\\Data\\DataSource](/kendo-ui/api/wrappers/php/kendo/data/datasource)
+#### Example - using [\\Kendo\\Data\\DataSource](/api/wrappers/php/kendo/data/datasource)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
@@ -295,7 +295,7 @@ Sets the data source of the <%= name %>.
 
 ##### $value `\\Kendo\\Data\\HierarchicalDataSource|array`
 
-#### Example - using [\\Kendo\\Data\\HierarchicalDataSource](/kendo-ui/api/wrappers/php/kendo/data/hierarchicaldatasource)
+#### Example - using [\\Kendo\\Data\\HierarchicalDataSource](/api/wrappers/php/kendo/data/hierarchicaldatasource)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
@@ -373,7 +373,7 @@ EVENT_SECTION = ERB.new(%{
 
 <%= description %>
 
-For additional information check the [<%= name %>](/kendo-ui/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
+For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.name.downcase %>#events-<%= name %>) event documentation.
 
 #### Returns
 `<%= owner.php_type %>`
@@ -400,7 +400,7 @@ For additional information check the [<%= name %>](/kendo-ui/api/<%= suite %>/<%
     <%= owner.variable %>-><%= php_name %>('on<%= name.pascalize %>');
     ?>
 
-#### Example - using [\\Kendo\\JavaScriptFunction](/kendo-ui/api/wrappers/php/kendo/javascriptfunction)
+#### Example - using [\\Kendo\\JavaScriptFunction](/api/wrappers/php/kendo/javascriptfunction)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
