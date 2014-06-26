@@ -1144,6 +1144,12 @@
     <Content Include="Views\demos\range-bar-charts\remote-data-binding.cshtml" />
     <Content Include="Views\demos\treemap\index.cshtml" />
     <Content Include="Views\demos\pivotgrid\index.cshtml" />
+    <Content Include="Views\demos\gantt\api.cshtml" />
+    <Content Include="Views\demos\gantt\events.cshtml" />
+    <Content Include="Views\demos\gantt\index.cshtml" />
+    <Content Include="Views\demos\gantt\mvvm.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\integration\diagram\js\" />
