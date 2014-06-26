@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class LayoutController : Controller
+    public partial class Mobile_LayoutController : Controller
     {       
         public ActionResult Index()
         {
