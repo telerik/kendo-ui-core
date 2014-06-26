@@ -24,6 +24,7 @@
 
     <%= Html.Kendo().PivotGrid()
         .Name("pivotgrid")
+        .ColumnWidth(200)
         .Height(550)
         .Configurator("#configurator")
         .DataSource(dataSource => dataSource.
