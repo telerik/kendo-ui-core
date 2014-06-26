@@ -1,5 +1,5 @@
-<div class="example" ng-app="KendoDemos">
-    <div class="demo-section k-header" style="width: 500px;" ng-controller="MyCtrl">
+<div id="example" ng-app="KendoDemos">
+    <div class="demo-section k-content" style="width: 500px;" ng-controller="MyCtrl">
         <div class="box-col">
             <h4>Start date: <span ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</span></h4>
             <kendo-calendar ng-model="startDate" rebind="endDate" max="endDate"></kendo-calendar>
