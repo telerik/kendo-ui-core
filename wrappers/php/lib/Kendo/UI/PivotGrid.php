@@ -37,6 +37,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * The width of the table columns. Value is treated as pixels.
+    * @param float $value
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function columnWidth($value) {
+        return $this->setProperty('columnWidth', $value);
+    }
+
+    /**
     * The height of the pivotgrid. Numeric values are treated as pixels.
     * @param float|string $value
     * @return \Kendo\UI\PivotGrid
