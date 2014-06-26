@@ -2293,10 +2293,11 @@ var __meta__ = {
             var rowsHeader = that.rowsHeader;
             var height = that.options.height;
             var scrollbar = kendo.support.scrollbar();
+            var skipScrollbar = minWidth <= 100;
 
             if (that.wrapper.is(":visible")) {
                 if (!height) {
-                    if (minWidth <= 100) {
+                    if (skipScrollbar) {
                         scrollbar = 0;
                     }
 
@@ -2312,6 +2313,11 @@ var __meta__ = {
                 }
 
                 content.height(height);
+
+                if (skipScrollbar) {
+                    scrollbar = 0;
+                }
+
                 rowsHeader.height(height - scrollbar);
             }
         },

@@ -3051,6 +3051,18 @@
         equal(rowsHeader.height(), content.height());
     });
 
+    test("PivotGrid sets height of rows header when height option is defined", function() {
+        var pivotgrid = createPivot({
+            height: 200,
+            dataSource: createDataSource()
+        });
+
+        var content = pivotgrid.wrapper.find(".k-grid-content");
+        var rowsHeader = pivotgrid.wrapper.find(".k-pivot-rowheaders").find(".k-grid");
+
+        equal(rowsHeader.height(), content.height());
+    });
+
     test("PivotGrid sets height of rows header without scrollbar if horizontal content scrollbar", function() {
         var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }] }];
         var data = [];
