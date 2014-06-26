@@ -188,12 +188,23 @@ var __meta__ = {
 
         onEnd: function() {
             this.moveTo(this.destination);
+            if (this.callback) {
+                this.callback.call();
+            }
         },
 
         setCoordinates: function(from, to) {
             this.offset = {};
             this.origin = from;
             this.destination = to;
+        },
+
+        setCallback: function(callback) {
+            if (callback && kendo.isFunction(callback)) {
+                this.callback = callback;
+            } else {
+                callback = undefined;
+            }
         },
 
         _updateCoordinates: function() {
@@ -522,7 +533,7 @@ var __meta__ = {
             }
         },
 
-        animatedScrollTo: function(x, y) {
+        animatedScrollTo: function(x, y, callback) {
             var from,
                 to;
 
@@ -533,6 +544,7 @@ var __meta__ = {
                 to = { x: x, y: y };
 
                 this.animatedScroller.setCoordinates(from, to);
+                this.animatedScroller.setCallback(callback);
                 this.animatedScroller.start();
             }
         },
