@@ -49,6 +49,7 @@ $dataSource->transport($transport)
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
+    ->columnWidth(200);
     ->height(550);
 
 $configurator = new \Kendo\UI\PivotConfigurator('configurator');
