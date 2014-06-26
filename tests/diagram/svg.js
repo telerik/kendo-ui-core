@@ -1173,4 +1173,140 @@
         elementTests("Group", Group);
     })();
 
+    (function() {
+        var Canvas = diagram.Canvas;
+        var drawingElement;
+        var element;
+        var canvas;
+
+        module("Canvas", {
+            setup: function() {
+                element = $("<div></div>").appendTo(QUnit.fixture);
+
+                canvas = new Canvas(element[0], {
+                    width: 500,
+                    height: 300
+                });
+                drawingElement = canvas.drawingElement;
+            },
+
+            teardown: function() {
+                element.remove();
+            }
+        });
+
+        test("inits surface", function() {
+            ok(canvas.surface);
+        });
+
+        test("inits container", function() {
+            ok(drawingElement instanceof d.Group);
+        });
+
+        test("inits viewBox", function() {
+            var viewBox = canvas._viewBox;
+            equal(viewBox.x, 0);
+            equal(viewBox.y, 0);
+            equal(viewBox.width, 500);
+            equal(viewBox.height, 300);
+        });
+
+        test("bounds returns rect with container bounding box width and height", function() {
+            canvas.drawingElement.bbox = function() {
+                return new Rect(50,50, 100, 200);
+            };
+            var rect = canvas.bounds();
+            equal(rect.x, 0);
+            equal(rect.y, 0);
+            equal(rect.width, 100);
+            equal(rect.height, 200);
+        });
+
+        test("viewBox sets viewBox x and y options", function() {
+            canvas.viewBox(new Rect(100, 200, 300, 300));
+            var viewBox = canvas._viewBox;
+            equal(viewBox.x, 100);
+            equal(viewBox.y, 200);
+        });
+
+        test("viewBox returns viewBox", function() {
+            var viewBox = canvas.viewBox();
+            equal(viewBox.x, 0);
+            equal(viewBox.y, 0);
+            equal(viewBox.width, 500);
+            equal(viewBox.height, 300);
+        });
+
+        test("size sets viewBox size", function() {
+            var viewBox = canvas._viewBox;
+            canvas.size({
+                width: 100,
+                height: 200
+            });
+            equal(viewBox.width, 100);
+            equal(viewBox.height, 200);
+        });
+
+        test("size returns viewBox size", function() {
+            var size = canvas.size();
+
+            equal(size.width, 500);
+            equal(size.height, 300);
+        });
+
+        test("draw draws container to surface", function() {
+            canvas.surface.draw = function() {
+                ok(true);
+            };
+            canvas.draw();
+        });
+
+        test("append appends visual drawingElement to container", function() {
+            drawingElement.append = function(drawing) {
+                equal(drawing.id, "foo");
+            };
+            canvas.append({
+                drawingElement: {
+                    id: "foo"
+                }
+            });
+        });
+
+        test("removes removes visual drawingElement from container", function() {
+            drawingElement.remove = function(drawing) {
+                equal(drawing.id, "foo");
+            };
+            canvas.remove({
+                drawingElement: {
+                    id: "foo"
+                }
+            });
+        });
+
+        test("clear clears container", function() {
+            drawingElement.clear = function(drawing) {
+                ok(true);
+            };
+            canvas.clear();
+        });
+
+        test("destroy destroys surface", function() {
+            canvas.surface.destroy = function() {
+                ok(true);
+            };
+            canvas.destroy();
+        });
+
+        test("destroy does not remove element", function() {
+            canvas.destroy();
+            ok(!QUnit.fixture.is(":empty"));
+        });
+
+        test("destroy removes element if true is passed as parameter", function() {
+            canvas.destroy(true);
+            ok(QUnit.fixture.is(":empty"));
+        });
+
+    })();
+
 })();

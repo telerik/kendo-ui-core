@@ -1021,190 +1021,82 @@
         }
     });
 
-    var Canvas = Visual.extend({
+    var Canvas = Class.extend({
         init: function (element, options) {
-            var that = this;
-            Visual.fn.init.call(that, document.createElementNS(SVGNS, "svg"), options);
-            this.markers = [];
-            this.gradients = [];
-            this.visuals = [];
-            this.defsNode = document.createElementNS(SVGNS, "defs");
-            this.domElement.appendChild(this.defsNode);
-            if (element.context) {
-                this.element = element.context; // kendo wrapped object
-            }
-            else {
-                this.element = element;
-            }
-            $(this.domElement).css({
-                width: this.options.width,
-                height: this.options.height
-            });
-            this.element.appendChild(that.domElement);
-            this.domElement.style.background = that.options.background;
-            this.domElement.setAttribute('xmlns', SVGNS);
-            this.domElement.setAttribute('xmlns:xlink', SVGXLINK);
-            this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
-            this._markers();
-            this.masks = [];
+            this.options = deepExtend({}, this.options, options);
+            options = this.options;
+
+            this.element = element;
+            this.surface = d.Surface.create(element, options);
+            this.transformTranslate = kendo.isFunction(this.surface.translate);
+            this.drawingElement = new d.Group();
+            this._viewBox = new Rect(0, 0, options.width, options.height);
         },
+
         options: {
             width: "100%",
-            height: "100%",
-            background: "none",
-            id: "SVGRoot"
+            height: "100%"
         },
+
         bounds: function () {
-            var box = this.domElement.getBBox();
+            var box = this.drawingElement.bbox();
             return new Rect(0, 0, box.width, box.height);
         },
+
         focus: function () {
-            this.element.focus();
+            //this.element.focus();
         },
-        size: function () {
-            var canvas = this,
-                size = Visual.fn.size.apply(canvas, arguments),
-                viewBox = this.viewBox();
 
-            this._styledSize(canvas.domElement);
-
-            viewBox.width = size.width;
-            viewBox.height = size.height;
-            this.viewBox(viewBox);
-
-            return size;
+        size: function (size) {
+            var viewBox = this._viewBox;
+            if (defined(size)) {
+                viewBox.width = size.width;
+                viewBox.height = size.height;
+                //this.surface.setSize(size);
+            } else {
+                return {
+                    width: viewBox.width,
+                    height: viewBox.height
+                };
+            }
         },
-        _styledSize: function (node) {
-            var size = this._sz;
-            $(node).css(size);
-        },
+
         viewBox: function (rect) {
-            var canvas = this;
-
-            if (isUndefined(rect)) {
-                return canvas.domElement.viewBox.baseVal ? Rect.toRect(canvas.domElement.viewBox.baseVal) : Rect.empty();
-            }
-
-            rect = Rect.toRect(rect);
-            if (!isNaN(rect.width) && !isNaN(rect.height)) {
-                this.domElement.setAttribute("viewBox", rect.toString(","));
+            var viewBox = this._viewBox;
+            if (rect) {
+                viewBox.x = rect.x;
+                viewBox.y = rect.y;
+                if (this.transformTranslate) {
+                    this.surface.translate(viewBox);
+                }
+            } else {
+                return viewBox.clone();
             }
         },
-        append: function (shape) {
-            this.domElement.appendChild(shape.domElement);
-            shape.canvas = this;
-            this.visuals.push(shape);
+
+        draw: function() {
+            this.surface.draw(this._drawingElement);
+        },
+
+        append: function (visual) {
+            this.drawingElement.append(visual.drawingElement);
             return this;
         },
+
         remove: function (visual) {
-            if (Utils.indexOf(this.visuals, visual) >= 0) {
-                this.domElement.removeChild(visual.domElement);
-                visual.canvas = undefined;
-                Utils.remove(this.visuals, visual);
-                return this;
-            }
+            this.drawingElement.remove(visual.drawingElement);
         },
+
         insertBefore: function (visual, beforeVisual) {
-            this.domElement.insertBefore(visual.domElement, beforeVisual.domElement);
-            visual.canvas = this;
-            this.visuals.push(visual);
-            return this;
-        },
-        addMarker: function (marker) {
-            this.defsNode.appendChild(marker.domElement);
-            this.markers.push(marker);
-        },
-        removeMarker: function (marker) {
-            if (marker && Utils.contains.contains(this.markers, marker)) {
-                this.defsNode.removeChild(marker.domElement);
-                Utils.remove(this.markers, marker);
-            }
-        },
-        addMask: function (mask) {
-            this.defsNode.appendChild(mask.domElement);
-            this.masks.push(mask);
-        },
-        removeMask: function (mask) {
-            if (mask && Utils.contains(this.masks, mask)) {
-                this.defsNode.removeChild(mask.domElement);
-                Utils.remove(this.masks, mask);
-            }
-        },
-        removeGradient: function (gradient) {
-            if (gradient && Utils.contains(this.gradients, gradient)) {
-                this.defsNode.removeChild(gradient.domElement);
-                Utils.remove(this.gradients, gradient);
-            }
-        },
-        addGradient: function (gradient) {
-            this.defsNode.appendChild(gradient.domElement);
-            this.gradients.push(gradient);
-        },
-        clearMarkers: function () {
-            var i;
-            if (this.markers.length === 0) {
-                return;
-            }
-            for (i = 0; i < this.markers.length; i++) {
-                this.defsNode.removeChild(this.markers[i].domElement);
-            }
-            this.markers = [];
-        },
-        clear: function () {
-            while (this.visuals.length) {
-                this.remove(this.visuals[0]);
-            }
-        },
-        mask: function (mask) {
-            if (mask === null) {
-                this.domElement.removeAttribute("mask");
-            }
-            else {
-                this.domElement.setAttribute("mask", "url(#" + mask.domElement.id + ")");
-            }
 
         },
-        _markers: function () {
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
-                    background: "Black"
-                },
-                id: Markers.arrowEnd,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(10, 5)
-            }));
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 5 L 10 0 L 7 5 L 10 10 z",
-                    background: "Black"
-                },
-                id: Markers.arrowStart,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(0, 5)
-            }));
-            this.addMarker(new Marker({
-                circle: {
-                    width: 6,
-                    height: 6,
-                    center: new Point(5, 5),
-                    stroke: {
-                        width: 1
-                    },
-                    background: "black"
-                },
-                width: 10,
-                height: 10,
-                id: Markers.filledCircle,
-                ref: new Point(5, 5),
-                orientation: "auto"
-            }));
+
+        clear: function () {
+            this.drawingElement.clear();
         },
+
         destroy: function(clearHtml) {
+            this.surface.destroy();
             if(clearHtml) {
                 $(this.element).remove();
             }
