@@ -75,6 +75,14 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("autoBind", value);
     }
 
+    public float getColumnWidth() {
+        return (float)getProperty("columnWidth");
+    }
+
+    public void setColumnWidth(float value) {
+        setProperty("columnWidth", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }
