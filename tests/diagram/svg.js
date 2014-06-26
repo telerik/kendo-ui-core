@@ -411,14 +411,12 @@
         });
     }
 
-    (function() {
-        var Visual = diagram.Visual;
+    function visualTests(name, type) {
         var visual;
-        var drawingElement;
 
-        module("Visual", {
+        module(name + " / Visual", {
             setup: function() {
-                visual = new Visual({});
+                visual = new type({});
             }
         });
 
@@ -475,8 +473,7 @@
             equal(size.width, 100);
             equal(size.height, 200);
         });
-
-    })();
+    }
 
     (function() {
         var TextBlock = diagram.TextBlock;
@@ -651,6 +648,7 @@
 
         elementTests("TextBlock", TextBlock);
         visualBaseTests("TextBlock", TextBlock);
+        visualTests("TextBlock", TextBlock);
     })();
 
     (function() {
@@ -713,6 +711,7 @@
 
         elementTests("Rectangle", Rectangle);
         visualBaseTests("Rectangle", Rectangle);
+        visualTests("Rectangle", Rectangle);
     })();
 
     (function() {
@@ -819,6 +818,7 @@
 
         elementTests("Path", Path);
         visualBaseTests("Path", Path);
+        visualTests("Path", Path);
     })();
 
     (function() {

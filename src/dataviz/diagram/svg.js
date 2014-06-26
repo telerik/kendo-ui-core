@@ -251,7 +251,7 @@
             var rect;
             if (!this._measured || force) {
                 var drawingElement = this.drawingElement;
-                var box = drawingElement.rawBBox();
+                var box = drawingElement.rawBBox() || new g.Rect();
                 var startPoint = box.topLeft();
                 rect = new Rect(startPoint.x, startPoint.y, box.width(), box.height());
                 this._originSize = rect;
