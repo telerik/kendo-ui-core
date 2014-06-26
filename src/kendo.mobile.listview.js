@@ -197,8 +197,10 @@ var __meta__ = {
             scroller.setOptions({
                 pullToRefresh: true,
                 pull: function() {
-                    handler._pulled = true;
-                    handler.dataSource.read(pullParameters.call(listView, handler._first));
+                    if (!handler._pulled) {
+                        handler._pulled = true;
+                        handler.dataSource.read(pullParameters.call(listView, handler._first));
+                    }
                 },
                 pullTemplate: options.pullTemplate,
                 releaseTemplate: options.releaseTemplate,
@@ -213,7 +215,15 @@ var __meta__ = {
             this.dataSource = dataSource;
 
             dataSource.bind("change", function() {
-                handler._change();
+                setTimeout(function() {
+                    handler._change();
+                }, 100);
+            });
+
+            dataSource.bind("error", function() {
+                setTimeout(function() {
+                    handler._change();
+                }, 100);
             });
         },
 
@@ -893,10 +903,6 @@ var __meta__ = {
 
             this._style();
 
-            if (this.options.pullToRefresh) {
-                this._pullToRefreshHandler = new RefreshHandler(this);
-            }
-
             if (this.options.filterable) {
                 this._filter = new ListViewFilter(this);
             }
@@ -905,6 +911,10 @@ var __meta__ = {
                 this._itemBinder = new VirtualListViewItemBinder(this);
             } else {
                 this._itemBinder = new ListViewItemBinder(this);
+            }
+
+            if (this.options.pullToRefresh) {
+                this._pullToRefreshHandler = new RefreshHandler(this);
             }
 
             this.setDataSource(options.dataSource);
