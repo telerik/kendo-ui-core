@@ -2065,6 +2065,30 @@
         equal(td_1.eq(0).text(), "measure 2");
     });
 
+    test("PivotGrid renders colgroup", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures)
+        });
+
+        var colGroup = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("colgroup");
+
+        var cols = colGroup.find("col");
+
+        equal(cols.length, 1);
+    });
+
     module("PivotGrid content rendering", {
         setup: function() {
             kendo.ns = "kendo-";

@@ -2062,6 +2062,7 @@ var __meta__ = {
             autoBind: true,
             reorderable: true,
             height: null,
+            columnWidth: 100,
             configurator: "",
             messages: {
                 measureFields: "Drop Data Fields Here",
@@ -2271,11 +2272,10 @@ var __meta__ = {
             var contentTable = this.content.children("table");
             var contentWidth = this.content.width();
 
-            var row = contentTable[0].rows[0];
-            var columnsLength = row ? row.children.length : 1;
+            var rowLength = contentTable.children("colgroup").children().length;
 
-            var calculatedWidth = columnsLength * 100;
-            var minWidth = 100;
+            var minWidth = 100; //percents
+            var calculatedWidth = rowLength * this.options.columnWidth;
 
             if (contentWidth < calculatedWidth) {
                 minWidth = Math.ceil((calculatedWidth / contentWidth) * 100);
@@ -2349,14 +2349,14 @@ var __meta__ = {
             that.rowsHeaderTree.render(rowBuilder.build(rows));
 
             columnAxis = {
-                measures: columnBuilder.measures,
                 indexes: columnBuilder._indexes,
+                measures: columnBuilder.measures,
                 metadata: columnBuilder.metadata
             };
 
             rowAxis = {
-                measures: dataSource._rowMeasures().length || 1,
                 indexes: rowBuilder._indexes,
+                measures: dataSource._rowMeasures().length || 1,
                 metadata: rowBuilder.metadata
             };
 
@@ -2415,17 +2415,13 @@ var __meta__ = {
 
     var ColumnBuilder = Class.extend({
         init: function(options) {
-            this.metadata = {};
             this.measures = 1;
+            this.metadata = {};
         },
 
         build: function(tuples) {
             var thead = this._thead(tuples);
-
-            var metadata = this.metadata[0];
-            var rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : this.measures;
-
-            var colgroup = this._colGroup(rowLength);
+            var colgroup = this._colGroup();
 
             return [
                 element("table", null, [colgroup, thead])
@@ -2440,7 +2436,27 @@ var __meta__ = {
             }
         },
 
-        _colGroup: function(length) {
+        rowLength: function() {
+            var cells = this.rows[0] ? this.rows[0].children : [];
+            var length = cells.length;
+            var rowLength = 0;
+            var idx = 0;
+
+            if (length) {
+                for (; idx < length; idx++) {
+                    rowLength += cells[idx].attr.colspan || 1;
+                }
+            }
+
+            if (!rowLength) {
+                rowLength = this.measures;
+            }
+
+            return rowLength;
+        },
+
+        _colGroup: function() {
+            var length = this.rowLength();
             var children = [];
             var idx = 0;
 
@@ -2793,8 +2809,11 @@ var __meta__ = {
         },
 
         build: function(tuples) {
+            var tbody = this._tbody(tuples);
+            var colgroup = this._colGroup();
+
             return [
-                element("table", null, [this._tbody(tuples)])
+                element("table", null, [colgroup, tbody])
             ];
         },
 
@@ -2804,6 +2823,18 @@ var __meta__ = {
             if (!tuple || root && tupleChanged(root, tuple)) {
                 this.metadata = {};
             }
+        },
+
+        _colGroup: function() {
+            var length = this.rows[0].children.length;
+            var children = [];
+            var idx = 0;
+
+            for (; idx < length; idx++) {
+                children.push(element("col", null));
+            }
+
+            return element("colgroup", null, children);
         },
 
         _tbody: function(tuples) {
@@ -2866,7 +2897,6 @@ var __meta__ = {
             }
         },
 
-        //same as ColumnBuilder
         _tuplePath: function(tuple, index) {
             var path = [];
             var idx = 0;
@@ -3054,16 +3084,24 @@ var __meta__ = {
                 this.rowLength = 1;
             }
 
+            var tbody = this._tbody(data);
+            var colgroup = this._colGroup();
+
             return [
-                element("table", null, [this._colGroup(), this._tbody(data)])
+                element("table", null, [colgroup, tbody])
             ];
         },
 
         _colGroup: function() {
+            var length = this.columnAxis.measures;
             var children = [];
             var idx = 0;
 
-            for (; idx < this.rowLength; idx++) {
+            if (this.rows[0]) {
+                length = this.rows[0].children.length;
+            }
+
+            for (; idx < length; idx++) {
                 children.push(element("col", null));
             }
 
