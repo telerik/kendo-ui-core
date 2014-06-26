@@ -296,6 +296,15 @@ header
     position:relative;
 }
 
+/* View Beta demos */
+.try-beta-demos {
+     text-align: center;
+     color: #0487c4; 
+     background-color: #e5f5fa;  
+     font-size: 14px;
+     padding: 24px 0;
+}
+
 /*popup submenus*/
 .submenu-box {
     margin-bottom: 15px;
