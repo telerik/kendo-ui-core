@@ -45,6 +45,12 @@
             set;
         }
 
+        public int ColumnWidth
+        {
+            get;
+            set;
+        }
+
         public int Height
         {
             get;
@@ -71,6 +77,11 @@
             if (!string.IsNullOrEmpty(Configurator))
             {
                 options["configurator"] = Configurator;
+            }
+
+            if (ColumnWidth != 0)
+            {
+                options["columnWidth"] = ColumnWidth;
             }
 
             if (Height != 0)

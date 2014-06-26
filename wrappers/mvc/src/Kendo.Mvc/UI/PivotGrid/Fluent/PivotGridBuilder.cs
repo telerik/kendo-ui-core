@@ -39,6 +39,17 @@
         }
 
         /// <summary>
+        /// Use it to set the column width of the Pivot.
+        /// </summary>
+        /// <param name="columnWidth">The column width.</param>
+        public PivotGridBuilder ColumnWidth(int columnWidth)
+        {
+            Component.ColumnWidth = columnWidth;
+
+            return this;
+        }
+
+        /// <summary>
         /// Use it to set the height of the Pivot.
         /// </summary>
         /// <param name="height">The height</param>
