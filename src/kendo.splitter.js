@@ -86,8 +86,6 @@ var __meta__ = {
 
             that._marker = kendo.guid().substring(0, 8);
 
-            that._resizeHandler = proxy(that.resize, that);
-
             that._initPanes();
 
             that.resizing = new PaneResizing(that);
@@ -129,7 +127,7 @@ var __meta__ = {
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
                 .end();
 
-            $(window).on("resize", that._resizeHandler);
+            $(window).on("resize" + NS + that._marker, proxy(that.resize, that));
         },
 
         _detachEvents: function() {
@@ -140,7 +138,7 @@ var __meta__ = {
                 .children(".k-splitbar").off("dblclick" + NS)
                     .children(".k-collapse-next, .k-collapse-prev, .k-expand-next, .k-expand-prev").off(NS);
 
-            $(window).off("resize", that._resizeHandler);
+            $(window).off("resize" + NS + that._marker);
         },
 
         options: {

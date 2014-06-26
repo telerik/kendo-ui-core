@@ -39,6 +39,29 @@
         ok(triggered);
     });
 
+    test("window resizing triggers resize to outer splitter and nested splitter", function () {
+        var triggered1,
+            triggered2;
+            splitter = create();
+
+        splitter.object.bind("resize", function () {
+            triggered1 = true;
+        });
+
+        splitter.dom.children(".k-pane").eq(0).append("<div id='splitter2'><div>pane foo</div></div>").find("#splitter2").kendoSplitter({
+            panes: [{}],
+            resize: function () {
+                triggered2 = true;
+            }
+        });
+
+        splitter.dom.css({ width: 100, height: 100 });
+
+        $(window).resize();
+
+        ok(triggered1);
+    });
+
     test("layoutChange is triggered after resize", function() {
         var triggered;
         splitter = create();
