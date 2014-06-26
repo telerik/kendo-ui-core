@@ -93,6 +93,7 @@ $orderIdField->from('OrderID')
 
 $parentIdField = new \Kendo\Data\DataSourceSchemaModelField('parentId');
 $parentIdField->from('ParentID')
+        ->defaultValue(null)
         ->type('number');
 
 $startField = new \Kendo\Data\DataSourceSchemaModelField('start');
@@ -118,6 +119,7 @@ $summaryField->from('Summary')
 
 $expandedField = new \Kendo\Data\DataSourceSchemaModelField('expanded');
 $expandedField->from('Expanded')
+        ->defaultValue(true)
         ->type('boolean');
 
 $taskModel->id('id')
