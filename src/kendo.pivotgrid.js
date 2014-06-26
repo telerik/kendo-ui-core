@@ -7,7 +7,13 @@ var __meta__ = {
     name: "PivotGrid",
     category: "web",
     description: "The PivotGrid widget is a data summarization tool.",
-    depends: [ "dom", "data", "sortable" ]
+    depends: [ "dom", "data", "sortable" ],
+    features: [ {
+        id: "mobile-scroller",
+        name: "Mobile scroller",
+        description: "Support for kinetic scrolling in mobile device",
+        depends: [ "mobile.scroller" ]
+    } ]
 };
 
 /*jshint eqnull: true*/
@@ -2038,10 +2044,7 @@ var __meta__ = {
                     }
                 });
 
-            that.content.scroll(function() {
-                that.columnsHeader[0].scrollLeft = this.scrollLeft;
-                that.rowsHeader[0].scrollTop = this.scrollTop;
-            });
+            that._scrollable();
 
             if (that.options.autoBind) {
                 that.dataSource.fetch();
@@ -2344,6 +2347,30 @@ var __meta__ = {
             that._progress(false);
 
             that.trigger(DATABOUND);
+        },
+
+        _scrollable: function() {
+            var that = this;
+
+            var columnsHeader = that.columnsHeader;
+            var rowsHeader = that.rowsHeader;
+            var content = that.content;
+
+            var touchScroller = kendo.touchScroller(content);
+
+            content.scroll(function() {
+                columnsHeader.scrollLeft(this.scrollLeft);
+                rowsHeader.scrollTop(this.scrollTop);
+            });
+
+            if (touchScroller && touchScroller.movable) {
+                that.touchScroller = touchScroller;
+
+                touchScroller.movable.bind("change", function(e) {
+                    columnsHeader.scrollLeft(-e.sender.x);
+                    rowsHeader.scrollTop(-e.sender.y);
+                });
+            }
         }
     });
 
