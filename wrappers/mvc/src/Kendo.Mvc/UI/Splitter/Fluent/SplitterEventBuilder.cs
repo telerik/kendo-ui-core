@@ -193,6 +193,51 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Defines the inline handler of the Error client-side event
+        /// </summary>
+        /// <param name="handler">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;% Html.Kendo().Splitter()
+        ///            .Name("Splitter")
+        ///            .Events(events => events.Error(
+        ///                 @&lt;text&gt;
+        ///                 function(e) {
+        ///                     //event handling code
+        ///                 }
+        ///                 &lt;/text&gt;
+        ///            ))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SplitterEventBuilder Error(Func<object, object> handler)
+        {
+            Handler("error", handler);
+
+            return this;
+        }
+
+        /// <summary>
+        ///  Defines the name of the JavaScript function that will handle the the Error client-side event.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Splitter()
+        ///             .Name("Splitter")
+        ///             .Events(events => events.Error("onError"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SplitterEventBuilder Error(string handler)
+        {
+            Handler("error", handler);
+
+            return this;
+        }
+
         public SplitterEventBuilder LayoutChange(Func<object, object> handler)
         {
             Handler("layoutChange", handler);
