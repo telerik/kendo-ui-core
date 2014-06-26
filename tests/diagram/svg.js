@@ -36,24 +36,18 @@
         }
     });
 
-    (function() {
-        var Element = diagram.Element;
+    function elementTests(name, type) {
         var element;
         var drawingElement;
 
-        function elementSetup(options) {
-            element = new Element(options);
-
-            drawingElement = new d.Element();
-            element.drawingElement = drawingElement;
-        }
-
-        module("Element", {
+        module(name + " / element", {
             setup: function() {
-                elementSetup({
+                element = new type({
                     foo: "bar",
                     id: "foo"
                 });
+
+                drawingElement = element.drawingElement;
             }
         });
 
@@ -169,9 +163,11 @@
 
         var rawRect = new Rect(100, 200, 100, 50)
 
-        module("Element / measure", {
+        module( name + " / measure", {
             setup: function() {
-                elementSetup({});
+                element = new type({});
+
+                drawingElement = element.drawingElement;
                 drawingElement.rawBBox = function() {
                     return new g.Rect(new g.Point(100,200), new g.Point(200, 250));
                 };
@@ -212,8 +208,7 @@
             var rect = element._measure(true);
             ok(rect.equals(new Rect(50, 60, 50, 40)));
         });
-
-    })();
+    }
 
     (function() {
         var VisualBase = diagram.VisualBase;
@@ -657,6 +652,8 @@
             equal(drawingElement.transform(), undefined);
         });
 
+        elementTests("TextBlock", TextBlock);
+
     })();
 
     (function() {
@@ -716,6 +713,8 @@
                 }
             });
         });
+
+        elementTests("Rectangle", Rectangle);
 
     })();
 
@@ -821,6 +820,7 @@
             equal(matrix.d, 3);
         });
 
+        elementTests("Path", Path);
     })();
 
     (function() {
@@ -884,6 +884,7 @@
             });
         });
 
+        elementTests("Line", Line);
     })();
 
     (function() {
@@ -941,6 +942,8 @@
                 }
             });
         });
+
+        elementTests("Polyline", Polyline);
 
     })();
 
@@ -1010,6 +1013,7 @@
             image.redraw();
         });
 
+        elementTests("Image", Image);
     })();
 
 
@@ -1075,6 +1079,7 @@
             equal(circleGeometry.center.y, 5);
         });
 
+        elementTests("Circle", Circle);
     })();
 
     (function() {
@@ -1165,6 +1170,7 @@
             ok(child2.drawingElement === drawingElement.children[1]);
         });
 
+        elementTests("Group", Group);
     })();
 
 })();
