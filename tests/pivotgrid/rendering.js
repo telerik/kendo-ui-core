@@ -3152,4 +3152,15 @@
 
         equal(rowsHeader.height(), content.height() - kendo.support.scrollbar());
     });
+
+    test("PivotGrid sets padding of .k-grid-header element", function() {
+        var pivotgrid = createPivot({
+            dataSource: createDataSource()
+        });
+
+        var columnHeader = pivotgrid.wrapper.find(".k-grid-header");
+
+        equal(columnHeader.css("padding-right"), kendo.support.scrollbar() + "px");
+    });
+
 })();

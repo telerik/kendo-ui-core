@@ -2197,6 +2197,8 @@ var __meta__ = {
             that.columnsHeader = $('<div class="k-grid-header-wrap" />')
                                     .wrap('<div class="k-grid-header" />');
 
+            that.columnsHeader.parent().css("padding-right", kendo.support.scrollbar());
+
             that.rowsHeader = $('<div class="k-grid k-widget k-alt"/>');
             that.content = $('<div class="k-grid-content" />');
 
