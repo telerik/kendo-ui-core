@@ -2340,14 +2340,16 @@ var __meta__ = {
                 return;
             }
 
+            columnBuilder.measures = dataSource._columnMeasures().length || 1;
             columnBuilder.reset(columns[0]);
+
             rowBuilder.reset(rows[0]);
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
 
             columnAxis = {
-                measures: dataSource._columnMeasures().length || 1,
+                measures: columnBuilder.measures,
                 indexes: columnBuilder._indexes,
                 metadata: columnBuilder.metadata
             };
@@ -2414,11 +2416,19 @@ var __meta__ = {
     var ColumnBuilder = Class.extend({
         init: function(options) {
             this.metadata = {};
+            this.measures = 1;
         },
 
         build: function(tuples) {
+            var thead = this._thead(tuples);
+
+            var metadata = this.metadata[0];
+            var rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : this.measures;
+
+            var colgroup = this._colGroup(rowLength);
+
             return [
-                element("table", null, [this._thead(tuples)])
+                element("table", null, [colgroup, thead])
             ];
         },
 
@@ -2428,6 +2438,17 @@ var __meta__ = {
             if (!tuple || root && tupleChanged(root, tuple)) {
                 this.metadata = {};
             }
+        },
+
+        _colGroup: function(length) {
+            var children = [];
+            var idx = 0;
+
+            for (; idx < length; idx++) {
+                children.push(element("col", null));
+            }
+
+            return element("colgroup", null, children);
         },
 
         _thead: function(tuples) {
@@ -3022,12 +3043,31 @@ var __meta__ = {
         },
 
         build: function(data, columnAxis, rowAxis) {
+            var metadata = columnAxis.metadata[columnAxis.indexes[0]];
+
             this.columnAxis = columnAxis;
             this.rowAxis = rowAxis;
 
+            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures;
+
+            if (!this.rowLength) {
+                this.rowLength = 1;
+            }
+
             return [
-                element("table", null, [this._tbody(data)])
+                element("table", null, [this._colGroup(), this._tbody(data)])
             ];
+        },
+
+        _colGroup: function() {
+            var children = [];
+            var idx = 0;
+
+            for (; idx < this.rowLength; idx++) {
+                children.push(element("col", null));
+            }
+
+            return element("colgroup", null, children);
         },
 
         _tbody: function(data) {
@@ -3035,22 +3075,13 @@ var __meta__ = {
             var dataItem = data[0];
             this.rows = [];
 
-            var metadata = columnAxis.metadata[columnAxis.indexes[0]];
-
-            this.rowIdx = 0;
-            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures;
-
-            if (!this.rowLength) {
-                this.rowLength = 1;
-            }
-
             if (dataItem) {
                 this.columnIndexes = this._indexes(this.columnAxis);
                 this.rowIndexes = this._indexes(this.rowAxis);
 
                 this._buildRows(data);
             } else {
-                this.rows.push(element("tr", null, [ element("td", null, [ text(dataItem ? dataItem.value : "") ]) ]));
+                this.rows.push(element("tr", null, [ element("td", null, [ text("") ]) ]));
             }
 
             return element("tbody", null, this.rows);

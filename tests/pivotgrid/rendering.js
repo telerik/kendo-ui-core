@@ -1061,6 +1061,25 @@
         equal(th_0.eq(1).text(), "measure 2");
     });
 
+    test("PivotGrid renders colgroup", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var colGroup  = pivotgrid.wrapper.find(".k-grid-header").find("colgroup");
+
+        var cols = colGroup.find("col");
+
+        equal(cols.length, 2);
+    });
+
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";
@@ -2957,6 +2976,30 @@
         equal(rows.length, 1);
 
         equal(cells.eq(0).text(), "1");
+    });
+
+    test("PivotGrid renders colgroup", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var colGroup  = pivotgrid.wrapper.find(".k-grid-content").find("colgroup");
+
+        var cols = colGroup.find("col");
+
+        equal(cols.length, 2);
     });
 
     module("PivotGrid resize on render", {
