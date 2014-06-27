@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.dom" ], f);
+    define([ "./kendo.dom", "./kendo.data" ], f);
 })(function(){
 
 var __meta__ = {
