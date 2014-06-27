@@ -9,32 +9,9 @@
         Point = diagram.Point,
         Rect = diagram.Rect,
         Rotation = diagram.Rotation,
-        CompositeTransform = diagram.CompositeTransform;
+        CompositeTransform = diagram.CompositeTransform,
 
-    var ShapeMock = d.Element.extend({
-        stroke: function(color, width, opacity) {
-            var stroke = this.options.stroke = this.options.stroke || {};
-            if (color) {
-                stroke.color = color;
-            }
-            if (width) {
-                stroke.width = width;
-            }
-            if (opacity) {
-                stroke.opacity = opacity
-            }
-        },
-
-        fill: function(color, opacity) {
-            var fill = this.options.fill = this.options.fill || {};
-            if (color) {
-                fill.color = color;
-            }
-            if (opacity) {
-                fill.opacity = opacity
-            }
-        }
-    });
+        TOLERANCE = 0.1;
 
     function elementTests(name, type) {
         var element;
@@ -166,15 +143,15 @@
         module( name + " / measure", {
             setup: function() {
                 element = new type({});
+                element._boundingBox = function() {
+                    return new g.Rect(new g.Point(100, 200), new g.Point(200, 250));
+                };
 
                 drawingElement = element.drawingElement;
-                drawingElement.rawBBox = function() {
-                    return new g.Rect(new g.Point(100,200), new g.Point(200, 250));
-                };
             }
         });
 
-        test("_measure returns raw bounding rect", function() {;
+        test("_measure returns bounding box", function() {;
             var rect = element._measure();
             ok(rect.equals(rawRect));
         });
@@ -191,19 +168,19 @@
             equal(element._measured, true);
         });
 
-        test("_measure returns current bounding rect if element has been measured", function() {;
+        test("_measure returns current bounding box if element has been measured", function() {;
             element._measure();
-            drawingElement.rawBBox = function() {
-                return new g.Rect(new g.Point(50,60), new g.Point(100, 100));
+            element._boundingBox = function() {
+                return new g.Rect(new g.Point(50, 60), new g.Point(100, 100));
             };
             var rect = element._measure();
             ok(rect.equals(rawRect));
         });
 
-        test("_measure recalculates raw bounding rect if element has been measured but true is passed as parameter", function() {
+        test("_measure recalculates bounding box if element has been measured but true is passed as parameter", function() {
             element._measure();
-            drawingElement.rawBBox = function() {
-                return new g.Rect(new g.Point(50,60), new g.Point(100, 100));
+            element._boundingBox = function() {
+                return new g.Rect(new g.Point(50, 60), new g.Point(100, 100));
             };
             var rect = element._measure(true);
             ok(rect.equals(new Rect(50, 60, 50, 40)));
@@ -213,26 +190,44 @@
     function visualBaseTests(name, type) {
         var visual;
         var drawingElement;
+        var RED = "red";
+        var GREEN = "green";
+        var redHex = new dataviz.Color(RED).toHex();
+        var greenHex = new dataviz.Color(GREEN).toHex();
 
         module(name + " / VisualBase", {
             setup: function() {
                 visual = new type({
                     fill: {
-                        color: "red"
+                        color: RED
                     },
                     stroke: {
-                        color: "green"
+                        color: GREEN
                     }
                 });
             }
         });
 
         test("inits fill color", function() {
-            equal(visual.options.fill.color, new dataviz.Color("red").toHex());
+            equal(visual.options.fill.color, redHex);
+        });
+
+        test("inits fill color if fill is a string", function() {
+            visual = new type({
+                fill: RED
+            });
+            equal(visual.options.fill.color, redHex);
         });
 
         test("inits stroke color", function() {
-            equal(visual.options.stroke.color, new dataviz.Color("green").toHex());
+            equal(visual.options.stroke.color, greenHex);
+        });
+
+        test("inits stroke color if stroke is a string", function() {
+            visual = new type({
+                stroke: RED
+            });
+            equal(visual.options.stroke.color, redHex);
         });
 
         // ------------------------------------------------------------
@@ -240,11 +235,11 @@
             setup: function() {
                 visual = new type({
                     fill: {
-                        color: "blue",
+                        color: GREEN,
                         opacity: 1
                     },
                     stroke: {
-                        color: "blue",
+                        color: GREEN,
                         width: 1,
                         opacity: 1
                     }
@@ -254,32 +249,32 @@
         });
 
         test("fill updates fill options", function() {
-            visual.fill("red", 0.5);
+            visual.fill(RED, 0.5);
             var fill =  visual.options.fill;
-            equal(fill.color, "#ff0000");
+            equal(fill.color, redHex);
             equal(fill.opacity, 0.5);
         });
 
         test("fill renders new fill options", function() {
-            visual.fill("red", 0.5);
+            visual.fill(RED, 0.5);
             var fill =  drawingElement.options.fill;
-            equal(fill.color, "#ff0000");
+            equal(fill.color, redHex);
             equal(fill.opacity, 0.5);
         });
 
         test("stroke updates stroke options", function() {
-            visual.stroke("red", 2, 0.5);
+            visual.stroke(RED, 2, 0.5);
             var stroke =  visual.options.stroke;
-            equal(stroke.color, "#ff0000");
+            equal(stroke.color, redHex);
             equal(stroke.width, 2);
             equal(stroke.opacity, 0.5);
         });
 
         test("stroke renders new stroke options", function() {
-            visual.stroke("red", 2, 0.5);
+            visual.stroke(RED, 2, 0.5);
             var stroke =  drawingElement.options.stroke;
 
-            equal(stroke.color, "#ff0000");
+            equal(stroke.color, redHex);
             equal(stroke.width, 2);
             equal(stroke.opacity, 0.5);
         });
@@ -287,27 +282,45 @@
         test("redraw sets fill options", function() {
             visual.redraw({
                 fill: {
-                    color: "red",
+                    color: RED,
                     opacity: 0.5
                 }
             });
             var fill = visual.options.fill;
 
-            equal(fill.color, "#ff0000");
+            equal(fill.color, redHex);
             equal(fill.opacity, 0.5);
+        });
+
+        test("redraw sets fill color if fill is passed as string", function() {
+            visual.redraw({
+                fill: RED
+            });
+            var fill = visual.options.fill;
+
+            equal(fill.color, redHex);
         });
 
         test("redraw renders fill options", function() {
             visual.redraw({
                 fill: {
-                    color: "red",
+                    color: RED,
                     opacity: 0.5
                 }
             });
             var fill = drawingElement.options.fill;
 
-            equal(fill.color, "#ff0000");
+            equal(fill.color, redHex);
             equal(fill.opacity, 0.5);
+        });
+
+        test("redraw renders fill color if fill is passed as string", function() {
+            visual.redraw({
+                fill: RED
+            });
+            var fill = drawingElement.options.fill;
+
+            equal(fill.color, redHex);
         });
 
         test("redraw does not render fill if no fill options are passed", 0, function() {
@@ -320,29 +333,38 @@
         test("redraw sets stroke options", function() {
             visual.redraw({
                 stroke: {
-                    color: "red",
+                    color: RED,
                     width: 2,
                     opacity: 0.5
                 }
             });
             var stroke = visual.options.stroke;
 
-            equal(stroke.color, "#ff0000");
+            equal(stroke.color, redHex);
             equal(stroke.width, 2);
             equal(stroke.opacity, 0.5);
+        });
+
+        test("redraw sets stroke color if stroke is passed as string", function() {
+            visual.redraw({
+                stroke: RED
+            });
+            var stroke = visual.options.stroke;
+
+            equal(stroke.color, redHex);
         });
 
         test("redraw renders stroke options", function() {
             visual.redraw({
                 stroke: {
-                    color: "red",
+                    color: RED,
                     width: 2,
                     opacity: 0.5
                 }
             });
             var stroke = drawingElement.options.stroke;
 
-            equal(stroke.color, "#ff0000");
+            equal(stroke.color, redHex);
             equal(stroke.width, 2);
             equal(stroke.opacity, 0.5);
         });
@@ -357,28 +379,28 @@
         test("_hover renders hover fill if true is passed as parameter and visual has hover fill options", function() {
             visual.options.hover = {
                 fill: {
-                    color: "#ff0000",
+                    color: RED,
                     opacity: 0.7
                 }
             };
             visual._hover(true);
             var fill = drawingElement.options.fill;
 
-            equal(fill.color, "#ff0000");
+            equal(fill.color, redHex);
             equal(fill.opacity, 0.7);
         });
 
         test("_hover does not update fill options", function() {
             visual.options.hover = {
                 fill: {
-                    color: "red",
+                    color: RED,
                     opacity: 0.7
                 }
             };
             visual._hover(true);
             var fill = visual.options.fill;
 
-            equal(fill.color, "#0000ff");
+            equal(fill.color, greenHex);
             equal(fill.opacity, 1);
         });
 
@@ -392,12 +414,12 @@
         test("_hover renders visual fill options if false is passed as parameter and visual has hover fill options", function() {
             visual.options.hover = {
                 fill: {
-                    color: "#ff0000",
+                    color: RED,
                     opacity: 0.7
                 }
             };
             drawingElement.fill = function(color, opacity) {
-                equal(color, "#0000ff");
+                equal(color, greenHex);
                 equal(opacity, 1);
             };
             visual._hover(false);
@@ -411,67 +433,109 @@
         });
     }
 
-    function visualTests(name, type) {
-        var visual;
+    function autoSizableTests(name, type) {
+        var element;
+        var matrix, translate, scale;
+        var drawingElement;
+        var prototypeBoundingBox = type.fn._boundingBox;
+        var defaultScaleY = 100 / 60;
+        var defaultScaleX = 100 / 50;
 
-        module(name + " / Visual", {
+        module(name + " / autosize", {
             setup: function() {
-                visual = new type({});
+                type.fn._boundingBox = function() {
+                    return new g.Rect(new g.Point(10, 20), new g.Point(60, 80));
+                };
+
+                element = new type({
+                    x: 10,
+                    y: 20,
+                    width: 100,
+                    height: 100
+                });
+
+                translate =  element._transform.translate;
+                scale = element._transform.scale;
+                drawingElement = element.drawingElement;
+                if (drawingElement.transform()) {
+                    matrix = drawingElement.transform().matrix();
+                }
+            },
+
+            teardown: function() {
+                type.fn._boundingBox = prototypeBoundingBox;
             }
         });
 
-        test("redraw updates visual position if x and y are passed", function() {
-            visual.position = function(x, y) {
-                equal(x, 10);
-                equal(y, 20);
+        test("inits position", function() {
+            equal(translate.x, 10);
+            equal(translate.y, 20);
+        });
+
+        test("renders initial position", function() {
+            equal(matrix.e, 10);
+            equal(matrix.f, 20);
+        });
+
+        test("inits scale", function() {
+            equal(scale.x, defaultScaleX);
+            equal(scale.y, defaultScaleY);
+        });
+
+        test("renders initial scale", function() {
+            equal(matrix.a, defaultScaleX);
+            equal(matrix.d, defaultScaleY);
+        });
+
+        test("does not render transformation if element has not x,y,width or height options", function() {
+            element = new type({});
+            ok(!element.drawingElement.transform());
+        });
+
+        test("redraw renders new position if new value is passed for x or y", function() {
+            element.redraw({
+                x: 20
+            });
+            equal(drawingElement.transform().matrix().e, 20);
+
+            element.redraw({
+                y: 30
+            });
+            equal(drawingElement.transform().matrix().f, 30);
+        });
+
+        test("redraw does not render transformation if x and y are not changed", 0, function() {
+            drawingElement.transform = function() {
+                ok(false);
             };
-            visual.redraw({
+            element.redraw({});
+            element.redraw({
                 x: 10,
                 y: 20
             });
         });
 
-        test("redraw does not update visual position if x and y are not passed", 0, function() {
-            visual.position = function(x, y) {
+        test("redraw renders new scale if new value is passed for width or height", function() {
+            element.redraw({
+                width: 80
+            });
+            equal(drawingElement.transform().matrix().a, 80 / 50);
+
+            element.redraw({
+                height: 80
+            });
+            equal(drawingElement.transform().matrix().d, 80 / 60);
+        });
+
+        test("redraw does not render transformation if width and height are not changed", 0, function() {
+            drawingElement.transform = function() {
                 ok(false);
             };
-            visual.redraw();
-        });
-
-        test("redraw sets visual size if width and height are passed with the options", function() {
-            visual.redraw({
+            element.redraw({});
+            element.redraw({
                 width: 100,
-                height: 200
+                height: 100
             });
-
-            equal(visual.options.width, 100);
-            equal(visual.options.height, 200);
-        });
-
-        test("redraw does not set size if width and height are not passed with the options", 0, function() {
-            visual.size = function() {
-                ok(false);
-            };
-            visual.redraw();
-        });
-
-        test("size sets size", function() {
-             visual.size({
-                width: 100,
-                height: 200
-            });
-
-            equal(visual.options.width, 100);
-            equal(visual.options.height, 200);
-        });
-
-        test("size returns current size", function() {
-            visual.options.width = 100;
-            visual.options.height = 200;
-            var size = visual.size();
-
-            equal(size.width, 100);
-            equal(size.height, 200);
         });
     }
 
@@ -648,7 +712,7 @@
 
         elementTests("TextBlock", TextBlock);
         visualBaseTests("TextBlock", TextBlock);
-        visualTests("TextBlock", TextBlock);
+        autoSizableTests("TextBlock", TextBlock);
     })();
 
     (function() {
@@ -656,12 +720,13 @@
         var rectangle;
         var drawingElement;
 
-
         module("Rectangle", {
             setup: function() {
                 rectangle = new Rectangle({
                     width: 200,
-                    height: 100
+                    height: 100,
+                    x: 5,
+                    y: 10
                 });
                 drawingElement = rectangle.drawingElement;
             }
@@ -669,23 +734,25 @@
 
         test("inits path", function() {
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 0, y: 0}));
-            ok(segments[1].anchor.equals({x: 200, y: 0}));
-            ok(segments[2].anchor.equals({x: 200, y: 100}));
-            ok(segments[3].anchor.equals({x: 0, y: 100}));
+            ok(segments[0].anchor.equals({x: 5, y: 10}));
+            ok(segments[1].anchor.equals({x: 205, y: 10}));
+            ok(segments[2].anchor.equals({x: 205, y: 110}));
+            ok(segments[3].anchor.equals({x: 5, y: 110}));
             equal(drawingElement.options.closed, true);
         });
 
         test("updates path", function() {
             rectangle.redraw({
                 width: 300,
-                height: 50
+                height: 50,
+                x: 10,
+                y: 20
             });
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 0, y: 0}));
-            ok(segments[1].anchor.equals({x: 300, y: 0}));
-            ok(segments[2].anchor.equals({x: 300, y: 50}));
-            ok(segments[3].anchor.equals({x: 0, y: 50}));
+            ok(segments[0].anchor.equals({x: 10, y: 20}));
+            ok(segments[1].anchor.equals({x: 310, y: 20}));
+            ok(segments[2].anchor.equals({x: 310, y: 70}));
+            ok(segments[3].anchor.equals({x: 10, y: 70}));
         });
 
         test("triggers geometry change once on update", 1, function() {
@@ -694,24 +761,26 @@
             };
             rectangle.redraw({
                 width: 300,
-                height: 50
+                height: 50,
+                x: 10,
+                y: 20
             });
         });
 
-        test("does not trigger geometry change if width and height are not changed", 0, function() {
+        test("does not trigger geometry change if width, height, x or y are not changed", 0, function() {
             drawingElement.geometryChange = function() {
                 ok(false);
             };
             rectangle.redraw({
-                stroke: {
-                    color: "green"
-                }
+                width: 200,
+                height: 100,
+                x: 5,
+                y: 10
             });
         });
 
         elementTests("Rectangle", Rectangle);
         visualBaseTests("Rectangle", Rectangle);
-        visualTests("Rectangle", Rectangle);
     })();
 
     (function() {
@@ -743,7 +812,7 @@
             equal(matrix.d, 2);
         });
 
-        test("does not init transformation if path has not width and heigth", function() {
+        test("does not init transformation if path has no width and heigth", function() {
             path = new Path({
                 data: "M100,100L200,200"
             });
@@ -818,7 +887,7 @@
 
         elementTests("Path", Path);
         visualBaseTests("Path", Path);
-        visualTests("Path", Path);
+        autoSizableTests("Path", Path);
     })();
 
     (function() {
@@ -890,7 +959,6 @@
         var Polyline = diagram.Polyline;
         var polyline;
         var drawingElement;
-
 
         module("Polyline", {
             setup: function() {
@@ -1015,7 +1083,6 @@
         elementTests("Image", Image);
     })();
 
-
     (function() {
         var Circle = diagram.Circle;
         var circle;
@@ -1040,6 +1107,25 @@
             equal(circleGeometry.getRadius(), 10);
             equal(circleGeometry.center.x, 30);
             equal(circleGeometry.center.y, 40);
+        });
+
+        test("inits center based on radius if center is not set", function() {
+            circle = new Circle({
+                radius: 20
+            });
+            circleGeometry = circle.drawingElement.geometry;
+            equal(circleGeometry.center.x, 20);
+            equal(circleGeometry.center.y, 20);
+        });
+
+        test("inits center and radius based on width or height if radius and center are not set", function() {
+            circle = new Circle({
+                width: 100
+            });
+            circleGeometry = circle.drawingElement.geometry;
+            equal(circleGeometry.getRadius(), 50);
+            equal(circleGeometry.center.x, 50);
+            equal(circleGeometry.center.y, 50);
         });
 
         test("redraw updates circle radius", function() {
@@ -1118,7 +1204,39 @@
             equal(drawingElement.children.length, 0);
         });
 
-        test("redraw transforms group to fit specified width and height", function() {
+        test("_boundingBox returns transformed children bbox without parent transformation", function() {
+            var rectangle = new diagram.Rectangle({
+                width: 50,
+                height: 50,
+                x: 10,
+                y: 10
+            });
+
+            rectangle._transform.scale = new diagram.Scale(2, 2);
+            rectangle._renderTransform();
+            group._transform.scale = new diagram.Scale(2, 2);
+            group._renderTransform();
+
+            group.append(rectangle);
+            var boundingBox = group._boundingBox();
+            var expected = rectangle.drawingElement.bbox(null);
+            ok(boundingBox.p0.equals(expected.p0));
+            ok(boundingBox.p1.equals(expected.p1));
+        });
+
+        // ------------------------------------------------------------
+        module("Group / autoSize", {
+            setup: function() {
+                group = new Group({
+                    width: 200,
+                    height: 300
+                });
+
+                drawingElement = group.drawingElement;
+            }
+        });
+
+        test("redraw transforms group to fit specified width and height when the width and height are the same but the children have changed", function() {
             var rect = new diagram.Rectangle({width: 100, height: 100});
             group.append(rect);
             group.redraw({
@@ -1127,8 +1245,8 @@
             });
 
             var matrix = group.drawingElement.transform().matrix();
-            equal(matrix.a, 2);
-            equal(matrix.d, 3);
+            close(matrix.a, 2, TOLERANCE);
+            close(matrix.d, 3, TOLERANCE);
         });
 
         // ------------------------------------------------------------
@@ -1170,7 +1288,8 @@
             ok(child2.drawingElement === drawingElement.children[1]);
         });
 
-        elementTests("Group", Group);
+        autoSizableTests("Group", Group);
+
     })();
 
     (function() {

@@ -16,6 +16,8 @@
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
         isUndefined = Utils.isUndefined,
+        isNumber = Utils.isNumber,
+        isString = Utils.isString,
         MatrixVector = diagram.MatrixVector,
 
         g = dataviz.geometry,
@@ -26,17 +28,22 @@
         inArray = $.inArray;
 
     // Constants ==============================================================
-    var SVGNS = "http://www.w3.org/2000/svg",
-        SVGXLINK = "http://www.w3.org/1999/xlink",
+    var NONE = "none",
+        TRANSPARENT = "transparent",
         Markers = {
-            none: "none",
+            none: NONE,
             arrowStart: "ArrowStart",
             filledCircle: "FilledCircle",
             arrowEnd: "ArrowEnd"
         },
         DEFAULTWIDTH = 100,
         DEFAULTHEIGHT = 100,
-        FULL_CIRCLE_ANGLE = 360;
+        FULL_CIRCLE_ANGLE = 360,
+
+        WIDTH = "width",
+        HEIGHT = "height",
+        X = "x",
+        Y = "y";
 
     diagram.Markers = Markers;
 
@@ -148,9 +155,12 @@
                 toString(this.rotate) +
                 toString(this.scale);
         },
+
         render: function (visual) {
-            visual.setAttribute("transform", this.toString());
+            visual._transform = this;
+            visual._renderTransform();
         },
+
         toMatrix: function () {
             var m = Matrix.unit();
 
@@ -184,16 +194,71 @@
         }
     });
 
-    function sizeTransform(element) {
-        var scaleX = element._originWidth ? element.options.width / element._originWidth : 1,
-            scaleY = element._originHeight ? element.options.height / element._originHeight : 1,
-            x = element.options.x || 0,
-            y = element.options.y || 0;
+    var AutoSizeableMixin = {
+        _setScale: function() {
+            var options = this.options;
+            var originWidth = this._originWidth;
+            var originHeight = this._originHeight;
+            var scaleX = options.width / originWidth;
+            var scaleY = options.height / originHeight;
 
-        element._transform.translate = new Translation(x, y);
-        element._transform.scale = new Scale(scaleX, scaleY);
-        element._renderTransform();
-    }
+            if (!isNumber(scaleX)) {
+                scaleX = 1;
+            }
+            if (!isNumber(scaleY)) {
+                scaleY = 1;
+            }
+
+            this._transform.scale = new Scale(scaleX, scaleY);
+        },
+
+        _setTranslate: function() {
+            var options = this.options;
+            var x = options.x || 0;
+            var y = options.y || 0;
+            this._transform.translate = new Translation(x, y);
+        },
+
+        _initSize: function() {
+            var options = this.options;
+            var transform = false;
+            if (defined(options.width) || defined(options.height)) {
+                this._measure(true);
+                this._setScale();
+                transform = true;
+            }
+
+            if (defined(options.x) || defined(options.y)) {
+                this._setTranslate();
+                transform = true;
+            }
+
+            if (transform) {
+                this._renderTransform();
+            }
+        },
+
+        _updateSize: function(options) {
+            var update = false;
+
+            if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
+                update = true;
+                this._measure(true);
+                this._setScale();
+            }
+
+            if (this._diffNumericOptions(options, [X, Y])) {
+                update = true;
+                this._setTranslate();
+            }
+
+            if (update) {
+                this._renderTransform();
+            }
+
+            return update;
+        }
+    };
 
     var Element = Class.extend({
         init: function (options) {
@@ -247,11 +312,26 @@
 
         _hover: function () {},
 
+        _diffNumericOptions: function (options, fields) {
+            var elementOptions = this.options;
+            var hasChanges = false;
+            var value, field;
+            for (var i = 0; i < fields.length; i++) {
+                field = fields[i];
+                value = options[field];
+                if (isNumber(value) && elementOptions[field] !== value) {
+                    elementOptions[field] = value;
+                    hasChanges = true;
+                }
+            }
+
+            return hasChanges;
+        },
+
         _measure: function (force) {
             var rect;
             if (!this._measured || force) {
-                var drawingElement = this.drawingElement;
-                var box = drawingElement.rawBBox() || new g.Rect();
+                var box = this._boundingBox() || new g.Rect();
                 var startPoint = box.topLeft();
                 rect = new Rect(startPoint.x, startPoint.y, box.width(), box.height());
                 this._originSize = rect;
@@ -262,73 +342,57 @@
                 rect = this._originSize;
             }
             return rect;
+        },
+
+        _boundingBox: function() {
+            return this.drawingElement.rawBBox();
         }
     });
 
-    // Visual but with no size.
     var VisualBase = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            this._fillOptions();
-            this._strokeOptions();
+
+            options = this.options;
+            options.fill = normalizeDrawingOptions(options.fill);
+            options.stroke = normalizeDrawingOptions(options.stroke);
         },
 
         options: {
             stroke: {
                 color: "gray",
-                width: 1,
-                dashType: "solid"
+                width: 1
             }
         },
 
         fill: function(color, opacity) {
-            deepExtend(this.options, {
-                fill: {
-                    color: color,
-                    opacity: opacity
-                }
+            this._fill({
+                color: getColor(color),
+                opacity: opacity
             });
-
-            var fillOptions = this._fillOptions();
-            this.drawingElement.fill(fillOptions.color, fillOptions.opacity);
-        },
-
-        _fillOptions: function() {
-            var fillOptions = this.options.fill || {};
-            fillOptions.color = this._getColor(fillOptions.color);
-            return fillOptions;
         },
 
         stroke: function(color, width, opacity) {
-             deepExtend(this.options, {
-                stroke: {
-                    color: color,
-                    width: width,
-                    opacity: opacity
-                }
+            this._stroke({
+                color: getColor(color),
+                width: width,
+                opacity: opacity
             });
-            var strokeOptions = this._strokeOptions();
-            this.drawingElement.stroke(strokeOptions.color, strokeOptions.width, strokeOptions.opacity);
-        },
-
-        _strokeOptions: function() {
-            var strokeOptions = this.options.stroke || {};
-            strokeOptions.color = this._getColor(strokeOptions.color);
-            return strokeOptions;
         },
 
         redraw: function (options) {
-            options = options || {};
-            var stroke = options.stroke;
-            var fill = options.fill;
-            if (stroke) {
-                this.stroke(stroke.color, stroke.width, stroke.opacity);
-            }
-            if (fill) {
-                this.fill(fill.color, fill.opacity);
-            }
+            if (options) {
+                var stroke = options.stroke;
+                var fill = options.fill;
+                if (stroke) {
+                    this._stroke(normalizeDrawingOptions(stroke));
+                }
+                if (fill) {
+                    this._fill(normalizeDrawingOptions(fill));
+                }
 
-            Element.fn.redraw.call(this, options);
+                Element.fn.redraw.call(this, options);
+            }
         },
 
         _hover: function (show) {
@@ -337,78 +401,60 @@
             var hover = options.hover;
 
             if (hover && hover.fill) {
-                var fill = show ? hover.fill : options.fill;
+                var fill = show ? normalizeDrawingOptions(hover.fill) : options.fill;
                 drawingElement.fill(fill.color, fill.opacity);
             }
         },
 
-        _getColor: function (value) {
-            var bg;
-            if (value != "none" && value != "transparent") {
-                var color = new dataviz.Color(value);
-                bg = color.toHex();
-            } else {
-                bg = value;
-            }
-            return bg;
-        }
-    });
+        _stroke: function(strokeOptions) {
+            var options = this.options;
+            deepExtend(options, {
+                stroke: strokeOptions
+            });
+            var stroke = options.stroke;
 
-    var Visual = VisualBase.extend({
-        redraw: function (options) {
-            options = options || {};
-            if (defined(options.x) && defined(options.y)) {
-                this.position(options.x, options.y);
-            }
-
-            if (hasSizeOptions(options)) {
-                this.size(options);
-            }
-
-            VisualBase.fn.redraw.call(this, options);
+            this.drawingElement.stroke(stroke.color, stroke.width, stroke.opacity);
         },
 
-        size: function (size) {
+        _fill: function(fillOptions) {
             var options = this.options;
-            if (size) {
-                options.width = size.width;
-                options.height = size.height;
-            } else {
-                return {
-                    width: options.width,
-                    height: options.height
-                };
-            }
+            deepExtend(options, {
+                fill: fillOptions
+            });
+            var fill = options.fill;
+
+            this.drawingElement.fill(fill.color, fill.opacity);
         }
     });
 
-    var TextBlock = Visual.extend({
+    var TextBlock = VisualBase.extend({
         init: function (options) {
             this._textColor(options);
-            Visual.fn.init.call(this, options);
+
+            VisualBase.fn.init.call(this, options);
+
             this._font();
+            this._initText();
+            this._initSize();
+        },
 
-            options = this.options;
+        options: {
+            fontSize: 15,
+            stroke: {
+                color: NONE
+            },
+            fill: {
+                color: "black"
+            }
+        },
 
+        _initText: function() {
+            var options = this.options;
             this.drawingElement = new d.Text(defined(options.text) ? options.text : "", new g.Point(), {
                 fill: options.fill,
                 stroke: options.stroke,
                 font: options.font
             });
-
-            this._size();
-        },
-
-        options: {
-            stroke: {
-                color: "none",
-                width: 0,
-                dashType: "solid"
-            },
-            fontSize: 15,
-            fill: {
-                color: "black"
-            }
         },
 
         _textColor: function(options) {
@@ -433,41 +479,37 @@
         },
 
         redraw: function (options) {
-            var sizeChanged = false;
-            var textOptions = this.options;
-            options = options || {};
-            this._textColor(options);
+            if (options) {
+                var sizeChanged = false;
+                var textOptions = this.options;
 
-            Visual.fn.redraw.call(this, options);
+                this._textColor(options);
 
-            if (options.fontFamily || defined(options.fontSize)) {
-                deepExtend(textOptions, {
-                    fontFamily: options.fontFamily,
-                    fontSize: options.fontSize
-                });
-                this._font();
-                this.drawingElement.options.set("font", textOptions.font);
-                sizeChanged = true;
+                VisualBase.fn.redraw.call(this, options);
+
+                if (options.fontFamily || defined(options.fontSize)) {
+                    deepExtend(textOptions, {
+                        fontFamily: options.fontFamily,
+                        fontSize: options.fontSize
+                    });
+                    this._font();
+                    this.drawingElement.options.set("font", textOptions.font);
+                    sizeChanged = true;
+                }
+
+                if (options.text) {
+                    this.content(options.text);
+                    sizeChanged = true;
+                }
+
+                if (!this._updateSize(options) && sizeChanged) {
+                    this._initSize();
+                }
             }
-
-            if (options.text) {
-                this.content(options.text);
-                sizeChanged = true;
-            }
-
-            if (sizeChanged || hasSizeOptions(options)) {
-                this._size();
-            }
-        },
-
-        _size: autoSizeElement,
-
-        bounds: function () {
-            var options = this.options,
-                rect = new Rect(0, 0, options.width, options.height);
-            return rect;
         }
     });
+
+    deepExtend(TextBlock.fn, AutoSizeableMixin);
 
     var TextBlockEditor = Observable.extend({
         init: function (domElement, options) {
@@ -556,91 +598,101 @@
         }
     });
 
-    var Rectangle = Visual.extend({
+    var Rectangle = VisualBase.extend({
         init: function (options) {
-            Visual.fn.init.call(this, options);
+            VisualBase.fn.init.call(this, options);
             this._initPath();
+        },
+
+        redraw: function (options) {
+            if (options) {
+                VisualBase.fn.redraw.call(this, options);
+                if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
+                    this._updatePoints();
+                }
+            }
         },
 
         _initPath: function() {
             var options = this.options;
-            var width = options.width;
-            var height = options.height;
-
+            var point = new g.Point();
             var drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
 
-            var points = [new g.Point(),
-                new g.Point(width, 0),
-                new g.Point(width, height),
-                new g.Point(0, height)];
+            var points = this._points = [point, point.clone(), point.clone(), point.clone()];
+            this._updatePoints();
 
             drawingElement.moveTo(points[0]);
             for (var i = 1; i < 4; i++) {
                 drawingElement.lineTo(points[i]);
             }
-
             drawingElement.close();
+
             this.drawingElement = drawingElement;
             this._points = points;
         },
 
-        options: {
-            stroke: {},
-            fill: {
-                color: "none"
-            }
-        },
-
-        redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            if (hasSizeOptions(options || {})) {
-                this._updatePath();
-            }
-        },
-
-        _updatePath: function() {
+        _updatePoints: function() {
             var points = this._points;
-            var options = this.options;
-            var width = options.width;
-            var height = options.height;
+            var sizeOptions = sizeOptionsOrDefault(this.options);
+            var x = sizeOptions.x;
+            var y = sizeOptions.y;
+            var x1 = x + sizeOptions.width;
+            var y1 = y + sizeOptions.height;
 
-            points[1].x = width;
-            points[3].y = height;
-            points[2].move(width, height);
+            points[0].x = x;
+            points[0].y = y;
+
+            points[1].x = x1;
+            points[1].y = y;
+
+            points[2].x = x1;
+            points[2].y = y1;
+
+            points[3].move(x, y1);
         }
     });
 
-    var Path = Visual.extend({
+    var Path = VisualBase.extend({
         init: function (options) {
-            Visual.fn.init.call(this, options);
-            options = this.options;
-
-            this.drawingElement = d.Path.parse(options.data || "", {
-                fill: options.fill,
-                stroke: options.stroke
-            });
-
-            this._size();
+            VisualBase.fn.init.call(this, options);
+            this._initPath();
+            this._initSize();
         },
 
         data: function (value) {
             if (value) {
                this._setData(value);
+               this._initSize();
             } else {
                 return this.options.data;
             }
         },
 
         redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            if (options && options.data) {
-                this._setData(options.data);
-            } else if (hasSizeOptions(options)) {
-                this._size();
+            if (options) {
+                VisualBase.fn.redraw.call(this, options);
+
+                if (options.data) {
+                    this._setData(options.data);
+                    if (!this._updateSize(options)) {
+                        this._initSize();
+                    };
+                } else {
+                    this._updateSize(options);
+                }
             }
+        },
+
+        _initPath: function() {
+            var options = this.options;
+
+            this.drawingElement = d.Path.parse(options.data || "", {
+                fill: options.fill,
+                stroke: options.stroke
+            });
         },
 
         _setData: function(data) {
@@ -659,13 +711,11 @@
                 drawingElement.geometryChange();
 
                 options.data = data;
-
-                this._size();
             }
-        },
-
-        _size: autoSizeElement
+        }
     });
+
+    deepExtend(Path.fn, AutoSizeableMixin);
 
     var Marker = Element.extend({
         init: function (options) {
@@ -741,33 +791,25 @@
             this._initPath();
         },
 
-        options: {
-            stroke: {
-                color: "gray",
-                width: 1
-            },
-            fill: {
-                color: "none"
-            }
-        },
-
         redraw: function (options) {
-            options = options || {};
-            var from = options.from;
-            var to = options.to;
-            if (from) {
-                this.options.from = from;
-            }
+            if (options) {
+                options = options || {};
+                var from = options.from;
+                var to = options.to;
+                if (from) {
+                    this.options.from = from;
+                }
 
-            if (to) {
-                this.options.to = to;
-            }
+                if (to) {
+                    this.options.to = to;
+                }
 
-            if (from || to) {
-                this._updatePath();
-            }
+                if (from || to) {
+                    this._updatePath();
+                }
 
-            VisualBase.fn.redraw.call(this, options);
+                VisualBase.fn.redraw.call(this, options);
+            }
         },
 
         _initPath: function() {
@@ -797,17 +839,7 @@
     var Polyline = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
-
-            options = this.options;
-
-            this.drawingElement = new d.Path({
-                fill: options.fill,
-                stroke: options.stroke
-            });
-
-            if (options.points) {
-                this._updatePath();
-            }
+            this._initPath();
         },
 
         points: function (points) {
@@ -821,11 +853,22 @@
         },
 
         redraw: function (options) {
-            if (options && options.points) {
+            if (options) {
+                VisualBase.fn.redraw.call(this, options);
                 this.points(options.points);
             }
+        },
 
-            VisualBase.fn.redraw.call(this, options);
+        _initPath: function() {
+            var options = this.options;
+            this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            if (options.points) {
+                this._updatePath();
+            }
         },
 
         _updatePath: function() {
@@ -845,15 +888,6 @@
         },
 
         options: {
-            stroke: {
-                color: "gray",
-                width: 1
-            },
-
-            fill: {
-                color: "none"
-            },
-
             points: []
         }
     });
@@ -866,23 +900,17 @@
         },
 
         redraw: function (options) {
-            options = options || {};
-            if (options.source) {
-                this.drawingElement.src(options.source);
-            }
+            if (options) {
+                if (options.source) {
+                    this.drawingElement.src(options.source);
+                }
 
-            if (defined(options.x) || defined(options.y) ||
-                defined(options.width) || defined(options.height)) {
-                deepExtend(this.options, {
-                    x: options.x,
-                    y: options.y,
-                    width: options.width,
-                    height: options.height
-                });
-                this.drawingElement.rect(this._rect());
-            }
+                if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
+                    this.drawingElement.rect(this._rect());
+                }
 
-            Element.fn.redraw.call(this, options);
+                Element.fn.redraw.call(this, options);
+            }
         },
 
         _initImage: function() {
@@ -893,13 +921,9 @@
         },
 
         _rect: function() {
-            var options = this.options;
-            var width = options.width || 0;
-            var height = options.height || 0;
-            var x = options.x || 0;
-            var y = options.y || 0;
-            var p0 = new g.Point(x, y);
-            var p1 = p0.clone().translate(width, height);
+            var sizeOptions = sizeOptionsOrDefault(this.options);
+            var p0 = new g.Point(sizeOptions.x, sizeOptions.y);
+            var p1 = p0.clone().translate(sizeOptions.width, sizeOptions.height);
 
             return new g.Rect(p0, p1);
         }
@@ -909,27 +933,23 @@
         init: function (options) {
             Element.fn.init.call(this, options);
             this.drawingElement = new d.Group();
-        },
-
-        size: Visual.fn.size,
-
-        _size: autoSizeElement,
-
-        options: {
-            autoSize: true
+            this._initSize();
         },
 
         append: function (visual) {
             this.drawingElement.append(visual.drawingElement);
             visual.canvas = this.canvas;
+            this._childrenChange = true;
         },
 
         remove: function (visual) {
             this.drawingElement.remove(visual.drawingElement);
+            this._childrenChange = true;
         },
 
         clear: function () {
             this.drawingElement.clear();
+            this._childrenChange = true;
         },
 
         toFront: function (visuals) {
@@ -971,53 +991,91 @@
         },
 
         redraw: function (options) {
-            options = options || {};
-            deepExtend(this.options, {
-                width: options.width,
-                height: options.height,
-                x: options.x,
-                y: options.y
-            });
-            this._size();
+            if (options) {
+                if (this._childrenChange) {
+                    this._childrenChange = false;
+                    if (!this._updateSize(options)) {
+                        this._initSize();
+                    }
+                } else {
+                    this._updateSize(options);
+                }
 
-            Element.fn.redraw.call(this, options);
+                Element.fn.redraw.call(this, options);
+            }
+        },
+
+        _boundingBox: function() {
+            var drawingElement = this.drawingElement;
+            var children = drawingElement.children;
+            var boundingBox = new g.Rect(g.Point.maxPoint(), g.Point.minPoint());
+            var hasBoundingBox = false;
+            var child, childBoundingBox;
+            for (var i = 0; i < children.length; i++) {
+                child = children[i];
+                if (child.visible()) {
+                    childBoundingBox = child.bbox(null);
+                    if (childBoundingBox) {
+                        hasBoundingBox = true;
+                        boundingBox = boundingBox.wrap(childBoundingBox);
+                    }
+                }
+            }
+
+            if (hasBoundingBox) {
+                return boundingBox;
+            }
         }
     });
 
-    //Should width and height be considered?
+    deepExtend(Group.fn, AutoSizeableMixin);
+
     var Circle = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
             this._initCircle();
         },
 
+        redraw: function (options) {
+            if (options) {
+                var circleOptions = this.options;
+
+                if (options.center) {
+                    deepExtend(circleOptions, {
+                        center: options.center
+                    });
+                    this._center.move(circleOptions.center.x, circleOptions.center.y);
+                }
+
+                if (this._diffNumericOptions(options, ["radius"])) {
+                    this._circle.setRadius(circleOptions.radius);
+                }
+                VisualBase.fn.redraw.call(this, options);
+            }
+        },
+
         _initCircle: function() {
             var options = this.options;
-            var radius = options.radius || 0;
-            var center = options.center || {};
+            var width = options.width;
+            var height = options.height;
+            var radius = options.radius;
+            if (!defined(radius)) {
+                if (!defined(width)) {
+                    width = height;
+                }
+                if (!defined(height)) {
+                    height = width;
+                }
+                options.radius = radius = Math.min(width, height) / 2;
+            }
+
+            var center = options.center || {x: radius, y: radius};
             this._center = new g.Point(center.x, center.y);
             this._circle = new g.Circle(this._center, radius);
             this.drawingElement = new d.Circle(this._circle, {
                 fill: options.fill,
                 stroke: options.stroke
             });
-        },
-
-        redraw: function (options) {
-            var circleOptions = this.options;
-            options = options || {};
-
-            if (options.center) {
-                deepExtend(circleOptions, {
-                    center: options.center
-                });
-                this._center.move(circleOptions.center.x, circleOptions.center.y);
-            }
-
-            if (options.radius) {
-                this._circle.setRadius(options.radius);
-            }
-            VisualBase.fn.redraw.call(this, options);
         }
     });
 
@@ -1075,7 +1133,7 @@
         },
 
         draw: function() {
-            this.surface.draw(this._drawingElement);
+            this.surface.draw(this.drawingElement);
         },
 
         append: function (visual) {
@@ -1103,15 +1161,42 @@
         }
     });
 
-    function hasSizeOptions(options) {
-        return options && defined(options.width) && defined(options.height);
+    // Helper functions ===========================================
+
+    function sizeOptionsOrDefault(options) {
+        return {
+            x: options.x || 0,
+            y: options.y || 0,
+            width: options.width || 0,
+            height: options.height || 0
+        };
     }
 
-    function autoSizeElement() {
-        if (hasSizeOptions(this.options)) {
-            this._measure(true);
-            sizeTransform(this);
+    function normalizeDrawingOptions(options) {
+        if (options) {
+            var drawingOptions = options;
+
+            if (isString(drawingOptions)) {
+                drawingOptions = {
+                    color: drawingOptions
+                };
+            }
+
+            if (drawingOptions.color) {
+                drawingOptions.color = getColor(drawingOptions.color);
+            }
+            return drawingOptions;
         }
+    }
+
+    function getColor(value) {
+        var color;
+        if (value != NONE && value != TRANSPARENT) {
+            color = new dataviz.Color(value).toHex();
+        } else {
+            color = value;
+        }
+        return color;
     }
 
     kendo.deepExtend(diagram, {
@@ -1135,7 +1220,6 @@
         TextBlockEditor: TextBlockEditor,
         Image: Image,
         Mask: Mask,
-        Visual: Visual,
         VisualBase: VisualBase
     });
 })(window.kendo.jQuery);
