@@ -2,6 +2,7 @@
 (function() {
     var dataviz = kendo.dataviz,
         diagram = dataviz.diagram,
+        deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
         d = dataviz.drawing,
@@ -1428,6 +1429,127 @@
         test("destroy removes element if true is passed as parameter", function() {
             canvas.destroy(true);
             ok(QUnit.fixture.is(":empty"));
+        });
+
+    })();
+
+    (function() {
+        var ArrowMarker = diagram.ArrowMarker;
+        var CircleMarker = diagram.CircleMarker;
+        var markerShape;
+
+        var linePath = d.Path.parse("M10,10L40,80").paths[0];
+        var circle;
+
+        module("CircleMarker", {
+            setup: function() {
+               markerShape = new CircleMarker({
+                    position: "start"
+               });
+               circle = markerShape.drawingElement.geometry;
+            }
+        });
+
+        test("inits circle", function() {
+            ok(markerShape.drawingElement instanceof d.Circle);
+        });
+
+        test("redraw updates position", function() {
+            markerShape.redraw({
+                position: "end"
+            });
+            equal(markerShape.options.position, "end");
+        });
+
+        test("positionMarker moves center to the target segment point", function() {
+            markerShape.positionMarker(linePath);
+            equal(circle.center.x, 10);
+            equal(circle.center.y, 10);
+            markerShape.redraw({position: "end"});
+            markerShape.positionMarker(linePath);
+            equal(circle.center.x, 40);
+            equal(circle.center.y, 80);
+        });
+
+        // ------------------------------------------------------------
+
+        var curvePath = d.Path.parse("M10,10C100,100 200,200 300,100").paths[0];
+        var tolerance = 0.01;
+        var path;
+        module("ArrowMarker", {
+            setup: function() {
+               markerShape = new ArrowMarker({
+                    position: "start"
+               });
+               path = markerShape.drawingElement;
+            }
+        });
+
+        test("inits path", function() {
+            ok(path instanceof d.MultiPath);
+        });
+
+        test("redraw updates position", function() {
+            markerShape.redraw({
+                position: "end"
+            });
+            equal(markerShape.options.position, "end");
+        });
+
+        test("positionMarker transforms arrow anchor to the start segment for line paths", function() {
+            markerShape.positionMarker(linePath);
+            var matrix = path.transform().matrix();
+
+            close(matrix.a, -0.393, tolerance);
+            close(matrix.b, -0.919, tolerance);
+            close(matrix.c, 0.919, tolerance);
+            close(matrix.d, -0.393, tolerance);
+            close(matrix.e, 9.34, tolerance);
+            close(matrix.f, 21.16, tolerance);
+        });
+
+        test("positionMarker transforms arrow anchor to the end segment for line paths", function() {
+            markerShape.redraw({
+                position: "end"
+            });
+            markerShape.positionMarker(linePath);
+            var matrix = path.transform().matrix();
+
+            close(matrix.a, 0.393, tolerance);
+            close(matrix.b, 0.919, tolerance);
+            close(matrix.c, -0.919, tolerance);
+            close(matrix.d, 0.393, tolerance);
+            close(matrix.e, 40.656, tolerance);
+            close(matrix.f, 68.838, tolerance);
+        });
+
+        test("positionMarker transforms arrow anchor to the start segment for curve paths", function() {
+            markerShape.positionMarker(curvePath);
+
+            var matrix = path.transform().matrix();
+
+            close(matrix.a, -0.707, tolerance);
+            close(matrix.b, -0.707, tolerance);
+            close(matrix.c, 0.707, tolerance);
+            close(matrix.d, -0.707, tolerance);
+            close(matrix.e, 13.535, tolerance);
+            close(matrix.f, 20.606, tolerance);
+        });
+
+        test("positionMarker transforms arrow anchor to the end segment for curve paths", function() {
+            markerShape.redraw({
+                position: "end"
+            });
+            markerShape.positionMarker(curvePath);
+
+            var matrix = path.transform().matrix();
+
+            close(matrix.a, 0.707, tolerance);
+            close(matrix.b, -0.707, tolerance);
+            close(matrix.c, 0.707, tolerance);
+            close(matrix.d, 0.707, tolerance);
+            close(matrix.e, 289.393, tolerance);
+            close(matrix.f, 103.535, tolerance);
         });
 
     })();

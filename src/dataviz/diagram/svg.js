@@ -39,7 +39,8 @@
         DEFAULTWIDTH = 100,
         DEFAULTHEIGHT = 100,
         FULL_CIRCLE_ANGLE = 360,
-
+        START = "start",
+        END = "end",
         WIDTH = "width",
         HEIGHT = "height",
         X = "x",
@@ -659,6 +660,135 @@
         }
     });
 
+    var MarkerBase = VisualBase.extend({
+        init: function(options) {
+           VisualBase.fn.init.call(this, options);
+           var anchor = this.options.anchor;
+           this.anchor = new g.Point(anchor.x, anchor.y);
+           this.createElement();
+        },
+
+        options: {
+           stroke: {
+                color: NONE,
+                width: 0
+           },
+           fill: {
+                color: "black"
+           }
+        },
+
+        _transformToPath: function(point, path) {
+            var transform = path.transform();
+            if (transform) {
+                point = point.transformCopy(transform);
+            }
+            return point;
+        },
+
+        redraw: function(options) {
+            if (options) {
+                if (options.position) {
+                    this.options.position = options.position;
+                }
+
+                VisualBase.fn.redraw.call(this, options);
+            }
+        }
+    });
+
+    var CircleMarker = MarkerBase.extend({
+        options: {
+            radius: 4,
+            anchor: {
+                x: 0,
+                y: 0
+            }
+        },
+
+        createElement: function() {
+            var options = this.options;
+            this.drawingElement = new d.Circle(new g.Circle(this.anchor, options.radius), {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
+        positionMarker: function(path) {
+            var options = this.options;
+            var position = options.position;
+            var segments = path.segments;
+            var targetSegment;
+            var point;
+
+            if (position == START) {
+                targetSegment = segments[0];
+            } else {
+                targetSegment = segments[segments.length - 1];
+            }
+            if (targetSegment) {
+                point = this._transformToPath(targetSegment.anchor, path);
+                this.anchor.move(point.x, point.y);
+            }
+        }
+    });
+
+    var ArrowMarker = MarkerBase.extend({
+        options: {
+            path: "M 0 0 L 10 5 L 0 10 L 3 5 z"           ,
+            anchor: {
+                x: 10,
+                y: 5
+            }
+        },
+
+        createElement: function() {
+            var options = this.options;
+            this.drawingElement = d.Path.parse(options.path, {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
+        positionMarker: function(path) {
+            var points = this._linePoints(path);
+            if (points) {
+                var start = points.start;
+                var end = points.end;
+                var angle = lineAngle(start, end);
+                var anchor = this.anchor;
+                var translate = end.clone().translate(-anchor.x, -anchor.y);
+                var transform = g.transform().rotate(angle, end).translate(translate.x, translate.y);
+                this.drawingElement.transform(transform);
+            }
+        },
+
+        _linePoints: function(path) {
+            var options = this.options;
+            var segments = path.segments;
+            var startPoint, endPoint, targetSegment;
+            if (options.position == START) {
+                targetSegment = segments[0];
+                if (targetSegment) {
+                    endPoint = targetSegment.anchor;
+                    startPoint = targetSegment.controlOut ? targetSegment.controlOut : segments[1].anchor;
+                }
+            } else {
+                targetSegment = segments[segments.length - 1];
+                if (targetSegment) {
+                    endPoint = targetSegment.anchor;
+                    startPoint = targetSegment.controlIn ? targetSegment.controlIn : segments[segments.length - 2].anchor;
+                }
+            }
+            if (startPoint && endPoint) {
+                return {
+                    start: this._transformToPath(startPoint, path),
+                    end: this._transformToPath(endPoint, path)
+                };
+            }
+        }
+    });
+
     var Path = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
@@ -720,40 +850,6 @@
     });
 
     deepExtend(Path.fn, AutoSizeableMixin);
-
-    var Marker = Element.extend({
-        init: function (options) {
-            var that = this, childElement;
-            Element.fn.init.call(that, document.createElementNS(SVGNS, "marker"), options);
-            var o = that.options;
-
-            if (o.path) {
-                childElement = new Path(o.path);
-            }
-            else if (o.circle) {
-                childElement = new Circle(o.circle);
-            }
-            if (childElement) {
-                this.domElement.appendChild(childElement.domElement);
-            }
-        },
-        redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            var that = this, o = that.options;
-            if (o.ref) {
-                that.domElement.refX.baseVal.value = o.ref.x;
-                that.domElement.refY.baseVal.value = o.ref.y;
-            }
-            if (o.width) {
-                that.domElement.markerWidth.baseVal.value = o.width;
-            }
-            if (o.height) {
-                that.domElement.markerHeight.baseVal.value = o.height;
-            }
-            this.setAtr("orient", "orientation");
-            this.setAtr("viewBox", "viewBox");
-        }
-    });
 
     var Line = VisualBase.extend({
         init: function (options) {
@@ -1169,6 +1265,14 @@
         return color;
     }
 
+    function lineAngle(p1, p2) {
+        var xDiff = p2.x - p1.x;
+        var yDiff = p2.y - p1.y;
+        var angle = dataviz.util.deg(Math.atan2(yDiff, xDiff));
+        return angle;
+    }
+
+    // Exports ================================================================
     kendo.deepExtend(diagram, {
         init: function (element) {
             kendo.init(element, diagram.ui);
@@ -1183,7 +1287,9 @@
         Canvas: Canvas,
         Path: Path,
         Line: Line,
-        Marker: Marker,
+        MarkerBase: MarkerBase,
+        ArrowMarker: ArrowMarker,
+        CircleMarker: CircleMarker,
         Polyline: Polyline,
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
