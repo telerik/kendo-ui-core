@@ -755,40 +755,6 @@
         }
     });
 
-    var Mask = Element.extend({
-        init: function (options) {
-            var that = this, childElement;
-            Element.fn.init.call(that, document.createElementNS(SVGNS, "mask"), options);
-            var o = that.options;
-
-            if (o.path) {
-                childElement = new Path(o.path);
-            }
-            else if (o.circle) {
-                childElement = new Circle(o.circle);
-            }
-            else if (o.rectangle) {
-                childElement = new Rectangle(o.rectangle);
-            }
-            if (childElement) {
-                this.domElement.appendChild(childElement.domElement);
-            }
-            this.setAtr("id", "id");
-        },
-        redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            var that = this, o = that.options;
-
-            if (o.width) {
-                that.domElement.width.baseVal.value = o.width;
-            }
-            if (o.height) {
-                that.domElement.height.baseVal.value = o.height;
-            }
-
-        }
-    });
-
     var Line = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
@@ -1223,7 +1189,6 @@
         TextBlock: TextBlock,
         TextBlockEditor: TextBlockEditor,
         Image: Image,
-        Mask: Mask,
         VisualBase: VisualBase
     });
 })(window.kendo.jQuery);
