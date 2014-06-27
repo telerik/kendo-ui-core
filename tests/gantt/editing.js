@@ -659,8 +659,8 @@
         }
     });
 
-    test("does not attach touch widget to the list content", function() {
-        ok(!gantt.list.content.data("kendoTouch"));
+    test("does not attach edit handler", function() {
+        ok(!gantt.list._startEditHandler);
     });
 
 })();

@@ -1530,6 +1530,19 @@ var __meta__ = {
             }
         },
 
+        _viewByIndex: function(index) {
+            var view;
+            var views = this.views;
+
+            for (view in views) {
+                if (!index) {
+                    return view;
+                }
+
+                index--;
+            }
+        },
+
         _initializeView: function(name) {
             var view = this.views[name];
 
@@ -2078,17 +2091,9 @@ var __meta__ = {
                         e.preventDefault();
                     })
                     .on(KEYDOWN + NS, function(e) {
-                        var selectedTask;
                         var selectedDependency;
 
                         if (e.keyCode === keys.DELETE) {
-                            selectedTask = that.select();
-
-                            if (selectedTask.length) {
-                                that.trigger("removeTask", { uid: selectedTask.attr("data-uid") });
-                                return;
-                            }
-
                             selectedDependency = that.selectDependency();
 
                             if (selectedDependency.length) {

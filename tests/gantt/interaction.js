@@ -77,15 +77,6 @@
         }
     });
 
-    test("clicking on icon toggles expanded/collapsed classes", 2, function() {
-        setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
-        var target = ganttList.content.find(".k-icon:not(.k-i-none)").eq(0);
-
-        target.click();
-        ok(!target.hasClass("k-i-collapse"));
-        ok(target.hasClass("k-i-expand"));
-    });
-
     test("clicking on icon toggles expanded/collapsed model field", 2, function() {
         setup({ columns: [], data: [{ title: "foo", parentId: null, id: 1, summary: true, expanded: true }] })
         var target = ganttList.content.find(".k-icon:not(.k-i-none)").eq(0);
@@ -280,17 +271,6 @@
         stub(gantt, "removeTask");
 
         target.click();
-
-        ok(gantt.calls("removeTask"));
-    });
-
-    test("pressing Del key calls removeTask() if task is selected", function() {
-        ganttTimeline._render(tasks);
-
-        stub(gantt, "removeTask");
-
-        ganttTimeline.select(ganttTimeline.wrapper.find(".k-task:first"));
-        ganttTimeline.wrapper.trigger($.Event("keydown", { keyCode: kendo.keys.DELETE }));
 
         ok(gantt.calls("removeTask"));
     });

@@ -152,7 +152,6 @@ var __meta__ = {
                     var element = $(this);
                     var model = that._modelFromElement(element);
 
-                    element.toggleClass(listStyles.iconCollapse + " "  + listStyles.iconExpand);
                     model.set("expanded", !model.get("expanded"));
 
                     e.stopPropagation();
@@ -203,8 +202,11 @@ var __meta__ = {
             var table;
 
             colgroup = kendoDomElement("colgroup", null, this._cols());
-            thead = kendoDomElement("thead", null, [kendoDomElement("tr", null, this._ths())]);
-            table = kendoDomElement("table", { "style": { "min-width": this.options.listWidth + "px" } }, [colgroup, thead]);
+            thead = kendoDomElement("thead", { "role": "rowgroup" }, [kendoDomElement("tr", { "role": "row" }, this._ths())]);
+            table = kendoDomElement("table", {
+                "style": { "min-width": this.options.listWidth + "px" },
+                "role": "grid"
+            }, [colgroup, thead]);
 
             domTree.render([table]);
         },
@@ -217,23 +219,32 @@ var __meta__ = {
             this.levels = [{ field: null, value: 0 }];
 
             colgroup = kendoDomElement("colgroup", null, this._cols());
-            tbody = kendoDomElement("tbody", null, this._trs(tasks));
-            table = kendoDomElement("table", { "style": { "min-width": this.options.listWidth + "px" } }, [colgroup, tbody]);
+            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(tasks));
+            table = kendoDomElement("table", {
+                "style": { "min-width": this.options.listWidth + "px" },
+                "tabIndex": 0,
+                "role": "treegrid"
+            }, [colgroup, tbody]);
 
             this.contentTree.render([table]);
+            this.trigger("render");
         },
 
         _ths: function() {
             var columns = this.columns;
             var column;
-            var style;
+            var attr;
             var ths = [];
 
             for (var i = 0, length = columns.length; i < length; i++) {
                 column = columns[i];
-                style = { "data-field": column.field, "data-title": column.title, className: GanttList.styles.header };
+                attr = {
+                    "data-field": column.field,
+                    "data-title": column.title, className: GanttList.styles.header,
+                    "role": "columnheader"
+                };
 
-                ths.push(kendoDomElement("th", style, [kendoTextElement(column.title)]));
+                ths.push(kendoDomElement("th", attr, [kendoTextElement(column.title)]));
             }
 
             return ths;
@@ -265,7 +276,7 @@ var __meta__ = {
         _trs: function(tasks) {
             var task;
             var rows = [];
-            var style;
+            var attr;
             var className = [];
             var level;
             var listStyles = GanttList.styles;
@@ -278,10 +289,15 @@ var __meta__ = {
                     summary: task.summary
                 });
 
-                style = {
+                attr = {
                     "data-uid": task.uid,
-                    "data-level": level
+                    "data-level": level,
+                    "role": "row"
                 };
+
+                if (task.summary) {
+                    attr["aria-expanded"] = task.expanded;
+                }
 
                 if (i % 2 !== 0) {
                     className.push(listStyles.alt);
@@ -292,12 +308,12 @@ var __meta__ = {
                 }
 
                 if (className.length) {
-                    style.className = className.join(" ");
+                    attr.className = className.join(" ");
                 }
 
                 rows.push(this._tds({
                     task: task,
-                    style: style,
+                    attr: attr,
                     level: level
                 }));
 
@@ -318,7 +334,7 @@ var __meta__ = {
                 children.push(this._td({ task: options.task, column: column, level: options.level }));
             }
 
-            return kendoDomElement("tr", options.style, children);
+            return kendoDomElement("tr", options.attr, children);
         },
 
         _td: function(options) {
@@ -339,7 +355,7 @@ var __meta__ = {
 
             children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
 
-            return kendoDomElement("td", null, children);
+            return kendoDomElement("td", { "role": "gridcell" }, children);
         },
 
         _levels: function(options) {
@@ -413,9 +429,12 @@ var __meta__ = {
 
             if (element.length) {
                 element
-                    .addClass(selectedClassName)
                     .siblings(DOT + selectedClassName)
-                    .removeClass(selectedClassName);
+                    .removeClass(selectedClassName)
+                    .attr("aria-selected", false)
+                    .end()
+                    .addClass(selectedClassName)
+                    .attr("aria-selected", true);
 
                 this.trigger("change");
 
@@ -448,22 +467,6 @@ var __meta__ = {
                     that._closeCell();
                 }
             };
-            var dblclick = function(e) {
-                if ($(e.initialTouch).is(iconSelector)) {
-                    return;
-                }
-
-                var td = $(e.currentTarget);
-                var column = that._columnFromElement(td);
-
-                if (that.editable) {
-                    return;
-                }
-
-                if (column.editable) {
-                    that._editCell({ cell: td, column: column });
-                }
-            };
             var mousedown = function(e) {
                 var currentTarget = $(e.currentTarget);
 
@@ -475,6 +478,15 @@ var __meta__ = {
             if (this.options.editable !== true) {
                 return;
             }
+
+            this._startEditHandler = function(e) {
+                var td = e.currentTarget ? $(e.currentTarget) : e;
+                var column = that._columnFromElement(td);
+
+                if (column.editable) {
+                    that._editCell({ cell: td, column: column });
+                }
+            };
 
             that.content
                 .on("focusin" + NS, function() {
@@ -510,8 +522,9 @@ var __meta__ = {
                         mousedown(e);
                     })
                     .on("dblclick" + NS, "td", function(e) {
-                        e.initialTouch = e.target;
-                        dblclick(e);
+                        if (!$(e.target).is(iconSelector)) {
+                            that._startEditHandler(e);
+                        }
                     });
             } else {
                 that.touch = that.content
@@ -521,7 +534,9 @@ var __meta__ = {
                             mousedown(e.touch);
                         },
                         doubletap: function(e) {
-                            dblclick(e.touch);
+                            if (!$(e.touch.initialTouch).is(iconSelector)) {
+                                that._startEditHandler(e.touch);
+                            }
                         }
                     }).data("kendoTouch");
             }

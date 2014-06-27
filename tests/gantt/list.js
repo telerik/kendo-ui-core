@@ -120,6 +120,12 @@
         equal(parseInt(header.children("table").css("min-width")), ganttList.options.listWidth);
     });
 
+    test("table element role", function() {
+        var header = ganttList.header;
+
+        equal(header.children("table").attr("role"), "grid");
+    });
+
     test("table colgroup", function() {
         var header = ganttList.header;
 
@@ -130,6 +136,12 @@
         var header = ganttList.header;
 
         equal(header.find("thead").length, 1);
+    });
+
+    test("table head role", function() {
+        var header = ganttList.header;
+
+        equal(header.find("thead").attr("role"), "rowgroup");
     });
 
     test("table col elements for each column", function() {
@@ -146,6 +158,13 @@
         ok(cols.eq(1).attr("style"));
         ok(cols.eq(2).attr("style"));
         ok(!cols.eq(3).attr("style"));
+    });
+
+    test("table head row", function() {
+        var header = ganttList.header;
+
+        equal(header.find("thead > tr").length, 1);
+        equal(header.find("thead > tr").attr("role"), "row");
     });
 
     test("table th elements for each column", function() {
@@ -169,6 +188,15 @@
             th = $(th);
             equal(th.attr("data-field"), ganttList.columns[idx].field);
             equal(th.attr("data-title"), ganttList.columns[idx].title);
+        };
+
+        header.find("th").each(test);
+    });
+
+    test("table th elements role", function() {
+        var header = ganttList.header;
+        var test = function(idx, th) {
+            equal($(th).attr("role"), "columnheader");
         };
 
         header.find("th").each(test);
@@ -246,6 +274,12 @@
         equal(parseInt(content.children("table").css("min-width")), ganttList.options.listWidth);
     });
 
+    test("table element role", function() {
+        var content = ganttList.content;
+
+        equal(content.children("table").attr("role"), "treegrid");
+    });
+
     test("table colgroup", function() {
         var content = ganttList.content;
 
@@ -282,6 +316,12 @@
         equal(content.find("tbody").length, 1);
     });
 
+    test("table body role", function() {
+        var content = ganttList.content;
+
+        equal(content.find("tbody").attr("role"), "rowgroup");
+    });
+
     test("table tr elements for each visible task", function() {
         var content = ganttList.content;
 
@@ -296,6 +336,23 @@
             var level = dataSource.taskLevel(task);
             equal(tr.attr("data-uid"), task.get("uid"));
             equal(parseInt(tr.attr("data-level")), level);
+            equal(tr.attr("role"), "row");
+        };
+
+        content.find("tr").each(test);
+    });
+
+    test("table tr aria-expanded for summary rows", function() {
+        var content = ganttList.content;
+        var test = function(idx, tr) {
+            var task = taskTree[idx];
+            tr = $(tr);
+
+            if (task.summary) {
+                equal(tr.attr("aria-expanded"), task.expanded.toString());
+            } else {
+                ok(!tr.attr("aria-expanded"));
+            }
         };
 
         content.find("tr").each(test);
@@ -332,6 +389,15 @@
         var content = ganttList.content;
 
         equal(content.find("tr").eq(0).children("td").length, columns.length);
+    });
+
+    test("table td role", function() {
+        var content = ganttList.content;
+        var test = function(idx, td) {
+            equal($(td).attr("role"), "gridcell");
+        };
+
+        content.find("td").each(test);
     });
 
     test("table td element with span as text container", function () {
