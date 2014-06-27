@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <dl class="specification">
     <dt>Bore * Stroke</dt>
         <dd>89 mm * 88.3 mm</dd>

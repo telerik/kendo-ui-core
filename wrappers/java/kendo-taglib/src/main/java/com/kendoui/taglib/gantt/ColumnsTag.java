@@ -9,6 +9,8 @@ import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.GanttTag;
 
 
+import com.kendoui.taglib.GridTag;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -22,6 +24,10 @@ public class ColumnsTag extends BaseTag /* interfaces */ /* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+
+        GanttTag parent = (GanttTag)findParentWithClass(GanttTag.class);
+        
+        parent.setColumns(this);
 
         return super.doEndTag();
     }

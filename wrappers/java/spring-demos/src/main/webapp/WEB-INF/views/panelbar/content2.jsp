@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <p>Alloy quad overhead camshaft, 48-valve, 7312 cc V12</p>
 <p>Front mid-mounted engine, rear-wheel drive</p>
 <p>Fully catalysed stainless steel lightweight sports exhaust system with active bypass valves</p>

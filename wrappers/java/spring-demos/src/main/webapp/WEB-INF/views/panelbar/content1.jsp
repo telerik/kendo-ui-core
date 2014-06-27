@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <p>Two-seat, two-door coupe</p>
 <p>Carbon fibre monocoque structure</p>
 <p>Hand crafted aluminium body panels</p>

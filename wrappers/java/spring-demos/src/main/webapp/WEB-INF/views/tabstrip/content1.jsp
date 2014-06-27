@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <dl class="specification">
     <dt>Wheelbase</dt>
         <dd>2851 mm</dd>

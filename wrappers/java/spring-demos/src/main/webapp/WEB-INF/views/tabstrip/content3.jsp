@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <dl class="specification">
     <dt>Engine position</dt>
         <dd>front longitudinal</dd>

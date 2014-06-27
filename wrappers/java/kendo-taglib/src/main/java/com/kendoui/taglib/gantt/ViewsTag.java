@@ -9,6 +9,8 @@ import com.kendoui.taglib.BaseTag;
 import com.kendoui.taglib.GanttTag;
 
 
+import com.kendoui.taglib.SchedulerTag;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -22,7 +24,11 @@ public class ViewsTag extends BaseTag /* interfaces */ /* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        
+        GanttTag parent = (GanttTag)findParentWithClass(GanttTag.class);
 
+        parent.setViews(this);
+        
         return super.doEndTag();
     }
 

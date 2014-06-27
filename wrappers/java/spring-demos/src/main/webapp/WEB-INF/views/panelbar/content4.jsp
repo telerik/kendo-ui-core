@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <p>Compression ratio 10.9:1</p>
 <p>Max power 559 kW (750 bhp/760 PS)</p>
 <p>Max torque 750 Nm</p>
