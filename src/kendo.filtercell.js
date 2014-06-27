@@ -169,9 +169,9 @@ var __meta__ = {
                 dataSource.reader.data = removeDuplicates(dataSource.reader.data, this.options.field);
             }
             this.suggestDataSource = dataSource;
-            var ac = this.input.data("kendoAutoComplete");
-            if (ac) {
-                ac.setDataSource(dataSource);
+            var autoComplete = this.input.data("kendoAutoComplete");
+            if (autoComplete) {
+                autoComplete.setDataSource(dataSource);
             }
         },
 
