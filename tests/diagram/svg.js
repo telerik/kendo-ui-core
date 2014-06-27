@@ -25,7 +25,7 @@
                     id: "foo"
                 });
 
-                drawingElement = element.drawingElement;
+                drawingElement = element.drawingContainer();
             }
         });
 
@@ -457,7 +457,7 @@
 
                 translate =  element._transform.translate;
                 scale = element._transform.scale;
-                drawingElement = element.drawingElement;
+                drawingElement = element.drawingContainer();
                 if (drawingElement.transform()) {
                     matrix = drawingElement.transform().matrix();
                 }
@@ -788,7 +788,7 @@
         var Path = diagram.Path;
         var path;
         var drawingElement;
-
+        var drawingContainer;
 
         module("Path", {
             setup: function() {
@@ -798,6 +798,7 @@
                     height: 200
                 });
                 drawingElement = path.drawingElement;
+                drawingContainer = path.drawingContainer();
             }
         });
 
@@ -807,8 +808,13 @@
             ok(segments[1].anchor.equals({x: 200, y: 200}));
         });
 
+        test("inits container", function() {
+            ok(drawingContainer instanceof d.Group);
+            equal($.inArray(drawingElement, drawingContainer.children), 0);
+        });
+
         test("inits transformation", function() {
-            var matrix = drawingElement.transform().matrix();
+            var matrix = drawingContainer.transform().matrix();
             equal(matrix.a, 3);
             equal(matrix.d, 2);
         });
@@ -817,29 +823,20 @@
             path = new Path({
                 data: "M100,100L200,200"
             });
-            equal(path.drawingElement.transform(), undefined);
+            equal(path.drawingContainer().transform(), undefined);
         });
 
-        test("redraw updates path", function() {
+        test("redraw redraws path", function() {
             path.redraw({
                 data: "M100,100L300,200"
             });
-            var segments = drawingElement.paths[0].segments;
+            var segments = path.drawingElement.paths[0].segments;
             ok(segments[0].anchor.equals({x: 100, y: 100}));
             ok(segments[1].anchor.equals({x: 300, y: 200}));
         });
 
-        test("redraw triggers geometry change once", 1, function() {
-            drawingElement.geometryChange = function() {
-                ok(true);
-            };
-            path.redraw({
-                data: "M100,100L300,200"
-            });
-        });
-
-        test("redraw does not trigger geometry change if no data is passed", 0, function() {
-            drawingElement.geometryChange = function() {
+        test("redraw does not redraw path if no data is passed", 0, function() {
+            drawingContainer.childrenChange = function() {
                 ok(false);
             };
             path.redraw({
@@ -849,8 +846,8 @@
             });
         });
 
-        test("redraw does not trigger geometry change if passed data is the same", 0, function() {
-            drawingElement.geometryChange = function() {
+        test("redraw does not redraw path if passed data is the same", 0, function() {
+            drawingContainer.childrenChange = function() {
                 ok(false);
             };
             path.redraw({
@@ -862,7 +859,7 @@
             path.redraw({
                 data: "M100,100L300,200"
             });
-            var matrix = drawingElement.transform().matrix();
+            var matrix = drawingContainer.transform().matrix();
             equal(matrix.a, 1.5);
             equal(matrix.d, 2);
         });
@@ -871,7 +868,7 @@
             path.redraw({
                 data: "M100,100L300,200"
             });
-            var matrix = drawingElement.transform().matrix();
+            var matrix = drawingContainer.transform().matrix();
             equal(matrix.a, 1.5);
             equal(matrix.d, 2);
         });
@@ -881,7 +878,7 @@
                 width: 200,
                 height: 300
             });
-            var matrix = drawingElement.transform().matrix();
+            var matrix = drawingContainer.transform().matrix();
             equal(matrix.a, 2);
             equal(matrix.d, 3);
         });

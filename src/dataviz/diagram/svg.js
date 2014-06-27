@@ -792,8 +792,13 @@
     var Path = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
-            this._initPath();
+            this.container = new d.Group();
+            this._createElements();
             this._initSize();
+        },
+
+        drawingContainer: function() {
+            return this.container;
         },
 
         data: function (value) {
@@ -820,31 +825,23 @@
             }
         },
 
-        _initPath: function() {
+        _createElements: function() {
             var options = this.options;
 
             this.drawingElement = d.Path.parse(options.data || "", {
                 fill: options.fill,
                 stroke: options.stroke
             });
+            this.container.append(this.drawingElement);
         },
 
         _setData: function(data) {
             var options = this.options;
-            var drawingElement = this.drawingElement;
+            var container = this.container;
             if (options.data != data) {
-                var path = d.Path.parse(data || "", {
-                    fill: options.fill,
-                    stroke: options.stroke
-                });
-                drawingElement.paths = path.paths;
-                for (var i = 0; i < path.paths.length; i++)  {
-                    path.paths[i].observer = drawingElement;
-                }
-
-                drawingElement.geometryChange();
-
                 options.data = data;
+                container.clear();
+                this._createElements();
             }
         }
     });
