@@ -128,9 +128,10 @@ var __meta__ = {
 
             that._errors = {};
             that._attachEvents();
+            that._isValidated = false;
         },
 
-        events: [ "validate" ],
+        events: [ "validate", "change" ],
 
         options: {
             name: "Validator",
@@ -215,6 +216,14 @@ var __meta__ = {
             this.element.off(NS);
         },
 
+        value: function() {
+            if (!this._isValidated) {
+                return false;
+            }
+
+            return this.errors().length === 0;
+        },
+
         _submit: function(e) {
             if (!this.validate()) {
                 e.stopPropagation();
@@ -223,6 +232,16 @@ var __meta__ = {
                 return false;
             }
             return true;
+        },
+
+        _checkElement: function(element) {
+            var state = this.value();
+
+            this.validateInput(element);
+
+            if (this.value() !== state) {
+                this.trigger("change");
+            }
         },
 
         _attachEvents: function() {
@@ -235,20 +254,20 @@ var __meta__ = {
             if (that.options.validateOnBlur) {
                 if (!that.element.is(INPUTSELECTOR)) {
                     that.element.on(BLUR + NS, that._inputSelector, function() {
-                        that.validateInput($(this));
+                        that._checkElement($(this));
                     });
 
                     that.element.on("click" + NS, that._checkboxSelector, function() {
-                        that.validateInput($(this));
+                        that._checkElement($(this));
                     });
                 } else {
                     that.element.on(BLUR + NS, function() {
-                        that.validateInput(that.element);
+                        that._checkElement(that.element);
                     });
 
                     if (that.element.is(CHECKBOXSELECTOR)) {
                         that.element.on("click" + NS, function() {
-                            that.validateInput(that.element);
+                            that._checkElement(that.element);
                         });
                     }
                 }
@@ -260,6 +279,8 @@ var __meta__ = {
             var idx;
             var result = false;
             var length;
+
+            var isValid = this.value();
 
             this._errors = {};
 
@@ -281,11 +302,17 @@ var __meta__ = {
 
             this.trigger("validate", { valid: result });
 
+            if (isValid !== result) {
+                this.trigger("change");
+            }
+
             return result;
         },
 
         validateInput: function(input) {
             input = $(input);
+
+            this._isValidated = true;
 
             var that = this,
                 template = that._errorTemplate,
