@@ -60,6 +60,7 @@ var __meta__ = {
         nextSelector = exclusionSelector + ":eq(0)",
         lastSelector = exclusionSelector + ":last",
         templateSelector = "div:not(.k-animation-container,.k-list-container)",
+        touchPointerTypes = { "2": 1, "touch": 1 },
 
         templates = {
             content: template(
@@ -766,7 +767,7 @@ var __meta__ = {
             }
 
             if (!that.options.openOnClick && !touch && !((pointers || msPointers) &&
-                e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) &&
+                e.originalEvent.pointerType in touchPointerTypes) &&
                 !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren &&
                 !contains(e.currentTarget, kendo._activeElement())) {
                     that.close(element);
@@ -1271,7 +1272,7 @@ var __meta__ = {
                 containment = contains(that.element[0], e.relatedTarget || e.target);
 
             if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
-                !((pointers || msPointers) && e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) &&
+                !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
                 containment) || !containment)) {
                     DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
