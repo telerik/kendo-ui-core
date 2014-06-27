@@ -28,19 +28,23 @@
             {
                 font: 12px sans-serif;
             }
+            .filter-container {
+                overflow: auto;
+                max-height: 300px;
+                min-height: 150px;
+                width: 200px;
+            }
         </style>
     </head>
     <body>
         <div id="configurator"></div>
 
         <div id="pivotgrid"></div>
+
         <script>
 
             $(function() {
 
-                $("#configurator, #configurator2").kendoPivotConfigurator({
-                    //dataSource: pivot.dataSource
-                });
 
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
@@ -51,14 +55,15 @@
                         //columns: ["[Department]"],
                         transport: {
                             connection: {
-                               catalog: "Adventure Works DW Standard Edition",
+                               catalog: "Adventure Works DW 2008R2",
                               cube: "Adventure Works"
                              //   catalog: "FoodMart",
                               //  cube: "HR"
                             },
                             read: {
-                                url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
+                            //    url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
                             //    url: "http://korchev:8080/foodmart/xmla",
+                                url: "http://demos.telerik.com/olap/msmdpump.dll",
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"
@@ -73,80 +78,122 @@
                     }
                 }).data("kendoPivotGrid");
 
-/*              var treeview = $("#treeview").kendoTreeView({
-                    dataTextField: "name",
-                    autoBind: false,
-                    dragAndDrop: true,
-                    dragstart: function(e) {
-                        var dataItem = this.dataItem(e.sourceNode);
-                        if (!dataItem.hasChildren) {
-                            e.preventDefault();
-                        }
-                    },
-                    drag: function(e) {
-                        var target = $(e.dropTarget);
-                        if (target.hasClass("k-settings-target")) {
-                            e.setStatusClass("k-add");
-                        } else {
-                            e.setStatusClass("k-denied");
-                        }
-                    },
-                    drop: function(e) {
-                        e.preventDefault();
-                        var target = $(e.dropTarget);
-                        var node = this.dataItem(e.sourceNode);
-                        var container = target.closest(".k-settings-target")
-                        if (container.length) {
-                            console.log(node);
-                            container
-                                .data("kendoPivotSettingTarget")
-                                .add(node.defaultHierarchy || node.uniqueName);
-                        }
-                    },
-                    dataSource: {
-                        schema: {
-                            model: {
-                                id: "uniqueName",
-                                hasChildren: function(item) {
-                                    if (item.hierarchyUniqueName) {
-                                        return false;
+                $("#configurator").kendoPivotConfigurator({
+                    dataSource: pivot.dataSource
+                });
+
+                var defaultMember = "[Date].[Fiscal].[(All)]";
+
+                var treeview;
+                var popup = new kendo.ui.Popup($("<div class='filter-container'><div class='treeview'></div></div>"), {
+                    activate: function() {
+                        if (!treeview) {
+                            var first = true;
+                            treeview =  $(".treeview").kendoTreeView({
+                                dataTextField: "name",
+                                checkboxes: {
+                                    checkChildren: true
+                                },
+                                dataBound: function() {
+                                    if (first) {
+                                        this.dataSource.at(0).set("checked", true)
+                                        first = false;
                                     }
-                                    return true;
+                                },
+                                dataSource: {
+                                    schema: {
+                                        model: {
+                                            id: "levelUniqueName",
+                                            hasChildren: function(item) {
+                                                //                if (item.hierarchyUniqueName) {
+                                                    //                   return false;
+                                                    //              }
+                                                return true;
+                                            }
+                                        }
+                                    },
+                                    transport: {
+                                        read: function(options) {
+                                            var node = $(".treeview").data("kendoTreeView").dataSource.get(options.data.levelUniqueName);
+
+                                            var name = options.data.levelUniqueName;
+
+                                            var restrictions = {
+                                                catalogName: pivot.dataSource.catalog(),
+                                                cubeName: pivot.dataSource.cube(),
+                                            }
+
+                                            if (!name) {
+                                                restrictions.levelUniqueName = defaultMember;
+                                            } else {
+                                                restrictions.memberUniqueName = node.uniqueName.replace(/\&/g, "&amp;");
+                                                restrictions.treeOp = 1;
+                                            }
+
+                                            pivot.dataSource.discover({
+                                                data: {
+                                                    command: "MDSCHEMA_MEMBERS",
+                                                    restrictions: restrictions
+                                                }
+                                                }).done(function(response) {
+                                                response = pivot.dataSource.reader._mapSchema(response, {
+                                                    name: kendo.getter("MEMBER_NAME['#text']", true),
+                                                    caption: kendo.getter("MEMBER_CAPTION['#text']", true),
+                                                    description: kendo.getter("DESCRIPTION['#text']", true),
+                                                    uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
+                                                    dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+                                                    levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
+                                                    hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true)
+                                                });
+                                                options.success(response);
+                                            });
+                                        }
+                                    }
                                 }
-                            }
-                        },
-                        transport: {
-                            read: function(options) {
-                                if ($.isEmptyObject(options.data)) {
-                                    pivot.dataSource.schemaDimensions().done(function(response) {
-                                        options.success(response);
-                                    });
-                                } else if (options.data.uniqueName == "[Measures]") {
-                                    pivot.dataSource.schemaMeasures().done(function(response) {
-                                        options.success(response);
-                                    });
-                                } else if (options.data.uniqueName.indexOf(".") > 1) {
-                                    pivot.dataSource.schemaLevels(options.data.uniqueName).done(function(response) {
-                                        options.success(response);
-                                    });
-                                } else if (options.data.uniqueName) {
-                                    pivot.dataSource.schemaHierarchies(options.data.uniqueName).done(function(response) {
-                                        options.success(response);
-                                    });
-                                } else {
-                                    options.success([]);
+                            }).data("kendoTreeView");
+
+                            treeview.dataSource.bind("change", function(e) {
+                                if (e.field === "checked") {
+                                    var checkedNodes = [];
+
+                                    checkedNodeIds(treeview.dataSource.view(), checkedNodes);
+
+                                    if (checkedNodes.length > 0) {
+                                        pivot.dataSource.filter({ value: checkedNodes.join(","), operator: "in" });
+                                        } else {
+                                        pivot.dataSource.filter({});
+                                    }
                                 }
-                            }
+                            });
+
+                        } else {
+                           treeview.dataSource.read();
+                       }
+                    }
+                });
+
+                $("#pivotgrid, #configurator").on("click", ".k-pivot-setting:not(.k-settings-measures)>.k-button", function(e) {
+                    if (!$(e.target).hasClass("k-setting-delete")) {
+                        defaultMember = $(this).attr(kendo.attr("name")) + ".[(ALL)]";
+                        popup.options.anchor = $(this);
+                        popup.open();
+                    }
+                });
+
+                // function that gathers IDs of checked nodes
+                function checkedNodeIds(nodes, checkedNodes) {
+                    for (var i = 0; i < nodes.length; i++) {
+                        if (nodes[i].checked) {
+                            checkedNodes.push(nodes[i].uniqueName);
+                        }
+
+                        if (nodes[i].hasChildren) {
+                            checkedNodeIds(nodes[i].children.view(), checkedNodes);
                         }
                     }
-                }).data("kendoTreeView");
-*/
-
+                }
             });
 
         </script>
-
-
-
     </body>
 </html>
