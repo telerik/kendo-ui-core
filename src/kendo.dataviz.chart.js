@@ -5661,8 +5661,6 @@ var __meta__ = {
 
         createPoint: function(value, fields) {
             var chart = this,
-                point,
-                pointOptions,
                 series = fields.series,
                 seriesColors = chart.plotArea.options.seriesColors || [],
                 pointsCount = series.data.length,
@@ -5671,12 +5669,14 @@ var __meta__ = {
                     delay: delay,
                     duration: INITIAL_ANIMATION_DURATION - delay,
                     type: BUBBLE
-                };
-
-            var color = fields.color ||
-                seriesColors[fields.pointIx % seriesColors.length];
+                },
+                color, point, pointOptions;
 
             if (kendo.isFunction(series.color)) {
+                color = series.color;
+            } else if (fields.color) {
+                color = fields.color;
+            } else {
                 color = series.color;
             }
 
