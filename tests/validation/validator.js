@@ -859,7 +859,6 @@
         ok(!input.hasClass("k-invalid"));
     });
 
-
     test("field is revalidated on blur", function() {
         var input = $('<input type="text" required />'),
             validator = setup(input);
@@ -1353,4 +1352,136 @@
         ok(!validator.validate());
     });
 
+    test("value initial state is false", function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       ok(!validator.value());
+    });
+
+    test("value is false is validation fails", function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       validator.validate();
+
+       ok(!validator.value());
+    });
+
+    test("value is true if validation succeed", function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("foo");
+
+       ok(validator.validate(), "Form is not valid");
+
+       ok(validator.value(), "State is not correct");
+    });
+
+    test("change event is not triggered when validate is called on initial load when validation fails", 0, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input, {
+                change: function() {
+                    ok(false);
+                }
+            });
+
+       validator.validate();
+    });
+
+    test("change event is triggered when validate is called on initial load when validation succeed", 1, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input, {
+                change: function() {
+                    ok(true);
+                }
+            });
+
+       input.val("foo");
+
+       validator.validate();
+    });
+
+    test("change event is not triggered when state is not changed", 0, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("foo");
+       validator.validate();
+
+       validator.bind("change", function() {
+           ok(false);
+       });
+
+       validator.validate();
+    });
+
+    test("change event is triggered when state is changed", 1, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("foo");
+       validator.validate();
+
+       validator.bind("change", function() {
+           ok(true);
+       });
+
+       input.val("");
+       validator.validate();
+    });
+
+    test("change event is not triggered on blur on initial load when validation fails", 0, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input, {
+                change: function() {
+                    ok(false);
+                }
+            });
+
+        input.trigger("blur");
+    });
+
+    test("change event is triggered on blur on initial load when validation succeed", 1, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input, {
+                change: function() {
+                    ok(true);
+                }
+            });
+
+       input.val("foo");
+
+       input.trigger("blur");
+    });
+
+    test("change event is not triggered when state is not changed - on blur", 0, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("foo");
+       validator.validate();
+
+       validator.bind("change", function() {
+           ok(false);
+       });
+
+       input.trigger("blur");
+    });
+
+    test("change event is triggered when state is changed - on blur", 1, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("foo");
+       validator.validate();
+
+       validator.bind("change", function() {
+           ok(true);
+       });
+
+       input.val("");
+       input.trigger("blur");
+    });
 })();
