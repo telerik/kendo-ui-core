@@ -789,6 +789,79 @@
         }
     });
 
+    var MarkerPathMixin = {
+        _getPath: function(position) {
+            var path = this.drawingElement;
+            if (path instanceof d.MultiPath) {
+                if (position == START) {
+                    path = path.paths[0];
+                } else {
+                    path = path.paths[path.paths.length - 1];
+                }
+            }
+            return path;
+        },
+
+        _removeMarker: function(position) {
+            var marker = this._markers[position];
+            if (marker) {
+                this.drawingContainer().remove(marker.drawingElement);
+                delete this._markers[position];
+            }
+        },
+
+        _createMarkers: function() {
+            var options = this.options;
+            var startCap = options.startCap;
+            var endCap = options.endCap;
+            this._markers = {
+                start: this._createMarker(startCap, START),
+                end: this._createMarker(endCap, END),
+            };
+        },
+
+        _createMarker: function(type, position) {
+            var path = this._getPath(position);
+            var markerType, marker;
+            if (!path) {
+                return;
+            }
+
+            if (type == Markers.filledCircle) {
+                markerType = CircleMarker;
+            } else if (type == Markers.arrowStart || type == Markers.arrowEnd){
+                markerType = ArrowMarker;
+            } else if (type != Markers.none) {
+                throw new Error("Unsupported cap type: " + type);
+            }
+            if (markerType) {
+                marker = new markerType({
+                    position: position
+                });
+                marker.positionMarker(path);
+                this.drawingContainer().append(marker.drawingElement);
+
+                return marker;
+            }
+        },
+
+        _redrawMarkers: function (options) {
+            var pathOptions = this.options;
+            var startCap = options.startCap;
+            var endCap = options.endCap;
+            if (startCap && startCap != pathOptions.startCap) {
+                pathOptions.startCap = startCap;
+                this._removeMarker(START);
+                this._markers[START] = this._createMarker(startCap, START);
+            }
+            if (endCap && endCap != pathOptions.endCap) {
+                pathOptions.endCap = endCap;
+                this._removeMarker(END);
+                this._markers[END] = this._createMarker(startCap, END);
+            }
+        }
+    };
+
     var Path = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
