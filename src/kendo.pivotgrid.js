@@ -2346,6 +2346,21 @@ var __meta__ = {
 
             that._resize();
 
+            if (that.touchScroller) {
+                that.touchScroller.contentResized();
+            } else {
+                var touchScroller = kendo.touchScroller(that.content);
+
+                if (touchScroller && touchScroller.movable) {
+                    that.touchScroller = touchScroller;
+
+                    touchScroller.movable.bind("change", function(e) {
+                        that.columnsHeader.scrollLeft(-e.sender.x);
+                        that.rowsHeader.scrollTop(-e.sender.y);
+                    });
+                }
+            }
+
             that._progress(false);
 
             that.trigger(DATABOUND);
@@ -2353,28 +2368,15 @@ var __meta__ = {
 
         _scrollable: function() {
             var that = this;
-
             var columnsHeader = that.columnsHeader;
             var rowsHeader = that.rowsHeader;
-            var content = that.content;
 
-            var touchScroller = kendo.touchScroller(content);
-
-            content.scroll(function() {
+            that.content.scroll(function() {
                 columnsHeader.scrollLeft(this.scrollLeft);
                 rowsHeader.scrollTop(this.scrollTop);
             });
 
             rowsHeader.bind("DOMMouseScroll" + NS + " mousewheel" + NS, $.proxy(that._wheelScroll, that));
-
-            if (touchScroller && touchScroller.movable) {
-                that.touchScroller = touchScroller;
-
-                touchScroller.movable.bind("change", function(e) {
-                    columnsHeader.scrollLeft(-e.sender.x);
-                    rowsHeader.scrollTop(-e.sender.y);
-                });
-            }
         },
 
         _wheelScroll: function (e) {
