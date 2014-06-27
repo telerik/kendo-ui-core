@@ -270,7 +270,7 @@
         },
 
         visible: function (value) {
-            return this.drawingElement.visible(value);
+            return this.drawingContainer().visible(value);
         },
 
         redraw: function (options) {
@@ -305,9 +305,13 @@
             return this._transform.rotate || new Rotation(0);
         },
 
+        drawingContainer: function() {
+            return this.drawingElement;
+        },
+
         _renderTransform: function () {
             var matrix = this._transform.toMatrix();
-            this.drawingElement.transform(new g.Matrix(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f));
+            this.drawingContainer().transform(new g.Matrix(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f));
         },
 
         _hover: function () {},
@@ -345,7 +349,7 @@
         },
 
         _boundingBox: function() {
-            return this.drawingElement.rawBBox();
+            return this.drawingContainer().rawBBox();
         }
     });
 
@@ -937,13 +941,13 @@
         },
 
         append: function (visual) {
-            this.drawingElement.append(visual.drawingElement);
+            this.drawingElement.append(visual.drawingContainer());
             visual.canvas = this.canvas;
             this._childrenChange = true;
         },
 
         remove: function (visual) {
-            this.drawingElement.remove(visual.drawingElement);
+            this.drawingElement.remove(visual.drawingContainer());
             this._childrenChange = true;
         },
 
@@ -958,8 +962,8 @@
 
             for (var i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                drawingElement.remove(visual.drawingElement);
-                drawingElement.append(visual.drawingElement);
+                drawingElement.remove(visual.drawingContainer());
+                drawingElement.append(visual.drawingContainer());
             }
         },
         //TO DO: add drawing group support for moving and inserting children
@@ -978,7 +982,7 @@
             var i, index, toIndex, drawingElement;
 
             for (i = 0; i < visuals.length; i++) {
-                drawingElement = visuals[i].drawingElement;
+                drawingElement = visuals[i].drawingContainer();
                 index = inArray(drawingElement, children);
                 if (index >= 0) {
                     children.splice(index, 1);
@@ -1137,12 +1141,12 @@
         },
 
         append: function (visual) {
-            this.drawingElement.append(visual.drawingElement);
+            this.drawingElement.append(visual.drawingContainer());
             return this;
         },
 
         remove: function (visual) {
-            this.drawingElement.remove(visual.drawingElement);
+            this.drawingElement.remove(visual.drawingContainer());
         },
 
         insertBefore: function (visual, beforeVisual) {

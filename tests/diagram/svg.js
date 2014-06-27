@@ -1184,13 +1184,13 @@
             ok(drawingElement);
         });
 
-        test("appends visual drawing element", function() {
+        test("appends visual drawingContainer element", function() {
             var childGroup = new Group();
             group.append(childGroup);
-            ok(childGroup.drawingElement === drawingElement.children[0]);
+            ok(childGroup.drawingContainer() === drawingElement.children[0]);
         });
 
-        test("removes visual drawing element", function() {
+        test("removes visual drawingContainer element", function() {
             var childGroup = new Group();
             group.append(childGroup);
             group.remove(childGroup);
@@ -1380,24 +1380,28 @@
             canvas.draw();
         });
 
-        test("append appends visual drawingElement to container", function() {
+        test("append appends visual drawingContainer to container", function() {
             drawingElement.append = function(drawing) {
                 equal(drawing.id, "foo");
             };
             canvas.append({
-                drawingElement: {
-                    id: "foo"
+                drawingContainer: function() {
+                    return  {
+                        id: "foo"
+                    };
                 }
             });
         });
 
-        test("removes removes visual drawingElement from container", function() {
+        test("removes removes visual drawingContainer from container", function() {
             drawingElement.remove = function(drawing) {
                 equal(drawing.id, "foo");
             };
             canvas.remove({
-                drawingElement: {
-                    id: "foo"
+                drawingContainer: function() {
+                    return  {
+                        id: "foo"
+                    };
                 }
             });
         });
