@@ -58,7 +58,7 @@
          </kendo:dataSource-schema>
      </kendo:dataSource>
      <kendo:diagram-layout type="layered" />
-     <kendo:diagram-shapeDefaults visual="visualTemplate" editable="false" rotatable="false" resizable="false" />
+     <kendo:diagram-shapeDefaults visual="visualTemplate" />
      <kendo:diagram-connectionDefaults>
      	<kendo:diagram-connectionDefaults-stroke color="#979797" width="2" />
 	 </kendo:diagram-connectionDefaults>

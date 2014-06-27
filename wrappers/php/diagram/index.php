@@ -79,10 +79,7 @@ $layout = new \Kendo\Dataviz\UI\DiagramLayout();
 $layout->type('layered');
 
 $shape_defaults = new \Kendo\Dataviz\UI\DiagramShapeDefaults();
-$shape_defaults->visual(new \Kendo\JavaScriptFunction('visualTemplate'))
-               ->editable(false)
-               ->rotatable(false)
-               ->resizable(false);
+$shape_defaults->visual(new \Kendo\JavaScriptFunction('visualTemplate'));
 
 $stroke = new \Kendo\Dataviz\UI\DiagramConnectionDefaultsStroke();
 $stroke->color('#979797')
