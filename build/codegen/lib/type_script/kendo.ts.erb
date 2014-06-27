@@ -1116,10 +1116,12 @@ declare module kendo.ui {
 
     interface DropTargetAreaDragenterEvent extends DropTargetAreaEvent {
         draggable?: JQuery;
+        dropTarget?: JQuery;
     }
 
     interface DropTargetAreaDragleaveEvent extends DropTargetAreaEvent {
         draggable?: JQuery;
+        dropTarget?: JQuery;
     }
 
     interface DropTargetAreaDropEvent extends DropTargetAreaEvent {
@@ -1129,10 +1131,13 @@ declare module kendo.ui {
 
     interface DraggableOptions {
         axis?: string;
+        container?: JQuery;
         cursorOffset?: any;
         distance?: number;
+        filter?: string;
         group?: string;
         hint?: Function;
+        ignore?: string;
         drag?(e: DraggableEvent): void;
         dragcancel?(e: DraggableEvent): void;
         dragend?(e: DraggableEvent): void;
