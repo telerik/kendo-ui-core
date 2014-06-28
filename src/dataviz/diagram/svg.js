@@ -970,7 +970,13 @@
     var Line = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
+            this.container = new d.Group();
             this._initPath();
+            this._createMarkers();
+        },
+
+        drawingContainer: function() {
+            return this.container;
         },
 
         redraw: function (options) {
@@ -988,6 +994,9 @@
 
                 if (from || to) {
                     this._updatePath();
+                    this._redrawMarkers(true, options);
+                } else {
+                    this._redrawMarkers(false, options);
                 }
 
                 VisualBase.fn.redraw.call(this, options);
@@ -998,14 +1007,15 @@
             var options = this.options;
             var from = options.from || new Point();
             var to = options.to || new Point();
-            this.drawingElement = new d.Path({
+            var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
             this._from = new g.Point(from.x, from.y);
             this._to = new g.Point(to.x, to.y);
-            this.drawingElement.moveTo(this._from);
-            this.drawingElement.lineTo(this._to);
+            drawingElement.moveTo(this._from);
+            drawingElement.lineTo(this._to);
+            this.container.append(drawingElement);
         },
 
         _updatePath: function() {
@@ -1017,6 +1027,8 @@
             this._to.move(to.x, to.y);
         }
     });
+
+    deepExtend(Line.fn, MarkerPathMixin);
 
     var Polyline = VisualBase.extend({
         init: function (options) {

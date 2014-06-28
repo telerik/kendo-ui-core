@@ -1124,13 +1124,16 @@
         var line;
         var drawingElement;
 
+        function createLine(options) {
+            return new Line(deepExtend({
+                from: new Point(10, 20),
+                to: new Point(20, 40)
+            }, options));
+        }
 
         module("Line", {
             setup: function() {
-                line = new Line({
-                    from: new Point(10, 20),
-                    to: new Point(20, 40)
-                });
+                line = createLine();
                 drawingElement = line.drawingElement;
             }
         });
@@ -1182,6 +1185,7 @@
 
         elementTests("Line", Line);
         visualBaseTests("Line", Line);
+        markerPathTests("Line", createLine);
     })();
 
     (function() {
