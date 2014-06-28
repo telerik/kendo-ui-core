@@ -1193,15 +1193,20 @@
         var polyline;
         var drawingElement;
 
+        function createPolyline(options) {
+            var polyline = new Polyline(deepExtend({
+                points: [
+                    new Point(10, 20),
+                    new Point(30, 40),
+                    new Point(15, 10)
+                ]
+            }, options));
+            return polyline;
+        }
+
         module("Polyline", {
             setup: function() {
-                polyline = new Polyline({
-                    points: [
-                        new Point(10, 20),
-                        new Point(30, 40),
-                        new Point(15, 10)
-                    ]
-                });
+                polyline = createPolyline();
                 drawingElement = polyline.drawingElement;
             }
         });
@@ -1243,8 +1248,50 @@
             });
         });
 
+        // ------------------------------------------------------------
+        module("PolyLine / markers / empty path", {
+            setup: function() {
+                polyline = createPolyline({
+                    points: [],
+                    startCap: diagram.Markers.filledCircle,
+                    endCap: diagram.Markers.arrowStart
+                });
+
+                drawingElement = polyline.drawingElement;
+                drawingContainer = polyline.drawingContainer();
+            }
+        });
+
+        test("does not create markers if no points", function() {
+            ok(!polyline._markers["start"]);
+            ok(!polyline._markers["end"]);
+        });
+
+        test("does not create markers if no points are set on redraw", function() {
+            polyline.redraw({
+                stroke:  {
+                    color: "red"
+                }
+            });
+            ok(!polyline._markers["start"]);
+            ok(!polyline._markers["end"]);
+        });
+
+        test("creates markers if points are set on redraw", function() {
+            polyline.redraw({
+               points: [
+                    new Point(10, 20),
+                    new Point(30, 40),
+                    new Point(15, 10)
+                ]
+            });
+            ok(polyline._markers["start"]);
+            ok(polyline._markers["end"]);
+        });
+
         elementTests("Polyline", Polyline);
         visualBaseTests("Polyline", Polyline);
+        markerPathTests("Polyline", createPolyline);
     })();
 
     (function() {

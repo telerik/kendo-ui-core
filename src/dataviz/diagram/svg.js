@@ -802,7 +802,9 @@
                     path = path.paths[path.paths.length - 1];
                 }
             }
-            return path;
+            if (path && path.segments.length) {
+                return path;
+            }
         },
 
         _removeMarker: function(position) {
@@ -1033,7 +1035,13 @@
     var Polyline = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
+            this.container = new d.Group();
             this._initPath();
+            this._createMarkers();
+        },
+
+        drawingContainer: function() {
+            return this.container;
         },
 
         points: function (points) {
@@ -1049,7 +1057,12 @@
         redraw: function (options) {
             if (options) {
                 VisualBase.fn.redraw.call(this, options);
-                this.points(options.points);
+                if (options.points) {
+                    this.points(options.points);
+                    this._redrawMarkers(true, options);
+                } else {
+                    this._redrawMarkers(false, options);
+                }
             }
         },
 
@@ -1059,6 +1072,8 @@
                 fill: options.fill,
                 stroke: options.stroke
             });
+
+            this.container.append(this.drawingElement);
 
             if (options.points) {
                 this._updatePath();
@@ -1085,6 +1100,8 @@
             points: []
         }
     });
+
+    deepExtend(Polyline.fn, MarkerPathMixin);
 
     var Image = Element.extend({
         init: function (options) {
