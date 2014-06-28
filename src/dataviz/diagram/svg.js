@@ -350,7 +350,7 @@
         },
 
         _boundingBox: function() {
-            return this.drawingContainer().rawBBox();
+            return this.drawingElement.rawBBox();
         }
     });
 
@@ -817,16 +817,16 @@
             var options = this.options;
             var startCap = options.startCap;
             var endCap = options.endCap;
-            this._markers = {
-                start: this._createMarker(startCap, START),
-                end: this._createMarker(endCap, END),
-            };
+            this._markers = {};
+            this._markers[START] = this._createMarker(startCap, START);
+            this._markers[END] = this._createMarker(endCap, END);
         },
 
         _createMarker: function(type, position) {
             var path = this._getPath(position);
             var markerType, marker;
             if (!path) {
+                this._removeMarker(position);
                 return;
             }
 
@@ -834,8 +834,8 @@
                 markerType = CircleMarker;
             } else if (type == Markers.arrowStart || type == Markers.arrowEnd){
                 markerType = ArrowMarker;
-            } else if (type != Markers.none) {
-                throw new Error("Unsupported cap type: " + type);
+            } else {
+                this._removeMarker(position);
             }
             if (markerType) {
                 marker = new markerType({
@@ -848,19 +848,47 @@
             }
         },
 
-        _redrawMarkers: function (options) {
-            var pathOptions = this.options;
-            var startCap = options.startCap;
-            var endCap = options.endCap;
-            if (startCap && startCap != pathOptions.startCap) {
-                pathOptions.startCap = startCap;
-                this._removeMarker(START);
-                this._markers[START] = this._createMarker(startCap, START);
+        _positionMarker : function(position) {
+            var marker = this._markers[position];
+
+            if (marker) {
+                var path = this._getPath(position);
+                if (path) {
+                    marker.positionMarker(path);
+                } else {
+                    this._removeMarker(position);
+                }
             }
-            if (endCap && endCap != pathOptions.endCap) {
-                pathOptions.endCap = endCap;
-                this._removeMarker(END);
-                this._markers[END] = this._createMarker(startCap, END);
+        },
+
+        _capMap: {
+            start: "startCap",
+            end: "endCap"
+        },
+
+        _redrawMarker: function(pathChange, position, options) {
+            var pathOptions = this.options;
+            var cap = this._capMap[position];
+            var optionsCap = options[cap];
+            var created = false;
+            if (optionsCap && pathOptions[cap] != optionsCap) {
+                pathOptions[cap] != optionsCap;
+                this._removeMarker(position);
+                this._markers[position] = this._createMarker(optionsCap, position);
+                created  = true;
+            } else if (pathChange && !this._markers[position] && pathOptions[cap]) {
+                this._markers[position] = this._createMarker(pathOptions[cap], position);
+                created = true;
+            }
+            return created;
+        },
+
+        _redrawMarkers: function (pathChange, options) {
+            if (!this._redrawMarker(pathChange, START, options) && pathChange) {
+                this._positionMarker(START);
+            }
+            if (!this._redrawMarker(pathChange, END, options) && pathChange) {
+                this._positionMarker(END);
             }
         }
     };
@@ -878,11 +906,16 @@
         },
 
         data: function (value) {
+            var options = this.options;
             if (value) {
-               this._setData(value);
-               this._initSize();
+                if (options.data != value) {
+                   options.data = value;
+                   this._setData(value);
+                   this._initSize();
+                   this._redrawMarkers(true, {});
+                }
             } else {
-                return this.options.data;
+                return options.data;
             }
         },
 
@@ -890,13 +923,19 @@
             if (options) {
                 VisualBase.fn.redraw.call(this, options);
 
-                if (options.data) {
-                    this._setData(options.data);
+                var pathOptions = this.options;
+                var data = options.data;
+
+                if (defined(data) && pathOptions.data != data) {
+                    pathOptions.data = data;
+                    this._setData(data);
                     if (!this._updateSize(options)) {
                         this._initSize();
                     };
+                    this._redrawMarkers(true, options);
                 } else {
                     this._updateSize(options);
+                    this._redrawMarkers(false, options);
                 }
             }
         },
@@ -909,20 +948,24 @@
                 stroke: options.stroke
             });
             this.container.append(this.drawingElement);
+            this._createMarkers();
         },
 
         _setData: function(data) {
-            var options = this.options;
-            var container = this.container;
-            if (options.data != data) {
-                options.data = data;
-                container.clear();
-                this._createElements();
+            var drawingElement = this.drawingElement;
+            var paths = d.Path.parse(data || "").paths;
+            drawingElement.paths = paths;
+
+            for (var i = 0; i < paths.length; i++) {
+                paths[i].observer = drawingElement;
             }
+
+            drawingElement.geometryChange();
         }
     });
 
     deepExtend(Path.fn, AutoSizeableMixin);
+    deepExtend(Path.fn, MarkerPathMixin);
 
     var Line = VisualBase.extend({
         init: function (options) {

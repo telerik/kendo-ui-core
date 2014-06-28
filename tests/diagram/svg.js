@@ -540,6 +540,158 @@
         });
     }
 
+    function markerPathTests(name, createElement) {
+        var Markers = diagram.Markers;
+        var ArrowMarker = diagram.ArrowMarker;
+        var CircleMarker = diagram.CircleMarker;
+        var element, markers;
+        var drawingContainer;
+
+        function setupMarkerPath(options) {
+            element = createElement(options);
+            markers = element._markers;
+            drawingContainer = element.drawingContainer();
+        }
+
+        function positionedCircleMarker(marker) {
+            var center = marker.drawingElement.geometry.center;
+            return center.x !== 0 && center.y !== 0;
+        }
+
+        function positionedArrowMarker(marker) {
+            return marker.drawingElement.transform() !== undefined;
+        }
+
+        module(name + " / markers", {
+            setup: function() {
+                setupMarkerPath({
+                    startCap: Markers.filledCircle,
+                    endCap: Markers.arrowEnd
+                });
+            }
+        });
+
+        test("creates markers", function() {
+            ok(markers["start"] instanceof CircleMarker);
+            ok(markers["end"] instanceof ArrowMarker);
+        });
+
+        test("appends markers to container", function() {
+            ok($.inArray(markers["start"].drawingElement, drawingContainer.children) >= 0);
+            ok($.inArray(markers["end"].drawingElement,drawingContainer.children) >= 0);
+        });
+
+        test("sets markers position", function() {
+            equal(markers["start"].options.position, "start");
+            equal(markers["end"].options.position, "end");
+        });
+
+        test("positions markers", function() {
+            ok(positionedCircleMarker(markers["start"]));
+            ok(positionedArrowMarker(markers["end"]));
+        });
+
+        module(name + " / markers / redraw / existing", {
+            setup: function() {
+                setupMarkerPath({
+                    startCap: Markers.filledCircle,
+                    endCap: Markers.arrowEnd
+                });
+            }
+        });
+
+        test("removes markers if none is set as cap", function() {
+            element.redraw({
+                startCap: Markers.none,
+                endCap: Markers.none
+            });
+            ok(!markers["start"]);
+            ok(!markers["end"]);
+            equal(drawingContainer.children.length, 1);
+        });
+
+        test("recreates markers if new cap type is set", function() {
+            element.redraw({
+                startCap: Markers.arrowStart,
+                endCap: Markers.filledCircle
+            });
+
+            ok(markers["start"] instanceof ArrowMarker);
+            ok(markers["end"] instanceof CircleMarker);
+        });
+
+        test("removes old markers if markers are recreated", function() {
+            element.redraw({
+                startCap: Markers.arrowStart,
+                endCap: Markers.filledCircle
+            });
+
+            equal(drawingContainer.children.length, 3);
+        });
+
+        test("positions markers", function() {
+            element.redraw({
+                startCap: Markers.arrowStart,
+                endCap: Markers.filledCircle
+            });
+            ok(positionedArrowMarker(markers["start"]));
+            ok(positionedCircleMarker(markers["end"]));
+        });
+
+        module(name + " / markers / redraw / new", {
+            setup: function() {
+                setupMarkerPath({});
+            }
+        });
+
+        test("creates markers", function() {
+            element.redraw({
+                startCap: Markers.filledCircle,
+                endCap: Markers.arrowEnd
+            });
+            ok(markers["start"] instanceof CircleMarker);
+            ok(markers["end"] instanceof ArrowMarker);
+        });
+
+        test("does not create markers if type is set to none", function() {
+            element.redraw({
+                startCap: Markers.none,
+                endCap: Markers.none
+            });
+            ok(!markers["start"]);
+            ok(!markers["end"]);
+            equal(drawingContainer.children.length, 1);
+        });
+
+        test("appends markers to container", function() {
+            element.redraw({
+                startCap: Markers.filledCircle,
+                endCap: Markers.arrowEnd
+            });
+            ok($.inArray(markers["start"].drawingElement, drawingContainer.children) >= 0);
+            ok($.inArray(markers["end"].drawingElement, drawingContainer.children) >= 0);
+        });
+
+        test("sets markers position", function() {
+            element.redraw({
+                startCap: Markers.filledCircle,
+                endCap: Markers.arrowEnd
+            });
+            equal(markers["start"].options.position, "start");
+            equal(markers["end"].options.position, "end");
+        });
+
+        test("positions markers", function() {
+            element.redraw({
+                startCap: Markers.arrowStart,
+                endCap: Markers.filledCircle
+            });
+
+            ok(positionedArrowMarker(markers["start"]));
+            ok(positionedCircleMarker(markers["end"]));
+        });
+    }
+
     (function() {
         var TextBlock = diagram.TextBlock;
         var textblock;
@@ -826,13 +978,20 @@
         var drawingElement;
         var drawingContainer;
 
+        function createPath(options) {
+            var path = new Path(deepExtend({
+                data: "M100,100L200,200"
+            }, options));
+            return path;
+        }
+
         module("Path", {
             setup: function() {
-                path = new Path({
-                    data: "M100,100L200,200",
+                path = createPath({
                     width: 300,
                     height: 200
                 });
+
                 drawingElement = path.drawingElement;
                 drawingContainer = path.drawingContainer();
             }
@@ -856,9 +1015,7 @@
         });
 
         test("does not init transformation if path has no width and heigth", function() {
-            path = new Path({
-                data: "M100,100L200,200"
-            });
+            path = createPath();
             equal(path.drawingContainer().transform(), undefined);
         });
 
@@ -919,9 +1076,47 @@
             equal(matrix.d, 3);
         });
 
+        // ------------------------------------------------------------
+        module("Path / markers / empty path", {
+            setup: function() {
+                path = createPath({
+                    data: "",
+                    startCap: diagram.Markers.filledCircle,
+                    endCap: diagram.Markers.arrowStart
+                });
+
+                drawingElement = path.drawingElement;
+                drawingContainer = path.drawingContainer();
+            }
+        });
+
+        test("does not create markers if path is empty", function() {
+            ok(!path._markers["start"]);
+            ok(!path._markers["end"]);
+        });
+
+        test("does not create markers if path is not set on redraw", function() {
+            path.redraw({
+                stroke:  {
+                    color: "red"
+                }
+            });
+            ok(!path._markers["start"]);
+            ok(!path._markers["end"]);
+        });
+
+        test("creates markers if path is set on redraw", function() {
+            path.redraw({
+                data:  "M100,100L300,200"
+            });
+            ok(path._markers["start"]);
+            ok(path._markers["end"]);
+        });
+
         elementTests("Path", Path);
         visualBaseTests("Path", Path);
         autoSizableTests("Path", Path);
+        markerPathTests("Path", createPath);
     })();
 
     (function() {
