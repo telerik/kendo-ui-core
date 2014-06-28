@@ -607,56 +607,59 @@
         init: function (options) {
             VisualBase.fn.init.call(this, options);
             this._initPath();
+            this._setPosition();
+        },
+
+        _setPosition: function() {
+            var options = this.options;
+            var x = options.x;
+            var y = options.y;
+            if (defined(x) || defined(y)) {
+                this.position(x || 0, y || 0);
+            }
         },
 
         redraw: function (options) {
             if (options) {
                 VisualBase.fn.redraw.call(this, options);
-                if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
-                    this._updatePoints();
+                if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
+                    this._updatePath();
+                }
+                if (this._diffNumericOptions(options, [X, Y])) {
+                    this._setPosition();
                 }
             }
         },
 
         _initPath: function() {
             var options = this.options;
-            var point = new g.Point();
-            var drawingElement = new d.Path({
+            var width = options.width;
+            var height = options.height;
+            var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
 
-            var points = this._points = [point, point.clone(), point.clone(), point.clone()];
-            this._updatePoints();
+            var points = this._points = [new g.Point(), new g.Point(width, 0),
+                new g.Point(width, height), new g.Point(0, height)];
 
             drawingElement.moveTo(points[0]);
             for (var i = 1; i < 4; i++) {
                 drawingElement.lineTo(points[i]);
             }
             drawingElement.close();
-
-            this.drawingElement = drawingElement;
-            this._points = points;
         },
 
-        _updatePoints: function() {
+        _updatePath: function() {
             var points = this._points;
             var sizeOptions = sizeOptionsOrDefault(this.options);
-            var x = sizeOptions.x;
-            var y = sizeOptions.y;
-            var x1 = x + sizeOptions.width;
-            var y1 = y + sizeOptions.height;
+            var width = sizeOptions.width;
+            var height = sizeOptions.height;
 
-            points[0].x = x;
-            points[0].y = y;
+            points[1].x = width;
 
-            points[1].x = x1;
-            points[1].y = y;
-
-            points[2].x = x1;
-            points[2].y = y1;
-
-            points[3].move(x, y1);
+            points[3].y = height;
+            points[2].move(width, height);
         }
     });
 

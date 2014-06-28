@@ -735,25 +735,41 @@
 
         test("inits path", function() {
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 5, y: 10}));
-            ok(segments[1].anchor.equals({x: 205, y: 10}));
-            ok(segments[2].anchor.equals({x: 205, y: 110}));
-            ok(segments[3].anchor.equals({x: 5, y: 110}));
+            ok(segments[0].anchor.equals({x: 0, y: 0}));
+            ok(segments[1].anchor.equals({x: 200, y: 0}));
+            ok(segments[2].anchor.equals({x: 200, y: 100}));
+            ok(segments[3].anchor.equals({x: 0, y: 100}));
             equal(drawingElement.options.closed, true);
+        });
+
+        test("inits position", function() {
+            var container = rectangle.drawingContainer();
+            var matrix = container.transform().matrix();
+            equal(matrix.e, 5);
+            equal(matrix.f, 10);
         });
 
         test("updates path", function() {
             rectangle.redraw({
                 width: 300,
-                height: 50,
-                x: 10,
-                y: 20
+                height: 50
             });
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 10, y: 20}));
-            ok(segments[1].anchor.equals({x: 310, y: 20}));
-            ok(segments[2].anchor.equals({x: 310, y: 70}));
-            ok(segments[3].anchor.equals({x: 10, y: 70}));
+            ok(segments[0].anchor.equals({x: 0, y: 0}));
+            ok(segments[1].anchor.equals({x: 300, y: 0}));
+            ok(segments[2].anchor.equals({x: 300, y: 50}));
+            ok(segments[3].anchor.equals({x: 0, y: 50}));
+        });
+
+        test("updates position", function() {
+            rectangle.redraw({
+                x: 100,
+                y: 50
+            });
+            var container = rectangle.drawingContainer();
+            var matrix = container.transform().matrix();
+            equal(matrix.e, 100);
+            equal(matrix.f, 50);
         });
 
         test("triggers geometry change once on update", 1, function() {
@@ -762,19 +778,39 @@
             };
             rectangle.redraw({
                 width: 300,
-                height: 50,
-                x: 10,
-                y: 20
+                height: 50
             });
         });
 
-        test("does not trigger geometry change if width, height, x or y are not changed", 0, function() {
+        test("does not trigger geometry change if width or height are not changed", 0, function() {
             drawingElement.geometryChange = function() {
                 ok(false);
             };
             rectangle.redraw({
                 width: 200,
-                height: 100,
+                height: 100
+            });
+        });
+
+        test("updates transformation once", 1, function() {
+            var container = rectangle.drawingContainer();
+            container.transform = function() {
+                ok(true);
+            };
+
+            rectangle.redraw({
+                x: 10,
+                y: 15
+            });
+        });
+
+        test("does not update transformation if x and y are the same", 0, function() {
+            var container = rectangle.drawingContainer();
+            container.transform = function() {
+                ok(false);
+            };
+
+            rectangle.redraw({
                 x: 5,
                 y: 10
             });
