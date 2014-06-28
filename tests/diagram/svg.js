@@ -437,7 +437,7 @@
     function autoSizableTests(name, type) {
         var element;
         var matrix, translate, scale;
-        var drawingElement;
+        var drawingContainer;
         var prototypeBoundingBox = type.fn._boundingBox;
         var defaultScaleY = 100 / 60;
         var defaultScaleX = 100 / 50;
@@ -457,9 +457,9 @@
 
                 translate =  element._transform.translate;
                 scale = element._transform.scale;
-                drawingElement = element.drawingContainer();
-                if (drawingElement.transform()) {
-                    matrix = drawingElement.transform().matrix();
+                drawingContainer = element.drawingContainer();
+                if (drawingContainer.transform()) {
+                    matrix = drawingContainer.transform().matrix();
                 }
             },
 
@@ -488,25 +488,66 @@
             equal(matrix.d, defaultScaleY);
         });
 
+        test("does not init scale if autoSize is set to false", function() {
+            element = new type({
+                x: 10,
+                y: 20,
+                width: 100,
+                height: 100,
+                autoSize: false
+            });
+            scale = element._transform.scale;
+            ok(!scale);
+        });
+
+        test("does not render scale if autoSize is set to false", function() {
+            element = new type({
+                x: 10,
+                y: 20,
+                width: 100,
+                height: 100,
+                autoSize: false
+            });
+            equal(element.drawingContainer().transform().matrix().a, 1);
+            equal(element.drawingContainer().transform().matrix().d, 1);
+        });
+
+
         test("does not render transformation if element has not x,y,width or height options", function() {
             element = new type({});
-            ok(!element.drawingElement.transform());
+            ok(!element.drawingContainer().transform());
         });
 
         test("redraw renders new position if new value is passed for x or y", function() {
             element.redraw({
                 x: 20
             });
-            equal(drawingElement.transform().matrix().e, 20);
+            equal(drawingContainer.transform().matrix().e, 20);
 
             element.redraw({
                 y: 30
             });
-            equal(drawingElement.transform().matrix().f, 30);
+            equal(drawingContainer.transform().matrix().f, 30);
+        });
+
+        test("redraw does not render scale if autoSize is set to false", function() {
+            element = new type({
+                width: 100,
+                height: 100,
+                x: 10,
+                y: 10,
+                autoSize: false
+            });
+            element.redraw({
+                width: 300,
+                height: 300
+            });
+            equal(element.drawingContainer().transform().matrix().a, 1);
+            equal(element.drawingContainer().transform().matrix().d, 1);
         });
 
         test("redraw does not render transformation if x and y are not changed", 0, function() {
-            drawingElement.transform = function() {
+            drawingContainer.transform = function() {
                 ok(false);
             };
             element.redraw({});
@@ -520,16 +561,16 @@
             element.redraw({
                 width: 80
             });
-            equal(drawingElement.transform().matrix().a, 80 / 50);
+            equal(drawingContainer.transform().matrix().a, 80 / 50);
 
             element.redraw({
                 height: 80
             });
-            equal(drawingElement.transform().matrix().d, 80 / 60);
+            equal(drawingContainer.transform().matrix().d, 80 / 60);
         });
 
         test("redraw does not render transformation if width and height are not changed", 0, function() {
-            drawingElement.transform = function() {
+            drawingContainer.transform = function() {
                 ok(false);
             };
             element.redraw({});

@@ -223,7 +223,7 @@
         _initSize: function() {
             var options = this.options;
             var transform = false;
-            if (defined(options.width) || defined(options.height)) {
+            if (options.autoSize !== false && (defined(options.width) || defined(options.height))) {
                 this._measure(true);
                 this._setScale();
                 transform = true;
@@ -242,7 +242,7 @@
         _updateSize: function(options) {
             var update = false;
 
-            if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
+            if (this.options.autoSize !== false && this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
                 update = true;
                 this._measure(true);
                 this._setScale();
@@ -450,7 +450,8 @@
             },
             fill: {
                 color: "black"
-            }
+            },
+            autoSize: true
         },
 
         _initText: function() {
@@ -903,6 +904,10 @@
             this._initSize();
         },
 
+        options: {
+            autoSize: true
+        },
+
         drawingContainer: function() {
             return this.container;
         },
@@ -1145,6 +1150,10 @@
             Element.fn.init.call(this, options);
             this.drawingElement = new d.Group();
             this._initSize();
+        },
+
+        options: {
+            autoSize: true
         },
 
         append: function (visual) {
