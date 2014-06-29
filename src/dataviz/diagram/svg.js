@@ -266,8 +266,8 @@
             var element = this;
             element.options = deepExtend({}, element.options, options);
             element.id = element.options.id;
-            this._originSize = Rect.empty();
-            this._transform = new CompositeTransform();
+            element._originSize = Rect.empty();
+            element._transform = new CompositeTransform();
         },
 
         visible: function (value) {
@@ -684,7 +684,7 @@
 
         _transformToPath: function(point, path) {
             var transform = path.transform();
-            if (transform) {
+            if (point && transform) {
                 point = point.transformCopy(transform);
             }
             return point;
@@ -756,15 +756,19 @@
 
         positionMarker: function(path) {
             var points = this._linePoints(path);
-            if (points) {
-                var start = points.start;
-                var end = points.end;
-                var angle = lineAngle(start, end);
+            var start = points.start;
+            var end = points.end;
+            var transform = g.transform();
+            if (start) {
+                transform.rotate(lineAngle(start, end), end);
+            }
+
+            if (end) {
                 var anchor = this.anchor;
                 var translate = end.clone().translate(-anchor.x, -anchor.y);
-                var transform = g.transform().rotate(angle, end).translate(translate.x, translate.y);
-                this.drawingElement.transform(transform);
+                transform.translate(translate.x, translate.y);
             }
+            this.drawingElement.transform(transform);
         },
 
         _linePoints: function(path) {
@@ -775,16 +779,16 @@
                 targetSegment = segments[0];
                 if (targetSegment) {
                     endPoint = targetSegment.anchor;
-                    startPoint = targetSegment.controlOut ? targetSegment.controlOut : segments[1].anchor;
+                    startPoint = targetSegment.controlOut ? targetSegment.controlOut : (segments[1] || {}).anchor;
                 }
             } else {
                 targetSegment = segments[segments.length - 1];
                 if (targetSegment) {
                     endPoint = targetSegment.anchor;
-                    startPoint = targetSegment.controlIn ? targetSegment.controlIn : segments[segments.length - 2].anchor;
+                    startPoint = targetSegment.controlIn ? targetSegment.controlIn : (segments[segments.length - 2] || {}).anchor;
                 }
             }
-            if (startPoint && endPoint) {
+            if (endPoint) {
                 return {
                     start: this._transformToPath(startPoint, path),
                     end: this._transformToPath(endPoint, path)

@@ -1796,6 +1796,16 @@
         var curvePath = d.Path.parse("M10,10C100,100 200,200 300,100").paths[0];
         var tolerance = 0.01;
         var path;
+
+        function closeMatrices(actual, expected, tolerance) {
+            close(actual.a, expected.a, tolerance);
+            close(actual.b, expected.b, tolerance);
+            close(actual.c, expected.c, tolerance);
+            close(actual.d, expected.d, tolerance);
+            close(actual.e, expected.e, tolerance);
+            close(actual.f, expected.f, tolerance);
+        }
+
         module("ArrowMarker", {
             setup: function() {
                markerShape = new ArrowMarker({
@@ -1819,13 +1829,7 @@
         test("positionMarker transforms arrow anchor to the start segment for line paths", function() {
             markerShape.positionMarker(linePath);
             var matrix = path.transform().matrix();
-
-            close(matrix.a, -0.393, tolerance);
-            close(matrix.b, -0.919, tolerance);
-            close(matrix.c, 0.919, tolerance);
-            close(matrix.d, -0.393, tolerance);
-            close(matrix.e, 9.34, tolerance);
-            close(matrix.f, 21.16, tolerance);
+            closeMatrices(matrix, new g.Matrix(-0.393, -0.919, 0.919, -0.393, 9.34, 21.16), tolerance);
         });
 
         test("positionMarker transforms arrow anchor to the end segment for line paths", function() {
@@ -1835,12 +1839,7 @@
             markerShape.positionMarker(linePath);
             var matrix = path.transform().matrix();
 
-            close(matrix.a, 0.393, tolerance);
-            close(matrix.b, 0.919, tolerance);
-            close(matrix.c, -0.919, tolerance);
-            close(matrix.d, 0.393, tolerance);
-            close(matrix.e, 40.656, tolerance);
-            close(matrix.f, 68.838, tolerance);
+            closeMatrices(matrix, new g.Matrix(0.393, 0.919, -0.919, 0.393, 40.656, 68.838), tolerance);
         });
 
         test("positionMarker transforms arrow anchor to the start segment for curve paths", function() {
@@ -1848,12 +1847,7 @@
 
             var matrix = path.transform().matrix();
 
-            close(matrix.a, -0.707, tolerance);
-            close(matrix.b, -0.707, tolerance);
-            close(matrix.c, 0.707, tolerance);
-            close(matrix.d, -0.707, tolerance);
-            close(matrix.e, 13.535, tolerance);
-            close(matrix.f, 20.606, tolerance);
+            closeMatrices(matrix, new g.Matrix(-0.707, -0.707, 0.707, -0.707, 13.535, 20.606), tolerance);
         });
 
         test("positionMarker transforms arrow anchor to the end segment for curve paths", function() {
@@ -1864,12 +1858,29 @@
 
             var matrix = path.transform().matrix();
 
-            close(matrix.a, 0.707, tolerance);
-            close(matrix.b, -0.707, tolerance);
-            close(matrix.c, 0.707, tolerance);
-            close(matrix.d, 0.707, tolerance);
-            close(matrix.e, 289.393, tolerance);
-            close(matrix.f, 103.535, tolerance);
+            closeMatrices(matrix, new g.Matrix(0.707, -0.707, 0.707, 0.707, 289.393, 103.535), tolerance);
+        });
+
+        test("positionMarker translates arrow anchor to the start point for paths with a single segment", function() {
+            var pointPath = new d.Path();
+            pointPath.moveTo(100, 200);
+            markerShape.positionMarker(pointPath);
+            var matrix = path.transform().matrix();
+
+            closeMatrices(matrix, new g.Matrix(1, 0, 0, 1, 90, 195), tolerance);
+        });
+
+        test("positionMarker translates arrow anchor to the end point for paths with a single segment", function() {
+            markerShape.redraw({
+                position: "end"
+            });
+
+            var pointPath = new d.Path();
+            pointPath.moveTo(100, 200);
+            markerShape.positionMarker(pointPath);
+            var matrix = path.transform().matrix();
+
+            closeMatrices(matrix, new g.Matrix(1, 0, 0, 1, 90, 195), tolerance);
         });
 
     })();
