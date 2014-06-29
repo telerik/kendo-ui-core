@@ -1659,19 +1659,19 @@
                     var handleOptions = editable.resize.handles,
                         hover = handleOptions.hover,
                         stroke = handleOptions.stroke,
-                        background = handleOptions.background;
+                        fill = handleOptions.fill;
 
                     if (value && Utils.isDefined(hover.stroke)) {
                         stroke = deepExtend({}, stroke, hover.stroke);
                     }
 
-                    if (value && Utils.isDefined(hover.background)) {
-                        background = hover.background;
+                    if (value && Utils.isDefined(hover.fill)) {
+                        fill = hover.fill;
                     }
 
                     element.redraw({
                         stroke: stroke,
-                        background: background
+                        fill: fill
                     });
                 }
             },
@@ -1904,7 +1904,9 @@
                     width: 1,
                     dashType: "dash"
                 },
-                background: "none"
+                fill: {
+                    color: "none"
+                }
             },
             start: function (p) {
                 this._sp = this._ep = p;
@@ -1946,19 +1948,19 @@
                 var options = this.options,
                     hover = options.hover,
                     stroke = options.stroke,
-                    background = options.background;
+                    fill = options.fill;
 
                 if (value && Utils.isDefined(hover.stroke)) {
                     stroke = deepExtend({}, stroke, hover.stroke);
                 }
 
-                if (value && Utils.isDefined(hover.background)) {
-                    background = hover.background;
+                if (value && Utils.isDefined(hover.fill)) {
+                    fill = hover.fill;
                 }
 
                 this.visual.redraw({
                     stroke: stroke,
-                    background: background
+                    fill: fill
                 });
             },
             refresh: function () {
