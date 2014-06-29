@@ -380,7 +380,9 @@
             options: {
                 width: 7,
                 height: 7,
-                background: DEFAULT_CONNECTION_BACKGROUND,
+                fill: {
+                    color: DEFAULT_CONNECTION_BACKGROUND
+                },
                 hover: {}
             },
             position: function () {
@@ -693,19 +695,19 @@
                 var options = this.options,
                     hover = options.hover,
                     stroke = options.stroke,
-                    background = options.background;
+                    fill = options.fill;
 
                 if (value && isDefined(hover.stroke)) {
                     stroke = deepExtend({}, stroke, hover.stroke);
                 }
 
-                if (value && isDefined(hover.background)) {
-                    background = hover.background;
+                if (value && isDefined(hover.fill)) {
+                    fill = hover.fill;
                 }
 
                 this.shapeVisual.redraw({
                     stroke: stroke,
-                    background: background
+                    fill: fill
                 });
 
                 this.diagram._showConnectors(this, value);
@@ -830,7 +832,7 @@
                 DiagramElement.fn.init.call(that, options, dataItem);
                 that._router = new PolylineRouter(this);
                 that.path = new Path(that.options);
-                that.path.background(NONE);
+                that.path.fill(NONE);
                 that.visual.append(that.path);
                 that._sourcePoint = that._targetPoint = new Point();
                 that.source(from);
