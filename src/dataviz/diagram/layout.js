@@ -3703,12 +3703,12 @@
                     node = diagramOrGraphOrNodes.nodes[i];
                     shape = node.associatedShape;
                     //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                    this.nodeMap.set(shape.visual.domElement.id, new Rect(node.x, node.y, node.width, node.height));
+                    this.nodeMap.set(shape.visual.id, new Rect(node.x, node.y, node.width, node.height));
                 }
                 for (i = 0; i < diagramOrGraphOrNodes.links.length; i++) {
                     link = diagramOrGraphOrNodes.links[i];
                     conn = link.associatedConnection;
-                    this.linkMap.set(conn.visual.domElement.id, link.points());
+                    this.linkMap.set(conn.visual.id, link.points());
                 }
             }
             else if (diagramOrGraphOrNodes instanceof Array) {
@@ -3717,7 +3717,7 @@
                     node = nodes[i];
                     shape = node.associatedShape;
                     if (shape) {
-                        this.nodeMap.set(shape.visual.domElement.id, new Rect(node.x, node.y, node.width, node.height));
+                        this.nodeMap.set(shape.visual.id, new Rect(node.x, node.y, node.width, node.height));
                     }
                 }
             }
@@ -3728,14 +3728,14 @@
                     node = nodes[i];
                     shape = node.associatedShape;
                     if (shape) {
-                        this.nodeMap.set(shape.visual.domElement.id, new Rect(node.x, node.y, node.width, node.height));
+                        this.nodeMap.set(shape.visual.id, new Rect(node.x, node.y, node.width, node.height));
                     }
                 }
                 for (i = 0; i < links.length; i++) {
                     link = links[i];
                     conn = link.associatedConnection;
                     if (conn) {
-                        this.linkMap.set(conn.visual.domElement.id, link.points);
+                        this.linkMap.set(conn.visual.id, link.points);
                     }
                 }
             }
@@ -3744,11 +3744,11 @@
                 var connections = this.diagram.connections;
                 for (i = 0; i < shapes.length; i++) {
                     shape = shapes[i];
-                    this.nodeMap.set(shape.visual.domElement.id, shape.bounds());
+                    this.nodeMap.set(shape.visual.id, shape.bounds());
                 }
                 for (i = 0; i < connections.length; i++) {
                     conn = connections[i];
-                    this.linkMap.set(conn.visual.domElement.id, conn.points());
+                    this.linkMap.set(conn.visual.id, conn.points());
                 }
             }
         }
