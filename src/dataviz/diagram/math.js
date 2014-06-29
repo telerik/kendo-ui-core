@@ -2787,7 +2787,7 @@
                 height: 20,
                 id: id,
                 radius: 10,
-                background: "#778899",
+                fill: "#778899",
                 data: "circle",
                 undoable: false,
                 x: p.x,
@@ -2848,7 +2848,7 @@
                 if (node.id === "0") {
                     /* kendo.deepExtend(opt,
                      {
-                     background: "Orange",
+                     fill: "Orange",
                      data: 'circle',
                      width: 100,
                      height: 100,
@@ -2860,7 +2860,9 @@
                         width: Math.random() * 150 + 20,
                         height: Math.random() * 80 + 50,
                         data: 'rectangle',
-                        background: "#778899"
+                        fill: {
+                            color: "#778899"
+                        }
                     });
                 }
 
