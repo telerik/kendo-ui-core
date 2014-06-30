@@ -2423,7 +2423,7 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
+                if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
@@ -2439,7 +2439,7 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
+                if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
@@ -2448,13 +2448,13 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
+                if ((e.which === 0 || e.which == 1)&& this.toolService.move(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
             _doubleClick: function (e) {
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.doubleClick(p, this._meta(e))) {
+                if (this.toolService.doubleClick(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
