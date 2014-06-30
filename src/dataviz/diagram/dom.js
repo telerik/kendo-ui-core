@@ -431,7 +431,7 @@
                 that.parentContainer = null;
                 that.isContainer = false;
                 that.isCollapsed = false;
-                that.id = that.visual.domElement.id;
+                that.id = that.visual.id;
                 that.content(that.content());
                 that._rotate();
                 if (options.hasOwnProperty("layout") && options.layout!==undefined) {
