@@ -1365,14 +1365,16 @@
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
 
             _mouseover: function(e) {
-                if (e.target._hover) {
-                    e.target._hover(true, e.target._kendoElement);
+                var node = e.target._kendoNode;
+                if (node && node.srcElement._hover) {
+                    node.srcElement._hover(true, node.srcElement);
                 }
             },
 
             _mouseout: function(e) {
-                if (e.target._hover) {
-                    e.target._hover(false, e.target._kendoElement);
+                var node = e.target._kendoNode;
+                if (node && node.srcElement._hover) {
+                    node.srcElement._hover(false, node.srcElement);
                 }
             },
 
