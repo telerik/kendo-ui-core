@@ -982,7 +982,7 @@
             _updateCursor: function (p) {
                 var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow));
 
-                $(this.diagram.canvas.domElement).css({cursor: cursor});
+                this.diagram.element.css({cursor: cursor});
             },
             _connectionManipulation: function (connection, disabledShape, isNew) {
                 this.activeConnection = connection;
@@ -1506,7 +1506,7 @@
                         for (y = -1; y <= 1; y++) {
                             if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
                                 item = new Rectangle(handles);
-                                item.domElement._hover = $.proxy(this._hover, this);
+                                item.drawingElement._hover = $.proxy(this._hover, this);
                                 this.map.push({ x: x, y: y, visual: item });
                                 this.visual.append(item);
                             }
@@ -1523,6 +1523,7 @@
                     return this._bounds;
                 }
             },
+
             _hitTest: function (p) {
                 var tp = this.diagram.modelToLayer(p),
                     editable = this.options.editable,
@@ -1554,6 +1555,7 @@
                     return new Point(0, 0);
                 }
             },
+
             _getHandleBounds: function (p) {
                 var editable = this.options.editable;
                 if (editable && editable.resize) {
@@ -1579,6 +1581,7 @@
                     return r;
                 }
             },
+
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
                 if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
@@ -1616,6 +1619,7 @@
                 }
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
+
             _initialize: function() {
                 var that = this, i, item,
                     items = that.diagram.select();
@@ -1637,6 +1641,7 @@
                 that.refresh();
                 that.redraw();
             },
+
             _rotates: function () {
                 var that = this, i, shape;
                 that.initialRotates = [];
@@ -1645,6 +1650,7 @@
                     that.initialRotates.push(shape.rotate().angle);
                 }
             },
+
             _positions: function () {
                 var that = this, i, shape;
                 that.initialStates = [];
@@ -1653,6 +1659,7 @@
                     that.initialStates.push(shape.bounds());
                 }
             },
+
             _hover: function(value, element) {
                 var editable = this.options.editable;
                 if (editable && editable.resize) {
@@ -1668,13 +1675,11 @@
                     if (value && Utils.isDefined(hover.fill)) {
                         fill = hover.fill;
                     }
-
-                    element.redraw({
-                        stroke: stroke,
-                        fill: fill
-                    });
+                    element.stroke(stroke.color, stroke.width, stroke.opacity);
+                    element.fill(fill.color, fill.opacity);
                 }
             },
+
             start: function (p) {
                 this._sp = p;
                 this._cp = p;
@@ -1687,22 +1692,24 @@
                     this.shapeStates.push(shape.bounds());
                 }
             },
+
             redraw: function () {
                 var that = this, i, handle,
                     editable = that.options.editable,
                     resize = editable.resize,
                     rotate = editable.rotate,
-                    display = editable && resize ? "inline" : "none",
-                    rotationDisplay = editable && rotate ? "inline" : "none";
+                    visibleHandles = editable && resize ? true : false,
+                    visibleThumb = editable && rotate ? true : false;
 
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
-                    $(handle.visual.domElement).css("display", display);
+                    handle.visual.visible(visibleHandles);
                 }
                 if (that.rotationThumb) {
-                    $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                    that.rotationThumb.visible(visibleThumb);
                 }
             },
+
             move: function (handle, p) {
                 var delta, dragging,
                     dtl = new Point(),
@@ -1798,22 +1805,26 @@
 
                 this._cp = p;
             },
+
             _truncatePositionToGuides: function (bounds) {
                 if (this.diagram.ruler) {
                     return this.diagram.ruler.truncatePositionToGuides(bounds);
                 }
                 return bounds;
             },
+
             _truncateSizeToGuides: function (bounds) {
                 if (this.diagram.ruler) {
                     return this.diagram.ruler.truncateSizeToGuides(bounds);
                 }
                 return bounds;
             },
+
             _truncateAngle: function (a) {
                 var snapAngle = Math.max(this.diagram.options.snap.angle, 5);
                 return this.diagram.options.snap.enabled === true ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
             },
+
             _truncateDistance: function (d) {
                 if (d instanceof diagram.Point) {
                     return new diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
@@ -1822,6 +1833,7 @@
                     return this.diagram.options.snap.enabled === true ? Math.floor(d / snapSize) * snapSize : d;
                 }
             },
+
             _displaceBounds: function (bounds, dtl, dbr, dragging) {
                 var tl = bounds.topLeft().plus(dtl),
                     br = bounds.bottomRight().plus(dbr),
@@ -1834,6 +1846,7 @@
                 }
                 return newBounds;
             },
+
             stop: function () {
                 var unit;
                 if (this._cp != this._sp) {
@@ -1860,6 +1873,7 @@
                 this._rotating = undefined;
                 return unit;
             },
+
             refreshBounds: function () {
                 var bounds = this.shapes.length == 1 ?
                     this.shapes[0].bounds().clone() :
@@ -1867,6 +1881,7 @@
 
                 this.bounds(bounds);
             },
+
             refresh: function () {
                 var that = this, b, bounds;
                 if (this.shapes.length > 0) {
