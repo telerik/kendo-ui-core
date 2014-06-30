@@ -1447,8 +1447,6 @@
                 that.rect = new Rectangle(options.editable.select);
                 that.visual.append(that.rect);
                 that._createHandles();
-                that.text = new TextBlock();
-                that.visual.append(that.text);
                 that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
