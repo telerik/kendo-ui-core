@@ -2179,12 +2179,11 @@
                 var diagram = this,
                     pan = pos || diagram._pan;
 
-                if (this.scroller) {
+                if (diagram.canvas.transformTranslate) {
                     diagram.scroller.scrollTo(pan.x, pan.y);
                     diagram._zoomMainLayer();
-                }
-                else {
-                    diagram._pan = pan;
+                } else {
+                    diagram._storePan(pan);
                     diagram._transformMainLayer();
                 }
             },
