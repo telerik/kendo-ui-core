@@ -1483,5 +1483,33 @@
 
        input.val("");
        input.trigger("blur");
+   });
+
+   test("errors are updated if input is validate on blur after being invalid", 1, function() {
+        var input = $('<input type="text" required />'),
+            validator = setup(input);
+
+       input.val("");
+       validator.validate();
+
+       input.val("foo");
+       input.trigger("blur");
+
+       ok(!validator.errors().length);
     });
+
+    test("errors only validated input are cleared - on blur", 1, function() {
+        container.append($('<input type="text" name="foo1" required="required" /><input type="text" name="foo2" required="required" />'));
+        var validator = setup(container);
+
+        validator.validate();
+
+        var input = container.find("input:first");
+
+        input.val("foo");
+        input.trigger("blur");
+
+        equal(validator.errors().length, 1);
+    });
+
 })();

@@ -338,6 +338,8 @@ var __meta__ = {
                 messageLabel.show();
 
                 input.attr("aria-invalid", true);
+            } else {
+                delete that._errors[fieldName];
             }
 
             input.toggleClass(INVALIDINPUT, !valid);
