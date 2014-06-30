@@ -1994,7 +1994,7 @@
                 return rect;
             },
             documentToView: function(point) {
-                var containerOffset = $(this.canvas.element).offset();
+                var containerOffset = this.element.offset();
 
                 return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
             },
