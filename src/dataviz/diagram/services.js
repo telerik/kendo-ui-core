@@ -18,7 +18,9 @@
             Path = diagram.Path,
             Ticker = diagram.Ticker,
             deepExtend = kendo.deepExtend,
-            Movable = kendo.ui.Movable;
+            Movable = kendo.ui.Movable,
+
+            proxy = $.proxy;
         // Constants ==============================================================
         var Cursors = {
                 arrow: "default",
@@ -46,7 +48,10 @@
             ZOOMSTART = "zoomStart",
             ZOOMEND = "zoomEnd",
             SCROLL_MIN = -20000,
-            SCROLL_MAX = 20000;
+            SCROLL_MAX = 20000,
+            FRICTION = 0.90,
+            FRICTION_MOBILE = 0.93,
+            VELOCITY_MULTIPLIER = 5;
 
         diagram.Cursors = Cursors;
 
@@ -582,13 +587,17 @@
         var ScrollerTool = EmptyTool.extend({
             init: function (toolService) {
                 var tool = this;
+                var friction = kendo.support.mobileOS ? FRICTION_MOBILE : FRICTION;
                 EmptyTool.fn.init.call(tool, toolService);
 
                 var diagram = tool.toolService.diagram,
                     canvas = diagram.canvas;
 
                 var scroller = diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
-                    scroll: $.proxy(tool._move, tool)
+                    friction: friction,
+                    velocityMultiplier: VELOCITY_MULTIPLIER,
+                    mousewheelScrolling: false,
+                    scroll: proxy(tool._move, tool)
                 }).data("kendoMobileScroller");
 
                 tool.movableCanvas = new Movable(canvas.element);
@@ -622,9 +631,11 @@
                     scrollPos = new Point(args.scrollLeft, args.scrollTop),
                     viewBox = new Rect(scrollPos.x, scrollPos.y, parseInt(canvasSize.width, 10), parseInt(canvasSize.height, 10));
 
-                diagram._storePan(scrollPos.times(-1));
-                tool.movableCanvas.moveTo(scrollPos);
-                canvas.viewBox(viewBox);
+                if (canvas.transformTranslate) {
+                    diagram._storePan(scrollPos.times(-1));
+                    tool.movableCanvas.moveTo(scrollPos);
+                    canvas.viewBox(viewBox);
+                }
             },
             end: function () {
                 this.currentCanvasSize = undefined;
@@ -1474,7 +1485,7 @@
                         for (y = -1; y <= 1; y++) {
                             if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
                                 item = new Rectangle(handles);
-                                item.drawingElement._hover = $.proxy(this._hover, this);
+                                item.drawingElement._hover = proxy(this._hover, this);
                                 this.map.push({ x: x, y: y, visual: item });
                                 this.visual.append(item);
                             }
