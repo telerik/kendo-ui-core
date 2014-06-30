@@ -1260,6 +1260,8 @@
                 that.bind(that.events, that.options);
                 element = that.element; // the hosting element
                 element.empty();
+                element.css("position", "relative");
+
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
 
@@ -1292,7 +1294,7 @@
 
                 that._adorn(that._resizingAdorner, true);
                 that._adorn(that._connectorsAdorner, true);
-                that.element
+                that.element.attr("tabindex", 0)
                     .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
                     .on("dblclick" + NS, proxy(that._doubleClick, that))
