@@ -2213,7 +2213,7 @@
                 var zoom = this._zoom;
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
-                transform.render(this.mainLayer.domElement);
+                transform.render(this.mainLayer);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
@@ -2222,7 +2222,7 @@
                     zoom = this._zoom;
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
-                transform.render(this.mainLayer.domElement);
+                transform.render(this.mainLayer);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
