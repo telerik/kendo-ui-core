@@ -579,36 +579,6 @@
             }
         });
 
-        var PanTool = EmptyTool.extend({
-            init: function (toolService) {
-                EmptyTool.fn.init.call(this, toolService);
-            },
-            tryActivate: function (p, meta) {
-                return this.toolService.hoveredItem === undefined && meta.ctrlKey;
-            },
-            start: function (p) {
-                this.toolService.isPanning = true;
-                this.panStart = this.toolService.diagram._pan;
-                this.panOffset = p;
-                this.panDelta = new Point();//relative to root
-            },
-            move: function (p) {
-                var diagram = this.toolService.diagram;
-                this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
-                diagram.pan(this.panStart.plus(this.panDelta), {delta: p.minus(this.panOffset).times(1 / this.toolService.diagram.zoom())});
-            },
-            end: function () {
-                var diagram = this.toolService.diagram;
-                diagram.undoRedoService.begin();
-                diagram.undoRedoService.add(new PanUndoUnit(this.panStart, diagram._pan, diagram));
-                diagram.undoRedoService.commit();
-                this.toolService.isPanning = false;
-            },
-            getCursor: function () {
-                return Cursors.move;
-            }
-        });
-
         var ScrollerTool = EmptyTool.extend({
             init: function (toolService) {
                 var tool = this;
@@ -849,7 +819,7 @@
                 this.diagram = diagram;
                 this.tools = [
                     new ContentEditTool(this),
-                    diagram.options.useScroller ? new ScrollerTool(this) : new PanTool(this),
+                    new ScrollerTool(this),
                     new ConnectionEditTool(this),
                     new ConnectionTool(this),
                     new SelectionTool(this),

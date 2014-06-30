@@ -1268,10 +1268,8 @@
                 that.canvas = new Canvas(canvasContainer, {
                     width: element.width(),
                     height: element.height()
-                }); // the root SVG Canvas
-                if (that.options.useScroller) {
-                    that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
-                }
+                });
+                that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
 
                 this.mainLayer = new Group({
                     id: "main-layer"
@@ -1334,7 +1332,6 @@
                     resize: {},
                     text: true
                 },
-                useScroller: true,
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
                     enabled: true,
@@ -1779,9 +1776,6 @@
                     align.align(rect, options.align);
 
                     var newPan = rect.topLeft().minus(old.topLeft());
-                    if (!this.options.useScroller) {
-                        newPan = this.pan().plus(newPan);
-                    }
                     this.pan(newPan, options.animate);
                 }
             },
