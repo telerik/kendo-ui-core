@@ -28,10 +28,9 @@
         inArray = $.inArray;
 
     // Constants ==============================================================
-    var NONE = "none",
-        TRANSPARENT = "transparent",
+    var TRANSPARENT = "transparent",
         Markers = {
-            none: NONE,
+            none: "none",
             arrowStart: "ArrowStart",
             filledCircle: "FilledCircle",
             arrowEnd: "ArrowEnd"
@@ -674,7 +673,7 @@
 
         options: {
            stroke: {
-                color: NONE,
+                color: TRANSPARENT,
                 width: 0
            },
            fill: {
@@ -1415,7 +1414,7 @@
 
     function getColor(value) {
         var color;
-        if (value != NONE && value != TRANSPARENT) {
+        if (value != TRANSPARENT) {
             color = new dataviz.Color(value).toHex();
         } else {
             color = value;

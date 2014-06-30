@@ -51,7 +51,8 @@
             SCROLL_MAX = 20000,
             FRICTION = 0.90,
             FRICTION_MOBILE = 0.93,
-            VELOCITY_MULTIPLIER = 5;
+            VELOCITY_MULTIPLIER = 5,
+            TRANSPARENT = "transparent";
 
         diagram.Cursors = Cursors;
 
@@ -1899,7 +1900,7 @@
                     dashType: "dash"
                 },
                 fill: {
-                    color: "none"
+                    color: TRANSPARENT
                 }
             },
             start: function (p) {

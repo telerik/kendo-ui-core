@@ -89,7 +89,8 @@
             ALL = "all",
             ABSOLUTE = "absolute",
             TRANSFORMED = "transformed",
-            ROTATED = "rotated";
+            ROTATED = "rotated",
+            TRANSPARENT = "transparent";
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -832,7 +833,7 @@
                 DiagramElement.fn.init.call(that, options, dataItem);
                 that._router = new PolylineRouter(this);
                 that.path = new Path(that.options);
-                that.path.fill(NONE);
+                that.path.fill(TRANSPARENT);
                 that.visual.append(that.path);
                 that._sourcePoint = that._targetPoint = new Point();
                 that.source(from);
