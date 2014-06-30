@@ -57,6 +57,8 @@ var __meta__ = {
         OVERFLOW_ALWAYS = "always",
         OVERFLOW_HIDDEN = "k-overflow-hidden",
 
+        KENDO_UID_ATTR = kendo.attr("uid"),
+
         template = kendo.template,
         components = {
             button: {
@@ -71,7 +73,7 @@ var __meta__ = {
                         item;
 
                     element.data({ type: "buttonGroup" });
-                    element.attr(kendo.attr("uid"), options.uid);
+                    element.attr(KENDO_UID_ATTR, options.uid);
 
                     for (var i = 0; i < items.length; i++) {
                         if (!items[i].uid) {
@@ -140,7 +142,7 @@ var __meta__ = {
 
                     element.attr("id", options.id);
                     popupElement.attr("id", options.id + "_optionlist")
-                                .attr(kendo.attr("uid"), options.rootUid);
+                                .attr(KENDO_UID_ATTR, options.rootUid);
 
                     if (options.mobile) {
                         popupElement = actionSheetWrap(popupElement);
@@ -156,7 +158,7 @@ var __meta__ = {
                         type: "splitButton",
                         kendoPopup: popup
                     });
-                    element.attr(kendo.attr("uid"), options.uid);
+                    element.attr(KENDO_UID_ATTR, options.uid);
 
                     return element;
                 },
@@ -178,24 +180,24 @@ var __meta__ = {
                     }
 
                     element.data({ type: "splitButton" });
-                    element.attr(kendo.attr("uid"), options.uid);
+                    element.attr(KENDO_UID_ATTR, options.uid);
 
                     return element;
                 }
             },
 
             separator: {
-                toolbar: function(options) {
-                    var element = $('<div class="k-separator">&nbsp;</div>');
+                base: function(options, overflow) {
+                    var element = overflow ? $('<li class="k-separator">&nbsp;</li>') : $('<div class="k-separator">&nbsp;</div>');
                     element.data({ type: "separator" });
-                    element.attr(kendo.attr("uid"), options.uid);
+                    element.attr(KENDO_UID_ATTR, options.uid);
                     return element;
                 },
+                toolbar: function(options) {
+                   return components.separator.base(options, false);
+                },
                 overflow: function(options) {
-                    var element = $('<li class="k-separator">&nbsp;</li>');
-                    element.data({ type: "separator" });
-                    element.attr(kendo.attr("uid"), options.uid);
-                    return element;
+                   return components.separator.base(options, true);
                 }
             },
 
@@ -208,7 +210,7 @@ var __meta__ = {
             var element = useButtonTag ? $('<button></button>') : $('<a></a>');
 
             element.data({ type: "button" });
-            element.attr(kendo.attr("uid"), options.uid);
+            element.attr(KENDO_UID_ATTR, options.uid);
 
             if (options.togglable) {
                 element.addClass(TOGGLE_BUTTON);
@@ -395,7 +397,7 @@ var __meta__ = {
                 element.addClass(TOOLBAR + " k-widget");
 
                 this.uid = kendo.guid();
-                element.attr(kendo.attr("uid"), this.uid);
+                element.attr(KENDO_UID_ATTR, this.uid);
 
                 that.isMobile = !!that.element.closest(".km-root")[0];
                 that.animation = that.isMobile ? { open: { effects: "fade" } } : {};
@@ -434,8 +436,8 @@ var __meta__ = {
                 that.userEvents = new kendo.UserEvents(document, {
                     threshold: 5,
                     filter:
-                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + BUTTON + ":not(." + OVERFLOW_ANCHOR + "), " +
-                        "[" + kendo.attr("uid") + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
+                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ":not(." + OVERFLOW_ANCHOR + "), " +
+                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that),
                     press: toggleActive,
                     release: toggleActive
@@ -509,9 +511,9 @@ var __meta__ = {
 
                     if (overflowElement && overflowElement.length) {
                         if(overflowElement.prop("tagName") !== "LI") {
-                            overflowElement.removeAttr("data-uid");
+                            overflowElement.removeAttr(KENDO_UID_ATTR);
                             overflowElement = overflowElement.wrap("<li></li>").parent();
-                            overflowElement.attr("data-uid", options.uid);
+                            overflowElement.attr(KENDO_UID_ATTR, options.uid);
                         }
                         that._attributes(overflowElement, options);
                         overflowElement.addClass(itemClasses).appendTo(that.popup.container);
@@ -550,26 +552,26 @@ var __meta__ = {
             remove: function(element) {
                 var toolbarElement = $(element),
                     type = toolbarElement.data("type"),
-                    uid = toolbarElement.attr(kendo.attr("uid"));
+                    uid = toolbarElement.attr(KENDO_UID_ATTR);
 
                 if (type === "splitButton") {
                     toolbarElement.data("kendoPopup").destroy();
                 }
 
-                $("[" + kendo.attr("uid") + "='" + uid + "']").remove();
+                $("[" + KENDO_UID_ATTR + "='" + uid + "']").remove();
             },
 
             enable: function(element, enable) {
-                var uid = $(element).attr(kendo.attr("uid"));
+                var uid = $(element).attr(KENDO_UID_ATTR);
 
                 if (typeof enable == "undefined") {
                     enable = true;
                 }
 
                 if (enable) {
-                    $("[" + kendo.attr("uid") + "='" + uid + "']").removeClass(STATE_DISABLED);
+                    $("[" + KENDO_UID_ATTR + "='" + uid + "']").removeClass(STATE_DISABLED);
                 } else {
-                    $("[" + kendo.attr("uid") + "='" + uid + "']").addClass(STATE_DISABLED);
+                    $("[" + KENDO_UID_ATTR + "='" + uid + "']").addClass(STATE_DISABLED);
                 }
             },
 
@@ -594,13 +596,13 @@ var __meta__ = {
                     }
 
                     if ($.contains(this.element[0], element[0])) {
-                        twinElement = this.popup.element.find("[" + kendo.attr("uid") + "='" + uid + "']");
+                        twinElement = this.popup.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']");
                         if (twinElement.prop("tagName") === "LI") {
                             twinElement = twinElement.find("." + TOGGLE_BUTTON + ":first");
                         }
                     } else {
                         uid = uid ? uid : element.parent().data("uid");
-                        twinElement = this.element.find("[" + kendo.attr("uid") + "='" + uid + "']");
+                        twinElement = this.element.find("[" + KENDO_UID_ATTR + "='" + uid + "']");
                     }
 
                     element.add(twinElement).toggleClass(STATE_ACTIVE, checked);
@@ -608,7 +610,6 @@ var __meta__ = {
             },
 
             _attributes: function(element, options) {
-                //element.attr(kendo.attr("uid"), options.uid);
                 element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);
             },
 
@@ -659,7 +660,7 @@ var __meta__ = {
                     that.popup.container = that.popup.element;
                 }
 
-                that.popup.container.attr(kendo.attr("uid"), this.uid);
+                that.popup.container.attr(KENDO_UID_ATTR, this.uid);
             },
 
             _toggleOverflowAnchor: function() {
