@@ -1271,27 +1271,27 @@
                 });
                 that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
 
-                this.mainLayer = new Group({
+                that.mainLayer = new Group({
                     id: "main-layer"
                 });
-                this.canvas.append(this.mainLayer);
+                that.canvas.append(that.mainLayer);
 
-                this._pan = new Point();
-                this._adorners = [];
-                this.adornerLayer = new Group({
+                that._pan = new Point();
+                that._adorners = [];
+                that.adornerLayer = new Group({
                     id: "adorner-layer"
                 });
-                this.canvas.append(this.adornerLayer);
-                this.libraries = []; // shape libraries needed to deserialize complex shapes/controls with composite geometries and layout
-                this.toolService = new ToolService(this);
-                this._attachEvents();
+                that.canvas.append(that.adornerLayer);
+                that.libraries = []; // shape libraries needed to deserialize complex shapes/controls with composite geometries and layout
+                that.toolService = new ToolService(that);
+                that._attachEvents();
                 that._initialize();
                 that._fetchFreshData();
-                this._resizingAdorner = new ResizingAdorner(this, { editable: this.options.editable });
-                this._connectorsAdorner = new ConnectorsAdorner(this);
+                that._resizingAdorner = new ResizingAdorner(that, { editable: that.options.editable });
+                that._connectorsAdorner = new ConnectorsAdorner(that);
 
-                this._adorn(this._resizingAdorner, true);
-                this._adorn(this._connectorsAdorner, true);
+                that._adorn(that._resizingAdorner, true);
+                that._adorn(that._connectorsAdorner, true);
                 that.element
                     .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
@@ -1309,12 +1309,14 @@
                 if (that.options.layout) {
                     that.layout(that.options.layout);
                 }
-                this.pauseMouseHandlers = false;
+                that.pauseMouseHandlers = false;
 
                 that._createShapes();
                 that._createConnections();
                 that.zoom(that.options.zoom);
                 that._autosizeCanvas();
+
+                that.canvas.draw();
             },
             options: {
                 name: "Diagram",
