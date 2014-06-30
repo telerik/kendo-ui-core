@@ -2099,13 +2099,13 @@
             getShapeById: function (id) {
                 var found;
                 found = Utils.first(this.shapes, function (s) {
-                    return s.visual.domElement.id === id;
+                    return s.visual.id === id;
                 });
                 if (found) {
                     return found;
                 }
                 found = Utils.first(this.connections, function (c) {
-                    return c.visual.domElement.id === id;
+                    return c.visual.id === id;
                 });
                 return found;
             },
