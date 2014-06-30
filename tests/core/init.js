@@ -6,7 +6,7 @@ var TestWidget = kendo.ui.Widget.extend({
     init: function(element, options) {
         kendo.ui.Widget.fn.init.call(this, element, options);
 
-        this.dataSource = kendo.data.DataSource.create(options.dataSource);
+        this.dataSource = kendo.data.DataSource.create(this.options.dataSource);
     },
 
     options: {
@@ -20,6 +20,12 @@ var TestWidget = kendo.ui.Widget.extend({
     },
 
     events: [ "click", "click2" ]
+});
+
+var MobileTestWidget = kendo.mobile.ui.Widget.extend({
+    options: {
+        name: "TestWidget"
+    }
 });
 
 var TestWidget2 = kendo.mobile.ui.Widget.extend({
@@ -43,6 +49,7 @@ module("kendo.init", {
 
         kendo.ui.plugin(TestWidget);
         kendo.mobile.ui.plugin(TestWidget2);
+        kendo.mobile.ui.plugin(MobileTestWidget);
 
         window.foo = function() {
             ok(true);
@@ -236,7 +243,6 @@ test("options respect the namespace", function() {
     equal(testwidget.options.dataMinHeight, "bar");
 });
 
-
 test("parses events from data attributes", function() {
     dom = $('<div data-role="testwidget" data-click="foo" />');
 
@@ -385,5 +391,15 @@ test("init unbinds events from options only ", 1, function() {
 
     dom.data("kendoTestWidget").trigger("click2");
 });
+
+test("Does not reinitialize a widget from another namespace", function() {
+    dom = $("<div />");
+    dom.kendoTestWidget();
+    kendo.init(dom, kendo.mobile.ui);
+
+    ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
+    equal(dom.data("kendoMobileTestWidget"), null, "MobileTestWidget is not initialized");
+});
+
 
 }());

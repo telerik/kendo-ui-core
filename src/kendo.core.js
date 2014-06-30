@@ -2742,6 +2742,23 @@ function pad(number, digits, end) {
             widget = kendo.getter(role)(window);
         }
 
+        // look for any widget that may be already instantiated based on this role.
+        // The prefix used is unknown, hence the regexp
+        var data = $(element).data(),
+            widgetKey = widget ? "kendo" + widget.fn.options.prefix + widget.fn.options.name : "",
+            widgetKeyRegExp = new RegExp("^kendo.*" + role + "$", "i");
+
+        for(var key in data) {
+            if (key.match(widgetKeyRegExp)) {
+                // we have detected a widget of the same kind - save its reference, we will set its options
+                if (key === widgetKey) {
+                    result = data[key];
+                } else {
+                    return data[key];
+                }
+            }
+        }
+
         if (!widget) {
             return;
         }
@@ -2767,8 +2784,6 @@ function pad(number, digits, end) {
                 options[option] = kendo.getter(value)(window);
             }
         }
-
-        result = $(element).data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
 
         if (!result) {
             result = new widget(element, options);
