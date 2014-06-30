@@ -446,7 +446,7 @@
         options: {
             fontSize: 15,
             stroke: {
-                color: NONE
+                width: 0
             },
             fill: {
                 color: "black"
