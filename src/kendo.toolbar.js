@@ -140,7 +140,7 @@ var __meta__ = {
                         options.id = options.uid;
                     }
 
-                    element.attr("id", options.id);
+                    element.attr("id", options.id + "_wrapper");
                     popupElement.attr("id", options.id + "_optionlist")
                                 .attr(KENDO_UID_ATTR, options.rootUid);
 

@@ -767,10 +767,26 @@
             ]
         });
 
-        var splitButton = container.find("#splitButton");
+        var splitButton = container.find(".k-button#splitButton");
 
-        ok(splitButton.length, "ID is applied");
-        equal(splitButton.find("a").text(), "foo", "Text is applied");
+        ok(splitButton.length, "ID is applied to the main button");
+        equal(splitButton.text(), "foo", "Text is applied");
+    });
+
+    test("SplitButton sets id to the wrapper element", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "foo", menuButtons: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" }
+                    ]
+                }
+            ]
+        });
+
+        var wrapper = container.find("#splitButton").parent();
+
+        equal(wrapper.attr("id"), "splitButton_wrapper");
     });
 
     test("SplitButton sets id to the popup element", 1, function() {
@@ -784,7 +800,7 @@
             ]
         });
 
-        var popup = container.find("#splitButton").data("kendoPopup");
+        var popup = container.find("#splitButton_wrapper").data("kendoPopup");
 
         equal(popup.element.attr("id"), "splitButton_optionlist");
     });

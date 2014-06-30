@@ -269,7 +269,7 @@
             }
         });
 
-        var button = container.find("#foo a:first");
+        var button = container.find("#foo");
 
         click(button);
     });
@@ -284,8 +284,8 @@
             ]
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
-        var popup = container.find("#foo").data("kendoPopup");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
+        var popup = container.find("#foo_wrapper").data("kendoPopup");
 
         click(button);
 
@@ -302,8 +302,8 @@
             ]
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
-        var popup = container.find("#foo").data("kendoPopup");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
+        var popup = container.find("#foo_wrapper").data("kendoPopup");
 
         click(button);
         ok(popup.visible());
@@ -322,8 +322,8 @@
             ]
         });
 
-        var button = container.find("#foo a:first");
-        var popup = container.find("#foo").data("kendoPopup");
+        var button = container.find("#foo");
+        var popup = container.find("#foo_wrapper").data("kendoPopup");
 
         click(button);
         ok(!popup.visible());
@@ -342,7 +342,7 @@
             }
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
 
         click(button);
     });
@@ -360,7 +360,7 @@
             }
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
 
         click(button);
     });
@@ -378,7 +378,7 @@
             }
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
         var popup = container.find(".k-split-button").data("kendoPopup");
 
         click(button);
@@ -399,7 +399,7 @@
             }
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
 
         click(button); //open
         click(button); //close
@@ -418,7 +418,7 @@
             }
         });
 
-        var button = container.find("#foo a.k-split-button-arrow");
+        var button = container.find("#foo_wrapper a.k-split-button-arrow");
         var popup = container.find(".k-split-button").data("kendoPopup");
 
         click(button); //open
