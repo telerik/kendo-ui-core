@@ -2016,7 +2016,12 @@
                 return this._transformWithMatrix(point, this._layerMatrixInvert);
             },
             documentToModel: function(point) {
-                return this.viewToModel(this.documentToView(point));
+                var viewPoint = this.documentToView(point);
+                if (!this.canvas.transformTranslate) {
+                    viewPoint.x = viewPoint.x + this.scroller.scrollLeft;
+                    viewPoint.y = viewPoint.y + this.scroller.scrollTop;
+                }
+                return this.viewToModel(viewPoint);
             },
             modelToDocument: function(point) {
                 return this.viewToDocument(this.modelToView(point));
