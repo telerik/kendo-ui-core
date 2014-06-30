@@ -1264,8 +1264,11 @@
                 that._extendLayoutOptions(that.options);
 
                 that.element.addClass("k-widget k-diagram").attr("role", "diagram");
-                var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
-                that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
+                var canvasContainer = $("<div class='k-layer'></div>").appendTo(element)[0];
+                that.canvas = new Canvas(canvasContainer, {
+                    width: element.width(),
+                    height: element.height()
+                }); // the root SVG Canvas
                 if (that.options.useScroller) {
                     that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
                 }
