@@ -58,7 +58,7 @@
             ]
        }).data("kendoToolBar");
 
-       toolbar.remove($("#splitButton"));
+       toolbar.remove($("#splitButton_wrapper"));
 
        equal(toolbar.element.find(".k-split-button").length, 0, "SplitButton is removed from the toolbar");
        equal(toolbar.popup.element.find(".k-split-button").length, 0, "SplitButton is removed from the overflow container");
