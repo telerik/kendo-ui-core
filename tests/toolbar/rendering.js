@@ -683,6 +683,26 @@
         equal(component.data("overflow"), "always");
     });
 
+    test("Each button in ButtonGroup receives an uid", 6, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", overflow: "auto", buttons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        buttons = toolbar.element.find(".k-button-group").children(".k-button");
+        overflowButtons = toolbar.popup.element.find(".k-button-group").children(".k-button");
+
+        for (var i = 0; i < buttons.length; i++) {
+            ok(buttons.eq(i).data("uid") && overflowButtons.eq(i).data("uid"), "Toolbar and Overflow buttons has ID attribute");
+            equal(buttons.eq(i).data("uid"), overflowButtons.eq(i).data("uid"), "Buttons has the same UID");
+        }
+    });
 
     /* SPLIT BUTTON */
 

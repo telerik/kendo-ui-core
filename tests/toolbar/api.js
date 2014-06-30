@@ -120,7 +120,7 @@
     test("Chanding the toggle state of a button is propagated to the twin element located in the command overflow popup", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foo", togglable: true, group: "foo" }
+                { type: "button", id: "foo", text: "foo", togglable: true }
             ]
         }).data("kendoToolBar");
 
@@ -132,11 +132,10 @@
     test("Chanding the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", 2, function() {
         var toolbar = container.kendoToolBar({
             items: [
-                { type: "button", id: "foo", text: "foo", togglable: true, group: "foo" }
+                { type: "button", id: "foo", text: "foo", togglable: true }
             ]
         }).data("kendoToolBar");
 
-        debugger;
         toolbar.toggle("#foo_overflow");
         ok($("#foo").hasClass("k-state-active"));
         ok($("#foo_overflow").hasClass("k-state-active"));

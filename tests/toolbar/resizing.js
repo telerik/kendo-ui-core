@@ -14,9 +14,6 @@
             }
         }
     });
-    
-
-
 
     test("buttons with overflow: auto are hidden upon initialization if there is not enough space", 4, function() {
         container.width(120);

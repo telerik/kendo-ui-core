@@ -71,8 +71,12 @@ var __meta__ = {
                         item;
 
                     element.data({ type: "buttonGroup" });
+                    element.attr(kendo.attr("uid"), options.uid);
 
                     for (var i = 0; i < items.length; i++) {
+                        if (!items[i].uid) {
+                            items[i].uid = kendo.guid();
+                        }
                         item = initializer($.extend({mobile: options.mobile}, items[i]));
                         item.appendTo(element);
                     }
@@ -152,6 +156,7 @@ var __meta__ = {
                         type: "splitButton",
                         kendoPopup: popup
                     });
+                    element.attr(kendo.attr("uid"), options.uid);
 
                     return element;
                 },
@@ -173,6 +178,7 @@ var __meta__ = {
                     }
 
                     element.data({ type: "splitButton" });
+                    element.attr(kendo.attr("uid"), options.uid);
 
                     return element;
                 }
@@ -182,11 +188,13 @@ var __meta__ = {
                 toolbar: function(options) {
                     var element = $('<div class="k-separator">&nbsp;</div>');
                     element.data({ type: "separator" });
+                    element.attr(kendo.attr("uid"), options.uid);
                     return element;
                 },
                 overflow: function(options) {
                     var element = $('<li class="k-separator">&nbsp;</li>');
                     element.data({ type: "separator" });
+                    element.attr(kendo.attr("uid"), options.uid);
                     return element;
                 }
             },
@@ -200,6 +208,7 @@ var __meta__ = {
             var element = useButtonTag ? $('<button></button>') : $('<a></a>');
 
             element.data({ type: "button" });
+            element.attr(kendo.attr("uid"), options.uid);
 
             if (options.togglable) {
                 element.addClass(TOGGLE_BUTTON);
@@ -500,7 +509,9 @@ var __meta__ = {
 
                     if (overflowElement && overflowElement.length) {
                         if(overflowElement.prop("tagName") !== "LI") {
+                            overflowElement.removeAttr("data-uid");
                             overflowElement = overflowElement.wrap("<li></li>").parent();
+                            overflowElement.attr("data-uid", options.uid);
                         }
                         that._attributes(overflowElement, options);
                         overflowElement.addClass(itemClasses).appendTo(that.popup.container);
@@ -566,8 +577,38 @@ var __meta__ = {
                 return this.element.find("." + TOGGLE_BUTTON + "[data-group='" + groupName + "']").filter("." + STATE_ACTIVE);
             },
 
+            toggle: function(button, checked) {
+                var element = $(button),
+                    uid = element.data("uid"),
+                    group = element.data("group"),
+                    twinElement;
+                    
+                if (element.hasClass(TOGGLE_BUTTON)) {
+
+                    if (group) { //find all buttons from the same group
+                        this.element
+                            .add(this.popup.element)
+                            .find("." + TOGGLE_BUTTON + "[data-group='" + group + "']")
+                            .filter("." + STATE_ACTIVE)
+                            .removeClass(STATE_ACTIVE);
+                    }
+
+                    if ($.contains(this.element[0], element[0])) {
+                        twinElement = this.popup.element.find("[" + kendo.attr("uid") + "='" + uid + "']");
+                        if (twinElement.prop("tagName") === "LI") {
+                            twinElement = twinElement.find("." + TOGGLE_BUTTON + ":first");
+                        }
+                    } else {
+                        uid = uid ? uid : element.parent().data("uid");
+                        twinElement = this.element.find("[" + kendo.attr("uid") + "='" + uid + "']");
+                    }
+
+                    element.add(twinElement).toggleClass(STATE_ACTIVE, checked);
+                }
+            },
+
             _attributes: function(element, options) {
-                element.attr(kendo.attr("uid"), options.uid);
+                //element.attr(kendo.attr("uid"), options.uid);
                 element.attr(kendo.attr("overflow"), options.overflow || OVERFLOW_AUTO);
             },
 
@@ -639,7 +680,7 @@ var __meta__ = {
                 var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
-                    group, current, handler, eventData;
+                    group, handler, eventData;
 
                 e.preventDefault();
 
@@ -664,12 +705,7 @@ var __meta__ = {
                     group = target.data("group");
                     handler = isFunction(target.data("toggle")) ? target.data("toggle") : null;
 
-                    if (group) { //find all buttons from the same group
-                        current = $("[" + kendo.attr("uid") + "='" + that.uid + "']").find("." + TOGGLE_BUTTON + "[data-group='" + group + "']").filter("." + STATE_ACTIVE);
-                        current.removeClass(STATE_ACTIVE);
-                    }
-
-                    target.toggleClass(STATE_ACTIVE);
+                    that.toggle(target);
                     isChecked = target.hasClass(STATE_ACTIVE);
                     eventData = { target: target, group: group, checked: isChecked, id: target.attr("id") };
 
