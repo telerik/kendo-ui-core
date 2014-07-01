@@ -551,19 +551,26 @@ var __meta__ = {
             },
 
             remove: function(element) {
-                var toolbarElement = $(element),
-                    type = toolbarElement.data("type"),
-                    uid = toolbarElement.attr(KENDO_UID_ATTR);
+                var commandElement = this.element.find(element),
+                    type = commandElement.data("type"),
+                    uid = commandElement.attr(KENDO_UID_ATTR);
 
-                if (type === "splitButton") {
-                    toolbarElement.data("kendoPopup").destroy();
+                if (commandElement.parent("." + SPLIT_BUTTON).data("type")) {
+                    type = "splitButton";
+                    commandElement = commandElement.parent();
                 }
 
-                $("[" + KENDO_UID_ATTR + "='" + uid + "']").remove();
+                if (type === "splitButton") {
+                    commandElement.data("kendoPopup").destroy();
+                }
+
+                commandElement
+                    .add(this.popup.element.find("[" + KENDO_UID_ATTR + "='" + commandElement.attr(KENDO_UID_ATTR) + "']"))
+                    .remove();
             },
 
             enable: function(element, enable) {
-                var uid = $(element).attr(KENDO_UID_ATTR);
+                var uid = this.element.find(element).attr(KENDO_UID_ATTR);
 
                 if (typeof enable == "undefined") {
                     enable = true;
