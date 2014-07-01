@@ -3155,16 +3155,17 @@ var __meta__ = {
 
             if (deviationMatch) {
                 that.valueGetter = that.createValueGetter(series, field);
+
                 var average = that.getAverage(data),
                     deviation = that.getStandardDeviation(data, average, false),
                     multiple = deviationMatch[1] ? parseFloat(deviationMatch[1]) : 1,
-                    errorRange = {low: average - deviation * multiple, high: average + deviation * multiple};
+                    errorRange = {low: average.value - deviation * multiple, high: average.value + deviation * multiple};
                 that.globalRange = function() {
                     return errorRange;
                 };
             } else if (errorValue.indexOf && errorValue.indexOf(STD_ERR) >= 0) {
                 that.valueGetter = that.createValueGetter(series, field);
-                var standardError = that.getStandardError(data);
+                var standardError = that.getStandardError(data, that.getAverage(data));
                 that.globalRange = function(value) {
                     return {low: value - standardError, high: value + standardError};
                 };
@@ -3200,7 +3201,6 @@ var __meta__ = {
                 high,
                 value;
 
-
             if (!defined(errorValue)) {
                 return;
             }
@@ -3226,17 +3226,21 @@ var __meta__ = {
             return {low: low, high: high};
         },
 
-        getStandardError: function(data) {
-            return this.getStandardDeviation(data, this.getAverage(data), true) / math.sqrt(data.length);
+        getStandardError: function(data, average) {
+            return this.getStandardDeviation(data, average, true) / math.sqrt(average.count);
         },
 
         getStandardDeviation: function(data, average, isSample) {
             var squareDifferenceSum = 0,
                 length = data.length,
-                total = isSample ? length - 1 : length;
+                total = isSample ? average.count - 1 : average.count,
+                value;
 
             for (var i = 0; i < length; i++) {
-                squareDifferenceSum += math.pow(this.valueGetter(data[i]) - average, 2);
+                value = this.valueGetter(data[i]);
+                if (isNumber(value)) {
+                    squareDifferenceSum += math.pow(value - average.value, 2);
+                }
             }
 
             return math.sqrt(squareDifferenceSum / total);
@@ -3244,13 +3248,22 @@ var __meta__ = {
 
         getAverage: function(data) {
             var sum = 0,
-                length = data.length;
+                count = 0,
+                length = data.length,
+                value;
 
             for(var i = 0; i < length; i++){
-                sum += this.valueGetter(data[i]);
+                value = this.valueGetter(data[i]);
+                if (isNumber(value)) {
+                    sum += value;
+                    count++;
+                }
             }
 
-            return sum / length;
+            return {
+                value: sum / count,
+                count: count
+            };
         }
     };
 

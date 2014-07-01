@@ -196,8 +196,29 @@
                 expectedAverageWithZeros = averageWithZeros;
             calculatedAverage = mockErrorRangeCalculator.getAverage(testData);
             calculatedAverageWithZeros = mockErrorRangeCalculator.getAverage(testDataWidthZeros);
-            equal(calculatedAverage, expectedAverage, "average value");
-            equal(calculatedAverageWithZeros, expectedAverageWithZeros, "average value with zeros");
+            equal(calculatedAverage.value, expectedAverage, "average value");
+            equal(calculatedAverageWithZeros.value, expectedAverageWithZeros, "average value with zeros");
+        });
+
+        test("correct average count is calculated", function() {
+            var calculatedAverage = mockErrorRangeCalculator.getAverage(testData),
+                expectedCount = testData.length;
+
+            equal(calculatedAverage.count, expectedCount, "average count");
+        });
+
+        test("average value when there are missing values", function() {
+            var data = [{value: 1},{}, {value: 3}],
+                calculatedAverage = mockErrorRangeCalculator.getAverage(data);
+
+            equal(calculatedAverage.value, 2, "average value");
+        });
+
+        test("average count when there are missing values", function() {
+            var data = [{value: 1},{}, {value: 3}],
+                calculatedAverage = mockErrorRangeCalculator.getAverage(data);
+
+            equal(calculatedAverage.count, 2, "average value");
         });
 
         test("correct sample standard deviation is calculated", function() {
@@ -206,8 +227,20 @@
                 expectedSampleSD = 2.986,
                 expectedSampleSDWithZeros = 4.528;
 
-            calculatedSampleSD = mockErrorRangeCalculator.getStandardDeviation(testData, average, true);
-            calculatedSampleSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros, averageWithZeros, true);
+            calculatedSampleSD = mockErrorRangeCalculator.getStandardDeviation(testData, {value: average, count: 4}, true);
+            calculatedSampleSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros, {value: averageWithZeros, count: 5 }, true);
+            equal(calculatedSampleSD.toFixed(3), expectedSampleSD, "sample standard deviation value");
+            equal(calculatedSampleSDWithZeros.toFixed(3), expectedSampleSDWithZeros, "sample standard deviation with zeros value");
+        });
+
+        test("correct sample standard deviation with missing values", function() {
+            var calculatedSampleSD,
+                calculatedSampleSDWithZeros,
+                expectedSampleSD = 2.986,
+                expectedSampleSDWithZeros = 4.528;
+
+            calculatedSampleSD = mockErrorRangeCalculator.getStandardDeviation(testData.concat({}), {value: average, count: 4}, true);
+            calculatedSampleSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros.concat({}), {value: averageWithZeros, count: 5 }, true);
             equal(calculatedSampleSD.toFixed(3), expectedSampleSD, "sample standard deviation value");
             equal(calculatedSampleSDWithZeros.toFixed(3), expectedSampleSDWithZeros, "sample standard deviation with zeros value");
         });
@@ -218,8 +251,20 @@
                 expectedSD = 2.586,
                 expectedSDWithZeros = 4.050;
 
-            calculatedSD = mockErrorRangeCalculator.getStandardDeviation(testData, average, false);
-            calculatedSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros, averageWithZeros, false);
+            calculatedSD = mockErrorRangeCalculator.getStandardDeviation(testData, {value: average, count: 4}, false);
+            calculatedSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros, {value: averageWithZeros, count: 5 }, false);
+            equal(calculatedSD.toFixed(3), expectedSD, "population standard deviation value");
+            equal(calculatedSDWithZeros.toFixed(3), expectedSDWithZeros, "population standard deviation with zeros value");
+        });
+
+        test("correct population standard deviation with missing values", function() {
+            var calculatedSD,
+                calculatedSDWithZeros,
+                expectedSD = 2.586,
+                expectedSDWithZeros = 4.050;
+
+            calculatedSD = mockErrorRangeCalculator.getStandardDeviation(testData.concat({}), {value: average, count: 4}, false);
+            calculatedSDWithZeros = mockErrorRangeCalculator.getStandardDeviation(testDataWidthZeros.concat({}), {value: averageWithZeros, count: 5 }, false);
             equal(calculatedSD.toFixed(3), expectedSD, "population standard deviation value");
             equal(calculatedSDWithZeros.toFixed(3), expectedSDWithZeros, "population standard deviation with zeros value");
         });
@@ -230,8 +275,20 @@
                 expectedSE = 1.493,
                 expectedSEWithZeros = 2.025;
 
-            calculatedSE = mockErrorRangeCalculator.getStandardError(testData);
-            calculatedSEWithZeros = mockErrorRangeCalculator.getStandardError(testDataWidthZeros);
+            calculatedSE = mockErrorRangeCalculator.getStandardError(testData, {value: average, count: 4});
+            calculatedSEWithZeros = mockErrorRangeCalculator.getStandardError(testDataWidthZeros, {value: averageWithZeros, count: 5 });
+            equal(calculatedSE.toFixed(3), expectedSE, "standard error value");
+            equal(calculatedSEWithZeros.toFixed(3), expectedSEWithZeros, "standard error with zeros value");
+        });
+
+        test("correct standard error with missing values", function() {
+            var calculatedSE,
+                calculatedSEWithZeros,
+                expectedSE = 1.493,
+                expectedSEWithZeros = 2.025;
+
+            calculatedSE = mockErrorRangeCalculator.getStandardError(testData.concat({}), {value: average, count: 4});
+            calculatedSEWithZeros = mockErrorRangeCalculator.getStandardError(testDataWidthZeros.concat({}), {value: averageWithZeros, count: 5 });
             equal(calculatedSE.toFixed(3), expectedSE, "standard error value");
             equal(calculatedSEWithZeros.toFixed(3), expectedSEWithZeros, "standard error with zeros value");
         });
