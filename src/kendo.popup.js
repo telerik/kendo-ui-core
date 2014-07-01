@@ -162,6 +162,7 @@ var __meta__ = {
             origin: BOTTOM + " " + LEFT,
             position: TOP + " " + LEFT,
             anchor: BODY,
+            appendTo: null,
             collision: "flip fit",
             viewport: window,
             copyAnchorStyles: true,
