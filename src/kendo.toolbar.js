@@ -207,8 +207,8 @@ var __meta__ = {
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
-        function createButton(options, useButtonTag) {
-            var element = useButtonTag ? $('<button></button>') : $('<a></a>');
+        function createButton(options) {
+            var element = options.useButtonTag ? $('<button></button>') : $('<a></a>');
 
             element.data({ type: "button" });
             element.attr(KENDO_UID_ATTR, options.uid);
@@ -224,7 +224,7 @@ var __meta__ = {
                 element.addClass(STATE_DISABLED);
             }
 
-            if (options.url !== undefined && !useButtonTag) {
+            if (options.url !== undefined && !options.useButtonTag) {
                 element.attr("href", options.url);
                 if (options.mobile) {
                     element.attr(kendo.attr("role"), "button");
