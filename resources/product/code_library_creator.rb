@@ -11,13 +11,13 @@ class TelerikCodeLibraryBot
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.get(SITE_URL + "/sitefinity")
 
-        #driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
-        #driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
-        #click_and_wait("Log in with Telerik", "Legacy Dashboard")
+        driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
+        driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        click_and_wait("Log in with Telerik", "Legacy Dashboard")
         #to be used on wwwsit.telerik.com
-        driver.find_element(:xpath, "//input[contains(@id,'username')]").send_keys SITE_LOGIN
-        driver.find_element(:xpath, "//input[contains(@id,'password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
-        click_element(find("[id='LoginButton']"))
+        #driver.find_element(:xpath, "//input[contains(@id,'username')]").send_keys SITE_LOGIN
+        #driver.find_element(:xpath, "//input[contains(@id,'password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        #click_element(find("[id='LoginButton']"))
     end
 
     def find(selector)
@@ -122,6 +122,8 @@ def set_cl_fields(bot, product_name)
       sleep(1)
 
       #bot.driver.find_element(:xpath, "//label[contains(text(),'Allow users to upload file attachments in posts')]").click
+      bot.execute_script("window.frames[0].$('a:contains(\"File attachments\")').click()")
+      sleep(1)
       bot.execute_script("window.frames[0].$('label:contains(\"Allow users to upload file attachments in posts\")').click()")
       sleep(1)
       bot.execute_script("window.frames[0].$('label:contains(\"Define Manually...\")').click()")
