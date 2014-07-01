@@ -3419,11 +3419,16 @@ var __meta__ = {
                 for (var i = 0; i < chart.options.series.length; i++) {
                     var series = chart.options.series[i];
                     var axisName = series.axis;
+                    var errorTotals = chart.errorTotals;
 
                     limits = chart.stackLimits(axisName, series.stack);
-                    if (chart.errorTotals) {
-                        limits.min = math.min(limits.min, sparseArrayMin(chart.errorTotals.negative));
-                        limits.max = math.max(limits.max, sparseArrayMax(chart.errorTotals.positive));
+                    if (errorTotals) {
+                        if (errorTotals.negative.length) {
+                            limits.min = math.min(limits.min, sparseArrayMin(errorTotals.negative));
+                        }
+                        if (errorTotals.positive.length) {
+                            limits.max = math.max(limits.max, sparseArrayMax(errorTotals.positive));
+                        }
                     }
 
                     chart.valueAxisRanges[axisName] = limits;
