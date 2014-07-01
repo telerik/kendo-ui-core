@@ -3692,14 +3692,22 @@ var __meta__ = {
                 var acDsOptions,
                     col = columns[i],
                     customDataSource = false,
+                    delay,
+                    values,
                     th = $("<th/>"),
                     field = col.field;
 
                 if (field && col.filterable !== false) {
+                    var cellOptions = col.filterable && col.filterable.cell;
+                    values = col.values;
+
                     acDsOptions = that.dataSource.options;
-                    if (col.filterable && isPlainObject(col.filterable.cell) && col.filterable.cell.dataSource) {
-                        acDsOptions = col.filterable.cell.dataSource;
-                        customDataSource = true;
+                    if (isPlainObject(cellOptions)) {
+                        if (cellOptions.dataSource) {
+                            acDsOptions = cellOptions.dataSource;
+                            customDataSource = true;
+                        }
+                        delay =  cellOptions.delay;
                     }
 
                     $("<span/>").attr(kendo.attr("field"), field)
@@ -3707,7 +3715,9 @@ var __meta__ = {
                             dataSource: that.dataSource,
                             suggestDataSource: acDsOptions,
                             customDataSource: customDataSource,
-                            field: field
+                            field: field,
+                            values: values,
+                            delay: delay
                         }).appendTo(th);
                 }
                 rowheader.append(th);

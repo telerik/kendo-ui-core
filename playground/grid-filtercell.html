@@ -17,6 +17,7 @@
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.autocomplete.js"></script>
+        <script src="../src/kendo.combobox.js"></script>
 
         <script src="../src/kendo.calendar.js"></script>
         <script src="../src/kendo.popup.js"></script>
@@ -94,18 +95,28 @@
                             Id: 1,
                             Name: "foo",
                             Position: 1 ,
+                            Grade: 1,
                             ContractDate : new Date('1996/12/12')
                         },
                         {
                             Id: 2,
                             Name: "bar",
                             Position: 2 ,
+                            Grade: 2,
                             ContractDate : new Date('2012/5/4')
                         },
                         {
                             Id: 3,
                             Name: "baz",
                             Position: 3 ,
+                            Grade: 3,
+                            ContractDate : new Date('1998/12/30')
+                        },
+                        {
+                            Id: 4,
+                            Name: "baz",
+                            Position: 3 ,
+                            Grade: 3,
                             ContractDate : new Date('1998/12/30')
                         }
                     ],
@@ -212,7 +223,29 @@
                         { field: "Id", locked: false, width: 300 },
                         { field: "Name", locked: true, width: 300 },
                         { field: "Position", locked: true, width: 300 },
-                        { field: "ContractDate", width: 400 }
+                        {
+                            field: "Grade",
+                            values: [
+                                {
+                                    text: "Grade 2",
+                                    value: 2
+                                },
+                                {
+                                    text: "Greid 3",
+                                    value: 3
+                                },
+                                {
+                                    text: "Grade 4",
+                                    value: 4
+                                },
+                                {
+                                    text: "GREID 1",
+                                    value: 1
+                                },
+                            ],
+                            width: 300
+                        },
+                        { field: "ContractDate", width: 400, format: "{0:MM/dd/yyyy}"}
                     ],
                     groupable:true,
                     reorderable: true,
@@ -223,7 +256,7 @@
                         requestStart: function() {
                             console.log("RS")
                         },
-                        pageSize:2,
+                        //pageSize:2,
                         transport: {
                             read: function(options) {
                                 options.success({ dd:[
@@ -231,30 +264,35 @@
                                         Id: 1,
                                         Name: "foo",
                                         Position: 1 ,
+                                        Grade: 1 ,
                                         ContractDate : new Date('1996/12/12')
                                     },
                                     {
                                         Id: 2,
                                         Name: "bar",
                                         Position: 2 ,
+                                        Grade: 1 ,
                                         ContractDate : new Date('2012/5/4')
                                     },
                                     {
                                         Id: 3,
                                         Name: "baz",
                                         Position: 3 ,
+                                        Grade: 2 ,
                                         ContractDate : new Date()
                                     },
                                     {
                                         Id: 4,
                                         Name: "baz",
                                         Position: 3 ,
+                                        Grade: 3 ,
                                         ContractDate : new Date()
                                     },
                                     {
                                         Id: 4,
                                         Name: "bat",
                                         Position: 3 ,
+                                        Grade: 3 ,
                                         ContractDate : new Date()
                                     }
                                 ] })
@@ -268,6 +306,9 @@
                                         type : "number"
                                     },
                                     Position: {
+                                        type : "number"
+                                    },
+                                    Grade: {
                                         type : "number"
                                     },
                                     Name: {

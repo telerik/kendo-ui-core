@@ -792,7 +792,8 @@
                                         readInvoked = true;
                                     }
                                 }
-                            }
+                            },
+                            delay: 500
                         }
                     }
                 },
@@ -817,7 +818,49 @@
         var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
         var firstWidget = widgets.eq(0).data("kendoFilterCell");
         firstWidget.suggestDataSource.read();
+        equal(firstWidget.input.data("kendoAutoComplete").options.delay, 500);
         ok(readInvoked);
+    });
+
+    test("filtercell creates comboBox when values is provided for the filterable column", function() {
+        var readInvoked;
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                row: true
+            },
+            columns: [
+                {
+                    field: "col1",
+                    values: [
+                        { text: "foo", value: 1 },
+                        { text: "bar", value: 2 },
+                        { text: "baz", value: 3 },
+                    ]
+                },
+                {
+                    field: "col2",
+                    filterable: true
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "string"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        var firstWidget = widgets.eq(0).data("kendoFilterCell");
+        var combo = firstWidget.input.data("kendoComboBox");
+        ok(combo);
+        equal(combo.dataSource.data().length, 3);
     });
 
     test("grid filterable options propagate to the filter menu", function() {

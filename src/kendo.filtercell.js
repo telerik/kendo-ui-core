@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.autocomplete", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.dropdownlist" ], f);
+    define([ "./kendo.autocomplete", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.combobox" ], f);
 })(function(){
 
 var __meta__ = {
@@ -95,6 +95,9 @@ var __meta__ = {
             //gets the type from the dataSource or sets default to string
             that.model = dataSource.options.schema.model;
             type = options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
+            if (options.values) {
+                options.type = type = "enum";
+            }
 
 
             element = $(element);
@@ -138,6 +141,10 @@ var __meta__ = {
                 that.setSuggestDataSource(suggestDataSource);
             }
 
+            if (type == "enum") {
+                that.setComboBoxSource(that.options.values);
+            }
+
             that.refreshUI();
 
             that._refreshHandler = proxy(that.refreshUI, that);
@@ -155,12 +162,20 @@ var __meta__ = {
             } else if (type == STRING) {
                 input.attr(kendo.attr("role"), "autocomplete")
                         .attr(kendo.attr("text-field"), that.options.field)
+                        .attr(kendo.attr("delay"), this.options.delay)
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
                 input.attr(kendo.attr("role"), "datepicker");
             } else if (type == "number") {
                 input.attr(kendo.attr("role"), "numerictextbox");
-            } //TODO enums
+            } else if (type == "enum") {
+                input.attr(kendo.attr("role"), "combobox")
+                        .attr(kendo.attr("text-field"), "text")
+                        .attr(kendo.attr("suggest"), true)
+                        .attr(kendo.attr("filter"), "contains")
+                        .attr(kendo.attr("value-field"), "value")
+                        .attr(kendo.attr("value-primitive"), true);
+            }
         },
 
         setSuggestDataSource: function(dataSource) {
@@ -172,6 +187,16 @@ var __meta__ = {
             var autoComplete = this.input.data("kendoAutoComplete");
             if (autoComplete) {
                 autoComplete.setDataSource(dataSource);
+            }
+        },
+
+        setComboBoxSource: function(values) {
+            var dataSource = DataSource.create({
+                data: values
+            });
+            var comboBox = this.input.data("kendoComboBox");
+            if (comboBox) {
+                comboBox.setDataSource(dataSource);
             }
         },
 
@@ -226,14 +251,14 @@ var __meta__ = {
 
             removeFiltersForField(result, that.options.field);
 
-            filters = $.grep(filters, function(filter) {
-                return filter.value !== "" && filter.value !== null;
-            });
-
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 filter.value = that._parse(filter.value);
             }
+
+            filters = $.grep(filters, function(filter) {
+                return filter.value !== "" && filter.value !== null;
+            });
 
             if (filters.length) {
                 if (result.filters.length) {
@@ -288,6 +313,8 @@ var __meta__ = {
         options: {
             name: "FilterCell",
             autoBind: true,
+            delay: 200,
+            values: undefined,
             customDataSource: false,
             field: "",
             type: "string",
