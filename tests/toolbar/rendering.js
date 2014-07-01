@@ -982,7 +982,7 @@
             resizable: false
         }).data("kendoToolBar");
 
-        ok(!toolbar.popup);
+        ok(!(toolbar.popup instanceof kendo.ui.Popup));
     });
 
     test("button's wrapper with overflow: auto has k-overflow-hidden class", 2, function() {
