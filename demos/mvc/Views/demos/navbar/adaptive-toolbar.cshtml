@@ -46,13 +46,22 @@
 </div>
 
 <style scoped>
+    .km-android #toolbar-mobile {
+        -webkit-box-direction: normal;
+        -moz-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    #back span.km-icon
+    {
+        font-size: 2.4em;
+    }
+
     #back .km-arrow-w:after,
     #back .km-arrow-w:before
     {
         content: "\e013";
-        font-size: 2em;
-        margin-left: -.5em;
-        margin-top: -.3em;
     }
 
     #back .km-icon
@@ -62,13 +71,15 @@
 
     #back
     {
-        margin-right: 0;
-        padding-right: 0;
+        margin-right: -.5em;
+        padding-left: .4em;
+        padding-right: .4em;
     }
 
     #viewName
     {
         margin-left: 0;
-        padding-left: 0;
+        padding-left: .4em;
+        padding-right: .4em;
     }
 </style>
