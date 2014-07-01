@@ -1588,15 +1588,19 @@ var __meta__ = {
 
     var XmlaTransport = kendo.data.RemoteTransport.extend({
         init: function(options) {
+            var originalOptions = options;
+
+            options = this.options = extend(true, {}, this.options, options);
+
             kendo.data.RemoteTransport.call(this, options);
 
-            if (isFunction(options.discover)) {
-                this.discover = options.discover;
-            } else if (typeof options.discover === "string") {
+            if (isFunction(originalOptions.discover)) {
+                this.discover = originalOptions.discover;
+            } else if (typeof originalOptions.discover === "string") {
                 this.options.discover = {
-                    url: options.discover
+                    url: originalOptions.discover
                 };
-            } else if (!options.discover) {
+            } else if (!originalOptions.discover) {
                 this.options.discover = this.options.read;
             }
         },
@@ -1607,6 +1611,16 @@ var __meta__ = {
             return kendo.data.RemoteTransport.fn.setup.call(this, options, type);
         },
         options: {
+            read: {
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            },
+            discover: {
+                dataType: "text",
+                contentType: "text/xml",
+                type: "POST"
+            },
             parameterMap: function(options, type) {
                 return convertersMap[type](options,type);
             }
