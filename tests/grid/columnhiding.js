@@ -868,6 +868,43 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
+    test("show/hide locked column header with filtercell", function() {
+        var grid = setup({
+            filterable: {
+                row: true
+            },
+            columns: [
+                { field: "foo", locked: true },
+                { field: "bar", locked: false }
+            ]
+        });
+        var lockedThs = grid.wrapper.find(".k-grid-header-locked th");
+        var unLockedThs = grid.wrapper.find(".k-grid-header-wrap th");
+
+        grid.hideColumn(1);
+
+        equal(lockedThs.length, 2);
+        equal(unLockedThs.length, 4);
+
+        equal(lockedThs.eq(0).is(":visible"), true);
+        equal(lockedThs.eq(1).is(":visible"), true);
+
+        equal(unLockedThs.eq(0).is(":visible"), false, "this is data-header");
+        equal(unLockedThs.eq(1).is(":visible"), true);
+        equal(unLockedThs.eq(2).is(":visible"), false, "this is data-filter-cell");
+        equal(unLockedThs.eq(3).is(":visible"), true);
+
+        grid.showColumn(1);
+
+        equal(lockedThs.eq(0).is(":visible"), true);
+        equal(lockedThs.eq(1).is(":visible"), true);
+
+        equal(unLockedThs.eq(0).is(":visible"), true);
+        equal(unLockedThs.eq(1).is(":visible"), true);
+        equal(unLockedThs.eq(2).is(":visible"), true);
+        equal(unLockedThs.eq(3).is(":visible"), true);
+    });
+
     test("show non locked column header in grid with locked column", function() {
         var grid = setup({
             columns: [

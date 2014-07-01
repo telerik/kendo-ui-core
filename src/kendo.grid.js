@@ -4790,7 +4790,8 @@ var __meta__ = {
 
             that._updateCols();
             that._updateLockedCols();
-            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr>th"), columnIndex, false);
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:first-child>th"), columnIndex, false);
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, false);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
                 that._updateLockedCols(footer.find(">.k-grid-footer-locked>table"));
@@ -4876,7 +4877,8 @@ var __meta__ = {
 
             that._updateCols();
             that._updateLockedCols();
-            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr>th"), columnIndex, true);
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:first-child>th"), columnIndex, true);
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, true);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
                 that._updateLockedCols(footer.find(">.k-grid-footer-locked>table"));
