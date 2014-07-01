@@ -149,6 +149,7 @@ var __meta__ = {
                     }
 
                     popup = popupElement.kendoPopup({
+                        appendTo: options.mobile ? $(options.mobile).children(".km-pane") : null,
                         anchor: element,
                         animation: options.animation,
                         open: adjustPopupWidth
@@ -201,7 +202,7 @@ var __meta__ = {
                 }
             },
 
-            overflowAnchor: '<div class="k-overflow-anchor k-button km-button"></div>',
+            overflowAnchor: '<div class="k-overflow-anchor"></div>',
 
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
@@ -399,7 +400,7 @@ var __meta__ = {
                 this.uid = kendo.guid();
                 element.attr(KENDO_UID_ATTR, this.uid);
 
-                that.isMobile = !!that.element.closest(".km-root")[0];
+                that.isMobile = that.element.closest(".km-root")[0];
                 that.animation = that.isMobile ? { open: { effects: "fade" } } : {};
 
                 if (that.isMobile) {
@@ -436,7 +437,7 @@ var __meta__ = {
                 that.userEvents = new kendo.UserEvents(document, {
                     threshold: 5,
                     filter:
-                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ":not(." + OVERFLOW_ANCHOR + "), " +
+                        "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ", " +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
                     tap: proxy(that._buttonClick, that),
                     press: toggleActive,
@@ -616,7 +617,7 @@ var __meta__ = {
             _renderOverflow: function() {
                 var that = this;
 
-                that.overflowAnchor = $(components.overflowAnchor);
+                that.overflowAnchor = $(components.overflowAnchor).addClass(BUTTON);
 
                 that.element.append(that.overflowAnchor);
 
@@ -632,6 +633,7 @@ var __meta__ = {
                     position: "top right",
                     anchor: that.overflowAnchor,
                     animation: that.animation,
+                    appendTo: that.isMobile ? $(that.isMobile).children(".km-pane") : null,
                     copyAnchorStyles: false,
                     open: function (e) {
                         var wrapper = kendo.wrap(that.popup.element)
@@ -686,6 +688,10 @@ var __meta__ = {
                 e.preventDefault();
 
                 target = $(e.target).closest("." + BUTTON, that.element);
+
+                if (target.is(OVERFLOW_ANCHOR)) {
+                    return;
+                }
 
                 if (!target.length && that.popup) {
                     target = $(e.target).closest("." + OVERFLOW_BUTTON, that.popup.container);
