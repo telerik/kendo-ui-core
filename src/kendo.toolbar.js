@@ -539,13 +539,15 @@ var __meta__ = {
 
                     if (element && element.length) {
                         that._attributes(element, options);
-                        element.appendTo(that.element).css("visibility", "hidden");
 
-                        var containerWidth = that.element.innerWidth();
+                        if (that.options.resizable) {
+                            element.appendTo(that.element).css("visibility", "hidden");
+                            that._shrink(that.element.innerWidth());
+                            element.css("visibility", "visible");
+                        } else {
+                            element.appendTo(that.element);
+                        }
 
-                        that._shrink(containerWidth);
-
-                        element.css("visibility", "visible");
                     }
                 }
             },
