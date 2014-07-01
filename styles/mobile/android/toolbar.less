@@ -7,6 +7,9 @@
 .km-android .k-toolbar
 {
     border: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 2.6em;
 }
 
 .km-android .k-toolbar > *
@@ -20,25 +23,21 @@
 {
     width: 1em;
     height: 1em;
-    font-size: 2.6em;
-    margin-right: 0;
+    font-size: 2.4em;
+    margin-top: -8px;
+    margin-bottom: -5px;
+    margin-right: .1em;
     vertical-align: middle;
 }
 
 .km-android .k-toolbar .km-button
 {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    .box-sizing(border-box);
 }
 
 .km-android .k-toolbar .km-text
 {
     vertical-align: middle;
-}
-
-.km-android div.k-toolbar > .k-align-left
-{
-    margin-top: 0;
 }
 
 .km-android .k-toolbar .km-buttongroup .k-button-icon
@@ -54,6 +53,13 @@
     padding: 0 .5em;
 }
 
+.km-android .k-toolbar .km-buttongroup .km-button
+{
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px 0;
+}
+
 .km-android .k-toolbar .km-buttongroup + .km-buttongroup
 {
     padding-left: 0;
@@ -66,6 +72,11 @@
     padding-right: 0;
     border-right: 0;
     margin-right: 0;
+}
+
+.km-android .k-toolbar .k-split-button-arrow
+{
+    border-radius: 0;
 }
 
 .km-android .k-split-button .km-arrowdown
