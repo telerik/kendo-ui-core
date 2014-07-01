@@ -4,14 +4,14 @@
 
 /* ToolBar */
 
-.km-ios .k-toolbar .km-button,
+.km-ios .k-toolbar > .km-button,
+.km-ios .k-toolbar .k-split-button > .km-button,
 .km-ios .k-toolbar .km-buttongroup,
 .km-ios .k-toolbar .k-split-button
 {
     padding-top: 1px;
     padding-bottom: 1px;
     font-size: 1em;
-    line-height: 2.2em;
 }
 
 .km-ios .k-toolbar .km-buttongroup .km-button
@@ -37,7 +37,7 @@
     margin-right: 1px;
 }
 
-.km-ios .k-split-button .k-button-icontext
+.km-ios .k-split-button .km-button:first-child
 {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -49,9 +49,9 @@
     border-bottom-left-radius: 0;
 }
 
-.km-ios.km-pane .k-toolbar .k-overflow-anchor
+.km-root .km-ios .k-toolbar .k-overflow-anchor
 {
-    font-size: 1.85em;
+    line-height: 1.5em;
 }
 
 .km-ios .k-toolbar .k-overflow-anchor .km-icon
