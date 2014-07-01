@@ -426,6 +426,8 @@ var __meta__ = {
                     kendo.onResize(function() {
                         that.resize();
                     });
+                } else {
+                    that.popup = { element: $([]) };
                 }
 
                 if(options.items && options.items.length) {
