@@ -1062,7 +1062,7 @@ declare module kendo.ui {
         options: DraggableOptions;
     }
 
-    interface DraggableEvent extends JQueryEventObject {
+    interface DraggableEvent {
         sender?: Draggable;
     }
 
@@ -1080,7 +1080,7 @@ declare module kendo.ui {
         drop?(e: DropTargetDropEvent): void;
     }
 
-    interface DropTargetEvent extends JQueryEventObject {
+    interface DropTargetEvent {
         sender?: DropTarget;
     }
 
@@ -1110,7 +1110,7 @@ declare module kendo.ui {
         drop?(e: DropTargetAreaDropEvent): void;
     }
 
-    interface DropTargetAreaEvent extends JQueryEventObject {
+    interface DropTargetAreaEvent {
         sender: DropTargetArea;
     }
 
