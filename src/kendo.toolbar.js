@@ -698,7 +698,7 @@ var __meta__ = {
 
                 target = $(e.target).closest("." + BUTTON, that.element);
 
-                if (target.is(OVERFLOW_ANCHOR)) {
+                if (target.hasClass(OVERFLOW_ANCHOR)) {
                     return;
                 }
 
