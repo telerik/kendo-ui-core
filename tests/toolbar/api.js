@@ -64,6 +64,25 @@
        equal(toolbar.popup.element.find(".k-split-button").length, 0, "SplitButton is removed from the overflow container");
     });
 
+    test("remove method removes splitButton by the ID of its main button", 2, function() {
+       var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                        { id: "option1", text: "Option 1" },
+                        { id: "option2", text: "Option 2" },
+                        { id: "option3", text: "Option 3" },
+                        { id: "option4", text: "Option 4" }
+                    ]
+                }
+            ]
+       }).data("kendoToolBar");
+
+       toolbar.remove($("#splitButton"));
+
+       equal(toolbar.element.find(".k-split-button").length, 0, "SplitButton is removed from the toolbar");
+       equal(toolbar.popup.element.find(".k-split-button").length, 0, "SplitButton is removed from the overflow container");
+    });
+
     test("remove method removes separator", 2, function() {
        var toolbar = container.kendoToolBar({
             items: [
