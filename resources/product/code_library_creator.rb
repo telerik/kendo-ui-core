@@ -102,7 +102,7 @@ def create_cl_thread(bot, product_name, tname)
 end
 def set_cl_fields(bot, product_name)
       p "setting code library fields>>#{product_name}"
-      sleep(1)
+      sleep(4)
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys '#{product_name}' 
       #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
       bot.execute_script("window.frames[0].$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")

@@ -195,7 +195,7 @@ def start_product_creation()
         create_product(bot, product_name,suite_alias, tname)
       end
       product_names.each do |product_name|
-        p "creating code library for this product>>"
+        p "creating code library for product>>#{product_name}"
         create_code_library(bot, product_name, tname)
       end
       bot.quit
