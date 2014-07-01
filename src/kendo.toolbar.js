@@ -151,6 +151,7 @@ var __meta__ = {
                     popup = popupElement.kendoPopup({
                         appendTo: options.mobile ? $(options.mobile).children(".km-pane") : null,
                         anchor: element,
+                        copyAnchorStyles: false,
                         animation: options.animation,
                         open: adjustPopupWidth
                     }).data("kendoPopup");
