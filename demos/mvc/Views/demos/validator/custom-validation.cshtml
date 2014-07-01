@@ -36,8 +36,8 @@
                         rules: {
                             greaterdate: function (input) {
                                 if (input.is("[data-greaterdate-msg]") && input.val() != "") {                                    
-                                    var date = input.data("kendoDatePicker").value(),
-                                        otherDate = $("[name='" + input.data("greaterdateField") + "']").data("kendoDatePicker").value();
+                                    var date = kendo.parseDate(input.val()),
+                                        otherDate = kendo.parseDate($("[name='" + input.data("greaterdateField") + "']").val());
                                     return otherDate == null || otherDate.getTime() < date.getTime();
                                 }
 
