@@ -52,7 +52,7 @@
     test("filtercell tr is append to locked header", function() {
         var grid = setup({
             filterable: {
-                row: true
+                mode: "row menu"
             },
             columns: [{ field: "foo", locked: true }, "bar", "baz"]
         });
@@ -75,7 +75,7 @@
     test("filtercell tr is append to locked header when filtercell is enabled", function() {
         var grid = setup({
             filterable: {
-                row: true
+                mode: "row menu"
             },
             columns: [{ field: "foo", locked: true }, "bar", "baz"]
         });
@@ -102,7 +102,7 @@
         var grid = setup({
             columns: [{ field: "foo", locked: true }, "bar", "baz"],
             filterable: {
-                row: true
+                mode: "row menu"
             }
         });
 

@@ -559,7 +559,7 @@
         $(table).html("<thead><tr><th data-kendo-field='col1'>col1</th></tr></thead><tbody><tr><td>&nbsp;</td></tr></tbody>");
         var grid = new Grid(table, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: ["foo"],
         });
@@ -571,7 +571,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: ["foo"],
         });
@@ -583,7 +583,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: ["foo"],
         });
@@ -598,7 +598,7 @@
             dataSource: [{foo: 1, filterable: true}],
             columns: ["foo"],
             filterable: {
-                row: true
+                mode: "cell row"
             }
         });
 
@@ -611,7 +611,7 @@
             dataSource: [{foo: 1}],
             columns: ["foo"],
             filterable: {
-                row: true
+                mode: "cell row"
             }
         });
 
@@ -634,7 +634,7 @@
             },
             columns: ["foo"],
             filterable: {
-                row: true
+                mode: "cell row"
             }
         });
 
@@ -651,7 +651,7 @@
             },
             columns: ["foo", "bar", { template: "foo" }],
             filterable: {
-                row: true
+                mode: "cell row"
             }
         });
 
@@ -668,7 +668,7 @@
             },
             columns: ["foo", "bar", { template: "foo" }],
             filterable: {
-                row: true
+                mode: "cell row"
             }
         });
 
@@ -683,7 +683,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: [
                 {
@@ -709,7 +709,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: [
                 {
@@ -742,7 +742,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: [
                 {
@@ -779,7 +779,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: [
                 {
@@ -827,7 +827,7 @@
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "cell row"
             },
             columns: [
                 {
@@ -878,6 +878,19 @@
         });
 
         equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.eq, "foo");
+    });
+
+    test("grid filterable menu is not initialized when using filtermode cell", function() {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
+            filterable: {
+                mode: "cell"
+            },
+            dataSource: [
+                { foo: "foo" }
+            ]
+        });
+
+        equal(grid.thead.find("th").data("kendoFilterMenu"), null);
     });
 
     test("column filterable options override the grid filterable options", function() {

@@ -871,7 +871,7 @@
     test("show/hide locked column header with filtercell", function() {
         var grid = setup({
             filterable: {
-                row: true
+                mode: "row menu"
             },
             columns: [
                 { field: "foo", locked: true },

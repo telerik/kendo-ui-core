@@ -187,7 +187,7 @@
         var grid = new Grid(div, {
             reorderable: true,
             filterable: {
-                row: true
+                mode: "row menu"
             },
             columns: ["foo", "bar"],
             dataSource: data
@@ -643,7 +643,7 @@
     test("reorder filtercell headers with locked columns", function() {
         var grid = new Grid(div, {
             filterable: {
-                row: true
+                mode: "row menu"
             },
             columns: [
                 { field: "bax", locked: true },
@@ -852,7 +852,7 @@
                 "baz"
             ],
             filterable: {
-                row: true
+                mode: "row menu"
             },
             dataSource: {
                 data: data,
@@ -874,7 +874,7 @@
                 "baz"
             ],
             filterable: {
-                row: true
+                mode: "row menu"
             },
             dataSource: {
                 data: data,

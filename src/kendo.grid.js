@@ -3641,6 +3641,9 @@ var __meta__ = {
                     focusTable(element.closest("table"), true);
                 },
                 filterable = that.options.filterable;
+                if (filterable && typeof filterable.mode == STRING && filterable.mode.indexOf("menu") == -1) {
+                    filterable = false;
+                }
 
             if (filterable && !that.options.columnMenu) {
                 cells = that._headerCells();
@@ -4118,7 +4121,9 @@ var __meta__ = {
         },
         _hasFilterRow: function() {
             var filterable = this.options.filterable;
-            var hasFiltering = filterable && filterable.row;
+            var hasFiltering = filterable &&
+                    typeof filterable.mode == STRING &&
+                    filterable.mode.indexOf("row") != -1;
             var columns = this.columns;
             var columnsWithoutFiltering = $.grep(columns, function(col, idx) {
                 return col.filterable === false;
