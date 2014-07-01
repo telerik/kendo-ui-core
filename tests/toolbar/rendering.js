@@ -459,6 +459,17 @@
         ok(icon.hasClass("k-i-foo"));
     });
 
+    test("button renders <button> tag when useButtonTag is set to true", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", useButtonTag: true }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#foo");
+        equal(button.prop("tagName"), "BUTTON", "<button> tag is rendered");
+    });
+
     /* TOGGLE BUTTON */
 
     test("toggleButton has k-toggle-button class", 2, function() {
