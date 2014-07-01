@@ -400,7 +400,7 @@ var __meta__ = {
                 this.uid = kendo.guid();
                 element.attr(KENDO_UID_ATTR, this.uid);
 
-                that.isMobile = that.element.closest(".km-root")[0];
+                that.isMobile = (typeof options.mobile === "boolean") ? options.mobile : that.element.closest(".km-root")[0];
                 that.animation = that.isMobile ? { open: { effects: "fade" } } : {};
 
                 if (that.isMobile) {
@@ -463,7 +463,8 @@ var __meta__ = {
             options: {
                 name: "ToolBar",
                 items: [],
-                resizable: true
+                resizable: true,
+                mobile: null
             },
 
             destroy: function() {
