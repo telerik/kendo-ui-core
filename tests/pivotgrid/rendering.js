@@ -3176,8 +3176,8 @@
         var measures = leftColumn.find(".k-settings-measures");
         var rowFields = leftColumn.find(".k-settings-rows");
 
-        equal(measures.width(), table.width());
-        equal(rowFields.width(), table.width());
+        equal(Math.ceil(measures.width()), Math.ceil(table.width()));
+        equal(Math.ceil(rowFields.width()), Math.ceil(table.width()));
     });
 
     test("PivotGrid sets width of measures and row fields if row header table is empty", function() {
