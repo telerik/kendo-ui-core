@@ -1280,7 +1280,7 @@
                 equal(value, "m 15000,10000 c 15000,15236 12618,20000 10000,20000 7382,20000 5000,15236 5000,10000 e");
             };
 
-            arc.geometry.setEndAngle(180);
+            arc.geometry().setEndAngle(180);
         });
 
     })();
@@ -1317,7 +1317,7 @@
                 ok(true);
             };
 
-            arc.geometry.setEndAngle(180);
+            arc.geometry().setEndAngle(180);
         });
 
         shapeTests(d.Arc, vml.ArcNode, "ArcNode");

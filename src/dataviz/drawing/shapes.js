@@ -276,16 +276,13 @@
 
     var Arc = Element.extend({
         init: function(geometry, options) {
-            var arc = this;
-            Element.fn.init.call(arc, options);
-
-            arc.geometry = geometry || new g.Arc();
-            arc.geometry.observer = this;
+            Element.fn.init.call(this, options);
+            this.geometry(geometry || new g.Arc());
         },
 
         bbox: function(transformation) {
             var combinedMatrix = toMatrix(this.currentTransform(transformation));
-            var rect = this.geometry.bbox(combinedMatrix);
+            var rect = this.geometry().bbox(combinedMatrix);
             var strokeWidth = this.options.get("stroke.width");
 
             if (strokeWidth) {
@@ -296,12 +293,12 @@
         },
 
         rawBBox: function() {
-            return this.geometry.bbox();
+            return this.geometry().bbox();
         },
 
         toPath: function() {
             var path = new Path();
-            var curvePoints = this.geometry.curvePoints();
+            var curvePoints = this.geometry().curvePoints();
 
             if (curvePoints.length > 0) {
                 path.moveTo(curvePoints[0].x, curvePoints[0].y);
@@ -315,6 +312,7 @@
         }
     });
     deepExtend(Arc.fn, drawing.mixins.Paintable);
+    defineGeometryAccessors(Arc.fn, ["geometry"]);
 
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {

@@ -673,7 +673,7 @@
         });
 
         test("sets initial geometry", function() {
-            deepEqual(arc.geometry, arcGeometry);
+            deepEqual(arc.geometry(), arcGeometry);
         });
 
         test("sets initial options", function() {
@@ -689,7 +689,7 @@
                 }
             };
 
-            arc.geometry.center.setX(5);
+            arc.geometry().center.setX(5);
         });
 
         test("changing a geometry field triggers geometryChange", 2, function() {
@@ -699,8 +699,8 @@
                 }
             };
 
-            arc.geometry.setRadiusX(100);
-            arc.geometry.setCounterClockwise(true);
+            arc.geometry().setRadiusX(100);
+            arc.geometry().setCounterClockwise(true);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
