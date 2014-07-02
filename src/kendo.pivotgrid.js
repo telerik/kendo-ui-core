@@ -2242,17 +2242,33 @@ var __meta__ = {
 
         _resize: function() {
             if (this.content[0].firstChild) {
+                this._setSectionsWidth();
                 this._setSectionsHeight();
                 this._setContentWidth();
                 this._setContentHeight();
             }
         },
 
+        _setSectionsWidth: function() {
+            var rowsHeaderWidth = this.rowsHeader.children("table").width();
+            var rowsTuples = (this.dataSource.axes().rows || {}).tuples || [];
+
+            if (!rowsTuples[0]) {
+                var measureFieldsWidth = this.measureFields.width("auto").width();
+                var rowFieldsWidth = this.rowFields.width("auto").width();
+
+                rowsHeaderWidth = Math.max(measureFieldsWidth, rowFieldsWidth);
+            }
+
+            this.measureFields.width(rowsHeaderWidth);
+            this.rowFields.width(rowsHeaderWidth);
+        },
+
         _setSectionsHeight: function() {
-            var measureFieldsHeight = this.measureFields.height("100%").height();
-            var columnFieldsHeight = this.columnFields.height("100%").height();
-            var rowFieldsHeight = this.rowFields.height("100%").innerHeight();
-            var columnsHeight = this.columnsHeader.height("100%").innerHeight();
+            var measureFieldsHeight = this.measureFields.height("auto").height();
+            var columnFieldsHeight = this.columnFields.height("auto").height();
+            var rowFieldsHeight = this.rowFields.height("auto").innerHeight();
+            var columnsHeight = this.columnsHeader.height("auto").innerHeight();
 
             var padding = rowFieldsHeight - this.rowFields.height();
 

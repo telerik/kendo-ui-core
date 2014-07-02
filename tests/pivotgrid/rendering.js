@@ -3163,4 +3163,47 @@
         equal(columnHeader.css("padding-right"), kendo.support.scrollbar() + "px");
     });
 
+    test("PivotGrid sets width of measures and row fields based on row header table", function() {
+        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] }];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var leftColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        var table = leftColumn.find("table");
+        var measures = leftColumn.find(".k-settings-measures");
+        var rowFields = leftColumn.find(".k-settings-rows");
+
+        equal(measures.width(), table.width());
+        equal(rowFields.width(), table.width());
+    });
+
+    test("PivotGrid sets width of measures and row fields if row header table is empty", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+
+        var leftColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
+
+        var table = leftColumn.find("table");
+        var measures = leftColumn.find(".k-settings-measures");
+        var rowFields = leftColumn.find(".k-settings-rows");
+
+        equal(measures.width(), rowFields.width());
+    });
 })();
