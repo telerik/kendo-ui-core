@@ -116,6 +116,7 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
+                // TODO: Arc
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
                 } else if (srcElement instanceof d.Image) {
