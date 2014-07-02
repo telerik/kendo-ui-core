@@ -1260,19 +1260,20 @@
                 that.options = deepExtend({}, that.options, userOptions);
                 that.bind(that.events, that.options);
                 element = that.element; // the hosting element
-                element.empty();
-                element.css("position", "relative");
+                element.empty()
+                    .css("position", "relative")
+                    .attr("tabindex", 0)
+                    .addClass("k-widget k-diagram");
 
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
 
-                that.element.addClass("k-widget k-diagram").attr("role", "diagram");
                 var canvasContainer = $("<div class='k-layer'></div>").appendTo(element)[0];
+                that.scrollable = $("<div />").appendTo(that.element).append(canvasContainer);
                 that.canvas = new Canvas(canvasContainer, {
                     width: element.width(),
                     height: element.height()
                 });
-                that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
 
                 that.mainLayer = new Group({
                     id: "main-layer"
@@ -1295,7 +1296,7 @@
 
                 that._adorn(that._resizingAdorner, true);
                 that._adorn(that._connectorsAdorner, true);
-                that.element.attr("tabindex", 0)
+                that.element
                     .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
                     .on("dblclick" + NS, proxy(that._doubleClick, that))
@@ -1470,8 +1471,8 @@
             },
             focus: function () {
                 var x = window.scrollX, y = window.scrollY;
-                this.canvas.focus();
-                window.scrollTo(x, y); // prevent the annoying scroll to top of the canvas (div).
+                this.element.focus();
+                window.scrollTo(x, y);
             },
             load: function(options) {
                 this.clear();
