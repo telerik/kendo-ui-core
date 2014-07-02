@@ -449,6 +449,7 @@
                 };
 
                 element = new type({
+                    autoSize: true,
                     x: 10,
                     y: 20,
                     width: 100,
@@ -1550,7 +1551,8 @@
             setup: function() {
                 group = new Group({
                     width: 200,
-                    height: 300
+                    height: 300,
+                    autoSize: true
                 });
 
                 drawingElement = group.drawingElement;

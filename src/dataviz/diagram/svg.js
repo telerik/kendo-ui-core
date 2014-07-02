@@ -1156,7 +1156,7 @@
         },
 
         options: {
-            autoSize: true
+            autoSize: false
         },
 
         append: function (visual) {
