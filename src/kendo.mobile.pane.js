@@ -279,7 +279,6 @@ var __meta__ = {
                 filter: roleSelector(buttonRoles),
                 tap: function(e) {
                     e.event.currentTarget = e.touch.currentTarget;
-                    console.log(e.event.currentTarget);
                     that._mouseup(e.event);
                 }
             });
