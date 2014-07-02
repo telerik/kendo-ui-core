@@ -50,13 +50,7 @@ var __meta__ = {
             that._userEvents = new kendo.UserEvents(that.element, {
                 press: function(e) { that._activate(e); },
                 tap: function(e) { that._release(e); },
-                release: function(e) { highlightButton(that, e, false); },
-                // prevent the navigation when native scrolling is present
-                end: function(e) {
-                    if (kendo.mobile.appLevelNativeScrolling() || that.viewHasNativeScrolling()) {
-                        e.preventDefault();
-                    }
-                }
+                release: function(e) { highlightButton(that, e, false); }
             });
 
             if (ANDROID3UP) {

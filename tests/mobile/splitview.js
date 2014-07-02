@@ -93,13 +93,13 @@
 
     test("splitview navigates based on a target", 2, function(){
         hidden("#bar");
-        root.find("[href='#bar']").trigger("mouseup");
+        tap(root.find("[href='#bar']"))
         visible("#bar");
     });
 
     test("splitview considers _top the application", 2, function(){
         hidden("#baz");
-        root.find("[href='#baz']").trigger("mouseup");
+        tap(root.find("[href='#baz']"))
         visible("#baz");
     });
 })();

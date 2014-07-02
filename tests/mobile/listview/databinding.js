@@ -407,10 +407,7 @@
             myListView.destroy();
         });
 
-        link = dom.find("li");
-
-        link.trigger(kendo.support.mousedown);
-        link.trigger("mouseup");
+        tap(dom.find("li"));
     });
 
     test("resetting the dataSource detaches the previous events", function() {

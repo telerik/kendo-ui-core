@@ -81,7 +81,7 @@
             start();
             equal(e.target[0], $("#fooAnchor")[0]);
         });
-        root.find("#fooAnchor").trigger("mouseup");
+        tap(root.find("#fooAnchor"));
     });
 
     test("is closed when close is called", 1, function(){

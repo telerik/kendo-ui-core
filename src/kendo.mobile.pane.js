@@ -183,6 +183,7 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.viewEngine.destroy();
+            this.userEvents.destroy();
         },
 
         navigate: function(url, transition) {
@@ -269,10 +270,19 @@ var __meta__ = {
         },
 
         _setupAppLinks: function() {
+            var that = this;
             this.element.handler(this)
                 .on("down", roleSelector(linkRoles), "_mouseup")
-                .on("up", roleSelector(buttonRoles), "_mouseup")
                 .on("click", roleSelector(linkRoles + " " + buttonRoles), "_appLinkClick");
+
+            this.userEvents = new kendo.UserEvents(this.element, {
+                filter: roleSelector(buttonRoles),
+                tap: function(e) {
+                    e.event.currentTarget = e.touch.currentTarget;
+                    console.log(e.event.currentTarget);
+                    that._mouseup(e.event);
+                }
+            });
         },
 
         _appLinkClick: function (e) {

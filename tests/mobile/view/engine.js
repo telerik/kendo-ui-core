@@ -292,8 +292,7 @@
 
         viewEngine.bind("viewShow", function(e) {
             start();
-            root.find("#remoteButton").trigger(kendo.support.mousedown);
-            root.find("#remoteButton").trigger(kendo.support.mouseup);
+            tap(root.find("#remoteButton"));
         });
 
         viewEngine.showView("page2.html");
