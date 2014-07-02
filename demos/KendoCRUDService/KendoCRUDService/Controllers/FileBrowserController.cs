@@ -12,7 +12,7 @@ namespace KendoCRUDService.Controllers
         private const string contentFolderRoot = "~/Content/";
         private const string prettyName = "Images/";
         private static readonly string[] foldersToCopy = new[] { "~/Content/editor/" };
-        private const string DefaultFilter = "*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx,*.zip,*.rar,*.jpg,*.jpeg,*.gif,*.png";
+        private const string DefaultFilter = "*.txt,*.doc,*.docx,*.xls,*.xlsx,*.ppt,*.pptx,*.zip,*.rar,*.jpg,*.jpeg,*.gif,*.png";
 
         private readonly DirectoryBrowser directoryBrowser;
         private readonly ContentInitializer contentInitializer;
@@ -220,25 +220,25 @@ namespace KendoCRUDService.Controllers
         }
 
         [OutputCache(Duration = 360, VaryByParam = "path")]
-        public ActionResult File(string path)
+        public ActionResult File(string fileName)
         {
-            path = NormalizePath(path);
+            var path = NormalizePath(fileName);
 
-            if (AuthorizeImage(path))
+            if (AuthorizeFile(path))
             {
                 var physicalPath = Server.MapPath(path);
 
                 if (System.IO.File.Exists(physicalPath))
                 {
                     const string contentType = "application/octet-stream";
-                    return File(System.IO.File.OpenRead(physicalPath), contentType);
+                    return File(System.IO.File.OpenRead(physicalPath), contentType, fileName);
                 }
             }
 
             throw new HttpException(403, "Forbidden");
         }
 
-        public virtual bool AuthorizeImage(string path)
+        public virtual bool AuthorizeFile(string path)
         {
             return CanAccess(path) && IsValidFile(Path.GetExtension(path));
         }

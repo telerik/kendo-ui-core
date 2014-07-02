@@ -2,7 +2,7 @@
 
             <div class="box">
                 <p>Allowed file types for the Image browser are: jpg, jpeg, gif, png</p>
-                <p>Allowed file types for the File browser for this demo are: doc, docx, xls, xlsx, ppt, pptx, zip, rar, jpg, jpeg, gif, png</p>
+                <p>Allowed file types for the File browser for this demo are: txt, doc, docx, xls, xlsx, ppt, pptx, zip, rar, jpg, jpeg, gif, png</p>
             </div>
 
             <textarea id="editor" rows="10" cols="30" style="height:440px">
@@ -69,7 +69,7 @@
                                     type: "POST"
                                 },
                                 uploadUrl: "/kendo-ui/service/FileBrowser/Upload",
-                                fileUrl: "/kendo-ui/service/FileBrowser/File?path={0}"
+                                fileUrl: "/kendo-ui/service/FileBrowser/File?fileName={0}"
                             }
                         }
                     });

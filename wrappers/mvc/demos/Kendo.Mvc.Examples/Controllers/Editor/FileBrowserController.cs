@@ -20,7 +20,18 @@ namespace Kendo.Mvc.Examples.Controllers
             {
                 return CreateUserFolder();
             }
-        }        
+        }
+
+        /// <summary>
+        /// Gets the valid file extensions by which served files will be filtered.
+        /// </summary>
+        public override string Filter
+        {
+            get
+            {
+                return "*.txt, *.doc, *.docx, *.xls, *.xlsx, *.ppt, *.pptx, *.zip, *.rar, *.jpg, *.jpeg, *.gif, *.png";
+            }
+        }
 
         private string CreateUserFolder()
         {            
