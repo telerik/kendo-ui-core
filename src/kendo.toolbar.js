@@ -526,6 +526,10 @@ var __meta__ = {
                         if (overflowElement.data("overflow") === OVERFLOW_AUTO) {
                             overflowElement.addClass(OVERFLOW_HIDDEN);
                         }
+
+                        that.angular("compile", function(){
+                            return { elements: overflowElement.get() };
+                        });
                     }
                 }
 
@@ -552,6 +556,9 @@ var __meta__ = {
                             element.appendTo(that.element);
                         }
 
+                        that.angular("compile", function(){
+                            return { elements: element.get() };
+                        });
                     }
                 }
             },
@@ -598,7 +605,7 @@ var __meta__ = {
                     uid = element.data("uid"),
                     group = element.data("group"),
                     twinElement;
-                    
+
                 if (element.hasClass(TOGGLE_BUTTON)) {
 
                     if (group) { //find all buttons from the same group
