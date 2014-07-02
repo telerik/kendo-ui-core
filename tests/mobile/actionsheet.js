@@ -50,7 +50,7 @@
             start();
             ok(true);
         })
-        root.find(".km-shim").trigger($.Event(kendo.support.mouseup));
+        tap(root.find(".km-shim"));
     });
 
     test("Calls click event handler", 1, function() {
@@ -59,7 +59,7 @@
         };
 
         actionSheet.open();
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
     });
 
     asyncTest("Closes on click", 2, function() {
@@ -68,7 +68,7 @@
         };
 
         actionSheet.open();
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
         isClosed();
     });
 
@@ -78,7 +78,7 @@
         };
 
         actionSheet.open(source);
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
     });
 
     test("Clicking a button raises command event", 2, function() {
@@ -91,7 +91,7 @@
             equal(e.target[0], source[0]);
         });
 
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
     });
 
 
@@ -101,19 +101,19 @@
         };
 
         actionSheet.openFor(root.find("#source"));
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
     });
 
     asyncTest("Cancel button closes the sheet", 1, function() {
         var cancel = element.find("a:contains('Cancel')");
 
         actionSheet.open();
-        cancel.trigger($.Event(kendo.support.mouseup));
+        tap(cancel);
         isClosed();
     });
 
     test("data-rel=actionsheet widget opens the action sheet", 1, function() {
-        root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
+        tap(root.find('[data-role=button]'));
         isOpen();
     });
 
@@ -123,8 +123,8 @@
             equal(e.context, 1);
         };
 
-        root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find('[data-role=button]'));
+        tap(root.find("#foo"));
     });
 
     asyncTest("raises close event when widget is closed by the cancel button", 1, function() {
@@ -136,7 +136,7 @@
         });
 
         actionSheet.open();
-        cancel.trigger($.Event(kendo.support.mouseup));
+        tap(cancel);
     });
 
     asyncTest("raises close event when widget is closed on click", 1, function() {
@@ -148,7 +148,7 @@
         });
 
         actionSheet.open();
-        root.find("#foo").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("#foo"));
     });
 
     module("integration", {

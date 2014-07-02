@@ -100,7 +100,7 @@
     });
 
     test("data-rel=modalview widget opens the modalview", 1, function() {
-        root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
+        tap(root.find('[data-role=button]'));
         equal(root.find(".km-shim").css("display"), "block");
     });
 
@@ -128,7 +128,7 @@
             responseTime: 0
         });
 
-        root.find("a").trigger($.Event(kendo.support.mouseup));
+        tap(root.find("a"));
 
         setTimeout(function() {
             start();

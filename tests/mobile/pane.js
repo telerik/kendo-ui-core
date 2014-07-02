@@ -66,7 +66,7 @@
 
     test("navigates when a button is pressed", 1, function() {
         pane = buildPane('<div data-role="view" id="foo"><a data-role="button" id="barButton" href="#bar">Go to Bar</a></div><div data-role="view" id="bar">Bar</div>');
-        root.find("#barButton").trigger("mouseup");
+        tap(root.find("#barButton"));
         visible("#bar");
     });
 
@@ -76,10 +76,10 @@
                 '> Back</a></div>');
 
         pane.navigate("#foo");
-        root.find("#barButton").trigger("mouseup");
+        tap(root.find("#barButton"));
         visible("#bar");
 
-        root.find("#fooButton").trigger("mouseup");
+        tap(root.find("#fooButton"));
         visible("#foo");
         hidden("#bar");
     });

@@ -873,12 +873,6 @@ var __meta__ = {
                 allowSelection: true,
                 tap: function(e) {
                     listView._click(e);
-                },
-                // prevent the navigation when native scrolling is present
-                end: function(e) {
-                    if (kendo.mobile.appLevelNativeScrolling() || listView.viewHasNativeScrolling()) {
-                        e.preventDefault();
-                    }
                 }
             });
 
