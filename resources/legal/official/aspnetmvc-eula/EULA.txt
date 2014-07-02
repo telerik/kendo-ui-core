@@ -1,6 +1,6 @@
 Telerik End User License Agreement for UI for ASP.NET MVC
 
-(Last Updated April 16, 2014)
+(Last Updated July 16th, 2014)
 
 Telerik UI for ASP.NET MVC is a suite of products containing Kendo UI Professional and server wrappers for Microsoft’s ASP.NET MVC framework and is offered pursuant to the terms and conditions contained below.
 
@@ -32,7 +32,7 @@ For purposes of this Agreement:
 
 1.2 Commercial License with Updates and Support.  If You purchase a Commercial License with Updates and Support, Your Licensed Developers may use the Software in minified and source code form in accordance with Section 1.3 in the development of Your Integrated Products. In addition, for the applicable period of one (1), two (2) or three (3) years from the date on which You purchased the Software, for which You have purchased updates and support (the “Subscription Period”), You will receive minor and major updates for the Software, access to certain source code for the Software, as well as the “Commercial” support package, each as described in further detail below.
 
-1.2.2 Support. During the Subscription Period, You are entitled to the “Commercial” support package as described in greater detail here: http://www.telerik.com/purchase/support-plans/kendo-ui, subject to the limitations and restrictions described in the following Fair Usage Policy.
+1.2.2 Support. During the Subscription Period, You are entitled to the “Commercial” support package as described in greater detail here: http://www.telerik.com/purchase/support-plans/kendo-ui, subject to the limitations and restrictions described in the following Fair Usage Policy. The support services for tickets submitted relating to AngularJS implementations are limited to (i) assistance with plain implementations which include AngularJS and Kendo UI widgets, (ii) assistance with implementations which utilize the Kendo Angular labs project (https://github.com/kendo-labs/angular-kendo) and its directives (project support) or (iii) implementations which require extension of the existing Kendo Angular labs project with new logic.
 
 1.2.2.1 Support Package Fair Usage Policy. Telerik may limit or terminate Your access to any or all of the support services available under the “Commercial” support package if Your use of the support services is determined by Telerik, in its sole and reasonable discretion, to be excessive.
 
