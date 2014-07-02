@@ -214,17 +214,6 @@
             }
         },
 
-        position: function(value) {
-            if (defined(value)) {
-                this._position = value;
-                this._position.observer = this;
-                this.geometryChange();
-                return this;
-            } else {
-                return this._position;
-            }
-        },
-
         measure: function() {
             var metrics = util.measureText(this.content(), {
                 font: this.options.get("font")
@@ -249,6 +238,7 @@
         }
     });
     deepExtend(Text.fn, drawing.mixins.Paintable);
+    defineGeometryAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
         init: function(geometry, options) {
