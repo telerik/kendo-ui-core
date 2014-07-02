@@ -729,6 +729,7 @@ var __meta__ = {
                 .appendTo(document.body);
 
                 that.angular("compile", function(){
+                    that.hint.removeAttr("ng-repeat");
                     return {
                         elements: that.hint.get(),
                         scopeFrom: e.target
