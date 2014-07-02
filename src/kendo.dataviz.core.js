@@ -2976,7 +2976,7 @@ var __meta__ = {
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
                 options = axis.options,
-                power = math.floor(axis.logMin + index),
+                power = math.ceil(axis.logMin + index),
                 value = Math.pow(options.majorUnit, power),
                 text = axis.axisLabelText(value, null, labelOptions);
 

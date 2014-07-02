@@ -864,12 +864,10 @@
 
         test("labels value is equal to base on power min power plus index", function() {
             var label1 = axis.createAxisLabel(0, {}),
-                label2 = axis.createAxisLabel(1, {}),
-                label3 = axis.createAxisLabel(2, {});
+                label2 = axis.createAxisLabel(1, {});
 
-            equal(label1.value, 1);
-            equal(label2.value, 10);
-            equal(label3.value, 100);
+            equal(label1.value, 10);
+            equal(label2.value, 100);
         });
 
     })();
