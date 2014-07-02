@@ -15,7 +15,7 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateProgressBar()
         {
-            var element = new  HtmlElement("div").Attribute("id", progressBar.Id);
+            var element = new HtmlElement("div").Attributes(progressBar.HtmlAttributes).Attribute("id", progressBar.Id);
 
             return element;
         }
