@@ -3932,6 +3932,21 @@
         "meta": {
             "kendo-ui": "Play with this Kendo UI ToolBar demo to learn how to include Kendo UI Editor widgets in the ToolBar."
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "toolbar/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Toolbar"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support in Kendo UI Toolbar"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Navigation"
