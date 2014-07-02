@@ -61,8 +61,6 @@ var __meta__ = {
 
             that._templates();
 
-            that._getColumnCount();
-
             that.calculateDateRange();
 
             that._groups();
@@ -162,13 +160,10 @@ var __meta__ = {
 
             var resources = this.groupedResources;
 
-            if (resources.length) {
-                rows.push({
-                    //add template here
-                    text: "All events"
-                });
+            if (resources.length && this._groupOrientation() === "vertical") {
                 rows = this._createRowsLayout(resources, null);
             } else {
+                //horizontal grouping is not supported
                 rows = [{
                     //add template here
                     text: "All events"
@@ -183,19 +178,27 @@ var __meta__ = {
             };
         },
 
-        _content: function(dates) {
+        _content: function(columnCount) {
             var that = this;
             var options = that.options;
             var start = options.startTime;
             var end = options.endTime;
+            var isVerticalGroupped = false;
+            var resources = this.groupedResources;
            
 
             //add support for more
             var groupsCount = 1;
             var rowCount = 1;
             //======
+            
+            if (resources.length) {
+                isVerticalGroupped = that._groupOrientation() === "vertical";
+                if (isVerticalGroupped) {
+                    rowCount = this._rowCountForLevel(this.rowLevels.length - 1);
+                }
+            }
 
-            var columnCount = that._columnCount;
             var html = '';
 
             html += '<tbody>';
@@ -235,29 +238,27 @@ var __meta__ = {
 
             dates = dates || [];
 
+            //dates are considered as resource for creating columns
+            //in current case they are not
             that._dates = dates;
+
+            that._getColumnCount();
 
             that._startDate = dates[0];
 
             that._endDate = dates[(dates.length - 1) || 0];
 
-            that.createLayout(that._layout(dates));
+            that.createLayout(that._layout(dates)); 
 
-            that._content(dates);
+            that._content(that._columnCount);
 
             that.refreshLayout();
 
-            
-            
-            
-            
-            
-            
-            
+
              //To be implemented
             //throw "_render is not implemented";
         },
-        
+
         startDate: function() {
             return this._startDate;
         },
@@ -265,8 +266,7 @@ var __meta__ = {
         endDate: function() {
             return this._endDate;
         },
-        
-        
+
         startTime: function() {
             var options = this.options;
             return options.startTime;
@@ -276,7 +276,7 @@ var __meta__ = {
             var options = this.options;
             return options.endTime;
         },
-        
+
         _timeSlotInterval: function() {
             var options = this.options;
             return msMajorInterval = options.majorTick * kendo.date.MS_PER_MINUTE;
@@ -360,16 +360,6 @@ var __meta__ = {
             this._render([this.options.date]);
         },
 
-        destroy: function() {
-            var that = this;
-
-            if (that.element) {
-                that.element.off(NS);
-            }
-
-            SchedulerView.fn.destroy.call(this);
-        },
-        
         render: function(events) {
             this._headerColumnCount = 0;
 
@@ -410,8 +400,9 @@ var __meta__ = {
               //To be implemented
             //throw "render is not implemented";
         },
-        
+
         _eventsByResource: function(events, resources, result) {
+            //todo
             var resource = resources[0];
 
             if (resource) {
@@ -432,8 +423,9 @@ var __meta__ = {
                 result.push(events);
             }
         },
-        
+
         _renderEvents: function(events, groupIndex) {
+            //todo
             var event;
 
             var idx;
@@ -444,50 +436,52 @@ var __meta__ = {
                 var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
                 var container =  this.content;
                 if (this._isInTimeSlot(event)) {
-                            group = this.groups[groupIndex];
-debugger;
-                            if (!group._continuousEvents) {
-                                group._continuousEvents = [];
-                            }
+                    group = this.groups[groupIndex];
 
-                            ranges = group.slotRanges(event);
+                    if (!group._continuousEvents) {
+                        group._continuousEvents = [];
+                    }
 
-                            var rangeCount = ranges.length;
+                    ranges = group.slotRanges(event);
 
-                            for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++) {
-                                var range = ranges[rangeIndex];
-                                var start = event.start;
-                                var end = event.end;
+                    var rangeCount = ranges.length;
 
-                                if (rangeCount > 1) {
-                                    if (rangeIndex === 0) {
-                                        end = range.end.endDate();
-                                    } else if (rangeIndex == rangeCount - 1) {
-                                        start = range.start.startDate();
-                                    } else {
-                                        start = range.start.startDate();
-                                        end = range.end.endDate();
-                                    }
-                                }
+                    for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++) {
+                        var range = ranges[rangeIndex];
+                        var start = event.start;
+                        var end = event.end;
 
-                                var occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
-
-                                if (this._isInTimeSlot(occurrence)) {
-                                    var head = range.head;
-
-                                    element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
-
-                                    element.appendTo(container);
-
-                                    this._positionEvent(occurrence, element, range);
-
-                                    addContinuousEvent(group, range, element, false);
-                                }
+                        if (rangeCount > 1) {
+                            if (rangeIndex === 0) {
+                                end = range.end.endDate();
+                            } else if (rangeIndex == rangeCount - 1) {
+                                start = range.start.startDate();
+                            } else {
+                                start = range.start.startDate();
+                                end = range.end.endDate();
                             }
                         }
+
+                        var occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
+
+                        if (this._isInTimeSlot(occurrence)) {
+                            var head = range.head;
+
+                            element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
+
+                            element.appendTo(container);
+
+                            this._positionEvent(occurrence, element, range);
+
+                            addContinuousEvent(group, range, element, false);
+                        }
+                    }
+                }
             }
         },
+
         _isInTimeSlot: function(event) {
+            //todo
             var slotStartTime = this.startTime(),
                 slotEndTime = this.endTime(),
                 startTime = event.startTime || event.start,
@@ -517,8 +511,10 @@ debugger;
                 isInTimeRange(endTime, slotStartTime, slotEndTime, overlaps) ||
                 isInTimeRange(slotStartTime, startTime, endTime) ||
                 isInTimeRange(slotEndTime, startTime, endTime);
-        }, 
+        },
+
         _createEventElement: function(event, isOneDayEvent, head, tail) {
+            //todo
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var editable = options.editable;
@@ -594,7 +590,9 @@ debugger;
             
             return element;
         }, 
+
         _positionEvent: function(event, element, slotRange) {
+            //todo
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
 
@@ -602,7 +600,7 @@ debugger;
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
             var width = rect.right - rect.left -2;
-            debugger;
+   
             if (width < 0) {
                 width = 0;
             }
@@ -619,9 +617,22 @@ debugger;
             } );
 
             this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
-       },
- 
-     
+        },
+
+        _rowCountForLevel: function(level) {
+            var rowLevel = this.rowLevels[level];
+            return rowLevel ? rowLevel.length : 0;
+        },
+
+        destroy: function() {
+            var that = this;
+
+            if (that.element) {
+                that.element.off(NS);
+            }
+
+            SchedulerView.fn.destroy.call(this);
+        }
     });
     
     extend(true, ui, {
