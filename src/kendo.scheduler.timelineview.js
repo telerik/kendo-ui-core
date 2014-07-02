@@ -160,12 +160,26 @@ var __meta__ = {
                 }
             }
 
+            var resources = this.groupedResources;
+
+            if (resources.length) {
+                rows.push({
+                    //add template here
+                    text: "All events"
+                });
+                rows = this._createRowsLayout(resources, null);
+            } else {
+                rows = [{
+                    //add template here
+                    text: "All events"
+                }];
+            }
+
             //rows currently are always 1
             return {
                 columns: columns,
-                rows: [{
-                    text: ""
-                }]
+                //groups - vertical
+                rows: rows
             };
         },
 
