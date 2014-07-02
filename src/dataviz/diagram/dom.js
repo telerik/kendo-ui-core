@@ -638,7 +638,7 @@
             },
             getPosition: function (side) {
                 var b = this.bounds(),
-                    fnName = side[0].toLowerCase() + side.slice(1);
+                    fnName = side.charAt(0).toLowerCase() + side.slice(1);
                 if (isFunction(b[fnName])) {
                     return this._transformPoint(b[fnName]());
                 }
