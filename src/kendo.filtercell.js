@@ -16,6 +16,7 @@ var __meta__ = {
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         CHANGE = "change",
+        BOOL = "boolean",
         STRING = "string",
         NS = ".kendoFilterCell",
         EQ = "Is equal to",
@@ -78,6 +79,8 @@ var __meta__ = {
 
     var FilterCell = Widget.extend( {
         init: function(element, options) {
+            element = $(element).addClass("grid-filter-header");
+            var wrapper = this.wrapper = $("<span/>").appendTo(element);
             var that = this,
                 dataSource,
                 suggestDataSource,
@@ -85,9 +88,9 @@ var __meta__ = {
                 type,
                 input = that.input = $("<input/>")
                     .attr(kendo.attr("bind"), "value: value")
-                    .appendTo(element);
+                    .appendTo(wrapper);
 
-            Widget.fn.init.call(that, element, options);
+            Widget.fn.init.call(that, element[0], options);
             options = that.options;
             dataSource = that.dataSource = options.dataSource;
 
@@ -100,8 +103,6 @@ var __meta__ = {
             }
 
 
-            element = $(element);
-            element.addClass("grid-filter-header");
 
             that._parse = function(value) {
                  return value + "";
@@ -127,7 +128,7 @@ var __meta__ = {
 
             that._createClearIcon();
 
-            kendo.bind(input, viewModel);
+            kendo.bind(this.wrapper, viewModel);
 
             if (type == STRING) {
                 suggestDataSource = that.suggestDataSource = options.suggestDataSource;
@@ -145,9 +146,9 @@ var __meta__ = {
                 that.setComboBoxSource(that.options.values);
             }
 
-            that.refreshUI();
+            that._refreshUI();
 
-            that._refreshHandler = proxy(that.refreshUI, that);
+            that._refreshHandler = proxy(that._refreshUI, that);
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
 
@@ -166,6 +167,20 @@ var __meta__ = {
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
                 input.attr(kendo.attr("role"), "datepicker");
+            } else if (type == BOOL) {
+                var wrapper = this.wrapper;
+                var inputName = kendo.guid();
+
+                var labelTrue = $("<label/>").text(this.options.messages.isTrue).append(input);
+                input.attr(kendo.attr("bind"), "checked:value")
+                    .attr("name", inputName)
+                    .val("true")
+                    .attr("type", "radio");
+
+                var labelFalse = labelTrue.clone().text(this.options.messages.isFalse);
+                        input.clone().val("false").appendTo(labelFalse);
+                wrapper.append([labelTrue, labelFalse]);
+
             } else if (type == "number") {
                 input.attr(kendo.attr("role"), "numerictextbox");
             } else if (type == "enum") {
@@ -200,17 +215,19 @@ var __meta__ = {
             }
         },
 
-        refreshUI: function() {
-            var that = this;
-            that._bind();
-        },
-
-        _bind: function() {
+        _refreshUI: function() {
             var that = this,
                 filter = findFilterForField(that.dataSource.filter(), this.options.field) || {},
                 viewModel = that.viewModel;
 
             that.manuallyUpdatingVM = true;
+
+            //MVVM check binding does not update the UI when changing the value to null/undefined
+            if (that.options.type == BOOL) {
+                filter.value = filter.value + "";
+                that.wrapper.find(":radio").prop("checked", false);
+            }
+
             if (filter.operator) {
                 viewModel.set("operator", filter.operator);
             }
@@ -289,7 +306,7 @@ var __meta__ = {
             $("<button class='k-button k-button-icon'/>")
                 .html("<span class='k-icon k-i-close'/>")
                 .click(proxy(that.clearFilter, that))
-                .appendTo(that.element);
+                .appendTo(that.wrapper);
         },
 
         clearFilter: function() {
@@ -312,7 +329,6 @@ var __meta__ = {
 
         options: {
             name: "FilterCell",
-            autoBind: true,
             delay: 200,
             values: undefined,
             customDataSource: false,
@@ -321,6 +337,13 @@ var __meta__ = {
             suggestDataSource: null,
             operator: "eq",
             template: null,
+            messages: {
+                isTrue: "is true",
+                isFalse: "is false",
+                filter: "Filter",
+                clear: "Clear",
+                operator: "Operator"
+            },
             operators: {
                 string: {
                     eq: EQ,
@@ -350,17 +373,6 @@ var __meta__ = {
                     eq: EQ,
                     neq: NEQ
                 }
-            },
-            messages: {
-                isTrue: "is true",
-                isFalse: "is false",
-                filter: "Filter",
-                clear: "Clear",
-                and: "And",
-                or: "Or",
-                operator: "Operator",
-                value: "Value",
-                cancel: "Cancel"
             }
         }
     });

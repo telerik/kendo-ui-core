@@ -46,6 +46,7 @@
         <div id="grid"></div>
         <h3>feature grid</h3>
         <div id="feature"></div>
+        <div id="someSecond"></div>
         <script>
             var standart = $("#standard-filterable-grid").kendoGrid({
                 filterable: true,
@@ -215,13 +216,25 @@
 
                 grid.thead.append(tr);
 
-                var feature = $("#feature").kendoGrid({
+                var feature = $("#feature,#someSecond").kendoGrid({
                     filterable: {
                         mode: "row menu"
                     },
                     columns: [
                         { field: "Id", locked: false, width: 300 },
                         { field: "Name", locked: true, width: 300 },
+                        {
+                            field: "Male",
+                            locked: false,
+                            width: 300,
+                            filterable: {
+                                cell: {
+                                    //template: function(input) {
+                                        //input.attr("type", "checkbox");
+                                    //}
+                                }
+                            }
+                        },
                         { field: "Position", locked: true, width: 300 },
                         {
                             field: "Grade",
@@ -265,6 +278,7 @@
                                         Name: "foo",
                                         Position: 1 ,
                                         Grade: 1 ,
+                                        Male: false,
                                         ContractDate : new Date('1996/12/12')
                                     },
                                     {
@@ -272,6 +286,7 @@
                                         Name: "bar",
                                         Position: 2 ,
                                         Grade: 1 ,
+                                        Male: true,
                                         ContractDate : new Date('2012/5/4')
                                     },
                                     {
@@ -279,6 +294,7 @@
                                         Name: "baz",
                                         Position: 3 ,
                                         Grade: 2 ,
+                                        Male: false,
                                         ContractDate : new Date()
                                     },
                                     {
@@ -286,6 +302,7 @@
                                         Name: "baz",
                                         Position: 3 ,
                                         Grade: 3 ,
+                                        Male: true,
                                         ContractDate : new Date()
                                     },
                                     {
@@ -294,6 +311,14 @@
                                         Position: 3 ,
                                         Grade: 3 ,
                                         ContractDate : new Date()
+                                    },
+                                    {
+                                        Id: 5,
+                                        Name: "vat",
+                                        Position: 3 ,
+                                        Grade: 2 ,
+                                        Male: false,
+                                        ContractDate : new Date('2012/5/4')
                                     }
                                 ] })
                             }
@@ -313,6 +338,9 @@
                                     },
                                     Name: {
                                         type : "string"
+                                    },
+                                    Male: {
+                                        type : "boolean"
                                     },
                                     ContractDate: {
                                         type : "date"

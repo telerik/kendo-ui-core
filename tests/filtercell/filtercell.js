@@ -310,4 +310,31 @@
         equal(suggestedItems.length, 3);
     });
 
+    test("suggest dataSource shows all records when using inherited dataSource options", function() {
+        var ds = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    fields: {
+                        foo: {
+                            type: "boolean"
+                        }
+                    }
+                }
+            }
+        });
+
+        filterCell = setup(dom, {
+            dataSource: ds,
+            field: "foo"
+        });
+
+        ds.filter({ field: "foo", operator: "eq", value: false});
+
+        equal(filterCell.wrapper.find(":radio:checked").length, 1);
+
+        ds.filter({});
+
+        equal(filterCell.wrapper.find(":radio:checked").length, 0);
+    });
+
 })();

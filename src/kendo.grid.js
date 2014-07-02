@@ -3696,6 +3696,7 @@ var __meta__ = {
                     col = columns[i],
                     customDataSource = false,
                     delay,
+                    template,
                     values,
                     th = $("<th/>"),
                     field = col.field;
@@ -3710,6 +3711,7 @@ var __meta__ = {
                             acDsOptions = cellOptions.dataSource;
                             customDataSource = true;
                         }
+                        template = cellOptions.template;
                         delay =  cellOptions.delay;
                     }
 
@@ -3719,6 +3721,7 @@ var __meta__ = {
                             suggestDataSource: acDsOptions,
                             customDataSource: customDataSource,
                             field: field,
+                            template: template,
                             values: values,
                             delay: delay
                         }).appendTo(th);
