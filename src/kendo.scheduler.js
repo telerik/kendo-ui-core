@@ -3313,6 +3313,9 @@ var __meta__ = {
         },
         month: {
             type: "kendo.ui.MonthView"
+        },
+        timeline: {
+            type: "kendo.ui.TimelineView"
         }
     };
 

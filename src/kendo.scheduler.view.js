@@ -707,7 +707,9 @@ var __meta__ = {
 
             return {
                 top: top,
-                bottom: bottom
+                bottom: bottom,
+                left: startSlot.offsetLeft + startSlot.clientWidth,
+                right: endSlot.offsetLeft + endSlot.clientWidth
             };
         },
 
