@@ -1,0 +1,35 @@
+<div id="example" ng-app="KendoDemos">
+  <div ng-controller="MyCtrl">
+    <div class="hasMenu" style="border: 2px solid black; padding: 3em; background: {{ menuOpen ? '#52c35d' : '' }}">
+      Right-click me
+      <span ng-show="menuOpen">— Menu is open</span>
+      <div ng-show="selected">Selected: <b>{{selected}}</b></div>
+    </div>
+    <ul kendo-context-menu
+        k-filter="'.hasMenu'"
+        k-on-open="menuOpen = menuOpen + 1"
+        k-on-close="menuOpen = menuOpen - 1"
+        k-on-select="onSelect(kendoEvent)">
+      <li>Item 1
+        <ul>
+          <li>Subitem 1.1</li>
+          <li>Subitem 1.2</li>
+          <li>Subitem 1.3</li>
+        </ul>
+      </li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  angular.module("KendoDemos", [ "kendo.directives" ]);
+
+  function MyCtrl($scope){
+      $scope.menuOpen = 0;
+      $scope.onSelect = function(e) {
+          $scope.selected = $(e.item).children(".k-link").text();
+      };
+  };
+</script>

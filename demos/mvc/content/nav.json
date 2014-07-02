@@ -2261,7 +2261,7 @@
           "!php"
         ]
       },
-{
+      {
         "text": "AngularJS",
         "url": "menu/angular",
         "title": {
@@ -2269,6 +2269,21 @@
         },
         "meta": {
             "kendo-ui": "AngularJS directive support for Kendo UI Menu"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS - ContextMenu",
+        "url": "menu/context-menu-angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI ContextMenu"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI ContextMenu"
         },
         "packages": [
           "!mvc",
