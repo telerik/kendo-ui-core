@@ -398,7 +398,7 @@
             };
         }
     });
-    defineGeometryAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"])
+    defineGeometryAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
 
     var Path = Element.extend({
         init: function(options) {
@@ -598,7 +598,7 @@
     function defineGeometryAccessors(fn, names) {
         for (var i = 0; i < names.length; i++) {
             fn[names[i]] = geometryAccessor(names[i]);
-        };
+        }
     }
 
     function geometryAccessor(name) {
