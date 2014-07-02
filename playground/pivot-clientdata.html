@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>pivot columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivot.configurator.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="http://demos.telerik.com/kendo-ui/content/shared/js/people.js"></script>
+
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+
+        <style>
+            html
+            {
+                font: 12px sans-serif;
+            }
+            .filter-container {
+                overflow: auto;
+                max-height: 300px;
+                min-height: 150px;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="pivotgrid"></div>
+
+        <script>
+
+            $(function() {
+                var data = createRandomData(10000);
+
+                var pivot = $("#pivotgrid").kendoPivotGrid({
+                    dataSource: {
+                    //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
+                        columns: ["FirstName"],
+                        //measures: ["[Measures].[Internet Order Lines Count]"],
+                        //columns: ["[Department]"],
+                        transport: {
+                            read: function(options) {
+                                console.log(options.data.columns);
+                                options.success(new kendo.data.PivotCubeBuilder().process(data, {
+                                    columns: options.data.columns,
+                                    rows: options.data.rows,
+                                    measures: options.data.measures
+                                }));
+                            }
+                        },
+                        schema: {
+                            axes: "axes",
+                            data: "data"
+                        },
+                        error: function(e) {
+                           alert("error: " + kendo.stringify(e.errors[0]));
+                        }
+                    }
+                }).data("kendoPivotGrid");
+            });
+
+        </script>
+    </body>
+</html>

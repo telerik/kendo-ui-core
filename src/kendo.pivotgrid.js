@@ -169,6 +169,74 @@ var __meta__ = {
         return members;
     }
 
+    var PivotCubeBuilder = Class.extend({
+        _asTuples: function(map, descriptors) {
+            var result = [];
+
+            result[result.length] = {
+                members: [{
+                    children: [],
+                    caption: "ALL",
+                    name: descriptors.name,
+                    levelName: descriptors.name,
+                    levelNum: "0",
+                    hasChildren: true,
+                    parentName: undefined,
+                    hierarchy: descriptors.name
+                }]
+            };
+
+            for (var key in map) {
+                result[result.length] = {
+                    members: [{
+                        children: [],
+                        caption: key,
+                        name: map[key]["name"],
+                        levelName: map[key]["name"] + "." + key,
+                        levelNum: 1,
+                        hasChildren: false,
+                        parentName: "ALL",
+                        hierarchy: map[key]["name"]
+                    }]
+                };
+            }
+
+            return result;
+        },
+
+        process: function(data, options) {
+            var columnDescriptor = ((options || {}).columns || [])[0] || {};
+            var rowDescriptor = ((options || {}).rows || [])[0] || {};
+            var columns = {};
+            var rows = {};
+            var columnValue;
+            var rowValue;
+            var columnGetter = kendo.getter(columnDescriptor.name, true);
+            var rowGetter = kendo.getter(rowDescriptor.name, true);
+
+            if (columnDescriptor.expand || rowDescriptor.expand) {
+                for (var idx = 0, length = data.length; idx < length; idx++) {
+
+                    columnValue = columnGetter(data[idx]);
+                    columns[columnValue] = { name: columnDescriptor.name };
+
+                    //if (rowDescriptor) {
+                        rowValue = rowGetter(data[idx]);
+                        rows[rowValue] = { name: rowDescriptor.name };
+                    //}
+                }
+            }
+
+            return {
+                axes: {
+                    columns: { tuples: this._asTuples(columns, columnDescriptor) },
+                    rows: { tuples: this._asTuples(rows, rowDescriptor) }
+                },
+                data: []
+            };
+        }
+    });
+
     var PivotTransport = Class.extend({
         init: function(options, transport) {
             this.transport = transport;
@@ -1852,6 +1920,7 @@ var __meta__ = {
        PivotDataSource: PivotDataSource,
        XmlaTransport: XmlaTransport,
        XmlaDataReader: XmlaDataReader,
+       PivotCubeBuilder: PivotCubeBuilder,
        transports: {
            xmla: XmlaTransport
        },
