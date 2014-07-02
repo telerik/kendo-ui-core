@@ -822,6 +822,84 @@
         ok(readInvoked);
     });
 
+    test("filtercell is initialized with messages options from the Grid", function() {
+        var readInvoked;
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                operators: {
+                    string: {
+                        eq: "IS EQUAL"
+                    }
+                },
+                mode: "cell row"
+            },
+            columns: [
+                {
+                    field: "col1",
+                },
+                {
+                    field: "col2",
+                    filterable: {
+                        cell: {
+                            enabled: false
+                        }
+                    }
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "string"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        equal(widgets.length, 1);
+        var firstWidget = widgets.eq(0).data("kendoFilterCell");
+        equal(firstWidget.operatorDropDown.data("kendoDropDownList").dataSource.data()[0].text, "IS EQUAL");
+    });
+
+    test("filtercell is initialized with messages options from the column messages", function() {
+        var readInvoked;
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                messages: {
+                    isTrue: "IS TRUE"
+                },
+                mode: "cell row"
+            },
+            columns: [
+                {
+                    field: "col1",
+                }
+            ],
+            dataSource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        var firstWidget = widgets.eq(0).data("kendoFilterCell");
+        equal(firstWidget.wrapper.find(":radio").length, 2);
+        equal(firstWidget.wrapper.find(":radio:first").parent().text(), "IS TRUE");
+    });
+
     test("filtercell creates comboBox when values is provided for the filterable column", function() {
         var readInvoked;
         var div = $("<div/>").appendTo(QUnit.fixture);

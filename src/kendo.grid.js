@@ -3689,6 +3689,7 @@ var __meta__ = {
             }
 
             var columns = that.columns,
+                filterable = that.options.filterable,
                 rowheader = that.thead.find(".k-filter-row");
 
             for (var i = 0; i < columns.length; i++) {
@@ -3701,12 +3702,21 @@ var __meta__ = {
                     th = $("<th/>"),
                     field = col.field;
 
+                rowheader.append(th);
                 if (field && col.filterable !== false) {
                     var cellOptions = col.filterable && col.filterable.cell;
                     values = col.values;
 
                     acDsOptions = that.dataSource.options;
+                    var messages = extend(true, {}, filterable.messages);
+                    if (col.filterable) {
+                        extend(true, messages, col.filterable.messages);
+                    }
+
                     if (isPlainObject(cellOptions)) {
+                        if (cellOptions.enabled === false) {
+                            continue;
+                        }
                         if (cellOptions.dataSource) {
                             acDsOptions = cellOptions.dataSource;
                             customDataSource = true;
@@ -3723,10 +3733,11 @@ var __meta__ = {
                             field: field,
                             template: template,
                             values: values,
-                            delay: delay
+                            delay: delay,
+                            messages: messages,
+                            operators: this.options.filterable.operators
                         }).appendTo(th);
                 }
-                rowheader.append(th);
             }
         },
 

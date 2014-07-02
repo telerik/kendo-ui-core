@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.autocomplete", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.combobox" ], f);
+    define([ "./kendo.autocomplete", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.combobox", "./kendo.dropdownlist" ], f);
 })(function(){
 
 var __meta__ = {
@@ -17,6 +17,7 @@ var __meta__ = {
         Widget = ui.Widget,
         CHANGE = "change",
         BOOL = "boolean",
+        ENUM = "enum",
         STRING = "string",
         NS = ".kendoFilterCell",
         EQ = "Is equal to",
@@ -86,6 +87,7 @@ var __meta__ = {
                 suggestDataSource,
                 viewModel,
                 type,
+                operators = that.operators = options.operators || {},
                 input = that.input = $("<input/>")
                     .attr(kendo.attr("bind"), "value: value")
                     .appendTo(wrapper);
@@ -99,10 +101,10 @@ var __meta__ = {
             that.model = dataSource.options.schema.model;
             type = options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
             if (options.values) {
-                options.type = type = "enum";
+                options.type = type = ENUM;
             }
 
-
+            operators = operators[type] || options.operators[type];
 
             that._parse = function(value) {
                  return value + "";
@@ -125,6 +127,10 @@ var __meta__ = {
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
 
             that._setInputType(options, type);
+
+            if (type != BOOL && type != ENUM) {
+                that._createOperatorDropDown(operators);
+            }
 
             that._createClearIcon();
 
@@ -193,6 +199,27 @@ var __meta__ = {
             }
         },
 
+        _createOperatorDropDown: function(operators) {
+            var items = [];
+            for (var prop in operators) {
+                items.push({
+                    text: operators[prop],
+                    value: prop
+                });
+            }
+            var dropdown = $('<input style="width:24px" data-bind="value: operator"/>').appendTo(this.wrapper);
+            this.operatorDropDown = dropdown.kendoDropDownList({
+                dataSource: items,
+                dataTextField: "text",
+                dataValueField: "value",
+                open: function() {
+                    //TODO calc this
+                    this.popup.element.width(150);
+                },
+                valuePrimitive: true
+            });
+        },
+
         setSuggestDataSource: function(dataSource) {
             if (!this.options.customDataSource) {
                 dataSource._pageSize = undefined;
@@ -215,7 +242,7 @@ var __meta__ = {
             }
         },
 
-        _refreshUI: function() {
+        _refreshUI: function(e) {
             var that = this,
                 filter = findFilterForField(that.dataSource.filter(), this.options.field) || {},
                 viewModel = that.viewModel;
@@ -235,7 +262,7 @@ var __meta__ = {
             that.manuallyUpdatingVM = false;
         },
 
-        updateDsFilter: function() {
+        updateDsFilter: function(e) {
             var that = this,
                 model = that.viewModel;
 
@@ -244,6 +271,9 @@ var __meta__ = {
             }
 
             var currentFilter = $.extend({}, that.viewModel.toJSON(), { field: that.options.field });
+            if (currentFilter.value === undefined) {
+                return;
+            }
 
             var expression = {
                 logic: "and",

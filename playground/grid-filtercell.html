@@ -18,6 +18,7 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.autocomplete.js"></script>
         <script src="../src/kendo.combobox.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
 
         <script src="../src/kendo.calendar.js"></script>
         <script src="../src/kendo.popup.js"></script>
@@ -46,7 +47,6 @@
         <div id="grid"></div>
         <h3>feature grid</h3>
         <div id="feature"></div>
-        <div id="someSecond"></div>
         <script>
             var standart = $("#standard-filterable-grid").kendoGrid({
                 filterable: true,
@@ -216,13 +216,22 @@
 
                 grid.thead.append(tr);
 
-                var feature = $("#feature,#someSecond").kendoGrid({
+                var feature = $("#feature").kendoGrid({
                     filterable: {
-                        mode: "row menu"
+                        mode: "row menu",
+                        operators: {
+                            date: {
+                                eq: "IS EQUAL"
+                            }
+                        }
                     },
                     columns: [
                         { field: "Id", locked: false, width: 300 },
-                        { field: "Name", locked: true, width: 300 },
+                        {
+                            field: "Name",
+                            locked: true,
+                            width: 300
+                        },
                         {
                             field: "Male",
                             locked: false,
@@ -235,7 +244,7 @@
                                 }
                             }
                         },
-                        { field: "Position", locked: true, width: 300 },
+                        { field: "Position", filterable: { cell: { enabled: false } }, locked: true, width: 300 },
                         {
                             field: "Grade",
                             values: [
