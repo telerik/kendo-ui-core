@@ -1753,6 +1753,21 @@
         ]
       },
       {
+        "text": "Localization",
+        "url": "grid/localization",
+        "title": {
+            "kendo-ui": "Kendo UI Grid localization demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how Kendo UI Grid widget can be localized."
+        },
+        "packages": [
+          "!mvc",
+          "!php",
+          "!jsp"
+        ]
+      },
+      {
         "text": "RTL support",
         "disableInMobile": true,
         "url": "grid/right-to-left-support",

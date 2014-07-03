@@ -1,0 +1,103 @@
+
+        <div id="example">
+            <label for="language">Choose culture:</label>
+            <input id="language" value="en-US" />
+
+            <div id="grid"></div>
+
+            <script>
+                var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+                    dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read:  {
+                                url: crudServiceBaseUrl + "/Products",
+                                dataType: "jsonp"
+                            },
+                            update: {
+                                url: crudServiceBaseUrl + "/Products/Update",
+                                dataType: "jsonp"
+                            },
+                            destroy: {
+                                url: crudServiceBaseUrl + "/Products/Destroy",
+                                dataType: "jsonp"
+                            },
+                            create: {
+                                url: crudServiceBaseUrl + "/Products/Create",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        },
+                        batch: true,
+                        pageSize: 20,
+                        schema: {
+                            model: {
+                                id: "ProductID",
+                                fields: {
+                                    ProductID: { editable: false, nullable: true },
+                                    ProductName: { validation: { required: true } },
+                                    UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                    Discontinued: { type: "boolean" },
+                                    UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                                }
+                            }
+                        }
+                    });
+
+                function changeLanguage() {
+                    kendo.ui.progress($("#grid"), true);
+                    $.getScript("../content/web/grid/messages/kendo.messages." + this.value() + ".js", function() {
+                        kendo.ui.progress($("#grid"), false);
+                        createGrid();
+                    });
+                }
+
+                function createGrid() {
+                    var element = $("#grid");
+
+                    if (element.data("kendoGrid")) {
+                        element.data("kendoGrid").destroy();
+                        element.empty();
+                    }
+
+                    element.kendoGrid({
+                        dataSource: dataSource,
+                        pageable: {
+                            refresh: true,
+                            pageSizes: true,
+                            buttonCount: 5
+                        },
+                        filterable: true,
+                        sortable: true,
+                        columnMenu: true,
+                        toolbar: ["create"],
+                        columns: [
+                            "ProductName",
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                            { field: "Discontinued", width: "100px" },
+                            { command: ["edit", "destroy"], title: " ", width: "300px" }],
+                        editable: "inline"
+                    });
+                }
+
+                $(document).ready(function() {
+                    $("#language").kendoDropDownList({
+                        change: changeLanguage,
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [
+                            {text: "bg-BG"},
+                            {text: "de-DE"},
+                            {text: "en-US"},
+                            {text: "ru-RU"}
+                        ]
+                    });
+
+                    $("#language").data("kendoDropDownList").trigger("change");
+                });
+            </script>
+        </div>
