@@ -116,6 +116,7 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
+                // TODO: Arc
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
                 } else if (srcElement instanceof d.Image) {
@@ -230,17 +231,17 @@
             }
 
             var s = segments[0];
-            ctx.moveTo(s.anchor.x, s.anchor.y);
+            ctx.moveTo(s.anchor().x, s.anchor().y);
 
             for (var i = 1; i < segments.length; i++) {
                 var ps = segments[i - 1];
                 s = segments[i];
-                if (ps.controlOut && s.controlIn) {
-                    ctx.bezierCurveTo(ps.controlOut.x, ps.controlOut.y,
-                                      s.controlIn.x, s.controlIn.y,
-                                      s.anchor.x, s.anchor.y);
+                if (ps.controlOut() && s.controlIn()) {
+                    ctx.bezierCurveTo(ps.controlOut().x, ps.controlOut().y,
+                                      s.controlIn().x, s.controlIn().y,
+                                      s.anchor().x, s.anchor().y);
                 } else {
-                    ctx.lineTo(s.anchor.x, s.anchor.y);
+                    ctx.lineTo(s.anchor().x, s.anchor().y);
                 }
             }
 
@@ -261,7 +262,7 @@
 
     var CircleNode = PathNode.extend({
         renderPoints: function(ctx) {
-            var geometry = this.srcElement.geometry;
+            var geometry = this.srcElement.geometry();
             var c = geometry.center;
             var r = geometry.radius;
 

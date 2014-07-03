@@ -44,8 +44,9 @@
 
         test("sets circle center", function() {
             layer.surface.draw = function(shape) {
-                equal(shape.geometry.center.x, 45);
-                equal(shape.geometry.center.y, 42);
+                var center = shape.geometry().center
+                equal(center.x, 45);
+                equal(center.y, 42);
             };
 
             load();
@@ -54,7 +55,7 @@
         test("sets circle radius to make area proportional", function() {
             var sizes = [];
             layer.surface.draw = function(shape) {
-                sizes.push(Math.round(shape.geometry.radius));
+                sizes.push(Math.round(shape.geometry().radius));
             };
 
             load();
@@ -238,7 +239,7 @@
 
         test("undefined values are ignored", 1, function() {
             layer.surface.draw = function(shape) {
-                equal(shape.geometry.radius, 50);
+                equal(shape.geometry().radius, 50);
             };
             load();
         });

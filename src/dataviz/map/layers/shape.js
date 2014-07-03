@@ -250,7 +250,7 @@
 
         _setLineFill: function(path) {
             var segments = path.segments;
-            if (segments.length < 4 || !segments[0].anchor.equals(last(segments).anchor)) {
+            if (segments.length < 4 || !segments[0].anchor().equals(last(segments).anchor())) {
                 path.options.fill = null;
             }
         },

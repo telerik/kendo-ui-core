@@ -383,13 +383,13 @@
                     }
 
                     if (segmentType === "L") {
-                        parts.push(this.printPoints(segments[i].anchor));
+                        parts.push(this.printPoints(segments[i].anchor()));
                     } else {
-                        parts.push(this.printPoints(segments[i - 1].controlOut, segments[i].controlIn, segments[i].anchor));
+                        parts.push(this.printPoints(segments[i - 1].controlOut(), segments[i].controlIn(), segments[i].anchor()));
                     }
                 }
 
-                output = "M" + this.printPoints(segments[0].anchor) + SPACE + parts.join(SPACE);
+                output = "M" + this.printPoints(segments[0].anchor()) + SPACE + parts.join(SPACE);
                 if (path.options.closed) {
                     output += "Z";
                 }
@@ -411,7 +411,7 @@
         },
 
         segmentType: function(segmentStart, segmentEnd) {
-            return segmentStart.controlOut && segmentEnd.controlIn ? "C" : "L";
+            return segmentStart.controlOut() && segmentEnd.controlIn() ? "C" : "L";
         },
 
         mapStroke: function(stroke) {
@@ -521,17 +521,25 @@
 
     var CircleNode = PathNode.extend({
         geometryChange: function() {
-            var geometry = this.srcElement.geometry;
-            this.attr("cx", geometry.center.x);
-            this.attr("cy", geometry.center.y);
-            this.attr("r", geometry.radius);
+            var center = this.center();
+            this.attr("cx", center.x);
+            this.attr("cy", center.y);
+            this.attr("r", this.radius());
             this.invalidate();
+        },
+
+        center: function() {
+            return this.srcElement.geometry().center;
+        },
+
+        radius: function() {
+            return this.srcElement.geometry().radius;
         },
 
         template: renderTemplate(
             "<circle #= d.renderStyle() # " +
-            "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
-            "r='#= this.srcElement.geometry.radius #' " +
+            "cx='#= d.center().x #' cy='#= d.center().y #' " +
+            "r='#= d.radius() #' " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "#= d.renderTransform() # ></circle>"

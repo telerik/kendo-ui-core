@@ -168,7 +168,7 @@
             var controlOut, endPoint, controlIn, lastControlIn;
 
             if (previousCommand == "s" || previousCommand == "c") {
-                lastControlIn = last(last(path.paths).segments).controlIn;
+                lastControlIn = last(last(path.paths).segments).controlIn();
             }
 
             for (var i = 0; i < parameters.length; i += 4) {
@@ -221,7 +221,7 @@
 
             if (previousCommand == "q" || previousCommand == "t") {
                 var lastSegment = last(last(path.paths).segments);
-                controlPoint = lastSegment.controlIn.clone()
+                controlPoint = lastSegment.controlIn().clone()
                     .translateWith(position.scaleCopy(-1 / 3))
                     .scale(3 / 2);
             }

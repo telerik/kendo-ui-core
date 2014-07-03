@@ -577,7 +577,7 @@
         });
 
         test("sets initial geometry", function() {
-            deepEqual(circle.geometry, circleGeometry);
+            deepEqual(circle.geometry(), circleGeometry);
         });
 
         test("sets initial options", function() {
@@ -593,7 +593,7 @@
                 }
             };
 
-            circle.geometry.center.setX(5);
+            circle.geometry().center.setX(5);
         });
 
         test("changing the radius triggers geometryChange", function() {
@@ -603,7 +603,21 @@
                 }
             };
 
-            circle.geometry.setRadius(5);
+            circle.geometry().setRadius(5);
+        });
+
+        test("changing the geometry triggers geometryChange", function() {
+            circle.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            circle.geometry(new Point(10, 10));
+        });
+
+        test("geometry setter is chainable", function() {
+            equal(circle.geometry(new Point(10, 10)), circle);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -659,7 +673,7 @@
         });
 
         test("sets initial geometry", function() {
-            deepEqual(arc.geometry, arcGeometry);
+            deepEqual(arc.geometry(), arcGeometry);
         });
 
         test("sets initial options", function() {
@@ -675,7 +689,7 @@
                 }
             };
 
-            arc.geometry.center.setX(5);
+            arc.geometry().center.setX(5);
         });
 
         test("changing a geometry field triggers geometryChange", 2, function() {
@@ -685,8 +699,8 @@
                 }
             };
 
-            arc.geometry.setRadiusX(100);
-            arc.geometry.setCounterClockwise(true);
+            arc.geometry().setRadiusX(100);
+            arc.geometry().setCounterClockwise(true);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -737,7 +751,7 @@
         });
 
         test("parameter-less constructor creates anchor", function() {
-            ok(new Segment().anchor);
+            ok(new Segment().anchor());
         });
 
         test("changing the anchor point triggers geometryChange", function() {
@@ -747,7 +761,21 @@
                 }
             };
 
-            segment.anchor.setX(5);
+            segment.anchor().setX(5);
+        });
+
+        test("setting the anchor point triggers geometryChange", function() {
+            segment.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            segment.anchor(new Point());
+        });
+
+        test("anchor setter is chainable", function() {
+            equal(segment.anchor(new Point()), segment);
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
@@ -757,7 +785,21 @@
                 }
             };
 
-            segment.controlIn.setX(5);
+            segment.controlIn().setX(5);
+        });
+
+        test("setting the control point (in) triggers geometryChange", function() {
+            segment.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            segment.controlIn(new Point());
+        });
+
+        test("controlIn setter is chainable", function() {
+            equal(segment.controlIn(new Point()), segment);
         });
 
         test("changing the control point (out) triggers geometryChange", function() {
@@ -767,7 +809,21 @@
                 }
             };
 
-            segment.controlOut.setX(5);
+            segment.controlOut().setX(5);
+        });
+
+        test("controlOut setter is chainable", function() {
+            equal(segment.controlOut(new Point()), segment);
+        });
+
+        test("setting the control point (out) triggers geometryChange", function() {
+            segment.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            segment.controlOut(new Point());
         });
 
         test("boundingBoxTo returns the line bounding box to the passed segment if all control points are not specified", function() {
@@ -850,8 +906,8 @@
             path.moveTo(0, 0);
             path.curveTo(controlOut, controlIn, Point.create(30,30));
 
-            deepEqual(path.segments[0].controlOut, controlOut);
-            deepEqual(path.segments[1].controlIn, controlIn);
+            deepEqual(path.segments[0].controlOut(), controlOut);
+            deepEqual(path.segments[1].controlIn(), controlIn);
         });
 
         test("changing the control points triggers geometryChange", 2, function() {

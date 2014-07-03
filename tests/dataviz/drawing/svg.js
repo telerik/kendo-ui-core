@@ -725,7 +725,7 @@
                 }
             };
 
-            circle.geometry.center.scale(2);
+            circle.geometry().center.scale(2);
         });
 
         test("geometryChange sets radius", 1, function() {
@@ -735,7 +735,7 @@
                 }
             };
 
-            circle.geometry.setRadius(60);
+            circle.geometry().setRadius(60);
         });
     })();
 
