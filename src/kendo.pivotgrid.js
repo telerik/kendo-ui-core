@@ -1444,9 +1444,12 @@ var __meta__ = {
     }
 
     var filterFunctionFormats = {
-        contains: ", InStr({0}.MemberValue,\"{1}\")",
-        startswith: ", Left({0}.MemberValue,Len(\"{1}\"))=\"{1}\"",
-        endswith: ", Right({0}.MemberValue,Len(\"{1}\"))=\"{1}\""
+        contains: ", InStr({0}.CurrentMember.MEMBER_CAPTION,\"{1}\") > 0",
+        doesnotcontain: ", InStr({0}.CurrentMember.MEMBER_CAPTION,\"{1}\") = 0",
+        startswith: ", Left({0}.CurrentMember.MEMBER_CAPTION,Len(\"{1}\"))=\"{1}\"",
+        endswith: ", Right({0}.CurrentMember.MEMBER_CAPTION,Len(\"{1}\"))=\"{1}\"",
+        eq: ", {0}.CurrentMember.MEMBER_CAPTION = \"{1}\"",
+        neq: ", NOT {0}.CurrentMember.MEMBER_CAPTION = \"{1}\""
     };
 
     function serializeFilters(filter) {

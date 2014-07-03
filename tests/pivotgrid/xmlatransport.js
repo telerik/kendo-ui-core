@@ -368,7 +368,20 @@
             filter: { filters: [{ operator: "contains", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, InStr([foo].MemberValue,"zoo"))) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, InStr([foo].CurrentMember.MEMBER_CAPTION,"zoo") > 0)) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap doesnotcontain filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "doesnotcontain", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, InStr([foo].CurrentMember.MEMBER_CAPTION,"zoo") = 0)) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap startswith filter is generated", function() {
@@ -381,7 +394,7 @@
             filter: { filters: [{ operator: "startswith", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Left([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Left([foo].CurrentMember.MEMBER_CAPTION,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap endswith filter is generated", function() {
@@ -394,7 +407,33 @@
             filter: { filters: [{ operator: "endswith", field: "[foo]", value: "zoo" }] }
         }, "read");
 
-        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Right([foo].MemberValue,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, Right([foo].CurrentMember.MEMBER_CAPTION,Len("zoo"))="zoo")) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap eq filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "eq", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, [foo].CurrentMember.MEMBER_CAPTION = "zoo")) ON 0 FROM [cubeName])') > -1);
+    });
+
+    test("parameterMap neq filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "neq", field: "[foo]", value: "zoo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, NOT [foo].CurrentMember.MEMBER_CAPTION = "zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
     test("parameterMap create empty discover statment wrap", function() {
