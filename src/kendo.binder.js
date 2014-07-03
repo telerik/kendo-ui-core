@@ -779,11 +779,11 @@ var __meta__ = {
                 bindElement(e.item[0], e.data, this._ns(e.ns), [e.data].concat(this.bindings[bindingName]._parents()));
             },
 
-            dataBinding: function() {
+            dataBinding: function(e) {
                 var idx,
                     length,
                     widget = this.widget,
-                    items = widget.items();
+                    items = e.removedItems || widget.items();
 
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     unbindElementTree(items[idx]);
@@ -803,14 +803,14 @@ var __meta__ = {
                 var idx,
                     length,
                     widget = this.widget,
-                    items = widget.items(),
+                    items = e.addedItems || widget.items(),
                     dataSource = widget[fieldName],
                     view,
                     parents,
                     groups = dataSource.group() || [];
 
                 if (items.length) {
-                    view = dataSource.flatView();
+                    view = e.addedDataItems || dataSource.flatView();
                     parents = this.bindings[bindingName]._parents();
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
