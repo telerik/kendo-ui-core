@@ -327,32 +327,46 @@
             },
             content: function (content) {
                 if (content !== undefined) {
-                    var bounds = this.bounds(),
-                        options = deepExtend({ text: "", width: bounds.width, height: bounds.height }, this.options.content);
+                    var options = this.options;
+                    var bounds = this.bounds();
 
                     if (diagram.Utils.isString(content)) {
-                        this.options.content.text = content;
-                        options.text = content;
+                        options.content.text = content;
                     } else {
-                        this.options.content = options;
+                        options.content = options;
                     }
 
-                    if (this.shapeVisual instanceof TextBlock) {
-                        this._contentVisual = this.shapeVisual;
-                    }
+                    var contentOptions = options.content;
+                    var contentVisual = this._contentVisual;
 
-                    if (!this._contentVisual && this.options.content.text) {
-                        this._contentVisual = new TextBlock();
+                    if (!contentVisual && contentOptions.text) {
+                        this._contentVisual = new TextBlock(contentOptions);
+                        this._alignContent();
                         this.visual.append(this._contentVisual);
-                    }
-
-                    if (this._contentVisual) {
-                        this._contentVisual.redraw(options);
+                    } else if (contentVisual) {
+                        contentVisual.redraw(contentOptions);
+                        this._alignContent();
                     }
                 }
 
                 return this.options.content.text;
             },
+
+            _alignContent: function() {
+                var contentOptions = this.options.content || {};
+                var contentVisual = this._contentVisual;
+                if (contentVisual && contentOptions.align) {
+                    var containerRect = this.visual._measure();
+                    var aligner = new diagram.RectAlign(containerRect);
+                    var contentBounds = contentVisual.drawingElement.bbox(null);
+
+                    var contentRect = new Rect(0, 0, contentBounds.width(), contentBounds.height());
+                    var alignedBounds = aligner.align(contentRect, contentOptions.align);
+
+                    contentVisual.position(alignedBounds.topLeft());
+                }
+            },
+
             _hitTest: function (point) {
                 var bounds = this.bounds();
                 return this.visible() && bounds.contains(point) && this.options.enable;
@@ -646,14 +660,11 @@
             redraw: function (options) {
                 if (options) {
                     this.options = deepExtend({}, this.options, options);
-                }
 
-                if (this._contentVisual) {
-                    this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
-                }
-                this.shapeVisual.redraw(options);
-                if (options && options.content) {
-                    this.content(options.content);
+                    this.shapeVisual.redraw(options);
+                    if (options && options.content) {
+                        this.content(options.content);
+                    }
                 }
             },
             _triggerBoundsChange: function () {

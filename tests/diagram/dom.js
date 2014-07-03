@@ -57,7 +57,7 @@
         teardown: teardown
     });
 
-    test("addShape adds shape to shapes", function() {
+    test("adds shape to shapes", function() {
         equal(diagram.shapes.length, 1);
     });
 
@@ -279,12 +279,54 @@
         test("text", function() {
             var shape = diagram.addShape({
                 content: {
-                    template: "foo"
+                    text: "foo"
                 }
             });
 
             equal(shape.options.content.text, "foo");
             equal(shape._contentVisual.content(), "foo");
+        });
+
+        test("aligns text", function() {
+            var shape = diagram.addShape({
+                content: {
+                    text: "foo",
+                    align: "center middle"
+                },
+                type: "rectangle",
+                width: 100,
+                height: 100
+            });
+            var content = shape._contentVisual;
+            var contentBBox = content.drawingElement.bbox(null);
+            var position = content.position();
+            close(position.x, (100 - contentBBox.width()) / 2, 1);
+            close(position.y, (100 - contentBBox.height()) / 2, 1);
+        });
+
+        test("aligns text with transformed visual", function() {
+            var shape = diagram.addShape({
+                content: {
+                    text: "foo",
+                    align: "center middle"
+                },
+                type: "rectangle",
+                width: 100,
+                height: 100,
+                x: 200,
+                y: 100,
+                rotation: {
+                    angle: 30
+                }
+            });
+            var rect = new Rect(0, 0, 200, 200);
+            shape.bounds(rect);
+            shape.content("foo");
+            var content = shape._contentVisual;
+            var contentBBox = content.drawingElement.bbox(null);
+            var position = content.position();
+            close(position.x, (100 - contentBBox.width()) / 2, 1);
+            close(position.y, (100 - contentBBox.height()) / 2, 1);
         });
 
         // ------------------------------------------------------------
