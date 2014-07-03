@@ -1331,6 +1331,22 @@ var __meta__ = {
             });
         },
 
+        schemaKPIs: function() {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaKPIs",
+                    restrictions: {
+                        catalogName: that.transport.catalog(),
+                        cubeName: that.transport.cube()
+                    }
+                }
+            }, function(response) {
+                return that.reader.kpis(response);
+            });
+        },
+
         schemaDimensions: function() {
             var that = this;
 
@@ -2172,7 +2188,8 @@ var __meta__ = {
         schemaDimensions: "MDSCHEMA_DIMENSIONS",
         schemaHierarchies: "MDSCHEMA_HIERARCHIES",
         schemaLevels: "MDSCHEMA_LEVELS",
-        schemaMembers: "MDSCHEMA_MEMBERS"
+        schemaMembers: "MDSCHEMA_MEMBERS",
+        schemaKPIs: "MDSCHEMA_KPIS"
     };
 
     var convertersMap = {
@@ -2366,6 +2383,18 @@ var __meta__ = {
             displayFolder: kendo.getter("MEASURE_DISPLAY_FOLDER['#text']", true),
             defaultFormat: kendo.getter("DEFAULT_FORMAT_STRING['#text']", true)
         },
+        kpis: {
+            name: kendo.getter("KPI_NAME['#text']", true),
+            caption: kendo.getter("KPI_CAPTION['#text']", true),
+            value: kendo.getter("KPI_VALUE['#text']", true),
+            goal: kendo.getter("KPI_GOAL['#text']", true),
+            status: kendo.getter("KPI_STATUS['#text']", true),
+            trend: kendo.getter("KPI_TREND['#text']", true),
+            statusGraphic: kendo.getter("KPI_STATUS_GRAPHIC['#text']", true),
+            trendGraphic: kendo.getter("KPI_TREND_GRAPHIC['#text']", true),
+            description: kendo.getter("KPI_DESCRIPTION['#text']", true),
+            groupName: kendo.getter("MEASUREGROUP_NAME['#text']", true)
+        },
         dimensions: {
             name: kendo.getter("DIMENSION_NAME['#text']", true),
             caption: kendo.getter("DIMENSION_CAPTION['#text']", true),
@@ -2499,6 +2528,9 @@ var __meta__ = {
         },
         measures: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.measures);
+        },
+        kpis: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.kpis);
         },
         hierarchies: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.hierarchies);
@@ -3995,6 +4027,7 @@ var __meta__ = {
 
                 if (children > -1) {
                     for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
+                        //TODO: detect whether this data cell is KPI or not!!!
                         result[children + firstEmpty + measureIdx] = {
                             children: children,
                             index: dataIdx,
