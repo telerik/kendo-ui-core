@@ -844,7 +844,23 @@ var __meta__ = {
             columnMenu: false,
             detailTemplate: null,
             columnResizeHandleWidth: 3,
-            mobile: ""
+            mobile: "",
+            messages: {
+                editable: {
+                    cancelDelete: CANCELDELETE,
+                    confirmation: DELETECONFIRM,
+                    confirmDelete: CONFIRMDELETE
+                },
+                commands: {
+                    create: defaultCommands.create.text,
+                    cancel: defaultCommands.cancel.text,
+                    save: defaultCommands.save.text,
+                    destroy: defaultCommands.destroy.text,
+                    edit: defaultCommands.edit.text,
+                    update: defaultCommands.update.text,
+                    canceledit: defaultCommands.canceledit.text
+                }
+            }
         },
 
         destroy: function() {
@@ -2276,7 +2292,7 @@ var __meta__ = {
         _confirmation: function(row) {
             var that = this,
                 editable = that.options.editable,
-                confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
+                confirmation = editable === true || typeof editable === STRING ? that.options.messages.editable.confirmation : editable.confirmation;
 
             if (confirmation !== false && confirmation != null) {
 
@@ -2285,9 +2301,9 @@ var __meta__ = {
                 }
 
                 return that._showMessage({
-                        confirmDelete: editable.confirmDelete || CONFIRMDELETE,
-                        cancelDelete: editable.cancelDelete || CANCELDELETE,
-                        title: confirmation === true ? DELETECONFIRM : confirmation
+                        confirmDelete: editable.confirmDelete || that.options.messages.editable.confirmDelete,
+                        cancelDelete: editable.cancelDelete || that.options.messages.editable.cancelDelete,
+                        title: confirmation === true ? that.options.messages.editable.confirmation : confirmation
                     }, row);
             }
 
@@ -2428,7 +2444,8 @@ var __meta__ = {
             var template = command.template || COMMANDBUTTONTMPL,
                 commandName = typeof command === STRING ? command : command.name || command.text,
                 className = defaultCommands[commandName] ? defaultCommands[commandName].className : "k-grid-" + (commandName || "").replace(/\s/g, ""),
-                options = { className: className, text: commandName, imageClass: "", attr: "", iconClass: "" };
+                options = { className: className, text: commandName, imageClass: "", attr: "", iconClass: "" },
+                messages = this.options.messages.commands;
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
@@ -2448,9 +2465,9 @@ var __meta__ = {
                     command.attr = stringifyAttributes(command.attr);
                 }
 
-                options = extend(true, options, defaultCommands[commandName], command);
+                options = extend(true, options, defaultCommands[commandName], { text: messages[commandName] }, command);
             } else {
-                options = extend(true, options, defaultCommands[commandName]);
+                options = extend(true, options, defaultCommands[commandName], { text: messages[commandName] });
             }
 
             return kendo.template(template)(options);

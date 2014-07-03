@@ -1758,4 +1758,24 @@
         equal(grid.dataItems().length, 2);
     });
 
+    test("Default commands text can be configured through the widget's options", 2, function() {
+        var grid = new Grid(table, {
+            dataSource: [
+                { foo: "foo", bar: "bar" }
+            ],
+            columns: [
+                { command: ["edit", { name: "destroy" }] }
+            ],
+            messages: {
+                commands: {
+                    edit: "foo",
+                    destroy: "bar"
+                }
+            }
+        });
+
+        equal(grid.wrapper.find(".k-grid-edit").text(), "foo");
+        equal(grid.wrapper.find(".k-grid-delete").text(), "bar");
+    });
+
 })();
