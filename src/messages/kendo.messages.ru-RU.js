@@ -47,7 +47,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "settings": "Параметры столбцов",
   "done": "Cделанный",
   "lock": "Запирать",
-  "unlock": "Отпереть"
+  "unlock": "Отпереть",
+  "filter": "Фильтровать"
 });
 }
 
@@ -311,5 +312,21 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Delete event",
   "showFullDay": "Show full day",
   "showWorkDay": "Show business hours"
+});
+}
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required": "{0} обязателен",
+  "pattern": "{0} не верен",
+  "min": "{0} должен быть больше или равен {1}",
+  "max": "{0} должен быть меньше или равен {1}",
+  "step": "{0} не верен",
+  "email": "{0} не корректный email",
+  "url": "{0} не корректный URL",
+  "date": "{0} не корректная дата"
 });
 }
