@@ -596,7 +596,7 @@
         }
 
         function positionedCircleMarker(marker) {
-            var center = marker.drawingElement.geometry.center;
+            var center = marker.drawingElement.geometry().center;
             return center.x !== 0 && center.y !== 0;
         }
 
@@ -929,10 +929,10 @@
 
         test("inits path", function() {
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 0, y: 0}));
-            ok(segments[1].anchor.equals({x: 200, y: 0}));
-            ok(segments[2].anchor.equals({x: 200, y: 100}));
-            ok(segments[3].anchor.equals({x: 0, y: 100}));
+            ok(segments[0].anchor().equals({x: 0, y: 0}));
+            ok(segments[1].anchor().equals({x: 200, y: 0}));
+            ok(segments[2].anchor().equals({x: 200, y: 100}));
+            ok(segments[3].anchor().equals({x: 0, y: 100}));
             equal(drawingElement.options.closed, true);
         });
 
@@ -949,10 +949,10 @@
                 height: 50
             });
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 0, y: 0}));
-            ok(segments[1].anchor.equals({x: 300, y: 0}));
-            ok(segments[2].anchor.equals({x: 300, y: 50}));
-            ok(segments[3].anchor.equals({x: 0, y: 50}));
+            ok(segments[0].anchor().equals({x: 0, y: 0}));
+            ok(segments[1].anchor().equals({x: 300, y: 0}));
+            ok(segments[2].anchor().equals({x: 300, y: 50}));
+            ok(segments[3].anchor().equals({x: 0, y: 50}));
         });
 
         test("updates position", function() {
@@ -1041,8 +1041,8 @@
 
         test("inits path", function() {
             var segments = drawingElement.paths[0].segments;
-            ok(segments[0].anchor.equals({x: 100, y: 100}));
-            ok(segments[1].anchor.equals({x: 200, y: 200}));
+            ok(segments[0].anchor().equals({x: 100, y: 100}));
+            ok(segments[1].anchor().equals({x: 200, y: 200}));
         });
 
         test("inits container", function() {
@@ -1066,8 +1066,8 @@
                 data: "M100,100L300,200"
             });
             var segments = path.drawingElement.paths[0].segments;
-            ok(segments[0].anchor.equals({x: 100, y: 100}));
-            ok(segments[1].anchor.equals({x: 300, y: 200}));
+            ok(segments[0].anchor().equals({x: 100, y: 100}));
+            ok(segments[1].anchor().equals({x: 300, y: 200}));
         });
 
         test("redraw does not redraw path if no data is passed", 0, function() {
@@ -1182,8 +1182,8 @@
 
         test("inits path", function() {
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 10, y: 20}));
-            ok(segments[1].anchor.equals({x: 20, y: 40}));
+            ok(segments[0].anchor().equals({x: 10, y: 20}));
+            ok(segments[1].anchor().equals({x: 20, y: 40}));
         });
 
         test("redraw updates path if from point is passed", function() {
@@ -1191,8 +1191,8 @@
                 from: new Point(5, 25)
             });
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 5, y: 25}));
-            ok(segments[1].anchor.equals({x: 20, y: 40}));
+            ok(segments[0].anchor().equals({x: 5, y: 25}));
+            ok(segments[1].anchor().equals({x: 20, y: 40}));
         });
 
         test("redraw updates path if to point is passed", function() {
@@ -1200,8 +1200,8 @@
                 to: new Point(30, 50)
             });
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 10, y: 20}));
-            ok(segments[1].anchor.equals({x: 30, y: 50}));
+            ok(segments[0].anchor().equals({x: 10, y: 20}));
+            ok(segments[1].anchor().equals({x: 30, y: 50}));
         });
 
         test("redraw triggers geometry change once", 1, function() {
@@ -1255,9 +1255,9 @@
 
         test("inits path", function() {
             var segments = drawingElement.segments;
-            ok(segments[0].anchor.equals({x: 10, y: 20}));
-            ok(segments[1].anchor.equals({x: 30, y: 40}));
-            ok(segments[2].anchor.equals({x: 15, y: 10}));
+            ok(segments[0].anchor().equals({x: 10, y: 20}));
+            ok(segments[1].anchor().equals({x: 30, y: 40}));
+            ok(segments[2].anchor().equals({x: 15, y: 10}));
         });
 
         test("redraw updates path", function() {
@@ -1266,8 +1266,8 @@
             });
             var segments = drawingElement.segments;
             equal(segments.length, 2);
-            ok(segments[0].anchor.equals({x: 15, y: 30}));
-            ok(segments[1].anchor.equals({x: 35, y: 35}));
+            ok(segments[0].anchor().equals({x: 15, y: 30}));
+            ok(segments[1].anchor().equals({x: 35, y: 35}));
         });
 
         test("redraw trigger geometry change once", 1, function() {
@@ -1421,7 +1421,7 @@
                     radius: 10
                 });
                 drawingElement = circle.drawingElement;
-                circleGeometry = drawingElement.geometry;
+                circleGeometry = drawingElement.geometry();
             }
         });
 
@@ -1435,7 +1435,7 @@
             circle = new Circle({
                 radius: 20
             });
-            circleGeometry = circle.drawingElement.geometry;
+            circleGeometry = circle.drawingElement.geometry();
             equal(circleGeometry.center.x, 20);
             equal(circleGeometry.center.y, 20);
         });
@@ -1444,7 +1444,7 @@
             circle = new Circle({
                 width: 100
             });
-            circleGeometry = circle.drawingElement.geometry;
+            circleGeometry = circle.drawingElement.geometry();
             equal(circleGeometry.getRadius(), 50);
             equal(circleGeometry.center.x, 50);
             equal(circleGeometry.center.y, 50);
@@ -1768,7 +1768,7 @@
                markerShape = new CircleMarker({
                     position: "start"
                });
-               circle = markerShape.drawingElement.geometry;
+               circle = markerShape.drawingElement.geometry();
             }
         });
 

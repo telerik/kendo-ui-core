@@ -730,7 +730,7 @@
                 targetSegment = segments[segments.length - 1];
             }
             if (targetSegment) {
-                point = this._transformToPath(targetSegment.anchor, path);
+                point = this._transformToPath(targetSegment.anchor(), path);
                 this.anchor.move(point.x, point.y);
             }
         }
@@ -777,14 +777,22 @@
             if (options.position == START) {
                 targetSegment = segments[0];
                 if (targetSegment) {
-                    endPoint = targetSegment.anchor;
-                    startPoint = targetSegment.controlOut ? targetSegment.controlOut : (segments[1] || {}).anchor;
+                    endPoint = targetSegment.anchor();
+                    startPoint = targetSegment.controlOut();
+                    var nextSegment = segments[1];
+                    if (!startPoint && nextSegment) {
+                        startPoint = nextSegment.anchor();
+                    }
                 }
             } else {
                 targetSegment = segments[segments.length - 1];
                 if (targetSegment) {
-                    endPoint = targetSegment.anchor;
-                    startPoint = targetSegment.controlIn ? targetSegment.controlIn : (segments[segments.length - 2] || {}).anchor;
+                    endPoint = targetSegment.anchor();
+                    startPoint = targetSegment.controlIn();
+                    var prevSegment = segments[segments.length - 2];
+                    if (!startPoint && prevSegment) {
+                        startPoint = prevSegment.anchor();
+                    }
                 }
             }
             if (endPoint) {
@@ -941,7 +949,7 @@
                     this._setData(data);
                     if (!this._updateSize(options)) {
                         this._initSize();
-                    };
+                    }
                     this._redrawMarkers(true, options);
                 } else {
                     this._updateSize(options);
