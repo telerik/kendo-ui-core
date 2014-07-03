@@ -82,7 +82,7 @@ var __meta__ = {
                     msMax += MS_PER_DAY;
                 }
 
-                this._columnCount = ((msMax - msMin) / msMajorInterval);
+                this._columnCount = Math.ceil((msMax - msMin) / msMajorInterval);
             }
        },
 
@@ -114,21 +114,30 @@ var __meta__ = {
             this.slotTemplate = kendo.template(options.slotTemplate, settings);
         },
 
-        _groups: function() {
-            var groupCount = 1;
-            var columnCount = this._columnCount;
+        _render: function(dates) {
+            var that = this;
 
-            this.groups = [];
-            
-            for (var idx = 0; idx < groupCount; idx++) {
-                var view = this._addResourceView(idx);
+            dates = dates || [];
 
-                //for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
-                    view.addTimeSlotCollection(this._dates[0], kendo.date.addDays(this._dates[0], 1));
-                //}
-            }
+            //dates are considered as resource for creating columns
+            //in current case they are not
+            that._dates = dates;
 
-            this._timeSlotGroups(groupCount, columnCount);
+            that._getColumnCount();
+
+            that._startDate = dates[0];
+
+            that._endDate = dates[(dates.length - 1) || 0];
+
+            that.createLayout(that._layout(dates));
+
+            that._content(that._columnCount);
+
+            that.refreshLayout();
+
+
+             //To be implemented
+            //throw "_render is not implemented";
         },
 
         _layout: function(dates) {
@@ -184,20 +193,14 @@ var __meta__ = {
             var start = options.startTime;
             var end = options.endTime;
             var isVerticalGroupped = false;
-            var resources = this.groupedResources;
            
 
             //add support for more
             var groupsCount = 1;
-            var rowCount = 1;
+            var rowCount;
             //======
-            
-            if (resources.length) {
-                isVerticalGroupped = that._groupOrientation() === "vertical";
-                if (isVerticalGroupped) {
-                    rowCount = this._rowCountForLevel(this.rowLevels.length - 1);
-                }
-            }
+
+            rowCount = this._groupCount();
 
             var html = '';
 
@@ -233,30 +236,84 @@ var __meta__ = {
             this.content.find("table").append(html);
         },
 
-        _render: function(dates) {
-            var that = this;
+        _groups: function() {
+            var groupCount = this._groupCount();
+            var columnCount = this._columnCount;
 
-            dates = dates || [];
+            this.groups = [];
 
-            //dates are considered as resource for creating columns
-            //in current case they are not
-            that._dates = dates;
+            for (var idx = 0; idx < groupCount; idx++) {
+                var view = this._addResourceView(idx);
 
-            that._getColumnCount();
+                view.addTimeSlotCollection(this._dates[0], kendo.date.addDays(this._dates[0], 1));
+            }
 
-            that._startDate = dates[0];
+            this._timeSlotGroups(groupCount, columnCount);
+        },
 
-            that._endDate = dates[(dates.length - 1) || 0];
-
-            that.createLayout(that._layout(dates)); 
-
-            that._content(that._columnCount);
-
-            that.refreshLayout();
-
-
-             //To be implemented
+        _timeSlotGroups: function(groupCount, columnCount) {
+            //To be implemented
             //throw "_render is not implemented";
+            var interval = this._timeSlotInterval();
+
+            var tableRows = this.content.find("tr");
+
+            tableRows.attr("role", "row");
+
+            var rowCount = tableRows.length;
+
+            if (this._isVerticallyGrouped()) {
+                //always returns 1
+                rowCount = Math.floor(rowCount / groupCount);
+            }
+
+            for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
+                var rowMultiplier = 0;
+
+                if (this._isVerticallyGrouped()) {
+                    rowMultiplier = groupIndex;
+                }
+
+                var rowIndex = rowMultiplier * rowCount;
+                var time;
+                var cellMultiplier = 0;
+
+                if (!this._isVerticallyGrouped()) {
+                    cellMultiplier = groupIndex;
+                }
+
+                while (rowIndex < (rowMultiplier + 1) * rowCount) {
+                    var cells = tableRows[rowIndex].children;
+                    var group = this.groups[groupIndex];
+
+                    time = getMilliseconds(new Date(+this.options.startTime));
+
+                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
+                        var cell = cells[cellIndex];
+
+                        var collectionIndex = 0;
+
+                        var collection = group.getTimeSlotCollection(collectionIndex);
+
+                        //need update for larger time intervals than one day
+                        var currentDate = this._dates[collectionIndex];
+
+                        var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+
+                        var start = (currentTime + time) + (interval * cellIndex);
+
+                        var end = start + interval;
+
+                        cell.setAttribute("role", "gridcell");
+                        cell.setAttribute("aria-selected", false);
+
+                        collection.addTimeSlot(cell, start, end);
+                    }
+
+                    time += interval;
+                    rowIndex ++;
+                }
+            }
         },
 
         startDate: function() {
@@ -280,71 +337,6 @@ var __meta__ = {
         _timeSlotInterval: function() {
             var options = this.options;
             return msMajorInterval = options.majorTick * kendo.date.MS_PER_MINUTE;
-        },
-
-        _timeSlotGroups: function(groupCount, columnCount) {
-            //To be implemented
-            //throw "_render is not implemented";
-            var interval = this._timeSlotInterval();
-
-            var tableRows = this.content.find("tr:not(.k-scheduler-header-all-day)");
-
-            tableRows.attr("role", "row");
-
-            var rowCount = tableRows.length;
-
-            if (this._isVerticallyGrouped()) {
-                rowCount = Math.floor(rowCount / groupCount);
-            }
-
-            for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
-                var rowMultiplier = 0;
-
-                if (this._isVerticallyGrouped()) {
-                    rowMultiplier = groupIndex;
-                }
-
-                var rowIndex = rowMultiplier * rowCount;
-                var time;
-                var cellMultiplier = 0;
-
-                if (!this._isVerticallyGrouped()) {
-                    cellMultiplier = groupIndex;
-                }
-
-                while (rowIndex < (rowMultiplier + 1) * rowCount) {
-                    var cells = tableRows[rowIndex].children;
-                    var group = this.groups[groupIndex];
-
-                    if (rowIndex % rowCount === 0) {
-                        time = getMilliseconds(new Date(+this.options.startTime));
-                    }
-
-                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
-                        var cell = cells[cellIndex];
-
-                        var collectionIndex = 0;
-
-                        var collection = group.getTimeSlotCollection(collectionIndex);
-
-                        var currentDate = this._dates[collectionIndex];
-
-                        var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-
-                        var start = currentTime + time;
-
-                        var end = start + interval;
-
-                        cell.setAttribute("role", "gridcell");
-                        cell.setAttribute("aria-selected", false);
-
-                        collection.addTimeSlot(cell, start, end);
-                    }
-
-                    time += interval;
-                    rowIndex ++;
-                }
-            }
         },
 
         nextDate: function() {
@@ -473,7 +465,7 @@ var __meta__ = {
 
                             this._positionEvent(occurrence, element, range);
 
-                            addContinuousEvent(group, range, element, false);
+                            //addContinuousEvent(group, range, element, false);
                         }
                     }
                 }
@@ -597,6 +589,7 @@ var __meta__ = {
             var end = event.endTime || event.end;
 
             var rect = slotRange.innerRect(start, end, false);
+            rect.top = slotRange.start.offsetTop;
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
             var width = rect.right - rect.left -2;
@@ -604,19 +597,32 @@ var __meta__ = {
             if (width < 0) {
                 width = 0;
             }
-            
+
             if (height < 0) {
                 height = 0;
             }
 
+            //need update
             element.css( {
-                top: 0,
+                top:rect.top,
                 height: height,
                 width: width,
                 left: rect.left
             } );
 
-            this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
+            //this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
+        },
+
+        _groupCount: function() {
+            var resources = this.groupedResources;
+
+            if (resources.length) {
+                isVerticalGroupped = this._groupOrientation() === "vertical";
+                if (isVerticalGroupped) {
+                    return this._rowCountForLevel(this.rowLevels.length - 1);
+                }
+            }
+            return 1;
         },
 
         _rowCountForLevel: function(level) {

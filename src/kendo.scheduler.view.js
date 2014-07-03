@@ -669,6 +669,8 @@ var __meta__ = {
         _rect: function(property, start, end, snap) {
             var top;
             var bottom;
+            var left;
+            var right;
             var startSlot = this.start;
             var endSlot = this.end;
 
@@ -703,13 +705,17 @@ var __meta__ = {
                 var endSlotDuration = endSlot.end - endSlot.start;
 
                 bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
+
+                //need update:
+                left = startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration;
+                right = endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration;
             }
 
             return {
                 top: top,
                 bottom: bottom,
-                left: startSlot.offsetLeft + startSlot.clientWidth,
-                right: endSlot.offsetLeft + endSlot.clientWidth
+                left: left,
+                right: right
             };
         },
 
