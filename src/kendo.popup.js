@@ -38,7 +38,6 @@ var __meta__ = {
         ACTIVEBORDERREGEXP = /k-state-border-(\w+)/,
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
-        WINDOW = $(window),
         DOCUMENT_ELEMENT = $(document.documentElement),
         RESIZE_SCROLL = "resize scroll",
         cssPrefix = support.transitions.css,
@@ -195,7 +194,7 @@ var __meta__ = {
 
             if (!options.modal) {
                 DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
-                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+                that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
             }
 
             kendo.destroy(that.element.children());
@@ -240,8 +239,9 @@ var __meta__ = {
 
                     // this binding hangs iOS in editor
                     if (!(support.mobileOS.ios || support.mobileOS.android)) {
-                        WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
-                              .bind(RESIZE_SCROLL, that._resizeProxy);
+                        this._scrollableParents()
+                            .unbind(RESIZE_SCROLL, that._resizeProxy)
+                            .bind(RESIZE_SCROLL, that._resizeProxy);
                     }
                 }
 
@@ -319,7 +319,7 @@ var __meta__ = {
                 });
 
                 DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
-                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+                that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
 
                 if (skipEffects) {
                     animation = { hide: true, effects: {} };
@@ -415,6 +415,16 @@ var __meta__ = {
                 }
             }
             return output;
+        },
+
+        _scrollableParents: function() {
+            return $(this.options.anchor)
+                       .parentsUntil("body")
+                       .filter(function(index, element) {
+                            var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
+                            return computedStyle["overflow"] != "visible";
+                       })
+                       .add(window);
         },
 
         _position: function(fixed) {
