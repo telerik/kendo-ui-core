@@ -475,6 +475,22 @@
             equal(text.options.font, "12px sans-serif");
         });
 
+        test("sets default fill", function() {
+            equal(text.options.fill.color, "#000");
+        });
+
+        test("default fill can be overriden", function() {
+            text = new Text("Foo", new g.Point(), { fill: { color: "foo" } });
+
+            equal(text.options.fill.color, "foo");
+        });
+
+        test("default fill can be disabled", function() {
+            text = new Text("Foo", new g.Point(), { fill: null });
+
+            equal(text.options.fill, null);
+        });
+
         test("changing the position triggers geometryChange", function() {
             text.observer = {
                 geometryChange: function() {
@@ -586,6 +602,15 @@
             ok(circle.options.foo);
         });
 
+        test("sets default stroke", function() {
+            equal(circle.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            circle = new Circle(circleGeometry, { stroke: { color: "foo" } });
+            equal(circle.options.stroke.color, "foo");
+        });
+
         test("changing the center triggers geometryChange", function() {
             circle.observer = {
                 geometryChange: function() {
@@ -680,6 +705,15 @@
             var arc = new Arc(arcGeometry, { foo: true });
 
             ok(arc.options.foo);
+        });
+
+        test("sets default stroke", function() {
+            equal(arc.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            arc = new Arc(arcGeometry, { stroke: { color: "foo" } });
+            equal(arc.options.stroke.color, "foo");
         });
 
         test("changing the center triggers geometryChange", function() {
@@ -861,6 +895,20 @@
             }
         });
 
+        test("sets initial options", function() {
+            var path = new Path({ foo: true });
+            ok(path.options.foo);
+        });
+
+        test("sets default stroke", function() {
+            equal(path.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            path = new Path({ stroke: { color: "foo" } });
+            equal(path.options.stroke.color, "foo");
+        });
+
         test("moveTo adds segment", function() {
             path.moveTo(0, 0);
             equal(path.segments.length, 1);
@@ -923,11 +971,6 @@
 
             controlOut.setX(20);
             controlIn.setY(30);
-        });
-
-        test("sets initial options", function() {
-            var path = new Path({ foo: true });
-            ok(path.options.foo);
         });
 
         test("adding a point triggers geometryChange", function() {
@@ -1048,6 +1091,20 @@
             setup: function() {
                 multiPath = new MultiPath();
             }
+        });
+
+        test("sets initial options", function() {
+            multiPath = new MultiPath({ foo: true });
+            ok(multiPath.options.foo);
+        });
+
+        test("sets default stroke", function() {
+            equal(multiPath.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            multiPath = new MultiPath({ stroke: { color: "foo" } });
+            equal(multiPath.options.stroke.color, "foo");
         });
 
         test("moveTo adds path", function() {

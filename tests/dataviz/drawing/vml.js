@@ -554,6 +554,7 @@
         });
 
         test("renders on attribute when no stroke is set", function() {
+            path.options.set("stroke", null);
             ok(strokeNode.render().indexOf("on='false'") !== -1);
         });
 

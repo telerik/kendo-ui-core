@@ -203,6 +203,10 @@
             if (!this.options.font) {
                 this.options.font = "12px sans-serif";
             }
+
+            if (!defined(this.options.fill)) {
+                this.fill("#000");
+            }
         },
 
         content: function(value) {
@@ -244,6 +248,10 @@
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Circle());
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         bbox: function(transformation) {
@@ -268,6 +276,10 @@
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Arc());
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         bbox: function(transformation) {
@@ -402,11 +414,12 @@
 
     var Path = Element.extend({
         init: function(options) {
-            var path = this;
+            this.segments = [];
+            Element.fn.init.call(this, options);
 
-            path.segments = [];
-
-            Element.fn.init.call(path, options);
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         moveTo: function(x, y) {
@@ -487,6 +500,10 @@
         init: function(options) {
             this.paths = [];
             Element.fn.init.call(this, options);
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         moveTo: function(x, y) {
