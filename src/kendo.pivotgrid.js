@@ -792,6 +792,22 @@ var __meta__ = {
             });
         },
 
+        schemaMembers: function(restrictions) {
+            var that = this;
+
+            return that.discover({
+                data: {
+                    command: "schemaMembers",
+                    restrictions: extend({
+                       catalogName: that.transport.catalog(),
+                       cubeName: that.transport.cube()
+                   }, restrictions)
+                }
+            }, function(response) {
+                return that.reader.members(response);
+            });
+        },
+
         _params: function(data) {
             if (this._clearAxesData) {
                 this._axes = {};
@@ -1507,7 +1523,8 @@ var __meta__ = {
         schemaMeasures: "MDSCHEMA_MEASURES",
         schemaDimensions: "MDSCHEMA_DIMENSIONS",
         schemaHierarchies: "MDSCHEMA_HIERARCHIES",
-        schemaLevels: "MDSCHEMA_LEVELS"
+        schemaLevels: "MDSCHEMA_LEVELS",
+        schemaMembers: "MDSCHEMA_MEMBERS"
     };
 
     var convertersMap = {
@@ -1730,6 +1747,14 @@ var __meta__ = {
             orderingProperty: kendo.getter("LEVEL_ORDERING_PROPERTY['#text']", true),
             origin: kendo.getter("LEVEL_ORIGIN['#text']", true),
             hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true)
+        },
+        members: {
+            name: kendo.getter("MEMBER_NAME['#text']", true),
+            caption: kendo.getter("MEMBER_CAPTION['#text']", true),
+            uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
+            dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+            hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true),
+            levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true)
         }
     };
 
@@ -1817,6 +1842,9 @@ var __meta__ = {
         },
         catalogs: function(root) {
             return this._mapSchema(root, schemaDataReaderMap.catalogs);
+        },
+        members: function(root) {
+            return this._mapSchema(root, schemaDataReaderMap.members);
         }
     });
 

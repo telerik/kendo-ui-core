@@ -50,20 +50,22 @@
                     dataSource: {
                         type: "xmla",
                     //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
-                        //columns: [ { name: "[Date].[Calendar]" }/*, { name: "[Product].[Product Name].[All]" }*/],
-                        //measures: ["[Measures].[Internet Order Lines Count]"],
-                        //columns: ["[Department]"],
+                        columns: [ { name: "[Date].[Calendar]" } ],
+                        measures: ["[Measures].[Internet Order Lines Count]"],
                         transport: {
                             connection: {
-                               catalog: "Adventure Works DW 2008R2",
-                              cube: "Adventure Works"
+                                catalog: "Adventure Works Internet Sales Model",
+                                cube: "Adventure Works Internet Sales Model"
+//                               catalog: "Adventure Works DW 2008R2",
+//                              cube: "Adventure Works"
                              //   catalog: "FoodMart",
                               //  cube: "HR"
                             },
                             read: {
                             //    url: "http://sampledata.infragistics.com/olap/msmdpump.dll",//"http://krustev:8080/olap/msmdpump.dll",
                             //    url: "http://korchev:8080/foodmart/xmla",
-                                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                                //url: "http://demos.telerik.com/olap/msmdpump.dll",
+                                url: "http://krustev:8080/olap/msmdpump.dll",
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"
@@ -118,10 +120,11 @@
 
                                             var name = options.data.levelUniqueName;
 
-                                            var restrictions = {
-                                                catalogName: pivot.dataSource.catalog(),
-                                                cubeName: pivot.dataSource.cube(),
-                                            }
+//                                            var restrictions = {
+//                                                catalogName: pivot.dataSource.catalog(),
+//                                                cubeName: pivot.dataSource.cube(),
+//                                            }
+                                            var restrictions = {};
 
                                             if (!name) {
                                                 restrictions.levelUniqueName = defaultMember;
@@ -130,23 +133,26 @@
                                                 restrictions.treeOp = 1;
                                             }
 
-                                            pivot.dataSource.discover({
-                                                data: {
-                                                    command: "MDSCHEMA_MEMBERS",
-                                                    restrictions: restrictions
-                                                }
-                                                }).done(function(response) {
-                                                response = pivot.dataSource.reader._mapSchema(response, {
-                                                    name: kendo.getter("MEMBER_NAME['#text']", true),
-                                                    caption: kendo.getter("MEMBER_CAPTION['#text']", true),
-                                                    description: kendo.getter("DESCRIPTION['#text']", true),
-                                                    uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
-                                                    dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
-                                                    levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
-                                                    hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true)
-                                                });
-                                                options.success(response);
-                                            });
+//                                            pivot.dataSource.discover({
+//                                                data: {
+//                                                    command: "MDSCHEMA_MEMBERS",
+//                                                    restrictions: restrictions
+//                                                }
+//                                                }).done(function(response) {
+//                                                response = pivot.dataSource.reader._mapSchema(response, {
+//                                                    name: kendo.getter("MEMBER_NAME['#text']", true),
+//                                                    caption: kendo.getter("MEMBER_CAPTION['#text']", true),
+//                                                    description: kendo.getter("DESCRIPTION['#text']", true),
+//                                                    uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
+//                                                    dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
+//                                                    levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
+//                                                    hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true)
+//                                                });
+//                                                options.success(response);
+//                                            });
+
+                                            pivot.dataSource.schemaMembers(restrictions).done(options.success);
+
                                         }
                                     }
                                 }

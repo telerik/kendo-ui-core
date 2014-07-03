@@ -202,4 +202,20 @@
         equal(result[0].origin, 2);
         equal(result[0].hierarchyUniqueName, "[Customer].[Address Line 1]");
     });
+
+    test("members are read from response", function() {
+        var reader = new kendo.data.XmlaDataReader({});
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <DiscoverResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla"><row> <CATALOG_NAME>Adventure Works Internet Sales Model</CATALOG_NAME> <DIMENSION_UNIQUE_NAME>[Date]</DIMENSION_UNIQUE_NAME> <HIERARCHY_UNIQUE_NAME>[Date].[Calendar]</HIERARCHY_UNIQUE_NAME> <LEVEL_UNIQUE_NAME>[Date].[Calendar].[(All)]</LEVEL_UNIQUE_NAME> <MEMBER_UNIQUE_NAME>[Date].[Calendar].[All]</MEMBER_UNIQUE_NAME> <MEMBER_NAME>All</MEMBER_NAME> <MEMBER_CAPTION>All</MEMBER_CAPTION></row></root> </return> </DiscoverResponse> </soap:Body> </soap:Envelope>';
+
+        var body = reader.parse(response);
+        var members = reader.members(body);
+
+        equal(members.length, 1);
+        equal(members[0].name, "All");
+        equal(members[0].caption, "All");
+        equal(members[0].uniqueName, "[Date].[Calendar].[All]");
+        equal(members[0].dimensionUniqueName, "[Date]");
+        equal(members[0].levelUniqueName, "[Date].[Calendar].[(All)]");
+        equal(members[0].hierarchyUniqueName, "[Date].[Calendar]");
+    });
 })();

@@ -210,6 +210,18 @@
         dataSource.schemaCatalogs();
     });
 
+    test("schemaMembers calls the transport discover", 1, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                discover: function(options) {
+                    equal(options.data.command, "schemaMembers");
+                }
+            }
+        });
+
+        dataSource.schemaMembers();
+    });
+
     test("schemaMeasures calls the transport discover", 3, function() {
         var dataSource = new PivotDataSource({
             transport: {
@@ -328,6 +340,45 @@
         });
 
         dataSource.schemaCatalogs();
+    });
+
+    test("schemaMembers calls the transport discover", 3, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaMembers");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                }
+            }
+        });
+
+        dataSource.schemaMembers();
+    });
+
+    test("schemaMembers calls the transport discover with additional restrictions", 4, function() {
+        var dataSource = new PivotDataSource({
+            transport: {
+                connection: {
+                    catalog: "foo",
+                    cube: "bar"
+                },
+                discover: function(options) {
+                    equal(options.data.command, "schemaMembers");
+                    equal(options.data.restrictions.catalogName, "foo");
+                    equal(options.data.restrictions.cubeName, "bar");
+                    equal(options.data.restrictions.foo, "baz");
+                }
+            }
+        });
+
+        dataSource.schemaMembers({
+            foo: "baz"
+        });
     });
 
     test("columns descriptors are normalized during initialization", function() {
