@@ -8,7 +8,6 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
-        extend = $.extend,
 
         dataviz = kendo.dataviz,
         append = dataviz.append,
@@ -39,7 +38,7 @@
         },
 
         _initOptions: function(options) {
-            options = extend({}, options);
+            options = options || {};
 
             var transform = options.transform;
             if (transform) {
