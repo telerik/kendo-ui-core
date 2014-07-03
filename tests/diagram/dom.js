@@ -206,57 +206,254 @@
     });
 
     // ------------------------------------------------------------
-    module("shape creation options", {
-        setup: setup,
-        teardown: teardown
-    });
-
-    test("create path shape", function() {
-        var shape = diagram.addShape({
-            id: "pathShape",
-            path: "m0,100 L100,100 L50,0z"
+    (function() {
+        module("Shape / types", {
+            setup: setup,
+            teardown: teardown
         });
 
-        equal(diagram.shapes.length, 1, "should have a single path");
-        var path = diagram.shapes[0];
-        equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
-    });
+        test("create path shape", function() {
+            var shape = diagram.addShape({
+                id: "pathShape",
+                path: "m0,100 L100,100 L50,0z"
+            });
 
-    test("create image shape", function() {
-        var shape = diagram.addShape({
-            id: "imageShape",
-            type: "image",
-            source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+            equal(diagram.shapes.length, 1, "should have a single path");
+            var path = diagram.shapes[0];
+            equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
         });
 
-        equal(diagram.shapes.length, 1, "should have a single group with rect");
-        var imageShape = diagram.shapes[0];
-        equal(imageShape.shapeVisual.options.source, "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg", "the shape visual should have the same image source");
-    });
+        test("create image shape", function() {
+            var shape = diagram.addShape({
+                id: "imageShape",
+                type: "image",
+                source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+            });
 
-    test("visual shape creation", function() {
-        var visualCalled = false,
-            shape = diagram.addShape({
-                id: "visualShape",
-                visual: function() {
-                    visualCalled = true;
-                    return new dataviz.diagram.Group({ id: "shapeRoot" });
+            equal(diagram.shapes.length, 1, "should have a single group with rect");
+            var imageShape = diagram.shapes[0];
+            equal(imageShape.shapeVisual.options.source, "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg", "the shape visual should have the same image source");
+        });
+
+        test("visual template", function() {
+            var visualCalled = false,
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    visual: function() {
+                        visualCalled = true;
+                        return new dataviz.diagram.Group({ id: "shapeRoot" });
+                    }
+                });
+
+            ok(visualCalled, "visual method should be called");
+            equal(diagram.shapes.length, 1, "should have a single shape");
+        });
+
+        test("typed shape", function() {
+            var shape = diagram.addShape({
+                id: "circle",
+                type: "circle"
+            });
+
+            equal(diagram.shapes.length, 1, "should have a single shape");
+            equal(diagram.shapes[0].shapeVisual.options.type, shape.options.type, "shape visual is same type as the shape itself");
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / Content", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("template", function() {
+            var shape = diagram.addShape({
+                content: {
+                    template: "foo"
                 }
             });
 
-        ok(visualCalled, "visual method should be called");
-        equal(diagram.shapes.length, 1, "should have a single shape");
-    });
-
-    test("typed shape", function() {
-        var shape = diagram.addShape({
-            id: "circle",
-            type: "circle"
+            equal(shape.options.content.text, "foo");
+            equal(shape._contentVisual.content(), "foo");
         });
 
-        equal(diagram.shapes.length, 1, "should have a single shape");
-        equal(diagram.shapes[0].shapeVisual.options.type, shape.options.type, "shape visual is same type as the shape itself");
-    });
+        test("text", function() {
+            var shape = diagram.addShape({
+                content: {
+                    template: "foo"
+                }
+            });
+
+            equal(shape.options.content.text, "foo");
+            equal(shape._contentVisual.content(), "foo");
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / bounds", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("inits position", function() {
+            var shape = diagram.addShape({
+                id: "visualShape",
+                type: "rectangle",
+                x: 10,
+                y: 40
+            });
+            var bounds = shape.bounds();
+            equal(bounds.x, 10);
+            equal(bounds.y, 40);
+        });
+
+        test("dose not set position to shape visual", function() {
+            var shape = diagram.addShape({
+                id: "visualShape",
+                type: "rectangle",
+                x: 10,
+                y: 40
+            });
+            var visual = shape.shapeVisual;
+            equal(visual.options.x, 0);
+            equal(visual.options.y, 0);
+        });
+
+        test("inits width and height based on visual content", function() {
+            var shape = diagram.addShape({
+                id: "visualShape",
+                visual: function() {
+                    return new dataviz.diagram.Rectangle({ width: 300, height: 150, stroke: {width: 0}});
+                }
+            });
+            var bounds = shape.bounds();
+            equal(bounds.width, 300);
+            equal(bounds.height, 150);
+        });
+
+        test("inits width and height based on width and height options with predefined type", function() {
+            var shape = diagram.addShape({
+                type: "rectangle",
+                width: 150,
+                height: 200,
+                stroke: {width: 0}
+            });
+            var bounds = shape.bounds();
+            equal(bounds.width, 150);
+            equal(bounds.height, 200);
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / bounds / redraw", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        // test("redraw sets new position", function() {
+            // var shape = diagram.addShape({
+                // id: "visualShape",
+                // type: "rectangle",
+                // x: 10,
+                // y: 40
+            // });
+            // shape.redraw({
+                // x: 20,
+                // y: 50
+            // });
+            // var bounds = shape.bounds();
+            // equal(bounds.x, 20);
+            // equal(bounds.y, 50);
+        // });
+
+        // ------------------------------------------------------------
+        module("Shape / bounds / events", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("itemBoundsChange event is raised after position set", function () {
+            var s = diagram.addShape({}),
+                raised;
+
+            diagram.bind("itemBoundsChange", function () {
+                raised = true;
+            });
+
+            s.position(new Point(100, 100));
+            ok(raised);
+        });
+
+        test("itemBoundsChange event is raised after bounds set", function () {
+            var s = diagram.addShape({}),
+                raised;
+
+            diagram.bind("itemBoundsChange", function () {
+                raised = true;
+            });
+
+            s.bounds(new Rect(100, 100, 100, 100));
+
+            ok(raised);
+        });
+
+
+        test("Add shape raises change event", function() {
+            var eventShape = null,
+                called = false;
+
+            diagram.bind("change", function(args) {
+                eventShape = args.added[0];
+                called = true;
+            });
+
+            var addedShape = diagram.addShape({});
+            ok(called, "change event should be raised");
+            equal(eventShape, addedShape, "the reported shape should be the same as the added");
+        });
+
+        test("Remove shape raises change event", function() {
+            var eventShape = null,
+                called = false,
+                shape = diagram.addShape({});
+
+            diagram.bind("change", function(args) {
+                eventShape = args.removed[0];
+                called = true;
+            });
+
+            diagram.remove(shape);
+            ok(called, "change event should be raised");
+            equal(eventShape, shape, "the reported shape should be the same as the removed");
+        });
+
+        test("Remove multiple items raises change event", function() {
+            var eventShapes = [],
+                point = new Point(1, 0),
+                shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
+
+            diagram.bind("change", function(args) {
+                eventShapes = args.removed;
+            });
+
+            diagram.remove(shapes);
+            equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / bounds / zoom", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("visual bounds are ok after zoom", function () {
+            var s = diagram.addShape({});
+            var z = 0.5;
+            z = diagram.zoom(z);
+
+            var vb = s.bounds("transformed");
+            var b = s.bounds();
+            close(b.width, vb.width / z, tolerance);
+            close(b.height, vb.height / z, tolerance);
+        });
+    })();
 
     // ------------------------------------------------------------
     module("event handling", {
@@ -349,23 +546,7 @@
     });
 
     // ------------------------------------------------------------
-    module("Shape / Template", {
-        setup: setup,
-        teardown: teardown
-    });
-
-    test("should render text", function() {
-        diagram.addShape({
-            content: {
-                template: "text"
-            }
-        });
-
-        equal(diagram.shapes[0].options.content.text, "text");
-    });
-
-    // ------------------------------------------------------------
-    module("Diagram shapeDefaults", {
+    module("Diagram / shapeDefaults", {
         setup: function() {
             QUnit.fixture.html('<div id="canvas" />');
             window.createShapeDefaults = function(shapeDefaults) {
@@ -401,97 +582,6 @@
         var shape = diagram.addShape({id: "shape1"});
 
         equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
-    });
-
-    // ------------------------------------------------------------
-    module("Shape bounds", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
-
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
-        }
-    });
-
-    test("Shape bounds changed event is raised after position set", function () {
-        var s = diagram.addShape({}),
-            raised;
-
-        diagram.bind("itemBoundsChange", function () {
-            raised = true;
-        });
-
-        s.position(new Point(100, 100));
-        ok(raised);
-    });
-
-    test("Shape bounds changed event is raised after bounds set", function () {
-        var s = diagram.addShape({}),
-            raised;
-
-        diagram.bind("itemBoundsChange", function () {
-            raised = true;
-        });
-
-        s.bounds(new Rect(100, 100, 100, 100));
-
-        ok(raised);
-    });
-
-    test("Shape visual bounds is ok after zoom", function () {
-        var s = diagram.addShape({});
-        var z = 0.5;
-        z = diagram.zoom(z);
-
-        var vb = s.bounds("transformed");
-        var b = s.bounds();
-        close(b.width, vb.width / z, tolerance);
-        close(b.height, vb.height / z, tolerance);
-    });
-
-    test("Add shape raises change event", function() {
-        var eventShape = null,
-            called = false;
-
-        diagram.bind("change", function(args) {
-            eventShape = args.added[0];
-            called = true;
-        });
-
-        var addedShape = diagram.addShape({});
-        ok(called, "change event should be raised");
-        equal(eventShape, addedShape, "the reported shape should be the same as the added");
-    });
-
-    test("Remove shape raises change event", function() {
-        var eventShape = null,
-            called = false,
-            shape = diagram.addShape({});
-
-        diagram.bind("change", function(args) {
-            eventShape = args.removed[0];
-            called = true;
-        });
-
-        diagram.remove(shape);
-        ok(called, "change event should be raised");
-        equal(eventShape, shape, "the reported shape should be the same as the removed");
-    });
-
-    test("Remove multiple items raises change event", function() {
-        var eventShapes = [],
-            point = new Point(1, 0),
-            shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
-
-        diagram.bind("change", function(args) {
-            eventShapes = args.removed;
-        });
-
-        diagram.remove(shapes);
-        equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
     });
 
     // ------------------------------------------------------------

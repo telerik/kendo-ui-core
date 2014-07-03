@@ -274,7 +274,8 @@
                 that.isSelected = false;
                 that.dataItem = dataItem;
                 that.visual = new Group({
-                    id: that.options.id
+                    id: that.options.id,
+                    autoSize: true
                 });
                 that._template();
             },
@@ -426,7 +427,8 @@
                 that.type = options.type;
                 that.shapeVisual = Shape.createShapeVisual(that.options);
                 that.visual.append(this.shapeVisual);
-                that.bounds(new Rect(options.x, options.y, Math.floor(options.width), Math.floor(options.height)));
+                var bounds = that.visual._measure();
+                that.bounds(new Rect(options.x, options.y, Math.floor(bounds.width), Math.floor(bounds.height)));
                 // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
                 that._createConnectors();
                 that.parentContainer = null;
@@ -488,23 +490,19 @@
                         options.width = Math.max(value.width, options.minWidth);
                         options.height = Math.max(value.height, options.minHeight);
                         this._bounds = new Rect(options.x, options.y, options.width, options.height);
-                        this.visual.position(point);
-                        this.redraw({ width: options.width, height: options.height });
+                        this.visual.redraw({
+                            x: point.x,
+                            y: point.y,
+                            width: options.width,
+                            height: options.height
+                        });
                         this.refreshConnections();
                         this._triggerBoundsChange();
                     }
                 } else {
                     bounds = this._bounds;
-                } if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
-                    size = this.shapeVisual._measure();
-                    if (size) {
-                        if (this.shapeVisual.options.autoSize) {
-                            this.bounds(new Rect(options.x, options.y, size.width, size.height));
-                        } else {
-                            this.shapeVisual.redraw();
-                        }
-                    }
                 }
+
                 return bounds;
             },
             position: function (point) {
@@ -644,6 +642,7 @@
                 }
                 return b.center();
             },
+            //TO DO: Implement support for updating width, height, x, y
             redraw: function (options) {
                 if (options) {
                     this.options = deepExtend({}, this.options, options);
