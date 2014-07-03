@@ -422,7 +422,7 @@ var __meta__ = {
                        .parentsUntil("body")
                        .filter(function(index, element) {
                             var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
-                            return computedStyle["overflow"] != "visible";
+                            return computedStyle.overflow != "visible";
                        })
                        .add(window);
         },
