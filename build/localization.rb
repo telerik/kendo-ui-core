@@ -28,6 +28,12 @@ COLUMN_MENU_OPTIONS = {
     "Unlock" => "unlock"
 }
 
+GRID_COMMAND_NAMES = {
+    "CancelChanges" => "cancel", #cancel changes button in the toolbar
+    "Cancel" => "canceledit", #cancel button in inline/popup mode
+    "SaveChanges" => "save"
+}
+
 LOCALIZATION_OPTION_NAMES = Hash.new("messages")
 LOCALIZATION_OPTION_NAMES["Upload"] = "localization"
 LOCALIZATION_OPTION_NAMES["FilterMenuOperators"] = "operators"
@@ -43,8 +49,6 @@ def extractMessages(file_name)
     messages["FilterMenuOperators"] = Hash.new
     messages["ColumnMenu"] = Hash.new
     messages["RecurrenceEditor"] = Hash.new
-    messages["GridDummy"] = Hash.new #contains the Grid options that cannot be set through the prototype
-
 
     doc = Nokogiri::XML(open(file_name))
 
@@ -68,7 +72,16 @@ def extractMessages(file_name)
             if COLUMN_MENU_OPTIONS[property]
                 messages["ColumnMenu"][COLUMN_MENU_OPTIONS[property]] = value
             elsif #options that cannot be set through the prototype
-                messages["GridDummy"][property] = value
+                messages[widget_name] ||= Hash.new
+
+                if property.match(/confirm|canceldelete/i)
+                    messages[widget_name]["editable"] ||= Hash.new
+                    messages[widget_name]["editable"][getPropertyName(property)] = value
+                else
+                    messages[widget_name]["commands"] ||= Hash.new
+                    messages[widget_name]["commands"][GRID_COMMAND_NAMES[property] || property.downcase] = value
+                end
+
             end
 
         elsif widget_name == "Scheduler"
@@ -115,19 +128,17 @@ def extractMessages(file_name)
 end
 
 desc 'Generates .js localization files from MVC wrappers Resources/Messages.*.resx files'
-task :l10n_res => FileList["wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx"].sub("wrappers/mvc/src/Kendo.Mvc/Resources/", "src/l10n/").ext("js")
+task :localization_messages => FileList["wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx"].sub("wrappers/mvc/src/Kendo.Mvc/Resources/", "src/messages/").ext("js")
 
-rule /src\/l10n\/(.+)\.js/ => lambda { |target| target.sub( "src/l10n/", "wrappers/mvc/src/Kendo.Mvc/Resources/").ext("resx") } do |task|
-    sh "mkdir -p src/l10n/"
+rule /src\/messages\/(.+)\.js/ => lambda { |target| target.sub( "src/messages/", "wrappers/mvc/src/Kendo.Mvc/Resources/").ext("resx") } do |task|
+    FileUtils.mkdir_p"src/messages"
     messages = extractMessages(task.source)
 
     File.open(task.name, "w") do |file|
 
         messages.each do |key, options|
 
-            if key == "GridDummy"
-                #todo
-            elsif key == "FilterMenuOperators"
+            if key == "FilterMenuOperators"
                 file.write(
                     "\n\n/* Filter menu operator messages */\n\n" +
                     "if (kendo.ui.FilterMenu) {\n" +
@@ -154,4 +165,4 @@ rule /src\/l10n\/(.+)\.js/ => lambda { |target| target.sub( "src/l10n/", "wrappe
     end
 end
 
-CLEAN.include("src/l10n")
+CLEAN.include("src/messages")
