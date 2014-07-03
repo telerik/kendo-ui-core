@@ -739,7 +739,7 @@ var __meta__ = {
                     },
                     hover: {
                         fill: {
-                            color: WHITE,
+                            color: WHITE
                         },
                         stroke: {
                             color: "#003f59"
