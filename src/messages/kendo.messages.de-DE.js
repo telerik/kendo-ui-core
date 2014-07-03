@@ -47,7 +47,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "settings": "Column Einstellungen",
   "done": "Geschehen",
   "lock": "Sperren",
-  "unlock": "Aufschließen"
+  "unlock": "Aufschließen",
+  "filter": "Filter"
 });
 }
 
@@ -311,5 +312,21 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Termin löschen",
   "showFullDay": "Zeigen ganztags",
   "showWorkDay": "Zeigen Geschäftszeiten"
+});
+}
+
+/* Validator messages */
+
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages,{
+  "required: "{0"} ist notwendig",
+  "pattern": "{0} ist ungültig",
+  "min": "{0} muss größer oder gleich sein als {1}",
+  "max": "{0} muss kleiner oder gleich sein als {1}",
+  "step": "{0} ist ungültig",
+  "email": "{0} ist keine gültige E-Mail",
+  "url": "{0} ist keine gültige URL",
+  "date": "{0} ist kein gültiges Datum"
 });
 }
