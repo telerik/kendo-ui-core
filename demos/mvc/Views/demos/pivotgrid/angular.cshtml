@@ -1,0 +1,50 @@
+<div id="example">
+  <div ng-app="KendoDemo" ng-controller="MyCtrl">
+    <div kendo-pivot-grid k-options="options"></div>
+    <div kendo-pivot-configurator k-data-source="dataSource"></div>
+  </div>
+</div>
+
+<script>
+  angular.module("KendoDemo", [ "kendo.directives" ]);
+
+  function MyCtrl($scope) {
+      $scope.dataSource = new kendo.data.PivotDataSource({
+          type: "xmla",
+          columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
+          rows: [{ name: "[Geography].[City]" }],
+          measures: ["[Measures].[Internet Sales Amount]"],
+          transport: {
+              connection: {
+                  catalog: "Adventure Works DW 2008R2",
+                  cube: "Adventure Works"
+              },
+              read: "http://demos.telerik.com/olap/msmdpump.dll"
+          },
+          schema: {
+              type: "xmla"
+          },
+          error: function (e) {
+              alert("error: " + kendo.stringify(e.errors[0]));
+          }
+      });
+      $scope.options = {
+          columnWidth: 200,
+          height: 550,
+          dataSource: $scope.dataSource
+      };
+  }
+</script>
+
+<style>
+  #pivotgrid {
+    display: inline-block;
+    vertical-align: top;
+    width: 71%;
+  }
+
+  #configurator {
+    display: inline-block;
+    vertical-align: top;
+  }
+</style>

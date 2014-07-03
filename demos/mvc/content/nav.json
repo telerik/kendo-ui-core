@@ -1855,8 +1855,23 @@
         "meta": {
             "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can make a data summarization tool."
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "pivotgrid/angular",
+        "title": {
+          "kendo-ui": "AngularJS support in Kendo UI PivotGrid"
+        },
+        "meta": {
+          "kendo-ui": "AngularJS directive support for Kendo UI PivotGrid"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
-	],
+    ],
     "category": "Data Management"
   },
   {
@@ -3227,6 +3242,21 @@
         },
         "meta": {
             "kendo-ui": "Events, source and visible MVVM binding support in Kendo UI Gantt"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
+        "text": "AngularJS",
+        "url": "gantt/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Gantt"
         },
         "packages": [
           "!mvc",
@@ -7503,6 +7533,21 @@
         "meta": {
             "kendo-ui": ""
         }
+      },
+      {
+        "text": "AngularJS",
+        "url": "treemap/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI TreeMap"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI TreeMap"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "name": "treemap",

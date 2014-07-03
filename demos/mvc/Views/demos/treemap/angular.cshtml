@@ -1,0 +1,35 @@
+<div id="example">
+  <div ng-app="KendoDemo" ng-controller="MyCtrl" class="demo-section k-header" style="padding: 1em">
+    <div kendo-treemap k-options="options" style="height: 600px; font-size: 12px;"></div>
+  </div>
+</div>
+
+<script>
+  angular.module("KendoDemo", [ "kendo.directives" ]);
+
+  function MyCtrl($scope) {
+      $scope.options = {
+          dataSource: {
+              transport: {
+                  read: {
+                      url: "../content/dataviz/js/population-usa.json",
+                      dataType: "json"
+                  }
+              },
+              schema: {
+                  model: {
+                      children: "items"
+                  }
+              }
+          },
+          valueField: "value",
+          textField: "name",
+          colors: [
+              ["#0c81c5", "#c5dceb"], ["#3aa2de", "#d8ecf8"],
+              ["#449000", "#dae9cc"], ["#76b800", "#dae7c3"],
+              ["#ffae00", "#f5e5c3"], ["#ef4c00", "#f1b092"],
+              ["#9e0a61", "#eccedf"]
+          ]
+      };
+  }
+</script>
