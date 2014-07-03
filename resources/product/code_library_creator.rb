@@ -77,6 +77,7 @@ def create_code_library(bot, product_name, tname)
     #bot.driver.quit
 end
 def navigate_to_cl_section(bot)
+    p "navigating to cl section>>"
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Content')]"))
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Forums')]"))
     bot.wait_for_title("Forums")
@@ -97,7 +98,7 @@ def create_cl_thread(bot, product_name, tname)
       
       p "saving>>"
       bot.execute_script("window.frames[0].$('[id*=\"saveButton\"]').click()")
-      sleep(5)
+      sleep(10)
     end
 end
 def set_cl_fields(bot, product_name)
