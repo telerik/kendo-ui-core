@@ -46,18 +46,29 @@
         <script>
 
             $(function() {
-                var data = createRandomData(10000);
+                var data = createRandomData(1000);
+
+                var cube = new kendo.data.PivotCubeBuilder({
+                    dimensions: {
+                        FirstName: { caption: "All First Names" },
+                        LastName: { caption: "All Last Names" }
+                    },
+                    measures: {
+                        Measure1: { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return data + state; } }
+                    }
+                });
 
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
                     //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
-                        columns: ["FirstName"],
+                        columns: [ { name: "FirstName", expand: false }],
+                        rows: [{name: "LastName", expand: true }],
+                        measures: ["Measure1"],
                         //measures: ["[Measures].[Internet Order Lines Count]"],
                         //columns: ["[Department]"],
                         transport: {
                             read: function(options) {
-                                console.log(options.data.columns);
-                                options.success(new kendo.data.PivotCubeBuilder().process(data, {
+                                options.success(cube.process(data, {
                                     columns: options.data.columns,
                                     rows: options.data.rows,
                                     measures: options.data.measures

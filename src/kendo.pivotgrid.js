@@ -170,32 +170,38 @@ var __meta__ = {
     }
 
     var PivotCubeBuilder = Class.extend({
+        init: function(options) {
+            this.options = extend({}, this.options, options);
+        },
         _asTuples: function(map, descriptors) {
+            var dimensionsSchema = this.options.dimensions || [];
             var result = [];
 
-            result[result.length] = {
-                members: [{
-                    children: [],
-                    caption: "ALL",
-                    name: descriptors.name,
-                    levelName: descriptors.name,
-                    levelNum: "0",
-                    hasChildren: true,
-                    parentName: undefined,
-                    hierarchy: descriptors.name
-                }]
-            };
+            if (descriptors.length) {
+                result[result.length] = {
+                    members: [{
+                        children: [],
+                        caption: (dimensionsSchema[descriptors[0].name] || {}).caption || "All",
+                        name: descriptors[0].name,
+                        levelName: descriptors[0].name,
+                        levelNum: "0",
+                        hasChildren: true,
+                        parentName: undefined,
+                        hierarchy: descriptors[0].name
+                    }]
+                };
+            }
 
             for (var key in map) {
                 result[result.length] = {
                     members: [{
                         children: [],
                         caption: key,
-                        name: map[key]["name"],
+                        name: map[key]["name"] + "." + key,
                         levelName: map[key]["name"] + "." + key,
                         levelNum: 1,
                         hasChildren: false,
-                        parentName: "ALL",
+                        parentName: descriptors[0].name,
                         hierarchy: map[key]["name"]
                     }]
                 };
@@ -204,35 +210,104 @@ var __meta__ = {
             return result;
         },
 
+        _toDataArray: function(map, columns) {
+            var result = [];
+            var items;
+            var rowIndex = 0;
+
+            for (var key in map) {
+                result[result.length] = {
+                    ordinal: rowIndex,
+                    value: map[key].aggregates,
+                    fmtValue: map[key].aggregates
+                };
+
+                items = map[key].items;
+
+                for (var columnKey in items) {
+                    result[result.length] = {
+                        ordinal: rowIndex + items[columnKey].index + 1,
+                        value: items[columnKey].aggregate,
+                        fmtValue: items[columnKey].aggregate
+                    };
+                }
+                rowIndex += columns.length;
+            }
+
+            return result;
+        },
+
         process: function(data, options) {
-            var columnDescriptor = ((options || {}).columns || [])[0] || {};
-            var rowDescriptor = ((options || {}).rows || [])[0] || {};
+            var columnDescriptors = (options || {}).columns || [];
+            var rowDescriptors = (options || {}).rows || [];
+            var measureDescriptors = (options || {}).measures || [];
+
+            var firstColumnDescriptor = columnDescriptors[0] || {};
+            var firstRowDescriptor = rowDescriptors[0] || {};
+
+            var aggregatedData = {};
             var columns = {};
             var rows = {};
+
             var columnValue;
             var rowValue;
-            var columnGetter = kendo.getter(columnDescriptor.name, true);
-            var rowGetter = kendo.getter(rowDescriptor.name, true);
+            var columnIndex = 0;
+            var columnGetter = kendo.getter(firstColumnDescriptor.name, true);
+            var rowGetter = kendo.getter(firstRowDescriptor.name, true);
 
-            if (columnDescriptor.expand || rowDescriptor.expand) {
+            var measure = (this.options.measures || {})[measureDescriptors[0]];
+            var measureAggregator = function() { return 1; };
+
+            if (measure) {
+                var measureGetter = kendo.getter(measure.field, true);
+                measureAggregator = function(data, state) {
+                    return measure.aggregate(measureGetter(data), state);
+                };
+            }
+
+            if (firstColumnDescriptor.expand || firstRowDescriptor.expand) {
                 for (var idx = 0, length = data.length; idx < length; idx++) {
 
-                    columnValue = columnGetter(data[idx]);
-                    columns[columnValue] = { name: columnDescriptor.name };
-
-                    //if (rowDescriptor) {
+                    if (firstRowDescriptor.name && firstRowDescriptor.expand) {
                         rowValue = rowGetter(data[idx]);
-                        rows[rowValue] = { name: rowDescriptor.name };
-                    //}
+                        rows[rowValue] = { name: firstRowDescriptor.name };
+                    }
+
+                    var value = aggregatedData[rowValue] || {
+                        items: {},
+                        aggregates: 0
+                    };
+
+                    if (firstColumnDescriptor.expand) {
+                        columnValue = columnGetter(data[idx]);
+
+                        var column = columns[columnValue] || {
+                            index: columnIndex++,
+                            name: firstColumnDescriptor.name
+                        };
+
+                        var item = value.items[columnValue] || {
+                            aggregate: 0
+                        };
+
+                        value.items[columnValue] = { index: column.index, aggregate: measureAggregator(data[idx], item.aggregate) };
+
+                        columns[columnValue] = column;
+                    }
+
+                    value.aggregates = measureAggregator(data[idx], value.aggregates);
+                    aggregatedData[rowValue] = value;
                 }
             }
 
+            columns = this._asTuples(columns, columnDescriptors);
+
             return {
                 axes: {
-                    columns: { tuples: this._asTuples(columns, columnDescriptor) },
-                    rows: { tuples: this._asTuples(rows, rowDescriptor) }
+                    columns: { tuples: columns },
+                    rows: { tuples: this._asTuples(rows, rowDescriptors) }
                 },
-                data: []
+                data: this._toDataArray(aggregatedData, columns)
             };
         }
     });
@@ -715,10 +790,6 @@ var __meta__ = {
         },
 
         _normalizeData: function(data, columns, rows) {
-            if (!data.length) {
-                return data;
-            }
-
             var cell, idx, length;
             var axesLength = (columns || 1) * (rows || 1);
             var result = new Array(axesLength);
