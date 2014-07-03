@@ -128,9 +128,9 @@ def extractMessages(file_name)
 end
 
 desc 'Generates .js localization files from MVC wrappers Resources/Messages.*.resx files'
-task :localization_messages => FileList["wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx"].sub("wrappers/mvc/src/Kendo.Mvc/Resources/", "src/messages/").ext("js")
+task :localization_messages => FileList["wrappers/mvc/src/Kendo.Mvc/Resources/Messages.*.resx"].sub("wrappers/mvc/src/Kendo.Mvc/Resources/M", "src/messages/kendo.m").ext("js")
 
-rule /src\/messages\/(.+)\.js/ => lambda { |target| target.sub( "src/messages/", "wrappers/mvc/src/Kendo.Mvc/Resources/").ext("resx") } do |task|
+rule /src\/messages\/(.+)\.js/ => lambda { |target| target.sub( "src/messages/kendo.m", "wrappers/mvc/src/Kendo.Mvc/Resources/M").ext("resx") } do |task|
     FileUtils.mkdir_p"src/messages"
     messages = extractMessages(task.source)
 
