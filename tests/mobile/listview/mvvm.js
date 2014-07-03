@@ -244,6 +244,24 @@
         ok(anchors.last().is(".km-listview-link"));
     });
 
+    test("adding item to the datasource maintains the existing items bindings", function() {
+        dom = $('<ul data-role="listview" data-template="template-with-events" data-bind="source:dataSource" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        stub(observable, "rootHandler");
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        observable.dataSource.push({ foo: "bar" });
+
+        dom.find("li strong").eq(0).click();
+
+        equal(observable.calls("rootHandler"), 1);
+    });
+
     test("ListView removes LI from UL if item is removed from list", function() {
         dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
 

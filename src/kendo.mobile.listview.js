@@ -720,7 +720,19 @@ var __meta__ = {
                 return;
             }
 
-            if (listView.trigger(DATABINDING, { action: action || "rebind", items: dataItems, index: e && e.index })) {
+            var removedItems, addedItems, addedDataItems;
+            var adding = (action === "add" && !groupedMode) || (prependOnRefresh && !listView._filter);
+            var removing = action === "remove" && !groupedMode;
+
+            if (adding) {
+                // no need to unbind anything
+                removedItems = [];
+            } else if (removing) {
+                // unbind the items about to be removed;
+                removedItems = listView.findByDataItem(dataItems);
+            }
+
+            if (listView.trigger(DATABINDING, { action: action || "rebind", items: dataItems, removedItems: removedItems, index: e && e.index })) {
                 if (this._shouldShowLoading()) {
                     listView.hideLoading();
                 }
@@ -730,15 +742,18 @@ var __meta__ = {
             if (action === "add" && !groupedMode) {
                 var index = view.indexOf(dataItems[0]);
                 if (index > -1) {
-                    listView.insertAt(dataItems, index);
+                    addedItems = listView.insertAt(dataItems, index);
+                    addedDataItems = dataItems;
                 }
             } else if (action === "remove" && !groupedMode) {
+                addedItems = [];
                 listView.remove(dataItems);
             } else if (groupedMode) {
                 listView.replaceGrouped(view);
             }
             else if (prependOnRefresh && !listView._filter) {
-                listView.prepend(view);
+                addedItems = listView.prepend(view);
+                addedDataItems = view;
             }
             else {
                 listView.replace(view);
@@ -748,7 +763,7 @@ var __meta__ = {
                 listView.hideLoading();
             }
 
-            listView.trigger(DATABOUND, { ns: ui });
+            listView.trigger(DATABOUND, { ns: ui, addedItems: addedItems, addedDataItems: addedDataItems });
         },
 
         setDataSource: function(dataSource) {
@@ -1018,9 +1033,6 @@ var __meta__ = {
                 } else {
                     listView.items().eq(index - 1).after(items);
                 }
-                for (var idx = 0; idx < items.length; idx ++) {
-                    listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
-                }
                 listView.angular("compile", function(){
                     return {
                         elements: items,
@@ -1085,6 +1097,7 @@ var __meta__ = {
             var listView = this,
                 replaceItem = function(items) {
                     var newItem = $(items[0]);
+                    kendo.destroy(item);
                     $(item).replaceWith(newItem);
                     listView.trigger(ITEM_CHANGE, { item: newItem, data: dataItem, ns: ui });
                 };
