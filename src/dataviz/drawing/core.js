@@ -27,7 +27,7 @@
             this._mouseenter = this._handler("mouseenter");
             this._mouseleave = this._handler("mouseleave");
 
-            this._appendTo(container);
+            this._appendTo($(container)[0]);
         },
 
         options: {
