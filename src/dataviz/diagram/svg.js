@@ -731,7 +731,7 @@
             }
             if (targetSegment) {
                 point = this._transformToPath(targetSegment.anchor(), path);
-                this.anchor.move(point.x, point.y);
+                this.drawingElement.transform(g.transform().translate(point.x, point.y));
             }
         }
     });

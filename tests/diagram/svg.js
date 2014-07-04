@@ -595,12 +595,7 @@
             drawingContainer = element.drawingContainer();
         }
 
-        function positionedCircleMarker(marker) {
-            var center = marker.drawingElement.geometry().center;
-            return center.x !== 0 && center.y !== 0;
-        }
-
-        function positionedArrowMarker(marker) {
+        function positionedMarker(marker) {
             return marker.drawingElement.transform() !== undefined;
         }
 
@@ -629,8 +624,8 @@
         });
 
         test("positions markers", function() {
-            ok(positionedCircleMarker(markers["start"]));
-            ok(positionedArrowMarker(markers["end"]));
+            ok(positionedMarker(markers["start"]));
+            ok(positionedMarker(markers["end"]));
         });
 
         module(name + " / markers / redraw / existing", {
@@ -676,8 +671,8 @@
                 startCap: Markers.arrowStart,
                 endCap: Markers.filledCircle
             });
-            ok(positionedArrowMarker(markers["start"]));
-            ok(positionedCircleMarker(markers["end"]));
+            ok(positionedMarker(markers["start"]));
+            ok(positionedMarker(markers["end"]));
         });
 
         module(name + " / markers / redraw / new", {
@@ -729,8 +724,8 @@
                 endCap: Markers.filledCircle
             });
 
-            ok(positionedArrowMarker(markers["start"]));
-            ok(positionedCircleMarker(markers["end"]));
+            ok(positionedMarker(markers["start"]));
+            ok(positionedMarker(markers["end"]));
         });
     }
 
@@ -1842,7 +1837,7 @@
                markerShape = new CircleMarker({
                     position: "start"
                });
-               circle = markerShape.drawingElement.geometry();
+               circle = markerShape.drawingElement;
             }
         });
 
@@ -1857,14 +1852,17 @@
             equal(markerShape.options.position, "end");
         });
 
-        test("positionMarker moves center to the target segment point", function() {
+        test("positionMarker translates circle to the target segment point", function() {
+            var matrix;
             markerShape.positionMarker(linePath);
-            equal(circle.center.x, 10);
-            equal(circle.center.y, 10);
+            matrix = circle.transform().matrix();
+            equal(matrix.e, 10);
+            equal(matrix.f, 10);
             markerShape.redraw({position: "end"});
             markerShape.positionMarker(linePath);
-            equal(circle.center.x, 40);
-            equal(circle.center.y, 80);
+            matrix = circle.transform().matrix();
+            equal(matrix.e, 40);
+            equal(matrix.f, 80);
         });
 
         // ------------------------------------------------------------
