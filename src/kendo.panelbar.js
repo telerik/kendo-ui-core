@@ -925,29 +925,27 @@ var __meta__ = {
         _collapseAllExpanded: function (item) {
             var that = this, children, stopExpand = false;
 
-            if (item.children(LINKSELECTOR).hasClass("k-header")) {
-                var groups = item.find(GROUPS).add(item.find(CONTENTS));
+            var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
-                if (groups.is(VISIBLE)) {
-                    stopExpand = true;
-                }
-
-                if (!(groups.is(VISIBLE) || groups.length === 0)) {
-                    children = $(that.element).children();
-                    children.find(GROUPS).add(children.find(CONTENTS))
-                            .filter(function () { return $(this).is(VISIBLE); })
-                            .each(function (index, content) {
-                                content = $(content);
-
-                                stopExpand = that._triggerEvent(COLLAPSE, content.closest(ITEM));
-                                if (!stopExpand) {
-                                    that._toggleGroup(content, true);
-                                }
-                            });
-                }
-
-                return stopExpand;
+            if (groups.is(VISIBLE)) {
+                stopExpand = true;
             }
+
+            if (!(groups.is(VISIBLE) || groups.length === 0)) {
+                children = item.siblings();
+                children.find(GROUPS).add(children.find(CONTENTS))
+                        .filter(function () { return $(this).is(VISIBLE); })
+                        .each(function (index, content) {
+                            content = $(content);
+
+                            stopExpand = that._triggerEvent(COLLAPSE, content.closest(ITEM));
+                            if (!stopExpand) {
+                                that._toggleGroup(content, true);
+                            }
+                        });
+            }
+
+            return stopExpand;
         },
 
         _ajaxRequest: function (element, contentElement, isVisible) {
