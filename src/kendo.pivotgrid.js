@@ -173,38 +173,59 @@ var __meta__ = {
         init: function(options) {
             this.options = extend({}, this.options, options);
         },
+
         _asTuples: function(map, descriptors) {
             var dimensionsSchema = this.options.dimensions || [];
             var result = [];
+            var root;
 
             if (descriptors.length) {
-                result[result.length] = {
-                    members: [{
+                root = { members: [] };
+
+                for (var idx = 0, length = descriptors.length; idx < length; idx++) {
+                    root.members[root.members.length] = {
                         children: [],
-                        caption: (dimensionsSchema[descriptors[0].name] || {}).caption || "All",
-                        name: descriptors[0].name,
-                        levelName: descriptors[0].name,
+                        caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
+                        name: descriptors[idx].name,
+                        levelName: descriptors[idx].name,
                         levelNum: "0",
                         hasChildren: true,
                         parentName: undefined,
-                        hierarchy: descriptors[0].name
-                    }]
-                };
+                        hierarchy: descriptors[idx].name
+                    };
+                }
+
+                result[result.length] = root;
             }
 
             for (var key in map) {
-                result[result.length] = {
-                    members: [{
-                        children: [],
-                        caption: key,
-                        name: map[key]["name"] + "." + key,
-                        levelName: map[key]["name"] + "." + key,
-                        levelNum: 1,
-                        hasChildren: false,
-                        parentName: descriptors[0].name,
-                        hierarchy: map[key]["name"]
-                    }]
+                var tuple = { members: [] };
+
+                tuple.members[tuple.members.length] = {
+                    children: [],
+                    caption: key,
+                    name: map[key]["name"] + "." + key,
+                    levelName: map[key]["name"] + "." + key,
+                    levelNum: 1,
+                    hasChildren: false,
+                    parentName: descriptors[0].name,
+                    hierarchy: map[key]["name"]
                 };
+
+                for (var idx = 1, length = descriptors.length; idx < length; idx++) {
+                    tuple.members[tuple.members.length] = {
+                        children: [],
+                        caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
+                        name: descriptors[idx].name,
+                        levelName: descriptors[idx].name,
+                        levelNum: "0",
+                        hasChildren: true,
+                        parentName: undefined,
+                        hierarchy: descriptors[idx].name
+                    };
+                }
+
+                result[result.length] = tuple;
             }
 
             return result;
@@ -265,7 +286,7 @@ var __meta__ = {
                 };
             }
 
-            if (firstColumnDescriptor.expand || firstRowDescriptor.expand) {
+            if (columnDescriptors.length || rowDescriptors.length) {
                 for (var idx = 0, length = data.length; idx < length; idx++) {
 
                     if (firstRowDescriptor.name && firstRowDescriptor.expand) {

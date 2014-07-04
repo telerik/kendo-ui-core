@@ -182,5 +182,23 @@
         equal(result.data[2].value, 2);
     });
 
+    test("process column root tuple member count is same as column descriptors", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 }, { name: "name1", lastName: "LastName2", value: 1 } ];
+        var result = builder.process(data, { columns: [{ name: "name" }, { name: "lastName" },] });
+
+        equal(result.axes.columns.tuples[0].members.length, 2);
+    });
+
+    test("process column detail tuples member count is same as column descriptors", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 }, { name: "name1", lastName: "LastName2", value: 1 } ];
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }, { name: "lastName" },] });
+
+        equal(result.axes.columns.tuples[1].members.length, 2);
+        equal(result.axes.columns.tuples[2].members.length, 2);
+    });
 
 })();
