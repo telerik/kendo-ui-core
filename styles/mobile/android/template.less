@@ -304,7 +304,25 @@
 
 .km-android .km-loader
 {
-    background-color: rgba(0,0,0,.2);
+    background: rgba(0,0,0,.1);
+}
+
+.km-android .km-loading
+{
+    border-color: @android-main-color fade(@android-main-color, 20%);
+    box-shadow: 0 1px 0 fade(@android-background-color, 10%),
+                0 -1px 0 fade(@android-background-color, 10%),
+                inset 0 1px 0 fade(@android-background-color, 10%),
+                inset 0 -1px 0 fade(@android-background-color, 10%);
+}
+
+.km-android-light .km-loading
+{
+    border-color: @android-light-main-color fade(@android-light-main-color, 20%);
+    box-shadow: 0 1px 0 fade(@android-light-background-color, 10%),
+                0 -1px 0 fade(@android-light-background-color, 10%),
+                inset 0 1px 0 fade(@android-light-background-color, 10%),
+                inset 0 -1px 0 fade(@android-light-background-color, 10%);
 }
 
 /* Forms */

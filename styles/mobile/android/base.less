@@ -135,6 +135,7 @@ html .km-android .km-navbar .km-notext
     top: auto;
     bottom: 0;
     left: 0;
+    opacity: 1;
     border-radius: 0;
 }
 
@@ -164,6 +165,16 @@ html .km-android .km-navbar .km-notext
     left: 50%;
     margin-left: -.9rem;
     bottom: .4rem;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    .box-sizing(border-box);
+}
+
+.km-android .km-loading:before,
+.km-android .km-loading:after
+{
+    display: none;
 }
 
 /* PopUp */
