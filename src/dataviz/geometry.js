@@ -139,7 +139,7 @@
     Point.create = function(arg0, arg1) {
         if (defined(arg0)) {
             if (arg0 instanceof Point) {
-                return arg0.clone();
+                return arg0;
             } else if (arguments.length === 1 && arg0.length === 2) {
                 return new Point(arg0[0], arg0[1]);
             } else {

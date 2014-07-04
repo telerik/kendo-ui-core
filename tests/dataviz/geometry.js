@@ -46,9 +46,9 @@
         ok(Point.create(new Point(10, 20)).equals(new Point(10, 20)));
     });
 
-    test("create from Point clones instance", function() {
+    test("create from Point does not clone instance", function() {
         var loc = new Point(10, 20);
-        ok(Point.create(loc) !== loc);
+        ok(Point.create(loc) === loc);
     });
 
     test("create from undefined", function() {
