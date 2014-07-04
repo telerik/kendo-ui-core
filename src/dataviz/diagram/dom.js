@@ -49,7 +49,9 @@
             defined = dataviz.util.defined,
             isArray = $.isArray,
             isFunction = kendo.isFunction,
-            isString = Utils.isString;
+            isString = Utils.isString,
+
+            math = Math;
 
         // Constants ==============================================================
         var NS = ".kendoDiagram",
@@ -214,7 +216,7 @@
                         if (!isAutoConnector(sourceConnector)) {
                             var currentSourcePoint = sourceConnector.position(),
                                 currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
-                            var dist = Math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
+                            var dist = math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
                             if (dist < minDist) {
                                 minDist = dist;
                                 connection._resolvedSourceConnector = sourceConnector;
@@ -281,6 +283,7 @@
                 });
                 that._template();
             },
+
             options: {
                 hover: {},
                 cursor: Cursors.grip,
@@ -343,30 +346,14 @@
 
                     if (!contentVisual && contentOptions.text) {
                         this._contentVisual = new TextBlock(contentOptions);
-                        this._alignContent();
+                        this._contentVisual._includeInBBox = false;
                         this.visual.append(this._contentVisual);
                     } else if (contentVisual) {
                         contentVisual.redraw(contentOptions);
-                        this._alignContent();
                     }
                 }
 
                 return this.options.content.text;
-            },
-
-            _alignContent: function() {
-                var contentOptions = this.options.content || {};
-                var contentVisual = this._contentVisual;
-                if (contentVisual && contentOptions.align) {
-                    var containerRect = this.visual._measure();
-                    var aligner = new diagram.RectAlign(containerRect);
-                    var contentBounds = contentVisual.drawingElement.bbox(null);
-
-                    var contentRect = new Rect(0, 0, contentBounds.width(), contentBounds.height());
-                    var alignedBounds = aligner.align(contentRect, contentOptions.align);
-
-                    contentVisual.position(alignedBounds.topLeft());
-                }
             },
 
             _hitTest: function (point) {
@@ -443,8 +430,7 @@
                 that.type = options.type;
                 that.shapeVisual = Shape.createShapeVisual(that.options);
                 that.visual.append(this.shapeVisual);
-                var bounds = that.visual._measure();
-                that.bounds(new Rect(options.x, options.y, Math.floor(bounds.width), Math.floor(bounds.height)));
+                that.updateBounds();
                 // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
                 that._createConnectors();
                 that.parentContainer = null;
@@ -460,6 +446,37 @@
             },
 
             options: diagram.shapeDefaults(),
+
+            updateBounds: function() {
+                var bounds = this.visual._measure(true);
+                var options = this.options;
+                this.bounds(new Rect(options.x, options.y, bounds.width, bounds.height));
+            },
+
+            content: function(content) {
+                if (defined(content)) {
+                    DiagramElement.fn.content.call(this, content);
+                    this._alignContent();
+                    return this;
+                } else {
+                    return this.options.content.text;
+                }
+            },
+
+            _alignContent: function() {
+                var contentOptions = this.options.content || {};
+                var contentVisual = this._contentVisual;
+                if (contentVisual && contentOptions.align) {
+                    var containerRect = this.visual._measure();
+                    var aligner = new diagram.RectAlign(containerRect);
+                    var contentBounds = contentVisual.drawingElement.bbox(null);
+
+                    var contentRect = new Rect(0, 0, contentBounds.width(), contentBounds.height());
+                    var alignedBounds = aligner.align(contentRect, contentOptions.align);
+
+                    contentVisual.position(alignedBounds.topLeft());
+                }
+            },
 
             _createConnectors: function() {
                 var options = this.options,
@@ -479,8 +496,8 @@
             },
 
             bounds: function (value) {
-                var point, size, bounds, options;
-                options = this.options;
+                var bounds;
+
                 if (value) {
                     if (isString(value)) {
                         switch (value) {
@@ -499,19 +516,8 @@
                             default:
                                 bounds = this._bounds;
                         }
-                    } else { // we assume Rect.
-                        point = value.topLeft();
-                        options.x = point.x;
-                        options.y = point.y;
-                        options.width = Math.max(value.width, options.minWidth);
-                        options.height = Math.max(value.height, options.minHeight);
-                        this._bounds = new Rect(options.x, options.y, options.width, options.height);
-                        this.visual.redraw({
-                            x: point.x,
-                            y: point.y,
-                            width: options.width,
-                            height: options.height
-                        });
+                    } else {
+                        this._setBounds(value);
                         this.refreshConnections();
                         this._triggerBoundsChange();
                     }
@@ -521,6 +527,25 @@
 
                 return bounds;
             },
+
+            _setBounds: function(rect) {
+                var options = this.options;
+                var topLeft = rect.topLeft();
+                var x = options.x = topLeft.x;
+                var y = options.y = topLeft.y;
+                var width = options.width = math.max(rect.width, options.minWidth);
+                var height = options.height = math.max(rect.height, options.minHeight);
+
+                this._bounds = new Rect(x, y, width, height);
+
+                this.visual.redraw({
+                    x: x,
+                    y: y,
+                    width: width,
+                    height: height
+                });
+            },
+
             position: function (point) {
                 if (point) {
                     this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
@@ -1776,16 +1801,16 @@
                     if (item instanceof Shape) {
                         switch (direction.toLowerCase()) {
                             case "left":
-                                val = Math.min(val, item.options.x);
+                                val = math.min(val, item.options.x);
                                 break;
                             case "top":
-                                val = Math.min(val, item.options.y);
+                                val = math.min(val, item.options.y);
                                 break;
                             case "right":
-                                val = Math.max(val, item.options.x);
+                                val = math.max(val, item.options.x);
                                 break;
                             case "bottom":
-                                val = Math.max(val, item.options.y);
+                                val = math.max(val, item.options.y);
                                 break;
                         }
                     }
@@ -1820,11 +1845,11 @@
                     zoom = this._zoom = this._getValidZoom(zoom);
 
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
-                        staticPoint = new diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
+                        staticPoint = new diagram.Point(math.round(staticPoint.x), math.round(staticPoint.y));
                         var zoomedPoint = staticPoint.times(zoom);
                         var viewportVector = this.modelToView(staticPoint);
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
-                        this._storePan(new diagram.Point(Math.round(raw.x), Math.round(raw.y)));
+                        this._storePan(new diagram.Point(math.round(raw.x), math.round(raw.y)));
                     }
 
                     if (options) {
@@ -2141,7 +2166,7 @@
                 }
             },
             _getValidZoom: function (zoom) {
-                return Math.min(Math.max(zoom, this.options.minZoom), this.options.maxZoom);
+                return math.min(math.max(zoom, this.options.minZoom), this.options.maxZoom);
             },
             _panTransform: function (pos) {
                 var diagram = this,
