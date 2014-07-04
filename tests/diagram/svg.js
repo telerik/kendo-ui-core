@@ -1506,10 +1506,27 @@
             ok(drawingElement);
         });
 
+        test("inits children", function() {
+            ok($.isArray(group.children));
+        });
+
+        test("appends visual", function() {
+            var childGroup = new Group();
+            group.append(childGroup);
+            ok(group.children[0] === childGroup);
+        });
+
         test("appends visual drawingContainer element", function() {
             var childGroup = new Group();
             group.append(childGroup);
             ok(childGroup.drawingContainer() === drawingElement.children[0]);
+        });
+
+        test("removes visual", function() {
+            var childGroup = new Group();
+            group.append(childGroup);
+            group.remove(childGroup);
+            equal(drawingElement.children.length, 0);
         });
 
         test("removes visual drawingContainer element", function() {
@@ -1517,6 +1534,17 @@
             group.append(childGroup);
             group.remove(childGroup);
             equal(drawingElement.children.length, 0);
+        });
+
+        test("does not change children if visual is not from children", function() {
+            var childGroup = new Group();
+            var notChild = new Group();
+            group.append(childGroup);
+            group._childrenChange = false;
+
+            group.remove(notChild);
+            equal(group.children.length, 1);
+            equal(group._childrenChange, false);
         });
 
         test("clear clears children", function() {
@@ -1540,6 +1568,33 @@
             group._renderTransform();
 
             group.append(rectangle);
+            var boundingBox = group._boundingBox();
+            var expected = rectangle.drawingElement.bbox(null);
+            ok(boundingBox.p0.equals(expected.p0));
+            ok(boundingBox.p1.equals(expected.p1));
+        });
+
+        test("_boundingBox excludes children with _includeInBBox set to false", function() {
+            var rectangle = new diagram.Rectangle({
+                width: 50,
+                height: 50,
+                x: 10,
+                y: 10
+            });
+            var excludeFromBBox = new diagram.Rectangle({
+                width: 200,
+                height: 200
+            });
+            excludeFromBBox._includeInBBox = false;
+
+            rectangle._transform.scale = new diagram.Scale(2, 2);
+            rectangle._renderTransform();
+            group._transform.scale = new diagram.Scale(2, 2);
+            group._renderTransform();
+
+            group.append(rectangle);
+            group.append(excludeFromBBox);
+
             var boundingBox = group._boundingBox();
             var expected = rectangle.drawingElement.bbox(null);
             ok(boundingBox.p0.equals(expected.p0));
@@ -1592,16 +1647,35 @@
             }
         });
 
+        test("toFront moves visuals to the end", function() {
+            group.toFront([child1, child2]);
+            ok(child1 === group.children[1]);
+            ok(child2 === group.children[2]);
+        });
+
         test("toFront moves elements to the end", function() {
             group.toFront([child1, child2]);
             ok(child1.drawingElement === drawingElement.children[1]);
             ok(child2.drawingElement === drawingElement.children[2]);
         });
 
+        test("toBack moves visuals to the start", function() {
+            group.toBack([child3, child2]);
+            ok(child2 === group.children[0]);
+            ok(child3 === group.children[1]);
+        });
+
         test("toBack moves elements to the start", function() {
             group.toBack([child3, child2]);
             ok(child2.drawingElement === drawingElement.children[0]);
             ok(child3.drawingElement === drawingElement.children[1]);
+        });
+
+        test("toIndex moves visuals to the specified indices", function() {
+            group.toIndex([child3, child2], [0, 1]);
+
+            ok(child3 === group.children[0]);
+            ok(child2 === group.children[1]);
         });
 
         test("toIndex moves elements to the specified indices", function() {

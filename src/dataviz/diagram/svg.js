@@ -1158,10 +1158,10 @@
 
     var Group = Element.extend({
         init: function (options) {
+            this.children = [];
             Element.fn.init.call(this, options);
             this.drawingElement = new d.Group();
             this._initSize();
-            this.children = [];
         },
 
         options: {
@@ -1256,15 +1256,14 @@
         },
 
         _boundingBox: function() {
-            var drawingElement = this.drawingElement;
-            var children = drawingElement.children;
+            var children = this.children;
             var boundingBox = new g.Rect(g.Point.maxPoint(), g.Point.minPoint());
             var hasBoundingBox = false;
-            var child, childBoundingBox;
+            var visual, childBoundingBox;
             for (var i = 0; i < children.length; i++) {
-                child = children[i];
-                if (child.visible()) {
-                    childBoundingBox = child.bbox(null);
+                visual = children[i];
+                if (visual.visible() && visual._includeInBBox !== false) {
+                    childBoundingBox = visual.drawingContainer().bbox(null);
                     if (childBoundingBox) {
                         hasBoundingBox = true;
                         boundingBox = boundingBox.wrap(childBoundingBox);
