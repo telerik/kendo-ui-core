@@ -170,7 +170,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
   },
   "enums": {
     "eq": "Is equal to",
-    "neq": "Is not equal to",
+    "neq": "Is not equal to"
   }
 });
 }
