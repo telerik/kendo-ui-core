@@ -118,6 +118,14 @@
             this.geometryChange();
 
             return this;
+        },
+
+        toArray: function(digits) {
+            var doRound = defined(digits);
+            var x = doRound ? round(this.x, digits) : this.x;
+            var y = doRound ? round(this.y, digits) : this.y;
+
+            return [x, y];
         }
     });
     defineAccessors(Point.fn, ["x", "y"]);

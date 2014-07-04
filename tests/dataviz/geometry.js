@@ -391,6 +391,17 @@
         equal(maxPoint.y, 20);
     });
 
+    test("toArray returns an array with the values", function() {
+        var result = point.toArray();
+        deepEqual(result, [10, 20]);
+    });
+
+    test("toArray returns an array with the values rounded to the specified precision", function() {
+        point.move(3.14, 3.45);
+        var result = point.toArray(1);
+        deepEqual(result, [3.1, 3.5]);
+    });
+
     // ------------------------------------------------------------
     var rect;
     var invRect;
