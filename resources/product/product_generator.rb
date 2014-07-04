@@ -161,7 +161,6 @@ class TelerikProductCreateBot
     end
     def check_or_expand(element)
       driver.execute_script 'arguments[0].click()', element
-      p "click or expand processed>>"
       rescue
       screenshot("Click_Or_Expand_Failed_For_Element_" + element.attribute("id"))
     end
@@ -169,8 +168,6 @@ end
 def start_product_creation()
       bot = TelerikProductCreateBot.instance
       product_names = ENV["ProductNames"].split(',')
-
-      p "number of products to create>>" + product_names.length.to_s
 
       suite_alias = ENV["SuiteAlias"] || "KUI"
       
@@ -191,11 +188,9 @@ def start_product_creation()
 
         bot.click_and_wait "New subproduct", "administration"
 
-        p "creating product>>#{product_name}"
         create_product(bot, product_name,suite_alias, tname)
       end
       product_names.each do |product_name|
-        p "creating code library for product>>#{product_name}"
         create_code_library(bot, product_name, tname)
       end
       bot.quit
@@ -262,13 +257,11 @@ def create_product(bot, product_name, suite_alias, tname)
     #sort new product accordingly
     sleep(5)
 
-    p "assigning team for this product>>"
     if product_name_trim == ""
       assign_team(bot, product_name, suite_alias)
     else
       assign_team(bot, "Mobile " + product_name_trim, suite_alias)
     end
-    p "creating forum for this product>>"
     create_forum(bot, product_name, suite_alias, tname)
 end
 def set_product_icon_path(bot, product_icon_path)
@@ -352,30 +345,23 @@ def assign_team(bot, product_name, suite_alias)
   full_name = bot.get_full_product_name(suite_alias)
 
   rows_length = bot.driver.find_elements(:css, "##{grid_id} tbody tr").length
-  p "rows length>>#{rows_length}. Processing..."
 
     1.upto(rows_length) do |index|
         tcell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{index}) td:nth-child(2)")
-        p "cell text>>" + tcell.text
-        p "cell found>>#{full_name}" if tcell.text.include? full_name
 
         if tcell.text.include? full_name
           expand_cell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{index}) td:nth-child(1) input[type=submit]")
-          p "expanding>>"
           bot.check_or_expand(expand_cell)
           Thread.current.send :sleep, 1
 
           next_row_index = index + 1
           detail_table_rows_length = bot.driver.find_elements(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr").length
-          p "detail table rows length>>#{detail_table_rows_length}. Processing..."
           
           1.upto(detail_table_rows_length) do |dindex|
               inner_tcell = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(1)")
-              p "cell found>>#{product_name}" if inner_tcell.text.include? product_name
 
               if inner_tcell.text.include? product_name
                   checkbox = bot.driver.find_element(:css, "##{grid_id} tbody tr:nth-child(#{next_row_index}) td:nth-child(2) .rgDetailTable tbody tr:nth-child(#{dindex}) td:nth-child(2) input[type=checkbox]")
-                  p "checking checkbox>>"
                   bot.check_or_expand(checkbox) if !checkbox.selected?
                   Thread.current.send :sleep, 1
                   return

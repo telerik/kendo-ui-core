@@ -73,8 +73,6 @@ def create_code_library(bot, product_name, tname)
     bot = TelerikCodeLibraryBot.instance
     navigate_to_cl_section(bot)
     create_cl_thread(bot, product_name, tname)
-
-    #bot.driver.quit
 end
 def navigate_to_cl_section(bot)
     p "navigating to cl section>>"
@@ -104,14 +102,11 @@ end
 def set_cl_fields(bot, product_name)
       p "setting code library fields>>#{product_name}"
       sleep(4)
-      #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys '#{product_name}' 
-      #bot.driver.find_element(:xpath, "//input[contains(@id,'titleFieldControl')]").send_keys :tab
       bot.execute_script("window.frames[0].$('input[id*=\"titleFieldControl\"]').val('#{product_name}')")
       sleep(1)
       bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').removeClass('sfDisplayNone')")
       sleep(1)
       bot.execute_script("window.frames[0].$('span[id*=\"pageUrl\"]').text('Code Library')")
-      #bot.driver.find_element(:xpath, "//span[contains(@id,'pageUrl')]")
       sleep(1)
 
       if product_name.index("Mobile") == nil
@@ -122,16 +117,13 @@ def set_cl_fields(bot, product_name)
       end
       sleep(1)
 
-      #bot.driver.find_element(:xpath, "//label[contains(text(),'Allow users to upload file attachments in posts')]").click
       bot.execute_script("window.frames[0].$('a:contains(\"File attachments\")').click()")
       sleep(1)
       bot.execute_script("window.frames[0].$('label:contains(\"Allow users to upload file attachments in posts\")').click()")
       sleep(1)
       bot.execute_script("window.frames[0].$('label:contains(\"Define Manually...\")').click()")
-      #bot.driver.find_element(:xpath, "//label[contains(text(),\"Define Manually\"]')").click
       sleep(1)
       p "fields settings done>>"
-      #bot.driver.find_element(:xpath, "//textarea[contains(@id,'AllowedAttachmentExtensionsText')]").type ".zip, .rar"
       bot.execute_script("window.frames[0].$('textarea[id*=\"AllowedAttachmentExtensionsText\"]').val('.zip, .rar')")
-      #sleep(3)
+      sleep(1)
 end
