@@ -119,8 +119,8 @@
 
     var Group = Element.extend({
         init: function(options) {
-            this.children = [];
             Element.fn.init.call(this, options);
+            this.children = [];
         },
 
         childrenChange: function(action, items, index) {
@@ -413,8 +413,8 @@
 
     var Path = Element.extend({
         init: function(options) {
-            this.segments = [];
             Element.fn.init.call(this, options);
+            this.segments = [];
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
@@ -497,8 +497,8 @@
 
     var MultiPath = Element.extend({
         init: function(options) {
-            this.paths = [];
             Element.fn.init.call(this, options);
+            this.paths = [];
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");

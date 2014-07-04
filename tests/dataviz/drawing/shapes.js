@@ -146,8 +146,12 @@
             shape.fill("red");
         });
 
-        test("fill returns shape", function() {
+        test("fill is chainable", function() {
             deepEqual(shape.fill("red"), shape);
+        });
+
+        test("fill returns fill", function() {
+            equal(shape.fill("red").fill().color, "red");
         });
 
         test("stroke sets stroke", function() {
@@ -168,8 +172,12 @@
             shape.stroke("red");
         });
 
-        test("stroke returns shape", function() {
+        test("stroke is chainable", function() {
             deepEqual(shape.stroke("red"), shape);
+        });
+
+        test("stroke returns stroke", function() {
+            equal(shape.stroke("red").stroke().color, "red");
         });
     }
 
