@@ -1161,6 +1161,7 @@
             Element.fn.init.call(this, options);
             this.drawingElement = new d.Group();
             this._initSize();
+            this.children = [];
         },
 
         options: {
@@ -1169,28 +1170,39 @@
 
         append: function (visual) {
             this.drawingElement.append(visual.drawingContainer());
-            visual.canvas = this.canvas;
+            this.children.push(visual);
             this._childrenChange = true;
         },
 
         remove: function (visual) {
-            this.drawingElement.remove(visual.drawingContainer());
-            this._childrenChange = true;
+            if (this._remove(visual)) {
+                this._childrenChange = true;
+            }
+        },
+
+        _remove: function(visual) {
+            var index = inArray(visual, this.children);
+            if (index >= 0) {
+                this.drawingElement.removeAt(index);
+                this.children.splice(index, 1);
+                return true;
+            }
         },
 
         clear: function () {
             this.drawingElement.clear();
+            this.children = [];
             this._childrenChange = true;
         },
 
         toFront: function (visuals) {
-            var drawingElement = this.drawingElement;
             var visual;
 
             for (var i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                drawingElement.remove(visual.drawingContainer());
-                drawingElement.append(visual.drawingContainer());
+                if (this._remove(visual)) {
+                    this.append(visual);
+                }
             }
         },
         //TO DO: add drawing group support for moving and inserting children
@@ -1204,21 +1216,28 @@
 
         _reorderChildren: function(visuals, indices) {
             var group = this.drawingElement;
-            var children = group.children.slice(0);
-            var fixedPosition = Utils.isNumber(indices);
-            var i, index, toIndex, drawingElement;
+            var drawingChildren = group.children.slice(0);
+            var children = this.children;
+            var fixedPosition = isNumber(indices);
+            var i, index, toIndex, drawingElement, visual;
 
             for (i = 0; i < visuals.length; i++) {
-                drawingElement = visuals[i].drawingContainer();
-                index = inArray(drawingElement, children);
+                visual = visuals[i];
+                drawingElement = visual.drawingContainer();
+
+                index = inArray(visual, children);
                 if (index >= 0) {
+                    drawingChildren.splice(index, 1);
                     children.splice(index, 1);
+
                     toIndex = fixedPosition ? indices : indices[i];
-                    children.splice(toIndex, 0, drawingElement);
+
+                    drawingChildren.splice(toIndex, 0, drawingElement);
+                    children.splice(toIndex, 0, visual);
                 }
             }
             group.clear();
-            group.append.apply(group, children);
+            group.append.apply(group, drawingChildren);
         },
 
         redraw: function (options) {
