@@ -382,7 +382,9 @@ var __meta__ = {
         }
 
         function actionSheetWrap(element) {
-            return $(element).addClass("km-widget km-actionsheet")
+            element = $(element);
+
+            return element.hasClass("km-actionsheet") ? element.closest(".km-popup-wrapper") : element.addClass("km-widget km-actionsheet")
                              .wrap('<div class="km-actionsheet-wrapper km-actionsheet-tablet km-widget km-popup"></div>').parent()
                              .wrap('<div class="km-popup-wrapper k-popup"></div>').parent();
         }
@@ -635,7 +637,8 @@ var __meta__ = {
             },
 
             _renderOverflow: function() {
-                var that = this;
+                var that = this,
+                    overflowContainer = components.overflowContainer;
 
                 that.overflowAnchor = $(components.overflowAnchor).addClass(BUTTON);
 
@@ -643,12 +646,12 @@ var __meta__ = {
 
                 if (that.isMobile) {
                     that.overflowAnchor.append('<span class="km-icon km-more"></span>');
-                    components.overflowContainer = actionSheetWrap(components.overflowContainer);
+                    overflowContainer = actionSheetWrap(overflowContainer);
                 } else {
                     that.overflowAnchor.append('<span class="k-icon k-i-more"></span>');
                 }
 
-                that.popup = new kendo.ui.Popup(components.overflowContainer, {
+                that.popup = new kendo.ui.Popup(overflowContainer, {
                     origin: "bottom right",
                     position: "top right",
                     anchor: that.overflowAnchor,
