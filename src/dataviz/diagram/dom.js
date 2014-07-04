@@ -46,6 +46,7 @@
             CascadingRouter = diagram.CascadingRouter,
             isUndefined = Utils.isUndefined,
             isDefined = Utils.isDefined,
+            defined = dataviz.util.defined,
             isArray = $.isArray,
             isFunction = kendo.isFunction,
             isString = Utils.isString;
@@ -242,11 +243,12 @@
 
         function indicesOfItems(group, visuals) {
             var i, indices = [], visual;
+            var children = group.drawingContainer().children;
+            var length = children.length;
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                for (var j = 0; j < group.children.length; j++) {
-                    var other = group.children[j];
-                    if (other == visual.domElement) {
+                for (var j = 0; j < length; j++) {
+                    if (children[j] == visual.drawingContainer()) {
                         indices.push(j);
                         break;
                     }
@@ -1683,12 +1685,11 @@
                     items = this._selectedItems.slice();
                 }
                 var result = this._getDiagramItems(items), indices;
-                if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
+                if (!defined(undoable) || undoable) {
+                    indices = indicesOfItems(this.mainLayer, result.visuals);
                     var unit = new ToFrontUnit(this, items, indices);
                     this.undoRedoService.add(unit);
-                }
-                else {
+                } else {
                     this.mainLayer.toFront(result.visuals);
                     this._fixOrdering(result, true);
                 }
@@ -1703,8 +1704,8 @@
                     items = this._selectedItems.slice();
                 }
                 var result = this._getDiagramItems(items), indices;
-                if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
+                if (!defined(undoable) || undoable) {
+                    indices = indicesOfItems(this.mainLayer, result.visuals);
                     var unit = new ToBackUnit(this, items, indices);
                     this.undoRedoService.add(unit);
                 }
