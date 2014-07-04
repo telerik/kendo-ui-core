@@ -11,6 +11,7 @@ VERBOSE = verbose == true
 
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build")
 $LOAD_PATH << File.join(File.dirname(__FILE__), "build", "codegen", "lib")
+$LOAD_PATH << File.join(File.dirname(__FILE__), "resources/product")
 
 CDN_ROOT = 'http://cdn.kendostatic.com/'
 KENDO_ORIGIN_HOST = 'kendoorigin'
@@ -122,6 +123,7 @@ require 'download_builder'
 require 'internal_build_upload'
 require 'release_build_upload'
 require 'release_notes'
+require 'product_incubator_hub'
 require 'cdn'
 require 'tests'
 require 'codegen'
