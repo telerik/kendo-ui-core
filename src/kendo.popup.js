@@ -72,6 +72,7 @@ var __meta__ = {
             options = that.options;
 
             that.collisions = options.collision ? options.collision.split(" ") : [];
+            that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
 
             if (that.collisions.length === 1) {
                 that.collisions.push(that.collisions[0]);
@@ -107,31 +108,7 @@ var __meta__ = {
 
             extend(options.animation.close, {
                 complete: function() {
-                    that.wrapper.hide();
-
-                    var location = that.wrapper.data(LOCATION),
-                        anchor = $(options.anchor),
-                        direction, dirClass;
-
-                    if (location) {
-                        that.wrapper.css(location);
-                    }
-
-                    if (options.anchor != BODY) {
-                        direction = (anchor[0].className.match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
-                        dirClass = ACTIVEBORDER + "-" + direction;
-
-                        anchor
-                            .removeClass(dirClass)
-                            .children(ACTIVECHILDREN)
-                            .removeClass(ACTIVE)
-                            .removeClass(dirClass);
-
-                        element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
-                    }
-
-                    that._closing = false;
-                    that._trigger(DEACTIVATE);
+                    that._animationClose();
                 }
             });
 
@@ -180,6 +157,37 @@ var __meta__ = {
             }
         },
 
+        _animationClose: function() {
+            var that = this,
+                options = that.options;
+
+            that.wrapper.hide();
+
+            var location = that.wrapper.data(LOCATION),
+                anchor = $(options.anchor),
+                direction, dirClass;
+
+            if (location) {
+                that.wrapper.css(location);
+            }
+
+            if (options.anchor != BODY) {
+                direction = (anchor[0].className.match(ACTIVEBORDERREGEXP) || ["", "down"])[1];
+                dirClass = ACTIVEBORDER + "-" + direction;
+
+                anchor
+                    .removeClass(dirClass)
+                    .children(ACTIVECHILDREN)
+                    .removeClass(ACTIVE)
+                    .removeClass(dirClass);
+
+                that.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+            }
+
+            that._closing = false;
+            that._trigger(DEACTIVATE);
+        },
+
         destroy: function() {
             var that = this,
                 options = that.options,
@@ -193,7 +201,7 @@ var __meta__ = {
             }
 
             if (!options.modal) {
-                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
+                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
                 that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
             }
 
@@ -234,8 +242,8 @@ var __meta__ = {
                 }
 
                 if (!options.modal) {
-                    DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy)
-                                .bind(MOUSEDOWN, that._mousedownProxy);
+                    DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy)
+                                .bind(that.downEvent, that._mousedownProxy);
 
                     // this binding hangs iOS in editor
                     if (!(support.mobileOS.ios || support.mobileOS.android)) {
@@ -318,7 +326,7 @@ var __meta__ = {
                     }
                 });
 
-                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
+                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
                 that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
 
                 if (skipEffects) {
