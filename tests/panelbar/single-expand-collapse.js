@@ -10,13 +10,58 @@
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
                 '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
-                '        <ul style="display: none;" class="k-group">' +
-                '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Deleted Items</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
-                '            </li>' +
+                '        <ul>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
+                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                <ul style="display: none;" class="k-group">' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Server Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Ajax Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Web Service Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Custom Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Twitter Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Facebook Binding</a></li>' +
+                    '                </ul>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
+                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                <ul style="display: none;" class="k-group">' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Server Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Ajax Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Web Service Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Custom Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Twitter Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Facebook Binding</a></li>' +
+                    '                </ul>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
+                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                <ul style="display: none;" class="k-group">' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Server Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Ajax Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Web Service Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Custom Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Twitter Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Facebook Binding</a></li>' +
+                    '                </ul>' +
+                    '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Mail</span>' +
                 '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Sent Items</span>' +
@@ -29,11 +74,7 @@
                 '    </li>' +
                 '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
                 '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
-                '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
-                '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Address Cards</span>' +
-                '            </li>' +
+                '        <ul>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
                 '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Shared Contacts</span>' +
@@ -69,8 +110,40 @@
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
                 '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
-                '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
-                '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
+                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                <ul style="display: none;" class="k-group">' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Server Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Ajax Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Web Service Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Custom Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Twitter Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Facebook Binding</a></li>' +
+                    '                </ul>' +
+                    '            </li>' +
+                    '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
+                    '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                    '                <ul style="display: none;" class="k-group">' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Server Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Ajax Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Web Service Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Custom Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Twitter Binding</a></li>' +
+                    '                    <li class="k-item k-state-default"><a href="#"' +
+                    '                                                          class="k-link">Facebook Binding</a></li>' +
+                    '                </ul>' +
+                    '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Profile<span' +
                 '                    class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
                 '                <ul style="display: none;" class="k-group">' +
@@ -154,5 +227,19 @@
         $(subItem).find('> .k-link').trigger('click');
 
         equal(item.find('.k-group').css("display"), "block");
+    });
+
+    test('clicking sub item should collapse siblings', function() {
+        var item = getRootItem(4);
+        panelbar.expand(item, false);
+
+        var subItem1 = item.find('> .k-panel').children().eq(0);
+        var subItem2 = subItem1.next();
+
+        subItem1.find('> .k-link').trigger('click');
+        subItem2.find('> .k-link').trigger('click');
+
+        equal(subItem1.find('> .k-panel').css("display"), "none");
+        equal(subItem2.find('> .k-panel').css("display"), "block");
     });
 })();
