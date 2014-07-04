@@ -167,5 +167,20 @@ namespace Kendo.Mvc.UI.Tests
             public string Bar { get; set; }            
             public SimpleFoo Complex { get; set; }
         }
+
+        enum FilterEnum
+        {
+            Foo,
+            Bar
+        }
+
+        [Fact]
+        public void Should_serialize_value_if_enum_is_set()
+        {
+            var descriptor = new FilterDescriptor {Member = "Foo", Value = FilterEnum.Bar };
+            var result = descriptor.ToJson();
+
+            result["value"].ShouldEqual(1);
+        }
     }
 }

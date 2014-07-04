@@ -155,7 +155,18 @@ namespace Kendo.Mvc
 
             json["field"] = Member;
             json["operator"] = Operator.ToToken();
-            json["value"] = Value;
+
+            if (Value != null && Value.GetType().GetNonNullableType().IsEnum)
+            {
+                var type = Value.GetType().GetNonNullableType();
+                var underlyingType = Enum.GetUnderlyingType(type);
+
+                json["value"] = Convert.ChangeType(Value, underlyingType);
+            }
+            else
+            {
+                json["value"] = Value;
+            }
         }
     }
 }
