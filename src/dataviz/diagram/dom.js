@@ -747,26 +747,6 @@
                 visualTemplate = shapeDefaults.visual, // Shape visual should not have position in its parent group.
                 type = shapeDefaults.type;
 
-            function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
-                // if external serializationSource we need to consult the attached libraries
-                // shapeDefaults.diagram is set when the diagram starts deserializing
-                if (diagram.libraries && diagram.libraries.length > 0) {
-                    for (var i = 0; i < diagram.libraries.length; i++) {
-                        var library = diagram.libraries[i];
-                        for (var j = 0; j < library.length; j++) {
-                            var shapeDefinition = library[j];
-                            if (shapeDefinition.options.name === libraryShapeName && shapeDefinition.options.serializationSource === "external") {
-                                // the JSON options do not contain the funcs managing the complex layout, so need to transfer them
-                                options.layout = shapeDefinition.options.layout;
-                                options.visual = shapeDefinition.options.visual;
-                                options.rebuild = shapeDefinition.options.rebuild;
-                                return shapeDefinition.options.visual(shapeDefaults);
-                            }
-                        }
-                    }
-                }
-            }
-
             function simpleShape(name, shapeDefaults) {
                 switch (name.toLocaleLowerCase()) {
                     case "rectangle":
@@ -777,8 +757,6 @@
                         return new TextBlock(shapeDefaults);
                     case "image":
                         return new Image(shapeDefaults);
-                    case "svg":
-                        return svgShape(shapeDefaults.definition);
                     default:
                         var p = new Path(shapeDefaults);
                         return p;
@@ -795,35 +773,7 @@
                 return func.call(context, shapeDefaults);
             }
 
-            var parseXml;
-
-            if (typeof window.DOMParser != "undefined") {
-                parseXml = function (xmlStr) {
-                    return ( new window.DOMParser() ).parseFromString(xmlStr, "image/svg+xml");
-                };
-            } else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
-                parseXml = function (xmlStr) {
-                    var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
-                    xmlDoc.async = "false";
-                    xmlDoc.loadXML(xmlStr);
-                    return xmlDoc;
-                };
-            } else {
-                throw new Error("No XML parser found");
-            }
-
-            function svgShape(svgString) {
-                var fullString = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
-                var result = parseXml(fullString);
-                var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
-                var g = new Group();
-                g.append(new Visual(importedNode));
-                return g;
-            }
-
-            if (!kendo.isFunction(visualTemplate) && shapeDefaults.serializationSource === "external") {
-                return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
-            } else if (shapeDefaults.path) {
+            if (shapeDefaults.path) {
                 return pathShape(shapeDefaults.path, shapeDefaults);
             } else if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
@@ -1296,7 +1246,6 @@
                     id: "adorner-layer"
                 });
                 that.canvas.append(that.adornerLayer);
-                that.libraries = []; // shape libraries needed to deserialize complex shapes/controls with composite geometries and layout
                 that.toolService = new ToolService(that);
                 that._attachEvents();
                 that._initialize();
