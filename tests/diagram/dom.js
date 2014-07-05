@@ -75,6 +75,42 @@
     });
 
     // ------------------------------------------------------------
+    (function() {
+        var shape;
+
+        function setupShapeDefaults(shapeDefaults) {
+            createDiagram({
+                shapeDefaults: shapeDefaults
+            });
+        }
+
+        module("Diagram / shapeDefaults", {
+            teardown: teardown
+        });
+
+        test("default shape type", function() {
+            setupShapeDefaults({type: "circle"});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal("circle", shape.options.type, "the type of the shape should come from shapeDefaults");
+        });
+
+        test("default shape path", function() {
+            setupShapeDefaults({path: "m0,100 L100,100 L50,0z"});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal("m0,100 L100,100 L50,0z", shape.options.path, "path should be set by the shapeDefaults");
+        });
+
+        test("shape is undoable", function() {
+            setupShapeDefaults({});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
+        });
+    })();
+
+    // ------------------------------------------------------------
     module("Diagram / add connection", {
         setup: setup,
         teardown: teardown
@@ -100,69 +136,75 @@
     });
 
     // ------------------------------------------------------------
-    module("Diagram / bring into view", {
-        setup: setup,
-        teardown: teardown
-    });
+    (function() {
+        var rect;
+        var shape;
+        var newPan;
+        var viewport;
 
-    test("rectangle", function () {
-        var rect = new Rect(0, 0, 400, 400),
-            viewport = diagram.viewport();
-        diagram.bringIntoView(rect);
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-    });
-
-    test("shape", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds(),
-            viewport = diagram.viewport();
-
-        diagram.bringIntoView(s, {align: "none"});
-        deepEqual(diagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
-
-        diagram.bringIntoView(s);
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-
-    });
-
-    test("multiple shapes", function () {
-        var s = diagram.addShape({});
-        var point = new Point(500, 500)
-        var s1 = diagram.addShape({
-            x: point.x,
-            y: point.y
+        module("Diagram / bring into view", {
+            setup: function (){
+                setup();
+                viewport = diagram.viewport();
+            },
+            teardown: teardown
         });
-        var rect = s.bounds().union(s1.bounds()),
-            viewport = diagram.viewport();
 
-        diagram.bringIntoView([s, s1], {center: true});
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-    });
+        test("rectangle", function () {
+            rect = new Rect(0, 0, 400, 400);
+            diagram.bringIntoView(rect);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan);
+        });
 
-    test("align top right", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds("transformed"),
-            viewport = diagram.viewport();
+        test("shape", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds();
 
-        var newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan());
-        diagram.bringIntoView([s], {align: "top right"});
-        equal(diagram.pan().x, Math.floor(newPan.x));
-        equal(diagram.pan().y, Math.floor(newPan.y));
-    });
+            diagram.bringIntoView(shape, {align: "none"});
+            deepEqual(diagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
 
-    test("align center bottom", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds("transformed"),
-            viewport = diagram.viewport();
+            diagram.bringIntoView(shape);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan);
 
-        var newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan());
-        diagram.bringIntoView([s], {align: "center bottom"});
-        equal(diagram.pan().x, newPan.x);
-        equal(diagram.pan().y, newPan.y);
-    });
+        });
+
+        test("multiple shapes", function () {
+            shape = diagram.addShape({});
+            var point = new Point(500, 500);
+            var shape1 = diagram.addShape({
+                x: point.x,
+                y: point.y
+            });
+
+            rect = shape.bounds().union(shape1.bounds());
+
+            diagram.bringIntoView([shape, shape1], {center: true});
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan);
+        });
+
+        test("align top right", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds("transformed");
+
+            newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan());
+            diagram.bringIntoView([shape], {align: "top right"});
+            equal(diagram.pan().x, Math.floor(newPan.x));
+            equal(diagram.pan().y, Math.floor(newPan.y));
+        });
+
+        test("align center bottom", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds("transformed");
+
+            newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan());
+            diagram.bringIntoView([shape], {align: "center bottom"});
+            equal(diagram.pan().x, newPan.x);
+            equal(diagram.pan().y, newPan.y);
+        });
+    })();
 
     // ------------------------------------------------------------
     (function() {
@@ -585,45 +627,6 @@
         var expected = diagram.viewToDocument(diagram.modelToView(point));
 
         roughlyEqualPoint(result, expected, "layer->view->document");
-    });
-
-    // ------------------------------------------------------------
-    module("Diagram / shapeDefaults", {
-        setup: function() {
-            QUnit.fixture.html('<div id="canvas" />');
-            window.createShapeDefaults = function(shapeDefaults) {
-                diagram = $("#canvas").kendoDiagram({
-                    shapeDefaults: shapeDefaults
-                }).getKendoDiagram();
-
-                return diagram;
-            };
-        },
-        teardown: function() {
-            diagram.destroy();
-            delete window.createShapeDefaults;
-        }
-    });
-
-    test("default shape type", function() {
-        createShapeDefaults({type: "circle"});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal("circle", shape.options.type, "the type of the shape should come from shapeDefaults");
-    });
-
-    test("default shape path", function() {
-        createShapeDefaults({path: "m0,100 L100,100 L50,0z"});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal("m0,100 L100,100 L50,0z", shape.options.path, "path should be set by the shapeDefaults");
-    });
-
-    test("shape is undoable", function() {
-        createShapeDefaults({});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
     });
 
     // ------------------------------------------------------------
