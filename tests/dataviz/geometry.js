@@ -660,6 +660,11 @@
         ok(arc.center instanceof Point);
     });
 
+    test("constructor sets center from array", function() {
+        arc = new Arc([0, 0], 10);
+        ok(arc.center.equals(new Point(0, 0)));
+    });
+
     test("constructor sets options", function() {
         equal(arc.radiusX, 50);
         equal(arc.radiusY, 100);
@@ -721,6 +726,21 @@
         equal(arc.getStartAngle(), 0);
         equal(arc.getEndAngle(), 180);
         equal(arc.getCounterClockwise(), false);
+    });
+
+    test("sets center", function() {
+        var center = new g.Point(10, 10);
+        arc.setCenter(center);
+        ok(arc.center.equals(center));
+    });
+
+    test("sets center from array", function() {
+        arc.setCenter([10, 10]);
+        ok(arc.center.equals(new g.Point(10, 10)));
+    });
+
+    test("gets center", function() {
+        ok(arc.getCenter().equals(new g.Point(100, 100)));
     });
 
     test("pointAt returns the point on the elipse for a given angle", function() {

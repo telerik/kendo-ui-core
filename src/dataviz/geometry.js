@@ -310,8 +310,7 @@
 
     var Arc = Class.extend({
         init: function(center, options) {
-            this.center = center || new Point();
-            this.center.observer = this;
+            this.setCenter(center || new Point());
 
             options = options || {};
             this.radiusX = options.radiusX;
@@ -319,6 +318,17 @@
             this.startAngle = options.startAngle;
             this.endAngle = options.endAngle;
             this.counterClockwise = options.counterClockwise || false;
+        },
+
+        setCenter: function(value) {
+            this.center = Point.create(value);
+            this.center.observer = this;
+            this.geometryChange();
+            return this;
+        },
+
+        getCenter: function() {
+            return this.center;
         },
 
         MAX_INTERVAL: 90,
