@@ -418,74 +418,101 @@
         });
 
         // ------------------------------------------------------------
-        module("Shape / Content", {
-            setup: setup,
-            teardown: teardown
-        });
+        (function() {
+            var contentVisual;
 
-        test("template", function() {
-            shape = diagram.addShape({
-                content: {
-                    template: "foo"
-                }
+            function setupShape(options) {
+                shape = diagram.addShape(options);
+                contentVisual = shape._contentVisual;
+            }
+
+            module("Shape / Content", {
+                setup: setup,
+                teardown: teardown
             });
 
-            equal(shape.options.content.text, "foo");
-            equal(shape._contentVisual.content(), "foo");
-        });
+            test("template", function() {
+                setupShape({
+                    content: {
+                        template: "foo"
+                    }
+                });
 
-        test("text", function() {
-            shape = diagram.addShape({
-                content: {
-                    text: "foo"
-                }
+                equal(shape.options.content.text, "foo");
+                equal(contentVisual.content(), "foo");
             });
 
-            equal(shape.options.content.text, "foo");
-            equal(shape._contentVisual.content(), "foo");
-        });
+            test("text", function() {
+                setupShape({
+                    content: {
+                        text: "foo"
+                    }
+                });
 
-        test("aligns text", function() {
-            shape = diagram.addShape({
-                content: {
-                    text: "foo",
-                    align: "center middle"
-                },
-                type: "rectangle",
-                width: 100,
-                height: 100
+                equal(shape.options.content.text, "foo");
+                equal(contentVisual.content(), "foo");
             });
-            var content = shape._contentVisual;
-            var contentBBox = content.drawingElement.bbox(null);
-            var position = content.position();
-            close(position.x, (100 - contentBBox.width()) / 2, 1);
-            close(position.y, (100 - contentBBox.height()) / 2, 1);
-        });
 
-        test("aligns text with transformed visual", function() {
-            shape = diagram.addShape({
-                content: {
-                    text: "foo",
-                    align: "center middle"
-                },
-                type: "rectangle",
-                width: 100,
-                height: 100,
-                x: 200,
-                y: 100,
-                rotation: {
-                    angle: 30
-                }
+            test("content should extend content options if an object is passed", function() {
+                setupShape({
+                    content: {
+                        text: "foo"
+                    }
+                });
+                shape.content({
+                    text: "bar",
+                    fill: {
+                        color: "#2e2e2e"
+                    }
+                });
+
+                equal(shape.options.content.text, "bar");
+                equal(shape.options.content.fill.color, "#2e2e2e");
             });
-            var rect = new Rect(0, 0, 200, 200);
-            shape.bounds(rect);
-            shape.content("foo");
-            var content = shape._contentVisual;
-            var contentBBox = content.drawingElement.bbox(null);
-            var position = content.position();
-            close(position.x, (100 - contentBBox.width()) / 2, 1);
-            close(position.y, (100 - contentBBox.height()) / 2, 1);
-        });
+
+            test("aligns text", function() {
+                setupShape({
+                    content: {
+                        text: "foo",
+                        align: "center middle"
+                    },
+                    type: "rectangle",
+                    width: 100,
+                    height: 100
+                });
+
+                var contentBBox = contentVisual.drawingElement.bbox(null);
+                var position = contentVisual.position();
+                close(position.x, (100 - contentBBox.width()) / 2, 1);
+                close(position.y, (100 - contentBBox.height()) / 2, 1);
+            });
+
+            test("aligns text with transformed visual", function() {
+                setupShape({
+                    content: {
+                        text: "foo",
+                        align: "center middle"
+                    },
+                    type: "rectangle",
+                    width: 100,
+                    height: 100,
+                    x: 200,
+                    y: 100,
+                    rotation: {
+                        angle: 30
+                    }
+                });
+
+                shape.bounds(new Rect(0, 0, 200, 200));
+                shape.content("foo");
+
+                var contentBBox = contentVisual.drawingElement.bbox(null);
+                var position = contentVisual.position();
+                close(position.x, (100 - contentBBox.width()) / 2, 1);
+                close(position.y, (100 - contentBBox.height()) / 2, 1);
+            });
+
+        })();
 
         (function() {
             var bounds;

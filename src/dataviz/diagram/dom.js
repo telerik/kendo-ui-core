@@ -338,7 +338,7 @@
                     if (diagram.Utils.isString(content)) {
                         options.content.text = content;
                     } else {
-                        options.content = options;
+                        deepExtend(options.content, content);
                     }
 
                     var contentOptions = options.content;
