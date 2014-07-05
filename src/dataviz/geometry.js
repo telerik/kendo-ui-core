@@ -248,10 +248,19 @@
 
     var Circle = Class.extend({
         init: function(center, radius) {
-            this.center = center || new Point();
-            this.radius = radius || 0;
+            this.setCenter(center || new Point());
+            this.setRadius(radius || 0);
+        },
 
+        setCenter: function(value) {
+            this.center = Point.create(value);
             this.center.observer = this;
+            this.geometryChange();
+            return this;
+        },
+
+        getCenter: function() {
+            return this.center;
         },
 
         geometryChange: util.mixins.geometryChange,

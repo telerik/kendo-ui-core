@@ -525,6 +525,11 @@
         ok(circle.center.equals(new Point(0, 0)));
     });
 
+    test("constructor sets center from array", function() {
+        circle = new Circle([0, 0], 10);
+        ok(circle.center.equals(new Point(0, 0)));
+    });
+
     test("constructor sets radius", function() {
         equal(circle.radius, 10);
     });
@@ -537,6 +542,21 @@
         };
 
         circle.center.setX(1);
+    });
+
+    test("sets center", function() {
+        var center = new g.Point(10, 10);
+        circle.setCenter(center);
+        ok(circle.center.equals(center));
+    });
+
+    test("sets center from array", function() {
+        circle.setCenter([10, 10]);
+        ok(circle.center.equals(new g.Point(10, 10)));
+    });
+
+    test("gets center", function() {
+        ok(circle.getCenter().equals(new g.Point(0, 0)));
     });
 
     test("sets radius", function() {
