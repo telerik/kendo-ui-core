@@ -605,7 +605,7 @@
 
         module("ImageNode", {
             setup: function() {
-                image = new d.Image("Foo", new g.Rect(new Point(10, 20), new Point(100, 100)));
+                image = new d.Image("Foo", new g.Rect(new Point(10, 20), [90, 80]));
                 imageNode = new canv.ImageNode(image);
                 imageNode._loaded = true;
             }
@@ -650,7 +650,7 @@
                 ok(true);
             };
 
-            image.rect().p0.setX(20);
+            image.rect().origin.setX(20);
         });
 
         test("renders transform", function() {

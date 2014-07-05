@@ -816,7 +816,7 @@
 
         module("ImageNode", {
             setup: function() {
-                image = new d.Image("Foo", new g.Rect(new g.Point(10, 20), new g.Point(100, 100)));
+                image = new d.Image("Foo", new g.Rect(new g.Point(10, 20), [90, 80]));
                 imageNode = new svg.ImageNode(image);
             }
         });
@@ -855,7 +855,7 @@
                 }
             };
 
-            image.rect().p0.scale(2);
+            image.rect().origin.scale(2);
         });
 
         test("geometryChange sets size", 2, function() {
@@ -867,7 +867,7 @@
                 }
             };
 
-            image.rect().p0.scale(2);
+            image.rect().setSize([80, 60]);
         });
 
         test("optionsChange sets source", function() {

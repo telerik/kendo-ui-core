@@ -647,8 +647,8 @@
         renderData: function() {
             var rect = this.srcElement.rect();
             var center = rect.center();
-            return "m " + printPoints([new g.Point(rect.p0.x, center.y)]) +
-                   " l " + printPoints([new g.Point(rect.p1.x, center.y)]);
+            return "m " + printPoints([new g.Point(rect.topLeft().x, center.y)]) +
+                   " l " + printPoints([new g.Point(rect.bottomRight().x, center.y)]);
         },
 
         template: renderTemplate(
@@ -775,10 +775,10 @@
                 matrix.round(TRANSFORM_PRECISION);
                 style.push(["filter", this.transformTemplate(matrix)]);
 
-                var bbox = this.srcElement.bbox();
-                var br = this.srcElement.rect().bottomRight();
-                style.push(["padding-right", max(bbox.p1.x - br.x, 0) + "px"],
-                           ["padding-bottom", max(bbox.p1.y - br.y, 0) + "px"]);
+                var bboxEdge = this.srcElement.bbox().bottomRight();
+                var edge = this.srcElement.rect().bottomRight();
+                style.push(["padding-right", max(bboxEdge.x - edge.x, 0) + "px"],
+                           ["padding-bottom", max(bboxEdge.y - edge.y, 0) + "px"]);
             }
 
             return style;

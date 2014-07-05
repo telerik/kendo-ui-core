@@ -373,10 +373,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10)),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -389,10 +389,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10)),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -405,10 +405,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10), {visible: false}),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -658,7 +658,7 @@
                 geometry = new g.Circle(new Point());
 
             geometry.bbox = function() {
-                return new g.Rect(new Point(50, 50), new Point(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             circle = new Circle(geometry, {stroke: {width: 5}});
             boundingBox = circle.bbox();
@@ -750,7 +750,7 @@
                 geometry = new g.Arc(new Point());
 
             geometry.bbox = function() {
-                return new g.Rect(new Point(50, 50), new Point(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             arc = new Arc(geometry, {stroke: {width: 5}});
             boundingBox = arc.bbox();
@@ -1255,7 +1255,7 @@
 
         module("Image", {
             setup: function() {
-                rect = new g.Rect(new g.Point(0, 0), new g.Point(100, 100));
+                rect = new g.Rect(new g.Point(0, 0), [100, 100]);
                 image = new d.Image("foo", rect);
             }
         });
@@ -1316,7 +1316,7 @@
                 }
             };
 
-            image.rect().p0.setX(5);
+            image.rect().origin.setX(5);
         });
 
         test("boundingBox returns bounding rect", function() {
