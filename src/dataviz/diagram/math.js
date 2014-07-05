@@ -270,6 +270,14 @@
 
             this.width *= scaleX;
             this.height *= scaleY;
+        },
+
+        zoom: function(zoom) {
+            this.x *= zoom;
+            this.y *= zoom;
+            this.width *= zoom;
+            this.height *= zoom;
+            return this;
         }
     });
 
