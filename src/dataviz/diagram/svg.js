@@ -316,21 +316,7 @@
 
         _hover: function () {},
 
-        _diffNumericOptions: function (options, fields) {
-            var elementOptions = this.options;
-            var hasChanges = false;
-            var value, field;
-            for (var i = 0; i < fields.length; i++) {
-                field = fields[i];
-                value = options[field];
-                if (isNumber(value) && elementOptions[field] !== value) {
-                    elementOptions[field] = value;
-                    hasChanges = true;
-                }
-            }
-
-            return hasChanges;
-        },
+        _diffNumericOptions: diffNumericOptions,
 
         _measure: function (force) {
             var rect;
@@ -1455,11 +1441,28 @@
         return angle;
     }
 
+    function diffNumericOptions(options, fields) {
+        var elementOptions = this.options;
+        var hasChanges = false;
+        var value, field;
+        for (var i = 0; i < fields.length; i++) {
+            field = fields[i];
+            value = options[field];
+            if (isNumber(value) && elementOptions[field] !== value) {
+                elementOptions[field] = value;
+                hasChanges = true;
+            }
+        }
+
+        return hasChanges;
+    }
+
     // Exports ================================================================
     kendo.deepExtend(diagram, {
         init: function (element) {
             kendo.init(element, diagram.ui);
         },
+        diffNumericOptions: diffNumericOptions,
         Element: Element,
         Scale: Scale,
         Translation: Translation,
