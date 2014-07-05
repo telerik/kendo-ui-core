@@ -123,6 +123,7 @@
             var defaults = {
                 type: DEFAULT_SHAPE_TYPE,
                 path: "",
+                autoSize: true,
                 visual: null,
                 x: DEFAULT_SHAPE_POSITION,
                 y: DEFAULT_SHAPE_POSITION,
@@ -283,7 +284,7 @@
                 that.dataItem = dataItem;
                 that.visual = new Group({
                     id: that.options.id,
-                    autoSize: true
+                    autoSize: that.options.autoSize
                 });
                 that._template();
             },
@@ -727,9 +728,7 @@
                     fill: options.fill,
                     stroke: options.stroke,
                     startCap: options.startCap,
-                    endCap: options.endCap,
-                    fontFamily: options.fontFamily,
-                    fontSize: options.fontSize
+                    endCap: options.endCap
                 };
             },
 

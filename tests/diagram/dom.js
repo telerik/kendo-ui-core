@@ -361,10 +361,29 @@
         equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
     });
 
-    // ------------------------------------------------------------
+
     (function() {
         var shape;
 
+        // ------------------------------------------------------------
+        module("Shape / initialization", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("sets autoSize to true to visual group by default", function() {
+            shape = diagram.addShape({});
+            equal(shape.visual.options.autoSize, true);
+        });
+
+        test("sets autoSizeto visual group base on the options", function() {
+            shape = diagram.addShape({
+                autoSize: false
+            });
+            equal(shape.visual.options.autoSize, false);
+        });
+
+        // ------------------------------------------------------------
         module("Shape / types", {
             setup: setup,
             teardown: teardown
