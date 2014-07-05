@@ -191,14 +191,50 @@
         var rect;
         var shape;
         var newPan;
-        var viewport;
+        var viewport = new Rect(0, 0, 800, 600);
+
+        function setupBringIntoView(options) {
+                createDiagram(options);
+                diagram.viewport = function() {
+                    return viewport;
+                };
+                diagram.pan = function(point) {
+                    if (point) {
+                        this._storePan(point);
+                    }
+                    return this._pan;
+                };
+                diagram._zoomMainLayer = function() {};
+        }
 
         module("Diagram / bring into view", {
-            setup: function (){
-                setup();
-                viewport = diagram.viewport();
+            setup: function() {
+                setupBringIntoView();
             },
             teardown: teardown
+        });
+
+        test("clears current pan", function () {
+            diagram._storePan = function(pan) {
+                equal(pan.x, 0);
+                equal(pan.y, 0);
+            };
+
+            diagram.pan = function() {
+                return this._pan;
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400));
+        });
+
+        test("passes animate option to pan", function () {
+            diagram.pan = function(pan, animate) {
+                ok(animate);
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400), {animate: true});
+            diagram.pan = function(pan, animate) {
+                ok(!animate);
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400), {animate: false});
         });
 
         test("rectangle", function () {
@@ -212,13 +248,9 @@
             shape = diagram.addShape({});
             rect = shape.bounds();
 
-            diagram.bringIntoView(shape, {align: "none"});
-            deepEqual(diagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
-
             diagram.bringIntoView(shape);
             newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
             deepEqual(diagram.pan(), newPan);
-
         });
 
         test("multiple shapes", function () {
@@ -255,6 +287,37 @@
             equal(diagram.pan().x, newPan.x);
             equal(diagram.pan().y, newPan.y);
         });
+
+        module("Diagram / bring into view / zoom", {
+            setup: function() {
+                setupBringIntoView({
+                    zoom: 2
+                });
+            },
+            teardown: teardown
+        });
+
+        test("takes current zoom into account", function() {
+            rect = new Rect(1000, 1000, 100, 100);
+            diagram.bringIntoView(rect);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.clone().zoom(2).center());
+            deepEqual(diagram.pan(), newPan);
+        });
+
+        test("zooms out if the bounding rect width or height is bigger than the viewport width or height", function() {
+            rect = new Rect(1000, 1000, 1000, 100);
+            diagram._zoomMainLayer = function() {
+                close(diagram._zoom, 800 / 1000, 0.1);
+            };
+            diagram.bringIntoView(rect);
+
+            rect = new Rect(1000, 1000, 100, 1000);
+            diagram._zoomMainLayer = function() {
+                close(diagram._zoom, 600 / 1000, 0.1);
+            };
+            diagram.bringIntoView(rect);
+        });
+
     })();
 
     // ------------------------------------------------------------

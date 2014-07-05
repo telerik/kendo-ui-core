@@ -1746,32 +1746,41 @@
              * "Center middle" will position the items in the center. animate - controls if the pan should be animated.
              */
             bringIntoView: function (item, options) { // jQuery|Item|Array|Rect
-                var rect,
-                    viewport = this.viewport();
+                var viewport = this.viewport();
+                var aligner = new diagram.RectAlign(viewport);
+                var current, rect, original, newPan;
 
                 options = deepExtend({animate: false, align: "center middle"}, options);
+                if (options.align == "none") {
+                    options.align = "center middle";
+                }
+
                 if (item instanceof DiagramElement) {
                     rect = item.bounds(TRANSFORMED);
-                }
-                else if (isArray(item)) {
+                } else if (isArray(item)) {
                     rect = this.boundingBox(item);
-                }
-                else if (item instanceof Rect) {
+                } else if (item instanceof Rect) {
                     rect = item.clone();
                 }
-                if (options.align !== "none" || !viewport.contains(rect.center())) {
-                    if (options.align === "none") {
-                        options.align = "center middle";
-                    }
-                    var old = rect.clone(),
-                        align = new diagram.RectAlign(viewport);
 
-                    align.align(rect, options.align);
+                original = rect.clone();
 
-                    var newPan = rect.topLeft().minus(old.topLeft());
-                    this.pan(newPan, options.animate);
+                rect.zoom(this._zoom);
+                this._storePan(new Point());
+
+                if (rect.width > viewport.width || rect.height > viewport.height) {
+                    this._zoom = this._getValidZoom(math.min(viewport.width / original.width, viewport.height / original.height));
+                    rect = original.clone().zoom(this._zoom);
                 }
+                this._zoomMainLayer();
+
+                current = rect.clone();
+                aligner.align(rect, options.align);
+
+                newPan = rect.topLeft().minus(current.topLeft());
+                this.pan(newPan, options.animate);
             },
+
             alignShapes: function (direction) {
                 if (isUndefined(direction)) {
                     direction = "Left";
