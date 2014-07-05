@@ -137,6 +137,57 @@
 
     // ------------------------------------------------------------
     (function() {
+
+        module("Diagram / pan", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("pan calls scroller scrollTo method with passed pan", function() {
+            diagram.scroller.scrollTo = function(x, y) {
+                equal(x, 100);
+                equal(y, 200);
+            };
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan calls scroller animatedScrollTo method with passed pan if second parameter is true", function() {
+            diagram.scroller.animatedScrollTo = function(x, y) {
+                equal(x, 100);
+                equal(y, 200);
+            };
+            diagram.pan(new Point(100, 200), true);
+        });
+
+        test("pan does not call scroller scrollTo or animatedScrollTo method if passed pan is the same as the current pan", 0, function() {
+            diagram.scroller.animatedScrollTo = function() {
+                ok(false);
+            };
+            diagram.scroller.scrollTo = function() {
+                ok(false);
+            };
+            diagram._pan = new Point(100, 200);
+            diagram.pan(new Point(100, 200), false);
+            diagram.pan(new Point(100, 200), true);
+        });
+
+        test("pan returns current pan and does not call scroller scrollTo or animatedScrollTo method if no point is passed", function() {
+            diagram.scroller.animatedScrollTo = function() {
+                ok(false);
+            };
+            diagram.scroller.scrollTo = function() {
+                ok(false);
+            };
+
+            diagram._pan = new Point(100, 200);
+            var pan = diagram.pan();
+            equal(pan.x, 100);
+            equal(pan.y, 200);
+        });
+
+    })();
+    // ------------------------------------------------------------
+    (function() {
         var rect;
         var shape;
         var newPan;

@@ -1865,20 +1865,20 @@
                 return this._zoom;
             },
 
-            pan: function (pan, options) {
-                options = options || {animated: false};
-                var animated = options.animated;
+            pan: function (pan, animate) {
                 if (pan instanceof Point && !pan.equals(this._pan)) {
-                    this._animatePan(pan, !animated);
-                    this._storePan(pan);
-
-                    this.trigger(PAN, {total: pan, delta: options.delta});
-                    this._autosizeCanvas();
+                    var scroller = this.scroller;
+                    if (animate) {
+                        scroller.animatedScrollTo(pan.x, pan.y);
+                    } else {
+                        scroller.scrollTo(pan.x, pan.y);
+                    }
                     this._updateAdorners();
                 }
 
                 return this._pan;
             },
+
             viewport: function () {
                 var element = this.element;
 
@@ -2180,25 +2180,7 @@
                     diagram._transformMainLayer();
                 }
             },
-            _animatePan: function (pan, skipAnimation) {
-                var diagram = this;
 
-                if (skipAnimation) {
-                    this._panTransform(pan);
-                } else {
-                    if (diagram.scroller) {
-                        diagram.scroller.animatedScrollTo(pan.x, pan.y);
-                        diagram._zoomMainLayer();
-                    } else {
-                        var t = new Ticker();
-                        t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                        t.onStep = function () {
-                            diagram._finishPan();
-                        };
-                        t.play();
-                    }
-                }
-            },
             _finishPan: function () {
                 this.trigger(PAN, {total: this._pan, delta: Number.NaN});
             },
