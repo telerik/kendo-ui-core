@@ -93,7 +93,11 @@
             ABSOLUTE = "absolute",
             TRANSFORMED = "transformed",
             ROTATED = "rotated",
-            TRANSPARENT = "transparent";
+            TRANSPARENT = "transparent",
+            WIDTH = "width",
+            HEIGHT = "height",
+            X = "x",
+            Y = "y";
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -598,6 +602,7 @@
                     }
                 }
             },
+
             rotate: function (angle, center) { // we assume the center is always the center of the shape.
                 var rotate = this.visual.rotate();
                 if (angle !== undefined) {
@@ -626,6 +631,7 @@
 
                 return rotate;
             },
+
             connections: function (type) { // in, out, undefined = both
                 var result = [], i, j, con, cons, ctr;
 
@@ -686,17 +692,47 @@
                 }
                 return b.center();
             },
-            //TO DO: Implement support for updating width, height, x, y
+
             redraw: function (options) {
                 if (options) {
-                    this.options = deepExtend({}, this.options, options);
+                    var shapeOptions = this.options;
+                    var boundsChange;
 
-                    this.shapeVisual.redraw(options);
-                    if (options && options.content) {
+                    this.shapeVisual.redraw(this._visualOptions(options));
+
+                    if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
+                        this.bounds(new Rect(shapeOptions.x, shapeOptions.y, shapeOptions.width, shapeOptions.height));
+                        boundsChange = true;
+                    }
+
+                    shapeOptions = deepExtend(shapeOptions, options);
+
+                    if  (options.rotation || boundsChange) {
+                        this._rotate();
+                    }
+
+                    if (options.content) {
                         this.content(options.content);
                     }
                 }
             },
+
+            _diffNumericOptions: diagram.diffNumericOptions,
+
+            _visualOptions: function(options) {
+                return {
+                    data: options.path,
+                    source: options.source,
+                    hover: options.hover,
+                    fill: options.fill,
+                    stroke: options.stroke,
+                    startCap: options.startCap,
+                    endCap: options.endCap,
+                    fontFamily: options.fontFamily,
+                    fontSize: options.fontSize
+                };
+            },
+
             _triggerBoundsChange: function () {
                 if (this.diagram) {
                     this.diagram.trigger(ITEMBOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.

@@ -633,27 +633,97 @@
             });
         })();
 
-        // ------------------------------------------------------------
-        module("Shape / bounds / redraw", {
-            setup: setup,
-            teardown: teardown
-        });
+        (function() {
 
-        // test("redraw sets new position", function() {
-            // var shape = diagram.addShape({
-                // id: "visualShape",
-                // type: "rectangle",
-                // x: 10,
-                // y: 40
-            // });
-            // shape.redraw({
-                // x: 20,
-                // y: 50
-            // });
-            // var bounds = shape.bounds();
-            // equal(bounds.x, 20);
-            // equal(bounds.y, 50);
-        // });
+            // ------------------------------------------------------------
+            module("Shape / redraw", {
+                setup: function() {
+                    setup();
+                    shape = diagram.addShape({
+                        id: "visualShape",
+                        type: "rectangle",
+                        x: 10,
+                        y: 40,
+                        width: 100,
+                        height: 100
+                    });
+                },
+                teardown: teardown
+            });
+
+            test("redraw sets new position", function() {
+                shape.redraw({
+                    x: 20,
+                    y: 50
+                });
+                var bounds = shape.bounds();
+                equal(bounds.x, 20);
+                equal(bounds.y, 50);
+            });
+
+            test("redraw sets new width and height", function() {
+                shape.redraw({
+                    x: 200,
+                    y: 300
+                });
+
+                var bounds = shape.bounds();
+                equal(bounds.x, 200);
+                equal(bounds.y, 300);
+            });
+
+            test("redraw calls _rotate if bounds have changed", function() {
+                shape._rotate = function() {
+                    ok(true);
+                };
+
+                shape.redraw({
+                    width: 200
+                });
+            });
+
+            test("redraw calls _rotate if rotation is passed", function() {
+                shape._rotate = function() {
+                   equal(this.options.rotation.angle, 33);
+                };
+
+                shape.redraw({
+                    rotation: {
+                        angle: 33
+                    }
+                });
+            });
+
+            test("redraw sets content", function() {
+                shape.content = function(options) {
+                    equal(options.text, "foo");
+                };
+                shape.redraw({content: {text: "foo"}});
+            });
+
+            test("redraw redraws shape visual with visual options", function() {
+                var visualOptions = {
+                    path: "foo",
+                    source: "bar",
+                    hover: {fill: "fooHover"},
+                    fill: {color: "fooColor"},
+                    stroke: {width: 3},
+                    startCap: "fooCap",
+                    endCap: "fooCap"
+                };
+
+                shape.shapeVisual.redraw = function(options) {
+                    equal(options.data, visualOptions.path);
+                    equal(options.source, visualOptions.source);
+                    equal(options.hover.fill, visualOptions.hover.fill);
+                    equal(options.fill.color, visualOptions.fill.color);
+                    equal(options.startCap, visualOptions.startCap);
+                    equal(options.endCap, visualOptions.endCap);
+                };
+
+                shape.redraw(visualOptions);
+            });
+        })();
 
         // ------------------------------------------------------------
         module("Shape / bounds / events", {
