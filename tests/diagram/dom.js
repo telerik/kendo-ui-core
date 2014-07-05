@@ -363,13 +363,15 @@
 
     // ------------------------------------------------------------
     (function() {
+        var shape;
+
         module("Shape / types", {
             setup: setup,
             teardown: teardown
         });
 
         test("create path shape", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 id: "pathShape",
                 path: "m0,100 L100,100 L50,0z"
             });
@@ -380,7 +382,7 @@
         });
 
         test("create image shape", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 id: "imageShape",
                 type: "image",
                 source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
@@ -392,21 +394,21 @@
         });
 
         test("visual template", function() {
-            var visualCalled = false,
-                shape = diagram.addShape({
-                    id: "visualShape",
-                    visual: function() {
-                        visualCalled = true;
-                        return new dataviz.diagram.Group({ id: "shapeRoot" });
-                    }
-                });
+            var visualCalled = false;
+            shape = diagram.addShape({
+                id: "visualShape",
+                visual: function() {
+                    visualCalled = true;
+                    return new dataviz.diagram.Group({ id: "shapeRoot" });
+                }
+            });
 
             ok(visualCalled, "visual method should be called");
             equal(diagram.shapes.length, 1, "should have a single shape");
         });
 
         test("typed shape", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 id: "circle",
                 type: "circle"
             });
@@ -422,7 +424,7 @@
         });
 
         test("template", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 content: {
                     template: "foo"
                 }
@@ -433,7 +435,7 @@
         });
 
         test("text", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 content: {
                     text: "foo"
                 }
@@ -444,7 +446,7 @@
         });
 
         test("aligns text", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 content: {
                     text: "foo",
                     align: "center middle"
@@ -461,7 +463,7 @@
         });
 
         test("aligns text with transformed visual", function() {
-            var shape = diagram.addShape({
+            shape = diagram.addShape({
                 content: {
                     text: "foo",
                     align: "center middle"
@@ -485,59 +487,124 @@
             close(position.y, (100 - contentBBox.height()) / 2, 1);
         });
 
-        // ------------------------------------------------------------
-        module("Shape / bounds", {
-            setup: setup,
-            teardown: teardown
-        });
+        (function() {
+            var bounds;
 
-        test("inits position", function() {
-            var shape = diagram.addShape({
-                id: "visualShape",
-                type: "rectangle",
-                x: 10,
-                y: 40
+            // ------------------------------------------------------------
+            module("Shape / bounds", {
+                setup: setup,
+                teardown: teardown
             });
-            var bounds = shape.bounds();
-            equal(bounds.x, 10);
-            equal(bounds.y, 40);
-        });
 
-        test("dose not set position to shape visual", function() {
-            var shape = diagram.addShape({
-                id: "visualShape",
-                type: "rectangle",
-                x: 10,
-                y: 40
+            test("inits position", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    type: "rectangle",
+                    x: 10,
+                    y: 40
+                });
+                bounds = shape.bounds();
+                equal(bounds.x, 10);
+                equal(bounds.y, 40);
             });
-            var visual = shape.shapeVisual;
-            equal(visual.options.x, 0);
-            equal(visual.options.y, 0);
-        });
 
-        test("inits width and height based on visual content", function() {
-            var shape = diagram.addShape({
-                id: "visualShape",
-                visual: function() {
-                    return new dataviz.diagram.Rectangle({ width: 300, height: 150, stroke: {width: 0}});
-                }
+            test("dose not set position to shape visual", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    type: "rectangle",
+                    x: 10,
+                    y: 40
+                });
+                var visual = shape.shapeVisual;
+                equal(visual.options.x, 0);
+                equal(visual.options.y, 0);
             });
-            var bounds = shape.bounds();
-            equal(bounds.width, 300);
-            equal(bounds.height, 150);
-        });
 
-        test("inits width and height based on width and height options with predefined type", function() {
-            var shape = diagram.addShape({
-                type: "rectangle",
-                width: 150,
-                height: 200,
-                stroke: {width: 0}
+            test("inits width and height based on visual content", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    visual: function() {
+                        return new dataviz.diagram.Rectangle({ width: 300, height: 150, stroke: {width: 0}});
+                    }
+                });
+                bounds = shape.bounds();
+                equal(bounds.width, 300);
+                equal(bounds.height, 150);
             });
-            var bounds = shape.bounds();
-            equal(bounds.width, 150);
-            equal(bounds.height, 200);
-        });
+
+            test("inits width and height based on width and height options with predefined type", function() {
+                shape = diagram.addShape({
+                    type: "rectangle",
+                    width: 150,
+                    height: 200,
+                    stroke: {width: 0}
+                });
+                bounds = shape.bounds();
+                equal(bounds.width, 150);
+                equal(bounds.height, 200);
+            });
+
+            // ------------------------------------------------------------
+            var shapeVisual;
+
+            module("Shape / bounds / update", {
+                setup: function() {
+                    setup();
+                    shape = diagram.addShape({
+                        type: "rectangle",
+                        width: 150,
+                        height: 200,
+                        stroke: {width: 0},
+                        content: {
+                            text: "foo"
+                        },
+                        rotation: {
+                            angle: 30
+                        }
+                    });
+                    shapeVisual = shape.visual.children[0];
+                },
+                teardown: teardown
+            });
+
+            test("updateBounds should update shape bounds", function() {
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                bounds = shape.bounds();
+                equal(bounds.width, 300);
+                equal(bounds.height, 100);
+            });
+
+            test("updateBounds should update content alignment", function() {
+                var contentVisual = shape._contentVisual;
+                contentVisual.drawingElement.measure = function() {
+                    return {width: 30, height: 10};
+                };
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                var position = contentVisual.position();
+
+                equal(position.x, 135);
+                equal(position.y, 45);
+            });
+
+            test("updateBounds should update rotation", function() {
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                var rotation = shape.visual.rotate();
+                equal(rotation.x, 150);
+                equal(rotation.y, 50);
+            });
+        })();
 
         // ------------------------------------------------------------
         module("Shape / bounds / redraw", {

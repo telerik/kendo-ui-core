@@ -431,14 +431,15 @@
                 that.shapeVisual = Shape.createShapeVisual(that.options);
                 that.visual.append(this.shapeVisual);
                 that.updateBounds();
+                that.content(that.content());
+
                 // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
                 that._createConnectors();
                 that.parentContainer = null;
                 that.isContainer = false;
                 that.isCollapsed = false;
                 that.id = that.visual.id;
-                that.content(that.content());
-                that._rotate();
+
                 if (options.hasOwnProperty("layout") && options.layout!==undefined) {
                     // pass the defined shape layout, it overtakes the default resizing
                     that.layout = options.layout.bind(options);
@@ -451,6 +452,8 @@
                 var bounds = this.visual._measure(true);
                 var options = this.options;
                 this.bounds(new Rect(options.x, options.y, bounds.width, bounds.height));
+                this._rotate();
+                this._alignContent();
             },
 
             content: function(content) {
