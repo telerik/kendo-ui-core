@@ -1476,11 +1476,33 @@
 
                 return json;
             },
-            focus: function () {
-                var x = window.scrollX, y = window.scrollY;
-                this.element.focus();
-                window.scrollTo(x, y);
+
+            focus: function() {
+                if (!this.element.is(kendo._activeElement())) {
+                    var element = this.element,
+                        scrollContainer = element[0],
+                        containers = [],
+                        offsets = [],
+                        documentElement = document.documentElement,
+                        i;
+
+                    do {
+                        scrollContainer = scrollContainer.parentNode;
+
+                        if (scrollContainer.scrollHeight > scrollContainer.clientHeight) {
+                            containers.push(scrollContainer);
+                            offsets.push(scrollContainer.scrollTop);
+                        }
+                    } while (scrollContainer != documentElement);
+
+                    element.focus();
+
+                    for (i = 0; i < containers.length; i++) {
+                        containers[i].scrollTop = offsets[i];
+                    }
+                }
             },
+
             load: function(options) {
                 this.clear();
 
