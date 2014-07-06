@@ -968,6 +968,17 @@
             equal(path.segments.length, 1);
         });
 
+        test("moveTo accepts Point", function() {
+            var p = new Point(10, 20);
+            path.moveTo(p);
+            ok(path.segments[0].anchor().equals(p));
+        });
+
+        test("moveTo accepts array", function() {
+            path.moveTo([10, 20]);
+            ok(path.segments[0].anchor().equals(new Point(10, 20)));
+        });
+
         test("moveTo returns path", function() {
             deepEqual(path.moveTo(0, 0), path);
         });
@@ -983,6 +994,17 @@
         test("lineTo adds segment", function() {
             path.lineTo(0, 0);
             equal(path.segments.length, 1);
+        });
+
+        test("lineTo accepts Point", function() {
+            var p = new Point(10, 20);
+            path.lineTo(p);
+            ok(path.segments[0].anchor().equals(p));
+        });
+
+        test("lineTo accepts array", function() {
+            path.lineTo([10, 20]);
+            ok(path.segments[0].anchor().equals(new Point(10, 20)));
         });
 
         test("lineTo returns path", function() {
@@ -1010,6 +1032,15 @@
 
             deepEqual(path.segments[0].controlOut(), controlOut);
             deepEqual(path.segments[1].controlIn(), controlIn);
+        });
+
+        test("curveTo sets points from arrays", function() {
+            path.moveTo(0, 0);
+            path.curveTo([10, 10], [40, 20], [30, 30]);
+
+            ok(path.segments[0].controlOut().equals(new Point(10, 10)));
+            ok(path.segments[1].controlIn().equals(new Point(40, 20)));
+            ok(path.segments[1].anchor().equals(new Point(30, 30)));
         });
 
         test("changing the control points triggers geometryChange", 2, function() {
