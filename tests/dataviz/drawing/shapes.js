@@ -473,6 +473,11 @@
             equal(text.position().x, 100);
         });
 
+        test("sets initial position from array", function() {
+            text = new Text("Foo", [100, 100]);
+            ok(text.position().equals(position));
+        });
+
         test("sets initial options", function() {
             text = new Text("Foo", new g.Point(), { foo: true });
 
@@ -507,6 +512,17 @@
             };
 
             text.position().setX(5);
+        });
+
+        test("position can be set to a Point instance", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            equal(text.position(), position);
+        });
+
+        test("position can be set to an array", function() {
+            text.position([10, 10]);
+            deepEqual(text.position().toArray(), [10, 10]);
         });
 
         test("setting content triggers optionsChange", function() {

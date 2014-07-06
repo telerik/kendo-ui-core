@@ -242,7 +242,7 @@
         }
     });
     deepExtend(Text.fn, drawing.mixins.Paintable);
-    defineGeometryAccessors(Text.fn, ["position"]);
+    definePointAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
         init: function(geometry, options) {
@@ -627,6 +627,26 @@
         return function(value) {
             if (defined(value)) {
                 this[fieldName] = value;
+                this[fieldName].observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this[fieldName];
+            }
+        };
+    }
+
+    function definePointAccessors(fn, names) {
+        for (var i = 0; i < names.length; i++) {
+            fn[names[i]] = pointAccessor(names[i]);
+        }
+    }
+
+    function pointAccessor(name) {
+        var fieldName = "_" + name;
+        return function(value) {
+            if (defined(value)) {
+                this[fieldName] = Point.create(value);
                 this[fieldName].observer = this;
                 this.geometryChange();
                 return this;
