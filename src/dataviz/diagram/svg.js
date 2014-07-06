@@ -1246,19 +1246,13 @@
 
     var Canvas = Class.extend({
         init: function (element, options) {
-            this.options = deepExtend({}, this.options, options);
-            options = this.options;
-
             this.element = element;
             this.surface = d.Surface.create(element, options);
-            this.transformTranslate = kendo.isFunction(this.surface.translate);
+            if (kendo.isFunction(this.surface.translate)) {
+                this.translate = this._translate;
+            }
             this.drawingElement = new d.Group();
             this._viewBox = new Rect(0, 0, options.width, options.height);
-        },
-
-        options: {
-            width: "100%",
-            height: "100%"
         },
 
         bounds: function () {
@@ -1266,35 +1260,30 @@
             return new Rect(0, 0, box.width, box.height);
         },
 
-        focus: function () {
-            //this.element.focus();
-        },
-
         size: function (size) {
             var viewBox = this._viewBox;
             if (defined(size)) {
                 viewBox.width = size.width;
                 viewBox.height = size.height;
-                //this.surface.setSize(size);
-            } else {
-                return {
-                    width: viewBox.width,
-                    height: viewBox.height
-                };
+                this.surface.setSize(size);
             }
+            return {
+                width: viewBox.width,
+                height: viewBox.height
+            };
         },
 
-        viewBox: function (rect) {
+        _translate: function (x, y) {
             var viewBox = this._viewBox;
-            if (rect) {
-                viewBox.x = rect.x;
-                viewBox.y = rect.y;
-                if (this.transformTranslate) {
-                    this.surface.translate(viewBox);
-                }
-            } else {
-                return viewBox.clone();
+            if (defined(x) && defined(y)) {
+                viewBox.x = x;
+                viewBox.y = y;
+                this.surface.translate({x: x, y: y});
             }
+            return {
+                x: viewBox.x,
+                y: viewBox.y
+            };
         },
 
         draw: function() {

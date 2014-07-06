@@ -1703,20 +1703,23 @@
         var element;
         var canvas;
 
-        module("Canvas", {
-            setup: function() {
-                element = $("<div></div>").appendTo(QUnit.fixture);
+        function setupCanvas() {
+            element = $("<div></div>").appendTo(QUnit.fixture);
+            canvas = new Canvas(element[0], {
+                width: 500,
+                height: 300
+            });
+            drawingElement = canvas.drawingElement;
+        }
 
-                canvas = new Canvas(element[0], {
-                    width: 500,
-                    height: 300
-                });
-                drawingElement = canvas.drawingElement;
-            },
+        function teardown() {
+            element.off();
+            element.remove();
+        }
 
-            teardown: function() {
-                element.remove();
-            }
+        module("Canvas / init", {
+            setup: setupCanvas,
+            teardown: teardown
         });
 
         test("inits surface", function() {
@@ -1735,6 +1738,38 @@
             equal(viewBox.height, 300);
         });
 
+        var SurfaceCreate = d.Surface.create;
+
+        module("Canvas / init translate", {
+            teardown: function() {
+                d.Surface.create = SurfaceCreate;
+                element.remove();
+            }
+        });
+
+        test("sets translate method if surface can translate", function() {
+            d.Surface.create = function(element, options) {
+                return {
+                    translate: function() {}
+                };
+            };
+            setupCanvas();
+            ok(canvas.translate === canvas._translate);
+        });
+
+        test("does no sets translate method if surface cannot translate", function() {
+            d.Surface.create = function(element, options) {
+                return {};
+            };
+            setupCanvas();
+            ok(canvas.translate === undefined);
+        });
+
+        module("Canvas / api", {
+            setup: setupCanvas,
+            teardown: teardown
+        });
+
         test("bounds returns rect with container bounding box width and height", function() {
             canvas.drawingElement.bbox = function() {
                 return new Rect(50,50, 100, 200);
@@ -1746,19 +1781,39 @@
             equal(rect.height, 200);
         });
 
-        test("viewBox sets viewBox x and y options", function() {
-            canvas.viewBox(new Rect(100, 200, 300, 300));
+        test("_translate translates surface", function() {
+            canvas.surface.translate = function(offset) {
+                equal(offset.x, 100);
+                equal(offset.y, 200);
+            };
+            canvas._translate(100, 200);
+        });
+
+        test("_translate updates viewBox", function() {
+            canvas._translate(100, 200);
             var viewBox = canvas._viewBox;
             equal(viewBox.x, 100);
             equal(viewBox.y, 200);
         });
 
-        test("viewBox returns viewBox", function() {
-            var viewBox = canvas.viewBox();
-            equal(viewBox.x, 0);
-            equal(viewBox.y, 0);
-            equal(viewBox.width, 500);
-            equal(viewBox.height, 300);
+        test("_translate returns current translation", function() {
+            canvas._viewBox.x = 100;
+            canvas._viewBox.y = 200;
+
+            var viewBox = canvas._translate();
+            equal(viewBox.x, 100);
+            equal(viewBox.y, 200);
+        });
+
+        test("size sets surface size", function() {
+            canvas.surface.setSize = function(size) {
+                equal(size.width, 100);
+                equal(size.height, 200);
+            };
+            canvas.size({
+                width: 100,
+                height: 200
+            });
         });
 
         test("size sets viewBox size", function() {
