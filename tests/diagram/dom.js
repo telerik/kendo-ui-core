@@ -382,6 +382,21 @@
             equal(diagram.shapes.length, 1, "should have a single shape");
         });
 
+        test("visual template should be used if both template and path are specified", function() {
+            var visualCalled = false;
+            shape = diagram.addShape({
+                id: "visualShape",
+                path: "M100 100L 200, 200",
+                visual: function() {
+                    visualCalled = true;
+                    return new dataviz.diagram.Group({ id: "shapeRoot" });
+                }
+            });
+
+            ok(visualCalled, "visual method should be called");
+            equal(diagram.shapes[0].shapeVisual.id, "shapeRoot");
+        });
+
         test("typed shape", function() {
             shape = diagram.addShape({
                 id: "circle",

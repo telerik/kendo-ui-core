@@ -838,10 +838,10 @@
                 return func.call(context, shapeDefaults);
             }
 
-            if (shapeDefaults.path) {
-                return pathShape(shapeDefaults.path, shapeDefaults);
-            } else if (isFunction(visualTemplate)) { // custom template
+            if (isFunction(visualTemplate)) { // custom template
                 return functionShape(visualTemplate, this, shapeDefaults);
+            } else if (shapeDefaults.path) {
+                return pathShape(shapeDefaults.path, shapeDefaults);
             } else if (isString(type)) {
                 return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
             } else {
