@@ -584,12 +584,7 @@
                 return this.toolService.hoveredItem === undefined && meta.ctrlKey;
             },
             start: function () {
-                var diagram = this.toolService.diagram,
-                    canvas = diagram.canvas,
-                    canvasSize = canvas.size();
-
                 this.scroller.enable();
-                this.currentCanvasSize = canvasSize;
             },
             move: function () {
             },//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
@@ -597,9 +592,7 @@
                 var tool = this,
                     diagram = tool.toolService.diagram,
                     canvas = diagram.canvas,
-                    canvasSize = tool.currentCanvasSize || canvas.size(),
-                    scrollPos = new Point(args.scrollLeft, args.scrollTop),
-                    viewBox = new Rect(scrollPos.x, scrollPos.y, parseInt(canvasSize.width, 10), parseInt(canvasSize.height, 10));
+                    scrollPos = new Point(args.scrollLeft, args.scrollTop);
 
                 if (canvas.translate) {
                     diagram._storePan(scrollPos.times(-1));
@@ -608,7 +601,6 @@
                 }
             },
             end: function () {
-                this.currentCanvasSize = undefined;
                 this.scroller.disable();
             },
             getCursor: function () {
