@@ -52,7 +52,8 @@
             FRICTION = 0.90,
             FRICTION_MOBILE = 0.93,
             VELOCITY_MULTIPLIER = 5,
-            TRANSPARENT = "transparent";
+            TRANSPARENT = "transparent",
+            PAN = "pan";
 
         diagram.Cursors = Cursors;
 
@@ -598,7 +599,11 @@
                     diagram._storePan(scrollPos.times(-1));
                     tool.movableCanvas.moveTo(scrollPos);
                     canvas.translate(scrollPos.x, scrollPos.y);
+                } else {
+                    scrollPos = scrollPos.plus(diagram._pan.times(-1));
                 }
+
+                diagram.trigger(PAN, {pan: scrollPos});
             },
             end: function () {
                 this.scroller.disable();

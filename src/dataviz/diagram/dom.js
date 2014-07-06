@@ -1815,7 +1815,7 @@
                 aligner.align(rect, options.align);
 
                 newPan = rect.topLeft().minus(current.topLeft());
-                this.pan(newPan, options.animate);
+                this.pan(newPan.times(-1), options.animate);
             },
 
             alignShapes: function (direction) {
@@ -1911,18 +1911,30 @@
                 return this._zoom;
             },
 
+            _getPan: function(pan) {
+                var canvas = this.canvas;
+                if (!canvas.translate) {
+                    pan = pan.plus(this._pan);
+                }
+                return pan;
+            },
+
             pan: function (pan, animate) {
-                if (pan instanceof Point && !pan.equals(this._pan)) {
-                    var scroller = this.scroller;
+                if (pan instanceof Point) {
+                    var that = this;
+                    var scroller = that.scroller;
+                    pan = that._getPan(pan);
+                    pan = pan.times(-1);
+
                     if (animate) {
-                        scroller.animatedScrollTo(pan.x, pan.y);
+                        scroller.animatedScrollTo(pan.x, pan.y, function() {
+                            that._updateAdorners();
+                        });
                     } else {
                         scroller.scrollTo(pan.x, pan.y);
+                        that._updateAdorners();
                     }
-                    this._updateAdorners();
                 }
-
-                return this._pan;
             },
 
             viewport: function () {

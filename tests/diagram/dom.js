@@ -118,46 +118,65 @@
             teardown: teardown
         });
 
-        test("pan calls scroller scrollTo method with passed pan", function() {
+        test("pan calls scroller scrollTo method with negated pan", function() {
             diagram.scroller.scrollTo = function(x, y) {
-                equal(x, 100);
-                equal(y, 200);
+                equal(x, -100);
+                equal(y, -200);
             };
             diagram.pan(new Point(100, 200));
         });
 
-        test("pan calls scroller animatedScrollTo method with passed pan if second parameter is true", function() {
+        test("pan updatesAdorners after scrollTo", function() {
+            var scrollCompleted = false;
+            diagram._updateAdorners = function() {
+                ok(scrollCompleted);
+            };
+            diagram.scroller.scrollTo = function(x, y) {
+                scrollCompleted = true;
+            };
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan calls scroller animatedScrollTo method with negated pan if second parameter is true", function() {
             diagram.scroller.animatedScrollTo = function(x, y) {
-                equal(x, 100);
-                equal(y, 200);
+                equal(x, -100);
+                equal(y, -200);
             };
             diagram.pan(new Point(100, 200), true);
         });
 
-        test("pan does not call scroller scrollTo or animatedScrollTo method if passed pan is the same as the current pan", 0, function() {
+        test("pan updatesAdorners in animatedScrollTo completed callback", function() {
+            var scrollCompleted = false;
+            diagram._updateAdorners = function() {
+                ok(scrollCompleted);
+            };
+
+            diagram.scroller.animatedScrollTo = function(x, y, callback) {
+                scrollCompleted = true;
+                callback();
+            };
+            diagram.pan(new Point(100, 200), true);
+        });
+
+        test("pan adds passed pan to the current stored pan if panning is not handled by the canvas", function() {
+            diagram.scroller.scrollTo = function(x, y) {
+                equal(x, -150);
+                equal(y, -300);
+            };
+            delete diagram.canvas.translate;
+            diagram._pan = new Point(50, 100);
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan does not call scroller scrollTo or animatedScrollTo method if no point is passed", 0, function() {
             diagram.scroller.animatedScrollTo = function() {
                 ok(false);
             };
             diagram.scroller.scrollTo = function() {
                 ok(false);
             };
-            diagram._pan = new Point(100, 200);
-            diagram.pan(new Point(100, 200), false);
-            diagram.pan(new Point(100, 200), true);
-        });
 
-        test("pan returns current pan and does not call scroller scrollTo or animatedScrollTo method if no point is passed", function() {
-            diagram.scroller.animatedScrollTo = function() {
-                ok(false);
-            };
-            diagram.scroller.scrollTo = function() {
-                ok(false);
-            };
-
-            diagram._pan = new Point(100, 200);
-            var pan = diagram.pan();
-            equal(pan.x, 100);
-            equal(pan.y, 200);
+            diagram.pan()
         });
 
     })();
@@ -216,7 +235,7 @@
             rect = new Rect(0, 0, 400, 400);
             diagram.bringIntoView(rect);
             newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-            deepEqual(diagram.pan(), newPan);
+            deepEqual(diagram.pan(), newPan.times(-1));
         });
 
         test("shape", function () {
@@ -225,7 +244,7 @@
 
             diagram.bringIntoView(shape);
             newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-            deepEqual(diagram.pan(), newPan);
+            deepEqual(diagram.pan(), newPan.times(-1));
         });
 
         test("multiple shapes", function () {
@@ -240,14 +259,14 @@
 
             diagram.bringIntoView([shape, shape1], {center: true});
             newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-            deepEqual(diagram.pan(), newPan);
+            deepEqual(diagram.pan(), newPan.times(-1));
         });
 
         test("align top right", function () {
             shape = diagram.addShape({});
             rect = shape.bounds("transformed");
 
-            newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan());
+            newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan()).times(-1);
             diagram.bringIntoView([shape], {align: "top right"});
             equal(diagram.pan().x, Math.floor(newPan.x));
             equal(diagram.pan().y, Math.floor(newPan.y));
@@ -257,7 +276,7 @@
             shape = diagram.addShape({});
             rect = shape.bounds("transformed");
 
-            newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan());
+            newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan()).times(-1);
             diagram.bringIntoView([shape], {align: "center bottom"});
             equal(diagram.pan().x, newPan.x);
             equal(diagram.pan().y, newPan.y);
@@ -275,7 +294,7 @@
         test("takes current zoom into account", function() {
             rect = new Rect(1000, 1000, 100, 100);
             diagram.bringIntoView(rect);
-            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.clone().zoom(2).center());
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.clone().zoom(2).center()).times(-1);
             deepEqual(diagram.pan(), newPan);
         });
 
@@ -822,10 +841,10 @@
     });
 
     test("zoom does not change the pan", function () {
-        var pan = diagram.pan().clone();
+        var pan = diagram._pan.clone();
         diagram.zoom(1.1);
 
-        ok(pan.equals(diagram.pan()));
+        ok(pan.equals(diagram._pan));
     });
 
     test("zoom at position changes diagram zoom", function () {
