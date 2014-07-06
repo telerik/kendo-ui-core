@@ -143,22 +143,6 @@
             return defaults;
         };
 
-        var PanAdapter = kendo.Class.extend({
-            init: function (panState) {
-                this.pan = panState.pan;
-                this.diagram = panState.diagram;
-            },
-            initState: function () {
-                this.from = this.diagram.pan();
-                this.to = this.pan;
-            },
-            update: function (tick) {
-                var diagram = this.diagram;
-                diagram._storePan(new Point(this.from.x + (this.to.x - this.from.x) * tick, this.from.y + (this.to.y - this.from.y) * tick));
-                diagram._transformMainLayer();
-            }
-        });
-
         function isAutoConnector(connector) {
             return connector.options.name.toLowerCase() === AUTO.toLowerCase();
         }
