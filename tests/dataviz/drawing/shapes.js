@@ -812,6 +812,21 @@
             ok(new Segment().anchor());
         });
 
+        test("sets initial anchor from array", function() {
+            segment = new Segment([10, 20]);
+            ok(segment.anchor().equals(new Point(10, 20)));
+        });
+
+        test("sets initial controlIn point from array", function() {
+            segment = new Segment([0, 0], [10, 20]);
+            ok(segment.controlIn().equals(new Point(10, 20)));
+        });
+
+        test("sets initial controlOut point from array", function() {
+            segment = new Segment([0, 0], [0, 0], [10, 20]);
+            ok(segment.controlOut().equals(new Point(10, 20)));
+        });
+
         test("changing the anchor point triggers geometryChange", function() {
             segment.observer = {
                 geometryChange: function() {
@@ -834,6 +849,11 @@
 
         test("anchor setter is chainable", function() {
             equal(segment.anchor(new Point()), segment);
+        });
+
+        test("anchor setter accepts array", function() {
+            segment.anchor([10, 20]);
+            ok(segment.anchor().equals(new Point(10, 20)));
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
@@ -860,6 +880,11 @@
             equal(segment.controlIn(new Point()), segment);
         });
 
+        test("controlIn setter accepts array", function() {
+            segment.controlIn([10, 20]);
+            ok(segment.controlIn().equals(new Point(10, 20)));
+        });
+
         test("changing the control point (out) triggers geometryChange", function() {
             segment.observer = {
                 geometryChange: function() {
@@ -872,6 +897,11 @@
 
         test("controlOut setter is chainable", function() {
             equal(segment.controlOut(new Point()), segment);
+        });
+
+        test("controlOut setter accepts array", function() {
+            segment.controlOut([10, 20]);
+            ok(segment.controlOut().equals(new Point(10, 20)));
         });
 
         test("setting the control point (out) triggers geometryChange", function() {

@@ -410,7 +410,7 @@
             };
         }
     });
-    defineGeometryAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
+    definePointAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
 
     var Path = Element.extend({
         init: function(options) {
