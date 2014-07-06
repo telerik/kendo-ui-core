@@ -1058,9 +1058,11 @@
 
         redraw: function (options) {
             if (options) {
+                var points = options.points;
                 VisualBase.fn.redraw.call(this, options);
-                if (options.points) {
-                    this.points(options.points);
+
+                if (points && this._pointsDiffer(points)) {
+                    this.points(points);
                     this._redrawMarkers(true, options);
                 } else {
                     this._redrawMarkers(false, options);
@@ -1080,6 +1082,21 @@
             if (options.points) {
                 this._updatePath();
             }
+        },
+
+        _pointsDiffer: function(points) {
+            var currentPoints = this.options.points;
+            var differ = currentPoints.length !== points.length;
+            if (!differ) {
+                for (var i = 0; i < points.length; i++) {
+                    if (currentPoints[i].x !== points[i].x || currentPoints[i].y !== points[i].y) {
+                        differ = true;
+                        break;
+                    }
+                }
+            }
+
+            return differ;
         },
 
         _updatePath: function() {

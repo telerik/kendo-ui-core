@@ -1285,6 +1285,19 @@
             });
         });
 
+        test("redraw dose not trigger geometry change if points are the same ", 0, function() {
+            drawingElement.geometryChange = function() {
+                ok(false);
+            };
+            polyline.redraw({
+                points: [
+                    new Point(10, 20),
+                    new Point(30, 40),
+                    new Point(15, 10)
+                ]
+            });
+        });
+
         // ------------------------------------------------------------
         module("PolyLine / markers / empty path", {
             setup: function() {
