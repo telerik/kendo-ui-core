@@ -476,6 +476,12 @@
             equal(pathNode.render().indexOf("stroke-dasharray="), -1);
         });
 
+        test("renders stroke linejoin", function() {
+            path.options.set("stroke.lineJoin", "round");
+
+            ok(pathNode.render().indexOf("stroke-linejoin='round'") !== -1);
+        });
+
         test("renders stroke linecap", function() {
             path.options.set("stroke.lineCap", "butt");
 
@@ -494,12 +500,6 @@
             path.options.set("stroke.lineCap", "foo");
 
             ok(pathNode.render().indexOf("stroke-linecap='foo'") !== -1);
-        });
-
-        test("renders default stroke linecap", function() {
-            path.options.set("stroke", {});
-
-            ok(pathNode.render().indexOf("stroke-linecap='square'") !== -1);
         });
 
         test("renders fill", function() {

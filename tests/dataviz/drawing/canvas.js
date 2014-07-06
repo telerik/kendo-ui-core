@@ -303,16 +303,6 @@
             pathNode.renderTo(ctx);
         });
 
-        test("renders fixed stroke lineJoin", function() {
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.lineJoin, "round");
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
         test("renders stroke opacity", function() {
             path.options.set("stroke.opacity", 0.5);
 
@@ -370,10 +360,12 @@
             pathNode.renderTo(ctx);
         });
 
-        test("renders default stroke linecap", function() {
+        test("renders stroke lineJoin", function() {
+            path.options.set("stroke.lineJoin", "round");
+
             var ctx = mockContext({
                 stroke: function() {
-                    equal(ctx.lineCap, "square");
+                    equal(ctx.lineJoin, "round");
                 }
             });
 

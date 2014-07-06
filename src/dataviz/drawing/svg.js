@@ -421,6 +421,7 @@
                 attrs.push(["stroke", stroke.color]);
                 attrs.push(["stroke-width", stroke.width]);
                 attrs.push(["stroke-linecap", this.renderLinecap(stroke)]);
+                attrs.push(["stroke-linejoin", stroke.lineJoin]);
 
                 if (defined(stroke.opacity)) {
                     attrs.push(["stroke-opacity", stroke.opacity]);
@@ -459,7 +460,7 @@
 
         renderLinecap: function(stroke) {
             var dashType = stroke.dashType,
-                lineCap = stroke.lineCap || SQUARE;
+                lineCap = stroke.lineCap;
 
             return (dashType && dashType != SOLID) ? BUTT : lineCap;
         },
@@ -491,8 +492,7 @@
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
-            "#= d.renderTransform() #" +
-            "stroke-linejoin='round'></path>"
+            "#= d.renderTransform() #></path>"
         )
     });
 

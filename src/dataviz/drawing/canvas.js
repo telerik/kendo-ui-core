@@ -160,6 +160,7 @@
 
             this.setLineDash(ctx);
             this.setLineCap(ctx);
+            this.setLineJoin(ctx);
 
             this.setFill(ctx);
             this.setStroke(ctx);
@@ -181,7 +182,6 @@
             if (stroke) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
-                ctx.lineJoin = "round";
                 ctx.globalAlpha = stroke.opacity;
                 ctx.stroke();
             }
@@ -212,8 +212,15 @@
             var stroke = this.srcElement.options.stroke;
             if (dashType && dashType !== SOLID) {
                 ctx.lineCap = BUTT;
-            } else if (stroke) {
-                ctx.lineCap = valueOrDefault(stroke.lineCap, "square");
+            } else if (stroke && stroke.lineCap) {
+                ctx.lineCap = stroke.lineCap;
+            }
+        },
+
+        setLineJoin: function(ctx) {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke && stroke.lineJoin) {
+                ctx.lineJoin = stroke.lineJoin;
             }
         },
 

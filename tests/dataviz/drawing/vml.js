@@ -590,6 +590,33 @@
             equal(strokeNode.render().indexOf("dashstyle="), -1);
         });
 
+        test("renders stroke lineJoin", function() {
+            path.options.set("stroke.lineJoin", "round");
+
+            ok(strokeNode.render().indexOf("joinstyle='round'") !== -1);
+        });
+
+        test("does not render stroke lineJoin if not set", function() {
+            path.options.set("stroke.lineJoin", null);
+            equal(strokeNode.render().indexOf("joinstyle="), -1);
+        });
+
+        test("renders stroke lineCap", function() {
+            path.options.set("stroke.lineCap", "round");
+
+            ok(strokeNode.render().indexOf("endcap='round'") !== -1);
+        });
+
+        test("renders stroke lineCap (butt)", function() {
+            path.options.set("stroke.lineCap", "butt");
+
+            ok(strokeNode.render().indexOf("endcap='flat'") !== -1);
+        });
+
+        test("does not render stroke lineCap if not set", function() {
+            equal(strokeNode.render().indexOf("endcap="), -1);
+        });
+
         test("optionsChange sets stroke color", function() {
             strokeNode.attr = function(name, value) {
                 equal(name, "color");

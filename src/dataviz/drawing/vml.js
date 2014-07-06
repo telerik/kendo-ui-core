@@ -299,6 +299,18 @@
                 if (defined(stroke.dashType)) {
                     attrs.push(["dashstyle", stroke.dashType]);
                 }
+
+                if (defined(stroke.lineJoin)) {
+                    attrs.push(["joinstyle", stroke.lineJoin]);
+                }
+
+                if (defined(stroke.lineCap)) {
+                    var lineCap = stroke.lineCap.toLowerCase();
+                    if (lineCap === "butt") {
+                        lineCap = lineCap === "butt" ? "flat" : lineCap;
+                    }
+                    attrs.push(["endcap", lineCap]);
+                }
             } else {
                 attrs.push(["on", "false"]);
             }
