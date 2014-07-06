@@ -1,10 +1,10 @@
 function compareBoundingBox(bbox, values, tolerance) {
     tolerance = tolerance || 0;
 
-    close(bbox.p0.x, values[0], tolerance, "p0.x");
-    close(bbox.p0.y, values[1], tolerance, "p0.y");
-    close(bbox.p1.x, values[2], tolerance, "p1.x");
-    close(bbox.p1.y, values[3], tolerance, "p1.y");
+    close(bbox.topLeft().x, values[0], tolerance, "topLeft.x");
+    close(bbox.topLeft().y, values[1], tolerance, "topLeft.y");
+    close(bbox.bottomRight().x, values[2], tolerance, "bottomRight.x");
+    close(bbox.bottomRight().y, values[3], tolerance, "bottomRight.y");
 }
 
 function compareMatrices(m1, m2, tolerance) {

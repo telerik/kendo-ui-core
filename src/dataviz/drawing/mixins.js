@@ -16,27 +16,35 @@
     // Mixins =================================================================
     var Paintable = {
         fill: function(color, opacity) {
-            this.options.set("fill.color", color);
+            if (defined(color)) {
+                this.options.set("fill.color", color);
 
-            if (defined(opacity)) {
-                this.options.set("fill.opacity", opacity);
+                if (defined(opacity)) {
+                    this.options.set("fill.opacity", opacity);
+                }
+
+                return this;
+            } else {
+                return this.options.get("fill");
             }
-
-            return this;
         },
 
         stroke: function(color, width, opacity) {
-            this.options.set("stroke.color", color);
+            if (defined(color)) {
+                this.options.set("stroke.color", color);
 
-            if (defined(width)) {
-               this.options.set("stroke.width", width);
+                if (defined(width)) {
+                   this.options.set("stroke.width", width);
+                }
+
+                if (defined(opacity)) {
+                   this.options.set("stroke.opacity", opacity);
+                }
+
+                return this;
+            } else {
+                return this.options.get("stroke");
             }
-
-            if (defined(opacity)) {
-               this.options.set("stroke.opacity", opacity);
-            }
-
-            return this;
         }
     };
 

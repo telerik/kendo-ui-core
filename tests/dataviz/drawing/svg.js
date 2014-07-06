@@ -476,6 +476,12 @@
             equal(pathNode.render().indexOf("stroke-dasharray="), -1);
         });
 
+        test("renders stroke linejoin", function() {
+            path.options.set("stroke.lineJoin", "round");
+
+            ok(pathNode.render().indexOf("stroke-linejoin='round'") !== -1);
+        });
+
         test("renders stroke linecap", function() {
             path.options.set("stroke.lineCap", "butt");
 
@@ -494,12 +500,6 @@
             path.options.set("stroke.lineCap", "foo");
 
             ok(pathNode.render().indexOf("stroke-linecap='foo'") !== -1);
-        });
-
-        test("renders default stroke linecap", function() {
-            path.options.set("stroke", {});
-
-            ok(pathNode.render().indexOf("stroke-linecap='square'") !== -1);
         });
 
         test("renders fill", function() {
@@ -816,7 +816,7 @@
 
         module("ImageNode", {
             setup: function() {
-                image = new d.Image("Foo", new g.Rect(new g.Point(10, 20), new g.Point(100, 100)));
+                image = new d.Image("Foo", new g.Rect(new g.Point(10, 20), [90, 80]));
                 imageNode = new svg.ImageNode(image);
             }
         });
@@ -855,7 +855,7 @@
                 }
             };
 
-            image.rect().p0.scale(2);
+            image.rect().origin.scale(2);
         });
 
         test("geometryChange sets size", 2, function() {
@@ -867,7 +867,7 @@
                 }
             };
 
-            image.rect().p0.scale(2);
+            image.rect().setSize([80, 60]);
         });
 
         test("optionsChange sets source", function() {

@@ -124,6 +124,30 @@
             node.load([new d.Text()]);
         });
 
+        test("load appends CircleNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.CircleNode);
+            };
+
+            node.load([new d.Circle()]);
+        });
+
+        test("load appends ArcNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.ArcNode);
+            };
+
+            node.load([new d.Arc()]);
+        });
+
+        test("load appends ImageNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.ImageNode);
+            };
+
+            node.load([new d.Image()]);
+        });
+
         test("load appends child nodes", function() {
             var parentGroup = new d.Group();
             var childGroup = new d.Group();
@@ -279,16 +303,6 @@
             pathNode.renderTo(ctx);
         });
 
-        test("renders fixed stroke lineJoin", function() {
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.lineJoin, "round");
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
         test("renders stroke opacity", function() {
             path.options.set("stroke.opacity", 0.5);
 
@@ -346,10 +360,12 @@
             pathNode.renderTo(ctx);
         });
 
-        test("renders default stroke linecap", function() {
+        test("renders stroke lineJoin", function() {
+            path.options.set("stroke.lineJoin", "round");
+
             var ctx = mockContext({
                 stroke: function() {
-                    equal(ctx.lineCap, "square");
+                    equal(ctx.lineJoin, "round");
                 }
             });
 
@@ -525,6 +541,39 @@
 
     // ------------------------------------------------------------
     (function() {
+        var arc,
+            arcNode;
+
+        module("ArcNode", {
+            setup: function() {
+                var geometry = new g.Arc(new Point(10, 20), {
+                    radiusX: 10,
+                    radiusY: 10,
+                    startAngle: 0,
+                    endAngle: 90
+                });
+                arc = new d.Arc(geometry);
+                arcNode = new canv.ArcNode(arc);
+            }
+        });
+
+        test("renders equivalent curve", function() {
+            var order = 0;
+            arcNode.renderTo(mockContext({
+                moveTo: function(x, y) {
+                    equal(order++, 0, "#");
+                    deepEqual([x, y], [20, 20]);
+                },
+                bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
+                    equal(order++, 1, "#");
+                    arrayClose([cp1x, cp1y, cp2x, cp2y, x, y], [20, 25, 15, 30, 10, 30], 0.3);
+                }
+            }));
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
         var text;
         var textNode;
 
@@ -605,7 +654,7 @@
 
         module("ImageNode", {
             setup: function() {
-                image = new d.Image("Foo", new g.Rect(new Point(10, 20), new Point(100, 100)));
+                image = new d.Image("Foo", new g.Rect(new Point(10, 20), [90, 80]));
                 imageNode = new canv.ImageNode(image);
                 imageNode._loaded = true;
             }
@@ -650,7 +699,7 @@
                 ok(true);
             };
 
-            image.rect().p0.setX(20);
+            image.rect().origin.setX(20);
         });
 
         test("renders transform", function() {

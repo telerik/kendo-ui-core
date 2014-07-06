@@ -299,6 +299,18 @@
                 if (defined(stroke.dashType)) {
                     attrs.push(["dashstyle", stroke.dashType]);
                 }
+
+                if (defined(stroke.lineJoin)) {
+                    attrs.push(["joinstyle", stroke.lineJoin]);
+                }
+
+                if (defined(stroke.lineCap)) {
+                    var lineCap = stroke.lineCap.toLowerCase();
+                    if (lineCap === "butt") {
+                        lineCap = lineCap === "butt" ? "flat" : lineCap;
+                    }
+                    attrs.push(["endcap", lineCap]);
+                }
             } else {
                 attrs.push(["on", "false"]);
             }
@@ -647,8 +659,8 @@
         renderData: function() {
             var rect = this.srcElement.rect();
             var center = rect.center();
-            return "m " + printPoints([new g.Point(rect.p0.x, center.y)]) +
-                   " l " + printPoints([new g.Point(rect.p1.x, center.y)]);
+            return "m " + printPoints([new g.Point(rect.topLeft().x, center.y)]) +
+                   " l " + printPoints([new g.Point(rect.bottomRight().x, center.y)]);
         },
 
         template: renderTemplate(
@@ -775,10 +787,10 @@
                 matrix.round(TRANSFORM_PRECISION);
                 style.push(["filter", this.transformTemplate(matrix)]);
 
-                var bbox = this.srcElement.bbox();
-                var br = this.srcElement.rect().bottomRight();
-                style.push(["padding-right", max(bbox.p1.x - br.x, 0) + "px"],
-                           ["padding-bottom", max(bbox.p1.y - br.y, 0) + "px"]);
+                var bboxEdge = this.srcElement.bbox().bottomRight();
+                var edge = this.srcElement.rect().bottomRight();
+                style.push(["padding-right", max(bboxEdge.x - edge.x, 0) + "px"],
+                           ["padding-bottom", max(bboxEdge.y - edge.y, 0) + "px"]);
             }
 
             return style;
@@ -857,7 +869,8 @@
     }
 
     // Exports ================================================================
-    if (kendo.support.browser.msie) {
+    var browser = kendo.support.browser;
+    if (browser.msie && browser.version < 9) {
         d.SurfaceFactory.current.register("vml", Surface, 30);
     }
 

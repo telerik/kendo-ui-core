@@ -118,6 +118,14 @@
             this.geometryChange();
 
             return this;
+        },
+
+        toArray: function(digits) {
+            var doRound = defined(digits);
+            var x = doRound ? round(this.x, digits) : this.x;
+            var y = doRound ? round(this.y, digits) : this.y;
+
+            return [x, y];
         }
     });
     defineAccessors(Point.fn, ["x", "y"]);
@@ -139,7 +147,7 @@
     Point.create = function(arg0, arg1) {
         if (defined(arg0)) {
             if (arg0 instanceof Point) {
-                return arg0.clone();
+                return arg0;
             } else if (arguments.length === 1 && arg0.length === 2) {
                 return new Point(arg0[0], arg0[1]);
             } else {
@@ -184,48 +192,101 @@
 
     Point.ZERO = new Point(0, 0);
 
-    var Rect = Class.extend({
-        init: function(p0, p1) {
-            this.p0 = p0 || new Point();
-            this.p1 = p1 || new Point();
-
-            this.p0.observer = this;
-            this.p1.observer = this;
+    var Size = Class.extend({
+        init: function(width, height) {
+            this.width = width || 0;
+            this.height = height || 0;
         },
 
         geometryChange: util.mixins.geometryChange,
 
-        topLeft: function() {
-            return Point.min(this.p0, this.p1);
+        equals: function(size) {
+            return size && size.width === this.width && size.height === this.height;
         },
 
-        bottomRight: function() {
-            return Point.max(this.p0, this.p1);
+        clone: function() {
+            return new Size(this.width, this.height);
+        }
+    });
+    defineAccessors(Size.fn, ["width", "height"]);
+
+    Size.create = function(arg0, arg1) {
+        if (defined(arg0)) {
+            if (arg0 instanceof Size) {
+                return arg0;
+            } else if (arguments.length === 1 && arg0.length === 2) {
+                return new Size(arg0[0], arg0[1]);
+            } else {
+                return new Size(arg0, arg1);
+            }
+        }
+    };
+
+    Size.ZERO = new Size(0, 0);
+
+    var Rect = Class.extend({
+        init: function(origin, size) {
+            this.setOrigin(origin || new Point());
+            this.setSize(size || new Size());
         },
 
-        topRight: function() {
-            return new Point(this.bottomRight().x, this.topLeft().y);
+        geometryChange: util.mixins.geometryChange,
+
+        setOrigin: function(value) {
+            this.origin = Point.create(value);
+            this.origin.observer = this;
+            this.geometryChange();
+            return this;
         },
 
-        bottomLeft: function() {
-            return new Point(this.topLeft().x, this.bottomRight().y);
+        getOrigin: function() {
+            return this.origin;
+        },
+
+        setSize: function(value) {
+            this.size = Size.create(value);
+            this.size.observer = this;
+            this.geometryChange();
+            return this;
+        },
+
+        getSize: function() {
+            return this.size;
         },
 
         width: function() {
-            return this.bottomRight().x - this.topLeft().x;
+            return this.size.width;
         },
 
         height: function() {
-            return this.bottomRight().y - this.topLeft().y;
+            return this.size.height;
+        },
+
+        topLeft: function() {
+            return this.origin.clone();
+        },
+
+        bottomRight: function() {
+            return this.origin.clone().translate(this.width(), this.height());
+        },
+
+        topRight: function() {
+            return this.origin.clone().translate(this.width(), 0);
+        },
+
+        bottomLeft: function() {
+            return this.origin.clone().translate(0, this.height());
         },
 
         center: function() {
-            var tl = this.topLeft();
-            return new Point(tl.x  + this.width() / 2, tl.y  + this.height() / 2);
+            return this.origin.clone().translate(this.width() / 2, this.height() / 2);
         },
 
         wrap: function(targetRect) {
-            return new Rect(Point.min(this.p0, targetRect.p0), Point.max(this.p1, targetRect.p1));
+            return Rect.fromPoints(
+                Point.min(this.topLeft(), targetRect.topLeft()),
+                Point.max(this.bottomRight(), targetRect.bottomRight())
+            );
         },
 
         bbox: function(matrix) {
@@ -234,16 +295,36 @@
             var br = this.bottomRight().transformCopy(matrix);
             var bl = this.bottomLeft().transformCopy(matrix);
 
-            return new Rect(Point.min(tl, tr, br, bl), Point.max(tl, tr, br, bl));
+            return Rect.fromPoints(tl, tr, br, bl);
         }
     });
 
+    Rect.fromPoints = function() {
+        var topLeft = Point.min.apply(this, arguments);
+        var bottomRight = Point.max.apply(this, arguments);
+        var size = new Size(
+            bottomRight.x - topLeft.x,
+            bottomRight.y - topLeft.y
+        );
+
+        return new Rect(topLeft, size);
+    };
+
     var Circle = Class.extend({
         init: function(center, radius) {
-            this.center = center || new Point();
-            this.radius = radius || 0;
+            this.setCenter(center || new Point());
+            this.setRadius(radius || 0);
+        },
 
+        setCenter: function(value) {
+            this.center = Point.create(value);
             this.center.observer = this;
+            this.geometryChange();
+            return this;
+        },
+
+        getCenter: function() {
+            return this.center;
         },
 
         geometryChange: util.mixins.geometryChange,
@@ -276,7 +357,8 @@
                 maxPoint = Point.max(maxPoint, currentPoint);
             }
 
-            return new Rect(minPoint, maxPoint);
+            // TODO: Let fromPoints figure out the min/max
+            return Rect.fromPoints(minPoint, maxPoint);
         },
 
         _pointAt: function(angle) {
@@ -293,8 +375,7 @@
 
     var Arc = Class.extend({
         init: function(center, options) {
-            this.center = center || new Point();
-            this.center.observer = this;
+            this.setCenter(center || new Point());
 
             options = options || {};
             this.radiusX = options.radiusX;
@@ -302,6 +383,17 @@
             this.startAngle = options.startAngle;
             this.endAngle = options.endAngle;
             this.counterClockwise = options.counterClockwise || false;
+        },
+
+        setCenter: function(value) {
+            this.center = Point.create(value);
+            this.center.observer = this;
+            this.geometryChange();
+            return this;
+        },
+
+        getCenter: function() {
+            return this.center;
         },
 
         MAX_INTERVAL: 90,
@@ -373,7 +465,8 @@
                 maxPoint = Point.max(maxPoint, currentPoint);
             }
 
-            return new Rect(minPoint, maxPoint);
+            // TODO: Let fromPoints figure out the min/max
+            return Rect.fromPoints(minPoint, maxPoint);
         },
 
         _arcInterval: function() {
@@ -667,6 +760,7 @@
             Matrix: Matrix,
             Point: Point,
             Rect: Rect,
+            Size: Size,
             Transformation: Transformation,
             transform: transform,
             toMatrix: toMatrix

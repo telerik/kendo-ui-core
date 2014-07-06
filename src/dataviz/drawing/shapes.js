@@ -8,7 +8,6 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
-        extend = $.extend,
 
         dataviz = kendo.dataviz,
         append = dataviz.append,
@@ -16,6 +15,7 @@
         g = dataviz.geometry,
         Point = g.Point,
         Rect = g.Rect,
+        Size = g.Size,
         Matrix = g.Matrix,
         toMatrix = g.toMatrix,
 
@@ -39,7 +39,7 @@
         },
 
         _initOptions: function(options) {
-            options = extend({}, options);
+            options = options || {};
 
             var transform = options.transform;
             if (transform) {
@@ -120,8 +120,8 @@
 
     var Group = Element.extend({
         init: function(options) {
-            this.children = [];
             Element.fn.init.call(this, options);
+            this.children = [];
         },
 
         childrenChange: function(action, items, index) {
@@ -203,6 +203,10 @@
             if (!this.options.font) {
                 this.options.font = "12px sans-serif";
             }
+
+            if (!defined(this.options.fill)) {
+                this.fill("#000");
+            }
         },
 
         content: function(value) {
@@ -225,7 +229,7 @@
         rect: function() {
             var size = this.measure();
             var pos = this.position().clone();
-            return new g.Rect(pos, pos.clone().translate(size.width, size.height));
+            return new g.Rect(pos, [size.width, size.height]);
         },
 
         bbox: function(transformation) {
@@ -238,12 +242,16 @@
         }
     });
     deepExtend(Text.fn, drawing.mixins.Paintable);
-    defineGeometryAccessors(Text.fn, ["position"]);
+    definePointAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Circle());
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         bbox: function(transformation) {
@@ -268,6 +276,10 @@
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Arc());
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         bbox: function(transformation) {
@@ -331,7 +343,7 @@
         },
 
         _lineBoundingBox: function(p1, p2) {
-            return new Rect(Point.min(p1, p2), Point.max(p1, p2));
+            return Rect.fromPoints(p1, p2);
         },
 
         _curveBoundingBox: function(p1, cp1, cp2, p2) {
@@ -341,7 +353,7 @@
                 xLimits = arrayLimits([extremesX.min, extremesX.max, p1.x, p2.x]),
                 yLimits = arrayLimits([extremesY.min, extremesY.max, p1.y, p2.y]);
 
-            return new Rect(Point.create(xLimits.min, yLimits.min), Point.create(xLimits.max, yLimits.max));
+            return Rect.fromPoints(new Point(xLimits.min, yLimits.min), new Point(xLimits.max, yLimits.max));
         },
 
         _curveExtremesFor: function(points, field) {
@@ -398,15 +410,20 @@
             };
         }
     });
-    defineGeometryAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
+    definePointAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
 
     var Path = Element.extend({
         init: function(options) {
-            var path = this;
+            Element.fn.init.call(this, options);
+            this.segments = [];
 
-            path.segments = [];
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
 
-            Element.fn.init.call(path, options);
+            if (!defined(this.options.stroke.lineJoin)) {
+                this.options.set("stroke.lineJoin", "miter");
+            }
         },
 
         moveTo: function(x, y) {
@@ -470,11 +487,15 @@
 
             if (length === 1) {
                 var anchor = segments[0].anchor().transformCopy(matrix);
-                boundingBox = new Rect(anchor, anchor);
+                boundingBox = new Rect(anchor, Size.ZERO);
             } else if (length > 0) {
-                boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
                 for (var i = 1; i < length; i++) {
-                    boundingBox = boundingBox.wrap(segments[i - 1].bboxTo(segments[i], matrix));
+                    var segmentBox = segments[i - 1].bboxTo(segments[i], matrix);
+                    if (boundingBox) {
+                        boundingBox = boundingBox.wrap(segmentBox);
+                    } else {
+                        boundingBox = segmentBox;
+                    }
                 }
             }
 
@@ -485,8 +506,12 @@
 
     var MultiPath = Element.extend({
         init: function(options) {
-            this.paths = [];
             Element.fn.init.call(this, options);
+            this.paths = [];
+
+            if (!defined(this.options.stroke)) {
+                this.stroke("#000");
+            }
         },
 
         moveTo: function(x, y) {
@@ -563,23 +588,23 @@
 
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
-        var boundingBox = new Rect(Point.maxPoint(), Point.minPoint());
-        var hasBoundingBox = false;
+        var boundingBox;
 
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i];
             if (element.visible()) {
                 var elementBoundingBox = applyTransform ? element.bbox(transformation) : element.rawBBox();
                 if (elementBoundingBox) {
-                    hasBoundingBox = true;
-                    boundingBox = boundingBox.wrap(elementBoundingBox);
+                    if (boundingBox) {
+                        boundingBox = boundingBox.wrap(elementBoundingBox);
+                    } else {
+                        boundingBox = elementBoundingBox;
+                    }
                 }
             }
         }
 
-        if (hasBoundingBox) {
-            return boundingBox;
-        }
+        return boundingBox;
     }
 
     function updateElementsParent(elements, parent) {
@@ -589,10 +614,10 @@
     }
 
     function expandRect(rect, value) {
-        rect.p0.x -= value;
-        rect.p0.y -= value;
-        rect.p1.x += value;
-        rect.p1.y += value;
+        rect.origin.x -= value;
+        rect.origin.y -= value;
+        rect.size.width += value * 2;
+        rect.size.height += value * 2;
     }
 
     function defineGeometryAccessors(fn, names) {
@@ -606,6 +631,26 @@
         return function(value) {
             if (defined(value)) {
                 this[fieldName] = value;
+                this[fieldName].observer = this;
+                this.geometryChange();
+                return this;
+            } else {
+                return this[fieldName];
+            }
+        };
+    }
+
+    function definePointAccessors(fn, names) {
+        for (var i = 0; i < names.length; i++) {
+            fn[names[i]] = pointAccessor(names[i]);
+        }
+    }
+
+    function pointAccessor(name) {
+        var fieldName = "_" + name;
+        return function(value) {
+            if (defined(value)) {
+                this[fieldName] = Point.create(value);
                 this[fieldName].observer = this;
                 this.geometryChange();
                 return this;

@@ -116,7 +116,8 @@
                     childNode = new MultiPathNode(srcElement);
                 } else if (srcElement instanceof d.Circle) {
                     childNode = new CircleNode(srcElement);
-                // TODO: Arc
+                } else if (srcElement instanceof d.Arc) {
+                    childNode = new ArcNode(srcElement);
                 } else if (srcElement instanceof d.Text) {
                     childNode = new TextNode(srcElement);
                 } else if (srcElement instanceof d.Image) {
@@ -159,6 +160,7 @@
 
             this.setLineDash(ctx);
             this.setLineCap(ctx);
+            this.setLineJoin(ctx);
 
             this.setFill(ctx);
             this.setStroke(ctx);
@@ -180,7 +182,6 @@
             if (stroke) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
-                ctx.lineJoin = "round";
                 ctx.globalAlpha = stroke.opacity;
                 ctx.stroke();
             }
@@ -211,8 +212,15 @@
             var stroke = this.srcElement.options.stroke;
             if (dashType && dashType !== SOLID) {
                 ctx.lineCap = BUTT;
-            } else if (stroke) {
-                ctx.lineCap = valueOrDefault(stroke.lineCap, "square");
+            } else if (stroke && stroke.lineCap) {
+                ctx.lineCap = stroke.lineCap;
+            }
+        },
+
+        setLineJoin: function(ctx) {
+            var stroke = this.srcElement.options.stroke;
+            if (stroke && stroke.lineJoin) {
+                ctx.lineJoin = stroke.lineJoin;
             }
         },
 
@@ -230,18 +238,24 @@
                 return;
             }
 
-            var s = segments[0];
-            ctx.moveTo(s.anchor().x, s.anchor().y);
+            var seg = segments[0];
+            var anchor = seg.anchor();
+            ctx.moveTo(anchor.x, anchor.y);
 
             for (var i = 1; i < segments.length; i++) {
-                var ps = segments[i - 1];
-                s = segments[i];
-                if (ps.controlOut() && s.controlIn()) {
-                    ctx.bezierCurveTo(ps.controlOut().x, ps.controlOut().y,
-                                      s.controlIn().x, s.controlIn().y,
-                                      s.anchor().x, s.anchor().y);
+                seg = segments[i];
+                anchor = seg.anchor();
+
+                var prevSeg = segments[i - 1];
+                var prevOut = prevSeg.controlOut();
+                var controlIn = seg.controlIn();
+
+                if (prevOut && controlIn) {
+                    ctx.bezierCurveTo(prevOut.x, prevOut.y,
+                                      controlIn.x, controlIn.y,
+                                      anchor.x, anchor.y);
                 } else {
-                    ctx.lineTo(s.anchor().x, s.anchor().y);
+                    ctx.lineTo(anchor.x, anchor.y);
                 }
             }
 
@@ -267,6 +281,13 @@
             var r = geometry.radius;
 
             ctx.arc(c.x, c.y, r, 0, Math.PI * 2);
+        }
+    });
+
+    var ArcNode = PathNode.extend({
+        renderPoints: function(ctx) {
+            var path = this.srcElement.toPath();
+            PathNode.fn.renderPoints.call(this, ctx, path);
         }
     });
 
@@ -347,6 +368,7 @@
 
     deepExtend(dataviz.drawing, {
         canvas: {
+            ArcNode: ArcNode,
             CircleNode: CircleNode,
             ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,

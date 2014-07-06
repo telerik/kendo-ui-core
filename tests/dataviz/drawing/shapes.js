@@ -146,8 +146,12 @@
             shape.fill("red");
         });
 
-        test("fill returns shape", function() {
+        test("fill is chainable", function() {
             deepEqual(shape.fill("red"), shape);
+        });
+
+        test("fill returns fill", function() {
+            equal(shape.fill("red").fill().color, "red");
         });
 
         test("stroke sets stroke", function() {
@@ -168,8 +172,12 @@
             shape.stroke("red");
         });
 
-        test("stroke returns shape", function() {
+        test("stroke is chainable", function() {
             deepEqual(shape.stroke("red"), shape);
+        });
+
+        test("stroke returns stroke", function() {
+            equal(shape.stroke("red").stroke().color, "red");
         });
     }
 
@@ -365,10 +373,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10)),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -381,10 +389,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10)),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -397,10 +405,10 @@
                 circle = new Circle(new g.Circle(new Point(), 10), {visible: false}),
                 boundingBox;
             circle.bbox = function() {
-                return new g.Rect(Point.create(50, 50), Point.create(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             path.bbox = function() {
-                return new g.Rect(Point.create(30, 70), Point.create(120, 170));
+                return new g.Rect(new Point(30, 70), [90, 100]);
             };
             group.append(circle);
             group.append(path);
@@ -465,6 +473,11 @@
             equal(text.position().x, 100);
         });
 
+        test("sets initial position from array", function() {
+            text = new Text("Foo", [100, 100]);
+            ok(text.position().equals(position));
+        });
+
         test("sets initial options", function() {
             text = new Text("Foo", new g.Point(), { foo: true });
 
@@ -475,6 +488,22 @@
             equal(text.options.font, "12px sans-serif");
         });
 
+        test("sets default fill", function() {
+            equal(text.options.fill.color, "#000");
+        });
+
+        test("default fill can be overriden", function() {
+            text = new Text("Foo", new g.Point(), { fill: { color: "foo" } });
+
+            equal(text.options.fill.color, "foo");
+        });
+
+        test("default fill can be disabled", function() {
+            text = new Text("Foo", new g.Point(), { fill: null });
+
+            equal(text.options.fill, null);
+        });
+
         test("changing the position triggers geometryChange", function() {
             text.observer = {
                 geometryChange: function() {
@@ -483,6 +512,17 @@
             };
 
             text.position().setX(5);
+        });
+
+        test("position can be set to a Point instance", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            equal(text.position(), position);
+        });
+
+        test("position can be set to an array", function() {
+            text.position([10, 10]);
+            deepEqual(text.position().toArray(), [10, 10]);
         });
 
         test("setting content triggers optionsChange", function() {
@@ -586,6 +626,15 @@
             ok(circle.options.foo);
         });
 
+        test("sets default stroke", function() {
+            equal(circle.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            circle = new Circle(circleGeometry, { stroke: { color: "foo" } });
+            equal(circle.options.stroke.color, "foo");
+        });
+
         test("changing the center triggers geometryChange", function() {
             circle.observer = {
                 geometryChange: function() {
@@ -625,7 +674,7 @@
                 geometry = new g.Circle(new Point());
 
             geometry.bbox = function() {
-                return new g.Rect(new Point(50, 50), new Point(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             circle = new Circle(geometry, {stroke: {width: 5}});
             boundingBox = circle.bbox();
@@ -682,6 +731,15 @@
             ok(arc.options.foo);
         });
 
+        test("sets default stroke", function() {
+            equal(arc.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            arc = new Arc(arcGeometry, { stroke: { color: "foo" } });
+            equal(arc.options.stroke.color, "foo");
+        });
+
         test("changing the center triggers geometryChange", function() {
             arc.observer = {
                 geometryChange: function() {
@@ -708,7 +766,7 @@
                 geometry = new g.Arc(new Point());
 
             geometry.bbox = function() {
-                return new g.Rect(new Point(50, 50), new Point(150, 150));
+                return new g.Rect(new Point(50, 50), [100, 100]);
             };
             arc = new Arc(geometry, {stroke: {width: 5}});
             boundingBox = arc.bbox();
@@ -754,6 +812,21 @@
             ok(new Segment().anchor());
         });
 
+        test("sets initial anchor from array", function() {
+            segment = new Segment([10, 20]);
+            ok(segment.anchor().equals(new Point(10, 20)));
+        });
+
+        test("sets initial controlIn point from array", function() {
+            segment = new Segment([0, 0], [10, 20]);
+            ok(segment.controlIn().equals(new Point(10, 20)));
+        });
+
+        test("sets initial controlOut point from array", function() {
+            segment = new Segment([0, 0], [0, 0], [10, 20]);
+            ok(segment.controlOut().equals(new Point(10, 20)));
+        });
+
         test("changing the anchor point triggers geometryChange", function() {
             segment.observer = {
                 geometryChange: function() {
@@ -776,6 +849,11 @@
 
         test("anchor setter is chainable", function() {
             equal(segment.anchor(new Point()), segment);
+        });
+
+        test("anchor setter accepts array", function() {
+            segment.anchor([10, 20]);
+            ok(segment.anchor().equals(new Point(10, 20)));
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
@@ -802,6 +880,11 @@
             equal(segment.controlIn(new Point()), segment);
         });
 
+        test("controlIn setter accepts array", function() {
+            segment.controlIn([10, 20]);
+            ok(segment.controlIn().equals(new Point(10, 20)));
+        });
+
         test("changing the control point (out) triggers geometryChange", function() {
             segment.observer = {
                 geometryChange: function() {
@@ -814,6 +897,11 @@
 
         test("controlOut setter is chainable", function() {
             equal(segment.controlOut(new Point()), segment);
+        });
+
+        test("controlOut setter accepts array", function() {
+            segment.controlOut([10, 20]);
+            ok(segment.controlOut().equals(new Point(10, 20)));
         });
 
         test("setting the control point (out) triggers geometryChange", function() {
@@ -861,9 +949,34 @@
             }
         });
 
+        test("sets initial options", function() {
+            var path = new Path({ foo: true });
+            ok(path.options.foo);
+        });
+
+        test("sets default stroke", function() {
+            equal(path.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            path = new Path({ stroke: { color: "foo" } });
+            equal(path.options.stroke.color, "foo");
+        });
+
         test("moveTo adds segment", function() {
             path.moveTo(0, 0);
             equal(path.segments.length, 1);
+        });
+
+        test("moveTo accepts Point", function() {
+            var p = new Point(10, 20);
+            path.moveTo(p);
+            ok(path.segments[0].anchor().equals(p));
+        });
+
+        test("moveTo accepts array", function() {
+            path.moveTo([10, 20]);
+            ok(path.segments[0].anchor().equals(new Point(10, 20)));
         });
 
         test("moveTo returns path", function() {
@@ -881,6 +994,17 @@
         test("lineTo adds segment", function() {
             path.lineTo(0, 0);
             equal(path.segments.length, 1);
+        });
+
+        test("lineTo accepts Point", function() {
+            var p = new Point(10, 20);
+            path.lineTo(p);
+            ok(path.segments[0].anchor().equals(p));
+        });
+
+        test("lineTo accepts array", function() {
+            path.lineTo([10, 20]);
+            ok(path.segments[0].anchor().equals(new Point(10, 20)));
         });
 
         test("lineTo returns path", function() {
@@ -910,6 +1034,15 @@
             deepEqual(path.segments[1].controlIn(), controlIn);
         });
 
+        test("curveTo sets points from arrays", function() {
+            path.moveTo(0, 0);
+            path.curveTo([10, 10], [40, 20], [30, 30]);
+
+            ok(path.segments[0].controlOut().equals(new Point(10, 10)));
+            ok(path.segments[1].controlIn().equals(new Point(40, 20)));
+            ok(path.segments[1].anchor().equals(new Point(30, 30)));
+        });
+
         test("changing the control points triggers geometryChange", 2, function() {
             var controlOut = Point.create(10, 10),
                 controlIn = Point.create(40, 20);
@@ -923,11 +1056,6 @@
 
             controlOut.setX(20);
             controlIn.setY(30);
-        });
-
-        test("sets initial options", function() {
-            var path = new Path({ foo: true });
-            ok(path.options.foo);
         });
 
         test("adding a point triggers geometryChange", function() {
@@ -1048,6 +1176,20 @@
             setup: function() {
                 multiPath = new MultiPath();
             }
+        });
+
+        test("sets initial options", function() {
+            multiPath = new MultiPath({ foo: true });
+            ok(multiPath.options.foo);
+        });
+
+        test("sets default stroke", function() {
+            equal(multiPath.options.stroke.color, "#000");
+        });
+
+        test("default stroke can be overriden", function() {
+            multiPath = new MultiPath({ stroke: { color: "foo" } });
+            equal(multiPath.options.stroke.color, "foo");
         });
 
         test("moveTo adds path", function() {
@@ -1190,7 +1332,7 @@
 
         module("Image", {
             setup: function() {
-                rect = new g.Rect(new g.Point(0, 0), new g.Point(100, 100));
+                rect = new g.Rect(new g.Point(0, 0), [100, 100]);
                 image = new d.Image("foo", rect);
             }
         });
@@ -1251,7 +1393,7 @@
                 }
             };
 
-            image.rect().p0.setX(5);
+            image.rect().origin.setX(5);
         });
 
         test("boundingBox returns bounding rect", function() {

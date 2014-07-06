@@ -160,7 +160,7 @@
 
     // Template helpers =======================================================
     function renderAttr(name, value) {
-        return defined(value) ? " " + name + "='" + value + "' " : "";
+        return (defined(value) && value !== null) ? " " + name + "='" + value + "' " : "";
     }
 
     function renderAllAttr(attrs) {

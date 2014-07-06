@@ -5,6 +5,7 @@
         Circle = g.Circle,
         Point = g.Point,
         Rect = g.Rect,
+        Size = g.Size,
         Matrix = g.Matrix,
         Arc = g.Arc,
         Transformation = g.Transformation;
@@ -46,9 +47,9 @@
         ok(Point.create(new Point(10, 20)).equals(new Point(10, 20)));
     });
 
-    test("create from Point clones instance", function() {
+    test("create from Point does not clone instance", function() {
         var loc = new Point(10, 20);
-        ok(Point.create(loc) !== loc);
+        ok(Point.create(loc) === loc);
     });
 
     test("create from undefined", function() {
@@ -391,30 +392,194 @@
         equal(maxPoint.y, 20);
     });
 
+    test("toArray returns an array with the values", function() {
+        var result = point.toArray();
+        deepEqual(result, [10, 20]);
+    });
+
+    test("toArray returns an array with the values rounded to the specified precision", function() {
+        point.move(3.14, 3.45);
+        var result = point.toArray(1);
+        deepEqual(result, [3.1, 3.5]);
+    });
+
+    // ------------------------------------------------------------
+    (function() {
+        var size;
+
+        module("Size", {
+            setup: function() {
+                size = new Size(10, 20);
+            }
+        });
+
+        test("constructor sets width", function() {
+            equal(size.width, 10);
+        });
+
+        test("constructor sets height", function() {
+            equal(size.height, 20);
+        });
+
+        test("width defaults to 0", function() {
+            equal(new Size().width, 0);
+        });
+
+        test("height defaults to 0", function() {
+            equal(new Size().height, 0);
+        });
+
+        test("create from width, height", function() {
+            ok(Size.create(10, 20).equals(new Size(10, 20)));
+        });
+
+        test("create from width, height array", function() {
+            ok(Size.create([10, 20]).equals(new Size(10, 20)));
+        });
+
+        test("create from Size", function() {
+            ok(Size.create(new Size(10, 20)).equals(new Size(10, 20)));
+        });
+
+        test("create from Size does not clone instance", function() {
+            var loc = new Size(10, 20);
+            ok(Size.create(loc) === loc);
+        });
+
+        test("create from undefined", function() {
+            equal(Size.create(undefined), undefined);
+        });
+
+        test("sets width", function() {
+            size.setWidth(10);
+            equal(size.width, 10);
+        });
+
+        test("sets height", function() {
+            size.setHeight(10);
+            equal(size.height, 10);
+        });
+
+        test("set is chainable", function() {
+            equal(size.setWidth(10), size);
+        });
+
+        test("gets width", function() {
+            equal(size.getWidth(), 10);
+        });
+
+        test("gets height", function() {
+            equal(size.getHeight(), 20);
+        });
+
+        test("changing width triggers geometryChange", function() {
+            size.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            size.setWidth(1);
+        });
+
+        test("changing height triggers geometryChange", function() {
+            size.observer = {
+                geometryChange: function() {
+                    ok(true);
+                }
+            };
+
+            size.setHeight(1);
+        });
+
+        test("setting width to same value does not trigger geometryChange", 0, function() {
+            size.observer = {
+                geometryChange: function() {
+                    ok(false);
+                }
+            };
+
+            size.setWidth(10);
+        });
+
+        test("setting height to same value does not trigger geometryChange", 0, function() {
+            size.observer = {
+                geometryChange: function() {
+                    ok(false);
+                }
+            };
+
+            size.setHeight(20);
+        });
+
+        test("clone returns new Size instance", function() {
+            var clone = size.clone();
+            notEqual(clone, size);
+            ok(clone instanceof Size);
+        });
+
+        test("clone copies width and height", function() {
+            var clone = size.clone();
+            equal(clone.width, size.width);
+            equal(clone.height, size.height);
+        });
+    })();
+
     // ------------------------------------------------------------
     var rect;
-    var invRect;
 
     module("Rect", {
         setup: function() {
-            rect = new Rect(
-                new Point(0, 0),
-                new Point(10, 20)
-            );
-
-            invRect = new Rect(
-                new Point(10, 20),
-                new Point(0, 0)
-            );
+            rect = new Rect(new Point(0, 0), new Size(10, 20));
         }
     });
 
-    test("constructor sets p0", function() {
-        ok(rect.p0.equals(new Point(0, 0)));
+    test("constructor sets origin", function() {
+        ok(rect.origin.equals(new Point(0, 0)));
     });
 
-    test("constructor sets p1", function() {
-        ok(rect.p1.equals(new Point(10, 20)));
+    test("constructor sets origin from array", function() {
+        rect = new Rect([0, 0], [10, 10]);
+        ok(rect.origin.equals(new Point(0, 0)));
+    });
+
+    test("constructor sets size", function() {
+        ok(rect.size.equals, new Size(10, 20));
+    });
+
+    test("constructor sets size from array", function() {
+        rect = new Rect(new Point(0, 0), [10, 20]);
+        ok(rect.size.equals, new Size(10, 20));
+    });
+
+    test("sets origin", function() {
+        var origin = new g.Point(10, 10);
+        rect.setOrigin(origin);
+        ok(rect.origin.equals(origin));
+    });
+
+    test("sets origin from array", function() {
+        rect.setOrigin([10, 10]);
+        ok(rect.origin.equals(new g.Point(10, 10)));
+    });
+
+    test("gets origin", function() {
+        ok(rect.getOrigin().equals(new g.Point(0, 0)));
+    });
+
+    test("sets size", function() {
+        var size = new g.Size(10, 10);
+        rect.setSize(size);
+        ok(rect.size.equals(size));
+    });
+
+    test("sets size from array", function() {
+        rect.setSize([10, 10]);
+        ok(rect.size.equals(new g.Size(10, 10)));
+    });
+
+    test("gets size", function() {
+        ok(rect.getSize().equals(new g.Size(10, 20)));
     });
 
     test("returns width", function() {
@@ -425,65 +590,53 @@
         equal(rect.height(), 20);
     });
 
-    test("returns width for any point order", function() {
-        equal(invRect.width(), 10);
-    });
-
-    test("returns height for any point order", function() {
-        equal(invRect.height(), 20);
-    });
-
     test("center returns center", function() {
         deepEqual(rect.center(), new Point(5,10));
     });
 
-    test("center returns center for any point order", function() {
-        deepEqual(invRect.center(), new Point(5,10));
-    });
-
     test("topLeft returns top left corner", function() {
-        ok(invRect.topLeft().equals(new Point(0, 0)));
+        ok(rect.topLeft().equals(new Point(0, 0)));
     });
 
     test("bottomRight returns bottom right corner", function() {
-        ok(invRect.bottomRight().equals(new Point(10, 20)));
+        ok(rect.bottomRight().equals(new Point(10, 20)));
     });
 
     test("topRight returns top right corner", function() {
-        ok(invRect.topRight().equals(new Point(10, 0)));
+        ok(rect.topRight().equals(new Point(10, 0)));
     });
 
     test("bottomLeft returns bottom left corner", function() {
-        ok(invRect.bottomLeft().equals(new Point(0, 20)));
+        ok(rect.bottomLeft().equals(new Point(0, 20)));
     });
 
-    test("wrap returns new rect with minimum p0 and maximum p1", function() {
-        var other = new Rect(new Point(-1, 5), new Point(15, 15)),
+    test("wraps other rectangle", function() {
+        var other = Rect.fromPoints(new Point(-1, 5), new Point(15, 15)),
             wrap =  rect.wrap(other);
-        equal(wrap.p0.x, -1);
-        equal(wrap.p0.y, 0);
-        equal(wrap.p1.x, 15);
-        equal(wrap.p1.y, 20);
+        equal(wrap.origin.x, -1);
+        equal(wrap.origin.y, 0);
+        equal(wrap.size.width, 16);
+        equal(wrap.size.height, 20);
     });
 
-    test("modifying p0 triggers geometryChange", function() {
+    test("modifying origin triggers geometryChange", function() {
         rect.observer = {
             geometryChange: function() {
                 ok(true);
             }
         };
 
-        rect.p0.setX(1);
+        rect.origin.setX(1);
     });
 
-    test("modifying p1 triggers geometryChange", function() {
+    test("modifying size triggers geometryChange", function() {
         rect.observer = {
             geometryChange: function() {
                 ok(true);
             }
         };
 
-        rect.p1.setX(1);
+        rect.size.setWidth(1);
     });
 
     test("boundingBox returns the bounding Rect", function() {
@@ -514,6 +667,11 @@
         ok(circle.center.equals(new Point(0, 0)));
     });
 
+    test("constructor sets center from array", function() {
+        circle = new Circle([0, 0], 10);
+        ok(circle.center.equals(new Point(0, 0)));
+    });
+
     test("constructor sets radius", function() {
         equal(circle.radius, 10);
     });
@@ -526,6 +684,21 @@
         };
 
         circle.center.setX(1);
+    });
+
+    test("sets center", function() {
+        var center = new g.Point(10, 10);
+        circle.setCenter(center);
+        ok(circle.center.equals(center));
+    });
+
+    test("sets center from array", function() {
+        circle.setCenter([10, 10]);
+        ok(circle.center.equals(new g.Point(10, 10)));
+    });
+
+    test("gets center", function() {
+        ok(circle.getCenter().equals(new g.Point(0, 0)));
     });
 
     test("sets radius", function() {
@@ -629,6 +802,11 @@
         ok(arc.center instanceof Point);
     });
 
+    test("constructor sets center from array", function() {
+        arc = new Arc([0, 0], 10);
+        ok(arc.center.equals(new Point(0, 0)));
+    });
+
     test("constructor sets options", function() {
         equal(arc.radiusX, 50);
         equal(arc.radiusY, 100);
@@ -690,6 +868,21 @@
         equal(arc.getStartAngle(), 0);
         equal(arc.getEndAngle(), 180);
         equal(arc.getCounterClockwise(), false);
+    });
+
+    test("sets center", function() {
+        var center = new g.Point(10, 10);
+        arc.setCenter(center);
+        ok(arc.center.equals(center));
+    });
+
+    test("sets center from array", function() {
+        arc.setCenter([10, 10]);
+        ok(arc.center.equals(new g.Point(10, 10)));
+    });
+
+    test("gets center", function() {
+        ok(arc.getCenter().equals(new g.Point(100, 100)));
     });
 
     test("pointAt returns the point on the elipse for a given angle", function() {
