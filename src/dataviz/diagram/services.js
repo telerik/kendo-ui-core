@@ -183,38 +183,6 @@
             }
         });
 
-        /**
-         * Unit for content editing.
-         */
-        var ContentChangedUndoUnit = Class.extend({
-            /**
-             * Instantiates the unit.
-             * @param element The element being edited.
-             * @param newcontent The new content.
-             * @param oldcontent The old content.
-             */
-            init: function (element, oldcontent, newcontent) {
-                this.item = element;
-                this._undoContent = oldcontent;
-                this._redoContent = newcontent;
-                this.title = "Content Editing";
-                this.rebuild = this.item.options.hasOwnProperty("rebuild") ? this.item.options.rebuild : null;
-            },
-            undo: function () {
-                this.item.content(this._undoContent);
-                if (this.rebuild) {
-                    this.rebuild.call(this.item, this.item);
-                }
-            },
-            redo: function () {
-                this.item.content(this._redoContent);
-                if (this.rebuild) {
-                    this.rebuild.call(this.item, this.item);
-                }
-            }
-
-        });
-
         var ConnectionEditUnit = Class.extend({
             init: function (item, redoSource, redoTarget) {
                 this.item = item;
@@ -575,8 +543,6 @@
             },
             end: function () {
             },
-            doubleClick: function () {
-            },
             tryActivate: function (p, meta) {
                 return false;
             },
@@ -806,18 +772,6 @@
             }
         });
 
-        var ContentEditTool = EmptyTool.extend({
-            init: function (toolService) {
-                EmptyTool.fn.init.call(this, toolService);
-            },
-            doubleClick: function () {
-                this.toolService.diagram.editor(this.toolService.hoveredItem);
-            },
-            tryActivate: function (p, meta) {
-                return meta.doubleClick && this.toolService.hoveredItem;
-            }
-        });
-
         function testKey(key, str) {
             return str.charCodeAt(0) == key || str.toUpperCase().charCodeAt(0) == key;
         }
@@ -830,7 +784,6 @@
             init: function (diagram) {
                 this.diagram = diagram;
                 this.tools = [
-                    new ContentEditTool(this),
                     new ScrollerTool(this),
                     new ConnectionEditTool(this),
                     new ConnectionTool(this),
@@ -871,13 +824,7 @@
                 this._updateCursor(p);
                 return true;
             },
-            doubleClick: function (p, meta) {
-                this._activateTool(p, deepExtend(meta, { doubleClick: true }));
-                if (this.activeTool.doubleClick) {
-                    this.activeTool.doubleClick(p, meta);
-                }
-                this._updateCursor(p);
-            },
+
             keyDown: function (key, meta) {
                 var diagram = this.diagram;
                 meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
@@ -1980,7 +1927,6 @@
             AddConnectionUnit: AddConnectionUnit,
             DeleteShapeUnit: DeleteShapeUnit,
             DeleteConnectionUnit: DeleteConnectionUnit,
-            ContentChangedUndoUnit: ContentChangedUndoUnit,
             ConnectionEditAdorner: ConnectionEditAdorner,
             UndoRedoService: UndoRedoService,
             ResizingAdorner: ResizingAdorner,

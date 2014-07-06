@@ -502,93 +502,6 @@
 
     deepExtend(TextBlock.fn, AutoSizeableMixin);
 
-    var TextBlockEditor = Observable.extend({
-        init: function (domElement, options) {
-            Observable.fn.init.call(this);
-
-            var element = this;
-            element.domElement = domElement || this._createEditor();
-            element.options = deepExtend({}, element.options, options);
-            element.redraw();
-        },
-        visible: function (value) {
-            if (value !== undefined) {
-                this._isVisible = value;
-                this.domElement.style.visibility = value ? "visible" : "hidden";
-            }
-            return this._isVisible;
-        },
-        position: function (x, y) {
-            if (y !== undefined) {
-                this.options.x = x;
-                this.options.y = y;
-                this._pos = new Point(x, y);
-            }
-            else if (x instanceof Point) {
-                this._pos = x;
-                this.options.x = this._pos.x;
-                this.options.y = this._pos.y;
-            }
-
-            $(this.domElement).css({left: this._pos.x + "px", top: this._pos.y + "px"});
-            return this._pos;
-        },
-        size: function (w, h) {
-            var isSet = false;
-            if (h !== undefined) {
-                this._size = { width: w, height: h };
-                isSet = true;
-            }
-            else if (w === Object(w)) {
-                this._size = { width: w.width, height: w.height };
-                isSet = true;
-            }
-
-            if (isSet) {
-                deepExtend(this.options, this._size);
-                $(this.domElement).css({width: this._size.width + "px", height: this._size.height + "px"});
-            }
-
-            return this._size;
-        },
-        focus: function () {
-            $(this.domElement).focus();
-        },
-        content: function (text) {
-            if (!isUndefined(text)) {
-                this.domElement.value = this.options.text = text;
-            }
-
-            return this.domElement.value;
-        },
-        redraw: function (options) {
-            this.options = deepExtend(this.options, options);
-            this.content(this.options.text);
-        },
-        _createEditor: function () {
-            var that = this,
-                input = $("<input type='text' class='textEditable' />")
-                    .css({ position: "absolute", zIndex: 100, fontSize: "16px" })
-                    .on("mousedown mouseup click dblclick", function (e) {
-                        e.stopPropagation();
-                    })
-                    .on("keydown", function (e) {
-                        e.stopPropagation();
-                    })
-                    .on("keypress", function (e) {
-                        if (e.keyCode == kendo.keys.ENTER) {
-                            that.trigger("finishEdit", e);
-                        }
-                        e.stopPropagation();
-                    })
-                    .on("focusout", function (e) {
-                        that.trigger("finishEdit", e);
-                        e.stopPropagation();
-                    });
-            return input[0];
-        }
-    });
-
     var Rectangle = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, options);
@@ -1496,7 +1409,6 @@
         Polyline: Polyline,
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
-        TextBlockEditor: TextBlockEditor,
         Image: Image,
         VisualBase: VisualBase
     });

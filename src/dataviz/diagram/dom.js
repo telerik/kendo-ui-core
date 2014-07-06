@@ -1328,7 +1328,6 @@
                 that.element
                     .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
-                    .on("dblclick" + NS, proxy(that._doubleClick, that))
                     .on("mousedown" + NS, proxy(that._mouseDown, that))
                     .mousewheel(proxy(that._wheel, that), { ns: NS })
                     .on("keydown" + NS, proxy(that._keydown, that))
@@ -1337,7 +1336,6 @@
                 that.selector = new Selector(that);
                 // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
-                that._initEditor();
 
                 if (that.options.layout) {
                     that.layout(that.options.layout);
@@ -1373,11 +1371,7 @@
                     offsetX: 20,
                     offsetY: 20
                 },
-                editor: {
-                    height: 20,
-                    margin: 10,
-                    fontSize: 15
-                },
+
                 selectable: { // none, extended, multiple
                     type: MULTIPLE,
                     inclusive: true
@@ -2156,62 +2150,13 @@
                 });
                 return found;
             },
-            /**
-             * Shows the built-in editor of target item.
-             * @options object. Preset options to customize the editor look and behavior.
-             */
-            editor: function (item, options) { // support custome editors via the options for vNext
-                var editor = this._editor;
-                if (isUndefined(item.options.editable) || item.options.editable.text) {
-                    editor.options = deepExtend(this.options.editor, options);
-                    this._editItem = item;
-                    this._showEditor();
-                    var shapeContent = item.content();
-                    editor._originalContent = shapeContent;
-                    editor.content(shapeContent);
-                    editor.focus();
-                }
-                return editor;
-            },
-            _initEditor: function () {
-                this._editor = new diagram.TextBlockEditor();
-                this._editor.bind("finishEdit", $.proxy(this._finishEditShape, this));
-            },
-            _showEditor: function () {
-                var editor = this._editor;
 
-                editor.visible(true);
-                this.element.context.appendChild(editor.domElement);
-                this._positionEditor();
-            },
-            _positionEditor: function () {
-                var editor = this._editor,
-                    options = editor.options,
-                    nativeEditor = $(editor.domElement),
-                    bounds = this.modelToView(this._editItem.bounds()),
-                    cssDim = function (prop) {
-                        return parseInt(nativeEditor.css(prop), 10);
-                    },
-                    nativeOffset = new Point(cssDim("borderLeftWidth") + cssDim("paddingLeft"), cssDim("borderTopWidth") + cssDim("paddingTop")),
-                    formattingOffset = new Point(options.margin, bounds.height / 2 - options.height / 2).minus(nativeOffset);
-
-                editor.size((bounds.width - 2 * options.margin), options.height);
-                editor.position(bounds.topLeft().plus(formattingOffset));
-                nativeEditor.css({ fontSize: options.fontSize });
-            },
             _extendLayoutOptions: function(options) {
                 if(options.layout) {
                     options.layout = deepExtend(diagram.LayoutBase.fn.defaultOptions || {}, options.layout);
                 }
             },
-            _finishEditShape: function () {
-                var editor = this._editor, item = this._editItem;
-                if (item) {
-                    var unit = new diagram.ContentChangedUndoUnit(item, editor._originalContent, editor.content());
-                    this.undoRedoService.add(unit);
-                    editor.visible(false);
-                }
-            },
+
             _selectionChanged: function (selected, deselected) {
                 if (selected.length || deselected.length) {
                     this.trigger(SELECT, { selected: selected, deselected: deselected });
@@ -2477,12 +2422,7 @@
                     e.preventDefault();
                 }
             },
-            _doubleClick: function (e) {
-                var p = this._calculatePosition(e);
-                if (this.toolService.doubleClick(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
+
             _keydown: function (e) {
                 if (this.toolService.keyDown(e.keyCode, this._meta(e))) {
                     e.preventDefault();
@@ -2591,7 +2531,6 @@
                 }
 
                 var diagram = (args || {}).sender || this,
-                    editor = this._editor,
                     zoom = diagram.zoom(),
                     viewport = diagram.element,
                     viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
@@ -2603,9 +2542,6 @@
                 cumulativeSize = cumulativeSize.union(viewportSize);
 
                 diagram.canvas.size(cumulativeSize);
-                if (editor && editor.visible()) {
-                    this._positionEditor();
-                }
             },
             _updateAdorners: function() {
                 var adorners = this._adorners;
