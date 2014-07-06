@@ -2038,7 +2038,7 @@
                 return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
             },
             viewToDocument: function(point) {
-                var containerOffset = $(this.canvas.element).offset();
+                var containerOffset = this.element.offset();
 
                 return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
             },
@@ -2056,7 +2056,7 @@
             },
             documentToModel: function(point) {
                 var viewPoint = this.documentToView(point);
-                if (!this.canvas.transformTranslate) {
+                if (!this.canvas.translate) {
                     viewPoint.x = viewPoint.x + this.scroller.scrollLeft;
                     viewPoint.y = viewPoint.y + this.scroller.scrollTop;
                 }
@@ -2169,7 +2169,7 @@
                 var diagram = this,
                     pan = pos || diagram._pan;
 
-                if (diagram.canvas.transformTranslate) {
+                if (diagram.canvas.translate) {
                     diagram.scroller.scrollTo(pan.x, pan.y);
                     diagram._zoomMainLayer();
                 } else {

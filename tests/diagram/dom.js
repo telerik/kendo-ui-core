@@ -849,7 +849,7 @@
     });
 
     test("transform view point to document point", function() {
-        var doc = $(diagram.canvas.element).offset(),
+        var doc = diagram.element.offset(),
             point = new Point(100, 100);
 
         var result = diagram.viewToDocument(point);

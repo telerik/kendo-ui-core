@@ -567,7 +567,10 @@
                     scroll: proxy(tool._move, tool)
                 }).data("kendoMobileScroller");
 
-                tool.movableCanvas = new Movable(canvas.element);
+                if (canvas.translate) {
+                    tool.movableCanvas = new Movable(canvas.element);
+                }
+
                 var virtualScroll = function (dimension, min, max) {
                     dimension.makeVirtual();
                     dimension.virtualSize(min || SCROLL_MIN, max || SCROLL_MAX);
@@ -598,10 +601,10 @@
                     scrollPos = new Point(args.scrollLeft, args.scrollTop),
                     viewBox = new Rect(scrollPos.x, scrollPos.y, parseInt(canvasSize.width, 10), parseInt(canvasSize.height, 10));
 
-                if (canvas.transformTranslate) {
+                if (canvas.translate) {
                     diagram._storePan(scrollPos.times(-1));
                     tool.movableCanvas.moveTo(scrollPos);
-                    canvas.viewBox(viewBox);
+                    canvas.translate(scrollPos.x, scrollPos.y);
                 }
             },
             end: function () {
