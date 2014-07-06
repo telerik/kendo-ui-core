@@ -857,15 +857,15 @@
                 var that = this;
                 DiagramElement.fn.init.call(that, options, dataItem);
                 that._router = new PolylineRouter(this);
-                that.path = new Path(that.options);
+                that.path = new diagram.Polyline(that.options);
                 that.path.fill(TRANSPARENT);
                 that.visual.append(that.path);
                 that._sourcePoint = that._targetPoint = new Point();
                 that.source(from);
                 that.target(to);
-                that.content(that.options.content.text);
+                that.content(that.options.content);
                 that.definers = [];
-                if (isDefined(options) && options.points) {
+                if (defined(options) && options.points) {
                     that.points(options.points);
                 }
                 that.refresh();
@@ -1020,7 +1020,9 @@
 
             content: function(content) {
                 var result = DiagramElement.fn.content.call(this, content);
-                this.refresh();
+                if (defined(content)) {
+                    this.refresh();
+                }
 
                 return result;
             },
@@ -1163,14 +1165,28 @@
                     this.adorner.refresh();
                 }
             },
+
             redraw: function (options) {
-                this.options = deepExtend({}, this.options, options);
-                this.content(this.options.content.text);
-                if (isDefined(this.options.points) && this.options.points.length > 0) {
-                    this.points(this.options.points);
-                    this._refreshPath();
+                if (options) {
+                    this.options = deepExtend({}, this.options, options);
+
+                    var points = this.options.points;
+
+                    if (options && options.content) {
+                        this.content(options.content);
+                    }
+
+                    if (defined(points) && points.length > 0) {
+                        this.points(points);
+                        this._refreshPath();
+                    }
+                    this.path.redraw({
+                        fill: options.fill,
+                        stroke: options.stroke,
+                        startCap: options.startCap,
+                        endCap: options.endCap
+                    });
                 }
-                this.path.redraw(options);
             },
             /**
              * Returns a clone of this connection.
@@ -1217,6 +1233,7 @@
                     }
                 }
             },
+
             _hover: function (value) {
                 var color = (this.options.stroke || {}).color;
 
@@ -1230,40 +1247,28 @@
                     }
                 });
             },
-            /**
-             * Using the current router with the endpoints and intermediate points, this returns the Path data to be drawn.
-             * @private
-             */
-            _calcPathData: function () {
+
+            _refreshPath: function () {
+                if (!defined(this.path)) {
+                    return;
+                }
+                this._drawPath();
+                this.bounds(this._router.getBounds());
+            },
+
+            _drawPath: function () {
                 if (this._router) {
                     this._router.route(); // sets the intermediate points
                 }
-                function pr(point) {
-                    return point.x + " " + point.y;
-                }
-
-                // for now let's take the heuristic approach, more complete API later
-                var from = this.sourcePoint();
-                var end = this.targetPoint();
-                var data = "M" + pr(from);
-
+                var source = this.sourcePoint();
+                var target = this.targetPoint();
                 var points = this.points();
-                for (var i = 0; i < points.length; i++) {
-                    var point = points[i];
-                    data += " L" + pr(point);
-                }
-                return data + " L" + pr(end);
+
+                this.path.redraw({
+                    points: [source].concat(points, [target])
+                });
             },
-            _refreshPath: function () {
-                if (isUndefined(this.path)) {
-                    return;
-                }
-                this._drawPath(this._calcPathData());
-                this.bounds(this._router.getBounds());
-            },
-            _drawPath: function (data) {
-                this.path.redraw({ data: data  });
-            },
+
             _clearSourceConnector: function () {
                 Utils.remove(this.sourceConnector.connections, this);
                 this.sourceConnector = undefined;

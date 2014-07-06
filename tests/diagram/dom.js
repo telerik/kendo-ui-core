@@ -111,31 +111,6 @@
     })();
 
     // ------------------------------------------------------------
-    module("Diagram / add connection", {
-        setup: setup,
-        teardown: teardown
-    });
-
-    test("connect adds connections", function () {
-        var shape1 = AddShape(diagram, new Point(100, 120),
-            kendo.deepExtend(Shapes.SequentialData, {
-                width: 80, height: 80, title: "sequential data"
-            }));
-        var shape2 = AddShape(diagram, new Point(100, 400));
-        var shape3 = AddShape(diagram, new Point(370, 400), Shapes.Wave);
-
-        var topCor = shape2.getConnector("Top");
-        var topCor2 = shape3.getConnector("Top");
-        var bottomCor = shape1.getConnector("Bottom");
-        var con = diagram.connect(bottomCor, topCor, {
-            startCap: "ArrowEnd",
-            endCap: "FilledCircle"
-        });
-        var con2 = diagram.connect(bottomCor, topCor2);
-        equal(diagram.connections.length, 2, "diagram should have 2 connections");
-    });
-
-    // ------------------------------------------------------------
     (function() {
 
         module("Diagram / pan", {
@@ -342,25 +317,6 @@
              // eqaul(diagram.calls("layout"), 1);
         // });
     })();
-
-    // ------------------------------------------------------------
-    module("initialization / connections", {
-        teardown: teardown
-    });
-
-    test("connection is created with 'to' reference to a shape", function() {
-        createDiagram({
-            shapes: [{id: "s1"}, {id: "s2"}],
-            connections: [{
-                from: { shapeId: "s1", connector: "auto" },
-                to: "s2"
-            }]
-        });
-
-        equal(diagram.connections.length, 1, "diagram should have a single connection");
-        equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
-    });
-
 
     (function() {
         var shape;
@@ -926,178 +882,297 @@
         roughlyEqualPoint(result, expected, "layer->view->document");
     });
 
-    // ------------------------------------------------------------
-    module("Connections and connectors", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
+    (function() {
+        var source, target, shape1, shape2, connection;
 
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
+        // ------------------------------------------------------------
+        module("Diagram / Connections and connectors / initialization", {
+            teardown: teardown
+        });
+
+        test("connection is created with 'to' reference to a shape", function() {
+            createDiagram({
+                shapes: [{id: "s1"}, {id: "s2"}],
+                connections: [{
+                    from: { shapeId: "s1", connector: "auto" },
+                    to: "s2"
+                }]
+            });
+
+            equal(diagram.connections.length, 1, "diagram should have a single connection");
+            equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
+        });
+
+        test("creates connection on init", function() {
+            createDiagram({
+                shapes: [{id: "s1"},{id: "s2"}],
+                connections: [{
+                    from: { shapeId: "s1" },
+                    to: { shapeId: "s2" }
+                }]
+            });
+
+            connection = diagram.connections[0];
+            source = connection.source();
+            target = connection.target();
+
+            equal(diagram.connections.length, 1, "one connection should be created");
+            equal(source.shape.id, "s1", "source should be the from shape");
+            equal(target.shape.id, "s2", "target should be the to shape");
+        });
+
+        test("connections init with specific connector", function() {
+            createDiagram({
+                shapes: [{
+                    id: "s1"
+                },{
+                    id: "s2"
+                }],
+                connections: [{
+                    from: {
+                        shapeId: "s1",
+                        connector: "bottom"
+                    },
+                    to: {
+                        shapeId: "s2",
+                        connector: "top"
+                    }
+                }]
+            });
+
+            connection = diagram.connections[0];
+            source = connection.source();
+            target = connection.target();
+
+            equal(source.options.name, "Bottom", "source connector is specific");
+            equal(target.options.name, "Top", "target connector is specific");
+        });
+
+        // ------------------------------------------------------------
+        module("Diagram / connect", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("adds connections", function () {
+            var shape3, bottomCorner;
+
+            shape1 = AddShape(diagram, new Point(100, 120),
+                kendo.deepExtend(Shapes.SequentialData, {
+                    width: 80, height: 80, title: "sequential data"
+                }));
+            shape2 = AddShape(diagram, new Point(100, 400));
+            shape3 = AddShape(diagram, new Point(370, 400), Shapes.Wave);
+
+            bottomCorner = shape1.getConnector("Bottom");
+            diagram.connect(bottomCorner, shape2.getConnector("Top"), {
+                startCap: "ArrowEnd",
+                endCap: "FilledCircle"
+            });
+            diagram.connect(bottomCorner, shape3.getConnector("Top"));
+            equal(diagram.connections.length, 2, "diagram should have 2 connections");
+        });
+
+        test("sets auto connectors", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 100, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection.sourceConnector.options.name, "Auto");
+            equal(connection.targetConnector.options.name, "Auto");
+        });
+
+        test("resolves auto connectors", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 100, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("resolves auto connectors border", function () {
+            shape1 = diagram.addShape({ x: 100, y: 100 });
+            shape2 = diagram.addShape({ x: 160, y: 160 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Bottom");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("resolves auto connectors after move", function () {
+            shape1 = diagram.addShape({ x: 100, y: 100 });
+            shape2 = diagram.addShape({ x: 160, y: 160 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Bottom");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+
+            shape2.position(new Point(300, 100));
+            connection.refresh();
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("Connection detach", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 200, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            connection.select(true);
+            diagram.toolService.start(shape2.bounds().left());
+
+            ok(connection.adorner, "The connection edit adorner is present");
+            ok(diagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
+
+            diagram.toolService.move(new Point(400, 0));
+            diagram.toolService.end(new Point(400, 0));
+
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection.sourceConnector.options.name, "Auto");
+        });
+    })();
+
+    (function() {
+        var Connection = dataviz.diagram.Connection;
+        var PathDefiner = dataviz.diagram.PathDefiner;
+        var connection;
+
+        function setupConnection(options) {
+            connection = new Connection(new Point(10, 20), new Point(100, 100), options);
         }
-    });
 
-    test("create connection on init", function() {
-        diagram.destroy();
-        diagram = $("#canvas").kendoDiagram({
-            shapes: [{id: "s1"},{id: "s2"}],
-            connections: [{
-                from: { shapeId: "s1" },
-                to: { shapeId: "s2" }
-            }]
-        }).getKendoDiagram();
+        // ------------------------------------------------------------
+        module("Connection / initialization", {
+            setup: function() {
+                setupConnection({
+                    content: {
+                        text: "foo"
+                    }
+                });
+            }
+        });
 
-        equal(diagram.connections.length, 1, "one connection should be created");
+        test("inits router", function() {
+            ok(connection._router instanceof dataviz.diagram.PolylineRouter);
+        });
 
-        var connection = diagram.connections[0],
-            source = connection.source(),
-            target = connection.target();
+        test("inits polyline path", function() {
+            ok(connection.path instanceof dataviz.diagram.Polyline);
+        });
 
-        equal(source.shape.id, "s1", "source should be the from shape");
-        equal(target.shape.id, "s2", "target should be the to shape");
-    });
+        test("appends path to visual", function() {
+            ok(connection.path === connection.visual.children[0]);
+        });
 
-    test("connections init with specific connector", function() {
-        diagram.destroy();
-        diagram = $("#canvas").kendoDiagram({
-            shapes: [{
-                id: "s1"
-            },{
-                id: "s2"
-            }],
-            connections: [{
-                from: {
-                    shapeId: "s1",
-                    connector: "bottom"
-                },
-                to: {
-                    shapeId: "s2",
-                    connector: "top"
+        test("inits path points with start and end point", function() {
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 100);
+            equal(points[1].y, 100);
+        });
+
+        test("inits path points with start, points and end point", function() {
+            setupConnection({
+                points: [new Point(30, 40)]
+            });
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 30);
+            equal(points[1].y, 40);
+            equal(points[2].x, 100);
+            equal(points[2].y, 100);
+        });
+
+        test("sets transparent fill to polyline", function() {
+            equal(connection.path.options.fill.color, "transparent");
+        });
+
+        test("inits content visual", function() {
+            ok(connection._contentVisual);
+        });
+
+        module("Connection / redraw", {
+            setup: function() {
+                setupConnection({
+                    content: {
+                        text: "foo"
+                    },
+                    points: [new Point(50, 50)]
+                });
+            }
+        });
+
+        test("updates content", function() {
+            connection.redraw({
+                content: {
+                    text: "bar"
                 }
-            }]
-        }).getKendoDiagram();
+            });
+            equal(connection._contentVisual.content(), "bar");
+        });
 
-        var connection = diagram.connections[0],
-            source = connection.source(),
-            target = connection.target();
+        test("updates path", function() {
+            connection.redraw({
+                points: [new Point(30, 40)]
+            });
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 30);
+            equal(points[1].y, 40);
+            equal(points[2].x, 100);
+            equal(points[2].y, 100);
+        });
 
-        equal(source.options.name, "Bottom", "source connector is specific");
-        equal(target.options.name, "Top", "target connector is specific");
-    });
+        // ------------------------------------------------------------
+        module("Connection", {});
 
-    test("Connection connect - set auto connectors test", function () {
-        var s1 = diagram.addShape({});
-        var point = new Point(100, 0);
-        var s2 = diagram.addShape({ x: point.x, y: point.y });
+        test('definers', function () {
+            connection = new Connection(new Point(10, 20), new Point(100, 200));
+            connection.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
+            equal(connection.points().length, 3);
+            equal(connection.allPoints().length, 5);
+            ok(connection.sourceDefiner().point === connection.sourcePoint());
+            ok(connection.targetDefiner().point === connection.targetPoint());
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1.sourceConnector.options.name, "Auto");
-        equal(c1.targetConnector.options.name, "Auto");
-    });
+            connection.sourceDefiner(new PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
+            ok(connection.sourceDefiner().point.x === 44 && connection.sourceDefiner().point.y === 55);
+            ok(connection.sourceDefiner().left === null);
+            ok(connection.sourceDefiner().right.x === -55 && connection.sourceDefiner().right.y === 0);
 
-    test("Connection connect - resolve auto connectors test", function () {
-        var s1 = diagram.addShape({});
-        var point = new Point(100, 0);
-        var s2 = diagram.addShape({ x: point.x, y: point.y });
+            connection.targetDefiner(new PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
+            ok(connection.targetDefiner().point.x === 44 && connection.targetDefiner().point.y === 55);
+            ok(connection.targetDefiner().right===null);
+            ok(connection.targetDefiner().left.x === 478 && connection.targetDefiner().left.y === 102);
+        });
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
+        test('bounds', function () {
+            connection = new Connection(new Point(0, 0), new Point(500, 500));
+            connection.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
+            var bounds = connection._router.getBounds();
+            ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
+        });
 
-    test("Connection connect - resolve auto connectors border test", function () {
-        var point1 = new Point(100, 100);
-        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
-        var point2 = new Point(160, 160);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
+        test('Distance to a line segment', function () {
+            var distance = Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
+            equal(distance, 100);
+            distance = Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
+            equal(distance,100);
+            distance = Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
+            equal(distance,100);
+        });
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Bottom");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
-
-    test("Connection connect - resolve auto connectors after move test", function () {
-        var point1 = new Point(100, 100);
-        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
-        var point2 = new Point(160, 160);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
-
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Bottom");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-
-        s2.position(new Point(300, 100));
-        c1.refresh();
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
-
-    test("Connection detach", function () {
-        var s1 = diagram.addShape({});
-        var point2 = new Point(200, 0);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
-
-        var c1 = diagram.connect(s1, s2);
-        c1.select(true);
-        diagram.toolService.start(s2.bounds().left());
-
-        ok(c1.adorner, "The connection edit adorner is present");
-        ok(diagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
-
-        diagram.toolService.move(new Point(400, 0));
-        diagram.toolService.end(new Point(400, 0));
-
-        //ok(c1._resolvedTargetConnector === undefined);
-        //ok(c1.targetConnector === undefined);
-
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1.sourceConnector.options.name, "Auto");
-    });
-
-    test('Connection definers', function () {
-        var con = new dataviz.diagram.Connection(new Point(10, 20), new Point(100, 200));
-        con.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
-        equal(con.points().length, 3);
-        equal(con.allPoints().length, 5);
-        ok(con.sourceDefiner().point === con.sourcePoint());
-        ok(con.targetDefiner().point === con.targetPoint());
-
-        con.sourceDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
-        ok(con.sourceDefiner().point.x === 44 && con.sourceDefiner().point.y === 55);
-        ok(con.sourceDefiner().left===null);
-        ok(con.sourceDefiner().right.x === -55 && con.sourceDefiner().right.y === 0);
-
-        con.targetDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
-        ok(con.targetDefiner().point.x === 44 && con.targetDefiner().point.y === 55);
-        ok(con.targetDefiner().right===null);
-        ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
-    });
-
-    test('Connection bounds', function () {
-        var con = new dataviz.diagram.Connection(new Point(0, 0), new Point(500, 500));
-        con.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
-        var bounds = con._router.getBounds();
-        ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
-    });
-
-    test('Distance to a line segment', function () {
-        var d = Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
-        equal(d, 100);
-        d = Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
-        equal(d,100);
-        d = Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
-        equal(d,100);
-    });
-
-    test('Distance to polyline', function () {
-        var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
-        var d = Geometry.distanceToPolyline(new Point(50,50), polyline);
-        equal(d, 50);
-        d = Geometry.distanceToPolyline(new Point(57,50), polyline);
-        equal(d, 43);
-    });
+        test('Distance to polyline', function () {
+            var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
+            var distance = Geometry.distanceToPolyline(new Point(50,50), polyline);
+            equal(distance, 50);
+            distance = Geometry.distanceToPolyline(new Point(57,50), polyline);
+            equal(distance, 43);
+        });
+    })();
 
     // ------------------------------------------------------------
     module("Serialization - Cut/Copy/Paste", {
