@@ -124,6 +124,30 @@
             node.load([new d.Text()]);
         });
 
+        test("load appends CircleNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.CircleNode);
+            };
+
+            node.load([new d.Circle()]);
+        });
+
+        test("load appends ArcNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.ArcNode);
+            };
+
+            node.load([new d.Arc()]);
+        });
+
+        test("load appends ImageNode", function() {
+            node.append = function(child) {
+                ok(child instanceof canv.ImageNode);
+            };
+
+            node.load([new d.Image()]);
+        });
+
         test("load appends child nodes", function() {
             var parentGroup = new d.Group();
             var childGroup = new d.Group();
@@ -518,6 +542,39 @@
                 arc: function(x, y, r, start, end) {
                     deepEqual([x, y, r, start, end],
                               [10, 20, 30, 0, Math.PI * 2]);
+                }
+            }));
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var arc,
+            arcNode;
+
+        module("ArcNode", {
+            setup: function() {
+                var geometry = new g.Arc(new Point(10, 20), {
+                    radiusX: 10,
+                    radiusY: 10,
+                    startAngle: 0,
+                    endAngle: 90
+                });
+                arc = new d.Arc(geometry);
+                arcNode = new canv.ArcNode(arc);
+            }
+        });
+
+        test("renders equivalent curve", function() {
+            var order = 0;
+            arcNode.renderTo(mockContext({
+                moveTo: function(x, y) {
+                    equal(order++, 0, "#");
+                    deepEqual([x, y], [20, 20]);
+                },
+                bezierCurveTo: function(cp1x, cp1y, cp2x, cp2y, x, y) {
+                    equal(order++, 1, "#");
+                    arrayClose([cp1x, cp1y, cp2x, cp2y, x, y], [20, 25, 15, 30, 10, 30], 0.3);
                 }
             }));
         });
