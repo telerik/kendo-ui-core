@@ -128,7 +128,7 @@ var __meta__ = {
 
             that._setInputType(options, type);
 
-            if (type != BOOL && type != ENUM) {
+            if (type != BOOL) {
                 that._createOperatorDropDown(operators);
             }
 
@@ -399,7 +399,7 @@ var __meta__ = {
                     lte: "Is before or equal to",
                     lt: "Is before"
                 },
-                enums: {
+                enum: {
                     eq: EQ,
                     neq: NEQ
                 }
