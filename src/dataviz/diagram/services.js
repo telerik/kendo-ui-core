@@ -19,6 +19,7 @@
             Ticker = diagram.Ticker,
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable,
+            browser = kendo.support.browser,
 
             proxy = $.proxy;
         // Constants ==============================================================
@@ -915,9 +916,14 @@
                 }
             },
             _updateCursor: function (p) {
+                var element = this.diagram.element;
                 var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow));
 
-                this.diagram.element.css({cursor: cursor});
+                element.css({cursor: cursor});
+                // workaround for IE 7 issue in which the elements overflow the container after setting cursor
+                if (browser.msie && browser.version == 7) {
+                    element[0].style.cssText = element[0].style.cssText;
+                }
             },
             _connectionManipulation: function (connection, disabledShape, isNew) {
                 this.activeConnection = connection;
