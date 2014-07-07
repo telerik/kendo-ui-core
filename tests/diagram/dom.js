@@ -41,6 +41,24 @@
         equal(diagram.element.find(".k-layer").length, 1);
     });
 
+    test("sets initial element size to canvas", function () {
+        var width = diagram.element.width();
+        var height = diagram.element.height();
+        var size = diagram.canvas.size();
+        equal(size.width, width);
+        equal(size.height, height);
+    });
+
+    test("_resize sets canvas size ", function () {
+        diagram._resize({
+            width: 300,
+            height: 400
+        });
+        var size = diagram.canvas.size();
+        equal(size.width, 300);
+        equal(size.height, 400);
+    });
+
     // ------------------------------------------------------------
     module("Diagram / add shape", {
         setup: function() {

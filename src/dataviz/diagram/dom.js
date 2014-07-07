@@ -1300,8 +1300,11 @@
                     id: "adorner-layer"
                 });
                 that.canvas.append(that.adornerLayer);
+
                 that.toolService = new ToolService(that);
+
                 that._attachEvents();
+
                 that._initialize();
                 that._fetchFreshData();
                 that._resizingAdorner = new ResizingAdorner(that, { editable: that.options.editable });
@@ -1309,14 +1312,7 @@
 
                 that._adorn(that._resizingAdorner, true);
                 that._adorn(that._connectorsAdorner, true);
-                that.element
-                    .on("mousemove" + NS, proxy(that._mouseMove, that))
-                    .on("mouseup" + NS, proxy(that._mouseUp, that))
-                    .on("mousedown" + NS, proxy(that._mouseDown, that))
-                    .mousewheel(proxy(that._wheel, that), { ns: NS })
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("mouseover" + NS, proxy(that._mouseover, that))
-                    .on("mouseout" + NS, proxy(that._mouseout, that));
+
                 that.selector = new Selector(that);
                 // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
@@ -1329,7 +1325,6 @@
                 that._createShapes();
                 that._createConnections();
                 that.zoom(that.options.zoom);
-                that._autosizeCanvas();
 
                 that.canvas.draw();
             },
@@ -1372,6 +1367,26 @@
             },
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _attachEvents: function () {
+                var that = this;
+                that.element
+                    .on("mousemove" + NS, proxy(that._mouseMove, that))
+                    .on("mouseup" + NS, proxy(that._mouseUp, that))
+                    .on("mousedown" + NS, proxy(that._mouseDown, that))
+                    .mousewheel(proxy(that._wheel, that), { ns: NS })
+                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("mouseover" + NS, proxy(that._mouseover, that))
+                    .on("mouseout" + NS, proxy(that._mouseout, that));
+
+                kendo.onResize(function() {
+                    that.resize();
+                });
+            },
+
+            _resize: function(size) {
+                this.canvas.size(size);
+            },
 
             _mouseover: function(e) {
                 var node = e.target._kendoNode;
@@ -1910,7 +1925,6 @@
 
                     this._panTransform();
 
-                    this._autosizeCanvas();
                     this._updateAdorners();
                 }
 
@@ -2475,15 +2489,7 @@
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
             },
-            _attachEvents: function () {
-                var diagram = this;
 
-                if (diagram.scroller) {
-                    diagram.bind(ITEMBOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(CHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(ZOOM_END, $.proxy(this._autosizeCanvas, this));
-                }
-            },
             _fetchFreshData: function () {
                 this._dataSource();
                 if (this.options.autoBind) {
@@ -2536,6 +2542,7 @@
                     }
                 }
             },
+
             _showConnectors: function (shape, value) {
                 if (value) {
                     this._connectorsAdorner.show(shape);
@@ -2543,24 +2550,7 @@
                     this._connectorsAdorner.destroy();
                 }
             },
-            _autosizeCanvas: function (args) {
-                if(!this.scroller) { //no need to resize the canvas when no scroller is present
-                    return;
-                }
 
-                var diagram = (args || {}).sender || this,
-                    zoom = diagram.zoom(),
-                    viewport = diagram.element,
-                    viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
-                    cumulativeSize = diagram.boundingBox(diagram.shapes);
-
-                cumulativeSize.width = (cumulativeSize.width + cumulativeSize.x) * zoom;
-                cumulativeSize.height = (cumulativeSize.height + cumulativeSize.y) * zoom;
-
-                cumulativeSize = cumulativeSize.union(viewportSize);
-
-                diagram.canvas.size(cumulativeSize);
-            },
             _updateAdorners: function() {
                 var adorners = this._adorners;
 
