@@ -119,6 +119,13 @@
         equal(dom.find("input").val(), "baz");
     });
 
+    test("uses template", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", template: function(input, model) {
+            input.addClass("foo");
+        } });
+        equal(dom.find(".foo").length, 1);
+    });
+
     test("updates the values of the filter when filter is cleared and then set", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
         equal(dom.find("input").val(), "");
