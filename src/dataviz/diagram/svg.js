@@ -352,6 +352,9 @@
             stroke: {
                 color: "gray",
                 width: 1
+            },
+            fill: {
+                color: TRANSPARENT
             }
         },
 
@@ -430,6 +433,7 @@
 
         options: {
             fontSize: 15,
+            fontFamily: "sans-serif",
             stroke: {
                 width: 0
             },
@@ -462,6 +466,8 @@
             var options = this.options;
             if (options.fontFamily && defined(options.fontSize)) {
                 options.font = options.fontSize + "px " + options.fontFamily;
+            } else {
+                delete options.font;
             }
         },
 
@@ -785,7 +791,7 @@
             var optionsCap = options[cap];
             var created = false;
             if (optionsCap && pathOptions[cap] != optionsCap) {
-                pathOptions[cap] != optionsCap;
+                pathOptions[cap] = optionsCap;
                 this._removeMarker(position);
                 this._markers[position] = this._createMarker(optionsCap, position);
                 created  = true;
@@ -1065,10 +1071,10 @@
 
         _rect: function() {
             var sizeOptions = sizeOptionsOrDefault(this.options);
-            var p0 = new g.Point(sizeOptions.x, sizeOptions.y);
-            var p1 = p0.clone().translate(sizeOptions.width, sizeOptions.height);
+            var origin = new g.Point(sizeOptions.x, sizeOptions.y);
+            var size = new g.Size(sizeOptions.width, sizeOptions.height);
 
-            return new g.Rect(p0, p1);
+            return new g.Rect(origin, size);
         }
     });
 
@@ -1173,23 +1179,23 @@
 
         _boundingBox: function() {
             var children = this.children;
-            var boundingBox = new g.Rect(g.Point.maxPoint(), g.Point.minPoint());
-            var hasBoundingBox = false;
+            var boundingBox;
             var visual, childBoundingBox;
             for (var i = 0; i < children.length; i++) {
                 visual = children[i];
                 if (visual.visible() && visual._includeInBBox !== false) {
                     childBoundingBox = visual.drawingContainer().bbox(null);
                     if (childBoundingBox) {
-                        hasBoundingBox = true;
-                        boundingBox = boundingBox.wrap(childBoundingBox);
+                        if (boundingBox) {
+                            boundingBox = boundingBox.wrap(childBoundingBox);
+                        } else {
+                            boundingBox = childBoundingBox;
+                        }
                     }
                 }
             }
 
-            if (hasBoundingBox) {
-                return boundingBox;
-            }
+            return boundingBox;
         }
     });
 
@@ -1257,7 +1263,7 @@
 
         bounds: function () {
             var box = this.drawingElement.bbox();
-            return new Rect(0, 0, box.width, box.height);
+            return new Rect(0, 0, box.width(), box.height());
         },
 
         size: function (size) {

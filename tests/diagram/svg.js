@@ -145,7 +145,7 @@
             setup: function() {
                 element = new type({});
                 element._boundingBox = function() {
-                    return new g.Rect(new g.Point(100, 200), new g.Point(200, 250));
+                    return new g.Rect(new g.Point(100, 200), new g.Size(100, 50));
                 };
 
                 drawingElement = element.drawingElement;
@@ -172,7 +172,7 @@
         test("_measure returns current bounding box if element has been measured", function() {;
             element._measure();
             element._boundingBox = function() {
-                return new g.Rect(new g.Point(50, 60), new g.Point(100, 100));
+                return new g.Rect(new g.Point(50, 60), new g.Size(50, 40));
             };
             var rect = element._measure();
             ok(rect.equals(rawRect));
@@ -181,7 +181,7 @@
         test("_measure recalculates bounding box if element has been measured but true is passed as parameter", function() {
             element._measure();
             element._boundingBox = function() {
-                return new g.Rect(new g.Point(50, 60), new g.Point(100, 100));
+                return new g.Rect(new g.Point(50, 60), new g.Size(50, 40));
             };
             var rect = element._measure(true);
             ok(rect.equals(new Rect(50, 60, 50, 40)));
@@ -445,7 +445,7 @@
         module(name + " / autosize", {
             setup: function() {
                 type.fn._boundingBox = function() {
-                    return new g.Rect(new g.Point(10, 20), new g.Point(60, 80));
+                    return new g.Rect(new g.Point(10, 20), new g.Size(50, 60));
                 };
 
                 element = new type({
@@ -1368,8 +1368,8 @@
 
         test("inits rectangle", function() {
             var rect = drawingElement.rect();
-            ok(rect.p0.equals({x: 10, y: 10}));
-            ok(rect.p1.equals({x: 40, y: 50}));
+            ok(rect.origin.equals({x: 10, y: 10}));
+            ok(rect.size.equals({width: 30, height: 40}));
         });
 
         test("redraw updates source", function() {
@@ -1387,8 +1387,8 @@
                 y: 50
             });
             var rect = drawingElement.rect();
-            ok(rect.p0.equals({x: 50, y: 50}));
-            ok(rect.p1.equals({x: 150, y: 100}));
+            ok(rect.origin.equals({x: 50, y: 50}));
+            ok(rect.size.equals({width: 100, height: 50}));
         });
 
         test("redraw triggers geometry change once", 1, function() {
@@ -1578,8 +1578,8 @@
             group.append(rectangle);
             var boundingBox = group._boundingBox();
             var expected = rectangle.drawingElement.bbox(null);
-            ok(boundingBox.p0.equals(expected.p0));
-            ok(boundingBox.p1.equals(expected.p1));
+            ok(boundingBox.origin.equals(expected.origin));
+            ok(boundingBox.size.equals(expected.size));
         });
 
         test("_boundingBox excludes children with _includeInBBox set to false", function() {
@@ -1605,8 +1605,8 @@
 
             var boundingBox = group._boundingBox();
             var expected = rectangle.drawingElement.bbox(null);
-            ok(boundingBox.p0.equals(expected.p0));
-            ok(boundingBox.p1.equals(expected.p1));
+            ok(boundingBox.origin.equals(expected.origin));
+            ok(boundingBox.size.equals(expected.size));
         });
 
         // ------------------------------------------------------------
@@ -1772,7 +1772,7 @@
 
         test("bounds returns rect with container bounding box width and height", function() {
             canvas.drawingElement.bbox = function() {
-                return new Rect(50,50, 100, 200);
+                return new g.Rect(new g.Point(50,50), new g.Size(100, 200));
             };
             var rect = canvas.bounds();
             equal(rect.x, 0);
