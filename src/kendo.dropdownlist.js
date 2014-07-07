@@ -153,6 +153,7 @@ var __meta__ = {
             this._template();
             this._inputTemplate();
             this._accessors();
+            this._filterHeader();
             this._aria();
         },
 
@@ -603,8 +604,18 @@ var __meta__ = {
 
         _filterHeader: function() {
             var options = this.options;
+            var filterEnalbed = options.filter !== "none";
 
-            if (options.filter !== "none") {
+            if (this.filterInput && !filterEnalbed) {
+                this.filterInput.off(ns)
+                    .parent()
+                    .remove();
+
+                this.filterInput = null;
+                return;
+            }
+
+            if (filterEnalbed) {
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
                                           role: "listbox",
