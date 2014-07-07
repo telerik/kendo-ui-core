@@ -1275,16 +1275,11 @@
                 Widget.fn.init.call(that, element);
                 that.options = deepExtend({}, that.options, userOptions);
                 that.bind(that.events, that.options);
-                element = that.element; // the hosting element
-                element.empty()
-                    .css("position", "relative")
-                    .attr("tabindex", 0)
-                    .addClass("k-widget k-diagram");
 
+                that._initElements();
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
 
-                that.scrollable = $("<div />").appendTo(that.element);
                 that._initCanvas();
 
                 that.mainLayer = new Group({
@@ -1365,6 +1360,15 @@
             },
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _initElements: function() {
+                this.wrapper = this.element.empty()
+                    .css("position", "relative")
+                    .attr("tabindex", 0)
+                    .addClass("k-widget k-diagram");
+
+                this.scrollable = $("<div />").appendTo(this.element);
+            },
 
             _initCanvas: function() {
                 var canvasContainer = $("<div class='k-layer'></div>").appendTo(this.scrollable)[0];

@@ -29,12 +29,16 @@
         equal(diagram.options.theme, "default");
     });
 
-    test("sets position relative, tabindex and widget classes to element", function () {
+    test("inits elements", function () {
         var element = diagram.element;
+
         equal(element.attr("tabindex"), 0);
         equal(element.css("position"), "relative");
         ok(element.hasClass("k-widget"));
         ok(element.hasClass("k-diagram"));
+
+        ok(diagram.wrapper);
+        ok(diagram.scrollable);
     });
 
     test("creates canvas container with class k-layer", function () {
