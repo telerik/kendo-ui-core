@@ -68,8 +68,6 @@ var __meta__ = {
             that._tabindex();
             that.wrapper.data(TABINDEX, that.wrapper.attr(TABINDEX));
 
-            that._aria();
-
             that._span();
 
             that._popup();
@@ -80,6 +78,9 @@ var __meta__ = {
             that._ignoreCase();
 
             that._filterHeader();
+
+            that._aria();
+
             that._enable();
 
             that._oldIndex = that.selectedIndex = -1;
@@ -604,7 +605,12 @@ var __meta__ = {
             var options = this.options;
 
             if (options.filter !== "none") {
-                this.filterInput = $('<input class="k-textbox"/>');
+                this.filterInput = $('<input class="k-textbox"/>')
+                                      .attr({
+                                          role: "listbox",
+                                          "aria-haspopup": true,
+                                          "aria-expanded": false
+                                      });
                 this.list.prepend($('<span class="k-filter-wrap" />').append(this.filterInput));
             }
         },

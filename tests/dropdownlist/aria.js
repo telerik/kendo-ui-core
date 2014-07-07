@@ -59,4 +59,46 @@
 
       equal(dropdownlist.current().attr("aria-selected"), "true");
   });
+
+  //filter input
+  test("DropDownList renders role='listbox' to filter input", function() {
+      var dropdownlist = new DropDownList(input, {
+          filter: "startswith"
+      });
+
+      equal(dropdownlist.filterInput.attr("role"), "listbox");
+  });
+
+  test("DropDownList renders aria-haspopup to filter input", function() {
+      var dropdownlist = new DropDownList(input, {
+          filter: "startswith"
+      });
+
+      equal(dropdownlist.filterInput.attr("aria-haspopup"), "true");
+  });
+
+  test("DropDownList renders aria-expanded to filter input", function() {
+      var dropdownlist = new DropDownList(input, {
+          filter: "startswith"
+      });
+
+      equal(dropdownlist.filterInput.attr("aria-expanded"), "false");
+  });
+
+  test("DropDownList renders aria-owns to filter input", function() {
+      var dropdownlist = new DropDownList(input.attr("id", "test"), {
+          filter: "startswith"
+      });
+
+      equal(dropdownlist.filterInput.attr("aria-owns"), dropdownlist.ul.attr("id"));
+  });
+
+  test("DropDownList renders aria-activedescendant", function() {
+      var dropdownlist = new DropDownList(input.attr("id", "test"), {
+          filter: "startswith",
+          dataSource: ["Item", "Item2"]
+      });
+
+      equal(dropdownlist.filterInput.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+  });
 })();
