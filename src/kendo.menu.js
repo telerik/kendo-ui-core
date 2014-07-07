@@ -50,7 +50,8 @@ var __meta__ = {
         HOVERSTATE = "k-state-hover",
         FOCUSEDSTATE = "k-state-focused",
         DISABLEDSTATE = "k-state-disabled",
-        groupSelector = ".k-group",
+        menuSelector = ".k-menu",
+        groupSelector = ".k-menu-group",
         popupSelector = groupSelector + ",.k-animation-container",
         allItemsSelector = ":not(.k-list) > .k-item",
         disabledSelector = ".k-item.k-state-disabled",
@@ -64,7 +65,7 @@ var __meta__ = {
 
         templates = {
             content: template(
-                "<div class='k-content k-group' tabindex='-1'>#= content(item) #</div>"
+                "<div class='k-content' tabindex='-1'>#= content(item) #</div>"
             ),
             group: template(
                 "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
@@ -154,7 +155,7 @@ var __meta__ = {
             },
 
             groupCssClass: function() {
-                return "k-group";
+                return "k-group k-menu-group";
             },
 
             content: function(item) {
@@ -237,7 +238,7 @@ var __meta__ = {
 
         item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
 
-        item.filter(":has(.k-group)")
+        item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
             .each(function () {
                 var item = $(this),
@@ -396,7 +397,7 @@ var __meta__ = {
         append: function (item, referenceItem) {
             referenceItem = this.element.find(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, > .k-animation-container > .k-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-menu-group, > .k-animation-container > .k-menu-group") : null);
 
             each(inserted.items, function () {
                 inserted.group.append(this);
@@ -480,7 +481,7 @@ var __meta__ = {
                 }
 
                 groups = items.find("> ul")
-                                .addClass("k-group")
+                                .addClass("k-menu-group")
                                 .attr("role", "menu");
 
                 items = items.filter("li");
@@ -553,12 +554,12 @@ var __meta__ = {
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-group:first:hidden"),
+                    var ul = li.find(".k-menu-group:first:hidden"),
                         popup;
 
                     if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
 
-                        if (!ul.find(".k-group")[0] && ul.children(".k-item").length > 1) {
+                        if (!ul.find(".k-menu-group")[0] && ul.children(".k-item").length > 1) {
                             var windowHeight = $(window).height(),
                                 setScrolling = function(){
                                     ul.css({maxHeight: windowHeight - (ul.outerHeight() - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
@@ -648,7 +649,7 @@ var __meta__ = {
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var popup = li.find(".k-group:not(.k-list-container):not(.k-calendar-container):first:visible").data(KENDOPOPUP);
+                    var popup = li.find(".k-menu-group:not(.k-list-container):not(.k-calendar-container):first:visible").data(KENDOPOPUP);
 
                     if (popup) {
                         popup.close();
@@ -719,7 +720,10 @@ var __meta__ = {
             element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             element.find("li > ul")
-                   .addClass("k-group")
+                   .filter(function() {
+                       return !$(this).parentsUntil(menuSelector, "div")[0];
+                   })
+                   .addClass("k-group k-menu-group")
                    .attr("role", "menu")
                    .attr("aria-hidden", element.is(":visible"))
                    .end()
@@ -727,7 +731,7 @@ var __meta__ = {
                    .addClass("k-content")
                    .attr("tabindex", "-1"); // Capture the focus before the Menu
 
-            items = element.find("> li,.k-group > li");
+            items = element.find("> li,.k-menu-group > li");
 
             items.each(function () {
                 updateItemClasses(this);
@@ -739,7 +743,7 @@ var __meta__ = {
                 element = $(e.currentTarget),
                 hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
-            if (e.delegateTarget != element.parents(".k-menu")[0]) {
+            if (e.delegateTarget != element.parents(menuSelector)[0]) {
                 return;
             }
 
@@ -853,7 +857,7 @@ var __meta__ = {
 
             if (target != that.wrapper[0] && !$(target).is(":kendoFocusable")) {
                 e.stopPropagation();
-                $(target).closest(".k-content").closest(".k-group").closest(".k-item").addClass(FOCUSEDSTATE);
+                $(target).closest(".k-content").closest(".k-menu-group").closest(".k-item").addClass(FOCUSEDSTATE);
                 that.wrapper.focus();
                 return;
             }
@@ -926,14 +930,14 @@ var __meta__ = {
             if (!item.length) {
                 return menuIsVertical;
             }
-            return item.parent().hasClass("k-group") || menuIsVertical;
+            return item.parent().hasClass("k-menu-group") || menuIsVertical;
         },
 
         _itemHasChildren: function (item) {
             if (!item.length) {
                 return false;
             }
-            return item.children("ul.k-group, div.k-animation-container").length > 0;
+            return item.children("ul.k-menu-group, div.k-animation-container").length > 0;
         },
 
         _moveHover: function (item, nextItem) {
@@ -962,15 +966,15 @@ var __meta__ = {
         },
 
         _findRootParent: function (item) {
-            if (item.parent().hasClass("k-menu")) {
+            if (this._isRootItem(item)) {
                 return item;
             } else {
-                return item.parentsUntil(".k-menu", "li.k-item").last();
+                return item.parentsUntil(menuSelector, "li.k-item").last();
             }
         },
 
         _isRootItem: function (item) {
-            return item.parent().hasClass("k-menu");
+            return item.parent().hasClass(MENU);
         },
 
         _itemRight: function (item, belongsToVertical, hasChildren) {
@@ -989,7 +993,7 @@ var __meta__ = {
                 }
             } else if (hasChildren) {
                 that.open(item);
-                nextItem = item.find(".k-group").children().first();
+                nextItem = item.find(".k-menu-group").children().first();
             } else if (that.options.orientation == "horizontal") {
                 parentItem = that._findRootParent(item);
                 that.close(parentItem);
@@ -1040,7 +1044,7 @@ var __meta__ = {
                     return;
                 } else {
                     that.open(item);
-                    nextItem = item.find(".k-group").children().first();
+                    nextItem = item.find(".k-menu-group").children().first();
                 }
             } else {
                 nextItem = item.nextAll(nextSelector);
