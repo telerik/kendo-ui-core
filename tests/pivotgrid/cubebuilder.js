@@ -91,9 +91,9 @@
         var firstMember = result.axes.columns.tuples[1].members[0];
 
         equal(firstMember.caption, "name1");
-        equal(firstMember.name, "name.name1");
+        equal(firstMember.name, "name&name1");
         equal(firstMember.hierarchy, "name");
-        equal(firstMember.levelName, "name.name1");
+        equal(firstMember.levelName, "name&name1");
         equal(firstMember.levelNum, "1");
         equal(firstMember.hasChildren, false);
     });
@@ -114,7 +114,7 @@
 
         var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName", expand: true }] });
 
-        equal(result.data.length, 5);
+        equal(result.data.length, 8);
     });
 
     test("process data contains correct number of items - expanded on columns axis, no missing values", function() {
@@ -134,7 +134,7 @@
 
         var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: true }] });
 
-        equal(result.data.length, 2);
+        equal(result.data.length, 3);
     });
 
     test("process data items are correctly formatted", function() {
@@ -157,12 +157,15 @@
 
         var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName", expand: true }] });
 
-        equal(result.data.length, 5);
+        equal(result.data.length, 8);
         equal(result.data[0].ordinal, 0);
         equal(result.data[1].ordinal, 1);
         equal(result.data[2].ordinal, 2);
         equal(result.data[3].ordinal, 3);
-        equal(result.data[4].ordinal, 5);
+        equal(result.data[4].ordinal, 4);
+        equal(result.data[5].ordinal, 5);
+        equal(result.data[6].ordinal, 6);
+        equal(result.data[7].ordinal, 8);
     });
 
     test("process data measure is calculated- expanded on columns axis, no missing values", function() {
