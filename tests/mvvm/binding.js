@@ -1180,6 +1180,7 @@ test("binding dispose removes change handler when bound to observable object", f
 
     kendo.bind(dom, viewModel);
 
+	dom._kendoBindingTarget;
     initialBindingCount = viewModel._events.change.length;
 	kendo.unbind(dom);
 	equal(viewModel._events.change.length, initialBindingCount - 1);
@@ -1194,11 +1195,11 @@ test("binding dispose removes change handler when bound to field of the parent o
 
     dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
 
-    kendo.unbind(dom, viewModel);
+    kendo.bind(dom, viewModel);
 
     initialBindingCount = viewModel._events.change.length;
-	kendo.destroy(dom);
-	equal(viewModel._events.change.length, initialBindingCount - 1);
+	kendo.unbind(dom);
+	equal(viewModel._events.change.length, initialBindingCount - 2); // -2 = 1 for source binder, 1 for text binder
 });
 
 test("widget event binding", 1, function() {

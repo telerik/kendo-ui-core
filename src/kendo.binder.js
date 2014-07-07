@@ -211,6 +211,9 @@ var __meta__ = {
         destroy: function() {
             if (this.observable) {
                 this.source.unbind(CHANGE, this._change);
+				if(this.currentSource) {
+					this.currentSource.unbind(CHANGE, this._change);
+				}
             }
 
             this.unbind();
