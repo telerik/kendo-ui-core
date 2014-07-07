@@ -1553,9 +1553,6 @@
             },
             clear: function () {
                 var that = this;
-                if (that.dataSource) {
-                    that._unbindDataSource();
-                }
 
                 that.select(false);
                 that.mainLayer.clear();
