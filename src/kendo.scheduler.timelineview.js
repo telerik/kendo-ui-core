@@ -23,11 +23,47 @@ var __meta__ = {
         MS_PER_DAY = kendo.date.MS_PER_DAY,
         NS = ".kendoTimelineView";
 
-    var EVENT_TEMPLATE = kendo.template('<div>event template</div>' +
-                '</div>'),
+    var EVENT_TEMPLATE = kendo.template('<div>' +
+                '<div class="k-event-template">${title}</div></div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
-        EVENT_WRAPPER_STRING = '<div role="gridcell" class="k-event" aria-selected="false">' +
+        EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
+                'data-#=ns#uid="#=uid#" ' +
+                '#if (resources[0]) { #' +
+                    'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
+                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#"' +
+                '#} else {#' +
+                    'class="k-event"' +
+                '#}#' +
+                '>' +
+                 '<span class="k-event-actions">' +
+                    '# if(data.isException()) {#' +
+                        '<span class="k-icon k-i-exception"></span>' +
+                    '# } else if(data.isRecurring()) {#' +
+                        '<span class="k-icon k-i-refresh"></span>' +
+                    '# } #' +
+                '</span>' +
                 '{0}' +
+                '<span class="k-event-actions">' +
+                    '#if (showDelete) {#' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                    '#}#' +
+                '</span>' +
+                '<span class="k-event-top-actions">' +
+                    '# if(data.tail || data.middle) {#' +
+                    '<span class="k-icon k-i-arrow-n"></span>' +
+                    '# } #' +
+                '</span>' +
+                '<span class="k-event-bottom-actions">' +
+                    '# if(data.head || data.middle) {#' +
+                        '<span class="k-icon k-i-arrow-s"></span>' +
+                    '# } #' +
+                '</span>' +
+                '# if(resizable && !data.tail && !data.middle) {#' +
+                '<span class="k-resize-handle k-resize-n"></span>' +
+                '# } #' +
+                '# if(resizable && !data.head && !data.middle) {#' +
+                    '<span class="k-resize-handle k-resize-s"></span>' +
+                '# } #' +
                 '</div>';
 
     function toInvariantTime(date) {
@@ -61,14 +97,149 @@ var __meta__ = {
 
             that._templates();
 
+            that._editable();
+
             that.calculateDateRange();
 
             that._groups();
         },
 
+        _editable: function() {
+            if (this.options.editable) {
+                if (this._isMobile()) {
+                    this._touchEditable();
+                } else {
+                    this._mouseEditable();
+                }
+            }
+        },
+
+        _mouseEditable: function() {
+            var that = this;
+            that.element.on("click" + NS, ".k-event a:has(.k-si-close)", function(e) {
+                that.trigger("remove", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                e.preventDefault();
+            });
+
+            if (that.options.editable.create !== false) {
+                that.element.on("dblclick" + NS, ".k-scheduler-content td", function(e) {
+                    var slot = that._slotByPosition(e.pageX, e.pageY);
+
+                    if (slot) {
+                        var resourceInfo = that._resourceBySlot(slot);
+                        that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+                    }
+
+                    e.preventDefault();
+                });
+            }
+
+            if (that.options.editable.update !== false) {
+                that.element.on("dblclick" + NS, ".k-event", function(e) {
+                    that.trigger("edit", { uid: $(this).closest(".k-event").attr(kendo.attr("uid")) });
+                    e.preventDefault();
+                });
+            }
+        },
+
+        _touchEditable: function() {
+            var that = this;
+
+            if (that.options.editable.create !== false) {
+                that._addUserEvents = new kendo.UserEvents(that.element, {
+                    filter:  ".k-scheduler-content td",
+                    tap: function(e) {
+                        var slot = that._slotByPosition(e.x.location, e.y.location);
+
+                        if (slot) {
+                            var resourceInfo = that._resourceBySlot(slot);
+                            that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+                        }
+
+                        e.preventDefault();
+                    }
+                });
+            }
+
+            if (that.options.editable.update !== false) {
+                that._editUserEvents = new kendo.UserEvents(that.element, {
+                    filter: ".k-event",
+                    tap: function(e) {
+                        var eventElement = $(e.target).closest(".k-event");
+
+                        if (!eventElement.hasClass("k-event-active")) {
+                            that.trigger("edit", { uid: eventElement.attr(kendo.attr("uid")) });
+                        }
+
+                        e.preventDefault();
+                    }
+                });
+            }
+        },
+
        _slotByPosition: function(x, y) {
-            //To be implemented
-            throw "_slotByPosition is not implemented";
+           var slot;
+
+           var offset;
+
+           if (this._isVerticallyGrouped()) {
+               offset = this.content.offset();
+               y += this.content[0].scrollTop;
+               x += this.content[0].scrollLeft;
+           } else {
+               offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").find(">div").offset();
+           }
+
+           if (offset) {
+               x -= offset.left;
+               y -= offset.top;
+           }
+
+           x = Math.ceil(x);
+           y = Math.ceil(y);
+
+           var group;
+           var groupIndex;
+
+           for (groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+                group = this.groups[groupIndex];
+
+                slot = group.daySlotByPosition(x, y);
+
+                if (slot) {
+                    return slot;
+                }
+           }
+
+           if (offset) {
+               x += offset.left;
+               y += offset.top;
+           }
+
+           offset = this.content.offset();
+
+           x -= offset.left;
+           y -= offset.top;
+
+           if (!this._isVerticallyGrouped()) {
+               y += this.content[0].scrollTop;
+               x += this.content[0].scrollLeft;
+           }
+
+           x = Math.ceil(x);
+           y = Math.ceil(y);
+
+           for (groupIndex = 0; groupIndex < this.groups.length; groupIndex++) {
+                group = this.groups[groupIndex];
+
+                slot = group.timeSlotByPosition(x, y);
+
+                if (slot) {
+                    return slot;
+                }
+           }
+
+           return null;
        },
 
        _getColumnCount: function() {
