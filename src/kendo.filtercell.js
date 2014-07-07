@@ -17,7 +17,7 @@ var __meta__ = {
         Widget = ui.Widget,
         CHANGE = "change",
         BOOL = "boolean",
-        ENUM = "enum",
+        ENUM = "enums",
         STRING = "string",
         NS = ".kendoFilterCell",
         EQ = "Is equal to",
@@ -148,7 +148,7 @@ var __meta__ = {
                 that.setSuggestDataSource(suggestDataSource);
             }
 
-            if (type == "enum") {
+            if (type == ENUM) {
                 that.setComboBoxSource(that.options.values);
             }
 
@@ -189,7 +189,7 @@ var __meta__ = {
 
             } else if (type == "number") {
                 input.attr(kendo.attr("role"), "numerictextbox");
-            } else if (type == "enum") {
+            } else if (type == ENUM) {
                 input.attr(kendo.attr("role"), "combobox")
                         .attr(kendo.attr("text-field"), "text")
                         .attr(kendo.attr("suggest"), true)
@@ -399,7 +399,7 @@ var __meta__ = {
                     lte: "Is before or equal to",
                     lt: "Is before"
                 },
-                enum: {
+                enums: {
                     eq: EQ,
                     neq: NEQ
                 }
