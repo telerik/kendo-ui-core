@@ -370,4 +370,21 @@
         ok(dropdownlist.current());
         equal(dropdownlist.current().text(), "Any");
     });
+
+    test("DropDownList focuses filter input on open", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        equal(document.activeElement, dropdownlist.filterInput[0]);
+    });
 })();
