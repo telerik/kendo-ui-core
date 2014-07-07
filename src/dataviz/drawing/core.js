@@ -11,6 +11,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz;
@@ -38,23 +39,16 @@
         events: [
             "click",
             "mouseenter",
-            "mouseleave"
+            "mouseleave",
+            "resize"
         ],
 
         draw: noop,
         clear: noop,
         destroy: noop,
 
-        resize: function(force) {
-            var size = this.getSize(),
-                currentSize = this._size;
-
-            if (force || !currentSize ||
-                size.width !== currentSize.width || size.height !== currentSize.height) {
-                this._size = size;
-                this._resize(size);
-            }
-        },
+        resize: Widget.fn.resize,
+        size: Widget.fn.size,
 
         getSize: function() {
             return {
