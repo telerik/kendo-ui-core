@@ -1815,6 +1815,10 @@
                 var aligner = new diagram.RectAlign(viewport);
                 var current, rect, original, newPan;
 
+                if (viewport.width === 0 || viewport.height === 0) {
+                    return;
+                }
+
                 options = deepExtend({animate: false, align: "center middle"}, options);
                 if (options.align == "none") {
                     options.align = "center middle";

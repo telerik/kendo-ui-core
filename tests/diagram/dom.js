@@ -338,6 +338,23 @@
             diagram.bringIntoView(rect);
         });
 
+        test("doe not zoom out if viewport has zero width or height", function() {
+            var initialZoom = diagram.zoom();
+            rect = new Rect(1000, 1000, 1000, 100);
+            diagram.viewport = function() {
+                return new Rect(0, 0, 0, 600);
+            };
+
+            diagram.bringIntoView(rect);
+            equal(diagram.zoom(), initialZoom);
+            diagram.viewport = function() {
+                return new Rect(0, 0, 800, 0);
+            };
+
+            diagram.bringIntoView(rect);
+            equal(diagram.zoom(), initialZoom);
+        });
+
     })();
 
     // ------------------------------------------------------------
