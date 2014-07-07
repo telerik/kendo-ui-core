@@ -3230,8 +3230,7 @@
         },
         "packages": [
           "!mvc",
-          "!jsp",
-          "!php"
+          "!jsp"
         ]
       },
       {
@@ -3245,8 +3244,7 @@
         },
         "packages": [
           "!mvc",
-          "!jsp",
-          "!php"
+          "!jsp"
         ]
       },
       {
