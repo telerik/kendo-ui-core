@@ -945,4 +945,20 @@
 
         equal(dropdownlist.ul.height(), height);
     });
+
+    test("widget renders search icon in filter header", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            optionLabel: "Select...",
+            dataTextField: "Orders.ShipCity",
+            dataValueField: "OrderID",
+            filter: "startswith"
+        });
+
+        var filterHeader = dropdownlist.list.children().first();
+        var icon = filterHeader.find("input").next();
+
+        ok(icon[0]);
+        ok(icon.hasClass("k-i-search"));
+    });
 })();

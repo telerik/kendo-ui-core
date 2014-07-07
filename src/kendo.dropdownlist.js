@@ -602,30 +602,6 @@ var __meta__ = {
             }
         },
 
-        _filterHeader: function() {
-            var options = this.options;
-            var filterEnalbed = options.filter !== "none";
-
-            if (this.filterInput && !filterEnalbed) {
-                this.filterInput.off(ns)
-                    .parent()
-                    .remove();
-
-                this.filterInput = null;
-                return;
-            }
-
-            if (filterEnalbed) {
-                this.filterInput = $('<input class="k-textbox"/>')
-                                      .attr({
-                                          role: "listbox",
-                                          "aria-haspopup": true,
-                                          "aria-expanded": false
-                                      });
-                this.list.prepend($('<span class="k-filter-wrap" />').append(this.filterInput));
-            }
-        },
-
         _filter: function(word) {
             if (word) {
                 var that = this;
@@ -745,6 +721,35 @@ var __meta__ = {
 
             if (root.length && os) {
                 popup.options.animation.open.effects = (os.android || os.meego) ? "fadeIn" : (os.ios || os.wp) ? "slideIn:up" : popup.options.animation.open.effects;
+            }
+        },
+
+        _filterHeader: function() {
+            var options = this.options;
+            var filterEnalbed = options.filter !== "none";
+
+            if (this.filterInput && !filterEnalbed) {
+                this.filterInput.off(ns)
+                    .parent()
+                    .remove();
+
+                this.filterInput = null;
+                return;
+            }
+
+            if (filterEnalbed) {
+                var icon = '<span unselectable="on" class="k-icon k-i-search">select</span>';
+
+                this.filterInput = $('<input class="k-textbox"/>')
+                                      .attr({
+                                          role: "listbox",
+                                          "aria-haspopup": true,
+                                          "aria-expanded": false
+                                      });
+
+                this.list
+                    .prepend($('<span class="k-filter-wrap" />')
+                    .append(this.filterInput.add(icon)));
             }
         },
 
