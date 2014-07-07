@@ -1254,6 +1254,8 @@ var __meta__ = {
                 return;
             }
 
+            that._eventOrigin = ev;
+
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
@@ -1274,6 +1276,8 @@ var __meta__ = {
         _closeHandler: function (e) {
             var that = this,
                 containment = contains(that.element[0], e.relatedTarget || e.target);
+
+            that._eventOrigin = e;
 
             if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
                 !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
@@ -1318,7 +1322,12 @@ var __meta__ = {
         },
 
         _triggerEvent: function(e) {
-            return this.trigger(e.type, { item: this.element[0] });
+            var that = this,
+                origin = that._eventOrigin;
+
+            that._eventOrigin = undefined;
+
+            return that.trigger(e.type, { item: this.element[0], event: origin });
         },
 
         _popup: function() {
