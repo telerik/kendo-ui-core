@@ -1028,7 +1028,7 @@
             ]
         }).data("kendoToolBar");
 
-        equal($("#template").data("overflow"), "never");
+        equal($("#template").parent().data("overflow"), "never");
     });
 
     test("When a template command without overflowTemplate is defined no JS error is thrown", 1, function() {
@@ -1043,6 +1043,26 @@
         }
 
         ok(true, "No JS error is thrown");
+    });
+
+    test("Template content is wrapped inside a <div> tag", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>' }
+            ]
+        }).data("kendoToolBar");
+
+        equal($("#template").parent().prop("tagName"), "DIV");
+    });
+
+    test("UID is attached to the template's wrapper element", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { template: '<span id="template"></span>' }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#template").parent().data("uid"));
     });
 
 })();
