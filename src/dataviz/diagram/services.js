@@ -793,8 +793,12 @@
 
                 this.activeTool = undefined;
             },
+
             start: function (p, meta) {
                 meta = deepExtend({}, meta);
+                if (this.activeTool) {
+                    this.activeTool.end(p, meta);
+                }
                 this._updateHoveredItem(p);
                 this._activateTool(p, meta);
                 this.activeTool.start(p, meta);
@@ -803,6 +807,7 @@
                 this.startPoint = p;
                 return true;
             },
+
             move: function (p, meta) {
                 meta = deepExtend({}, meta);
                 var updateHovered = true;
@@ -815,6 +820,7 @@
                 this._updateCursor(p);
                 return true;
             },
+
             end: function (p, meta) {
                 meta = deepExtend({}, meta);
                 if (this.activeTool) {

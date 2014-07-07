@@ -33,6 +33,20 @@
         element.remove();
     }
 
+    module("ToolService", {
+        setup: setup,
+        teardown: teardown
+    });
+
+    test("toolservice ends tool on start if there is active tool", function() {
+        d.toolService.activeTool = {
+            end: function(p, meta) {
+                ok(true);
+            }
+        };
+        d.toolService.start(new Point(), {});
+    });
+
     module("Selection tests", {
         setup: setup,
         teardown: teardown
