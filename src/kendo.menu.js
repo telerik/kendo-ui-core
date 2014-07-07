@@ -1259,6 +1259,8 @@ var __meta__ = {
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
+            that.element.find("." + FOCUSEDSTATE).removeClass(FOCUSEDSTATE);
+
             if ((options.filter && kendo.support.matchesSelector.call(ev.currentTarget, options.filter)) || !options.filter) {
                 if (options.alignToAnchor) {
                     that.show(ev.currentTarget);
@@ -1269,19 +1271,23 @@ var __meta__ = {
         },
 
         _close: function() {
-            this.popup.close();
-            this.unbind(SELECT, this._closeTimeoutProxy);
+            var that = this;
+
+            that.popup.close();
+            that.unbind(SELECT, that._closeTimeoutProxy);
         },
 
         _closeHandler: function (e) {
             var that = this,
-                containment = contains(that.element[0], e.relatedTarget || e.target);
+                target = e.relatedTarget || e.target,
+                children = $(target).closest(itemSelector).children(popupSelector),
+                containment = contains(that.element[0], target);
 
             that._eventOrigin = e;
 
             if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
                 !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
-                containment) || !containment)) {
+                !children[0] && containment) || !containment)) {
                     DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
 
                     if (containment) {
