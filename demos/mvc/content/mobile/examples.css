@@ -55,19 +55,21 @@
 #demos-search {
     visibility: visible;
     width: 14em;
+    height: 1.8em;
     background: #6a6c71;
     border: 1px solid #74767a;
     color: white;
-    padding-left: 1em;
-    font-size: 1.2em;
+    padding-left: 1.7em;
+    font-size: 1.1em;
+    line-height: 1.2em;
 }
 
 #demos-search-container:before {
-    font: 1em/1em "Kendo UI" normal;
+    font: 1em/.9em "Kendo UI" normal;
     content: "\e21e";
     position: absolute;
     margin-top: .6em;
-    margin-left: .5em;
+    margin-left: .6em;
 }
 
 #examples .km-drawer-icon:before,
@@ -221,8 +223,11 @@
 and (min-device-width : 320px) 
 and (max-device-width : 568px) 
 and (orientation : landscape) {
-    #desktop-footer {
+  #desktop-footer {
       display: none;
+  }
+  #demos-search {
+      width: 29em;
   }
 }
 
@@ -230,16 +235,18 @@ and (orientation : landscape) {
 and (min-device-width : 320px) 
 and (max-device-width : 480px) 
 and (orientation : landscape) {
-    #desktop-footer {
+  #desktop-footer {
       display: none;
   }
 }
+
+
 
 @media only screen 
 and (min-width: 360px)
 and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 3.0) {
-    #desktop-footer {
+  #desktop-footer {
       display: none;
   }
 }
