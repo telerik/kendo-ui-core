@@ -319,6 +319,10 @@ var __meta__ = {
                 },
                 focusout = function() {
                     if (!that._prevent && !that._wrapperClicked) {
+                        if (that._state === STATE_FILTER) {
+                            that._select(that._current);
+                        }
+
                         that._triggerCascade();
 
                         var isIFrame = window.self !== window.top;
@@ -331,8 +335,6 @@ var __meta__ = {
                         dropDownWrapper.removeClass(FOCUSED);
                         that._prevent = true;
                         element.blur();
-
-                        //that._state = "";
                     }
 
                     that._wrapperClicked = false;
