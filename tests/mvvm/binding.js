@@ -1170,6 +1170,37 @@ test("grand parent function has the right context", 1, function(){
     kendo.bind(dom, viewModel);
 });
 
+test("binding dispose removes change handler when bound to observable object", function(){
+	var initialBindingCount;
+    var viewModel = kendo.observable({
+        foo: "foo"
+    });
+
+    dom = $('<span data-bind="text:foo"/>');
+
+    kendo.bind(dom, viewModel);
+
+    initialBindingCount = viewModel._events.change.length;
+	kendo.unbind(dom);
+	equal(viewModel._events.change.length, initialBindingCount - 1);
+});
+
+test("binding dispose removes change handler when bound to field of the parent object", function(){
+	var initialBindingCount;
+    var viewModel = kendo.observable({
+        foo: "foo",
+        items: [{}]
+    });
+
+    dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
+
+    kendo.unbind(dom, viewModel);
+
+    initialBindingCount = viewModel._events.change.length;
+	kendo.destroy(dom);
+	equal(viewModel._events.change.length, initialBindingCount - 1);
+});
+
 test("widget event binding", 1, function() {
     dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
     var viewModel = {
