@@ -174,9 +174,10 @@ var __meta__ = {
         },
 
         _createTarget: function(element, options) {
+            var filter = options.setting != "measures" ? '<span class="k-icon k-filter k-setting-filter">' : '';
             return new kendo.ui.PivotSettingTarget(element, $.extend({
                 dataSource: this.dataSource,
-                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-icon k-si-close k-setting-delete"></span></li>',
+                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}' + filter + '</span><span class="k-icon k-si-close k-setting-delete"></span></li>',
                 emptyTemplate: '<li class="k-item k-empty">${data}</li>'
             }, options));
         },

@@ -2265,12 +2265,19 @@ var __meta__ = {
                 }
             });
 
+            if (this.options.filterable) {
+                this.filterMenu = new ui.PivotFilterMenu(this.element, {
+                    filter: ".k-setting-filter"
+                });
+            }
+
             this.refresh();
         },
 
         options: {
             name: "PivotSettingTarget",
             template: null,
+            filterable: false,
             emptyTemplate: "<div class='k-empty'>${data}</div>",
             setting: "columns",
             enabled: true,
@@ -2483,6 +2490,7 @@ var __meta__ = {
             name: "PivotGrid",
             autoBind: true,
             reorderable: true,
+            filterable: false,
             height: null,
             columnWidth: 100,
             configurator: "",
@@ -2571,6 +2579,11 @@ var __meta__ = {
 
         _createSettingTarget: function(element, options) {
             var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+
+            if (options.filterable) {
+                template += '<span class="k-icon k-filter k-setting-filter"></span>';
+            }
+
             if (this.options.reorderable) {
                 template += '<span class="k-icon k-si-close k-setting-delete"></span>';
             }
@@ -2588,6 +2601,7 @@ var __meta__ = {
             this.columnsTarget = this._createSettingTarget(this.columnFields, {
                 connectWith: this.rowFields,
                 setting: "columns",
+                filterable: this.options.filterable,
                 messages: {
                     empty: this.options.messages.columnFields
                 }
@@ -2596,6 +2610,7 @@ var __meta__ = {
             this.rowsTarget = this._createSettingTarget(this.rowFields, {
                 connectWith: this.columnFields,
                 setting: "rows",
+                filterable: this.options.filterable,
                 messages: {
                     empty: this.options.messages.rowFields
                 }

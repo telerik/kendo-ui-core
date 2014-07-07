@@ -275,4 +275,28 @@
 
         ok(method.calls("setDataSource"));
     });
+
+    test("filterable option is not set for measures setting target", function() {
+        var pivotgrid = createPivot({
+            filterable: true
+        });
+
+        equal(pivotgrid.measuresTarget.options.filterable, false);
+    });
+
+    test("filterable option is set for columns setting target", function() {
+        var pivotgrid = createPivot({
+            filterable: true
+        });
+
+        equal(pivotgrid.columnsTarget.options.filterable, true);
+    });
+
+    test("filterable option is set for rows setting target", function() {
+        var pivotgrid = createPivot({
+            filterable: true
+        });
+
+        equal(pivotgrid.rowsTarget.options.filterable, true);
+    });
 })();
