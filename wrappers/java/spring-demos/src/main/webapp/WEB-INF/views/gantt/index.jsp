@@ -57,12 +57,8 @@
                 <kendo:dataSource-transport-destroy url="${tasksDestroyUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-parameterMap>
                 	<script>
-	                	function parameterMap(options, type) { 
-	                		if (type == "read") {
-	                			return JSON.stringify(options);
-	                		} else {
-	                			return JSON.stringify(options.models);
-	                		}
+	                	function parameterMap(options, type) {
+                			return JSON.stringify(options.models || [ options ]);
 	                	}
                 	</script>
                 </kendo:dataSource-transport-parameterMap>              
@@ -88,11 +84,7 @@
                 <kendo:dataSource-transport-parameterMap>
                 	<script>
 	                	function parameterMap(options, type) { 
-	                		if (type == "read") {
-	                			return JSON.stringify(options);
-	                		} else {
-	                			return JSON.stringify(options.models);
-	                		}
+                			return JSON.stringify(options.models || [ options ]);
 	                	}
                 	</script>
                 </kendo:dataSource-transport-parameterMap>              
