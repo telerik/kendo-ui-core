@@ -806,7 +806,7 @@ var __meta__ = {
             childGroup = element.children(popupSelector);
             childGroupVisible = childGroup.is(":visible");
 
-            if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible))) {
+            if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible && element.parent().hasClass(LINK)))) {
                 element.removeClass(HOVERSTATE).css("height"); // Force refresh for Chrome
                 that._oldHoverItem = that._findRootParent(element);
                 that.close(link.parentsUntil(that.element, allItemsSelector));
