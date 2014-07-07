@@ -635,4 +635,23 @@
         dropdownlist.value("item2");
     });
 
+    test("setOptions remove filter header", function() {
+        var input = $("<input />");
+
+        dropdownlist.destroy();
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        ok(dropdownlist.filterInput);
+
+        dropdownlist.setOptions({
+            filter: "none"
+        });
+
+        ok(!dropdownlist.filterInput);
+        ok(!dropdownlist.list.find(".k-textbox")[0]);
+    });
+
 })();
