@@ -258,10 +258,6 @@ var __meta__ = {
             that.trigger("dataBound");
         },
 
-        _option: function(value, text) {
-            return '<option value="' + value + '">' + text + "</option>";
-        },
-
         text: function (text) {
             var that = this;
             var dataItem, loweredText;
@@ -405,6 +401,10 @@ var __meta__ = {
 
         _accept: function(li) {
             this._focus(li);
+        },
+
+        _option: function(value, text) {
+            return '<option value="' + value + '">' + text + "</option>";
         },
 
         _optionLabelText: function() {
