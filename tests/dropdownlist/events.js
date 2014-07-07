@@ -496,4 +496,65 @@
         dropdownlist._change();
         dropdownlist.destroy();
     });
+
+    test("Dropdownlist with enabled filter triggers change on ENTER", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataSource: ["foo", "bar"],
+            change: function() {
+                equal(dropdownlist.value(), "bar");
+            }
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().trigger({
+            type: "keydown",
+            keyCode: kendo.keys.DOWN
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+    });
+
+    test("Dropdownlist with enabled filter triggers change on TAB", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            dataSource: ["foo", "bar"],
+            change: function() {
+                equal(dropdownlist.value(), "bar");
+            }
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.focus().trigger({
+            type: "keydown",
+            keyCode: kendo.keys.DOWN
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.TAB
+        });
+    });
+
+    asyncTest("Dropdownlist with filtered source triggers change on document mousedown", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            delay: 0,
+            filter: "startswith",
+            dataSource: ["foo", "bar"],
+            change: function() {
+                equal(dropdownlist.value(), "bar");
+            }
+        });
+
+        dropdownlist.open();
+        dropdownlist.bind("dataBound", function() {
+            start();
+            dropdownlist.filterInput.focusout();
+        });
+
+        dropdownlist.filterInput.focus().val("b").keydown();
+    });
 })();
