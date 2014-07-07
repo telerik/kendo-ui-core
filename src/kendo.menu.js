@@ -1250,6 +1250,10 @@ var __meta__ = {
                 ev.pageY = e.y.location;
             }
 
+            if (contains(that.element[0], e.relatedTarget || e.target)) {
+                return;
+            }
+
             ev.preventDefault();
             ev.stopImmediatePropagation();
 
