@@ -77,6 +77,8 @@
             SINGLE = "single",
             NONE = "none",
             MULTIPLE = "multiple",
+            DEFAULT_CANVAS_WIDTH = 600,
+            DEFAULT_CANVAS_HEIGHT = 600,
             DEFAULT_SHAPE_TYPE = "rectangle",
             DEFAULT_SHAPE_WIDTH = 100,
             DEFAULT_SHAPE_HEIGHT = 100,
@@ -1282,12 +1284,8 @@
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
 
-                var canvasContainer = $("<div class='k-layer'></div>").appendTo(element)[0];
-                that.scrollable = $("<div />").appendTo(that.element).append(canvasContainer);
-                that.canvas = new Canvas(canvasContainer, {
-                    width: element.width(),
-                    height: element.height()
-                });
+                that.scrollable = $("<div />").appendTo(that.element);
+                that._initCanvas();
 
                 that.mainLayer = new Group({
                     id: "main-layer"
@@ -1367,6 +1365,15 @@
             },
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _initCanvas: function() {
+                var canvasContainer = $("<div class='k-layer'></div>").appendTo(this.scrollable)[0];
+                var viewPort = this.viewport();
+                this.canvas = new Canvas(canvasContainer, {
+                    width: viewPort.width || DEFAULT_CANVAS_WIDTH,
+                    height: viewPort.height || DEFAULT_CANVAS_HEIGHT
+                });
+            },
 
             _attachEvents: function () {
                 var that = this;

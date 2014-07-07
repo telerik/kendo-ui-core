@@ -1252,11 +1252,13 @@
 
     var Canvas = Class.extend({
         init: function (element, options) {
+            options = options || {};
             this.element = element;
             this.surface = d.Surface.create(element, options);
             if (kendo.isFunction(this.surface.translate)) {
                 this.translate = this._translate;
             }
+
             this.drawingElement = new d.Group();
             this._viewBox = new Rect(0, 0, options.width, options.height);
         },
@@ -1284,6 +1286,7 @@
             if (defined(x) && defined(y)) {
                 viewBox.x = x;
                 viewBox.y = y;
+                this.surface.setSize(viewBox);
                 this.surface.translate({x: x, y: y});
             }
             return {

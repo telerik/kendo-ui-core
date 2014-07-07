@@ -59,6 +59,14 @@
         equal(size.height, 400);
     });
 
+    test("sets default width and height if element has 0 width or height", function () {
+        diagram.destroy();
+        diagram = $("#canvas").hide().kendoDiagram().getKendoDiagram();
+        var size = diagram.canvas.size();
+        equal(size.width, 600);
+        equal(size.height, 600);
+    });
+
     // ------------------------------------------------------------
     module("Diagram / add shape", {
         setup: function() {
