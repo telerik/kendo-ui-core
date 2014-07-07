@@ -370,4 +370,100 @@
         ok(dropdownlist.current());
         equal(dropdownlist.current().text(), "Any");
     });
+
+    test("DropDownList focuses filter input on open", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        equal(document.activeElement, dropdownlist.filterInput[0]);
+    });
+
+    test("DropDownList does not filter on altKey", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        stub(dropdownlist, {
+            _search: dropdownlist._search
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            altKey: true
+        });
+
+        equal(dropdownlist.calls("_search"), 0);
+    });
+
+    test("DropDownList prevent 'home' logic when filterinput is focused", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        stub(dropdownlist, {
+            _select: dropdownlist._select
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.HOME
+        });
+
+        equal(dropdownlist.calls("_select"), 0);
+    });
+
+    asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+            dropdownlist.filterInput.focusout();
+
+            equal(dropdownlist.value(), "item2");
+        });
+
+        dropdownlist.filterInput.focus().val("item2").trigger({
+            type: "keydown"
+        });
+    });
 })();

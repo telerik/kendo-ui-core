@@ -1,6 +1,7 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
         data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+        select,
         input;
 
     module("kendo.ui.DropDownList searching", {
@@ -13,10 +14,18 @@
                 return this.trigger({ type: "keypress", keyCode: key } );
             }
             input = $("<input />").appendTo(QUnit.fixture);
+            select = $("<select />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            input.data('kendoDropDownList').destroy();
-            input.add($("ul")).parent(".k-widget").remove();
+            if (input.data('kendoDropDownList')) {
+                input.data('kendoDropDownList').destroy();
+                input.add($("ul")).parent(".k-widget").remove();
+            }
+
+            if (select.data('kendoDropDownList')) {
+                select.data('kendoDropDownList').destroy();
+                select.add($("ul")).parent(".k-widget").remove();
+            }
         }
     });
 
@@ -262,5 +271,179 @@
         input.press("z");
 
         ok(true);
+    });
+
+    asyncTest("filter items on user input", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+
+            var data = dropdownlist.dataSource.view();
+
+            equal(data.length, 1);
+            equal(data[0].text, "Orange");
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("or").keydown();
+    });
+
+    asyncTest("widget does not update selected text on filter", 2, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+
+            equal(dropdownlist.value(), "3");
+            equal(dropdownlist.text(), "Grey");
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("or").keydown();
+    });
+
+    asyncTest("widget focuses first item after search", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+
+            equal(dropdownlist.ul[0].firstChild, dropdownlist.current()[0]);
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("or").keydown();
+    });
+
+    asyncTest("keep open popup if no items can be found", 0, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.bind("close", function() {
+            ok(false);
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("not found").keydown();
+
+        setTimeout(function() {
+            start();
+        }, 100);
+    });
+
+    asyncTest("clear filter when clear input value", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.val("not found").keydown();
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+            equal(dropdownlist.dataSource.view().length, 3);
+        });
+
+        dropdownlist.filterInput.val("").keydown();
+    });
+
+    test("focus wrapper on ENTER key", 1, function() {
+        var dropdownlist = new DropDownList(input, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        equal(document.activeElement, dropdownlist.wrapper[0]);
+    });
+
+    asyncTest("persist selected value if no items (select)", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+            equal(dropdownlist.value(), "3");
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
     });
 })();

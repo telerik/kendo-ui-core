@@ -914,4 +914,51 @@
 
         equal(dropdownlist.span.html(), "Select...");
     });
+
+    test("widget renders filter header in input", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            optionLabel: "Select...",
+            dataTextField: "Orders.ShipCity",
+            dataValueField: "OrderID",
+            filter: "startswith"
+        });
+
+        var filterHeader = dropdownlist.list.children().first();
+
+        ok(filterHeader.hasClass("k-filter-wrap"));
+        ok(filterHeader.find("input")[0]);
+    });
+
+    test("adjust ul height if filter header is rendered", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2", "item3", "item4", "item5"],
+            filter: "startswith",
+            height: 50
+        });
+
+        dropdownlist.open();
+
+        var list = dropdownlist.list;
+        var filterHeader = list.find(".k-textbox");
+        var height = list.height() - filterHeader.outerHeight();
+
+        equal(dropdownlist.ul.height(), height);
+    });
+
+    test("widget renders search icon in filter header", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            optionLabel: "Select...",
+            dataTextField: "Orders.ShipCity",
+            dataValueField: "OrderID",
+            filter: "startswith"
+        });
+
+        var filterHeader = dropdownlist.list.children().first();
+        var icon = filterHeader.find("input").next();
+
+        ok(icon[0]);
+        ok(icon.hasClass("k-i-search"));
+    });
 })();
