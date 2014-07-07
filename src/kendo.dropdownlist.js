@@ -198,16 +198,17 @@ var __meta__ = {
                 length = data.length,
                 optionLabel = that.options.optionLabel,
                 element = that.element[0],
-                selectedIndex;
+                selectedIndex,
+                value;
 
             that.trigger("dataBinding");
             if (that._current) {
                 that.current(null);
             }
 
-            this._angularItems("cleanup");
+            that._angularItems("cleanup");
             that.ul[0].innerHTML = kendo.render(that.template, data);
-            this._angularItems("compile");
+            that._angularItems("compile");
 
             that._height(length);
 
@@ -217,9 +218,15 @@ var __meta__ = {
 
             if (that._isSelect) {
                 selectedIndex = element.selectedIndex;
+                value = that.value();
 
-                if (optionLabel && length) {
-                    optionLabel = '<option value="">' + that._optionLabelText(optionLabel) + "</option>";
+                if (length) {
+                    if (optionLabel) {
+                        optionLabel = that._option("", that._optionLabelText(optionLabel));
+                    }
+                } else if (value) {
+                    selectedIndex = 0;
+                    optionLabel = that._option(value, that.text());
                 }
 
                 that._options(data, optionLabel);
@@ -249,6 +256,10 @@ var __meta__ = {
 
             that._bound = !!length;
             that.trigger("dataBound");
+        },
+
+        _option: function(value, text) {
+            return '<option value="' + value + '">' + text + "</option>";
         },
 
         text: function (text) {

@@ -1,6 +1,7 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
         data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+        select,
         input;
 
     module("kendo.ui.DropDownList searching", {
@@ -13,10 +14,18 @@
                 return this.trigger({ type: "keypress", keyCode: key } );
             }
             input = $("<input />").appendTo(QUnit.fixture);
+            select = $("<select />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            input.data('kendoDropDownList').destroy();
-            input.add($("ul")).parent(".k-widget").remove();
+            if (input.data('kendoDropDownList')) {
+                input.data('kendoDropDownList').destroy();
+                input.add($("ul")).parent(".k-widget").remove();
+            }
+
+            if (select.data('kendoDropDownList')) {
+                select.data('kendoDropDownList').destroy();
+                select.add($("ul")).parent(".k-widget").remove();
+            }
         }
     });
 
@@ -412,5 +421,29 @@
         });
 
         equal(document.activeElement, dropdownlist.wrapper[0]);
+    });
+
+    asyncTest("persist selected value if no items (select)", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            index: 2
+        });
+
+        dropdownlist.open();
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+            equal(dropdownlist.value(), "3");
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
     });
 })();
