@@ -99,7 +99,8 @@
             WIDTH = "width",
             HEIGHT = "height",
             X = "x",
-            Y = "y";
+            Y = "y",
+            MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS;
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -144,6 +145,20 @@
 
             return defaults;
         };
+
+        function mwDelta(e) {
+            var origEvent = e.originalEvent,
+                delta = 0;
+
+            if (origEvent.wheelDelta) {
+                delta = -origEvent.wheelDelta / 40;
+                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+            } else if (origEvent.detail) {
+                delta = origEvent.detail;
+            }
+
+            return delta;
+        }
 
         function isAutoConnector(connector) {
             return connector.options.name.toLowerCase() === AUTO.toLowerCase();
@@ -1385,7 +1400,7 @@
                     .on("mousemove" + NS, proxy(that._mouseMove, that))
                     .on("mouseup" + NS, proxy(that._mouseUp, that))
                     .on("mousedown" + NS, proxy(that._mouseDown, that))
-                    .mousewheel(proxy(that._wheel, that), { ns: NS })
+                    .on(MOUSEWHEEL_NS, proxy(that._wheel, that))
                     .on("keydown" + NS, proxy(that._keydown, that))
                     .on("mouseover" + NS, proxy(that._mouseover, that))
                     .on("mouseout" + NS, proxy(that._mouseout, that));
@@ -2476,8 +2491,9 @@
                 }
             },
             _wheel: function (e) {
-                var p = this._calculatePosition(e),
-                    meta = deepExtend(this._meta(e), { delta: e.data.delta });
+                var delta = mwDelta(e),
+                    p = this._calculatePosition(e),
+                    meta = deepExtend(this._meta(e), { delta: delta });
 
                 if (this.toolService.wheel(p, meta)) {
                     e.preventDefault();

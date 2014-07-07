@@ -2,7 +2,6 @@
     define([
             "./kendo.data", "./kendo.draganddrop", "./kendo.userevents", "./kendo.mobile.scroller",
 
-           "./dataviz/diagram/extensions",
            "./dataviz/diagram/utils",
            "./dataviz/diagram/math",
            "./dataviz/diagram/svg",
