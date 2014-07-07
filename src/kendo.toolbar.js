@@ -543,6 +543,9 @@ var __meta__ = {
                         if (!(element instanceof jQuery)) {
                             element = $(element.replace(/^\s+|\s+$/g, ''));
                         }
+
+                        element = element.wrap("<div></div>").parent();
+                        element.attr(KENDO_UID_ATTR, options.uid);
                     } else if (component) { //build-in command
                         element = (component.toolbar || $.noop)(options);
                     }
