@@ -207,7 +207,7 @@ var __meta__ = {
                     value: prop
                 });
             }
-            var dropdown = $('<input style="width:24px" data-bind="value: operator"/>').appendTo(this.wrapper);
+            var dropdown = $('<input style="width:24px" ' + kendo.attr("bind") + '="value: operator"/>').appendTo(this.wrapper);
             this.operatorDropDown = dropdown.kendoDropDownList({
                 dataSource: items,
                 dataTextField: "text",

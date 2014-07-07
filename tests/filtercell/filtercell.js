@@ -90,9 +90,9 @@
         equal(filterCell.options.type, "number");
     });
 
-    test("creates input element by default", function() {
+    test("creates input elements by default", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "bar" });
-        equal(dom.find("input[" + kendo.attr("bind") + "]").length, 1);
+        equal(dom.find("input[" + kendo.attr("bind") + "]").length, 2, "one for value, one for operator");
     });
 
     test("sets the value of the input element when there is default filter", function() {
@@ -117,6 +117,17 @@
         dataSource.filter({ filters: [{ field:"faz", operator:"eq", value:"gaz" }, { field:"foo", operator:"eq", value:"baz" }] });
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
         equal(dom.find("input").val(), "baz");
+    });
+
+    test("does not set the value of the input element to null when filter is cleared without adding filter before that", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        filterCell.clearFilter();
+        equal(dom.find("input").eq(0).val(), "");
+    });
+
+    test("sets default operator", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", operator: "neq" });
+        equal(dom.find("["+ kendo.attr("role") +"=dropdownlist]").data("kendoDropDownList").value(), "neq");
     });
 
     test("does not set the value of the input element to null when filter is cleared without adding filter before that", function() {
