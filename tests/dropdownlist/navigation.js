@@ -439,4 +439,31 @@
 
         equal(dropdownlist.calls("_select"), 0);
     });
+
+    asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            delay: 0,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.bind("dataBound", function() {
+            start();
+            dropdownlist.filterInput.focusout();
+
+            equal(dropdownlist.value(), "item2");
+        });
+
+        dropdownlist.filterInput.focus().val("item2").trigger({
+            type: "keydown"
+        });
+    });
 })();
