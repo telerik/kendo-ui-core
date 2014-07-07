@@ -183,8 +183,9 @@ var __meta__ = {
         },
 
         current: function(candidate) {
-            var that = this,
-                id = that._optionID;
+            var that = this;
+            var focused = that._focused.add(that.filterInput);
+            var id = that._optionID;
 
             if (candidate !== undefined) {
                 if (that._current) {
@@ -193,8 +194,7 @@ var __meta__ = {
                         .removeAttr("aria-selected")
                         .removeAttr(ID);
 
-                    that._focused
-                        .removeAttr("aria-activedescendant");
+                    focused.removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {
@@ -203,7 +203,7 @@ var __meta__ = {
 
                     if (id) {
                         candidate.attr("id", id);
-                        that._focused.attr("aria-activedescendant", id);
+                        focused.attr("aria-activedescendant", id);
                     }
                 }
 
@@ -271,7 +271,7 @@ var __meta__ = {
         _aria: function(id) {
             var that = this,
                 options = that.options,
-                element = that._focused;
+                element = that._focused.add(that.filterInput);
 
             if (options.suggest !== undefined) {
                 element.attr("aria-autocomplete", options.suggest ? "both" : "list");
