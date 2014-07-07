@@ -70,22 +70,22 @@
             equal(surface._root.childNodes.length, 0);
         });
 
-        test("getSize returns element dimensions", function() {
+        test("size returns element dimensions", function() {
             $(surface.element).css({ width: 1000, height: 1000 });
 
-            deepEqual(surface.getSize(), {
+            deepEqual(surface.size(), {
                 width: 1000,
                 height: 1000
             });
         });
 
-        test("setSize sets element dimensions", function() {
-            deepEqual(surface.setSize({
+        test("size sets element dimensions", function() {
+            surface.size({
                 width: 100,
                 height: 100
-            }));
+            });
 
-            deepEqual(surface.getSize(), {
+            deepEqual(surface.size(), {
                 width: 100,
                 height: 100
             });
