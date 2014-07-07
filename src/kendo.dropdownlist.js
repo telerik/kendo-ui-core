@@ -465,24 +465,27 @@ var __meta__ = {
 
             handled = that._move(e);
 
-            //TODO: Skip this on filter!
-            if (key === keys.HOME) {
-                handled = true;
-                e.preventDefault();
-                that._select(ul.firstChild);
-            } else if (key === keys.END) {
-                handled = true;
-                e.preventDefault();
-                that._select(ul.lastChild);
+            if (!that.popup.visible() || !that.filterInput) {
+                if (key === keys.HOME) {
+                    handled = true;
+                    e.preventDefault();
+                    that._select(ul.firstChild);
+                } else if (key === keys.END) {
+                    handled = true;
+                    e.preventDefault();
+                    that._select(ul.lastChild);
+                }
             }
 
-            if (handled && key !== keys.TAB) {
-                this._prevent = true;
-                this._focused = this.wrapper.focus();
-            }
+            if (!e.altKey) {
+                if (handled && key !== keys.TAB && !e.shiftKey) {
+                    that._prevent = true;
+                    that._focused = that.wrapper.focus();
+                }
 
-            if (!handled && that.filterInput) {
-                that._search();
+                if (!handled && that.filterInput) {
+                    that._search();
+                }
             }
         },
 

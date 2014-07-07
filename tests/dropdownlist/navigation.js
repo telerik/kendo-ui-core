@@ -387,4 +387,56 @@
 
         equal(document.activeElement, dropdownlist.filterInput[0]);
     });
+
+    test("DropDownList does not filter on altKey", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        stub(dropdownlist, {
+            _search: dropdownlist._search
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            altKey: true
+        });
+
+        equal(dropdownlist.calls("_search"), 0);
+    });
+
+    test("DropDownList prevent 'home' logic when filterinput is focused", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        stub(dropdownlist, {
+            _select: dropdownlist._select
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.HOME
+        });
+
+        equal(dropdownlist.calls("_select"), 0);
+    });
 })();
