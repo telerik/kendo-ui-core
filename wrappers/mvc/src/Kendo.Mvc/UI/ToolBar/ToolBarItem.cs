@@ -17,6 +17,10 @@ namespace Kendo.Mvc.UI
             MenuButtons = new List<ToolBarItemMenuButton>();
                 
         //<< Initialization
+
+            Click = new ClientHandlerDescriptor();
+
+            Toggle = new ClientHandlerDescriptor();
         }
 
         //>> Fields
@@ -26,8 +30,6 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
-        
-        public string Click { get; set; }
         
         public bool? Enable { get; set; }
         
@@ -63,8 +65,6 @@ namespace Kendo.Mvc.UI
         
         public bool? Togglable { get; set; }
         
-        public string Toggle { get; set; }
-        
         public string Url { get; set; }
         
         public CommandType? Type { get; set; }
@@ -76,6 +76,10 @@ namespace Kendo.Mvc.UI
         public ShowInOverflowPopup? Overflow { get; set; }
         
         //<< Fields
+
+        public ClientHandlerDescriptor Click { get; set; }
+
+        public ClientHandlerDescriptor Toggle { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {

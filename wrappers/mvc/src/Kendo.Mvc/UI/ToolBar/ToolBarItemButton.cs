@@ -13,11 +13,13 @@ namespace Kendo.Mvc.UI
             //>> Initialization
         
         //<< Initialization
+
+            Click = new ClientHandlerDescriptor();
+
+            Toggle = new ClientHandlerDescriptor();
         }
 
         //>> Fields
-        
-        public string Click { get; set; }
         
         public bool? Enable { get; set; }
         
@@ -31,9 +33,7 @@ namespace Kendo.Mvc.UI
         
         public bool? Selected { get; set; }
         
-        public string SpriteCssClass { get; set; }
-        
-        public string Toggle { get; set; }
+        public string SpriteCssClass { get; set; }   
         
         public bool? Togglable { get; set; }
         
@@ -46,6 +46,10 @@ namespace Kendo.Mvc.UI
         public ShowIn? ShowIcon { get; set; }
         
         //<< Fields
+
+        public ClientHandlerDescriptor Click { get; set; }
+
+        public ClientHandlerDescriptor Toggle { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {

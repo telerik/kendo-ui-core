@@ -20,17 +20,6 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.
-        /// </summary>
-        /// <param name="value">The value that configures the click.</param>
-        public ToolBarItemButtonBuilder Click(string value)
-        {
-            container.Click = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Specifies whether the button is initially enabled or disabled.
         /// </summary>
         /// <param name="value">The value that configures the enable.</param>
@@ -108,17 +97,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.
-        /// </summary>
-        /// <param name="value">The value that configures the toggle.</param>
-        public ToolBarItemButtonBuilder Toggle(string value)
-        {
-            container.Toggle = value;
-
-            return this;
-        }
-        
-        /// <summary>
         /// Specifies if the button is togglable, e.g. has a selected and unselected state. Applicable only for the children of a ButtonGroup.
         /// </summary>
         /// <param name="value">The value that configures the togglable.</param>
@@ -174,6 +152,48 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         //<< Fields
+
+        /// <summary>
+        /// Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.
+        /// </summary>
+        /// <param name="value">The name of the click event handler.</param>
+        public ToolBarItemButtonBuilder Click(string value)
+        {
+            container.Click.HandlerName = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.
+        /// </summary>                
+        public ToolBarItemButtonBuilder Click(Func<object, object> value)
+        {
+            container.Click.TemplateDelegate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.
+        /// </summary>
+        /// <param name="value">The name of the toggle handler.</param>
+        public ToolBarItemButtonBuilder Toggle(string value)
+        {
+            container.Toggle.HandlerName = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the toggle event handler of the button. Applicable only for the children of a ButtonGroup.
+        /// </summary>                
+        public ToolBarItemButtonBuilder Toggle(Func<object, object> value)
+        {
+            container.Toggle.TemplateDelegate = value;
+
+            return this;
+        }
     }
 }
 
