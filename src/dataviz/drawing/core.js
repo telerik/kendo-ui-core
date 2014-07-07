@@ -63,7 +63,8 @@
                 height: size.height
             });
 
-            this.resize();
+            this._size = size;
+            this._resize();
         },
 
         _resize: noop,

@@ -31,8 +31,11 @@
 
         module("Surface", {
             setup: function() {
-                container = QUnit.fixture[0];
+                container = $("<div>").appendTo(QUnit.fixture[0]);
                 surface = new Surface(container);
+            },
+            teardown: function() {
+                container.remove();
             }
         });
 
@@ -42,7 +45,7 @@
         });
 
         test("appends element to container", function() {
-            equal(QUnit.fixture.find("div").length, 1);
+            equal(container.find("div").length, 1);
         });
 
         test("draw attaches element to root node", function() {
@@ -86,6 +89,21 @@
             });
 
             deepEqual(surface.size(), {
+                width: 100,
+                height: 100
+            });
+        });
+
+        test("size caches size even if element is hidden", function() {
+            $(container).css("display", "none");
+            surface._resize = function() {
+                deepEqual(surface._size, {
+                    width: 100,
+                    height: 100
+                });
+            };
+
+            surface.size({
                 width: 100,
                 height: 100
             });

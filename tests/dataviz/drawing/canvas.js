@@ -31,8 +31,11 @@
 
         module("Surface", {
             setup: function() {
-                container = QUnit.fixture[0];
+                container = $("<div>").appendTo(QUnit.fixture);
                 surface = new Surface(container);
+            },
+            teardown: function() {
+                container.remove();
             }
         });
 
@@ -76,6 +79,21 @@
             });
 
             deepEqual(surface.size(), {
+                width: 100,
+                height: 100
+            });
+        });
+
+        test("size caches size even if element is hidden", function() {
+            $(container).css("display", "none");
+            surface._resize = function() {
+                deepEqual(surface._size, {
+                    width: 100,
+                    height: 100
+                });
+            };
+
+            surface.size({
                 width: 100,
                 height: 100
             });

@@ -63,7 +63,8 @@
         setSize: function(size) {
             this.element.setAttribute("width", renderSize(size.width));
             this.element.setAttribute("height", renderSize(size.height));
-            this.resize();
+
+            d.Surface.fn.setSize.call(this, size);
         },
 
         _resize: function() {
