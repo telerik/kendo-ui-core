@@ -68,7 +68,9 @@ var __meta__ = {
             that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .on("mousedown" + ns, function(e) {
-                            e.preventDefault();
+                            if (!that.filterInput || that.filterInput[0] !== e.target) {
+                                e.preventDefault();
+                            }
                         });
 
             id = element.attr(ID);
@@ -387,9 +389,11 @@ var __meta__ = {
             if (length) {
                 var that = this,
                     list = that.list,
-                    visible = that.popup.visible(),
                     height = that.options.height,
+                    visible = that.popup.visible(),
+                    filterInput = that.filterInput,
                     header = that.header,
+                    offsetHeight = 0,
                     popups;
 
                 popups = list.add(list.parent(".k-animation-container")).show();
@@ -398,9 +402,21 @@ var __meta__ = {
 
                 popups.height(height);
 
-                if (header) {
-                    that.ul.height(height == "auto" ? height : list.height() - header.height());
+                if (height !== "auto") {
+                    if (filterInput) {
+                        offsetHeight += filterInput.outerHeight();
+                    }
+
+                    if (header) {
+                        offsetHeight += header.outerHeight();
+                    }
                 }
+
+                if (offsetHeight) {
+                    height = list.height() - offsetHeight;
+                }
+
+                that.ul.height(height);
 
                 if (!visible) {
                     popups.hide();
@@ -518,7 +534,7 @@ var __meta__ = {
                 ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight,
                 touchScroller = this._touchScroller,
-                yDimension, headerHeight;
+                yDimension, offsetHeight;
 
             if (touchScroller) {
                 yDimension = touchScroller.dimensions.y;
@@ -529,11 +545,12 @@ var __meta__ = {
                     touchScroller.scrollTo(0, -itemOffsetTop);
                 }
             } else {
-                headerHeight = this.header ? this.header.outerHeight() : 0;
+                offsetHeight = this.header ? this.header.outerHeight() : 0;
+                offsetHeight += this.filterInput ? this.filterInput.outerHeight() : 0;
 
                 ul.scrollTop = ulScrollTop > itemOffsetTop ?
-                               (itemOffsetTop - headerHeight) : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
-                               (bottomDistance - ulOffsetHeight - headerHeight) : ulScrollTop;
+                               (itemOffsetTop - offsetHeight) : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                               (bottomDistance - ulOffsetHeight - offsetHeight) : ulScrollTop;
             }
         },
 
@@ -630,6 +647,34 @@ var __meta__ = {
                 that._triggerCascade();
                 that._old = that._accessor();
                 that._oldIndex = that.selectedIndex;
+            }
+        },
+
+        search: function(word) {
+            word = typeof word === "string" ? word : this.text();
+            var that = this;
+            var length = word.length;
+            var options = that.options;
+            var ignoreCase = options.ignoreCase;
+            var filter = options.filter;
+            var field = options.dataTextField;
+
+            clearTimeout(that._typing);
+
+            //TODO: add info - widget rebind on empty filter!
+            if (!length || length >= options.minLength) {
+                that._state = "filter";
+                if (filter === "none") {
+                    that._filter(word);
+                } else {
+                    that._open = true;
+                    that._filterSource({
+                        value: ignoreCase ? word.toLowerCase() : word,
+                        field: field,
+                        operator: filter,
+                        ignoreCase: ignoreCase
+                    });
+                }
             }
         },
 

@@ -322,33 +322,6 @@ var __meta__ = {
             that.trigger("dataBound");
         },
 
-        search: function(word) {
-            word = typeof word === "string" ? word : this.text();
-            var that = this,
-                length = word.length,
-                options = that.options,
-                ignoreCase = options.ignoreCase,
-                filter = options.filter,
-                field = options.dataTextField;
-
-            clearTimeout(that._typing);
-
-            if (length >= options.minLength) {
-                that._state = STATE_FILTER;
-                if (filter === "none") {
-                    that._filter(word);
-                } else {
-                    that._open = true;
-                    that._filterSource({
-                        value: ignoreCase ? word.toLowerCase() : word,
-                        field: field,
-                        operator: filter,
-                        ignoreCase: ignoreCase
-                    });
-                }
-            }
-        },
-
         suggest: function(word) {
             var that = this,
                 element = that.input[0],
