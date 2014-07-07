@@ -9,29 +9,53 @@ DEMOS_BULDFILES = FileList['build/demos.rb'].include('build/templates/**/*.erb')
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
 
 OFFLINE_DEMO_TEMPLATE_OPTIONS = {
-    "/web/spa/Sushi.html" => {
+    "/spa/Sushi.html" => {
         skip_back_button: true,
         additional_code: <<-SCRIPT,
-            window.contentPath = "../../content/spa/websushi";
+            window.contentPath = "../content/spa/websushi";
         SCRIPT
         additional_scripts: %W(
-            ../../content/spa/websushi/js/sushi.js
+            ../content/spa/websushi/js/sushi.js
         ),
         additional_stylesheets: %W(
-            ../../content/spa/websushi/css/style.css
+            ../content/spa/websushi/css/style.css
         )
     },
-    "/web/spa/Aeroviewr.html" => {
+    "/spa/Aeroviewr.html" => {
         skip_back_button: true,
         additional_scripts: %W(
-            ../../content/spa/aeroviewr/js/500px.js
-            ../../content/spa/aeroviewr/js/aeroviewr.js
+            ../content/spa/aeroviewr/js/500px.js
+            ../content/spa/aeroviewr/js/aeroviewr.js
         ),
         additional_stylesheets: %W(
-            ../../content/spa/aeroviewr/css/aeroviewr.css
+            ../content/spa/aeroviewr/css/aeroviewr.css
         )
     },
-    "/web/bootstrap/index.html" => {
+    "/mobile-apps/sushi.html" => {
+        skip_back_button: true,
+        additional_code: <<-SCRIPT,
+            window.contentPath = "../content/mobile/apps/sushi";
+        SCRIPT
+        additional_scripts: %W(
+            ../content/mobile/apps/sushi/sushi.js
+        ),
+        additional_stylesheets: %W(
+            ../content/mobile/apps/sushi/css/style.css
+        )
+    },
+    "/mobile-apps/cuteness.html" => {
+        skip_back_button: true,
+        additional_code: <<-SCRIPT,
+            window.contentPath = "../content/mobile/apps/cuteness";
+        SCRIPT
+        additional_scripts: %W(
+            ../content/mobile/apps/cuteness/cuteness.js
+        ),
+        additional_stylesheets: %W(
+            ../content/mobile/apps/cuteness/css/style.css
+        )
+    },
+    "/bootstrap/index.html" => {
         skip_back_button: true,
         additional_stylesheets: %W(
             ../../content/integration/bootstrap-integration/css/bootstrap.min.css

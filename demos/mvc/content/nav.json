@@ -9077,5 +9077,60 @@
       }
     ],
     "category": "Mobile"
+  },
+  {
+      "text": "Single Page Applications",
+      "name": "spa",
+      "packages": [ "offline" ],
+      "items": [
+          {
+            "text": "Aeroviewr",
+            "url": "spa/Aeroviewr",
+            "title": {
+                "kendo-ui": "Aeroviewr"
+            },
+            "meta": {
+                "kendo-ui": "Aeroviewr"
+            }
+          },
+          {
+            "text": "Sushi",
+            "url": "spa/Sushi",
+            "title": {
+                "kendo-ui": "Sushi"
+            },
+            "meta": {
+                "kendo-ui": "Sushi"
+            }
+          }
+      ]
+  },
+  {
+      "text": "Sample Mobile Applications",
+      "name": "mobile-apps",
+      "mobile": "true",
+      "packages": [ "offline" ],
+      "items": [
+          {
+            "text": "Cuteness.io",
+            "url": "mobile-apps/cuteness",
+            "title": {
+                "kendo-ui": "Cuteness.io"
+            },
+            "meta": {
+                "kendo-ui": "Cuteness.io"
+            }
+          },
+          {
+            "text": "Sushi",
+            "url": "mobile-apps/sushi",
+            "title": {
+                "kendo-ui": "Sushi (mobile)"
+            },
+            "meta": {
+                "kendo-ui": "Sushi (mobile)"
+            }
+          }
+      ]
   }
 ]
