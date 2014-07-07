@@ -2,6 +2,7 @@
 package com.kendoui.taglib;
 
 import com.kendoui.taglib.editor.*;
+import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Textarea;
 import com.kendoui.taglib.json.Function;
@@ -18,7 +19,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     @Override
     public Element<?> createElement() {
-        return new Textarea().attr("name", getName()).html(body());
+        if(getProperty("tag") == "div") {
+            return new Div().html(body());
+        } else {
+            return new Textarea().attr("name", getName()).html(body());
+        }
     }
     
     @Override
