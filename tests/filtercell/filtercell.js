@@ -119,6 +119,12 @@
         equal(dom.find("input").val(), "baz");
     });
 
+    test("does not set the value of the input element to null when filter is cleared without adding filter before that", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        filterCell.clearFilter();
+        equal(dom.find("input").eq(0).val(), "");
+    });
+
     test("uses template", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "foo", template: function(input, model) {
             input.addClass("foo");

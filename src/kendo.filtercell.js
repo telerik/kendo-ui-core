@@ -271,14 +271,14 @@ var __meta__ = {
             }
 
             var currentFilter = $.extend({}, that.viewModel.toJSON(), { field: that.options.field });
-            if (currentFilter.value === undefined) {
-                return;
-            }
 
             var expression = {
                 logic: "and",
-                filters: [currentFilter]
+                filters: []
             };
+            if (currentFilter.value !== undefined && currentFilter.value !== null) {
+                expression.filters.push(currentFilter);
+            }
             var mergeResult = that._merge(expression);
             if (mergeResult.filters.length) {
                 that.dataSource.filter(mergeResult);

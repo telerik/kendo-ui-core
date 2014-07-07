@@ -3701,7 +3701,7 @@ var __meta__ = {
 
         _filterRow: function() {
             var that = this;
-            if (!this._hasFilterRow()) {
+            if (!that._hasFilterRow()) {
                return;
             }
 
@@ -3752,7 +3752,7 @@ var __meta__ = {
                             values: values,
                             delay: delay,
                             messages: messages,
-                            operators: this.options.filterable.operators
+                            operators: that.options.filterable.operators
                         }).appendTo(th);
                 }
             }
