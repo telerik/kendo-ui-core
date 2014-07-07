@@ -661,7 +661,6 @@ var __meta__ = {
 
             clearTimeout(that._typing);
 
-            //TODO: add info - widget rebind on empty filter!
             if (!length || length >= options.minLength) {
                 that._state = "filter";
                 if (filter === "none") {

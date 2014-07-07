@@ -373,10 +373,10 @@ var __meta__ = {
                             that._blured = false;
                             e.preventDefault();
                             that._toggle();
-                    })
+                    });
 
                 if (!that.filterInput) {
-                    wrapper.on("keypress" + ns, proxy(that._keypress, that))
+                    wrapper.on("keypress" + ns, proxy(that._keypress, that));
                 }
 
             } else if (disable) {
