@@ -216,6 +216,10 @@ var __meta__ = {
                 scaledTotal = total * that.scale,
                 size = that.getSize();
 
+            if (total === 0) {
+                return; // we are not visible.
+            }
+
             that.max = that.virtual ? -that._virtualMin : 0;
             that.size = size;
             that.total = scaledTotal;
@@ -469,6 +473,7 @@ var __meta__ = {
                     that.element[0].style.position = "absolute";
                     that.element[0].style.left = that.x + "px";
                     that.element[0].style.top = that.y + "px";
+
                 } else {
                     that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
                 }
