@@ -18,7 +18,10 @@
             Path = diagram.Path,
             Ticker = diagram.Ticker,
             deepExtend = kendo.deepExtend,
-            Movable = kendo.ui.Movable;
+            Movable = kendo.ui.Movable,
+            browser = kendo.support.browser,
+
+            proxy = $.proxy;
         // Constants ==============================================================
         var Cursors = {
                 arrow: "default",
@@ -46,7 +49,12 @@
             ZOOMSTART = "zoomStart",
             ZOOMEND = "zoomEnd",
             SCROLL_MIN = -20000,
-            SCROLL_MAX = 20000;
+            SCROLL_MAX = 20000,
+            FRICTION = 0.90,
+            FRICTION_MOBILE = 0.93,
+            VELOCITY_MULTIPLIER = 5,
+            TRANSPARENT = "transparent",
+            PAN = "pan";
 
         diagram.Cursors = Cursors;
 
@@ -175,38 +183,6 @@
                     this.units[i].redo();
                 }
             }
-        });
-
-        /**
-         * Unit for content editing.
-         */
-        var ContentChangedUndoUnit = Class.extend({
-            /**
-             * Instantiates the unit.
-             * @param element The element being edited.
-             * @param newcontent The new content.
-             * @param oldcontent The old content.
-             */
-            init: function (element, oldcontent, newcontent) {
-                this.item = element;
-                this._undoContent = oldcontent;
-                this._redoContent = newcontent;
-                this.title = "Content Editing";
-                this.rebuild = this.item.options.hasOwnProperty("rebuild") ? this.item.options.rebuild : null;
-            },
-            undo: function () {
-                this.item.content(this._undoContent);
-                if (this.rebuild) {
-                    this.rebuild.call(this.item, this.item);
-                }
-            },
-            redo: function () {
-                this.item.content(this._redoContent);
-                if (this.rebuild) {
-                    this.rebuild.call(this.item, this.item);
-                }
-            }
-
         });
 
         var ConnectionEditUnit = Class.extend({
@@ -569,8 +545,6 @@
             },
             end: function () {
             },
-            doubleClick: function () {
-            },
             tryActivate: function (p, meta) {
                 return false;
             },
@@ -579,49 +553,26 @@
             }
         });
 
-        var PanTool = EmptyTool.extend({
-            init: function (toolService) {
-                EmptyTool.fn.init.call(this, toolService);
-            },
-            tryActivate: function (p, meta) {
-                return this.toolService.hoveredItem === undefined && meta.ctrlKey;
-            },
-            start: function (p) {
-                this.toolService.isPanning = true;
-                this.panStart = this.toolService.diagram._pan;
-                this.panOffset = p;
-                this.panDelta = new Point();//relative to root
-            },
-            move: function (p) {
-                var diagram = this.toolService.diagram;
-                this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
-                diagram.pan(this.panStart.plus(this.panDelta), {delta: p.minus(this.panOffset).times(1 / this.toolService.diagram.zoom())});
-            },
-            end: function () {
-                var diagram = this.toolService.diagram;
-                diagram.undoRedoService.begin();
-                diagram.undoRedoService.add(new PanUndoUnit(this.panStart, diagram._pan, diagram));
-                diagram.undoRedoService.commit();
-                this.toolService.isPanning = false;
-            },
-            getCursor: function () {
-                return Cursors.move;
-            }
-        });
-
         var ScrollerTool = EmptyTool.extend({
             init: function (toolService) {
                 var tool = this;
+                var friction = kendo.support.mobileOS ? FRICTION_MOBILE : FRICTION;
                 EmptyTool.fn.init.call(tool, toolService);
 
                 var diagram = tool.toolService.diagram,
                     canvas = diagram.canvas;
 
                 var scroller = diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
-                    scroll: $.proxy(tool._move, tool)
+                    friction: friction,
+                    velocityMultiplier: VELOCITY_MULTIPLIER,
+                    mousewheelScrolling: false,
+                    scroll: proxy(tool._move, tool)
                 }).data("kendoMobileScroller");
 
-                tool.movableCanvas = new Movable(canvas.element);
+                if (canvas.translate) {
+                    tool.movableCanvas = new Movable(canvas.element);
+                }
+
                 var virtualScroll = function (dimension, min, max) {
                     dimension.makeVirtual();
                     dimension.virtualSize(min || SCROLL_MIN, max || SCROLL_MAX);
@@ -635,12 +586,7 @@
                 return this.toolService.hoveredItem === undefined && meta.ctrlKey;
             },
             start: function () {
-                var diagram = this.toolService.diagram,
-                    canvas = diagram.canvas,
-                    canvasSize = canvas.size();
-
                 this.scroller.enable();
-                this.currentCanvasSize = canvasSize;
             },
             move: function () {
             },//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
@@ -648,16 +594,19 @@
                 var tool = this,
                     diagram = tool.toolService.diagram,
                     canvas = diagram.canvas,
-                    canvasSize = tool.currentCanvasSize || canvas.size(),
-                    scrollPos = new Point(args.scrollLeft, args.scrollTop),
-                    viewBox = new Rect(scrollPos.x, scrollPos.y, parseInt(canvasSize.width, 10), parseInt(canvasSize.height, 10));
+                    scrollPos = new Point(args.scrollLeft, args.scrollTop);
 
-                diagram._storePan(scrollPos.times(-1));
-                tool.movableCanvas.moveTo(scrollPos);
-                canvas.viewBox(viewBox);
+                if (canvas.translate) {
+                    diagram._storePan(scrollPos.times(-1));
+                    tool.movableCanvas.moveTo(scrollPos);
+                    canvas.translate(scrollPos.x, scrollPos.y);
+                } else {
+                    scrollPos = scrollPos.plus(diagram._pan.times(-1));
+                }
+
+                diagram.trigger(PAN, {pan: scrollPos});
             },
             end: function () {
-                this.currentCanvasSize = undefined;
                 this.scroller.disable();
             },
             getCursor: function () {
@@ -824,18 +773,6 @@
             }
         });
 
-        var ContentEditTool = EmptyTool.extend({
-            init: function (toolService) {
-                EmptyTool.fn.init.call(this, toolService);
-            },
-            doubleClick: function () {
-                this.toolService.diagram.editor(this.toolService.hoveredItem);
-            },
-            tryActivate: function (p, meta) {
-                return meta.doubleClick && this.toolService.hoveredItem;
-            }
-        });
-
         function testKey(key, str) {
             return str.charCodeAt(0) == key || str.toUpperCase().charCodeAt(0) == key;
         }
@@ -848,8 +785,7 @@
             init: function (diagram) {
                 this.diagram = diagram;
                 this.tools = [
-                    new ContentEditTool(this),
-                    diagram.options.useScroller ? new ScrollerTool(this) : new PanTool(this),
+                    new ScrollerTool(this),
                     new ConnectionEditTool(this),
                     new ConnectionTool(this),
                     new SelectionTool(this),
@@ -858,8 +794,12 @@
 
                 this.activeTool = undefined;
             },
+
             start: function (p, meta) {
                 meta = deepExtend({}, meta);
+                if (this.activeTool) {
+                    this.activeTool.end(p, meta);
+                }
                 this._updateHoveredItem(p);
                 this._activateTool(p, meta);
                 this.activeTool.start(p, meta);
@@ -868,6 +808,7 @@
                 this.startPoint = p;
                 return true;
             },
+
             move: function (p, meta) {
                 meta = deepExtend({}, meta);
                 var updateHovered = true;
@@ -880,6 +821,7 @@
                 this._updateCursor(p);
                 return true;
             },
+
             end: function (p, meta) {
                 meta = deepExtend({}, meta);
                 if (this.activeTool) {
@@ -889,13 +831,7 @@
                 this._updateCursor(p);
                 return true;
             },
-            doubleClick: function (p, meta) {
-                this._activateTool(p, deepExtend(meta, { doubleClick: true }));
-                if (this.activeTool.doubleClick) {
-                    this.activeTool.doubleClick(p, meta);
-                }
-                this._updateCursor(p);
-            },
+
             keyDown: function (key, meta) {
                 var diagram = this.diagram;
                 meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
@@ -980,9 +916,14 @@
                 }
             },
             _updateCursor: function (p) {
+                var element = this.diagram.element;
                 var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow));
 
-                $(this.diagram.canvas.domElement).css({cursor: cursor});
+                element.css({cursor: cursor});
+                // workaround for IE 7 issue in which the elements overflow the container after setting cursor
+                if (browser.msie && browser.version == 7) {
+                    element[0].style.cssText = element[0].style.cssText;
+                }
             },
             _connectionManipulation: function (connection, disabledShape, isNew) {
                 this.activeConnection = connection;
@@ -1447,8 +1388,6 @@
                 that.rect = new Rectangle(options.editable.select);
                 that.visual.append(that.rect);
                 that._createHandles();
-                that.text = new TextBlock();
-                that.visual.append(that.text);
                 that._createThumb();
                 that.redraw();
                 that.diagram.bind("select", function (e) {
@@ -1506,7 +1445,7 @@
                         for (y = -1; y <= 1; y++) {
                             if ((x !== 0) || (y !== 0)) { // (0, 0) element, (-1, -1) top-left, (+1, +1) bottom-right
                                 item = new Rectangle(handles);
-                                item.domElement._hover = $.proxy(this._hover, this);
+                                item.drawingElement._hover = proxy(this._hover, this);
                                 this.map.push({ x: x, y: y, visual: item });
                                 this.visual.append(item);
                             }
@@ -1523,6 +1462,7 @@
                     return this._bounds;
                 }
             },
+
             _hitTest: function (p) {
                 var tp = this.diagram.modelToLayer(p),
                     editable = this.options.editable,
@@ -1554,6 +1494,7 @@
                     return new Point(0, 0);
                 }
             },
+
             _getHandleBounds: function (p) {
                 var editable = this.options.editable;
                 if (editable && editable.resize) {
@@ -1579,6 +1520,7 @@
                     return r;
                 }
             },
+
             _getCursor: function (point) {
                 var hit = this._hitTest(point);
                 if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.editable && this.options.editable.resize) {
@@ -1616,6 +1558,7 @@
                 }
                 return this._manipulating ? Cursors.move : Cursors.select;
             },
+
             _initialize: function() {
                 var that = this, i, item,
                     items = that.diagram.select();
@@ -1637,6 +1580,7 @@
                 that.refresh();
                 that.redraw();
             },
+
             _rotates: function () {
                 var that = this, i, shape;
                 that.initialRotates = [];
@@ -1645,6 +1589,7 @@
                     that.initialRotates.push(shape.rotate().angle);
                 }
             },
+
             _positions: function () {
                 var that = this, i, shape;
                 that.initialStates = [];
@@ -1653,28 +1598,27 @@
                     that.initialStates.push(shape.bounds());
                 }
             },
+
             _hover: function(value, element) {
                 var editable = this.options.editable;
                 if (editable && editable.resize) {
                     var handleOptions = editable.resize.handles,
                         hover = handleOptions.hover,
                         stroke = handleOptions.stroke,
-                        background = handleOptions.background;
+                        fill = handleOptions.fill;
 
                     if (value && Utils.isDefined(hover.stroke)) {
                         stroke = deepExtend({}, stroke, hover.stroke);
                     }
 
-                    if (value && Utils.isDefined(hover.background)) {
-                        background = hover.background;
+                    if (value && Utils.isDefined(hover.fill)) {
+                        fill = hover.fill;
                     }
-
-                    element.redraw({
-                        stroke: stroke,
-                        background: background
-                    });
+                    element.stroke(stroke.color, stroke.width, stroke.opacity);
+                    element.fill(fill.color, fill.opacity);
                 }
             },
+
             start: function (p) {
                 this._sp = p;
                 this._cp = p;
@@ -1687,22 +1631,24 @@
                     this.shapeStates.push(shape.bounds());
                 }
             },
+
             redraw: function () {
                 var that = this, i, handle,
                     editable = that.options.editable,
                     resize = editable.resize,
                     rotate = editable.rotate,
-                    display = editable && resize ? "inline" : "none",
-                    rotationDisplay = editable && rotate ? "inline" : "none";
+                    visibleHandles = editable && resize ? true : false,
+                    visibleThumb = editable && rotate ? true : false;
 
                 for (i = 0; i < this.map.length; i++) {
                     handle = this.map[i];
-                    $(handle.visual.domElement).css("display", display);
+                    handle.visual.visible(visibleHandles);
                 }
                 if (that.rotationThumb) {
-                    $(that.rotationThumb.domElement).css("display", rotationDisplay);
+                    that.rotationThumb.visible(visibleThumb);
                 }
             },
+
             move: function (handle, p) {
                 var delta, dragging,
                     dtl = new Point(),
@@ -1798,22 +1744,26 @@
 
                 this._cp = p;
             },
+
             _truncatePositionToGuides: function (bounds) {
                 if (this.diagram.ruler) {
                     return this.diagram.ruler.truncatePositionToGuides(bounds);
                 }
                 return bounds;
             },
+
             _truncateSizeToGuides: function (bounds) {
                 if (this.diagram.ruler) {
                     return this.diagram.ruler.truncateSizeToGuides(bounds);
                 }
                 return bounds;
             },
+
             _truncateAngle: function (a) {
                 var snapAngle = Math.max(this.diagram.options.snap.angle, 5);
                 return this.diagram.options.snap.enabled === true ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
             },
+
             _truncateDistance: function (d) {
                 if (d instanceof diagram.Point) {
                     return new diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
@@ -1822,6 +1772,7 @@
                     return this.diagram.options.snap.enabled === true ? Math.floor(d / snapSize) * snapSize : d;
                 }
             },
+
             _displaceBounds: function (bounds, dtl, dbr, dragging) {
                 var tl = bounds.topLeft().plus(dtl),
                     br = bounds.bottomRight().plus(dbr),
@@ -1834,6 +1785,7 @@
                 }
                 return newBounds;
             },
+
             stop: function () {
                 var unit;
                 if (this._cp != this._sp) {
@@ -1860,6 +1812,7 @@
                 this._rotating = undefined;
                 return unit;
             },
+
             refreshBounds: function () {
                 var bounds = this.shapes.length == 1 ?
                     this.shapes[0].bounds().clone() :
@@ -1867,6 +1820,7 @@
 
                 this.bounds(bounds);
             },
+
             refresh: function () {
                 var that = this, b, bounds;
                 if (this.shapes.length > 0) {
@@ -1904,7 +1858,9 @@
                     width: 1,
                     dashType: "dash"
                 },
-                background: "none"
+                fill: {
+                    color: TRANSPARENT
+                }
             },
             start: function (p) {
                 this._sp = this._ep = p;
@@ -1946,19 +1902,19 @@
                 var options = this.options,
                     hover = options.hover,
                     stroke = options.stroke,
-                    background = options.background;
+                    fill = options.fill;
 
                 if (value && Utils.isDefined(hover.stroke)) {
                     stroke = deepExtend({}, stroke, hover.stroke);
                 }
 
-                if (value && Utils.isDefined(hover.background)) {
-                    background = hover.background;
+                if (value && Utils.isDefined(hover.fill)) {
+                    fill = hover.fill;
                 }
 
                 this.visual.redraw({
                     stroke: stroke,
-                    background: background
+                    fill: fill
                 });
             },
             refresh: function () {
@@ -1983,7 +1939,6 @@
             AddConnectionUnit: AddConnectionUnit,
             DeleteShapeUnit: DeleteShapeUnit,
             DeleteConnectionUnit: DeleteConnectionUnit,
-            ContentChangedUndoUnit: ContentChangedUndoUnit,
             ConnectionEditAdorner: ConnectionEditAdorner,
             UndoRedoService: UndoRedoService,
             ResizingAdorner: ResizingAdorner,

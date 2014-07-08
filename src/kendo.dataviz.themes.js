@@ -531,14 +531,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#0066cc",
+                fill: {
+                    color: "#0066cc"
+                },
                 connectorDefaults: {
-                    background: WHITE,
+                    fill: {
+                        color: WHITE
+                    },
                     stroke: {
                         color: "#384049"
                     },
                     hover: {
-                        background: "#3d3d3d",
+                        fill: {
+                            color: "#3d3d3d"
+                        },
                         stroke: {
                             color: "#efefef"
                         }
@@ -551,12 +557,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: "#3d3d3d",
+                        fill: {
+                            color: "#3d3d3d"
+                        },
                         stroke: {
                             color: WHITE
                         },
                         hover: {
-                            background: WHITE,
+                            fill: {
+                                color: WHITE
+                            },
                             stroke: {
                                 color: WHITE
                             }
@@ -568,7 +578,9 @@ var __meta__ = {
                         stroke: {
                             color: WHITE
                         },
-                        background: WHITE
+                        fill: {
+                            color: WHITE
+                        }
                     }
                 },
                 select: {
@@ -586,7 +598,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: "#3d3d3d",
+                        fill: {
+                            color: "#3d3d3d"
+                        },
                         stroke: {
                             color: "#efefef"
                         }
@@ -713,14 +727,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#7ec6e3",
+                fill: {
+                    color: "#7ec6e3"
+                },
                 connectorDefaults: {
-                    background: "#003f59",
+                    fill: {
+                        color: "#003f59"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#003f59"
                         }
@@ -733,12 +753,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#003f59"
                         },
                         hover: {
-                            background: "#003f59",
+                            fill: {
+                                color: "#003f59"
+                            },
                             stroke: {
                                 color: "#003f59"
                             }
@@ -750,7 +774,9 @@ var __meta__ = {
                         stroke: {
                             color: "#003f59"
                         },
-                        background: "#003f59"
+                        fill: {
+                            color: "#003f59"
+                        }
                     }
                 },
                 select: {
@@ -768,7 +794,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: "#3d3d3d",
+                        fill: {
+                            color: "#3d3d3d"
+                        },
                         stroke: {
                             color: "#efefef"
                         }
@@ -939,14 +967,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#a7018f",
+                fill: {
+                    color: "#a7018f"
+                },
                 connectorDefaults: {
-                    background: WHITE,
+                    fill: {
+                        color: WHITE
+                    },
                     stroke: {
                         color: "#2c232b"
                     },
                     hover: {
-                        background: "#2c232b",
+                        fill: {
+                            color: "#2c232b"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -959,12 +993,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: "#2c232b",
+                        fill: {
+                            color: "#2c232b"
+                        },
                         stroke: {
                             color: WHITE
                         },
                         hover: {
-                            background: WHITE,
+                            fill: {
+                                color: WHITE
+                            },
                             stroke: {
                                 color: WHITE
                             }
@@ -976,7 +1014,9 @@ var __meta__ = {
                         stroke: {
                             color: WHITE
                         },
-                        background: WHITE
+                        fill: {
+                            color: WHITE
+                        }
                     }
                 },
                 select: {
@@ -994,7 +1034,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: "#2c232b",
+                        fill: {
+                            color: "#2c232b"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -1121,14 +1163,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#e15613",
+                fill: {
+                    color: "#e15613"
+                },
                 connectorDefaults: {
-                    background: "#282828",
+                    fill: {
+                        color: "#282828"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#282828"
                         }
@@ -1141,12 +1189,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#282828"
                         },
                         hover: {
-                            background: "#282828",
+                            fill: {
+                                color: "#282828"
+                            },
                             stroke: {
                                 color: "#282828"
                             }
@@ -1158,7 +1210,9 @@ var __meta__ = {
                         stroke: {
                             color: "#282828"
                         },
-                        background: "#282828"
+                        fill: {
+                            color: "#282828"
+                        }
                     }
                 },
                 select: {
@@ -1176,7 +1230,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#282828"
                         }
@@ -1328,14 +1384,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#1c82c2",
+                fill: {
+                    color: "#1c82c2"
+                },
                 connectorDefaults: {
-                    background: "#515967",
+                    fill: {
+                        color: "#515967"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#282828"
                         }
@@ -1348,12 +1410,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#515967"
                         },
                         hover: {
-                            background: "#515967",
+                            fill: {
+                                color: "#515967"
+                            },
                             stroke: {
                                 color: "#515967"
                             }
@@ -1365,7 +1431,9 @@ var __meta__ = {
                         stroke: {
                             color: "#515967"
                         },
-                        background: "#515967"
+                        fill: {
+                            color: "#515967"
+                        }
                     }
                 },
                 select: {
@@ -1383,7 +1451,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#515967"
                         }
@@ -1514,14 +1584,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#8ebc00",
+                fill: {
+                    color: "#8ebc00"
+                },
                 connectorDefaults: {
-                    background: BLACK,
+                    fill: {
+                        color: BLACK
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: BLACK
                         }
@@ -1534,12 +1610,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#787878"
                         },
                         hover: {
-                            background: "#787878",
+                            fill: {
+                                color: "#787878"
+                            },
                             stroke: {
                                 color: "#787878"
                             }
@@ -1551,7 +1631,9 @@ var __meta__ = {
                         stroke: {
                             color: "#787878"
                         },
-                        background: "#787878"
+                        fill: {
+                            color: "#787878"
+                        }
                     }
                 },
                 select: {
@@ -1569,7 +1651,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#787878"
                         }
@@ -1721,14 +1805,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#00aba9",
+                fill: {
+                    color: "#00aba9"
+                },
                 connectorDefaults: {
-                    background: WHITE,
+                    fill: {
+                        color: WHITE
+                    },
                     stroke: {
                         color: "#0e0e0e"
                     },
                     hover: {
-                        background: "#0e0e0e",
+                        fill: {
+                            color: "#0e0e0e"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -1741,12 +1831,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: "#0e0e0e",
+                        fill: {
+                            color: "#0e0e0e"
+                        },
                         stroke: {
                             color: "#787878"
                         },
                         hover: {
-                            background: "#787878",
+                            fill: {
+                                color: "#787878"
+                            },
                             stroke: {
                                 color: "#787878"
                             }
@@ -1758,7 +1852,9 @@ var __meta__ = {
                         stroke: {
                             color: WHITE
                         },
-                        background: WHITE
+                        fill: {
+                            color: WHITE
+                        }
                     }
                 },
                 select: {
@@ -1776,7 +1872,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: "#0e0e0e",
+                        fill: {
+                            color: "#0e0e0e"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -1956,14 +2054,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#f3ae03",
+                fill: {
+                    color: "#f3ae03"
+                },
                 connectorDefaults: {
-                    background: WHITE,
+                    fill: {
+                        color: WHITE
+                    },
                     stroke: {
                         color: "#414550"
                     },
                     hover: {
-                        background: "#414550",
+                        fill: {
+                            color: "#414550"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -1976,12 +2080,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: "#414550",
+                        fill: {
+                            color: "#414550"
+                        },
                         stroke: {
                             color: WHITE
                         },
                         hover: {
-                            background: WHITE,
+                            fill: {
+                                color: WHITE
+                            },
                             stroke: {
                                 color: WHITE
                             }
@@ -1993,7 +2101,9 @@ var __meta__ = {
                         stroke: {
                             color: WHITE
                         },
-                        background: WHITE
+                        fill: {
+                            color: WHITE
+                        }
                     }
                 },
                 select: {
@@ -2011,7 +2121,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: "#414550",
+                        fill: {
+                            color: "#414550"
+                        },
                         stroke: {
                             color: WHITE
                         }
@@ -2190,14 +2302,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#d1d1d1",
+                fill: {
+                    color: "#d1d1d1"
+                },
                 connectorDefaults: {
-                    background: "#686868",
+                    fill: {
+                        color: "#686868"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#686868"
                         }
@@ -2210,12 +2328,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#686868"
                         },
                         hover: {
-                            background: "#686868",
+                            fill: {
+                                color: "#686868"
+                            },
                             stroke: {
                                 color: "#686868"
                             }
@@ -2227,7 +2349,9 @@ var __meta__ = {
                         stroke: {
                             color: "#686868"
                         },
-                        background: "#686868"
+                        fill: {
+                            color: "#686868"
+                        }
                     }
                 },
                 select: {
@@ -2245,7 +2369,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#686868"
                         }
@@ -2427,14 +2553,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#428bca",
+                fill: {
+                    color: "#428bca"
+                },
                 connectorDefaults: {
-                    background: "#333333",
+                    fill: {
+                        color: "#333333"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#333333"
                         }
@@ -2447,12 +2579,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#333333"
                         },
                         hover: {
-                            background: "#333333",
+                            fill: {
+                                color: "#333333"
+                            },
                             stroke: {
                                 color: "#333333"
                             }
@@ -2464,7 +2600,9 @@ var __meta__ = {
                         stroke: {
                             color: "#333333"
                         },
-                        background: "#333333"
+                        fill: {
+                            color: "#333333"
+                        }
                     }
                 },
                 select: {
@@ -2482,7 +2620,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#333333"
                         }
@@ -2619,14 +2759,20 @@ var __meta__ = {
         },
         diagram: {
             shapeDefaults: {
-                background: "#10c4b2",
+                fill: {
+                    color: "#10c4b2"
+                },
                 connectorDefaults: {
-                    background: "#363940",
+                    fill: {
+                        color: "#363940"
+                    },
                     stroke: {
                         color: WHITE
                     },
                     hover: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#363940"
                         }
@@ -2639,12 +2785,16 @@ var __meta__ = {
             editable: {
                 resize: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#363940"
                         },
                         hover: {
-                            background: "#363940",
+                            fill: {
+                                color: "#363940"
+                            },
                             stroke: {
                                 color: "#363940"
                             }
@@ -2656,7 +2806,9 @@ var __meta__ = {
                         stroke: {
                             color: "#363940"
                         },
-                        background: "#363940"
+                        fill: {
+                            color: "#363940"
+                        }
                     }
                 },
                 select: {
@@ -2674,7 +2826,9 @@ var __meta__ = {
                 },
                 select: {
                     handles: {
-                        background: WHITE,
+                        fill: {
+                            color: WHITE
+                        },
                         stroke: {
                             color: "#363940"
                         }

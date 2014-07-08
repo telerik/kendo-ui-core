@@ -46,9 +46,12 @@
             CascadingRouter = diagram.CascadingRouter,
             isUndefined = Utils.isUndefined,
             isDefined = Utils.isDefined,
+            defined = dataviz.util.defined,
             isArray = $.isArray,
             isFunction = kendo.isFunction,
-            isString = Utils.isString;
+            isString = Utils.isString,
+
+            math = Math;
 
         // Constants ==============================================================
         var NS = ".kendoDiagram",
@@ -74,6 +77,8 @@
             SINGLE = "single",
             NONE = "none",
             MULTIPLE = "multiple",
+            DEFAULT_CANVAS_WIDTH = 600,
+            DEFAULT_CANVAS_HEIGHT = 600,
             DEFAULT_SHAPE_TYPE = "rectangle",
             DEFAULT_SHAPE_WIDTH = 100,
             DEFAULT_SHAPE_HEIGHT = 100,
@@ -89,7 +94,13 @@
             ALL = "all",
             ABSOLUTE = "absolute",
             TRANSFORMED = "transformed",
-            ROTATED = "rotated";
+            ROTATED = "rotated",
+            TRANSPARENT = "transparent",
+            WIDTH = "width",
+            HEIGHT = "height",
+            X = "x",
+            Y = "y",
+            MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS;
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -115,6 +126,7 @@
             var defaults = {
                 type: DEFAULT_SHAPE_TYPE,
                 path: "",
+                autoSize: true,
                 visual: null,
                 x: DEFAULT_SHAPE_POSITION,
                 y: DEFAULT_SHAPE_POSITION,
@@ -134,21 +146,19 @@
             return defaults;
         };
 
-        var PanAdapter = kendo.Class.extend({
-            init: function (panState) {
-                this.pan = panState.pan;
-                this.diagram = panState.diagram;
-            },
-            initState: function () {
-                this.from = this.diagram.pan();
-                this.to = this.pan;
-            },
-            update: function (tick) {
-                var diagram = this.diagram;
-                diagram._storePan(new Point(this.from.x + (this.to.x - this.from.x) * tick, this.from.y + (this.to.y - this.from.y) * tick));
-                diagram._transformMainLayer();
+        function mwDelta(e) {
+            var origEvent = e.originalEvent,
+                delta = 0;
+
+            if (origEvent.wheelDelta) {
+                delta = -origEvent.wheelDelta / 40;
+                delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+            } else if (origEvent.detail) {
+                delta = origEvent.detail;
             }
-        });
+
+            return delta;
+        }
 
         function isAutoConnector(connector) {
             return connector.options.name.toLowerCase() === AUTO.toLowerCase();
@@ -212,7 +222,7 @@
                         if (!isAutoConnector(sourceConnector)) {
                             var currentSourcePoint = sourceConnector.position(),
                                 currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
-                            var dist = Math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
+                            var dist = math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
                             if (dist < minDist) {
                                 minDist = dist;
                                 connection._resolvedSourceConnector = sourceConnector;
@@ -241,11 +251,12 @@
 
         function indicesOfItems(group, visuals) {
             var i, indices = [], visual;
+            var children = group.drawingContainer().children;
+            var length = children.length;
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                for (var j = 0; j < group.children.length; j++) {
-                    var other = group.children[j];
-                    if (other == visual.domElement) {
+                for (var j = 0; j < length; j++) {
+                    if (children[j] == visual.drawingContainer()) {
                         indices.push(j);
                         break;
                     }
@@ -273,10 +284,12 @@
                 that.isSelected = false;
                 that.dataItem = dataItem;
                 that.visual = new Group({
-                    id: that.options.id
+                    id: that.options.id,
+                    autoSize: that.options.autoSize
                 });
                 that._template();
             },
+
             options: {
                 hover: {},
                 cursor: Cursors.grip,
@@ -325,32 +338,30 @@
             },
             content: function (content) {
                 if (content !== undefined) {
-                    var bounds = this.bounds(),
-                        options = deepExtend({ text: "", width: bounds.width, height: bounds.height }, this.options.content);
+                    var options = this.options;
+                    var bounds = this.bounds();
 
                     if (diagram.Utils.isString(content)) {
-                        this.options.content.text = content;
-                        options.text = content;
+                        options.content.text = content;
                     } else {
-                        this.options.content = options;
+                        deepExtend(options.content, content);
                     }
 
-                    if (this.shapeVisual instanceof TextBlock) {
-                        this._contentVisual = this.shapeVisual;
-                    }
+                    var contentOptions = options.content;
+                    var contentVisual = this._contentVisual;
 
-                    if (!this._contentVisual && this.options.content.text) {
-                        this._contentVisual = new TextBlock();
+                    if (!contentVisual && contentOptions.text) {
+                        this._contentVisual = new TextBlock(contentOptions);
+                        this._contentVisual._includeInBBox = false;
                         this.visual.append(this._contentVisual);
-                    }
-
-                    if (this._contentVisual) {
-                        this._contentVisual.redraw(options);
+                    } else if (contentVisual) {
+                        contentVisual.redraw(contentOptions);
                     }
                 }
 
                 return this.options.content.text;
             },
+
             _hitTest: function (point) {
                 var bounds = this.bounds();
                 return this.visible() && bounds.contains(point) && this.options.enable;
@@ -380,7 +391,9 @@
             options: {
                 width: 7,
                 height: 7,
-                background: DEFAULT_CONNECTION_BACKGROUND,
+                fill: {
+                    color: DEFAULT_CONNECTION_BACKGROUND
+                },
                 hover: {}
             },
             position: function () {
@@ -423,15 +436,16 @@
                 that.type = options.type;
                 that.shapeVisual = Shape.createShapeVisual(that.options);
                 that.visual.append(this.shapeVisual);
-                that.bounds(new Rect(options.x, options.y, Math.floor(options.width), Math.floor(options.height)));
+                that.updateBounds();
+                that.content(that.content());
+
                 // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
                 that._createConnectors();
                 that.parentContainer = null;
                 that.isContainer = false;
                 that.isCollapsed = false;
-                that.id = that.visual.domElement.id;
-                that.content(that.content());
-                that._rotate();
+                that.id = that.visual.id;
+
                 if (options.hasOwnProperty("layout") && options.layout!==undefined) {
                     // pass the defined shape layout, it overtakes the default resizing
                     that.layout = options.layout.bind(options);
@@ -439,6 +453,39 @@
             },
 
             options: diagram.shapeDefaults(),
+
+            updateBounds: function() {
+                var bounds = this.visual._measure(true);
+                var options = this.options;
+                this.bounds(new Rect(options.x, options.y, bounds.width, bounds.height));
+                this._rotate();
+                this._alignContent();
+            },
+
+            content: function(content) {
+                if (defined(content)) {
+                    DiagramElement.fn.content.call(this, content);
+                    this._alignContent();
+                    return this;
+                } else {
+                    return this.options.content.text;
+                }
+            },
+
+            _alignContent: function() {
+                var contentOptions = this.options.content || {};
+                var contentVisual = this._contentVisual;
+                if (contentVisual && contentOptions.align) {
+                    var containerRect = this.visual._measure();
+                    var aligner = new diagram.RectAlign(containerRect);
+                    var contentBounds = contentVisual.drawingElement.bbox(null);
+
+                    var contentRect = new Rect(0, 0, contentBounds.width(), contentBounds.height());
+                    var alignedBounds = aligner.align(contentRect, contentOptions.align);
+
+                    contentVisual.position(alignedBounds.topLeft());
+                }
+            },
 
             _createConnectors: function() {
                 var options = this.options,
@@ -458,8 +505,8 @@
             },
 
             bounds: function (value) {
-                var point, size, bounds, options;
-                options = this.options;
+                var bounds;
+
                 if (value) {
                     if (isString(value)) {
                         switch (value) {
@@ -478,32 +525,36 @@
                             default:
                                 bounds = this._bounds;
                         }
-                    } else { // we assume Rect.
-                        point = value.topLeft();
-                        options.x = point.x;
-                        options.y = point.y;
-                        options.width = Math.max(value.width, options.minWidth);
-                        options.height = Math.max(value.height, options.minHeight);
-                        this._bounds = new Rect(options.x, options.y, options.width, options.height);
-                        this.visual.position(point);
-                        this.redraw({ width: options.width, height: options.height });
+                    } else {
+                        this._setBounds(value);
                         this.refreshConnections();
                         this._triggerBoundsChange();
                     }
                 } else {
                     bounds = this._bounds;
-                } if (!this.shapeVisual._measured) { // no dimensions, assuming autosize for paths, groups...
-                    size = this.shapeVisual._measure();
-                    if (size) {
-                        if (this.shapeVisual.options.autoSize) {
-                            this.bounds(new Rect(options.x, options.y, size.width, size.height));
-                        } else {
-                            this.shapeVisual.redraw();
-                        }
-                    }
                 }
+
                 return bounds;
             },
+
+            _setBounds: function(rect) {
+                var options = this.options;
+                var topLeft = rect.topLeft();
+                var x = options.x = topLeft.x;
+                var y = options.y = topLeft.y;
+                var width = options.width = math.max(rect.width, options.minWidth);
+                var height = options.height = math.max(rect.height, options.minHeight);
+
+                this._bounds = new Rect(x, y, width, height);
+
+                this.visual.redraw({
+                    x: x,
+                    y: y,
+                    width: width,
+                    height: height
+                });
+            },
+
             position: function (point) {
                 if (point) {
                     this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
@@ -553,6 +604,7 @@
                     }
                 }
             },
+
             rotate: function (angle, center) { // we assume the center is always the center of the shape.
                 var rotate = this.visual.rotate();
                 if (angle !== undefined) {
@@ -581,6 +633,7 @@
 
                 return rotate;
             },
+
             connections: function (type) { // in, out, undefined = both
                 var result = [], i, j, con, cons, ctr;
 
@@ -635,25 +688,51 @@
             },
             getPosition: function (side) {
                 var b = this.bounds(),
-                    fnName = side[0].toLowerCase() + side.slice(1);
+                    fnName = side.charAt(0).toLowerCase() + side.slice(1);
                 if (isFunction(b[fnName])) {
                     return this._transformPoint(b[fnName]());
                 }
                 return b.center();
             },
+
             redraw: function (options) {
                 if (options) {
-                    this.options = deepExtend({}, this.options, options);
-                }
+                    var shapeOptions = this.options;
+                    var boundsChange;
 
-                if (this._contentVisual) {
-                    this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
-                }
-                this.shapeVisual.redraw(options);
-                if (options && options.content) {
-                    this.content(options.content);
+                    this.shapeVisual.redraw(this._visualOptions(options));
+
+                    if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
+                        this.bounds(new Rect(shapeOptions.x, shapeOptions.y, shapeOptions.width, shapeOptions.height));
+                        boundsChange = true;
+                    }
+
+                    shapeOptions = deepExtend(shapeOptions, options);
+
+                    if  (options.rotation || boundsChange) {
+                        this._rotate();
+                    }
+
+                    if (options.content) {
+                        this.content(options.content);
+                    }
                 }
             },
+
+            _diffNumericOptions: diagram.diffNumericOptions,
+
+            _visualOptions: function(options) {
+                return {
+                    data: options.path,
+                    source: options.source,
+                    hover: options.hover,
+                    fill: options.fill,
+                    stroke: options.stroke,
+                    startCap: options.startCap,
+                    endCap: options.endCap
+                };
+            },
+
             _triggerBoundsChange: function () {
                 if (this.diagram) {
                     this.diagram.trigger(ITEMBOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
@@ -693,19 +772,19 @@
                 var options = this.options,
                     hover = options.hover,
                     stroke = options.stroke,
-                    background = options.background;
+                    fill = options.fill;
 
                 if (value && isDefined(hover.stroke)) {
                     stroke = deepExtend({}, stroke, hover.stroke);
                 }
 
-                if (value && isDefined(hover.background)) {
-                    background = hover.background;
+                if (value && isDefined(hover.fill)) {
+                    fill = hover.fill;
                 }
 
                 this.shapeVisual.redraw({
                     stroke: stroke,
-                    background: background
+                    fill: fill
                 });
 
                 this.diagram._showConnectors(this, value);
@@ -734,26 +813,6 @@
                 visualTemplate = shapeDefaults.visual, // Shape visual should not have position in its parent group.
                 type = shapeDefaults.type;
 
-            function externalLibraryShape(libraryShapeName, options, shapeDefaults) {
-                // if external serializationSource we need to consult the attached libraries
-                // shapeDefaults.diagram is set when the diagram starts deserializing
-                if (diagram.libraries && diagram.libraries.length > 0) {
-                    for (var i = 0; i < diagram.libraries.length; i++) {
-                        var library = diagram.libraries[i];
-                        for (var j = 0; j < library.length; j++) {
-                            var shapeDefinition = library[j];
-                            if (shapeDefinition.options.name === libraryShapeName && shapeDefinition.options.serializationSource === "external") {
-                                // the JSON options do not contain the funcs managing the complex layout, so need to transfer them
-                                options.layout = shapeDefinition.options.layout;
-                                options.visual = shapeDefinition.options.visual;
-                                options.rebuild = shapeDefinition.options.rebuild;
-                                return shapeDefinition.options.visual(shapeDefaults);
-                            }
-                        }
-                    }
-                }
-            }
-
             function simpleShape(name, shapeDefaults) {
                 switch (name.toLocaleLowerCase()) {
                     case "rectangle":
@@ -764,8 +823,6 @@
                         return new TextBlock(shapeDefaults);
                     case "image":
                         return new Image(shapeDefaults);
-                    case "svg":
-                        return svgShape(shapeDefaults.definition);
                     default:
                         var p = new Path(shapeDefaults);
                         return p;
@@ -782,38 +839,10 @@
                 return func.call(context, shapeDefaults);
             }
 
-            var parseXml;
-
-            if (typeof window.DOMParser != "undefined") {
-                parseXml = function (xmlStr) {
-                    return ( new window.DOMParser() ).parseFromString(xmlStr, "image/svg+xml");
-                };
-            } else if (typeof window.ActiveXObject != "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
-                parseXml = function (xmlStr) {
-                    var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
-                    xmlDoc.async = "false";
-                    xmlDoc.loadXML(xmlStr);
-                    return xmlDoc;
-                };
-            } else {
-                throw new Error("No XML parser found");
-            }
-
-            function svgShape(svgString) {
-                var fullString = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">' + svgString + '</svg>';
-                var result = parseXml(fullString);
-                var importedNode = document.importNode(result.childNodes[0].childNodes[0], true);
-                var g = new Group();
-                g.append(new Visual(importedNode));
-                return g;
-            }
-
-            if (!kendo.isFunction(visualTemplate) && shapeDefaults.serializationSource === "external") {
-                return externalLibraryShape(shapeDefaults.name, options, shapeDefaults);
+            if (isFunction(visualTemplate)) { // custom template
+                return functionShape(visualTemplate, this, shapeDefaults);
             } else if (shapeDefaults.path) {
                 return pathShape(shapeDefaults.path, shapeDefaults);
-            } else if (isFunction(visualTemplate)) { // custom template
-                return functionShape(visualTemplate, this, shapeDefaults);
             } else if (isString(type)) {
                 return simpleShape(shapeDefaults.type.toLocaleLowerCase(), shapeDefaults);
             } else {
@@ -829,15 +858,15 @@
                 var that = this;
                 DiagramElement.fn.init.call(that, options, dataItem);
                 that._router = new PolylineRouter(this);
-                that.path = new Path(that.options);
-                that.path.background(NONE);
+                that.path = new diagram.Polyline(that.options);
+                that.path.fill(TRANSPARENT);
                 that.visual.append(that.path);
                 that._sourcePoint = that._targetPoint = new Point();
                 that.source(from);
                 that.target(to);
-                that.content(that.options.content.text);
+                that.content(that.options.content);
                 that.definers = [];
-                if (isDefined(options) && options.points) {
+                if (defined(options) && options.points) {
                     that.points(options.points);
                 }
                 that.refresh();
@@ -992,7 +1021,9 @@
 
             content: function(content) {
                 var result = DiagramElement.fn.content.call(this, content);
-                this.refresh();
+                if (defined(content)) {
+                    this.refresh();
+                }
 
                 return result;
             },
@@ -1135,14 +1166,28 @@
                     this.adorner.refresh();
                 }
             },
+
             redraw: function (options) {
-                this.options = deepExtend({}, this.options, options);
-                this.content(this.options.content.text);
-                if (isDefined(this.options.points) && this.options.points.length > 0) {
-                    this.points(this.options.points);
-                    this._refreshPath();
+                if (options) {
+                    this.options = deepExtend({}, this.options, options);
+
+                    var points = this.options.points;
+
+                    if (options && options.content) {
+                        this.content(options.content);
+                    }
+
+                    if (defined(points) && points.length > 0) {
+                        this.points(points);
+                        this._refreshPath();
+                    }
+                    this.path.redraw({
+                        fill: options.fill,
+                        stroke: options.stroke,
+                        startCap: options.startCap,
+                        endCap: options.endCap
+                    });
                 }
-                this.path.redraw(options);
             },
             /**
              * Returns a clone of this connection.
@@ -1189,6 +1234,7 @@
                     }
                 }
             },
+
             _hover: function (value) {
                 var color = (this.options.stroke || {}).color;
 
@@ -1202,40 +1248,28 @@
                     }
                 });
             },
-            /**
-             * Using the current router with the endpoints and intermediate points, this returns the Path data to be drawn.
-             * @private
-             */
-            _calcPathData: function () {
+
+            _refreshPath: function () {
+                if (!defined(this.path)) {
+                    return;
+                }
+                this._drawPath();
+                this.bounds(this._router.getBounds());
+            },
+
+            _drawPath: function () {
                 if (this._router) {
                     this._router.route(); // sets the intermediate points
                 }
-                function pr(point) {
-                    return point.x + " " + point.y;
-                }
-
-                // for now let's take the heuristic approach, more complete API later
-                var from = this.sourcePoint();
-                var end = this.targetPoint();
-                var data = "M" + pr(from);
-
+                var source = this.sourcePoint();
+                var target = this.targetPoint();
                 var points = this.points();
-                for (var i = 0; i < points.length; i++) {
-                    var point = points[i];
-                    data += " L" + pr(point);
-                }
-                return data + " L" + pr(end);
+
+                this.path.redraw({
+                    points: [source].concat(points, [target])
+                });
             },
-            _refreshPath: function () {
-                if (isUndefined(this.path)) {
-                    return;
-                }
-                this._drawPath(this._calcPathData());
-                this.bounds(this._router.getBounds());
-            },
-            _drawPath: function (data) {
-                this.path.redraw({ data: data  });
-            },
+
             _clearSourceConnector: function () {
                 Utils.remove(this.sourceConnector.connections, this);
                 this.sourceConnector = undefined;
@@ -1256,62 +1290,51 @@
                 Widget.fn.init.call(that, element);
                 that.options = deepExtend({}, that.options, userOptions);
                 that.bind(that.events, that.options);
-                element = that.element; // the hosting element
-                element.empty();
+
+                that._initElements();
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
 
-                that.element.addClass("k-widget k-diagram").attr("role", "diagram");
-                var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
-                that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
-                if (that.options.useScroller) {
-                    that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
-                }
+                that._initCanvas();
 
-                this.mainLayer = new Group({
+                that.mainLayer = new Group({
                     id: "main-layer"
                 });
-                this.canvas.append(this.mainLayer);
+                that.canvas.append(that.mainLayer);
 
-                this._pan = new Point();
-                this._adorners = [];
-                this.adornerLayer = new Group({
+                that._pan = new Point();
+                that._adorners = [];
+                that.adornerLayer = new Group({
                     id: "adorner-layer"
                 });
-                this.canvas.append(this.adornerLayer);
-                this.libraries = []; // shape libraries needed to deserialize complex shapes/controls with composite geometries and layout
-                this.toolService = new ToolService(this);
-                this._attachEvents();
+                that.canvas.append(that.adornerLayer);
+
+                that.toolService = new ToolService(that);
+
+                that._attachEvents();
+
                 that._initialize();
                 that._fetchFreshData();
-                this._resizingAdorner = new ResizingAdorner(this, { editable: this.options.editable });
-                this._connectorsAdorner = new ConnectorsAdorner(this);
+                that._resizingAdorner = new ResizingAdorner(that, { editable: that.options.editable });
+                that._connectorsAdorner = new ConnectorsAdorner(that);
 
-                this._adorn(this._resizingAdorner, true);
-                this._adorn(this._connectorsAdorner, true);
-                that.element
-                    .on("mousemove" + NS, proxy(that._mouseMove, that))
-                    .on("mouseup" + NS, proxy(that._mouseUp, that))
-                    .on("dblclick" + NS, proxy(that._doubleClick, that))
-                    .on("mousedown" + NS, proxy(that._mouseDown, that))
-                    .mousewheel(proxy(that._wheel, that), { ns: NS })
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("mouseover" + NS, proxy(that._mouseover, that))
-                    .on("mouseout" + NS, proxy(that._mouseout, that));
+                that._adorn(that._resizingAdorner, true);
+                that._adorn(that._connectorsAdorner, true);
+
                 that.selector = new Selector(that);
                 // TODO: We may consider using real Clipboard API once is supported by the standard.
                 that._clipboard = [];
-                that._initEditor();
 
                 if (that.options.layout) {
                     that.layout(that.options.layout);
                 }
-                this.pauseMouseHandlers = false;
+                that.pauseMouseHandlers = false;
 
                 that._createShapes();
                 that._createConnections();
                 that.zoom(that.options.zoom);
-                that._autosizeCanvas();
+
+                that.canvas.draw();
             },
             options: {
                 name: "Diagram",
@@ -1329,18 +1352,13 @@
                     resize: {},
                     text: true
                 },
-                useScroller: true,
                 tooltip: { enabled: true, format: "{0}" },
                 copy: {
                     enabled: true,
                     offsetX: 20,
                     offsetY: 20
                 },
-                editor: {
-                    height: 20,
-                    margin: 10,
-                    fontSize: 15
-                },
+
                 selectable: { // none, extended, multiple
                     type: MULTIPLE,
                     inclusive: true
@@ -1358,15 +1376,55 @@
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
 
+            _initElements: function() {
+                this.wrapper = this.element.empty()
+                    .css("position", "relative")
+                    .attr("tabindex", 0)
+                    .addClass("k-widget k-diagram");
+
+                this.scrollable = $("<div />").appendTo(this.element);
+            },
+
+            _initCanvas: function() {
+                var canvasContainer = $("<div class='k-layer'></div>").appendTo(this.scrollable)[0];
+                var viewPort = this.viewport();
+                this.canvas = new Canvas(canvasContainer, {
+                    width: viewPort.width || DEFAULT_CANVAS_WIDTH,
+                    height: viewPort.height || DEFAULT_CANVAS_HEIGHT
+                });
+            },
+
+            _attachEvents: function () {
+                var that = this;
+                that.element
+                    .on("mousemove" + NS, proxy(that._mouseMove, that))
+                    .on("mouseup" + NS, proxy(that._mouseUp, that))
+                    .on("mousedown" + NS, proxy(that._mouseDown, that))
+                    .on(MOUSEWHEEL_NS, proxy(that._wheel, that))
+                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("mouseover" + NS, proxy(that._mouseover, that))
+                    .on("mouseout" + NS, proxy(that._mouseout, that));
+
+                kendo.onResize(function() {
+                    that.resize();
+                });
+            },
+
+            _resize: function(size) {
+                this.canvas.size(size);
+            },
+
             _mouseover: function(e) {
-                if (e.target._hover) {
-                    e.target._hover(true, e.target._kendoElement);
+                var node = e.target._kendoNode;
+                if (node && node.srcElement._hover) {
+                    node.srcElement._hover(true, node.srcElement);
                 }
             },
 
             _mouseout: function(e) {
-                if (e.target._hover) {
-                    e.target._hover(false, e.target._kendoElement);
+                var node = e.target._kendoNode;
+                if (node && node.srcElement._hover) {
+                    node.srcElement._hover(false, node.srcElement);
                 }
             },
 
@@ -1459,11 +1517,33 @@
 
                 return json;
             },
-            focus: function () {
-                var x = window.scrollX, y = window.scrollY;
-                this.canvas.focus();
-                window.scrollTo(x, y); // prevent the annoying scroll to top of the canvas (div).
+
+            focus: function() {
+                if (!this.element.is(kendo._activeElement())) {
+                    var element = this.element,
+                        scrollContainer = element[0],
+                        containers = [],
+                        offsets = [],
+                        documentElement = document.documentElement,
+                        i;
+
+                    do {
+                        scrollContainer = scrollContainer.parentNode;
+
+                        if (scrollContainer.scrollHeight > scrollContainer.clientHeight) {
+                            containers.push(scrollContainer);
+                            offsets.push(scrollContainer.scrollTop);
+                        }
+                    } while (scrollContainer != documentElement);
+
+                    element.focus();
+
+                    for (i = 0; i < containers.length; i++) {
+                        containers[i].scrollTop = offsets[i];
+                    }
+                }
             },
+
             load: function(options) {
                 this.clear();
 
@@ -1473,9 +1553,6 @@
             },
             clear: function () {
                 var that = this;
-                if (that.dataSource) {
-                    that._unbindDataSource();
-                }
 
                 that.select(false);
                 that.mainLayer.clear();
@@ -1714,12 +1791,11 @@
                     items = this._selectedItems.slice();
                 }
                 var result = this._getDiagramItems(items), indices;
-                if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
+                if (!defined(undoable) || undoable) {
+                    indices = indicesOfItems(this.mainLayer, result.visuals);
                     var unit = new ToFrontUnit(this, items, indices);
                     this.undoRedoService.add(unit);
-                }
-                else {
+                } else {
                     this.mainLayer.toFront(result.visuals);
                     this._fixOrdering(result, true);
                 }
@@ -1734,8 +1810,8 @@
                     items = this._selectedItems.slice();
                 }
                 var result = this._getDiagramItems(items), indices;
-                if (isUndefined(undoable) || undoable) {
-                    indices = indicesOfItems(this.mainLayer.domElement, result.visuals);
+                if (!defined(undoable) || undoable) {
+                    indices = indicesOfItems(this.mainLayer, result.visuals);
                     var unit = new ToBackUnit(this, items, indices);
                     this.undoRedoService.add(unit);
                 }
@@ -1751,35 +1827,45 @@
              * "Center middle" will position the items in the center. animate - controls if the pan should be animated.
              */
             bringIntoView: function (item, options) { // jQuery|Item|Array|Rect
-                var rect,
-                    viewport = this.viewport();
+                var viewport = this.viewport();
+                var aligner = new diagram.RectAlign(viewport);
+                var current, rect, original, newPan;
+
+                if (viewport.width === 0 || viewport.height === 0) {
+                    return;
+                }
 
                 options = deepExtend({animate: false, align: "center middle"}, options);
+                if (options.align == "none") {
+                    options.align = "center middle";
+                }
+
                 if (item instanceof DiagramElement) {
                     rect = item.bounds(TRANSFORMED);
-                }
-                else if (isArray(item)) {
+                } else if (isArray(item)) {
                     rect = this.boundingBox(item);
-                }
-                else if (item instanceof Rect) {
+                } else if (item instanceof Rect) {
                     rect = item.clone();
                 }
-                if (options.align !== "none" || !viewport.contains(rect.center())) {
-                    if (options.align === "none") {
-                        options.align = "center middle";
-                    }
-                    var old = rect.clone(),
-                        align = new diagram.RectAlign(viewport);
 
-                    align.align(rect, options.align);
+                original = rect.clone();
 
-                    var newPan = rect.topLeft().minus(old.topLeft());
-                    if (!this.options.useScroller) {
-                        newPan = this.pan().plus(newPan);
-                    }
-                    this.pan(newPan, options.animate);
+                rect.zoom(this._zoom);
+                this._storePan(new Point());
+
+                if (rect.width > viewport.width || rect.height > viewport.height) {
+                    this._zoom = this._getValidZoom(math.min(viewport.width / original.width, viewport.height / original.height));
+                    rect = original.clone().zoom(this._zoom);
                 }
+                this._zoomMainLayer();
+
+                current = rect.clone();
+                aligner.align(rect, options.align);
+
+                newPan = rect.topLeft().minus(current.topLeft());
+                this.pan(newPan.times(-1), options.animate);
             },
+
             alignShapes: function (direction) {
                 if (isUndefined(direction)) {
                     direction = "Left";
@@ -1809,16 +1895,16 @@
                     if (item instanceof Shape) {
                         switch (direction.toLowerCase()) {
                             case "left":
-                                val = Math.min(val, item.options.x);
+                                val = math.min(val, item.options.x);
                                 break;
                             case "top":
-                                val = Math.min(val, item.options.y);
+                                val = math.min(val, item.options.y);
                                 break;
                             case "right":
-                                val = Math.max(val, item.options.x);
+                                val = math.max(val, item.options.x);
                                 break;
                             case "bottom":
-                                val = Math.max(val, item.options.y);
+                                val = math.max(val, item.options.y);
                                 break;
                         }
                     }
@@ -1853,11 +1939,11 @@
                     zoom = this._zoom = this._getValidZoom(zoom);
 
                     if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
-                        staticPoint = new diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
+                        staticPoint = new diagram.Point(math.round(staticPoint.x), math.round(staticPoint.y));
                         var zoomedPoint = staticPoint.times(zoom);
                         var viewportVector = this.modelToView(staticPoint);
                         var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
-                        this._storePan(new diagram.Point(Math.round(raw.x), Math.round(raw.y)));
+                        this._storePan(new diagram.Point(math.round(raw.x), math.round(raw.y)));
                     }
 
                     if (options) {
@@ -1866,27 +1952,38 @@
 
                     this._panTransform();
 
-                    this._autosizeCanvas();
                     this._updateAdorners();
                 }
 
                 return this._zoom;
             },
 
-            pan: function (pan, options) {
-                options = options || {animated: false};
-                var animated = options.animated;
-                if (pan instanceof Point && !pan.equals(this._pan)) {
-                    this._animatePan(pan, !animated);
-                    this._storePan(pan);
-
-                    this.trigger(PAN, {total: pan, delta: options.delta});
-                    this._autosizeCanvas();
-                    this._updateAdorners();
+            _getPan: function(pan) {
+                var canvas = this.canvas;
+                if (!canvas.translate) {
+                    pan = pan.plus(this._pan);
                 }
-
-                return this._pan;
+                return pan;
             },
+
+            pan: function (pan, animate) {
+                if (pan instanceof Point) {
+                    var that = this;
+                    var scroller = that.scroller;
+                    pan = that._getPan(pan);
+                    pan = pan.times(-1);
+
+                    if (animate) {
+                        scroller.animatedScrollTo(pan.x, pan.y, function() {
+                            that._updateAdorners();
+                        });
+                    } else {
+                        scroller.scrollTo(pan.x, pan.y);
+                        that._updateAdorners();
+                    }
+                }
+            },
+
             viewport: function () {
                 var element = this.element;
 
@@ -1995,12 +2092,12 @@
                 return rect;
             },
             documentToView: function(point) {
-                var containerOffset = $(this.canvas.element).offset();
+                var containerOffset = this.element.offset();
 
                 return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
             },
             viewToDocument: function(point) {
-                var containerOffset = $(this.canvas.element).offset();
+                var containerOffset = this.element.offset();
 
                 return new Point(point.x + containerOffset.left, point.y + containerOffset.top);
             },
@@ -2017,7 +2114,12 @@
                 return this._transformWithMatrix(point, this._layerMatrixInvert);
             },
             documentToModel: function(point) {
-                return this.viewToModel(this.documentToView(point));
+                var viewPoint = this.documentToView(point);
+                if (!this.canvas.translate) {
+                    viewPoint.x = viewPoint.x + this.scroller.scrollLeft;
+                    viewPoint.y = viewPoint.y + this.scroller.scrollTop;
+                }
+                return this.viewToModel(viewPoint);
             },
             modelToDocument: function(point) {
                 return this.viewToDocument(this.modelToView(point));
@@ -2097,112 +2199,44 @@
             getShapeById: function (id) {
                 var found;
                 found = Utils.first(this.shapes, function (s) {
-                    return s.visual.domElement.id === id;
+                    return s.visual.id === id;
                 });
                 if (found) {
                     return found;
                 }
                 found = Utils.first(this.connections, function (c) {
-                    return c.visual.domElement.id === id;
+                    return c.visual.id === id;
                 });
                 return found;
             },
-            /**
-             * Shows the built-in editor of target item.
-             * @options object. Preset options to customize the editor look and behavior.
-             */
-            editor: function (item, options) { // support custome editors via the options for vNext
-                var editor = this._editor;
-                if (isUndefined(item.options.editable) || item.options.editable.text) {
-                    editor.options = deepExtend(this.options.editor, options);
-                    this._editItem = item;
-                    this._showEditor();
-                    var shapeContent = item.content();
-                    editor._originalContent = shapeContent;
-                    editor.content(shapeContent);
-                    editor.focus();
-                }
-                return editor;
-            },
-            _initEditor: function () {
-                this._editor = new diagram.TextBlockEditor();
-                this._editor.bind("finishEdit", $.proxy(this._finishEditShape, this));
-            },
-            _showEditor: function () {
-                var editor = this._editor;
 
-                editor.visible(true);
-                this.element.context.appendChild(editor.domElement);
-                this._positionEditor();
-            },
-            _positionEditor: function () {
-                var editor = this._editor,
-                    options = editor.options,
-                    nativeEditor = $(editor.domElement),
-                    bounds = this.modelToView(this._editItem.bounds()),
-                    cssDim = function (prop) {
-                        return parseInt(nativeEditor.css(prop), 10);
-                    },
-                    nativeOffset = new Point(cssDim("borderLeftWidth") + cssDim("paddingLeft"), cssDim("borderTopWidth") + cssDim("paddingTop")),
-                    formattingOffset = new Point(options.margin, bounds.height / 2 - options.height / 2).minus(nativeOffset);
-
-                editor.size((bounds.width - 2 * options.margin), options.height);
-                editor.position(bounds.topLeft().plus(formattingOffset));
-                nativeEditor.css({ fontSize: options.fontSize });
-            },
             _extendLayoutOptions: function(options) {
                 if(options.layout) {
                     options.layout = deepExtend(diagram.LayoutBase.fn.defaultOptions || {}, options.layout);
                 }
             },
-            _finishEditShape: function () {
-                var editor = this._editor, item = this._editItem;
-                if (item) {
-                    var unit = new diagram.ContentChangedUndoUnit(item, editor._originalContent, editor.content());
-                    this.undoRedoService.add(unit);
-                    editor.visible(false);
-                }
-            },
+
             _selectionChanged: function (selected, deselected) {
                 if (selected.length || deselected.length) {
                     this.trigger(SELECT, { selected: selected, deselected: deselected });
                 }
             },
             _getValidZoom: function (zoom) {
-                return Math.min(Math.max(zoom, this.options.minZoom), this.options.maxZoom);
+                return math.min(math.max(zoom, this.options.minZoom), this.options.maxZoom);
             },
             _panTransform: function (pos) {
                 var diagram = this,
                     pan = pos || diagram._pan;
 
-                if (this.scroller) {
+                if (diagram.canvas.translate) {
                     diagram.scroller.scrollTo(pan.x, pan.y);
                     diagram._zoomMainLayer();
-                }
-                else {
-                    diagram._pan = pan;
+                } else {
+                    diagram._storePan(pan);
                     diagram._transformMainLayer();
                 }
             },
-            _animatePan: function (pan, skipAnimation) {
-                var diagram = this;
 
-                if (skipAnimation) {
-                    this._panTransform(pan);
-                } else {
-                    if (diagram.scroller) {
-                        diagram.scroller.animatedScrollTo(pan.x, pan.y);
-                        diagram._zoomMainLayer();
-                    } else {
-                        var t = new Ticker();
-                        t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                        t.onStep = function () {
-                            diagram._finishPan();
-                        };
-                        t.play();
-                    }
-                }
-            },
             _finishPan: function () {
                 this.trigger(PAN, {total: this._pan, delta: Number.NaN});
             },
@@ -2214,7 +2248,7 @@
                 var zoom = this._zoom;
 
                 var transform = new CompositeTransform(0, 0, zoom, zoom);
-                transform.render(this.mainLayer.domElement);
+                transform.render(this.mainLayer);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
@@ -2223,7 +2257,7 @@
                     zoom = this._zoom;
 
                 var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
-                transform.render(this.mainLayer.domElement);
+                transform.render(this.mainLayer);
                 this._storeLayerMatrix(transform);
                 this._storeViewMatrix();
             },
@@ -2418,7 +2452,7 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
+                if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
@@ -2434,7 +2468,7 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
+                if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
@@ -2443,24 +2477,20 @@
                     return;
                 }
                 var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
+                if ((e.which === 0 || e.which == 1)&& this.toolService.move(p, this._meta(e))) {
                     e.preventDefault();
                 }
             },
-            _doubleClick: function (e) {
-                var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.doubleClick(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
+
             _keydown: function (e) {
                 if (this.toolService.keyDown(e.keyCode, this._meta(e))) {
                     e.preventDefault();
                 }
             },
             _wheel: function (e) {
-                var p = this._calculatePosition(e),
-                    meta = deepExtend(this._meta(e), { delta: e.data.delta });
+                var delta = mwDelta(e),
+                    p = this._calculatePosition(e),
+                    meta = deepExtend(this._meta(e), { delta: delta });
 
                 if (this.toolService.wheel(p, meta)) {
                     e.preventDefault();
@@ -2487,15 +2517,7 @@
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
             },
-            _attachEvents: function () {
-                var diagram = this;
 
-                if (diagram.scroller) {
-                    diagram.bind(ITEMBOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(CHANGE, $.proxy(this._autosizeCanvas, this));
-                    diagram.bind(ZOOM_END, $.proxy(this._autosizeCanvas, this));
-                }
-            },
             _fetchFreshData: function () {
                 this._dataSource();
                 if (this.options.autoBind) {
@@ -2548,6 +2570,7 @@
                     }
                 }
             },
+
             _showConnectors: function (shape, value) {
                 if (value) {
                     this._connectorsAdorner.show(shape);
@@ -2555,28 +2578,7 @@
                     this._connectorsAdorner.destroy();
                 }
             },
-            _autosizeCanvas: function (args) {
-                if(!this.scroller) { //no need to resize the canvas when no scroller is present
-                    return;
-                }
 
-                var diagram = (args || {}).sender || this,
-                    editor = this._editor,
-                    zoom = diagram.zoom(),
-                    viewport = diagram.element,
-                    viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
-                    cumulativeSize = diagram.boundingBox(diagram.shapes);
-
-                cumulativeSize.width = (cumulativeSize.width + cumulativeSize.x) * zoom;
-                cumulativeSize.height = (cumulativeSize.height + cumulativeSize.y) * zoom;
-
-                cumulativeSize = cumulativeSize.union(viewportSize);
-
-                diagram.canvas.size(cumulativeSize);
-                if (editor && editor.visible()) {
-                    this._positionEditor();
-                }
-            },
             _updateAdorners: function() {
                 var adorners = this._adorners;
 

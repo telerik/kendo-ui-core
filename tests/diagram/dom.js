@@ -1,10 +1,3 @@
-///<reference path="qunit-1.12.0.js" />
-///<reference path="../refs/kendo.core.js" />
-///<reference path="../refs/kendo.dataviz.core.js" />
-///<reference path="../js/diagram.math.js" />
-///<reference path="common.js" />
-///<reference path="mock-helper.js" />
-
 (function() {
     var tolerance = 0.0001,
         dataviz = kendo.dataviz,
@@ -13,214 +6,436 @@
         Geometry = dataviz.diagram.Geometry,
         diagram;
 
-    /*-----------Diagram tests------------------------------------*/
-    module("Diagram tests", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
-        }
+    function createDiagram(options) {
+        QUnit.fixture.html('<div id="canvas" />');
+        diagram = $("#canvas").kendoDiagram(options).getKendoDiagram();
+    }
+
+    function setup() {
+        createDiagram();
+    }
+
+    function teardown() {
+        diagram.destroy();
+    }
+
+    // ------------------------------------------------------------
+    module("Diagram", {
+        setup: setup,
+        teardown: teardown
     });
 
     test("Diagram should have default theme", function () {
         equal(diagram.options.theme, "default");
     });
 
-    test("Basic tests", function () {
-        var found = document.getElementById('SVGRoot');
-        ok(found != null, "The Diagram should add an <SVG/> element with name 'SVGRoot'.");
+    test("inits elements", function () {
+        var element = diagram.element;
+
+        equal(element.attr("tabindex"), 0);
+        equal(element.css("position"), "relative");
+        ok(element.hasClass("k-widget"));
+        ok(element.hasClass("k-diagram"));
+
+        ok(diagram.wrapper);
+        ok(diagram.scrollable);
     });
 
-    test("Adding shape tests", function () {
-        diagram.addShape({
-            id: "TestShape",
-            data: "rectangle",
-            width: 200, height: 100,
-            background: "#778899",
-            x: 100,
-            y: 120
+    test("creates canvas container with class k-layer", function () {
+        equal(diagram.element.find(".k-layer").length, 1);
+    });
+
+    test("sets initial element size to canvas", function () {
+        var width = diagram.element.width();
+        var height = diagram.element.height();
+        var size = diagram.canvas.size();
+        equal(size.width, width);
+        equal(size.height, height);
+    });
+
+    test("_resize sets canvas size ", function () {
+        diagram._resize({
+            width: 300,
+            height: 400
         });
-        var found = document.getElementById("TestShape");
-        ok(found != null, "A SVG shape with name 'TestShape' should be in the HTML tree.");
-        ok(diagram.shapes.length == 1, "Items count should be incremented.");
-        var item = diagram.shapes[0];
-        ok(item.connectors.length == 5, "Item should have 5 connectors.");
-        ok(item.options.id == "TestShape", "The Id should be passed across the hierarchy.");
-
-        item.visible(false);
-        ok(found.attributes["visibility"].value == "hidden", "The visibility should be 'collapsed' now.");
-        item.visible(true);
-        ok(found.attributes["visibility"].value == "visible", "The visibility should be 'visible' now.");
+        var size = diagram.canvas.size();
+        equal(size.width, 300);
+        equal(size.height, 400);
     });
 
-    test("Adding connections", function () {
-        var kendoDiagram = diagram;
-        var shape1 = AddShape(kendoDiagram, new Point(100, 120),
-            kendo.deepExtend(Shapes.SequentialData, {
-                width: 80, height: 80, title: "sequential data"
-            }));
-        shape1.Title = "Sequential Data.";
-        var shape2 = AddShape(kendoDiagram, new Point(100, 400));
-        var shape3 = AddShape(kendoDiagram, new Point(370, 400), Shapes.Wave);
-        var topCor = shape2.getConnector("Top");
-        var topCor2 = shape3.getConnector("Top");
-        var bottomCor = shape1.getConnector("Bottom");
-        var con = AddConnection(kendoDiagram, bottomCor, topCor, {
-            startCap: "ArrowEnd",
-            endCap: "FilledCircle"
-        });
-        var con2 = AddConnection(kendoDiagram, bottomCor, topCor2);
-        con2.content("Connection Label");
-        equal(kendoDiagram.connections.length, 2, "diagram should have 2 connections");
+    test("sets default width and height if element has 0 width or height", function () {
+        diagram.destroy();
+        diagram = $("#canvas").hide().kendoDiagram().getKendoDiagram();
+        var size = diagram.canvas.size();
+        equal(size.width, 600);
+        equal(size.height, 600);
     });
 
-    test("Bring into view - rect", function () {
-        var rect = new Rect(0, 0, 400, 400),
-            viewport = diagram.viewport();
-        diagram.bringIntoView(rect);
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-    });
-
-    test("Bring into view - shape", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds(),
-            viewport = diagram.viewport();
-
-        diagram.bringIntoView(s, {align: "none"});
-        deepEqual(diagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
-
-        diagram.bringIntoView(s);
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-
-    });
-
-    test("Bring into view - many shapes", function () {
-        var s = diagram.addShape({});
-        var point = new Point(500, 500)
-        var s1 = diagram.addShape({
-            x: point.x,
-            y: point.y
-        });
-        var rect = s.bounds().union(s1.bounds()),
-            viewport = diagram.viewport();
-
-        diagram.bringIntoView([s, s1], {center: true});
-        var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-        deepEqual(diagram.pan(), newPan);
-    });
-
-    test("Bring into view - align top right", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds("transformed"),
-            viewport = diagram.viewport();
-
-        var newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan());
-        diagram.bringIntoView([s], {align: "top right"});
-        equal(diagram.pan().x, Math.floor(newPan.x));
-        equal(diagram.pan().y, Math.floor(newPan.y));
-    });
-
-    test("Bring into view - align center bottom", function () {
-        var s = diagram.addShape({});
-        var rect = s.bounds("transformed"),
-            viewport = diagram.viewport();
-
-        var newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan());
-        diagram.bringIntoView([s], {align: "center bottom"});
-        equal(diagram.pan().x, newPan.x);
-        equal(diagram.pan().y, newPan.y);
-    });
-
-    module("initialization", {
+    // ------------------------------------------------------------
+    module("Diagram / add shape", {
         setup: function() {
-            QUnit.fixture.html('<div id=canvas />');
-            window.initLayoutDiagram = function(options) {
-                diagram = $("#canvas").kendoDiagram({ layout: options }).data("kendoDiagram");
+            createDiagram();
+            diagram.addShape({
+                id: "TestShape",
+                data: "rectangle",
+                width: 200, height: 100,
+                background: "#778899",
+                x: 100,
+                y: 120
+            });
+        },
+        teardown: teardown
+    });
+
+    test("adds shape to shapes", function() {
+        equal(diagram.shapes.length, 1);
+    });
+
+    test("appends shape to main layer", function() {
+        var shape = diagram.shapes[0];
+        ok($.inArray(shape.visual.drawingContainer(), diagram.mainLayer.drawingContainer().children) >= 0);
+    });
+
+    test("shape has 5 connectors by default", function() {
+        equal(diagram.shapes[0].connectors.length, 5);
+    });
+
+    test("sets shape id", function() {
+        equal(diagram.shapes[0].options.id, "TestShape");
+    });
+
+    // ------------------------------------------------------------
+    (function() {
+        var shape;
+
+        function setupShapeDefaults(shapeDefaults) {
+            createDiagram({
+                shapeDefaults: shapeDefaults
+            });
+        }
+
+        module("Diagram / shapeDefaults", {
+            teardown: teardown
+        });
+
+        test("default shape type", function() {
+            setupShapeDefaults({type: "circle"});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal("circle", shape.options.type, "the type of the shape should come from shapeDefaults");
+        });
+
+        test("default shape path", function() {
+            setupShapeDefaults({path: "m0,100 L100,100 L50,0z"});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal("m0,100 L100,100 L50,0z", shape.options.path, "path should be set by the shapeDefaults");
+        });
+
+        test("shape is undoable", function() {
+            setupShapeDefaults({});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+
+        module("Diagram / pan", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("pan calls scroller scrollTo method with negated pan", function() {
+            diagram.scroller.scrollTo = function(x, y) {
+                equal(x, -100);
+                equal(y, -200);
             };
-        },
-        teardown: function() {
-            window.removeMocksIn(window.kendo.dataviz.ui.Diagram.fn);
-            delete window.initLayoutDiagram;
-            diagram.destroy();
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan updatesAdorners after scrollTo", function() {
+            var scrollCompleted = false;
+            diagram._updateAdorners = function() {
+                ok(scrollCompleted);
+            };
+            diagram.scroller.scrollTo = function(x, y) {
+                scrollCompleted = true;
+            };
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan calls scroller animatedScrollTo method with negated pan if second parameter is true", function() {
+            diagram.scroller.animatedScrollTo = function(x, y) {
+                equal(x, -100);
+                equal(y, -200);
+            };
+            diagram.pan(new Point(100, 200), true);
+        });
+
+        test("pan updatesAdorners in animatedScrollTo completed callback", function() {
+            var scrollCompleted = false;
+            diagram._updateAdorners = function() {
+                ok(scrollCompleted);
+            };
+
+            diagram.scroller.animatedScrollTo = function(x, y, callback) {
+                scrollCompleted = true;
+                callback();
+            };
+            diagram.pan(new Point(100, 200), true);
+        });
+
+        test("pan adds passed pan to the current stored pan if panning is not handled by the canvas", function() {
+            diagram.scroller.scrollTo = function(x, y) {
+                equal(x, -150);
+                equal(y, -300);
+            };
+            delete diagram.canvas.translate;
+            diagram._pan = new Point(50, 100);
+            diagram.pan(new Point(100, 200));
+        });
+
+        test("pan does not call scroller scrollTo or animatedScrollTo method if no point is passed", 0, function() {
+            diagram.scroller.animatedScrollTo = function() {
+                ok(false);
+            };
+            diagram.scroller.scrollTo = function() {
+                ok(false);
+            };
+
+            diagram.pan()
+        });
+
+    })();
+    // ------------------------------------------------------------
+    (function() {
+        var rect;
+        var shape;
+        var newPan;
+        var viewport = new Rect(0, 0, 800, 600);
+
+        function setupBringIntoView(options) {
+                createDiagram(options);
+                diagram.viewport = function() {
+                    return viewport;
+                };
+                diagram.pan = function(point) {
+                    if (point) {
+                        this._storePan(point);
+                    }
+                    return this._pan;
+                };
+                diagram._zoomMainLayer = function() {};
         }
-    });
 
-    test("grid layout", function () {
-        var diagramFn = kendo.dataviz.ui.Diagram.prototype;
-        diagramFn.layout = diagramFn.layout.mock();
-
-        window.initLayoutDiagram({
-            grid: {
-                width: 600
-            }
+        module("Diagram / bring into view", {
+            setup: function() {
+                setupBringIntoView();
+            },
+            teardown: teardown
         });
 
-        equal(diagram.options.layout.grid.width, 600, "grid width option should be stored");
-        ok(diagramFn.layout.called, "the layout method of the diagram should be called");
-    });
+        test("clears current pan", function () {
+            diagram._storePan = function(pan) {
+                equal(pan.x, 0);
+                equal(pan.y, 0);
+            };
 
-    test("connection is created with 'to' reference to a shape", function() {
-        diagram = $("#canvas").kendoDiagram({
-            shapes: [{id: "s1"}, {id: "s2"}],
-            connections: [{
-                from: { shapeId: "s1", connector: "auto" },
-                to: "s2"
-            }]
-        }).getKendoDiagram();
-
-        equal(diagram.connections.length, 1, "diagram should have a single connection");
-        equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
-    });
-
-    module("shape creation options", {
-        setup: function() {
-            QUnit.fixture.html('<div id=canvas />');
-            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
-        },
-        teardown: function() {
-            diagram.destroy();
-        }
-    });
-
-    test("create path shape", function() {
-        var shape = diagram.addShape({
-            id: "pathShape",
-            path: "m0,100 L100,100 L50,0z"
+            diagram.pan = function() {
+                return this._pan;
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400));
         });
 
-        equal(diagram.shapes.length, 1, "should have a single path");
-        var path = diagram.shapes[0];
-        equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
-    });
-
-    test("create svg shape", function() {
-        var shape = diagram.addShape({
-            id: "pathShape",
-            type: "svg",
-            definition: '<rect ry="7" rx="7" id="svg_2" height="125" width="270" y="0" x="0" stroke-width="0" stroke="#000000" fill="#e1e6e5"/>'
+        test("passes animate option to pan", function () {
+            diagram.pan = function(pan, animate) {
+                ok(animate);
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400), {animate: true});
+            diagram.pan = function(pan, animate) {
+                ok(!animate);
+            };
+            diagram.bringIntoView(new Rect(0, 0, 400, 400), {animate: false});
         });
 
-        equal(diagram.shapes.length, 1, "should have a single group with rect");
-    });
-
-    test("create image shape", function() {
-        var shape = diagram.addShape({
-            id: "imageShape",
-            type: "image",
-            source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+        test("rectangle", function () {
+            rect = new Rect(0, 0, 400, 400);
+            diagram.bringIntoView(rect);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan.times(-1));
         });
 
-        equal(diagram.shapes.length, 1, "should have a single group with rect");
-        var imageShape = diagram.shapes[0];
-        equal(imageShape.shapeVisual.options.source, "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg", "the shape visual should have the same image source");
-    });
+        test("shape", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds();
 
-    test("visual shape creation", function() {
-        var visualCalled = false,
+            diagram.bringIntoView(shape);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan.times(-1));
+        });
+
+        test("multiple shapes", function () {
+            shape = diagram.addShape({});
+            var point = new Point(500, 500);
+            var shape1 = diagram.addShape({
+                x: point.x,
+                y: point.y
+            });
+
+            rect = shape.bounds().union(shape1.bounds());
+
+            diagram.bringIntoView([shape, shape1], {center: true});
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            deepEqual(diagram.pan(), newPan.times(-1));
+        });
+
+        test("align top right", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds("transformed");
+
+            newPan = viewport.topRight().minus(rect.topRight()).plus(diagram.pan()).times(-1);
+            diagram.bringIntoView([shape], {align: "top right"});
+            equal(diagram.pan().x, Math.floor(newPan.x));
+            equal(diagram.pan().y, Math.floor(newPan.y));
+        });
+
+        test("align center bottom", function () {
+            shape = diagram.addShape({});
+            rect = shape.bounds("transformed");
+
+            newPan = viewport.bottom().minus(rect.bottom()).plus(diagram.pan()).times(-1);
+            diagram.bringIntoView([shape], {align: "center bottom"});
+            equal(diagram.pan().x, newPan.x);
+            equal(diagram.pan().y, newPan.y);
+        });
+
+        module("Diagram / bring into view / zoom", {
+            setup: function() {
+                setupBringIntoView({
+                    zoom: 2
+                });
+            },
+            teardown: teardown
+        });
+
+        test("takes current zoom into account", function() {
+            rect = new Rect(1000, 1000, 100, 100);
+            diagram.bringIntoView(rect);
+            newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.clone().zoom(2).center()).times(-1);
+            deepEqual(diagram.pan(), newPan);
+        });
+
+        test("zooms out if the bounding rect width or height is bigger than the viewport width or height", function() {
+            rect = new Rect(1000, 1000, 1000, 100);
+            diagram._zoomMainLayer = function() {
+                close(diagram._zoom, 800 / 1000, 0.1);
+            };
+            diagram.bringIntoView(rect);
+
+            rect = new Rect(1000, 1000, 100, 1000);
+            diagram._zoomMainLayer = function() {
+                close(diagram._zoom, 600 / 1000, 0.1);
+            };
+            diagram.bringIntoView(rect);
+        });
+
+        test("doe not zoom out if viewport has zero width or height", function() {
+            var initialZoom = diagram.zoom();
+            rect = new Rect(1000, 1000, 1000, 100);
+            diagram.viewport = function() {
+                return new Rect(0, 0, 0, 600);
+            };
+
+            diagram.bringIntoView(rect);
+            equal(diagram.zoom(), initialZoom);
+            diagram.viewport = function() {
+                return new Rect(0, 0, 800, 0);
+            };
+
+            diagram.bringIntoView(rect);
+            equal(diagram.zoom(), initialZoom);
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        module("initialization / layout", {
+            setup: function() {
+                createDiagram({ layout: {
+                        grid: {
+                            width: 600
+                        }
+                    }
+                });
+            },
+            teardown: teardown
+        });
+
+        test("stores grid layout width option", function () {
+            equal(diagram.options.layout.grid.width, 600, "");
+        });
+
+        // test("calls layout method", function () {
+             // eqaul(diagram.calls("layout"), 1);
+        // });
+    })();
+
+    (function() {
+        var shape;
+
+        // ------------------------------------------------------------
+        module("Shape / initialization", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("sets autoSize to true to visual group by default", function() {
+            shape = diagram.addShape({});
+            equal(shape.visual.options.autoSize, true);
+        });
+
+        test("sets autoSizeto visual group base on the options", function() {
+            shape = diagram.addShape({
+                autoSize: false
+            });
+            equal(shape.visual.options.autoSize, false);
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / types", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("create path shape", function() {
+            shape = diagram.addShape({
+                id: "pathShape",
+                path: "m0,100 L100,100 L50,0z"
+            });
+
+            equal(diagram.shapes.length, 1, "should have a single path");
+            var path = diagram.shapes[0];
+            equal(path.shapeVisual.data(), shape.options.path, "the shape visual should have the same path data");
+        });
+
+        test("create image shape", function() {
+            shape = diagram.addShape({
+                id: "imageShape",
+                type: "image",
+                source: "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+            });
+
+            equal(diagram.shapes.length, 1, "should have a single group with rect");
+            var imageShape = diagram.shapes[0];
+            equal(imageShape.shapeVisual.options.source, "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg", "the shape visual should have the same image source");
+        });
+
+        test("visual template", function() {
+            var visualCalled = false;
             shape = diagram.addShape({
                 id: "visualShape",
                 visual: function() {
@@ -229,29 +444,439 @@
                 }
             });
 
-        ok(visualCalled, "visual method should be called");
-        equal(diagram.shapes.length, 1, "should have a single shape");
-    });
-
-    test("typed shape", function() {
-        var shape = diagram.addShape({
-            id: "circle",
-            type: "circle"
+            ok(visualCalled, "visual method should be called");
+            equal(diagram.shapes.length, 1, "should have a single shape");
         });
 
-        equal(diagram.shapes.length, 1, "should have a single shape");
-        equal(diagram.shapes[0].shapeVisual.options.type, shape.options.type, "shape visual is same type as the shape itself");
-    });
+        test("visual template should be used if both template and path are specified", function() {
+            var visualCalled = false;
+            shape = diagram.addShape({
+                id: "visualShape",
+                path: "M100 100L 200, 200",
+                visual: function() {
+                    visualCalled = true;
+                    return new dataviz.diagram.Group({ id: "shapeRoot" });
+                }
+            });
 
+            ok(visualCalled, "visual method should be called");
+            equal(diagram.shapes[0].shapeVisual.id, "shapeRoot");
+        });
+
+        test("typed shape", function() {
+            shape = diagram.addShape({
+                id: "circle",
+                type: "circle"
+            });
+
+            equal(diagram.shapes.length, 1, "should have a single shape");
+            equal(diagram.shapes[0].shapeVisual.options.type, shape.options.type, "shape visual is same type as the shape itself");
+        });
+
+        // ------------------------------------------------------------
+        (function() {
+            var contentVisual;
+
+            function setupShape(options) {
+                shape = diagram.addShape(options);
+                contentVisual = shape._contentVisual;
+            }
+
+            module("Shape / Content", {
+                setup: setup,
+                teardown: teardown
+            });
+
+            test("template", function() {
+                setupShape({
+                    content: {
+                        template: "foo"
+                    }
+                });
+
+                equal(shape.options.content.text, "foo");
+                equal(contentVisual.content(), "foo");
+            });
+
+            test("text", function() {
+                setupShape({
+                    content: {
+                        text: "foo"
+                    }
+                });
+
+                equal(shape.options.content.text, "foo");
+                equal(contentVisual.content(), "foo");
+            });
+
+            test("content should extend content options if an object is passed", function() {
+                setupShape({
+                    content: {
+                        text: "foo"
+                    }
+                });
+                shape.content({
+                    text: "bar",
+                    fill: {
+                        color: "#2e2e2e"
+                    }
+                });
+
+                equal(shape.options.content.text, "bar");
+                equal(shape.options.content.fill.color, "#2e2e2e");
+            });
+
+            test("aligns text", function() {
+                setupShape({
+                    content: {
+                        text: "foo",
+                        align: "center middle"
+                    },
+                    type: "rectangle",
+                    width: 100,
+                    height: 100
+                });
+
+                var contentBBox = contentVisual.drawingElement.bbox(null);
+                var position = contentVisual.position();
+                close(position.x, (100 - contentBBox.width()) / 2, 1);
+                close(position.y, (100 - contentBBox.height()) / 2, 1);
+            });
+
+            test("aligns text with transformed visual", function() {
+                setupShape({
+                    content: {
+                        text: "foo",
+                        align: "center middle"
+                    },
+                    type: "rectangle",
+                    width: 100,
+                    height: 100,
+                    x: 200,
+                    y: 100,
+                    rotation: {
+                        angle: 30
+                    }
+                });
+
+                shape.bounds(new Rect(0, 0, 200, 200));
+                shape.content("foo");
+
+                var contentBBox = contentVisual.drawingElement.bbox(null);
+                var position = contentVisual.position();
+                close(position.x, (100 - contentBBox.width()) / 2, 1);
+                close(position.y, (100 - contentBBox.height()) / 2, 1);
+            });
+
+        })();
+
+        (function() {
+            var bounds;
+
+            // ------------------------------------------------------------
+            module("Shape / bounds", {
+                setup: setup,
+                teardown: teardown
+            });
+
+            test("inits position", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    type: "rectangle",
+                    x: 10,
+                    y: 40
+                });
+                bounds = shape.bounds();
+                equal(bounds.x, 10);
+                equal(bounds.y, 40);
+            });
+
+            test("dose not set position to shape visual", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    type: "rectangle",
+                    x: 10,
+                    y: 40
+                });
+                var visual = shape.shapeVisual;
+                equal(visual.options.x, 0);
+                equal(visual.options.y, 0);
+            });
+
+            test("inits width and height based on visual content", function() {
+                shape = diagram.addShape({
+                    id: "visualShape",
+                    visual: function() {
+                        return new dataviz.diagram.Rectangle({ width: 300, height: 150, stroke: {width: 0}});
+                    }
+                });
+                bounds = shape.bounds();
+                equal(bounds.width, 300);
+                equal(bounds.height, 150);
+            });
+
+            test("inits width and height based on width and height options with predefined type", function() {
+                shape = diagram.addShape({
+                    type: "rectangle",
+                    width: 150,
+                    height: 200,
+                    stroke: {width: 0}
+                });
+                bounds = shape.bounds();
+                equal(bounds.width, 150);
+                equal(bounds.height, 200);
+            });
+
+            // ------------------------------------------------------------
+            var shapeVisual;
+
+            module("Shape / bounds / update", {
+                setup: function() {
+                    setup();
+                    shape = diagram.addShape({
+                        type: "rectangle",
+                        width: 150,
+                        height: 200,
+                        stroke: {width: 0},
+                        content: {
+                            text: "foo"
+                        },
+                        rotation: {
+                            angle: 30
+                        }
+                    });
+                    shapeVisual = shape.visual.children[0];
+                },
+                teardown: teardown
+            });
+
+            test("updateBounds should update shape bounds", function() {
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                bounds = shape.bounds();
+                equal(bounds.width, 300);
+                equal(bounds.height, 100);
+            });
+
+            test("updateBounds should update content alignment", function() {
+                var contentVisual = shape._contentVisual;
+                contentVisual.drawingElement.measure = function() {
+                    return {width: 30, height: 10};
+                };
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                var position = contentVisual.position();
+
+                equal(position.x, 135);
+                equal(position.y, 45);
+            });
+
+            test("updateBounds should update rotation", function() {
+                shapeVisual.redraw({
+                    width: 300,
+                    height: 100
+                });
+                shape.updateBounds();
+                var rotation = shape.visual.rotate();
+                equal(rotation.x, 150);
+                equal(rotation.y, 50);
+            });
+        })();
+
+        (function() {
+
+            // ------------------------------------------------------------
+            module("Shape / redraw", {
+                setup: function() {
+                    setup();
+                    shape = diagram.addShape({
+                        id: "visualShape",
+                        type: "rectangle",
+                        x: 10,
+                        y: 40,
+                        width: 100,
+                        height: 100
+                    });
+                },
+                teardown: teardown
+            });
+
+            test("redraw sets new position", function() {
+                shape.redraw({
+                    x: 20,
+                    y: 50
+                });
+                var bounds = shape.bounds();
+                equal(bounds.x, 20);
+                equal(bounds.y, 50);
+            });
+
+            test("redraw sets new width and height", function() {
+                shape.redraw({
+                    x: 200,
+                    y: 300
+                });
+
+                var bounds = shape.bounds();
+                equal(bounds.x, 200);
+                equal(bounds.y, 300);
+            });
+
+            test("redraw calls _rotate if bounds have changed", function() {
+                shape._rotate = function() {
+                    ok(true);
+                };
+
+                shape.redraw({
+                    width: 200
+                });
+            });
+
+            test("redraw calls _rotate if rotation is passed", function() {
+                shape._rotate = function() {
+                   equal(this.options.rotation.angle, 33);
+                };
+
+                shape.redraw({
+                    rotation: {
+                        angle: 33
+                    }
+                });
+            });
+
+            test("redraw sets content", function() {
+                shape.content = function(options) {
+                    equal(options.text, "foo");
+                };
+                shape.redraw({content: {text: "foo"}});
+            });
+
+            test("redraw redraws shape visual with visual options", function() {
+                var visualOptions = {
+                    path: "foo",
+                    source: "bar",
+                    hover: {fill: "fooHover"},
+                    fill: {color: "fooColor"},
+                    stroke: {width: 3},
+                    startCap: "fooCap",
+                    endCap: "fooCap"
+                };
+
+                shape.shapeVisual.redraw = function(options) {
+                    equal(options.data, visualOptions.path);
+                    equal(options.source, visualOptions.source);
+                    equal(options.hover.fill, visualOptions.hover.fill);
+                    equal(options.fill.color, visualOptions.fill.color);
+                    equal(options.startCap, visualOptions.startCap);
+                    equal(options.endCap, visualOptions.endCap);
+                };
+
+                shape.redraw(visualOptions);
+            });
+        })();
+
+        // ------------------------------------------------------------
+        module("Shape / bounds / events", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("itemBoundsChange event is raised after position set", function () {
+            var s = diagram.addShape({}),
+                raised;
+
+            diagram.bind("itemBoundsChange", function () {
+                raised = true;
+            });
+
+            s.position(new Point(100, 100));
+            ok(raised);
+        });
+
+        test("itemBoundsChange event is raised after bounds set", function () {
+            var s = diagram.addShape({}),
+                raised;
+
+            diagram.bind("itemBoundsChange", function () {
+                raised = true;
+            });
+
+            s.bounds(new Rect(100, 100, 100, 100));
+
+            ok(raised);
+        });
+
+
+        test("Add shape raises change event", function() {
+            var eventShape = null,
+                called = false;
+
+            diagram.bind("change", function(args) {
+                eventShape = args.added[0];
+                called = true;
+            });
+
+            var addedShape = diagram.addShape({});
+            ok(called, "change event should be raised");
+            equal(eventShape, addedShape, "the reported shape should be the same as the added");
+        });
+
+        test("Remove shape raises change event", function() {
+            var eventShape = null,
+                called = false,
+                shape = diagram.addShape({});
+
+            diagram.bind("change", function(args) {
+                eventShape = args.removed[0];
+                called = true;
+            });
+
+            diagram.remove(shape);
+            ok(called, "change event should be raised");
+            equal(eventShape, shape, "the reported shape should be the same as the removed");
+        });
+
+        test("Remove multiple items raises change event", function() {
+            var eventShapes = [],
+                point = new Point(1, 0),
+                shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
+
+            diagram.bind("change", function(args) {
+                eventShapes = args.removed;
+            });
+
+            diagram.remove(shapes);
+            equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
+        });
+
+        // ------------------------------------------------------------
+        module("Shape / bounds / zoom", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("visual bounds are ok after zoom", function () {
+            var s = diagram.addShape({});
+            var z = 0.5;
+            z = diagram.zoom(z);
+
+            var vb = s.bounds("transformed");
+            var b = s.bounds();
+            close(b.width, vb.width / z, tolerance);
+            close(b.height, vb.height / z, tolerance);
+        });
+    })();
+
+    // ------------------------------------------------------------
     module("event handling", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
-        }
+        setup: setup,
+        teardown: teardown
     });
 
     test("limit zoom with min/max values", function () {
@@ -263,10 +888,10 @@
     });
 
     test("zoom does not change the pan", function () {
-        var pan = diagram.pan().clone();
+        var pan = diagram._pan.clone();
         diagram.zoom(1.1);
 
-        ok(pan.equals(diagram.pan()));
+        ok(pan.equals(diagram._pan));
     });
 
     test("zoom at position changes diagram zoom", function () {
@@ -274,18 +899,14 @@
         equal(zoom, 1.1);
     });
 
+    // ------------------------------------------------------------
     module("Coordinate transformations", {
-        setup: function() {
-            QUnit.fixture.html('<div id="canvas" />');
-            diagram = $("#canvas").kendoDiagram().getKendoDiagram();
-        },
-        teardown: function() {
-            diagram.destroy();
-        }
+        setup: setup,
+        teardown: teardown
     });
 
     test("transform document point to view point", function() {
-        var doc = $(diagram.canvas.element).offset(),
+        var doc = diagram.element.offset(),
             point = new Point(100, 100);
 
         var result = diagram.documentToView(point);
@@ -294,7 +915,7 @@
     });
 
     test("transform view point to document point", function() {
-        var doc = $(diagram.canvas.element).offset(),
+        var doc = diagram.element.offset(),
             point = new Point(100, 100);
 
         var result = diagram.viewToDocument(point);
@@ -342,328 +963,299 @@
         roughlyEqualPoint(result, expected, "layer->view->document");
     });
 
-    module("Shape / Template", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
+    (function() {
+        var source, target, shape1, shape2, connection;
 
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
+        // ------------------------------------------------------------
+        module("Diagram / Connections and connectors / initialization", {
+            teardown: teardown
+        });
+
+        test("connection is created with 'to' reference to a shape", function() {
+            createDiagram({
+                shapes: [{id: "s1"}, {id: "s2"}],
+                connections: [{
+                    from: { shapeId: "s1", connector: "auto" },
+                    to: "s2"
+                }]
+            });
+
+            equal(diagram.connections.length, 1, "diagram should have a single connection");
+            equal(diagram.connections[0].to.shape, diagram.getShapeById("s2"), "the to property should point to the second shape");
+        });
+
+        test("creates connection on init", function() {
+            createDiagram({
+                shapes: [{id: "s1"},{id: "s2"}],
+                connections: [{
+                    from: { shapeId: "s1" },
+                    to: { shapeId: "s2" }
+                }]
+            });
+
+            connection = diagram.connections[0];
+            source = connection.source();
+            target = connection.target();
+
+            equal(diagram.connections.length, 1, "one connection should be created");
+            equal(source.shape.id, "s1", "source should be the from shape");
+            equal(target.shape.id, "s2", "target should be the to shape");
+        });
+
+        test("connections init with specific connector", function() {
+            createDiagram({
+                shapes: [{
+                    id: "s1"
+                },{
+                    id: "s2"
+                }],
+                connections: [{
+                    from: {
+                        shapeId: "s1",
+                        connector: "bottom"
+                    },
+                    to: {
+                        shapeId: "s2",
+                        connector: "top"
+                    }
+                }]
+            });
+
+            connection = diagram.connections[0];
+            source = connection.source();
+            target = connection.target();
+
+            equal(source.options.name, "Bottom", "source connector is specific");
+            equal(target.options.name, "Top", "target connector is specific");
+        });
+
+        // ------------------------------------------------------------
+        module("Diagram / connect", {
+            setup: setup,
+            teardown: teardown
+        });
+
+        test("adds connections", function () {
+            var shape3, bottomCorner;
+
+            shape1 = AddShape(diagram, new Point(100, 120),
+                kendo.deepExtend(Shapes.SequentialData, {
+                    width: 80, height: 80, title: "sequential data"
+                }));
+            shape2 = AddShape(diagram, new Point(100, 400));
+            shape3 = AddShape(diagram, new Point(370, 400), Shapes.Wave);
+
+            bottomCorner = shape1.getConnector("Bottom");
+            diagram.connect(bottomCorner, shape2.getConnector("Top"), {
+                startCap: "ArrowEnd",
+                endCap: "FilledCircle"
+            });
+            diagram.connect(bottomCorner, shape3.getConnector("Top"));
+            equal(diagram.connections.length, 2, "diagram should have 2 connections");
+        });
+
+        test("sets auto connectors", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 100, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection.sourceConnector.options.name, "Auto");
+            equal(connection.targetConnector.options.name, "Auto");
+        });
+
+        test("resolves auto connectors", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 100, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("resolves auto connectors border", function () {
+            shape1 = diagram.addShape({ x: 100, y: 100 });
+            shape2 = diagram.addShape({ x: 160, y: 160 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Bottom");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("resolves auto connectors after move", function () {
+            shape1 = diagram.addShape({ x: 100, y: 100 });
+            shape2 = diagram.addShape({ x: 160, y: 160 });
+
+            connection = diagram.connect(shape1, shape2);
+            equal(connection._resolvedSourceConnector.options.name, "Bottom");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+
+            shape2.position(new Point(300, 100));
+            connection.refresh();
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection._resolvedTargetConnector.options.name, "Left");
+        });
+
+        test("Connection detach", function () {
+            shape1 = diagram.addShape({});
+            shape2 = diagram.addShape({ x: 200, y: 0 });
+
+            connection = diagram.connect(shape1, shape2);
+            connection.select(true);
+            diagram.toolService.start(shape2.bounds().left());
+
+            ok(connection.adorner, "The connection edit adorner is present");
+            ok(diagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
+
+            diagram.toolService.move(new Point(400, 0));
+            diagram.toolService.end(new Point(400, 0));
+
+            equal(connection._resolvedSourceConnector.options.name, "Right");
+            equal(connection.sourceConnector.options.name, "Auto");
+        });
+    })();
+
+    (function() {
+        var Connection = dataviz.diagram.Connection;
+        var PathDefiner = dataviz.diagram.PathDefiner;
+        var connection;
+
+        function setupConnection(options) {
+            connection = new Connection(new Point(10, 20), new Point(100, 100), options);
         }
-    });
 
-    test("should render text", function() {
-        diagram.addShape({
-            content: {
-                template: "text"
+        // ------------------------------------------------------------
+        module("Connection / initialization", {
+            setup: function() {
+                setupConnection({
+                    content: {
+                        text: "foo"
+                    }
+                });
             }
         });
 
-        equal(diagram.shapes[0].options.content.text, "text");
-    });
-
-    module("Diagram shapeDefaults", {
-        setup: function() {
-            QUnit.fixture.html('<div id="canvas" />');
-            window.createShapeDefaults = function(shapeDefaults) {
-                diagram = $("#canvas").kendoDiagram({
-                    shapeDefaults: shapeDefaults
-                }).getKendoDiagram();
-
-                return diagram;
-            };
-        },
-        teardown: function() {
-            diagram.destroy();
-            delete window.createShapeDefaults;
-        }
-    });
-
-    test("default shape type", function() {
-        createShapeDefaults({type: "circle"});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal("circle", shape.options.type, "the type of the shape should come from shapeDefaults");
-    });
-
-    test("default shape path", function() {
-        createShapeDefaults({path: "m0,100 L100,100 L50,0z"});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal("m0,100 L100,100 L50,0z", shape.options.path, "path should be set by the shapeDefaults");
-    });
-
-    test("shape is undoable", function() {
-        createShapeDefaults({});
-        var shape = diagram.addShape({id: "shape1"});
-
-        equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
-    });
-
-    module("Shape bounds", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
-
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
-        }
-    });
-
-    test("Shape bounds changed event is raised after position set", function () {
-        var s = diagram.addShape({}),
-            raised;
-
-        diagram.bind("itemBoundsChange", function () {
-            raised = true;
+        test("inits router", function() {
+            ok(connection._router instanceof dataviz.diagram.PolylineRouter);
         });
 
-        s.position(new Point(100, 100));
-        ok(raised);
-    });
-
-    test("Shape bounds changed event is raised after bounds set", function () {
-        var s = diagram.addShape({}),
-            raised;
-
-        diagram.bind("itemBoundsChange", function () {
-            raised = true;
+        test("inits polyline path", function() {
+            ok(connection.path instanceof dataviz.diagram.Polyline);
         });
 
-        s.bounds(new Rect(100, 100, 100, 100));
-
-        ok(raised);
-    });
-
-    test("Shape visual bounds is ok after zoom", function () {
-        var s = diagram.addShape({});
-        var z = 0.5;
-        z = diagram.zoom(z);
-
-        var vb = s.bounds("transformed");
-        var b = s.bounds();
-        close(b.width, vb.width / z, tolerance);
-        close(b.height, vb.height / z, tolerance);
-    });
-
-    test("Add shape raises change event", function() {
-        var eventShape = null,
-            called = false;
-
-        diagram.bind("change", function(args) {
-            eventShape = args.added[0];
-            called = true;
+        test("appends path to visual", function() {
+            ok(connection.path === connection.visual.children[0]);
         });
 
-        var addedShape = diagram.addShape({});
-        ok(called, "change event should be raised");
-        equal(eventShape, addedShape, "the reported shape should be the same as the added");
-    });
-
-    test("Remove shape raises change event", function() {
-        var eventShape = null,
-            called = false,
-            shape = diagram.addShape({});
-
-        diagram.bind("change", function(args) {
-            eventShape = args.removed[0];
-            called = true;
+        test("inits path points with start and end point", function() {
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 100);
+            equal(points[1].y, 100);
         });
 
-        diagram.remove(shape);
-        ok(called, "change event should be raised");
-        equal(eventShape, shape, "the reported shape should be the same as the removed");
-    });
-
-    test("Remove multiple items raises change event", function() {
-        var eventShapes = [],
-            point = new Point(1, 0),
-            shapes = [diagram.addShape({}), diagram.addShape({ x: point.x, y: point.y })];
-
-        diagram.bind("change", function(args) {
-            eventShapes = args.removed;
+        test("inits path points with start, points and end point", function() {
+            setupConnection({
+                points: [new Point(30, 40)]
+            });
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 30);
+            equal(points[1].y, 40);
+            equal(points[2].x, 100);
+            equal(points[2].y, 100);
         });
 
-        diagram.remove(shapes);
-        equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
-    });
+        test("sets transparent fill to polyline", function() {
+            equal(connection.path.options.fill.color, "transparent");
+        });
 
-    module("Connections and connectors", {
-        setup: function () {
-            QUnit.fixture.html('<div id="canvas" />');
-            $("#canvas").kendoDiagram();
+        test("inits content visual", function() {
+            ok(connection._contentVisual);
+        });
 
-            diagram = $("#canvas").getKendoDiagram();
-        },
-        teardown: function () {
-            diagram.destroy();
-        }
-    });
+        module("Connection / redraw", {
+            setup: function() {
+                setupConnection({
+                    content: {
+                        text: "foo"
+                    },
+                    points: [new Point(50, 50)]
+                });
+            }
+        });
 
-    test("create connection on init", function() {
-        diagram.destroy();
-        diagram = $("#canvas").kendoDiagram({
-            shapes: [{id: "s1"},{id: "s2"}],
-            connections: [{
-                from: { shapeId: "s1" },
-                to: { shapeId: "s2" }
-            }]
-        }).getKendoDiagram();
-
-        equal(diagram.connections.length, 1, "one connection should be created");
-
-        var connection = diagram.connections[0],
-            source = connection.source(),
-            target = connection.target();
-
-        equal(source.shape.id, "s1", "source should be the from shape");
-        equal(target.shape.id, "s2", "target should be the to shape");
-    });
-
-    test("connections init with specific connector", function() {
-        diagram.destroy();
-        diagram = $("#canvas").kendoDiagram({
-            shapes: [{
-                id: "s1"
-            },{
-                id: "s2"
-            }],
-            connections: [{
-                from: {
-                    shapeId: "s1",
-                    connector: "bottom"
-                },
-                to: {
-                    shapeId: "s2",
-                    connector: "top"
+        test("updates content", function() {
+            connection.redraw({
+                content: {
+                    text: "bar"
                 }
-            }]
-        }).getKendoDiagram();
+            });
+            equal(connection._contentVisual.content(), "bar");
+        });
 
-        var connection = diagram.connections[0],
-            source = connection.source(),
-            target = connection.target();
+        test("updates path", function() {
+            connection.redraw({
+                points: [new Point(30, 40)]
+            });
+            var points = connection.path.points();
+            equal(points[0].x, 10);
+            equal(points[0].y, 20);
+            equal(points[1].x, 30);
+            equal(points[1].y, 40);
+            equal(points[2].x, 100);
+            equal(points[2].y, 100);
+        });
 
-        equal(source.options.name, "Bottom", "source connector is specific");
-        equal(target.options.name, "Top", "target connector is specific");
-    });
+        // ------------------------------------------------------------
+        module("Connection", {});
 
-    test("Connection connect - set auto connectors test", function () {
-        var s1 = diagram.addShape({});
-        var point = new Point(100, 0);
-        var s2 = diagram.addShape({ x: point.x, y: point.y });
+        test('definers', function () {
+            connection = new Connection(new Point(10, 20), new Point(100, 200));
+            connection.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
+            equal(connection.points().length, 3);
+            equal(connection.allPoints().length, 5);
+            ok(connection.sourceDefiner().point === connection.sourcePoint());
+            ok(connection.targetDefiner().point === connection.targetPoint());
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1.sourceConnector.options.name, "Auto");
-        equal(c1.targetConnector.options.name, "Auto");
-    });
+            connection.sourceDefiner(new PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
+            ok(connection.sourceDefiner().point.x === 44 && connection.sourceDefiner().point.y === 55);
+            ok(connection.sourceDefiner().left === null);
+            ok(connection.sourceDefiner().right.x === -55 && connection.sourceDefiner().right.y === 0);
 
-    test("Connection connect - resolve auto connectors test", function () {
-        var s1 = diagram.addShape({});
-        var point = new Point(100, 0);
-        var s2 = diagram.addShape({ x: point.x, y: point.y });
+            connection.targetDefiner(new PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
+            ok(connection.targetDefiner().point.x === 44 && connection.targetDefiner().point.y === 55);
+            ok(connection.targetDefiner().right===null);
+            ok(connection.targetDefiner().left.x === 478 && connection.targetDefiner().left.y === 102);
+        });
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
+        test('bounds', function () {
+            connection = new Connection(new Point(0, 0), new Point(500, 500));
+            connection.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
+            var bounds = connection._router.getBounds();
+            ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
+        });
 
-    test("Connection connect - resolve auto connectors border test", function () {
-        var point1 = new Point(100, 100);
-        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
-        var point2 = new Point(160, 160);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
+        test('Distance to a line segment', function () {
+            var distance = Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
+            equal(distance, 100);
+            distance = Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
+            equal(distance,100);
+            distance = Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
+            equal(distance,100);
+        });
 
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Bottom");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
+        test('Distance to polyline', function () {
+            var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
+            var distance = Geometry.distanceToPolyline(new Point(50,50), polyline);
+            equal(distance, 50);
+            distance = Geometry.distanceToPolyline(new Point(57,50), polyline);
+            equal(distance, 43);
+        });
+    })();
 
-    test("Connection connect - resolve auto connectors after move test", function () {
-        var point1 = new Point(100, 100);
-        var s1 = diagram.addShape({ x: point1.x, y: point1.y });
-        var point2 = new Point(160, 160);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
-
-        var c1 = diagram.connect(s1, s2);
-        equal(c1._resolvedSourceConnector.options.name, "Bottom");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-
-        s2.position(new Point(300, 100));
-        c1.refresh();
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1._resolvedTargetConnector.options.name, "Left");
-    });
-
-    test("Connection detach", function () {
-        var s1 = diagram.addShape({});
-        var point2 = new Point(200, 0);
-        var s2 = diagram.addShape({ x: point2.x, y: point2.y });
-
-        var c1 = diagram.connect(s1, s2);
-        c1.select(true);
-        diagram.toolService.start(s2.bounds().left());
-
-        ok(c1.adorner, "The connection edit adorner is present");
-        ok(diagram.toolService.activeTool.type === "ConnectionTool", "The active tool is ConnectionEditTool");
-
-        diagram.toolService.move(new Point(400, 0));
-        diagram.toolService.end(new Point(400, 0));
-
-        //ok(c1._resolvedTargetConnector === undefined);
-        //ok(c1.targetConnector === undefined);
-
-        equal(c1._resolvedSourceConnector.options.name, "Right");
-        equal(c1.sourceConnector.options.name, "Auto");
-    });
-
-    test('Connection definers', function () {
-        var con = new dataviz.diagram.Connection(new Point(10, 20), new Point(100, 200));
-        con.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
-        equal(con.points().length, 3);
-        equal(con.allPoints().length, 5);
-        ok(con.sourceDefiner().point === con.sourcePoint());
-        ok(con.targetDefiner().point === con.targetPoint());
-
-        con.sourceDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
-        ok(con.sourceDefiner().point.x === 44 && con.sourceDefiner().point.y === 55);
-        ok(con.sourceDefiner().left===null);
-        ok(con.sourceDefiner().right.x === -55 && con.sourceDefiner().right.y === 0);
-
-        con.targetDefiner(new dataviz.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
-        ok(con.targetDefiner().point.x === 44 && con.targetDefiner().point.y === 55);
-        ok(con.targetDefiner().right===null);
-        ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
-    });
-
-    test('Connection bounds', function () {
-        var con = new dataviz.diagram.Connection(new Point(0, 0), new Point(500, 500));
-        con.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
-        var bounds = con._router.getBounds();
-        ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
-    });
-
-    test('Distance to a line segment', function () {
-        var d = Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
-        equal(d, 100);
-        d = Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
-        equal(d,100);
-        d = Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
-        equal(d,100);
-    });
-
-    test('Distance to polyline', function () {
-        var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
-        var d = Geometry.distanceToPolyline(new Point(50,50), polyline);
-        equal(d, 50);
-        d = Geometry.distanceToPolyline(new Point(57,50), polyline);
-        equal(d, 43);
-    });
-
+    // ------------------------------------------------------------
     module("Serialization - Cut/Copy/Paste", {
         setup: function () {
             QUnit.fixture.html('<div id="canvas" />');

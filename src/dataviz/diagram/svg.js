@@ -16,11 +16,19 @@
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
         isUndefined = Utils.isUndefined,
-        MatrixVector = diagram.MatrixVector;
+        isNumber = Utils.isNumber,
+        isString = Utils.isString,
+        MatrixVector = diagram.MatrixVector,
+
+        g = dataviz.geometry,
+        d = dataviz.drawing,
+
+        defined = dataviz.defined,
+
+        inArray = $.inArray;
 
     // Constants ==============================================================
-    var SVGNS = "http://www.w3.org/2000/svg",
-        SVGXLINK = "http://www.w3.org/1999/xlink",
+    var TRANSPARENT = "transparent",
         Markers = {
             none: "none",
             arrowStart: "ArrowStart",
@@ -29,7 +37,13 @@
         },
         DEFAULTWIDTH = 100,
         DEFAULTHEIGHT = 100,
-        FULL_CIRCLE_ANGLE = 360;
+        FULL_CIRCLE_ANGLE = 360,
+        START = "start",
+        END = "end",
+        WIDTH = "width",
+        HEIGHT = "height",
+        X = "x",
+        Y = "y";
 
     diagram.Markers = Markers;
 
@@ -141,9 +155,12 @@
                 toString(this.rotate) +
                 toString(this.scale);
         },
+
         render: function (visual) {
-            visual.setAttribute("transform", this.toString());
+            visual._transform = this;
+            visual._renderTransform();
         },
+
         toMatrix: function () {
             var m = Matrix.unit();
 
@@ -177,867 +194,1204 @@
         }
     });
 
-    function sizeTransform(element) {
-        var scaleX = element._originWidth ? element.options.width / element._originWidth : 1,
-            scaleY = element._originHeight ? element.options.height / element._originHeight : 1,
-            x = element.options.x || 0,
-            y = element.options.y || 0;
+    var AutoSizeableMixin = {
+        _setScale: function() {
+            var options = this.options;
+            var originWidth = this._originWidth;
+            var originHeight = this._originHeight;
+            var scaleX = options.width / originWidth;
+            var scaleY = options.height / originHeight;
 
-        element._transform.translate = new Translation(x, y);
-        element._transform.scale = new Scale(scaleX, scaleY);
-        element._renderTransform();
-    }
+            if (!isNumber(scaleX)) {
+                scaleX = 1;
+            }
+            if (!isNumber(scaleY)) {
+                scaleY = 1;
+            }
+
+            this._transform.scale = new Scale(scaleX, scaleY);
+        },
+
+        _setTranslate: function() {
+            var options = this.options;
+            var x = options.x || 0;
+            var y = options.y || 0;
+            this._transform.translate = new Translation(x, y);
+        },
+
+        _initSize: function() {
+            var options = this.options;
+            var transform = false;
+            if (options.autoSize !== false && (defined(options.width) || defined(options.height))) {
+                this._measure(true);
+                this._setScale();
+                transform = true;
+            }
+
+            if (defined(options.x) || defined(options.y)) {
+                this._setTranslate();
+                transform = true;
+            }
+
+            if (transform) {
+                this._renderTransform();
+            }
+        },
+
+        _updateSize: function(options) {
+            var update = false;
+
+            if (this.options.autoSize !== false && this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
+                update = true;
+                this._measure(true);
+                this._setScale();
+            }
+
+            if (this._diffNumericOptions(options, [X, Y])) {
+                update = true;
+                this._setTranslate();
+            }
+
+            if (update) {
+                this._renderTransform();
+            }
+
+            return update;
+        }
+    };
 
     var Element = Class.extend({
-        init: function (domElement, options) {
+        init: function (options) {
             var element = this;
-            this._originSize = Rect.empty();
-            this._visible = true;
-            this._transform = new CompositeTransform();
-            element.domElement = domElement;
             element.options = deepExtend({}, element.options, options);
-            element.redraw();
+            element.id = element.options.id;
+            element._originSize = Rect.empty();
+            element._transform = new CompositeTransform();
         },
+
         visible: function (value) {
-            if (isUndefined(value)) {
-                return this._visible;
-            } else {
-                this._visible = value;
-                this.domElement.setAttribute("visibility", (value ? "visible" : "hidden"));
-            }
+            return this.drawingContainer().visible(value);
         },
-        setAtr: function (atr, prop) {
-            if (isUndefined(prop) || isUndefined(this.options[prop])) {
-                return;
-            }
-            if (this.options[prop] !== undefined) {
-                this.domElement.setAttribute(atr, this.options[prop]);
-            }
-        },
+
         redraw: function (options) {
-            if (options) {
-                deepExtend(this.options, options);
+            if (options && options.id) {
+                 this.id = options.id;
             }
-            this.setAtr("id", "id");
         },
+
         position: function (x, y) {
-            if (y !== undefined) {
-                this.options.x = x;
-                this.options.y = y;
-                this._pos = new Point(x, y);
+            var options = this.options;
+            if (!defined(x)) {
+               return new Point(options.x, options.y);
             }
-            else if (x instanceof Point) {
-                this._pos = x;
-                this.options.x = this._pos.x;
-                this.options.y = this._pos.y;
+
+            if (defined(y)) {
+                options.x = x;
+                options.y = y;
+            } else if (x instanceof Point) {
+                options.x = x.x;
+                options.y = x.y;
             }
-            this._transform.translate = new Translation(this.options.x, this.options.y);
+
+            this._transform.translate = new Translation(options.x, options.y);
             this._renderTransform();
-            return this._pos;
         },
+
         rotate: function (angle, center) {
-            if (angle !== undefined) {
+            if (defined(angle)) {
                 this._transform.rotate = new Rotation(angle, center.x, center.y);
                 this._renderTransform();
             }
             return this._transform.rotate || new Rotation(0);
         },
+
+        drawingContainer: function() {
+            return this.drawingElement;
+        },
+
         _renderTransform: function () {
-            this._transform.render(this.domElement);
+            var matrix = this._transform.toMatrix();
+            this.drawingContainer().transform(new g.Matrix(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f));
         },
-        _hover: function () {
-        },
+
+        _hover: function () {},
+
+        _diffNumericOptions: diffNumericOptions,
+
         _measure: function (force) {
-            var box, n = this.domElement;
+            var rect;
             if (!this._measured || force) {
-                try {
-                    box = n.getBBox();
-                    if (box.width && box.height) {
-                        this._originSize = new Rect(box.left, box.right, box.width, box.height);
-                        this._originWidth = box.width;
-                        this._originHeight = box.height;
-                        this._measured = true;
-                        return this._originSize;
-                    }
-                }
-                catch (e) {
-                }
+                var box = this._boundingBox() || new g.Rect();
+                var startPoint = box.topLeft();
+                rect = new Rect(startPoint.x, startPoint.y, box.width(), box.height());
+                this._originSize = rect;
+                this._originWidth = rect.width;
+                this._originHeight = rect.height;
+                this._measured = true;
+            } else {
+                rect = this._originSize;
             }
+            return rect;
+        },
+
+        _boundingBox: function() {
+            return this.drawingElement.rawBBox();
         }
     });
 
-    // Visual but with no size.
     var VisualBase = Element.extend({
-        init: function (domElement, options) {
-            var that = this;
-            Element.fn.init.call(that, domElement, options);
-            domElement._kendoElement = this;
-        },
-        options: {
-            stroke: {
-                color: "gray",
-                width: 1,
-                dashType: "none"
-            }
-        },
-        background: function (value) {
-            if (value !== undefined) {
-                this.options.background = value;
-            }
-            this._background(this.options.background);
-        },
-        redraw: function (options) {
-            var that = this;
-            Element.fn.redraw.call(that, options);
-            that._setStroke();
-            that.setAtr("fill-opacity", "fillOpacity");
-            that.background();
-        },
-        _setStroke: function() {
-            var stroke = this.options.stroke || {};
-            this.domElement.setAttribute("stroke", stroke.color);
-            this.domElement.setAttribute("stroke-dasharray", this._renderDashType());
-            this.domElement.setAttribute("stroke-width", stroke.width);
-        },
-        _renderDashType: function() {
-            var stroke = this.options.stroke || {},
-                width = stroke.width || 1,
-                dashType = stroke.dashType;
+        init: function(options) {
+            Element.fn.init.call(this, options);
 
-            if (dashType && dashType != "solid") {
-                var dashArray = dataviz.DASH_ARRAYS[dashType.toLowerCase()] || [],
-                    result = [],
-                    i;
+            options = this.options;
+            options.fill = normalizeDrawingOptions(options.fill);
+            options.stroke = normalizeDrawingOptions(options.stroke);
+        },
 
-                for (i = 0; i < dashArray.length; i++) {
-                    result.push(dashArray[i] * width);
-                }
-
-                return result.join(" ");
-            }
-        },
-        _hover: function (value) {
-            var color = this.options.background;
-
-            if (value && Utils.isDefined(this.options.hover.background)) {
-                color = this.options.hover.background;
-            }
-
-            this._background(color);
-        },
-        _background: function (value) {
-            this.domElement.setAttribute("fill", this._getColor(value));
-        },
-        _getColor: function (value) {
-            var bg;
-            if (value != "none") {
-                var color = new dataviz.Color(value);
-                bg = color.toHex();
-            }
-            else {
-                bg = value;
-            }
-            return bg;
-        }
-    });
-
-    var Visual = VisualBase.extend({
-        init: function (domElement, options) {
-            var that = this;
-            VisualBase.fn.init.call(that, domElement, options);
-        },
-        redraw: function (options) {
-            var that = this;
-            VisualBase.fn.redraw.call(that, options);
-
-            if (that.options.x !== undefined && that.options.y !== undefined) {
-                that.position(that.options.x, that.options.y);
-            }
-            that.size();
-        },
-        size: function (value) {
-            if (value !== undefined) {
-                this.options.width = value.width;
-                this.options.height = value.height;
-            }
-            this._sz = { width: this.options.width, height: this.options.height };
-            this.setAtr("width", "width");
-            this.setAtr("height", "height");
-            this.setAtr("background", "background");
-            return this._sz;
-        }
-    });
-
-    var TextBlock = VisualBase.extend({
-        init: function (options) {
-            var that = this;
-            Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
-            this.domElement.setAttribute("dominant-baseline", "hanging");
-        },
-        options: {
-            stroke: {
-                color: "none",
-                width: 0,
-                dashType: "none"
-            },
-            fontSize: 15,
-            fontVariant: "normal",
-            fontWeight: "normal",
-            anchor: "middle",
-            background: "black",
-            align: ""
-        },
-        content: function (text) {
-            if (text !== undefined) {
-                this.domElement.textContent = this.options.text = text;
-                this._align();
-            }
-
-            return this.options.text;
-        },
-        redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            this.setAtr("font-family", "fontFamily");
-            this.setAtr("font-variant", "fontVariant");
-            this.setAtr("font-size", "fontSize");
-            this.setAtr("font-weight", "fontWeight");
-            this.setAtr("font-style", "fontStyle");
-            this.setAtr("text-decoration", "textDecoration");
-            this.setAtr("fill", "color");
-            this.content(this.options.text);
-        },
-        size: function () {
-            sizeTransform(this);
-        },
-        bounds: function () {
-            var o = this.options,
-                containerRect = new Rect(0, 0, o.width, o.height);
-            return containerRect;
-        },
-        align: function (alignment) {
-            this.options.align = alignment;
-            this._align(alignment);
-        },
-        _align: function () {
-            if (!this.options.align) {
-                return;
-            }
-            this._measure(true);
-            var o = this.options,
-                containerRect = this.bounds(),
-                aligner = new RectAlign(containerRect),
-                contentBounds = aligner.align(this._originSize, o.align);
-
-            this.position(contentBounds.topLeft());
-            o.width = contentBounds.width;
-            o.height = contentBounds.height;
-            this.size();
-        }
-    });
-
-    var TextBlockEditor = Observable.extend({
-        init: function (domElement, options) {
-            Observable.fn.init.call(this);
-
-            var element = this;
-            element.domElement = domElement || this._createEditor();
-            element.options = deepExtend({}, element.options, options);
-            element.redraw();
-        },
-        visible: function (value) {
-            if (value !== undefined) {
-                this._isVisible = value;
-                this.domElement.style.visibility = value ? "visible" : "hidden";
-            }
-            return this._isVisible;
-        },
-        position: function (x, y) {
-            if (y !== undefined) {
-                this.options.x = x;
-                this.options.y = y;
-                this._pos = new Point(x, y);
-            }
-            else if (x instanceof Point) {
-                this._pos = x;
-                this.options.x = this._pos.x;
-                this.options.y = this._pos.y;
-            }
-
-            $(this.domElement).css({left: this._pos.x + "px", top: this._pos.y + "px"});
-            return this._pos;
-        },
-        size: function (w, h) {
-            var isSet = false;
-            if (h !== undefined) {
-                this._size = { width: w, height: h };
-                isSet = true;
-            }
-            else if (w === Object(w)) {
-                this._size = { width: w.width, height: w.height };
-                isSet = true;
-            }
-
-            if (isSet) {
-                deepExtend(this.options, this._size);
-                $(this.domElement).css({width: this._size.width + "px", height: this._size.height + "px"});
-            }
-
-            return this._size;
-        },
-        focus: function () {
-            $(this.domElement).focus();
-        },
-        content: function (text) {
-            if (!isUndefined(text)) {
-                this.domElement.value = this.options.text = text;
-            }
-
-            return this.domElement.value;
-        },
-        redraw: function (options) {
-            this.options = deepExtend(this.options, options);
-            this.content(this.options.text);
-        },
-        _createEditor: function () {
-            var that = this,
-                input = $("<input type='text' class='textEditable' />")
-                    .css({ position: "absolute", zIndex: 100, fontSize: "16px" })
-                    .on("mousedown mouseup click dblclick", function (e) {
-                        e.stopPropagation();
-                    })
-                    .on("keydown", function (e) {
-                        e.stopPropagation();
-                    })
-                    .on("keypress", function (e) {
-                        if (e.keyCode == kendo.keys.ENTER) {
-                            that.trigger("finishEdit", e);
-                        }
-                        e.stopPropagation();
-                    })
-                    .on("focusout", function (e) {
-                        that.trigger("finishEdit", e);
-                        e.stopPropagation();
-                    });
-            return input[0];
-        }
-    });
-
-    var Rectangle = Visual.extend({
-        init: function (options) {
-            Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
-        },
-        options: {
-            stroke: {},
-            background: "none"
-        },
-        redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            this.setAtr("rx", "cornerRadius");
-            this.setAtr("ry", "cornerRadius");
-            this._setStroke();
-        }
-    });
-
-    var Path = VisualBase.extend({
-        init: function (options) {
-            var that = this;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
-        },
-        options: {
-            autoSize: true
-        },
-        data: function (value) {
-            if (value) {
-                this.options.data = value;
-            }
-            else {
-                return this.options.data;
-            }
-        },
-        size: function () {
-            sizeTransform(this);
-        },
-        redraw: function (options) {
-            var that = this;
-            VisualBase.fn.redraw.call(that, options);
-            that.size();
-            that.setAtr("d", "data");
-            if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-start");
-            }
-            if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-end");
-            }
-
-            // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
-            }
-        }
-    });
-
-    var Marker = Element.extend({
-        init: function (options) {
-            var that = this, childElement;
-            Element.fn.init.call(that, document.createElementNS(SVGNS, "marker"), options);
-            var o = that.options;
-
-            if (o.path) {
-                childElement = new Path(o.path);
-            }
-            else if (o.circle) {
-                childElement = new Circle(o.circle);
-            }
-            if (childElement) {
-                this.domElement.appendChild(childElement.domElement);
-            }
-        },
-        redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            var that = this, o = that.options;
-            if (o.ref) {
-                that.domElement.refX.baseVal.value = o.ref.x;
-                that.domElement.refY.baseVal.value = o.ref.y;
-            }
-            if (o.width) {
-                that.domElement.markerWidth.baseVal.value = o.width;
-            }
-            if (o.height) {
-                that.domElement.markerHeight.baseVal.value = o.height;
-            }
-            this.setAtr("orient", "orientation");
-            this.setAtr("viewBox", "viewBox");
-        }
-    });
-
-    var Mask = Element.extend({
-        init: function (options) {
-            var that = this, childElement;
-            Element.fn.init.call(that, document.createElementNS(SVGNS, "mask"), options);
-            var o = that.options;
-
-            if (o.path) {
-                childElement = new Path(o.path);
-            }
-            else if (o.circle) {
-                childElement = new Circle(o.circle);
-            }
-            else if (o.rectangle) {
-                childElement = new Rectangle(o.rectangle);
-            }
-            if (childElement) {
-                this.domElement.appendChild(childElement.domElement);
-            }
-            this.setAtr("id", "id");
-        },
-        redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            var that = this, o = that.options;
-
-            if (o.width) {
-                that.domElement.width.baseVal.value = o.width;
-            }
-            if (o.height) {
-                that.domElement.height.baseVal.value = o.height;
-            }
-
-        }
-    });
-
-    var Line = VisualBase.extend({
-        init: function (options) {
-            VisualBase.fn.init.call(this, document.createElementNS(SVGNS, "line"), options);
-            this.options.from = this.options.from || new Point();
-            this.options.to = this.options.to || new Point();
-        },
-        redraw: function (options) {
-            VisualBase.fn.redraw.call(this, options);
-            if (this.options.from) {
-                this.domElement.setAttribute("x1", this.options.from.x.toString());
-                this.domElement.setAttribute("y1", this.options.from.y.toString());
-            }
-            if (this.options.to) {
-                this.domElement.setAttribute("x2", this.options.to.x.toString());
-                this.domElement.setAttribute("y2", this.options.to.y.toString());
-            }
-            if (this.options.startCap && this.options.startCap !== Markers.none) {
-                this.domElement.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-start");
-            }
-            if (this.options.endCap && this.options.endCap !== Markers.none) {
-                this.domElement.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
-            }
-            else {
-                this.domElement.removeAttribute("marker-end");
-            }
-
-            // SVG markers are not refreshed after the line has changed. This fixes the problem.
-            if (this.domElement.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
-                this.domElement.parentNode.insertBefore(this.domElement, this.domElement);
-            }
-        }
-    });
-
-    var Polyline = VisualBase.extend({
-        init: function (options) {
-            var that = this;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "polyline"), options);
-            if (Utils.isDefined(options) && options.points !== null) {
-                this.points(that.options.points);
-            }
-
-            this.background("none");
-
-        },
-        refresh: function () {
-            if (this._points === null || this._points.length === 0) {
-                return;
-            }
-            var pointsString = "", i;
-            for (i = 0; i < this._points.length; i++) {
-                // todo: toArray and fromArray to allow Point and Tuple
-                pointsString += " " + this._points[i].x + "," + this._points[i].y;
-            }
-            this.domElement.setAttribute("points", pointsString.trim());
-            this.domElement.setAttribute("stroke", "Orange");
-            this.domElement.setAttribute("stroke-width", "5");
-
-        },
-        points: function (value) {
-            if (isUndefined(value)) {
-                return this._points;
-            }
-            else {
-                this._points = value;
-                this.refresh();
-            }
-        },
-        redraw: function () {
-            this.refresh();
-        },
         options: {
             stroke: {
                 color: "gray",
                 width: 1
             },
-            backgrounds: "none",
+            fill: {
+                color: TRANSPARENT
+            }
+        },
+
+        fill: function(color, opacity) {
+            this._fill({
+                color: getColor(color),
+                opacity: opacity
+            });
+        },
+
+        stroke: function(color, width, opacity) {
+            this._stroke({
+                color: getColor(color),
+                width: width,
+                opacity: opacity
+            });
+        },
+
+        redraw: function (options) {
+            if (options) {
+                var stroke = options.stroke;
+                var fill = options.fill;
+                if (stroke) {
+                    this._stroke(normalizeDrawingOptions(stroke));
+                }
+                if (fill) {
+                    this._fill(normalizeDrawingOptions(fill));
+                }
+
+                Element.fn.redraw.call(this, options);
+            }
+        },
+
+        _hover: function (show) {
+            var drawingElement = this.drawingElement;
+            var options = this.options;
+            var hover = options.hover;
+
+            if (hover && hover.fill) {
+                var fill = show ? normalizeDrawingOptions(hover.fill) : options.fill;
+                drawingElement.fill(fill.color, fill.opacity);
+            }
+        },
+
+        _stroke: function(strokeOptions) {
+            var options = this.options;
+            deepExtend(options, {
+                stroke: strokeOptions
+            });
+            var stroke = options.stroke;
+
+            this.drawingElement.stroke(stroke.color, stroke.width, stroke.opacity);
+        },
+
+        _fill: function(fillOptions) {
+            var options = this.options;
+            deepExtend(options, {
+                fill: fillOptions
+            });
+            var fill = options.fill;
+
+            this.drawingElement.fill(fill.color, fill.opacity);
+        }
+    });
+
+    var TextBlock = VisualBase.extend({
+        init: function (options) {
+            this._textColor(options);
+
+            VisualBase.fn.init.call(this, options);
+
+            this._font();
+            this._initText();
+            this._initSize();
+        },
+
+        options: {
+            fontSize: 15,
+            fontFamily: "sans-serif",
+            stroke: {
+                width: 0
+            },
+            fill: {
+                color: "black"
+            },
+            autoSize: true
+        },
+
+        _initText: function() {
+            var options = this.options;
+            this.drawingElement = new d.Text(defined(options.text) ? options.text : "", new g.Point(), {
+                fill: options.fill,
+                stroke: options.stroke,
+                font: options.font
+            });
+        },
+
+        _textColor: function(options) {
+            if (options && options.color) {
+                deepExtend(options, {
+                    fill: {
+                        color: options.color
+                    }
+                });
+            }
+        },
+
+        _font: function() {
+            var options = this.options;
+            if (options.fontFamily && defined(options.fontSize)) {
+                options.font = options.fontSize + "px " + options.fontFamily;
+            } else {
+                delete options.font;
+            }
+        },
+
+        content: function (text) {
+            return this.drawingElement.content(text);
+        },
+
+        redraw: function (options) {
+            if (options) {
+                var sizeChanged = false;
+                var textOptions = this.options;
+
+                this._textColor(options);
+
+                VisualBase.fn.redraw.call(this, options);
+
+                if (options.fontFamily || defined(options.fontSize)) {
+                    deepExtend(textOptions, {
+                        fontFamily: options.fontFamily,
+                        fontSize: options.fontSize
+                    });
+                    this._font();
+                    this.drawingElement.options.set("font", textOptions.font);
+                    sizeChanged = true;
+                }
+
+                if (options.text) {
+                    this.content(options.text);
+                    sizeChanged = true;
+                }
+
+                if (!this._updateSize(options) && sizeChanged) {
+                    this._initSize();
+                }
+            }
+        }
+    });
+
+    deepExtend(TextBlock.fn, AutoSizeableMixin);
+
+    var Rectangle = VisualBase.extend({
+        init: function (options) {
+            VisualBase.fn.init.call(this, options);
+            this._initPath();
+            this._setPosition();
+        },
+
+        _setPosition: function() {
+            var options = this.options;
+            var x = options.x;
+            var y = options.y;
+            if (defined(x) || defined(y)) {
+                this.position(x || 0, y || 0);
+            }
+        },
+
+        redraw: function (options) {
+            if (options) {
+                VisualBase.fn.redraw.call(this, options);
+                if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
+                    this._updatePath();
+                }
+                if (this._diffNumericOptions(options, [X, Y])) {
+                    this._setPosition();
+                }
+            }
+        },
+
+        _initPath: function() {
+            var options = this.options;
+            var width = options.width;
+            var height = options.height;
+            var drawingElement = this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            var points = this._points = [new g.Point(), new g.Point(width, 0),
+                new g.Point(width, height), new g.Point(0, height)];
+
+            drawingElement.moveTo(points[0]);
+            for (var i = 1; i < 4; i++) {
+                drawingElement.lineTo(points[i]);
+            }
+            drawingElement.close();
+        },
+
+        _updatePath: function() {
+            var points = this._points;
+            var sizeOptions = sizeOptionsOrDefault(this.options);
+            var width = sizeOptions.width;
+            var height = sizeOptions.height;
+
+            points[1].x = width;
+
+            points[3].y = height;
+            points[2].move(width, height);
+        }
+    });
+
+    var MarkerBase = VisualBase.extend({
+        init: function(options) {
+           VisualBase.fn.init.call(this, options);
+           var anchor = this.options.anchor;
+           this.anchor = new g.Point(anchor.x, anchor.y);
+           this.createElement();
+        },
+
+        options: {
+           stroke: {
+                color: TRANSPARENT,
+                width: 0
+           },
+           fill: {
+                color: "black"
+           }
+        },
+
+        _transformToPath: function(point, path) {
+            var transform = path.transform();
+            if (point && transform) {
+                point = point.transformCopy(transform);
+            }
+            return point;
+        },
+
+        redraw: function(options) {
+            if (options) {
+                if (options.position) {
+                    this.options.position = options.position;
+                }
+
+                VisualBase.fn.redraw.call(this, options);
+            }
+        }
+    });
+
+    var CircleMarker = MarkerBase.extend({
+        options: {
+            radius: 4,
+            anchor: {
+                x: 0,
+                y: 0
+            }
+        },
+
+        createElement: function() {
+            var options = this.options;
+            this.drawingElement = new d.Circle(new g.Circle(this.anchor, options.radius), {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
+        positionMarker: function(path) {
+            var options = this.options;
+            var position = options.position;
+            var segments = path.segments;
+            var targetSegment;
+            var point;
+
+            if (position == START) {
+                targetSegment = segments[0];
+            } else {
+                targetSegment = segments[segments.length - 1];
+            }
+            if (targetSegment) {
+                point = this._transformToPath(targetSegment.anchor(), path);
+                this.drawingElement.transform(g.transform().translate(point.x, point.y));
+            }
+        }
+    });
+
+    var ArrowMarker = MarkerBase.extend({
+        options: {
+            path: "M 0 0 L 10 5 L 0 10 L 3 5 z"           ,
+            anchor: {
+                x: 10,
+                y: 5
+            }
+        },
+
+        createElement: function() {
+            var options = this.options;
+            this.drawingElement = d.Path.parse(options.path, {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+        },
+
+        positionMarker: function(path) {
+            var points = this._linePoints(path);
+            var start = points.start;
+            var end = points.end;
+            var transform = g.transform();
+            if (start) {
+                transform.rotate(lineAngle(start, end), end);
+            }
+
+            if (end) {
+                var anchor = this.anchor;
+                var translate = end.clone().translate(-anchor.x, -anchor.y);
+                transform.translate(translate.x, translate.y);
+            }
+            this.drawingElement.transform(transform);
+        },
+
+        _linePoints: function(path) {
+            var options = this.options;
+            var segments = path.segments;
+            var startPoint, endPoint, targetSegment;
+            if (options.position == START) {
+                targetSegment = segments[0];
+                if (targetSegment) {
+                    endPoint = targetSegment.anchor();
+                    startPoint = targetSegment.controlOut();
+                    var nextSegment = segments[1];
+                    if (!startPoint && nextSegment) {
+                        startPoint = nextSegment.anchor();
+                    }
+                }
+            } else {
+                targetSegment = segments[segments.length - 1];
+                if (targetSegment) {
+                    endPoint = targetSegment.anchor();
+                    startPoint = targetSegment.controlIn();
+                    var prevSegment = segments[segments.length - 2];
+                    if (!startPoint && prevSegment) {
+                        startPoint = prevSegment.anchor();
+                    }
+                }
+            }
+            if (endPoint) {
+                return {
+                    start: this._transformToPath(startPoint, path),
+                    end: this._transformToPath(endPoint, path)
+                };
+            }
+        }
+    });
+
+    var MarkerPathMixin = {
+        _getPath: function(position) {
+            var path = this.drawingElement;
+            if (path instanceof d.MultiPath) {
+                if (position == START) {
+                    path = path.paths[0];
+                } else {
+                    path = path.paths[path.paths.length - 1];
+                }
+            }
+            if (path && path.segments.length) {
+                return path;
+            }
+        },
+
+        _removeMarker: function(position) {
+            var marker = this._markers[position];
+            if (marker) {
+                this.drawingContainer().remove(marker.drawingElement);
+                delete this._markers[position];
+            }
+        },
+
+        _createMarkers: function() {
+            var options = this.options;
+            var startCap = options.startCap;
+            var endCap = options.endCap;
+            this._markers = {};
+            this._markers[START] = this._createMarker(startCap, START);
+            this._markers[END] = this._createMarker(endCap, END);
+        },
+
+        _createMarker: function(type, position) {
+            var path = this._getPath(position);
+            var markerType, marker;
+            if (!path) {
+                this._removeMarker(position);
+                return;
+            }
+
+            if (type == Markers.filledCircle) {
+                markerType = CircleMarker;
+            } else if (type == Markers.arrowStart || type == Markers.arrowEnd){
+                markerType = ArrowMarker;
+            } else {
+                this._removeMarker(position);
+            }
+            if (markerType) {
+                marker = new markerType({
+                    position: position
+                });
+                marker.positionMarker(path);
+                this.drawingContainer().append(marker.drawingElement);
+
+                return marker;
+            }
+        },
+
+        _positionMarker : function(position) {
+            var marker = this._markers[position];
+
+            if (marker) {
+                var path = this._getPath(position);
+                if (path) {
+                    marker.positionMarker(path);
+                } else {
+                    this._removeMarker(position);
+                }
+            }
+        },
+
+        _capMap: {
+            start: "startCap",
+            end: "endCap"
+        },
+
+        _redrawMarker: function(pathChange, position, options) {
+            var pathOptions = this.options;
+            var cap = this._capMap[position];
+            var optionsCap = options[cap];
+            var created = false;
+            if (optionsCap && pathOptions[cap] != optionsCap) {
+                pathOptions[cap] = optionsCap;
+                this._removeMarker(position);
+                this._markers[position] = this._createMarker(optionsCap, position);
+                created  = true;
+            } else if (pathChange && !this._markers[position] && pathOptions[cap]) {
+                this._markers[position] = this._createMarker(pathOptions[cap], position);
+                created = true;
+            }
+            return created;
+        },
+
+        _redrawMarkers: function (pathChange, options) {
+            if (!this._redrawMarker(pathChange, START, options) && pathChange) {
+                this._positionMarker(START);
+            }
+            if (!this._redrawMarker(pathChange, END, options) && pathChange) {
+                this._positionMarker(END);
+            }
+        }
+    };
+
+    var Path = VisualBase.extend({
+        init: function (options) {
+            VisualBase.fn.init.call(this, options);
+            this.container = new d.Group();
+            this._createElements();
+            this._initSize();
+        },
+
+        options: {
+            autoSize: true
+        },
+
+        drawingContainer: function() {
+            return this.container;
+        },
+
+        data: function (value) {
+            var options = this.options;
+            if (value) {
+                if (options.data != value) {
+                   options.data = value;
+                   this._setData(value);
+                   this._initSize();
+                   this._redrawMarkers(true, {});
+                }
+            } else {
+                return options.data;
+            }
+        },
+
+        redraw: function (options) {
+            if (options) {
+                VisualBase.fn.redraw.call(this, options);
+
+                var pathOptions = this.options;
+                var data = options.data;
+
+                if (defined(data) && pathOptions.data != data) {
+                    pathOptions.data = data;
+                    this._setData(data);
+                    if (!this._updateSize(options)) {
+                        this._initSize();
+                    }
+                    this._redrawMarkers(true, options);
+                } else {
+                    this._updateSize(options);
+                    this._redrawMarkers(false, options);
+                }
+            }
+        },
+
+        _createElements: function() {
+            var options = this.options;
+
+            this.drawingElement = d.Path.parse(options.data || "", {
+                fill: options.fill,
+                stroke: options.stroke
+            });
+            this.container.append(this.drawingElement);
+            this._createMarkers();
+        },
+
+        _setData: function(data) {
+            var drawingElement = this.drawingElement;
+            var paths = d.Path.parse(data || "").paths;
+            drawingElement.paths = paths;
+
+            for (var i = 0; i < paths.length; i++) {
+                paths[i].observer = drawingElement;
+            }
+
+            drawingElement.geometryChange();
+        }
+    });
+
+    deepExtend(Path.fn, AutoSizeableMixin);
+    deepExtend(Path.fn, MarkerPathMixin);
+
+    var Line = VisualBase.extend({
+        init: function (options) {
+            VisualBase.fn.init.call(this, options);
+            this.container = new d.Group();
+            this._initPath();
+            this._createMarkers();
+        },
+
+        drawingContainer: function() {
+            return this.container;
+        },
+
+        redraw: function (options) {
+            if (options) {
+                options = options || {};
+                var from = options.from;
+                var to = options.to;
+                if (from) {
+                    this.options.from = from;
+                }
+
+                if (to) {
+                    this.options.to = to;
+                }
+
+                if (from || to) {
+                    this._updatePath();
+                    this._redrawMarkers(true, options);
+                } else {
+                    this._redrawMarkers(false, options);
+                }
+
+                VisualBase.fn.redraw.call(this, options);
+            }
+        },
+
+        _initPath: function() {
+            var options = this.options;
+            var from = options.from || new Point();
+            var to = options.to || new Point();
+            var drawingElement = this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+            this._from = new g.Point(from.x, from.y);
+            this._to = new g.Point(to.x, to.y);
+            drawingElement.moveTo(this._from);
+            drawingElement.lineTo(this._to);
+            this.container.append(drawingElement);
+        },
+
+        _updatePath: function() {
+            var options = this.options;
+            var from = options.from;
+            var to = options.to;
+            this._from.x = from.x;
+            this._from.y = from.y;
+            this._to.move(to.x, to.y);
+        }
+    });
+
+    deepExtend(Line.fn, MarkerPathMixin);
+
+    var Polyline = VisualBase.extend({
+        init: function (options) {
+            VisualBase.fn.init.call(this, options);
+            this.container = new d.Group();
+            this._initPath();
+            this._createMarkers();
+        },
+
+        drawingContainer: function() {
+            return this.container;
+        },
+
+        points: function (points) {
+            var options = this.options;
+            if (points) {
+                options.points = points;
+                this._updatePath();
+            } else {
+                return options.points;
+            }
+        },
+
+        redraw: function (options) {
+            if (options) {
+                var points = options.points;
+                VisualBase.fn.redraw.call(this, options);
+
+                if (points && this._pointsDiffer(points)) {
+                    this.points(points);
+                    this._redrawMarkers(true, options);
+                } else {
+                    this._redrawMarkers(false, options);
+                }
+            }
+        },
+
+        _initPath: function() {
+            var options = this.options;
+            this.drawingElement = new d.Path({
+                fill: options.fill,
+                stroke: options.stroke
+            });
+
+            this.container.append(this.drawingElement);
+
+            if (options.points) {
+                this._updatePath();
+            }
+        },
+
+        _pointsDiffer: function(points) {
+            var currentPoints = this.options.points;
+            var differ = currentPoints.length !== points.length;
+            if (!differ) {
+                for (var i = 0; i < points.length; i++) {
+                    if (currentPoints[i].x !== points[i].x || currentPoints[i].y !== points[i].y) {
+                        differ = true;
+                        break;
+                    }
+                }
+            }
+
+            return differ;
+        },
+
+        _updatePath: function() {
+            var drawingElement = this.drawingElement;
+            var options = this.options;
+            var points = options.points;
+            var segments = drawingElement.segments = [];
+            var point, segment;
+            for (var i = 0; i < points.length; i++) {
+                point = points[i];
+                segment = new d.Segment(new g.Point(point.x, point.y));
+                segment.observer = drawingElement;
+                segments.push(segment);
+            }
+
+            drawingElement.geometryChange();
+        },
+
+        options: {
             points: []
         }
     });
 
+    deepExtend(Polyline.fn, MarkerPathMixin);
+
     var Image = Element.extend({
         init: function (options) {
-            Element.fn.init.call(this, document.createElementNS(SVGNS, "image"), options);
+            Element.fn.init.call(this, options);
+
+            this._initImage();
         },
-        options: {
-            autoSize: true
-        },
+
         redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            this.domElement.setAttributeNS(SVGXLINK, "href", this.options.source);
-            this.setAtr("width", "width");
-            this.setAtr("height", "height");
-            this.setAtr("x", "x");
-            this.setAtr("y", "y");
+            if (options) {
+                if (options.source) {
+                    this.drawingElement.src(options.source);
+                }
+
+                if (this._diffNumericOptions(options, [WIDTH, HEIGHT, X, Y])) {
+                    this.drawingElement.rect(this._rect());
+                }
+
+                Element.fn.redraw.call(this, options);
+            }
+        },
+
+        _initImage: function() {
+            var options = this.options;
+            var rect = this._rect();
+
+            this.drawingElement = new d.Image(options.source, rect, {});
+        },
+
+        _rect: function() {
+            var sizeOptions = sizeOptionsOrDefault(this.options);
+            var origin = new g.Point(sizeOptions.x, sizeOptions.y);
+            var size = new g.Size(sizeOptions.width, sizeOptions.height);
+
+            return new g.Rect(origin, size);
         }
     });
 
     var Group = Element.extend({
         init: function (options) {
-            Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
-            this.width = this.options.width;
-            this.height = this.options.height;
+            this.children = [];
+            Element.fn.init.call(this, options);
+            this.drawingElement = new d.Group();
+            this._initSize();
         },
+
         options: {
-            autoSize: true
+            autoSize: false
         },
+
         append: function (visual) {
-            this.domElement.appendChild(visual.domElement);
-            visual.canvas = this.canvas;
+            this.drawingElement.append(visual.drawingContainer());
+            this.children.push(visual);
+            this._childrenChange = true;
         },
+
         remove: function (visual) {
-            if (visual.domElement) {
-                this.domElement.removeChild(visual.domElement);
-            }
-            else {
-                this.domElement.removeChild(visual);
+            if (this._remove(visual)) {
+                this._childrenChange = true;
             }
         },
+
+        _remove: function(visual) {
+            var index = inArray(visual, this.children);
+            if (index >= 0) {
+                this.drawingElement.removeAt(index);
+                this.children.splice(index, 1);
+                return true;
+            }
+        },
+
         clear: function () {
-            while (this.domElement.lastChild) {
-                this.domElement.removeChild(this.domElement.lastChild);
+            this.drawingElement.clear();
+            this.children = [];
+            this._childrenChange = true;
+        },
+
+        toFront: function (visuals) {
+            var visual;
+
+            for (var i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                if (this._remove(visual)) {
+                    this.append(visual);
+                }
             }
         },
-        toFront: function (visuals) {
-            var visual, i, n = this.domElement;
+        //TO DO: add drawing group support for moving and inserting children
+        toBack: function (visuals) {
+            this._reorderChildren(visuals, 0);
+        },
+
+        toIndex: function (visuals, indices) {
+            this._reorderChildren(visuals, indices);
+        },
+
+        _reorderChildren: function(visuals, indices) {
+            var group = this.drawingElement;
+            var drawingChildren = group.children.slice(0);
+            var children = this.children;
+            var fixedPosition = isNumber(indices);
+            var i, index, toIndex, drawingElement, visual;
 
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                n.appendChild(visual.domElement);
+                drawingElement = visual.drawingContainer();
+
+                index = inArray(visual, children);
+                if (index >= 0) {
+                    drawingChildren.splice(index, 1);
+                    children.splice(index, 1);
+
+                    toIndex = fixedPosition ? indices : indices[i];
+
+                    drawingChildren.splice(toIndex, 0, drawingElement);
+                    children.splice(toIndex, 0, visual);
+                }
             }
+            group.clear();
+            group.append.apply(group, drawingChildren);
         },
-        toBack: function (visuals) {
-            var visual, i;
-            for (i = 0; i < visuals.length; i++) {
-                visual = visuals[i];
-                this.domElement.insertBefore(visual.domElement, this.domElement.firstChild);
-            }
-        },
-        toIndex: function (visuals, indices) { // bring the items to the following index
-            var visual, i, index;
-            for (i = 0; i < visuals.length; i++) {
-                visual = visuals[i];
-                index = indices[i];
-                this.domElement.insertBefore(visual.domElement, this.domElement.children[index]);
-            }
-        },
-        size: function () {
-            sizeTransform(this);
-        },
+
         redraw: function (options) {
-            Element.fn.redraw.call(this, options);
-            this.size();
+            if (options) {
+                if (this._childrenChange) {
+                    this._childrenChange = false;
+                    if (!this._updateSize(options)) {
+                        this._initSize();
+                    }
+                } else {
+                    this._updateSize(options);
+                }
+
+                Element.fn.redraw.call(this, options);
+            }
+        },
+
+        _boundingBox: function() {
+            var children = this.children;
+            var boundingBox;
+            var visual, childBoundingBox;
+            for (var i = 0; i < children.length; i++) {
+                visual = children[i];
+                if (visual.visible() && visual._includeInBBox !== false) {
+                    childBoundingBox = visual.drawingContainer().bbox(null);
+                    if (childBoundingBox) {
+                        if (boundingBox) {
+                            boundingBox = boundingBox.wrap(childBoundingBox);
+                        } else {
+                            boundingBox = childBoundingBox;
+                        }
+                    }
+                }
+            }
+
+            return boundingBox;
         }
     });
+
+    deepExtend(Group.fn, AutoSizeableMixin);
 
     var Circle = VisualBase.extend({
         init: function (options) {
-            var that = this;
-            if (options && options.radius) {
-                options.width = options.radius * 2;
-                options.height = options.radius * 2;
-            }
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "ellipse"), options);
+            VisualBase.fn.init.call(this, options);
+            this._initCircle();
         },
+
         redraw: function (options) {
-            if (options && Utils.isNumber(options.width) && Utils.isNumber(options.height)) {
-                options.center = new Point(options.width / 2, options.height / 2);
-            }
-            VisualBase.fn.redraw.call(this, options);
-            var n = this.domElement,
-                o = this.options,
-                rx = o.width / 2 || o.rx, ry = o.height / 2 || o.rx;
+            if (options) {
+                var circleOptions = this.options;
 
-            if (rx && ry) {
-                n.rx.baseVal.value = rx;
-                n.ry.baseVal.value = ry;
+                if (options.center) {
+                    deepExtend(circleOptions, {
+                        center: options.center
+                    });
+                    this._center.move(circleOptions.center.x, circleOptions.center.y);
+                }
+
+                if (this._diffNumericOptions(options, ["radius"])) {
+                    this._circle.setRadius(circleOptions.radius);
+                }
+                VisualBase.fn.redraw.call(this, options);
+            }
+        },
+
+        _initCircle: function() {
+            var options = this.options;
+            var width = options.width;
+            var height = options.height;
+            var radius = options.radius;
+            if (!defined(radius)) {
+                if (!defined(width)) {
+                    width = height;
+                }
+                if (!defined(height)) {
+                    height = width;
+                }
+                options.radius = radius = Math.min(width, height) / 2;
             }
 
-            if (o.center) {
-                n.cx.baseVal.value = o.center.x;
-                n.cy.baseVal.value = o.center.y;
-            } else if (Utils.isDefined(o.x) && Utils.isDefined(o.y)) {
-                n.cx.baseVal.value = o.x + rx;
-                n.cy.baseVal.value = o.y + ry;
-            } else {
-                n.cx.baseVal.value = rx;
-                n.cy.baseVal.value = ry;
-            }
+            var center = options.center || {x: radius, y: radius};
+            this._center = new g.Point(center.x, center.y);
+            this._circle = new g.Circle(this._center, radius);
+            this.drawingElement = new d.Circle(this._circle, {
+                fill: options.fill,
+                stroke: options.stroke
+            });
         }
     });
 
-    var Canvas = Visual.extend({
+    var Canvas = Class.extend({
         init: function (element, options) {
-            var that = this;
-            Visual.fn.init.call(that, document.createElementNS(SVGNS, "svg"), options);
-            this.markers = [];
-            this.gradients = [];
-            this.visuals = [];
-            this.defsNode = document.createElementNS(SVGNS, "defs");
-            this.domElement.appendChild(this.defsNode);
-            if (element.context) {
-                this.element = element.context; // kendo wrapped object
+            options = options || {};
+            this.element = element;
+            this.surface = d.Surface.create(element, options);
+            if (kendo.isFunction(this.surface.translate)) {
+                this.translate = this._translate;
             }
-            else {
-                this.element = element;
-            }
-            $(this.domElement).css({
-                width: this.options.width,
-                height: this.options.height
-            });
-            this.element.appendChild(that.domElement);
-            this.domElement.style.background = that.options.background;
-            this.domElement.setAttribute('xmlns', SVGNS);
-            this.domElement.setAttribute('xmlns:xlink', SVGXLINK);
-            this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
-            this._markers();
-            this.masks = [];
+
+            this.drawingElement = new d.Group();
+            this._viewBox = new Rect(0, 0, options.width, options.height);
         },
-        options: {
-            width: "100%",
-            height: "100%",
-            background: "none",
-            id: "SVGRoot"
-        },
+
         bounds: function () {
-            var box = this.domElement.getBBox();
-            return new Rect(0, 0, box.width, box.height);
+            var box = this.drawingElement.bbox();
+            return new Rect(0, 0, box.width(), box.height());
         },
-        focus: function () {
-            this.element.focus();
-        },
-        size: function () {
-            var canvas = this,
-                size = Visual.fn.size.apply(canvas, arguments),
-                viewBox = this.viewBox();
 
-            this._styledSize(canvas.domElement);
-
-            viewBox.width = size.width;
-            viewBox.height = size.height;
-            this.viewBox(viewBox);
-
-            return size;
-        },
-        _styledSize: function (node) {
-            var size = this._sz;
-            $(node).css(size);
-        },
-        viewBox: function (rect) {
-            var canvas = this;
-
-            if (isUndefined(rect)) {
-                return canvas.domElement.viewBox.baseVal ? Rect.toRect(canvas.domElement.viewBox.baseVal) : Rect.empty();
+        size: function (size) {
+            var viewBox = this._viewBox;
+            if (defined(size)) {
+                viewBox.width = size.width;
+                viewBox.height = size.height;
+                this.surface.setSize(size);
             }
-
-            rect = Rect.toRect(rect);
-            if (!isNaN(rect.width) && !isNaN(rect.height)) {
-                this.domElement.setAttribute("viewBox", rect.toString(","));
-            }
+            return {
+                width: viewBox.width,
+                height: viewBox.height
+            };
         },
-        append: function (shape) {
-            this.domElement.appendChild(shape.domElement);
-            shape.canvas = this;
-            this.visuals.push(shape);
+
+        _translate: function (x, y) {
+            var viewBox = this._viewBox;
+            if (defined(x) && defined(y)) {
+                viewBox.x = x;
+                viewBox.y = y;
+                this.surface.setSize(viewBox);
+                this.surface.translate({x: x, y: y});
+            }
+            return {
+                x: viewBox.x,
+                y: viewBox.y
+            };
+        },
+
+        draw: function() {
+            this.surface.draw(this.drawingElement);
+        },
+
+        append: function (visual) {
+            this.drawingElement.append(visual.drawingContainer());
             return this;
         },
+
         remove: function (visual) {
-            if (Utils.indexOf(this.visuals, visual) >= 0) {
-                this.domElement.removeChild(visual.domElement);
-                visual.canvas = undefined;
-                Utils.remove(this.visuals, visual);
-                return this;
-            }
+            this.drawingElement.remove(visual.drawingContainer());
         },
+
         insertBefore: function (visual, beforeVisual) {
-            this.domElement.insertBefore(visual.domElement, beforeVisual.domElement);
-            visual.canvas = this;
-            this.visuals.push(visual);
-            return this;
-        },
-        addMarker: function (marker) {
-            this.defsNode.appendChild(marker.domElement);
-            this.markers.push(marker);
-        },
-        removeMarker: function (marker) {
-            if (marker && Utils.contains.contains(this.markers, marker)) {
-                this.defsNode.removeChild(marker.domElement);
-                Utils.remove(this.markers, marker);
-            }
-        },
-        addMask: function (mask) {
-            this.defsNode.appendChild(mask.domElement);
-            this.masks.push(mask);
-        },
-        removeMask: function (mask) {
-            if (mask && Utils.contains(this.masks, mask)) {
-                this.defsNode.removeChild(mask.domElement);
-                Utils.remove(this.masks, mask);
-            }
-        },
-        removeGradient: function (gradient) {
-            if (gradient && Utils.contains(this.gradients, gradient)) {
-                this.defsNode.removeChild(gradient.domElement);
-                Utils.remove(this.gradients, gradient);
-            }
-        },
-        addGradient: function (gradient) {
-            this.defsNode.appendChild(gradient.domElement);
-            this.gradients.push(gradient);
-        },
-        clearMarkers: function () {
-            var i;
-            if (this.markers.length === 0) {
-                return;
-            }
-            for (i = 0; i < this.markers.length; i++) {
-                this.defsNode.removeChild(this.markers[i].domElement);
-            }
-            this.markers = [];
-        },
-        clear: function () {
-            while (this.visuals.length) {
-                this.remove(this.visuals[0]);
-            }
-        },
-        mask: function (mask) {
-            if (mask === null) {
-                this.domElement.removeAttribute("mask");
-            }
-            else {
-                this.domElement.setAttribute("mask", "url(#" + mask.domElement.id + ")");
-            }
 
         },
-        _markers: function () {
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
-                    background: "Black"
-                },
-                id: Markers.arrowEnd,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(10, 5)
-            }));
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 5 L 10 0 L 7 5 L 10 10 z",
-                    background: "Black"
-                },
-                id: Markers.arrowStart,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(0, 5)
-            }));
-            this.addMarker(new Marker({
-                circle: {
-                    width: 6,
-                    height: 6,
-                    center: new Point(5, 5),
-                    stroke: {
-                        width: 1
-                    },
-                    background: "black"
-                },
-                width: 10,
-                height: 10,
-                id: Markers.filledCircle,
-                ref: new Point(5, 5),
-                orientation: "auto"
-            }));
+
+        clear: function () {
+            this.drawingElement.clear();
         },
+
         destroy: function(clearHtml) {
+            this.surface.destroy();
             if(clearHtml) {
                 $(this.element).remove();
             }
         }
     });
 
+    // Helper functions ===========================================
+
+    function sizeOptionsOrDefault(options) {
+        return {
+            x: options.x || 0,
+            y: options.y || 0,
+            width: options.width || 0,
+            height: options.height || 0
+        };
+    }
+
+    function normalizeDrawingOptions(options) {
+        if (options) {
+            var drawingOptions = options;
+
+            if (isString(drawingOptions)) {
+                drawingOptions = {
+                    color: drawingOptions
+                };
+            }
+
+            if (drawingOptions.color) {
+                drawingOptions.color = getColor(drawingOptions.color);
+            }
+            return drawingOptions;
+        }
+    }
+
+    function getColor(value) {
+        var color;
+        if (value != TRANSPARENT) {
+            color = new dataviz.Color(value).toHex();
+        } else {
+            color = value;
+        }
+        return color;
+    }
+
+    function lineAngle(p1, p2) {
+        var xDiff = p2.x - p1.x;
+        var yDiff = p2.y - p1.y;
+        var angle = dataviz.util.deg(Math.atan2(yDiff, xDiff));
+        return angle;
+    }
+
+    function diffNumericOptions(options, fields) {
+        var elementOptions = this.options;
+        var hasChanges = false;
+        var value, field;
+        for (var i = 0; i < fields.length; i++) {
+            field = fields[i];
+            value = options[field];
+            if (isNumber(value) && elementOptions[field] !== value) {
+                elementOptions[field] = value;
+                hasChanges = true;
+            }
+        }
+
+        return hasChanges;
+    }
+
+    // Exports ================================================================
     kendo.deepExtend(diagram, {
         init: function (element) {
             kendo.init(element, diagram.ui);
         },
+        diffNumericOptions: diffNumericOptions,
+        Element: Element,
         Scale: Scale,
         Translation: Translation,
         Rotation: Rotation,
@@ -1047,14 +1401,13 @@
         Canvas: Canvas,
         Path: Path,
         Line: Line,
-        Marker: Marker,
+        MarkerBase: MarkerBase,
+        ArrowMarker: ArrowMarker,
+        CircleMarker: CircleMarker,
         Polyline: Polyline,
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
-        TextBlockEditor: TextBlockEditor,
         Image: Image,
-        Mask: Mask,
-        Visual: Visual,
         VisualBase: VisualBase
     });
 })(window.kendo.jQuery);

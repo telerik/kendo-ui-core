@@ -698,24 +698,79 @@
     });
 
     /*-----------Rect tests------------------------------------*/
-    QUnit.module("Rect tests");
+    (function() {
+        var Rect = diagram.Rect;
+        var rect;
 
-    test("Basic tests", function () {
-        var r = new diagram.Rect(122, 155);
-        equal(r.width, 0, "if not specified, width should be 0");
-        ok(!r.contains(new diagram.Point(150, 160)));
+        module("Rect / initialization");
 
-        r.width = 120;
-        r.height = 150;
-        ok(r.contains(new diagram.Point(150, 160)), "Specifying the dimensions renders the result.");
-        ok(!r.contains(new diagram.Point(NaN, 160)));
-        ok(!r.contains(new diagram.Point(550, 160)), "Points outside should not be contained, obviously.");
-        r = new diagram.Rect(100, 100, 150, 150);
-        r.inflate(5);
-        ok(r.width == 161);
-        var rr = r.clone();
-        ok(rr.x == r.x && rr.y == r.y && rr.width == r.width && rr.height == r.height, "Clones should be identical.");
-    });
+        test("sets passed values", function() {
+           rect = new Rect(10, 20, 30, 40);
+           equal(rect.x, 10);
+           equal(rect.y, 20);
+           equal(rect.width, 30);
+           equal(rect.height, 40);
+        });
+
+        test("parameters default to 0 if not passed", function() {
+            rect = new Rect();
+            equal(rect.x, 0);
+            equal(rect.y, 0);
+            equal(rect.width, 0);
+            equal(rect.height, 0);
+        });
+
+        module("Rect / api", {
+            setup: function() {
+                rect = new Rect(10, 10, 100, 100);
+            }
+        });
+
+        test("contains determines if point is inside rectangle", function() {
+            ok(rect.contains(new Point(110, 100)));
+            ok(!rect.contains(new Point(110, 120)));
+        });
+
+        test("center returns the rect center point", function() {
+            var center = rect.center();
+            equal(center.x, 60);
+            equal(center.y, 60);
+        });
+
+        test("inflate moves x and y increases size with twice the passed values plus one", function() {
+            rect.inflate(5, 10);
+            equal(rect.x, 5);
+            equal(rect.y, 0);
+            equal(rect.width, 111);
+            equal(rect.height, 121);
+        });
+
+        test("inflate uses first parameter for both x and y if a second parameter is not passed", function() {
+            rect.inflate(5);
+            equal(rect.x, 5);
+            equal(rect.y, 5);
+            equal(rect.width, 111);
+            equal(rect.height, 111);
+        });
+
+        test("clone returns a new rect with same values", function() {
+            var clone = rect.clone();
+            ok(clone !== rect);
+            equal(rect.x, 10);
+            equal(rect.y, 10);
+            equal(rect.width, 100);
+            equal(rect.height, 100);
+        });
+
+        test("zoom multiplies values by the passed parameter", function() {
+            rect.zoom(2);
+            equal(rect.x, 20);
+            equal(rect.y, 20);
+            equal(rect.width, 200);
+            equal(rect.height, 200);
+        });
+
+    })();
 
     /*-----------XML Loading tests------------------------------------*/
     QUnit.module("Graph adapter tests", {

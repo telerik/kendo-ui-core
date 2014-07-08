@@ -185,11 +185,13 @@ span.k-sparkline,
 
 /* Map */
 
-.k-map {
+.k-map,
+.k-diagram {
     height: 600px;
 }
 
-.k-map .km-scroll-wrapper {
+.k-map .km-scroll-wrapper,
+.k-diagram .km-scroll-wrapper {
     padding-bottom: 0;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -197,19 +199,23 @@ span.k-sparkline,
 }
 
 .k-map .km-scroll-wrapper,
-.k-map .km-scroll-container {
+.k-diagram .km-scroll-wrapper,
+.k-map .km-scroll-container,
+.k-diagram .km-scroll-container {
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
-.k-map .k-layer {
+.k-map .k-layer,
+.k-diagram .k-layer {
     position: absolute;
     left: 0;
     top: 0;
 }
 
-.k-map .km-touch-scrollbar {
+.k-map .km-touch-scrollbar,
+.k-diagram .km-touch-scrollbar {
     display: none;
 }
 

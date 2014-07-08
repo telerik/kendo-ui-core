@@ -1,31 +1,61 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 
 (function ($, undefined) {
-    var kendo = window.kendo, diagram = kendo.dataviz.diagram, d, Point = diagram.Point;
+    var kendo = window.kendo;
+    var deepExtend = kendo.deepExtend;
+    var diagram = kendo.dataviz.diagram;
+    var Point = diagram.Point;
+    var element;
+    var d;
+
+    function setup() {
+        setupDiagram();
+        addShapes();
+    }
+
+    function addShapes() {
+        d.addShape(new Point(10, 20), { data: "Rectangle" });
+        d.addShape(new Point(50, 100), { data: "Rectangle" });
+        d.addShape(new Point(30, 200), { data: "Rectangle" });
+        d.addShape(new Point(500, 100), { data: "Rectangle" });
+    }
+
+    function setupDiagram(options) {
+        element = $('<div id=canvas />').appendTo(QUnit.fixture);
+        element.kendoDiagram(deepExtend({
+            theme: "black"
+        }, options));
+        d = element.data("kendoDiagram");
+    }
+
+    function teardown() {
+        kendo.destroy(QUnit.fixture);
+        element.remove();
+    }
+
+    module("ToolService", {
+        setup: setup,
+        teardown: teardown
+    });
+
+    test("toolservice ends tool on start if there is active tool", function() {
+        d.toolService.activeTool = {
+            end: function(p, meta) {
+                ok(true);
+            }
+        };
+        d.toolService.start(new Point(), {});
+    });
 
     module("Selection tests", {
-        setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram({
-                theme: "black"
-            });
-
-            d = $("#canvas").getKendoDiagram();
-            randomDiagram(d);
-        },
-        teardown: function () {
-            kendo.destroy(QUnit.fixture);
-        }
+        setup: setup,
+        teardown: teardown
     });
 
     test("Select/Deselect all", function () {
         d.selectAll();
 
         equal(d.shapes.length + d.connections.length, d.select().length);
-
-//        d.select(false);
-//
-//        equal(0, d.select().length);
     });
 
     test("Select/Deselect any", function () {
@@ -57,49 +87,124 @@
         ok(c.targetConnector !== undefined, "Connection is attached to the target.");
     });
 
-    test("Resizing/Selection adorner", function () {
-        var i = d.shapes[0];
-        i.select(true);
-        var adorner = d._resizingAdorner;
-        ok(adorner, "Adorner is present.");
-        deepEqual(i.bounds("transformed").inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
-    });
+    (function() {
+        var adorner;
+        var visual;
+        var drawingContainer;
 
-    test("Resizing adorner - correct cursor", function () {
-        var last = d.shapes[d.shapes.length - 1];
+        module("Resizing/Selection adorner / initialization", {
+            setup: function() {
+                setupDiagram();
+                adorner = d._resizingAdorner;
+                visual = adorner.visual;
+                drawingContainer = visual.drawingContainer();
+            },
+            teardown: teardown
+        });
 
-        last.select(true);
-        var adorner = d._resizingAdorner;
-        var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
-        var testP = last.bounds().bottomRight().plus(delta);
+        test("creates visual group", function() {
+            ok(visual instanceof diagram.Group);
+        });
 
-        equal(adorner._getCursor(testP), "se-resize", "Cursor is correct.");
-    });
+        test("creates bounds rectangle", function() {
+            ok(adorner.rect instanceof diagram.Rectangle);
+        });
 
-    test("Resizing adorner - correct cursor after rotation - 50", function () {
-        var last = d.shapes[d.shapes.length - 1];
-        var adorner = d._resizingAdorner;
+        test("appends bounds rectangle to visual group", function() {
+            ok($.inArray(adorner.rect.drawingContainer(), drawingContainer.children) >= 0);
+        });
 
-        last.select(true);
-        last.rotate(50);
-        var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
-        var testP = last.bounds().bottomRight().plus(delta);
-        testP.rotate(last.bounds().center(), 360 - 50);
+        test("creates handles", function() {
+            var map = adorner.map;
+            equal(map.length, 8);
+            for (var i = 0; i < 8; i++) {
+                ok(map[i].visual instanceof diagram.Rectangle);
+            }
+        });
 
-        equal(adorner._getCursor(testP), "s-resize", "Cursor is correct.");
-    });
+        test("adds handles to visual group", function() {
+            var map = adorner.map;
+            for (var i = 0; i < 8; i++) {
+                ok($.inArray(map[i].visual.drawingContainer(), drawingContainer.children) >= 0);
+            }
+        });
 
+        test("creates rotation thumb", function() {
+            ok(adorner.rotationThumb instanceof diagram.Path);
+        });
+
+        test("adds rotation thumb to visual group", function() {
+            ok($.inArray(adorner.rotationThumb.drawingContainer(), drawingContainer.children) >= 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Resizing/Selection adorner / editable", {
+            setup: function() {
+                setupDiagram({
+                    editable: {
+                        resize: false,
+                        rotate: false
+                    }
+                });
+                adorner = d._resizingAdorner;
+                visual = adorner.visual;
+                drawingContainer = visual.drawingContainer();
+            },
+            teardown: teardown
+        });
+
+        test("does not create handles if resizing is disabled", function() {
+            equal(adorner.map.length, 0);
+        });
+
+        test("does not create rotation thumb if rotation is disabled", function() {
+            ok(!adorner.rotationThumb);
+        });
+
+        // ------------------------------------------------------------
+        module("Resizing/Selection adorner", {
+            setup: function() {
+                setupDiagram();
+                adorner = d._resizingAdorner;
+                addShapes();
+            },
+            teardown: teardown
+        });
+
+        test("bounds", function () {
+            var shape = d.shapes[0];
+            shape.select(true);
+            deepEqual(shape.bounds("transformed").inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
+        });
+
+        test("correct cursor", function () {
+            var last = d.shapes[d.shapes.length - 1];
+
+            last.select(true);
+            var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
+            var testP = last.bounds().bottomRight().plus(delta);
+
+            equal(adorner._getCursor(testP), "se-resize", "Cursor is correct.");
+        });
+
+        test("correct cursor after rotation - 50", function () {
+            var last = d.shapes[d.shapes.length - 1];
+
+            last.select(true);
+            last.rotate(50);
+            var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
+            var testP = last.bounds().bottomRight().plus(delta);
+            testP.rotate(last.bounds().center(), 360 - 50);
+
+            equal(adorner._getCursor(testP), "s-resize", "Cursor is correct.");
+        });
+
+    })();
+
+    // ------------------------------------------------------------
     module("Tooling tests. Ensure the tools are activated correctly.", {
-        setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram();
-
-            d = $("#canvas").getKendoDiagram();
-            randomDiagram(d);
-        },
-        teardown: function () {
-            d.destroy();
-        }
+        setup: setup,
+        teardown: teardown
     });
 
     test("Connectors activated", function () {
@@ -136,31 +241,16 @@
         //equal(d.toolService._hoveredConnector, s1.getConnector("Auto"), "Auto (center) connector is hovered");
     });
 
-    module("Hitesting tests", {
-        setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram();
+    // ------------------------------------------------------------
+    // module("Hitesting tests", {
+        // setup: setup,
+        // teardown: teardown
+    // });
 
-            d = $("#canvas").getKendoDiagram();
-            randomDiagram(d);
-        },
-        teardown: function () {
-            d.destroy();
-        }
-    });
-
-    /*-----------Undoredo tests------------------------------------*/
+    // ------------------------------------------------------------
     QUnit.module("UndoRedo tests", {
-        setup: function () {
-            QUnit.fixture.html('<div id=canvas />');
-            $("#canvas").kendoDiagram();
-
-            d = $("#canvas").getKendoDiagram();
-            randomDiagram(d);
-        },
-        teardown: function () {
-            d.destroy();
-        }
+        setup: setup,
+        teardown: teardown
     });
 
     test("UndoRedoService basic", function () {
