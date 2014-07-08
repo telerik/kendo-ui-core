@@ -1003,6 +1003,16 @@
         }
       },
       {
+        "text": "Server filtering",
+        "url": "dropdownlist/serverfiltering",
+        "title": {
+            "kendo-ui": "Example of Server filtering in Kendo UI DropDownList widget"
+        },
+        "meta": {
+            "kendo-ui": "See how the auto-searchable dropdown list of Kendo UI DropDownList is filtered on the the server based on the input."
+        }
+      },
+      {
         "text": "Customizing templates",
         "url": "dropdownlist/template",
         "title": {
