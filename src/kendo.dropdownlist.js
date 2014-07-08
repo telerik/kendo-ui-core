@@ -242,9 +242,10 @@ var __meta__ = {
 
             if (!filtered) {
                 if (that._open) {
-                    that._open = false;
                     that.toggle(!!length);
                 }
+
+                that._open = false;
 
                 if (!that._fetch) {
                     if (length) {
