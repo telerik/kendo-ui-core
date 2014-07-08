@@ -2602,13 +2602,17 @@ a.footer-links:hover,
     padding: 0 0 0.924em;
 }
 
+#widgets-all > ul > li {
+    padding-bottom: 2em;
+}
+
 #overview-widgets h3 {
     color: #000;
     font: 700 12px/1em Arial,Helvetica,sans-serif;
     text-transform: uppercase;
     margin-left: 0.833em;
     text-align: left;
-    padding: 0 0 0.924em;
+    padding: 0 0 1em;
 }
 
 #most-popular a{
