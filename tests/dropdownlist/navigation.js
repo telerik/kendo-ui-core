@@ -558,4 +558,22 @@
             keyCode: kendo.keys.TAB
         });
     });
+
+    test("DropDownList do not loose focus on double wrapper click", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.click();
+        dropdownlist.wrapper.click();
+
+        equal(dropdownlist.wrapper[0], document.activeElement);
+    });
 })();

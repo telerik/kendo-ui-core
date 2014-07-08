@@ -379,8 +379,8 @@ var __meta__ = {
                         that._wrapperClicked = true;
                     })
                     .on("click" + ns, function(e) {
-                            that._blured = false;
                             e.preventDefault();
+                            that._focused = that.wrapper;
                             that._toggle();
                     });
 
