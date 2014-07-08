@@ -197,11 +197,13 @@ var __meta__ = {
             var dimensionsSchema = this.options.dimensions || [];
             var result = [];
             var root;
+            var idx;
+            var length;
 
             if (descriptors.length) {
                 root = { members: [] };
 
-                for (var idx = 0, length = descriptors.length; idx < length; idx++) {
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
                     root.members[root.members.length] = {
                         children: [],
                         caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
@@ -219,13 +221,13 @@ var __meta__ = {
 
             for (var key in map) {
                 var tuple = { members: [] };
-                for (var idx = 0, length = descriptors.length; idx < length; idx++) {
-                    if (map[key].parentName.indexOf(descriptors[idx].name) == 0) {
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                    if (map[key].parentName.indexOf(descriptors[idx].name) === 0) {
                         tuple.members[tuple.members.length] = {
                             children: [],
-                            caption: map[key]["value"],
-                            name: map[key]["name"],
-                            levelName: map[key]["name"],
+                            caption: map[key].value,
+                            name: map[key].name,
+                            levelName: map[key].name,
                             levelNum: 1,
                             hasChildren: false,
                             parentName: descriptors[idx].name,
@@ -276,7 +278,7 @@ var __meta__ = {
         _matchDescriptors: function(dataItem, descriptors, getters, idx) {
             var descriptor;
             var parts;
-            var parenField;
+            var parentField;
             var expectedValue;
             var parentGetter;
 
