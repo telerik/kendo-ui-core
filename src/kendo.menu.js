@@ -714,6 +714,7 @@ var __meta__ = {
 
         _updateClasses: function() {
             var element = this.element,
+                nonContentGroupsSelector = menuSelector + " div ul",
                 items;
 
             element.removeClass("k-menu-horizontal k-menu-vertical");
@@ -721,7 +722,7 @@ var __meta__ = {
 
             element.find("li > ul")
                    .filter(function() {
-                       return !$(this).parentsUntil(menuSelector, "div")[0];
+                       return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
                    })
                    .addClass("k-group k-menu-group")
                    .attr("role", "menu")
