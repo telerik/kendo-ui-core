@@ -56,7 +56,7 @@
             surface.translate({ x: 10, y: 10 });
             surface.size({ width: 100, height: 100 });
 
-            equal(surface.element.getAttribute("viewBox"), "10 10 100 100");
+            equal(surface._rootElement.getAttribute("viewBox"), "10 10 100 100");
         });
     })();
 

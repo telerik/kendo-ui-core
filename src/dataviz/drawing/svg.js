@@ -38,6 +38,24 @@
 
     // SVG rendering surface ==================================================
     var Surface = d.Surface.extend({
+        init: function(element, options) {
+            d.Surface.fn.init.call(this, element, options);
+
+            this._root = new RootNode();
+
+            renderSVG(this.element[0], this._template(this));
+            this._rootElement = this.element[0].firstElementChild;
+            alignToScreen(this._rootElement);
+
+            this._root.attachTo(this._rootElement);
+
+            this.element.on("click", this._click);
+            this.element.on("mouseover", this._mouseenter);
+            this.element.on("mouseout", this._mouseleave);
+
+            this.resize();
+        },
+
         translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
@@ -45,7 +63,7 @@
                 this._size.width, this._size.height);
 
             this._offset = offset;
-            this.element.setAttribute("viewBox", viewBox);
+            this._rootElement.setAttribute("viewBox", viewBox);
         },
 
         draw: function(element) {
@@ -61,8 +79,8 @@
         },
 
         setSize: function(size) {
-            this.element.setAttribute("width", renderSize(size.width));
-            this.element.setAttribute("height", renderSize(size.height));
+            this._rootElement.setAttribute("width", renderSize(size.width));
+            this._rootElement.setAttribute("height", renderSize(size.height));
 
             d.Surface.fn.setSize.call(this, size);
         },
@@ -81,21 +99,6 @@
         ),
 
         _appendTo: function(container) {
-            this._root = new RootNode();
-
-            renderSVG(container, this._template(this));
-            this.element = container.firstElementChild;
-            alignToScreen(this.element);
-
-            this._root.attachTo(this.element);
-
-            var element = $(this.element);
-
-            element.on("click", this._click);
-            element.on("mouseover", this._mouseenter);
-            element.on("mouseout", this._mouseleave);
-
-            this.resize();
         }
     });
 

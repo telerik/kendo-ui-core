@@ -42,6 +42,30 @@
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
+        init: function(element, options) {
+            d.Surface.fn.init.call(this, element, options);
+
+            var canvas = this.element[0].firstElementChild;
+
+            if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
+                this.element[0].innerHTML = this._template(this);
+                canvas = this.element[0].firstElementChild;
+            } else {
+                $(canvas).css({
+                    width: this.options.width,
+                    height: this.options.height
+                });
+            }
+
+            canvas.width = $(canvas).width();
+            canvas.height = $(canvas).height();
+
+            this._rootElement = canvas;
+
+            this._root = new RootNode(canvas);
+            this._root.invalidate();
+        },
+
         draw: function(element) {
             this._root.load([element]);
         },
@@ -51,8 +75,8 @@
         },
 
         setSize: function(size) {
-            this.element.width = size.width;
-            this.element.height = size.height;
+            this._rootElement.width = size.width;
+            this._rootElement.height = size.height;
 
             d.Surface.fn.setSize.call(this, size);
         },
@@ -61,30 +85,7 @@
             "<canvas style='position: absolute; " +
             "width: #= kendo.dataviz.util.renderSize(d.options.width) #; " +
             "height: #= kendo.dataviz.util.renderSize(d.options.height) #;'></canvas>"
-        ),
-
-        _appendTo: function(container) {
-            var options = this.options,
-                canvas = container.firstElementChild;
-
-            if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                container.innerHTML = this._template(this);
-                canvas = container.firstElementChild;
-            } else {
-                $(canvas).css({
-                    width: options.width,
-                    height: options.height
-                });
-            }
-
-            canvas.width = $(canvas).width();
-            canvas.height = $(canvas).height();
-
-            this.element = canvas;
-
-            this._root = new RootNode(canvas);
-            this._root.invalidate();
-        }
+        )
     });
 
     // Nodes ===================================================================
