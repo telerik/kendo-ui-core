@@ -96,6 +96,16 @@ Help topic showing how cascading functionality works
     }
 
     /**
+    * The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
+The supported filter values are startswith, endswith and contains.
+    * @param string $value
+    * @return \Kendo\UI\DropDownList
+    */
+    public function filter($value) {
+        return $this->setProperty('filter', $value);
+    }
+
+    /**
     * The height of the suggestion popup in pixels. The default value is 200 pixels.
     * @param float $value
     * @return \Kendo\UI\DropDownList
@@ -120,6 +130,15 @@ Help topic showing how cascading functionality works
     */
     public function index($value) {
         return $this->setProperty('index', $value);
+    }
+
+    /**
+    * The minimum number of characters the user must type before a filter is performed. Set to higher value than 1 if the search could match a lot of items.
+    * @param float $value
+    * @return \Kendo\UI\DropDownList
+    */
+    public function minLength($value) {
+        return $this->setProperty('minLength', $value);
     }
 
     /**

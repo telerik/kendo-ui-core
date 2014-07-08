@@ -97,7 +97,7 @@ Help topic showing how cascading functionality works
     }
 
     /**
-    * The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+    * The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
 The supported filter values are startswith, endswith and contains.
     * @param string $value
     * @return \Kendo\UI\ComboBox
