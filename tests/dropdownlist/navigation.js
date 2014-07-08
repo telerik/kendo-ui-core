@@ -513,7 +513,7 @@
         dropdownlist.filterInput.focus().val("item2").keydown();
     });
 
-    test("DropDownList calls focusout on wrapper on TAB", 1, function() {
+    test("DropDownList calls focusout of wrapper on TAB", function() {
         var dropdownlist = input.kendoDropDownList({
             dataTextField: "text",
             dataValueField: "value",
