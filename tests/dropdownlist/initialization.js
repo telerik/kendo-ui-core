@@ -926,7 +926,7 @@
 
         var filterHeader = dropdownlist.list.children().first();
 
-        ok(filterHeader.hasClass("k-filter-wrap"));
+        ok(filterHeader.hasClass("k-list-filter"));
         ok(filterHeader.find("input")[0]);
     });
 

@@ -748,7 +748,7 @@ var __meta__ = {
                                       });
 
                 this.list
-                    .prepend($('<span class="k-filter-wrap" />')
+                    .prepend($('<span class="k-list-filter" />')
                     .append(this.filterInput.add(icon)));
             }
         },
