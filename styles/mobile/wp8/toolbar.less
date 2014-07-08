@@ -4,13 +4,17 @@
 
 /* ToolBar */
 
+.km-wp .k-toolbar
+{
+    line-height: 1.6em;
+}
+
 .km-wp .k-toolbar .km-button,
 .km-wp .k-toolbar .k-split-button,
 .km-root .km-wp .k-toolbar .km-buttongroup .km-button
 {
     padding-top: 0;
     padding-bottom: 0;
-    line-height: 1.5em;
 }
 
 .km-wp .k-toolbar > *
@@ -18,9 +22,12 @@
     color: inherit;
 }
 
-.km-wp .k-toolbar .km-buttongroup
+.km-wp .k-toolbar .km-button,
+.km-wp .k-toolbar .k-split-button,
+.km-wp .k-toolbar .km-buttongroup,
+.km-root .km-wp .k-toolbar .km-buttongroup .km-button
 {
-    line-height: 1.5em;
+    line-height: inherit;
 }
 
 .km-wp .k-toolbar .km-buttongroup .km-text
@@ -31,6 +38,7 @@
 .km-wp .k-toolbar .k-split-button-arrow
 {
     padding-bottom: .2em;
+    border-radius: 0;
 }
 
 .km-root .km-wp .k-toolbar .km-buttongroup .km-button
@@ -68,11 +76,6 @@
 {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-}
-
-.km-wp div.k-toolbar > .k-align-left
-{
-    margin-top: .65em;
 }
 
 .km-wp.km-pane .k-toolbar .k-overflow-anchor
