@@ -124,6 +124,10 @@
     box-shadow: none;
 }
 
+#about .km-listview-link:after {
+    border: 0;
+}
+
 #about {
     background: transparent url("backgrounds/kendo.jpg") left -500px no-repeat;
 }
@@ -169,7 +173,7 @@
 }
 
 #about .km-footer .km-listview {
-    margin-bottom: 1em;
+    margin-bottom: 23px;
 }
 
 #about .km-footer {
@@ -225,9 +229,6 @@ and (max-device-width : 568px)
 and (orientation : landscape) {
   #desktop-footer {
       display: none;
-  }
-  #demos-search {
-      width: 29em;
   }
 }
 
