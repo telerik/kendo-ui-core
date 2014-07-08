@@ -3,6 +3,9 @@ function baseSurfaceTests(name, TSurface) {
         d = dataviz.drawing,
         Group = d.Group;
 
+    var container;
+    var surface;
+
     // ------------------------------------------------------------
     module("Surface Base Tests / " + name, {
         setup: function() {
@@ -75,6 +78,9 @@ function baseSurfaceEventTests(name, TSurface) {
     var dataviz = kendo.dataviz,
         d = dataviz.drawing,
         Group = d.Group;
+
+    var container;
+    var surface;
 
     // ------------------------------------------------------------
     module("Surface Base Tests / " + name + " /Events", {
