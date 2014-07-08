@@ -116,13 +116,10 @@
         </header>
 
         <div data-role="content">
-            <aside>
-                <img data-bind="srcPath: currentItem.image" /> <!-- src="../content/images/200/#:image#" -->
-                <span class="price" data-bind="format: currentItem.price"></span></span>
-                <a data-role="button" data-bind="click: addToCart">Order</a>
-            </aside>
+            <img data-bind="srcPath: currentItem.image" /> <!-- src="../content/images/200/#:image#" -->
             <h2 data-bind="text: currentItem.name"></h2>
             <p data-bind="text: currentItem.description"></p>
+            <a id="buy-now" data-role="button" data-bind="click: addToCart"><span data-bind="format: currentItem.price"></span></a>
             <span class="added" data-bind="innerText: currentItem.ordered, visible: showLabel"></span>
         </div>
     </div>
