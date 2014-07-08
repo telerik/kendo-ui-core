@@ -96,7 +96,6 @@ var __meta__ = {
             options = that.options;
             dataSource = that.dataSource = options.dataSource;
 
-
             //gets the type from the dataSource or sets default to string
             that.model = dataSource.options.schema.model;
             type = options.type = kendo.getter("options.schema.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
@@ -122,13 +121,17 @@ var __meta__ = {
 
             that.viewModel = viewModel = kendo.observable({
                 operator: options.operator,
-                value: null
+                value: null,
+                operatorVisible: function() {
+                    var val = this.get("value");
+                    return  val !== null && val !== undefined && val != "undefined";
+                }
             });
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
 
             that._setInputType(options, type);
 
-            if (type != BOOL) {
+            if (type != BOOL && options.showOperators !== false) {
                 that._createOperatorDropDown(operators);
             }
 
@@ -168,7 +171,7 @@ var __meta__ = {
                 options.template.call(that.viewModel, that.input);
             } else if (type == STRING) {
                 input.attr(kendo.attr("role"), "autocomplete")
-                        .attr(kendo.attr("text-field"), that.options.field)
+                        .attr(kendo.attr("text-field"), that.options.dataTextField || that.options.field)
                         .attr(kendo.attr("delay"), this.options.delay)
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
@@ -217,7 +220,9 @@ var __meta__ = {
                     this.popup.element.width(150);
                 },
                 valuePrimitive: true
-            });
+            }).data("kendoDropDownList");
+
+            this.operatorDropDown.wrapper.find(".k-i-arrow-s").removeClass("k-i-arrow-s").addClass("k-filter");
         },
 
         setSuggestDataSource: function(dataSource) {
@@ -334,6 +339,7 @@ var __meta__ = {
             var that = this;
 
             $("<button class='k-button k-button-icon'/>")
+                .attr(kendo.attr("bind"), "visible:operatorVisible")
                 .html("<span class='k-icon k-i-close'/>")
                 .click(proxy(that.clearFilter, that))
                 .appendTo(that.wrapper);
@@ -363,6 +369,7 @@ var __meta__ = {
             values: undefined,
             customDataSource: false,
             field: "",
+            dataTextField: "",
             type: "string",
             suggestDataSource: null,
             operator: "eq",

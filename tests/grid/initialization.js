@@ -863,7 +863,7 @@
         var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
         equal(widgets.length, 1);
         var firstWidget = widgets.eq(0).data("kendoFilterCell");
-        equal(firstWidget.operatorDropDown.data("kendoDropDownList").dataSource.data()[0].text, "IS EQUAL");
+        equal(firstWidget.operatorDropDown.dataSource.data()[0].text, "IS EQUAL");
     });
 
     test("filtercell is initialized with messages options from the column messages", function() {

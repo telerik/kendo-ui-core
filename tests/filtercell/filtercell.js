@@ -101,6 +101,11 @@
         equal(filterCell.element.find("input").val(), "baz");
     });
 
+    test("uses the provided dataTextField option for autocompletion", function() {
+        filterCell = setup(dom, { field: "foo", dataSource: dataSource, dataTextField: "bla"  });
+        equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.dataTextField, "bla");
+    });
+
     test("sets the value of the input element when there is array as filter", function() {
         dataSource.filter([{ field:"foo", operator:"eq", value:"baz" }]);
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
@@ -128,6 +133,11 @@
     test("sets default operator", function() {
         filterCell = setup(dom, { dataSource: dataSource, field: "foo", operator: "neq" });
         equal(dom.find("["+ kendo.attr("role") +"=dropdownlist]").data("kendoDropDownList").value(), "neq");
+    });
+
+    test("showOperators set to false does not render the operators DropDownList", function() {
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", operator: "neq", showOperators: false });
+        equal(dom.find("["+ kendo.attr("role") +"=dropdownlist]").length, 0);
     });
 
     test("does not set the value of the input element to null when filter is cleared without adding filter before that", function() {

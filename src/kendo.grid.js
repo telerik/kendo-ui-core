@@ -3710,48 +3710,42 @@ var __meta__ = {
                 rowheader = that.thead.find(".k-filter-row");
 
             for (var i = 0; i < columns.length; i++) {
-                var acDsOptions,
+                var suggestDataSource,
                     col = columns[i],
                     customDataSource = false,
-                    delay,
-                    template,
-                    values,
                     th = $("<th/>"),
                     field = col.field;
 
                 rowheader.append(th);
                 if (field && col.filterable !== false) {
-                    var cellOptions = col.filterable && col.filterable.cell;
-                    values = col.values;
+                    var cellOptions = col.filterable && col.filterable.cell || {};
 
-                    acDsOptions = that.dataSource.options;
+                    suggestDataSource = that.dataSource.options;
                     var messages = extend(true, {}, filterable.messages);
                     if (col.filterable) {
                         extend(true, messages, col.filterable.messages);
                     }
 
-                    if (isPlainObject(cellOptions)) {
-                        if (cellOptions.enabled === false) {
-                            continue;
-                        }
-                        if (cellOptions.dataSource) {
-                            acDsOptions = cellOptions.dataSource;
-                            customDataSource = true;
-                        }
-                        template = cellOptions.template;
-                        delay =  cellOptions.delay;
+                    if (cellOptions.enabled === false) {
+                        continue;
+                    }
+                    if (cellOptions.dataSource) {
+                        suggestDataSource = cellOptions.dataSource;
+                        customDataSource = true;
                     }
 
                     $("<span/>").attr(kendo.attr("field"), field)
                         .kendoFilterCell({
                             dataSource: that.dataSource,
-                            suggestDataSource: acDsOptions,
+                            suggestDataSource: suggestDataSource,
                             customDataSource: customDataSource,
                             field: field,
-                            template: template,
-                            values: values,
-                            delay: delay,
                             messages: messages,
+                            values: col.values,
+                            template: cellOptions.template,
+                            delay: cellOptions.delay,
+                            dataTextField: cellOptions.dataTextField,
+                            operator: cellOptions.operator,
                             operators: that.options.filterable.operators
                         }).appendTo(th);
                 }

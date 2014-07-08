@@ -233,6 +233,24 @@
                             width: 300
                         },
                         {
+                            field: "Name",
+                            locked: true,
+                            width: 300,
+                            filterable: {
+                                cell : {
+                                    dataSource: {
+                                        data: [
+                                            { someField:"aaa" },
+                                            { someField:"aab" },
+                                            { someField:"aac" },
+                                            { someField:"aad" }
+                                        ]
+                                    },
+                                    dataTextField: "someField"
+                                }
+                            }
+                        },
+                        {
                             field: "Male",
                             locked: false,
                             width: 300,
