@@ -463,7 +463,7 @@
         equal(dropdownlist.wrapper[0], document.activeElement);
     });
 
-    test("DropDownList returns focus to wrapper on ENTER", 1, function() {
+    asyncTest("DropDownList returns focus to wrapper on ENTER", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             dataTextField: "text",
             dataValueField: "value",
@@ -482,7 +482,10 @@
             keyCode: kendo.keys.ENTER
         });
 
-        equal(dropdownlist.wrapper[0], document.activeElement);
+        setTimeout(function() {
+            start();
+            equal(dropdownlist.wrapper[0], document.activeElement);
+        });
     });
 
     asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
@@ -507,8 +510,6 @@
             equal(dropdownlist.value(), "item2");
         });
 
-        dropdownlist.filterInput.focus().val("item2").trigger({
-            type: "keydown"
-        });
+        dropdownlist.filterInput.focus().val("item2").keydown();
     });
 })();

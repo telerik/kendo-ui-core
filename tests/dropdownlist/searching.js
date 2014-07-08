@@ -390,6 +390,7 @@
         });
 
         dropdownlist.open();
+        dropdownlist._prev = "not found";
         dropdownlist.filterInput.val("not found").keydown();
 
         dropdownlist.bind("dataBound", function() {
@@ -398,29 +399,6 @@
         });
 
         dropdownlist.filterInput.val("").keydown();
-    });
-
-    test("focus wrapper on ENTER key", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
-
-        dropdownlist.open();
-        dropdownlist.filterInput.trigger({
-            type: "keydown",
-            keyCode: kendo.keys.ENTER
-        });
-
-        equal(document.activeElement, dropdownlist.wrapper[0]);
     });
 
     asyncTest("persist selected value if no items (select)", 1, function() {
