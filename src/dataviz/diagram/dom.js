@@ -2,8 +2,7 @@
     define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes",
            "./svg",
            "./services",
-           "./layout",
-           "./extensions" ], f);
+           "./layout" ], f);
 })(function () {
 
     (function ($, undefined) {
