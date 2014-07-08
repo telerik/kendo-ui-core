@@ -332,13 +332,17 @@ var __meta__ = {
                 },
                 focusout = function() {
                     if (!that._prevent && !that._wrapperClicked) {
-                        if (that._state === STATE_FILTER) {
+                        var filtered = that._state === STATE_FILTER;
+                        var isIFrame = window.self !== window.top;
+
+                        if (filtered) {
                             that._select(that._current);
                         }
 
-                        that._triggerCascade();
+                        if (!filtered || that.dataItem()) {
+                            that._triggerCascade();
+                        }
 
-                        var isIFrame = window.self !== window.top;
                         if (kendo.support.mobileOS.ios && isIFrame) {
                             that._change();
                         } else {

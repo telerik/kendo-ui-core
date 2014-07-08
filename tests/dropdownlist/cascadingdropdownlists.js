@@ -512,4 +512,27 @@
         equal(orders.value(), "10382");
         ok(!orders.element.is("[disabled]"));
     });
+
+    asyncTest("do not raise cascade if filtered with no items", 0, function() {
+        var categories = new DropDownList(parent, {
+            delay: 0,
+            filter: "startswith",
+            dataTextField: "CategoryName",
+            dataValueField: "CategoryID",
+            dataSource: { data: [{"CategoryName": "Condiments", "CategoryID": 2}] },
+        });
+
+        categories.bind("dataBound", function() {
+            start();
+            categories.filterInput.focusout();
+        });
+
+        categories.bind("cascade", function() {
+            ok(false);
+        });
+
+        categories.open();
+        categories.filterInput.focus().val("not found").keydown();
+
+    });
 })();
