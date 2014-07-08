@@ -868,7 +868,7 @@ var __meta__ = {
                     current = null;
                 }
 
-                that._accept(current);
+                that._accept(current, key);
                 pressed = true;
             } else if (key === keys.ESC) {
                 if (that.popup.visible()) {

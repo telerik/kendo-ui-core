@@ -410,9 +410,16 @@ var __meta__ = {
                    .attr(ARIA_READONLY, readonly);
         },
 
-        _accept: function(li) {
-            this._focus(li);
-            this._focusElement(this.wrapper);
+        _accept: function(li, key) {
+            var that = this;
+            var activeFilter = that.filterInput && that.filterInput[0] === activeElement();
+
+            that._focus(li);
+            that._focusElement(that.wrapper);
+
+            if (activeFilter && key === keys.TAB) {
+                that.wrapper.focusout();
+            }
         },
 
         _option: function(value, text) {
