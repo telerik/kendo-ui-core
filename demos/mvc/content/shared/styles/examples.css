@@ -2581,7 +2581,9 @@ a.footer-links:hover,
     zoom:1;
 }
 
-#overview-applications ul {
+#overview-applications ul,
+#widgets-all,
+#most-popular {
     margin-top: 14px;
 }
 
@@ -2597,15 +2599,16 @@ a.footer-links:hover,
     font-size: 13px;
     color: #0487c4;
     line-height: 13px;
-    padding: 0.462em 0;
+    padding: 0 0 0.924em;
 }
 
 #overview-widgets h3 {
     color: #000;
-    font: 700 12px/2.2 Arial,Helvetica,sans-serif;
+    font: 700 12px/1em Arial,Helvetica,sans-serif;
     text-transform: uppercase;
     margin-left: 0.833em;
     text-align: left;
+    padding: 0 0 0.924em;
 }
 
 #most-popular a{
@@ -2650,7 +2653,6 @@ h5 {
     font-size: 24px;
     line-height: 28px;
     margin-bottom: 34px;
-    margin-top: 5px;
 }
 
  #overview-widgets h2 strong {
@@ -2696,10 +2698,6 @@ h5 {
     display: block;
     width: 1px;
     background-color: #ebecee;
-}
-
-.col-four ul {
-    margin-bottom: 1em;
 }
 
 .application {
