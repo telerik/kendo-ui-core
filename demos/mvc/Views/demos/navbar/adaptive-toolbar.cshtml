@@ -66,9 +66,10 @@
         margin: -.05em 0 0;
     }
 
-    #back .km-icon
+    .k-ie #back .km-arrow-w:after, /* IE9+ em inheritance in pseudo element bug */
+    .k-ie #back .km-arrow-w:before
     {
-        font-size: 1em;
+        font-size: 2rem;
     }
 
     #back
