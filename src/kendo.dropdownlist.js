@@ -469,6 +469,7 @@ var __meta__ = {
         _keydown: function(e) {
             var that = this;
             var key = e.keyCode;
+            var altKey = e.altKey;
             var ul = that.ul[0];
             var handled;
 
@@ -494,15 +495,13 @@ var __meta__ = {
                 }
             }
 
-            if (!e.altKey) {
-                if (handled && key !== keys.TAB && !e.shiftKey) {
-                    that._prevent = true;
-                    that._focused = that.wrapper.focus();
-                }
+            if ((altKey && key === keys.UP) || key === keys.ENTER) {
+                that._prevent = true;
+                that._focused = that.wrapper.focus();
+            }
 
-                if (!handled && that.filterInput) {
-                    that._search();
-                }
+            if (!altKey && !handled && that.filterInput) {
+                that._search();
             }
         },
 
