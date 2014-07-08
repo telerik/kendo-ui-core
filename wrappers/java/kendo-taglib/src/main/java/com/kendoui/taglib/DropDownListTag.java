@@ -142,6 +142,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("enable", value);
     }
 
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
+    }
+
+    public void setFilter(java.lang.String value) {
+        setProperty("filter", value);
+    }
+
     public java.lang.String getHeaderTemplate() {
         return (java.lang.String)getProperty("headerTemplate");
     }
@@ -172,6 +180,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
 
     public void setIndex(float value) {
         setProperty("index", value);
+    }
+
+    public float getMinLength() {
+        return (float)getProperty("minLength");
+    }
+
+    public void setMinLength(float value) {
+        setProperty("minLength", value);
     }
 
     public java.lang.Object getOptionLabel() {

@@ -10059,7 +10059,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+            <description>The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
 The supported filter values are startswith, endswith and contains.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12900,6 +12900,13 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The filtering method used to determine the suggestions for the current value. Filtration is turned off by default.
+The supported filter values are startswith, endswith and contains.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Specifies a static HTML content, which will be rendered as a header of the popup element.</description>
             <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -12920,6 +12927,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         <attribute>
             <description>The index of the initially selected item. The index is 0 based.</description>
             <name>index</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The minimum number of characters the user must type before a filter is performed. Set to higher value than 1 if the search could match a lot of items.</description>
+            <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
