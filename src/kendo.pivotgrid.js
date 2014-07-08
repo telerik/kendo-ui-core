@@ -33,6 +33,7 @@ var __meta__ = {
         PROGRESS = "progress",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
+        ROW_TOTAL_KEY = "__row_total__",
         DATABINDING = "dataBinding",
         DATABOUND = "dataBound",
         EXPANDMEMBER = "expandMember",
@@ -169,6 +170,24 @@ var __meta__ = {
         return members;
     }
 
+    function addDataCell(result, rowIndex, map, key) {
+        result[result.length] = {
+            ordinal: rowIndex,
+            value: map[key].aggregates,
+            fmtValue: map[key].aggregates
+        };
+
+        var items = map[key].items;
+
+        for (var columnKey in items) {
+            result[result.length] = {
+                ordinal: rowIndex + items[columnKey].index + 1,
+                value: items[columnKey].aggregate,
+                fmtValue: items[columnKey].aggregate
+            };
+        }
+    }
+
     var PivotCubeBuilder = Class.extend({
         init: function(options) {
             this.options = extend({}, this.options, options);
@@ -237,22 +256,17 @@ var __meta__ = {
             var items;
             var rowIndex = 0;
 
+            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY);
+
+            rowIndex += columns.length;
+
             for (var key in map) {
-                result[result.length] = {
-                    ordinal: rowIndex,
-                    value: map[key].aggregates,
-                    fmtValue: map[key].aggregates
-                };
-
-                items = map[key].items;
-
-                for (var columnKey in items) {
-                    result[result.length] = {
-                        ordinal: rowIndex + items[columnKey].index + 1,
-                        value: items[columnKey].aggregate,
-                        fmtValue: items[columnKey].aggregate
-                    };
+                if (key === ROW_TOTAL_KEY) {
+                    continue;
                 }
+
+                addDataCell(result, rowIndex, map, key);
+
                 rowIndex += columns.length;
             }
 
@@ -284,7 +298,7 @@ var __meta__ = {
 
         _isExpanded: function(descriptors) {
             for (var idx = 0, length = descriptors.length; idx < length; idx++) {
-                if (descriptors.expand) {
+                if (descriptors[idx].expand) {
                     return true;
                 }
             }
@@ -323,8 +337,10 @@ var __meta__ = {
 
                     rowTotal.items[name] = { index: column.index, aggregate: measureAggregator(dataItem, totalItem.aggregate) };
 
-                    if (!updateColumn) {
-                        state.columnIndex++;
+                    if (updateColumn) {
+                        if (!columns[name]) {
+                            state.columnIndex++;
+                        }
                         columns[name] = column;
                     }
                 }
@@ -332,7 +348,6 @@ var __meta__ = {
         },
 
         _measureAggregator: function(options) {
-
             var measureDescriptors = (options || {}).measures || [];
             var measure = (this.options.measures || {})[measureDescriptors[0]];
             var measureAggregator;
@@ -368,8 +383,6 @@ var __meta__ = {
         },
 
         process: function(data, options) {
-            var ROW_TOTAL_KEY = "__row_total__";
-
             var columnDescriptors = (options || {}).columns || [];
             var rowDescriptors = (options || {}).rows || [];
 
@@ -384,8 +397,12 @@ var __meta__ = {
             var columnGetters = this._buildGetters(columnDescriptors);
             var rowGetters = this._buildGetters(rowDescriptors);
 
+            var processed = false;
+
             if (columnDescriptors.length || rowDescriptors.length) {
                 var hasExpandedRows = this._isExpanded(rowDescriptors);
+
+                processed = true;
 
                 for (var idx = 0, length = data.length; idx < length; idx++) {
                     var rowTotal = aggregatedData[ROW_TOTAL_KEY] || {
@@ -393,7 +410,7 @@ var __meta__ = {
                         aggregates: 0
                     };
 
-                    this._processColumns(measureAggregator, columnDescriptors, columnGetters, columns, data[idx], rowTotal, state, hasExpandedRows);
+                    this._processColumns(measureAggregator, columnDescriptors, columnGetters, columns, data[idx], rowTotal, state, !hasExpandedRows);
 
                     rowTotal.aggregates = measureAggregator(data[idx], rowTotal.aggregates);
                     aggregatedData[ROW_TOTAL_KEY] = rowTotal;
@@ -429,12 +446,18 @@ var __meta__ = {
 
             columns = this._asTuples(columns, columnDescriptors);
 
+            if (processed) {
+                aggregatedData = this._toDataArray(aggregatedData, columns);
+            } else {
+                aggregatedData = [];
+            }
+
             return {
                 axes: {
                     columns: { tuples: columns },
                     rows: { tuples: this._asTuples(rows, rowDescriptors) }
                 },
-                data: this._toDataArray(aggregatedData, columns)
+                data: aggregatedData
             };
         }
     });

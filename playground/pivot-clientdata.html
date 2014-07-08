@@ -46,8 +46,9 @@
         <script>
 
             $(function() {
-                var data = createRandomData(2000000);
+        //        var data = createRandomData(2000000);
 
+        var data = [{ FirstName: "Name1", LastName: "LastName1", Age: 42 }, { FirstName: "Name2", LastName: "LastName1", Age: 42  }, { FirstName: "Name2", LastName: "LastName2", Age: 52  } ];
                 /*var data = [
                     { FirstName: "Nancy", LastName: "Fuller", City: "London" },
                     { FirstName: "Janet", LastName: "Fuller", City: "Seattle" }
@@ -57,7 +58,7 @@
                     dimensions: {
                         FirstName: { caption: "All First Names" },
                         LastName: { caption: "All Last Names" },
-                        City: { caption: "City" }
+                        Age: { caption: "Age" }
                     },
                     measures: {
                         "Count": { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return state + 1; } }
@@ -66,10 +67,9 @@
 
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
-                    columns: [{ name: "LastName", expand: false } ],
+                    columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true } ],
                     measures: ["Count"],
-                    rows: [{ name: "FirstName", expand: true },{ name: "City", expand: true }],
-
+                    rows: [{ name: "Age", expand: true  }],
                         transport: {
                             read: function(options) {
                                 var start = new Date();

@@ -204,4 +204,80 @@
         equal(result.axes.columns.tuples[2].members.length, 2);
     });
 
+    test("process data contains correct number of items - multiple members on column axis and no rows", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name2", lastName: "LastName2" } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }, { name: "lastName", expand: true }] });
+
+        equal(result.data.length, 5);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].ordinal, 1);
+        equal(result.data[2].ordinal, 2);
+        equal(result.data[3].ordinal, 3);
+        equal(result.data[4].ordinal, 4);
+    });
+
+    test("process data contains correct number of items - multiple members on row axis", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1", lastName: "LastName1", age: 42 }, { name: "name2", lastName: "LastName1", age: 42  }, { name: "name2", lastName: "LastName2", age: 52  } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: true },{ name: "age", expand: true }] });
+
+        equal(result.data.length, 5);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].ordinal, 1);
+        equal(result.data[2].ordinal, 2);
+        equal(result.data[3].ordinal, 3);
+        equal(result.data[4].ordinal, 4);
+    });
+
+    test("process data contains correct number of items - multiple members on columns axis and expanded row axis", function() {
+        var builder = new PivotCubeBuilder({
+           dimensions: {
+               FirstName: { caption: "All First Names" },
+               LastName: { caption: "All Last Names" },
+               Age: { caption: "Age" }
+           },
+           measures: {
+               "Count": { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return state + 1; } }
+           }
+        });
+        var data = [{ FirstName: "Name1", LastName: "LastName1", Age: 42 }, { FirstName: "Name2", LastName: "LastName1", Age: 42  }, { FirstName: "Name2", LastName: "LastName2", Age: 52  } ];
+
+        var result = builder.process(data, {
+            columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true }],
+            rows: [{ name: "Age", expand: true }],
+            measures: ["Count"]
+        });
+
+        equal(result.data.length, 12);
+        equal(result.data[0].ordinal, 0, "ordinal 0");
+        equal(result.data[0].value, 3, "ordinal 0");
+        equal(result.data[1].ordinal, 1, "ordinal 1");
+        equal(result.data[1].value, 1, "ordinal 1");
+        equal(result.data[2].ordinal, 2, "ordinal 2");
+        equal(result.data[2].value, 2, "ordinal 2");
+        equal(result.data[3].ordinal, 3, "ordinal 3");
+        equal(result.data[3].value, 2, "ordinal 3");
+        equal(result.data[4].ordinal, 4, "ordinal 4");
+        equal(result.data[4].value, 1, "ordinal 4");
+        equal(result.data[5].ordinal, 5, "ordinal 5");
+        equal(result.data[5].value, 2, "ordinal 5");
+        equal(result.data[6].ordinal, 6, "ordinal 6");
+        equal(result.data[6].value, 1, "ordinal 6");
+        equal(result.data[7].ordinal, 7, "ordinal 7");
+        equal(result.data[7].value, 2, "ordinal 7");
+        equal(result.data[8].ordinal, 8, "ordinal 8");
+        equal(result.data[8].value, 1, "ordinal 8");
+        equal(result.data[9].ordinal, 10, "ordinal 9");
+        equal(result.data[9].value, 1, "ordinal 9");
+        equal(result.data[10].ordinal, 13, "ordinal 10");
+        equal(result.data[10].value, 1, "ordinal 10");
+        equal(result.data[11].ordinal, 14, "ordinal 11");
+        equal(result.data[11].value, 1, "ordinal 11");
+    });
+
 })();
