@@ -41,9 +41,10 @@ var __meta__ = {
         POINTERDOWN = "touchstart" + NS + " MSPointerDown" + NS + " pointerdown" + NS,
         pointers = kendo.support.pointers,
         msPointers = kendo.support.msPointers,
+        allPointers = msPointers || pointers,
         MOUSEENTER = pointers ? "pointerover" : (msPointers ? "MSPointerOver" : "mouseenter"),
         MOUSELEAVE = pointers ? "pointerout" : (msPointers ? "MSPointerOut" : "mouseleave"),
-        mobile = touch || msPointers || pointers,
+        mobile = touch || allPointers,
         DOCUMENT_ELEMENT = $(document.documentElement),
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
@@ -748,7 +749,8 @@ var __meta__ = {
                 return;
             }
 
-            if ((!that.options.openOnClick || that.clicked) && !touch) {
+            if ((!that.options.openOnClick || that.clicked) && !touch && !((pointers || msPointers) &&
+                e.originalEvent.pointerType in touchPointerTypes && that._isRootItem(element.closest(allItemsSelector)))) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
                 }
@@ -811,7 +813,7 @@ var __meta__ = {
             childGroup = element.children(popupSelector);
             childGroupVisible = childGroup.is(":visible");
 
-            if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible && element.parent().hasClass(LINK)))) {
+            if (options.closeOnClick && !isLink && (!childGroup.length || (options.openOnClick && childGroupVisible && that._isRootItem(element)))) {
                 element.removeClass(HOVERSTATE).css("height"); // Force refresh for Chrome
                 that._oldHoverItem = that._findRootParent(element);
                 that.close(link.parentsUntil(that.element, allItemsSelector));
