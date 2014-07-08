@@ -512,4 +512,50 @@
 
         dropdownlist.filterInput.focus().val("item2").keydown();
     });
+
+    test("DropDownList calls focusout on wrapper on TAB", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.wrapper.focusout(function() {
+            ok(true);
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.TAB
+        });
+    });
+
+    test("DropDownList do not call focusout manually if filterInput is not focused", 0, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.wrapper.focusout(function() {
+            ok(false);
+        });
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.TAB
+        });
+    });
 })();
