@@ -2313,16 +2313,26 @@ a.footer-links:hover,
     background-image: url(tags.png);
 }
 
+#widgets-all .new-widget,
+#widgets-all .beta-widget
+{
+    position: relative;
+    display: inline-block;
+    left: 5px;
+    top: 0;
+}
+
 .new-widget { background-position: 100% -9px; }
 .beta-widget { background-position: 100% 0; }
 .pro-widget { background-position: 100% -18px; }
+
+#widgets-all .new-widget { width: 18px; background-position: -19px -9px; }
+#widgets-all .beta-widget { width: 21px; background-position: -16px 0; }
 
 .multiple-tags .pro-widget { top: 5px; }
 .multiple-tags .beta-widget,
 .multiple-tags .new-widget { top: 14px; }
 
-#overview .new-widget,
-#overview .beta-widget,
 #overview .pro-widget {
     display: none;
 }
