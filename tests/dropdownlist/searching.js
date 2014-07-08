@@ -446,4 +446,30 @@
 
         dropdownlist.filterInput.focus().val("test").keydown();
     });
+
+    asyncTest("update popup height when no items are found", 1, function() {
+        var dropdownlist = new DropDownList(select, {
+            filter: "startswith",
+            delay: 0,
+            dataSource: [
+                { text: "Black", value: "1" },
+                { text: "Orange", value: "2" },
+                { text: "Grey", value: "3" }
+            ],
+            dataTextField: "text",
+            dataValueField: "value"
+        });
+
+        dropdownlist.open();
+        dropdownlist.bind("dataBound", function() {
+            start();
+            equal(dropdownlist.args("_height")[0], 1);
+        });
+
+        stub(dropdownlist, {
+            _height: dropdownlist._height
+        });
+
+        dropdownlist.filterInput.focus().val("test").keydown();
+    });
 })();

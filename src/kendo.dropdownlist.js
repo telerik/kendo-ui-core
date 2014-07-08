@@ -199,9 +199,11 @@ var __meta__ = {
                 data = that._data(),
                 length = data.length,
                 optionLabel = that.options.optionLabel,
+                filtered = that._state === STATE_FILTER,
                 element = that.element[0],
                 selectedIndex,
                 value;
+
 
             that.trigger("dataBinding");
             if (that._current) {
@@ -212,7 +214,7 @@ var __meta__ = {
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._angularItems("compile");
 
-            that._height(length);
+            that._height(filtered ? (length || 1) : length);
 
             if (that.popup.visible()) {
                 that.popup._position();
@@ -238,7 +240,7 @@ var __meta__ = {
             that._hideBusy();
             that._makeUnselectable();
 
-            if (that._state !== STATE_FILTER) {
+            if (!filtered) {
                 if (that._open) {
                     that._open = false;
                     that.toggle(!!length);
