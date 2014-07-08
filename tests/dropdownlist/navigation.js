@@ -440,6 +440,51 @@
         equal(dropdownlist.calls("_select"), 0);
     });
 
+    test("DropDownList returns focus to wrapper on ALT+UP", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.UP,
+            altKey: true
+        });
+
+        equal(dropdownlist.wrapper[0], document.activeElement);
+    });
+
+    test("DropDownList returns focus to wrapper on ENTER", 1, function() {
+        var dropdownlist = input.kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "item1", value: "item1"},
+                { text: "item2", value: "item2"}
+            ],
+            filter: "startswith"
+        }).data("kendoDropDownList");
+
+        dropdownlist.wrapper.focus();
+        dropdownlist.open();
+
+        dropdownlist.filterInput.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        equal(dropdownlist.wrapper[0], document.activeElement);
+    });
+
     asyncTest("DropDownList selects focused item on blur after filtering", 1, function() {
         var dropdownlist = input.kendoDropDownList({
             delay: 0,
