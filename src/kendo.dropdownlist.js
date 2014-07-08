@@ -155,6 +155,7 @@ var __meta__ = {
             this._inputTemplate();
             this._accessors();
             this._filterHeader();
+            this._enable();
             this._aria();
         },
 
