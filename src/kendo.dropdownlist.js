@@ -61,6 +61,7 @@ var __meta__ = {
 
             that._reset();
 
+            that._prev = "";
             that._word = "";
 
             that._wrapper();
@@ -185,7 +186,7 @@ var __meta__ = {
                 that._filterSource();
             } else {
                 that.popup.open();
-                that._focusInput();
+                that._focusElement(that.filterInput);
                 that._scroll(that._current);
             }
         },
@@ -346,6 +347,7 @@ var __meta__ = {
 
                         dropDownWrapper.removeClass(FOCUSED);
                         that._prevent = true;
+                        that._open = false;
                         element.blur();
                     }
 
@@ -406,6 +408,7 @@ var __meta__ = {
 
         _accept: function(li) {
             this._focus(li);
+            this._focusElement(this.wrapper);
         },
 
         _option: function(value, text) {
@@ -496,9 +499,8 @@ var __meta__ = {
                 }
             }
 
-            if ((altKey && key === keys.UP) || key === keys.ENTER) {
-                that._prevent = true;
-                that._focused = that.wrapper.focus();
+            if (altKey && key === keys.UP) {
+                that._focusElement(that.wrapper);
             }
 
             if (!altKey && !handled && that.filterInput) {
@@ -593,14 +595,15 @@ var __meta__ = {
             }, this));
         },
 
-        _focusInput: function() {
-            var filterInput = this.filterInput;
-            var wrapper = this.wrapper;
+        _focusElement: function(element) {
             var active = activeElement();
+            var wrapper = this.wrapper;
+            var filterInput = this.filterInput;
+            var compareElement = element === filterInput ? wrapper : filterInput;
 
-            if (filterInput && wrapper[0] === active) {
+            if (filterInput && compareElement[0] === active) {
                 this._prevent = true;
-                this._focused = filterInput.focus();
+                this._focused = element.focus();
             }
         },
 
