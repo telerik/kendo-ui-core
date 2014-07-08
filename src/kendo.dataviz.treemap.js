@@ -43,9 +43,15 @@ var __meta__ = {
 
             this.element.addClass("k-widget k-treemap");
 
-            this.view = new SquarifiedView(this, this.options);
+            if (this.options.type === "horizontal") {
+                this.src = new SliceAndDice(false);
+            } else if (this.options.type === "vertical") {
+                this.src = new SliceAndDice(true);
+            } else {
+                this.src = new Squarified();
+            }
 
-            this.src = new Squarified();
+            this.view = new SquarifiedView(this, this.options);
 
             this._initDataSource();
 
@@ -169,6 +175,8 @@ var __meta__ = {
             if (defined(this.options.textField)) {
                 wrap.text = getField(this.options.textField, item);
             }
+
+            wrap.level = item.level();
 
             wrap.dataItem = item;
 
@@ -607,6 +615,96 @@ var __meta__ = {
             }
 
             return brightness;
+        }
+    });
+
+    var SliceAndDice = Class.extend({
+        init: function(isVertical) {
+            this.quotient = isVertical ? 1 : 0;
+        },
+
+        compute: function(root, rootCoord, htmlSize) {
+            var children = root.children;
+            if (children && children.length > 0) {
+                var newRootCoord = {
+                    width: rootCoord.width,
+                    height: rootCoord.height - htmlSize.text,
+                    top: 0,
+                    left: 0
+                };
+
+                this.layoutChildren(children, newRootCoord);
+            }
+        },
+
+        layoutChildren: function(items, coord) {
+            var parentArea = coord.width * coord.height;
+            var totalArea = 0;
+            var itemsArea = [];
+
+            for (i = 0; i < items.length; i++) {
+                itemsArea[i] = parseFloat(items[i].value);
+                totalArea += itemsArea[i];
+            }
+
+            for (i = 0; i < itemsArea.length; i++) {
+                items[i]._area = parentArea * itemsArea[i] / totalArea;
+            }
+
+            this.sliceAndDice(items, coord);
+        },
+
+        sliceAndDice: function(items, coord) {
+            var totalArea = this._totalArea(items);
+            if (items[0].level % 2 === this.quotient) {
+                this.layoutVertical(items, coord, totalArea);
+            } else {
+                this.layoutHorizontal(items, coord, totalArea);
+            }
+        },
+
+        layoutHorizontal: function(items, coord, totalArea) {
+            var left = 0;
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var width = item._area / (totalArea / coord.width);
+                item.coord = {
+                    height: coord.height,
+                    width: width,
+                    top: coord.top,
+                    left: coord.left + left
+                };
+
+                left += width;
+            }
+        },
+
+        layoutVertical: function(items, coord, totalArea) {
+            var top = 0;
+
+            for (var i = 0; i < items.length; i++) {
+                var item = items[i];
+                var height = item._area / (totalArea / coord.height);
+                item.coord = {
+                    height: height,
+                    width: coord.width,
+                    top: coord.top + top,
+                    left: coord.left
+                };
+
+                top += height;
+            }
+        },
+
+        _totalArea: function(items) {
+            var total = 0;
+
+            for (var i = 0; i < items.length; i++) {
+                total += items[i]._area;
+            }
+
+            return total;
         }
     });
 
