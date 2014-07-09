@@ -3172,6 +3172,22 @@
         }
       },
       {
+        "text": "Localization",
+        "url": "scheduler/localization",
+        "disableInMobile": true,
+        "title": {
+            "kendo-ui": "Kendo UI Scheduler localization demo"
+        },
+        "meta": {
+            "kendo-ui": "This demo shows how Kendo UI Scheduler widget can be localized."
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "RTL Support",
         "disableInMobile": true,
         "url": "scheduler/right-to-left-support",
