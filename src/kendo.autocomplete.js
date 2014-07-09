@@ -96,7 +96,7 @@ var __meta__ = {
                     that._placeholder(false);
                     wrapper.addClass(FOCUSED);
                 })
-                .on("blur" + ns, function () {
+                .on("focusout" + ns, function () {
                     that._change();
                     that._placeholder();
                     wrapper.removeClass(FOCUSED);

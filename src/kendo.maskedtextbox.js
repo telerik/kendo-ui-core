@@ -56,7 +56,7 @@ var __meta__ = {
                         caret(element, 0, value ? that._maskLength : 0);
                     });
                 })
-                .on("blur" + ns, function() {
+                .on("focusout" + ns, function() {
                     var value = element.val();
 
                     clearTimeout(that._timeoutId);

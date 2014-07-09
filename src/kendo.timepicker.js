@@ -650,7 +650,7 @@ var __meta__ = {
                        .attr(ARIA_DISABLED, false)
                        .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
-                       .on("blur" + ns, proxy(that._blur, that))
+                       .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
                            that._inputWrapper.addClass(FOCUSED);
                        });

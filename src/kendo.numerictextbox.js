@@ -54,7 +54,7 @@ var __meta__ = {
 
              options = that.options;
              element = that.element
-                           .on("blur" + ns, proxy(that._focusout, that))
+                           .on("focusout" + ns, proxy(that._focusout, that))
                            .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");

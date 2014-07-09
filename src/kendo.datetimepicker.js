@@ -192,7 +192,7 @@ var __meta__ = {
                        .on("focus" + ns, function() {
                            that._inputWrapper.addClass(FOCUSED);
                        })
-                       .on("blur" + ns, function() {
+                       .on("focusout" + ns, function() {
                            that._inputWrapper.removeClass(FOCUSED);
                            if (element.val() !== that._oldText) {
                                that._change(element.val());
