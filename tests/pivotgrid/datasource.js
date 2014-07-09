@@ -1,7 +1,6 @@
 (function() {
     var PivotGrid = kendo.ui.PivotGrid,
         PivotDataSource = kendo.data.PivotDataSource,
-        XmlaTransport = kendo.data.XmlaTransport,
         div;
 
     module("PivotDataSource initialziation", { });
@@ -1985,5 +1984,103 @@
         ok(!dataSource.axes().columns);
         ok(!dataSource.axes().rows);
         equal(dataSource.data().length, 0);
+    });
+
+    test("cube builder configuration is read from the schema", function() {
+        var cubeDefinition = {
+            dimensions: {
+                foo: { caption: "foo" }
+            },
+            measures: {
+                measure1: { caption: "measure1" }
+            }
+        };
+
+        var dataSource = new PivotDataSource({
+            schema: {
+                cube: cubeDefinition
+            }
+        });
+
+        var builderOptions = dataSource.cubeBuilder.options;
+
+        deepEqual(builderOptions.dimensions, cubeDefinition.dimensions);
+        deepEqual(builderOptions.measures, cubeDefinition.measures);
+    });
+
+    test("cube builder process method is called with correct descriptor when expanding column", function() {
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            rows: ["LastName"],
+            data: [
+                { FirstName: "Name1", LastName: "LastName1", Age: 42 },
+                { FirstName: "Name2", LastName: "LastName1", Age: 42  },
+                { FirstName: "Name2", LastName: "LastName2", Age: 52  }
+            ],
+            schema: {
+                cube: {
+                    dimensions: {
+                        FirstName: { caption: "All First Names" },
+                        LastName: { caption: "All Last Names" },
+                        Age: { caption: "Age" }
+                    }
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var method = stub(dataSource.cubeBuilder, { process: dataSource.cubeBuilder.process });
+
+        dataSource.expandColumn("FirstName");
+
+        var columns = method.args("process", 0)[1].columns;
+        var rows = method.args("process", 0)[1].rows;
+
+        equal(columns.length, 1);
+        equal(columns[0].name, "FirstName");
+        ok(columns[0].expand);
+
+        equal(rows.length, 1);
+        equal(rows[0].name, "LastName");
+        ok(!rows[0].expand);
+    });
+
+    test("cube builder process method is called with correct descriptor when data is set via data method", function() {
+        var data = [
+                { FirstName: "Name1", LastName: "LastName1", Age: 42 },
+                { FirstName: "Name2", LastName: "LastName1", Age: 42  },
+                { FirstName: "Name2", LastName: "LastName2", Age: 52  }
+            ];
+
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            rows: ["LastName"],
+            schema: {
+                cube: {
+                    dimensions: {
+                        FirstName: { caption: "All First Names" },
+                        LastName: { caption: "All Last Names" },
+                        Age: { caption: "Age" }
+                    }
+                }
+            }
+        });
+
+
+        var method = stub(dataSource.cubeBuilder, { process: dataSource.cubeBuilder.process });
+
+        dataSource.data(data);
+
+        var columns = method.args("process", 0)[1].columns;
+        var rows = method.args("process", 0)[1].rows;
+
+        equal(columns.length, 1);
+        equal(columns[0].name, "FirstName");
+        ok(!columns[0].expand);
+
+        equal(rows.length, 1);
+        equal(rows[0].name, "LastName");
+        ok(!rows[0].expand);
     });
 })();

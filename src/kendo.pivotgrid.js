@@ -33,6 +33,7 @@ var __meta__ = {
         PROGRESS = "progress",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
+        ROW_TOTAL_KEY = "__row_total__",
         DATABINDING = "dataBinding",
         DATABOUND = "dataBound",
         EXPANDMEMBER = "expandMember",
@@ -169,6 +170,302 @@ var __meta__ = {
         return members;
     }
 
+    function addDataCell(result, rowIndex, map, key) {
+        result[result.length] = {
+            ordinal: rowIndex,
+            value: map[key].aggregates,
+            fmtValue: map[key].aggregates
+        };
+
+        var items = map[key].items;
+
+        for (var columnKey in items) {
+            result[result.length] = {
+                ordinal: rowIndex + items[columnKey].index + 1,
+                value: items[columnKey].aggregate,
+                fmtValue: items[columnKey].aggregate
+            };
+        }
+    }
+
+    var PivotCubeBuilder = Class.extend({
+        init: function(options) {
+            this.options = extend({}, this.options, options);
+        },
+
+        _asTuples: function(map, descriptors) {
+            var dimensionsSchema = this.options.dimensions || [];
+            var result = [];
+            var root;
+            var idx;
+            var length;
+
+            if (descriptors.length) {
+                root = { members: [] };
+
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                    root.members[root.members.length] = {
+                        children: [],
+                        caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
+                        name: descriptors[idx].name,
+                        levelName: descriptors[idx].name,
+                        levelNum: "0",
+                        hasChildren: true,
+                        parentName: undefined,
+                        hierarchy: descriptors[idx].name
+                    };
+                }
+
+                result[result.length] = root;
+            }
+
+            for (var key in map) {
+                var tuple = { members: [] };
+                for (idx = 0, length = descriptors.length; idx < length; idx++) {
+                    if (map[key].parentName.indexOf(descriptors[idx].name) === 0) {
+                        tuple.members[tuple.members.length] = {
+                            children: [],
+                            caption: map[key].value,
+                            name: map[key].name,
+                            levelName: map[key].name,
+                            levelNum: 1,
+                            hasChildren: false,
+                            parentName: descriptors[idx].name,
+                            hierarchy: descriptors[idx].name
+                        };
+                    } else {
+                        tuple.members[tuple.members.length] = {
+                            children: [],
+                            caption: (dimensionsSchema[descriptors[idx].name] || {}).caption || "All",
+                            name: descriptors[idx].name,
+                            levelName: descriptors[idx].name,
+                            levelNum: "0",
+                            hasChildren: true,
+                            parentName: undefined,
+                            hierarchy: descriptors[idx].name
+                        };
+                    }
+                }
+
+                result[result.length] = tuple;
+            }
+
+            return result;
+        },
+
+        _toDataArray: function(map, columns) {
+            var result = [];
+            var items;
+            var rowIndex = 0;
+
+            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY);
+
+            rowIndex += columns.length;
+
+            for (var key in map) {
+                if (key === ROW_TOTAL_KEY) {
+                    continue;
+                }
+
+                addDataCell(result, rowIndex, map, key);
+
+                rowIndex += columns.length;
+            }
+
+            return result;
+        },
+
+        _matchDescriptors: function(dataItem, descriptors, getters, idx) {
+            var descriptor;
+            var parts;
+            var parentField;
+            var expectedValue;
+            var parentGetter;
+
+            while (idx > 0) {
+                descriptor = descriptors[--idx];
+                parts = descriptor.name.split("&");
+                if (parts.length > 1) {
+                    parentField = parts[0];
+                    expectedValue = parts[1];
+                    parentGetter = getters[parentField];
+
+                    if (parentGetter(dataItem) != expectedValue) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        },
+
+        _isExpanded: function(descriptors) {
+            for (var idx = 0, length = descriptors.length; idx < length; idx++) {
+                if (descriptors[idx].expand) {
+                    return true;
+                }
+            }
+            return false;
+        },
+
+        _processColumns: function(measureAggregator, descriptors, getters, columns, dataItem, rowTotal, state, updateColumn) {
+            var value;
+            var descriptor;
+            var name;
+            var column;
+            var totalItem;
+
+            for (var idx = 0; idx < descriptors.length; idx++) {
+                descriptor = descriptors[idx];
+
+                if (descriptor.expand) {
+                    if (!this._matchDescriptors(dataItem, descriptors, getters, idx)) {
+                        continue;
+                    }
+
+                    value = getters[descriptor.name](dataItem);
+
+                    name = descriptor.name + "&" + value;
+
+                    column = columns[name] || {
+                        index: state.columnIndex,
+                        name: name,
+                        parentName: descriptor.name,
+                        value: value
+                    };
+
+                    totalItem = rowTotal.items[name] || {
+                        aggregate: 0
+                    };
+
+                    rowTotal.items[name] = { index: column.index, aggregate: measureAggregator(dataItem, totalItem.aggregate) };
+
+                    if (updateColumn) {
+                        if (!columns[name]) {
+                            state.columnIndex++;
+                        }
+                        columns[name] = column;
+                    }
+                }
+            }
+        },
+
+        _measureAggregator: function(options) {
+            var measureDescriptors = (options || {}).measures || [];
+            var measure = (this.options.measures || {})[measureDescriptors[0]];
+            var measureAggregator;
+
+            if (measure) {
+                var measureGetter = kendo.getter(measure.field, true);
+                measureAggregator = function(data, state) {
+                    return measure.aggregate(measureGetter(data), state);
+                };
+            } else {
+                measureAggregator = function() { return 1; };
+            }
+            return measureAggregator;
+        },
+
+        _buildGetters: function(descriptors) {
+            var result = {};
+            var descriptor;
+            var parts;
+
+            for (var idx = 0, length = descriptors.length; idx < length; idx++) {
+                descriptor = descriptors[idx];
+                parts = descriptor.name.split("&");
+
+                if (parts.length > 1) {
+                    result[parts[0]] = kendo.getter(parts[0], true);
+                } else {
+                    result[descriptor.name] = kendo.getter(descriptor.name, true);
+                }
+            }
+
+            return result;
+        },
+
+        process: function(data, options) {
+            data = data || [];
+            var columnDescriptors = (options || {}).columns || [];
+            var rowDescriptors = (options || {}).rows || [];
+
+            var aggregatedData = {};
+            var columns = {};
+            var rows = {};
+
+            var rowValue;
+            var state = { columnIndex: 0 };
+
+            var measureAggregator = this._measureAggregator(options);
+            var columnGetters = this._buildGetters(columnDescriptors);
+            var rowGetters = this._buildGetters(rowDescriptors);
+
+            var processed = false;
+
+            if (columnDescriptors.length || rowDescriptors.length) {
+                var hasExpandedRows = this._isExpanded(rowDescriptors);
+
+                processed = true;
+
+                for (var idx = 0, length = data.length; idx < length; idx++) {
+                    var rowTotal = aggregatedData[ROW_TOTAL_KEY] || {
+                        items: {},
+                        aggregates: 0
+                    };
+
+                    this._processColumns(measureAggregator, columnDescriptors, columnGetters, columns, data[idx], rowTotal, state, !hasExpandedRows);
+
+                    rowTotal.aggregates = measureAggregator(data[idx], rowTotal.aggregates);
+                    aggregatedData[ROW_TOTAL_KEY] = rowTotal;
+
+                    for (var rowIdx = 0, rowLength = rowDescriptors.length; rowIdx < rowLength; rowIdx++) {
+                        var rowDescriptor = rowDescriptors[rowIdx];
+
+                        if (rowDescriptor.expand) {
+                            if (!this._matchDescriptors(data[idx], rowDescriptors, rowGetters, rowIdx)) {
+                                continue;
+                            }
+
+                            rowValue = rowGetters[rowDescriptor.name](data[idx]);
+                            rows[rowValue] = {
+                                name: rowDescriptor.name + "&" + rowValue,
+                                parentName: rowDescriptor.name,
+                                value: rowValue
+                            };
+
+                            var value = aggregatedData[rowValue] || {
+                                items: {},
+                                aggregates: 0
+                            };
+
+                            this._processColumns(measureAggregator, columnDescriptors, columnGetters, columns, data[idx], value, state, true);
+
+                            value.aggregates = measureAggregator(data[idx], value.aggregates);
+                            aggregatedData[rowValue] = value;
+                        }
+                    }
+                }
+            }
+
+
+            if (processed && data.length) {
+                columns = this._asTuples(columns, columnDescriptors);
+                rows = this._asTuples(rows, rowDescriptors);
+                aggregatedData = this._toDataArray(aggregatedData, columns);
+            } else {
+                aggregatedData = [];
+            }
+
+            return {
+                axes: {
+                    columns: { tuples: columns },
+                    rows: { tuples: rows }
+                },
+                data: aggregatedData
+            };
+        }
+    });
+
     var PivotTransport = Class.extend({
         init: function(options, transport) {
             this.transport = transport;
@@ -240,6 +537,10 @@ var __meta__ = {
                     levels: identity
                 }
             }, options));
+
+            if (this.options.schema && this.options.schema.cube) {
+                this.cubeBuilder = new PivotCubeBuilder(this.options.schema.cube);
+            }
 
             this.transport = new PivotTransport(this.options.transport || {}, this.transport);
 
@@ -461,6 +762,14 @@ var __meta__ = {
         _readData: function(data) {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
+
+            if (this.cubeBuilder) {
+                var processedData = this.cubeBuilder.process(newData, this._requestData);
+
+                newData = processedData.data;
+                axes = processedData.axes;
+            }
+
             var tuples, resultAxis, measures, axisToSkip;
             var columnDescriptors = this.columns().length;
             var rowDescriptors = this.rows().length;
@@ -646,11 +955,36 @@ var __meta__ = {
             return rowMeasures;
         },
 
-        _normalizeData: function(data, columns, rows) {
-            if (!data.length) {
-                return data;
-            }
+        data: function(value) {
+            var that = this;
+            if (value !== undefined) {
+                if (this.cubeBuilder) {
+                    this._requestData = {
+                        columns: this.columns(),
+                        rows: this.rows(),
+                        measures: this.measures()
+                    };
 
+                    value = this._readData(value);
+                }
+
+                that._data = this._observe(value);
+
+                that._pristineData = value.slice(0);
+
+                that._ranges = [];
+                that._addRange(that._data);
+
+                that._total = that._data.length;
+                that._pristineTotal = that._total;
+
+                that._process(that._data);
+            } else {
+                return that._data;
+            }
+        },
+
+        _normalizeData: function(data, columns, rows) {
             var cell, idx, length;
             var axesLength = (columns || 1) * (rows || 1);
             var result = new Array(axesLength);
@@ -823,6 +1157,10 @@ var __meta__ = {
                 columns: this.columns(),
                 rows: this.rows()
             }, options);
+
+            if (this.cubeBuilder) {
+                this._requestData = options;
+            }
 
             return options;
         }
@@ -1852,6 +2190,7 @@ var __meta__ = {
        PivotDataSource: PivotDataSource,
        XmlaTransport: XmlaTransport,
        XmlaDataReader: XmlaDataReader,
+       PivotCubeBuilder: PivotCubeBuilder,
        transports: {
            xmla: XmlaTransport
        },
