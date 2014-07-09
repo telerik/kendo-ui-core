@@ -563,4 +563,34 @@ div.k-navigator .k-navigator-w
     top: 2.42em;
 }
 
+.k-treemap-title-vertical
+{
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2.42em;
+    line-height: 2.42em;
+    overflow: hidden;
+    padding: .6em 0;
+    white-space: nowrap;
+}
+
+.k-treemap-title-vertical > div
+{
+    position: absolute;
+    top: 0;
+    right: 1.23em;
+    transform-origin: right;
+    -webkit-transform-origin: right;
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
+.k-treemap-title-vertical + .k-treemap-wrap
+{
+    left: 2.42em;
+}
+
 /* TreeMap end */
