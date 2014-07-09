@@ -144,7 +144,9 @@
         selectedSize: window.kendoCommonFile,
 
         updateMobileTheme: function(e) {
-            this.setMobileTheme(e.item.value);
+            var that = this;
+
+            setTimeout(function () { that.setMobileTheme(e.item.value) }, 0);
         },
 
         updateTheme: function(e) {
