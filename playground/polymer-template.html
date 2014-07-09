@@ -1,0 +1,50 @@
+<link rel="import" href="k-core.html" />
+
+<polymer-element name="#{component_name}" attributes="#{component_attributes.join(' ')}">
+
+  <template>
+    <link rel="stylesheet" href="../kendo/css/web/kendo.common.min.css" />
+    <link rel="stylesheet" href="../kendo/css/web/kendo.default.min.css" />
+    <#{tag} id="element"></#{tag}>
+  </template>
+
+  <script>
+    Polymer("#{component_name}", {
+
+      ready: function() {
+        var plm = this;
+
+        // DIY, because <content> is lame.
+        var range = document.createRange();
+        range.selectNodeContents(this);
+        var doc = range.extractContents();
+        plm.$.element.insertBefore(doc, null);
+
+        var options = {};
+        #{ component_attributes .. json }.forEach(function(name){
+          if (plm[name] != null) {
+            options[name] = plm[name];
+          }
+        });
+        options.change = function() {
+          plm.value = this.value();
+        };
+        plm.kendoWidget = $(plm.$.element).#{widget_constructor}(options).data("#{widget_constructor}");
+      },
+
+      valueChanged: function() {
+        // XXX: not all widgets have a value method
+        this.kendoWidget.value(this.value);
+      },
+
+      // options bindings
+      #(FOREACH (name, component_attributes)#(WHEN (name == "value") #(CONTINUE)#)
+      #{name}Changed: function() {
+        this.kendoWidget.setOptions({ #{name}: this.#{name} });
+      },
+      #)
+
+    });
+  </script>
+
+</polymer-element>
