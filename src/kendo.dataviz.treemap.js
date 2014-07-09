@@ -195,7 +195,7 @@ var __meta__ = {
                             if (item.dataItem.uid === uid) {
                                 return item;
                             } else {
-                                recursiveGetByUid(item);
+                                return recursiveGetByUid(item);
                             }
                         }
                     }
@@ -213,7 +213,7 @@ var __meta__ = {
         },
 
         findByUid: function(uid) {
-            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "=" + uid + "]");
+            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "='" + uid + "']");
         },
 
         _mouseover: function(e) {
@@ -489,7 +489,7 @@ var __meta__ = {
         },
 
         _getByUid: function(uid) {
-            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "=" + uid + "]");
+            return this.element.find(".k-treemap-tile[" + kendo.attr("uid") + "='" + uid + "']");
         },
 
         render: function(root) {
