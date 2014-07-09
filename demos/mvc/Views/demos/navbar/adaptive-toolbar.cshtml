@@ -74,16 +74,10 @@
         flex-direction: column;
     }
 
-    #back span.km-icon
-    {
-        font-size: 2em;
-    }
-
     #back .km-arrow-w:after,
     #back .km-arrow-w:before
     {
         content: "\e013";
-        font-size: 1em;
         margin: -.05em 0 0;
     }
     
@@ -99,28 +93,12 @@
         content: "\e012";
     }
 
-    .k-ie #back .km-arrow-w:after, /* IE9+ em inheritance in pseudo element bug */
-    .k-ie #back .km-arrow-w:before
+    .km-ios7 #viewName_wrapper,
+    #examples .km-flat #viewName_wrapper
     {
-        font-size: 2rem;
+        margin-left: -.5em;
     }
 
-    #back
-    {
-        margin-right: -.5em;
-    }
-
-    #viewName
-    {
-        margin-left: 0;
-    }
-
-    #back,
-    #viewName
-    {
-        padding-left: .1em;
-        padding-right: .1em;
-    }
     .mail-content h2,
     .mail-content h3,
     .mail-content p {
