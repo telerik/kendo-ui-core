@@ -35,13 +35,31 @@
 
     // VML rendering surface ==================================================
     var Surface = d.Surface.extend({
+        init: function(element, options) {
+            d.Surface.fn.init.call(this, element, options);
+
+            if (doc.namespaces) {
+                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
+
+            this._root = new RootNode();
+            this.element[0].innerHTML = this._template(this);
+
+            this._rootElement = this.element[0].firstChild;
+            this._root.attachTo(this._rootElement);
+
+            this.element.on("click", this._click);
+            this.element.on("mouseover", this._mouseenter);
+            this.element.on("mouseout", this._mouseleave);
+        },
+
         draw: function(element) {
             var surface = this;
             surface._root.load([element], null);
 
             if (kendo.support.browser.version < 8) {
                 setTimeout(function() {
-                    surface.element.style.display = "block";
+                    surface._rootElement.style.display = "block";
                 }, 0);
             }
         },
@@ -50,34 +68,13 @@
             this._root.clear();
 
             if (kendo.support.browser.version < 8) {
-                this.element.style.display = "none";
+                this._rootElement.style.display = "none";
             }
         },
 
         _template: renderTemplate(
-            "<div style='" +
-                "width:#= kendo.dataviz.util.renderSize(d.options.width) #; " +
-                "height:#= kendo.dataviz.util.renderSize(d.options.height) #; " +
-                "position: absolute;'" +
-            "><#= d._root.render() #/div>"
-        ),
-
-        _appendTo: function(container) {
-            if (doc.namespaces) {
-                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
-            }
-
-            this._root = new RootNode();
-            container.innerHTML = this._template(this);
-            this.element = container.firstChild;
-
-            this._root.attachTo(this.element);
-
-            var element = $(this.element);
-            element.on("click", this._click);
-            element.on("mouseover", this._mouseenter);
-            element.on("mouseout", this._mouseleave);
-        }
+            "<div><#= d._root.render() #/div>"
+        )
     });
 
     // VML Node ================================================================

@@ -25,7 +25,8 @@
             "kendo": true,
             "define": true,
             "angular": true,
-            "compareMatrices": true, "compareBoundingBox": true
+            "compareMatrices": true, "compareBoundingBox": true,
+            "baseSurfaceTests": true, "baseSurfaceEventTests": true
         }
     }
 }

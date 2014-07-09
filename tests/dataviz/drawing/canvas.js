@@ -29,56 +29,42 @@
         var container,
             surface;
 
+        baseSurfaceTests("Canvas", Surface);
+
         module("Surface", {
             setup: function() {
-                container = QUnit.fixture[0];
+                container = $("<div>").appendTo(QUnit.fixture);
                 surface = new Surface(container);
+            },
+            teardown: function() {
+                container.remove();
             }
-        });
-
-        test("sets initial options", function() {
-            surface = new Surface(container, { foo: true });
-            ok(surface.options.foo);
         });
 
         test("appends canvas element to container", function() {
             equal(QUnit.fixture.find("canvas").length, 1);
         });
 
-        test("draw attaches element to root node", function() {
-            var group = new d.Group();
-            surface.draw(group);
-
-            deepEqual(surface._root.childNodes[0].srcElement, group);
+        test("sets actual width on root element", function() {
+            surface = new Surface(container, { width: "500px" });
+            equal(surface._rootElement.width, 500);
         });
 
-        test("clear removes element from root node", function() {
-            var group = new d.Group();
-            surface.draw(group);
-            surface.clear();
-
-            equal(surface._root.childNodes.length, 0);
+        test("sets actual height on root element", function() {
+            surface = new Surface(container, { height: "500px" });
+            equal(surface._rootElement.height, 500);
         });
 
-        test("getSize returns element dimensions", function() {
-            surface.setSize({ width: 1000, height: 1000 });
-
-            deepEqual(surface.getSize(), {
-                width: 1000,
-                height: 1000
-            });
+        test("sets actual width on resize", function() {
+            surface.element.css("width", "500px");
+            surface.resize();
+            equal(surface._rootElement.width, 500);
         });
 
-        test("setSize sets element dimensions", function() {
-            deepEqual(surface.setSize({
-                width: 100,
-                height: 100
-            }));
-
-            deepEqual(surface.getSize(), {
-                width: 100,
-                height: 100
-            });
+        test("sets actual height on resize", function() {
+            surface.element.css("height", "500px");
+            surface.resize();
+            equal(surface._rootElement.height, 500);
         });
     })();
 
@@ -156,6 +142,11 @@
             node.load([parentGroup]);
 
             ok(node.childNodes[0].childNodes[0] instanceof canv.Node);
+        });
+
+        test("load invalidates node", function() {
+            node.invalidate = function() { ok(true); };
+            node.load([new d.Group()]);
         });
     })();
 

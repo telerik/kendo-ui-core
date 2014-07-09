@@ -18,7 +18,7 @@
     });
 
     test("Movable is attached to surface element", function() {
-        equal(layer.movable.element[0], layer.surface.element);
+        equal(layer.movable.element[0], layer.surface.element[0]);
     });
 
     // ------------------------------------------------------------
