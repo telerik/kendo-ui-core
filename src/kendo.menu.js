@@ -558,7 +558,7 @@ var __meta__ = {
                     var ul = li.find(".k-menu-group:first:hidden"),
                         popup;
 
-                    if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
+                    if (ul[0] && that._triggerEvent({ item: li[0], type: OPEN }) === false) {
 
                         if (!ul.find(".k-menu-group")[0] && ul.children(".k-item").length > 1) {
                             var windowHeight = $(window).height(),
@@ -587,8 +587,8 @@ var __meta__ = {
 
                         if (!popup) {
                             popup = ul.kendoPopup({
-                                activate: function() { that.trigger(ACTIVATE, { item: this.wrapper.parent() }); },
-                                deactivate: function() { that.trigger(DEACTIVATE, { item: this.wrapper.parent() }); },
+                                activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
+                                deactivate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: DEACTIVATE }); },
                                 origin: directions.origin,
                                 position: directions.position,
                                 collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
@@ -601,7 +601,7 @@ var __meta__ = {
                                 close: function (e) {
                                     var li = e.sender.wrapper.parent();
 
-                                    if (!that.trigger(CLOSE, { item: li[0] })) {
+                                    if (!that._triggerEvent(CLOSE, { item: li[0], type: CLOSE })) {
                                         li.css(ZINDEX, li.data(ZINDEX));
                                         li.removeData(ZINDEX);
 
@@ -804,7 +804,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!e.handled && that.trigger(SELECT, { item: element[0] }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
+            if (!e.handled && that._triggerEvent({ item: element[0], select: SELECT }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
                 e.preventDefault();
             }
 
@@ -1098,6 +1098,12 @@ var __meta__ = {
             return nextItem;
         },
 
+        _triggerEvent: function(e) {
+            var that = this;
+
+            return that.trigger(e.type, { type: e.type, item: e.item });
+        },
+
         _focusHandler: function (e) {
             var that = this,
                 item = $(kendo.eventTarget(e)).closest(allItemsSelector);
@@ -1336,11 +1342,12 @@ var __meta__ = {
 
         _triggerEvent: function(e) {
             var that = this,
+                anchor = $(that.popup.options.anchor)[0],
                 origin = that._eventOrigin;
 
             that._eventOrigin = undefined;
 
-            return that.trigger(e.type, { item: this.element[0], event: origin });
+            return that.trigger(e.type, extend({ type: e.type, item: this.element[0], target: anchor }, origin ? { event: origin } : {} ));
         },
 
         _popup: function() {
