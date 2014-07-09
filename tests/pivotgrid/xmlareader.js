@@ -205,7 +205,7 @@
 
     test("members are read from response", function() {
         var reader = new kendo.data.XmlaDataReader({});
-        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <DiscoverResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla"><row> <CATALOG_NAME>Adventure Works Internet Sales Model</CATALOG_NAME> <DIMENSION_UNIQUE_NAME>[Date]</DIMENSION_UNIQUE_NAME> <HIERARCHY_UNIQUE_NAME>[Date].[Calendar]</HIERARCHY_UNIQUE_NAME> <LEVEL_UNIQUE_NAME>[Date].[Calendar].[(All)]</LEVEL_UNIQUE_NAME> <MEMBER_UNIQUE_NAME>[Date].[Calendar].[All]</MEMBER_UNIQUE_NAME> <MEMBER_NAME>All</MEMBER_NAME> <MEMBER_CAPTION>All</MEMBER_CAPTION></row></root> </return> </DiscoverResponse> </soap:Body> </soap:Envelope>';
+        var response = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"> <soap:Body> <DiscoverResponse xmlns="urn:schemas-microsoft-com:xml-analysis"> <return> <root xmlns="urn:schemas-microsoft-com:xml-analysis:mddataset" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msxmla="http://schemas.microsoft.com/analysisservices/2003/xmla"><row> <CATALOG_NAME>Adventure Works Internet Sales Model</CATALOG_NAME> <DIMENSION_UNIQUE_NAME>[Date]</DIMENSION_UNIQUE_NAME> <HIERARCHY_UNIQUE_NAME>[Date].[Calendar]</HIERARCHY_UNIQUE_NAME> <LEVEL_UNIQUE_NAME>[Date].[Calendar].[(All)]</LEVEL_UNIQUE_NAME> <MEMBER_UNIQUE_NAME>[Date].[Calendar].[All]</MEMBER_UNIQUE_NAME> <MEMBER_NAME>All</MEMBER_NAME> <MEMBER_CAPTION>All</MEMBER_CAPTION> <CHILDREN_CARDINALITY>10</CHILDREN_CARDINALITY></row></root> </return> </DiscoverResponse> </soap:Body> </soap:Envelope>';
 
         var body = reader.parse(response);
         var members = reader.members(body);
@@ -217,5 +217,6 @@
         equal(members[0].dimensionUniqueName, "[Date]");
         equal(members[0].levelUniqueName, "[Date].[Calendar].[(All)]");
         equal(members[0].hierarchyUniqueName, "[Date].[Calendar]");
+        equal(members[0].childrenCardinality, "10");
     });
 })();

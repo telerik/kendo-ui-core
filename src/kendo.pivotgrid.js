@@ -545,7 +545,8 @@ var __meta__ = {
                     measures: identity,
                     dimensions: identity,
                     hierarchies: identity,
-                    levels: identity
+                    levels: identity,
+                    members: identity
                 }
             }, options));
 
@@ -2127,7 +2128,8 @@ var __meta__ = {
             uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
             dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
             hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true),
-            levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true)
+            levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
+            childrenCardinality: kendo.getter("CHILDREN_CARDINALITY['#text']", true)
         }
     };
 
@@ -2265,9 +2267,10 @@ var __meta__ = {
                 }
             });
 
-            if (this.options.filterable) {
+            if (options.filterable) {
                 this.filterMenu = new ui.PivotFilterMenu(this.element, {
-                    filter: ".k-setting-filter"
+                    filter: ".k-setting-filter",
+                    dataSource: this.dataSource
                 });
             }
 
