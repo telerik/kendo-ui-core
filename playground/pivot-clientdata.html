@@ -46,49 +46,29 @@
         <script>
 
             $(function() {
-        //        var data = createRandomData(2000000);
+                //        var data = createRandomData(2000000);
 
-        var data = [{ FirstName: "Name1", LastName: "LastName1", Age: 42 }, { FirstName: "Name2", LastName: "LastName1", Age: 42  }, { FirstName: "Name2", LastName: "LastName2", Age: 52  } ];
-                /*var data = [
-                    { FirstName: "Nancy", LastName: "Fuller", City: "London" },
-                    { FirstName: "Janet", LastName: "Fuller", City: "Seattle" }
-                    ];*/
-
-                var cube = new kendo.data.PivotCubeBuilder({
-                    dimensions: {
-                        FirstName: { caption: "All First Names" },
-                        LastName: { caption: "All Last Names" },
-                        Age: { caption: "Age" }
-                    },
-                    measures: {
-                        "Count": { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return state + 1; } }
-                    }
-                });
-
+                var data = [{ FirstName: "Name1", LastName: "LastName1", Age: 42 }, { FirstName: "Name2", LastName: "LastName1", Age: 42  }, { FirstName: "Name2", LastName: "LastName2", Age: 52  } ];
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
-                    columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true } ],
-                    measures: ["Count"],
-                    rows: [{ name: "Age", expand: true  }],
-                        transport: {
-                            read: function(options) {
-                                var start = new Date();
-
-                                options.success(cube.process(data, {
-                                    columns: options.data.columns,
-                                    rows: options.data.rows,
-                                    measures: options.data.measures
-                                }));
-
-                                console.log(new Date() - start);
+                        columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true } ],
+                        measures: ["Count"],
+                        rows: [{ name: "Age", expand: true  }],
+                        data: data,
+                        schema: {
+                            cube: {
+                                dimensions: {
+                                    FirstName: { caption: "All First Names" },
+                                    LastName: { caption: "All Last Names" },
+                                    Age: { caption: "Age" }
+                                },
+                                measures: {
+                                    "Count": { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return state + 1; } }
+                                }
                             }
                         },
-                        schema: {
-                            axes: "axes",
-                            data: "data"
-                        },
                         error: function(e) {
-                           alert("error: " + kendo.stringify(e.errors[0]));
+                            alert("error: " + kendo.stringify(e.errors[0]));
                         }
                     }
                 }).data("kendoPivotGrid");

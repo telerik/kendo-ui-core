@@ -61,8 +61,8 @@
         var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
         var result = builder.process(data, { columns: [], rows: [] });
 
-        equal(result.axes.columns.tuples.length, 0);
-        equal(result.axes.rows.tuples.length, 0);
+        ok(result.axes.columns);
+        ok(result.axes.rows);
         equal(result.data.length, 0, "data does not exists");
     });
 

@@ -385,6 +385,7 @@ var __meta__ = {
         },
 
         process: function(data, options) {
+            data = data || [];
             var columnDescriptors = (options || {}).columns || [];
             var rowDescriptors = (options || {}).rows || [];
 
@@ -446,9 +447,10 @@ var __meta__ = {
                 }
             }
 
-            columns = this._asTuples(columns, columnDescriptors);
 
-            if (processed) {
+            if (processed && data.length) {
+                columns = this._asTuples(columns, columnDescriptors);
+                rows = this._asTuples(rows, rowDescriptors);
                 aggregatedData = this._toDataArray(aggregatedData, columns);
             } else {
                 aggregatedData = [];
@@ -457,7 +459,7 @@ var __meta__ = {
             return {
                 axes: {
                     columns: { tuples: columns },
-                    rows: { tuples: this._asTuples(rows, rowDescriptors) }
+                    rows: { tuples: rows }
                 },
                 data: aggregatedData
             };
@@ -535,6 +537,10 @@ var __meta__ = {
                     levels: identity
                 }
             }, options));
+
+            if (this.options.schema && this.options.schema.cube) {
+                this.cubeBuilder = new PivotCubeBuilder(this.options.schema.cube);
+            }
 
             this.transport = new PivotTransport(this.options.transport || {}, this.transport);
 
@@ -756,6 +762,14 @@ var __meta__ = {
         _readData: function(data) {
             var axes = this.reader.axes(data);
             var newData = this.reader.data(data);
+
+            if (this.cubeBuilder) {
+                var processedData = this.cubeBuilder.process(newData, this._requestData);
+
+                newData = processedData.data;
+                axes = processedData.axes;
+            }
+
             var tuples, resultAxis, measures, axisToSkip;
             var columnDescriptors = this.columns().length;
             var rowDescriptors = this.rows().length;
@@ -941,6 +955,35 @@ var __meta__ = {
             return rowMeasures;
         },
 
+        data: function(value) {
+            var that = this;
+            if (value !== undefined) {
+                if (this.cubeBuilder) {
+                    this._requestData = {
+                        columns: this.columns(),
+                        rows: this.rows(),
+                        measures: this.measures()
+                    };
+
+                    value = this._readData(value);
+                }
+
+                that._data = this._observe(value);
+
+                that._pristineData = value.slice(0);
+
+                that._ranges = [];
+                that._addRange(that._data);
+
+                that._total = that._data.length;
+                that._pristineTotal = that._total;
+
+                that._process(that._data);
+            } else {
+                return that._data;
+            }
+        },
+
         _normalizeData: function(data, columns, rows) {
             var cell, idx, length;
             var axesLength = (columns || 1) * (rows || 1);
@@ -1114,6 +1157,10 @@ var __meta__ = {
                 columns: this.columns(),
                 rows: this.rows()
             }, options);
+
+            if (this.cubeBuilder) {
+                this._requestData = options;
+            }
 
             return options;
         }
