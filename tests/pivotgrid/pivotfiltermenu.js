@@ -135,7 +135,7 @@
 
         dataSource.read();
 
-        equal(schemaMembers.args("schemaMembers")[0].levelUniqueName, "foo");
+        equal(schemaMembers.args("schemaMembers")[0].levelUniqueName, "foo.[(ALL)]");
     });
 
     test("treeview transport calls pivotDataSource with memberUniqueName", function() {
@@ -164,6 +164,131 @@
         var args = schemaMembers.args("schemaMembers")[0];
         equal(args.memberUniqueName, "foo");
         equal(args.treeOp, 1);
+    });
+
+    test("treeview node is checked without filter expressions", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(dataSource.at(0).checked);
+    });
+
+    test("treeview node is checked when there isn't filter expressios for current member", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                filter: { field: "baz", operator: "in", value: "baz" },
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(dataSource.at(0).checked);
+    });
+
+    test("treeview node is not checked when there is filter expressios for current member", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                filter: { field: "foo", operator: "in", value: "baz" },
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(!dataSource.at(0).checked);
+    });
+
+    test("treeview node is checked when there isn't `in` filter expressios for current member", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                filter: { field: "foo", operator: "eq", value: "foo" },
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(dataSource.at(0).checked);
+    });
+
+    test("treeview node is checked when there is filter expressios for current member and current member is in the value", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                filter: { field: "foo", operator: "in", value: "foo" },
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(dataSource.at(0).checked);
+    });
+
+    test("treeview node is checked depending on the first `in` filter expression", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                filter: {
+                    logic: "and",
+                    filters: [
+                        { field: "foo", operator: "in", value: "baz" },
+                        { field: "foo", operator: "in", value: "foo" },
+                    ]
+                },
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo" }]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        var dataSource = filterMenu.treeView.dataSource;
+
+        ok(!dataSource.at(0).checked);
     });
 
 })();

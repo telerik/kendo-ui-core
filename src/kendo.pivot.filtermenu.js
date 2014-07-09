@@ -17,6 +17,7 @@ var __meta__ = {
         POPUP = "kendoPopup",
         MENU = "kendoContextMenu",
         proxy = $.proxy,
+        NS = ".kendoPivotFilterMenu",
         Widget = ui.Widget;
 
     var PivotFilterMenu = Widget.extend({
@@ -75,8 +76,8 @@ var __meta__ = {
             this.includeWindow = $(kendo.template(WINDOWTEMPLATE)({
                 messages: messages
             }))
-            .on("click", ".k-button-ok", proxy(this._applyIncludes, this))
-            .on("click", ".k-button-cancel", proxy(this._closeWindow, this));
+            .on("click" + NS, ".k-button-ok", proxy(this._applyIncludes, this))
+            .on("click" + NS, ".k-button-cancel", proxy(this._closeWindow, this));
 
             this.includeWindow = new ui.Window(this.includeWindow, {
                 title: messages.title,
@@ -91,11 +92,38 @@ var __meta__ = {
 
             checkedNodeIds(this.treeView.dataSource.view(), checkedNodes);
 
-            if (checkedNodes.length > 0) {
-                this.dataSource.filter({ value: checkedNodes.join(","), operator: "in" });
-            } else {
-                this.dataSource.filter({});
+//            if (checkedNodes.length > 0) {
+//                this.dataSource.filter({ value: checkedNodes.join(","), operator: "in", field: this.currentMember });
+//            } else {
+//                this.dataSource.filter({});
+//            }
+
+            var filters = this.dataSource.filter();
+            var filter = findFilter(filters, this.currentMember);
+
+            if (!filters) {
+                filters = {
+                    logic: "and",
+                    filters: []
+                };
             }
+
+            if (filter) {
+                if (checkedNodes.length > 0) {
+                    filter.value = checkedNodes.join(",");
+                } else {
+                    filter = null;
+                }
+            } else {
+                filter = {
+                    field: this.currentMember,
+                    operator: "in",
+                    value: checkedNodes.join(",")
+                };
+                filters.filters.push(filter);
+            }
+
+            this.dataSource.filter(filters);
 
             this._closeWindow(e);
         },
@@ -125,7 +153,7 @@ var __meta__ = {
                         var name = options.data.uniqueName;
 
                         if (!name) {
-                            restrictions.levelUniqueName = that.currentMember;
+                            restrictions.levelUniqueName = that.currentMember + ".[(ALL)]";
                         } else {
                             restrictions.memberUniqueName = node.uniqueName.replace(/\&/g, "&amp;");
                             restrictions.treeOp = 1;
@@ -134,11 +162,8 @@ var __meta__ = {
                         that.dataSource
                             .schemaMembers(restrictions)
                             .done(function (data) {
-                                var filters = that.dataSource.filter();
-                                filters = filters ? filters.filters[0].value.split(",") : "";
-                                for (var idx = 0, length = data.length; idx < length; idx ++) {
-                                    data[idx].checked = filters === "" || $.inArray(data[idx].uniqueName, filters) >= 0;
-                                }
+                                checkNodes(that.dataSource.filter(), that.currentMember, data);
+
                                 options.success(data);
                             })
                             .fail(options.error);
@@ -166,13 +191,13 @@ var __meta__ = {
             }
 
             var attr = kendo.attr("name");
-            this.currentMember = $(e.event.target).closest("[" + attr + "]").attr(attr) + ".[(ALL)]";
+            this.currentMember = $(e.event.target).closest("[" + attr + "]").attr(attr);
         },
 
         _select: function(e) {
             var item = $(e.item);
 
-            $(".k-pivot-filter-window").not(this.includeWindow).kendoWindow("close");
+            $(".k-pivot-filter-window").not(this.includeWindow.element).kendoWindow("close");
 
             if (item.hasClass("k-include-item")) {
                 this.includeWindow.open().center();
@@ -209,6 +234,39 @@ var __meta__ = {
             this.element = null;
         }
     });
+
+    function findFilter(filter, member) {
+        if (!filter) {
+            return;
+        }
+
+        filter = filter.filters;
+        var idx = 0, length = filter.length;
+
+        for ( ; idx < length; idx++) {
+            if (filter[idx].operator === "in" && filter[idx].field === member) {
+                return filter[idx];
+            }
+        }
+
+        return;
+    }
+
+    function checkNodes(filter, member, nodes) {
+        var values, idx = 0, length = nodes.length;
+        filter = findFilter(filter, member);
+
+        if (!filter) {
+            for (; idx < length; idx++) {
+                nodes[idx].checked = true;
+            }
+        } else {
+            values = filter.value.split(",");
+            for (; idx < length; idx++) {
+                nodes[idx].checked = $.inArray(nodes[idx].uniqueName, values) >= 0;
+            }
+        }
+    }
 
     function checkedNodeIds(nodes, checkedNodes) {
         var idx, length = nodes.length;
