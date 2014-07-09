@@ -49,7 +49,7 @@
 
                 function changeLanguage() {
                     kendo.ui.progress($("#grid"), true);
-                    $.getScript("../content/web/grid/messages/kendo.messages." + this.value() + ".js", function() {
+                    $.getScript("../content/shared/messages/kendo.messages." + this.value() + ".js", function() {
                         kendo.ui.progress($("#grid"), false);
                         createGrid();
                     });
