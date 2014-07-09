@@ -73,7 +73,7 @@
         },
 
         _template: renderTemplate(
-            "<div style='position: absolute;'><#= d._root.render() #/div>"
+            "<div><#= d._root.render() #/div>"
         )
     });
 
