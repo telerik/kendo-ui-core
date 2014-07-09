@@ -934,6 +934,38 @@ var __meta__ = {
             var time = Math.floor(duration * ( difference / this.offsetHeight));
 
             return this.start + time;
+        },
+
+        horizontalStartOffset: function(x, y, snap) {
+            if (snap) {
+                return this.start;
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = x - offset.left;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetWidth));
+
+            return this.start + time;
+        },
+
+        horizontalEndOffset: function(x, y, snap) {
+            if (snap) {
+                return this.end;
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = x - offset.left;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetWidth));
+
+            return this.start + time;
         }
     });
 

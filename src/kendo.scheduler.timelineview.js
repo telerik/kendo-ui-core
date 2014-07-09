@@ -27,15 +27,18 @@ var __meta__ = {
                 '<div class="k-event-template">${title}</div></div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
-                'data-#=ns#uid="#=uid#" ' +
+                'data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
-                    'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
-                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#"' +
+                    'style="background-color:#=resources[0].color#; border-color: #=resources[0].color#"' +
+                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#" ' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +
                 '>' +
-                 '<span class="k-event-actions">' +
+                '<span class="k-event-actions">' +
+                    '# if(data.tail || data.middle) {#' +
+                        '<span class="k-icon k-i-arrow-w"></span>' +
+                    '#}#' +
                     '# if(data.isException()) {#' +
                         '<span class="k-icon k-i-exception"></span>' +
                     '# } else if(data.isRecurring()) {#' +
@@ -47,23 +50,16 @@ var __meta__ = {
                     '#if (showDelete) {#' +
                         '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
-                '</span>' +
-                '<span class="k-event-top-actions">' +
-                    '# if(data.tail || data.middle) {#' +
-                    '<span class="k-icon k-i-arrow-n"></span>' +
-                    '# } #' +
-                '</span>' +
-                '<span class="k-event-bottom-actions">' +
                     '# if(data.head || data.middle) {#' +
-                        '<span class="k-icon k-i-arrow-s"></span>' +
-                    '# } #' +
+                        '<span class="k-icon k-i-arrow-e"></span>' +
+                    '#}#' +
                 '</span>' +
-                '# if(resizable && !data.tail && !data.middle) {#' +
-                '<span class="k-resize-handle k-resize-n"></span>' +
-                '# } #' +
-                '# if(resizable && !data.head && !data.middle) {#' +
-                    '<span class="k-resize-handle k-resize-s"></span>' +
-                '# } #' +
+                '#if(resizable && !data.tail && !data.middle){#' +
+                '<span class="k-resize-handle k-resize-w"></span>' +
+                '#}#' +
+                '#if(resizable && !data.head && !data.middle){#' +
+                '<span class="k-resize-handle k-resize-e"></span>' +
+                '#}#' +
                 '</div>';
 
     function toInvariantTime(date) {
@@ -305,10 +301,6 @@ var __meta__ = {
             that._content(that._columnCount);
 
             that.refreshLayout();
-
-
-             //To be implemented
-            //throw "_render is not implemented";
         },
 
         _layout: function(dates) {
@@ -350,10 +342,8 @@ var __meta__ = {
                 }];
             }
 
-            //rows currently are always 1
             return {
                 columns: columns,
-                //groups - vertical
                 rows: rows
             };
         },
@@ -364,12 +354,9 @@ var __meta__ = {
             var start = options.startTime;
             var end = options.endTime;
             var isVerticalGroupped = false;
-           
 
-            //add support for more
             var groupsCount = 1;
             var rowCount;
-            //======
 
             rowCount = this._groupCount();
 
@@ -799,6 +786,47 @@ var __meta__ = {
         _rowCountForLevel: function(level) {
             var rowLevel = this.rowLevels[level];
             return rowLevel ? rowLevel.length : 0;
+        },
+
+        _updateResizeHint: function(event, groupIndex, startTime, endTime) {
+            var multiday = false;
+
+            var group = this.groups[groupIndex];
+
+            var ranges = group.ranges(startTime, endTime, false, false);
+
+            this._removeResizeHint();
+
+            for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
+                var range = ranges[rangeIndex];
+                var start = range.startSlot();
+
+                var startRect = range.innerRect(startTime, endTime, false);
+                startRect.top = start.offsetTop;
+
+                var width = startRect.right - startRect.left;
+                var height = start.offsetHeight;
+
+                var hint = SchedulerView.fn._createResizeHint.call(this,
+                    startRect.left,
+                    startRect.top,
+                    width,
+                    height
+                );
+
+                this._resizeHint = this._resizeHint.add(hint);
+            }
+
+            var format = "t";
+            var container = this.content;
+
+            this._resizeHint.appendTo(container);
+
+            this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
+
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(kendo.timezone.toLocalDate(startTime), format));
+
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
         },
 
         destroy: function() {

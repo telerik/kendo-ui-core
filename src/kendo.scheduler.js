@@ -2250,10 +2250,16 @@ var __meta__ = {
                             } else {
                                 endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                             }
+                        } else if (!slot.isDaySlot && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
+                            //update needed
+                            endTime = slot.horizontalEndOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     } else if (dir == "west") {
                         if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
                             startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                        } else if (!slot.isDaySlot && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
+                            //update needed
+                            startTime = slot.horizontalStartOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     }
 
@@ -2266,6 +2272,7 @@ var __meta__ = {
                     })) {
                         view._updateResizeHint(event, slot.groupIndex, startTime, endTime);
                     } else {
+                    console.log("prevent changes");
                         startTime = originalStart;
                         endTime = originalEnd;
                     }
@@ -2283,11 +2290,21 @@ var __meta__ = {
                     } else if (dir == "north") {
                         start = kendo.timezone.toLocalDate(startTime);
                     } else if (dir == "east") {
-                        end = kendo.date.getDate(kendo.timezone.toLocalDate(endTime));
+                        if (slot.isDaySlot) {
+                            end = kendo.date.getDate(kendo.timezone.toLocalDate(endTime));
+                        } else {
+                            //update needed
+                            end = kendo.timezone.toLocalDate(endTime);
+                        }
                     } else if (dir == "west") {
-                        start = new Date(kendo.timezone.toLocalDate(startTime));
-                        start.setHours(0);
-                        start.setMinutes(0);
+                        if (slot.isDaySlot) {
+                            start = new Date(kendo.timezone.toLocalDate(startTime));
+                            start.setHours(0);
+                            start.setMinutes(0);
+                        } else {
+                            //update needed
+                            start = kendo.timezone.toLocalDate(startTime);
+                        }
                     }
 
                     var prevented = that.trigger("resizeEnd", {
