@@ -72,6 +72,7 @@
         var multiselect = new MultiSelect(select);
 
         ok(multiselect.input);
+        ok(multiselect.input.attr("autocomplete"), "off");
     });
 
     test("MultiSelect appends input to the wrapper", function() {

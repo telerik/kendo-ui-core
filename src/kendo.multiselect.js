@@ -966,6 +966,7 @@ var __meta__ = {
             that.element.removeAttr("accesskey");
             that._focused = that.input = input.attr({
                 "accesskey": accessKey,
+                "autocomplete": "off",
                 "role": "listbox",
                 "aria-expanded": false
             });
