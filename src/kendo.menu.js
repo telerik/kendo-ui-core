@@ -601,7 +601,7 @@ var __meta__ = {
                                 close: function (e) {
                                     var li = e.sender.wrapper.parent();
 
-                                    if (!that._triggerEvent(CLOSE, { item: li[0], type: CLOSE })) {
+                                    if (!that._triggerEvent({ item: li[0], type: CLOSE })) {
                                         li.css(ZINDEX, li.data(ZINDEX));
                                         li.removeData(ZINDEX);
 
