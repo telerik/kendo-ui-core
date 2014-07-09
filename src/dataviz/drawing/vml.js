@@ -53,6 +53,8 @@
             this.element.on("mouseout", this._mouseleave);
         },
 
+        type: "vml",
+
         draw: function(element) {
             var surface = this;
             surface._root.load([element], null);

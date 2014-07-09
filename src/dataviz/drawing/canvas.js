@@ -56,6 +56,8 @@
             this._root.invalidate();
         },
 
+        type: "canvas",
+
         draw: function(element) {
             this._root.load([element]);
         },

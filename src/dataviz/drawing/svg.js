@@ -56,6 +56,8 @@
             this.resize();
         },
 
+        type: "svg",
+
         translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",

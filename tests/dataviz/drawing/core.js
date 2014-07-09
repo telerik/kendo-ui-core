@@ -229,28 +229,21 @@
             factory.register("foo", function() { ok(false); }, 0);
             factory.register("bar", function() { ok(true); }, 1);
 
-            factory.create(null, {}, "bar");
-        });
-
-        test("instantiates preferred surface w/o options", function() {
-            factory.register("foo", function() { ok(false); }, 0);
-            factory.register("bar", function() { ok(true); }, 1);
-
-            factory.create(null, "bar");
+            factory.create(null, { type: "bar" });
         });
 
         test("ignores case of preferred surface", function() {
             factory.register("foo", function() { ok(false); }, 0);
             factory.register("bar", function() { ok(true); }, 1);
 
-            factory.create(null, {}, "Bar");
+            factory.create(null, { type: "Bar" });
         });
 
         test("instantiates default surface if the preferred is unavailable", function() {
             factory.register("foo", function() { ok(true); }, 0);
             factory.register("bar", function() { ok(false); }, 1);
 
-            factory.create(null, {}, "baz");
+            factory.create(null, { type: "baz" });
         });
 
         asyncTest("logs warning if no surfaces are registered", 1, function() {

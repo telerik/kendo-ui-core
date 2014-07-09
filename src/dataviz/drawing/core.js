@@ -89,8 +89,8 @@
         }
     });
 
-    Surface.create = function(element, options, preferred) {
-        return SurfaceFactory.current.create(element, options, preferred);
+    Surface.create = function(element, options) {
+        return SurfaceFactory.current.create(element, options);
     };
 
     // Base surface node =====================================================
@@ -259,17 +259,12 @@
             }
         },
 
-        create: function(element, options, preferred) {
+        create: function(element, options) {
             var items = this._items,
                 match = items[0];
 
-            if (typeof options === "string") {
-                preferred = options;
-                options = null;
-            }
-
-            if (preferred) {
-                preferred = preferred.toLowerCase();
+            if (options && options.type) {
+                var preferred = options.type.toLowerCase();
                 for (var i = 0; i < items.length; i++) {
                     if (items[i].name === preferred) {
                         match = items[i];

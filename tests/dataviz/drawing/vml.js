@@ -42,6 +42,11 @@
             }
         });
 
+        test("reports actual surface type", function() {
+            surface = new Surface(container, { type: "foo" });
+            equal(surface.type, "vml");
+        });
+
         test("appends element to container", function() {
             equal(container.find("div").length, 1);
         });
