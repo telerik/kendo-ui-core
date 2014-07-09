@@ -184,25 +184,19 @@ var __meta__ = {
         },
 
         _getByUid: function(uid) {
-            function recursiveGetByUid(root) {
-                if (root.dataItem.uid === uid) {
-                    return root;
-                } else {
-                    var children = root.children;
-                    if (children) {
-                        for (var i = 0; i < children.length; i++) {
-                            var item = children[i];
-                            if (item.dataItem.uid === uid) {
-                                return item;
-                            } else {
-                                return recursiveGetByUid(item);
-                            }
-                        }
-                    }
+            var items = [this._root];
+            var item;
+
+            while (items.length) {
+                item = items.pop();
+                if (item.dataItem.uid === uid) {
+                    return item;
+                }
+
+                if (item.children) {
+                    items = items.concat(item.children);
                 }
             }
-
-            return recursiveGetByUid(this._root);
         },
 
         dataItem: function(node) {
@@ -265,11 +259,11 @@ var __meta__ = {
             }
 
             for (i = 0; i < itemsArea.length; i++) {
-                items[i]._area = parentArea * itemsArea[i] / totalArea;
+                items[i].area = parentArea * itemsArea[i] / totalArea;
             }
 
             var minimumSideValue = this.layoutHorizontal() ? coord.height : coord.width;
-            items.sort(function(a, b) { return (a._area <= b._area) - (a._area >= b._area); });
+            items.sort(function(a, b) { return (a.area <= b.area) - (a.area >= b.area); });
             var firstElement = [items[0]];
             var tail = items.slice(1);
             this.squarify(tail, firstElement, minimumSideValue, coord);
@@ -344,7 +338,7 @@ var __meta__ = {
                 minArea = MAX_VALUE;
 
             for (var i = 0; i < items.length; i++) {
-                var area = items[i]._area;
+                var area = items[i].area;
                 areaSum += area;
                 minArea = (minArea < area) ? minArea : area;
                 maxArea = (maxArea > area) ? maxArea : area;
@@ -381,7 +375,7 @@ var __meta__ = {
             width = math.round(totalArea / width);
 
             for (var i = 0; i < items.length; i++) {
-                var height = math.round(items[i]._area / width);
+                var height = math.round(items[i].area / width);
                 items[i].coord = {
                     height: height,
                     width: width,
@@ -418,7 +412,7 @@ var __meta__ = {
             for (var i=0; i<items.length; i++) {
                 items[i].coord = {
                     height: height,
-                    width: math.round(items[i]._area / height),
+                    width: math.round(items[i].area / height),
                     top: top,
                     left: coord.left + left
                 };
@@ -445,7 +439,7 @@ var __meta__ = {
             var total = 0;
 
             for (var i = 0; i < items.length; i++) {
-                total += items[i]._area;
+                total += items[i].area;
             }
 
             return total;
@@ -649,8 +643,10 @@ var __meta__ = {
             }
 
             for (i = 0; i < itemsArea.length; i++) {
-                items[i]._area = parentArea * itemsArea[i] / totalArea;
+                items[i].area = parentArea * itemsArea[i] / totalArea;
             }
+
+            items.sort(function(a, b) { return (a.area <= b.area) - (a.area >= b.area); });
 
             this.sliceAndDice(items, coord);
         },
@@ -669,7 +665,7 @@ var __meta__ = {
 
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                var width = item._area / (totalArea / coord.width);
+                var width = item.area / (totalArea / coord.width);
                 item.coord = {
                     height: coord.height,
                     width: width,
@@ -686,7 +682,7 @@ var __meta__ = {
 
             for (var i = 0; i < items.length; i++) {
                 var item = items[i];
-                var height = item._area / (totalArea / coord.height);
+                var height = item.area / (totalArea / coord.height);
                 item.coord = {
                     height: height,
                     width: coord.width,
@@ -702,7 +698,7 @@ var __meta__ = {
             var total = 0;
 
             for (var i = 0; i < items.length; i++) {
-                total += items[i]._area;
+                total += items[i].area;
             }
 
             return total;
