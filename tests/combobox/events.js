@@ -172,7 +172,7 @@ test("change should be raised on tab", 1, function() {
     combobox.open();
     combobox.input.press(kendo.keys.DOWN);
     combobox.input.press(kendo.keys.TAB);
-    combobox.input.blur();
+    combobox.input.focusout();
 });
 
 test("_change raises change event if selectedIndex has changed", 1, function() {
@@ -220,7 +220,7 @@ test("raise change on custom value", 3, function() {
     combobox.input
             .focus()
             .val("foo")
-            .blur();
+            .focusout();
 });
 
 test("raise change on custom value if element is select", 3, function() {
@@ -239,7 +239,7 @@ test("raise change on custom value if element is select", 3, function() {
     combobox.input
             .focus()
             .val("custom value")
-            .blur();
+            .focusout();
 
 });
 
@@ -257,7 +257,7 @@ test("raise change if empty input after selection", 2, function() {
 
     combobox.select(0);
 
-    combobox.input.focus().val("").press(kendo.keys.BACKSPACE).blur();
+    combobox.input.focus().val("").press(kendo.keys.BACKSPACE).focusout();
 
 });
 
@@ -427,7 +427,7 @@ test("ComboBox trigger blur of the hidden input", 1, function() {
         ok(true);
     });
 
-    combobox.input.blur();
+    combobox.input.focusout();
 });
 
 test("ComboBox trigger cascade on TAB", 1, function() {
@@ -464,7 +464,7 @@ test("ComboBox trigger change on blur after filtration", 1, function() {
     combobox.input.val("");
     combobox.suggest("bar");
 
-    combobox.input.blur();
+    combobox.input.focusout();
 });
 
 })();

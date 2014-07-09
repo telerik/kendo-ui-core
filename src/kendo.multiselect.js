@@ -251,7 +251,7 @@ var __meta__ = {
                         that._placeholder(false);
                         wrapper.addClass(FOCUSEDCLASS);
                     })
-                    .on("blur" + ns, function() {
+                    .on("focusout" + ns, function() {
                         clearTimeout(that._typing);
 
                         wrapper.removeClass(FOCUSEDCLASS);
