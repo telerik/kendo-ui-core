@@ -804,7 +804,7 @@ var __meta__ = {
                 return;
             }
 
-            if (!e.handled && that._triggerEvent({ item: element[0], select: SELECT }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
+            if (!e.handled && that._triggerEvent({ item: element[0], type: SELECT }) && !formNode) { // We shouldn't stop propagation and shoudn't prevent form elements.
                 e.preventDefault();
             }
 
