@@ -1013,6 +1013,14 @@
         }
       },
       {
+        "packages": [
+          "mvc-offline",
+          "jsp"
+        ],
+        "text": "Client filtering",
+        "url": "dropdownlist/clientfiltering"
+      },
+      {
         "text": "Customizing templates",
         "url": "dropdownlist/template",
         "title": {
