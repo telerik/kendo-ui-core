@@ -1,9 +1,10 @@
 (function(f, define){
     define([
-        "./kendo.data", "./kendo.combobox", "./kendo.multiselect", "./kendo.validator",
+        "./kendo.data", "./kendo.combobox", "./kendo.dropdownlist", "./kendo.multiselect", "./kendo.validator",
 
         "./aspnetmvc/kendo.data.aspnetmvc",
         "./aspnetmvc/kendo.combobox.aspnetmvc",
+        "./aspnetmvc/kendo.dropdownlist.aspnetmvc",
         "./aspnetmvc/kendo.multiselect.aspnetmvc",
         "./aspnetmvc/kendo.imagebrowser.aspnetmvc",
         "./aspnetmvc/kendo.validator.aspnetmvc"
@@ -15,7 +16,7 @@ var __meta__ = {
     name: "ASP.NET MVC",
     category: "wrappers",
     description: "Scripts required by Telerik UI for ASP.NET MVC",
-    depends: [ "data", "combobox", "multiselect", "validator" ]
+    depends: [ "data", "combobox", "dropdownlist", "multiselect", "validator" ]
 };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
