@@ -46,7 +46,6 @@
             this.element[0].innerHTML = this._template(this);
 
             this._rootElement = this.element[0].firstChild;
-            this._clip(kendo.dimensions(this.element));
             this._root.attachTo(this._rootElement);
 
             this.element.on("click", this._click);
@@ -71,15 +70,6 @@
             if (kendo.support.browser.version < 8) {
                 this._rootElement.style.display = "none";
             }
-        },
-
-        _clip: function(size) {
-            var rect = kendo.format("rect(0, {0}px, {1}px, 0)", size.width, size.height);
-            $(this._rootElement).css("clip", rect);
-        },
-
-        _resize: function() {
-            this._clip(this._size);
         },
 
         _template: renderTemplate(
