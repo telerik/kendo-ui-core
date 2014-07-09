@@ -78,13 +78,6 @@
             return "<?xml version='1.0' ?>" + this._template(this);
         },
 
-        setSize: function(size) {
-            this._rootElement.setAttribute("width", renderSize(size.width));
-            this._rootElement.setAttribute("height", renderSize(size.height));
-
-            d.Surface.fn.setSize.call(this, size);
-        },
-
         _resize: function() {
             if (this._offset) {
                 this.translate(this._offset);
@@ -92,14 +85,8 @@
         },
 
         _template: renderTemplate(
-            "<svg xmlns='" + SVG_NS + "' version='1.1' " +
-            "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
-            "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
-            "style='position: absolute;'>#= d._root.render() #</svg>"
-        ),
-
-        _appendTo: function(container) {
-        }
+            "<svg xmlns='" + SVG_NS + "' version='1.1'>#= d._root.render() #</svg>"
+        )
     });
 
     // SVG Node ================================================================

@@ -44,8 +44,9 @@
 
             this._root = new RootNode();
             this.element[0].innerHTML = this._template(this);
-            this._rootElement = this.element[0].firstChild;
 
+            this._rootElement = this.element[0].firstChild;
+            this._clip(kendo.dimensions(this.element));
             this._root.attachTo(this._rootElement);
 
             this.element.on("click", this._click);
@@ -72,12 +73,17 @@
             }
         },
 
+        _clip: function(size) {
+            var rect = kendo.format("rect(0, {0}px, {1}px, 0)", size.width, size.height);
+            $(this._rootElement).css("clip", rect);
+        },
+
+        _resize: function() {
+            this._clip(this._size);
+        },
+
         _template: renderTemplate(
-            "<div style='" +
-                "width:#= kendo.dataviz.util.renderSize(d.options.width) #; " +
-                "height:#= kendo.dataviz.util.renderSize(d.options.height) #; " +
-                "position: absolute;'" +
-            "><#= d._root.render() #/div>"
+            "<div style='position: absolute;'><#= d._root.render() #/div>"
         )
     });
 

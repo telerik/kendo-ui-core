@@ -29,12 +29,17 @@
             this._mouseleave = this._handler("mouseleave");
 
             this.element = $(element);
+
+            if (this.options.width) {
+                this.element.css("width", this.options.width);
+            }
+
+            if (this.options.height) {
+                this.element.css("height", this.options.height);
+            }
         },
 
-        options: {
-            width: "100%",
-            height: "100%"
-        },
+        options: { },
 
         events: [
             "click",

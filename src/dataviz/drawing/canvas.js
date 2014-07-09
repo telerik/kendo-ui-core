@@ -45,20 +45,10 @@
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
 
+            this.element[0].innerHTML = this._template(this);
             var canvas = this.element[0].firstElementChild;
-
-            if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                this.element[0].innerHTML = this._template(this);
-                canvas = this.element[0].firstElementChild;
-            } else {
-                $(canvas).css({
-                    width: this.options.width,
-                    height: this.options.height
-                });
-            }
-
-            canvas.width = $(canvas).width();
-            canvas.height = $(canvas).height();
+            canvas.width = $(element).width();
+            canvas.height = $(element).height();
 
             this._rootElement = canvas;
 
@@ -74,17 +64,16 @@
             this._root.clear();
         },
 
-        setSize: function(size) {
-            this._rootElement.width = size.width;
-            this._rootElement.height = size.height;
+        _resize: function() {
+            this._rootElement.width = this._size.width;
+            this._rootElement.height = this._size.height;
 
-            d.Surface.fn.setSize.call(this, size);
+            this._root.invalidate();
         },
 
         _template: renderTemplate(
-            "<canvas style='position: absolute; " +
-            "width: #= kendo.dataviz.util.renderSize(d.options.width) #; " +
-            "height: #= kendo.dataviz.util.renderSize(d.options.height) #;'></canvas>"
+            "<canvas style='position: relative; " +
+            "width: 100%; height: 100%;'></canvas>"
         )
     });
 
@@ -133,6 +122,8 @@
 
                 node.append(childNode);
             }
+
+            node.invalidate();
         }
     });
 
