@@ -29,7 +29,7 @@
         init: function(map, options) {
             Layer.fn.init.call(this, map, options);
 
-            this.surface = d.Surface.create(this.element[0], {
+            this.surface = d.Surface.create(this.element, {
                 width: map.scrollElement.width(),
                 height: map.scrollElement.height()
             });
@@ -74,9 +74,7 @@
         },
 
         _resize: function() {
-            this.surface.setSize(
-                this.map.getSize()
-            );
+            this.surface.size(this.map.size());
         },
 
         _initDataSource: function() {
