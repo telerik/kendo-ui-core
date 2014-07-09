@@ -44,6 +44,28 @@
         test("appends canvas element to container", function() {
             equal(QUnit.fixture.find("canvas").length, 1);
         });
+
+        test("sets actual width on root element", function() {
+            surface = new Surface(container, { width: "500px" });
+            equal(surface._rootElement.width, 500);
+        });
+
+        test("sets actual height on root element", function() {
+            surface = new Surface(container, { height: "500px" });
+            equal(surface._rootElement.height, 500);
+        });
+
+        test("sets actual width on resize", function() {
+            surface.element.css("width", "500px");
+            surface.resize();
+            equal(surface._rootElement.width, 500);
+        });
+
+        test("sets actual height on resize", function() {
+            surface.element.css("height", "500px");
+            surface.resize();
+            equal(surface._rootElement.height, 500);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -120,6 +142,11 @@
             node.load([parentGroup]);
 
             ok(node.childNodes[0].childNodes[0] instanceof canv.Node);
+        });
+
+        test("load invalidates node", function() {
+            node.invalidate = function() { ok(true); };
+            node.load([new d.Group()]);
         });
     })();
 

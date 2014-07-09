@@ -22,6 +22,24 @@ function baseSurfaceTests(name, TSurface) {
         ok(surface.options.foo);
     });
 
+    test("does not set initial width", function() {
+        equal(surface.element[0].style.width, "");
+    });
+
+    test("sets initial width", function() {
+        surface = new TSurface(container, { width: "500px" });
+        equal(surface.element[0].style.width, "500px");
+    });
+
+    test("does not set initial height", function() {
+        equal(surface.element[0].style.height, "");
+    });
+
+    test("sets initial height", function() {
+        surface = new TSurface(container, { height: "500px" });
+        equal(surface.element[0].style.height, "500px");
+    });
+
     test("draw attaches element to root node", function() {
         var group = new Group();
         surface.draw(group);
