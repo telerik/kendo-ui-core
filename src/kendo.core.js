@@ -569,7 +569,7 @@ function pad(number, digits, end) {
             culture.calendar = culture.calendars.standard;
             cultures.current = culture;
 
-            if (globalize) {
+            if (globalize && !globalize.load) {
                 expandNumberFormat(culture.numberFormat);
             }
 
@@ -1041,7 +1041,7 @@ function pad(number, digits, end) {
         return value !== undefined ? value : "";
     };
 
-    if (globalize) {
+    if (globalize && globalize.load) {
         toString = function(value, format, culture) {
             if ($.isPlainObject(culture)) {
                 culture = culture.name;
@@ -1597,7 +1597,7 @@ function pad(number, digits, end) {
         return value;
     };
 
-    if (globalize) {
+    if (globalize && globalize.load) {
         kendo.parseDate = function (value, format, culture) {
             if (objectToString.call(value) === "[object Date]") {
                 return value;
