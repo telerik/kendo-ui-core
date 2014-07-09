@@ -185,6 +185,23 @@
         equal(result.data[2].value, 2);
     });
 
+    test("process data measure format is applied", function() {
+        var builder = new PivotCubeBuilder({
+            measures: {
+                Measure1: { caption: "Measure 1", field: "value", format: "foo {0}",  aggregate: function(data, state) { return state + data;  }}
+            }
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1", value: 1 }, { name: "name2", lastName: "LastName1", value: 2 }, { name: "name1", lastName: "LastName2", value: 1 } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }], rows: [{ name: "lastName" }], measures: ["Measure1"] });
+
+        equal(result.data.length, 3);
+        equal(result.data[0].fmtValue, "foo 4");
+        equal(result.data[1].fmtValue, "foo 2");
+        equal(result.data[2].fmtValue, "foo 2");
+    });
+
     test("process column root tuple member count is same as column descriptors", function() {
         var builder = new PivotCubeBuilder();
 

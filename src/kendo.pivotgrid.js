@@ -170,11 +170,11 @@ var __meta__ = {
         return members;
     }
 
-    function addDataCell(result, rowIndex, map, key) {
+    function addDataCell(result, rowIndex, map, key, format) {
         result[result.length] = {
             ordinal: rowIndex,
             value: map[key].aggregates,
-            fmtValue: map[key].aggregates
+            fmtValue: format ? kendo.format(format, map[key].aggregates) : map[key].aggregates
         };
 
         var items = map[key].items;
@@ -183,7 +183,7 @@ var __meta__ = {
             result[result.length] = {
                 ordinal: rowIndex + items[columnKey].index + 1,
                 value: items[columnKey].aggregate,
-                fmtValue: items[columnKey].aggregate
+                fmtValue: format ? kendo.format(format, items[columnKey].aggregate) : items[columnKey].aggregate
             };
         }
     }
@@ -253,12 +253,20 @@ var __meta__ = {
             return result;
         },
 
-        _toDataArray: function(map, columns) {
+        _toDataArray: function(map, columns, measures) {
+            var format;
+            if (measures && measures.length) {
+                var measure = (this.options.measures || {})[measures[0]];
+                if (measure.format) {
+                    format = measure.format;
+                }
+            }
+
             var result = [];
             var items;
             var rowIndex = 0;
 
-            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY);
+            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY, format);
 
             rowIndex += columns.length;
 
@@ -267,7 +275,7 @@ var __meta__ = {
                     continue;
                 }
 
-                addDataCell(result, rowIndex, map, key);
+                addDataCell(result, rowIndex, map, key, format);
 
                 rowIndex += columns.length;
             }
@@ -350,7 +358,7 @@ var __meta__ = {
         },
 
         _measureAggregator: function(options) {
-            var measureDescriptors = (options || {}).measures || [];
+            var measureDescriptors = options.measures || [];
             var measure = (this.options.measures || {})[measureDescriptors[0]];
             var measureAggregator;
 
@@ -386,8 +394,10 @@ var __meta__ = {
 
         process: function(data, options) {
             data = data || [];
-            var columnDescriptors = (options || {}).columns || [];
-            var rowDescriptors = (options || {}).rows || [];
+            options = options || {};
+
+            var columnDescriptors = options.columns || [];
+            var rowDescriptors = options.rows || [];
 
             var aggregatedData = {};
             var columns = {};
@@ -448,11 +458,10 @@ var __meta__ = {
                 }
             }
 
-
             if (processed && data.length) {
                 columns = this._asTuples(columns, columnDescriptors);
                 rows = this._asTuples(rows, rowDescriptors);
-                aggregatedData = this._toDataArray(aggregatedData, columns);
+                aggregatedData = this._toDataArray(aggregatedData, columns, options.measures);
             } else {
                 aggregatedData = columns = rows = [];
             }

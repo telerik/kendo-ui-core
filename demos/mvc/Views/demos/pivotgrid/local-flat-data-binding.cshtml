@@ -27,7 +27,7 @@
                                 Discontinued: { caption: "Discontinued" }
                             },
                             measures: {
-                                "Sum": { field: "UnitPrice", aggregate: function(value, state) { return value + state; } }
+                                "Sum": { field: "UnitPrice", format: "{0:c}", aggregate: function(value, state) { return value + state; } }
                             }
                         }
                     },
