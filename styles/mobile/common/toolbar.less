@@ -25,6 +25,18 @@
     vertical-align: middle;
 }
 
+.km-root .k-toolbar .k-button-icon
+{
+    padding-left: .4em;
+    padding-right: .4em;
+}
+
+.km-root .k-toolbar .k-button-icon .km-icon
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .km-root .k-toolbar-resizable
 {
     overflow: hidden;
@@ -103,9 +115,7 @@
     height: 100%;
     margin: 0;
     font-size: 2.2em;
-    line-height: 1.36em;
     border-radius: 0;
-    text-align: center;
 
     position: absolute;
     top: 0;
@@ -113,10 +123,18 @@
     padding: 0;
 }
 
-.km-root .k-overflow-anchor .km-icon
+.km-root .k-overflow-anchor span.km-icon
 {
-    vertical-align: middle;
-    margin: -1px 0 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -.5em 0 0 -.5em;
+}
+
+.km-root .k-overflow-anchor .km-icon:after,
+.km-root .k-overflow-anchor .km-icon:before
+{
+    margin-left: 0;
 }
 
 .km-root .k-overflow-container .k-item
