@@ -821,4 +821,39 @@
 
         scheduler.resize(true);
     });
+
+    test("Recreating the scheduler does not throw javascript exception if widget is bound to external dataSource", 0, function() {
+        var dataSource = new kendo.data.SchedulerDataSource({
+            data: [
+                {
+                    id: 1,
+                    start: new Date("2013/6/6 08:00 AM"),
+                    end: new Date("2013/6/6 09:00 AM"),
+                    title: "Interview"
+                },
+                {
+                    id: 2,
+                    start: new Date("2013/6/6 08:00 AM"),
+                    end: new Date("2013/6/6 09:00 AM"),
+                    title: "Meeting"
+                }
+            ]
+        });
+
+        container.kendoScheduler({ 
+            date: new Date("2013/6/6"),
+            dataSource: dataSource
+        });
+
+        try {
+            container.data("kendoScheduler").destroy();
+            container.empty();
+            container.kendoScheduler({ 
+                date: new Date("2013/6/6"),
+                dataSource: dataSource
+            });
+        } catch (e) {
+            ok(false, "Error is thrown!");
+        }
+    });
 })();

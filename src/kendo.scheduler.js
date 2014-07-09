@@ -1981,6 +1981,8 @@ var __meta__ = {
 
             if (that.dataSource) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
+                that.dataSource.unbind("progress", that._progressHandler);
+                that.dataSource.unbind("error", that._errorHandler);
             }
 
             if (that.calendar) {
