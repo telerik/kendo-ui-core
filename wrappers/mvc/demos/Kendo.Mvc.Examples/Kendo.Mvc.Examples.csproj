@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
@@ -804,6 +805,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
@@ -1182,6 +1184,7 @@
     <None Include="Areas\razor\Views\diagram\index.cshtml" />
     <None Include="Areas\razor\Views\diagram\layout.cshtml" />
     <Content Include="Areas\razor\Views\dropdownlist\serverfiltering.cshtml" />
+    <Content Include="Areas\razor\Views\dropdownlist\clientfiltering.cshtml" />
     <None Include="Areas\razor\Views\treemap\index.cshtml" />
     <Content Include="Content\dataviz\dashboards\area-chart.png" />
     <Content Include="Content\dataviz\dashboards\car-dashboard.png" />
