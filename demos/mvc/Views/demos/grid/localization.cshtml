@@ -76,10 +76,10 @@
                         toolbar: ["create"],
                         columns: [
                             "ProductName",
-                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}" },
-                            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-                            { field: "Discontinued", width: "100px" },
-                            { command: ["edit", "destroy"], title: " ", width: "300px" }],
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "140px" },
+                            { field: "Discontinued", width: "140px" },
+                            { command: ["edit", "destroy"], title: "", width: "260px" }],
                         editable: "inline"
                     });
                 }
@@ -91,7 +91,7 @@
                         dataValueField: "value",
                         dataSource: [
                             {text: "bg-BG"},
-                            {text: "de-DE"},
+                            {text: "zh-CN"},
                             {text: "en-US"},
                             {text: "ru-RU"}
                         ]
