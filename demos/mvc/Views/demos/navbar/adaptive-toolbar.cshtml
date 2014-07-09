@@ -10,37 +10,58 @@
                             url: "#:back"
                         },
                         {
-                            type: "splitButton", id: "viewName", name: "viewName", text: "ToolBar as ActionBar", menuButtons: [
-                                { id: "option1", text: "Option 1" },
-                                { id: "option2", text: "Option 2" },
-                                { id: "option3", text: "Option 3" },
-                                { id: "option4", text: "Option 4" }
+                            type: "splitButton", id: "viewName", name: "viewName", text: "Inbox (18)", menuButtons: [
+                                { id: "option1", text: "Drafts (3)" },
+                                { id: "option2", text: "Sent" },
+                                { id: "option3", text: "Junk (21)" },
+                                { id: "option4", text: "Trash (53)" }
                             ],
                             overflow: "never",
                             align: "left"
                         },
 
-                        { type: "buttonGroup", id: "btnGroup", buttons: [
-                            { id: "btn1", showText: "overflow", showIcon: "toolbar", text: "seek-w", icon: "rewind"  },
-                            { id: "btn2", showText: "overflow", showIcon: "toolbar", text: "arrow-w", icon: "pause" },
-                            { id: "btn3", showText: "overflow", showIcon: "toolbar", text: "arrow-w", icon: "play" },
-                            { id: "btn4", showText: "overflow", showIcon: "toolbar", text: "seek-e", icon: "fastforward"  }
-                        ] },
+                        { type: "button", showText: "overflow", id: "prev", text: "Previous", icon: "up", enable: false, align: "left" },
+                        { type: "button", showText: "overflow", id: "next", text: "Next", icon: "down", align: "left" },
+                        { type: "button", showText: "overflow", id: "flag", text: "Flag", icon: "toprated", click: function(){$("#flags").data("kendoMobileActionSheet").open()} },
+                        { type: "button", showText: "overflow", id: "reply", text: "Reply", icon: "reply", click: function(){$("#reply-options").data("kendoMobileActionSheet").open()} },
+                        { type: "button", showText: "overflow", id: "disabledBtn", text: "Delete", icon: "delete", click: function(){$("#delete-confirm").data("kendoMobileActionSheet").open()} },
 
-                        { type: "button", id: "iconButton", text: "Folder Add", icon: "refresh" },
-                        { type: "button", id: "primaryBtn", text: "Primary Button", primary: true },
-                        { type: "button", id: "regularBtn", text: "Regular Button" },
-                        { type: "button", id: "disabledBtn", text: "Disabled", enable: false },
-                        { type: "button", id: "toggleBtn", togglable: true, text: "Toggle Button", selected: true },
-
-                        { type: "button", text: "Always", overflow: "always" }
+                        { type: "button", text: "Organize", overflow: "always", icon: "organize", enable: false }
                     ]'>
         </div>
     </header>
+    
+    <div class="mail-content">
+        <h2>RE: New "Your Links" menu</h2>
+        <h3>From: John Doe</h3>
+        <p>Excellent feature! Except that I instantly imagined that this would be how I keep track of all those demo pages that I wanted to re-visit or remember existed. Any chance you could include the bookmark feature on the demo pages?</p>
+    </div>
+    
+    <ul data-role="actionsheet" id="flags" data-popup='{"direction": "left"}'>
+        <li class="km-actionsheet-title">Flag</li>
+        <li><a href="#">Flag</a></li>
+        <li><a href="#">Mark as Unread</a></li>
+        <li><a href="#">Move to Junk</a></li>
+    </ul>
+    
+    <ul data-role="actionsheet" id="reply-options" data-popup='{"direction": "left"}'>
+        <li class="km-actionsheet-title">Reply</li>
+        <li><a href="#">Reply</a></li>
+        <li><a href="#">Reply to All</a></li>
+        <li><a href="#">Forward</a></li>
+    </ul>
+    
+    <ul data-role="actionsheet" id="delete-confirm" data-popup='{"direction": "left"}'>
+        <li class="km-actionsheet-title">Delete</li>
+        <li><a href="#">Delete</a></li>
+    </ul>
+    
     <footer data-role="footer">
         <div data-role="tabstrip">
-            <a data-role="button" data-icon="favorites">Favorites</a>
-            <a data-role="button" data-icon="home">Favorites</a>
+            <a data-role="button" data-icon="home" data-badge="18">Inbox</a>
+            <a data-role="button" data-icon="compose" data-badge="3">Drafts</a>
+            <a data-role="button" data-icon="organize" data-badge="21">Junk</a>
+            <a data-role="button" data-icon="trash" data-badge="53">Trash</a>
         </div>
     </footer>
 </div>
@@ -65,6 +86,18 @@
         font-size: 1em;
         margin: -.05em 0 0;
     }
+    
+    .km-up:after,
+    .km-up:before
+    {
+        content: "\e011";
+    }
+    
+    .km-down:after,
+    .km-down:before
+    {
+        content: "\e012";
+    }
 
     .k-ie #back .km-arrow-w:after, /* IE9+ em inheritance in pseudo element bug */
     .k-ie #back .km-arrow-w:before
@@ -87,5 +120,10 @@
     {
         padding-left: .1em;
         padding-right: .1em;
+    }
+    .mail-content h2,
+    .mail-content h3,
+    .mail-content p {
+        margin-top: 1em;
     }
 </style>
