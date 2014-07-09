@@ -37,6 +37,7 @@
     var Surface = d.Surface.extend({
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
+            this.options.type = "vml";
 
             if (doc.namespaces) {
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");

@@ -40,6 +40,7 @@
     var Surface = d.Surface.extend({
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
+            this.options.type = "svg";
 
             this._root = new RootNode();
 
