@@ -11,20 +11,8 @@ namespace Kendo.Mvc.UI
             : base(viewContext, initializer, viewData, urlGenerator)
         {
         }
-
-        public string Filter
-        {
-            get;
-            set;
-        }
-
+        
         public bool? HighlightFirst
-        {
-            get;
-            set;
-        }
-
-        public int? MinLength
         {
             get;
             set;
@@ -52,19 +40,9 @@ namespace Kendo.Mvc.UI
         {
             var options = this.SeriailzeBaseOptions();
 
-            if (!string.IsNullOrEmpty(Filter))
-            {
-                options["filter"] = Filter;
-            }
-
             if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
-            }
-
-            if (MinLength != null)
-            {
-                options["minLength"] = MinLength;
             }
 
             if (!string.IsNullOrEmpty(Placeholder))

@@ -47,6 +47,12 @@
             set;
         }
 
+        public string Filter
+        {
+            get;
+            set;
+        }
+
         public bool? IgnoreCase
         {
             get;
@@ -66,6 +72,12 @@
         }
 
         public string HeaderTemplateId
+        {
+            get;
+            set;
+        }
+
+        public int? MinLength
         {
             get;
             set;
@@ -113,6 +125,11 @@
                 options["delay"] = Delay;
             }
 
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                options["filter"] = Filter;
+            }
+
             if (IgnoreCase != null)
             {
                 options["ignoreCase"] = IgnoreCase;
@@ -136,6 +153,11 @@
             else if (!string.IsNullOrEmpty(HeaderTemplate))
             {
                 options["headerTemplate"] = HeaderTemplate;
+            }
+
+            if (MinLength != null)
+            {
+                options["minLength"] = MinLength;
             }
 
             if (ValuePrimitive != null)

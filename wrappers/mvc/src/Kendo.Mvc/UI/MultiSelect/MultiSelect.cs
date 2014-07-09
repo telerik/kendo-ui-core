@@ -35,12 +35,6 @@
             set;
         }
 
-        public string Filter
-        {
-            get;
-            set;
-        }
-
         public bool? HighlightFirst
         {
             get;
@@ -48,12 +42,6 @@
         }
 
         public int? MaxSelectedItems
-        {
-            get;
-            set;
-        }
-
-        public int? MinLength
         {
             get;
             set;
@@ -146,11 +134,6 @@
                 options["dataValueField"] = DataValueField;
             }
 
-            if (!string.IsNullOrEmpty(Filter))
-            {
-                options["filter"] = Filter;
-            }
-            
             if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
@@ -159,11 +142,6 @@
             if (MaxSelectedItems != null)
             {
                 options["maxSelectedItems"] = MaxSelectedItems;
-            }
-
-            if (MinLength != null)
-            {
-                options["minLength"] = MinLength;
             }
 
             if (!string.IsNullOrEmpty(Placeholder))

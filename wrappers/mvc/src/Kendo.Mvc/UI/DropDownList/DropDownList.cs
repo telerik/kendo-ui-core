@@ -3,10 +3,14 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
     using System.IO;
+    using System.Text.RegularExpressions;
     using System.Web.Mvc;
 
     public class DropDownList : DropDownListBase
     {
+        //Escape meta characters: http://api.jquery.com/category/selectors/
+        private static readonly Regex EscapeRegex = new Regex(@"([;&,\.\+\*~'\:\""\!\^\$\[\]\(\)\|\/])", RegexOptions.Compiled);
+
         public DropDownList(ViewContext viewContext, IJavaScriptInitializer initializer, ViewDataDictionary viewData, IUrlGenerator urlGenerator)
             : base(viewContext, initializer, viewData, urlGenerator)
         {
@@ -68,6 +72,14 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            if (DataSource.ServerFiltering && !DataSource.Transport.Read.Data.HasValue() && DataSource.Type != DataSourceType.Custom)
+            {
+                DataSource.Transport.Read.Data = new ClientHandlerDescriptor
+                {
+                    HandlerName = "function() { return kendo.ui.DropDownList.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
+                };
+            }
+
             var options = this.SeriailzeBaseOptions();
 
             var idPrefix = "#";

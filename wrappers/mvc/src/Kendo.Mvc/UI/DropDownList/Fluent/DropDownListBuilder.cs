@@ -136,6 +136,42 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Use it to enable filtering of items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Filter("startswith");
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder Filter(string filter)
+        {
+            Component.Filter = filter;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Use it to enable filtering of items.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .Filter(FilterType.Contains);
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder Filter(FilterType filter)
+        {
+            Component.Filter = filter.ToString().ToLower();
+
+            return this;
+        }
+
+        /// <summary>
         /// Defines the items in the DropDownList
         /// </summary>
         /// <param name="addAction">The add action.</param>
@@ -194,6 +230,24 @@ namespace Kendo.Mvc.UI.Fluent
         public DropDownListBuilder OptionLabel(object optionLabel)
         {
             Component.OptionLabel = optionLabel;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the minimum number of characters that should be typed before the widget queries the dataSource.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .MinLength(3)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder MinLength(int length)
+        {
+            Component.MinLength = length;
 
             return this;
         }

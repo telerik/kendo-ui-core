@@ -42,19 +42,7 @@ namespace Kendo.Mvc.UI
             set; 
         }
 
-        public string Filter
-        {
-            get;
-            set;
-        }
-
         public bool? HighlightFirst
-        {
-            get;
-            set;
-        }
-
-        public int? MinLength
         {
             get;
             set;
@@ -106,11 +94,6 @@ namespace Kendo.Mvc.UI
                 options["dataValueField"] = DataValueField;
             }
 
-            if (!string.IsNullOrEmpty(Filter))
-            {
-                options["filter"] = Filter;
-            }
-
             if (SelectedIndex != null && SelectedIndex > -1)
             {
                 options["index"] = SelectedIndex;
@@ -119,11 +102,6 @@ namespace Kendo.Mvc.UI
             if (HighlightFirst != null)
             {
                 options["highlightFirst"] = HighlightFirst;
-            }
-
-            if (MinLength != null)
-            {
-                options["minLength"] = MinLength;
             }
 
             if (!string.IsNullOrEmpty(Placeholder))
