@@ -3147,6 +3147,10 @@ var __meta__ = {
             return ranges.length && ranges[0].data.length && ranges[0].data[0].uid;
         },
 
+        enableRequestsInProgress: function() {
+            this._skipRequestsInProgress = false;
+        },
+
         range: function(skip, take) {
             skip = math.min(skip || 0, this.total());
 
@@ -4093,6 +4097,7 @@ var __meta__ = {
             this.dataOffset = offset;
             this._expanding = expanding;
             this.dataSource.range(offset, this.pageSize);
+            this.dataSource.enableRequestsInProgress();
         },
 
         _change: function() {
