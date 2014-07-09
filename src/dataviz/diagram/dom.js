@@ -1404,9 +1404,8 @@
                     .on("mouseover" + NS, proxy(that._mouseover, that))
                     .on("mouseout" + NS, proxy(that._mouseout, that));
 
-                kendo.onResize(function() {
-                    that.resize();
-                });
+                that._resizeHandler = proxy(that.resize, that);
+                kendo.onResize(that._resizeHandler);
             },
 
             _resize: function(size) {
@@ -1476,6 +1475,8 @@
             destroy: function () {
                 var that = this;
                 Widget.fn.destroy.call(that);
+
+                kendo.unbindResize(that._resizeHandler);
 
                 that.clear();
                 that.element.off(NS);
