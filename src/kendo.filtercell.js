@@ -373,6 +373,7 @@ var __meta__ = {
             type: "string",
             suggestDataSource: null,
             operator: "eq",
+            showOperators: true,
             template: null,
             messages: {
                 isTrue: "is true",

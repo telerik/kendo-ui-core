@@ -3746,7 +3746,8 @@ var __meta__ = {
                             delay: cellOptions.delay,
                             dataTextField: cellOptions.dataTextField,
                             operator: cellOptions.operator,
-                            operators: that.options.filterable.operators
+                            operators: that.options.filterable.operators,
+                            showOperators: cellOptions.showOperators
                         }).appendTo(th);
                 }
             }
