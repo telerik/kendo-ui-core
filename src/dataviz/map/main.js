@@ -530,13 +530,12 @@
             var nw = this.extent().nw;
             var topLeft = this.locationToLayer(nw).round();
 
+            scroller.movable.round = true;
             scroller.reset();
             scroller.userEvents.cancel();
 
             var maxZoom = this.options.maxZoom - this.zoom();
             scroller.dimensions.maxScale = pow(2, maxZoom);
-
-            scroller.movable.round = true;
 
             var xBounds = { min: -topLeft.x, max: scale - topLeft.x };
             var yBounds = { min: -topLeft.y, max: scale - topLeft.y };

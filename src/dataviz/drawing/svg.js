@@ -59,7 +59,7 @@
         translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
-                offset.x, offset.y,
+                Math.round(offset.x), Math.round(offset.y),
                 this._size.width, this._size.height);
 
             this._offset = offset;
