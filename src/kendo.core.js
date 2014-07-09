@@ -1041,7 +1041,7 @@ function pad(number, digits, end) {
         return value !== undefined ? value : "";
     };
 
-    if (globalize && globalize.load) {
+    if (globalize && !globalize.load) {
         toString = function(value, format, culture) {
             if ($.isPlainObject(culture)) {
                 culture = culture.name;
@@ -1597,7 +1597,7 @@ function pad(number, digits, end) {
         return value;
     };
 
-    if (globalize && globalize.load) {
+    if (globalize && !globalize.load) {
         kendo.parseDate = function (value, format, culture) {
             if (objectToString.call(value) === "[object Date]") {
                 return value;
