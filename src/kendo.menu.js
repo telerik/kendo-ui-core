@@ -1347,7 +1347,7 @@ var __meta__ = {
 
             that._eventOrigin = undefined;
 
-            return that.trigger(e.type, extend({ type: e.type, item: this.element[0], target: anchor }, origin ? { event: origin } : {} ));
+            return that.trigger(e.type, extend({ type: e.type, item: e.item || this.element[0], target: anchor }, origin ? { event: origin } : {} ));
         },
 
         _popup: function() {
