@@ -59,7 +59,7 @@
 
             if (kendo.support.browser.version < 8) {
                 setTimeout(function() {
-                    surface.element.style.display = "block";
+                    surface._rootElement.style.display = "block";
                 }, 0);
             }
         },
