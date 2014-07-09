@@ -41,9 +41,9 @@
             }
         });
 
-        test("sets actual surface type", function() {
+        test("reports actual surface type", function() {
             surface = new Surface(container, { type: "foo" });
-            equal(surface.options.type, "canvas");
+            equal(surface.type, "canvas");
         });
 
         test("appends canvas element to container", function() {

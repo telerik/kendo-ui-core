@@ -40,9 +40,9 @@
             }
         });
 
-        test("sets actual surface type", function() {
+        test("reports actual surface type", function() {
             surface = new Surface(container, { type: "foo" });
-            equal(surface.options.type, "svg");
+            equal(surface.type, "svg");
         });
 
         test("appends svg element to container", function() {

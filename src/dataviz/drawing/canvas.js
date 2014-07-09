@@ -44,7 +44,6 @@
     var Surface = d.Surface.extend({
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
-            this.options.type = "canvas";
 
             this.element[0].innerHTML = this._template(this);
             var canvas = this.element[0].firstElementChild;
@@ -56,6 +55,8 @@
             this._root = new RootNode(canvas);
             this._root.invalidate();
         },
+
+        type: "canvas",
 
         draw: function(element) {
             this._root.load([element]);

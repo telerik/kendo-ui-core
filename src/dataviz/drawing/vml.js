@@ -37,7 +37,6 @@
     var Surface = d.Surface.extend({
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
-            this.options.type = "vml";
 
             if (doc.namespaces) {
                 doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
@@ -53,6 +52,8 @@
             this.element.on("mouseover", this._mouseenter);
             this.element.on("mouseout", this._mouseleave);
         },
+
+        type: "vml",
 
         draw: function(element) {
             var surface = this;
