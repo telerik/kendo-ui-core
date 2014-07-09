@@ -641,6 +641,7 @@ var __meta__ = {
             var parentArea = coord.width * coord.height;
             var totalArea = 0;
             var itemsArea = [];
+            var i;
 
             for (i = 0; i < items.length; i++) {
                 itemsArea[i] = parseFloat(items[i].value);
