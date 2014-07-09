@@ -1641,6 +1641,16 @@
             "kendo-ui": "In this example we will learn how to customize the filter menu of Kendo UI Grid component."
         }
       },
+    {
+        "text": "Filter row",
+        "url": "grid/filter-row",
+        "title": {
+            "kendo-ui": "Filter row in Kendo UI Grid | Kendo UI Web Demo"
+        },
+        "meta": {
+            "kendo-ui": "In this example we will learn how to enable the filter row of Kendo UI Grid component."
+        }
+      },
       {
         "text": "Server aggregates",
         "url": "grid/serveraggregates",
