@@ -1,0 +1,34 @@
+<div id="example">
+    <div id="pivotgrid"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#pivotgrid").kendoPivotGrid({
+                columnWidth: 120,
+                height: 570,
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                    },
+                    schema: {
+                        cube: {
+                            dimensions: {
+                                ContactName: { caption: "All Contacts" },
+                                CompanyName: { caption: "All Companies" },
+                                Country: { caption: "All Countries" },
+                                ContactTitle: { caption: "All Titles" }
+                            },
+                            measures: {
+                                "Contacts Count": { field: "CustomerID", aggregate: function(value, state) { return state + 1; } }
+                            }
+                        }
+                    },
+                    columns: [{ name: "Country", expand: true }, { name: "CompanyName" } ],
+                    rows: [{ name: "ContactTitle", expand: true }],
+                    measures: ["Contacts Count"]
+                }
+            });
+        });
+</script>
+</div>

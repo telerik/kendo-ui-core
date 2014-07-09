@@ -1,0 +1,41 @@
+<script src="../content/shared/js/products.js"></script>
+
+<div id="example">
+    <div id="pivotgrid"></div>
+
+    <script>
+        $(document).ready(function () {
+            $("#pivotgrid").kendoPivotGrid({
+                columnWidth: 120,
+                height: 570,
+                dataSource: {
+                    data: products,
+                    schema: {
+                        model: {
+                            fields: {
+                                ProductName: { type: "string" },
+                                UnitPrice: { type: "number" },
+                                UnitsInStock: { type: "number" },
+                                Discontinued: { type: "boolean" },
+                                CategoryName: { field: "Category.CategoryName" }
+                            }
+                        },
+                        cube: {
+                            dimensions: {
+                                ProductName: { caption: "All Products" },
+                                CategoryName: { caption: "All Categories" },
+                                Discontinued: { caption: "Discontinued" }
+                            },
+                            measures: {
+                                "Sum": { field: "UnitPrice", aggregate: function(value, state) { return value + state; } }
+                            }
+                        }
+                    },
+                    columns: [{ name: "CategoryName", expand: true }, { name: "ProductName" } ],
+                    rows: [{ name: "Discontinued", expand: true }],
+                    measures: ["Sum"]
+                }
+            });
+        });
+</script>
+</div>

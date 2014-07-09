@@ -1890,6 +1890,26 @@
         }
       },
       {
+        "text": "Remote binding",
+        "url": "pivotgrid/remote-flat-data-binding",
+        "title": {
+            "kendo-ui": "Binding Pivot Grid to flat remote data"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with remote flat data."
+        }
+      },
+      {
+        "text": "Local binding",
+        "url": "pivotgrid/local-flat-data-binding",
+        "title": {
+            "kendo-ui": "Binding Pivot Grid to local data"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with local flat data."
+        }
+      },
+      {
         "text": "AngularJS",
         "url": "pivotgrid/angular",
         "title": {

@@ -427,6 +427,7 @@ var __meta__ = {
                             }
 
                             rowValue = rowGetters[rowDescriptor.name](data[idx]);
+                            rowValue = rowValue !== undefined ? rowValue.toString() : rowValue;
                             rows[rowValue] = {
                                 name: rowDescriptor.name + "&" + rowValue,
                                 parentName: rowDescriptor.name,
@@ -453,7 +454,7 @@ var __meta__ = {
                 rows = this._asTuples(rows, rowDescriptors);
                 aggregatedData = this._toDataArray(aggregatedData, columns);
             } else {
-                aggregatedData = [];
+                aggregatedData = columns = rows = [];
             }
 
             return {
