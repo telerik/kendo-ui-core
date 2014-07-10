@@ -455,6 +455,17 @@
             equal(layer.items.length, 3);
         });
 
+        test("sets the dataSource", function() {
+            layer.setDataSource(new kendo.data.DataSource({
+                data: [{
+                    latlng: [10, 10],
+                    text: "Foo"
+                }]
+            }));
+
+            equal(layer.items.length, 1);
+        });
+
         test("binds location", function() {
             createBoundLayer({ locationField: "latlng" });
             ok(new Location(10, 10).equals(marker.location()));

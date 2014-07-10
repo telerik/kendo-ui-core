@@ -60,6 +60,19 @@
             this.dataSource.unbind("change", this._dataChange);
         },
 
+        setDataSource: function(dataSource) {
+            if (this.dataSource) {
+                this.dataSource.unbind("change", this._dataChange);
+            }
+
+            this.dataSource = dataSource;
+            this.dataSource.bind("change", this._dataChange);
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+        },
+
         _reset: function() {
             Layer.fn._reset.call(this);
             this._translateSurface();

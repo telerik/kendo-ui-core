@@ -160,6 +160,20 @@
         layer.dataSource.add({});
     });
 
+    test("sets the dataSource", function() {
+        layer.setDataSource(new kendo.data.DataSource({
+            data: [{
+                "type": "LineString",
+                "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+            }, {
+                "type": "LineString",
+                "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+            }]
+        }));
+
+        equal(layer._data.length, 2);
+    });
+
     // ------------------------------------------------------------
     module("Shape Layer / API", {
         setup: function() {

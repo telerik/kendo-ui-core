@@ -100,6 +100,19 @@
             }
         },
 
+        setDataSource: function(dataSource) {
+            if (this.dataSource) {
+                this.dataSource.unbind("change", this._dataChange);
+            }
+
+            this.dataSource = dataSource;
+            this.dataSource.bind("change", this._dataChange);
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+        },
+
         _addOne: function(arg) {
             var marker = Marker.create(arg, this.options);
             marker.addTo(this);
