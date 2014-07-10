@@ -4,7 +4,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/dropdownlist/remote-data/read" var="readUrl" />
+<c:url value="/dropdownlist/serverfiltering/read" var="readUrl" />
 
 <demo:header />
     <div class="demo-section">

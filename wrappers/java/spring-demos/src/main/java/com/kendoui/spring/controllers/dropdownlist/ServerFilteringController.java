@@ -22,7 +22,7 @@ public class ServerFilteringController {
         return "dropdownlist/serverfiltering";
     }
     
-    @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
+    @RequestMapping(value = "/serverfiltering/read", method = RequestMethod.POST)
     public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
         return product.getList(request);
     }

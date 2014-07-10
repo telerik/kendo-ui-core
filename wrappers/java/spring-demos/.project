@@ -3,6 +3,7 @@
 	<name>spring-demos</name>
 	<comment></comment>
 	<projects>
+		<project>kendo-taglib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
