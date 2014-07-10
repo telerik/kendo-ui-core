@@ -254,12 +254,4 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
         return false;
     }
 
-    public boolean getSelected() {
-        return (boolean)getProperty("selected");
-    }
-
-    public void setSelected(boolean value) {
-        setProperty("selected", value);
-    }
-
 }
