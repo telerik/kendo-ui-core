@@ -8,7 +8,7 @@ var __meta__ = {
     category: "web",
     description: "",
     hidden: true,
-    depends: [ "listview", "dropdownlist", "upload" ]
+    depends: [ "selectable", "listview", "dropdownlist", "upload" ]
 };
 
 (function($, undefined) {
