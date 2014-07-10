@@ -1052,7 +1052,7 @@ var __meta__ = {
                 that.trigger(REFRESH);
             }
 
-            element.toggleClass("k-window-iframecontent", showIframe);
+            element.toggleClass("k-window-iframecontent", !!showIframe);
 
             return that;
         },
