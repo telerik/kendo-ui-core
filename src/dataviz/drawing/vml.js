@@ -233,6 +233,8 @@
 
         mapStyle: function() {
             var style = [];
+            style.push(["position", "absolute"]);
+            style.push(["white-space", "nowrap"]);
             if (this.srcElement && this.srcElement.options.visible === false) {
                 style.push([
                     "display", "none"
