@@ -1,17 +1,212 @@
 <div id="example">
-    <div id="info" class="box-col"></div>
-    <div class="box-col select-col">
-        <h4>Bubble symbol</h4>
-        <ul id="select-symbol">
-            <li>Circle</li>
-            <li>Square</li>
-        </ul>
+    <div class="box">
+        <div id="info" class="box-col"></div>
+        <div class="box-col select-col">
+            <h4>Surface type</h4>
+            <ul id="select-type">
+                <li>SVG</li>
+                <li>Canvas</li>
+                <li>VML</li>
+            </ul>
+        </div>
     </div>
-    <div class="demo-section k-header">
-        <div id="surface"></div>
+    <div id="surface-container">
+        <div id="surface" style="width: 800px; height: 300px;"></div>
     </div>
     <script>
+    var dataviz = kendo.dataviz;
+    var geo = dataviz.geometry;
+    var Point = geo.Point;
+    var drawing = dataviz.drawing;
+    var Circle = drawing.Circle;
+    var Group = drawing.Group;
+    var Path = drawing.Path;
+    var Text = drawing.Text;
+
+    var Clock = kendo.Class.extend({
+        init: function(center, size) {
+            this._center = center;
+            this._size = size;
+
+            this._render();
+        },
+
+        set: function(date) {
+            var center = this._center;
+            var angle;
+
+            var millis = date.getMilliseconds() + date.getSeconds() * 1000;
+            angle = (360 / 60000) * millis;
+            this._seconds.transform(geo.transform().rotate(angle, center));
+
+            angle = (360/60) * date.getMinutes();
+            this._minutes.transform(geo.transform().rotate(angle, center));
+
+            var hours = date.getHours() + date.getMinutes() / 60;
+            angle = (360/12) * hours;
+            this._hours.transform(geo.transform().rotate(angle, center));
+        },
+
+        attachTo: function(surface) {
+            surface.draw(this._root);
+        },
+
+        _render: function() {
+            var center = this._center;
+            var size = this._size;
+
+            this._seconds = new Path()
+                .stroke("red", 1)
+                .moveTo(center).lineTo(center.x, this._fromTop(0.05));
+
+            this._minutes = new Path({
+                stroke: {
+                    color: "black",
+                    width: 3,
+                    lineCap: "round"
+                }
+            }).moveTo(center).lineTo(center.x, this._fromTop(0.04));
+
+            this._hours = new Path({
+                stroke: {
+                    color: "black",
+                    width: 6,
+                    lineCap: "round"
+                }
+            }).moveTo(center).lineTo(center.x, this._fromTop(0.25));
+
+            // Stacking order matches element order
+            this._root = new Group();
+            this._root.append(
+                this._renderFrame(),
+                this._renderTicks(),
+                this._seconds,
+                this._minutes,
+                this._hours,
+                this._renderLabels()
+            );
+        },
+
+        _renderTicks: function () {
+            var center = this._center;
+            var ticks = new Group();
+
+            for (var i = 0; i < 360; i += 30) {
+                var p1 = new Point(center.x, this._fromTop(0.025)).rotate(i, center);
+                var p2 = new Point(center.x, this._fromTop(0.01)).rotate(i, center);
+                ticks.append(new Path({
+                    stroke: {
+                        color: "black",
+                        width: 0.5
+                    }
+                }).moveTo(p1).lineTo(p2));
+            }
+
+            return ticks;
+        },
+
+        _renderLabels: function() {
+            var center = this._center;
+            var labels = new Group();
+            var font = "bold " + this._size * 0.06 + "px Helvetica";
+
+            var hours = 12;
+            for (var i = 0; i < 360; i += 90) {
+                var origin = new Point(center.x, this._fromTop(0.075))
+                                 .rotate(i, center);
+
+                var text = new Text(hours, origin, {
+                    font: font,
+                    fill: {
+                        color: "black",
+                        opacity: 0.3
+                    }
+                });
+
+                // Align text
+                var bbox = text.bbox();
+                origin.translate(-bbox.width() / 2, -bbox.height() / 2);
+
+                hours = (hours + 3) % 12;
+                labels.append(text);
+            }
+
+            return labels;
+        },
+
+        _renderFrame: function() {
+            var frame = new Group();
+            var size = this._size;
+
+            var outerCircle = new geo.Circle(this._center, (size / 2) - 4);
+            var innerCircle = new geo.Circle(this._center, size * 0.01);
+
+            frame.append(
+                new Circle(outerCircle).stroke("black", 0.5),
+                new Circle(innerCircle).fill("black")
+            );
+
+            return frame;
+        },
+
+        _fromTop: function(ratio) {
+            var top = this._center.y - this._size / 2;
+            return top + this._size * ratio;
+        }
+    });
+
+    function initSurface(type) {
+        return drawing.Surface.create($("#surface"), { type: type });
+    }
+
+    function attachClocks(clocks, surface) {
+        for (var i = 0; i < clocks.length; i++) {
+            clocks[i].attachTo(surface);
+        }
+    }
+
     $(document).ready(function() {
+        var surface = initSurface();
+        var clocks = [];
+        clocks.push(new Clock(new geo.Point(150, 150), 300))
+        clocks.push(new Clock(new geo.Point(425, 200), 200))
+        clocks.push(new Clock(new geo.Point(650, 200), 200))
+
+        attachClocks(clocks, surface);
+
+        setInterval(function() {
+            for (var i = 0; i < clocks.length; i++) {
+                var date = new Date(new Date().setHours(i * 3));
+                clocks[i].set(date)
+            }
+        }, 100);
+
+        $("#select-type").kendoMobileButtonGroup({
+            select: function(e) {
+                var type = $("li", e.sender.element).eq(e.index).text().toLowerCase();
+
+                surface.destroy();
+                surface = initSurface(type);
+                attachClocks();
+            },
+            index: 0
+        });
     });
     </script>
+    <style scoped>
+        #example .box,
+        .demo-section {
+            margin: 1em auto;
+            padding: 2em;
+        }
+
+        #surface-container {
+            text-align: center;
+
+            margin: 0 auto;
+            width: 800px;
+            height: 300px;
+            padding: 20px;
+        }
+    </style>
 </div>
