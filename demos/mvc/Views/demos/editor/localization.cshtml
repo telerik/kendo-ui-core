@@ -1,0 +1,82 @@
+<div id="example">
+    <label for="language">Choose culture:</label>
+    <input id="language" value="en-US" />
+
+    <textarea id="editor" rows="10" cols="30" style="width:100%;height:400px"></textarea>
+
+    <script>
+
+        function changeLanguage() {
+            kendo.ui.progress($("#editor"), true);
+            $.getScript("../content/shared/messages/kendo.messages." + this.value() + ".js", function() {
+                kendo.ui.progress($("#editor"), false);
+                createEditor();
+            });
+        }
+
+        $(document).ready(function() {
+            $("#language").kendoDropDownList({
+                change: changeLanguage,
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    {text: "bg-BG"},
+                    {text: "zh-CN"},
+                    {text: "en-US"},
+                ]
+            });
+
+            $("#language").data("kendoDropDownList").trigger("change");
+        });
+
+        function createEditor() {
+            var element = $("#editor"),
+                editor = element.data("kendoEditor");
+
+            if (editor) {
+                wrapper = editor.wrapper;
+                editor.destroy();
+                wrapper.remove();
+                element.appendTo($("#example"));
+            }
+
+            element.kendoEditor({
+                tools: [
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "justifyLeft",
+                    "justifyCenter",
+                    "justifyRight",
+                    "justifyFull",
+                    "insertUnorderedList",
+                    "insertOrderedList",
+                    "indent",
+                    "outdent",
+                    "createLink",
+                    "unlink",
+                    "insertImage",
+                    "insertFile",
+                    "subscript",
+                    "superscript",
+                    "createTable",
+                    "addRowAbove",
+                    "addRowBelow",
+                    "addColumnLeft",
+                    "addColumnRight",
+                    "deleteRow",
+                    "deleteColumn",
+                    "viewHtml",
+                    "formatting",
+                    "cleanFormatting",
+                    "fontName",
+                    "fontSize",
+                    "foreColor",
+                    "backColor"
+                ]
+            });
+        }
+
+    </script>
+</div>

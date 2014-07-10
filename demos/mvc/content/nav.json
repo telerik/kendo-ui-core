@@ -1259,6 +1259,22 @@
         }
       },
       {
+        "text": "Localization",
+        "disableInMobile": true,
+        "url": "editor/localization",
+        "title": {
+            "kendo-ui": "Localization support in Kendo UI Editor"
+        },
+        "meta": {
+            "kendo-ui": "With Kendo UI Editor you can allow end users to edit HTML5 in a user-friendly way. Check out this demo to learn more about the localization support in the widget."
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "RTL support",
         "disableInMobile": true,
         "url": "editor/right-to-left-support",
