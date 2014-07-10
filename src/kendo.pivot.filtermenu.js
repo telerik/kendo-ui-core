@@ -89,53 +89,44 @@ var __meta__ = {
 
         _applyIncludes: function(e) {
             var checkedNodes = [];
+            var resultExpression;
             var view = this.treeView.dataSource.view();
+            var rootChecked = view[0].checked;
             var filter = this.dataSource.filter();
-            var expr = findFilter(filter, this.currentMember);
+            var existingExpression = findFilter(filter, this.currentMember);
 
             checkedNodeIds(view, checkedNodes);
 
-            var resultExpr;
-            if (!checkedNodes.length) {
-                if (expr && view[0].checked) {
-                    filter.filters.splice(filter.filters.indexOf(expr), 1);
+            if (existingExpression) {
+                if (rootChecked) {
+                    filter.filters.splice(filter.filters.indexOf(existingExpression), 1);
                     if (!filter.filters.length) {
                         filter = {};
                     }
-
-                    resultExpr = filter;
-                }
-            } else {
-                if (expr) {
-                    if (view[0].checked) {
-                        filter.filters.splice(filter.filters.indexOf(expr), 1);
-                        if (!filter.filters.length) {
-                            filter = {};
-                        }
-                    } else {
-                        expr.value = checkedNodes.join(",");
-                    }
-                    resultExpr = filter;
                 } else {
-                    if (view[0].checked) {
-                        this._closeWindow(e);
-                        return;
-                    }
-                    resultExpr = {
+                    existingExpression.value = checkedNodes.join(",");
+                }
+
+                resultExpression = filter;
+            }
+
+            if (checkedNodes.length) {
+                if (!resultExpression && !rootChecked) {
+                    resultExpression = {
                         field: this.currentMember,
                         operator: "in",
                         value: checkedNodes.join(",")
                     };
 
                     if (filter) {
-                        filter.filters.push(resultExpr);
-                        resultExpr = filter;
+                        filter.filters.push(resultExpression);
+                        resultExpression = filter;
                     }
                 }
             }
 
-            if (resultExpr) {
-                this.dataSource.filter(resultExpr);
+            if (resultExpression) {
+                this.dataSource.filter(resultExpression);
             }
 
             this._closeWindow(e);
