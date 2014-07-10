@@ -87,7 +87,8 @@
                 }).data("kendoPivotGrid");
 
                 $("#configurator").kendoPivotConfigurator({
-                    dataSource: pivot.dataSource
+                    dataSource: pivot.dataSource,
+                    filterable: true
                 });
 
                 var defaultMember = "[Date].[Fiscal].[(All)]";
