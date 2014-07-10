@@ -3307,10 +3307,7 @@
         },
         "meta": {
             "kendo-ui": "This example demonstrates different events which are available in KendoGantt widget and the code explains how you can use them for your project."
-        },
-        "packages": [
-          "!mvc"
-        ]
+        }
       },
       {
         "text": "API",
@@ -3320,10 +3317,7 @@
         },
         "meta": {
             "kendo-ui": "This demo shows API Functions of KendoGantt. Demo Source Code will show you how to call methods on the widget instance to script its behavior."
-        },
-        "packages": [
-          "!mvc"
-        ]
+        }
       },
       {
         "text": "MVVM",
