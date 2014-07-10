@@ -1726,6 +1726,12 @@
             ok(canvas.surface);
         });
 
+        test("inits surface size", function() {
+            var size = canvas.surface.getSize();
+            ok(size.width, 500);
+            ok(size.height, 300);
+        });
+
         test("inits container", function() {
             ok(drawingElement instanceof d.Group);
         });
@@ -1740,6 +1746,12 @@
 
         var SurfaceCreate = d.Surface.create;
 
+        function Surface() {
+            this.setSize = function(size) {
+                this._size = size;
+            };
+        }
+
         module("Canvas / init translate", {
             teardown: function() {
                 d.Surface.create = SurfaceCreate;
@@ -1749,17 +1761,17 @@
 
         test("sets translate method if surface can translate", function() {
             d.Surface.create = function(element, options) {
-                return {
-                    translate: function() {}
-                };
+                var surface = new Surface();
+                surface.translate = function() {};
+                return surface;
             };
             setupCanvas();
             ok(canvas.translate === canvas._translate);
         });
 
-        test("does no sets translate method if surface cannot translate", function() {
+        test("does not set translate method if surface cannot translate", function() {
             d.Surface.create = function(element, options) {
-                return {};
+                return new Surface();
             };
             setupCanvas();
             ok(canvas.translate === undefined);
