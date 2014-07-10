@@ -131,18 +131,6 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        public string ClientGroupFooterTemplate
-        {
-            get
-            {
-                return Settings.ClientGroupFooterTemplate;
-            }
-            set
-            {
-                Settings.ClientGroupFooterTemplate = value;
-            }
-        }
-
         /// <summary>
         /// Gets a function which returns the value of the property to which the column is bound to.
         /// </summary>

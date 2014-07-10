@@ -236,6 +236,18 @@ namespace Kendo.Mvc.UI
             }
         }
         
+        public string ClientGroupFooterTemplate
+        {
+            get
+            {
+                return Settings.ClientGroupFooterTemplate;
+            }
+            set
+            {
+                Settings.ClientGroupFooterTemplate = value;
+            }
+        }
+        
         /// <summary>
         /// Gets or sets a value indicating whether this column is hidden.
         /// </summary>
