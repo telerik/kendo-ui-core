@@ -98,6 +98,7 @@ var __meta__ = {
 //                this.dataSource.filter({});
 //            }
 
+            console.log( checkedNodes);
             var filters = this.dataSource.filter();
             var filter = findFilter(filters, this.currentMember);
 
@@ -111,8 +112,6 @@ var __meta__ = {
             if (filter) {
                 if (checkedNodes.length > 0) {
                     filter.value = checkedNodes.join(",");
-                } else {
-                    filter = null;
                 }
             } else {
                 filter = {
@@ -181,6 +180,9 @@ var __meta__ = {
                 dataTextField: "name",
                 checkboxes: {
                     checkChildren: true
+                },
+                dataBound: function() {
+                    ui.progress(that.includeWindow.element, false);
                 }
             });
         },
@@ -209,6 +211,7 @@ var __meta__ = {
                 this._createTreeView(this.includeWindow.element.find(".k-treeview"));
             }
 
+            ui.progress(this.includeWindow.element, true);
             this.treeView.dataSource.read();
         },
 
