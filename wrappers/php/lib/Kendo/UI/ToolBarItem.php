@@ -118,8 +118,8 @@ class ToolBarItem extends \Kendo\SerializableObject {
     * @param boolean $value
     * @return \Kendo\UI\ToolBarItem
     */
-    public function selectable($value) {
-        return $this->setProperty('selectable', $value);
+    public function selected($value) {
+        return $this->setProperty('selected', $value);
     }
 
     /**

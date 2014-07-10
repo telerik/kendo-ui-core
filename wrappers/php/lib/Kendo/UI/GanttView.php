@@ -25,7 +25,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the timeHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the time slots in "day" view
+    * The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GanttView
     */
@@ -37,7 +37,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the timeHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the time slots in "day" view
+    * The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view
     * @param string $value The template content.
     * @return \Kendo\UI\GanttView
     */
@@ -47,7 +47,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the dayHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
+    * The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GanttView
     */
@@ -59,7 +59,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the dayHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
+    * The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
     * @param string $value The template content.
     * @return \Kendo\UI\GanttView
     */
@@ -69,7 +69,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the weekHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
+    * The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GanttView
     */
@@ -81,7 +81,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the weekHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
+    * The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
     * @param string $value The template content.
     * @return \Kendo\UI\GanttView
     */
@@ -91,7 +91,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the monthHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the month slots in "month" views.
+    * The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GanttView
     */
@@ -103,7 +103,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the monthHeaderTemplate option of the GanttView.
-    * The [template](/kendo-ui/api/framework/kendo#methods-template used to render the month slots in "month" views.
+    * The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.
     * @param string $value The template content.
     * @return \Kendo\UI\GanttView
     */

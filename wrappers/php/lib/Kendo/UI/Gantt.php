@@ -56,6 +56,15 @@ instance.If the dependencies option is set to a JavaScript object or array the w
     }
 
     /**
+    * If set to true the user could navigate the widget using the keyboard. By default keyboard navigation is disabled.
+    * @param boolean $value
+    * @return \Kendo\UI\Gantt
+    */
+    public function navigatable($value) {
+        return $this->setProperty('navigatable', $value);
+    }
+
+    /**
     * Sets the start of the work day.
     * @param date $value
     * @return \Kendo\UI\Gantt
