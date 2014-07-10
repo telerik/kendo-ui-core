@@ -1316,7 +1316,7 @@ var __meta__ = {
     });
 
     var RESTORE_OVERFLOW = !support.mobileOS.android;
-    var IGNORE_TRANSITION_EVENT_SELECTOR = ".km-touch-scrollbar";
+    var IGNORE_TRANSITION_EVENT_SELECTOR = ".km-touch-scrollbar, .km-actionsheet-wrapper";
 
     createEffect("replace", {
         _before: $.noop,
