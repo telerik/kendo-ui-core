@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI
         
         public bool? Primary { get; set; }
         
-        public bool? Selectable { get; set; }
+        public bool? Selected { get; set; }
         
         public string SpriteCssClass { get; set; }
         
@@ -146,9 +146,9 @@ namespace Kendo.Mvc.UI
                 json["primary"] = Primary;
             }
                 
-            if (Selectable.HasValue)
+            if (Selected.HasValue)
             {
-                json["selectable"] = Selectable;
+                json["selected"] = Selected;
             }
                 
             if (SpriteCssClass.HasValue())

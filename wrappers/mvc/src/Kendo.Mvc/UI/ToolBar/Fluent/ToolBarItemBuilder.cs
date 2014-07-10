@@ -130,10 +130,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Specifies if the toggle button is initially selected. Applicable only for buttons with togglable: true.
         /// </summary>
-        /// <param name="value">The value that configures the selectable.</param>
-        public ToolBarItemBuilder Selectable(bool value)
+        /// <param name="value">The value that configures the selected.</param>
+        public ToolBarItemBuilder Selected(bool value)
         {
-            container.Selectable = value;
+            container.Selected = value;
 
             return this;
         }
