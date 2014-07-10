@@ -647,7 +647,7 @@ var __meta__ = {
             var overlap = 2;
             var arrowOverlap = 1;
             var rowHeight = this._rowHeight;
-            var minLineLength = Math.floor(rowHeight / 2);
+            var minLineWidth = 10;
             var fromTop = from.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
             var toTop = to.rowIndex * rowHeight + Math.floor(rowHeight / 2) - 1;
             var styles = GanttView.styles;
@@ -661,12 +661,12 @@ var __meta__ = {
 
             left = from[dir];
             top = fromTop;
-            width = minLineLength;
+            width = minLineWidth;
 
             delta = to[dir] - from[dir];
 
             if ((delta) > 0 !== reverse) {
-                width = Math.abs(delta) + minLineLength;
+                width = Math.abs(delta) + minLineWidth;
             }
 
             if (reverse) {
@@ -675,7 +675,7 @@ var __meta__ = {
                 addHorizontal();
             } else {
                 addHorizontal();
-                left += width;
+                left += width - overlap;
             }
 
             if (toTop < top) {
@@ -710,8 +710,9 @@ var __meta__ = {
             var width = 0;
             var height = 0;
             var rowHeight = this._rowHeight;
-            var minLineLength = Math.floor(rowHeight / 2);
-            var minDistance = 2 * minLineLength;
+            var minLineHeight = Math.floor(rowHeight / 2);
+            var minLineWidth = 10;
+            var minDistance = 2 * minLineWidth;
             var delta = to.start - from.end;
             var overlap = 2;
             var arrowOverlap = 1;
@@ -728,23 +729,23 @@ var __meta__ = {
 
             left = from.end;
             top = fromTop;
-            width = minLineLength;
+            width = minLineWidth;
 
             if (reverse) {
                 left += arrowOverlap;
 
                 if (delta > minDistance) {
-                    width = delta - minLineLength;
+                    width = delta - (minLineWidth - overlap);
                 }
 
                 width -= arrowOverlap;
             }
 
             addHorizontal();
-            left += width;
+            left += width - overlap;
 
             if ((delta) <= minDistance) {
-                height = reverse ? Math.abs(toTop - fromTop) - minLineLength : minLineLength;
+                height = reverse ? Math.abs(toTop - fromTop) - minLineHeight : minLineHeight;
 
                 if (toTop < fromTop) {
                     top -= height;
@@ -759,13 +760,11 @@ var __meta__ = {
 
                 width = (from.end - to.start) + minDistance;
 
-                if (width < minLineLength) {
-                    width = minLineLength;
+                if (width < minLineWidth) {
+                    width = minLineWidth;
                 }
 
-                left -= width;
-
-                width += overlap;
+                left -= width - overlap;
 
                 addHorizontal();
             }

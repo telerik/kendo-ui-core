@@ -118,17 +118,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.task2RightEdge + referencePoints.minLineLength - referencePoints.task1RightEdge);
+        equalWithRound(firstLine.outerWidth(), referencePoints.task2RightEdge + referencePoints.minLineWidth - referencePoints.task1RightEdge);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -189,17 +189,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task1RightEdge + referencePoints.minLineLength - referencePoints.task2RightEdge);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task1RightEdge + referencePoints.minLineWidth - referencePoints.task2RightEdge);
     });
 
 
@@ -260,17 +260,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.task1RightEdge + referencePoints.minLineLength - referencePoints.task2RightEdge);
+        equalWithRound(firstLine.outerWidth(), referencePoints.task1RightEdge + referencePoints.minLineWidth - referencePoints.task2RightEdge);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -331,17 +331,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task2RightEdge + referencePoints.minLineLength - referencePoints.task1RightEdge);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task2RightEdge + referencePoints.minLineWidth - referencePoints.task1RightEdge);
     });
 
 
@@ -404,17 +404,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge - (referencePoints.task1RightEdge + referencePoints.minLineLength));
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge - (referencePoints.task1RightEdge + referencePoints.minLineWidth));
     });
 
 
@@ -479,27 +479,27 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(secondLine.outerHeight(), referencePoints.minLineLength);
+        equalWithRound(secondLine.outerHeight(), referencePoints.minLineHeight);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
-        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(thirdLine.outerWidth(), (referencePoints.task1RightEdge - referencePoints.task2LeftEdge) + 2 * referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(thirdLine.outerWidth(), (referencePoints.task1RightEdge - referencePoints.task2LeftEdge) + 2 * referencePoints.minLineWidth);
 
         var fourthLine = lines.eq(3);
-        equalWithRound(fourthLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
-        equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(fourthLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle - referencePoints.minLineLength);
+        equalWithRound(fourthLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(fourthLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle - referencePoints.minLineHeight);
 
         var fifthLine = lines.eq(4);
-        equalWithRound(fifthLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(fifthLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(fifthLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineWidth);
 
     });
 
@@ -561,17 +561,17 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge - referencePoints.task2RightEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge - referencePoints.task2RightEdge - referencePoints.minLineWidth);
     });
 
 
@@ -636,27 +636,27 @@
         var firstLine = lines.eq(0);
         equalWithRound(firstLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
-        equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(secondLine.outerHeight(), referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
+        equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(secondLine.outerHeight(), referencePoints.minLineHeight);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
-        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(thirdLine.outerWidth(), (referencePoints.task2RightEdge - referencePoints.task1LeftEdge) + 2 * referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(thirdLine.outerWidth(), (referencePoints.task2RightEdge - referencePoints.task1LeftEdge) + 2 * referencePoints.minLineWidth);
 
         var fourthLine = lines.eq(3);
-        equalWithRound(fourthLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(fourthLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(fourthLine.outerHeight(), referencePoints.minLineLength);
+        equalWithRound(fourthLine.outerHeight(), referencePoints.minLineHeight);
 
         var fifthLine = lines.eq(4);
-        equalWithRound(fifthLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(fifthLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(fifthLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -717,19 +717,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge - referencePoints.task2RightEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge - referencePoints.task2RightEdge - referencePoints.minLineWidth);
     });
 
 
@@ -792,29 +792,29 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(secondLine.outerHeight(), referencePoints.minLineLength);
+        equalWithRound(secondLine.outerHeight(), referencePoints.minLineHeight);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
-        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(thirdLine.outerWidth(), (referencePoints.task2RightEdge - referencePoints.task1LeftEdge) + 2 * referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(thirdLine.outerWidth(), (referencePoints.task2RightEdge - referencePoints.task1LeftEdge) + 2 * referencePoints.minLineWidth);
 
         var fourthLine = lines.eq(3);
-        equalWithRound(fourthLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineLength);
-        equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(fourthLine.outerHeight(), (referencePoints.secondRowMiddle - referencePoints.firstRowMiddle) - referencePoints.minLineLength);
+        equalWithRound(fourthLine.offset().left, referencePoints.task2RightEdge + referencePoints.minLineWidth);
+        equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(fourthLine.outerHeight(), (referencePoints.secondRowMiddle - referencePoints.firstRowMiddle) - referencePoints.minLineHeight);
 
         var fifthLine = lines.eq(4);
         equalWithRound(fifthLine.offset().left, referencePoints.task2RightEdge);
         equalWithRound(fifthLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -873,19 +873,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
         equalWithRound(thirdLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge - referencePoints.task1RightEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge - referencePoints.task1RightEdge - referencePoints.minLineWidth);
     });
 
 
@@ -948,29 +948,29 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
-        equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(secondLine.outerHeight(), referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(secondLine.outerHeight(), referencePoints.minLineHeight);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
-        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineLength);
-        equalWithRound(thirdLine.outerWidth(), (referencePoints.task1RightEdge - referencePoints.task2LeftEdge) + 2 * referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
+        equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle + referencePoints.minLineHeight);
+        equalWithRound(thirdLine.outerWidth(), (referencePoints.task1RightEdge - referencePoints.task2LeftEdge) + 2 * referencePoints.minLineWidth);
 
         var fourthLine = lines.eq(3);
-        equalWithRound(fourthLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineLength);
+        equalWithRound(fourthLine.offset().left, referencePoints.task1RightEdge + referencePoints.minLineWidth);
         equalWithRound(fourthLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(fourthLine.outerHeight(), (referencePoints.secondRowMiddle - referencePoints.firstRowMiddle) - referencePoints.minLineLength);
+        equalWithRound(fourthLine.outerHeight(), (referencePoints.secondRowMiddle - referencePoints.firstRowMiddle) - referencePoints.minLineHeight);
 
         var fifthLine = lines.eq(4);
         equalWithRound(fifthLine.offset().left, referencePoints.task1RightEdge);
         equalWithRound(fifthLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(fifthLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -1031,19 +1031,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge + referencePoints.minLineLength - referencePoints.task1LeftEdge);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task2LeftEdge + referencePoints.minLineWidth - referencePoints.task1LeftEdge);
     });
 
 
@@ -1102,19 +1102,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.task1LeftEdge + referencePoints.minLineLength - referencePoints.task2LeftEdge);
+        equalWithRound(firstLine.outerWidth(), referencePoints.task1LeftEdge + referencePoints.minLineWidth - referencePoints.task2LeftEdge);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -1173,19 +1173,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(firstLine.outerWidth(), referencePoints.minLineWidth);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task2LeftEdge - referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge + referencePoints.minLineLength - referencePoints.task2LeftEdge);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.task1LeftEdge + referencePoints.minLineWidth - referencePoints.task2LeftEdge);
 
     });
 
@@ -1245,19 +1245,19 @@
         var lines = timeline.wrapper.find(".k-gantt-dependencies .k-line");
 
         var firstLine = lines.eq(0);
-        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(firstLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(firstLine.offset().top, referencePoints.secondRowMiddle);
-        equalWithRound(firstLine.outerWidth(), referencePoints.task2LeftEdge + referencePoints.minLineLength - referencePoints.task1LeftEdge);
+        equalWithRound(firstLine.outerWidth(), referencePoints.task2LeftEdge + referencePoints.minLineWidth - referencePoints.task1LeftEdge);
 
         var secondLine = lines.eq(1);
-        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(secondLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(secondLine.offset().top, referencePoints.firstRowMiddle);
         equalWithRound(secondLine.outerHeight(), referencePoints.secondRowMiddle - referencePoints.firstRowMiddle);
 
         var thirdLine = lines.eq(2);
-        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineLength);
+        equalWithRound(thirdLine.offset().left, referencePoints.task1LeftEdge - referencePoints.minLineWidth);
         equalWithRound(thirdLine.offset().top, referencePoints.firstRowMiddle);
-        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineLength);
+        equalWithRound(thirdLine.outerWidth(), referencePoints.minLineWidth);
     });
 
 
@@ -1279,7 +1279,8 @@
         result.task2RightEdge = result.task2LeftEdge + taskElements.eq(1).outerWidth();
 
         result.rowHeight = rowHeight;
-        result.minLineLength = rowHeight / 2;
+        result.minLineHeight = rowHeight / 2;
+        result.minLineWidth = 10;
 
         result.firstRowMiddle = timeline.view().content.offset().top + rowHeight / 2;
         result.secondRowMiddle = result.firstRowMiddle + rowHeight;
