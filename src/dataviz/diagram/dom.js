@@ -1409,7 +1409,9 @@
             },
 
             _resize: function(size) {
-                this.canvas.size(size);
+                if (this.canvas) {
+                    this.canvas.size(size);
+                }
             },
 
             _mouseover: function(e) {
