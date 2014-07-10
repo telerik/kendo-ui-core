@@ -73,15 +73,32 @@
         var surface = initSurface();
         surface.draw(path);
 
+        $("#select-type li").each(function() {
+            var type = $(this).text().toLowerCase();
+            if (kendo.support[type]) {
+                $(this).addClass("enabled");
+            } else {
+                $(this).addClass("disabled km-state-disabled");
+            }
+        });
+
+        var selectedIndex = $("#select-type li.enabled").index();
         $("#select-type").kendoMobileButtonGroup({
             select: function(e) {
-                var type = $("li", e.sender.element).eq(e.index).text().toLowerCase();
+                var option = $("li", e.sender.element).eq(e.index);
+                if (option.is(".disabled")) {
+                    e.sender.select(selectedIndex);
+                } else {
+                    var type = option.text().toLowerCase();
 
-                surface.destroy();
-                surface = initSurface(type);
-                surface.draw(path);
+                    surface.destroy();
+                    surface = initSurface(type);
+                    surface.draw(path);
+
+                    selectedIndex = e.sender.selectedIndex;
+                }
             },
-            index: 0
+            index: selectedIndex
         });
     });
     </script>
