@@ -247,6 +247,7 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
         {
             configurator(new GanttViewFactory(container.Views));
+
             return this;
         }
         
@@ -270,7 +271,6 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public GanttBuilder<TTaskModel, TDependenciesModel> Events(Action<GanttEventBuilder> configurator)
         {
-
             configurator(new GanttEventBuilder(Component.Events));
 
             return this;

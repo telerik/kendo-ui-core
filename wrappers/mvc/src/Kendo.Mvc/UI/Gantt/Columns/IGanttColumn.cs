@@ -6,7 +6,13 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.UI.Html;
 
     public interface IGanttColumn
-    {      
+    {
+        string Format
+        {
+            get;
+            set;
+        }
+
         string Title 
         { 
             get; 
@@ -20,6 +26,12 @@ namespace Kendo.Mvc.UI
         }
 
         bool? Editable
+        {
+            get;
+            set;
+        }
+
+        bool? Sortable
         {
             get;
             set;

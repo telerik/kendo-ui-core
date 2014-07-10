@@ -16,19 +16,13 @@ namespace Kendo.Mvc.UI
     public abstract class GanttColumnBase<TTaskModel> : JsonObject, IGanttColumn
         where TTaskModel : class, IGanttTask
     {
-        public string Format
-        {
-            get
-            {
-                return Settings.Format;
-            }
-            set
-            {
-                Settings.Format = value;
-            }
-        }
-        
         public string EditorHtml
+        {
+            get;
+            set;
+        }
+
+        internal GanttColumnSettings Settings
         {
             get;
             set;
@@ -63,6 +57,11 @@ namespace Kendo.Mvc.UI
                 json["title"] = Title;
             }
 
+            if (Format.HasValue())
+            {
+                json["format"] = Format;
+            }
+
             if (Width.HasValue)
             {
                 json["width"] = Width;
@@ -72,8 +71,29 @@ namespace Kendo.Mvc.UI
             {
                 json["editable"] = Editable.Value;
             }
-        }       
-        
+
+            if (Sortable.HasValue)
+            {
+                json["sortable"] = Sortable;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the format of the column.
+        /// </summary>
+        /// <value>The format.</value>
+        public string Format
+        {
+            get
+            {
+                return Settings.Format;
+            }
+            set
+            {
+                Settings.Format = value;
+            }
+        }
+
         /// <summary>
         /// Gets or sets the title of the column.
         /// </summary>
@@ -87,6 +107,22 @@ namespace Kendo.Mvc.UI
             set
             {
                 Settings.Title = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the width of the column.
+        /// </summary>
+        /// <value>The width.</value>
+        public int? Width
+        {
+            get
+            {
+                return Settings.Width;
+            }
+            set
+            {
+                Settings.Width = value;
             }
         }
 
@@ -106,25 +142,19 @@ namespace Kendo.Mvc.UI
             }
         }
 
-        internal GanttColumnSettings Settings
-        {
-            get;
-            set;
-        }
-
         /// <summary>
-        /// Gets or sets the width of the column.
+        /// Gets or sets whether the column is sortable
         /// </summary>
-        /// <value>The width.</value>
-        public int? Width
+        /// <value>Whether the column is sortable.</value>
+        public virtual bool? Sortable
         {
             get
             {
-                return Settings.Width;
+                return Settings.Sortable;
             }
             set
             {
-                Settings.Width = value;
+                Settings.Sortable = value;
             }
         }
     }

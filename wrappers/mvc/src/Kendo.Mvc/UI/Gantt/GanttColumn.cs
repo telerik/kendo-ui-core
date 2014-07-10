@@ -8,31 +8,22 @@ namespace Kendo.Mvc.UI
 
     public class GanttColumn : JsonObject
     {
-        public GanttColumn()
-        {
-            //>> Initialization
-        
-        //<< Initialization
-        }
+        public GanttColumn() { }
 
-        //>> Fields
-        
         public string Field { get; set; }
-        
+
         public string Title { get; set; }
-        
+
         public string Format { get; set; }
-        
+
         public string Width { get; set; }
-        
+
         public bool? Editable { get; set; }
-        
-        //<< Fields
+
+        public bool? Sortable { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            //>> Serialization
-        
             if (Field.HasValue())
             {
                 json["field"] = Field;
@@ -57,8 +48,11 @@ namespace Kendo.Mvc.UI
             {
                 json["editable"] = Editable;
             }
-                
-        //<< Serialization
+
+            if (Sortable.HasValue)
+            {
+                json["sortable"] = Sortable;
+            }
         }
     }
 }

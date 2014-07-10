@@ -69,7 +69,7 @@
             if (string.IsNullOrEmpty(Title))
             {
                 Title = Member.AsTitle();
-            }       
+            }
         }
 
         /// <summary>
@@ -108,37 +108,11 @@
             private set;
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="GanttColumnBase{T}"/> is sortable.
-        /// </summary>
-        /// <value><c>true</c> if sortable; otherwise, <c>false</c>. The default value is <c>true</c>.</value>
-        public bool Sortable
-        {
-            get
-            {
-                return Settings.Sortable;
-            }
-            set
-            {
-                Settings.Sortable = value;
-            }
-        }
-
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
 
             json["field"] = Member;
-
-            if (Format.HasValue())
-            {
-                json["format"] = Format;
-            }
-
-            if (!Sortable)
-            {
-                json["sortable"] = false;
-            }
 
             SerializeValues(json);
         }

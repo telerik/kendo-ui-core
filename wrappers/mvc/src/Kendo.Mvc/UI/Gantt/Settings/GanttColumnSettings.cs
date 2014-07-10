@@ -32,6 +32,30 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string Title
+        {
+            get;
+            set;
+        }
+
+        public int? Width
+        {
+            get;
+            set;
+        }
+
+        public bool? Sortable
+        {
+            get;
+            set;
+        }
+
+        public bool? Editable
+        {
+            get;
+            set;
+        }
+
         public string Member
         {
             get
@@ -55,28 +79,5 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public bool Sortable
-        {
-            get;
-            set;
-        }
-
-        public string Title
-        {
-            get;
-            set;
-        }
-
-        public bool? Editable
-        {
-            get;
-            set;
-        }
-
-        public int? Width
-        {
-            get;
-            set;
-        }
     }
 }

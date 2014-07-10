@@ -54,20 +54,37 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the title displayed in the header of the column.
+        /// Makes the column editable or not.By default a column is not editable.
         /// </summary>
-        /// <param name="text">The text.</param>
         /// <example>
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Gantt(Model)
         ///             .Name("Gantt")
-        ///             .Columns(columns => columns.Bound(o => o.OrderID).Title("ID"))
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Editable(true))
         /// %&gt;
         /// </code>
         /// </example>
         public TColumnBuilder Editable(bool value)
         {
             Column.Editable = value;
+
+            return this as TColumnBuilder;
+        }
+
+        /// <summary>
+        /// Makes the column sortable or not. By default a column is not sortable.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Gantt(Model)
+        ///             .Name("Gantt")
+        ///             .Columns(columns => columns.Bound(o => o.OrderID).Sortable(true))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TColumnBuilder Sortable(bool value)
+        {
+            Column.Sortable = value;
 
             return this as TColumnBuilder;
         }
