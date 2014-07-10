@@ -332,7 +332,7 @@ var __meta__ = {
                     that._prevent = false;
                 },
                 focusout = function() {
-                    if (!that._prevent && !that._wrapperClicked) {
+                    if (!that._prevent) {
                         var filtered = that._state === STATE_FILTER;
                         var isIFrame = window.self !== window.top;
 
@@ -373,16 +373,16 @@ var __meta__ = {
                     .attr(ARIA_READONLY, false)
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("focusin" + ns, focusin)
-                    .on("focusout" + ns, focusout);
+                    .on("focusout" + ns, focusout)
+                    .on("mousedown" + ns, function(e) {
+                        that._prevent = true;
+                    });
 
                 that.wrapper
-                    .on("mousedown" + ns, function(e) {
-                        that._wrapperClicked = true;
-                    })
                     .on("click" + ns, function(e) {
-                            e.preventDefault();
-                            that._focused = that.wrapper;
-                            that._toggle();
+                        e.preventDefault();
+                        that._focused = that.wrapper;
+                        that._toggle();
                     });
 
                 if (!that.filterInput) {
