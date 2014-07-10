@@ -291,4 +291,311 @@
         ok(!dataSource.at(0).checked);
     });
 
+    test("filter expression is not build for checked root node", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo", childrenCardinality: 2 }]);
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        ok(!filter);
+    });
+
+    test("filter expression is not build for unchecked root node when there isn't filter expressions", function() {
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success([{ uniqueName: "foo", childrenCardinality: 2 }]);
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).set("checked", false);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        ok(!filter);
+    });
+
+    test("filter expression is build for checked nodes", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("bar").set("checked", false);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        equal(filter.filters.length, 1);
+        equal(filter.filters[0].field, "foo");
+        equal(filter.filters[0].operator, "in");
+        equal(filter.filters[0].value, "baz");
+    });
+
+    test("existing `in` filter expressions is modified", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("bar").set("checked", false);
+        filterMenu.treeView.dataSource.get("baz").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        equal(filter.filters.length, 1);
+        equal(filter.filters[0].field, "foo");
+        equal(filter.filters[0].operator, "in");
+        equal(filter.filters[0].value, "baz,bax");
+    });
+
+    test("existing `in` filter expressions is removed", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" },
+                filter: { field: "baz", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("foo").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        equal(filter.filters.length, 1);
+    });
+
+    test("filter expressions are cleared when last `in` expression is removed", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("foo").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        ok(!filter);
+    });
+
+    test("filter expression is not build if root node is checked and there aren't existing filter expressions", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("foo").set("checked", false);
+        filterMenu.treeView.dataSource.get("foo").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        ok(!filter);
+    });
+
+    test("existing filter expressins are preserved", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" },
+                filter: { field: "baz", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.at(0).load();
+
+        filterMenu.treeView.dataSource.get("baz").set("checked", false);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        equal(filter.filters.length, 2);
+
+        equal(filter.filters[0].field, "baz");
+        equal(filter.filters[0].operator, "in");
+        equal(filter.filters[0].value, "bax");
+
+        equal(filter.filters[1].field, "foo");
+        equal(filter.filters[1].operator, "in");
+        equal(filter.filters[1].value, "bar,bax");
+
+    });
+
+    test("existing `in` filter expressions is removed when root node is checked and children are not loaded", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" },
+                filter: { field: "baz", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.get("foo").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        equal(filter.filters.length, 1);
+    });
+
+    test("filter expressions are cleared when root node is checked and its children are not loaded", function() {
+        var data = [
+            [{ uniqueName: "foo", childrenCardinality: 2 }],
+            [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
+        ];
+        var filterMenu = createMenu({
+            dataSource: {
+                transport: {
+                    discover: function(options) {
+                        options.success(data.shift());
+                    },
+                    read: function(options) {
+                        options.success([]);
+                    }
+                },
+                filter: { field: "foo", operator: "in", value: "bax" }
+            }
+        });
+
+        filterMenu.currentMember = "foo";
+        filterMenu.includeWindow.open();
+
+        filterMenu.treeView.dataSource.get("foo").set("checked", true);
+        filterMenu.includeWindow.element.find(".k-button-ok").click();
+
+        var filter = filterMenu.dataSource.filter();
+        ok(!filter);
+    });
 })();

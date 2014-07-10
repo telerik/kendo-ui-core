@@ -89,40 +89,54 @@ var __meta__ = {
 
         _applyIncludes: function(e) {
             var checkedNodes = [];
+            var view = this.treeView.dataSource.view();
+            var filter = this.dataSource.filter();
+            var expr = findFilter(filter, this.currentMember);
 
-            checkedNodeIds(this.treeView.dataSource.view(), checkedNodes);
+            checkedNodeIds(view, checkedNodes);
 
-//            if (checkedNodes.length > 0) {
-//                this.dataSource.filter({ value: checkedNodes.join(","), operator: "in", field: this.currentMember });
-//            } else {
-//                this.dataSource.filter({});
-//            }
+            var resultExpr;
+            if (!checkedNodes.length) {
+                if (expr && view[0].checked) {
+                    filter.filters.splice(filter.filters.indexOf(expr), 1);
+                    if (!filter.filters.length) {
+                        filter = {};
+                    }
 
-            console.log( checkedNodes);
-            var filters = this.dataSource.filter();
-            var filter = findFilter(filters, this.currentMember);
-
-            if (!filters) {
-                filters = {
-                    logic: "and",
-                    filters: []
-                };
-            }
-
-            if (filter) {
-                if (checkedNodes.length > 0) {
-                    filter.value = checkedNodes.join(",");
+                    resultExpr = filter;
                 }
             } else {
-                filter = {
-                    field: this.currentMember,
-                    operator: "in",
-                    value: checkedNodes.join(",")
-                };
-                filters.filters.push(filter);
+                if (expr) {
+                    if (view[0].checked) {
+                        filter.filters.splice(filter.filters.indexOf(expr), 1);
+                        if (!filter.filters.length) {
+                            filter = {};
+                        }
+                    } else {
+                        expr.value = checkedNodes.join(",");
+                    }
+                    resultExpr = filter;
+                } else {
+                    if (view[0].checked) {
+                        this._closeWindow(e);
+                        return;
+                    }
+                    resultExpr = {
+                        field: this.currentMember,
+                        operator: "in",
+                        value: checkedNodes.join(",")
+                    };
+
+                    if (filter) {
+                        filter.filters.push(resultExpr);
+                        resultExpr = filter;
+                    }
+                }
             }
 
-            this.dataSource.filter(filters);
+            if (resultExpr) {
+                this.dataSource.filter(resultExpr);
+            }
 
             this._closeWindow(e);
         },
@@ -274,8 +288,8 @@ var __meta__ = {
     function checkedNodeIds(nodes, checkedNodes) {
         var idx, length = nodes.length;
 
-        for (idx= 0; idx < length; idx++) {
-            if (nodes[idx].checked) {
+        for (idx = 0; idx < length; idx++) {
+            if (nodes[idx].checked && nodes[idx].level() !== 0) {
                 checkedNodes.push(nodes[idx].uniqueName);
             }
 
