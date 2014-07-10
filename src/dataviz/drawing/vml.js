@@ -869,8 +869,12 @@
     }
 
     // Exports ================================================================
-    var browser = kendo.support.browser;
-    if (browser.msie && browser.version < 9) {
+    kendo.support.vml = (function() {
+        var browser = kendo.support.browser;
+        return browser.msie && browser.version < 9;
+    })();
+
+    if (kendo.support.vml) {
         d.SurfaceFactory.current.register("vml", Surface, 30);
     }
 
