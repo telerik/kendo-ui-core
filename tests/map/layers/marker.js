@@ -447,6 +447,14 @@
             equal(layer.items.length, 2);
         });
 
+        test("changing the data source rebinds all markers", function() {
+            layer.dataSource.add({
+                latlng: [30, 30],
+                text: "Foo"
+            });
+            equal(layer.items.length, 3);
+        });
+
         test("binds location", function() {
             createBoundLayer({ locationField: "latlng" });
             ok(new Location(10, 10).equals(marker.location()));

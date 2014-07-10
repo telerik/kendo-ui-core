@@ -119,8 +119,8 @@
             }
         },
 
-        _dataChange: function(data) {
-            this._load(data.items);
+        _dataChange: function(e) {
+            this._load(e.sender.view());
         },
 
         _load: function(data) {
