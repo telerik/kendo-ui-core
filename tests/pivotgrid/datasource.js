@@ -2083,4 +2083,36 @@
         equal(rows[0].name, "LastName");
         ok(!rows[0].expand);
     });
+
+    test("featch data is not read if once loaded with local cube processing", 1, function() {
+        var data = [
+                { FirstName: "Name1", LastName: "LastName1", Age: 42 },
+                { FirstName: "Name2", LastName: "LastName1", Age: 42  },
+                { FirstName: "Name2", LastName: "LastName2", Age: 52  }
+            ];
+
+        var dataSource = new PivotDataSource({
+            columns: ["FirstName"],
+            rows: ["LastName"],
+            transport: {
+                read: function(options) {
+                    options.success(data);
+                    ok(true);
+                }
+            },
+            schema: {
+                cube: {
+                    dimensions: {
+                        FirstName: { caption: "All First Names" },
+                        LastName: { caption: "All Last Names" },
+                        Age: { caption: "Age" }
+                    }
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.fetch();
+    });
 })();

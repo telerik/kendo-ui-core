@@ -729,7 +729,13 @@ var __meta__ = {
         },
 
         query: function(options) {
-            this.read(this._mergeState(options));
+            var state = this._mergeState(options);
+            if (this._data.length && this.cubeBuilder) {
+                this._params(state);
+                this._updateLocalData(this._pristineData);
+            } else {
+                this.read(state);
+            }
         },
 
         _mergeState: function(options) {
@@ -770,14 +776,22 @@ var __meta__ = {
             this._expandPath(path, "rows");
         },
 
-        _readData: function(data) {
-            var axes = this.reader.axes(data);
-            var newData = this.reader.data(data);
-
+        success: function(data) {
+            var originalData;
             if (this.cubeBuilder) {
-                var processedData = this.cubeBuilder.process(newData, this._requestData);
+                originalData = (this.reader.data(data) || []).slice(0);
+            }
+            DataSource.fn.success.call(this, data);
+            if (originalData) {
+                this._pristineData = originalData;
+            }
+        },
 
-                newData = processedData.data;
+        _processResult: function(data, axes) {
+            if (this.cubeBuilder) {
+                var processedData = this.cubeBuilder.process(data, this._requestData);
+
+                data = processedData.data;
                 axes = processedData.axes;
             }
 
@@ -810,7 +824,7 @@ var __meta__ = {
                 rows: normalizeAxis(axes.rows)
             };
 
-            newData = this._normalizeData(newData, axes.columns.tuples.length, axes.rows.tuples.length);
+            data = this._normalizeData(data, axes.columns.tuples.length, axes.rows.tuples.length);
 
             if (this._lastExpanded == "rows") {
                 tuples = axes.columns.tuples;
@@ -820,8 +834,8 @@ var __meta__ = {
                 if (resultAxis) {
                     axisToSkip = "columns";
                     axes.columns = resultAxis;
-                    adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, newData);
-                    newData = this._normalizeData(newData, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
+                    adjustDataByColumn(tuples, resultAxis.tuples, axes.rows.tuples.length, measures, data);
+                    data = this._normalizeData(data, membersCount(axes.columns.tuples, measures), axes.rows.tuples.length);
                 }
             } else if (this._lastExpanded == "columns") {
                 tuples = axes.rows.tuples;
@@ -831,17 +845,24 @@ var __meta__ = {
                 if (resultAxis) {
                     axisToSkip = "rows";
                     axes.rows = resultAxis;
-                    adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, newData);
-                    newData = this._normalizeData(newData, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
+                    adjustDataByRow(tuples, resultAxis.tuples, axes.columns.tuples.length, measures, data);
+                    data = this._normalizeData(data, membersCount(axes.rows.tuples, measures), axes.columns.tuples.length);
                 }
             }
 
             this._lastExpanded = null;
 
-            var result = this._mergeAxes(axes, newData, axisToSkip);
+            var result = this._mergeAxes(axes, data, axisToSkip);
             this._axes = result.axes;
 
             return result.data;
+        },
+
+        _readData: function(data) {
+            var axes = this.reader.axes(data);
+            var newData = this.reader.data(data);
+
+            return this._processResult(newData, axes);
         },
 
         _mergeAxes: function(sourceAxes, data, axisToSkip) {
@@ -966,30 +987,33 @@ var __meta__ = {
             return rowMeasures;
         },
 
+        _updateLocalData: function(data, state) {
+            if (this.cubeBuilder) {
+                if (state) {
+                    this._requestData = state;
+                }
+                data = this._processResult(data);
+            }
+
+            this._data = this._observe(data);
+
+            this._ranges = [];
+            this._addRange(this._data);
+
+            this._total = this._data.length;
+            this._pristineTotal = this._total;
+            this._process(this._data);
+        },
+
         data: function(value) {
             var that = this;
             if (value !== undefined) {
-                if (this.cubeBuilder) {
-                    this._requestData = {
+                this._pristineData = value.slice(0);
+                this._updateLocalData(value, {
                         columns: this.columns(),
                         rows: this.rows(),
                         measures: this.measures()
-                    };
-
-                    value = this._readData(value);
-                }
-
-                that._data = this._observe(value);
-
-                that._pristineData = value.slice(0);
-
-                that._ranges = [];
-                that._addRange(that._data);
-
-                that._total = that._data.length;
-                that._pristineTotal = that._total;
-
-                that._process(that._data);
+                    });
             } else {
                 return that._data;
             }
