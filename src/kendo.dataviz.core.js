@@ -4167,7 +4167,7 @@ var __meta__ = {
 
     TextMetrics.fn._measureBox =
         $("<div style='position: absolute; top: -4000px;" +
-                      "line-height: normal; visibility: hidden;' />")[0];
+                      "line-height: normal; visibility: hidden; white-space:nowrap;' />")[0];
 
     TextMetrics.current = new TextMetrics();
 
