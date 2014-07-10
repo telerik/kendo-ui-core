@@ -221,19 +221,24 @@ $idColumn->field("id")
 $titleColumn = new \Kendo\UI\GanttColumn();
 $titleColumn->field("title")
             ->title("Title")
-            ->editable(true);
+            ->editable(true)
+            ->sortable(true);
 
 $startColumn = new \Kendo\UI\GanttColumn();
 $startColumn->field("start")
             ->title("Start Time")
             ->format("{0:MM/dd/yyyy}")
-            ->width(100);
+            ->width(100)
+            ->editable(true)
+            ->sortable(true);
 
 $endColumn = new \Kendo\UI\GanttColumn();
 $endColumn->field("end")
           ->title("End Time")
           ->format("{0:MM/dd/yyyy}")
-          ->width(100);
+          ->width(100)
+          ->editable(true)
+          ->sortable(true);
 
 // gantt
 $gantt = new \Kendo\UI\Gantt('gantt');
@@ -253,20 +258,31 @@ $gantt->dataSource($tasks)
 // attach event handlers
 
 $gantt
+    ->dataBound("onDataBound")
+    ->dataBinding("onDataBinding")
     ->change("onChange")
     ->addEvent("onAdd")
     ->edit("onEdit")
+    ->cancel("onCancel")
+    ->change("onChange")
     ->remove("onRemove")
     ->save("onSave")
-    ->dataBound("onDataBound")
-    ->dataBinding("onDataBinding");
+    ->navigate("onNavigate")
+    ->moveStart("onMoveStart")
+    ->move("onMove")
+    ->moveEnd("onMoveEnd")
+    ->resizeStart("onResizeStart")
+    ->resize("onResize")
+    ->resizeEnd("onResizeEnd");
+?>
 
+<?php
 echo $gantt->render();
 ?>
 
 <script>
-    function onChange(arg) {
-        var gantt = arg.sender;
+    function onChange(e) {
+        var gantt = e.sender;
         var selection = gantt.select();
 
         if (selection.length) {
@@ -275,20 +291,24 @@ echo $gantt->render();
         }
     }
 
-    function onAdd() {
+    function onAdd(e) {
         kendoConsole.log("Task added");
     }
 
-    function onEdit(arg) {
-        kendoConsole.log("Task about to be edited :: " + arg.task.title);
+    function onEdit(e) {
+        kendoConsole.log("Task about to be edited :: " + e.task.title);
     }
 
-    function onRemove(arg) {
-        kendoConsole.log("Task removed :: " + arg.task.title);
+    function onCancel(e) {
+        kendoConsole.log("Cancel task edit :: " + e.task.title);
     }
 
-    function onSave(arg) {
-        kendoConsole.log("Task saved :: " + arg.task.title);
+    function onRemove(e) {
+        kendoConsole.log("Task removed :: " + e.task.title);
+    }
+
+    function onSave(e) {
+        kendoConsole.log("Task saved :: " + e.task.title);
     }
 
     function onDataBound() {
@@ -297,6 +317,34 @@ echo $gantt->render();
 
     function onDataBinding() {
         kendoConsole.log("Gantt data binding");
+    }
+
+    function onNavigate(e) {
+        kendoConsole.log(kendo.format("navigate:: view:{0};", e.view));
+    }
+
+    function onMoveStart(e) {
+        kendoConsole.log("moveStart");
+    }
+
+    function onMove(e) {
+        kendoConsole.log("move");
+    }
+
+    function onMoveEnd(e) {
+        kendoConsole.log("moveEnd");
+    }
+
+    function onResizeStart(e) {
+        kendoConsole.log("resizeStart");
+    }
+
+    function onResize(e) {
+        kendoConsole.log("resize");
+    }
+
+    function onResizeEnd(e) {
+        kendoConsole.log("resizeEnd");
     }
 </script>
 

@@ -221,19 +221,24 @@ $idColumn->field("id")
 $titleColumn = new \Kendo\UI\GanttColumn();
 $titleColumn->field("title")
             ->title("Title")
-            ->editable(true);
+            ->editable(true)
+            ->sortable(true);
 
 $startColumn = new \Kendo\UI\GanttColumn();
 $startColumn->field("start")
             ->title("Start Time")
             ->format("{0:MM/dd/yyyy}")
-            ->width(100);
+            ->width(100)
+            ->editable(true)
+            ->sortable(true);
 
 $endColumn = new \Kendo\UI\GanttColumn();
 $endColumn->field("end")
           ->title("End Time")
           ->format("{0:MM/dd/yyyy}")
-          ->width(100);
+          ->width(100)
+          ->editable(true)
+          ->sortable(true);
 
 // gantt
 $gantt = new \Kendo\UI\Gantt('gantt');
