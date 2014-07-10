@@ -369,7 +369,7 @@
         });
 
         test("renders div tag", function() {
-            equal(groupNode.render(), "<div></div>");
+            equal(groupNode.render(), "<div style='position:absolute;white-space:nowrap;' ></div>");
         });
 
         test("renders visibility", function() {
