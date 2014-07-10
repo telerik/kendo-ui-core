@@ -598,4 +598,30 @@
         var filter = filterMenu.dataSource.filter();
         ok(!filter);
     });
+
+    test("add label filter form on menu init", function() {
+        var idx = 0;
+        var filterMenu = createMenu();
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var filterForm = filterItem.find("div").eq(0);
+        var select = filterForm.find("select")[0];
+
+        equal(filterForm.find(".k-filter-help-text").text(), filterMenu.options.messages.info);
+
+        for (var operator in filterMenu.options.operators) {
+            equal(select.options[idx].value, operator);
+            idx++;
+        }
+
+        equal(filterForm.find(".k-button").length, 2);
+    });
+
+    /*test("add label filte form on menu init", function() {
+        var filterMenu = createMenu();
+
+        filterMenu.menu.open();
+        filterMenu.menu.element.find(".k-include-item").click();
+
+        ok(filterMenu.includeWindow.element.is(":visible"));
+    });*/
 })();

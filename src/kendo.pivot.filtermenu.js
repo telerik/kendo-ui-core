@@ -36,10 +36,21 @@ var __meta__ = {
         options: {
             name: "PivotFilterMenu",
             filter: null,
+            operators: {
+                contains: "Contains",
+                doesnotcontain: "Does not contain",
+                startswith: "Starts with",
+                endswith: "Ends with",
+                eq: "Is equal to",
+                neq: "Is not equal to"
+            },
             messages: {
+                info: "Show items with value that:",
                 filter: "Fields Filter",
                 include: "Include Fields...",
                 title: "Fields to include",
+                filter: "Filter",
+                clear: "Clear",
                 ok: "Ok",
                 cancel: "Cancel"
             }
@@ -50,6 +61,7 @@ var __meta__ = {
 
             this.wrapper = $(kendo.template(MENUTEMPLATE)({
                 ns: kendo.ns,
+                operators: options.operators,
                 messages: options.messages
             }));
 
@@ -64,6 +76,11 @@ var __meta__ = {
             }).data(MENU);
 
             this._createWindow();
+
+            //TODO: wire filter/cancel buttons in label search
+            /*that.form
+                .on("submit" + NS, proxy(that._submit, that))
+                .on("reset" + NS, proxy(that._reset, that)); */
         },
 
         _dataSource: function() {
@@ -290,6 +307,21 @@ var __meta__ = {
         }
     }
 
+    var LABELMENUTEMPLATE =
+            '<div>' +
+                '<div class="k-filter-help-text">#=messages.info#</div>'+
+                '<select data-#=ns#bind="value: filters[0].operator" data-#=ns#role="dropdownlist">'+
+                    '#for(var op in operators){#'+
+                        '<option value="#=op#">#=operators[op]#</option>' +
+                    '#}#'+
+                '</select>'+
+                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" />'+
+                '<div>'+
+                '<button type="submit" class="k-button k-primary">#=messages.filter#</button>'+
+                '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                '</div>'+
+            '</div>';
+
     var MENUTEMPLATE = '<ul class="k-pivot-filtermenu">'+
                         '<li class="k-item k-include-item">'+
                             '<span class="k-link">'+
@@ -304,7 +336,7 @@ var __meta__ = {
                                 '${messages.filter}'+
                             '</span>'+
                             '<ul>'+
-                                '<li><div>Filter</div></li>'+
+                                '<li>' + LABELMENUTEMPLATE + '</li>'+
                             '</ul>'+
                         '</li>'+
                     '</ul>';
