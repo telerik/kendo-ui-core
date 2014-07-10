@@ -576,4 +576,15 @@
 
         equal(dropdownlist.wrapper[0], document.activeElement);
     });
+
+    test("DropDownList removes focused state on blur", function() {
+        var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+        dropdownlist.wrapper.mousedown().focusin().click();
+        ok(dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+
+        dropdownlist.wrapper.focusout();
+
+        ok(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+    });
 })();
