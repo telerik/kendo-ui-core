@@ -9184,6 +9184,7 @@
       "text": "Single Page Applications",
       "name": "spa",
       "packages": [ "offline" ],
+      "disableInMobile": true,
       "items": [
           {
             "text": "Aeroviewr",
@@ -9211,6 +9212,7 @@
       "text": "Sample Mobile Applications",
       "name": "mobile-apps",
       "mobile": "true",
+      "disableInMobile": true,
       "packages": [ "offline" ],
       "items": [
           {
