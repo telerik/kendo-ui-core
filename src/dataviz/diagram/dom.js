@@ -2466,73 +2466,68 @@
                 }
             },
 
+            _addDataItem: function(dataItem) {
+                if (!defined(dataItem)) {
+                    return;
+                }
+                var shape = this._dataMap[dataItem.uid];
+                if (shape) {
+                    return shape;
+                }
+
+                var options = deepExtend({}, this.options.shapeDefaults, {
+                    dataItem: dataItem
+                });
+                shape = new Shape(options, dataItem);
+                this.addShape(shape);
+                this._dataMap[dataItem.uid] = shape;
+                return shape;
+            },
+
+            _addDataItems: function(items, parent) {
+                var item, idx, shape, parentShape, connection;
+                for (idx = 0; idx < items.length; idx++) {
+                    item = items[idx];
+                    shape = this._addDataItem(item);
+                    parentShape = this._addDataItem(parent);
+                    if (parentShape && !this.connected(parentShape, shape)) { // check if connected to not duplicate connections.
+                        connection = this.connect(parentShape, shape);
+                        connection.type(CASCADING);
+                    }
+                }
+            },
+
             _refreshSource: function (e) {
                 var that = this,
                     node = e.node,
                     action = e.action,
                     items = e.items,
                     options = that.options,
-                    i;
+                    idx;
 
-                function addShape(dataItem) {
-                    if (isUndefined(dataItem)) { // happens on updating dataSource
-                        return;
-                    }
-                    var shape = that._dataMap[dataItem.uid];
-                    if (shape) {
-                        return shape;
-                    }
-
-                    var opt = deepExtend({}, that.options.shapeDefaults, {
-                        dataItem: dataItem
-                    });
-                    shape = new Shape(opt, dataItem);
-                    that.addShape(shape);
-                    that._dataMap[dataItem.uid] = shape;
-                    return shape;
+                if (e.field) {
+                    return;
                 }
 
-                function append(parent, children) {
-                    for (var i = 0; i < children.length; i++) {
-                        var node = children[i],
-                            shape = addShape(node),
-                            parentShape = addShape(parent);
-                        if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
-                            var con = that.connect(parentShape, shape);
-                            //var con = that.connect(parentShape.connectors[2], shape.connectors[0]);
-                            con.type(CASCADING);
-                        }
+                if (action == "remove") {
+                    this._removeDataItems(e.items, true);
+                } else {
+                    if (!action && !node) {
+                         that.clear();
+                    }
+
+                    this._addDataItems(items, node);
+
+                    for (idx = 0; idx < items.length; idx++) {
+                        items[idx].load();
                     }
                 }
 
-                if (!e.field) { // field means any field in the data source has changed - like selected, expanded... We don't have to update in that case.
-                    if (!action || action === "add") {
-                        append(node, items);
-                    } else if (action === "remove") {
-                        this._removeDataItems(items, true);
-                    } else if (action === "itemchange") {
-                        if (node) {
-                            if (!items.length) {
-                                //Update
-                            } else {
-                                append(node, items);
-                            }
-                        } else {
-                            for (i = 0; i < items.length; i++) {
-                                addShape(items[i]); // roots
-                            }
-                        }
-                    }
-
-                    for (i = 0; i < items.length; i++) {
-                        items[i].load();
-                    }
-                }
-
-                if (that.options.layout) {
-                    that.layout(that.options.layout);
+                if (options.layout) {
+                    that.layout(options.layout);
                 }
             },
+
             _mouseDown: function (e) {
                 if (this.pauseMouseHandlers) {
                     return;

@@ -161,6 +161,10 @@
                             children: "items"
                         }
                     }
+                },
+                layout:{
+                    type: "tree",
+                    subtype: "Down"
                 }
             });
             shapes = diagram.shapes;
@@ -205,5 +209,70 @@
         equal(shapes.length, 1);
     });
 
+    test("dataSource remove updates layout", function() {
+        diagram.layout = function() {
+            ok(true);
+        };
+        dataSource.remove(dataSource.at(0));
+    });
+
+    test("dataSource add adds shape", function() {
+        dataSource.add({id: "3"});
+
+        equal(shapes.length, 4);
+    });
+
+    test("dataSource add updates layout", function() {
+        diagram.layout = function() {
+            ok(true);
+        };
+
+        dataSource.add({id: "3"});
+    });
+
+    test("dataSource add adds connections if shape has parents", function() {
+        var item = dataSource.at(0);
+        var newItem = item.children.add({id: "3"});
+        var shape = dataMap[newItem.uid];
+        ok(shape.connections().length);
+    });
+
+    test("dataSource read clears existing shapes before adding new ones", function() {
+        dataSource.read();
+
+        equal(shapes.length, 3);
+    });
+
+    test("dataSource read clears existing uids from map", function() {
+        dataSource.read();
+        dataMap = diagram._dataMap;
+        var mapCount = 0;
+        var existingItemsUids = true;
+
+        for(var uid in dataMap) {
+            mapCount++;
+            existingItemsUids = existingItemsUids && !!dataSource.getByUid(uid);
+        }
+
+        ok(existingItemsUids);
+        equal(mapCount, 3);
+    });
+
+    test("updating item fields does not layout diagram", 0, function() {
+       diagram.layout = function() {
+           ok(false);
+       };
+       var item = dataSource.at(0);
+       item.set("foo", "bar");
+    });
+
+    test("updating item fields does not update shapes and connections", function() {
+       var connectionsCount = connections.length;
+       var shapesCount = shapes.length;
+       var item = dataSource.at(0);
+       item.set("foo", "bar");
+       equal(connections.length, connectionsCount);
+       equal(shapes.length, shapesCount);
+    });
 
 })();
