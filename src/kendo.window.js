@@ -626,7 +626,7 @@ var __meta__ = {
             return that;
         },
 
-        content: function (html) {
+        content: function (html, data) {
             var content = this.wrapper.children(KWINDOWCONTENT),
                 scrollContainer = content.children(".km-scroll-container");
 
@@ -636,9 +636,25 @@ var __meta__ = {
                 return content.html();
             }
 
+            this.angular("cleanup", function(){
+                return { elements: content.children() };
+            });
+
             kendo.destroy(this.element.children());
 
             content.empty().html(html);
+
+            this.angular("compile", function(){
+                var a = [];
+                for (var i = content.length; --i >= 0;) {
+                    a.push({ dataItem: data });
+                }
+                return {
+                    elements: content.children(),
+                    data: a
+                };
+            });
+
             return this;
         },
 
@@ -1036,7 +1052,7 @@ var __meta__ = {
                 that.trigger(REFRESH);
             }
 
-            element.toggleClass("k-window-iframecontent", showIframe);
+            element.toggleClass("k-window-iframecontent", !!showIframe);
 
             return that;
         },
@@ -1056,11 +1072,12 @@ var __meta__ = {
 
         _ajaxSuccess: function (contentTemplate) {
             return function (data) {
+                var html = data;
                 if (contentTemplate) {
-                    data = template(contentTemplate)(data || {});
+                    html = template(contentTemplate)(data || {});
                 }
 
-                this.content(data);
+                this.content(html, data);
                 this.element.prop("scrollTop", 0);
 
                 this.trigger(REFRESH);
@@ -1214,6 +1231,7 @@ var __meta__ = {
             this.owner.wrapper.append(templates.overlay);
         },
         removeOverlay: function () {
+>>>>>>> 0ad442b... Window does not have padding when content is set as template
             this.owner.wrapper.find(KOVERLAY).remove();
         },
         dragstart: function (e) {
