@@ -338,7 +338,7 @@ var __meta__ = {
         _createClearIcon: function() {
             var that = this;
 
-            $("<button class='k-button k-button-icon'/>")
+            $("<button type='button' class='k-button k-button-icon'/>")
                 .attr(kendo.attr("bind"), "visible:operatorVisible")
                 .html("<span class='k-icon k-i-close'/>")
                 .click(proxy(that.clearFilter, that))
