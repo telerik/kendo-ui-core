@@ -75,7 +75,8 @@
         },
 
         _template: renderTemplate(
-            "<div><#= d._root.render() #/div>"
+            "<div style='width: 100%; height: 100%;'>" +
+            "<#= d._root.render() #/div>"
         )
     });
 

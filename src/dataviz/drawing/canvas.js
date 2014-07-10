@@ -74,8 +74,7 @@
         },
 
         _template: renderTemplate(
-            "<canvas style='position: relative; " +
-            "width: 100%; height: 100%;'></canvas>"
+            "<canvas style='width: 100%; height: 100%;'></canvas>"
         )
     });
 
