@@ -93,9 +93,9 @@
                     ],
                     columns: [
                         { field: "id", title: "ID", width: 50 },
-                        { field: "title", title: "Title", editable: true },
-                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100 },
-                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100 }
+                        { field: "title", title: "Title", editable: true, sortable: true },
+                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
+                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
                     ],
                     height: 700,
 
@@ -107,3 +107,4 @@
             });
         </script>
     </div>
+

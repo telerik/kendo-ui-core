@@ -1,30 +1,30 @@
 <div id="example">
         <div class="box">
             <div class="box-col">
-            <h4>Selection</h4>
-            <ul class="options">
-                <li>
-                    <input type="text" value="0" id="selectTask" class="k-textbox"/>
-                    <button class="selectTask k-button">Select task</button>
-                </li>
-                <li>
-                    <button class="clearSelection k-button">Clear selected task</button>
-                </li>
-            </ul>
+                <h4>Selection</h4>
+                <ul class="options">
+                    <li>
+                        <input type="text" value="0" id="selectTask" class="k-textbox" />
+                        <button class="selectTask k-button">Select task</button>
+                    </li>
+                    <li>
+                        <button class="clearSelection k-button">Clear selected task</button>
+                    </li>
+                </ul>
             </div>
             <div class="box-col">
-            <h4>Get selected task</h4>
-            <ul class="options">
-                <li>
-                    <button class="getData k-button">Get data</button>
-                </li>
-            </ul>
+                <h4>Get selected task</h4>
+                <ul class="options">
+                    <li>
+                        <button class="getData k-button">Get data</button>
+                    </li>
+                </ul>
             </div>
         </div>
 
         <script>
 
-            $(".clearSelection").click(function () {
+            $(".clearSelection").click(function() {
                 var gantt = $("#gantt").data("kendoGantt");
                 gantt.clearSelection();
             });
@@ -151,9 +151,9 @@
                     ],
                     columns: [
                         { field: "id", title: "ID", width: 50 },
-                        { field: "title", title: "Title", editable: true },
-                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100 },
-                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100 }
+                        { field: "title", title: "Title", editable: true, sortable: true },
+                        { field: "start", title: "Start Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true },
+                        { field: "end", title: "End Time", format: "{0:MM/dd/yyyy}", width: 100, editable: true, sortable: true }
                     ],
                     height: 400,
 
@@ -163,4 +163,5 @@
             });
         </script>
     </div>
+
 
