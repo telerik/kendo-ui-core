@@ -1231,7 +1231,6 @@ var __meta__ = {
             this.owner.wrapper.append(templates.overlay);
         },
         removeOverlay: function () {
->>>>>>> 0ad442b... Window does not have padding when content is set as template
             this.owner.wrapper.find(KOVERLAY).remove();
         },
         dragstart: function (e) {
