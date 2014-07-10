@@ -2445,11 +2445,9 @@
                     if (isUndefined(dataItem)) { // happens on updating dataSource
                         return;
                     }
-                    var shape = Utils.first(that._dataMap, function (item) {
-                        return item.uid === dataItem.uid;
-                    });
+                    var shape = that._dataMap[dataItem.uid];
                     if (shape) {
-                        return shape.shape;
+                        return shape;
                     }
 
                     var opt = deepExtend({}, that.options.shapeDefaults, {
@@ -2457,7 +2455,7 @@
                     });
                     shape = new Shape(opt, dataItem);
                     that.addShape(shape);
-                    that._dataMap.push({ uid: dataItem.uid, shape: shape });
+                    that._dataMap[dataItem.uid] = shape;
                     return shape;
                 }
 
@@ -2568,7 +2566,7 @@
                 this.shapes = [];
                 this._selectedItems = [];
                 this.connections = [];
-                this._dataMap = [];
+                this._dataMap = {};
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
             },

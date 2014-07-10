@@ -134,4 +134,40 @@
 
         ok(diagram.shapes[1].dataItem.foo);
     });
+
+    // ------------------------------------------------------------
+    var dataMap;
+    var shape;
+    var uid;
+
+    module("Diagram / Data Binding / map", {
+        setup: function() {
+            diagram = createDiagram({
+                dataSource: {
+                    data: [{
+                        id: "1",
+                        items: [{
+                            id: "1.1",
+                            foo: true
+                        }]
+                    }],
+                    schema: {
+                        model: {
+                            children: "items"
+                        }
+                    }
+                }
+            });
+            dataMap = diagram._dataMap;
+        },
+        teardown: destroyDiagram
+    });
+    test("binding adds dataItem uids to dataMap", function() {
+        var shapes = diagram.shapes;
+        for (var idx = 0; idx < shapes.length; idx++) {
+            var shape = shapes[idx];
+            ok(dataMap[shape.dataItem.uid] === shape);
+        }
+    });
+
 })();
