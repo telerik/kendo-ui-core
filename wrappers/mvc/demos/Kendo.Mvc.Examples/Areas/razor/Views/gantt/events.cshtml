@@ -3,9 +3,9 @@
     .Columns(columns =>
     {
         columns.Bound(c => c.TaskID).Title("ID").Width(50);
-        columns.Bound("title").Editable(true);
-        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100);
-        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100);
+        columns.Bound("title").Editable(true).Sortable(true);
+        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
+        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true).Sortable(true);
     })
     .Views(views =>
     {
