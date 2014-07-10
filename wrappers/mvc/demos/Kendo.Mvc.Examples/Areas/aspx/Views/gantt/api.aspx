@@ -1,0 +1,111 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<%=Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
+    .Name("gantt")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.TaskID).Title("ID").Width(50);
+        columns.Bound("title").Editable(true);
+        columns.Bound("start").Title("Start Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true);
+        columns.Bound("end").Title("End Time").Format("{0:MM/dd/yyyy}").Width(100).Editable(true);
+    })
+    .Views(views =>
+    {
+        views.DayView();
+        views.WeekView(weekView => weekView.Selected(true));
+        views.MonthView();
+    })
+    .Height(400)
+    .ShowWorkHours(false)
+    .ShowWorkDays(false)
+    .DataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.TaskID);
+            m.ParentId(f => f.ParentID);
+            m.OrderId(f => f.OrderId);
+            m.Field(f => f.Expanded).DefaultValue(true);
+        })
+        .Read("ReadTasks", "Gantt")
+        .Create("CreateTask", "Gantt")
+        .Destroy("DestroyTask", "Gantt")
+        .Update("UpdateTask", "Gantt")
+    )
+    .DependenciesDataSource(d => d
+        .Model(m =>
+        {
+            m.Id(f => f.DependencyID);
+            m.PredecessorId(f => f.PredecessorID);
+            m.SuccessorId(f => f.SuccessorID);
+            m.Type(f => f.Type);
+        })
+        .Read("ReadDependencies", "Gantt")
+        .Create("CreateDependency", "Gantt")
+        .Destroy("DestroyDependency", "Gantt")
+        .Update("UpdateDependency", "Gantt")
+    )
+%>
+
+<div id="example">
+    <div class="box">
+        <div class="box-col">
+            <h4>Selection</h4>
+            <ul class="options">
+                <li>
+                    <input type="text" value="0" id="selectTask" class="k-textbox" />
+                    <button class="selectTask k-button">Select task</button>
+                </li>
+                <li>
+                    <button class="clearSelection k-button">Clear selected task</button>
+                </li>
+            </ul>
+        </div>
+        <div class="box-col">
+            <h4>Get selected task</h4>
+            <ul class="options">
+                <li>
+                    <button class="getData k-button">Get data</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+
+        $(".clearSelection").click(function() {
+            var gantt = $("#gantt").data("kendoGantt");
+            gantt.clearSelection();
+        });
+
+        function selectTask(e) {
+            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                var gantt = $("#gantt").data("kendoGantt");
+                var taskIndex = $("#selectTask").val();
+
+                gantt.select("tr:eq(" + taskIndex + ")");
+            }
+        }
+
+        $(".selectTask").click(selectTask);
+        $("#selectTask").keypress(selectTask);
+
+        $(".getData").click(function() {
+            var gantt = $("#gantt").data("kendoGantt");
+            var selection = gantt.select();
+
+            if (!selection.length) {
+                alert("No item selected");
+            } else {
+                var dataItem = gantt.dataItem(selection);
+                alert(
+                    "'" + dataItem.title + "' is " +
+                    (dataItem.percentComplete * 100) + "% complete"
+                );
+            }
+        });
+    </script>
+</div>
+
+</asp:Content>
+

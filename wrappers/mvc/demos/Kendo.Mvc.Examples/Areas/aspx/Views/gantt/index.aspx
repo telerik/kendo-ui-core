@@ -1,4 +1,7 @@
-@(Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+<%: Html.Kendo().Gantt<Kendo.Mvc.Examples.Models.Gantt.TaskViewModel, Kendo.Mvc.Examples.Models.Gantt.DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>
     {
@@ -43,4 +46,5 @@
         .Destroy("DestroyDependency", "Gantt")
         .Update("UpdateDependency", "Gantt")
     )
-)
+    %>
+</asp:Content>

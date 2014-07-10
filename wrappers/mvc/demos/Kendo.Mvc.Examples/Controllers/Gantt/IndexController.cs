@@ -1,15 +1,15 @@
-﻿namespace Kendo.Mvc.Examples.Controllers
-{﻿
-    using System.Collections.Generic;
-    using System.Data.Linq;
-    using System.Linq;
-    using System.Web.Mvc;
-    using Kendo.Mvc.Examples.Models;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
-    using System;
-    using Kendo.Mvc.Examples.Models.Gantt;
+﻿using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using System.Web.Mvc;
+using Kendo.Mvc.Examples.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using System;
+using Kendo.Mvc.Examples.Models.Gantt;
 
+namespace Kendo.Mvc.Examples.Controllers
+{﻿
     public partial class GanttController : Controller
     {
         private GanttTaskService taskService;
@@ -17,15 +17,22 @@
 
         public GanttController()
         {
-            this.taskService = new GanttTaskService();
-            this.dependencyService = new GanttDependencyService();
+            taskService = new GanttTaskService();
+            dependencyService = new GanttDependencyService();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            taskService.Dispose();
+            dependencyService.Dispose();
+
+            base.Dispose(disposing);
         }
 
         public ActionResult Index()
         {
             return View();
         }
-
 
         public virtual JsonResult ReadTasks([DataSourceRequest] DataSourceRequest request)
         {
