@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Uploads beta release builds from K:\Distributions\KendoUI to admin.telerik.com&#xd;
-&#xd;
-!! Caution: Files are directly visible on telerik.com, execute with DRY_RUN=true to test on integration admin</description>
+  <description>Uploads relase notes to telerik.com</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>10</numToKeep>
@@ -25,7 +23,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>stable</name>
+        <name>production</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -47,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>xvfb-run -e xvfb-run.log -a ./build/run-build-task beta_builds:bundles:all</command>
+      <command>BETA=true xvfb-run -e xvfb-run.log -a ./build/run-build-task release_notes:upload</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

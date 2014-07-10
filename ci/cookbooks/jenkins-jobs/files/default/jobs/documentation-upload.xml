@@ -58,6 +58,35 @@
     <hudson.tasks.Shell>
       <command>rsync -av --delete /var/www/kendo-ui/ /mnt/Resources/AppDirector/Drops/KendoUI/KendoUI.Docs/</command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+VERSION=&quot;1.0.`date +%s`&quot;;
+
+PAYLOAD=&quot;{ \&quot;Folder\&quot;: \&quot;//telerik.com/resources/AppDirector/Drops/KendoUI\&quot;, \&quot;Version\&quot;: \&quot;$VERSION\&quot;, \&quot;Environment\&quot;: \&quot;Live\&quot;, \&quot;RepositoryName\&quot;: \&quot;Local\&quot;, \&quot;Workspace\&quot;: \&quot;Documentation\&quot;, \&quot;ClientId\&quot;: \&quot;uri:platform.cp.builds\&quot;, \&quot;ClientSecret\&quot;: \&quot;3edd5acdb61db37f3ab2bd735b058911\&quot;, \&quot;SkipRegisterPackage\&quot;: false, \&quot;OverwritePackage\&quot;: true, \&quot;SkipDateChange\&quot;: true, \&quot;SkipDeployment\&quot;: false, \&quot;DeploymentApiUrl\&quot;: \&quot;http://deploy.telerik.com/api/deployment/v1\&quot;, \&quot;RepositoryUrl\&quot;: \&quot;http://deploy.telerik.com/api/repository/v1\&quot;, \&quot;TokenEndpoint\&quot;: \&quot;https://identity.telerik.com/v2/oauth/telerik/token\&quot;, \&quot;PackageNameFormat\&quot;: \&quot;package-{0}-{1}.zip\&quot; }&quot;;
+
+echo &quot;posting $PAYLOAD&quot;;
+
+curl -X POST -d &quot;$PAYLOAD&quot; -H &quot;Accept: application/json&quot; -H &quot;Content-Type: application/json&quot; http://deploy.telerik.com/api/deployment/v1/packages
+
+RESULT=&apos;&apos;
+
+while [ &quot;$RESULT&quot; != &quot;success&quot; ]
+do
+    if [ &quot;$RESULT&quot; = &apos;fail&apos; ]
+    then
+        echo &apos;Deployment failed :(&apos;;
+        exit 1;
+    else
+        RESULT=$(curl -s http://deploy.telerik.com/api/deployment/v1/workspaces/KendoUI/stacks/KendoUI.Docs/environments/Live/status)
+        echo &quot;Deployment in progress, current status: $RESULT&quot;
+        sleep 2
+    fi
+done
+
+echo &apos;Deployment passed :)&apos;
+</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">

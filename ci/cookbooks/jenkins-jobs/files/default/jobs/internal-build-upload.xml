@@ -45,7 +45,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>DOCS_BRANCH=master xvfb-run -e xvfb-run.log -a ./build/run-build-task internal_builds:uncheck_previous</command>
+      <command>DOCS_BRANCH=production xvfb-run -e xvfb-run.log -a ./build/run-build-task internal_builds:uncheck_previous</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

@@ -68,9 +68,10 @@
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>true</scriptOnlyIfFailure>
+      <executeOn>BOTH</executeOn>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
     <hudson.tasks.BuildTrigger>
-      <childProjects>production-demos, production-bundles</childProjects>
+      <childProjects>production-demos,production-bundles</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
