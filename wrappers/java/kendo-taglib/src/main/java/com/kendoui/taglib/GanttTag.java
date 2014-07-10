@@ -175,6 +175,14 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("listWidth", value);
     }
 
+    public boolean getNavigatable() {
+        return (boolean)getProperty("navigatable");
+    }
+
+    public void setNavigatable(boolean value) {
+        setProperty("navigatable", value);
+    }
+
     public boolean getSelectable() {
         return (boolean)getProperty("selectable");
     }

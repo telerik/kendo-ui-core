@@ -69,6 +69,14 @@ public class FilterableTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("extra", value);
     }
 
+    public java.lang.String getMode() {
+        return (java.lang.String)getProperty("mode");
+    }
+
+    public void setMode(java.lang.String value) {
+        setProperty("mode", value);
+    }
+
 //<< Attributes
 
 }

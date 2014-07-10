@@ -154,12 +154,12 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
         setProperty("primary", value);
     }
 
-    public boolean getSelectable() {
-        return (boolean)getProperty("selectable");
+    public boolean getSelected() {
+        return (boolean)getProperty("selected");
     }
 
-    public void setSelectable(boolean value) {
-        setProperty("selectable", value);
+    public void setSelected(boolean value) {
+        setProperty("selected", value);
     }
 
     public java.lang.String getShowIcon() {

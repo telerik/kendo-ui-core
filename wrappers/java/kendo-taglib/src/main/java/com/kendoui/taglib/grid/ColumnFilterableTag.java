@@ -51,6 +51,10 @@ public class ColumnFilterableTag extends  BaseTag  /* interfaces */ /* interface
         return "grid-column-filterable";
     }
 
+    public void setCell(com.kendoui.taglib.grid.ColumnFilterableCellTag value) {
+        setProperty("cell", value);
+    }
+
     public void setUi(ColumnFilterableUiFunctionTag value) {
         setEvent("ui", value.getBody());
     }
