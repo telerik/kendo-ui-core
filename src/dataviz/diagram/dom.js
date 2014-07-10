@@ -2433,6 +2433,39 @@
                 var type = this.options.selectable.type;
                 return type === MULTIPLE;
             },
+
+            _removeDataItems: function(items, recursive) {
+                var item, children, shape, idx;
+                items = isArray(items) ? items : [items];
+
+                while (items.length) {
+                    item = items.shift();
+                    shape = this._dataMap[item.uid];
+                    if (shape) {
+                        this._removeShapeConnections(shape);
+                        this._removeItem(shape, false);
+                        delete this._dataMap[item.uid];
+                        if (recursive && item.hasChildren && item.loaded()) {
+                            children = item.children.data();
+                            for (idx = 0; idx < children.length; idx++) {
+                                items.push(children[idx]);
+                            }
+                        }
+                    }
+                }
+            },
+
+            _removeShapeConnections: function(shape) {
+                var connections = shape.connections();
+                var idx;
+
+                if (connections) {
+                    for (idx = 0; idx < connections.length; idx++) {
+                        this._removeItem(connections[idx], false);
+                    }
+                }
+            },
+
             _refreshSource: function (e) {
                 var that = this,
                     node = e.node,
@@ -2476,7 +2509,7 @@
                     if (!action || action === "add") {
                         append(node, items);
                     } else if (action === "remove") {
-                        //Remove
+                        this._removeDataItems(items, true);
                     } else if (action === "itemchange") {
                         if (node) {
                             if (!items.length) {

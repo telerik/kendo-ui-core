@@ -137,10 +137,13 @@
 
     // ------------------------------------------------------------
     var dataMap;
+    var dataSource;
+    var shapes;
+    var connections;
     var shape;
     var uid;
 
-    module("Diagram / Data Binding / map", {
+    module("Diagram / Data Binding / updates", {
         setup: function() {
             diagram = createDiagram({
                 dataSource: {
@@ -150,6 +153,8 @@
                             id: "1.1",
                             foo: true
                         }]
+                    }, {
+                        id: "2"
                     }],
                     schema: {
                         model: {
@@ -158,16 +163,47 @@
                     }
                 }
             });
+            shapes = diagram.shapes;
+            connections = diagram.connections;
+            dataSource = diagram.dataSource;
             dataMap = diagram._dataMap;
         },
         teardown: destroyDiagram
     });
+
     test("binding adds dataItem uids to dataMap", function() {
-        var shapes = diagram.shapes;
         for (var idx = 0; idx < shapes.length; idx++) {
-            var shape = shapes[idx];
+            shape = shapes[idx];
             ok(dataMap[shape.dataItem.uid] === shape);
         }
     });
+
+    test("dataSource remove removes uid from map", function() {
+        var item = dataSource.at(0);
+        uid = item.uid;
+        dataSource.remove(item);
+        ok(!dataMap[uid]);
+    });
+
+    test("dataSource remove removes shape and its connections ", function() {
+        shape = diagram.shapes[0];
+        var shapeConnections = shape.connections();
+        var removed;
+        var idx;
+        dataSource.remove(dataSource.at(0));
+        removed = $.inArray(shape, shapes) == -1;
+
+        for (idx = 0; idx < shapeConnections.length; idx++) {
+            removed = removed && $.inArray(shapeConnections[idx], connections) == -1;
+        }
+        ok(removed);
+    });
+
+    test("dataSource remove removes children shapes and their connections", function() {
+        dataSource.remove(dataSource.at(0));
+        equal(connections.length, 0);
+        equal(shapes.length, 1);
+    });
+
 
 })();
