@@ -40,7 +40,7 @@
 </head>
 
 <body id="examples">
-    <div data-role="view" data-title="Kendo UI" id="index" data-layout="">
+    <div data-role="view" data-title="Kendo UI" id="index" data-layout="" data-show="nullCurrentExample">
         <header data-role="header">
             <div data-role="navbar">
                 <a data-align="left" data-role="button" href="#about" data-rel="drawer" data-icon="drawer-icon"></a>
@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <div data-role="drawer" id="themechooser" data-position="right">
+    <div data-role="drawer" id="themechooser" data-position="right" data-before-show="checkThemeChooser">
         <header data-role="header">
             <div data-role="navbar">
                 <span data-align="left" id="theme-title">Theme</span>

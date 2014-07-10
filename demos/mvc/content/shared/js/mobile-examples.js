@@ -1,6 +1,13 @@
 var isAndroid = kendo.support.mobileOS.android;
 
 
+var currentExample,
+    currentSection;
+
+function nullCurrentExample(e) {
+    currentExample = null;
+}
+
 function removeView(e) {
     if (!e.view.element.data("persist")) {
         e.view.purge();
@@ -8,6 +15,7 @@ function removeView(e) {
 }
 
 function loadSection(e) {
+    currentExample = null;
     navDataSource.fetch(function() {
         var item = navDataSource.get(e.view.params["name"]);
         detailNavDataSource.data(mobileExamples(item));
@@ -62,29 +70,37 @@ function pickInitialTheme(e) {
 }
 
 function showDemoLayout(e) {
+    currentExample = null;
+    currentSection = null;
     navDataSource.fetch(function() {
         var url = e.view.id,
             element = e.view.element;
 
-        var section = navDataSource.get(url.split("/")[0]);
+        currentSection = navDataSource.get(url.split("/")[0]);
 
-        if (section) {
-            detailNavDataSource.data(mobileExamples(section));
+        if (currentSection) {
+            detailNavDataSource.data(mobileExamples(currentSection));
 
-            var item = detailNavDataSource.get(url);
+            currentExample = detailNavDataSource.get(url);
             var navBar = element.find("[data-role=navbar]").data("kendoMobileNavBar");
 
             if (navBar) {
-                navBar.title(item.text);
+                navBar.title(currentExample.text);
             }
 
-            e.view.header.find("#themechooser-button").toggle(!section.mobile);
-            e.view.footer.find("#desktop-footer").toggle(!section.mobile);
+            e.view.header.find("#themechooser-button").toggle(!currentSection.mobile);
+            e.view.footer.find("#desktop-footer").toggle(!currentSection.mobile);
             e.view.footer.find("#desktop-link").attr("href", "../" + url);
 
-            element.find("[data-role=backbutton]").attr("href", "#section?name=" + section.name);
+            element.find("[data-role=backbutton]").attr("href", "#section?name=" + currentSection.name);
         }
     });
+}
+
+function checkThemeChooser(e) {
+    if (!currentExample || (currentSection && currentSection.mobile)) {
+        e.preventDefault();
+    }
 }
 
 function selectTheme(e) {
