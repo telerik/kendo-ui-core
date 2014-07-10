@@ -1261,6 +1261,7 @@
 
             this.drawingElement = new d.Group();
             this._viewBox = new Rect(0, 0, options.width, options.height);
+            this.size(this._viewBox);
         },
 
         bounds: function () {
@@ -1286,7 +1287,6 @@
             if (defined(x) && defined(y)) {
                 viewBox.x = x;
                 viewBox.y = y;
-                this.surface.setSize(viewBox);
                 this.surface.translate({x: x, y: y});
             }
             return {
