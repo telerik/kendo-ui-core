@@ -99,7 +99,9 @@
             HEIGHT = "height",
             X = "x",
             Y = "y",
-            MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS;
+            MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
+            MOBILE_ZOOM_RATE = 0.05,
+            MOBILE_PAN_DISTANCE = 5;
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -1308,9 +1310,7 @@
                 });
                 that.canvas.append(that.adornerLayer);
 
-                that.toolService = new ToolService(that);
-
-                that._attachEvents();
+                that._createHandlers();
 
                 that._initialize();
                 that._fetchFreshData();
@@ -1393,19 +1393,68 @@
                 });
             },
 
-            _attachEvents: function () {
+            _createHandlers: function () {
                 var that = this;
-                that.element
-                    .on("mousemove" + NS, proxy(that._mouseMove, that))
-                    .on("mouseup" + NS, proxy(that._mouseUp, that))
-                    .on("mousedown" + NS, proxy(that._mouseDown, that))
-                    .on(MOUSEWHEEL_NS, proxy(that._wheel, that))
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("mouseover" + NS, proxy(that._mouseover, that))
-                    .on("mouseout" + NS, proxy(that._mouseout, that));
+                if (!kendo.support.touch && !kendo.support.mobileOS) {
+                    that.toolService = new ToolService(that);
+                    that.element
+                        .on("mousemove" + NS, proxy(that._mouseMove, that))
+                        .on("mouseup" + NS, proxy(that._mouseUp, that))
+                        .on("mousedown" + NS, proxy(that._mouseDown, that))
+                        .on(MOUSEWHEEL_NS, proxy(that._wheel, that))
+                        .on("keydown" + NS, proxy(that._keydown, that))
+                        .on("mouseover" + NS, proxy(that._mouseover, that))
+                        .on("mouseout" + NS, proxy(that._mouseout, that));
+                } else {
+                    that._userEvents = new kendo.UserEvents(that.element, {
+                        multiTouch: true
+                    });
+
+                    that._userEvents.bind(["gesturestart", "gesturechange", "gestureend"], {
+                        gesturestart: proxy(that._gestureStart, that),
+                        gesturechange: proxy(that._gestureChange, that),
+                        gestureend: proxy(that._gestureEnd, that)
+                    });
+                    that.toolService = new ToolService(that);
+                    that.scroller.enable();
+                }
 
                 that._resizeHandler = proxy(that.resize, that);
                 kendo.onResize(that._resizeHandler);
+            },
+
+            _gestureStart: function(e) {
+                this.scroller.disable();
+                this._gesture = e;
+                this._initialCenter = this.viewToModel(this.documentToView(new Point(e.center.x, e.center.y)));
+            },
+
+            _gestureChange: function(e) {
+                var previousGesture = this._gesture;
+                var initialCenter = this._initialCenter;
+                var center = this.documentToView(new Point(e.center.x, e.center.y));
+                var scaleDelta = e.distance / previousGesture.distance;
+                var zoom = this._zoom;
+                var updateZoom = false;
+
+                if (math.abs(scaleDelta - 1) >= MOBILE_ZOOM_RATE) {
+                    this._zoom = zoom = this._getValidZoom(zoom * scaleDelta);
+                    this.options.zoom = zoom;
+                    this._gesture = e;
+                    updateZoom = true;
+                }
+
+                var zoomedPoint = initialCenter.times(zoom);
+                var pan = center.minus(zoomedPoint);
+                if (updateZoom || this._pan.distanceTo(pan) >= MOBILE_PAN_DISTANCE) {
+                    this._panTransform(pan);
+                }
+
+                e.preventDefault();
+            },
+
+            _gestureEnd: function() {
+                this.scroller.enable();
             },
 
             _resize: function(size) {
@@ -1477,6 +1526,10 @@
             destroy: function () {
                 var that = this;
                 Widget.fn.destroy.call(that);
+
+                if (this._userEvents) {
+                    this._userEvents.destroy();
+                }
 
                 kendo.unbindResize(that._resizeHandler);
 

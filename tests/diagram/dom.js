@@ -72,6 +72,116 @@
     });
 
     // ------------------------------------------------------------
+    (function() {
+        var MOBILE_ZOOM_RATE = 0.05;
+        var MOBILE_PAN_DISTANCE = 5;
+        var gesture;
+
+        function createGesture(options) {
+            return kendo.deepExtend({
+                center: {
+                    x: 100,
+                    y: 100
+                },
+                distance: 10,
+                preventDefault: function() {}
+            }, options);
+        };
+
+        module("Diagram / gestures", {
+            setup: function() {
+                setup();
+                gesture = createGesture();
+                diagram.documentToView = function(p) {
+                    return p;
+                };
+            },
+            teardown: teardown
+        });
+
+        test("_gestureStart disables scroller", function () {
+            diagram.scroller.disable = function() {
+                ok(true);
+            };
+            diagram._gestureStart(gesture);
+        });
+
+        test("_gestureStart saves gesture", function () {
+            diagram._gestureStart(gesture);
+            ok(diagram._gesture === gesture);
+        });
+
+        test("_gestureStart saves initial center", function () {
+            diagram.zoom(2);
+            diagram._gestureStart(gesture);
+
+            var center = diagram._initialCenter;
+            equal(center.x, 50);
+            equal(center.x, 50);
+        });
+
+        test("_gestureChange updates zoom if scaleDelta is bigger or equal to mobile zoom rate", function () {
+            var newDistance = 10 + 10 * MOBILE_ZOOM_RATE;
+            diagram._gestureStart(gesture);
+            diagram._gestureChange(createGesture({distance: newDistance}));
+            var zoom = diagram._zoom;
+            var expecteZoom = newDistance / 10;
+            equal(zoom, expecteZoom);
+        });
+
+        test("_gestureChange does no update zoom if scaleDelta is lower than mobile zoom rate", function () {
+            var newDistance = 10;
+            diagram._gestureStart(gesture);
+            diagram._gestureChange(createGesture({distance: newDistance}));
+            var zoom = diagram._zoom;
+
+            equal(zoom, 1);
+        });
+
+        test("_gestureChange updates pan if zoom is the same but the center has changed with bigger distance than minimum pan distance", function () {
+            var newDistance = 10;
+            var newCenter = Math.sqrt(Math.pow(MOBILE_PAN_DISTANCE, 2) / 2) + 101;
+            diagram._gestureStart(gesture);
+
+            diagram._gestureChange(createGesture({
+                distance: newDistance,
+                center: {
+                  x: newCenter,
+                  y: newCenter
+                }
+            }));
+            var pan = diagram._pan;
+
+            close(pan.x, 4.5, 0.1);
+            close(pan.y, 4.5, 0.1);
+        });
+
+        test("_gestureChange does not transform diagram if new the current zoom and distance are not big enough", 0, function () {
+            var newDistance = 10;
+            var newCenter = Math.sqrt(Math.pow(MOBILE_PAN_DISTANCE, 2) / 2) + 99;
+            diagram._gestureStart(gesture);
+
+            diagram._panTransform = function() {
+                ok(false);
+            };
+            diagram._gestureChange(createGesture({
+                distance: newDistance,
+                center: {
+                  x: newCenter,
+                  y: newCenter
+                }
+            }));
+        });
+
+        test("_gestureEnd enables scroller", function () {
+            diagram.scroller.enable = function() {
+                ok(true);
+            };
+            diagram._gestureEnd(gesture);
+        });
+    })();
+
+    // ------------------------------------------------------------
     module("Diagram / add shape", {
         setup: function() {
             createDiagram();

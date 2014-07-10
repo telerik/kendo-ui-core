@@ -566,6 +566,7 @@
                     friction: friction,
                     velocityMultiplier: VELOCITY_MULTIPLIER,
                     mousewheelScrolling: false,
+                    zoom: false,
                     scroll: proxy(tool._move, tool)
                 }).data("kendoMobileScroller");
 
