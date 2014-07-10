@@ -1,0 +1,104 @@
+<div id="example">
+    <div class="box">
+        <div id="info" class="box-col"></div>
+        <div class="box-col select-col">
+            <h4>Surface type</h4>
+            <ul id="select-type">
+                <li>SVG</li>
+                <li>Canvas</li>
+                <li>VML</li>
+            </ul>
+        </div>
+    </div>
+    <div id="surface-container">
+        <div id="surface" style="width: 100%; height: 100%;"></div>
+    </div>
+    <script>
+    var dataviz = kendo.dataviz;
+    var geo = dataviz.geometry;
+    var Point = geo.Point;
+    var drawing = dataviz.drawing;
+    var Path = drawing.Path;
+
+    var points = 15;
+    var distance = 40;
+
+    function initSurface(type) {
+        return drawing.Surface.create($("#surface"), { type: type });
+    }
+
+    // Based on Follow3 example by Processing
+    function renderPath() {
+        var path = new Path({
+            stroke: {
+                color: '#E4141B',
+                width: 20,
+                lineCap: "round",
+                lineJoin: "round"
+            }
+        });
+
+        var start = new Point(100, 100);
+        for (var i = 0; i < points; i++) {
+            path.lineTo(start.clone().translate(i * distance, 0));
+        }
+
+        return path;
+    }
+
+    var path = renderPath();
+    $("#surface-container")
+        .on("mousemove", function(e) {
+            var offset = $(this).offset();
+            path.segments[0].anchor().move(e.pageX - offset.left, e.pageY - offset.top);
+
+            for (var i = 0; i < points - 1; i++) {
+                var point = path.segments[i].anchor();
+                var nextPoint = path.segments[i + 1].anchor();
+
+                var vector = point.clone().translate(-nextPoint.x, -nextPoint.y);
+                vector.scale(distance / vector.distanceTo(Point.ZERO));
+
+                nextPoint.move(point.x - vector.x, point.y - vector.y);
+            }
+        })
+        .on("mousedown", function(e) {
+            path.options.stroke.set("width", 2);
+        })
+        .on("mouseup", function(e) {
+            path.options.stroke.set("width", 20);
+        })
+
+    $(document).ready(function() {
+        var surface = initSurface();
+        surface.draw(path);
+
+        $("#select-type").kendoMobileButtonGroup({
+            select: function(e) {
+                var type = $("li", e.sender.element).eq(e.index).text().toLowerCase();
+
+                surface.destroy();
+                surface = initSurface(type);
+                surface.draw(path);
+            },
+            index: 0
+        });
+    });
+    </script>
+    <style scoped>
+        #example .box,
+        .demo-section {
+            margin: 1em auto;
+            padding: 2em;
+        }
+
+        #surface-container {
+            text-align: center;
+
+            margin: 0 auto;
+            width: 100%;
+            height: 600px;
+            padding: 20px;
+        }
+    </style>
+</div>

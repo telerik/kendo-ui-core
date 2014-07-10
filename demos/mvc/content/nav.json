@@ -5284,6 +5284,34 @@
     "category": "Framework"
   },
   {
+    "packages": [ "!mvc", "!jsp", "!php" ],
+    "category": "Framework",
+    "text": "Drawing API",
+    "name": "drawing",
+    "spriteCssClass": "drawingIcon",
+    "items": [
+      {
+        "text": "Basic Usage",
+        "url": "drawing/index",
+        "title": {
+            "kendo-ui": "Kendo UI Drawing API"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to draw basic shapes."
+        }
+      }, {
+        "text": "Manipulating Paths",
+        "url": "drawing/paths",
+        "title": {
+            "kendo-ui": "Kendo UI Drawing API"
+        },
+        "meta": {
+            "kendo-ui": "This demo illustrates how the Kendo UI Drawing API can be used to manipulate paths."
+        }
+      }
+    ]
+  },
+  {
     "text": "Area Charts",
     "name": "area-charts",
     "pro": "true",
