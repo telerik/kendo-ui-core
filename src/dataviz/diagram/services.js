@@ -5,7 +5,8 @@
     (function ($, undefined) {
         // Imports ================================================================
         var kendo = window.kendo,
-            diagram = kendo.dataviz.diagram,
+            dataviz = kendo.dataviz,
+            diagram = dataviz.diagram,
             Class = kendo.Class,
             Group = diagram.Group,
             TextBlock = diagram.TextBlock,
@@ -20,6 +21,7 @@
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable,
             browser = kendo.support.browser,
+            defined = dataviz.defined,
 
             proxy = $.proxy;
         // Constants ==============================================================
@@ -627,10 +629,15 @@
                 return true; // the pointer tool is last and handles all others requests.
             },
             start: function (p, meta) {
-                var diagram = this.toolService.diagram,
-                    hoveredItem = this.toolService.hoveredItem;
+                var toolService = this.toolService,
+                    diagram = toolService.diagram,
+                    hoveredItem = toolService.hoveredItem,
+                    selectable = diagram.options.selectable !== false;
+
                 if (hoveredItem) {
-                    selectSingle(hoveredItem, meta);
+                    if (selectable) {
+                        selectSingle(hoveredItem, meta);
+                    }
                     if (hoveredItem.adorner) { //connection
                         this.adorner = hoveredItem.adorner;
                         this.handle = this.adorner._hitTest(p);
@@ -679,7 +686,10 @@
                 this.toolService = toolService;
             },
             tryActivate: function (p, meta) {
-                return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
+                var toolService = this.toolService;
+                var diagram = toolService.diagram;
+                var selectable = diagram.options.selectable !== false;
+                return selectable && !defined(toolService.hoveredItem) && !defined(toolService.hoveredAdorner);
             },
             start: function (p) {
                 var diagram = this.toolService.diagram;
@@ -747,9 +757,13 @@
                 this.toolService = toolService;
                 this.type = "ConnectionTool";
             },
+
             tryActivate: function (p, meta) {
-                var item = this.toolService.hoveredItem,
-                    isActive = item && item.path; // means it is connection
+                var toolService = this.toolService,
+                    diagram = toolService.diagram,
+                    selectable = diagram.options.selectable !== false,
+                    item = toolService.hoveredItem,
+                    isActive = selectable && item && item.path; // means it is connection
                 if (isActive) {
                     this._c = item;
                 }
@@ -1386,8 +1400,8 @@
                 that._manipulating = false;
                 that.map = [];
                 that.shapes = [];
-                that.rect = new Rectangle(options.editable.select);
-                that.visual.append(that.rect);
+
+                that._initSelection();
                 that._createHandles();
                 that._createThumb();
                 that.redraw();
@@ -1422,7 +1436,26 @@
                         }
                     }
                 },
+                selectable: {
+                    stroke: {
+                        color: "#778899",
+                        width: 1,
+                        dashType: "dash"
+                    },
+                    fill: {
+                        color: TRANSPARENT
+                    }
+                },
                 offset: 10
+            },
+
+            _initSelection: function() {
+                var that = this;
+                var diagram = that.diagram;
+                var selectable = diagram.options.selectable;
+                var options = deepExtend({}, that.options.selectable, selectable)
+                that.rect = new Rectangle(options);
+                that.visual.append(that.rect);
             },
 
             _createThumb: function() {
@@ -1850,6 +1883,9 @@
 
         var Selector = Class.extend({
             init: function (diagram) {
+                var selectable = diagram.options.selectable;
+                this.options = deepExtend({}, this.options, selectable);
+
                 this.visual = new Rectangle(this.options);
                 this.diagram = diagram;
             },
@@ -1953,7 +1989,9 @@
             ConnectionRouterBase: ConnectionRouterBase,
             PolylineRouter: PolylineRouter,
             CascadingRouter: CascadingRouter,
-            SelectionTool: SelectionTool
+            SelectionTool: SelectionTool,
+            PointerTool: PointerTool,
+            ConnectionEditTool: ConnectionEditTool
         });
 })(window.kendo.jQuery);
 

@@ -201,6 +201,161 @@
 
     })();
 
+    (function() {
+        var PointerTool = diagram.PointerTool;
+        var toolservice;
+        var pointertool;
+        var shape;
+        function setupTool(options) {
+            setupDiagram(options);
+            shape = d.addShape(new Point(10, 20), { data: "Rectangle" });
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof PointerTool) {
+                    pointertool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("PointerTool", {
+            teardown: teardown
+        });
+
+        test("selects hovered item if diagram is selectable", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = shape;
+            pointertool.start(new Point(), {});
+            ok(shape.isSelected);
+        });
+
+        test("does not select hovered item if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            toolservice.hoveredItem = shape;
+            pointertool.start(new Point(), {});
+            ok(!shape.isSelected);
+        });
+    })();
+
+    (function() {
+        var SelectionTool = diagram.SelectionTool;
+        var toolservice;
+        var selectiontool;
+
+        function setupTool(options) {
+            setupDiagram(options);
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof SelectionTool) {
+                    selectiontool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("SelectionTool", {
+            teardown: teardown
+        });
+
+        test("does not activate if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("activates if diagram is selectabel", function() {
+            setupTool({
+                selectable: true
+            });
+            ok(selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("does not activate if there is a hovered item", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = {};
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("does not activate if there is a hovered adorner", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredAdorner = {};
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+    })();
+
+    (function() {
+        var ConnectionEditTool = diagram.ConnectionEditTool;
+        var toolservice;
+        var connectionEditTool;
+
+        function setupTool(options) {
+            setupDiagram(options);
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof ConnectionEditTool) {
+                    connectionEditTool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("ConnectionEditTool", {
+            teardown: teardown
+        });
+
+        test("does not activate if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            ok(!connectionEditTool.tryActivate(new Point(), {}));
+        });
+
+        test("activates if diagram is selectable and the hovered item is a connection", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = new diagram.Connection(new Point(), new Point());
+            ok(connectionEditTool.tryActivate(new Point(), {}));
+        });
+
+    })();
+
+    (function() {
+        var Selector = diagram.Selector;
+        var selector;
+        module("Selector", {});
+
+        test("Selector extends its visual options with diagram selectable options", function() {
+            var diagram = {
+                options: {
+                    selectable: {
+                        stroke: {
+                            color: "#919191"
+                        },
+                        fill: {
+                            color: "#919191"
+                        }
+                    }
+                }
+            };
+            selector = new Selector(diagram);
+            var rectangle = selector.visual;
+            var options = rectangle.options;
+            equal(options.stroke.color, "#919191");
+            equal(options.fill.color, "#919191");
+        });
+    })();
+
     // ------------------------------------------------------------
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: setup,

@@ -136,6 +136,9 @@
                 width: DEFAULT_SHAPE_WIDTH,
                 height: DEFAULT_SHAPE_HEIGHT,
                 hover: {},
+                editable: {
+                    connect: true
+                },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
@@ -379,7 +382,7 @@
                 }
             },
             _canSelect: function () {
-                return this.options.selectable && this.diagram.options.selectable.type !== NONE;
+                return this.options.selectable !== false;
             }
         });
 
@@ -578,20 +581,16 @@
                 return clone;
             },
             select: function (value) {
-                var diagram = this.diagram, selected, deselected, type;
+                var diagram = this.diagram, selected, deselected;
                 if (isUndefined(value)) {
                     value = true;
                 }
                 if (this._canSelect()) {
                     if (this.isSelected != value) {
-                        type = this.diagram.options.selectable.type;
                         selected = [];
                         deselected = [];
                         this.isSelected = value;
                         if (this.isSelected) {
-                            if (type === SINGLE) {
-                                this.diagram.deselect();
-                            }
                             diagram._selectedItems.push(this);
                             selected.push(this);
                         } else {
@@ -787,8 +786,9 @@
                     stroke: stroke,
                     fill: fill
                 });
-
-                this.diagram._showConnectors(this, value);
+                if (options.editable && options.editable.connect) {
+                    this.diagram._showConnectors(this, value);
+                }
             },
             _hitTest: function (value) {
                 if (this.visible()) {
@@ -1034,18 +1034,14 @@
              * @param value True to select, false to unselect.
              */
             select: function (value) {
-                var diagram = this.diagram, selected, deselected, type;
+                var diagram = this.diagram, selected, deselected;
                 if (this._canSelect()) {
                     if (this.isSelected !== value) {
                         this.isSelected = value;
                         selected = [];
                         deselected = [];
-                        type = this.diagram.options.selectable.type;
                         if (this.isSelected) {
-                            if (type === SINGLE) {
-                                this.diagram.deselect();
-                            }
-                            this.adorner = new ConnectionEditAdorner(this, this.options.select);
+                            this.adorner = new ConnectionEditAdorner(this, this.options.selection);
                             diagram._adorn(this.adorner, true);
                             diagram._selectedItems.push(this);
                             selected.push(this);
@@ -1288,13 +1284,14 @@
                 var that = this;
 
                 kendo.destroy(element);
-                Widget.fn.init.call(that, element);
-                that.options = deepExtend({}, that.options, userOptions);
+                Widget.fn.init.call(that, element, userOptions);
+
                 that.bind(that.events, that.options);
 
                 that._initElements();
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
+                that._initShapeDefaults();
 
                 that._initCanvas();
 
@@ -1357,11 +1354,6 @@
                     offsetX: 20,
                     offsetY: 20
                 },
-
-                selectable: { // none, extended, multiple
-                    type: MULTIPLE,
-                    inclusive: true
-                },
                 snap: {
                     enabled: true,
                     size: 10,
@@ -1382,6 +1374,17 @@
                     .addClass("k-widget k-diagram");
 
                 this.scrollable = $("<div />").appendTo(this.element);
+            },
+
+            _initShapeDefaults: function() {
+                var options = this.options;
+                if (options.editable === false) {
+                    deepExtend(options.shapeDefaults, {
+                        editable: {
+                            connect: false
+                        }
+                    });
+                }
             },
 
             _initCanvas: function() {
@@ -2436,10 +2439,6 @@
                 else {
                     Utils.remove(this.connections, connection);
                 }
-            },
-            _canRectSelect: function () {
-                var type = this.options.selectable.type;
-                return type === MULTIPLE;
             },
 
             _removeDataItems: function(items, recursive) {
