@@ -1396,8 +1396,8 @@
                 that._manipulating = false;
                 that.map = [];
                 that.shapes = [];
-                that.rect = new Rectangle(options.editable.select);
-                that.visual.append(that.rect);
+
+                that._initSelection();
                 that._createHandles();
                 that._createThumb();
                 that.redraw();
@@ -1432,7 +1432,26 @@
                         }
                     }
                 },
+                selectable: {
+                    stroke: {
+                        color: "#778899",
+                        width: 1,
+                        dashType: "dash"
+                    },
+                    fill: {
+                        color: TRANSPARENT
+                    }
+                },
                 offset: 10
+            },
+
+            _initSelection: function() {
+                var that = this;
+                var diagram = that.diagram;
+                var selectable = diagram.options.selectable;
+                var options = deepExtend({}, that.options.selectable, selectable)
+                that.rect = new Rectangle(options);
+                that.visual.append(that.rect);
             },
 
             _createThumb: function() {
