@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.menu", "./kendo.window", "./kendo.treeview" ], f);
+    define([ "./kendo.pivotgrid", "./kendo.menu", "./kendo.window", "./kendo.treeview", "./kendo.dropdownlist" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,14 +7,13 @@ var __meta__ = {
     name: "PivotFilterMenu",
     category: "web",
     description: "The PivotFilterMenu widget allows the user to filter on fields displayed in PivotGrid",
-    depends: [ "contextmenu", "window", "treeview" ]
+    depends: [ "pivotgrid", "menu", "window", "treeview", "dropdownlist" ]
 };
 
 /*jshint eqnull: true*/
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        POPUP = "kendoPopup",
         MENU = "kendoContextMenu",
         proxy = $.proxy,
         NS = ".kendoPivotFilterMenu",
@@ -49,7 +48,6 @@ var __meta__ = {
                 filter: "Fields Filter",
                 include: "Include Fields...",
                 title: "Fields to include",
-                filter: "Filter",
                 clear: "Clear",
                 ok: "Ok",
                 cancel: "Cancel"
