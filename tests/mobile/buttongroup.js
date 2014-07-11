@@ -107,6 +107,15 @@
         equal(dom.children("li.km-state-active").length, 0);
     });
 
+    test("Do not select if li has km-state-disabled", function() {
+        var group = new ButtonGroup(dom);
+
+        var li = dom.children("li:first").addClass("km-state-disabled");
+        group.select(li);
+
+        ok(li.is(":not(.km-state-active)"));
+    });
+
     test("Only one li is selected", function() {
         var group = new ButtonGroup(dom);
 
