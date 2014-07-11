@@ -10,7 +10,8 @@
         ui.DropDownList.requestData = function (selector) {
             var dropdownlist = $(selector).data("kendoDropDownList"),
                 filters = dropdownlist.dataSource.filter(),
-                value = dropdownlist.input.val();
+                filterInput = dropdownlist.filterInput,
+                value = filterInput ? filterInput.val() : "";
 
             if (!filters) {
                 value = "";
