@@ -61,7 +61,7 @@ var __meta__ = {
             var that = this,
                 index = -1;
 
-            if (li === undefined || li === -1 || !that._enable) {
+            if (li === undefined || li === -1 || !that._enable || $(li).is("." + DISABLE)) {
                 return;
             }
 
