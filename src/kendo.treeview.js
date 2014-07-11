@@ -85,7 +85,7 @@ var __meta__ = {
     };
 
     function checkboxes(node) {
-        return node.children("div").find(".k-checkbox:first :checkbox");
+        return node.find("> div .k-checkbox [type=checkbox]");
     }
 
     function insertAction(indexOffset) {
