@@ -1041,7 +1041,7 @@
                         selected = [];
                         deselected = [];
                         if (this.isSelected) {
-                            this.adorner = new ConnectionEditAdorner(this, this.options.select);
+                            this.adorner = new ConnectionEditAdorner(this, this.options.selection);
                             diagram._adorn(this.adorner, true);
                             diagram._selectedItems.push(this);
                             selected.push(this);

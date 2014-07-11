@@ -346,7 +346,7 @@ var __meta__ = {
             stroke: {
                 width: 2
             },
-            select: {
+            selection: {
                 handles: {
                     width: 8,
                     height: 8
@@ -596,7 +596,7 @@ var __meta__ = {
                 content: {
                     color: WHITE
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: "#3d3d3d"
@@ -792,7 +792,7 @@ var __meta__ = {
                 content: {
                     color: "#293135"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: "#3d3d3d"
@@ -1032,7 +1032,7 @@ var __meta__ = {
                 content: {
                     color: WHITE
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: "#2c232b"
@@ -1228,7 +1228,7 @@ var __meta__ = {
                 content: {
                     color: "#2e2e2e"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
@@ -1449,7 +1449,7 @@ var __meta__ = {
                 content: {
                     color: "#515967"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
@@ -1649,7 +1649,7 @@ var __meta__ = {
                 content: {
                     color: "#777"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
@@ -1870,7 +1870,7 @@ var __meta__ = {
                 content: {
                     color: WHITE
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: "#0e0e0e"
@@ -2119,7 +2119,7 @@ var __meta__ = {
                 content: {
                     color: WHITE
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: "#414550"
@@ -2367,7 +2367,7 @@ var __meta__ = {
                 content: {
                     color: "#686868"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
@@ -2618,7 +2618,7 @@ var __meta__ = {
                 content: {
                     color: "#333333"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
@@ -2824,7 +2824,7 @@ var __meta__ = {
                 content: {
                     color: "#4c5356"
                 },
-                select: {
+                selection: {
                     handles: {
                         fill: {
                             color: WHITE
