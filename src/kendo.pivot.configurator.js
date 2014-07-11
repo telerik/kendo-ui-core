@@ -199,7 +199,8 @@ var __meta__ = {
                 filterable: this.options.filterable,
                 connectWith: rows,
                 messages: {
-                    empty: this.options.messages.columns
+                    empty: this.options.messages.columns,
+                    filterable: this.options.messages.filterable
                 }
             });
 
@@ -208,7 +209,8 @@ var __meta__ = {
                 setting: "rows",
                 connectWith: columns,
                 messages: {
-                    empty: this.options.messages.rows
+                    empty: this.options.messages.rows,
+                    filterable: this.options.messages.filterable
                 }
             });
 
