@@ -231,11 +231,15 @@
 
         surface.draw(root);
 
-        setInterval(function() {
+        function loop() {
             for (var i = 0; i < clocks.length; i++) {
                 clocks[i].set(new Date())
             }
-        }, 100);
+
+            kendo.animationFrame(loop);
+        }
+
+        loop();
 
         $("#select-type li").each(function() {
             var type = $(this).text().toLowerCase();
