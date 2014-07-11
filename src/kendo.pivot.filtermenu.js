@@ -123,7 +123,7 @@ var __meta__ = {
             var value = that._filterValue.val();
 
             if (!value) {
-                //TODO: close form
+                that.menu.close();
                 return;
             }
 
@@ -137,21 +137,20 @@ var __meta__ = {
             filter.filters.push(expression);
 
             that.dataSource.filter(filter);
-
-            //TODO: close form
+            that.menu.close();
         },
 
         _reset: function() {
-            var filter = this._clearFilters(this.currentMember);
+            var that = this;
+            var filter = that._clearFilters(that.currentMember);
 
             if (!filter.filters[0]) {
                 filter = {};
             }
 
-            this.dataSource.filter(filter);
-            this._setFilterForm(null);
-
-            //TODO: close form
+            that.dataSource.filter(filter);
+            that._setFilterForm(null);
+            that.menu.close();
         },
 
         _dataSource: function() {

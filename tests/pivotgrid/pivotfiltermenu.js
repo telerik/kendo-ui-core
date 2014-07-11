@@ -765,4 +765,28 @@
         equal(filterItem.find("select").val(), "contains");
         equal(filterItem.find("input").val(), "");
     });
+
+    test("close context menu on filter", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        stub(filterMenu.menu, "close");
+
+        filterItem.find(".k-button-filter").click();
+
+        ok(filterMenu.menu.calls("close"));
+    });
+
+    test("close context menu on reset", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        stub(filterMenu.menu, "close");
+
+        filterItem.find(".k-button-clear").click();
+
+        ok(filterMenu.menu.calls("close"));
+    });
 })();
