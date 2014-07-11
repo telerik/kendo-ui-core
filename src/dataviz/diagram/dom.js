@@ -1034,17 +1034,13 @@
              * @param value True to select, false to unselect.
              */
             select: function (value) {
-                var diagram = this.diagram, selected, deselected, type;
+                var diagram = this.diagram, selected, deselected;
                 if (this._canSelect()) {
                     if (this.isSelected !== value) {
                         this.isSelected = value;
                         selected = [];
                         deselected = [];
-                        type = this.diagram.options.selectable.type;
                         if (this.isSelected) {
-                            if (type === SINGLE) {
-                                this.diagram.deselect();
-                            }
                             this.adorner = new ConnectionEditAdorner(this, this.options.select);
                             diagram._adorn(this.adorner, true);
                             diagram._selectedItems.push(this);
