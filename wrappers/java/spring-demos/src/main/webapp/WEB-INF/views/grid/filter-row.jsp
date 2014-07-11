@@ -9,18 +9,30 @@
 <demo:header />
     <kendo:grid name="grid" pageable="true" height="430px" sortable="true" groupable="true">
         <kendo:grid-filterable mode="row"/>
-    	<kendo:grid-scrollable/>
+        <kendo:grid-scrollable/>
         <kendo:grid-columns>
-            <kendo:grid-column title="Order ID" field="orderId" width="220px" filterable="false" />
-            <kendo:grid-column title="Ship Name" field="shipName" width="500px"/>
-            <kendo:grid-column title="Freight" field="freight" width="250px" />
-            <kendo:grid-column title="Order Date" field="orderDate" format="{0:MM/dd/yyyy}" />            
+            <kendo:grid-column title="Order ID" field="orderId" width="220px">
+                 <kendo:grid-column-filterable>
+                     <kendo:grid-column-filterable-cell showOperators="false" />
+                 </kendo:grid-column-filterable>
+            </kendo:grid-column>
+            <kendo:grid-column title="Ship Name" field="shipName" width="500px">
+                <kendo:grid-column-filterable>
+                    <kendo:grid-column-filterable-cell operator="contains" />
+                </kendo:grid-column-filterable>
+            </kendo:grid-column>
+            <kendo:grid-column title="Freight" field="freight" width="250px" >
+                <kendo:grid-column-filterable>
+                     <kendo:grid-column-filterable-cell operator="gte" />
+                </kendo:grid-column-filterable>
+            </kendo:grid-column>
+            <kendo:grid-column title="Order Date" field="orderDate" format="{0:MM/dd/yyyy}" />
         </kendo:grid-columns>
         <kendo:dataSource pageSize="20" serverPaging="true" serverSorting="true" serverFiltering="true" serverGrouping="true">
-            <kendo:dataSource-transport>            	
+            <kendo:dataSource-transport>                
                 <kendo:dataSource-transport-read url="${transportReadUrl}" type="POST" contentType="application/json"/>  
                 <kendo:dataSource-transport-parameterMap>
-                	function(options){return JSON.stringify(options);}
+                    function(options){return JSON.stringify(options);}
                 </kendo:dataSource-transport-parameterMap>              
             </kendo:dataSource-transport>
             <kendo:dataSource-schema data="data" total="total" groups="data">

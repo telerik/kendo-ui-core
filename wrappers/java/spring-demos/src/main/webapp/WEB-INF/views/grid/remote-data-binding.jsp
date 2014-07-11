@@ -4,7 +4,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url value="/grid/remote-data/read" var="transportReadUrl" />
+<c:url value="/grid/remote-data-binding/read" var="transportReadUrl" />
 
 <demo:header />
     <kendo:grid name="grid" pageable="true" height="430px" sortable="true" filterable="true" groupable="true">
