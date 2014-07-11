@@ -117,7 +117,18 @@
 
             var center = diagram._initialCenter;
             equal(center.x, 50);
-            equal(center.x, 50);
+            equal(center.y, 50);
+        });
+
+        test("_gestureStart triggers zoomStart", function () {
+            diagram.zoom(2);
+            diagram.bind("zoomStart", function(e) {
+                var point = e.point;
+                equal(point.x, 50);
+                equal(point.y, 50);
+                equal(e.zoom, 2);
+            });
+            diagram._gestureStart(gesture);
         });
 
         test("_gestureChange updates zoom if scaleDelta is bigger or equal to mobile zoom rate", function () {
@@ -177,6 +188,18 @@
             diagram.scroller.enable = function() {
                 ok(true);
             };
+            diagram._gestureEnd(gesture);
+        });
+
+        test("_gestureEnd triggers zoomEnd", function () {
+            diagram.zoom(2);
+            diagram._gestureStart(gesture);
+            diagram.bind("zoomEnd", function(e) {
+                var point = e.point;
+                equal(point.x, 50);
+                equal(point.y, 50);
+                equal(e.zoom, 2);
+            });
             diagram._gestureEnd(gesture);
         });
     })();

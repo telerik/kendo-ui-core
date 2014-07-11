@@ -873,7 +873,7 @@
                     z = diagram.zoom(),
                     options = diagram.options,
                     zoomRate = options.zoomRate,
-                    zoomOptions = { location: p, meta: meta, zoom: z };
+                    zoomOptions = { point: p, meta: meta, zoom: z };
 
                 diagram.trigger(ZOOMSTART, zoomOptions);
 

@@ -1426,7 +1426,11 @@
             _gestureStart: function(e) {
                 this.scroller.disable();
                 this._gesture = e;
-                this._initialCenter = this.viewToModel(this.documentToView(new Point(e.center.x, e.center.y)));
+                this._initialCenter = this.documentToModel(new Point(e.center.x, e.center.y));
+                this.trigger(ZOOM_START, {
+                    point: this._initialCenter,
+                    zoom: this.zoom()
+                });
             },
 
             _gestureChange: function(e) {
@@ -1455,6 +1459,10 @@
 
             _gestureEnd: function() {
                 this.scroller.enable();
+                this.trigger(ZOOM_END, {
+                    point: this._initialCenter,
+                    zoom: this.zoom()
+                });
             },
 
             _resize: function(size) {
@@ -1989,7 +1997,7 @@
 
             zoom: function (zoom, options) {
                 if (zoom) {
-                    var staticPoint = options ? options.location : new diagram.Point(0, 0);
+                    var staticPoint = options ? options.point : new diagram.Point(0, 0);
                     // var meta = options ? options.meta : 0;
                     zoom = this._zoom = this._getValidZoom(zoom);
 
