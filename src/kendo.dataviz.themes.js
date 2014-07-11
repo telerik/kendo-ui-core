@@ -334,12 +334,12 @@ var __meta__ = {
             },
             handles: {
                 type: "rectangle"
-            },
-            select: {
-                stroke: {
-                    width: 1,
-                    dashType: "dot"
-                }
+            }
+        },
+        selectable: {
+            stroke: {
+                width: 1,
+                dashType: "dot"
             }
         },
         connectionDefaults: {
@@ -582,11 +582,11 @@ var __meta__ = {
                             color: WHITE
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: WHITE
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: WHITE
                 }
             },
             connectionDefaults: {
@@ -778,11 +778,11 @@ var __meta__ = {
                             color: "#003f59"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#003f59"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#003f59"
                 }
             },
             connectionDefaults: {
@@ -1018,11 +1018,11 @@ var __meta__ = {
                             color: WHITE
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: WHITE
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: WHITE
                 }
             },
             connectionDefaults: {
@@ -1214,11 +1214,11 @@ var __meta__ = {
                             color: "#282828"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#a7018f"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#a7018f"
                 }
             },
             connectionDefaults: {
@@ -1435,11 +1435,11 @@ var __meta__ = {
                             color: "#515967"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#515967"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#515967"
                 }
             },
             connectionDefaults: {
@@ -1635,11 +1635,11 @@ var __meta__ = {
                             color: "#787878"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#515967"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#515967"
                 }
             },
             connectionDefaults: {
@@ -1856,11 +1856,11 @@ var __meta__ = {
                             color: WHITE
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#787878"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#787878"
                 }
             },
             connectionDefaults: {
@@ -2105,11 +2105,11 @@ var __meta__ = {
                             color: WHITE
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: WHITE
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: WHITE
                 }
             },
             connectionDefaults: {
@@ -2353,11 +2353,11 @@ var __meta__ = {
                             color: "#686868"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#686868"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#686868"
                 }
             },
             connectionDefaults: {
@@ -2604,11 +2604,11 @@ var __meta__ = {
                             color: "#333333"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#333333"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#333333"
                 }
             },
             connectionDefaults: {
@@ -2810,11 +2810,11 @@ var __meta__ = {
                             color: "#363940"
                         }
                     }
-                },
-                select: {
-                    stroke: {
-                        color: "#363940"
-                    }
+                }
+            },
+            selectable: {
+                stroke: {
+                    color: "#363940"
                 }
             },
             connectionDefaults: {
