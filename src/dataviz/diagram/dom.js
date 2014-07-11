@@ -136,6 +136,9 @@
                 width: DEFAULT_SHAPE_WIDTH,
                 height: DEFAULT_SHAPE_HEIGHT,
                 hover: {},
+                editable: {
+                    connect: true
+                },
                 connectors: diagram.DefaultConnectors,
                 rotation: {
                     angle: 0
@@ -787,8 +790,9 @@
                     stroke: stroke,
                     fill: fill
                 });
-
-                this.diagram._showConnectors(this, value);
+                if (options.editable && options.editable.connect) {
+                    this.diagram._showConnectors(this, value);
+                }
             },
             _hitTest: function (value) {
                 if (this.visible()) {
@@ -1288,13 +1292,14 @@
                 var that = this;
 
                 kendo.destroy(element);
-                Widget.fn.init.call(that, element);
-                that.options = deepExtend({}, that.options, userOptions);
+                Widget.fn.init.call(that, element, userOptions);
+
                 that.bind(that.events, that.options);
 
                 that._initElements();
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
+                that._initShapeDefaults();
 
                 that._initCanvas();
 
@@ -1382,6 +1387,17 @@
                     .addClass("k-widget k-diagram");
 
                 this.scrollable = $("<div />").appendTo(this.element);
+            },
+
+            _initShapeDefaults: function() {
+                var options = this.options;
+                if (options.editable === false) {
+                    deepExtend(options.shapeDefaults, {
+                        editable: {
+                            connect: false
+                        }
+                    });
+                }
             },
 
             _initCanvas: function() {

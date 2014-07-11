@@ -271,6 +271,33 @@
 
             equal(shape, diagram.undoRedoService.stack[0].shape, "shape is undoable");
         });
+
+        test("editable connect is true by default", function() {
+            setupShapeDefaults({});
+            shape = diagram.addShape({id: "shape1"});
+
+            equal(shape.options.editable.connect, true);
+        });
+
+        test("editable connect is set", function() {
+            setupShapeDefaults({
+                editable: {
+                    connect: false
+                }
+            });
+            shape = diagram.addShape({id: "shape1"});
+
+            equal(shape.options.editable.connect, false);
+        });
+
+        test("editable connect is set to false if diagram editable is false", function() {
+            createDiagram({
+                editable: false
+            });
+            shape = diagram.addShape({id: "shape1"});
+
+            equal(shape.options.editable.connect, false);
+        });
     })();
 
     // ------------------------------------------------------------
