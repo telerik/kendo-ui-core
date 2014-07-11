@@ -75,30 +75,21 @@
 
         $("#select-type li").each(function() {
             var type = $(this).text().toLowerCase();
-            if (kendo.support[type]) {
-                $(this).addClass("enabled");
-            } else {
-                $(this).addClass("disabled km-state-disabled");
+            if (!kendo.support[type]) {
+                $(this).addClass("km-state-disabled");
             }
         });
 
-        var selectedIndex = $("#select-type li.enabled").index();
         $("#select-type").kendoMobileButtonGroup({
             select: function(e) {
                 var option = $("li", e.sender.element).eq(e.index);
-                if (option.is(".disabled")) {
-                    e.sender.select(selectedIndex);
-                } else {
-                    var type = option.text().toLowerCase();
+                var type = option.text().toLowerCase();
 
-                    surface.destroy();
-                    surface = initSurface(type);
-                    surface.draw(path);
-
-                    selectedIndex = e.sender.selectedIndex;
-                }
+                surface.destroy();
+                surface = initSurface(type);
+                surface.draw(path);
             },
-            index: selectedIndex
+            index: $("#select-type li:not(.km-state-disabled)").index()
         });
     });
     </script>
