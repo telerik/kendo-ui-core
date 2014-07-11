@@ -237,7 +237,9 @@ var __meta__ = {
                 if (!model) {
                     e.preventDefault();
                 } else {
+                    model._uploading = true;
                     that.upload.one("success", function(e) {
+                        delete model._uploading;
                         model.set(fileNameField, e.response[that._getFieldName(fileNameField)]);
                         model.set(sizeField, e.response[that._getFieldName(sizeField)]);
                         that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
@@ -324,6 +326,10 @@ var __meta__ = {
                 thumbnailUrl = that.options.transport.thumbnailUrl,
                 img = $("<img />", { alt: name }),
                 urlJoin = "?";
+
+            if (dataItem._uploading) {
+                return;
+            }
 
             img.hide()
                .on("load" + NS, function() {
