@@ -1230,26 +1230,38 @@ var __meta__ = {
             Menu.fn.destroy.call(that);
         },
 
-        show: function(x, y) {
+        open: function(x, y) {
             var that = this;
 
-            if (that.popup.visible() && that.options.filter) {
-                that.popup.close(true);
-            }
+            if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
+                if (that.popup.visible() && that.options.filter) {
+                    that.popup.close(true);
+                }
 
-            if (y !== undefined) {
-                that.popup.wrapper.hide();
-                that.popup.open(x, y);
-            } else {
-                that.popup.options.anchor = x ? x[0] || x : that.popup.anchor;
-                that.popup.open();
-            }
+                if (y !== undefined) {
+                    that.popup.wrapper.hide();
+                    that.popup.open(x, y);
+                } else {
+                    that.popup.options.anchor = (x ? x[0] || x : that.popup.anchor) || that.target;
+                    that.popup.open();
+                }
 
-            DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
-            DOCUMENT_ELEMENT
-                .on(kendo.support.mousedown + NS, that._closeProxy);
+                DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
+                DOCUMENT_ELEMENT
+                    .on(kendo.support.mousedown + NS, that._closeProxy);
+            }
 
             return that;
+        },
+
+        close: function() {
+            var that = this;
+
+            if (that.popup.visible()) {
+                if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
+                    that._close();
+                }
+            }
         },
 
         _showHandler: function (e) {
@@ -1276,9 +1288,9 @@ var __meta__ = {
 
             if ((options.filter && kendo.support.matchesSelector.call(ev.currentTarget, options.filter)) || !options.filter) {
                 if (options.alignToAnchor) {
-                    that.show(ev.currentTarget);
+                    that.open(ev.currentTarget);
                 } else {
-                    that.show(ev.pageX, ev.pageY);
+                    that.open(ev.pageX, ev.pageY);
                 }
             }
         },
@@ -1287,6 +1299,7 @@ var __meta__ = {
             var that = this;
 
             that.popup.close();
+            DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
             that.unbind(SELECT, that._closeTimeoutProxy);
         },
 
@@ -1301,13 +1314,11 @@ var __meta__ = {
             if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
                 !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
                 !children[0] && containment) || !containment)) {
-                    DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
-
                     if (containment) {
                         this.unbind(SELECT, this._closeTimeoutProxy);
                         that.bind(SELECT, that._closeTimeoutProxy);
                     } else {
-                        this.popup.close();
+                        that._close();
                     }
             }
         },

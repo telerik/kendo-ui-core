@@ -51,5 +51,59 @@ test('Popup widget is initialized on the root element', function() {
     ok(menu.popup == menu.element.data("kendoPopup"))
 });
 
+/* API */
+
+test('calling open raises open event', function() {
+    menu.bind("open", function () {
+        ok(true);
+    });
+
+    menu.open();
+});
+
+test('calling close raises close event if popup is visible', function() {
+    menu.bind("close", function () {
+        ok(true);
+    });
+
+    menu.open();
+    menu.close();
+});
+
+test('calling open shows the popup', function() {
+    menu.open();
+
+    ok(menu.popup.visible());
+});
+
+test('calling open with position shows the popup at that position', function() {
+    menu.open(100, 100);
+
+    var offset = menu.popup.element.offset();
+    ok(offset.left == 100);
+    ok(offset.top == 100);
+});
+
+test('preventing open should not open the popup', function() {
+    menu.bind("open", function (e) {
+        e.preventDefault();
+    });
+
+    menu.open();
+
+    ok(!menu.popup.visible());
+});
+
+test('preventing close should not close the popup', function() {
+    menu.bind("close", function (e) {
+        e.preventDefault();
+    });
+
+    menu.open();
+    menu.close();
+
+    ok(menu.popup.visible());
+});
+
 })();
 
