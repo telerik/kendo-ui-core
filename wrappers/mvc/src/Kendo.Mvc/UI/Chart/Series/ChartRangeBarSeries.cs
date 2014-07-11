@@ -21,7 +21,7 @@
 
         public ChartRangeBarSeries(IEnumerable data)
             : base(data)
-        { 
+        {
         }
 
         public ChartRangeBarSeries() : base()
@@ -45,10 +45,22 @@
             set;
         }
 
+        public ChartRangeBarLabels RangeBarLabel
+        {
+            get;
+            set;
+        }
+
         public CategoricalErrorBars ErrorBars
         {
             get;
             set;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            RangeBarLabel = new ChartRangeBarLabels();
         }
     }
 

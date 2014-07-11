@@ -19,8 +19,22 @@
             var result = base.Serialize();
             
             result["type"] = series.Orientation == ChartSeriesOrientation.Horizontal ? "rangeBar" : "rangeColumn";
-            result.Add("fromField", series.FromField);
-            result.Add("toField", series.ToField);
+
+            if (series.FromField != null)
+            {
+                result.Add("fromField", series.FromField);
+            }
+
+            if (series.ToField != null)
+            {
+                result.Add("toField", series.ToField);
+            }
+
+            var labelsData = series.RangeBarLabel.CreateSerializer().Serialize();
+            if (labelsData.Count > 0)
+            {
+                result.Add("labels", labelsData);
+            }
 
             return result;
         } 

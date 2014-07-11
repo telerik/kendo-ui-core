@@ -163,7 +163,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Labels(Action<ChartBarLabelsBuilder> configurator)
+        public virtual TSeriesBuilder Labels(Action<ChartBarLabelsBuilder> configurator)
         {
 
             configurator(new ChartBarLabelsBuilder(Series.Labels));
