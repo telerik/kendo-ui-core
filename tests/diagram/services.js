@@ -201,6 +201,46 @@
 
     })();
 
+    (function() {
+        var PointerTool = diagram.PointerTool;
+        var toolservice;
+        var pointertool;
+        var shape;
+        function setupTool(options) {
+            setupDiagram(options);
+            shape = d.addShape(new Point(10, 20), { data: "Rectangle" });
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof PointerTool) {
+                    pointertool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("PointerTool", {
+            teardown: teardown
+        });
+
+        test("selects hovered item if diagram is selectable", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = shape;
+            pointertool.start(new Point(), {});
+            ok(shape.isSelected);
+        });
+
+        test("does not select hovered item if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            toolservice.hoveredItem = shape;
+            pointertool.start(new Point(), {});
+            ok(!shape.isSelected);
+        });
+    })();
+
     // ------------------------------------------------------------
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: setup,
