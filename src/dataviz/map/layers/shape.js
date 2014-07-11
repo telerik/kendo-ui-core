@@ -34,6 +34,8 @@
                 height: map.scrollElement.height()
             });
 
+            this._initRoot();
+
             this.movable = new kendo.ui.Movable(this.surface.element);
             this._markers = [];
 
@@ -82,8 +84,14 @@
             }
         },
 
+        _initRoot: function() {
+            this._root = new Group();
+            this.surface.draw(this._root);
+        },
+
         _beforeReset: function() {
             this.surface.clear();
+            this._initRoot();
         },
 
         _resize: function() {
@@ -114,12 +122,16 @@
                 this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             }
 
+            var container = new Group();
             for (var i = 0; i < data.length; i++) {
                 var shape = this._loader.parse(data[i]);
                 if (shape) {
-                    this.surface.draw(shape);
+                    container.append(shape);
                 }
             }
+
+            this._root.clear();
+            this._root.append(container);
         },
 
         shapeCreated: function(shape) {

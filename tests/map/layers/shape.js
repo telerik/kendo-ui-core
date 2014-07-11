@@ -76,8 +76,8 @@
     test("adds circle when markerCreated is cancelled", function() {
         map.bind("markerCreated", function(e) { e.preventDefault(); });
 
-        layer.surface.draw = function(shape) {
-            ok(shape instanceof d.Circle);
+        layer._root.append = function(container) {
+            ok(container.children[0] instanceof d.Circle);
         };
 
         layer._load(pointData);
@@ -144,20 +144,30 @@
         }
     });
 
-    test("re-draws GeoJSON primitives on reset", function() {
-        layer.surface.draw = function() {
+    test("redraws GeoJSON primitives on reset", function() {
+        layer._root.append = function() {
             ok(true);
         };
 
         map.trigger("reset");
     });
 
-    test("re-draws all shapes on incremental change", function() {
+    test("redraws all shapes on incremental change", function() {
         layer._load = function(data) {
             equal(data.length, 2);
         };
 
         layer.dataSource.add({});
+    });
+
+    test("does not duplicate shapes on rebind", function() {
+        layer.dataSource.read();
+        var count = 0;
+        layer._root.traverse(function() {
+            count++;
+        });
+
+        equal(count, 2);
     });
 
     test("sets the dataSource", function() {
