@@ -44,14 +44,15 @@ var __meta__ = {
             this.element.addClass("k-widget k-treemap");
 
             if (this.options.type === "horizontal") {
-                this.src = new SliceAndDice(false);
+                this._layout = new SliceAndDice(false);
+                this._view = new SliceAndDiceView(this, this.options);
             } else if (this.options.type === "vertical") {
-                this.src = new SliceAndDice(true);
+                this._layout = new SliceAndDice(true);
+                this._view = new SliceAndDiceView(this, this.options);
             } else {
-                this.src = new Squarified();
+                this._layout = new Squarified();
+                this._view = new SquarifiedView(this, this.options);
             }
-
-            this.view = new SquarifiedView(this, this.options);
 
             this._initDataSource();
 
@@ -99,16 +100,14 @@ var __meta__ = {
             var item, i, colors;
 
             if (!node) {
-                this._items = [];
                 item = this._wrapItem(items[0]);
-                item.coord = {
-                    width: this.element.outerWidth(),
-                    height: this.element.outerHeight(),
-                    top: 0,
-                    left: 0
-                };
-                this._items.push(item);
-                this.view.createRoot(item);
+                this._layout.createRoot(
+                    item,
+                    this.element.outerWidth(),
+                    this.element.outerHeight(),
+                    this.options.type === "vertical"
+                );
+                this._view.createRoot(item);
                 // Reference of the root
                 this._root = item;
             } else {
@@ -127,8 +126,8 @@ var __meta__ = {
                         root.children.push(this._wrapItem(item));
                     }
 
-                    var htmlSize = this.view.htmlSize(root);
-                    this.src.compute(root, root.coord, htmlSize);
+                    var htmlSize = this._view.htmlSize(root);
+                    this._layout.compute(root.children, root.coord, htmlSize);
 
                     for (i = 0; i < root.children.length; i++) {
                         item = root.children[i];
@@ -146,7 +145,7 @@ var __meta__ = {
                         }
                     }
 
-                    this.view.render(root);
+                    this._view.render(root);
                 }
             }
 
@@ -243,11 +242,20 @@ var __meta__ = {
     });
 
     var Squarified = Class.extend({
+        createRoot: function(root, width, height) {
+            root.coord = {
+                width: width,
+                height: height,
+                top: 0,
+                left: 0
+            };
+        },
+
         leaf: function(tree) {
             return !tree.children;
         },
 
-        layoutChildren: function(parent, items, coord) {
+        layoutChildren: function(items, coord) {
             var parentArea = coord.width * coord.height;
             var totalArea = 0,
                 itemsArea = [],
@@ -350,12 +358,11 @@ var __meta__ = {
             );
         },
 
-        compute: function(data, rootCoord, htmlSize) {
+        compute: function(children, rootCoord, htmlSize) {
             if (!(rootCoord.width >= rootCoord.height && this.layoutHorizontal())) {
                 this.layoutChange();
             }
 
-            var children = data.children;
             if (children && children.length > 0) {
                 var newRootCoord = {
                     width: rootCoord.width,
@@ -364,7 +371,7 @@ var __meta__ = {
                     left: 0
                 };
 
-                this.layoutChildren(data, children, newRootCoord);
+                this.layoutChildren(children, newRootCoord);
             }
         },
 
@@ -468,8 +475,7 @@ var __meta__ = {
                 var text = this._getText(root);
                 if (text) {
                     var title = this._createTitle(root);
-                    rootElement
-                        .append(title);
+                    rootElement.append(title);
 
                     htmlSize.text = title.height();
                 }
@@ -593,8 +599,7 @@ var __meta__ = {
         },
 
         _createTitle: function(item) {
-            return $("<div class='k-treemap-title'></div>")
-                .text(this._getText(item));
+            return $("<div class='k-treemap-title'></div>").text(this._getText(item));
         },
 
         _createWrap: function() {
@@ -613,16 +618,35 @@ var __meta__ = {
     });
 
     var SliceAndDice = Class.extend({
-        init: function(isVertical) {
-            this.quotient = isVertical ? 1 : 0;
+        createRoot: function(root, width, height, vertical) {
+            root.coord = {
+                width: width,
+                height: height,
+                top: 0,
+                left: 0
+            };
+            root.vertical = vertical;
         },
 
-        compute: function(root, rootCoord, htmlSize) {
-            var children = root.children;
-            if (children && children.length > 0) {
+        init: function(vertical) {
+            this.vertical = vertical;
+            this.quotient = vertical ? 1 : 0;
+        },
+
+        compute: function(children, rootCoord, htmlSize) {
+            if (children.length > 0) {
+                var width = rootCoord.width;
+                var height = rootCoord.height;
+
+                if (this.vertical) {
+                    height -= htmlSize.text;
+                } else {
+                    width -= htmlSize.text;
+                }
+
                 var newRootCoord = {
-                    width: rootCoord.width,
-                    height: rootCoord.height - htmlSize.text,
+                    width: width,
+                    height: height,
                     top: 0,
                     left: 0
                 };
@@ -638,8 +662,10 @@ var __meta__ = {
             var i;
 
             for (i = 0; i < items.length; i++) {
+                var item = items[i];
                 itemsArea[i] = parseFloat(items[i].value);
                 totalArea += itemsArea[i];
+                item.vertical = this.vertical;
             }
 
             for (i = 0; i < itemsArea.length; i++) {
@@ -654,9 +680,9 @@ var __meta__ = {
         sliceAndDice: function(items, coord) {
             var totalArea = this._totalArea(items);
             if (items[0].level % 2 === this.quotient) {
-                this.layoutVertical(items, coord, totalArea);
-            } else {
                 this.layoutHorizontal(items, coord, totalArea);
+            } else {
+                this.layoutVertical(items, coord, totalArea);
             }
         },
 
@@ -704,6 +730,50 @@ var __meta__ = {
             return total;
         }
     });
+
+    var SliceAndDiceView = SquarifiedView.extend({
+        htmlSize: function(root) {
+            var rootElement = this._getByUid(root.dataItem.uid);
+            var htmlSize = {
+                text: 0,
+                offset: 0
+            };
+
+            if (root.children) {
+                this._clean(rootElement);
+
+                var text = this._getText(root);
+                if (text) {
+                    var title = this._createTitle(root);
+                    rootElement.append(title);
+
+                    if (root.vertical) {
+                        htmlSize.text = title.height();
+                    } else {
+                        htmlSize.text = title.width();
+                    }
+                }
+
+                rootElement.append(this._createWrap());
+
+                this.offset = (rootElement.outerWidth() - rootElement.innerWidth()) / 2;
+            }
+
+            return htmlSize;
+        },
+
+        _createTitle: function(item) {
+            var title;
+            if (item.vertical) {
+                title = $("<div class='k-treemap-title'></div>");
+            } else {
+                title = $("<div class='k-treemap-title-vertical'></div>");
+            }
+
+            return title.text(this._getText(item));
+        }
+    });
+
 
     function valueOrDefault(value, defaultValue) {
         return defined(value) ? value : defaultValue;
