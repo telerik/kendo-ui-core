@@ -15320,6 +15320,66 @@ for all columns when filtering is enabled via the filterable option.Can be set t
 
     </tag>
 
+    <tag>
+        <description>Specifies options for the filter cell when enabled.Can be set to a JavaScript object which represents the filter cell configuration.</description>
+        <name>grid-column-filterable-cell</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnFilterableCellTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Specifies custom dataSource for the AutoComplete when type of the column is string.  Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.
+If the dataSource options is missing the options of the Grid's dataSource will be used.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the name of the field which will provide the text representation for the AutoComplete suggestion (when using String type column) when CustomDataSource is provided. By default the name of the field bound to the column will be used.</description>
+            <name>dataTextField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the delay of the AutoComplete widget which will provide the suggest functionality (when using String type column).</description>
+            <name>delay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>When set to false the Grid will not render the cell filtering widget for that specific column.</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the default operator that will be used for the cell filtering.</description>
+            <name>operator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether to show or hide the DropDownList with the operators.</description>
+            <name>showOperators</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>JavaScript function which will customize how the input for the filter value is customized.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>JavaScript function which will customize how the input for the filter value is customized.</description>
+        <name>grid-column-filterable-cell-template</name>
+        <tag-class>com.kendoui.taglib.grid.ColumnFilterableCellTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The role data attribute of the widget used in the filter menu or a JavaScript function which initializes that widget.</description>
@@ -15483,6 +15543,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <name>extra</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to row the user would be able to filter via extra row added below the headers. By default filtering is using the menu mode.Can also be set to the following string values:</description>
+            <name>mode</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
 
     </tag>
