@@ -390,19 +390,23 @@ var __meta__ = {
     }
 
     var LABELMENUTEMPLATE =
-            '<div>' +
-                '<div class="k-filter-help-text">#=messages.info#</div>'+
-                '<select>'+
-                    '#for(var op in operators){#'+
-                        '<option value="#=op#">#=operators[op]#</option>' +
-                    '#}#'+
-                '</select>'+
-                '<input class="k-textbox" type="text" />'+
-                '<div>'+
-                '<a class="k-button k-primary k-button-filter" href="\\#">#=messages.filter#</a>'+
-                '<a class="k-button k-button-clear" href="\\#">#=messages.clear#</a>'+
-                '</div>'+
-            '</div>';
+        '<div class="k-filterable k-content" tabindex="-1" data-role="filtermenu">' +
+            '<form class="k-filter-menu">' +
+                '<div>' +
+                    '<div class="k-filter-help-text">#=messages.info#</div>'+
+                    '<select>'+
+                        '#for(var op in operators){#'+
+                            '<option value="#=op#">#=operators[op]#</option>' +
+                        '#}#'+
+                    '</select>'+
+                    '<input class="k-textbox" type="text" />'+
+                    '<div>'+
+                    '<a class="k-button k-primary k-button-filter" href="\\#">#=messages.filter#</a>'+
+                    '<a class="k-button k-button-clear" href="\\#">#=messages.clear#</a>'+
+                    '</div>'+
+                '</div>' +
+            '</form>' +
+        '</div>';
 
     var MENUTEMPLATE = '<ul class="k-pivot-filtermenu">'+
                         '<li class="k-item k-include-item">'+
