@@ -294,6 +294,43 @@
     })();
 
     (function() {
+        var ConnectionEditTool = diagram.ConnectionEditTool;
+        var toolservice;
+        var connectionEditTool;
+
+        function setupTool(options) {
+            setupDiagram(options);
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof ConnectionEditTool) {
+                    connectionEditTool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("ConnectionEditTool", {
+            teardown: teardown
+        });
+
+        test("does not activate if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            ok(!connectionEditTool.tryActivate(new Point(), {}));
+        });
+
+        test("activates if diagram is selectable and the hovered item is a connection", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = new diagram.Connection(new Point(), new Point());
+            ok(connectionEditTool.tryActivate(new Point(), {}));
+        });
+
+    })();
+
+    (function() {
         var Selector = diagram.Selector;
         var selector;
         module("Selector", {});

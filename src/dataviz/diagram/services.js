@@ -757,9 +757,13 @@
                 this.toolService = toolService;
                 this.type = "ConnectionTool";
             },
+
             tryActivate: function (p, meta) {
-                var item = this.toolService.hoveredItem,
-                    isActive = item && item.path; // means it is connection
+                var toolService = this.toolService,
+                    diagram = toolService.diagram,
+                    selectable = diagram.options.selectable !== false,
+                    item = toolService.hoveredItem,
+                    isActive = selectable && item && item.path; // means it is connection
                 if (isActive) {
                     this._c = item;
                 }
@@ -1986,7 +1990,8 @@
             PolylineRouter: PolylineRouter,
             CascadingRouter: CascadingRouter,
             SelectionTool: SelectionTool,
-            PointerTool: PointerTool
+            PointerTool: PointerTool,
+            ConnectionEditTool: ConnectionEditTool
         });
 })(window.kendo.jQuery);
 
