@@ -31,6 +31,7 @@ var __meta__ = {
         CHANGE = "change",
         ERROR = "error",
         PROGRESS = "progress",
+        STATERESET = "stateReset",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
         ROW_TOTAL_KEY = "__row_total__",
@@ -1183,6 +1184,7 @@ var __meta__ = {
                 this._axes = {};
                 this._data = this._observe([]);
                 this._clearAxesData = false;
+                this.trigger(STATERESET);
             }
 
             var options = DataSource.fn._params.call(this, data);
@@ -2544,17 +2546,20 @@ var __meta__ = {
 
             if (that.dataSource && this._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler)
-                                .unbind(PROGRESS, that._progressHandler)
-                                .unbind(ERROR, that._errorHandler);
+                               .unbind(STATERESET, that._stateResetHandler)
+                               .unbind(PROGRESS, that._progressHandler)
+                               .unbind(ERROR, that._errorHandler);
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
                 that._progressHandler = $.proxy(that._requestStart, that);
+                that._stateResetHandler = $.proxy(that._stateReset, that);
                 that._errorHandler = $.proxy(that._error, that);
             }
 
             that.dataSource = kendo.data.PivotDataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
                                    .bind(PROGRESS, that._progressHandler)
+                                   .bind(STATERESET, that._stateResetHandler)
                                    .bind(ERROR, that._errorHandler);
         },
 
@@ -2564,6 +2569,11 @@ var __meta__ = {
 
         _requestStart: function() {
             this._progress(true);
+        },
+
+        _stateReset: function() {
+            this._columnBuilder.reset();
+            this._rowBuilder.reset();
         },
 
         _wrapper: function() {
@@ -2779,9 +2789,6 @@ var __meta__ = {
             }
 
             columnBuilder.measures = dataSource._columnMeasures().length || 1;
-            columnBuilder.reset(columns[0]);
-
-            rowBuilder.reset(rows[0]);
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
@@ -2854,46 +2861,6 @@ var __meta__ = {
         }
     });
 
-
-    function descriptorsChanged(old, current) {
-        var length = current.length;
-
-        if (!old) {
-            return false;
-        }
-
-        if (old.length !== length) {
-            return true;
-        }
-
-        for (var idx = 0; idx < length; idx++) {
-            if (old[idx].name !== current[idx].name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function tupleChanged(old, current) {
-        var oldMembers = old.members;
-        var currentMembers = current.members;
-        var length = currentMembers.length;
-        var idx = 0;
-
-        if (oldMembers.length !== length) {
-            return true;
-        }
-
-        for (; idx < length; idx++) {
-            if (oldMembers[idx].name !== currentMembers[idx].name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
@@ -2912,12 +2879,8 @@ var __meta__ = {
             ];
         },
 
-        reset: function(tuple) {
-            var root = this.rootTuple;
-
-            if (!tuple || root && tupleChanged(root, tuple)) {
-                this.metadata = {};
-            }
+        reset: function() {
+            this.metadata = {};
         },
 
         rowLength: function() {
@@ -3301,12 +3264,8 @@ var __meta__ = {
             ];
         },
 
-        reset: function(tuple) {
-            var root = this.rootTuple;
-
-            if (!tuple || root && tupleChanged(root, tuple)) {
-                this.metadata = {};
-            }
+        reset: function() {
+            this.metadata = {};
         },
 
         _colGroup: function() {
