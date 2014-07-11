@@ -1233,22 +1233,28 @@ var __meta__ = {
         open: function(x, y) {
             var that = this;
 
-            if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
-                if (that.popup.visible() && that.options.filter) {
-                    that.popup.close(true);
-                }
+            x = $(x)[0];
 
-                if (y !== undefined) {
-                    that.popup.wrapper.hide();
-                    that.popup.open(x, y);
-                } else {
-                    that.popup.options.anchor = (x ? x[0] || x : that.popup.anchor) || that.target;
-                    that.popup.open();
-                }
+            if (contains(that.element[0], $(x)[0])) { // call parent open for children elements
+                Menu.fn.open.call(that, x);
+            } else {
+                if (that._triggerEvent({ item: that.element, type: OPEN }) === false) {
+                    if (that.popup.visible() && that.options.filter) {
+                        that.popup.close(true);
+                    }
 
-                DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
-                DOCUMENT_ELEMENT
-                    .on(kendo.support.mousedown + NS, that._closeProxy);
+                    if (y !== undefined) {
+                        that.popup.wrapper.hide();
+                        that.popup.open(x, y);
+                    } else {
+                        that.popup.options.anchor = (x ? x : that.popup.anchor) || that.target;
+                        that.popup.open();
+                    }
+
+                    DOCUMENT_ELEMENT.off(MOUSEDOWN, that.popup._mousedownProxy);
+                    DOCUMENT_ELEMENT
+                        .on(kendo.support.mousedown + NS, that._closeProxy);
+                }
             }
 
             return that;
@@ -1257,9 +1263,15 @@ var __meta__ = {
         close: function() {
             var that = this;
 
-            if (that.popup.visible()) {
-                if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
-                    that._close();
+            if (contains(that.element[0], $(arguments[0])[0])) {
+                Menu.fn.close.call(that, arguments[0]);
+            } else {
+                if (that.popup.visible()) {
+                    if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
+                        that.popup.close();
+                        DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
+                        that.unbind(SELECT, that._closeTimeoutProxy);
+                    }
                 }
             }
         },
@@ -1295,14 +1307,6 @@ var __meta__ = {
             }
         },
 
-        _close: function() {
-            var that = this;
-
-            that.popup.close();
-            DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS, that._closeProxy);
-            that.unbind(SELECT, that._closeTimeoutProxy);
-        },
-
         _closeHandler: function (e) {
             var that = this,
                 target = e.relatedTarget || e.target,
@@ -1318,7 +1322,7 @@ var __meta__ = {
                         this.unbind(SELECT, this._closeTimeoutProxy);
                         that.bind(SELECT, that._closeTimeoutProxy);
                     } else {
-                        that._close();
+                        that.close();
                     }
             }
         },
@@ -1330,7 +1334,7 @@ var __meta__ = {
 
             that._showProxy = proxy(that._showHandler, that);
             that._closeProxy = proxy(that._closeHandler, that);
-            that._closeTimeoutProxy = proxy(that._close, that);
+            that._closeTimeoutProxy = proxy(that.close, that);
 
             if (target[0]) {
                 if (kendo.support.mobileOS && options.showOn == "contextmenu") {
@@ -1372,8 +1376,6 @@ var __meta__ = {
                                 anchor: that.target || "body",
                                 collision: that.options.popupCollision || "fit",
                                 animation: that.options.animation,
-                                open: that._triggerProxy,
-                                close: that._triggerProxy,
                                 activate: that._triggerProxy,
                                 deactivate: that._triggerProxy
                             }).data("kendoPopup");
