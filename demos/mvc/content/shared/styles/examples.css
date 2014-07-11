@@ -2782,6 +2782,9 @@ h5 {
 .demo-section.k-header {
     background-position: 50% 70%;
 }
+html.k-flat .demo-section.k-header {
+  background-color: #fff;
+}
 .box h4,
 .demo-section h4 {
     margin-bottom: 1em;
