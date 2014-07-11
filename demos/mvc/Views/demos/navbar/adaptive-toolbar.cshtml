@@ -20,11 +20,11 @@
                             align: "left"
                         },
 
-                        { type: "button", showText: "overflow", id: "prev", text: "Previous", icon: "up", enable: false, align: "left" },
-                        { type: "button", showText: "overflow", id: "next", text: "Next", icon: "down", align: "left" },
-                        { type: "button", showText: "overflow", id: "flag", text: "Flag", icon: "toprated", click: function(){$("#flags").data("kendoMobileActionSheet").open()} },
-                        { type: "button", showText: "overflow", id: "reply", text: "Reply", icon: "reply", click: function(){$("#reply-options").data("kendoMobileActionSheet").open()} },
-                        { type: "button", showText: "overflow", id: "disabledBtn", text: "Delete", icon: "delete", click: function(){$("#delete-confirm").data("kendoMobileActionSheet").open()} },
+                        { type: "button", showText: "overflow", id: "prev", text: "Previous", icon: "previous", enable: false, align: "left" },
+                        { type: "button", showText: "overflow", id: "next", text: "Next", icon: "next", align: "left" },
+                        { type: "button", showText: "overflow", id: "flag", text: "Flag", icon: "toprated", click: function(e){$("#flags").data("kendoMobileActionSheet").open(e.target)} },
+                        { type: "button", showText: "overflow", id: "reply", text: "Reply", icon: "reply", click: function(e){$("#reply-options").data("kendoMobileActionSheet").open(e.target)} },
+                        { type: "button", showText: "overflow", id: "disabledBtn", text: "Delete", icon: "delete", click: function(e){$("#delete-confirm").data("kendoMobileActionSheet").open(e.target)} },
 
                         { type: "button", text: "Organize", overflow: "always", icon: "organize", enable: false }
                     ]'>
@@ -37,21 +37,21 @@
         <p>Excellent feature! Except that I instantly imagined that this would be how I keep track of all those demo pages that I wanted to re-visit or remember existed. Any chance you could include the bookmark feature on the demo pages?</p>
     </div>
     
-    <ul data-role="actionsheet" id="flags" data-popup='{"direction": "left"}'>
+    <ul data-role="actionsheet" id="flags">
         <li class="km-actionsheet-title">Flag</li>
         <li><a href="#">Flag</a></li>
         <li><a href="#">Mark as Unread</a></li>
         <li><a href="#">Move to Junk</a></li>
     </ul>
     
-    <ul data-role="actionsheet" id="reply-options" data-popup='{"direction": "left"}'>
+    <ul data-role="actionsheet" id="reply-options">
         <li class="km-actionsheet-title">Reply</li>
         <li><a href="#">Reply</a></li>
         <li><a href="#">Reply to All</a></li>
         <li><a href="#">Forward</a></li>
     </ul>
     
-    <ul data-role="actionsheet" id="delete-confirm" data-popup='{"direction": "left"}'>
+    <ul data-role="actionsheet" id="delete-confirm">
         <li class="km-actionsheet-title">Delete</li>
         <li><a href="#">Delete</a></li>
     </ul>
@@ -85,14 +85,14 @@
         font-size: 1em;
     }
     
-    .km-up:after,
-    .km-up:before
+    .km-previous:after,
+    .km-previous:before
     {
         content: "\e011";
     }
     
-    .km-down:after,
-    .km-down:before
+    .km-next:after,
+    .km-next:before
     {
         content: "\e012";
     }
