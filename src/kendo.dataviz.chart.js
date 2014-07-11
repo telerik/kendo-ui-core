@@ -3902,6 +3902,76 @@ var __meta__ = {
             tooltip: {
                 format: "{1}"
             }
+        },
+
+        createLabel: function() {
+            var value = this.value;
+            var labels = this.options.labels;
+            var fromOptions = deepExtend({}, labels, labels.from);
+            var toOptions = deepExtend({}, labels, labels.to);
+
+            if (fromOptions.visible) {
+                this.labelFrom = this._createLabel(fromOptions);
+                this.append(this.labelFrom);
+            }
+
+            if (toOptions.visible) {
+                this.labelTo = this._createLabel(toOptions);
+                this.append(this.labelTo);
+            }
+        },
+
+        _createLabel: function(options) {
+            var labelText;
+        
+            if (options.template) {
+                var labelTemplate = template(options.template);
+                labelText = labelTemplate({
+                    dataItem: this.dataItem,
+                    category: this.category,
+                    value: this.value,
+                    percentage: this.percentage,
+                    runningTotal: this.runningTotal,
+                    total: this.total,
+                    series: this.series
+                });
+            } else {
+                labelText = this.formatValue(options.format);
+            }
+
+            return new BarLabel(labelText,
+                deepExtend({
+                    vertical: this.options.vertical,
+                    id: uniqueId()
+                },
+                options
+            ));
+        },
+
+        reflow: function(targetBox) {
+            this.render();
+
+            var rangeBar = this,
+                options = rangeBar.options,
+                labelFrom = rangeBar.labelFrom,
+                labelTo = rangeBar.labelTo,
+                value = rangeBar.value;
+
+            rangeBar.box = targetBox;
+
+            if (labelFrom) {
+                labelFrom.options.aboveAxis = rangeBar.value.from > rangeBar.value.to;
+                labelFrom.reflow(targetBox);
+            }
+
+            if (labelTo) {
+                labelTo.options.aboveAxis = rangeBar.value.to > rangeBar.value.from;
+                labelTo.reflow(targetBox);
+            }
+
+            if (rangeBar.note) {
+                rangeBar.note.reflow(targetBox);
+            }
         }
     });
 

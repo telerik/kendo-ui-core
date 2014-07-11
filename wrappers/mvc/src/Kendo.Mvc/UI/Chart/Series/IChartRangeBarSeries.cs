@@ -5,5 +5,7 @@
         string FromField { get; set; }
 
         string ToField { get; set; }
+
+        ChartRangeBarLabels RangeBarLabel { get; set; }
     }
 }

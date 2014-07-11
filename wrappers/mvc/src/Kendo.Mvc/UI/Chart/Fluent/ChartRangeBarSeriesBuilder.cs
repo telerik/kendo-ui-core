@@ -14,7 +14,13 @@
         public ChartRangeBarSeriesBuilder(IChartRangeBarSeries series)
             : base((IChartBarSeries)series)
         {
+            RangeBarSeries = series;
+        }
 
+        public IChartRangeBarSeries RangeBarSeries
+        {
+            get;
+            private set;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -39,6 +45,19 @@
         public override ChartBarSeriesBuilder<T> Aggregate(ChartSeriesAggregate aggregate)
         {
             return base.Aggregate(aggregate);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override ChartBarSeriesBuilder<T> Labels(Action<ChartBarLabelsBuilder> configurator)
+        {
+            return base.Labels(configurator);
+        }
+
+        public ChartRangeBarSeriesBuilder<T> Labels(Action<ChartRangeBarLabelsBuilder> configurator)
+        {
+            configurator(new ChartRangeBarLabelsBuilder(RangeBarSeries.RangeBarLabel));
+
+            return this;
         }
     }
 }
