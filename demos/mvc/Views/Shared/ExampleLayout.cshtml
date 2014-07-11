@@ -24,11 +24,16 @@
         <input id="example-search" placeholder="Search demos"/>
     </div>
 </div>
-
+<div id="example-nav-bar">
+    <a href="#" title="See all components" id="back-forward" class="back-nav">All Components</a>
+</div>
 <div id="nav-wrapper">
 
     <div id="nav">
+        
         <div id="root-nav">
+        
+
     @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
     {
         <ul class="root-nav-categories">
@@ -50,12 +55,11 @@
         </ul>
     }
         </div>
-
+        
         <div id="example-nav">
-            <a href="#" title="Back to all widgets" id="back-nav" class="k-uniE604"></a>
-
-        <h4>@ViewBag.CurrentWidget.Text</h4>
-        <ul>
+            
+        <h3>@ViewBag.CurrentWidget.Text</h3>
+            <ul>
             @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
             {
                 if (example.ShouldInclude(navProduct))
@@ -63,13 +67,24 @@
                     <li>@Html.ExampleLink(example)</li>
                 }
             }
-        </ul>
+            </ul>
         </div>
     </div>
 
     <script>
-        $("#back-nav").on("click", function(e) {
-            $("#nav").addClass("root");
+        $("#back-forward").on("click", function(e) {
+            if ($(this).hasClass("back-nav")) {
+                $(this).removeClass("back-nav").addClass("forward-nav").text("@ViewBag.CurrentWidget.Text").attr("title", "See @ViewBag.CurrentWidget.Text demos");
+                $("#nav").addClass("root");
+
+            }
+            else {
+                $(this).removeClass("forward-nav").addClass("back-nav").text("All Components").attr("title", "See all components");
+                $("#nav").removeClass("root");
+            }
+
+
+            
             e.preventDefault();
         });
 

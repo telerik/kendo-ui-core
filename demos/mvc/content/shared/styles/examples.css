@@ -27,7 +27,9 @@
 }
 
 [class^="k-uni"],
-.tc-activator:after {
+.tc-activator:after,
+.back-nav:before,
+.forward-nav:before {
     font-family: 'demos';
     speak: none;
     font-style: normal;
@@ -53,7 +55,9 @@
 .k-uniE603:before {
     content: "\e603";
 }
-.k-uniE604:before {
+.k-uniE604:before,
+.back-nav:before,
+.forward-nav:before {
     content: "\e604";
 }
 .k-external:before {
@@ -2123,19 +2127,63 @@ a.footer-links:hover,
     font-size: 14px;
     line-height: 14px;
     padding: 0.5em 0 0.5em 3.571em;
-}
-
-.root-nav-categories h3 {
     text-transform: uppercase;
 }
 
-#example-nav h4 {
+#example-nav h3 {
     color: #000;
-    font-size: 18px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 1.7em 0 0.5em 3.571em;
+}
+
+#example-nav-bar {
+    width: 299px;
+    float: left;
+    clear: left;
+    background-color: #f5f7f8;
+    border-right: 1px solid #e2e4e7;
+    border-top: 1px solid #e2e4e7;
+}
+
+
+#back-forward {
+    display: block;
+    position: relative;
+    color: #000;
+    font-size: 14px;
     line-height: 15px;
     font-weight: normal;
-    margin-top: -1.278em;
-    padding: 0.389em 0 1.222em 2.722em;
+    padding: 1em 3.5em;
+    vertical-align: middle;
+}
+
+#root-nav h4 a {
+    text-align: right;
+}
+
+.back-nav {
+  text-align: left;
+}
+.back-nav:before {
+    position: absolute;
+    top: 1em;
+    left: 1.2em;
+}
+
+.forward-nav {
+  text-align: left;
+}
+.forward-nav:before {
+    position: absolute;
+    display: block;
+    top: 1em;
+    right: 1.2em;
+    width: 14px;
+    height: 14px;
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
 
 .root-nav-categories {
@@ -2158,7 +2206,8 @@ a.footer-links:hover,
 }
 
 #root-nav li a:hover,
-#example-nav li a:hover {
+#example-nav li a:hover,
+#back-forward:hover {
     color: #000;
     text-decoration: none;
     background-color: #e2e4e7;
@@ -2172,18 +2221,6 @@ a.footer-links:hover,
 #example-nav .active {
     background-color: #e2e4e7;
     cursor: default;
-}
-
-#back-nav {
-    color: #2d3e50;
-    font-size: 18px;
-    display: inline-block;
-    margin-top: 0.818em;
-    margin-left: 1.045em;
-}
-
-#back-nav:hover {
-    text-decoration: none;
 }
 
 /* Demos */
@@ -2285,7 +2322,7 @@ a.footer-links:hover,
 }
 
 #nav #root-nav {
-    height: 10px;
+    height: 40px;
     overflow: hidden;
 }
 
