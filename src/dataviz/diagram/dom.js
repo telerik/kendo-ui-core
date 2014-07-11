@@ -1358,11 +1358,6 @@
                     offsetX: 20,
                     offsetY: 20
                 },
-
-                selectable: { // none, extended, multiple
-                    type: MULTIPLE,
-                    inclusive: true
-                },
                 snap: {
                     enabled: true,
                     size: 10,
