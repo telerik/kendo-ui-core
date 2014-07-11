@@ -1860,6 +1860,9 @@
 
         var Selector = Class.extend({
             init: function (diagram) {
+                var selectable = diagram.options.selectable;
+                this.options = deepExtend({}, this.options, selectable);
+
                 this.visual = new Rectangle(this.options);
                 this.diagram = diagram;
             },

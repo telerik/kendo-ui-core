@@ -293,6 +293,32 @@
 
     })();
 
+    (function() {
+        var Selector = diagram.Selector;
+        var selector;
+        module("Selector", {});
+
+        test("Selector extends its visual options with diagram selectable options", function() {
+            var diagram = {
+                options: {
+                    selectable: {
+                        stroke: {
+                            color: "#919191"
+                        },
+                        fill: {
+                            color: "#919191"
+                        }
+                    }
+                }
+            };
+            selector = new Selector(diagram);
+            var rectangle = selector.visual;
+            var options = rectangle.options;
+            equal(options.stroke.color, "#919191");
+            equal(options.fill.color, "#919191");
+        });
+    })();
+
     // ------------------------------------------------------------
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: setup,
