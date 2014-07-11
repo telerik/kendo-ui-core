@@ -382,7 +382,7 @@
                 }
             },
             _canSelect: function () {
-                return this.options.selectable && this.diagram.options.selectable.type !== NONE;
+                return this.options.selectable !== false;
             }
         });
 
@@ -581,20 +581,16 @@
                 return clone;
             },
             select: function (value) {
-                var diagram = this.diagram, selected, deselected, type;
+                var diagram = this.diagram, selected, deselected;
                 if (isUndefined(value)) {
                     value = true;
                 }
                 if (this._canSelect()) {
                     if (this.isSelected != value) {
-                        type = this.diagram.options.selectable.type;
                         selected = [];
                         deselected = [];
                         this.isSelected = value;
                         if (this.isSelected) {
-                            if (type === SINGLE) {
-                                this.diagram.deselect();
-                            }
                             diagram._selectedItems.push(this);
                             selected.push(this);
                         } else {
