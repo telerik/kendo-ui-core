@@ -627,10 +627,15 @@
                 return true; // the pointer tool is last and handles all others requests.
             },
             start: function (p, meta) {
-                var diagram = this.toolService.diagram,
-                    hoveredItem = this.toolService.hoveredItem;
+                var toolService = this.toolService,
+                    diagram = toolService.diagram,
+                    hoveredItem = toolService.hoveredItem,
+                    selectable = diagram.options.selectable !== false;
+
                 if (hoveredItem) {
-                    selectSingle(hoveredItem, meta);
+                    if (selectable) {
+                        selectSingle(hoveredItem, meta);
+                    }
                     if (hoveredItem.adorner) { //connection
                         this.adorner = hoveredItem.adorner;
                         this.handle = this.adorner._hitTest(p);
@@ -1953,7 +1958,8 @@
             ConnectionRouterBase: ConnectionRouterBase,
             PolylineRouter: PolylineRouter,
             CascadingRouter: CascadingRouter,
-            SelectionTool: SelectionTool
+            SelectionTool: SelectionTool,
+            PointerTool: PointerTool
         });
 })(window.kendo.jQuery);
 
