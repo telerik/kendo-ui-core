@@ -2444,10 +2444,6 @@
                     Utils.remove(this.connections, connection);
                 }
             },
-            _canRectSelect: function () {
-                var type = this.options.selectable.type;
-                return type === MULTIPLE;
-            },
 
             _removeDataItems: function(items, recursive) {
                 var item, children, shape, idx;

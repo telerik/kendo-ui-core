@@ -241,6 +241,58 @@
         });
     })();
 
+    (function() {
+        var SelectionTool = diagram.SelectionTool;
+        var toolservice;
+        var selectiontool;
+
+        function setupTool(options) {
+            setupDiagram(options);
+            toolservice = d.toolService;
+            for (var i = 0; i < toolservice.tools.length; i++) {
+                if (toolservice.tools[i] instanceof SelectionTool) {
+                    selectiontool = toolservice.tools[i];
+                    break;
+                }
+            }
+        }
+
+        module("SelectionTool", {
+            teardown: teardown
+        });
+
+        test("does not activate if diagram is not selectable", function() {
+            setupTool({
+                selectable: false
+            });
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("activates if diagram is selectabel", function() {
+            setupTool({
+                selectable: true
+            });
+            ok(selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("does not activate if there is a hovered item", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredItem = {};
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+        test("does not activate if there is a hovered adorner", function() {
+            setupTool({
+                selectable: true
+            });
+            toolservice.hoveredAdorner = {};
+            ok(!selectiontool.tryActivate(new Point(), {}));
+        });
+
+    })();
+
     // ------------------------------------------------------------
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: setup,

@@ -5,7 +5,8 @@
     (function ($, undefined) {
         // Imports ================================================================
         var kendo = window.kendo,
-            diagram = kendo.dataviz.diagram,
+            dataviz = kendo.dataviz,
+            diagram = dataviz.diagram,
             Class = kendo.Class,
             Group = diagram.Group,
             TextBlock = diagram.TextBlock,
@@ -20,6 +21,7 @@
             deepExtend = kendo.deepExtend,
             Movable = kendo.ui.Movable,
             browser = kendo.support.browser,
+            defined = dataviz.defined,
 
             proxy = $.proxy;
         // Constants ==============================================================
@@ -684,7 +686,10 @@
                 this.toolService = toolService;
             },
             tryActivate: function (p, meta) {
-                return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
+                var toolService = this.toolService;
+                var diagram = toolService.diagram;
+                var selectable = diagram.options.selectable !== false;
+                return selectable && !defined(toolService.hoveredItem) && !defined(toolService.hoveredAdorner);
             },
             start: function (p) {
                 var diagram = this.toolService.diagram;
