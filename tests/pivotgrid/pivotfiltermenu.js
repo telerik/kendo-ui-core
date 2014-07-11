@@ -32,6 +32,27 @@
         return new PivotFilterMenu(div, options);
     }
 
+    function createDataSource() {
+        return new kendo.data.PivotDataSource({
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: []
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+    }
+
     test("kendoPivotFilterMenu attaches a filter menu object to target", function() {
         var menu = $(div).kendoPivotFilterMenu({ });
 
@@ -616,12 +637,132 @@
         equal(filterForm.find(".k-button").length, 2);
     });
 
-    /*test("add label filte form on menu init", function() {
+    test("create a dropdownlist for operators", function() {
         var filterMenu = createMenu();
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var select = filterItem.find("select");
 
-        filterMenu.menu.open();
-        filterMenu.menu.element.find(".k-include-item").click();
+        ok(select.data("kendoDropDownList"));
+    });
 
-        ok(filterMenu.includeWindow.element.is(":visible"));
-    });*/
+    test("filter data source on filter button click", function() {
+        var filterMenu = createMenu();
+        var dataSource = filterMenu.dataSource;
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        filterItem.find("select").data("kendoDropDownList").value("eq");
+        filterItem.find("input").val("chai");
+
+        stub(dataSource, "filter");
+
+        filterItem.find(".k-button-filter").click();
+
+        var expression = dataSource.args("filter")[0].filters[0];
+
+        equal(expression.field, filterMenu.currentMember);
+        equal(expression.operator, "eq");
+        equal(expression.value, "chai");
+    });
+
+    test("do not filter data source if no value", function() {
+        var filterMenu = createMenu();
+        var dataSource = filterMenu.dataSource;
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        filterItem.find("select").data("kendoDropDownList").value("eq");
+        filterItem.find("input").val("");
+
+        stub(dataSource, "filter");
+
+        filterItem.find(".k-button-filter").click();
+
+        ok(!dataSource.calls("filter"));
+    });
+
+    test("filter form removes existing filter before filter", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: filterMenu.currentMember,
+            operator: "eq",
+            value: "test"
+        });
+
+        filterItem.find("select").data("kendoDropDownList").value("eq");
+        filterItem.find("input").val("chai");
+
+        filterItem.find(".k-button-filter").click();
+
+        var filters = dataSource.filter().filters;
+
+        equal(filters.length, 1);
+        equal(filters[0].field, filterMenu.currentMember);
+        equal(filters[0].operator, "eq");
+        equal(filters[0].value, "chai");
+    });
+
+    test("filter form preserves filters on 'in' operators", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: filterMenu.currentMember,
+            operator: "in",
+            value: "test"
+        });
+
+        filterItem.find("select").data("kendoDropDownList").value("contains");
+        filterItem.find("input").val("chai");
+
+        filterItem.find(".k-button-filter").click();
+
+        var filters = dataSource.filter().filters;
+
+        equal(filters.length, 2);
+        equal(filters[0].field, filterMenu.currentMember);
+        equal(filters[0].operator, "in");
+        equal(filters[0].value, "test");
+
+        equal(filters[1].field, filterMenu.currentMember);
+        equal(filters[1].operator, "contains");
+        equal(filters[1].value, "chai");
+    });
+
+    test("clear filter on clear button click", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: filterMenu.currentMember,
+            operator: "eq",
+            value: "test"
+        });
+
+        filterItem.find(".k-button-clear").click();
+
+        var filters = dataSource.filter();
+
+        ok(!filters);
+    });
+
+    test("reset form on clear button click", function() {
+        var dataSource = createDataSource();
+        var filterMenu = createMenu({ dataSource: dataSource });
+        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+
+        dataSource.filter({
+            field: filterMenu.currentMember,
+            operator: "eq",
+            value: "test"
+        });
+
+        filterItem.find(".k-button-clear").click();
+
+        equal(filterItem.find("select").val(), "contains");
+        equal(filterItem.find("input").val(), "");
+    });
 })();

@@ -77,10 +77,83 @@ var __meta__ = {
 
             this._createWindow();
 
-            //TODO: wire filter/cancel buttons in label search
-            /*that.form
-                .on("submit" + NS, proxy(that._submit, that))
-                .on("reset" + NS, proxy(that._reset, that)); */
+            this._initFilterForm();
+        },
+
+        _initFilterForm: function() {
+            var filterForm = this.menu.element.find(".k-filter-item");
+
+            this._filterOperator = new kendo.ui.DropDownList(filterForm.find("select"));
+            this._filterValue = filterForm.find(".k-textbox");
+
+            filterForm
+                .on("click" + NS, ".k-button-filter", proxy(this._filter, this))
+                .on("click" + NS, ".k-button-clear", proxy(this._reset, this));
+        },
+
+        _setFilterForm: function(expression) {
+            var operator = "";
+            var value = "";
+
+            if (expression) {
+                operator = expression.operator;
+                value = expression.value;
+            }
+
+            this._filterOperator.value(operator);
+            this._filterValue.val(value);
+        },
+
+        _clearFilters: function(member) {
+            var filter = this.dataSource.filter() || {};
+            var expressions;
+            var idx = 0;
+            var length;
+
+            filter.filters = filter.filters || [];
+            expressions = findFilters(filter, member);
+
+            for (length = expressions.length; idx < length; idx++) {
+                filter.filters.splice(filter.filters.indexOf(expressions[idx]), 1);
+            }
+
+            return filter;
+        },
+
+        _filter: function() {
+            var that = this;
+            var value = that._filterValue.val();
+
+            if (!value) {
+                //TODO: close form
+                return;
+            }
+
+            var expression = {
+                field: that.currentMember,
+                operator: that._filterOperator.value(),
+                value: value
+            };
+            var filter = that._clearFilters(that.currentMember);
+
+            filter.filters.push(expression);
+
+            that.dataSource.filter(filter);
+
+            //TODO: close form
+        },
+
+        _reset: function() {
+            var filter = this._clearFilters(this.currentMember);
+
+            if (!filter.filters[0]) {
+                filter = {};
+            }
+
+            this.dataSource.filter(filter);
+            this._setFilterForm(null);
+
+            //TODO: close form
         },
 
         _dataSource: function() {
@@ -110,7 +183,7 @@ var __meta__ = {
             var view = this.treeView.dataSource.view();
             var rootChecked = view[0].checked;
             var filter = this.dataSource.filter();
-            var existingExpression = findFilter(filter, this.currentMember);
+            var existingExpression = findFilters(filter, this.currentMember, "in")[0];
 
             checkedNodeIds(view, checkedNodes);
 
@@ -215,7 +288,10 @@ var __meta__ = {
             }
 
             var attr = kendo.attr("name");
+            var expression;
+
             this.currentMember = $(e.event.target).closest("[" + attr + "]").attr(attr);
+            this._setFilterForm(findFilters(this.dataSource.filter(), this.currentMember)[0]);
         },
 
         _select: function(e) {
@@ -260,26 +336,32 @@ var __meta__ = {
         }
     });
 
-    function findFilter(filter, member) {
+    function findFilters(filter, member, operator) {
         if (!filter) {
-            return;
+            return [];
         }
 
         filter = filter.filters;
-        var idx = 0, length = filter.length;
+
+        var idx = 0;
+        var result = [];
+        var length = filter.length;
+        var filterOperator;
 
         for ( ; idx < length; idx++) {
-            if (filter[idx].operator === "in" && filter[idx].field === member) {
-                return filter[idx];
+            filterOperator = filter[idx].operator;
+
+            if (((!operator && filterOperator !== "in") || (filterOperator === operator)) && filter[idx].field === member) {
+                result.push(filter[idx]);
             }
         }
 
-        return;
+        return result;
     }
 
     function checkNodes(filter, member, nodes) {
         var values, idx = 0, length = nodes.length;
-        filter = findFilter(filter, member);
+        filter = findFilters(filter, member, "in")[0];
 
         if (!filter) {
             for (; idx < length; idx++) {
@@ -310,15 +392,15 @@ var __meta__ = {
     var LABELMENUTEMPLATE =
             '<div>' +
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
-                '<select data-#=ns#bind="value: filters[0].operator" data-#=ns#role="dropdownlist">'+
+                '<select>'+
                     '#for(var op in operators){#'+
                         '<option value="#=op#">#=operators[op]#</option>' +
                     '#}#'+
                 '</select>'+
-                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" />'+
+                '<input class="k-textbox" type="text" />'+
                 '<div>'+
-                '<button type="submit" class="k-button k-primary">#=messages.filter#</button>'+
-                '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                '<a class="k-button k-primary k-button-filter" href="\\#">#=messages.filter#</a>'+
+                '<a class="k-button k-button-clear" href="\\#">#=messages.clear#</a>'+
                 '</div>'+
             '</div>';
 
