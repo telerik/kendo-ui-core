@@ -33,11 +33,11 @@
                     }
                 },
                 valueField: "value",
-                textField: "name",
-                type: "vertical"
+                textField: "name"
             });
         }
 
         $(document).ready(treeMap);
+        $(document).bind("kendo:skinChange", treeMap);
     </script>
 </div>

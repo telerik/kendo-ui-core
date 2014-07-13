@@ -815,7 +815,7 @@ var __meta__ = {
             }
         },
         treeMap: {
-            color: [
+            colors: [
                 ["#0069a5", "#bad7e7"],
                 ["#0098ee", "#b9e0f5"],
                 ["#7bd2f6", "#ceeaf6"],

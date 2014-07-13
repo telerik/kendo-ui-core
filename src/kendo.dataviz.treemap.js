@@ -37,6 +37,9 @@ var __meta__ = {
 
     var TreeMap = Widget.extend({
         init: function(element, options) {
+            kendo.destroy(element);
+            $(element).empty();
+
             Widget.fn.init.call(this, element, options);
 
             this.bind(this.events, this.options);
@@ -126,9 +129,9 @@ var __meta__ = {
                     root.children = [];
 
                     if (!defined(root.minColor) && !defined(root.maxColor)) {
-                        colors = options.colors;
+                        colors = options.colors || [];
                     } else {
-                        colors = colorsByLength(root.minColor, root.maxColor, items.length);
+                        colors = colorsByLength(root.minColor, root.maxColor, items.length) || [];
                     }
 
                     for (i = 0; i < items.length; i++) {
