@@ -108,10 +108,10 @@ var __meta__ = {
 
         setDataSource: function(dataSource) {
             var that = this;
-            that.dataSource.unbind(CHANGE, that._onDataChange);
+            that.dataSource.unbind(CHANGE, that._dataChangeHandler);
             that.dataSource = dataSource;
 
-            dataSource.bind(CHANGE, that._onDataChange);
+            dataSource.bind(CHANGE, that._dataChangeHandler);
 
             if (dataSource) {
                 if (that.options.autoBind) {
