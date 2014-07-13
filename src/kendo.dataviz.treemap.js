@@ -106,6 +106,19 @@ var __meta__ = {
             }
         },
 
+        setDataSource: function(dataSource) {
+            this.dataSource.unbind(CHANGE, this._onDataChange);
+            this.dataSource = dataSource;
+
+            dataSource.bind(CHANGE, this._onDataChange);
+
+            if (dataSource) {
+                if (this.options.autoBind) {
+                    this.dataSource.fetch();
+                }
+            }
+        },
+
         _onDataChange: function(e) {
             var node = e.node;
             var items = e.items;
