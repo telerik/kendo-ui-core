@@ -68,7 +68,9 @@ var __meta__ = {
         options: {
             name: "TreeMap",
             theme: "default",
-            autoBind: true
+            autoBind: true,
+            textField: "",
+            valueField: ""
         },
 
         events: [DATA_BOUND, ITEM_CREATED],
@@ -265,6 +267,10 @@ var __meta__ = {
             }
 
             kendo.destroy(this.element);
+        },
+
+        items: function() {
+            return $();
         }
     });
 
