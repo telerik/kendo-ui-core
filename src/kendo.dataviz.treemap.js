@@ -107,14 +107,15 @@ var __meta__ = {
         },
 
         setDataSource: function(dataSource) {
-            this.dataSource.unbind(CHANGE, this._onDataChange);
-            this.dataSource = dataSource;
+            var that = this;
+            that.dataSource.unbind(CHANGE, that._onDataChange);
+            that.dataSource = dataSource;
 
-            dataSource.bind(CHANGE, this._onDataChange);
+            dataSource.bind(CHANGE, that._onDataChange);
 
             if (dataSource) {
-                if (this.options.autoBind) {
-                    this.dataSource.fetch();
+                if (that.options.autoBind) {
+                    that.dataSource.fetch();
                 }
             }
         },
