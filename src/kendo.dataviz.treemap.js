@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "TreeMap",
     category: "dataviz",
     description: "",
-    depends: [ "data", "userevents", "dataviz.core" ]
+    depends: [ "data", "userevents", "dataviz.core", "dataviz.themes" ]
 };
 
 (function($, undefined) {
@@ -40,6 +40,7 @@ var __meta__ = {
             Widget.fn.init.call(this, element, options);
 
             this.bind(this.events, this.options);
+            this._initTheme();
 
             this.element.addClass("k-widget k-treemap");
 
@@ -63,11 +64,21 @@ var __meta__ = {
 
         options: {
             name: "TreeMap",
-            autoBind: true,
-            colors: []
+            theme: "default",
+            autoBind: true
         },
 
         events: [DATA_BOUND, ITEM_CREATED],
+
+        _initTheme: function() {
+            var that = this,
+                themes = dataviz.ui.themes || {},
+                themeName = ((that.options || {}).theme || "").toLowerCase(),
+                themeOptions = (themes[themeName] || {}).treeMap;
+            console.log(themeName);
+
+            that.options = deepExtend({}, themeOptions, that.options);
+        },
 
         _attachEvents: function() {
             this.element

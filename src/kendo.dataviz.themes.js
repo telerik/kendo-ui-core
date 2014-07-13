@@ -362,6 +362,7 @@ var __meta__ = {
             result.chart = deepExtend({}, chartBaseTheme, options.chart);
             result.gauge = deepExtend({}, gaugeBaseTheme, options.gauge);
             result.diagram = deepExtend({}, diagramBaseTheme, options.diagram);
+            result.treeMap = deepExtend({}, options.treeMap);
 
             // Copy the line/area chart settings for their vertical counterparts
             var defaults = result.chart.seriesDefaults;
@@ -607,6 +608,15 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#0081da", "#314b5c"],
+                ["#3aafff", "#3c5464"],
+                ["#99c900", "#4f5931"],
+                ["#ffeb3d", "#64603d"],
+                ["#b20753", "#543241"],
+                ["#ff4195", "#643e4f"]]
         }
     });
 
@@ -803,6 +813,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            color: [
+                ["#0069a5", "#bad7e7"],
+                ["#0098ee", "#b9e0f5"],
+                ["#7bd2f6", "#ceeaf6"],
+                ["#ffb800", "#e6e3c4"],
+                ["#ff8517", "#e4d8c8"],
+                ["#e34a00", "#ddccc2"]
+            ]
         }
     });
 
@@ -1043,6 +1063,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#a7008f", "#451c3f"],
+                ["#ffb800", "#564122"],
+                ["#3aafff", "#2f3f55"],
+                ["#99c900", "#424422"],
+                ["#b20753", "#471d33"],
+                ["#ff4195", "#562940"]
+            ]
         }
     });
 
@@ -1239,6 +1269,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#ff6800", "#edcfba"],
+                ["#a0a700", "#dadcba"],
+                ["#ff8d00", "#edd7ba"],
+                ["#678900", "#cfd6ba"],
+                ["#ffb53c", "#eddfc6"],
+                ["#396000", "#c6ceba"]
+            ]
         }
     });
 
@@ -1460,6 +1500,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#007bc3", "#c2dbea"],
+                ["#76b800", "#dae7c3"],
+                ["#ffae00", "#f5e5c3"],
+                ["#ef4c00", "#f2d2c3"],
+                ["#a419b7", "#e3c7e8"],
+                ["#430b62", "#d0c5d7"]
+            ]
         }
     });
 
@@ -1660,6 +1710,20 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#8ebc00", "#e8f2cc"],
+                ["#309b46", "#d6ebda"],
+                ["#25a0da", "#d3ecf8"],
+                ["#ff6900", "#ffe1cc"],
+                ["#e61e26", "#fad2d4"],
+                ["#d8e404", "#f7facd"],
+                ["#16aba9", "#d0eeee"],
+                ["#7e51a1", "#e5dcec"],
+                ["#313131", "#d6d6d6"],
+                ["#ed1691", "#fbd0e9"]
+            ]
         }
     });
 
@@ -1881,6 +1945,20 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#00aba9", "#0b2d2d"],
+                ["#309b46", "#152a19"],
+                ["#8ebc00", "#28310b"],
+                ["#ff6900", "#3e200b"],
+                ["#e61e26", "#391113"],
+                ["#d8e404", "#36390c"],
+                ["#25a0da", "#132b37"],
+                ["#7e51a1", "#241b2b"],
+                ["#313131", "#151515"],
+                ["#ed1691", "#3b1028"]
+            ]
         }
     });
 
@@ -2130,8 +2208,19 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#ffca08", "#4e4b2b"],
+                ["#ff710f", "#4e392d"],
+                ["#ed2e24", "#4b2c31"],
+                ["#ff9f03", "#4e422a"],
+                ["#e13c02", "#482e2a"],
+                ["#a00201", "#3b232a"]
+            ]
         }
     });
+
     registerTheme("uniform", {
         chart: {
             title: {
@@ -2378,6 +2467,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#527aa3", "#d0d8e1"],
+                ["#6f91b3", "#d6dde4"],
+                ["#8ca7c2", "#dce1e7"],
+                ["#a8bdd1", "#e2e6ea"],
+                ["#c5d3e0", "#e7eaed"],
+                ["#e2e9f0", "#edeff0"]
+            ]
         }
     });
 
@@ -2632,6 +2731,16 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#428bca", "#d1e0ec"],
+                ["#5bc0de", "#d6eaf0"],
+                ["#5cb85c", "#d6e9d6"],
+                ["#5cb85c", "#f4e8d7"],
+                ["#e67d4a", "#f2ddd3"],
+                ["#da3b36", "#f0d0cf"]
+            ]
         }
     });
 
@@ -2838,6 +2947,17 @@ var __meta__ = {
                     }
                 }
             }
+        },
+        treeMap: {
+            colors: [
+                ["#10c4b2", "#cff3f0"],
+                ["#ff7663", "#ffe4e0"],
+                ["#ffb74f", "#fff1dc"],
+                ["#a2df53", "#ecf9dd"],
+                ["#1c9ec4", "#d2ecf3"],
+                ["#ff63a5", "#ffe0ed"],
+                ["#1cc47b", "#d2f3e5"]
+            ]
         }
     });
 
