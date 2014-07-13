@@ -1453,7 +1453,7 @@
                 var that = this;
                 var diagram = that.diagram;
                 var selectable = diagram.options.selectable;
-                var options = deepExtend({}, that.options.selectable, selectable)
+                var options = deepExtend({}, that.options.selectable, selectable);
                 that.rect = new Rectangle(options);
                 that.visual.append(that.rect);
             },

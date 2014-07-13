@@ -75,7 +75,6 @@ var __meta__ = {
                 themes = dataviz.ui.themes || {},
                 themeName = ((that.options || {}).theme || "").toLowerCase(),
                 themeOptions = (themes[themeName] || {}).treeMap;
-            console.log(themeName);
 
             that.options = deepExtend({}, themeOptions, that.options);
         },
