@@ -7646,8 +7646,25 @@
         "meta": {
             "kendo-ui": ""
         }
-      },
-      {
+      },{
+        "text": "Events",
+        "url": "treemap/events",
+        "title": {
+			"kendo-ui": "Events in Kendo UI TreeMap"
+        },
+        "meta": {
+            "kendo-ui": ""
+        }
+      },{
+        "text": "MVVM",
+        "url": "treemap/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI TreeMap"
+        },
+        "meta": {
+            "kendo-ui": ""
+        }
+      },{
         "text": "AngularJS",
         "url": "treemap/angular",
         "title": {
