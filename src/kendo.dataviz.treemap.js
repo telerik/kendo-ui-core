@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.themes" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "TreeMap",
     category: "dataviz",
     description: "",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.themes" ]
+    depends: [ "data", "userevents", "dataviz.themes" ]
 };
 
 (function($, undefined) {
