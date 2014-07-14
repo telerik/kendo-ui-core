@@ -3274,6 +3274,9 @@
   <ItemGroup>
     <Content Include="Areas\razor\Views\grid\filter_row.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\grid\filter_row.aspx" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
