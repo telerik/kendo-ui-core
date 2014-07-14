@@ -7838,6 +7838,16 @@
             "kendo-ui": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component."
         }
       },
+	  {
+        "text": "Events",
+        "url": "diagram/events",
+        "title": {
+            "kendo-ui": "Example of using events in Kendo UI Diagram control"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates different events which are available in Kendo UI Diagram widget."
+        }
+      },
       {
         "text": "MVVM",
         "url": "diagram/mvvm",

@@ -1,0 +1,190 @@
+﻿        
+        <div id="example">
+            
+            <div id="diagram"></div>
+
+            <script>
+                function createDiagram() {
+                    $("#diagram").kendoDiagram({
+                        dataSource: new kendo.data.HierarchicalDataSource({
+                            data: data,
+                            schema: {
+                                model: {
+                                    children: "items"
+                                }
+                            }
+                        }),
+                        layout: {
+                            type: "layered"
+                        },
+                        shapeDefaults: {
+                            visual: visualTemplate
+                        },
+                        connectionDefaults: {
+                            stroke: {
+                                color: "#979797",
+                                width: 2
+                            }
+                        },
+                        itemBoundsChange: onItemBoundsChange,
+                        itemRotate: onItemRotate,
+                        pan: onPan,
+                        select: onSelect,
+                        zoomStart: onZoomStart,
+                        zoomEnd: onZoomEnd,
+                        click: onClick
+
+                    });
+
+                    var diagram = $("#diagram").getKendoDiagram();
+                    diagram.bringIntoView(diagram.shapes);
+                }
+
+                function onItemBoundsChange(e) {
+                    var bounds = e.bounds;
+                    kendoConsole.log("Bounds change: x:" + bounds.x + "; y: " + bounds.y + "; width" + bounds.width + "; height" + bounds.height);
+                }
+
+                function onItemRotate(e) {
+                    var rotation = e.item.rotate();
+                    kendoConsole.log("Rotate: " + rotation.angle);
+                }
+
+                function onPan(e) {
+                    kendoConsole.log("Pan: " + e.pan.toString());
+                }
+
+                function onSelect(e) {
+                    var action;
+                    var items;
+                    if (e.selected.length) {
+                        action = "Selected";
+                        items = e.selected;
+                    } else if (e.deselected.length) {
+                        action = "Deselected";
+                        items = e.deselected;
+                    }
+
+                    kendoConsole.log(action + ": " + items.length);
+                }
+
+                function onZoomStart(e) {
+                    kendoConsole.log("Zoom start: " + e.zoom);
+                }
+
+                function onZoomEnd(e) {
+                    kendoConsole.log("Zoom end: " + e.zoom);
+                }
+
+                var Shape = kendo.dataviz.diagram.Shape;
+
+                function onClick(e) {
+                    if (e.item instanceof Shape) {                        
+                        kendoConsole.log("Click Shape: " + itemName(e.item.dataItem));
+                    } else {
+                        var connection = e.item;
+                        var sourceShape = connection.source().shape;
+                        var targetShape = connection.target().shape;
+                        kendoConsole.log("Click Connection from: " + itemName(sourceShape.dataItem) + " to: " + itemName(targetShape.dataItem));
+                    }
+                }
+
+                function itemName(dataItem) {
+                    return dataItem ? dataItem.firstName + " " + dataItem.lastName : "";
+                }
+
+                var data = [{
+                    firstName: "Antonio",
+                    lastName: "Moreno",
+                    image: "antonio.jpg",
+                    title: "Team Lead",
+                    colorScheme: "#1696d3",
+                    items: [{
+                        firstName: "Elizabeth",
+                        image: "elizabeth.jpg",
+                        lastName: "Brown",
+                        title: "Design Lead",
+                        colorScheme: "#ef6944",
+                        items: [{
+                            firstName: "Ann",
+                            lastName: "Devon",
+                            image: "ann.jpg",
+                            title: "UI Designer",
+                            colorScheme: "#ef6944"
+                        }]
+                    }, {
+                        firstName: "Diego",
+                        lastName: "Roel",
+                        image: "diego.jpg",
+                        title: "QA Engineer",
+                        colorScheme: "#ee587b",
+                        items: [{
+                            firstName: "Fran",
+                            lastName: "Wilson",
+                            image: "fran.jpg",
+                            title: "QA Intern",
+                            colorScheme: "#ee587b"
+                        }]
+                    }, {
+                        firstName: "Felipe",
+                        lastName: "Izquiedro",
+                        image: "felipe.jpg",
+                        title: "Senior Developer",
+                        colorScheme: "#75be16",
+                        items: [{
+                            firstName: "Daniel",
+                            lastName: "Tonini",
+                            image: "daniel.jpg",
+                            title: "Developer",
+                            colorScheme: "#75be16"
+                        }]
+                    }]
+                }];
+
+                function visualTemplate(options) {
+                    var dataviz = kendo.dataviz;
+                    var g = new dataviz.diagram.Group();
+                    var dataItem = options.dataItem;
+
+                    g.append(new dataviz.diagram.Rectangle({
+                        width: 210,
+                        height: 75,
+                        stroke: {
+                            width: 0
+                        },
+                        fill: dataItem.colorScheme
+                    }));
+
+                    g.append(new dataviz.diagram.TextBlock({
+                        text: dataItem.firstName + " " + dataItem.lastName,
+                        x: 85,
+                        y: 20,
+                        color: "#fff"
+                    }));
+
+                    g.append(new dataviz.diagram.TextBlock({
+                        text: dataItem.title,
+                        x: 85,
+                        y: 40,
+                        color: "#fff"
+                    }));
+
+                    g.append(new dataviz.diagram.Image({
+                        source: "../content/dataviz/diagram/people/" + dataItem.image,
+                        x: 3,
+                        y: 3,
+                        width: 68,
+                        height: 68
+                    }));
+
+                    return g;
+                }
+
+                $(document).ready(createDiagram);
+            </script>
+            <div class="box">
+                <h4>Console log</h4>
+                <div class="console"></div>
+            </div>
+        </div>
+        
