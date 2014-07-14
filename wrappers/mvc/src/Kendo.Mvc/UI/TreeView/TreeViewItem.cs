@@ -68,6 +68,7 @@ namespace Kendo.Mvc.UI
             Serialize(json, "imageUrl", ConvertUrl(this.ImageUrl, urlHelper), null);
             Serialize(json, "url", ConvertUrl(this.Url, urlHelper), null);
             Serialize(json, "spriteCssClass", this.SpriteCssClasses, null);
+            Serialize(json, "enabled", this.Enabled, true);
 
             if (Items.Count > 0)
             {
