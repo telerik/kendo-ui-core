@@ -2453,6 +2453,14 @@ var __meta__ = {
             this.dataSource.unbind(CHANGE, this._refreshHandler);
             this.element.off(NS);
 
+            if (this.sortable) {
+                this.sortable.destroy();
+            }
+
+            if (this.fieldMenu) {
+                this.fieldMenu.destroy();
+            }
+
             this.element = null;
             this._refreshHandler = null;
         }

@@ -21,6 +21,8 @@ var __meta__ = {
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        ns = ".kendoPivotConfigurator",
+        HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon #=icon#"></span>${name}</p>' +
                 '<div class="k-list-container k-reset"/>');
 
@@ -181,10 +183,11 @@ var __meta__ = {
         },
 
         _createTarget: function(element, options) {
-            var filter = options.filterable ? '<span class="k-icon k-filter k-setting-filter">' : '';
+            var filter = options.filterable ? '<span class="k-icon k-filter k-setting-filter"></span>' : '';
             return new kendo.ui.PivotSettingTarget(element, $.extend({
                 dataSource: this.dataSource,
-                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}' + filter + '</span><span class="k-icon k-si-close k-setting-delete"></span></li>',
+                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-field-actions">' +
+                            filter + '<span class="k-icon k-si-close k-setting-delete"></span></span></li>',
                 emptyTemplate: '<li class="k-item k-empty">${data}</li>'
             }, options));
         },
@@ -226,6 +229,15 @@ var __meta__ = {
                     empty: this.options.messages.measures
                 }
             });
+
+            columns
+                .add(rows)
+                .add(measures)
+                .on(HOVEREVENTS, ".k-item:not(.k-empty)", this._toggleHover);
+        },
+
+        _toggleHover: function(e) {
+            $(e.currentTarget).toggleClass("k-state-hover", e.type === "mouseenter");
         },
 
         refresh: function() {
@@ -243,6 +255,13 @@ var __meta__ = {
             Widget.fn.destroy.call(this);
 
             this.dataSource.unbind("change", this._refreshHandler);
+
+            this.form.find(".k-list").off(ns);
+
+            this.rows.destroy();
+            this.columns.destroy();
+            this.measures.destroy();
+            this.treeView.destroy();
 
             this.element = null;
             this._refreshHandler = null;
