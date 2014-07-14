@@ -2634,14 +2634,19 @@ var __meta__ = {
 
         _createSettingTarget: function(element, options) {
             var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var icons = "";
 
             if (options.filterable) {
-                template += '<span class="k-icon k-filter k-setting-filter"></span>';
+                icons += '<span class="k-icon k-filter k-setting-filter"></span>';
+            }
+            if (this.options.reorderable) {
+                icons += '<span class="k-icon k-si-close k-setting-delete"></span>';
             }
 
-            if (this.options.reorderable) {
-                template += '<span class="k-icon k-si-close k-setting-delete"></span>';
+            if (icons) {
+                template += '<span class="k-field-actions">' + icons + '</span>';
             }
+
             template += '</span>';
 
             return new kendo.ui.PivotSettingTarget(element, $.extend({
