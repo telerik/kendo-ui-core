@@ -20,7 +20,7 @@
         /// Sets measure values.
         /// </summary>
         /// <param name="values">The measure values</param>
-        public PivotDataSourceMeasureBuilder Values(string[] values)
+        public PivotDataSourceMeasureBuilder Values(params string[] values)
         {
             measure.Values = values;
 

@@ -23,5 +23,19 @@
             builder.AutoBind(false);
             Assert.False(pivotGrid.AutoBind);
         }
+
+        [Fact]
+        public void Filterable_sets_the_corresponding_property()
+        {
+            builder.Filterable(true);
+            Assert.True(pivotGrid.Filterable);
+        }
+
+        [Fact]
+        public void Reorderable_sets_the_corresponding_property()
+        {
+            builder.Reorderable(false);
+            Assert.False(pivotGrid.Reorderable);
+        }
     }
 }

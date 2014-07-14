@@ -27,9 +27,20 @@
             private set;
         }
 
+        public bool Filterable
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
+
+            if (Filterable == true)
+            {
+                options["filterable"] = Filterable;
+            }
 
             writer.Write(Initializer.Initialize(Selector, "PivotConfigurator", options));
 

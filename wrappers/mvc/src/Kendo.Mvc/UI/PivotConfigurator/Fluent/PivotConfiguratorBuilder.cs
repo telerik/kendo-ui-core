@@ -15,5 +15,16 @@
             : base(component)
         {
         }
+
+        /// <summary>
+        /// If set to true the user will be able to filter by using the field menu.
+        /// </summary>
+        /// <param name="filterable">The filterable</param>
+        public PivotConfiguratorBuilder Filterable(bool filterable)
+        {
+            Component.Filterable = filterable;
+
+            return this;
+        }
     }
 }

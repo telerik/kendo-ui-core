@@ -63,6 +63,12 @@
             set;
         }
 
+        public bool Filterable
+        {
+            get;
+            set;
+        }
+
         public bool AutoBind { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -92,6 +98,11 @@
             if (Reorderable == false)
             {
                 options["reorderable"] = Reorderable;
+            }
+
+            if (Filterable == true)
+            {
+                options["filterable"] = Filterable;
             }
 
             options["dataSource"] = DataSource.ToJson();

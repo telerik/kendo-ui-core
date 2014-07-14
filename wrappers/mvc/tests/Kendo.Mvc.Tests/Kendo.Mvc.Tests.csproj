@@ -188,6 +188,7 @@
     <Compile Include="UI\Map\Serialization\ZoomSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
+    <Compile Include="UI\PivotConfigurator\PivotConfiguratorBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaCubeBuilderTests.cs" />

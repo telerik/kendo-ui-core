@@ -74,6 +74,17 @@
         }
 
         /// <summary>
+        /// If set to true the user will be able to filter by using the field menu.
+        /// </summary>
+        /// <param name="filterable">The filterable</param>
+        public PivotGridBuilder<TModel> Filterable(bool filterable)
+        {
+            Component.Filterable = filterable;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the client-side events
         /// </summary>
         public PivotGridBuilder<TModel> Events(Action<PivotGridEventBuilder> configurator)
