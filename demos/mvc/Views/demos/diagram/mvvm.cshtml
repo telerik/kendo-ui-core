@@ -1,0 +1,87 @@
+﻿<div id="example">
+    <div class="demo-section">
+        <div class="box-col" style="width: 500px;">
+            <h4>Hover some series</h4>
+            <div id="diagram" data-role="diagram"
+                 data-editable="false" 
+                 data-layout='{"type": "tree", "subtype": "down", "horizontalSeparation": 30, "verticalSeparation": 30}'   
+                 data-shape-defaults='{"width": 40, "height": 40}'
+                 data-bind="visible: isVisible,
+                            source: dataSource,
+                            events: {select: onSelect}"></div>
+        </div>
+        <div class="box-col">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-col" style="width: 500px">
+            <h4>Configuration</h4>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="box-col">
+            <h4>Information</h4>
+            Kendo UI Diagram supports the
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.telerik.com/kendo-ui/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function diagramNodes() {
+        var root = { name: "item" + 0, items: [] };
+        addNodes(root, 1);
+        return [root];
+    }
+
+    function addNodes(root, level) {
+        if (level < 3) {
+            for (var i = 0; i <= level; i++) {
+                var node = { name: "item" + level + "." + (i + 1), items: [] };
+                root.items.push(node);
+
+                addNodes(node, level + 1);
+            }
+        }
+    }
+
+    function connectionText(connection) {
+        var source = connection.source(),
+            sourceName = source.shape.dataItem.name,
+            target = connection.target(),
+            targetName = target.shape.dataItem.name;
+        return sourceName + "-" + targetName;
+    }
+
+    function createDigaram() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSelect: function (e) {
+                var action;
+                var items;
+                if (e.selected.length) {
+                    action = "Selected";
+                    items = e.selected;
+                } else if (e.deselected.length) {
+                    action = "Deselected";
+                    items = e.deselected;
+                }
+                var selected = $.map(items, function (item) {
+                    return item.dataItem ? item.dataItem.name : connectionText(item);
+                });
+                kendoConsole.log(action + ": " + selected.length + " item(s), [" + selected.join(", ") + "]");
+            },
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: diagramNodes()
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createDigaram).bind("kendo:skinChange", createDigaram);
+
+</script>
+</div>

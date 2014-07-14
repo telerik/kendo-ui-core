@@ -7837,6 +7837,21 @@
         "meta": {
             "kendo-ui": "This sample demonstrates the built-in layouts which are specific to Kendo UI Diagram component."
         }
+      },
+      {
+        "text": "MVVM",
+        "url": "diagram/mvvm",
+        "title": {
+            "kendo-ui": "MVVM support in Kendo UI Diagram"
+        },
+        "meta": {
+            "kendo-ui": "Source, events and visible MVVM binding support in Kendo UI Diagram"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Diagramming"
