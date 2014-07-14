@@ -4,10 +4,19 @@ require_once '../lib/Kendo/Autoload.php';
 require_once '../include/header.php';
 
 $weather = new \Kendo\Dataviz\UI\ChartSeriesItem();
-$weather->data(array
-  (
-   array(5, 11), array(5, 13), array(7, 15), array(10, 19), array(13, 23), array(17, 28),
-   array(20, 30), array(20, 30), array(17, 26), array(13, 22), array(9, 16), array(6, 13)
+$weather
+  ->data(array(
+     array(5, 11), array(5, 13), array(7, 15), array(10, 19), array(13, 23), array(17, 28),
+     array(20, 30), array(20, 30), array(17, 26), array(13, 22), array(9, 16), array(6, 13)
+    ))
+  ->labels(array(
+    'visible' => true,
+    'from' => array(
+      'template' => "#=value.from# °C"
+    ),
+    'to' => array(
+      'template' => "#=value.to# °C"
+    )
   ));
 
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
