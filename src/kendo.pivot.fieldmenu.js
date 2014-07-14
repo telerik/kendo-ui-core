@@ -46,7 +46,8 @@ var __meta__ = {
             },
             messages: {
                 info: "Show items with value that:",
-                filter: "Fields Filter",
+                filterFields: "Fields Filter",
+                filter: "Filter",
                 include: "Include Fields...",
                 title: "Fields to include",
                 clear: "Clear",
@@ -417,7 +418,7 @@ var __meta__ = {
                         '<li class="k-item k-filter-item">'+
                             '<span class="k-link">'+
                                 '<span class="k-icon k-filter"></span>'+
-                                '${messages.filter}'+
+                                '${messages.filterFields}'+
                             '</span>'+
                             '<ul>'+
                                 '<li>' + LABELMENUTEMPLATE + '</li>'+
