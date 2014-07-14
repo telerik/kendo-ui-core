@@ -3320,6 +3320,16 @@
         }
       },
       {
+        "text": "Keyboard navigation",
+        "url": "gantt/keyboard-navigation",
+        "title": {
+            "kendo-ui": "Keyboard navigation in Kendo UI Gantt"
+        },
+        "meta": {
+            "kendo-ui": "Look at this Kendo UI Gantt demo to learn how different keyboard combinations could be used to navigate in the component."
+        }
+      },
+      {
         "text": "MVVM",
         "url": "gantt/mvvm",
         "title": {
