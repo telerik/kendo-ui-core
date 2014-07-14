@@ -671,7 +671,8 @@ var __meta__ = {
         },
 
         _createTitle: function(item) {
-            return $("<div class='k-treemap-title'></div>").text(this._getText(item));
+            return $("<div class='k-treemap-title'></div>")
+                    .append($("<div></div>").text(this._getText(item)));
         },
 
         _createWrap: function() {
@@ -836,7 +837,7 @@ var __meta__ = {
                 title = $("<div class='k-treemap-title-vertical'></div>");
             }
 
-            return title.text(this._getText(item));
+            return title.append($("<div></div>").text(this._getText(item)));
         }
     });
 
