@@ -243,7 +243,7 @@ td.k-group-cell,
 .k-alt .k-alt,
 .k-header.k-alt
 {
-    background-color: darken(@alt-background-color, 8%);
+    background-color: @nested-alt-background-color;
 }
 
 .k-textbox,
@@ -303,6 +303,11 @@ textarea.k-textbox:hover,
 .k-dropdown .k-input
 {
     color: @widget-text-color;
+}
+
+.k-inverse
+{
+    color: @inverse-text-color;
 }
 
 .k-block
@@ -1281,8 +1286,8 @@ div.k-filebrowser-dropzone em
 
 .k-task-summary
 {
-    border-color: lighten(@widget-text-color, 25%);
-    background: lighten(@widget-text-color, 25%);
+    border-color: @task-summary-color;
+    background: @task-summary-color;
 }
 
 .k-task-milestone,
@@ -1294,8 +1299,8 @@ div.k-filebrowser-dropzone em
 
 .k-state-selected.k-task-summary
 {
-    border-color: lighten(@selected-background-color, 25%);
-    background: lighten(@selected-background-color, 25%);
+    border-color: @task-summary-selected-color;
+    background: @task-summary-selected-color;
 }
 
 .k-state-selected.k-task-milestone,

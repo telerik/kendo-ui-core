@@ -5,8 +5,9 @@
 
 /* Widget Base Styles */
 @widget-text-color: #515967;
+@inverse-text-color: #fff;
 @widget-gradient: "rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 100%";
-@widget-background-color: #ffffff;
+@widget-background-color: #fff;
 @widget-border-color: #dbdbde;
 @widget-shadow: none;
 
@@ -89,8 +90,8 @@
 @notification-error-background-color: #ffe0d9;
 @notification-error-text-color: #ef470a;
 @notification-error-border-color: #ffb7a8;
-
 @notification-error-text-color: #ef470a;
+
 /* ToolTip */
 @tooltip-text-color: #fff;
 @tooltip-background-color: @selected-border-color;
@@ -115,6 +116,7 @@
 
 /* Grid */
 @alt-background-color: #f9f9f9;
+@nested-alt-background-color: darken(@alt-background-color, 8%);
 @cell-border-color: #dbdbde;
 @column-highlight-background-color: #fbfbfb;
 @active-filter-background-color: @active-background-color;
@@ -135,6 +137,11 @@
 @upload-success-text-color: #28760b;
 @upload-error-background-color: #ffded7;
 @upload-error-text-color: #c00;
+
+/* Gantt*/
+
+@task-summary-color: lighten(@widget-text-color, 25%);
+@task-summary-selected-color: lighten(@selected-background-color, 25%);
 
 /* Loading Indicators */
 @loading-panel-color: #fff;
