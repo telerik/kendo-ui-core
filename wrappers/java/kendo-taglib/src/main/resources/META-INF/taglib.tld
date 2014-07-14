@@ -36881,6 +36881,12 @@ The supported values are "odata" which supports the OData v.2 protocol and "sign
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+         <attribute>
+            <description>The array of data items which the data source contains. The data source will wrap those items as kendo.data.ObservableObject or kendo.data.Model (if schema.model is set).Can be set to a string value if the schema.type option is set to "xml".</description>
+            <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
         <attribute>
             <description>Fired when the data source is populated from a JavaScript array or a remote service, a data item is inserted, updated or removed, the data items are paged, sorted, filtered or grouped.The event handler function context (available via the this keyword) will be set to the data source instance.</description>
             <name>change</name>
@@ -37099,8 +37105,102 @@ return the measures schema information for the response. It is executed during t
         </attribute>
 
     </tag>
+    
+	<tag>
+        <description>PivotDataSource schema cube definition</description>
+        <name>pivotDataSource-schema-cube</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeTag</tag-class>
+        <body-content>JSP</body-content>       
+    </tag>
 
+    <tag>
+        <description>Configures cube dimensions</description>
+        <name>pivotDataSource-schema-cube-dimensions</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeDimensionsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
+    <tag>
+        <description>Defines a cube dimension</description>
+        <name>pivotDataSource-schema-cube-dimension</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeDimensionTag</tag-class>
+        <body-content>JSP</body-content>
+
+         <attribute>
+            <description>The mandatory and unique name of the dimension. The name of field from the data</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>The caption of the dimension.</description>
+            <name>caption</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+	 <tag>
+        <description>Configures cube measures</description>
+        <name>pivotDataSource-schema-cube-measures</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeMeasuresTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>Defines a cube measure</description>
+        <name>pivotDataSource-schema-cube-measure</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeMeasureTag</tag-class>
+        <body-content>JSP</body-content>
+
+         <attribute>
+            <description>The mandatory and unique name of the measure.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>The mandatory field used in the measure calculation.</description>
+            <name>field</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>The format.</description>
+            <name>format</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>The caption of the measure.</description>
+            <name>caption</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+         <attribute>
+            <description></description>
+            <name>aggregate</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    
+    <tag>
+        <description></description>
+        <name>pivotDataSource-schema-cube-measure-aggregate</name>
+        <tag-class>com.kendoui.taglib.pivotdatasource.SchemaCubeMeasureAggregateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    
     <tag>
         <description>The field from the server response which contains the columns and rows axes data. Can be set to a function which is called to
 return the columns and rows axes data for the response.</description>

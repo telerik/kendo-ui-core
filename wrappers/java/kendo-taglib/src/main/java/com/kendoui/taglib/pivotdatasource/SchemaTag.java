@@ -145,6 +145,14 @@ public class SchemaTag extends  com.kendoui.taglib.datasource.SchemaTag  /* inte
         setProperty("measures", value);
     }
 
+    public java.lang.Object getCube() {
+        return (java.lang.Object)getProperty("cube");
+    }
+
+    public void setCube(java.lang.Object value) {
+        setProperty("cube", value);
+    }
+
 //<< Attributes
 
 }
