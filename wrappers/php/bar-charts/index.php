@@ -30,7 +30,7 @@ $chart->addSeriesItem($total, $unique)
       ->addCategoryAxisItem($categoryAxis)
       ->legend(array('visible' => false))
       ->seriesDefaults(array('type' => 'bar'))
-      ->title(array('text' => 'Site Visitors Stats /thousands/'))
+      ->title(array('text' => 'Site Visitors Stats \n /thousands/'))
       ->chartArea(array('background' => 'transparent'))
       ->tooltip($tooltip);
 

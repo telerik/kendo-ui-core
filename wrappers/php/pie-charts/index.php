@@ -17,7 +17,7 @@ $series->type('pie')
             'visible' => true,
             'background' => 'transparent',
             'position' => 'outsideEnd',
-            'template' => '#= category #: #= value#%'
+            'template' => '#= category #: \n #= value#%'
         ));
 
 $chart = new \Kendo\Dataviz\UI\Chart('chart');

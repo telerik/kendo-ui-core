@@ -51,7 +51,7 @@ $dataSource->transport($transport);
 $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
 
 $chart->dataSource($dataSource)
-      ->title(array('text' => 'The Boeing Company (NYSE:BA)'))
+      ->title(array('text' => 'The Boeing Company \n (NYSE:BA)'))
       ->dateField('Date')
       ->addSeriesItem($series)
       ->addCategoryAxisItem($categoryAxis)

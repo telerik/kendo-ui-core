@@ -35,7 +35,7 @@ $tooltip->visible(true)
         ->template('#= series.name #: #= value #');
 
 $chart = new \Kendo\Dataviz\UI\Chart('chart');
-$chart->title(array('text' => 'Gross domestic product growth /GDP annual %/'))
+$chart->title(array('text' => 'Gross domestic product growth \n /GDP annual %/'))
       ->legend(array('position' => 'bottom'))
       ->addSeriesItem($india, $world, $russia, $haiti)
       ->addValueAxisItem($valueAxis)
