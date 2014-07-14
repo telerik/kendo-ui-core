@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.themes" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "TreeMap",
     category: "dataviz",
     description: "",
-    depends: [ "data", "userevents", "dataviz.themes" ]
+    depends: [ "data", "userevents", "./kendo.dataviz.core", "dataviz.themes" ]
 };
 
 (function($, undefined) {
@@ -117,9 +117,8 @@ var __meta__ = {
         setDataSource: function(dataSource) {
             var that = this;
             that.dataSource.unbind(CHANGE, that._dataChangeHandler);
-            that.dataSource = dataSource;
-
-            dataSource.bind(CHANGE, that._dataChangeHandler);
+            that.dataSource = dataSource
+                    .bind(CHANGE, that._dataChangeHandler);
 
             if (dataSource) {
                 if (that.options.autoBind) {
@@ -135,6 +134,7 @@ var __meta__ = {
             var item, i, colors;
 
             if (!node) {
+                this.element.empty();
                 item = this._wrapItem(items[0]);
                 this._layout.createRoot(
                     item,
@@ -286,7 +286,6 @@ var __meta__ = {
         },
 
         _resize: function() {
-            this.element.empty();
             this.dataSource.fetch();
         },
 
@@ -294,7 +293,6 @@ var __meta__ = {
             var dataSource = options.dataSource;
 
             options.dataSource = undefined;
-            this.element.empty();
             this._originalOptions = deepExtend(this._originalOptions, options);
             this.options = deepExtend({}, this._originalOptions);
             this._setLayout();
