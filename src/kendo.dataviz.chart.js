@@ -4131,6 +4131,12 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.current;
+        },
+
+        aboveAxis: function(point, valueAxis) {
+            var value = point.value.current;
+
+            return value > 0;
         }
     });
 
