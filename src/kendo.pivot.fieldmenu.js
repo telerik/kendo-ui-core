@@ -3,7 +3,7 @@
 })(function(){
 
 var __meta__ = {
-    id: "pivotgrid.fieldmenu",
+    id: "pivot.fieldmenu",
     name: "PivotFieldMenu",
     category: "web",
     description: "The PivotFieldMenu widget allows the user to filter on fields displayed in PivotGrid",
