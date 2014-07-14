@@ -20,13 +20,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Set the handles backgorund.
+        /// Set the handles hover fill options.
         /// </summary>
-        /// <param name="value">The value that configures the background.</param>
-        public DiagramEditableResizeHandlesHoverSettingsBuilder Background(string value)
+        /// <param name="configurator">The action that configures the fill.</param>
+        public DiagramEditableResizeHandlesHoverSettingsBuilder Fill(Action<DiagramEditableResizeHandlesHoverFillSettingsBuilder> configurator)
         {
-            container.Background = value;
-
+            configurator(new DiagramEditableResizeHandlesHoverFillSettingsBuilder(container.Fill));
             return this;
         }
         

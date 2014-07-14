@@ -61,6 +61,16 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Defines the connection selection configuration.
+        /// </summary>
+        /// <param name="configurator">The action that configures the selection.</param>
+        public DiagramConnectionDefaultsSettingsBuilder Selection(Action<DiagramConnectionDefaultsSelectionSettingsBuilder> configurator)
+        {
+            configurator(new DiagramConnectionDefaultsSelectionSettingsBuilder(container.Selection));
+            return this;
+        }
+        
         //<< Fields
     }
 }

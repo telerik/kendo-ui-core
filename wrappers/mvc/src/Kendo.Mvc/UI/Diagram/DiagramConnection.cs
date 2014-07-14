@@ -16,6 +16,8 @@ namespace Kendo.Mvc.UI
                 
             Points = new List<DiagramConnectionPoint>();
                 
+            Selection = new DiagramConnectionSelectionSettings();
+                
             Stroke = new DiagramConnectionStrokeSettings();
                 
         //<< Initialization
@@ -40,6 +42,12 @@ namespace Kendo.Mvc.UI
         public string EndCap { get; set; }
         
         public List<DiagramConnectionPoint> Points
+        {
+            get;
+            set;
+        }
+        
+        public DiagramConnectionSelectionSettings Selection
         {
             get;
             set;
@@ -77,6 +85,12 @@ namespace Kendo.Mvc.UI
             if (points.Any())
             {
                 json["points"] = points;
+            }
+                
+            var selection = Selection.ToJson();
+            if (selection.Any())
+            {
+                json["selection"] = selection;
             }
                 
         //<< Serialization

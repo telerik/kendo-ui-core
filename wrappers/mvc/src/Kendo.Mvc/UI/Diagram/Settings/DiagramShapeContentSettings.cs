@@ -21,6 +21,12 @@ namespace Kendo.Mvc.UI
         
         public string Align { get; set; }
         
+        public string FontFamily { get; set; }
+        
+        public double? FontSize { get; set; }
+        
+        public string Color { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -35,6 +41,21 @@ namespace Kendo.Mvc.UI
             if (Align.HasValue())
             {
                 json["align"] = Align;
+            }
+            
+            if (FontFamily.HasValue())
+            {
+                json["fontFamily"] = FontFamily;
+            }
+            
+            if (FontSize.HasValue)
+            {
+                json["fontSize"] = FontSize;
+            }
+                
+            if (Color.HasValue())
+            {
+                json["color"] = Color;
             }
             
         //<< Serialization

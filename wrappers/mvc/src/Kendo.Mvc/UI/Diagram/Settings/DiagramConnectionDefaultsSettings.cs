@@ -14,6 +14,8 @@ namespace Kendo.Mvc.UI
         
             Hover = new DiagramConnectionDefaultsHoverSettings();
                 
+            Selection = new DiagramConnectionDefaultsSelectionSettings();
+                
             Stroke = new DiagramConnectionDefaultsStrokeSettings();
                 
         //<< Initialization
@@ -36,6 +38,12 @@ namespace Kendo.Mvc.UI
         public string StartCap { get; set; }
         
         public string EndCap { get; set; }
+        
+        public DiagramConnectionDefaultsSelectionSettings Selection
+        {
+            get;
+            set;
+        }
         
         //<< Fields
 
@@ -65,6 +73,12 @@ namespace Kendo.Mvc.UI
                 json["endCap"] = EndCap;
             }
             
+            var selection = Selection.ToJson();
+            if (selection.Any())
+            {
+                json["selection"] = selection;
+            }
+                
         //<< Serialization
         }
     }

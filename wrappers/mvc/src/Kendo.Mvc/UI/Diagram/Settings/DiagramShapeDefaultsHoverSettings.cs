@@ -12,12 +12,18 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Fill = new DiagramShapeDefaultsHoverFillSettings();
+                
         //<< Initialization
         }
 
         //>> Fields
         
-        public string Background { get; set; }
+        public DiagramShapeDefaultsHoverFillSettings Fill
+        {
+            get;
+            set;
+        }
         
         //<< Fields
 
@@ -25,11 +31,12 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Background.HasValue())
+            var fill = Fill.ToJson();
+            if (fill.Any())
             {
-                json["background"] = Background;
+                json["fill"] = fill;
             }
-            
+                
         //<< Serialization
         }
     }

@@ -39,16 +39,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        /// <summary>
-        /// Specifyes the select style.
-        /// </summary>
-        /// <param name="configurator">The action that configures the select.</param>
-        public DiagramEditableSettingsBuilder Select(Action<DiagramEditableSelectSettingsBuilder> configurator)
-        {
-            configurator(new DiagramEditableSelectSettingsBuilder(container.Select));
-            return this;
-        }
-        
         //<< Fields
 
         /// <summary>
@@ -74,20 +64,6 @@ namespace Kendo.Mvc.UI.Fluent
             if (!visible)
             {
                 container.Rotate = null;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Specifyes the select style.
-        /// </summary>
-        /// <param name="visible">A value indicating if the selection will be available.</param>
-        public DiagramEditableSettingsBuilder Select(bool visible)
-        {
-            if (!visible)
-            {
-                container.Select = null;
             }
 
             return this;

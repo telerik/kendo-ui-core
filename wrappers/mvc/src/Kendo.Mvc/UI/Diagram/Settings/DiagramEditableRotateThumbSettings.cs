@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Fill = new DiagramEditableRotateThumbFillSettings();
+                
             Stroke = new DiagramEditableRotateThumbStrokeSettings();
                 
         //<< Initialization
@@ -19,7 +21,11 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Background { get; set; }
+        public DiagramEditableRotateThumbFillSettings Fill
+        {
+            get;
+            set;
+        }
         
         public DiagramEditableRotateThumbStrokeSettings Stroke
         {
@@ -33,11 +39,12 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Background.HasValue())
+            var fill = Fill.ToJson();
+            if (fill.Any())
             {
-                json["background"] = Background;
+                json["fill"] = fill;
             }
-            
+                
             var stroke = Stroke.ToJson();
             if (stroke.Any())
             {

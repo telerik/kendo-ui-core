@@ -41,6 +41,39 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The font family of the shape content text.
+        /// </summary>
+        /// <param name="value">The value that configures the fontfamily.</param>
+        public DiagramShapeContentSettingsBuilder FontFamily(string value)
+        {
+            container.FontFamily = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The font size of the shape content text.
+        /// </summary>
+        /// <param name="value">The value that configures the fontsize.</param>
+        public DiagramShapeContentSettingsBuilder FontSize(double value)
+        {
+            container.FontSize = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The color of the shape content text.
+        /// </summary>
+        /// <param name="value">The value that configures the color.</param>
+        public DiagramShapeContentSettingsBuilder Color(string value)
+        {
+            container.Color = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }

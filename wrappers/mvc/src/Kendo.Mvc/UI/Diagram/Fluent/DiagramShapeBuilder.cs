@@ -31,6 +31,16 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Defines the shape editable options.
+        /// </summary>
+        /// <param name="configurator">The action that configures the editable.</param>
+        public DiagramShapeBuilder Editable(Action<DiagramShapeEditableSettingsBuilder> configurator)
+        {
+            configurator(new DiagramShapeEditableSettingsBuilder(container.Editable));
+            return this;
+        }
+        
+        /// <summary>
         /// The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
         /// </summary>
         /// <param name="value">The value that configures the path.</param>
@@ -129,13 +139,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Defines the fill-color of the shape.
+        /// Defines the fill options of the shape.
         /// </summary>
-        /// <param name="value">The value that configures the background.</param>
-        public DiagramShapeBuilder Background(string value)
+        /// <param name="configurator">The action that configures the fill.</param>
+        public DiagramShapeBuilder Fill(Action<DiagramShapeFillSettingsBuilder> configurator)
         {
-            container.Background = value;
-
+            configurator(new DiagramShapeFillSettingsBuilder(container.Fill));
             return this;
         }
         
@@ -176,6 +185,17 @@ namespace Kendo.Mvc.UI.Fluent
         public DiagramShapeBuilder Content(Action<DiagramShapeContentSettingsBuilder> configurator)
         {
             configurator(new DiagramShapeContentSettingsBuilder(container.Content));
+            return this;
+        }
+        
+        /// <summary>
+        /// The source of the shape image. Applicable when the type is set to "image".
+        /// </summary>
+        /// <param name="value">The value that configures the source.</param>
+        public DiagramShapeBuilder Source(string value)
+        {
+            container.Source = value;
+
             return this;
         }
         

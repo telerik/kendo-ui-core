@@ -20,13 +20,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Set the thumb backgorund.
+        /// Set the thumb fill options.
         /// </summary>
-        /// <param name="value">The value that configures the background.</param>
-        public DiagramEditableRotateThumbSettingsBuilder Background(string value)
+        /// <param name="configurator">The action that configures the fill.</param>
+        public DiagramEditableRotateThumbSettingsBuilder Fill(Action<DiagramEditableRotateThumbFillSettingsBuilder> configurator)
         {
-            container.Background = value;
-
+            configurator(new DiagramEditableRotateThumbFillSettingsBuilder(container.Fill));
             return this;
         }
         

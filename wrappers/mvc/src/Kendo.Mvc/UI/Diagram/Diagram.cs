@@ -31,6 +31,8 @@ namespace Kendo.Mvc.UI
                 
             Layout = new DiagramLayoutSettings();
                 
+            Selectable = new DiagramSelectableSettings();
+                
             ShapeDefaults = new DiagramShapeDefaultsSettings();
                 
             Shapes = new List<DiagramShape>();
@@ -62,14 +64,14 @@ namespace Kendo.Mvc.UI
             set;
         }
         
-        public bool? Draggable { get; set; }
-        
         public DiagramLayoutSettings Layout
         {
             get;
             set;
         }
         
+        public string Template { get; set; }
+
         public string TemplateId { get; set; }
         
         public DiagramConnectionDefaultsSettings ConnectionDefaults
@@ -79,6 +81,12 @@ namespace Kendo.Mvc.UI
         }
         
         public List<DiagramConnection> Connections
+        {
+            get;
+            set;
+        }
+        
+        public DiagramSelectableSettings Selectable
         {
             get;
             set;
@@ -138,22 +146,26 @@ namespace Kendo.Mvc.UI
                 json["zoomMax"] = ZoomMax;
             }
                 
-            if (Draggable.HasValue)
-            {
-                json["draggable"] = Draggable;
-            }
-                
             var layout = Layout.ToJson();
             if (layout.Any())
             {
                 json["layout"] = layout;
             }
                 
-            if (TemplateId.HasValue())
+            if (!string.IsNullOrEmpty(TemplateId))
             {
-                json["template"] = TemplateId;
+                json["template"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        TemplateId
+                    )
+                };
             }
-            
+            else if (!string.IsNullOrEmpty(Template))
+            {
+                json["template"] = Template;
+            }
+                
             var connectionDefaults = ConnectionDefaults.ToJson();
             if (connectionDefaults.Any())
             {
@@ -164,6 +176,12 @@ namespace Kendo.Mvc.UI
             if (connections.Any())
             {
                 json["connections"] = connections;
+            }
+                
+            var selectable = Selectable.ToJson();
+            if (selectable.Any())
+            {
+                json["selectable"] = selectable;
             }
                 
             var shapeDefaults = ShapeDefaults.ToJson();

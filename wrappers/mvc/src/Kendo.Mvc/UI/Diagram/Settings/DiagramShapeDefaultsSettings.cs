@@ -16,6 +16,10 @@ namespace Kendo.Mvc.UI
                 
             Content = new DiagramShapeDefaultsContentSettings();
                 
+            Editable = new DiagramShapeDefaultsEditableSettings();
+                
+            Fill = new DiagramShapeDefaultsFillSettings();
+                
             Hover = new DiagramShapeDefaultsHoverSettings();
                 
             Rotation = new DiagramShapeDefaultsRotationSettings();
@@ -28,6 +32,12 @@ namespace Kendo.Mvc.UI
         }
 
         //>> Fields
+        
+        public DiagramShapeDefaultsEditableSettings Editable
+        {
+            get;
+            set;
+        }
         
         public string Path { get; set; }
         
@@ -51,7 +61,11 @@ namespace Kendo.Mvc.UI
         
         public double? Height { get; set; }
         
-        public string Background { get; set; }
+        public DiagramShapeDefaultsFillSettings Fill
+        {
+            get;
+            set;
+        }
         
         public DiagramShapeDefaultsHoverSettings Hover
         {
@@ -77,6 +91,8 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public string Source { get; set; }
+        
         //<< Fields
 
         public ClientHandlerDescriptor Visual { get; set; }
@@ -85,6 +101,12 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            var editable = Editable.ToJson();
+            if (editable.Any())
+            {
+                json["editable"] = editable;
+            }
+                
             if (Path.HasValue())
             {
                 json["path"] = Path;
@@ -131,11 +153,12 @@ namespace Kendo.Mvc.UI
                 json["height"] = Height;
             }
                 
-            if (Background.HasValue())
+            var fill = Fill.ToJson();
+            if (fill.Any())
             {
-                json["background"] = Background;
+                json["fill"] = fill;
             }
-            
+                
             var hover = Hover.ToJson();
             if (hover.Any())
             {
@@ -160,6 +183,11 @@ namespace Kendo.Mvc.UI
                 json["content"] = content;
             }
                 
+            if (Source.HasValue())
+            {
+                json["source"] = Source;
+            }
+            
         //<< Serialization
 
             if (Visual.HasValue())

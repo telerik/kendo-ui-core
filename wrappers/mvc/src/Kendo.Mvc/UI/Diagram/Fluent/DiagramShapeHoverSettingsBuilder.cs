@@ -20,13 +20,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Hover's background color.
+        /// Hover's fill options.
         /// </summary>
-        /// <param name="value">The value that configures the background.</param>
-        public DiagramShapeHoverSettingsBuilder Background(string value)
+        /// <param name="configurator">The action that configures the fill.</param>
+        public DiagramShapeHoverSettingsBuilder Fill(Action<DiagramShapeHoverFillSettingsBuilder> configurator)
         {
-            container.Background = value;
-
+            configurator(new DiagramShapeHoverFillSettingsBuilder(container.Fill));
             return this;
         }
         

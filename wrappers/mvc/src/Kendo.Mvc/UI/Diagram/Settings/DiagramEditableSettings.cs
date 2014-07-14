@@ -16,8 +16,6 @@ namespace Kendo.Mvc.UI
                 
             Rotate = new DiagramEditableRotateSettings();
                 
-            Select = new DiagramEditableSelectSettings();
-                
         //<< Initialization
         }
 
@@ -30,12 +28,6 @@ namespace Kendo.Mvc.UI
         }
         
         public DiagramEditableRotateSettings Rotate
-        {
-            get;
-            set;
-        }
-        
-        public DiagramEditableSelectSettings Select
         {
             get;
             set;
@@ -60,19 +52,6 @@ namespace Kendo.Mvc.UI
             else
             {
                 json["resize"] = false;
-            }
-
-            if (Select != null)
-            {
-                var select = Select.ToJson();
-                if (select.Any())
-                {
-                    json["select"] = select;
-                }
-            }
-            else
-            {
-                json["select"] = false;
             }
 
             if (Rotate != null)
