@@ -36,14 +36,6 @@ var __meta__ = {
         options: {
             name: "PivotFieldMenu",
             filter: null,
-            operators: {
-                contains: "Contains",
-                doesnotcontain: "Does not contain",
-                startswith: "Starts with",
-                endswith: "Ends with",
-                eq: "Is equal to",
-                neq: "Is not equal to"
-            },
             messages: {
                 info: "Show items with value that:",
                 filterFields: "Fields Filter",
@@ -52,7 +44,15 @@ var __meta__ = {
                 title: "Fields to include",
                 clear: "Clear",
                 ok: "Ok",
-                cancel: "Cancel"
+                cancel: "Cancel",
+                operators: {
+                    contains: "Contains",
+                    doesnotcontain: "Does not contain",
+                    startswith: "Starts with",
+                    endswith: "Ends with",
+                    eq: "Is equal to",
+                    neq: "Is not equal to"
+                }
             }
         },
 
@@ -61,7 +61,6 @@ var __meta__ = {
 
             this.wrapper = $(kendo.template(MENUTEMPLATE)({
                 ns: kendo.ns,
-                operators: options.operators,
                 messages: options.messages
             }));
 
@@ -394,8 +393,8 @@ var __meta__ = {
                 '<div>' +
                     '<div class="k-filter-help-text">#=messages.info#</div>'+
                     '<select>'+
-                        '#for(var op in operators){#'+
-                            '<option value="#=op#">#=operators[op]#</option>' +
+                        '#for(var op in messages.operators){#'+
+                            '<option value="#=op#">#=messages.operators[op]#</option>' +
                         '#}#'+
                     '</select>'+
                     '<input class="k-textbox" type="text" />'+
