@@ -37,6 +37,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to true the user will be able to filter by using the field menu.
+    * @param boolean $value
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function filterable($value) {
+        return $this->setProperty('filterable', $value);
+    }
+
+    /**
     * The width of the table columns. Value is treated as pixels.
     * @param float $value
     * @return \Kendo\UI\PivotGrid

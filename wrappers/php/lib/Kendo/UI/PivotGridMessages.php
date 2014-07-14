@@ -32,6 +32,15 @@ class PivotGridMessages extends \Kendo\SerializableObject {
         return $this->setProperty('rowFields', $value);
     }
 
+    /**
+    * The text messages displayed in the field menu.
+    * @param \Kendo\UI\PivotGridMessagesFieldMenu|array $value
+    * @return \Kendo\UI\PivotGridMessages
+    */
+    public function fieldMenu($value) {
+        return $this->setProperty('fieldMenu', $value);
+    }
+
 //<< Properties
 }
 

@@ -18,6 +18,15 @@ class PivotConfigurator extends \Kendo\UI\Widget {
     }
 
     /**
+    * If set to true the user will be able to filter by using the field menu.
+    * @param boolean $value
+    * @return \Kendo\UI\PivotConfigurator
+    */
+    public function filterable($value) {
+        return $this->setProperty('filterable', $value);
+    }
+
+    /**
     * The text messages displayed in the fields sections.
     * @param \Kendo\UI\PivotConfiguratorMessages|array $value
     * @return \Kendo\UI\PivotConfigurator

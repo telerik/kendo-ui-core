@@ -68,6 +68,15 @@ class PivotConfiguratorMessages extends \Kendo\SerializableObject {
         return $this->setProperty('fieldsLabel', $value);
     }
 
+    /**
+    * The text messages displayed in the field menu.
+    * @param \Kendo\UI\PivotConfiguratorMessagesFieldMenu|array $value
+    * @return \Kendo\UI\PivotConfiguratorMessages
+    */
+    public function fieldMenu($value) {
+        return $this->setProperty('fieldMenu', $value);
+    }
+
 //<< Properties
 }
 
