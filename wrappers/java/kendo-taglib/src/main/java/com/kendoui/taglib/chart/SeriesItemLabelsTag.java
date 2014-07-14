@@ -55,12 +55,20 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("border", value);
     }
 
+    public void setFrom(com.kendoui.taglib.chart.SeriesItemLabelsFromTag value) {
+        setProperty("from", value);
+    }
+
     public void setMargin(com.kendoui.taglib.chart.SeriesItemLabelsMarginTag value) {
         setProperty("margin", value);
     }
 
     public void setPadding(com.kendoui.taglib.chart.SeriesItemLabelsPaddingTag value) {
         setProperty("padding", value);
+    }
+
+    public void setTo(com.kendoui.taglib.chart.SeriesItemLabelsToTag value) {
+        setProperty("to", value);
     }
 
     public void setBackground(SeriesItemLabelsBackgroundFunctionTag value) {

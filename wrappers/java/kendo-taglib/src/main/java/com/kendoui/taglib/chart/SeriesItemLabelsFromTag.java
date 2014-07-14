@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class SeriesItemLabelsFromTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesDefaultsTag parent = (SeriesDefaultsTag)findParentWithClass(SeriesDefaultsTag.class);
+        SeriesItemLabelsTag parent = (SeriesItemLabelsTag)findParentWithClass(SeriesItemLabelsTag.class);
 
 
-        parent.setLabels(this);
+        parent.setFrom(this);
 
 //<< doEndTag
 
@@ -48,31 +48,47 @@ public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces */ /* inter
 //>> Attributes
 
     public static String tagName() {
-        return "chart-seriesDefaults-labels";
+        return "chart-seriesItem-labels-from";
     }
 
-    public void setBorder(com.kendoui.taglib.chart.SeriesDefaultsLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.SeriesItemLabelsFromBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setFrom(com.kendoui.taglib.chart.SeriesDefaultsLabelsFromTag value) {
-        setProperty("from", value);
-    }
-
-    public void setMargin(com.kendoui.taglib.chart.SeriesDefaultsLabelsMarginTag value) {
+    public void setMargin(com.kendoui.taglib.chart.SeriesItemLabelsFromMarginTag value) {
         setProperty("margin", value);
     }
 
-    public void setPadding(com.kendoui.taglib.chart.SeriesDefaultsLabelsPaddingTag value) {
+    public void setPadding(com.kendoui.taglib.chart.SeriesItemLabelsFromPaddingTag value) {
         setProperty("padding", value);
     }
 
-    public void setTo(com.kendoui.taglib.chart.SeriesDefaultsLabelsToTag value) {
-        setProperty("to", value);
+    public void setBackground(SeriesItemLabelsFromBackgroundFunctionTag value) {
+        setEvent("background", value.getBody());
     }
 
-    public void setTemplate(SeriesDefaultsLabelsTemplateFunctionTag value) {
+    public void setColor(SeriesItemLabelsFromColorFunctionTag value) {
+        setEvent("color", value.getBody());
+    }
+
+    public void setFont(SeriesItemLabelsFromFontFunctionTag value) {
+        setEvent("font", value.getBody());
+    }
+
+    public void setFormat(SeriesItemLabelsFromFormatFunctionTag value) {
+        setEvent("format", value.getBody());
+    }
+
+    public void setPosition(SeriesItemLabelsFromPositionFunctionTag value) {
+        setEvent("position", value.getBody());
+    }
+
+    public void setTemplate(SeriesItemLabelsFromTemplateFunctionTag value) {
         setEvent("template", value.getBody());
+    }
+
+    public void setVisible(SeriesItemLabelsFromVisibleFunctionTag value) {
+        setEvent("visible", value.getBody());
     }
 
     public java.lang.String getBackground() {
@@ -121,6 +137,14 @@ public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces */ /* inter
 
     public void setPadding(float value) {
         setProperty("padding", value);
+    }
+
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
+    }
+
+    public void setPosition(java.lang.String value) {
+        setProperty("position", value);
     }
 
     public java.lang.String getTemplate() {

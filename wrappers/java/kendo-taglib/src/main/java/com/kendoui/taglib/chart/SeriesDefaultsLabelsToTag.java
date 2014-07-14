@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class SeriesDefaultsLabelsToTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesDefaultsTag parent = (SeriesDefaultsTag)findParentWithClass(SeriesDefaultsTag.class);
+        SeriesDefaultsLabelsTag parent = (SeriesDefaultsLabelsTag)findParentWithClass(SeriesDefaultsLabelsTag.class);
 
 
-        parent.setLabels(this);
+        parent.setTo(this);
 
 //<< doEndTag
 
@@ -48,30 +48,22 @@ public class SeriesDefaultsLabelsTag extends  BaseTag  /* interfaces */ /* inter
 //>> Attributes
 
     public static String tagName() {
-        return "chart-seriesDefaults-labels";
+        return "chart-seriesDefaults-labels-to";
     }
 
-    public void setBorder(com.kendoui.taglib.chart.SeriesDefaultsLabelsBorderTag value) {
+    public void setBorder(com.kendoui.taglib.chart.SeriesDefaultsLabelsToBorderTag value) {
         setProperty("border", value);
     }
 
-    public void setFrom(com.kendoui.taglib.chart.SeriesDefaultsLabelsFromTag value) {
-        setProperty("from", value);
-    }
-
-    public void setMargin(com.kendoui.taglib.chart.SeriesDefaultsLabelsMarginTag value) {
+    public void setMargin(com.kendoui.taglib.chart.SeriesDefaultsLabelsToMarginTag value) {
         setProperty("margin", value);
     }
 
-    public void setPadding(com.kendoui.taglib.chart.SeriesDefaultsLabelsPaddingTag value) {
+    public void setPadding(com.kendoui.taglib.chart.SeriesDefaultsLabelsToPaddingTag value) {
         setProperty("padding", value);
     }
 
-    public void setTo(com.kendoui.taglib.chart.SeriesDefaultsLabelsToTag value) {
-        setProperty("to", value);
-    }
-
-    public void setTemplate(SeriesDefaultsLabelsTemplateFunctionTag value) {
+    public void setTemplate(SeriesDefaultsLabelsToTemplateFunctionTag value) {
         setEvent("template", value.getBody());
     }
 
