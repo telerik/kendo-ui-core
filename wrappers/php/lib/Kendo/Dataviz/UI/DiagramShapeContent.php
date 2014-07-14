@@ -23,6 +23,33 @@ class DiagramShapeContent extends \Kendo\SerializableObject {
         return $this->setProperty('align', $value);
     }
 
+    /**
+    * The font family of the shape content text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function fontFamily($value) {
+        return $this->setProperty('fontFamily', $value);
+    }
+
+    /**
+    * The font size of the shape content text.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function fontSize($value) {
+        return $this->setProperty('fontSize', $value);
+    }
+
+    /**
+    * The color of the shape content text.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShapeContent
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
 //<< Properties
 }
 

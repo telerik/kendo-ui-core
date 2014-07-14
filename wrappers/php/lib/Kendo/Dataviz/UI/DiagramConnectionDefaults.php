@@ -41,6 +41,15 @@ class DiagramConnectionDefaults extends \Kendo\SerializableObject {
         return $this->setProperty('endCap', $value);
     }
 
+    /**
+    * Defines the connection selection configuration.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionDefaultsSelection|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnectionDefaults
+    */
+    public function selection($value) {
+        return $this->setProperty('selection', $value);
+    }
+
 //<< Properties
 }
 

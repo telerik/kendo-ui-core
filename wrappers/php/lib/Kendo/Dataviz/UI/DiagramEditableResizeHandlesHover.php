@@ -6,12 +6,12 @@ class DiagramEditableResizeHandlesHover extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the handles backgorund.
-    * @param string $value
+    * Set the handles hover fill options.
+    * @param string|\Kendo\Dataviz\UI\DiagramEditableResizeHandlesHoverFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableResizeHandlesHover
     */
-    public function background($value) {
-        return $this->setProperty('background', $value);
+    public function fill($value) {
+        return $this->setProperty('fill', $value);
     }
 
     /**

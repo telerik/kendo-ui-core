@@ -6,12 +6,12 @@ class DiagramEditableRotateThumb extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Set the thumb backgorund.
-    * @param string $value
+    * Set the thumb fill options.
+    * @param string|\Kendo\Dataviz\UI\DiagramEditableRotateThumbFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramEditableRotateThumb
     */
-    public function background($value) {
-        return $this->setProperty('background', $value);
+    public function fill($value) {
+        return $this->setProperty('fill', $value);
     }
 
     /**

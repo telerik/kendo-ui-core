@@ -6,12 +6,12 @@ class DiagramShapeHover extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Hover's background color.
-    * @param string $value
+    * Hover's fill options.
+    * @param string|\Kendo\Dataviz\UI\DiagramShapeHoverFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramShapeHover
     */
-    public function background($value) {
-        return $this->setProperty('background', $value);
+    public function fill($value) {
+        return $this->setProperty('fill', $value);
     }
 
 //<< Properties

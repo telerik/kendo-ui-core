@@ -50,6 +50,15 @@ class DiagramConnection extends \Kendo\SerializableObject {
         return $this->add('points', func_get_args());
     }
 
+    /**
+    * Defines the connection selection configuration.
+    * @param \Kendo\Dataviz\UI\DiagramConnectionSelection|array $value
+    * @return \Kendo\Dataviz\UI\DiagramConnection
+    */
+    public function selection($value) {
+        return $this->setProperty('selection', $value);
+    }
+
 //<< Properties
 }
 

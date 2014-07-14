@@ -73,15 +73,6 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Defines whether items can be dropped on the diagram.
-    * @param boolean $value
-    * @return \Kendo\Dataviz\UI\Diagram
-    */
-    public function draggable($value) {
-        return $this->setProperty('draggable', $value);
-    }
-
-    /**
     * The layout of a diagram consists in arranging the shapes (sometimes also the connections) in some fashion in order to achieve an aesthetically pleasing experience to the user. It aims at giving a more direct insight in the information contained within the diagram and its relational structure.On a technical level, layout consists of a multitude of algorithms and optimizations:and various ad-hoc calculations which depend on the type of layout. The criteria on which an algorithm is based vary but the common denominator is:Kendo diagram includes three of the most used layout algorithms which should cover most of your layout needs - tree layout, force-directed layout and layered layout. Please, check the type property for more details regarding each type.The generic way to apply a layout is by calling the layout() method on the diagram. The method has a single parameter options. It is an object, which can contain parameters which are specific to the layout as well as parameters customizing the global grid layout. Parameters which apply to other layout algorithms can be included but are overlooked if not applicable to the chose layout type. This means that you can define a set of parameters which cover all possible layout types and simply pass it in the method whatever the layout define in the first parameter.
     * @param \Kendo\Dataviz\UI\DiagramLayout|array $value
     * @return \Kendo\Dataviz\UI\Diagram
@@ -128,6 +119,15 @@ data source is fired. By default the widget will bind to the data source specifi
     */
     public function addConnection($value) {
         return $this->add('connections', func_get_args());
+    }
+
+    /**
+    * Defines the selectable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramSelectable|array $value
+    * @return \Kendo\Dataviz\UI\Diagram
+    */
+    public function selectable($value) {
+        return $this->setProperty('selectable', $value);
     }
 
     /**

@@ -15,6 +15,15 @@ class DiagramShape extends \Kendo\SerializableObject {
     }
 
     /**
+    * Defines the shape editable options.
+    * @param boolean|\Kendo\Dataviz\UI\DiagramShapeEditable|array $value
+    * @return \Kendo\Dataviz\UI\DiagramShape
+    */
+    public function editable($value) {
+        return $this->setProperty('editable', $value);
+    }
+
+    /**
     * The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
     * @param string $value
     * @return \Kendo\Dataviz\UI\DiagramShape
@@ -96,12 +105,12 @@ class DiagramShape extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the fill-color of the shape.
-    * @param string $value
+    * Defines the fill options of the shape.
+    * @param string|\Kendo\Dataviz\UI\DiagramShapeFill|array $value
     * @return \Kendo\Dataviz\UI\DiagramShape
     */
-    public function background($value) {
-        return $this->setProperty('background', $value);
+    public function fill($value) {
+        return $this->setProperty('fill', $value);
     }
 
     /**
@@ -138,6 +147,15 @@ class DiagramShape extends \Kendo\SerializableObject {
     */
     public function content($value) {
         return $this->setProperty('content', $value);
+    }
+
+    /**
+    * The source of the shape image. Applicable when the type is set to "image".
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\DiagramShape
+    */
+    public function source($value) {
+        return $this->setProperty('source', $value);
     }
 
     /**

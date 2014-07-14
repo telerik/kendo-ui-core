@@ -23,15 +23,6 @@ class DiagramEditable extends \Kendo\SerializableObject {
         return $this->setProperty('rotate', $value);
     }
 
-    /**
-    * Specifyes the select style.
-    * @param boolean|\Kendo\Dataviz\UI\DiagramEditableSelect|array $value
-    * @return \Kendo\Dataviz\UI\DiagramEditable
-    */
-    public function select($value) {
-        return $this->setProperty('select', $value);
-    }
-
 //<< Properties
 }
 

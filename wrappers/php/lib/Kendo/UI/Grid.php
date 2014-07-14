@@ -92,6 +92,15 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
+    * Defines the text of the command buttons that are shown within the Grid. Used primarily for localization.
+    * @param \Kendo\UI\GridMessages|array $value
+    * @return \Kendo\UI\Grid
+    */
+    public function messages($value) {
+        return $this->setProperty('messages', $value);
+    }
+
+    /**
     * If set to true and the grid is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
 The grid uses same layout for both phone and tablet.
     * @param boolean|string $value
