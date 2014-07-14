@@ -643,13 +643,7 @@ var __meta__ = {
         },
 
         _tileColorBrightness: function(item) {
-            var brightness = 0;
-            if (item.color) {
-                var color = rgbToDecimal(item.color);
-                brightness = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
-            }
-
-            return brightness;
+            return colorBrightness(item.color);
         }
     });
 
@@ -831,15 +825,16 @@ var __meta__ = {
     function colorsByLength(min, max, length) {
         var minRGBtoDecimal = rgbToDecimal(min);
         var maxRGBtoDecimal = rgbToDecimal(max);
+        var isDarker = colorBrightness(min) - colorBrightness(max) < 0;
         var colors = [];
 
         colors.push(min);
 
         for (var i = 0; i < length; i++) {
             var rgbColor = {
-                r: colorByIndex(minRGBtoDecimal.r, maxRGBtoDecimal.r, i, length),
-                g: colorByIndex(minRGBtoDecimal.g, maxRGBtoDecimal.g, i, length),
-                b: colorByIndex(minRGBtoDecimal.b, maxRGBtoDecimal.b, i, length)
+                r: colorByIndex(minRGBtoDecimal.r, maxRGBtoDecimal.r, i, length, isDarker),
+                g: colorByIndex(minRGBtoDecimal.g, maxRGBtoDecimal.g, i, length, isDarker),
+                b: colorByIndex(minRGBtoDecimal.b, maxRGBtoDecimal.b, i, length, isDarker)
             };
             colors.push(buildColorFromRGB(rgbColor));
         }
@@ -849,13 +844,20 @@ var __meta__ = {
         return colors;
     }
 
-    function colorByIndex(min, max, index, length) {
-        min = math.min(math.abs(min), math.abs(max));
-        max = math.max(math.abs(min), math.abs(max));
-        var step = (max - min) / (length + 1);
+    function colorByIndex(min, max, index, length, isDarker) {
+        var minColor = math.min(math.abs(min), math.abs(max));
+        var maxColor = math.max(math.abs(min), math.abs(max));
+        var step = (maxColor - minColor) / (length + 1);
         var currentStep = step * (index + 1);
+        var color;
 
-        return min + currentStep;
+        if (isDarker) {
+            color = minColor + currentStep;
+        } else {
+            color = maxColor - currentStep;
+        }
+
+        return color;
     }
 
     function buildColorFromRGB(color) {
@@ -901,6 +903,16 @@ var __meta__ = {
 
     function rgbToHex(rgb) {
         return parseInt(rgb.toString(16), 16);
+    }
+
+    function colorBrightness(color) {
+        var brightness = 0;
+        if (color) {
+            var color = rgbToDecimal(color);
+            brightness = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
+        }
+
+        return brightness;
     }
 
     dataviz.ui.plugin(TreeMap);
