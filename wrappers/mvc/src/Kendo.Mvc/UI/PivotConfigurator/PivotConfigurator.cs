@@ -19,6 +19,7 @@
             : base(viewContext, initializer)
         {
             UrlGenerator = urlGenerator;
+            Messages = new PivotConfiguratorMessages();
         }
 
         public IUrlGenerator UrlGenerator
@@ -33,6 +34,12 @@
             set;
         }
 
+        public PivotConfiguratorMessages Messages
+        {
+            get;
+            set;
+        }
+
         public override void WriteInitializationScript(TextWriter writer)
         {
             var options = this.SeriailzeBaseOptions();
@@ -40,6 +47,12 @@
             if (Filterable == true)
             {
                 options["filterable"] = Filterable;
+            }
+
+            var messages = Messages.ToJson();
+            if (messages.Count > 0)
+            {
+                options["messages"] = messages;
             }
 
             writer.Write(Initializer.Initialize(Selector, "PivotConfigurator", options));

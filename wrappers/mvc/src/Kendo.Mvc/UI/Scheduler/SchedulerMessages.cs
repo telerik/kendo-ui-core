@@ -147,7 +147,6 @@
                 json["showWorkDay"] = ShowWorkDay;
             }
 
-            //TODO: CHECK IF THERE IS DATA BEFORE ASSIGN:
             IDictionary<string, object> viewMessages = ViewMessages.ToJson();
             if (viewMessages.Count > 0)
             {

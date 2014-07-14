@@ -813,4 +813,25 @@
   <data name="Editor_InsertFile" xml:space="preserve">
     <value>Insert file</value>
   </data>
+  <data name="PivotConfigurator_Columns" xml:space="preserve">
+    <value>Drop Column Fields Here</value>
+  </data>
+  <data name="PivotConfigurator_ColumnsLabel" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="PivotConfigurator_FieldsLabel" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="PivotConfigurator_Measures" xml:space="preserve">
+    <value>Drop Data Fields Here</value>
+  </data>
+  <data name="PivotConfigurator_MeasuresLabel" xml:space="preserve">
+    <value>Measures</value>
+  </data>
+  <data name="PivotConfigurator_Rows" xml:space="preserve">
+    <value>Drop Rows Fields Here</value>
+  </data>
+  <data name="PivotConfigurator_RowsLabel" xml:space="preserve">
+    <value>Rows</value>
+  </data>
 </root>

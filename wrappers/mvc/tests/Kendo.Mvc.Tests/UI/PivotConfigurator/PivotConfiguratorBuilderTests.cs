@@ -23,5 +23,14 @@
             builder.Filterable(true);
             Assert.True(pivotConfigurator.Filterable);
         }
+
+        [Fact]
+        public void Messages_sets_the_corresponding_property()
+        {
+            string value = "custom message";
+            builder.Messages(m => m.ColumnsLabel(value));
+
+            pivotConfigurator.Messages.ColumnsLabel.Equals(value);
+        }
     }
 }

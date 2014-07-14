@@ -26,5 +26,18 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the messages of the pivotGrid.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the pivotGrid messages</param>
+        public PivotConfiguratorBuilder Messages(Action<PivotConfiguratorMessagesBuilder> addViewAction)
+        {
+            PivotConfiguratorMessagesBuilder builder = new PivotConfiguratorMessagesBuilder(Component.Messages);
+
+            addViewAction(builder);
+
+            return this;
+        }
     }
 }

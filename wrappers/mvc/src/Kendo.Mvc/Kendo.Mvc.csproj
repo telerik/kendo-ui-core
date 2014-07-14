@@ -713,7 +713,9 @@
     <Compile Include="UI\Grid\GridFilterMode.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />
     <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorBuilder.cs" />
+    <Compile Include="UI\PivotConfigurator\Fluent\PivotConfiguratorMessagesBuilder.cs" />
     <Compile Include="UI\PivotConfigurator\Html\PivotConfiguratorHtmlBuilder.cs" />
+    <Compile Include="UI\PivotConfigurator\PivotConfiguratorMessages.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceSchemaBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotAjaxDataSourceSchemaCubeBuilder.cs" />
@@ -1351,6 +1353,7 @@
     <Compile Include="UI\PivotDataSource\PivotTransport.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceRow.cs" />
     <Compile Include="UI\PivotDataSource\PivotTransportConnection.cs" />
+    <Compile Include="UI\PivotGrid\PivotGridMessages.cs" />
     <Compile Include="UI\ProgressBar\Fluent\ProgressBarAnimationBuilder.cs" />
     <Compile Include="UI\ProgressBar\Fluent\ProgressBarBuilder.cs" />
     <Compile Include="UI\ProgressBar\Fluent\ProgressBarEventBuilder.cs" />
