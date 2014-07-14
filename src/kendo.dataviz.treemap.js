@@ -556,6 +556,7 @@ var __meta__ = {
         _clean: function(root) {
             root.css("background-color", "");
             root.removeClass("k-leaf");
+            root.removeClass("k-tile-inverse");
             root.empty();
         },
 
