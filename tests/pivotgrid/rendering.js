@@ -3163,23 +3163,6 @@
         equal(columnHeader.css("padding-right"), kendo.support.scrollbar() + "px");
     });
 
-    test("PivotGrid sets width of measures and row fields based on row header table", function() {
-        var tuples = [{ members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] }];
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSourceRows(tuples)
-        });
-
-        var leftColumn = pivotgrid.wrapper.find(".k-pivot-rowheaders");
-
-        var table = leftColumn.find("table");
-        var measures = leftColumn.find(".k-settings-measures");
-        var rowFields = leftColumn.find(".k-settings-rows");
-
-        equal(Math.ceil(measures.width()), Math.ceil(table.width()));
-        equal(Math.ceil(rowFields.width()), Math.ceil(table.width()));
-    });
-
     test("PivotGrid sets width of measures and row fields if row header table is empty", function() {
         var tuples = [
             { members: [ { name: "measure 1", children: [] } ] },

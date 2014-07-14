@@ -2727,18 +2727,14 @@ var __meta__ = {
         },
 
         _setSectionsWidth: function() {
-            var rowsHeaderWidth = this.rowsHeader.children("table").width();
-            var rowsTuples = (this.dataSource.axes().rows || {}).tuples || [];
+            var rowsHeader = this.rowsHeader;
+            var leftColumn = rowsHeader.parent(".k-pivot-rowheaders").width("auto");
+            var width;
 
-            if (!rowsTuples[0]) {
-                var measureFieldsWidth = this.measureFields.width("auto").width();
-                var rowFieldsWidth = this.rowFields.width("auto").width();
+            width = Math.max(this.measureFields.outerWidth(), this.rowFields.outerWidth());
+            width = Math.max(rowsHeader.children("table").width(), width);
 
-                rowsHeaderWidth = Math.max(measureFieldsWidth, rowFieldsWidth);
-            }
-
-            this.measureFields.width(rowsHeaderWidth);
-            this.rowFields.width(rowsHeaderWidth);
+            leftColumn.width(width);
         },
 
         _setSectionsHeight: function() {
@@ -2912,11 +2908,11 @@ var __meta__ = {
         },
 
         build: function(tuples) {
-            var thead = this._thead(tuples);
+            var tbody = this._tbody(tuples);
             var colgroup = this._colGroup();
 
             return [
-                element("table", null, [colgroup, thead])
+                element("table", null, [colgroup, tbody])
             ];
         },
 
@@ -2955,7 +2951,7 @@ var __meta__ = {
             return element("colgroup", null, children);
         },
 
-        _thead: function(tuples) {
+        _tbody: function(tuples) {
             var root = tuples[0];
 
             this.map = {};
@@ -2971,7 +2967,7 @@ var __meta__ = {
                 this.rows.push(element("tr", null, [ element("th", null) ]));
             }
 
-            return element("thead", null, this.rows);
+            return element("tbody", null, this.rows);
         },
 
         _memberIdx: function(members, parentMember) {
