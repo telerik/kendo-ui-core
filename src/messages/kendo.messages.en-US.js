@@ -266,6 +266,36 @@ $.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
 });
 }
 
+/* PivotFieldMenu operators */
+
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotGrid.prototype.options.operators =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.operators,{
+  "contains": "Contains",
+  "doesnotcontain": "Does not contain",
+  "startswith": "Starts with",
+  "endswith": "Ends with",
+  "eq": "Is equal to",
+  "neq": "Is not equal to"
+});
+}
+
+/* PivotFieldMenu messages */
+
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotGrid.prototype.options.messages =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.messages,{
+  "info": "Show items with value that:",
+  "filterFields": "Fields Filter",
+  "filter": "Filter",
+  "include": "Include Fields...",
+  "title": "Fields to include",
+  "clear": "Clear",
+  "ok": "Ok",
+  "cancel": "Cancel"
+});
+}
+
 /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {
