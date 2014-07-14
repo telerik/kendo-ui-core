@@ -22,7 +22,7 @@ var __meta__ = {
         ui = kendo.ui,
         Widget = ui.Widget,
         SETTING_CONTAINER_TEMPLATE = kendo.template('<p class="k-reset"><span class="k-icon #=icon#"></span>${name}</p>' +
-                '<div class="k-list-container k-group k-reset"/>');
+                '<div class="k-list-container k-reset"/>');
 
 
     function settingTargetFromNode(node) {
