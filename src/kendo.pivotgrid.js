@@ -12,8 +12,8 @@ var __meta__ = {
         id: "mobile-scroller",
         name: "Mobile scroller",
         description: "Support for kinetic scrolling in mobile device",
-        depends: [ "mobile.scroller" ],
-
+        depends: [ "mobile.scroller" ]
+    }, {
         id: "pivotgrid-filtering",
         name: "PivotGrid Filtering",
         description: "Support for filtering",
