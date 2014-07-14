@@ -5,6 +5,7 @@
 
 /* Widget Base Styles */
 @widget-text-color: #2e2e2e;
+@inverse-text-color: #fff;
 @widget-gradient: "rgba(255,255,255,.6) 0%, rgba(255,255,255,.0) 100%";
 @widget-background-color: #fff;
 @widget-border-color: #c5c5c5;
@@ -114,6 +115,7 @@
 
 /* Grid */
 @alt-background-color: #f5f5f5;
+@nested-alt-background-color: darken(@alt-background-color, 8%);
 @cell-border-color: @widget-border-color;
 @column-highlight-background-color: #f8f8f8;
 @active-filter-background-color: @active-background-color;
@@ -134,6 +136,11 @@
 @upload-success-text-color: #28760b;
 @upload-error-background-color: #ffded7;
 @upload-error-text-color: #c00;
+
+/* Gantt*/
+
+@task-summary-color: lighten(@widget-text-color, 25%);
+@task-summary-selected-color: lighten(@selected-background-color, 25%);
 
 /* Loading Indicators */
 @loading-panel-color: #fff;
