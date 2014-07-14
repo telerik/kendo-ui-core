@@ -6,6 +6,7 @@
             <script>
                 $(document).ready(function () {
                     var pivotgrid = $("#pivotgrid").kendoPivotGrid({
+                        filterable: true,
                         columnWidth: 200,
                         height: 550,
                         dataSource: {
@@ -30,6 +31,7 @@
                     }).data("kendoPivotGrid");
 
                     $("#configurator").kendoPivotConfigurator({
+                        filterable: true,
                         dataSource: pivotgrid.dataSource
                     });
                 });
