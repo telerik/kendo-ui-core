@@ -53,6 +53,10 @@ public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "pivotGrid-messages";
     }
 
+    public void setFieldMenu(com.kendoui.taglib.pivotgrid.MessagesFieldMenuTag value) {
+        setProperty("fieldMenu", value);
+    }
+
     public java.lang.String getColumnFields() {
         return (java.lang.String)getProperty("columnFields");
     }

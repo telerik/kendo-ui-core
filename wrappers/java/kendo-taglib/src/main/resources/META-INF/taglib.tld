@@ -20218,6 +20218,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
+        <attribute>
+            <description>If set to true the user will be able to filter by using the field menu.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
 
@@ -20225,7 +20231,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         <description>The text messages displayed in the fields sections.</description>
         <name>pivotConfigurator-messages</name>
         <tag-class>com.kendoui.taglib.pivotconfigurator.MessagesTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The text messages displayed in the column fields sections.</description>
@@ -20272,6 +20278,64 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
 
     </tag>
 
+    <tag>
+        <description>The text messages displayed in the field menu.</description>
+        <name>pivotConfigurator-messages-fieldMenu</name>
+        <tag-class>com.kendoui.taglib.pivotconfigurator.MessagesFieldMenuTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text of the cancel button in the include fields dialog.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the clear filter expressions button.</description>
+            <name>clear</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the filter button.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the fields filter menu item.</description>
+            <name>filterFields</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the include menu item.</description>
+            <name>include</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed in fields filter.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the ok button in the include fields dialog.</description>
+            <name>ok</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the include fields dialog.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
 
 
     <tag>
@@ -20305,6 +20369,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the user will be able to filter by using the field menu.</description>
+            <name>filterable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The height of the pivotgrid. Numeric values are treated as pixels.</description>
@@ -20345,7 +20415,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         <description>The text messages displayed in the fields sections.</description>
         <name>pivotGrid-messages</name>
         <tag-class>com.kendoui.taglib.pivotgrid.MessagesTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The text messages displayed in the column fields sections.</description>
@@ -20367,6 +20437,64 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>The text messages displayed in the field menu.</description>
+        <name>pivotGrid-messages-fieldMenu</name>
+        <tag-class>com.kendoui.taglib.pivotgrid.MessagesFieldMenuTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text of the cancel button in the include fields dialog.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the clear filter expressions button.</description>
+            <name>clear</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the filter button.</description>
+            <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the fields filter menu item.</description>
+            <name>filterFields</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages of the include menu item.</description>
+            <name>include</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text messages displayed in fields filter.</description>
+            <name>info</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the ok button in the include fields dialog.</description>
+            <name>ok</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the include fields dialog.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
 
 

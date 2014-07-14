@@ -53,6 +53,14 @@ public class PivotConfiguratorTag extends WidgetTag /* interfaces */implements D
         setProperty("dataSource", dataSource);
     }
 
+    public boolean getFilterable() {
+        return (boolean)getProperty("filterable");
+    }
+
+    public void setFilterable(boolean value) {
+        setProperty("filterable", value);
+    }
+
 //<< Attributes
 
 }
