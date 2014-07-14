@@ -282,7 +282,7 @@ var __meta__ = {
         },
 
         getSize: function() {
-            return kendo.dimentions(this.element);
+            return kendo.dimensions(this.element);
         },
 
         _resize: function() {
