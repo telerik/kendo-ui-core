@@ -303,7 +303,7 @@ var __meta__ = {
             Widget.fn._setEvents.call(this, options);
 
             if (dataSource) {
-                this.setDataSource(DataSource.create(dataSource));
+                this.setDataSource(HierarchicalDataSource.create(dataSource));
             }
 
             if (this.options.autoBind) {
