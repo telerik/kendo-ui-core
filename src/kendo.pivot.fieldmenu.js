@@ -299,7 +299,7 @@ var __meta__ = {
             $(".k-pivot-filter-window").not(this.includeWindow.element).kendoWindow("close");
 
             if (item.hasClass("k-include-item")) {
-                this.includeWindow.open().center();
+                this.includeWindow.center().open();
             }
         },
 
