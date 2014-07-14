@@ -409,14 +409,14 @@ var __meta__ = {
     var MENUTEMPLATE = '<ul class="k-pivot-fieldmenu">'+
                         '<li class="k-item k-include-item">'+
                             '<span class="k-link">'+
-                                '<span class="k-sprite k-include"></span>'+
+                                '<span class="k-icon k-filter"></span>'+
                                 '${messages.include}'+
                             '</span>'+
                         '</li>'+
                         '<li class="k-separator"></li>'+
                         '<li class="k-item k-filter-item">'+
                             '<span class="k-link">'+
-                                '<span class="k-sprite k-filter"></span>'+
+                                '<span class="k-icon k-filter"></span>'+
                                 '${messages.filter}'+
                             '</span>'+
                             '<ul>'+
