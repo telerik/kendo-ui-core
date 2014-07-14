@@ -43,20 +43,13 @@ var __meta__ = {
             Widget.fn.init.call(this, element, options);
 
             this.bind(this.events, this.options);
-            this._initTheme();
+            this._initTheme(this.options);
 
             this.element.addClass("k-widget k-treemap");
 
-            if (this.options.type === "horizontal") {
-                this._layout = new SliceAndDice(false);
-                this._view = new SliceAndDiceView(this, this.options);
-            } else if (this.options.type === "vertical") {
-                this._layout = new SliceAndDice(true);
-                this._view = new SliceAndDiceView(this, this.options);
-            } else {
-                this._layout = new Squarified();
-                this._view = new SquarifiedView(this, this.options);
-            }
+            this._setLayout();
+
+            this._originalOptions = deepExtend({}, this.options);
 
             this._initDataSource();
 
@@ -75,19 +68,32 @@ var __meta__ = {
 
         events: [DATA_BOUND, ITEM_CREATED],
 
-        _initTheme: function() {
+        _initTheme: function(options) {
             var that = this,
                 themes = dataviz.ui.themes || {},
-                themeName = ((that.options || {}).theme || "").toLowerCase(),
+                themeName = ((options || {}).theme || "").toLowerCase(),
                 themeOptions = (themes[themeName] || {}).treeMap;
 
-            that.options = deepExtend({}, themeOptions, that.options);
+            that.options = deepExtend({}, themeOptions, options);
         },
 
         _attachEvents: function() {
             this.element
                 .on(MOUSEOVER_NS, proxy(this._mouseover, this))
                 .on(MOUSELEAVE_NS, proxy(this._mouseleave, this));
+        },
+
+        _setLayout: function() {
+            if (this.options.type === "horizontal") {
+                this._layout = new SliceAndDice(false);
+                this._view = new SliceAndDiceView(this, this.options);
+            } else if (this.options.type === "vertical") {
+                this._layout = new SliceAndDice(true);
+                this._view = new SliceAndDiceView(this, this.options);
+            } else {
+                this._layout = new Squarified();
+                this._view = new SquarifiedView(this, this.options);
+            }
         },
 
         _initDataSource: function() {
@@ -282,6 +288,27 @@ var __meta__ = {
         _resize: function() {
             this.element.empty();
             this.dataSource.fetch();
+        },
+
+        setOptions: function(options) {
+            var dataSource = options.dataSource;
+
+            options.dataSource = undefined;
+            this.element.empty();
+            this._originalOptions = deepExtend(this._originalOptions, options);
+            this.options = deepExtend({}, this._originalOptions);
+            this._setLayout();
+            this._initTheme(this.options);
+
+            Widget.fn._setEvents.call(this, options);
+
+            if (dataSource) {
+                this.setDataSource(DataSource.create(dataSource));
+            }
+
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
         }
     });
 

@@ -1,23 +1,31 @@
 <div id="example">
     <div class="demo-section k-header" style="padding: 1em;">
         <div id="treeMap" style="height: 600px; font-size: 12px;"></div>
-        <style scoped>
-            .k-leaf {
-                color: #fff;
-            }
-            .k-leaf:hover {
-                border: 0;
-                color: #fff;
-                padding: .7em;
-            }
-            .k-tile-inverse,
-            .k-tile-inverse:hover {
-                color: #000;
-            }
-        </style>
+        <div class="box">
+            <div class="box-col">
+                <h4>TreeMap rendering types</h4>
+                <ul class="options">
+                    <li>
+                        <input id="typeSquarified" name="type"
+                                    type="radio" value="squarified" checked="checked" autocomplete="off" />
+                        <label for="typeSquarified">Squarified</label>
+                    </li>
+                    <li>
+                        <input id="typeVertical" name="type"
+                                    type="radio" value="vertical" autocomplete="off" />
+                        <label for="typeVertical">Vertical(Slice and Dice)</label>
+                    </li>
+                    <li>
+                        <input id="typeHorizontal" name="type"
+                                    type="radio" value="horizontal" autocomplete="off" />
+                        <label for="typeHorizontal">Horizontal(Slice and Dice)</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
     <script>
-        function treeMap() {
+        function createTreeMap() {
             $("#treeMap").kendoTreeMap({
                 dataSource: {
                     transport: {
@@ -37,7 +45,16 @@
             });
         }
 
-        $(document).ready(treeMap);
-        $(document).bind("kendo:skinChange", treeMap);
+        $(document).ready(function() {
+            createTreeMap();
+            $(document).bind("kendo:skinChange", createTreeMap);
+            $(".options").bind("change", refresh);
+        });
+
+        function refresh() {
+            $("#treeMap").getKendoTreeMap().setOptions({
+                type: $("input[name=type]:checked").val()
+            });
+        }
     </script>
 </div>

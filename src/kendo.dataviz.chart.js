@@ -3923,7 +3923,7 @@ var __meta__ = {
 
         _createLabel: function(options) {
             var labelText;
-        
+
             if (options.template) {
                 var labelTemplate = template(options.template);
                 labelText = labelTemplate({
