@@ -4,7 +4,7 @@ namespace Kendo\Data;
 
 class PivotDataSourceSchemaCubeMeasure extends \Kendo\SerializableObject {
     function __construct($field) {
-        $this->field($field);
+        $this->name($field);
     }
 
     public function caption($value) {
@@ -13,6 +13,10 @@ class PivotDataSourceSchemaCubeMeasure extends \Kendo\SerializableObject {
 
     public function field($value) {
         return $this->setProperty('field', $value);
+    }
+
+    public function name($value) {
+        return $this->setProperty('name', $value);
     }
 
     public function format($value) {

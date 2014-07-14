@@ -4,29 +4,25 @@ require_once '../lib/Kendo/Autoload.php';
 
 require_once '../include/header.php';
 
-$result = new DataSourceResult('sqlite:..//sample.db');
+$db = new PDO('sqlite:..//sample.db');
+$statement = $db->prepare("SELECT p.ProductName, p.UnitPrice, p.Discontinued, c.CategoryName FROM Products as p JOIN Categories c ON c.CategoryID = p.CategoryID");
+$statement->execute();
+$data = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-$data = $result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock', 'Discontinued'));
-/*
 $model = new \Kendo\Data\DataSourceSchemaModel();
-
 $productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
 $productNameField->type('string');
 
 $unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
 $unitPriceField->type('number');
 
-$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
-$unitsInStockField->type('number');
-
 $discontinuedField = new \Kendo\Data\DataSourceSchemaModelField('Discontinued');
 $discontinuedField->type('boolean');
 
 $model->addField($productNameField)
       ->addField($unitPriceField)
-      ->addField($unitsInStockField)
       ->addField($discontinuedField);
- */
+
 $productNameDimension = new \Kendo\Data\PivotDataSourceSchemaCubeDimension('ProductName');
 $productNameDimension->caption('All Products');
 
@@ -36,17 +32,19 @@ $categoryNameDimension->caption('All Categories');
 $discontinuedDimension = new \Kendo\Data\PivotDataSourceSchemaCubeDimension('Discontinued');
 $discontinuedDimension->caption('Discontinued');
 
-$sumMeasure = new \Kendo\Data\PivotDataSourceSchemaCubeMeasure('UnitPrice');
+$sumMeasure = new \Kendo\Data\PivotDataSourceSchemaCubeMeasure('Sum');
 $sumMeasure->format('{0:c}')
+            ->field('UnitPrice')
             ->aggregate('function(value, state) { return value + state; }');
 
 $cube = new \Kendo\Data\PivotDataSourceSchemaCube();
 $cube->addDimension($productNameDimension)
     ->addDimension($categoryNameDimension)
-    ->addDimension($discontinuedDimension);
+    ->addDimension($discontinuedDimension)
+    ->addMeasure($sumMeasure);
 
 $schema = new \Kendo\Data\PivotDataSourceSchema();
-$schema->data('data')
+$schema->model($model)
        ->cube($cube);
 
 $categoryColumn = new \Kendo\Data\PivotDataSourceColumn();
