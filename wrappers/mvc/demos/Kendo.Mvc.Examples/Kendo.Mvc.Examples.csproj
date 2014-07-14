@@ -189,6 +189,7 @@
     <Compile Include="Controllers\Gantt\ApiController.cs" />
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
+    <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\TreeMap\EventsController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
@@ -3269,6 +3270,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\treemap\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\grid\filter_row.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,14 +16,18 @@ namespace Kendo.Mvc.UI.Fluent
         where TModel : class
     {
         private bool hasGeneratedColumn;
+        private IUrlGenerator urlGenerator;
+        private ViewContext viewContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridColumnFactory{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container.</param>
-        public GridColumnFactory(Grid<TModel> container)
+        public GridColumnFactory(Grid<TModel> container, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             Container = container;
+            this.viewContext = viewContext;
+            this.urlGenerator = urlGenerator;
         }
 
         public Grid<TModel> Container
@@ -54,7 +58,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Container.Columns.Add(column);
 
-            return new GridBoundColumnBuilder<TModel>(column);
+            return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
 
         /// <summary>
@@ -98,7 +102,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Container.Columns.Add((GridColumnBase<TModel>)column);
 
-            return new GridBoundColumnBuilder<TModel>(column);
+            return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
                 
         /// <summary>
@@ -131,7 +135,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Container.Columns.Add(column);
 
-            return new GridBoundColumnBuilder<TModel>(column);
+            return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
 
         public virtual GridBoundColumnBuilder<TModel> ForeignKey(string memberName, IEnumerable data,
@@ -182,7 +186,7 @@ namespace Kendo.Mvc.UI.Fluent
 
             Container.Columns.Add((GridColumnBase<TModel>)column);
 
-            return new GridBoundColumnBuilder<TModel>(column);
+            return new GridBoundColumnBuilder<TModel>(column, this.viewContext, this.urlGenerator);
         }
 
         protected virtual void AutoGenerate(bool shouldGenerate, Action<GridColumnBase<TModel>> columnAction)

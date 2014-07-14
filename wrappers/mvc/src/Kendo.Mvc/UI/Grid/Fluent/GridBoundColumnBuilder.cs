@@ -11,13 +11,17 @@ namespace Kendo.Mvc.UI.Fluent
     public class GridBoundColumnBuilder<T> : GridColumnBuilderBase<IGridBoundColumn, GridBoundColumnBuilder<T>>
         where T : class
     {
+        private System.Web.Mvc.ViewContext viewContext;
+        private IUrlGenerator urlGenerator;
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBoundColumnBuilder{T}"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
-        public GridBoundColumnBuilder(IGridBoundColumn column)
+        public GridBoundColumnBuilder(IGridBoundColumn column, System.Web.Mvc.ViewContext viewContext, IUrlGenerator urlGenerator)
             : base(column)
-        {            
+        {
+            this.viewContext = viewContext;
+            this.urlGenerator = urlGenerator;
         }
 
         /// <summary>
@@ -130,7 +134,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GridBoundColumnBuilder<T> Filterable(Action<GridBoundColumnFilterableBuilder> configurator)
         {
-            configurator(new GridBoundColumnFilterableBuilder(Column.FilterableSettings));
+            configurator(new GridBoundColumnFilterableBuilder(Column.FilterableSettings, this.viewContext, this.urlGenerator));
             return this;
         }  
         

@@ -14,7 +14,7 @@ namespace Kendo.Mvc.UI.Tests.Grid
         public GridBoundColumnBuilderTests()
         {
             column = new GridBoundColumn<Customer, int>(GridTestHelper.CreateGrid<Customer>(), c=>c.Id);
-            builder = new GridBoundColumnBuilder<Customer>(column);
+            builder = new GridBoundColumnBuilder<Customer>(column, null, null);
         }
 
         [Fact]

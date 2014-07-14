@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         private static GridColumnFactory<T> Factory<T>()
             where T : class
         {
-            return new GridColumnFactory<T>(GridTestHelper.CreateGrid<T>());
+            return new GridColumnFactory<T>(GridTestHelper.CreateGrid<T>(), null, null);
         }
         
         [Fact]
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI.Fluent.Tests
         {
             var grid = GridTestHelper.CreateGrid<Customer>();
             grid.DataSource.Data = new[] {new Customer {Id = 1}}.AsQueryable();
-            var factory = new GridColumnFactory<Customer>(grid);
+            var factory = new GridColumnFactory<Customer>(grid, null, null);
             var builder = factory.Bound("Id");
 
             builder.Column.ShouldBeType<GridBoundColumn<Customer, int>>();

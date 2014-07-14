@@ -11,13 +11,17 @@ namespace Kendo.Mvc.UI.Fluent
     public class GridBoundColumnFilterableBuilder : GridFilterableSettingsBuilderBase<GridBoundColumnFilterableBuilder>
     {
         private readonly GridBoundColumnFilterableSettings settings;
+        private System.Web.Mvc.ViewContext viewContext;
+        private IUrlGenerator urlGenerator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridBoundColumnFilterableBuilder"/> class.
         /// </summary>
         /// <param name="column">The column.</param>
-        public GridBoundColumnFilterableBuilder(GridBoundColumnFilterableSettings settings) : base(settings)
+        public GridBoundColumnFilterableBuilder(GridBoundColumnFilterableSettings settings, System.Web.Mvc.ViewContext viewContext, IUrlGenerator urlGenerator) : base(settings)
         {
+            this.viewContext = viewContext;
+            this.urlGenerator = urlGenerator;
             this.settings = settings;
         }
 
@@ -40,6 +44,13 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBoundColumnFilterableBuilder UI(GridFilterUIRole role)
         {
             settings.FilterUIRole = role;
+            return this;
+        }
+
+        public GridBoundColumnFilterableBuilder Cell(Action<GridColumnFilterableCellSettingsBuilder> configurator)
+        {
+            configurator(new GridColumnFilterableCellSettingsBuilder(settings.CellSettings, this.viewContext, this.urlGenerator));
+            
             return this;
         }
 

@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
         public GridFilterableSettings()
         {
             Extra = true;
+            Mode = GridFilterMode.Menu;
             Messages = new FilterableMessages();
             Operators = new FilterableOperators();
         }
@@ -14,6 +15,8 @@ namespace Kendo.Mvc.UI
         public bool Enabled { get; set; }
 
         public bool Extra { get; set; }
+
+        public GridFilterMode Mode { get; set; }
 
         public FilterableMessages Messages { get; private set; }
 
@@ -24,6 +27,11 @@ namespace Kendo.Mvc.UI
             if (!Extra)
             {
                 json["extra"] = false;
+            }
+
+            if (Mode != GridFilterMode.Menu)
+            {
+                json["mode"] = Mode;
             }
 
             var messages = Messages.ToJson();

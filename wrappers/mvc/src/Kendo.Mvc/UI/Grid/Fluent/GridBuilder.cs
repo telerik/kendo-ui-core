@@ -889,7 +889,7 @@ namespace Kendo.Mvc.UI.Fluent
         public GridBuilder<T> Columns(Action<GridColumnFactory<T>> configurator)
         {
 
-            GridColumnFactory<T> factory = new GridColumnFactory<T>(Component);
+            GridColumnFactory<T> factory = new GridColumnFactory<T>(Component, Component.ViewContext, Component.UrlGenerator);
 
             configurator(factory);
 

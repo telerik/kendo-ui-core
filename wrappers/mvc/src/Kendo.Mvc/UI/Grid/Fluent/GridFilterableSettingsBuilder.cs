@@ -81,6 +81,17 @@ namespace Kendo.Mvc.UI.Fluent
             settings.Enabled = true;
 
             return (TDataSourceBuilder)this;
-        }       
+        }
+
+        /// <summary>
+        /// Specify the filter mode - you can choose between having separate header row and the filter menu available by clicking the icon. Default is the filter menu.
+        /// </summary>        
+        public TDataSourceBuilder Mode(GridFilterMode value)
+        {
+            settings.Mode = value;
+            settings.Enabled = true;
+
+            return (TDataSourceBuilder)this;
+        }    
     }    
 }
