@@ -687,7 +687,7 @@ var __meta__ = {
             var axes = this.axes();
             var descriptors = this[axis]() || [];
 
-            if (axes && axes[axis]) {
+            if (axes && axes[axis] && axes[axis].tuples && axes[axis].tuples[0]) {
                 descriptors = descriptorsForAxes(axes[axis].tuples || []);
             }
             return descriptors;
@@ -2167,7 +2167,7 @@ var __meta__ = {
         axes: function(root) {
             root = kendo.getter("ExecuteResponse.return.root", true)(root);
 
-            var axes = kendo.getter("Axes.Axis", true)(root);
+            var axes = asArray(kendo.getter("Axes.Axis", true)(root));
             var columns = translateAxis(axes[0]);
             var rows = {};
 

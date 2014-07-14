@@ -1144,6 +1144,36 @@
         equal(descriptors[0].name, "foo");
     });
 
+    test("columnsAxisDescriptors returns columns state when there are not tuples", 2, function() {
+        var dataSource = new PivotDataSource({
+            columns: [{ name: "[level 0]" }],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: [
+                                ]
+                            }
+                        },
+                        data: []
+                    });
+                }
+            }
+        });
+
+        dataSource.read();
+
+        var descriptors = dataSource.columnsAxisDescriptors();
+
+        equal(descriptors.length, 1);
+        equal(descriptors[0].name, "[level 0]");
+    });
+
     test("expand of nested tuple with multiple measures", 3, function() {
         var columnTuples = [
             [
