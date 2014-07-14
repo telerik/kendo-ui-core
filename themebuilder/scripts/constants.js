@@ -304,6 +304,8 @@
             "@upload-error-background-color":           constant(BGCOLOR, ".k-file-error .k-progress"),
 
             "@alt-background-color":            constant(BGCOLOR, ".k-alt"),
+            "@nested-alt-background-color":     constant(BGCOLOR, ".k-alt .k-alt"),
+            "@inverse-text-color":              constant(COLOR, ".k-inverse"),
             "@input-background-color":          constant(BGCOLOR, ".k-input"),
             "@input-text-color":                constant(COLOR, ".k-autocomplete .k-input"),
             "@shadow-color":                    constant("box-shadow", ".k-popup"),
@@ -323,7 +325,10 @@
             "@notification-warning-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
             "@notification-error-background-color": constant(BGCOLOR, ".k-notification.k-notification-error"),
             "@notification-error-text-color": constant(COLOR, ".k-notification.k-notification-error"),
-            "@notification-error-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info")
+            "@notification-error-border-color": constant(BORDERCOLOR, ".k-notification.k-notification-info"),
+
+            "@task-summary-color": constant(BORDERCOLOR, ".k-task-summary"),
+            "@task-summary-selected-color": constant(BORDERCOLOR, ".k-state-selected.k-task-summary")
 
         },
         datavizConstants = {
@@ -467,10 +472,16 @@
             "Misc": {
                 "@main-border-radius":            "Border radius",
                 "@alt-background-color":          "Alternating color",
+                "@nested-alt-background-color":   "Nested alternating color",
                 "@shadow-color":                  "Shadow color",
                 "@shadow-inset-color":            "Inset shadow",
                 "@loading-panel-color":           "Loading panel background",
-                "@splitbar-background-color":     "Splitbar background"
+                "@splitbar-background-color":     "Splitbar background",
+                "@inverse-text-color":            "Inverse text color"
+            },
+            "Gantt charts": {
+                "@task-summary-color":          "Task summary color",
+                "@task-summary-selected-color": "Task summary selected color"
             }
         },
         datavizConstantsHierarchy = {
