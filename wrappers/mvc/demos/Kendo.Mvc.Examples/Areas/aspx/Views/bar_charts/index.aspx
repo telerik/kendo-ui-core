@@ -12,7 +12,7 @@
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart()
         .Name("chart")
-        .Title("Site Visitors Stats /thousands/")
+        .Title("Site Visitors Stats \n /thousands/")
         .Legend(legend => legend
             .Visible(false)
         )

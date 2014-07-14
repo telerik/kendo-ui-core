@@ -29,7 +29,7 @@
         new {category="NorthAmerica",value=3.6,color="#033939"}           
     })
             .Labels(labels => labels
-                .Template("#= category #: #= value#%")
+                .Template("#= category #: \n #= value#%")
                 .Background("transparent")
                 .Visible(true)
             )

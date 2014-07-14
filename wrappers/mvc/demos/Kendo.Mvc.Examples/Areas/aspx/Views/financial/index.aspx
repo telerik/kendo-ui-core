@@ -6,7 +6,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
         .Name("stockChart")
-        .Title("The Boeing Company (NYSE:BA)")
+        .Title("The Boeing Company \n (NYSE:BA)")
         .DataSource(ds => ds.Read(read => read
             .Action("_BoeingStockData", "Financial")
         ))

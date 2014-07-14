@@ -46,7 +46,7 @@
             .Labels(labels => labels
                 .Visible(true)
                 .Position(ChartPieLabelsPosition.OutsideEnd)
-                .Template("#= category #: #= value#%")
+                .Template("#= category #: \n #= value#%")
                 .Background("transparent")
             );
         })
