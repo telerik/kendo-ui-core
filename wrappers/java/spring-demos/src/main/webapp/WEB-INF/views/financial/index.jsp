@@ -7,7 +7,7 @@
 
 <demo:header />
      <kendo:stockChart name="stockChart" dateField="date">
-        <kendo:stockChart-title text="The Boeing Company (NYSE:BA)" />
+        <kendo:stockChart-title text="The Boeing Company \n (NYSE:BA)" />
         <kendo:dataSource>
              <kendo:dataSource-transport>
                  <kendo:dataSource-transport-read url="${readUrl}" dataType="json" type="POST" contentType="application/json" />

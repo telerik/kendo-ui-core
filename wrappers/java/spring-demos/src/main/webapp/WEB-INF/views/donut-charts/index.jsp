@@ -11,7 +11,7 @@
                 <kendo:chart-seriesItem type="donut" data="${donutData2011}" startAngle="150">
                 </kendo:chart-seriesItem>
                 <kendo:chart-seriesItem type="donut" data="${donutData2012}" startAngle="150">
-                	<kendo:chart-seriesItem-labels position="outsideEnd" visible="true" template="#= category #: #= value#%" background="transparent" />
+                	<kendo:chart-seriesItem-labels position="outsideEnd" visible="true" template="#= category #: \n #= value#%" background="transparent" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-tooltip visible="true" template="#= category # (#= series.name #): #= value #%" />

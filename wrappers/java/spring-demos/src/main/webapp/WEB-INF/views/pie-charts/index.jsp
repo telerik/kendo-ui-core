@@ -10,7 +10,7 @@
              </kendo:chart-legend>
              <kendo:chart-series>
                 <kendo:chart-seriesItem type="pie" data="${pieData}" startAngle="150">
-                	<kendo:chart-seriesItem-labels template="#= category #: #= value#%" visible="true" background="transparent" />
+                	<kendo:chart-seriesItem-labels template="#= category #: \n #= value#%" visible="true" background="transparent" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-tooltip visible="true" format="{0}%" />

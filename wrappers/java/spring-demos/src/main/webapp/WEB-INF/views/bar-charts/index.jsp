@@ -12,7 +12,7 @@
              };
          %>
          <kendo:chart name="chart">
-             <kendo:chart-title text="Site Visitors Stats /thousands/" />
+             <kendo:chart-title text="Site Visitors Stats \n /thousands/" />
              <kendo:chart-legend visible="false" />
              <kendo:chart-chartArea background="transparent" />
              <kendo:chart-series>

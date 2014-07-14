@@ -14,7 +14,7 @@
              };
          %>
          <kendo:chart name="chart">
-             <kendo:chart-title text="Gross domestic product growth /GDP annual %/" />
+             <kendo:chart-title text="Gross domestic product growth \n /GDP annual %/" />
              <kendo:chart-legend position="bottom" />
              <kendo:chart-chartArea background="transparent" />
              <kendo:chart-series>
