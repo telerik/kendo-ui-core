@@ -51,7 +51,7 @@ $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
     ->columnWidth(200)
     ->filterable(true)
-    ->height(550);
+    ->height(494);
 
 $configurator = new \Kendo\UI\PivotConfigurator('configurator');
 $configurator->dataSource($dataSource)
@@ -59,8 +59,8 @@ $configurator->dataSource($dataSource)
 ?>
 
 <?php
-echo $pivotgrid->render();
 echo $configurator->render();
+echo $pivotgrid->render();
 ?>
 
 <style>

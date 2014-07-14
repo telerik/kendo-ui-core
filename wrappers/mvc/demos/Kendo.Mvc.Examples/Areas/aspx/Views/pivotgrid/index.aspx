@@ -27,7 +27,7 @@
         .Name("pivotgrid")
         .ColumnWidth(200)
         .Filterable(true)
-        .Height(550)
+        .Height(494)
         .Configurator("#configurator")
         .DataSource(dataSource => dataSource.
             Xmla()
