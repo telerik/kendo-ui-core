@@ -332,6 +332,12 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 if (kendo.ui.Scheduler) {
 kendo.ui.Scheduler.prototype.options.messages =
 $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
+  "allDay": "all day",
+  "date": "Date",
+  "event": "Event",
+  "time": "Time",
+  "showFullDay": "Show full day",
+  "showWorkDay": "Show business hours",
   "today": "Today",
   "save": "Save",
   "cancel": "Cancel",
@@ -339,6 +345,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Delete event",
   "ariaSlotLabel": "Selected from {0:t} to {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
+  "confirmation": "Are you sure you want to delete this event?",
   "views": {
     "day": "Day",
     "week": "Week",
@@ -352,7 +359,9 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "deleteWindowSeries": "Delete the series",
     "editWindowTitle": "Edit Recurring Item",
     "editWindowOccurrence": "Edit current occurrence",
-    "editWindowSeries": "Edit the series"
+    "editWindowSeries": "Edit the series",
+    "deleteRecurring": "Do you want to delete only this event occurrence or the whole series?",
+    "editRecurring": "Do you want to edit only this event occurrence or the whole series?"
   },
   "editor": {
     "title": "Title",
