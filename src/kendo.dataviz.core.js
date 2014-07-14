@@ -1186,7 +1186,7 @@ var __meta__ = {
     });
 
     var TextBox = BoxElement.extend({
-        ROWS_SPLIT_REGEX: /\n/m,
+        ROWS_SPLIT_REGEX: /\n|\\n/m,
 
         init: function(content, options) {
             var textbox = this;
