@@ -1286,8 +1286,6 @@
                 kendo.destroy(element);
                 Widget.fn.init.call(that, element, userOptions);
 
-                that.bind(that.events, that.options);
-
                 that._initElements();
                 that._initTheme();
                 that._extendLayoutOptions(that.options);
