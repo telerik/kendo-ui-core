@@ -1,13 +1,3 @@
-bash "Install forever" do
-    code "npm install -g forever"
-    creates "/usr/bin/forever"
-end
-
-bash "Install nodemon" do
-    code "npm install -g nodemon"
-    creates "/usr/bin/nodemon"
-end
-
 services = [
     { name: 'dojo', port: 3300 },
     { name: 'dojo-runner', port: 3301 }
