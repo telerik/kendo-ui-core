@@ -7,7 +7,8 @@ var __meta__ = {
     name: "PivotFieldMenu",
     category: "web",
     description: "The PivotFieldMenu widget allows the user to filter on fields displayed in PivotGrid",
-    depends: [ "pivotgrid", "menu", "window", "treeview", "dropdownlist" ]
+    depends: [ "pivotgrid", "menu", "window", "treeview", "dropdownlist" ],
+    advanced: true
 };
 
 /*jshint eqnull: true*/
