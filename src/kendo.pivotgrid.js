@@ -2335,6 +2335,10 @@ var __meta__ = {
         setDataSource: function(dataSource) {
             this.dataSource.unbind(CHANGE, this._refreshHandler);
             this.dataSource = this.options.dataSource = dataSource;
+
+            if (this.fieldMenu) {
+                this.fieldMenu.setDataSource(dataSource);
+            }
             dataSource.first(CHANGE, this._refreshHandler);
 
             this.refresh();

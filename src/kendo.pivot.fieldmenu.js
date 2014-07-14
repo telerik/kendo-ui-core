@@ -154,6 +154,12 @@ var __meta__ = {
             that.menu.close();
         },
 
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+        },
+
         _dataSource: function() {
             this.dataSource = kendo.data.PivotDataSource.create(this.options.dataSource);
         },
