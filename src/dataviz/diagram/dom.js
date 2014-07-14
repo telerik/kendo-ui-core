@@ -1616,6 +1616,11 @@
                 this._createShapes();
                 this._createConnections();
             },
+
+            setOptions: function(options) {
+                deepExtend(this.options, options);
+            },
+
             clear: function () {
                 var that = this;
 
@@ -1826,18 +1831,19 @@
             deselect: function(item) {
                 this._internalSelection = true;
                 var deselected = [],
+                    items = [],
                     element, i;
 
                 if (item instanceof Array) {
-                    deselected = item;
+                    items = item;
                 } else if (item instanceof DiagramElement) {
-                    deselected.push(item);
+                    items.push(item);
                 } else if (!isDefined(item)) {
-                    deselected = this._selectedItems.slice(0);
+                    items = this._selectedItems.slice(0);
                 }
 
-                for (i = 0; i < deselected.length; i++) {
-                    element = deselected[i];
+                for (i = 0; i < items.length; i++) {
+                    element = items[i];
                     if (element.select(false)) {
                         deselected.push(element);
                     }
