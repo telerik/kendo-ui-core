@@ -1,11 +1,13 @@
 ﻿@(Html.Kendo().PivotConfigurator()
     .Name("configurator")
+    .Filterable(true)
 )
 
 @(Html.Kendo().PivotGrid()
     .Name("pivotgrid")
     .ColumnWidth(200)
     .Height(550)
+    .Filterable(true)
     .Configurator("#configurator")
     .DataSource(dataSource => dataSource.
         Xmla()

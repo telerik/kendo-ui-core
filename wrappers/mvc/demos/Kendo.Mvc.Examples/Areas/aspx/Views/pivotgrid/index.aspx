@@ -20,11 +20,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%= Html.Kendo().PivotConfigurator()
         .Name("configurator")
+        .Filterable(true)
     %>
 
     <%= Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
+        .Filterable(true)
         .Height(550)
         .Configurator("#configurator")
         .DataSource(dataSource => dataSource.
