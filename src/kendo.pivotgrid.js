@@ -197,10 +197,32 @@ var __meta__ = {
     var PivotCubeBuilder = Class.extend({
         init: function(options) {
             this.options = extend({}, this.options, options);
+            this.dimensions = this._normalizeDescriptors("field", this.options.dimensions);
+            this.measures = this._normalizeDescriptors("name", this.options.measures);
+        },
+
+        _normalizeDescriptors: function(keyField, descriptors) {
+            descriptors = descriptors || {};
+            var fields = {};
+            var field;
+
+            if (toString.call(descriptors) === "[object Array]") {
+                for (var idx = 0, length = descriptors.length; idx < length; idx++) {
+                    field = descriptors[idx];
+                    if (typeof field === "string") {
+                        fields[field] = {};
+                    } else if (field[keyField]) {
+                        fields[field[keyField]] = field;
+                    }
+                }
+                descriptors = fields;
+            }
+
+            return descriptors;
         },
 
         _asTuples: function(map, descriptors) {
-            var dimensionsSchema = this.options.dimensions || [];
+            var dimensionsSchema = this.dimensions || [];
             var result = [];
             var root;
             var idx;
@@ -262,7 +284,7 @@ var __meta__ = {
         _toDataArray: function(map, columns, measures) {
             var format;
             if (measures && measures.length) {
-                var measure = (this.options.measures || {})[measures[0]];
+                var measure = (this.measures || {})[measures[0]];
                 if (measure.format) {
                     format = measure.format;
                 }
@@ -366,7 +388,7 @@ var __meta__ = {
 
         _measureAggregator: function(options) {
             var measureDescriptors = options.measures || [];
-            var measure = (this.options.measures || {})[measureDescriptors[0]];
+            var measure = (this.measures || {})[measureDescriptors[0]];
             var measureAggregator;
 
             if (measure) {

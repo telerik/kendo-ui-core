@@ -297,4 +297,37 @@
         equal(result.data[11].value, 1, "ordinal 11");
     });
 
+    test("dimension as array", function() {
+        var builder = new PivotCubeBuilder({
+           dimensions: [
+               { field: "FirstName", caption: "All First Names" },
+               { field: "LastName", caption: "All Last Names" }
+           ]
+        });
+
+        equal(builder.dimensions.FirstName.caption, "All First Names");
+        equal(builder.dimensions.LastName.caption, "All Last Names");
+    });
+
+    test("dimension as array of strings", function() {
+        var builder = new PivotCubeBuilder({
+           dimensions: [ "FirstName", "LastName" ]
+        });
+
+        ok(builder.dimensions.FirstName);
+        ok(builder.dimensions.LastName);
+    });
+
+    test("measures as array", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+
+        equal(builder.measures.Measure1.caption, "Measure 1");
+        equal(builder.measures.Measure1.field, "value");
+        ok(builder.measures.Measure1.aggregate);
+    });
+
 })();
