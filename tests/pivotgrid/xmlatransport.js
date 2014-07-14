@@ -436,6 +436,19 @@
         ok(params.indexOf('FROM (SELECT (Filter([foo].Children, NOT [foo].CurrentMember.MEMBER_CAPTION = "zoo")) ON 0 FROM [cubeName])') > -1);
     });
 
+    test("parameterMap nested filter is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]" }],
+            measures: ["[bar]", "[baz]"],
+            filter: { filters: [{ operator: "neq", field: "[foo]", value: "zoo" }, { operator: "eq", field: "[foo]", value: "boo" }] }
+        }, "read");
+
+        ok(params.indexOf('FROM (SELECT (Filter([foo].Children, NOT [foo].CurrentMember.MEMBER_CAPTION = "zoo")) ON 0 FROM ( SELECT (Filter([foo].Children, [foo].CurrentMember.MEMBER_CAPTION = "boo")) ON 0 FROM [cubeName] ))') > -1);
+    });
+
     test("parameterMap create empty discover statment wrap", function() {
         var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName" } }, "discover");

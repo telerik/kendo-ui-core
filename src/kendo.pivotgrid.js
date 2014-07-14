@@ -1844,29 +1844,43 @@ var __meta__ = {
         neq: ", NOT {0}.CurrentMember.MEMBER_CAPTION = \"{1}\""
     };
 
-    function serializeFilters(filter) {
+    function serializeExpression(expression) {
         var command = "";
+        var value = expression.value;
+        var field = expression.field;
+        var operator = expression.operator;
 
+        if (operator == "in") {
+            command += "{";
+            command += value;
+            command += "}";
+        } else {
+            command += "Filter(";
+            command += field + ".Children";
+            command += kendo.format(filterFunctionFormats[operator], field, value);
+            command += ")";
+        }
+
+        return command;
+    }
+
+    function serializeFilters(filter, cube) {
+        var command = "", current;
         var filters = filter.filters;
-        for (var idx = 0; idx < filters.length; idx++) {
-            if (filters[idx].operator == "in") {
-                command += "{";
-                command += filters[idx].value;
-                command += "}";
+        var length = filters.length;
+        var idx;
+
+        for (idx = length - 1; idx >= 0; idx--) {
+
+            current = "SELECT (";
+            current += serializeExpression(filters[idx]);
+            current += ") ON 0";
+
+            if (idx == length - 1) {
+                current += " FROM [" + cube + "]";
+                command = current;
             } else {
-                command += "Filter(";
-
-                var name = filters[idx].field;
-
-                name += ".Children";
-
-                command += name;
-                command += kendo.format(filterFunctionFormats[filters[idx].operator], filters[idx].field, filters[idx].value);
-                command += ")";
-            }
-
-            if (idx < filters.length - 1) {
-                command += ",";
+                command = current + " FROM ( " + command + " )";
             }
         }
 
@@ -1947,9 +1961,9 @@ var __meta__ = {
 
             if (options.filter) {
                 command += " FROM ";
-                command += "(SELECT (";
-                command += serializeFilters(options.filter);
-                command += ") ON 0 FROM [" + options.connection.cube + "])";
+                command += "(";
+                command += serializeFilters(options.filter, options.connection.cube);
+                command += ")";
             } else {
                 command += " FROM [" + options.connection.cube + "]";
             }
