@@ -188,6 +188,7 @@
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
     <Compile Include="Controllers\Gantt\ApiController.cs" />
     <Compile Include="Controllers\Gantt\EventsController.cs" />
+    <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
@@ -812,6 +813,7 @@
     <Content Include="Areas\aspx\Views\gantt\api.aspx" />
     <Content Include="Areas\aspx\Views\gantt\events.aspx" />
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
+    <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
@@ -3260,7 +3262,9 @@
     <Content Include="Areas\razor\Views\notification\position_stacking.cshtml" />
     <Content Include="Areas\razor\Views\notification\templates.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\gantt\keyboard_navigation.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
