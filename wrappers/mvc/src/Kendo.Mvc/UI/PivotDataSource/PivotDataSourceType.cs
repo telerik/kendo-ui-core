@@ -3,6 +3,7 @@
     public enum PivotDataSourceType
     {
         Xmla,
-        Custom
+        Custom,
+        Ajax
     }
 }

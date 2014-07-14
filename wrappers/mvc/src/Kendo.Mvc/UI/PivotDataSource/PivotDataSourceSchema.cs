@@ -2,6 +2,7 @@
 {
     using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class PivotDataSourceSchema : JsonObject
     {
@@ -35,6 +36,14 @@
 
         public string Type { get; set; }
 
+        public PivotDataSourceSchemaCube Cube { get; set; }
+
+        public string Data { get; set; }
+
+        public string Total { get; set; }
+
+        public string Errors { get; set; }
+
         public PivotDataSourceSchema()
         {
             FunctionAxes = new ClientHandlerDescriptor();
@@ -44,6 +53,7 @@
             FunctionDimensions = new ClientHandlerDescriptor();
             FunctionHierarchies = new ClientHandlerDescriptor();
             FunctionLevels = new ClientHandlerDescriptor();
+            Cube = new PivotDataSourceSchemaCube();
         }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -111,9 +121,31 @@
                 FluentDictionary.For(json).Add("levels", Levels, string.Empty);
             }
 
+            if (!string.IsNullOrEmpty(Data))
+            {
+                json.Add("data", Data);
+            }
+
+            if (!string.IsNullOrEmpty(Total))
+            {
+                json.Add("total", Total);
+            }
+
+            if (!string.IsNullOrEmpty(Errors))
+            {
+                json.Add("errors", Errors);
+            }
+
             if (!string.IsNullOrEmpty(Type))
             {
                 json.Add("type", Type);
+            }
+
+            var cube = Cube.ToJson();
+
+            if (cube.Keys.Any())
+            {
+                json["cube"] = cube;
             }
         }
     }

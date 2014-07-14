@@ -2,12 +2,12 @@
 {
     using Xunit;
 
-    public class PivotCustomDataSourceTransportTests
+    public class PivotCustomDataSourceTransportBuilderTests
     {
         private readonly PivotTransport transport;
         private readonly PivotCustomDataSourceTransportBuilder builder;
 
-        public PivotCustomDataSourceTransportTests()
+        public PivotCustomDataSourceTransportBuilderTests()
         {
             transport = new PivotTransport();
             builder = new PivotCustomDataSourceTransportBuilder(transport, TestHelper.CreateViewContext(), new UrlGenerator());

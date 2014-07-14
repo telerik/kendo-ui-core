@@ -11,7 +11,7 @@
     /// <summary>
     /// The server side wrapper for Kendo UI PivotGrid
     /// </summary>
-    public class PivotGrid : WidgetBase
+    public class PivotGrid: WidgetBase
     {
         public PivotGrid(ViewContext viewContext,
                     IJavaScriptInitializer initializer,

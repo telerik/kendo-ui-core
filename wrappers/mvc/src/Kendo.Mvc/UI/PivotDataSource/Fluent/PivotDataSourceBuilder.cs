@@ -7,7 +7,8 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PivotDataSource"/> component.
     /// </summary>
-    public class PivotDataSourceBuilder : IHideObjectMembers
+    public class PivotDataSourceBuilder<TModel> : IHideObjectMembers
+         where TModel : class
     {
         protected readonly PivotDataSource dataSource;
         protected readonly IUrlGenerator urlGenerator;
@@ -37,6 +38,16 @@
         {
             dataSource.Type = PivotDataSourceType.Custom;
             return new PivotCustomDataSourceBuilder(dataSource, viewContext, urlGenerator);
+        }
+
+
+        /// <summary>
+        /// Use it to configure Ajax binding to flat data.
+        /// </summary>
+        public PivotAjaxDataSourceBuilder<TModel> Ajax()
+        {
+            dataSource.Type = PivotDataSourceType.Ajax;
+            return new PivotAjaxDataSourceBuilder<TModel>(dataSource, viewContext, urlGenerator);
         }
     }
 }

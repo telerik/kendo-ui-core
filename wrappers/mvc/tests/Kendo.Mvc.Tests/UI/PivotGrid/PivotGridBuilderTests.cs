@@ -8,13 +8,13 @@
     public class PivotGridBuilderTests
     {
         private readonly PivotGrid pivotGrid;
-        private readonly PivotGridBuilder builder;
+        private readonly PivotGridBuilder<object> builder;
 
         public PivotGridBuilderTests()
         {
             Mock<HtmlTextWriter> writer = new Mock<HtmlTextWriter>(TextWriter.Null);
             pivotGrid = PivotGridTestHelper.CreatePivotGrid(writer.Object);
-            builder = new PivotGridBuilder(pivotGrid);
+            builder = new PivotGridBuilder<object>(pivotGrid);
         }
 
         [Fact]

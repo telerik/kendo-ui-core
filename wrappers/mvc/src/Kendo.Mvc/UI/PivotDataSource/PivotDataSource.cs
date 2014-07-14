@@ -1,8 +1,9 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Kendo.Mvc.Extensions;
 
     public class PivotDataSource : JsonObject
     {
@@ -29,24 +30,10 @@
             protected set;
         }
 
-        public PivotDataSourceType? Type
-        {
-            get;
-            set;
-        }
-
-        public string CustomType
-        {
-            get;
-            set;
-        }
-
-        public IDictionary<string, object> CustomTransport
-        {
-            get;
-            set;
-        }
-
+        public string CustomType { get; set; }
+        public PivotDataSourceType? Type { get; set; }
+        public IEnumerable Data { get; set; }
+        public IDictionary<string, object> CustomTransport { get; set; }
         public IDictionary<string, object> Events { get; private set; }
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -57,7 +44,11 @@
                 {
                     json["type"] = Type.ToString().ToLower();
                 }
-                else if (Type == PivotDataSourceType.Custom)
+                else if (Type == PivotDataSourceType.Ajax)
+                {
+                    json["type"] = new ClientHandlerDescriptor() { HandlerName = GenerateTypeFunction(true) };
+                }
+                else
                 {
                     if (!string.IsNullOrEmpty(CustomType))
                     {
@@ -107,6 +98,34 @@
                 json["schema"] = schema;
             }
 
+            if (Data != null)
+            {
+                SerializeData(json, Data);
+            }
+        }
+
+        private void SerializeData(IDictionary<string, object> json, IEnumerable data)
+        {
+            if (string.IsNullOrEmpty(Schema.Data))
+            {
+                json["data"] = Data;
+            }
+            else
+            {
+                json["data"] = new Dictionary<string, object>()
+                    {
+                        { Schema.Data,  Data },
+                        { Schema.Total, Data.AsQueryable().Count() }
+                    };
+            }
+        }
+
+        private string GenerateTypeFunction(bool isAspNetMvc)
+        {
+            string baseFunction = "(function(){{if(kendo.data.transports['{0}{1}']){{return '{0}{1}';}}" +
+                         " else{{throw new Error('The kendo.aspnetmvc.min.js script is not included.');}}}})()";
+
+            return string.Format(baseFunction, "aspnetmvc-", Type.ToString().ToLower());
         }
     }
 }

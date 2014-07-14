@@ -48,6 +48,5 @@
 
             return this;
         }
-
     }
 }

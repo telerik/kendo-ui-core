@@ -188,10 +188,15 @@
     <Compile Include="UI\Map\Serialization\ZoomSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\NavigatorSettingsTests.cs" />
     <Compile Include="UI\Map\Serialization\MapControlsSettingsTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceBuilderTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaBuilderTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaCubeBuilderTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaCubeDimensionBuilderTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotAjaxDataSourceSchemaCubeMeasureBuilderTests.cs" />
     <Compile Include="UI\PivotGrid\PivotGridBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotCustomDataSourceBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotCustomDataSourceSchemaBuilderTests.cs" />
-    <Compile Include="UI\PivotDataSource\PivotCustomDataSourceTransportTests.cs" />
+    <Compile Include="UI\PivotDataSource\PivotCustomDataSourceTransportBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceColumnBuilderTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceColumnFactoryTests.cs" />
     <Compile Include="UI\PivotDataSource\PivotDataSourceMeasureBuilderTests.cs" />

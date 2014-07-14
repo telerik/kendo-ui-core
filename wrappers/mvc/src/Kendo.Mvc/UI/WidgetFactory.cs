@@ -568,7 +568,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().Scheduler()
+        ///  &lt;%= Html.Kendo().Scheduler&lt;SchedulerEvent&gt;()
         ///             .Name("Scheduler")
         /// %&gt;
         /// </code>
@@ -579,7 +579,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a new <see cref="PivotGrid"/>.
+        /// Creates a new <see cref="PivotGrid{T}"/>.
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -588,11 +588,25 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public virtual PivotGridBuilder PivotGrid()
+        public virtual PivotGridBuilder<object> PivotGrid()
         {
-            return new PivotGridBuilder(new PivotGrid(ViewContext, Initializer, UrlGenerator));
+            return new PivotGridBuilder<object>(new PivotGrid(ViewContext, Initializer, UrlGenerator));
         }
 
+        /// <summary>
+        /// Creates a new <see cref="PivotGrid{T}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().PivotGrid&lt;EventData&gt;()
+        ///             .Name("PivotGrid")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual PivotGridBuilder<T> PivotGrid<T>() where T : class
+        {
+            return new PivotGridBuilder<T>(new PivotGrid(ViewContext, Initializer, UrlGenerator));
+        }
 
         /// <summary>
         /// Creates a new <see cref="PivotConfigurator"/>.
