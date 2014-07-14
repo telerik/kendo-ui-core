@@ -31,6 +31,7 @@ var __meta__ = {
         CHANGE = "change",
         ERROR = "error",
         PROGRESS = "progress",
+        STATERESET = "stateReset",
         DIV = "<div/>",
         NS = ".kendoPivotGrid",
         ROW_TOTAL_KEY = "__row_total__",
@@ -545,7 +546,8 @@ var __meta__ = {
                     measures: identity,
                     dimensions: identity,
                     hierarchies: identity,
-                    levels: identity
+                    levels: identity,
+                    members: identity
                 }
             }, options));
 
@@ -685,7 +687,7 @@ var __meta__ = {
             var axes = this.axes();
             var descriptors = this[axis]() || [];
 
-            if (axes && axes[axis]) {
+            if (axes && axes[axis] && axes[axis].tuples && axes[axis].tuples[0]) {
                 descriptors = descriptorsForAxes(axes[axis].tuples || []);
             }
             return descriptors;
@@ -1182,6 +1184,7 @@ var __meta__ = {
                 this._axes = {};
                 this._data = this._observe([]);
                 this._clearAxesData = false;
+                this.trigger(STATERESET);
             }
 
             var options = DataSource.fn._params.call(this, data);
@@ -1841,29 +1844,43 @@ var __meta__ = {
         neq: ", NOT {0}.CurrentMember.MEMBER_CAPTION = \"{1}\""
     };
 
-    function serializeFilters(filter) {
+    function serializeExpression(expression) {
         var command = "";
+        var value = expression.value;
+        var field = expression.field;
+        var operator = expression.operator;
 
+        if (operator == "in") {
+            command += "{";
+            command += value;
+            command += "}";
+        } else {
+            command += "Filter(";
+            command += field + ".Children";
+            command += kendo.format(filterFunctionFormats[operator], field, value);
+            command += ")";
+        }
+
+        return command;
+    }
+
+    function serializeFilters(filter, cube) {
+        var command = "", current;
         var filters = filter.filters;
-        for (var idx = 0; idx < filters.length; idx++) {
-            if (filters[idx].operator == "in") {
-                command += "{";
-                command += filters[idx].value;
-                command += "}";
+        var length = filters.length;
+        var idx;
+
+        for (idx = length - 1; idx >= 0; idx--) {
+
+            current = "SELECT (";
+            current += serializeExpression(filters[idx]);
+            current += ") ON 0";
+
+            if (idx == length - 1) {
+                current += " FROM [" + cube + "]";
+                command = current;
             } else {
-                command += "Filter(";
-
-                var name = filters[idx].field;
-
-                name += ".Children";
-
-                command += name;
-                command += kendo.format(filterFunctionFormats[filters[idx].operator], filters[idx].field, filters[idx].value);
-                command += ")";
-            }
-
-            if (idx < filters.length - 1) {
-                command += ",";
+                command = current + " FROM ( " + command + " )";
             }
         }
 
@@ -1944,9 +1961,9 @@ var __meta__ = {
 
             if (options.filter) {
                 command += " FROM ";
-                command += "(SELECT (";
-                command += serializeFilters(options.filter);
-                command += ") ON 0 FROM [" + options.connection.cube + "])";
+                command += "(";
+                command += serializeFilters(options.filter, options.connection.cube);
+                command += ")";
             } else {
                 command += " FROM [" + options.connection.cube + "]";
             }
@@ -2127,7 +2144,8 @@ var __meta__ = {
             uniqueName: kendo.getter("MEMBER_UNIQUE_NAME['#text']", true),
             dimensionUniqueName: kendo.getter("DIMENSION_UNIQUE_NAME['#text']", true),
             hierarchyUniqueName: kendo.getter("HIERARCHY_UNIQUE_NAME['#text']", true),
-            levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true)
+            levelUniqueName: kendo.getter("LEVEL_UNIQUE_NAME['#text']", true),
+            childrenCardinality: kendo.getter("CHILDREN_CARDINALITY['#text']", true)
         }
     };
 
@@ -2149,7 +2167,7 @@ var __meta__ = {
         axes: function(root) {
             root = kendo.getter("ExecuteResponse.return.root", true)(root);
 
-            var axes = kendo.getter("Axes.Axis", true)(root);
+            var axes = asArray(kendo.getter("Axes.Axis", true)(root));
             var columns = translateAxis(axes[0]);
             var rows = {};
 
@@ -2265,12 +2283,21 @@ var __meta__ = {
                 }
             });
 
+            if (options.filterable) {
+                this.fieldMenu = new ui.PivotFieldMenu(this.element, {
+                    messages: this.options.messages.filterable,
+                    filter: ".k-setting-filter",
+                    dataSource: this.dataSource
+                });
+            }
+
             this.refresh();
         },
 
         options: {
             name: "PivotSettingTarget",
             template: null,
+            filterable: false,
             emptyTemplate: "<div class='k-empty'>${data}</div>",
             setting: "columns",
             enabled: true,
@@ -2483,6 +2510,7 @@ var __meta__ = {
             name: "PivotGrid",
             autoBind: true,
             reorderable: true,
+            filterable: false,
             height: null,
             columnWidth: 100,
             configurator: "",
@@ -2532,17 +2560,20 @@ var __meta__ = {
 
             if (that.dataSource && this._refreshHandler) {
                 that.dataSource.unbind(CHANGE, that._refreshHandler)
-                                .unbind(PROGRESS, that._progressHandler)
-                                .unbind(ERROR, that._errorHandler);
+                               .unbind(STATERESET, that._stateResetHandler)
+                               .unbind(PROGRESS, that._progressHandler)
+                               .unbind(ERROR, that._errorHandler);
             } else {
                 that._refreshHandler = $.proxy(that.refresh, that);
                 that._progressHandler = $.proxy(that._requestStart, that);
+                that._stateResetHandler = $.proxy(that._stateReset, that);
                 that._errorHandler = $.proxy(that._error, that);
             }
 
             that.dataSource = kendo.data.PivotDataSource.create(dataSource)
                                    .bind(CHANGE, that._refreshHandler)
                                    .bind(PROGRESS, that._progressHandler)
+                                   .bind(STATERESET, that._stateResetHandler)
                                    .bind(ERROR, that._errorHandler);
         },
 
@@ -2552,6 +2583,11 @@ var __meta__ = {
 
         _requestStart: function() {
             this._progress(true);
+        },
+
+        _stateReset: function() {
+            this._columnBuilder.reset();
+            this._rowBuilder.reset();
         },
 
         _wrapper: function() {
@@ -2571,6 +2607,11 @@ var __meta__ = {
 
         _createSettingTarget: function(element, options) {
             var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+
+            if (options.filterable) {
+                template += '<span class="k-icon k-filter k-setting-filter"></span>';
+            }
+
             if (this.options.reorderable) {
                 template += '<span class="k-icon k-si-close k-setting-delete"></span>';
             }
@@ -2588,16 +2629,20 @@ var __meta__ = {
             this.columnsTarget = this._createSettingTarget(this.columnFields, {
                 connectWith: this.rowFields,
                 setting: "columns",
+                filterable: this.options.filterable,
                 messages: {
-                    empty: this.options.messages.columnFields
+                    empty: this.options.messages.columnFields,
+                    filterable: this.options.messages.filterable
                 }
             });
 
             this.rowsTarget = this._createSettingTarget(this.rowFields, {
                 connectWith: this.columnFields,
                 setting: "rows",
+                filterable: this.options.filterable,
                 messages: {
-                    empty: this.options.messages.rowFields
+                    empty: this.options.messages.rowFields,
+                    filterable: this.options.messages.filterable
                 }
             });
         },
@@ -2758,9 +2803,6 @@ var __meta__ = {
             }
 
             columnBuilder.measures = dataSource._columnMeasures().length || 1;
-            columnBuilder.reset(columns[0]);
-
-            rowBuilder.reset(rows[0]);
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
@@ -2833,46 +2875,6 @@ var __meta__ = {
         }
     });
 
-
-    function descriptorsChanged(old, current) {
-        var length = current.length;
-
-        if (!old) {
-            return false;
-        }
-
-        if (old.length !== length) {
-            return true;
-        }
-
-        for (var idx = 0; idx < length; idx++) {
-            if (old[idx].name !== current[idx].name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function tupleChanged(old, current) {
-        var oldMembers = old.members;
-        var currentMembers = current.members;
-        var length = currentMembers.length;
-        var idx = 0;
-
-        if (oldMembers.length !== length) {
-            return true;
-        }
-
-        for (; idx < length; idx++) {
-            if (oldMembers[idx].name !== currentMembers[idx].name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
@@ -2891,12 +2893,8 @@ var __meta__ = {
             ];
         },
 
-        reset: function(tuple) {
-            var root = this.rootTuple;
-
-            if (!tuple || root && tupleChanged(root, tuple)) {
-                this.metadata = {};
-            }
+        reset: function() {
+            this.metadata = {};
         },
 
         rowLength: function() {
@@ -3280,12 +3278,8 @@ var __meta__ = {
             ];
         },
 
-        reset: function(tuple) {
-            var root = this.rootTuple;
-
-            if (!tuple || root && tupleChanged(root, tuple)) {
-                this.metadata = {};
-            }
+        reset: function() {
+            this.metadata = {};
         },
 
         _colGroup: function() {

@@ -519,6 +519,14 @@
         ok(!setting.validate({ defaultHierarchy: "bar" }));
     });
 
+    test("field menu is initialized", function() {
+        var setting  = new PivotSettingTarget($(div), {
+            filterable: true
+        });
+
+        ok(setting.fieldMenu instanceof kendo.ui.PivotFieldMenu);
+    });
+
     test("setDataSource changes the dataSource instance", function() {
         var dataSource = new kendo.data.PivotDataSource({
             columns: ["foo", "bar"]

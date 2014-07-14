@@ -47,6 +47,7 @@ var __meta__ = {
 
         options: {
             name: "PivotConfigurator",
+            filterable: false,
             messages: {
                 measures: "Drop Data Fields Here",
                 columns: "Drop Column Fields Here",
@@ -174,9 +175,10 @@ var __meta__ = {
         },
 
         _createTarget: function(element, options) {
+            var filter = options.filterable ? '<span class="k-icon k-filter k-setting-filter">' : '';
             return new kendo.ui.PivotSettingTarget(element, $.extend({
                 dataSource: this.dataSource,
-                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-icon k-si-close k-setting-delete"></span></li>',
+                template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}' + filter + '</span><span class="k-icon k-si-close k-setting-delete"></span></li>',
                 emptyTemplate: '<li class="k-item k-empty">${data}</li>'
             }, options));
         },
@@ -194,17 +196,21 @@ var __meta__ = {
             var measures = $('<ul class="k-pivot-configurator-settings k-list k-reset" />').appendTo(measuresContainer.last());
 
             this.columns = this._createTarget(columns, {
+                filterable: this.options.filterable,
                 connectWith: rows,
                 messages: {
-                    empty: this.options.messages.columns
+                    empty: this.options.messages.columns,
+                    filterable: this.options.messages.filterable
                 }
             });
 
             this.rows = this._createTarget(rows, {
+                filterable: this.options.filterable,
                 setting: "rows",
                 connectWith: columns,
                 messages: {
-                    empty: this.options.messages.rows
+                    empty: this.options.messages.rows,
+                    filterable: this.options.messages.filterable
                 }
             });
 

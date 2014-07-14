@@ -43,7 +43,7 @@
         "./kendo.maskedtextbox",
         "./kendo.menu",
         "./kendo.editable",
-        "./kendo.filtermenu",
+        "./kendo.fieldmenu",
         "./kendo.filtercell",
         "./kendo.panelbar",
         "./kendo.progressbar",
