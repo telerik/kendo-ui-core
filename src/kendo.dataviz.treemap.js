@@ -273,6 +273,15 @@ var __meta__ = {
 
         items: function() {
             return $();
+        },
+
+        getSize: function() {
+            return kendo.dimentions(this.element);
+        },
+
+        _resize: function() {
+            this.element.empty();
+            this.dataSource.fetch();
         }
     });
 
@@ -803,7 +812,6 @@ var __meta__ = {
             return title.text(this._getText(item));
         }
     });
-
 
     function valueOrDefault(value, defaultValue) {
         return defined(value) ? value : defaultValue;
