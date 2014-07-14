@@ -7728,7 +7728,12 @@
         },
         "meta": {
             "kendo-ui": ""
-        }
+        },
+        "packages": [
+            "!mvc",
+            "!jsp",
+            "!php"
+        ]
       },{
         "text": "AngularJS",
         "new": true,
