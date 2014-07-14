@@ -9,8 +9,8 @@ var __meta__ = {
     description: "The PivotConfigurator widget allows the user to select data slices displayed in PivotGrid",
     depends: [ "pivotgrid", "dropdownlist", "treeview" ],
     features: [ {
-        id: "pivotgrid-filtering",
-        name: "PivotGrid Filtering",
+        id: "pivotconfigurator-filtering",
+        name: "PivotConfigurator Filtering",
         description: "Support for filtering",
         depends: [ "pivot.fieldmenu" ]
     } ]
