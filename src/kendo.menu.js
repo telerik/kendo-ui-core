@@ -1277,7 +1277,7 @@ var __meta__ = {
         },
 
         _showHandler: function (e) {
-            var ev = e,
+            var ev = e, offset,
                 that = this,
                 options = that.options;
 
@@ -1302,7 +1302,12 @@ var __meta__ = {
                 if (options.alignToAnchor) {
                     that.open(ev.currentTarget);
                 } else {
-                    that.open(ev.pageX, ev.pageY);
+                    if (that._targetChild) {
+                        offset = that.target.offset();
+                        that.open(ev.pageX - offset.left, ev.pageY - offset.top);
+                    } else {
+                        that.open(ev.pageX, ev.pageY);
+                    }
                 }
             }
         },
@@ -1379,6 +1384,8 @@ var __meta__ = {
                                 activate: that._triggerProxy,
                                 deactivate: that._triggerProxy
                             }).data("kendoPopup");
+
+            that._targetChild = contains(that.target[0], that.popup.element[0]);
         }
     });
 
