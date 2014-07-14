@@ -126,6 +126,24 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * The chart series from label configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemLabelsFrom|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    */
+    public function from($value) {
+        return $this->setProperty('from', $value);
+    }
+
+    /**
+    * The chart series to label configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemLabelsTo|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
+    */
+    public function to($value) {
+        return $this->setProperty('to', $value);
+    }
+
 //<< Properties
 }
 

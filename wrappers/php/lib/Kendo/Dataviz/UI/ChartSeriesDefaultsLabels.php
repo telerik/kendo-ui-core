@@ -99,6 +99,24 @@ class ChartSeriesDefaultsLabels extends \Kendo\SerializableObject {
         return $this->setProperty('visible', $value);
     }
 
+    /**
+    * The chart series from label configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsFrom|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    */
+    public function from($value) {
+        return $this->setProperty('from', $value);
+    }
+
+    /**
+    * The chart series to label configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesDefaultsLabelsTo|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesDefaultsLabels
+    */
+    public function to($value) {
+        return $this->setProperty('to', $value);
+    }
+
 //<< Properties
 }
 
