@@ -3,6 +3,9 @@
 namespace Kendo\Data;
 
 class PivotDataSourceSchema extends \Kendo\Data\DataSourceSchema {
+    public function cube(\Kendo\Data\PivotDataSourceSchemaCube $value) {
+        return $this->setProperty('cube', $value);
+    }
 //>> Properties
 
     /**
