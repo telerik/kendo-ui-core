@@ -266,6 +266,8 @@ var __meta__ = {
                 this.dataSource.unbind(CHANGE, this._dataChangeHandler);
             }
 
+            this._root = null;
+
             kendo.destroy(this.element);
         },
 
