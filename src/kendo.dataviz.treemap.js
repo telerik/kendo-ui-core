@@ -908,7 +908,7 @@ var __meta__ = {
     function colorBrightness(color) {
         var brightness = 0;
         if (color) {
-            var color = rgbToDecimal(color);
+            color = rgbToDecimal(color);
             brightness = math.sqrt(0.241 * color.r * color.r + 0.691 * color.g * color.g + 0.068 * color.b * color.b);
         }
 
