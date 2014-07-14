@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class EditableRotateThumbFillTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeTag parent = (ShapeTag)findParentWithClass(ShapeTag.class);
+        EditableRotateThumbTag parent = (EditableRotateThumbTag)findParentWithClass(EditableRotateThumbTag.class);
 
 
-        parent.setHover(this);
+        parent.setFill(this);
 
 //<< doEndTag
 
@@ -48,19 +48,23 @@ public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shape-hover";
+        return "diagram-editable-rotate-thumb-fill";
     }
 
-    public void setFill(com.kendoui.taglib.diagram.ShapeHoverFillTag value) {
-        setProperty("fill", value);
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public java.lang.String getFill() {
-        return (java.lang.String)getProperty("fill");
+    public void setColor(java.lang.String value) {
+        setProperty("color", value);
     }
 
-    public void setFill(java.lang.String value) {
-        setProperty("fill", value);
+    public float getOpacity() {
+        return (float)getProperty("opacity");
+    }
+
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

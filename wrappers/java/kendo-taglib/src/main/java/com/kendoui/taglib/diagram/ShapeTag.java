@@ -61,6 +61,14 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("content", value);
     }
 
+    public void setEditable(com.kendoui.taglib.diagram.ShapeEditableTag value) {
+        setProperty("editable", value);
+    }
+
+    public void setFill(com.kendoui.taglib.diagram.ShapeFillTag value) {
+        setProperty("fill", value);
+    }
+
     public void setHover(com.kendoui.taglib.diagram.ShapeHoverTag value) {
         setProperty("hover", value);
     }
@@ -77,12 +85,20 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("visual", value.getBody());
     }
 
-    public java.lang.String getBackground() {
-        return (java.lang.String)getProperty("background");
+    public boolean getEditable() {
+        return (boolean)getProperty("editable");
     }
 
-    public void setBackground(java.lang.String value) {
-        setProperty("background", value);
+    public void setEditable(boolean value) {
+        setProperty("editable", value);
+    }
+
+    public java.lang.String getFill() {
+        return (java.lang.String)getProperty("fill");
+    }
+
+    public void setFill(java.lang.String value) {
+        setProperty("fill", value);
     }
 
     public float getHeight() {
@@ -123,6 +139,14 @@ public class ShapeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setPath(java.lang.String value) {
         setProperty("path", value);
+    }
+
+    public java.lang.String getSource() {
+        return (java.lang.String)getProperty("source");
+    }
+
+    public void setSource(java.lang.String value) {
+        setProperty("source", value);
     }
 
     public java.lang.String getType() {

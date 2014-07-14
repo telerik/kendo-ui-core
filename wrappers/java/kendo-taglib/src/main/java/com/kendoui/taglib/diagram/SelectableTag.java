@@ -6,23 +6,25 @@ import com.kendoui.taglib.BaseTag;
 
 
 
+import com.kendoui.taglib.DiagramTag;
+
 
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditableSelectTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class SelectableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        EditableTag parent = (EditableTag)findParentWithClass(EditableTag.class);
+        DiagramTag parent = (DiagramTag)findParentWithClass(DiagramTag.class);
 
 
-        parent.setSelect(this);
+        parent.setSelectable(this);
 
 //<< doEndTag
 
@@ -48,19 +50,11 @@ public class EditableSelectTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-editable-select";
+        return "diagram-selectable";
     }
 
-    public void setStroke(com.kendoui.taglib.diagram.EditableSelectStrokeTag value) {
+    public void setStroke(com.kendoui.taglib.diagram.SelectableStrokeTag value) {
         setProperty("stroke", value);
-    }
-
-    public java.lang.String getBackground() {
-        return (java.lang.String)getProperty("background");
-    }
-
-    public void setBackground(java.lang.String value) {
-        setProperty("background", value);
     }
 
 //<< Attributes

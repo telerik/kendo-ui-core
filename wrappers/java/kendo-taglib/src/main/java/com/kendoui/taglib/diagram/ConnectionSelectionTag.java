@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionSelectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeTag parent = (ShapeTag)findParentWithClass(ShapeTag.class);
+        ConnectionTag parent = (ConnectionTag)findParentWithClass(ConnectionTag.class);
 
 
-        parent.setHover(this);
+        parent.setSelection(this);
 
 //<< doEndTag
 
@@ -48,19 +48,11 @@ public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shape-hover";
+        return "diagram-connection-selection";
     }
 
-    public void setFill(com.kendoui.taglib.diagram.ShapeHoverFillTag value) {
-        setProperty("fill", value);
-    }
-
-    public java.lang.String getFill() {
-        return (java.lang.String)getProperty("fill");
-    }
-
-    public void setFill(java.lang.String value) {
-        setProperty("fill", value);
+    public void setHandles(com.kendoui.taglib.diagram.ConnectionSelectionHandlesTag value) {
+        setProperty("handles", value);
     }
 
 //<< Attributes

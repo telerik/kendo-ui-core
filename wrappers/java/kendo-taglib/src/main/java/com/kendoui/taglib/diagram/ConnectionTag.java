@@ -59,6 +59,10 @@ public class ConnectionTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     }
 
+    public void setSelection(com.kendoui.taglib.diagram.ConnectionSelectionTag value) {
+        setProperty("selection", value);
+    }
+
     public void setStroke(com.kendoui.taglib.diagram.ConnectionStrokeTag value) {
         setProperty("stroke", value);
     }

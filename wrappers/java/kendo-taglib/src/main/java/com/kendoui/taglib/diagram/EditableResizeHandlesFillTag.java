@@ -12,7 +12,7 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditableResizeHandlesHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class EditableResizeHandlesFillTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -22,7 +22,7 @@ public class EditableResizeHandlesHoverTag extends  BaseTag  /* interfaces */ /*
         EditableResizeHandlesTag parent = (EditableResizeHandlesTag)findParentWithClass(EditableResizeHandlesTag.class);
 
 
-        parent.setHover(this);
+        parent.setFill(this);
 
 //<< doEndTag
 
@@ -48,23 +48,23 @@ public class EditableResizeHandlesHoverTag extends  BaseTag  /* interfaces */ /*
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-editable-resize-handles-hover";
+        return "diagram-editable-resize-handles-fill";
     }
 
-    public void setFill(com.kendoui.taglib.diagram.EditableResizeHandlesHoverFillTag value) {
-        setProperty("fill", value);
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setStroke(com.kendoui.taglib.diagram.EditableResizeHandlesHoverStrokeTag value) {
-        setProperty("stroke", value);
+    public void setColor(java.lang.String value) {
+        setProperty("color", value);
     }
 
-    public java.lang.String getFill() {
-        return (java.lang.String)getProperty("fill");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setFill(java.lang.String value) {
-        setProperty("fill", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

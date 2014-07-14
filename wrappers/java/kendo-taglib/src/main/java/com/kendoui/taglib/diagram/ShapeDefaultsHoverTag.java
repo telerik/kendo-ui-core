@@ -51,12 +51,16 @@ public class ShapeDefaultsHoverTag extends  BaseTag  /* interfaces */ /* interfa
         return "diagram-shapeDefaults-hover";
     }
 
-    public java.lang.String getBackground() {
-        return (java.lang.String)getProperty("background");
+    public void setFill(com.kendoui.taglib.diagram.ShapeDefaultsHoverFillTag value) {
+        setProperty("fill", value);
     }
 
-    public void setBackground(java.lang.String value) {
-        setProperty("background", value);
+    public java.lang.String getFill() {
+        return (java.lang.String)getProperty("fill");
+    }
+
+    public void setFill(java.lang.String value) {
+        setProperty("fill", value);
     }
 
 //<< Attributes

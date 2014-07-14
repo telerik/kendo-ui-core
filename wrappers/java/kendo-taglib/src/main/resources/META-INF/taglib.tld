@@ -12399,14 +12399,14 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Defines whether items can be dropped on the diagram.</description>
-            <name>draggable</name>
+            <description>Specifies the shape editable.</description>
+            <name>editable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the shape editable.</description>
-            <name>editable</name>
+            <description>Defines the selectable options.</description>
+            <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -12531,6 +12531,64 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
+        <description>Defines the connection selection configuration.</description>
+        <name>diagram-connectionDefaults-selection</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsSelectionTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Defines the connection selection handles configuration.</description>
+        <name>diagram-connectionDefaults-selection-handles</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsSelectionHandlesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the handles fill options.</description>
+            <name>fill</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Defines the handles fill options.</description>
+        <name>diagram-connectionDefaults-selection-handles-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsSelectionHandlesFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the handles fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the handles stroke options.</description>
+        <name>diagram-connectionDefaults-selection-handles-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsSelectionHandlesStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the handles stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>Defines the stroke configuration.</description>
         <name>diagram-connectionDefaults-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionDefaultsStrokeTag</tag-class>
@@ -12636,6 +12694,64 @@ data source is fired. By default the widget will bind to the data source specifi
 
 
     <tag>
+        <description>Defines the connection selection configuration.</description>
+        <name>diagram-connection-selection</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionSelectionTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Defines the connection selection handles configuration.</description>
+        <name>diagram-connection-selection-handles</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionSelectionHandlesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Defines the handles fill options.</description>
+            <name>fill</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Defines the handles fill options.</description>
+        <name>diagram-connection-selection-handles-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionSelectionHandlesFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the handles fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the handles stroke options.</description>
+        <name>diagram-connection-selection-handles-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.ConnectionSelectionHandlesStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the handles stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>Defines the stroke configuration.</description>
         <name>diagram-connection-stroke</name>
         <tag-class>com.kendoui.taglib.diagram.ConnectionStrokeTag</tag-class>
@@ -12677,12 +12793,6 @@ data source is fired. By default the widget will bind to the data source specifi
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
-        <attribute>
-            <description>Specifyes the select style.</description>
-            <name>select</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
-        </attribute>
 
     </tag>
 
@@ -12702,8 +12812,8 @@ data source is fired. By default the widget will bind to the data source specifi
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Set the handles backgorund.</description>
-            <name>background</name>
+            <description>Specifies the handles fill options.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -12723,19 +12833,63 @@ data source is fired. By default the widget will bind to the data source specifi
     </tag>
 
     <tag>
+        <description>Specifies the handles fill options.</description>
+        <name>diagram-editable-resize-handles-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Specifies the handles fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the handles fill opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>Set the handles hover styles.</description>
         <name>diagram-editable-resize-handles-hover</name>
         <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Set the handles backgorund.</description>
-            <name>background</name>
+            <description>Set the handles hover fill options.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Set the handles hover fill options.</description>
+        <name>diagram-editable-resize-handles-hover-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableResizeHandlesHoverFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Set the handles hover fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Set the handles hover fill opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
     <tag>
         <description>Specifies the handles stroke styles.</description>
@@ -12812,13 +12966,35 @@ data source is fired. By default the widget will bind to the data source specifi
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Set the thumb backgorund.</description>
-            <name>background</name>
+            <description>Set the thumb fill options.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Set the thumb fill options.</description>
+        <name>diagram-editable-rotate-thumb-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.EditableRotateThumbFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Set the thumb fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Set the thumb fill opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
     <tag>
         <description>Specifies the thumb stroke styles.</description>
@@ -12847,50 +13023,6 @@ data source is fired. By default the widget will bind to the data source specifi
 
     </tag>
 
-
-
-
-    <tag>
-        <description>Specifyes the select style.</description>
-        <name>diagram-editable-select</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableSelectTag</tag-class>
-        <body-content>JSP</body-content>
-
-        <attribute>
-            <description>Set the thumb backgorund.</description>
-            <name>background</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-
-    </tag>
-
-    <tag>
-        <description>Specifies the select stroke styles.</description>
-        <name>diagram-editable-select-stroke</name>
-        <tag-class>com.kendoui.taglib.diagram.EditableSelectStrokeTag</tag-class>
-        <body-content>empty</body-content>
-
-        <attribute>
-            <description>Specifies the select stroke color.</description>
-            <name>color</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the select stroke dash type.</description>
-            <name>dashType</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>Specifies the select stroke width.</description>
-            <name>width</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>float</type>
-        </attribute>
-
-    </tag>
 
 
 
@@ -13033,14 +13165,59 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
     <tag>
+        <description>Defines the selectable options.</description>
+        <name>diagram-selectable</name>
+        <tag-class>com.kendoui.taglib.diagram.SelectableTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>Defines the selection stroke configuration.</description>
+        <name>diagram-selectable-stroke</name>
+        <tag-class>com.kendoui.taglib.diagram.SelectableStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the selection stroke color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the selection dash type.</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the selection stroke width.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>Defines the shape options.</description>
         <name>diagram-shapeDefaults</name>
         <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsTag</tag-class>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>Defines the fill-color of the shape.</description>
-            <name>background</name>
+            <description>Defines the shape editable options.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the fill options of the shape.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -13065,6 +13242,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <attribute>
             <description>The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").</description>
             <name>path</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The source of the shape image. Applicable when the type is set to "image".</description>
+            <name>source</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -13154,6 +13337,24 @@ A diagram can have in general disconnected pieces, known as components, which ca
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The color of the shape content text.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font family of the shape content text.</description>
+            <name>fontFamily</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font size of the shape content text.</description>
+            <name>fontSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The text displayed in the shape.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13164,19 +13365,79 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
 
     <tag>
-        <description>Defines the hover configuration.</description>
-        <name>diagram-shapeDefaults-hover</name>
-        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsHoverTag</tag-class>
+        <description>Defines the shape editable options.</description>
+        <name>diagram-shapeDefaults-editable</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsEditableTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Hover's background color.</description>
-            <name>background</name>
+            <description>Specifies whether the connectors should appear on hover.</description>
+            <name>connect</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the fill options of the shape.</description>
+        <name>diagram-shapeDefaults-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the fill color of the shape.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the fill opacity of the shape.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the hover configuration.</description>
+        <name>diagram-shapeDefaults-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsHoverTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Hover's fill options.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Hover's fill options.</description>
+        <name>diagram-shapeDefaults-hover-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeDefaultsHoverFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Hover's fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Hover's fill opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -13245,8 +13506,14 @@ A diagram can have in general disconnected pieces, known as components, which ca
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>Defines the fill-color of the shape.</description>
-            <name>background</name>
+            <description>Defines the shape editable options.</description>
+            <name>editable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines the fill options of the shape.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -13277,6 +13544,12 @@ A diagram can have in general disconnected pieces, known as components, which ca
         <attribute>
             <description>The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").</description>
             <name>path</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The source of the shape image. Applicable when the type is set to "image".</description>
+            <name>source</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -13366,6 +13639,24 @@ See visual.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The color of the shape content text.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font family of the shape content text.</description>
+            <name>fontFamily</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font size of the shape content text.</description>
+            <name>fontSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The text displayed in the shape.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13376,19 +13667,79 @@ See visual.</description>
 
 
     <tag>
-        <description>Defines the hover configuration.</description>
-        <name>diagram-shape-hover</name>
-        <tag-class>com.kendoui.taglib.diagram.ShapeHoverTag</tag-class>
+        <description>Defines the shape editable options.</description>
+        <name>diagram-shape-editable</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeEditableTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Hover's background color.</description>
-            <name>background</name>
+            <description>Specifies whether the connectors should appear on hover.</description>
+            <name>connect</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the fill options of the shape.</description>
+        <name>diagram-shape-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Defines the fill color of the shape.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the fill opacity of the shape.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Defines the hover configuration.</description>
+        <name>diagram-shape-hover</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeHoverTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Hover's fill options.</description>
+            <name>fill</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Hover's fill options.</description>
+        <name>diagram-shape-hover-fill</name>
+        <tag-class>com.kendoui.taglib.diagram.ShapeHoverFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Hover's fill color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Hover's fill opacity.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>

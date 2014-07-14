@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditableRotateThumbTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ConnectionDefaultsSelectionHandlesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        EditableRotateTag parent = (EditableRotateTag)findParentWithClass(EditableRotateTag.class);
+        ConnectionDefaultsSelectionTag parent = (ConnectionDefaultsSelectionTag)findParentWithClass(ConnectionDefaultsSelectionTag.class);
 
 
-        parent.setThumb(this);
+        parent.setHandles(this);
 
 //<< doEndTag
 
@@ -48,14 +48,14 @@ public class EditableRotateThumbTag extends  BaseTag  /* interfaces */ /* interf
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-editable-rotate-thumb";
+        return "diagram-connectionDefaults-selection-handles";
     }
 
-    public void setFill(com.kendoui.taglib.diagram.EditableRotateThumbFillTag value) {
+    public void setFill(com.kendoui.taglib.diagram.ConnectionDefaultsSelectionHandlesFillTag value) {
         setProperty("fill", value);
     }
 
-    public void setStroke(com.kendoui.taglib.diagram.EditableRotateThumbStrokeTag value) {
+    public void setStroke(com.kendoui.taglib.diagram.ConnectionDefaultsSelectionHandlesStrokeTag value) {
         setProperty("stroke", value);
     }
 

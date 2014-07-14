@@ -1,10 +1,12 @@
 
-package com.kendoui.taglib.diagram;
+package com.kendoui.taglib.grid;
 
 
 import com.kendoui.taglib.BaseTag;
 
 
+
+import com.kendoui.taglib.GridTag;
 
 
 
@@ -12,17 +14,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class MessagesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        ShapeTag parent = (ShapeTag)findParentWithClass(ShapeTag.class);
+        GridTag parent = (GridTag)findParentWithClass(GridTag.class);
 
 
-        parent.setHover(this);
+        parent.setMessages(this);
 
 //<< doEndTag
 
@@ -48,19 +50,11 @@ public class ShapeHoverTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-shape-hover";
+        return "grid-messages";
     }
 
-    public void setFill(com.kendoui.taglib.diagram.ShapeHoverFillTag value) {
-        setProperty("fill", value);
-    }
-
-    public java.lang.String getFill() {
-        return (java.lang.String)getProperty("fill");
-    }
-
-    public void setFill(java.lang.String value) {
-        setProperty("fill", value);
+    public void setCommands(com.kendoui.taglib.grid.MessagesCommandsTag value) {
+        setProperty("commands", value);
     }
 
 //<< Attributes

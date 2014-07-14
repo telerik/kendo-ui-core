@@ -51,6 +51,10 @@ public class EditableResizeHandlesTag extends  BaseTag  /* interfaces */ /* inte
         return "diagram-editable-resize-handles";
     }
 
+    public void setFill(com.kendoui.taglib.diagram.EditableResizeHandlesFillTag value) {
+        setProperty("fill", value);
+    }
+
     public void setHover(com.kendoui.taglib.diagram.EditableResizeHandlesHoverTag value) {
         setProperty("hover", value);
     }
@@ -59,12 +63,12 @@ public class EditableResizeHandlesTag extends  BaseTag  /* interfaces */ /* inte
         setProperty("stroke", value);
     }
 
-    public java.lang.String getBackground() {
-        return (java.lang.String)getProperty("background");
+    public java.lang.String getFill() {
+        return (java.lang.String)getProperty("fill");
     }
 
-    public void setBackground(java.lang.String value) {
-        setProperty("background", value);
+    public void setFill(java.lang.String value) {
+        setProperty("fill", value);
     }
 
     public float getHeight() {

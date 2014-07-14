@@ -86,6 +86,10 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("groupable", value);
     }
 
+    public void setMessages(com.kendoui.taglib.grid.MessagesTag value) {
+        setProperty("messages", value);
+    }
+
     public void setPageable(com.kendoui.taglib.grid.PageableTag value) {
         setProperty("pageable", value);
     }

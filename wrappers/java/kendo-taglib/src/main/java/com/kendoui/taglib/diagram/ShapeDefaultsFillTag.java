@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class EditableSelectStrokeTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class ShapeDefaultsFillTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        EditableSelectTag parent = (EditableSelectTag)findParentWithClass(EditableSelectTag.class);
+        ShapeDefaultsTag parent = (ShapeDefaultsTag)findParentWithClass(ShapeDefaultsTag.class);
 
 
-        parent.setStroke(this);
+        parent.setFill(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class EditableSelectStrokeTag extends  BaseTag  /* interfaces */ /* inter
 //>> Attributes
 
     public static String tagName() {
-        return "diagram-editable-select-stroke";
+        return "diagram-shapeDefaults-fill";
     }
 
     public java.lang.String getColor() {
@@ -59,20 +59,12 @@ public class EditableSelectStrokeTag extends  BaseTag  /* interfaces */ /* inter
         setProperty("color", value);
     }
 
-    public java.lang.String getDashType() {
-        return (java.lang.String)getProperty("dashType");
+    public float getOpacity() {
+        return (float)getProperty("opacity");
     }
 
-    public void setDashType(java.lang.String value) {
-        setProperty("dashType", value);
-    }
-
-    public float getWidth() {
-        return (float)getProperty("width");
-    }
-
-    public void setWidth(float value) {
-        setProperty("width", value);
+    public void setOpacity(float value) {
+        setProperty("opacity", value);
     }
 
 //<< Attributes

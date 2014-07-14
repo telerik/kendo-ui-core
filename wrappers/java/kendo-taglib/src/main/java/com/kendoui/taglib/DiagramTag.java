@@ -61,6 +61,10 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("layout", value);
     }
 
+    public void setSelectable(com.kendoui.taglib.diagram.SelectableTag value) {
+        setProperty("selectable", value);
+    }
+
     public void setShapeDefaults(com.kendoui.taglib.diagram.ShapeDefaultsTag value) {
         setProperty("shapeDefaults", value);
     }
@@ -115,20 +119,20 @@ public class DiagramTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("dataSource", dataSource);
     }
 
-    public boolean getDraggable() {
-        return (boolean)getProperty("draggable");
-    }
-
-    public void setDraggable(boolean value) {
-        setProperty("draggable", value);
-    }
-
     public boolean getEditable() {
         return (boolean)getProperty("editable");
     }
 
     public void setEditable(boolean value) {
         setProperty("editable", value);
+    }
+
+    public boolean getSelectable() {
+        return (boolean)getProperty("selectable");
+    }
+
+    public void setSelectable(boolean value) {
+        setProperty("selectable", value);
     }
 
     public java.lang.String getTemplate() {

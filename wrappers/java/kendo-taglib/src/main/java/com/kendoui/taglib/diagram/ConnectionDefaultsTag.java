@@ -57,6 +57,10 @@ public class ConnectionDefaultsTag extends  BaseTag  /* interfaces */ /* interfa
         setProperty("hover", value);
     }
 
+    public void setSelection(com.kendoui.taglib.diagram.ConnectionDefaultsSelectionTag value) {
+        setProperty("selection", value);
+    }
+
     public void setStroke(com.kendoui.taglib.diagram.ConnectionDefaultsStrokeTag value) {
         setProperty("stroke", value);
     }
