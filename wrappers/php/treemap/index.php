@@ -40,18 +40,37 @@ $treeMap->dataSource($dataSource)
 
 echo $treeMap->render();
 ?>
-<style scoped>
-    .k-leaf {
-        color: #fff;
+<div class="configuration-horizontal">
+    <div class="config-section">
+        <h4>TreeMap rendering types</h4>
+        <ul class="options">
+            <li>
+                <input id="typeSquarified" name="type"
+                            type="radio" value="squarified" checked="checked" autocomplete="off" />
+                <label for="typeSquarified">Squarified</label>
+            </li>
+            <li>
+                <input id="typeVertical" name="type"
+                            type="radio" value="vertical" autocomplete="off" />
+                <label for="typeVertical">Vertical(Slice and Dice)</label>
+            </li>
+            <li>
+                <input id="typeHorizontal" name="type"
+                            type="radio" value="horizontal" autocomplete="off" />
+                <label for="typeHorizontal">Horizontal(Slice and Dice)</label>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $(".options").bind("change", refresh);
+    });
+
+    function refresh() {
+        $("#treeMap").getKendoTreeMap().setOptions({
+            type: $("input[name=type]:checked").val()
+        });
     }
-    .k-leaf:hover {
-        border: 0;
-        color: #fff;
-        padding: .7em;
-    }
-    .k-tile-inverse,
-    .k-tile-inverse:hover {
-        color: #000;
-    }
-</style>
+</script>
 <?php require_once '../include/footer.php'; ?>
