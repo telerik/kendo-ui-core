@@ -590,7 +590,7 @@ var __meta__ = {
         _clean: function(root) {
             root.css("background-color", "");
             root.removeClass("k-leaf");
-            root.removeClass("k-tile-inverse");
+            root.removeClass("k-inverse");
             root.empty();
         },
 
@@ -605,7 +605,7 @@ var __meta__ = {
                     .text(this._getText(item))
                     .css("background-color", item.color)
                     .toggleClass(
-                        "k-tile-inverse",
+                        "k-inverse",
                         this._tileColorBrightness(item) > 180
                     );
             }
