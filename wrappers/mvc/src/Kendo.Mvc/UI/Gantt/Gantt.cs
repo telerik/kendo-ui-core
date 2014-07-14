@@ -64,6 +64,8 @@ namespace Kendo.Mvc.UI
         
         public bool? Editable { get; set; }
         
+        public bool? Navigatable { get; set; }
+        
         public DateTime? WorkDayStart { get; set; }
         
         public DateTime? WorkDayEnd { get; set; }
@@ -120,6 +122,11 @@ namespace Kendo.Mvc.UI
             if (Editable.HasValue)
             {
                 json["editable"] = Editable;
+            }
+                
+            if (Navigatable.HasValue)
+            {
+                json["navigatable"] = Navigatable;
             }
                 
             if (WorkDayStart.HasValue)

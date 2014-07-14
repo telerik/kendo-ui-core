@@ -109,6 +109,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// If set to true the user could navigate the widget using the keyboard. By default keyboard navigation is disabled.
+        /// </summary>
+        /// <param name="value">The value that configures the navigatable.</param>
+        public GanttBuilder<TTaskModel,TDependenciesModel> Navigatable(bool value)
+        {
+            container.Navigatable = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Sets the start of the work day.
         /// </summary>
         /// <param name="value">The value that configures the workdaystart.</param>
@@ -247,7 +258,6 @@ namespace Kendo.Mvc.UI.Fluent
         public GanttBuilder<TTaskModel,TDependenciesModel> Views(Action<GanttViewFactory> configurator)
         {
             configurator(new GanttViewFactory(container.Views));
-
             return this;
         }
         
