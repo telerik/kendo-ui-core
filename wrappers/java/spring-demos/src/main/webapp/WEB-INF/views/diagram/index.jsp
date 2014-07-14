@@ -20,7 +20,7 @@
             stroke: {
                 width: 0
             },
-            background: dataItem.colorScheme
+            fill: dataItem.colorScheme
         }));
 
         g.append(new dataviz.diagram.TextBlock({
