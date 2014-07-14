@@ -13,6 +13,7 @@ var __meta__ = {
 (function($, undefined) {
 
     var kendo = window.kendo;
+    var browser = kendo.support.browser;
     var Observable = kendo.Observable;
     var Widget = kendo.ui.Widget;
     var DataSource = kendo.data.DataSource;
@@ -42,9 +43,9 @@ var __meta__ = {
     var DOT = ".";
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
             '#if (editable == true) {#'+
-                '<ul class="#=styles.actionsWrapper#">' +
-                    '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
-                '</ul>' +
+                '<div class="#=styles.actions#">' +
+                    '<button class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</button>' +
+                '</div>' +
             '#}#' +
             '<ul class="#=styles.viewsWrapper#">' +
                 '#for(var view in views){#' +
@@ -60,9 +61,9 @@ var __meta__ = {
             '</ul>' +
         '</div>');
     var FOOTER_TEMPLATE = kendo.template('<div class="#=styles.footerWrapper#">' +
-            '<ul class="#=styles.actionsWrapper#">' +
-                '<li class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</li>' +
-            '</ul>' +
+            '<div class="#=styles.actions#">' +
+                    '<button class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</button>' +
+            '</div>' +
         '</div>');
 
     var ganttStyles = {
@@ -92,7 +93,6 @@ var __meta__ = {
             views: "k-gantt-views",
             viewsWrapper: "k-reset k-header k-gantt-views",
             actions: "k-gantt-actions",
-            actionsWrapper: "k-reset k-header k-gantt-actions",
             button: "k-button k-button-icontext",
             iconPlus: "k-icon k-i-plus",
             viewButtonDefault: "k-state-default",
@@ -140,9 +140,40 @@ var __meta__ = {
         return true;
     }
 
-    function focusTable(table) {
+    function focusTable(table, direct) {
+        var wrapper = table.parents('[' + kendo.attr("role") + '="gantt"]');
+        var scrollPositions = [];
+        var parents = scrollableParents(wrapper);
+
         table.attr(TABINDEX, 0);
-        table.focus();
+
+        if (direct) {
+            parents.each(function(index, parent) {
+                scrollPositions[index] = $(parent).scrollTop();
+            });
+        }
+
+        try {
+            //The setActive method does not cause the document to scroll to the active object in the current page
+            table[0].setActive();
+        } catch (e) {
+            table[0].focus();
+        }
+
+        if (direct) {
+            parents.each(function(index, parent) {
+                $(parent).scrollTop(scrollPositions[index]);
+            });
+        }
+    }
+
+    function scrollableParents(element) {
+        return $(element).parentsUntil("body")
+                .filter(function(index, element) {
+                    var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
+                    return computedStyle.overflow != "hidden";
+                })
+                .add(window);
     }
 
     var TaskDropDown = Observable.extend({
@@ -219,7 +250,7 @@ var __meta__ = {
             );
 
             this.element
-                .on(CLICK + NS, "li", function(e) {
+                .on(CLICK + NS, "button", function(e) {
                     var target = $(this);
                     var action = target.attr(kendo.attr("action"));
 
@@ -282,9 +313,11 @@ var __meta__ = {
 
                         switch (key) {
                             case keys.UP:
+                                e.preventDefault();
                                 that._current("prev");
                                 break;
                             case keys.DOWN:
+                                e.preventDefault();
                                 that._current("next");
                                 break;
                             case keys.ENTER:
@@ -293,6 +326,7 @@ var __meta__ = {
                                     .click();
                                 break;
                             case keys.ESC:
+                                e.preventDefault();
                                 that.popup.close();
                                 break;
                         }
@@ -304,7 +338,6 @@ var __meta__ = {
             var list = this.list;
             var width = list[0].style.width;
             var wrapper = this.element;
-            var browser = kendo.support.browser;
             var computedStyle;
             var computedWidth;
 
@@ -1121,7 +1154,8 @@ var __meta__ = {
                     open: {
                         effects: "slideIn:up"
                     }
-                }
+                },
+                navigatable: that.options.navigatable
             });
 
             this.headerDropDown = new TaskDropDown(this.toolbar.children(actionsSelector).eq(0), {
@@ -1137,21 +1171,24 @@ var __meta__ = {
 
         _list: function() {
             var that = this;
+            var navigatable = that.options.navigatable;
             var ganttStyles = Gantt.styles;
             var listWrapper = this.wrapper.find(DOT + ganttStyles.list);
             var element = listWrapper.find("> div");
-            var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actions + " > li");
-            var options = extend({}, {
+            var toggleButtons = this.wrapper.find(DOT + ganttStyles.toolbar.actions + " > button");
+            var options = {
                 columns: this.options.columns || [],
                 dataSource: this.dataSource,
                 selectable: this.options.selectable,
                 editable: this.options.editable,
                 listWidth: listWrapper.outerWidth()
-            });
+            };
             var restoreFocus = function() {
-                that._current(that._cachedCurrent);
+                if (navigatable) {
+                    that._current(that._cachedCurrent);
 
-                focusTable(that.list.content.find("table"));
+                    focusTable(that.list.content.find("table"), true);
+                }
 
                 delete that._cachedCurrent;
             };
@@ -1163,6 +1200,8 @@ var __meta__ = {
                     that._navigatable();
                  }, true)
                 .bind("edit", function(e) {
+                    that._cachedCurrent = e.cell;
+
                     if (that.trigger("edit", { task: e.model, container: e.cell })) {
                         e.preventDefault();
                     }
@@ -1469,6 +1508,7 @@ var __meta__ = {
 
             var dataSource = this.dataSource;
             var taskTree = dataSource.taskTree();
+            var scrollToUid = this._scrollToUid;
             var current;
             var cachedUid;
             var cachedIndex = -1;
@@ -1487,14 +1527,14 @@ var __meta__ = {
             this.timeline._render(taskTree);
             this.timeline._renderDependencies(this.dependencies.view());
 
-            if (this._scrollToUid) {
-                this._scrollTo(this._scrollToUid);
-                this.select(selector(this._scrollToUid));
+            if (scrollToUid) {
+                this._scrollTo(scrollToUid);
+                this.select(selector(scrollToUid));
             }
 
-            if (cachedUid && cachedIndex >= 0) {
+            if ((scrollToUid || cachedUid) && cachedIndex >= 0) {
                 current = this.list.content
-                    .find("tr" + selector(cachedUid) + " > td:eq(" + cachedIndex + ")");
+                    .find("tr" + selector((scrollToUid || cachedUid)) + " > td:eq(" + cachedIndex + ")");
 
                 this._current(current);
             }
@@ -1632,11 +1672,11 @@ var __meta__ = {
                 var index = that.current.index();
                 var subling = parent[method]();
 
-                if (that.select().length) {
+                if (that.select().length !== 0) {
                     that.clearSelection();
                 }
 
-                if (subling.length) {
+                if (subling.length !== 0) {
                     that._current(subling.children("td:eq(" + index + ")"));
                     that._scrollTo(that.current);
                 } else {
@@ -1650,7 +1690,7 @@ var __meta__ = {
             var moveHorizontal = function(method) {
                 var subling = that.current[method]();
 
-                if (subling.length) {
+                if (subling.length !== 0) {
                     that._current(subling);
                     cellIndex = that.current.index();
                 }
@@ -1674,12 +1714,6 @@ var __meta__ = {
                     that.removeTask(selectedTask.attr(uid));
                 }
             };
-            var insertAction = function() {
-                that.headerDropDown
-                    .element
-                    .find("li")
-                    .click();
-            };
 
             $(this.wrapper)
                 .on("mousedown" + NS, "tr" + attr + ", div" + attr, function(e) {
@@ -1701,9 +1735,9 @@ var __meta__ = {
                         that._current(current);
                     }
 
-                    setTimeout(function() {
-                        focusTable(that.list.content.find("table"));
-                    }, 2);
+                    if (navigatable || editable) {
+                        focusTable(that.list.content.find("table"), true);
+                    }
                 });
 
             if (navigatable !== true) {
@@ -1729,7 +1763,10 @@ var __meta__ = {
                 })
                 .on("blur" + NS, function() {
                     that._current();
-                    $(this).attr(TABINDEX, -1);
+
+                    if (this == headerTable) {
+                        $(this).attr(TABINDEX, -1);
+                    }
                 })
                 .on("keydown" + NS, function(e) {
                     var key = e.keyCode;
@@ -1743,42 +1780,37 @@ var __meta__ = {
 
                     switch (key) {
                         case keys.RIGHT:
+                            e.preventDefault();
                             if (e.altKey) {
                                 scroll();
-                            } if (e.ctrlKey) {
+                            } else if (e.ctrlKey) {
                                 toggleExpandedState(expandState.expand);
                             } else {
                                 moveHorizontal("next");
                             }
                             break;
                         case keys.LEFT:
+                            e.preventDefault();
                             if (e.altKey) {
                                 scroll(true);
-                            } if (e.ctrlKey) {
+                            } else if (e.ctrlKey) {
                                 toggleExpandedState(expandState.collapse);
                             } else {
                                 moveHorizontal("prev");
                             }
                             break;
                         case keys.UP:
+                            e.preventDefault();
                             moveVertical("prev");
                             break;
                         case keys.DOWN:
+                            e.preventDefault();
                             moveVertical("next");
                             break;
                         case keys.SPACEBAR:
+                            e.preventDefault();
                             if (isCell) {
                                 that.select(that.current.closest("tr"));
-                            }
-                            break;
-                        case keys.NUMPAD_PLUS:
-                            if (isCell) {
-                                toggleExpandedState(expandState.expand);
-                            }
-                            break;
-                        case keys.NUMPAD_MINUS:
-                            if (isCell) {
-                                toggleExpandedState(expandState.collapse);
                             }
                             break;
                         case keys.ENTER:
@@ -1796,28 +1828,14 @@ var __meta__ = {
                                     .click();
                             }
                             break;
-                        case keys.ESC:
-                            /* Stop the event propagation so that the list widget won't close its editor immediately */
-                            e.stopPropagation();
-                            break;
                         case keys.DELETE:
                             if (isCell) {
                                 deleteAction();
                             }
                             break;
-                        case keys.INSERT:
-                            if (editable) {
-                                insertAction();
-                            }
-                            break;
                         default:
-                            var idx = editable ? 50 : 49;
                             if (key >= 49 && key <= 57) {
-                                if (key == 49 && editable) {
-                                    insertAction();
-                                } else {
-                                    that.view(that.timeline._viewByIndex(key - idx));
-                                }
+                                that.view(that.timeline._viewByIndex(key - 49));
                             }
                             break;
                     }

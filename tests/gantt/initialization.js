@@ -102,11 +102,10 @@
         equal(gantt.toolbar.find(".k-gantt-views .k-link").text(), "Day");
     });
 
-    test("toolbar action button is added", 2, function () {
+    test("toolbar action button is added", function () {
         var gantt = new Gantt(element);
 
         ok(gantt.toolbar.find(".k-gantt-actions").length);
-        ok(gantt.toolbar.find(".k-gantt-actions").hasClass("k-reset k-header"));
     });
 
     test("toolbar action button are not added when non editable", function() {
@@ -118,8 +117,8 @@
     test("toolbar action button's elements are rendered", 4, function () {
         var gantt = new Gantt(element);
 
-        ok(gantt.toolbar.find(".k-gantt-actions > li").length);
-        ok(gantt.toolbar.find(".k-gantt-actions > li").hasClass("k-button k-button-icontext"));
+        ok(gantt.toolbar.find(".k-gantt-actions > button").length);
+        ok(gantt.toolbar.find(".k-gantt-actions > button").hasClass("k-button k-button-icontext"));
 
         ok(gantt.toolbar.find(".k-gantt-actions span").length);
         ok(gantt.toolbar.find(".k-gantt-actions span").hasClass("k-icon k-i-plus"));
@@ -128,27 +127,26 @@
     test("toolbar action button data attributes are rendered", function () {
         var gantt = new Gantt(element);
 
-        equal(gantt.toolbar.find(".k-gantt-actions > li").attr("data-action"), "add");
+        equal(gantt.toolbar.find(".k-gantt-actions > button").attr("data-action"), "add");
     });
 
     test("toolbar action button text is rendered", function () {
         var gantt = new Gantt(element);
 
-        equal(gantt.toolbar.find(".k-gantt-actions > li").text(), "Add Task");
+        equal(gantt.toolbar.find(".k-gantt-actions > button").text(), "Add Task");
     });
 
-    test("footer action button is added", 2, function () {
+    test("footer action button is added", function () {
         var gantt = new Gantt(element);
 
         ok(gantt.footer.find(".k-gantt-actions").length);
-        ok(gantt.footer.find(".k-gantt-actions").hasClass("k-reset k-header"));
     });
 
     test("footer action button's elements are rendered", 4, function () {
         var gantt = new Gantt(element);
 
-        ok(gantt.footer.find(".k-gantt-actions > li").length);
-        ok(gantt.footer.find(".k-gantt-actions > li").hasClass("k-button k-button-icontext"));
+        ok(gantt.footer.find(".k-gantt-actions > button").length);
+        ok(gantt.footer.find(".k-gantt-actions > button").hasClass("k-button k-button-icontext"));
 
         ok(gantt.footer.find(".k-gantt-actions span").length);
         ok(gantt.footer.find(".k-gantt-actions span").hasClass("k-icon k-i-plus"));
@@ -157,13 +155,13 @@
     test("footer action button data attributes are rendered", function () {
         var gantt = new Gantt(element);
 
-        equal(gantt.footer.find(".k-gantt-actions > li").attr("data-action"), "add");
+        equal(gantt.footer.find(".k-gantt-actions > button").attr("data-action"), "add");
     });
 
     test("footer action button text is rendered", function () {
         var gantt = new Gantt(element);
 
-        equal(gantt.footer.find(".k-gantt-actions > li").text(), "Add Task");
+        equal(gantt.footer.find(".k-gantt-actions > button").text(), "Add Task");
     });
 
     test("default action toolbar button is localized", function() {
@@ -175,7 +173,7 @@
             }
         });
 
-        equal(gantt.toolbar.find(".k-gantt-actions > li").text(), "bar");
+        equal(gantt.toolbar.find(".k-gantt-actions > button").text(), "bar");
     });
 
     test("default action footer button is localized", function() {
@@ -187,7 +185,7 @@
             }
         });
 
-        equal(gantt.footer.find(".k-gantt-actions > li").text(), "bar");
+        equal(gantt.footer.find(".k-gantt-actions > button").text(), "bar");
     });
 
     test("toolbar action dropDown is created", 2, function() {

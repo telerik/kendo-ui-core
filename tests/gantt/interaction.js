@@ -336,7 +336,7 @@
             equal(e.type, "add");
         });
 
-        dropDown.element.find("li").click();
+        dropDown.element.find("button").click();
     });
 
     test("triggers command upon list item click", 2, function() {
@@ -384,7 +384,7 @@
 
         gantt.select("tr:first");
         stub(dropDown.popup, "open");
-        dropDown.element.find("li").click();
+        dropDown.element.find("button").click();
 
         ok(dropDown.popup.calls("open"));
     });

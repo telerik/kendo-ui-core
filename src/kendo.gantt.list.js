@@ -563,7 +563,7 @@ var __meta__ = {
             this._editableContainer = cell;
 
             cell.data("modelCopy", modelCopy);
-            
+
             if ((field.type === "date" || $.type(field) === "date") &&
                 /H|m|s|F|g|u/.test(column.format)) {
                 attr[BINDING] = "value:" + column.field;

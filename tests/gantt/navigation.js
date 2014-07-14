@@ -226,15 +226,6 @@
         equal(content.find("tr").length, 2);
     });
 
-    test("numpad minus key collapse row", function() {
-        var content = gantt.list.content;
-
-        focusTable();
-        keyDown(content.find("table"), keys.NUMPAD_MINUS);
-
-        equal(content.find("tr").length, 2);
-    });
-
     test("ctrl right expand row", function() {
         var content = gantt.list.content;
 
@@ -245,16 +236,6 @@
             keyCode: keys.RIGHT,
             ctrlKey: true
         });
-
-        equal(content.find("tr").length, 4);
-    });
-
-    test("numpad plus key expand row", function() {
-        var content = gantt.list.content;
-
-        focusTable();
-        gantt.dataSource.at(0).expanded = false;
-        keyDown(content.find("table"), keys.NUMPAD_PLUS);
 
         equal(content.find("tr").length, 4);
     });
@@ -329,40 +310,14 @@
 
         focusTable();
 
-        keyDown(content.find("table"), 51);
+        keyDown(content.find("table"), 50);
         equal(gantt.view().title, "Week");
 
-        keyDown(content.find("table"), 52);
+        keyDown(content.find("table"), 51);
         equal(gantt.view().title, "Month");
 
-        keyDown(content.find("table"), 50);
-        equal(gantt.view().title, "Day");
-    });
-
-    test("numeric key 1 triggers action button click", function() {
-        var content = gantt.list.content;
-        var actionButton = gantt.headerDropDown.element.find("li");
-
-        focusTable();
-
-        actionButton.on("click", function() {
-            ok(true);
-        });
-
         keyDown(content.find("table"), 49);
-    });
-
-    test("insert key triggers action button click", 1, function() {
-        var content = gantt.list.content;
-        var actionButton = gantt.headerDropDown.element.find("li");
-
-        focusTable();
-
-        actionButton.on("click", function() {
-            ok(true);
-        });
-
-        keyDown(content.find("table"), keys.INSERT);
+        equal(gantt.view().title, "Day");
     });
 
     module("Action drop-down navigatable", {
@@ -390,44 +345,32 @@
         }
     });
 
-    test("insert key set focus class to first item", 1, function() {
-        var content = gantt.list.content;
-
-        focusTable();
+    test("click set focus class to first item", 1, function() {
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
 
         ok(gantt.headerDropDown.list.find("li:first").hasClass("k-state-focused"));
     });
 
     test("insert key set id attr to first item", 2, function() {
-        var content = gantt.list.content;
-
-        focusTable();
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
 
         ok(gantt.headerDropDown.list.find("li:first").attr("id"));
         equal(gantt.headerDropDown.list.find("li:first").attr("id"), "action-option-focused");
     });
 
     test("insert key set aria-descendant to list element", 2, function() {
-        var content = gantt.list.content;
-
-        focusTable();
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
 
         ok(gantt.headerDropDown.list.find("ul").attr("aria-activedescendant"));
         equal(gantt.headerDropDown.list.find("ul").attr("aria-activedescendant"), "action-option-focused");
     });
 
     test("key down move to next action item", function() {
-        var content = gantt.list.content;
-
-        focusTable();
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
         keyDown(gantt.headerDropDown.list.find("ul"), keys.DOWN);
 
         ok(!gantt.headerDropDown.list.find("li:first").hasClass("k-state-focused"));
@@ -435,11 +378,8 @@
     });
 
     test("key down change move id attr", function() {
-        var content = gantt.list.content;
-
-        focusTable();
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
         keyDown(gantt.headerDropDown.list.find("ul"), keys.DOWN);
 
         ok(!gantt.headerDropDown.list.find("li:first").attr("id"));
@@ -448,11 +388,8 @@
     });
 
     test("key down last item does not move to next item when current is last", function() {
-        var content = gantt.list.content;
-
-        focusTable();
         gantt.select("tr:first");
-        keyDown(content.find("table"), keys.INSERT);
+        gantt.headerDropDown.element.find("button").click();
         keyDown(gantt.headerDropDown.list.find("ul"), keys.DOWN);
         keyDown(gantt.headerDropDown.list.find("ul"), keys.DOWN);
         keyDown(gantt.headerDropDown.list.find("ul"), keys.DOWN);
