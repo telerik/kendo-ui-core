@@ -143,9 +143,11 @@ var __meta__ = {
                 suggestDataSource = that.suggestDataSource = options.suggestDataSource;
 
                 if (!(suggestDataSource instanceof DataSource)) {
-                    suggestDataSource =
-                        that.suggestDataSource =
-                            DataSource.create($.extend(suggestDataSource, { group: [] }));
+                    if (!options.customDataSource) {
+                        delete suggestDataSource.group;
+                        delete suggestDataSource.data;
+                    }
+                    suggestDataSource = that.suggestDataSource = DataSource.create(suggestDataSource);
                 }
 
                 that.setSuggestDataSource(suggestDataSource);
