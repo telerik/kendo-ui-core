@@ -2312,7 +2312,7 @@ var __meta__ = {
 
             if (options.filterable) {
                 this.fieldMenu = new ui.PivotFieldMenu(this.element, {
-                    messages: this.options.messages.filterable,
+                    messages: this.options.messages.fieldMenu,
                     filter: ".k-setting-filter",
                     dataSource: this.dataSource
                 });
@@ -2659,7 +2659,7 @@ var __meta__ = {
                 filterable: this.options.filterable,
                 messages: {
                     empty: this.options.messages.columnFields,
-                    filterable: this.options.messages.filterable
+                    fieldMenu: this.options.messages.fieldMenu
                 }
             });
 
@@ -2669,7 +2669,7 @@ var __meta__ = {
                 filterable: this.options.filterable,
                 messages: {
                     empty: this.options.messages.rowFields,
-                    filterable: this.options.messages.filterable
+                    fieldMenu: this.options.messages.fieldMenu
                 }
             });
         },

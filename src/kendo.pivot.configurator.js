@@ -206,7 +206,7 @@ var __meta__ = {
                 connectWith: rows,
                 messages: {
                     empty: this.options.messages.columns,
-                    filterable: this.options.messages.filterable
+                    fieldMenu: this.options.messages.fieldMenu
                 }
             });
 
@@ -216,7 +216,7 @@ var __meta__ = {
                 connectWith: columns,
                 messages: {
                     empty: this.options.messages.rows,
-                    filterable: this.options.messages.filterable
+                    fieldMenu: this.options.messages.fieldMenu
                 }
             });
 
