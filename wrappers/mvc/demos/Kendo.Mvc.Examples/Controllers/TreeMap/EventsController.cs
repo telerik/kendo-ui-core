@@ -7,9 +7,14 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class TreeMapController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Events()
         {
             return View();
+        }
+
+        public ActionResult _PopulationUSA()
+        {
+            return Json(TreeMapDataRepository.PopulationUSAData(), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -190,6 +190,7 @@
     <Compile Include="Controllers\Gantt\EventsController.cs" />
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
+    <Compile Include="Controllers\TreeMap\EventsController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
     <Compile Include="Controllers\PivotGrid\IndexController.cs" />
@@ -815,6 +816,7 @@
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
     <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
+    <Content Include="Areas\aspx\Views\treemap\events.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
     <Content Include="Areas\aspx\Views\pivotgrid\index.aspx" />
@@ -3264,6 +3266,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\gantt\keyboard_navigation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\treemap\events.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
