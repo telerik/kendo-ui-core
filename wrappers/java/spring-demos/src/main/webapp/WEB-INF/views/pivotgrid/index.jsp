@@ -8,10 +8,10 @@
 
 <demo:header />
 
-	<kendo:pivotConfigurator name="configurator">
+	<kendo:pivotConfigurator name="configurator" filterable="true">
 	</kendo:pivotConfigurator>
 
-	<kendo:pivotGrid name="pivotgrid" columnWidth="200" height="550px">
+	<kendo:pivotGrid name="pivotgrid" columnWidth="200" height="550px" filterable="true">		
 		<kendo:pivotGrid-configurator name="configurator" />
 		<kendo:pivotDataSource type="xmla">
 			<kendo:pivotDataSource-columns>
