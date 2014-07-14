@@ -1,15 +1,15 @@
 (function() {
-    var PivotFilterMenu = kendo.ui.PivotFilterMenu,
+    var PivotFieldMenu = kendo.ui.PivotFieldMenu,
         div;
 
-    module("PivotFilterMenu initialziation", {
+    module("PivotFieldMenu initialziation", {
         setup: function() {
             kendo.ns = "kendo-";
             div = document.createElement("div");
             QUnit.fixture[0].appendChild(div);
         },
         teardown: function() {
-            var component = $(div).data("kendoPivotFilterMenu");
+            var component = $(div).data("kendoPivotFieldMenu");
             if (component) {
                 component.destroy();
             }
@@ -29,7 +29,7 @@
             }
         }, options);
 
-        return new PivotFilterMenu(div, options);
+        return new PivotFieldMenu(div, options);
     }
 
     function createDataSource() {
@@ -53,55 +53,55 @@
         });
     }
 
-    test("kendoPivotFilterMenu attaches a filter menu object to target", function() {
-        var menu = $(div).kendoPivotFilterMenu({ });
+    test("kendoPivotFieldMenu attaches a field menu object to target", function() {
+        var menu = $(div).kendoPivotFieldMenu({ });
 
-        ok(menu.data("kendoPivotFilterMenu") instanceof PivotFilterMenu);
+        ok(menu.data("kendoPivotFieldMenu") instanceof PivotFieldMenu);
     });
 
     test("context menu is initialized", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        equal(filterMenu.menu, filterMenu.wrapper.data("kendoContextMenu"));
+        equal(fieldmenu.menu, fieldmenu.wrapper.data("kendoContextMenu"));
     });
 
     test("window is initialized", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        ok(filterMenu.includeWindow instanceof kendo.ui.Window);
+        ok(fieldmenu.includeWindow instanceof kendo.ui.Window);
     });
 
     test("window opens on context menu select", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.menu.open();
-        filterMenu.menu.element.find(".k-include-item").click();
+        fieldmenu.menu.open();
+        fieldmenu.menu.element.find(".k-include-item").click();
 
-        ok(filterMenu.includeWindow.element.is(":visible"));
+        ok(fieldmenu.includeWindow.element.is(":visible"));
     });
 
     test("treeview is initialized in the window", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        ok(filterMenu.includeWindow.element.find(".k-treeview").data("kendoTreeView"));
+        ok(fieldmenu.includeWindow.element.find(".k-treeview").data("kendoTreeView"));
     });
 
     test("treeview is not bound initially", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        ok(!filterMenu.treeView.options.autoBind);
+        ok(!fieldmenu.treeView.options.autoBind);
     });
 
     test("treeview schema id is uniqueName", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         var model = new dataSource.reader.model;
 
@@ -109,11 +109,11 @@
     });
 
     test("treeview hasChildren returns true for items with childrenCardinality", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         var model = new dataSource.reader.model({ childrenCardinality: 10 });
 
@@ -121,11 +121,11 @@
     });
 
     test("treeview hasChildren returns false for items with zero childrenCardinality", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         var model = new dataSource.reader.model({ childrenCardinality: 0 });
 
@@ -133,12 +133,12 @@
     });
 
     test("treeview transport calls pivotDataSource for list of members", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.includeWindow.open();
+        fieldmenu.includeWindow.open();
 
-        var schemaMembers = stub(filterMenu.dataSource, { schemaMembers: filterMenu.dataSource.schemaMembers });
-        var dataSource = filterMenu.treeView.dataSource;
+        var schemaMembers = stub(fieldmenu.dataSource, { schemaMembers: fieldmenu.dataSource.schemaMembers });
+        var dataSource = fieldmenu.treeView.dataSource;
 
         dataSource.read();
 
@@ -146,13 +146,13 @@
     });
 
     test("treeview transport calls pivotDataSource with levelUniqueName", function() {
-        var filterMenu = createMenu();
+        var fieldmenu = createMenu();
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var schemaMembers = stub(filterMenu.dataSource, { schemaMembers: filterMenu.dataSource.schemaMembers });
-        var dataSource = filterMenu.treeView.dataSource;
+        var schemaMembers = stub(fieldmenu.dataSource, { schemaMembers: fieldmenu.dataSource.schemaMembers });
+        var dataSource = fieldmenu.treeView.dataSource;
 
         dataSource.read();
 
@@ -164,7 +164,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -174,11 +174,11 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var schemaMembers = stub(filterMenu.dataSource, { schemaMembers: filterMenu.dataSource.schemaMembers });
-        var dataSource = filterMenu.treeView.dataSource;
+        var schemaMembers = stub(fieldmenu.dataSource, { schemaMembers: fieldmenu.dataSource.schemaMembers });
+        var dataSource = fieldmenu.treeView.dataSource;
 
         dataSource.at(0).load();
 
@@ -188,7 +188,7 @@
     });
 
     test("treeview node is checked without filter expressions", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -198,16 +198,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(dataSource.at(0).checked);
     });
 
     test("treeview node is checked when there isn't filter expressios for current member", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 filter: { field: "baz", operator: "in", value: "baz" },
                 transport: {
@@ -218,16 +218,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(dataSource.at(0).checked);
     });
 
     test("treeview node is not checked when there is filter expressios for current member", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 filter: { field: "foo", operator: "in", value: "baz" },
                 transport: {
@@ -238,16 +238,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(!dataSource.at(0).checked);
     });
 
     test("treeview node is checked when there isn't `in` filter expressios for current member", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 filter: { field: "foo", operator: "eq", value: "foo" },
                 transport: {
@@ -258,16 +258,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(dataSource.at(0).checked);
     });
 
     test("treeview node is checked when there is filter expressios for current member and current member is in the value", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 filter: { field: "foo", operator: "in", value: "foo" },
                 transport: {
@@ -278,16 +278,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(dataSource.at(0).checked);
     });
 
     test("treeview node is checked depending on the first `in` filter expression", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 filter: {
                     logic: "and",
@@ -304,16 +304,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        var dataSource = filterMenu.treeView.dataSource;
+        var dataSource = fieldmenu.treeView.dataSource;
 
         ok(!dataSource.at(0).checked);
     });
 
     test("filter expression is not build for checked root node", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -326,16 +326,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         ok(!filter);
     });
 
     test("filter expression is not build for unchecked root node when there isn't filter expressions", function() {
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -348,13 +348,13 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).set("checked", false);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.at(0).set("checked", false);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         ok(!filter);
     });
 
@@ -363,7 +363,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -376,15 +376,15 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("bar").set("checked", false);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("bar").set("checked", false);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         equal(filter.filters.length, 1);
         equal(filter.filters[0].field, "foo");
         equal(filter.filters[0].operator, "in");
@@ -396,7 +396,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -410,16 +410,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("bar").set("checked", false);
-        filterMenu.treeView.dataSource.get("baz").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("bar").set("checked", false);
+        fieldmenu.treeView.dataSource.get("baz").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         equal(filter.filters.length, 1);
         equal(filter.filters[0].field, "foo");
         equal(filter.filters[0].operator, "in");
@@ -431,7 +431,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -446,15 +446,15 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("foo").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("foo").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         equal(filter.filters.length, 1);
     });
 
@@ -463,7 +463,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -477,15 +477,15 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("foo").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("foo").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         ok(!filter);
     });
 
@@ -494,7 +494,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -507,16 +507,16 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("foo").set("checked", false);
-        filterMenu.treeView.dataSource.get("foo").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("foo").set("checked", false);
+        fieldmenu.treeView.dataSource.get("foo").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         ok(!filter);
     });
 
@@ -525,7 +525,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -540,15 +540,15 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.at(0).load();
+        fieldmenu.treeView.dataSource.at(0).load();
 
-        filterMenu.treeView.dataSource.get("baz").set("checked", false);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("baz").set("checked", false);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         equal(filter.filters.length, 2);
 
         equal(filter.filters[0].field, "baz");
@@ -566,7 +566,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -581,13 +581,13 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.get("foo").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("foo").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         equal(filter.filters.length, 1);
     });
 
@@ -596,7 +596,7 @@
             [{ uniqueName: "foo", childrenCardinality: 2 }],
             [{ uniqueName: "bar" }, { uniqueName: "baz"}, { uniqueName: "bax"}]
         ];
-        var filterMenu = createMenu({
+        var fieldmenu = createMenu({
             dataSource: {
                 transport: {
                     discover: function(options) {
@@ -610,26 +610,26 @@
             }
         });
 
-        filterMenu.currentMember = "foo";
-        filterMenu.includeWindow.open();
+        fieldmenu.currentMember = "foo";
+        fieldmenu.includeWindow.open();
 
-        filterMenu.treeView.dataSource.get("foo").set("checked", true);
-        filterMenu.includeWindow.element.find(".k-button-ok").click();
+        fieldmenu.treeView.dataSource.get("foo").set("checked", true);
+        fieldmenu.includeWindow.element.find(".k-button-ok").click();
 
-        var filter = filterMenu.dataSource.filter();
+        var filter = fieldmenu.dataSource.filter();
         ok(!filter);
     });
 
     test("add label filter form on menu init", function() {
         var idx = 0;
-        var filterMenu = createMenu();
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu();
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
         var filterForm = filterItem.find("div").eq(0);
         var select = filterForm.find("select")[0];
 
-        equal(filterForm.find(".k-filter-help-text").text(), filterMenu.options.messages.info);
+        equal(filterForm.find(".k-filter-help-text").text(), fieldmenu.options.messages.info);
 
-        for (var operator in filterMenu.options.operators) {
+        for (var operator in fieldmenu.options.operators) {
             equal(select.options[idx].value, operator);
             idx++;
         }
@@ -638,17 +638,17 @@
     });
 
     test("create a dropdownlist for operators", function() {
-        var filterMenu = createMenu();
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu();
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
         var select = filterItem.find("select");
 
         ok(select.data("kendoDropDownList"));
     });
 
     test("filter data source on filter button click", function() {
-        var filterMenu = createMenu();
-        var dataSource = filterMenu.dataSource;
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu();
+        var dataSource = fieldmenu.dataSource;
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         filterItem.find("select").data("kendoDropDownList").value("eq");
         filterItem.find("input").val("chai");
@@ -659,15 +659,15 @@
 
         var expression = dataSource.args("filter")[0].filters[0];
 
-        equal(expression.field, filterMenu.currentMember);
+        equal(expression.field, fieldmenu.currentMember);
         equal(expression.operator, "eq");
         equal(expression.value, "chai");
     });
 
     test("do not filter data source if no value", function() {
-        var filterMenu = createMenu();
-        var dataSource = filterMenu.dataSource;
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu();
+        var dataSource = fieldmenu.dataSource;
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         filterItem.find("select").data("kendoDropDownList").value("eq");
         filterItem.find("input").val("");
@@ -681,11 +681,11 @@
 
     test("filter form removes existing filter before filter", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         dataSource.filter({
-            field: filterMenu.currentMember,
+            field: fieldmenu.currentMember,
             operator: "eq",
             value: "test"
         });
@@ -698,18 +698,18 @@
         var filters = dataSource.filter().filters;
 
         equal(filters.length, 1);
-        equal(filters[0].field, filterMenu.currentMember);
+        equal(filters[0].field, fieldmenu.currentMember);
         equal(filters[0].operator, "eq");
         equal(filters[0].value, "chai");
     });
 
     test("filter form preserves filters on 'in' operators", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         dataSource.filter({
-            field: filterMenu.currentMember,
+            field: fieldmenu.currentMember,
             operator: "in",
             value: "test"
         });
@@ -722,22 +722,22 @@
         var filters = dataSource.filter().filters;
 
         equal(filters.length, 2);
-        equal(filters[0].field, filterMenu.currentMember);
+        equal(filters[0].field, fieldmenu.currentMember);
         equal(filters[0].operator, "in");
         equal(filters[0].value, "test");
 
-        equal(filters[1].field, filterMenu.currentMember);
+        equal(filters[1].field, fieldmenu.currentMember);
         equal(filters[1].operator, "contains");
         equal(filters[1].value, "chai");
     });
 
     test("clear filter on clear button click", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         dataSource.filter({
-            field: filterMenu.currentMember,
+            field: fieldmenu.currentMember,
             operator: "eq",
             value: "test"
         });
@@ -751,11 +751,11 @@
 
     test("reset form on clear button click", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
         dataSource.filter({
-            field: filterMenu.currentMember,
+            field: fieldmenu.currentMember,
             operator: "eq",
             value: "test"
         });
@@ -768,25 +768,25 @@
 
     test("close context menu on filter", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
-        stub(filterMenu.menu, "close");
+        stub(fieldmenu.menu, "close");
 
         filterItem.find(".k-button-filter").click();
 
-        ok(filterMenu.menu.calls("close"));
+        ok(fieldmenu.menu.calls("close"));
     });
 
     test("close context menu on reset", function() {
         var dataSource = createDataSource();
-        var filterMenu = createMenu({ dataSource: dataSource });
-        var filterItem = filterMenu.menu.element.find(".k-filter-item");
+        var fieldmenu = createMenu({ dataSource: dataSource });
+        var filterItem = fieldmenu.menu.element.find(".k-filter-item");
 
-        stub(filterMenu.menu, "close");
+        stub(fieldmenu.menu, "close");
 
         filterItem.find(".k-button-clear").click();
 
-        ok(filterMenu.menu.calls("close"));
+        ok(fieldmenu.menu.calls("close"));
     });
 })();

@@ -3,10 +3,10 @@
 })(function(){
 
 var __meta__ = {
-    id: "pivotgrid.filtermenu",
-    name: "PivotFilterMenu",
+    id: "pivotgrid.fieldmenu",
+    name: "PivotFieldMenu",
     category: "web",
-    description: "The PivotFilterMenu widget allows the user to filter on fields displayed in PivotGrid",
+    description: "The PivotFieldMenu widget allows the user to filter on fields displayed in PivotGrid",
     depends: [ "pivotgrid", "menu", "window", "treeview", "dropdownlist" ]
 };
 
@@ -16,10 +16,10 @@ var __meta__ = {
         ui = kendo.ui,
         MENU = "kendoContextMenu",
         proxy = $.proxy,
-        NS = ".kendoPivotFilterMenu",
+        NS = ".kendoPivotFieldMenu",
         Widget = ui.Widget;
 
-    var PivotFilterMenu = Widget.extend({
+    var PivotFieldMenu = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
@@ -33,7 +33,7 @@ var __meta__ = {
         events: [],
 
         options: {
-            name: "PivotFilterMenu",
+            name: "PivotFieldMenu",
             filter: null,
             operators: {
                 contains: "Contains",
@@ -387,7 +387,7 @@ var __meta__ = {
     }
 
     var LABELMENUTEMPLATE =
-        '<div class="k-filterable k-content" tabindex="-1" data-role="filtermenu">' +
+        '<div class="k-filterable k-content" tabindex="-1" data-role="fieldmenu">' +
             '<form class="k-filter-menu">' +
                 '<div>' +
                     '<div class="k-filter-help-text">#=messages.info#</div>'+
@@ -405,7 +405,7 @@ var __meta__ = {
             '</form>' +
         '</div>';
 
-    var MENUTEMPLATE = '<ul class="k-pivot-filtermenu">'+
+    var MENUTEMPLATE = '<ul class="k-pivot-fieldmenu">'+
                         '<li class="k-item k-include-item">'+
                             '<span class="k-link">'+
                                 '<span class="k-sprite k-include"></span>'+
@@ -435,7 +435,7 @@ var __meta__ = {
                             '</a>'+
                         '</div></div>';
 
-    ui.plugin(PivotFilterMenu);
+    ui.plugin(PivotFieldMenu);
 
 })(window.kendo.jQuery);
 

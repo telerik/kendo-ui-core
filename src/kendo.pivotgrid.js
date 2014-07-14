@@ -2284,7 +2284,7 @@ var __meta__ = {
             });
 
             if (options.filterable) {
-                this.filterMenu = new ui.PivotFilterMenu(this.element, {
+                this.fieldMenu = new ui.PivotFieldMenu(this.element, {
                     messages: this.options.messages.filterable,
                     filter: ".k-setting-filter",
                     dataSource: this.dataSource
