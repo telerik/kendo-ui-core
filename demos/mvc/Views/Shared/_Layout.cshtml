@@ -28,10 +28,11 @@
         function resizeContainers() {
             var headerHeight = $("#header").height(),
                 searchWrapper = $("#example-search-wrapper").height(),
+                navbarWrapper = $("#example-nav-bar").height(),
                 htmlHeight = (kendo.support.mobileOS) ? parseFloat(window.innerHeight) : $('html').height();
-            navHeight = htmlHeight - (headerHeight + searchWrapper);
-            $("#nav-wrapper").height(navHeight - 1);
-            $("#main").height(navHeight + searchWrapper);
+            navHeight = htmlHeight - (headerHeight + searchWrapper + navbarWrapper);
+            $("#nav-wrapper").height(navHeight - 2);
+            $("#main").height(navHeight + searchWrapper + navbarWrapper);
         }
 
         $(function () {
