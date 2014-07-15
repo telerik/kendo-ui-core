@@ -133,6 +133,7 @@
                         model: {
                             id: "id",
                             fields: {
+                                id: { from: "ID", type: "number" },
                                 predecessorId: { from: "PredecessorID", type: "number" },
                                 successorId: { from: "SuccessorID", type: "number" },
                                 type: { from: "Type", type: "number" }
@@ -141,7 +142,7 @@
                     }
                 });
 
-                var gantt = $("#gantt").kendoGantt({
+                $("#gantt").kendoGantt({
                     dataSource: tasksDataSource,
                     dependencies: dependenciesDataSource,
                     views: [
@@ -159,7 +160,7 @@
 
                     showWorkHours: false,
                     showWorkDays: false
-                }).data("kendoGantt");
+                });
             });
         </script>
     </div>

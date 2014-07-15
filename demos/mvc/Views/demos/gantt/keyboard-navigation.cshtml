@@ -217,6 +217,7 @@
                     model: {
                         id: "id",
                         fields: {
+                            id: { from: "ID", type: "number" },
                             predecessorId: { from: "PredecessorID", type: "number" },
                             successorId: { from: "SuccessorID", type: "number" },
                             type: { from: "Type", type: "number" }
@@ -225,7 +226,7 @@
                 }
             });
 
-            var gantt = $("#gantt").kendoGantt({
+            $("#gantt").kendoGantt({
                 dataSource: tasksDataSource,
                 dependencies: dependenciesDataSource,
                 views: [
@@ -245,10 +246,11 @@
 
                 showWorkHours: false,
                 showWorkDays: false
-            }).data("kendoGantt");
+            });
 
             $(document.body).keydown(function(e) {
                 if (e.altKey && e.keyCode == 87) {
+                    var gantt = $("#gantt").data("kendoGantt");
                     gantt.list.content.find("table").focus();
                 }
             });
