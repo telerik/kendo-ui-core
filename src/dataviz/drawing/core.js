@@ -184,6 +184,7 @@
                 var composite = this._set(field, this.wrap(value, field));
                 if (this.observer && !composite) {
                     this.observer.optionsChange({
+                        // TODO: Supply old value as well
                         field: this.prefix + field,
                         value: value
                     });
@@ -223,6 +224,7 @@
             return composite;
         },
 
+        // TODO: Make private
         wrap: function(object, field) {
             var type = toString.call(object);
 
@@ -285,6 +287,8 @@
     };
 
     SurfaceFactory.current = new SurfaceFactory();
+
+    // TODO: Surface.exportSVG, Surface.exportImage
 
     // Exports ================================================================
     deepExtend(dataviz, {

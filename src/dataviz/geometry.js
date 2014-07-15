@@ -232,6 +232,8 @@
 
         geometryChange: util.mixins.geometryChange,
 
+        // TODO: clone, equals
+
         setOrigin: function(value) {
             this.origin = Point.create(value);
             this.origin.observer = this;
@@ -282,10 +284,11 @@
             return this.origin.clone().translate(this.width() / 2, this.height() / 2);
         },
 
-        wrap: function(targetRect) {
+        // TODO: Act on this instance, document after change
+        wrap: function(rect) {
             return Rect.fromPoints(
-                Point.min(this.topLeft(), targetRect.topLeft()),
-                Point.max(this.bottomRight(), targetRect.bottomRight())
+                Point.min(this.topLeft(), rect.topLeft()),
+                Point.max(this.bottomRight(), rect.bottomRight())
             );
         },
 
@@ -385,6 +388,8 @@
             this.anticlockwise = options.anticlockwise || false;
         },
 
+        // TODO: clone, equals
+
         setCenter: function(value) {
             this.center = Point.create(value);
             this.center.observer = this;
@@ -410,6 +415,7 @@
             );
         },
 
+        // TODO: Review, document
         curvePoints: function() {
             var startAngle = this.startAngle;
             var endAngle = this.endAngle;
@@ -610,6 +616,8 @@
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();
         },
+
+        // TODO: clone, equals
 
         _optionsChange: function() {
             if (this.observer) {

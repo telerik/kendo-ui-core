@@ -25,6 +25,7 @@
 
                 return this;
             } else {
+                // TODO: Remove getter
                 return this.options.get("fill");
             }
         },
@@ -43,6 +44,7 @@
 
                 return this;
             } else {
+                // TODO: Remove getter
                 return this.options.get("stroke");
             }
         }
