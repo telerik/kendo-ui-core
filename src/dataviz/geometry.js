@@ -32,8 +32,8 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        equals: function(point) {
-            return point && point.x === this.x && point.y === this.y;
+        equals: function(other) {
+            return other && other.x === this.x && other.y === this.y;
         },
 
         clone: function() {
@@ -200,8 +200,8 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        equals: function(size) {
-            return size && size.width === this.width && size.height === this.height;
+        equals: function(other) {
+            return other && other.width === this.width && other.height === this.height;
         },
 
         clone: function() {
