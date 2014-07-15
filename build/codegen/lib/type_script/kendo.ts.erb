@@ -668,6 +668,108 @@ declare module kendo.data {
         children?: any;
     }
 
+    interface PivotDiscoverRequestRestrictionOptions {
+        catalogName: string;
+        cubeName: string;
+    }
+
+    interface PivotDiscoverRequestDataOptions {
+        command: string;
+        restrictions: PivotDiscoverRequestRestrictionOptions;
+    }
+
+    interface PivotDiscoverRequestOptions {
+        data: PivotDiscoverRequestDataOptions;
+    }
+
+    interface PivotTransportConnection {
+        catalog?: string;
+        cube?: string;
+    }
+
+    interface PivotTransportDiscover {
+        cache?: boolean;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
+    }
+
+    interface PivotTransport {
+        discover?: any;
+        read?: any;
+    }
+
+    interface PivotTransportWithObjectOperations extends PivotTransport {
+        connection: PivotTransportConnection;
+        discover?: PivotTransportDiscover;
+        read?: DataSourceTransportRead;
+    }
+
+    interface PivotTransportWithFunctionOperations extends PivotTransport {
+        discover?: (options: DataSourceTransportOptions) => void;
+        read?: (options: DataSourceTransportOptions) => void;
+    }
+
+    interface PivotDataSourceOptions extends DataSourceOptions {
+        transport?: PivotTransport;
+        schema?: PivotSchema;
+    }
+
+    interface PivotTupleModel {
+        children: PivotTupleModel[];
+        caption?: string;
+        name: string;
+        levelName?: string;
+        levelNum: number;
+        hasChildren?: boolean;
+        hierarchy?: string;
+    }
+
+    interface PivotSchemaRowAxis {
+        tuples: PivotTupleModel[];
+    }
+
+    interface PivotSchemaColumnAxis {
+        tuples: PivotTupleModel[];
+    }
+
+    interface PivotSchemaAxes {
+        rows: PivotSchemaRowAxis;
+        columns: PivotSchemaColumnAxis;
+    }
+
+    interface PivotSchema extends DataSourceSchema{
+        axes?: any;
+        catalogs?: any;
+        cubes?: any;
+        data?: any;
+        dimensions?: any;
+        hierarchies?: any;
+        levels?: any;
+        measures?: any;
+    }
+
+    class PivotDataSource extends DataSource {
+        axes(): PivotSchemaAxes;
+        constructor(options?: PivotDataSourceOptions);
+        init(options?: PivotDataSourceOptions): void;
+        catalog(val: string): void;
+        columns(val: string[]): string[];
+        cube(val: string): void;
+        discover(options: PivotDiscoverRequestOptions): JQueryPromise<any>;
+        measures(val: string[]): string[];
+        measuresAxis(): string;
+        rows(val: string[]): string[];
+        schemaCatalogs(): JQueryPromise<any>;
+        schemaCubes(): JQueryPromise<any>;
+        schemaDimensions(): JQueryPromise<any>;
+        schemaHierarchies(): JQueryPromise<any>;
+        schemaLevels(): JQueryPromise<any>;
+        schemaMeasures(): JQueryPromise<any>;
+    }
+
     interface DataSourceTransport {
         parameterMap?(data: DataSourceTransportParameterMapData, type: string): any;
     }

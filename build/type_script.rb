@@ -15,6 +15,7 @@ module CodeGen::TypeScript
         'docs/api/framework/hierarchicaldatasource.md',
         'docs/api/framework/schedulerdatasource.md',
         'docs/api/framework/schedulerevent.md',
+        'docs/api/framework/pivotdatasource.md',
         'docs/api/framework/ganttdatasource.md',
         'docs/api/framework/gantttask.md',
         'docs/api/framework/ganttdependencydatasource.md',
