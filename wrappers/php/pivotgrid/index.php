@@ -50,12 +50,13 @@ $dataSource->transport($transport)
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
 $pivotgrid->dataSource($dataSource)
     ->columnWidth(200)
+    ->configurator("#configurator")
     ->filterable(true)
     ->height(494);
 
 $configurator = new \Kendo\UI\PivotConfigurator('configurator');
-$configurator->dataSource($dataSource)
-    ->filterable(true);
+$configurator->filterable(true);
+
 ?>
 
 <?php
