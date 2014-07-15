@@ -7861,6 +7861,22 @@
           "!jsp",
           "!php"
         ]
+      },
+      {
+        "text": "AngularJS",
+        "disableInMobile": true,
+        "url": "diagram/angular",
+        "title": {
+            "kendo-ui": "AngularJS support in Kendo UI Diagram"
+        },
+        "meta": {
+            "kendo-ui": "AngularJS directive support for Kendo UI Diagram"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
       }
     ],
     "category": "Diagramming"
