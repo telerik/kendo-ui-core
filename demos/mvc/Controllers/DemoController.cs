@@ -97,6 +97,7 @@ namespace Kendo.Controllers
             if (currentWidget.Forum != null && currentWidget.Forum.ContainsKey(product))
             {
                 ViewBag.Forum = "http://www.telerik.com/forums/" + currentWidget.Forum[product];
+                ViewBag.ProductPageUrl = "http://www.telerik.com/" + currentWidget.Forum[product];
             }
 
             if (currentWidget.CodeLibrary != null && currentWidget.CodeLibrary.ContainsKey(product))
