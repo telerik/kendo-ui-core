@@ -786,13 +786,31 @@
             var style = [];
             var matrix = toMatrix(transform);
             if (matrix) {
+                var image = this.srcElement;
+                var imageBottom = image.rect().bottomRight();
+                var bbox = image.bbox();
+                var bboxBottom = bbox.bottomRight();
+                var bboxTop = bbox.topLeft();
+
+                var paddingRight = bboxBottom.x - imageBottom.x;
+                var paddingBottom = bboxBottom.y - imageBottom.y;
                 matrix.round(TRANSFORM_PRECISION);
                 style.push(["filter", this.transformTemplate(matrix)]);
 
-                var bboxEdge = this.srcElement.bbox().bottomRight();
-                var edge = this.srcElement.rect().bottomRight();
-                style.push(["padding-right", max(bboxEdge.x - edge.x, 0) + "px"],
-                           ["padding-bottom", max(bboxEdge.y - edge.y, 0) + "px"]);
+                if (bboxTop.x < 0) {
+                    style.push(["left", bboxTop.x + "px"]);
+                    style.push(["padding-left", max(-(matrix.e / matrix.a), 0) + "px"]);
+                    paddingRight -= bboxTop.x;
+                }
+
+                if (bboxTop.y < 0) {
+                    style.push(["top", bboxTop.y + "px"]);
+                    style.push(["padding-top", max(-(matrix.f / matrix.d), 0) + "px"]);
+                    paddingBottom -= bboxTop.y;
+                }
+
+                style.push(["padding-right", max(paddingRight, 0) + "px"]);
+                style.push(["padding-bottom", max(paddingBottom, 0) + "px"]);
             }
 
             return style;
