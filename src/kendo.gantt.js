@@ -1420,6 +1420,11 @@ var __meta__ = {
 
         removeTask: function(uid) {
             var task = typeof uid === "string" ? this.dataSource.getByUid(uid) : uid;
+
+            if (!task) {
+                return;
+            }
+
             var dependencies = this.dependencies.dependencies(task.id);
 
             if (!this.trigger("remove", {
