@@ -18,14 +18,16 @@
         {
             var result = base.Serialize();
 
-            if (rangeBarLabels.From != null)
+            var fromLabelsData = rangeBarLabels.From.CreateSerializer().Serialize();
+            if (fromLabelsData.Count > 0)
             {
-                result.Add("from", rangeBarLabels.From.CreateSerializer().Serialize());
+                result.Add("from", fromLabelsData);
             }
 
-            if (rangeBarLabels.To != null)
+            var toLabelsData = rangeBarLabels.To.CreateSerializer().Serialize();
+            if (toLabelsData.Count > 0)
             {
-                result.Add("to", rangeBarLabels.To.CreateSerializer().Serialize());
+                result.Add("to", toLabelsData);
             }
 
             return result;
