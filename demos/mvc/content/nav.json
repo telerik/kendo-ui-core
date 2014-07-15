@@ -1418,7 +1418,6 @@
       {
         "text": "Binding to SignalR",
         "url": "grid/signalr",
-        "new": true,
         "title": {
             "kendo-ui": "Real-time Binding to SignalR Hub"
         },
@@ -1433,7 +1432,6 @@
       {
         "text": "Binding to WebSocket",
         "url": "grid/web-socket",
-        "new": true,
         "title": {
             "kendo-ui": "Real-time Binding to WebSocket"
         },
@@ -1659,6 +1657,7 @@
       },
     {
         "text": "Filter row",
+        "new": true,
         "url": "grid/filter-row",
         "title": {
             "kendo-ui": "Filter row in Kendo UI Grid | Kendo UI Web Demo"
@@ -1736,7 +1735,6 @@
       },
       {
         "text": "Frozen columns",
-        "new": true,
         "url": "grid/frozen-columns",
         "title": {
             "kendo-ui": "Static columns of Kendo UI Grid control | Kendo UI Web demo"
