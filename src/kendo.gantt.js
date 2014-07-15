@@ -171,7 +171,7 @@ var __meta__ = {
         return $(element).parentsUntil("body")
                 .filter(function(index, element) {
                     var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
-                    return computedStyle.overflow != "hidden";
+                    return computedStyle.overflow != "visible";
                 })
                 .add(window);
     }
