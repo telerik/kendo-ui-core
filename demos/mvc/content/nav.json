@@ -7848,6 +7848,16 @@
             "kendo-ui": "This example demonstrates different events which are available in Kendo UI Diagram widget."
         }
       },
+	  {
+        "text": "API",
+        "url": "diagram/api",
+        "title": {
+            "kendo-ui": "Example of Kendo UI Diagram API"
+        },
+        "meta": {
+            "kendo-ui": "The API Functions of Kendo UI Diagram widget give you the option to add/remove shapes and connections, set the current pan and zoom, select elements."
+        }
+      },
       {
         "text": "MVVM",
         "url": "diagram/mvvm",
