@@ -8430,6 +8430,21 @@
         ]
       },
       {
+        "text": "Responsive images",
+        "url": "mobile-listview/responsive-images",
+        "title": {
+            "kendo-ui": "Mobile ListView widget demo | Kendo UI Demos"
+        },
+        "meta": {
+            "kendo-ui": "This example demonstrates how the Mobile ListView is used alongside the responsive images feature of Telerik Backend Services"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "Adaptive Usage",
         "disableInMobile": true,
         "url": "listview/adaptive",

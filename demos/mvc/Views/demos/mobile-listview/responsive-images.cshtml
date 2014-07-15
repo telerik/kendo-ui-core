@@ -1,0 +1,122 @@
+<div data-role="view" data-title="Magazines"
+     data-init="mobileListViewResponsiveImages"
+     id="index" class="all-magazines">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            Magazines
+        </div>
+    </header>
+
+    <ul id="magazines-list"></ul>
+</div>
+
+<script id="listview-template" type="text/x-kendo-template">
+    <div data-bind="events: { click: onItemClick }">
+        <img data-src="#= CoverURL #" width="30%" class="resimgs item-cover" />
+        <h3 class="magazine-name">#: Name #</h3>
+        <time class="magazine-time">#: Published() #</time>
+    </div>
+</script>
+
+<div data-role="view" data-title="Magazine"
+     id="singleItem" class="all-magazines"
+     data-show="onDetailViewShow">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            Magazine Details
+        </div>
+    </header>
+
+    <img id="detailedImage" data-bind="attr: { data-src: CoverURL }" width="100%" class="resimgs" />
+</div>
+
+<script src="../content/shared/js/everlive.all.js"></script>
+<script src="../content/shared/js/everlive.images.js"></script>
+
+<script>
+    // initialize the Backend Services SDK with an API Key
+    var apiKey = "3q4sHgIqESXbpvOp";
+    new Everlive(apiKey);
+    everliveImages.init(apiKey);
+
+    // retrieve the Image URL from the Files table using expand
+    var expandExpression = {
+        "Cover": {
+            "ReturnAs": "CoverURL",
+            "SingleField": "Uri"
+        }
+    };
+
+    // retrieve a subset of the fields to optimize the payload
+    var filterExpression = {
+        "Name": 1,
+        "PublishedDate": 1,
+        "Cover": 1
+    };
+
+    // create the images datasource
+    var dataSource = new kendo.data.DataSource({
+        type: "everlive",
+        transport: {
+            typeName: "Magazines",
+            read: {
+                beforeSend: function (xhr) {
+                   xhr.setRequestHeader("X-Everlive-Expand", JSON.stringify(expandExpression));
+                   xhr.setRequestHeader("X-Everlive-Fields", JSON.stringify(filterExpression));
+                }
+            }
+        },
+        schema: {
+            model: {
+                Published: function () {
+                    return kendo.toString(this.PublishedDate, "MMMM yyyy");
+                }
+            }
+        }
+    });
+
+    function mobileListViewResponsiveImages() {
+        $("#magazines-list").kendoMobileListView({
+            style: "inset",
+            dataSource: dataSource,
+            template: $("#listview-template").html(),
+            dataBound: function (e) {
+               everliveImages.responsiveAll();
+            },
+            click: function(e) {
+                app.navigate("#singleItem?uid=" + e.dataItem.uid);
+            }
+        });
+    }
+
+    function onDetailViewShow(e) {
+        var clickedItemUid = e.view.params.uid;
+        var viewModel = dataSource.getByUid(clickedItemUid);
+
+        kendo.bind(e.view.element, viewModel);
+
+        everliveImages.responsiveAll();
+    }
+
+</script>
+
+<style>
+    .item-cover {
+        float: left;
+        margin-right: 2.5%;
+    }
+
+    .magazine-name {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .magazine-time {
+        color: #666;
+    }
+
+    .detailed-title {
+        padding: 20px;
+    }
+</style>
