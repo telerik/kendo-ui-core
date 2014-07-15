@@ -291,6 +291,7 @@
             var size = text.measure();
 
             ctx.save();
+            ctx.beginPath();
 
             this.setFill(ctx);
             this.setTransform(ctx);
