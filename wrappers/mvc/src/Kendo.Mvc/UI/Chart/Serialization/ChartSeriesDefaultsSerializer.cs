@@ -20,6 +20,12 @@ namespace Kendo.Mvc.UI
             var columnData = seriesDefaults.Column.CreateSerializer().Serialize();
             columnData.Remove("type");
 
+            var rangeBarData = seriesDefaults.RangeBar.CreateSerializer().Serialize();
+            rangeBarData.Remove("type");
+
+            var rangeColumnData = seriesDefaults.RangeColumn.CreateSerializer().Serialize();
+            rangeColumnData.Remove("type");
+
             var lineData = seriesDefaults.Line.CreateSerializer().Serialize();
             lineData.Remove("type");
 
@@ -78,6 +84,8 @@ namespace Kendo.Mvc.UI
             FluentDictionary.For(result)
                   .Add("bar", barData, () => barData.Count > 0)
                   .Add("column", columnData, () => columnData.Count > 0)
+                  .Add("rangeBar", rangeBarData, () => rangeBarData.Count > 0)
+                  .Add("rangeColumn", rangeColumnData, () => rangeColumnData.Count > 0)
                   .Add("line", lineData, () => lineData.Count > 0)
                   .Add("verticalLine", verticalLineData, () => verticalLineData.Count > 0)
                   .Add("area", areaData, () => areaData.Count > 0)

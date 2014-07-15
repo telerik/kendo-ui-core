@@ -77,5 +77,9 @@
             : base(data)
         {
         }
+
+        public ChartRangeBarSeries()
+        { 
+        }
     }
 }

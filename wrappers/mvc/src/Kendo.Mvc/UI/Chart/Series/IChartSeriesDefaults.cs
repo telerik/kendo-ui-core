@@ -19,6 +19,22 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The default settings for all range bar series
+        /// </summary>
+        IChartRangeBarSeries RangeBar
+        {
+            get;
+        }
+
+        /// <summary>
+        /// The default settings for all range column series
+        /// </summary>
+        IChartRangeBarSeries RangeColumn
+        {
+            get;
+        }
+
+        /// <summary>
         /// The default settings for all line series
         /// </summary>
         IChartLineSeries Line

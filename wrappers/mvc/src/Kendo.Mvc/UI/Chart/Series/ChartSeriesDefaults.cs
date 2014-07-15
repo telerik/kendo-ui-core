@@ -9,6 +9,8 @@ namespace Kendo.Mvc.UI
         {
             Bar = new ChartBarSeries<T, object>();
             Column = new ChartBarSeries<T, object>();
+            RangeBar = new ChartRangeBarSeries<T, object>();
+            RangeColumn = new ChartRangeBarSeries<T, object>();
             Line = new ChartLineSeries<T, object>();
             VerticalLine = new ChartLineSeries<T, object>();
             Pie = new ChartPieSeries<T, object>();
@@ -42,6 +44,24 @@ namespace Kendo.Mvc.UI
         /// The default settings for all column series.
         /// </summary>
         public IChartBarSeries Column
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all range bar series.
+        /// </summary>
+        public IChartRangeBarSeries RangeBar
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// The default settings for all range column series.
+        /// </summary>
+        public IChartRangeBarSeries RangeColumn
         {
             get;
             private set;

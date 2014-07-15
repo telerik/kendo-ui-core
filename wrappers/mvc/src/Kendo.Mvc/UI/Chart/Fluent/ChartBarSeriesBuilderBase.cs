@@ -186,7 +186,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TSeriesBuilder Labels(bool visible)
+        public virtual TSeriesBuilder Labels(bool visible)
         {
             Series.Labels.Visible = visible;
 

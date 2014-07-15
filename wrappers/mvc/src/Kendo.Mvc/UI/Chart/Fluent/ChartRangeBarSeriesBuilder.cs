@@ -53,6 +53,12 @@
             return base.Labels(configurator);
         }
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public override ChartBarSeriesBuilder<T> Labels(bool visible)
+        {
+            return base.Labels(visible);
+        }
+
         public ChartRangeBarSeriesBuilder<T> Labels(Action<ChartRangeBarLabelsBuilder> configurator)
         {
             configurator(new ChartRangeBarLabelsBuilder(RangeBarSeries.RangeBarLabel));

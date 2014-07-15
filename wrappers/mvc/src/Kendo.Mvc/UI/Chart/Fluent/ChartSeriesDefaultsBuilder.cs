@@ -30,6 +30,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the default settings range bar series
+        /// </summary>
+        /// <returns></returns>
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeBar()
+        {
+            return new ChartRangeBarSeriesBuilder<TModel>(chart.SeriesDefaults.RangeBar);
+        }
+
+        /// <summary>
+        /// Defines the default settings range column series
+        /// </summary>
+        /// <returns></returns>
+        public virtual ChartRangeBarSeriesBuilder<TModel> RangeColumn()
+        {
+            return new ChartRangeBarSeriesBuilder<TModel>(chart.SeriesDefaults.RangeColumn);
+        }
+
+        /// <summary>
         /// Defines the default settings for line series.
         /// </summary>
         public virtual ChartLineSeriesBuilder<TModel> Line()
