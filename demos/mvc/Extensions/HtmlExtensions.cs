@@ -30,12 +30,28 @@ namespace Kendo.Extensions
                 className += " active";
             }
 
-            return html.Raw(string.Format("<a {0} {1} href=\"{2}\">{3}</a>",
-                    !String.IsNullOrEmpty(className) ? "class=\"" + className + "\"" : "",
-                    example.External ? "rel=\"external\"" : "",
-                    href,
-                    example.Text
-            ));
+            StringBuilder link = new StringBuilder();
+
+            link.Append("<a ");
+
+            if (!String.IsNullOrEmpty(className)) {
+                link.Append("class=\"" + className + "\" ");
+            }
+
+            if (example.External) {
+                link.Append("rel=\"external\"");
+            }
+
+            link.Append("href=\"" + href + "\">");
+
+            if (example.New)
+            {
+                link.Append("<span class=\"new-widget\"></span>");
+            }
+
+            link.Append(example.Text).Append("</a>");
+
+            return html.Raw(link.ToString());
         }
 
         public static string ExampleUrl(this HtmlHelper html, NavigationExample example)

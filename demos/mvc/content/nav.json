@@ -8431,6 +8431,7 @@
       },
       {
         "text": "Responsive images",
+        "new": true,
         "url": "mobile-listview/responsive-images",
         "title": {
             "kendo-ui": "Mobile ListView widget demo | Kendo UI Demos"
