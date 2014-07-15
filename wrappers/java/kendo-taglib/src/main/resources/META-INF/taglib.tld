@@ -20633,7 +20633,7 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         <description>The text messages displayed in the field menu.</description>
         <name>pivotConfigurator-messages-fieldMenu</name>
         <tag-class>com.kendoui.taglib.pivotconfigurator.MessagesFieldMenuTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>The text of the cancel button in the include fields dialog.</description>
@@ -20685,6 +20685,52 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>The text of the filter operators displayed in the filter menu.</description>
+        <name>pivotConfigurator-messages-fieldMenu-operators</name>
+        <tag-class>com.kendoui.taglib.pivotconfigurator.MessagesFieldMenuOperatorsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text of the "contains" filter operator.</description>
+            <name>contains</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the "Does not contain" filter operator.</description>
+            <name>doesnotcontain</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the "Ends with" filter operator.</description>
+            <name>endswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the "equal" filter operator.</description>
+            <name>eq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the "not equal" filter operator.</description>
+            <name>neq</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the "Starts with" filter operator.</description>
+            <name>startswith</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
 
 
