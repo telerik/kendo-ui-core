@@ -193,6 +193,8 @@
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
+    <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
+    <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\TreeMap\EventsController.cs" />
     <Compile Include="Controllers\TreeMap\IndexController.cs" />
     <Compile Include="Controllers\Map\BubbleLayerController.cs" />
@@ -821,6 +823,8 @@
     <Content Include="Areas\aspx\Views\gantt\index.aspx" />
     <Content Include="Areas\aspx\Views\gantt\keyboard_navigation.aspx" />
     <Content Include="Areas\aspx\Views\menu\context_menu.aspx" />
+    <Content Include="Areas\aspx\Views\pivotgrid\local_flat_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\pivotgrid\remote_flat_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\treemap\events.aspx" />
     <Content Include="Areas\aspx\Views\treemap\index.aspx" />
     <Content Include="Areas\aspx\Views\map\bubble_layer.aspx" />
@@ -3283,9 +3287,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\diagram\events.cshtml" />
+    <Content Include="Areas\razor\Views\diagram\api.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\diagram\api.cshtml" />
+    <Content Include="Areas\razor\Views\pivotgrid\local_flat_data_binding.cshtml" />
+    <Content Include="Areas\razor\Views\pivotgrid\remote_flat_data_binding.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
