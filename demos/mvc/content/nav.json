@@ -1260,6 +1260,7 @@
       },
       {
         "text": "Localization",
+        "new": true,
         "disableInMobile": true,
         "url": "editor/localization",
         "title": {
@@ -1796,6 +1797,7 @@
       },
       {
         "text": "Localization",
+        "new": true,
         "url": "grid/localization",
         "title": {
             "kendo-ui": "Kendo UI Grid localization demo"
@@ -3187,6 +3189,7 @@
       },
       {
         "text": "Localization",
+        "new": true,
         "url": "scheduler/localization",
         "disableInMobile": true,
         "title": {
