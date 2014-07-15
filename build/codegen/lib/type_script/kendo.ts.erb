@@ -712,7 +712,20 @@ declare module kendo.data {
         read?: (options: DataSourceTransportOptions) => void;
     }
 
+    interface PivotDataSourceAxisOptions {
+        name: string;
+        expand?: boolean;
+    }
+
+    interface PivotDataSourceMeasureOptions {
+        values: string[];
+        axis?: string;
+    }
+
     interface PivotDataSourceOptions extends DataSourceOptions {
+        columns?: PivotDataSourceAxisOptions[];
+        measures?: PivotDataSourceMeasureOptions[];
+        rows?: PivotDataSourceAxisOptions[];
         transport?: PivotTransport;
         schema?: PivotSchema;
     }
