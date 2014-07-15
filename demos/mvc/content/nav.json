@@ -1005,6 +1005,7 @@
       {
         "text": "Server filtering",
         "url": "dropdownlist/serverfiltering",
+        "new": true,
         "title": {
             "kendo-ui": "Example of Server filtering in Kendo UI DropDownList widget"
         },
@@ -1017,6 +1018,7 @@
           "mvc-offline",
           "jsp"
         ],
+        "new": true,
         "text": "Client filtering",
         "url": "dropdownlist/clientfiltering"
       },
