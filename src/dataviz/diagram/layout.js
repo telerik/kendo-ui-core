@@ -2334,10 +2334,10 @@
             }, this);
             this.downNodes.forEachValue(function (list) {
                 list.sort(this._gridPositionComparer);
-            });
+            }, this);
             this.upNodes.forEachValue(function (list) {
                 list.sort(this._gridPositionComparer);
-            });
+            }, this);
 
             for (l = 0; l < this.layers.length - 1; ++l) {
                 layer = this.layers[l];
