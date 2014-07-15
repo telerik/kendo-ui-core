@@ -479,7 +479,7 @@
             setup: function() {
                 container = document.createElement("div");
 
-                path = new Path();
+                path = new Path({ stroke: { width: 1 } });
                 strokeNode = new StrokeNode(path);
                 strokeNode.attachTo(container);
             }
@@ -493,6 +493,11 @@
 
         test("renders on attribute when no stroke is set", function() {
             path.options.set("stroke", null);
+            ok(strokeNode.render().indexOf("on='false'") !== -1);
+        });
+
+        test("renders on attribute when stroke width is 0", function() {
+            path.options.set("stroke", { color: "red", width: 0 });
             ok(strokeNode.render().indexOf("on='false'") !== -1);
         });
 

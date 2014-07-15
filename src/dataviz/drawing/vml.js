@@ -289,7 +289,7 @@
         mapStroke: function(stroke) {
             var attrs = [];
 
-            if (stroke) {
+            if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
                 attrs.push(["weight", stroke.width + "px"]);
