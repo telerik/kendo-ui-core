@@ -51,7 +51,7 @@
 
         <ul data-role="listview" data-source="navDataSource" data-template="nav-template">
             <script type="text/x-kendo-template" id="nav-template">
-                <a href="\\#section?name=#: name #">#: text #</a>
+                <a href="\\#section?name=#: name #" style="#: data.new ? 'color: green' : '' #">#: text #</a>
             </script>
         </ul>
     </div>
@@ -89,7 +89,7 @@
 
         <ul data-role="listview" data-source="detailNavDataSource" data-template="detail-nav-template" data-auto-bind="false">
             <script type="text/x-kendo-template" id="detail-nav-template">
-                <a href="#: url #">#: text #</a>
+                <a href="#: url #" style="#: data.new ? 'color: green' : '' #">#: text #</a>
             </script>
         </ul>
     </div>
