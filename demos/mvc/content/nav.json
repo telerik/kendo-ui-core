@@ -1949,7 +1949,6 @@
       },
       {
         "text": "AngularJS",
-        "new": true,
         "url": "pivotgrid/angular",
         "title": {
           "kendo-ui": "AngularJS support in Kendo UI PivotGrid"
@@ -3372,7 +3371,6 @@
       },
       {
         "text": "AngularJS",
-        "new": true,
         "url": "gantt/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Gantt"
@@ -4107,7 +4105,6 @@
       },
       {
         "text": "AngularJS",
-        "new": true,
         "url": "toolbar/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Toolbar"
@@ -7738,7 +7735,6 @@
         ]
       },{
         "text": "AngularJS",
-        "new": true,
         "url": "treemap/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI TreeMap"
