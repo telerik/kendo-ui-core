@@ -5,31 +5,62 @@ require_once '../lib/Kendo/Autoload.php';
 
 ?>
 
+<div class="box">
+    <p>Allowed file types for the Image browser are: jpg, jpeg, gif, png</p>
+    <p>Allowed file types for the File browser for this demo are: txt, doc, docx, xls, xlsx, ppt, pptx, zip, rar, jpg, jpeg, gif, png</p>
+</div>
+
 <?php
     $editor = new \Kendo\UI\Editor('editor');
+
+    $editor->addTool(
+        "insertImage", "insertFile"
+    );
 
     // configure image browser
     $imageBrowser = new \Kendo\UI\EditorImageBrowser();
 
-    $transport = new \Kendo\UI\EditorImageBrowserTransport();
-    $transport->thumbnailUrl('../lib/ImageBrowser.php?action=thumbnail');
-    $transport->uploadUrl('../lib/ImageBrowser.php?action=upload');
-    $transport->imageUrl('../lib/ImageBrowser.php?action=image&path={0}');
+    $imageBrowser_transport = new \Kendo\UI\EditorImageBrowserTransport();
+    $imageBrowser_transport->thumbnailUrl('../lib/ImageBrowser.php?action=thumbnail');
+    $imageBrowser_transport->uploadUrl('../lib/ImageBrowser.php?action=upload');
+    $imageBrowser_transport->imageUrl('../lib/ImageBrowser.php?action=image&path={0}');
 
-    $transport->read('../lib/ImageBrowser.php?action=read');
-    $destroy = new \Kendo\UI\EditorImageBrowserTransportDestroy();
-    $destroy
+    $imageBrowser_transport->read('../lib/ImageBrowser.php?action=read');
+    $imageBrowser_destroy = new \Kendo\UI\EditorImageBrowserTransportDestroy();
+    $imageBrowser_destroy
         ->url('../lib/ImageBrowser.php?action=destroy')
         ->type('POST');
-    $transport->destroy($destroy);
-    $create = new \Kendo\UI\EditorImageBrowserTransportDestroy();
-    $create
+    $imageBrowser_transport->destroy($imageBrowser_destroy);
+    $imageBrowser_create = new \Kendo\UI\EditorImageBrowserTransportCreate();
+    $imageBrowser_create
         ->url('../lib/ImageBrowser.php?action=create')
         ->type('POST');
-    $transport->create($create);
-    $imageBrowser->transport($transport);
+    $imageBrowser_transport->create($imageBrowser_create);
+    $imageBrowser->transport($imageBrowser_transport);
 
     $editor->imageBrowser($imageBrowser);
+
+    // configure file browser
+    $fileBrowser = new \Kendo\UI\EditorFileBrowser();
+
+    $fileBrowser_transport = new \Kendo\UI\EditorFileBrowserTransport();
+    $fileBrowser_transport->uploadUrl('../lib/FileBrowser.php?action=upload');
+    $fileBrowser_transport->fileUrl('../lib/FileBrowser.php?action=file&path={0}');
+
+    $fileBrowser_transport->read('../lib/FileBrowser.php?action=read');
+    $fileBrowser_destroy = new \Kendo\UI\EditorFileBrowserTransportDestroy();
+    $fileBrowser_destroy
+        ->url('../lib/FileBrowser.php?action=destroy')
+        ->type('POST');
+    $fileBrowser_transport->destroy($fileBrowser_destroy);
+    $fileBrowser_create = new \Kendo\UI\EditorFileBrowserTransportCreate();
+    $fileBrowser_create
+        ->url('../lib/FileBrowser.php?action=create')
+        ->type('POST');
+    $fileBrowser_transport->create($fileBrowser_create);
+    $fileBrowser->transport($fileBrowser_transport);
+
+    $editor->fileBrowser($fileBrowser);
 
     // add content
     $editor
