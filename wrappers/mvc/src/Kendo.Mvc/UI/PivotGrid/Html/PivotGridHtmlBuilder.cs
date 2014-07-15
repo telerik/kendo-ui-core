@@ -1,13 +1,14 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    public class PivotGridHtmlBuilder
+    public class PivotGridHtmlBuilder<TModel>
+        where TModel : class
     {
-        public PivotGridHtmlBuilder(PivotGrid pivotGrid)
+        public PivotGridHtmlBuilder(PivotGrid<TModel> pivotGrid)
         {
             PivotGrid = pivotGrid;
         }
 
-        public PivotGrid PivotGrid
+        public PivotGrid<TModel> PivotGrid
         {
             get;
             private set;

@@ -44,6 +44,12 @@
 
         public string Errors { get; set; }
 
+        public ModelDescriptor Model
+        {
+            get;
+            set;
+        }
+
         public PivotDataSourceSchema()
         {
             FunctionAxes = new ClientHandlerDescriptor();
@@ -146,6 +152,15 @@
             if (cube.Keys.Any())
             {
                 json["cube"] = cube;
+            }
+
+            if (Model != null)
+            {
+                var model = Model.ToJson();
+                if (model.Count > 0)
+                {
+                    json.Add("model", model);
+                }
             }
         }
     }

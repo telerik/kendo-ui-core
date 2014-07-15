@@ -6,14 +6,14 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="PivotGrid"/>.
     /// </summary>
-    public class PivotGridBuilder<TModel> : WidgetBuilderBase<PivotGrid, PivotGridBuilder<TModel>>
+    public class PivotGridBuilder<TModel> : WidgetBuilderBase<PivotGrid<TModel>, PivotGridBuilder<TModel>>
         where TModel : class
     {
         // <summary>
         /// Initializes a new instance of the <see cref="PivotGridBuilder"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public PivotGridBuilder(PivotGrid component)
+        public PivotGridBuilder(PivotGrid<TModel> component)
             : base(component)
         {
         }

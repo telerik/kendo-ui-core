@@ -7,7 +7,7 @@
 
     public class PivotGridBuilderTests
     {
-        private readonly PivotGrid pivotGrid;
+        private readonly PivotGrid<object> pivotGrid;
         private readonly PivotGridBuilder<object> builder;
 
         public PivotGridBuilderTests()

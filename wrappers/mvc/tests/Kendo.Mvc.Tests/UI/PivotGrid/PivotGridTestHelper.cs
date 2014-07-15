@@ -9,7 +9,7 @@
 
     public class PivotGridTestHelper
     {
-        public static PivotGrid CreatePivotGrid(HtmlTextWriter writer)
+        public static PivotGrid<object> CreatePivotGrid(HtmlTextWriter writer)
         {
             Mock<HttpContextBase> httpContext = TestHelper.CreateMockedHttpContext();
 
@@ -27,7 +27,7 @@
 
             var initializer = new Mock<IJavaScriptInitializer>();
 
-            PivotGrid pivotGrid = new PivotGrid(viewContext, initializer.Object, urlGenerator.Object) { Name = "pivotGrid" };
+            PivotGrid<object> pivotGrid = new PivotGrid<object>(viewContext, initializer.Object, urlGenerator.Object) { Name = "pivotGrid" };
 
             return pivotGrid;
         }

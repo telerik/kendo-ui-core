@@ -590,7 +590,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual PivotGridBuilder<object> PivotGrid()
         {
-            return new PivotGridBuilder<object>(new PivotGrid(ViewContext, Initializer, UrlGenerator));
+            return new PivotGridBuilder<object>(new PivotGrid<object>(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>
@@ -605,7 +605,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual PivotGridBuilder<T> PivotGrid<T>() where T : class
         {
-            return new PivotGridBuilder<T>(new PivotGrid(ViewContext, Initializer, UrlGenerator));
+            return new PivotGridBuilder<T>(new PivotGrid<T>(ViewContext, Initializer, UrlGenerator));
         }
 
         /// <summary>

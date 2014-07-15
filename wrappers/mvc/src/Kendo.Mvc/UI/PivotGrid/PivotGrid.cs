@@ -11,7 +11,8 @@
     /// <summary>
     /// The server side wrapper for Kendo UI PivotGrid
     /// </summary>
-    public class PivotGrid: WidgetBase
+    public class PivotGrid<TModel>: WidgetBase
+        where TModel : class
     {
         public PivotGrid(ViewContext viewContext,
                     IJavaScriptInitializer initializer,
@@ -20,6 +21,7 @@
             : base(viewContext, initializer)
         {
             DataSource = new PivotDataSource();
+            DataSource.ModelType(typeof(TModel));
 
             UrlGenerator = urlGenerator;
 
@@ -134,7 +136,7 @@
 
         protected override void WriteHtml(System.Web.UI.HtmlTextWriter writer)
         {
-            PivotGridHtmlBuilder builder = new PivotGridHtmlBuilder(this);
+            PivotGridHtmlBuilder<TModel> builder = new PivotGridHtmlBuilder<TModel>(this);
 
             builder.Build().WriteTo(writer);
 

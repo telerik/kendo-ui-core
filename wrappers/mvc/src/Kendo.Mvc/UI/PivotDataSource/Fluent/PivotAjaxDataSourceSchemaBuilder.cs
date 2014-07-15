@@ -24,5 +24,15 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Configures Model properties
+        /// </summary>
+        public virtual PivotAjaxDataSourceSchemaBuilder<TModel> Model(Action<CustomDataSourceModelDescriptorFactory<TModel>> configurator)
+        {
+            configurator(new CustomDataSourceModelDescriptorFactory<TModel>(schema.Model));
+
+            return this;
+        }
     }
 }

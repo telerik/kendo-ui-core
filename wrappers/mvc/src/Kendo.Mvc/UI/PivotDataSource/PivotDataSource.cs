@@ -1,6 +1,7 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using Kendo.Mvc.Extensions;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -118,6 +119,11 @@
                         { Schema.Total, Data.AsQueryable().Count() }
                     };
             }
+        }
+
+        public void ModelType(Type modelType)
+        {
+            Schema.Model = new ModelDescriptor(modelType);
         }
 
         private string GenerateTypeFunction(bool isAspNetMvc)
