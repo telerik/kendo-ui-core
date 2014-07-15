@@ -346,6 +346,7 @@ def upgrade_web_config_to_mvc5(t)
              .gsub('newVersion="4.0.0.0"', 'newVersion="5.0.0.0"')
              .sub('key="webpages:Version" value="2.0.0.0"', 'key="webpages:Version" value="3.0.0.0"')
              .gsub(', Version=4.0.0.0', ', Version=5.0.0.0')
+             .gsub('System.Data.Entity, Version=5.0.0.0', 'System.Data.Entity, Version=4.0.0.0')
              .gsub(', Version=2.0.0.0', ', Version=3.0.0.0')
 
     xml = xml.sub(/httpRuntime(.*)?Version=5\.0\.0\.0/, "httpRuntime\\1Version=4.0.0.0")
