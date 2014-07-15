@@ -8656,6 +8656,7 @@
       {
         "text": "ToolBar as ActionBar",
         "url": "navbar/adaptive-toolbar",
+        "new": true,
         "title": {
             "kendo-ui": "Example of using the ToolBar web widget as an ActionBar"
         },
