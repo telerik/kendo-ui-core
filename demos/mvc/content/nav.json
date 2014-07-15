@@ -2306,6 +2306,7 @@
       {
         "text": "Events",
         "url": "menu/events",
+        "new": true,
         "title": {
             "kendo-ui": "Kendo UI jQuery Menu Events Sample | KendoMenu Demos"
         },
@@ -2326,6 +2327,7 @@
       {
         "text": "Context Menu",
         "url": "menu/context-menu",
+        "new": true,
         "title": {
             "kendo-ui": "Kendo UI Context Menu example"
         },
