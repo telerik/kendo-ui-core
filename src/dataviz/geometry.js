@@ -32,8 +32,8 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        equals: function(point) {
-            return point && point.x === this.x && point.y === this.y;
+        equals: function(other) {
+            return other && other.x === this.x && other.y === this.y;
         },
 
         clone: function() {
@@ -200,8 +200,8 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        equals: function(size) {
-            return size && size.width === this.width && size.height === this.height;
+        equals: function(other) {
+            return other && other.width === this.width && other.height === this.height;
         },
 
         clone: function() {
@@ -382,7 +382,7 @@
             this.radiusY = options.radiusY || options.radiusX;
             this.startAngle = options.startAngle;
             this.endAngle = options.endAngle;
-            this.counterClockwise = options.counterClockwise || false;
+            this.anticlockwise = options.anticlockwise || false;
         },
 
         setCenter: function(value) {
@@ -413,7 +413,7 @@
         curvePoints: function() {
             var startAngle = this.startAngle;
             var endAngle = this.endAngle;
-            var dir = this.counterClockwise ? -1 : 1;
+            var dir = this.anticlockwise ? -1 : 1;
             var curvePoints = [this.pointAt(startAngle)];
             var currentAngle = startAngle;
             var interval = this._arcInterval();
@@ -472,15 +472,15 @@
         _arcInterval: function() {
             var startAngle = this.startAngle;
             var endAngle = this.endAngle;
-            var counterClockwise = this.counterClockwise;
+            var anticlockwise = this.anticlockwise;
 
-            if (counterClockwise) {
+            if (anticlockwise) {
                 var oldStart = startAngle;
                 startAngle = endAngle;
                 endAngle = oldStart;
             }
 
-            if (startAngle > endAngle || (counterClockwise && startAngle === endAngle)) {
+            if (startAngle > endAngle || (anticlockwise && startAngle === endAngle)) {
                 endAngle += 360;
             }
 
@@ -515,7 +515,7 @@
             return new Point(-arc.radiusX * math.sin(radian), arc.radiusY * math.cos(radian));
         }
     });
-    defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "counterClockwise"]);
+    defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "anticlockwise"]);
 
     var Matrix = Class.extend({
         /* Transformation matrix

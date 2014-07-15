@@ -814,8 +814,8 @@
         equal(arc.endAngle, 180);
     });
 
-    test("counterClockwise is false by default", function() {
-        equal(arc.counterClockwise, false);
+    test("anticlockwise is false by default", function() {
+        equal(arc.anticlockwise, false);
     });
 
     test("modifying center triggers geometryChange", function() {
@@ -833,13 +833,13 @@
         arc.setRadiusY(20);
         arc.setStartAngle(30);
         arc.setEndAngle(40);
-        arc.setCounterClockwise(true);
+        arc.setAnticlockwise(true);
 
         equal(arc.radiusX, 10);
         equal(arc.radiusY, 20);
         equal(arc.startAngle, 30);
         equal(arc.endAngle, 40);
-        equal(arc.counterClockwise, true);
+        equal(arc.anticlockwise, true);
     });
 
     test("setting a field triggers geometryChange", function() {
@@ -867,7 +867,7 @@
         equal(arc.getRadiusY(), 100);
         equal(arc.getStartAngle(), 0);
         equal(arc.getEndAngle(), 180);
-        equal(arc.getCounterClockwise(), false);
+        equal(arc.getAnticlockwise(), false);
     });
 
     test("sets center", function() {
