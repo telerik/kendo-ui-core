@@ -76,13 +76,26 @@
             var entity = task.ToEntity();
             db.GanttTasks.Attach(entity);
 
+            Delete(entity);
+
             db.GanttTasks.Remove(entity);
             db.SaveChanges();
         }
 
-        private bool ValidateModel(TaskViewModel appointment, ModelStateDictionary modelState)
+        private void Delete(GanttTask task)
         {
-            if (appointment.Start > appointment.End)
+            var childTasks = db.GanttTasks.Where(t => t.ParentID == task.ID);
+
+            foreach (var childTask in childTasks)
+            {
+                Delete(childTask);
+                db.GanttTasks.Remove(childTask);
+            }
+        }
+
+        private bool ValidateModel(TaskViewModel task, ModelStateDictionary modelState)
+        {
+            if (task.Start > task.End)
             {
                 modelState.AddModelError("errors", "End date must be greater or equal to Start date.");
                 return false;
