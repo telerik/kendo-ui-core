@@ -12,10 +12,14 @@
 <c:url value="/editor/imagebrowser/destroy" var="transportDestroyUrl" />
 <c:url value="/resources/shared/imagebrowser/{0}" var="transportImageUrl" />
 
+<div class="box">
+    <p>Allowed file types for this demo are: jpg, jpeg, gif, png</p>
+</div>
 
 <kendo:editor name="editor" style="width:740px;height:440px">
 	<kendo:editor-tools>
-    	<kendo:editor-tool name="insertImage"/>
+    		<kendo:editor-tool name="insertImage"/>
+		<kendo:editor-tool name="insertFile"/>
   	</kendo:editor-tools>
 	<kendo:editor-imageBrowser>
 		<kendo:editor-imageBrowser-transport 
@@ -27,6 +31,15 @@
 			<kendo:editor-imageBrowser-transport-destroy type="POST" url="${ transportDestroyUrl }"/>
 		</kendo:editor-imageBrowser-transport>		
 	</kendo:editor-imageBrowser>
+	<kendo:editor-fileBrowser>
+		<kendo:editor-fileBrowser-transport 
+			read="${ transportReadUrl }" 
+			fileUrl="${ transportImageUrl }"
+			uploadUrl="${ transportUploadUrl }">
+			<kendo:editor-fileBrowser-transport-create type="POST" url="${ transportCreateUrl }"/>
+			<kendo:editor-fileBrowser-transport-destroy type="POST" url="${ transportDestroyUrl }"/>
+		</kendo:editor-fileBrowser-transport>		
+	</kendo:editor-fileBrowser>
     <kendo:editor-value>
          &lt;p&gt;
                &lt;img src="../../content/web/editor/kendo-ui-web.png" alt="Editor for ASP.NET MVC logo" style="display:block;margin-left:auto;margin-right:auto;" /&gt;
