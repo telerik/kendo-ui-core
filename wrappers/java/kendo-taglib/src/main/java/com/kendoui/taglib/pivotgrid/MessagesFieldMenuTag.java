@@ -51,6 +51,10 @@ public class MessagesFieldMenuTag extends  BaseTag  /* interfaces */ /* interfac
         return "pivotGrid-messages-fieldMenu";
     }
 
+    public void setOperators(com.kendoui.taglib.pivotgrid.MessagesFieldMenuOperatorsTag value) {
+        setProperty("operators", value);
+    }
+
     public java.lang.String getCancel() {
         return (java.lang.String)getProperty("cancel");
     }
