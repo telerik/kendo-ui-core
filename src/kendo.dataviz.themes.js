@@ -2516,7 +2516,7 @@ var __meta__ = {
                         }
                     },
                     label: {
-                        color: "#ffffff"
+                        color: "#333333"
                     },
                     line: {
                         color: "#000000"
