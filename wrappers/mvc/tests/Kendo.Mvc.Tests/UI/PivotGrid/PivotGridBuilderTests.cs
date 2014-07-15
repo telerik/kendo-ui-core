@@ -46,5 +46,14 @@
 
             pivotGrid.Messages.ColumnFields.Equals(value);
         }
+
+        [Fact]
+        public void Messages_FieldMenu_sets_the_corresponding_property()
+        {
+            string value = "custom message";
+            builder.Messages(m => m.FieldMenu(fm => fm.Info(value)));
+
+            pivotGrid.Messages.FieldMenu.Info.Equals(value);
+        }
     }
 }

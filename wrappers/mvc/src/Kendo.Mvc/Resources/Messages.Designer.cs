@@ -1186,6 +1186,78 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string PivotFieldMenu_Cancel {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string PivotFieldMenu_Clear {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string PivotFieldMenu_Filter {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields Filter.
+        /// </summary>
+        public static string PivotFieldMenu_FilterFields {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_FilterFields", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Include Fields....
+        /// </summary>
+        public static string PivotFieldMenu_Include {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Include", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show items with value that:.
+        /// </summary>
+        public static string PivotFieldMenu_Info {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string PivotFieldMenu_Ok {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fields to include.
+        /// </summary>
+        public static string PivotFieldMenu_Title {
+            get {
+                return ResourceManager.GetString("PivotFieldMenu_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to all day.
         /// </summary>
         public static string Scheduler_AllDay {

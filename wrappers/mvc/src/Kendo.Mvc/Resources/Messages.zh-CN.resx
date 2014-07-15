@@ -849,4 +849,28 @@
   <data name="PivotConfigurator_RowsLabel" xml:space="preserve">
     <value>Rows</value>
   </data>
+  <data name="PivotFieldMenu_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PivotFieldMenu_Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="PivotFieldMenu_Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="PivotFieldMenu_FilterFields" xml:space="preserve">
+    <value>Fields Filter</value>
+  </data>
+  <data name="PivotFieldMenu_Include" xml:space="preserve">
+    <value>Include Fields...</value>
+  </data>
+  <data name="PivotFieldMenu_Info" xml:space="preserve">
+    <value>Show items with value that:</value>
+  </data>
+  <data name="PivotFieldMenu_Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PivotFieldMenu_Title" xml:space="preserve">
+    <value>Fields to include</value>
+  </data>
 </root>

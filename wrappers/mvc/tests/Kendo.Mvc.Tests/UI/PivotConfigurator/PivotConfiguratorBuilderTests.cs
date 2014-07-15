@@ -32,5 +32,14 @@
 
             pivotConfigurator.Messages.ColumnsLabel.Equals(value);
         }
+
+        [Fact]
+        public void Messages_FieldMenu_sets_the_corresponding_property()
+        {
+            string value = "custom message";
+            builder.Messages(m => m.FieldMenu(fm => fm.Info(value)));
+
+            pivotConfigurator.Messages.FieldMenu.Info.Equals(value);
+        }
     }
 }

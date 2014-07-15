@@ -22,6 +22,7 @@
             ColumnsLabel = Messages.PivotConfigurator_ColumnsLabel;
             RowsLabel = Messages.PivotConfigurator_RowsLabel;
             FieldsLabel = Messages.PivotConfigurator_FieldsLabel;
+            FieldMenu = new PivotFieldMenuMessages();
         }
 
         public string Measures { get; set; }
@@ -31,6 +32,7 @@
         public string ColumnsLabel { get; set; }
         public string RowsLabel { get; set; }
         public string FieldsLabel { get; set; }
+        public PivotFieldMenuMessages FieldMenu { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -67,6 +69,12 @@
             if (FieldsLabel != DefaultFieldsLabel)
             {
                 json["fieldsLabel"] = FieldsLabel;
+            }
+
+            var fieldMenu = FieldMenu.ToJson();
+            if (fieldMenu.Count > 0)
+            {
+                json["fieldMenu"] = fieldMenu;
             }
         }
     }

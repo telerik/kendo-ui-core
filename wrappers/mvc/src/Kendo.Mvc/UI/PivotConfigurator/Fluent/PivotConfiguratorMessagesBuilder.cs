@@ -62,5 +62,18 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the messages of the pivotFieldMenu.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the pivotFieldMenu messages</param>
+        public PivotConfiguratorMessagesBuilder FieldMenu(Action<PivotFieldMenuMessagesBuilder> addViewAction)
+        {
+            PivotFieldMenuMessagesBuilder builder = new PivotFieldMenuMessagesBuilder(messages.FieldMenu);
+
+            addViewAction(builder);
+
+            return this;
+        }
     }
 }
