@@ -77,6 +77,15 @@ class PivotGridMessagesFieldMenu extends \Kendo\SerializableObject {
         return $this->setProperty('cancel', $value);
     }
 
+    /**
+    * The text of the filter operators displayed in the filter menu.
+    * @param \Kendo\UI\PivotGridMessagesFieldMenuOperators|array $value
+    * @return \Kendo\UI\PivotGridMessagesFieldMenu
+    */
+    public function operators($value) {
+        return $this->setProperty('operators', $value);
+    }
+
 //<< Properties
 }
 
