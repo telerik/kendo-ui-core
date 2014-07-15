@@ -7,7 +7,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring bound columns
     /// </summary>
-    /// <typeparam name="T">The type of the data item</typeparam>
+    /// <typeparam name="TTaskModel">The type of the task data item</typeparam>
+    /// /// <typeparam name="TDependenciesModel">The type of the dependency data item</typeparam>
     public class GanttBoundColumnBuilder<TTaskModel, TDependenciesModel> : GanttColumnBuilderBase<IGanttBoundColumn, GanttBoundColumnBuilder<TTaskModel, TDependenciesModel>>
         where TTaskModel : class, IGanttTask
         where TDependenciesModel : class, IGanttDependency

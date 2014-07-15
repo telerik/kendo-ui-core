@@ -2147,8 +2147,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\Gantt\Fluent\GanttColumnFactory.cs" />
-    <Compile Include="UI\Gantt\GanttColumn.cs" />
-    <Compile Include="UI\Gantt\Fluent\GanttColumnBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UI\ToolBar\ToolBar.cs" />

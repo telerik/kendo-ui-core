@@ -4,6 +4,9 @@
     using System.ComponentModel;
     using System.Web.Mvc;
 
+    /// <summary>
+    /// Defines the fluent interface for configuring the Gantt dependencies <see cref="DataSource"/>.
+    /// </summary>
     public class GanttDependenciesDataSourceBuilder<TModel> : FilterableAjaxDataSourceBuilder<TModel, GanttDependenciesDataSourceBuilder<TModel>>
          where TModel : class
     {

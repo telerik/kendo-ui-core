@@ -7,6 +7,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent API for configuring the Kendo Gantt for ASP.NET MVC.
     /// </summary>
+    /// <typeparam name="TTaskModel">The type of the task data item</typeparam>
+    /// <typeparam name="TDependenciesModel">The type of the dependency data item</typeparam>
     public class GanttBuilder<TTaskModel, TDependenciesModel> : WidgetBuilderBase<Gantt<TTaskModel, TDependenciesModel>, GanttBuilder<TTaskModel, TDependenciesModel>>
         where TTaskModel : class, IGanttTask
         where TDependenciesModel : class, IGanttDependency

@@ -9,6 +9,11 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
+    /// <summary>
+    /// The server side wrapper for Kendo UI Gantt
+    /// </summary>
+    /// <typeparam name="TTaskModel">Type of the Task model</typeparam>
+    /// <typeparam name="TDependenciesModel">Type of the Dependencies model</typeparam>
     public class Gantt<TTaskModel, TDependenciesModel> : WidgetBase
         where TTaskModel : class, IGanttTask
         where TDependenciesModel : class, IGanttDependency

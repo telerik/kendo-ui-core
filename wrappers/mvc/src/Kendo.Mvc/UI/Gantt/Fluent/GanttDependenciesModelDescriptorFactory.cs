@@ -5,7 +5,7 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="DataSource"/> Model definition.
+    /// Defines the fluent interface for configuring the dependencies <see cref="DataSource"/> Model definition.
     /// </summary>
     /// <typeparam name="TModel">Type of the model</typeparam>
     public class GanttDependenciesModelDescriptorFactory<TModel> : DataSourceModelDescriptorFactory<TModel>, IHideObjectMembers
