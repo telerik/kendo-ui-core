@@ -948,14 +948,14 @@
             compareMatrices(matrix, initMatrix(0,2,2,0,2,2));
         });
 
-        test("times multiplies matrix", function() {
+        test("multiplyCopy multiplies matrix", function() {
             matrix = new Matrix(2,2,2,2,2,2);
-            compareMatrices(matrix.times(new Matrix(3,3,3,3,3,3)), initMatrix(12,12,12,12,14,14));
+            compareMatrices(matrix.multiplyCopy(new Matrix(3,3,3,3,3,3)), initMatrix(12,12,12,12,14,14));
         });
 
-        test("times returns a new matrix", function() {
+        test("multiplyCopy returns a new matrix", function() {
             matrix = new Matrix(2,2,2,2,2,2);
-            result = matrix.times(new Matrix(3,3,3,3,3,3));
+            result = matrix.multiplyCopy(new Matrix(3,3,3,3,3,3));
             ok(result !== matrix);
             ok(result instanceof Matrix);
         });
@@ -1155,8 +1155,8 @@
             transformation.scale(1, 2, [10, 20]);
             deepEqual(transformation.matrix(),
                       Matrix.translate(10, 20).
-                          times(Matrix.scale(1, 2)).
-                          times(Matrix.translate(-10, -20))
+                          multiplyCopy(Matrix.scale(1, 2)).
+                          multiplyCopy(Matrix.translate(-10, -20))
             );
         });
 
@@ -1164,8 +1164,8 @@
             transformation.scale(1, 2, new Point(10, 20));
             deepEqual(transformation.matrix(),
                       Matrix.translate(10, 20).
-                          times(Matrix.scale(1, 2)).
-                          times(Matrix.translate(-10, -20))
+                          multiplyCopy(Matrix.scale(1, 2)).
+                          multiplyCopy(Matrix.translate(-10, -20))
             );
         });
 

@@ -109,7 +109,7 @@
         test("load appends PathNode with combined transformation", function() {
             var matrix = new Matrix(3,3,3,3,3,3),
                 currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.times(matrix),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
                 path = new Path({transform: matrix});
 
             node.append = function(child) {
@@ -154,7 +154,7 @@
         test("load appends TextNode with combined transformation", function() {
             var matrix = new Matrix(3,3,3,3,3,3),
                 currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.times(matrix),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
                 text = new d.Text("foo", new g.Point(), {transform: matrix});
 
             node.append = function(child) {
@@ -183,7 +183,7 @@
         test("load appends ImageNode with combined transformation", function() {
             var matrix = new Matrix(3,3,3,3,3,3),
                 currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.times(matrix),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
                 image = new d.Image("foo", new g.Rect(), {transform: matrix});
 
             node.append = function(child) {
@@ -259,7 +259,7 @@
         test("load passes combined transformation", function() {
             var matrix = new Matrix(3,3,3,3,3,3),
                 currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.times(matrix),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
                 group = new Group({transform: g.transform(matrix)});
 
             group.append(new Group());
@@ -398,7 +398,7 @@
         test("refreshTransform method calls childNodes refreshTransform method with current transformation", function() {
             var matrix = new Matrix(2,2,2,2,2,2),
                 parentMatrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = parentMatrix.times(matrix),
+                currentMatrix = parentMatrix.multiplyCopy(matrix),
                 group = new Group({transform: g.transform(matrix)}),
                 path = new Path(),
                 childGroupNode,
@@ -1044,7 +1044,7 @@
         test("refreshTransform calls transform refresh method with the srcElement transformation", 14, function() {
             var srcMatrix = new Matrix(3,3,3,3,3,3),
                 parentMatrix = new Matrix(2,2,2,2,2,2),
-                currentMatrix = parentMatrix.times(srcMatrix),
+                currentMatrix = parentMatrix.multiplyCopy(srcMatrix),
                 group = new Group({transform: parentMatrix});
             path = new Path({transform: srcMatrix});
             group.append(path);
@@ -1521,7 +1521,7 @@
         test("refreshTransform updates transformation", function() {
             var srcMatrix = new Matrix(3,3,3,3,3,3);
             var parentMatrix = new Matrix(2,2,2,2,2,2);
-            var currentMatrix = parentMatrix.times(srcMatrix);
+            var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
             var group = new Group({ transform: parentMatrix });
 
             image = new d.Image("foo", new g.Rect(), { transform: srcMatrix });

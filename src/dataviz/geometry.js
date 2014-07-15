@@ -518,14 +518,6 @@
     defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "anticlockwise"]);
 
     var Matrix = Class.extend({
-        /* Transformation matrix
-         *
-         *   a c e
-         * ( b d f )
-         *   0 0 1
-         *
-         */
-
         init: function (a, b, c, d, e, f) {
             this.a = a || 0;
             this.b = b || 0;
@@ -535,7 +527,7 @@
             this.f = f || 0;
         },
 
-        times: function (m) {
+        multiplyCopy: function (m) {
             return new Matrix(
                 this.a * m.a + this.c * m.b,
                 this.b * m.a + this.d * m.b,
@@ -629,7 +621,7 @@
         },
 
         translate: function(x, y) {
-            this._matrix = this._matrix.times(Matrix.translate(x, y));
+            this._matrix = this._matrix.multiplyCopy(Matrix.translate(x, y));
 
             this._optionsChange();
             return this;
@@ -642,13 +634,13 @@
 
             if (origin) {
                 origin = Point.create(origin);
-                this._matrix = this._matrix.times(Matrix.translate(origin.x, origin.y));
+                this._matrix = this._matrix.multiplyCopy(Matrix.translate(origin.x, origin.y));
             }
 
-            this._matrix = this._matrix.times(Matrix.scale(scaleX, scaleY));
+            this._matrix = this._matrix.multiplyCopy(Matrix.scale(scaleX, scaleY));
 
             if (origin) {
-                this._matrix = this._matrix.times(Matrix.translate(-origin.x, -origin.y));
+                this._matrix = this._matrix.multiplyCopy(Matrix.translate(-origin.x, -origin.y));
             }
 
             this._optionsChange();
@@ -658,7 +650,7 @@
         rotate: function(angle, origin) {
             origin = Point.create(origin) || Point.ZERO;
 
-            this._matrix = this._matrix.times(Matrix.rotate(angle, origin.x, origin.y));
+            this._matrix = this._matrix.multiplyCopy(Matrix.rotate(angle, origin.x, origin.y));
 
             this._optionsChange();
             return this;
@@ -667,7 +659,7 @@
         multiply: function(transformation) {
             var matrix = toMatrix(transformation);
 
-            this._matrix = this._matrix.times(matrix);
+            this._matrix = this._matrix.multiplyCopy(matrix);
 
             this._optionsChange();
             return this;

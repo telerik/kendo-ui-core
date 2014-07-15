@@ -76,7 +76,7 @@
                 element = element.parent;
                 transformation = element.transform();
                 if (transformation) {
-                    parentMatrix = transformation.matrix().times(parentMatrix || Matrix.unit());
+                    parentMatrix = transformation.matrix().multiplyCopy(parentMatrix || Matrix.unit());
                 }
             }
 
@@ -98,7 +98,7 @@
             parentMatrix = toMatrix(parentTransform);
 
             if (elementMatrix && parentMatrix) {
-                combinedMatrix = parentMatrix.times(elementMatrix);
+                combinedMatrix = parentMatrix.multiplyCopy(elementMatrix);
             } else {
                 combinedMatrix = elementMatrix || parentMatrix;
             }
