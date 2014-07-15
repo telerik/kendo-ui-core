@@ -257,11 +257,12 @@ var __meta__ = {
                 viewModel = that.viewModel;
 
             that.manuallyUpdatingVM = true;
-
+            filter = $.extend(true, {}, filter);
             //MVVM check binding does not update the UI when changing the value to null/undefined
             if (that.options.type == BOOL) {
-                filter.value = filter.value + "";
-                that.wrapper.find(":radio").prop("checked", false);
+                if (viewModel.value !== filter.value) {
+                    that.wrapper.find(":radio").prop("checked", false);
+                }
             }
 
             if (filter.operator) {
@@ -285,6 +286,7 @@ var __meta__ = {
                 logic: "and",
                 filters: []
             };
+
             if (currentFilter.value !== undefined && currentFilter.value !== null) {
                 expression.filters.push(currentFilter);
             }
