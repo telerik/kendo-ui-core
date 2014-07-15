@@ -25,6 +25,7 @@
 
             AutoBind = true;
             Reorderable = true;
+            Messages = new PivotGridMessages();
         }
 
         public PivotDataSource DataSource
@@ -69,6 +70,12 @@
             set;
         }
 
+        public PivotGridMessages Messages
+        {
+            get;
+            set;
+        }
+
         public bool AutoBind { get; set; }
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -103,6 +110,12 @@
             if (Filterable == true)
             {
                 options["filterable"] = Filterable;
+            }
+
+            var messages = Messages.ToJson();
+            if (messages.Count > 0)
+            {
+                options["messages"] = messages;
             }
 
             options["dataSource"] = DataSource.ToJson();

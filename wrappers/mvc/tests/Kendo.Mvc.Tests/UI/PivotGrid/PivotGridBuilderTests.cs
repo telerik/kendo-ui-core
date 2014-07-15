@@ -37,5 +37,14 @@
             builder.Reorderable(false);
             Assert.False(pivotGrid.Reorderable);
         }
+
+        [Fact]
+        public void Messages_sets_the_corresponding_property()
+        {
+            string value = "custom message";
+            builder.Messages(m => m.ColumnFields(value));
+
+            pivotGrid.Messages.ColumnFields.Equals(value);
+        }
     }
 }

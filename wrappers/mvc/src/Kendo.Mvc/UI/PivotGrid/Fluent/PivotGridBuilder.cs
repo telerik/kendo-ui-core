@@ -115,5 +115,18 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the messages of the pivotGrid.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the pivotGrid messages</param>
+        public PivotGridBuilder<TModel> Messages(Action<PivotGridMessagesBuilder> addViewAction)
+        {
+            PivotGridMessagesBuilder builder = new PivotGridMessagesBuilder(Component.Messages);
+
+            addViewAction(builder);
+
+            return this;
+        }
     }
 }
