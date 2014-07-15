@@ -128,6 +128,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "autocomplete/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI AutoComplete"
@@ -260,6 +261,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "button/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Button"
@@ -386,6 +388,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "calendar/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Calendar"
@@ -516,6 +519,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "colorpicker/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI ColorPicker"
@@ -670,6 +674,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "combobox/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI ComboBox"
@@ -806,6 +811,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "datepicker/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI DatePicker"
@@ -942,6 +948,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "datetimepicker/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI DateTimePicker"
@@ -1108,6 +1115,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "dropdownlist/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI DropDownList"
@@ -1317,6 +1325,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "editor/angular",
         "disableInMobile": true,
         "title": {
@@ -1865,6 +1874,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "grid/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Grid"
@@ -1939,6 +1949,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "pivotgrid/angular",
         "title": {
           "kendo-ui": "AngularJS support in Kendo UI PivotGrid"
@@ -2068,6 +2079,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "listview/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI ListView"
@@ -2186,6 +2198,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "maskedtextbox/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI MaskedTextBox"
@@ -2359,6 +2372,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "menu/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Menu"
@@ -2374,6 +2388,7 @@
       },
       {
         "text": "AngularJS - ContextMenu",
+        "new": true,
         "url": "menu/context-menu-angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI ContextMenu"
@@ -2511,6 +2526,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "multiselect/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI MultiSelect"
@@ -2614,6 +2630,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "notification/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Notification"
@@ -2730,6 +2747,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "numerictextbox/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI NumericTextBox"
@@ -2871,6 +2889,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "panelbar/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI PanelBar"
@@ -2999,6 +3018,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "progressbar/angular",
         "title": {
             "kendo-ui": "AngularJS support for Kendo UI ProgressBar"
@@ -3248,6 +3268,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "scheduler/angular",
         "disableInMobile": true,
         "title": {
@@ -3349,6 +3370,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "gantt/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Gantt"
@@ -3453,6 +3475,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "slider/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Slider"
@@ -3595,6 +3618,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "sortable/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Sortable"
@@ -3717,6 +3741,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "splitter/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Splitter"
@@ -3858,6 +3883,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "tabstrip/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI TabStrip"
@@ -3984,6 +4010,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "timepicker/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI TimePicker"
@@ -4078,6 +4105,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "toolbar/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Toolbar"
@@ -4186,6 +4214,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "tooltip/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Tooltip"
@@ -4379,6 +4408,7 @@
       },
 {
         "text": "AngularJS",
+        "new": true,
         "url": "treeview/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI TreeView"
@@ -4511,6 +4541,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "upload/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Upload"
@@ -4654,6 +4685,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "window/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Window"
@@ -5122,6 +5154,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "dragdrop/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Drag & Drop"
@@ -5176,6 +5209,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "validator/angular",
         "title": {
@@ -5487,6 +5521,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "area-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -5716,6 +5751,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "bar-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -5799,6 +5835,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "box-plot-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -5902,6 +5939,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "bubble-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -5994,6 +6032,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "bullet-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6096,6 +6135,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "donut-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6204,6 +6244,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "funnel-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6400,6 +6441,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "line-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6502,6 +6544,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "pie-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6624,6 +6667,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "polar-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -6758,6 +6802,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "radar-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -7045,6 +7090,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "scatter-charts/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Chart"
@@ -7134,6 +7180,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "sparklines/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Sparkline"
@@ -7280,6 +7327,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "linear-gauge/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Linear Gauge"
@@ -7358,6 +7406,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "radial-gauge/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Radial Gauge"
@@ -7454,6 +7503,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "barcode/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI Barcode"
@@ -7535,6 +7585,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "url": "qrcode/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI QR code"
@@ -7680,6 +7731,7 @@
         }
       },{
         "text": "AngularJS",
+        "new": true,
         "url": "treemap/angular",
         "title": {
             "kendo-ui": "AngularJS support in Kendo UI TreeMap"
@@ -7878,6 +7930,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "diagram/angular",
         "title": {
@@ -7944,6 +7997,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "actionsheet/angular",
         "title": {
@@ -8175,6 +8229,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "buttongroup/angular",
         "title": {
@@ -8250,6 +8305,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "drawer/angular",
         "title": {
@@ -8466,6 +8522,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "mobile-listview/angular",
         "title": {
@@ -8531,6 +8588,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "modalview/angular",
         "title": {
@@ -8616,6 +8674,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "navbar/angular",
         "title": {
@@ -8682,6 +8741,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "popover/angular",
         "title": {
@@ -8757,6 +8817,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "scroller/angular",
         "title": {
@@ -8848,6 +8909,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "scrollview/angular",
         "title": {
@@ -8938,6 +9000,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "switch/angular",
         "title": {
@@ -9023,6 +9086,7 @@
       },
       {
         "text": "AngularJS",
+        "new": true,
         "disableInMobile": true,
         "url": "mobile-tabstrip/angular",
         "title": {
