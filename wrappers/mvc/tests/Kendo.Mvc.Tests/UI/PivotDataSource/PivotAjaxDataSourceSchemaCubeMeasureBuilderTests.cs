@@ -45,6 +45,21 @@
         }
 
         [Fact]
+        public void Format_should_return_builder()
+        {
+            builder.Format("{0}").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Format_should_configure_corresponding_option()
+        {
+            string formatValue = "{0}";
+            builder.Format(formatValue);
+
+            measure.Format.ShouldBeSameAs(formatValue);
+        }
+
+        [Fact]
         public void Aggregate_should_return_builder()
         {
             builder.Aggregate("aggregate").ShouldBeSameAs(builder);

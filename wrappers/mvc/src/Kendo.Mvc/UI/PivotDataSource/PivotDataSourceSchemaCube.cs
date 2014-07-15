@@ -42,6 +42,11 @@
                     {
                         measure["aggregate"] = prop.Aggregate;
                     }
+
+                    if (!string.IsNullOrEmpty(prop.Format))
+                    {
+                        measure["format"] = prop.Format;
+                    }
                 });
             }
 

@@ -54,6 +54,17 @@
         }
 
         /// <summary>
+        /// Describes a format of the measure.
+        /// </summary>
+        /// <param name="format">The format for the measure.</param>
+        public PivotAjaxDataSourceSchemaCubeMeasureBuilder<TModel> Format(string format)
+        {
+            measure.Format = format;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets Aggregate option
         /// </summary>
         /// <param name="aggregate">Aggregate option</param>
