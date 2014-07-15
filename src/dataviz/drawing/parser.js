@@ -148,7 +148,7 @@
                     endAngle: arcParameters.endAngle,
                     radiusX: radiusX,
                     radiusY: radiusY,
-                    counterClockwise: swipe === 0
+                    anticlockwise: swipe === 0
                 });
 
                 var curvePoints = arc.curvePoints();
