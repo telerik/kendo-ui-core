@@ -1833,6 +1833,9 @@ var __meta__ = {
                                     .click();
                             }
                             break;
+                        case keys.ESC:
+                            e.stopPropagation();
+                            break;
                         case keys.DELETE:
                             if (isCell) {
                                 deleteAction();
