@@ -5258,9 +5258,10 @@ var __meta__ = {
            isHeader = currentTarget.is("th"),
            table = this.table.add(this.lockedTable),
            headerTable = this.thead.parent().add($(">table", this.lockedHeader)),
+           isInput = $(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap"),
            currentTable = currentTarget.closest("table")[0];
 
-       if (kendo.support.touch) {
+       if (kendo.support.touch || (isInput && currentTarget.find(kendo.roleSelector("filtercell")).length)) {
            return;
        }
 
@@ -5270,7 +5271,7 @@ var __meta__ = {
 
        this.current(currentTarget);
 
-       if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap")) {
+       if (isHeader || !isInput) {
            setTimeout(function() {
                //Do not focus if widget, because in IE8 a DDL will be closed
                if (!(isIE8 && $(kendo._activeElement()).hasClass("k-widget"))) {
