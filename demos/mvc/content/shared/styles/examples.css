@@ -67,11 +67,11 @@
 /* Widgets icons font */
 @font-face {
   font-family: 'widgets';
-  src: url('fonts/widgets.eot?585921');
-  src: url('fonts/widgets.eot?585921#iefix') format('embedded-opentype'),
-       url('fonts/widgets.woff?585921') format('woff'),
-       url('fonts/widgets.ttf?585921') format('truetype'),
-       url('fonts/widgets.svg?585921#widgets') format('svg');
+  src: url('fonts/widgets-v1.eot');
+  src: url('fonts/widgets-v1.eot') format('embedded-opentype'),
+       url('fonts/widgets-v1.woff') format('woff'),
+       url('fonts/widgets-v1.ttf') format('truetype'),
+       url('fonts/widgets-v1.svg') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -541,7 +541,7 @@ div.submenu-box ol {
 .mobileAppIcon:after { content: '\e801'; }
 .chartAreaIcon:after { content: '\e802'; }
 .autoCompleteIcon:after { content: '\e803'; }
-.chartBarIcon:after { content: '\e804'; }
+.chartBarIcon:after, .chartIcon:after { content: '\e804'; }
 .barcodeIcon:after { content: '\e805'; }
 .chartBoxPlotIcon:after { content: '\e806'; }
 .chartBubbleIcon:after { content: '\e807'; }
@@ -553,7 +553,7 @@ div.submenu-box ol {
 .dataSourceIcon:after { content: '\e80d'; }
 .datePickerIcon:after, .dateTimePickerIcon:after { content: '\e80e'; }
 .diagramIcon:after { content: '\e80f'; }
-.chartDonutIcon:after { content: '\e810'; }
+.chartDonutIcon:after, .integrationIcon:after { content: '\e810'; }
 .dragDropIcon:after { content: '\e811'; }
 .mobileDrawerIcon:after { content: '\e812'; }
 .dropDownListIcon:after { content: '\e813'; }
@@ -566,13 +566,13 @@ div.submenu-box ol {
 .i-layout:after { content: '\e819'; }  /*....................*/
 .gaugeLinearIcon:after { content: '\e81a'; }
 .chartLineIcon:after { content: '\e81b'; }
-.mobileListViewIcon:after { content: '\e81c'; }
+.listViewIcon:after { content: '\e81c'; }
 .mapIcon:after { content: '\e81d'; }
 .maskedtextboxIcon:after { content: '\e81e'; }
-.menuIcon:after { content: '\e81f'; }
+.mobileListViewIcon:after, .menuIcon:after { content: '\e81f'; }
 .mobileModalViewIcon:after { content: '\e820'; }
 .multiselectIcon:after { content: '\e821'; }
-.mobileNavBarIcon:after { content: '\e823'; }
+.mobileNavBarIcon:after, .toolbarIcon:after { content: '\e823'; }
 .notificationIcon:after { content: '\e824'; }
 .numericTextBoxIcon:after { content: '\e825'; }
 .panelBarIcon:after { content: '\e826'; }
@@ -590,7 +590,7 @@ div.submenu-box ol {
 .spaIcon:after { content: '\e832'; }
 .sliderIcon:after { content: '\e833'; }
 .sortableIcon:after { content: '\e834'; } 
-.sparklineIcon:after { content: '\e835'; }
+.sparklineIcon:after, .drawingIcon:after { content: '\e835'; }
 .splitterIcon:after { content: '\e836'; }
 .mobileSplitViewIcon:after { content: '\e837'; }
 .chartStockIcon:after { content: '\e838'; }
@@ -604,6 +604,12 @@ div.submenu-box ol {
 .uploadIcon:after { content: '\e840'; }
 .validatorIcon:after { content: '\e841'; }
 .windowIcon:after { content: '\e842'; }
+.ganttIcon:after { content: '\e843'; }
+.pivotGridIcon:after { content: '\e844'; }
+.treemapIcon:after { content: '\e845'; }
+.chartRangeBarIcon:after { content: '\e846'; }
+.chartWaterfallIcon:after { content: '\e847'; }
+.comboBoxIcon:after { content: '\e848'; }
 
 .mobile + .widgetOverview #exampleTitle
 {
@@ -2122,7 +2128,8 @@ a.footer-links:hover,
     list-style: none;
 }
 
-.root-nav-categories h3 {
+.root-nav-categories h3,
+#example-nav h3 {
     color: #000;
     font-size: 14px;
     line-height: 14px;
@@ -2131,9 +2138,6 @@ a.footer-links:hover,
 }
 
 #example-nav h3 {
-    color: #000;
-    font-size: 14px;
-    line-height: 14px;
     padding: 1.7em 0 0.5em 3.571em;
 }
 

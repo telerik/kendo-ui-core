@@ -5292,6 +5292,7 @@
     "category": "Framework",
     "text": "Drawing API",
     "name": "drawing",
+    "new": "true",
     "spriteCssClass": "drawingIcon",
     "items": [
       {
@@ -7626,7 +7627,7 @@
     "text": "TreeMap",
     "pro": "true",
     "new": "true",
-    "spriteCssClass": "treeMapIcon",
+    "spriteCssClass": "treemapIcon",
     "api": "dataviz/treemap",
     "documentation": {
        "kendo-ui": "getting-started/dataviz/treemap/overview",
