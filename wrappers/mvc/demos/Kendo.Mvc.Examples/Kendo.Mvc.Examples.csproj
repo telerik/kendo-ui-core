@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Local_Data_BindingController.cs" />
     <Compile Include="Controllers\Bullet_Charts\Remote_Data_BindingController.cs" />
+    <Compile Include="Controllers\Diagram\ApiController.cs" />
     <Compile Include="Controllers\Diagram\Events.cs" />
     <Compile Include="Controllers\DropDownList\ClientFilteringController.cs" />
     <Compile Include="Controllers\DropDownList\ServerFilteringController.cs" />
@@ -811,6 +812,7 @@
     <Content Include="Areas\aspx\Views\bullet_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\local_data_binding.aspx" />
     <Content Include="Areas\aspx\Views\bullet_charts\remote_data_binding.aspx" />
+    <Content Include="Areas\aspx\Views\diagram\api.aspx" />
     <Content Include="Areas\aspx\Views\diagram\events.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\clientfiltering.aspx" />
     <Content Include="Areas\aspx\Views\dropdownlist\serverfiltering.aspx" />
@@ -3281,6 +3283,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\diagram\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\diagram\api.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
