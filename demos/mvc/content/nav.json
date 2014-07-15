@@ -7795,7 +7795,6 @@
     "text": "Diagram",
     "name": "diagram",
     "pro": "true",
-    "beta": "true",
     "api": "dataviz/diagram",
     "documentation": {
        "kendo-ui": "getting-started/dataviz/diagram/overview",
