@@ -84,7 +84,7 @@ def upload_download_builder_files()
     bot.click_element(bot.driver.find_element(:xpath, "//span[contains(text(), 'Upload Custom Downloads package')]"))
     bot.wait_for_title("Upload Custom Downloads package")
 
-    if defined? SERVICE_PACK_NUMBER
+    if SERVICE_PACK_NUMBER != nil
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}/download-builder"
     else
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}/download-builder"
