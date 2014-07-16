@@ -462,7 +462,13 @@ var __meta__ = {
         },
 
         _onUploadSelected: function() {
-            this._module.onSaveSelected();
+            var that = this;
+            var wrapper = that.wrapper;
+
+            if (!wrapper.hasClass("k-state-disabled")) {
+                this._module.onSaveSelected();
+            }
+
             return false;
         },
 
