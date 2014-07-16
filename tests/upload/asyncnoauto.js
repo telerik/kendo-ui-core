@@ -109,4 +109,25 @@ function asyncNoAuto(createUpload, simulateUploadWithResponse, noAutoConfig, sim
         
         equal($(".k-upload-status-total", uploadInstance.wrapper).length, 1);
     });
+
+    test("file upload is prevented if the widget is disabled", function() {
+        var uploadInstance = createUpload(noAutoConfig);
+        simulateFileSelect();
+
+        uploadInstance.disable();
+        $(".k-upload-selected").click();
+
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 1);
+    });
+
+    test("file upload is successful if the widget was disabled and reenabled", function() {
+        var uploadInstance = createUpload(noAutoConfig);
+        simulateFileSelect();
+
+        uploadInstance.disable();
+        uploadInstance.enable();
+        $(".k-upload-selected").click();
+
+        equal($(".k-upload-selected", uploadInstance.wrapper).length, 0);
+    });
 }
