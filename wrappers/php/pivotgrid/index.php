@@ -44,7 +44,7 @@ $dataSource->transport($transport)
             ->type("xmla")
             ->addColumn($dateColumn, $cityColumn)
             ->addRow('[Product].[Product]')
-            ->addMeasure(array('[Measures].[Internet Sales Amount]'))
+            ->addMeasure('[Measures].[Internet Sales Amount]')
             ->schema($schema);
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
