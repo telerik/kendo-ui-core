@@ -725,10 +725,14 @@
             if (e.field === "src") {
                 this.attr("src", e.value);
             } else if (e.field === "transform") {
-                this.allAttr(this.mapTransform());
+                this.refresh();
             }
 
             this.invalidate();
+        },
+
+        refresh: function() {
+            this.allAttr(this.mapTransform());
         },
 
         mapTransform: function() {
@@ -737,43 +741,41 @@
             var rawbbox = img.rawBBox();
             var bbox = img.bbox();
 
-            var sx = bbox.width() / rawbbox.width();
-            var sy = bbox.width() / rawbbox.width();
+            var fillOrigin = COORDINATE_MULTIPLE / 2;
+            var fillSize = COORDINATE_MULTIPLE;
+            var sx = rawbbox.width() / fillSize;
+            var sy = rawbbox.height() / fillSize;
 
-            var rx = bbox.origin.x / rawbbox.width();
-            var ry = bbox.origin.y / rawbbox.height();
+            var rx = (rawbbox.center().x - fillOrigin) / fillSize;
+            var ry = (rawbbox.center().y - fillOrigin) / fillSize;
 
             var angle = 0;
 
             var transform = img.currentTransform();
             if (transform) {
                 var matrix = transform.matrix();
-                console.log(matrix);
 
-                sx = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
-                sy = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2))
+                var scaleX = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
+                var scaleY = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2))
 
-                angle = util.deg(Math.atan(matrix.b / matrix.d));
+                sx *= scaleX;
+                sy *= scaleY;
 
-                rx = 1 + 0.25 * 1.5;
-                ry = 1 + 0.5 * 1.5;
-                /*
-                rx *= 1 + matrix.a;
-                ry *= 1 + matrix.b;
-                var tr = g.transform(matrix).rotate(-45, [100, 100]);
-                var o = rawbbox.origin.transformCopy(tr);;
-                console.log(o);
-                rx = o.x / rawbbox.width();
-                ry = o.y / rawbbox.height();
-               */
-                rx = 1 + (matrix.e / rawbbox.width());
-                ry = 1 + (matrix.f / rawbbox.height());
+                var ax = util.deg(Math.atan2(matrix.b, matrix.d));
+                var ay = util.deg(Math.atan2(-matrix.c, matrix.a))
+                var angle = (ax + ay) / 2;
+                if (angle) {
+                    rx = (bbox.center().x - fillOrigin) / fillSize;
+                    ry = (bbox.center().y - fillOrigin) / fillSize;
+                } else {
+                    rx = (rawbbox.center().x * scaleX + matrix.e - fillOrigin) / fillSize;
+                    ry = (rawbbox.center().y * scaleY + matrix.f - fillOrigin) / fillSize;
+                }
             }
 
             attrs.push(["size", sx + "," + sy]);
             attrs.push(["position", rx + "," + ry]);
             attrs.push(["angle", angle]);
-            console.log(attrs);
 
             return attrs;
         },
@@ -806,6 +808,11 @@
         optionsChange: function(e) {
             this.fill.optionsChange(e);
             PathNode.fn.optionsChange.call(this, e);
+        },
+
+        refreshTransform: function(transform) {
+            PathNode.fn.refreshTransform.call(this, transform);
+            this.fill.refresh(this.srcElement.currentTransform(transform));
         }
     });
 
