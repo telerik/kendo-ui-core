@@ -438,7 +438,7 @@
 
     var ShapeNode = Node.extend({
         init: function(srcElement, transform) {
-            this.fill = new FillNode(srcElement);
+            this.fill = this.createFillNode(srcElement);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
 
@@ -447,6 +447,10 @@
             this.append(this.fill);
             this.append(this.stroke);
             this.append(this.transform);
+        },
+
+        createFillNode: function(srcElement) {
+            return new FillNode(srcElement);
         },
 
         createTransformNode: function(srcElement, transform) {
@@ -469,22 +473,6 @@
 
         refreshTransform: function(transform) {
             this.transform.refresh(this.srcElement.currentTransform(transform));
-        },
-
-        mapFill: function(fill) {
-            var attrs = [];
-
-            if (fill && fill.color !== TRANSPARENT) {
-                attrs.push(["fill", fill.color]);
-
-                if (defined(fill.opacity)) {
-                    attrs.push(["fill-opacity", fill.opacity]);
-                }
-            } else {
-                attrs.push(["fill", NONE]);
-            }
-
-            return attrs;
         },
 
         mapStyle: function() {
@@ -719,10 +707,95 @@
         }
     });
 
-    var ImageNode = Node.extend({
-        init: function(srcElement, transform) {
-            Node.fn.init.call(this, srcElement);
-            this.transform = transform;
+    var ImagePathDataNode = PathDataNode.extend({
+        renderData: function() {
+            var rect = this.srcElement.rect();
+            var path = new d.Path().moveTo(rect.topLeft())
+                                   .lineTo(rect.topRight())
+                                   .lineTo(rect.bottomRight())
+                                   .lineTo(rect.bottomLeft())
+                                   .close();
+
+            return printPath(path);
+        }
+    });
+
+    var ImageFillNode = Node.extend({
+        optionsChange: function(e) {
+            if (e.field === "src") {
+                this.attr("src", e.value);
+            } else if (e.field === "transform") {
+                this.allAttr(this.mapTransform());
+            }
+
+            this.invalidate();
+        },
+
+        mapTransform: function() {
+            var attrs = [];
+            var img = this.srcElement;
+            var rawbbox = img.rawBBox();
+            var bbox = img.bbox();
+
+            var sx = bbox.width() / rawbbox.width();
+            var sy = bbox.width() / rawbbox.width();
+
+            var rx = bbox.origin.x / rawbbox.width();
+            var ry = bbox.origin.y / rawbbox.height();
+
+            var angle = 0;
+
+            var transform = img.currentTransform();
+            if (transform) {
+                var matrix = transform.matrix();
+                console.log(matrix);
+
+                sx = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
+                sy = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2))
+
+                angle = util.deg(Math.atan(matrix.b / matrix.d));
+
+                rx = 1 + 0.25 * 1.5;
+                ry = 1 + 0.5 * 1.5;
+                /*
+                rx *= 1 + matrix.a;
+                ry *= 1 + matrix.b;
+                var tr = g.transform(matrix).rotate(-45, [100, 100]);
+                var o = rawbbox.origin.transformCopy(tr);;
+                console.log(o);
+                rx = o.x / rawbbox.width();
+                ry = o.y / rawbbox.height();
+               */
+                rx = 1 + (matrix.e / rawbbox.width());
+                ry = 1 + (matrix.f / rawbbox.height());
+            }
+
+            attrs.push(["size", sx + "," + sy]);
+            attrs.push(["position", rx + "," + ry]);
+            attrs.push(["angle", angle]);
+            console.log(attrs);
+
+            return attrs;
+        },
+
+        renderTransform: function() {
+            return renderAllAttr(this.mapTransform());
+        },
+
+        template: renderTemplate(
+            "<kvml:fill src='#= d.srcElement.src() #' " +
+            "type='frame' rotate='true' " +
+            "#= d.renderTransform() #></kvml:fill>"
+        )
+    });
+
+    var ImageNode = PathNode.extend({
+        createFillNode: function(srcElement) {
+            return new ImageFillNode(srcElement);
+        },
+
+        createDataNode: function(srcElement) {
+            return new ImagePathDataNode(srcElement);
         },
 
         geometryChange: function() {
@@ -731,100 +804,9 @@
         },
 
         optionsChange: function(e) {
-            if (e.field === "src") {
-                this.attr("src", this.srcElement.src());
-            } else if (e.field === "visible") {
-                this.css("display", e.value ? "" : "none");
-            } else if (e.field === "transform") {
-                this.refreshTransform(this.srcElement.currentTransform());
-            }
-
-            Node.fn.optionsChange.call(this, e);
-        },
-
-        mapStyle: function() {
-            var image = this.srcElement;
-            var rect = image.rect();
-
-            var pos = rect.topLeft();
-            var style = [
-                ["position", "absolute"],
-                ["top", "0px"],
-                ["left", "0px"],
-                ["padding-left", pos.x + "px"],
-                ["padding-top", pos.y + "px"],
-                ["width", rect.width() + "px"],
-                ["height", rect.height() + "px"],
-                ["cursor", image.options.cursor]
-            ];
-
-            if (image.options.visible === false) {
-                style.push(["display", "none"]);
-            }
-
-            if (this.transform) {
-                util.append(style, this.mapTransform(this.transform));
-            }
-
-            return style;
-        },
-
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
-        refreshTransform: function(transform) {
-            var currentTransform = this.srcElement.currentTransform(transform);
-            this.allCss(this.mapTransform(currentTransform));
-
-            if (this.element) {
-                this.element.style.cssText = this.element.style.cssText;
-            }
-        },
-
-        mapTransform: function(transform) {
-            var style = [];
-            var matrix = toMatrix(transform);
-            if (matrix) {
-                var image = this.srcElement;
-                var imageBottom = image.rect().bottomRight();
-                var bbox = image.bbox();
-                var bboxBottom = bbox.bottomRight();
-                var bboxTop = bbox.topLeft();
-
-                var paddingRight = bboxBottom.x - imageBottom.x;
-                var paddingBottom = bboxBottom.y - imageBottom.y;
-                matrix.round(TRANSFORM_PRECISION);
-                style.push(["filter", this.transformTemplate(matrix)]);
-
-                if (bboxTop.x < 0) {
-                    style.push(["left", bboxTop.x + "px"]);
-                    style.push(["padding-left", max(-(matrix.e / matrix.a), 0) + "px"]);
-                    paddingRight -= bboxTop.x;
-                }
-
-                if (bboxTop.y < 0) {
-                    style.push(["top", bboxTop.y + "px"]);
-                    style.push(["padding-top", max(-(matrix.f / matrix.d), 0) + "px"]);
-                    paddingBottom -= bboxTop.y;
-                }
-
-                style.push(["padding-right", max(paddingRight, 0) + "px"]);
-                style.push(["padding-bottom", max(paddingBottom, 0) + "px"]);
-            }
-
-            return style;
-        },
-
-        transformTemplate: renderTemplate(
-            "progid:DXImageTransform.Microsoft.Matrix(" +
-            "M11=${d.a}, M12=${d.c}, M21=${d.b}, M22=${d.d}, Dx=${d.e}, Dy=${d.f})"
-        ),
-
-        template: renderTemplate(
-            "<img src='#= d.srcElement.src() #' " +
-            "#= d.renderStyle() # />"
-        )
+            this.fill.optionsChange(e);
+            PathNode.fn.optionsChange.call(this, e);
+        }
     });
 
     // Helper functions =======================================================
