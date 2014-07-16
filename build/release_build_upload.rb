@@ -105,7 +105,7 @@ end
 def create_version(bot, options)
       product_name = options[:product]
       return if bot.version_created(product_name)
-      return if (product_name == "Kendo UI Core") && (defined? SERVICE_PACK_NUMBER)
+      return if (product_name == "Kendo UI Core") && (SERVICE_PACK_NUMBER != nil)
       bot.add_product(product_name)
 
       bot.click_and_wait("Administration", "administration")
@@ -187,7 +187,7 @@ def prepare_release_files(bot, options)
   file_metadata = release_config[:file_metadata]
   p_name = options[:product]
 
-  return if (p_name == "Kendo UI Core") && (defined? SERVICE_PACK_NUMBER)
+  return if (p_name == "Kendo UI Core") && (SERVICE_PACK_NUMBER != nil)
 
   #zip files
   if file_metadata[:zip]
