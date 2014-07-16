@@ -303,4 +303,31 @@
         deepEqual(timepicker.max(), date);
     });
 
+    test("TimePicker resize height on first open", 1, function() {
+        var timepicker = new TimePicker(input, {
+            height: 100
+        });
+
+        timepicker.open();
+
+        equal(timepicker.timeView.ul.height(), 100)
+    });
+
+    test("TimePicker resize height after setOptions", 1, function() {
+        var timepicker = new TimePicker(input, {
+            animation: false,
+            height: 100
+        });
+
+        timepicker.open();
+        timepicker.close();
+
+        timepicker.setOptions({
+            height: 200
+        });
+
+        timepicker.open();
+
+        equal(timepicker.timeView.ul.height(), 200)
+    });
 })();
