@@ -120,7 +120,7 @@ def create_version(bot, options)
       bot.click_and_wait product_name, "administration"
       bot.click_and_wait "Manage Versions", "administration"
 
-      if defined? SERVICE_PACK_NUMBER
+      if SERVICE_PACK_NUMBER != nil
         bot.click_and_wait "New Minor","administration"
         fill_version_fields(bot, options)
       else
