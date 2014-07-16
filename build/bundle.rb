@@ -168,7 +168,7 @@ def bundle(options)
     end
 
     if options[:release_build]
-      if defined? SERVICE_PACK_NUMBER
+      if SERVICE_PACK_NUMBER != nil
         release_destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}"
       else
         release_destination_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}"
