@@ -12,10 +12,13 @@ class TelerikReleaseNotesBot
         @driver = Selenium::WebDriver.for(:firefox)
         @driver.get(SITE_URL + "/sitefinity")
 
-        driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
-        driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
-        click_and_wait("Log in with Telerik", "Legacy Dashboard")
-
+        #driver.find_element(:xpath, "//input[contains(@id,'_UserName')]").send_keys SITE_LOGIN
+        #driver.find_element(:xpath, "//input[contains(@id,'_Password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        #click_and_wait("Log in with Telerik", "Legacy Dashboard")
+        driver.find_element(:xpath, "//input[contains(@id,'username')]").send_keys SITE_LOGIN
+        driver.find_element(:xpath, "//input[contains(@id,'password')]").send_keys SITE_DOWNLOAD_BUILDER_UPLOAD_PASS
+        click_element(find("[id='LoginButton']"))
+        
         @products = ["Kendo UI", "UI for ASP.NET MVC", "UI for JSP", "UI for PHP"]
 
     end
