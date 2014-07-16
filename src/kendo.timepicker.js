@@ -77,6 +77,7 @@ var __meta__ = {
         }
 
         that._popup();
+        that._heightHandler = proxy(that._height, that);
 
         that.template = kendo.template('<li tabindex="-1" role="option" class="k-item" unselectable="on">#=data#</li>', { useWithBlock: false });
     };
@@ -161,7 +162,7 @@ var __meta__ = {
                 }
             }
 
-            that._html(html, length);
+            that._html(html);
         },
 
         refresh: function() {
@@ -219,7 +220,7 @@ var __meta__ = {
                 html += template(toString(start, format, options.culture));
             }
 
-            that._html(html, length);
+            that._html(html);
         },
 
         bind: function() {
@@ -233,11 +234,13 @@ var __meta__ = {
             }
         },
 
-        _html: function(html, length) {
+        _html: function(html) {
             var that = this;
 
             that.ul[0].innerHTML = html;
-            that._height(length);
+
+            that.popup.unbind(OPEN, that._heightHandler);
+            that.popup.one(OPEN, that._heightHandler);
 
             that.current(null);
             that.select(that._value);
@@ -342,13 +345,13 @@ var __meta__ = {
             }
         },
 
-        _height: function(length) {
-            if (length) {
-                var that = this,
-                    list = that.list,
-                    parent = list.parent(".k-animation-container"),
-                    height = that.options.height;
+        _height: function() {
+            var that = this;
+            var list = that.list;
+            var parent = list.parent(".k-animation-container");
+            var height = that.options.height;
 
+            if (that.ul[0].children.length) {
                 list.add(parent)
                     .show()
                     .height(that.ul[0].scrollHeight > height ? height : "auto")
