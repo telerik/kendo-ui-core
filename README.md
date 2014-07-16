@@ -40,14 +40,18 @@ Kendo UI Core is a free and open-source distribution of Kendo UI. The following 
 | Progress | Yes | Yes | Yes |
 | Button | Yes | Yes | Yes |
 | Color Picker | Yes | Yes | Yes |
+| ContextMenu | Yes | Yes | Yes |
 | Toolbar | Yes | Yes | Yes |
 | MultiSelect | Yes | Yes | Yes |
 | MaskedTextBox | Yes | Yes | Yes |
 | Notification | Yes | Yes | Yes |
 | Editor | No | Yes | Yes |
 | Grid | No | Yes | Yes |
+| PivotGrid | No | Yes | Yes |
 | Scheduler | No | Yes | Yes |
+| Gantt | No | Yes | Yes |
 | TreeView | No | Yes | Yes |
+| TreeMap | No | Yes | Yes |
 | Upload | No | Yes | Yes |
 | **Data Viz** |
 | Charts | No | Yes | Yes |
