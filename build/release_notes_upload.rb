@@ -102,7 +102,7 @@ def set_path_and_upload()
       end    
     else
       #official release
-      if defined? SERVICE_PACK_NUMBER
+      if SERVICE_PACK_NUMBER != nil
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}/changelogs"
       else
         archive_folder_name = "Q#{VERSION_Q} #{VERSION_YEAR}/Q#{VERSION_Q} #{VERSION_YEAR}/changelogs"
@@ -165,7 +165,7 @@ def set_fields_data(bot, productName)
       bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_2\"]').click()")  
     else
     #official release notes
-      if defined? SERVICE_PACK_NUMBER
+      if SERVICE_PACK_NUMBER != nil
         bot.execute_script("$('[id$=\"_TitleTb\"]').val('Q#{VERSION_Q} #{VERSION_YEAR} SP#{SERVICE_PACK_NUMBER}')")
         bot.execute_script("$('[id$=\"_ProductMinorVersionTb\"]').val('#{SERVICE_PACK_NUMBER}')")
         bot.execute_script("$('[id$=\"_ReleaseTypeRadioButtons_1\"]').click()")
