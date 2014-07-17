@@ -234,6 +234,11 @@ QUnit.extend( QUnit, {
 
     notClose: function(actual, expected, minDifference, message) {
         QUnit.push(Math.abs(actual - expected) > minDifference, actual, expected, message);
+    },
+
+    contains: function(actual, substring, message) {
+        var passes = actual.indexOf(substring) !== -1;
+        QUnit.push(passes, actual, substring, message);
     }
 });
 
@@ -241,4 +246,5 @@ QUnit.config.testTimeout = 2500;
 QUnit.config.reorder = false;
 
 var close = QUnit.close,
-    notClose = QUnit.notClose;
+    notClose = QUnit.notClose,
+    contains = QUnit.contains;
