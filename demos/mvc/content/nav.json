@@ -5405,8 +5405,7 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how a 100% stacked area chart is created with KendoChart. Learn how to visualize series that should be stacked to 100% in the chart."
-        },
-        "new": "true"
+        }
       },
       {
         "text": "Stepped Area",
@@ -5447,7 +5446,6 @@
         "meta": {
             "kendo-ui": "This demo shows how you can use a logarithmic axis for the Kendo UI Area Chart."
         },
-        "new": "true",
         "requiresServer": "true"
       },
       {
@@ -5611,8 +5609,7 @@
         },
         "meta": {
             "kendo-ui": "This example shows how Kendo UI Bar Charts component supports a 100% stacked bar. The feature of the widget is enabled by setting the stack type to '100%'."
-        },
-        "new": "true"
+        }
       },
       {
         "text": "100% Stacked and grouped bars",
@@ -5622,8 +5619,7 @@
         },
         "meta": {
             "kendo-ui": "This sample demonstrates the implementation of Kendo UI 100% stacked and grouped bars in various data visualization-driven web apps."
-        },
-        "new": "true"
+        }
       },
       {
         "text": "Date axis",
@@ -5643,8 +5639,7 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how you can use a logarithmic axis for the Kendo UI Bar Chart."
-        },
-        "new": "true"
+        }
       },
       {
         "text": "Multi-axis",
@@ -6315,8 +6310,7 @@
         },
         "meta": {
             "kendo-ui": "This demo shows how you can easily implement Kendo UI 100% Stacked Line Charts in your business webapp."
-        },
-        "new": "true"
+        }
       },
       {
         "text": "Steped line",
@@ -6357,7 +6351,6 @@
         "meta": {
             "kendo-ui": "This demo shows how you can use a logarithmic axis for the Kendo UI Line Chart."
         },
-        "new": "true",
         "requiresServer": "true"
       },
       {
