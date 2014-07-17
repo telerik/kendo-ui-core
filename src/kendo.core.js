@@ -236,6 +236,10 @@ var __meta__ = {
         curlyRegExp = /__CURLY__/g,
         escapedSharpRegExp = /\\#/g,
         sharpRegExp = /__SHARP__/g,
+        tripleCurlyBeginRegExp = /{{{/g,
+        tripleCurlyEndRegExp = /}}}/g,
+        doubleCurlyBeginRegExp = /{{/g,
+        doubleCurlyEndRegExp = /}}/g,
         zeros = ["", "0", "00", "000", "0000"];
 
     Template = {
@@ -271,6 +275,10 @@ var __meta__ = {
             functionBody += "o=";
 
             parts = template
+                .replace(tripleCurlyBeginRegExp, "#:")
+                .replace(tripleCurlyEndRegExp, "#")
+                .replace(doubleCurlyBeginRegExp, "#=")
+                .replace(doubleCurlyEndRegExp, "#")
                 .replace(escapedCurlyRegExp, "__CURLY__")
                 .replace(encodeRegExp, "#=e($1)#")
                 .replace(curlyRegExp, "}")
