@@ -959,7 +959,7 @@
         });
 
         test("sets default linejoin", function() {
-            equal(path.options.stroke.linejoin, "miter");
+            equal(path.options.stroke.lineJoin, "miter");
         });
 
         test("doesn't override null stroke", function() {
