@@ -66,7 +66,7 @@ var __meta__ = {
 
         templates = {
             content: template(
-                "<div class='k-content' tabindex='-1'>#= content(item) #</div>"
+                "<div class='k-content #= groupCssClass() #' tabindex='-1'>#= content(item) #</div>"
             ),
             group: template(
                 "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) # role='menu' aria-hidden='true'>" +
