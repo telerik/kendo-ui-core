@@ -22,6 +22,7 @@ demos/mvc/sources
 demos/mvc/src
 demos/KendoCRUDService/KendoCRUDService/Content/UserFiles
 !src/docs
+.dir-locals.el
 !src/jquery.min.js
 src/**/*.min.js
 src/**/*.min.js.map
