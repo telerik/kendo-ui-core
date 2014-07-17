@@ -463,20 +463,20 @@
         make(name, name);
         if (shortcut != name) {
             make(shortcut, name);
-
-            // <kendo-numerictextbox>-type directives
-            var dashed = name.replace(/([A-Z])/g, "-$1");
-            module.directive(shortcut, function(){
-                return {
-                    restrict : "E",
-                    replace  : true,
-                    template : function(element, attributes) {
-                        var tag = TAGNAMES[className] || "div";
-                        return "<" + tag + " " + dashed + "></" + tag + ">";
-                    }
-                };
-            });
         }
+
+        // <kendo-numerictextbox>-type directives
+        var dashed = name.replace(/([A-Z])/g, "-$1");
+        module.directive(shortcut, function(){
+            return {
+                restrict : "E",
+                replace  : true,
+                template : function(element, attributes) {
+                    var tag = TAGNAMES[className] || "div";
+                    return "<" + tag + " " + dashed + "></" + tag + ">";
+                }
+            };
+        });
     }
 
     (function(){
