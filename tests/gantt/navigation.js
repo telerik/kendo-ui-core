@@ -260,6 +260,16 @@
         equal(gantt.select().length, 0);
     });
 
+    test("enter keydown default behavior is prevented", 1, function() {
+        var contentTable = gantt.list.content.find("table");
+
+        focusTable();
+        contentTable.on("keydown", function(e) {
+            ok(e.isDefaultPrevented());
+        });
+        keyDown(contentTable, keys.ENTER);
+    });
+
     test("enter trigger edit", function() {
         var content = gantt.list.content;
 
