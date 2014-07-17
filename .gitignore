@@ -12,6 +12,7 @@ dist/
 .JustCode
 .bundle/
 .livereload
+.dir-locals.el
 !src/jquery.min.js
 styles/web/*.css
 styles/mobile/*.css
