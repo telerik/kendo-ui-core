@@ -162,7 +162,21 @@
     {
         
         <div id="wrappers-source-code">
-            <h2>HTML5/JavaScript source</h2>
+        @switch ((string)ViewBag.Product)
+        {
+            case "kendo-ui":
+        <h2>HTML5/JavaScript source</h2>
+                break;
+            case "aspnet-mvc":
+        <h2>ASP.NET MVC source</h2>
+                break;
+            case "php-ui":
+        <h2>PHP source</h2>
+                break;
+            case "jsp-ui":
+        <h2>JSP source</h2>
+                break;
+        }
               
         @if (html || php || jsp || mvc)
         {
