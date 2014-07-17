@@ -56,6 +56,12 @@
     -webkit-backface-visibility: hidden;
 }
 
+// Fix for several strange behaviors in Android Chrome and native scrolling
+.km-android4.km-ios-chrome .km-listview-wrapper
+{
+    -webkit-transform: none;
+}
+
 .km-native-scrolling .km-header,
 .km-native-scrolling .km-footer,
 .km-native-scrolling .km-shim,
