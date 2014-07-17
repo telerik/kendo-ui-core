@@ -958,6 +958,15 @@
             equal(path.options.stroke.color, "#000");
         });
 
+        test("sets default linejoin", function() {
+            equal(path.options.stroke.linejoin, "miter");
+        });
+
+        test("doesn't override null stroke", function() {
+            path = new Path({ stroke: null });
+            equal(path.options.stroke, null);
+        });
+
         test("default stroke can be overriden", function() {
             path = new Path({ stroke: { color: "foo" } });
             equal(path.options.stroke.color, "foo");
