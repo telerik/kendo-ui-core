@@ -112,10 +112,6 @@
         }
     }
 
-    function hasKendoTag(element) {
-        return (/^kendo/i).test(element.prop("tagName"));
-    }
-
     module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, parse, compile, log) {
 
         $timeout = timeout;
@@ -129,35 +125,12 @@
 
             return {
                 // Parse the directive for attributes and classes
-                restrict: "ACE",
+                restrict: "AC",
                 require: [ "?ngModel", "^?form" ],
                 scope: false,
 
                 transclude: true,
                 controller: [ '$scope', '$attrs', '$element', '$transclude', function($scope, $attrs, $element, $transclude) {
-
-                    if (hasKendoTag($element)) {(function(){
-                        var element = $element[0];
-                        $attrs.$kendoOrigElement = element.cloneNode(true);
-                        var attributes = Array.prototype.slice.call(element.attributes); // guess why we need that. :-\
-                        for (var i = 0; i < attributes.length; ++i) {
-                            var orig = attributes[i].nodeName;
-                            if (!/^(k|ng)-/.test(orig) && !/^(style|class|id)$/.test(orig)) {
-                                var name = ("k-" + orig).replace(/-(.)/g, function(s, p){
-                                    return p.toUpperCase();
-                                });
-                                if (!(name in $attrs)) {
-                                    $attrs[name] = attributes[i].nodeValue;
-                                }
-
-                                // we must remove the original attribute!  otherwise some widgets (DropDownList at least) will prefer to
-                                // take options from there instead of the options object we actually pass to constructor, ending up with
-                                // dataTextField = "'name'" (unevaluated), leading to a SyntaxError: Unexpected string error.
-                                element.removeAttribute(orig);
-                            }
-                        }
-                    })();}
-
                     // Make the element's contents available to the kendo widget to allow creating some widgets from existing elements.
                     $transclude($scope, function(clone){
                         $element.append(clone);
@@ -449,6 +422,25 @@
         };
     }]);
 
+    var TAGNAMES = {
+        Editor         : "textarea",
+        NumericTextBox : "input",
+        DatePicker     : "input",
+        DateTimePicker : "input",
+        TimePicker     : "input",
+        AutoComplete   : "input",
+        ColorPicker    : "input",
+        MaskedTextBox  : "input",
+        MultiSelect    : "input",
+        Upload         : "input",
+        Validator      : "form",
+        Button         : "button",
+        ListView       : "ul",
+        TreeView       : "ul",
+        Menu           : "ul",
+        ContextMenu    : "ul",
+    };
+
     function createDirectives(klass, isMobile) {
         function make(directiveName, widgetName) {
             module.directive(directiveName, [
@@ -461,6 +453,7 @@
 
         var name = isMobile ? "Mobile" : "";
         name += klass.fn.options.name;
+        var className = name;
         var shortcut = "kendo" + name.charAt(0) + name.substr(1).toLowerCase();
         name = "kendo" + name;
 
@@ -470,6 +463,19 @@
         make(name, name);
         if (shortcut != name) {
             make(shortcut, name);
+
+            // <kendo-numerictextbox>-type directives
+            var dashed = name.replace(/([A-Z])/g, "-$1");
+            module.directive(shortcut, function(){
+                return {
+                    restrict : "E",
+                    replace  : true,
+                    template : function(element, attributes) {
+                        var tag = TAGNAMES[className] || "div";
+                        return "<" + tag + " " + dashed + "></" + tag + ">";
+                    }
+                }
+            });
         }
     }
 
