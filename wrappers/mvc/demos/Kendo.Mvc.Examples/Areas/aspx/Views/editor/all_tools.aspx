@@ -22,6 +22,7 @@
         .TableEditing()
         .ViewHtml()
         .Formatting()
+        .CleanFormatting()
         .FontName()
         .FontSize()
         .FontColor().BackColor()
