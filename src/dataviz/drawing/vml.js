@@ -6,7 +6,9 @@
 
     // Imports ================================================================
     var doc = document,
+        atan2 = Math.atan2,
         max = Math.max,
+        sqrt = Math.sqrt,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
@@ -734,47 +736,49 @@
         },
 
         mapTransform: function(transform) {
-            var attrs = [];
             var img = this.srcElement;
             var rawbbox = img.rawBBox();
-            var bbox = img.bbox();
+            var rawcenter = rawbbox.center();
 
             var fillOrigin = COORDINATE_MULTIPLE / 2;
             var fillSize = COORDINATE_MULTIPLE;
-            var sx = rawbbox.width() / fillSize;
-            var sy = rawbbox.height() / fillSize;
 
-            var rx = (rawbbox.center().x - fillOrigin) / fillSize;
-            var ry = (rawbbox.center().y - fillOrigin) / fillSize;
-
+            var x;
+            var y;
+            var width = rawbbox.width() / fillSize;
+            var height = rawbbox.height() / fillSize;
             var angle = 0;
 
             if (transform) {
                 var matrix = toMatrix(transform);
+                var sx = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
+                var sy = sqrt(matrix.c * matrix.c + matrix.d * matrix.d);
 
-                var scaleX = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
-                var scaleY = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2))
+                width *= sx;
+                height *= sy;
 
-                sx *= scaleX;
-                sy *= scaleY;
+                var ax = util.deg(atan2(matrix.b, matrix.d));
+                var ay = util.deg(atan2(-matrix.c, matrix.a))
+                angle = (ax + ay) / 2;
 
-                var ax = util.deg(Math.atan2(matrix.b, matrix.d));
-                var ay = util.deg(Math.atan2(-matrix.c, matrix.a))
-                var angle = (ax + ay) / 2;
-                if (angle) {
-                    rx = (bbox.center().x - fillOrigin) / fillSize;
-                    ry = (bbox.center().y - fillOrigin) / fillSize;
+                if (angle !== 0) {
+                    var center = img.bbox().center();
+                    x = (center.x - fillOrigin) / fillSize;
+                    y = (center.y - fillOrigin) / fillSize;
                 } else {
-                    rx = (rawbbox.center().x * scaleX + matrix.e - fillOrigin) / fillSize;
-                    ry = (rawbbox.center().y * scaleY + matrix.f - fillOrigin) / fillSize;
+                    x = (rawcenter.x * sx + matrix.e - fillOrigin) / fillSize;
+                    y = (rawcenter.y * sy + matrix.f - fillOrigin) / fillSize;
                 }
+            } else {
+                x = (rawcenter.x - fillOrigin) / fillSize;
+                y = (rawcenter.y - fillOrigin) / fillSize;
             }
 
-            attrs.push(["size", sx + "," + sy]);
-            attrs.push(["position", rx + "," + ry]);
-            attrs.push(["angle", angle]);
-
-            return attrs;
+            return [
+                ["size", width + "," + height],
+                ["position", x + "," + y],
+                ["angle", angle]
+            ];
         },
 
         template: renderTemplate(
