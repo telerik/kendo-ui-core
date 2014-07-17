@@ -483,6 +483,10 @@ var __meta__ = {
                 var td = e.currentTarget ? $(e.currentTarget) : e;
                 var column = that._columnFromElement(td);
 
+                if (that.editable) {
+                    return;
+                }
+
                 if (column.editable) {
                     that._editCell({ cell: td, column: column });
                 }

@@ -17,11 +17,12 @@
 
             columns = [
                 { field: "title", editable: true, editor: function() { } },
+                { field: "start", editable: true },
                 { field: "summary" }
             ];
 
             dataSource = new GanttDataSource({
-                data: [{ title: "foo", parentId: null, id: 1, summary: true }],
+                data: [{ title: "foo", start: new Date(), parentId: null, id: 1, summary: true }],
                 schema: {
                     model: {
                         id: "id"
@@ -48,6 +49,14 @@
         doubleTap(targetCell);
 
         ok(targetCell.data("kendoEditable"));
+    });
+
+    test("doers not start edit on dblclick when another cell already in edit", function() {
+        doubleTap(ganttList.content.find("td").eq(0));
+        stub(ganttList, "_editCell");
+        doubleTap(ganttList.content.find("td").eq(1));
+
+        ok(!ganttList.calls("_editCell"));
     });
 
     test("applies css class to editable cell on dblclick", function () {
@@ -147,7 +156,7 @@
     });
 
     test("does not attach editable widget to non-editable cell on dblclick", function() {
-        var targetCell = ganttList.content.find("td").eq(1);
+        var targetCell = ganttList.content.find("td").eq(2);
 
         doubleTap(targetCell);
 
