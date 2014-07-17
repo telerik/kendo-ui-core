@@ -427,18 +427,18 @@
             return attrs;
         },
 
-        renderTranform: function() {
+        renderTransform: function() {
             return renderAllAttr(this.mapTransform(this.transform));
         },
 
         template: renderTemplate(
-            "<kvml:skew #=d.renderTranform()# ></kvml:skew>"
+            "<kvml:skew #= d.renderTransform() # ></kvml:skew>"
         )
     });
 
     var ShapeNode = Node.extend({
         init: function(srcElement, transform) {
-            this.fill = this.createFillNode(srcElement);
+            this.fill = this.createFillNode(srcElement, transform);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
 
@@ -720,26 +720,20 @@
         }
     });
 
-    var ImageFillNode = Node.extend({
+    var ImageFillNode = TransformNode.extend({
         optionsChange: function(e) {
             if (e.field === "src") {
                 this.attr("src", e.value);
-            } else if (e.field === "transform") {
-                this.refresh();
             }
 
-            this.invalidate();
+            TransformNode.fn.optionsChange.call(this, e);
         },
 
         geometryChange: function() {
             this.refresh();
         },
 
-        refresh: function() {
-            this.allAttr(this.mapTransform());
-        },
-
-        mapTransform: function() {
+        mapTransform: function(transform) {
             var attrs = [];
             var img = this.srcElement;
             var rawbbox = img.rawBBox();
@@ -755,9 +749,8 @@
 
             var angle = 0;
 
-            var transform = img.currentTransform();
             if (transform) {
-                var matrix = transform.matrix();
+                var matrix = toMatrix(transform);
 
                 var scaleX = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
                 var scaleY = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2))
@@ -784,10 +777,6 @@
             return attrs;
         },
 
-        renderTransform: function() {
-            return renderAllAttr(this.mapTransform());
-        },
-
         template: renderTemplate(
             "<kvml:fill src='#= d.srcElement.src() #' " +
             "type='frame' rotate='true' " +
@@ -796,8 +785,8 @@
     });
 
     var ImageNode = PathNode.extend({
-        createFillNode: function(srcElement) {
-            return new ImageFillNode(srcElement);
+        createFillNode: function(srcElement, transform) {
+            return new ImageFillNode(srcElement, transform);
         },
 
         createDataNode: function(srcElement) {
