@@ -1821,6 +1821,7 @@ var __meta__ = {
                             }
                             break;
                         case keys.ENTER:
+                            e.preventDefault();
                             if (isCell) {
                                 if (that.options.editable) {
                                     that._cachedCurrent = that.current;
