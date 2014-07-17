@@ -147,8 +147,50 @@
         </script>
     </div>
 
+
+
+        @{
+        NavigationExample currentExample = ViewBag.CurrentExample;
+        NavigationWidget currentWidget = ViewBag.CurrentWidget;
+        var html = currentWidget.ShouldInclude("online") && currentExample.ShouldInclude("online") && navProduct != "online";
+        var php = currentWidget.ShouldInclude("php") && currentExample.ShouldInclude("php") && navProduct != "php";
+        var mvc = currentWidget.ShouldInclude("mvc") && currentExample.ShouldInclude("mvc") && navProduct != "mvc";
+        var jsp = currentWidget.ShouldInclude("jsp") && currentExample.ShouldInclude("jsp") && navProduct != "jsp";
+    }
+
     @if (ViewBag.ShowCodeStrip == true)
     {
+        
+        <div id="wrappers-source-code">
+            <h2>HTML5/JavaScript source</h2>
+              
+        @if (html || php || jsp || mvc)
+        {
+            <div class="other-source">
+                <h4>@ViewBag.CurrentWidget.Text demo also available for:</h4>
+                <ul>
+                    @if (html)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "kendo-ui")">HTML5 / JavaScript</a></li>
+                    }
+                    @if (mvc)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "aspnet-mvc")">ASP.NET MVC</a></li>
+                    }
+                    @if (jsp)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "jsp-ui")">JSP</a></li>
+                    }
+                    @if (php)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "php-ui")">PHP</a></li>
+                    }
+                </ul>
+            </div>
+        }
+            
+        </div>
+        
         <div id="codeStrip">
             @if (!string.IsNullOrEmpty(ViewBag.Api))
             {
@@ -225,27 +267,12 @@
         </div>
         }
         <div id="technologies" class="box-col">
-            @{
-                NavigationExample currentExample = ViewBag.CurrentExample;
-                NavigationWidget currentWidget = ViewBag.CurrentWidget;
-                var html = currentWidget.ShouldInclude("online") && currentExample.ShouldInclude("online") && navProduct != "online";
-                var php = currentWidget.ShouldInclude("php") && currentExample.ShouldInclude("php") && navProduct != "php";
-                var mvc = currentWidget.ShouldInclude("mvc") && currentExample.ShouldInclude("mvc") && navProduct != "mvc";
-                var jsp = currentWidget.ShouldInclude("jsp") && currentExample.ShouldInclude("jsp") && navProduct != "jsp";
-            }
+
 
             @if (html || php || jsp || mvc)
             {
                 <h4>@ViewBag.CurrentWidget.Text for other technologies</h4>
                 <ul>
-                    @if (php)
-                    {
-                    <li><a href="@Html.ProductExampleUrl(currentExample, "php-ui")">PHP</a></li>
-                    }
-                    @if (jsp)
-                    {
-                    <li><a href="@Html.ProductExampleUrl(currentExample, "jsp-ui")">JSP</a></li>
-                    }
                     @if (html)
                     {
                     <li><a href="@Html.ProductExampleUrl(currentExample, "kendo-ui")">HTML5 / JavaScript</a></li>
@@ -253,6 +280,14 @@
                     @if (mvc)
                     {
                     <li><a href="@Html.ProductExampleUrl(currentExample, "aspnet-mvc")">ASP.NET MVC</a></li>
+                    }
+                    @if (jsp)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "jsp-ui")">JSP</a></li>
+                    }
+                    @if (php)
+                    {
+                    <li><a href="@Html.ProductExampleUrl(currentExample, "php-ui")">PHP</a></li>
                     }
                 </ul>
             }
