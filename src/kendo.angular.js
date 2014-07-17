@@ -474,7 +474,7 @@
                         var tag = TAGNAMES[className] || "div";
                         return "<" + tag + " " + dashed + "></" + tag + ">";
                     }
-                }
+                };
             });
         }
     }
