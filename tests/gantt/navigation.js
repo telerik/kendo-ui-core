@@ -440,4 +440,22 @@
 
         ok(gantt.calls("removeTask"));
     });
+
+    asyncTest("delete key does not delete task when cell in edit", function() {
+        expect(1);
+        var content = gantt.list.content;
+        var removeTask;
+        var targetCell = gantt.list.content.find("td:first");
+
+        focusTable();
+        removeTask = stub(gantt, "removeTask");
+        targetCell.trigger("dblclick");
+        gantt.select(targetCell);
+
+        setTimeout(function() {
+            keyDown(content.find("table"), keys.DELETE);
+            ok(!removeTask.calls("removeTask"));
+            start();
+        }, 3);
+    });
 })();

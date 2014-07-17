@@ -1708,7 +1708,7 @@ var __meta__ = {
                 }
             };
             var deleteAction = function() {
-                if (!that.options.editable) {
+                if (!that.options.editable || that.list.editable) {
                     return;
                 }
 
