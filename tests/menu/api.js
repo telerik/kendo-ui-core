@@ -312,8 +312,8 @@ test("Adding dynamic content element renders properly on root and inner levels",
         }
     ]);
 
-    ok(m.element.children("li:first").children("div.k-content")[0]);
-    ok(m.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
+    ok(m.element.children("li:first").children("div.k-content.k-menu-group.k-group")[0]);
+    ok(m.element.find("> li:last > ul > li:first").children("div.k-content.k-menu-group.k-group")[0]);
     m.destroy();
 });
 
