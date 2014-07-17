@@ -2050,6 +2050,7 @@ var __meta__ = {
             var styles = GanttTimeline.styles;
 
             if (element.length) {
+                this.clearSelection();
                 this.trigger("clear");
 
                 uid = $(element).attr("data-uid");
