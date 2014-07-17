@@ -758,7 +758,7 @@
                 height *= sy;
 
                 var ax = util.deg(atan2(matrix.b, matrix.d));
-                var ay = util.deg(atan2(-matrix.c, matrix.a))
+                var ay = util.deg(atan2(-matrix.c, matrix.a));
                 angle = (ax + ay) / 2;
 
                 if (angle !== 0) {
