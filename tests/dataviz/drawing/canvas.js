@@ -641,6 +641,16 @@
 
             textNode.renderTo(ctx);
         });
+
+        test("creates new path", function() {
+            var ctx = mockContext({
+                beginPath: function(mx) {
+                    ok(true);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
     })();
 
     // ------------------------------------------------------------

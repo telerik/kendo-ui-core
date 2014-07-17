@@ -137,7 +137,7 @@
         },
 
         invalidate: function() {
-            this.canvas.width = this.canvas.width;
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.renderTo(this.ctx);
         }
     });
@@ -291,6 +291,7 @@
             var size = text.measure();
 
             ctx.save();
+            ctx.beginPath();
 
             this.setFill(ctx);
             this.setTransform(ctx);

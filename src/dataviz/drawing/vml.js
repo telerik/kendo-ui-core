@@ -6,7 +6,9 @@
 
     // Imports ================================================================
     var doc = document,
+        atan2 = Math.atan2,
         max = Math.max,
+        sqrt = Math.sqrt,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
@@ -289,7 +291,7 @@
         mapStroke: function(stroke) {
             var attrs = [];
 
-            if (stroke) {
+            if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
                 attrs.push(["weight", stroke.width + "px"]);
@@ -427,18 +429,18 @@
             return attrs;
         },
 
-        renderTranform: function() {
+        renderTransform: function() {
             return renderAllAttr(this.mapTransform(this.transform));
         },
 
         template: renderTemplate(
-            "<kvml:skew #=d.renderTranform()# ></kvml:skew>"
+            "<kvml:skew #= d.renderTransform() # ></kvml:skew>"
         )
     });
 
     var ShapeNode = Node.extend({
         init: function(srcElement, transform) {
-            this.fill = new FillNode(srcElement);
+            this.fill = this.createFillNode(srcElement, transform);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
 
@@ -447,6 +449,10 @@
             this.append(this.fill);
             this.append(this.stroke);
             this.append(this.transform);
+        },
+
+        createFillNode: function(srcElement) {
+            return new FillNode(srcElement);
         },
 
         createTransformNode: function(srcElement, transform) {
@@ -469,22 +475,6 @@
 
         refreshTransform: function(transform) {
             this.transform.refresh(this.srcElement.currentTransform(transform));
-        },
-
-        mapFill: function(fill) {
-            var attrs = [];
-
-            if (fill && fill.color !== TRANSPARENT) {
-                attrs.push(["fill", fill.color]);
-
-                if (defined(fill.opacity)) {
-                    attrs.push(["fill-opacity", fill.opacity]);
-                }
-            } else {
-                attrs.push(["fill", NONE]);
-            }
-
-            return attrs;
         },
 
         mapStyle: function() {
@@ -719,112 +709,111 @@
         }
     });
 
-    var ImageNode = Node.extend({
-        init: function(srcElement, transform) {
-            Node.fn.init.call(this, srcElement);
-            this.transform = transform;
+    var ImagePathDataNode = PathDataNode.extend({
+        renderData: function() {
+            var rect = this.srcElement.rect();
+            var path = new d.Path().moveTo(rect.topLeft())
+                                   .lineTo(rect.topRight())
+                                   .lineTo(rect.bottomRight())
+                                   .lineTo(rect.bottomLeft())
+                                   .close();
+
+            return printPath(path);
+        }
+    });
+
+    var ImageFillNode = TransformNode.extend({
+        optionsChange: function(e) {
+            if (e.field === "src") {
+                this.attr("src", e.value);
+            }
+
+            TransformNode.fn.optionsChange.call(this, e);
         },
 
         geometryChange: function() {
-            this.allCss(this.mapStyle());
-            this.invalidate();
-        },
-
-        optionsChange: function(e) {
-            if (e.field === "src") {
-                this.attr("src", this.srcElement.src());
-            } else if (e.field === "visible") {
-                this.css("display", e.value ? "" : "none");
-            } else if (e.field === "transform") {
-                this.refreshTransform(this.srcElement.currentTransform());
-            }
-
-            Node.fn.optionsChange.call(this, e);
-        },
-
-        mapStyle: function() {
-            var image = this.srcElement;
-            var rect = image.rect();
-
-            var pos = rect.topLeft();
-            var style = [
-                ["position", "absolute"],
-                ["top", "0px"],
-                ["left", "0px"],
-                ["padding-left", pos.x + "px"],
-                ["padding-top", pos.y + "px"],
-                ["width", rect.width() + "px"],
-                ["height", rect.height() + "px"],
-                ["cursor", image.options.cursor]
-            ];
-
-            if (image.options.visible === false) {
-                style.push(["display", "none"]);
-            }
-
-            if (this.transform) {
-                util.append(style, this.mapTransform(this.transform));
-            }
-
-            return style;
-        },
-
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
-        refreshTransform: function(transform) {
-            var currentTransform = this.srcElement.currentTransform(transform);
-            this.allCss(this.mapTransform(currentTransform));
-
-            if (this.element) {
-                this.element.style.cssText = this.element.style.cssText;
-            }
+            this.refresh();
         },
 
         mapTransform: function(transform) {
-            var style = [];
-            var matrix = toMatrix(transform);
-            if (matrix) {
-                var image = this.srcElement;
-                var imageBottom = image.rect().bottomRight();
-                var bbox = image.bbox();
-                var bboxBottom = bbox.bottomRight();
-                var bboxTop = bbox.topLeft();
+            var img = this.srcElement;
+            var rawbbox = img.rawBBox();
+            var rawcenter = rawbbox.center();
 
-                var paddingRight = bboxBottom.x - imageBottom.x;
-                var paddingBottom = bboxBottom.y - imageBottom.y;
-                matrix.round(TRANSFORM_PRECISION);
-                style.push(["filter", this.transformTemplate(matrix)]);
+            var fillOrigin = COORDINATE_MULTIPLE / 2;
+            var fillSize = COORDINATE_MULTIPLE;
 
-                if (bboxTop.x < 0) {
-                    style.push(["left", bboxTop.x + "px"]);
-                    style.push(["padding-left", max(-(matrix.e / matrix.a), 0) + "px"]);
-                    paddingRight -= bboxTop.x;
+            var x;
+            var y;
+            var width = rawbbox.width() / fillSize;
+            var height = rawbbox.height() / fillSize;
+            var angle = 0;
+
+            if (transform) {
+                var matrix = toMatrix(transform);
+                var sx = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
+                var sy = sqrt(matrix.c * matrix.c + matrix.d * matrix.d);
+
+                width *= sx;
+                height *= sy;
+
+                var ax = util.deg(atan2(matrix.b, matrix.d));
+                var ay = util.deg(atan2(-matrix.c, matrix.a));
+                angle = (ax + ay) / 2;
+
+                if (angle !== 0) {
+                    var center = img.bbox().center();
+                    x = (center.x - fillOrigin) / fillSize;
+                    y = (center.y - fillOrigin) / fillSize;
+                } else {
+                    x = (rawcenter.x * sx + matrix.e - fillOrigin) / fillSize;
+                    y = (rawcenter.y * sy + matrix.f - fillOrigin) / fillSize;
                 }
-
-                if (bboxTop.y < 0) {
-                    style.push(["top", bboxTop.y + "px"]);
-                    style.push(["padding-top", max(-(matrix.f / matrix.d), 0) + "px"]);
-                    paddingBottom -= bboxTop.y;
-                }
-
-                style.push(["padding-right", max(paddingRight, 0) + "px"]);
-                style.push(["padding-bottom", max(paddingBottom, 0) + "px"]);
+            } else {
+                x = (rawcenter.x - fillOrigin) / fillSize;
+                y = (rawcenter.y - fillOrigin) / fillSize;
             }
 
-            return style;
+            return [
+                ["size", width + "," + height],
+                ["position", x + "," + y],
+                ["angle", angle]
+            ];
         },
 
-        transformTemplate: renderTemplate(
-            "progid:DXImageTransform.Microsoft.Matrix(" +
-            "M11=${d.a}, M12=${d.c}, M21=${d.b}, M22=${d.d}, Dx=${d.e}, Dy=${d.f})"
-        ),
-
         template: renderTemplate(
-            "<img src='#= d.srcElement.src() #' " +
-            "#= d.renderStyle() # />"
+            "<kvml:fill src='#= d.srcElement.src() #' " +
+            "type='frame' rotate='true' " +
+            "#= d.renderTransform() #></kvml:fill>"
         )
+    });
+
+    var ImageNode = PathNode.extend({
+        createFillNode: function(srcElement, transform) {
+            return new ImageFillNode(srcElement, transform);
+        },
+
+        createDataNode: function(srcElement) {
+            return new ImagePathDataNode(srcElement);
+        },
+
+        optionsChange: function(e) {
+            if (e.field === "src" || e.field === "transform") {
+                this.fill.optionsChange(e);
+            }
+
+            PathNode.fn.optionsChange.call(this, e);
+        },
+
+        geometryChange: function() {
+            this.fill.geometryChange();
+            PathNode.fn.geometryChange.call(this);
+        },
+
+        refreshTransform: function(transform) {
+            PathNode.fn.refreshTransform.call(this, transform);
+            this.fill.refresh(this.srcElement.currentTransform(transform));
+        }
     });
 
     // Helper functions =======================================================
@@ -907,6 +896,8 @@
             FillNode: FillNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
+            ImageFillNode: ImageFillNode,
+            ImagePathDataNode: ImagePathDataNode,
             MultiPathDataNode: MultiPathDataNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
