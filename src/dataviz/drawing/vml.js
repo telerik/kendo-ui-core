@@ -800,13 +800,11 @@
             return new ImagePathDataNode(srcElement);
         },
 
-        geometryChange: function() {
-            this.allCss(this.mapStyle());
-            this.invalidate();
-        },
-
         optionsChange: function(e) {
-            this.fill.optionsChange(e);
+            if (e.field === "src" || e.field === "transform") {
+                this.fill.optionsChange(e);
+            }
+
             PathNode.fn.optionsChange.call(this, e);
         },
 

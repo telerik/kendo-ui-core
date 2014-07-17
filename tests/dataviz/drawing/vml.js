@@ -175,7 +175,7 @@
         test("load appends ImageNode with current transformation", function() {
             var transform = g.transform();
             node.append = function(child) {
-                ok(child.transform.matrix().equals(transform.matrix()));
+                ok(child.transform.transform.matrix().equals(transform.matrix()));
             };
             node.load([new d.Image("foo", new g.Rect())], transform);
         });
@@ -187,7 +187,7 @@
                 image = new d.Image("foo", new g.Rect(), {transform: matrix});
 
             node.append = function(child) {
-                compareMatrices(child.transform.matrix(), combinedMatrix);
+                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
             };
             node.load([image], currentMatrix);
         });
@@ -934,6 +934,23 @@
 
             shape.options.set("foo", true);
         });
+
+        test("refreshTransform calls transform refresh method with the srcElement transformation", 12, function() {
+            var srcMatrix = new Matrix(3,3,3,3,3,3);
+            var parentMatrix = new Matrix(2,2,2,2,2,2);
+            var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
+            var group = new Group({transform: parentMatrix});
+
+            shape.transform(srcMatrix);
+            group.append(shape);
+
+            node.transform.refresh = function(transform) {
+                compareMatrices(transform.matrix(), currentMatrix);
+            };
+
+            node.refreshTransform();
+            node.refreshTransform(g.transform(parentMatrix));
+        });
     }
 
     // ------------------------------------------------------------
@@ -1044,23 +1061,6 @@
             };
 
             path.lineTo(10, 10);
-        });
-
-        test("refreshTransform calls transform refresh method with the srcElement transformation", 14, function() {
-            var srcMatrix = new Matrix(3,3,3,3,3,3),
-                parentMatrix = new Matrix(2,2,2,2,2,2),
-                currentMatrix = parentMatrix.multiplyCopy(srcMatrix),
-                group = new Group({transform: parentMatrix});
-            path = new Path({transform: srcMatrix});
-            group.append(path);
-            pathNode = new PathNode(path);
-            pathNode.transform.refresh = function(transform) {
-                ok(true);
-                compareMatrices(transform.matrix(), currentMatrix);
-            };
-
-            pathNode.refreshTransform();
-            pathNode.refreshTransform(g.transform(parentMatrix));
         });
     })();
 
@@ -1433,115 +1433,52 @@
             equal(image.observer, imageNode);
         });
 
-        test("renders cursor", function() {
-            image.options.set("cursor", "hand");
-            ok(imageNode.render().indexOf("cursor:hand;") !== -1);
-        });
-
-        test("does not render cursor if not set", function() {
-            ok(imageNode.render().indexOf("cursor") === -1);
-        });
-
-        test("renders width", function() {
-            ok(imageNode.render().indexOf("width:90px;") !== -1);
-        });
-
-        test("renders height", function() {
-            ok(imageNode.render().indexOf("height:80px;") !== -1);
-        });
-
-        test("renders static position", function() {
-            ok(imageNode.render().indexOf("position:absolute;top:0px;left:0px;") !== -1);
-        });
-
-        test("renders padding position", function() {
-            ok(imageNode.render().indexOf("padding-left:10px;padding-top:20px;") !== -1);
-        });
-
-        test("renders extra padding to fit bounding box", function() {
-            image.transform(g.transform().scale(2, 2));
-            imageNode.transform = image.transform();
-            ok(imageNode.render().indexOf("padding-right:100px;padding-bottom:100px;") !== -1);
-        });
-
-        test("geometryChange sets position", 2, function() {
-            imageNode.css = function(name, value) {
-                if (name === "padding-left") {
-                    equal(value, "20px");
-                } else if (name === "padding-top") {
-                    equal(value, "40px");
-                }
-            };
-
-            image.rect().origin.scale(2);
-        });
-
-        test("geometryChange sets size", 2, function() {
-            imageNode.css = function(name, value) {
-                if (name === "width") {
-                    equal(value, "80px");
-                } else if (name === "height") {
-                    equal(value, "60px");
-                }
-            };
-
-            image.rect().setSize([80, 60]);
-        });
-
-        test("optionsChange sets source", function() {
-            imageNode.attr = function(name, value) {
-                equal(name, "src");
-                equal(value, "bar");
+        test("optionsChange is forwarded to fill (src)", function() {
+            imageNode.fill.optionsChange = function() {
+                ok(true);
             };
 
             image.src("bar");
         });
 
-        test("optionsChange sets transformation", function() {
-            var group = new Group({ transform: g.transform().translate(1, 1) });
-            group.append(image);
-
-            imageNode.refreshTransform = function(transform) {
-                ok(transform.matrix().equals(image.currentTransform().matrix()));
+        test("optionsChange is forwarded to fill (transform)", function() {
+            imageNode.fill.optionsChange = function() {
+                ok(true);
             };
 
-            image.transform(g.transform());
+            image.options.set("transform", g.transform());
         });
 
-        test("optionsChange sets transformation padding", function() {
-            var group = new Group({ transform: g.transform().translate(10, 10) });
-            group.append(image);
-
-            imageNode.css = function(name, value) {
-                if (name === "padding-right") {
-                    equal(value, "110px");
-                } else if (name === "padding-bottom") {
-                    equal(value, "210px");
-                }
+        test("geometryChange is forwarded to pathData", function() {
+            imageNode.pathData.geometryChange = function() {
+                ok(true);
             };
 
-            image.transform(g.transform().scale(2, 3));
+            image.rect().size.setWidth(100);
         });
 
-        test("refreshTransform updates transformation", function() {
-            var srcMatrix = new Matrix(3,3,3,3,3,3);
-            var parentMatrix = new Matrix(2,2,2,2,2,2);
-            var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
-            var group = new Group({ transform: parentMatrix });
+        test("refreshTransform refreshes fill transform", 14, function() {
+            var srcMatrix = new Matrix(3,3,3,3,3,3),
+                parentMatrix = new Matrix(2,2,2,2,2,2),
+                currentMatrix = parentMatrix.multiplyCopy(srcMatrix),
+                group = new Group({ transform: parentMatrix });
 
-            image = new d.Image("foo", new g.Rect(), { transform: srcMatrix });
+            image = new d.Image("foo", new g.Rect([0, 0], [10, 10]), {
+                transform: srcMatrix
+            });
+
             group.append(image);
-
             imageNode = new vml.ImageNode(image);
-            imageNode.css = function(name, value) {
-                if (name === "filter") {
-                    equal(value, imageNode.transformTemplate(currentMatrix));
-                }
+            imageNode.fill.refresh = function(transform) {
+                ok(true);
+                compareMatrices(transform.matrix(), currentMatrix);
             };
 
             imageNode.refreshTransform();
             imageNode.refreshTransform(g.transform(parentMatrix));
         });
+
+        shapeTests(d.Image, vml.ImageNode, "ImageNode");
     })();
 
 })();
