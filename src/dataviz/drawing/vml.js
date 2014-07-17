@@ -731,6 +731,10 @@
             this.invalidate();
         },
 
+        geometryChange: function() {
+            this.refresh();
+        },
+
         refresh: function() {
             this.allAttr(this.mapTransform());
         },
@@ -806,6 +810,11 @@
             }
 
             PathNode.fn.optionsChange.call(this, e);
+        },
+
+        geometryChange: function() {
+            this.fill.geometryChange();
+            PathNode.fn.geometryChange.call(this);
         },
 
         refreshTransform: function(transform) {
@@ -894,6 +903,8 @@
             FillNode: FillNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
+            ImageFillNode: ImageFillNode,
+            ImagePathDataNode: ImagePathDataNode,
             MultiPathDataNode: MultiPathDataNode,
             MultiPathNode: MultiPathNode,
             Node: Node,

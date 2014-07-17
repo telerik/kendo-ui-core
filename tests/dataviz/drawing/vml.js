@@ -1420,6 +1420,124 @@
     // ------------------------------------------------------------
     (function() {
         var image;
+        var dataNode;
+
+        module("ImagePathDataNode", {
+            setup: function() {
+                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]));
+                dataNode = new vml.ImagePathDataNode(image);
+            }
+        });
+
+        test("renders rectangle", function() {
+            equal(dataNode.renderData(), "m 1000,2000 l 10000,2000 10000,10000 1000,10000 x e");
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var image;
+        var fillNode;
+
+        module("ImageFillNode", {
+            setup: function() {
+                image = new d.Image("foo", new g.Rect([10, 20], [90, 80]));
+                fillNode = new vml.ImageFillNode(image);
+            }
+        });
+
+        test("renders src", function() {
+            contains(fillNode.render(), "src='foo'");
+        });
+
+        test("renders type", function() {
+            contains(fillNode.render(), "type='frame'");
+        });
+
+        test("renders rotate", function() {
+            contains(fillNode.render(), "rotate='true'");
+        });
+
+        test("renders fill relative size", function() {
+            contains(fillNode.render(), "size='0.9,0.8'");
+        });
+
+        test("renders fill relative center position", function() {
+            contains(fillNode.render(), "position='0.05,0.1'");
+        });
+
+        test("renders default angle of rotation", function() {
+            contains(fillNode.render(), "angle='0'");
+        });
+
+        test("sets size for transformation scale", function() {
+            image.transform(g.transform().scale(2, 4));
+            contains(fillNode.render(), "size='1.8,3.2'");
+        });
+
+        test("sets position for transformation scale", function() {
+            image.transform(g.transform().scale(2, 4));
+            contains(fillNode.render(), "position='0.6,1.9'");
+        });
+
+        test("sets position for transformation translation", function() {
+            image.transform(g.transform().translate(10, 20));
+            contains(fillNode.render(), "position='0.15,0.3'");
+        });
+
+        test("sets position for transformation translation and scale", function() {
+            image.transform(g.transform().translate(10, 20).scale(2, 4));
+            contains(fillNode.render(), "position='0.7,2.1'");
+        });
+
+        test("sets position for transformation rotation", function() {
+            image.transform(g.transform().translate(10, 20).rotate(90));
+            contains(fillNode.render(), "position='-1,0.25'");
+        });
+
+        test("sets angle for transformation angle", function() {
+            image.transform(g.transform().rotate(45));
+            contains(fillNode.render(), "angle='45'");
+        });
+
+        test("sets angle for transformation angle and non-uniform scale", function() {
+            image.transform(g.transform().rotate(45).scale(2, 4));
+            contains(fillNode.render(), "angle='45'");
+        });
+
+        test("optionsChange sets src", function() {
+            fillNode.attr = function(name, value) {
+                equal(name, "src");
+                equal(value, "bar");
+            };
+
+            image.src("bar");
+        });
+
+        test("optionsChange sets transform", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "angle") {
+                    equal(value, 45);
+                }
+            };
+
+            image.transform(g.transform().rotate(45));
+        });
+
+        test("geometryChange sets transform", function() {
+            fillNode.attr = function(name, value) {
+                if (name === "size") {
+                    equal(value, "2,2");
+                }
+            };
+
+            image.rect().setSize([200, 200]);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var image;
         var imageNode;
 
         module("ImageNode", {
@@ -1451,6 +1569,14 @@
 
         test("geometryChange is forwarded to pathData", function() {
             imageNode.pathData.geometryChange = function() {
+                ok(true);
+            };
+
+            image.rect().size.setWidth(100);
+        });
+
+        test("geometryChange is forwarded to fill", function() {
+            imageNode.fill.geometryChange = function() {
                 ok(true);
             };
 
