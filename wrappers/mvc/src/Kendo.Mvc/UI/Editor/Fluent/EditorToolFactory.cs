@@ -257,6 +257,11 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public EditorToolFactory CleanFormatting()
+        {
+            return Button("cleanFormatting");
+        }
         
         private EditorToolFactory Button(string text)
         {
