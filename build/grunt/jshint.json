@@ -21,7 +21,7 @@
         "browser": true,
         "jquery": true,
         "globals": {
-            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true, "stubMethod": true, "arrayClose": true,
+            "QUnit": true, "test": true, "asyncTest": true, "module": true, "start": true, "equal": true, "deepEqual": true, "ok": true, "stubMethod": true, "arrayClose": true, "contains": true,
             "kendo": true,
             "define": true,
             "angular": true,

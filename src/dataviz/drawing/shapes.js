@@ -419,10 +419,10 @@
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
-            }
 
-            if (!defined(this.options.stroke.lineJoin)) {
-                this.options.set("stroke.lineJoin", "miter");
+                if (!defined(this.options.stroke.lineJoin)) {
+                    this.options.set("stroke.lineJoin", "miter");
+                }
             }
         },
 
