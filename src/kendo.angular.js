@@ -438,7 +438,7 @@
         ListView       : "ul",
         TreeView       : "ul",
         Menu           : "ul",
-        ContextMenu    : "ul",
+        ContextMenu    : "ul"
     };
 
     function createDirectives(klass, isMobile) {
