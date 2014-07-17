@@ -787,7 +787,11 @@ var __meta__ = {
 
             that.span = span;
             that._inputWrapper = $(wrapper[0].firstChild);
-            that._arrow = wrapper.find(".k-icon").mousedown(function(e) { e.preventDefault(); });
+            that._arrow = wrapper.find(".k-icon")
+                                 .mousedown(function(e) {
+                                     wrapper.focus();
+                                     e.preventDefault();
+                                 });
         },
 
         _wrapper: function() {
