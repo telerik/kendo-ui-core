@@ -8612,6 +8612,7 @@
   {
     "text": "NavBar",
     "name": "navbar",
+    "new": true,
     "api": "mobile/navbar",
     "documentation": {
        "kendo-ui": "getting-started/mobile/navbar",
