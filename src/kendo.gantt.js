@@ -1741,7 +1741,9 @@ var __meta__ = {
                     }
 
                     if (navigatable || editable) {
-                        focusTable(that.list.content.find("table"), true);
+                        setTimeout(function() {
+                            focusTable(that.list.content.find("table"), true);
+                        }, 2);
                     }
                 });
 
