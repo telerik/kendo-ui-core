@@ -10,6 +10,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class TreeViewBuilder : WidgetBuilderBase<TreeView, TreeViewBuilder>, IHideObjectMembers
     {
+        private TreeView container;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TreeViewBuilder"/> class.
         /// </summary>
@@ -17,6 +19,7 @@ namespace Kendo.Mvc.UI.Fluent
         public TreeViewBuilder(TreeView component)
             : base(component)
         {
+            container = component;
         }
 
         /// <summary>
@@ -68,7 +71,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return Checkboxes(config => config.TemplateId(templateId));
         }
-
+        
         /// <summary>
         /// Template to be used for rendering the items in the treeview.
         /// </summary>
@@ -518,82 +521,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the name of the field that will supply the item text.
-        /// </summary>
-        /// <param name="field">The field name.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .DataTextField("Name")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder DataTextField(string field)
-        {
-            Component.DataTextField = field;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the name of the field that will supply the item URL.
-        /// </summary>
-        /// <param name="field">The field name.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .DataUrlField("LinksTo")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder DataUrlField(string field)
-        {
-            Component.DataUrlField = field;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the name of the field that will supply the CSS class for the item sprite image.
-        /// </summary>
-        /// <param name="field">The field name.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .DataSpriteCssClassField("IconSprite")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder DataSpriteCssClassField(string field)
-        {
-            Component.DataSpriteCssClassField = field;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the name of the field that will supply the URL for the item image.
-        /// </summary>
-        /// <param name="field">The field name.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .DataImageUrlField("ImageURL")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public TreeViewBuilder DataImageUrlField(string field)
-        {
-            Component.DataImageUrlField = field;
-
-            return this;
-        }
-
-        /// <summary>
         /// Configure the DataSource of the component
         /// </summary>
         /// <param name="configurator">The action that configures the <see cref="DataSource"/>.</param>
@@ -634,5 +561,66 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        //>> Fields
+        
+        /// <summary>
+        /// Sets the field of the data item that provides the image URL of the treeview nodes.
+        /// </summary>
+        /// <param name="value">The value that configures the dataimageurlfield.</param>
+        public TreeViewBuilder DataImageUrlField(string value)
+        {
+            container.DataImageUrlField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Sets the field of the data item that provides the sprite CSS class of the nodes.
+		/// If an array, each level uses the field that is at the same index in the array, or the last item in the array.
+        /// </summary>
+        /// <param name="value">The value that configures the dataspritecssclassfield.</param>
+        public TreeViewBuilder DataSpriteCssClassField(string value)
+        {
+            container.DataSpriteCssClassField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Sets the field of the data item that provides the text content of the nodes.
+		/// If an array, each level uses the field that is at the same index in the array, or the last item in the array.
+        /// </summary>
+        /// <param name="value">The value that configures the datatextfield.</param>
+        public TreeViewBuilder DataTextField(string value)
+        {
+            container.DataTextField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Sets the field of the data item that provides the link URL of the nodes.
+        /// </summary>
+        /// <param name="value">The value that configures the dataurlfield.</param>
+        public TreeViewBuilder DataUrlField(string value)
+        {
+            container.DataUrlField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The text messages displayed in the widget. Use it to customize or localize the messages.
+        /// </summary>
+        /// <param name="configurator">The action that configures the messages.</param>
+        public TreeViewBuilder Messages(Action<TreeViewMessagesSettingsBuilder> configurator)
+        {
+            configurator(new TreeViewMessagesSettingsBuilder(container.Messages));
+            return this;
+        }
+        
+        //<< Fields
+
     }
 }

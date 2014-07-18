@@ -112,7 +112,8 @@ namespace :generate do
                     'docs/api/dataviz/diagram.md',
                     'docs/api/dataviz/treemap.md',
                     'docs/api/web/gantt.md',
-                    'docs/api/web/toolbar.md'
+                    'docs/api/web/toolbar.md',
+                    'docs/api/web/treeview.md'
                 ]
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
