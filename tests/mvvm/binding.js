@@ -1180,7 +1180,6 @@ test("binding dispose removes change handler when bound to observable object", f
 
     kendo.bind(dom, viewModel);
 
-	dom._kendoBindingTarget;
     initialBindingCount = viewModel._events.change.length;
 	kendo.unbind(dom);
 	equal(viewModel._events.change.length, initialBindingCount - 1);
