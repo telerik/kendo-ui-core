@@ -29,12 +29,12 @@
             }
             return kendo.data[type].create(dataSource);
         };
-        return function(scope, element, attrs, role) {
+        return function(scope, element, role, source) {
             var type = types[role] || 'DataSource';
-            var ds = toDataSource(scope.$eval(attrs.kDataSource), type);
+            var ds = toDataSource(scope.$eval(source), type);
 
             // not recursive -- this triggers when the whole data source changed
-            scope.$watch(attrs.kDataSource, function(mew, old){
+            scope.$watch(source, function(mew, old){
                 if (mew !== old) {
                     var ds = toDataSource(mew, type);
                     var widget = kendoWidgetInstance(element);
@@ -55,11 +55,48 @@
         kNgDelay    : true
     };
 
+    function addOption(scope, options, name, value) {
+        options[name] = angular.copy(scope.$eval(value));
+        if (options[name] === undefined && value.match(/^\w*$/)) {
+            $log.warn(name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
+        }
+    }
+
     function createWidget(scope, element, attrs, widget, origAttr) {
         var role = widget.replace(/^kendo/, '');
-        var options = angular.extend({}, scope.$eval(attrs.kOptions));
+        var options = angular.extend({}, scope.$eval(attrs.kOptions || attrs.options));
+        var ctor = $(element)[widget];
+
+        if (!ctor) {
+            window.console.error("Could not find: " + widget);
+            return null;
+        }
+
+        var widgetOptions = ctor.widget.prototype.options;
+        var widgetEvents = ctor.widget.prototype.events;
+
         $.each(attrs, function(name, value) {
-            if (!ignoredAttributes[name]) {
+            if (name === "source" || name === "kDataSource") {
+                return;
+            }
+
+            var dataName = "data" + name.charAt(0).toUpperCase() + name.slice(1);
+
+            if (name.indexOf("on") === 0) { // let's search for such event.
+                var eventKey = name.replace(/^on./, function(prefix) {
+                    return prefix.charAt(2).toLowerCase();
+                });
+
+                if (widgetEvents.indexOf(eventKey) > -1) {
+                    options[eventKey] = value;
+                }
+            } // don't elsif here - there are on* options
+
+            if (widgetOptions.hasOwnProperty(dataName)) {
+                addOption(scope, options, dataName, value);
+            } else if (widgetOptions.hasOwnProperty(name)) {
+                addOption(scope, options, name, value);
+            } else if (!ignoredAttributes[name]) {
                 var match = name.match(/^k(On)?([A-Z].*)/);
                 if (match) {
                     var optionName = match[2].charAt(0).toLowerCase() + match[2].slice(1);
@@ -70,29 +107,23 @@
                         if (name == "kOnLabel") {
                             optionName = "onLabel"; // XXX: that's awful.
                         }
-                        options[optionName] = angular.copy(scope.$eval(value));
-                        if (options[optionName] === undefined && value.match(/^\w*$/)) {
-                            $log.warn(widget + '\'s ' + name + ' attribute resolved to undefined. Maybe you meant to use a string literal like: \'' + value + '\'?');
-                        }
+                        addOption(scope, options, optionName, value);
                     }
                 }
             }
         });
 
         // parse the datasource attribute
-        if (attrs.kDataSource) {
-            options.dataSource = createDataSource(scope, element, attrs, role);
+        var dataSource = attrs.kDataSource || attrs.source;
+
+        if (dataSource) {
+            options.dataSource = createDataSource(scope, element, role, dataSource);
         }
 
         // deepExtend in kendo.core (used in Editor) will fail with stack
         // overflow if we don't put it in an array :-\
         options.$angular = [ scope ];
 
-        var ctor = $(element)[widget];
-        if (!ctor) {
-            window.console.error("Could not find: " + widget);
-            return null;
-        }
         var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
         exposeWidget(object, scope, attrs, widget, origAttr);
         scope.$emit("kendoWidgetCreated", object);

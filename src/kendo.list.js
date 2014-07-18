@@ -249,23 +249,8 @@ var __meta__ = {
         },
 
         _accessors: function() {
-            var that = this,
-                element = that.element,
-                options = that.options,
-                getter = kendo.getter,
-                textField = element.attr(kendo.attr("text-field")),
-                valueField = element.attr(kendo.attr("value-field"));
-
-            if (textField) {
-                options.dataTextField = textField;
-            }
-
-            if (valueField) {
-                options.dataValueField = valueField;
-            }
-
-            that._text = getter(options.dataTextField);
-            that._value = getter(options.dataValueField);
+            this._text = kendo.getter(this.options.dataTextField);
+            this._value = kendo.getter(this.options.dataValueField);
         },
 
         _aria: function(id) {

@@ -2940,6 +2940,8 @@ function pad(number, digits, end) {
                 return value;
             };
 
+            $.fn[name].widget = widget;
+
             $.fn[getter] = function() {
                 return this.data(name);
             };

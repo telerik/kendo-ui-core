@@ -299,15 +299,6 @@ test("combobox populates its list when the datasource changes", function() {
    equal(combobox.ul.children("li").first().text(), "foo");
 });
 
-test("dataAccessors are get from data attributes", function() {
-   var select = $('<select data-kendo-text-field="name" data-kendo-value-field="id"></select>');
-
-   combobox = new ComboBox(select, {autoBind: false});
-
-   equal(combobox.options.dataTextField, "name");
-   equal(combobox.options.dataValueField, "id");
-});
-
 test("template should render item directly if datatextField is empty string", function(){
     combobox = new ComboBox(input, { dataTextField : ""});
 
