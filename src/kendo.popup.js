@@ -39,6 +39,8 @@ var __meta__ = {
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = "down",
         DOCUMENT_ELEMENT = $(document.documentElement),
+        WINDOW = $(window),
+        SCROLL = "scroll",
         RESIZE_SCROLL = "resize scroll",
         cssPrefix = support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
@@ -202,7 +204,8 @@ var __meta__ = {
 
             if (!options.modal) {
                 DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
-                that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
+                that._scrollableParents().unbind(SCROLL, that._resizeProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
             }
 
             kendo.destroy(that.element.children());
@@ -247,9 +250,12 @@ var __meta__ = {
 
                     // this binding hangs iOS in editor
                     if (!(support.mobileOS.ios || support.mobileOS.android)) {
-                        this._scrollableParents()
-                            .unbind(RESIZE_SCROLL, that._resizeProxy)
-                            .bind(RESIZE_SCROLL, that._resizeProxy);
+                        // all elements in IE7/8 fire resize event, causing mayhem
+                        that._scrollableParents()
+                            .unbind(SCROLL, that._resizeProxy)
+                            .bind(SCROLL, that._resizeProxy);
+                        WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
+                              .bind(RESIZE_SCROLL, that._resizeProxy);
                     }
                 }
 
@@ -327,7 +333,8 @@ var __meta__ = {
                 });
 
                 DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
-                that._scrollableParents().unbind(RESIZE_SCROLL, that._resizeProxy);
+                that._scrollableParents().unbind(SCROLL, that._resizeProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
 
                 if (skipEffects) {
                     animation = { hide: true, effects: {} };
@@ -431,8 +438,7 @@ var __meta__ = {
                        .filter(function(index, element) {
                             var computedStyle = kendo.getComputedStyles(element, ["overflow"]);
                             return computedStyle.overflow != "visible";
-                       })
-                       .add(window);
+                       });
         },
 
         _position: function(fixed) {
