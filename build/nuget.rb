@@ -1,3 +1,5 @@
+require 'nuget_upload'
+
 NUGET_ROOT = 'dist/nuget/KendoUIWeb/'
 NUGET_CSS = NUGET_ROOT + "Content/kendo/#{VERSION}"
 NUGET_JS = NUGET_ROOT + "Scripts/kendo/#{VERSION}"
@@ -39,4 +41,8 @@ task :nuget => [NUGET_CSS, NUGET_JS] do
 
     sh "mono --runtime=v4.0 build/lib/NuGet.exe pack #{NUGET_SPEC} -OutputDirectory dist/nuget/"
     #sh"mono --runtime=v4.0 build/lib/NuGet.exe push dist/nuget/KendoUIWeb.#{VERSION}.nupkg"
+end
+desc 'Publish a NuGet package for Kendo UI Core on nuget.org'
+task :core_nuget_upload do
+  navigate_and_upload \
 end

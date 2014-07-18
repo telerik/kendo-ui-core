@@ -45,10 +45,13 @@ else
 
     SITE_URL = "http://www1.telerik.com"
     SITE_LOGIN = "stefan.rahnev@telerik.com"
+    NUGET_SITE_URL = "https://www.nuget.org/"
+    NUGET_SITE_LOGIN = "stefan.rahnev@telerik.com"
 end
 
 ADMIN_RELEASE_UPLOAD_PASS = "t3l3r1k@dm1n"
 SITE_DOWNLOAD_BUILDER_UPLOAD_PASS = "t3l3r1kc0m"
+NUGET_UPLOAD_PASS = "nug3t0rg"
 
 ROOT_MAP = {
     '.' => /(dist\/js|dist\/styles\/.+?)\//,
