@@ -1334,9 +1334,11 @@ var __meta__ = {
             }
 
             var result = $();
+            selection.events = [];
             for (idx = 0; idx < length; idx ++) {
                 if ($.inArray(groupEvents[idx].uid, events) > -1) {
                     result = result.add(groupEvents[idx].element);
+                    selection.events.push(groupEvents[idx].uid);
                 }
             }
 
