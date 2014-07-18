@@ -1302,6 +1302,8 @@ var __meta__ = {
                 if (options.alignToAnchor) {
                     that.open(ev.currentTarget);
                 } else {
+                    that.popup.options.anchor = ev.currentTarget;
+
                     if (that._targetChild) {
                         offset = that.target.offset();
                         that.open(ev.pageX - offset.left, ev.pageY - offset.top);
