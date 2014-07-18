@@ -274,7 +274,7 @@ def upload_release_file(bot, upload_id, full_path)
     bot.wait_for_element("##{upload_id} .ruRemove")
 end
 def release_build_file_copy(release_build, name, versioned_bundle_destination_path, versioned_bundle_archive_path)
-    return if (name == "core") && (defined? SERVICE_PACK_NUMBER)
+    return if (name == "core") && (SERVICE_PACK_NUMBER != nil)
     release_build_config = release_build[:file_metadata]
 
     if release_build_config[:zip]
@@ -303,6 +303,13 @@ def release_build_file_copy(release_build, name, versioned_bundle_destination_pa
       :archive => versioned_bundle_archive_path,
       :vbd => versioned_bundle_name(name),
       :extension => ".nupkg.zip"
+    end
+    #KUI Core nuget package for nuget.org
+    if (name == "core") && (SERVICE_PACK_NUMBER == nil)
+      build_path_and_copy \
+      :destination =>  versioned_bundle_destination_path,
+      :archive => versioned_bundle_archive_path,
+      :static_name => "KendoUICore.#{VERSION}.nupkg"   
     end
     if release_build[:download_builder]
       build_path_and_copy \
