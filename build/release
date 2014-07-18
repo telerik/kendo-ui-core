@@ -43,4 +43,9 @@ echo "git tag -d $VERSION"
 echo "git tag -a $VERSION -m 'Kendo UI: $VERSION_YEAR Q$VERSION_Q' core/master"
 echo "git push core $VERSION"
 
+echo "git --work-tree=docs --git-dir=docs/.git fetch origin"
+echo "git --work-tree=docs --git-dir=docs/.git tag -a $VERSION -m 'Kendo UI: $VERSION_YEAR Q$VERSION_Q' origin/master"
+echo "git --work-tree=docs --git-dir=docs/.git push origin $VERSION"
+echo "git --work-tree=docs --git-dir=docs/.git push --force origin origin/master:production"
+
 echo "Now, make sure that you update the version in VERSION file in master and core-master. After the official build release, you should also add the servicePack flag in production and core-production"
