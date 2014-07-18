@@ -274,11 +274,15 @@ var __meta__ = {
 
             functionBody += "o=";
 
-            parts = template
+            if (!window.angular) {
+                template = template
                 .replace(tripleCurlyBeginRegExp, "#:")
                 .replace(tripleCurlyEndRegExp, "#")
                 .replace(doubleCurlyBeginRegExp, "#=")
                 .replace(doubleCurlyEndRegExp, "#")
+            }
+
+            parts = template
                 .replace(escapedCurlyRegExp, "__CURLY__")
                 .replace(encodeRegExp, "#=e($1)#")
                 .replace(curlyRegExp, "}")
