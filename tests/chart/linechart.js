@@ -657,6 +657,14 @@
             equal(view.log.circle.length, 1);
         });
 
+        test("highlightOverlay returns marker when not initially visible", function() {
+            createPoint({ markers: { visible: false }});
+            view = new ViewStub();
+
+            point.highlightOverlay(view);
+            equal(view.log.circle.length, 1);
+        });
+
         test("outline element has same model id", function() {
             createPoint({ markers: { type: "circle" }});
             view = new ViewStub();
