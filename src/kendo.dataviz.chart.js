@@ -4658,7 +4658,12 @@ var __meta__ = {
                 visible: markers.visible
             });
 
-            var marker = this.marker || this.createMarker();
+            var marker = this.marker;
+            if (!marker) {
+                marker = this.createMarker();
+                marker.reflow(this._childBox);
+            }
+
             return marker.getViewElements(view, options)[0];
         },
 
