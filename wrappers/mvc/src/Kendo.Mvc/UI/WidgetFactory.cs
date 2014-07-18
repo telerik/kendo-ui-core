@@ -624,22 +624,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Creates a <see cref="TreeView"/>
-        /// </summary>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().TreeView()
-        ///             .Name("TreeView")
-        ///             .Items(items => { /* add items here */ });
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public virtual TreeViewBuilder TreeView()
-        {
-            return new TreeViewBuilder(new TreeView(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>()));
-        }
-
-        /// <summary>
         /// Creates a new <see cref="NumericTextBox"/>.
         /// </summary>
         /// <example>
@@ -1410,6 +1394,21 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual TreeMapBuilder TreeMap()
         {
             return new TreeMapBuilder(new TreeMap(ViewContext, Initializer, UrlGenerator));
+        }
+        
+        /// <summary>
+        /// Creates a <see cref="TreeView"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TreeView()
+        ///             .Name("TreeView")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TreeViewBuilder TreeView()
+        {
+            return new TreeViewBuilder(new TreeView(ViewContext, Initializer, UrlGenerator, DI.Current.Resolve<INavigationItemAuthorization>()));
         }
         //<< DataVizComponents
 

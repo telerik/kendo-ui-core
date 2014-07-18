@@ -38,31 +38,31 @@ namespace Kendo.Mvc.UI
             DataSource.ModelType(typeof(object));
 
             AutoBind = true;
+
+//>> Initialization
+        
+            Messages = new TreeViewMessagesSettings();
+                
+        //<< Initialization
         }
 
-        public string DataTextField
+//>> Fields
+        
+        public string DataImageUrlField { get; set; }
+        
+        public string DataSpriteCssClassField { get; set; }
+        
+        public string DataTextField { get; set; }
+        
+        public string DataUrlField { get; set; }
+        
+        public TreeViewMessagesSettings Messages
         {
             get;
             set;
         }
-
-        public string DataUrlField
-        {
-            get;
-            set;
-        }
-
-        public string DataSpriteCssClassField
-        {
-            get;
-            set;
-        }
-
-        public string DataImageUrlField
-        {
-            get;
-            set;
-        }
+        
+        //<< Fields
 
         public DataSource DataSource
         {
@@ -186,7 +186,7 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var json = new Dictionary<string, object>(Events);
 
             // use client-side rendering if templates are set
             if (Items.Any() && this.UsesTemplates())
@@ -197,46 +197,26 @@ namespace Kendo.Mvc.UI
 
             if (!string.IsNullOrEmpty(DataSource.Transport.Read.Url) || DataSource.Type == DataSourceType.Custom)
             {
-                options["dataSource"] = DataSource.ToJson();
+                json["dataSource"] = DataSource.ToJson();
             }
             else if (DataSource.Data != null)
             {
-                options["dataSource"] = DataSource.Data;
+                json["dataSource"] = DataSource.Data;
             }
 
             if (DragAndDrop)
             {
-                options["dragAndDrop"] = true;
+                json["dragAndDrop"] = true;
             }
 
             if (!AutoBind)
             {
-                options["autoBind"] = false;
+                json["autoBind"] = false;
             }
 
             if (!LoadOnDemand)
             {
-                options["loadOnDemand"] = false;
-            }
-
-            if (!string.IsNullOrEmpty(DataTextField))
-            {
-                options["dataTextField"] = DataTextField;
-            }
-
-            if (!string.IsNullOrEmpty(DataUrlField))
-            {
-                options["dataUrlField"] = DataUrlField;
-            }
-
-            if (!string.IsNullOrEmpty(DataSpriteCssClassField))
-            {
-                options["dataSpriteCssClassField"] = DataSpriteCssClassField;
-            }
-
-            if (!string.IsNullOrEmpty(DataImageUrlField))
-            {
-                options["dataImageUrlField"] = DataImageUrlField;
+                json["loadOnDemand"] = false;
             }
 
             var idPrefix = "#";
@@ -247,28 +227,58 @@ namespace Kendo.Mvc.UI
 
             if (!string.IsNullOrEmpty(TemplateId))
             {
-                options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, TemplateId) };
+                json["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, TemplateId) };
             }
             else if (!string.IsNullOrEmpty(Template))
             {
-                options["template"] = Template;
+                json["template"] = Template;
             }
 
             var checkboxes = Checkboxes.ToJson();
 
             if (checkboxes.Keys.Any())
             {
-                options["checkboxes"] = checkboxes["checkboxes"];
+                json["checkboxes"] = checkboxes["checkboxes"];
             }
 
             var animation = Animation.ToJson();
 
             if (animation.Keys.Any())
             {
-                options["animation"] = animation["animation"];
+                json["animation"] = animation["animation"];
             }
 
-            writer.Write(Initializer.Initialize(Selector, "TreeView", options));
+//>> Serialization
+        
+            if (DataImageUrlField.HasValue())
+            {
+                json["dataImageUrlField"] = DataImageUrlField;
+            }
+            
+            if (DataSpriteCssClassField.HasValue())
+            {
+                json["dataSpriteCssClassField"] = DataSpriteCssClassField;
+            }
+            
+            if (DataTextField.HasValue())
+            {
+                json["dataTextField"] = DataTextField;
+            }
+            
+            if (DataUrlField.HasValue())
+            {
+                json["dataUrlField"] = DataUrlField;
+            }
+            
+            var messages = Messages.ToJson();
+            if (messages.Any())
+            {
+                json["messages"] = messages;
+            }
+                
+        //<< Serialization
+
+            writer.Write(Initializer.Initialize(Selector, "TreeView", json));
 
             base.WriteInitializationScript(writer);
         }

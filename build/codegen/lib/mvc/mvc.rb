@@ -80,6 +80,14 @@ module CodeGen::MVC::Wrappers
         'gantt.datasource',
         'gantt.dependencies',
         'gantt.columns',
+        'treeview.items',
+        'treeview.autobind',
+        'treeview.animation',
+        'treeview.draganddrop',
+        'treeview.loadondemand',
+        'treeview.datasource',
+        'treeview.checkboxes',
+        'treeview.template',
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
 		'diagram.datasource',
@@ -185,7 +193,7 @@ module CodeGen::MVC::Wrappers
         /// </example>
         public virtual <%= csharp_class %>Builder<%= csharp_generic_args %> <%= csharp_class %><%= csharp_generic_args %>()<%= csharp_generic_constraints %>
         {
-            return new <%= csharp_class %>Builder<%= csharp_generic_args %>(new <%= csharp_class %><%= csharp_generic_args %>(ViewContext, Initializer, UrlGenerator));
+            return new <%= csharp_class %>Builder<%= csharp_generic_args %>(new <%= csharp_class %><%= csharp_generic_args %>(ViewContext, Initializer, UrlGenerator<%= csharp_init_args %>));
         }
         })
 
@@ -411,6 +419,12 @@ module CodeGen::MVC::Wrappers
             return unless args
 
             args.map { |name, type| " where #{name} : #{type}" } .join(' ')
+        end
+
+        def csharp_init_args
+            return ", DI.Current.Resolve<INavigationItemAuthorization>()" if name == 'TreeView'
+
+            return ""
         end
 
         def component_template

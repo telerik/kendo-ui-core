@@ -2220,4 +2220,8 @@
     <Compile Include="UI\Diagram\Settings\DiagramShapeHoverFillSettings.cs" />
     <Compile Include="UI\Diagram\Fluent\DiagramShapeHoverFillSettingsBuilder.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\TreeView\Settings\TreeViewMessagesSettings.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewMessagesSettingsBuilder.cs" />
+  </ItemGroup>
 </Project>
