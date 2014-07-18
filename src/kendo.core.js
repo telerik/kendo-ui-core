@@ -2836,7 +2836,7 @@ function pad(number, digits, end) {
 
     function resizableWidget() {
         var widget = $(this);
-        return ($.inArray(widget.attr("data-role"), ["slider", "rangeslider"]) > 0) || widget.is(":visible");
+        return ($.inArray(widget.attr("data-" + kendo.ns + "role"), ["slider", "rangeslider"]) > -1) || widget.is(":visible");
     }
 
     kendo.resize = function(element, force) {
