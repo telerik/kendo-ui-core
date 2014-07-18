@@ -82,7 +82,7 @@ def upload_package(bot, archive_path)
     sleep(5)
 
     click_element(bot.find("[value='Save']"))
-    sleep(5)
+    sleep(7)
 
     bot.wait_for_validation("//span[contains(text(), 'Kendo UI Core #{VERSION}')]")
 end
