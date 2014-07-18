@@ -184,5 +184,29 @@
         ok(menu.popup.visible());
     });
 
+    test('events should pass the current target regardless of alignToAnchor', function () {
+        menu.setOptions({
+            filter: ".filter",
+            showOn: "click"
+        });
+
+        menu.bind("select", function (e) {
+            ok(e.target = $(".filter")[0]);
+        });
+
+        $(".filter").click();
+        $("#menu > li").eq(0).click();
+
+        menu.setOptions({
+            filter: ".filter",
+            showOn: "click",
+            alignToAnchor: true
+        });
+
+        $(".filter").click();
+        $("#menu > li").eq(0).click();
+
+    });
+
 })();
 
