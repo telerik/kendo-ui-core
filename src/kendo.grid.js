@@ -3521,7 +3521,7 @@ var __meta__ = {
                 that.angular("compile", function(){
                     return {
                         elements: footer.find("td").get(),
-                        data: that.columns.map(function(col, i){
+                        data: map(that.columns, function(col, i){
                             return {
                                 column: col,
                                 aggregate: aggregates[col.field]
@@ -4467,7 +4467,7 @@ var __meta__ = {
             this.angular("compile", function(){
                 return {
                     elements: thead.find("th").get(),
-                    data: columns.map(function(col){ return { column: col }; })
+                    data: map(columns, function(col){ return { column: col }; })
                 };
             });
 
