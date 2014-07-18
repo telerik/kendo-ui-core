@@ -279,7 +279,7 @@ var __meta__ = {
                 .replace(tripleCurlyBeginRegExp, "#:")
                 .replace(tripleCurlyEndRegExp, "#")
                 .replace(doubleCurlyBeginRegExp, "#=")
-                .replace(doubleCurlyEndRegExp, "#")
+                .replace(doubleCurlyEndRegExp, "#");
             }
 
             parts = template
