@@ -73,7 +73,7 @@ def navigate_and_upload()
     bot.driver.quit
 end
 def upload_package(bot, archive_path)
-    full_path = archive_path + "/KendoUICore.#{VERSION}.nupkg", File.join(File.dirname(__FILE__), ".."))
+    full_path = archive_path + "/KendoUICore.#{VERSION}.nupkg", File.join(File.dirname(__FILE__), "..")
     
     bot.send_keys_to_target(bot.find('input[type=file]'), full_path)  
     sleep(2)
