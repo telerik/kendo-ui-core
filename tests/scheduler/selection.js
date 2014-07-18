@@ -732,6 +732,61 @@
         });
     });
 
+    test("events from previous group are removed", 2, function() {
+        var today = kendo.date.today();
+        var end = new Date(today);
+        end.setHours(1);
+
+        setupWidget({
+            dataSource: [
+        { roomId: 1, roomId: 1, start: today, end: end, title: "Test Room 101" },
+            { roomId: 2, roomId: 2, start: today, end: end, title: "Test Room 201" }
+        ],
+            group: {
+                resources: ["Rooms"]
+            },
+            resources: [
+        {
+            field: "roomId",
+            name: "Rooms",
+            dataSource: [
+        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+            { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+        ],
+            valuePrimitive: true,
+            title: "Room"
+        }
+        ]
+        });
+
+
+        var event = scheduler.wrapper.find(".k-event").eq(0);
+
+        event.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+
+        scheduler.bind("change", function(selection) {
+            var dataItem = scheduler.dataSource.view()[0];
+
+            equal(selection.events.length, 1);
+            equal(selection.events[0].uid, scheduler.wrapper.find(".k-event").eq(1).data("uid"));
+        });
+
+        scheduler.wrapper.trigger({
+            ctrlKey: true,
+            type: "keydown"
+        });
+
+        event = scheduler.wrapper.find(".k-event").eq(1);
+
+        event.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+    });
+
     test("Scheduler pre-sets resources on view selection", function() {
         var today = kendo.date.today();
         var end = new Date(today);
