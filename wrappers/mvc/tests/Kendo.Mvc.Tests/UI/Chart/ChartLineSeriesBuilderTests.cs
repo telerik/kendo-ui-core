@@ -279,8 +279,8 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Highlight_with_builder_should_configure_highlight()
         {
-            builder.Highlight(highlight => { highlight.Markers(m => m.Background("green")); });
-            series.Highlight.Markers.Background.ShouldEqual("green");
+            builder.Highlight(highlight => { highlight.Visible(false); });
+            series.Highlight.Visible.ShouldEqual(false);
         }
 
         [Fact]

@@ -16,27 +16,5 @@ namespace Kendo.Mvc.UI.Fluent
             : base(highlight)
         {
         }
-        
-        /// <summary>
-        /// Configures the line chart markers for highlighted points.
-        /// </summary>
-        /// <param name="configurator">The configuration action.</param>
-        public ChartLineSeriesHighlightBuilder Markers(Action<ChartMarkersBuilder> configurator)
-        {
-            configurator(new ChartMarkersBuilder(Highlight.Markers));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the visibility of line chart markers for highlighted points.
-        /// </summary>
-        /// <param name="visible">The visibility. The default value is true.</param>
-        public ChartLineSeriesHighlightBuilder Markers(bool visible)
-        {
-            Highlight.Markers.Visible = visible;
-
-            return this;
-        }
     }
 }

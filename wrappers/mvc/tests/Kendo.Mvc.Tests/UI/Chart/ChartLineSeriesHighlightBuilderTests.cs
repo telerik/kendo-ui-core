@@ -16,16 +16,16 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
-        public void Markers_should_set_markers_visibility()
+        public void Visible_should_set_visibility()
         {
-            builder.Markers(true);
-            highlight.Markers.Visible.ShouldEqual(true);
+            builder.Visible(false);
+            highlight.Visible.ShouldEqual(false);
         }
 
         [Fact]
-        public void Markers_should_return_builder()
+        public void Visible_should_return_builder()
         {
-            builder.Markers(labels => { }).ShouldBeSameAs(builder);
+            builder.Visible(true).ShouldBeSameAs(builder);
         }
     }
 }
