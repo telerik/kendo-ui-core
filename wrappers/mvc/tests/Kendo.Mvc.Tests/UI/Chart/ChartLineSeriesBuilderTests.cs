@@ -275,5 +275,18 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.NoteTextField("NoteText").ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Highlight_with_builder_should_configure_highlight()
+        {
+            builder.Highlight(highlight => { highlight.Visible(false); });
+            series.Highlight.Visible.ShouldEqual(false);
+        }
+
+        [Fact]
+        public void Highlight_with_builder_should_return_builder()
+        {
+            builder.Highlight(highlight => { }).ShouldBeSameAs(builder);
+        }
     }
 }
