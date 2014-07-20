@@ -187,6 +187,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("valueField", value);
     }
 
+    public float getZindex() {
+        return (float)getProperty("zIndex");
+    }
+
+    public void setZindex(float value) {
+        setProperty("zIndex", value);
+    }
+
 //<< Attributes
 
 }

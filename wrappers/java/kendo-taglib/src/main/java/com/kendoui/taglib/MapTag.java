@@ -69,6 +69,10 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     }
 
+    public void setBeforeReset(BeforeResetFunctionTag value) {
+        setEvent("beforeReset", value.getBody());
+    }
+
     public void setClick(ClickFunctionTag value) {
         setEvent("click", value.getBody());
     }
@@ -175,6 +179,18 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setZoomable(boolean value) {
         setProperty("zoomable", value);
+    }
+
+    public String getBeforeReset() {
+        Function property = ((Function)getProperty("beforeReset"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setBeforeReset(String value) {
+        setProperty("beforeReset", new Function(value));
     }
 
     public String getClick() {

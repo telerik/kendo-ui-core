@@ -161,6 +161,15 @@ The data item field should be a number.
     }
 
     /**
+    * The zIndex for this layer.Layers are normally stacked in declaration order (last one is on top).
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function zIndex($value) {
+        return $this->setProperty('zIndex', $value);
+    }
+
+    /**
     * The layer type. Supported types are "tile", "bing", "shape", "marker" and "bubble".
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer

@@ -18122,6 +18122,12 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Fired immediately before the map is reset.
+This event is typically used for cleanup by layer implementers.</description>
+            <name>beforeReset</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired when the user clicks on the map.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18808,6 +18814,12 @@ The data item field should be a number.</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>The zIndex for this layer.Layers are normally stacked in declaration order (last one is on top).</description>
+            <name>zindex</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
     </tag>
 
     <tag>
@@ -19292,6 +19304,13 @@ will disable all animations in the widget.</description>
 
 
 
+    <tag>
+        <description>Fired immediately before the map is reset.
+This event is typically used for cleanup by layer implementers.</description>
+        <name>map-beforeReset</name>
+        <tag-class>com.kendoui.taglib.map.BeforeResetFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>Fired when the user clicks on the map.</description>
         <name>map-click</name>

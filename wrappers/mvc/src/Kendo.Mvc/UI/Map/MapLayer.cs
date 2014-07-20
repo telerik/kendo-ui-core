@@ -65,9 +65,13 @@ namespace Kendo.Mvc.UI
             set;
         }
         
+        public string UrlTemplate { get; set; }
+
         public string UrlTemplateId { get; set; }
         
         public string ValueField { get; set; }
+        
+        public double? ZIndex { get; set; }
         
         public MapLayerType? Type { get; set; }
         
@@ -154,16 +158,30 @@ namespace Kendo.Mvc.UI
                 json["style"] = style;
             }
                 
-            if (UrlTemplateId.HasValue())
+            if (!string.IsNullOrEmpty(UrlTemplateId))
             {
-                json["urlTemplate"] = UrlTemplateId;
+                json["urlTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        UrlTemplateId
+                    )
+                };
             }
-            
+            else if (!string.IsNullOrEmpty(UrlTemplate))
+            {
+                json["urlTemplate"] = UrlTemplate;
+            }
+                
             if (ValueField.HasValue())
             {
                 json["valueField"] = ValueField;
             }
             
+            if (ZIndex.HasValue)
+            {
+                json["zIndex"] = ZIndex;
+            }
+                
             if (Type.HasValue)
             {
                 json["type"] = Type;

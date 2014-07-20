@@ -16,6 +16,18 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Handlers
         
         /// <summary>
+        /// Fired immediately before the map is reset.
+		/// This event is typically used for cleanup by layer implementers.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the beforeReset event.</param>
+        public MapEventBuilder BeforeReset(string handler)
+        {
+            Handler("beforeReset", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired when the user clicks on the map.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the click event.</param>

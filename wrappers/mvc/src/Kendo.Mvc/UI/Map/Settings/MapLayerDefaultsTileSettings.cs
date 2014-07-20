@@ -20,6 +20,8 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public string UrlTemplate { get; set; }
+
         public string UrlTemplateId { get; set; }
         
         public string Attribution { get; set; }
@@ -32,11 +34,20 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (UrlTemplateId.HasValue())
+            if (!string.IsNullOrEmpty(UrlTemplateId))
             {
-                json["urlTemplate"] = UrlTemplateId;
+                json["urlTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        UrlTemplateId
+                    )
+                };
             }
-            
+            else if (!string.IsNullOrEmpty(UrlTemplate))
+            {
+                json["urlTemplate"] = UrlTemplate;
+            }
+                
             if (Attribution.HasValue())
             {
                 json["attribution"] = Attribution;
