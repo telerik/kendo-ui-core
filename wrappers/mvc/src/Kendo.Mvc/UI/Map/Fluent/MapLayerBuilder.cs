@@ -160,7 +160,18 @@ using System.Web.Mvc;
         /// <summary>
         /// The URL template for tile layers. Template variables:
         /// </summary>
-        /// <param name="value">The value that configures the urltemplateid.</param>
+        /// <param name="value">The value that configures the urltemplate.</param>
+        public MapLayerBuilder UrlTemplate(string value)
+        {
+            container.UrlTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The URL template for tile layers. Template variables:
+        /// </summary>
+        /// <param name="value">The value that configures the urltemplate.</param>
         public MapLayerBuilder UrlTemplateId(string value)
         {
             container.UrlTemplateId = value;
@@ -176,6 +187,17 @@ using System.Web.Mvc;
         public MapLayerBuilder ValueField(string value)
         {
             container.ValueField = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The zIndex for this layer.Layers are normally stacked in declaration order (last one is on top).
+        /// </summary>
+        /// <param name="value">The value that configures the zindex.</param>
+        public MapLayerBuilder ZIndex(double value)
+        {
+            container.ZIndex = value;
 
             return this;
         }

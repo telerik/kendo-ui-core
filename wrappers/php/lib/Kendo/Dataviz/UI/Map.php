@@ -128,6 +128,21 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
     }
 
     /**
+    * Sets the beforeReset event of the Map.
+    * Fired immediately before the map is reset.
+This event is typically used for cleanup by layer implementers.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function beforeReset($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('beforeReset', $value);
+    }
+
+    /**
     * Sets the click event of the Map.
     * Fired when the user clicks on the map.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
