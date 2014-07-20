@@ -75,6 +75,19 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Should_serialize_marker_settings()
+        {
+            highlight.Markers.Background = "green";
+            GetJson().ContainsKey("markers").ShouldEqual(true);
+        }
+
+        [Fact]
+        public void Should_not_serialize_marker_settings_by_default()
+        {
+            GetJson().ContainsKey("markers").ShouldEqual(false);
+        }
+
+        [Fact]
         public void Should_serialize_visible()
         {
             highlight.Visible = false;

@@ -28,6 +28,12 @@ namespace Kendo.Mvc.UI
                 result.Add("border", borderData);
             }
 
+            var markersData = highlight.Markers.CreateSerializer().Serialize();
+            if (markersData.Count > 0)
+            {
+                result.Add("markers", markersData);
+            }
+
             var lineData = highlight.Line.CreateSerializer().Serialize();
             if (lineData.Count > 0)
             {

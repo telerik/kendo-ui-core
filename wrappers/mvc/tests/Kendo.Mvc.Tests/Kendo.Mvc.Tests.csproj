@@ -127,6 +127,7 @@
     <Compile Include="UI\Chart\ChartFunnelSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\BoxPlotData.cs" />
     <Compile Include="UI\Chart\ChartBoxPlotSeriesBuilderTests.cs" />
+    <Compile Include="UI\Chart\ChartLineSeriesHighlightBuilderTests.cs" />
     <Compile Include="UI\Chart\ScatterErrorBarsBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\CategoricalErrorBarsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />

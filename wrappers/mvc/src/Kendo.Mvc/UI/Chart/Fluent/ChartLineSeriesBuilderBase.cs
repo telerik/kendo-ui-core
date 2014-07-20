@@ -312,5 +312,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return (TSeriesBuilder)this;
         }
+
+        /// <summary>
+        /// Configures the series highlight
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>        
+        public TSeriesBuilder Highlight(Action<ChartLineSeriesHighlightBuilder> configurator)
+        {
+            configurator(new ChartLineSeriesHighlightBuilder(Series.Highlight));
+            return this as TSeriesBuilder;
+        }
     }
 }
