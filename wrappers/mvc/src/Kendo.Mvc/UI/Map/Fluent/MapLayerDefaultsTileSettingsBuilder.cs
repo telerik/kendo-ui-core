@@ -22,7 +22,18 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// The URL template for tile layers. Template variables:
         /// </summary>
-        /// <param name="value">The value that configures the urltemplateid.</param>
+        /// <param name="value">The value that configures the urltemplate.</param>
+        public MapLayerDefaultsTileSettingsBuilder UrlTemplate(string value)
+        {
+            container.UrlTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The URL template for tile layers. Template variables:
+        /// </summary>
+        /// <param name="value">The value that configures the urltemplate.</param>
         public MapLayerDefaultsTileSettingsBuilder UrlTemplateId(string value)
         {
             container.UrlTemplateId = value;
