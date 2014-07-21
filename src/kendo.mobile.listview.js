@@ -453,7 +453,7 @@ var __meta__ = {
 
     var VirtualListViewItem = kendo.Class.extend({
         init: function(listView, dataItem) {
-            var element = listView.append([dataItem])[0],
+            var element = listView.append([dataItem], true)[0],
                 height = element.offsetHeight;
 
             $.extend(this, {
@@ -1022,7 +1022,7 @@ var __meta__ = {
             }
         },
 
-        insertAt: function(dataItems, index) {
+        insertAt: function(dataItems, index, triggerChange) {
             var listView = this;
             return listView._renderItems(dataItems, function(items) {
                 if (index === 0) {
@@ -1033,6 +1033,13 @@ var __meta__ = {
                 } else {
                     listView.items().eq(index - 1).after(items);
                 }
+
+                if (triggerChange) {
+                    for (var i = 0; i < items.length; i ++) {
+                        listView.trigger(ITEM_CHANGE, { item: items.eq(i), data: dataItems[i], ns: ui });
+                    }
+                }
+
                 listView.angular("compile", function(){
                     return {
                         elements: items,
@@ -1044,12 +1051,12 @@ var __meta__ = {
             });
         },
 
-        append: function(dataItems) {
-            return this.insertAt(dataItems, -1);
+        append: function(dataItems, triggerChange) {
+            return this.insertAt(dataItems, -1, triggerChange);
         },
 
-        prepend: function(dataItems) {
-            return this.insertAt(dataItems, 0);
+        prepend: function(dataItems, triggerChange) {
+            return this.insertAt(dataItems, 0, triggerChange);
         },
 
         replace: function(dataItems) {
