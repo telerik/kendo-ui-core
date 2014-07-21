@@ -753,6 +753,10 @@ var __meta__ = {
                 hideOptions = options.animation.close;
 
             if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered })) {
+                if (that._closing) {
+                    return;
+                }
+
                 that._closing = true;
                 options.visible = false;
 
