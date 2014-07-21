@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Html.Tests
             var toolBar = builder.CreateToolBar(Enumerable.Empty<IGridButtonBuilder>());
 
             toolBar.TagName.ShouldEqual("div");
-            toolBar.Attribute("class").ShouldContain(UIPrimitives.ToolBar);
+            toolBar.Attribute("class").ShouldContain(UIPrimitives.Header);
             toolBar.Attribute("class").ShouldContain(UIPrimitives.Grid.ToolBar);
         }
     }
