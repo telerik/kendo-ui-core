@@ -323,20 +323,23 @@ var __meta__ = {
                 e.preventDefault();
             } else if (key === keys.ENTER) {
                 this._change();
-                e.preventDefault();
             }
         },
 
         _keypress: function(e) {
-            if (e.which === 0 || e.ctrlKey) {
+            if (e.which === 0 || e.ctrlKey || e.keyCode === keys.ENTER) {
                 return;
             }
 
+            var character = String.fromCharCode(e.which);
+
             var selection = caret(this.element);
 
-            this._mask(selection[0], selection[1], String.fromCharCode(e.which));
+            this._mask(selection[0], selection[1], character);
 
-            e.preventDefault();
+            if (e.keyCode === keys.BACKSPACE || character) {
+                e.preventDefault();
+            }
         },
 
         _find: function(idx, backward) {

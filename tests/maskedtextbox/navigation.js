@@ -306,6 +306,25 @@
         equal(caret(input[0])[0], 0);
     });
 
+    test("MaskedTextBox does not prevent ENTER", 0, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "0-0"
+        });
+
+        input.focus();
+        input.val("2-2");
+        caret(input[0], 3);
+
+        input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER,
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
+
     asyncTest("MaskedTextBox supports pasting a valid value", 2, function() {
         var maskedtextbox = new MaskedTextBox(input, {
             mask: "0000"
