@@ -1723,6 +1723,7 @@ var __meta__ = {
             $(this.wrapper)
                 .on("mousedown" + NS, "tr" + attr + ", div" + attr, function(e) {
                     var currentTarget = $(e.currentTarget);
+                    var isInput = $(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap");
                     var current;
 
                     if (e.ctrlKey) {
@@ -1740,7 +1741,7 @@ var __meta__ = {
                         that._current(current);
                     }
 
-                    if (navigatable || editable) {
+                    if ((navigatable || editable) && !isInput) {
                         setTimeout(function() {
                             focusTable(that.list.content.find("table"), true);
                         }, 2);
