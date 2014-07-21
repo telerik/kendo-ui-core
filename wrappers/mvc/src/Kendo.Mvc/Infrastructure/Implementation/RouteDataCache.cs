@@ -163,7 +163,7 @@
             {
                 result = appCurrentUrl;
             }
-            else
+            else if (appVirtualPathLength <= appCurrentUrl.Length)
             {
                 result = appCurrentUrl.Substring(appVirtualPathLength);
             }
