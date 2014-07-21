@@ -211,6 +211,23 @@
         equal(observable.calls("rootHandler"), 1);
     });
 
+    test("binds event handlers in template to root view model when item changes", function() {
+        dom = $('<div data-role="scroller"><ul data-role="listview" data-template="template-with-events" data-endless-scroll="true" data-virtual-view-size="2" data-bind="source:dataSource" /></div>');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        stub(observable, "rootHandler");
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        dom.find("li strong").click();
+
+        equal(observable.calls("rootHandler"), 1);
+    });
+
+
     test("template with links styles the links when item changes", 2, function() {
         dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
 
