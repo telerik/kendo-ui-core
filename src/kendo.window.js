@@ -1219,7 +1219,7 @@ var __meta__ = {
         var that = this;
         that.owner = wnd;
         that._draggable = new Draggable(wnd.wrapper, {
-            filter: KWINDOWRESIZEHANDLES,
+            filter: ">" + KWINDOWRESIZEHANDLES,
             group: wnd.wrapper.id + "-resizing",
             dragstart: proxy(that.dragstart, that),
             drag: proxy(that.drag, that),
