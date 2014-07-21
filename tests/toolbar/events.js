@@ -582,5 +582,19 @@
         ok(toolbar.popup.element.is(":visible"));
     });
 
+    test("_overflow suffix is removed from the ID in click event data", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" }
+            ],
+            click: function(e) {
+                equal(e.id, "foo", "_overflow is removed.");
+            }
+        }).data("kendoToolBar");
+
+        var button = toolbar.popup.element.find("#foo_overflow");
+
+        click(button);
+    });
 
 })();
