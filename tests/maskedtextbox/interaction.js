@@ -203,4 +203,41 @@
         });
     });
 
+    test("MaskedTextBox doesn't show promptChar", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000-0000",
+            clearPromptChar: true,
+            value: "123"
+        });
+
+        equal(maskedtextbox.value(), "(123)    -    ");
+    });
+
+    asyncTest("MaskedTextBox shows promptChar on focus", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000-0000",
+            clearPromptChar: true,
+            value: "123"
+        });
+
+        input.focus();
+
+        setTimeout(function() {
+            start();
+            equal(maskedtextbox.value(), "(123) ___-____");
+        });
+    });
+
+    test("MaskedTextBox shows promptChar on focus", 1, function() {
+        var maskedtextbox = new MaskedTextBox(input, {
+            mask: "(000) 000-0000",
+            clearPromptChar: true,
+            value: "123"
+        });
+
+        input.focus();
+        input.focusout();
+
+        equal(maskedtextbox.value(), "(123)    -    ");
+    });
 })();
