@@ -84,6 +84,10 @@ test("opening list when there is no comment", function() {
     equal(clean('<p style="text-indent: -0.25in;" class="MsoListParagraphCxSpFirst"><span style="font-family: Symbol;"><span style="">o<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>foo</p>'), '<ul><li>foo</li></ul>');
 });
 
+test("list with letters", function() {
+    equal(clean('<p class="MsoNormal" style="text-align:justify;line-height:115%"><span lang="EN-GB" style="font-size:8.0pt;line-height:115%;mso-ansi-language:EN-GB">a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; foo<o:p></o:p></span></p><p class="MsoNormal" style="text-align:justify;line-height:115%"><span lang="EN-GB" style="font-size:8.0pt;line-height:115%;mso-ansi-language:EN-GB">b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bar<o:p></o:p></span></p>'), '<ol><li>foo</li><li>bar</li></ol>');
+});
+
 test("comments removed", function() {
     equal(clean('<!--[if gte vml 1]>foo<![endif]-->'), '');
 });
