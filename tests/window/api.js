@@ -107,6 +107,22 @@
         ok(dialog.wrapper.prev("div").is(".k-overlay"));
     });
 
+    test("closing window from close handler", 1, function() {
+        var dialog = createWindow({
+                modal: true,
+                close: function(e) {
+                    if (e.userTriggered) {
+                        this.close();
+                    }
+                },
+                deactivate: function() {
+                    ok(true);
+                }
+            });
+
+        dialog.wrapper.find(".k-i-close").click();
+    });
+
     test("closing a modal window moves overlay below previous window", function() {
         function resumeTest() {
             window.setTimeout(function(){
