@@ -709,7 +709,7 @@ var __meta__ = {
                 var that = this, popup,
                     target, splitContainer,
                     isDisabled, isChecked,
-                    group, handler, eventData;
+                    group, handler, eventData, id;
 
                 e.preventDefault();
 
@@ -734,19 +734,21 @@ var __meta__ = {
                     return;
                 }
 
+                id = target.attr("id") ? target.attr("id").replace(/(_overflow$)/, "") : undefined;
+
                 if (target.hasClass(TOGGLE_BUTTON)) {
                     group = target.data("group");
                     handler = isFunction(target.data("toggle")) ? target.data("toggle") : null;
 
                     that.toggle(target);
                     isChecked = target.hasClass(STATE_ACTIVE);
-                    eventData = { target: target, group: group, checked: isChecked, id: target.attr("id") };
+                    eventData = { target: target, group: group, checked: isChecked, id: id };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(TOGGLE, eventData);
                 } else {
                     handler = isFunction(target.data("click")) ? target.data("click") : null;
-                    eventData = { target: target, id: target.attr("id") };
+                    eventData = { target: target, id: id };
 
                     if (handler) { handler.call(that, eventData); }
                     that.trigger(CLICK, eventData);
