@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Html
 
         private IHtmlNode CreateWrapper(Action<IHtmlNode> appendContent)
         {
-            var toolbar = new HtmlElement("div").AddClass(UIPrimitives.ToolBar, UIPrimitives.Grid.ToolBar);
+            var toolbar = new HtmlElement("div").AddClass(UIPrimitives.Header, UIPrimitives.Grid.ToolBar);
             
             appendContent(toolbar);
 
