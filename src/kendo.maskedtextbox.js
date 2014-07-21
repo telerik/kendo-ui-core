@@ -46,11 +46,14 @@ var __meta__ = {
                 .attr("autocomplete", "off")
                 .on("focus" + ns, function() {
                     var value = DOMElement.value;
-                    that._oldValue = value;
 
                     if (!value) {
                         DOMElement.value = that._old = that._emptyMask;
+                    } else {
+                        that._togglePrompt(true);
                     }
+
+                    that._oldValue = value;
 
                     that._timeoutId = setTimeout(function() {
                         caret(element, 0, value ? that._maskLength : 0);
@@ -67,6 +70,7 @@ var __meta__ = {
                     }
 
                     that._change();
+                    that._togglePrompt();
                 });
 
              var disabled = element.is("[disabled]");
@@ -85,6 +89,7 @@ var __meta__ = {
         options: {
             name: "MaskedTextBox",
             promptChar: "_",
+            clearPromptChar: false,
             culture: "",
             rules: {},
             value: "",
@@ -137,6 +142,7 @@ var __meta__ = {
         value: function(value) {
             var element = this.element;
             var emptyMask = this._emptyMask;
+            var options = this.options;
 
             if (value === undefined) {
                 return this.element.val();
@@ -153,8 +159,30 @@ var __meta__ = {
 
             this._mask(0, this._maskLength, value);
 
-            if (kendo._activeElement() !== element && element.val() === emptyMask) {
-                element.val("");
+            value = element.val();
+            this._oldValue = value;
+
+            if (kendo._activeElement() !== element) {
+                if (value === emptyMask) {
+                    element.val("");
+                } else {
+                    this._togglePrompt();
+                }
+            }
+        },
+
+        _togglePrompt: function(show) {
+            var DOMElement = this.element[0];
+            var value = DOMElement.value;
+
+            if (this.options.clearPromptChar) {
+                if (!show) {
+                    value = value.replace(new RegExp(this.options.promptChar, "g"), " ");
+                } else {
+                    value = this._oldValue;
+                }
+
+                DOMElement.value = this._old = value;
             }
         },
 
