@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <style> body { font: 12px arial } </style>
+
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery",
+        "../src/angular",
+        "../src/kendo.grid",
+        "../src/kendo.menu",
+        "../src/kendo.editor",
+        "../src/kendo.angular"
+      ]);
+    </script>
+  </head>
+
+  <body ng-app="App" ng-controller="Ctrl">
+
+    <kendo-grid options="gridOptions"></kendo-grid>
+
+    <script>
+      var app = angular.module("App", [ "kendo.directives" ]);
+      app.controller("Ctrl", [ "$scope", function($scope){
+
+        var data = Object.keys(requireSync.LOADED).map(function(key){
+          var x = requireSync.LOADED[key];
+          return {
+            url: key,
+            start: x.start,
+            stop: x.stop,
+            time: x.time
+          };
+        });
+
+        $scope.gridOptions = {
+          dataSource: data,
+          sortable: true,
+          selectable: true,
+          columns: [
+            { title: "URL", field: "url" },
+            { title: "Load time", field: "time" }
+          ]
+        };
+
+      }]);
+    </script>
+  </body>
+</html>
