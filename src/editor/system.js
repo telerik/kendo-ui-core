@@ -696,6 +696,21 @@ var MSWordFormatCleaner = Cleaner.extend({
         }
     },
 
+    _convertToLi: function(p) {
+        var content;
+
+        if (p.childNodes.length == 1) {
+            content = p.firstChild.innerHTML.replace(/^\w+[\.\)](&nbsp;)+ /, "");
+        } else {
+            dom.remove(p.firstChild);
+            content = p.innerHTML;
+        }
+
+        dom.remove(p);
+
+        return dom.create(document, 'li', { innerHTML: content });
+    },
+
     lists: function(placeholder) {
         var blockChildren = $(dom.blockElements.join(','), placeholder),
             lastMargin = -1,
@@ -750,10 +765,9 @@ var MSWordFormatCleaner = Cleaner.extend({
                 }
             }
 
-            dom.remove(p.firstChild);
-            li = dom.create(document, 'li', {innerHTML:p.innerHTML});
+            li = this._convertToLi(p);
+
             list.appendChild(li);
-            dom.remove(p);
             lastMargin = margin;
             lastType = type;
         }
