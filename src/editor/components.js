@@ -14,12 +14,13 @@ var SelectBox = DropDownList.extend({
 
         DropDownList.fn.init.call(that, element, options);
 
-        that.value(that.options.title);
-
         // overlay drop-down with popout for snappier interaction
         if (kendo.support.mobileOS.ios) {
-            that._initSelectOverlay();
+            this._initSelectOverlay();
+            this.bind("dataBound", $.proxy(this._initSelectOverlay, this));
         }
+
+        that.value(that.options.title);
 
         that.bind("open", function() {
             if (that.options.autoSize) {
@@ -50,38 +51,36 @@ var SelectBox = DropDownList.extend({
     },
 
     _initSelectOverlay: function() {
-        var element = $(this.element);
-        var select = $("<select class='k-select-overlay' />");
-        var wrapper = element.closest(".k-widget");
         var selectBox = this;
+        var value = selectBox.value();
+        var view = this.dataSource.view();
+        var item;
+        var html = "";
+        var encode = kendo.htmlEncode;
+
+        for (var i = 0; i < view.length; i++) {
+            item = view[i];
+
+            html += "<option value='" + encode(item.value) + "'";
+
+            if (item.value == value) {
+                html += " selected";
+            }
+
+            html += ">" + encode(item.text) + "</option>";
+        }
+
+        var select = $("<select class='k-select-overlay'>" + html + "</select>");
+        var wrapper = $(this.element).closest(".k-widget");
+
+        wrapper.next(".k-select-overlay").remove();
+
+        select.insertAfter(wrapper);
 
         select.on("change", function() {
             selectBox.value(this.value);
             selectBox.trigger("change");
         });
-
-        this.bind("dataBound", function() {
-            var value = selectBox.value();
-            var view = this.dataSource.view();
-            var item;
-            var html = "";
-
-            for (var i = 0; i < view.length; i++) {
-                item = view[i];
-
-                html += "<option value='" + item.value + "'";
-
-                if (item.value == value) {
-                    html += " selected";
-                }
-
-                html += ">" + item.text + "</option>";
-            }
-
-            select.html(html);
-        });
-
-        select.insertAfter(wrapper);
     },
 
     value: function(value) {
