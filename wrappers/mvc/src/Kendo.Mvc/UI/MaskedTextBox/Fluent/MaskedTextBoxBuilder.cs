@@ -22,6 +22,18 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies whether the widget will replace the prompt characters with spaces on blur
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public MaskedTextBoxBuilder ClearPromptChar(bool value)
+        {
+            Component.ClearPromptChar = value;
+
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the character used to represent the absence of user input in the widget
         /// </summary>
         public MaskedTextBoxBuilder PromptChar(string promptChar)
@@ -79,7 +91,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Enables or disables the textbox.
         /// </summary>
-        /// <param name="allowSpinner"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public MaskedTextBoxBuilder Enable(bool value)
         {
