@@ -106,6 +106,26 @@
         equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.dataTextField, "bla");
     });
 
+    test("when there is template specified which uses autoComplete then the dataSource is not overriden", function() {
+        filterCell = setup(dom, {
+            field: "foo",
+            dataSource: dataSource,
+            dataTextField: "bla", template: function(input) {
+                input.kendoAutoComplete({
+                    dataSource: {
+                        transport: {
+                            read: {
+                                url: "myurl"
+                            }
+                        }
+                    }
+                })
+            }
+        });
+        var acDS = filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").dataSource;
+        equal(acDS.options.transport.read.url, "myurl");
+    });
+
     test("sets the value of the input element when there is array as filter", function() {
         dataSource.filter([{ field:"foo", operator:"eq", value:"baz" }]);
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
