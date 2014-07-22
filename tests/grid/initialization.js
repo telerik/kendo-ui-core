@@ -3,7 +3,7 @@
         table,
         DataSource = kendo.data.DataSource;
 
-    module("grid initialziation", {
+    module("grid initialization", {
         setup: function() {
             kendo.ns = "kendo-";
             table = document.createElement("table");
@@ -1437,6 +1437,18 @@
         ok(grid.tbody.find("tr:first > td:first a").hasClass("k-grid-bar"));
     });
 
+    test("rowTemplate and altRowTemplate commands have the same class when text is used", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { text: "bar"} }]
+        });
+
+        var rowClass = grid.tbody.find("tr:first > td:first a").attr("class");
+        var altRowClass = grid.tbody.find("tr:eq(1) > td:first a").attr("class");
+
+        equal(rowClass, altRowClass);
+    });
+
     test("spaces are removed from the text when used as class", function() {
         var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
@@ -1456,6 +1468,66 @@
         function(error) {
             return error.message === "Custom commands should have name specified";
         });
+    });
+
+    test("rowTemplate and altRowTemplate custom commands with name have the same class", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar"} }]
+        });
+
+        var rowClass = grid.tbody.find("tr:first > td:first a").attr("class");
+        var altRowClass = grid.tbody.find("tr:eq(1) > td:first a").attr("class");
+
+        equal(rowClass, altRowClass);
+    });
+
+    test("rowTemplate and altRowTemplate custom commands have the same classes when className is defined", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar", className: "className"} }]
+        });
+
+        var rowClass = grid.tbody.find("tr:first > td:first a").attr("class");
+        var altRowClass = grid.tbody.find("tr:eq(1) > td:first a").attr("class");
+
+        equal(rowClass, altRowClass);
+    });
+
+    test("commands preserve classes when added as string attributes", function(){
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar", attr: "style=\"color:blue;\" class=\"myclass\"" } }]
+        });
+
+        ok(grid.tbody.find("tr:first > td:first a").hasClass("myclass"));
+    });
+
+    test("commands preserve rest of attributes when class added through attributes as string", function(){
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar", attr: "style=\"color:blue;\" class=\"myclass\"" } }]
+        });
+
+        equal(grid.tbody.find("tr:first > td:first a").attr("style"), "color:blue;");
+    });
+
+    test("commands preserve classes when added as object attributes", function(){
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar", attr: { class: "myclass", style: "color: blue;" } } }]
+        });
+
+        ok(grid.tbody.find("tr:first > td:first a").hasClass("myclass"));
+    });
+
+    test("commands preserve rest of attributes when class added as object attributes", function(){
+        var grid = new Grid(table, {
+            dataSource: [{ foo: 1, bar: "bar"}, { foo: 2, bar: "baz"}],
+            columns: [ { command: { name: "bar", attr: { class: "myclass", style: "color:blue;" } } }]
+        });
+
+        equal(grid.tbody.find("tr:first > td:first a").attr("style"), "color:blue;");
     });
 
     test("custom command click handler is called if only text with multiple spaces is set", 1, function() {
