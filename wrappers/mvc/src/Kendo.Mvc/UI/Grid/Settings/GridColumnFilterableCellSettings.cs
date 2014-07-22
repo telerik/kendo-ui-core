@@ -10,6 +10,8 @@ namespace Kendo.Mvc.UI
             Enabled = true;
             ShowOperators = true;
             Delay = 200;
+            MinLength = 1;            
+            SuggestionOperator = FilterType.StartsWith;
             Operator = "eq";
             Template = new ClientHandlerDescriptor();
             DataSource = new DataSource();
@@ -22,6 +24,9 @@ namespace Kendo.Mvc.UI
 
         public string Operator { get; set; }
         public double Delay { get; set; }
+        public int MinLength { get; set; }
+        public FilterType SuggestionOperator { get; set; }
+        public int? InputWidth { get; set; }
         public string DataTextField { get; set; }
         public bool Enabled { get; set; }
         public bool ShowOperators { get; set; }
@@ -45,6 +50,18 @@ namespace Kendo.Mvc.UI
             if (Delay != 200)
             {
                 json["delay"] = Delay;
+            }
+            if (InputWidth != null)
+            {
+                json["inputWidth"] = InputWidth;
+            }
+            if (SuggestionOperator != FilterType.StartsWith)
+            {
+                json["suggestionOperator"] = SuggestionOperator;
+            }
+            if (MinLength != 1)
+            {
+                json["minLength"] = MinLength;
             }
             if (Operator != "eq")
             {

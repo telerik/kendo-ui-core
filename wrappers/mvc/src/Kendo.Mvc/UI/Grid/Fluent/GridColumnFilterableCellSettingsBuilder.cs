@@ -88,6 +88,36 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Specifies the MinLength option of the AutoComplete suggestions when the column is of type string.
+        /// </summary>
+        /// <param name="handler">JavaScript function name</param>
+        public GridColumnFilterableCellSettingsBuilder MinLength(int minLength)
+        {
+            settings.MinLength = minLength;
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the filter option of the AutoComplete suggestions when the column is of type string.
+        /// </summary>
+        /// <param name="handler">JavaScript function name</param>
+        public GridColumnFilterableCellSettingsBuilder SuggestionOperator(FilterType filterType)
+        {
+            settings.SuggestionOperator = filterType;
+            return this;
+        }
+
+        /// <summary>
+        /// Specifies the width of the input before it is turned into a widget.
+        /// </summary>
+        /// <param name="handler">JavaScript function name</param>
+        public GridColumnFilterableCellSettingsBuilder InputWidth(int inputWidth)
+        {
+            settings.InputWidth = inputWidth;
+            return this;
+        }
+
+        /// <summary>
         /// Specifies the name of the field which will be used to show the suggestions when using Custom DataSource.
         /// </summary>
         /// <param name="handler">JavaScript function name</param>
