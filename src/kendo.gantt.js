@@ -80,6 +80,7 @@ var __meta__ = {
         resizeHandle: "k-resize-handle",
         icon: "k-icon",
         item: "k-item",
+        line: "k-line",
         hovered: "k-state-hover",
         selected: "k-state-selected",
         focused: "k-state-focused",
@@ -1660,7 +1661,8 @@ var __meta__ = {
             var editable = this.options.editable;
             var headerTable = this.list.header.find("table");
             var contentTable = this.list.content.find("table");
-            var timelineContent = this.timeline.element.find(DOT + Gantt.styles.gridContent);
+            var ganttStyles = Gantt.styles;
+            var timelineContent = this.timeline.element.find(DOT + ganttStyles.gridContent);
             var tables = headerTable.add(contentTable);
             var attr = selector();
             var cellIndex;
@@ -1722,7 +1724,7 @@ var __meta__ = {
             };
 
             $(this.wrapper)
-                .on("mousedown" + NS, "tr" + attr + ", div" + attr + ":not(.k-line)", function(e) {
+                .on("mousedown" + NS, "tr" + attr + ", div" + attr + ":not(" + DOT + ganttStyles.line + ")", function(e) {
                     var currentTarget = $(e.currentTarget);
                     var isInput = $(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap");
                     var current;
