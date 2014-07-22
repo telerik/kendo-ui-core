@@ -33,6 +33,33 @@ class GridColumnFilterableCell extends \Kendo\SerializableObject {
     }
 
     /**
+    * Specifies the width of the input before it is initialized or turned into a widget. Provides convenient way to set the width according to the column width.
+    * @param float $value
+    * @return \Kendo\UI\GridColumnFilterableCell
+    */
+    public function inputWidth($value) {
+        return $this->setProperty('inputWidth', $value);
+    }
+
+    /**
+    * Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswidht", "endswith", "contains". Notice this operator is completely separate from the operator used for filtering on this column.
+    * @param string $value
+    * @return \Kendo\UI\GridColumnFilterableCell
+    */
+    public function suggestionOperator($value) {
+        return $this->setProperty('suggestionOperator', $value);
+    }
+
+    /**
+    * Specifies the minLength option of the AutoComplete widget when column is of type string.
+    * @param float $value
+    * @return \Kendo\UI\GridColumnFilterableCell
+    */
+    public function minLength($value) {
+        return $this->setProperty('minLength', $value);
+    }
+
+    /**
     * When set to false the Grid will not render the cell filtering widget for that specific column.
     * @param boolean $value
     * @return \Kendo\UI\GridColumnFilterableCell
