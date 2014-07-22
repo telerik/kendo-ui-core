@@ -36,6 +36,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public bool ClearPromptChar
+        {
+            get;
+            set;
+        }
+
         public string PromptChar
         {
             get;
@@ -66,6 +72,11 @@ namespace Kendo.Mvc.UI
             if (Culture.HasValue())
             {
                 options["culture"] = Culture;
+            }
+
+            if (ClearPromptChar != false)
+            {
+                options["clearPromptChar"] = ClearPromptChar;
             }
 
             if (PromptChar.HasValue())
