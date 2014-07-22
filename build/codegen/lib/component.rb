@@ -23,6 +23,7 @@ module CodeGen
 
         def initialize(settings)
             @full_name = settings[:name]
+            @base = settings[:base]
             @name = @full_name.split('.').last
             @options = []
             @events = []
