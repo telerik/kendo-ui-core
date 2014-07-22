@@ -1099,11 +1099,12 @@ var __meta__ = {
             var view = this.timeline.view();
             var attr = kendo.attr("uid");
             var id = typeof value === "string" ? value :
-                value
-                .closest("tr" + selector())
-                .attr(attr);
+                value.closest("tr" + selector()).attr(attr);
+            var scrollTarget = view.content.find(selector(id));
 
-            view._scrollTo(view.content.find(selector(id)));
+            if (scrollTarget.length !== 0) {
+                view._scrollTo(scrollTarget);
+            }
         },
 
         _dropDowns: function() {
