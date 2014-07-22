@@ -404,11 +404,17 @@ module CodeGen::TypeScript
         end
 
         def type_script_base_class
-            return if fx?
+            if @base
+                return @base
+            end
 
-            return 'kendo.ui.Widget' if widget? && !mobile?
+            if fx?
+                return
+            end
 
-            return 'kendo.mobile.ui.Widget' if widget? && mobile?
+            if widget?
+                return mobile? ? 'kendo.mobile.ui.Widget' : 'kendo.ui.Widget'
+            end
 
             'Observable'
         end

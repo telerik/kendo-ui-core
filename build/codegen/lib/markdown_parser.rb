@@ -23,7 +23,7 @@ class MarkdownParser
 
         header = root.children.find { |e| e.type == :header && e.options[:level] == 1 }
 
-        component = component_class.new(:name => component_name(root))
+        component = component_class.new(component_settings(root))
 
         configuration = configuration_section(root)
 
@@ -188,10 +188,14 @@ class MarkdownParser
         end
     end
 
-    def component_name(element)
+    def component_settings(element)
         header = element.children.find {|e| e.type == :header && e.options[:level] == 1}
+        parts = header.options[:raw_text].split(/\s?+:\s?+/)
 
-        header.options[:raw_text]
+        {
+            :name => parts[0],
+            :base => parts[1]
+        }
     end
 
     def section_name(element)
