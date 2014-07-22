@@ -29,7 +29,6 @@
     });
 
     asyncTest("loading of iframe triggers load event", 1, function() {
-        var triggered = false;
         var timeout = setTimeout(start, 2000);
 
         createWindow({
@@ -340,18 +339,16 @@
     });
 
     test("hitting escape in a non-closable window does not close it", function() {
-        var triggered = false;
+        var handler = spy();
 
         var dialogObject = createWindow({
             actions: ["custom"],
-            close: function() {
-                triggered = true;
-            }
+            close: handler
         });
 
         dialogObject.element.press(keys.ESC);
 
-        ok(!triggered);
+        ok(!handler.calls);
     });
 
     test("opening and closing modal Windows positions the modal overlay correctly over all other instances but one", function() {
@@ -382,5 +379,18 @@
             keyCode: 40,
             ctrlKey: true
         });
+    });
+
+    test("resizeEnd event is triggered after resizing", function() {
+        var handler = spy();
+        var dialog = createWindow({
+            resizeEnd: handler
+        });
+
+        dialog.resizing.dragend({
+            currentTarget: dialog.wrapper
+        });
+
+        ok(handler.calls);
     });
 })();
