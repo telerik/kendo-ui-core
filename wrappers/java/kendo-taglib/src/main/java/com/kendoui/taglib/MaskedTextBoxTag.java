@@ -54,6 +54,14 @@ public class MaskedTextBoxTag extends WidgetTag /* interfaces *//* interfaces */
         setEvent("change", value.getBody());
     }
 
+    public boolean getClearPromptChar() {
+        return (boolean)getProperty("clearPromptChar");
+    }
+
+    public void setClearPromptChar(boolean value) {
+        setProperty("clearPromptChar", value);
+    }
+
     public java.lang.String getCulture() {
         return (java.lang.String)getProperty("culture");
     }
