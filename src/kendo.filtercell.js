@@ -142,7 +142,7 @@ var __meta__ = {
 
             kendo.bind(this.wrapper, viewModel);
 
-            if (type == STRING) {
+            if (type == STRING && !options.template) {
                 suggestDataSource = that.suggestDataSource = options.suggestDataSource;
 
                 if (!(suggestDataSource instanceof DataSource)) {

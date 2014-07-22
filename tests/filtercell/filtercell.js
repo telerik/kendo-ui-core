@@ -116,7 +116,7 @@
         equal(filterCell.input.width(), 333 );
     });
 
-    test("sets the input width", function() {
+    test("sets the minLength option", function() {
         filterCell = setup(dom, { field: "foo", dataSource: dataSource, dataTextField: "bla", minLength:4 });
         equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.minLength, 4);
     });
