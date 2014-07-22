@@ -175,22 +175,23 @@ var __meta__ = {
                 options.template.call(that.viewModel, that.input);
             } else if (type == STRING) {
                 input.attr(kendo.attr("role"), "autocomplete")
-                        .attr(kendo.attr("text-field"), that.options.dataTextField || that.options.field)
-                        .attr(kendo.attr("delay"), this.options.delay)
+                        .attr(kendo.attr("text-field"), options.dataTextField || options.field)
+                        .attr(kendo.attr("filter"), options.suggestionOperator)
+                        .attr(kendo.attr("delay"), options.delay)
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
                 input.attr(kendo.attr("role"), "datepicker");
             } else if (type == BOOL) {
-                var wrapper = this.wrapper;
+                var wrapper = that.wrapper;
                 var inputName = kendo.guid();
 
-                var labelTrue = $("<label/>").text(this.options.messages.isTrue).append(input);
+                var labelTrue = $("<label/>").text(options.messages.isTrue).append(input);
                 input.attr(kendo.attr("bind"), "checked:value")
                     .attr("name", inputName)
                     .val("true")
                     .attr("type", "radio");
 
-                var labelFalse = labelTrue.clone().text(this.options.messages.isFalse);
+                var labelFalse = labelTrue.clone().text(options.messages.isFalse);
                         input.clone().val("false").appendTo(labelFalse);
                 wrapper.append([labelTrue, labelFalse]);
 
@@ -378,6 +379,7 @@ var __meta__ = {
             dataTextField: "",
             type: "string",
             suggestDataSource: null,
+            suggestionOperator: "startswith",
             operator: "eq",
             showOperators: true,
             template: null,

@@ -106,6 +106,11 @@
         equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.dataTextField, "bla");
     });
 
+    test("sets the filter option of the AutoComplete", function() {
+        filterCell = setup(dom, { field: "foo", dataSource: dataSource, dataTextField: "bla", suggestionOperator: "contains"  });
+        equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.filter, "contains");
+    });
+
     test("when there is template specified which uses autoComplete then the dataSource is not overriden", function() {
         filterCell = setup(dom, {
             field: "foo",
