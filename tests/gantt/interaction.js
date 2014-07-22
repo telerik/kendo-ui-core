@@ -49,6 +49,17 @@
             summary: false
         }
     ];
+    var dependenciesData = [{
+        uid: "DependencyUniqueId1",
+        predecessorId: 1,
+        successorId: 2,
+        type: 1
+    }, {
+        uid: "DependencyUniqueId2",
+        predecessorId: 2,
+        successorId: 3,
+        type: 1
+    }];
     var setup = function(options) {
         var dataSource = setupDataSource(options.data);
         ganttList = new GanttList(element, {
@@ -163,17 +174,7 @@
                 start: new Date("2014/04/16"),
                 end: new Date("2014/04/17")
             })];
-            dependencies = [{
-                uid: "DependencyUniqueId1",
-                predecessorId: 1,
-                successorId: 2,
-                type: 1
-            }, {
-                uid: "DependencyUniqueId2",
-                predecessorId: 2,
-                successorId: 3,
-                type: 1
-            }];
+            dependencies = dependenciesData;
         },
         teardown: function() {
             gantt.destroy();
@@ -742,4 +743,87 @@
         }, 2);
     });
 
+    module("Content Focusable", {
+        setup: function() {
+            element = $("<div/>").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(element);
+            element.remove();
+        }
+    });
+
+    asyncTest("navigatable and editable gantt focus list table upon mouse down", function() {
+        expect(1);
+        gantt = new Gantt(element, {
+            dataSource: setupDataSource(data),
+            navigatable: true
+        });
+
+        gantt.list.content.find("tr:first").mousedown();
+
+        setTimeout(function() {
+            equal(kendo._activeElement(), gantt.list.content.find("table").get(0));
+            start();
+        }, 3);
+    });
+
+    asyncTest("navigatable and editable gantt focus list table upon mouse down on timeline task", function() {
+        expect(1);
+        gantt = new Gantt(element, {
+            dataSource: setupDataSource(data),
+            navigatable: true
+        });
+
+        gantt.timeline.wrapper.find("div[data-uid]:first").mousedown();
+
+        setTimeout(function() {
+            equal(kendo._activeElement(), gantt.list.content.find("table").get(0));
+            start();
+        }, 3);
+    });
+
+    asyncTest("editable gantt focus list table upon mouse down", function() {
+        expect(1);
+        gantt = new Gantt(element, {
+            dataSource: setupDataSource(data)
+        });
+
+        gantt.list.content.find("tr:first").mousedown();
+
+        setTimeout(function() {
+            equal(kendo._activeElement(), gantt.list.content.find("table").get(0));
+            start();
+        }, 3);
+    });
+
+    asyncTest("editable gantt focus list table upon mouse down on timeline task", function() {
+        expect(1);
+        gantt = new Gantt(element, {
+            dataSource: setupDataSource(data)
+        });
+
+        gantt.timeline.wrapper.find("div[data-uid]:first").mousedown();
+
+        setTimeout(function() {
+            equal(kendo._activeElement(), gantt.list.content.find("table").get(0));
+            start();
+        }, 3);
+    });
+
+    asyncTest("navigatable and editable gantt does not focus list table upon mouse down on timeline dependency", function() {
+        expect(1);
+        gantt = new Gantt(element, {
+            dataSource: setupDataSource(data),
+            dependencies: dependenciesData,
+            navigatable: true
+        });
+
+        gantt.timeline.wrapper.find("div.k-line").mousedown();
+
+        setTimeout(function() {
+            notEqual(kendo._activeElement(), gantt.list.content.find("table").get(0));
+            start();
+        }, 3);
+    });
 })();

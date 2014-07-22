@@ -1721,7 +1721,7 @@ var __meta__ = {
             };
 
             $(this.wrapper)
-                .on("mousedown" + NS, "tr" + attr + ", div" + attr, function(e) {
+                .on("mousedown" + NS, "tr" + attr + ", div" + attr + ":not(.k-line)", function(e) {
                     var currentTarget = $(e.currentTarget);
                     var isInput = $(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap");
                     var current;
