@@ -46,6 +46,7 @@ var __meta__ = {
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
+        RESIZEEND = "resizeEnd",
         DRAGSTART = "dragstart",
         DRAGEND = "dragend",
         ERROR = "error",
@@ -384,6 +385,7 @@ var __meta__ = {
             CLOSE,
             REFRESH,
             RESIZE,
+            RESIZEEND,
             DRAGSTART,
             DRAGEND,
             ERROR
@@ -1323,10 +1325,13 @@ var __meta__ = {
             if (wnd.touchScroller) {
                wnd.touchScroller.reset();
             }
+
             if (e.keyCode == 27) {
                 wrapper.css(that.initialPosition)
                     .css(that.initialSize);
             }
+
+            wnd.trigger(RESIZEEND);
 
             return false;
         },
