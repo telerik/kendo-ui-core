@@ -111,6 +111,11 @@
         equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.filter, "contains");
     });
 
+    test("sets the input width", function() {
+        filterCell = setup(dom, { field: "foo", dataSource: dataSource, dataTextField: "bla", inputWidth: 333 , template: function(){}}); //template is used to create clean input, otherwise width is different based on the widget created
+        equal(filterCell.input.width(), 333 );
+    });
+
     test("when there is template specified which uses autoComplete then the dataSource is not overriden", function() {
         filterCell = setup(dom, {
             field: "foo",
