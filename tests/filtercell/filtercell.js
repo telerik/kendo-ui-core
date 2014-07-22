@@ -116,6 +116,11 @@
         equal(filterCell.input.width(), 333 );
     });
 
+    test("sets the input width", function() {
+        filterCell = setup(dom, { field: "foo", dataSource: dataSource, dataTextField: "bla", minLength:4 });
+        equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.minLength, 4);
+    });
+
     test("when there is template specified which uses autoComplete then the dataSource is not overriden", function() {
         filterCell = setup(dom, {
             field: "foo",

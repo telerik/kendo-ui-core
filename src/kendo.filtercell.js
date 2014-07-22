@@ -181,6 +181,7 @@ var __meta__ = {
                         .attr(kendo.attr("text-field"), options.dataTextField || options.field)
                         .attr(kendo.attr("filter"), options.suggestionOperator)
                         .attr(kendo.attr("delay"), options.delay)
+                        .attr(kendo.attr("min-length"), options.minLength)
                         .attr(kendo.attr("value-primitive"), true);
             } else if (type == "date") {
                 input.attr(kendo.attr("role"), "datepicker");
@@ -376,6 +377,7 @@ var __meta__ = {
         options: {
             name: "FilterCell",
             delay: 200,
+            minLength: 1,
             inputWidth: null,
             values: undefined,
             customDataSource: false,
