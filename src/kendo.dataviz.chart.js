@@ -2891,7 +2891,8 @@ var __meta__ = {
                 dataItem: point.dataItem,
                 runningTotal: point.runningTotal,
                 total: point.total,
-                element: $(e.target)
+                element: $(e.target),
+                originalEvent: e
             });
         },
 
@@ -2906,7 +2907,8 @@ var __meta__ = {
                 dataItem: point.dataItem,
                 runningTotal: point.runningTotal,
                 total: point.total,
-                element: $(e.target)
+                element: $(e.target),
+                originalEvent: e
             });
         }
     };
@@ -9389,6 +9391,7 @@ var __meta__ = {
             if (categories.length > 0 && values.length > 0) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
+                    originalEvent: e,
                     category: singleItemOrArray(categories),
                     value: singleItemOrArray(values)
                 });
@@ -9701,6 +9704,7 @@ var __meta__ = {
             if (xValues.length > 0 && yValues.length > 0) {
                 chart.trigger(PLOT_AREA_CLICK, {
                     element: $(e.target),
+                    originalEvent: e,
                     x: singleItemOrArray(xValues),
                     y: singleItemOrArray(yValues)
                 });
