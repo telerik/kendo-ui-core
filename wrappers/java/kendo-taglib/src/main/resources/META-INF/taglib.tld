@@ -16366,6 +16366,18 @@ If the dataSource options is missing the options of the Grid's dataSource will b
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Specifies the width of the input before it is initialized or turned into a widget. Provides convenient way to set the width according to the column width.</description>
+            <name>inputWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the minLength option of the AutoComplete widget when column is of type string.</description>
+            <name>minLength</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>Specifies the default operator that will be used for the cell filtering.</description>
             <name>operator</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16376,6 +16388,12 @@ If the dataSource options is missing the options of the Grid's dataSource will b
             <name>showOperators</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the AutoComplete filter option. Possible values are same as the one for the AutoComplete filter option- "startswidht", "endswith", "contains". Notice this operator is completely separate from the operator used for filtering on this column.</description>
+            <name>suggestionOperator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>JavaScript function which will customize how the input for the filter value is customized.</description>
