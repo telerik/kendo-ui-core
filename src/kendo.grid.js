@@ -3716,6 +3716,9 @@ var __meta__ = {
                     th = $("<th/>"),
                     field = col.field;
 
+                if (col.hidden) {
+                    th.hide();
+                }
                 rowheader.append(th);
                 if (field && col.filterable !== false) {
                     var cellOptions = col.filterable && col.filterable.cell || {};

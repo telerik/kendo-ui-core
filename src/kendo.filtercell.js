@@ -129,6 +129,9 @@ var __meta__ = {
             });
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
 
+            if (options.inputWidth !== null) {
+                input.width(options.inputWidth);
+            }
             that._setInputType(options, type);
 
             if (type != BOOL && options.showOperators !== false) {
@@ -373,6 +376,7 @@ var __meta__ = {
         options: {
             name: "FilterCell",
             delay: 200,
+            inputWidth: null,
             values: undefined,
             customDataSource: false,
             field: "",

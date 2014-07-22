@@ -658,6 +658,23 @@
         equal(grid.thead.find(".k-filter-row").find("th").length, 3);
     });
 
+    test("filtercell hides its th cells based on column visibility", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: {
+                data: [
+                    { foo: 1, bar: 1, baz: 1},
+                ]
+            },
+            columns: ["foo", "bar", { field: "baz", hidden: true }],
+            filterable: {
+                mode: "row"
+            }
+        });
+
+        equal(grid.thead.find(".k-filter-row").find("th:eq(2)").is(":visible"), false);
+    });
+
     test("filtercell creates th cells and sets attributes for bound columns", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
