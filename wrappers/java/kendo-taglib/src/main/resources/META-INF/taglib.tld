@@ -19411,6 +19411,12 @@ Cancelling the event will prevent the user action.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Specifies whether the widget will replace the prompt characters with spaces on blur. Prompt chars will be shown again on focus.</description>
+            <name>clearPromptChar</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
