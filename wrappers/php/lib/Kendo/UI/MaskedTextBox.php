@@ -13,6 +13,15 @@ class MaskedTextBox extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
+    * Specifies whether the widget will replace the prompt characters with spaces on blur. Prompt chars will be shown again on focus.
+    * @param boolean $value
+    * @return \Kendo\UI\MaskedTextBox
+    */
+    public function clearPromptChar($value) {
+        return $this->setProperty('clearPromptChar', $value);
+    }
+
+    /**
     * Specifies the culture info used by the widget.
     * @param string $value
     * @return \Kendo\UI\MaskedTextBox
