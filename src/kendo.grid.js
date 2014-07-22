@@ -2445,15 +2445,18 @@ var __meta__ = {
                 commandName = typeof command === STRING ? command : command.name || command.text,
                 className = defaultCommands[commandName] ? defaultCommands[commandName].className : "k-grid-" + (commandName || "").replace(/\s/g, ""),
                 options = { className: className, text: commandName, imageClass: "", attr: "", iconClass: "" },
-                messages = this.options.messages.commands;
+                messages = this.options.messages.commands,
+                attributeClassMatch;
 
             if (!commandName && !(isPlainObject(command) && command.template))  {
                 throw new Error("Custom commands should have name specified");
             }
 
             if (isPlainObject(command)) {
-                if (command.className) {
+                if (command.className && command.className.split(" ").indexOf(options.className) < 0) {
                     command.className += " " + options.className;
+                } else if (command.className === undefined) {
+                    command.className = options.className;
                 }
 
                 if (commandName === "edit" && isPlainObject(command.text)) {
@@ -2461,8 +2464,18 @@ var __meta__ = {
                     command.text = command.text.edit;
                 }
 
-                if (command.attr && isPlainObject(command.attr)) {
-                    command.attr = stringifyAttributes(command.attr);
+                if (command.attr) {
+                    if (isPlainObject(command.attr)) {
+                        command.attr = stringifyAttributes(command.attr);
+                    }
+
+                    if (typeof command.attr === STRING) {
+                        attributeClassMatch = command.attr.match(/class="(.+?)"/);
+
+                        if (attributeClassMatch && command.className.split(" ").indexOf(attributeClassMatch[1]) < 0) {
+                            command.className += " " + attributeClassMatch[1];
+                        }
+                    }
                 }
 
                 options = extend(true, options, defaultCommands[commandName], { text: messages[commandName] }, command);
