@@ -1609,6 +1609,28 @@
             });
         });
 
+        test("template has access to default format", function() {
+            createBoundChart({
+                categoryAxis: {
+                    labels: {
+                        format: 'foo',
+                        template: "#= equal(format, 'foo') #"
+                    }
+                }
+            });
+        });
+
+        test("template has access to default culture", function() {
+            createBoundChart({
+                categoryAxis: {
+                    labels: {
+                        culture: 'foo',
+                        template: "#= equal(culture, 'foo') #"
+                    }
+                }
+            });
+        });
+
         test("categories are bound for secondary axis", function() {
             createBoundChart({
                 categoryAxis: [{
