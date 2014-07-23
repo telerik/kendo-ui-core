@@ -12,9 +12,9 @@
         /// <summary>
         /// Configures the transport of the DataSource
         /// </summary>
-        public SignalRHierarchicalDataSourceBuilder Transport(Action<ReadOnlySignalRDataSourceTransportBuilder> configurator)
+        public SignalRHierarchicalDataSourceBuilder Transport(Action<SignalRDataSourceTransportBuilder> configurator)
         {
-            configurator(new ReadOnlySignalRDataSourceTransportBuilder(dataSource.Transport));
+            configurator(new SignalRDataSourceTransportBuilder(dataSource.Transport));
 
             return this;
         }

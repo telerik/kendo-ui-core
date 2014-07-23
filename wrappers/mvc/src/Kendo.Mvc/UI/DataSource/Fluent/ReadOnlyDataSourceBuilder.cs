@@ -99,11 +99,11 @@
         /// <summary>
         /// Use it to configure SignalR binding.
         /// </summary>
-        public ReadOnlySignalRDataSourceBuilder SignalR()
+        public SignalRDataSourceBuilder<Object> SignalR()
         {
             dataSource.Type = DataSourceType.Custom;
 
-            return new ReadOnlySignalRDataSourceBuilder(dataSource);
+            return new SignalRDataSourceBuilder<Object>(dataSource);
         }
 
         protected virtual void SetOperationUrl(CrudOperation operation, string actionName, string controllerName, object routeValues)
