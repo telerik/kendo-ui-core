@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="../../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" type="text/css" href="../../dist/styles/web/kendo.default.css" />
+    <link rel="stylesheet" type="text/css" href="./inspector.css" />
+    <style> body { font: 13px arial,sans-serif } </style>
+    <script src="../loader.js"></script>
+    <script>
+      requireSync([
+        "../../src/jquery.js",
+        "../../src/kendo.web.js",
+        "./inspector.js"
+      ]);
+    </script>
+  </head>
+  <body>
+    <input id="datepicker" />
+    <div id="grid" style="height: 300px; width: 400px; overflow: auto"></div>
+    <div id="window" style="padding: 0"><div id="inspector"></div></div>
+
+    <script>(function(){
+
+      var datepicker = $("#datepicker").kendoDatePicker().data("kendoDatePicker");
+
+      var grid = $("#grid").kendoGrid({
+        dataSource: [
+          { name: "Jane Smith", age: 28 },
+          { name: "John Doe", age: 30 }
+        ],
+        sortable: true,
+        selectable: true,
+        columns: [
+          { title: "Name", field: "name" },
+          { title: "Age", field: "age" }
+        ]
+      }).data("kendoGrid");
+
+      var win = $("#window").kendoWindow({
+        title: "Test inspector",
+        width: 600,
+        height: 400,
+      }).data("kendoWindow");
+
+      $("#inspector").kendoInspector({ widget: grid });
+
+      win.open().center();
+
+    }())</script>
+  </body>
+</html>
