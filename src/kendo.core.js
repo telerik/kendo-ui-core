@@ -2629,7 +2629,7 @@ function pad(number, digits, end) {
     var DataBoundWidget = Widget.extend({
         // Angular consumes these.
         dataItems: function() {
-            return this.dataSource.view();
+            return this.dataSource.flatView();
         },
 
         _angularItems: function(cmd) {
