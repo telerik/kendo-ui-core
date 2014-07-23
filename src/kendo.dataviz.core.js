@@ -1992,7 +1992,7 @@ var __meta__ = {
 
             if (options.template) {
                 var tmpl = template(options.template);
-                text = tmpl({ value: value, dataItem: dataItem });
+                text = tmpl({ value: value, dataItem: dataItem, format: options.format, culture: options.culture });
             } else if (options.format) {
                 if (options.format.match(FORMAT_REGEX)) {
                     text = kendo.format(options.format, value);
