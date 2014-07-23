@@ -1076,8 +1076,8 @@ var __meta__ = {
             this._enhanceItems(items.children("ul").children("li"));
             this.element.append(items);
             mobile.init(items);
-            this._angularItems("compile");
             this._style();
+            this._angularItems("compile");
         },
 
         remove: function(dataItems) {
