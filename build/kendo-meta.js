@@ -234,9 +234,9 @@ var getKendoFile = (function() {
         buildMinSource: cachedProperty("buildMinSource", function(){
             var source_map = this._source_map = U2.SourceMap({
                 file: this.filename().replace(/\.js$/i, ".min.js"),
-                // orig_line_diff: 8,
-                // dest_line_diff: 8,
-                root: "../../src/" // XXX: what's the source map root?
+                orig_line_diff: 8,
+                dest_line_diff: 8,
+                root: "../src/js/"
             });
             return this.buildMinAST().print_to_string({
                 source_map: source_map
