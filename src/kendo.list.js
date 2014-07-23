@@ -249,8 +249,23 @@ var __meta__ = {
         },
 
         _accessors: function() {
-            this._text = kendo.getter(this.options.dataTextField);
-            this._value = kendo.getter(this.options.dataValueField);
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var getter = kendo.getter;
+            var textField = element.attr(kendo.attr("text-field"));
+            var valueField = element.attr(kendo.attr("value-field"));
+
+            if (!options.dataTextField && textField) {
+                options.dataTextField = textField;
+            }
+
+            if (!options.dataValueField && valueField) {
+                options.dataValueField = valueField;
+            }
+
+            that._text = getter(options.dataTextField);
+            that._value = getter(options.dataValueField);
         },
 
         _aria: function(id) {
