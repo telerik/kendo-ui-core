@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+        <script src="loader.js"></script>
+        <script>
+            requireSync([
+            "../src/jquery",
+            "../src/kendo.grid",
+            "../src/kendo.notification",
+            "../src/kendo.mobile.switch"
+            ]);
+        </script>
+    </head>
+    <body>
+        Online: <input id="online" type="checkbox" checked>
+        <div id="grid"></div>
+        <div id="notification"></div>
+        <script>
+
+            var online = true;
+
+            $("#online").kendoMobileSwitch({
+                change: function() {
+                    online = this.value();
+
+                    if (online) {
+                        notification.success("Online");
+                    } else {
+                        notification.success("Offline");
+                    }
+                }
+            });
+
+            var notification = new kendo.ui.Notification("#notification", {
+                width: "50%",
+                autoHideAfter: 1000,
+                position: {
+                    top: 0,
+                    right: 0
+                }
+            });
+
+            var OfflineTransport = kendo.data.RemoteTransport.extend({
+                update: function(options) {
+                    var data = options.data;
+
+                    if (online) {
+                        if (localStorage.getItem("grid")) {
+                            var state = JSON.parse(localStorage.getItem("grid"));
+
+                            var models = [];
+
+                            for (var key in state.updated) {
+                                models.push(state.updated[key]);
+                            }
+
+                            models.push.apply(models, data.models);
+
+                            data.models = models;
+
+                            console.log(models);
+                        }
+
+                        notification.success(kendo.format("Updating {0} models", data.models.length));
+
+                        kendo.data.RemoteTransport.fn.update.call(this, options).success(function() {
+                            localStorage.removeItem("grid");
+                        });
+                    } else {
+                        notification.success("Storing updated record in localStorage");
+
+                        var state = { updated: {} };
+
+                        if (localStorage.getItem("grid")) {
+                            state = JSON.parse(localStorage.getItem("grid"));
+                        }
+
+                        if (!state.updated) {
+                            state.updated = {};
+                        }
+
+                        for (var i = 0; i < data.models.length; i++) {
+                            state.updated[data.models[i].ProductID] = data.models[i];
+                        }
+
+                        localStorage.setItem("grid", JSON.stringify(state));
+
+                        options.success();
+                    }
+                }
+            });
+
+            function url(operation) {
+                return function() {
+                    return "http://demos.telerik.com/kendo-ui/service/products" + operation;
+                }
+            }
+
+            var dataSource = new kendo.data.DataSource({
+                transport: new OfflineTransport({
+                    read:  {
+                        url: url(""),
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: url("/update"),
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: url("/destroy"),
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: url("/create"),
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                }),
+                batch: true,
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        fields: {
+                            ProductID: { editable: false, nullable: true },
+                            ProductName: { validation: { required: true } },
+                            UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                            Discontinued: { type: "boolean" },
+                            UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                        }
+                    }
+                }
+            });
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: true,
+                height: 550,
+                columns: [
+                "ProductName",
+                { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+                { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                { field: "Discontinued", width: "120px" },
+                { command: ["edit"], title: "&nbsp;", width: "200px" }],
+                editable: "inline"
+            });
+        </script>
+    </body>
+</html>
