@@ -2719,7 +2719,9 @@ function pad(number, digits, end) {
             length,
             role,
             value,
-            dataSource;
+            dataSource,
+            fullPath,
+            widgetKeyRegExp;
 
         // Preserve backwards compatibility with (element, options, namespace) signature, where namespace was kendo.ui
         if (!roles) {
@@ -2736,17 +2738,26 @@ function pad(number, digits, end) {
             return;
         }
 
-        if (role.indexOf(".") === -1) {
+        fullPath = role.indexOf(".") === -1;
+
+        // look for any widget that may be already instantiated based on this role.
+        // The prefix used is unknown, hence the regexp
+        //
+
+        if (fullPath) {
             widget = roles[role];
         } else { // full namespace path - like kendo.ui.Widget
             widget = kendo.getter(role)(window);
         }
 
-        // look for any widget that may be already instantiated based on this role.
-        // The prefix used is unknown, hence the regexp
         var data = $(element).data(),
-            widgetKey = widget ? "kendo" + widget.fn.options.prefix + widget.fn.options.name : "",
+            widgetKey = widget ? "kendo" + widget.fn.options.prefix + widget.fn.options.name : "";
+
+        if (fullPath) {
             widgetKeyRegExp = new RegExp("^kendo.*" + role + "$", "i");
+        } else { // full namespace path - like kendo.ui.Widget
+            widgetKeyRegExp = new RegExp("^" + widgetKey + "$", "i");
+        }
 
         for(var key in data) {
             if (key.match(widgetKeyRegExp)) {
