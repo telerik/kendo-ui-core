@@ -4033,7 +4033,7 @@ var __meta__ = {
             var buffer = this,
                 pageSize = buffer.pageSize,
                 offset = buffer.skip - buffer.viewSize, // this calculation relies that the buffer has already jumped into the mid range segment
-                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize;
+                pageSkip = math.max(math.floor(offset / pageSize) - 1, 0) * pageSize + pageSize;
 
             this.offset = offset;
             this.dataSource.prefetch(pageSkip, pageSize, function() {

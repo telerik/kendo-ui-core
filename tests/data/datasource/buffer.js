@@ -8,6 +8,7 @@ module("data buffer", {
             transport: {
                 read: function(options) {
 
+                    console.log("requesting ", options.data.skip, options.data.take);
                     var results = [], data = options.data;
                     for (var i = data.skip; i < data.skip + data.take; i ++) {
                         results.push(i);
