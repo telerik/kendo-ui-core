@@ -953,4 +953,19 @@
         ok(icon[0]);
         ok(icon.hasClass("k-i-search"));
     });
+
+    test("widget does not retrieve data attributes if options are set", function() {
+        input.attr({
+            "data-kendo-text-field": "text1",
+            "data-kendo-value-field": "value1",
+        });
+
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "Orders.ShipCity",
+            dataValueField: "OrderID"
+        });
+
+        equal(dropdownlist.options.dataTextField, "Orders.ShipCity");
+        equal(dropdownlist.options.dataValueField, "OrderID");
+    });
 })();
