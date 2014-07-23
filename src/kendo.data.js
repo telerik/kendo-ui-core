@@ -3984,7 +3984,7 @@ var __meta__ = {
             }
             if (this.useRanges) {
                 // out of range request
-                if (index < this.dataOffset || index > this.skip + pageSize) {
+                if (index < this.dataOffset || index >= this.skip + pageSize) {
                     var offset = Math.floor(index / pageSize) * pageSize;
                     this.range(offset);
                 }
