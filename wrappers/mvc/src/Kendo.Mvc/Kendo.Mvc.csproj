@@ -729,9 +729,6 @@
     <Compile Include="UI\PivotDataSource\Fluent\PivotCustomDataSourceTransportBuilder.cs" />
     <Compile Include="UI\PivotDataSource\Fluent\PivotDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyCustomDataSourceSortDescriptorFactory.cs" />
-    <Compile Include="UI\DataSource\Fluent\ReadOnlySignalRCrudOperationsBuilder.cs" />
-    <Compile Include="UI\DataSource\Fluent\ReadOnlySignalRDataSourceBuilder.cs" />
-    <Compile Include="UI\DataSource\Fluent\ReadOnlySignalRDataSourceTransportBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableSignalRDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SignalRCrudOperationsBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\SignalRDataSourceBuilder.cs" />

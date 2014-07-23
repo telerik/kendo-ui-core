@@ -41,11 +41,11 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Use it to configure SignalR binding.
         /// </summary>
-        public ReadOnlySignalRDataSourceBuilder SignalR()
+        public SignalRDataSourceBuilder<TModel> SignalR()
         {
             dataSource.Type = DataSourceType.Custom;
 
-            return new ReadOnlySignalRDataSourceBuilder(dataSource);
+            return new SignalRDataSourceBuilder<TModel>(dataSource);
         }
     }
 }
