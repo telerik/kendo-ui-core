@@ -59,7 +59,6 @@ var __meta__ = {
             }
 
             that._draggable = that._createDraggable();
-            that.floating = false;
         },
 
         events: [
@@ -129,7 +128,6 @@ var __meta__ = {
                 if(this.trigger(START, { item: draggedElement, draggableEvent: e })) {
                     e.preventDefault();
                 } else {
-                    this.floating = this._isFloating(draggedElement);
                     draggedElement.css("display", "none");
                     draggedElement.before(placeholder);
 
@@ -183,7 +181,7 @@ var __meta__ = {
                     this._movePlaceholder(target, "next", eventData);
                 }
 
-                if(this.floating) { //horizontal
+                if(this._isFloating(target.element)) { //horizontal
                     if(axisDelta.x < 0 && offsetDelta.left < 0) {
                         direction = "prev";
                     } else if(axisDelta.x > 0 && offsetDelta.left > 0) {
@@ -366,7 +364,7 @@ var __meta__ = {
             lastItemOffset.top += lastItem.outerHeight();
             lastItemOffset.left += lastItem.outerWidth();
 
-            if(this.floating) { //horizontal
+            if(this._isFloating(lastItem)) { //horizontal
                 delta = lastItemOffset.left - cursorOffset.left;
             } else { //vertical
                 delta = lastItemOffset.top - cursorOffset.top;
