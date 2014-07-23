@@ -742,20 +742,21 @@ var __meta__ = {
         },
 
         _filterHeader: function() {
+            var icon;
             var options = this.options;
             var filterEnalbed = options.filter !== "none";
 
-            if (this.filterInput && !filterEnalbed) {
-                this.filterInput.off(ns)
+            if (this.filterInput) {
+                this.filterInput
+                    .off(ns)
                     .parent()
                     .remove();
 
                 this.filterInput = null;
-                return;
             }
 
             if (filterEnalbed) {
-                var icon = '<span unselectable="on" class="k-icon k-i-search">select</span>';
+                icon = '<span unselectable="on" class="k-icon k-i-search">select</span>';
 
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
