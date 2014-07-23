@@ -654,4 +654,20 @@
         ok(!dropdownlist.list.find(".k-textbox")[0]);
     });
 
+    test("setOptions does not render more than one input", function() {
+        var input = $("<input />");
+
+        dropdownlist.destroy();
+        dropdownlist = new DropDownList(input, {
+            dataSource: ["item1", "item2"],
+            filter: "startswith"
+        });
+
+        dropdownlist.setOptions({});
+
+        var list = dropdownlist.list;
+
+        equal(list.find(".k-textbox").length, 1);
+    });
+
 })();
