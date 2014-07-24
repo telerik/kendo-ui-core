@@ -705,9 +705,14 @@ var __meta__ = {
 
                 idx = ui.List.inArray(li[0], that.ul[0]);
                 if (idx > -1) {
+                    that.selectedIndex = idx;
+
                     data = that._data()[idx];
                     value = that._value(data);
-                    that.selectedIndex = idx;
+
+                    if (value === null) {
+                        value = "";
+                    }
 
                     that._textAccessor(data);
                     that._accessor(value !== undefined ? value : that._text(data), idx);
