@@ -91,6 +91,8 @@ test("refresh suggests on every dataSource change", 2, function() {
         delay: 0
     });
 
+    input.focus();
+
     input.val("t");
     autocomplete.search("t");
     input.val("3");
@@ -98,6 +100,20 @@ test("refresh suggests on every dataSource change", 2, function() {
 
     equal(autocomplete.value(), "3text");
     equal(autocomplete.current(), null);
+});
+
+test("refresh does not suggest if input is not active", 1, function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: ["text", "Text", "3text"],
+        filter: "startswith",
+        highlightFirst: false,
+        suggest: true,
+        delay: 0
+    });
+
+    autocomplete.dataSource.fetch();
+
+    equal(autocomplete.value(), "");
 });
 
 asyncTest("AutoComplete does not open popup if not active element", 1, function() {
