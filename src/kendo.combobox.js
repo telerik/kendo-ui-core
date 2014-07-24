@@ -712,6 +712,10 @@ var __meta__ = {
                 text = that._text(data);
                 value = that._value(data);
 
+                if (value === null) {
+                    value = "";
+                }
+
                 that._prev = that.input[0].value = text;
                 that._accessor(value !== undefined ? value : text, idx);
                 that._selectedValue = that._accessor();
