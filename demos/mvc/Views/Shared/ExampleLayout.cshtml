@@ -166,7 +166,7 @@
 
         var widgets = [];
         var datasource = [];
-        $("#exampleWrap").find("*").each(function(){
+        $("#exampleWrap *").each(function(){
             var w = kendoWidgetInstance(this);
             if (w && widgets.indexOf(w) < 0) {
                 datasource.push({
