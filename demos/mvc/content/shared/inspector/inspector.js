@@ -499,8 +499,10 @@
                 "line-height"         : el.outerHeight() + "px"
             });
             hl.appendTo(el[0].ownerDocument.body);
-            if (!elementInView(el))
-                el.get(0).scrollIntoView();
+
+            // that's not good for the demo pages
+            // if (!elementInView(el))
+            //     el.get(0).scrollIntoView();
         }
     }
 

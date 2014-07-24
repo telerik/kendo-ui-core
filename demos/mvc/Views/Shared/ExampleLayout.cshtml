@@ -30,9 +30,9 @@
 <div id="nav-wrapper">
 
     <div id="nav">
-        
+
         <div id="root-nav">
-        
+
 
     @foreach (IGrouping<string, NavigationWidget> category in ViewBag.Categories)
     {
@@ -55,9 +55,9 @@
         </ul>
     }
         </div>
-        
+
         <div id="example-nav">
-            
+
         <h3>@ViewBag.CurrentWidget.Text</h3>
             <ul>
             @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
@@ -84,7 +84,7 @@
             }
 
 
-            
+
             e.preventDefault();
         });
 
@@ -147,6 +147,58 @@
         </script>
     </div>
 
+<!--widget inspector-->
+    <div id="inspector-container" style="margin: 0 6em 2em 6em">
+        <label>
+            Select widget to inspect:
+            <select id="inspector-widgets"></select>
+        </label>
+        <div id="inspector" style="margin-top: 1em; max-height: 20em; overflow: auto; border: 1px solid #999"></div>
+    </div>
+    <script>$(document).ready(function(){
+
+        function kendoWidgetInstance(el) {
+            el = $(el);
+            return kendo.widgetInstance(el, kendo.ui) ||
+                kendo.widgetInstance(el, kendo.mobile.ui) ||
+                kendo.widgetInstance(el, kendo.dataviz.ui);
+        }
+
+        var widgets = [];
+        var datasource = [];
+        $("#exampleWrap").find("*").each(function(){
+            var w = kendoWidgetInstance(this);
+            if (w && widgets.indexOf(w) < 0) {
+                datasource.push({
+                    name   : w.options.name,
+                    index  : widgets.length
+                });
+                widgets.push(w);
+            }
+        });
+
+        if (widgets.length == 0) {
+            $("#inspector-container").hide();
+        } else {
+            $("#inspector-widgets").kendoDropDownList({
+                dataSource     : datasource,
+                dataTextField  : "name",
+                dataValueField : "index",
+                value          : 0,
+                change         : function() {
+                    inspector.reset(widgets[this.value()]);
+                }
+            });
+            var inspector = $("#inspector").kendoInspector({
+                showPicker : false,
+                showEvents : false,
+                docBaseUrl : "@ViewBag.Api",
+                widget     : widgets[0]
+            }).data("kendoInspector");
+        }
+
+    })</script>
+<!--/widget inspector-->
 
 
         @{
@@ -160,10 +212,10 @@
 
     @if (ViewBag.ShowCodeStrip == true)
     {
-        
+
         <div id="wrappers-source-code">
             <h2>HTML5/JavaScript source</h2>
-              
+
         @if (html || php || jsp || mvc)
         {
             <div class="other-source">
@@ -188,9 +240,9 @@
                 </ul>
             </div>
         }
-            
+
         </div>
-        
+
         <div id="codeStrip">
             @if (!string.IsNullOrEmpty(ViewBag.Api))
             {
