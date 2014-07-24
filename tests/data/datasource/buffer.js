@@ -8,7 +8,6 @@ module("data buffer", {
             transport: {
                 read: function(options) {
 
-                    console.log("requesting ", options.data.skip, options.data.take);
                     var results = [], data = options.data;
                     for (var i = data.skip; i < data.skip + data.take; i ++) {
                         results.push(i);
@@ -29,6 +28,29 @@ module("data buffer", {
 
     teardown: function() {
     }
+});
+
+asyncTest("returns correct offset of dataSource item", 1, function() {
+    ds.fetch();
+
+    buffer.one("expand", function() {
+        start();
+        equal(buffer.dataSource._ranges.length, 2);
+    });
+
+    buffer.at(20); // trigger the range change
+});
+
+asyncTest("returns correct offset of dataSource item", 2, function() {
+    ds.fetch();
+
+    buffer.one("expand", function() {
+        start();
+        equal(buffer.at(40), 40);
+        equal(buffer.dataSource._ranges.length, 2);
+    });
+
+    buffer.at(40); // trigger the range change
 });
 
 test("returns correct dataSource item", 1, function() {
@@ -56,16 +78,6 @@ asyncTest("returns correct offset of dataSource item", 3, function() {
     buffer.at(19); // trigger the range change
 });
 
-asyncTest("returns correct offset of dataSource item", 1, function() {
-    ds.fetch();
-
-    buffer.one("expand", function() {
-        start();
-        equal(buffer.at(20), 20);
-    });
-
-    buffer.at(20); // trigger the range change
-});
 
 asyncTest("approaching the end of the range prefetches data", 4, function() {
     ds.fetch(function() {

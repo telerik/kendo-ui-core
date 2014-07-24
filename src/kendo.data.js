@@ -4048,7 +4048,7 @@ var __meta__ = {
 
             var buffer = this,
                 pageSize = this.pageSize,
-                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize + pageSize,
+                pageSkip = math.max(math.floor(offset / pageSize) - 1, 0) * pageSize + pageSize,
                 dataSource = this.dataSource;
 
             this.offset = offset;
