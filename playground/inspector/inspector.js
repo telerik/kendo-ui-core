@@ -54,6 +54,10 @@
             }
             self.widget = widget;
 
+            if (!widget) {
+                return;
+            }
+
             displayJSON(safeValueForJSON(widget)).appendTo(cont);
             displayJSON({ element: safeValueForJSON(widget.element) }).appendTo(cont);
 
@@ -295,7 +299,7 @@
 
             // grab widget
             element.on("click", ".grab-widget", function(ev){
-                self._grabWidget();
+                self.grabWidget();
             });
 
             element.on("click", ".clear-section", function(ev){
@@ -327,7 +331,7 @@
 
         },
 
-        _grabWidget: function() {
+        grabWidget: function(callback) {
             var self = this, grabbed = null;
             $(document.body)
                 .addClass("kendo-inspector-grabbing")
@@ -349,11 +353,14 @@
                     $(document.body).off(".kendoInspector");
                     $(document.body).removeClass("kendo-inspector-grabbing");
                     removeHighlight();
+                    ev.preventDefault();
+                    ev.stopPropagation();
                     if (grabbed) {
                         self.reset(grabbed);
                     }
-                    ev.preventDefault();
-                    ev.stopPropagation();
+                    if (callback) {
+                        callback(grabbed);
+                    }
                 });
         }
 
