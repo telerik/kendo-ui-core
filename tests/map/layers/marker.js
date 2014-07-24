@@ -400,6 +400,13 @@
             layer.reset();
         });
 
+        test("map reset updates all markers", 2, function() {
+            layer.add([{}, {}]);
+            layer.update = function() { ok(true); };
+
+            map.trigger("reset");
+        });
+
         test("destroy clears markers", function() {
             layer.clear = function() { ok(true); };
             layer.destroy();
