@@ -8,6 +8,10 @@
 @linkcolor: @datbluecolor;
 @linkhovercolor: #e15613;
 
+.kendo-inspector-grabbing, .kendo-inspector-grabbing * {
+    cursor: crosshair !important;
+}
+
 .kendo-inspector {
 
     .monospace-font {
@@ -20,6 +24,15 @@
 
     input, textarea, button {
         .inputfield-font;
+    }
+
+    .separator-top {
+        padding-top: 6px;
+        border-top: 1px solid #ccc;
+    }
+    .separator-bottom {
+        padding-bottom: 6px;
+        border-bottom: 1px solid #ccc;
     }
 
     .editable-object {
@@ -183,7 +196,11 @@
     }
 
     .section {
+        .sec-buttons {
+            float: right;
+        }
         .sec-title {
+            font-weight: bold;
             padding: 3px 10px 4px 10px;
             cursor: pointer;
             color: #444;
@@ -215,7 +232,6 @@
         &.visible {
             border-bottom: 1px solid #999;
             .sec-title {
-                background-color: #fff;
                 &:before {
                     color: @datbluecolor;
                     .k-i-arrow-s;

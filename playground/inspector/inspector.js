@@ -5,15 +5,21 @@
 
     var template =
         ('<div class="section visible widget" data-section="widget">' +
-         '  <div class="sec-title">Widget inspector</div>' +
+         '  <div class="sec-buttons">' +
+         '    <button class="k-button grab-widget">Select</button>' +
+         '  </div>' +
+         '  <div class="sec-title k-header">Widget inspector</div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
          '<div class="section datasource" data-section="datasource">' +
-         '  <div class="sec-title">Data source</div>' +
+         '  <div class="sec-title k-header">Data source</div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
          '<div class="section events" data-section="events">' +
-         '  <div class="sec-title">Events</div>' +
+         '  <div class="sec-buttons">' +
+         '    <button class="k-button clear-section">Clear</button>' +
+         '  </div>' +
+         '  <div class="sec-title k-header">Events</div>' +
          '  <div class="sec-content"></div>' +
          "</div>"
         );
@@ -32,11 +38,21 @@
             options = self.options;
 
             element.addClass("kendo-inspector");
-
             $(template).appendTo(element);
+            self._addListeners();
+            self.reset(options.widget);
+        },
 
-            var widget = self.widget = options.widget;
+        reset: function(widget) {
+            var self = this, element = self.element;
+            element.find(".section .sec-content").empty();
+
             var cont = element.find(".section.widget .sec-content");
+
+            if (self.widget) {
+                self._unwatchWidget();
+            }
+            self.widget = widget;
 
             displayJSON(safeValueForJSON(widget)).appendTo(cont);
             displayJSON({ element: safeValueForJSON(widget.element) }).appendTo(cont);
@@ -45,16 +61,16 @@
                 displayJSON({ wrapper: safeValueForJSON(widget.wrapper) }).appendTo(cont);
             }
 
-            displayJSON({ options: widget.options }, {
+            displayJSON({ options: safeValueForJSON(widget.options) }, {
                 filterable: true,
                 sort: true
             }).appendTo(cont);
 
-            if (!widget.dataSource) {
-                element.find(".section.datasource").remove();
-            }
+            element.find(".section.datasource").removeClass("visible").css({
+                display: widget.dataSource ? "block" : "none"
+            });
 
-            self._addListeners();
+            self._watchWidget();
         },
 
         _sectionToggled: function(sec, visible) {
@@ -79,8 +95,9 @@
                                 // if we can't parse it, it'll remain a string
                                 val = JSON.parse(val);
                             } catch(ex) {};
-                            alert("FIXME: edit datasource");
-                            callback(false);
+                            if (setDatasourceProperty(self.widget, path, val)) {
+                                callback(val);
+                            }
                         }
                     }).appendTo(cont);
                 }
@@ -88,23 +105,66 @@
             }
         },
 
+        _onWidgetEvent: function(eventName, ev) {
+            var now = new Date().getTime();
+            ev = safeValueForJSON(ev);
+            ev.__eventName = eventName;
+            ev.__timestamp = new Date();
+            var cont = this.element.find(".section.events .sec-content");
+            var el = displayEvent(ev).prependTo(cont);
+            if (this._lastEventTime && now - this._lastEventTime > 100) {
+                el.addClass("separator-bottom");
+            }
+            this._lastEventTime = now;
+        },
+
+        _watchWidget: function() {
+            var self = this, widget = self.widget;
+            self._lastEventTime = null;
+            if (!widget.__kendo_inspector_watcher) {
+                var running = true;
+                widget.__kendo_inspector_watcher = {
+                    stop: function() { running = false },
+                    resume: function() { running = true }
+                };
+                function makeHandler(eventName) {
+                    return function(ev) {
+                        if (running) {
+                            self._onWidgetEvent(eventName, ev);
+                        }
+                    };
+                }
+                widget.events.forEach(function(eventName){
+                    widget.bind(eventName, makeHandler(eventName));
+                });
+            }
+            widget.__kendo_inspector_watcher.resume();
+        },
+
+        _unwatchWidget: function() {
+            if (this.widget.__kendo_inspector_watcher)
+                this.widget.__kendo_inspector_watcher.stop();
+        },
+
         _addListeners: function() {
             var self = this, element = self.element;
 
-            $(element).on("click", ".sec-title", function(ev){
+            // expand/collapse sections on clicking the title
+            element.on("click", ".sec-title", function(ev){
                 var sec = $(ev.target).closest(".section");
                 sec.toggleClass("visible");
                 self._sectionToggled(sec, sec.hasClass("visible"));
             });
 
-            $(element).on("click", ".codefold-button, .property", function(ev){
+            // expand/collapse object properties
+            element.on("click", ".codefold-button, .property", function(ev){
                 var cf = $(ev.target).closest(".expandable");
                 cf.toggleClass("collapsed");
                 if (!cf.hasClass("collapsed")) {
                     cf.find(".hidden").removeClass("hidden");
                     if (cf.data("lazy-id")) {
                         var data = getCachedObject(cf.data("lazy-id"));
-                        var html = displayJSON(data, { innerObject: true });
+                        var html = displayJSON(safeValueForJSON(data), { innerObject: true });
                         cf.find(".codefold-body").html(html);
                         cf.removeAttr("data-lazy-id");
                         cf.removeData("lazy-id");
@@ -112,13 +172,14 @@
                 }
             });
 
+            // right-clicking an expander deep-expands/collapses subproperties
             element.on("contextmenu", ".codefold-button", function(ev){
                 ev.preventDefault();
                 ev.stopPropagation();
                 var cf = $(ev.target).closest(".expandable");
                 if (cf.data("lazy-id")) {
                     var data = getCachedObject(cf.data("lazy-id"));
-                    var html = displayJSON(data, { innerObject: true });
+                    var html = displayJSON(safeValueForJSON(data), { innerObject: true });
                     cf.find(".codefold-body").html(html);
                     cf.removeAttr("data-lazy-id");
                     cf.removeData("lazy-id");
@@ -141,6 +202,7 @@
                 }
             });
 
+            // support editable fields
             element.on("click", ".editable-object .editable", function(ev){
                 var span = $(ev.target).hide();
                 var orig = span.attr("data-value");
@@ -173,7 +235,9 @@
 
                 resize();
 
+                var done = false;
                 function resize() {
+                    if (done) return;
                     span.text(input.val());
                     span.show();
                     var width = span.width();
@@ -199,65 +263,192 @@
                             span.attr("data-value", val);
                             input.remove();
                             span.show();
+                            done = true;
                         }
                     } ]);
                 }
             });
 
-            $(element).on("mouseenter", "[data-widget-id]", function(ev){
+            // highlight widget on hover
+            element.on("mouseenter", "[data-widget-id]", function(ev){
                 var id = $(ev.target).attr("data-widget-id");
                 highlightWidget(id);
             });
 
-            $(element).on("mouseenter", "[data-element-id]", function(ev){
+            // highlight element on hover
+            element.on("mouseenter", "[data-element-id]", function(ev){
                 var id = $(ev.target).attr("data-element-id");
                 highlightElement(id);
             });
 
-            $(element).on("mouseleave", "[data-widget-id], [data-element-id]", function(ev){
+            element.on("mouseleave", "[data-widget-id], [data-element-id]", function(ev){
                 removeHighlight();
             });
 
-            $(element).on("mouseenter", ".codefold-button", function(ev){
+            element.on("mouseenter", ".codefold-button", function(ev){
                 $(ev.target).closest(".codefold").addClass("highlight");
             });
 
-            $(element).on("mouseleave", ".codefold-button", function(ev){
+            element.on("mouseleave", ".codefold-button", function(ev){
                 $(ev.target).closest(".codefold").removeClass("highlight");
             });
 
+            // grab widget
+            element.on("click", ".grab-widget", function(ev){
+                self._grabWidget();
+            });
+
+            element.on("click", ".clear-section", function(ev){
+                var cont = $(ev.currentTarget).closest(".section").find(".sec-content");
+                cont.empty();
+                self._lastEventTime = null;
+            });
+
+            element.on("click", "[data-object-id]", function(ev){
+                var el = $(ev.currentTarget);
+                if (el.is("[data-element-id]")) {
+                    console.log(getCachedObject(el.data("element-id")));
+                } else {
+                    window.$K = getCachedObject(el.data("object-id"));
+                    console.log(window.$K);
+                }
+            });
+
+            element.kendoTooltip({
+                filter: "[data-object-id]",
+                content : function(data) {
+                    if (data.target.is("[data-element-id]")) {
+                        return "<div style='white-space: nowrap'>Click to dump with console.log</div>";
+                    } else {
+                        return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
+                    }
+                },
+            });
+
+        },
+
+        _grabWidget: function() {
+            var self = this, grabbed = null;
+            $(document.body)
+                .addClass("kendo-inspector-grabbing")
+                .on("mouseenter.kendoInspector", "[data-role]", function(ev){
+                    var el = $(ev.currentTarget);
+                    if (el.data("role") == "draggable") {
+                        return;
+                    }
+                    grabbed = kendoWidgetInstance(el);
+                    if (grabbed) {
+                        highlightWidget(grabbed);
+                    }
+                })
+                .on("mouseleave.kendoInspector", ".kendo-inspector-highlight", function(ev){
+                    removeHighlight();
+                    grabbed = null;
+                })
+                .on("mousedown.kendoInspector", function(ev){
+                    $(document.body).off(".kendoInspector");
+                    $(document.body).removeClass("kendo-inspector-grabbing");
+                    removeHighlight();
+                    if (grabbed) {
+                        self.reset(grabbed);
+                    }
+                    ev.preventDefault();
+                    ev.stopPropagation();
+                });
         }
 
     });
 
     ui.plugin(Inspector);
 
-    /* -----[ code taken from kendo devtools inspector ]----- */
+    function kendoWidgetInstance(el) {
+        el = $(el);
+        return kendo.widgetInstance(el, kendo.ui) ||
+            kendo.widgetInstance(el, kendo.mobile.ui) ||
+            kendo.widgetInstance(el, kendo.dataviz.ui);
+    }
 
-    var object_id = 0;
-    var cache = {};
+    var OBJECT_ID = 0;
+    var CACHE = {};
 
     function cacheObject(w) {
-        if (w.__kendo_devtools_id) {
-            return w.__kendo_devtools_id;
+        if (w.__kendo_inspector_id) {
+            return w.__kendo_inspector_id;
         }
-        var id = w.__kendo_devtools_id = ++object_id;
-        cache[id] = w;
+        var id = w.__kendo_inspector_id = ++OBJECT_ID;
+        CACHE[id] = w;
         return id;
     }
 
+    function setDatasourceProperty(wid, path, val) {
+        var w = getCachedObject(wid);
+        var ds = w.dataSource;
+        var data = ds.data();
+        var i = 0;
+        while (i < path.length) {
+            var prop = path[i++];
+            if (data instanceof kendo.data.ObservableObject) {
+                if (i < path.length) {
+                    data = data.get(prop);
+                } else {
+                    data.set(prop, val);
+                    return true;
+                }
+            }
+            else if (data instanceof kendo.data.ObservableArray || Array.isArray(data)) {
+                if (i < path.length) {
+                    data = data[prop];
+                } else {
+                    data.splice(prop, 1, val);
+                    return true;
+                }
+            }
+            else if (data instanceof Date) {
+                var new_data = new Date(data);
+                val = parseInt(val, 10);
+                if (isNaN(val)) return false;
+                switch (prop) {
+                  case "year"         : new_data.setFullYear(val)     ; break;
+                  case "month"        : new_data.setMonth(val)        ; break;
+                  case "date"         : new_data.setDate(val)         ; break;
+                  case "hours"        : new_data.setHours(val)        ; break;
+                  case "minutes"      : new_data.setMinutes(val)      ; break;
+                  case "seconds"      : new_data.setSeconds(val)      ; break;
+                  case "milliseconds" : new_data.setMilliseconds(val) ; break;
+                  default:
+                    return false;
+                }
+                tools.setDatasourceProperty(w, path.slice(0, -1), new_data);
+                return new_data;
+            }
+            else if (typeof data == "object") {
+                if (i < path.length) {
+                    data = data[prop];
+                } else {
+                    data[prop] = val;
+                    return true;
+                }
+            }
+            else {
+                console.error("Can't setDatasourceProperty on", data);
+                return false;
+            }
+        }
+        return false;
+    }
+
     function removeFromCache(w) {
-        var id = w.__kendo_devtools_id;
+        var id = w.__kendo_inspector_id;
         if (id) {
-            delete cache[id];
-            delete w.__kendo_devtools_id;
+            delete CACHE[id];
+            delete w.__kendo_inspector_id;
             return id;
         }
     }
 
     function getCachedObject(obj) {
         if (typeof obj == "object") return obj;
-        return cache[obj];
+        return CACHE[obj];
     }
 
     function elementInView(el) {
@@ -267,11 +458,14 @@
         return pos > top + 10 && pos < bot - 10;
     }
 
-    function _highlightElement(el) {
+    function _highlightElement(el, text) {
         removeHighlight();
         el = $(el);
         if (el.is(":visible")) {
-            var hl = $("<div class='kendo-devtools-highlight' style='position: absolute; z-index: 32700; background-color: rgba(109, 188, 233, 0.6); border-color: rgba(191, 241, 174, 0.67); border-style: solid; box-sizing: border-box;'></div>");
+            var hl = "<div class='kendo-inspector-highlight' style='position: absolute; z-index: 32700; color: #000; font-size: 16px; text-align: center; background-color: rgba(109, 188, 233, 0.6); border-color: rgba(191, 241, 174, 0.67); border-style: solid; box-sizing: border-box;'>";
+            if (text) hl += htmlescape(text);
+            hl += "</div>";
+            hl = $(hl);
             var pos = el.offset();
             hl.css({
                 "border-left-width"   : el.css("padding-left"),
@@ -282,6 +476,7 @@
                 "top"                 : pos.top,
                 "width"               : el.outerWidth(),
                 "height"              : el.outerHeight(),
+                "line-height"         : el.outerHeight() + "px"
             });
             hl.appendTo(el[0].ownerDocument.body);
             if (!elementInView(el))
@@ -291,21 +486,21 @@
 
     function highlightElement(id) {
         var el = getCachedObject(id);
-        _highlightElement(el);
+        _highlightElement(el, "<" + $(el)[0].tagName.toLowerCase() + ">");
     }
 
     function highlightWidget(id) {
         var w = getCachedObject(id);
         var el = w.wrapper || w.element;
-        _highlightElement(el);
+        _highlightElement(el, w.options.name);
     }
 
     function removeHighlight() {
-        $(".kendo-devtools-highlight").remove();
+        $(".kendo-inspector-highlight").remove();
     }
 
     function makeSpecial(type, props) {
-        props.__kendo_devtools_type = type;
+        props.__kendo_inspector_type = type;
         return props;
     }
 
@@ -393,9 +588,6 @@
             }
             throw ex;
         }
-        // finally {
-        //     console.log(count);
-        // }
         function saferize(x) {
             ++count;
             //if (count > 3000) throw TOO_BIG;
@@ -460,7 +652,7 @@
                         // }
                         if (shouldSendLazy(x)) {
                             return {
-                                __kendo_devtools_type: "Array",
+                                __kendo_inspector_type: "Array",
                                 id: cacheObject(x),
                                 length: x.length
                             };
@@ -489,14 +681,14 @@
                         }
                         else if (Array.isArray(x[i])) {
                             tmp[i] = {
-                                __kendo_devtools_type: "Array",
+                                __kendo_inspector_type: "Array",
                                 id: cacheObject(x[i]),
                                 length: x[i].length
                             };
                         }
                         else {
                             tmp[i] = {
-                                __kendo_devtools_type: "Object",
+                                __kendo_inspector_type: "Object",
                                 id: cacheObject(x[i]),
                                 length: Object.keys(x[i]).length - 1
                             };
@@ -510,6 +702,31 @@
                 console.error("saferize failed: ", ex, x);
                 return "### ERROR ###";
             }
+        }
+    }
+
+    function displayEvent(ev, includeWidget) {
+        var type = ev.__eventName;
+        delete ev.__eventName;
+        var ts = ev.__timestamp;
+        delete ev.__timestamp;
+        var time = kendo.format("{0:HH:mm:ss}", ts) + "." + ts.getMilliseconds();
+        var name = "[" + time + "] " + type;
+        if (includeWidget && ev.sender) {
+            name += " in " + wrapWidget(ev.sender);
+        }
+        var obj = {};
+        obj[name] = ev;
+        return displayJSON(obj, {
+            collapsed: true,
+            wrapProperty: function(key, val, currentPath) {
+                if (key === name) {
+                    return "<span class='property'>" + key + "</span>";
+                }
+            }
+        });
+        function wrapWidget(obj) {
+            return "<span class='widget' data-object-id='" + obj.id + "' data-widget-id='" + obj.id + "'>" + obj.type + "</span>";
         }
     }
 
@@ -603,17 +820,17 @@
                 return wrapEditable(rec(obj.toUTCString()));
             }
             else if (typeof obj == "object") {
-                delete obj.__kendo_devtools_id;
-                switch (obj.__kendo_devtools_type) {
+                delete obj.__kendo_inspector_id;
+                switch (obj.__kendo_inspector_type) {
                   case "kendo.ui.Widget":
                     return wrapWidget(obj);
                   case "Element":
                     return wrapElement(obj);
                   case "jQuery":
-                    delete obj.__kendo_devtools_type;
+                    delete obj.__kendo_inspector_type;
                     break;
                   case "Date":
-                    delete obj.__kendo_devtools_type;
+                    delete obj.__kendo_inspector_type;
                     break;
                   case "link":
                     return wrapLink(obj);
@@ -668,7 +885,7 @@
             };
             if (thing == null) return { expandable: false };
             if (typeof thing == "object") {
-                switch (thing.__kendo_devtools_type) {
+                switch (thing.__kendo_inspector_type) {
                   case "Array":
                     return {
                         expandable : thing.length > 0,
@@ -691,7 +908,7 @@
                   case "Date":
                     return {
                         expandable : true,
-                        title      : thing.__kendo_devtools_type,
+                        title      : thing.__kendo_inspector_type,
                     };
                 }
                 var keys = Object.keys(thing);

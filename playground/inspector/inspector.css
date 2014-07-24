@@ -861,6 +861,10 @@
 .k-i-drophere {
   content: "\E119";
 }
+.kendo-inspector-grabbing,
+.kendo-inspector-grabbing * {
+  cursor: crosshair !important;
+}
 .kendo-inspector .monospace-font {
   font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
 }
@@ -871,6 +875,14 @@
 .kendo-inspector textarea,
 .kendo-inspector button {
   font: 13px arial, sans-serif;
+}
+.kendo-inspector .separator-top {
+  padding-top: 6px;
+  border-top: 1px solid #ccc;
+}
+.kendo-inspector .separator-bottom {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ccc;
 }
 .kendo-inspector .editable-object {
   font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
@@ -1036,7 +1048,11 @@
 .kendo-inspector .editable-object .codefold-operations .filter.has-query:after {
   content: "\E06D";
 }
+.kendo-inspector .section .sec-buttons {
+  float: right;
+}
 .kendo-inspector .section .sec-title {
+  font-weight: bold;
   padding: 3px 10px 4px 10px;
   cursor: pointer;
   color: #444;
@@ -1075,9 +1091,6 @@
 }
 .kendo-inspector .section.visible {
   border-bottom: 1px solid #999;
-}
-.kendo-inspector .section.visible .sec-title {
-  background-color: #fff;
 }
 .kendo-inspector .section.visible .sec-title:before {
   color: #3d94cf;
