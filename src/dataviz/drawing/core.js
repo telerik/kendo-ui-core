@@ -153,15 +153,15 @@
 
     // Options storage with optional observer =============================
     var OptionsStore = Class.extend({
-        init: function(value, prefix) {
+        init: function(options, prefix) {
             var field,
                 member;
 
             this.observer = null;
             this.prefix = prefix || "";
 
-            for (field in value) {
-                member = value[field];
+            for (field in options) {
+                member = options[field];
                 member = this.wrap(member, field);
                 this[field] = member;
             }
