@@ -1,4 +1,4 @@
-(function(){
+(function(kendo, $){
 
     var ui = kendo.ui;
     var Widget = ui.Widget;
@@ -27,8 +27,11 @@
     var Inspector = Widget.extend({
 
         options: {
-            name   : "Inspector",
-            widget : null
+            name       : "Inspector",
+            showPicker : true,
+            showEvents : true,
+            docBaseUrl : null,
+            widget     : null
         },
 
         init: function(element, options) {
@@ -39,6 +42,11 @@
 
             element.addClass("kendo-inspector");
             $(template).appendTo(element);
+
+            if (!options.showEvents) {
+                element.find(".section.events").remove();
+            }
+
             self._addListeners();
             self.reset(options.widget);
         },
@@ -74,7 +82,9 @@
                 display: widget.dataSource ? "block" : "none"
             });
 
-            self._watchWidget();
+            if (self.options.showEvents) {
+                self._watchWidget();
+            }
         },
 
         _sectionToggled: function(sec, visible) {
@@ -125,19 +135,19 @@
         _watchWidget: function() {
             var self = this, widget = self.widget;
             self._lastEventTime = null;
+            function makeHandler(eventName) {
+                return function(ev) {
+                    if (running) {
+                        self._onWidgetEvent(eventName, ev);
+                    }
+                };
+            }
             if (!widget.__kendo_inspector_watcher) {
                 var running = true;
                 widget.__kendo_inspector_watcher = {
                     stop: function() { running = false },
                     resume: function() { running = true }
                 };
-                function makeHandler(eventName) {
-                    return function(ev) {
-                        if (running) {
-                            self._onWidgetEvent(eventName, ev);
-                        }
-                    };
-                }
                 widget.events.forEach(function(eventName){
                     widget.bind(eventName, makeHandler(eventName));
                 });
@@ -326,7 +336,7 @@
                     } else {
                         return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
                     }
-                },
+                }
             });
 
         },
@@ -425,7 +435,7 @@
                   default:
                     return false;
                 }
-                tools.setDatasourceProperty(w, path.slice(0, -1), new_data);
+                setDatasourceProperty(w, path.slice(0, -1), new_data);
                 return new_data;
             }
             else if (typeof data == "object") {
@@ -517,19 +527,12 @@
             id             : cacheObject(w),
             type           : w.options.name,
             prefix         : w.options.prefix,
-            events         : w.events && w.events.length > 0 ? w.events.map(function(evname){
-                return makeSpecial("doclink-event", {
-                    event  : evname,
-                    widget : w.options.name,
-                    prefix : w.options.prefix,
-                });
-            }) : undefined,
             element_tag    : w.element.get(0).tagName,
             element_id     : w.element.attr("id"),
             element_class  : w.element.attr("class"),
             visible        : el.is(":visible"),
             hasModel       : !!w.dataSource,
-            wasInspected   : w === window.$K,
+            wasInspected   : w === window.$K
         };
         if (typeof w.value == "function") {
             ret.value = safeValueForJSON(w.value());
@@ -550,7 +553,7 @@
         var data = ds.data();
         return {
             data    : safeValueForJSON(data.toJSON()),
-            options : safeValueForJSON(ds.options),
+            options : safeValueForJSON(ds.options)
         };
     }
 
@@ -611,13 +614,13 @@
                         hours        : x.getHours(),
                         minutes      : x.getMinutes(),
                         seconds      : x.getSeconds(),
-                        milliseconds : x.getMilliseconds(),
+                        milliseconds : x.getMilliseconds()
                     });
                 }
                 if (x instanceof $) {
                     return makeSpecial("jQuery", {
                         selector : x.selector,
-                        elements : x.get().map(saferize),
+                        elements : x.get().map(saferize)
                     });
                 }
                 if (isObject(x, "HTML")) {
@@ -625,7 +628,7 @@
                         id            : cacheObject(x),
                         tag           : x.tagName,
                         element_id    : x.id,
-                        element_class : x.className,
+                        element_class : x.className
                     });
                 }
                 if (isDomNode(x)) {
@@ -767,7 +770,7 @@
             return "<span class='element' data-object-id='" + obj.id + "' data-element-id='" + obj.id + "'>### DOM element (" + obj.tag + ") ###</span>";
         }
         function wrapLink(link) {
-            return "<a target='KENDOUIDOCS' class='" + (link.class || "") + "' href='" + link.url + "'>" + link.text + "</a>";
+            return "<a target='KENDOUIDOCS' class='" + (link["class"] || "") + "' href='" + link.url + "'>" + link.text + "</a>";
         }
         function wrapTooBig(obj) {
             return "<span class='object' data-object-id='" + obj.id + "'>### OBJECT TOO BIG ###</span>";
@@ -843,20 +846,6 @@
                     return wrapLink(obj);
                   case "too-big":
                     return wrapTooBig(obj);
-                  case "doclink-event":
-                    var name = obj.widget;
-                    if (obj.prefix == "mobile") {
-                        name = "mobile." + name;
-                    }
-                    var w = KENDO_CONFIG.widgets[name];
-                    var url = "http://docs.kendoui.com/api/" + w.category
-                        + "/" + obj.widget.toLowerCase()
-                        + "#events-" + obj.event;
-                    return wrapLink({
-                        class: "doclink",
-                        text: obj.event,
-                        url: url
-                    });
                 }
 
                 var a = Object.keys(obj);
@@ -888,7 +877,7 @@
         function inspectValue(thing) {
             if (Array.isArray(thing)) return {
                 expandable : thing.length > 0,
-                title      : "Array[" + thing.length + "]",
+                title      : "Array[" + thing.length + "]"
             };
             if (thing == null) return { expandable: false };
             if (typeof thing == "object") {
@@ -908,14 +897,13 @@
                   case "kendo.ui.Widget":
                   case "Element":
                   case "link":
-                  case "doclink-event":
                   case "too-big":
                     return { expandable: false };
                   case "jQuery":
                   case "Date":
                     return {
                         expandable : true,
-                        title      : thing.__kendo_inspector_type,
+                        title      : thing.__kendo_inspector_type
                     };
                 }
                 var keys = Object.keys(thing);
@@ -1050,4 +1038,4 @@
         return "<span class='json-heading'>" + title + "</span> ";
     }
 
-})();
+})(kendo, jQuery);
