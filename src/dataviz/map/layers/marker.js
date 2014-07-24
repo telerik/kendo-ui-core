@@ -80,8 +80,8 @@
             }
         },
 
-        reset: function() {
-            Layer.fn.reset.call(this);
+        _reset: function() {
+            Layer.fn._reset.call(this);
             var items = this.items;
             for (var i = 0; i < items.length; i++) {
                 this.update(items[i]);
