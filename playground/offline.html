@@ -45,51 +45,91 @@
             });
 
             var OfflineTransport = kendo.data.RemoteTransport.extend({
-                update: function(options) {
-                    var data = options.data;
+                sync: function() {
+                    if (localStorage.getItem("grid")) {
+                        var state = JSON.parse(localStorage.getItem("grid"));
 
-                    if (online) {
-                        if (localStorage.getItem("grid")) {
-                            var state = JSON.parse(localStorage.getItem("grid"));
+                        notification.success(kendo.format("Sync {0} requests", state.requests.length));
 
-                            var models = [];
+                        var promises = [];
 
-                            for (var key in state.updated) {
-                                models.push(state.updated[key]);
+                        for (var req = 0; req < state.requests.length; req++) {
+                            var request = state.requests[req];
+
+                            if (request.type == "update") {
+                                var promise = kendo.data.RemoteTransport.fn.update.call(this, request.options);
+                                promises.push(promise);
                             }
-
-                            models.push.apply(models, data.models);
-
-                            data.models = models;
-
-                            console.log(models);
                         }
 
-                        notification.success(kendo.format("Updating {0} models", data.models.length));
+                        $.when.apply(null, promises)
+                              .then(function() {
+                                  notification.success("Removing items from localStorage");
+                                  localStorage.removeItem("grid");
+                              });
+                    }
+                },
+                store: function(type, options) {
+                    var state = { requests: [] };
 
-                        kendo.data.RemoteTransport.fn.update.call(this, options).success(function() {
-                            localStorage.removeItem("grid");
-                        });
+                    if (localStorage.getItem("grid")) {
+                        state = JSON.parse(localStorage.getItem("grid"));
+                    }
+
+                    if (!state.requests) {
+                        state.requests = [];
+                    }
+
+                    state.requests.push({
+                        type: type,
+                        options: options
+                    });
+
+                    localStorage.setItem("grid", JSON.stringify(state));
+                },
+                read: function(options) {
+                    var success = options.success || noop;
+
+                    if (online) {
+
+                        options.success = function(response) {
+                            var state = { };
+
+                            if (localStorage.getItem("grid")) {
+                                state = JSON.parse(localStorage.getItem("grid"));
+                            }
+
+                            state.response = response;
+
+                            localStorage.setItem("grid", JSON.stringify(state));
+
+                            success(response);
+                        };
+
+                        kendo.data.RemoteTransport.fn.read.call(this, options);
                     } else {
-                        notification.success("Storing updated record in localStorage");
-
-                        var state = { updated: {} };
+                        var state = { response : null };
 
                         if (localStorage.getItem("grid")) {
                             state = JSON.parse(localStorage.getItem("grid"));
                         }
 
-                        if (!state.updated) {
-                            state.updated = {};
-                        }
+                        success(state.response);
+                    }
+                },
+                update: function(options) {
+                    if (online) {
+                        this.sync();
 
-                        for (var i = 0; i < data.models.length; i++) {
-                            state.updated[data.models[i].ProductID] = data.models[i];
-                        }
+                        return kendo.data.RemoteTransport.fn.update.call(this, options);
+                    } else {
+                        notification.success("Storing update requests in localStorage");
 
-                        localStorage.setItem("grid", JSON.stringify(state));
+                        this.store("update", options);
 
-                        options.success();
+                        return $.Deferred(function(deferred) {
+                            options.success();
+                        }).promise();
                     }
                 }
             });
@@ -142,14 +182,18 @@
 
             $("#grid").kendoGrid({
                 dataSource: dataSource,
-                pageable: true,
+                pageable: {
+                    refresh: true
+                },
                 height: 550,
+                toolbar: [ "save" ],
                 columns: [
-                "ProductName",
-                { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
-                { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px" },
-                { command: ["edit"], title: "&nbsp;", width: "200px" }],
+                    "ProductName",
+                    { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+                    { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                    { field: "Discontinued", width: "120px" },
+                    { command: ["edit"], title: "&nbsp;", width: "200px" }
+                ],
                 editable: "inline"
             });
         </script>
