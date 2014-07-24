@@ -235,6 +235,7 @@ var __meta__ = {
             options = that.options,
             data = that._data(),
             length = data.length,
+            isActive = that.element[0] === activeElement(),
             action;
 
             that._angularItems("cleanup");
@@ -253,7 +254,7 @@ var __meta__ = {
                     that.current($(ul.firstChild));
                 }
 
-                if (options.suggest) {
+                if (options.suggest && isActive) {
                     that.suggest($(ul.firstChild));
                 }
             }
@@ -262,7 +263,7 @@ var __meta__ = {
                 that._open = false;
                 action = length ? "open" : "close";
 
-                if (that._typing && that.element[0] !== activeElement()) {
+                if (that._typing && !isActive) {
                     action = "close";
                 }
 
