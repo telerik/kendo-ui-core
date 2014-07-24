@@ -1,7 +1,5 @@
 // -*- mode: less-css; less-css-compile-at-save: t; css-indent-offset: 4 -*-
 
-@import "font.less";
-
 @textcolor: #2d3e50;
 @datbluecolor: #3d94cf;
 @editablecolor: #c41416;
@@ -13,6 +11,31 @@
 }
 
 .kendo-inspector {
+
+    @font-face {
+        font-family: "KendoUI";
+        src: url("../styles/kendoui.woff") format("woff"),
+             url("../styles/kendoui.ttf") format("truetype");
+    }
+
+    .kendo-font-icon {
+        font-family: "KendoUI";
+        font-weight: normal;
+        font-style: normal;
+        line-height: 0.8em;
+        position: relative;
+        top: 0.1em;
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+        speak: none;
+    }
+
+    .k-i-arrow-e { content: "\E000"; }
+    .k-i-arrow-s { content: "\E002"; }
+    .k-i-search-a { content: "\E0E9"; }
+    .k-i-filter { content: "\E06C"; }
+    .k-i-filter-clear { content: "\E06D"; }
+    .k-si-hyperlink-ext { content: "\E076"; }
 
     .monospace-font {
         font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
