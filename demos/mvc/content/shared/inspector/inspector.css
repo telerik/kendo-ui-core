@@ -218,17 +218,17 @@
 .kendo-inspector .editable-object .codefold-operations .filter.has-query:after {
   content: "\E06D";
 }
-.kendo-inspector .section .sec-buttons {
+.kendo-inspector .kendo-inspector-section .sec-buttons {
   float: right;
 }
-.kendo-inspector .section .sec-title {
+.kendo-inspector .kendo-inspector-section .sec-title {
   font-weight: bold;
   padding: 3px 10px 4px 10px;
   cursor: pointer;
   color: #444;
   border-bottom: 1px solid #999;
 }
-.kendo-inspector .section .sec-title:before {
+.kendo-inspector .kendo-inspector-section .sec-title:before {
   font-family: "KendoUI";
   font-weight: normal;
   font-style: normal;
@@ -243,30 +243,30 @@
   font-size: 140%;
   top: 1px;
 }
-.kendo-inspector .section .sec-title:hover {
+.kendo-inspector .kendo-inspector-section .sec-title:hover {
   color: #000;
 }
-.kendo-inspector .section .sec-title:hover:before {
+.kendo-inspector .kendo-inspector-section .sec-title:hover:before {
   color: #3d94cf;
 }
-.kendo-inspector .section .sec-title .sec-toolbar {
+.kendo-inspector .kendo-inspector-section .sec-title .sec-toolbar {
   float: right;
   display: none;
 }
-.kendo-inspector .section .sec-content {
+.kendo-inspector .kendo-inspector-section .sec-content {
   display: none;
 }
-.kendo-inspector .section .sec-content > pre {
+.kendo-inspector .kendo-inspector-section .sec-content > pre {
   margin: 0.5em;
 }
-.kendo-inspector .section.visible {
+.kendo-inspector .kendo-inspector-section.visible {
   border-bottom: 1px solid #999;
 }
-.kendo-inspector .section.visible .sec-title:before {
+.kendo-inspector .kendo-inspector-section.visible .sec-title:before {
   color: #3d94cf;
   content: "\E002";
 }
-.kendo-inspector .section.visible .sec-content,
-.kendo-inspector .section.visible .sec-toolbar {
+.kendo-inspector .kendo-inspector-section.visible .sec-content,
+.kendo-inspector .kendo-inspector-section.visible .sec-toolbar {
   display: block;
 }

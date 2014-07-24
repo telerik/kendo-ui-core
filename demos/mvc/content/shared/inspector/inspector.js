@@ -4,18 +4,18 @@
     var Widget = ui.Widget;
 
     var template =
-        ('<div class="section visible widget" data-section="widget">' +
+        ('<div class="kendo-inspector-section visible widget" data-section="widget">' +
          '  <div class="sec-buttons">' +
          '    <button class="k-button grab-widget">Select</button>' +
          '  </div>' +
          '  <div class="sec-title k-header">Widget inspector</div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
-         '<div class="section datasource" data-section="datasource">' +
+         '<div class="kendo-inspector-section datasource" data-section="datasource">' +
          '  <div class="sec-title k-header">Data source</div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
-         '<div class="section events" data-section="events">' +
+         '<div class="kendo-inspector-section events" data-section="events">' +
          '  <div class="sec-buttons">' +
          '    <button class="k-button clear-section">Clear</button>' +
          '  </div>' +
@@ -44,7 +44,10 @@
             $(template).appendTo(element);
 
             if (!options.showEvents) {
-                element.find(".section.events").remove();
+                element.find(".kendo-inspector-section.events").remove();
+            }
+            if (!options.showPicker) {
+                element.find(".grab-widget").remove();
             }
 
             self._addListeners();
@@ -53,9 +56,9 @@
 
         reset: function(widget) {
             var self = this, element = self.element;
-            element.find(".section .sec-content").empty();
+            element.find(".kendo-inspector-section .sec-content").empty();
 
-            var cont = element.find(".section.widget .sec-content");
+            var cont = element.find(".kendo-inspector-section.widget .sec-content");
 
             if (self.widget) {
                 self._unwatchWidget();
@@ -78,7 +81,7 @@
                 sort: true
             }).appendTo(cont);
 
-            element.find(".section.datasource").removeClass("visible").css({
+            element.find(".kendo-inspector-section.datasource").removeClass("visible").css({
                 display: widget.dataSource ? "block" : "none"
             });
 
@@ -124,7 +127,7 @@
             ev = safeValueForJSON(ev);
             ev.__eventName = eventName;
             ev.__timestamp = new Date();
-            var cont = this.element.find(".section.events .sec-content");
+            var cont = this.element.find(".kendo-inspector-section.events .sec-content");
             var el = displayEvent(ev).prependTo(cont);
             if (this._lastEventTime && now - this._lastEventTime > 100) {
                 el.addClass("separator-bottom");
@@ -165,7 +168,7 @@
 
             // expand/collapse sections on clicking the title
             element.on("click", ".sec-title", function(ev){
-                var sec = $(ev.target).closest(".section");
+                var sec = $(ev.target).closest(".kendo-inspector-section");
                 sec.toggleClass("visible");
                 self._sectionToggled(sec, sec.hasClass("visible"));
             });
@@ -313,7 +316,7 @@
             });
 
             element.on("click", ".clear-section", function(ev){
-                var cont = $(ev.currentTarget).closest(".section").find(".sec-content");
+                var cont = $(ev.currentTarget).closest(".kendo-inspector-section").find(".sec-content");
                 cont.empty();
                 self._lastEventTime = null;
             });
