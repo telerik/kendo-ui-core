@@ -176,11 +176,14 @@
                     // we must remove data-kendo-widget-name attribute because
                     // it breaks kendo.widgetInstance; can generate all kinds
                     // of funny issues like
-                    // https://github.com/kendo-labs/angular-kendo/issues/167
-
-                    // $(element).removeData(role);
-                    // console.log($(element).data(role)); // --> not undefined.  now I'm pissed.
-                    $(element)[0].removeAttribute("data-" + role.replace(/([A-Z])/g, "-$1"));
+                    //
+                    //   https://github.com/kendo-labs/angular-kendo/issues/167
+                    //
+                    // but we still keep the attribute without the
+                    // `data-` prefix, so k-rebind would work.
+                    var roleattr = role.replace(/([A-Z])/g, "-$1");
+                    $(element).attr(roleattr, $(element).attr("data-" + roleattr));
+                    $(element)[0].removeAttribute("data-" + roleattr);
 
                     ++KENDO_COUNT;
 
