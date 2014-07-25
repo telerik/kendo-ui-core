@@ -89,7 +89,7 @@
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { return kendo.ui.MultiSelect.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
+                    HandlerName = "function() { return kendo.ui.MultiSelect.requestData(jQuery(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\")); }"
                 };
             }
 
@@ -103,7 +103,7 @@
 
             if (!string.IsNullOrEmpty(ItemTemplateId))
             {
-                options["itemTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, ItemTemplateId) };
+                options["itemTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery(\"{0}{1}\").html()", idPrefix, ItemTemplateId) };
             }
             else if (!string.IsNullOrEmpty(ItemTemplate))
             {
@@ -112,7 +112,7 @@
 
             if (!string.IsNullOrEmpty(TagTemplateId))
             {
-                options["tagTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, TagTemplateId) };
+                options["tagTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery(\"{0}{1}\").html()", idPrefix, TagTemplateId) };
             }
             else if (!string.IsNullOrEmpty(TagTemplate))
             {
