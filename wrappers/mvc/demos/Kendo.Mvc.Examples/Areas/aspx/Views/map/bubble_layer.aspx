@@ -34,7 +34,7 @@
         {
             layers.Add()
                 .Type(MapLayerType.Tile)
-                .UrlTemplateId("http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png")
+                .UrlTemplate("http://otile3.mqcdn.com/tiles/1.0.0/sat/#= zoom #/#= x #/#= y #.png")
                 .Attribution("Tiles &copy; <a href='http://www.mapquest.com/' target='_blank'>MapQuest</a>");
 
             layers.Add()
