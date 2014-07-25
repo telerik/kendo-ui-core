@@ -130,6 +130,8 @@
             "reset",
             "pan",
             "panEnd",
+            "markerActivate",
+            "markerClick",
             "markerCreated",
             "shapeClick",
             "shapeCreated",

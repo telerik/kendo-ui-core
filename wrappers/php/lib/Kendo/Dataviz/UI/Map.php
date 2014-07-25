@@ -157,6 +157,20 @@ This event is typically used for cleanup by layer implementers.
     }
 
     /**
+    * Sets the markerActivate event of the Map.
+    * Fired when a marker has been displayed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function markerActivate($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('markerActivate', $value);
+    }
+
+    /**
     * Sets the markerCreated event of the Map.
     * Fired when a marker has been created and is about to be displayed.
 Cancelling the event will prevent the marker from being shown.
@@ -169,6 +183,20 @@ Cancelling the event will prevent the marker from being shown.
         }
 
         return $this->setProperty('markerCreated', $value);
+    }
+
+    /**
+    * Sets the markerClick event of the Map.
+    * Fired when a marker has been clicked or tapped.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function markerClick($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('markerClick', $value);
     }
 
     /**

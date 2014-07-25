@@ -9,7 +9,7 @@
         {
             layers.Add()
                 .Type(MapLayerType.Tile)
-                .UrlTemplateId("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
                 .Subdomains("a", "b", "c")
                 .Attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>");
         })

@@ -424,7 +424,13 @@
 
         // ------------------------------------------------------------
         function createBoundLayer(options) {
+            if (layer) {
+                layer.destroy();
+            }
+
             layer = new MarkerLayer(map, deepExtend({
+                locationField: "latlng",
+                titleField: "text",
                 dataSource: {
                     data: [{
                         latlng: [10, 10],
@@ -474,22 +480,20 @@
         });
 
         test("binds location", function() {
-            createBoundLayer({ locationField: "latlng" });
             ok(new Location(10, 10).equals(marker.location()));
         });
 
-        test("does not bind location if no field is specified", function() {
-            createBoundLayer({ });
+        test("does not bind location if wrong field is specified", function() {
+            createBoundLayer({ locationField: "foo" });
             equal(marker.location(), null);
         });
 
         test("binds title", function() {
-            createBoundLayer({ titleField: "text" });
             equal(marker.options.title, "Foo");
         });
 
-        test("does not bind title if no field is specified", function() {
-            createBoundLayer({ });
+        test("does not bind title if wrong field is specified", function() {
+            createBoundLayer({ titleField: "foo" });
             equal(marker.options.title, undefined);
         });
 
@@ -516,6 +520,20 @@
             createBoundLayer();
         });
 
+        test("markerCreated has reference to marker", function() {
+            map.bind("markerCreated", function(e) {
+                ok(e.marker);
+            });
+            createBoundLayer();
+        });
+
+        test("markerCreated has reference to layer", function() {
+            map.bind("markerCreated", function(e) {
+                ok(e.layer instanceof MarkerLayer);
+            });
+            createBoundLayer();
+        });
+
         test("markerCreated can be cancelled", function() {
             map.bind("markerCreated", function(e) {
                 e.preventDefault();
@@ -524,7 +542,84 @@
 
             equal(marker, null);
         });
+
+        test("triggers markerActivate", function() {
+            map.bind("markerActivate", function() {
+                ok(true);
+            });
+            createBoundLayer();
+        });
+
+        test("markerActivate has reference to marker", function() {
+            map.bind("markerActivate", function(e) {
+                ok(e.marker);
+            });
+            createBoundLayer();
+        });
+
+        test("markerActivate has reference to layer", function() {
+            map.bind("markerActivate", function(e) {
+                equal(dataviz.util.last(e.layer.items), e.marker);
+            });
+            createBoundLayer();
+        });
+
+        test("marker has element in markerActivate", function() {
+            map.bind("markerActivate", function(e) {
+                ok(e.marker.element);
+            });
+            createBoundLayer();
+        });
     })();
 
     baseLayerTests("Marker Layer", MarkerLayer);
+
+    // ------------------------------------------------------------
+    (function() {
+        var map;
+        var layer;
+        var marker;
+
+        module("Marker Layer / markerClick", {
+            setup: function() {
+                map = new MapMock();
+
+                layer = new MarkerLayer(map, {
+                    dataSource: {
+                        data: [{
+                            location: [10, 10],
+                            title: "Foo"
+                        }]
+                    }
+                });
+
+                marker = layer.items[0];
+            },
+            teardown: function() {
+                map.destroy();
+                layer.destroy();
+            }
+        });
+
+        test("triggers markerClick", function() {
+            map.bind("markerClick", function(e) {
+                ok(true);
+            });
+            marker.element.click();
+        });
+
+        test("markerClick has reference to marker", function() {
+            map.bind("markerClick", function(e) {
+                equal(e.marker, marker);
+            });
+            marker.element.click();
+        });
+
+        test("markerClick has reference to layer", function() {
+            map.bind("markerClick", function(e) {
+                equal(e.layer, layer);
+            });
+            marker.element.click();
+        });
+    })();
 })();

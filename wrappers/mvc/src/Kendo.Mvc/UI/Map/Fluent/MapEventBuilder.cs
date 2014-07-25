@@ -39,6 +39,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Fired when a marker has been displayed.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the markerActivate event.</param>
+        public MapEventBuilder MarkerActivate(string handler)
+        {
+            Handler("markerActivate", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fired when a marker has been created and is about to be displayed.
 		/// Cancelling the event will prevent the marker from being shown.
         /// </summary>
@@ -46,6 +57,17 @@ namespace Kendo.Mvc.UI.Fluent
         public MapEventBuilder MarkerCreated(string handler)
         {
             Handler("markerCreated", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when a marker has been clicked or tapped.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the markerClick event.</param>
+        public MapEventBuilder MarkerClick(string handler)
+        {
+            Handler("markerClick", handler);
 
             return this;
         }
