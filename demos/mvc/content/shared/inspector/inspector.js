@@ -606,10 +606,10 @@
         if (!options) options = {};
         function shouldSendLazy(obj) {
             if (obj === x) return false;
+            var len = Array.isArray(obj) ? obj.length : Object.keys(obj).length;
+            if (len == 0) return false;
             if (options.lazy) return true;
-            if (Array.isArray(obj))
-                return obj.length > 20;
-            return Object.keys(obj).length > 20;
+            return len > 20;
         }
         var seen = [];
         var count = 0;
@@ -695,39 +695,24 @@
                         }
                         return x.map(saferize);
                     }
+                    if (shouldSendLazy(x)) {
+                        return {
+                            __kendo_inspector_type: "Object",
+                            id: cacheObject(x),
+                            length: Object.keys(x).length - 1
+                        };
+                    }
                     var tmp = {};
                     for (var i in x) if (i != "dataSource" && x.hasOwnProperty(i)) {
                         if (x[i] === window[i]) {
                             // dumping global objects is a bad idea.
                             continue;
                         }
-                        else if (typeof x[i] == "function") {
+                        else if (/undefined|function/.test(typeof x[i])) {
                             continue;
                         }
-                        else if (/(string|boolean|number|function)/.test(typeof x[i])
-                                 || x[i] instanceof kendo.ui.Widget
-                                 || x[i] instanceof Date
-                                 || x[i] === null
-                                 || isDomNode(x[i])
-                                 || x[i] instanceof $
-                                 || isObject(x[i], "Window")
-                                 || isObject(x[i], "HTML")
-                                 || !shouldSendLazy(x[i])) {
-                            tmp[i] = saferize(x[i]);
-                        }
-                        else if (Array.isArray(x[i])) {
-                            tmp[i] = {
-                                __kendo_inspector_type: "Array",
-                                id: cacheObject(x[i]),
-                                length: x[i].length
-                            };
-                        }
                         else {
-                            tmp[i] = {
-                                __kendo_inspector_type: "Object",
-                                id: cacheObject(x[i]),
-                                length: Object.keys(x[i]).length - 1
-                            };
+                            tmp[i] = saferize(x[i]);
                         }
                     }
                     return tmp;
@@ -735,7 +720,7 @@
                 return x;
             } catch(ex) {
                 if (ex === TOO_BIG) throw ex;
-                console.error("saferize failed: ", ex, x);
+                console.error("saferize failed: ", ex.stack, x);
                 return "### ERROR ###";
             }
         }

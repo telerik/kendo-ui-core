@@ -18,6 +18,7 @@
     <input id="datepicker" />
     <div id="grid" style="height: 300px; width: 400px; overflow: auto"></div>
     <div id="window" style="padding: 0"><div id="inspector"></div></div>
+    <textarea id="editor"></textarea>
 
     <script>(function(){
 
@@ -36,13 +37,15 @@
         ]
       }).data("kendoGrid");
 
+      var editor = $("#editor").kendoEditor().data("kendoEditor");
+
       var win = $("#window").kendoWindow({
         title: "Test inspector",
         width: 600,
         height: 400,
       }).data("kendoWindow");
 
-      $("#inspector").kendoInspector({ widget: grid });
+      $("#inspector").kendoInspector({ widget: editor });
 
       win.open().center();
 
