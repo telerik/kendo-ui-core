@@ -3963,6 +3963,10 @@ var __meta__ = {
                 buffer._change();
             });
 
+            dataSource.bind("reset", function() {
+                buffer._reset();
+            });
+
             this._syncWithDataSource();
 
             this.setViewSize(viewSize);
@@ -3974,7 +3978,10 @@ var __meta__ = {
         },
 
         at: function(index)  {
-            var pageSize = this.pageSize, item;
+            var pageSize = this.pageSize,
+                item,
+                itemPresent = true,
+                changeTo;
 
             if (index >= this.total()) {
                 this.trigger("endreached", {index: index });
@@ -3987,8 +3994,11 @@ var __meta__ = {
             if (this.useRanges) {
                 // out of range request
                 if (index < this.dataOffset || index >= this.skip + pageSize) {
-                    var offset = Math.floor(index / pageSize) * pageSize;
-                    this.range(offset);
+                    if (index % pageSize === pageSize - 1) {
+                        itemPresent = this.range(Math.ceil(index / pageSize) * pageSize - this.viewSize, true);
+                    } else {
+                        itemPresent = this.range(Math.floor(index / pageSize) * pageSize);
+                    }
                 }
 
                 // prefetch
@@ -3998,7 +4008,7 @@ var __meta__ = {
 
                 // mid-range jump - prefetchThreshold and nextPageThreshold may be equal, do not change to else if
                 if (index === this.midPageThreshold) {
-                    this.range(this.nextMidRange);
+                    this.range(this.nextMidRange, true);
                 }
                 // next range jump
                 else if (index === this.nextPageThreshold) {
@@ -4013,14 +4023,12 @@ var __meta__ = {
                     }
                 }
 
-                item = this.dataSource.at(index - this.dataOffset);
+                if (itemPresent) {
+                    return this.dataSource.at(index - this.dataOffset);
+                } else {
+                    this.trigger("endreached", { index: index });
+                }
             }
-
-            if (item === undefined) {
-                this.trigger("endreached", { index: index });
-            }
-
-            return item;
         },
 
         indexOf: function(item) {
@@ -4034,8 +4042,8 @@ var __meta__ = {
         next: function() {
             var buffer = this,
                 pageSize = buffer.pageSize,
-                offset = buffer.skip - buffer.viewSize, // this calculation relies that the buffer has already jumped into the mid range segment
-                pageSkip = math.max(math.floor(offset / pageSize) - 1, 0) * pageSize + pageSize;
+                offset = buffer.skip - buffer.viewSize + pageSize,
+                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize;
 
             this.offset = offset;
             this.dataSource.prefetch(pageSkip, pageSize, function() {
@@ -4043,25 +4051,35 @@ var __meta__ = {
             });
         },
 
-        range: function(offset) {
+        range: function(offset, nextRange) {
             if (this.offset === offset) {
-                return;
+                return true;
             }
 
             var buffer = this,
                 pageSize = this.pageSize,
-                pageSkip = math.max(math.floor(offset / pageSize) - 1, 0) * pageSize + pageSize,
+                pageSkip = math.max(math.floor(offset / pageSize), 0) * pageSize,
                 dataSource = this.dataSource;
 
-            this.offset = offset;
-            this._recalculate();
+            if (nextRange) {
+                pageSkip += pageSize;
+            }
+
             if (dataSource.inRange(offset, pageSize)) {
+                this.offset = offset;
+                this._recalculate();
                 this._goToRange(offset);
+                return true;
             } else if (this.prefetch) {
                 dataSource.prefetch(pageSkip, pageSize, function() {
+                    buffer.offset = offset;
+                    buffer._recalculate();
                     buffer._goToRange(offset, true);
                 });
+                return false;
             }
+
+            return true;
         },
 
         syncDataSource: function() {
@@ -4102,15 +4120,19 @@ var __meta__ = {
             this.dataSource.enableRequestsInProgress();
         },
 
+        _reset: function() {
+            this._syncPending = true;
+        },
+
         _change: function() {
-            var dataSource = this.dataSource,
-                firstItemUid = dataSource.firstItemUid();
+            var dataSource = this.dataSource;
 
             this.length = this.useRanges ? dataSource.lastRange().end : dataSource.view().length;
 
-            if (this._firstItemUid !== firstItemUid || !this.useRanges) {
+            if (this._syncPending) {
                 this._syncWithDataSource();
                 this._recalculate();
+                this._syncPending = false;
                 this.trigger("reset", { offset: this.offset });
             }
 

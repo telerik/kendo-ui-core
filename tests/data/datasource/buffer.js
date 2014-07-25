@@ -336,11 +336,61 @@ test("reaching the end of the range does not shift", 4, function() {
     equal(buffer.at(25), undefined);
 });
 
-test("calling next shifts range to mid state", 1, function() {
+asyncTest("calling next shifts range to mid state", 1, function() {
     ds.fetch();
     buffer.at(19);
+
+    buffer.one("resize", function() {
+        start();
+        equal(ds.view()[0].value, 13);
+    });
+
     buffer.next();
-    equal(ds.view()[0].value, 13);
+});
+
+module("buffer jumps", {
+    setup: function() {
+        ds = new kendo.data.DataSource({
+            transport: {
+                read: function(options) {
+
+                    var results = [], data = options.data;
+                    for (var i = data.skip; i < data.skip + data.take; i ++) {
+                        results.push({ num: i });
+                    }
+
+                    options.success(results);
+                }
+            },
+            pageSize: 20,
+            serverPaging: true,
+            page: 2,
+            schema: {
+                total: function() { return 100000; }
+            }
+        });
+
+        buffer = new kendo.data.Buffer(ds, 7);
+    },
+
+    teardown: function() {
+    }
+});
+
+asyncTest("understands the datasource offsets", 2, function() {
+    ds.fetch();
+
+    equal(buffer.at(20).num, 20);
+
+    buffer.one("reset", function() {
+        ok(false);
+    });
+
+    buffer.one("resize", function() {
+        start();
+    });
+
+    equal(buffer.at(19), null);
 });
 
 }());
