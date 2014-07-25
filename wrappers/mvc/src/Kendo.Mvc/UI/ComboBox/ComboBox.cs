@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
+                    HandlerName = "function() { return kendo.ui.ComboBox.requestData(jQuery(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\")); }"
                 };
             }
 

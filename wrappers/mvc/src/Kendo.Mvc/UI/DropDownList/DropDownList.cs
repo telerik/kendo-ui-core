@@ -76,7 +76,7 @@ namespace Kendo.Mvc.UI
             {
                 DataSource.Transport.Read.Data = new ClientHandlerDescriptor
                 {
-                    HandlerName = "function() { return kendo.ui.DropDownList.requestData(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\"); }"
+                    HandlerName = "function() { return kendo.ui.DropDownList.requestData(jQuery(\"" + EscapeRegex.Replace(Selector, @"\\$1") + "\")); }"
                 };
             }
 
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI
 
             if (!string.IsNullOrEmpty(ValueTemplateId))
             {
-                options["valueTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery('{0}{1}').html()", idPrefix, ValueTemplateId) };
+                options["valueTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery(\"{0}{1}\").html()", idPrefix, ValueTemplateId) };
             }
             else if (!string.IsNullOrEmpty(ValueTemplate))
             {
