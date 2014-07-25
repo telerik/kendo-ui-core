@@ -26,12 +26,17 @@
         init: function(map, options) {
             Layer.fn.init.call(this, map, options);
 
+            this._markerClick = proxy(this._markerClick, this);
+            this.element.on("click", ".k-marker", this._markerClick);
+
             this.items = [];
             this._initDataSource();
         },
 
         destroy: function() {
             Layer.fn.destroy.call(this);
+
+            this.element.off("click", ".k-marker", this._markerClick);
 
             this.dataSource.unbind("change", this._dataChange);
             this.clear();
@@ -73,10 +78,12 @@
         },
 
         update: function(marker) {
-            // TODO: Do not show markers outside the map extent
             var loc = marker.location();
             if (loc) {
                 marker.showAt(this.map.locationToView(loc));
+
+                var args = { marker: marker, layer: this };
+                this.map.trigger("markerActivate", args);
             }
         },
 
@@ -92,7 +99,7 @@
             var marker = map.Marker.create(options, this.options);
             marker.dataItem = dataItem;
 
-            var args = { marker: marker };
+            var args = { marker: marker, layer: this };
             var cancelled = this.map.trigger("markerCreated", args);
             if (!cancelled) {
                 this.add(marker);
@@ -149,6 +156,11 @@
                     title: getTitle(dataItem)
                 }, dataItem);
             }
+        },
+
+        _markerClick: function(e) {
+            var args = { marker: $(e.target).data("kendoMarker"), layer: this };
+            this.map.trigger("markerClick", args);
         }
     });
 
@@ -215,6 +227,7 @@
                 this.element = $(doc.createElement("span"))
                     .addClass("k-marker k-marker-" + kendo.toHyphens(options.shape || "pin"))
                     .attr("title", options.title)
+                    .data("kendoMarker", this)
                     .css("zIndex", options.zIndex);
 
                 if (layer) {
