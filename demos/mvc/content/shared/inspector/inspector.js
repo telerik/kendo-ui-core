@@ -76,9 +76,30 @@
                 displayJSON({ wrapper: safeValueForJSON(widget.wrapper) }).appendTo(cont);
             }
 
+            var orig_options = widget.constructor.prototype.options;
+
             displayJSON({ options: safeValueForJSON(widget.options) }, {
                 filterable: true,
-                sort: true
+                sort: true,
+                wrapProperty: function(key, val, path) {
+                    path = path.slice(1);
+                    var modified = propertyChanged(orig_options, path, val);
+                    if (self.options.docBaseUrl) {
+                        path = path.filter(function(x){ return typeof x == "string" }).join(".");
+                        var url = self.options.docBaseUrl + "#configuration";
+                        if (path) {
+                            url += "-" + path;
+                        }
+                        return "<a target='KENDOUIDOCS' kendo-tooltip='Config option: " + path + "' class='property doclink"
+                            + (modified ? " modified" : "")
+                            + "' href='" + url + "'>" + htmlescape(key) + "</a>";
+                    }
+                    else {
+                        return "<span class='property"
+                            + (modified ? " modified" : "")
+                            + "'>" + htmlescape(key) + "</span>";
+                    }
+                }
             }).appendTo(cont);
 
             element.find(".kendo-inspector-section.datasource").removeClass("visible").css({
