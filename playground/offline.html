@@ -23,9 +23,17 @@
 
             var online = true;
 
+            if (localStorage["online"] == "false") {
+                $("#online").removeAttr("checked");
+                online = false;
+            }
+
             $("#online").kendoMobileSwitch({
+                value: Boolean(localStorage["online"]),
                 change: function() {
                     online = this.value();
+
+                    localStorage.setItem("online", online);
 
                     if (online) {
                         notification.success("Online");
@@ -48,6 +56,8 @@
                 sync: function() {
                     if (localStorage.getItem("grid")) {
                         var state = JSON.parse(localStorage.getItem("grid"));
+
+                        if (!state.requests) return;
 
                         notification.success(kendo.format("Sync {0} requests", state.requests.length));
 
@@ -87,34 +97,34 @@
 
                     localStorage.setItem("grid", JSON.stringify(state));
                 },
-                read: function(options) {
-                    var success = options.success || noop;
-
-                    if (online) {
-
-                        options.success = function(response) {
-                            var state = { };
-
-                            if (localStorage.getItem("grid")) {
-                                state = JSON.parse(localStorage.getItem("grid"));
-                            }
-
-                            state.response = response;
-
-                            localStorage.setItem("grid", JSON.stringify(state));
-
-                            success(response);
-                        };
-
-                        kendo.data.RemoteTransport.fn.read.call(this, options);
-                    } else {
-                        var state = { response : null };
+                data: function(data) {
+                    if (data !== undefined) {
+                        var state = { };
 
                         if (localStorage.getItem("grid")) {
                             state = JSON.parse(localStorage.getItem("grid"));
                         }
 
-                        success(state.response);
+                        state.data = data;
+
+                        localStorage.setItem("grid", JSON.stringify(state));
+                    } else {
+                        var state = { };
+
+                        if (localStorage.getItem("grid")) {
+                            state = JSON.parse(localStorage.getItem("grid"));
+                        }
+
+                        return state.data;
+                    }
+                },
+                read: function(options) {
+                    var success = options.success || noop;
+
+                    if (online) {
+                        kendo.data.RemoteTransport.fn.read.call(this, options);
+                    } else {
+                        options.success(this.data());
                     }
                 },
                 update: function(options) {
@@ -140,7 +150,89 @@
                 }
             }
 
-            var dataSource = new kendo.data.DataSource({
+            var OfflineDataSource = kendo.data.DataSource.extend({
+                success: function(data) {
+                    var that = this,
+                    options = that.options;
+
+                    that.trigger("requestend", { response: data, type: "read" });
+
+                    if (online) {
+                        data = that.reader.parse(data);
+
+                        that.transport.data(data);
+
+                        if (that._handleCustomErrors(data)) {
+                            that._dequeueRequest();
+                            return;
+                        }
+
+                        that._total = that.reader.total(data);
+
+                        if (that._aggregate && options.serverAggregates) {
+                            that._aggregateResult = that.reader.aggregates(data);
+                        }
+
+                        data = that._readData(data);
+                    } else {
+                        that._total = data.length;
+                    }
+
+                    that._pristineData = data.slice(0);
+                    that._pristineTotal = that._total;
+
+                    that._data = that._observe(data);
+
+                    that._addRange(that._data);
+
+                    that._process(that._data);
+                    that._dequeueRequest();
+                },
+                sync: function() {
+                    var that = this,
+                    idx,
+                    length,
+                    created = [],
+                    updated = [],
+                    destroyed = that._destroyed,
+                    data = that._flatData(that._data);
+
+                    if (!that.reader.model) {
+                        return;
+                    }
+
+                    for (idx = 0, length = data.length; idx < length; idx++) {
+                        if (data[idx].isNew()) {
+                            created.push(data[idx]);
+                            } else if (data[idx].dirty) {
+                            updated.push(data[idx]);
+                        }
+                    }
+
+                    var promises = that._send("create", created);
+
+                    promises.push.apply(promises ,that._send("update", updated));
+                    promises.push.apply(promises ,that._send("destroy", destroyed));
+
+                    $.when.apply(null, promises)
+                    .then(function() {
+                        var idx, length;
+
+                        for (idx = 0, length = arguments.length; idx < length; idx++){
+                            that._accept(arguments[idx]);
+                        }
+
+                        that._change({ action: "sync" });
+
+                        that.transport.data(that.data());
+
+                        that.trigger("sync");
+                    });
+                }
+            });
+
+
+            var dataSource = new OfflineDataSource({
                 transport: new OfflineTransport({
                     read:  {
                         url: url(""),
