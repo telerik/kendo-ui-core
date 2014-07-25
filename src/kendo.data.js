@@ -2211,6 +2211,7 @@ var __meta__ = {
                 that._pristineData = value.slice(0);
 
                 that._ranges = [];
+                that.trigger("reset");
                 that._addRange(that._data);
 
                 that._total = that._data.length;
@@ -2649,6 +2650,7 @@ var __meta__ = {
                     that.trigger(PROGRESS);
 
                     that._ranges = [];
+                    that.trigger("reset");
                     that.transport.read({
                         data: params,
                         success: proxy(that.success, that),

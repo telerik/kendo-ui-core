@@ -162,6 +162,23 @@ test("read raises the change event", function() {
     ok(changeWasCalled);
 });
 
+test("read raises the reset event", function() {
+    var dataSource = new DataSource({
+        data: data
+    });
+
+    var resetWasCalled = false;
+
+    dataSource.bind("reset", function() {
+        resetWasCalled = true;
+    });
+
+    dataSource.read();
+
+    ok(resetWasCalled);
+});
+
+
 test("data is initially empty", function() {
     var dataSource = new DataSource({
         data: data

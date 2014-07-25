@@ -390,4 +390,15 @@ test("reseting data unbind change from the previous data", 1, function() {
     originalData.push({});
 });
 
+test("setting data triggers reset event", 1, function() {
+    var dataSource = new DataSource({ data: [] });
+    var originalData = dataSource.data();
+
+    dataSource.bind("reset", function() {
+        ok(true);
+    });
+
+    dataSource.data([{}]);
+});
+
 }());
