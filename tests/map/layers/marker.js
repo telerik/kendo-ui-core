@@ -516,6 +516,20 @@
             createBoundLayer();
         });
 
+        test("markerCreated has reference to marker", 2, function() {
+            map.bind("markerCreated", function(e) {
+                ok(e.marker);
+            });
+            createBoundLayer();
+        });
+
+        test("markerCreated has reference to layer", 2, function() {
+            map.bind("markerCreated", function(e) {
+                ok(e.layer === layer);
+            });
+            createBoundLayer();
+        });
+
         test("markerCreated can be cancelled", function() {
             map.bind("markerCreated", function(e) {
                 e.preventDefault();

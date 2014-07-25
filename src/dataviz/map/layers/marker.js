@@ -92,7 +92,7 @@
             var marker = map.Marker.create(options, this.options);
             marker.dataItem = dataItem;
 
-            var args = { marker: marker };
+            var args = { marker: marker, layer: this };
             var cancelled = this.map.trigger("markerCreated", args);
             if (!cancelled) {
                 this.add(marker);
