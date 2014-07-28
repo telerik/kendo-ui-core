@@ -157,15 +157,6 @@ asyncTest("requesting an out of range item shifts the buffer to the correct rang
     });
 });
 
-asyncTest("requesting the last item of a non-existent range switches to mid-range state", 1, function() {
-    ds.fetch();
-    buffer.at(79);
-    buffer.one("expand", function() {
-        start();
-        equal(ds.view()[0], 73);
-    });
-});
-
 module("buffer end/resize events ", {
     setup: function() {
         ds = new kendo.data.DataSource({
