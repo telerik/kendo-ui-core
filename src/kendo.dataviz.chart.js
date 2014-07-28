@@ -1421,7 +1421,20 @@ var __meta__ = {
             return this._otherFields[series.type] || [VALUE];
         },
 
+        resetSeriesCache: function(series) {
+            if (series.data) {
+                series.data._bindCache = [];
+            }
+        },
+
         bindPoint: function(series, pointIx) {
+            if (series.data._bindCache) {
+                var cached = series.data._bindCache[pointIx];
+                if (cached) {
+                    return cached;
+                }
+            }
+
             var binder = this,
                 data = series.data,
                 pointData = data[pointIx],
@@ -1457,6 +1470,10 @@ var __meta__ = {
             }
 
             result.fields = fields || {};
+
+            if (series.data._bindCache) {
+                series.data._bindCache[pointIx] = result;
+            }
 
             return result;
         },
@@ -7998,7 +8015,7 @@ var __meta__ = {
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.series = series;
-            plotArea.setSeriesIndexes();
+            plotArea.initSeries();
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
@@ -8034,13 +8051,15 @@ var __meta__ = {
             }
         },
 
-        setSeriesIndexes: function() {
+        initSeries: function() {
             var series = this.series,
                 i, currentSeries;
 
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 currentSeries.index = i;
+
+                SeriesBinder.current.resetSeriesCache(currentSeries);
             }
         },
 
@@ -8330,6 +8349,7 @@ var __meta__ = {
                 i;
 
             panes = [].concat(panes);
+            this.initSeries();
 
             for (i = 0; i < panes.length; i++) {
                 plotArea.removeCrosshairs(panes[i]);
@@ -8983,6 +9003,8 @@ var __meta__ = {
                     srcPoints[i], categories[i]
                 );
             }
+
+            SeriesBinder.current.resetSeriesCache(result);
 
             return result;
         },
