@@ -52,9 +52,9 @@
                 var pivot = $("#pivotgrid").kendoPivotGrid({
                     dataSource: {
                         columns: [{ name: "FirstName", expand: true },{ name: "LastName", expand: true } ],
-                        measures: ["Count"],
+                        measures: ["Count", "Sum"],
                         rows: [{ name: "Age", expand: true  }],
-                        data: data,
+                       data: data,
                         schema: {
                             cube: {
                                 dimensions: {
@@ -63,7 +63,8 @@
                                     Age: { caption: "Age" }
                                 },
                                 measures: {
-                                    "Count": { caption: "Measure 1", field: "Age",  aggregate: function(data, state) { return state + 1; } }
+                                    "Count": { caption: "Count", field: "Name1",  aggregate: function(data, state) { return state + 1; } },
+                                    "Sum": { caption: "Sum", field: "Age",  aggregate: function(data, state) { return state + data; } }
                                 }
                             }
                         },
