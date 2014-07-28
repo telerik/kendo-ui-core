@@ -4790,16 +4790,11 @@ var __meta__ = {
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
-                points = [],
-                i,
-                length = linePoints.length,
-                pointCenter;
+                points = new Array(linePoints.length);
 
-            for (i = 0; i < length; i++) {
+            for (var i = 0, length = linePoints.length; i < length; i++) {
                 if (linePoints[i].visible !== false) {
-                    pointCenter = linePoints[i].markerBox().center();
-
-                    points.push(Point2D(pointCenter.x, pointCenter.y));
+                    points[i] = linePoints[i]._childBox.center();
                 }
             }
 
