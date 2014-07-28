@@ -1202,10 +1202,13 @@
              * @returns {Connection}
              */
             serialize: function () {
+                var from = this.from.toJSON ? this.from.toJSON : this.from.toString(),
+                    to = this.to.toJSON ? this.to.toJSON : this.to.toString()
+
                 var json = deepExtend({}, {
                     options: this.options,
-                    from: this.from.toJSON(),
-                    to: this.to.toJSON()
+                    from: from,
+                    to: to
                 });
                 if (this.dataItem) {
                     json.dataItem = this.dataItem.toString();
