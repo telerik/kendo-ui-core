@@ -50,6 +50,8 @@ namespace Kendo.Mvc.UI
         
         public string[] Colors { get; set; }
         
+        public TreeMapType? Type { get; set; }
+        
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
@@ -111,6 +113,11 @@ namespace Kendo.Mvc.UI
                 json["colors"] = Colors;
             }
 	    
+            if (Type.HasValue)
+            {
+                json["type"] = Type;
+            }
+                
         //<< Serialization
 
             writer.Write(Initializer.Initialize(Selector, "TreeMap", json));

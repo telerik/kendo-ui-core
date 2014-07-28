@@ -2222,4 +2222,4 @@
     <Compile Include="UI\TreeView\Settings\TreeViewMessagesSettings.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewMessagesSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\TreeMap\TreeMapType.cs" /></ItemGroup></Project>

@@ -100,6 +100,17 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The layout type for the Treemap.
+        /// </summary>
+        /// <param name="value">The value that configures the type.</param>
+        public TreeMapBuilder Type(TreeMapType value)
+        {
+            container.Type = value;
+
+            return this;
+        }
+        
         //<< Fields
 
         /// <summary>
