@@ -153,8 +153,10 @@ body:before
     display: none;
 }
 
-:-webkit-any(.km-ios):not(.km-android):not(.km-blackberry6):not(.km-blackberry7):not(.km-meego) .km-icon:after,
-:-webkit-any(.km-blackberry):not(.km-android):not(.km-blackberry6):not(.km-blackberry7):not(.km-meego) .km-icon:after
+.k-webkit .km-ios:not(.km-android):not(.km-blackberry6):not(.km-blackberry7) .km-icon:after,
+.k-webkit .km-blackberry:not(.km-android):not(.km-blackberry6):not(.km-blackberry7) .km-icon:after,
+.k-safari .km-ios:not(.km-android):not(.km-blackberry6):not(.km-blackberry7) .km-icon:after,
+.k-safari .km-blackberry:not(.km-android):not(.km-blackberry6):not(.km-blackberry7) .km-icon:after
 {
     background-image: inherit;
     background-repeat: inherit;
