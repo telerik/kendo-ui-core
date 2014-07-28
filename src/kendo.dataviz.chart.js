@@ -1422,14 +1422,12 @@ var __meta__ = {
         },
 
         resetSeriesCache: function(series) {
-            if (series.data) {
-                series.data._bindCache = [];
-            }
+            series._bindCache = [];
         },
 
         bindPoint: function(series, pointIx) {
-            if (series.data._bindCache) {
-                var cached = series.data._bindCache[pointIx];
+            if (series._bindCache) {
+                var cached = series._bindCache[pointIx];
                 if (cached) {
                     return cached;
                 }
@@ -1471,8 +1469,8 @@ var __meta__ = {
 
             result.fields = fields || {};
 
-            if (series.data._bindCache) {
-                series.data._bindCache[pointIx] = result;
+            if (series._bindCache) {
+                series._bindCache[pointIx] = result;
             }
 
             return result;
