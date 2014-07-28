@@ -16396,7 +16396,7 @@ If the dataSource options is missing the options of the Grid's dataSource will b
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>JavaScript function which will customize how the input for the filter value is customized.</description>
+            <description>JavaScript function which will customize how the input for the filter value is rendered.</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16406,7 +16406,7 @@ If the dataSource options is missing the options of the Grid's dataSource will b
 
 
     <tag>
-        <description>JavaScript function which will customize how the input for the filter value is customized.</description>
+        <description>JavaScript function which will customize how the input for the filter value is rendered.</description>
         <name>grid-column-filterable-cell-template</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableCellTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -35575,6 +35575,12 @@ instance.If the HierarchicalDataSource option is set to a JavaScript object or a
         <attribute>
             <description>The data item field which contains the tile title.</description>
             <name>textField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The layout type for the Treemap.The Supported values are:</description>
+            <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
