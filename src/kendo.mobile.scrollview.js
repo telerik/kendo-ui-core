@@ -614,7 +614,7 @@ var __meta__ = {
 
             this.trigger(CLEANUP, { item: page.element });
 
-            if(view) {
+            if (view !== null) {
                 page.content(template(view));
             } else {
                 page.content(emptyTemplate({}));

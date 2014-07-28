@@ -4023,6 +4023,7 @@ var __meta__ = {
                     return this.dataSource.at(index - this.dataOffset);
                 } else {
                     this.trigger("endreached", { index: index });
+                    return null;
                 }
             }
         },
