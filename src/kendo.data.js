@@ -3994,11 +3994,7 @@ var __meta__ = {
             if (this.useRanges) {
                 // out of range request
                 if (index < this.dataOffset || index >= this.skip + pageSize) {
-                    if (index % pageSize === pageSize - 1) {
-                        itemPresent = this.range(Math.ceil(index / pageSize) * pageSize - this.viewSize, true);
-                    } else {
-                        itemPresent = this.range(Math.floor(index / pageSize) * pageSize);
-                    }
+                    itemPresent = this.range(Math.floor(index / pageSize) * pageSize);
                 }
 
                 // prefetch
