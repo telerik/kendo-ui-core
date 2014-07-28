@@ -1,0 +1,9 @@
+:options:
+    - :name: type
+      :type: String
+      :description: The layout type for the Treemap.
+      :values:
+          - squarified
+          - horizontal
+          - veritcal
+
