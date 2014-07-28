@@ -11,7 +11,8 @@
     border-bottom-style: solid;
 }
 
-.km-ios :-webkit-any(.km-back)
+.k-webkit .km-ios .km-back,
+.k-safari .km-ios .km-back
 {
     overflow: hidden;
     margin-left: -1em;
@@ -37,19 +38,22 @@
     background-repeat: no-repeat;
 }
 
-.km-ios :-webkit-any(.km-back):after
+.k-webkit .km-ios .km-back:after,
+.k-safari .km-ios .km-back:after
 {
     display: block;
 }
 
-.km-ios.km-on-android :-webkit-any(.km-back)
+.k-webkit .km-ios.km-on-android .km-back,
+.k-safari .km-ios.km-on-android .km-back
 {
     -webkit-mask-image: none;
     padding-left: .8em;
     margin-left: 0;
 }
 
-.km-ios.km-on-android :-webkit-any(.km-back):after
+.k-webkit .km-ios.km-on-android .km-back:after,
+.k-safari .km-ios.km-on-android .km-back:after
 {
     display: none;
 }
