@@ -559,11 +559,8 @@ var __meta__ = {
         },
 
         _onResize: function() {
-            var page = this.pages[2], //last page
-                idx = this.page + 1;
-
-            if(this._pendingPageRefresh) {
-                this.setPageContent(page, idx);
+            if (this._pendingPageRefresh) {
+                this._updatePagesContent(this.page);
                 this._pendingPageRefresh = false;
             }
         },
