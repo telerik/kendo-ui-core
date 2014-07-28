@@ -28,6 +28,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * The layout type for the Treemap.The Supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\TreeMap
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
+    }
+
+    /**
     * The data item field which contains the tile value.
     * @param string $value
     * @return \Kendo\Dataviz\UI\TreeMap
