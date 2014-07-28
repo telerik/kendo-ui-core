@@ -278,9 +278,9 @@ var __meta__ = {
             if (this.contentHeight === "100%") {
                 var containerHeight = this.element.parent().height();
 
-                if(this.enablePager === true) {
+                if (this.enablePager === true) {
                     var pager = this.element.parent().find("ol.km-pages");
-                    if(pager.length) {
+                    if (pager.length) {
                         containerHeight -= pager.outerHeight(true);
                     }
                 }
@@ -338,7 +338,7 @@ var __meta__ = {
 
         _viewShow: function() {
             var that = this;
-            if(that._pendingWidgetRefresh) {
+            if (that._pendingWidgetRefresh) {
                 setTimeout(function() {
                     that._resetPages();
                 }, 0);
@@ -349,11 +349,11 @@ var __meta__ = {
         _buffer: function() {
             var itemsPerPage = this.options.itemsPerPage;
 
-            if(this.buffer) {
+            if (this.buffer) {
                 this.buffer.destroy();
             }
 
-            if(itemsPerPage > 1) {
+            if (itemsPerPage > 1) {
                 this.buffer = new BatchBuffer(this.dataSource, itemsPerPage);
             } else {
                 this.buffer = new Buffer(this.dataSource, itemsPerPage * 3);
@@ -376,14 +376,14 @@ var __meta__ = {
                 templateProxy = {},
                 emptyTemplateProxy = {};
 
-            if(typeof template === FUNCTION) {
+            if (typeof template === FUNCTION) {
                 templateProxy.template = template;
                 template = "#=this.template(data)#";
             }
 
             this.template = proxy(kendo.template(template), templateProxy);
 
-            if(typeof emptyTemplate === FUNCTION) {
+            if (typeof emptyTemplate === FUNCTION) {
                 emptyTemplateProxy.emptyTemplate = emptyTemplate;
                 emptyTemplate = "#=this.emptyTemplate(data)#";
             }
@@ -419,9 +419,9 @@ var __meta__ = {
             else if (this.options.contentHeight === "100%") {
                 var containerHeight = this.element.parent().height();
 
-                if(this.options.enablePager === true) {
+                if (this.options.enablePager === true) {
                     var pager = this.element.parent().find("ol.km-pages");
-                    if(pager.length) {
+                    if (pager.length) {
                         containerHeight -= pager.outerHeight(true);
                     }
                 }
@@ -446,7 +446,7 @@ var __meta__ = {
             buffer.syncDataSource();
             dataItem = buffer.at(page);
 
-            if(!dataItem) {
+            if (!dataItem) {
                 return;
             }
 
@@ -466,30 +466,30 @@ var __meta__ = {
                 nextPage,
                 delta = 0;
 
-            if(swipeType === RIGHT_SWIPE) {
-                if(that.page !== 0) {
+            if (swipeType === RIGHT_SWIPE) {
+                if (that.page !== 0) {
                     delta = -1; //backward
                 }
-            } else if(swipeType === LEFT_SWIPE && !isEndReached) {
+            } else if (swipeType === LEFT_SWIPE && !isEndReached) {
                 delta = 1; //forward
-            } else if(offset > 0 && (thresholdPassed && !isEndReached)) {
+            } else if (offset > 0 && (thresholdPassed && !isEndReached)) {
                 delta = 1; //forward
-            } else if(offset < 0 && thresholdPassed) {
-                if(that.page !== 0) {
+            } else if (offset < 0 && thresholdPassed) {
+                if (that.page !== 0) {
                     delta = -1; //backward
                 }
             }
 
             nextPage = that.page;
-            if(delta) {
+            if (delta) {
                 nextPage = (delta > 0) ? nextPage + 1 : nextPage - 1;
             }
 
-            if(callback && callback({ currentPage: that.page, nextPage: nextPage })) {
+            if (callback && callback({ currentPage: that.page, nextPage: nextPage })) {
                 delta = 0;
             }
 
-            if(delta === 0) {
+            if (delta === 0) {
                 that._cancelMove(ease, instant);
             } else if (delta === -1) {
                 that._moveBackward(instant);
@@ -501,11 +501,11 @@ var __meta__ = {
         updatePage: function() {
             var pages = this.pages;
 
-            if(this.pane.offset() === 0) {
+            if (this.pane.offset() === 0) {
                 return false;
             }
 
-            if(this.pane.offset() > 0) {
+            if (this.pane.offset() > 0) {
                 pages.push(this.pages.shift());//forward
                 this.page++;
                 this.setPageContent(pages[2], this.page + 1);
@@ -526,7 +526,7 @@ var __meta__ = {
             var offset = this.pane.offset(),
                 threshold  = this.pane.size().width * 3/4;
 
-            if(abs(offset) > threshold) {
+            if (abs(offset) > threshold) {
                 return this.updatePage();
             }
 
@@ -571,7 +571,7 @@ var __meta__ = {
         _onReset: function() {
             this.pageCount = ceil(this.dataSource.total() / this.options.itemsPerPage);
 
-            if(this.element.is(":visible")) {
+            if (this.element.is(":visible")) {
                 this._resetPages();
             } else {
                 this._widgetNeedsRefresh = true;
@@ -605,7 +605,7 @@ var __meta__ = {
                 emptyTemplate = this.emptyTemplate,
                 view = null;
 
-            if(index >= 0) {
+            if (index >= 0) {
                 view = buffer.at(index);
                 if ($.isArray(view) && !view.length) {
                     view = null;
@@ -667,7 +667,7 @@ var __meta__ = {
                 .wrapInner("<div/>")
                 .addClass("km-scrollview");
 
-            if(this.options.enablePager) {
+            if (this.options.enablePager) {
                 this.pager = new Pager(this);
             }
 
@@ -719,7 +719,7 @@ var __meta__ = {
 
             var mobileContainer = that.container();
 
-            if(mobileContainer.nullObject) {
+            if (mobileContainer.nullObject) {
                 that.viewInit();
                 that.viewShow();
             } else {
@@ -754,7 +754,7 @@ var __meta__ = {
         },
 
         viewInit: function() {
-            if(this.options.autoBind) {
+            if (this.options.autoBind) {
                 this._content.scrollTo(this._content.page, true);
             }
         },
@@ -837,7 +837,7 @@ var __meta__ = {
             this.page = this._content.page;
 
             data = buffer ? buffer.at(this.page) : undefined;
-            if(!(data instanceof Array)) {
+            if (!(data instanceof Array)) {
                 data = [data];
             }
             element = pages ? pages[1].element : undefined;
@@ -860,7 +860,7 @@ var __meta__ = {
 
             if (velocity > velocityThreshold) {
                 swipeType = RIGHT_SWIPE;
-            } else if(velocity < -velocityThreshold) {
+            } else if (velocity < -velocityThreshold) {
                 swipeType = LEFT_SWIPE;
             }
 
