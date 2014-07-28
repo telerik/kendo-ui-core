@@ -194,7 +194,7 @@ var __meta__ = {
     });
 
 
-    window.jQuery.fn.kendoMobileSwipe = function(callback, options) {
+    window.kendo.jQuery.fn.kendoMobileSwipe = function(callback, options) {
         this.each(function() {
             new Swipe(this, callback, options);
         });
