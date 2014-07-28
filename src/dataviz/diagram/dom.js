@@ -407,7 +407,7 @@
                     return this.shape.getPosition(this.options.name);
                 }
             },
-            toString: function () {
+            toJSON: function () {
                 return {
                     shapeId: this.shape.toString(),
                     connector: this.options.name
@@ -1204,8 +1204,8 @@
             serialize: function () {
                 var json = deepExtend({}, {
                     options: this.options,
-                    from: this.from.toString(),
-                    to: this.to.toString()
+                    from: this.from.toJSON(),
+                    to: this.to.toJSON()
                 });
                 if (this.dataItem) {
                     json.dataItem = this.dataItem.toString();
@@ -1576,7 +1576,7 @@
 
                 for (i = 0; i < this.connections.length; i++) {
                     var con = this.connections[i];
-                    var conOptions = deepExtend({}, { from: con.from.toString(), to: con.to.toString() }, con.options);
+                    var conOptions = deepExtend({}, { from: con.from.toJSON(), to: con.to.toJSON() }, con.options);
                     json.connections.push(conOptions);
                 }
 
