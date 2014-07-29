@@ -176,11 +176,13 @@ var __meta__ = {
         return members;
     }
 
-    function addDataCell(result, rowIndex, map, key, format) {
-        var value, aggregate, columnKey, measuresCount = 0;
+    function addDataCell(result, rowIndex, map, key, formats) {
+        var value, aggregate, columnKey, format, measuresCount = 0;
 
         for (aggregate in map[key].aggregates) {
             value = map[key].aggregates[aggregate];
+
+            format = formats[aggregate];
 
             result[result.length] = {
                 ordinal: rowIndex++,
@@ -197,6 +199,8 @@ var __meta__ = {
 
             for (aggregate in items[columnKey].aggregates) {
                 value = items[columnKey].aggregates[aggregate];
+
+                format = formats[aggregate];
 
                 result[result.length] = {
                     ordinal: rowIndex + index++,
@@ -329,12 +333,15 @@ var __meta__ = {
         },
 
         _toDataArray: function(map, columns, measures) {
-            var format;
+            var formats = {};
 
             if (measures && measures.length) {
-                var measure = (this.measures || {})[measures[0]];
-                if (measure.format) {
-                    format = measure.format;
+                var descriptors = (this.measures || {});
+                for (var idx = 0; idx < measures.length; idx++) {
+                    var measure = descriptors[measures[idx]];
+                    if (measure.format) {
+                        formats[measures[idx]] = measure.format;
+                    }
                 }
             }
 
@@ -342,7 +349,7 @@ var __meta__ = {
             var items;
             var rowIndex = 0;
 
-            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY, format);
+            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY, formats);
 
             rowIndex += columns.length;
 
@@ -351,7 +358,7 @@ var __meta__ = {
                     continue;
                 }
 
-                addDataCell(result, rowIndex, map, key, format);
+                addDataCell(result, rowIndex, map, key, formats);
 
                 rowIndex += columns.length;
             }

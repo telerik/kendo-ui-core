@@ -472,4 +472,41 @@
         equal(result.data.length, 16);
     });
 
+    test("process data items are correctly formatted with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name", format: "foo{0}",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  format: "{0}bar", aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+
+        equal(result.data[0].value, 3);
+        equal(result.data[0].fmtValue, "foo3");
+        equal(result.data[1].value, 3);
+        equal(result.data[1].fmtValue, "3bar");
+    });
+
+    test("process data items are correctly formatted with multiple measures - single measure format", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  format: "{0}bar", aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+
+        equal(result.data[0].value, 3);
+        equal(result.data[0].fmtValue, 3);
+        equal(result.data[1].value, 3);
+        equal(result.data[1].fmtValue, "3bar");
+    });
+
+
 })();
