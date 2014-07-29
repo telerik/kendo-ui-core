@@ -792,6 +792,7 @@ var __meta__ = {
 
         setDataSource: function(dataSource) {
             var that = this;
+            var scrollable = that.options.scrollable;
 
             that.options.dataSource = dataSource;
 
@@ -800,6 +801,14 @@ var __meta__ = {
             that._pageable();
 
             that._thead();
+
+            if (scrollable) {
+                if (scrollable.virtual) {
+                    that.content.find(">.k-virtual-scrollable-wrap").scrollLeft(0);
+                } else {
+                    that.content.scrollLeft(0);
+                }
+            }
 
             if (that.options.groupable) {
                 that._groupable();
@@ -3173,21 +3182,26 @@ var __meta__ = {
                 }
 
                 if (scrollable.virtual) {
-                    that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
+                    that.content.find(">.k-virtual-scrollable-wrap").unbind("scroll" + NS).bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft);
                         if (that.lockedContent) {
                             that.lockedContent[0].scrollTop = this.scrollTop;
                         }
                     });
                 } else {
-                    that.content.bind("scroll" + NS, function () {
+                    that.content.unbind("scroll" + NS).bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft);
                         if (that.lockedContent) {
                             that.lockedContent[0].scrollTop = this.scrollTop;
                         }
                     });
 
-                    var touchScroller = kendo.touchScroller(that.content);
+                    var touchScroller = that.content.data("kendoTouchScroller");
+                    if (touchScroller) {
+                        touchScroller.destroy();
+                    }
+
+                    touchScroller = kendo.touchScroller(that.content);
                     if (touchScroller && touchScroller.movable) {
                         that.touchScroller = touchScroller;
                         touchScroller.movable.bind("change", function(e) {

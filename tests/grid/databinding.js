@@ -144,7 +144,52 @@
         equal(grid.columns.length, 2);
     });
 
-    test("binding to null value does not display the string 'null'", function() {
+    test("setDataSource resets the data area scroll offset to zero", function () {
+        var grid = new Grid(dom, {
+            dataSource: {
+                data: [{ text: 11, value: 11 }, { text: 22, value: 22}]
+            },
+            columns: [
+                { field: "text", width: 1000 },
+                { field: "value", width: 1000 }
+            ]
+        });
+
+        grid.wrapper.width(500);
+        grid.content.scrollLeft(1000);
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
+        }));
+
+        equal(grid.content.scrollLeft(), 0);
+    });
+
+    test("setDataSource resets the data area scroll offset to zero when virtual scrolling is used", function () {
+        var grid = new Grid(dom, {
+            dataSource: {
+                data: [{ text: 11, value: 11 }, { text: 22, value: 22 }]
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "text", width: 1000 },
+                { field: "value", width: 1000 }
+            ]
+        });
+
+        grid.wrapper.width(500);
+        grid.content.find(">.k-virtual-scrollable-wrap").scrollLeft(1000);
+
+        grid.setDataSource(new kendo.data.DataSource({
+            data: [{ text: 1, value: 1 }, { text: 2, value: 2 }]
+        }));
+
+        equal(grid.content.find(">.k-virtual-scrollable-wrap").scrollLeft(), 0);
+    });
+
+    test("binding to null value does not display the string 'null'", function () {
         var grid = new Grid(dom, { dataSource: [ { foo: null} ], columns: ["foo"] });
 
         ok(grid.tbody.find("td").text() != "null");
