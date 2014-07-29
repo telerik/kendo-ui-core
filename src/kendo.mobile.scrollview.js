@@ -559,10 +559,14 @@ var __meta__ = {
         },
 
         _onResize: function() {
+            this.pageCount = ceil(this.dataSource.total() / this.options.itemsPerPage);
+
             if (this._pendingPageRefresh) {
                 this._updatePagesContent(this.page);
                 this._pendingPageRefresh = false;
             }
+
+            this.trigger("resize");
         },
 
         _onReset: function() {
@@ -688,17 +692,20 @@ var __meta__ = {
 
             var empty = this.inner.children().length === 0;
 
-            that._content = empty ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane, options);
-            that._content.page = that.page;
+            var content = empty ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane, options);
 
-            that._content.bind("reset", function() {
-                var content = that._content;
+            content.page = that.page;
 
+            content.bind("reset", function() {
                 that._syncWithContent();
                 that.trigger(REFRESH, { pageCount: content.pageCount, page: content.page });
             });
 
-            that._content.bind(ITEM_CHANGE, function(e) {
+            content.bind("resize", function() {
+                that.trigger(REFRESH, { pageCount: content.pageCount, page: content.page });
+            });
+
+            content.bind(ITEM_CHANGE, function(e) {
                 that.trigger(ITEM_CHANGE, e);
 
                 that.angular("compile", function() {
@@ -706,12 +713,13 @@ var __meta__ = {
                 });
             });
 
-            that._content.bind(CLEANUP, function(e) {
+            content.bind(CLEANUP, function(e) {
                 that.angular("cleanup", function() {
                     return { elements: e.item };
                 });
             });
 
+            that._content = content;
             that.setDataSource(options.dataSource);
 
             var mobileContainer = that.container();
