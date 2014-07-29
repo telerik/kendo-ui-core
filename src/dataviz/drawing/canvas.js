@@ -167,6 +167,8 @@
                 ctx.fillStyle = fill.color;
                 ctx.globalAlpha = fill.opacity;
                 ctx.fill();
+
+                return true;
             }
         },
 
@@ -177,6 +179,8 @@
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
                 ctx.globalAlpha = stroke.opacity;
                 ctx.stroke();
+
+                return true;
             }
         },
 
@@ -293,11 +297,17 @@
             ctx.save();
             ctx.beginPath();
 
-            this.setFill(ctx);
             this.setTransform(ctx);
-
             ctx.font = text.options.font;
-            ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
+
+            if (this.setFill(ctx)) {
+                ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
+            }
+
+            if (this.setStroke(ctx)) {
+                this.setLineDash(ctx);
+                ctx.strokeText(text.content(), pos.x, pos.y + size.baseline);
+            }
 
             ctx.restore();
         }
