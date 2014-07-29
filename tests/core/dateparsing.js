@@ -872,4 +872,12 @@ test("parseDate supports UTC date without a timezone offset", function() {
     deepEqual(result, new Date(2012, 2, 25, 4, 30, 10, 123));
 });
 
+test("parseExact method parses date string with UTC 'Z' zone designator", function() {
+    var utcDate = new Date(Date.UTC(2014, 4, 21, 0, 0, 0));
+    var result = kendo.parseDate("2014-05-21 00:00:00Z", "yyyy-MM-dd HH:mm:sszz")
+
+    deepEqual(result, utcDate);
+});
+
+
 }());
