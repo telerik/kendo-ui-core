@@ -22,7 +22,7 @@
     <div id="menu">
         <div class="header">
             Diagram
-            <a onclick="about.center().open();">About</a>
+            <a id="about">About</a>
         </div>
         <ul></ul>
     </div>
@@ -37,32 +37,32 @@
                                 <span class="shapeItem" data-shape='{"width":120,"height":120,"type":"rectangle"}' style="background-position: 0 0"></span>
                                 <span>Square</span>
                             </li><li>
-						        <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":120}' style="background-position: -60px 0"></span>
-						        <span>Circle</span>
-					        </li><li>
-						        <span class="shapeItem" data-shape='{"width":120,"height":80,"type":"rectangle"}' style="background-position: -120px 0"></span>
-						        <span>Rectangle</span>
-					        </li><li>
-						        <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":80}' style="background-position: -180px 0"></span>
-						        <span>Ellipse</span>
-					        </li>
+                                <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":120}' style="background-position: -60px 0"></span>
+                                <span>Circle</span>
+                            </li><li>
+                                <span class="shapeItem" data-shape='{"width":120,"height":80,"type":"rectangle"}' style="background-position: -120px 0"></span>
+                                <span>Rectangle</span>
+                            </li><li>
+                                <span class="shapeItem" data-shape='{"type":"circle","width":120,"height":80}' style="background-position: -180px 0"></span>
+                                <span>Ellipse</span>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         Polygons
                         <ul>
                             <li>
-						        <span class="shapeItem" data-shape='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}' style="background-position: -240px 0"></span>
-						        <span>Pentagon</span>
+                                <span class="shapeItem" data-shape='{"path":"M 60,0 L120,44 L97,114 L23,114 L0,44 z"}' style="background-position: -240px 0"></span>
+                                <span>Pentagon</span>
                             </li><li>
-						        <span class="shapeItem" data-shape='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}' style="background-position: -300px 0"></span>
-						        <span>Hexagon</span>
+                                <span class="shapeItem" data-shape='{"path":"m30,0 L90,0 L120,52 L90,104 L30,104 L0,52 z"}' style="background-position: -300px 0"></span>
+                                <span>Hexagon</span>
                             </li><li>
-						        <span class="shapeItem" data-shape='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}' style="background-position: -360px 0"></span>
-						        <span>Heptagon</span>
+                                <span class="shapeItem" data-shape='{"path":"m60,0 L108.12,23.17 L120,75.24 L86.7,116.99 L33.3,116.99 L0,75.24 L11.88,23.17 z"}' style="background-position: -360px 0"></span>
+                                <span>Heptagon</span>
                             </li><li>
-						        <span class="shapeItem" data-shape='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}' style="background-position: -420px 0"></span>
-						        <span>Octagon</span>
+                                <span class="shapeItem" data-shape='{"path":"m35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z"}' style="background-position: -420px 0"></span>
+                                <span>Octagon</span>
                             </li>
                        </ul>
                    </li>
@@ -70,11 +70,11 @@
                         Arrows
                         <ul>
                             <li>
-							    <span class="shapeItem" data-shape='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}' style="background-position: -480px 0"></span>
-							    <span>45 degree</span>
+                                <span class="shapeItem" data-shape='{"path":"m0,20 L20,0 L20,10 L120,10 L120,30 L20,30 L20,40 z"}' style="background-position: -480px 0"></span>
+                                <span>45 degree</span>
                             </li><li>
-							    <span class="shapeItem" data-shape='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}' style="background-position: -540px 0"></span>
-							    <span>60 degree</span>
+                                <span class="shapeItem" data-shape='{"path":"m0,20 L11.5,0 L11.5,10 L120,10 L120,31 L11.5,31 L11.5,40 z"}' style="background-position: -540px 0"></span>
+                                <span>60 degree</span>
                             </li>
                         </ul>
                     </li>
@@ -95,7 +95,7 @@
                         <ul>
                             <li>
                                 <span>Background Color:</span>
-                                <input id="canvasBackgroundColorPicker" class="" />
+                                <input id="canvasBackgroundColorPicker" class="colorPicker" />
                             </li>
                             <li>
                                 <span>Layout:</span>
@@ -110,11 +110,11 @@
                         <ul>
                             <li>
                                 <span>Background Color:</span>
-                                <input id="shapeBackgroundColorPicker" />
+                                <input id="shapeBackgroundColorPicker" class="colorPicker" />
                             </li>
                             <li>
                                 <span>Stroke Color:</span>
-                                <input id="shapeStrokeColorPicker" />
+                                <input id="shapeStrokeColorPicker" class="colorPicker" />
                             </li>
                             <li>
                                 <span>Stroke Width:</span>
@@ -189,7 +189,7 @@
         <input type="text" id="diagramZoomIndicator" class="k-textbox" value="100" style="width: 40px; vertical-align: middle;" />
     </div>
 
-    <div class="about">
+    <div id="window">
         <h2>HTML5 Diagram Sample Application by Telerik</h2>
 
         <p>The Diagramming Tool app was built with Telerik HTML5 Kendo UI widgets. Telerik Kendo UI framework consists of <a href="http://www.telerik.com/kendo-ui#Widgets">70+ UI widgets</a> that take care of the common functionality of your application, while leaving you with more time to work on its business logic.</p>
@@ -279,6 +279,7 @@
                 diagram.element.css(
                     "background-color",
                     $("#canvasBackgroundColorPicker").getKendoColorPicker().value());
+
                 var layout = layoutMapping[$("#canvasLayout").getKendoDropDownList().value()];
 
                 diagram.layout({
@@ -317,8 +318,6 @@
                 }
             }
 
-            $("#connectionProperties").on("change", connectionPropertiesChange);
-
             function connectionPropertiesChange() {
                 var elements = selected || [],
                     options = {
@@ -326,7 +325,7 @@
                         endCap: $("#connectionEndCap").getKendoDropDownList().value()
                     },
                     element;
-                
+
                 for (i = 0; i < elements.length; i++) {
                     element = elements[i];
                     if (element instanceof Connection) {
@@ -334,6 +333,8 @@
                     }
                 }
             }
+
+            $("#connectionProperties").on("change", connectionPropertiesChange);
 
             $("#alignConfiguration .configurationButtons").kendoButton({
                 click: function(e) {
@@ -383,17 +384,6 @@
                 paste: pasteItem
             };
 
-            function onMenuSelect(e) {
-                var item = $(e.item),
-                    itemText = item.children(".k-link").text();
-
-                if (!item.hasClass("active")) {
-                    return;
-                }
-
-                actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
-            }
-
             $("#menu ul").kendoMenu({
                 dataSource: [
                     { text: "New", spriteCssClass: "new-item", items: [
@@ -407,7 +397,16 @@
                     { text: "Copy", spriteCssClass: "copy-item", cssClass: "active" },
                     { text: "Paste", spriteCssClass: "paste-item", cssClass: "active" }
                 ],
-                select: onMenuSelect
+                select: function(e) {
+                    var item = $(e.item),
+                        itemText = item.children(".k-link").text();
+
+                    if (!item.hasClass("active")) {
+                        return;
+                    }
+
+                    actions[itemText.charAt(0).toLowerCase() + itemText.slice(1)]();
+                }
             });
 
             $("#export").on("click", function() {
@@ -421,21 +420,6 @@
                 }
             });
 
-            function onSelect(e) {
-                if (typeof(FileReader) !== "undefined") {
-                    var f = e.files[0].rawFile,
-                        reader = new FileReader;
-
-                    reader.onload = (function(file) {
-                        return function(e) {
-                            diagram.load(JSON.parse(e.target.result));
-                        };
-                    })(f);
-
-                    reader.readAsBinaryString(f);
-                }
-            }
-      
             $("#upload").kendoUpload({
                 async: {
                     saveUrl: "save",
@@ -446,7 +430,20 @@
                 localization: {
                     select: ""
                 },
-                select: onSelect
+                select: function(e) {
+                    if (typeof(FileReader) !== "undefined") {
+                        var f = e.files[0].rawFile,
+                            reader = new FileReader;
+
+                        reader.onload = (function(file) {
+                            return function(e) {
+                                diagram.load(JSON.parse(e.target.result));
+                            };
+                        })(f);
+
+                        reader.readAsBinaryString(f);
+                    }
+                }
             });
 
             $("#splitter").kendoSplitter({
@@ -457,17 +454,7 @@
                 ]
             });
 
-            function diagramSelect(e) {
-                if (e.selected.length) {
-                    selected = e.selected;
-                    var element = e.selected[0];
-                    if (element instanceof Shape) {
-                        updateShapeProperties(element.options);
-                    } else {
-                        updateConnectionProperties(element.options);
-                    }
-                }
-            }
+
 
             var diagram = $("#diagram").kendoDiagram({
                 theme: "default",
@@ -493,8 +480,33 @@
                     type: "tree",
                     subtype: "right"
                 },
-                select: diagramSelect
+                select: function(e) {
+                    if (e.selected.length) {
+                        selected = e.selected;
+                        var element = e.selected[0];
+                        if (element instanceof Shape) {
+                            updateShapeProperties(element.options);
+                        } else {
+                            updateConnectionProperties(element.options);
+                        }
+                    }
+                }
             }).getKendoDiagram();
+
+            function updateShapeProperties(shape) {
+                $("#shapeBackgroundColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.background));
+                $("#shapeStrokeColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.stroke.color));
+                $("#shapeStrokeWidth").getKendoNumericTextBox().value(shape.stroke.width);
+                $("#shapeWidth").getKendoNumericTextBox().value(shape.width);
+                $("#shapeHeight").getKendoNumericTextBox().value(shape.height);
+                $("#shapePositionX").getKendoNumericTextBox().value(shape.x);
+                $("#shapePositionY").getKendoNumericTextBox().value(shape.y);
+            }
+
+            function updateConnectionProperties(shape) {
+                $("#connectionStartCap").getKendoDropDownList().value(shape.startCap);
+                $("#connectionEndCap").getKendoDropDownList().value(shape.endCap);
+            }
 
             $("#shapesPanelBar").kendoPanelBar({
                 expandMode: "multiple"
@@ -504,17 +516,7 @@
                 expandMode: "multiple"
             }).getKendoPanelBar().expand(">li", false);
 
-            $("#canvasBackgroundColorPicker").kendoColorPicker({
-                value: "#ffffff",
-                buttons: false
-            });
-
-            $("#shapeBackgroundColorPicker").kendoColorPicker({
-                value: "#ffffff",
-                buttons: false
-            });
-
-            $("#shapeStrokeColorPicker").kendoColorPicker({
+            $(".colorPicker").kendoColorPicker({
                 value: "#ffffff",
                 buttons: false
             });
@@ -579,27 +581,16 @@
 
             $(".numeric").kendoNumericTextBox();
 
-            window.about = $(".about").kendoWindow({
+            $("#window").kendoWindow({
                 visible: false,
                 width: 800,
                 resizable: false,
                 title: "About"
-            }).getKendoWindow();
+            });
 
-            function updateShapeProperties(shape) {
-                $("#shapeBackgroundColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.background));
-                $("#shapeStrokeColorPicker").getKendoColorPicker().value(kendo.parseColor(shape.stroke.color));
-                $("#shapeStrokeWidth").getKendoNumericTextBox().value(shape.stroke.width);
-                $("#shapeWidth").getKendoNumericTextBox().value(shape.width);
-                $("#shapeHeight").getKendoNumericTextBox().value(shape.height);
-                $("#shapePositionX").getKendoNumericTextBox().value(shape.x);
-                $("#shapePositionY").getKendoNumericTextBox().value(shape.y);
-            }
-
-            function updateConnectionProperties(shape) {
-                $("#connectionStartCap").getKendoDropDownList().value(shape.startCap);
-                $("#connectionEndCap").getKendoDropDownList().value(shape.endCap);
-            }
+            $("#about").click(function() {
+                $(".about").getKendoWindow().center().open();
+            });
 
             $("#shapesPanelBar .shapeItem").kendoDraggable({
                 hint: function() {
