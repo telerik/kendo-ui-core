@@ -26,7 +26,7 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        DASH_ARRAYS = dataviz.DASH_ARRAYS,
+        DASH_ARRAYS = d.DASH_ARRAYS,
         NONE = "none",
         SOLID = "solid",
         SPACE = " ",
