@@ -28,12 +28,12 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The layout type for the Treemap.The Supported values are:
+    * The theme of the TreeMap.
     * @param string $value
     * @return \Kendo\Dataviz\UI\TreeMap
     */
-    public function type($value) {
-        return $this->setProperty('type', $value);
+    public function theme($value) {
+        return $this->setProperty('theme', $value);
     }
 
     /**
@@ -92,6 +92,15 @@ data source is fired. By default the widget will bind to the data source specifi
     */
     public function colors($value) {
         return $this->setProperty('colors', $value);
+    }
+
+    /**
+    * The layout type for the Treemap.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\TreeMap
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
     }
 
     /**
