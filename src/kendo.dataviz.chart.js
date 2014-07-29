@@ -1421,18 +1421,7 @@ var __meta__ = {
             return this._otherFields[series.type] || [VALUE];
         },
 
-        resetSeriesCache: function(series) {
-            series._bindCache = [];
-        },
-
         bindPoint: function(series, pointIx) {
-            if (series._bindCache) {
-                var cached = series._bindCache[pointIx];
-                if (cached) {
-                    return cached;
-                }
-            }
-
             var binder = this,
                 data = series.data,
                 pointData = data[pointIx],
@@ -1468,10 +1457,6 @@ var __meta__ = {
             }
 
             result.fields = fields || {};
-
-            if (series._bindCache) {
-                series._bindCache[pointIx] = result;
-            }
 
             return result;
         },
@@ -3727,7 +3712,7 @@ var __meta__ = {
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentSeries = series[seriesIx];
                     currentCategory = categories[categoryIx];
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                    pointData = this._bindPoint(currentSeries, seriesIx, categoryIx);
 
                     callback(pointData, {
                         category: currentCategory,
@@ -3737,6 +3722,24 @@ var __meta__ = {
                     });
                 }
             }
+        },
+
+        _bindPoint: function(series, seriesIx, categoryIx) {
+            if (!this._bindCache) {
+                this._bindCache = [];
+            }
+
+            var bindCache = this._bindCache[seriesIx];
+            if (!bindCache) {
+                bindCache = this._bindCache[seriesIx] = [];
+            }
+
+            var data = bindCache[categoryIx];
+            if (!data) {
+                data = bindCache[categoryIx] = SeriesBinder.current.bindPoint(series, categoryIx);
+            }
+
+            return data;
         },
 
         formatPointValue: function(point, format) {
@@ -5702,7 +5705,7 @@ var __meta__ = {
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
+                    pointData = this._bindPoint(currentSeries, seriesIx, pointIx);
                     value = pointData.valueFields;
                     fields = pointData.fields;
 
@@ -5716,6 +5719,8 @@ var __meta__ = {
                 }
             }
         },
+
+        _bindPoint: CategoricalChart.fn._bindPoint,
 
         formatPointValue: function(point, format) {
             var value = point.value;
@@ -8051,8 +8056,6 @@ var __meta__ = {
             for (i = 0; i < series.length; i++) {
                 currentSeries = series[i];
                 currentSeries.index = i;
-
-                SeriesBinder.current.resetSeriesCache(currentSeries);
             }
         },
 
@@ -8996,8 +8999,6 @@ var __meta__ = {
                     srcPoints[i], categories[i]
                 );
             }
-
-            SeriesBinder.current.resetSeriesCache(result);
 
             return result;
         },
