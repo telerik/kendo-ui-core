@@ -224,6 +224,31 @@ var TypingHandler = Class.extend({
     }
 });
 
+var BackspaceHandler = Class.extend({
+    init: function(editor) {
+        this.editor = editor;
+    },
+    keydown: function(e) {
+        if (e.keyCode === kendo.keys.BACKSPACE) {
+            var editor = this.editor;
+            var range = editor.getRange();
+            var emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />';
+
+            range.deleteContents();
+
+            var ancestor = range.commonAncestorContainer;
+
+            if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
+                ancestor.innerHTML = emptyParagraphContent;
+                range.setStart(ancestor, 0);
+                range.collapse(true);
+                editor.selectRange(range);
+            }
+        }
+    },
+    keyup: function() {}
+});
+
 var SystemHandler = Class.extend({
     init: function(editor) {
         this.editor = editor;
@@ -931,6 +956,7 @@ extend(editorNS, {
     UndoRedoStack: UndoRedoStack,
     TypingHandler: TypingHandler,
     SystemHandler: SystemHandler,
+    BackspaceHandler: BackspaceHandler,
     Keyboard: Keyboard,
     Clipboard: Clipboard,
     Cleaner: Cleaner,
