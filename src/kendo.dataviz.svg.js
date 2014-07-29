@@ -508,13 +508,17 @@ var __meta__ = {
                 rotation = line.options.rotation,
                 rCenter = new Point2D(rotation[1], rotation[2]),
                 rAmount = -rotation[0],
+                rotate = rAmount !== 0,
                 i,
                 result = [];
 
             for (i = 0; i < points.length; i++) {
-                result.push(line._print(
-                    points[i].clone().rotate(rCenter, rAmount)
-                ));
+                var point = points[i];
+                if (rotate) {
+                    point = point.clone().rotate(rCenter, rAmount);
+                }
+
+                result.push(line._print(point));
             }
 
             if (line.closed) {

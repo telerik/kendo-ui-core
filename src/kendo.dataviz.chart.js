@@ -3712,7 +3712,7 @@ var __meta__ = {
                 for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
                     currentSeries = series[seriesIx];
                     currentCategory = categories[categoryIx];
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, categoryIx);
+                    pointData = this._bindPoint(currentSeries, seriesIx, categoryIx);
 
                     callback(pointData, {
                         category: currentCategory,
@@ -3722,6 +3722,24 @@ var __meta__ = {
                     });
                 }
             }
+        },
+
+        _bindPoint: function(series, seriesIx, categoryIx) {
+            if (!this._bindCache) {
+                this._bindCache = [];
+            }
+
+            var bindCache = this._bindCache[seriesIx];
+            if (!bindCache) {
+                bindCache = this._bindCache[seriesIx] = [];
+            }
+
+            var data = bindCache[categoryIx];
+            if (!data) {
+                data = bindCache[categoryIx] = SeriesBinder.current.bindPoint(series, categoryIx);
+            }
+
+            return data;
         },
 
         formatPointValue: function(point, format) {
@@ -4773,16 +4791,11 @@ var __meta__ = {
         points: function(visualPoints) {
             var segment = this,
                 linePoints = segment.linePoints.concat(visualPoints || []),
-                points = [],
-                i,
-                length = linePoints.length,
-                pointCenter;
+                points = new Array(linePoints.length);
 
-            for (i = 0; i < length; i++) {
+            for (var i = 0, length = linePoints.length; i < length; i++) {
                 if (linePoints[i].visible !== false) {
-                    pointCenter = linePoints[i].markerBox().center();
-
-                    points.push(Point2D(pointCenter.x, pointCenter.y));
+                    points[i] = linePoints[i]._childBox.center();
                 }
             }
 
@@ -5692,7 +5705,7 @@ var __meta__ = {
                 }
 
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
-                    pointData = SeriesBinder.current.bindPoint(currentSeries, pointIx);
+                    pointData = this._bindPoint(currentSeries, seriesIx, pointIx);
                     value = pointData.valueFields;
                     fields = pointData.fields;
 
@@ -5706,6 +5719,8 @@ var __meta__ = {
                 }
             }
         },
+
+        _bindPoint: CategoricalChart.fn._bindPoint,
 
         formatPointValue: function(point, format) {
             var value = point.value;
@@ -7998,7 +8013,7 @@ var __meta__ = {
             ChartElement.fn.init.call(plotArea, options);
 
             plotArea.series = series;
-            plotArea.setSeriesIndexes();
+            plotArea.initSeries();
             plotArea.charts = [];
             plotArea.options.legend.items = [];
             plotArea.axes = [];
@@ -8034,7 +8049,7 @@ var __meta__ = {
             }
         },
 
-        setSeriesIndexes: function() {
+        initSeries: function() {
             var series = this.series,
                 i, currentSeries;
 
@@ -8330,6 +8345,7 @@ var __meta__ = {
                 i;
 
             panes = [].concat(panes);
+            this.initSeries();
 
             for (i = 0; i < panes.length; i++) {
                 plotArea.removeCrosshairs(panes[i]);
