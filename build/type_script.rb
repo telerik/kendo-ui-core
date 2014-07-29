@@ -408,6 +408,10 @@ module CodeGen::TypeScript
                 return @base
             end
 
+            if interface?
+                return
+            end
+
             if fx?
                 return
             end
@@ -417,6 +421,18 @@ module CodeGen::TypeScript
             end
 
             'Observable'
+        end
+
+        def interface?
+            @name =~ /^I[A-Z]/
+        end
+
+        def type_script_kind
+            if interface?
+                return 'interface'
+            end
+
+            'class'
         end
 
         def namespace
