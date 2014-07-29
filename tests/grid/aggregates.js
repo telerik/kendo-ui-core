@@ -366,6 +366,20 @@
         ok(ths.eq(1).attr("data-kendo-aggregates") === undefined);
     });
 
+    test("does not generate headers data-kendo-aggregates attr for columns with aggregate if set to empty array", function() {
+        var element = $(table()),
+        grid = new Grid(element, {
+            data: [],
+            columns: [
+                { field: "foo", aggregates: [] },
+                { field: "bar" }
+            ]
+        });
+        var ths = grid.wrapper.find("th");
+
+        ok(ths.eq(0).attr("data-kendo-aggregates") === undefined);
+    });
+
     test("group footer row is rendered if column footer template is set", function() {
         var grid = new Grid(table(), {
             dataSource: {

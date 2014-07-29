@@ -4283,7 +4283,7 @@ var __meta__ = {
                         html += kendo.attr("groupable") + "='" + th.groupable + "' ";
                     }
 
-                    if (th.aggregates) {
+                    if (th.aggregates && th.aggregates.length) {
                         html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
                     }
 
