@@ -1210,7 +1210,7 @@ function pad(number, digits, end) {
             twoDigitYearMax = calendar.twoDigitYearMax || 2029,
             defaultYear = date.getFullYear(),
             ch, count, length, pattern,
-            pmHour, UTC, ISO8601, matches,
+            pmHour, UTC, matches,
             amDesignators, pmDesignators,
             hoursOffset, minutesOffset,
             hasTime, match;
@@ -1347,10 +1347,6 @@ function pad(number, digits, end) {
                     count = lookAhead("z");
 
                     if (value.substr(valueIdx, 1) === "Z") {
-                        if (!ISO8601) {
-                            return null;
-                        }
-
                         checkLiteral();
                         continue;
                     }
@@ -1377,8 +1373,6 @@ function pad(number, digits, end) {
                             return null;
                         }
                     }
-                } else if (ch === "T") {
-                    ISO8601 = checkLiteral();
                 } else if (ch === "'") {
                     literal = true;
                     checkLiteral();
