@@ -218,7 +218,7 @@ var __meta__ = {
                 for (i = 0; i < items.length; i++) {
                     item = $(items[i]);
                     value = that._values[i];
-                    if (value % options.smallStep === 0 && value % options.largeStep === 0) {
+                    if ((1000 * value) % (1000 * options.smallStep) === 0 && (1000 * value) % (1000 * options.largeStep) === 0) {
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
@@ -308,7 +308,8 @@ var __meta__ = {
             while (i < itemsCount) {
                 selection += (pixelWidths[i - 1] + pixelWidths[i]) / 2;
                 that._pixelSteps[i] = selection;
-                that._values[i] = val += options.smallStep;
+                val += options.smallStep;
+                that._values[i] = round(val);
 
                 i++;
             }
