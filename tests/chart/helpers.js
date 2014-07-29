@@ -1240,6 +1240,27 @@
             equal(pool._pool.length, 3);
         });
 
+        test("freed does not grow beyond max size", function() {
+            var ids = [];
+
+            pool.free(pool.alloc());
+
+            for (var i = 0; i < 4; i++) {
+                ids.push(pool.alloc());
+            }
+
+            for (i = 0; i < 4; i++) {
+                pool.free(ids.pop());
+            }
+
+            var freed = 0;
+            for (var key in pool._freed) {
+                freed++;
+            };
+
+            equal(freed, 3);
+        });
+
         test("pool does not accept duplicates", function() {
             pool.free("foo");
             pool.free("foo");

@@ -684,7 +684,7 @@ var __meta__ = {
         enableDiscovery: function() {
             var element = this;
 
-            element.modelId = IDPool.current.alloc();
+            element.modelId = uniqueId();
             element.discoverable = true;
         },
 
@@ -3947,7 +3947,7 @@ var __meta__ = {
 
             if (pool.length > 0) {
                 id = pool.pop();
-                that._freed[id] = false;
+                delete that._freed[id];
             } else {
                 id = that._prefix + that._id++;
             }
@@ -3962,7 +3962,6 @@ var __meta__ = {
 
             if (pool.length < that._size && !freed[id]) {
                 pool.push(id);
-
                 freed[id] = true;
             }
         }
