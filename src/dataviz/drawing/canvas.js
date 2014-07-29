@@ -38,7 +38,9 @@
     // Constants ==============================================================
     var BUTT = "butt",
         DASH_ARRAYS = d.DASH_ARRAYS,
-        SOLID = "solid";
+        NONE = "none",
+        SOLID = "solid",
+        TRANSP = "transparent";
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
@@ -163,7 +165,7 @@
 
         setFill: function(ctx) {
             var fill = this.srcElement.options.fill;
-            if (fill && fill.color !== "transparent") {
+            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
                 ctx.fillStyle = fill.color;
                 ctx.globalAlpha = fill.opacity;
                 ctx.fill();
@@ -174,7 +176,7 @@
 
         setStroke: function(ctx) {
             var stroke = this.srcElement.options.stroke;
-            if (stroke) {
+            if (stroke && stroke.color !== NONE && stroke.color !== TRANSP) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
                 ctx.globalAlpha = stroke.opacity;

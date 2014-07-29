@@ -179,6 +179,30 @@
             node.renderTo(ctx);
         });
 
+        test("does not render stroke if set to none", 0, function() {
+            shape.options.set("stroke.color", "none");
+
+            var ctx = mockContext({
+                stroke: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render stroke if set to transparent", 0, function() {
+            shape.options.set("stroke.color", "transparent");
+
+            var ctx = mockContext({
+                stroke: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
         test("renders stroke width", function() {
             var ctx = mockContext({
                 stroke: function() {
@@ -257,6 +281,18 @@
 
         test("does not render fill if not set", 0, function() {
             shape.options.set("fill", null);
+
+            var ctx = mockContext({
+                fill: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render fill if set to none", 0, function() {
+            shape.options.set("fill.color", "none");
 
             var ctx = mockContext({
                 fill: function() {
