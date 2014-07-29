@@ -100,6 +100,14 @@ public class TreeMapTag extends WidgetTag /* interfaces */implements DataBoundWi
         setProperty("textField", value);
     }
 
+    public java.lang.String getTheme() {
+        return (java.lang.String)getProperty("theme");
+    }
+
+    public void setTheme(java.lang.String value) {
+        setProperty("theme", value);
+    }
+
     public java.lang.String getType() {
         return (java.lang.String)getProperty("type");
     }

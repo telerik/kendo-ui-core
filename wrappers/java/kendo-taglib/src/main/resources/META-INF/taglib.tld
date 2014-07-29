@@ -35579,7 +35579,13 @@ instance.If the HierarchicalDataSource option is set to a JavaScript object or a
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The layout type for the Treemap.The Supported values are:</description>
+            <description>The theme of the TreeMap.</description>
+            <name>theme</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The layout type for the Treemap.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
