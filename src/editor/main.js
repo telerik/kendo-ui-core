@@ -206,6 +206,7 @@
             that._initializeContentElement(that);
 
             that.keyboard = new editorNS.Keyboard([
+                new editorNS.BackspaceHandler(that),
                 new editorNS.TypingHandler(that),
                 new editorNS.SystemHandler(that)
             ]);
@@ -406,23 +407,6 @@
 
                         e.preventDefault();
                         return;
-                    } else if (e.keyCode === keys.BACKSPACE) {
-                        range = editor.getRange();
-
-                        var ancestor,
-                            emptyParagraphContent = browser.msie ? '' : '<br _moz_dirty="" />',
-                            dom = kendo.ui.editor.Dom;
-
-                        range.deleteContents();
-
-                        ancestor = range.commonAncestorContainer;
-
-                        if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
-                            ancestor.innerHTML = emptyParagraphContent;
-                            range.setStart(ancestor, 0);
-                            range.collapse(true);
-                            editor.selectRange(range);
-                        }
                     } else if (e.keyCode == keys.LEFT || e.keyCode == keys.RIGHT) {
                         // skip bom nodes when navigating with arrows
                         range = editor.getRange();
