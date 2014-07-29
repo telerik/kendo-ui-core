@@ -10117,11 +10117,13 @@ var __meta__ = {
         },
 
         _hideElement: function() {
-            this.element.fadeOut({
-                always: function(){
-                    $(this).off(MOUSELEAVE_NS).remove();
-                }
-            });
+            if (this.element) {
+                this.element.fadeOut({
+                    always: function(){
+                        $(this).off(MOUSELEAVE_NS).remove();
+                    }
+                });
+            }
         },
 
         _pointContent: function(point) {
