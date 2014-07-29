@@ -314,8 +314,7 @@
             visible: function (value) {
                 if (isUndefined(value)) {
                     return this.visual.visible();
-                }
-                else {
+                } else {
                     this.visual.visible(value);
                 }
             },
@@ -329,12 +328,14 @@
                 this.options.y = point.y;
                 this.visual.position(point);
             },
-            toString: function () {
-                return this.options.id;
+            toJSON: function() {
+                return {
+                    id: this.options.id
+                };
             },
             serialize: function () {
                 // the options json object describes the shape perfectly. So this object can serve as shape serialization.
-                var json = deepExtend({}, {options: this.options});
+                var json = deepExtend({}, { options: this.options });
                 if (this.dataItem) {
                     json.dataItem = this.dataItem.toString();
                 }
@@ -409,7 +410,7 @@
             },
             toJSON: function () {
                 return {
-                    shapeId: this.shape.toString(),
+                    shapeId: this.shape.toJSON().id,
                     connector: this.options.name
                 };
             }
@@ -1202,13 +1203,10 @@
              * @returns {Connection}
              */
             serialize: function () {
-                var from = this.from.toJSON ? this.from.toJSON : this.from.toString(),
-                    to = this.to.toJSON ? this.to.toJSON : this.to.toString();
-
                 var json = deepExtend({}, {
                     options: this.options,
-                    from: from,
-                    to: to
+                    from: this.from.toJSON(),
+                    to: this.to.toJSON()
                 });
                 if (this.dataItem) {
                     json.dataItem = this.dataItem.toString();
