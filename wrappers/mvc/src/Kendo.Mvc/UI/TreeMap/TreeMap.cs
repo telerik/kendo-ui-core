@@ -38,6 +38,8 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
+        public string Theme { get; set; }
+        
         public string ValueField { get; set; }
         
         public string ColorField { get; set; }
@@ -79,6 +81,11 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
+            if (Theme.HasValue())
+            {
+                json["theme"] = Theme;
+            }
+            
             if (ValueField.HasValue())
             {
                 json["valueField"] = ValueField;
