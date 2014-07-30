@@ -1906,6 +1906,8 @@ var __meta__ = {
 
         _resize: function() {
             this._adjustDimensions();
+            this.timeline.view()._adjustHeight();
+            this.list._adjustHeight();
         }
     });
 

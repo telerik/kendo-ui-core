@@ -107,6 +107,10 @@ var __meta__ = {
             this._draggable();
             this._attachEvents();
 
+            this._adjustHeight();
+        },
+
+        _adjustHeight: function() {
             this.content.height(this.element.height() - this.header.parent().outerHeight());
         },
 
