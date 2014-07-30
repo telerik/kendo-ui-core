@@ -33,9 +33,9 @@
             Xmla()
             .Columns(columns => {
                 columns.Add("[Date].[Calendar]").Expand(true);
-                columns.Add("[Geography].[City]");
+                columns.Add("[Product].[Category]");
             })
-            .Rows(rows => rows.Add("[Product].[Product]"))
+            .Rows(rows => rows.Add("[Geography].[City]"))
             .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
             .Transport(transport => transport
                 .Connection(connection => connection
