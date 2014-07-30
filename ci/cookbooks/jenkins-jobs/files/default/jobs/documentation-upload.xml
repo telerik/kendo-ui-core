@@ -11,14 +11,14 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
-      <projectUrl>https://github.com/telerik/kendo-docs/</projectUrl>
+      <projectUrl>https://github.com/telerik/kendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.0.4">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>git@github.com:telerik/kendo-docs.git</url>
+        <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -53,10 +53,16 @@
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>bundle exec jekyll build -d /var/www/kendo-ui</command>
+      <command>DOCS_BRANCH=production ./build/run-build-task build:production:generate_help
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>rsync -av --delete /var/www/kendo-ui/ /mnt/Resources/AppDirector/Drops/KendoUI/KendoUI.Docs/</command>
+      <command>cd docs; 
+bundle --without development --path ~/gems;
+bundle exec bundle exec jekyll build -d /var/www/kendo-ui
+rm -rf api/wrappers/*
+
+rsync -av --delete /var/www/kendo-ui/ /mnt/Resources/AppDirector/Drops/KendoUI/KendoUI.Docs/</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
@@ -78,7 +84,7 @@ do
         echo &apos;Deployment failed :(&apos;;
         exit 1;
     else
-        RESULT=$(curl -s http://deploy.telerik.com/api/deployment/v1/workspaces/KendoUI/stacks/KendoUI.Docs/environments/Live/status)
+        RESULT=$(curl -s http://deploy.telerik.com/api/deployment/v1/workspaces/Documentation/stacks/KendoUI.Docs/environments/Live/status)
         echo &quot;Deployment in progress, current status: $RESULT&quot;
         sleep 2
     fi

@@ -219,6 +219,8 @@
         <comparator class="hudson.util.CaseInsensitiveComparator"/>
         <string>documentation-staging</string>
         <string>documentation-upload</string>
+        <string>master-docs-upload-trigger</string>
+        <string>production-docs-build-trigger</string>
       </jobNames>
       <jobFilters/>
       <columns>

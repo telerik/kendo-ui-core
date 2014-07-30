@@ -38,7 +38,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh &quot;http://kendobuild/staging-php/&quot; Wrappers -proxyInjectionMode -userContentTransformation &apos;((web|dataviz).*)\.html&apos; &apos;$1.php&apos;</command>
+      <command>./run-all.sh &quot;http://kendobuild/staging-php/&quot; Wrappers -proxyInjectionMode -userContentTransformation &apos;^(?!.*html).*grid//.*$&apos; &apos;$1.php&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
