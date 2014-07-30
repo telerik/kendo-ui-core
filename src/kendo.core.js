@@ -1086,7 +1086,7 @@ function pad(number, digits, end) {
     var nonBreakingSpaceRegExp = /\u00A0/g,
         exponentRegExp = /[eE][\-+]?[0-9]+/,
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
-        longTimeZoneRegExp = /[+|\-]\d{1,2}:\d{2}/,
+        longTimeZoneRegExp = /[+|\-]\d{1,2}:?\d{2}/,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
         offsetRegExp = /[+-]\d*/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"],
@@ -1358,17 +1358,24 @@ function pad(number, digits, end) {
                         return null;
                     }
 
-                    matches = matches[0];
-                    valueIdx = matches.length;
-                    matches = matches.split(":");
+                    matches = matches[0].split(":");
 
-                    hoursOffset = parseInt(matches[0], 10);
+                    hoursOffset = matches[0];
+                    minutesOffset = matches[1];
+
+                    if (!minutesOffset && hoursOffset.length > 3) { //(+|-)[hh][mm] format is used
+                        valueIdx = hoursOffset.length - 2;
+                        minutesOffset = hoursOffset.substring(valueIdx);
+                        hoursOffset = hoursOffset.substring(0, valueIdx);
+                    }
+
+                    hoursOffset = parseInt(hoursOffset, 10);
                     if (outOfRange(hoursOffset, -12, 13)) {
                         return null;
                     }
 
                     if (count > 2) {
-                        minutesOffset = parseInt(matches[1], 10);
+                        minutesOffset = parseInt(minutesOffset, 10);
                         if (isNaN(minutesOffset) || outOfRange(minutesOffset, 0, 59)) {
                             return null;
                         }
