@@ -8,7 +8,8 @@
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        valueOrDefault = dataviz.util.valueOrDefault;
+        valueOrDefault = dataviz.util.valueOrDefault,
+        defined = dataviz.util.defined;
 
     var Attribution = Widget.extend({
         init: function(element, options) {
@@ -31,7 +32,7 @@
         },
 
         add: function(item) {
-            if (item) {
+            if (defined(item)) {
                 if (typeof item === "string") {
                     item = { text: item };
                 }
@@ -62,7 +63,6 @@
 
         _render: function() {
             var result = [];
-            this.element.empty();
             var itemTemplate = template(this.options.itemTemplate);
 
             for (var i = 0; i < this.items.length; i++) {
@@ -75,7 +75,13 @@
                 }
             }
 
-            this.element.append(result.join(this.options.separator));
+            if (result.length > 0) {
+                this.element.empty()
+                    .append(result.join(this.options.separator))
+                    .show();
+            } else {
+                this.element.hide();
+            }
         },
 
         _itemText: function(item) {
