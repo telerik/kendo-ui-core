@@ -311,6 +311,22 @@
         }, 150);
     });
 
+    asyncTest("form reset support does not remove place2older", 1, function() {
+        popuplateSelect();
+
+        var form = $("<form/>").appendTo(document.documentElement).append(select);
+        var multiselect = new MultiSelect(select, {
+            placeholder: "Select..."
+        });
+
+        form[0].reset();
+
+        setTimeout(function() {
+            equal(multiselect.input.val(), "Select...");
+            start();
+        }, 150);
+    });
+
     test("persist tabIndex of the original element", function() {
         var multiselect = new MultiSelect($("<select tabindex='5'/>").appendTo(QUnit.fixture));
 

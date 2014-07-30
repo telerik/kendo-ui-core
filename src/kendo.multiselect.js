@@ -490,6 +490,7 @@ var __meta__ = {
                 that._resetHandler = function() {
                     setTimeout(function() {
                         that.value(that._initialValues);
+                        that._placeholder();
                     });
                 };
 
