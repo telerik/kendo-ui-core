@@ -35,15 +35,15 @@ $dateColumn = new \Kendo\Data\PivotDataSourceColumn();
 $dateColumn->name('[Date].[Calendar]')
             ->expand(true);
 
-$cityColumn = new \Kendo\Data\PivotDataSourceColumn();
-$cityColumn->name('[Geography].[City]');
+$productColumn = new \Kendo\Data\PivotDataSourceColumn();
+$productColumn->name('[Product].[Category]');
 
 $dataSource = new \Kendo\Data\PivotDataSource();
 
 $dataSource->transport($transport)
             ->type("xmla")
-            ->addColumn($dateColumn, $cityColumn)
-            ->addRow('[Product].[Product]')
+            ->addColumn($dateColumn, $productColumn)
+            ->addRow('[Geography].[City]')
             ->addMeasure('[Measures].[Internet Sales Amount]')
             ->schema($schema);
 
