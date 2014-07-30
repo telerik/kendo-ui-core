@@ -166,6 +166,9 @@ var __meta__ = {
             that.element.off(ns);
             that._inputWrapper.off(ns);
 
+            that._arrow.off();
+            that._arrow = null;
+
             Select.fn.destroy.call(that);
         },
 
