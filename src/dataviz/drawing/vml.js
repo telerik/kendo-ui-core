@@ -774,6 +774,12 @@
                 y = (rawcenter.y - fillOrigin) / fillSize;
             }
 
+            width = round(width, TRANSFORM_PRECISION);
+            height = round(height, TRANSFORM_PRECISION);
+            x = round(x, TRANSFORM_PRECISION);
+            y = round(y, TRANSFORM_PRECISION);
+            angle = round(angle, TRANSFORM_PRECISION);
+
             return [
                 ["size", width + "," + height],
                 ["position", x + "," + y],
