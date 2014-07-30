@@ -52,6 +52,14 @@ var __meta__ = {
 
             kendo.notify(that);
         },
+        
+        destroy: function() {
+			var that = this;
+			
+			that.wrapper.off(NS);
+			
+			Widget.fn.destroy.call(that);
+		},
 
         events: [
             CLICK
