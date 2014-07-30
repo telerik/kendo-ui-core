@@ -454,7 +454,7 @@ function pad(number, digits, end) {
 
 // Date and Number formatting
 (function() {
-    var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
+    var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|zzz|zz|z|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /(\\.)|(['][^']*[']?)|(["][^"]*["]?)/g,
         commaRegExp = /\,/g,
@@ -594,7 +594,9 @@ function pad(number, digits, end) {
         format = calendar.patterns[format] || format;
 
         return format.replace(dateFormatRegExp, function (match) {
+            var minutes;
             var result;
+            var sign;
 
             if (match === "d") {
                 result = date.getDate();
@@ -639,12 +641,29 @@ function pad(number, digits, end) {
                 if (result > 99) {
                     result = math.floor(result / 10);
                 }
-
                 result = pad(result);
             } else if (match === "fff") {
                 result = pad(date.getMilliseconds(), 3);
             } else if (match === "tt") {
                 result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0];
+            } else if (match === "zzz") {
+                minutes = date.getTimezoneOffset();
+                sign = minutes < 0;
+
+                result = math.abs(minutes / 60).toString().split(".")[0];
+                minutes = math.abs(minutes) - (result * 60);
+
+                result = (sign ? "-" : "+") + pad(result);
+                result += ":" + pad(minutes);
+            } else if (match === "zz") {
+                result = date.getTimezoneOffset() / 60;
+                sign = result < 0;
+
+                result = math.abs(result).toString().split(".")[0];
+                result = (sign ? "-" : "+") + pad(result);
+            } else if (match === "z") {
+                result = date.getTimezoneOffset() / 60;
+                result = (result > 0 ? "+" : "") + result.toString().split(".")[0];
             }
 
             return result !== undefined ? result : match.slice(1, match.length - 1);
