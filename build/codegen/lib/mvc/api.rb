@@ -217,6 +217,8 @@ PARAMETER = ERB.new(%{
 
     module CodeGen::MVC::API
         class Generator
+            include Rake::DSL
+
             def initialize(path)
                 @path = path
             end
@@ -225,6 +227,8 @@ PARAMETER = ERB.new(%{
                 return if component.empty?
 
                 filename = "#{@path}#{component.namespace}/#{component.name}.md"
+
+                ensure_path(filename)
 
                 File.write(filename, component.to_markdown)
             end
