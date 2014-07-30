@@ -1135,7 +1135,7 @@ namespace :build do
             changelog
         ].flatten
 
-        task :generate_help => [ :get_binaries, 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
+        task :generate_help => [ :get_binaries, 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml', 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
     end
 
     namespace :master do
