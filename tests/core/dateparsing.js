@@ -629,6 +629,10 @@ test("parseExact method parses datetime with timezone offset (hours and minutes)
     equal(+parse("2000-10-10 14:30 +03:30", "yyyy-MM-dd HH:mm zzz"), Date.parse("2000-10-10T14:30+03:30"));
 });
 
+test("parseExact method parses datetime with timezone hours and minutes offset wihout colon", function() {
+    equal(+parse("2000-10-10 14:30 +0330", "yyyy-MM-dd HH:mm zzz"), Date.parse("2000-10-10T14:30+03:30"));
+});
+
 test("parseExact method returns null if short timezone is incorrect", function() {
     equal(parse("2000-10-10 14:30 +14:30", "yyyy-MM-dd HH:mm zz"), null);
 });
