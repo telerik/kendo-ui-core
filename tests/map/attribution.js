@@ -31,6 +31,16 @@
         teardown: destroyAttribution
     });
 
+    test("hides element if empty", function() {
+        attr.add("");
+        equal(attr.element.css("display"), "none");
+    });
+
+    test("shows element if not empty", function() {
+        attr.add("foo");
+        equal(attr.element.css("display"), "block");
+    });
+
     test("adds css classes to wrapper", function() {
         ok(attr.element.is(".k-widget.k-attribution"));
     });
