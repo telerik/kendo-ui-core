@@ -16,10 +16,10 @@
 		<kendo:pivotDataSource type="xmla">
 			<kendo:pivotDataSource-columns>
 				<kendo:pivotDataSource-column name="[Date].[Calendar]" expand="true"/>
-				<kendo:pivotDataSource-column name="[Geography].[City]"/>
+				<kendo:pivotDataSource-column name="[Product].[Category]"/>
 			</kendo:pivotDataSource-columns>
 			<kendo:pivotDataSource-rows>
-				<kendo:pivotDataSource-row name="[Product].[Product]"/>
+				<kendo:pivotDataSource-row name="[Geography].[City]"/>
 			</kendo:pivotDataSource-rows>
 			<kendo:pivotDataSource-measures>
 				<kendo:pivotDataSource-measure name="[Measures].[Internet Sales Amount]"/>
