@@ -232,4 +232,19 @@ test('date formatting supports small year with four digits', function() {
     equal(toString(d, "s"), '0001-01-01T00:00:00');
 });
 
+test('date formatting supports "z" timezone offset specifier', function() {
+    var d = date(2000, 0, 1);
+    equal(toString(d, "z"), '-2');
+});
+
+test('date formatting supports padded timezone offset specifier', function() {
+    var d = date(2000, 0, 1);
+    equal(toString(d, "zz"), '-02');
+});
+
+test('date formatting supports full timezone offset', function() {
+    var d = date(2000, 0, 1);
+    equal(toString(d, "zzz"), '-02:00');
+});
+
 }());
