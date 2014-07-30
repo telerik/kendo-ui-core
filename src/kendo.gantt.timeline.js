@@ -198,6 +198,10 @@ var __meta__ = {
 
             this._slotDimensions();
 
+            this._adjustHeight();
+        },
+
+        _adjustHeight: function() {
             this.content.height(this.element.height() - this.header.outerHeight());
         },
 
