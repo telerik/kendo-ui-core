@@ -1134,6 +1134,8 @@ namespace :build do
             xml_changelogs("Production"),
             changelog
         ].flatten
+
+        task :generate_help => [ :get_binaries, 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
     end
 
     namespace :master do
@@ -1182,6 +1184,8 @@ namespace :build do
             zip_targets("Stable"),
             xml_changelogs("Stable")
         ].flatten
+
+        task :generate_help => [ :get_binaries, 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
     end
 
     namespace :update do
@@ -1215,4 +1219,3 @@ task :bundles =>  "bundles:all"
 
 task :default => :bundles
 
-task :generate_help => [ 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
