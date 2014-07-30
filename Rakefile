@@ -1214,3 +1214,5 @@ desc 'Build all bundles'
 task :bundles =>  "bundles:all"
 
 task :default => :bundles
+
+task :generate_help => [ 'generate:php:api', 'generate:jsp:api', 'generate:mvc:api' ]
