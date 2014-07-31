@@ -87,6 +87,7 @@ var __meta__ = {
         init: function(element, options) {
             var that = this;
             //only vertical grouping is supported = ignore orientation?
+
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
@@ -99,6 +100,7 @@ var __meta__ = {
 
             that._groups();
         },
+        name: "timeline",
 
         _editable: function() {
             if (this.options.editable) {
