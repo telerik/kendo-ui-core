@@ -20,6 +20,13 @@ namespace Kendo.Mvc.UI
             return div;
         }
 
+        public IHtmlNode TabStripWrapperTag()
+        {
+            IHtmlNode div = new HtmlElement("div").AddClass("k-tabstrip-wrapper");
+
+            return div;
+        }
+
         public IHtmlNode ItemTag(TabStripItem item)
         {
             return ListItemTag(item, li =>
