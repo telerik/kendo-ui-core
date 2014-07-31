@@ -3,6 +3,35 @@
     var ui = kendo.ui;
     var Widget = ui.Widget;
 
+    var Object_keys = typeof Object.keys == "function" ? Object.keys : function(obj) {
+        var a = [];
+        for (var i in obj) if (Object.prototype.hasOwnProperty.call(obj, i)) {
+            a.push(i);
+        }
+        return a;
+    };
+
+    function map(a, fn) {
+        if (typeof a.map == "function")
+            return a.map(fn);
+        var ret = [];
+        for (var i = 0; i < a.length; ++i) {
+            ret[i] = fn.call(a, a[i], i);
+        }
+        return ret;
+    }
+
+    function filter(a, fn) {
+        if (typeof a.filter == "function")
+            return a.filter(fn);
+        var ret = [];
+        for (var i = 0; i < a.length; ++i) {
+            if (fn(a[i], i))
+                ret.push(a[i]);
+        }
+        return ret;
+    }
+
     var template =
         ('<div class="kendo-inspector-section visible widget" data-section="widget">' +
          '  <div class="sec-buttons">' +
@@ -87,7 +116,7 @@
                     path = path.slice(1);
                     var modified = propertyChanged(orig_options, path, val);
                     if (self.options.docBaseUrl) {
-                        path = path.filter(function(x){ return typeof x == "string" }).join(".");
+                        path = filter(path, function(x){ return typeof x == "string" }).join(".");
                         var url = self.options.docBaseUrl + "#configuration";
                         if (path) {
                             url += "-" + path;
@@ -438,7 +467,7 @@
                     return true;
                 }
             }
-            else if (data instanceof kendo.data.ObservableArray || Array.isArray(data)) {
+            else if (data instanceof kendo.data.ObservableArray || $.isArray(data)) {
                 if (i < path.length) {
                     data = data[prop];
                 } else {
@@ -587,7 +616,7 @@
 
     // <xxx> reliability isn't on the list of JavaScript's main features.
     function isObject(x, type) {
-        if (Array.isArray(x)) return false;
+        if ($.isArray(x)) return false;
         var rx = new RegExp("^\\[object " + type);
         return typeof x == "object" && rx.test(x.toString());
         // try {
@@ -608,7 +637,7 @@
         if (!options) options = {};
         function shouldSendLazy(obj) {
             if (obj === x) return false;
-            var len = Array.isArray(obj) ? obj.length : Object.keys(obj).length;
+            var len = $.isArray(obj) ? obj.length : Object_keys(obj).length;
             if (len == 0) return false;
             if (options.lazy) return true;
             return len > 20;
@@ -648,7 +677,7 @@
                 if (x instanceof $) {
                     return makeSpecial("jQuery", {
                         selector : x.selector,
-                        elements : x.get().map(saferize)
+                        elements : map(x.get(), saferize)
                     });
                 }
                 if (isObject(x, "HTML")) {
@@ -682,7 +711,7 @@
                     if (typeof x.toJSON == "function") {
                         return saferize(x.toJSON());
                     }
-                    if (Array.isArray(x)) {
+                    if ($.isArray(x)) {
                         // var n = x.length;
                         // if (n > 102) {
                         //     x = x.slice(0, 100);
@@ -695,13 +724,13 @@
                                 length: x.length
                             };
                         }
-                        return x.map(saferize);
+                        return map(x, saferize);
                     }
                     if (shouldSendLazy(x)) {
                         return {
                             __kendo_inspector_type: "Object",
                             id: cacheObject(x),
-                            length: Object.keys(x).length - 1
+                            length: Object_keys(x).length - 1
                         };
                     }
                     var tmp = {};
@@ -722,7 +751,8 @@
                 return x;
             } catch(ex) {
                 if (ex === TOO_BIG) throw ex;
-                console.error("saferize failed: ", ex.stack, x);
+                console.error("saferize failed: ");
+                console.error(x);
                 return "### ERROR ###";
             }
         }
@@ -831,8 +861,8 @@
             if (obj == null) {
                 return wrapEditable("null");
             }
-            else if (Array.isArray(obj)) {
-                return obj.map(function(el, i){
+            else if ($.isArray(obj)) {
+                return map(obj, function(el, i){
                     currentPath.push(i);
                     var html = displayProp(i+"", el);
                     currentPath.pop();
@@ -861,7 +891,7 @@
                     return wrapTooBig(obj);
                 }
 
-                var a = Object.keys(obj);
+                var a = Object_keys(obj);
                 if (options.sort) {
                     if (options.sort instanceof Function) {
                         a = a.sort(function(a, b){
@@ -875,7 +905,7 @@
                         });
                     }
                 }
-                return a.map(function(key){
+                return map(a, function(key){
                     currentPath.push(key);
                     var html = displayProp(key, obj[key]);
                     currentPath.pop();
@@ -888,7 +918,7 @@
         }(orig_obj);
 
         function inspectValue(thing) {
-            if (Array.isArray(thing)) return {
+            if ($.isArray(thing)) return {
                 expandable : thing.length > 0,
                 title      : "Array[" + thing.length + "]"
             };
@@ -919,7 +949,7 @@
                         title      : thing.__kendo_inspector_type
                     };
                 }
-                var keys = Object.keys(thing);
+                var keys = Object_keys(thing);
                 return {
                     expandable : keys.length > 0,
                     title      : "Object{" + keys.length + "}"
@@ -931,7 +961,7 @@
         if (options.innerObject) return html;
 
         var has_expandable_props = (function(){
-            var props = Object.keys(orig_obj);
+            var props = Object_keys(orig_obj);
             for (var i = props.length; --i >= 0;) {
                 if (inspectValue(orig_obj[props[i]]).expandable)
                     return true;
@@ -1019,7 +1049,7 @@
     function equals(a, b) {
         if (a == null) return b == null;
         if (b == null) return a == null;
-        if (Array.isArray(a) && Array.isArray(b)) {
+        if ($.isArray(a) && $.isArray(b)) {
             if (a.length != b.length) return false;
             for (var i = a.length; --i >= 0;) {
                 if (!equals(a[i], b[i])) return false;
@@ -1028,7 +1058,7 @@
         }
         if (typeof a != typeof b) return false;
         if (typeof a == "object") {
-            var keys = Object.keys(a);
+            var keys = Object_keys(a);
             for (var i = keys.length; --i >= 0;) {
                 if (!equals(a[i], b[i])) return false;
             }
