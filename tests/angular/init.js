@@ -15,7 +15,18 @@
 
     var $injector, $controller, $scope, $compile;
 
-    var app = angular.module("MyApp", [ "kendo.directives", "ngRoute" ]);
+    angular.module("my.directives", []).directive("isolatedScope", function(){
+        return {
+            scope: {
+                "foo": "@"
+            },
+            restrict: "A",
+            transclude: true,
+            template: "<div><h1>Isolated Scope</h1><span ng-transclude></span></div>"
+        };
+    });
+
+    var app = angular.module("MyApp", [ "kendo.directives", "my.directives", "ngRoute" ]);
     app.controller("MyCtrl", function($scope){
         $scope.windowOptions = {
             title: "Das titlen"
@@ -747,6 +758,27 @@
         });
     });
     }
+
+    /// custom directives
+
+    runTest("Custom directive with isolated scope", function(dom){
+        $scope.options = {
+            dataSource     : $scope.data,
+            dataTextField  : "text",
+            dataValueField : "id"
+        };
+        $scope.ns = { test: 1 };
+        $("<div isolated-scope><select kendo-dropdownlist='ns.list' ng-model='ns.test' k-options='options'></select></div>").appendTo(dom);
+        expect(2);
+        setTimeout(function(){
+            var dl = $scope.ns.list;
+            equal(dom.find("h1").length, 1);
+            dl.value(2);
+            dl.element.trigger("change");
+            equal($scope.ns.test, 2);
+            start();
+        }, 100);
+    });
 
     /// mobile
 
