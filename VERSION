@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 { "year": 2014, "release": 3 }
+=======
+{ "year": 2014, "release": 2, "servicePack": "next" }
+>>>>>>> 4454a614ae3a3819ab4e249819d36fd64684645a
