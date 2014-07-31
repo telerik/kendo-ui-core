@@ -1126,23 +1126,29 @@ pre.prettyprint
 /* widget inspector */
 
 #inspector-container .sec-title.k-header {
-    background: #f3f5f7;
+    background: #fdfdfd;
     border-bottom: 1px solid #ebecee;
-    height: 40px;
-    line-height: 40px;
+    height: 32px;
+    line-height: 32px;
     vertical-align: middle;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+}
+
+#inspector-container .sec-content {
+    border-bottom: 1px solid #ebecee;
+    padding: 10px 15px;
 }
 
 #inspector-container .sec-title:hover,
 #inspector-container .sec-title:hover:before {
-    background: #e2e4e7;
+    background: #f3f5f7;
     color: #000;
 }
 
 #inspector-container .kendo-inspector .kendo-inspector-section .sec-title:before {
-    top: 12px;
+    top: 8px;
 }
 
 #inspector-container .kendo-inspector .kendo-inspector-section.visible .sec-title:before {
@@ -1182,8 +1188,9 @@ pre.prettyprint
  
 #inspector-header {
     border-bottom: 1px solid #ebecee;
+    background: #fdfdfd;
     padding: 14px 20px;
-    font-size: 1.1em;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -1197,7 +1204,6 @@ pre.prettyprint
     border: 0;
     background: #fff;
 }
-
 
 
 
