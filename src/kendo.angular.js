@@ -94,7 +94,7 @@
 
             if (widgetOptions.hasOwnProperty(dataName)) {
                 addOption(scope, options, dataName, value);
-            } else if (widgetOptions.hasOwnProperty(name)) {
+            } else if (widgetOptions.hasOwnProperty(name) && name != "name") { // `name` must be forbidden. XXX: other names to ignore here?
                 addOption(scope, options, name, value);
             } else if (!ignoredAttributes[name]) {
                 var match = name.match(/^k(On)?([A-Z].*)/);
