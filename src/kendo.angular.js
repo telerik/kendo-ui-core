@@ -259,7 +259,10 @@
                             prev_destroy = scope.$on("$destroy", function() {
                                 if (widget) {
                                     if (widget.element) {
-                                        widget.destroy();
+                                        widget = kendoWidgetInstance(widget.element);
+                                        if (widget) {
+                                            widget.destroy();
+                                        }
                                     }
                                     widget = null;
                                 }
