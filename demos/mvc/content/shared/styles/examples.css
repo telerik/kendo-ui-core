@@ -896,7 +896,7 @@ div.submenu-box ol {
 
 pre.prettyprint
 {
-    font-family:courier,monospace;
+    font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 /*console*/
@@ -1125,15 +1125,33 @@ pre.prettyprint
 
 /* widget inspector */
 
-#inspector-container .sec-title {
-    display: none;
+#inspector-container .sec-title.k-header {
+    background: #f3f5f7;
+    border-bottom: 1px solid #ebecee;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#inspector-container .sec-title:hover,
+#inspector-container .sec-title:hover:before {
+    background: #e2e4e7;
+    color: #000;
+}
+
+#inspector-container .kendo-inspector .kendo-inspector-section .sec-title:before {
+    top: 12px;
+}
+
+#inspector-container .kendo-inspector .kendo-inspector-section.visible .sec-title:before {
+    color: #444;
 }
 
 #inspector-container .kendo-inspector .kendo-inspector-section.visible {
     border-bottom: 0;
     font-size: 14px;
-    font-family: courier,monospace;
-    padding: 15px;
 }
 
 #inspector-container .kendo-inspector .editable-object a.doclink:before {
