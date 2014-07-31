@@ -741,7 +741,7 @@
         if (options.columns) {
             var settings = $.extend({}, kendo.Template, options.templateSettings);
             angular.forEach(options.columns, function(col){
-                if (col.field && !col.template && !col.format && !col.values) {
+                if (col.field && !col.template && !col.format && !col.values && (col.encoded === undefined || col.encoded)) {
                     col.template = "<span ng-bind='" +
                         kendo.expr(col.field, "dataItem") + "'>#: " +
                         kendo.expr(col.field, settings.paramName) + "#</span>";
