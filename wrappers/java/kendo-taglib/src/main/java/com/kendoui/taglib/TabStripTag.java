@@ -3,8 +3,6 @@ package com.kendoui.taglib;
 
 
 import com.kendoui.taglib.tabstrip.*;
-
-
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.json.Function;
 
@@ -27,6 +25,26 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         return element;
     }
     
+    @Override
+    public Element<?> html() {
+        Element<?> element = createElement();
+
+        element.attr("id", getName());
+
+        for (String attribute : attributes.keySet()) {
+            Object value = attributes.get(attribute);
+            
+            if (value != null) {
+                element.attr(attribute, value);
+            }
+        }
+        Element<?> wrapper = super.createElement();
+        wrapper.attr("class", "k-tabstrip-wrapper");
+        wrapper.append(element);
+
+        return wrapper;
+    }
+
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
