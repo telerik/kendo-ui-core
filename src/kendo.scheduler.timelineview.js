@@ -86,7 +86,7 @@ var __meta__ = {
     var TimelineView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
-
+            //only vertical grouping is supported = ignore orientation?
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
@@ -249,7 +249,8 @@ var __meta__ = {
                     msMax += MS_PER_DAY;
                 }
 
-                this._columnCount = Math.ceil((msMax - msMin) / msMajorInterval);
+                //math.ceil or floor?
+                this._columnCount = Math.floor((msMax - msMin) / msMajorInterval);
             }
        },
 
@@ -260,6 +261,8 @@ var __meta__ = {
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
             minorTickCount: 2,
+            //new option
+            numberOfDays: 1,
             majorTick: 60,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
@@ -298,7 +301,7 @@ var __meta__ = {
 
             that.createLayout(that._layout(dates));
 
-            that._content(that._columnCount);
+            that._content(that._columnCount * that._dates.length);
 
             that.refreshLayout();
         },
@@ -396,80 +399,78 @@ var __meta__ = {
 
         _groups: function() {
             var groupCount = this._groupCount();
-            var columnCount = this._columnCount;
+            var columnCount = this._columnCount * this._dates.length;
 
             this.groups = [];
 
             for (var idx = 0; idx < groupCount; idx++) {
                 var view = this._addResourceView(idx);
-
-                view.addTimeSlotCollection(this._dates[0], kendo.date.addDays(this._dates[0], 1));
+                var dates = this._dates;
+                var start = dates[0];
+                var end = dates[(dates.length - 1) || 0];
+                view.addTimeSlotCollection(start, kendo.date.addDays(end, 1));
             }
 
             this._timeSlotGroups(groupCount, columnCount);
         },
 
-        _timeSlotGroups: function(groupCount, columnCount) {
-            //To be implemented
-            //throw "_render is not implemented";
-            var interval = this._timeSlotInterval();
+        _isGrouped: function () {
+            return !!this.groupedResources.length;
+        },
 
+        _timeSlotGroups: function (groupCount, columnCount) {
+            //example logic
+            var interval = this._timeSlotInterval();
+            var isGrouped = this._isGrouped();
             var tableRows = this.content.find("tr");
+            var rowCount = tableRows.length;
 
             tableRows.attr("role", "row");
 
-            var rowCount = tableRows.length;
-
-            if (this._isVerticallyGrouped()) {
-                //always returns 1
+            if (isGrouped) {
                 rowCount = Math.floor(rowCount / groupCount);
             }
 
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
+                var cells = tableRows[groupIndex].children;
+                var group = this.groups[groupIndex];
+                var datesCount = this._dates.length;
+                var time;
 
-                if (this._isVerticallyGrouped()) {
+                if (isGrouped) {
                     rowMultiplier = groupIndex;
                 }
 
                 var rowIndex = rowMultiplier * rowCount;
-                var time;
+
                 var cellMultiplier = 0;
 
-                if (!this._isVerticallyGrouped()) {
+                if (!isGrouped) {
                     cellMultiplier = groupIndex;
                 }
 
-                while (rowIndex < (rowMultiplier + 1) * rowCount) {
-                    var cells = tableRows[rowIndex].children;
-                    var group = this.groups[groupIndex];
-
+                //two possible slot creation approaches:
+                //1) current - loop throught the dates - this way the current date is available directly by index
+                //2) another - loop throught all cells for given row and get date from deviding index by column index
+                for (var dateIndex = 0; dateIndex < datesCount; dateIndex++) {
+                    var dayColumnCount = Math.floor(columnCount / datesCount);
                     time = getMilliseconds(new Date(+this.options.startTime));
-
-                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < (cellMultiplier + 1) * columnCount; cellIndex++) {
-                        var cell = cells[cellIndex];
-
-                        var collectionIndex = 0;
-
-                        var collection = group.getTimeSlotCollection(collectionIndex);
-
-                        //need update for larger time intervals than one day
-                        var currentDate = this._dates[collectionIndex];
-
+                    for (var cellIndex = cellMultiplier * columnCount; cellIndex < columnCount / datesCount ; cellIndex++) {
+                        var cell = cells[cellIndex + (dateIndex * dayColumnCount)];
+                        var collection = group.getTimeSlotCollection(0);
+                        var currentDate = this._dates[dateIndex];
                         var currentTime = Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-
-                        var start = (currentTime + time) + (interval * cellIndex);
-
+                        var start = currentTime + time;
                         var end = start + interval;
 
                         cell.setAttribute("role", "gridcell");
                         cell.setAttribute("aria-selected", false);
 
                         collection.addTimeSlot(cell, start, end);
-                    }
 
-                    time += interval;
-                    rowIndex ++;
+                        time += interval;
+                    }
                 }
             }
         },
@@ -497,17 +498,29 @@ var __meta__ = {
             return msMajorInterval = options.majorTick * kendo.date.MS_PER_MINUTE;
         },
 
-        nextDate: function() {
+        nextDate: function () {
             return kendo.date.nextDay(this.endDate());
         },
-
-        previousDate: function() {
-            return kendo.date.previousDay(this.startDate());
+        previousDate: function () {
+            var daysToSubstract = -Math.abs(this.options.numberOfDays); //get the negative value of numberOfDays
+            var startDate = kendo.date.addDays(this.startDate(), daysToSubstract); //substract the dates
+            return startDate;
         },
 
         calculateDateRange: function() {
             //add support for different intervals - day, week, month
-            this._render([this.options.date]);
+            var selectedDate = this.options.date,
+                      numberOfDays = Math.abs(this.options.numberOfDays),
+                      start = selectedDate,
+                      idx, length,
+                      dates = [];
+
+            for (idx = 0, length = numberOfDays; idx < length; idx++) {
+                dates.push(start);
+                start = kendo.date.nextDay(start);
+            }
+            this._render(dates);
+            //this._render([this.options.date, kendo.date.addDays(this.options.date, 1)]);
         },
 
         render: function(events) {
@@ -584,16 +597,22 @@ var __meta__ = {
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
                 var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
-                var container =  this.content;
-                if (this._isInTimeSlot(event)) {
+                var container = this.content;
+
+                if (this._isInTimeSlot(event) || event.isAllDay) {
                     group = this.groups[groupIndex];
 
                     if (!group._continuousEvents) {
                         group._continuousEvents = [];
                     }
 
-                    ranges = group.slotRanges(event);
+                    if (isMultiDayEvent) {
+                        ranges = group.customSlotRanges(event);
+                    } else {
+                        ranges = group.slotRanges(event);
+                    }
 
+                    console.log(ranges);
                     var rangeCount = ranges.length;
 
                     for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++) {
@@ -612,17 +631,20 @@ var __meta__ = {
                             }
                         }
 
-                        var occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
+                        var occurrence;
+                        if (event.isAllDay) {
+                            debugger;
+                            occurrence = event.clone({ start: getDate(start), end: new Date(getDate(event.end).getTime() + MS_PER_DAY - 1), startTime: event.startTime, endTime: event.endTime });
+                        } else {
+                            occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
+                        }
 
-                        if (this._isInTimeSlot(occurrence)) {
-                            var head = range.head;
-
-                            element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
-
+                        if (this._isInTimeSlot(occurrence) || event.isAllDay) {
+                            element = this._createEventElement(event, true, range.head, range.tail);
                             element.appendTo(container);
-
                             this._positionEvent(occurrence, element, range);
 
+                            //?add support
                             //addContinuousEvent(group, range, element, false);
                         }
                     }
@@ -682,26 +704,24 @@ var __meta__ = {
             if (startTime >= endTime) {
                 endTime = getMilliseconds(new Date(this.endTime().getTime() + MS_PER_DAY - 1));
             }
-            
+
             if (!isOneDayEvent && !event.isAllDay) {
                 endDate = new Date(endDate.getTime() + MS_PER_DAY);
             }
-            
+
             var eventStartDate = event.start;
             var eventEndDate = event.end;
-            
-            
+
             if ((!isInDateRange(getDate(eventStartDate), startDate, endDate) &&
                 !isInDateRange(eventEndDate, startDate, endDate)) ||
                 (isOneDayEvent && eventStartTime < startTime && eventEndTime > endTime)) {
-
                 middle = true;
             } else if (getDate(eventStartDate) < startDate || (isOneDayEvent && eventStartTime < startTime)) {
                 tail = true;
             } else if ((eventEndDate > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
-            
+
             var resources = this.eventResources(event);
             
             if (event.startTime) {
@@ -713,7 +733,7 @@ var __meta__ = {
                 eventEndDate = new Date(eventEndTime);
                 eventEndDate = kendo.timezone.apply(eventEndDate, "Etc/UTC");
             }
-            
+
               var data = extend({}, {
                 ns: kendo.ns,
                 resizable: resizable,
@@ -737,21 +757,33 @@ var __meta__ = {
                     data: [ { dataItem: data } ]
                 };
             });
-            
+
             return element;
-        }, 
+        },
 
         _positionEvent: function(event, element, slotRange) {
             //todo
+            //var slotWidth = slotRange.innerWidth();
+            var slotWidth = slotRange.start.clientWidth;
+            var startIndex = slotRange.start.index;
+            var endIndex = slotRange.end.index;
+
+            var allDayEvents = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
+
+            var currentColumnCount = this._headerColumnCount || 0;
+
+            var leftOffset = 2;
+
+            var rightOffset = startIndex !== endIndex ? 5 : 4;
+
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
-
             var rect = slotRange.innerRect(start, end, false);
             rect.top = slotRange.start.offsetTop;
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
             var width = rect.right - rect.left -2;
-   
+
             if (width < 0) {
                 width = 0;
             }
@@ -760,14 +792,64 @@ var __meta__ = {
                 height = 0;
             }
 
-            //need update
-            element.css( {
-                top:rect.top,
-                height: height,
-                width: width,
-                left: rect.left
-            } );
+            var eventHeight = height;
 
+            element
+                .css({
+                    left: rect.left,
+                    width: width,
+                    height: "20px"
+                });
+
+            slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
+
+            allDayEvents.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
+
+            var rows = SchedulerView.createRows(allDayEvents);
+
+            if (rows.length && rows.length > currentColumnCount) {
+                this._headerColumnCount = rows.length;
+            }
+
+            var top = slotRange.start.offsetTop;
+
+            for (var idx = 0, length = rows.length; idx < length; idx++) {
+                var rowEvents = rows[idx].events;
+
+                for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
+                    $(rowEvents[j].element).css({
+                        top: top + idx * eventHeight
+                    });
+                }
+            }
+
+            //var start = event.startTime || event.start;
+            //var end = event.endTime || event.end;
+            //
+            //var rect = slotRange.innerRect(start, end, false);
+            //rect.top = slotRange.start.offsetTop;
+            //
+            //var height = rect.bottom - rect.top - 2; /* two times border width */
+            //var width = rect.right - rect.left -2;
+            //
+            //if (width < 0) {
+            //    width = 0;
+            //}
+            //
+            //if (height < 0) {
+            //    height = 0;
+            //}
+            //
+            ////need update
+            //element.css( {
+            //    top:rect.top,
+            //    height: height,
+            //    width: width,
+            //    left: rect.left,
+            //    "min-height": 10 //update?
+            //} );
+            //
+            ////JUST ADDED - > need update as it should align the events by rows not by columns
             //this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
         },
 

@@ -393,6 +393,22 @@ var __meta__ = {
             return this.timeSlotRanges(startTime, endTime);
         },
 
+        //need update - naming?
+        customSlotRanges: function (event, isDay) {
+            var startTime = event.startTime || kendo.date.toUtcTime(event.start);
+            var endTime = event.endTime || kendo.date.toUtcTime(event.end);
+
+            if (isDay === undefined) {
+                isDay = event.isAllDay;
+            }
+            //debugger;
+            if (isDay) {
+                endTime = startTime + kendo.date.MS_PER_DAY;
+            }
+
+            return this.timeSlotRanges(startTime, endTime);
+        },
+
         ranges: function(startTime, endTime, isDay, isAllDay) {
             if (typeof startTime != "number") {
                 startTime = kendo.date.toUtcTime(startTime);
@@ -936,6 +952,7 @@ var __meta__ = {
             return this.start + time;
         },
 
+        //need update
         horizontalStartOffset: function(x, y, snap) {
             if (snap) {
                 return this.start;
@@ -951,7 +968,7 @@ var __meta__ = {
 
             return this.start + time;
         },
-
+        //need update
         horizontalEndOffset: function(x, y, snap) {
             if (snap) {
                 return this.end;
