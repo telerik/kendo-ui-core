@@ -731,8 +731,10 @@ var __meta__ = {
             }
 
             that._busy = setTimeout(function () {
-                that._focused.attr("aria-busy", true);
-                that._arrow.addClass(LOADING);
+                if (that._arrow) { //destroyed after request start
+                    that._focused.attr("aria-busy", true);
+                    that._arrow.addClass(LOADING);
+                }
             }, 100);
         },
 

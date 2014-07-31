@@ -18,9 +18,6 @@
         },
         teardown: function() {
             kendo.destroy(dom);
-            if (dropdownlist) {
-                dropdownlist.destroy();
-            }
         }
     });
 
