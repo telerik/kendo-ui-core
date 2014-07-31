@@ -1505,6 +1505,21 @@
             axisLabelClick(function() { ok(true); });
         });
 
+        test("fires when clicking axis labels with children", 2, function() {
+            axisLabelClick(function(e) {
+                ok(true);
+            }, {
+                categoryAxis: {
+                    labels: {
+                        template: "<tspan>Foo</tspan>"
+                    }
+                }
+            });
+
+            chart._userEvents.press(0, 0, getElement(label.options.id).firstChild);
+            chart._userEvents.end(0, 0);
+        });
+
         test("event arguments contain axis options", 1, function() {
             axisLabelClick(function(e) {
                 equal(e.axis.type, "category");
