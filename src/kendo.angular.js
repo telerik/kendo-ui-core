@@ -198,7 +198,7 @@
                                         kNgDelay = null;
                                         $timeout(createIt); // XXX: won't work without `timeout` ;-\
                                     }
-                                }, true);
+                                });
                             })();
                         }
 
