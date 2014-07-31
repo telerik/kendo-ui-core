@@ -171,7 +171,7 @@
         });
 
         if (widgets.length == 0) {
-            $("#inspector-container").hide();
+            $("#inspector-container, .inspector-tab").hide();
         } else {
             $("#inspector-widgets").kendoDropDownList({
                 dataSource     : datasource,
@@ -259,7 +259,7 @@
                         {
                             <li>@file.Name</li>
                         }
-                        <li>Widget configuration</li>
+                        <li class="inspector-tab">Widget configuration</li>
                     </ul>
                     @foreach (ExampleFile file in examples)
                     {
