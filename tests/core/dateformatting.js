@@ -1,5 +1,18 @@
 (function(){
 var toString = kendo.toString;
+var zeros = ["", "0", "00", "000", "0000"];
+
+function pad(number, digits, end) {
+    number = number + "";
+    digits = digits || 2;
+    end = digits - number.length;
+
+    if (end) {
+        return zeros[digits].substring(0, end) + number;
+    }
+
+    return number;
+}
 
 function date(year, month, day, hour, minute, second, millisecond) {
     var d = new Date();
@@ -234,17 +247,35 @@ test('date formatting supports small year with four digits', function() {
 
 test('date formatting supports "z" timezone offset specifier', function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "z"), '-2');
+    var hours = (d.getTimezoneOffset() / 60).toString().split(".")[0];
+
+    equal(toString(d, "z"), hours);
 });
 
 test('date formatting supports padded timezone offset specifier', function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "zz"), '-02');
+    var offset = d.getTimezoneOffset();
+    var sign = offset < 0;
+
+    var hours = Math.abs((offset / 60).toString().split(".")[0]);
+
+    hours = (sign ? "-" : "+") + pad(hours);
+
+    equal(toString(d, "zz"), hours);
 });
 
 test('date formatting supports full timezone offset', function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "zzz"), '-02:00');
+    var offset = d.getTimezoneOffset();
+
+    var sign = offset < 0;
+    var hours = Math.abs((offset / 60).toString().split(".")[0]);
+    var minutes = Math.abs(offset) - (hours * 60);
+
+    hours = (sign ? "-" : "+") + pad(hours);
+    hours += ":" + pad(minutes);
+
+    equal(toString(d, "zzz"), hours);
 });
 
 }());
