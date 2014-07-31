@@ -546,7 +546,8 @@
     }
 
     function digest(scope) {
-        if (!/^\$(digest|apply)$/.test(scope.$root.$$phase)) {
+        var root = scope.$root || scope;
+        if (!/^\$(digest|apply)$/.test(root.$$phase)) {
             scope.$digest();
         }
     }
@@ -681,7 +682,8 @@
     defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
         handler = $parse(handler);
         return function(e) {
-            if (/^\$(apply|digest)$/.test(scope.$root.$$phase)) {
+            var root = scope.$root || scope;
+            if (/^\$(apply|digest)$/.test(root.$$phase)) {
                 handler(scope, { kendoEvent: e });
             } else {
                 scope.$apply(function() { handler(scope, { kendoEvent: e }); });
