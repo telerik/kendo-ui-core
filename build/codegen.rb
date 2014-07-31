@@ -39,7 +39,7 @@ namespace :generate do
     end
 
     desc 'Generate all server wrappers and their API reference'
-    task :all => [:php, :jsp, 'mvc:wrappers', 'mvc:api']
+    task :all => [:php, :jsp, 'mvc:wrappers']
 
     namespace :aspx do
 
@@ -183,7 +183,7 @@ namespace :generate do
     end
 
     desc 'Generate PHP wrappers'
-    task :php => ['php:wrappers', 'php:api']
+    task :php => ['php:wrappers']
 
     namespace :php do
         desc 'Generate PHP classes'
@@ -218,7 +218,7 @@ namespace :generate do
     end
 
     desc 'Generate JSP wrappers'
-    task :jsp => ['jsp:tld', 'jsp:wrappers', 'jsp:api']
+    task :jsp => ['jsp:tld', 'jsp:wrappers']
 
     namespace :jsp do
 
