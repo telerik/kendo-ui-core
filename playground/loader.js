@@ -7,7 +7,7 @@
     }
 
     function normalize(url) {
-        var m = /^(https?:\/\/)(.*)$/i.exec(url);
+        var m = /^(https?:\/\/|\/\/)(.*)$/i.exec(url);
         if (!m) throw new Error("Cannot normalize url: " + url);
         var scheme = m[1], path = m[2].split("/");
         var normal = [];
@@ -30,8 +30,13 @@
     sync_require.LOADED = LOADED;
 
     function load(path, file) {
+        var url;
         file = file.replace(/\.js$/, "") + ".js";
-        var url = normalize(path + file);
+        if (/^(https?:|\/\/)/.test(file)) {
+            url = normalize(file);
+        } else {
+            url = normalize(path + file);
+        }
         if (LOADED[url]) {
             return LOADED[url].value;
         }
