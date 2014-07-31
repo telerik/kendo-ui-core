@@ -245,21 +245,25 @@ var __meta__ = {
             var msMajorInterval = this._timeSlotInterval();
             var msMin = getMilliseconds(toInvariantTime(options.startTime));
             var msMax = getMilliseconds(toInvariantTime(options.endTime));
+            var columnCount;
 
+            columnCount = MS_PER_DAY / msMajorInterval;
             if (msMin != msMax) {
                 if (msMin > msMax) {
                     msMax += MS_PER_DAY;
                 }
 
-                //math.ceil or floor?
-                this._columnCount = Math.floor((msMax - msMin) / msMajorInterval);
+                columnCount = (msMax - msMin) / msMajorInterval;
             }
+
+            this._columnCount = Math.round(columnCount)
        },
 
         options: {
             name: "TimelineView",
             selectedDateFormat: "{0:D}",
             title: "",
+            date: kendo.date.today(),
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
             minorTickCount: 2,
@@ -356,8 +360,6 @@ var __meta__ = {
         _content: function(columnCount) {
             var that = this;
             var options = that.options;
-            var start = options.startTime;
-            var end = options.endTime;
             var isVerticalGroupped = false;
 
             var groupsCount = 1;
