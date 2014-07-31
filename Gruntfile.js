@@ -6,6 +6,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-debug-task');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadTasks('build/grunt/tasks');
 
     // support different test sets for public|private repo
@@ -235,12 +236,31 @@ module.exports = function(grunt) {
                     return PATH.basename(src).match(/^kendo(.+)(js|css|less)$/);
                 }
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: './',
+                    keepalive: true
+                }
+            }
         }
-
+    
     });
+
+    /*
+    var connect = require('connect');
+
+    grunt.registerTask('connect', 'Start a custom static web server.', function() {
+        grunt.log.writeln('Starting static web server in "www-root" on port 9001.');
+        connect(connect.static('./')).listen(9001);
+    });
+    */
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
+    grunt.registerTask('server', ['connect']);
     grunt.registerTask('tests', [ 'styles', 'karma:unit' ]);
     grunt.registerTask('styles', [ 'copy:css_assets', 'less' ]);
     grunt.registerTask('all', [ 'kendo', 'download_builder', 'copy:jquery', 'copy:angular', 'copy:timezones' ]);
