@@ -148,13 +148,6 @@
     </div>
 
 <!--widget inspector-->
-    <div id="inspector-container">
-        <div id="inspector-header">
-            <label for="inspector-widgets">Select widget to inspect</label>
-            <select id="inspector-widgets"></select>
-        </div>
-        <div id="inspector"></div>
-    </div>
     <script>$(document).ready(function(){
 
         function kendoWidgetInstance(el) {
@@ -266,7 +259,21 @@
                         {
                             <li>@file.Name</li>
                         }
-                   </ul>
+                        <li>Widget configuration</li>
+                    </ul>
+                    @foreach (ExampleFile file in examples)
+                    {
+                        <div></div>
+                    }
+                    <div>
+                        <div id="inspector-container">
+                            <div id="inspector-header">
+                              <label for="inspector-widgets">Select widget to inspect</label>
+                              <select id="inspector-widgets"></select>
+                            </div>
+                            <div id="inspector"></div>
+                        </div>
+                    </div>
                 </div>
                <script>
                $("#source-code").kendoTabStrip({
