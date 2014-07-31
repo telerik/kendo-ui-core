@@ -44,6 +44,12 @@ test("adds a scroll stopping wrapper around itself", function() {
     ok(tabstrip.wrapper.parent(".k-tabstrip-wrapper").length, "Wraps around the TabStrip");
 });
 
+test("doesn't add a scroll stopping wrapper if there is one already", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom.wrap('<div class="k-tabstrip-wrapper"></div>'));
+
+    ok(dom.parents(".k-tabstrip-wrapper").length == 1, "Only one wrapper around the TabStrip");
+});
+
 test("removes its scrolling wrapper on destroy", function() {
     var tabstrip = new kendo.ui.TabStrip(dom);
 

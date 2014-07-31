@@ -807,7 +807,11 @@ var __meta__ = {
                 that.wrapper = that.element;
             }
 
-            that.scrollWrap = that.wrapper.wrapAll("<div class='k-tabstrip-wrapper' />").parent();
+            that.scrollWrap = that.wrapper.parent(".k-tabstrip-wrapper");
+
+            if (!that.scrollWrap[0]) {
+                that.scrollWrap = that.wrapper.wrapAll("<div class='k-tabstrip-wrapper' />").parent();
+            }
         },
 
         _sizeScrollWrap: function(element) {
