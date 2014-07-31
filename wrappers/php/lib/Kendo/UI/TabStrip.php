@@ -45,6 +45,18 @@ class TabStrip extends \Kendo\UI\Widget {
         return $element;
     }
 
+    public function html() {
+        $element = $this->createElement();
+
+        $wrapper = new \Kendo\Html\Element('div');
+        $wrapper->attr('class', 'k-tabstrip-wrapper');
+        $wrapper->append($element);
+
+        $this->addAttributes($element);
+
+        return $wrapper->outerHtml();
+    }
+
     /**
     * Sets the data of the TabStrip.
     * @param array $value
