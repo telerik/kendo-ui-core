@@ -245,37 +245,19 @@ test('date formatting supports small year with four digits', function() {
     equal(toString(d, "s"), '0001-01-01T00:00:00');
 });
 
-test('date formatting supports "z" timezone offset specifier', function() {
+tzTest("Sofia", "date formatting supports 'z' timezone offset specifier", function() {
     var d = date(2000, 0, 1);
-    var hours = (d.getTimezoneOffset() / 60).toString().split(".")[0];
-
-    equal(toString(d, "z"), hours);
+    equal(toString(d, "z"), "-2");
 });
 
-test('date formatting supports padded timezone offset specifier', function() {
+tzTest("Sofia", "date formatting supports padded timezone offset specifier", function() {
     var d = date(2000, 0, 1);
-    var offset = d.getTimezoneOffset();
-    var sign = offset < 0;
-
-    var hours = Math.abs((offset / 60).toString().split(".")[0]);
-
-    hours = (sign ? "-" : "+") + pad(hours);
-
-    equal(toString(d, "zz"), hours);
+    equal(toString(d, "zz"), "-02");
 });
 
-test('date formatting supports full timezone offset', function() {
+tzTest("Sofia", "date formatting supports full timezone offset", function() {
     var d = date(2000, 0, 1);
-    var offset = d.getTimezoneOffset();
-
-    var sign = offset < 0;
-    var hours = Math.abs((offset / 60).toString().split(".")[0]);
-    var minutes = Math.abs(offset) - (hours * 60);
-
-    hours = (sign ? "-" : "+") + pad(hours);
-    hours += ":" + pad(minutes);
-
-    equal(toString(d, "zzz"), hours);
+    equal(toString(d, "zzz"), "-02:00");
 });
 
 }());
