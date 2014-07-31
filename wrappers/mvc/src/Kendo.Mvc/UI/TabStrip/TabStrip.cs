@@ -137,6 +137,7 @@ namespace Kendo.Mvc.UI
                 int itemIndex = 0;
                 bool isPathHighlighted = false;
 
+                IHtmlNode tabStripWrapperTag = builder.TabStripWrapperTag();
                 IHtmlNode tabStripTag = builder.TabStripTag();
 
                 //this loop is required because of SelectedIndex feature.
@@ -159,7 +160,8 @@ namespace Kendo.Mvc.UI
                     WriteItem(item, tabStripTag, builder);
                 });
 
-                tabStripTag.WriteTo(writer);
+                tabStripTag.AppendTo(tabStripWrapperTag);
+                tabStripWrapperTag.WriteTo(writer);
             }
             base.WriteHtml(writer);
         }
