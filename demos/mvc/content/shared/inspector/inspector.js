@@ -8,7 +8,7 @@
          '  <div class="sec-buttons">' +
          '    <button class="k-button grab-widget">Select</button>' +
          '  </div>' +
-         '  <div class="sec-title k-header">Widget inspector</div>' +
+         '  <div class="sec-title k-header"></div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
          '<div class="kendo-inspector-section datasource" data-section="datasource">' +
@@ -57,6 +57,8 @@
         reset: function(widget) {
             var self = this, element = self.element;
             element.find(".kendo-inspector-section .sec-content").empty();
+
+            element.find(".kendo-inspector-section.widget .sec-title").text(widget.options.name + " options");
 
             var cont = element.find(".kendo-inspector-section.widget .sec-content");
 
