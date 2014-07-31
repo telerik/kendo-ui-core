@@ -57,7 +57,7 @@ var __meta__ = {
 
             options = that.options;
 
-            that._distance = options.max - options.min;
+            that._distance = round(options.max - options.min);
             that._isHorizontal = options.orientation == "horizontal";
             that._isRtl = that._isHorizontal && kendo.support.isRtl(element);
             that._position = that._isHorizontal ? "left" : "bottom";
