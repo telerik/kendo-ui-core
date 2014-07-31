@@ -210,7 +210,7 @@ var __meta__ = {
                 items = that.wrapper.find(TICK_SELECTOR),
                 i = 0, item, value;
 
-            if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0 || that._distance / options.largeStep >= 3) {
+            if (removeFraction(options.largeStep) % removeFraction(options.smallStep) === 0 || that._distance / options.largeStep >= 3) {
                 if (!that._isHorizontal && !that._isRtl) {
                     items = $.makeArray(items).reverse();
                 }
@@ -218,7 +218,7 @@ var __meta__ = {
                 for (i = 0; i < items.length; i++) {
                     item = $(items[i]);
                     value = that._values[i];
-                    if ((1000 * value) % (1000 * options.smallStep) === 0 && (1000 * value) % (1000 * options.largeStep) === 0) {
+                    if (removeFraction(value) % removeFraction(options.smallStep) === 0 && removeFraction(value) % removeFraction(options.largeStep) === 0) {
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
@@ -601,6 +601,10 @@ var __meta__ = {
 
     function defined(value) {
         return typeof value !== UNDEFINED;
+    }
+
+    function removeFraction(value) {
+        return value * 10000;
     }
 
     var Slider = SliderBase.extend({
