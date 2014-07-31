@@ -796,7 +796,8 @@ var __meta__ = {
 
         _getChartElement: function(e) {
             var chart = this,
-                modelId = $(e.target).data("modelId"),
+                target = $(e.target),
+                modelId = target.data("modelId") || target.parent().data("modelId"),
                 model = chart._model,
                 element;
 
