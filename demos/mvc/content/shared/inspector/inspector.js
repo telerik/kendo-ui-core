@@ -66,11 +66,13 @@
     var Inspector = Widget.extend({
 
         options: {
-            name       : "Inspector",
-            showPicker : true,
-            showEvents : true,
-            docBaseUrl : null,
-            widget     : null
+            name           : "Inspector",
+            showPicker     : true,
+            showEvents     : true,
+            docBaseUrl     : null,
+            widget         : null,
+            tooltips       : false,
+            showAllOptions : false
         },
 
         init: function(element, options) {
@@ -119,28 +121,40 @@
 
             var orig_options = widget.constructor.prototype.options;
 
-            displayJSON({ options: safeValueForJSON(widget.options) }, {
-                filterable: true,
-                sort: true,
-                wrapProperty: function(key, val, path) {
-                    path = path.slice(1);
-                    var modified = propertyChanged(orig_options, path, val);
-                    if (self.options.docBaseUrl) {
-                        path = filter(path, function(x){ return typeof x == "string" }).join(".");
-                        var url = self.options.docBaseUrl + "#configuration";
-                        if (path) {
-                            url += "-" + path;
-                        }
-                        return "<a target='KENDOUIDOCS' kendo-tooltip='Config option: " + path + "' class='property doclink"
-                            + (modified ? " modified" : "")
-                            + "' href='" + url + "'>" + htmlescape(key) + "</a>";
+            function wrapOption(key, val, path) {
+                path = path.slice(1);
+                var modified = propertyChanged(orig_options, path, val);
+                if (self.options.docBaseUrl) {
+                    path = filter(path, function(x){ return typeof x == "string" }).join(".");
+                    var url = self.options.docBaseUrl + "#configuration";
+                    if (path) {
+                        url += "-" + path;
                     }
-                    else {
-                        return "<span class='property"
-                            + (modified ? " modified" : "")
-                            + "'>" + htmlescape(key) + "</span>";
+                    return "<a target='KENDOUIDOCS' kendo-tooltip='Config option: " + path + "' class='property doclink"
+                        + (modified ? " modified" : "")
+                        + "' href='" + url + "'>" + htmlescape(key) + "</a>";
+                }
+                else {
+                    return "<span class='property"
+                        + (modified && self.options.showAllOptions ? " modified" : "")
+                        + "'>" + htmlescape(key) + "</span>";
+                }
+            }
+
+            var opts = widget.options;
+            if (!self.options.showAllOptions) {
+                opts = {};
+                for (var i in widget.options) if (Object.prototype.hasOwnProperty.call(widget.options, i)) {
+                    if (propertyChanged(orig_options, [ i ], widget.options[i])) {
+                        opts[i] = widget.options[i];
                     }
                 }
+            }
+
+            displayJSON({ options: safeValueForJSON(opts) }, {
+                filterable: true,
+                sort: true,
+                wrapProperty: wrapOption
             }).appendTo(cont);
 
             element.find(".kendo-inspector-section.datasource").removeClass("visible").css({
@@ -393,16 +407,18 @@
                 }
             });
 
-            element.kendoTooltip({
-                filter: "[data-object-id]",
-                content : function(data) {
-                    if (data.target.is("[data-element-id]")) {
-                        return "<div style='white-space: nowrap'>Click to dump with console.log</div>";
-                    } else {
-                        return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
+            if (self.options.tooltips) {
+                element.kendoTooltip({
+                    filter: "[data-object-id]",
+                    content : function(data) {
+                        if (data.target.is("[data-element-id]")) {
+                            return "<div style='white-space: nowrap'>Click to dump with console.log</div>";
+                        } else {
+                            return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
+                        }
                     }
-                }
-            });
+                });
+            }
 
         },
 
