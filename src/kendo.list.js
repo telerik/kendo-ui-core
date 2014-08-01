@@ -67,11 +67,7 @@ var __meta__ = {
 
             that.list = $("<div class='k-list-container'/>")
                         .append(that.ul)
-                        .on("mousedown" + ns, function(e) {
-                            if (!that.filterInput || that.filterInput[0] !== e.target) {
-                                e.preventDefault();
-                            }
-                        });
+                        .on("mousedown" + ns, proxy(that._listMousedown, that));
 
             id = element.attr(ID);
 
@@ -115,6 +111,12 @@ var __meta__ = {
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+        },
+
+        _listMousedown: function(e) {
+            if (!this.filterInput || this.filterInput[0] !== e.target) {
+                e.preventDefault();
+            }
         },
 
         _filterSource: function(filter) {
@@ -456,41 +458,42 @@ var __meta__ = {
             return true;
         },
 
+        _openHandler: function(e) {
+            this._adjustListWidth();
+
+            if (this.trigger(OPEN)) {
+                e.preventDefault();
+            } else {
+                this._focused.attr("aria-expanded", true);
+                this.ul.attr("aria-hidden", false);
+            }
+        },
+
+        _closeHandler: function(e) {
+            if (this.trigger(CLOSE)) {
+                e.preventDefault();
+            } else {
+                this._focused.attr("aria-expanded", false);
+                this.ul.attr("aria-hidden", true);
+            }
+        },
+
+        _firstOpen: function() {
+            this._height(this._data().length);
+        },
+
         _popup: function() {
-            var that = this,
-                list = that.list,
-                focused = that._focused,
-                options = that.options,
-                wrapper = that.wrapper;
+            var that = this;
 
-            that.popup = new ui.Popup(list, extend({}, options.popup, {
-                anchor: wrapper,
-                open: function(e) {
-                    that._adjustListWidth();
-
-                    if (that.trigger(OPEN)) {
-                        e.preventDefault();
-                    } else {
-                        focused.attr("aria-expanded", true);
-                        that.ul.attr("aria-hidden", false);
-                    }
-                },
-                close: function(e) {
-                    if (that.trigger(CLOSE)) {
-                        e.preventDefault();
-                    } else {
-                        focused.attr("aria-expanded", false);
-                        that.ul.attr("aria-hidden", true);
-                    }
-                },
-                animation: options.animation,
-                isRtl: support.isRtl(wrapper)
+            that.popup = new ui.Popup(that.list, extend({}, that.options.popup, {
+                anchor: that.wrapper,
+                open: proxy(that._openHandler, that),
+                close: proxy(that._closeHandler, that),
+                animation: that.options.animation,
+                isRtl: support.isRtl(that.wrapper)
             }));
 
-            that.popup.one(OPEN, function() {
-                that._height(that._data().length);
-            });
-
+            that.popup.one(OPEN, proxy(that._firstOpen, that));
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
