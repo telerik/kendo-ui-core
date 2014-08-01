@@ -6,12 +6,23 @@
         return url.replace(/\/*[^\/]+$/, "/");
     }
 
+    function foreach(a, f) {
+        for (var i = 0; i < a.length; ++i)
+            f(a[i], i);
+    }
+
+    function map(a, f) {
+        for (var i = 0, ret = []; i < a.length; ++i)
+            ret[i] = f(a[i], i);
+        return ret;
+    }
+
     function normalize(url) {
         var m = /^(https?:\/\/|\/\/)(.*)$/i.exec(url);
         if (!m) throw new Error("Cannot normalize url: " + url);
         var scheme = m[1], path = m[2].split("/");
         var normal = [];
-        path.forEach(function(x){
+        foreach(path, function(x){
             if (x == "." || x == "") return;
             else if (x == "..") normal.pop();
             else normal.push(x);
@@ -20,8 +31,8 @@
     }
 
     function sync_require(filename) {
-        if (Array.isArray(filename)) {
-            filename.forEach(sync_require);
+        if (filename instanceof Array) {
+            foreach(filename, sync_require);
         } else {
             load(basedir(window.location + ""), filename);
         }
@@ -40,11 +51,11 @@
         if (LOADED[url]) {
             return LOADED[url].value;
         }
-        var start = Date.now();
+        var start = new Date().getTime();
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, false);
         xhr.send(null);
-        var stop = Date.now();
+        var stop = new Date().getTime();
         var time = stop - start;
         if (xhr.status == 200) {
             var code = xhr.responseText;
@@ -69,7 +80,7 @@
             : basedir(window.location + "");
         function define(deps, factory) {
             deps = randomize(deps); // RequireJS loads them in no specified order.
-            deps = deps.map(function(file){
+            deps = map(deps, function(file){
                 return load(base, file);
             });
             return factory.apply(window, deps);
