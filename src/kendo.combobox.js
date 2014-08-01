@@ -55,12 +55,8 @@ var __meta__ = {
 
             Select.fn.init.call(that, element, options);
 
-            that._focusHandler = function() {
-                that.input.focus();
-            };
-
             options = that.options;
-            element = that.element.on("focus" + ns, that._focusHandler);
+            element = that.element.on("focus" + ns, proxy(that._focusHandler, that));
 
             options.placeholder = options.placeholder || element.attr("placeholder");
 
@@ -173,6 +169,36 @@ var __meta__ = {
             Select.fn.destroy.call(that);
         },
 
+        _focusHandler: function() {
+            this.input.focus();
+        },
+
+        _arrowClick: function() {
+            this._toggle();
+        },
+
+        _inputFocus: function() {
+            this._inputWrapper.addClass(FOCUSED);
+            this._placeholder(false);
+        },
+
+        _inputFocusout: function() {
+            var that = this;
+
+            that._inputWrapper.removeClass(FOCUSED);
+            clearTimeout(that._typing);
+            that._typing = null;
+
+            if (that.options.text !== that.input.val()) {
+                that.text(that.text());
+            }
+
+            that._placeholder();
+            that._blur();
+
+            that.element.blur();
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
@@ -192,29 +218,13 @@ var __meta__ = {
                      .attr(ARIA_DISABLED, false)
                      .attr(ARIA_READONLY, false);
 
-                arrow.on(CLICK, function() { that._toggle(); })
+                arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("focus" + ns, function() {
-                        wrapper.addClass(FOCUSED);
-                        that._placeholder(false);
-                    })
-                    .on("focusout" + ns, function() {
-                        wrapper.removeClass(FOCUSED);
-                        clearTimeout(that._typing);
-                        that._typing = null;
-
-                        if (that.options.text !== that.input.val()) {
-                            that.text(that.text());
-                        }
-
-                        that._placeholder();
-                        that._blur();
-
-                        that.element.blur();
-                    });
+                    .on("focus" + ns, proxy(that._inputFocus, that))
+                    .on("focusout" + ns, proxy(that._inputFocusout, that));
 
             } else {
                 wrapper
