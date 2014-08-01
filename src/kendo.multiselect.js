@@ -208,11 +208,62 @@ var __meta__ = {
             var that = this,
                 ns = that.ns;
 
+            clearTimeout(that._busy);
+            clearTimeout(that._typing);
+
             that.wrapper.off(ns);
             that.tagList.off(ns);
             that.input.off(ns);
 
             List.fn.destroy.call(that);
+        },
+
+        _wrapperMousedown: function(e) {
+            var that = this;
+            var notInput = e.target.nodeName.toLowerCase() !== "input";
+
+            if (notInput) {
+                e.preventDefault();
+            }
+
+            if (e.target.className.indexOf("k-delete") === -1) {
+                if (that.input[0] !== activeElement() && notInput) {
+                    that.input.focus();
+                }
+
+                if (that.options.minLength === 0) {
+                    that.open();
+                }
+            }
+
+        },
+
+        _inputFocus: function() {
+            this._placeholder(false);
+            this.wrapper.addClass(FOCUSEDCLASS);
+        },
+
+        _inputFocusout: function() {
+            var that = this;
+
+            clearTimeout(that._typing);
+
+            that.wrapper.removeClass(FOCUSEDCLASS);
+
+            that._placeholder(!that._dataItems[0], true);
+            that.close();
+
+            if (that._state === FILTER) {
+                that._state = ACCEPT;
+            }
+
+            that.element.blur();
+        },
+
+        _tagListClick: function(e) {
+            this._unselect($(e.target).closest(LI));
+            this._change();
+            this.close();
         },
 
         _editable: function(options) {
@@ -227,44 +278,12 @@ var __meta__ = {
                 wrapper
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("mousedown" + ns, function(e) {
-                        var notInput = e.target.nodeName.toLowerCase() !== "input";
-
-                        if (notInput) {
-                            e.preventDefault();
-                        }
-
-                        if (e.target.className.indexOf("k-delete") === -1) {
-                            if (that.input[0] !== activeElement() && notInput) {
-                                that.input.focus();
-                            }
-
-                            if (that.options.minLength === 0) {
-                                that.open();
-                            }
-                        }
-                    });
+                    .on("mousedown" + ns, proxy(that._wrapperMousedown, that));
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
-                    .on("focus" + ns, function() {
-                        that._placeholder(false);
-                        wrapper.addClass(FOCUSEDCLASS);
-                    })
-                    .on("focusout" + ns, function() {
-                        clearTimeout(that._typing);
-
-                        wrapper.removeClass(FOCUSEDCLASS);
-
-                        that._placeholder(!that._dataItems[0], true);
-                        that.close();
-
-                        if (that._state === FILTER) {
-                            that._state = ACCEPT;
-                        }
-
-                        that.element.blur();
-                    });
+                    .on("focus" + ns, proxy(that._inputFocus, that))
+                    .on("focusout" + ns, proxy(that._inputFocusout, that));
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
@@ -274,12 +293,7 @@ var __meta__ = {
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK, ".k-delete", function(e) {
-                        that._unselect($(e.target).closest(LI));
-                        that._change();
-                        that.close();
-                    });
-
+                    .on(CLICK, ".k-delete", proxy(that._tagListClick, that));
             } else {
                 if (disable) {
                     wrapper.addClass(STATEDISABLED);
@@ -685,6 +699,11 @@ var __meta__ = {
             that._busy = null;
         },
 
+        _showBusyHandler: function() {
+            this.input.attr("aria-busy", true);
+            this._loading.removeClass(HIDDENCLASS);
+        },
+
         _showBusy: function () {
             var that = this;
 
@@ -694,10 +713,7 @@ var __meta__ = {
                 return;
             }
 
-            that._busy = setTimeout(function () {
-                that.input.attr("aria-busy", true);
-                that._loading.removeClass(HIDDENCLASS);
-            }, 100);
+            that._busy = setTimeout(proxy(that._showBusyHandler, that), 100);
         },
 
         _placeholder: function(show, skipCaret) {
