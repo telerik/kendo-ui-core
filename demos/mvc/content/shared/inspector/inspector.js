@@ -32,6 +32,16 @@
         return ret;
     }
 
+    function indexOf(a, el) {
+        if (typeof a.indexOf == "function")
+            return a.indexOf(el);
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i] === el)
+                return i;
+        }
+        return -1;
+    }
+
     var template =
         ('<div class="kendo-inspector-section visible widget" data-section="widget">' +
          '  <div class="sec-buttons">' +
@@ -203,7 +213,7 @@
                     stop: function() { running = false },
                     resume: function() { running = true }
                 };
-                widget.events.forEach(function(eventName){
+                map(widget.events, function(eventName){
                     widget.bind(eventName, makeHandler(eventName));
                 });
             }
@@ -626,10 +636,17 @@
         // }
     }
     function isDomNode(x) {
-        return (x instanceof Node
+        return ((typeof Node != "undefined" && x instanceof Node)
                 || (typeof x == "object" &&
-                    typeof x.insertBefore == "function" &&
-                    typeof x.cloneNode == "function"));
+                    /function|object/.test(typeof x.insertBefore) &&
+                    /function|object/.test(typeof x.cloneNode)));
+    }
+    function isDomElement(x) {
+        return isObject(x, "HTML") ||
+            (typeof x == "object" &&
+             /function|object/.test(typeof x.insertBefore) &&
+             /function|object/.test(typeof x.cloneNode) &&
+             /object/.test(typeof x.children));
     }
     // </xxx>
 
@@ -680,7 +697,7 @@
                         elements : map(x.get(), saferize)
                     });
                 }
-                if (isObject(x, "HTML")) {
+                if (isDomElement(x)) {
                     return makeSpecial("Element", {
                         id            : cacheObject(x),
                         tag           : x.tagName,
@@ -704,7 +721,7 @@
                     return "### FUNCTION ###";
                 }
                 if (typeof x == "object") {
-                    if (seen.indexOf(x) >= 0) {
+                    if (indexOf(seen, x) >= 0) {
                         return "### CIRCULAR ###";
                     }
                     seen.push(x);
@@ -751,8 +768,10 @@
                 return x;
             } catch(ex) {
                 if (ex === TOO_BIG) throw ex;
-                console.error("saferize failed: ");
-                console.error(x);
+                // console.error(ex);
+                // console.error("saferize failed: ");
+                // console.error(x);
+                // throw ex;
                 return "### ERROR ###";
             }
         }
@@ -760,15 +779,15 @@
 
     function displayEvent(ev, includeWidget) {
         var type = ev.__eventName;
-        delete ev.__eventName;
         var ts = ev.__timestamp;
-        delete ev.__timestamp;
         var time = kendo.format("{0:HH:mm:ss}", ts) + "." + ts.getMilliseconds();
         var name = "[" + time + "] " + type;
         if (includeWidget && ev.sender) {
             name += " in " + wrapWidget(ev.sender);
         }
         var obj = {};
+        delete ev.__eventName;
+        delete ev.__timestamp;
         obj[name] = ev;
         return displayJSON(obj, {
             collapsed: true,

@@ -43,11 +43,12 @@
         title: "Test inspector",
         width: 600,
         height: 400,
+        visible: false,
       }).data("kendoWindow");
 
-      $("#inspector").kendoInspector({ widget: editor });
-
       win.open().center();
+
+      $("#inspector").kendoInspector({ widget: grid });
 
     }())</script>
   </body>
