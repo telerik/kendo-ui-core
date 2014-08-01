@@ -7,11 +7,13 @@
 *.mdb
 obj/
 bin/
+.svn/
 dist/
 .DS_Store
 .JustCode
 .bundle/
 .livereload
+.dir-locals.el
 !src/jquery.min.js
 styles/web/*.css
 styles/mobile/*.css
