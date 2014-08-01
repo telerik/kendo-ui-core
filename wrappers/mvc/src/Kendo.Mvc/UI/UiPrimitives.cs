@@ -48,6 +48,11 @@ namespace Kendo.Mvc.UI
         public const string Group = "k-group";
 
         /// <summary>
+        /// MenuGroup - rendered around menu grouped items (children)
+        /// </summary>
+        public const string MenuGroup = "k-menu-group";
+
+        /// <summary>
         /// Header - rendered on headers or header items
         /// </summary>
         public const string Header = "k-header";

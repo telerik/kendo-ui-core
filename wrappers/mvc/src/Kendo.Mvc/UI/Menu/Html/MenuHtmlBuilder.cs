@@ -11,6 +11,12 @@ namespace Kendo.Mvc.UI
         {
         }
 
+        public new IHtmlNode ListTag()
+        {
+            return new HtmlElement("ul")
+                .AddClass(UIPrimitives.Group, UIPrimitives.MenuGroup);
+        }
+
         public IHtmlNode ChildrenTag(MenuItem item)
         {
             return ListTag();
