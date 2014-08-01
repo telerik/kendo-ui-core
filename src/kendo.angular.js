@@ -637,7 +637,7 @@
                     angular.forEach(elements, function(el){
                         var itemScope = angular.element(el).scope();
                         if (itemScope && itemScope !== scope) {
-                            destroyScope(itemScope);
+                            destroyScope(itemScope, el);
                         }
                     });
                     break;
