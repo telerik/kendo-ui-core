@@ -461,6 +461,7 @@ var __meta__ = {
                 to.insertAfter(that.element[0].firstChild);
                 that._bindTable(to);
             } else if (from.parent().data("animating")) {
+                from.off(ns);
                 from.parent().kendoStop(true, true).remove();
                 from.remove();
 
@@ -468,7 +469,7 @@ var __meta__ = {
                 that._focusView(active);
             } else if (!from.is(":visible") || that.options.animation === false) {
                 to.insertAfter(from);
-                from.remove();
+                from.off(ns).remove();
 
                 that._focusView(active);
             } else {
@@ -503,12 +504,13 @@ var __meta__ = {
                 extend(horizontal, {
                     effects: SLIDE + ":" + (future ? "right" : LEFT),
                     complete: function() {
-                        from.remove();
+                        from.off(ns).remove();
+                        that._oldTable = null;
+
                         to.unwrap();
 
                         that._focusView(active);
 
-                        that._oldTable = undefined;
                     }
                 });
 
@@ -541,7 +543,8 @@ var __meta__ = {
                     effects: "fadeOut",
                     duration: 600,
                     complete: function() {
-                        from.remove();
+                        from.off(ns).remove();
+                        that._oldTable = null;
 
                         to.css({
                             position: "static",
@@ -550,8 +553,6 @@ var __meta__ = {
                         });
 
                         that._focusView(active);
-
-                        that._oldTable = undefined;
                     }
                 });
 
