@@ -1,6 +1,6 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
-})(function(){
+    define([ "jquery", "./kendo.core", "./kendo.userevents" ], f);
+})(function(jQuery){
 
 var __meta__ = {
     id: "touch",
@@ -194,7 +194,7 @@ var __meta__ = {
     });
 
 
-    window.kendo.jQuery.fn.kendoMobileSwipe = function(callback, options) {
+    jQuery.fn.kendoMobileSwipe = function(callback, options) {
         this.each(function() {
             new Swipe(this, callback, options);
         });
@@ -205,4 +205,4 @@ var __meta__ = {
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(window.jQuery); });
