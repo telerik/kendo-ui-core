@@ -1659,15 +1659,45 @@ var __meta__ = {
                 options.success(this.data());
             }
         },
-        update: function(options) {
+        _request: function(type, options) {
             if (this.online) {
-                return this._transport.update(options);
+                this._sync();
+                return this._transport[type](options);
             } else {
-                this._store("update", options);
+                this._store(type, options);
 
                 return $.Deferred(function(deferred) {
                     options.success();
                 }).promise();
+            }
+        },
+        create: function(options) {
+            return this._request("create", options);
+        },
+        destroy: function(options) {
+            return this._request("destroy", options);
+        },
+        update: function(options) {
+            return this._request("update", options);
+        },
+        _sync: function() {
+            var state = this._state();
+            var that = this;
+
+            if (state.requests) {
+                var resolver = function(request) {
+                    return function() {
+                       state.requests.splice($.inArray(request, state.requests), 1);
+                       that._state(state);
+                    }
+                };
+
+                for (var idx = 0; idx < state.requests.length; idx++) {
+                    var request = state.requests[idx];
+                    var options = request.data;
+                    options.success = resolver(request);
+                    this._transport[request.type](options);
+                }
             }
         },
         _state: function(state) {
