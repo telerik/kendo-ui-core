@@ -379,5 +379,23 @@
 
             ok(dom.data("kendoTreeView").options.checkboxes);
         });
+
+        test("indeterminate states are updated observableHierarchy", function() {
+            var dom = $('<div data-role="treeview" data-load-on-demand="false" data-checkboxes="{ checkChildren: true }" data-bind="source: items"></div>').appendTo(QUnit.fixture);
+
+            var viewModel = kendo.observable({
+                items: kendo.observableHierarchy([
+                    { text: "foo", expanded: false, items: [
+                      { text: "bar", checked: false },
+                      { text: "baz", checked: true }
+                    ] }
+                ])
+            });
+
+            kendo.bind(dom, viewModel);
+
+            ok(dom.find(":checkbox:first").prop("indeterminate"));
+        });
+
     })();
 })();
