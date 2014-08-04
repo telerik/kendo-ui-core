@@ -766,6 +766,13 @@
             });
         });
 
+        test("Returns just one major tick if majorUnit is 0", function() {
+            numericAxis = new NumericAxis(0, 1, { majorUnit: 0 });
+            numericAxis.reflow(chartBox);
+            numericAxis.getViewElements(view);
+            equal(view.log.line.length, 2);
+        });
+
         // ------------------------------------------------------------
         module("Numeric Axis / Vertical / Label Step / Rendering", {
             setup: function() {
