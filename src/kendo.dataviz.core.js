@@ -2521,6 +2521,10 @@ var __meta__ = {
         },
 
         getDivisions: function(stepValue) {
+            if (stepValue === 0) {
+                return 1;
+            }
+
             var options = this.options,
                 range = options.max - options.min;
 
