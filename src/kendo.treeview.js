@@ -511,11 +511,17 @@ var __meta__ = {
         },
 
         setDataSource: function(dataSource) {
-            this.options.dataSource = dataSource;
+            var options = this.options;
+
+            options.dataSource = dataSource;
 
             this._dataSource();
 
             this.dataSource.fetch();
+
+            if (options.checkboxes && options.checkboxes.checkChildren) {
+                this.updateIndeterminate();
+            }
         },
 
         _bindDataSource: function() {
