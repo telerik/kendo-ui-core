@@ -2108,7 +2108,7 @@ var __meta__ = {
                 dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
                 destinationNode = dropHint.closest(NODE);
             } else if (dropTarget) {
-                destinationNode = dropTarget.closest(NODE);
+                destinationNode = dropTarget.closest(".k-treeview .k-item");
 
                 // moving node to root element
                 if (!destinationNode.length) {
