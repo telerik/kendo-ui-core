@@ -1,54 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TreeView binding</title>
-        <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
-        <link rel="stylesheet/less" href="../styles/web/kendo.default.less"/>
-        <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css"></link>
+  <head>
+    <style>html { font-size: 12px; font-family: Arial, Helvetica, sans-serif; }</style>
+    <title>TreeView / Nested MVVM</title>
 
-        <script src="../demos/mvc/content/shared/js/less.js"></script>
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less"/>
+    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css"></link>
 
-        <script src="../src/jquery.js"></script>
-        <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.data.odata.js"></script>
-        <script src="../src/kendo.userevents.js"></script>
-        <script src="../src/kendo.draganddrop.js"></script>
-        <script src="../src/kendo.fx.js"></script>
-        <script src="../src/kendo.treeview.js"></script>
-    </head>
-    <body>
-        <div id="tree"></div>
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
 
-        <script>
-            $(function () {
-                var counter = 1;
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.data.odata.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.treeview.js"></script>
+  </head>
+  <body>
+    <div data-role="treeview"
+         data-template="itemTemplate"
+         data-bind="source: files, events: { dataBound: onDataBound }"></div>
 
-                function getLevels(depth, itemsPerLevel) {
-                    var result = [];
+    <script id="itemTemplate" type="text/x-kendo-template">
+         #: item.text #
+         <span data-bind="events: { click: deleteClick }" class='delete-link'></span>
+    </script>
 
-                    for (var i = 0; i < itemsPerLevel; i++) {
-                        var item = { id: counter, text: "Node " + counter };
-                        counter++;
+    <script>
+      var viewModel = kendo.observable({
+        onDataBound: function(e) {
+          // should this be required?
+          //kendo.bind(e.node, this);
+        },
+        files: kendo.observableHierarchy([
+          { text: "My Web Site", expanded: true, items: [
+            { text: "images", expanded: true, items: [
+              { text: "logo.png" },
+              { text: "my-photo.jpg" }
+            ] },
+            { text: "about.html" },
+            { text: "index.html" }
+          ] }
+        ]),
 
-                        if (depth > 1) {
-                            item.items = getLevels(depth-1, itemsPerLevel);
-                        } else {
-                            item.items = [];
-                        }
+        deleteClick: function () {
+          alert("Delete fired;");
+        }
+      });
 
-                        result.push(item);
-                    }
+      kendo.bind("body", viewModel);
+    </script>
 
-                    return result;
-                }
+    <style scoped>
 
-                console.time("TreeView init");
-                $("#tree").kendoTreeView({
-                    dataSource: getLevels(3, 10)
-                });
-                console.timeEnd("TreeView init");
-            });
-        </script>
-    </body>
+      .delete-link {
+        width: 12px;
+        height: 12px;
+        background: transparent url("http://demos.telerik.com/kendo-ui/content/web/treeview/close.png") no-repeat 50% 50%;
+        overflow: hidden;
+        display: inline-block;
+        font-size: 0;
+        line-height: 0;
+        vertical-align: top;
+        margin: 2px 0 0 3px;
+        -webkit-border-radius: 5px;
+        -mox-border-radius: 5px;
+        border-radius: 5px;
+      }
+    </style>
+
+
+  </body>
 </html>
+

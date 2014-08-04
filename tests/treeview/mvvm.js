@@ -119,28 +119,6 @@
         equal(dom.text(), "baz");
     });
 
-    /*
-    test("template binding", function() {
-
-        var dom = $(
-            '<div>' +
-                '<script id="fooTemplate" type="text/x-kendo-template">#: item.text # foo</script>' +
-                '<div data-role="treview" data-template="fooTemplate" data-bind="source: source"></div>' +
-            '</div>'
-        ).appendTo(QUnit.fixture);
-
-        var viewModel = kendo.observable({
-            source: [
-                { text: "bar" }
-            ]
-        });
-
-        kendo.bind(dom, viewModel);
-
-        equal(dom.find(".k-item").text(), "bar foo");
-    });
-    */
-
     test("set multi-level dataTextField through data attribute", function() {
         var dom = $('<div data-text-field="[\'foo\',\'bar\']" data-bind="source: src" data-role="treeview" />').appendTo(QUnit.fixture);
 
