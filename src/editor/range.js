@@ -738,12 +738,14 @@ var RestorePoint = Class.extend({
             node = node.childNodes[path[length]];
         }
 
-        while (node.nodeType == 3 && node.nodeValue.length < offset) {
+        while (node && node.nodeType == 3 && node.nodeValue.length < offset) {
             offset -= node.nodeValue.length;
             node = node.nextSibling;
         }
 
-        range[start ? 'setStart' : 'setEnd'](node, offset);
+        if (node && offset >= 0) {
+            range[start ? 'setStart' : 'setEnd'](node, offset);
+        }
     },
 
     toRange: function () {
