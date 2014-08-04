@@ -17,6 +17,16 @@
         Marker = editorNS.Marker,
         extend = $.extend;
 
+function finishUpdate(editor, startRestorePoint) {
+    var endRestorePoint = editor.selectionRestorePoint = new RestorePoint(editor.getRange());
+    var command = new GenericCommand(startRestorePoint, endRestorePoint);
+    command.editor = editor;
+
+    editor.undoRedoStack.push(command);
+
+    return endRestorePoint;
+}
+
 var Command = Class.extend({
     init: function(options) {
         this.options = options;
@@ -197,11 +207,7 @@ var TypingHandler = Class.extend({
             that.startRestorePoint = new RestorePoint(range);
 
             keyboard.startTyping(function () {
-                editor.selectionRestorePoint = that.endRestorePoint = new RestorePoint(editor.getRange());
-                var genericCommand = new GenericCommand(that.startRestorePoint, that.endRestorePoint);
-                genericCommand.editor = editor;
-
-                editor.undoRedoStack.push(genericCommand);
+                that.endRestorePoint = finishUpdate(editor, that.startRestorePoint);
             });
 
             return true;
@@ -234,6 +240,14 @@ var BackspaceHandler = Class.extend({
             var range = editor.getRange();
             var emptyParagraphContent = kendo.support.browser.msie ? '' : '<br _moz_dirty="" />';
 
+            if (range.collapsed) {
+                return;
+            }
+
+            e.preventDefault();
+
+            var startRestorePoint = new RestorePoint(range);
+
             range.deleteContents();
 
             var ancestor = range.commonAncestorContainer;
@@ -244,6 +258,8 @@ var BackspaceHandler = Class.extend({
                 range.collapse(true);
                 editor.selectRange(range);
             }
+
+            finishUpdate(editor, startRestorePoint);
         }
     },
     keyup: function() {}
@@ -256,13 +272,7 @@ var SystemHandler = Class.extend({
     },
 
     createUndoCommand: function () {
-        var that = this;
-
-        that.endRestorePoint = new RestorePoint(that.editor.getRange());
-        var command = new GenericCommand(that.startRestorePoint, that.endRestorePoint);
-        command.editor = that.editor;
-        that.editor.undoRedoStack.push(command);
-        that.startRestorePoint = that.endRestorePoint;
+        this.startRestorePoint = this.endRestorePoint = finishUpdate(this.editor, this.startRestorePoint);
     },
 
     changed: function () {
@@ -307,7 +317,7 @@ var SystemHandler = Class.extend({
 
         if (that.systemCommandIsInProgress && that.changed()) {
             that.systemCommandIsInProgress = false;
-            that.createUndoCommand(e);
+            that.createUndoCommand();
             return true;
         }
 
@@ -462,10 +472,8 @@ var Clipboard = Class.extend({
         setTimeout(function() {
             after.call(that, editor, range);
 
-            var endRestorePoint = new RestorePoint(editor.getRange());
-            var genericCommand = new GenericCommand(startRestorePoint, endRestorePoint);
-            genericCommand.editor = editor;
-            editor.undoRedoStack.push(genericCommand);
+            finishUpdate(editor, startRestorePoint);
+
             editor._selectionChange();
 
             that._inProgress = false;
