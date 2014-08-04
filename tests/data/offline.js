@@ -179,7 +179,7 @@
         equal(typeof result.then, "function");
     });
 
-    test("_sync sends all pending update requests to transport", function() {
+    test("sync sends all pending update requests to transport", function() {
         var wrapper = new Wrapper({
             storage: storage,
             transport: stub({}, "update")
@@ -192,7 +192,7 @@
             ]
         })
 
-        wrapper._sync();
+        wrapper.sync();
 
         equal(wrapper._transport.calls("update"), 2);
     });
@@ -216,25 +216,12 @@
             ]
         })
 
-        wrapper._sync();
+        wrapper.sync();
 
         var state = wrapper._state();
 
         equal(state.requests.length, 1);
         equal(state.requests[0].data.foo, "bar");
-    });
-
-    test("update calls _sync when online", function() {
-        var wrapper = new Wrapper({
-            storage: storage,
-            transport: stub({}, "update")
-        });
-
-        stub(wrapper, "_sync");
-
-        wrapper.update();
-
-        equal(wrapper.calls("_sync"), 1);
     });
 
     test("destroy delegates to the wrapped transport", 1, function() {
@@ -292,19 +279,6 @@
         equal(typeof result.then, "function");
     });
 
-    test("destroy calls _sync when online", function() {
-        var wrapper = new Wrapper({
-            storage: storage,
-            transport: stub({}, "destroy")
-        });
-
-        stub(wrapper, "_sync");
-
-        wrapper.destroy();
-
-        equal(wrapper.calls("_sync"), 1);
-    });
-
     test("create delegates to the wrapped transport", 1, function() {
         var createOptions = {};
 
@@ -358,19 +332,6 @@
         var result = wrapper.create({ foo: "foo", success: $.noop });
 
         equal(typeof result.then, "function");
-    });
-
-    test("create calls _sync when online", function() {
-        var wrapper = new Wrapper({
-            storage: storage,
-            transport: stub({}, "create")
-        });
-
-        stub(wrapper, "_sync");
-
-        wrapper.create();
-
-        equal(wrapper.calls("_sync"), 1);
     });
 
     test("data source wraps existingt transpor with OfflineTransportWrapper when offlineStorage is set", function() {
@@ -436,5 +397,22 @@
         dataSource.sync();
 
         equal(dataSource.transport.calls("data"), 1);
+    });
+
+    test("data source calls the sync method of the wrapper when it syncs data", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        stub(dataSource.transport, "sync");
+
+        dataSource.sync();
+
+        equal(dataSource.transport.calls("sync"), 1);
     });
 }());

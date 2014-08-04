@@ -1661,7 +1661,6 @@ var __meta__ = {
         },
         _request: function(type, options) {
             if (this.online) {
-                this._sync();
                 return this._transport[type](options);
             } else {
                 this._store(type, options);
@@ -1680,7 +1679,7 @@ var __meta__ = {
         update: function(options) {
             return this._request("update", options);
         },
-        _sync: function() {
+        sync: function() {
             var state = this._state();
             var that = this;
 
@@ -2538,6 +2537,10 @@ var __meta__ = {
 
             if (!that.reader.model) {
                 return;
+            }
+
+            if (that.options.offlineStorage != null && that.online()) {
+                that.transport.sync();
             }
 
             for (idx = 0, length = data.length; idx < length; idx++) {
