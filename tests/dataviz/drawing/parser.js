@@ -146,6 +146,36 @@
         equal(point.y, 300);
     });
 
+    test("implicit line with relative coordinates", function() {
+        multiPath = parser.parse("m 10,20 30,40", {}, true);
+
+        point = multiPath.paths[0].segments[1].anchor();
+        equal(point.x, 40);
+        equal(point.y, 60);
+    });
+
+    test("implicit line with relative coordinates (two segments)", function() {
+        multiPath = parser.parse("m 10,20 30,40 5,5", {}, true);
+
+        point = multiPath.paths[0].segments[2].anchor();
+        equal(point.x, 45);
+        equal(point.y, 65);
+    });
+
+    test("implicit line with absolute coordinates", function() {
+        multiPath = parser.parse("M 10,20 30,40", {}, true);
+        point = multiPath.paths[0].segments[1].anchor();
+        equal(point.x, 30);
+        equal(point.y, 40);
+    });
+
+    test("implicit line with absolute coordinates (two segments)", function() {
+        multiPath = parser.parse("M 10,20 30,40 5,5", {}, true);
+        point = multiPath.paths[0].segments[2].anchor();
+        equal(point.x, 5);
+        equal(point.y, 5);
+    });
+
     // ------------------------------------------------------------
     var endSegment;
 
