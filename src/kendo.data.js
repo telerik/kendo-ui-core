@@ -1646,6 +1646,63 @@ var __meta__ = {
         }
     });
 
+    var OfflineTransportWrapper = Class.extend({
+        init: function(options) {
+            this._transport = options.transport;
+            this._key = options.key;
+            this.online = true;
+        },
+        read: function(options) {
+            if (this.online) {
+                this._transport.read(options);
+            } else {
+                options.success(this.data());
+            }
+        },
+        update: function(options) {
+            if (this.online) {
+                return this._transport.update(options);
+            } else {
+                this._store("update", options);
+
+                return $.Deferred(function(deferred) {
+                    options.success();
+                }).promise();
+            }
+        },
+        _state: function(state) {
+            if (state !== undefined) {
+                localStorage.setItem(this._key, stringify(state));
+            } else {
+                return JSON.parse(localStorage.getItem(this._key)) || {};
+            }
+        },
+        _store: function(type, data) {
+            var state = this._state();
+
+            if (!state.requests) {
+                state.requests = [];
+            }
+
+            state.requests.push({
+                type: type,
+                data: data
+            });
+
+            this._state(state);
+        },
+        data: function(data) {
+            var state = this._state();
+
+            if (data != undefined) {
+                state.data = data;
+                this._state(state);
+            } else {
+                return state.data;
+            }
+        }
+    });
+
     var Cache = Class.extend({
         init: function() {
             this._store = {};
@@ -4257,6 +4314,7 @@ var __meta__ = {
         ObservableArray: ObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
+        OfflineTransportWrapper: OfflineTransportWrapper,
         Cache: Cache,
         DataReader: DataReader,
         Model: Model,
