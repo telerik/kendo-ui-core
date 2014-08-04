@@ -1282,7 +1282,15 @@ var __meta__ = {
                             currentWidth = columnWidth + (e.x.location * rtlMultiplier) - (columnStart * rtlMultiplier);
 
                         if (options.scrollable) {
-                            var footer = (isLocked ? that.lockedFooter.children("table") : that.footer.find(">.k-grid-footer-wrap>table")) || $();
+                            var footer;
+                            if (isLocked && that.lockedFooter) {
+                                footer = that.lockedFooter.children("table");
+                            } else if (that.footer) {
+                                footer = that.footer.find(">.k-grid-footer-wrap>table");
+                            }
+                            if (!footer[0]) {
+                                footer = $();
+                            }
                             var header = th.closest("table");
                             var contentTable = isLocked ? that.lockedTable : that.table;
                             var constrain = false;
