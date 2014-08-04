@@ -11,6 +11,17 @@
 
     var Wrapper = kendo.data.OfflineTransportWrapper;
 
+    var storage = {
+        getItem: function() {
+            return JSON.parse(localStorage.getItem("key"))
+        },
+        setItem: function(item) {
+            localStorage.setItem("key", kendo.stringify(item));
+        }
+    };
+
+    var transport = {}
+
     test("read delegates to the wrapped transport", 1, function() {
         var readOptions = {};
 
@@ -27,7 +38,7 @@
 
     test("state stores in localStorage under specified key", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         var state = { foo: "foo" };
@@ -39,7 +50,7 @@
 
     test("state returns item in localStorage under the specified key", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         localStorage.setItem("key", kendo.stringify({foo:"foo"}));
@@ -65,7 +76,7 @@
 
     test("state returns empty object if localStorage doesn't contain an item for the specified key", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         var state = wrapper._state();
@@ -75,7 +86,7 @@
 
     test("date stores in state", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         var data = { foo: "foo" };
@@ -87,7 +98,7 @@
 
     test("date returns data stored in state", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         var data = { foo: "foo" };
@@ -99,7 +110,7 @@
 
     test("read returns the contents of data if online is false", 1, function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.data({ foo: "foo"});
@@ -117,6 +128,7 @@
         var updateOptions = {};
 
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 update: function(options) {
                     strictEqual(options, updateOptions);
@@ -129,6 +141,7 @@
 
     test("update returns what the wrapped transport returns", 1, function() {
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 update: function() {
                     return "foo";
@@ -141,7 +154,7 @@
 
     test("update stores the request in localStorage when not online", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -156,7 +169,7 @@
 
     test("update returns a promise", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -168,7 +181,7 @@
 
     test("_sync sends all pending update requests to transport", function() {
         var wrapper = new Wrapper({
-            key: "key",
+            storage: storage,
             transport: stub({}, "update")
         });
 
@@ -186,7 +199,7 @@
 
     test("_sunc removes requests that have been sent successfully", function() {
         var wrapper = new Wrapper({
-            key: "key",
+            storage: storage,
             transport: {
                 update: function(options) {
                     if (options.foo == "foo") {
@@ -213,7 +226,7 @@
 
     test("update calls _sync when online", function() {
         var wrapper = new Wrapper({
-            key: "key",
+            storage: storage,
             transport: stub({}, "update")
         });
 
@@ -228,6 +241,7 @@
         var destroyOptions = {};
 
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 destroy: function(options) {
                     strictEqual(options, destroyOptions);
@@ -240,6 +254,7 @@
 
     test("destroy returns what the wrapped transport returns", 1, function() {
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 destroy: function() {
                     return "foo";
@@ -252,7 +267,7 @@
 
     test("destroy stores the request in localStorage when not online", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -267,7 +282,7 @@
 
     test("destroy returns a promise", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -279,7 +294,7 @@
 
     test("destroy calls _sync when online", function() {
         var wrapper = new Wrapper({
-            key: "key",
+            storage: storage,
             transport: stub({}, "destroy")
         });
 
@@ -294,6 +309,7 @@
         var createOptions = {};
 
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 create: function(options) {
                     strictEqual(options, createOptions);
@@ -306,6 +322,7 @@
 
     test("create returns what the wrapped transport returns", 1, function() {
         var wrapper = new Wrapper({
+            storage: storage,
             transport: {
                 create: function() {
                     return "foo";
@@ -318,7 +335,7 @@
 
     test("create stores the request in localStorage when not online", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -333,7 +350,7 @@
 
     test("create returns a promise", function() {
         var wrapper = new Wrapper({
-            key: "key"
+            storage: storage
         });
 
         wrapper.online = false;
@@ -345,7 +362,7 @@
 
     test("create calls _sync when online", function() {
         var wrapper = new Wrapper({
-            key: "key",
+            storage: storage,
             transport: stub({}, "create")
         });
 

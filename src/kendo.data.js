@@ -1649,7 +1649,7 @@ var __meta__ = {
     var OfflineTransportWrapper = Class.extend({
         init: function(options) {
             this._transport = options.transport;
-            this._key = options.key;
+            this._storage = options.storage;
             this.online = true;
         },
         read: function(options) {
@@ -1702,9 +1702,9 @@ var __meta__ = {
         },
         _state: function(state) {
             if (state !== undefined) {
-                localStorage.setItem(this._key, stringify(state));
+                this._storage.setItem(state);
             } else {
-                return JSON.parse(localStorage.getItem(this._key)) || {};
+                return this._storage.getItem() || {};
             }
         },
         _store: function(type, data) {
@@ -2200,10 +2200,26 @@ var __meta__ = {
             }
 
             if (options.offlineStorage != null) {
-                that.transport = new OfflineTransportWrapper({
-                    transport: that.transport,
-                    key: options.offlineStorage
-                });
+                if (typeof options.offlineStorage == "string") {
+                    var key = options.offlineStorage;
+
+                    that.transport = new OfflineTransportWrapper({
+                        transport: that.transport,
+                        storage: {
+                            getItem: function() {
+                                return JSON.parse(localStorage.getItem(key))
+                            },
+                            setItem: function(item) {
+                                localStorage.setItem(key, stringify(item));
+                            }
+                        }
+                    });
+                } else {
+                    that.transport = new OfflineTransportWrapper({
+                        transport: that.transport,
+                        storage: options.offlineStorage
+                    });
+                }
             }
 
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
