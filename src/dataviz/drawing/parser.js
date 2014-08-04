@@ -46,7 +46,14 @@
                     }
 
                     multiPath.moveTo(position.x, position.y);
-                } else if (ShapeMap[command]) {
+
+                    if (parameters.length > 2) {
+                        command = "l";
+                        parameters.splice(0, 2);
+                    }
+                }
+
+                if (ShapeMap[command]) {
                     ShapeMap[command](
                         multiPath, {
                             parameters: parameters,
@@ -59,8 +66,8 @@
                     if (closePath && closePath.toLowerCase() === CLOSE) {
                         multiPath.close();
                     }
-                } else {
-                    throw new Error("Unsupported command: " + command);
+                } else if (command !== MOVE) {
+                    throw new Error("Error while parsing SVG path. Unsupported command: " + command);
                 }
 
                 previousCommand = command;
