@@ -628,7 +628,7 @@
             return;
         }
         var scope = self.$angular_scope || angular.element(self.element).scope();
-        if (scope) {
+        if (scope && $compile) {
             var x = arg(), elements = x.elements, data = x.data;
             if (elements.length > 0) {
                 switch (cmd) {
