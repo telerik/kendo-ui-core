@@ -1363,12 +1363,11 @@ var __meta__ = {
         },
 
         refresh: function(e) {
-            var that = this,
-                parentNode = that.wrapper,
+            var parentNode = this.wrapper,
                 node = e.node,
                 action = e.action,
                 items = e.items,
-                options = that.options,
+                options = this.options,
                 loadOnDemand = options.loadOnDemand,
                 checkChildren = options.checkboxes && options.checkboxes.checkChildren,
                 i;
@@ -1378,12 +1377,12 @@ var __meta__ = {
                     return;
                 }
 
-                return that._updateNode(e.field, items);
+                return this._updateNode(e.field, items);
             }
 
             if (node) {
-                parentNode = that.findByUid(node.uid);
-                that._progress(parentNode, false);
+                parentNode = this.findByUid(node.uid);
+                this._progress(parentNode, false);
             }
 
             if (checkChildren && action != "remove" && node && node.checked) {
@@ -1395,7 +1394,7 @@ var __meta__ = {
             if (action == "add") {
                 this._appendItems(e.index, items, parentNode);
             } else if (action == "remove") {
-                that._remove(that.findByUid(items[0].uid), false);
+                this._remove(this.findByUid(items[0].uid), false);
             } else {
                 if (node) {
                     subGroup(parentNode).empty();
@@ -1409,9 +1408,11 @@ var __meta__ = {
                             this._bubbleIndeterminate(subGroup(parentNode).children().last());
                         }
                     }
+
+                    this.trigger("itemChange", { item: parentNode, data: node, ns: ui });
                 } else {
 
-                    var groupHtml = that._renderGroup({
+                    var groupHtml = this._renderGroup({
                             items: items,
                             group: {
                                 firstLevel: true,
@@ -1419,18 +1420,18 @@ var __meta__ = {
                             }
                         });
 
-                    if (that.root.length) {
+                    if (this.root.length) {
 
                         this._angularItems("cleanup");
 
                         var group = $(groupHtml);
 
-                        that.root
+                        this.root
                             .attr("class", group.attr("class"))
                             .attr("role", group.attr("role"))
                             .html(group.html());
                     } else {
-                        that.root = that.wrapper.html(groupHtml).children("ul");
+                        this.root = this.wrapper.html(groupHtml).children("ul");
                     }
 
                     this._angularItems("compile");
@@ -1443,7 +1444,7 @@ var __meta__ = {
                 }
             }
 
-            that.trigger(DATABOUND, {
+            this.trigger(DATABOUND, {
                 node: node ? parentNode : undefined
             });
         },
