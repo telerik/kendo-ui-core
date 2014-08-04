@@ -2,6 +2,9 @@
 
     "use strict";
 
+    /* jshint eqnull:true */
+    /* global console */ // temporary
+
     var NL = "\n";
 
     function PDF() {
@@ -60,6 +63,7 @@
             return offset;
         };
         self.render = function() {
+            var i;
             /// file header
             out("%PDF-1.4", NL);
 
@@ -68,7 +72,7 @@
             out("%\x80\x81\x82\x83", NL);
 
             /// file body
-            for (var i = 0; i < objects.length; ++i) {
+            for (i = 0; i < objects.length; ++i) {
                 out(objects[i], NL, NL);
             }
 
@@ -76,7 +80,7 @@
             var xrefOffset = offset;
             out("xref", NL, 0, " ", objects.length, NL);
             out("0000000000 65535 f ", NL);
-            for (var i = 0; i < objects.length; ++i) {
+            for (i = 0; i < objects.length; ++i) {
                 out(zeropad(objects[i].offset, 10), " 00000 n ", NL);
             }
             out(NL);
@@ -100,7 +104,7 @@
         catalog.value.setPages(pageTree);
 
         self.addPage = function() {
-            var content = new PDFStream();
+            var content = self.makeStream();
             var page = new PDFPage({
                 Contents: self.makeObject(content).makeRef()
             });
@@ -120,8 +124,9 @@
     }
 
     function pad(str, len, ch) {
-        while (str.length < len)
+        while (str.length < len) {
             str = ch + str;
+        }
         return str;
     }
 
@@ -131,6 +136,16 @@
 
     function hasOwnProperty(obj, key) {
         return Object.prototype.hasOwnProperty.call(obj, key);
+    }
+
+    function mmul(a, b) {
+        var a1 = a[0], b1 = a[1], c1 = a[2], d1 = a[3], e1 = a[4], f1 = a[5];
+        var a2 = b[0], b2 = b[1], c2 = b[2], d2 = b[3], e2 = b[4], f2 = b[5];
+        return [
+            a1*a2 + b1*c2,          a1*b2 + b1*d2,
+            c1*a2 + d1*c2,          c1*b2 + d1*d2,
+            e1*a2 + f1*c2 + e2,     e1*b2 + f1*d2 + f2
+        ];
     }
 
     var isArray = Array.isArray || function(obj) {
@@ -168,17 +183,17 @@
 
     function PDFValue(){}
 
-    function defclass(ctor, proto, base) {
-        if (base == null) {
-            base = PDFValue;
+    function defclass(Ctor, proto, Base) {
+        if (!Base) {
+            Base = PDFValue;
         }
-        ctor.prototype = new base;
+        Ctor.prototype = new Base();
         for (var i in proto) {
             if (hasOwnProperty(proto, i)) {
-                ctor.prototype[i] = proto[i];
+                Ctor.prototype[i] = proto[i];
             }
         }
-        return ctor;
+        return Ctor;
     }
 
     /// strings
@@ -211,9 +226,10 @@
 
     PDFName.cache = {};
     PDFName.get = function(name) {
-        if (hasOwnProperty(PDFName.cache, name))
+        if (hasOwnProperty(PDFName.cache, name)) {
             return PDFName.cache[name];
-        return PDFName.cache[name] = new PDFName(name);
+        }
+        return (PDFName.cache[name] = new PDFName(name));
     };
 
     /// dictionary
@@ -390,7 +406,7 @@
                 this._fontResources[name] = this._pdf.FONTS[fontName].makeRef();
             }
             return PDFName.get(name);
-        },
+        }
     }, PDFDictionary);
 
 
@@ -414,32 +430,37 @@
     page1._endText();
 
     var page2 = pdf.addPage();
-    page2._transform(1, 0, 0, 1, 0, mm2pt(297));
-    page2._transform(1, 0, 0, -1, 0, 0);
+    page2._transform(1, 0, 0, -1, 0, mm2pt(297));
 
+    page2._out("q", NL);
+    page2._transform(1, 0, 0, 1, mm2pt(105), mm2pt(148.5));
     page2._beginText();
-    page2._out(mm2pt(105), " ", mm2pt(148.5), " TD", NL);
-    page2._out(page2._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
+    page2._transform(1, 0, 0, -1, 0, 0);
+    page2._out(page2._getFontResource("Times-Roman"), " 24 Tf", NL);
     page2._out(pdf.makeString("Hello world!"), " Tj", NL);
     page2._endText();
+    page2._out("Q", NL);
 
+    page2._out("q", NL);
+    page2._transform(1, 0, 0, 1, mm2pt(10), mm2pt(10));
     page2._beginText();
+    page2._transform(1, 0, 0, -1, 0, 0);
     page2._out(page2._getFontResource("Helvetica"), " 24 Tf", NL);
-    page2._out(mm2pt(20), " ", mm2pt(20), " TD 1 Tr 1 w", NL);
+    page2._out("1 Tr 1 w", NL);
     page2._out(pdf.makeString("Second line"), " Tj", NL);
     page2._endText();
+    page2._out("Q", NL);
 
     page2._out(mm2pt(105), " ", mm2pt(0), " m", NL);
     page2._out(mm2pt(105), " ", mm2pt(297), " l", NL);
     page2._out("s", NL, NL);
 
-    page2._out(mm2pt(0), " ", mm2pt(148), " m", NL);
-    page2._out(mm2pt(210), " ", mm2pt(148), " l", NL);
+    page2._out(mm2pt(0), " ", mm2pt(148.5), " m", NL);
+    page2._out(mm2pt(210), " ", mm2pt(148.5), " l", NL);
     page2._out("s", NL, NL);
 
     var page3 = pdf.addPage();
-    page3._transform(mm2pt(1), 0, 0, mm2pt(1), 0, 0);
-    page3._transform(1, 0, 0, 1, 105, 148.5);
+    page3._transform(mm2pt(1), 0, 0, mm2pt(1), mm2pt(105), mm2pt(148.5));
     page3._beginText();
     page3._out(page3._getFontResource("Courier-Bold"), " 10 Tf", NL);
     page3._out(pdf.makeString("Courier-Bold"), " Tj", NL);
@@ -449,6 +470,5 @@
     page3._out("0 -148.5 m 0 148.5 l s ", NL);
 
     console.log("%s", pdf.render());
-
 
 })(undefined);
