@@ -26,77 +26,91 @@
     });
 
     test("state stores in localStorage under specified key", function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       var state = { foo: "foo" };
+        var state = { foo: "foo" };
 
-       wrapper._state(state);
+        wrapper._state(state);
 
-       equal(localStorage.getItem("key"), '{"foo":"foo"}');
+        equal(localStorage.getItem("key"), '{"foo":"foo"}');
     });
 
     test("state returns item in localStorage under the specified key", function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       localStorage.setItem("key", kendo.stringify({foo:"foo"}));
+        localStorage.setItem("key", kendo.stringify({foo:"foo"}));
 
-       var state = wrapper._state();
+        var state = wrapper._state();
 
-       equal(state.foo, "foo");
+        equal(state.foo, "foo");
+    });
+
+    test("state uses custom storage to save", 1, function() {
+        var state = {};
+
+        var wrapper = new Wrapper({
+            storage: {
+                setItem: function(data) {
+                    strictEqual(state, data)
+                }
+            }
+        });
+
+        wrapper._state(state);
     });
 
     test("state returns empty object if localStorage doesn't contain an item for the specified key", function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       var state = wrapper._state();
+        var state = wrapper._state();
 
-       equal(kendo.stringify(state), "{}");
+        equal(kendo.stringify(state), "{}");
     });
 
     test("date stores in state", function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       var data = { foo: "foo" };
+        var data = { foo: "foo" };
 
-       wrapper.data(data);
+        wrapper.data(data);
 
-       deepEqual(wrapper._state().data, data);
+        deepEqual(wrapper._state().data, data);
     });
 
     test("date returns data stored in state", function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       var data = { foo: "foo" };
+        var data = { foo: "foo" };
 
-       wrapper.data(data);
+        wrapper.data(data);
 
-       deepEqual(wrapper.data(), data);
+        deepEqual(wrapper.data(), data);
     });
 
     test("read returns the contents of data if online is false", 1, function() {
-       var wrapper = new Wrapper({
-           key: "key"
-       });
+        var wrapper = new Wrapper({
+            key: "key"
+        });
 
-       wrapper.data({ foo: "foo"});
+        wrapper.data({ foo: "foo"});
 
-       wrapper.online = false;
+        wrapper.online = false;
 
-       wrapper.read({
-          success: function(data) {
-              equal(kendo.stringify(data), '{"foo":"foo"}');
-          }
-       });
+        wrapper.read({
+            success: function(data) {
+                equal(kendo.stringify(data), '{"foo":"foo"}');
+            }
+        });
     });
 
     test("update delegates to the wrapped transport", 1, function() {
@@ -176,7 +190,7 @@
             transport: {
                 update: function(options) {
                     if (options.foo == "foo") {
-                       options.success();
+                        options.success();
                     }
                 }
             }
@@ -340,5 +354,70 @@
         wrapper.create();
 
         equal(wrapper.calls("_sync"), 1);
+    });
+
+    test("data source wraps existingt transpor with OfflineTransportWrapper when offlineStorage is set", function() {
+        var transport = new kendo.data.RemoteTransport();
+
+        var dataSource = new kendo.data.DataSource({
+            transport: transport,
+            offlineStorage: "key"
+        });
+
+        ok(dataSource.transport instanceof Wrapper);
+        strictEqual(dataSource.transport._transport, transport);
+    });
+
+    test("online method sets the online flag of the transport", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        dataSource.online(false);
+
+        equal(dataSource.transport.online, false);
+    });
+
+    test("online returns true if offlineStorage is not enabled", function() {
+        var dataSource = new kendo.data.DataSource();
+
+        equal(dataSource.online(), true);
+    });
+
+    test("online method gets the online flag of the transport", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        equal(dataSource.online(), true);
+    });
+
+    test("data source calls the data method of the wrapper when it reads data", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        stub(dataSource.transport, "data");
+
+        dataSource.read();
+
+        equal(dataSource.transport.calls("data"), 1);
+    });
+
+    test("data source calls the data method of the wrapper when it syncs data", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        stub(dataSource.transport, "data");
+
+        dataSource.sync();
+
+        equal(dataSource.transport.calls("data"), 1);
     });
 }());

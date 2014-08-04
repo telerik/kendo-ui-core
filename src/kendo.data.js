@@ -2199,6 +2199,13 @@ var __meta__ = {
                 });
             }
 
+            if (options.offlineStorage != null) {
+                that.transport = new OfflineTransportWrapper({
+                    transport: that.transport,
+                    key: options.offlineStorage
+                });
+            }
+
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
@@ -2213,6 +2220,7 @@ var __meta__ = {
             schema: {
                modelBase: Model
             },
+            offlineStorage: null,
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
@@ -2221,6 +2229,15 @@ var __meta__ = {
             batch: false
         },
 
+        online: function(value) {
+            if (value !== undefined) {
+                this.transport.online = value;;
+            } else if (this.options.offlineStorage != null) {
+                return this.transport.online;
+            } else {
+                return true;
+            }
+        },
         _isServerGrouped: function() {
             var group = this.group() || [];
 
@@ -2530,6 +2547,10 @@ var __meta__ = {
 
                     that._change({ action: "sync" });
 
+                    if (that.options.offlineStorage != null) {
+                        that.transport.data(that.data());
+                    }
+
                     that.trigger(SYNC);
                 });
         },
@@ -2759,21 +2780,28 @@ var __meta__ = {
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
-            data = that.reader.parse(data);
+            if (that.online()) {
+                data = that.reader.parse(data);
 
-            if (that._handleCustomErrors(data)) {
-                that._dequeueRequest();
-                return;
+                if (that.options.offlineStorage != null) {
+                    that.transport.data(data);
+                }
+
+                if (that._handleCustomErrors(data)) {
+                    that._dequeueRequest();
+                    return;
+                }
+
+                that._total = that.reader.total(data);
+
+                if (that._aggregate && options.serverAggregates) {
+                    that._aggregateResult = that.reader.aggregates(data);
+                }
+
+                data = that._readData(data);
+            } else {
+                that._total = data.length;
             }
-
-            that._total = that.reader.total(data);
-            that._pristineTotal = that._total;
-
-            if (that._aggregate && options.serverAggregates) {
-                that._aggregateResult = that.reader.aggregates(data);
-            }
-
-            data = that._readData(data);
 
             that._pristineData = data.slice(0);
 
