@@ -2253,6 +2253,14 @@ var __meta__ = {
                 return true;
             }
         },
+
+        offlineState: function() {
+            if (this.options.offlineStorage != null) {
+                return this.transport._state();
+            }
+
+            return null;
+        },
         _isServerGrouped: function() {
             var group = this.group() || [];
 

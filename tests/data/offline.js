@@ -415,4 +415,20 @@
 
         equal(dataSource.transport.calls("sync"), 1);
     });
+
+    test("offlineState returns the current wrapper state", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key"
+        });
+
+        dataSource.transport._state({ foo: "foo" });
+        equal(dataSource.offlineState().foo, "foo");
+    });
+
+    test("offlineState returns null if offlineStorage isn't enabled", function() {
+        var dataSource = new kendo.data.DataSource({
+        });
+
+        equal(dataSource.offlineState(), null);
+    });
 }());
