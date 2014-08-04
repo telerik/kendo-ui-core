@@ -158,4 +158,10 @@ test("getFormat on body does not throw error", function() {
     equal(finder.getFormat([editor.body]), "");
 });
 
+test("getFormat returns false despite of inline editor wrapper", function() {
+    var inline = $("#inline").wrap("<div style='text-align:center' />")[0];
+    var finder = new BlockFormatFinder(justifyCenter);
+    ok(!finder.isFormatted([inline]));
+});
+
 }());
