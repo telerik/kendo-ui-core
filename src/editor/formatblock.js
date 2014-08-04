@@ -70,13 +70,14 @@ var BlockFormatFinder = Class.extend({
     findFormat: function (sourceNode) {
         var format = this.format,
             i, len, node, tags, attributes;
+        var editableParent = dom.editableParent(sourceNode);
 
         for (i = 0, len = format.length; i < len; i++) {
             node = sourceNode;
             tags = format[i].tags;
             attributes = format[i].attr;
 
-            while (node) {
+            while (node && dom.isAncestorOf(editableParent, node)) {
                 if (dom.ofType(node, tags) && dom.attrEquals(node, attributes)) {
                     return node;
                 }
