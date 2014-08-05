@@ -240,6 +240,16 @@
         equal(filter, null);
     });
 
+    test("when operator is changed and value is null, no filtering is performed", function() {
+        var notInvoked = true;
+        dataSource.bind("requestStart", function() {
+            notInvoked = false;
+        });
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
+        filterCell.viewModel.set("operator", "neq");
+        ok(notInvoked);
+    });
+
     test("when viewModel is changed to empty value, filter of the dataSource is cleared and other filters are preserved", function() {
         dataSource.filter([{ field: "bar", value: "someBarvalue", operator: "neq" }, { field: "foo", value: "soneFooValue", operator: "neq" }]);
         filterCell = setup(dom, { dataSource: dataSource, field: "foo" });
