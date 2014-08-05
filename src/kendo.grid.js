@@ -5092,6 +5092,15 @@ var __meta__ = {
 
             that._setContentWidth();
 
+            if (that.lockedTable) {
+                //requires manual trigger of scroll to sync both tables
+                if (that.options.scrollable.virtual) {
+                    that.content.find(">.k-virtual-scrollable-wrap").trigger("scroll");
+                } else {
+                    that.content.trigger("scroll");
+                }
+            }
+
             if (currentIndex >= 0) {
                 that._removeCurrent();
                 if (!isCurrentInHeader) {
