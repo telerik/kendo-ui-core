@@ -49,6 +49,7 @@
         };
         out.indent = function() {
             out(NL, pad("", indentLevel * 2, " "));
+            out.apply(null, arguments);
         };
         out.offset = function() {
             return offset;
@@ -60,31 +61,41 @@
     }
 
     function PDF() {
+        var self = this;
         var out = makeOutput();
         var objcount = 0;
-        var self = this;
         var objects = [];
 
-        self.makeString = function(str) {
-            return new PDFString(str);
-        };
-        self.makeName = function(name) {
-            return PDFName.get(name);
-        };
-        self.makeDictionary = function(props) {
-            return new PDFDictionary(props);
-        };
         self.makeObject = function(value) {
             var obj = new PDFObject(value, ++objcount);
             objects.push(obj);
             return obj;
         };
-        self.makeStream = function(data, props) {
-            return new PDFStream(data, props);
+
+        var fonts = {};
+        for (var i in self.FONTS) {
+            if (hasOwnProperty(self.FONTS, i)) {
+                fonts[i] = self.makeObject(self.FONTS[i]);
+            }
+        }
+        self.FONTS = fonts;
+
+        var catalog = self.makeObject(new PDFCatalog());
+        var pageTree = self.makeObject(new PDFPageTree());
+        catalog.value.setPages(pageTree);
+
+        self.addPage = function() {
+            var content = new PDFStream(makeOutput());
+            var page = new PDFPage({
+                Contents : self.makeObject(content).makeRef(),
+                Parent   : pageTree.makeRef()
+            });
+            page._content = content;
+            page._pdf = self;
+            pageTree.value.addPage(self.makeObject(page));
+            return page;
         };
-        self.endDocument = function() {
-            return out("%%EOF");
-        };
+
         self.render = function() {
             var i;
             /// file header
@@ -121,30 +132,6 @@
 
             return out+"";
         };
-
-        var catalog = self.makeObject(new PDFCatalog());
-        var pageTree = self.makeObject(new PDFPageTree());
-        catalog.value.setPages(pageTree);
-
-        self.addPage = function() {
-            var content = self.makeStream(makeOutput());
-            var page = new PDFPage({
-                Contents : self.makeObject(content).makeRef(),
-                Parent   : pageTree.makeRef()
-            });
-            page._content = content;
-            page._pdf = self;
-            pageTree.value.addPage(self.makeObject(page));
-            return page;
-        };
-
-        var fonts = {};
-        for (var i in self.FONTS) {
-            if (hasOwnProperty(self.FONTS, i)) {
-                fonts[i] = self.makeObject(self.FONTS[i]);
-            }
-        }
-        self.FONTS = fonts;
     }
 
     function pad(str, len, ch) {
@@ -182,13 +169,14 @@
 
     function renderArray(a, out) {
         out("[");
-        out.withIndent(function(){
-            for (var i = 0; i < a.length; ++i) {
-                out.indent();
-                out(" ", a[i]);
-            }
-        });
-        out.indent();
+        if (a.length > 0) {
+            out.withIndent(function(){
+                for (var i = 0; i < a.length; ++i) {
+                    out.indent(a[i]);
+                }
+            });
+            out.indent();
+        }
         out("]");
     }
 
@@ -271,13 +259,11 @@
             out.withIndent(function(){
                 for (var i in props) {
                     if (hasOwnProperty(props, i) && !/^_/.test(i)) {
-                        out.indent();
-                        out(PDFName.get(i), " ", props[i]);
+                        out.indent(PDFName.get(i), " ", props[i]);
                     }
                 }
             });
-            out.indent();
-            out(">>");
+            out.indent(">>");
         }
     });
 
@@ -288,14 +274,7 @@
         this.id = id;
     }, {
         render: function(out) {
-            var self = this;
-            out(self.id, " 0 obj");
-            out.withIndent(function(){
-                out.indent();
-                out(self.value);
-            });
-            out.indent();
-            out("endobj");
+            out(this.id, " 0 obj ", this.value, " endobj");
         },
         makeRef: function() {
             return new PDFObjectRef(this);
@@ -319,13 +298,14 @@
         this.props = props || {};
     }, {
         render: function(out) {
-            var self = this;
-            self.data += "";
-            if (self.props.Length == null) {
-                self.props.Length = self.data.length;
+            this.data += "";
+            if (this.props.Length == null) {
+                this.props.Length = this.data.length;
             }
-            out(new PDFDictionary(self.props), NL,
-                "stream", NL, self.data, NL, "endstream");
+            out(new PDFDictionary(this.props),
+                " stream", NL,
+                this.data, NL,
+                "endstream");
         }
     });
 
@@ -374,8 +354,7 @@
         "Courier-Oblique",
         "Courier-BoldOblique",
         "Symbol",
-        "ZapfDingbats",
-        "Arial Black"           // XXX: temporary
+        "ZapfDingbats"
     ].forEach(function(name, i){
         FONTS[name] = new PDFDictionary({
             Type     : PDFName.get("Font"),
@@ -474,8 +453,8 @@
     var page1 = pdf.addPage();
     page1._beginText();
     page1._out("70 50 TD", NL);
-    page1._out(page1._getFontResource("Arial Black"), " 20 Tf", NL);
-    page1._out(pdf.makeString("Hello WORLD! (looks poor in Arial Black, no font metrics)"), " Tj", NL);
+    page1._out(page1._getFontResource("Helvetica-BoldOblique"), " 20 Tf", NL);
+    page1._out(new PDFString("Hello WORLD!"), " Tj", NL);
     page1._endText();
 
     var page2 = pdf.addPage();
@@ -504,7 +483,7 @@
     page2._setLineWidth(1);
     page2._setStrokeColor(1, 0, 0);
     page2._out("2 Tr", NL);
-    page2._out(pdf.makeString("Hello world!"), " Tj", NL);
+    page2._out(new PDFString("Hello world!"), " Tj", NL);
     page2._endText();
     page2._restoreContext();
 
@@ -518,7 +497,7 @@
     page2._setFillColor(0.9, 0.9, 0.2);
     page2._setDashPattern([ 1.5, 0.5 ], 0);
     page2._out(opacity_half, " gs", NL);
-    page2._out(pdf.makeString("Second line"), " Tj", NL);
+    page2._out(new PDFString("Second line"), " Tj", NL);
     page2._endText();
     page2._restoreContext();
 
@@ -536,7 +515,7 @@
     page3._transform(mm2pt(1), 0, 0, mm2pt(1), mm2pt(105), mm2pt(148.5));
     page3._beginText();
     page3._out(page3._getFontResource("Courier-Bold"), " 10 Tf", NL);
-    page3._out(pdf.makeString("Courier-Bold"), " Tj", NL);
+    page3._out(new PDFString("Courier-Bold"), " Tj", NL);
     page3._endText();
 
     page3._out("-105 0 m 105 0 l s ", NL);
