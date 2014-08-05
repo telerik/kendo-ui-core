@@ -99,8 +99,10 @@ var __meta__ = {
         return classes.join(" ");
     }
 
-    function wp8Background() {
-        return parseInt($("<div style='background: Background' />").css("background-color").split(",")[1], 10) === 0 ? 'dark' : 'light';
+    function wp8Background(os) {
+        return 'km-wp-' + (os.noVariantSet ?
+                            (parseInt($("<div style='background: Background' />").css("background-color").split(",")[1], 10) === 0 ? 'dark' : 'light') :
+                            os.variant + " km-wp-" + os.variant + "-force");
     }
 
     function isOrientationHorizontal(element) {
@@ -252,6 +254,7 @@ var __meta__ = {
             }
 
             if (!os.variant) {
+                os.noVariantSet = true;
                 os.variant = "dark";
             }
 
@@ -262,19 +265,19 @@ var __meta__ = {
             if (os.wp) {
                 if (!that.refreshBackgroundColorProxy) {
                     that.refreshBackgroundColorProxy = $.proxy(function () {
-                        if ((that.os.variant && ((that.os.skin && that.os.skin === that.os.name)) || !that.os.skin)) {
-                            that.element.removeClass("km-wp-dark km-wp-light").addClass("km-wp-" + wp8Background());
+                        if (that.os.variant && (that.os.skin && that.os.skin === that.os.name) || !that.os.skin) {
+                            that.element.removeClass("km-wp-dark km-wp-light km-wp-dark-force km-wp-light-force").addClass(wp8Background(that.os));
                         }
                     }, that);
                 }
 
-                $(window).off("focusin", that.refreshBackgroundColorProxy);
+                $(document).off("visibilitychange", that.refreshBackgroundColorProxy);
                 $(document).off("resume", that.refreshBackgroundColorProxy);
 
                 if (!os.skin) {
                     that.element.parent().css("overflow", "hidden");
 
-                    $(window).on("focusin", that.refreshBackgroundColorProxy); // Restore theme on browser focus (requires click).
+                    $(document).on("visibilitychange", that.refreshBackgroundColorProxy); // Restore theme on browser focus (using the Visibility API).
                     $(document).on("resume", that.refreshBackgroundColorProxy); // PhoneGap fires resume.
 
                     that.refreshBackgroundColorProxy();
