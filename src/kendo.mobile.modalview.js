@@ -55,10 +55,6 @@ var __meta__ = {
                 }
             });
 
-            if (kendo.support.mobileOS.wp) {
-                that.shim.shim.on("click", false);
-            }
-
             that._id();
             that._layout();
             that._scroller();
