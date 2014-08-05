@@ -7,37 +7,63 @@
 
     var NL = "\n";
 
-    function PDF() {
-        var offset = 0;
-        var output = "";
-        var objcount = 0;
-        var self = this;
-        var objects = [];
-
+    function makeOutput() {
+        var offset = 0, indentLevel = 0, output = "";
         function out() {
             for (var i = 0; i < arguments.length; ++i) {
-                var txt = arguments[i];
-                if (txt === undefined) {
+                var x = arguments[i];
+                if (x === undefined) {
                     throw new Error("Cannot output undefined to PDF");
                 }
-                else if (txt instanceof PDFValue) {
-                    txt.offset = offset;
-                    txt.render(out);
+                else if (x instanceof PDFValue) {
+                    x.offset = offset;
+                    x.render(out);
                 }
-                else if (isArray(txt)) {
-                    renderArray(txt, out);
+                else if (isArray(x)) {
+                    renderArray(x, out);
                 }
-                else if (isDate(txt)) {
-                    renderDate(txt, out);
+                else if (isDate(x)) {
+                    renderDate(x, out);
                 }
                 else {
-                    txt += "";
-                    output += txt;
-                    offset += txt.length;
+                    if (typeof x == "number") {
+                        if (isNaN(x)) {
+                            throw new Error("Cannot output NaN to PDF");
+                        }
+                        // make sure it doesn't end up in exponent notation.
+                        if (x != Math.floor(x)) {
+                            x = x.toFixed(7).replace(/0+$/, "");
+                        }
+                    }
+                    x += "";
+                    output += x;
+                    offset += x.length;
                 }
             }
             return output;
         }
+        out.withIndent = function(f) {
+            ++indentLevel;
+            f(out);
+            --indentLevel;
+        };
+        out.indent = function() {
+            out(NL, pad("", indentLevel * 2, " "));
+        };
+        out.offset = function() {
+            return offset;
+        };
+        out.toString = function() {
+            return output;
+        };
+        return out;
+    }
+
+    function PDF() {
+        var out = makeOutput();
+        var objcount = 0;
+        var self = this;
+        var objects = [];
 
         self.makeString = function(str) {
             return new PDFString(str);
@@ -59,9 +85,6 @@
         self.endDocument = function() {
             return out("%%EOF");
         };
-        self.offset = function() {
-            return offset;
-        };
         self.render = function() {
             var i;
             /// file header
@@ -77,7 +100,7 @@
             }
 
             /// cross-reference table
-            var xrefOffset = offset;
+            var xrefOffset = out.offset();
             out("xref", NL, 0, " ", objects.length, NL);
             out("0000000000 65535 f ", NL);
             for (i = 0; i < objects.length; ++i) {
@@ -96,7 +119,7 @@
             out("startxref", NL, xrefOffset, NL);
             out("%%EOF", NL);
 
-            return output;
+            return out+"";
         };
 
         var catalog = self.makeObject(new PDFCatalog());
@@ -104,9 +127,10 @@
         catalog.value.setPages(pageTree);
 
         self.addPage = function() {
-            var content = self.makeStream();
+            var content = self.makeStream(makeOutput());
             var page = new PDFPage({
-                Contents: self.makeObject(content).makeRef()
+                Contents : self.makeObject(content).makeRef(),
+                Parent   : pageTree.makeRef()
             });
             page._content = content;
             page._pdf = self;
@@ -158,10 +182,14 @@
 
     function renderArray(a, out) {
         out("[");
-        for (var i = 0; i < a.length; ++i) {
-            out(" ", a[i]);
-        }
-        out(" ]");
+        out.withIndent(function(){
+            for (var i = 0; i < a.length; ++i) {
+                out.indent();
+                out(" ", a[i]);
+            }
+        });
+        out.indent();
+        out("]");
     }
 
     function renderDate(date, out) {
@@ -238,13 +266,18 @@
         this.props = props;
     }, {
         render: function(out) {
+            var props = this.props;
             out("<<");
-            for (var i in this.props) {
-                if (hasOwnProperty(this.props, i)) {
-                    out(" ", PDFName.get(i), " ", this.props[i]);
+            out.withIndent(function(){
+                for (var i in props) {
+                    if (hasOwnProperty(props, i) && !/^_/.test(i)) {
+                        out.indent();
+                        out(PDFName.get(i), " ", props[i]);
+                    }
                 }
-            }
-            out(" >>");
+            });
+            out.indent();
+            out(">>");
         }
     });
 
@@ -255,7 +288,14 @@
         this.id = id;
     }, {
         render: function(out) {
-            out(this.id, " 0 obj", NL, this.value, NL, "endobj");
+            var self = this;
+            out(self.id, " 0 obj");
+            out.withIndent(function(){
+                out.indent();
+                out(self.value);
+            });
+            out.indent();
+            out("endobj");
         },
         makeRef: function() {
             return new PDFObjectRef(this);
@@ -279,13 +319,13 @@
         this.props = props || {};
     }, {
         render: function(out) {
-            if (this.props.Length == null) {
-                this.props.Length = this.data.length;
+            var self = this;
+            self.data += "";
+            if (self.props.Length == null) {
+                self.props.Length = self.data.length;
             }
-            out(new PDFDictionary(this.props),
-                " stream", NL,
-                this.data, NL,
-                "endstream");
+            out(new PDFDictionary(self.props), NL,
+                "stream", NL, self.data, NL, "endstream");
         }
     });
 
@@ -317,16 +357,8 @@
         }
     }, PDFDictionary);
 
-    /// font object
+    /// standard fonts
 
-    var PDFFont = defclass(function PDFFont(props){
-        props = this.props = props || {};
-        props.Type = PDFName.get("Font");
-    }, {
-
-    }, PDFDictionary);
-
-    // standard fonts
     var FONTS = PDF.prototype.FONTS = {};
     [
         "Times-Roman",
@@ -342,11 +374,13 @@
         "Courier-Oblique",
         "Courier-BoldOblique",
         "Symbol",
-        "ZapfDingbats"
+        "ZapfDingbats",
+        "Arial Black"           // XXX: temporary
     ].forEach(function(name, i){
-        FONTS[name] = new PDFFont({
-            Subtype: PDFName.get("Type1"),
-            BaseFont: PDFName.get(name)
+        FONTS[name] = new PDFDictionary({
+            Type     : PDFName.get("Font"),
+            Subtype  : PDFName.get("Type1"),
+            BaseFont : PDFName.get(name)
         });
     });
 
@@ -356,37 +390,18 @@
         this._rcount = 0;
         this._textMode = false;
         this._fontResources = {};
+        this._gsResources = {};
         this._fontsByName = {};
 
         props = this.props = props || {};
         props.Type = PDFName.get("Page");
         props.Resources = new PDFDictionary({
-            Font: new PDFDictionary(this._fontResources)
+            Font: new PDFDictionary(this._fontResources),
+            ExtGState: new PDFDictionary(this._gsResources)
         });
     }, {
         _out: function() {
-            var content = this._content;
-            (function out() {
-                for (var i = 0; i < arguments.length; ++i) {
-                    var txt = arguments[i];
-                    if (txt === undefined) {
-                        throw new Error("Cannot output undefined to PDF");
-                    }
-                    else if (txt instanceof PDFValue) {
-                        txt.render(out);
-                    }
-                    else if (isArray(txt)) {
-                        renderArray(txt, out);
-                    }
-                    else if (isDate(txt)) {
-                        renderDate(txt, out);
-                    }
-                    else {
-                        txt += "";
-                        content.data += txt;
-                    }
-                }
-            }).apply(null, arguments);
+            this._content.data.apply(null, arguments);
         },
         _transform: function(a, b, c, d, e, f) {
             this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm", NL);
@@ -399,12 +414,46 @@
             this._textMode = false;
             this._out(NL, "ET", NL);
         },
+        _setStrokeColor: function(r, g, b) {
+            this._out(r, " ", g, " ", b, " RG", NL);
+        },
+        _setFillColor: function(r, g, b) {
+            this._out(r, " ", g, " ", b, " rg", NL);
+        },
+        _setDashPattern: function(dashArray, dashPhase) {
+            this._out(dashArray, " ", dashPhase, " d", NL);
+        },
+        _setLineWidth: function(width) {
+            this._out(width, " w", NL);
+        },
+        _setLineCap: function(lineCap) {
+            this._out(lineCap, " J", NL);
+        },
+        _setLineJoin: function(lineJoin) {
+            this._out(lineJoin, " j", NL);
+        },
+        _setMitterLimit: function(mitterLimit) {
+            this._out(mitterLimit, " M", NL);
+        },
+        _saveContext: function() {
+            this._out("q", NL);
+        },
+        _restoreContext: function() {
+            this._out("Q", NL);
+        },
         _getFontResource: function(fontName) {
             var name = this._fontsByName[fontName];
             if (!name) {
                 name = this._fontsByName[fontName] = "F" + this._rcount++;
                 this._fontResources[name] = this._pdf.FONTS[fontName].makeRef();
             }
+            return PDFName.get(name);
+        },
+        _getGSResource: function(props) {
+            props.Type = "ExtGState";
+            var gs = new PDFDictionary(props);
+            var name = "GS" + this._rcount++;
+            this._gsResources[name] = this._pdf.makeObject(gs).makeRef();
             return PDFName.get(name);
         }
     }, PDFDictionary);
@@ -425,31 +474,55 @@
     var page1 = pdf.addPage();
     page1._beginText();
     page1._out("70 50 TD", NL);
-    page1._out(page1._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
-    page1._out(pdf.makeString("Hello WORLD!"), " Tj", NL);
+    page1._out(page1._getFontResource("Arial Black"), " 20 Tf", NL);
+    page1._out(pdf.makeString("Hello WORLD! (looks poor in Arial Black, no font metrics)"), " Tj", NL);
     page1._endText();
 
     var page2 = pdf.addPage();
     page2._transform(1, 0, 0, -1, 0, mm2pt(297));
 
-    page2._out("q", NL);
-    page2._transform(1, 0, 0, 1, mm2pt(105), mm2pt(148.5));
+    page2._saveContext();
+    page2._setLineWidth(0.2);
+    for (var y = 0; y <= 297; y += 10) {
+        page2._out(mm2pt(0), " ", mm2pt(y), " m ",
+                   mm2pt(210), " ", mm2pt(297 - y), " l s", NL);
+    }
+    for (var x = 0; x <= 210; x += 10) {
+        page2._out(mm2pt(x), " ", mm2pt(0), " m ",
+                   mm2pt(210 - x), " ", mm2pt(297), " l s", NL);
+    }
+    page2._restoreContext();
+
+    var opacity_half = page2._getGSResource({ ca: 0.5, CA: 0.5 });
+
+    page2._saveContext();
+    page2._transform(1, 0, 0, -1, mm2pt(105), mm2pt(148.5));
     page2._beginText();
-    page2._transform(1, 0, 0, -1, 0, 0);
-    page2._out(page2._getFontResource("Times-Roman"), " 24 Tf", NL);
+    page2._out(page2._getFontResource("Times-Roman"), " 50 Tf", NL);
+    page2._setFillColor(0.5, 0.5, 0.5);
+    page2._out(opacity_half, " gs", NL);
+    page2._setLineWidth(1);
+    page2._setStrokeColor(1, 0, 0);
+    page2._out("2 Tr", NL);
     page2._out(pdf.makeString("Hello world!"), " Tj", NL);
     page2._endText();
-    page2._out("Q", NL);
+    page2._restoreContext();
 
-    page2._out("q", NL);
-    page2._transform(1, 0, 0, 1, mm2pt(10), mm2pt(10));
+    page2._saveContext();
+    page2._transform(1, 0, 0, -1, mm2pt(10), mm2pt(10));
     page2._beginText();
-    page2._transform(1, 0, 0, -1, 0, 0);
-    page2._out(page2._getFontResource("Helvetica"), " 24 Tf", NL);
-    page2._out("1 Tr 1 w", NL);
+    page2._out(page2._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
+    page2._out("2 Tr", NL);
+    page2._setLineWidth(0.1);
+    page2._setStrokeColor(0.9, 0.2, 0.1);
+    page2._setFillColor(0.9, 0.9, 0.2);
+    page2._setDashPattern([ 1.5, 0.5 ], 0);
+    page2._out(opacity_half, " gs", NL);
     page2._out(pdf.makeString("Second line"), " Tj", NL);
     page2._endText();
-    page2._out("Q", NL);
+    page2._restoreContext();
+
+    page2._setStrokeColor(0, 0.8, 0);
 
     page2._out(mm2pt(105), " ", mm2pt(0), " m", NL);
     page2._out(mm2pt(105), " ", mm2pt(297), " l", NL);
