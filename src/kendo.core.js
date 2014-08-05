@@ -1907,6 +1907,7 @@ function pad(number, digits, end) {
             var os = false, minorVersion, match = [],
                 notAndroidPhone = !/mobile safari/i.test(ua),
                 agentRxs = {
+                    wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
                     fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
                     android: /(Android|Android.*(?:Opera|Firefox).*?\/)\s*(\d+)\.(\d+(\.\d+)?)/,
                     iphone: /(iPhone|iPod).*OS\s+(\d+)[\._]([\d\._]+)/,
@@ -1915,7 +1916,6 @@ function pad(number, digits, end) {
                     webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
                     blackberry: /(BlackBerry|BB10).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
                     playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/,
-                    wp: /(Windows Phone(?: OS)?)\s(\d+)\.(\d+(\.\d+)?)/,
                     windows: /(MSIE)\s+(\d+)\.(\d+(\.\d+)?)/,
                     tizen: /(tizen).*?Version\/(\d+)\.(\d+(\.\d+)?)/i,
                     sailfish: /(sailfish).*rv:(\d+)\.(\d+(\.\d+)?).*firefox/i,
@@ -1938,9 +1938,9 @@ function pad(number, digits, end) {
                     omobile: /Opera\sMobi/i,
                     firefox: /Firefox|Fennec/i,
                     mobilesafari: /version\/.*safari/i,
+                    ie: /MSIE|Windows\sPhone/i,
                     chrome: /chrome|crios/i,
-                    webkit: /webkit/i,
-                    ie: /MSIE|Windows\sPhone/i
+                    webkit: /webkit/i
                 };
 
             for (var agent in agentRxs) {
