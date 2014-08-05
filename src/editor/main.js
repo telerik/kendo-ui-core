@@ -475,6 +475,7 @@
                 .on("focusin" + NS, function() {
                     $(this).addClass("k-state-active");
                     editor.toolbar.show();
+                    editor.selectRange(editor.getRange()); // see https://github.com/telerik/kendo/issues/3509
                 })
                 .on("focusout" + NS, function() {
                     setTimeout(function() {
