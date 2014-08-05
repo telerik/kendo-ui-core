@@ -281,7 +281,7 @@ var __meta__ = {
             var that = this,
                 model = that.viewModel;
 
-            if (that.manuallyUpdatingVM) {
+            if (that.manuallyUpdatingVM || (e.field == "operator" && model.value === undefined)) {
                 return;
             }
 
