@@ -62,7 +62,7 @@
   display: none;
 }
 .kendo-inspector .editable-object .codefold {
-  padding-left: 1.2em;
+  padding-left: 1.35em;
   position: relative;
 }
 .kendo-inspector .editable-object .codefold.highlight > .codefold-button {
