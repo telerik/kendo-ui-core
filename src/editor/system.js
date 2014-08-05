@@ -247,10 +247,15 @@ var BackspaceHandler = Class.extend({
             e.preventDefault();
 
             var startRestorePoint = new RestorePoint(range);
+            var ancestor = range.commonAncestorContainer;
+
+            if (/t(able|body|r)/i.test(dom.name(ancestor))) {
+                range.selectNode(dom.closest(ancestor, "table"));
+            }
 
             range.deleteContents();
 
-            var ancestor = range.commonAncestorContainer;
+            ancestor = range.commonAncestorContainer;
 
             if (dom.name(ancestor) === "p" && ancestor.innerHTML === "") {
                 ancestor.innerHTML = emptyParagraphContent;
