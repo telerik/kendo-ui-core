@@ -416,6 +416,24 @@
         equal(dataSource.transport.calls("sync"), 1);
     });
 
+    test("data source calls the sync method when online is set to true", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        stub(dataSource.transport, "sync");
+
+        dataSource.online(false);
+        dataSource.online(true);
+
+        equal(dataSource.transport.calls("sync"), 1);
+    });
+
     test("offlineState returns the current wrapper state", function() {
         var dataSource = new kendo.data.DataSource({
             offlineStorage: "key"

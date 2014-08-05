@@ -2246,7 +2246,12 @@ var __meta__ = {
 
         online: function(value) {
             if (value !== undefined) {
-                this.transport.online = value;;
+                if (this.transport.online != value) {
+                    this.transport.online = value;
+                    if (value) {
+                        this.sync();
+                    }
+                }
             } else if (this.options.offlineStorage != null) {
                 return this.transport.online;
             } else {
