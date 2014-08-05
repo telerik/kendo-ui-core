@@ -1,0 +1,269 @@
+// -*- mode: less-css; less-css-compile-at-save: t; css-indent-offset: 4 -*-
+
+@textcolor: #2d3e50;
+@datbluecolor: #3d94cf;
+@editablecolor: #c41416;
+@linkcolor: @datbluecolor;
+@linkhovercolor: #e15613;
+
+.kendo-inspector-grabbing, .kendo-inspector-grabbing * {
+    cursor: crosshair !important;
+}
+
+.kendo-inspector {
+
+    @font-face {
+        font-family: "KendoUI";
+        src: url("../styles/kendoui.woff") format("woff"),
+             url("../styles/kendoui.ttf") format("truetype");
+    }
+
+    .kendo-font-icon {
+        font-family: "KendoUI";
+        font-weight: normal;
+        font-style: normal;
+        line-height: 0.8em;
+        position: relative;
+        top: 0.1em;
+        text-decoration: none;
+        -webkit-font-smoothing: antialiased;
+        speak: none;
+    }
+
+    .k-i-arrow-e { content: "\E000"; }
+    .k-i-arrow-s { content: "\E002"; }
+    .k-i-search-a { content: "\E0E9"; }
+    .k-i-filter { content: "\E06C"; }
+    .k-i-filter-clear { content: "\E06D"; }
+    .k-si-hyperlink-ext { content: "\E076"; }
+
+    .monospace-font {
+        font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
+    }
+
+    .inputfield-font {
+        font: 13px arial,sans-serif;
+    }
+
+    input, textarea, button {
+        .inputfield-font;
+    }
+
+    .separator-top {
+        padding-top: 6px;
+        border-top: 1px solid #ccc;
+    }
+    .separator-bottom {
+        padding-bottom: 6px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .editable-object {
+        .monospace-font;
+        position: relative;
+        .hidden {
+            display: none;
+        }
+        .codefold {
+            padding-left: 1.2em;
+            position: relative;
+            &.highlight {
+                & > .codefold-button {
+                    color: orange;
+                    background-color: #def;
+                }
+            }
+            &.collapsed {
+                & > .codefold-body {
+                    display: none;
+                }
+                & > .codefold-button {
+                    &:after {
+                        .k-i-arrow-e;
+                    }
+                }
+            }
+            .codefold-button {
+                position: absolute;
+                left: 0px;
+                font-size: 120%;
+                &:after {
+                    .kendo-font-icon;
+                    .k-i-arrow-s;
+                    color: #444;
+                }
+            }
+        }
+        .editable {
+            color: @editablecolor;
+            &:hover {
+                outline: 1px solid #888;
+            }
+        }
+        .editable-input {
+            border: 0;
+            padding: 0;
+            background-color: #fff;
+            .monospace-font;
+            font-size: inherit;
+            margin: 0;
+            max-width: 30em;
+        }
+        .property {
+            cursor: default;
+            color: @textcolor;
+            &.modified {
+                font-weight: bold;
+            }
+        }
+        .value {
+            color: @datbluecolor;
+        }
+        a.doclink {
+            &:before {
+                .kendo-font-icon;
+                .k-si-hyperlink-ext;
+                color: #888;
+                font-size: 90%;
+            }
+            &:hover {
+                color: @linkhovercolor;
+                &:before {
+                    color: #000;
+                }
+            }
+        }
+        [data-object-id] {
+            color: @editablecolor;
+            &:hover {
+                background-color: rgba(109, 188, 233, 0.6);
+            }
+            &:active {
+                background-color: rgba(109, 188, 233, 1);
+            }
+        }
+        .json-heading {
+            color: #888;
+        }
+        &:hover {
+            .codefold-operations {
+                opacity: 1;
+            }
+        }
+        .codefold-operations {
+            opacity: 0;
+            transition-duration: 0.3s;
+            position: absolute;
+            top: 0;
+            right: 5px;
+            font-weight: normal;
+            &.has-query {
+                opacity: 1;
+            }
+            .codefold-operation {
+                transition-duration: 0.3s;
+                cursor: pointer;
+                margin-left: 10px;
+                font-family: arial,helvetica,sans-serif;
+                &:hover {
+                    color: orange;
+                }
+                &.expand-all {
+                    &:before {
+                        content: "expand";
+                    }
+                }
+                &.collapse-all {
+                    &:before {
+                        content: "collapse";
+                    }
+                }
+            }
+            .filter {
+                .inputfield-font;
+                position: relative;
+                // position: absolute;
+                // right: 0;
+                // top: 1.3em;
+                input {
+                    padding-left: 1.4em;
+                    border: 1px solid #ccc;
+                    width: 3em;
+                    transition-duration: 0.5s;
+                    &:focus {
+                        border-color: #222;
+                        transition-duration: 0.25s;
+                        width: 10em;
+                        outline: none;
+                    }
+                }
+                &:after {
+                    .kendo-font-icon;
+                    .k-i-search-a;
+                    font-size: 120%;
+                    position: absolute;
+                    left: 2px;
+                    top: 2px;
+                    color: #555;
+                }
+                &.has-query {
+                    input {
+                        width: 10em;
+                    }
+                    &:after {
+                        .k-i-filter-clear;
+                    }
+                }
+            }
+        }
+    }
+
+    .kendo-inspector-section {
+        .sec-buttons {
+            float: right;
+        }
+        .sec-title {
+            font-weight: bold;
+            padding: 3px 10px 4px 10px;
+            cursor: pointer;
+            color: #444;
+            border-bottom: 1px solid #999;
+            &:before {
+                .kendo-font-icon;
+                .k-i-arrow-e;
+                float: left;
+                font-size: 140%;
+                top: 1px;
+            }
+            &:hover {
+                color: #000;
+                &:before {
+                    color: @datbluecolor;
+                }
+            }
+            .sec-toolbar {
+                float: right;
+                display: none;
+            }
+        }
+        .sec-content {
+            display: none;
+            & > pre {
+                margin: 0.5em;
+            }
+        }
+        &.visible {
+            border-bottom: 1px solid #999;
+            .sec-title {
+                &:before {
+                    color: @datbluecolor;
+                    .k-i-arrow-s;
+                }
+            }
+            .sec-content, .sec-toolbar {
+                display: block;
+            }
+        }
+    }
+
+}
