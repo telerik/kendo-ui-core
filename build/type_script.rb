@@ -408,7 +408,7 @@ module CodeGen::TypeScript
                 return @base
             end
 
-            if interface?
+            if config_object?
                 return
             end
 
@@ -423,12 +423,12 @@ module CodeGen::TypeScript
             'Observable'
         end
 
-        def interface?
-            @name =~ /^I[A-Z]/
+        def config_object?
+            @name =~ /Options$/
         end
 
         def type_script_kind
-            if interface?
+            if config_object?
                 return 'interface'
             end
 
@@ -440,7 +440,19 @@ module CodeGen::TypeScript
         end
 
         def type_script_options_type
+            if config_object?
+                return
+            end
+
             type_script_type + 'Options'
+        end
+
+        def type_script_event_type
+            if config_object?
+                return
+            end
+
+            type_script_type + 'Event'
         end
 
         def type_script_class

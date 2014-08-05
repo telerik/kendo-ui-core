@@ -9,7 +9,9 @@
 % elsif options.any?
         constructor(options?: <%= type_script_options_type %>);
 % end
+%if type_script_options_type
         options: <%= type_script_options_type %>;
+%end
 % if options.any? { |o| o.name == 'dataSource' }
 % unless name =~ /Menu|ContextMenu|PanelBar/
         dataSource: kendo.data.DataSource;
@@ -40,6 +42,7 @@
 % end
 % end
 
+%if type_script_options_type
     interface <%= type_script_options_type %> {
         name?: string;
 % unique_options.each do |option|
@@ -49,12 +52,14 @@
         <%= event.type_script_declaration %>
 % end
     }
-
-    interface <%= type_script_type %>Event {
+%end
+%if type_script_event_type
+    interface <%= type_script_event_type %> {
         sender: <%= type_script_type %>;
         isDefaultPrevented(): boolean;
         preventDefault: Function;
     }
+%end
 
 % events.each do |event|
 % if event.options.size > 0
