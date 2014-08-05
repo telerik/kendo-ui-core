@@ -1,0 +1,272 @@
+.kendo-inspector-grabbing,
+.kendo-inspector-grabbing * {
+  cursor: crosshair !important;
+}
+@font-face {
+  font-family: "KendoUI";
+  src: url("../styles/kendoui.woff") format("woff"), url("../styles/kendoui.ttf") format("truetype");
+}
+.kendo-inspector .kendo-font-icon {
+  font-family: "KendoUI";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0.8em;
+  position: relative;
+  top: 0.1em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+}
+.kendo-inspector .k-i-arrow-e {
+  content: "\E000";
+}
+.kendo-inspector .k-i-arrow-s {
+  content: "\E002";
+}
+.kendo-inspector .k-i-search-a {
+  content: "\E0E9";
+}
+.kendo-inspector .k-i-filter {
+  content: "\E06C";
+}
+.kendo-inspector .k-i-filter-clear {
+  content: "\E06D";
+}
+.kendo-inspector .k-si-hyperlink-ext {
+  content: "\E076";
+}
+.kendo-inspector .monospace-font {
+  font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
+}
+.kendo-inspector .inputfield-font {
+  font: 13px arial, sans-serif;
+}
+.kendo-inspector input,
+.kendo-inspector textarea,
+.kendo-inspector button {
+  font: 13px arial, sans-serif;
+}
+.kendo-inspector .separator-top {
+  padding-top: 6px;
+  border-top: 1px solid #ccc;
+}
+.kendo-inspector .separator-bottom {
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ccc;
+}
+.kendo-inspector .editable-object {
+  font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
+  position: relative;
+}
+.kendo-inspector .editable-object .hidden {
+  display: none;
+}
+.kendo-inspector .editable-object .codefold {
+  padding-left: 1.35em;
+  position: relative;
+}
+.kendo-inspector .editable-object .codefold.highlight > .codefold-button {
+  color: orange;
+  background-color: #def;
+}
+.kendo-inspector .editable-object .codefold.collapsed > .codefold-body {
+  display: none;
+}
+.kendo-inspector .editable-object .codefold.collapsed > .codefold-button:after {
+  content: "\E000";
+}
+.kendo-inspector .editable-object .codefold .codefold-button {
+  position: absolute;
+  left: 0px;
+  font-size: 120%;
+}
+.kendo-inspector .editable-object .codefold .codefold-button:after {
+  font-family: "KendoUI";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0.8em;
+  position: relative;
+  top: 0.1em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  content: "\E002";
+  color: #444;
+}
+.kendo-inspector .editable-object .editable {
+  color: #c41416;
+}
+.kendo-inspector .editable-object .editable:hover {
+  outline: 1px solid #888;
+}
+.kendo-inspector .editable-object .editable-input {
+  border: 0;
+  padding: 0;
+  background-color: #fff;
+  font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace !important;
+  font-size: inherit;
+  margin: 0;
+  max-width: 30em;
+}
+.kendo-inspector .editable-object .property {
+  cursor: default;
+  color: #2d3e50;
+}
+.kendo-inspector .editable-object .property.modified {
+  font-weight: bold;
+}
+.kendo-inspector .editable-object .value {
+  color: #3d94cf;
+}
+.kendo-inspector .editable-object a.doclink:before {
+  font-family: "KendoUI";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0.8em;
+  position: relative;
+  top: 0.1em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  content: "\E076";
+  color: #888;
+  font-size: 90%;
+}
+.kendo-inspector .editable-object a.doclink:hover {
+  color: #e15613;
+}
+.kendo-inspector .editable-object a.doclink:hover:before {
+  color: #000;
+}
+.kendo-inspector .editable-object [data-object-id] {
+  color: #c41416;
+}
+.kendo-inspector .editable-object [data-object-id]:hover {
+  background-color: rgba(109, 188, 233, 0.6);
+}
+.kendo-inspector .editable-object [data-object-id]:active {
+  background-color: #6dbce9;
+}
+.kendo-inspector .editable-object .json-heading {
+  color: #888;
+}
+.kendo-inspector .editable-object:hover .codefold-operations {
+  opacity: 1;
+}
+.kendo-inspector .editable-object .codefold-operations {
+  opacity: 0;
+  transition-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-weight: normal;
+}
+.kendo-inspector .editable-object .codefold-operations.has-query {
+  opacity: 1;
+}
+.kendo-inspector .editable-object .codefold-operations .codefold-operation {
+  transition-duration: 0.3s;
+  cursor: pointer;
+  margin-left: 10px;
+  font-family: arial, helvetica, sans-serif;
+}
+.kendo-inspector .editable-object .codefold-operations .codefold-operation:hover {
+  color: orange;
+}
+.kendo-inspector .editable-object .codefold-operations .codefold-operation.expand-all:before {
+  content: "expand";
+}
+.kendo-inspector .editable-object .codefold-operations .codefold-operation.collapse-all:before {
+  content: "collapse";
+}
+.kendo-inspector .editable-object .codefold-operations .filter {
+  font: 13px arial, sans-serif;
+  position: relative;
+}
+.kendo-inspector .editable-object .codefold-operations .filter input {
+  padding-left: 1.4em;
+  border: 1px solid #ccc;
+  width: 3em;
+  transition-duration: 0.5s;
+}
+.kendo-inspector .editable-object .codefold-operations .filter input:focus {
+  border-color: #222;
+  transition-duration: 0.25s;
+  width: 10em;
+  outline: none;
+}
+.kendo-inspector .editable-object .codefold-operations .filter:after {
+  font-family: "KendoUI";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0.8em;
+  position: relative;
+  top: 0.1em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  content: "\E0E9";
+  font-size: 120%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: #555;
+}
+.kendo-inspector .editable-object .codefold-operations .filter.has-query input {
+  width: 10em;
+}
+.kendo-inspector .editable-object .codefold-operations .filter.has-query:after {
+  content: "\E06D";
+}
+.kendo-inspector .kendo-inspector-section .sec-buttons {
+  float: right;
+}
+.kendo-inspector .kendo-inspector-section .sec-title {
+  font-weight: bold;
+  padding: 3px 10px 4px 10px;
+  cursor: pointer;
+  color: #444;
+  border-bottom: 1px solid #999;
+}
+.kendo-inspector .kendo-inspector-section .sec-title:before {
+  font-family: "KendoUI";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0.8em;
+  position: relative;
+  top: 0.1em;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  content: "\E000";
+  float: left;
+  font-size: 140%;
+  top: 1px;
+}
+.kendo-inspector .kendo-inspector-section .sec-title:hover {
+  color: #000;
+}
+.kendo-inspector .kendo-inspector-section .sec-title:hover:before {
+  color: #3d94cf;
+}
+.kendo-inspector .kendo-inspector-section .sec-title .sec-toolbar {
+  float: right;
+  display: none;
+}
+.kendo-inspector .kendo-inspector-section .sec-content {
+  display: none;
+}
+.kendo-inspector .kendo-inspector-section .sec-content > pre {
+  margin: 0.5em;
+}
+.kendo-inspector .kendo-inspector-section.visible {
+  border-bottom: 1px solid #999;
+}
+.kendo-inspector .kendo-inspector-section.visible .sec-title:before {
+  color: #3d94cf;
+  content: "\E002";
+}
+.kendo-inspector .kendo-inspector-section.visible .sec-content,
+.kendo-inspector .kendo-inspector-section.visible .sec-toolbar {
+  display: block;
+}

@@ -1,21 +1,60 @@
-(function(){
+(function(kendo, $){
 
     var ui = kendo.ui;
     var Widget = ui.Widget;
 
+    var Object_keys = typeof Object.keys == "function" ? Object.keys : function(obj) {
+        var a = [];
+        for (var i in obj) if (Object.prototype.hasOwnProperty.call(obj, i)) {
+            a.push(i);
+        }
+        return a;
+    };
+
+    function map(a, fn) {
+        if (typeof a.map == "function")
+            return a.map(fn);
+        var ret = [];
+        for (var i = 0; i < a.length; ++i) {
+            ret[i] = fn.call(a, a[i], i);
+        }
+        return ret;
+    }
+
+    function filter(a, fn) {
+        if (typeof a.filter == "function")
+            return a.filter(fn);
+        var ret = [];
+        for (var i = 0; i < a.length; ++i) {
+            if (fn(a[i], i))
+                ret.push(a[i]);
+        }
+        return ret;
+    }
+
+    function indexOf(a, el) {
+        if (typeof a.indexOf == "function")
+            return a.indexOf(el);
+        for (var i = 0; i < a.length; ++i) {
+            if (a[i] === el)
+                return i;
+        }
+        return -1;
+    }
+
     var template =
-        ('<div class="section visible widget" data-section="widget">' +
+        ('<div class="kendo-inspector-section visible widget" data-section="widget">' +
          '  <div class="sec-buttons">' +
          '    <button class="k-button grab-widget">Select</button>' +
          '  </div>' +
-         '  <div class="sec-title k-header">Widget inspector</div>' +
+         '  <div class="sec-title k-header"></div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
-         '<div class="section datasource" data-section="datasource">' +
+         '<div class="kendo-inspector-section datasource" data-section="datasource">' +
          '  <div class="sec-title k-header">Data source</div>' +
          '  <div class="sec-content"></div>' +
          '</div>' +
-         '<div class="section events" data-section="events">' +
+         '<div class="kendo-inspector-section events" data-section="events">' +
          '  <div class="sec-buttons">' +
          '    <button class="k-button clear-section">Clear</button>' +
          '  </div>' +
@@ -27,8 +66,13 @@
     var Inspector = Widget.extend({
 
         options: {
-            name   : "Inspector",
-            widget : null
+            name           : "Inspector",
+            showPicker     : true,
+            showEvents     : true,
+            docBaseUrl     : null,
+            widget         : null,
+            tooltips       : false,
+            showAllOptions : false
         },
 
         init: function(element, options) {
@@ -39,15 +83,25 @@
 
             element.addClass("kendo-inspector");
             $(template).appendTo(element);
+
+            if (!options.showEvents) {
+                element.find(".kendo-inspector-section.events").remove();
+            }
+            if (!options.showPicker) {
+                element.find(".grab-widget").remove();
+            }
+
             self._addListeners();
             self.reset(options.widget);
         },
 
         reset: function(widget) {
             var self = this, element = self.element;
-            element.find(".section .sec-content").empty();
+            element.find(".kendo-inspector-section .sec-content").empty();
 
-            var cont = element.find(".section.widget .sec-content");
+            element.find(".kendo-inspector-section.widget .sec-title").text(widget.options.name + " options");
+
+            var cont = element.find(".kendo-inspector-section.widget .sec-content");
 
             if (self.widget) {
                 self._unwatchWidget();
@@ -65,16 +119,51 @@
                 displayJSON({ wrapper: safeValueForJSON(widget.wrapper) }).appendTo(cont);
             }
 
-            displayJSON({ options: safeValueForJSON(widget.options) }, {
+            var orig_options = widget.constructor.prototype.options;
+
+            function wrapOption(key, val, path) {
+                path = path.slice(1);
+                var modified = propertyChanged(orig_options, path, val);
+                if (self.options.docBaseUrl) {
+                    path = filter(path, function(x){ return typeof x == "string" }).join(".");
+                    var url = self.options.docBaseUrl + "#configuration";
+                    if (path) {
+                        url += "-" + path;
+                    }
+                    return "<a target='KENDOUIDOCS' kendo-tooltip='Config option: " + path + "' class='property doclink"
+                        + (modified ? " modified" : "")
+                        + "' href='" + url + "'>" + htmlescape(key) + "</a>";
+                }
+                else {
+                    return "<span class='property"
+                        + (modified && self.options.showAllOptions ? " modified" : "")
+                        + "'>" + htmlescape(key) + "</span>";
+                }
+            }
+
+            var opts = widget.options;
+            if (!self.options.showAllOptions) {
+                opts = {};
+                for (var i in widget.options) if (Object.prototype.hasOwnProperty.call(widget.options, i)) {
+                    if (propertyChanged(orig_options, [ i ], widget.options[i])) {
+                        opts[i] = widget.options[i];
+                    }
+                }
+            }
+
+            displayJSON({ options: safeValueForJSON(opts) }, {
                 filterable: true,
-                sort: true
+                sort: true,
+                wrapProperty: wrapOption
             }).appendTo(cont);
 
-            element.find(".section.datasource").removeClass("visible").css({
+            element.find(".kendo-inspector-section.datasource").removeClass("visible").css({
                 display: widget.dataSource ? "block" : "none"
             });
 
-            self._watchWidget();
+            if (self.options.showEvents) {
+                self._watchWidget();
+            }
         },
 
         _sectionToggled: function(sec, visible) {
@@ -114,7 +203,7 @@
             ev = safeValueForJSON(ev);
             ev.__eventName = eventName;
             ev.__timestamp = new Date();
-            var cont = this.element.find(".section.events .sec-content");
+            var cont = this.element.find(".kendo-inspector-section.events .sec-content");
             var el = displayEvent(ev).prependTo(cont);
             if (this._lastEventTime && now - this._lastEventTime > 100) {
                 el.addClass("separator-bottom");
@@ -125,20 +214,20 @@
         _watchWidget: function() {
             var self = this, widget = self.widget;
             self._lastEventTime = null;
+            function makeHandler(eventName) {
+                return function(ev) {
+                    if (running) {
+                        self._onWidgetEvent(eventName, ev);
+                    }
+                };
+            }
             if (!widget.__kendo_inspector_watcher) {
                 var running = true;
                 widget.__kendo_inspector_watcher = {
                     stop: function() { running = false },
                     resume: function() { running = true }
                 };
-                function makeHandler(eventName) {
-                    return function(ev) {
-                        if (running) {
-                            self._onWidgetEvent(eventName, ev);
-                        }
-                    };
-                }
-                widget.events.forEach(function(eventName){
+                map(widget.events, function(eventName){
                     widget.bind(eventName, makeHandler(eventName));
                 });
             }
@@ -155,7 +244,7 @@
 
             // expand/collapse sections on clicking the title
             element.on("click", ".sec-title", function(ev){
-                var sec = $(ev.target).closest(".section");
+                var sec = $(ev.target).closest(".kendo-inspector-section");
                 sec.toggleClass("visible");
                 self._sectionToggled(sec, sec.hasClass("visible"));
             });
@@ -303,7 +392,7 @@
             });
 
             element.on("click", ".clear-section", function(ev){
-                var cont = $(ev.currentTarget).closest(".section").find(".sec-content");
+                var cont = $(ev.currentTarget).closest(".kendo-inspector-section").find(".sec-content");
                 cont.empty();
                 self._lastEventTime = null;
             });
@@ -318,16 +407,18 @@
                 }
             });
 
-            element.kendoTooltip({
-                filter: "[data-object-id]",
-                content : function(data) {
-                    if (data.target.is("[data-element-id]")) {
-                        return "<div style='white-space: nowrap'>Click to dump with console.log</div>";
-                    } else {
-                        return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
+            if (self.options.tooltips) {
+                element.kendoTooltip({
+                    filter: "[data-object-id]",
+                    content : function(data) {
+                        if (data.target.is("[data-element-id]")) {
+                            return "<div style='white-space: nowrap'>Click to dump with console.log</div>";
+                        } else {
+                            return "<div style='white-space: nowrap'>Click to dump with console.log.<br />Places reference in global $K variable.</div>";
+                        }
                     }
-                },
-            });
+                });
+            }
 
         },
 
@@ -402,7 +493,7 @@
                     return true;
                 }
             }
-            else if (data instanceof kendo.data.ObservableArray || Array.isArray(data)) {
+            else if (data instanceof kendo.data.ObservableArray || $.isArray(data)) {
                 if (i < path.length) {
                     data = data[prop];
                 } else {
@@ -425,7 +516,7 @@
                   default:
                     return false;
                 }
-                tools.setDatasourceProperty(w, path.slice(0, -1), new_data);
+                setDatasourceProperty(w, path.slice(0, -1), new_data);
                 return new_data;
             }
             else if (typeof data == "object") {
@@ -486,8 +577,10 @@
                 "line-height"         : el.outerHeight() + "px"
             });
             hl.appendTo(el[0].ownerDocument.body);
-            if (!elementInView(el))
-                el.get(0).scrollIntoView();
+
+            // that's not good for the demo pages
+            // if (!elementInView(el))
+            //     el.get(0).scrollIntoView();
         }
     }
 
@@ -517,19 +610,12 @@
             id             : cacheObject(w),
             type           : w.options.name,
             prefix         : w.options.prefix,
-            events         : w.events && w.events.length > 0 ? w.events.map(function(evname){
-                return makeSpecial("doclink-event", {
-                    event  : evname,
-                    widget : w.options.name,
-                    prefix : w.options.prefix,
-                });
-            }) : undefined,
             element_tag    : w.element.get(0).tagName,
             element_id     : w.element.attr("id"),
             element_class  : w.element.attr("class"),
             visible        : el.is(":visible"),
             hasModel       : !!w.dataSource,
-            wasInspected   : w === window.$K,
+            wasInspected   : w === window.$K
         };
         if (typeof w.value == "function") {
             ret.value = safeValueForJSON(w.value());
@@ -550,13 +636,13 @@
         var data = ds.data();
         return {
             data    : safeValueForJSON(data.toJSON()),
-            options : safeValueForJSON(ds.options),
+            options : safeValueForJSON(ds.options)
         };
     }
 
     // <xxx> reliability isn't on the list of JavaScript's main features.
     function isObject(x, type) {
-        if (Array.isArray(x)) return false;
+        if ($.isArray(x)) return false;
         var rx = new RegExp("^\\[object " + type);
         return typeof x == "object" && rx.test(x.toString());
         // try {
@@ -566,10 +652,17 @@
         // }
     }
     function isDomNode(x) {
-        return (x instanceof Node
+        return ((typeof Node != "undefined" && x instanceof Node)
                 || (typeof x == "object" &&
-                    typeof x.insertBefore == "function" &&
-                    typeof x.cloneNode == "function"));
+                    /function|object/.test(typeof x.insertBefore) &&
+                    /function|object/.test(typeof x.cloneNode)));
+    }
+    function isDomElement(x) {
+        return isObject(x, "HTML") ||
+            (typeof x == "object" &&
+             /function|object/.test(typeof x.insertBefore) &&
+             /function|object/.test(typeof x.cloneNode) &&
+             /object/.test(typeof x.children));
     }
     // </xxx>
 
@@ -577,10 +670,10 @@
         if (!options) options = {};
         function shouldSendLazy(obj) {
             if (obj === x) return false;
+            var len = $.isArray(obj) ? obj.length : Object_keys(obj).length;
+            if (len == 0) return false;
             if (options.lazy) return true;
-            if (Array.isArray(obj))
-                return obj.length > 20;
-            return Object.keys(obj).length > 20;
+            return len > 20;
         }
         var seen = [];
         var count = 0;
@@ -611,21 +704,21 @@
                         hours        : x.getHours(),
                         minutes      : x.getMinutes(),
                         seconds      : x.getSeconds(),
-                        milliseconds : x.getMilliseconds(),
+                        milliseconds : x.getMilliseconds()
                     });
                 }
                 if (x instanceof $) {
                     return makeSpecial("jQuery", {
                         selector : x.selector,
-                        elements : x.get().map(saferize),
+                        elements : map(x.get(), saferize)
                     });
                 }
-                if (isObject(x, "HTML")) {
+                if (isDomElement(x)) {
                     return makeSpecial("Element", {
                         id            : cacheObject(x),
                         tag           : x.tagName,
                         element_id    : x.id,
-                        element_class : x.className,
+                        element_class : x.className
                     });
                 }
                 if (isDomNode(x)) {
@@ -644,14 +737,14 @@
                     return "### FUNCTION ###";
                 }
                 if (typeof x == "object") {
-                    if (seen.indexOf(x) >= 0) {
+                    if (indexOf(seen, x) >= 0) {
                         return "### CIRCULAR ###";
                     }
                     seen.push(x);
                     if (typeof x.toJSON == "function") {
                         return saferize(x.toJSON());
                     }
-                    if (Array.isArray(x)) {
+                    if ($.isArray(x)) {
                         // var n = x.length;
                         // if (n > 102) {
                         //     x = x.slice(0, 100);
@@ -664,7 +757,14 @@
                                 length: x.length
                             };
                         }
-                        return x.map(saferize);
+                        return map(x, saferize);
+                    }
+                    if (shouldSendLazy(x)) {
+                        return {
+                            __kendo_inspector_type: "Object",
+                            id: cacheObject(x),
+                            length: Object_keys(x).length - 1
+                        };
                     }
                     var tmp = {};
                     for (var i in x) if (i != "dataSource" && x.hasOwnProperty(i)) {
@@ -672,33 +772,11 @@
                             // dumping global objects is a bad idea.
                             continue;
                         }
-                        else if (typeof x[i] == "function") {
+                        else if (/undefined|function/.test(typeof x[i])) {
                             continue;
                         }
-                        else if (/(string|boolean|number|function)/.test(typeof x[i])
-                                 || x[i] instanceof kendo.ui.Widget
-                                 || x[i] instanceof Date
-                                 || x[i] === null
-                                 || isDomNode(x[i])
-                                 || x[i] instanceof $
-                                 || isObject(x[i], "Window")
-                                 || isObject(x[i], "HTML")
-                                 || !shouldSendLazy(x[i])) {
-                            tmp[i] = saferize(x[i]);
-                        }
-                        else if (Array.isArray(x[i])) {
-                            tmp[i] = {
-                                __kendo_inspector_type: "Array",
-                                id: cacheObject(x[i]),
-                                length: x[i].length
-                            };
-                        }
                         else {
-                            tmp[i] = {
-                                __kendo_inspector_type: "Object",
-                                id: cacheObject(x[i]),
-                                length: Object.keys(x[i]).length - 1
-                            };
+                            tmp[i] = saferize(x[i]);
                         }
                     }
                     return tmp;
@@ -706,7 +784,10 @@
                 return x;
             } catch(ex) {
                 if (ex === TOO_BIG) throw ex;
-                console.error("saferize failed: ", ex, x);
+                // console.error(ex);
+                // console.error("saferize failed: ");
+                // console.error(x);
+                // throw ex;
                 return "### ERROR ###";
             }
         }
@@ -714,15 +795,15 @@
 
     function displayEvent(ev, includeWidget) {
         var type = ev.__eventName;
-        delete ev.__eventName;
         var ts = ev.__timestamp;
-        delete ev.__timestamp;
         var time = kendo.format("{0:HH:mm:ss}", ts) + "." + ts.getMilliseconds();
         var name = "[" + time + "] " + type;
         if (includeWidget && ev.sender) {
             name += " in " + wrapWidget(ev.sender);
         }
         var obj = {};
+        delete ev.__eventName;
+        delete ev.__timestamp;
         obj[name] = ev;
         return displayJSON(obj, {
             collapsed: true,
@@ -767,7 +848,7 @@
             return "<span class='element' data-object-id='" + obj.id + "' data-element-id='" + obj.id + "'>### DOM element (" + obj.tag + ") ###</span>";
         }
         function wrapLink(link) {
-            return "<a target='KENDOUIDOCS' class='" + (link.class || "") + "' href='" + link.url + "'>" + link.text + "</a>";
+            return "<a target='KENDOUIDOCS' class='" + (link["class"] || "") + "' href='" + link.url + "'>" + link.text + "</a>";
         }
         function wrapTooBig(obj) {
             return "<span class='object' data-object-id='" + obj.id + "'>### OBJECT TOO BIG ###</span>";
@@ -815,8 +896,8 @@
             if (obj == null) {
                 return wrapEditable("null");
             }
-            else if (Array.isArray(obj)) {
-                return obj.map(function(el, i){
+            else if ($.isArray(obj)) {
+                return map(obj, function(el, i){
                     currentPath.push(i);
                     var html = displayProp(i+"", el);
                     currentPath.pop();
@@ -843,23 +924,9 @@
                     return wrapLink(obj);
                   case "too-big":
                     return wrapTooBig(obj);
-                  case "doclink-event":
-                    var name = obj.widget;
-                    if (obj.prefix == "mobile") {
-                        name = "mobile." + name;
-                    }
-                    var w = KENDO_CONFIG.widgets[name];
-                    var url = "http://docs.kendoui.com/api/" + w.category
-                        + "/" + obj.widget.toLowerCase()
-                        + "#events-" + obj.event;
-                    return wrapLink({
-                        class: "doclink",
-                        text: obj.event,
-                        url: url
-                    });
                 }
 
-                var a = Object.keys(obj);
+                var a = Object_keys(obj);
                 if (options.sort) {
                     if (options.sort instanceof Function) {
                         a = a.sort(function(a, b){
@@ -873,7 +940,7 @@
                         });
                     }
                 }
-                return a.map(function(key){
+                return map(a, function(key){
                     currentPath.push(key);
                     var html = displayProp(key, obj[key]);
                     currentPath.pop();
@@ -886,9 +953,9 @@
         }(orig_obj);
 
         function inspectValue(thing) {
-            if (Array.isArray(thing)) return {
+            if ($.isArray(thing)) return {
                 expandable : thing.length > 0,
-                title      : "Array[" + thing.length + "]",
+                title      : "Array[" + thing.length + "]"
             };
             if (thing == null) return { expandable: false };
             if (typeof thing == "object") {
@@ -908,17 +975,16 @@
                   case "kendo.ui.Widget":
                   case "Element":
                   case "link":
-                  case "doclink-event":
                   case "too-big":
                     return { expandable: false };
                   case "jQuery":
                   case "Date":
                     return {
                         expandable : true,
-                        title      : thing.__kendo_inspector_type,
+                        title      : thing.__kendo_inspector_type
                     };
                 }
-                var keys = Object.keys(thing);
+                var keys = Object_keys(thing);
                 return {
                     expandable : keys.length > 0,
                     title      : "Object{" + keys.length + "}"
@@ -930,7 +996,7 @@
         if (options.innerObject) return html;
 
         var has_expandable_props = (function(){
-            var props = Object.keys(orig_obj);
+            var props = Object_keys(orig_obj);
             for (var i = props.length; --i >= 0;) {
                 if (inspectValue(orig_obj[props[i]]).expandable)
                     return true;
@@ -1018,7 +1084,7 @@
     function equals(a, b) {
         if (a == null) return b == null;
         if (b == null) return a == null;
-        if (Array.isArray(a) && Array.isArray(b)) {
+        if ($.isArray(a) && $.isArray(b)) {
             if (a.length != b.length) return false;
             for (var i = a.length; --i >= 0;) {
                 if (!equals(a[i], b[i])) return false;
@@ -1027,7 +1093,7 @@
         }
         if (typeof a != typeof b) return false;
         if (typeof a == "object") {
-            var keys = Object.keys(a);
+            var keys = Object_keys(a);
             for (var i = keys.length; --i >= 0;) {
                 if (!equals(a[i], b[i])) return false;
             }
@@ -1050,4 +1116,4 @@
         return "<span class='json-heading'>" + title + "</span> ";
     }
 
-})();
+})(kendo, jQuery);

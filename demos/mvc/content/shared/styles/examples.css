@@ -896,7 +896,7 @@ div.submenu-box ol {
 
 pre.prettyprint
 {
-    font-family:courier,monospace;
+    font-family: "Ubuntu Mono", "Consolas", "Monaco", monospace;
 }
 
 /*console*/
@@ -1122,6 +1122,91 @@ pre.prettyprint
     margin-bottom: 3px;
 }
 
+
+/* widget inspector */
+
+#inspector-container .sec-title.k-header {
+    background: #fdfdfd;
+    border-bottom: 1px solid #ebecee;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 15px;
+}
+
+#inspector-container .sec-content {
+    border-bottom: 1px solid #ebecee;
+    padding: 10px 15px;
+}
+
+#inspector-container .sec-title:hover,
+#inspector-container .sec-title:hover:before {
+    background: #f3f5f7;
+    color: #000;
+}
+
+#inspector-container .kendo-inspector .kendo-inspector-section .sec-title:before {
+    top: 8px;
+}
+
+#inspector-container .kendo-inspector .kendo-inspector-section.visible .sec-title:before {
+    color: #444;
+}
+
+#inspector-container .kendo-inspector .kendo-inspector-section.visible {
+    border-bottom: 0;
+    font-size: 14px;
+}
+
+#inspector-container .kendo-inspector .editable-object a.doclink:before {
+    top: 0;
+    font-size: 95%;
+    color: #aaa;
+}
+
+#inspector-container .kendo-inspector .editable-object a.doclink,
+#inspector-container .kendo-inspector .editable-object [data-object-id] {
+    cursor: pointer;
+}
+
+#inspector-container .kendo-inspector .editable-object [data-object-id]:hover {
+    background-color: #e2e4e7;
+}
+
+#inspector-container .kendo-inspector .editable-object .codefold-operations .filter:after {
+    top: 4px;
+}
+
+#inspector-container .kendo-inspector .editable-object .codefold.highlight > .codefold-button,
+#inspector-container .kendo-inspector .editable-object .codefold.highlight > .codefold-button:after {
+	background-color: #fff;
+	color: #036c9c;
+    cursor: pointer;
+}
+ 
+#inspector-header {
+    border-bottom: 1px solid #ebecee;
+    background: #fdfdfd;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#inspector-header label {
+    margin-right: 5px;
+    color: #000;
+}
+
+#inspector {
+    overflow: auto;
+    border: 0;
+    background: #fff;
+}
+
+
+
 /* code viewer */
 #wrappers-source-code {
     margin: 0 7.5em -2.5em 7.5em;
@@ -1259,7 +1344,7 @@ pre.prettyprint
 #codeStrip .k-tabstrip .k-link
 {
     /*padding:5px 10px;*/
-    margin:10px 0 10px 14px;
+    margin:10px 0 10px 5px;
     color: #000;
 }
 
@@ -2326,7 +2411,8 @@ a.footer-links:hover,
 
 #header:after,
 #codeStrip:after,
-#overview-applications:after {
+#overview-applications:after,
+#inspector-container:after {
     display: block;
     content:"";
     clear: both;
