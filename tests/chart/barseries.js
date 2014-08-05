@@ -2614,6 +2614,18 @@
             barClick(function() { ok(true); });
         });
 
+        test("fires on contextmenu", function() {
+            createBarChart({
+                seriesClick: function(e) {
+                    equal(e.originalEvent.type, "contextmenu");
+                }
+            });
+
+            var e = new jQuery.Event("contextmenu");
+            e.target = barElement;
+            chart.element.trigger(e);
+        });
+
         test("fires on subsequent click", 2, function() {
             barClick(function() { ok(true); });
             clickChart(chart, barElement);

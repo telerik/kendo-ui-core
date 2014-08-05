@@ -101,6 +101,7 @@ var __meta__ = {
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
+        CONTEXTMENU_NS = "contextmenu" + NS,
         CLIP = dataviz.CLIP,
         COLOR = "color",
         COLUMN = "column",
@@ -612,6 +613,7 @@ var __meta__ = {
             var chart = this,
                 element = chart.element;
 
+            element.on(CONTEXTMENU_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEOUT_NS, proxy(chart._mouseout, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
