@@ -748,6 +748,11 @@ div.submenu-box ol {
     width: 132px;
 }
 
+.k-ie7 .tc-column {
+    display: inline;
+    zoom: 1;
+    vertical-align: top;
+}
 
 .tc-item:hover
 {
@@ -1217,6 +1222,8 @@ pre.prettyprint
 #wrappers-source-code ul,
 #wrappers-source-code ul li {
     display: inline-block;
+    *display: inline;
+    zoom: 1;
 }
 
 .other-source {
@@ -2428,6 +2435,7 @@ a.footer-links:hover,
     border-right: 1px solid #e2e4e7;
     overflow-x: hidden;
     overflow-y: auto;
+    position: relative;
     float: left;
     clear: left;
     background-color: #f5f7f8;
