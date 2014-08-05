@@ -383,7 +383,9 @@ var __meta__ = {
                 that[field] = member;
             }
 
-            that.uid = kendo.guid();
+            if (that.uid === undefined) {
+                that.uid = kendo.guid();
+            }
         },
 
         shouldSerialize: function(field) {
@@ -1646,92 +1648,6 @@ var __meta__ = {
         }
     });
 
-    var OfflineTransportWrapper = Class.extend({
-        init: function(options) {
-            this._transport = options.transport;
-            this._storage = options.storage;
-            this.online = true;
-        },
-        read: function(options) {
-            if (this.online) {
-                this._transport.read(options);
-            } else {
-                options.success(this.data());
-            }
-        },
-        _request: function(type, options) {
-            if (this.online) {
-                return this._transport[type](options);
-            } else {
-                this._store(type, options);
-
-                return $.Deferred(function(deferred) {
-                    options.success();
-                }).promise();
-            }
-        },
-        create: function(options) {
-            return this._request("create", options);
-        },
-        destroy: function(options) {
-            return this._request("destroy", options);
-        },
-        update: function(options) {
-            return this._request("update", options);
-        },
-        sync: function() {
-            var state = this._state();
-            var that = this;
-
-            if (state.requests) {
-                var resolver = function(request) {
-                    return function() {
-                       state.requests.splice($.inArray(request, state.requests), 1);
-                       that._state(state);
-                    }
-                };
-
-                for (var idx = 0; idx < state.requests.length; idx++) {
-                    var request = state.requests[idx];
-                    var options = request.data;
-                    options.success = resolver(request);
-                    this._transport[request.type](options);
-                }
-            }
-        },
-        _state: function(state) {
-            if (state !== undefined) {
-                this._storage.setItem(state);
-            } else {
-                return this._storage.getItem() || {};
-            }
-        },
-        _store: function(type, data) {
-            var state = this._state();
-
-            if (!state.requests) {
-                state.requests = [];
-            }
-
-            state.requests.push({
-                type: type,
-                data: data
-            });
-
-            this._state(state);
-        },
-        data: function(data) {
-            var state = this._state();
-
-            if (data != undefined) {
-                state.data = data;
-                this._state(state);
-            } else {
-                return state.data;
-            }
-        }
-    });
-
     var Cache = Class.extend({
         init: function() {
             this._store = {};
@@ -2202,22 +2118,16 @@ var __meta__ = {
                 if (typeof options.offlineStorage == "string") {
                     var key = options.offlineStorage;
 
-                    that.transport = new OfflineTransportWrapper({
-                        transport: that.transport,
-                        storage: {
-                            getItem: function() {
-                                return JSON.parse(localStorage.getItem(key))
-                            },
-                            setItem: function(item) {
-                                localStorage.setItem(key, stringify(item));
-                            }
+                    that._storage = {
+                        getItem: function() {
+                            return JSON.parse(localStorage.getItem(key))
+                        },
+                        setItem: function(item) {
+                            localStorage.setItem(key, stringify(item));
                         }
-                    });
+                    };
                 } else {
-                    that.transport = new OfflineTransportWrapper({
-                        transport: that.transport,
-                        storage: options.offlineStorage
-                    });
+                    that._storage = options.offlineStorage;
                 }
             }
 
@@ -2226,6 +2136,7 @@ var __meta__ = {
             model = that.reader.model || {};
 
             that._data = that._observe(that._data);
+            that._online = true;
 
             that.bind(["push", ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
         },
@@ -2246,26 +2157,30 @@ var __meta__ = {
 
         online: function(value) {
             if (value !== undefined) {
-                if (this.transport.online != value) {
-                    this.transport.online = value;
+                if (this._online != value) {
+                    this._online = value;
+
                     if (value) {
                         this.sync();
                     }
                 }
-            } else if (this.options.offlineStorage != null) {
-                return this.transport.online;
             } else {
-                return true;
+                return this._online;
             }
         },
 
-        offlineState: function() {
-            if (this.options.offlineStorage != null) {
-                return this.transport._state();
+        offlineState: function(state) {
+            if (this.options.offlineStorage == null) {
+                return null;
             }
 
-            return null;
+            if (state !== undefined) {
+                return this._storage.setItem(state);
+            }
+
+            return this._storage.getItem() || {};
         },
+
         _isServerGrouped: function() {
             var group = this.group() || [];
 
@@ -2552,8 +2467,31 @@ var __meta__ = {
                 return;
             }
 
-            if (that.options.offlineStorage != null && that.online()) {
-                that.transport.sync();
+            var promises = [];
+
+
+            if (this.online() && this.options.offlineStorage != null) {
+                var state = this.offlineState();
+
+                var resolver = function(request) {
+                    return function() {
+                       state.requests.splice($.inArray(request, state.requests), 1);
+                       that.offlineState(state);
+                    };
+                };
+
+                if (state.requests) {
+                    for (var idx = 0; idx < state.requests.length; idx++) {
+                        var request = state.requests[idx];
+                        var models = that.options.batch ? request.data.models : [request.data];
+                        models = $.map(models, function(item) {
+                            return that.getByUid(item.uid);
+                        });
+                        var promise = that._promise({ data: request.data }, models, request.type);
+                        promise.then(resolver(request));
+                        promises.push(promise);
+                    }
+                }
             }
 
             for (idx = 0, length = data.length; idx < length; idx++) {
@@ -2564,10 +2502,9 @@ var __meta__ = {
                 }
             }
 
-            var promises = that._send("create", created);
-
-            promises.push.apply(promises ,that._send("update", updated));
-            promises.push.apply(promises ,that._send("destroy", destroyed));
+            promises.push.apply(promises, that._send("create", created));
+            promises.push.apply(promises, that._send("update", updated));
+            promises.push.apply(promises, that._send("destroy", destroyed));
 
             $.when.apply(null, promises)
                 .then(function() {
@@ -2579,9 +2516,7 @@ var __meta__ = {
 
                     that._change({ action: "sync" });
 
-                    if (that.options.offlineStorage != null) {
-                        that.transport.data(that.data());
-                    }
+                    that._storeData();
 
                     that.trigger(SYNC);
                 });
@@ -2742,27 +2677,42 @@ var __meta__ = {
         },
 
         _promise: function(data, models, type) {
-            var that = this,
-            transport = that.transport;
+            var that = this;
 
             return $.Deferred(function(deferred) {
-
                 that.trigger(REQUESTSTART, { type: type });
 
-                transport[type].call(transport, extend({
-                    success: function(response) {
-                        deferred.resolve({
-                            response: response,
-                            models: models,
-                            type: type
-                        });
-                    },
-                    error: function(response, status, error) {
-                        deferred.reject(response);
-                        that.error(response, status, error);
+                if (that.online()) {
+                    that.transport[type].call(that.transport, extend({
+                        success: function(response) {
+                            deferred.resolve({
+                                response: response,
+                                models: models,
+                                type: type
+                            });
+                        },
+                        error: function(response, status, error) {
+                            deferred.reject(response);
+                            that.error(response, status, error);
+                        }
+                    }, data));
+                } else {
+                    var state = that.offlineState();
+
+                    if (!state.requests) {
+                        state.requests = [];
                     }
-                }, data)
-                );
+
+                    state.requests.push(extend({ type: type}, data));
+
+                    deferred.resolve({
+                        response: null,
+                        models: models,
+                        type: type
+                    });
+
+                    that.offlineState(state);
+                }
             }).promise();
         },
 
@@ -2772,6 +2722,12 @@ var __meta__ = {
                 length,
                 promises = [],
                 converted = that.reader.serialize(toJSON(data));
+
+            if (that.online() == false) {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    converted[idx].uid = data[idx].uid;
+                }
+            }
 
             if (that.options.batch) {
                 if (data.length) {
@@ -2795,11 +2751,15 @@ var __meta__ = {
 
                     that._ranges = [];
                     that.trigger("reset");
-                    that.transport.read({
-                        data: params,
-                        success: proxy(that.success, that),
-                        error: proxy(that.error, that)
-                    });
+                    if (that.online()) {
+                        that.transport.read({
+                            data: params,
+                            success: proxy(that.success, that),
+                            error: proxy(that.error, that)
+                        });
+                    } else if (that.options.offlineStorage != null){
+                        that.success(that.offlineState().data);
+                    }
                 } else {
                     that._dequeueRequest();
                 }
@@ -2814,10 +2774,6 @@ var __meta__ = {
 
             if (that.online()) {
                 data = that.reader.parse(data);
-
-                if (that.options.offlineStorage != null) {
-                    that.transport.data(data);
-                }
 
                 if (that._handleCustomErrors(data)) {
                     that._dequeueRequest();
@@ -2835,14 +2791,33 @@ var __meta__ = {
                 that._total = data.length;
             }
 
+            that._pristineTotal = that._total;
+
             that._pristineData = data.slice(0);
 
             that._data = that._observe(data);
 
+            that._storeData();
+
             that._addRange(that._data);
 
             that._process(that._data);
+
             that._dequeueRequest();
+        },
+
+        _storeData: function() {
+            if (this.options.offlineStorage != null) {
+                var state = this.offlineState();
+
+                state.data = $.map(this.data(), function(item) {
+                    var data = item.toJSON();
+                    data.uid = item.uid;
+                    return data;
+                });
+
+                this.offlineState(state);
+            }
         },
 
         _addRange: function(data) {
@@ -4404,7 +4379,6 @@ var __meta__ = {
         ObservableArray: ObservableArray,
         LocalTransport: LocalTransport,
         RemoteTransport: RemoteTransport,
-        OfflineTransportWrapper: OfflineTransportWrapper,
         Cache: Cache,
         DataReader: DataReader,
         Model: Model,
