@@ -306,30 +306,48 @@
             pieChart,
             firstSegment;
 
+        function createPieChart(options) {
+            chart = createChart(deepExtend({
+                dataSource: {
+                    data: data
+                },
+                series: [{
+                    type: "pie",
+                    field: "value",
+                    categoryField: "category",
+                    colorField: "color",
+                    explodeField: "explode"
+                }]
+            }, options));
+
+            pieChart = chart._plotArea.charts[0];
+            firstSegment = pieChart.points[0];
+        }
+
         // ------------------------------------------------------------
         module("Pie Chart / Data Source", {
             setup: function() {
-                chart = createChart({
-                    dataSource: {
-                        data: data
-                    },
-                    series: [{
-                        type: "pie",
-                        field: "value",
-                        categoryField: "category",
-                        colorField: "color",
-                        explodeField: "explode"
-                    }]
-                });
-
-                pieChart = chart._plotArea.charts[0];
-                firstSegment = pieChart.points[0];
+                createPieChart();
             },
             teardown: destroyChart
         });
 
         test("sets segment angle based on value", function() {
             equal(firstSegment.sector.angle, 60);
+        });
+
+        test("sets segment angle for negative values", function() {
+            createPieChart({
+                dataSource: {
+                    data: [{
+                        value: -10
+                    }, {
+                        value: 10
+                    }]
+                }
+            });
+
+            equal(firstSegment.sector.angle, 180);
         });
 
         test("sets segment category from dataItem", function() {

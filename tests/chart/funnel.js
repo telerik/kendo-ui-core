@@ -200,6 +200,23 @@
             equal(chart.labels.length, 3);
     });
 
+    test("renders segment for negative values", function() {
+        createFunnelChart({
+            dynamicHeight: false,
+            series: [{
+                data: [{
+                    value: -1,
+                    category: "A",
+                }, {
+                    value: 1,
+                    category: "B"
+                }]
+            }]
+        });
+
+        equal(chart.points[0].percentage, 0.5);
+    });
+
     module("dynamicSlope false", {
         setup: function() {
             createFunnelChart({
