@@ -1171,7 +1171,6 @@ var __meta__ = {
 
                         that.angular("cleanup", function(){ return { elements: content.get() }; });
                         content.html(data);
-                        that.angular("compile", function(){ return { elements: content.get() }; });
                     } catch (e) {
                         var console = window.console;
 
@@ -1184,6 +1183,8 @@ var __meta__ = {
                     if (complete) {
                         complete.call(that, content);
                     }
+
+                    that.angular("compile", function(){ return { elements: content.get() }; });
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: content[0] });
                 }
