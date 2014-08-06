@@ -4780,6 +4780,7 @@ var __meta__ = {
         _updateHeader: function(groups) {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
+                filterCells = container.find("tr.k-row-filter").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
@@ -4789,6 +4790,8 @@ var __meta__ = {
                     $(this).find("th.k-group-cell")
                         .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
                 });
+            } else if(length > filterCells) {
+                $(new Array(length - filterCells + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find(".k-filter-row"));
             }
         },
 
