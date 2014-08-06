@@ -142,7 +142,7 @@ var __meta__ = {
                     series: series,
                     category: fields.category,
                     dataItem: data[i],
-                    percentage: value / total,
+                    percentage: Math.abs(value) / total,
                     visibleInLegend: fields.visibleInLegend,
                     visible: fields.visible
                 }, fields);

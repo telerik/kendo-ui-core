@@ -7034,7 +7034,7 @@ var __meta__ = {
                 seriesCount = series.length,
                 overlayId = uniqueId(),
                 currentSeries, pointData, fields, seriesIx,
-                angle, data, anglePerValue, value, explode,
+                angle, data, anglePerValue, value, plotValue, explode,
                 total, currentAngle, i, pointIx = 0;
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
@@ -7058,8 +7058,9 @@ var __meta__ = {
                 for (i = 0; i < data.length; i++) {
                     pointData = SeriesBinder.current.bindPoint(currentSeries, i);
                     value = pointData.valueFields.value;
+                    plotValue = math.abs(value);
                     fields = pointData.fields;
-                    angle = round(value * anglePerValue, DEFAULT_PRECISION);
+                    angle = round(plotValue * anglePerValue, DEFAULT_PRECISION);
                     explode = data.length != 1 && !!fields.explode;
                     if (!isFn(currentSeries.color)) {
                         currentSeries.color = fields.color || colors[i % colorsCount];
@@ -7072,7 +7073,7 @@ var __meta__ = {
                         series: currentSeries,
                         seriesIx: seriesIx,
                         dataItem: data[i],
-                        percentage: value / total,
+                        percentage: plotValue / total,
                         explode: explode,
                         visibleInLegend: fields.visibleInLegend,
                         visible: fields.visible,
@@ -11982,7 +11983,7 @@ var __meta__ = {
             }
 
             if (isNumber(value) && pointData.fields.visible !== false) {
-                sum += value;
+                sum += math.abs(value);
             }
         }
 
