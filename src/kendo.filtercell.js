@@ -187,7 +187,7 @@ var __meta__ = {
                 input.attr(kendo.attr("role"), "datepicker");
             } else if (type == BOOL) {
                 input.remove();
-                var radioInput = $("<input type='radio'/>")
+                var radioInput = $("<input type='radio'/>");
                 var wrapper = that.wrapper;
                 var inputName = kendo.guid();
 
