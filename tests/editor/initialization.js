@@ -89,6 +89,18 @@ test("adds k-editor class to contentEditable", function() {
     ok(dom.hasClass("k-widget"));
 });
 
+test("shows popup toolbar within the viewport boundaries", 2, function () {
+    var dom = $("<div contentEditable='true' style='position:absolute;top:-100px;left:-100px'><p>foo</p></div>").appendTo(QUnit.fixture);
+    dom.kendoEditor();
+
+    dom.focus();
+
+    var editorToolbarWindow = dom.data("kendoEditor").toolbar.window.wrapper;
+
+    ok(parseInt(editorToolbarWindow.css("top"), 10) >= 0);
+    ok(parseInt(editorToolbarWindow.css("left"), 10) >= 0);
+});
+
 if (!kendo.support.browser.msie) {
     test("processes value when initializing", function() {
         var dom = $("<div contentEditable><p></p></div>").appendTo(QUnit.fixture);
