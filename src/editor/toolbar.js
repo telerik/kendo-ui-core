@@ -178,7 +178,7 @@
             var that = this,
                 window = that.window,
                 editorOptions = that.options.editor,
-                wrapper, editorElement;
+                wrapper, editorElement, editorOffset;
 
             if (window) {
                 wrapper = window.wrapper;
@@ -192,8 +192,11 @@
 
                     // track content position when other parts of page change
                     if (!window._moved) {
-                        wrapper.css("top", parseInt(editorElement.offset().top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10));
-                        wrapper.css("left", parseInt(editorElement.offset().left, 10));
+                        editorOffset = editorElement.offset();
+                        wrapper.css({
+                            top: Math.max(0, parseInt(editorOffset.top, 10) - wrapper.outerHeight() - parseInt(that.window.element.css("padding-bottom"), 10)),
+                            left: Math.max(0, parseInt(editorOffset.left, 10))
+                        });
                     }
 
                     window.open();
