@@ -935,7 +935,7 @@ var __meta__ = {
         _mousemove: function(e) {
             var chart = this,
                 now = new Date(),
-                timestamp = chart._mousemove.timestamp;
+                timestamp = chart._mousemove_ts;
 
             if (!timestamp || now - timestamp > MOUSEMOVE_THROTTLE) {
                 var coords = chart._eventCoordinates(e);
@@ -946,7 +946,7 @@ var __meta__ = {
                     chart._trackSharedTooltip(coords);
                 }
 
-                chart._mousemove.timestamp = now;
+                chart._mousemove_ts = now;
             }
         },
 
