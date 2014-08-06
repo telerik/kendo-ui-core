@@ -103,7 +103,7 @@ class TelerikInternalBuildBot
             
             if name_anchor.text.index("#{VERSION}") == nil && name_anchor.text.index("#{VERSION_YEAR}.#{VERSION_Q}") != nil && checkbox.selected?
                  uncheck_version(checkbox)
-                 Thread.current.send :sleep, 2
+                 Thread.current.send :sleep, 4
             end
         end
     end
