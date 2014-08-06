@@ -877,8 +877,7 @@ var __meta__ = {
 
             point = chart._getChartElement(e);
             if (point && point.hover) {
-                point.hover(chart, e);
-                if (!e.isDefaultPrevented()) {
+                if (!point.hover(chart, e)) {
                     chart._activePoint = point;
 
                     tooltipOptions = deepExtend({}, tooltipOptions, point.options.tooltip);
@@ -2902,7 +2901,7 @@ var __meta__ = {
         hover: function(chart, e) {
             var point = this;
 
-            chart.trigger(SERIES_HOVER, {
+            return chart.trigger(SERIES_HOVER, {
                 value: point.value,
                 percentage: point.percentage,
                 category: point.category,

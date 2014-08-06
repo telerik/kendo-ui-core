@@ -2757,6 +2757,27 @@
                 equal(e.element[0], getElement(bar.id));
             });
         });
+
+        test("cancelling seriesHover prevents tooltip from opening", 0, function() {
+            createBarChart({
+                tooltip: { visible: true },
+                seriesHover: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            chart._tooltip.show = function() { ok(false); };
+            barElement.mouseover();
+        });
+
+        test("tooltip is opened if seriesHover is not cancelled", function() {
+            createBarChart({
+                tooltip: { visible: true }
+            });
+
+            chart._tooltip.show = function() { ok(true); };
+            barElement.mouseover();
+        });
     })();
 
     (function() {
