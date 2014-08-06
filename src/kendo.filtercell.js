@@ -186,17 +186,18 @@ var __meta__ = {
             } else if (type == "date") {
                 input.attr(kendo.attr("role"), "datepicker");
             } else if (type == BOOL) {
+                input.remove();
+                var radioInput = $("<input type='radio'/>")
                 var wrapper = that.wrapper;
                 var inputName = kendo.guid();
 
-                var labelTrue = $("<label/>").text(options.messages.isTrue).append(input);
-                input.attr(kendo.attr("bind"), "checked:value")
+                var labelTrue = $("<label/>").text(options.messages.isTrue).append(radioInput);
+                radioInput.attr(kendo.attr("bind"), "checked:value")
                     .attr("name", inputName)
-                    .val("true")
-                    .attr("type", "radio");
+                    .val("true");
 
                 var labelFalse = labelTrue.clone().text(options.messages.isFalse);
-                        input.clone().val("false").appendTo(labelFalse);
+                radioInput.clone().val("false").appendTo(labelFalse);
                 wrapper.append([labelTrue, labelFalse]);
 
             } else if (type == "number") {
