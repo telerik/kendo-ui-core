@@ -61,4 +61,16 @@ test("kendo.support checks for datetime-local type", function() {
     equal(kendo.support.input.datetimelocal, input.type === "datetime-local");
 });
 
+test("kendo.support.scrollbar() returns a number", function () {
+    var scrollbar = kendo.support.scrollbar();
+    ok(!!scrollbar && !isNaN(scrollbar));
+});
+
+test("kendo.support.scrollbar(true) refreshes the cached value", function () {
+    kendo.support._scrollbar = -1;
+
+    var scrollbar = kendo.support.scrollbar(true);
+    ok(!isNaN(scrollbar) && scrollbar > -1);
+});
+
 }());

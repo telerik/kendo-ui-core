@@ -1825,19 +1825,26 @@ function pad(number, digits, end) {
         return styles;
     }
 
-    (function() {
-        support.scrollbar = function() {
-            var div = document.createElement("div"),
-                result;
+    (function () {
+        support._scrollbar = undefined;
 
-            div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1;clear:both;display:block";
-            div.innerHTML = "&nbsp;";
-            document.body.appendChild(div);
+        support.scrollbar = function (refresh) {
+            if (!isNaN(support._scrollbar) && !refresh) {
+                return support._scrollbar;
+            } else {
+                var div = document.createElement("div"),
+                    result;
 
-            result = div.offsetWidth - div.scrollWidth;
+                div.style.cssText = "overflow:scroll;overflow-x:hidden;zoom:1;clear:both;display:block";
+                div.innerHTML = "&nbsp;";
+                document.body.appendChild(div);
 
-            document.body.removeChild(div);
-            return result;
+                support._scrollbar = result = div.offsetWidth - div.scrollWidth;
+
+                document.body.removeChild(div);
+
+                return result;
+            }
         };
 
         support.isRtl = function(element) {
