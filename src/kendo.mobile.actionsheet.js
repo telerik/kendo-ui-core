@@ -136,9 +136,12 @@ var __meta__ = {
             this._close();
         },
 
-        _close: function() {
-            this.close();
-            this.trigger(CLOSE);
+        _close: function(e) {
+            if (!this.trigger(CLOSE)) {
+                this.close();
+            } else {
+                e.preventDefault();
+            }
         }
     });
 
