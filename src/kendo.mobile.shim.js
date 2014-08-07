@@ -65,20 +65,22 @@ var __meta__ = {
                     }
                 },
 
-                deactivate: function(e) {
+                close: function(e) {
                     var prevented = false;
 
                     if (!that._apiCall) {
                         prevented = that.trigger(HIDE);
                     }
 
-                    if (!prevented) {
-                        shim.hide();
-                    } else {
+                    if (prevented) {
                         e.preventDefault();
                     }
 
                     that._apiCall = false;
+                },
+
+                deactivate: function() { // Deactivate event can't be prevented.
+                    shim.hide();
                 },
 
                 open: function() {
