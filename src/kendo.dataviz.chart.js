@@ -2622,6 +2622,11 @@ var __meta__ = {
 
         options: {
             type: DATE,
+            majorGridLines: {
+                visible: true,
+                width: 1,
+                color: BLACK
+            },
             labels: {
                 dateFormats: DateLabelFormats
             }
