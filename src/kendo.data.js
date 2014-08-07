@@ -383,9 +383,7 @@ var __meta__ = {
                 that[field] = member;
             }
 
-            if (that.uid === undefined) {
-                that.uid = kendo.guid();
-            }
+            that.uid = kendo.guid();
         },
 
         shouldSerialize: function(field) {
@@ -2463,51 +2461,28 @@ var __meta__ = {
                 destroyed = that._destroyed,
                 data = that._flatData(that._data);
 
-            if (!that.reader.model) {
-                return;
-            }
+            if (that.online()) {
 
-            var promises = [];
+                if (!that.reader.model) {
+                    return;
+                }
 
-
-            if (this.online() && this.options.offlineStorage != null) {
-                var state = this.offlineState();
-
-                var resolver = function(request) {
-                    return function() {
-                       state.requests.splice($.inArray(request, state.requests), 1);
-                       that.offlineState(state);
-                    };
-                };
-
-                if (state.requests) {
-                    for (var idx = 0; idx < state.requests.length; idx++) {
-                        var request = state.requests[idx];
-                        var models = that.options.batch ? request.data.models : [request.data];
-                        models = $.map(models, function(item) {
-                            return that.getByUid(item.uid);
-                        });
-                        var promise = that._promise({ data: request.data }, models, request.type);
-                        promise.then(resolver(request));
-                        promises.push(promise);
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (data[idx].isNew()) {
+                        created.push(data[idx]);
+                    } else if (data[idx].dirty) {
+                        updated.push(data[idx]);
                     }
                 }
-            }
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].isNew()) {
-                    created.push(data[idx]);
-                } else if (data[idx].dirty) {
-                    updated.push(data[idx]);
-                }
-            }
+                var promises = [];
+                promises.push.apply(promises, that._send("create", created));
+                promises.push.apply(promises, that._send("update", updated));
+                promises.push.apply(promises, that._send("destroy", destroyed));
 
-            promises.push.apply(promises, that._send("create", created));
-            promises.push.apply(promises, that._send("update", updated));
-            promises.push.apply(promises, that._send("destroy", destroyed));
-
-            $.when.apply(null, promises)
-                .then(function() {
+                $.when
+                 .apply(null, promises)
+                 .then(function() {
                     var idx, length;
 
                     for (idx = 0, length = arguments.length; idx < length; idx++){
@@ -2516,10 +2491,12 @@ var __meta__ = {
 
                     that._change({ action: "sync" });
 
-                    that._storeData();
-
                     that.trigger(SYNC);
                 });
+            } else {
+                that._storeData();
+                that._change({ action: "sync" });
+            }
         },
 
         cancelChanges: function(model) {
@@ -2682,37 +2659,19 @@ var __meta__ = {
             return $.Deferred(function(deferred) {
                 that.trigger(REQUESTSTART, { type: type });
 
-                if (that.online()) {
-                    that.transport[type].call(that.transport, extend({
-                        success: function(response) {
-                            deferred.resolve({
-                                response: response,
-                                models: models,
-                                type: type
-                            });
-                        },
-                        error: function(response, status, error) {
-                            deferred.reject(response);
-                            that.error(response, status, error);
-                        }
-                    }, data));
-                } else {
-                    var state = that.offlineState();
-
-                    if (!state.requests) {
-                        state.requests = [];
+                that.transport[type].call(that.transport, extend({
+                    success: function(response) {
+                        deferred.resolve({
+                            response: response,
+                            models: models,
+                            type: type
+                        });
+                    },
+                    error: function(response, status, error) {
+                        deferred.reject(response);
+                        that.error(response, status, error);
                     }
-
-                    state.requests.push(extend({ type: type}, data));
-
-                    deferred.resolve({
-                        response: null,
-                        models: models,
-                        type: type
-                    });
-
-                    that.offlineState(state);
-                }
+                }, data));
             }).promise();
         },
 
@@ -2722,12 +2681,6 @@ var __meta__ = {
                 length,
                 promises = [],
                 converted = that.reader.serialize(toJSON(data));
-
-            if (that.online() == false) {
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    converted[idx].uid = data[idx].uid;
-                }
-            }
 
             if (that.options.batch) {
                 if (data.length) {
@@ -2788,6 +2741,21 @@ var __meta__ = {
 
                 data = that._readData(data);
             } else {
+                var items = [];
+
+                for (var idx = 0; idx < data.length; idx++) {
+                    var item = data[idx];
+                    var state = item.__state__;
+
+                    if (state == "destroy") {
+                       this._destroyed.push(item);
+                    } else {
+                        items.push(item);
+                    }
+                }
+
+                data = items;
+
                 that._total = data.length;
             }
 
@@ -2796,6 +2764,12 @@ var __meta__ = {
             that._pristineData = data.slice(0);
 
             that._data = that._observe(data);
+
+            that._data.forEach(function(item) {
+                if (item.__state__ == "update") {
+                    item.dirty = true;
+                }
+            });
 
             that._storeData();
 
@@ -2808,15 +2782,29 @@ var __meta__ = {
 
         _storeData: function() {
             if (this.options.offlineStorage != null) {
-                var state = this.offlineState();
+                var state = [];
+                var item;
+                var data = this.data();
 
-                state.data = $.map(this.data(), function(item) {
-                    var data = item.toJSON();
-                    data.uid = item.uid;
-                    return data;
-                });
+                for (idx = 0; idx < data.length; idx++) {
+                    item = data[idx].toJSON();
+                    if (this.reader.model) {
+                        if (data[idx].isNew()) {
+                            item.__state__ = "create";
+                        } else if (data[idx].dirty) {
+                            item.__state__ = "update";
+                        }
+                    }
 
-                this.offlineState(state);
+                    state.push(item);
+                }
+
+                for (idx = 0; idx < this._destroyed.length; idx++) {
+                    item = this._destroyed[idx].toJSON();
+                    item.__state__ = "destroy";
+                }
+
+                this.offlineState({ data: state });
             }
         },
 

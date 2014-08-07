@@ -86,23 +86,7 @@
         deepEqual(dataSource.data().length, 1);
     });
 
-    test("data persists uid when offline", function() {
-        var data = [{ foo: "foo" }];
-
-        var dataSource = new DataSource({
-            offlineStorage: "key",
-            data: data
-        });
-
-        dataSource.read();
-        var uid = dataSource.at(0).uid;
-        dataSource.online(false);
-        dataSource.read();
-
-        deepEqual(dataSource.at(0).uid, uid);
-    });
-
-    test("update stores the request in localStorage when not online", function() {
+    test("updated items are stored in localStorage when not online", function() {
         var dataSource = new DataSource({
             offlineStorage: "key",
             schema: {
@@ -119,11 +103,10 @@
         dataSource.online(false);
         dataSource.get(1).set("foo", "bar");
         dataSource.sync();
+        dataSource.read();
 
-        var state = dataSource.offlineState();
-
-        equal(state.requests[0].type, "update");
-        equal(state.requests[0].data.foo, "bar");
+        equal(dataSource.get(1).dirty, true);
+        equal(dataSource.get(1).foo, "bar");
     });
 
     test("sync sends all pending update requests to transport", 2, function() {
@@ -189,78 +172,6 @@
         dataSource.online(true);
     });
 
-    test("sync removes requests that have been sent successfully", function() {
-        var dataSource = new DataSource({
-            offlineStorage: "key",
-            schema: {
-                model: {
-                    id: "id"
-                }
-            },
-            transport: {
-                read: function(options) {
-                    options.success([]);
-                },
-                update: function(options) {
-                    if (options.data.foo == "foo") {
-                        options.success();
-                    }
-                }
-            }
-        });
-
-        dataSource.online(false);
-        dataSource.offlineState({
-            requests: [
-                { data: {foo:"foo"}, type: "update"},
-                { data: {foo:"bar"}, type: "update"}
-            ]
-        });
-        dataSource.sync();
-
-        dataSource.online(true);
-
-        var state = dataSource.offlineState();
-
-        equal(state.requests.length, 1);
-        equal(state.requests[0].data.foo, "bar");
-    });
-
-    test("sync removes batch requests that have been sent successfully", function() {
-        var dataSource = new DataSource({
-            offlineStorage: "key",
-            batch: true,
-            schema: {
-                model: {
-                    id: "id"
-                }
-            },
-            transport: {
-                read: function(options) {
-                    options.success([]);
-                },
-                update: function(options) {
-                    if (options.data.models[0].foo == "foo") {
-                        options.success();
-                    }
-                }
-            }
-        });
-
-        dataSource.offlineState({
-            requests: [
-                { data: { models: [ { foo:"foo" } ] }, type: "update" },
-                { data: { models: [ { foo:"bar" } ] }, type: "update" }
-            ]
-        });
-
-        dataSource.sync();
-
-        var state = dataSource.offlineState();
-
-        equal(state.requests.length, 1);
-        equal(state.requests[0].data.models[0].foo, "bar");
-    });
 
     test("sync accepts data for batch requests that have been sent successfully", function() {
         var dataSource = new DataSource({
@@ -318,7 +229,7 @@
         equal(dataSource.get(1).foo, "baz");
     });
 
-    test("destroy stores the request in localStorage when not online", function() {
+    test("destroy stores the destroyed items in localStorage when not online", function() {
         var dataSource = new DataSource({
             offlineStorage: "key",
             schema: {
@@ -326,26 +237,24 @@
                     id: "id"
                 }
             },
-            transport: {
-                read: function(options) {
-                    options.success([{ id:1, foo: "foo" }]);
-                }
-            }
+            data: [
+                { id : 1 }
+            ]
         });
 
         dataSource.read();
         dataSource.online(false);
         dataSource.remove(dataSource.get(1));
         dataSource.sync();
+        dataSource.read();
 
-        var state = dataSource.offlineState();
-
-        equal(state.requests[0].type, "destroy");
-        equal(state.requests[0].data.foo, "foo");
+        equal(dataSource.data().length, 0);
+        equal(dataSource.total(), 0);
+        equal(dataSource._destroyed.length, 1);
+        equal(dataSource._destroyed[0].id, 1);
     });
 
-
-    test("create stores the request in localStorage when not online", function() {
+    test("create stores the creted items in localStorage when not online", function() {
         var dataSource = new DataSource({
             offlineStorage: "key",
             schema: {
@@ -358,11 +267,11 @@
         dataSource.online(false);
         dataSource.add({ foo: "foo" });
         dataSource.sync();
+        dataSource.read();
 
         var state = dataSource.offlineState();
 
-        equal(state.requests[0].type, "create");
-        equal(state.requests[0].data.foo, "foo");
+        equal(dataSource.at(0).isNew(), true);
     });
 
     test("online returns true by default", function() {
@@ -425,4 +334,24 @@
         equal(dataSource.offlineState(), null);
     });
 
+    test("updating inserted item updates the item", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        dataSource.online(false);
+        dataSource.add( { foo : "foo" });
+        dataSource.sync();
+        dataSource.at(0).set("foo", "bar");
+        dataSource.sync();
+        dataSource.read();
+
+        equal(dataSource.at(0).foo, "bar");
+        equal(dataSource.total(), 1);
+    });
 }());
