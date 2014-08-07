@@ -715,11 +715,11 @@ var __meta__ = {
 
         _updateClasses: function() {
             var element = this.element,
-                nonContentGroupsSelector = menuSelector + " div ul",
+                nonContentGroupsSelector = ".k-menu-init div ul",
                 items;
 
             element.removeClass("k-menu-horizontal k-menu-vertical");
-            element.addClass("k-widget k-reset k-header " + MENU).addClass(MENU + "-" + this.options.orientation);
+            element.addClass("k-widget k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             element.find("li > ul")
                    .filter(function() {
@@ -734,6 +734,8 @@ var __meta__ = {
                    .attr("tabindex", "-1"); // Capture the focus before the Menu
 
             items = element.find("> li,.k-menu-group > li");
+
+            element.removeClass("k-menu-init");
 
             items.each(function () {
                 updateItemClasses(this);
