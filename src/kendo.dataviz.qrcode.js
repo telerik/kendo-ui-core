@@ -1107,7 +1107,7 @@ var __meta__ = {
             },
             options: {
                 name: "QRCode",
-                renderAs: "canvas",
+                renderAs: "svg",
                 encoding: "ISO_8859_1",
                 value: "",
                 errorCorrection: QRCodeDefaults.DEFAULT_ERROR_CORRECTION_LEVEL,
