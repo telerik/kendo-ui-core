@@ -84,7 +84,7 @@
         <li>90% Discount!</li>
         <li>One time offer!</li>
     </ul>
-    <a data-role="button" style="background-color: darkred; display: block; margin: 2em; font-size: 1.4em;">Delete Spam</a>
+    <a data-role="button" class="spam">Delete Spam</a>
 </div>
 
 <div data-role="drawer" id="my-drawer" style="width: 270px" data-views="['drawer-home', 'drawer-starred', 'drawer-deleted', 'drawer-spam', 'drawer-drafts', 'drawer-sent', '@Url.Content("~/mobile/m/drawer/index.html")']">
@@ -181,5 +181,19 @@
         color: #369;
         float: left;
         margin-right: 10px;
+    }
+
+    #drawer-spam .spam
+    {
+        color: darkred;
+        background: currentcolor;
+        display: block;
+        margin: 2em;
+        font-size: 1.4em;
+    }
+
+    #drawer-spam .spam .km-text
+    {
+        color: white;
     }
 </style>
