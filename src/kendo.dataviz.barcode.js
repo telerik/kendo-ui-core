@@ -1736,7 +1736,7 @@ var __meta__ = {
 
         options: {
             name: "Barcode",
-            renderAs: "canvas",
+            renderAs: "svg",
             value: "",
             type: "code39",
             checksum: false,
