@@ -51,7 +51,7 @@
             setTimeout(function() {
                 start();
                 ok(!shim.shim.is(":visible"));
-            });
+            }, 210);
         });
 
         shim.popup._resize({});
@@ -72,7 +72,7 @@
             start();
             ok(!called);
             ok(!shim.shim.is(":visible"));
-        }, 100);
+        }, 210);
 
         shim.hide();
     });
