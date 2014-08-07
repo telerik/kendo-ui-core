@@ -262,7 +262,7 @@ var __meta__ = {
 
             that.osCssClass = osCssClass(that.os, that.options);
 
-            if (os.wp) {
+            if (os.name == "wp") {
                 if (!that.refreshBackgroundColorProxy) {
                     that.refreshBackgroundColorProxy = $.proxy(function () {
                         if (that.os.variant && (that.os.skin && that.os.skin === that.os.name) || !that.os.skin) {
