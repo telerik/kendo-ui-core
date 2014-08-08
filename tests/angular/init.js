@@ -468,6 +468,31 @@
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
     });
 
+    runTest("Grid -- compile custom editor field", function(dom){
+        function createEditor(container, options) {
+            $("<input name='" + options.field + "' kendo-numerictextbox='ns.numericTextBox' k-ng-bind='dataItem.id' />")
+                .appendTo(container);
+        }
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [ { field: "text" }, { field: "id", editor: createEditor } ]
+        };
+        $scope.ns = {};
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(2);
+        var disableHandler = $scope.$on("kendoRendered", function(){
+            disableHandler();
+            var cell = $($scope.grid.items()[1].cells[1]);
+            $scope.grid.editCell(cell);
+            setTimeout(function(){
+                var ntb = $scope.ns.numericTextBox;
+                ok( ntb instanceof kendo.ui.NumericTextBox );
+                equal( ntb.value(), 2 );
+                start();
+            }, 5);
+        });
+    });
+
     }
 
     if (kendo.ui.TreeView) {
