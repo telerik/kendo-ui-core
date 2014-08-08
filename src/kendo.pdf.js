@@ -3,7 +3,7 @@
     "use strict";
 
     /* jshint eqnull:true */
-    /* global console */ // temporary
+    /* global console,require */ // temporary
 
     var NL = "\n";
 
@@ -159,6 +159,51 @@
         ];
     }
 
+    function utf8_encode(string) {
+        var i = string.length, k = 0, c, ret = "";
+        while (--i >= 0) {
+            c = string.charCodeAt(k++);
+            // unicode support
+            if (c < 0x80) {
+                // one byte - ASCII
+                ret += String.fromCharCode(c);
+            } else if (c < 0x800) {
+                // two bytes
+                ret += String.fromCharCode(0xC0 | ((c >>> 6) & 0x1F));
+                ret += String.fromCharCode(0x80 | (c & 0x3F));
+            } else if (c < 0x10000) {
+                // three bytes
+                ret += String.fromCharCode(0xE0 | ((c >>> 12) & 0x0F));
+                ret += String.fromCharCode(0x80 | ((c >>> 6) & 0x3F));
+                ret += String.fromCharCode(0x80 | (c & 0x3F));
+            } else if (c < 0x110000) {
+                // four bytes
+                ret += String.fromCharCode(0xF0 | ((c >>> 18) & 0x03));
+                ret += String.fromCharCode(0x80 | ((c >>> 12) & 0x3F));
+                ret += String.fromCharCode(0x80 | ((c >>> 6) & 0x3F));
+                ret += String.fromCharCode(0x80 | (c & 0x3F));
+            }
+        }
+        return ret;
+    }
+
+    function utf16_be_encode(string) {
+        var i = string.length, k = 0, c, ret = "";
+        function add(c) {
+            ret += String.fromCharCode(c >> 8) + String.fromCharCode(c & 0xFF);
+        }
+        while (--i >= 0) {
+            c = string.charCodeAt(k++);
+            if (c <= 0xFFFF) {
+                add(c);
+            } else {
+                add( ((c - 0x10000) >> 10) + 0xD800 );
+                add( ((c - 0x10000) & 0x3FF) + 0xD800 );
+            }
+        }
+        return ret;
+    }
+
     var isArray = Array.isArray || function(obj) {
         return obj instanceof Array;
     };
@@ -218,7 +263,7 @@
         this.value = value;
     }, {
         render: function(out) {
-            out("(", this.escape(), ")");
+            out("(\xFE\xFF", utf16_be_encode(this.escape()), ")");
         },
         escape: function() {
             return this.value.replace(/([\(\)\\])/g, "\\$1");
@@ -453,8 +498,8 @@
     var page1 = pdf.addPage();
     page1._beginText();
     page1._out("70 50 TD", NL);
-    page1._out(page1._getFontResource("Helvetica-BoldOblique"), " 20 Tf", NL);
-    page1._out(new PDFString("Hello WORLD!"), " Tj", NL);
+    page1._out(page1._getFontResource("Helvetica"), " 20 Tf", NL);
+    page1._out(new PDFString("Hello «a» ŞWORLD ♥!"), " Tj", NL);
     page1._endText();
 
     var page2 = pdf.addPage();
@@ -521,6 +566,9 @@
     page3._out("-105 0 m 105 0 l s ", NL);
     page3._out("0 -148.5 m 0 148.5 l s ", NL);
 
-    console.log("%s", pdf.render());
+    //console.log("%s", pdf.render());
+    //require("util").puts(pdf.render());
+    var fs = require("fs");
+    fs.writeFileSync("/tmp/pdf.txt", pdf.render(), { encoding: "binary" });
 
 })(undefined);
