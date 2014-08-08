@@ -276,15 +276,6 @@ var __meta__ = {
                 modelField,
                 modelFields;
 
-            if (that.options.target) {
-                that.angular("compile", function(){
-                    return {
-                        elements: container,
-                        data: [ { dataItem: model } ]
-                    };
-                });
-            }
-
             if (!$.isArray(fields)) {
                 fields = [fields];
             }
@@ -298,6 +289,15 @@ var __meta__ = {
                  addValidationRules(modelField, rules);
 
                  that.editor(field, modelField);
+            }
+
+            if (that.options.target) {
+                that.angular("compile", function(){
+                    return {
+                        elements: container,
+                        data: [ { dataItem: model } ]
+                    };
+                });
             }
 
             if (!length) {
