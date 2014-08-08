@@ -1697,6 +1697,7 @@ var __meta__ = {
                     .kendoEditable({
                         fields: { field: column.field, format: column.format, editor: column.editor, values: column.values },
                         model: model,
+                        target: that,
                         change: function(e) {
                             if (that.trigger(SAVE, { values: e.values, container: cell, model: model } )) {
                                 e.preventDefault();
