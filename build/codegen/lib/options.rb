@@ -47,7 +47,9 @@ module CodeGen
             return unless types
 
             if types.is_a?(String)
-                type = types.split('|').map { |type| type.strip }.find_all { |t| TYPES.include?(t) }
+                type = types.split('|').map { |type| type.strip }.find_all do |t|
+                    TYPES.include?(t) || t.start_with?('kendo')
+                end
             else
                 type = types
             end
