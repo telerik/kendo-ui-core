@@ -2009,7 +2009,7 @@ function pad(number, digits, end) {
                     if (match) {
                         browser = {};
                         browser[agent] = true;
-                        browser[match[1].toLowerCase()] = true;
+                        browser[match[1].toLowerCase().split(" ")[0].split("/")[0]] = true;
                         browser.version = parseInt(document.documentMode || match[2], 10);
 
                         break;
