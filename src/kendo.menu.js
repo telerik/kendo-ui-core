@@ -588,7 +588,12 @@ var __meta__ = {
                         if (!popup) {
                             popup = ul.kendoPopup({
                                 activate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: ACTIVATE }); },
-                                deactivate: function() { that._triggerEvent({ item: this.wrapper.parent(), type: DEACTIVATE }); },
+                                deactivate: function(e) {
+                                    e.sender.element // Restore opacity after fade.
+                                        .removeData("targetTransform")
+                                        .css({ opacity: "" });
+                                    that._triggerEvent({ item: this.wrapper.parent(), type: DEACTIVATE });
+                                },
                                 origin: directions.origin,
                                 position: directions.position,
                                 collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
