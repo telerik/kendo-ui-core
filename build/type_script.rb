@@ -408,6 +408,10 @@ module CodeGen::TypeScript
                 return @base
             end
 
+            if config_object?
+                return
+            end
+
             if fx?
                 return
             end
@@ -419,12 +423,36 @@ module CodeGen::TypeScript
             'Observable'
         end
 
+        def config_object?
+            @name =~ /Options$/
+        end
+
+        def type_script_kind
+            if config_object?
+                return 'interface'
+            end
+
+            'class'
+        end
+
         def namespace
             @full_name.sub('.' + @name, '')
         end
 
         def type_script_options_type
+            if config_object?
+                return
+            end
+
             type_script_type + 'Options'
+        end
+
+        def type_script_event_type
+            if config_object?
+                return
+            end
+
+            type_script_type + 'Event'
         end
 
         def type_script_class
