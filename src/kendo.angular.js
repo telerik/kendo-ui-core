@@ -14,6 +14,16 @@
     var module = angular.module('kendo.directives', []);
     var $parse, $timeout, $compile, $log;
 
+    function withoutTimeout(f) {
+        var save = $timeout;
+        try {
+            $timeout = function(f){ return f(); };
+            return f();
+        } finally {
+            $timeout = save;
+        }
+    }
+
     var OPTIONS_NOW;
 
     var createDataSource = (function() {
@@ -629,37 +639,39 @@
         }
         var scope = self.$angular_scope || angular.element(self.element).scope();
         if (scope && $compile) {
-            var x = arg(), elements = x.elements, data = x.data;
-            if (elements.length > 0) {
-                switch (cmd) {
+            withoutTimeout(function(){
+                var x = arg(), elements = x.elements, data = x.data;
+                if (elements.length > 0) {
+                    switch (cmd) {
 
-                  case "cleanup":
-                    angular.forEach(elements, function(el){
-                        var itemScope = angular.element(el).scope();
-                        if (itemScope && itemScope !== scope) {
-                            destroyScope(itemScope, el);
-                        }
-                    });
-                    break;
-
-                  case "compile":
-                    angular.forEach(elements, function(el, i){
-                        var itemScope;
-                        if (x.scopeFrom) {
-                            itemScope = angular.element(x.scopeFrom).scope();
-                        } else {
-                            var vars = data && data[i];
-                            if (vars !== undefined) {
-                                itemScope = $.extend(scope.$new(), vars);
+                      case "cleanup":
+                        angular.forEach(elements, function(el){
+                            var itemScope = angular.element(el).scope();
+                            if (itemScope && itemScope !== scope) {
+                                destroyScope(itemScope, el);
                             }
-                        }
+                        });
+                        break;
 
-                        $compile(el)(itemScope || scope);
-                    });
-                    digest(scope);
-                    break;
+                      case "compile":
+                        angular.forEach(elements, function(el, i){
+                            var itemScope;
+                            if (x.scopeFrom) {
+                                itemScope = angular.element(x.scopeFrom).scope();
+                            } else {
+                                var vars = data && data[i];
+                                if (vars !== undefined) {
+                                    itemScope = $.extend(scope.$new(), vars);
+                                }
+                            }
+
+                            $compile(el)(itemScope || scope);
+                        });
+                        digest(scope);
+                        break;
+                    }
                 }
-            }
+            });
         }
     });
 
