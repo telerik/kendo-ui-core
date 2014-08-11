@@ -50,14 +50,13 @@
                 url: url,
                 data: {
                     output: "json",
-                    jsonp: "bingTileParams",
                     include: "ImageryProviders",
                     key: options.key,
                     uriScheme: proto
                 },
                 type: "get",
                 dataType: "jsonp",
-                jsonpCallback: "bingTileParams",
+                jsonp: "jsonp",
                 success: this._onMetadata
             });
         },
