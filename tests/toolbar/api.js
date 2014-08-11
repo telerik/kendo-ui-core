@@ -104,7 +104,7 @@
         }).data("kendoToolBar");
 
         toolbar.enable("#foo");
-        
+
         ok(!$("#foo").hasClass("k-state-disabled"), "Toolbar button does not have k-state-disabled class");
         ok(!toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button does not have k-state-disabled class");
     });
@@ -117,9 +117,21 @@
         }).data("kendoToolBar");
 
         toolbar.enable("#foo", false);
-        
+
         ok($("#foo").hasClass("k-state-disabled"), "Toolbar button have k-state-disabled class");
         ok(toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+    });
+
+    test("enable method disables button with overflow: 'always'", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", overflow: "always", enable: true }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.enable("#foo_overflow", false);
+
+        ok($("#foo_overflow").parent("li").hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
     });
 
     test("get selected item from group returns the selected toggle button", 1, function() {

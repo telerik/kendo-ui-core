@@ -590,6 +590,10 @@ var __meta__ = {
             enable: function(element, enable) {
                 var uid = this.element.find(element).attr(KENDO_UID_ATTR);
 
+                if (!uid && this.popup) {
+                    uid = this.popup.element.find(element).parent("li").attr(KENDO_UID_ATTR);
+                }
+
                 if (typeof enable == "undefined") {
                     enable = true;
                 }
