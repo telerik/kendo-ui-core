@@ -63,7 +63,7 @@ $dataSource = new \Kendo\Data\PivotDataSource();
 $dataSource ->addColumn($countryColumn, $companyNameColumn)
             ->addRow($contactTitleRow)
             ->transport($transport)
-            ->addMeasure(array('Contacts Count'))
+            ->addMeasure('Contacts Count')
             ->schema($schema);
 
 $pivotgrid = new \Kendo\UI\PivotGrid('pivotgrid');
