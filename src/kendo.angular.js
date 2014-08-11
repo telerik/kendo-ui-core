@@ -14,6 +14,16 @@
     var module = angular.module('kendo.directives', []);
     var $parse, $timeout, $compile, $log;
 
+    function withoutTimeout(f) {
+        var save = $timeout;
+        try {
+            $timeout = function(f){ return f(); };
+            return f();
+        } finally {
+            $timeout = save;
+        }
+    }
+
     var OPTIONS_NOW;
 
     var createDataSource = (function() {
@@ -94,7 +104,7 @@
 
             if (widgetOptions.hasOwnProperty(dataName)) {
                 addOption(scope, options, dataName, value);
-            } else if (widgetOptions.hasOwnProperty(name)) {
+            } else if (widgetOptions.hasOwnProperty(name) && name != "name") { // `name` must be forbidden. XXX: other names to ignore here?
                 addOption(scope, options, name, value);
             } else if (!ignoredAttributes[name]) {
                 var match = name.match(/^k(On)?([A-Z].*)/);
@@ -198,7 +208,7 @@
                                         kNgDelay = null;
                                         $timeout(createIt); // XXX: won't work without `timeout` ;-\
                                     }
-                                }, true);
+                                });
                             })();
                         }
 
@@ -259,7 +269,10 @@
                             prev_destroy = scope.$on("$destroy", function() {
                                 if (widget) {
                                     if (widget.element) {
-                                        widget.destroy();
+                                        widget = kendoWidgetInstance(widget.element);
+                                        if (widget) {
+                                            widget.destroy();
+                                        }
                                     }
                                     widget = null;
                                 }
@@ -546,7 +559,8 @@
     }
 
     function digest(scope) {
-        if (!/^\$(digest|apply)$/.test(scope.$root.$$phase)) {
+        var root = scope.$root || scope;
+        if (!/^\$(digest|apply)$/.test(root.$$phase)) {
             scope.$digest();
         }
     }
@@ -627,38 +641,40 @@
             return;
         }
         var scope = self.$angular_scope || angular.element(self.element).scope();
-        if (scope) {
-            var x = arg(), elements = x.elements, data = x.data;
-            if (elements.length > 0) {
-                switch (cmd) {
+        if (scope && $compile) {
+            withoutTimeout(function(){
+                var x = arg(), elements = x.elements, data = x.data;
+                if (elements.length > 0) {
+                    switch (cmd) {
 
-                  case "cleanup":
-                    angular.forEach(elements, function(el){
-                        var itemScope = angular.element(el).scope();
-                        if (itemScope && itemScope !== scope) {
-                            destroyScope(itemScope);
-                        }
-                    });
-                    break;
-
-                  case "compile":
-                    angular.forEach(elements, function(el, i){
-                        var itemScope;
-                        if (x.scopeFrom) {
-                            itemScope = angular.element(x.scopeFrom).scope();
-                        } else {
-                            var vars = data && data[i];
-                            if (vars !== undefined) {
-                                itemScope = $.extend(scope.$new(), vars);
+                      case "cleanup":
+                        angular.forEach(elements, function(el){
+                            var itemScope = angular.element(el).scope();
+                            if (itemScope && itemScope !== scope) {
+                                destroyScope(itemScope, el);
                             }
-                        }
+                        });
+                        break;
 
-                        $compile(el)(itemScope || scope);
-                    });
-                    digest(scope);
-                    break;
+                      case "compile":
+                        angular.forEach(elements, function(el, i){
+                            var itemScope;
+                            if (x.scopeFrom) {
+                                itemScope = angular.element(x.scopeFrom).scope();
+                            } else {
+                                var vars = data && data[i];
+                                if (vars !== undefined) {
+                                    itemScope = $.extend(scope.$new(), vars);
+                                }
+                            }
+
+                            $compile(el)(itemScope || scope);
+                        });
+                        digest(scope);
+                        break;
+                    }
                 }
-            }
+            });
         }
     });
 
@@ -681,7 +697,8 @@
     defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
         handler = $parse(handler);
         return function(e) {
-            if (/^\$(apply|digest)$/.test(scope.$root.$$phase)) {
+            var root = scope.$root || scope;
+            if (/^\$(apply|digest)$/.test(root.$$phase)) {
                 handler(scope, { kendoEvent: e });
             } else {
                 scope.$apply(function() { handler(scope, { kendoEvent: e }); });
@@ -741,7 +758,7 @@
         if (options.columns) {
             var settings = $.extend({}, kendo.Template, options.templateSettings);
             angular.forEach(options.columns, function(col){
-                if (col.field && !col.template && !col.format && !col.values) {
+                if (col.field && !col.template && !col.format && !col.values && (col.encoded === undefined || col.encoded)) {
                     col.template = "<span ng-bind='" +
                         kendo.expr(col.field, "dataItem") + "'>#: " +
                         kendo.expr(col.field, settings.paramName) + "#</span>";
