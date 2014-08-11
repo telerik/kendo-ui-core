@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes", "../util",
            "./svg",
            "./services",
            "./layout" ], f);
