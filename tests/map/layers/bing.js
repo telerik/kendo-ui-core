@@ -94,6 +94,18 @@
                 "Bing tile layer: API key is required"
             );
         });
+
+        test("sets URI Scheme for HTTPS protocol", function() {
+            equal(layer._scheme("https:"), "https");
+        });
+
+        test("sets URI Scheme for HTTP protocol", function() {
+            equal(layer._scheme("http:"), "http");
+        });
+
+        test("sets URI Scheme for other protocols", function() {
+            equal(layer._scheme("foo:"), "http");
+        });
     })();
 
     baseLayerTests("Bing Layer", BingLayerDouble);

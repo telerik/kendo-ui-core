@@ -43,22 +43,23 @@
                 throw new Error("Bing tile layer: API key is required");
             }
 
-            var url = options.baseUrl + options.imagerySet;
-            var proto = window.location.protocol.replace(":", "") === "https" ? "https" : "http";
-
             $.ajax({
-                url: url,
+                url: options.baseUrl + options.imagerySet,
                 data: {
                     output: "json",
                     include: "ImageryProviders",
                     key: options.key,
-                    uriScheme: proto
+                    uriScheme: this._scheme(window.location.protocol)
                 },
                 type: "get",
                 dataType: "jsonp",
                 jsonp: "jsonp",
                 success: this._onMetadata
             });
+        },
+
+        _scheme: function(proto) {
+            return proto.replace(":", "") === "https" ? "https" : "http";
         },
 
         _onMetadata: function(data) {
