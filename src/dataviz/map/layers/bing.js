@@ -26,41 +26,43 @@
     var BingLayer = TileLayer.extend({
         init: function(map, options) {
             TileLayer.fn.init.call(this, map, options);
-            this._initView();
+
+            this._onMetadata = $.proxy(this._onMetadata, this);
+            this._fetchMetadata();
         },
 
         options: {
-            settingsUrl: "//dev.virtualearth.net/REST/v1/Imagery/Metadata/#= imagerySet #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #",
+            baseUrl: "//dev.virtualearth.net/REST/v1/Imagery/Metadata/",
             imagerySet: "road"
         },
 
-        _initView: function() {
+        _fetchMetadata: function() {
             var options = this.options;
-
-            if (!options.settingsUrl) {
-                return;
-            }
 
             if (!options.key) {
                 throw new Error("Bing tile layer: API key is required");
             }
 
-            var settingsTemplate = template(options.settingsUrl);
-            var settingsUrl = settingsTemplate({
-                    key: options.key,
-                    imagerySet: options.imagerySet
-                });
-
             $.ajax({
-                url: settingsUrl,
+                url: options.baseUrl + options.imagerySet,
+                data: {
+                    output: "json",
+                    include: "ImageryProviders",
+                    key: options.key,
+                    uriScheme: this._scheme(window.location.protocol)
+                },
                 type: "get",
                 dataType: "jsonp",
-                jsonpCallback: "bingTileParams",
-                success: proxy(this._success, this)
+                jsonp: "jsonp",
+                success: this._onMetadata
             });
         },
 
-        _success: function(data) {
+        _scheme: function(proto) {
+            return proto.replace(":", "") === "https" ? "https" : "http";
+        },
+
+        _onMetadata: function(data) {
             if (data && data.resourceSets.length) {
                 var resource = this.resource = data.resourceSets[0].resources[0];
 
