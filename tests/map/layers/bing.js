@@ -8,7 +8,9 @@
         deepExtend = kendo.deepExtend,
         Point = dataviz.geometry.Point;
 
-    var VOID_URL = "javascript: void(0);";
+    var BingLayerDouble = BingLayer.extend({
+        _fetchMetadata: $.noop
+    });
 
     (function() {
         var map,
@@ -16,16 +18,14 @@
 
         function createBingLayer(options) {
             map = new MapMock();
-            layer = new BingLayer(map, deepExtend({
-                settingsUrl: null
-            }, options));
+            layer = new BingLayerDouble(map, options);
         }
 
-        function setResource(res) {
-            layer._success({
+        function setMetadata(res) {
+            layer._onMetadata({
                 resourceSets: [{
                     resources: [deepExtend({
-                        imageUrl: VOID_URL
+                        imageUrl: "javascript: void(0);"
                     }, res)]
                 }]
             });
@@ -42,11 +42,6 @@
             ok(layer.element.parent().is("#scroll-element"));
         });
 
-        test("sets custom z-index", function() {
-            createBingLayer({ zIndex: 100 });
-            equal(layer.element.css("zIndex"), 100);
-        });
-
         test("renders in initial element", function() {
             var element = layer.element;
 
@@ -56,11 +51,11 @@
                 ok(layer._view.element.is(element));
             }
 
-            setResource();
+            setMetadata();
         });
 
         test("sets minZoom from metadata", function() {
-            setResource({
+            setMetadata({
                 zoomMin: 4
             });
 
@@ -68,7 +63,7 @@
         });
 
         test("sets maxZoom from metadata", function() {
-            setResource({
+            setMetadata({
                 zoomMax: 4
             });
 
@@ -76,7 +71,7 @@
         });
 
         test("sets subdomains from metadata", function() {
-            setResource({
+            setMetadata({
                 imageUrlSubdomains: ["a", "b", "c"]
             });
 
@@ -84,7 +79,7 @@
         });
 
         test("converts imageUrl to urlTemplate", function() {
-            setResource({
+            setMetadata({
                 imageUrl: "javascript:void('{subdomain}/{quadkey}/{culture}')"
             });
 
@@ -93,16 +88,25 @@
 
         test("error is thrown if no key is defined", function() {
             raises(function() {
-                    createBingLayer({ key: null, settingsUrl: VOID_URL });
+                    map = new MapMock();
+                    layer = new BingLayer(map);
                 },
-                Error
+                "Bing tile layer: API key is required"
             );
+        });
+
+        test("sets URI Scheme for HTTPS protocol", function() {
+            equal(layer._scheme("https:"), "https");
+        });
+
+        test("sets URI Scheme for HTTP protocol", function() {
+            equal(layer._scheme("http:"), "http");
+        });
+
+        test("sets URI Scheme for other protocols", function() {
+            equal(layer._scheme("foo:"), "http");
         });
     })();
 
-    var DummyBingLayer = BingLayer.extend({
-        _initView: $.noop
-    });
-
-    baseLayerTests("Bing Layer", DummyBingLayer);
+    baseLayerTests("Bing Layer", BingLayerDouble);
 })();
