@@ -310,6 +310,6 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "Başarız Oldu",
   "statusUploaded": "Yüklendi",
   "statusUploading": "Yükleniyor",
-  "uploadSelectedFiles": "Dosyaları Yükle"
+  "uploadSelectedFiles": "seçilen dosyaları Yükle"
 });
 }
