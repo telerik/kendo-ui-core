@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../../kendo.dataviz.drawing", "../../kendo.dataviz.geometry", "./math" ], f);
+    define([ "../../kendo.dataviz.drawing", "./math" ], f);
 })(function(){
 
 (function ($, undefined) {
