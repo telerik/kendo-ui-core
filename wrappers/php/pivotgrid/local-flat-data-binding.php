@@ -62,7 +62,7 @@ $dataSource = new \Kendo\Data\PivotDataSource();
 
 $dataSource ->addColumn($categoryColumn, $productNameColumn)
             ->addRow($discontinuedRow)
-            ->addMeasure(array('Sum'))
+            ->addMeasure('Sum')
             ->data($data)
             ->schema($schema);
 
