@@ -165,7 +165,6 @@ Directory.prototype = {
     encode: function(tables) {
         var tableCount = Object.keys(tables).length;
 
-        // if my understanding is correct, PDFKit messes this up.
         var maxpow2 = Math.pow(2, Math.floor(Math.log(tableCount) / Math.LN2));
         var searchRange = maxpow2 * 16;
         var entrySelector = Math.floor(Math.log(maxpow2) / Math.LN2);
@@ -235,7 +234,7 @@ function deftable(methods) {
     };
     for (var i in methods) {
         if (hasOwnProperty(methods, i)) {
-            Ctor.prototype[i] = methods[i];
+            Ctor[i] = Ctor.prototype[i] = methods[i];
         }
     }
     return Ctor;
@@ -299,7 +298,7 @@ var LocaTable = deftable({
             this.offsets = data.times(this.length / 4, data.readLong);
         }
     },
-    indexOf: function(id) {
+    offsetOf: function(id) {
         return this.offsets[id];
     },
     lengthOf: function(id) {
@@ -317,7 +316,7 @@ var LocaTable = deftable({
         }
         return {
             format: needsLongFormat ? 1 : 0,
-            data: out.get()
+            table: out.get()
         };
     }
 });
@@ -385,7 +384,7 @@ var MaxpTable = deftable({
         this.maxComponentDepth = data.readShort();
     },
     encode: function(glyphIds) {
-        var out = new Data();
+        var out = BinaryStream();
         out.writeLong(this.version);
         out.writeShort(glyphIds.length);
         out.writeShort(this.maxPoints);
@@ -419,6 +418,7 @@ var HmtxTable = deftable({
         this.leftSideBearings = data.times(lsbCount, data.readShort_);
     },
     forGlyph: function(id) {
+        var metrics = this.metrics;
         var n = metrics.length;
         if (id < n)
             return metrics[id];
@@ -440,12 +440,15 @@ var HmtxTable = deftable({
 
 var GlyfTable = (function(){
 
-    SimpleGlyph.prototype.compound = false;
-    function SimpleGlyph(data, offset, length) {
-        this.encode = function() {
-            return data.slice(offset, length);
-        };
+    function SimpleGlyph(raw) {
+        this.raw = raw;
     }
+    SimpleGlyph.prototype = {
+        compound: false,
+        encode: function() {
+            return this.raw.get();
+        }
+    };
 
     var ARG_1_AND_2_ARE_WORDS     = 0x0001
     var WE_HAVE_A_SCALE           = 0x0008
@@ -454,11 +457,10 @@ var GlyfTable = (function(){
     var WE_HAVE_A_TWO_BY_TWO      = 0x0080
     var WE_HAVE_INSTRUCTIONS      = 0x0100
 
-    CompoundGlyph.prototype.compound = true;
-    function CompoundGlyph(data, offset, length) {
-        this.raw = data = BinaryStream(data.slice(offset, length));
+    function CompoundGlyph(data) {
+        this.raw = data;
         var ids = this.glyphIds = [];
-        var offsets = this.glyphOffsets = [];
+        var offsets = this.idOffsets = [];
         while (true) {
             var flags = data.readShort();
             offsets.push(data.offset());
@@ -479,13 +481,17 @@ var GlyfTable = (function(){
         }
     }
 
-    CompoundGlyph.prototype.encode = function(mapping) {
-        var out = this.raw;
-        for (var i = 0; i < this.glyphIds.length; ++i) {
-            out.offset(this.glyphOffsets[i]);
-            out.writeShort(mapping[id]);
+    CompoundGlyph.prototype = {
+        compound: true,
+        encode: function(old2new) {
+            var out = BinaryStream(this.raw.get());
+            for (var i = 0; i < this.glyphIds.length; ++i) {
+                var id = this.glyphIds[i];
+                out.offset(this.idOffsets[i]);
+                out.writeShort(old2new[id]);
+            }
+            return out.get();
         }
-        return out.get();
     };
 
     return deftable({
@@ -504,18 +510,18 @@ var GlyfTable = (function(){
                 return cache[id] = null;
 
             var data = this.rawData;
-            var offset = this.offset + loca.indexOf(id);
-            data.offset(offset);
+            var offset = this.offset + loca.offsetOf(id);
+            var raw = BinaryStream(data.slice(offset, length));
 
-            var numberOfContours = data.readShort_();
-            var xMin = data.readShort_();
-            var yMin = data.readShort_();
-            var xMax = data.readShort_();
-            var yMax = data.readShort_();
+            var numberOfContours = raw.readShort_();
+            var xMin = raw.readShort_();
+            var yMin = raw.readShort_();
+            var xMax = raw.readShort_();
+            var yMax = raw.readShort_();
 
             var glyph = cache[id] = numberOfContours == -1
-                ? new CompoundGlyph(data, offset, length)
-                : new SimpleGlyph(data, offset, length);
+                ? new CompoundGlyph(raw)
+                : new SimpleGlyph(raw);
 
             glyph.numberOfContours = numberOfContours;
             glyph.xMin = xMin;
@@ -525,19 +531,19 @@ var GlyfTable = (function(){
 
             return glyph;
         },
-        encode: function(glyphs, mapping, old2new) {
+        encode: function(glyphs, oldIds, old2new) {
             var out = BinaryStream(), offsets = [];
-            for (var i = 0; i < mapping.length; ++i) {
-                offsets.push(out.offset());
-                var id = mapping[i];
+            for (var i = 0; i < oldIds.length; ++i) {
+                var id = oldIds[i];
                 var glyph = glyphs[id];
+                offsets.push(out.offset());
                 if (glyph) {
                     out.write(glyph.encode(old2new));
                 }
             }
             offsets.push(out.offset());
             return {
-                data: out.get(),
+                table: out.get(),
                 offsets: offsets
             };
         }
@@ -637,7 +643,7 @@ var NameTable = (function(){
 
             return {
                 psName: ps.text,
-                data: out.get()
+                table: out.get()
             };
         }
     });
@@ -789,14 +795,31 @@ var CmapTable = (function(){
                 var glyphIds = data.times(count, data.readShort);
 
                 for (var i = 0; i < segCount; ++i) {
-                    var end = endCode[i];
-                    var start = startCode[i];
+                    var start = startCode[i], end = endCode[i];
                     for (var code = start; code <= end; ++code) {
                         var glyphId;
                         if (idRangeOffset[i] == 0) {
                             glyphId = code + idDelta[i];
                         } else {
-                            var index = idRangeOffset[i] / 2 + (code - start) - (segCount - i);
+                            ///
+                            // When non-zero, idRangeOffset contains for each segment the byte offset of the Glyph ID
+                            // into the glyphIds table, from the *current* `i` cell of idRangeOffset.  In other words,
+                            // this offset spans from the first into the second array.  This works, because the arrays
+                            // are consecutive in the TTF file:
+                            //
+                            //     [ ...idRangeOffset... ][ ...glyphIds... ]
+                            //       ...... 48 ......       .... ID ....
+                            //              ^----- 48 bytes -----^
+                            //
+                            // (but I can't stop wondering why is it not just a plain index, possibly incremented by 1
+                            // so that we can have that special `zero` value.)
+                            //
+                            // The elements of idRangeOffset are even numbers, because both arrays contain 16-bit words,
+                            // yet the offset is in bytes.  That is why we divide it by 2.  Then we subtract the
+                            // remaining segments (segCount-i), and add the code-start offset, to which we need to add
+                            // the corresponding delta to get the actual glyph ID.
+                            ///
+                            var index = idRangeOffset[i] / 2 - (segCount - i) + (code - start);
                             glyphId = glyphIds[index] || 0;
                             if (glyphId != 0) glyphId += idDelta[i];
                         }
@@ -807,44 +830,368 @@ var CmapTable = (function(){
         });
     }
 
+    // function splitChunks(codes) {
+    //     var a = null;
+    //     var chunks = [];
+    //     for (var i = 0; i < codes.length; ++i) {
+    //         var code = codes[i];
+    //         if (a == null || code - a[a.length - 1] > 1) {
+    //             a = [];
+    //             chunks.push(a);
+    //         }
+    //         a.push(code);
+    //     }
+    //     return chunks;
+    // }
+
+    function encodeCharmap(charmap) {
+        var codes = [];
+        for (var i in charmap) {
+            if (hasOwnProperty(charmap, i)) {
+                codes.push(parseInt(i, 10));
+            }
+        }
+        codes = codes.sort(function(a, b){ return a - b });
+        var startCodes = [];
+        var endCodes = [];
+        var nextID = 0;
+        var map = {};
+        var charMap = {};
+        var last = null;
+        var diff = null;
+
+        for (var i = 0; i < codes.length; ++i) {
+            var code = codes[i];
+            var old = charmap[code];
+            if (map[old] == null) {
+                map[old] = ++nextID;
+            }
+            charMap[code] = { new: map[old], old: old };
+            var delta = map[old] - code;
+            if (last == null || delta !== diff) {
+                if (last) endCodes.push(last);
+                startCodes.push(code);
+                diff = delta;
+            }
+            last = code;
+        }
+
+        if (last) endCodes.push(last);
+        endCodes.push(0xFFFF);
+        startCodes.push(0xFFFF);
+
+        var segCount = startCodes.length;
+        var segCountX2 = segCount * 2;
+        var searchRange = 2 * Math.pow(2, Math.floor(Math.log(segCount) / Math.LN2));
+        var entrySelector = Math.log(searchRange / 2) / Math.LN2;
+        var rangeShift = segCountX2 - searchRange;
+
+        var deltas = [];
+        var rangeOffsets = [];
+        var glyphIds = [];
+
+        for (var i = 0; i < segCount; ++i) {
+            var startCode = startCodes[i];
+            var endCode = endCodes[i];
+            if (startCode == 0xFFFF) {
+                deltas.push(0);
+                rangeOffsets.push(0);
+                break;
+            }
+            var startGlyph = charMap[startCode].new;
+            if (startCode - startGlyph >= 0x8000) {
+                deltas.push(0);
+                rangeOffsets.push(2 * (glyphIds.length + segCount - i));
+                for (var j = startCode; j <= endCode; ++j) {
+                    glyphIds.push(charMap[j].new);
+                }
+            } else {
+                deltas.push(startGlyph - startCode);
+                rangeOffsets.push(0);
+            }
+        }
+
+        var out = BinaryStream();
+
+        out.writeShort(3);      // platformID
+        out.writeShort(1);      // platformSpecificID
+        out.writeLong(12);      // offset
+        out.writeShort(4);      // format
+        out.writeShort(16 + segCount * 8 + glyphIds.length * 2); // length
+        out.writeShort(0);      // language
+        out.writeShort(segCountX2);
+        out.writeShort(searchRange);
+        out.writeShort(entrySelector);
+        out.writeShort(rangeShift);
+
+        function addArray(a) {
+            for (var i = 0; i < a.length; ++i) {
+                out.writeShort(a[i]);
+            }
+        }
+
+        addArray(endCodes);
+        out.writeShort(0);      // reserved pad
+        addArray(startCodes);
+        addArray(deltas);
+        addArray(rangeOffsets);
+        addArray(glyphIds);
+
+        return {
+            charMap: charMap,
+            subtable: out.get(),
+            maxGlyphId: nextID + 1
+        };
+    }
+
     return deftable({
         parse: function(data) {
-            var offset = this.offset;
+            var self = this;
+            var offset = self.offset;
             data.offset(offset);
 
-            this.version = data.readShort();
+            self.version = data.readShort();
             var tableCount = data.readShort();
-            var hasUnicode = false;
-            this.tables = data.times(tableCount, function(){
+            self.unicodeEntry = null;
+            self.tables = data.times(tableCount, function(){
                 var entry = new CmapEntry(data, offset);
-                if (entry.isUnicode) hasUnicode = true;
+                if (entry.isUnicode) self.unicodeEntry = entry;
                 return entry;
             });
-
-            this.hasUnicode = hasUnicode;
+        },
+        encode: function(charmap) {
+            var result = encodeCharmap(charmap);
+            var out = BinaryStream();
+            out.writeShort(0);  // version
+            out.writeShort(1);  // tableCount
+            out.write(result.subtable);
+            result.table = out.get();
+            return result;
+        },
+        getUnicodeEntry: function() {
+            if (!this.unicodeEntry) {
+                throw new Error("Font doesn't have an Unicode encoding");
+            }
+            return this.unicodeEntry;
         }
     });
 
 })();
+
+var OS2Table = deftable({
+    parse: function(data) {
+        // XXX: not sure this is needed yet
+    },
+    encode: function() {
+        return this.raw();
+    }
+})
+
+function Subfont(font) {
+    this.font = font;
+    this.subset = {};
+    this.unicodes = {};
+    this.next = 32;
+}
+
+Subfont.prototype = {
+    use: function(ch) {
+        if (typeof ch == "string") {
+            var ret = "";
+            for (var i = 0; i < ch.length; ++i) {
+                var code = this.use(ch.charCodeAt(i));
+                ret += String.fromCharCode(code);
+            }
+            return ret;
+        }
+        var code = this.unicodes[ch];
+        if (!code) {
+            code = this.next++;
+            this.subset[code] = ch;
+            this.unicodes[ch] = code;
+        }
+        return code;
+    },
+    encodeText: function(text) {
+        return this.use(text);
+    },
+    generateCmap: function() {
+        // unicodeCmap maps char code -> glyphId
+        var unicodeCmap = this.font.cmap.getUnicodeEntry().codeMap;
+        // the returned mapping will be internal (subset) codes -> glyphId
+        var mapping = {};
+        for (var i in this.subset) {
+            if (hasOwnProperty(this.subset, i)) {
+                mapping[i] = unicodeCmap[this.subset[i]];
+            }
+        }
+        return mapping;
+    },
+    glyphIds: function() {
+        var unicodeCmap = this.font.cmap.getUnicodeEntry().codeMap;
+        var ret = [ 0 ];
+        for (var i in this.subset) {
+            if (hasOwnProperty(this.subset, i)) {
+                var id = unicodeCmap[this.subset[i]];
+                if (id != null && ret.indexOf(id) < 0) {
+                    ret.push(id);
+                }
+            }
+        }
+        return ret.sort();
+    },
+    glyphsFor: function(glyphIds, result) {
+        if (!result) result = {};
+        for (var i = 0; i < glyphIds.length; ++i) {
+            var id = glyphIds[i];
+            if (!result[id]) {
+                var glyph = result[id] = this.font.glyf.glyphFor(id);
+                if (glyph && glyph.compound) {
+                    this.glyphsFor(glyph.glyphIds, result);
+                }
+            }
+        }
+        return result;
+    },
+    invertObject: function(obj) {
+        var ret = {};
+        for (var i in obj) {
+            if (hasOwnProperty(obj, i)) {
+                ret[obj[i]] = i;
+            }
+        }
+        return ret;
+    },
+    encode: function() {
+        var cmap = CmapTable.encode(this.generateCmap());
+        var glyphs = this.glyphsFor(this.glyphIds());
+        var old2new = { 0: 0 };
+        for (var code in cmap.charMap) {
+            if (hasOwnProperty(cmap.charMap, code)) {
+                var ids = cmap.charMap[code];
+                old2new[ids.old] = ids.new;
+            }
+        }
+
+        var nextGlyphId = cmap.maxGlyphId;
+        for (var oldId in glyphs) {
+            if (hasOwnProperty(glyphs, oldId)) {
+                if (!hasOwnProperty(old2new, oldId)) {
+                    oldId = parseInt(oldId, 10);
+                    old2new[oldId] = nextGlyphId++;
+                }
+            }
+        }
+
+        // XXX: IE8.
+        var new2old = this.invertObject(old2new);
+        var newIds = Object.keys(new2old).sort(function(a, b){ return a - b });
+        var oldIds = newIds.map(function(id){
+            return new2old[id];
+        });
+
+        var glyf = this.font.glyf.encode(glyphs, oldIds, old2new);
+        var loca = this.font.loca.encode(glyf.offsets);
+        var name = this.font.name.encode();
+
+        this.psName = name.psName;
+        this.cmap = {};
+        for (var code in cmap.charMap) {
+            if (hasOwnProperty(cmap.charMap, code)) {
+                var ids = cmap.charMap;
+                this.cmap[code] = ids.old;
+            }
+        }
+
+        var tables = {
+            "cmap" : cmap.table,
+            "glyf" : glyf.table,
+            "loca" : loca.table,
+            "hmtx" : font.hmtx.encode(oldIds),
+            "hhea" : font.hhea.encode(oldIds),
+            "maxp" : font.maxp.encode(oldIds),
+            "post" : font.post.encode(oldIds),
+            "name" : name.table,
+            "head" : font.head.encode(loca.format),
+            "OS/2" : font.os2.encode()
+        };
+
+        return this.font.directory.encode(tables);
+    }
+};
+
+function TTFFont(rawData, name) {
+    var self = this;
+    var data = self.contents = BinaryStream(rawData);
+    if (data.readString(4) == "ttcf") {
+        if (!name) {
+            throw new Error("Must specify a name for TTC files");
+        }
+        var version = data.readLong();
+        var numFonts = data.readLong();
+        for (var i = 0; i < numFonts; ++i) {
+            var offset = data.readLong();
+            data.saveExcursion(function(){
+                data.offset(offset);
+                self.parse();
+            });
+            if (self.psName == name) return;
+        }
+        throw new Error("Font " + name + " not found in collection");
+    } else {
+        data.offset(0);
+        self.parse();
+    }
+}
+
+TTFFont.prototype = {
+    parse: function() {
+        var dir = this.directory = new Directory(this.contents);
+        this.head = dir.readTable("head", HeadTable);
+        this.loca = dir.readTable("loca", LocaTable);
+        this.hhea = dir.readTable("hhea", HheaTable);
+        this.maxp = dir.readTable("maxp", MaxpTable);
+        this.hmtx = dir.readTable("hmtx", HmtxTable);
+        this.glyf = dir.readTable("glyf", GlyfTable);
+        this.name = dir.readTable("name", NameTable);
+        this.post = dir.readTable("post", PostTable);
+        this.cmap = dir.readTable("cmap", CmapTable);
+        this.os2  = dir.readTable("OS/2", OS2Table);
+    },
+    glyphIdForCharCode: function(code) {
+        return this.cmap.unicodeEntry.codeMap[code];
+    },
+    widthOfGlyph: function(glyph) {
+        return this.hmtx.forGlyph(glyph).advance * 1000 / this.head.unitsPerEm;
+    }
+};
 
 ///
 
 var data = fs.readFileSync("Ubuntu-C.ttf", { encoding: "binary" });
 var str = data.toString({ encoding: "binary" });
 
-var input = BinaryStream(str);
-var dir = new Directory(input);
-dir.readTable("head", HeadTable);
-dir.readTable("loca", LocaTable);
-dir.readTable("hhea", HheaTable);
-dir.readTable("maxp", MaxpTable);
-dir.readTable("hmtx", HmtxTable);
-dir.readTable("glyf", GlyfTable);
-dir.readTable("name", NameTable);
-dir.readTable("post", PostTable);
-dir.readTable("cmap", CmapTable);
+var font = new TTFFont(str);
+var subset = new Subfont(font);
 
-console.log(dir.cmap);
+// for (var i = 32; i < 8000; ++i) {
+//     subset.use(parseInt(i, 10));
+// }
+
+subset.use("абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя");
+
+// var x = Object.keys(font.cmap.unicodeEntry.codeMap).sort(function(a, b){ return a - b });
+// for (var i = 0; i < x.length; ++i) {
+//     var id = parseInt(x[i], 10);
+//     if (id >= 32 && id < 2048) {
+//         subset.use(id);
+//     }
+// }
+
+var bytes = subset.encode();
+//var data = new Buffer(bytes);
+var data = bytes;
+fs.writeFileSync("/tmp/out.ttf", data, { encoding: "binary" });
 
 //console.log(dir.name.encode());
 
