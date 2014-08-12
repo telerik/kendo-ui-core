@@ -6,7 +6,7 @@ var __meta__ = {
     id: "dataviz.treeMap",
     name: "TreeMap",
     category: "dataviz",
-    description: "",
+    description: "The Kendo DataViz TreeMap",
     depends: [ "data", "userevents", "dataviz.themes" ]
 };
 
