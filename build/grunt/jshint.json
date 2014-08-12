@@ -1,6 +1,7 @@
 {
     "files": [
     "src/kendo*.js",
+    "src/messages/kendo*.js",
     "src/editor/*.js",
     "src/dataviz/**/*.js",
     "tests/map/layers/helpers.js",
