@@ -3,7 +3,7 @@
 if git remote | grep -q core;
 then
     echo "core remote found, switching to core-$BRANCH branch"
-    git checkout core-$BRANCH; git pull
+    git checkout -f core-$BRANCH; git pull
 else
     echo "core remote not found, adding..."
     git remote add core git@github.com:telerik/kendo-ui-core.git
