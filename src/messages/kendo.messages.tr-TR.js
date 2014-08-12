@@ -228,7 +228,7 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
-  "display": "{0} - {1} {2} öğeleri",
+  "display": "{0} - {1} aralığı gösteriliyor. Toplam {2} öğe var",
   "empty": "Görüntülenecek öğe yok",
   "first": "İlk sayfaya git",
   "itemsPerPage": "Sayfa başına ürün",
@@ -310,6 +310,6 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "Başarız Oldu",
   "statusUploaded": "Yüklendi",
   "statusUploading": "Yükleniyor",
-  "uploadSelectedFiles": "Dosyaları Yükle"
+  "uploadSelectedFiles": "seçilen dosyaları Yükle"
 });
 }
