@@ -6,8 +6,8 @@ var __meta__ = {
     id: "dataviz.treeMap",
     name: "TreeMap",
     category: "dataviz",
-    description: "",
-    depends: [ "data", "userevents", "./kendo.dataviz.core", "dataviz.themes" ]
+    description: "The Kendo DataViz TreeMap",
+    depends: [ "data", "userevents", "dataviz.themes" ]
 };
 
 (function($, undefined) {
