@@ -200,6 +200,7 @@ var TypingHandler = Class.extend({
 
         if (evt.isDefaultPrevented()) {
             e.preventDefault();
+            return true;
         }
 
         if (!evt.isDefaultPrevented() && isTypingKey && !keyboard.isTypingInProgress()) {
