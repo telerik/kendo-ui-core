@@ -91,6 +91,28 @@ module.exports = function(grunt) {
         });
     }
 
+    function makeMessages(task) {
+        var destDir = task.files[0].dest;
+        var files = UTILS.getSrc(task);
+        files.forEach(function(f){
+            var basename = PATH.basename(f);
+            var dest = PATH.join(destDir, basename);
+            var destMin = dest.replace(/\.js$/, ".min.js");
+            if (UTILS.outdated(f, dest)) {
+                var code = grunt.file.read(f, { encoding: "utf8" });
+
+                code = META.wrapAMD([], code);
+                grunt.log.writeln("Writing " + dest);
+                grunt.file.write(dest, code);
+
+                var ast = META.minify(code);
+                code = ast.print_to_string();
+                grunt.log.writeln("Writing " + destMin);
+                grunt.file.write(destMin, code);
+            }
+        });
+    }
+
     grunt.registerMultiTask("kendo", "Kendo UI build task", function(){
         var task = this;
         switch (task.target) {
@@ -98,9 +120,11 @@ module.exports = function(grunt) {
           case "full":
             makeSources(task);
             break;
-
           case "cultures":
             makeCultures(task);
+            break;
+          case "messages":
+            makeMessages(task);
             break;
         }
     });
