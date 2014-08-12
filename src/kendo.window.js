@@ -1175,7 +1175,7 @@ var __meta__ = {
             wrapper.find(".k-window-title")
                 .css(isRtl ? "left" : "right", wrapper.find(".k-window-actions").outerWidth() + 10);
 
-            contentHtml.show();
+            contentHtml.css("visibility", "").show();
 
             contentHtml.find("[data-role=editor]").each(function() {
                 var editor = $(this).data("kendoEditor");
