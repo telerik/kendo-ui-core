@@ -2664,7 +2664,7 @@ function pad(number, digits, end) {
             that.angular(cmd, function(){
                 return {
                     elements: that.items(),
-                    data: that.dataItems().map(function(dataItem){
+                    data: $.map(that.dataItems(), function(dataItem){
                         return { dataItem: dataItem };
                     })
                 };
