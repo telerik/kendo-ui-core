@@ -98,7 +98,12 @@ var __meta__ = {
 
             //gets the type from the dataSource or sets default to string
             that.model = dataSource.reader.model;
-            type = options.type = kendo.getter("reader.model.fields['" + options.field + "'].type", true)(dataSource) || STRING;
+            type = options.type = STRING;
+            var fields = kendo.getter("reader.model.fields", true)(dataSource) || {};
+            var target = fields[options.field];
+            if (target && target.type) {
+                type = options.type = target.type;
+            }
             if (options.values) {
                 options.type = type = ENUM;
             }
