@@ -15,7 +15,18 @@
 
     var $injector, $controller, $scope, $compile;
 
-    var app = angular.module("MyApp", [ "kendo.directives", "ngRoute" ]);
+    angular.module("my.directives", []).directive("isolatedScope", function(){
+        return {
+            scope: {
+                "foo": "@"
+            },
+            restrict: "A",
+            transclude: true,
+            template: "<div><h1>Isolated Scope</h1><span ng-transclude></span></div>"
+        };
+    });
+
+    var app = angular.module("MyApp", [ "kendo.directives", "my.directives", "ngRoute" ]);
     app.controller("MyCtrl", function($scope){
         $scope.windowOptions = {
             title: "Das titlen"
@@ -25,6 +36,12 @@
             { text: "Bar", id: 2 }
         ]);
         $scope.hello = "Hello World!";
+        $scope.whenRendered = function(f) {
+            var off = $scope.$on("kendoRendered", function(){
+                off();
+                f.apply(null, arguments);
+            });
+        };
     });
 
     $.mockjaxSettings.responseTime = 0;
@@ -94,7 +111,7 @@
         var colorPicker = $("<input kendo-color-picker />").appendTo(dom);
         var grid = $("<div kendo-grid></div>").appendTo(dom);
 
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             start();
             ok(slider.data("kendoSlider") instanceof kendo.ui.Slider);
             ok(numericTextBox.data("kendoNumericTextBox") instanceof kendo.ui.NumericTextBox);
@@ -108,7 +125,7 @@
     runTest("store widget reference in $scope", function(dom){
         $("<div kendo-window='window' k-title='\"Reference\"'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             ok($scope.window instanceof kendo.ui.Window);
             equal($scope.window.title(), "Reference");
             start();
@@ -119,7 +136,7 @@
         var w1 = $("<div kendo-window k-options='windowOptions'></div>").appendTo(dom);
         var w2 = $("<div kendo-window k-title='windowOptions.title'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             w1 = w1.data("kendoWindow");
             w2 = w2.data("kendoWindow");
             equal(w1.title(), $scope.windowOptions.title);
@@ -131,7 +148,7 @@
     runTest("handle unprefixed options", function(dom){
         var w = $("<div kendo-window options='windowOptions'></div>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             equal(w.data("kendoWindow").title(), $scope.windowOptions.title);
             start();
         });
@@ -140,7 +157,7 @@
     runTest("handle unprefixed on- options", function(dom){
         var theSwitch = $("<div kendo-mobileswitch on-label='onLabel'></div>").appendTo(dom);
         $scope.onLabel = "ONE"
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             equal(theSwitch.data("kendoMobileSwitch").options.onLabel, "ONE");
             start();
         });
@@ -154,7 +171,7 @@
             { foo: "value", bar: "text" }
         ];
 
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             equal(ddl.find('option').attr("value"), "value");
             equal(ddl.find('option').text(), "text");
             equal(ddl.data('kendoDropDownList').options.dataValueField, 'foo');
@@ -173,7 +190,7 @@
         };
         var input = $("<input kendo-autocomplete='autocomplete' k-options='options' />").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             input.type("b");
             $scope.autocomplete.search();
             input.press(kendo.keys.DOWN);
@@ -193,7 +210,7 @@
         };
         var combo = $("<input kendo-combobox='combobox' k-options='options' />").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             $scope.combobox.open();
             var items = $scope.combobox.items();
             equal($(items[0]).text(), "| Foo |");
@@ -214,7 +231,7 @@
         };
         $("<div kendo-listview='list' k-options='options'></div>").appendTo(dom);
         expect(3);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.list.items();
             equal(items.eq(0).text(), "Foo 1");
             equal(items.eq(1).text(), "2 Bar");
@@ -232,7 +249,7 @@
         };
         var input = $("<select kendo-dropdownlist='list' k-options='options'></select>").appendTo(dom);
         expect(3);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.list.items();
             equal($(items[0]).text(), "Foo 1");
             equal($(items[1]).text(), "Bar 2");
@@ -260,7 +277,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(4);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var rows = $("tr", $scope.grid.tbody);
             equal($($scope.grid.thead[0].rows[0].cells[0]).text(), "6");
             equal($($scope.grid.element.find(".k-footer-template")[0].cells[0]).text(), "8");
@@ -281,7 +298,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var grid = $scope.grid;
             function firstRow() {
                 return grid.items().eq(0);
@@ -310,7 +327,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(5);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var grid = $scope.grid;
             var el = grid.element;
             var tbody = grid.tbody;
@@ -349,7 +366,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var grid = $scope.grid;
             grid.editRow(grid.tbody.find("tr:first"));
             var el = grid._editContainer.find(".my-editable");
@@ -367,7 +384,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.grid.items();
             equal(items.eq(0).text(), "1. Foo");
             equal(items.eq(1).text(), "2. Bar");
@@ -390,7 +407,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.grid.items();
             equal($scope.grid.tbody.text(), "|1||2|");
             equal($scope.grid.lockedContent.text(), "|Foo||Bar|");
@@ -420,7 +437,7 @@
         };
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
         expect(5);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var toolbar = $scope.grid.element.find(".k-grid-toolbar .my-toolbar");
             var header = $scope.grid.element.find(".k-grid-header");
             var footer = $scope.grid.element.find(".k-grid-footer");
@@ -457,6 +474,30 @@
         $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
     });
 
+    runTest("Grid -- compile custom editor field", function(dom){
+        function createEditor(container, options) {
+            $("<input name='" + options.field + "' kendo-numerictextbox='ns.numericTextBox' k-ng-bind='dataItem.id' />")
+                .appendTo(container);
+        }
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [ { field: "text" }, { field: "id", editor: createEditor } ]
+        };
+        $scope.ns = {};
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(2);
+        $scope.whenRendered(function(){
+            var cell = $($scope.grid.items()[1].cells[1]);
+            $scope.grid.editCell(cell);
+            setTimeout(function(){
+                var ntb = $scope.ns.numericTextBox;
+                ok( ntb instanceof kendo.ui.NumericTextBox );
+                equal( ntb.value(), 2 );
+                start();
+            }, 5);
+        });
+    });
+
     }
 
     if (kendo.ui.TreeView) {
@@ -468,7 +509,7 @@
         };
         $("<div kendo-treeview='tree' k-options='options'></div>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.tree.items();
             equal(items.eq(0).text(), "Foo | 1");
             equal(items.eq(1).text(), "Bar | 2");
@@ -484,7 +525,7 @@
         };
         $("<div kendo-treeview='tree' k-options='options'></div>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var item = $scope.tree.items().eq(0).find(".k-in:first");
             var pos = item.offset();
             trigger("mousedown", item, { pageX: pos.left, pageY: pos.top });
@@ -507,7 +548,7 @@
             };
             $("<textarea kendo-editor='editor' k-options='options'></textarea>").appendTo(dom);
             expect(1);
-            $scope.$on("kendoRendered", function(){
+            $scope.whenRendered(function(){
                 var el = $scope.editor.toolbar.element.find(".my-toolbar");
                 equal(el.text(), "6");
                 start();
@@ -523,7 +564,7 @@
         };
         $("<ul kendo-menu='menu' k-options='options'></ul>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             equal($scope.menu.wrapper.find("li:first").text(), "6");
             start();
         });
@@ -543,7 +584,7 @@
           "  <li><a>Title</a><div class='content'></div></li>" +
           "</ul>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             $scope.panelbar.expand(dom.find("li:first"));
         });
     });
@@ -582,7 +623,7 @@
         $scope.text = "{{3 + 3}}";
         var div = $("<div kendo-tooltip='tooltip' k-content='text'>foo</div>").appendTo(dom);
         expect(1);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             $scope.tooltip.show(div);
             equal($scope.tooltip.content.text(), "6");
             start();
@@ -632,7 +673,7 @@
         };
         $("<div kendo-scheduler='scheduler' k-options='options'></div>").appendTo(dom);
         expect(8);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var scheduler = $scope.scheduler;
             function shouldDestroy(sel) {
                 var scope = scheduler.element.find(sel).scope();
@@ -721,7 +762,7 @@
         };
         $("<div kendo-grid='grid' k-options='options' k-on-change='check(kendoEvent, selected, data, dataItem)'></div>").appendTo(dom);
         expect(4);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             $scope.grid.select($scope.grid.items().eq(0));
         });
     });
@@ -742,11 +783,32 @@
         };
         $("<div kendo-grid='grid' k-options='options' k-on-change='check(selected, data)'></div>").appendTo(dom);
         expect(4);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             $scope.grid.select($scope.grid.items());
         });
     });
     }
+
+    /// custom directives
+
+    runTest("Custom directive with isolated scope", function(dom){
+        $scope.options = {
+            dataSource     : $scope.data,
+            dataTextField  : "text",
+            dataValueField : "id"
+        };
+        $scope.ns = { test: 1 };
+        $("<div isolated-scope><select kendo-dropdownlist='ns.list' ng-model='ns.test' k-options='options'></select></div>").appendTo(dom);
+        expect(2);
+        setTimeout(function(){
+            var dl = $scope.ns.list;
+            equal(dom.find("h1").length, 1);
+            dl.value(2);
+            dl.element.trigger("change");
+            equal($scope.ns.test, 2);
+            start();
+        }, 100);
+    });
 
     /// mobile
 
@@ -757,7 +819,7 @@
         };
         $("<ul kendo-mobilelistview='list' k-options='options'></ul>").appendTo(dom);
         expect(2);
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.list.element.find(".my-item");
             equal(items.eq(0).text(), "1/Foo");
             equal(items.eq(1).text(), "2/Bar");
@@ -774,7 +836,7 @@
         $("<ul kendo-mobilescrollview='list' k-options='options'></ul>").appendTo(dom);
         expect(2);
 
-        $scope.$on("kendoRendered", function(){
+        $scope.whenRendered(function(){
             var items = $scope.list.element.find(".my-item");
             equal(items.eq(0).text(), "1/Foo");
             equal(items.eq(1).text(), "2/Bar");
