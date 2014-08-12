@@ -199,6 +199,11 @@ module.exports = function(grunt) {
                        "!src/cultures/kendo.culture.*.min.js" ],
                 dest: "<%= kendo.options.jsDestDir %>/cultures",
             },
+            messages: {
+                src: [ "src/messages/kendo.messages.*.js",
+                       "!src/messages/kendo.messages.*.min.js" ],
+                dest: "<%= kendo.options.jsDestDir %>/messages",
+            }
         },
 
         download_builder: {
