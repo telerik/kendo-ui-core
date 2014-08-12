@@ -1,13 +1,14 @@
 (function(f, define){
     define([
-            "./kendo.data", "./kendo.draganddrop", "./kendo.userevents", "./kendo.mobile.scroller",
+        "./kendo.data", "./kendo.draganddrop", "./kendo.userevents", "./kendo.mobile.scroller",
+        "./kendo.dataviz.drawing",
 
-           "./dataviz/diagram/utils",
-           "./dataviz/diagram/math",
-           "./dataviz/diagram/svg",
-           "./dataviz/diagram/services",
-           "./dataviz/diagram/layout",
-           "./dataviz/diagram/dom"
+       "./dataviz/diagram/utils",
+       "./dataviz/diagram/math",
+       "./dataviz/diagram/svg",
+       "./dataviz/diagram/services",
+       "./dataviz/diagram/layout",
+       "./dataviz/diagram/dom"
     ], f);
 })(function(){
 
@@ -16,7 +17,7 @@
         name: "Diagram",
         category: "dataviz",
         description: "The Kendo DataViz Diagram ",
-        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core" ]
+        depends: [ "data", "userevents", "mobile.scroller", "draganddrop", "dataviz.core", "dataviz.drawing" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
