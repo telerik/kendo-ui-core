@@ -87,6 +87,40 @@ var __meta__ = {
             return parents;
         },
 
+        _locatePathSource: function(originalSource, path) {
+            var source = originalSource;
+            var result = source.get(path);
+            var index = 0;
+
+            // Traverse the observable hierarchy if the binding is not resolved at the current level.
+            while (result === undefined && source) {
+
+                source = this.parents[++index];
+
+                if (source instanceof ObservableObject) {
+                    result = source.get(path);
+                }
+            }
+
+            // second pass try to get the parent from the object hierarchy
+            if (result === undefined) {
+                source = originalSource; //get the initial source
+
+                while (result === undefined && source) {
+                    source = source.parent();
+
+                    if (source instanceof ObservableObject) {
+                        result = source.get(path);
+                    }
+                }
+            }
+
+            return {
+                source: source,
+                value: result
+            };
+        },
+
         change: function(e) {
             var dependency,
                 ch,
@@ -123,7 +157,8 @@ var __meta__ = {
                 source = that.source,
                 index = 0,
                 path = that.path,
-                result = source;
+                result = source,
+                pathValueAndSource;
 
             if (!that.observable) {
                 return result;
@@ -131,30 +166,9 @@ var __meta__ = {
 
             that.start(that.source);
 
-            result = source.get(path);
-
-            // Traverse the observable hierarchy if the binding is not resolved at the current level.
-            while (result === undefined && source) {
-
-                source = that.parents[++index];
-
-                if (source instanceof ObservableObject) {
-                    result = source.get(path);
-                }
-            }
-
-            // second pass try to get the parent from the object hierarchy
-            if (result === undefined) {
-                source = that.source; //get the initial source
-
-                while (result === undefined && source) {
-                    source = source.parent();
-
-                    if (source instanceof ObservableObject) {
-                        result = source.get(path);
-                    }
-                }
-            }
+            pathValueAndSource = that._locatePathSource(source, path);
+            result = pathValueAndSource.value;
+            source = pathValueAndSource.source;
 
             // If the result is a function - invoke it
             if (typeof result === "function") {
@@ -224,18 +238,12 @@ var __meta__ = {
         get: function() {
             var source = this.source,
                 path = this.path,
-                index = 0,
-                handler;
+                handler,
+                pathValueAndSource;
 
-            handler = source.get(path);
-
-            while (!handler && source) {
-                source = this.parents[++index];
-
-                if (source instanceof ObservableObject) {
-                    handler = source.get(path);
-                }
-            }
+            pathValueAndSource = this._locatePathSource(source, path);
+            handler = pathValueAndSource.value;
+            source = pathValueAndSource.source;
 
             return proxy(handler, source);
         }
