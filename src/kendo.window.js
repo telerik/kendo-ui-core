@@ -229,7 +229,9 @@ var __meta__ = {
 
             that._resizeHandler = proxy(that._onDocumentResize, that);
 
-            $(window).on("resize", that._resizeHandler);
+            that._marker = kendo.guid().substring(0, 8);
+
+            $(window).on("resize" + NS + that._marker, that._resizeHandler);
 
             if (options.visible) {
                 that.trigger(OPEN);
@@ -1108,33 +1110,35 @@ var __meta__ = {
         },
 
         destroy: function () {
-            if (this.resizing) {
-                this.resizing.destroy();
+            var that = this;
+
+            if (that.resizing) {
+                that.resizing.destroy();
             }
 
-            if (this.dragging) {
-                this.dragging.destroy();
+            if (that.dragging) {
+                that.dragging.destroy();
             }
 
-            this.wrapper.off(NS)
+            that.wrapper.off(NS)
                 .children(KWINDOWCONTENT).off(NS).end()
                 .find(".k-resize-handle,.k-window-titlebar").off(NS);
 
-            $(window).off("resize", this._resizeHandler);
+            $(window).off("resize" + NS + that._marker);
 
-            clearTimeout(this._loadingIconTimeout);
+            clearTimeout(that._loadingIconTimeout);
 
-            Widget.fn.destroy.call(this);
+            Widget.fn.destroy.call(that);
 
-            this.unbind(undefined);
+            that.unbind(undefined);
 
-            kendo.destroy(this.wrapper);
+            kendo.destroy(that.wrapper);
 
-            this._removeOverlay(true);
+            that._removeOverlay(true);
 
-            this.wrapper.empty().remove();
+            that.wrapper.empty().remove();
 
-            this.wrapper = this.appendTo = this.element = $();
+            that.wrapper = that.appendTo = that.element = $();
         },
 
         _createWindow: function() {
