@@ -498,6 +498,27 @@
         });
     });
 
+    runTest("Grid - compile columns menu", function(dom){
+        $scope.options = {
+            dataSource: $scope.data,
+            columns: [
+                { field: "text", title: "<div class='my-column'>|{{ column.foo }}|</div>", foo: "TEST" }
+            ],
+            columnMenu: true
+        };
+        $("<div kendo-grid='grid' k-options='options'></div>").appendTo(dom);
+        expect(3);
+        $scope.whenRendered(function(){
+            var grid = $scope.grid;
+            grid.wrapper.find(".k-header-column-menu").click();
+            var col = $(".my-column");
+            equal(col.length, 2);
+            equal(col.eq(0).html(), "|TEST|");
+            equal(col.eq(1).html(), "|TEST|");
+            start();
+        });
+    });
+
     }
 
     if (kendo.ui.TreeView) {

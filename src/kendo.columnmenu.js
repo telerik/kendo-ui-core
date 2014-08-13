@@ -85,6 +85,8 @@ var __meta__ = {
                 that._createMenu();
             }
 
+            that._angularItems("compile");
+
             that._sort();
 
             that._columns();
@@ -185,8 +187,26 @@ var __meta__ = {
             }
         },
 
+        _angularItems: function(action) {
+            var that = this;
+            that.angular(action, function(){
+                var items = that.wrapper.find(".k-columns-item input[" + kendo.attr("field") + "]").map(function(){
+                    return $(this).closest("li");
+                });
+                var data = map(that._ownerColumns(), function(col){
+                    return { column: col._originalObject };
+                });
+                return {
+                    elements: items,
+                    data: data
+                };
+            });
+        },
+
         destroy: function() {
             var that = this;
+
+            that._angularItems("cleanup");
 
             Widget.fn.destroy.call(that);
 
@@ -293,7 +313,8 @@ var __meta__ = {
                     title: col.title || col.field,
                     hidden: col.hidden,
                     index: inArray(col, columns),
-                    locked: !!col.locked
+                    locked: !!col.locked,
+                    _originalObject: col
                 };
             });
         },
