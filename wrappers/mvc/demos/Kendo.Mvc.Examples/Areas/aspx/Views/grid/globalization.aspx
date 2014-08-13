@@ -12,7 +12,7 @@
     kendo.culture("<%: System.Threading.Thread.CurrentThread.CurrentCulture  %>");
 </script>
 
-<div class="configuration k-widget k-header" style="width: 190px">
+<div class="box">
     <ul class="options">
         <li>Choose culture: 
             <%: Html.Kendo().DropDownList()
@@ -27,7 +27,6 @@
 
 <%: Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
     .Name("Grid")
-    .HtmlAttributes(new { style = "width: 700px; float: left;" })
     .Columns(columns =>
     {
         columns.Bound(p => p.ProductName);
