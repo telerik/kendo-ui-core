@@ -1980,6 +1980,10 @@ var __meta__ = {
     function indexOfPristineModel(data, model) {
         if (model) {
             return indexOf(data, function(item) {
+                if (item.uid) {
+                    return item.uid == model.uid;
+                }
+
                 return item[model.idField] === model.id;
             });
         }
@@ -2167,7 +2171,7 @@ var __meta__ = {
             }
         },
 
-        offlineState: function(state) {
+        offlineData: function(state) {
             if (this.options.offlineStorage == null) {
                 return null;
             }
@@ -2494,7 +2498,8 @@ var __meta__ = {
                     that.trigger(SYNC);
                 });
             } else {
-                that._storeData();
+                that._storeData(true);
+
                 that._change({ action: "sync" });
             }
         },
@@ -2638,13 +2643,12 @@ var __meta__ = {
         },
 
         _cancelModel: function(model) {
-            var pristine = this._pristineForModel(model),
-                idx;
+            var pristine = this._pristineForModel(model);
 
-           this._eachItem(this._data, function(items) {
-                idx = indexOfModel(items, model);
-                if (idx != -1) {
-                    if (!model.isNew() && pristine) {
+            this._eachItem(this._data, function(items) {
+                var idx = indexOfModel(items, model);
+                if (idx >= 0) {
+                    if (pristine && (!model.isNew() || pristine.__state__)) {
                         items[idx].accept(pristine);
                     } else {
                         items.splice(idx, 1);
@@ -2711,7 +2715,7 @@ var __meta__ = {
                             error: proxy(that.error, that)
                         });
                     } else if (that.options.offlineStorage != null){
-                        that.success(that.offlineState().data);
+                        that.success(that.offlineData());
                     }
                 } else {
                     that._dequeueRequest();
@@ -2780,7 +2784,7 @@ var __meta__ = {
             that._dequeueRequest();
         },
 
-        _storeData: function() {
+        _storeData: function(updatePristine) {
             if (this.options.offlineStorage != null) {
                 var state = [];
                 var item;
@@ -2788,6 +2792,7 @@ var __meta__ = {
 
                 for (idx = 0; idx < data.length; idx++) {
                     item = data[idx].toJSON();
+                    item.uid = data[idx].uid;
                     if (this.reader.model) {
                         if (data[idx].isNew()) {
                             item.__state__ = "create";
@@ -2804,7 +2809,11 @@ var __meta__ = {
                     item.__state__ = "destroy";
                 }
 
-                this.offlineState({ data: state });
+                this.offlineData(state);
+
+                if (updatePristine) {
+                    this._pristineData = state;
+                }
             }
         },
 

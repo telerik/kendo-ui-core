@@ -52,8 +52,7 @@
                         id: "ProductID",
                         fields: {
                             ProductID: { editable: false, nullable: true },
-                            ProductName: { validation: { required: true } },
-                            UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                            UnitPrice: { type: "number", validation: { min: 1} },
                             Discontinued: { type: "boolean" },
                             UnitsInStock: { type: "number", validation: { min: 0, required: true } }
                         }

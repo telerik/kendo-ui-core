@@ -15,7 +15,7 @@
 
         var state = { foo: "foo" };
 
-        dataSource.offlineState(state);
+        dataSource.offlineData(state);
 
         equal(localStorage.getItem("key"), '{"foo":"foo"}');
     });
@@ -27,7 +27,7 @@
 
         localStorage.setItem("key", kendo.stringify({foo:"foo"}));
 
-        var state = dataSource.offlineState();
+        var state = dataSource.offlineData();
 
         equal(state.foo, "foo");
     });
@@ -43,7 +43,7 @@
             }
         });
 
-        dataSource.offlineState(state);
+        dataSource.offlineData(state);
     });
 
     test("state returns empty object if localStorage doesn't contain an item for the specified key", function() {
@@ -51,7 +51,7 @@
             offlineStorage: "key"
         });
 
-        var state = dataSource.offlineState();
+        var state = dataSource.offlineData();
 
         equal(kendo.stringify(state), "{}");
     });
@@ -66,8 +66,8 @@
 
         dataSource.read();
 
-        equal(dataSource.offlineState().data.length, data.length);
-        equal(dataSource.offlineState().data[0].foo, data[0].foo);
+        equal(dataSource.offlineData().length, data.length);
+        equal(dataSource.offlineData()[0].foo, data[0].foo);
     });
 
     test("data returns data stored in state when offline", function() {
@@ -77,9 +77,7 @@
             offlineStorage: "key"
         });
 
-        dataSource.offlineState({
-            data: data
-        });
+        dataSource.offlineData(data);
         dataSource.online(false);
         dataSource.read();
 
@@ -269,7 +267,7 @@
         dataSource.sync();
         dataSource.read();
 
-        var state = dataSource.offlineState();
+        var state = dataSource.offlineData();
 
         equal(dataSource.at(0).isNew(), true);
     });
@@ -300,9 +298,9 @@
         dataSource.get(1).set("foo", "bar");
         dataSource.sync();
 
-        var state = dataSource.offlineState();
+        var state = dataSource.offlineData();
 
-        equal(state.data[0].foo, "bar");
+        equal(state[0].foo, "bar");
     });
 
     test("sync of offline data triggers request start", 1, function() {
@@ -328,10 +326,10 @@
         dataSource.online(true);
     })
 
-    test("offlineState returns null if offlineStorage isn't enabled", function() {
+    test("offlineData returns null if offlineStorage isn't enabled", function() {
         var dataSource = new kendo.data.DataSource({});
 
-        equal(dataSource.offlineState(), null);
+        equal(dataSource.offlineData(), null);
     });
 
     test("updating inserted item updates the item", function() {
@@ -353,5 +351,65 @@
 
         equal(dataSource.at(0).foo, "bar");
         equal(dataSource.total(), 1);
+    });
+
+    test("synced inserted item remains after cancelChanges", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        dataSource.online(false);
+        dataSource.add( { foo : "foo" });
+        dataSource.sync();
+
+        dataSource.cancelChanges(dataSource.at(0));
+
+        equal(dataSource.total(), 1);
+    });
+
+    test("cancelChanges of synced inserted item resets it to previous state", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        dataSource.online(false);
+        dataSource.add( { foo : "foo" });
+        dataSource.sync();
+
+        dataSource.at(0).set("foo", "bar");
+        dataSource.cancelChanges(dataSource.at(0));
+
+        equal(dataSource.at(0).foo, "foo");
+    });
+
+    test("cancelChanges removes unsynced inserted item", function() {
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            }
+        });
+
+        dataSource.online(false);
+        dataSource.add( { foo : "foo" });
+        dataSource.sync();
+
+        dataSource.add( { foo : "bar" });
+        dataSource.cancelChanges(dataSource.at(1));
+
+        equal(dataSource.total(), 1);
+        equal(dataSource.at(0).foo, "foo");
     });
 }());
