@@ -248,3 +248,81 @@ QUnit.config.reorder = false;
 var close = QUnit.close,
     notClose = QUnit.notClose,
     contains = QUnit.contains;
+
+function withAngularTests(moduleName, func) {
+    var $injector, $controller, $scope, $compile;
+
+    module(moduleName, {
+        setup: function() {
+            $injector = angular.injector([ "ng", "MyApp" ]);
+            $scope = $injector.get("$rootScope").$new();
+            $controller = $injector.get("$controller")("MyCtrl", { $scope: $scope });
+            $compile = $injector.get("$compile");
+        },
+        teardown: function() {
+            $scope.$destroy();
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
+    angular.module("my.directives", []).directive("isolatedScope", function(){
+        return {
+            scope: {
+                "foo": "@"
+            },
+            restrict: "A",
+            transclude: true,
+            template: "<div><h1>Isolated Scope</h1><span ng-transclude></span></div>"
+        };
+    });
+
+    var app = angular.module("MyApp", [ "kendo.directives", "my.directives", "ngRoute" ]);
+    app.controller("MyCtrl", function($scope){
+        $scope.windowOptions = {
+            title: "Das titlen"
+        };
+        $scope.data = new kendo.data.ObservableArray([
+            { text: "Foo", id: 1 },
+            { text: "Bar", id: 2 }
+        ]);
+        $scope.hello = "Hello World!";
+        $scope.whenRendered = function(f) {
+            var off = $scope.$on("kendoRendered", function(){
+                off();
+                f.apply(null, arguments);
+            });
+        };
+    });
+
+    $.mockjaxSettings.responseTime = 0;
+
+    $.mockjax({
+        url: "ajax-template.html",
+        response: function() {
+            this.responseText = '<div>{{ hello }}</div>';
+        }
+    });
+
+    $.mockjax({
+        url: "data.json",
+        response: function() {
+            this.responseText = JSON.stringify({
+                user: {
+                    firstName: "John",
+                    lastName: "Doe"
+                }
+            });
+        }
+    });
+
+    function runTest(name, test){
+        asyncTest(name, function(){
+            var dom = $("<div></div>").appendTo(QUnit.fixture);
+            test(dom, $scope);
+            $compile(dom)($scope);
+        });
+    };
+
+    func(runTest);
+
+}
