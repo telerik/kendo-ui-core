@@ -1,6 +1,8 @@
-(function(undefined){
+(function(undefined, global){
 
     "use strict";
+
+    var kendo = global.kendo || (global.kendo = {});
 
     /* jshint eqnull:true */
     /* global console,require */ // temporary
@@ -17,6 +19,7 @@
                 }
                 else if (x instanceof PDFValue) {
                     x.offset = offset;
+                    x.beforeRender(out);
                     x.render(out);
                 }
                 else if (isArray(x)) {
@@ -48,7 +51,8 @@
             --indentLevel;
         };
         out.indent = function() {
-            out(NL, pad("", indentLevel * 2, " "));
+            if (offset > 0) out(NL);
+            out(pad("", indentLevel * 2, " "));
             out.apply(null, arguments);
         };
         out.offset = function() {
@@ -133,6 +137,14 @@
             return out+"";
         };
     }
+
+    PDF.prototype = {
+
+        /* -----[ TTF fonts ]----- */
+
+    };
+
+    /* -----[ utils ]----- */
 
     function pad(str, len, ch) {
         while (str.length < len) {
@@ -244,6 +256,8 @@
 
     function PDFValue(){}
 
+    PDFValue.prototype.beforeRender = function(){};
+
     function defclass(Ctor, proto, Base) {
         if (!Base) {
             Base = PDFValue;
@@ -269,6 +283,18 @@
             return this.value.replace(/([\(\)\\])/g, "\\$1");
         }
     });
+
+    var PDFHexString = defclass(function PDFHexString(value){
+        this.value = value;
+    }, {
+        render: function(out) {
+            out("<");
+            for (var i = 0; i < this.value.length; ++i) {
+                out(" ", zeropad(this.value.charCodeAt(i).toString(16), 2));
+            }
+            out(" >");
+        }
+    }, PDFString);
 
     /// names
 
@@ -408,6 +434,131 @@
         });
     });
 
+    /// TTF fonts
+
+    var PDFFont = defclass(function PDFFont(props){
+        props = this.props = props || {};
+        props.Type = PDFName.get("Font");
+        props.Subtype = PDFName.get("TrueType");
+        props.Encoding = PDFName.get("MacRomanEncoding");
+    }, {
+        loadTTF: function(data) {
+            var font = this._font = new PDF.TTFFont(data);
+            this._sub = font.makeSubset();
+
+            var head = font.head;
+
+            this.name = font.psName;
+            var scale = this.scale = font.scale;
+            this.bbox = [
+                head.xMin * scale,
+                head.yMin * scale,
+                head.xMax * scale,
+                head.yMax * scale
+            ];
+
+            this.italicAngle = font.post.italicAngle;
+            this.ascent = font.ascent * scale;
+            this.descent = font.descent * scale;
+            this.lineGap = font.lineGap * scale;
+            this.capHeight = font.os2.capHeight || this.ascent;
+            this.xHeight = font.os2.xHeight || 0;
+            this.stemV = 0;
+
+            this.familyClass = (font.os2.familyClass || 0) >> 8;
+            this.isSerif = this.familyClass >= 1 && this.familyClass <= 7;
+            this.isScript = this.familyClass == 10;
+
+            this.flags = ((font.post.isFixedPitch ? 1 : 0) |
+                          (this.isSerif ? 1 << 1 : 0) |
+                          (this.isScript ? 1 << 3 : 0) |
+                          (this.italicAngle != 0 ? 1 << 6 : 0) |
+                          (1 << 5));
+
+            this.descriptor = this._pdf.makeObject(new PDFDictionary({
+                Type         : PDFName.get("FontDescriptor"),
+                FontName     : PDFName.get(this._sub.psName),
+                FontBBox     : this.bbox,
+                Flags        : this.flags,
+                StemV        : this.stemV,
+                ItalicAngle  : this.italicAngle,
+                Ascent       : this.ascent,
+                Descent      : this.descent,
+                CapHeight    : this.capHeight,
+                XHeight      : this.xHeight
+            }));
+
+            this.stream = this._pdf.makeObject(new PDFStream(makeOutput()));
+            this.descriptor.value.props.FontFile2 = this.stream.makeRef();
+        },
+        encodeText: function(text) {
+            return this._sub.encodeText(text);
+        },
+        beforeRender: function() {
+            // write the TTF data
+            var self = this;
+            var sub = self._sub;
+            var data = sub.encode();
+            self.stream.value.data(data);
+
+            var cmap = sub.cmap;
+            var ids = Object.keys(cmap).sort(function(a, b){ return a - b }).map(parseFloat);
+            var charWidths = ids.map(function(charId){
+                return self._font.widthOfGlyph(cmap[charId]);
+            });
+            var firstChar = ids[0];
+            var lastChar = ids[ids.length - 1];
+
+            // update the dictionary
+            var dict = self.props;
+            dict.BaseFont = self._sub.psName;
+            dict.FontDescriptor = self.descriptor.makeRef();
+            dict.FirstChar = firstChar;
+            dict.LastChar = lastChar;
+            dict.Widths = charWidths;
+
+            var unimap = new PDFUnicodeCMap(ids, sub.subset);
+            var unimapStream = new PDFStream(makeOutput());
+            unimapStream.data(unimap);
+            dict.ToUnicode = this._pdf.makeObject(unimapStream).makeRef();
+        }
+    }, PDFDictionary);
+
+    var PDFUnicodeCMap = defclass(function PDFUnicodeCMap(ids, map){
+        this.ids = ids;
+        this.map = map;
+    }, {
+        render: function(out) {
+            out.indent("/CIDInit /ProcSet findresource begin");
+            out.indent("12 dict begin");
+            out.indent("begincmap");
+            out.indent("/CIDSystemInfo <<");
+            out.indent("  /Registry (Adobe)");
+            out.indent("  /Ordering (UCS)");
+            out.indent("  /Supplement 0");
+            out.indent(">> def");
+            out.indent("/CMapName /Adobe-Identity-UCS def");
+            out.indent("/CMapType 2 def");
+            out.indent("1 begincodespacerange");
+            out.indent("<0000><ffff>");
+            out.indent("endcodespacerange");
+
+            var ids = this.ids, map = this.map;
+            out.indent(ids.length, " beginbfchar");
+            ids.forEach(function(code){
+                var unicode = map[code];
+                out.indent("<", zeropad(code.toString(16), 4), ">",
+                           "<", zeropad(unicode.toString(16), 4), ">");
+            });
+            out.indent("endbfchar");
+
+            out.indent("endcmap");
+            out.indent("CMapName currentdict /CMap defineresource pop");
+            out.indent("end");
+            out.indent("end");
+        }
+    });
+
     /// page object
 
     var PDFPage = defclass(function PDFPage(props){
@@ -419,6 +570,13 @@
 
         props = this.props = props || {};
         props.Type = PDFName.get("Page");
+        props.ProcSet = [
+            PDFName.get("PDF"),
+            PDFName.get("Text"),
+            PDFName.get("ImageB"),
+            PDFName.get("ImageC"),
+            PDFName.get("ImageI")
+        ];
         props.Resources = new PDFDictionary({
             Font: new PDFDictionary(this._fontResources),
             ExtGState: new PDFDictionary(this._gsResources)
@@ -482,10 +640,9 @@
         }
     }, PDFDictionary);
 
+    /// exports.
 
-
-
-
+    kendo.PDF = PDF;
 
 
 
@@ -494,12 +651,35 @@
 
     ///// DEBUG
 
+    require("./kendo.pdf.ttf.js");
+
     var pdf = new PDF();
+
+    {
+        var fs = require("fs");
+        var font = new PDFFont();
+        var fontObj = pdf.makeObject(font);
+        font._pdf = pdf;
+        var fontdata = fs.readFileSync("/home/mishoo/tmp/timesi.ttf", { encoding: "binary" });
+        fontdata = fontdata.toString("binary");
+        font.loadTTF(fontdata);
+
+        var fontName = font._sub.psName;
+        pdf.FONTS[fontName] = fontObj;
+
+        var page = pdf.addPage();
+        page._beginText();
+        page._out("70 50 TD", NL);
+        page._out(page._getFontResource(fontName), " 20 Tf", NL);
+        page._out(new PDFHexString(font.encodeText("© ™ ® ă ş ţ î â Ă Ş Ţ Î Â α β π λ Λ")), " Tj", NL);
+        page._endText();
+    }
+
     var page1 = pdf.addPage();
     page1._beginText();
     page1._out("70 50 TD", NL);
-    page1._out(page1._getFontResource("Helvetica"), " 20 Tf", NL);
-    page1._out(new PDFString("Hello «a» ŞWORLD ♥!"), " Tj", NL);
+    page1._out(page1._getFontResource(fontName), " 20 Tf", NL);
+    page1._out(new PDFHexString(font.encodeText("Check this out")), " Tj", NL);
     page1._endText();
 
     var page2 = pdf.addPage();
@@ -571,4 +751,4 @@
     var fs = require("fs");
     fs.writeFileSync("/tmp/pdf.txt", pdf.render(), { encoding: "binary" });
 
-})(undefined);
+})(undefined, Function("return this")());

@@ -1,4 +1,4 @@
-var fs = require("fs");
+(function(global){
 
 function hasOwnProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
@@ -28,7 +28,7 @@ function BinaryStream(data) {
         return (readByte() << 8) | readByte();
     }
     function writeShort(w) {
-        writeByte(w >>> 8);
+        writeByte(w >> 8);
         writeByte(w);
     }
     function readShort_() {
@@ -39,7 +39,7 @@ function BinaryStream(data) {
         writeShort(w < 0 ? w + 0x10000 : w);
     }
     function readLong() {
-        return (readShort() << 16) | readShort();
+        return (readShort() * 0x10000) + readShort();
     }
     function writeLong(w) {
         writeShort((w >>> 16) & 0xFFFF);
@@ -51,6 +51,18 @@ function BinaryStream(data) {
     }
     function writeLong_(w) {
         writeLong(w < 0 ? w + 0x100000000 : w);
+    }
+    function readFixed() {
+        return readLong() / 0x10000;
+    }
+    function writeFixed(f) {
+        writeLong(Math.round(f * 0x10000));
+    }
+    function readFixed_() {
+        return readLong_() / 0x10000;
+    }
+    function writeFixed_(f) {
+        writeLong_(Math.round(f * 0x10000));
     }
     function read(len) {
         var ret = [];
@@ -85,12 +97,16 @@ function BinaryStream(data) {
         writeShort  : writeShort,
         readLong    : readLong,
         writeLong   : writeLong,
+        readFixed   : readFixed,
+        writeFixed  : writeFixed,
 
         // signed numbers.
         readShort_  : readShort_,
         writeShort_ : writeShort_,
         readLong_   : readLong_,
         writeLong_  : writeLong_,
+        readFixed_  : readFixed_,
+        writeFixed_ : writeFixed_,
 
         read        : read,
         write       : write,
@@ -599,16 +615,19 @@ var NameTable = (function(){
             }
             this.postscriptEntry = strings[6][0];
             this.postscriptName = this.postscriptEntry.text.replace(/[^\x20-\x7F]/g, "");
-        },
 
-        encode: function() {
-            var strings = this.strings;
             var ps = new NameEntry(nextSubsetTag() + "+" + this.postscriptName, {
                 platformID         : this.postscriptEntry.platformID,
                 platformSpecificID : this.postscriptEntry.platformSpecificID,
                 languageID         : this.postscriptEntry.languageID
             });
             strings[6] = [ ps ];
+
+            this.subsetPsName = ps.text;
+        },
+
+        encode: function() {
+            var strings = this.strings;
             var strCount = 0;
             for (var i in strings) {
                 if (hasOwnProperty(strings, i)) {
@@ -641,10 +660,7 @@ var NameTable = (function(){
 
             out.write(strTable.get());
 
-            return {
-                psName: ps.text,
-                table: out.get()
-            };
+            return out.get();
         }
     });
 
@@ -659,7 +675,7 @@ var PostTable = (function(){
             data.offset(this.offset);
 
             this.format = data.readLong();
-            this.italicAngle = data.readLong();
+            this.italicAngle = data.readFixed_();
             this.underlinePosition = data.readShort_();
             this.underlineThickness = data.readShort_();
             this.isFixedPitch = data.readLong();
@@ -980,7 +996,48 @@ var CmapTable = (function(){
 
 var OS2Table = deftable({
     parse: function(data) {
-        // XXX: not sure this is needed yet
+        data.offset(this.offset);
+        this.version = data.readShort();
+        this.averageCharWidth = data.readShort_();
+        this.weightClass = data.readShort();
+        this.widthClass = data.readShort();
+        this.type = data.readShort();
+        this.ySubscriptXSize = data.readShort_();
+        this.ySubscriptYSize = data.readShort_();
+        this.ySubscriptXOffset = data.readShort_();
+        this.ySubscriptYOffset = data.readShort_();
+        this.ySuperscriptXSize = data.readShort_();
+        this.ySuperscriptYSize = data.readShort_();
+        this.ySuperscriptXOffset = data.readShort_();
+        this.ySuperscriptYOffset = data.readShort_();
+        this.yStrikeoutSize = data.readShort_();
+        this.yStrikeoutPosition = data.readShort_();
+        this.familyClass = data.readShort_();
+
+        this.panose = data.times(10, data.readByte);
+        this.charRange = data.times(4, data.readLong);
+
+        this.vendorID = data.readString(4);
+        this.selection = data.readShort();
+        this.firstCharIndex = data.readShort();
+        this.lastCharIndex = data.readShort();
+
+        if (this.version > 0) {
+            this.ascent = data.readShort_();
+            this.descent = data.readShort_();
+            this.lineGap = data.readShort_();
+            this.winAscent = data.readShort();
+            this.winDescent = data.readShort();
+            this.codePageRange = data.times(2, data.readLong);
+
+            if (this.version > 1) {
+                this.xHeight = data.readShort();
+                this.capHeight = data.readShort();
+                this.defaultChar = data.readShort();
+                this.breakChar = data.readShort();
+                this.maxContext = data.readShort();
+            }
+        }
     },
     encode: function() {
         return this.raw();
@@ -992,6 +1049,7 @@ function Subfont(font) {
     this.subset = {};
     this.unicodes = {};
     this.next = 32;
+    this.psName = this.font.name.subsetPsName;
 }
 
 Subfont.prototype = {
@@ -1090,15 +1148,14 @@ Subfont.prototype = {
             return new2old[id];
         });
 
-        var glyf = this.font.glyf.encode(glyphs, oldIds, old2new);
-        var loca = this.font.loca.encode(glyf.offsets);
-        var name = this.font.name.encode();
+        var font = this.font;
+        var glyf = font.glyf.encode(glyphs, oldIds, old2new);
+        var loca = font.loca.encode(glyf.offsets);
 
-        this.psName = name.psName;
         this.cmap = {};
         for (var code in cmap.charMap) {
             if (hasOwnProperty(cmap.charMap, code)) {
-                var ids = cmap.charMap;
+                var ids = cmap.charMap[code];
                 this.cmap[code] = ids.old;
             }
         }
@@ -1111,7 +1168,7 @@ Subfont.prototype = {
             "hhea" : font.hhea.encode(oldIds),
             "maxp" : font.maxp.encode(oldIds),
             "post" : font.post.encode(oldIds),
-            "name" : name.table,
+            "name" : font.name.encode(),
             "head" : font.head.encode(loca.format),
             "OS/2" : font.os2.encode()
         };
@@ -1147,6 +1204,7 @@ function TTFFont(rawData, name) {
 TTFFont.prototype = {
     parse: function() {
         var dir = this.directory = new Directory(this.contents);
+
         this.head = dir.readTable("head", HeadTable);
         this.loca = dir.readTable("loca", LocaTable);
         this.hhea = dir.readTable("hhea", HheaTable);
@@ -1157,45 +1215,33 @@ TTFFont.prototype = {
         this.post = dir.readTable("post", PostTable);
         this.cmap = dir.readTable("cmap", CmapTable);
         this.os2  = dir.readTable("OS/2", OS2Table);
+
+        this.psName = this.name.postscriptName;
+        this.ascent = this.os2.ascent || this.hhea.ascent;
+        this.descent = this.os2.descent || this.hhea.descent;
+        this.lineGap = this.os2.lineGap || this.hhea.lineGap;
+        this.scale = 1000 / this.head.unitsPerEm;
     },
     glyphIdForCharCode: function(code) {
         return this.cmap.unicodeEntry.codeMap[code];
     },
     widthOfGlyph: function(glyph) {
-        return this.hmtx.forGlyph(glyph).advance * 1000 / this.head.unitsPerEm;
+        return this.hmtx.forGlyph(glyph).advance * this.scale;
+    },
+    makeSubset: function() {
+        return new Subfont(this);
     }
 };
 
-///
+if (global.kendo) global.kendo.PDF.TTFFont = TTFFont;
 
-var data = fs.readFileSync("Ubuntu-C.ttf", { encoding: "binary" });
-var str = data.toString({ encoding: "binary" });
+    // var fs = require("fs");
+    // var data = fs.readFileSync("/home/mishoo/tmp/timesi.ttf", { encoding: "binary" });
+    // data = data.toString("binary");
+    // var font = new TTFFont(data);
+    // var sub = font.makeSubset();
+    // sub.use("ăşţ");
+    // var out = sub.encode();
+    // fs.writeFileSync("/tmp/out.ttf", out, { encoding: "binary" });
 
-var font = new TTFFont(str);
-var subset = new Subfont(font);
-
-// for (var i = 32; i < 8000; ++i) {
-//     subset.use(parseInt(i, 10));
-// }
-
-subset.use("абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя");
-
-// var x = Object.keys(font.cmap.unicodeEntry.codeMap).sort(function(a, b){ return a - b });
-// for (var i = 0; i < x.length; ++i) {
-//     var id = parseInt(x[i], 10);
-//     if (id >= 32 && id < 2048) {
-//         subset.use(id);
-//     }
-// }
-
-var bytes = subset.encode();
-//var data = new Buffer(bytes);
-var data = bytes;
-fs.writeFileSync("/tmp/out.ttf", data, { encoding: "binary" });
-
-//console.log(dir.name.encode());
-
-// var enc = dir.encode({
-//     test: "foobar",
-// });
-// fs.writeFileSync("/tmp/x.ttf", enc, { encoding: "binary" });
+})(Function("return this")());
