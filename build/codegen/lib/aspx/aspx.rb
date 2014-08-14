@@ -65,12 +65,10 @@ module CodeGen
             CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
             CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
-            if (!convertable.<%= csharp_name %>.IsDefault)
-                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
             CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE = ERB.new('
-            if (!convertable.<%= csharp_name %>.IsDefault)
-                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToArray(), null);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToArray(), null);')
 
             CONVERTER_ARRAY_TEMPLATE = ERB.new('
             if (convertable.<%= csharp_name %>.Count != 0)
