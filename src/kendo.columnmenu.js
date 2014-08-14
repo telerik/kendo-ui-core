@@ -57,6 +57,7 @@ var __meta__ = {
             that.dataSource = options.dataSource;
 
             that.field = element.attr(kendo.attr("field"));
+            that.title = element.attr(kendo.attr("title"));
 
             link = element.find(".k-header-column-menu");
 
@@ -159,6 +160,7 @@ var __meta__ = {
             var html = kendo.template(mobileTemplate)({
                 ns: kendo.ns,
                 field: that.field,
+                title: that.title || that.field,
                 messages: options.messages,
                 sortable: options.sortable,
                 filterable: options.filterable,
@@ -623,7 +625,7 @@ var __meta__ = {
                     '<button class="k-button k-done">#=messages.done#</button>'+
                 '</div>'+
                 '<div class="k-column-menu k-mobile-list"><ul><li>'+
-                    '<span class="k-link">${field}</span><ul>'+
+                    '<span class="k-link">${title}</span><ul>'+
                 '#if(sortable){#'+
                     '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
                     '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
