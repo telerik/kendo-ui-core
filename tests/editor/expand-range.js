@@ -26,7 +26,7 @@ test('expandRange selects node contents', function() {
     range = expandRange(range);
 
     equal(range.startContainer, editor.body.firstChild);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, editor.body.childNodes[editor.body.childNodes.length - 2]);
     equal(range.startOffset, 0);
     equal(range.endOffset, 2);
 });
@@ -80,7 +80,7 @@ test('expandRange does not stop at unicode characters', function() {
     range = expandRange(range);
 
     equal(range.startContainer, editor.body.firstChild);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, editor.body.childNodes[editor.body.childNodes.length - 2]);
     equal(range.startOffset, 0);
     equal(range.endOffset, 6);
 });

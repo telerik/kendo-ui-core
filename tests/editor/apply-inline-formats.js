@@ -53,7 +53,7 @@ test('applyFormat applies format on split text elements', function() {
 
     var range = editor.createRange();
     range.setStart(pararagraph.firstChild, 2);
-    range.setEnd(pararagraph.lastChild, 2);
+    range.setEnd(pararagraph.childNodes[2], 2);
 
     formatRange(range, editor.options.formats.bold);
 
@@ -97,7 +97,7 @@ test('formatRange does not introduce blank text nodes', function() {
 
     formatRange(range, editor.options.formats.bold);
 
-    equal(editor.body.childNodes.length, 1);
+    equal(editor.body.childNodes.length, 2);
 });
 
 test('formatRange does honor block elements', function() {

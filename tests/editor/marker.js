@@ -27,7 +27,7 @@ function createRange(startContainer, startOffset, endContainer, endOffset) {
 }
 
 function clean(html) {
-    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"');
+    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/<br[^>]*dirty[^>]*>/ig, "");
 }
 
 test('addMarker inserts markers', function() {
@@ -105,7 +105,7 @@ test('removeMarker normalizes neighbouring text nodes', function() {
     marker.add(range);
     marker.remove(range);
 
-    equal(editor.body.childNodes.length, 1);
+    equal(editor.body.childNodes.length, 2);
     equal(range.startContainer, editor.body.firstChild);
     equal(range.endContainer, editor.body.firstChild);
     equal(range.startOffset, 3);
@@ -185,7 +185,7 @@ test('removeCaretMarker normalizes dom', function() {
     marker.addCaret(range);
     marker.removeCaret(range);
 
-    equal(editor.body.childNodes.length, 1);
+    equal(editor.body.childNodes.length, 2); // #text + br
 });
 
 test('removeCaretMarker updates range to collapsed state', function() {

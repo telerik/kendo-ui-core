@@ -406,7 +406,14 @@ var Serializer = {
             }
         }
 
-        if (root.childNodes.length == 1 && root.firstChild.nodeType == 3) {
+        function textOnly(root) {
+            var childrenCount = root.childNodes.length;
+            var textChild = childrenCount && root.firstChild.nodeType == 3;
+
+            return textChild && (childrenCount == 1 || (childrenCount == 2 && dom.insignificant(root.lastChild)));
+        }
+
+        if (textOnly(root)) {
             return dom.encode(text(root.firstChild).replace(/[\r\n\v\f\t ]+/, ' '), options);
         }
 

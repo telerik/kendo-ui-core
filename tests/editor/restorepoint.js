@@ -52,7 +52,7 @@ test('restorePoint initializes for root node', function() {
     equal(restorePoint.startContainer.toString(), crossBrowserOffset('0,1,0'));
     equal(restorePoint.startOffset, 0);
     equal(restorePoint.endContainer.toString(), crossBrowserOffset('0,1,0'));
-    equal(restorePoint.endOffset, 1);
+    equal(restorePoint.endOffset, 2);
 });
 
 test('restorePoint initializes for root node contents', function() {
@@ -76,7 +76,7 @@ test('restorePoint initializes for different start and end containers', function
 
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setEnd(editor.body.lastChild.firstChild, 2);
+    range.setEnd(editor.body.childNodes[1].firstChild, 2);
 
     var restorePoint = new RestorePoint(range);
 
@@ -93,7 +93,7 @@ test("restorePoint initializes with specific root node", function() {
 
     var range = inline.createRange();
     range.setStart(inline.body.firstChild.firstChild, 1);
-    range.setEnd(inline.body.lastChild.firstChild, 2);
+    range.setEnd(inline.body.childNodes[1].firstChild, 2);
 
     var restorePoint = new RestorePoint(range, inline.body);
 
@@ -137,7 +137,7 @@ test('toRange returns root node', function() {
     equal(restorePointRange.startContainer, editor.body.firstChild);
     equal(restorePointRange.startOffset, 0);
     equal(restorePointRange.endContainer, editor.body.firstChild);
-    equal(restorePointRange.endOffset, 1);
+    equal(restorePointRange.endOffset, 2);
 });
 
 test('toRange returns root node contents', function() {
@@ -165,7 +165,7 @@ test('toRange returns different start and end containers', function() {
 
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setEnd(editor.body.lastChild.firstChild, 2);
+    range.setEnd(editor.body.childNodes[1].firstChild, 2);
 
     var restorePoint = new RestorePoint(range);
 
@@ -175,7 +175,7 @@ test('toRange returns different start and end containers', function() {
 
     equal(restorePointRange.startContainer, editor.body.firstChild.firstChild);
     equal(restorePointRange.startOffset, 1);
-    equal(restorePointRange.endContainer, editor.body.lastChild.firstChild);
+    equal(restorePointRange.endContainer, editor.body.childNodes[1].firstChild);
     equal(restorePointRange.endOffset, 2);
 });
 
@@ -184,7 +184,7 @@ test('toRange does not modify restore point', function() {
 
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setEnd(editor.body.lastChild.firstChild, 2);
+    range.setEnd(editor.body.childNodes[1].firstChild, 2);
 
     var restorePoint = new RestorePoint(range);
 
@@ -198,6 +198,9 @@ test('toRange does not modify restore point', function() {
 
 test('denormalized content', function() {
     editor.value('');
+    while (editor.body.firstChild) {
+        editor.body.removeChild(editor.body.firstChild);
+    }
     var node = editor.document.createTextNode('foo');
     editor.body.appendChild(node);
     node = editor.document.createTextNode('bar');

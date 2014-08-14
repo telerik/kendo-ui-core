@@ -52,7 +52,7 @@ test('applyFormat applies block format on partial selection with line break', fu
     var pararagraph = $('p', editor.document)[0];
     var range = editor.createRange();
     range.setStart(pararagraph.firstChild, 2);
-    range.setEnd(pararagraph.lastChild, 4);
+    range.setEnd(pararagraph.childNodes[2], 4);
 
     formatRange(range, editor.options.formats.justifyCenter);
 

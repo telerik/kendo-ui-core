@@ -18,6 +18,7 @@ editor_module("editor list formatter", {
 function clean(html) {
     return html.toLowerCase()
         .replace(/class=k-marker/g, 'class="k-marker"')
+        .replace(/<br[^>]*dirty[^>]*>/ig, "")
         .replace(/\r\n/g, '');
 }
 
@@ -41,21 +42,21 @@ test("apply on block node", function() {
 
 test("apply on block nodes", function() {
     editor.value('<div>foo</div><div>bar</div>');
-    formatter.apply([editor.body.firstChild.firstChild,editor.body.lastChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild,editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
 test("apply on list and other content merges the list", function() {
     editor.value('<ul><li>foo</li></ul>bar');
 
-    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild]);
+    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1]]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
 test("apply on block element which is adjacent to list merges it with the list", function() {
     editor.value('<ul><li>foo</li></ul><p>bar</p>');
 
-    formatter.apply([editor.body.lastChild.firstChild]);
+    formatter.apply([editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
@@ -69,7 +70,7 @@ test("apply on block element which is adjacent to list merges it with the list w
 test("apply on block element which is adjacent to list and there is whitespace merges it with the list", function() {
     editor.value('<ul><li>foo</li></ul>     <p>bar</p>');
 
-    formatter.apply([editor.body.lastChild.firstChild]);
+    formatter.apply([editor.body.childNodes[2].firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 test("apply on block element which precedes a list merges it with the list", function() {
@@ -96,7 +97,7 @@ test("apply on block element which is amongst lists creates a single list", func
 test("apply on single paragraph which contains inline elements", function() {
     editor.value('<p><span class="k-marker"></span>f<span class="k-marker"></span><span class="k-marker"></span>oo</p>');
 
-    formatter.apply([editor.body.firstChild.childNodes[1], editor.body.firstChild.lastChild]);
+    formatter.apply([editor.body.firstChild.childNodes[1], editor.body.firstChild.childNodes[4]]);
     equal(clean(editor.body.innerHTML), '<ul><li><span class="k-marker"></span>f<span class="k-marker"></span><span class="k-marker"></span>oo</li></ul>');
 });
 
@@ -148,21 +149,21 @@ test("apply merges adjacent lists", function() {
     editor.value('<ol><li>foo</li></ol><ol><li>bar</li></ol>');
     formatter = new ListFormatter('ol');
 
-    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild.firstChild]);
     equal(editor.value(), '<ol><li>foo</li><li>bar</li></ol>');
 });
 
 test("apply converts and merges adjacent lists", function() {
     editor.value('<ol><li>foo</li></ol><ol><li>bar</li></ol>');
 
-    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild.firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
 test("apply converts and merges adjacent lists of different type li", function() {
     editor.value('<ol><li>foo</li></ol><ul><li>bar</li></ul>');
 
-    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild.firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
@@ -170,7 +171,7 @@ test("apply converts and merges adjacent lists of different type ol", function()
     editor.value('<ol><li>foo</li></ol><ul><li>bar</li></ul>');
     formatter = new ListFormatter('ol');
 
-    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild.firstChild]);
     equal(editor.value(), '<ol><li>foo</li><li>bar</li></ol>');
 });
 
@@ -421,7 +422,7 @@ test("apply in selection of paragraph and existing unordered list", function() {
     editor.value("<p>foo</p><ul><li>bar</li></ul>");
 
     var foo = editor.body.firstChild.firstChild;
-    var bar = editor.body.lastChild.firstChild.firstChild;
+    var bar = editor.body.childNodes[1].firstChild.firstChild;
 
     formatter.apply([foo, bar]);
     equal(editor.value(), "<ul><li>foo</li><li>bar</li></ul>");
@@ -431,7 +432,7 @@ test("apply in selection of paragraph and existing ordered list", function() {
     editor.value("<p>foo</p><ol><li>bar</li></ol>");
 
     var foo = editor.body.firstChild.firstChild;
-    var bar = editor.body.lastChild.firstChild.firstChild;
+    var bar = editor.body.childNodes[1].firstChild.firstChild;
     formatter = new ListFormatter("ol");
 
     formatter.apply([foo, bar]);

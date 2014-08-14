@@ -192,8 +192,10 @@ test("extractContents extracts tags", function() {
 
     var range = editor.createRange();
 
-    range.setStart(editor.body.lastChild.firstChild, 1);
-    range.setEndAfter(editor.body.lastChild);
+    var strong = editor.body.childNodes[1];
+
+    range.setStart(strong.firstChild, 1);
+    range.setEndAfter(strong);
 
     var contents = range.extractContents();
 
@@ -208,12 +210,14 @@ test("extractContents after range manipulation", function() {
 
     var range = editor.createRange();
 
+    var strong = editor.body.childNodes[1];
+
     range.setStart(editor.body.firstChild, 0);
     range.setEnd(editor.body.firstChild, 2);
 
     range = range.cloneRange();
     range.collapse(false);
-    range.setEndAfter(editor.body.lastChild);
+    range.setEndAfter(strong);
 
     var contents = range.extractContents();
 
@@ -244,7 +248,8 @@ test("extractContents updates original range when container is element node", fu
 test("extractContents updates original range when whole text element is removed", function() {
     editor.value("<p>foo</p><p>bar<a></a>baz</p>");
     var range = editor.createRange();
-    var anchor = editor.body.lastChild.childNodes[1];
+    var lastP = editor.body.childNodes[1];
+    var anchor = lastP.childNodes[1];
     range.selectNode(anchor);
 
     var leftRange = range.cloneRange();
@@ -253,8 +258,8 @@ test("extractContents updates original range when whole text element is removed"
 
     leftRange.extractContents();
 
-    equal(range.startContainer, editor.body.lastChild);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.startContainer, lastP);
+    equal(range.endContainer, lastP);
     equal(range.startOffset, 0);
     equal(range.endOffset, 1);
 });
@@ -262,7 +267,8 @@ test("extractContents updates original range when whole text element is removed"
 test("extractContents does not update original range when outside range", function() {
     editor.value("<p>foo</p><p>bar<strong>baz</strong>foo</p>");
     var range = editor.createRange();
-    var anchor = editor.body.lastChild.childNodes[1];
+    var lastP = editor.body.childNodes[1];
+    var anchor = lastP.childNodes[1];
     range.selectNode(anchor);
 
     var rightRange = range.cloneRange();
@@ -270,8 +276,8 @@ test("extractContents does not update original range when outside range", functi
     rightRange.setEndAfter(anchor.parentNode);
     rightRange.extractContents();
 
-    equal(range.startContainer, editor.body.lastChild);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.startContainer, lastP);
+    equal(range.endContainer, lastP);
     equal(range.startOffset, 1);
     equal(range.endOffset, 2);
 });
@@ -318,11 +324,12 @@ test("setStart validation across nested containers", function() {
 test("setStart validation across sibling containers", function() {
     var range = createRangeFromText(editor, "<span>f|oo</span><span>ba|r</span><span>baz</span");
 
-    range.setStart(editor.body.lastChild.firstChild, 2);
+    var lastSpan = editor.body.childNodes[2];
+    range.setStart(lastSpan.firstChild, 2);
 
-    equal(range.startContainer, editor.body.lastChild.firstChild);
-    equal(range.endContainer, editor.body.lastChild.firstChild);
-    equal(range.commonAncestorContainer, editor.body.lastChild.firstChild);
+    equal(range.startContainer, lastSpan.firstChild);
+    equal(range.endContainer, lastSpan.firstChild);
+    equal(range.commonAncestorContainer, lastSpan.firstChild);
     equal(range.startOffset, 2);
     equal(range.endOffset, 2);
     equal(range.collapsed, true);

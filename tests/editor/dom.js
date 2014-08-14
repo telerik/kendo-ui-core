@@ -18,7 +18,7 @@ editor_module("editor DOM", {
 
 test('commonAncestor returns common ancestor for root nodes returns body', function() {
     editor.value('<span>foo</span><span>bar</span>');
-    equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.lastChild.lastChild), editor.body);
+    equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild), editor.body);
 });
 
 test('commonAncestor single node returns same element', function() {
@@ -187,7 +187,7 @@ test("scrollTo does not scroll if element is in view", function() {
 
 test("scrollTo scrolls to last element", function() {
     editor.value("<div style='height: 1000px'>foo</div><div style='height:24px'>bar</div>");
-    var bar = editor.body.lastChild;
+    var bar = editor.body.childNodes[1];
     Dom.scrollTo(bar);
     equal(scrollTop(editor), 1024 - iframe.height());
 });
