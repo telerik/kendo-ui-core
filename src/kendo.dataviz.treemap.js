@@ -595,22 +595,15 @@ var __meta__ = {
         },
 
         _createLeaf: function(item) {
-            var element = this._createTile(item);
-            element.addClass("k-leaf");
-
-            if (defined(this.options.template)) {
-                element.append($(this._renderTemplate(item)));
-            } else {
-                element
-                    .text(this._getText(item))
+            return this._createTile(item)
                     .css("background-color", item.color)
+                    .addClass("k-leaf")
                     .toggleClass(
                         "k-inverse",
                         this._tileColorBrightness(item) > 180
-                    );
-            }
-
-            return element;
+                    )
+                    .append($("<div></div>")
+                    .text(this._getText(item)));
         },
 
         _createTile: function(item) {
