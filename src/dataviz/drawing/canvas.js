@@ -86,8 +86,22 @@
             var childNodes = this.childNodes,
                 i;
 
+            ctx.save();
+            this.setTransform(ctx);
+
             for (i = 0; i < childNodes.length; i++) {
                 childNodes[i].renderTo(ctx);
+            }
+
+            ctx.restore();
+        },
+
+        setTransform: function(ctx) {
+            if (this.srcElement) {
+                var transform = this.srcElement.transform();
+                if (transform) {
+                    ctx.transform.apply(ctx, transform.matrix().toArray(6));
+                }
             }
         },
 
@@ -220,13 +234,6 @@
             var stroke = this.srcElement.options.stroke;
             if (stroke && stroke.lineJoin) {
                 ctx.lineJoin = stroke.lineJoin;
-            }
-        },
-
-        setTransform: function(ctx) {
-            var transform = this.srcElement.transform();
-            if (transform) {
-                ctx.transform.apply(ctx, transform.matrix().toArray(6));
             }
         },
 

@@ -154,6 +154,30 @@
             node.invalidate = function() { ok(true); };
             node.load([new d.Group()]);
         });
+
+        test("renders transform", function() {
+            var group = new d.Group();
+            group.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
+
+            var ctx = mockContext({
+                transform: function(a, b, c, d, e, f) {
+                    deepEqual([a, b, c, d, e, f], [1e-6, 2, 3, 4, 5, 6]);
+                }
+            });
+
+            node.load([group]);
+            node.renderTo(ctx);
+        });
+
+        test("does not render transform if not set", 0, function() {
+            var ctx = mockContext({
+                transform: function(mx) {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
     })();
 
     function paintTests(TShape, TNode, nodeName) {
@@ -314,7 +338,6 @@
 
             node.renderTo(ctx);
         });
-
     }
 
     // ------------------------------------------------------------
