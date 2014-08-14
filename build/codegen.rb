@@ -59,7 +59,7 @@ namespace :generate do
                 import_metadata(component, "lib/aspx/")
                 folderName = component.widget? ? component.name : component.owner_namespace
                 folderPath = "wrappers/aspx/src/#{folderName}/"
-                sh "mkdir #{folderPath}" unless Dir.exists?(folderPath)
+                sh "mkdir -p #{folderPath}" unless Dir.exists?(folderPath)
                 generator = CodeGen::ASPX::Wrappers::Generator.new(folderPath)
 
                 generator.component(component)
