@@ -42,7 +42,6 @@ var __meta__ = {
 
             Widget.fn.init.call(this, element, options);
 
-            this.bind(this.events, this.options);
             this._initTheme(this.options);
 
             this.element.addClass("k-widget k-treemap");
@@ -188,7 +187,11 @@ var __meta__ = {
                 items[i].load();
             }
 
-            this.trigger(DATA_BOUND);
+            if (node) {
+                this.trigger(DATA_BOUND, {
+                    node: node
+                });
+            }
         },
 
         _contentSize: function(root) {
