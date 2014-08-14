@@ -637,6 +637,10 @@
 
             editorNS.Serializer.htmlToDom(html, body);
 
+            if (!browser.msie) {
+                kendo.ui.editor.Dom.ensureTrailingBreaks(this.body);
+            }
+
             this.selectionRestorePoint = null;
             this.update();
         },

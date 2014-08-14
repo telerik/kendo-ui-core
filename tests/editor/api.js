@@ -68,6 +68,14 @@ test("value method passes serialization options to serializer", function() {
     equal(editor.value(), "foo ä bar");
 });
 
+test("value adds line breaks where necessary", function() {
+    var editor = new kendo.ui.Editor("#editor");
+
+    editor.value("<p>foo<br> </p><p>bar</p>");
+
+    ok(kendo.ui.editor.Dom.insignificant(editor.body.firstChild.lastChild));
+});
+
 test("restoreSelection restores element selection", function() {
     var editor = new kendo.ui.Editor("#inline");
 
@@ -194,4 +202,20 @@ test("destroy destroys toolbar", function() {
     editor.toolbar.destroy();
 });
 
-}());
+test("selectedHtml returns selected whitespace", function() {
+    var editor = new kendo.ui.Editor("#editor", {
+        value: "foo bar"
+    });
+
+    var range = editor.createRange();
+    var node = editor.document.body.firstChild;
+
+    range.setStart(node, 3);
+    range.setEnd(node, node.length);
+
+    editor.selectRange(range);
+
+    equal(editor.selectedHtml(), " bar");
+});
+
+})();

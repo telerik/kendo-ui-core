@@ -32,13 +32,13 @@ test('apply to block node', function() {
 
 test('apply to selection', function() {
     editor.value('<div>foo</div><div>bar</div>');
-    formatter.apply([editor.body.firstChild.firstChild,editor.body.lastChild.firstChild]);
+    formatter.apply([editor.body.firstChild.firstChild,editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<div style="margin-left:30px;">foo</div><div style="margin-left:30px;">bar</div>');
 });
 
 test('remove from selection', function() {
     editor.value('<div style="margin-left:30px;">foo</div><div style="margin-left:30px;">bar</div>');
-    formatter.remove([editor.body.firstChild.firstChild,editor.body.lastChild.firstChild]);
+    formatter.remove([editor.body.firstChild.firstChild,editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<div>foo</div><div>bar</div>');
 });
 

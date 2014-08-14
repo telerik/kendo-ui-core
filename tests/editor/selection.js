@@ -100,14 +100,15 @@ test('addRange with collapsed range', function() {
     editor.value('<strong>foo</strong>bar');
 
     var range = editor.createRange();
-    range.setStart(editor.body.lastChild, 2);
-    range.setEnd(editor.body.lastChild, 2);
+    var bar = editor.body.childNodes[1];
+    range.setStart(bar, 2);
+    range.setEnd(bar, 2);
 
     range = selectAndGet(range);
 
-    equal(range.startContainer, editor.body.lastChild);
+    equal(range.startContainer, bar);
     equal(range.startOffset, 2);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, bar);
     equal(range.endOffset, 2);
 });
 
@@ -115,14 +116,15 @@ test('addRange with text to element range', function() {
     editor.value('<strong>foo</strong>bar baz');
 
     var range = editor.createRange();
-    range.setStart(editor.body.lastChild, 0);
-    range.setEnd(editor.body.lastChild, 5);
+    var barbaz = editor.body.childNodes[1];
+    range.setStart(barbaz, 0);
+    range.setEnd(barbaz, 5);
 
     range = selectAndGet(range);
 
-    equal(range.startContainer, editor.body.lastChild);
+    equal(range.startContainer, barbaz);
     equal(range.startOffset, 0);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, barbaz);
     equal(range.endOffset, 5);
 });
 
@@ -130,14 +132,15 @@ test('addRange with collapsed range at start of element', function() {
     editor.value('<p>foo</p><p>bar</p>');
 
     var range = editor.createRange();
-    range.setStart(editor.body.lastChild.firstChild, 0);
-    range.setEnd(editor.body.lastChild.firstChild, 0);
+    var bar = editor.body.childNodes[1].firstChild;
+    range.setStart(bar, 0);
+    range.setEnd(bar, 0);
 
     range = selectAndGet(range);
 
-    equal(range.startContainer, editor.body.lastChild.firstChild);
+    equal(range.startContainer, bar);
     equal(range.startOffset, 0);
-    equal(range.endContainer, editor.body.lastChild.firstChild);
+    equal(range.endContainer, bar);
     equal(range.endOffset, 0);
 });
 
@@ -172,52 +175,60 @@ test('getRangeAt on selection of part of text node', function() {
 test('getRangeAt on selection with end points in text node and tag', function() {
     editor.value('fo<em>obar</em>');
 
-    selectRange(editor.body.firstChild, 1, editor.body.lastChild.firstChild, 2);
+    var fo = editor.body.firstChild;
+    var obar = editor.body.childNodes[1].firstChild;
+    selectRange(fo, 1, obar, 2);
 
     var range = editor.getSelection().getRangeAt(0);
 
-    equal(range.startContainer, editor.body.firstChild);
+    equal(range.startContainer, fo);
     equal(range.startOffset, 1);
-    equal(range.endContainer, editor.body.lastChild.firstChild);
+    equal(range.endContainer, obar);
     equal(range.endOffset, 2);
 });
 
 test('getRangeAt on selection with end points in tag and text node', function() {
     editor.value('<em>foob</em>ar');
 
-    selectRange(editor.body.firstChild.firstChild, 2, editor.body.lastChild, 1, 5);
+    var foob = editor.body.firstChild.firstChild;
+    var ar = editor.body.childNodes[1];
+    selectRange(foob, 2, ar, 1, 5);
 
     var range = editor.getSelection().getRangeAt(0);
 
-    equal(range.startContainer, editor.body.firstChild.firstChild);
+    equal(range.startContainer, foob);
     equal(range.startOffset, 2);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, ar);
     equal(range.endOffset, 1);
 });
 
 test('getRangeAt on selection with end points in the middle of different tags', function() {
     editor.value('<em>foo</em><strong>bar</strong>');
 
-    selectRange(editor.body.firstChild.firstChild, 1, editor.body.lastChild.firstChild, 2);
+    var foo = editor.body.firstChild.firstChild;
+    var bar = editor.body.childNodes[1].firstChild;
+    selectRange(foo, 1, bar, 2);
 
     var range = editor.getSelection().getRangeAt(0);
 
-    equal(range.startContainer, editor.body.firstChild.firstChild);
+    equal(range.startContainer, foo);
     equal(range.startOffset, 1);
-    equal(range.endContainer, editor.body.lastChild.firstChild);
+    equal(range.endContainer, bar);
     equal(range.endOffset, 2);
 });
 
 test('getRangeAt on selection with end points in the middle of different text nodes', function() {
     editor.value('fo<em>ob</em>ar');
 
-    selectRange(editor.body.firstChild, 1, editor.body.lastChild, 1, 5);
+    var fo = editor.body.firstChild;
+    var ar = editor.body.childNodes[2];
+    selectRange(fo, 1, ar, 1, 5);
 
     var range = editor.getSelection().getRangeAt(0);
 
-    equal(range.startContainer, editor.body.firstChild);
+    equal(range.startContainer, fo);
     equal(range.startOffset, 1);
-    equal(range.endContainer, editor.body.lastChild);
+    equal(range.endContainer, ar);
     equal(range.endOffset, 1);
 });
 

@@ -38,28 +38,28 @@ test("apply wraps single node", function() {
 test("apply wraps all inline nodes", function() {
     editor.value('<span>foo</span><span>bar</span>');
 
-    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<div style="text-align:center;"><span>foo</span><span>bar</span></div>');
 });
 
 test("apply wraps block and inline nodes", function() {
     editor.value('<div>foo</div><span>bar</span>');
 
-    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;"><span>bar</span></div>');
 });
 
 test("apply for block nodes", function() {
     editor.value('<div>foo</div><div>bar</div>');
 
-    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    justifyCenter.apply([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
     equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;">bar</div>');
 });
 
 test("apply for text and block", function() {
     editor.value('foo<div>bar</div>baz');
 
-    justifyCenter.apply([editor.body.firstChild, editor.body.childNodes[1].firstChild, editor.body.lastChild]);
+    justifyCenter.apply([editor.body.firstChild, editor.body.childNodes[1].firstChild, editor.body.childNodes[2]]);
 
     equal(editor.value(), '<div style="text-align:center;">foo</div><div style="text-align:center;">bar</div><div style="text-align:center;">baz</div>');
 });
@@ -89,7 +89,7 @@ test("remove preserves paragraphs", function() {
 
 test("remove unwraps block nodes", function() {
     editor.value('<div style="text-align:center">foo</div><div style="text-align:center">bar</div>');
-    justifyCenter.remove([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    justifyCenter.remove([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
     equal(editor.value(), 'foobar');
 });
 
@@ -170,7 +170,7 @@ test("toggle on image in paragarph", function() {
 test("apply on image and sibling element", function() {
     editor.value('<img src="foo" /><p>foo</p>');
 
-    justifyRight.apply([ editor.body.firstChild, editor.body.lastChild ]);
+    justifyRight.apply([ editor.body.firstChild, editor.body.childNodes[1] ]);
 
     equal(editor.value(), '<img src="foo" style="float:right;" /><p style="text-align:right;">foo</p>');
 });
@@ -178,7 +178,7 @@ test("apply on image and sibling element", function() {
 test("apply on image and sibling text", function() {
     editor.value('<img src="foo" />foo');
 
-    justifyRight.apply([ editor.body.firstChild, editor.body.lastChild ]);
+    justifyRight.apply([ editor.body.firstChild, editor.body.childNodes[1] ]);
 
     equal(editor.value(), '<div style="text-align:right;"><img src="foo" style="float:right;" />foo</div>');
 });

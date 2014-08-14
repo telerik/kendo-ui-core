@@ -23,7 +23,7 @@ test('isFormatted returns false for text node', function() {
 test('isFormatted returns false for mixed selection node', function () {
     editor.value('<ul><li>foo</li></ul><p>bar</p>');
     var finder = new ListFormatFinder('ul');
-    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild]));
+    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild]));
 });
 
 test('isFormatted returns true for list', function() {
@@ -41,7 +41,7 @@ test('isFormatted returns true for list items from the same list', function() {
 test('isFormatted returns false for two lists', function() {
     editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
     var finder = new ListFormatFinder('ul');
-    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]));
+    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1].firstChild.firstChild]));
 });
 
 test('isFormatted returns true for multiple lists in table cells', function() {
@@ -56,19 +56,24 @@ test('isFormatted returns true for multiple lists in table cells', function() {
 test('findSuitable returns ul', function() {
     editor.value('<ul><li>foo</li></ul>bar');
     var finder = new ListFormatFinder('ul');
-    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild]), editor.body.firstChild);
+    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.childNodes[1]]), editor.body.firstChild);
+
 });
 
 test('findSuitable returns first ul for adjacent lists', function() {
     editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
     var finder = new ListFormatFinder('ul');
-    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]), editor.body.firstChild);
+    var firstUl = editor.body.firstChild;
+    var secondUl = editor.body.childNodes[1];
+    equal(finder.findSuitable([firstUl.firstChild.firstChild, secondUl.firstChild.firstChild]), firstUl);
 });
 
-test('findSuitable returns null when ul is not fist sibling', function() {
+test('findSuitable returns null when ul is not first sibling', function() {
     editor.value('<ol><li>foo</li></ol><ul><li>bar</li></ul>');
     var finder = new ListFormatFinder('ul');
-    ok(null === finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]));
+    var firstList = editor.body.firstChild;
+    var secondList = editor.body.childNodes[1];
+    ok(null === finder.findSuitable([firstList.firstChild.firstChild, secondList.firstChild.firstChild]));
 });
 
 test('isFormatted returns false in mixed list scenario', function() {

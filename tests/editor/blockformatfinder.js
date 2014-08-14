@@ -32,19 +32,19 @@ test("findSuitable returns null if no suitable found", function() {
 test("findSuitable returns all suitable nodes null if no suitable found", function() {
     editor.value("<div>foo</div><div>bar</div>");
     var finder = new BlockFormatFinder(justifyCenter);
-    equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]).length, 2);
+    equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]).length, 2);
 });
 
 test("findSuitable returns distinct nodes", function() {
     editor.value("<div><span>foo</span><span>bar</span></div><div>baz</div>");
     var finder = new BlockFormatFinder(justifyCenter);
-    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.firstChild.lastChild.firstChild, editor.body.lastChild.firstChild]).length, 2);
+    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.firstChild.lastChild.firstChild, editor.body.childNodes[1].firstChild]).length, 2);
 });
 
 test("findSuitable looks for common ancestor which is suitable", function() {
     editor.value("<div>foo</div>bar");
     var finder = new BlockFormatFinder(justifyCenter);
-    equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.lastChild]).length, 0);
+    equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.childNodes[1]]).length, 0);
 });
 
 test("findSuitable looks for the outer most common ancestor which is suitable", function() {
@@ -130,7 +130,7 @@ test("isFormatted returns true for formatted and unformatted nodes", function() 
     editor.value('<div style="text-align:center">foo</div>bar');
 
     var finder = new BlockFormatFinder(justifyCenter);
-    ok(!finder.isFormatted([editor.body.firstChild.firstChild, editor.body.lastChild]));
+    ok(!finder.isFormatted([editor.body.firstChild.firstChild, editor.body.childNodes[1]]));
 });
 
 test("isFormatted returns true for image", function() {
@@ -149,7 +149,7 @@ test("getFormat on single node", function() {
 test("getFormat on multiple different nodes", function() {
     editor.value("<h1>foo</h1><h2>bar</h2>");
     var finder = new BlockFormatFinder([{ tags: "div,p,h1,h2,h3,h4,h5,h6".split(",") }]);
-    equal(finder.getFormat([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]), "");
+    equal(finder.getFormat([editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]), "");
 });
 
 test("getFormat on body does not throw error", function() {

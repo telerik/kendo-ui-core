@@ -48,7 +48,7 @@ test('enumerate returns the text contents when more than one node is selected', 
 
     var result = enumerateRange(range);
 
-    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
 });
 
 test('enumerate returns the text contents in case of partial selection', function() {
@@ -56,7 +56,7 @@ test('enumerate returns the text contents in case of partial selection', functio
 
     var result = enumerateRange(range);
 
-    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]);
+    assertArrayEquals(result, [editor.body.firstChild.firstChild, editor.body.childNodes[1].firstChild]);
 });
 
 test('enumerate skips white space nodes', function() {
