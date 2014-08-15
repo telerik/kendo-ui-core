@@ -5,6 +5,7 @@ namespace Kendo.Mvc.UI.Html
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
+    using System.Globalization;
 
     public class SliderHtmlBuilder<T>: ISliderHtmlBuilder  where T : struct, IComparable
     {
@@ -35,8 +36,8 @@ namespace Kendo.Mvc.UI.Html
                 {
                     result = Component.Min;
                 }
-
-                value = "{0}".FormatWith(result);
+                CultureInfo info = CultureInfo.CurrentCulture;
+                value =  string.Format(info, "{0}", result);
             }
 
             if (!Component.LargeStep.HasValue)
