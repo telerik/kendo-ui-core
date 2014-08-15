@@ -178,7 +178,7 @@ Directory.prototype = {
         return this[name] = def.table = new Ctor(this, def);
     },
 
-    encode: function(tables) {
+    render: function(tables) {
         var tableCount = Object.keys(tables).length;
 
         var maxpow2 = Math.pow(2, Math.floor(Math.log(tableCount) / Math.LN2));
@@ -279,7 +279,7 @@ var HeadTable = deftable({
         this.indexToLocFormat   = data.readShort_();
         this.glyphDataFormat    = data.readShort_();
     },
-    encode: function(indexToLocFormat) {
+    render: function(indexToLocFormat) {
         var out = BinaryStream();
         out.writeLong(this.version);
         out.writeLong(this.revision);
@@ -320,7 +320,7 @@ var LocaTable = deftable({
     lengthOf: function(id) {
         return this.offsets[id + 1] - this.offsets[id];
     },
-    encode: function(offsets) {
+    render: function(offsets) {
         var out = BinaryStream();
         var needsLongFormat = offsets[offsets.length - 1] > 0xFFFF;
         for (var i = 0; i < offsets.length; ++i) {
@@ -358,7 +358,7 @@ var HheaTable = deftable({
         this.metricDataFormat     = data.readShort_();
         this.numOfLongHorMetrics  = data.readShort();
     },
-    encode: function(ids) {
+    render: function(ids) {
         var out = BinaryStream();
         out.writeLong(this.version);
         out.writeShort_(this.ascent);
@@ -399,7 +399,7 @@ var MaxpTable = deftable({
         this.maxComponentElements = data.readShort();
         this.maxComponentDepth = data.readShort();
     },
-    encode: function(glyphIds) {
+    render: function(glyphIds) {
         var out = BinaryStream();
         out.writeLong(this.version);
         out.writeShort(glyphIds.length);
@@ -443,7 +443,7 @@ var HmtxTable = deftable({
             lsb: this.leftSideBearings[id - n]
         };
     },
-    encode: function(glyphIds) {
+    render: function(glyphIds) {
         var out = BinaryStream();
         for (var i = 0; i < glyphIds.length; ++i) {
             var m = this.forGlyph(glyphIds[i]);
@@ -461,7 +461,7 @@ var GlyfTable = (function(){
     }
     SimpleGlyph.prototype = {
         compound: false,
-        encode: function() {
+        render: function() {
             return this.raw.get();
         }
     };
@@ -499,7 +499,7 @@ var GlyfTable = (function(){
 
     CompoundGlyph.prototype = {
         compound: true,
-        encode: function(old2new) {
+        render: function(old2new) {
             var out = BinaryStream(this.raw.get());
             for (var i = 0; i < this.glyphIds.length; ++i) {
                 var id = this.glyphIds[i];
@@ -547,14 +547,14 @@ var GlyfTable = (function(){
 
             return glyph;
         },
-        encode: function(glyphs, oldIds, old2new) {
+        render: function(glyphs, oldIds, old2new) {
             var out = BinaryStream(), offsets = [];
             for (var i = 0; i < oldIds.length; ++i) {
                 var id = oldIds[i];
                 var glyph = glyphs[id];
                 offsets.push(out.offset());
                 if (glyph) {
-                    out.write(glyph.encode(old2new));
+                    out.write(glyph.render(old2new));
                 }
             }
             offsets.push(out.offset());
@@ -626,7 +626,7 @@ var NameTable = (function(){
             this.subsetPsName = ps.text;
         },
 
-        encode: function() {
+        render: function() {
             var strings = this.strings;
             var strCount = 0;
             for (var i in strings) {
@@ -729,7 +729,7 @@ var PostTable = (function(){
                 return this.map[code] || 0xFFFF;
             }
         },
-        encode: function(mapping) {
+        render: function(mapping) {
             if (this.format = 0x00030000)
                 return this.raw();
 
@@ -860,7 +860,7 @@ var CmapTable = (function(){
     //     return chunks;
     // }
 
-    function encodeCharmap(charmap) {
+    function renderCharmap(charmap) {
         var codes = [];
         for (var i in charmap) {
             if (hasOwnProperty(charmap, i)) {
@@ -975,8 +975,8 @@ var CmapTable = (function(){
                 return entry;
             });
         },
-        encode: function(charmap) {
-            var result = encodeCharmap(charmap);
+        render: function(charmap) {
+            var result = renderCharmap(charmap);
             var out = BinaryStream();
             out.writeShort(0);  // version
             out.writeShort(1);  // tableCount
@@ -1039,7 +1039,7 @@ var OS2Table = deftable({
             }
         }
     },
-    encode: function() {
+    render: function() {
         return this.raw();
     }
 })
@@ -1120,8 +1120,8 @@ Subfont.prototype = {
         }
         return ret;
     },
-    encode: function() {
-        var cmap = CmapTable.encode(this.generateCmap());
+    render: function() {
+        var cmap = CmapTable.render(this.generateCmap());
         var glyphs = this.glyphsFor(this.glyphIds());
         var old2new = { 0: 0 };
         for (var code in cmap.charMap) {
@@ -1149,8 +1149,8 @@ Subfont.prototype = {
         });
 
         var font = this.font;
-        var glyf = font.glyf.encode(glyphs, oldIds, old2new);
-        var loca = font.loca.encode(glyf.offsets);
+        var glyf = font.glyf.render(glyphs, oldIds, old2new);
+        var loca = font.loca.render(glyf.offsets);
 
         this.cmap = {};
         for (var code in cmap.charMap) {
@@ -1164,16 +1164,16 @@ Subfont.prototype = {
             "cmap" : cmap.table,
             "glyf" : glyf.table,
             "loca" : loca.table,
-            "hmtx" : font.hmtx.encode(oldIds),
-            "hhea" : font.hhea.encode(oldIds),
-            "maxp" : font.maxp.encode(oldIds),
-            "post" : font.post.encode(oldIds),
-            "name" : font.name.encode(),
-            "head" : font.head.encode(loca.format),
-            "OS/2" : font.os2.encode()
+            "hmtx" : font.hmtx.render(oldIds),
+            "hhea" : font.hhea.render(oldIds),
+            "maxp" : font.maxp.render(oldIds),
+            "post" : font.post.render(oldIds),
+            "name" : font.name.render(),
+            "head" : font.head.render(loca.format),
+            "OS/2" : font.os2.render()
         };
 
-        return this.font.directory.encode(tables);
+        return this.font.directory.render(tables);
     }
 };
 
@@ -1222,9 +1222,6 @@ TTFFont.prototype = {
         this.lineGap = this.os2.lineGap || this.hhea.lineGap;
         this.scale = 1000 / this.head.unitsPerEm;
     },
-    glyphIdForCharCode: function(code) {
-        return this.cmap.unicodeEntry.codeMap[code];
-    },
     widthOfGlyph: function(glyph) {
         return this.hmtx.forGlyph(glyph).advance * this.scale;
     },
@@ -1241,7 +1238,7 @@ if (global.kendo) global.kendo.PDF.TTFFont = TTFFont;
     // var font = new TTFFont(data);
     // var sub = font.makeSubset();
     // sub.use("ăşţ");
-    // var out = sub.encode();
+    // var out = sub.render();
     // fs.writeFileSync("/tmp/out.ttf", out, { encoding: "binary" });
 
 })(Function("return this")());

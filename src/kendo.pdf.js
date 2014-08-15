@@ -18,7 +18,6 @@
                     throw new Error("Cannot output undefined to PDF");
                 }
                 else if (x instanceof PDFValue) {
-                    x.offset = offset;
                     x.beforeRender(out);
                     x.render(out);
                 }
@@ -70,7 +69,7 @@
         var objcount = 0;
         var objects = [];
 
-        self.makeObject = function(value) {
+        self.attach = function(value) {
             var obj = new PDFObject(value, ++objcount);
             objects.push(obj);
             return obj;
@@ -79,24 +78,23 @@
         var fonts = {};
         for (var i in self.FONTS) {
             if (hasOwnProperty(self.FONTS, i)) {
-                fonts[i] = self.makeObject(self.FONTS[i]);
+                fonts[i] = self.attach(self.FONTS[i]);
             }
         }
         self.FONTS = fonts;
 
-        var catalog = self.makeObject(new PDFCatalog());
-        var pageTree = self.makeObject(new PDFPageTree());
+        var catalog = self.attach(new PDFCatalog());
+        var pageTree = self.attach(new PDFPageTree());
         catalog.value.setPages(pageTree);
 
         self.addPage = function() {
             var content = new PDFStream(makeOutput());
-            var page = new PDFPage({
-                Contents : self.makeObject(content).makeRef(),
-                Parent   : pageTree.makeRef()
+            var page = new PDFPage(self, {
+                Contents : self.attach(content),
+                Parent   : pageTree
             });
             page._content = content;
-            page._pdf = self;
-            pageTree.value.addPage(self.makeObject(page));
+            pageTree.value.addPage(self.attach(page));
             return page;
         };
 
@@ -111,7 +109,8 @@
 
             /// file body
             for (i = 0; i < objects.length; ++i) {
-                out(objects[i], NL, NL);
+                objects[i].renderFull(out);
+                out(NL, NL);
             }
 
             /// cross-reference table
@@ -127,7 +126,7 @@
             out("trailer", NL);
             out(new PDFDictionary({
                 Size: objects.length,
-                Root: catalog.makeRef()
+                Root: catalog
             }), NL, NL);
 
             /// end
@@ -325,16 +324,18 @@
         this.props = props;
     }, {
         render: function(out) {
-            var props = this.props;
+            var props = this.props, empty = true;
             out("<<");
             out.withIndent(function(){
                 for (var i in props) {
                     if (hasOwnProperty(props, i) && !/^_/.test(i)) {
+                        empty = false;
                         out.indent(PDFName.get(i), " ", props[i]);
                     }
                 }
             });
-            out.indent(">>");
+            if (!empty) out.indent();
+            out(">>");
         }
     });
 
@@ -343,22 +344,14 @@
     var PDFObject = defclass(function PDFObject(value, id) {
         this.value = value;
         this.id = id;
+        this.offset = null;
     }, {
         render: function(out) {
-            out(this.id, " 0 obj ", this.value, " endobj");
+            out(this.id, " 0 R");
         },
-        makeRef: function() {
-            return new PDFObjectRef(this);
-        }
-    });
-
-    /// object references
-
-    var PDFObjectRef = defclass(function PDFObjectRef(target) {
-        this.target = target;
-    }, {
-        render: function(out) {
-            out(this.target.id, " 0 R");
+        renderFull: function(out) {
+            this.offset = out.offset();
+            out(this.id, " 0 obj ", this.value, " endobj");
         }
     });
 
@@ -387,7 +380,7 @@
         props.Type = PDFName.get("Catalog");
     }, {
         setPages: function(pagesObj) {
-            this.props.Pages = pagesObj.makeRef();
+            this.props.Pages = pagesObj;
         }
     }, PDFDictionary);
 
@@ -403,7 +396,7 @@
         };
     }, {
         addPage: function(pageObj) {
-            this.props.Kids.push(pageObj.makeRef());
+            this.props.Kids.push(pageObj);
             this.props.Count++;
         }
     }, PDFDictionary);
@@ -436,7 +429,8 @@
 
     /// TTF fonts
 
-    var PDFFont = defclass(function PDFFont(props){
+    var PDFFont = defclass(function PDFFont(pdf, props){
+        this._pdf = pdf;
         props = this.props = props || {};
         props.Type = PDFName.get("Font");
         props.Subtype = PDFName.get("TrueType");
@@ -475,7 +469,7 @@
                           (this.italicAngle != 0 ? 1 << 6 : 0) |
                           (1 << 5));
 
-            this.descriptor = this._pdf.makeObject(new PDFDictionary({
+            this.descriptor = this._pdf.attach(new PDFDictionary({
                 Type         : PDFName.get("FontDescriptor"),
                 FontName     : PDFName.get(this._sub.psName),
                 FontBBox     : this.bbox,
@@ -488,8 +482,8 @@
                 XHeight      : this.xHeight
             }));
 
-            this.stream = this._pdf.makeObject(new PDFStream(makeOutput()));
-            this.descriptor.value.props.FontFile2 = this.stream.makeRef();
+            this.stream = this._pdf.attach(new PDFStream(makeOutput()));
+            this.descriptor.value.props.FontFile2 = this.stream;
         },
         encodeText: function(text) {
             return this._sub.encodeText(text);
@@ -498,7 +492,7 @@
             // write the TTF data
             var self = this;
             var sub = self._sub;
-            var data = sub.encode();
+            var data = sub.render();
             self.stream.value.data(data);
 
             var cmap = sub.cmap;
@@ -512,19 +506,19 @@
             // update the dictionary
             var dict = self.props;
             dict.BaseFont = self._sub.psName;
-            dict.FontDescriptor = self.descriptor.makeRef();
+            dict.FontDescriptor = self.descriptor;
             dict.FirstChar = firstChar;
             dict.LastChar = lastChar;
             dict.Widths = charWidths;
 
-            var unimap = new PDFUnicodeCMap(ids, sub.subset);
+            var unimap = new PDFToUnicodeCmap(ids, sub.subset);
             var unimapStream = new PDFStream(makeOutput());
             unimapStream.data(unimap);
-            dict.ToUnicode = this._pdf.makeObject(unimapStream).makeRef();
+            dict.ToUnicode = this._pdf.attach(unimapStream);
         }
     }, PDFDictionary);
 
-    var PDFUnicodeCMap = defclass(function PDFUnicodeCMap(ids, map){
+    var PDFToUnicodeCmap = defclass(function PDFUnicodeCMap(ids, map){
         this.ids = ids;
         this.map = map;
     }, {
@@ -540,15 +534,17 @@
             out.indent("/CMapName /Adobe-Identity-UCS def");
             out.indent("/CMapType 2 def");
             out.indent("1 begincodespacerange");
-            out.indent("<0000><ffff>");
+            out.indent("  <0000><ffff>");
             out.indent("endcodespacerange");
 
             var ids = this.ids, map = this.map;
             out.indent(ids.length, " beginbfchar");
-            ids.forEach(function(code){
-                var unicode = map[code];
-                out.indent("<", zeropad(code.toString(16), 4), ">",
-                           "<", zeropad(unicode.toString(16), 4), ">");
+            out.withIndent(function(){
+                ids.forEach(function(code){
+                    var unicode = map[code];
+                    out.indent("<", zeropad(code.toString(16), 4), ">",
+                               "<", zeropad(unicode.toString(16), 4), ">");
+                });
             });
             out.indent("endbfchar");
 
@@ -561,7 +557,8 @@
 
     /// page object
 
-    var PDFPage = defclass(function PDFPage(props){
+    var PDFPage = defclass(function PDFPage(pdf, props){
+        this._pdf = pdf;
         this._rcount = 0;
         this._textMode = false;
         this._fontResources = {};
@@ -627,7 +624,7 @@
             var name = this._fontsByName[fontName];
             if (!name) {
                 name = this._fontsByName[fontName] = "F" + this._rcount++;
-                this._fontResources[name] = this._pdf.FONTS[fontName].makeRef();
+                this._fontResources[name] = this._pdf.FONTS[fontName];
             }
             return PDFName.get(name);
         },
@@ -635,7 +632,7 @@
             props.Type = "ExtGState";
             var gs = new PDFDictionary(props);
             var name = "GS" + this._rcount++;
-            this._gsResources[name] = this._pdf.makeObject(gs).makeRef();
+            this._gsResources[name] = this._pdf.attach(gs);
             return PDFName.get(name);
         }
     }, PDFDictionary);
@@ -657,10 +654,9 @@
 
     {
         var fs = require("fs");
-        var font = new PDFFont();
-        var fontObj = pdf.makeObject(font);
-        font._pdf = pdf;
-        var fontdata = fs.readFileSync("/home/mishoo/tmp/timesi.ttf", { encoding: "binary" });
+        var font = new PDFFont(pdf);
+        var fontObj = pdf.attach(font);
+        var fontdata = fs.readFileSync("/usr/share/fonts/truetype/msttcorefonts/timesi.ttf", { encoding: "binary" });
         fontdata = fontdata.toString("binary");
         font.loadTTF(fontdata);
 
@@ -669,9 +665,9 @@
 
         var page = pdf.addPage();
         page._beginText();
-        page._out("70 50 TD", NL);
-        page._out(page._getFontResource(fontName), " 20 Tf", NL);
-        page._out(new PDFHexString(font.encodeText("© ™ ® ă ş ţ î â Ă Ş Ţ Î Â α β π λ Λ")), " Tj", NL);
+        page._out(mm2pt(10), " ", mm2pt(250), " TD", NL);
+        page._out(page._getFontResource(fontName), " 25 Tf", NL);
+        page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
         page._endText();
     }
 
