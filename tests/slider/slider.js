@@ -1,4 +1,6 @@
-﻿var Slider = kendo.ui.Slider;
+﻿(function(){
+
+var Slider = kendo.ui.Slider;
 var input;
 var isDefaultPrevent;
 
@@ -292,10 +294,19 @@ test("slider should render large ticks instead of small ticks", function () {
     })
 });
 
-test("slider should render ", function () {
+test("slider should render a small last tick", function () {
     var slider = newSlider({ max: 23 }, $("<input />"));
     var lastLargeTick = slider.wrapper.find(".k-tick-large span:last");
     equal(lastLargeTick.html(), 20);
     var lastSmallTick = slider.wrapper.find(".k-tick:last");
     equal(lastSmallTick.attr("title"), 23);
 });
+
+test("slider should not modify input value with bg-BG culture", function () {
+    kendo.culture("bg-BG");
+    var slider = newSlider({}, $("<input value='5,5' />"));
+    equal(slider.element.val(), "5,5");
+    kendo.culture("en-US");
+});
+
+}());

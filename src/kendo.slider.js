@@ -422,10 +422,10 @@ var __meta__ = {
                 inputs = element.find("input");
 
             if (inputs.length == 2) {
-                inputs.eq(0).val(options.selectionStart);
-                inputs.eq(1).val(options.selectionEnd);
+                inputs.eq(0).prop("value", formatValue(options.selectionStart));
+                inputs.eq(1).prop("value", formatValue(options.selectionEnd));
             } else {
-                element.val(options.value);
+                element.prop("value", formatValue(options.value));
             }
 
             element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
@@ -630,7 +630,7 @@ var __meta__ = {
             options = that.options;
             if (!defined(options.value) || options.value === null) {
                 options.value = options.min;
-                element.val(options.min);
+                element.prop("value", formatValue(options.min));
             }
             options.value = math.max(math.min(options.value, options.max), options.min);
 
@@ -1288,12 +1288,12 @@ var __meta__ = {
             options = that.options;
             if (!defined(options.selectionStart) || options.selectionStart === null) {
                 options.selectionStart = options.min;
-                inputs.eq(0).val(options.min);
+                inputs.eq(0).prop("value", formatValue(options.min));
             }
 
             if (!defined(options.selectionEnd) || options.selectionEnd === null) {
                 options.selectionEnd = options.max;
-                inputs.eq(1).val(options.max);
+                inputs.eq(1).prop("value", formatValue(options.max));
             }
 
             var dragHandles = that.wrapper.find(DRAG_HANDLE);
