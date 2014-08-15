@@ -1048,7 +1048,7 @@ function Subfont(font) {
     this.font = font;
     this.subset = {};
     this.unicodes = {};
-    this.next = 32;
+    this.next = 1;
     this.psName = this.font.name.subsetPsName;
 }
 

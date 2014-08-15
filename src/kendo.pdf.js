@@ -289,7 +289,7 @@
         render: function(out) {
             out("<");
             for (var i = 0; i < this.value.length; ++i) {
-                out(" ", zeropad(this.value.charCodeAt(i).toString(16), 2));
+                out(" ", zeropad(this.value.charCodeAt(i).toString(16), 4));
             }
             out(" >");
         }
@@ -433,8 +433,8 @@
         this._pdf = pdf;
         props = this.props = props || {};
         props.Type = PDFName.get("Font");
-        props.Subtype = PDFName.get("TrueType");
-        props.Encoding = PDFName.get("MacRomanEncoding");
+        props.Subtype = PDFName.get("Type0");
+        props.Encoding = PDFName.get("Identity-H");
     }, {
         loadTTF: function(data) {
             var font = this._font = new PDF.TTFFont(data);
@@ -494,6 +494,7 @@
             var sub = self._sub;
             var data = sub.render();
             self.stream.value.data(data);
+            self.stream.value.props.Length1 = data.length;
 
             var cmap = sub.cmap;
             var ids = Object.keys(cmap).sort(function(a, b){ return a - b }).map(parseFloat);
@@ -503,14 +504,34 @@
             var firstChar = ids[0];
             var lastChar = ids[ids.length - 1];
 
-            // update the dictionary
-            var dict = self.props;
-            dict.BaseFont = self._sub.psName;
-            dict.FontDescriptor = self.descriptor;
-            dict.FirstChar = firstChar;
-            dict.LastChar = lastChar;
-            dict.Widths = charWidths;
+            // As if two dictionaries weren't enough, we need another
+            // one, the "descendant font".  Only that one can be of
+            // Subtype CIDFontType2.  PDF is the X11 of document
+            // formats: portable but full of legacy that nobody cares
+            // about anymore.
 
+            var descendant = new PDFDictionary({
+                Type: PDFName.get("Font"),
+                Subtype: PDFName.get("CIDFontType2"),
+                BaseFont: PDFName.get(self._sub.psName),
+                CIDSystemInfo: new PDFDictionary({
+                    Registry   : new PDFString("Adobe"),
+                    Ordering   : new PDFString("Identity"),
+                    Supplement : 0
+                }),
+                FontDescriptor: self.descriptor,
+                FirstChar: firstChar,
+                LastChar: lastChar,
+                W: [ 1, charWidths ],
+                CIDToGIDMap: PDFName.get("Identity")
+            });
+
+            var dict = self.props;
+            dict.BaseFont = PDFName.get(self._sub.psName);
+            dict.DescendantFonts = [ self._pdf.attach(descendant) ];
+
+            // Compute the ToUnicode map so that apps can extract
+            // meaningful text from the PDF.
             var unimap = new PDFToUnicodeCmap(ids, sub.subset);
             var unimapStream = new PDFStream(makeOutput());
             unimapStream.data(unimap);
@@ -652,6 +673,8 @@
 
     var pdf = new PDF();
 
+    var cyrillic = "Румы́нская кири́ллица использовалась для записи румынского языка до официальной замены латиницей в начале 1860-х годов. Варианты кириллического алфавита, употреблявшиеся для молдавского языка в Молдавской АССР в 1924—1932 и в 1938—1940 гг. (между 1932 и 1938 гг. официально использовалась латиница) и с 1940 по 1989 в Молдавской ССР (см. Молдавский алфавит), значительно отличаются от традиционной кириллицы, использовавшейся в Валахии, Трансильвании и Молдове и по сути представляют собой адаптацию русского алфавита для молдавского языка. Перевод румынской письменности на латиницу был двухступенчатым: сначала применялся так называемый «переходный алфавит», включавший как кириллические, так и латинские знаки, и лишь через несколько лет была введена собственно латиница.";
+
     {
         var fs = require("fs");
         var font = new PDFFont(pdf);
@@ -666,81 +689,88 @@
         var page = pdf.addPage();
         page._beginText();
         page._out(mm2pt(10), " ", mm2pt(250), " TD", NL);
-        page._out(page._getFontResource(fontName), " 25 Tf", NL);
+        page._out(page._getFontResource(fontName), " 20 Tf", NL);
+        //page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
+        page._out(new PDFHexString(font.encodeText("abcdefghijklmnopqrstuvxyz (0123456789)")), " Tj", NL);
+        page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
+        page._out(new PDFHexString(font.encodeText("ABCDEFGHIJKLMNOPQRSTUVXYZ @#$%^&*-=_+—≠±–")), " Tj", NL);
+        page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
         page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
+        page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
+        page._out(new PDFHexString(font.encodeText(cyrillic)), " Tj", NL);
         page._endText();
     }
 
-    var page1 = pdf.addPage();
-    page1._beginText();
-    page1._out("70 50 TD", NL);
-    page1._out(page1._getFontResource(fontName), " 20 Tf", NL);
-    page1._out(new PDFHexString(font.encodeText("Check this out")), " Tj", NL);
-    page1._endText();
+    // var page1 = pdf.addPage();
+    // page1._beginText();
+    // page1._out("70 50 TD", NL);
+    // page1._out(page1._getFontResource(fontName), " 20 Tf", NL);
+    // page1._out(new PDFHexString(font.encodeText("Check this out")), " Tj", NL);
+    // page1._endText();
 
-    var page2 = pdf.addPage();
-    page2._transform(1, 0, 0, -1, 0, mm2pt(297));
+    // var page2 = pdf.addPage();
+    // page2._transform(1, 0, 0, -1, 0, mm2pt(297));
 
-    page2._saveContext();
-    page2._setLineWidth(0.2);
-    for (var y = 0; y <= 297; y += 10) {
-        page2._out(mm2pt(0), " ", mm2pt(y), " m ",
-                   mm2pt(210), " ", mm2pt(297 - y), " l s", NL);
-    }
-    for (var x = 0; x <= 210; x += 10) {
-        page2._out(mm2pt(x), " ", mm2pt(0), " m ",
-                   mm2pt(210 - x), " ", mm2pt(297), " l s", NL);
-    }
-    page2._restoreContext();
+    // page2._saveContext();
+    // page2._setLineWidth(0.2);
+    // for (var y = 0; y <= 297; y += 10) {
+    //     page2._out(mm2pt(0), " ", mm2pt(y), " m ",
+    //                mm2pt(210), " ", mm2pt(297 - y), " l s", NL);
+    // }
+    // for (var x = 0; x <= 210; x += 10) {
+    //     page2._out(mm2pt(x), " ", mm2pt(0), " m ",
+    //                mm2pt(210 - x), " ", mm2pt(297), " l s", NL);
+    // }
+    // page2._restoreContext();
 
-    var opacity_half = page2._getGSResource({ ca: 0.5, CA: 0.5 });
+    // var opacity_half = page2._getGSResource({ ca: 0.5, CA: 0.5 });
 
-    page2._saveContext();
-    page2._transform(1, 0, 0, -1, mm2pt(105), mm2pt(148.5));
-    page2._beginText();
-    page2._out(page2._getFontResource("Times-Roman"), " 50 Tf", NL);
-    page2._setFillColor(0.5, 0.5, 0.5);
-    page2._out(opacity_half, " gs", NL);
-    page2._setLineWidth(1);
-    page2._setStrokeColor(1, 0, 0);
-    page2._out("2 Tr", NL);
-    page2._out(new PDFString("Hello world!"), " Tj", NL);
-    page2._endText();
-    page2._restoreContext();
+    // page2._saveContext();
+    // page2._transform(1, 0, 0, -1, mm2pt(105), mm2pt(148.5));
+    // page2._beginText();
+    // page2._out(page2._getFontResource("Times-Roman"), " 50 Tf", NL);
+    // page2._setFillColor(0.5, 0.5, 0.5);
+    // page2._out(opacity_half, " gs", NL);
+    // page2._setLineWidth(1);
+    // page2._setStrokeColor(1, 0, 0);
+    // page2._out("2 Tr", NL);
+    // page2._out(new PDFString("Hello world!"), " Tj", NL);
+    // page2._endText();
+    // page2._restoreContext();
 
-    page2._saveContext();
-    page2._transform(1, 0, 0, -1, mm2pt(10), mm2pt(10));
-    page2._beginText();
-    page2._out(page2._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
-    page2._out("2 Tr", NL);
-    page2._setLineWidth(0.1);
-    page2._setStrokeColor(0.9, 0.2, 0.1);
-    page2._setFillColor(0.9, 0.9, 0.2);
-    page2._setDashPattern([ 1.5, 0.5 ], 0);
-    page2._out(opacity_half, " gs", NL);
-    page2._out(new PDFString("Second line"), " Tj", NL);
-    page2._endText();
-    page2._restoreContext();
+    // page2._saveContext();
+    // page2._transform(1, 0, 0, -1, mm2pt(10), mm2pt(10));
+    // page2._beginText();
+    // page2._out(page2._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
+    // page2._out("2 Tr", NL);
+    // page2._setLineWidth(0.1);
+    // page2._setStrokeColor(0.9, 0.2, 0.1);
+    // page2._setFillColor(0.9, 0.9, 0.2);
+    // page2._setDashPattern([ 1.5, 0.5 ], 0);
+    // page2._out(opacity_half, " gs", NL);
+    // page2._out(new PDFString("Second line"), " Tj", NL);
+    // page2._endText();
+    // page2._restoreContext();
 
-    page2._setStrokeColor(0, 0.8, 0);
+    // page2._setStrokeColor(0, 0.8, 0);
 
-    page2._out(mm2pt(105), " ", mm2pt(0), " m", NL);
-    page2._out(mm2pt(105), " ", mm2pt(297), " l", NL);
-    page2._out("s", NL, NL);
+    // page2._out(mm2pt(105), " ", mm2pt(0), " m", NL);
+    // page2._out(mm2pt(105), " ", mm2pt(297), " l", NL);
+    // page2._out("s", NL, NL);
 
-    page2._out(mm2pt(0), " ", mm2pt(148.5), " m", NL);
-    page2._out(mm2pt(210), " ", mm2pt(148.5), " l", NL);
-    page2._out("s", NL, NL);
+    // page2._out(mm2pt(0), " ", mm2pt(148.5), " m", NL);
+    // page2._out(mm2pt(210), " ", mm2pt(148.5), " l", NL);
+    // page2._out("s", NL, NL);
 
-    var page3 = pdf.addPage();
-    page3._transform(mm2pt(1), 0, 0, mm2pt(1), mm2pt(105), mm2pt(148.5));
-    page3._beginText();
-    page3._out(page3._getFontResource("Courier-Bold"), " 10 Tf", NL);
-    page3._out(new PDFString("Courier-Bold"), " Tj", NL);
-    page3._endText();
+    // var page3 = pdf.addPage();
+    // page3._transform(mm2pt(1), 0, 0, mm2pt(1), mm2pt(105), mm2pt(148.5));
+    // page3._beginText();
+    // page3._out(page3._getFontResource("Courier-Bold"), " 10 Tf", NL);
+    // page3._out(new PDFString("Courier-Bold"), " Tj", NL);
+    // page3._endText();
 
-    page3._out("-105 0 m 105 0 l s ", NL);
-    page3._out("0 -148.5 m 0 148.5 l s ", NL);
+    // page3._out("-105 0 m 105 0 l s ", NL);
+    // page3._out("0 -148.5 m 0 148.5 l s ", NL);
 
     //console.log("%s", pdf.render());
     //require("util").puts(pdf.render());
