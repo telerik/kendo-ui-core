@@ -378,8 +378,9 @@
                                 });
                                 bindBefore(widget, "change", function(){
                                     updating = true;
-                                    setter(scope, widget.value());
-                                    digest(scope);
+                                    scope.$apply(function(){
+                                        setter(scope, widget.value());
+                                    });
                                     updating = false;
                                 });
                             }
