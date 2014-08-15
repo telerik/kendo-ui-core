@@ -317,10 +317,19 @@ test("rangeSlider resize should resize", function () {
 });
 
 test("rangeSlider should render large ticks instead of small ticks", function () {
-    var slider = newSlider({ smallStep: 1, largeStep: 1 }, $("<input />"));
-    slider.wrapper.find(".k-tick-large").each(function() {
+    var rangeSlider = newRangeSlider({ smallStep: 1, largeStep: 1 });
+    rangeSlider.wrapper.find(".k-tick-large").each(function() {
         ok($(this).hasClass("k-tick-large"));
     })
+});
+
+test("rangeSlider should not modify input value with bg-BG culture", function () {
+    kendo.culture("bg-BG");
+    var rangeSlider = newRangeSlider({}, $("<div><input value='2,2' /><input value='4,4' /></div>"));
+        inputs = rangeSlider.element.find("input");
+    equal(inputs.eq(0).val(), "2,2");
+    equal(inputs.eq(1).val(), "4,4");
+    kendo.culture("en-US");
 });
 
 }());
