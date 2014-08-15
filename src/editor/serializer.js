@@ -26,7 +26,7 @@ div = null;
 
 var Serializer = {
     toEditableHtml: function(html) {
-        var br = '<br _moz_dirty="">';
+        var br = '<br class="k-br">';
 
         html = html || "";
 

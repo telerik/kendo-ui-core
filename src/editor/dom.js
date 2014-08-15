@@ -283,7 +283,7 @@ var Dom = {
     insignificant: function(node) {
         var attr = node.attributes;
 
-        return node.className == "k-marker" || (Dom.is(node, 'br') && (attr._moz_dirty || attr._moz_editor_bogus_node));
+        return node.className == "k-marker" || (Dom.is(node, 'br') && (node.className == "k-br" || attr._moz_dirty || attr._moz_editor_bogus_node));
     },
 
     emptyNode: function(node) {
@@ -758,7 +758,7 @@ var Dom = {
 
         if (!name || name != "br" && name != "img") {
             br = node.ownerDocument.createElement("br");
-            br.setAttribute("_moz_dirty", true);
+            br.className = "k-br";
             node.appendChild(br);
         }
     }
