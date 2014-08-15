@@ -18,7 +18,7 @@ editor_module("editor list formatter", {
 function clean(html) {
     return html.toLowerCase()
         .replace(/class=k-marker/g, 'class="k-marker"')
-        .replace(/<br[^>]*dirty[^>]*>/ig, "")
+        .replace(/<br[^>]*k-br[^>]*>/ig, "")
         .replace(/\r\n/g, '');
 }
 

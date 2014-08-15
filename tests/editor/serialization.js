@@ -142,6 +142,11 @@ test('br moz dirty removed', function() {
     equal(editor.value(), '');
 });
 
+test('br k-br removed', function() {
+    editor.value('<br class="k-br">');
+    equal(editor.value(), '');
+});
+
 test('moz dirty removed', function() {
     editor.value('<hr _moz_dirty="">');
     equal(editor.value(), '<hr />');
@@ -466,7 +471,7 @@ test("removes whitespace after images", function() {
 
     var table = '<table><tr><td>foo</td></tr></table>';
     var blockquote = '<blockquote>foo</blockquote>';
-    var br = '<br _moz_dirty="">';
+    var br = '<br class="k-br">';
     equal(Serializer.toEditableHtml(table), br + table + br);
     equal(Serializer.toEditableHtml(blockquote), br + blockquote + br);
 });

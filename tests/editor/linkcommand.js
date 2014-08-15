@@ -421,8 +421,7 @@ test("link dialog allows users to remove target='_blank' attribute", function() 
     createLink(editor.getRange(), "foo", "foo", true);
 
     var range = editor.getRange();
-    range.setStart(editor.body, 0);
-    range.setEnd(editor.body, 2);
+    range.selectNodeContents(editor.body);
 
     execLinkCommandOnRange(range);
 

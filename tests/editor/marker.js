@@ -27,7 +27,7 @@ function createRange(startContainer, startOffset, endContainer, endOffset) {
 }
 
 function clean(html) {
-    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/<br[^>]*dirty[^>]*>/ig, "");
+    return html.toLowerCase().replace(/class=k-marker/g, 'class="k-marker"').replace(/<br[^>]*k-br[^>]*>/ig, "");
 }
 
 test('addMarker inserts markers', function() {
