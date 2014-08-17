@@ -124,6 +124,8 @@ function BinaryStream(data) {
 
         get: function() { return data },
 
+        toString: function() { return data },
+
         length: function() { return data.length },
 
         slice: function(start, length) {
@@ -804,7 +806,7 @@ var CmapTable = (function(){
                 var endCode = data.times(segCount, data.readShort);
                 data.skip(2);       // reserved pad
                 var startCode = data.times(segCount, data.readShort);
-                var idDelta = data.times(segCount, data.readShort);
+                var idDelta = data.times(segCount, data.readShort_);
                 var idRangeOffset = data.times(segCount, data.readShort);
 
                 var count = (self.length + self.offset - data.offset()) / 2;
@@ -940,18 +942,12 @@ var CmapTable = (function(){
         out.writeShort(entrySelector);
         out.writeShort(rangeShift);
 
-        function addArray(a) {
-            for (var i = 0; i < a.length; ++i) {
-                out.writeShort(a[i]);
-            }
-        }
-
-        addArray(endCodes);
+        endCodes.forEach(out.writeShort);
         out.writeShort(0);      // reserved pad
-        addArray(startCodes);
-        addArray(deltas);
-        addArray(rangeOffsets);
-        addArray(glyphIds);
+        startCodes.forEach(out.writeShort);
+        deltas.forEach(out.writeShort_);
+        rangeOffsets.forEach(out.writeShort);
+        glyphIds.forEach(out.writeShort);
 
         return {
             charMap: charMap,
@@ -1080,7 +1076,11 @@ Subfont.prototype = {
         var mapping = {};
         for (var i in this.subset) {
             if (hasOwnProperty(this.subset, i)) {
-                mapping[i] = unicodeCmap[this.subset[i]];
+                var unicode = this.subset[i];
+                var gid = unicodeCmap[unicode];
+                if (gid != null) {
+                    mapping[i] = gid;
+                }
             }
         }
         return mapping;
@@ -1141,7 +1141,6 @@ Subfont.prototype = {
             }
         }
 
-        // XXX: IE8.
         var new2old = this.invertObject(old2new);
         var newIds = Object.keys(new2old).sort(function(a, b){ return a - b });
         var oldIds = newIds.map(function(id){
@@ -1230,7 +1229,10 @@ TTFFont.prototype = {
     }
 };
 
-if (global.kendo) global.kendo.PDF.TTFFont = TTFFont;
+if (global.kendo) {
+    global.kendo.PDF.TTFFont = TTFFont;
+    global.kendo.PDF.BinaryStream = BinaryStream;
+}
 
     // var fs = require("fs");
     // var data = fs.readFileSync("/home/mishoo/tmp/timesi.ttf", { encoding: "binary" });
