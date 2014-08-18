@@ -732,7 +732,7 @@ var PostTable = (function(){
             }
         },
         render: function(mapping) {
-            if (this.format = 0x00030000)
+            if (this.format == 0x00030000)
                 return this.raw();
 
             // keep original header, but set format to 2.0
