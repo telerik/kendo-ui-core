@@ -54,6 +54,18 @@
         equal(dataSource.at(0).foo, "bar");
     });
 
+    test("replaced data is stored offline", function() {
+        var dataSource = new DataSource({
+            offlineStorage: "key"
+        });
+
+        dataSource.data([ { foo: "foo" }]);
+        dataSource.online(false);
+        dataSource.read();
+
+        equal(dataSource.at(0).foo, "foo");
+    });
+
     test("state uses custom storage to save", 1, function() {
         var state = {};
 

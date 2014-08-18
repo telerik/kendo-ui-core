@@ -2259,6 +2259,8 @@ var __meta__ = {
 
                 that._pristineData = value.slice(0);
 
+                that._storeData();
+
                 that._ranges = [];
                 that.trigger("reset");
                 that._addRange(that._data);
