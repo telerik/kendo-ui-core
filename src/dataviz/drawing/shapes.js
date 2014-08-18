@@ -145,6 +145,8 @@
                     child.traverse(callback);
                 }
             }
+
+            return this;
         },
 
         append: function() {
@@ -152,24 +154,30 @@
             updateElementsParent(arguments, this);
 
             this.childrenChange("add", arguments);
+
+            return this;
         },
 
-        remove: function(shape) {
-            var index = inArray(shape, this.children);
+        remove: function(element) {
+            var index = inArray(element, this.children);
             if (index >= 0) {
                 this.children.splice(index, 1);
-                shape.parent = null;
-                this.childrenChange("remove", [shape], index);
+                element.parent = null;
+                this.childrenChange("remove", [element], index);
             }
+
+            return this;
         },
 
         removeAt: function(index) {
             if (0 <= index && index < this.children.length) {
-                var shape = this.children[index];
+                var element = this.children[index];
                 this.children.splice(index, 1);
-                shape.parent = null;
-                this.childrenChange("remove", [shape], index);
+                element.parent = null;
+                this.childrenChange("remove", [element], index);
             }
+
+            return this;
         },
 
         clear: function() {
@@ -178,6 +186,8 @@
             updateElementsParent(items, null);
 
             this.childrenChange("remove", items, 0);
+
+            return this;
         },
 
         bbox: function(transformation) {
