@@ -31,7 +31,7 @@
 
     // Constants ==============================================================
     var NONE = "none",
-        TRANSPARENT = "transparent",
+        TRANSP = "transparent",
         COORDINATE_MULTIPLE = 100,
         TRANSFORM_PRECISION = 4;
 
@@ -362,7 +362,7 @@
         mapFill: function(fill) {
             var attrs = [];
 
-            if (fill && fill.color !== TRANSPARENT) {
+            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", fill.color]);
 

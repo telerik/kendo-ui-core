@@ -37,8 +37,10 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        SOLID = "solid";
+        DASH_ARRAYS = d.DASH_ARRAYS,
+        NONE = "none",
+        SOLID = "solid",
+        TRANSP = "transparent";
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
@@ -84,8 +86,22 @@
             var childNodes = this.childNodes,
                 i;
 
+            ctx.save();
+            this.setTransform(ctx);
+
             for (i = 0; i < childNodes.length; i++) {
                 childNodes[i].renderTo(ctx);
+            }
+
+            ctx.restore();
+        },
+
+        setTransform: function(ctx) {
+            if (this.srcElement) {
+                var transform = this.srcElement.transform();
+                if (transform) {
+                    ctx.transform.apply(ctx, transform.matrix().toArray(6));
+                }
             }
         },
 
@@ -163,20 +179,24 @@
 
         setFill: function(ctx) {
             var fill = this.srcElement.options.fill;
-            if (fill && fill.color !== "transparent") {
+            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
                 ctx.fillStyle = fill.color;
                 ctx.globalAlpha = fill.opacity;
                 ctx.fill();
+
+                return true;
             }
         },
 
         setStroke: function(ctx) {
             var stroke = this.srcElement.options.stroke;
-            if (stroke) {
+            if (stroke && stroke.color !== NONE && stroke.color !== TRANSP) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
                 ctx.globalAlpha = stroke.opacity;
                 ctx.stroke();
+
+                return true;
             }
         },
 
@@ -214,13 +234,6 @@
             var stroke = this.srcElement.options.stroke;
             if (stroke && stroke.lineJoin) {
                 ctx.lineJoin = stroke.lineJoin;
-            }
-        },
-
-        setTransform: function(ctx) {
-            var transform = this.srcElement.transform();
-            if (transform) {
-                ctx.transform.apply(ctx, transform.matrix().toArray(6));
             }
         },
 
@@ -293,11 +306,17 @@
             ctx.save();
             ctx.beginPath();
 
-            this.setFill(ctx);
             this.setTransform(ctx);
-
             ctx.font = text.options.font;
-            ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
+
+            if (this.setFill(ctx)) {
+                ctx.fillText(text.content(), pos.x, pos.y + size.baseline);
+            }
+
+            if (this.setStroke(ctx)) {
+                this.setLineDash(ctx);
+                ctx.strokeText(text.content(), pos.x, pos.y + size.baseline);
+            }
 
             ctx.restore();
         }

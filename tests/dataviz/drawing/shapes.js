@@ -217,6 +217,10 @@
             group.append(child);
         });
 
+        test("append is chainable", function() {
+            equal(group.append(new Group()), group);
+        });
+
         test("remove removes child", function() {
             var toRemove = new Group();
             group.append(toRemove);
@@ -259,6 +263,13 @@
             };
 
             group.remove(toRemove);
+        });
+
+        test("remove is chainable", function() {
+            var child = new Group();
+            group.append(child);
+
+            equal(group.remove(child), group);
         });
 
         test("removeAt removes child at specified index", function() {
@@ -308,6 +319,13 @@
             group.removeAt(1);
         });
 
+        test("removeAt is chainable", function() {
+            var child = new Group();
+            group.append(child);
+
+            equal(group.removeAt(0), group);
+        });
+
         test("clear triggers childrenChange", function() {
             var child = new Group();
             group.append(child);
@@ -327,6 +345,10 @@
             group.clear();
 
             ok(child.parent === null);
+        });
+
+        test("clear is chainable", function() {
+            equal(group.clear(), group);
         });
 
         test("visible triggers optionsChange", function() {
@@ -366,6 +388,10 @@
             group.traverse(function(item) {
                 ok(true);
             });
+        });
+
+        test("traverse is chainable", function() {
+            equal(group.traverse($.noop), group);
         });
 
         test("boundingBox returns children bounding rectangle", function() {

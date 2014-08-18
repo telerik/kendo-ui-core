@@ -26,14 +26,14 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        DASH_ARRAYS = dataviz.DASH_ARRAYS,
+        DASH_ARRAYS = d.DASH_ARRAYS,
         NONE = "none",
         SOLID = "solid",
         SPACE = " ",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TRANSFORM = "transform",
-        TRANSPARENT = "transparent",
+        TRANSP = "transparent",
         UNDEFINED = "undefined";
 
     // SVG rendering surface ==================================================
@@ -189,7 +189,7 @@
 
         optionsChange: function(e) {
             if (e.field === "visible") {
-                this.css("display", e.value ? "" : "none");
+                this.css("display", e.value ? "" : NONE);
             }
 
             BaseNode.fn.optionsChange.call(this, e);
@@ -266,7 +266,7 @@
             var style = [["cursor", this.srcElement.options.cursor]];
 
             if (this.srcElement.options.visible === false) {
-                style.push(["display", "none"]);
+                style.push(["display", NONE]);
             }
 
             return style;
@@ -411,7 +411,7 @@
         mapStroke: function(stroke) {
             var attrs = [];
 
-            if (stroke) {
+            if (stroke && stroke.color !== NONE && stroke.color !== TRANSP) {
                 attrs.push(["stroke", stroke.color]);
                 attrs.push(["stroke-width", stroke.width]);
                 attrs.push(["stroke-linecap", this.renderLinecap(stroke)]);
@@ -424,6 +424,8 @@
                 if (defined(stroke.dashType)) {
                     attrs.push(["stroke-dasharray", this.renderDashType(stroke)]);
                 }
+            } else {
+                attrs.push(["stroke", NONE]);
             }
 
             return attrs;
@@ -462,7 +464,7 @@
         mapFill: function(fill) {
             var attrs = [];
 
-            if (fill && fill.color !== TRANSPARENT) {
+            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
                 attrs.push(["fill", fill.color]);
 
                 if (defined(fill.opacity)) {

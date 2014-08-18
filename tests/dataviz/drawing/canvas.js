@@ -20,7 +20,8 @@
             moveTo: $.noop,
             restore: $.noop,
             save: $.noop,
-            stroke: $.noop
+            stroke: $.noop,
+            strokeText: $.noop
         }, members);
     }
 
@@ -153,12 +154,198 @@
             node.invalidate = function() { ok(true); };
             node.load([new d.Group()]);
         });
+
+        test("renders transform", function() {
+            var group = new d.Group();
+            group.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
+
+            var ctx = mockContext({
+                transform: function(a, b, c, d, e, f) {
+                    deepEqual([a, b, c, d, e, f], [1e-6, 2, 3, 4, 5, 6]);
+                }
+            });
+
+            node.load([group]);
+            node.renderTo(ctx);
+        });
+
+        test("does not render transform if not set", 0, function() {
+            var ctx = mockContext({
+                transform: function(mx) {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
     })();
+
+    function paintTests(TShape, TNode, nodeName) {
+        var shape;
+        var node;
+
+        module("Paint Tests / " + nodeName, {
+            setup: function() {
+                shape = new TShape()
+                    .stroke("red", 2).fill("blue");
+
+                node = new TNode(shape);
+            }
+        });
+
+        test("renders stroke", function() {
+            var ctx = mockContext({
+                stroke: function() {
+                    equal(ctx.strokeStyle, "red");
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render stroke if set to none", 0, function() {
+            shape.options.set("stroke.color", "none");
+
+            var ctx = mockContext({
+                stroke: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render stroke if set to transparent", 0, function() {
+            shape.options.set("stroke.color", "transparent");
+
+            var ctx = mockContext({
+                stroke: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("renders stroke width", function() {
+            var ctx = mockContext({
+                stroke: function() {
+                    equal(ctx.lineWidth, 2);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("renders stroke opacity", function() {
+            shape.options.set("stroke.opacity", 0.5);
+
+            var ctx = mockContext({
+                stroke: function() {
+                    equal(ctx.globalAlpha, 0.5);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render stroke opacity if not set", function() {
+            var ctx = mockContext({
+                stroke: function() {
+                    equal(ctx.globalAlpha, undefined);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("renders stroke dashType", function() {
+            shape.options.set("stroke.dashType", "dot");
+
+            var ctx = mockContext({
+                setLineDash: function(arr) {
+                    deepEqual(arr, [1.5, 3.5]);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render stroke dashType if not set", 0, function() {
+            var ctx = mockContext({
+                setLineDash: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("renders fill", function() {
+            var ctx = mockContext({
+                fill: function() {
+                    equal(ctx.fillStyle, "blue");
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("renders fill opacity", function() {
+            shape.options.set("fill.opacity", 0.5);
+
+            var ctx = mockContext({
+                fill: function() {
+                    equal(ctx.globalAlpha, 0.5);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render fill if not set", 0, function() {
+            shape.options.set("fill", null);
+
+            var ctx = mockContext({
+                fill: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render fill if set to none", 0, function() {
+            shape.options.set("fill.color", "none");
+
+            var ctx = mockContext({
+                fill: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
+        test("does not render fill if set to transparent", 0, function() {
+            shape.options.set("fill.color", "transparent");
+
+            var ctx = mockContext({
+                fill: function() {
+                    ok(false);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+    }
 
     // ------------------------------------------------------------
     (function() {
         var path,
             pathNode;
+
+        paintTests(d.Path, canv.PathNode, "PathNode");
 
         module("PathNode", {
             setup: function() {
@@ -279,60 +466,6 @@
             }));
         });
 
-        test("renders stroke", function() {
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.strokeStyle, "red");
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("renders stroke width", function() {
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.lineWidth, 2);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("renders stroke opacity", function() {
-            path.options.set("stroke.opacity", 0.5);
-
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.globalAlpha, 0.5);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("does not render stroke opacity if not set", function() {
-            var ctx = mockContext({
-                stroke: function() {
-                    equal(ctx.globalAlpha, undefined);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("renders stroke dashType", function() {
-            path.options.set("stroke.dashType", "dot");
-
-            var ctx = mockContext({
-                setLineDash: function(arr) {
-                    deepEqual(arr, [1.5, 3.5]);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
         test("renders stroke dashType (legacy)", function() {
             path.options.set("stroke.dashType", "dot");
 
@@ -340,16 +473,6 @@
                 stroke: function() {
                     deepEqual(ctx.mozDash, [1.5, 3.5]);
                     deepEqual(ctx.webkitLineDash, ctx.mozDash);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("does not render stroke dashType if not set", 0, function() {
-            var ctx = mockContext({
-                setLineDash: function() {
-                    ok(false);
                 }
             });
 
@@ -400,52 +523,6 @@
             var ctx = mockContext({
                 stroke: function() {
                     equal(ctx.lineCap, "round");
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("renders fill", function() {
-            var ctx = mockContext({
-                fill: function() {
-                    equal(ctx.fillStyle, "blue");
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("renders fill opacity", function() {
-            path.options.set("fill.opacity", 0.5);
-
-            var ctx = mockContext({
-                fill: function() {
-                    equal(ctx.globalAlpha, 0.5);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("does not render fill if not set", 0, function() {
-            path.options.set("fill", null);
-
-            var ctx = mockContext({
-                fill: function() {
-                    ok(false);
-                }
-            });
-
-            pathNode.renderTo(ctx);
-        });
-
-        test("does not render fill if set to transparent", 0, function() {
-            path.options.set("fill.color", "transparent");
-
-            var ctx = mockContext({
-                fill: function() {
-                    ok(false);
                 }
             });
 
@@ -573,6 +650,8 @@
         var text;
         var textNode;
 
+        paintTests(d.Text, canv.TextNode, "TextNode");
+
         module("TextNode", {
             setup: function() {
                 text = new d.Text("Foo", new Point(10, 20), { font: "arial" });
@@ -612,12 +691,47 @@
             textNode.renderTo(ctx);
         });
 
+        test("does not fill text if no fill is set", 0, function() {
+            text.options.set("fill", null);
+
+            var ctx = mockContext({
+                fillText: function() {
+                    ok(false);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
+
         test("setting content invalidates node", function() {
             textNode.invalidate = function() {
                 ok(true);
             };
 
             text.content("Bar");
+        });
+
+        test("strokes text", function() {
+            text.stroke("red");
+
+            var ctx = mockContext({
+                strokeText: function(content, x, y) {
+                    equal(content, "Foo");
+                    deepEqual([x, y], [10, 35]);
+                }
+            });
+
+            textNode.renderTo(ctx);
+        });
+
+        test("does not stroke text if no stroke is set", 0, function() {
+            var ctx = mockContext({
+                strokeText: function() {
+                    ok(false);
+                }
+            });
+
+            textNode.renderTo(ctx);
         });
 
         test("renders transform", function() {

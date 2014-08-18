@@ -645,6 +645,16 @@
             ok(fillNode.render().indexOf("on='false'") !== -1);
         });
 
+        test("renders on attribute if set to none", function() {
+            path.options.set("fill.color", "none");
+            ok(fillNode.render().indexOf("on='false'") !== -1);
+        });
+
+        test("renders on attribute if set to none", function() {
+            path.options.set("fill.color", "none");
+            ok(fillNode.render().indexOf("on='false'") !== -1);
+        });
+
         test("renders on attribute if set to transparent", function() {
             path.options.set("fill.color", "transparent");
             ok(fillNode.render().indexOf("on='false'") !== -1);
@@ -681,6 +691,24 @@
             };
 
             path.options.set("fill.opacity", 0.4);
+        });
+
+        test("optionsChange clears fill for none", function() {
+            fillNode.attr = function(name, value) {
+                equal(name, "on");
+                equal(value, "false");
+            };
+
+            path.options.set("fill.color", "none");
+        });
+
+        test("optionsChange clears fill for none", function() {
+            fillNode.attr = function(name, value) {
+                equal(name, "on");
+                equal(value, "false");
+            };
+
+            path.options.set("fill.color", "none");
         });
 
         test("optionsChange clears fill for transparent", function() {

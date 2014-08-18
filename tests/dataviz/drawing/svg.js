@@ -388,6 +388,16 @@
             ok(pathNode.render().indexOf("stroke='red'") !== -1);
         });
 
+        test("renders empty stroke if set to transparent", function() {
+            path.options.set("stroke.color", "transparent");
+            ok(pathNode.render().indexOf("stroke='none'") !== -1);
+        });
+
+        test("renders empty stroke if set to none", function() {
+            path.options.set("stroke.color", "none");
+            ok(pathNode.render().indexOf("stroke='none'") !== -1);
+        });
+
         test("renders stroke width", function() {
             path.options.set("stroke.width", 2);
 
@@ -449,6 +459,11 @@
         });
 
         test("renders empty fill if not set", function() {
+            ok(pathNode.render().indexOf("fill='none'") !== -1);
+        });
+
+        test("renders empty fill if set to none", function() {
+            path.options.set("fill.color", "none");
             ok(pathNode.render().indexOf("fill='none'") !== -1);
         });
 
