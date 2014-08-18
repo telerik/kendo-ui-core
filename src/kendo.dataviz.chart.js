@@ -10111,9 +10111,11 @@ var __meta__ = {
         },
 
         _ensureElement: function() {
-            this.element
-                .appendTo(document.body)
-                .on(MOUSELEAVE_NS, this._mouseleave);
+            if (this.element) {
+                this.element
+                    .appendTo(document.body)
+                    .on(MOUSELEAVE_NS, this._mouseleave);
+            }
         },
 
         _mouseleave: function(e) {
