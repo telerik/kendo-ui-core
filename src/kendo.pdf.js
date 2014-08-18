@@ -504,9 +504,18 @@
             var firstChar = ids[0];
             var lastChar = ids[ids.length - 1];
             var charWidths = [];
-            for (var i = firstChar; i <= lastChar; ++i) {
-                charWidths.push(self._font.widthOfGlyph(cmap[i] || 0));
-            }
+            (function loop(i, chunk){
+                if (i <= lastChar) {
+                    var gid = cmap[i];
+                    if (gid == null) {
+                        loop(i + 1);
+                    } else {
+                        if (!chunk) charWidths.push(i, chunk = []);
+                        chunk.push(self._font.widthOfGlyph(gid));
+                        loop(i + 1, chunk);
+                    }
+                }
+            })(firstChar);
 
             // As if two dictionaries weren't enough, we need another
             // one, the "descendant font".  Only that one can be of
@@ -526,7 +535,7 @@
                 FontDescriptor: self.descriptor,
                 FirstChar: firstChar,
                 LastChar: lastChar,
-                W: [ firstChar, charWidths ],
+                W: charWidths,
                 CIDToGIDMap: this._pdf.attach(this._makeCidToGidMap(ids, cmap)),
                 // CIDToGIDMap: PDFName.get("Identity")
             });
@@ -545,22 +554,17 @@
         _makeCidToGidMap: function(ids, cmap) {
             // generate CIDToGIDMap -- map character ID (not code) to
             // glyph index as a binary stream
-            var a = [];
+            var out = PDF.BinaryStream(), len = 0;
             var gid = 1;
             for (var i = 0; i < ids.length; ++i) {
                 var cid = ids[i];
-                while (a.length < cid) {
-                    a.push(0);
+                while (len < cid) {
+                    out.writeShort(0);
+                    len++;
                 }
-                var old = cmap[cid];
-                if (old == null) {
-                    a.push(0);
-                } else {
-                    a.push(gid++);
-                }
+                out.writeShort(cmap[cid] == null ? 0 : gid++);
+                len++;
             }
-            var out = PDF.BinaryStream();
-            a.forEach(out.writeShort);
             return new PDFStream(out);
         }
     }, PDFDictionary);
@@ -700,7 +704,21 @@
 
     var pdf = new PDF();
 
-    var cyrillic = [
+    var strings = [
+        //" ",
+    ];
+
+    var txt = "";
+    for (var i = 32; i < 383; ++i) {
+        if (i == 160 || i == 173) continue;
+        txt += String.fromCharCode(i);
+        if (txt.length > 50) {
+            strings.push(txt);
+            txt = "";
+        }
+    }
+    if (txt) strings.push(txt);
+    strings = strings.concat([
         "Румы́нская кири́ллица использовалась для записи румынского языка до",
         "официальной замены латиницей в начале 1860-х годов. Варианты",
         "кириллического алфавита, употреблявшиеся для молдавского языка в",
@@ -712,8 +730,11 @@
         "языка. Перевод румынской письменности на латиницу был двухступенчатым:",
         "сначала применялся так называемый «переходный алфавит», включавший как",
         "кириллические, так и латинские знаки, и лишь через несколько лет была",
-        "введена собственно латиница."
-    ];
+        "введена собственно латиница.",
+        //"АБВГДЕЖЅZЗИІКЛМНОПҀРСТȢѸФХѾЦЧШЩЪЫЬѢꙖѤЮѦѪѨѬѠѺѮѰѲѴ",
+        "АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЬьЮюЯя",
+        "©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺"
+    ]);
 
     {
         var fs = require("fs");
@@ -729,17 +750,18 @@
         var page = pdf.addPage();
         page._beginText();
         page._out(mm2pt(10), " ", mm2pt(250), " TD", NL);
-        page._out(page._getFontResource(fontName), " 20 Tf", NL);
-        page._out(new PDFHexString(font.encodeText("Test test ツ x→a♥b ←asd→")), " Tj", NL);
-        page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
-        page._out(new PDFHexString(font.encodeText("abcdefghijklmnopqrstuvxyz (0123456789)")), " Tj", NL);
-        page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
-        page._out(new PDFHexString(font.encodeText("ABCDEFGHIJKLMNOPQRSTUVXYZ @#$%^&*-=_+—≠±–")), " Tj", NL);
-        page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
-        page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ")), " Tj", NL);
+
+        // page._out(page._getFontResource(fontName), " 15 Tf", NL);
+        // page._out(new PDFHexString(font.encodeText("Test test ツ x→a♥b ←asd→")), " Tj", NL);
+        // page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
+        // page._out(new PDFHexString(font.encodeText("abcdefghijklmnopqrstuvxyz (0123456789)")), " Tj", NL);
+        // page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
+        // page._out(new PDFHexString(font.encodeText("ABCDEFGHIJKLMNOPQRSTUVXYZ @#$%^&*-=_+—≠±–")), " Tj", NL);
+        // page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
+        // page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ")), " Tj", NL);
 
         page._out(page._getFontResource(fontName), " 15 Tf", NL);
-        cyrillic.forEach(function(txt){
+        strings.forEach(function(txt){
             page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
             page._out(new PDFHexString(font.encodeText(txt)), " Tj", NL);
         });
