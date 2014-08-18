@@ -422,6 +422,7 @@ var __meta__ = {
 
                     that.overflowUserEvents = new kendo.UserEvents(that.element, {
                         threshold: 5,
+                        allowSelection: true,
                         filter: "." + OVERFLOW_ANCHOR,
                         tap: proxy(that._toggleOverflow, that)
                     });
@@ -441,6 +442,7 @@ var __meta__ = {
 
                 that.userEvents = new kendo.UserEvents(document, {
                     threshold: 5,
+                    allowSelection: true,
                     filter:
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + BUTTON + ", " +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
