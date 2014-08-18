@@ -1323,13 +1323,15 @@ var __meta__ = {
 
         _closeHandler: function (e) {
             var that = this,
+				options = that.options,
                 target = e.relatedTarget || e.target,
+				sameTarget = target == that.target[0],
                 children = $(target).closest(itemSelector).children(popupSelector),
                 containment = contains(that.element[0], target);
 
             that._eventOrigin = e;
 
-            if (that.popup.visible() && ((that.options.closeOnClick && !touch &&
+            if (that.popup.visible() && ((e.which !== 3 && sameTarget) || !sameTarget) && ((that.options.closeOnClick && !touch &&
                 !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
                 !children[0] && containment) || !containment)) {
                     if (containment) {
