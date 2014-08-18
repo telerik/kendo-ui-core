@@ -2242,7 +2242,11 @@ var __meta__ = {
 
         _createNewModel: function(model) {
             if (this.reader.model) {
-                return  new this.reader.model(model);
+                return new this.reader.model(model);
+            }
+
+            if (model instanceof ObservableObject) {
+                return model;
             }
 
             return new ObservableObject(model);
