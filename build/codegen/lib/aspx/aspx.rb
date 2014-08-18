@@ -329,12 +329,9 @@ module CodeGen
                 end
 
                 def to_converter
-                    if (serialize_to_array)
-                        CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding)
-                    else
-                        return CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE.result(get_binding) unless depends_on.nil?
-                        CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
-                    end
+                    return CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding) if serialize_to_array
+                    return CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE.result(get_binding) unless depends_on.nil?
+                    CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
                 end
 
                 def to_declaration
