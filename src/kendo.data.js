@@ -3934,6 +3934,8 @@ var __meta__ = {
 
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
+            this._preprocessFlatData(options);
+
             var node = Node.define({
                 children: options
             });
@@ -3941,6 +3943,35 @@ var __meta__ = {
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
             this._attachBubbleHandlers();
+        },
+
+        _preprocessFlatData: function(options) {
+            var data = options.data;
+            var schema = options.schema;
+            var model = schema && schema.model;
+            var idField = model && model.id;
+            var parentField = model && model.parentId;
+
+            if (data && parentField) {
+                var hash = {};
+
+                for (var i = 0; i < data.length; i++) {
+                    var item = data[i];
+                    var id = item[idField];
+                    var parentId = item[parentField];
+
+                    hash[id] = hash[id] || [];
+                    hash[parentId] = hash[parentId] || [];
+
+                    item.items = hash[id];
+                    hash[parentId].push(item);
+                }
+
+                options.data = hash[null] || hash[0];
+
+                model.children = "items";
+                delete model.parentId;
+            }
         },
 
         _attachBubbleHandlers: function() {

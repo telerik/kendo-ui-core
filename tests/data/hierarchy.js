@@ -1032,6 +1032,30 @@ test("loading of child datasources updates items field of parent", function() {
     equal(root.items, root.children.data());
 });
 
+test("parentId builds hierarchy from flat table", function() {
+    var dataSource = new HierarchicalDataSource({
+        data: [
+            { id: 1, parentId: 0 },
+            { id: 2, parentId: 1 }
+        ],
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    dataSource.read();
+
+    dataSource.get(1).load();
+
+    equal(dataSource.view().length, 1);
+    ok(dataSource.get(2), "child item not found via get()");
+    equal(dataSource.get(2).parentNode(), dataSource.get(1));
+});
+
+
 module("HierarchicalDataSource : parameterMap", {
     setup: function() {
         $.mockjaxSettings.responseTime = 0;
