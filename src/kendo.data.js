@@ -2493,6 +2493,8 @@ var __meta__ = {
                         that._accept(arguments[idx]);
                     }
 
+                    that._storeData(true);
+
                     that._change({ action: "sync" });
 
                     that.trigger(SYNC);

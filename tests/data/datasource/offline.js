@@ -32,6 +32,28 @@
         equal(state.foo, "foo");
     });
 
+    test("changes are persisted even when online", function() {
+        var dataSource = new DataSource({
+            offlineStorage: "key",
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            data: [
+                { id: 1, foo: "foo" }
+            ]
+        });
+
+        dataSource.read();
+        dataSource.at(0).set("foo", "bar");
+        dataSource.sync();
+        dataSource.online(false);
+        dataSource.read();
+
+        equal(dataSource.at(0).foo, "bar");
+    });
+
     test("state uses custom storage to save", 1, function() {
         var state = {};
 
