@@ -2122,7 +2122,7 @@ var __meta__ = {
 
                     that._storage = {
                         getItem: function() {
-                            return JSON.parse(localStorage.getItem(key))
+                            return JSON.parse(localStorage.getItem(key));
                         },
                         setItem: function(item) {
                             localStorage.setItem(key, stringify(item));
@@ -2752,7 +2752,7 @@ var __meta__ = {
                     var state = item.__state__;
 
                     if (state == "destroy") {
-                       this._destroyed.push(item);
+                       this._destroyed.push(this._createNewModel(item));
                     } else {
                         items.push(item);
                     }
@@ -2769,11 +2769,15 @@ var __meta__ = {
 
             that._data = that._observe(data);
 
-            that._data.forEach(function(item) {
-                if (item.__state__ == "update") {
-                    item.dirty = true;
-                }
-            });
+            if (that.options.offlineStorage != null) {
+                that._eachItem(that._data, function(items) {
+                    for (var idx = 0; idx < items.length; idx++) {
+                        if (items[idx].__state__ == "update") {
+                            items[idx].dirty = true;
+                        }
+                    }
+                });
+            }
 
             that._storeData();
 
@@ -2785,28 +2789,40 @@ var __meta__ = {
         },
 
         _storeData: function(updatePristine) {
-            if (this.options.offlineStorage != null) {
+            function items(data) {
                 var state = [];
-                var item;
-                var data = this.data();
 
-                for (idx = 0; idx < data.length; idx++) {
-                    item = data[idx].toJSON();
-                    item.uid = data[idx].uid;
-                    if (this.reader.model) {
-                        if (data[idx].isNew()) {
-                            item.__state__ = "create";
-                        } else if (data[idx].dirty) {
-                            item.__state__ = "update";
+                for (var idx = 0; idx < data.length; idx++) {
+                    var item = data[idx].toJSON();
+
+                    if (serverGrouping && data[idx].items) {
+                        item.items = items(data[idx].items);
+                    } else {
+                        item.uid = data[idx].uid;
+                        if (model) {
+                            if (data[idx].isNew()) {
+                                item.__state__ = "create";
+                            } else if (data[idx].dirty) {
+                                item.__state__ = "update";
+                            }
                         }
                     }
-
                     state.push(item);
                 }
 
-                for (idx = 0; idx < this._destroyed.length; idx++) {
-                    item = this._destroyed[idx].toJSON();
+                return state;
+            }
+            if (this.options.offlineStorage != null) {
+                var model = this.reader.model;
+                var serverGrouping = this._isServerGrouped();
+
+
+                var state = items(this._data);
+
+                for (var idx = 0; idx < this._destroyed.length; idx++) {
+                    var item = this._destroyed[idx].toJSON();
                     item.__state__ = "destroy";
+                    state.push(item);
                 }
 
                 this.offlineData(state);

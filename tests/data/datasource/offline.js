@@ -56,7 +56,7 @@
         equal(kendo.stringify(state), "{}");
     });
 
-    test("data stores in state", function() {
+    test("data is stored in state", function() {
         var data = [{ foo: "foo" }];
 
         var dataSource = new DataSource({
@@ -68,6 +68,36 @@
 
         equal(dataSource.offlineData().length, data.length);
         equal(dataSource.offlineData()[0].foo, data[0].foo);
+    });
+
+    function serverGroupedDataSource(data) {
+        return new DataSource({
+            offlineStorage: "key",
+            serverGrouping: true,
+            group: { field: "foo" },
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                   options.success(data);
+                }
+            }
+        });
+    }
+
+    test("server grouped data is stored in state", function() {
+        var data = [{ items: [ { foo: "foo" } ], field: "foo", value: "foo" }];
+
+        var dataSource = serverGroupedDataSource(data);
+
+        dataSource.read();
+
+        equal(dataSource.offlineData().length, 1);
+        equal(dataSource.offlineData()[0].items.length, 1);
+        equal(dataSource.offlineData()[0].field, "foo");
     });
 
     test("data returns data stored in state when offline", function() {
@@ -82,6 +112,97 @@
         dataSource.read();
 
         deepEqual(dataSource.data().length, 1);
+    });
+
+    test("data returns data stored in state when offline and server grouped", function() {
+        var data = [{ items: [ { foo: "foo" } ], field: "foo", value: "foo" }];
+
+        var dataSource = serverGroupedDataSource(data);
+
+        dataSource.offlineData(data);
+        dataSource.online(false);
+        dataSource.read();
+
+        equal(dataSource.data().length, 1);
+        equal(dataSource.data()[0].items.length, 1);
+        equal(dataSource.data()[0].field, "foo");
+    });
+
+    test("updated items are stored in localStorage when not online and server grouped", function() {
+        var data = [{ hasSubgroups: false, items: [ { id: 1, foo: "foo" } ], field: "foo", value: "foo" }];
+
+        var dataSource = serverGroupedDataSource(data);
+
+        dataSource.read();
+
+        dataSource.online(false);
+        dataSource.get(1).set("foo", "bar");
+        dataSource.sync();
+        dataSource.read();
+
+        equal(dataSource.get(1).dirty, true);
+        equal(dataSource.get(1).foo, "bar");
+    });
+
+    test("destroyed items are stored in localStorage when not online and server grouped", function() {
+        var data = [{ hasSubgroups: false, items: [ { id: 1, foo: "foo" } ], field: "foo", value: "foo" }];
+
+        var dataSource = serverGroupedDataSource(data);
+
+        dataSource.read();
+
+        dataSource.online(false);
+        dataSource.remove(dataSource.get(1));
+        dataSource.sync();
+        dataSource.read();
+
+        equal(dataSource._destroyed[0].id, 1);
+    });
+
+
+    test("updated items are stored in localStorage when not online and nested server groups", function() {
+        var data = [
+            {
+            hasSubgroups: true,
+            items: [
+                {
+                    field: "id",
+                    value: 1,
+                    items: [
+                        { id: 1, foo: "foo" }
+                    ],
+                    hasSubgroups: false
+                }
+            ],
+            field: "foo",
+            value: "foo"
+        }];
+
+        var dataSource = new DataSource({
+            offlineStorage: "key",
+            serverGrouping: true,
+            group: [{ field: "foo" }, { field: "id" }],
+            schema: {
+                model: {
+                    id: "id"
+                }
+            },
+            transport: {
+                read: function(options) {
+                   options.success(data);
+                }
+            }
+        });
+
+        dataSource.read();
+
+        dataSource.online(false);
+        dataSource.get(1).set("foo", "bar");
+        dataSource.sync();
+        dataSource.read();
+
+        equal(dataSource.get(1).dirty, true);
+        equal(dataSource.get(1).foo, "bar");
     });
 
     test("updated items are stored in localStorage when not online", function() {
@@ -244,12 +365,8 @@
         dataSource.online(false);
         dataSource.remove(dataSource.get(1));
         dataSource.sync();
-        dataSource.read();
 
-        equal(dataSource.data().length, 0);
-        equal(dataSource.total(), 0);
-        equal(dataSource._destroyed.length, 1);
-        equal(dataSource._destroyed[0].id, 1);
+        equal(dataSource.offlineData()[0].id, 1);
     });
 
     test("create stores the creted items in localStorage when not online", function() {
