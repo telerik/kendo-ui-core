@@ -3147,7 +3147,7 @@ var __meta__ = {
 
             if (root) {
                 this._buildRows(root, 0);
-                this._normalizeRows();
+                this._normalize();
             } else {
                 this.rows.push(element("tr", null, [ element("th", null) ]));
             }
@@ -3167,12 +3167,7 @@ var __meta__ = {
             return member ? index : index - 1;
         },
 
-        _normalizeRows: function() {
-            this._normalizeRowSpan();
-            this._normalizeColSpan();
-        },
-
-        _normalizeRowSpan: function() {
+        _normalize: function() {
             var rows = this.rows;
             var rowsLength = rows.length;
             var rowIdx = 0;
@@ -3204,50 +3199,6 @@ var __meta__ = {
                     }
                 }
             }
-        },
-
-        _normalizeColSpan: function() {
-            var rootMembers = this.rootTuple.members;
-            var idx = rootMembers.length - 1;
-            var member = rootMembers[idx];
-
-            if (member.measure) {
-                member = rootMembers[--idx];
-
-                if (!member) {
-                    return;
-                }
-            }
-
-            var map = this.map;
-            var row = map[member.name + member.levelNum];
-            var colspan = this._rootRowColSpan(row);
-            var currentColspan;
-
-            while(idx) {
-                idx -= 1;
-                member = rootMembers[idx];
-                row = map[member.name + member.levelNum];
-
-                if (colspan > 1) {
-                    row.children[row.children.length - 1].attr.colspan = colspan;
-                }
-
-                colspan = this._rootRowColSpan(row);
-            }
-        },
-
-        _rootRowColSpan: function (row) {
-            var children = row.children;
-            var lastIdx = children.length - 1;
-            var cell = children[lastIdx];
-            var colspan = cell.attr.colspan || 1;
-
-            if (cell.attr.rowspan > 1) {
-                colspan += children[lastIdx - 1].attr.colspan;
-            }
-
-            return colspan;
         },
 
         _rowIndex: function(row) {
