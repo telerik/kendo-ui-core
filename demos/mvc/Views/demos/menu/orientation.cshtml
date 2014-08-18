@@ -176,7 +176,7 @@
                         var orientation = $("#orientation").data("kendoDropDownList").value();
                         $("#menu").kendoMenu({
                             orientation: orientation
-                        });
+                        }).data("kendoMenu").wrapper.css("width", (orientation == "horizontal") ? 600 : 120);
                     };
 
                     initMenu();
