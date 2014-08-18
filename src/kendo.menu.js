@@ -1329,7 +1329,7 @@ var __meta__ = {
 
             that._eventOrigin = e;
 
-            if (that.popup.visible() && e.which !== 3 && ((that.options.closeOnClick && !touch &&
+            if (that.popup.visible() && ((that.options.closeOnClick && !touch &&
                 !((pointers || msPointers) && e.originalEvent.pointerType in touchPointerTypes) &&
                 !children[0] && containment) || !containment)) {
                     if (containment) {
