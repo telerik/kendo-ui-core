@@ -55,12 +55,11 @@
 
     - :name: shapeDefaults.editable
       :type: Boolean
-      :boolean_duality: true
       :description: Specifies editable properties for shapes
 
     - :name: shapeDefaults.editable_settings
       :type: kendo.dataviz.diagram.Shape.Editable
-      :boolean_duality: true
+      :depends_on: shapeDefaults.editable
       :description: Specifies editable properties for shapes
 
     - :name: shapeDefaults.stroke

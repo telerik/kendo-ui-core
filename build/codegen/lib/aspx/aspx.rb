@@ -58,7 +58,7 @@ module CodeGen
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
             CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE = ERB.new('
-            else
+            if (convertable.<%= name.pascalize %>)
                 AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
             CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE = ERB.new('
@@ -71,10 +71,6 @@ module CodeGen
             CONVERTER_PROPERTY_TEMPLATE = ERB.new('
             AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
-            CONVERTER_BOOLEAN_DUALITY_PROPERTY_TEMPLATE = ERB.new('
-            if (convertable.<%= csharp_name %> == false)
-                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, true);')
-
             CONVERTER_SCRIPT_TEMPLATE = ERB.new('
             AddScript(state, "<%= name %>", convertable.<%= csharp_name %>);')
 
@@ -82,7 +78,7 @@ module CodeGen
             AddScript(state, "<%= name %>", convertable.ClientEvents.<%= csharp_name %>);')
 
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), <%= csharp_default %>.ToString());')
+            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), StringHelpers.ToCamelCase(<%= csharp_default %>.ToString()));')
 
             LOAD_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).LoadViewState(viewState[i++]);')
 
@@ -94,7 +90,7 @@ module CodeGen
 
             module Options
 
-                attr_accessor :type, :values, :description, :default, :boolean_duality
+                attr_accessor :type, :values, :description, :default, :depends_on
 
                 def component_class
                     Component
@@ -261,7 +257,6 @@ module CodeGen
                 def to_converter
                     return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
                     return CONVERTER_SCRIPT_TEMPLATE.result(get_binding) if type.instance_of?([].class) && type.length == 1 && (type.include?("Function") || type.include?("ClientEvent"))
-                    return CONVERTER_BOOLEAN_DUALITY_PROPERTY_TEMPLATE.result(get_binding) if boolean_duality
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
                 end
 
@@ -337,7 +332,7 @@ module CodeGen
                     if (serialize_to_array)
                         CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding)
                     else
-                        return CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE.result(get_binding) if boolean_duality
+                        return CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE.result(get_binding) unless depends_on.nil?
                         CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
                     end
                 end
@@ -483,7 +478,7 @@ module CodeGen
                     metadata[:options].each do |option|
                         existing_option = find_option_by_name(option[:name], self)
 
-                        if option[:boolean_duality]
+                        if option.has_key?(:depends_on)
                             option[:name].chomp!('_settings')
                             existing_option = find_option_by_name_and_type(option)
                             if existing_option
@@ -500,7 +495,7 @@ module CodeGen
                         end
                     end
 
-                    mark_boolean_duality
+                    mark_dependable
                 end
 
                 def update_option(existing_option, option)
@@ -512,13 +507,10 @@ module CodeGen
                     existing_option.serialize_to_array = option[:serialize_to_array] unless option[:serialize_to_array].nil?
                 end
 
-                def mark_boolean_duality
+                def mark_dependable
                     previous = nil
                     mark_block = Proc.new do |o|
-                        if previous && previous.type.include?('Boolean') && previous.respond_to?('owner') && o.respond_to?('owner') && o.owner == previous.owner && o.name == previous.name
-                            previous.boolean_duality = true
-                            o.boolean_duality = true
-                        end
+                        o.depends_on = previous if previous && previous.type.include?('Boolean') && previous.respond_to?('owner') && o.respond_to?('owner') && o.owner == previous.owner && o.name == previous.name
 
                         previous = o
                         o.options.each &mark_block if o.respond_to?('options?') && o.options?
