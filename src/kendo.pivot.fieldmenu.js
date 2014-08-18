@@ -43,7 +43,7 @@ var __meta__ = {
                 include: "Include Fields...",
                 title: "Fields to include",
                 clear: "Clear",
-                ok: "Ok",
+                ok: "OK",
                 cancel: "Cancel",
                 operators: {
                     contains: "Contains",
