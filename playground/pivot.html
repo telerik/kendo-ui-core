@@ -42,33 +42,60 @@
         <div id="pivotgrid"></div>
 
         <script>
-            $(function() {
-                var pivot = $("#pivotgrid").kendoPivotGrid({
-                    height: 300,
-                    dataSource: {
-                        type: "xmla",
-                        rows: [{ name: "[Date].[Calendar]", expand: true }],
-                        columns: [{ name: "[Geography].[City]", expand: true }],
-                        transport: {
-                            connection: {
-                                catalog: "Adventure Works DW 2008R2",
-                                cube: "Adventure Works"
-                            },
-                            read: {
-                                url: "http://testolap.telerik.com/msmdpump.dll",
-                                dataType: "text",
-                                contentType: "text/xml",
-                                type: "POST"
-                            }
-                        },
+            function createPivot(options) {
+                options = options || {};
+
+                if (!options.dataSource) {
+                    options.dataSource = new kendo.data.PivotDataSource({
                         schema: {
-                            type: "xmla"
-                        },
-                        error: function(e) {
-                           alert("error: " + kendo.stringify(e.errors[0]));
+                            axes: function() {
+                                return {};
+                            }
+                        }
+                    });
+                }
+
+                return new kendo.ui.PivotGrid($("#pivotgrid"), options);
+            }
+
+            function createDataSource(tuples, data, measures) {
+                return new kendo.data.PivotDataSource({
+                    measures: measures || [],
+                    schema: {
+                        axes: "axes",
+                        data: "data"
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                axes: {
+                                    columns: {
+                                        tuples: tuples || []
+                                    }
+                                },
+                                data: data || []
+                            });
                         }
                     }
-                }).data("kendoPivotGrid");
+                });
+            }
+
+            $(function() {
+                var tuples = [
+                    { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+                    { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+                    { members: [ { name: "dim 0_3", parentName: "dim 0_2", levelNum: "2", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+                    { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }] },
+                    { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] }] }
+                ];
+
+                var pivotgrid = createPivot({
+                    dataSource: createDataSource(tuples)
+                });
 
             });
         </script>
