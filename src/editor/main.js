@@ -475,7 +475,11 @@
                 .on("focusin" + NS, function() {
                     $(this).addClass("k-state-active");
                     editor.toolbar.show();
-                    editor.selectRange(editor.getRange()); // see https://github.com/telerik/kendo/issues/3509
+
+                    if (editor.textarea) {
+                        // see https://github.com/telerik/kendo/issues/3509
+                        editor.selectRange(editor.getRange());
+                    }
                 })
                 .on("focusout" + NS, function() {
                     setTimeout(function() {
