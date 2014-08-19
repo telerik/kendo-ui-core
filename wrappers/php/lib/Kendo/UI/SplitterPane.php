@@ -34,7 +34,7 @@ class SplitterPane extends \Kendo\SerializableObject {
     }
 
     /**
-    * Specifies the HTML attributes that will be applied to the pane elemnent
+    * Specifies the HTML attributes that will be applied to the pane element
     * @param  $value
     * @return \Kendo\UI\SplitterPane
     */
@@ -48,6 +48,15 @@ class SplitterPane extends \Kendo\SerializableObject {
     */
     public function collapsed($value) {
         return $this->setProperty('collapsed', $value);
+    }
+
+    /**
+    * Specifies the size of a collapsed pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). This value must not exceed panes.max or be less then panes.min.
+    * @param string $value
+    * @return \Kendo\UI\SplitterPane
+    */
+    public function collapsedSize($value) {
+        return $this->setProperty('collapsedSize', $value);
     }
 
     /**

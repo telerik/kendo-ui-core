@@ -86,6 +86,14 @@ public class PaneTag extends  BaseTag implements DynamicAttributes /* interfaces
         setProperty("collapsed", value);
     }
 
+    public java.lang.String getCollapsedSize() {
+        return (java.lang.String)getProperty("collapsedSize");
+    }
+
+    public void setCollapsedSize(java.lang.String value) {
+        setProperty("collapsedSize", value);
+    }
+
     public boolean getCollapsible() {
         return (boolean)getProperty("collapsible");
     }
