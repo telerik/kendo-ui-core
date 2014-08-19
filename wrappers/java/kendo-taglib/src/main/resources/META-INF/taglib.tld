@@ -27488,6 +27488,12 @@ and is about to render it.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Specifies the size of a collapsed pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). This value must not exceed panes.max or be less then panes.min.</description>
+            <name>collapsedSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Specifies whether a pane is collapsible (true) or not collapsible (false).</description>
             <name>collapsible</name>
             <rtexprvalue>true</rtexprvalue>
