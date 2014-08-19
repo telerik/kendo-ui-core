@@ -54,6 +54,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Specifies the collapsed size of the pane
+        /// </summary>
+        public string CollapsedSize
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Specifies whether the pane can be collapsed by the user
         /// </summary>
         public bool Collapsible
@@ -126,6 +135,7 @@ namespace Kendo.Mvc.UI
                 .Add("resizable", Resizable, true)
                 .Add("collapsible", Collapsible, false)
                 .Add("collapsed", Collapsed, false)
+                .Add("collapsedSize", CollapsedSize, "*")
                 .Add("size", Size, "*")
                 .Add("min", MinSize, () => !string.IsNullOrEmpty(MinSize))
                 .Add("max", MaxSize, () => !string.IsNullOrEmpty(MaxSize))
