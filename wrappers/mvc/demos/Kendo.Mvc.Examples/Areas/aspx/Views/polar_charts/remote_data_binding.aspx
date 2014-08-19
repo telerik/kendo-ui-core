@@ -13,7 +13,7 @@
         {
             series.PolarLine(model => model.Azimuth, model => model.Gain);
         })
-        .XAxis(axis => axis.Numeric()
+        .XAxis(axis => axis.Polar()
             .MajorUnit(30)
         )
     %>

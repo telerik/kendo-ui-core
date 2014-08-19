@@ -29,7 +29,7 @@
             })
             .Name("at 7 ft");
         })
-        .YAxis(axis => axis.Numeric()
+        .YAxis(axis => axis.Polar()
             .Visible(false)
             .Max(10)
         )
