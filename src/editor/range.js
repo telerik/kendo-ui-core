@@ -1074,7 +1074,7 @@ var RangeUtils = {
         var startEditable = dom.editableParent(range.startContainer);
         var endEditable = dom.editableParent(range.endContainer);
 
-        while (range.startOffset == 0 && range.startContainer != startEditable) {
+        while (range.startOffset === 0 && range.startContainer != startEditable) {
             range.setStart(range.startContainer.parentNode, dom.findNodeIndex(range.startContainer));
         }
 
