@@ -414,6 +414,7 @@
     <Compile Include="UI\Chart\Fluent\ChartRangeBarSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartWaterfallSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesHighlightBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPolarAxisBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLogarithmicAxisSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartRangeBarLabelsSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartRangeBarSeriesSerializer.cs" />
@@ -2222,4 +2223,7 @@
     <Compile Include="UI\TreeView\Settings\TreeViewMessagesSettings.cs" />
     <Compile Include="UI\TreeView\Fluent\TreeViewMessagesSettingsBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\TreeMap\TreeMapType.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\TreeMap\TreeMapType.cs" />
+  </ItemGroup>
+</Project>

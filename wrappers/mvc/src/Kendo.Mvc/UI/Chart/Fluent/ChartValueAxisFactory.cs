@@ -97,5 +97,26 @@ namespace Kendo.Mvc.UI.Fluent
 
             return new ChartDateAxisBuilder(dateAxis);
         }
+
+        /// <summary>
+        /// Defines a polar value axis.
+        /// </summary>
+        public virtual ChartPolarAxisBuilder Polar()
+        {
+            return Polar("");
+        }
+
+        /// <summary>
+        /// Defines a polar value axis.
+        /// </summary>
+        public virtual ChartPolarAxisBuilder Polar(string name)
+        {
+            var axis = new ChartNumericAxis<TModel>(Container);
+            axis.Name = name;
+
+            Axes.Add(axis);
+
+            return new ChartPolarAxisBuilder(axis);
+        }
     }
 }

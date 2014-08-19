@@ -22,12 +22,12 @@ Inherits="System.Web.Mvc.ViewPage<IEnumerable<Kendo.Mvc.Examples.Models.Chart.Su
             );
         })
         .XAxis(axis => axis
-            .Numeric()
+            .Polar()
             .StartAngle(-90)
             .MajorUnit(30)
         )
         .YAxis(axis => axis
-            .Numeric()
+            .Polar()
             .Labels(labels => labels
                 .Visible(false)
             )

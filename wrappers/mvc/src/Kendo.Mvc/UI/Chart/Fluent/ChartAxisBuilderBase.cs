@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI.Fluent
 {
     using System;
+using System.ComponentModel;
 
     /// <summary>
     /// Defines the fluent interface for configuring axes.
@@ -487,7 +488,8 @@ namespace Kendo.Mvc.UI.Fluent
         /// It defaults to 0.
         /// </summary>
         /// <param name="startAngle">Angles increase counterclockwise and 0 is to the right. Negative values are acceptable.</param>
-        public TAxisBuilder StartAngle(double startAngle)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public virtual TAxisBuilder StartAngle(double startAngle)
         {
             Axis.StartAngle = startAngle;
 
