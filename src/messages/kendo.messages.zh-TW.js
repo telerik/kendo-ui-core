@@ -223,7 +223,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Groupable) {
 kendo.ui.Groupable.prototype.options.messages =
 $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
-  "empty": "托拽列標題到此處按列組合顯示"
+  "empty": "拖拽列標題到此處按列組合顯示"
 });
 }
 
