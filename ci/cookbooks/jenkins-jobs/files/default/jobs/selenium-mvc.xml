@@ -38,7 +38,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh &quot;http://kendobuild/staging-aspnet-mvc/&quot; Wrappers -proxyInjectionMode -userContentTransformation &apos;((&gt;grid/).*)\.html&apos; &apos;$1&apos;</command>
+      <command>./run-all.sh &quot;http://kendobuild/staging-aspnet-mvc/&quot; Wrappers 
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

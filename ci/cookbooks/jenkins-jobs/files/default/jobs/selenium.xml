@@ -44,7 +44,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh &quot;http://kendobuild/staging-kendo-ui/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,Sushi,AeroViewr </command>
+      <command>./run-all.sh &quot;http://kendobuild/staging-kendo-ui/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,Sushi,AeroViewr</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
