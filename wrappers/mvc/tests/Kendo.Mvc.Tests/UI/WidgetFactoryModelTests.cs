@@ -15,7 +15,10 @@ namespace Kendo.Mvc.UI.Tests
         {
             htmlHelper = TestHelper.CreateHtmlHelper<TestModel>();
 
-            htmlHelper.ViewData.Model = new TestModel { ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel() };
+            htmlHelper.ViewData.Model = new TestModel {
+                ID = 1, DoubleProperty = 1.0, DecimalProperty = 1.0m, DateTimeProperty = DateTime.Today, TimeProperty = DateTime.Now.TimeOfDay, ComplexModel = new TestModel(),
+                NullableShort = 5
+            };
 
             factory = new WidgetFactory<TestModel>(htmlHelper);
         }
@@ -76,6 +79,14 @@ namespace Kendo.Mvc.UI.Tests
 
             Assert.Equal(1, builder.ToComponent().Min);
             Assert.Equal(30, builder.ToComponent().Max);
+        }
+
+        [Fact]
+        public void IntegerTextBoxFor_should_return_new_instance_for_nullable_short()
+        {
+            var builder = factory.IntegerTextBoxFor(m => m.NullableShort);
+
+            Assert.Equal(5, builder.ToComponent().Value.Value);
         }
       
         [Fact]
@@ -329,6 +340,7 @@ namespace Kendo.Mvc.UI.Tests
             public double? NullableDouble { get; set; }
             public decimal DecimalProperty { get; set; }
             public decimal? NullableDecimal { get; set; }
+            public short? NullableShort { get; set; }
 
             [Range(typeof(DateTime), "10/10/2000", "10/10/2020")]
             public DateTime DateTimeProperty { get; set; }
