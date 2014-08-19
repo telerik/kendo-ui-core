@@ -1070,6 +1070,37 @@ var RangeUtils = {
         }
     },
 
+    wrapSelectedElements: function(range) {
+        var startEditable = dom.editableParent(range.startContainer);
+        var endEditable = dom.editableParent(range.endContainer);
+
+        while (range.startOffset == 0 && range.startContainer != startEditable) {
+            range.setStart(range.startContainer.parentNode, dom.findNodeIndex(range.startContainer));
+        }
+
+        function isEnd(offset, container) {
+            var length = dom.getNodeLength(container);
+
+            if (offset == length) {
+                return true;
+            }
+
+            for (var i = offset; i < length; i++) {
+                if (!dom.insignificant(container.childNodes[i])) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        while (isEnd(range.endOffset, range.endContainer) && range.endContainer != endEditable) {
+            range.setEnd(range.endContainer.parentNode, dom.findNodeIndex(range.endContainer) + 1);
+        }
+
+        return range;
+    },
+
     expand: function (range) {
         var result = range.cloneRange();
 
