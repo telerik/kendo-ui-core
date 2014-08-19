@@ -48,6 +48,16 @@ var __meta__ = {
         return !isPercentageSize(size) && !isPixelSize(size);
     }
 
+    function calculateSize(size, total) {
+        var output = parseInt(size, 10);
+
+        if (isPercentageSize(size)) {
+            output = Math.floor(output * total / 100);
+        }
+
+        return output;
+    }
+
     function panePropertyAccessor(propertyName, triggersResize) {
         return function(pane, value) {
             var paneConfig = this.element.find(pane).data(PANE);
@@ -394,20 +404,18 @@ var __meta__ = {
 
             panes.css({ position: "absolute", top: 0 })
                 [sizingProperty](function() {
-                    var config = $(this).data(PANE) || {}, size;
+                    var element = $(this),
+                        config = element.data(PANE) || {}, size;
 
+                    element.removeClass("k-state-collapsed");
                     if (config.collapsed) {
-                        size = 0;
-                        $(this).css("overflow", "hidden");
+                        size = config.collapsedSize ? calculateSize(config.collapsedSize, totalSize) : 0;
+                        element.css("overflow", "hidden").addClass("k-state-collapsed");
                     } else if (isFluid(config.size)) {
                         freeSizedPanes = freeSizedPanes.add(this);
                         return;
                     } else { // sized in px/%, not collapsed
-                        size = parseInt(config.size, 10);
-
-                        if (isPercentageSize(config.size)) {
-                            size = Math.floor(size * totalSize / 100);
-                        }
+                        size = calculateSize(config.size, totalSize);
                     }
 
                     sizedPanesCount++;
