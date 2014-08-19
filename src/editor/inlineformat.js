@@ -97,10 +97,9 @@ var InlineFormatFinder = Class.extend({
 
 var InlineFormatter = Class.extend({
     init: function(format, values) {
-        var that = this;
-        that.finder = new InlineFormatFinder(format);
-        that.attributes = extend({}, format[0].attr, values);
-        that.tag = format[0].tags[0];
+        this.finder = new InlineFormatFinder(format);
+        this.attributes = extend({}, format[0].attr, values);
+        this.tag = format[0].tags[0];
     },
 
     wrap: function(node) {
@@ -108,12 +107,11 @@ var InlineFormatter = Class.extend({
     },
 
     activate: function(range, nodes) {
-        var that = this;
-        if (that.finder.isFormatted(nodes)) {
-            that.split(range);
-            that.remove(nodes);
+        if (this.finder.isFormatted(nodes)) {
+            this.split(range);
+            this.remove(nodes);
         } else {
-            that.apply(nodes);
+            this.apply(nodes);
         }
     },
 
@@ -126,34 +124,32 @@ var InlineFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var that = this,
-        formatNodes = [],
-        i, l, node, formatNode;
+        var formatNodes = [];
+        var i, l, node, formatNode;
 
         for (i = 0, l = nodes.length; i < l; i++) {
             node = nodes[i];
-            formatNode = that.finder.findSuitable(node);
+            formatNode = this.finder.findSuitable(node);
             if (formatNode) {
-                dom.attr(formatNode, that.attributes);
+                dom.attr(formatNode, this.attributes);
             } else {
-                formatNode = that.wrap(node);
+                formatNode = this.wrap(node);
             }
 
             formatNodes.push(formatNode);
         }
 
-        that.consolidate(formatNodes);
+        this.consolidate(formatNodes);
     },
 
     remove: function (nodes) {
-        var that = this,
-        i, l, formatNode;
+        var i, l, formatNode;
 
         for (i = 0, l = nodes.length; i < l; i++) {
-            formatNode = that.finder.findFormat(nodes[i]);
+            formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode) {
-                if (that.attributes && that.attributes.style) {
-                    dom.unstyle(formatNode, that.attributes.style);
+                if (this.attributes && this.attributes.style) {
+                    dom.unstyle(formatNode, this.attributes.style);
                     if (!formatNode.style.cssText && !formatNode.attributes["class"]) {
                         dom.unwrap(formatNode);
                     }
@@ -165,9 +161,9 @@ var InlineFormatter = Class.extend({
     },
 
     split: function (range) {
-        var nodes = RangeUtils.textNodes(range),
-        l = nodes.length,
-        i, formatNode;
+        var nodes = RangeUtils.textNodes(range);
+        var l = nodes.length;
+        var i, formatNode;
 
         if (l > 0) {
             for (i = 0; i < l; i++) {
@@ -202,16 +198,16 @@ var InlineFormatter = Class.extend({
 
 var GreedyInlineFormatFinder = InlineFormatFinder.extend({
     init: function(format, greedyProperty) {
-        var that = this;
-        that.format = format;
-        that.greedyProperty = greedyProperty;
-        InlineFormatFinder.fn.init.call(that, format);
+        this.format = format;
+        this.greedyProperty = greedyProperty;
+        InlineFormatFinder.fn.init.call(this, format);
     },
 
     getInlineCssValue: function(node) {
-        var attributes = node.attributes,
-            trim = $.trim,
-            i, l, attribute, name, attributeValue, css, pair, cssIndex, len, propertyAndValue, property, value;
+        var attributes = node.attributes;
+        var trim = $.trim;
+        var i, l, attribute, name, attributeValue, css, pair, cssIndex, len;
+        var propertyAndValue, property, value;
 
         if (!attributes) {
             return;
@@ -245,9 +241,9 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
     },
 
     getFormatInner: function (node) {
-        var $node = $(dom.isDataNode(node) ? node.parentNode : node),
-            parents = $node.parentsUntil("[contentEditable]").addBack(),
-            i, len, value;
+        var $node = $(dom.isDataNode(node) ? node.parentNode : node);
+        var parents = $node.parentsUntil("[contentEditable]").addBack().toArray().reverse();
+        var i, len, value;
 
         for (i = 0, len = parents.length; i < len; i++) {
             value = this.greedyProperty == "className" ? parents[i].className : this.getInlineCssValue(parents[i]);
@@ -260,8 +256,7 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
     },
 
     getFormat: function (nodes) {
-        var result = this.getFormatInner(nodes[0]),
-        i, len;
+        var result = this.getFormatInner(nodes[0]), i, len;
 
         for (i = 1, len = nodes.length; i < len; i++) {
             if (result != this.getFormatInner(nodes[i])) {
@@ -324,13 +319,12 @@ var DelayedExecutionTool = Tool.extend({
 
 var FontTool = DelayedExecutionTool.extend({
     init: function(options) {
-        var that = this;
-        Tool.fn.init.call(that, options);
+        Tool.fn.init.call(this, options);
 
         // IE has single selection hence we are using select box instead of combobox
-        that.type = (kendo.support.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
-        that.format = [{ tags: ["span"] }];
-        that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
+        this.type = (kendo.support.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
+        this.format = [{ tags: ["span"] }];
+        this.finder = new GreedyInlineFormatFinder(this.format, options.cssAttr);
     },
 
     command: function (commandArguments) {

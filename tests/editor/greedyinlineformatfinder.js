@@ -18,25 +18,25 @@ test('getFormat returns inherit when called on unformatted node', function() {
 });
 
 test('getFormat returns correct font when in format node', function() {
-    editor.value('foo<span style="font-family:Courier, monospace;">bar</span>baz');
+    editor.value('foo<span style="font-family:Courier;">bar</span>baz');
 
     var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
 
     var span = editor.body.childNodes[1];
-    equal(finder.getFormat([span.firstChild]).replace(/\s+/g, ''), $(span).css('font-family').replace(/\s+/g, ''));
+    equal(finder.getFormat([span.firstChild]), 'Courier');
 });
 
 test('getFormat returns correct font when deep in format node', function() {
-    editor.value('foo<span style="font-family:Courier, monospace;"><del>bar</del></span>baz');
+    editor.value('foo<span style="font-family:Courier;"><del>bar</del></span>baz');
 
     var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
 
     var span = editor.body.childNodes[1];
-    equal(finder.getFormat([span.firstChild.firstChild]).replace(/\s+/g, ''), $(span).css('font-family').replace(/\s+/g, ''));
+    equal(finder.getFormat([span.firstChild.firstChild]), 'Courier');
 });
 
 test('getFormat returns empty string when different fonts are encountered', function() {
-    editor.value('<span style="font-family:Verdana,sans-serif;">foo</span><span style="font-family:Courier,monospace;">bar</span>');
+    editor.value('<span style="font-family:Verdana;">foo</span><span style="font-family:Courier;">bar</span>');
 
     var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
 
@@ -49,6 +49,13 @@ test('getFormat returns relative font sizes when they are set', function() {
     var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-size');
 
     equal(finder.getFormat([editor.body.firstChild.firstChild]), 'x-large');
+});
+
+test('getFormat returns inner format when called on nested format nodes', function() {
+    editor.value('<p style="font-family:Verdana;">foo <span style="font-family:Courier;">bar</span></p>');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['p', 'span'] }], 'font-family');
+    equal(finder.getFormat([$("span", editor.body)[0].firstChild]), 'Courier');
 });
 
 }());
