@@ -172,6 +172,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the pane size while collapsed.
+        /// </summary>
+        /// <param name="collapsedSize">The desired size. Only sizes in pixels and percentages are allowed.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Splitter()
+        ///             .Name("Splitter")
+        ///             .Panes(panes =>
+        ///             {
+        ///                 panes.Add().CollapsedSize("220px");
+        ///             })
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public SplitterPaneBuilder CollapsedSize(string collapsedSize)
+        {
+
+            if (!sizeValueRegex.IsMatch(collapsedSize))
+            {
+                throw new ArgumentException("CollapsedSize should be in pixels or percentages", "collapsedSize");
+            }
+
+            pane.CollapsedSize = collapsedSize;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets whether the pane can be collapsed by the user.
         /// </summary>
         /// <param name="isCollapsible">Whether the pane can be collapsed by the user.</param>
