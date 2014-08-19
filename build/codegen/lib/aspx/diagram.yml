@@ -53,6 +53,15 @@
     - :name: shapeDefaults.connectors.connector
       :type: kendo.dataviz.diagram.Shape.Connector
 
+    - :name: shapeDefaults.editable
+      :type: Boolean
+      :description: Specifies editable properties for shapes
+
+    - :name: shapeDefaults.editable_settings
+      :type: kendo.dataviz.diagram.Shape.Editable
+      :depends_on: shapeDefaults.editable
+      :description: Specifies editable properties for shapes
+
     - :name: shapeDefaults.stroke
       :type: kendo.dataviz.diagram.Shape.Stroke
       :description: Defines the stroke configuration.

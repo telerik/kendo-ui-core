@@ -43,34 +43,26 @@ module CodeGen
             }
 
             CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/class.template.erb'))
-
             WIDGET_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/widget.class.template.erb'))
-
             COMPOSITE_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.class.template.erb'))
-
             PROPERTY_WITH_DEFAULT_VALUE_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.with.default.template.erb'))
-
             PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/property.template.erb'))
-
             COMPOSITE_PROPERTY_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/composite.property.template.erb'))
-
             ENUM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/enum.template.erb'))
-
             COLLECTION_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.class.template.erb'))
-
             COLLECTION_ITEM_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.property.template.erb'))
-
             ARRAY_ITEM_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/collection.item.class.template.erb'))
-
             CONVERTER_CLASS_TEMPLATE = ERB.new(File.read('build/codegen/lib/aspx/converter.class.template.erb'))
 
             CONVERTER_COMPOSITE_TEMPLATE = ERB.new('
-            if (!convertable.<%= csharp_name %>.IsDefault)
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
+
+            CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE = ERB.new('
+            if (convertable.<%= name.pascalize %>)
                 AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, null);')
 
             CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE = ERB.new('
-            if (!convertable.<%= csharp_name %>.IsDefault)
-                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToArray(), null);')
+            AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>.ToArray(), null);')
 
             CONVERTER_ARRAY_TEMPLATE = ERB.new('
             if (convertable.<%= csharp_name %>.Count != 0)
@@ -86,7 +78,7 @@ module CodeGen
             AddScript(state, "<%= name %>", convertable.ClientEvents.<%= csharp_name %>);')
 
             CONVERTER_ENUM_PROPERTY_TEMPLATE = ERB.new('
-            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), <%= csharp_default %>.ToString());')
+            AddProperty(state, "<%= name %>", StringHelpers.ToCamelCase(convertable.<%= csharp_name %>.ToString()), StringHelpers.ToCamelCase(<%= csharp_default %>.ToString()));')
 
             LOAD_VIEWSTATE_TEMPLATE = ERB.new('((IStateManager)<%= csharp_name%>).LoadViewState(viewState[i++]);')
 
@@ -98,7 +90,7 @@ module CodeGen
 
             module Options
 
-                attr_accessor :type, :values, :description, :default
+                attr_accessor :type, :values, :description, :default, :depends_on
 
                 def component_class
                     Component
@@ -122,6 +114,10 @@ module CodeGen
 
                 def has_composite_options?
                     composite? && @options.select { |o| o.composite? }.count > 0
+                end
+
+                def options?
+                    !@options.nil?
                 end
 
                 def csharp_name
@@ -333,11 +329,9 @@ module CodeGen
                 end
 
                 def to_converter
-                    if (serialize_to_array)
-                      CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding)
-                    else
-                      CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
-                    end
+                    return CONVERTER_COMPOSITE_TO_ARRAY_TEMPLATE.result(get_binding) if serialize_to_array
+                    return CONVERTER_BOOLEAN_DUALITY_COMPOSITE_TEMPLATE.result(get_binding) unless depends_on.nil?
+                    CONVERTER_COMPOSITE_TEMPLATE.result(get_binding)
                 end
 
                 def to_declaration
@@ -439,7 +433,6 @@ module CodeGen
 
                 def find_option_by_name(name, root)
                     return root if root.name == name
-
                     child = root.options.find { |o| name == o.name || name.start_with?("#{o.name}.") }
 
                     if !child.nil? && !child.instance_of?(Option) && name != child.name
@@ -455,24 +448,72 @@ module CodeGen
                     end
                 end
 
+                def find_option_by_name_and_type(option)
+                    name, type = option[:name], option[:type]
+                    conditions = {
+                        :block => Proc.new { |o| (name == o.name) && (o.type[0] == type || o.type[0] == "Object") },
+                        :recurse? => Proc.new { |o| name.sub!("#{o.name}.", '') || (name == o.name) }
+                    }
+                    result = []
+                    find_options_recursively(self, conditions, result)
+                    result[0]
+                end
+
+                def find_options_recursively(root, conditions, result)
+                    if(conditions[:block].call(root))
+                        return result << root
+                    end
+                    conditions[:recurse?] = Proc.new {|o| true } if conditions[:recurse?].nil?
+                    child_condition = conditions[:recurse?]
+
+                    root.options.each {|o| child_condition.call(o) && find_options_recursively(o, conditions, result) } if root.options?
+                end
+
                 def import(metadata)
                     @content = metadata[:content]
 
                     metadata[:options].each do |option|
                         existing_option = find_option_by_name(option[:name], self)
 
-                        if !existing_option.nil?
-                            existing_option.type = option[:type] unless option[:type].nil?
-                            existing_option.values = option[:values] unless option[:values].nil?
-                            existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
-                            existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
-                            existing_option.csharp_datafield = option[:default] unless option[:datafield].nil? || option[:datafield] == ''
-                            existing_option.serialize_to_array = option[:serialize_to_array] unless option[:serialize_to_array].nil?
+                        if option.has_key?(:depends_on)
+                            option[:name].chomp!('_settings')
+                            existing_option = find_option_by_name_and_type(option)
+                            if existing_option
+                                update_option(existing_option, option)
+                            else
+                                option[:remove_existing] = existing_option.nil?
+                                add_option(option)
+                            end
+                        elsif !existing_option.nil?
+                            update_option(existing_option, option)
                         else
                             option[:remove_existing] = existing_option.nil?
                             add_option(option)
                         end
                     end
+
+                    mark_dependable
+                end
+
+                def update_option(existing_option, option)
+                    existing_option.type = option[:type] unless option[:type].nil?
+                    existing_option.values = option[:values] unless option[:values].nil?
+                    existing_option.description = option[:description] unless option[:description].nil? || option[:description] == ''
+                    existing_option.default = option[:default] unless option[:default].nil? || option[:default] == ''
+                    existing_option.csharp_datafield = option[:default] unless option[:datafield].nil? || option[:datafield] == ''
+                    existing_option.serialize_to_array = option[:serialize_to_array] unless option[:serialize_to_array].nil?
+                end
+
+                def mark_dependable
+                    previous = nil
+                    mark_block = Proc.new do |o|
+                        o.depends_on = previous if previous && previous.type.include?('Boolean') && previous.respond_to?('owner') && o.respond_to?('owner') && o.owner == previous.owner && o.name == previous.name
+
+                        previous = o
+                        o.options.each &mark_block if o.respond_to?('options?') && o.options?
+                    end
+
+                    self.options.each &mark_block
                 end
 
                 def csharp_class
@@ -755,9 +796,7 @@ module CodeGen
                         key = composite.root_component.widget? ? composite.root_component.csharp_name : composite.root_component.owner_namespace
                     end
 
-                    if @@converters[key].nil?
-                        @@converters[key] = []
-                    end
+                    @@converters[key] = [] if @@converters[key].nil?
                     @@converters[key] << composite.csharp_converter_class unless @@converters[key].include?(composite.csharp_converter_class)
 
                     composite_content = write_converter_options(composite.options)
