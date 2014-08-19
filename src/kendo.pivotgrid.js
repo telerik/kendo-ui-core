@@ -3086,6 +3086,29 @@ var __meta__ = {
     var element = kendo.dom.element;
     var text = kendo.dom.text;
 
+    var createMetadata = function(levelNum, memberIdx) {
+       return {
+            maxChildren: 0,
+            children: 0,
+            maxMembers: 0,
+            members: 0,
+            measures: 1,
+            levelNum: levelNum,
+            parentMember: memberIdx !== 0
+        };
+    };
+
+    var buildPath = function(tuple, index) {
+        var path = [];
+        var idx = 0;
+
+        for(; idx <= index; idx++) {
+            path.push(tuple.members[idx].name);
+        }
+
+        return path;
+    };
+
     var ColumnBuilder = Class.extend({
         init: function(options) {
             this.measures = 1;
@@ -3105,27 +3128,8 @@ var __meta__ = {
             this.metadata = {};
         },
 
-        rowLength: function() {
-            var cells = this.rows[0] ? this.rows[0].children : [];
-            var length = cells.length;
-            var rowLength = 0;
-            var idx = 0;
-
-            if (length) {
-                for (; idx < length; idx++) {
-                    rowLength += cells[idx].attr.colspan || 1;
-                }
-            }
-
-            if (!rowLength) {
-                rowLength = this.measures;
-            }
-
-            return rowLength;
-        },
-
         _colGroup: function() {
-            var length = this.rowLength();
+            var length = this._rowLength();
             var children = [];
             var idx = 0;
 
@@ -3153,18 +3157,6 @@ var __meta__ = {
             }
 
             return element("tbody", null, this.rows);
-        },
-
-        _memberIdx: function(members, parentMember) {
-            var index = 0;
-            var member = members[index];
-
-            while(member && member.parentName !== parentMember.name) {
-                index += 1;
-                member = members[index];
-            }
-
-            return member ? index : index - 1;
         },
 
         _normalize: function() {
@@ -3215,6 +3207,25 @@ var __meta__ = {
             return idx;
         },
 
+        _rowLength: function() {
+            var cells = this.rows[0] ? this.rows[0].children : [];
+            var length = cells.length;
+            var rowLength = 0;
+            var idx = 0;
+
+            if (length) {
+                for (; idx < length; idx++) {
+                    rowLength += cells[idx].attr.colspan || 1;
+                }
+            }
+
+            if (!rowLength) {
+                rowLength = this.measures;
+            }
+
+            return rowLength;
+        },
+
         _row: function(tuple, memberIdx, parentMember) {
             var rootName = this.rootTuple.members[memberIdx].name;
             var levelNum = tuple.members[memberIdx].levelNum;
@@ -3248,25 +3259,14 @@ var __meta__ = {
                 this.rows.splice(this._rowIndex(parentRow) + 1, 0, row);
             } else {
                 row.notFirst = false;
-            }
 
-            if (!row.parentMember || row.parentMember !== parentMember) {
-                row.parentMember = parentMember;
-                row.colspan = 0;
+                if (!row.parentMember || row.parentMember !== parentMember) {
+                    row.parentMember = parentMember;
+                    row.colspan = 0;
+                }
             }
 
             return row;
-        },
-
-        _tuplePath: function(tuple, index) {
-            var path = [];
-            var idx = 0;
-
-            for(; idx <= index; idx++) {
-                path.push(tuple.members[idx].name);
-            }
-
-            return path;
         },
 
         _measures: function(measures) {
@@ -3290,59 +3290,35 @@ var __meta__ = {
 
         _buildRows: function(tuple, memberIdx, parentMember) {
             var members = tuple.members;
-            var children;
-            var childRow;
-            var member;
-            var row;
+            var member = members[memberIdx];
+            var nextMember = members[memberIdx + 1];
 
-            var nextMember;
-
-            var allCell;
-            var cell;
-            var cellAttr;
+            var row, childRow, children, childrenLength;
+            var cell, allCell, cellAttr;
             var cellChildren = [];
             var path;
 
             var idx = 0;
-            var childrenLength;
-
             var colspan;
             var metadata;
-
-            if (parentMember) {
-                memberIdx = this._memberIdx(members, parentMember); //we do not need this func
-            }
-
-            member = members[memberIdx];
 
             if (member.measure) {
                 this._measures(member.children);
                 return;
             }
 
+            path = kendo.stringify(buildPath(tuple, memberIdx));
             row = this._row(tuple, memberIdx, parentMember);
 
             children = member.children;
             childrenLength = children.length;
 
-            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
             metadata = this.metadata[path];
+            if (!metadata) {
+                this.metadata[path] = metadata = createMetadata(Number(member.levelNum), memberIdx);
+            }
 
             this._indexes.push(path);
-
-            if (!metadata) {
-                metadata = {
-                    maxChildren: 0,
-                    children: 0,
-                    maxMembers: 0,
-                    members: 0,
-                    measures: 1,
-                    levelNum: Number(member.levelNum),
-                    parentMember: memberIdx !== 0
-                };
-
-                this.metadata[path] = metadata;
-            }
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
@@ -3362,14 +3338,12 @@ var __meta__ = {
             row.children.push(cell);
             row.colspan += 1;
 
-            nextMember = members[memberIdx + 1];
-
             if (childrenLength) {
                 allCell = element("th", { className: "k-header k-alt" }, [text(member.caption || member.name)]);
                 row.children.push(allCell);
 
                 for (; idx < childrenLength; idx++) {
-                    childRow = this._buildRows(children[idx], 0, member);
+                    childRow = this._buildRows(children[idx], memberIdx, member);
                 }
 
                 colspan = childRow.colspan;
@@ -3513,17 +3487,6 @@ var __meta__ = {
             }
         },
 
-        _tuplePath: function(tuple, index) {
-            var path = [];
-            var idx = 0;
-
-            for(; idx <= index; idx++) {
-                path.push(tuple.members[idx].name);
-            }
-
-            return path;
-        },
-
         _row: function(attr, children) {
             var row = element("tr", attr, children);
             row.rowspan = 1;
@@ -3551,7 +3514,7 @@ var __meta__ = {
 
             var levelNum = Number(member.levelNum) + 1;
             var rootName = this.rootTuple.members[memberIdx].name;
-            var tuplePath = this._tuplePath(tuple, memberIdx - 1).join("");
+            var tuplePath = buildPath(tuple, memberIdx - 1).join("");
 
             var parentName = tuplePath + (member.parentName || "");
             var row = map[parentName + "all"] || map[parentName];
@@ -3585,24 +3548,14 @@ var __meta__ = {
 
             map[tuplePath + member.name] = row;
 
-            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            path = kendo.stringify(buildPath(tuple, memberIdx));
+
             metadata = this.metadata[path];
+            if (!metadata) {
+                this.metadata[path] = metadata = createMetadata(levelNum - 1, memberIdx);
+            }
 
             this._indexes.push(path);
-
-            if (!metadata) {
-                metadata = {
-                    maxChildren: 0,
-                    children: 0,
-                    maxMembers: 0,
-                    members: 0,
-                    measures: 1,
-                    levelNum: levelNum - 1,
-                    parentMember: memberIdx !== 0
-                };
-
-                this.metadata[path] = metadata;
-            }
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
