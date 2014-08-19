@@ -20,11 +20,18 @@ function cleanCommand(range) {
     return command;
 }
 
-function cleanedContent(html) {
+function selectAll(editor) {
+    var range = editor.createRange();
+
+    range.selectNodeContents(editor.body);
+
+    return range;
+}
+
+function cleanedContent(html, select) {
     editor.value(html);
 
-    var range = editor.createRange();
-    range.selectNodeContents(editor.body);
+    var range = (select || selectAll)(editor);
 
     var command = cleanCommand(range);
     command.exec();
@@ -58,6 +65,23 @@ test("keeps paragraphs", function() {
 
 test("removes style attributes", function() {
     equal(cleanedContent('<p style="color: #f00;">foo</p>'), '<p>foo</p>');
+});
+
+test("removes style attributes of fully selected nodes", function() {
+    equal(
+        cleanedContent(
+            '<p style="color: #f00;">foo</p>' +
+            '<p style="color: #00f;">bar</p>',
+        function(editor) {
+            var range = editor.createRange();
+            var p = $("p", editor.body);
+
+            range.setStart(p[0].firstChild, 0);
+            range.setEnd(p[1].firstChild, 3);
+
+            return range;
+        }), '<p>foo</p><p>bar</p>'
+    );
 });
 
 }());

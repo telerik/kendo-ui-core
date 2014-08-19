@@ -12,6 +12,7 @@ var kendo = window.kendo,
     Command = Editor.Command,
     dom = Editor.Dom,
     EditorUtils = Editor.EditorUtils,
+    RangeUtils = Editor.RangeUtils,
     registerTool = EditorUtils.registerTool;
 
 
@@ -191,6 +192,8 @@ var CleanFormatCommand = Command.extend({
     exec: function() {
         var range = this.lockRange(true);
         var remove = this.options.remove || "strong,em,span".split(",");
+
+        RangeUtils.wrapSelectedElements(range);
 
         var iterator = new Editor.RangeIterator(range);
 
