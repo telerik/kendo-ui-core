@@ -1400,18 +1400,20 @@
 
             _createHandlers: function () {
                 var that = this;
+                var element = that.element;
+
+                element.on(MOUSEWHEEL_NS, proxy(that._wheel, that));
                 if (!kendo.support.touch && !kendo.support.mobileOS) {
                     that.toolService = new ToolService(that);
-                    that.element
+                    element
                         .on("mousemove" + NS, proxy(that._mouseMove, that))
                         .on("mouseup" + NS, proxy(that._mouseUp, that))
                         .on("mousedown" + NS, proxy(that._mouseDown, that))
-                        .on(MOUSEWHEEL_NS, proxy(that._wheel, that))
                         .on("keydown" + NS, proxy(that._keydown, that))
                         .on("mouseover" + NS, proxy(that._mouseover, that))
                         .on("mouseout" + NS, proxy(that._mouseout, that));
                 } else {
-                    that._userEvents = new kendo.UserEvents(that.element, {
+                    that._userEvents = new kendo.UserEvents(element, {
                         multiTouch: true
                     });
 
