@@ -303,7 +303,7 @@ var __meta__ = {
                 .addClass(that._guid)
                 [insertionMethod](options.appendTo)
                 .hide()
-                .kendoAnimate(animation.open);
+                .kendoAnimate(animation.open || false);
 
             that._attachStaticEvents(options, wrapper);
 
@@ -315,7 +315,7 @@ var __meta__ = {
         },
 
         _hideStatic: function(wrapper) {
-            wrapper.kendoAnimate(extend(this.options.animation.close, { complete: function() {
+            wrapper.kendoAnimate(extend(this.options.animation.close || false, { complete: function() {
                 wrapper.off(NS).find(KICLOSE).off(NS);
                 wrapper.remove();
             }}));
