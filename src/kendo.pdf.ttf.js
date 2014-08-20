@@ -753,7 +753,7 @@ var PostTable = (function(){
                 if (index >= 0) {
                     indexes.push(index);
                 } else {
-                    indexes.push(POSTSCRIPT_GLYPHS.length - 1 + strings.length);
+                    indexes.push(POSTSCRIPT_GLYPHS.length + strings.length);
                     strings.push(post);
                 }
             }
