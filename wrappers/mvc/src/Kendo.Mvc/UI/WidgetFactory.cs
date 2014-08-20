@@ -1769,6 +1769,19 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
+        public virtual NumericTextBoxBuilder<long> IntegerTextBoxFor(Expression<Func<TModel, Nullable<long>>> expression)
+        {
+            return NumericTextBoxFor<long>(expression).Format("n0").Decimals(0);
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="NumericTextBox{T}"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().IntegerTextBoxFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
         public virtual NumericTextBoxBuilder<int> IntegerTextBoxFor(Expression<Func<TModel, int>> expression)
         {
             return NumericTextBoxFor<int>(expression).Format("n0").Decimals(0);
