@@ -1116,6 +1116,24 @@ Subfont.prototype = {
         };
 
         return this.font.directory.render(tables);
+    },
+    cidToGidMap: function() {
+        var out = BinaryStream(), len = 0;
+        for (var cid = this.firstChar; cid < this.next; ++cid) {
+            while (len < cid) {
+                out.writeShort(0);
+                len++;
+            }
+            var old_gid = this.ncid2ogid[cid];
+            if (old_gid) {
+                var new_gid = this.ogid2ngid[old_gid];
+                out.writeShort(new_gid);
+            } else {
+                out.writeShort(0);
+            }
+            len++;
+        }
+        return out.get();
     }
 };
 
@@ -1173,6 +1191,5 @@ TTFFont.prototype = {
 };
 
 global.kendo.PDF.TTFFont = TTFFont;
-global.kendo.PDF.BinaryStream = BinaryStream;
 
 })(Function("return this")());

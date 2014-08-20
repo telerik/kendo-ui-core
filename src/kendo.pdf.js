@@ -137,10 +137,39 @@
         };
     }
 
+    var FONT_CACHE = {};
+
+    function getFont(url, cont) {
+        var font = FONT_CACHE[url];
+        if (font) {
+            cont(font);
+        } else {
+            var req = new XMLHttpRequest();
+            req.open('GET', url, true);
+            req.overrideMimeType("text/plain; charset=x-user-defined");
+            req.onload = function() {
+                var data = req.responseText;
+                var font = new PDF.TTFFont(data);
+                FONT_CACHE[url] = font;
+                cont(font);
+            };
+            req.send(null);
+        }
+    }
+
     PDF.prototype = {
-
-        /* -----[ TTF fonts ]----- */
-
+        getFont: function(url, cont) {
+            var self = this;
+            if (self.FONTS[url]) {
+                cont(self.FONTS[url].value);
+            } else {
+                getFont(url, function(font){
+                    font = new PDFFont(font, self);
+                    self.FONTS[url] = self.attach(font);
+                    cont(font);
+                });
+            }
+        }
     };
 
     /* -----[ utils ]----- */
@@ -429,75 +458,72 @@
 
     /// TTF fonts
 
-    var PDFFont = defclass(function PDFFont(pdf, props){
-        this._pdf = pdf;
+    var PDFFont = defclass(function PDFFont(font, pdf, props){
         props = this.props = props || {};
         props.Type = PDFName.get("Font");
         props.Subtype = PDFName.get("Type0");
         props.Encoding = PDFName.get("Identity-H");
+
+        this._pdf = pdf;
+        this._font = font;
+
+        this._sub = font.makeSubset();
+
+        var head = font.head;
+
+        this.name = font.psName;
+        var scale = this.scale = font.scale;
+        this.bbox = [
+            head.xMin * scale,
+            head.yMin * scale,
+            head.xMax * scale,
+            head.yMax * scale
+        ];
+
+        this.italicAngle = font.post.italicAngle;
+        this.ascent = font.ascent * scale;
+        this.descent = font.descent * scale;
+        this.lineGap = font.lineGap * scale;
+        this.capHeight = font.os2.capHeight || this.ascent;
+        this.xHeight = font.os2.xHeight || 0;
+        this.stemV = 0;
+
+        this.familyClass = (font.os2.familyClass || 0) >> 8;
+        this.isSerif = this.familyClass >= 1 && this.familyClass <= 7;
+        this.isScript = this.familyClass == 10;
+
+        this.flags = ((font.post.isFixedPitch ? 1 : 0) |
+                      (this.isSerif ? 1 << 1 : 0) |
+                      (this.isScript ? 1 << 3 : 0) |
+                      (this.italicAngle != 0 ? 1 << 6 : 0) |
+                      (1 << 5));
+
+        this.descriptor = this._pdf.attach(new PDFDictionary({
+            Type         : PDFName.get("FontDescriptor"),
+            FontName     : PDFName.get(this._sub.psName),
+            FontBBox     : this.bbox,
+            Flags        : this.flags,
+            StemV        : this.stemV,
+            ItalicAngle  : this.italicAngle,
+            Ascent       : this.ascent,
+            Descent      : this.descent,
+            CapHeight    : this.capHeight,
+            XHeight      : this.xHeight
+        }));
     }, {
-        loadTTF: function(data) {
-            var font = this._font = new PDF.TTFFont(data);
-            this._sub = font.makeSubset();
-
-            var head = font.head;
-
-            this.name = font.psName;
-            var scale = this.scale = font.scale;
-            this.bbox = [
-                head.xMin * scale,
-                head.yMin * scale,
-                head.xMax * scale,
-                head.yMax * scale
-            ];
-
-            this.italicAngle = font.post.italicAngle;
-            this.ascent = font.ascent * scale;
-            this.descent = font.descent * scale;
-            this.lineGap = font.lineGap * scale;
-            this.capHeight = font.os2.capHeight || this.ascent;
-            this.xHeight = font.os2.xHeight || 0;
-            this.stemV = 0;
-
-            this.familyClass = (font.os2.familyClass || 0) >> 8;
-            this.isSerif = this.familyClass >= 1 && this.familyClass <= 7;
-            this.isScript = this.familyClass == 10;
-
-            this.flags = ((font.post.isFixedPitch ? 1 : 0) |
-                          (this.isSerif ? 1 << 1 : 0) |
-                          (this.isScript ? 1 << 3 : 0) |
-                          (this.italicAngle != 0 ? 1 << 6 : 0) |
-                          (1 << 5));
-
-            this.descriptor = this._pdf.attach(new PDFDictionary({
-                Type         : PDFName.get("FontDescriptor"),
-                FontName     : PDFName.get(this._sub.psName),
-                FontBBox     : this.bbox,
-                Flags        : this.flags,
-                StemV        : this.stemV,
-                ItalicAngle  : this.italicAngle,
-                Ascent       : this.ascent,
-                Descent      : this.descent,
-                CapHeight    : this.capHeight,
-                XHeight      : this.xHeight
-            }));
-
-            this.stream = this._pdf.attach(new PDFStream(makeOutput()));
-            this.descriptor.value.props.FontFile2 = this.stream;
-        },
         encodeText: function(text) {
-            return this._sub.encodeText(text);
+            return new PDFHexString(this._sub.encodeText(text));
         },
         beforeRender: function() {
-            // write the TTF data
             var self = this;
+
+            // write the TTF data
+            self.stream = self._pdf.attach(new PDFStream(makeOutput()));
+            self.descriptor.value.props.FontFile2 = self.stream;
             var sub = self._sub;
             var data = sub.render();
             self.stream.value.data(data);
             self.stream.value.props.Length1 = data.length;
-
-            var fs = require("fs");
-            fs.writeFileSync("/tmp/font.ttf", data, { encoding: "binary" });
 
             var cmap = sub.ncid2ogid;
             var firstChar = sub.firstChar;
@@ -536,7 +562,7 @@
                 LastChar: lastChar,
                 DW: Math.round(self._font.widthOfGlyph(0)),
                 W: charWidths,
-                CIDToGIDMap: self._pdf.attach(self._makeCidToGidMap(firstChar, lastChar))
+                CIDToGIDMap: self._pdf.attach(self._makeCidToGidMap())
             });
 
             var dict = self.props;
@@ -548,27 +574,10 @@
             var unimap = new PDFToUnicodeCmap(firstChar, lastChar, sub.subset);
             var unimapStream = new PDFStream(makeOutput());
             unimapStream.data(unimap);
-            dict.ToUnicode = this._pdf.attach(unimapStream);
+            dict.ToUnicode = self._pdf.attach(unimapStream);
         },
-        _makeCidToGidMap: function(firstChar, lastChar) {
-            // generate CIDToGIDMap -- map character ID (not code) to
-            // glyph index as a binary stream
-            var out = PDF.BinaryStream(), len = 0;
-            for (var cid = firstChar; cid <= lastChar; ++cid) {
-                while (len < cid) {
-                    out.writeShort(0);
-                    len++;
-                }
-                var old_gid = this._sub.ncid2ogid[cid];
-                if (old_gid) {
-                    var new_gid = this._sub.ogid2ngid[old_gid];
-                    out.writeShort(new_gid);
-                } else {
-                    out.writeShort(0);
-                }
-                len++;
-            }
-            return new PDFStream(out);
+        _makeCidToGidMap: function() {
+            return new PDFStream(this._sub.cidToGidMap());
         }
     }, PDFDictionary);
 
@@ -695,141 +704,5 @@
     /// exports.
 
     kendo.PDF = PDF;
-
-
-
-
-
-
-    ///// DEBUG
-
-    require("./kendo.pdf.ttf.js");
-
-    var pdf = new PDF();
-
-    {
-        var fs = require("fs");
-        var font = new PDFFont(pdf);
-        var fontObj = pdf.attach(font);
-        var fontdata = fs.readFileSync("/usr/share/fonts/truetype/msttcorefonts/times.ttf", { encoding: "binary" });
-        fontdata = fontdata.toString("binary");
-        font.loadTTF(fontdata);
-
-        var fontName = font._sub.psName;
-        pdf.FONTS[fontName] = fontObj;
-
-
-        var txt = "", strings = [ "The quick dog eats the lazy fox", "" ];
-        for (var i = 32; i < 0xFFFF; ++i) {
-            var gid = font._font.cmap.getUnicodeEntry().codeMap[i];
-            if (gid == null) continue;
-            txt += String.fromCharCode(i) + " ";
-            if (txt.length > 140) {
-                strings.push(txt);
-                txt = "";
-            }
-        }
-        if (txt) strings.push(txt);
-
-        strings.push("", "The quick brown fox jumps over the lazy dog", "");
-        strings = strings.concat(strings);
-
-
-        var page = pdf.addPage();
-        page._beginText();
-        page._out(mm2pt(5), " ", mm2pt(250), " TD", NL);
-
-        // page._out(page._getFontResource(fontName), " 15 Tf", NL);
-        // page._out(new PDFHexString(font.encodeText("Test test ツ x→a♥b ←asd→")), " Tj", NL);
-        // page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺")), " Tj", NL);
-        // page._out(new PDFHexString(font.encodeText("abcdefghijklmnopqrstuvxyz (0123456789)")), " Tj", NL);
-        // page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
-        // page._out(new PDFHexString(font.encodeText("ABCDEFGHIJKLMNOPQRSTUVXYZ @#$%^&*-=_+—≠±–")), " Tj", NL);
-        // page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
-        // page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ")), " Tj", NL);
-
-        page._out(page._getFontResource(fontName), " 7.5 Tf", NL);
-        strings.forEach(function(txt){
-            page._out(mm2pt(0), " ", mm2pt(-4), " TD", NL);
-            page._out(new PDFHexString(font.encodeText(txt)), " Tj", NL);
-        });
-        page._endText();
-    }
-
-    // var page1 = pdf.addPage();
-    // page1._beginText();
-    // page1._out("70 50 TD", NL);
-    // page1._out(page1._getFontResource(fontName), " 20 Tf", NL);
-    // page1._out(new PDFHexString(font.encodeText("Check this out")), " Tj", NL);
-    // page1._endText();
-
-    // var page2 = pdf.addPage();
-    // page2._transform(1, 0, 0, -1, 0, mm2pt(297));
-
-    // page2._saveContext();
-    // page2._setLineWidth(0.2);
-    // for (var y = 0; y <= 297; y += 10) {
-    //     page2._out(mm2pt(0), " ", mm2pt(y), " m ",
-    //                mm2pt(210), " ", mm2pt(297 - y), " l s", NL);
-    // }
-    // for (var x = 0; x <= 210; x += 10) {
-    //     page2._out(mm2pt(x), " ", mm2pt(0), " m ",
-    //                mm2pt(210 - x), " ", mm2pt(297), " l s", NL);
-    // }
-    // page2._restoreContext();
-
-    // var opacity_half = page2._getGSResource({ ca: 0.5, CA: 0.5 });
-
-    // page2._saveContext();
-    // page2._transform(1, 0, 0, -1, mm2pt(105), mm2pt(148.5));
-    // page2._beginText();
-    // page2._out(page2._getFontResource("Times-Roman"), " 50 Tf", NL);
-    // page2._setFillColor(0.5, 0.5, 0.5);
-    // page2._out(opacity_half, " gs", NL);
-    // page2._setLineWidth(1);
-    // page2._setStrokeColor(1, 0, 0);
-    // page2._out("2 Tr", NL);
-    // page2._out(new PDFString("Hello world!"), " Tj", NL);
-    // page2._endText();
-    // page2._restoreContext();
-
-    // page2._saveContext();
-    // page2._transform(1, 0, 0, -1, mm2pt(10), mm2pt(10));
-    // page2._beginText();
-    // page2._out(page2._getFontResource("Times-BoldItalic"), " 24 Tf", NL);
-    // page2._out("2 Tr", NL);
-    // page2._setLineWidth(0.1);
-    // page2._setStrokeColor(0.9, 0.2, 0.1);
-    // page2._setFillColor(0.9, 0.9, 0.2);
-    // page2._setDashPattern([ 1.5, 0.5 ], 0);
-    // page2._out(opacity_half, " gs", NL);
-    // page2._out(new PDFString("Second line"), " Tj", NL);
-    // page2._endText();
-    // page2._restoreContext();
-
-    // page2._setStrokeColor(0, 0.8, 0);
-
-    // page2._out(mm2pt(105), " ", mm2pt(0), " m", NL);
-    // page2._out(mm2pt(105), " ", mm2pt(297), " l", NL);
-    // page2._out("s", NL, NL);
-
-    // page2._out(mm2pt(0), " ", mm2pt(148.5), " m", NL);
-    // page2._out(mm2pt(210), " ", mm2pt(148.5), " l", NL);
-    // page2._out("s", NL, NL);
-
-    // var page3 = pdf.addPage();
-    // page3._transform(mm2pt(1), 0, 0, mm2pt(1), mm2pt(105), mm2pt(148.5));
-    // page3._beginText();
-    // page3._out(page3._getFontResource("Courier-Bold"), " 10 Tf", NL);
-    // page3._out(new PDFString("Courier-Bold"), " Tj", NL);
-    // page3._endText();
-
-    // page3._out("-105 0 m 105 0 l s ", NL);
-    // page3._out("0 -148.5 m 0 148.5 l s ", NL);
-
-    //console.log("%s", pdf.render());
-    //require("util").puts(pdf.render());
-    var fs = require("fs");
-    fs.writeFileSync("/tmp/pdf.txt", pdf.render(), { encoding: "binary" });
 
 })(undefined, Function("return this")());
