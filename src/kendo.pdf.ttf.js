@@ -4,6 +4,10 @@ function hasOwnProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
+function sortedKeys(obj) {
+    return Object.keys(obj).sort(function(a, b){ return a - b }).map(parseFloat);
+}
+
 function BinaryStream(data) {
     var offset = 0;
     if (data == null) data = "";
@@ -559,7 +563,6 @@ var GlyfTable = (function(){
                     out.write(glyph.render(old2new));
                 }
             }
-            offsets.push(out.offset());
             return {
                 table: out.get(),
                 offsets: offsets
@@ -848,44 +851,21 @@ var CmapTable = (function(){
         });
     }
 
-    // function splitChunks(codes) {
-    //     var a = null;
-    //     var chunks = [];
-    //     for (var i = 0; i < codes.length; ++i) {
-    //         var code = codes[i];
-    //         if (a == null || code - a[a.length - 1] > 1) {
-    //             a = [];
-    //             chunks.push(a);
-    //         }
-    //         a.push(code);
-    //     }
-    //     return chunks;
-    // }
-
-    function renderCharmap(charmap) {
-        var codes = [];
-        for (var i in charmap) {
-            if (hasOwnProperty(charmap, i)) {
-                codes.push(parseInt(i, 10));
-            }
-        }
-        codes = codes.sort(function(a, b){ return a - b });
+    function renderCharmap(ncid2ogid, ogid2ngid) {
+        var codes = sortedKeys(ncid2ogid);
         var startCodes = [];
         var endCodes = [];
-        var nextID = 0;
-        var map = {};
-        var charMap = {};
         var last = null;
         var diff = null;
 
+        function new_gid(charcode) {
+            return ogid2ngid[ncid2ogid[charcode]];
+        }
+
         for (var i = 0; i < codes.length; ++i) {
             var code = codes[i];
-            var old = charmap[code];
-            if (map[old] == null) {
-                map[old] = ++nextID;
-            }
-            charMap[code] = { new: map[old], old: old };
-            var delta = map[old] - code;
+            var gid = new_gid(code);
+            var delta = gid - code;
             if (last == null || delta !== diff) {
                 if (last) endCodes.push(last);
                 startCodes.push(code);
@@ -916,12 +896,12 @@ var CmapTable = (function(){
                 rangeOffsets.push(0);
                 break;
             }
-            var startGlyph = charMap[startCode].new;
+            var startGlyph = new_gid(startCode);
             if (startCode - startGlyph >= 0x8000) {
                 deltas.push(0);
                 rangeOffsets.push(2 * (glyphIds.length + segCount - i));
                 for (var j = startCode; j <= endCode; ++j) {
-                    glyphIds.push(charMap[j].new);
+                    glyphIds.push(new_gid(j));
                 }
             } else {
                 deltas.push(startGlyph - startCode);
@@ -949,11 +929,7 @@ var CmapTable = (function(){
         rangeOffsets.forEach(out.writeShort);
         glyphIds.forEach(out.writeShort);
 
-        return {
-            charMap: charMap,
-            subtable: out.get(),
-            maxGlyphId: nextID + 1
-        };
+        return out.get();
     }
 
     return deftable({
@@ -971,14 +947,12 @@ var CmapTable = (function(){
                 return entry;
             });
         },
-        render: function(charmap) {
-            var result = renderCharmap(charmap);
+        render: function(ncid2ogid, ogid2ngid) {
             var out = BinaryStream();
             out.writeShort(0);  // version
             out.writeShort(1);  // tableCount
-            out.write(result.subtable);
-            result.table = out.get();
-            return result;
+            out.write(renderCharmap(ncid2ogid, ogid2ngid));
+            return out.get();
         },
         getUnicodeEntry: function() {
             if (!this.unicodeEntry) {
@@ -1044,7 +1018,11 @@ function Subfont(font) {
     this.font = font;
     this.subset = {};
     this.unicodes = {};
-    this.next = 1;
+    this.ogid2ngid = { 0: 0 };
+    this.ngid2ogid = { 0: 0 };
+    this.ncid2ogid = {};
+    this.next = this.firstChar = 1;
+    this.nextGid = 1;
     this.psName = this.font.name.subsetPsName;
 }
 
@@ -1063,40 +1041,26 @@ Subfont.prototype = {
             code = this.next++;
             this.subset[code] = ch;
             this.unicodes[ch] = code;
+
+            // generate new GID (glyph ID) and maintain newGID ->
+            // oldGID and back mappings
+            var old_gid = this.font.cmap.getUnicodeEntry().codeMap[ch];
+            if (old_gid) {
+                this.ncid2ogid[code] = old_gid;
+                if (this.ogid2ngid[old_gid] == null) {
+                    var new_gid = this.nextGid++;
+                    this.ogid2ngid[old_gid] = new_gid;
+                    this.ngid2ogid[new_gid] = old_gid;
+                }
+            }
         }
         return code;
     },
     encodeText: function(text) {
         return this.use(text);
     },
-    generateCmap: function() {
-        // unicodeCmap maps char code -> glyphId
-        var unicodeCmap = this.font.cmap.getUnicodeEntry().codeMap;
-        // the returned mapping will be internal (subset) codes -> glyphId
-        var mapping = {};
-        for (var i in this.subset) {
-            if (hasOwnProperty(this.subset, i)) {
-                var unicode = this.subset[i];
-                var gid = unicodeCmap[unicode];
-                if (gid != null) {
-                    mapping[i] = gid;
-                }
-            }
-        }
-        return mapping;
-    },
     glyphIds: function() {
-        var unicodeCmap = this.font.cmap.getUnicodeEntry().codeMap;
-        var ret = [ 0 ];
-        for (var i in this.subset) {
-            if (hasOwnProperty(this.subset, i)) {
-                var id = unicodeCmap[this.subset[i]];
-                if (id != null && ret.indexOf(id) < 0) {
-                    ret.push(id);
-                }
-            }
-        }
-        return ret.sort();
+        return sortedKeys(this.ogid2ngid);
     },
     glyphsFor: function(glyphIds, result) {
         if (!result) result = {};
@@ -1111,62 +1075,41 @@ Subfont.prototype = {
         }
         return result;
     },
-    invertObject: function(obj) {
-        var ret = {};
-        for (var i in obj) {
-            if (hasOwnProperty(obj, i)) {
-                ret[obj[i]] = i;
-            }
-        }
-        return ret;
-    },
     render: function() {
-        var cmap = CmapTable.render(this.generateCmap());
         var glyphs = this.glyphsFor(this.glyphIds());
-        var old2new = { 0: 0 };
-        for (var code in cmap.charMap) {
-            if (hasOwnProperty(cmap.charMap, code)) {
-                var ids = cmap.charMap[code];
-                old2new[ids.old] = ids.new;
-            }
-        }
 
-        var nextGlyphId = cmap.maxGlyphId;
-        for (var oldId in glyphs) {
-            if (hasOwnProperty(glyphs, oldId)) {
-                if (!hasOwnProperty(old2new, oldId)) {
-                    oldId = parseInt(oldId, 10);
-                    old2new[oldId] = nextGlyphId++;
+        // add missing sub-glyphs
+        for (var old_gid in glyphs) {
+            if (hasOwnProperty(glyphs, old_gid)) {
+                if (this.ogid2ngid[old_gid] == null) {
+                    var new_gid = this.nextGid++;
+                    this.ogid2ngid[old_gid] = new_gid;
+                    this.ngid2ogid[new_gid] = old_gid;
                 }
             }
         }
 
-        var new2old = this.invertObject(old2new);
-        var newIds = Object.keys(new2old).sort(function(a, b){ return a - b });
-        var oldIds = newIds.map(function(id){
-            return new2old[id];
-        });
+        // must obtain old_gid_ids in an order matching sorted
+        // new_gid_ids
+        var new_gid_ids = sortedKeys(this.ngid2ogid);
+        var old_gid_ids = new_gid_ids.map(function(id){
+            return this.ngid2ogid[id];
+        }, this);
 
         var font = this.font;
-        var glyf = font.glyf.render(glyphs, oldIds, old2new);
+        var glyf = font.glyf.render(glyphs, old_gid_ids, this.ogid2ngid);
         var loca = font.loca.render(glyf.offsets);
 
-        this.cmap = {};
-        for (var code in cmap.charMap) {
-            if (hasOwnProperty(cmap.charMap, code)) {
-                var ids = cmap.charMap[code];
-                this.cmap[code] = ids.old;
-            }
-        }
+        this.lastChar = this.next - 1;
 
         var tables = {
-            "cmap" : cmap.table,
+            "cmap" : CmapTable.render(this.ncid2ogid, this.ogid2ngid),
             "glyf" : glyf.table,
             "loca" : loca.table,
-            "hmtx" : font.hmtx.render(oldIds),
-            "hhea" : font.hhea.render(oldIds),
-            "maxp" : font.maxp.render(oldIds),
-            "post" : font.post.render(oldIds),
+            "hmtx" : font.hmtx.render(old_gid_ids),
+            "hhea" : font.hhea.render(old_gid_ids),
+            "maxp" : font.maxp.render(old_gid_ids),
+            "post" : font.post.render(old_gid_ids),
             "name" : font.name.render(),
             "head" : font.head.render(loca.format),
             "OS/2" : font.os2.render()
@@ -1229,18 +1172,7 @@ TTFFont.prototype = {
     }
 };
 
-if (global.kendo) {
-    global.kendo.PDF.TTFFont = TTFFont;
-    global.kendo.PDF.BinaryStream = BinaryStream;
-}
-
-    // var fs = require("fs");
-    // var data = fs.readFileSync("/home/mishoo/tmp/timesi.ttf", { encoding: "binary" });
-    // data = data.toString("binary");
-    // var font = new TTFFont(data);
-    // var sub = font.makeSubset();
-    // sub.use("ăşţ");
-    // var out = sub.render();
-    // fs.writeFileSync("/tmp/out.ttf", out, { encoding: "binary" });
+global.kendo.PDF.TTFFont = TTFFont;
+global.kendo.PDF.BinaryStream = BinaryStream;
 
 })(Function("return this")());

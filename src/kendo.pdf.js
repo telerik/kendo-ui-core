@@ -499,10 +499,9 @@
             var fs = require("fs");
             fs.writeFileSync("/tmp/font.ttf", data, { encoding: "binary" });
 
-            var cmap = sub.cmap;
-            var ids = Object.keys(cmap).sort(function(a, b){ return a - b }).map(parseFloat);
-            var firstChar = ids[0];
-            var lastChar = ids[ids.length - 1];
+            var cmap = sub.ncid2ogid;
+            var firstChar = sub.firstChar;
+            var lastChar = sub.lastChar;
             var charWidths = [];
             (function loop(i, chunk){
                 if (i <= lastChar) {
@@ -535,9 +534,9 @@
                 FontDescriptor: self.descriptor,
                 FirstChar: firstChar,
                 LastChar: lastChar,
+                DW: Math.round(self._font.widthOfGlyph(0)),
                 W: charWidths,
-                CIDToGIDMap: this._pdf.attach(this._makeCidToGidMap(ids, cmap)),
-                // CIDToGIDMap: PDFName.get("Identity")
+                CIDToGIDMap: self._pdf.attach(self._makeCidToGidMap(firstChar, lastChar))
             });
 
             var dict = self.props;
@@ -551,18 +550,22 @@
             unimapStream.data(unimap);
             dict.ToUnicode = this._pdf.attach(unimapStream);
         },
-        _makeCidToGidMap: function(ids, cmap) {
+        _makeCidToGidMap: function(firstChar, lastChar) {
             // generate CIDToGIDMap -- map character ID (not code) to
             // glyph index as a binary stream
             var out = PDF.BinaryStream(), len = 0;
-            var gid = 1;
-            for (var i = 0; i < ids.length; ++i) {
-                var cid = ids[i];
+            for (var cid = firstChar; cid <= lastChar; ++cid) {
                 while (len < cid) {
                     out.writeShort(0);
                     len++;
                 }
-                out.writeShort(cmap[cid] == null ? 0 : gid++);
+                var old_gid = this._sub.ncid2ogid[cid];
+                if (old_gid) {
+                    var new_gid = this._sub.ogid2ngid[old_gid];
+                    out.writeShort(new_gid);
+                } else {
+                    out.writeShort(0);
+                }
                 len++;
             }
             return new PDFStream(out);
@@ -704,52 +707,37 @@
 
     var pdf = new PDF();
 
-    var strings = [
-        //" ",
-    ];
-
-    var txt = "";
-    for (var i = 32; i < 383; ++i) {
-        if (i == 160 || i == 173) continue;
-        txt += String.fromCharCode(i);
-        if (txt.length > 50) {
-            strings.push(txt);
-            txt = "";
-        }
-    }
-    if (txt) strings.push(txt);
-    strings = strings.concat([
-        "Румы́нская кири́ллица использовалась для записи румынского языка до",
-        "официальной замены латиницей в начале 1860-х годов. Варианты",
-        "кириллического алфавита, употреблявшиеся для молдавского языка в",
-        "Молдавской АССР в 1924—1932 и в 1938—1940 гг. (между 1932 и 1938",
-        "гг. официально использовалась латиница) и с 1940 по 1989 в Молдавской",
-        "ССР (см. Молдавский алфавит), значительно отличаются от традиционной",
-        "кириллицы, использовавшейся в Валахии, Трансильвании и Молдове и по",
-        "сути представляют собой адаптацию русского алфавита для молдавского",
-        "языка. Перевод румынской письменности на латиницу был двухступенчатым:",
-        "сначала применялся так называемый «переходный алфавит», включавший как",
-        "кириллические, так и латинские знаки, и лишь через несколько лет была",
-        "введена собственно латиница.",
-        //"АБВГДЕЖЅZЗИІКЛМНОПҀРСТȢѸФХѾЦЧШЩЪЫЬѢꙖѤЮѦѪѨѬѠѺѮѰѲѴ",
-        "АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЬьЮюЯя",
-        "©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ♥←↓→↑☺"
-    ]);
-
     {
         var fs = require("fs");
         var font = new PDFFont(pdf);
         var fontObj = pdf.attach(font);
-        var fontdata = fs.readFileSync("/usr/share/fonts/truetype/msttcorefonts/timesi.ttf", { encoding: "binary" });
+        var fontdata = fs.readFileSync("/usr/share/fonts/truetype/msttcorefonts/times.ttf", { encoding: "binary" });
         fontdata = fontdata.toString("binary");
         font.loadTTF(fontdata);
 
         var fontName = font._sub.psName;
         pdf.FONTS[fontName] = fontObj;
 
+
+        var txt = "", strings = [ "The quick dog eats the lazy fox", "" ];
+        for (var i = 32; i < 0xFFFF; ++i) {
+            var gid = font._font.cmap.getUnicodeEntry().codeMap[i];
+            if (gid == null) continue;
+            txt += String.fromCharCode(i) + " ";
+            if (txt.length > 140) {
+                strings.push(txt);
+                txt = "";
+            }
+        }
+        if (txt) strings.push(txt);
+
+        strings.push("", "The quick brown fox jumps over the lazy dog", "");
+        strings = strings.concat(strings);
+
+
         var page = pdf.addPage();
         page._beginText();
-        page._out(mm2pt(10), " ", mm2pt(250), " TD", NL);
+        page._out(mm2pt(5), " ", mm2pt(250), " TD", NL);
 
         // page._out(page._getFontResource(fontName), " 15 Tf", NL);
         // page._out(new PDFHexString(font.encodeText("Test test ツ x→a♥b ←asd→")), " Tj", NL);
@@ -760,9 +748,9 @@
         // page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
         // page._out(new PDFHexString(font.encodeText("©… §™ …®ăşţîâĂŞŢÎÂαβπλΛ")), " Tj", NL);
 
-        page._out(page._getFontResource(fontName), " 15 Tf", NL);
+        page._out(page._getFontResource(fontName), " 7.5 Tf", NL);
         strings.forEach(function(txt){
-            page._out(mm2pt(0), " ", mm2pt(-10), " TD", NL);
+            page._out(mm2pt(0), " ", mm2pt(-4), " TD", NL);
             page._out(new PDFHexString(font.encodeText(txt)), " Tj", NL);
         });
         page._endText();
