@@ -245,7 +245,22 @@
         equal($(".k-notification").attr("data-role"), "alert");
     });
 
-    test("shortcut show methods call show method with appropriate arguments", 8, function() {
+    test("show and hide methods work for static notifications when animations are disabled", function () {
+        createNotification({
+            appendTo: QUnit.fixture,
+            animation: false
+        });
+
+        notification.show("foo");
+
+        ok($(".k-notification").is(":visible"));
+
+        notification.hide();
+
+        equal($(".k-notification").length, 0);
+    });
+
+    test("shortcut show methods call show method with appropriate arguments", 8, function () {
         var defaultArgs = [null, null],
             methods = ["info", "success", "warning", "error"],
             args, j;
