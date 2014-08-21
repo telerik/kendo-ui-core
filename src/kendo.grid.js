@@ -1748,6 +1748,13 @@ var __meta__ = {
             var destroy = function() {
                 if (that.editable) {
 
+                    var container = that.editView ? that.editView.element : that._editContainer;
+
+                    if (container) {
+                        container.off(CLICK + NS, "a.k-grid-cancel", that._editCancelClickHandler);
+                        container.off(CLICK + NS, "a.k-grid-update", that._editUpdateClickHandler);
+                    }
+
                     that._detachModelChange();
                     that.editable.destroy();
                     that.editable = null;
@@ -1912,7 +1919,6 @@ var __meta__ = {
             }
 
             var mode = that._editMode();
-            var navigatable = that.options.navigatable;
             var container;
 
             that.cancelRow();
@@ -1941,30 +1947,47 @@ var __meta__ = {
 
                 container = that.editView ? that.editView.element : that._editContainer;
 
-                container.on(CLICK + NS, "a.k-grid-cancel", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+                if (!this._editCancelClickHandler) {
+                    this._editCancelClickHandler = proxy(this._editCancelClick, this);
+                }
 
-                    if (that.trigger("cancel", { container: container, model: model })) {
-                        return;
-                    }
+                container.on(CLICK + NS, "a.k-grid-cancel", this._editCancelClickHandler);
 
-                    var currentIndex = that.items().index($(that.current()).parent());
+                if (!this._editUpdateClickHandler) {
+                    this._editUpdateClickHandler = proxy(this._editUpdateClick, this);
+                }
 
-                    that.cancelRow();
+                container.on(CLICK + NS, "a.k-grid-update", this._editUpdateClickHandler);
+            }
+        },
 
-                    if (navigatable) {
-                        that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
-                        focusTable(that.table, true);
-                    }
-                });
+        _editUpdateClick: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
 
-                container.on(CLICK + NS, "a.k-grid-update", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+            this.saveRow();
+        },
 
-                    that.saveRow();
-                });
+        _editCancelClick: function(e) {
+            var that = this;
+            var navigatable = that.options.navigatable;
+            var model = that.editable.options.model;
+            var container = that.editView ? that.editView.element : that._editContainer;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (that.trigger("cancel", { container: container, model: model })) {
+                return;
+            }
+
+            var currentIndex = that.items().index($(that.current()).parent());
+
+            that.cancelRow();
+
+            if (navigatable) {
+                that.current(that.items().eq(currentIndex).children().filter(NAVCELL).first());
+                focusTable(that.table, true);
             }
         },
 
