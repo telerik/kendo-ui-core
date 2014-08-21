@@ -1144,27 +1144,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (!series.Member.HasValue())
             {
-                series.Member = valueMemberName.AsTitle();
+                series.Member = valueMemberName;
             }
 
             if (!series.CategoryMember.HasValue())
             {
-                series.CategoryMember = categoryMemberName.AsTitle();
+                series.CategoryMember = categoryMemberName;
             }
 
             if (!series.ColorMember.HasValue())
             {
-                series.ColorMember = colorMemberName.AsTitle();
+                series.ColorMember = colorMemberName;
             }
 
             if (!series.ExplodeMember.HasValue())
             {
-                series.ExplodeMember = explodeMemberName.AsTitle();
+                series.ExplodeMember = explodeMemberName;
             }
 
             if (!series.VisibleInLegendMember.HasValue())
             {
-                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+                series.VisibleInLegendMember = visibleInLegendMemberName;
             }
 
             Container.Series.Add((ChartSeriesBase<TModel>)series);
@@ -1243,22 +1243,22 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (!series.Member.HasValue())
             {
-                series.Member = valueMemberName.AsTitle();
+                series.Member = valueMemberName;
             }
 
             if (!series.CategoryMember.HasValue())
             {
-                series.CategoryMember = categoryMemberName.AsTitle();
+                series.CategoryMember = categoryMemberName;
             }
 
             if (!series.ColorMember.HasValue())
             {
-                series.ColorMember = colorMemberName.AsTitle();
+                series.ColorMember = colorMemberName;
             }
 
             if (!series.VisibleInLegendMember.HasValue())
             {
-                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+                series.VisibleInLegendMember = visibleInLegendMemberName;
             }
 
             Container.Series.Add((ChartSeriesBase<TModel>)series);
@@ -1341,27 +1341,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             if (!series.Member.HasValue())
             {
-                series.Member = valueMemberName.AsTitle();
+                series.Member = valueMemberName;
             }
 
             if (!series.CategoryMember.HasValue())
             {
-                series.CategoryMember = categoryMemberName.AsTitle();
+                series.CategoryMember = categoryMemberName;
             }
 
             if (!series.ColorMember.HasValue())
             {
-                series.ColorMember = colorMemberName.AsTitle();
+                series.ColorMember = colorMemberName;
             }
 
             if (!series.ExplodeMember.HasValue())
             {
-                series.ExplodeMember = explodeMemberName.AsTitle();
+                series.ExplodeMember = explodeMemberName;
             }
 
             if (!series.VisibleInLegendMember.HasValue())
             {
-                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+                series.VisibleInLegendMember = visibleInLegendMemberName;
             }
 
             Container.Series.Add((ChartSeriesBase<TModel>)series);
