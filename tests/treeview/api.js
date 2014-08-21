@@ -395,6 +395,45 @@
         equal(treeview.find(".k-item .k-item").length, 2);
     });
 
+    test("appended items get their checked state from parent", function() {
+        createTreeView({
+            checkboxes: {
+                checkChildren: true
+            },
+            dataSource: {
+                data: [
+                    { text: "foo", items: [
+                        { text: "bar", checked: true }
+                    ] }
+                ]
+            }
+        });
+
+        treeviewObject.append({ text: "baz" }, treeviewObject.findByText("foo"));
+
+        ok(treeviewObject.findByText("baz").find(":checkbox").prop("checked"));
+    });
+
+    test("appended items update indeterminate state", function() {
+        createTreeView({
+            checkboxes: {
+                checkChildren: true
+            },
+            dataSource: {
+                data: [
+                    { text: "foo", items: [
+                        { text: "bar", checked: true }
+                    ] }
+                ]
+            }
+        });
+
+        treeviewObject.append({ text: "baz", checked: false }, treeviewObject.findByText("foo"));
+
+        ok(!treeviewObject.findByText("baz").find(":checkbox").prop("checked"));
+        ok(!treeviewObject.findByText("foo").find(":checkbox").prop("checked"));
+    });
+
     asyncTest("append() to unfetched async parent", function() {
         createTreeView({
             dataSource: {

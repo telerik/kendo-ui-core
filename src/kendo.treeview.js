@@ -518,10 +518,6 @@ var __meta__ = {
             this._dataSource();
 
             this.dataSource.fetch();
-
-            if (options.checkboxes && options.checkboxes.checkChildren) {
-                this.updateIndeterminate();
-            }
         },
 
         _bindDataSource: function() {
@@ -1385,9 +1381,20 @@ var __meta__ = {
                 this._progress(parentNode, false);
             }
 
-            if (checkChildren && action != "remove" && node && node.checked) {
+            if (checkChildren && action != "remove") {
+                var bubble = false;
+
                 for (i = 0; i < items.length; i++) {
-                    items[i].checked = true;
+                    if ("checked" in items[i]) {
+                        bubble = true;
+                        break;
+                    }
+                }
+
+                if (!bubble && node && node.checked) {
+                    for (i = 0; i < items.length; i++) {
+                        items[i].checked = true;
+                    }
                 }
             }
 
@@ -1438,10 +1445,16 @@ var __meta__ = {
                 }
             }
 
+            // expand any expanded items
             for (i = 0; i < items.length; i++) {
                 if (!loadOnDemand || items[i].expanded) {
                     items[i].load();
                 }
+            }
+
+            // update indeterminate state when appending / moving items
+            if (checkChildren) {
+                this.updateIndeterminate();
             }
 
             this.trigger(DATABOUND, {
