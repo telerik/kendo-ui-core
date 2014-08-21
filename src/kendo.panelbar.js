@@ -599,7 +599,7 @@ var __meta__ = {
                 next = item.parent(VISIBLEGROUP).parent(ITEM).next();
             }
 
-            if (!next[0] || !next.is(":visible")) {
+            if (!next[0]) {
                 next = this._first();
             }
 
