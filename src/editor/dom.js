@@ -486,23 +486,25 @@ var Dom = {
         return $.inArray(Dom.name(node), tags) >= 0;
     },
 
-    changeTag: function (referenceElement, tagName) {
+    changeTag: function (referenceElement, tagName, skipAttributes) {
         var newElement = Dom.create(referenceElement.ownerDocument, tagName),
             attributes = referenceElement.attributes,
             i, len, name, value, attribute;
 
-        for (i = 0, len = attributes.length; i < len; i++) {
-            attribute = attributes[i];
-            if (attribute.specified) {
-                // IE < 8 cannot set class or style via setAttribute
-                name = attribute.nodeName;
-                value = attribute.nodeValue;
-                if (name == CLASS) {
-                    newElement.className = value;
-                } else if (name == STYLE) {
-                    newElement.style.cssText = referenceElement.style.cssText;
-                } else {
-                    newElement.setAttribute(name, value);
+        if (!skipAttributes) {
+            for (i = 0, len = attributes.length; i < len; i++) {
+                attribute = attributes[i];
+                if (attribute.specified) {
+                    // IE < 8 cannot set class or style via setAttribute
+                    name = attribute.nodeName;
+                    value = attribute.nodeValue;
+                    if (name == CLASS) {
+                        newElement.className = value;
+                    } else if (name == STYLE) {
+                        newElement.style.cssText = referenceElement.style.cssText;
+                    } else {
+                        newElement.setAttribute(name, value);
+                    }
                 }
             }
         }
