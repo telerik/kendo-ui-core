@@ -614,4 +614,14 @@
         equal(grid.content[0].scrollTop, grid.content[0].offsetHeight);
     });
 
+    test("saveRow detaches button click handlers", function() {
+        var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+            tr = table.find("tr:first");
+
+        grid.editRow(tr);
+        grid.saveRow();
+
+        ok(!$._data(tr[0], "events"));
+    });
+
 })();
