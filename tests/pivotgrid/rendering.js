@@ -1417,7 +1417,7 @@
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2_1", parentName: "dim 2", levelNum: "0", children: [] } ] }
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2_1", parentName: "dim 2", levelNum: "1", children: [] } ] }
         ]
 
         var pivotgrid = createPivot({
@@ -1713,11 +1713,11 @@
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
@@ -1789,11 +1789,11 @@
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
@@ -3024,6 +3024,231 @@
         var cols = colGroup.find("col");
 
         equal(cols.length, 2);
+    });
+
+    test("PivotGrid use dataCellTemplate to render data cells", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "test #: data.dataItem.value #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("td");
+
+        equal(cell.text(), "test 1");
+    });
+
+    test("PivotGrid passes column tuple to cell template", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] }] }
+        ];
+
+        var data = [
+            { value: 0 },
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ];
+
+        var indexes = [3, 4, 1, 5, 2, 0];
+
+        window.checkTuple = function (data) {
+            var tuple = tuples[indexes.shift()];
+            var templateTuple = data.columnTuple;
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes row tuple to cell template", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] }] }
+        ];
+
+        var data = [
+            { value: 0 },
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ];
+
+        var indexes = [3, 4, 1, 5, 2, 0];
+
+        window.checkTuple = function (data) {
+            var tuple = tuples[indexes.shift()];
+            var templateTuple = data.rowTuple;
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes a measure along with the column tuple", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ];
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var index = indexes.shift();
+
+            var tuple = tuples[index];
+            var templateTuple = data.columnTuple;
+
+            equal(data.measure, measures[index]);
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes a measure along with the row tuple", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ];
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var index = indexes.shift();
+
+            var tuple = tuples[index];
+            var templateTuple = data.rowTuple;
+
+            equal(data.measure, measures[index]);
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            var dataMeasure = data.measure;
+
+            equal(measure, data.measure);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass row measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            var dataMeasure = data.measure;
+
+            equal(measure, data.measure);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
     });
 
     module("PivotGrid resize on render", {

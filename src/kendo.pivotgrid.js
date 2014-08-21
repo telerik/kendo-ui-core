@@ -46,6 +46,7 @@ var __meta__ = {
         COLLAPSEMEMBER = "collapseMember",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
+        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -2653,9 +2654,12 @@ var __meta__ = {
             that._wrapper();
             that._createLayout();
 
+
             that._columnBuilder = columnBuilder = new ColumnBuilder();
             that._rowBuilder = rowBuilder = new RowBuilder();
             that._contentBuilder = new ContentBuilder();
+
+            that._templates();
 
             that.columnsHeader
                 .add(that.rowsHeader)
@@ -2721,11 +2725,18 @@ var __meta__ = {
             height: null,
             columnWidth: 100,
             configurator: "",
+            dataCellTemplate: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
                 rowFields: "Drop Rows Fields Here"
             }
+        },
+
+        _templates: function() {
+            var dataTemplate = this.options.dataCellTemplate;
+
+            this._contentBuilder.template = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
         },
 
         _bindConfigurator: function() {
@@ -2757,6 +2768,12 @@ var __meta__ = {
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
+        },
+
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            this._templates();
         },
 
         _dataSource: function() {
@@ -2890,7 +2907,6 @@ var __meta__ = {
 
             that.wrapper.append(layoutTable);
 
-            //VIRTUAL DOM
             that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
             that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
             that.contentTree = new kendo.dom.Tree(that.content[0]);
@@ -3010,7 +3026,7 @@ var __meta__ = {
                 return;
             }
 
-            columnBuilder.measures = dataSource._columnMeasures().length || 1;
+            columnBuilder.measures = dataSource._columnMeasures();
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
@@ -3023,7 +3039,7 @@ var __meta__ = {
 
             rowAxis = {
                 indexes: rowBuilder._indexes,
-                measures: dataSource._rowMeasures().length || 1,
+                measures: dataSource._rowMeasures(),
                 metadata: rowBuilder.metadata
             };
 
@@ -3318,7 +3334,10 @@ var __meta__ = {
                 this.metadata[path] = metadata = createMetadata(Number(member.levelNum), memberIdx);
             }
 
-            this._indexes.push(path);
+            this._indexes.push({
+                path: path,
+                tuple: tuple
+            });
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
@@ -3555,7 +3574,10 @@ var __meta__ = {
                 this.metadata[path] = metadata = createMetadata(levelNum - 1, memberIdx);
             }
 
-            this._indexes.push(path);
+            this._indexes.push({
+                path: path,
+                tuple: tuple
+            });
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
@@ -3636,18 +3658,19 @@ var __meta__ = {
     });
 
     var ContentBuilder = Class.extend({
-        init: function(options) {
+        init: function() {
             this.columnAxis = {};
             this.rowAxis = {};
         },
 
         build: function(data, columnAxis, rowAxis) {
-            var metadata = columnAxis.metadata[columnAxis.indexes[0]];
+            var index = columnAxis.indexes[0];
+            var metadata = columnAxis.metadata[index ? index.path : undefined];
 
             this.columnAxis = columnAxis;
             this.rowAxis = rowAxis;
 
-            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures;
+            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures.length || 1;
 
             if (!this.rowLength) {
                 this.rowLength = 1;
@@ -3662,7 +3685,7 @@ var __meta__ = {
         },
 
         _colGroup: function() {
-            var length = this.columnAxis.measures;
+            var length = this.columnAxis.measures.length || 1;
             var children = [];
             var idx = 0;
 
@@ -3696,9 +3719,11 @@ var __meta__ = {
 
         _indexes: function(axisInfo) {
             var result = [];
+            var axisInfoMember;
             var indexes = axisInfo.indexes;
-            var measures = axisInfo.measures;
             var metadata = axisInfo.metadata;
+            var measures = axisInfo.measures;
+            var measuresLength = measures.length || 1;
 
             var current;
             var dataIdx = 0;
@@ -3712,20 +3737,25 @@ var __meta__ = {
             var skipChildren;
 
             if (!length) {
-                for (measureIdx = 0; measureIdx < measures; measureIdx++) {
-                    result[measureIdx] = measureIdx;
+                for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
+                    result[measureIdx] = {
+                        index: measureIdx,
+                        measure: measures[measureIdx],
+                        tuple: null
+                    };
                 }
 
                 return result;
             }
 
             for (; idx < length; idx++) {
-                current = metadata[indexes[idx]];
+                axisInfoMember = indexes[idx];
+                current = metadata[axisInfoMember.path];
                 children = current.children + current.members;
                 skipChildren = 0;
 
                 if (children) {
-                    children -= measures;
+                    children -= measuresLength;
                 }
 
                 if (current.expanded === false && current.children !== current.maxChildren) {
@@ -3737,8 +3767,12 @@ var __meta__ = {
                 }
 
                 if (children > -1) {
-                    for (measureIdx = 0; measureIdx < measures; measureIdx++) {
-                        result[children + firstEmpty + measureIdx] = dataIdx;
+                    for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
+                        result[children + firstEmpty + measureIdx] = {
+                            index: dataIdx,
+                            measure: measures[measureIdx],
+                            tuple: axisInfoMember.tuple
+                        };
                         dataIdx += 1;
                     }
 
@@ -3760,29 +3794,37 @@ var __meta__ = {
             var length = rowIndexes.length;
             var idx = 0;
 
-            var currentIdx;
+            var rowInfo;
 
             for (; idx < length; idx++) {
-                currentIdx = rowIndexes[idx];
-                this.rows.push(this._buildRow(data, currentIdx * rowLength));
+                rowInfo = rowIndexes[idx];
+                this.rows.push(this._buildRow(data, rowInfo, rowLength));
             }
         },
 
-        _buildRow: function(data, startIdx) {
+        _buildRow: function(data, rowInfo, rowLength) {
             var cells = [];
+            var columnInfo;
             var columnIndexes = this.columnIndexes;
+            var startIdx = rowInfo.index * rowLength;
             var length = columnIndexes.length;
             var idx = 0;
 
             var dataItem;
-            var cellValue;
+            var cellContent;
 
             for (; idx < length; idx++) {
-                dataItem = data[startIdx + columnIndexes[idx]];
+                columnInfo = columnIndexes[idx];
+                dataItem = data[startIdx + columnInfo.index];
 
-                cellValue = dataItem ? (dataItem.fmtValue || dataItem.value) : "";
+                cellContent = this.template({
+                    columnTuple: columnInfo.tuple,
+                    rowTuple: rowInfo.tuple,
+                    measure: columnInfo.measure || rowInfo.measure,
+                    dataItem: dataItem
+                });
 
-                cells.push(element("td", null, [ text(cellValue) ]));
+                cells.push(element("td", null, [ kendo.dom.html(cellContent) ]));
             }
 
             return element("tr", null, cells);
