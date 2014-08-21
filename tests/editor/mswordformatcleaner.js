@@ -100,8 +100,8 @@ test("nested list with more than one root node", function() {
     equal(clean('<p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style=""><span style="">1.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>One</p><p class="MsoListParagraphCxSpFirst" style="margin-left: 0.75in; text-indent: -0.25in;"><span style=""><span style="">1.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>Two</p><p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style=""><span style="">2.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>Three</p>'), '<ol><li>One<ol><li>Two</li></ol></li><li>Three</li></ol>');
 });
 
-test("paragraph cleaned", function() {
-    equal(clean('<p class="MsoTitle"><span>foo</span></p>'), '<p><span>foo</span></p>');
+test("titles converted to header", function() {
+    equal(clean('<p class="MsoTitle"><span>foo</span></p>'), '<h1><span>foo</span></h1>');
 });
 
 test("list paragraph", function() {

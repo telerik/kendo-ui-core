@@ -932,6 +932,14 @@ var MSWordFormatCleaner = Cleaner.extend({
         }
     },
 
+    headers: function(placeholder) {
+        var titles = $(placeholder).find("p.MsoTitle");
+
+        for (var i = 0; i < titles.length; i++) {
+            dom.changeTag(titles[i], "h1");
+        }
+    },
+
     clean: function(html) {
         var that = this, placeholder;
 
@@ -939,6 +947,7 @@ var MSWordFormatCleaner = Cleaner.extend({
         html = that.stripEmptyAnchors(html);
 
         placeholder = dom.create(document, 'div', {innerHTML: html});
+        that.headers(placeholder);
         that.lists(placeholder);
         that.tables(placeholder);
 
