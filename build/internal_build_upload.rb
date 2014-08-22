@@ -48,7 +48,7 @@ class TelerikInternalBuildBot
         driver.find_element(:link, link).click
         wait_for_title(title)
         rescue
-        screenshot("Click_Element_Failed_For_" + element.attribute("id"))
+        screenshot("Click_Element_Failed_For_Link_To" + title)
     end
 
     def wait_for_title(title)
