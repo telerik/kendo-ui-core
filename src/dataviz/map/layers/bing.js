@@ -113,6 +113,16 @@
                     }
                 }
             }
+        },
+
+        imagerySet: function(value) {
+            if (value) {
+                this.options.imagerySet = value;
+                this.map.attribution.clear();
+                this._reset();
+            } else {
+                return this.options.imagerySet;
+            }
         }
     });
 
