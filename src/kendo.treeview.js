@@ -2154,6 +2154,8 @@ var __meta__ = {
             that._draggable.dropped = true;
 
             function triggerDragEnd(sourceNode) {
+                treeview.updateIndeterminate();
+
                 treeview.trigger(DRAGEND, {
                     sourceNode: sourceNode && sourceNode[0],
                     destinationNode: destinationNode[0],
