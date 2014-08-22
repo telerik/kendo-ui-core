@@ -17,6 +17,11 @@
                 new m.Location(-50, 180)
             );
 
+            this.attribution = {
+                add: function() {},
+                clear: function() {}
+            };
+
             Observable.fn.init.call(this);
         },
 

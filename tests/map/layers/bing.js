@@ -106,6 +106,17 @@
         test("sets URI Scheme for other protocols", function() {
             equal(layer._scheme("foo:"), "http");
         });
+
+        test("sets imagerySet via imagerySet()", function() {
+            var imagerySetValue = "aerial";
+            layer.imagerySet(imagerySetValue);
+
+            deepEqual(layer.options.imagerySet, "aerial");
+        });
+
+        test("sets current imagerySet from imagerySet() without parameters", function() {
+            deepEqual(layer.imagerySet(), "road");
+        });
     })();
 
     baseLayerTests("Bing Layer", BingLayerDouble);
