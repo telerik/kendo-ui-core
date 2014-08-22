@@ -703,7 +703,7 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user clicks the plot area.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user clicks the plot area.</description>
             <name>plotAreaClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -723,7 +723,7 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the user clicks the chart series.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <description>Fired when the user clicks the chart series.</description>
             <name>seriesClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -10473,7 +10473,7 @@ body of the chart.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user clicks the plot area.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user clicks the plot area.</description>
         <name>chart-plotAreaClick</name>
         <tag-class>com.kendoui.taglib.chart.PlotAreaClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10497,7 +10497,7 @@ body of the chart.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the user clicks the chart series.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <description>Fired when the user clicks the chart series.</description>
         <name>chart-seriesClick</name>
         <tag-class>com.kendoui.taglib.chart.SeriesClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -11286,6 +11286,12 @@ makes a HTTP request for every CRUD operation.</description>
         <attribute>
             <description>The array of data items which the data source contains. The data source will wrap those items as kendo.data.ObservableObject or kendo.data.Model (if schema.model is set).Can be set to a string value if the schema.type option is set to "xml".</description>
             <name>data</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The offline storage key or custom offline storage implementation.</description>
+            <name>offlineStorage</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
@@ -15639,13 +15645,13 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
 
         <body-content>JSP</body-content>
         <attribute>
-            <description>The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.</description>
+            <description>The template used to render the day slots in "day" and "week" views.</description>
             <name>dayHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.</description>
+            <description>The template used to render the month slots in "month" views.</description>
             <name>monthHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15663,7 +15669,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view</description>
+            <description>The template used to render the time slots in "day" view</description>
             <name>timeHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15675,7 +15681,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.</description>
+            <description>The template used to render the week slots in "week" and "month" views.</description>
             <name>weekHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15684,25 +15690,25 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
 
 
     <tag>
-        <description>The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view</description>
+        <description>The template used to render the time slots in "day" view</description>
         <name>gantt-view-timeHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.gantt.ViewTimeHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.</description>
+        <description>The template used to render the day slots in "day" and "week" views.</description>
         <name>gantt-view-dayHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.gantt.ViewDayHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.</description>
+        <description>The template used to render the week slots in "week" and "month" views.</description>
         <name>gantt-view-weekHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.gantt.ViewWeekHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.</description>
+        <description>The template used to render the month slots in "month" views.</description>
         <name>gantt-view-monthHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.gantt.ViewMonthHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -15927,6 +15933,13 @@ The grid uses same layout for both phone and tablet.</description>
             <name>sortable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+            <name>toolbar</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Fired when the user clicks the "cancel" button (in inline or popup editing mode) or closes the popup window.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
@@ -16334,7 +16347,7 @@ for all columns when filtering is enabled via the filterable option.Can be set t
     </tag>
 
     <tag>
-        <description>Specifies options for the filter cell when enabled.Can be set to a JavaScript object which represents the filter cell configuration.</description>
+        <description>Specifies options for the filter header cell when filter mode is set to 'row'.Can be set to a JavaScript object which represents the filter cell configuration.</description>
         <name>grid-column-filterable-cell</name>
         <tag-class>com.kendoui.taglib.grid.ColumnFilterableCellTag</tag-class>
         <body-content>JSP</body-content>
@@ -17101,14 +17114,16 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
-        <description>The list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
         <name>grid-toolbar</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
     <tag>
-        <description>The list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
+        <description>If a String value is assigned to the toolbar configuration option, it will be treated as a single string template for the whole Grid toolbar,
+and the string value will be passed as an argument to a kendo.template() function.If a Function value is assigned (it may be a kendo.template() function call or a generic function reference), then the return value of the function will be used to render the Grid toolbar contents.If an Array value is assigned, it will be treated as the list of commands displayed in the grid toolbar. Commands can be custom or built-in ("cancel", "create", "save").The "cancel" built-in command reverts any data changes done by the end user.The "create" command adds an empty data item to the grid.The "save" command persists any data changes done by the end user.</description>
         <name>grid-toolbarItem</name>
         <tag-class>com.kendoui.taglib.grid.ToolbarItemTag</tag-class>
 
@@ -21188,7 +21203,9 @@ If it is not supported by the browser, the QRCode will switch to the first avail
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the size of a QR code in pixels (i.e. "200px"). Numeric values are treated as pixels. If no size is specified, it will be determined from the element width and height. In case the element does not have width or height bigger than zero, a default value of 200 pixels will be used.</description>
+            <description>Specifies the size of a QR code in pixels (i.e. "200px"). Numeric values are treated as pixels.
+If no size is specified, it will be determined from the element width and height.
+In case the element has width or height of zero, a default value of 200 pixels will be used.</description>
             <name>size</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -23284,13 +23301,13 @@ tick labels.</description>
             <description>Selector which determines if items from the current Sortable widget can be accepted from another Sortable container(s). The connectWith option describes one way relationship, if the developer wants a two way connection then the connectWith option should be set on both widgets.</description>
             <name>connectWith</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>Selector that determines the container to which boundaries the hint movement will be constrained.</description>
             <name>container</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The cursor that will be shown while user drags sortable item.</description>

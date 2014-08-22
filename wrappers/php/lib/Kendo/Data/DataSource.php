@@ -61,6 +61,15 @@ makes a HTTP request for every CRUD operation.
     }
 
     /**
+    * The offline storage key or custom offline storage implementation.
+    * @param string| $value
+    * @return \Kendo\Data\DataSource
+    */
+    public function offlineStorage($value) {
+        return $this->setProperty('offlineStorage', $value);
+    }
+
+    /**
     * The page of data which the data source will return when the view method is invoked or request from the remote service.
     * @param float $value
     * @return \Kendo\Data\DataSource
