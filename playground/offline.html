@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.default.mobile.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2014.2.716/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+        <script src="loader.js"></script>
+        <script>
+            requireSync([
+            "../src/jquery",
+            "../src/kendo.grid",
+            "../src/kendo.notification",
+            "../src/kendo.mobile.switch"
+            ]);
+        </script>
+    </head>
+    <body>
+        Online: <input id="online" type="checkbox" checked>
+        <div id="grid"></div>
+        <div id="notification"></div>
+        <script>
+            var dataSource = new kendo.data.DataSource({
+                offlineStorage: "grid",
+                transport: {
+                    read:  {
+                        url: url(""),
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: url("/update"),
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: url("/destroy"),
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: url("/create"),
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                },
+                batch: true,
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "ProductID",
+                        fields: {
+                            ProductID: { editable: false, nullable: true },
+                            UnitPrice: { type: "number", validation: { min: 1} },
+                            Discontinued: { type: "boolean" },
+                            UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                        }
+                    }
+                }
+            });
+
+
+            if (localStorage["online"] == "false") {
+                $("#online").removeAttr("checked");
+                dataSource.online(false);
+            }
+
+            $("#online").kendoMobileSwitch({
+                value: Boolean(localStorage["online"]),
+                change: function() {
+                    online = this.value();
+
+                    localStorage.setItem("online", online);
+
+                    dataSource.online(online);
+                }
+            });
+
+            var notification = new kendo.ui.Notification("#notification", {
+                width: "50%",
+                autoHideAfter: 1000,
+                position: {
+                    top: 0,
+                    right: 0
+                }
+            });
+
+            function url(operation) {
+                return function() {
+                    return "http://demos.telerik.com/kendo-ui/service/products" + operation;
+                }
+            }
+
+            $("#grid").kendoGrid({
+                dataSource: dataSource,
+                pageable: {
+                    refresh: true
+                },
+                height: 550,
+                toolbar: [ "save", "create" ],
+                columns: [
+                    "ProductName",
+                    { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
+                    { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                    { field: "Discontinued", width: "120px" },
+                    { command: ["edit", "destroy"], title: "&nbsp;", width: "200px" }
+                ],
+                editable: "inline"
+            });
+        </script>
+    </body>
+</html>
