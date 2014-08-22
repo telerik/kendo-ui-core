@@ -119,6 +119,7 @@
             if (value) {
                 this.options.imagerySet = value;
                 this.map.attribution.clear();
+                this._fetchMetadata();
                 this._reset();
             } else {
                 return this.options.imagerySet;
