@@ -928,6 +928,10 @@ declare module kendo.data {
         indexOf(value: kendo.data.ObservableObject): number;
         insert(index: number, model: kendo.data.Model): kendo.data.Model;
         insert(index: number, model: Object): kendo.data.Model;
+        online(value: boolean): void;
+        online(): boolean;
+        offlineData(data: any[]): void;
+        offlineData(): any[];
         page(): number;
         page(page: number): void;
         pageSize(): number;
@@ -1078,6 +1082,7 @@ declare module kendo.data {
         data?: any;
         filter?: any;
         group?: DataSourceGroupItem[];
+        offlineStorage?: any;
         page?: number;
         pageSize?: number;
         schema?: DataSourceSchema;
