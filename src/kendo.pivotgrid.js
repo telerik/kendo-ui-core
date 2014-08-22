@@ -46,6 +46,7 @@ var __meta__ = {
         COLLAPSEMEMBER = "collapseMember",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
+        HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
         DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
@@ -2725,6 +2726,8 @@ var __meta__ = {
             height: null,
             columnWidth: 100,
             configurator: "",
+            columnHeaderTemplate: null,
+            rowHeaderTemplate: null,
             dataCellTemplate: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
@@ -2735,8 +2738,12 @@ var __meta__ = {
 
         _templates: function() {
             var dataTemplate = this.options.dataCellTemplate;
+            var columnTemplate = this.options.columnHeaderTemplate;
+            var rowTemplate = this.options.rowHeaderTemplate;
 
+            this._columnBuilder.template = kendo.template(columnTemplate || HEADER_TEMPLATE, { useWithBlock: !!columnTemplate });
             this._contentBuilder.template = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._rowBuilder.template = kendo.template(rowTemplate || HEADER_TEMPLATE, { useWithBlock: !!rowTemplate });
         },
 
         _bindConfigurator: function() {
@@ -3100,6 +3107,7 @@ var __meta__ = {
     });
 
     var element = kendo.dom.element;
+    var htmlNode = kendo.dom.html;
     var text = kendo.dom.text;
 
     var createMetadata = function(levelNum, memberIdx) {
@@ -3285,7 +3293,7 @@ var __meta__ = {
             return row;
         },
 
-        _measures: function(measures) {
+        _measures: function(measures, tuple) {
             var map = this.map;
             var row = map.measureRow;
             var measure;
@@ -3298,10 +3306,21 @@ var __meta__ = {
 
             for (var idx = 0, length = measures.length; idx < length; idx++) {
                 measure = measures[idx];
-                row.children.push(element("th", { className: "k-header" }, [text(measure.caption || measure.name)]));
+                row.children.push(element("th", { className: "k-header" }, [this._content(measure, tuple)]));
             }
 
             return length;
+        },
+
+        _content: function(member, tuple) {
+            return htmlNode(this.template({
+                member: member,
+                tuple: tuple
+            }));
+        },
+
+        _cell: function(className, children) {
+            return element("th", { className: "k-header" + className }, children);
         },
 
         _buildRows: function(tuple, memberIdx, parentMember) {
@@ -3319,7 +3338,7 @@ var __meta__ = {
             var metadata;
 
             if (member.measure) {
-                this._measures(member.children);
+                this._measures(member.children, tuple);
                 return;
             }
 
@@ -3351,14 +3370,14 @@ var __meta__ = {
                 cellChildren.push(element("span", cellAttr));
             }
 
-            cellChildren.push(text(member.caption || member.name));
-            cell = element("th", { className: "k-header" + (row.notFirst ? " k-first" : "") }, cellChildren);
+            cellChildren.push(this._content(member, tuple));
+            cell = this._cell((row.notFirst ? " k-first" : ""), cellChildren);
 
             row.children.push(cell);
             row.colspan += 1;
 
             if (childrenLength) {
-                allCell = element("th", { className: "k-header k-alt" }, [text(member.caption || member.name)]);
+                allCell = this._cell(" k-alt", [this._content(member, tuple)]);
                 row.children.push(allCell);
 
                 for (; idx < childrenLength; idx++) {
@@ -3411,6 +3430,7 @@ var __meta__ = {
             }
 
             (allCell || cell).attr[kendo.attr("tuple-all")] = true;
+            //TODO: refactor and remove this
 
             return row;
         }
@@ -3516,8 +3536,11 @@ var __meta__ = {
             return row;
         },
 
-        _text: function(member) {
-            return text(member.caption || member.name);
+        _content: function(member, tuple) {
+            return htmlNode(this.template({
+                member: member,
+                tuple: tuple
+            }));
         },
 
         _buildRows: function(tuple, memberIdx) {
@@ -3554,12 +3577,12 @@ var __meta__ = {
             }
 
             if (member.measure) {
-                row.children.push(element("td", null, [ this._text(children[0]) ]));
+                row.children.push(element("td", null, [ this._content(children[0], tuple) ]));
 
                 row.rowspan = childrenLength;
 
                 for (idx = 1; idx < childrenLength; idx++) {
-                    this._row(row.attr, [ element("td", null, [ this._text(children[idx]) ]) ]);
+                    this._row(row.attr, [ element("td", null, [ this._content(children[idx], tuple) ]) ]);
                 }
 
                 return row;
@@ -3591,7 +3614,7 @@ var __meta__ = {
                 cellChildren.push(element("span", expandIconAttr));
             }
 
-            cellChildren.push(this._text(member));
+            cellChildren.push(this._content(member, tuple));
             cell = element("td", null, cellChildren);
             cell.levelNum = levelNum;
 
@@ -3619,7 +3642,7 @@ var __meta__ = {
 
                 metadata.children = row.rowspan;
 
-                allCell = element("td", null, [this._text(member)]);
+                allCell = element("td", null, [this._content(member, tuple)]);
                 allCell.levelNum = levelNum;
 
                 allRow = this._row({ className: "k-grid-footer" }, [ allCell ]);
@@ -3824,7 +3847,7 @@ var __meta__ = {
                     dataItem: dataItem
                 });
 
-                cells.push(element("td", null, [ kendo.dom.html(cellContent) ]));
+                cells.push(element("td", null, [ htmlNode(cellContent) ]));
             }
 
             return element("tr", null, cells);

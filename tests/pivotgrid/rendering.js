@@ -1080,6 +1080,75 @@
         equal(cols.length, 2);
     });
 
+    test("PivotGrid use columnHeaderTemplate to render column header measure", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("th");
+
+        equal(cell.text(), "test measure 1");
+    });
+
+    test("PivotGrid use columnHeaderTemplate to render column header cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("th");
+
+        equal(cell.text(), "test level 0");
+    });
+
+    test("PivotGrid use columnHeaderTemplate to render column header allcell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "level 1", parentName: "level 0", levelNum: "1", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var row = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("tr:first");
+
+        equal(row.find("th:last").text(), "test level 0");
+    });
+
+    test("PivotGrid passes correct tuple to columnHeaderTemplate", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        window.checkTuple = function(tuple) {
+            equal(tuple.members[0].name, "level 0");
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "#checkTuple(data.tuple)#"
+        });
+
+        window.checkTuple = null;
+    });
+
     module("PivotGrid rows header rendering", {
         setup: function() {
             kendo.ns = "kendo-";
@@ -2087,6 +2156,75 @@
         var cols = colGroup.find("col");
 
         equal(cols.length, 1);
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header measure", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("td");
+
+        equal(cell.text(), "test measure 1");
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("td");
+
+        equal(cell.text(), "test level 0");
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header allcell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "level 1", parentName: "level 0", levelNum: "1", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var row = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("tr:last");
+
+        equal(row.find("td:last").text(), "test level 0");
+    });
+
+    test("PivotGrid passes correct tuple to rowHeaderTemplate", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        window.checkTuple = function(tuple) {
+            equal(tuple.members[0].name, "level 0");
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "#checkTuple(data.tuple)#"
+        });
+
+        window.checkTuple = null;
     });
 
     module("PivotGrid content rendering", {
