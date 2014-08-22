@@ -380,7 +380,7 @@ var __meta__ = {
             return result;
         },
 
-        _toDataArray: function(map, columns, measures) {
+        _toDataArray: function(map, rowStartOffset, measures, offset, addFunc) {
             var formats = {};
 
             if (measures && measures.length) {
@@ -397,49 +397,15 @@ var __meta__ = {
             var items;
             var rowIndex = 0;
 
-            addDataCell(result, rowIndex, map, ROW_TOTAL_KEY, formats);
-
-            rowIndex += columns.length;
+            addFunc(result, rowIndex, map, ROW_TOTAL_KEY, formats, rowStartOffset);
 
             for (var key in map) {
                 if (key === ROW_TOTAL_KEY) {
                     continue;
                 }
 
-                addDataCell(result, rowIndex, map, key, formats);
-
-                rowIndex += columns.length;
-            }
-
-            return result;
-        },
-
-        _toVerticalDataArray: function(map, columns, measures) {
-            var formats = {};
-
-            if (measures && measures.length) {
-                var descriptors = (this.measures || {});
-                for (var idx = 0; idx < measures.length; idx++) {
-                    var measure = descriptors[measures[idx]];
-                    if (measure.format) {
-                        formats[measures[idx]] = measure.format;
-                    }
-                }
-            }
-
-            var result = [];
-            var items;
-            var rowIndex = 0;
-
-            addDataCellVertical(result, rowIndex, map, ROW_TOTAL_KEY, formats, columns.length);
-
-            for (var key in map) {
-                if (key === ROW_TOTAL_KEY) {
-                    continue;
-                }
-
-                rowIndex++;
-                addDataCellVertical(result, rowIndex, map, key, formats, columns.length);
+                rowIndex += offset;
+                addFunc(result, rowIndex, map, key, formats, rowStartOffset);
             }
 
             return result;
@@ -658,16 +624,18 @@ var __meta__ = {
                 columns = this._asTuples(columns, columnDescriptors, measureAggregators);
                 rows = this._asTuples(rows, rowDescriptors, []);
 
+                var offset = columns.length;
+
                 if (measuresRowAxis) {
-                    aggregatedData = this._toVerticalDataArray(aggregatedData, rows, options.measures);
+                    offset = 1;
 
                     var tmp = columns;
                     columns = rows;
                     rows = tmp;
-
-                } else {
-                    aggregatedData = this._toDataArray(aggregatedData, columns, options.measures);
                 }
+
+                aggregatedData = this._toDataArray(aggregatedData, columns.length, options.measures, offset, measuresRowAxis ? addDataCellVertical : addDataCell);
+
             } else {
                 aggregatedData = columns = rows = [];
             }
