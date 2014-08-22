@@ -1980,6 +1980,10 @@ var __meta__ = {
     function indexOfPristineModel(data, model) {
         if (model) {
             return indexOf(data, function(item) {
+                if (item.uid) {
+                    return item.uid == model.uid;
+                }
+
                 return item[model.idField] === model.id;
             });
         }
@@ -2112,11 +2116,29 @@ var __meta__ = {
                 });
             }
 
+            if (options.offlineStorage != null) {
+                if (typeof options.offlineStorage == "string") {
+                    var key = options.offlineStorage;
+
+                    that._storage = {
+                        getItem: function() {
+                            return JSON.parse(localStorage.getItem(key));
+                        },
+                        setItem: function(item) {
+                            localStorage.setItem(key, stringify(item));
+                        }
+                    };
+                } else {
+                    that._storage = options.offlineStorage;
+                }
+            }
+
             that.reader = new kendo.data.readers[options.schema.type || "json" ](options.schema);
 
             model = that.reader.model || {};
 
             that._data = that._observe(that._data);
+            that._online = true;
 
             that.bind(["push", ERROR, CHANGE, REQUESTSTART, SYNC, REQUESTEND, PROGRESS], options);
         },
@@ -2126,12 +2148,39 @@ var __meta__ = {
             schema: {
                modelBase: Model
             },
+            offlineStorage: null,
             serverSorting: false,
             serverPaging: false,
             serverFiltering: false,
             serverGrouping: false,
             serverAggregates: false,
             batch: false
+        },
+
+        online: function(value) {
+            if (value !== undefined) {
+                if (this._online != value) {
+                    this._online = value;
+
+                    if (value) {
+                        this.sync();
+                    }
+                }
+            } else {
+                return this._online;
+            }
+        },
+
+        offlineData: function(state) {
+            if (this.options.offlineStorage == null) {
+                return null;
+            }
+
+            if (state !== undefined) {
+                return this._storage.setItem(state);
+            }
+
+            return this._storage.getItem() || {};
         },
 
         _isServerGrouped: function() {
@@ -2209,6 +2258,8 @@ var __meta__ = {
                 that._data = this._observe(value);
 
                 that._pristineData = value.slice(0);
+
+                that._storeData();
 
                 that._ranges = [];
                 that.trigger("reset");
@@ -2416,35 +2467,45 @@ var __meta__ = {
                 destroyed = that._destroyed,
                 data = that._flatData(that._data);
 
-            if (!that.reader.model) {
-                return;
-            }
+            if (that.online()) {
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].isNew()) {
-                    created.push(data[idx]);
-                } else if (data[idx].dirty) {
-                    updated.push(data[idx]);
+                if (!that.reader.model) {
+                    return;
                 }
-            }
 
-            var promises = that._send("create", created);
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (data[idx].isNew()) {
+                        created.push(data[idx]);
+                    } else if (data[idx].dirty) {
+                        updated.push(data[idx]);
+                    }
+                }
 
-            promises.push.apply(promises ,that._send("update", updated));
-            promises.push.apply(promises ,that._send("destroy", destroyed));
+                var promises = [];
+                promises.push.apply(promises, that._send("create", created));
+                promises.push.apply(promises, that._send("update", updated));
+                promises.push.apply(promises, that._send("destroy", destroyed));
 
-            $.when.apply(null, promises)
-                .then(function() {
+                $.when
+                 .apply(null, promises)
+                 .then(function() {
                     var idx, length;
 
                     for (idx = 0, length = arguments.length; idx < length; idx++){
                         that._accept(arguments[idx]);
                     }
 
+                    that._storeData(true);
+
                     that._change({ action: "sync" });
 
                     that.trigger(SYNC);
                 });
+            } else {
+                that._storeData(true);
+
+                that._change({ action: "sync" });
+            }
         },
 
         cancelChanges: function(model) {
@@ -2586,13 +2647,12 @@ var __meta__ = {
         },
 
         _cancelModel: function(model) {
-            var pristine = this._pristineForModel(model),
-                idx;
+            var pristine = this._pristineForModel(model);
 
-           this._eachItem(this._data, function(items) {
-                idx = indexOfModel(items, model);
-                if (idx != -1) {
-                    if (!model.isNew() && pristine) {
+            this._eachItem(this._data, function(items) {
+                var idx = indexOfModel(items, model);
+                if (idx >= 0) {
+                    if (pristine && (!model.isNew() || pristine.__state__)) {
                         items[idx].accept(pristine);
                     } else {
                         items.splice(idx, 1);
@@ -2602,14 +2662,12 @@ var __meta__ = {
         },
 
         _promise: function(data, models, type) {
-            var that = this,
-            transport = that.transport;
+            var that = this;
 
             return $.Deferred(function(deferred) {
-
                 that.trigger(REQUESTSTART, { type: type });
 
-                transport[type].call(transport, extend({
+                that.transport[type].call(that.transport, extend({
                     success: function(response) {
                         deferred.resolve({
                             response: response,
@@ -2621,8 +2679,7 @@ var __meta__ = {
                         deferred.reject(response);
                         that.error(response, status, error);
                     }
-                }, data)
-                );
+                }, data));
             }).promise();
         },
 
@@ -2655,11 +2712,15 @@ var __meta__ = {
 
                     that._ranges = [];
                     that.trigger("reset");
-                    that.transport.read({
-                        data: params,
-                        success: proxy(that.success, that),
-                        error: proxy(that.error, that)
-                    });
+                    if (that.online()) {
+                        that.transport.read({
+                            data: params,
+                            success: proxy(that.success, that),
+                            error: proxy(that.error, that)
+                        });
+                    } else if (that.options.offlineStorage != null){
+                        that.success(that.offlineData());
+                    }
                 } else {
                     that._dequeueRequest();
                 }
@@ -2672,30 +2733,108 @@ var __meta__ = {
 
             that.trigger(REQUESTEND, { response: data, type: "read" });
 
-            data = that.reader.parse(data);
+            if (that.online()) {
+                data = that.reader.parse(data);
 
-            if (that._handleCustomErrors(data)) {
-                that._dequeueRequest();
-                return;
+                if (that._handleCustomErrors(data)) {
+                    that._dequeueRequest();
+                    return;
+                }
+
+                that._total = that.reader.total(data);
+
+                if (that._aggregate && options.serverAggregates) {
+                    that._aggregateResult = that.reader.aggregates(data);
+                }
+
+                data = that._readData(data);
+            } else {
+                var items = [];
+
+                for (var idx = 0; idx < data.length; idx++) {
+                    var item = data[idx];
+                    var state = item.__state__;
+
+                    if (state == "destroy") {
+                       this._destroyed.push(this._createNewModel(item));
+                    } else {
+                        items.push(item);
+                    }
+                }
+
+                data = items;
+
+                that._total = data.length;
             }
 
-            that._total = that.reader.total(data);
             that._pristineTotal = that._total;
-
-            if (that._aggregate && options.serverAggregates) {
-                that._aggregateResult = that.reader.aggregates(data);
-            }
-
-            data = that._readData(data);
 
             that._pristineData = data.slice(0);
 
             that._data = that._observe(data);
 
+            if (that.options.offlineStorage != null) {
+                that._eachItem(that._data, function(items) {
+                    for (var idx = 0; idx < items.length; idx++) {
+                        if (items[idx].__state__ == "update") {
+                            items[idx].dirty = true;
+                        }
+                    }
+                });
+            }
+
+            that._storeData();
+
             that._addRange(that._data);
 
             that._process(that._data);
+
             that._dequeueRequest();
+        },
+
+        _storeData: function(updatePristine) {
+            function items(data) {
+                var state = [];
+
+                for (var idx = 0; idx < data.length; idx++) {
+                    var item = data[idx].toJSON();
+
+                    if (serverGrouping && data[idx].items) {
+                        item.items = items(data[idx].items);
+                    } else {
+                        item.uid = data[idx].uid;
+                        if (model) {
+                            if (data[idx].isNew()) {
+                                item.__state__ = "create";
+                            } else if (data[idx].dirty) {
+                                item.__state__ = "update";
+                            }
+                        }
+                    }
+                    state.push(item);
+                }
+
+                return state;
+            }
+            if (this.options.offlineStorage != null) {
+                var model = this.reader.model;
+                var serverGrouping = this._isServerGrouped();
+
+
+                var state = items(this._data);
+
+                for (var idx = 0; idx < this._destroyed.length; idx++) {
+                    var item = this._destroyed[idx].toJSON();
+                    item.__state__ = "destroy";
+                    state.push(item);
+                }
+
+                this.offlineData(state);
+
+                if (updatePristine) {
+                    this._pristineData = state;
+                }
+            }
         },
 
         _addRange: function(data) {
