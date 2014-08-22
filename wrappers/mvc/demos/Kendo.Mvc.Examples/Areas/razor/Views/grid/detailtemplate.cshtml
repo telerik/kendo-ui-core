@@ -21,12 +21,6 @@
     .Events(events => events.DataBound("dataBound"))
 )
 
-<script>
-    function dataBound() {
-        this.expandRow(this.tbody.find("tr.k-master-row").first());
-    }
-</script>
-
 <script id="template" type="text/kendo-tmpl">
     @(Html.Kendo().TabStrip()
             .Name("tabStrip_#=EmployeeID#")
