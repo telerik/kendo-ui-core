@@ -563,6 +563,7 @@ var GlyfTable = (function(){
                     out.write(glyph.render(old2new));
                 }
             }
+            offsets.push(out.offset());
             return {
                 table: out.get(),
                 offsets: offsets
