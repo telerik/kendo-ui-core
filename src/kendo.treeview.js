@@ -1385,9 +1385,20 @@ var __meta__ = {
                 this._progress(parentNode, false);
             }
 
-            if (checkChildren && action != "remove" && node && node.checked) {
+            if (checkChildren && action != "remove") {
+                var bubble = false;
+
                 for (i = 0; i < items.length; i++) {
-                    items[i].checked = true;
+                    if ("checked" in items[i]) {
+                        bubble = true;
+                        break;
+                    }
+                }
+
+                if (!bubble && node && node.checked) {
+                    for (i = 0; i < items.length; i++) {
+                        items[i].checked = true;
+                    }
                 }
             }
 
@@ -2141,6 +2152,8 @@ var __meta__ = {
             that._draggable.dropped = true;
 
             function triggerDragEnd(sourceNode) {
+                treeview.updateIndeterminate();
+
                 treeview.trigger(DRAGEND, {
                     sourceNode: sourceNode && sourceNode[0],
                     destinationNode: destinationNode[0],
