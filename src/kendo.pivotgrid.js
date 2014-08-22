@@ -3293,7 +3293,7 @@ var __meta__ = {
             return row;
         },
 
-        _measures: function(measures, tuple) {
+        _measures: function(measures, tuple, className) {
             var map = this.map;
             var row = map.measureRow;
             var measure;
@@ -3306,7 +3306,7 @@ var __meta__ = {
 
             for (var idx = 0, length = measures.length; idx < length; idx++) {
                 measure = measures[idx];
-                row.children.push(element("th", { className: "k-header" }, [this._content(measure, tuple)]));
+                row.children.push(element("th", { className: "k-header" + (className || "") }, [this._content(measure, tuple)]));
             }
 
             return length;
@@ -3395,7 +3395,7 @@ var __meta__ = {
 
                 if (nextMember) {
                     if (nextMember.measure) {
-                        colspan = this._measures(nextMember.children);
+                        colspan = this._measures(nextMember.children, tuple, " k-alt");
                     } else {
                         colspan = this._buildRows(tuple, memberIdx + 1).colspan;
                     }
@@ -3408,7 +3408,7 @@ var __meta__ = {
                 }
             } else if (nextMember) {
                 if (nextMember.measure) {
-                    colspan = this._measures(nextMember.children);
+                    colspan = this._measures(nextMember.children, tuple);
                 } else {
                     colspan = this._buildRows(tuple, memberIdx + 1).colspan;
                 }
@@ -3522,12 +3522,12 @@ var __meta__ = {
             }
 
             if (allRow) {
-                allRow.children[0].attr.className = "k-first";
+                allRow.children[0].attr.className += " k-first";
             }
         },
 
-        _row: function(attr, children) {
-            var row = element("tr", attr, children);
+        _row: function(children) {
+            var row = element("tr", null, children);
             row.rowspan = 1;
             row.colspan = {};
 
@@ -3568,6 +3568,7 @@ var __meta__ = {
             var cellChildren = [];
             var allCell;
             var cell;
+            var attr;
             var idx;
 
             if (!row || row.hasChild) {
@@ -3577,12 +3578,13 @@ var __meta__ = {
             }
 
             if (member.measure) {
-                row.children.push(element("td", null, [ this._content(children[0], tuple) ]));
+                attr = { className: row.allCell ? "k-grid-footer" : "" };
+                row.children.push(element("td", attr, [ this._content(children[0], tuple) ]));
 
                 row.rowspan = childrenLength;
 
                 for (idx = 1; idx < childrenLength; idx++) {
-                    this._row(row.attr, [ element("td", null, [ this._content(children[idx], tuple) ]) ]);
+                    this._row([ element("td", attr, [ this._content(children[idx], tuple) ]) ]);
                 }
 
                 return row;
@@ -3615,7 +3617,7 @@ var __meta__ = {
             }
 
             cellChildren.push(this._content(member, tuple));
-            cell = element("td", null, cellChildren);
+            cell = element("td", { className: row.allCell && !childrenLength ? "k-grid-footer" : "" }, cellChildren);
             cell.levelNum = levelNum;
 
             row.children.push(cell);
@@ -3626,6 +3628,7 @@ var __meta__ = {
             }
 
             if (childrenLength) {
+                row.allCell = false;
                 row.hasChild = false;
 
                 for (idx = 0; idx < childrenLength; idx++) {
@@ -3642,11 +3645,12 @@ var __meta__ = {
 
                 metadata.children = row.rowspan;
 
-                allCell = element("td", null, [this._content(member, tuple)]);
+                allCell = element("td", { className: "k-grid-footer" }, [this._content(member, tuple)]);
                 allCell.levelNum = levelNum;
 
-                allRow = this._row({ className: "k-grid-footer" }, [ allCell ]);
+                allRow = this._row([ allCell ]);
                 allRow.colspan["dim" + memberIdx] = allCell;
+                allRow.allCell = true;
 
                 map[tuplePath + member.name + "all"] = allRow;
 

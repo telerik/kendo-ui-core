@@ -852,6 +852,28 @@
         ok(!th_level1.eq(0).hasClass("k-alt"));
     });
 
+    test("PivotGrid renders k-header k-alt style to measures of all cells", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] }] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] }] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] }] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] }] }
+        ]
+
+        var measures = ["measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var cells = headerTable.find("tr:last").find("th");
+
+        ok(cells.eq(2).hasClass("k-alt"));
+        ok(cells.eq(3).hasClass("k-alt"));
+    });
+
     test("PivotGrid renders k-first class to the physical cell that is not visually first", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", children: [] }] },
@@ -1912,7 +1934,7 @@
         ok(!td_1.eq(1).hasClass("k-first"));
     });
 
-    test("PivotGrid renders k-grid-footer to all rows", function() {
+    test("PivotGrid renders k-grid-footer to all cells", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
@@ -1929,9 +1951,32 @@
         var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
 
         var rows = headerTable.find("tr");
+        var cells3 = rows.eq(3).find("td");
+        var cells5 = rows.eq(5).find("td");
 
-        ok(rows.eq(3).hasClass("k-grid-footer"));
-        ok(rows.eq(5).hasClass("k-grid-footer"));
+        ok(cells3.hasClass("k-grid-footer"));
+        ok(cells5.eq(0).hasClass("k-grid-footer"));
+        ok(cells5.eq(1).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid doesn't render k-grid-footer if cell has children", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var cells = headerTable.find("tr").eq(1).find("td");
+
+        ok(cells.eq(0).hasClass("k-grid-footer"));
+        ok(!cells.eq(1).hasClass("k-grid-footer"));
+        ok(!cells.eq(2).hasClass("k-grid-footer"));
     });
 
     test("PivotGrid renders expand button collapsed of the row headers", function() {
@@ -2082,9 +2127,12 @@
         var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
 
         var rows = headerTable.find("tr");
+        var cells2 = rows.eq(2).find("td");
+        var cells3 = rows.eq(3).find("td");
 
-        ok(rows.eq(2).hasClass("k-grid-footer"));
-        ok(rows.eq(3).hasClass("k-grid-footer"));
+        ok(cells2.eq(0).hasClass("k-grid-footer"));
+        ok(cells2.eq(1).hasClass("k-grid-footer"));
+        ok(cells3.eq(0).hasClass("k-grid-footer"));
     });
 
     test("PivotGrid renders k-first class to the first root cell when multiple measures are used", function() {
