@@ -144,6 +144,15 @@
         if (font) {
             cont(font);
         } else {
+            if (global.process) { // XXX: temporary
+                require("fs").readFile(url, { encoding: "binary" }, function(err, data){
+                    data = data.toString("binary");
+                    var font = new PDF.TTFFont(data);
+                    FONT_CACHE[url] = font;
+                    cont(font);
+                });
+                return;
+            }
             var req = new XMLHttpRequest();
             req.open('GET', url, true);
             req.overrideMimeType("text/plain; charset=x-user-defined");
@@ -197,34 +206,6 @@
             c1*a2 + d1*c2,          c1*b2 + d1*d2,
             e1*a2 + f1*c2 + e2,     e1*b2 + f1*d2 + f2
         ];
-    }
-
-    function utf8_encode(string) {
-        var i = string.length, k = 0, c, ret = "";
-        while (--i >= 0) {
-            c = string.charCodeAt(k++);
-            // unicode support
-            if (c < 0x80) {
-                // one byte - ASCII
-                ret += String.fromCharCode(c);
-            } else if (c < 0x800) {
-                // two bytes
-                ret += String.fromCharCode(0xC0 | ((c >>> 6) & 0x1F));
-                ret += String.fromCharCode(0x80 | (c & 0x3F));
-            } else if (c < 0x10000) {
-                // three bytes
-                ret += String.fromCharCode(0xE0 | ((c >>> 12) & 0x0F));
-                ret += String.fromCharCode(0x80 | ((c >>> 6) & 0x3F));
-                ret += String.fromCharCode(0x80 | (c & 0x3F));
-            } else if (c < 0x110000) {
-                // four bytes
-                ret += String.fromCharCode(0xF0 | ((c >>> 18) & 0x03));
-                ret += String.fromCharCode(0x80 | ((c >>> 12) & 0x3F));
-                ret += String.fromCharCode(0x80 | ((c >>> 6) & 0x3F));
-                ret += String.fromCharCode(0x80 | (c & 0x3F));
-            }
-        }
-        return ret;
     }
 
     function utf16_be_encode(string) {
@@ -466,7 +447,6 @@
 
         this._pdf = pdf;
         this._font = font;
-
         this._sub = font.makeSubset();
 
         var head = font.head;
@@ -497,33 +477,38 @@
                       (this.isScript ? 1 << 3 : 0) |
                       (this.italicAngle != 0 ? 1 << 6 : 0) |
                       (1 << 5));
-
-        this.descriptor = this._pdf.attach(new PDFDictionary({
-            Type         : PDFName.get("FontDescriptor"),
-            FontName     : PDFName.get(this._sub.psName),
-            FontBBox     : this.bbox,
-            Flags        : this.flags,
-            StemV        : this.stemV,
-            ItalicAngle  : this.italicAngle,
-            Ascent       : this.ascent,
-            Descent      : this.descent,
-            CapHeight    : this.capHeight,
-            XHeight      : this.xHeight
-        }));
     }, {
         encodeText: function(text) {
             return new PDFHexString(this._sub.encodeText(text));
         },
         beforeRender: function() {
             var self = this;
+            var font = self._font;
+            var sub = self._sub;
 
             // write the TTF data
-            self.stream = self._pdf.attach(new PDFStream(makeOutput()));
-            self.descriptor.value.props.FontFile2 = self.stream;
-            var sub = self._sub;
             var data = sub.render();
-            self.stream.value.data(data);
-            self.stream.value.props.Length1 = data.length;
+            var fontStream = new PDFStream(data, {
+                Length1: data.length
+            });
+
+            if (global.process) { // XXX: temporary
+                require("fs").writeFileSync("/tmp/x.ttf", data, { encoding: "binary" });
+            }
+
+            var descriptor = self._pdf.attach(new PDFDictionary({
+                Type         : PDFName.get("FontDescriptor"),
+                FontName     : PDFName.get(self._sub.psName),
+                FontBBox     : self.bbox,
+                Flags        : self.flags,
+                StemV        : self.stemV,
+                ItalicAngle  : self.italicAngle,
+                Ascent       : self.ascent,
+                Descent      : self.descent,
+                CapHeight    : self.capHeight,
+                XHeight      : self.xHeight,
+                FontFile2    : self._pdf.attach(fontStream)
+            }));
 
             var cmap = sub.ncid2ogid;
             var firstChar = sub.firstChar;
@@ -557,7 +542,7 @@
                     Ordering   : new PDFString("Identity"),
                     Supplement : 0
                 }),
-                FontDescriptor: self.descriptor,
+                FontDescriptor: descriptor,
                 FirstChar: firstChar,
                 LastChar: lastChar,
                 DW: Math.round(self._font.widthOfGlyph(0)),

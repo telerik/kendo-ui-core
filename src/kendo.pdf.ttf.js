@@ -1081,6 +1081,7 @@ Subfont.prototype = {
         // add missing sub-glyphs
         for (var old_gid in glyphs) {
             if (hasOwnProperty(glyphs, old_gid)) {
+                old_gid = parseInt(old_gid, 10);
                 if (this.ogid2ngid[old_gid] == null) {
                     var new_gid = this.nextGid++;
                     this.ogid2ngid[old_gid] = new_gid;
