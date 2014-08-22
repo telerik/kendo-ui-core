@@ -414,7 +414,7 @@
         ok(treeviewObject.findByText("baz").find(":checkbox").prop("checked"));
     });
 
-    test("appended items update indeterminate state", function() {
+    test("append() does not override explicit checked state", function() {
         createTreeView({
             checkboxes: {
                 checkChildren: true
@@ -431,7 +431,6 @@
         treeviewObject.append({ text: "baz", checked: false }, treeviewObject.findByText("foo"));
 
         ok(!treeviewObject.findByText("baz").find(":checkbox").prop("checked"));
-        ok(!treeviewObject.findByText("foo").find(":checkbox").prop("checked"));
     });
 
     asyncTest("append() to unfetched async parent", function() {
