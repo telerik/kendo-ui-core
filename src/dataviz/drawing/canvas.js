@@ -38,6 +38,7 @@
     // Constants ==============================================================
     var BUTT = "butt",
         DASH_ARRAYS = d.DASH_ARRAYS,
+        FRAME_DELAY = 1000 / 60,
         NONE = "none",
         SOLID = "solid",
         TRANSP = "transparent";
@@ -150,11 +151,18 @@
 
             this.canvas = canvas;
             this.ctx = canvas.getContext("2d");
+            this.ts = timestamp();
         },
 
         invalidate: function() {
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.renderTo(this.ctx);
+            var ts = timestamp();
+
+            if (ts - this.ts > FRAME_DELAY) {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.renderTo(this.ctx);
+
+                this.ts = timestamp();
+            }
         }
     });
 
@@ -369,6 +377,11 @@
             );
         }
     });
+
+    // Helpers ================================================================
+    function timestamp() {
+        return new Date().getTime();
+    }
 
     // Exports ================================================================
     kendo.support.canvas = (function() {
