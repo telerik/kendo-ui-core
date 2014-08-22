@@ -21,11 +21,15 @@ namespace Kendo.Mvc.UI
             Events = new Dictionary<string, object>();
 
             Schema = new DataSourceSchema();
+
+            OfflineStorage = new Dictionary<string, object>();
         }
 
         public int TotalPages { get; set; }
         public int Page { get; set; }
         public int Total { get; set; }
+        public string OfflineStorageKey { get; set; }
+        public IDictionary<string, object> OfflineStorage { get; set; }
         public DataSourceSchema Schema { get; private set; }
         public IDictionary<string, object> Events { get; private set; }
 
@@ -73,6 +77,16 @@ namespace Kendo.Mvc.UI
                 {
                     json["transport"] = transport;
                 }
+            }
+
+            if (!string.IsNullOrEmpty(OfflineStorageKey))
+            {
+                json["offlineStorage"] = OfflineStorageKey;
+            }
+
+            if (OfflineStorage.Any())
+            {
+                json["offlineStorage"] = OfflineStorage;
             }
 
             if (PageSize > 0)
@@ -476,5 +490,6 @@ namespace Kendo.Mvc.UI
                 }
             }
         }
+
     }
 }

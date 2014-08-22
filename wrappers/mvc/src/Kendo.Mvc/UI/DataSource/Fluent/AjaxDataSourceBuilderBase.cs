@@ -79,6 +79,31 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the key used for offline state persistance.
+        /// </summary>
+        /// <param name="key"></param>
+        public TDataSourceBuilder OfflineStorage(string key)
+        {
+            dataSource.OfflineStorageKey = key;
+
+            return (TDataSourceBuilder)this;
+        }
+
+        /// <summary>
+        /// Specifies custom implementation for offline storage.
+        /// </summary>
+        /// <param name="getItem">The name of the JavaScript function which returns the offline state.</param>
+        /// <param name="setItem">The name of the JavaScript function which saves the offline state.</param>
+        /// <returns></returns>
+        public TDataSourceBuilder OfflineStorage(string getItem, string setItem)
+        {
+            dataSource.OfflineStorage["getItem"] = new ClientHandlerDescriptor { HandlerName = getItem };
+            dataSource.OfflineStorage["setItem"] = new ClientHandlerDescriptor { HandlerName = setItem };
+
+            return (TDataSourceBuilder)this;
+        }
+
+        /// <summary>
         /// Sets the number of records displayed on a single page.
         /// </summary>
         /// <param name="pageSize"></param>        
