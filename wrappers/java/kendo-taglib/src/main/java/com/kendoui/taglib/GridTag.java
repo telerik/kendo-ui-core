@@ -332,6 +332,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("sortable", value);
     }
 
+    public java.lang.String getToolbar() {
+        return (java.lang.String)getProperty("toolbar");
+    }
+
+    public void setToolbar(java.lang.String value) {
+        setProperty("toolbar", value);
+    }
+
     public String getCancel() {
         Function property = ((Function)getProperty("cancel"));
         if (property != null) {

@@ -136,6 +136,14 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("data", value);
     }
 
+    public java.lang.Object getOfflineStorage() {
+        return (java.lang.Object)getProperty("offlineStorage");
+    }
+
+    public void setOfflineStorage(java.lang.Object value) {
+        setProperty("offlineStorage", value);
+    }
+
     public float getPage() {
         return (float)getProperty("page");
     }
