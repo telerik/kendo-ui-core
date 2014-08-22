@@ -363,32 +363,6 @@
         ok(treeviewObject.dataSource.get(1).loaded());
     });
 
-    test("moving items updates indeterminate state", function() {
-        createTreeView({
-            dragAndDrop: true,
-            checkboxes: {
-                checkChildren: true
-            },
-            dataSource: [
-                { text: "foo", items: [
-                    { text: "bar", checked: true },
-                    { text: "qux", checked: false }
-                ] },
-                { text: "baz", items: [
-                    { text: "cat", checked: true }
-                ] }
-            ]
-        });
-
-        window.foo = 1;
-        moveNode(treeviewObject, "qux", "baz");
-        delete window.foo;
-
-        ok(treeviewObject.findByText("foo").find(":checkbox").prop("checked"));
-        ok(!treeviewObject.findByText("baz").find(":checkbox").prop("checked"));
-        ok(treeviewObject.findByText("baz").find(":checkbox").prop("indeterminate"));
-    });
-
     module("keyboard support", {
         setup: function() {
             kendo.effects.disable();
