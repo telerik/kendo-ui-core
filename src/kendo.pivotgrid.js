@@ -176,6 +176,47 @@ var __meta__ = {
         return members;
     }
 
+    function addDataCellVertical(result, rowIndex, map, key, formats, offset) {
+        var value, aggregate, columnKey, format, measuresCount = 0;
+
+        var start = rowIndex;
+
+        for (aggregate in map[key].aggregates) {
+            value = map[key].aggregates[aggregate];
+
+            format = formats[aggregate];
+
+            result[start] = {
+                ordinal: start,
+                value: value,
+                fmtValue: format ? kendo.format(format, value) : value
+            };
+            ++measuresCount;
+            start += offset;
+        }
+
+        var items = map[key].items;
+
+        for (columnKey in items) {
+            var index = items[columnKey].index * measuresCount;
+
+            index = start + index*offset;
+
+            for (aggregate in items[columnKey].aggregates) {
+                value = items[columnKey].aggregates[aggregate];
+
+                format = formats[aggregate];
+
+                result[index] = {
+                    ordinal: index,
+                    value: value,
+                    fmtValue: format ? kendo.format(format, value) : value
+                };
+                index += offset;
+            }
+        }
+    }
+
     function addDataCell(result, rowIndex, map, key, formats) {
         var value, aggregate, columnKey, format, measuresCount = 0;
 
@@ -209,6 +250,13 @@ var __meta__ = {
                 };
             }
         }
+    }
+
+    function createAggregateGetter(m) {
+        var measureGetter = kendo.getter(m.field, true);
+        return function(data, state) {
+            return m.aggregate(measureGetter(data), state);
+        };
     }
 
     var PivotCubeBuilder = Class.extend({
@@ -366,6 +414,37 @@ var __meta__ = {
             return result;
         },
 
+        _toVerticalDataArray: function(map, columns, measures) {
+            var formats = {};
+
+            if (measures && measures.length) {
+                var descriptors = (this.measures || {});
+                for (var idx = 0; idx < measures.length; idx++) {
+                    var measure = descriptors[measures[idx]];
+                    if (measure.format) {
+                        formats[measures[idx]] = measure.format;
+                    }
+                }
+            }
+
+            var result = [];
+            var items;
+            var rowIndex = 0;
+
+            addDataCellVertical(result, rowIndex, map, ROW_TOTAL_KEY, formats, columns.length);
+
+            for (var key in map) {
+                if (key === ROW_TOTAL_KEY) {
+                    continue;
+                }
+
+                rowIndex++;
+                addDataCellVertical(result, rowIndex, map, key, formats, columns.length);
+            }
+
+            return result;
+        },
+
         _matchDescriptors: function(dataItem, descriptors, getters, idx) {
             var descriptor;
             var parts;
@@ -473,12 +552,7 @@ var __meta__ = {
                         aggregators.push({
                             name: descriptor,
                             caption: measure.caption,
-                            aggregator: (function(m) {
-                                var measureGetter = kendo.getter(m.field, true);
-                                return function(data, state) {
-                                    return m.aggregate(measureGetter(data), state);
-                                }
-                            })(measure)
+                            aggregator: createAggregateGetter(measure)
                         });
                     }
                 }
@@ -516,8 +590,10 @@ var __meta__ = {
             data = data || [];
             options = options || {};
 
-            var columnDescriptors = options.columns || [];
-            var rowDescriptors = options.rows || [];
+            var measuresRowAxis = options.measuresAxis === "rows";
+
+            var columnDescriptors = (measuresRowAxis ? options.rows : options.columns) || [];
+            var rowDescriptors = (!measuresRowAxis ? options.rows : options.columns) || [];
 
             var aggregatedData = {};
             var columns = {};
@@ -581,7 +657,17 @@ var __meta__ = {
             if (processed && data.length) {
                 columns = this._asTuples(columns, columnDescriptors, measureAggregators);
                 rows = this._asTuples(rows, rowDescriptors, []);
-                aggregatedData = this._toDataArray(aggregatedData, columns, options.measures);
+
+                if (measuresRowAxis) {
+                    aggregatedData = this._toVerticalDataArray(aggregatedData, rows, options.measures);
+
+                    var tmp = columns;
+                    columns = rows;
+                    rows = tmp;
+
+                } else {
+                    aggregatedData = this._toDataArray(aggregatedData, columns, options.measures);
+                }
             } else {
                 aggregatedData = columns = rows = [];
             }
@@ -1154,7 +1240,9 @@ var __meta__ = {
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                cell = data[idx];
-               result[cell.ordinal] = cell;
+               if (cell) {
+                   result[cell.ordinal] = cell;
+               }
             }
 
             return result;
