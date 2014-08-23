@@ -1,4 +1,4 @@
-(function(undefined, global){
+(function(global, undefined){
 
     "use strict";
 
@@ -690,4 +690,4 @@
 
     kendo.PDF = PDF;
 
-})(undefined, Function("return this")());
+})(Function("return this")());
