@@ -584,16 +584,6 @@ var NameTable = (function(){
         this.nameID = entry.nameID;
     }
 
-    var subsetTag = 100000;
-
-    function nextSubsetTag() {
-        var ret = "", n = subsetTag+"";
-        for (var i = 0; i < n.length; ++i)
-            ret += String.fromCharCode(n.charCodeAt(i) - 48 + 65);
-        ++subsetTag;
-        return ret;
-    }
-
     return deftable({
         parse: function(data) {
             data.offset(this.offset);
@@ -608,7 +598,7 @@ var NameTable = (function(){
                     nameID             : data.readShort(),
                     length             : data.readShort(),
                     offset             : data.readShort() + stringOffset
-                }
+                };
             });
             var strings = this.strings = {};
             for (var i = 0; i < nameRecords.length; ++i) {
@@ -621,18 +611,9 @@ var NameTable = (function(){
             }
             this.postscriptEntry = strings[6][0];
             this.postscriptName = this.postscriptEntry.text.replace(/[^\x20-\x7F]/g, "");
-
-            var ps = new NameEntry(nextSubsetTag() + "+" + this.postscriptName, {
-                platformID         : this.postscriptEntry.platformID,
-                platformSpecificID : this.postscriptEntry.platformSpecificID,
-                languageID         : this.postscriptEntry.languageID
-            });
-            strings[6] = [ ps ];
-
-            this.subsetPsName = ps.text;
         },
 
-        render: function() {
+        render: function(psName) {
             var strings = this.strings;
             var strCount = 0;
             for (var i in strings) {
@@ -649,7 +630,9 @@ var NameTable = (function(){
 
             for (var i in strings) {
                 if (hasOwnProperty(strings, i)) {
-                    var list = strings[i];
+                    var list = i == 6 ? [
+                        new NameEntry(psName, this.postscriptEntry)
+                    ] : strings[i];
                     for (var j = 0; j < list.length; ++j) {
                         var str = list[j];
                         out.writeShort(str.platformID);
@@ -1013,7 +996,17 @@ var OS2Table = deftable({
     render: function() {
         return this.raw();
     }
-})
+});
+
+var subsetTag = 100000;
+
+function nextSubsetTag() {
+    var ret = "", n = subsetTag+"";
+    for (var i = 0; i < n.length; ++i)
+        ret += String.fromCharCode(n.charCodeAt(i) - 48 + 65);
+    ++subsetTag;
+    return ret;
+}
 
 function Subfont(font) {
     this.font = font;
@@ -1024,7 +1017,7 @@ function Subfont(font) {
     this.ncid2ogid = {};
     this.next = this.firstChar = 1;
     this.nextGid = 1;
-    this.psName = this.font.name.subsetPsName;
+    this.psName = nextSubsetTag() + "+" + this.font.psName;
 }
 
 Subfont.prototype = {
@@ -1112,7 +1105,7 @@ Subfont.prototype = {
             "hhea" : font.hhea.render(old_gid_ids),
             "maxp" : font.maxp.render(old_gid_ids),
             "post" : font.post.render(old_gid_ids),
-            "name" : font.name.render(),
+            "name" : font.name.render(this.psName),
             "head" : font.head.render(loca.format),
             "OS/2" : font.os2.render()
         };
