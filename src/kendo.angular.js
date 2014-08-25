@@ -331,8 +331,8 @@
                                     };
                                 };
 
-                                bindBefore(widget, "change", onChange(false));
-                                bindBefore(widget, "dataBound", onChange(true));
+                                widget.first("change", onChange(false));
+                                widget.first("dataBound", onChange(true));
 
                                 var currentVal = value();
 
@@ -369,7 +369,7 @@
                                     }
                                     widget.value(newValue);
                                 });
-                                bindBefore(widget, "change", function(){
+                                widget.first("change", function(){
                                     updating = true;
                                     scope.$apply(function(){
                                         setter(scope, widget.value());
@@ -445,7 +445,7 @@
                                 mo.observe($(element)[0], { attributes: true });
                             }
                             resume();
-                            bindBefore(widget, "destroy", suspend);
+                            widget.first("destroy", suspend);
                         })();
 
                         --KENDO_COUNT;
@@ -550,15 +550,6 @@
         return kendo.widgetInstance(el, kendo.ui) ||
             kendo.widgetInstance(el, kendo.mobile.ui) ||
             kendo.widgetInstance(el, kendo.dataviz.ui);
-    }
-
-    // XXX: using internal API (Widget::_events).  Seems to be no way in Kendo to
-    // insert a handler to be executed before any existing ones, hence this hack.
-    // Use for a single event/handler combination.
-    function bindBefore(widget, name, handler, one) {
-        widget.bind.call(widget, name, handler, one);
-        var a = widget._events[name];
-        a.unshift(a.pop());
     }
 
     function digest(scope) {
