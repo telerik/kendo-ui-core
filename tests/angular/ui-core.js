@@ -321,8 +321,6 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataSource : $scope.data
         };
         $("<ul kendo-mobilescrollview='list' k-options='options'></ul>").appendTo(dom);
-        expect(2);
-
         $scope.whenRendered(function(){
             var items = $scope.list.element.find(".my-item");
             equal(items.eq(0).text(), "1/Foo");
@@ -330,5 +328,59 @@ withAngularTests("Angular (UI Core)", function(runTest){
             start();
         });
     });
+
+    runTest("Set dirty flag on change", function(dom, $scope){
+        $scope.options = {
+            dataSource     : $scope.data,
+            dataTextField  : "text",
+            dataValueField : "id"
+        };
+        $scope.item = 1;
+        var form = $("<form name='form'><select name='select' kendo-dropdownlist='dropDown' k-options='options' ng-model='item'></select></form>").appendTo(dom);
+        expect(5);
+        $scope.whenRendered(function(){
+            equal($scope.form.$dirty, false);
+            equal($scope.form.select.$dirty, false);
+            $scope.dropDown.value(2);
+            $scope.dropDown.trigger("change");
+            setTimeout(function(){
+                equal($scope.item, 2);
+                equal($scope.form.$dirty, true);
+                equal($scope.form.select.$dirty, true);
+            });
+            start();
+        });
+    });
+
+    // XXX: for some reason ng-repeat does not work in the test suite.
+    //
+    // runTest("Dirty flag should not be globally cleared with ng-repeat", function(dom, $scope){
+    //     var options = {
+    //         dataSource     : $scope.data,
+    //         dataTextField  : "text",
+    //         dataValueField : "id"
+    //     };
+    //     $scope.things = [{
+    //         item: 1,
+    //         options: options
+    //     }];
+    //     var html = [
+    //         "<form name='form'>",
+    //         "  <div ng-repeat='i in things'>",
+    //         "    <select name='i.select' kendo-dropdownlist='i.dropDown' k-options='i.options' ng-model='i.item'></select>",
+    //         "  </div>",
+    //         "</form>"
+    //     ].join("");
+    //     var form = $(html).appendTo(dom);
+    //     console.log(form.html());
+    //     expect(0);
+    //     setTimeout(function(){
+    //         console.log(form.html());
+    //     }, 250);
+    //     $scope.whenRendered(function(){
+    //         console.log(dom.html());
+    //         start();
+    //     });
+    // });
 
 });
