@@ -37,7 +37,7 @@ data source is fired. By default the widget will bind to the data source specifi
     * Specifies the extent of the region covered by this layer.
 The layer will be hidden when the specified area is out of view.Accepts a four-element array that specifies the extent covered by this layer:
 North-West lat, longitude, South-East latitude, longitude.If not specified, the layer is always visible.
-    * @param array $value
+    * @param array| $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
     public function extent($value) {

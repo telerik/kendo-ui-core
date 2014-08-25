@@ -309,7 +309,7 @@ If it is not supported by the browser, the Chart will switch to the first availa
 
     /**
     * Sets the plotAreaClick event of the Chart.
-    * Fired when the user clicks the plot area.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired when the user clicks the plot area.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Chart
     */
@@ -365,7 +365,7 @@ If it is not supported by the browser, the Chart will switch to the first availa
 
     /**
     * Sets the seriesClick event of the Chart.
-    * Fired when the user clicks the chart series.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * Fired when the user clicks the chart series.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Chart
     */
