@@ -135,6 +135,17 @@
         // overflow if we don't put it in an array :-\
         options.$angular = [ scope ];
 
+        if (element.is("select")) {
+            (function(options){
+                if (options.length > 0) {
+                    var first = $(options[0]);
+                    if (!/\S/.test(first.text()) && /^\?/.test(first.val())) {
+                        first.remove();
+                    }
+                }
+            }(element[0].options));
+        }
+
         var object = ctor.call(element, OPTIONS_NOW = options).data(widget);
         exposeWidget(object, scope, attrs, widget, origAttr);
         scope.$emit("kendoWidgetCreated", object);
