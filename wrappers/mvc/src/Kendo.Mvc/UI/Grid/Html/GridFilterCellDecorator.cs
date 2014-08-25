@@ -15,6 +15,7 @@ namespace Kendo.Mvc.UI.Html
 
             var link = new HtmlElement("a")
                 .AddClass("k-grid-filter")
+                .Attribute("href", "#")
                 .ToggleClass("k-state-active", filtered);
 
 
