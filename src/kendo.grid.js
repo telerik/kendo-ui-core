@@ -1337,7 +1337,7 @@ var __meta__ = {
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
-                            header = that.lockedHeader ? that.lockedHeader.find("thead:first").add(that.thead) : th.parent();
+                            header = that.lockedHeader ? that.lockedHeader.find("thead:first tr:first").add(that.thead.find("tr:first")) : th.parent();
 
                             column = that.columns[header.find("th:not(.k-group-cell):not(.k-hierarchy-cell)").index(th)];
 
