@@ -343,11 +343,9 @@ withAngularTests("Angular (UI Core)", function(runTest){
             equal($scope.form.select.$dirty, false);
             $scope.dropDown.value(2);
             $scope.dropDown.trigger("change");
-            setTimeout(function(){
-                equal($scope.item, 2);
-                equal($scope.form.$dirty, true);
-                equal($scope.form.select.$dirty, true);
-            });
+            equal($scope.item, 2);
+            equal($scope.form.$dirty, true);
+            equal($scope.form.select.$dirty, true);
             start();
         });
     });
