@@ -313,7 +313,7 @@
 
                                 // Some widgets trigger "change" on the input field
                                 // and this would result in two events sent (#135)
-                                var haveChangeOnElement;
+                                var haveChangeOnElement = false;
                                 if (isFormField) {
                                     element.on("change", function(){
                                         haveChangeOnElement = true;
@@ -322,23 +322,21 @@
 
                                 var onChange = function(pristine){
                                     return function(){
+                                        var formPristine;
+                                        if (haveChangeOnElement) {
+                                            return;
+                                        }
                                         haveChangeOnElement = false;
-                                        $timeout(function(){
-                                            var formPristine;
-                                            if (haveChangeOnElement) {
-                                                return;
+                                        if (pristine && ngForm) {
+                                            formPristine = ngForm.$pristine;
+                                        }
+                                        ngModel.$setViewValue(value());
+                                        if (pristine) {
+                                            ngModel.$setPristine();
+                                            if (formPristine) {
+                                                ngForm.$setPristine();
                                             }
-                                            if (pristine && ngForm) {
-                                                formPristine = ngForm.$pristine;
-                                            }
-                                            ngModel.$setViewValue(value());
-                                            if (pristine) {
-                                                ngModel.$setPristine();
-                                                if (formPristine) {
-                                                    ngForm.$setPristine();
-                                                }
-                                            }
-                                        });
+                                        }
                                     };
                                 };
 
