@@ -73,6 +73,14 @@ public class TitleTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("background", value);
     }
 
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
+    }
+
+    public void setColor(java.lang.String value) {
+        setProperty("color", value);
+    }
+
     public java.lang.String getFont() {
         return (java.lang.String)getProperty("font");
     }

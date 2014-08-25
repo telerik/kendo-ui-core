@@ -42,6 +42,15 @@ class StockChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
+    * The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartTitle
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
     * The margin of the title.
     * @param float| $value
     * @return \Kendo\Dataviz\UI\StockChartTitle

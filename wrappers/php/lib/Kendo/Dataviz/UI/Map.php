@@ -10,7 +10,7 @@ class Map extends \Kendo\UI\Widget {
 
     /**
     * The map center. Coordinates are listed as [Latitude, Longitude].
-    * @param array $value
+    * @param array| $value
     * @return \Kendo\Dataviz\UI\Map
     */
     public function center($value) {

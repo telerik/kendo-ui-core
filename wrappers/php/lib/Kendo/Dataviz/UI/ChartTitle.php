@@ -33,6 +33,15 @@ class ChartTitle extends \Kendo\SerializableObject {
     }
 
     /**
+    * The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartTitle
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
     * The font of the title.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartTitle

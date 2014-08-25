@@ -7,7 +7,7 @@ class MapMarker extends \Kendo\SerializableObject {
 
     /**
     * The marker location on the map. Coordinates are listed as [Latitude, Longitude].
-    * @param array $value
+    * @param array| $value
     * @return \Kendo\Dataviz\UI\MapMarker
     */
     public function location($value) {
