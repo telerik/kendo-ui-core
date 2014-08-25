@@ -329,6 +329,18 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("No `? undefined:undefined ?` option in dropdown (kendo-ui-core#248)", function(dom, $scope){
+        expect(2);
+        $("<select kendo-dropdownlist='dropDown' ng-model='item'><option value='1'>Foo</option></select>").appendTo(dom);
+        $scope.whenRendered(function(){
+            var dropDown = $scope.dropDown;
+            var items = dropDown.items();
+            equal(items.length, 1);
+            equal($(items[0]).text(), "Foo");
+            start();
+        });
+    });
+
     runTest("Set dirty flag on change", function(dom, $scope){
         $scope.options = {
             dataSource     : $scope.data,
