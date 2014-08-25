@@ -11568,6 +11568,7 @@ var __meta__ = {
                 result = new Date(date.getFullYear() + value, 0, 1);
             } else if (unit === MONTHS) {
                 result = new Date(date.getFullYear(), date.getMonth() + value, 1);
+                kendo.date.adjustDST(result, hours);
             } else if (unit === WEEKS) {
                 result = addDuration(startOfWeek(date, weekStartDay), value * 7, DAYS);
                 kendo.date.adjustDST(result, hours);
