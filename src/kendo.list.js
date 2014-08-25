@@ -314,10 +314,10 @@ var __meta__ = {
                 that._old = value;
                 that._oldIndex = index;
 
-                that.trigger(CHANGE);
-
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
+
+                that.trigger(CHANGE);
             }
         },
 
