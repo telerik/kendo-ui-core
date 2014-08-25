@@ -161,6 +161,7 @@
         $log = log;
 
         var KENDO_COUNT = 0;
+        var RENDERED = false;
 
         var create = function(role, origAttr) {
 
@@ -345,14 +346,6 @@
                                 }
 
                                 ngModel.$setPristine();
-                                if (ngForm) {
-                                    var form = element, top;
-                                    while (form.controller("form")) {
-                                        top = form.controller("form");
-                                        form = form.parent();
-                                    }
-                                    top.$setPristine();
-                                }
                             }
 
                             // kNgModel is used for the "logical" value
@@ -457,7 +450,16 @@
 
                         --KENDO_COUNT;
                         if (KENDO_COUNT === 0) {
-                            scope.$emit("kendoRendered");
+                            if (!RENDERED) {
+                                RENDERED = true;
+                                scope.$emit("kendoRendered");
+                                $("form").each(function(){
+                                    var form = $(this).controller("form");
+                                    if (form) {
+                                        form.$setPristine();
+                                    }
+                                });
+                            }
                         }
 
                     });
