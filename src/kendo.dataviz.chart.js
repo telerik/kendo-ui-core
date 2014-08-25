@@ -8090,6 +8090,7 @@ var __meta__ = {
             var plotArea = this,
                 charts = plotArea.charts,
                 axes = plotArea.axes,
+                crosshairs = plotArea.crosshairs,
                 i;
 
             for (i = 0; i < charts.length; i++) {
@@ -8098,6 +8099,10 @@ var __meta__ = {
 
             for (i = 0; i < axes.length; i++) {
                 axes[i].destroy();
+            }
+
+            for (i = 0; i < crosshairs.length; i++) {
+                crosshairs[i].destroy();
             }
 
             ChartElement.fn.destroy.call(plotArea);

@@ -3697,6 +3697,21 @@
             equal(crosshair.calls("destroy"), 1);
         });
 
+        test("destroys crosshairs on destroy", function() {
+            createPlotArea({
+                valueAxis: {
+                    crosshair: {
+                        visible: true
+                    }
+                }
+            });
+
+            var crosshair = plotArea.crosshairs[0];
+            stub(crosshair, "destroy");
+            plotArea.destroy();
+            equal(crosshair.calls("destroy"), 1);
+        });
+
         // ------------------------------------------------------------
         module("Categorical PlotArea / Panes / redraw / batch", {
             setup: function() {
