@@ -312,9 +312,13 @@ declare module kendo {
         model: Object;
     }
 
+    class ViewContainer extends Observable {
+       view: View;
+    }
+
     class Layout extends View {
         showIn(selector: string, view: View): void;
-        regions: { [selector: string]: View; };
+        containers: { [selector: string]: ViewContainer; };
     }
 
     class History extends Observable {
@@ -484,6 +488,12 @@ declare module kendo.data {
         destroy(): void;
     }
 
+    class BindingTarget {
+        target: any;
+        options: any;
+        source: any;
+    }
+
     class EventBinding extends Binding {
         get (): void;
     }
@@ -546,9 +556,23 @@ declare module kendo.data {
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
     }
 
+    interface SchedulerEventData {
+        description?: string;
+        end?: Date;
+        endTimezone?: string;
+        isAllDay?: boolean;
+        id?: any;
+        start?: Date;
+        startTimezone?: string;
+        recurrenceId?: any;
+        recurrenceRule?: string;
+        recurrenceException?: string;
+        title?: string;
+    }
+
     class SchedulerEvent extends Model {
-        constructor(data?: any);
-        init(data?: any): void;
+        constructor(data?: SchedulerEventData);
+        init(data?: SchedulerEventData): void;
 
         description: string;
         end: Date;
@@ -560,10 +584,21 @@ declare module kendo.data {
         recurrenceId: any;
         recurrenceRule: string;
         recurrenceException: string;
+        title: string;
         static idField: string;
         static fields: DataSourceSchemaModelFields;
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof SchedulerEvent;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof SchedulerEvent;
+        clone(options: any, updateUid: boolean): SchedulerEvent;
+        duration(): number;
+        expand(start: Date, end: Date, zone: any): SchedulerEvent[];
+        update(eventInfo: SchedulerEventData): void;
+        isMultiDay(): boolean;
+        isException(): boolean;
+        isOccurrence(): boolean;
+        isRecurring(): boolean;
+        isRecurrenceHead(): boolean;
+        toOccurrence(options: any): SchedulerEvent;
     }
 
     class GanttTask extends Model {
@@ -872,6 +907,7 @@ declare module kendo.data {
     class ObservableArray extends Observable {
         constructor(array?: any[]);
         init(array?: any[]): void;
+        [index: number]: any;
         length: number;
         join(separator: string): string;
         parent(): ObservableObject;
@@ -909,7 +945,8 @@ declare module kendo.data {
         options: DataSourceOptions;
         add(model: Object): kendo.data.Model;
         add(model: kendo.data.Model): kendo.data.Model;
-        aggregate(val?: any): any;
+        aggregate(val: any): void;
+        aggregate(): any;
         aggregates(): any;
         at(index: number): kendo.data.ObservableObject;
         cancelChanges(model?: kendo.data.Model): void;
@@ -1055,6 +1092,7 @@ declare module kendo.data {
     interface DataSourceTransportReadOptionsData {
         sort?: DataSourceSortItem[];
         filter?: DataSourceFilters;
+        group?: DataSourceGroupItem[];
         take?: number;
         skip?: number;
     }
@@ -1157,6 +1195,8 @@ declare module kendo.ui {
         element: JQuery;
         setOptions(options: Object): void;
         resize(force?: boolean): void;
+        options: Object;
+        events: string[];
     }
 
     function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.ui, prefix?: String): void;
@@ -1286,6 +1326,8 @@ declare module kendo.mobile {
         scroller(): kendo.mobile.ui.Scroller;
         showLoading(): void;
         view(): kendo.mobile.ui.View;
+        router: kendo.Router;
+        pane: kendo.mobile.ui.Pane;
     }
 
     interface ApplicationOptions {
@@ -1369,7 +1411,7 @@ declare module <%= key %> {
 % end
 
 interface HTMLElement {
-    kendoBindingTarget: kendo.data.Binding;
+    kendoBindingTarget: kendo.data.BindingTarget;
 }
 
 interface JQueryXHR {
