@@ -239,6 +239,16 @@
         tree.render([html("<b>foo</b>")]);
     });
 
+    test("render inserts new html node after the same node has been rendered", 2, function() {
+        tree.render([html("<b>foo</b>")]);
+        tree.render([html("<b>foo</b>")]);
+
+        tree.render([html("<i>bar</i>")]);
+
+        equal(root.firstChild.nodeName, "I");
+        equal(root.firstChild.firstChild.nodeValue, "bar");
+    });
+
     test("render updates html node", function() {
         tree.render([html("<b>foo</b>")]);
 
