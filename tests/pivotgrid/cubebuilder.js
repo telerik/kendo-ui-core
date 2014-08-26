@@ -749,4 +749,59 @@
         equal(result.data[22].ordinal, 22);
     });
 
+    test("process measures are set as columns if no columns and rows are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [], measures: ["Count"] });
+
+        ok(result.axes.columns);
+        equal(result.data.length, 1);
+    });
+
+    test("process multiple measures are set as columns if no columns and rows are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [], measures: ["Count", "Sum"] });
+
+        equal(result.axes.columns.tuples.length, 2);
+        equal(result.axes.columns.tuples[0].members.length, 1, "members count");
+        equal(result.data.length, 2);
+    });
+
+    test("process measures are set as columns if no column are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [{ name: "name" }], measures: ["Count"] });
+
+        ok(result.axes.columns.tuples.length);
+        ok(result.axes.rows.tuples.length);
+        equal(result.data.length, 1);
+    });
+
+    test("process rows are set as columns if no column and measures are set", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [{ name: "name" }] });
+
+        ok(result.axes.columns.tuples.length);
+        ok(!result.axes.rows.tuples.length);
+        equal(result.data.length, 1);
+    });
+
 })();

@@ -288,6 +288,7 @@ var __meta__ = {
 
         _asTuples: function(map, descriptors, measureAggregators) {
             measureAggregators = measureAggregators || [];
+
             var dimensionsSchema = this.dimensions || [];
             var result = [];
             var root;
@@ -297,7 +298,7 @@ var __meta__ = {
             var tuple;
             var aggregatorsLength = measureAggregators.length || 1;
 
-            if (descriptors.length) {
+            if (descriptors.length || measureAggregators.length) {
                 for (measureIdx = 0; measureIdx < aggregatorsLength; measureIdx++) {
 
                     root = { members: [] };
@@ -322,7 +323,7 @@ var __meta__ = {
                             name: measureAggregators[measureIdx].name,
                             levelName: "MEASURES",
                             levelNum: "0",
-                            hasChildren: true,
+                            hasChildren: false,
                             parentName: undefined,
                             hierarchy: "MEASURES"
                         };
@@ -556,10 +557,26 @@ var __meta__ = {
             data = data || [];
             options = options || {};
 
+            var measures = options.measures || [];
+
             var measuresRowAxis = options.measuresAxis === "rows";
 
             var columnDescriptors = (measuresRowAxis ? options.rows : options.columns) || [];
             var rowDescriptors = (!measuresRowAxis ? options.rows : options.columns) || [];
+
+            if (!columnDescriptors.length && rowDescriptors.length && (!measures.length || (measures.length && measuresRowAxis))) {
+                columnDescriptors = rowDescriptors;
+                rowDescriptors = [];
+                measuresRowAxis = false;
+            }
+
+            if (!columnDescriptors.length && !rowDescriptors.length) {
+                measuresRowAxis = false;
+            }
+
+            if (!columnDescriptors.length && measures.length) {
+                columnDescriptors = normalizeMembers(options.measures);
+            }
 
             var aggregatedData = {};
             var columns = {};
@@ -621,6 +638,10 @@ var __meta__ = {
             }
 
             if (processed && data.length) {
+                if (measureAggregators.length > 1 && (!options.columns || !options.columns.length)) {
+                    columnDescriptors = [];
+                }
+
                 columns = this._asTuples(columns, columnDescriptors, measureAggregators);
                 rows = this._asTuples(rows, rowDescriptors, []);
 
