@@ -185,6 +185,8 @@ var __meta__ = {
                for (var child = lastChild ? lastChild.nextSibling : parent.firstChild; child; child = child.nextSibling) {
                    this.nodes.push(child);
                }
+           } else {
+               this.nodes = cached.nodes.slice(0);
            }
        }
     };
