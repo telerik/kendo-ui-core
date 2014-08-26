@@ -116,12 +116,12 @@ namespace Kendo.Mvc.UI.Fluent
             Component.Render();
         }
 
-        public string ToHtmlString()
+        public virtual string ToHtmlString()
         {
             return ToComponent().ToHtmlString();
         }
 
-        public MvcHtmlString ToClientTemplate()
+        public virtual MvcHtmlString ToClientTemplate()
         {
             return ToComponent().ToClientTemplate();
         }
