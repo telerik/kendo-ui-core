@@ -75,13 +75,7 @@
             return obj;
         };
 
-        var fonts = {};
-        for (var i in self.FONTS) {
-            if (hasOwnProperty(self.FONTS, i)) {
-                fonts[i] = self.attach(self.FONTS[i]);
-            }
-        }
-        self.FONTS = fonts;
+        self.FONTS = {};
 
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree());
@@ -139,7 +133,7 @@
 
     var FONT_CACHE = {};
 
-    function getFont(url, cont) {
+    function loadFont(url, cont) {
         var font = FONT_CACHE[url];
         if (font) {
             cont(font);
@@ -166,19 +160,36 @@
         }
     }
 
-    PDF.prototype = {
-        getFont: function(url, cont) {
-            var self = this;
-            if (self.FONTS[url]) {
-                cont(self.FONTS[url].value);
-            } else {
-                getFont(url, function(font){
-                    font = new PDFFont(font, self);
-                    self.FONTS[url] = self.attach(font);
-                    cont(font);
-                });
-            }
+    PDF.loadFonts = function(urls, callback) {
+        var n = urls.length;
+        if (n == 0) {
+            return callback();
         }
+        (function loop(i){
+            if (i < urls.length) {
+                loadFont(urls[i], function(){
+                    if (--n == 0) {
+                        callback();
+                    }
+                });
+                loop(i + 1);
+            }
+        }(0));
+    };
+
+    PDF.prototype = {
+        getFont: function(url) {
+            if (!this.FONTS[url]) {
+                var font = FONT_CACHE[url];
+                if (!font) {
+                    throw new Error("Font " + url + " has not been loaded");
+                }
+                font = new PDFFont(font, this);
+                this.FONTS[url] = this.attach(font);
+            }
+            return this.FONTS[url].value;
+        },
+        loadFonts: PDF.loadFonts
     };
 
     /* -----[ utils ]----- */
@@ -413,7 +424,7 @@
 
     /// standard fonts
 
-    var FONTS = PDF.prototype.FONTS = {};
+    // var FONTS = {};
     // [
     //     "Times-Roman",
     //     "Times-Bold",
@@ -614,6 +625,9 @@
         this._gsResources = {};
         this._fontsByName = {};
 
+        this._font = null;
+        this._fontSize = null;
+
         props = this.props = props || {};
         props.Type = PDFName.get("Page");
         props.ProcSet = [
@@ -641,6 +655,19 @@
         _endText: function() {
             this._textMode = false;
             this._out(NL, "ET", NL);
+        },
+        _requireTextMode: function() {
+            if (!this._textMode) {
+                throw new Error("Text mode required, call page._beginText() first");
+            }
+        },
+        _setFont: function(font, size) {
+            this._requireTextMode();
+            if (!(font instanceof PDFFont)) {
+                font = this.getFont(font);
+            }
+            this._font = font;
+            this._fontSize = size;
         },
         _setStrokeColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " RG", NL);

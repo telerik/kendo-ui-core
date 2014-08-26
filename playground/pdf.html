@@ -13,7 +13,8 @@
 
       function makePDF() {
         var pdf = new PDF();
-        pdf.getFont(fonturl, function(font){
+        PDF.loadFonts([ fonturl ], function(){
+          var font = pdf.getFont(fonturl);
           var strings = [
               "Kendo UI PDF generator. ♥",
               "♙♘♗♖♕♔ ♟♞♝♜♛♚",

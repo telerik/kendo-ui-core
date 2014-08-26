@@ -10,8 +10,9 @@ function mm2pt(mm) {
 var PDF = kendo.PDF;
 var pdf = new PDF();
 var fonturl = "/usr/share/fonts/truetype/freefont/FreeSerif.ttf";
-pdf.getFont(fonturl, function(font){
+PDF.loadFonts([ fonturl ], function(){
 
+    var font = pdf.getFont(fonturl);
     var strings = [
         "Kendo UI PDF generator. ♥",
         "♙♘♗♖♕♔ ♟♞♝♜♛♚",
