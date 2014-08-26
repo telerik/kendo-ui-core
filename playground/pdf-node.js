@@ -34,11 +34,10 @@ PDF.loadFonts([ fonturl ], function(){
     var page = pdf.addPage();
     page._beginText();
     page._out(mm2pt(5), " ", mm2pt(290), " TD\n");
-    page._out(page._getFontResource(fonturl), " 8 Tf\n");
+    page._setFont(font, 8);
+    page._setTextLeading(mm2pt(3.5));
     for (var i = 0; i < strings.length; ++i) {
-        var txt = strings[i];
-        page._out(font.encodeText(txt), " Tj\n");
-        page._out(mm2pt(0), " ", mm2pt(-3.5), " TD\n");
+        page._showTextNL(strings[i]);
     }
     page._endText();
 

@@ -182,33 +182,30 @@
     }
 
     PDF.loadFonts = function(urls, callback) {
-        var n = urls.length;
+        var n = urls.length, i = n;
         if (n == 0) {
             return callback();
         }
-        (function loop(i){
-            if (i < urls.length) {
-                loadFont(urls[i], function(){
-                    if (--n == 0) {
-                        callback();
-                    }
-                });
-                loop(i + 1);
-            }
-        }(0));
+        while (i-- > 0) {
+            loadFont(urls[i], function(){
+                if (--n == 0) {
+                    callback();
+                }
+            });
+        }
     };
 
     PDF.prototype = {
         getFont: function(url) {
-            if (!this.FONTS[url]) {
+            var font = this.FONTS[url];
+            if (!font) {
                 var font = FONT_CACHE[url];
                 if (!font) {
                     throw new Error("Font " + url + " has not been loaded");
                 }
-                font = new PDFFont(font, this);
-                this.FONTS[url] = this.attach(font);
+                font = this.FONTS[url] = this.attach(new PDFFont(this, font));
             }
-            return this.FONTS[url];
+            return font;
         },
         loadFonts: PDF.loadFonts
     };
@@ -322,6 +319,9 @@
         },
         escape: function() {
             return this.value.replace(/([\(\)\\])/g, "\\$1");
+        },
+        toString: function() {
+            return this.value;
         }
     });
 
@@ -331,9 +331,9 @@
         render: function(out) {
             out("<");
             for (var i = 0; i < this.value.length; ++i) {
-                out(" ", zeropad(this.value.charCodeAt(i).toString(16), 4));
+                out(zeropad(this.value.charCodeAt(i).toString(16), 4));
             }
-            out(" >");
+            out(">");
         }
     }, PDFString);
 
@@ -349,6 +349,9 @@
             return this.name.replace(/[^\x21-\x7E]/g, function(c){
                 return "#" + zeropad(c.charCodeAt(0).toString(16), 2);
             });
+        },
+        toString: function() {
+            return this.name;
         }
     });
 
@@ -455,7 +458,9 @@
 
     /// TTF fonts
 
-    var PDFFont = defclass(function PDFFont(font, pdf, props){
+    var FONT_RESOURCE_COUNTER = 0;
+
+    var PDFFont = defclass(function PDFFont(pdf, font, props){
         props = this.props = props || {};
         props.Type = PDFName.get("Font");
         props.Subtype = PDFName.get("Type0");
@@ -464,6 +469,7 @@
         this._pdf = pdf;
         this._font = font;
         this._sub = font.makeSubset();
+        this._resourceName = PDFName.get("F" + (++FONT_RESOURCE_COUNTER));
 
         var head = font.head;
 
@@ -628,7 +634,6 @@
         this._textMode = false;
         this._fontResources = {};
         this._gsResources = {};
-        this._fontsByName = {};
 
         this._font = null;
         this._fontSize = null;
@@ -663,16 +668,41 @@
         },
         _requireTextMode: function() {
             if (!this._textMode) {
-                throw new Error("Text mode required, call page._beginText() first");
+                throw new Error("Text mode required; call page._beginText() first");
+            }
+        },
+        _requireFont: function() {
+            if (!this._font) {
+                throw new Error("No font selected; call page._setFont() first");
             }
         },
         _setFont: function(font, size) {
             this._requireTextMode();
-            if (!(font instanceof PDFFont)) {
-                font = this.getFont(font);
+            if (font == null) {
+                font = this._font;
+            } else if (!(font instanceof PDFFont)) {
+                font = this._pdf.getFont(font);
             }
+            if (size == null) {
+                size = this._fontSize;
+            }
+            var name = font._resourceName;
+            this._fontResources[name] = font;
             this._font = font;
             this._fontSize = size;
+            this._out(name, " ", size, " Tf", NL);
+        },
+        _setTextLeading: function(size) {
+            this._requireTextMode();
+            this._out(size, " TL", NL);
+        },
+        _showText: function(text) {
+            this._requireFont();
+            this._out(this._font.encodeText(text), " Tj", NL);
+        },
+        _showTextNL: function(text) {
+            this._requireFont();
+            this._out(this._font.encodeText(text), " '", NL);
         },
         _setStrokeColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " RG", NL);
@@ -700,14 +730,6 @@
         },
         _restoreContext: function() {
             this._out("Q", NL);
-        },
-        _getFontResource: function(fontName) {
-            var name = this._fontsByName[fontName];
-            if (!name) {
-                name = this._fontsByName[fontName] = "F" + this._rcount++;
-                this._fontResources[name] = this._pdf.FONTS[fontName];
-            }
-            return PDFName.get(name);
         },
         _getGSResource: function(props) {
             props.Type = "ExtGState";
