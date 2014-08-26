@@ -4144,7 +4144,7 @@ var __meta__ = {
 
                 if (template) {
                     if (type !== FUNCTION) {
-                        scope = fieldsMap[column.field] ? extend({}, settings, { paramName: paramName + "." + column.field }) : {};
+                        scope = fieldsMap[column.field] ? extend({}, settings, { paramName: paramName + "['" + column.field + "']" }) : {};
                         template = kendo.template(template, scope);
                     }
 
