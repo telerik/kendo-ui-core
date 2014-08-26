@@ -3307,7 +3307,7 @@
         window.checkTuple = null;
     });
 
-    test("PivotGrid passes a measure along with the column tuple", function() {
+    test("PivotGrid passes a measure with the column tuple", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
@@ -3435,6 +3435,76 @@
         });
 
         window.checkTuple = null;
+    });
+
+    test("PivotGrid renders k-grid-footer class to the row representing 'Grand Total'", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+
+        ok(!rows.eq(0).hasClass("k-grid-footer"));
+        ok(rows.eq(1).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders k-grid-footer class to all 'Grand Total' rows", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+
+        ok(!rows.eq(0).hasClass("k-grid-footer"));
+        ok(rows.eq(1).hasClass("k-grid-footer"));
+        ok(rows.eq(2).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders k-alt class to 'Grand Total' cells", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cells = rows.eq(0).find("td");
+
+        ok(!cells.eq(0).hasClass("k-alt"));
+        ok(cells.eq(1).hasClass("k-alt"));
+        ok(cells.eq(2).hasClass("k-alt"));
     });
 
     module("PivotGrid resize on render", {

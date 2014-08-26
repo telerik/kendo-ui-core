@@ -107,30 +107,20 @@
             }
 
             $(function() {
-                var tuples = [
-                    { members: [ { name: "measure 1", children: [] } ] },
-                    { members: [ { name: "measure 2", children: [] } ] },
-                ]
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
 
-                var measures = [ "measure 1", "measure 2"];
-
-                var data = [
-                    { value: 1 },
-                    { value: 2 }
-                ];
-
-                var indexes = [3, 4, 1, 5, 2, 0];
-
-                window.checkTuple = function (data) {
-                    var tuple = tuples[indexes.shift()];
-                    var templateTuple = data.rowTuple;
-
-                    console.log(tuple.members[0].name, templateTuple.members[0].name);
-                    console.log(tuple.members[1].name, templateTuple.members[1].name);
-                };
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
 
                 var pivotgrid = createPivot({
-                    dataSource: createDataSourceRows(tuples, data, measures),
+                    dataSource: createDataSource(tuples, data)
                 });
             });
         </script>

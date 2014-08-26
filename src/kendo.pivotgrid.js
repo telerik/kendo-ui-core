@@ -3796,6 +3796,7 @@ var __meta__ = {
                 if (children > -1) {
                     for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
                         result[children + firstEmpty + measureIdx] = {
+                            children: children,
                             index: dataIdx,
                             measure: measures[measureIdx],
                             tuple: axisInfoMember.tuple
@@ -3837,6 +3838,7 @@ var __meta__ = {
             var length = columnIndexes.length;
             var idx = 0;
 
+            var attr;
             var dataItem;
             var cellContent;
 
@@ -3851,10 +3853,20 @@ var __meta__ = {
                     dataItem: dataItem
                 });
 
-                cells.push(element("td", null, [ htmlNode(cellContent) ]));
+                attr = {};
+                if (columnInfo.children) {
+                    attr.className = "k-alt";
+                }
+
+                cells.push(element("td", attr, [ htmlNode(cellContent) ]));
             }
 
-            return element("tr", null, cells);
+            attr = {};
+            if (rowInfo.children) {
+                attr.className = "k-grid-footer";
+            }
+
+            return element("tr", attr, cells);
         }
     });
 
