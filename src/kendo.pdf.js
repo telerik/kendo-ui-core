@@ -63,6 +63,25 @@
         return out;
     }
 
+    function wrapObject(value, id) {
+        var beforeRender = value.beforeRender;
+        var renderValue = value.render;
+
+        value.beforeRender = function(){};
+
+        value.render = function(out) {
+            out(id, " 0 R");
+        };
+
+        value.renderFull = function(out) {
+            value._offset = out.offset();
+            out(id, " 0 obj ");
+            beforeRender.call(value, out);
+            renderValue.call(value, out);
+            out(" endobj");
+        };
+    }
+
     function PDF() {
         var self = this;
         var out = makeOutput();
@@ -70,16 +89,18 @@
         var objects = [];
 
         self.attach = function(value) {
-            var obj = new PDFObject(value, ++objcount);
-            objects.push(obj);
-            return obj;
+            if (objects.indexOf(value) < 0) {
+                wrapObject(value, ++objcount);
+                objects.push(value);
+            }
+            return value;
         };
 
         self.FONTS = {};
 
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree());
-        catalog.value.setPages(pageTree);
+        catalog.setPages(pageTree);
 
         self.addPage = function() {
             var content = new PDFStream(makeOutput());
@@ -88,7 +109,7 @@
                 Parent   : pageTree
             });
             page._content = content;
-            pageTree.value.addPage(self.attach(page));
+            pageTree.addPage(self.attach(page));
             return page;
         };
 
@@ -112,7 +133,7 @@
             out("xref", NL, 0, " ", objects.length, NL);
             out("0000000000 65535 f ", NL);
             for (i = 0; i < objects.length; ++i) {
-                out(zeropad(objects[i].offset, 10), " 00000 n ", NL);
+                out(zeropad(objects[i]._offset, 10), " 00000 n ", NL);
             }
             out(NL);
 
@@ -187,7 +208,7 @@
                 font = new PDFFont(font, this);
                 this.FONTS[url] = this.attach(font);
             }
-            return this.FONTS[url].value;
+            return this.FONTS[url];
         },
         loadFonts: PDF.loadFonts
     };
@@ -357,22 +378,6 @@
             });
             if (!empty) out.indent();
             out(">>");
-        }
-    });
-
-    /// objects
-
-    var PDFObject = defclass(function PDFObject(value, id) {
-        this.value = value;
-        this.id = id;
-        this.offset = null;
-    }, {
-        render: function(out) {
-            out(this.id, " 0 R");
-        },
-        renderFull: function(out) {
-            this.offset = out.offset();
-            out(this.id, " 0 obj ", this.value, " endobj");
         }
     });
 
