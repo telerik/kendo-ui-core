@@ -324,4 +324,35 @@
         equal(panelbar._focused[0], item[0]);
     });
 
+    test("PanelBar selects next visible item", function() {
+        addItems(3);
+        ul.find("li:eq(1)").hide();
+        ul.focus();
+
+        ul.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        ok(ul.children(":last").find(".k-link").hasClass("k-state-focused"));
+    });
+
+    test("PanelBar selects prev visible item", function() {
+        addItems(3);
+        ul.find("li:eq(1)").hide();
+        ul.focus();
+
+        ul.trigger({
+            type: "keydown",
+            keyCode: keys.DOWN
+        });
+
+        ul.trigger({
+            type: "keydown",
+            keyCode: keys.UP
+        });
+
+        ok(ul.children(":first").find(".k-link").hasClass("k-state-focused"));
+    });
+
 })();

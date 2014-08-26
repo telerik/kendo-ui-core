@@ -589,7 +589,7 @@ var __meta__ = {
             }
 
             var group = item.children(VISIBLEGROUP),
-                next = item.next();
+                next = item.nextAll(":visible").first();
 
             if (group[0]) {
                 next = group.children("." + FIRST);
@@ -599,7 +599,7 @@ var __meta__ = {
                 next = item.parent(VISIBLEGROUP).parent(ITEM).next();
             }
 
-            if (!next[0] || !next.is(":visible")) {
+            if (!next[0]) {
                 next = this._first();
             }
 
@@ -615,7 +615,7 @@ var __meta__ = {
                 return this._last();
             }
 
-            var prev = item.prev(),
+            var prev = item.prevAll(":visible").first(),
                 result;
 
             if (!prev[0]) {
