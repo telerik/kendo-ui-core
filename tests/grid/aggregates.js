@@ -261,6 +261,20 @@
         equal(footerCells.last().text(), "baz");
     });
 
+    test("column footer template with aggregate on nested field", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [ { foo: { bar: 1 } }],
+                aggregate: { field: "foo.bar", aggregate: "count" }
+            },
+            columns: [ { field: "foo.bar", footerTemplate: "count:#=count#" } ]
+        }),
+        footer = grid.wrapper.children("div.k-grid-footer"),
+        footerCells = footer.find("tr.k-footer-template").find("td");
+
+        equal(footerCells.first().text(), "count:1");
+    });
+
     test("column width is set to the footer cell", function() {
         var grid = new Grid(table(), {
             dataSource: {
