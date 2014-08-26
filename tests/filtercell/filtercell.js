@@ -121,24 +121,27 @@
         equal(filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").options.minLength, 4);
     });
 
-    test("when there is template specified which uses autoComplete then the dataSource is not overriden", function() {
+    test("filtercell template option receive the special dataSource", function() {
         filterCell = setup(dom, {
             field: "foo",
             dataSource: dataSource,
-            dataTextField: "bla", template: function(input) {
-                input.kendoAutoComplete({
-                    dataSource: {
-                        transport: {
-                            read: {
-                                url: "myurl"
-                            }
-                        }
+            suggestDataSource: {
+                transport: {
+                    read: function(e) {
+                        e.success([
+                          { foo: "one" },
+                          { foo: "one" },
+                          { foo: "two" }
+                        ])
                     }
-                })
+                }
+            },
+            customDataSource: false,
+            dataTextField: "bla", template: function(e) {
+                e.dataSource.read();
+                equal(e.dataSource.view().length, 2)
             }
         });
-        var acDS = filterCell.wrapper.find("[" + kendo.attr("role") + "=autocomplete]").data("kendoAutoComplete").dataSource;
-        equal(acDS.options.transport.read.url, "myurl");
     });
 
     test("sets the value of the input element when there is array as filter", function() {
@@ -182,8 +185,8 @@
     });
 
     test("uses template", function() {
-        filterCell = setup(dom, { dataSource: dataSource, field: "foo", template: function(input, model) {
-            input.addClass("foo");
+        filterCell = setup(dom, { dataSource: dataSource, field: "foo", template: function(e, model) {
+            e.element.addClass("foo");
         } });
         equal(dom.find(".foo").length, 1);
     });

@@ -84,7 +84,6 @@ var __meta__ = {
             var wrapper = this.wrapper = $("<span/>").appendTo(element);
             var that = this,
                 dataSource,
-                suggestDataSource,
                 viewModel,
                 type,
                 operators = that.operators = options.operators || {},
@@ -134,6 +133,10 @@ var __meta__ = {
             });
             viewModel.bind(CHANGE, proxy(that.updateDsFilter, that));
 
+            if (type == STRING) {
+                that.initSuggestDataSource(options);
+            }
+
             if (options.inputWidth !== null) {
                 input.width(options.inputWidth);
             }
@@ -147,20 +150,10 @@ var __meta__ = {
 
             kendo.bind(this.wrapper, viewModel);
 
-            if (type == STRING && !options.template) {
-                suggestDataSource = that.suggestDataSource = options.suggestDataSource;
-
-                if (!(suggestDataSource instanceof DataSource)) {
-                    if (!options.customDataSource && suggestDataSource) {
-                        suggestDataSource.data = undefined;
-                        suggestDataSource.group = undefined;
-                    }
-                    suggestDataSource =
-                        that.suggestDataSource =
-                            DataSource.create(suggestDataSource);
+            if (type == STRING) {
+                if (!options.template) {
+                    that.setAutoCompleteSource();
                 }
-
-                that.setSuggestDataSource(suggestDataSource);
             }
 
             if (type == ENUM) {
@@ -180,7 +173,10 @@ var __meta__ = {
                 input = that.input;
 
             if (typeof (options.template) == "function") {
-                options.template.call(that.viewModel, that.input);
+                options.template.call(that.viewModel, {
+                    element: that.input,
+                    dataSource: that.suggestDataSource
+                });
             } else if (type == STRING) {
                 input.attr(kendo.attr("role"), "autocomplete")
                         .attr(kendo.attr("text-field"), options.dataTextField || options.field)
@@ -240,15 +236,32 @@ var __meta__ = {
             this.operatorDropDown.wrapper.find(".k-i-arrow-s").removeClass("k-i-arrow-s").addClass("k-filter");
         },
 
-        setSuggestDataSource: function(dataSource) {
-            if (!this.options.customDataSource) {
-                dataSource._pageSize = undefined;
-                dataSource.reader.data = removeDuplicates(dataSource.reader.data, this.options.field);
+        initSuggestDataSource: function(options) {
+            var suggestDataSource = options.suggestDataSource;
+
+            if (!(suggestDataSource instanceof DataSource)) {
+                if (!options.customDataSource && suggestDataSource) {
+                    suggestDataSource.data = undefined;
+                    suggestDataSource.group = undefined;
+                }
+                suggestDataSource =
+                    this.suggestDataSource =
+                        DataSource.create(suggestDataSource);
+
+
+                if (!options.customDataSource) {
+                    suggestDataSource._pageSize = undefined;
+                    suggestDataSource.reader.data = removeDuplicates(suggestDataSource.reader.data, this.options.field);
+                }
             }
-            this.suggestDataSource = dataSource;
+
+            this.suggestDataSource = suggestDataSource;
+        },
+
+        setAutoCompleteSource: function() {
             var autoComplete = this.input.data("kendoAutoComplete");
             if (autoComplete) {
-                autoComplete.setDataSource(dataSource);
+                autoComplete.setDataSource(this.suggestDataSource);
             }
         },
 
