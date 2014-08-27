@@ -4804,7 +4804,7 @@ var __meta__ = {
         _updateHeader: function(groups) {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
-                filterCells = container.find("tr.k-row-filter").find("th.k-group-cell").length,
+                filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
