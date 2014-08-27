@@ -330,4 +330,478 @@
         ok(builder.measures.Measure1.aggregate);
     });
 
+    test("additional tuple is created for every measure if multiple measures are defined", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "name" }], measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.columns.tuples.length, 2);
+    });
+
+    test("measure member of the tuples have measure names set - with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "name" }], measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.columns.tuples[0].members.length, 2);
+        equal(result.axes.columns.tuples[0].members[1].caption, "Measure 1");
+        equal(result.axes.columns.tuples[1].members.length, 2);
+        equal(result.axes.columns.tuples[1].members[1].caption, "Measure 2");
+    });
+
+    test("measure member of the tuples have measure names set with expanded column - with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "name", expand: true }], measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.columns.tuples.length, 6);
+
+        equal(result.axes.columns.tuples[0].members.length, 2);
+        equal(result.axes.columns.tuples[0].members[1].caption, "Measure 1");
+        equal(result.axes.columns.tuples[0].members[1].name, "Measure1");
+        equal(result.axes.columns.tuples[1].members.length, 2);
+        equal(result.axes.columns.tuples[1].members[1].caption, "Measure 2");
+        equal(result.axes.columns.tuples[1].members[1].name, "Measure2");
+
+        equal(result.axes.columns.tuples[2].members.length, 2);
+        equal(result.axes.columns.tuples[2].members[1].caption, "Measure 1");
+        equal(result.axes.columns.tuples[2].members[1].name, "Measure1");
+        equal(result.axes.columns.tuples[3].members.length, 2);
+        equal(result.axes.columns.tuples[3].members[1].caption, "Measure 2");
+        equal(result.axes.columns.tuples[3].members[1].name, "Measure2");
+    });
+
+    test("no additional tuple is created on the opposite axes if multiple measures are defined", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "name" }], rows: [{ name: "lastName" }], measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.columns.tuples.length, 2);
+        equal(result.axes.rows.tuples.length, 1);
+    });
+
+    test("process data contains correct number of items - non expanded column with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, {
+            columns: [{ name: "name" }],
+            measures: ["Measure1", "Measure2"] });
+
+        equal(result.data.length, 2);
+    });
+
+    test("process data contains correct number of items - expanded column with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, {
+            columns: [{ name: "name", expand: true }],
+            measures: ["Measure1", "Measure2"] });
+
+        equal(result.data.length, 6);
+    });
+
+    test("process data contains correct number of items - expanded column and rows with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, {
+            columns: [{ name: "name", expand: true }],
+            rows: [{ name: "lastName", expand: true }],
+            measures: ["Measure1", "Measure2"] });
+
+        equal(result.data.length, 16);
+    });
+
+    test("process data items are correctly formatted with multiple measures", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name", format: "foo{0}",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  format: "{0}bar", aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+
+        equal(result.data[0].value, 3);
+        equal(result.data[0].fmtValue, "foo3");
+        equal(result.data[1].value, 3);
+        equal(result.data[1].fmtValue, "3bar");
+    });
+
+    test("process data items are correctly formatted with multiple measures - single measure format", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  format: "{0}bar", aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [{ name: "name1", lastName: "LastName1" }, { name: "name2", lastName: "LastName1" }, { name: "name1", lastName: "LastName2" } ];
+
+        var result = builder.process(data, { columns: [{ name: "name", expand: false }], rows: [{ name: "lastName", expand: false }], measures: ["Measure1", "Measure2"] });
+
+        equal(result.data[0].value, 3);
+        equal(result.data[0].fmtValue, 3);
+        equal(result.data[1].value, 3);
+        equal(result.data[1].fmtValue, "3bar");
+    });
+
+    test("additional tuple is created for every measure if multiple measures are defined - measures on row axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "lastName" }], measures: ["Measure1", "Measure2"], rows: [{ name: "name" }], measuresAxis: "rows" });
+
+        equal(result.axes.rows.tuples.length, 2);
+    });
+
+    test("measure member of the tuples have measure names set - with multiple measures - measures on row axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name" }], measures: ["Measure1", "Measure2"], measuresAxis: "rows"});
+
+        equal(result.axes.rows.tuples[0].members.length, 2);
+        equal(result.axes.rows.tuples[0].members[1].caption, "Measure 1");
+        equal(result.axes.rows.tuples[1].members.length, 2);
+        equal(result.axes.rows.tuples[1].members[1].caption, "Measure 2");
+    });
+
+    test("measure member of the tuples have measure names set with expanded column - with multiple measures on row axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { columns: [{ name: "lastName" }], rows: [{ name: "name", expand: true }], measuresAxis: "rows", measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.rows.tuples.length, 6);
+
+        equal(result.axes.rows.tuples[0].members.length, 2);
+        equal(result.axes.rows.tuples[0].members[1].caption, "Measure 1");
+        equal(result.axes.rows.tuples[0].members[1].name, "Measure1");
+        equal(result.axes.rows.tuples[1].members.length, 2);
+        equal(result.axes.rows.tuples[1].members[1].caption, "Measure 2");
+        equal(result.axes.rows.tuples[1].members[1].name, "Measure2");
+
+        equal(result.axes.rows.tuples[2].members.length, 2);
+        equal(result.axes.rows.tuples[2].members[1].caption, "Measure 1");
+        equal(result.axes.rows.tuples[2].members[1].name, "Measure1");
+        equal(result.axes.rows.tuples[3].members.length, 2);
+        equal(result.axes.rows.tuples[3].members[1].caption, "Measure 2");
+        equal(result.axes.rows.tuples[3].members[1].name, "Measure2");
+    });
+
+    test("no additional tuple is created on the opposite axes if multiple measures are defined - with measures on row axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Measure1", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Measure2", caption: "Measure 2", field: "lastName",  aggregate: function(data, state) { return state + 1;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1" },
+            { name: "name2", lastName: "lastName2" },
+            { name: "name1", lastName: "lastName3" }
+        ];
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Measure1", "Measure2"]});
+
+        equal(result.axes.rows.tuples.length, 2);
+        equal(result.axes.columns.tuples.length, 1);
+    });
+
+    test("data is correct with multiple measures on row axis and no expanded members", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1", value: 1 },
+            { name: "name2", lastName: "lastName2", value: 2 },
+            { name: "name1", lastName: "lastName3", value: 1 }
+        ];
+
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+
+        equal(result.data.length, 2);
+        equal(result.data[0].value, 3);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].value, 4);
+        equal(result.data[1].ordinal, 1);
+    });
+
+    test("data is correct with multiple measures on row axis and expanded members on column axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1", value: 1 },
+            { name: "name2", lastName: "lastName2", value: 2 },
+            { name: "name1", lastName: "lastName3", value: 1 }
+        ];
+
+        var result = builder.process(data, { rows: [{ name: "name" }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+
+        equal(result.data.length, 8);
+        equal(result.data[0].value, 3);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].value, 1);
+        equal(result.data[1].ordinal, 1);
+        equal(result.data[2].value, 1);
+        equal(result.data[2].ordinal, 2);
+        equal(result.data[3].value, 1);
+        equal(result.data[3].ordinal, 3);
+        equal(result.data[4].value, 4);
+        equal(result.data[4].ordinal, 4);
+        equal(result.data[5].value, 1);
+        equal(result.data[5].ordinal, 5);
+        equal(result.data[6].value, 2);
+        equal(result.data[6].ordinal, 6);
+        equal(result.data[7].value, 1);
+        equal(result.data[7].ordinal, 7);
+    });
+
+    test("data is correct with multiple measures on row axis and expanded members on row axis", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1", value: 1 },
+            { name: "name2", lastName: "lastName2", value: 2 },
+            { name: "name1", lastName: "lastName3", value: 1 }
+        ];
+
+        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName" }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+
+        equal(result.data.length, 6);
+        equal(result.data[0].value, 3);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].value, 4);
+        equal(result.data[1].ordinal, 1);
+        equal(result.data[2].value, 2);
+        equal(result.data[2].ordinal, 2);
+        equal(result.data[3].value, 2);
+        equal(result.data[3].ordinal, 3);
+        equal(result.data[4].value, 1);
+        equal(result.data[4].ordinal, 4);
+        equal(result.data[5].value, 2);
+        equal(result.data[5].ordinal, 5);
+    });
+
+    test("data is correct with multiple measures on row axis and expanded members on both axes", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+
+        var data = [
+            { name: "name1", lastName: "lastName1", value: 1 },
+            { name: "name2", lastName: "lastName2", value: 2 },
+            { name: "name1", lastName: "lastName3", value: 1 }
+        ];
+
+        var result = builder.process(data, { rows: [{ name: "name", expand: true }], columns: [{ name: "lastName", expand: true }], measuresAxis: "rows",  measures: ["Count", "Sum"]});
+
+        equal(result.data.length, 23);
+
+        equal(result.data[0].value, 3);
+        equal(result.data[0].ordinal, 0);
+        equal(result.data[1].value, 1);
+        equal(result.data[1].ordinal, 1);
+        equal(result.data[2].value, 1);
+        equal(result.data[2].ordinal, 2);
+        equal(result.data[3].value, 1);
+        equal(result.data[3].ordinal, 3);
+
+        equal(result.data[4].value, 4);
+        equal(result.data[4].ordinal, 4);
+        equal(result.data[5].value, 1);
+        equal(result.data[5].ordinal, 5);
+        equal(result.data[6].value, 2);
+        equal(result.data[6].ordinal, 6);
+        equal(result.data[7].value, 1);
+        equal(result.data[7].ordinal, 7);
+
+        equal(result.data[8].value, 2);
+        equal(result.data[8].ordinal, 8);
+        equal(result.data[9].value, 1);
+        equal(result.data[9].ordinal, 9);
+
+        equal(result.data[11].value, 1);
+        equal(result.data[11].ordinal, 11);
+
+        equal(result.data[12].value, 2);
+        equal(result.data[12].ordinal, 12);
+        equal(result.data[13].value, 1);
+        equal(result.data[13].ordinal, 13);
+
+        equal(result.data[15].value, 1);
+        equal(result.data[15].ordinal, 15);
+        equal(result.data[16].value, 1);
+        equal(result.data[16].ordinal, 16);
+        equal(result.data[18].value, 1);
+        equal(result.data[18].ordinal, 18);
+        equal(result.data[20].value, 2);
+        equal(result.data[20].ordinal, 20);
+
+        equal(result.data[22].value, 2);
+        equal(result.data[22].ordinal, 22);
+    });
+
+    test("process measures are set as columns if no columns and rows are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [], measures: ["Count"] });
+
+        ok(result.axes.columns);
+        equal(result.data.length, 1);
+    });
+
+    test("process multiple measures are set as columns if no columns and rows are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [], measures: ["Count", "Sum"] });
+
+        equal(result.axes.columns.tuples.length, 2);
+        equal(result.axes.columns.tuples[0].members.length, 1, "members count");
+        equal(result.data.length, 2);
+    });
+
+    test("process measures are set as columns if no column are set", function() {
+        var builder = new PivotCubeBuilder({
+            measures: [
+                { name: "Count", caption: "Measure 1", field: "name",  aggregate: function(data, state) { return state + 1;  }},
+                { name: "Sum", caption: "Measure 2", field: "value",  aggregate: function(data, state) { return state + data;  }}
+            ]
+        });
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [{ name: "name" }], measures: ["Count"] });
+
+        ok(result.axes.columns.tuples.length);
+        ok(result.axes.rows.tuples.length);
+        equal(result.data.length, 1);
+    });
+
+    test("process rows are set as columns if no column and measures are set", function() {
+        var builder = new PivotCubeBuilder();
+
+        var data = [{ name: "name1" }, { name: "name2" }, { name: "name1" } ];
+        var result = builder.process(data, { columns: [], rows: [{ name: "name" }] });
+
+        ok(result.axes.columns.tuples.length);
+        ok(!result.axes.rows.tuples.length);
+        equal(result.data.length, 1);
+    });
+
 })();
