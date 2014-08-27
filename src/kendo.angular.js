@@ -561,9 +561,16 @@
             kendo.widgetInstance(el, kendo.dataviz.ui);
     }
 
-    function digest(scope) {
+    function digest(scope, func) {
         var root = scope.$root || scope;
-        if (!/^\$(digest|apply)$/.test(root.$$phase)) {
+        var isDigesting = /^\$(digest|apply)$/.test(root.$$phase);
+        if (func) {
+            if (isDigesting) {
+                func();
+            } else {
+                scope.$apply(func);
+            }
+        } else if (!isDigesting) {
             scope.$digest();
         }
     }
@@ -700,12 +707,9 @@
     defadvice("ui.Widget", "$angular_makeEventHandler", function(event, scope, handler){
         handler = $parse(handler);
         return function(e) {
-            var root = scope.$root || scope;
-            if (/^\$(apply|digest)$/.test(root.$$phase)) {
+            digest(scope, function() {
                 handler(scope, { kendoEvent: e });
-            } else {
-                scope.$apply(function() { handler(scope, { kendoEvent: e }); });
-            }
+            });
         };
     });
 
@@ -749,7 +753,9 @@
                 locals.selected = elems[0];
             }
 
-            scope.$apply(function() { handler(scope, locals); });
+            digest(scope, function() {
+                handler(scope, locals);
+            });
         };
     });
 
