@@ -20,7 +20,7 @@
         <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
-        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.bootstrap.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
         <style>
@@ -107,21 +107,33 @@
             }
 
             $(function() {
-        var tuples = [
-            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
-        ];
+                var tuples = [
+                    { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+                    { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+                    { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+                    { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] }, { name: "measure 1", children: [] } ] },
+                    { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] }, { name: "measure 2", children: [] } ] }
+                ];
 
-        var data = [
-            { value: 1 },
-            { value: 2 },
-            { value: 3 }
-        ];
+                var data = [
+                    { value: 1 },
+                    { value: 2 },
+                    { value: 3 },
+                    { value: 4 },
+                    { value: 5 },
+                    { value: 6 }
+                ];
+
+                var measures = ["measure 1", "measure 2"];
 
                 var pivotgrid = createPivot({
-                    dataSource: createDataSource(tuples, data)
+                    dataSource: createDataSourceRows(tuples, data, measures)
                 });
+
+                var info = pivotgrid.cellInfo(0, 1);
+
+                console.log(info);
             });
         </script>
     </body>

@@ -2753,6 +2753,20 @@ var __meta__ = {
             }
         },
 
+        cellInfo: function(columnIndex, rowIndex) {
+            columnIndex = columnIndex || 0;
+            rowIndex = rowIndex || 0;
+
+            if (typeof columnIndex !== "number") {
+                columnIndex = $(columnIndex);
+
+                rowIndex = columnIndex.parent("tr").index();
+                columnIndex = columnIndex.index();
+            }
+
+            return this._contentBuilder.cellInfo(this.dataSource.data(), columnIndex, rowIndex);
+        },
+
         setDataSource: function(dataSource) {
             this.options.dataSource = dataSource;
 
@@ -3711,6 +3725,29 @@ var __meta__ = {
             ];
         },
 
+        //TODO: test
+        //TODO: cache data on build() function call
+        //
+        cellInfo: function(data, columnIndex, rowIndex) {
+            var columnInfo = this.columnIndexes[columnIndex];
+            var rowInfo = this.rowIndexes[rowIndex];
+
+            if (!columnInfo || !rowInfo) {
+                return null;
+            }
+
+            return {
+                columnTuple: columnInfo.tuple,
+                rowTuple: rowInfo.tuple,
+                measure: columnInfo.measure || rowInfo.measure,
+                dataItem: this.dataItem(data, rowInfo, columnInfo)
+            };
+        },
+
+        dataItem: function(data, rowInfo, columnInfo) {
+            return data[(rowInfo.index * this.rowLength) + columnInfo.index];
+        },
+
         _colGroup: function() {
             var length = this.columnAxis.measures.length || 1;
             var children = [];
@@ -3816,47 +3853,40 @@ var __meta__ = {
         },
 
         _buildRows: function(data) {
-            var cells = [];
             var rowIndexes = this.rowIndexes;
-            var rowLength = this.rowLength;
             var length = rowIndexes.length;
             var idx = 0;
 
-            var rowInfo;
-
             for (; idx < length; idx++) {
-                rowInfo = rowIndexes[idx];
-                this.rows.push(this._buildRow(data, rowInfo, rowLength));
+                this.rows.push(this._buildRow(data, rowIndexes[idx]));
             }
         },
 
-        _buildRow: function(data, rowInfo, rowLength) {
-            var cells = [];
-            var columnInfo;
+        _buildRow: function(data, rowInfo) {
+            var startIdx = rowInfo.index * this.rowLength;
             var columnIndexes = this.columnIndexes;
-            var startIdx = rowInfo.index * rowLength;
             var length = columnIndexes.length;
+            var columnInfo;
+            var cells = [];
             var idx = 0;
 
-            var attr;
-            var dataItem;
             var cellContent;
+            var attr;
 
             for (; idx < length; idx++) {
                 columnInfo = columnIndexes[idx];
-                dataItem = data[startIdx + columnInfo.index];
-
-                cellContent = this.template({
-                    columnTuple: columnInfo.tuple,
-                    rowTuple: rowInfo.tuple,
-                    measure: columnInfo.measure || rowInfo.measure,
-                    dataItem: dataItem
-                });
 
                 attr = {};
                 if (columnInfo.children) {
                     attr.className = "k-alt";
                 }
+
+                cellContent = this.template({
+                    columnTuple: columnInfo.tuple,
+                    rowTuple: rowInfo.tuple,
+                    measure: columnInfo.measure || rowInfo.measure,
+                    dataItem: data[startIdx + columnInfo.index]
+                });
 
                 cells.push(element("td", attr, [ htmlNode(cellContent) ]));
             }

@@ -23,7 +23,7 @@
         <script src="../src/kendo.pivot.fieldmenu.js"></script>
 
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
-        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.bootstrap.less" rel="stylesheet/less" />
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
         <style>
@@ -55,9 +55,9 @@
                     filterable: true,
                     dataSource: {
                         type: "xmla",
-                    //    rows: [{ name: "[Date].[Calendar]", expand: false }, { name: "[Geography].[City]" } ],
-                        columns: [ { name: "[Date].[Calendar]" } ],
-                        //measures: ["[Measures].[Internet Order Lines Count]"],
+                        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                        rows: [ { name: "[Product].[Category]", expand: true } ],
+                        measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Sales]"],
                         transport: {
                             connection: {
                                 catalog: "adventure works internet sales model",
