@@ -190,9 +190,16 @@ var __meta__ = {
 
             separator: {
                 base: function(options, overflow) {
-                    var element = overflow ? $('<li class="k-separator">&nbsp;</li>') : $('<div class="k-separator">&nbsp;</div>');
+                    var element = overflow ? $('<li>&nbsp;</li>') : $('<div>&nbsp;</div>');
                     element.data({ type: "separator" });
                     element.attr(KENDO_UID_ATTR, options.uid);
+
+                    if (options.attributes) {
+                        element.attr(options.attributes);
+                    }
+
+                    element.addClass(SEPARATOR);
+
                     return element;
                 },
                 toolbar: function(options) {
@@ -213,6 +220,10 @@ var __meta__ = {
 
             element.data({ type: "button" });
             element.attr(KENDO_UID_ATTR, options.uid);
+
+            if (options.attributes) {
+                element.attr(options.attributes);
+            }
 
             if (options.togglable) {
                 element.addClass(TOGGLE_BUTTON);
