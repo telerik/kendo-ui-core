@@ -470,6 +470,28 @@
         equal(button.prop("tagName"), "BUTTON", "<button> tag is rendered");
     });
 
+    test("options.attributes are attached to the button element", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", attributes: { "class": "foo" } }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.element.find("#foo");
+        ok(button.hasClass("foo"));
+    });
+
+    test("options.attributes are attached to the button element located in the overflow popup", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo", attributes: { "class": "foo" } }
+            ]
+        }).data("kendoToolBar");
+
+        var button = toolbar.popup.element.find("#foo_overflow");
+        ok(button.hasClass("foo"));
+    });
+
     /* TOGGLE BUTTON */
 
     test("toggleButton has k-toggle-button class", 2, function() {
@@ -715,6 +737,23 @@
         }
     });
 
+    test("options.attributes are attached to each button", 3, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "buttonGroup", buttons: [
+                        { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                        { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                        { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#btn1").hasClass("foo"));
+        ok($("#btn2").hasClass("bar"));
+        ok($("#btn3").hasClass("baz"));
+    });
+
     /* SPLIT BUTTON */
 
     test("renders splitButton from JSON", 2, function() {
@@ -919,6 +958,38 @@
         equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
     });
 
+    test("options.attribute are attached to the main button", 1, function() {
+        var splitButton = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", attributes: { "class": "foo" }, menuButtons: [
+                        { id: "btn1", text: "Btn1" },
+                        { id: "btn2", text: "Btn2" },
+                        { id: "btn3", text: "Btn3" }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#foo").hasClass("foo"));
+    });
+
+    test("options.attribute are attached to the menu buttons", 3, function() {
+        var splitButton = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "foo", text: "foo", menuButtons: [
+                        { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                        { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                        { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                    ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        ok($("#btn1").hasClass("foo"));
+        ok($("#btn2").hasClass("bar"));
+        ok($("#btn3").hasClass("baz"));
+    });
+
     /* SEPARATOR */
 
     test("renders separator from JSON", 1, function() {
@@ -942,6 +1013,16 @@
 
         equal(separator.prop("tagName"), "LI");
         ok(separator.data("uid"));
+    });
+
+    test("options.attributes are attached to the separator element", 1, function() {
+        container.kendoToolBar({
+            items: [
+                { type: "separator", attributes: { "class": "foo" } }
+            ]
+        });
+
+        ok(container.children(".k-separator").hasClass("foo"));
     });
 
     /* COMMAND OVERFLOW */
