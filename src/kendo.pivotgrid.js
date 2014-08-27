@@ -1905,7 +1905,7 @@ var __meta__ = {
     }
 
 
-    function expandMemberDescriptor(members, memberNames) {
+    function expandMemberDescriptor(members, memberNames, sort) {
         return transformDescriptors(members, function(member) {
             var name = member.name;
 
@@ -1919,19 +1919,39 @@ var __meta__ = {
             }
 
             if (member.expand && found) {
-                name += ".Children";
+
+                var sortDescriptor = sortDescriptorForMember(sort, name);
+                if (sortDescriptor && sortDescriptor.dir) {
+                    name = "ORDER(" + name + ".Children," + sortDescriptor.field + ".CurrentMember.MEMBER_CAPTION," + sortDescriptor.dir + ")";
+                } else {
+                    name += ".Children";
+                }
             }
 
             return name;
         });
     }
 
-    function expandDescriptors(members) {
+    function sortDescriptorForMember(sort, member) {
+        for (var idx = 0, length = sort.length; idx < length; idx++) {
+            if (member.indexOf(sort[idx].field) === 0) {
+                return sort[idx];
+            }
+        }
+        return null;
+    }
+
+    function expandDescriptors(members, sort) {
         return transformDescriptors(members, function(member) {
             var name = member.name;
 
             if (member.expand) {
-                name += ".Children";
+                var sortDescriptor = sortDescriptorForMember(sort, name);
+                if (sortDescriptor && sortDescriptor.dir) {
+                    name = "ORDER(" + name + ".Children," + sortDescriptor.field + ".CurrentMember.MEMBER_CAPTION," + sortDescriptor.dir + ")";
+                } else {
+                    name += ".Children";
+                }
             }
             return name;
         });
@@ -1979,7 +1999,7 @@ var __meta__ = {
         return result;
     }
 
-    function serializeMembers(members, measures) {
+    function serializeMembers(members, measures, sort) {
         var command = "";
 
         members = members || [];
@@ -2012,7 +2032,7 @@ var __meta__ = {
                             tmpMembers = trimSameHierarchyChildDescriptorsForName(members, name);
                         }
 
-                        var tmp = crossJoinCommand(expandMemberDescriptor(tmpMembers, expandedMemberNames.concat(name)), measures);
+                        var tmp = crossJoinCommand(expandMemberDescriptor(tmpMembers, expandedMemberNames.concat(name), sort), measures);
                         if ($.inArray(tmp, generatedMembers) == -1) {
                             command += ",";
                             command += tmp;
@@ -2027,7 +2047,7 @@ var __meta__ = {
             }
         } else {
             if (expandedColumns.length) {
-                memberNames = memberNames.concat(expandDescriptors(members));
+                memberNames = memberNames.concat(expandDescriptors(members, sort));
             }
             command += memberNames.join(",");
         }
@@ -2128,6 +2148,7 @@ var __meta__ = {
 
             var measures = options.measures || [];
             var measuresRowAxis = options.measuresAxis === "rows";
+            var sort = options.sort || [];
 
             if (!columns.length && rows.length && (!measures.length || (measures.length && measuresRowAxis))) {
                 columns = rows;
@@ -2140,7 +2161,7 @@ var __meta__ = {
             }
 
             if (columns.length) {
-                command += serializeMembers(columns, !measuresRowAxis ? measures : []);
+                command += serializeMembers(columns, !measuresRowAxis ? measures : [], sort);
             } else if (measures.length && !measuresRowAxis) {
                 command += measures.join(",");
             }
@@ -2151,7 +2172,7 @@ var __meta__ = {
                 command += ", NON EMPTY {";
 
                 if (rows.length) {
-                    command += serializeMembers(rows, measuresRowAxis ? measures : []);
+                    command += serializeMembers(rows, measuresRowAxis ? measures : [], sort);
                 } else {
                     command += measures.join(",");
                 }
