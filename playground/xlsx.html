@@ -5,6 +5,7 @@
     <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
     <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css" rel="stylesheet" />
     <script src="loader.js"></script>
+    <script src="../src/jszip.min.js"></script>
     <script>
         requireSync([
             "../src/jquery",
@@ -14,7 +15,7 @@
     </script>
 </head>
 <body>
-    <h1>JavaScript-only export to Excel via <a href="https://github.com/stephen-hardy/xlsx.js">XLSX.js</a></h1>
+    <h1>JavaScript-only export to Excel</h1>
     <h2>Supported browsers</h2>
     <ul>
       <li>Google Chrome</li>
@@ -58,7 +59,7 @@
       function excel() {
         var grid = $("#grid").data("kendoGrid");
 
-        // use grid.dataSource.data() to export all data and not just the current page
+        /*
         var data = grid.dataSource.view();
 
         var file = {
@@ -108,6 +109,9 @@
         } else {
           this.href = result.href();
         }
+        */
+
+        this.href = kendo.xlsx();
       }
 
       // See: http://goo.gl/qlg5dd
