@@ -1,5 +1,5 @@
 (function(f, define) {
-    define([ "./tile" ], f);
+    define([ ], f);
 })(function() {
 
 (function ($, undefined) {

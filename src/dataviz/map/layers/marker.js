@@ -1,6 +1,5 @@
 (function(f, define){
-    define([ "./base", "../location",
-             "../../../kendo.data", "../../../kendo.tooltip" ], f);
+    define([ ], f);
 })(function(){
 
 (function ($, undefined) {
