@@ -84,4 +84,8 @@ test("removes style attributes of fully selected nodes", function() {
     );
 });
 
+test("removes class attribute", function() {
+    equal(cleanedContent('<p class="red">foo</p>'), '<p>foo</p>');
+});
+
 }());
