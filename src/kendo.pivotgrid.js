@@ -2753,18 +2753,30 @@ var __meta__ = {
             }
         },
 
+        cellInfoByElement: function(element) {
+            element = $(element);
+
+            return this.cellInfo(element.index(), element.parent("tr").index());
+        },
+
         cellInfo: function(columnIndex, rowIndex) {
-            columnIndex = columnIndex || 0;
-            rowIndex = rowIndex || 0;
+            var contentBuilder = this._contentBuilder;
+            var columnInfo = contentBuilder.columnIndexes[columnIndex || 0];
+            var rowInfo = contentBuilder.rowIndexes[rowIndex || 0];
+            var dataIndex;
 
-            if (typeof columnIndex !== "number") {
-                columnIndex = $(columnIndex);
-
-                rowIndex = columnIndex.parent("tr").index();
-                columnIndex = columnIndex.index();
+            if (!columnInfo || !rowInfo) {
+                return null;
             }
 
-            return this._contentBuilder.cellInfo(this.dataSource.data(), columnIndex, rowIndex);
+            dataIndex = (rowInfo.index * contentBuilder.rowLength) + columnInfo.index;
+
+            return {
+                columnTuple: columnInfo.tuple,
+                rowTuple: rowInfo.tuple,
+                measure: columnInfo.measure || rowInfo.measure,
+                dataItem: this.dataSource.view()[dataIndex]
+            };
         },
 
         setDataSource: function(dataSource) {
@@ -3711,41 +3723,20 @@ var __meta__ = {
             this.columnAxis = columnAxis;
             this.rowAxis = rowAxis;
 
+            this.data = data;
+
             this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures.length || 1;
 
             if (!this.rowLength) {
                 this.rowLength = 1;
             }
 
-            var tbody = this._tbody(data);
+            var tbody = this._tbody();
             var colgroup = this._colGroup();
 
             return [
                 element("table", null, [colgroup, tbody])
             ];
-        },
-
-        //TODO: test
-        //TODO: cache data on build() function call
-        //
-        cellInfo: function(data, columnIndex, rowIndex) {
-            var columnInfo = this.columnIndexes[columnIndex];
-            var rowInfo = this.rowIndexes[rowIndex];
-
-            if (!columnInfo || !rowInfo) {
-                return null;
-            }
-
-            return {
-                columnTuple: columnInfo.tuple,
-                rowTuple: rowInfo.tuple,
-                measure: columnInfo.measure || rowInfo.measure,
-                dataItem: this.dataItem(data, rowInfo, columnInfo)
-            };
-        },
-
-        dataItem: function(data, rowInfo, columnInfo) {
-            return data[(rowInfo.index * this.rowLength) + columnInfo.index];
         },
 
         _colGroup: function() {
@@ -3764,16 +3755,14 @@ var __meta__ = {
             return element("colgroup", null, children);
         },
 
-        _tbody: function(data) {
-            var columnAxis = this.columnAxis;
-            var dataItem = data[0];
+        _tbody: function() {
             this.rows = [];
 
-            if (dataItem) {
+            if (this.data[0]) {
                 this.columnIndexes = this._indexes(this.columnAxis);
                 this.rowIndexes = this._indexes(this.rowAxis);
 
-                this._buildRows(data);
+                this._buildRows();
             } else {
                 this.rows.push(element("tr", null, [ element("td", null, [ text("") ]) ]));
             }
@@ -3852,17 +3841,17 @@ var __meta__ = {
             return result;
         },
 
-        _buildRows: function(data) {
+        _buildRows: function() {
             var rowIndexes = this.rowIndexes;
             var length = rowIndexes.length;
             var idx = 0;
 
             for (; idx < length; idx++) {
-                this.rows.push(this._buildRow(data, rowIndexes[idx]));
+                this.rows.push(this._buildRow(rowIndexes[idx]));
             }
         },
 
-        _buildRow: function(data, rowInfo) {
+        _buildRow: function(rowInfo) {
             var startIdx = rowInfo.index * this.rowLength;
             var columnIndexes = this.columnIndexes;
             var length = columnIndexes.length;
@@ -3885,7 +3874,7 @@ var __meta__ = {
                     columnTuple: columnInfo.tuple,
                     rowTuple: rowInfo.tuple,
                     measure: columnInfo.measure || rowInfo.measure,
-                    dataItem: data[startIdx + columnInfo.index]
+                    dataItem: this.data[startIdx + columnInfo.index]
                 });
 
                 cells.push(element("td", attr, [ htmlNode(cellContent) ]));

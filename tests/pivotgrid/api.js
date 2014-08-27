@@ -617,7 +617,7 @@
         });
 
         var cell = pivotgrid.wrapper.find(".k-grid-content").find("table").find("td");
-        var info = pivotgrid.cellInfo(cell);
+        var info = pivotgrid.cellInfoByElement(cell);
 
         equal(info.dataItem, pivotgrid.dataSource.data()[0]);
         equal(info.columnTuple, tuples[0]);
