@@ -203,19 +203,21 @@ var NewLineCommand = Command.extend({
     },
 
     exec: function () {
-        var range = this.getRange(),
-            br = dom.create(RangeUtils.documentFromRange(range), 'br'),
-            filler;
+        var range = this.getRange();
+        var br = dom.create(RangeUtils.documentFromRange(range), 'br');
+        var filler;
+        var browser = kendo.support.browser;
+        var oldIE = browser.msie && browser.version < 11;
 
         range.deleteContents();
         range.insertNode(br);
 
         normalize(br.parentNode);
 
-        if (!kendo.support.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
+        if (!oldIE && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
             // Gecko and WebKit cannot put the caret after only one br.
             filler = br.cloneNode(true);
-            filler.setAttribute('_moz_dirty', '');
+            filler.className = 'k-br';
             dom.insertAfter(filler, br);
         }
 
