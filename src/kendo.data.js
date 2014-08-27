@@ -335,7 +335,7 @@ var __meta__ = {
             var idx = this.indexOf(item);
 
             if( idx !== -1) {
-                this.splice(this.indexOf(item), 1);
+                this.splice(idx, 1);
             }
         },
 
