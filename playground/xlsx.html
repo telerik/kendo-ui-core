@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Export to Excel via XLSX.js</title>
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.416/styles/kendo.default.min.css" rel="stylesheet" />
+    <script src="loader.js"></script>
+    <script>
+        requireSync([
+            "../src/jquery",
+            "../src/kendo.xlsx",
+            "../src/kendo.grid"
+        ]);
+    </script>
+</head>
+<body>
+    <h1>JavaScript-only export to Excel via <a href="https://github.com/stephen-hardy/xlsx.js">XLSX.js</a></h1>
+    <h2>Supported browsers</h2>
+    <ul>
+      <li>Google Chrome</li>
+      <li>Firefox</li>
+      <li>IE10+</li>
+    </ul>
+    <div id="grid" style="height: 365px"></div>
+    <script>
+        $("#grid").kendoGrid({
+          toolbar: '<a download="Contacts.xlsx" class="k-button" id="export">Export</a>',
+          dataSource: {
+              type: "odata",
+              transport: {
+                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+              },
+              pageSize: 10
+          },
+          sortable: true,
+          pageable: {
+              refresh: true,
+              pageSizes: true,
+              buttonCount: 5
+          },
+          columns: [{
+              field: "ContactName",
+              title: "Contact Name",
+              width: 200
+          }, {
+              field: "ContactTitle",
+              title: "Contact Title",
+              width: 250
+          }, {
+              field: "CompanyName",
+              title: "Company Name"
+          }, {
+              field: "Country",
+              width: 150
+          }]
+      }).on("click", "#export", excel);
+
+      function excel() {
+        var grid = $("#grid").data("kendoGrid");
+
+        // use grid.dataSource.data() to export all data and not just the current page
+        var data = grid.dataSource.view();
+
+        var file = {
+          worksheets: [{
+            data: []
+          }],
+          creator: 'John Smith',
+          created: new Date('8/16/2012'),
+          lastModifiedBy: 'Larry Jones',
+          modified: new Date(),
+          activeWorksheet: 0
+        };
+
+        var worksheetData = file.worksheets[0].data;
+        var worksheetDataHeader = [];
+
+        worksheetData.push(worksheetDataHeader);
+
+        for (var ci = 0; ci < grid.columns.length; ci++) {
+          var title = grid.columns[ci].title || grid.columns[ci].field;
+          worksheetDataHeader.push({
+            value: title,
+            autoWidth: true
+          });
+        }
+
+        for (var di = 0; di < data.length; di++) {
+          var dataItem = data[di];
+          var worksheetDataItem = [];
+
+          for (ci = 0; ci < grid.columns.length; ci++) {
+            var column = grid.columns[ci];
+
+            worksheetDataItem.push({
+              value: dataItem.get(column.field)
+            });
+          }
+
+          worksheetData.push(worksheetDataItem);
+        }
+
+        var result = xlsx(file);
+
+        if (navigator.msSaveBlob) {
+          var blob = toBlob(result.base64, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+          navigator.msSaveBlob(blob, this.getAttribute("download"));
+        } else {
+          this.href = result.href();
+        }
+      }
+
+      // See: http://goo.gl/qlg5dd
+    function toBlob(base64, type) {
+      var rawData = base64.substring(base64.indexOf("base64," + 7));
+      var data = atob(rawData);
+      var arr = new Uint8Array(data.length);
+
+      for (var i = 0; i < data.length; ++i) {
+        arr[i] = data.charCodeAt(i);
+      }
+
+      return new Blob([ arr.buffer ], { type: type });
+    }
+    </script>
+</body>
+</html>
