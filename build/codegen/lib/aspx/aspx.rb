@@ -74,6 +74,12 @@ module CodeGen
             CONVERTER_SCRIPT_TEMPLATE = ERB.new('
             AddScript(state, "<%= name %>", convertable.<%= csharp_name %>);')
 
+            CONVERTER_STRING_FUNCTION_TEMPLATE = ERB.new('
+            if(convertable.<%= csharp_name %>.StartsWith("javascript:", StringComparison.InvariantCultureIgnoreCase))
+                AddScript(state, "<%= name %>", convertable.Template.Substring(11).TrimStart());
+            else
+                AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
+
             CONVERTER_EVENT_TEMPLATE = ERB.new('
             AddScript(state, "<%= name %>", convertable.ClientEvents.<%= csharp_name %>);')
 
@@ -257,6 +263,7 @@ module CodeGen
                 def to_converter
                     return CONVERTER_ENUM_PROPERTY_TEMPLATE.result(get_binding) if values
                     return CONVERTER_SCRIPT_TEMPLATE.result(get_binding) if type.instance_of?([].class) && type.length == 1 && (type.include?("Function") || type.include?("ClientEvent"))
+                    return CONVERTER_STRING_FUNCTION_TEMPLATE.result(get_binding) if type.include?('String') && type.include?('Function')
                     return CONVERTER_PROPERTY_TEMPLATE.result(get_binding) if csharp_default
                 end
 
