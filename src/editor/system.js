@@ -743,6 +743,13 @@ var MSWordFormatCleaner = Cleaner.extend({
         } else {
             dom.remove(p.firstChild);
 
+            // check for roman numerals
+            if (p.firstChild.nodeType == 3) {
+                if (/^[ivx]+\.$/i.test(p.firstChild.nodeValue)) {
+                    dom.remove(p.firstChild);
+                }
+            }
+
             if (/^(&nbsp;|\s)+$/i.test(p.firstChild.innerHTML)) {
                 dom.remove(p.firstChild);
             }
