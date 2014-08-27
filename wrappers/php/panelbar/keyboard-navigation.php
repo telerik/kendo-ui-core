@@ -10,8 +10,7 @@ require_once '../lib/Kendo/Autoload.php';
 <?php
     $panelbar = new \Kendo\UI\PanelBar('panelbar');
 
-    $panelbar->attr('accesskey', 'w')
-             ->expandMode("multiple");
+    $panelbar->expandMode("multiple");
 
     $salesforecasts = new \Kendo\UI\PanelBarItem("Sales Forecasts");
     $salesforecasts->addItem(
@@ -51,7 +50,7 @@ require_once '../lib/Kendo/Autoload.php';
 <ul class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>
@@ -127,6 +126,14 @@ require_once '../lib/Kendo/Autoload.php';
         </span>
     </li>
 </ul>
+
+<script>
+    $(document.body).keydown(function (e) {
+        if (e.altKey && e.keyCode == 87) {
+            $("#panelbar").focus();
+        }
+    });
+</script>
 
 <style scoped>
     .demo-section

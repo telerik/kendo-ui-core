@@ -14,7 +14,7 @@
 <c:url value="/resources/web/panelbar/orgFoot.png" var="orgFoot" />
 
 <div class="demo-section">
-	<kendo:panelBar name="panelBar" accesskey="w">
+	<kendo:panelBar name="panelBar">
 		<kendo:panelBar-items>
 			<kendo:panelBar-item  text="Projects">
 				<kendo:panelBar-items>
@@ -48,7 +48,7 @@
 <ul class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>
@@ -124,6 +124,14 @@
         </span>
     </li>
 </ul>
+
+<script>
+    $(document.body).keydown(function (e) {
+        if (e.altKey && e.keyCode == 87) {
+            $("#panelBar").focus();
+        }
+    });
+</script>
 
 <style scoped>
     .demo-section

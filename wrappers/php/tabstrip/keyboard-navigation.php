@@ -9,8 +9,6 @@ require_once '../lib/Kendo/Autoload.php';
 <?php
     $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
 
-    $tabstrip->attr('accesskey', 'w');
-
     // set items
 
     $paris = new \Kendo\UI\TabStripItem();
@@ -92,7 +90,7 @@ require_once '../lib/Kendo/Autoload.php';
 <ul id="keyboard-nav" class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>
@@ -136,6 +134,14 @@ require_once '../lib/Kendo/Autoload.php';
         </span>
     </li>
 </ul>
+
+<script>
+    $(document.body).keydown(function (e) {
+        if (e.altKey && e.keyCode == 87) {
+            $("#tabstrip").focus();
+        }
+    });
+</script>
 
 <style scoped>
     .sunny, .cloudy, .rainy {

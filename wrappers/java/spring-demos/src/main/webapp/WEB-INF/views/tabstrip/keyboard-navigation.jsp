@@ -5,7 +5,7 @@
 
 <demo:header />
 
-<kendo:tabStrip name="tabStrip" accesskey="w">
+<kendo:tabStrip name="tabStrip">
 	<kendo:tabStrip-items>
 	    <kendo:tabStrip-item text="Paris" selected="true">
 			<kendo:tabStrip-item-content>
@@ -58,7 +58,7 @@
 <ul id="keyboard-nav" class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>
@@ -102,6 +102,14 @@
         </span>
     </li>
 </ul>
+
+<script>
+    $(document.body).keydown(function (e) {
+        if (e.altKey && e.keyCode == 87) {
+            $("#tabStrip").focus();
+        }
+    });
+</script>
 
 <style scoped>
 	#forecast {

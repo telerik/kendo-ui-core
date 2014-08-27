@@ -1,6 +1,6 @@
         <div id="example">
             <div class="demo-section k-header">
-                <ul id="panelbar" accesskey="w">
+                <ul id="panelbar">
                     <li>
                         Projects
                         <ul>
@@ -40,7 +40,7 @@
                     <ul class="keyboard-legend">
                         <li>
                             <span class="button-preview">
-                                <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+                                <span class="key-button leftAlign wider">Alt</span>
                                 +
                                 <span class="key-button">w</span>
                             </span>
@@ -137,6 +137,12 @@
                 $(document).ready(function() {
                     $("#panelbar").kendoPanelBar({
                         expandMode: "multiple"
+                    });
+
+                    $(document.body).keydown(function (e) {
+                        if (e.altKey && e.keyCode == 87) {
+                            $("#panelbar").focus();
+                        }
                     });
                 });
             </script>
