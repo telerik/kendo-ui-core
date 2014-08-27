@@ -742,6 +742,11 @@ var MSWordFormatCleaner = Cleaner.extend({
             content = p.firstChild.innerHTML.replace(/^\w+[\.\)](&nbsp;)+ /, "");
         } else {
             dom.remove(p.firstChild);
+
+            if (/^(&nbsp;|\s)+$/i.test(p.firstChild.innerHTML)) {
+                dom.remove(p.firstChild);
+            }
+
             content = p.innerHTML;
         }
 

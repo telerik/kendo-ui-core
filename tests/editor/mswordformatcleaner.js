@@ -100,6 +100,10 @@ test("nested list with more than one root node", function() {
     equal(clean('<p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style=""><span style="">1.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>One</p><p class="MsoListParagraphCxSpFirst" style="margin-left: 0.75in; text-indent: -0.25in;"><span style=""><span style="">1.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>Two</p><p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style=""><span style="">2.<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>Three</p>'), '<ol><li>One<ol><li>Two</li></ol></li><li>Three</li></ol>');
 });
 
+test("nested ordered lists", function() {
+    equal(clean('<p class="MsoListParagraphCxSpFirst" style="text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--[if !supportLists]-->1.<span style="font-size: 7pt; font-family: \'Times New Roman\';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Foo<o:p></o:p></p><p class="MsoListParagraphCxSpMiddle" style="margin-left:72.0pt;mso-add-space: auto;text-indent:-18.0pt;mso-list:l0 level2 lfo1"><!--[if !supportLists]-->a.<span style="font-size: 7pt; font-family: \'Times New Roman\';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Bar<o:p></o:p></p><p class="MsoListParagraphCxSpMiddle" style="text-indent:-18.0pt;mso-list:l0 level1 lfo1"><!--[if !supportLists]-->2.<span style="font-size: 7pt; font-family: \'Times New Roman\';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><!--[endif]-->Bar<o:p></o:p></p>'), '<ol><li>Foo<ol><li>Bar</li></ol></li><li>Bar</li></ol>');
+});
+
 test("titles converted to header", function() {
     equal(clean('<p class="MsoTitle"><span>foo</span></p>'), '<h1><span>foo</span></h1>');
 });
