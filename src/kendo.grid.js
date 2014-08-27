@@ -2494,7 +2494,7 @@ var __meta__ = {
             }
 
             if (isPlainObject(command)) {
-                if (command.className && command.className.split(" ").indexOf(options.className) < 0) {
+                if (command.className && inArray(options.className, command.className.split(" ")) < 0) {
                     command.className += " " + options.className;
                 } else if (command.className === undefined) {
                     command.className = options.className;
@@ -2513,7 +2513,7 @@ var __meta__ = {
                     if (typeof command.attr === STRING) {
                         attributeClassMatch = command.attr.match(/class="(.+?)"/);
 
-                        if (attributeClassMatch && command.className.split(" ").indexOf(attributeClassMatch[1]) < 0) {
+                        if (attributeClassMatch && inArray(attributeClassMatch[1], command.className.split(" ")) < 0) {
                             command.className += " " + attributeClassMatch[1];
                         }
                     }
