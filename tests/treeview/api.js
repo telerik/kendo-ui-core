@@ -1012,7 +1012,7 @@
         ok(treeview.find(":checkbox:first").prop("indeterminate"));
     });
 
-    test("destroy demoves datasource handlers", function() {
+    test("destroy removes datasource handlers", function() {
         var dataSource = new kendo.data.HierarchicalDataSource();
 
         createTreeView({ dataSource: dataSource });

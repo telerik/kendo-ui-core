@@ -2084,7 +2084,7 @@ var __meta__ = {
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, model, data;
+            var that = this, data;
 
             if (options) {
                 data = options.data;
@@ -2142,6 +2142,7 @@ var __meta__ = {
             model = that.reader.model || {};
 
             that._detachObservableParents();
+
             that._data = that._observe(that._data);
             that._online = true;
 
@@ -3843,7 +3844,7 @@ var __meta__ = {
         append: function(model) {
             this._initChildren();
             this.loaded(true);
-            this.children.add(model);
+            return this.children.add(model);
         },
 
         hasChildren: false,
@@ -3946,8 +3947,8 @@ var __meta__ = {
         },
 
         _preprocessFlatData: function(options) {
-            var data = options.data;
-            var schema = options.schema;
+            var data = options && options.data;
+            var schema = options && options.schema;
             var model = schema && schema.model;
             var idField = model && model.id;
             var parentField = model && model.parentId;
@@ -3970,7 +3971,6 @@ var __meta__ = {
                 options.data = hash[null] || hash[0];
 
                 model.children = "items";
-                delete model.parentId;
             }
         },
 
@@ -4004,6 +4004,25 @@ var __meta__ = {
 
         data: dataMethod("data"),
 
+        _parentId: function() {
+            return kendo.getter("schema.model.parentId", true)(this.options);
+        },
+
+        _addParentId: function(model) {
+            var parentNode = this.parent();
+            var parentIdField = this._parentId();
+
+            if (parentIdField) {
+                if (parentNode && parentNode._initChildren) {
+                    model[parentIdField] = parentNode.id;
+                } else {
+                    model[parentIdField] = 0;
+                }
+            }
+
+            return model;
+        },
+
         insert: function(index, model) {
             var parentNode = this.parent();
 
@@ -4012,7 +4031,7 @@ var __meta__ = {
                 parentNode._initChildren();
             }
 
-            return DataSource.fn.insert.call(this, index, model);
+            return DataSource.fn.insert.call(this, index, this._addParentId(model));
         },
 
         _find: function(method, value) {

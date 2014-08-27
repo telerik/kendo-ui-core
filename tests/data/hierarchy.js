@@ -1055,6 +1055,27 @@ test("parentId builds hierarchy from flat table", function() {
     equal(dataSource.get(2).parentNode(), dataSource.get(1));
 });
 
+test("adding items to parent node set the parentId", function() {
+    var dataSource = new HierarchicalDataSource({
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    dataSource.read();
+
+    var model = dataSource.add({ id: 3});
+
+    equal(model.parentId, 0);
+
+    model = model.append({ id: 4 });
+
+    equal(model.parentId, 3);
+});
+
 
 module("HierarchicalDataSource : parameterMap", {
     setup: function() {
