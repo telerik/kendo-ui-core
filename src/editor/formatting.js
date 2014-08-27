@@ -202,12 +202,13 @@ var CleanFormatCommand = Command.extend({
                 return;
             }
 
-            if (node.nodeType == 1) {
+            if (node.nodeType == 1 && !dom.insignificant(node)) {
                 for (var i = node.childNodes.length-1; i >= 0; i--) {
                     clean(node.childNodes[i]);
                 }
 
                 node.removeAttribute("style");
+                node.removeAttribute("class");
             }
 
             if (remove.indexOf(dom.name(node)) > -1) {
