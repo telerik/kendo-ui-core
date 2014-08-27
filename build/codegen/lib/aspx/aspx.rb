@@ -76,7 +76,7 @@ module CodeGen
 
             CONVERTER_STRING_FUNCTION_TEMPLATE = ERB.new('
             if(convertable.<%= csharp_name %>.StartsWith("javascript:", StringComparison.InvariantCultureIgnoreCase))
-                AddScript(state, "<%= name %>", convertable.Template.Substring(11).TrimStart());
+                AddScript(state, "<%= name %>", convertable.<%= csharp_name %>.Substring(11).TrimStart());
             else
                 AddProperty(state, "<%= name %>", convertable.<%= csharp_name %>, <%= csharp_default %>);')
 
