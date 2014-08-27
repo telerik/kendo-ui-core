@@ -9917,7 +9917,9 @@ var __meta__ = {
 
             while (overlays.length) {
                 overlay = highlight._overlays.pop();
-                overlay.parentNode.removeChild(overlay);
+                if (overlay.parentNode) {
+                    overlay.parentNode.removeChild(overlay);
+                }
             }
 
             if (points) {
