@@ -6,7 +6,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <% Html.Kendo().TabStrip()
         .Name("tabstrip")
-        .HtmlAttributes(new { accesskey = "w" })
         .Items(tabstrip =>
         {
             tabstrip.Add().Text("Paris")
@@ -63,7 +62,7 @@
 <ul id="keyboard-nav" class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider"><a target="_blank" href="http://en.wikipedia.org/wiki/Access_key">Access key</a></span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>

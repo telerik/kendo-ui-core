@@ -2,7 +2,7 @@
 @(Html.Kendo().PanelBar()
     .Name("panelbar")
     .ExpandMode(PanelBarExpandMode.Multiple)
-    .HtmlAttributes(new { style = "width:300px", accesskey = "w" })
+    .HtmlAttributes(new { style = "width:300px" })
     .Items(panelbar =>
     {
         panelbar.Add().Text("Projects")
@@ -40,7 +40,7 @@
 <ul class="keyboard-legend">
     <li>
         <span class="button-preview">
-            <span class="key-button leftAlign wider">Access key</span>
+            <span class="key-button leftAlign wider">Alt</span>
             +
             <span class="key-button">w</span>
         </span>
