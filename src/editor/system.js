@@ -490,7 +490,38 @@ var Clipboard = Class.extend({
         this._contentModification($.noop, $.noop);
     },
 
+    _handleImagePaste: function(e) {
+        if (!('FileReader' in window)) {
+            return;
+        }
+
+        var that = this;
+        var clipboardData = e.clipboardData || e.originalEvent.clipboardData;
+        var items = clipboardData.items;
+
+        if (!items.length) {
+            return;
+        }
+
+        // TODO: check content type
+
+        var blob = items[0].getAsFile();
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            that.paste('<img src="' + e.target.result + '" />');
+        };
+
+        reader.readAsDataURL(blob);
+
+        return true;
+    },
+
     onpaste: function(e) {
+        if (this._handleImagePaste(e)) {
+            return;
+        }
+
         this._contentModification(
             function beforePaste(editor, range) {
                 var clipboardNode = dom.create(editor.document, 'div', {
