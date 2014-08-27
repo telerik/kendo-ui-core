@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ ], f);
+    define([ "./location", "../../kendo.dataviz.drawing" ], f);
 })(function(){
 
 (function ($, undefined) {
