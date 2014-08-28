@@ -793,19 +793,29 @@ var __meta__ = {
         },
 
         prev: function() {
-            var that = this;
+            var that = this,
+                prevPage = that.page - 1;
 
-            that._content.paneMoved(RIGHT_SWIPE, undefined, function(eventData) {
-                return that.trigger(CHANGING, eventData);
-            });
+            if (that._content instanceof VirtualScrollViewContent) {
+                that._content.paneMoved(RIGHT_SWIPE, undefined, function(eventData) {
+                    return that.trigger(CHANGING, eventData);
+                });
+            } else if (prevPage > -1) {
+                that.scrollTo(prevPage);
+            }
         },
 
         next: function() {
-            var that = this;
+            var that = this,
+                nextPage = that.page + 1;
 
-            that._content.paneMoved(LEFT_SWIPE, undefined, function(eventData) {
-                return that.trigger(CHANGING, eventData);
-            });
+            if (that._content instanceof VirtualScrollViewContent) {
+                that._content.paneMoved(LEFT_SWIPE, undefined, function(eventData) {
+                    return that.trigger(CHANGING, eventData);
+                });
+            } else if (nextPage < that._content.pageCount) {
+                that.scrollTo(nextPage);
+            }
         },
 
         setDataSource: function(dataSource) {
