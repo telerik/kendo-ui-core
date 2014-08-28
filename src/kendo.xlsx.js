@@ -12,14 +12,14 @@ var __meta__ = {
 
 (function(kendo, JSZip){
 
-var RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+var RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
            '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
                '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/>' +
                '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>' +
                '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
             '</Relationships>';
 
-var CORE = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+var CORE = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
            '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '+
                'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" ' +
                'xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
@@ -29,7 +29,7 @@ var CORE = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
                 '<dcterms:modified xsi:type="dcterms:W3CDTF">{3}</dcterms:modified>' +
            '</cp:coreProperties>';
 
-var THEME = '<?xml version="1.0" encoding="UTF-8"?>' +
+var THEME = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
             '<a:theme xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" name="Office Theme">' +
                 '<a:themeElements>' +
                     '<a:clrScheme name="Office">' +
@@ -313,7 +313,7 @@ var THEME = '<?xml version="1.0" encoding="UTF-8"?>' +
                 '<a:extraClrSchemeLst />' +
             '</a:theme>';
 
-var APP = '<?xml version="1.0" encoding="UTF-8"?>' +
+var APP = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
           '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">' +
               '<Application>Microsoft Excel</Application>' +
               '<DocSecurity>0</DocSecurity>' +
@@ -329,7 +329,7 @@ var APP = '<?xml version="1.0" encoding="UTF-8"?>' +
                   '</vt:vector>' +
               '</HeadingPairs>' +
               '<TitlesOfParts>' +
-                  '<vt:vector size="3" baseType="lpstr">' +
+                  '<vt:vector size="{0}" baseType="lpstr">' +
                       '<vt:lpstr>Sheet1</vt:lpstr>' +
                   '</vt:vector>' +
               '</TitlesOfParts>' +
@@ -339,7 +339,7 @@ var APP = '<?xml version="1.0" encoding="UTF-8"?>' +
               '<AppVersion>14.0300</AppVersion>' +
           '</Properties>';
 
-var CONTENT_TYPES = '<?xml version="1.0" encoding="UTF-8"?>' +
+var CONTENT_TYPES = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
                     '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
                         '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />' +
                         '<Default Extension="xml" ContentType="application/xml" />' +
@@ -349,7 +349,38 @@ var CONTENT_TYPES = '<?xml version="1.0" encoding="UTF-8"?>' +
                         '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml" />' +
                         '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml" />' +
                         '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" />' +
-                    '</Types>' +
+                    '</Types>';
+
+var WORKBOOK = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+               '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+                   '<fileVersion appName="xl" lastEdited="5" lowestEdited="5" rupBuild="9303" />' +
+                   '<workbookPr defaultThemeVersion="124226" />' +
+                   '<bookViews>' +
+                       '<workbookView xWindow="240" yWindow="45" windowWidth="18195" windowHeight="7995" />' +
+                   '</bookViews>' +
+                   '<sheets>' +
+                       '<sheet name="Sheet1" sheetId="1" r:id="rId1" />' +
+                   '</sheets>' +
+                   '<calcPr calcId="145621" />' +
+               '</workbook>';
+
+var WORKSHEET = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+                '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">' +
+                    '<dimension ref="A1" />' +
+                    '<sheetViews>' +
+                        '<sheetView tabSelected="1" workbookViewId="0" />' +
+                    '</sheetViews>' +
+                    '<sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25" />' +
+                    '<sheetData />' +
+                    '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
+                '</worksheet>';
+
+var WORKBOOK_RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+                    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+                        '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
+                        '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/theme" Target="theme/theme1.xml" />' +
+                        '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml" />' +
+                    '</Relationships>';
 
 function worksheet(options) {
 
@@ -365,6 +396,7 @@ kendo.xlsx = function(options) {
         new Date().toISOString(),
         new Date().toISOString()
     ));
+
     docProps.file("app.xml", kendo.format(APP,
         1
     ));
@@ -375,6 +407,13 @@ kendo.xlsx = function(options) {
     var xl = zip.folder("xl");
     var theme = xl.folder("theme");
     theme.file("theme1.xml", THEME);
+
+    var xlRels = xl.folder("_rels");
+    xlRels.file("workbook.xml.rels", WORKBOOK_RELS);
+
+    xl.file("workbook.xml", WORKBOOK);
+    var worksheets = xl.folder("worksheets");
+    worksheets.file("sheet1.xml", WORKSHEET);
 
     zip.file("[Content_Types].xml", CONTENT_TYPES);
 
