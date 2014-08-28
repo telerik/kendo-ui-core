@@ -112,6 +112,12 @@
             });
             page._content = content;
             pageTree.addPage(self.attach(page));
+
+            // canvas-like coord. system.  (0,0) is upper-left.
+            // text must be vertically mirorred before drawing.
+            // XXX: configurable page size.
+            page._transform(1, 0, 0, -1, 0, mm2pt(297));
+
             return page;
         };
 

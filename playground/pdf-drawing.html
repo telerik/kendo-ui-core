@@ -13,28 +13,52 @@
   </head>
   <body>
 
-    <div id="surface"></div>
+    <div id="surface" style="border: 1px solid black"></div>
 
     <script>
-        var d = kendo.dataviz.drawing;
-        var geo = kendo.dataviz.geometry;
+      kendo.PDF.loadFonts([ "./font.ttf" ], function(){
+          var d = kendo.dataviz.drawing;
+          var geo = kendo.dataviz.geometry;
 
-        var arcGeometry = new geo.Arc([100, 100], {
-            radiusX: 10,
-            radiusY: 10,
-            startAngle: 45,
-            endAngle: 135
-        });
-        var arc = new d.Arc(arcGeometry).stroke("red", 1);
+          var surface = d.Surface.create($("#surface"), {
+              width: 600,
+              height: 400,
+              type: "pdf",
+          });
 
-        var surface = d.Surface.create($("#surface"), {
-            type: "pdf",
-        });
-        surface.draw(arc);
+          var a1 = 40, a2 = 140;
+          var b1 = -40, b2 = -140;
+          for (var i = 0; i < 60; i += 2.5) {
+              var arcGeometry = new geo.Arc([100, 100], {
+                  radiusX: i,
+                  radiusY: i,
+                  startAngle: a1,
+                  endAngle: a2
+              });
+              var arc = new d.Arc(arcGeometry).stroke("red", 1);
+              surface.draw(arc);
+              var arcGeometry = new geo.Arc([100, 100], {
+                  radiusX: i,
+                  radiusY: i,
+                  startAngle: b1,
+                  endAngle: b2,
+                  anticlockwise: true
+              });
+              var arc = new d.Arc(arcGeometry).stroke("red", 1);
+              surface.draw(arc);
 
-        var position = new geo.Point(10, 10);
-        var text = new d.Text("Foo", position);
-        surface.draw(text);
+              a1 += 5; a2 += 5;
+              b1 += 5; b2 += 5;
+          }
+
+          var position = new geo.Point(100, 100);
+          var text = new d.Text("DAS\nTEXT ☺", position);
+          surface.draw(text);
+
+          var circleGeometry = new geo.Circle([100, 100], 60);
+          var circle = new d.Circle(circleGeometry).stroke("red", 1);
+          surface.draw(circle);
+      });
     </script>
 
   </body>
