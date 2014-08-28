@@ -571,12 +571,7 @@ var __meta__ = {
 
         _onReset: function() {
             this.pageCount = ceil(this.dataSource.total() / this.options.itemsPerPage);
-
-            if (this.element.is(":visible")) {
-                this._resetPages();
-            } else {
-                this._widgetNeedsRefresh = true;
-            }
+            this._resetPages();
         },
 
         _onEndReached: function() {
