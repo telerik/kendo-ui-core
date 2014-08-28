@@ -307,7 +307,9 @@
                                         val = ngModel.$modelValue;
                                     }
                                     setTimeout(function(){
-                                        widget.value(val);
+                                        if (widget) {
+                                            widget.value(val);    
+                                        }
                                     }, 0);
                                 };
 
