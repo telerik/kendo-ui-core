@@ -28,10 +28,11 @@
 
     var createDataSource = (function() {
         var types = {
-            TreeView  : 'HierarchicalDataSource',
-            Scheduler : 'SchedulerDataSource',
-            PanelBar  : '$PLAIN',
-            Menu      : "$PLAIN"
+            TreeView    : 'HierarchicalDataSource',
+            Scheduler   : 'SchedulerDataSource',
+            PanelBar    : '$PLAIN',
+            Menu        : "$PLAIN",
+            ContextMenu : "$PLAIN"
         };
         var toDataSource = function(dataSource, type) {
             if (type == '$PLAIN') {
