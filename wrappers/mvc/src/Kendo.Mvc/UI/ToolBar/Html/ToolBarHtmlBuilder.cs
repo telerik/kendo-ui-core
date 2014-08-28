@@ -24,7 +24,8 @@ namespace Kendo.Mvc.UI
         public IHtmlNode Build()
         {
             var html = CreateElement();
-            html.Attribute("data-role", "toolbar")
+            html.Attributes(component.HtmlAttributes)
+                .Attribute("data-role", "toolbar")
                 .Attribute("id", component.Id);
 
             return html;
