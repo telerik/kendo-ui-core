@@ -658,6 +658,16 @@
         _transform: function(a, b, c, d, e, f) {
             this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm", NL);
         },
+        _translate: function(dx, dy) {
+            this._transform(1, 0, 0, 1, dx, dy);
+        },
+        _scale: function(sx, sy) {
+            this._transform(sx, 0, 0, sy, 0, 0);
+        },
+        _rotate: function(angle) {
+            var cos = Math.cos(angle), sin = Math.sin(angle);
+            this._transform(cos, sin, -sin, cos, 0, 0);
+        },
         _beginText: function() {
             this._textMode = true;
             this._out("BT", NL);
@@ -725,10 +735,10 @@
         _setMitterLimit: function(mitterLimit) {
             this._out(mitterLimit, " M", NL);
         },
-        _saveContext: function() {
+        _save: function() {
             this._out("q", NL);
         },
-        _restoreContext: function() {
+        _restore: function() {
             this._out("Q", NL);
         },
         _getGSResource: function(props) {
@@ -737,6 +747,71 @@
             var name = "GS" + this._rcount++;
             this._gsResources[name] = this._pdf.attach(gs);
             return PDFName.get(name);
+        },
+
+        // paths
+        _moveTo: function(x, y) {
+            this._out(x, " ", y, " m", NL);
+        },
+        _lineTo: function(x, y) {
+            this._out(x, " ", y, " l", NL);
+        },
+        _bezier: function(x1, y1, x2, y2, x3, y3) {
+            this._out(x1, " ", y1, " ", x2, " ", y2, " ", x3, " ", y3, " c", NL);
+        },
+        _bezier1: function(x1, y1, x3, y3) {
+            this._out(x1, " ", y1, " ", x3, " ", y3, " y", NL);
+        },
+        _bezier2: function(x2, y2, x3, y3) {
+            this._out(x2, " ", y2, " ", x3, " ", y3, " v", NL);
+        },
+        _close: function() {
+            this._out("h", NL);
+        },
+        _rect: function(x, y, w, h) {
+            this._out(x, " ", y, " ", w, " ", h, " re", NL);
+        },
+        _ellipse: function(x, y, rx, ry) {
+            function X(v) { return x + v; }
+            function Y(v) { return y + v; }
+
+            // how to get to the "magic number" is explained here:
+            // http://www.whizkidtech.redprince.net/bezier/circle/kappa/
+            var k = 0.5522847498307936;
+
+            this._moveTo(X(0), Y(ry));
+            this._bezier(
+                X(rx * k) , Y(ry),
+                X(rx)     , Y(ry * k),
+                X(rx)     , Y(0)
+            );
+            this._bezier(
+                X(rx)     , Y(-ry * k),
+                X(rx * k) , Y(-ry),
+                X(0)      , Y(-ry)
+            );
+            this._bezier(
+                X(-rx * k) , Y(-ry),
+                X(-rx)     , Y(-ry * k),
+                X(-rx)     , Y(0)
+            );
+            this._bezier(
+                X(-rx)     , Y(ry * k),
+                X(-rx * k) , Y(ry),
+                X(0)       , Y(ry)
+            );
+        },
+        _circle: function(x, y, r) {
+            this._ellipse(x, y, r, r);
+        },
+        _stroke: function() {
+            this._out("S", NL);
+        },
+        _closeStroke: function() {
+            this._out("s", NL);
+        },
+        _fill: function() {
+            this._out("f", NL);
         }
     }, PDFDictionary);
 
