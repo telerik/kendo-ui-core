@@ -1,0 +1,150 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>pivot columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.xml.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivotgrid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.window.js"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivot.configurator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pivot.fieldmenu.js"></script>
+        <script src="../src/kendo.tooltip.js"></script>
+
+        <script src="../src/cultures/kendo.culture.bg-BG.js"></script>
+
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <style>
+            html
+            {
+                font: 12px sans-serif;
+            }
+            .filter-container {
+                overflow: auto;
+                max-height: 300px;
+                min-height: 150px;
+                width: 200px;
+            }
+            .k-treeview .k-group {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pivotgrid"></div>
+
+        <script id="dataCellTemplate" type="text/x-kendo-template">
+            <span style='#: columnTuple.members[0].name === "[Date].[Calendar].[Year].&[2005]" ? "border:1px solid red" : "" #'>
+                #: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #
+            </span>
+        </script>
+
+        <script id="columnTemplate" type="text/x-kendo-template">
+            <span style='#: member.name === "[Date].[Calendar].[Year].&[2005]" ? "border:1px solid red" : "" #'>
+                <em>#: member.caption #</em>
+            </span>
+        </script>
+
+        <script id="rowTemplate" type="text/x-kendo-template">
+            <span style='#: member.name === "[Product].[Category].[Category].&[Bikes]" ? "border:1px solid blue" : "" #'>
+                <em>#: member.caption #</em>
+            </span>
+        </script>
+
+        <script id="membersTemplate" type="text/x-kendo-template">
+            # for (var idx = 0, length = data.length; idx < length; idx++) { #
+                <dd>#: data[idx].name #</dd>
+            # } #
+        </script>
+
+        <script id="tooltipTemplate" type="text/x-kendo-template">
+            # var info = getInfo(target); #
+
+            <dl>
+                <dt>Column Tuple</dt>
+                #= membersTemplate(info.columnTuple.members) #
+            </dl>
+            <dl>
+                <dt>Row Tuple</dt>
+                #= membersTemplate(info.rowTuple.members) #
+            </dl>
+            <dl>
+                <dt>Measure</dt>
+                <dd>#: info.measure #</dd>
+            </dl>
+
+            <dl>
+                <dt>Data item</dt>
+                <dd>Value: #: info.dataItem.value#</dd>
+                <dd>FmtValue: #: info.dataItem.fmtValue#</dd>
+            </dl>
+        </script>
+
+        <script>
+            kendo.culture("bg-BG");
+
+            var membersTemplate = kendo.template($("#membersTemplate").html());
+
+            $(function() {
+                var pivot = $("#pivotgrid").kendoPivotGrid({
+                    filterable: true,
+                    dataCellTemplate: $("#dataCellTemplate").html(),
+                    columnHeaderTemplate: $("#columnTemplate").html(),
+                    rowHeaderTemplate: $("#rowTemplate").html(),
+                    dataSource: {
+                        type: "xmla",
+                        columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                        rows: [ { name: "[Product].[Category]", expand: true } ],
+                        measures: ["[Measures].[Internet Order Lines Count]", "[Measures].[Internet Total Sales]"],
+                        transport: {
+                            connection: {
+                                catalog: "adventure works internet sales model",
+                                cube: "adventure works internet sales model"
+                            },
+                            read: {
+                                url: "http://krustev:8080/olap/msmdpump.dll",
+                                dataType: "text",
+                                contentType: "text/xml",
+                                type: "POST"
+                            }
+                        },
+                        schema: {
+                            type: "xmla"
+                        },
+                        error: function(e) {
+                           alert("error: " + kendo.stringify(e.errors[0]));
+                        }
+                    }
+                }).data("kendoPivotGrid");
+
+                $("#pivotgrid").kendoTooltip({
+                    filter: ".k-grid-content td",
+                    content: kendo.template($("#tooltipTemplate").html()),
+                    width: 350,
+                    height: 300,
+                    position: "top"
+                });
+            });
+
+            function getInfo(cell) {
+                return $("#pivotgrid").data("kendoPivotGrid").cellInfoByElement(cell);
+            }
+        </script>
+    </body>
+</html>
