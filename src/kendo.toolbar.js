@@ -280,7 +280,7 @@ var __meta__ = {
                 if (options.mobile) {
                     element.html('<span class="km-text">' + options.text + "</span>");
                 } else {
-                    element.text(options.text);
+                    element.html(options.text);
                 }
             }
 
@@ -311,7 +311,7 @@ var __meta__ = {
                 if (options.mobile) {
                     element.html('<span class="km-text">' + options.text + "</span>");
                 } else {
-                    element.text(options.text);
+                    element.html(options.text);
                 }
             }
 
