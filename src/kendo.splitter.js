@@ -349,6 +349,10 @@ var __meta__ = {
                         catIconIf("k-collapse-next", nextCollapsible && !nextCollapsed && !prevCollapsed) +
                         catIconIf("k-expand-next", nextCollapsible && nextCollapsed && !prevCollapsed)
                     );
+
+            if (!draggable && !prevCollapsible && !nextCollapsible) {
+                splitbar.removeAttr("tabindex");
+            }
         },
         _updateSplitBars: function() {
             var that = this;

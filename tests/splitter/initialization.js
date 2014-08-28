@@ -114,6 +114,17 @@
         equal(innerSplitter.find(">div:first").height(), 50)
     });
 
+    test("splibars between non-resizable and non-collapsible panes do not have a tabindex", function () {
+        splitter = create({
+            panes: [
+                { collapsible: false, resizable: false },
+                { collapsible: false, resizable: false }
+            ]
+        });
+
+        ok(typeof splitter.dom.find(".k-splitbar").attr("tabindex") == "undefined");
+    });
+
 //    test("initialization filters out script blocks", function() {
 //        var dom = $("<div><div /><div /><script><\/script></div>");
 
