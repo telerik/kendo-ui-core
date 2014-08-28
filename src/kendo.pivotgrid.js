@@ -3219,7 +3219,6 @@ var __meta__ = {
             var cellIdx;
             var cells;
             var cell;
-            var attrName = kendo.attr("tuple-all");
 
             for (; rowIdx < rowsLength; rowIdx++) {
                 row = rows[rowIdx];
@@ -3236,7 +3235,7 @@ var __meta__ = {
                 for (; cellIdx < cellsLength; cellIdx++) {
                     cell = cells[cellIdx];
 
-                    if (cell.attr[attrName]) {
+                    if (cell.tupleAll) {
                         cell.attr.rowspan = row.rowspan;
                     }
                 }
@@ -3455,8 +3454,7 @@ var __meta__ = {
                 metadata.maxMembers = metadata.members;
             }
 
-            (allCell || cell).attr[kendo.attr("tuple-all")] = true;
-            //TODO: refactor and remove this
+            (allCell || cell).tupleAll = true;
 
             return row;
         }
