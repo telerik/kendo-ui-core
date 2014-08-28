@@ -123,6 +123,51 @@ var getKendoFile = (function() {
             });
         }),
 
+        buildOwnSource: cachedProperty("buildOwnSource", function(){
+            if (this.isBundle()) return "";
+            var my_code = "";
+            var ast = this.getAMDFactory().factory;
+            if (ast.body.length > 0) {
+                my_code = this.getOrigCode();
+
+                var replacements = [];
+                replacements.push(
+                    { begin : 0,
+                      end   : ast.body[0].start.pos,
+                      text  : ""
+                    },
+                    { begin : ast.body[ast.body.length - 1].end.endpos,
+                      end   : my_code.length,
+                      text  : "" }
+                );
+
+                walkAST(ast, function(node){
+                    if (isMetaNode(node)) {
+                        replacements.push({
+                            begin : node.start.pos,
+                            end   : node.end.endpos,
+                            text  : ""
+                        });
+                        return true;
+                    }
+                    if (node instanceof U2.AST_Return &&
+                        (/^return (window\.)?kendo/.test(node.print_to_string()))) {
+                        replacements.push({
+                            begin : node.start.pos,
+                            end   : node.end.endpos,
+                            text  : ""
+                        });
+                        return true;
+                    }
+                    if (node instanceof U2.AST_Statement && node !== ast)
+                        return true; // don't dive
+                });
+
+                my_code = replaceInString(my_code, replacements);
+            }
+            return my_code;
+        }),
+
         // Generates the complete (readable) source of this component.
         // Merge any subfiles, and remove them from the `define` list,
         // leaving there only other toplevel components.  Drops
@@ -203,14 +248,9 @@ var getKendoFile = (function() {
             return this._source_map.toString();
         }),
 
-        getFullAST: cachedProperty("getFullAST", function(){
-            var self = this;
-            if (self.isSubfile()) {
-                throw new Error("getFullAST doesn't make sense for subfiles: " + self.filename());
-            }
-            var deps = this.getCompFiles();
+        _getFullAST: function(withoutDeps){
+            var deps = withoutDeps ? [] : this.getCompFiles();
             var ast = this.getAMDFactory().factory;
-            if (deps.length == 0) return ast;
             ast = cloneAST(ast);
             ast.transform(new U2.TreeTransformer(function(node, descend){
                 if (node === ast) {
@@ -232,60 +272,26 @@ var getKendoFile = (function() {
                     return node;
             }));
             return ast;
+        },
+
+        getFullAST: cachedProperty("getFullAST", function(){
+            return this._getFullAST(false);
+        }),
+
+        getFullAST_noDeps: cachedProperty("getFullAST_noDeps", function(){
+            return this._getFullAST(true);
         }),
 
         getFullCode: cachedProperty("getFullCode", function() {
-            var self = this;
-            if (self.isSubfile()) {
-                throw new Error("getFullCode doesn't make sense for subfiles: " + self.filename());
-            }
-
-            var my_code = "";
-            var ast = this.getAMDFactory().factory;
-            if (ast.body.length > 0) {
-                my_code = this.getOrigCode();
-
-                var replacements = [];
-                replacements.push(
-                    { begin : 0,
-                      end   : ast.body[0].start.pos,
-                      text  : ""
-                    },
-                    { begin : ast.body[ast.body.length - 1].end.endpos,
-                      end   : my_code.length,
-                      text  : "" }
-                );
-
-                walkAST(ast, function(node){
-                    if (isMetaNode(node)) {
-                        replacements.push({
-                            begin : node.start.pos,
-                            end   : node.end.endpos,
-                            text  : ""
-                        });
-                        return true;
-                    }
-                    if (node instanceof U2.AST_Return &&
-                        (/^return (window\.)?kendo/.test(node.print_to_string()))) {
-                        replacements.push({
-                            begin : node.start.pos,
-                            end   : node.end.endpos,
-                            text  : ""
-                        });
-                        return true;
-                    }
-                    if (node instanceof U2.AST_Statement && node !== ast)
-                        return true; // don't dive
-                });
-
-                my_code = replaceInString(my_code, replacements);
+            if (this.isSubfile()) {
+                throw new Error("getFullCode doesn't make sense for subfiles: " + this.filename());
             }
 
             var files = this.getCompFiles().map(function(f){
                 var comp = getKendoFile(f);
                 return comp.getMainCode();
             });
-            files.push(my_code);
+            files.push(this.buildOwnSource());
 
             return files.join("\n\n").trim();
         }),
@@ -396,7 +402,7 @@ function replaceInString(str, replacements) {
 };
 
 function cachedProperty(name, fetcher) {
-    name = "_" + name;
+    name = "___" + name;
     return function() {
         var self = this;
         if (self[name] != null)
@@ -700,29 +706,14 @@ function loadComponents(files, maxLevel) {
 }
 
 function bundleFiles_getMinAST(files) {
-    var code = loadComponents(files).reduce(function(a, f){
+    var code = [];
+    loadComponents(files).forEach(function(f){
         var comp = getKendoFile(f);
-        if (!comp.isSubfile() && !comp.isBundle()) {
-            var ast = comp.buildMinAST();
-            ast = walkAST(ast, findDefine).factory;
-            var body = ast.body.filter(function(node){ return !(node instanceof U2.AST_EmptyStatement) });
-            if (body[0] instanceof U2.AST_Return
-                && body[0].value instanceof U2.AST_Seq
-                && body[0].value.car instanceof U2.AST_Call
-                && body[0].value.cdr.print_to_string() == "window.kendo") {
-                a.push(new U2.AST_SimpleStatement({ body: body[0].value.car }));
-            } else {
-                a.push(new U2.AST_SimpleStatement({
-                    body: new U2.AST_Call({
-                        expression: ast,
-                        args: [],
-                    })
-                }));
-            }
-        }
-        return a;
-    }, []);
-    return get_wrapper().wrap([], { body: code });
+        var ast = comp.getFullAST_noDeps();
+        code.push.apply(code, ast.body);
+    });
+    var min = minify(new U2.AST_Toplevel({ body: code }));
+    return get_wrapper().wrap([], min);
 }
 
 // makes a bundle loading files and any dependencies in the right order
@@ -732,9 +723,9 @@ function bundleFiles(files, filename, min) {
         var ast = bundleFiles_getMinAST(files);
         var map = U2.SourceMap({
             file: filename,
-            // orig_line_diff: 8,
-            // dest_line_diff: 8,
-            root: "../../src/" // XXX: what's the source map root?
+            orig_line_diff: 8,
+            dest_line_diff: 8,
+            root: "../src/js/"
         });
         code = ast.print_to_string({ source_map: map });
         return {
@@ -743,13 +734,9 @@ function bundleFiles(files, filename, min) {
         };
     }
     else {
-        var code = loadComponents(files).reduce(function(a, f){
-            var comp = getKendoFile(f);
-            if (!comp.isSubfile() && !comp.isBundle()) {
-                a.push(comp.getFullCode());
-            }
-            return a;
-        }, []).join("\n\n");
+        var code = loadComponents(files).map(function(f){
+            return getKendoFile(f).buildOwnSource();
+        }).join("\n\n");
         return {
             code: wrapAMD([], code)
         };
