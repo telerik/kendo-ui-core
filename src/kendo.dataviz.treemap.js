@@ -387,6 +387,7 @@ var __meta__ = {
         },
 
         layoutRow: function(items, width, coord) {
+            console.log(this.layoutHorizontal());
             if (this.layoutHorizontal()) {
                 return this.layoutV(items, width, coord);
             } else {
@@ -451,10 +452,10 @@ var __meta__ = {
             var totalArea = this._totalArea(items),
                 top =  0;
 
-            width = math.round(totalArea / width);
+            width = round(totalArea / width);
 
             for (var i = 0; i < items.length; i++) {
-                var height = math.round(items[i].area / width);
+                var height = round(items[i].area / width);
                 items[i].coord = {
                     height: height,
                     width: width,
@@ -484,14 +485,14 @@ var __meta__ = {
         layoutH: function(items, width, coord) {
             var totalArea = this._totalArea(items);
 
-            var height = math.round(totalArea / width),
+            var height = round(totalArea / width),
                 top = coord.top,
                 left = 0;
 
             for (var i=0; i<items.length; i++) {
                 items[i].coord = {
                     height: height,
-                    width: math.round(items[i].area / height),
+                    width: round(items[i].area / height),
                     top: top,
                     left: coord.left + left
                 };
@@ -537,8 +538,7 @@ var __meta__ = {
         htmlSize: function(root) {
             var rootElement = this._getByUid(root.dataItem.uid);
             var htmlSize = {
-                text: 0,
-                offset: 0
+                text: 0
             };
 
             if (root.children) {
@@ -618,14 +618,12 @@ var __meta__ = {
             };
 
             if (newCoord.left && this.offset) {
-                newCoord.left -= this.offset;
                 newCoord.width += this.offset * 2;
             } else {
                 newCoord.width += this.offset;
             }
 
             if (newCoord.top) {
-                newCoord.top -= this.offset;
                 newCoord.height += this.offset * 2;
             } else {
                 newCoord.height += this.offset;
@@ -712,11 +710,11 @@ var __meta__ = {
                     left: 0
                 };
 
-                this.layoutChildren(children, newRootCoord);
+                this.layoutChildren(children, newRootCoord, htmlSize);
             }
         },
 
-        layoutChildren: function(items, coord) {
+        layoutChildren: function(items, coord, htmlSize) {
             var parentArea = coord.width * coord.height;
             var totalArea = 0;
             var itemsArea = [];
@@ -943,6 +941,11 @@ var __meta__ = {
         }
 
         return brightness;
+    }
+
+    function round(value) {
+        var power = math.pow(10, 4);
+        return math.round(value * power) / power;
     }
 
     dataviz.ui.plugin(TreeMap);
