@@ -74,34 +74,34 @@ namespace Kendo.Mvc.Examples.Controllers
             return Json(dependencyService.GetAll().ToDataSourceResult(request));
         }
 
-        public virtual JsonResult DestroyDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        public virtual JsonResult DestroyDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel dependency)
         {
             if (ModelState.IsValid)
             {
-                dependencyService.Delete(task, ModelState);
+                dependencyService.Delete(dependency, ModelState);
             }
 
-            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { dependency }.ToDataSourceResult(request, ModelState));
         }
 
-        public virtual JsonResult CreateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        public virtual JsonResult CreateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel dependency)
         {
             if (ModelState.IsValid)
             {
-                dependencyService.Insert(task, ModelState);
+                dependencyService.Insert(dependency, ModelState);
             }
 
-            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { dependency }.ToDataSourceResult(request, ModelState));
         }
 
-        public virtual JsonResult UpdateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel task)
+        public virtual JsonResult UpdateDependency([DataSourceRequest] DataSourceRequest request, DependencyViewModel dependency)
         {
             if (ModelState.IsValid)
             {
-                dependencyService.Update(task, ModelState);
+                dependencyService.Update(dependency, ModelState);
             }
 
-            return Json(new[] { task }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { dependency }.ToDataSourceResult(request, ModelState));
         }
     }
 }
