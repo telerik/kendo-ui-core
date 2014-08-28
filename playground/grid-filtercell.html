@@ -288,7 +288,20 @@
                             ],
                             width: 300
                         },
-                        { field: "ContractDate", width: 400, format: "{0:MM/dd/yyyy}"}
+                        {
+                            field: "ContractDate",
+                            width: 400,
+                            format: "{0:MM/dd/yyyy}",
+                            filterable: {
+                                operators: {
+                                    date: {
+                                        eq: "col level equal"
+                                    }
+
+                                }
+                            }
+                        },
+                        { field: "ContractDate", width: 400, format: "{0:MM/dd/yyyy}" }
                     ],
                     groupable:true,
                     resizable: true,
