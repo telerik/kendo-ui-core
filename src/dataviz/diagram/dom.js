@@ -2622,39 +2622,114 @@
                     this.dataSource.fetch();
                 }
             },
-            _dataSource: function () {
-                var that = this,
-                    options = that.options,
-                    dataSource = options.dataSource;
+            _dataSource: function() {
+                var dsOptions = this.options.dataSource || {};
+                var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
 
-                dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
-
-                if (!dataSource.fields) {
-                    dataSource.fields = [
-                        { field: "text" },
-                        { field: "url" },
-                        { field: "spriteCssClass" },
-                        { field: "imageUrl" }
-                    ];
-                }
-                if (that.dataSource && that._refreshHandler) {
-                    that._unbindDataSource();
+                if (this.dataSource && this._shapesRefreshHandler) {
+                    this.dataSource
+                        .unbind("change", this._shapesRefreshHandler)
+                        .unbind("error", this._shapesErrorHandler);
+                } else {
+                    this._shapesRefreshHandler = proxy(this._refreshShapes, this);
+                    this._shapesErrorHandler = proxy(this._error, this);
                 }
 
-                that._refreshHandler = proxy(that._refreshSource, that);
-                that._errorHandler = proxy(that._error, that);
+                this.dataSource = kendo.data.DataSource.create(ds)
+                    .bind("change", this._shapesRefreshHandler)
+                    .bind("error", this._shapesErrorHandler);
 
-                that.dataSource = HierarchicalDataSource.create(dataSource)
-                    .bind(CHANGE, that._refreshHandler)
-                    .bind(ERROR, that._errorHandler);
+                if (this.dataSource) {
+                    if (this.options.autoBind) {
+                        this.dataSource.fetch();
+                    }
+                }
             },
+            _connectionDataSource: function() {
+                var dsOptions = this.options.connectionsDataSource || {};
+                var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
+
+                if (this.connectionsDataSource && this._connectionsRefreshHandler) {
+                    this.connectionsDataSource
+                        .unbind("change", this._connectionsRefreshHandler)
+                        .unbind("error", this._connectionsErrorHandler);
+                } else {
+                    this._connectionsRefreshHandler = proxy(this._refreshConnections, this);
+                    this._connectionsErrorHandler = proxy(this._error, this);
+                }
+
+                this.connectionsDataSource = kendo.data.DataSource.create(ds)
+                    .bind("change", this._connectionsRefreshHandler)
+                    .bind("error", this._connectionsErrorHandler);
+
+                if (this.connectionsDataSource) {
+                    if (this.options.autoBind) {
+                        this.connectionsDataSource.fetch();
+                    }
+                }
+            },
+
+            _refreshShapes: function(e) {
+                if (e.action === "remove") {
+                    // remove shapes
+                } else {
+                    this.clear();
+                    this._addShapes(e.sender.view());
+                }
+
+                if (this.options.layout) {
+                    this.layout(this.options.layout);
+                }
+            },
+
+            _refreshConnections: function(e) {
+                if (e.action === "remove") {
+                    // remove connections
+                } else {
+                    this._addCoonection();
+                }
+
+            },
+
+            _addShapes: function(shapes) {
+                var length = shapes.length;
+
+                for (var i = 0; i < shapes.length; i++) {
+                    this._addDataItem(shapes[i]);
+                }
+            },
+            //_dataSource: function () {
+            //    var that = this,
+            //        options = that.options,
+            //        dataSource = options.dataSource;
+
+            //    dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            //    if (!dataSource.fields) {
+            //        dataSource.fields = [
+            //            { field: "text" },
+            //            { field: "url" },
+            //            { field: "spriteCssClass" },
+            //            { field: "imageUrl" }
+            //        ];
+            //    }
+            //    if (that.dataSource && that._refreshHandler) {
+            //        that._unbindDataSource();
+            //    }
+
+            //    that._refreshHandler = proxy(that._refreshSource, that);
+            //    that._errorHandler = proxy(that._error, that);
+
+            //    that.dataSource = HierarchicalDataSource.create(dataSource)
+            //        .bind(CHANGE, that._refreshHandler)
+            //        .bind(ERROR, that._errorHandler);
+            //},
             _unbindDataSource: function () {
                 var that = this;
 
                 that.dataSource.unbind(CHANGE, that._refreshHandler).unbind(ERROR, that._errorHandler);
             },
             _error: function () {
-                // TODO: Do something?
             },
             _adorn: function (adorner, isActive) {
                 if (isActive !== undefined && adorner) {
