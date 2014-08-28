@@ -839,6 +839,61 @@
         ok(readInvoked);
     });
 
+    test("filtercell respect the filterable.operators configuration", function() {
+        var readinvoked;
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            filterable: {
+                mode: "cell row",
+                operators: {
+                    string: { eq: "foo equal"}
+                }
+            },
+            columns: [
+                {
+                    field: "col1",
+                    filterable: {
+                        operators: {
+                            string: {
+                                eq: "bar equal"
+                            }
+                        },
+                        cell: {
+                            datasource: {
+                                transport: {
+                                    read: function() {
+                                        readinvoked = true;
+                                    }
+                                }
+                            },
+                            delay: 500
+                        }
+                    }
+                },
+                {
+                    field: "col2",
+                    filterable: true
+                }
+            ],
+            datasource: {
+                schema: {
+                    model: {
+                        fields: {
+                            col1: {
+                                type: "string"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        var widgets = grid.thead.find("["+ kendo.attr("role") +"=filtercell]");
+        var firstwidget = widgets.eq(0).data("kendoFilterCell");
+        firstwidget.suggestDataSource.read();
+        equal(firstwidget.options.operators.string.eq , "bar equal");
+    });
+
     test("filtercell is initialized with messages options from the Grid", function() {
         var readInvoked;
         var div = $("<div/>").appendTo(QUnit.fixture);

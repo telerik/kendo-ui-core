@@ -3771,6 +3771,7 @@ var __meta__ = {
             for (var i = 0; i < columns.length; i++) {
                 var suggestDataSource,
                     col = columns[i],
+                    operators = that.options.filterable.operators,
                     customDataSource = false,
                     th = $("<th/>"),
                     field = col.field;
@@ -3783,6 +3784,7 @@ var __meta__ = {
                     var cellOptions = col.filterable && col.filterable.cell || {};
 
                     suggestDataSource = that.dataSource.options;
+
                     var messages = extend(true, {}, filterable.messages);
                     if (col.filterable) {
                         extend(true, messages, col.filterable.messages);
@@ -3794,6 +3796,9 @@ var __meta__ = {
                     if (cellOptions.dataSource) {
                         suggestDataSource = cellOptions.dataSource;
                         customDataSource = true;
+                    }
+                    if (col.filterable) {
+                        operators =  col.filterable.operators;
                     }
 
                     $("<span/>").attr(kendo.attr("field"), field)
@@ -3811,7 +3816,7 @@ var __meta__ = {
                             minLength: cellOptions.minLength,
                             dataTextField: cellOptions.dataTextField,
                             operator: cellOptions.operator,
-                            operators: that.options.filterable.operators,
+                            operators: operators,
                             showOperators: cellOptions.showOperators
                         }).appendTo(th);
                 }
