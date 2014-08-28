@@ -387,7 +387,6 @@ var __meta__ = {
         },
 
         layoutRow: function(items, width, coord) {
-            console.log(this.layoutHorizontal());
             if (this.layoutHorizontal()) {
                 return this.layoutV(items, width, coord);
             } else {
@@ -710,11 +709,11 @@ var __meta__ = {
                     left: 0
                 };
 
-                this.layoutChildren(children, newRootCoord, htmlSize);
+                this.layoutChildren(children, newRootCoord);
             }
         },
 
-        layoutChildren: function(items, coord, htmlSize) {
+        layoutChildren: function(items, coord) {
             var parentArea = coord.width * coord.height;
             var totalArea = 0;
             var itemsArea = [];
