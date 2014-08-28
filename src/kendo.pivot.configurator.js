@@ -186,6 +186,13 @@ var __meta__ = {
             var filter = options.filterable ? '<span class="k-icon k-filter k-setting-filter"></span>' : '';
             return new kendo.ui.PivotSettingTarget(element, $.extend({
                 dataSource: this.dataSource,
+                hint: function(element) {
+                    var wrapper = $('<div class="k-fieldselector"><ul class="k-list k-reset"></ul></div>');
+
+                    wrapper.find(".k-list").append(element.clone());
+
+                    return wrapper;
+                },
                 template: '<li class="k-item k-header" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}<span class="k-field-actions">' +
                             filter + '<span class="k-icon k-si-close k-setting-delete"></span></span></li>',
                 emptyTemplate: '<li class="k-item k-empty">${data}</li>'
