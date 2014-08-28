@@ -8,7 +8,8 @@
         "./dataviz/drawing/parser",
         "./dataviz/drawing/svg",
         "./dataviz/drawing/canvas",
-        "./dataviz/drawing/vml"
+        "./dataviz/drawing/vml",
+        "./dataviz/drawing/pdf"
     ], f);
 })(function(){
 

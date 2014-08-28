@@ -1,4 +1,10 @@
+(function(f, define){
+    define([ "./core" ], f);
+})(function(){
+
 (function(global){
+
+"use strict";
 
 function hasOwnProperty(obj, key) {
     return Object.prototype.hasOwnProperty.call(obj, key);
@@ -19,7 +25,7 @@ function BinaryStream(data) {
         return data.charCodeAt(offset++) & 0xFF;
     }
     function writeByte(b) {
-        ch = String.fromCharCode(b & 0xFF);
+        var ch = String.fromCharCode(b & 0xFF);
         if (offset < data.length) {
             // overwrite
             data = data.substr(0, offset) + ch + data.substr(offset + 1);
@@ -1188,3 +1194,5 @@ TTFFont.prototype = {
 global.kendo.PDF.TTFFont = TTFFont;
 
 })(Function("return this")());
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

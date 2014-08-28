@@ -1,4 +1,6 @@
-require("../src/kendo.pdf.js");
+global.kendo = {};
+
+require("../src/kendo.pdf.core.js");
 require("../src/kendo.pdf.ttf.js");
 
 var fs = require("fs");

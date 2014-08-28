@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <link ref="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link ref="stylesheet" href="../dist/styles/web/kendo.default.css" />
+
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.dataviz.js"
+      ]);
+    </script>
+  </head>
+  <body>
+
+    <div id="surface"></div>
+
+    <script>
+        var d = kendo.dataviz.drawing;
+        var geo = kendo.dataviz.geometry;
+
+        var arcGeometry = new geo.Arc([100, 100], {
+            radiusX: 10,
+            radiusY: 10,
+            startAngle: 45,
+            endAngle: 135
+        });
+        var arc = new d.Arc(arcGeometry).stroke("red", 1);
+
+        var surface = d.Surface.create($("#surface"), {
+            type: "pdf",
+        });
+        surface.draw(arc);
+
+        var position = new geo.Point(10, 10);
+        var text = new d.Text("Foo", position);
+        surface.draw(text);
+    </script>
+
+  </body>
+</html>
