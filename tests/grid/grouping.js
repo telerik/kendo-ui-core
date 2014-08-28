@@ -509,6 +509,18 @@
         equal(grid.tbody.find("tr>td:first").text(), "foo : 1 count: 1");
     });
 
+    test("groupHeaderTemplate using aggregates - all aggregates are pass to the template", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [{foo: "1", bar: "bar"}, {foo: "foo1", bar: "baz"}],
+                group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count" }, { field: "bar", aggregate: "count" } ]}
+            },
+            columns: [ { field: "foo", groupHeaderTemplate: "#=field# : #=value# count: #=count# bar count: #=aggregates.bar.count#"  } ]
+        });
+
+        equal(grid.tbody.find("tr>td:first").text(), "foo : 1 count: 1 bar count: 1");
+    });
+
     test("resetting DataSource instantiate new Groupable", 1, function() {
         var grid = new Grid(table(), { groupable: true, columns: ["text", "value"] });
 

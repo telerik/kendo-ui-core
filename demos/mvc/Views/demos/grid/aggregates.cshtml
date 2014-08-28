@@ -40,11 +40,11 @@
                         scrollable: false,
                         pageable: true,
                         columns: [
-                            { field: "ProductName", title: "Product Name", footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
-                            { field: "UnitPrice", title: "Unit Price" },
-                            { field: "UnitsOnOrder", title: "Units On Order", footerTemplate: "Average: #=average#",
+                            { field: "ProductName", title: "Product Name", aggregates: ["count"], footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                            { field: "UnitPrice", title: "Unit Price", aggregates: ["sum"] },
+                            { field: "UnitsOnOrder", title: "Units On Order", aggregates: ["average"], footerTemplate: "Average: #=average#",
                                 groupFooterTemplate: "Average: #=average#" },
-                            { field: "UnitsInStock", title: "Units In Stock", footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>",
+                            { field: "UnitsInStock", title: "Units In Stock", aggregates: ["min", "max", "count"], footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>",
                                 groupHeaderTemplate: "Units In Stock: #= value # (Count: #= count#)" }
                         ]
                     });

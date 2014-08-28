@@ -4668,8 +4668,9 @@ var __meta__ = {
                 column = grep(that.columns, function(column) { return column.field == field; })[0] || { },
                 template = column.groupHeaderTemplate,
                 text =  (column.title || field) + ': ' + formatGroupValue(group.value, column.format, column.values),
-                data = extend({}, { field: group.field, value: group.value }, group.aggregates[group.field]),
                 footerDefaults = that._groupAggregatesDefaultObject || {},
+                aggregates = extend(footerDefaults, group.aggregates),
+                data = extend({}, { field: group.field, value: group.value, aggregates: aggregates }, group.aggregates[group.field]),
                 rowTemplate = templates.rowTemplate,
                 altRowTemplate = templates.altRowTemplate,
                 groupFooterTemplate = templates.groupFooterTemplate,
@@ -4690,7 +4691,7 @@ var __meta__ = {
             }
 
             if (groupFooterTemplate) {
-                html += groupFooterTemplate(extend(footerDefaults, group.aggregates));
+                html += groupFooterTemplate(aggregates);
             }
             return html;
         },
