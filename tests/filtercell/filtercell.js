@@ -61,6 +61,31 @@
         ok(filterCell.dataSource === dataSource);
     });
 
+    test("suggestions work with initially defined data", function() {
+            dataSource = new DataSource({
+                data: [
+                    { foo: "foo" },
+                    { foo: "foo" },
+                    { foo: "bar" },
+                    { foo: "bar" },
+                ],
+                schema: {
+                    model: {
+                        fields: {
+                            foo: {
+                                type: "string"
+                            }
+                        }
+                    }
+                }
+            });
+
+        filterCell = setup(dom, { field: "foo", dataSource: dataSource, suggestDataSource: dataSource.options, customDataSource: false });
+
+        filterCell.suggestDataSource.read();
+        equal(filterCell.suggestDataSource.data().length, 2);
+    });
+
     test("ac dataSource is different instance when suggestDataSource is not specified", function() {
         filterCell = setup(dom, { dataSource: dataSource });
 
