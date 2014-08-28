@@ -241,7 +241,6 @@ var __meta__ = {
 
             if (!(suggestDataSource instanceof DataSource)) {
                 if (!options.customDataSource && suggestDataSource) {
-                    suggestDataSource.data = undefined;
                     suggestDataSource.group = undefined;
                 }
                 suggestDataSource =
