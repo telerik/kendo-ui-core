@@ -332,7 +332,11 @@ var __meta__ = {
 
         // non-standard collection methods
         remove: function(item) {
-            this.splice(this.indexOf(item), 1);
+            var idx = this.indexOf(item);
+
+            if (idx !== -1) {
+                this.splice(idx, 1);
+            }
         },
 
         empty: function() {
