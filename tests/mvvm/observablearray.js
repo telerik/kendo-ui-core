@@ -395,6 +395,16 @@ test("remove removes the given item", 2, function() {
     equal(viewModel.foo[0], 5);
 });
 
+test("remove only removes if the item exists", 3, function() {
+    var viewModel = kendo.observable({ foo: [3, 5] });
+
+    viewModel.foo.remove(4);
+
+    equal(viewModel.foo.length, 2);
+    equal(viewModel.foo[0], 3);
+    equal(viewModel.foo[1], 5);
+});
+
 test("empty removes all items", function() {
     var viewModel = kendo.observable({ foo: [3, 5] });
 
