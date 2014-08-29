@@ -8,6 +8,7 @@ namespace Kendo.Mvc.UI
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
+    using Kendo.Mvc.Extensions;
 
     public class ColorPicker : WidgetBase
     {
@@ -16,60 +17,59 @@ namespace Kendo.Mvc.UI
         {
             Palette = ColorPickerPalette.None;
             Enabled = true;
-            Buttons = true;
+
+            //>> Initialization
+        
+            Messages = new ColorPickerMessagesSettings();
+                
+        //<< Initialization
         }
 
         public ColorPickerPalette Palette { get; set; }
 
         public IEnumerable<string> PaletteColors { get; set; }
 
-        public string ToolIcon { get; set; }
-
-        public string Value { get; set; }
-
         public bool Enabled { get; set; }
 
-        public bool Opacity { get; set; }
-
-        public bool Buttons { get; set; }
-
         public object TileSize { get; set; }
+
+        //>> Fields
+        
+        public bool? Buttons { get; set; }
+        
+        public double? Columns { get; set; }
+        
+        public ColorPickerMessagesSettings Messages
+        {
+            get;
+            set;
+        }
+        
+        public bool? Opacity { get; set; }
+        
+        public bool? Preview { get; set; }
+        
+        public string ToolIcon { get; set; }
+        
+        public string Value { get; set; }
+        
+        //<< Fields
        
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var json = new Dictionary<string, object>(Events);
 
             if (Palette == ColorPickerPalette.Basic)
             {
-                options["palette"] = "basic";
+                json["palette"] = "basic";
             }
             else if (Palette == ColorPickerPalette.WebSafe)
             {
-                options["palette"] = "websafe";
+                json["palette"] = "websafe";
             }
             else if (PaletteColors != null && PaletteColors.Any())
             {
-                options["palette"] = PaletteColors;
-            }
-
-            if (Opacity)
-            {
-                options["opacity"] = true;
-            }
-
-            if (!Buttons)
-            {
-                options["buttons"] = false;
-            }
-
-            if (!string.IsNullOrEmpty(ToolIcon))
-            {
-                options["toolIcon"] = ToolIcon;
-            }
-
-            if (!string.IsNullOrEmpty(Value))
-            {
-                options["value"] = Value;
+                json["palette"] = PaletteColors;
             }
 
             if (TileSize != null)
@@ -78,15 +78,55 @@ namespace Kendo.Mvc.UI
 
                 if (tileSize != null)
                 {
-                    options["tileSize"] = new { width = tileSize.Width, height = tileSize.Height };
+                    json["tileSize"] = new { width = tileSize.Width, height = tileSize.Height };
                 }
                 else
                 {
-                    options["tileSize"] = (int)TileSize;
+                    json["tileSize"] = (int)TileSize;
                 }
             }
 
-            writer.Write(Initializer.Initialize(Selector, "ColorPicker", options));
+            //>> Serialization
+        
+            if (Buttons.HasValue)
+            {
+                json["buttons"] = Buttons;
+            }
+                
+            if (Columns.HasValue)
+            {
+                json["columns"] = Columns;
+            }
+                
+            var messages = Messages.ToJson();
+            if (messages.Any())
+            {
+                json["messages"] = messages;
+            }
+                
+            if (Opacity.HasValue)
+            {
+                json["opacity"] = Opacity;
+            }
+                
+            if (Preview.HasValue)
+            {
+                json["preview"] = Preview;
+            }
+                
+            if (ToolIcon.HasValue())
+            {
+                json["toolIcon"] = ToolIcon;
+            }
+            
+            if (Value.HasValue())
+            {
+                json["value"] = Value;
+            }
+            
+        //<< Serialization
+
+            writer.Write(Initializer.Initialize(Selector, "ColorPicker", json));
 
             base.WriteInitializationScript(writer);
         }

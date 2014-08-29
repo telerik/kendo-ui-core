@@ -2226,4 +2226,4 @@
   <ItemGroup>
     <Compile Include="UI\TreeMap\TreeMapType.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\ColorPicker\Settings\ColorPickerMessagesSettings.cs" /><Compile Include="UI\ColorPicker\Fluent\ColorPickerMessagesSettingsBuilder.cs" /></ItemGroup></Project>

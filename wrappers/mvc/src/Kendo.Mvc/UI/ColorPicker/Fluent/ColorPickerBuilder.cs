@@ -7,6 +7,8 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class ColorPickerBuilder : WidgetBuilderBase<ColorPicker, ColorPickerBuilder>, IHideObjectMembers
     {
+        private readonly ColorPicker container;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ColorPickerBuilder"/> class.
         /// </summary>
@@ -14,7 +16,93 @@ namespace Kendo.Mvc.UI.Fluent
         public ColorPickerBuilder(ColorPicker component)
             : base(component)
         {
+            container = component;
         }
+
+        //>> Fields
+        
+        /// <summary>
+        /// Specifies whether the widget should display the Apply / Cancel buttons.Applicable only for the HSV selector, when a pallete is not specified.
+        /// </summary>
+        /// <param name="value">The value that configures the buttons.</param>
+        public ColorPickerBuilder Buttons(bool value)
+        {
+            container.Buttons = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The number of columns to show in the color dropdown when a pallete is specified.
+		/// This is automatically initialized for the "basic" and "websafe" palettes.
+		/// If you use a custom palette then you can set this to some value that makes sense for your colors.
+        /// </summary>
+        /// <param name="value">The value that configures the columns.</param>
+        public ColorPickerBuilder Columns(double value)
+        {
+            container.Columns = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Allows localization of the strings that are used in the widget.
+        /// </summary>
+        /// <param name="configurator">The action that configures the messages.</param>
+        public ColorPickerBuilder Messages(Action<ColorPickerMessagesSettingsBuilder> configurator)
+        {
+            configurator(new ColorPickerMessagesSettingsBuilder(container.Messages));
+            return this;
+        }
+        
+        /// <summary>
+        /// Only for the HSV selector.  If true, the widget will display the opacity slider.
+		/// Note that currently in HTML5 the &lt;input type="color"&gt; does not support opacity.
+        /// </summary>
+        /// <param name="value">The value that configures the opacity.</param>
+        public ColorPickerBuilder Opacity(bool value)
+        {
+            container.Opacity = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Only applicable for the HSV selector.Displays the color preview element, along with an input field where the end user can paste a color in a CSS-supported notation.
+        /// </summary>
+        /// <param name="value">The value that configures the preview.</param>
+        public ColorPickerBuilder Preview(bool value)
+        {
+            container.Preview = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// A CSS class name to display an icon in the color picker button.  If
+		/// specified, the HTML for the element will look like this:
+        /// </summary>
+        /// <param name="value">The value that configures the toolicon.</param>
+        public ColorPickerBuilder ToolIcon(string value)
+        {
+            container.ToolIcon = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The initially selected color.
+		/// Note that when initializing the widget from an &lt;input&gt; element, the initial color will be decided by the field instead.
+        /// </summary>
+        /// <param name="value">The value that configures the value.</param>
+        public ColorPickerBuilder Value(string value)
+        {
+            container.Value = value;
+
+            return this;
+        }
+        
+        //<< Fields
 
         /// <summary>
         /// Configures the client-side events.
@@ -33,35 +121,6 @@ namespace Kendo.Mvc.UI.Fluent
         public ColorPickerBuilder Events(Action<ColorPickerEventBuilder> clientEventsAction)
         {
             clientEventsAction(new ColorPickerEventBuilder(Component.Events));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the value of the picker input
-        /// </summary>
-        public ColorPickerBuilder Value(string color)
-        {
-            Component.Value = color;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Indicates whether the picker will allow transparent colors to be picked.
-        /// </summary>
-        /// <param name="allowOpacity">Whether the user is allowed to change the color opacity.</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
-        ///             .Opacity(true)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ColorPickerBuilder Opacity(bool allowOpacity)
-        {
-            Component.Opacity = allowOpacity;
 
             return this;
         }
@@ -121,44 +180,6 @@ namespace Kendo.Mvc.UI.Fluent
         public ColorPickerBuilder Enable(bool value)
         {
             Component.Enabled = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Shows or hides the accept/cancel buttons.
-        /// </summary>
-        /// <param name="value">Whether the buttons should be shown</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
-        ///             .Buttons(false)
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ColorPickerBuilder Buttons(bool value)
-        {
-            Component.Buttons = value;
-
-            return this;
-        }
-
-        /// <summary>
-        /// Shows a tool icon.
-        /// </summary>
-        /// <param name="cssClass">The CSS class that will be used for styling</param>
-        /// <example>
-        /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().ColorPicker()
-        ///             .Name("ColorPicker")
-        ///             .ToolIcon("k-foreColor")
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ColorPickerBuilder ToolIcon(string cssClass)
-        {
-            Component.ToolIcon = cssClass;
 
             return this;
         }

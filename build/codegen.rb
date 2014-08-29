@@ -111,6 +111,7 @@ namespace :generate do
                     'docs/api/dataviz/map.md',
                     'docs/api/dataviz/diagram.md',
                     'docs/api/dataviz/treemap.md',
+                    'docs/api/web/colorpicker.md',
                     'docs/api/web/gantt.md',
                     'docs/api/web/toolbar.md',
                     'docs/api/web/treeview.md'
