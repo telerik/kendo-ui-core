@@ -141,7 +141,6 @@ var Workbook = kendo.Class.extend({
 
         var xl = zip.folder("xl");
 
-
         var xlRels = xl.folder("_rels");
         xlRels.file("workbook.xml.rels", WORKBOOK_RELS);
 
@@ -187,7 +186,7 @@ var Worksheet = kendo.Class.extend({
 });
 
 
-kendo.xlsx = {
+kendo.ooxml = {
     Workbook: Workbook,
     Worksheet: Worksheet
 };
