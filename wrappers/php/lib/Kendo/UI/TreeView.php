@@ -163,8 +163,24 @@ Note: when initializing the widget from an array (rather than from a Hierarchica
     }
 
     /**
+    * Sets the check event of the TreeView.
+    * Triggered after the user has checked or unchecked a checkbox.
+If checkChildren is true, the event is triggered after all checked states are updated.
+This event has been introduced in internal builds after 2014.2.828.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\TreeView
+    */
+    public function check($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('check', $value);
+    }
+
+    /**
     * Sets the collapse event of the TreeView.
-    * Triggered before a subgroup gets collapsed.
+    * Triggered before a subgroup gets collapsed. Cancellable.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\TreeView
     */
