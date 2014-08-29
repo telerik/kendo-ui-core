@@ -60,6 +60,7 @@ var CONTENT_TYPES = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n
                         '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />' +
                         '<Default Extension="xml" ContentType="application/xml" />' +
                         '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" />' +
+                        '<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>' +
                         '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" />' +
                         '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml" />' +
                         '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" />' +
@@ -85,50 +86,110 @@ var WORKSHEET = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
                         '<sheetView tabSelected="1" workbookViewId="0" />' +
                     '</sheetViews>' +
                     '<sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25" />' +
-                    '<sheetData />' +
+                    '<sheetData>' +
+                    '{0}' +
+                    '</sheetData>' +
                     '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
                 '</worksheet>';
 
 var WORKBOOK_RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
                     '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
-                        '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
                         '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml" />' +
+                        '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
+                        '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml" />' +
                     '</Relationships>';
 
-function worksheet(options) {
+var SHARED_STRINGS = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+                                    '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="${count}" uniqueCount="${uniqueCount}">' +
+                                        '# for (var sharedString in indexes) { #' +
+                                        '<si><t>${sharedString}</t></si>' +
+                                        '# } #' +
+                                    '</sst>');
 
-}
+var Workbook = kendo.Class.extend({
+    init: function(options) {
+        this.options = options;
+        this._sharedStrings = {
+            indexes: {},
+            count: 0,
+            uniqueCount: 0
+        };
+        this._sheets = [];
 
-kendo.xlsx = function(options) {
-    var zip = new JSZip();
+        $.map(options.sheets || [], $.proxy(this.addSheet, this));
+    },
+    addSheet: function(options) {
+        this._sheets.push(new Worksheet(options, this._sharedStrings));
+    },
+    toDataURL: function() {
+        var zip = new JSZip();
 
-    var docProps = zip.folder("docProps");
-    docProps.file("core.xml", kendo.format(CORE,
-        "Kendo UI",
-        "Kendo UI",
-        new Date().toISOString(),
-        new Date().toISOString()
-    ));
+        var docProps = zip.folder("docProps");
+        docProps.file("core.xml", kendo.format(CORE,
+            "Kendo UI",
+            "Kendo UI",
+            new Date().toISOString(),
+            new Date().toISOString()
+        ));
 
-    docProps.file("app.xml", kendo.format(APP,
-        1
-    ));
+        docProps.file("app.xml", kendo.format(APP,
+            1
+        ));
 
-    var rels = zip.folder("_rels");
-    rels.file(".rels", RELS);
+        var rels = zip.folder("_rels");
+        rels.file(".rels", RELS);
 
-    var xl = zip.folder("xl");
+        var xl = zip.folder("xl");
 
-    var xlRels = xl.folder("_rels");
-    xlRels.file("workbook.xml.rels", WORKBOOK_RELS);
 
-    xl.file("workbook.xml", WORKBOOK);
-    var worksheets = xl.folder("worksheets");
-    worksheets.file("sheet1.xml", WORKSHEET);
+        var xlRels = xl.folder("_rels");
+        xlRels.file("workbook.xml.rels", WORKBOOK_RELS);
 
-    zip.file("[Content_Types].xml", CONTENT_TYPES);
+        xl.file("workbook.xml", WORKBOOK);
+        var worksheets = xl.folder("worksheets");
+        worksheets.file("sheet1.xml", this._sheets[0].toXML());
 
-    return "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + zip.generate({ compression: "DEFLATE" });
+        xl.file("sharedStrings.xml", SHARED_STRINGS(this._sharedStrings));
+
+        zip.file("[Content_Types].xml", CONTENT_TYPES);
+
+        return "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + zip.generate({ compression: "DEFLATE" });
+    }
+});
+
+var Worksheet = kendo.Class.extend({
+    init: function(options, sharedStrings) {
+        this.options = options;
+        this._sharedStrings = sharedStrings;
+    },
+    toXML: function() {
+        return kendo.format(WORKSHEET, $.map(this.options.data, $.proxy(this._row, this)).join(""));
+    },
+    _row: function(data, index) {
+        return kendo.format('<row r="r{0}">{1}</row>', index + 1, $.map(data, $.proxy(this._cell, this, index + 1)).join(""))
+    },
+    _cell: function(rowNum, data, cellIndex) {
+        if (typeof data === "string") {
+            var index = this._sharedStrings.indexes[data];
+
+            if (index !== undefined) {
+                data = index;
+            } else {
+                this._sharedStrings.indexes[data] = data = this._sharedStrings.uniqueCount;
+                this._sharedStrings.uniqueCount ++;
+            }
+
+            this._sharedStrings.count ++;
+        }
+
+        return kendo.format('<c r="{0}{1}" t="s"><v>{2}</v></c>', String.fromCharCode(65 + cellIndex), rowNum, data);
+    }
+});
+
+
+kendo.xlsx = {
+    Workbook: Workbook,
+    Worksheet: Worksheet
 };
 
 })(kendo, JSZip);

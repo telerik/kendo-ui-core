@@ -111,7 +111,15 @@
         }
         */
 
-        this.href = kendo.xlsx();
+        this.href = new kendo.xlsx.Workbook({
+            sheets: [
+                {
+                    data: [
+                        ["Foo", "Bar"]
+                    ]
+                }
+            ]
+        }).toDataURL();
       }
 
       // See: http://goo.gl/qlg5dd
