@@ -308,7 +308,9 @@
                                         val = ngModel.$modelValue;
                                     }
                                     setTimeout(function(){
-                                        widget.value(val);
+                                        if (widget) { // might have been destroyed in between. :-(
+                                            widget.value(val);
+                                        }
                                     }, 0);
                                 };
 
@@ -338,6 +340,7 @@
                                                 ngForm.$setPristine();
                                             }
                                         }
+                                        digest(scope);
                                     };
                                 };
 
