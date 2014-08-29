@@ -1,6 +1,8 @@
 <div id="example" ng-app="KendoDemos">
   <div ng-controller="MyCtrl">
-    <div class="hasMenu" style="border: 2px solid black; padding: 3em; background: {{ menuOpen ? '#52c35d' : '' }}">
+    <div class="hasMenu" ng-style="{ 'border': '2px solid black',
+                                     'padding': '3em',
+                                     'background': menuOpen ? '#52c35d' : '' }">
       Right-click me
       <span ng-show="menuOpen">- Menu is open</span>
       <div ng-show="selected">Selected: <b>{{selected}}</b></div>
