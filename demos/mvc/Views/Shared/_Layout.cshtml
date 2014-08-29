@@ -18,7 +18,7 @@
     }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @{ bool isAngularJsExample = ViewBag.CurrentExample != null &&
-                                 ViewBag.CurrentExample.Text == "AngularJS"; }
+                                 ViewBag.CurrentExample.Text.StartsWith("AngularJS"); }
 
     @foreach (string scriptName in Kendo.Models.ScriptGroups.All)
     {
