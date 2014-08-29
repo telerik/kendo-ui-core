@@ -787,7 +787,7 @@ var __meta__ = {
         },
 
         _iconMousedown: function(e) {
-            this.wrapper.focus();
+            this.wrapper.focusin();
             e.preventDefault();
         },
 
