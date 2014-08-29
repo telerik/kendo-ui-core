@@ -1,12 +1,12 @@
 <div id="example" ng-app="KendoDemos">
-    <div class="demo-section k-content" style="width: 500px;" ng-controller="MyCtrl">
+    <div class="demo-section k-content" style="width: 600px;" ng-controller="MyCtrl">
         <div class="box-col">
             <h4>Start date: <span ng-show="startDate">{{startDate | date:"MMM d, yyyy"}}</span></h4>
-            <kendo-calendar ng-model="startDate" rebind="endDate" max="endDate"></kendo-calendar>
+            <kendo-calendar ng-model="startDate" k-rebind="endDate" max="endDate"></kendo-calendar>
         </div>
         <div class="box-col" ng-show="startDate">
             <h4>End date: <span ng-show="endDate">{{endDate | date:"MMM d, yyyy"}}</span></h4>
-            <kendo-calendar ng-model="endDate" rebind="startDate" min="startDate" max="maxEndDate"></kendo-calendar>
+            <kendo-calendar ng-model="endDate" k-rebind="startDate" min="startDate" max="maxEndDate"></kendo-calendar>
         </div>
     </div>
 </div>
