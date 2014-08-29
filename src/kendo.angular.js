@@ -536,7 +536,7 @@
                 replace  : true,
                 template : function(element, attributes) {
                     var tag = TAGNAMES[className] || "div";
-                    return "<" + tag + " " + dashed + "></" + tag + ">";
+                    return "<" + tag + " " + dashed + ">" + element.html() + "</" + tag + ">";
                 }
             };
         });
