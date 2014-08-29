@@ -1,3 +1,17 @@
+var navCategories = [
+    "Data Management",
+    "Editors",
+    "Layout",
+    "Data Visualization",
+    "Diagramming",
+    "Geo Visualization",
+    "Scheduling",
+    "Navigation",
+    "Interactivity & UX",
+    "Framework",
+    "Mobile"
+];
+
 var navDataSource = new kendo.data.DataSource({
     transport: {
         read: {
@@ -9,6 +23,11 @@ var navDataSource = new kendo.data.DataSource({
         model: {
             id: "name"
         }
+    },
+    change: function(e) {
+        this.view().sort(function(a, b) {
+            return navCategories.indexOf(a.value) > navCategories.indexOf(b.value) ? 1 : -1;
+        });
     },
     filter: { field: "disableInMobile", operator: "neq", value: true },
     group: { field: "category" }
