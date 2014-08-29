@@ -71,7 +71,8 @@ var __meta__ = {
                 showOn: "click",
                 closeOnClick: false,
                 open: proxy(this._menuOpen, this),
-                select: proxy(this._select, this)
+                select: proxy(this._select, this),
+                copyAnchorStyles: false
             }).data(MENU);
 
             this._createWindow();
