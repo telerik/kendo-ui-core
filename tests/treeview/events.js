@@ -1,14 +1,22 @@
 (function() {
     var createTreeView = TreeViewHelpers.fromOptions;
     var treeFromHtml = TreeViewHelpers.fromHtml;
+    var handler;
 
-    module("events", TreeViewHelpers.basicModule);
+    module("events", {
+        setup: function() {
+            handler = spy();
+        },
+        teardown: TreeViewHelpers.destroy
+    });
+
+    function eventArgs(spy) {
+        return spy.lastArgs[0];
+    }
 
     test("selecting nodes triggers selected event and passes node as argument", function() {
-        var selectedArgs;
-
         createTreeView({
-            select: function(e) { selectedArgs = e; },
+            select: handler,
             dataSource: [ { text: "foo" } ]
         });
 
@@ -16,15 +24,13 @@
 
         node.find(".k-in").trigger("click");
 
-        ok(selectedArgs);
-        equal(selectedArgs.node, node[0]);
+        equal(handler.calls, 1);
+        equal(eventArgs(handler).node, node[0]);
     });
 
     test("clicking expand button triggers expand event", function() {
-        var expandArgs;
-
         createTreeView({
-            expand: function(e) { expandArgs = e; },
+            expand: handler,
             dataSource: [
                 { text: "foo", items: [
                     { text: "food" }
@@ -32,18 +38,15 @@
             ]
         });
 
-        $(".k-plus", treeview)
-            .trigger("click");
+        $(".k-plus", treeview).trigger("click");
 
-        ok(expandArgs);
-        equal(expandArgs.node, $(".k-item")[0]);
+        equal(handler.calls, 1);
+        equal(eventArgs(handler).node, $(".k-item")[0]);
     });
 
     test("clicking collapse button triggers collapse event", function() {
-        var collapseArgs;
-
         createTreeView({
-            collapse: function(e) { collapseArgs = e; },
+            collapse: handler,
             dataSource: [
                 { text: "foo", expanded: true, items: [
                     { text: "food" }
@@ -51,15 +54,10 @@
             ]
         });
 
-        $(".k-minus", treeview)
-            .trigger("click");
+        $(".k-minus", treeview).trigger("click");
 
-        ok(collapseArgs);
-        equal(collapseArgs.node, $(".k-item")[0]);
-    });
-
-    module("drag & drop", {
-        teardown: TreeViewHelpers.destroy
+        equal(handler.calls, 1);
+        equal(eventArgs(handler).node, $(".k-item")[0]);
     });
 
     function moveNode(treeview, sourceText, destinationText) {
@@ -89,8 +87,6 @@
     }
 
     test("moving node triggers dragstart", function () {
-        var dragStartTriggered;
-
         createTreeView({
             dragAndDrop: true,
             dataSource: [
@@ -99,13 +95,13 @@
                 ] },
                 { text: "baz" }
             ],
-            dragstart: function(e) { dragStartTriggered = e; }
+            dragstart: handler
         });
 
         moveNode(treeviewObject, "bar", "baz");
 
-        ok(dragStartTriggered);
-        equal(treeviewObject.text(dragStartTriggered.sourceNode), "bar");
+        equal(handler.calls, 1);
+        equal(treeviewObject.text(eventArgs(handler).sourceNode), "bar");
     });
 
     test("dragstart can be prevented", function () {
@@ -126,8 +122,6 @@
     });
 
     test("moving node triggers drag", function () {
-        var dragTriggered;
-
         createTreeView({
             dragAndDrop: true,
             dataSource: [
@@ -136,22 +130,22 @@
                 ] },
                 { text: "baz" }
             ],
-            drag: function(e) { dragTriggered = e; }
+            drag: handler
         });
 
         moveNode(treeviewObject, "bar", "baz");
 
-        ok(dragTriggered);
-        equal(treeviewObject.text(dragTriggered.sourceNode), "bar");
-        ok(dragTriggered.setStatusClass);
-        equal(dragTriggered.statusClass, "add");
-        ok(dragTriggered.pageX);
-        ok(dragTriggered.pageY);
+        ok(handler.calls);
+
+        var e = eventArgs(handler);
+        equal(treeviewObject.text(e.sourceNode), "bar");
+        ok(e.setStatusClass);
+        equal(e.statusClass, "add");
+        ok(e.pageX);
+        ok(e.pageY);
     });
 
     test("moving node triggers drop", function () {
-        var dropTriggered;
-
         createTreeView({
             dragAndDrop: true,
             dataSource: [
@@ -160,16 +154,18 @@
                 ] },
                 { text: "baz" }
             ],
-            drop: function(e) { dropTriggered = e; }
+            drop: handler
         });
 
         moveNode(treeviewObject, "bar", "baz");
 
-        ok(dropTriggered);
-        equal(treeviewObject.text(dropTriggered.sourceNode), "bar");
-        equal(dropTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
-        ok(dropTriggered.valid);
-        equal(dropTriggered.dropPosition, "over");
+        ok(handler.calls);
+
+        var e = eventArgs(handler);
+        equal(treeviewObject.text(e.sourceNode), "bar");
+        equal(e.destinationNode, treeviewObject.findByText("baz")[0]);
+        ok(e.valid);
+        equal(e.dropPosition, "over");
     });
 
     test("drop event setValid sets event valid state", 1, function () {
@@ -190,8 +186,6 @@
     });
 
     test("moving node triggers dragstart/drag/drop/dragend", function () {
-        var dragEndTriggered;
-
         createTreeView({
             dragAndDrop: true,
             dataSource: [
@@ -200,16 +194,17 @@
                 ] },
                 { text: "baz" }
             ],
-            dragend: function(e) { dragEndTriggered = e; }
+            dragend: handler
         });
 
         moveNode(treeviewObject, "bar", "baz");
 
-        ok(dragEndTriggered);
-        equal(treeviewObject.text(dragEndTriggered.sourceNode), "bar");
-        equal(dragEndTriggered.destinationNode, treeviewObject.findByText("baz")[0]);
-        equal(dragEndTriggered.dropPosition, "over");
-        equal(dragEndTriggered.sourceNode, treeviewObject.findByText("bar")[0]);
+        ok(handler.calls);
+        var e = eventArgs(handler);
+        equal(treeviewObject.text(e.sourceNode), "bar");
+        equal(e.destinationNode, treeviewObject.findByText("baz")[0]);
+        equal(e.dropPosition, "over");
+        equal(e.sourceNode, treeviewObject.findByText("bar")[0]);
     });
 
     test("drop event can be cancelled", function() {
@@ -234,20 +229,16 @@
    });
 
    test("initialization of expanded nodes does not trigger expand events", function() {
-       var triggered = false;
-
        createTreeView({
             dataSource: [
                 { text: "foo", expanded: true, items: [
                     { text: "bar" }
                 ] }
             ],
-            expand: function() {
-                triggered = true;
-            }
+            expand: handler
         });
 
-        ok(!triggered);
+        ok(!handler.calls);
    });
 
    test("setting Node.loaded to false allows nodes to be refreshed", function() {
@@ -286,9 +277,6 @@
    });
 
    test("dataBound event is triggered after dataSource changes", function() {
-       var calls = 0,
-           args;
-
        createTreeView({
            dataSource: {
                transport: {
@@ -297,21 +285,14 @@
                    }
                }
            },
-           dataBound: function(e) {
-               calls++;
-               args = e;
-           }
+           dataBound: handler
        });
 
-       equal(calls, 1);
-       ok(args);
-       ok(typeof args.node == "undefined");
+       equal(handler.calls, 1);
+       ok(typeof eventArgs(handler).node == "undefined");
    });
 
    test("dataBound event is triggered from sublevel", function() {
-       var calls = 0,
-           args;
-
        createTreeView({
            dataSource: {
                transport: {
@@ -320,16 +301,13 @@
                    }
                }
            },
-           dataBound: function(e) {
-               calls++;
-               args = e;
-           }
+           dataBound: handler
        });
 
        treeviewObject.expand(".k-item");
 
-       equal(calls, 2);
-       ok(args.node.is(treeview.find(".k-item:first")));
+       equal(handler.calls, 2);
+       ok(handler.lastArgs[0].node.is(treeview.find(".k-item:first")));
    });
 
    test("selecting an item triggers change event", 1, function() {
@@ -337,12 +315,12 @@
            dataSource: [
                { text: "foo" }
            ],
-           change: function() {
-               ok(true);
-           }
+           change: handler
        });
 
        treeview.find(".k-in").trigger("click");
+
+       equal(handler.calls, 1);
    });
 
    asyncTest("moving node to unfetched parent triggers dragend when the source node is available", 2, function () {
@@ -375,5 +353,21 @@
        });
 
        moveNode(treeviewObject, "bar", "foo");
+   });
+
+   test("checking checkbox triggers check event", function() {
+       createTreeView({
+           checkboxes: true,
+           dataSource: [
+               { text: "foo" }
+           ],
+           check: handler
+       });
+
+       treeview.find(":checkbox").attr("checked", true).trigger("change");
+
+       equal(handler.calls, 1);
+
+       equal(eventArgs(handler).node, treeview.find(".k-item")[0]);
    });
 })();

@@ -24,6 +24,7 @@ var __meta__ = {
         keys = kendo.keys,
         NS = ".kendoTreeView",
         SELECT = "select",
+        CHECK = "check",
         NAVIGATE = "navigate",
         EXPAND = "expand",
         CHANGE = "change",
@@ -588,7 +589,8 @@ var __meta__ = {
             COLLAPSE,
             SELECT,
             CHANGE,
-            NAVIGATE
+            NAVIGATE,
+            CHECK
         ],
 
         options: {
@@ -771,11 +773,13 @@ var __meta__ = {
         },
 
         _checkboxChange: function(e) {
-            var checkbox = $(e.target),
-                isChecked = checkbox.prop(CHECKED),
-                node = checkbox.closest(NODE);
+            var checkbox = $(e.target);
+            var isChecked = checkbox.prop(CHECKED);
+            var node = checkbox.closest(NODE);
 
             this.dataItem(node).set(CHECKED, isChecked);
+
+            this._trigger(CHECK, node);
         },
 
         _toggleButtonClick: function (e) {

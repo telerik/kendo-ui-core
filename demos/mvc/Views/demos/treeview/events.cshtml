@@ -3,7 +3,7 @@
             <div class="demo-section k-header" style="width: 200px;">
                 <div id="treeview"></div>
             </div>
-            
+
             <div class="box">
                 <h4>Console log</h4>
                 <div class="console"></div>
@@ -14,8 +14,12 @@
                         kendoConsole.log("Selecting: " + this.text(e.node));
                     }
 
+                    function onCheck(e) {
+                        kendoConsole.log("Checkbox changed :: " + this.text(e.node));
+                    }
+
                     function onChange(e) {
-                        kendoConsole.log("Selection changed");
+                        kendoConsole.log("Selection changed :: " + this.text(e.node));
                     }
 
                     function onCollapse(e) {
@@ -50,6 +54,7 @@
                     }
 
                     $("#treeview").kendoTreeView({
+                        checkboxes: true,
                         dataSource: [
                             { text: "Furniture", expanded: true, items: [
                                 { text: "Tables & Chairs" },
@@ -64,6 +69,7 @@
                             { text: "Storage" }
                         ],
                         select: onSelect,
+                        check: onCheck,
                         change: onChange,
                         collapse: onCollapse,
                         expand: onExpand,

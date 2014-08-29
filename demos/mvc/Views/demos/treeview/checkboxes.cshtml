@@ -17,6 +17,8 @@
                 checkChildren: true
             },
 
+            check: onCheck,
+
             dataSource: [{
                 id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
                     {
@@ -57,7 +59,7 @@
         }
 
         // show checked node IDs on datasource change
-        $("#treeview").data("kendoTreeView").dataSource.bind("change", function() {
+        function onCheck() {
             var checkedNodes = [],
                 treeView = $("#treeview").data("kendoTreeView"),
                 message;
@@ -71,7 +73,7 @@
             }
 
             $("#result").html(message);
-        });
+        }
     </script>
 
     <style scoped>

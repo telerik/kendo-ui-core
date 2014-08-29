@@ -46,7 +46,9 @@ function spy(that, methods) {
             }
 
             callback.calls++;
-            callback.args.push(Array.prototype.splice.call(arguments));
+            var args = Array.prototype.slice.call(arguments);
+            callback.args.push(args);
+            callback.lastArgs = args;
         };
 
         return callback;
