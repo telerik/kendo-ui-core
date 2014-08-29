@@ -606,7 +606,7 @@ var __meta__ = {
                         this._tileColorBrightness(item) > 180
                     )
                     .append($("<div></div>")
-                    .text(this._getText(item)));
+                    .html(this._getText(item)));
         },
 
         _createTile: function(item) {
@@ -664,7 +664,7 @@ var __meta__ = {
 
         _createTitle: function(item) {
             return $("<div class='k-treemap-title'></div>")
-                    .append($("<div></div>").text(this._getText(item)));
+                    .append($("<div></div>").html(this._getText(item)));
         },
 
         _createWrap: function() {
@@ -829,7 +829,7 @@ var __meta__ = {
                 title = $("<div class='k-treemap-title-vertical'></div>");
             }
 
-            return title.append($("<div></div>").text(this._getText(item)));
+            return title.append($("<div></div>").html(this._getText(item)));
         }
     });
 
