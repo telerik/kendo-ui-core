@@ -343,7 +343,8 @@ var __meta__ = {
             }
 
             var minimumSideValue = this.layoutHorizontal() ? coord.height : coord.width;
-            items.sort(function(a, b) { return (a.area <= b.area) - (a.area >= b.area); });
+
+            items = new kendo.data.Query(items)._sortForGrouping("value", "desc");
             var firstElement = [items[0]];
             var tail = items.slice(1);
             this.squarify(tail, firstElement, minimumSideValue, coord);
@@ -730,7 +731,7 @@ var __meta__ = {
                 items[i].area = parentArea * itemsArea[i] / totalArea;
             }
 
-            items.sort(function(a, b) { return (a.area <= b.area) - (a.area >= b.area); });
+            items = new kendo.data.Query(items)._sortForGrouping("value", "desc");
 
             this.sliceAndDice(items, coord);
         },
