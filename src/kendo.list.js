@@ -499,7 +499,7 @@ var __meta__ = {
 
         _makeUnselectable: function() {
             if (isIE8) {
-                this.list.find("*").attr("unselectable", "on");
+                this.list.find("*").not(".k-textbox").attr("unselectable", "on");
             }
         },
 
