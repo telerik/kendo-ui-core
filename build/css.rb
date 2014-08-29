@@ -23,10 +23,10 @@ DATAVIZ_SRC_CSS = FileList[SRC_CSS].keep_if { |f| f =~ /styles\/dataviz\// }
 CORE_MIN_CSS_RESOURCES = FileList[MIN_CSS_RESOURCES]
     .exclude("dist/styles/kendo.common-bootstrap.min.css")
     .exclude("dist/styles/kendo.common.min.css")
-    .keep_if { |f| f =~ /styles\/(web|common)\// }
+    .keep_if { |f| f =~ /styles\/(web|common|mobile)\// }
 
 CORE_SRC_CSS = FileList[SRC_CSS]
-    .keep_if { |f| f =~ /styles\/(web|common)\// }
+    .keep_if { |f| f =~ /styles\/(web|common|mobile)\// }
     .exclude("dist/styles/web/kendo.common-bootstrap.css")
     .exclude("dist/styles/web/kendo.common-bootstrap.less")
     .exclude("dist/styles/web/kendo.common.css")
