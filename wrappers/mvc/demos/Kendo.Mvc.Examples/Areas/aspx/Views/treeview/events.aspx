@@ -10,6 +10,7 @@
     .DragAndDrop(true)
     .Events(events => events
         .Select("onSelect")
+        .Check("onCheck")
         .Change("onChange")
         .Collapse("onCollapse")
         .Expand("onExpand")
@@ -53,6 +54,10 @@
 
     function onSelect(e) {
         kendoConsole.log("Selecting: " + this.text(e.node));
+    }
+
+    function onCheck(e) {
+        kendoConsole.log("Checkbox changed :: " + this.text(e.node));
     }
 
     function onChange(e) {

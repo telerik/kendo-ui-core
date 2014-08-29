@@ -4,7 +4,7 @@
 
 <demo:header />
 <div class="demo-section" style="width: 200px">
-    <kendo:treeView name="treeview" select="onSelect" change="onChange" collapse="onCollapse" expand="onExpand"
+    <kendo:treeView name="treeview" select="onSelect" check="onCheck" change="onChange" collapse="onCollapse" expand="onExpand"
                     dragAndDrop="true" dragstart="onDragStart" drag="onDrag" drop="onDrop" dragend="onDragEnd">
         <kendo:treeView-items>
             <kendo:treeView-item text="Furniture" expanded="true">
@@ -33,6 +33,10 @@
     <script>
         function onSelect(e) {
             kendoConsole.log("Selected: " + this.text(e.node));
+        }
+
+        function onCheck(e) {
+            kendoConsole.log("Checkbox changed :: " + this.text(e.node));
         }
 
         function onCollapse(e) {
