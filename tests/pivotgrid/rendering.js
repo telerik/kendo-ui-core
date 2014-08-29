@@ -739,76 +739,6 @@
         equal(th_level4.eq(4).attr("rowspan"), 2);
     });
 
-    test("PivotGrid adds tuple-all attr to the ALL tuple column without children", function() {
-        var tuples = [
-            { members: [ { name: "level 0", levelNum: "0", children: [] }] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
-
-        var tr = headerTable.find("tr");
-        var th = headerTable.find("th");
-
-        ok(th.attr("data-kendo-tuple-all"), "true");
-    });
-
-    test("PivotGrid adds tuple-all attr to the expanded ALL tuples", function() {
-        var tuples = [
-            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
-
-        var tr = headerTable.find("tr");
-        var th_level0 = tr.eq(0).find("th");
-        var th_level1 = tr.eq(1).find("th");
-
-        equal(th_level0.last().attr("data-kendo-tuple-all"), "true");
-        equal(th_level1.eq(0).attr("data-kendo-tuple-all"), "true");
-        equal(th_level1.eq(1).attr("data-kendo-tuple-all"), "true");
-    });
-
-    test("PivotGrid adds tuple-all attr to the second level parent cell", function() {
-        var tuples = [
-            { members: [ { name: "level 0", levelNum: "0", children: [] }] },
-            { members: [ { name: "level 1_1", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 1_2", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 1_3", parentName: "level 0", levelNum: "1", children: [] }] },
-            { members: [ { name: "level 2", parentName: "level 1_1", levelNum: "2", children: [] }] }
-        ]
-
-        var pivotgrid = createPivot({
-            dataSource: createDataSource(tuples)
-        });
-
-        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
-
-        var rows = headerTable.find("tr");
-        var th_level0 = rows.eq(0).find("th");
-        var th_level1 = rows.eq(1).find("th");
-        var th_level2 = rows.eq(2).find("th");
-
-        ok(!th_level0.first().attr("data-kendo-tuple-all"));
-        equal(th_level0.last().attr("data-kendo-tuple-all"), "true");
-
-        ok(!th_level1.eq(0).attr("data-kendo-tuple-all"));
-        equal(th_level1.eq(1).attr("data-kendo-tuple-all"), "true");
-        equal(th_level1.eq(2).attr("data-kendo-tuple-all"), "true");
-        equal(th_level1.eq(3).attr("data-kendo-tuple-all"), "true");
-
-        equal(th_level2.eq(0).attr("data-kendo-tuple-all"), "true");
-    });
-
     test("PivotGrid renders k-header style to TH cell", function() {
         var tuples = [
             { members: [ { name: "level 0", levelNum: "0", children: [] }] }
@@ -850,6 +780,28 @@
 
         ok(th_level1.eq(0).hasClass("k-header"));
         ok(!th_level1.eq(0).hasClass("k-alt"));
+    });
+
+    test("PivotGrid renders k-header k-alt style to measures of all cells", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] }] },
+            { members: [ { name: "level 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] }] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] }] },
+            { members: [ { name: "level 0_1", parentName: "level 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] }] }
+        ]
+
+        var measures = ["measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [], measures)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var cells = headerTable.find("tr:last").find("th");
+
+        ok(cells.eq(2).hasClass("k-alt"));
+        ok(cells.eq(3).hasClass("k-alt"));
     });
 
     test("PivotGrid renders k-first class to the physical cell that is not visually first", function() {
@@ -1078,6 +1030,75 @@
         var cols = colGroup.find("col");
 
         equal(cols.length, 2);
+    });
+
+    test("PivotGrid use columnHeaderTemplate to render column header measure", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("th");
+
+        equal(cell.text(), "test measure 1");
+    });
+
+    test("PivotGrid use columnHeaderTemplate to render column header cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("th");
+
+        equal(cell.text(), "test level 0");
+    });
+
+    test("PivotGrid use columnHeaderTemplate to render column header allcell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "level 1", parentName: "level 0", levelNum: "1", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var row = pivotgrid.wrapper.find(".k-grid-header").find("tbody").find("tr:first");
+
+        equal(row.find("th:last").text(), "test level 0");
+    });
+
+    test("PivotGrid passes correct tuple to columnHeaderTemplate", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        window.checkTuple = function(tuple) {
+            equal(tuple.members[0].name, "level 0");
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples),
+            columnHeaderTemplate: "#checkTuple(data.tuple)#"
+        });
+
+        window.checkTuple = null;
     });
 
     module("PivotGrid rows header rendering", {
@@ -1417,7 +1438,7 @@
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2_1", parentName: "dim 2", levelNum: "0", children: [] } ] }
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] }, { name: "dim 2_1", parentName: "dim 2", levelNum: "1", children: [] } ] }
         ]
 
         var pivotgrid = createPivot({
@@ -1713,11 +1734,11 @@
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
@@ -1789,11 +1810,11 @@
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_3", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_4", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "0", children: [] } ] },
-            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_5", parentName: "dim 1", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1_6", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", children: [] } ] },
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] } ] },
@@ -1843,7 +1864,7 @@
         ok(!td_1.eq(1).hasClass("k-first"));
     });
 
-    test("PivotGrid renders k-grid-footer to all rows", function() {
+    test("PivotGrid renders k-grid-footer to all cells", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
             { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
@@ -1860,9 +1881,32 @@
         var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
 
         var rows = headerTable.find("tr");
+        var cells3 = rows.eq(3).find("td");
+        var cells5 = rows.eq(5).find("td");
 
-        ok(rows.eq(3).hasClass("k-grid-footer"));
-        ok(rows.eq(5).hasClass("k-grid-footer"));
+        ok(cells3.hasClass("k-grid-footer"));
+        ok(cells5.eq(0).hasClass("k-grid-footer"));
+        ok(cells5.eq(1).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid doesn't render k-grid-footer if cell has children", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "dim 1", levelNum: "0", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", children: [] } ] },
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var cells = headerTable.find("tr").eq(1).find("td");
+
+        ok(cells.eq(0).hasClass("k-grid-footer"));
+        ok(!cells.eq(1).hasClass("k-grid-footer"));
+        ok(!cells.eq(2).hasClass("k-grid-footer"));
     });
 
     test("PivotGrid renders expand button collapsed of the row headers", function() {
@@ -2013,9 +2057,12 @@
         var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
 
         var rows = headerTable.find("tr");
+        var cells2 = rows.eq(2).find("td");
+        var cells3 = rows.eq(3).find("td");
 
-        ok(rows.eq(2).hasClass("k-grid-footer"));
-        ok(rows.eq(3).hasClass("k-grid-footer"));
+        ok(cells2.eq(0).hasClass("k-grid-footer"));
+        ok(cells2.eq(1).hasClass("k-grid-footer"));
+        ok(cells3.eq(0).hasClass("k-grid-footer"));
     });
 
     test("PivotGrid renders k-first class to the first root cell when multiple measures are used", function() {
@@ -2087,6 +2134,75 @@
         var cols = colGroup.find("col");
 
         equal(cols.length, 1);
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header measure", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("td");
+
+        equal(cell.text(), "test measure 1");
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header cell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("td");
+
+        equal(cell.text(), "test level 0");
+    });
+
+    test("PivotGrid use rowHeaderTemplate to render row header allcell", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "level 1", parentName: "level 0", levelNum: "1", children: [] } ] }
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "test #: data.member.name #"
+        });
+
+        var row = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("tbody").find("tr:last");
+
+        equal(row.find("td:last").text(), "test level 0");
+    });
+
+    test("PivotGrid passes correct tuple to rowHeaderTemplate", 1, function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", children: [] } ] }
+        ]
+
+        window.checkTuple = function(tuple) {
+            equal(tuple.members[0].name, "level 0");
+        }
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples),
+            rowHeaderTemplate: "#checkTuple(data.tuple)#"
+        });
+
+        window.checkTuple = null;
     });
 
     module("PivotGrid content rendering", {
@@ -3024,6 +3140,301 @@
         var cols = colGroup.find("col");
 
         equal(cols.length, 2);
+    });
+
+    test("PivotGrid use dataCellTemplate to render data cells", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] }
+        ]
+
+        var measures = [ "measure 1" ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "test #: data.dataItem.value #"
+        });
+
+        var cell  = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("td");
+
+        equal(cell.text(), "test 1");
+    });
+
+    test("PivotGrid passes column tuple to cell template", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] }] }
+        ];
+
+        var data = [
+            { value: 0 },
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ];
+
+        var indexes = [3, 4, 1, 5, 2, 0];
+
+        window.checkTuple = function (data) {
+            var tuple = tuples[indexes.shift()];
+            var templateTuple = data.columnTuple;
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes row tuple to cell template", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1", levelNum: "0", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_1", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_2", parentName: "dim 1", levelNum: "1", hasChildren: true, children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_3", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_4", parentName: "dim 1_1", levelNum: "2", children: [] }] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "dim 1_5", parentName: "dim 1_2", levelNum: "2", children: [] }] }
+        ];
+
+        var data = [
+            { value: 0 },
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 }
+        ];
+
+        var indexes = [3, 4, 1, 5, 2, 0];
+
+        window.checkTuple = function (data) {
+            var tuple = tuples[indexes.shift()];
+            var templateTuple = data.rowTuple;
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes a measure with the column tuple", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ];
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var index = indexes.shift();
+
+            var tuple = tuples[index];
+            var templateTuple = data.columnTuple;
+
+            equal(data.measure, measures[index]);
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid passes a measure along with the row tuple", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] }
+        ];
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var index = indexes.shift();
+
+            var tuple = tuples[index];
+            var templateTuple = data.rowTuple;
+
+            equal(data.measure, measures[index]);
+
+            equal(tuple.members[0].name, templateTuple.members[0].name);
+            equal(tuple.members[1].name, templateTuple.members[1].name);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass column measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            var dataMeasure = data.measure;
+
+            equal(measure, data.measure);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid pass row measure to dataCellTemplate", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var indexes = [0, 1];
+
+        window.checkTuple = function (data) {
+            var measure = measures[indexes.shift()];
+            var dataMeasure = data.measure;
+
+            equal(measure, data.measure);
+        };
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures),
+            dataCellTemplate: "#checkTuple(data)#"
+        });
+
+        window.checkTuple = null;
+    });
+
+    test("PivotGrid renders k-grid-footer class to the row representing 'Grand Total'", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+
+        ok(!rows.eq(0).hasClass("k-grid-footer"));
+        ok(rows.eq(1).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders k-grid-footer class to all 'Grand Total' rows", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+
+        ok(!rows.eq(0).hasClass("k-grid-footer"));
+        ok(rows.eq(1).hasClass("k-grid-footer"));
+        ok(rows.eq(2).hasClass("k-grid-footer"));
+    });
+
+    test("PivotGrid renders k-alt class to 'Grand Total' cells", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var rows = pivotgrid.wrapper.find(".k-grid-content").find("tbody").find("tr");
+        var cells = rows.eq(0).find("td");
+
+        ok(!cells.eq(0).hasClass("k-alt"));
+        ok(cells.eq(1).hasClass("k-alt"));
+        ok(cells.eq(2).hasClass("k-alt"));
     });
 
     module("PivotGrid resize on render", {
