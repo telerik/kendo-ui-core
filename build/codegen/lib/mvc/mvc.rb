@@ -88,6 +88,8 @@ module CodeGen::MVC::Wrappers
         'treeview.datasource',
         'treeview.checkboxes',
         'treeview.template',
+        'colorpicker.palette',
+        'colorpicker.tilesize',
 		'diagram.shapedefaults.visual',
 		'diagram.shapes.visual',
 		'diagram.datasource',
@@ -193,7 +195,7 @@ module CodeGen::MVC::Wrappers
         /// </example>
         public virtual <%= csharp_class %>Builder<%= csharp_generic_args %> <%= csharp_class %><%= csharp_generic_args %>()<%= csharp_generic_constraints %>
         {
-            return new <%= csharp_class %>Builder<%= csharp_generic_args %>(new <%= csharp_class %><%= csharp_generic_args %>(ViewContext, Initializer, UrlGenerator<%= csharp_init_args %>));
+            return new <%= csharp_class %>Builder<%= csharp_generic_args %>(new <%= csharp_class %><%= csharp_generic_args %>(<%= csharp_registration_args %>));
         }
         })
 
@@ -464,7 +466,14 @@ module CodeGen::MVC::Wrappers
         end
 
         def prepare_fluent_fields(csharp, options)
-            fields = csharp.match(/\/\/>> Fields(.|\n)*\/\/<< Fields/)[0]
+            matches = csharp.match(/\/\/>> Fields(.|\n)*\/\/<< Fields/)
+
+            if matches.nil?
+                puts "Field markers not found in #{charp_builder_class}, skipping..." if VERBOSE
+                return csharp
+            end
+
+            fields = matches[0]
 
             parts = options.map do |o|
                 match = fields.match("//>> #{o.csharp_name}$(.|\n)*//<< #{o.csharp_name}$")
@@ -515,6 +524,23 @@ module CodeGen::MVC::Wrappers
             csharp = File.exists?(filename) ? File.read(filename) : EVENT.result(binding)
 
             csharp = csharp.sub(/\/\/>> Handlers(.|\n)*\/\/<< Handlers/, FLUENT_EVENTS.result(binding))
+        end
+
+        def editing_widget
+            puts name
+            name.include?('Picker')
+        end
+
+        def csharp_registration_args
+            args = [ "ViewContext", "Initializer" ]
+
+            if editing_widget
+                args.push("ViewData")
+            else
+                args.push("UrlGenerator" + csharp_init_args)
+            end
+
+            args.join(", ")
         end
 
         def register(container)
