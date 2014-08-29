@@ -100,6 +100,12 @@ test("getter access property with safe options type is correct", function() {
     equal(getter("foo.bar", true)(dataItem), 0);
 });
 
+test("getter cache honors safe flag", function() {
+    var dataItem = {};
+    getter("foo.bar");
+    equal(getter("foo.bar", true)(dataItem), undefined);
+});
+
 test("setter creates function which sets the specified expression", function() {
     var data = { foo: "foo" };
 

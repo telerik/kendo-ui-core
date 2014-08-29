@@ -2506,7 +2506,8 @@ function pad(number, digits, end) {
         },
 
         getter: function(expression, safe) {
-            return getterCache[expression] = getterCache[expression] || new Function("d", "return " + kendo.expr(expression, safe));
+            var key = expression + safe;
+            return getterCache[key] = getterCache[key] || new Function("d", "return " + kendo.expr(expression, safe));
         },
 
         setter: function(expression) {
