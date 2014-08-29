@@ -164,27 +164,28 @@ var Worksheet = kendo.Class.extend({
     toXML: function() {
         return kendo.format(WORKSHEET, $.map(this.options.data, $.proxy(this._row, this)).join(""));
     },
-    _row: function(data, index) {
-        return kendo.format('<row r="r{0}">{1}</row>', index + 1, $.map(data, $.proxy(this._cell, this, index + 1)).join(""))
+    _row: function(data, rowIndex) {
+        return kendo.format('<row r="r{0}">{1}</row>', rowIndex + 1, $.map(data, $.proxy(this._cell, this, rowIndex)).join(""))
     },
-    _cell: function(rowNum, data, cellIndex) {
-        if (typeof data === "string") {
-            var index = this._sharedStrings.indexes[data];
+    _cell: function(rowIndex, data, cellIndex) {
+        var value = data.value;
+
+        if (typeof value === "string") {
+            var index = this._sharedStrings.indexes[value];
 
             if (index !== undefined) {
-                data = index;
+                value = index;
             } else {
-                this._sharedStrings.indexes[data] = data = this._sharedStrings.uniqueCount;
+                value = this._sharedStrings.indexes[value] = this._sharedStrings.uniqueCount;
                 this._sharedStrings.uniqueCount ++;
             }
 
             this._sharedStrings.count ++;
         }
 
-        return kendo.format('<c r="{0}{1}" t="s"><v>{2}</v></c>', String.fromCharCode(65 + cellIndex), rowNum, data);
+        return kendo.format('<c r="{0}{1}" t="s"><v>{2}</v></c>', String.fromCharCode(65 + cellIndex), rowIndex + 1, value);
     }
 });
-
 
 kendo.ooxml = {
     Workbook: Workbook,
