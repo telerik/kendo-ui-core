@@ -52,8 +52,8 @@ If you use a custom palette then you can set this to some value that makes sense
     }
 
     /**
-    * Allows customization of "Apply" / "Cancel" labels.
-    * @param  $value
+    * Allows localization of the strings that are used in the widget.
+    * @param \Kendo\UI\ColorPickerMessages|array $value
     * @return \Kendo\UI\ColorPicker
     */
     public function messages($value) {

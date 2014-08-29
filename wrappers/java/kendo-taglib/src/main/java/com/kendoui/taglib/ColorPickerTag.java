@@ -54,6 +54,10 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "colorPicker";
     }
 
+    public void setMessages(com.kendoui.taglib.colorpicker.MessagesTag value) {
+        setProperty("messages", value);
+    }
+
     public void setTileSize(com.kendoui.taglib.colorpicker.TileSizeTag value) {
         setProperty("tileSize", value);
     }
@@ -88,14 +92,6 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setColumns(float value) {
         setProperty("columns", value);
-    }
-
-    public java.lang.Object getMessages() {
-        return (java.lang.Object)getProperty("messages");
-    }
-
-    public void setMessages(java.lang.Object value) {
-        setProperty("messages", value);
     }
 
     public boolean getOpacity() {

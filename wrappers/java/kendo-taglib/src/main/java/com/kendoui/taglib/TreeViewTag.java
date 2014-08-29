@@ -85,6 +85,10 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setEvent("change", value.getBody());
     }
 
+    public void setCheck(CheckFunctionTag value) {
+        setEvent("check", value.getBody());
+    }
+
     public void setCollapse(CollapseFunctionTag value) {
         setEvent("collapse", value.getBody());
     }
@@ -215,6 +219,18 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
 
     public void setChange(String value) {
         setProperty("change", new Function(value));
+    }
+
+    public String getCheck() {
+        Function property = ((Function)getProperty("check"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setCheck(String value) {
+        setProperty("check", new Function(value));
     }
 
     public String getCollapse() {
