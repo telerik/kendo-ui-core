@@ -5,6 +5,7 @@
     .Events(events => events
         .Change("onChange")
         .Select("onSelect")
+        .Check("onCheck")
         .Collapse("onCollapse")
         .Expand("onExpand")
         .DragStart("onDragStart")
@@ -46,6 +47,10 @@
         kendoConsole.log("Selecting: " + this.text(e.node));
     }
 
+    function onCheck(e) {
+        kendoConsole.log("Checkbox changed :: " + this.text(e.node));
+    }
+
     function onChange(e) {
         kendoConsole.log("Selection changed");
     }
@@ -80,7 +85,7 @@
     function onDragEnd(e) {
         kendoConsole.log("Finished dragging " + treeview.text(e.sourceNode));
     }
-        
+
     $(document).ready(function() {
         treeview = $("#treeview").data("kendoTreeView");
     });
