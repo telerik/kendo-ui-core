@@ -46,6 +46,8 @@ var __meta__ = {
         COLLAPSEMEMBER = "collapseMember",
         STATE_EXPANDED = "k-i-arrow-s",
         STATE_COLLAPSED = "k-i-arrow-e",
+        HEADER_TEMPLATE = "#: data.member.caption || data.member.name #",
+        DATACELL_TEMPLATE = '#: data.dataItem ? (data.dataItem.fmtValue || data.dataItem.value) : "" #',
         LAYOUT_TABLE = '<table class="k-pivot-layout">' +
                             '<tr>' +
                                 '<td>' +
@@ -2351,9 +2353,7 @@ var __meta__ = {
                 this.sortable = this.element.kendoSortable({
                     connectWith: this.options.connectWith,
                     filter: ">:not(.k-empty)",
-                    placeholder: function(element) {
-                        return element.clone().hide();
-                    },
+                    hint: that.options.hint,
                     cursor: "move",
                     change: function(e) {
                         var name = e.item.attr(kendo.attr("name"));
@@ -2485,9 +2485,12 @@ var __meta__ = {
             that._wrapper();
             that._createLayout();
 
+
             that._columnBuilder = columnBuilder = new ColumnBuilder();
             that._rowBuilder = rowBuilder = new RowBuilder();
             that._contentBuilder = new ContentBuilder();
+
+            that._templates();
 
             that.columnsHeader
                 .add(that.rowsHeader)
@@ -2553,6 +2556,9 @@ var __meta__ = {
             height: null,
             columnWidth: 100,
             configurator: "",
+            columnHeaderTemplate: null,
+            rowHeaderTemplate: null,
+            dataCellTemplate: null,
             messages: {
                 measureFields: "Drop Data Fields Here",
                 columnFields: "Drop Column Fields Here",
@@ -2560,11 +2566,47 @@ var __meta__ = {
             }
         },
 
+        _templates: function() {
+            var dataTemplate = this.options.dataCellTemplate;
+            var columnTemplate = this.options.columnHeaderTemplate;
+            var rowTemplate = this.options.rowHeaderTemplate;
+
+            this._columnBuilder.template = kendo.template(columnTemplate || HEADER_TEMPLATE, { useWithBlock: !!columnTemplate });
+            this._contentBuilder.template = kendo.template(dataTemplate || DATACELL_TEMPLATE, { useWithBlock: !!dataTemplate });
+            this._rowBuilder.template = kendo.template(rowTemplate || HEADER_TEMPLATE, { useWithBlock: !!rowTemplate });
+        },
+
         _bindConfigurator: function() {
             var configurator = this.options.configurator;
             if (configurator) {
                 $(configurator).kendoPivotConfigurator("setDataSource", this.dataSource);
             }
+        },
+
+        cellInfoByElement: function(element) {
+            element = $(element);
+
+            return this.cellInfo(element.index(), element.parent("tr").index());
+        },
+
+        cellInfo: function(columnIndex, rowIndex) {
+            var contentBuilder = this._contentBuilder;
+            var columnInfo = contentBuilder.columnIndexes[columnIndex || 0];
+            var rowInfo = contentBuilder.rowIndexes[rowIndex || 0];
+            var dataIndex;
+
+            if (!columnInfo || !rowInfo) {
+                return null;
+            }
+
+            dataIndex = (rowInfo.index * contentBuilder.rowLength) + columnInfo.index;
+
+            return {
+                columnTuple: columnInfo.tuple,
+                rowTuple: rowInfo.tuple,
+                measure: columnInfo.measure || rowInfo.measure,
+                dataItem: this.dataSource.view()[dataIndex]
+            };
         },
 
         setDataSource: function(dataSource) {
@@ -2589,6 +2631,12 @@ var __meta__ = {
             if (this.options.autoBind) {
                 dataSource.fetch();
             }
+        },
+
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            this._templates();
         },
 
         _dataSource: function() {
@@ -2722,7 +2770,6 @@ var __meta__ = {
 
             that.wrapper.append(layoutTable);
 
-            //VIRTUAL DOM
             that.columnsHeaderTree = new kendo.dom.Tree(that.columnsHeader[0]);
             that.rowsHeaderTree = new kendo.dom.Tree(that.rowsHeader[0]);
             that.contentTree = new kendo.dom.Tree(that.content[0]);
@@ -2842,7 +2889,7 @@ var __meta__ = {
                 return;
             }
 
-            columnBuilder.measures = dataSource._columnMeasures().length || 1;
+            columnBuilder.measures = dataSource._columnMeasures();
 
             that.columnsHeaderTree.render(columnBuilder.build(columns));
             that.rowsHeaderTree.render(rowBuilder.build(rows));
@@ -2855,7 +2902,7 @@ var __meta__ = {
 
             rowAxis = {
                 indexes: rowBuilder._indexes,
-                measures: dataSource._rowMeasures().length || 1,
+                measures: dataSource._rowMeasures(),
                 metadata: rowBuilder.metadata
             };
 
@@ -2916,7 +2963,31 @@ var __meta__ = {
     });
 
     var element = kendo.dom.element;
+    var htmlNode = kendo.dom.html;
     var text = kendo.dom.text;
+
+    var createMetadata = function(levelNum, memberIdx) {
+       return {
+            maxChildren: 0,
+            children: 0,
+            maxMembers: 0,
+            members: 0,
+            measures: 1,
+            levelNum: levelNum,
+            parentMember: memberIdx !== 0
+        };
+    };
+
+    var buildPath = function(tuple, index) {
+        var path = [];
+        var idx = 0;
+
+        for(; idx <= index; idx++) {
+            path.push(tuple.members[idx].name);
+        }
+
+        return path;
+    };
 
     var ColumnBuilder = Class.extend({
         init: function(options) {
@@ -2937,27 +3008,8 @@ var __meta__ = {
             this.metadata = {};
         },
 
-        rowLength: function() {
-            var cells = this.rows[0] ? this.rows[0].children : [];
-            var length = cells.length;
-            var rowLength = 0;
-            var idx = 0;
-
-            if (length) {
-                for (; idx < length; idx++) {
-                    rowLength += cells[idx].attr.colspan || 1;
-                }
-            }
-
-            if (!rowLength) {
-                rowLength = this.measures;
-            }
-
-            return rowLength;
-        },
-
         _colGroup: function() {
-            var length = this.rowLength();
+            var length = this._rowLength();
             var children = [];
             var idx = 0;
 
@@ -2979,7 +3031,7 @@ var __meta__ = {
 
             if (root) {
                 this._buildRows(root, 0);
-                this._normalizeRows();
+                this._normalize();
             } else {
                 this.rows.push(element("tr", null, [ element("th", null) ]));
             }
@@ -2987,24 +3039,7 @@ var __meta__ = {
             return element("tbody", null, this.rows);
         },
 
-        _memberIdx: function(members, parentMember) {
-            var index = 0;
-            var member = members[index];
-
-            while(member && member.parentName !== parentMember.name) {
-                index += 1;
-                member = members[index];
-            }
-
-            return member ? index : index - 1;
-        },
-
-        _normalizeRows: function() {
-            this._normalizeRowSpan();
-            this._normalizeColSpan();
-        },
-
-        _normalizeRowSpan: function() {
+        _normalize: function() {
             var rows = this.rows;
             var rowsLength = rows.length;
             var rowIdx = 0;
@@ -3014,7 +3049,6 @@ var __meta__ = {
             var cellIdx;
             var cells;
             var cell;
-            var attrName = kendo.attr("tuple-all");
 
             for (; rowIdx < rowsLength; rowIdx++) {
                 row = rows[rowIdx];
@@ -3031,55 +3065,11 @@ var __meta__ = {
                 for (; cellIdx < cellsLength; cellIdx++) {
                     cell = cells[cellIdx];
 
-                    if (cell.attr[attrName]) {
+                    if (cell.tupleAll) {
                         cell.attr.rowspan = row.rowspan;
                     }
                 }
             }
-        },
-
-        _normalizeColSpan: function() {
-            var rootMembers = this.rootTuple.members;
-            var idx = rootMembers.length - 1;
-            var member = rootMembers[idx];
-
-            if (member.measure) {
-                member = rootMembers[--idx];
-
-                if (!member) {
-                    return;
-                }
-            }
-
-            var map = this.map;
-            var row = map[member.name + member.levelNum];
-            var colspan = this._rootRowColSpan(row);
-            var currentColspan;
-
-            while(idx) {
-                idx -= 1;
-                member = rootMembers[idx];
-                row = map[member.name + member.levelNum];
-
-                if (colspan > 1) {
-                    row.children[row.children.length - 1].attr.colspan = colspan;
-                }
-
-                colspan = this._rootRowColSpan(row);
-            }
-        },
-
-        _rootRowColSpan: function (row) {
-            var children = row.children;
-            var lastIdx = children.length - 1;
-            var cell = children[lastIdx];
-            var colspan = cell.attr.colspan || 1;
-
-            if (cell.attr.rowspan > 1) {
-                colspan += children[lastIdx - 1].attr.colspan;
-            }
-
-            return colspan;
         },
 
         _rowIndex: function(row) {
@@ -3094,6 +3084,25 @@ var __meta__ = {
             }
 
             return idx;
+        },
+
+        _rowLength: function() {
+            var cells = this.rows[0] ? this.rows[0].children : [];
+            var length = cells.length;
+            var rowLength = 0;
+            var idx = 0;
+
+            if (length) {
+                for (; idx < length; idx++) {
+                    rowLength += cells[idx].attr.colspan || 1;
+                }
+            }
+
+            if (!rowLength) {
+                rowLength = this.measures;
+            }
+
+            return rowLength;
         },
 
         _row: function(tuple, memberIdx, parentMember) {
@@ -3129,28 +3138,17 @@ var __meta__ = {
                 this.rows.splice(this._rowIndex(parentRow) + 1, 0, row);
             } else {
                 row.notFirst = false;
-            }
 
-            if (!row.parentMember || row.parentMember !== parentMember) {
-                row.parentMember = parentMember;
-                row.colspan = 0;
+                if (!row.parentMember || row.parentMember !== parentMember) {
+                    row.parentMember = parentMember;
+                    row.colspan = 0;
+                }
             }
 
             return row;
         },
 
-        _tuplePath: function(tuple, index) {
-            var path = [];
-            var idx = 0;
-
-            for(; idx <= index; idx++) {
-                path.push(tuple.members[idx].name);
-            }
-
-            return path;
-        },
-
-        _measures: function(measures) {
+        _measures: function(measures, tuple, className) {
             var map = this.map;
             var row = map.measureRow;
             var measure;
@@ -3163,67 +3161,57 @@ var __meta__ = {
 
             for (var idx = 0, length = measures.length; idx < length; idx++) {
                 measure = measures[idx];
-                row.children.push(element("th", { className: "k-header" }, [text(measure.caption || measure.name)]));
+                row.children.push(element("th", { className: "k-header" + (className || "") }, [this._content(measure, tuple)]));
             }
 
             return length;
         },
 
+        _content: function(member, tuple) {
+            return htmlNode(this.template({
+                member: member,
+                tuple: tuple
+            }));
+        },
+
+        _cell: function(className, children) {
+            return element("th", { className: "k-header" + className }, children);
+        },
+
         _buildRows: function(tuple, memberIdx, parentMember) {
             var members = tuple.members;
-            var children;
-            var childRow;
-            var member;
-            var row;
+            var member = members[memberIdx];
+            var nextMember = members[memberIdx + 1];
 
-            var nextMember;
-
-            var allCell;
-            var cell;
-            var cellAttr;
+            var row, childRow, children, childrenLength;
+            var cell, allCell, cellAttr;
             var cellChildren = [];
             var path;
 
             var idx = 0;
-            var childrenLength;
-
             var colspan;
             var metadata;
 
-            if (parentMember) {
-                memberIdx = this._memberIdx(members, parentMember); //we do not need this func
-            }
-
-            member = members[memberIdx];
-
             if (member.measure) {
-                this._measures(member.children);
+                this._measures(member.children, tuple);
                 return;
             }
 
+            path = kendo.stringify(buildPath(tuple, memberIdx));
             row = this._row(tuple, memberIdx, parentMember);
 
             children = member.children;
             childrenLength = children.length;
 
-            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
             metadata = this.metadata[path];
-
-            this._indexes.push(path);
-
             if (!metadata) {
-                metadata = {
-                    maxChildren: 0,
-                    children: 0,
-                    maxMembers: 0,
-                    members: 0,
-                    measures: 1,
-                    levelNum: Number(member.levelNum),
-                    parentMember: memberIdx !== 0
-                };
-
-                this.metadata[path] = metadata;
+                this.metadata[path] = metadata = createMetadata(Number(member.levelNum), memberIdx);
             }
+
+            this._indexes.push({
+                path: path,
+                tuple: tuple
+            });
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
@@ -3237,20 +3225,18 @@ var __meta__ = {
                 cellChildren.push(element("span", cellAttr));
             }
 
-            cellChildren.push(text(member.caption || member.name));
-            cell = element("th", { className: "k-header" + (row.notFirst ? " k-first" : "") }, cellChildren);
+            cellChildren.push(this._content(member, tuple));
+            cell = this._cell((row.notFirst ? " k-first" : ""), cellChildren);
 
             row.children.push(cell);
             row.colspan += 1;
 
-            nextMember = members[memberIdx + 1];
-
             if (childrenLength) {
-                allCell = element("th", { className: "k-header k-alt" }, [text(member.caption || member.name)]);
+                allCell = this._cell(" k-alt", [this._content(member, tuple)]);
                 row.children.push(allCell);
 
                 for (; idx < childrenLength; idx++) {
-                    childRow = this._buildRows(children[idx], 0, member);
+                    childRow = this._buildRows(children[idx], memberIdx, member);
                 }
 
                 colspan = childRow.colspan;
@@ -3264,7 +3250,7 @@ var __meta__ = {
 
                 if (nextMember) {
                     if (nextMember.measure) {
-                        colspan = this._measures(nextMember.children);
+                        colspan = this._measures(nextMember.children, tuple, " k-alt");
                     } else {
                         colspan = this._buildRows(tuple, memberIdx + 1).colspan;
                     }
@@ -3277,7 +3263,7 @@ var __meta__ = {
                 }
             } else if (nextMember) {
                 if (nextMember.measure) {
-                    colspan = this._measures(nextMember.children);
+                    colspan = this._measures(nextMember.children, tuple);
                 } else {
                     colspan = this._buildRows(tuple, memberIdx + 1).colspan;
                 }
@@ -3298,7 +3284,7 @@ var __meta__ = {
                 metadata.maxMembers = metadata.members;
             }
 
-            (allCell || cell).attr[kendo.attr("tuple-all")] = true;
+            (allCell || cell).tupleAll = true;
 
             return row;
         }
@@ -3390,23 +3376,12 @@ var __meta__ = {
             }
 
             if (allRow) {
-                allRow.children[0].attr.className = "k-first";
+                allRow.children[0].attr.className += " k-first";
             }
         },
 
-        _tuplePath: function(tuple, index) {
-            var path = [];
-            var idx = 0;
-
-            for(; idx <= index; idx++) {
-                path.push(tuple.members[idx].name);
-            }
-
-            return path;
-        },
-
-        _row: function(attr, children) {
-            var row = element("tr", attr, children);
+        _row: function(children) {
+            var row = element("tr", null, children);
             row.rowspan = 1;
             row.colspan = {};
 
@@ -3415,8 +3390,11 @@ var __meta__ = {
             return row;
         },
 
-        _text: function(member) {
-            return text(member.caption || member.name);
+        _content: function(member, tuple) {
+            return htmlNode(this.template({
+                member: member,
+                tuple: tuple
+            }));
         },
 
         _buildRows: function(tuple, memberIdx) {
@@ -3432,7 +3410,7 @@ var __meta__ = {
 
             var levelNum = Number(member.levelNum) + 1;
             var rootName = this.rootTuple.members[memberIdx].name;
-            var tuplePath = this._tuplePath(tuple, memberIdx - 1).join("");
+            var tuplePath = buildPath(tuple, memberIdx - 1).join("");
 
             var parentName = tuplePath + (member.parentName || "");
             var row = map[parentName + "all"] || map[parentName];
@@ -3444,6 +3422,7 @@ var __meta__ = {
             var cellChildren = [];
             var allCell;
             var cell;
+            var attr;
             var idx;
 
             if (!row || row.hasChild) {
@@ -3453,12 +3432,13 @@ var __meta__ = {
             }
 
             if (member.measure) {
-                row.children.push(element("td", null, [ this._text(children[0]) ]));
+                attr = { className: row.allCell ? "k-grid-footer" : "" };
+                row.children.push(element("td", attr, [ this._content(children[0], tuple) ]));
 
                 row.rowspan = childrenLength;
 
                 for (idx = 1; idx < childrenLength; idx++) {
-                    this._row(row.attr, [ element("td", null, [ this._text(children[idx]) ]) ]);
+                    this._row([ element("td", attr, [ this._content(children[idx], tuple) ]) ]);
                 }
 
                 return row;
@@ -3466,24 +3446,17 @@ var __meta__ = {
 
             map[tuplePath + member.name] = row;
 
-            path = kendo.stringify(this._tuplePath(tuple, memberIdx));
+            path = kendo.stringify(buildPath(tuple, memberIdx));
+
             metadata = this.metadata[path];
-
-            this._indexes.push(path);
-
             if (!metadata) {
-                metadata = {
-                    maxChildren: 0,
-                    children: 0,
-                    maxMembers: 0,
-                    members: 0,
-                    measures: 1,
-                    levelNum: levelNum - 1,
-                    parentMember: memberIdx !== 0
-                };
-
-                this.metadata[path] = metadata;
+                this.metadata[path] = metadata = createMetadata(levelNum - 1, memberIdx);
             }
+
+            this._indexes.push({
+                path: path,
+                tuple: tuple
+            });
 
             if (member.hasChildren) {
                 if (metadata.expanded === false) {
@@ -3497,8 +3470,8 @@ var __meta__ = {
                 cellChildren.push(element("span", expandIconAttr));
             }
 
-            cellChildren.push(this._text(member));
-            cell = element("td", null, cellChildren);
+            cellChildren.push(this._content(member, tuple));
+            cell = element("td", { className: row.allCell && !childrenLength ? "k-grid-footer" : "" }, cellChildren);
             cell.levelNum = levelNum;
 
             row.children.push(cell);
@@ -3509,6 +3482,7 @@ var __meta__ = {
             }
 
             if (childrenLength) {
+                row.allCell = false;
                 row.hasChild = false;
 
                 for (idx = 0; idx < childrenLength; idx++) {
@@ -3525,11 +3499,12 @@ var __meta__ = {
 
                 metadata.children = row.rowspan;
 
-                allCell = element("td", null, [this._text(member)]);
+                allCell = element("td", { className: "k-grid-footer" }, [this._content(member, tuple)]);
                 allCell.levelNum = levelNum;
 
-                allRow = this._row({ className: "k-grid-footer" }, [ allCell ]);
+                allRow = this._row([ allCell ]);
                 allRow.colspan["dim" + memberIdx] = allCell;
+                allRow.allCell = true;
 
                 map[tuplePath + member.name + "all"] = allRow;
 
@@ -3564,24 +3539,27 @@ var __meta__ = {
     });
 
     var ContentBuilder = Class.extend({
-        init: function(options) {
+        init: function() {
             this.columnAxis = {};
             this.rowAxis = {};
         },
 
         build: function(data, columnAxis, rowAxis) {
-            var metadata = columnAxis.metadata[columnAxis.indexes[0]];
+            var index = columnAxis.indexes[0];
+            var metadata = columnAxis.metadata[index ? index.path : undefined];
 
             this.columnAxis = columnAxis;
             this.rowAxis = rowAxis;
 
-            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures;
+            this.data = data;
+
+            this.rowLength = metadata ? metadata.maxChildren + metadata.maxMembers : columnAxis.measures.length || 1;
 
             if (!this.rowLength) {
                 this.rowLength = 1;
             }
 
-            var tbody = this._tbody(data);
+            var tbody = this._tbody();
             var colgroup = this._colGroup();
 
             return [
@@ -3590,7 +3568,7 @@ var __meta__ = {
         },
 
         _colGroup: function() {
-            var length = this.columnAxis.measures;
+            var length = this.columnAxis.measures.length || 1;
             var children = [];
             var idx = 0;
 
@@ -3605,16 +3583,14 @@ var __meta__ = {
             return element("colgroup", null, children);
         },
 
-        _tbody: function(data) {
-            var columnAxis = this.columnAxis;
-            var dataItem = data[0];
+        _tbody: function() {
             this.rows = [];
 
-            if (dataItem) {
+            if (this.data[0]) {
                 this.columnIndexes = this._indexes(this.columnAxis);
                 this.rowIndexes = this._indexes(this.rowAxis);
 
-                this._buildRows(data);
+                this._buildRows();
             } else {
                 this.rows.push(element("tr", null, [ element("td", null, [ text("") ]) ]));
             }
@@ -3624,9 +3600,11 @@ var __meta__ = {
 
         _indexes: function(axisInfo) {
             var result = [];
+            var axisInfoMember;
             var indexes = axisInfo.indexes;
-            var measures = axisInfo.measures;
             var metadata = axisInfo.metadata;
+            var measures = axisInfo.measures;
+            var measuresLength = measures.length || 1;
 
             var current;
             var dataIdx = 0;
@@ -3640,20 +3618,25 @@ var __meta__ = {
             var skipChildren;
 
             if (!length) {
-                for (measureIdx = 0; measureIdx < measures; measureIdx++) {
-                    result[measureIdx] = measureIdx;
+                for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
+                    result[measureIdx] = {
+                        index: measureIdx,
+                        measure: measures[measureIdx],
+                        tuple: null
+                    };
                 }
 
                 return result;
             }
 
             for (; idx < length; idx++) {
-                current = metadata[indexes[idx]];
+                axisInfoMember = indexes[idx];
+                current = metadata[axisInfoMember.path];
                 children = current.children + current.members;
                 skipChildren = 0;
 
                 if (children) {
-                    children -= measures;
+                    children -= measuresLength;
                 }
 
                 if (current.expanded === false && current.children !== current.maxChildren) {
@@ -3665,8 +3648,13 @@ var __meta__ = {
                 }
 
                 if (children > -1) {
-                    for (measureIdx = 0; measureIdx < measures; measureIdx++) {
-                        result[children + firstEmpty + measureIdx] = dataIdx;
+                    for (measureIdx = 0; measureIdx < measuresLength; measureIdx++) {
+                        result[children + firstEmpty + measureIdx] = {
+                            children: children,
+                            index: dataIdx,
+                            measure: measures[measureIdx],
+                            tuple: axisInfoMember.tuple
+                        };
                         dataIdx += 1;
                     }
 
@@ -3681,39 +3669,51 @@ var __meta__ = {
             return result;
         },
 
-        _buildRows: function(data) {
-            var cells = [];
+        _buildRows: function() {
             var rowIndexes = this.rowIndexes;
-            var rowLength = this.rowLength;
             var length = rowIndexes.length;
             var idx = 0;
 
-            var currentIdx;
-
             for (; idx < length; idx++) {
-                currentIdx = rowIndexes[idx];
-                this.rows.push(this._buildRow(data, currentIdx * rowLength));
+                this.rows.push(this._buildRow(rowIndexes[idx]));
             }
         },
 
-        _buildRow: function(data, startIdx) {
-            var cells = [];
+        _buildRow: function(rowInfo) {
+            var startIdx = rowInfo.index * this.rowLength;
             var columnIndexes = this.columnIndexes;
             var length = columnIndexes.length;
+            var columnInfo;
+            var cells = [];
             var idx = 0;
 
-            var dataItem;
-            var cellValue;
+            var cellContent;
+            var attr;
 
             for (; idx < length; idx++) {
-                dataItem = data[startIdx + columnIndexes[idx]];
+                columnInfo = columnIndexes[idx];
 
-                cellValue = dataItem ? (dataItem.fmtValue || dataItem.value) : "";
+                attr = {};
+                if (columnInfo.children) {
+                    attr.className = "k-alt";
+                }
 
-                cells.push(element("td", null, [ text(cellValue) ]));
+                cellContent = this.template({
+                    columnTuple: columnInfo.tuple,
+                    rowTuple: rowInfo.tuple,
+                    measure: columnInfo.measure || rowInfo.measure,
+                    dataItem: this.data[startIdx + columnInfo.index]
+                });
+
+                cells.push(element("td", attr, [ htmlNode(cellContent) ]));
             }
 
-            return element("tr", null, cells);
+            attr = {};
+            if (rowInfo.children) {
+                attr.className = "k-grid-footer";
+            }
+
+            return element("tr", attr, cells);
         }
     });
 

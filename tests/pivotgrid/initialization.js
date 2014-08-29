@@ -276,6 +276,20 @@
         ok(method.calls("setDataSource"));
     });
 
+    test("setOptions updates template", function() {
+        var pivotgrid = createPivot();
+
+        pivotgrid.setOptions({
+            dataCellTemplate: "test #: dataItem.value #"
+        });
+
+        var result = pivotgrid._contentBuilder.template({
+            dataItem: { value: "1" }
+        });
+
+        equal(result, "test 1");
+    });
+
     test("filterable option is not set for measures setting target", function() {
         var pivotgrid = createPivot({
             filterable: true

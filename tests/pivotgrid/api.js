@@ -297,8 +297,12 @@
         }
     });
 
-    function createDataSourceRows(tuples, data) {
+    function createDataSourceRows(tuples, data, measures) {
         return new PivotDataSource({
+            measures: {
+                values: measures || [],
+                axis: "rows"
+            },
             schema: {
                 axes: "axes",
                 data: "data"
@@ -543,5 +547,211 @@
 
         equal(dataSource.calls("expandRow"), 0);
         equal(headerTable.find("tr").length, 1);
+    });
+
+    module("PivotGrid Cell Info API", {
+        setup: function() {
+            kendo.ns = "kendo-";
+            div = document.createElement("div");
+            QUnit.fixture[0].appendChild(div);
+        },
+        teardown: function() {
+            var component = $(div).data("kendoPivotGrid");
+            if (component) {
+                component.destroy();
+            }
+            kendo.destroy(QUnit.fixture);
+            kendo.ns = "";
+        }
+    });
+
+    function createPivot(options) {
+        options = options || {};
+
+        if (!options.dataSource) {
+            options.dataSource = new kendo.data.PivotDataSource({
+                schema: {
+                    axes: function() {
+                        return {};
+                    }
+                }
+            });
+        }
+
+        return new PivotGrid($(div), options);
+    }
+
+    function createDataSource(tuples, data, measures) {
+        return new PivotDataSource({
+            measures: measures || [],
+            schema: {
+                axes: "axes",
+                data: "data"
+            },
+            transport: {
+                read: function(options) {
+                    options.success({
+                        axes: {
+                            columns: {
+                                tuples: tuples || []
+                            }
+                        },
+                        data: data || []
+                    });
+                }
+            }
+        });
+    }
+
+    test("PivotGrid returns info for TD element", function() {
+        var tuples = [
+            { members: [ { name: "level 0", levelNum: "0", hasChildren: false, children: [] }] }
+        ];
+
+        var data = [
+            { value: 1 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var cell = pivotgrid.wrapper.find(".k-grid-content").find("table").find("td");
+        var info = pivotgrid.cellInfoByElement(cell);
+
+        equal(info.dataItem, pivotgrid.dataSource.data()[0]);
+        equal(info.columnTuple, tuples[0]);
+        equal(info.rowTuple, null);
+        equal(info.measure, null);
+    });
+
+    test("PivotGrid returns info based on row/column index", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var info = pivotgrid.cellInfo(1, 0);
+
+        equal(info.dataItem, pivotgrid.dataSource.data()[1]);
+        equal(info.columnTuple, tuples[1]);
+        equal(info.rowTuple, null);
+        equal(info.measure, null);
+    });
+
+    test("PivotGrid returns info with rowTuple based on row/column index", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data)
+        });
+
+        var info = pivotgrid.cellInfo(0, 2);
+
+        equal(info.dataItem, pivotgrid.dataSource.data()[0]);
+        equal(info.columnTuple, null);
+        equal(info.rowTuple, tuples[0]);
+        equal(info.measure, null);
+    });
+
+    test("PivotGrid returns info with rowTuple with measure based on indexes", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0", levelNum: "0", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] }, { name: "measure 2", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] }, { name: "measure 1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] }, { name: "measure 2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 },
+            { value: 4 },
+            { value: 5 },
+            { value: 6 }
+        ];
+
+        var measures = ["measure 1", "measure 2"];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples, data, measures)
+        });
+
+        var info = pivotgrid.cellInfo(0, 1);
+
+        equal(info.dataItem, pivotgrid.dataSource.data()[5]);
+        equal(info.columnTuple, null);
+        equal(info.rowTuple.members[0].name, "dim 0_2");
+        equal(info.measure, "measure 2");
+    });
+
+    test("PivotGrid returns only measure info", function() {
+        var tuples = [
+            { members: [ { name: "measure 1", children: [] } ] },
+            { members: [ { name: "measure 2", children: [] } ] },
+        ]
+
+        var measures = [ "measure 1", "measure 2"];
+
+        var data = [
+            { value: 1 },
+            { value: 2 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data, measures)
+        });
+
+        var info = pivotgrid.cellInfo(1, 0);
+
+        equal(info.dataItem, pivotgrid.dataSource.data()[1]);
+        equal(info.columnTuple, null);
+        equal(info.rowTuple, null);
+        equal(info.measure, "measure 2");
+    });
+
+    test("PivotGrid returns null if no such data cell", function() {
+        var tuples = [
+            { members: [ { name: "dim 0", levelNum: "0", children: [] } ] },
+            { members: [ { name: "dim 0_1", parentName: "dim 0", levelNum: "1", children: [] } ] },
+            { members: [ { name: "dim 0_2", parentName: "dim 0_1", levelNum: "2", children: [] } ] }
+        ];
+
+        var data = [
+            { value: 1 },
+            { value: 2 },
+            { value: 3 }
+        ];
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, data)
+        });
+
+        var info = pivotgrid.cellInfo(0, 1);
+
+        equal(info, null);
     });
 })();
