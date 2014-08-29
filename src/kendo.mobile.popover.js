@@ -213,7 +213,11 @@ var __meta__ = {
             }, this.options.popup);
 
             that.popup = new Popup(that.element, popupOptions);
-            that.popup.overlay.on("move", false);
+            that.popup.overlay.on("move", function(e) {
+                if (e.target == that.popup.overlay[0]) {
+                    e.preventDefault();
+                }
+            });
 
             that.pane = new ui.Pane(that.element, this.options.pane);
             that.pane.navigateToInitial();
