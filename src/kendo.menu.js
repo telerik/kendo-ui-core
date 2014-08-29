@@ -1390,6 +1390,7 @@ var __meta__ = {
                             .addClass("k-context-menu")
                             .kendoPopup({
                                 anchor: that.target || "body",
+                                copyAnchorStyles: that.options.copyAnchorStyles,
                                 collision: that.options.popupCollision || "fit",
                                 animation: that.options.animation,
                                 activate: that._triggerProxy,
