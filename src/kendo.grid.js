@@ -4534,6 +4534,12 @@ var __meta__ = {
                 that._destroyColumnAttachments();
             }
 
+            this.angular("cleanup", function(){
+                return {
+                    elements: thead.find("th").get()
+                };
+            });
+
             this.angular("compile", function(){
                 return {
                     elements: thead.find("th").get(),
