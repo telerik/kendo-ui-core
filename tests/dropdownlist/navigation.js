@@ -587,4 +587,13 @@
 
         ok(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
     });
+
+    test("DropDownList removes focused state on blur when arrow is clicked", function() {
+        var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
+
+        dropdownlist.wrapper.find(".k-icon").mousedown().click();
+        dropdownlist.wrapper.focusout();
+
+        ok(!dropdownlist.wrapper.find(".k-dropdown-wrap").hasClass("k-state-focused"));
+    });
 })();
