@@ -10610,22 +10610,15 @@ var __meta__ = {
 
         sum: function(values) {
             var length = values.length,
-                defaultValue, sum, i, n;
+                sum = 0,
+                i,
+                n;
 
             for (i = 0; i < length; i++) {
                 n = values[i];
                 if (isNumber(n)) {
-                    if (!defined(sum)) {
-                        sum = 0;
-                    }
                     sum += n;
-                } else if (n === null) {
-                    defaultValue = null;
                 }
-            }
-
-            if (!isNumber(sum)) {
-                sum = defaultValue;
             }
 
             return sum;
