@@ -247,8 +247,8 @@ var __meta__ = {
                 return;
             }
 
-            if ((!that.ul[0].firstChild && state !== STATE_FILTER)
-            || (state === STATE_ACCEPT && !serverFiltering)) {
+            if ((!that.ul[0].firstChild && state !== STATE_FILTER) ||
+                (state === STATE_ACCEPT && !serverFiltering)) {
                 that._open = true;
                 that._state = STATE_REBIND;
                 that._filterSource();
