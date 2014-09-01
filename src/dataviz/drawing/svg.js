@@ -671,6 +671,37 @@
         }
     }
 
+    function exportSVG(element) {
+        var node = document.createElement("div");
+        var surface = new Surface(node);
+
+        pushObserver(element);
+        surface.draw(element);
+        popObserver(element);
+
+        return surface.svg();
+    }
+
+    function pushObserver(element) {
+        element._observer = element.observer;
+
+        if (element.traverse) {
+            element.traverse(function(child) {
+                child._observer = child.observer;
+            });
+        }
+    }
+
+    function popObserver(element) {
+        element.observer = element._observer;
+
+        if (element.traverse) {
+            element.traverse(function(child) {
+                child.observer = child._observer;
+            });
+        }
+    }
+
     // Exports ================================================================
     kendo.support.svg = (function() {
         return doc.implementation.hasFeature(
@@ -680,6 +711,8 @@
     if (kendo.support.svg) {
         d.SurfaceFactory.current.register("svg", Surface, 10);
     }
+
+    d.Surface.exportSVG = exportSVG;
 
     deepExtend(d, {
         svg: {

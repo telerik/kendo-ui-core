@@ -832,4 +832,36 @@
             image.src("Bar");
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var path;
+
+        module("Export / SVG", {
+            setup: function() {
+                path = new Path();
+                path.moveTo(0, 0).lineTo(100, 100);
+            }
+        });
+
+        test("outputs document", function() {
+            var svg = d.Surface.exportSVG(path);
+            equal(svg.indexOf("<?xml version='1.0' ?><svg"), 0);
+        });
+
+        test("doesn't change element observer", function() {
+            path.observer = "foo";
+            var svg = d.Surface.exportSVG(path);
+            equal(path.observer, "foo");
+        });
+
+        test("doesn't change child element observer", function() {
+            var group = new Group();
+            group.append(path);
+
+            path.observer = "foo";
+            var svg = d.Surface.exportSVG(group);
+            equal(path.observer, "foo");
+        });
+    })();
 })();

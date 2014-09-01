@@ -286,7 +286,7 @@
 
     SurfaceFactory.current = new SurfaceFactory();
 
-    // TODO: Surface.exportSVG, Surface.exportImage
+    // TODO: Surface.exportImage
 
     // Exports ================================================================
     deepExtend(dataviz, {
