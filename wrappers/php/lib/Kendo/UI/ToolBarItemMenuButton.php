@@ -6,6 +6,15 @@ class ToolBarItemMenuButton extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Specifies the HTML attributes of a menu button.
+    * @param  $value
+    * @return \Kendo\UI\ToolBarItemMenuButton
+    */
+    public function attributes($value) {
+        return $this->setProperty('attributes', $value);
+    }
+
+    /**
     * Specifies whether the menu button is initially enabled or disabled.
     * @param boolean $value
     * @return \Kendo\UI\ToolBarItemMenuButton

@@ -6,6 +6,15 @@ class ToolBarItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Specifies the HTML attributes of a ToolBar button.
+    * @param  $value
+    * @return \Kendo\UI\ToolBarItem
+    */
+    public function attributes($value) {
+        return $this->setProperty('attributes', $value);
+    }
+
+    /**
     * Adds ToolBarItemButton to the ToolBarItem.
     * @param \Kendo\UI\ToolBarItemButton|array,... $value one or more ToolBarItemButton to add.
     * @return \Kendo\UI\ToolBarItem
