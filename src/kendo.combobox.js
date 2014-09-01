@@ -535,7 +535,7 @@ var __meta__ = {
 
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () {
-                    if (dataSource.data()[0]) {
+                    if (dataSource.view()[0]) {
                         that.search(word);
                     }
                 }).fetch();

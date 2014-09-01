@@ -798,6 +798,32 @@ asyncTest("ComboBox does not trigger filtering when set custom value", 0, functi
     }, 100);
 });
 
+test("ComboBox does not fall in continuous loop after filtering", 1, function() {
+    combobox.destroy();
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data: [{
+                text: "item1",
+                value: 1
+            }],
+            filter: {
+                field: "value",
+                operator: "eq",
+                value: 2
+            }
+        },
+        delay: 0
+    });
+
+    combobox.dataSource.bind("change", function() {
+        ok(true);
+    });
+
+    combobox.search("unknown");
+});
+
 test("ComboBox does not rebind on open if still in filter mode", 1, function() {
     combobox.destroy();
     combobox = new ComboBox(input, {
