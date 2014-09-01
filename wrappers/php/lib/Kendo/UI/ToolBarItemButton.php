@@ -6,6 +6,15 @@ class ToolBarItemButton extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Specifies the HTML attributes of a ButtonGroup's button.
+    * @param  $value
+    * @return \Kendo\UI\ToolBarItemButton
+    */
+    public function attributes($value) {
+        return $this->setProperty('attributes', $value);
+    }
+
+    /**
     * Sets the click option of the ToolBarItemButton.
     * Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
