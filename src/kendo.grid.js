@@ -822,7 +822,7 @@ var __meta__ = {
                 that._navigatable();
             }
 
-            if (that.selectable) {
+            if (that.options.selectable) {
                 that._selectable();
             }
 
@@ -4466,6 +4466,7 @@ var __meta__ = {
             elements.off(NS).remove();
 
             this.lockedHeader = this.lockedContent = this.lockedFooter = null;
+            this.selectable = null;
         },
 
         _thead: function() {
