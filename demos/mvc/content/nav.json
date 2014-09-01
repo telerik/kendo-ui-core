@@ -1428,6 +1428,22 @@
         ]
       },
       {
+        "text": "Working Offline",
+        "url": "grid/offline",
+        "new": true,
+        "title": {
+            "kendo-ui": "Working Offline"
+        },
+        "meta": {
+            "kendo-ui": "This example shows how the Kendo UI Grid can work with offline data"
+        },
+        "packages": [
+          "!mvc",
+          "!jsp",
+          "!php"
+        ]
+      },
+      {
         "text": "Binding to SignalR",
         "url": "grid/signalr",
         "title": {
