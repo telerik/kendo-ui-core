@@ -78,6 +78,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */ {
         setEvent("toggle", value.getBody());
     }
 
+    public java.lang.Object getAttributes() {
+        return (java.lang.Object)getProperty("attributes");
+    }
+
+    public void setAttributes(java.lang.Object value) {
+        setProperty("attributes", value);
+    }
+
     public String getClick() {
         Function property = ((Function)getProperty("click"));
         if (property != null) {
