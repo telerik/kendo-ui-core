@@ -356,7 +356,7 @@ var __meta__ = {
         },
 
         _wrapperMousedown: function() {
-            this._prevent = true;
+            this._prevent = !!this.filterInput;
         },
 
         _wrapperClick: function(e) {
