@@ -291,6 +291,17 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Specifies the HTML attributes of a ToolBar button.
+        /// </summary>
+        /// <param name="attributes">The attributes.</param>
+        public ToolBarItemBuilder HtmlAttributes(object attributes)
+        {
+            container.HtmlAttributes = attributes.ToDictionary();
+
+            return this;
+        }
     }
 }
 

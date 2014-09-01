@@ -5,6 +5,8 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
+    using System.Web.Util;
+    using System.Web;
 
     public class ToolBarItem : JsonObject
     {
@@ -21,6 +23,8 @@ namespace Kendo.Mvc.UI
             Click = new ClientHandlerDescriptor();
 
             Toggle = new ClientHandlerDescriptor();
+
+            HtmlAttributes = new RouteValueDictionary();
         }
 
         //>> Fields
@@ -81,10 +85,12 @@ namespace Kendo.Mvc.UI
 
         public ClientHandlerDescriptor Toggle { get; set; }
 
+        public IDictionary<string, object> HtmlAttributes { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
+                
             var buttons = Buttons.ToJson();
             if (buttons.Any())
             {
@@ -215,6 +221,25 @@ namespace Kendo.Mvc.UI
             if (Type.HasValue)
             {
                 json["type"] = Type.ToString().ToCamelCase();
+            }
+
+            if (HtmlAttributes.Any())
+            {
+                var attributes = new Dictionary<string, object>();
+
+                var hasAntiXss = HttpEncoder.Current != null && HttpEncoder.Current.GetType().ToString().Contains("AntiXssEncoder");
+
+                HtmlAttributes.Each(attr =>
+                {
+                    var value = HttpUtility.HtmlAttributeEncode(attr.Value.ToString());
+                    if (hasAntiXss)
+                    {
+                        value = value.Replace("&#32;", " ");
+                    }
+                    attributes[HttpUtility.HtmlAttributeEncode(attr.Key)] = value;
+                });
+
+                json["attributes"] = attributes;
             }
         }
     }
