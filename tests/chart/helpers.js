@@ -1042,7 +1042,7 @@
         });
 
         test("sum with no values", function() {
-            equal(Aggregates.sum([]), undefined);
+            equal(Aggregates.sum([]), 0);
         });
 
         test("avg", function() {
