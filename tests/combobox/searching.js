@@ -577,6 +577,7 @@ test("remove only combobox filter expression on rebind", function() {
     });
 
     combobox.search("foo1");
+    combobox.input.focus().blur();
     combobox.open();
 
     ok(combobox.dataSource.filter());
@@ -795,6 +796,23 @@ asyncTest("ComboBox does not trigger filtering when set custom value", 0, functi
     setTimeout(function() {
         start();
     }, 100);
+});
+
+test("ComboBox does not rebind on open if still in filter mode", 1, function() {
+    combobox.destroy();
+    combobox = new ComboBox(input, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        delay: 0
+    });
+
+    combobox.search("unknown");
+    combobox.input.val("unknown");
+    combobox.open();
+
+    equal(combobox.ul.children().length, 0);
 });
 
 })();
