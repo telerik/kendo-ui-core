@@ -2570,7 +2570,7 @@ var __meta__ = {
                 GROUPINGDRAGGABLES = HEADERCELLS + ":visible[" + kendo.attr("field") + "]",
                 GROUPINGFILTER =  HEADERCELLS + "[" + kendo.attr("field") + "]";
 
-            if (groupable) {
+            if (groupable && groupable.enabled !== false) {
 
                 if(!wrapper.has("div.k-grouping-header")[0]) {
                     $("<div>&nbsp;</div>").addClass("k-grouping-header").prependTo(wrapper);
@@ -4712,7 +4712,9 @@ var __meta__ = {
             group = $(group);
 
             var level,
-                footerCount = 1,
+                groupable = this.options.groupable,
+                hideFooter =  groupable.hideFooter,
+                footerCount = hideFooter ? 0 : 1,
                 offset,
                 relatedGroup = $(),
                 idx,

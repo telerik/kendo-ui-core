@@ -27,6 +27,16 @@
         equal(groupingHeader.length, 1);
     });
 
+    test("groupable is not initialized when groupable.enabled is set to false", function() {
+        var grid = new Grid(table(), { dataSource:[], groupable: {
+            enabled: false
+        } }),
+            gridElement = grid.wrapper;
+
+        var groupingHeader = gridElement.find("div.k-grouping-header");
+        equal(groupingHeader.length, 0);
+    });
+
     test("groupable creates .k-grouping-header after the toolbar", function() {
         var grid = new Grid(table(), {
                 dataSource:[],
@@ -676,6 +686,41 @@
         grid.collapseGroup(groups.eq(1));
         grid.collapseGroup(groups.eq(0));
         grid.expandGroup(groups.eq(0));
+
+        equal(grid.table.find(".k-group-footer:visible").length, 1);
+    });
+
+    test("collapse group hides group footer", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [{ foo: "foo", bar: "bar" }],
+                group: [{ field: "foo" }]
+            },
+            columns: [ { field: "foo", groupFooterTemplate: "foo" },
+                { field: "bar" }]
+        });
+
+        var groups = grid.table.find("tr.k-grouping-row");
+        grid.collapseGroup(groups.eq(0));
+
+        equal(grid.table.find(".k-group-footer:visible").length, 0);
+    });
+
+    test("collapse group does not hide group footer when hideFooter is enabled", function() {
+        var grid = new Grid(table(), {
+            dataSource: {
+                data: [{ foo: "foo", bar: "bar" }],
+                group: [{ field: "foo" }]
+            },
+            groupable: {
+                hideFooter: true
+            },
+            columns: [ { field: "foo", groupFooterTemplate: "foo" },
+                { field: "bar" }]
+        });
+
+        var groups = grid.table.find("tr.k-grouping-row");
+        grid.collapseGroup(groups.eq(0));
 
         equal(grid.table.find(".k-group-footer:visible").length, 1);
     });

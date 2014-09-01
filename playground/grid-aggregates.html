@@ -5,12 +5,13 @@
         <title>editable</title>
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnsorter.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
@@ -20,8 +21,10 @@
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
-        <link href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>"
         <style>
             body {
                font: 75% arial,helvetica,sans-serif;
@@ -43,7 +46,7 @@
                 dataSource = new kendo.data.DataSource({
                     data: data,
                     pageSize: 5,
-                    //group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count"} ] },
+                    group: { field: "foo", aggregates: [ { field: "foo", aggregate: "count"} ] },
                     aggregate: [ { field: "id", aggregate: "sum"}, { field: "foo", aggregate:"count"},{ field: "bar", aggregate:"count" }]
                 });
 
@@ -53,7 +56,10 @@
                     navigatable: true,
                     selectable: "cell",
                     detailTemplate: " chur",
-                    groupable: true,
+                    groupable: {
+                        enabled: false,
+                        hideFooter: true
+                    },
                     pageable: true,
                     sortable: true,
                     columns: [
