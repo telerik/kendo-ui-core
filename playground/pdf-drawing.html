@@ -26,6 +26,11 @@
               type: "pdf",
           });
 
+          var circleGeometry = new geo.Circle([100, 100], 60);
+          var circle = new d.Circle(circleGeometry).stroke("red", 1).fill("yellow");
+          circle.fill().opacity = 0.3;
+          surface.draw(circle);
+
           var a1 = 40, a2 = 140;
           var b1 = -40, b2 = -140;
           for (var i = 0; i < 60; i += 2.5) {
@@ -35,7 +40,7 @@
                   startAngle: a1,
                   endAngle: a2
               });
-              var arc = new d.Arc(arcGeometry).stroke("red", 1);
+              var arc = new d.Arc(arcGeometry).stroke("red", 0.4);
               surface.draw(arc);
               var arcGeometry = new geo.Arc([100, 100], {
                   radiusX: i,
@@ -45,6 +50,7 @@
                   anticlockwise: true
               });
               var arc = new d.Arc(arcGeometry).stroke("red", 1);
+              arc.stroke().opacity = 0.5;
               surface.draw(arc);
 
               a1 += 5; a2 += 5;
@@ -52,12 +58,37 @@
           }
 
           var position = new geo.Point(100, 100);
-          var text = new d.Text("DAS\nTEXT ☺", position);
+          var text = new d.Text("DAS TEXT ☺", position);
           surface.draw(text);
 
-          var circleGeometry = new geo.Circle([100, 100], 60);
-          var circle = new d.Circle(circleGeometry).stroke("red", 1);
-          surface.draw(circle);
+          var text = new d.Text("Kendo UI ♛", new geo.Point(300, 100));
+          text.options.font = "40px serif";
+          text.stroke("red", 0.7);
+          //text.stroke().dashType = "dash";
+          text.fill("#23c");
+          text.fill().opacity = 0.5;
+          surface.draw(text);
+
+          var path = new d.Path({ closed: true })
+              .moveTo(100, 300)
+              .curveTo([100, 200], [250, 200], [250, 300])
+              .lineTo(100, 300);
+          path.stroke().width = 10;
+          path.stroke().lineJoin = "round";
+          surface.draw(path);
+
+          var multiPath = new d.MultiPath()
+              .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]).close()
+              .moveTo(150, 150).lineTo(200, 150).close();
+          multiPath.stroke().dashType = "dash";
+          multiPath.opacity = 0.3;
+          surface.draw(multiPath);
+
+          var group = new d.Group();
+          var pathA = new d.Path().moveTo(298, 98).lineTo(302, 102);
+          var pathB = new d.Path().moveTo(298, 102).lineTo(302, 98);
+          group.append(pathA, pathB);
+          surface.draw(group);
       });
     </script>
 

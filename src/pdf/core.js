@@ -11,6 +11,20 @@
 
     var NL = "\n";
 
+    var FONT_RESOURCE_COUNTER = 0;
+    var GS_RESOURCE_COUNTER = 0;
+
+    PDF.TEXT_RENDERING_MODE = {
+        fill           : 0,
+        stroke         : 1,
+        fillAndStroke  : 2,
+        invisible      : 3,
+        fillAndClip    : 4,
+        strokeAndClip  : 5,
+        fillStrokeClip : 6,
+        clip           : 7
+    };
+
     function makeOutput() {
         var offset = 0, indentLevel = 0, output = "";
         function out() {
@@ -116,7 +130,7 @@
             // canvas-like coord. system.  (0,0) is upper-left.
             // text must be vertically mirorred before drawing.
             // XXX: configurable page size.
-            page._transform(1, 0, 0, -1, 0, mm2pt(297));
+            page.transform(1, 0, 0, -1, 0, mm2pt(297));
 
             return page;
         };
@@ -215,7 +229,29 @@
             }
             return font;
         },
-        loadFonts: PDF.loadFonts
+        loadFonts: PDF.loadFonts,
+
+        getOpacityGS: function(opacity, forStroke) {
+            var id = parseFloat(opacity).toFixed(3);
+            opacity = parseFloat(id);
+            id += forStroke ? "S" : "F";
+            var cache = this._opacityGSCache || (this._opacityGSCache = {});
+            var gs = cache[id];
+            if (!gs) {
+                var props = {
+                    Type: PDFName.get("ExtGState")
+                };
+                if (forStroke) {
+                    props.CA = opacity;
+                } else {
+                    props.ca = opacity;
+                }
+                gs = this.attach(new PDFDictionary(props));
+                gs._resourceName = PDFName.get("GS" + (++GS_RESOURCE_COUNTER));
+                cache[id] = gs;
+            }
+            return gs;
+        }
     };
 
     /* -----[ utils ]----- */
@@ -466,8 +502,6 @@
 
     /// TTF fonts
 
-    var FONT_RESOURCE_COUNTER = 0;
-
     var PDFFont = defclass(function PDFFont(pdf, font, props){
         props = this.props = props || {};
         props.Type = PDFName.get("Font");
@@ -509,7 +543,7 @@
                       (1 << 5));
     }, {
         encodeText: function(text) {
-            return new PDFHexString(this._sub.encodeText(text));
+            return new PDFHexString(this._sub.encodeText(text+""));
         },
         beforeRender: function() {
             var self = this;
@@ -663,38 +697,38 @@
         _out: function() {
             this._content.data.apply(null, arguments);
         },
-        _transform: function(a, b, c, d, e, f) {
+        transform: function(a, b, c, d, e, f) {
             this._out(a, " ", b, " ", c, " ", d, " ", e, " ", f, " cm", NL);
         },
-        _translate: function(dx, dy) {
-            this._transform(1, 0, 0, 1, dx, dy);
+        translate: function(dx, dy) {
+            this.transform(1, 0, 0, 1, dx, dy);
         },
-        _scale: function(sx, sy) {
-            this._transform(sx, 0, 0, sy, 0, 0);
+        scale: function(sx, sy) {
+            this.transform(sx, 0, 0, sy, 0, 0);
         },
-        _rotate: function(angle) {
+        rotate: function(angle) {
             var cos = Math.cos(angle), sin = Math.sin(angle);
-            this._transform(cos, sin, -sin, cos, 0, 0);
+            this.transform(cos, sin, -sin, cos, 0, 0);
         },
-        _beginText: function() {
+        beginText: function() {
             this._textMode = true;
             this._out("BT", NL);
         },
-        _endText: function() {
+        endText: function() {
             this._textMode = false;
             this._out(NL, "ET", NL);
         },
         _requireTextMode: function() {
             if (!this._textMode) {
-                throw new Error("Text mode required; call page._beginText() first");
+                throw new Error("Text mode required; call page.beginText() first");
             }
         },
         _requireFont: function() {
             if (!this._font) {
-                throw new Error("No font selected; call page._setFont() first");
+                throw new Error("No font selected; call page.setFont() first");
             }
         },
-        _setFont: function(font, size) {
+        setFont: function(font, size) {
             this._requireTextMode();
             if (font == null) {
                 font = this._font;
@@ -710,76 +744,83 @@
             this._fontSize = size;
             this._out(name, " ", size, " Tf", NL);
         },
-        _setTextLeading: function(size) {
+        setTextLeading: function(size) {
             this._requireTextMode();
             this._out(size, " TL", NL);
         },
-        _showText: function(text) {
+        setTextRenderingMode: function(mode) {
+            this._requireTextMode();
+            this._out(mode, " Tr", NL);
+        },
+        showText: function(text) {
             this._requireFont();
             this._out(this._font.encodeText(text), " Tj", NL);
         },
-        _showTextNL: function(text) {
+        showTextNL: function(text) {
             this._requireFont();
             this._out(this._font.encodeText(text), " '", NL);
         },
-        _setStrokeColor: function(r, g, b) {
+        setStrokeColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " RG", NL);
         },
-        _setFillColor: function(r, g, b) {
+        setStrokeOpacity: function(opacity) {
+            var gs = this._pdf.getOpacityGS(opacity, true);
+            this._gsResources[gs._resourceName.name] = gs;
+            this._out(gs._resourceName, " gs", NL);
+        },
+        setFillColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " rg", NL);
         },
-        _setDashPattern: function(dashArray, dashPhase) {
+        setFillOpacity: function(opacity) {
+            var gs = this._pdf.getOpacityGS(opacity, false);
+            this._gsResources[gs._resourceName.name] = gs;
+            this._out(gs._resourceName, " gs", NL);
+        },
+        setDashPattern: function(dashArray, dashPhase) {
             this._out(dashArray, " ", dashPhase, " d", NL);
         },
-        _setLineWidth: function(width) {
+        setLineWidth: function(width) {
             this._out(width, " w", NL);
         },
-        _setLineCap: function(lineCap) {
+        setLineCap: function(lineCap) {
             this._out(lineCap, " J", NL);
         },
-        _setLineJoin: function(lineJoin) {
+        setLineJoin: function(lineJoin) {
             this._out(lineJoin, " j", NL);
         },
-        _setMitterLimit: function(mitterLimit) {
+        setMitterLimit: function(mitterLimit) {
             this._out(mitterLimit, " M", NL);
         },
-        _save: function() {
+        save: function() {
             this._out("q", NL);
         },
-        _restore: function() {
+        restore: function() {
             this._out("Q", NL);
-        },
-        _getGSResource: function(props) {
-            props.Type = "ExtGState";
-            var gs = new PDFDictionary(props);
-            var name = "GS" + this._rcount++;
-            this._gsResources[name] = this._pdf.attach(gs);
-            return PDFName.get(name);
         },
 
         // paths
-        _moveTo: function(x, y) {
+        moveTo: function(x, y) {
             this._out(x, " ", y, " m", NL);
         },
-        _lineTo: function(x, y) {
+        lineTo: function(x, y) {
             this._out(x, " ", y, " l", NL);
         },
-        _bezier: function(x1, y1, x2, y2, x3, y3) {
+        bezier: function(x1, y1, x2, y2, x3, y3) {
             this._out(x1, " ", y1, " ", x2, " ", y2, " ", x3, " ", y3, " c", NL);
         },
-        _bezier1: function(x1, y1, x3, y3) {
+        bezier1: function(x1, y1, x3, y3) {
             this._out(x1, " ", y1, " ", x3, " ", y3, " y", NL);
         },
-        _bezier2: function(x2, y2, x3, y3) {
+        bezier2: function(x2, y2, x3, y3) {
             this._out(x2, " ", y2, " ", x3, " ", y3, " v", NL);
         },
-        _close: function() {
+        close: function() {
             this._out("h", NL);
         },
-        _rect: function(x, y, w, h) {
+        rect: function(x, y, w, h) {
             this._out(x, " ", y, " ", w, " ", h, " re", NL);
         },
-        _ellipse: function(x, y, rx, ry) {
+        ellipse: function(x, y, rx, ry) {
             function X(v) { return x + v; }
             function Y(v) { return y + v; }
 
@@ -787,39 +828,42 @@
             // http://www.whizkidtech.redprince.net/bezier/circle/kappa/
             var k = 0.5522847498307936;
 
-            this._moveTo(X(0), Y(ry));
-            this._bezier(
+            this.moveTo(X(0), Y(ry));
+            this.bezier(
                 X(rx * k) , Y(ry),
                 X(rx)     , Y(ry * k),
                 X(rx)     , Y(0)
             );
-            this._bezier(
+            this.bezier(
                 X(rx)     , Y(-ry * k),
                 X(rx * k) , Y(-ry),
                 X(0)      , Y(-ry)
             );
-            this._bezier(
+            this.bezier(
                 X(-rx * k) , Y(-ry),
                 X(-rx)     , Y(-ry * k),
                 X(-rx)     , Y(0)
             );
-            this._bezier(
+            this.bezier(
                 X(-rx)     , Y(ry * k),
                 X(-rx * k) , Y(ry),
                 X(0)       , Y(ry)
             );
         },
-        _circle: function(x, y, r) {
-            this._ellipse(x, y, r, r);
+        circle: function(x, y, r) {
+            this.ellipse(x, y, r, r);
         },
-        _stroke: function() {
+        stroke: function() {
             this._out("S", NL);
         },
-        _closeStroke: function() {
+        closeStroke: function() {
             this._out("s", NL);
         },
-        _fill: function() {
+        fill: function() {
             this._out("f", NL);
+        },
+        fillStroke: function() {
+            this._out("B", NL);
         }
     }, PDFDictionary);
 
