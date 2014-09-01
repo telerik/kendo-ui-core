@@ -807,6 +807,10 @@ var __meta__ = {
             _resize: function(e) {
                 var containerWidth = e.width;
 
+                if (!this.options.resizable) {
+                    return;
+                }
+
                 this.popup.close();
 
                 this._shrink(containerWidth);
