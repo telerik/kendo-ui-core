@@ -1,0 +1,109 @@
+<div id="example">
+    Online: <input id="online" type="checkbox" checked>
+    <div class="k-header demo-section" style="margin:0.5em auto">
+        <div class="box-col">
+            <div style="width: 700px" id="grid"></div>
+        </div>
+        <div class="box-col console-section">
+            <h4>Console</h4>
+            <div class="console"></div>
+        </div>
+    </div>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            offlineStorage: "offline-kendo-demo",
+            transport: {
+                read:  {
+                    url: "http://demos.telerik.com/kendo-ui/service/products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products/update",
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products/destroy",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.telerik.com/kendo-ui/service/products/create",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            requestStart: function(e) {
+                if (e.type != "read") {
+                    kendoConsole.log(kendo.format("Request start ({0})", e.type));
+                }
+            },
+            requestEnd: function(e) {
+                if (e.type != "read") {
+                    kendoConsole.log(kendo.format("Request end ({0})", e.type));
+                }
+            },
+            batch: true,
+            pageSize: 20,
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        UnitPrice: { type: "number", validation: { min: 1} },
+                        Discontinued: { type: "boolean" },
+                        UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                    }
+                }
+            }
+        });
+
+        var online = localStorage["online"] == "true";
+
+        kendoConsole.log("Working " + (online ? "online" : "offline"));
+
+        if (!online) {
+            $("#online").removeAttr("checked");
+            dataSource.online(false);
+        }
+
+        $("#online").kendoMobileSwitch({
+            value: online,
+            change: function() {
+                online = this.value();
+
+                kendoConsole.log("Working " + (online ? "online" : "offline"));
+
+                localStorage["online"] = online;
+
+                dataSource.online(online);
+            }
+        });
+
+        $("#grid").kendoGrid({
+            dataSource: dataSource,
+            pageable: {
+                refresh: true
+            },
+            height: 450,
+            toolbar: [ "create" ],
+            columns: [
+                "ProductName",
+                { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+                { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }
+            ],
+            editable: "inline"
+        });
+    </script>
+     <div class="box">
+        <h4>Information</h4>
+        <p>This example demonstrates the offline support of the Kendo DataSource.</p>
+        <ol>
+            <li>Use the switch to go in offline mode.</li>
+            <li>Create, update or destroy grid items.</li>
+            <li>Use the switch to go in online mode. The data source will sync all changes made while offline.</li>
+        </ol>
+    </div>
+</div>
