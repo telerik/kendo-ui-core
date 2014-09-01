@@ -127,4 +127,33 @@ test("toDataUrl relationship element for every sheet in workbook.xml.rels", func
     equal(dom.find("Relationship[Target*=sheet]").length, 2);
 });
 
+test("toDataUrl creates sharedStrings.xml", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {} ]
+    });
+
+    workbook.toDataURL();
+
+    ok(JSZip.prototype.files["sharedStrings.xml"]);
+});
+
+test("toDataUrl stores shared strings in sharedStrings", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { value: "foo" }, { value: "foo" }, { value: "bar" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["sharedStrings.xml"]);
+
+    equal(dom.last().attr("count"), "3");
+    equal(dom.last().attr("uniqueCount"), "2");
+    equal(dom.find("si > t").first().text(), "foo");
+    equal(dom.find("si > t").last().text(), "bar");
+});
+
 }());
