@@ -162,7 +162,7 @@
 
             for (field in options) {
                 member = options[field];
-                member = this.wrap(member, field);
+                member = this._wrap(member, field);
                 this[field] = member;
             }
         },
@@ -181,10 +181,9 @@
             var current = kendo.getter(field, true)(this);
 
             if (current !== value) {
-                var composite = this._set(field, this.wrap(value, field));
+                var composite = this._set(field, this._wrap(value, field));
                 if (this.observer && !composite) {
                     this.observer.optionsChange({
-                        // TODO: Supply old value as well
                         field: this.prefix + field,
                         value: value
                     });
@@ -224,8 +223,7 @@
             return composite;
         },
 
-        // TODO: Make private
-        wrap: function(object, field) {
+        _wrap: function(object, field) {
             var type = toString.call(object);
 
             if (object !== null && type === "[object Object]") {
