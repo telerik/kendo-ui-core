@@ -536,6 +536,20 @@ var __meta__ = {
         });
     }
 
+    function columnsForRendering(columns) {
+        var result = [];
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (!columns[idx].columns) {
+                result.push(columns[idx]);
+                continue;
+            }
+            result = result.concat(columnsForRendering(columns[idx].columns));
+        }
+
+        return result;
+    }
+
     function appendContent(tbody, table, html) {
         var placeholder,
             tmp = tbody;
@@ -4388,7 +4402,7 @@ var __meta__ = {
             $(tr).find('> td .k-minus, > td .k-i-collapse').click();
         },
 
-        _createHeaderCells: function(columns) {
+        _createHeaderCells: function(columns, rowSpan) {
             var that = this,
                 idx,
                 th,
@@ -4397,11 +4411,20 @@ var __meta__ = {
                 length;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
-                th = columns[idx];
+                th = columns[idx].column;
                 text = that._headerCellText(th);
 
                 if (!th.command) {
                     html += "<th role='columnheader' " + kendo.attr("field") + "='" + (th.field || "") + "' ";
+
+                    if (rowSpan && !columns[idx].colSpan) {
+                        html += " rowspan='" + rowSpan + "'";
+                    }
+
+                    if (columns[idx].colSpan) {
+                        html += 'colspan="' + columns[idx].colSpan + '"';
+                    }
+
                     if (th.title) {
                         html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
                     }
@@ -4571,12 +4594,13 @@ var __meta__ = {
                 tr = that.element.find("tr:has(th):first");
             }
 
+            /*
             if (!tr.length) {
                 tr = thead.children().first();
                 if (!tr.length) {
                     tr = $("<tr/>");
                 }
-            }
+            }*/
 
             if (hasFilterRow) {
                 var filterRow = $("<tr/>");
@@ -4588,16 +4612,26 @@ var __meta__ = {
                 thead.append(filterRow);
             }
 
-            if (!tr.children().length) {
-                if (hasDetails) {
-                    html += '<th class="k-hierarchy-cell">&nbsp;</th>';
-                }
-                html += that._createHeaderCells(columns);
+            var rows = [{ rowSpan: 0, cells: [] }];
+            this._prepareColumns(rows, columns);
 
-                tr.html(html);
+            if (!tr.children().length) {
+                for (var idx = 0; idx < rows.length; idx++) {
+                    html += "<tr>";
+                    if (hasDetails) {
+                        html += '<th class="k-hierarchy-cell">&nbsp;</th>';
+                    }
+                    html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
+                }
+
+                html += "</tr>";
+                tr = $(html);
+                //tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
+
+            this.columns = columnsForRendering(this.columns);
 
             tr.attr("role", "row").find("th").addClass("k-header");
 
@@ -4657,6 +4691,32 @@ var __meta__ = {
 
             if (that.groupable) {
                 that._attachGroupable();
+            }
+        },
+
+        _prepareColumns: function(rows, columns, parentCell) {
+            var row = rows[rows.length - 1];
+
+            var childRow;
+            var totalColSpan = 0;
+
+            for (var idx = 0; idx < columns.length; idx++) {
+                var cell = { column: columns[idx], colSpan: 0 };
+                row.cells.push(cell);
+
+                if (columns[idx].columns && columns[idx].columns.length) {
+                    if (!childRow) {
+                        childRow = { rowSpan: 0, cells: [] };
+                        rows.push(childRow);
+                    }
+                    cell.colSpan = columns[idx].columns.length;
+                    totalColSpan += cell.colSpan - 1;
+                    this._prepareColumns(rows, columns[idx].columns, cell);
+                    row.rowSpan = rows.length;
+                }
+            }
+            if (parentCell) {
+                parentCell.colSpan += totalColSpan;
             }
         },
 

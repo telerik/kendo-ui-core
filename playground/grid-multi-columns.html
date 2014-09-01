@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>multi-header columns</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.reorderable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnsorter.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.menu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnmenu.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+    <body>
+        <div id="grid"></div>
+
+        <script>
+            $(document).ready(function () {
+                $("#grid").kendoGrid({
+                    dataSource: {
+                        type: "odata",
+                        transport: {
+                            read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
+                        },
+                        pageSize: 5,
+                        schema: {
+                            model: {
+                                id: "CustomerID",
+                                fields: {
+                                    CustomerID: { type: "number" },
+                                    ContactName: { type: "string" },
+                                    ContactTitle: { type: "string"},
+                                    CompanyName: { type: "string"},
+                                    Country: { type: "string"}
+                                }
+                            }
+                        }
+                    },
+                    pageable: true,
+                    toolbar: ["create"],
+                    //sortable: true,
+                    scrollable: false,
+                    //groupable: true,
+                    columns: [{
+                        title: "Contact Details",
+                        columns: [
+                            {
+                                field: "ContactName",
+                                title: "Contact Name",
+                                width: 140
+                            },{
+                            field: "ContactTitle",
+                            title: "Contact Title",
+                            width: 290
+                        }, {
+                            //field: "CompanyName",
+                            title: "Company Name",
+                            columns: [{
+                            field: "CustomerID",
+                            width: 100
+                        }]
+                        }
+                        ] }, {
+                            field: "CustomerID",
+                            width: 100
+                        },{
+                        field: "Country",
+                        width: 200
+                        }]
+                    });
+                });
+
+                /*
+                function f(rows, columns, parentCell) {
+                    var row = rows[rows.length - 1];
+
+                    var childRow;
+                    var totalColSpan = 0;
+
+                    for (var idx = 0; idx < columns.length; idx++) {
+                        var cell = { title: columns[idx].title, colSpan: 0 };
+                        row.cells.push(cell);
+
+                        if (columns[idx].columns && columns[idx].columns.length) {
+                            if (!childRow) {
+                                childRow = { rowSpan: 0, cells: [] };
+                                rows.push(childRow);
+                            }
+                            cell.colSpan = columns[idx].columns.length;
+                            totalColSpan += cell.colSpan;
+                            f(rows, columns[idx].columns, cell);
+                            row.rowSpan = rows.length;
+                        }
+                    }
+                    if (parentCell) {
+                        parentCell.colSpan += totalColSpan;
+                    }
+                }
+
+                function rowBuilder(html, columns) {
+                    var rows = [{ rowSpan: 0, cells: [] }];
+
+                    f(rows, columns);
+
+                    for (var idx = 0; idx < rows.length; idx++) {
+                        html += "<tr>";
+                        var row = rows[idx];
+                        for (var j = 0; j < row.cells.length; j++) {
+                            html += "<th";
+                            if (row.rowSpan && !row.cells[j].colSpan) {
+                                html += " rowspan='" + row.rowSpan + "'";
+                            }
+
+                            if (row.cells[j].colSpan) {
+                                html += " colspan='" + row.cells[j].colSpan + "'";
+                            }
+                            html += ">";
+
+                            html += row.cells[j].title + "</th>";
+                        }
+                        html += "</tr>";
+                    }
+
+                    return html;
+                }
+
+                $(function() {
+                    var columns = [
+                        { title: "foo", columns: [ { title: "child1" }, { title: "child2" } ] },
+                        { title: "bar" },
+                        { title: "baz", columns: [ { title: "child1", columns: [{ title: "child1-child" }, { title: "child1-child2" }, { title: "child1-child3" }] }, { title: "child2" } ] }
+                    ];
+
+                    var html = rowBuilder(html, columns);
+
+                    $("table thead").html(html);
+                });
+                */
+            </script>
+    </body>
+</html>
