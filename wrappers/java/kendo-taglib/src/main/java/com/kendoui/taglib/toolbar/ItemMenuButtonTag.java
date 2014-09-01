@@ -49,6 +49,14 @@ public class ItemMenuButtonTag extends  BaseTag  /* interfaces */ /* interfaces 
         return "toolBar-item-menuButton";
     }
 
+    public java.lang.Object getAttributes() {
+        return (java.lang.Object)getProperty("attributes");
+    }
+
+    public void setAttributes(java.lang.Object value) {
+        setProperty("attributes", value);
+    }
+
     public boolean getEnable() {
         return (boolean)getProperty("enable");
     }

@@ -10627,12 +10627,6 @@ If you use a custom palette then you can set this to some value that makes sense
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Allows customization of "Apply" / "Cancel" labels.</description>
-            <name>messages</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>Only for the HSV selector.  If true, the widget will display the opacity slider.
 Note that currently in HTML5 the &lt;input type="color"&gt; does not support opacity.</description>
             <name>opacity</name>
@@ -22937,7 +22931,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The type of the view. The built-in views are: "day", "week", "month" and "agenda".</description>
+            <description>The type of the view. The built-in views are: "day", "week", "workWeek", "month" and "agenda".</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -35024,6 +35018,12 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
         <body-content>JSP</body-content>
         <attribute>
+            <description>Specifies the HTML attributes of a ToolBar button.</description>
+            <name>attributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Specifies the click event handler of the button. Applicable only for commands of type button and splitButton.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
@@ -35153,6 +35153,12 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
         <body-content>JSP</body-content>
         <attribute>
+            <description>Specifies the HTML attributes of a ButtonGroup's button.</description>
+            <name>attributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Specifies the click event handler of the button. Applicable only for the children of a ButtonGroup.</description>
             <name>click</name>
             <rtexprvalue>true</rtexprvalue>
@@ -35264,6 +35270,12 @@ is closed. By default not specified - uses the opening animation with reverse.</
         <tag-class>com.kendoui.taglib.toolbar.ItemMenuButtonTag</tag-class>
 
         <body-content>empty</body-content>
+        <attribute>
+            <description>Specifies the HTML attributes of a menu button.</description>
+            <name>attributes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
         <attribute>
             <description>Specifies whether the menu button is initially enabled or disabled.</description>
             <name>enable</name>
@@ -35730,7 +35742,14 @@ Note: when initializing the widget from an array (rather than from a Hierarchica
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Triggered before a subgroup gets collapsed.</description>
+            <description>Triggered after the user has checked or unchecked a checkbox.
+If checkChildren is true, the event is triggered after all checked states are updated.
+This event has been introduced in internal builds after 2014.2.828.</description>
+            <name>check</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Triggered before a subgroup gets collapsed. Cancellable.</description>
             <name>collapse</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -35986,7 +36005,15 @@ additional information along the treeview checkboxes.The fields which can be use
 
 
     <tag>
-        <description>Triggered before a subgroup gets collapsed.</description>
+        <description>Triggered after the user has checked or unchecked a checkbox.
+If checkChildren is true, the event is triggered after all checked states are updated.
+This event has been introduced in internal builds after 2014.2.828.</description>
+        <name>treeView-check</name>
+        <tag-class>com.kendoui.taglib.treeview.CheckFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered before a subgroup gets collapsed. Cancellable.</description>
         <name>treeView-collapse</name>
         <tag-class>com.kendoui.taglib.treeview.CollapseFunctionTag</tag-class>
         <body-content>JSP</body-content>
