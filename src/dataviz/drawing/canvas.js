@@ -154,10 +154,15 @@
             this.ts = timestamp();
         },
 
-        invalidate: function() {
+        load: function(elements) {
+            Node.fn.load.call(this, elements);
+            this.invalidate(true);
+        },
+
+        invalidate: function(force) {
             var ts = timestamp();
 
-            if (ts - this.ts > FRAME_DELAY) {
+            if (force || ts - this.ts > FRAME_DELAY) {
                 this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
                 this.renderTo(this.ctx);
 
