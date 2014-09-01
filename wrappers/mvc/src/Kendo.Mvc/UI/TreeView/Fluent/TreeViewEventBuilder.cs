@@ -425,7 +425,50 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Defines the inline handler of the check client-side event
+        /// </summary>
+        /// <param name="onCheckAction">The handler code wrapped in a text tag (Razor syntax).</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().TreeView()
+        ///           .Name("TreeView")
+        ///           .Events(events => events.Check(
+        ///                @&lt;text&gt;
+        ///                function(e) {
+        ///                    // event handling code
+        ///                }
+        ///                &lt;/text&gt;
+        ///           ))
+        ///           .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewEventBuilder Check(Func<object, object> onCheckAction)
+        {
+            Handler("check", onCheckAction);
 
+            return this;
+        }
+
+        /// <summary>
+        /// Defines the name of the JavaScript function that will handle the the check client-side event.
+        /// </summary>
+        /// <param name="onCheckHandlerName">The name of the JavaScript function that will handle the event.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().TreeView()
+        ///            .Name("TreeView")
+        ///            .Events(events => events.Check("onCheck"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TreeViewEventBuilder Check(string onCheckHandlerName)
+        {
+            Handler("check", onCheckHandlerName);
+
+            return this;
+        }
     }
 }
 
