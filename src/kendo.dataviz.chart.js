@@ -1748,6 +1748,9 @@ var __meta__ = {
                 e.preventDefault();
                 widget._legendItemHover(args.seriesIndex, args.pointIndex);
             }
+
+            // Don't trigger point hover for legend items
+            return true;
         },
 
         leave: function(widget) {
