@@ -19,118 +19,169 @@ var RELS = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
                '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
             '</Relationships>';
 
-var CORE = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                          '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '+
-                              'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" ' +
-                              'xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
-                               '<dc:creator>${creator}</dc:creator>' +
-                               '<cp:lastModifiedBy>${lastModifiedBy}</cp:lastModifiedBy>' +
-                               '<dcterms:created xsi:type="dcterms:W3CDTF">${created}</dcterms:created>' +
-                               '<dcterms:modified xsi:type="dcterms:W3CDTF">${modified}</dcterms:modified>' +
-                          '</cp:coreProperties>');
+var CORE = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '+
+  'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" ' +
+  'xmlns:dcmitype="http://purl.org/dc/dcmitype/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+   '<dc:creator>${creator}</dc:creator>' +
+   '<cp:lastModifiedBy>${lastModifiedBy}</cp:lastModifiedBy>' +
+   '<dcterms:created xsi:type="dcterms:W3CDTF">${created}</dcterms:created>' +
+   '<dcterms:modified xsi:type="dcterms:W3CDTF">${modified}</dcterms:modified>' +
+'</cp:coreProperties>');
 
-var APP = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                          '<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">' +
-                              '<Application>Microsoft Excel</Application>' +
-                              '<DocSecurity>0</DocSecurity>' +
-                              '<ScaleCrop>false</ScaleCrop>' +
-                              '<HeadingPairs>' +
-                                  '<vt:vector size="2" baseType="variant">' +
-                                      '<vt:variant>' +
-                                          '<vt:lpstr>Worksheets</vt:lpstr>' +
-                                      '</vt:variant>' +
-                                      '<vt:variant>' +
-                                          '<vt:i4>${sheets.length}</vt:i4>' +
-                                      '</vt:variant>' +
-                                  '</vt:vector>' +
-                              '</HeadingPairs>' +
-                              '<TitlesOfParts>' +
-                                  '<vt:vector size="${sheets.length}" baseType="lpstr">' +
-                                  '# for (var idx = 0; idx < sheets.length; idx++) { #' +
-                                      '# if (sheets[idx].options.title) { #' +
-                                      '<vt:lpstr>${sheets[idx].options.title}</vt:lpstr>' +
-                                      '# } else { #' +
-                                      '<vt:lpstr>Sheet${idx+1}</vt:lpstr>' +
-                                      '# } #' +
-                                  '# } #' +
-                                  '</vt:vector>' +
-                              '</TitlesOfParts>' +
-                              '<LinksUpToDate>false</LinksUpToDate>' +
-                              '<SharedDoc>false</SharedDoc>' +
-                              '<HyperlinksChanged>false</HyperlinksChanged>' +
-                              '<AppVersion>14.0300</AppVersion>' +
-                          '</Properties>');
+var APP = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">' +
+  '<Application>Microsoft Excel</Application>' +
+  '<DocSecurity>0</DocSecurity>' +
+  '<ScaleCrop>false</ScaleCrop>' +
+  '<HeadingPairs>' +
+      '<vt:vector size="2" baseType="variant">' +
+          '<vt:variant>' +
+              '<vt:lpstr>Worksheets</vt:lpstr>' +
+          '</vt:variant>' +
+          '<vt:variant>' +
+              '<vt:i4>${sheets.length}</vt:i4>' +
+          '</vt:variant>' +
+      '</vt:vector>' +
+  '</HeadingPairs>' +
+  '<TitlesOfParts>' +
+      '<vt:vector size="${sheets.length}" baseType="lpstr">' +
+      '# for (var idx = 0; idx < sheets.length; idx++) { #' +
+          '# if (sheets[idx].options.title) { #' +
+          '<vt:lpstr>${sheets[idx].options.title}</vt:lpstr>' +
+          '# } else { #' +
+          '<vt:lpstr>Sheet${idx+1}</vt:lpstr>' +
+          '# } #' +
+      '# } #' +
+      '</vt:vector>' +
+  '</TitlesOfParts>' +
+  '<LinksUpToDate>false</LinksUpToDate>' +
+  '<SharedDoc>false</SharedDoc>' +
+  '<HyperlinksChanged>false</HyperlinksChanged>' +
+  '<AppVersion>14.0300</AppVersion>' +
+'</Properties>');
 
-var CONTENT_TYPES = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                                   '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
-                                       '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />' +
-                                       '<Default Extension="xml" ContentType="application/xml" />' +
-                                       '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" />' +
-                                       '<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>' +
-                                       '# for (var idx = 1; idx <= count; idx++) { #' +
-                                       '<Override PartName="/xl/worksheets/sheet${idx}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" />' +
-                                       '# } #' +
-                                       '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml" />' +
-                                       '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" />' +
-                                   '</Types>');
+var CONTENT_TYPES = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+   '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />' +
+   '<Default Extension="xml" ContentType="application/xml" />' +
+   '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml" />' +
+   '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+   '<Override PartName="/xl/sharedStrings.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml"/>' +
+   '# for (var idx = 1; idx <= count; idx++) { #' +
+   '<Override PartName="/xl/worksheets/sheet${idx}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml" />' +
+   '# } #' +
+   '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml" />' +
+   '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml" />' +
+'</Types>');
 
-var WORKBOOK = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                              '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
-                                  '<fileVersion appName="xl" lastEdited="5" lowestEdited="5" rupBuild="9303" />' +
-                                  '<workbookPr defaultThemeVersion="124226" />' +
-                                  '<bookViews>' +
-                                      '<workbookView xWindow="240" yWindow="45" windowWidth="18195" windowHeight="7995" />' +
-                                  '</bookViews>' +
-                                  '<sheets>' +
-                                  '# for (var idx = 0; idx < sheets.length; idx++) { #' +
-                                      '# if (sheets[idx].options.title) { #' +
-                                      '<sheet name="${sheets[idx].options.title}" sheetId="${idx+1}" r:id="rId${idx+1}" />' +
-                                      '# } else { #' +
-                                      '<sheet name="Sheet${idx+1}" sheetId="${idx+1}" r:id="rId${idx+1}" />' +
-                                      '# } #' +
-                                  '# } #' +
-                                  '</sheets>' +
-                                  '<calcPr calcId="145621" />' +
-                              '</workbook>');
+var WORKBOOK = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+  '<fileVersion appName="xl" lastEdited="5" lowestEdited="5" rupBuild="9303" />' +
+  '<workbookPr defaultThemeVersion="124226" />' +
+  '<bookViews>' +
+      '<workbookView xWindow="240" yWindow="45" windowWidth="18195" windowHeight="7995" />' +
+  '</bookViews>' +
+  '<sheets>' +
+  '# for (var idx = 0; idx < sheets.length; idx++) { #' +
+      '# if (sheets[idx].options.title) { #' +
+      '<sheet name="${sheets[idx].options.title}" sheetId="${idx+1}" r:id="rId${idx+1}" />' +
+      '# } else { #' +
+      '<sheet name="Sheet${idx+1}" sheetId="${idx+1}" r:id="rId${idx+1}" />' +
+      '# } #' +
+  '# } #' +
+  '</sheets>' +
+  '<calcPr calcId="145621" />' +
+'</workbook>');
 
-var WORKSHEET = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                               '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">' +
-                                   '<dimension ref="A1" />' +
-                                   '<sheetViews>' +
-                                       '<sheetView tabSelected="1" workbookViewId="0" />' +
-                                   '</sheetViews>' +
-                                   '<sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25" />' +
-                                   '<sheetData>' +
-                                   '# for (var ri = 0; ri < data.length; ri++) { #' +
-                                       '# var row = data[ri]; #' +
-                                       '<row r="r${ri + 1}">' +
-                                       '# for (var ci = 0; ci < row.data.length; ci++) { #' +
-                                           '# var cell = row.data[ci];#' +
-                                           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" t="${cell.type}">' +
-                                               '<v>${cell.value}</v>' +
-                                           '</c>' +
-                                       '# } #' +
-                                       '</row>' +
-                                   '# } #' +
-                                   '</sheetData>' +
-                                   '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
-                               '</worksheet>');
+var WORKSHEET = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">' +
+   '<dimension ref="A1" />' +
+   '<sheetViews>' +
+       '<sheetView tabSelected="1" workbookViewId="0" />' +
+   '</sheetViews>' +
+   '<sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25" />' +
+   '<sheetData>' +
+   '# for (var ri = 0; ri < data.length; ri++) { #' +
+       '# var row = data[ri]; #' +
+       '<row r="r${ri + 1}">' +
+       '# for (var ci = 0; ci < row.data.length; ci++) { #' +
+           '# var cell = row.data[ci];#' +
+           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" t="${cell.type}">' +
+               '<v>${cell.value}</v>' +
+           '</c>' +
+       '# } #' +
+       '</row>' +
+   '# } #' +
+   '</sheetData>' +
+   '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
+'</worksheet>');
 
-var WORKBOOK_RELS = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                                   '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
-                                   '# for (var idx = 1; idx <= count; idx++) { #' +
-                                       '<Relationship Id="rId${idx}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${idx}.xml" />' +
-                                   '# } #' +
-                                       '<Relationship Id="rId${count+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
-                                       '<Relationship Id="rId${count+2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml" />' +
-                                   '</Relationships>');
+var WORKBOOK_RELS = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+'# for (var idx = 1; idx <= count; idx++) { #' +
+   '<Relationship Id="rId${idx}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${idx}.xml" />' +
+'# } #' +
+   '<Relationship Id="rId${count+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
+   '<Relationship Id="rId${count+2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml" />' +
+   '<Relationship Id="rId${count+3}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
+'</Relationships>');
 
-var SHARED_STRINGS = kendo.template('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
-                                    '<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="${count}" uniqueCount="${uniqueCount}">' +
-                                    '# for (var index in indexes) { #' +
-                                        '<si><t>${index}</t></si>' +
-                                    '# } #' +
-                                    '</sst>');
+var SHARED_STRINGS = kendo.template(
+'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\r\n' +
+'<sst xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" count="${count}" uniqueCount="${uniqueCount}">' +
+'# for (var index in indexes) { #' +
+    '<si><t>${index}</t></si>' +
+'# } #' +
+'</sst>');
+
+var STYLES = kendo.template(
+'<?xml version="1.0" encoding="UTF-8"?>' +
+'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+   '<fonts count="1">' +
+      '<font>' +
+         '<sz val="11" />' +
+         '<color theme="1" />' +
+         '<name val="Calibri" />' +
+         '<family val="2" />' +
+         '<scheme val="minor" />' +
+      '</font>' +
+   '</fonts>' +
+   '<fills count="2">' +
+      '<fill>' +
+         '<patternFill patternType="none" />' +
+      '</fill>' +
+      '<fill>' +
+         '<patternFill patternType="gray125" />' +
+      '</fill>' +
+   '</fills>' +
+   '<borders count="1">' +
+      '<border>' +
+         '<left />' +
+         '<right />' +
+         '<top />' +
+         '<bottom />' +
+         '<diagonal />' +
+      '</border>' +
+   '</borders>' +
+   '<cellStyleXfs count="1">' +
+      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" />' +
+   '</cellStyleXfs>' +
+   '<cellXfs count="1">' +
+      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" />' +
+   '</cellXfs>' +
+   '<cellStyles count="1">' +
+      '<cellStyle name="Normal" xfId="0" builtinId="0" />' +
+   '</cellStyles>' +
+   '<dxfs count="0" />' +
+   '<tableStyles count="0" defaultTableStyle="TableStyleMedium2" defaultPivotStyle="PivotStyleMedium9" />' +
+'</styleSheet>');
 
 var Worksheet = kendo.Class.extend({
     init: function(options, sharedStrings) {
@@ -211,6 +262,7 @@ var Workbook = kendo.Class.extend({
 
         var xl = zip.folder("xl");
 
+
         var xlRels = xl.folder("_rels");
         xlRels.file("workbook.xml.rels", WORKBOOK_RELS({ count: sheetCount }));
 
@@ -221,6 +273,8 @@ var Workbook = kendo.Class.extend({
         for (var idx = 0; idx < sheetCount; idx++) {
             worksheets.file(kendo.format("sheet{0}.xml", idx+1), this._sheets[idx].toXML());
         }
+
+        xl.file("styles.xml", STYLES({}));
 
         xl.file("sharedStrings.xml", SHARED_STRINGS(this._sharedStrings));
 
