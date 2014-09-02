@@ -456,33 +456,48 @@ var Clipboard = Class.extend({
         return (/<(div|p|ul|ol|table|h[1-6])/i).test(html);
     },
 
-    _contentModification: function(before, after) {
-        var that = this;
-        var editor = that.editor;
+    _startModification: function() {
         var range;
         var startRestorePoint;
+        var editor = this.editor;
 
-        if (that._inProgress) {
+        if (this._inProgress) {
             return;
         }
 
-        that._inProgress = true;
+        this._inProgress = true;
 
-        range = editor.getRange();
-        startRestorePoint = new RestorePoint(range);
+        var range = editor.getRange();
+        var restorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
-        before.call(that, editor, range);
+        return { range: range, restorePoint: restorePoint };
+    },
+
+    _endModification: function(modificationInfo) {
+        finishUpdate(this.editor, modificationInfo.restorePoint);
+
+        this.editor._selectionChange();
+
+        this._inProgress = false;
+    },
+
+    _contentModification: function(before, after) {
+        var that = this;
+        var editor = that.editor;
+        var modificationInfo = that._startModification();
+
+        if (!modificationInfo) {
+            return;
+        }
+
+        before.call(that, editor, modificationInfo.range);
 
         setTimeout(function() {
-            after.call(that, editor, range);
+            after.call(that, editor, modificationInfo.range);
 
-            finishUpdate(editor, startRestorePoint);
-
-            editor._selectionChange();
-
-            that._inProgress = false;
+            that._endModification(modificationInfo);
         });
     },
 
@@ -497,19 +512,29 @@ var Clipboard = Class.extend({
 
         var that = this;
         var clipboardData = e.clipboardData || e.originalEvent.clipboardData;
-        var items = clipboardData.items;
+        var items = clipboardData && clipboardData.items;
 
-        if (!items.length) {
+        if (!items || !items.length) {
             return;
         }
 
-        // TODO: check content type
+        if (!/^image\//i.test(items[0].type)) {
+            return;
+        }
+
+        var modificationInfo = that._startModification();
+
+        if (!modificationInfo) {
+            return;
+        }
 
         var blob = items[0].getAsFile();
         var reader = new FileReader();
 
         reader.onload = function(e) {
             that.paste('<img src="' + e.target.result + '" />');
+
+            that._endModification(modificationInfo);
         };
 
         reader.readAsDataURL(blob);
