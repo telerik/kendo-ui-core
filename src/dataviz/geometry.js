@@ -627,7 +627,17 @@
             this._matrix = matrix || Matrix.unit();
         },
 
-        // TODO: clone, equals
+        clone: function() {
+            return new Transformation(
+                this._matrix.clone()
+            );
+        },
+
+        equals: function(other) {
+            return other &&
+                   other._matrix.equals(this._matrix);
+        },
+
 
         _optionsChange: function() {
             if (this.observer) {

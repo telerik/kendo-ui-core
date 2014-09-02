@@ -683,7 +683,6 @@
         ok(!rect.equals());
     });
 
-
     // ------------------------------------------------------------
     (function() {
         module("Rect / Class methods");
@@ -1131,6 +1130,32 @@
         test("matrix returns current matrix", function() {
             transformation = new Transformation(matrix);
             deepEqual(transformation.matrix(), matrix);
+        });
+
+        test("clone returns new instance", function() {
+            var clone = transformation.clone();
+            notEqual(clone, transformation);
+            ok(clone instanceof Transformation);
+        });
+
+        test("clone copies matrix", function() {
+            var clone = transformation.clone();
+            notEqual(clone._matrix, transformation._matrix);
+            ok(clone._matrix.equals(transformation._matrix));
+        });
+
+        test("equals is true for same transformation", function() {
+            ok(transformation.equals(transformation.clone()));
+        });
+
+        test("equals is false for different matrix", function() {
+            var other = transformation.clone();
+            other._matrix.a = 5;
+            ok(!transformation.equals(other));
+        });
+
+        test("equals is false for undefined transformation", function() {
+            ok(!transformation.equals());
         });
 
         // ------------------------------------------------------------
