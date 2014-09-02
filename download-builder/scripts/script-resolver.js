@@ -34,7 +34,9 @@ ScriptResolver.prototype = {
     reset: function() {
         var resolver = this;
 
-        resolver.scripts = [];
+        resolver.inline = [];
+        resolver.deferred = [];
+
         resolver.resolved = [];
         resolver.seen = [];
     },
@@ -71,8 +73,11 @@ ScriptResolver.prototype = {
             resolver._resolve(dependancy);
         });
 
-        resolver._register(resolver.scripts, component.source);
+        var sources = component.defer ? resolver.deferred : resolver.inline;
+        resolver._register(sources, component.source);
         resolver._register(resolved, component.id);
+
+        resolver.scripts = resolver.inline.concat(resolver.deferred);
     },
 
     _register: function(registry, entry) {

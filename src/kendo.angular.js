@@ -7,7 +7,8 @@ var __meta__ = {
     name: "AngularJS Directives",
     category: "framework",
     description: "Adds Kendo UI for AngularJS directives",
-    depends: [ "core" ]
+    depends: [ "core" ],
+    defer: true
 };
 
 (function ($, angular, undefined) {
