@@ -1,5 +1,6 @@
 @(Html.Kendo().TreeView()
     .Name("treeview")
+    .Checkboxes(true)
     .HtmlAttributes(new { @class = "demo-section",style="width: 200px" })
     .DragAndDrop(true)
     .Events(events => events
