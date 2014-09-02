@@ -4421,7 +4421,7 @@ var __meta__ = {
                         html += " rowspan='" + rowSpan + "'";
                     }
 
-                    if (columns[idx].colSpan) {
+                    if (columns[idx].colSpan > 1) {
                         html += 'colspan="' + columns[idx].colSpan + '"';
                     }
 
@@ -4594,14 +4594,6 @@ var __meta__ = {
                 tr = that.element.find("tr:has(th):first");
             }
 
-            /*
-            if (!tr.length) {
-                tr = thead.children().first();
-                if (!tr.length) {
-                    tr = $("<tr/>");
-                }
-            }*/
-
             if (hasFilterRow) {
                 var filterRow = $("<tr/>");
                 filterRow.addClass("k-filter-row");
@@ -4612,26 +4604,33 @@ var __meta__ = {
                 thead.append(filterRow);
             }
 
-            var rows = [{ rowSpan: 0, cells: [] }];
-            this._prepareColumns(rows, columns);
+            if (!tr.length) {
+                tr = thead.children().first();
+                if (!tr.length) {
+                    tr = $("<tr/>");
+                }
+            }
 
             if (!tr.children().length) {
-                for (var idx = 0; idx < rows.length; idx++) {
-                    html += "<tr>";
-                    if (hasDetails) {
-                        html += '<th class="k-hierarchy-cell">&nbsp;</th>';
-                    }
-                    html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
-                }
+               var rows = [{ rowSpan: 1, cells: [], index: 0 }];
+               that._prepareColumns(rows, columns);
 
-                html += "</tr>";
-                tr = $(html);
-                //tr.html(html);
+               for (var idx = 0; idx < rows.length; idx++) {
+                   html += "<tr>";
+                   if (hasDetails) {
+                       html += '<th class="k-hierarchy-cell">&nbsp;</th>';
+                   }
+                   html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
+               }
+
+               html += "</tr>";
+               tr = $(html);
+           //     tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
 
-            this.columns = columnsForRendering(this.columns);
+            //this.columns = columnsForRendering(this.columns);
 
             tr.attr("role", "row").find("th").addClass("k-header");
 
@@ -4694,8 +4693,8 @@ var __meta__ = {
             }
         },
 
-        _prepareColumns: function(rows, columns, parentCell) {
-            var row = rows[rows.length - 1];
+        _prepareColumns: function(rows, columns, parentCell, parentRow) {
+            var row = parentRow || rows[rows.length - 1];
 
             var childRow;
             var totalColSpan = 0;
@@ -4706,13 +4705,13 @@ var __meta__ = {
 
                 if (columns[idx].columns && columns[idx].columns.length) {
                     if (!childRow) {
-                        childRow = { rowSpan: 0, cells: [] };
+                        childRow = { rowSpan: 0, cells: [], index: rows.length };
                         rows.push(childRow);
                     }
                     cell.colSpan = columns[idx].columns.length;
+                    this._prepareColumns(rows, columns[idx].columns, cell, childRow);
                     totalColSpan += cell.colSpan - 1;
-                    this._prepareColumns(rows, columns[idx].columns, cell);
-                    row.rowSpan = rows.length;
+                    row.rowSpan = rows.length - row.index;
                 }
             }
             if (parentCell) {
