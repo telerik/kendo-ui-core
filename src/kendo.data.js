@@ -2141,6 +2141,7 @@ var __meta__ = {
 
             model = that.reader.model || {};
 
+            that._detachObservableParents();
             that._data = that._observe(that._data);
             that._online = true;
 
@@ -2259,6 +2260,7 @@ var __meta__ = {
         data: function(value) {
             var that = this;
             if (value !== undefined) {
+                that._detachObservableParents();
                 that._data = this._observe(value);
 
                 that._pristineData = value.slice(0);
@@ -2518,6 +2520,7 @@ var __meta__ = {
                 that._cancelModel(model);
             } else {
                 that._destroyed = [];
+                that._detachObservableParents();
                 that._data = that._observe(that._pristineData);
                 if (that.options.serverPaging) {
                     that._total = that._pristineTotal;
@@ -2774,6 +2777,8 @@ var __meta__ = {
 
             that._pristineData = data.slice(0);
 
+            that._detachObservableParents();
+
             that._data = that._observe(data);
 
             if (that.options.offlineStorage != null) {
@@ -2793,6 +2798,14 @@ var __meta__ = {
             that._process(that._data);
 
             that._dequeueRequest();
+        },
+
+        _detachObservableParents: function() {
+            if (this._data) {
+                for (var idx = 0; idx < this._data.length; idx++) {
+                    this._data[idx].parent = null;
+                }
+            }
         },
 
         _storeData: function(updatePristine) {
@@ -3334,6 +3347,7 @@ var __meta__ = {
                     that.options.serverAggregates = true;
 
                     if (paging) {
+                        that._detachObservableParents();
                         that._data = data = that._observe(data);
                     }
                     that._process(data);
