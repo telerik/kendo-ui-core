@@ -2,6 +2,15 @@
     define([ "./kendo.core" ], f);
 })(function() {
 
+var __meta__ = {
+    id: "angular",
+    name: "AngularJS Directives",
+    category: "framework",
+    description: "Adds Kendo UI for AngularJS directives",
+    depends: [ "core" ],
+    defer: true
+};
+
 (function ($, angular, undefined) {
     "use strict";
 
