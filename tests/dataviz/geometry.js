@@ -645,6 +645,45 @@
         compareBoundingBox(bbox, [-14.1421, 0, 7.0711, 21.2132], 1e-4);
     });
 
+    test("clone returns new instance", function() {
+        var clone = rect.clone();
+        notEqual(clone, rect);
+        ok(clone instanceof Rect);
+    });
+
+    test("clone copies origin", function() {
+        var clone = rect.clone();
+        notEqual(clone.origin, rect.origin);
+        ok(clone.origin.equals(rect.origin));
+    });
+
+    test("clone copies size", function() {
+        var clone = rect.clone();
+        notEqual(clone.size, rect.size);
+        ok(clone.size.equals(rect.size));
+    });
+
+    test("equals is true for same rectangle", function() {
+        ok(rect.equals(rect.clone()));
+    });
+
+    test("equals is false for different origin", function() {
+        var other = rect.clone();
+        other.origin.move(1, 1);
+        ok(!rect.equals(other));
+    });
+
+    test("equals is false for different size", function() {
+        var other = rect.clone();
+        other.size.setWidth(100);
+        ok(!rect.equals(other));
+    });
+
+    test("equals is false for undefined rectangle", function() {
+        ok(!rect.equals());
+    });
+
+
     // ------------------------------------------------------------
     (function() {
         module("Rect / Class methods");

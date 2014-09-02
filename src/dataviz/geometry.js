@@ -232,7 +232,18 @@
 
         geometryChange: util.mixins.geometryChange,
 
-        // TODO: clone, equals
+        clone: function() {
+            return new Rect(
+                this.origin.clone(),
+                this.size.clone()
+            );
+        },
+
+        equals: function(other) {
+            return other &&
+                   other.origin.equals(this.origin) &&
+                   other.size.equals(this.size);
+        },
 
         setOrigin: function(value) {
             this.origin = Point.create(value);
