@@ -193,6 +193,7 @@
     <Compile Include="Controllers\Gantt\Keyboard_NavigationController.cs" />
     <Compile Include="Controllers\Grid\Filter_Row_Controller.cs" />
     <Compile Include="Controllers\Menu\Context_MenuController.cs" />
+    <Compile Include="Controllers\PivotGrid\TemplatesController.cs" />
     <Compile Include="Controllers\PivotGrid\Local_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\PivotGrid\Remote_Flat_Data_BindingController.cs" />
     <Compile Include="Controllers\TreeMap\EventsController.cs" />
@@ -3294,6 +3295,10 @@
     <Content Include="Areas\razor\Views\pivotgrid\remote_flat_data_binding.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\razor\Views\pivotgrid\templates.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\pivotgrid\templates.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
