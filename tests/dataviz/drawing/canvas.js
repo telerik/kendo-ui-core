@@ -12,6 +12,7 @@
     function mockContext(members) {
         return kendo.deepExtend({
             beginPath: $.noop,
+            clearRect: $.noop,
             close: $.noop,
             drawImage: $.noop,
             fill: $.noop,
@@ -71,6 +72,77 @@
             surface.element.css("height", "500px");
             surface.resize();
             equal(surface._rootElement.height, 500);
+        });
+
+        test("destroys root node", function() {
+            surface._root.destroy = function() {
+                ok(true);
+            };
+
+            surface.destroy();
+        });
+
+        test("image returns base64 encoded image", function() {
+            var path = new d.Path();
+            path.moveTo(0, 0).lineTo(100, 100);
+            surface.draw(path);
+
+            var image = surface.image();
+            equal(image.indexOf("data:image/png;base64,"), 0);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var root;
+
+        function createRoot(ctx) {
+            root = new canv.RootNode({
+                getContext: function() {
+                    return ctx;
+                }
+            });
+        }
+
+        module("RootNode", {
+            setup: function() {
+                createRoot(mockContext());
+            }
+        });
+
+        test("throttles invalidate", function() {
+            createRoot(mockContext({
+                clearRect: function() {
+                    ok(true);
+                }
+            }));
+
+            root.invalidate();
+            root.invalidate();
+
+            root.destroy();
+        });
+
+        asyncTest("makes a tail call to invalidate", function() {
+            var count = 0;
+            createRoot(mockContext({
+                clearRect: function() {
+                    if (++count == 2) {
+                        ok(true);
+                        start();
+                    }
+                }
+            }));
+
+            root.invalidate();
+            root.invalidate();
+        });
+
+        test("destroy clears timeout", function() {
+            root.invalidate();
+            root.destroy();
+
+            equal(root._timeout, null);
         });
     })();
 

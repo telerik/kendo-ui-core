@@ -1187,7 +1187,7 @@
                     childBoundingBox = visual.drawingContainer().bbox(null);
                     if (childBoundingBox) {
                         if (boundingBox) {
-                            boundingBox = boundingBox.wrap(childBoundingBox);
+                            boundingBox = Rect.union(boundingBox, childBoundingBox);
                         } else {
                             boundingBox = childBoundingBox;
                         }

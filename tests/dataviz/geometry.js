@@ -610,15 +610,6 @@
         ok(rect.bottomLeft().equals(new Point(0, 20)));
     });
 
-    test("wraps other rectangle", function() {
-        var other = Rect.fromPoints(new Point(-1, 5), new Point(15, 15)),
-            wrap =  rect.wrap(other);
-        equal(wrap.origin.x, -1);
-        equal(wrap.origin.y, 0);
-        equal(wrap.size.width, 16);
-        equal(wrap.size.height, 20);
-    });
-
     test("modifying origin triggers geometryChange", function() {
         rect.observer = {
             geometryChange: function() {
@@ -653,6 +644,60 @@
         var bbox = rect.bbox(Matrix.rotate(45, new Point(5, 10)));
         compareBoundingBox(bbox, [-14.1421, 0, 7.0711, 21.2132], 1e-4);
     });
+
+    test("clone returns new instance", function() {
+        var clone = rect.clone();
+        notEqual(clone, rect);
+        ok(clone instanceof Rect);
+    });
+
+    test("clone copies origin", function() {
+        var clone = rect.clone();
+        notEqual(clone.origin, rect.origin);
+        ok(clone.origin.equals(rect.origin));
+    });
+
+    test("clone copies size", function() {
+        var clone = rect.clone();
+        notEqual(clone.size, rect.size);
+        ok(clone.size.equals(rect.size));
+    });
+
+    test("equals is true for same rectangle", function() {
+        ok(rect.equals(rect.clone()));
+    });
+
+    test("equals is false for different origin", function() {
+        var other = rect.clone();
+        other.origin.move(1, 1);
+        ok(!rect.equals(other));
+    });
+
+    test("equals is false for different size", function() {
+        var other = rect.clone();
+        other.size.setWidth(100);
+        ok(!rect.equals(other));
+    });
+
+    test("equals is false for undefined rectangle", function() {
+        ok(!rect.equals());
+    });
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Rect / Class methods");
+
+        test("union of two rectangles", function() {
+            var a = new Rect(new Point(0, 0), new Size(10, 20));
+            var b = new Rect(new Point(-1, 5), new Size(16, 10));
+            var union = Rect.union(a, b);
+
+            equal(union.origin.x, -1);
+            equal(union.origin.y, 0);
+            equal(union.size.width, 16);
+            equal(union.size.height, 20);
+        });
+    })();
 
     // ------------------------------------------------------------
     var circle;
@@ -1085,6 +1130,32 @@
         test("matrix returns current matrix", function() {
             transformation = new Transformation(matrix);
             deepEqual(transformation.matrix(), matrix);
+        });
+
+        test("clone returns new instance", function() {
+            var clone = transformation.clone();
+            notEqual(clone, transformation);
+            ok(clone instanceof Transformation);
+        });
+
+        test("clone copies matrix", function() {
+            var clone = transformation.clone();
+            notEqual(clone._matrix, transformation._matrix);
+            ok(clone._matrix.equals(transformation._matrix));
+        });
+
+        test("equals is true for same transformation", function() {
+            ok(transformation.equals(transformation.clone()));
+        });
+
+        test("equals is false for different matrix", function() {
+            var other = transformation.clone();
+            other._matrix.a = 5;
+            ok(!transformation.equals(other));
+        });
+
+        test("equals is false for undefined transformation", function() {
+            ok(!transformation.equals());
         });
 
         // ------------------------------------------------------------

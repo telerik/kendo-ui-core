@@ -232,6 +232,19 @@
 
         geometryChange: util.mixins.geometryChange,
 
+        clone: function() {
+            return new Rect(
+                this.origin.clone(),
+                this.size.clone()
+            );
+        },
+
+        equals: function(other) {
+            return other &&
+                   other.origin.equals(this.origin) &&
+                   other.size.equals(this.size);
+        },
+
         setOrigin: function(value) {
             this.origin = Point.create(value);
             this.origin.observer = this;
@@ -282,13 +295,6 @@
             return this.origin.clone().translate(this.width() / 2, this.height() / 2);
         },
 
-        wrap: function(targetRect) {
-            return Rect.fromPoints(
-                Point.min(this.topLeft(), targetRect.topLeft()),
-                Point.max(this.bottomRight(), targetRect.bottomRight())
-            );
-        },
-
         bbox: function(matrix) {
             var tl = this.topLeft().transformCopy(matrix);
             var tr = this.topRight().transformCopy(matrix);
@@ -308,6 +314,13 @@
         );
 
         return new Rect(topLeft, size);
+    };
+
+    Rect.union = function(a, b) {
+        return Rect.fromPoints(
+            Point.min(a.topLeft(), b.topLeft()),
+            Point.max(a.bottomRight(), b.bottomRight())
+        );
     };
 
     var Circle = Class.extend({
@@ -385,6 +398,8 @@
             this.anticlockwise = options.anticlockwise || false;
         },
 
+        // TODO: clone, equals
+
         setCenter: function(value) {
             this.center = Point.create(value);
             this.center.observer = this;
@@ -410,6 +425,7 @@
             );
         },
 
+        // TODO: Review, document
         curvePoints: function() {
             var startAngle = this.startAngle;
             var endAngle = this.endAngle;
@@ -610,6 +626,18 @@
         init: function(matrix) {
             this._matrix = matrix || Matrix.unit();
         },
+
+        clone: function() {
+            return new Transformation(
+                this._matrix.clone()
+            );
+        },
+
+        equals: function(other) {
+            return other &&
+                   other._matrix.equals(this._matrix);
+        },
+
 
         _optionsChange: function() {
             if (this.observer) {

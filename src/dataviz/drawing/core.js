@@ -105,6 +105,7 @@
             }
         },
 
+        destroy: noop,
         load: noop,
 
         append: function(node) {
@@ -153,16 +154,16 @@
 
     // Options storage with optional observer =============================
     var OptionsStore = Class.extend({
-        init: function(value, prefix) {
+        init: function(options, prefix) {
             var field,
                 member;
 
             this.observer = null;
             this.prefix = prefix || "";
 
-            for (field in value) {
-                member = value[field];
-                member = this.wrap(member, field);
+            for (field in options) {
+                member = options[field];
+                member = this._wrap(member, field);
                 this[field] = member;
             }
         },
@@ -181,7 +182,7 @@
             var current = kendo.getter(field, true)(this);
 
             if (current !== value) {
-                var composite = this._set(field, this.wrap(value, field));
+                var composite = this._set(field, this._wrap(value, field));
                 if (this.observer && !composite) {
                     this.observer.optionsChange({
                         field: this.prefix + field,
@@ -223,7 +224,7 @@
             return composite;
         },
 
-        wrap: function(object, field) {
+        _wrap: function(object, field) {
             var type = toString.call(object);
 
             if (object !== null && type === "[object Object]") {
