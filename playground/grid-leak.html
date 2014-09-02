@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.grid.js",
+      ]);
+    </script>
+  </head>
+  <body>
+    <button onclick="refresh()">Refresh</button>
+    |
+    <button onclick="start()">Start</button>
+    <button onclick="startFast()">Start FAST</button>
+    <button onclick="stop()">Stop</button>
+    <div id="grid"></div>
+
+
+
+
+<script>
+
+var grid = $("#grid").kendoGrid({
+    dataSource: makeDataSource(),
+    scrollable: {
+        virtual:true
+    },
+    filterable: true,
+    sortable: true,
+    columns : [ {
+	field : "AGENT_GRP_ID",
+	title : "Agent Group Id",
+	width : "12%"
+    }, {
+	field : "PRIMARY_MEDIA_TYPE_ID",
+	title : "Primary Media Type ",
+	width : "12%"
+    }, {
+	field : "DUR_WORK_SETUP",
+	title : "Work Duration",
+	width : "20%",
+	template: "<strong id='workDuration' title='#=AGENT_GRP_ID# '>#: NUM_WRAPUP # </strong>"
+    }, {
+	field : "DUR_INTERACT",
+	title : "Interaction Duration"
+    }, {
+	field : "NUM_INTERACT",
+	title : "# Interaction",
+    }, {
+	field : "DUR_HOLD",
+	title : "Hold Duration",
+    }, {
+	field : "NUM_HOLD",
+	title : "# Hold",
+    }, {
+	field : "DUR_WRAPUP",
+	title : "Duration Wrap",
+    }, {
+	field : "NUM_WRAPUP",
+	title : "# Wrap",
+    },{
+	field : "rowId",
+	title : "# Row ID",
+    } ]
+}).data("kendoGrid");
+
+function makeDataSource() {
+    return new kendo.data.DataSource({
+        transport: {
+            read: function(options) {
+                options.success(createDataForGrid());
+            }
+        },
+        pageSize: 10,
+	schema : {
+	    fields : {
+		AGENT_GRP_ID : {
+		    type : "int",
+		    editable : false
+		},
+		PRIMARY_MEDIA_TYPE_ID : {
+		    type : "string",
+		    editable : false
+		},
+		DUR_WORK_ACCEPT : {
+		    type : "string",
+		    editable : false
+		},
+		DUR_WORK_SETUP : {
+		    type : "string",
+		    editable : false
+		},
+		DUR_INTERACT : {
+		    type : "string",
+		    editable : false
+		},
+		NUM_INTERACT : {
+		    type : "string",
+		    editable : false
+		},
+		DUR_HOLD : {
+		    type : "string",
+		    editable : false
+		},
+		NUM_HOLD : {
+		    type : "string",
+		    editable : false
+		},
+		DUR_WRAPUP : {
+		    type : "string",
+		    editable : false
+		},
+		NUM_WRAPUP : {
+		    type : "string",
+		    editable : false
+		},
+		rowId : {
+		    type : "int",
+		    editable : false
+		}
+	    }
+	}
+    });
+}
+
+function createDataForGrid() {
+    var dataArray = [];
+    for (i = 0; i < 1000; i++) {
+        dataArray.push({
+            rowId:i,
+            AGENT_GRP_ID : i,
+            PRIMARY_MEDIA_TYPE_ID : Math.floor((Math.random()*10)+1),
+            DUR_WORK_ACCEPT : Math.floor((Math.random()*100)+1),
+            DUR_WORK_SETUP : Math.floor((Math.random()*100)+1),
+            DUR_INTERACT : Math.floor((Math.random()*100)+1),
+            NUM_INTERACT : Math.floor((Math.random()*10)+1),
+            DUR_HOLD : Math.floor((Math.random()*100)+1),
+            NUM_HOLD : Math.floor((Math.random()*10)+1),
+            DUR_WRAPUP : Math.floor((Math.random()*100)+1),
+            NUM_WRAPUP : Math.floor((Math.random()*10)+1)
+        });
+    }
+    return dataArray;
+}
+
+function refresh() {
+    //grid.setDataSource(makeDataSource());
+    grid.dataSource.read();
+}
+
+var timer = null;
+
+function stop() {
+    clearInterval(timer);
+}
+
+function start() {
+    stop();
+    timer = setInterval(refresh, 1000);
+}
+
+function startFast() {
+    stop();
+    timer = setInterval(refresh, 100);
+}
+</script>
+
+
+  </body>
+</html>
