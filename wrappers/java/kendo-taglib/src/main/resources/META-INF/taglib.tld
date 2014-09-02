@@ -20829,10 +20829,23 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The template which renders the content of the column header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.</description>
+            <name>columnHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The width of the table columns. Value is treated as pixels.</description>
             <name>columnWidth</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.</description>
+            <name>dataCellTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The data source of the widget which is used to display values. Can be a JavaScript object which represents a valid data source configuration or an existing kendo.data.PivotDataSource
@@ -20858,6 +20871,12 @@ instance.If the dataSource option is set to a JavaScript object the widget will 
             <name>reorderable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the content of the row header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.</description>
+            <name>rowHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
