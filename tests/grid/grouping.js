@@ -706,14 +706,14 @@
         equal(grid.table.find(".k-group-footer:visible").length, 0);
     });
 
-    test("collapse group does not hide group footer when hideFooter is enabled", function() {
+    test("collapse group does not hide group footer when showFooter is enabled", function() {
         var grid = new Grid(table(), {
             dataSource: {
                 data: [{ foo: "foo", bar: "bar" }],
                 group: [{ field: "foo" }]
             },
             groupable: {
-                hideFooter: true
+                showFooter: true
             },
             columns: [ { field: "foo", groupFooterTemplate: "foo" },
                 { field: "bar" }]

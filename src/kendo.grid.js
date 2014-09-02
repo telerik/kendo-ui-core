@@ -4713,8 +4713,8 @@ var __meta__ = {
 
             var level,
                 groupable = this.options.groupable,
-                hideFooter =  groupable.hideFooter,
-                footerCount = hideFooter ? 0 : 1,
+                showFooter =  groupable.showFooter,
+                footerCount = showFooter ? 0 : 1,
                 offset,
                 relatedGroup = $(),
                 idx,
