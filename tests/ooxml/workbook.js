@@ -153,7 +153,96 @@ test("toDataUrl stores shared strings in sharedStrings", function() {
     equal(dom.last().attr("count"), "3");
     equal(dom.last().attr("uniqueCount"), "2");
     equal(dom.find("si > t").first().text(), "foo");
-    equal(dom.find("si > t").last().text(), "bar");
+});
+
+test("toDataUrl creates styles.xml", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {} ]
+    });
+
+    workbook.toDataURL();
+
+    ok(JSZip.prototype.files["styles.xml"]);
+});
+
+test("toDataUrl stores fonts styles as 'font' elements", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { bold: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("font > b").length, 1);
+});
+
+test("toDataUrl stores cell style as 'xf' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { bold: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").length, 2);
+});
+
+test("toDataUrl stores default cell style style as 'xf'", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").length, 1);
+});
+
+test("toDataUrl stores cell font index as 'fontId' attribute of the 'xf' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { bold: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("fontId"), 1);
+});
+
+test("toDataUrl sets 'applyFont' attribute to '1' if bold is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { bold: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("applyFont"), 1);
 });
 
 }());

@@ -112,7 +112,7 @@ var WORKSHEET = kendo.template(
        '<row r="r${ri + 1}">' +
        '# for (var ci = 0; ci < row.data.length; ci++) { #' +
            '# var cell = row.data[ci];#' +
-           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" t="${cell.type}">' +
+           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" # if (cell.style) { # s="${cell.style}" # } # t="${cell.type}">' +
                '<v>${cell.value}</v>' +
            '</c>' +
        '# } #' +
@@ -130,7 +130,6 @@ var WORKBOOK_RELS = kendo.template(
 '# } #' +
    '<Relationship Id="rId${count+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml" />' +
    '<Relationship Id="rId${count+2}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings" Target="sharedStrings.xml" />' +
-   '<Relationship Id="rId${count+3}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
 '</Relationships>');
 
 var SHARED_STRINGS = kendo.template(
@@ -143,8 +142,12 @@ var SHARED_STRINGS = kendo.template(
 
 var STYLES = kendo.template(
 '<?xml version="1.0" encoding="UTF-8"?>' +
-'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
-   '<fonts count="1">' +
+'<styleSheet' +
+   ' xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"' +
+   ' xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"'+
+   ' mc:Ignorable="x14ac"'+
+   ' xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">' +
+   '<fonts count="${fonts.length+1}" x14ac:knownFonts="1">' +
       '<font>' +
          '<sz val="11" />' +
          '<color theme="1" />' +
@@ -152,41 +155,46 @@ var STYLES = kendo.template(
          '<family val="2" />' +
          '<scheme val="minor" />' +
       '</font>' +
+   '# for (var fi = 0; fi < fonts.length; fi++) { #' +
+       '# var font = fonts[fi]; #' +
+      '<font>' +
+         '# if (font.bold) { #' +
+            '<b />' +
+         '# } #' +
+         '<sz val="11" />' +
+         '<color theme="1" />' +
+         '<name val="Calibri" />' +
+         '<family val="2" />' +
+         '<scheme val="minor" />' +
+      '</font>' +
+   '# } #' +
    '</fonts>' +
-   '<fills count="2">' +
-      '<fill>' +
-         '<patternFill patternType="none" />' +
-      '</fill>' +
-      '<fill>' +
-         '<patternFill patternType="gray125" />' +
-      '</fill>' +
-   '</fills>' +
-   '<borders count="1">' +
-      '<border>' +
-         '<left />' +
-         '<right />' +
-         '<top />' +
-         '<bottom />' +
-         '<diagonal />' +
-      '</border>' +
-   '</borders>' +
-   '<cellStyleXfs count="1">' +
-      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" />' +
-   '</cellStyleXfs>' +
-   '<cellXfs count="1">' +
-      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" />' +
+    '<fills count="1">' +
+        '<fill><patternFill patternType="none"/></fill>' +
+    '</fills>' +
+    '<borders count="1">' +
+        '<border><left/><right/><top/><bottom/><diagonal/></border>' +
+    '</borders>' +
+   '<cellXfs count="${styles.length+1}">' +
+       '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+   '# for (var si = 0; si < styles.length; si++) { #' +
+       '# var style = styles[si]; #' +
+       '<xf xfid="0"' +
+       '# if (style.fontId) { #' +
+          ' fontId="${style.fontId}" applyFont="1"' +
+       '# } #' +
+       '></xf>' +
+   '# } #' +
    '</cellXfs>' +
-   '<cellStyles count="1">' +
-      '<cellStyle name="Normal" xfId="0" builtinId="0" />' +
-   '</cellStyles>' +
    '<dxfs count="0" />' +
    '<tableStyles count="0" defaultTableStyle="TableStyleMedium2" defaultPivotStyle="PivotStyleMedium9" />' +
 '</styleSheet>');
 
 var Worksheet = kendo.Class.extend({
-    init: function(options, sharedStrings) {
+    init: function(options, sharedStrings, styles) {
         this.options = options;
-        this._sharedStrings = sharedStrings;
+        this._strings = sharedStrings;
+        this._styles = styles;
     },
     toXML: function() {
         return WORKSHEET({
@@ -199,47 +207,70 @@ var Worksheet = kendo.Class.extend({
         };
     },
     _lookupString: function(value) {
-        var index = this._sharedStrings.indexes[value];
+        var index = this._strings.indexes[value];
 
         if (index !== undefined) {
             value = index;
         } else {
-            value = this._sharedStrings.indexes[value] = this._sharedStrings.uniqueCount;
-            this._sharedStrings.uniqueCount ++;
+            value = this._strings.indexes[value] = this._strings.uniqueCount;
+            this._strings.uniqueCount ++;
         }
 
-        this._sharedStrings.count ++;
+        this._strings.count ++;
 
         return value;
     },
+    _lookupStyle: function(style) {
+        if (!style) {
+            return 0;
+        }
+
+        var json = kendo.stringify(style);
+
+        var index = $.inArray(json, this._styles);
+
+        if (index < 0) {
+            // There is one default style so we skip it
+            index = this._styles.push(json);
+        }
+
+        return index;
+    },
     _cell: function(data) {
         var value = data.value;
+
+        var style = this._lookupStyle(data.style);
+        var type = "s";
 
         if (typeof value === "string") {
             value = this._lookupString(value);
         }
 
-        return {
+        var cell = {
             value: value,
-            type: "s"
+            type: type,
+            style: style
         };
+
+        return cell;
     }
 });
 
 var Workbook = kendo.Class.extend({
     init: function(options) {
         this.options = options || {};
-        this._sharedStrings = {
+        this._strings = {
             indexes: {},
             count: 0,
             uniqueCount: 0
         };
         this._sheets = [];
+        this._styles = [];
 
         $.map(this.options.sheets || [], $.proxy(this.addSheet, this));
     },
     addSheet: function(options) {
-        this._sheets.push(new Worksheet(options, this._sharedStrings));
+        this._sheets.push(new Worksheet(options, this._strings, this._styles));
     },
     toDataURL: function() {
         var zip = new JSZip();
@@ -274,9 +305,26 @@ var Workbook = kendo.Class.extend({
             worksheets.file(kendo.format("sheet{0}.xml", idx+1), this._sheets[idx].toXML());
         }
 
-        xl.file("styles.xml", STYLES({}));
+        var fonts = $.grep(this._styles, function(style) {
+            if (style.bold) {
+                return style;
+            }
+        });
 
-        xl.file("sharedStrings.xml", SHARED_STRINGS(this._sharedStrings));
+        xl.file("styles.xml", STYLES({
+           fonts: fonts,
+           styles: $.map(this._styles, function(style) {
+              var result = {};
+
+              if (style.bold) {
+                  result.fontId = $.inArray(style, fonts) + 1;
+              }
+
+              return result;
+           })
+        }));
+
+        xl.file("sharedStrings.xml", SHARED_STRINGS(this._strings));
 
         zip.file("[Content_Types].xml", CONTENT_TYPES( { count: sheetCount }));
 

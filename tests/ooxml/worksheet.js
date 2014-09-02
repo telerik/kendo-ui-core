@@ -1,6 +1,7 @@
 (function(){
 
 var sharedStrings;
+var styles;
 
 module("Worksheet", {
   setup: function() {
@@ -9,6 +10,7 @@ module("Worksheet", {
         count: 0,
         indexes: {}
      };
+     styles = [];
   }
 });
 
@@ -19,7 +21,7 @@ function Worksheet(options) {
         options = { data: options };
     }
 
-    return new kendo.ooxml.Worksheet(options, sharedStrings);
+    return new kendo.ooxml.Worksheet(options, sharedStrings, styles);
 }
 
 test("toXML creates a 'c' element for cells", function() {
@@ -136,4 +138,27 @@ test("toXML renders cells as children elements", function() {
     equal(dom.find("c:first v").text(), "0");
     equal(dom.find("c:last v").text(), "1");
 });
+
+test("toXML adds styles", function() {
+    var worksheet = Worksheet([[ { style: { bold: true }, value: "foo" } ]]);
+
+    worksheet.toXML();
+
+    equal(styles.length, 1);
+});
+
+test("toXML sets style index plus one as 's' attribute", function() {
+    var worksheet = Worksheet([[ { style: { bold: true }, value: "foo" } ]]);
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("c").attr("s"), 1);
+});
+
+test("toXML does not set the 's' attribute if style is not set", function() {
+    var worksheet = Worksheet([[ { value: "foo" } ]]);
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("c").attr("s"), null);
+});
+
 }());
