@@ -54,6 +54,22 @@ public class GroupableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("messages", value);
     }
 
+    public boolean getEnabled() {
+        return (boolean)getProperty("enabled");
+    }
+
+    public void setEnabled(boolean value) {
+        setProperty("enabled", value);
+    }
+
+    public boolean getShowFooter() {
+        return (boolean)getProperty("showFooter");
+    }
+
+    public void setShowFooter(boolean value) {
+        setProperty("showFooter", value);
+    }
+
 //<< Attributes
 
 }

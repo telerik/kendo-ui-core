@@ -16845,6 +16845,18 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <tag-class>com.kendoui.taglib.grid.GroupableTag</tag-class>
         <body-content>JSP</body-content>
 
+        <attribute>
+            <description>When set  to false grouping is considered disabled.</description>
+            <name>enabled</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>When enabled the footer will remain visible when the gruop is collapsed.</description>
+            <name>showFooter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
 
     </tag>
 
