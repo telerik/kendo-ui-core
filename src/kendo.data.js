@@ -2714,7 +2714,6 @@ var __meta__ = {
                     that.trigger(PROGRESS);
 
                     that._ranges = [];
-
                     that.trigger("reset");
                     if (that.online()) {
                         that.transport.read({
