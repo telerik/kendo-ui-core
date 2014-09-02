@@ -53,8 +53,7 @@
             surface.draw(new Group());
 
             var svg = surface.svg();
-            ok(svg.indexOf("<?xml") === 0);
-            ok(svg.indexOf("<g>") !== -1);
+            equal(svg.indexOf("<?xml version='1.0' ?><svg"), 0);
         });
 
         test("size updates translate", function() {

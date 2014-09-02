@@ -52,11 +52,14 @@
             var canvas = this.element[0].firstElementChild;
             canvas.width = $(element).width();
             canvas.height = $(element).height();
-
             this._rootElement = canvas;
 
             this._root = new RootNode(canvas);
-            this._root.invalidate();
+        },
+
+        destroy: function() {
+            d.Surface.fn.destroy.call(this);
+            this._root.destroy();
         },
 
         type: "canvas",
@@ -67,6 +70,10 @@
 
         clear: function() {
             this._root.clear();
+        },
+
+        image: function() {
+            return this._rootElement.toDataURL();
         },
 
         _resize: function() {
@@ -151,18 +158,38 @@
 
             this.canvas = canvas;
             this.ctx = canvas.getContext("2d");
-            this.ts = timestamp();
+            this._last = 0;
+            this._render = $.proxy(this._render, this);
         },
 
-        invalidate: function() {
-            var ts = timestamp();
+        destroy: function() {
+            Node.fn.destroy.call(this);
+            this._clearTimeout();
+        },
 
-            if (ts - this.ts > FRAME_DELAY) {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.renderTo(this.ctx);
+        invalidate: function(force) {
+            var now = timestamp();
 
-                this.ts = timestamp();
+            this._clearTimeout();
+
+            if (now - this._last > FRAME_DELAY) {
+                this._render();
+            } else {
+                this._timeout = setTimeout(this._render, FRAME_DELAY);
             }
+        },
+
+        _clearTimeout: function() {
+            if (this._timeout) {
+                clearTimeout(this._timeout);
+                this._timeout = null;
+            }
+        },
+
+        _render: function() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.renderTo(this.ctx);
+            this._last = timestamp();
         }
     });
 
@@ -400,6 +427,7 @@
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
+            RootNode: RootNode,
             Surface: Surface,
             TextNode: TextNode
         }
