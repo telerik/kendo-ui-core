@@ -163,4 +163,34 @@ test("paste of nested table adds k-table class", function() {
     ok($("table", editor.body).hasClass("k-table"));
 });
 
+if ('FileReader' in window) {
+
+    function imageEvent() {
+        return { clipboardData: { items: [ { type: "image/png" } ] } };
+    }
+
+    editor_module("editor pasting images", {
+       setup: function() {
+           editor = $("#editor-fixture").data("kendoEditor");
+           editor.clipboard._fileToDataURL = function(item, complete) {
+               complete({ target: { result: "READ_FILE" } });
+           };
+       },
+       teardown: function() {
+           kendo.destroy(QUnit.fixture);
+       }
+    });
+
+    test("pasting of image file triggers paste event", function() {
+        var handler = spy();
+
+        editor.one("paste", handler);
+
+        editor.clipboard.onpaste(imageEvent());
+
+        equal(handler.calls, 1);
+        equal(handler.lastArgs[0].html, '<img src="READ_FILE" />');
+    });
+}
+
 }());

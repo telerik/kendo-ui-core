@@ -505,6 +505,26 @@ var Clipboard = Class.extend({
         this._contentModification($.noop, $.noop);
     },
 
+    _fileToDataURL: function(clipboardItem, complete) {
+        var blob = clipboardItem.getAsFile();
+        var reader = new FileReader();
+
+        reader.onload = complete || $.noop;
+
+        reader.readAsDataURL(blob);
+    },
+
+    _triggerPaste: function(html, options) {
+        var args = { html: html || "" };
+
+        args.html = args.html.replace(/\ufeff/g, "");
+
+        this.editor.trigger("paste", args);
+
+        this.paste(args.html, options || {});
+
+    },
+
     _handleImagePaste: function(e) {
         if (!('FileReader' in window)) {
             return;
@@ -528,16 +548,11 @@ var Clipboard = Class.extend({
             return;
         }
 
-        var blob = items[0].getAsFile();
-        var reader = new FileReader();
-
-        reader.onload = function(e) {
-            that.paste('<img src="' + e.target.result + '" />');
+        this._fileToDataURL(items[0], function(e) {
+            that._triggerPaste('<img src="' + e.target.result + '" />');
 
             that._endModification(modificationInfo);
-        };
-
-        reader.readAsDataURL(blob);
+        });
 
         return true;
     },
@@ -596,12 +611,7 @@ var Clipboard = Class.extend({
 
                 containers.remove();
 
-                html = html.replace(/\ufeff/g, "");
-
-                args.html = html;
-
-                editor.trigger("paste", args);
-                editor.clipboard.paste(args.html, { clean: true });
+                this._triggerPaste(html, { clean: true });
             }
         );
     },
