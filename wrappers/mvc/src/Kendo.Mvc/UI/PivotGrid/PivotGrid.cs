@@ -72,6 +72,42 @@
             set;
         }
 
+        public string ColumnHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string ColumnHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string DataCellTemplate
+        {
+            get;
+            set;
+        }
+
+        public string DataCellTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string RowHeaderTemplate
+        {
+            get;
+            set;
+        }
+
+        public string RowHeaderTemplateId
+        {
+            get;
+            set;
+        }
+
         public PivotGridMessages Messages
         {
             get;
@@ -122,9 +158,36 @@
 
             options["dataSource"] = DataSource.ToJson();
 
+            options["dataCellTemplate"] = GetTemplate(DataCellTemplateId, DataCellTemplate);
+
+            options["columnHeaderTemplate"] = GetTemplate(ColumnHeaderTemplateId, ColumnHeaderTemplate);
+            options["rowHeaderTemplate"] = GetTemplate(RowHeaderTemplateId, RowHeaderTemplate);
+
             writer.Write(Initializer.Initialize(Selector, "PivotGrid", options));
 
             base.WriteInitializationScript(writer);
+        }
+
+        private object GetTemplate(string templateId, string template)
+        {
+            object result = null;
+
+            var idPrefix = "#";
+            if (IsInClientTemplate)
+            {
+                idPrefix = "\\" + idPrefix;
+            }
+
+            if (!string.IsNullOrEmpty(templateId))
+            {
+                result = new ClientHandlerDescriptor { HandlerName = string.Format("jQuery(\"{0}{1}\").html()", idPrefix, templateId) };
+            }
+            else if (!string.IsNullOrEmpty(template))
+            {
+                result = template;
+            }
+
+            return result;
         }
 
         protected virtual IDictionary<string, object> SeriailzeBaseOptions()

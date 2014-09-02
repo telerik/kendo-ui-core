@@ -128,5 +128,221 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the data cell template of the pivot grid.
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .DataCellTemplate(&quot;<em>#: dataItem.fmtValue #</em>&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> DataCellTemplate(string template)
+        {
+            Component.DataCellTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the data cell template of the pivot grid.
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .DataCellTemplateId(&quot;dataCellTemplateId&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> DataCellTemplateId(string templateId)
+        {
+            Component.DataCellTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the column header cell template of the pivot grid.
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .ColumnHeaderTemplate(&quot;<em>#: member.caption #</em>&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> ColumnHeaderTemplate(string template)
+        {
+            Component.ColumnHeaderTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the column header cell template of the pivot grid.
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .ColumnHeaderTemplateId(&quot;columnHeaderTemplateId&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> ColumnHeaderTemplateId(string templateId)
+        {
+            Component.ColumnHeaderTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the row header cell template of the pivot grid.
+        /// </summary>
+        /// <param name="template">The template</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .RowHeaderTemplate(&quot;<em>#: member.caption #</em>&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> RowHeaderTemplate(string template)
+        {
+            Component.RowHeaderTemplate = template;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the row header cell template of the pivot grid.
+        /// </summary>
+        /// <param name="templateId">The template id</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().PivotGrid()
+        ///       .Name(&quot;pivotgrid&quot;)
+        ///       .RowHeaderTemplateId(&quot;rowHeaderTemplateId&quot;)
+        ///       .DataSource(dataSource =&gt;
+        ///         dataSource.Xmla()
+        ///            .Columns(columns =&gt; columns.Add(&quot;[Date].[Calendar]&quot;).Expand(true))
+        ///            .Rows(rows =&gt; rows.Add(&quot;[Geography].[City]&quot;))
+        ///            .Measures(measures =&gt; measures.Values(new string[]{&quot;[Measures].[Internet Sales Amount]&quot;}))
+        ///            .Transport(transport =&gt; transport
+        ///                .Connection(connection =&gt; connection
+        ///                    .Catalog(&quot;Adventure Works DW 2008R2&quot;)
+        ///                    .Cube(&quot;Adventure Works&quot;))
+        ///                .Read(read =&gt; read
+        ///                    .Url(&quot;http://demos.telerik.com/olap/msmdpump.dll&quot;)
+        ///                    .DataType(&quot;text&quot;)
+        ///                    .ContentType(&quot;text/xml&quot;)
+        ///                    .Type(HttpVerbs.Post)
+        ///                )
+        ///            )
+        ///        )
+        ///    )
+        /// </code>
+        /// </example>
+        public PivotGridBuilder<TModel> RowHeaderTemplateId(string templateId)
+        {
+            Component.RowHeaderTemplateId = templateId;
+
+            return this;
+        }
     }
 }
