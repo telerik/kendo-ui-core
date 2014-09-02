@@ -50,7 +50,7 @@ ScriptResolver.prototype = {
             circularDependancy;
 
         resolver._register(seen, component.id);
-        depends.forEach(function(dependancyId) {
+        $.each(depends, function(i, dependancyId) {
             circularDependancy =
                 !inArray(resolved, dependancyId) &&
                  inArray(seen, dependancyId);
@@ -81,7 +81,7 @@ ScriptResolver.prototype = {
     },
 
     _register: function(registry, entry) {
-        if (entry && registry.indexOf(entry) === -1) {
+        if (entry && !inArray(registry, entry)) {
             registry.push(entry);
         }
     },
@@ -106,7 +106,7 @@ function findById(arr, id) {
 }
 
 function inArray(arr, element) {
-    return arr.indexOf(element) !== -1;
+    return $.inArray(element, arr) !== -1;
 }
 
 window.ScriptResolver = ScriptResolver;
