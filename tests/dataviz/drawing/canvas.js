@@ -102,7 +102,7 @@
                     return ctx;
                 }
             });
-        };
+        }
 
         module("RootNode", {
             setup: function() {
