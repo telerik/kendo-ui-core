@@ -105,6 +105,7 @@
             }
         },
 
+        destroy: noop,
         load: noop,
 
         append: function(node) {
