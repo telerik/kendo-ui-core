@@ -152,4 +152,24 @@
 
         deepEqual(resolver.resolved, ["a"]);
     });
+
+    test("registers deferred components", function() {
+        createResolver([{
+            id: "a",
+            source: "a.js"
+        }, {
+            id: "b",
+            source: "b.js",
+            defer: true
+        }, {
+            id: "c",
+            source: "c.js"
+        }]);
+
+        resolver.addComponent("a");
+        resolver.addComponent("b");
+        resolver.addComponent("c");
+
+        deepEqual(resolver.scripts, ["a.js", "c.js", "b.js"]);
+    });
 })();
