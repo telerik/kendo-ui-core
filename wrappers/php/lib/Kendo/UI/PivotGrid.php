@@ -64,6 +64,74 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Sets the columnHeaderTemplate option of the PivotGrid.
+    * The template which renders the content of the column header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function columnHeaderTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('columnHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the columnHeaderTemplate option of the PivotGrid.
+    * The template which renders the content of the column header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.
+    * @param string $value The template content.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function columnHeaderTemplate($value) {
+        return $this->setProperty('columnHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the dataCellTemplate option of the PivotGrid.
+    * The template which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function dataCellTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('dataCellTemplate', $value);
+    }
+
+    /**
+    * Sets the dataCellTemplate option of the PivotGrid.
+    * The template which renders the content of the data cell. By default renders the formatted value (fmtValue) of the data item.The fields which can be used in the template are:For information about the tuple structure check this link.
+About the data item structure review this help topic.
+    * @param string $value The template content.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function dataCellTemplate($value) {
+        return $this->setProperty('dataCellTemplate', $value);
+    }
+
+    /**
+    * Sets the rowHeaderTemplate option of the PivotGrid.
+    * The template which renders the content of the row header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function rowHeaderTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('rowHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the rowHeaderTemplate option of the PivotGrid.
+    * The template which renders the content of the row header cell. By default it renders the caption of the tuple member.The fields which can be used in the template are:For information about the tuple structure check this link.
+    * @param string $value The template content.
+    * @return \Kendo\UI\PivotGrid
+    */
+    public function rowHeaderTemplate($value) {
+        return $this->setProperty('rowHeaderTemplate', $value);
+    }
+
+    /**
     * The text messages displayed in the fields sections.
     * @param \Kendo\UI\PivotGridMessages|array $value
     * @return \Kendo\UI\PivotGrid
