@@ -203,6 +203,17 @@
 
             that.toolbar.bindTo(that);
 
+            if (type == "textarea") {
+                setTimeout(function () {
+                    var heightStyle = that.wrapper[0].style.height;
+                    var expectedHeight = parseInt(heightStyle, 10);
+                    var actualHeight = that.wrapper.height();
+                    if (heightStyle.indexOf("px") > 0 && !isNaN(expectedHeight) && actualHeight > expectedHeight) {
+                        that.wrapper.height(expectedHeight - (actualHeight - expectedHeight));
+                    }
+                });
+            }
+
             that._initializeContentElement(that);
 
             that.keyboard = new editorNS.Keyboard([
