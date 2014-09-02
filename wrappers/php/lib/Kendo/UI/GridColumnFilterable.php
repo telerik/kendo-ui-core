@@ -6,7 +6,7 @@ class GridColumnFilterable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Specifies options for the filter cell when enabled.Can be set to a JavaScript object which represents the filter cell configuration.
+    * Specifies options for the filter header cell when filter mode is set to 'row'.Can be set to a JavaScript object which represents the filter cell configuration.
     * @param \Kendo\UI\GridColumnFilterableCell|array $value
     * @return \Kendo\UI\GridColumnFilterable
     */

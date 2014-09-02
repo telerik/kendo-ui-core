@@ -88,7 +88,7 @@ class GridColumnFilterableCell extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridColumnFilterableCell.
-    * JavaScript function which will customize how the input for the filter value is customized.
+    * JavaScript function which will customize how the input for the filter value is rendered.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GridColumnFilterableCell
     */
@@ -100,7 +100,7 @@ class GridColumnFilterableCell extends \Kendo\SerializableObject {
 
     /**
     * Sets the template option of the GridColumnFilterableCell.
-    * JavaScript function which will customize how the input for the filter value is customized.
+    * JavaScript function which will customize how the input for the filter value is rendered.
     * @param string $value The template content.
     * @return \Kendo\UI\GridColumnFilterableCell
     */
