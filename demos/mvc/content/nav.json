@@ -1963,6 +1963,16 @@
             "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can poplate the widget with local flat data."
         }
       },
+	  {
+        "text": "Templates",
+        "url": "pivotgrid/templates",
+        "title": {
+            "kendo-ui": "Customizing Pivot Grid apperience"
+        },
+        "meta": {
+            "kendo-ui": "This demo for Kendo UI jQuery-based PivotGrid component shows how you can customize the widget apperience."
+        }
+      },
       {
         "text": "AngularJS",
         "url": "pivotgrid/angular",
