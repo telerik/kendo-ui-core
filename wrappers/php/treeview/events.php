@@ -12,6 +12,8 @@ require_once '../lib/Kendo/Autoload.php';
 
     $treeview->dragAndDrop(true);
 
+    $treeview->checkboxes(true);
+
     // build DataSource
     $furniture = new \Kendo\UI\TreeViewItem('Furniture');
     $furniture->expanded(true);

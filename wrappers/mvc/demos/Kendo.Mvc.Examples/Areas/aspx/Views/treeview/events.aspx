@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <%= Html.Kendo().TreeView()
     .Name("treeview")
+    .Checkboxes(true)
     .HtmlAttributes(new { @class = "demo-section", style = "width: 200px" })
     .DragAndDrop(true)
     .Events(events => events
