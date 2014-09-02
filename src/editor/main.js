@@ -672,9 +672,11 @@
 
         _focusBody: function() {
             var body = this.body;
+            var iframe = this.wrapper && this.wrapper.find("iframe")[0];
             var documentElement = this.document.documentElement;
+            var activeElement = kendo._activeElement();
 
-            if (kendo._activeElement() != body) {
+            if (activeElement != body && activeElement != iframe) {
                 var scrollTop = documentElement.scrollTop;
                 body.focus();
                 documentElement.scrollTop = scrollTop;
