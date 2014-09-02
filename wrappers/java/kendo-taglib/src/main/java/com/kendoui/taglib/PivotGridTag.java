@@ -75,12 +75,28 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("autoBind", value);
     }
 
+    public java.lang.String getColumnHeaderTemplate() {
+        return (java.lang.String)getProperty("columnHeaderTemplate");
+    }
+
+    public void setColumnHeaderTemplate(java.lang.String value) {
+        setProperty("columnHeaderTemplate", value);
+    }
+
     public float getColumnWidth() {
         return (float)getProperty("columnWidth");
     }
 
     public void setColumnWidth(float value) {
         setProperty("columnWidth", value);
+    }
+
+    public java.lang.String getDataCellTemplate() {
+        return (java.lang.String)getProperty("dataCellTemplate");
+    }
+
+    public void setDataCellTemplate(java.lang.String value) {
+        setProperty("dataCellTemplate", value);
     }
 
     public void setDataSource(DataSourceTag dataSource) {
@@ -109,6 +125,14 @@ public class PivotGridTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setReorderable(boolean value) {
         setProperty("reorderable", value);
+    }
+
+    public java.lang.String getRowHeaderTemplate() {
+        return (java.lang.String)getProperty("rowHeaderTemplate");
+    }
+
+    public void setRowHeaderTemplate(java.lang.String value) {
+        setProperty("rowHeaderTemplate", value);
     }
 
     public String getCollapseMember() {
