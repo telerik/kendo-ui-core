@@ -72,6 +72,10 @@
             this._root.clear();
         },
 
+        image: function() {
+            return this._rootElement.toDataURL();
+        },
+
         _resize: function() {
             this._rootElement.width = this._size.width;
             this._rootElement.height = this._size.height;

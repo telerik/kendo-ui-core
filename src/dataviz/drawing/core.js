@@ -287,8 +287,6 @@
 
     SurfaceFactory.current = new SurfaceFactory();
 
-    // TODO: Surface.exportImage
-
     // Exports ================================================================
     deepExtend(dataviz, {
         drawing: {
