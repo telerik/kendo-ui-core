@@ -3783,7 +3783,7 @@ var __meta__ = {
                 if (field && col.filterable !== false) {
                     var cellOptions = col.filterable && col.filterable.cell || {};
 
-                    suggestDataSource = that.dataSource.options;
+                    suggestDataSource = that.options.dataSource;
 
                     var messages = extend(true, {}, filterable.messages);
                     if (col.filterable) {
