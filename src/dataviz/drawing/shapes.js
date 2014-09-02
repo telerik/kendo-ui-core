@@ -502,7 +502,7 @@
                 for (var i = 1; i < length; i++) {
                     var segmentBox = segments[i - 1].bboxTo(segments[i], matrix);
                     if (boundingBox) {
-                        boundingBox = boundingBox.wrap(segmentBox);
+                        boundingBox = Rect.union(boundingBox, segmentBox);
                     } else {
                         boundingBox = segmentBox;
                     }
@@ -606,7 +606,7 @@
                 var elementBoundingBox = applyTransform ? element.bbox(transformation) : element.rawBBox();
                 if (elementBoundingBox) {
                     if (boundingBox) {
-                        boundingBox = boundingBox.wrap(elementBoundingBox);
+                        boundingBox = Rect.union(boundingBox, elementBoundingBox);
                     } else {
                         boundingBox = elementBoundingBox;
                     }

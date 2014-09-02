@@ -284,14 +284,6 @@
             return this.origin.clone().translate(this.width() / 2, this.height() / 2);
         },
 
-        // TODO: Act on this instance, document after change
-        wrap: function(rect) {
-            return Rect.fromPoints(
-                Point.min(this.topLeft(), rect.topLeft()),
-                Point.max(this.bottomRight(), rect.bottomRight())
-            );
-        },
-
         bbox: function(matrix) {
             var tl = this.topLeft().transformCopy(matrix);
             var tr = this.topRight().transformCopy(matrix);
@@ -311,6 +303,13 @@
         );
 
         return new Rect(topLeft, size);
+    };
+
+    Rect.union = function(a, b) {
+        return Rect.fromPoints(
+            Point.min(a.topLeft(), b.topLeft()),
+            Point.max(a.bottomRight(), b.bottomRight())
+        );
     };
 
     var Circle = Class.extend({

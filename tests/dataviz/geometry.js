@@ -610,15 +610,6 @@
         ok(rect.bottomLeft().equals(new Point(0, 20)));
     });
 
-    test("wraps other rectangle", function() {
-        var other = Rect.fromPoints(new Point(-1, 5), new Point(15, 15)),
-            wrap =  rect.wrap(other);
-        equal(wrap.origin.x, -1);
-        equal(wrap.origin.y, 0);
-        equal(wrap.size.width, 16);
-        equal(wrap.size.height, 20);
-    });
-
     test("modifying origin triggers geometryChange", function() {
         rect.observer = {
             geometryChange: function() {
@@ -653,6 +644,22 @@
         var bbox = rect.bbox(Matrix.rotate(45, new Point(5, 10)));
         compareBoundingBox(bbox, [-14.1421, 0, 7.0711, 21.2132], 1e-4);
     });
+
+    // ------------------------------------------------------------
+    (function() {
+        module("Rect / Class methods");
+
+        test("union of two rectangles", function() {
+            var a = new Rect(new Point(0, 0), new Size(10, 20));
+            var b = new Rect(new Point(-1, 5), new Size(16, 10));
+            var union = Rect.union(a, b);
+
+            equal(union.origin.x, -1);
+            equal(union.origin.y, 0);
+            equal(union.size.width, 16);
+            equal(union.size.height, 20);
+        });
+    })();
 
     // ------------------------------------------------------------
     var circle;
