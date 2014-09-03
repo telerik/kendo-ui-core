@@ -458,7 +458,7 @@ var Clipboard = Class.extend({
 
     _startModification: function() {
         var range;
-        var startRestorePoint;
+        var restorePoint;
         var editor = this.editor;
 
         if (this._inProgress) {
@@ -467,8 +467,8 @@ var Clipboard = Class.extend({
 
         this._inProgress = true;
 
-        var range = editor.getRange();
-        var restorePoint = new RestorePoint(range);
+        range = editor.getRange();
+        restorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
@@ -532,7 +532,7 @@ var Clipboard = Class.extend({
 
         var that = this;
         var clipboardData = e.clipboardData || e.originalEvent.clipboardData;
-        var items = clipboardData && clipboardData.items;
+        var items = clipboardData && (clipboardData.items || clipboardData.files);
 
         if (!items || !items.length) {
             return;
