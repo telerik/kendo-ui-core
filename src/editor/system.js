@@ -456,33 +456,48 @@ var Clipboard = Class.extend({
         return (/<(div|p|ul|ol|table|h[1-6])/i).test(html);
     },
 
-    _contentModification: function(before, after) {
-        var that = this;
-        var editor = that.editor;
+    _startModification: function() {
         var range;
         var startRestorePoint;
+        var editor = this.editor;
 
-        if (that._inProgress) {
+        if (this._inProgress) {
             return;
         }
 
-        that._inProgress = true;
+        this._inProgress = true;
 
-        range = editor.getRange();
-        startRestorePoint = new RestorePoint(range);
+        var range = editor.getRange();
+        var restorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
-        before.call(that, editor, range);
+        return { range: range, restorePoint: restorePoint };
+    },
+
+    _endModification: function(modificationInfo) {
+        finishUpdate(this.editor, modificationInfo.restorePoint);
+
+        this.editor._selectionChange();
+
+        this._inProgress = false;
+    },
+
+    _contentModification: function(before, after) {
+        var that = this;
+        var editor = that.editor;
+        var modificationInfo = that._startModification();
+
+        if (!modificationInfo) {
+            return;
+        }
+
+        before.call(that, editor, modificationInfo.range);
 
         setTimeout(function() {
-            after.call(that, editor, range);
+            after.call(that, editor, modificationInfo.range);
 
-            finishUpdate(editor, startRestorePoint);
-
-            editor._selectionChange();
-
-            that._inProgress = false;
+            that._endModification(modificationInfo);
         });
     },
 
@@ -490,7 +505,63 @@ var Clipboard = Class.extend({
         this._contentModification($.noop, $.noop);
     },
 
+    _fileToDataURL: function(clipboardItem, complete) {
+        var blob = clipboardItem.getAsFile();
+        var reader = new FileReader();
+
+        reader.onload = complete || $.noop;
+
+        reader.readAsDataURL(blob);
+    },
+
+    _triggerPaste: function(html, options) {
+        var args = { html: html || "" };
+
+        args.html = args.html.replace(/\ufeff/g, "");
+
+        this.editor.trigger("paste", args);
+
+        this.paste(args.html, options || {});
+
+    },
+
+    _handleImagePaste: function(e) {
+        if (!('FileReader' in window)) {
+            return;
+        }
+
+        var that = this;
+        var clipboardData = e.clipboardData || e.originalEvent.clipboardData;
+        var items = clipboardData && clipboardData.items;
+
+        if (!items || !items.length) {
+            return;
+        }
+
+        if (!/^image\//i.test(items[0].type)) {
+            return;
+        }
+
+        var modificationInfo = that._startModification();
+
+        if (!modificationInfo) {
+            return;
+        }
+
+        this._fileToDataURL(items[0], function(e) {
+            that._triggerPaste('<img src="' + e.target.result + '" />');
+
+            that._endModification(modificationInfo);
+        });
+
+        return true;
+    },
+
     onpaste: function(e) {
+        if (this._handleImagePaste(e)) {
+            return;
+        }
+
         this._contentModification(
             function beforePaste(editor, range) {
                 var clipboardNode = dom.create(editor.document, 'div', {
@@ -540,12 +611,7 @@ var Clipboard = Class.extend({
 
                 containers.remove();
 
-                html = html.replace(/\ufeff/g, "");
-
-                args.html = html;
-
-                editor.trigger("paste", args);
-                editor.clipboard.paste(args.html, { clean: true });
+                this._triggerPaste(html, { clean: true });
             }
         );
     },
