@@ -16,7 +16,15 @@
     <div id="surface" style="border: 1px solid black"></div>
 
     <script>
-      kendo.PDF.loadFonts([ "./font.ttf" ], function(){
+      var fonturl = "./font.ttf";
+      var imgurl = "./images/1.jpg";
+      kendo.PDF.loadFonts([ fonturl ], function(){
+        kendo.PDF.loadImages([ imgurl ], function(){
+          init();
+        });
+      });
+
+      function init(){
           var d = kendo.dataviz.drawing;
           var geo = kendo.dataviz.geometry;
 
@@ -89,7 +97,11 @@
           var pathB = new d.Path().moveTo(298, 102).lineTo(302, 98);
           group.append(pathA, pathB);
           surface.draw(group);
-      });
+
+          var rect = new geo.Rect([ 300, 200 ], [ 213.34, 145.67 ]);
+          var image = new d.Image(imgurl, rect);
+          surface.draw(image);
+      }
     </script>
 
   </body>

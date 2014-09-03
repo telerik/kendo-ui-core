@@ -274,7 +274,12 @@
         },
 
         _drawImage: function(element, page, pdf) {
-            throw new Error("Implement image!");
+            var url = element.src();
+            var rect = element.rect();
+            var tl = rect.getOrigin();
+            var sz = rect.getSize();
+            page.transform(sz.width, 0, 0, -sz.height, tl.x, tl.y + sz.height);
+            page.drawImage(url);
         }
 
     });

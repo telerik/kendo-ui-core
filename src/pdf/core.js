@@ -13,6 +13,7 @@
 
     var FONT_RESOURCE_COUNTER = 0;
     var GS_RESOURCE_COUNTER = 0;
+    var X_RESOURCE_COUNTER = 0;
 
     PDF.TEXT_RENDERING_MODE = {
         fill           : 0,
@@ -113,6 +114,7 @@
         };
 
         self.FONTS = {};
+        self.IMAGES = {};
 
         var catalog = self.attach(new PDFCatalog());
         var pageTree = self.attach(new PDFPageTree());
@@ -176,52 +178,84 @@
 
     var FONT_CACHE = {};
 
+    function loadBinary(url, cont) {
+        if (global.process) { // XXX: temporary
+            require("fs").readFile(url, { encoding: "binary" }, function(err, data){
+                data = data.toString("binary");
+                cont(data);
+            });
+            return;
+        }
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.overrideMimeType("text/plain; charset=x-user-defined");
+        req.onload = function() {
+            cont(req.responseText);
+        };
+        req.send(null);
+    }
+
     function loadFont(url, cont) {
         var font = FONT_CACHE[url];
         if (font) {
             cont(font);
         } else {
-            if (global.process) { // XXX: temporary
-                require("fs").readFile(url, { encoding: "binary" }, function(err, data){
-                    data = data.toString("binary");
-                    var font = new PDF.TTFFont(data);
-                    FONT_CACHE[url] = font;
-                    cont(font);
-                });
-                return;
-            }
-            var req = new XMLHttpRequest();
-            req.open('GET', url, true);
-            req.overrideMimeType("text/plain; charset=x-user-defined");
-            req.onload = function() {
-                var data = req.responseText;
+            loadBinary(url, function(data){
                 var font = new PDF.TTFFont(data);
                 FONT_CACHE[url] = font;
                 cont(font);
-            };
-            req.send(null);
+            });
         }
     }
 
-    PDF.loadFonts = function(urls, callback) {
-        var n = urls.length, i = n;
-        if (n == 0) {
-            return callback();
-        }
-        while (i-- > 0) {
-            loadFont(urls[i], function(){
-                if (--n == 0) {
-                    callback();
+    var IMAGE_CACHE = {};
+
+    function loadImage(url, cont) {
+        var img = IMAGE_CACHE[url];
+        if (img) {
+            cont(img);
+        } else {
+            loadBinary(url, function(data){
+                data = BinaryStream(data);
+                data.offset(0);
+                if (data.readShort() == 0xFFD8 && data.readShort() == 0xFFE0 &&
+                    (data.skip(2), data.readString(4)) == "JFIF")
+                {
+                    var img = new PDF.JPEG(data);
+                    IMAGE_CACHE[url] = img;
+                    cont(img);
                 }
             });
         }
-    };
+    }
+
+    function loadMany(loadOne) {
+        return function(urls, callback) {
+            var n = urls.length, i = n;
+            if (n == 0) {
+                return callback();
+            }
+            while (i-- > 0) {
+                loadOne(urls[i], function(){
+                    if (--n == 0) {
+                        callback();
+                    }
+                });
+            }
+        };
+    }
+
+    PDF.loadFonts = loadMany(loadFont);
+    PDF.loadImages = loadMany(loadImage);
 
     PDF.prototype = {
+        loadFonts: PDF.loadFonts,
+        loadImages: PDF.loadImages,
+
         getFont: function(url) {
             var font = this.FONTS[url];
             if (!font) {
-                var font = FONT_CACHE[url];
+                font = FONT_CACHE[url];
                 if (!font) {
                     throw new Error("Font " + url + " has not been loaded");
                 }
@@ -229,7 +263,18 @@
             }
             return font;
         },
-        loadFonts: PDF.loadFonts,
+
+        getImage: function(url) {
+            var img = this.IMAGES[url];
+            if (!img) {
+                img = IMAGE_CACHE[url];
+                if (!img) {
+                    throw new Error("Image " + url + " has not been loaded");
+                }
+                img = this.IMAGES[url] = this.attach(new PDFImage(img));
+            }
+            return img;
+        },
 
         getOpacityGS: function(opacity, forStroke) {
             var id = parseFloat(opacity).toFixed(3);
@@ -474,6 +519,26 @@
         }
     }, PDFDictionary);
 
+    /// images
+
+    var PDFImage = defclass(function PDFImage(img){
+        this.data = img.data;
+        this.props = {
+            Type             : PDFName.get("XObject"),
+            Subtype          : PDFName.get("Image"),
+            BitsPerComponent : img.bits,
+            Height           : img.height,
+            Width            : img.width,
+            Filter           : PDFName.get("DCTDecode"),
+            ColorSpace       : PDFName.get({
+                1: "DeviceGray",
+                3: "DeviceRGB",
+                4: "DeviceCMYK"
+            }[img.channels])
+        };
+        this._resourceName = PDFName.get("I" + (++X_RESOURCE_COUNTER));
+    }, {}, PDFStream);
+
     /// standard fonts
 
     // var FONTS = {};
@@ -676,6 +741,7 @@
         this._textMode = false;
         this._fontResources = {};
         this._gsResources = {};
+        this._xResources = {};
 
         this._font = null;
         this._fontSize = null;
@@ -690,8 +756,9 @@
             PDFName.get("ImageI")
         ];
         props.Resources = new PDFDictionary({
-            Font: new PDFDictionary(this._fontResources),
-            ExtGState: new PDFDictionary(this._gsResources)
+            Font      : new PDFDictionary(this._fontResources),
+            ExtGState : new PDFDictionary(this._gsResources),
+            XObject   : new PDFDictionary(this._xResources)
         });
     }, {
         _out: function() {
@@ -864,11 +931,163 @@
         },
         fillStroke: function() {
             this._out("B", NL);
+        },
+        drawImage: function(url) {
+            var img = this._pdf.getImage(url);
+            var name = img._resourceName.name;
+            this._xResources[name] = img;
+            this._out(PDFName.get(name), " Do", NL);
         }
     }, PDFDictionary);
 
+    function BinaryStream(data) {
+        var offset = 0;
+        if (data == null) data = "";
+
+        function eof() {
+            return !data.charAt(offset);
+        }
+        function readByte() {
+            return data.charCodeAt(offset++) & 0xFF;
+        }
+        function writeByte(b) {
+            var ch = String.fromCharCode(b & 0xFF);
+            if (offset < data.length) {
+                // overwrite
+                data = data.substr(0, offset) + ch + data.substr(offset + 1);
+            } else {
+                data += ch;
+            }
+            offset++;
+        }
+        function readShort() {
+            return (readByte() << 8) | readByte();
+        }
+        function writeShort(w) {
+            writeByte(w >> 8);
+            writeByte(w);
+        }
+        function readShort_() {
+            var w = readShort();
+            return w >= 0x8000 ? w - 0x10000 : w;
+        }
+        function writeShort_(w) {
+            writeShort(w < 0 ? w + 0x10000 : w);
+        }
+        function readLong() {
+            return (readShort() * 0x10000) + readShort();
+        }
+        function writeLong(w) {
+            writeShort((w >>> 16) & 0xFFFF);
+            writeShort(w & 0xFFFF);
+        }
+        function readLong_() {
+            var w = readLong();
+            return w >= 0x80000000 ? w - 0x100000000 : w;
+        }
+        function writeLong_(w) {
+            writeLong(w < 0 ? w + 0x100000000 : w);
+        }
+        function readFixed() {
+            return readLong() / 0x10000;
+        }
+        function writeFixed(f) {
+            writeLong(Math.round(f * 0x10000));
+        }
+        function readFixed_() {
+            return readLong_() / 0x10000;
+        }
+        function writeFixed_(f) {
+            writeLong_(Math.round(f * 0x10000));
+        }
+        function read(len) {
+            var ret = [];
+            while (len-- > 0)
+                ret.push(readByte());
+            return ret;
+        }
+        function write(bytes) {
+            if (typeof bytes == "string")
+                return writeString(bytes);
+            for (var i = 0; i < bytes.length; ++i) {
+                writeByte(bytes[i]);
+            }
+        }
+        function readString(len) {
+            var ret = "";
+            while (len-- > 0) {
+                ret += String.fromCharCode(readByte());
+            }
+            return ret;
+        }
+        function writeString(str) {
+            for (var i = 0; i < str.length; ++i) {
+                writeByte(str.charCodeAt(i));
+            }
+        }
+        return {
+            eof         : eof,
+            readByte    : readByte,
+            writeByte   : writeByte,
+            readShort   : readShort,
+            writeShort  : writeShort,
+            readLong    : readLong,
+            writeLong   : writeLong,
+            readFixed   : readFixed,
+            writeFixed  : writeFixed,
+
+            // signed numbers.
+            readShort_  : readShort_,
+            writeShort_ : writeShort_,
+            readLong_   : readLong_,
+            writeLong_  : writeLong_,
+            readFixed_  : readFixed_,
+            writeFixed_ : writeFixed_,
+
+            read        : read,
+            write       : write,
+            readString  : readString,
+            writeString : writeString,
+
+            offset: function(pos) {
+                if (pos != null) offset = pos;
+                return offset;
+            },
+
+            skip: function(nbytes) {
+                offset += nbytes;
+            },
+
+            get: function() { return data },
+
+            toString: function() { return data },
+
+            length: function() { return data.length },
+
+            slice: function(start, length) {
+                return data.substr(start, length);
+            },
+
+            times: function(n, reader) {
+                for (var ret = []; n > 0; --n)
+                    ret.push(reader());
+                return ret;
+            },
+
+            saveExcursion: function(f) {
+                var pos = offset;
+                try {
+                    return f();
+                } finally {
+                    offset = pos;
+                }
+            }
+        };
+    }
+
     /// exports.
 
+    PDF.BinaryStream = BinaryStream;
     global.kendo.PDF = PDF;
 
 })(Function("return this")());

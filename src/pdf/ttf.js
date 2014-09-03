@@ -14,150 +14,8 @@ function sortedKeys(obj) {
     return Object.keys(obj).sort(function(a, b){ return a - b }).map(parseFloat);
 }
 
-function BinaryStream(data) {
-    var offset = 0;
-    if (data == null) data = "";
-
-    function eof() {
-        return !data.charAt(offset);
-    }
-    function readByte() {
-        return data.charCodeAt(offset++) & 0xFF;
-    }
-    function writeByte(b) {
-        var ch = String.fromCharCode(b & 0xFF);
-        if (offset < data.length) {
-            // overwrite
-            data = data.substr(0, offset) + ch + data.substr(offset + 1);
-        } else {
-            data += ch;
-        }
-        offset++;
-    }
-    function readShort() {
-        return (readByte() << 8) | readByte();
-    }
-    function writeShort(w) {
-        writeByte(w >> 8);
-        writeByte(w);
-    }
-    function readShort_() {
-        var w = readShort();
-        return w >= 0x8000 ? w - 0x10000 : w;
-    }
-    function writeShort_(w) {
-        writeShort(w < 0 ? w + 0x10000 : w);
-    }
-    function readLong() {
-        return (readShort() * 0x10000) + readShort();
-    }
-    function writeLong(w) {
-        writeShort((w >>> 16) & 0xFFFF);
-        writeShort(w & 0xFFFF);
-    }
-    function readLong_() {
-        var w = readLong();
-        return w >= 0x80000000 ? w - 0x100000000 : w;
-    }
-    function writeLong_(w) {
-        writeLong(w < 0 ? w + 0x100000000 : w);
-    }
-    function readFixed() {
-        return readLong() / 0x10000;
-    }
-    function writeFixed(f) {
-        writeLong(Math.round(f * 0x10000));
-    }
-    function readFixed_() {
-        return readLong_() / 0x10000;
-    }
-    function writeFixed_(f) {
-        writeLong_(Math.round(f * 0x10000));
-    }
-    function read(len) {
-        var ret = [];
-        while (len-- > 0)
-            ret.push(readByte());
-        return ret;
-    }
-    function write(bytes) {
-        if (typeof bytes == "string")
-            return writeString(bytes);
-        for (var i = 0; i < bytes.length; ++i) {
-            writeByte(bytes[i]);
-        }
-    }
-    function readString(len) {
-        var ret = "";
-        while (len-- > 0) {
-            ret += String.fromCharCode(readByte());
-        }
-        return ret;
-    }
-    function writeString(str) {
-        for (var i = 0; i < str.length; ++i) {
-            writeByte(str.charCodeAt(i));
-        }
-    }
-    return {
-        eof         : eof,
-        readByte    : readByte,
-        writeByte   : writeByte,
-        readShort   : readShort,
-        writeShort  : writeShort,
-        readLong    : readLong,
-        writeLong   : writeLong,
-        readFixed   : readFixed,
-        writeFixed  : writeFixed,
-
-        // signed numbers.
-        readShort_  : readShort_,
-        writeShort_ : writeShort_,
-        readLong_   : readLong_,
-        writeLong_  : writeLong_,
-        readFixed_  : readFixed_,
-        writeFixed_ : writeFixed_,
-
-        read        : read,
-        write       : write,
-        readString  : readString,
-        writeString : writeString,
-
-        offset: function(pos) {
-            if (pos != null) offset = pos;
-            return offset;
-        },
-
-        skip: function(nbytes) {
-            offset += nbytes;
-        },
-
-        get: function() { return data },
-
-        toString: function() { return data },
-
-        length: function() { return data.length },
-
-        slice: function(start, length) {
-            return data.substr(start, length);
-        },
-
-        times: function(n, reader) {
-            for (var ret = []; n > 0; --n)
-                ret.push(reader());
-            return ret;
-        },
-
-        saveExcursion: function(f) {
-            var pos = offset;
-            try {
-                return f();
-            } finally {
-                offset = pos;
-            }
-        }
-    };
-}
+var PDF = global.kendo.PDF;
+var BinaryStream = PDF.BinaryStream;
 
 ///
 
@@ -1191,7 +1049,7 @@ TTFFont.prototype = {
     }
 };
 
-global.kendo.PDF.TTFFont = TTFFont;
+PDF.TTFFont = TTFFont;
 
 })(Function("return this")());
 
