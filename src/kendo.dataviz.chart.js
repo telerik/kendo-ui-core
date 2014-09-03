@@ -9982,7 +9982,7 @@ var __meta__ = {
         },
 
         destroy: function() {
-            clearTimeout(this.showTimeout);
+            this._clearShowTimeout();
 
             if (this.element) {
                 this.element.off(MOUSELEAVE_NS).remove();
@@ -10025,6 +10025,13 @@ var __meta__ = {
                 }, options.animation.duration);
 
             tooltip.visible = true;
+        },
+
+        _clearShowTimeout: function() {
+            if (this.showTimeout) {
+                clearTimeout(this.showTimeout);
+                this.showTimeout = null;
+            }
         },
 
         _padding: function() {
@@ -10091,9 +10098,8 @@ var __meta__ = {
         },
 
         show: function() {
-            var tooltip = this;
-
-            tooltip.showTimeout = setTimeout(tooltip.move, TOOLTIP_SHOW_DELAY);
+            this._clearShowTimeout();
+            this.showTimeout = setTimeout(this.move, TOOLTIP_SHOW_DELAY);
         },
 
         hide: function() {
