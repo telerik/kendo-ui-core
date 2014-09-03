@@ -182,7 +182,7 @@
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = areaChart.points[1],
+            var point = areaChart.points[3],
                 result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
 
             ok(result === point);
@@ -200,7 +200,7 @@
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = areaChart.points[3],
+            var point = areaChart.points[5],
                 result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 10, 1);
 
             ok(result === point);

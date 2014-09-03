@@ -910,7 +910,7 @@ var __meta__ = {
                 tooltipOptions, owner, seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords)) {
-                if (point && point.series && inArray(point.series.type, [ LINE, AREA ])) {
+                if (point && point.tooltipTracking && point.series) {
                     owner = point.parent;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
@@ -4478,6 +4478,7 @@ var __meta__ = {
             point.color = options.color;
             point.aboveAxis = valueOrDefault(point.options.aboveAxis, true);
             point.id = uniqueId();
+            point.tooltipTracking = true;
 
             point.enableDiscovery();
         },
@@ -4907,28 +4908,20 @@ var __meta__ = {
         },
 
         getNearestPoint: function(x, y, seriesIx) {
-            var chart = this,
-                invertAxes = chart.options.invertAxes,
-                axis = invertAxes ? Y : X,
-                pos = invertAxes ? y : x,
-                points = chart.seriesPoints[seriesIx],
-                nearestPointDistance = MAX_VALUE,
-                pointsLength = points.length,
-                currentPoint,
-                pointBox,
-                pointDistance,
-                nearestPoint,
-                i;
+            var target = new Point2D(x, y);
+            var allPoints = this.seriesPoints[seriesIx];
+            var nearestPointDistance = MAX_VALUE;
+            var nearestPoint;
 
-            for (i = 0; i < pointsLength; i++) {
-                currentPoint = points[i];
+            for (var i = 0; i < allPoints.length; i++) {
+                var point = allPoints[i];
 
-                if (currentPoint && defined(currentPoint.value) && currentPoint.value !== null && currentPoint.visible !== false) {
-                    pointBox = currentPoint.box;
-                    pointDistance = math.abs(pointBox.center()[axis] - pos);
+                if (point && defined(point.value) && point.value !== null && point.visible !== false) {
+                    var pointBox = point.box;
+                    var pointDistance = pointBox.center().distanceTo(target);
 
                     if (pointDistance < nearestPointDistance) {
-                        nearestPoint = currentPoint;
+                        nearestPoint = point;
                         nearestPointDistance = pointDistance;
                     }
                 }
