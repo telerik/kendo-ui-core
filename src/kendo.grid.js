@@ -5160,6 +5160,10 @@ var __meta__ = {
                 that.touchScroller.contentResized();
             }
 
+            if (that.selectable) {
+                that.selectable.resetTouchEvents();
+            }
+
             that._angularItems("compile");
 
             that.trigger(DATABOUND);
