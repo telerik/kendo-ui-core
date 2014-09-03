@@ -217,7 +217,6 @@ var __meta__ = {
             that._items = null;
         },
 
-
         _invalidateSelectables: function(position, ctrlKey) {
             var idx,
                 length,
@@ -323,6 +322,10 @@ var __meta__ = {
             }
 
             return true;
+        },
+
+        resetTouchEvents: function() {
+            this.userEvents.cancel();
         },
 
         clear: function() {
