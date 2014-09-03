@@ -3797,7 +3797,7 @@ var __meta__ = {
                         suggestDataSource = cellOptions.dataSource;
                         customDataSource = true;
                     }
-                    if (col.filterable) {
+                    if (col.filterable && col.filterable.operators) {
                         operators =  col.filterable.operators;
                     }
 
