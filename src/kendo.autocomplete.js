@@ -305,9 +305,7 @@ var __meta__ = {
 
             length = word.length;
 
-            if (!length) {
-                that.popup.close();
-            } else if (length >= that.options.minLength) {
+            if (!length || length >= options.minLength) {
                 that._open = true;
 
                 that._filterSource({
