@@ -59,19 +59,45 @@
             this._pdfElements.push(element);
         },
 
-        _download: function() {
-            var pdf = new PDF();
-            var page = pdf.addPage();
+        toDataURL: function(callback) {
+            var self = this, elements = self._pdfElements, fonts = [], images = [];
 
-            for (var i = 0; i < this._pdfElements.length; ++i) {
-                var element = this._pdfElements[i];
-                this._drawElement(element, page, pdf);
+            for (var i = 0; i < elements.length; ++i) {
+                var element = elements[i];
+                if (element instanceof d.Image) {
+                    if (images.indexOf(element.src()) < 0) {
+                        images.push(element.src());
+                    }
+                } else if (element instanceof d.Text) {
+                    var style = parseFontDef(element.options.font);
+                    var url = getFontURL(style.fontFamily);
+                    if (fonts.indexOf(url) < 0) {
+                        fonts.push(url);
+                    }
+                }
             }
 
-            var binary = pdf.render();
-            var base64 = window.btoa(binary);
-            var dataurl = "data:application/pdf;base64," + base64;
-            window.open(dataurl);
+            function doIt() {
+                if (--count > 0) return;
+                var pdf = new PDF();
+                var page = pdf.addPage();
+                for (var i = 0; i < elements.length; ++i) {
+                    var element = elements[i];
+                    self._drawElement(element, page, pdf);
+                }
+                var binary = pdf.render();
+                var base64 = window.btoa(binary);
+                var dataurl = "data:application/pdf;base64," + base64;
+                callback(dataurl);
+            }
+
+            var count = 2;
+            PDF.loadFonts(fonts, doIt);
+            PDF.loadImages(images, doIt);
+        },
+
+        _download: function() {
+            this.toDataURL(window.open);
         },
 
         _drawElement: function(element, page, pdf) {
@@ -239,18 +265,11 @@
         },
 
         _drawText: function(element, page, pdf) {
-            var fontdef = element.options.font;
-            var m = fontdef.match(/^([0-9.-]+)(px|pt)\s+(.*)/);
-            var fontSize = m ? parseFloat(m[1]) : 12, fontFamily = m ? m[2] : "Helvetica";
-            if (!m) {
-                console.error("Can't parse", fontdef);
-            }
+            var style = parseFontDef(element.options.font);
             var pos = element._position;
-            page.transform(1, 0, 0, -1, pos.x, pos.y + fontSize);
+            page.transform(1, 0, 0, -1, pos.x, pos.y + style.fontSize);
             page.beginText();
-
-            // XXX: custom font mapping?
-            page.setFont("./font.ttf", fontSize);
+            page.setFont(getFontURL(style.fontFamily), style.fontSize);
 
             var mode;
             if (element.fill() && element.stroke()) {
@@ -290,6 +309,20 @@
             color = dataviz.Color.namedColors[color];
         }
         return kendo.parseColor(color).toRGB();
+    }
+
+    function parseFontDef(fontdef) {
+        // XXX: this is very crude for now.  Proper parsing is quite involved.
+        var m = fontdef.match(/^([0-9.-]+)(px|pt)?\s+(.*)/);
+        var fontSize = m ? parseFloat(m[1]) : 12, fontFamily = m ? m[2] : "Helvetica";
+        return {
+            fontSize: fontSize,
+            fontFamily: fontFamily
+        };
+    }
+
+    function getFontURL(fontFamily) {
+        return "./font.ttf";    // XXX: custom font mapping
     }
 
     d.SurfaceFactory.current.register("pdf", Surface, 100);
