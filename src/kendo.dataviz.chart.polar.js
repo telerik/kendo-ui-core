@@ -839,6 +839,10 @@ var __meta__ = {
     });
 
     var RadarLineChart = LineChart.extend({
+        options: {
+            clip: false
+        },
+
         pointSlot: function(categorySlot, valueSlot) {
             var valueRadius = categorySlot.c.y - valueSlot.y1,
                 slot = Point2D.onCircle(categorySlot.c, categorySlot.middle(), valueRadius);
@@ -864,9 +868,6 @@ var __meta__ = {
             }
 
             return segment;
-        },
-        options: {
-            clip: false
         }
     });
 
