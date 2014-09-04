@@ -176,8 +176,19 @@ var STYLES = kendo.template(
       '</font>' +
    '# } #' +
    '</fonts>' +
-    '<fills count="1">' +
+    '<fills count="${fills.length+1}">' +
         '<fill><patternFill patternType="none"/></fill>' +
+        '<fill><patternFill patternType="gray125"/></fill>' +
+    '# for (var fi = 0; fi < fills.length; fi++) { #' +
+       '# var fill = fills[fi]; #' +
+       '# if (fill.background) { #' +
+        '<fill>' +
+            '<patternFill patternType="solid">' +
+                '<fgColor rgb="${fill.background}"/>' +
+            '</patternFill>' +
+        '</fill>' +
+       '# } #' +
+    '# } #' +
     '</fills>' +
     '<borders count="1">' +
         '<border><left/><right/><top/><bottom/><diagonal/></border>' +
@@ -189,6 +200,9 @@ var STYLES = kendo.template(
        '<xf xfid="0"' +
        '# if (style.fontId) { #' +
           ' fontId="${style.fontId}" applyFont="1"' +
+       '# } #' +
+       '# if (style.fillId) { #' +
+          ' fillId="${style.fillId}" applyFill="1"' +
        '# } #' +
        '></xf>' +
    '# } #' +
@@ -263,6 +277,22 @@ var Worksheet = kendo.Class.extend({
     }
 });
 
+function convertColor(color) {
+    if (color.length < 6) {
+        color = color.replace(/(\w)/g, function($0, $1) {
+            return $1 + $1;
+        });
+    }
+
+    color = color.substring(1).toUpperCase();
+
+    if (color.length < 8) {
+        color = "FF" + color;
+    }
+
+    return color;
+}
+
 var Workbook = kendo.Class.extend({
     init: function(options) {
         this.options = options || {};
@@ -315,22 +345,8 @@ var Workbook = kendo.Class.extend({
         var styles = $.map(this._styles, $.parseJSON);
 
         var fonts = $.map(styles, function(style) {
-            var color = style.color;
-
-            if (color) {
-                if (color.length < 6) {
-                    color = color.replace(/(\w)/g, function($0, $1) {
-                        return $1 + $1;
-                    });
-                }
-
-                color = color.substring(1).toUpperCase();
-
-                if (color.length < 8) {
-                    color = "FF" + color;
-                }
-
-                style.color = color;
+            if (style.color) {
+                style.color = convertColor(style.color);
             }
 
             if (style.bold || style.italic || style.color) {
@@ -338,13 +354,25 @@ var Workbook = kendo.Class.extend({
             }
         });
 
+        var fills = $.map(styles, function(style) {
+            if (style.background) {
+                style.background = convertColor(style.background)
+                return style;
+            }
+        });
+
         xl.file("styles.xml", STYLES({
            fonts: fonts,
+           fills: fills,
            styles: $.map(styles, function(style) {
               var result = {};
 
               if (style.bold || style.italic || style.color) {
                   result.fontId = $.inArray(style, fonts) + 1;
+              }
+
+              if (style.background) {
+                  result.fillId = $.inArray(style, fills) + 2;
               }
 
               return result;

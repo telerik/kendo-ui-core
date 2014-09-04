@@ -281,7 +281,7 @@ test("toDataUrl reuses fonts and styles", function() {
     equal(dom.find("fonts > font").length, 2);
 });
 
-test("toDataUrl sets the rgb attribute of the 'color' element when color style is specified", function() {
+test("toDataUrl sets the rgb attribute of the 'color' element when color style is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
@@ -328,5 +328,87 @@ test("toDataUrl and rgba color", function() {
 
     equal(dom.find("fonts > font:last > color").attr("rgb"), "AABBCCDDEE");
 });
+
+test("toDataUrl creates two default 'fill' elements", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fills > fill").length, 2);
+});
+
+test("toDataUrl creates a 'fill' element if the background style option is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { background: "red" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fills > fill").length, 3);
+});
+
+
+test("toDataUrl stores cell fill index as 'fillId' attribute of the 'xf' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { background: "red" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("fillId"), 2);
+});
+
+test("toDataUrl sets 'applyFill' attribute to '1' if background is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { background: "a0b0c0" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("applyFill"), 1);
+});
+
+test("toDataUrl sets the rgb attribute of the 'fgColor' element when background style is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { background: "#ff0000" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fills > fill:last > patternFill > fgColor").attr("rgb"), "FFFF0000");
+});
+
 
 }());
