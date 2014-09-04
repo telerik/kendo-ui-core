@@ -130,4 +130,170 @@
         equal(lastRow.find("th").first().text(), "master1-child-child");
     });
 
+    test("render correct number of col elements", function() {
+        var grid = new Grid(table, {
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.parent().find("col").length, 5);
+        equal(grid.tbody.parent().find("col").length, 5);
+    });
+
+    test("single hierarchy cell is added to the header if detailView is defined", function() {
+        var grid = new Grid(table, {
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ],
+            detailTemplate: "#= foo #",
+        });
+
+        var firstRow = grid.thead.find("tr:first");
+        var secondRow = grid.thead.find("tr:eq(1)");
+        var lastRow = grid.thead.find("tr:last");
+
+        equal(grid.thead.find("tr").length, 3);
+        equal(firstRow.find("th").length, 4);
+        ok(firstRow.find("th").first().hasClass("k-hierarchy-cell"));
+        equal(firstRow.find("th.k-hierarchy-cell").attr("rowspan"), 3);
+        equal(firstRow.find("th.k-hierarchy-cell").length, 1);
+        equal(secondRow.find("th").length, 4);
+        equal(lastRow.find("th").length, 1);
+    });
+
+    test("single group cell is added to the header when grouped", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        var firstRow = grid.thead.find("tr:first");
+        var secondRow = grid.thead.find("tr:eq(1)");
+        var lastRow = grid.thead.find("tr:last");
+
+        equal(grid.thead.find("tr").length, 3);
+        equal(firstRow.find("th").length, 4);
+        ok(firstRow.find("th").first().hasClass("k-group-cell"));
+        equal(firstRow.find("th.k-group-cell").attr("rowspan"), 3);
+        equal(firstRow.find("th.k-group-cell").length, 1);
+        equal(secondRow.find("th").length, 4);
+        equal(lastRow.find("th").length, 1);
+    });
+
+    test("render header additional col element for hierarchy cell", function() {
+        var grid = new Grid(table, {
+            detailTemplate: "bar",
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.parent().find("col").length, 6);
+        equal(grid.thead.parent().find("col.k-hierarchy-col").length, 1);
+        ok(grid.thead.parent().find("col").first().hasClass("k-hierarchy-col"));
+    });
+
+    test("render correct number content cells", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}],
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.tbody.find("tr td").length, 5);
+    });
+
+    test("render correct number content cells - non-scrollable grid", function() {
+        var grid = new Grid(table, {
+            dataSource: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}],
+            scrollable: false,
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.tbody.find("tr td").length, 5);
+    });
+
+    test("footer created when footerTemplate is set to leaf column", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", footerTemplate: "foo" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+        equal(grid.footer.find("td").length, 5);
+    });
+
+    test("footer is not created when footerTemplate is set to non-leaf column", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", footerTemplate: "foo", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        ok(!grid.footer.length);
+    });
+
+    test("group header colspan is set", function() {
+        var grid = new Grid(table, {
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}],
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+        equal(grid.tbody.find(".k-grouping-row>td").attr("colspan"), 6);
+    });
+
+    test("colspan of detail template row", function() {
+        var grid = new Grid(table, {
+            detailTemplate: "bar",
+            dataSource: {
+                data: [{ foo: "foo1", foo1: "foo1", foo2: "foo1", foo3: "foo1", foo4: "foo1"}]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child" }] }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        grid.expandRow(grid.items().first());
+
+        equal(grid.tbody.find("tr.k-detail-row td.k-detail-cell").attr("colspan"), 5);
+    });
+
+
 })();

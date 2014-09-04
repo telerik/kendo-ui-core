@@ -536,7 +536,7 @@ var __meta__ = {
         });
     }
 
-    function columnsForRendering(columns) {
+    function leafColumns(columns) {
         var result = [];
 
         for (var idx = 0; idx < columns.length; idx++) {
@@ -544,7 +544,7 @@ var __meta__ = {
                 result.push(columns[idx]);
                 continue;
             }
-            result = result.concat(columnsForRendering(columns[idx].columns));
+            result = result.concat(leafColumns(columns[idx].columns));
         }
 
         return result;
@@ -4165,8 +4165,9 @@ var __meta__ = {
                 groups = dataSource.group(),
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate(),
+                columnLeafs = leafColumns(that.columns),
                 columnsLocked = lockedColumns(that.columns),
-                columns = options.scrollable ? nonLockedColumns(that.columns) : that.columns;
+                columns = options.scrollable ? nonLockedColumns(columnLeafs) : columnLeafs;
 
             if (options.scrollable && columnsLocked.length) {
                 if (options.rowTemplate || options.altRowTemplate) {
@@ -4188,12 +4189,12 @@ var __meta__ = {
             }
 
             if ((that._group && !isEmptyObject(aggregates)) || (!isEmptyObject(aggregates) && !footer.length) ||
-                grep(that.columns, function(column) { return column.footerTemplate; }).length) {
+                grep(columnLeafs, function(column) { return column.footerTemplate; }).length) {
 
-                that.footerTemplate = that._footerTmpl(that.columns, aggregates, "footerTemplate", "k-footer-template");
+                that.footerTemplate = that._footerTmpl(columnLeafs, aggregates, "footerTemplate", "k-footer-template");
             }
 
-            if (groups && grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
+            if (groups && grep(columnLeafs, function(column) { return column.groupFooterTemplate; }).length) {
                 aggregates = $.map(groups, function(g) { return g.aggregates; });
 
                 that.groupFooterTemplate = that._footerTmpl(columns, aggregates, "groupFooterTemplate", "k-group-footer", columnsLocked.length);
@@ -4272,7 +4273,7 @@ var __meta__ = {
                 templateFunctionStorage = {},
                 templateFunctionCount = 0,
                 groups = that._groups(),
-                colspan = visibleColumns(that.columns).length,
+                colspan = visibleColumns(leafColumns(that.columns)).length,
                 type = typeof template;
 
             html += '<tr class="k-detail-row">';
@@ -4411,7 +4412,7 @@ var __meta__ = {
                 length;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
-                th = columns[idx].column;
+                th = columns[idx].column || columns[idx];
                 text = that._headerCellText(th);
 
                 if (!th.command) {
@@ -4594,6 +4595,29 @@ var __meta__ = {
                 tr = that.element.find("tr:has(th):first");
             }
 
+            if (!tr.length) {
+                tr = thead.children().first();
+                if (!tr.length) {
+                   var rows = [{ rowSpan: 1, cells: [], index: 0 }];
+                   that._prepareColumns(rows, columns);
+
+                   for (var idx = 0; idx < rows.length; idx++) {
+                       html += "<tr>";
+                       if (hasDetails && idx === 0) {
+                           html += '<th class="k-hierarchy-cell"';
+                           if (rows[idx].rowSpan > 1) {
+                               html += ' rowspan="' + rows[idx].rowSpan + '"';
+                           }
+                           html += '>&nbsp;</th>';
+                       }
+                       html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
+                       html += "</tr>";
+                   }
+
+                   tr = $(html);
+               }
+            }
+
             if (hasFilterRow) {
                 var filterRow = $("<tr/>");
                 filterRow.addClass("k-filter-row");
@@ -4604,33 +4628,18 @@ var __meta__ = {
                 thead.append(filterRow);
             }
 
-            if (!tr.length) {
-                tr = thead.children().first();
-                if (!tr.length) {
-                    tr = $("<tr/>");
-                }
-            }
-
             if (!tr.children().length) {
-               var rows = [{ rowSpan: 1, cells: [], index: 0 }];
-               that._prepareColumns(rows, columns);
+                html = "";
+                if (hasDetails) {
+                    html += '<th class="k-hierarchy-cell">&nbsp;</th>';
+                }
 
-               for (var idx = 0; idx < rows.length; idx++) {
-                   html += "<tr>";
-                   if (hasDetails) {
-                       html += '<th class="k-hierarchy-cell">&nbsp;</th>';
-                   }
-                   html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
-               }
+                html += that._createHeaderCells(columns);
 
-               html += "</tr>";
-               tr = $(html);
-           //     tr.html(html);
+                tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
                 tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
-
-            //this.columns = columnsForRendering(this.columns);
 
             tr.attr("role", "row").find("th").addClass("k-header");
 
@@ -4764,7 +4773,7 @@ var __meta__ = {
             if (locked) {
                 normalizeCols(table, visibleNonLockedColumns(this.columns), this._hasDetails(), 0);
             } else {
-                normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
+                normalizeCols(table, visibleColumns(leafColumns(this.columns)), this._hasDetails(), this._groups());
             }
         },
 
@@ -4955,12 +4964,14 @@ var __meta__ = {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
+                rowSpan = container.find("tr:not(.k-filter-row)").length,
                 length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr:first"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr.k-filter-row"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header"' + (rowSpan > 1 ? ' rowspan="' + rowSpan + '"' : "") + '>&nbsp;</th>')).prependTo(container.find("tr:first"));
             } else if(groups < length) {
-                container.find("tr").each(function(){
+                container.find("tr:first").each(function(){
                     $(this).find("th.k-group-cell")
                         .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
                 });
@@ -5215,7 +5226,7 @@ var __meta__ = {
                 current = $(that.current()),
                 isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
-                colspan = groups + visibleColumns(that.columns).length;
+                colspan = groups + visibleColumns(leafColumns(that.columns)).length;
 
             if (e && e.action === "itemchange" && that.editable) { // skip rebinding if editing is in progress
                 return;
