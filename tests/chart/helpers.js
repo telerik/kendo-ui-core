@@ -1045,6 +1045,14 @@
             equal(Aggregates.sum([]), 0);
         });
 
+        test("sumOrNull", function() {
+            equal(Aggregates.sumOrNull(values), 6);
+        });
+
+        test("sumOrNull with no values", function() {
+            equal(Aggregates.sumOrNull([]), null);
+        });
+
         test("avg", function() {
             equal(Aggregates.avg(values), 2);
         });
