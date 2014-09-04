@@ -377,8 +377,8 @@ var __meta__ = {
                     pageX = e.pageX,
                     pageY = e.pageY;
 
-                offset.right = offset.left + element.outerWidth();
-                offset.bottom = offset.top + element.outerHeight();
+                offset.right = offset.left + element[0].clientWidth;
+                offset.bottom = offset.top + element[0].clientHeight;
 
                 if (pageX > offset.left && pageX < offset.right && pageY > offset.top && pageY < offset.bottom) {
                     return;
