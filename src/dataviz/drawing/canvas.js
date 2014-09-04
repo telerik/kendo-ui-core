@@ -159,8 +159,8 @@
             this.canvas = canvas;
             this.ctx = canvas.getContext("2d");
 
-            this._render = kendo.throttle(
-                $.proxy(this._render, this),
+            this.invalidate = kendo.throttle(
+                $.proxy(this.invalidate, this),
                 FRAME_DELAY
             );
         },
@@ -171,11 +171,7 @@
             this.ctx = null;
         },
 
-        invalidate: function(force) {
-            this._render();
-        },
-
-        _render: function() {
+        invalidate: function() {
             if (!this.ctx) {
                 return;
             }
