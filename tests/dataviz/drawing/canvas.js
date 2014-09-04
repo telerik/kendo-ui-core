@@ -138,11 +138,21 @@
             root.invalidate();
         });
 
-        test("destroy clears timeout", function() {
+        test("destroy clears timeout", 0, function() {
+            var firstRun = true;
+            createRoot(mockContext({
+                clearRect: function() {
+                    if (!firstRun) {
+                        ok(false);
+                    }
+
+                    firstRun = false;
+                }
+            }));
+
+            root.invalidate();
             root.invalidate();
             root.destroy();
-
-            equal(root._timeout, null);
         });
     })();
 

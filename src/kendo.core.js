@@ -3859,8 +3859,8 @@ function pad(number, digits, end) {
             var args = arguments;
 
             function exec() {
-                lastExecTime = +new Date();
                 fn.apply(that, args);
+                lastExecTime = +new Date();
             }
 
             // first execution
