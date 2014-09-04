@@ -864,7 +864,7 @@
             Tool: Tool,
             FormatTool: FormatTool,
             _bomFill: bomFill,
-            emptyElementContent: browser.msie ? '\ufeff' : '<br _moz_dirty="" />'
+            emptyElementContent: (browser.msie && browser.version < 11) ? '\ufeff' : '<br class="k-br" />'
         }
     });
 
