@@ -6228,6 +6228,12 @@ A string value is interpreted as series.stack.group.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The font of the title.</description>
             <name>font</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10697,6 +10703,29 @@ original value.</description>
     </tag>
 
     <tag>
+        <description>Allows localization of the strings that are used in the widget.</description>
+        <name>colorPicker-messages</name>
+        <tag-class>com.kendoui.taglib.colorpicker.MessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>Allows customization of the "Apply" button text.</description>
+            <name>apply</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Allows customization of the "Cancel" button text.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The size of a color cell.</description>
         <name>colorPicker-tileSize</name>
         <tag-class>com.kendoui.taglib.colorpicker.TileSizeTag</tag-class>
@@ -14138,12 +14167,6 @@ This property has been introduced in internal builds after 2014.1.319.</descript
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines the text of the labels that are shown within the editor. Used primarily for localization.</description>
-            <name>messages</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>Allows custom stylesheets to be included within the editing area. This setting is applicable only when the Editor is initialized from a textarea
 and a contenteditable iframe is generated.</description>
             <name>stylesheets</name>
@@ -15097,6 +15120,371 @@ If function is assigned, the current path and image name will be provided.</desc
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportImageUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
+
+
+    <tag>
+        <description>Defines the text of the labels that are shown within the editor. Used primarily for localization.</description>
+        <name>editor-messages</name>
+        <tag-class>com.kendoui.taglib.editor.MessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The title of the tool that adds table columns on the left of the selection.</description>
+            <name>addColumnLeft</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that adds table columns on the right of the selection.</description>
+            <name>addColumnRight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that adds table rows above the selection.</description>
+            <name>addRowAbove</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that adds table rows below the selection.</description>
+            <name>addRowBelow</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that changes the text background color.</description>
+            <name>backColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that makes text bold.</description>
+            <name>bold</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that creates hyperlinks.</description>
+            <name>createLink</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts tables.</description>
+            <name>createTable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The status text of the tool that inserts tables, which indicates the dimensions of the inserted table.</description>
+            <name>createTableHint</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that deletes selected table columns.</description>
+            <name>deleteColumn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The confirmation message shown when deleting files in the file- or imageBrowser.</description>
+            <name>deleteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that deletes selected table rows.</description>
+            <name>deleteRow</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The label of the cancel button in all editor dialogs.</description>
+            <name>dialogCancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The label of the insert button in all editor dialogs.</description>
+            <name>dialogInsert</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The label of the update button in all editor dialogs.</description>
+            <name>dialogUpdate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The error message shown when the target directory is not found in the file- or imageBrowser.</description>
+            <name>directoryNotFound</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The message shown in the file- or imageBrowser when a folder is empty.</description>
+            <name>emptyFolder</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the file title in the insertFile dialog.</description>
+            <name>fileTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the file URL in the insertFile dialog.</description>
+            <name>fileWebAddress</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that changes the text font.</description>
+            <name>fontName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text that is shown when the text font will be inherited from the surrounding page.</description>
+            <name>fontNameInherit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that changes the text size.</description>
+            <name>fontSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text that is shown when the text size will be inherited from the surrounding page.</description>
+            <name>fontSizeInherit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that changes the text color.</description>
+            <name>foreColor</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that lets users choose block formats. Deprecated.</description>
+            <name>formatBlock</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that lets users choose block formats.</description>
+            <name>formatting</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the image alternate text in the insertImage dialog.</description>
+            <name>imageAltText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the image height in the insertImage dialog.</description>
+            <name>imageHeight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the image URL in the insertImage dialog.</description>
+            <name>imageWebAddress</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the image width in the insertImage dialog.</description>
+            <name>imageWidth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that indents the content.</description>
+            <name>indent</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts links to files.</description>
+            <name>insertFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts HTML snippets.</description>
+            <name>insertHtml</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts images.</description>
+            <name>insertImage</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts an ordered list.</description>
+            <name>insertOrderedList</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that inserts an unordered list.</description>
+            <name>insertUnorderedList</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The error message shown when an invalid file type has been selected in the file- or imageBrowser.</description>
+            <name>invalidFileType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that makes text italicized.</description>
+            <name>italic</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that aligns text in the center.</description>
+            <name>justifyCenter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that justifies text both left and right.</description>
+            <name>justifyFull</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that aligns text on the left.</description>
+            <name>justifyLeft</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that aligns text on the right.</description>
+            <name>justifyRight</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the checkbox for opening the link in a new window in the createLink dialog.</description>
+            <name>linkOpenInNewWindow</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the link text in the createLink dialog.</description>
+            <name>linkText</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the link tooltip in the createLink dialog.</description>
+            <name>linkToolTip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption for the URL in the createLink dialog.</description>
+            <name>linkWebAddress</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption of the sorting order in the file- or imageBrowser.</description>
+            <name>orderBy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The sorting order by name in the file- or imageBrowser.</description>
+            <name>orderByName</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The sorting order by size in the file- or imageBrowser.</description>
+            <name>orderBySize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that outdents the content.</description>
+            <name>outdent</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The confirmation message shown when overwriting files in the file- or imageBrowser.</description>
+            <name>overwriteFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that stirkes through text.</description>
+            <name>strikethrough</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that applies styling to elements. Deprecated.</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that makes text subscript.</description>
+            <name>subscript</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that makes text superscript.</description>
+            <name>superscript</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that underlines text.</description>
+            <name>underline</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that removes hyperlinks.</description>
+            <name>unlink</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The caption of the upload button in the file- or imageBrowser.</description>
+            <name>uploadFile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The title of the tool that shows the editor value as HTML.</description>
+            <name>viewHtml</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
 
     <tag>
@@ -33196,6 +33584,12 @@ Template variables:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The font of the title.</description>
             <name>font</name>
             <rtexprvalue>true</rtexprvalue>
@@ -36417,6 +36811,12 @@ Note that this does not constrain the window dragging within the given element.<
             <name>appendTo</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>Determines whether the Window will be focused automatically when opened. The property also influences the focus behavior when the Window is clicked when already opened.</description>
+            <name>autoFocus</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The content of the window</description>

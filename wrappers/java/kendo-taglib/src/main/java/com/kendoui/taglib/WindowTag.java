@@ -118,6 +118,14 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("appendTo", value);
     }
 
+    public boolean getAutoFocus() {
+        return (boolean)getProperty("autoFocus");
+    }
+
+    public void setAutoFocus(boolean value) {
+        setProperty("autoFocus", value);
+    }
+
     public java.lang.Object getContent() {
         return (java.lang.Object)getProperty("content");
     }

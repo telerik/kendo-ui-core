@@ -312,7 +312,7 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
-    * The type of the view. The built-in views are: "day", "week", "month" and "agenda".
+    * The type of the view. The built-in views are: "day", "week", "workWeek", "month" and "agenda".
     * @param string $value
     * @return \Kendo\UI\SchedulerView
     */

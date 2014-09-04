@@ -56,6 +56,15 @@ Note that this does not constrain the window dragging within the given element.
     }
 
     /**
+    * Determines whether the Window will be focused automatically when opened. The property also influences the focus behavior when the Window is clicked when already opened.
+    * @param boolean $value
+    * @return \Kendo\UI\Window
+    */
+    public function autoFocus($value) {
+        return $this->setProperty('autoFocus', $value);
+    }
+
+    /**
     * Enables (true) or disables (false) the ability for users to move/drag the widget.
     * @param boolean $value
     * @return \Kendo\UI\Window

@@ -64,6 +64,10 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("imageBrowser", value);
     }
 
+    public void setMessages(com.kendoui.taglib.editor.MessagesTag value) {
+        setProperty("messages", value);
+    }
+
     public void setSerialization(com.kendoui.taglib.editor.SerializationTag value) {
         setProperty("serialization", value);
     }
@@ -120,14 +124,6 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setEncoded(boolean value) {
         setProperty("encoded", value);
-    }
-
-    public java.lang.Object getMessages() {
-        return (java.lang.Object)getProperty("messages");
-    }
-
-    public void setMessages(java.lang.Object value) {
-        setProperty("messages", value);
     }
 
     public java.lang.Object getStylesheets() {

@@ -39,7 +39,7 @@ data source is fired. By default the widget will bind to the data source specifi
     /**
     * The data source of the widget which contains the dependencies. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.GanttDependencyDataSource
 instance.If the dependencies option is set to a JavaScript object or array the widget will initialize a new kendo.data.GanttDependencyDataSource instance using that value as data source configuration.If the dependencies option is an existing kendo.data.GanttDependencyDataSource instance the widget will use that instance and will not initialize a new one.
-    * @param |array $value
+    * @param |array| $value
     * @return \Kendo\UI\Gantt
     */
     public function dependencies($value) {
