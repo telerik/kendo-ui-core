@@ -60,9 +60,9 @@
             }
         });
 
-        var online = localStorage["online"] == "true";
+        var online = localStorage["kendo-grid-online"] == "true" || localStorage["kendo-grid-online"] === undefined;
 
-        kendoConsole.log("Working " + (online ? "online" : "offline"));
+        kendoConsole.log("Working " + (online ? "kendo-grid-online" : "offline"));
 
         if (!online) {
             $("#online").removeAttr("checked");
@@ -74,9 +74,9 @@
             change: function() {
                 online = this.value();
 
-                kendoConsole.log("Working " + (online ? "online" : "offline"));
+                kendoConsole.log("Working " + (online ? "kendo-grid-online" : "offline"));
 
-                localStorage["online"] = online;
+                localStorage["kendo-grid-online"] = online;
 
                 dataSource.online(online);
             }
