@@ -343,7 +343,6 @@
         equal(headerWidth, footerWidth);
     });
 
-
     test("row height is in sync", function() {
         div.appendTo(QUnit.fixture);
 
@@ -362,6 +361,26 @@
         equal(grid.content.find("tr:eq(1)").height(), grid.lockedContent.find("tr:eq(1)").height());
         equal(grid.content.find("tr:eq(2)").height(), grid.lockedContent.find("tr:eq(2)").height());
     });
+
+    test("row height sync does not throw if content has single row and grid is not databound", 0, function() {
+        var table = $("<table><tbody><tr/></tbody></table>");
+        div.append(table);
+
+        var grid = table.kendoGrid({
+            autoBind: false,
+            dataSource: {
+                data: [
+                    { foo: "foo", bar: "bar", baz: "baz" },
+                    { foo: "foo", bar: "bar", baz: "baz" },
+                    { foo: "foo", bar: "bar", baz: "baz" }
+                ]
+            },
+            columns: [{ template: "foo <br/> foo", locked: true, width: 140, encode: false }, "bar", "baz"]
+        }).data("kendoGrid");
+
+        grid.hideColumn(0);
+    });
+
 
     test("header row height is in sync - locked column is bigger", function() {
         div.appendTo(QUnit.fixture);
