@@ -910,9 +910,8 @@ var __meta__ = {
                 tooltipOptions, owner, seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords)) {
-                if (point && point.tooltipTracking && point.series) {
-                    owner = point.parent;
-                    seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
+                if (point && point.tooltipTracking && point.series && point.parent.getNearestPoint) {
+                    seriesPoint = point.parent.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
                         seriesPoint.hover(chart, e);
                         chart._activePoint = seriesPoint;
