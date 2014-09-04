@@ -70,7 +70,7 @@
                     }
                 } else if (element instanceof d.Text) {
                     var style = parseFontDef(element.options.font);
-                    var url = getFontURL(style.fontFamily);
+                    var url = getFontURL(style);
                     if (fonts.indexOf(url) < 0) {
                         fonts.push(url);
                     }
@@ -269,7 +269,7 @@
             var pos = element._position;
             page.transform(1, 0, 0, -1, pos.x, pos.y + style.fontSize);
             page.beginText();
-            page.setFont(getFontURL(style.fontFamily), style.fontSize);
+            page.setFont(getFontURL(style), style.fontSize);
 
             var mode;
             if (element.fill() && element.stroke()) {
@@ -313,17 +313,67 @@
 
     function parseFontDef(fontdef) {
         // XXX: this is very crude for now.  Proper parsing is quite involved.
-        var m = fontdef.match(/^([0-9.-]+)(px|pt)?\s+(.*)/);
-        var fontSize = m ? parseFloat(m[1]) : 12, fontFamily = m ? m[2] : "Helvetica";
+        var rx = /^\s*((normal|italic)\s+)?((normal|small-caps)\s+)?((normal|bold)\s+)?(([0-9.]+)(px|pt))(\/(([0-9.]+)(px|pt)))?\s+(.*?)\s*$/i;
+        var m = rx.exec(fontdef);
+        if (!m) {
+            return { fontSize: 12, fontFamily: "sans-serif" };
+        }
         return {
-            fontSize: fontSize,
-            fontFamily: fontFamily
+            italic     : m[2] && m[2].toLowerCase() == "italic",
+            variant    : m[4],
+            bold       : m[6] && m[6].toLowerCase() == "bold",
+            fontSize   : m[8] ? parseInt(m[8], 10) : 12,
+            lineHeight : m[12] ? parseInt(m[12], 10) : null,
+            fontFamily : m[14].split(/\s*,\s*/g)
         };
     }
 
-    function getFontURL(fontFamily) {
-        return "./font.ttf";    // XXX: custom font mapping
+    function getFontURL(style) {
+        function mkFamily(name) {
+            if (style.bold) name += "|bold";
+            if (style.italic) name += "|italic";
+            return name.toLowerCase();
+        }
+        var fontFamily = style.fontFamily;
+        var name, url;
+        if (fontFamily instanceof Array) {
+            for (var i = 0; i < fontFamily.length; ++i) {
+                name = mkFamily(fontFamily[i]);
+                url = FONT_MAPPINGS[name];
+                if (url) return url;
+            }
+        } else {
+            url = FONT_MAPPINGS[fontFamily.toLowerCase()];
+        }
+        if (!url) url = "Times-Roman";
+        return url;
     }
+
+    var FONT_MAPPINGS = {
+        "serif"                  : "Times-Roman",
+        "serif|bold"             : "Times-Bold",
+        "serif|italic"           : "Times-Italic",
+        "serif|bold|italic"      : "Times-BoldItalic",
+        "sans-serif"             : "Helvetica",
+        "sans-serif|bold"        : "Helvetica-Bold",
+        "sans-serif|italic"      : "Helvetica-Oblique",
+        "sans-serif|bold|italic" : "Helvetica-BoldOblique",
+        "monospace"              : "Courier",
+        "monospace|bold"         : "Courier-Bold",
+        "monospace|italic"       : "Courier-Oblique",
+        "monospace|bold|italic"  : "Courier-BoldOblique",
+    };
+
+    PDF.defineFont = function defineFont(name, url) {
+        if (arguments.length == 1) {
+            for (var i in name) {
+                defineFont(i, name[i]);
+            }
+        } else {
+            name = name.toLowerCase();
+            FONT_MAPPINGS[name] = url;
+        }
+    };
 
     d.SurfaceFactory.current.register("pdf", Surface, 100);
 

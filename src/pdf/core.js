@@ -15,6 +15,23 @@
     var GS_RESOURCE_COUNTER = 0;
     var X_RESOURCE_COUNTER = 0;
 
+    var STANDARD_FONTS = [
+        "Times-Roman",
+        "Times-Bold",
+        "Times-Italic",
+        "Times-BoldItalic",
+        "Helvetica",
+        "Helvetica-Bold",
+        "Helvetica-Oblique",
+        "Helvetica-BoldOblique",
+        "Courier",
+        "Courier-Bold",
+        "Courier-Oblique",
+        "Courier-BoldOblique",
+        "Symbol",
+        "ZapfDingbats"
+    ];
+
     PDF.TEXT_RENDERING_MODE = {
         fill           : 0,
         stroke         : 1,
@@ -177,6 +194,9 @@
     }
 
     var FONT_CACHE = {};
+    STANDARD_FONTS.forEach(function(name){
+        FONT_CACHE[name] = true;
+    });
 
     function loadBinary(url, cont) {
         if (global.process) { // XXX: temporary
@@ -229,7 +249,7 @@
         }
     }
 
-    function loadMany(loadOne) {
+    function manyLoader(loadOne) {
         return function(urls, callback) {
             var n = urls.length, i = n;
             if (n == 0) {
@@ -245,8 +265,8 @@
         };
     }
 
-    PDF.loadFonts = loadMany(loadFont);
-    PDF.loadImages = loadMany(loadImage);
+    PDF.loadFonts = manyLoader(loadFont);
+    PDF.loadImages = manyLoader(loadImage);
 
     PDF.prototype = {
         loadFonts: PDF.loadFonts,
@@ -255,11 +275,16 @@
         getFont: function(url) {
             var font = this.FONTS[url];
             if (!font) {
-                font = FONT_CACHE[url];
-                if (!font) {
-                    throw new Error("Font " + url + " has not been loaded");
+                if (STANDARD_FONTS.indexOf(url) >= 0) {
+                    font = this.attach(new PDFStandardFont(url));
+                } else {
+                    font = FONT_CACHE[url];
+                    if (!font) {
+                        throw new Error("Font " + url + " has not been loaded");
+                    }
+                    font = this.attach(new PDFFont(this, font));
                 }
-                font = this.FONTS[url] = this.attach(new PDFFont(this, font));
+                this.FONTS[url] = font;
             }
             return font;
         },
@@ -404,7 +429,12 @@
         this.value = value;
     }, {
         render: function(out) {
-            out("(\xFE\xFF", utf16_be_encode(this.escape()), ")");
+            //out("(\xFE\xFF", utf16_be_encode(this.escape()), ")");
+            var txt = "";
+            for (var i = 0; i < this.value.length; ++i) {
+                txt += String.fromCharCode(this.value.charCodeAt(i) & 0xFF);
+            }
+            out("(", txt, ")");
         },
         escape: function() {
             return this.value.replace(/([\(\)\\])/g, "\\$1");
@@ -541,29 +571,18 @@
 
     /// standard fonts
 
-    // var FONTS = {};
-    // [
-    //     "Times-Roman",
-    //     "Times-Bold",
-    //     "Times-Italic",
-    //     "Times-BoldItalic",
-    //     "Helvetica",
-    //     "Helvetica-Bold",
-    //     "Helvetica-Oblique",
-    //     "Helvetica-BoldOblique",
-    //     "Courier",
-    //     "Courier-Bold",
-    //     "Courier-Oblique",
-    //     "Courier-BoldOblique",
-    //     "Symbol",
-    //     "ZapfDingbats"
-    // ].forEach(function(name, i){
-    //     FONTS[name] = new PDFDictionary({
-    //         Type     : PDFName.get("Font"),
-    //         Subtype  : PDFName.get("Type1"),
-    //         BaseFont : PDFName.get(name)
-    //     });
-    // });
+    var PDFStandardFont = defclass(function PDFStandardFont(name){
+        this.props = {
+            Type     : PDFName.get("Font"),
+            Subtype  : PDFName.get("Type1"),
+            BaseFont : PDFName.get(name)
+        };
+        this._resourceName = PDFName.get("F" + (++FONT_RESOURCE_COUNTER));
+    }, {
+        encodeText: function(str) {
+            return new PDFString(str+"");
+        }
+    }, PDFDictionary);
 
     /// TTF fonts
 
@@ -805,11 +824,10 @@
             if (size == null) {
                 size = this._fontSize;
             }
-            var name = font._resourceName;
-            this._fontResources[name] = font;
+            this._fontResources[font._resourceName] = font;
             this._font = font;
             this._fontSize = size;
-            this._out(name, " ", size, " Tf", NL);
+            this._out(font._resourceName, " ", size, " Tf", NL);
         },
         setTextLeading: function(size) {
             this._requireTextMode();
@@ -832,7 +850,7 @@
         },
         setStrokeOpacity: function(opacity) {
             var gs = this._pdf.getOpacityGS(opacity, true);
-            this._gsResources[gs._resourceName.name] = gs;
+            this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
         setFillColor: function(r, g, b) {
@@ -840,7 +858,7 @@
         },
         setFillOpacity: function(opacity) {
             var gs = this._pdf.getOpacityGS(opacity, false);
-            this._gsResources[gs._resourceName.name] = gs;
+            this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
         setDashPattern: function(dashArray, dashPhase) {
@@ -934,9 +952,8 @@
         },
         drawImage: function(url) {
             var img = this._pdf.getImage(url);
-            var name = img._resourceName.name;
-            this._xResources[name] = img;
-            this._out(PDFName.get(name), " Do", NL);
+            this._xResources[img._resourceName] = img;
+            this._out(img._resourceName, " Do", NL);
         }
     }, PDFDictionary);
 
