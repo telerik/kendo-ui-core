@@ -281,4 +281,52 @@ test("toDataUrl reuses fonts and styles", function() {
     equal(dom.find("fonts > font").length, 2);
 });
 
+test("toDataUrl sets the rgb attribute of the 'color' element when color style is specified", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { color: "#ff0000" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fonts > font:last > color").attr("rgb"), "FFFF0000");
+});
+
+test("toDataUrl and short color", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { color: "#f00" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fonts > font:last > color").attr("rgb"), "FFFF0000");
+});
+
+test("toDataUrl and rgba color", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { color: "#aabbccddee" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("fonts > font:last > color").attr("rgb"), "AABBCCDDEE");
+});
+
 }());

@@ -165,7 +165,11 @@ var STYLES = kendo.template(
             '<i/>' +
          '# } #' +
          '<sz val="11" />' +
+         '# if (font.color) { #' +
+         '<color rgb="${font.color}" />' +
+         '# } else { #' +
          '<color theme="1" />' +
+         '# } #' +
          '<name val="Calibri" />' +
          '<family val="2" />' +
          '<scheme val="minor" />' +
@@ -310,8 +314,26 @@ var Workbook = kendo.Class.extend({
 
         var styles = $.map(this._styles, $.parseJSON);
 
-        var fonts = $.grep(styles, function(style) {
-            if (style.bold || style.italic) {
+        var fonts = $.map(styles, function(style) {
+            var color = style.color;
+
+            if (color) {
+                if (color.length < 6) {
+                    color = color.replace(/(\w)/g, function($0, $1) {
+                        return $1 + $1;
+                    });
+                }
+
+                color = color.substring(1).toUpperCase();
+
+                if (color.length < 8) {
+                    color = "FF" + color;
+                }
+
+                style.color = color;
+            }
+
+            if (style.bold || style.italic || style.color) {
                 return style;
             }
         });
@@ -321,7 +343,7 @@ var Workbook = kendo.Class.extend({
            styles: $.map(styles, function(style) {
               var result = {};
 
-              if (style.bold || style.italic) {
+              if (style.bold || style.italic || style.color) {
                   result.fontId = $.inArray(style, fonts) + 1;
               }
 
