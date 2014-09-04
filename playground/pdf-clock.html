@@ -187,7 +187,7 @@
             if (title) {
                 var pos = [this._center.x, this._fromTop(-0.1)];
                 var text = new Text(title, pos, {
-                    font: "16px arial",
+                    font: "16px arial, helvetica, sans-serif",
                     fill: {
                         color: "#333"
                     }
@@ -241,9 +241,7 @@
         return [local, officeA, officeB];
     }
 
-    $(document).ready(function(){
-        kendo.PDF.loadFonts([ "./font.ttf" ], init);
-    });
+    init();
 
     function init() {
         var surface = initSurface();
