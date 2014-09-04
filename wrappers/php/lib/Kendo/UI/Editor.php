@@ -55,7 +55,7 @@ This property has been introduced in internal builds after 2014.1.319.
 
     /**
     * Defines the text of the labels that are shown within the editor. Used primarily for localization.
-    * @param  $value
+    * @param \Kendo\UI\EditorMessages|array $value
     * @return \Kendo\UI\Editor
     */
     public function messages($value) {

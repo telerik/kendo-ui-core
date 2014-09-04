@@ -42,7 +42,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view
+        /// The template used to render the time slots in "day" view
         /// </summary>
         /// <param name="value">The value that configures the timeheadertemplate.</param>
         public GanttViewBuilder TimeHeaderTemplate(string value)
@@ -53,7 +53,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the time slots in "day" view
+        /// The template used to render the time slots in "day" view
         /// </summary>
         /// <param name="value">The value that configures the timeheadertemplate.</param>
         public GanttViewBuilder TimeHeaderTemplateId(string value)
@@ -64,7 +64,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
+        /// The template used to render the day slots in "day" and "week" views.
         /// </summary>
         /// <param name="value">The value that configures the dayheadertemplate.</param>
         public GanttViewBuilder DayHeaderTemplate(string value)
@@ -75,7 +75,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the day slots in "day" and "week" views.
+        /// The template used to render the day slots in "day" and "week" views.
         /// </summary>
         /// <param name="value">The value that configures the dayheadertemplate.</param>
         public GanttViewBuilder DayHeaderTemplateId(string value)
@@ -86,7 +86,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
+        /// The template used to render the week slots in "week" and "month" views.
         /// </summary>
         /// <param name="value">The value that configures the weekheadertemplate.</param>
         public GanttViewBuilder WeekHeaderTemplate(string value)
@@ -97,7 +97,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the week slots in "week" and "month" views.
+        /// The template used to render the week slots in "week" and "month" views.
         /// </summary>
         /// <param name="value">The value that configures the weekheadertemplate.</param>
         public GanttViewBuilder WeekHeaderTemplateId(string value)
@@ -108,7 +108,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.
+        /// The template used to render the month slots in "month" views.
         /// </summary>
         /// <param name="value">The value that configures the monthheadertemplate.</param>
         public GanttViewBuilder MonthHeaderTemplate(string value)
@@ -119,7 +119,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The [template](/api/framework/kendo#methods-template used to render the month slots in "month" views.
+        /// The template used to render the month slots in "month" views.
         /// </summary>
         /// <param name="value">The value that configures the monthheadertemplate.</param>
         public GanttViewBuilder MonthHeaderTemplateId(string value)

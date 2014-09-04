@@ -47,7 +47,7 @@ class Sortable extends \Kendo\UI\Widget {
 
     /**
     * Selector that determines the container to which boundaries the hint movement will be constrained.
-    * @param string $value
+    * @param string| $value
     * @return \Kendo\UI\Sortable
     */
     public function container($value) {
@@ -56,7 +56,7 @@ class Sortable extends \Kendo\UI\Widget {
 
     /**
     * Selector which determines if items from the current Sortable widget can be accepted from another Sortable container(s). The connectWith option describes one way relationship, if the developer wants a two way connection then the connectWith option should be set on both widgets.
-    * @param string $value
+    * @param string| $value
     * @return \Kendo\UI\Sortable
     */
     public function connectWith($value) {
