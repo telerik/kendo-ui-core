@@ -74,7 +74,7 @@
             kendo.support.mobileOS = false;
             createTileLayer();
 
-            stubMethod(TileLayer.fn, "_render", function() {
+            stubMethod(TileView.fn, "render", function() {
                 ok(true);
             }, function() {
                 map.trigger("pan");
@@ -82,7 +82,7 @@
         });
 
         test("throttles rendering on pan", function() {
-            stubMethod(TileLayer.fn, "_render", function() {
+            stubMethod(TileView.fn, "render", function() {
                 ok(true);
             }, function() {
                 map.trigger("pan");

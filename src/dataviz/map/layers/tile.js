@@ -25,6 +25,8 @@
         renderSize = util.renderSize,
         limit = util.limitValue;
 
+    var PAN_DELAY = 100;
+
     // Image tile layer =============================================================
     var TileLayer = Layer.extend({
         init: function(map, options) {
@@ -61,7 +63,10 @@
 
             if (!kendo.support.mobileOS) {
                 if (!this._pan) {
-                    this._pan = proxy(this._throttleRender, this);
+                    this._pan = kendo.throttle(
+                        proxy(this._render, this),
+                        100
+                    );
                 }
 
                 this.map.bind("pan", this._pan);
@@ -92,17 +97,6 @@
 
         _resize: function() {
             this._render();
-        },
-
-        _throttleRender: function() {
-            var layer = this,
-                now = new Date(),
-                timestamp = layer._renderTimestamp;
-
-            if (!timestamp || now - timestamp > 100) {
-                this._render();
-                layer._renderTimestamp = now;
-            }
         },
 
         _panEnd: function(e) {
