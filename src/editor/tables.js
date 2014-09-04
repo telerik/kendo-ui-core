@@ -124,7 +124,7 @@ var InsertTableTool = PopupTool.extend({
             popupTemplate:
                 "<div class='k-ct-popup'>" +
                     new Array(this.cols * this.rows + 1).join("<span class='k-ct-cell k-state-disabled' />") +
-                    "<div class='k-status'>Cancel</div>" +
+                    "<div class='k-status'></div>" +
                 "</div>"
         }));
     },
@@ -182,14 +182,15 @@ var InsertTableTool = PopupTool.extend({
     },
 
     _setTableSize: function(size) {
-        var element = this._popup.element; 
+        var element = this._popup.element;
         var status = element.find(".k-status");
         var cells = element.find(".k-ct-cell");
         var rows = this.rows;
         var cols = this.cols;
+        var messages = this._editor.options.messages;
 
         if (this._valid(size)) {
-            status.text(kendo.format("Create a {0} x {1} table", size.row, size.col));
+            status.text(kendo.format(messages.createTableHint, size.row, size.col));
 
             cells.each(function(i) {
                 $(this).toggleClass(
@@ -198,7 +199,7 @@ var InsertTableTool = PopupTool.extend({
                 );
             });
         } else {
-            status.text("Cancel");
+            status.text(messages.dialogCancel);
             cells.removeClass(SELECTEDSTATE);
         }
     },
@@ -247,8 +248,13 @@ var InsertTableTool = PopupTool.extend({
     },
 
     _open: function() {
+        var messages = this._editor.options.messages;
+
         PopupTool.fn._open.call(this);
-        this.popup().element.find(".k-ct-cell").removeClass(SELECTEDSTATE);
+
+        this.popup().element
+            .find(".k-status").text(messages.dialogCancel).end()
+            .find(".k-ct-cell").removeClass(SELECTEDSTATE);
     },
 
     _close: function() {

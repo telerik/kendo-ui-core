@@ -6,6 +6,10 @@ var dom;
 var editorNS = kendo.ui.editor;
 var toolTemplate = kendo.template(editorNS.EditorUtils.buttonTemplate, { useWithBlock: false });
 var keys = kendo.keys;
+var messages = {
+    createTableHint: "Table will be {0} by {1} cells",
+    dialogCancel: "Abort"
+};
 
 module("editor insert table tool", {
     setup: function() {
@@ -26,7 +30,15 @@ module("editor insert table tool", {
 
             $(this).trigger(options);
         };
-        tool.initialize(dom, { title: "", editor: { exec: $.noop } });
+        tool.initialize(dom, {
+            title: "",
+            editor: {
+                exec: $.noop,
+                options: {
+                    messages: messages
+                }
+            }
+        });
     },
     teardown: function() {
         kendo.effects.enable();
@@ -154,6 +166,24 @@ test("enter key triggers createTable command", function() {
         equal(execArgs[0], "createTable");
         deepEqual(execArgs[1], { rows: 1, columns: 1 });
     });
+});
+
+test("uses messages object to set status messages", function() {
+    var popup = tool.popup();
+
+    popup.open();
+
+    var status = popup.element.find(".k-status");
+
+    equal(status.text(), messages.dialogCancel);
+
+    dom.press({ keyCode: keys.RIGHT });
+
+    equal(status.text(), kendo.format(messages.createTableHint, 1, 2));
+
+    dom.press({ keyCode: keys.DOWN });
+
+    equal(status.text(), kendo.format(messages.createTableHint, 2, 2));
 });
 
 }());
