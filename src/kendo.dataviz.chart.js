@@ -158,7 +158,7 @@ var __meta__ = {
         MOUSEOVER_NS = "mouseover" + NS,
         MOUSEOUT_NS = "mouseout" + NS,
         MOUSEMOVE_NS = "mousemove" + NS,
-        MOUSEMOVE_THROTTLE = 20,
+        MOUSEMOVE_DELAY = 20,
         MOUSEWHEEL_DELAY = 150,
         MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
         NOTE_CLICK = dataviz.NOTE_CLICK,
@@ -618,8 +618,14 @@ var __meta__ = {
             element.on(MOUSEOUT_NS, proxy(chart._mouseout, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
+
+            chart._mousemove = kendo.throttle(
+                proxy(chart._mousemove, chart),
+                MOUSEMOVE_DELAY
+            );
+
             if (chart._shouldAttachMouseMove()) {
-                element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
+                element.on(MOUSEMOVE_NS, chart._mousemove);
             }
 
             if (kendo.UserEvents) {
@@ -931,20 +937,12 @@ var __meta__ = {
         },
 
         _mousemove: function(e) {
-            var chart = this,
-                now = new Date(),
-                timestamp = chart._mousemove_ts;
+            var coords = this._eventCoordinates(e);
 
-            if (!timestamp || now - timestamp > MOUSEMOVE_THROTTLE) {
-                var coords = chart._eventCoordinates(e);
+            this._trackCrosshairs(coords);
 
-                chart._trackCrosshairs(coords);
-
-                if (chart._sharedTooltip()) {
-                    chart._trackSharedTooltip(coords);
-                }
-
-                chart._mousemove_ts = now;
+            if (this._sharedTooltip()) {
+                this._trackSharedTooltip(coords);
             }
         },
 
@@ -1295,7 +1293,7 @@ var __meta__ = {
             }
 
             if (chart._shouldAttachMouseMove()) {
-                chart.element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
+                chart.element.on(MOUSEMOVE_NS, chart._mousemove);
             }
 
             if (chart._hasDataSource) {
