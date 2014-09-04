@@ -5240,7 +5240,11 @@ var __meta__ = {
             containersLength = containers.length,
             heights = [];
 
-          for (idx = 0; idx < length; idx++) {
+        for (idx = 0; idx < length; idx++) {
+              if (!rows2[idx]) {
+                break;
+              }
+
               if (rows[idx].style.height) {
                   rows[idx].style.height = rows2[idx].style.height = "";
               }
