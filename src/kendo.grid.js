@@ -4603,12 +4603,8 @@ var __meta__ = {
 
                    for (var idx = 0; idx < rows.length; idx++) {
                        html += "<tr>";
-                       if (hasDetails && idx === 0) {
-                           html += '<th class="k-hierarchy-cell"';
-                           if (rows[idx].rowSpan > 1) {
-                               html += ' rowspan="' + rows[idx].rowSpan + '"';
-                           }
-                           html += '>&nbsp;</th>';
+                       if (hasDetails) {
+                           html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                        }
                        html += that._createHeaderCells(rows[idx].cells, rows[idx].rowSpan);
                        html += "</tr>";
@@ -4964,12 +4960,10 @@ var __meta__ = {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
-                rowSpan = container.find("tr:not(.k-filter-row)").length,
                 length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr.k-filter-row"));
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header"' + (rowSpan > 1 ? ' rowspan="' + rowSpan + '"' : "") + '>&nbsp;</th>')).prependTo(container.find("tr:first"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
             } else if(groups < length) {
                 container.find("tr:first").each(function(){
                     $(this).find("th.k-group-cell")

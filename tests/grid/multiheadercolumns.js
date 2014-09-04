@@ -143,7 +143,7 @@
         equal(grid.tbody.parent().find("col").length, 5);
     });
 
-    test("single hierarchy cell is added to the header if detailView is defined", function() {
+    test("hierarchy cell is added to the header if detailView is defined", function() {
         var grid = new Grid(table, {
             columns: [
                 { title: "master" },
@@ -158,15 +158,13 @@
         var lastRow = grid.thead.find("tr:last");
 
         equal(grid.thead.find("tr").length, 3);
-        equal(firstRow.find("th").length, 4);
         ok(firstRow.find("th").first().hasClass("k-hierarchy-cell"));
-        equal(firstRow.find("th.k-hierarchy-cell").attr("rowspan"), 3);
-        equal(firstRow.find("th.k-hierarchy-cell").length, 1);
-        equal(secondRow.find("th").length, 4);
-        equal(lastRow.find("th").length, 1);
+        ok(secondRow.find("th").first().hasClass("k-hierarchy-cell"));
+        ok(lastRow.find("th").first().hasClass("k-hierarchy-cell"));
+        equal(grid.thead.find("th.k-hierarchy-cell").length, 3);
     });
 
-    test("single group cell is added to the header when grouped", function() {
+    test("group cell is added to the header when grouped", function() {
         var grid = new Grid(table, {
             dataSource: {
                 group: "foo"
@@ -183,12 +181,10 @@
         var lastRow = grid.thead.find("tr:last");
 
         equal(grid.thead.find("tr").length, 3);
-        equal(firstRow.find("th").length, 4);
         ok(firstRow.find("th").first().hasClass("k-group-cell"));
-        equal(firstRow.find("th.k-group-cell").attr("rowspan"), 3);
-        equal(firstRow.find("th.k-group-cell").length, 1);
-        equal(secondRow.find("th").length, 4);
-        equal(lastRow.find("th").length, 1);
+        ok(secondRow.find("th").first().hasClass("k-group-cell"));
+        ok(lastRow.find("th").first().hasClass("k-group-cell"));
+        equal(grid.thead.find("th.k-group-cell").length, 3);
     });
 
     test("render header additional col element for hierarchy cell", function() {
@@ -294,6 +290,5 @@
 
         equal(grid.tbody.find("tr.k-detail-row td.k-detail-cell").attr("colspan"), 5);
     });
-
 
 })();
