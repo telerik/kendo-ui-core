@@ -10574,9 +10574,8 @@ var __meta__ = {
     var Aggregates = {
         min: function(values) {
             var min = MAX_VALUE,
-                i,
                 length = values.length,
-                n;
+                i, n;
 
             for (i = 0; i < length; i++) {
                 n = values[i];
@@ -10590,9 +10589,8 @@ var __meta__ = {
 
         max: function(values) {
             var max = MIN_VALUE,
-                i,
                 length = values.length,
-                n;
+                i, n;
 
             for (i = 0; i < length; i++) {
                 n = values[i];
@@ -10607,8 +10605,7 @@ var __meta__ = {
         sum: function(values) {
             var length = values.length,
                 sum = 0,
-                i,
-                n;
+                i, n;
 
             for (i = 0; i < length; i++) {
                 n = values[i];
@@ -10620,11 +10617,20 @@ var __meta__ = {
             return sum;
         },
 
+        sumOrNull: function(values) {
+            var result = null;
+
+            if (countNumbers(values)) {
+                result = this.sum(values);
+            }
+
+            return result;
+        },
+
         count: function(values) {
             var length = values.length,
                 count = 0,
-                i,
-                val;
+                i, val;
 
             for (i = 0; i < length; i++) {
                 val = values[i];

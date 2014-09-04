@@ -44,6 +44,17 @@
         }
     });
 
+    test("sumOrNull should return null if values are with value null", function() {
+        series.aggregate = "sumOrNull";
+        series.data = [{
+            value: null
+        },{
+            value: null
+        }];
+
+        equal(aggregate(series).value, null);
+    });
+
     test("accepts named aggregates", function() {
         series.aggregate = "min";
 
