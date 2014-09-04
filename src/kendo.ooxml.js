@@ -159,7 +159,10 @@ var STYLES = kendo.template(
        '# var font = fonts[fi]; #' +
       '<font>' +
          '# if (font.bold) { #' +
-            '<b />' +
+            '<b/>' +
+         '# } #' +
+         '# if (font.italic) { #' +
+            '<i/>' +
          '# } #' +
          '<sz val="11" />' +
          '<color theme="1" />' +
@@ -305,18 +308,20 @@ var Workbook = kendo.Class.extend({
             worksheets.file(kendo.format("sheet{0}.xml", idx+1), this._sheets[idx].toXML());
         }
 
-        var fonts = $.grep(this._styles, function(style) {
-            if (style.bold) {
+        var styles = $.map(this._styles, $.parseJSON);
+
+        var fonts = $.grep(styles, function(style) {
+            if (style.bold || style.italic) {
                 return style;
             }
         });
 
         xl.file("styles.xml", STYLES({
            fonts: fonts,
-           styles: $.map(this._styles, function(style) {
+           styles: $.map(styles, function(style) {
               var result = {};
 
-              if (style.bold) {
+              if (style.bold || style.italic) {
                   result.fontId = $.inArray(style, fonts) + 1;
               }
 

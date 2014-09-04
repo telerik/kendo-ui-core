@@ -165,7 +165,7 @@ test("toDataUrl creates styles.xml", function() {
     ok(JSZip.prototype.files["styles.xml"]);
 });
 
-test("toDataUrl stores fonts styles as 'font' elements", function() {
+test("toDataUrl stores bold style as 'b' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
@@ -179,6 +179,22 @@ test("toDataUrl stores fonts styles as 'font' elements", function() {
     var dom = $(JSZip.prototype.files["styles.xml"]);
 
     equal(dom.find("font > b").length, 1);
+});
+
+test("toDataUrl stores bold italic style as 'i' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { italic: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("font > i").length, 1);
 });
 
 test("toDataUrl stores cell style as 'xf' element", function() {
@@ -243,6 +259,26 @@ test("toDataUrl sets 'applyFont' attribute to '1' if bold is set", function() {
     var dom = $(JSZip.prototype.files["styles.xml"]);
 
     equal(dom.find("cellXfs > xf").last().attr("applyFont"), 1);
+});
+
+test("toDataUrl reuses fonts and styles", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [
+                   { style: { bold: true }, value: "foo" },
+                   { style: { bold: true }, value: "bar" }
+               ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").length, 2);
+    equal(dom.find("fonts > font").length, 2);
 });
 
 }());
