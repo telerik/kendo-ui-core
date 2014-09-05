@@ -61,7 +61,7 @@
 
         gantt.removeTask(taskUid);
 
-        equal($(".k-popup-message").text(), "Are you sure you want to delete this task?");
+        equal($(".k-popup-message").text(), "Are you sure you want to delete this task and all of its dependencies?");
     });
 
     test("delete button rendered", function() {
@@ -157,7 +157,7 @@
     });
     
     test("prevents call to datasource remove", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dataSource = gantt.dependencies;
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
 
@@ -169,7 +169,7 @@
     });
     
     test("default text rendered", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
         
         gantt.removeDependency(dependencyUid);
@@ -178,7 +178,7 @@
     });
     
     test("delete button rendered", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
         var deleteButton;
 
@@ -190,7 +190,7 @@
     });
 
     test("delete button click calls datasource remove", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dataSource = gantt.dependencies;
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
         var deleteButton;
@@ -207,7 +207,7 @@
     });
     
     test("cancel button rendered", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
         var cancelButton;
 
@@ -219,14 +219,14 @@
     });
 
     test("cancel button click prevents call to  datasource remove", function() {
-        var gantt = setup();
+        var gantt = setupDependency();
         var dataSource = gantt.dependencies;
         var dependencyUid = gantt.wrapper.find(".k-line").data("uid");
         var cancelButton;
 
-        gantt.removeDependency(dependencyUid);
+        stub(dataSource, "remove");
 
-        gantt.removeTask(taskUid);
+        gantt.removeDependency(dependencyUid);
 
         cancelButton = $(".k-popup-edit-form .k-gantt-cancel");
 

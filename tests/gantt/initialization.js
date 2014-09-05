@@ -35,6 +35,26 @@
         ok(element.data("kendoGantt").timeline);
         ok(element.data("kendoGantt").timeline instanceof ui.GanttTimeline);
     });
+    
+    test("kendoGantt creates Popup editor widget", 2, function() {
+        element.kendoGantt();
+
+        ok(element.data("kendoGantt")._editor);
+        ok(element.data("kendoGantt")._editor instanceof kendo.Observable);
+    });
+    
+    test("kendoGantt dispose also disposes Popup editor", function() {
+        element.kendoGantt();
+
+        var gantt = element.data("kendoGantt");
+        var editor = gantt._editor;
+
+        stub(editor, "destroy");
+
+        gantt.destroy();
+
+        ok(editor.calls("destroy"));
+    });
 
     test("initialized with default height", function () {
         var gantt = new Gantt(element);

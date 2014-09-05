@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.popup", "./kendo.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline" ], f);
+    define([ "./kendo.data", "./kendo.popup", "./kendo.window", "./kendo.resizable", "./kendo.gantt.list", "./kendo.gantt.timeline" ], f);
 })(function(){
 
 var __meta__ = {
@@ -7,7 +7,7 @@ var __meta__ = {
     name: "Gantt",
     category: "web",
     description: "The Gantt component.",
-    depends: [ "data", "popup", "resizable", "gantt.list", "gantt.timeline" ]
+    depends: [ "data", "popup", "resizable", "window", "gantt.list", "gantt.timeline" ]
 };
 
 (function($, undefined) {
@@ -21,6 +21,7 @@ var __meta__ = {
     var isArray = $.isArray;
     var proxy = $.proxy;
     var extend = $.extend;
+    var isPlainObject = $.isPlainObject;
     var map = $.map;
     var keys = kendo.keys;
     var NS = ".kendoGantt";
@@ -41,6 +42,9 @@ var __meta__ = {
     var ACTIVE_CELL = "gantt_active_cell";
     var ACTIVE_OPTION = "action-option-focused";
     var DOT = ".";
+    var TASK_DELETE_CONFIRM = "Are you sure you want to delete this task and all of its dependencies?";
+    var DEPENDENCY_DELETE_CONFIRM = "Are you sure you want to delete this dependency?";
+    var COMMAND_BUTTON_TEMPLATE = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>';
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
             '#if (editable == true) {#'+
                 '<div class="#=styles.actions#">' +
@@ -81,12 +85,22 @@ var __meta__ = {
         icon: "k-icon",
         item: "k-item",
         line: "k-line",
+        buttonDelete: "k-gantt-delete",
+        buttonCancel: "k-gantt-cancel",
+        primary: "k-primary",
         hovered: "k-state-hover",
         selected: "k-state-selected",
         focused: "k-state-focused",
         gridHeader: "k-grid-header",
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
+        popup: {
+            form: "k-popup-edit-form",
+            formContainer: "k-edit-form-container",
+            message: "k-popup-message",
+            buttonsContainer: "k-edit-buttons k-state-default",
+            button: "k-button"
+        },
         toolbar: {
             headerWrapper: "k-floatwrap k-header k-gantt-toolbar",
             footerWrapper: "k-floatwrap k-header k-gantt-toolbar",
@@ -99,6 +113,17 @@ var __meta__ = {
             viewButtonDefault: "k-state-default",
             viewButton: "k-view",
             link: "k-link"
+        }
+    };
+
+    var defaultCommands = {
+        canceledit: {
+            text: "Cancel",
+            className: ganttStyles.buttonCancel
+        },
+        destroy: {
+            text: "Delete",
+            className: ganttStyles.primary + " " + ganttStyles.buttonDelete
         }
     };
 
@@ -843,6 +868,75 @@ var __meta__ = {
         GanttDependency: GanttDependency
     });
 
+    var Editor = kendo.Observable.extend({
+        init: function(element, options) {
+            kendo.Observable.fn.init.call(this);
+
+            this.element = element;
+            this.options = extend(true, {}, this.options, options);
+            this.createButton = this.options.createButton;
+        }
+    });
+
+    var PopupEditor = Editor.extend({
+        destroy: function() {
+            this.close();
+        },
+
+        close: function() {
+            if (this.popup) {
+                this.popup.destroy();
+                this.popup = null;
+            }
+        },
+
+        showDialog: function(options) {
+            var buttons = options.buttons;
+            var popupStyles = ganttStyles.popup;
+
+            var html = kendo.format('<div class="{0}"><div class="{1}"><p class="{2}">{3}</p><div class="{4}">',
+                popupStyles.form, popupStyles.formContainer, popupStyles.message, options.text, popupStyles.buttonsContainer);
+
+            for (var i = 0, length = buttons.length; i < length; i++) {
+                html += this.createButton(buttons[i]);
+            }
+            
+            html += '</div></div></div>';
+
+            var wrapper = this.element;
+
+            if (this.popup) {
+                this.popup.destroy();
+            }
+
+            var popup = this.popup = $(html).appendTo(wrapper)
+                .eq(0)
+                .on("click", DOT + popupStyles.button, function(e) {
+                    e.preventDefault();
+
+                    popup.close();
+
+                    var buttonIndex = $(e.currentTarget).index();
+
+                    buttons[buttonIndex].click();
+                })
+                .kendoWindow({
+                    modal: true,
+                    resizable: false,
+                    draggable: false,
+                    title: options.title,
+                    visible: false,
+                    close: function() {
+                        this.destroy();
+                        wrapper.focus();
+                    }
+                })
+                .getKendoWindow();
+
+            popup.center().open();
+        }
+    });
+
     var Gantt = Widget.extend({
         init: function(element, options) {
             if (isArray(options)) {
@@ -884,6 +978,8 @@ var __meta__ = {
 
             this._attachEvents();
 
+            this._createEditor();
+
             kendo.notify(this);
         },
 
@@ -916,6 +1012,10 @@ var __meta__ = {
             dataSource: {},
             dependencies: {},
             messages: {
+                cancel: "Cancel",
+                destroy: "Delete",
+                deleteTaskWindowTitle: "Delete task",
+                deleteDependencyWindowTitle: "Delete dependency",
                 views: {
                     day: "Day",
                     week: "Week",
@@ -975,6 +1075,10 @@ var __meta__ = {
 
             if (this.headerDropDown) {
                 this.headerDropDown.destroy();
+            }
+
+            if (this._editor) {
+                this._editor.destroy();
             }
 
             if (this._resizeDraggable) {
@@ -1369,6 +1473,38 @@ var __meta__ = {
                 .bind("error", this._dependencyErrorHandler);
         },
 
+        _createEditor: function(command) {
+            this._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
+                target: this,
+                createButton: proxy(this._createButton, this)
+            }));
+        },
+
+        _createButton: function(command) {
+            var commandName = command.name || command.text;
+            var options = { 
+                className: "k-gantt-" + (commandName || "").replace(/\s/g, ""),
+                text: commandName,
+                attr: ""
+            };
+
+            if (!commandName && !(isPlainObject(command) && command.template))  {
+                throw new Error("Custom commands should have name specified");
+            }
+
+            if (isPlainObject(command)) {
+                if (command.className) {
+                    command.className += " " + options.className;
+                }
+
+                options = extend(true, options, defaultCommands[commandName], command);
+            } else {
+                options = extend(true, options, defaultCommands[commandName]);
+            }
+
+            return kendo.template(COMMAND_BUTTON_TEMPLATE)(options);
+        },
+
         view: function(type) {
             return this.timeline.view(type);
         },
@@ -1421,28 +1557,18 @@ var __meta__ = {
         },
 
         removeTask: function(uid) {
+            var that = this;
             var task = typeof uid === "string" ? this.dataSource.getByUid(uid) : uid;
 
             if (!task) {
                 return;
             }
 
-            var dependencies = this.dependencies.dependencies(task.id);
-
-            if (!this.trigger("remove", {
-                task: task,
-                dependencies: dependencies
-            })) {
-                this._removeTaskDependencies(task, dependencies);
-
-                this._preventRefresh = true;
-
-                if (this.dataSource.remove(task)) {
-                    this._syncDataSource();
+            this._taskConfirm(function(cancel) {
+                if (!cancel) {
+                    that._removeTask(task);
                 }
-
-                this._preventRefresh = false;
-            }
+            }, task);
         },
 
         _createTask: function(task, index) {
@@ -1482,16 +1608,18 @@ var __meta__ = {
         },
 
         removeDependency: function(uid) {
+            var that = this;
             var dependency = typeof uid === "string" ? this.dependencies.getByUid(uid) : uid;
 
-            if (!this.trigger("remove", {
-                task: null,
-                dependencies: [dependency]
-            })) {
-                if (this.dependencies.remove(dependency)) {
-                    this.dependencies.sync();
-                }
+            if (!dependency) {
+                return;
             }
+
+            this._dependencyConfirm(function(cancel) {
+                if (!cancel) {
+                    that._removeDependency(dependency);
+                }
+            }, dependency);
         },
 
         _removeTaskDependencies: function(task, dependencies) {
@@ -1504,6 +1632,67 @@ var __meta__ = {
             this._preventDependencyRefresh = false;
 
             this.dependencies.sync();
+        },
+
+        _removeTask: function(task) {
+            var dependencies = this.dependencies.dependencies(task.id);
+
+            if (!this.trigger("remove", {
+                task: task,
+                dependencies: dependencies
+            })) {
+                this._removeTaskDependencies(task, dependencies);
+
+                this._preventRefresh = true;
+
+                if (this.dataSource.remove(task)) {
+                    this._syncDataSource();
+                }
+
+                this._preventRefresh = false;
+            }
+        },
+
+        _removeDependency: function(dependency) {
+            if (!this.trigger("remove", {
+                task: null,
+                dependencies: [dependency]
+            })) {
+                if (this.dependencies.remove(dependency)) {
+                    this.dependencies.sync();
+                }
+            }
+        },
+
+        _taskConfirm: function(callback, task) {
+            this._confirm(callback, {
+                model: task,
+                text: TASK_DELETE_CONFIRM,
+                title: this.options.messages.deleteTaskWindowTitle
+            });
+        },
+
+        _dependencyConfirm: function(callback, dependency) {
+            this._confirm(callback, {
+                model: dependency,
+                text: DEPENDENCY_DELETE_CONFIRM,
+                title: this.options.messages.deleteDependencyWindowTitle
+            });
+        },
+
+        _confirm: function(callback, options) {
+            var messages = this.options.messages;
+
+            var buttons = [
+                { name: "destroy", text: messages.destroy, click: function() { callback(); } },
+                { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
+            ];
+
+            this.showDialog(extend(true, {}, options, { buttons: buttons }));
+        },
+
+        showDialog: function(options) {
+            this._editor.showDialog(options);
         },
 
         refresh: function(e) {
