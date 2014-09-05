@@ -1236,7 +1236,8 @@ var __meta__ = {
             fields,
             operators,
             result = [],
-            filter;
+            filter,
+            containsChildren;
 
             expressions = normalizeFilter(expressions);
 
@@ -1258,8 +1259,9 @@ var __meta__ = {
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 current = data[idx];
+                containsChildren = current && current.hasChildren && current.children.view().length;
 
-                if (filter(current)) {
+                if (containsChildren || filter(current)) {
                     result.push(current);
                 }
             }
@@ -3944,6 +3946,24 @@ var __meta__ = {
             DataSource.fn.init.call(this, extend(true, {}, { schema: { modelBase: node, model: node } }, options));
 
             this._attachBubbleHandlers();
+        },
+
+        filter: function(val) {
+            var baseFilter = DataSource.fn.filter;
+
+            if (val === undefined) {
+                return baseFilter.call(this);
+            }
+
+            var idx, length, item;
+            for (idx = 0, length = this._data.length; idx< length; idx++) {
+                item = this._data[idx];
+                if (item.hasChildren && item.loaded()) {
+                    item.children.filter(val);
+                }
+            }
+
+            baseFilter.call(this, val);
         },
 
         _preprocessFlatData: function(options) {
