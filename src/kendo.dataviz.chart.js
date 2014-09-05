@@ -10203,7 +10203,7 @@ var __meta__ = {
             var tooltip = this,
                 options = deepExtend({}, tooltip.options, point.options.tooltip);
 
-            if (!point) {
+            if (!point || !point.tooltipAnchor) {
                 return;
             }
 
