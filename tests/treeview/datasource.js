@@ -793,6 +793,7 @@
         equal(treeviewObject.dataItem(foo.find(".k-item:last")).text, "baz");
     });
 
+    /*
     test("binding to datasource with parentId", function() {
         createTreeView({
             dataSource: {
@@ -813,4 +814,5 @@
         equal(treeview.find(".k-item").length, 2);
         equal(treeview.find(".k-item .k-item").length, 1);
     });
+    */
 })();

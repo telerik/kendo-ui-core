@@ -1048,8 +1048,6 @@ test("parentId builds hierarchy from flat table", function() {
 
     dataSource.read();
 
-    dataSource.get(1).load();
-
     equal(dataSource.view().length, 1);
     ok(dataSource.get(2), "child item not found via get()");
     equal(dataSource.get(2).parentNode(), dataSource.get(1));
@@ -1076,6 +1074,86 @@ test("adding items to parent node set the parentId", function() {
     equal(model.parentId, 3);
 });
 
+test("preprocessing of remote data", function() {
+    var dataSource = new HierarchicalDataSource({
+        transport: {
+            read: function(options) {
+                options.success([
+                    { id: 1, parentId: 0 },
+                    { id: 2, parentId: 1 }
+                ]);
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    dataSource.read();
+
+    equal(dataSource.view().length, 1);
+    equal(dataSource.view()[0].children.view().length, 1);
+});
+
+test("loading preprocessed children does not call transport.read", 1, function() {
+    var dataSource = new HierarchicalDataSource({
+        transport: {
+            read: function(options) {
+                ok(true);
+                options.success([
+                    { id: 1, parentId: 0 },
+                    { id: 2, parentId: 1 }
+                ]);
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    dataSource.read();
+
+    dataSource.view()[0].load();
+
+    dataSource.view()[0].load();
+});
+
+test("reloading preprocessed children calls transport.read", function() {
+    var calls = 0;
+    var dataSource = new HierarchicalDataSource({
+        transport: {
+            read: function(options) {
+                calls++
+                options.success([
+                    { id: 1, parentId: 0 },
+                    { id: 2, parentId: 1 }
+                ]);
+            }
+        },
+        schema: {
+            model: {
+                id: "id",
+                parentId: "parentId"
+            }
+        }
+    });
+
+    dataSource.read();
+
+    equal(calls, 1);
+
+    dataSource.view()[0].loaded(false);
+
+    dataSource.view()[0].load();
+
+    equal(calls, 2);
+});
 
 module("HierarchicalDataSource : parameterMap", {
     setup: function() {

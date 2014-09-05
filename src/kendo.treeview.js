@@ -1381,7 +1381,7 @@ var __meta__ = {
                 i;
 
             if (e.field) {
-                if (!items[0].level) {
+                if (!items[0] || !items[0].level) {
                     return;
                 }
 

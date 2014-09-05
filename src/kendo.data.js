@@ -3841,6 +3841,11 @@ var __meta__ = {
 
                 that._updateChildrenField();
             }
+
+            if (this.__items && this.__items.length) {
+                this.loaded(true);
+                this.children.data(this.__items);
+            }
         },
 
         append: function(model) {
@@ -3864,9 +3869,9 @@ var __meta__ = {
         },
 
         _updateChildrenField: function() {
-            var fieldName = this._childrenOptions.schema.data;
+            var fieldName = this._childrenOptions.schema.data || "items";
 
-            this[fieldName || "items"] = this.children.data();
+            this[fieldName] = this.children.data();
         },
 
         _childrenLoaded: function() {
@@ -3881,6 +3886,7 @@ var __meta__ = {
             var children;
 
             if (this.hasChildren) {
+
                 this._initChildren();
 
                 children = this.children;
@@ -3908,6 +3914,9 @@ var __meta__ = {
         loaded: function(value) {
             if (value !== undefined) {
                 this._loaded = value;
+                if (!value) {
+                    this.__items = undefined;
+                }
             } else {
                 return this._loaded;
             }
@@ -3937,8 +3946,6 @@ var __meta__ = {
 
     var HierarchicalDataSource = DataSource.extend({
         init: function(options) {
-            this._preprocessFlatData(options);
-
             var node = Node.define({
                 children: options
             });
@@ -3966,12 +3973,18 @@ var __meta__ = {
             baseFilter.call(this, val);
         },
 
-        _preprocessFlatData: function(options) {
-            var data = options && options.data;
-            var schema = options && options.schema;
-            var model = schema && schema.model;
-            var idField = model && model.id;
-            var parentField = model && model.parentId;
+        _readData: function(data) {
+            data = DataSource.fn._readData.call(this, data);
+
+            return this._preprocessFlatData(data, {
+                id: this.options.schema.model.id,
+                parentId: this.options.schema.model.parentId
+            });
+        },
+
+        _preprocessFlatData: function(data, options) {
+            var idField = options.id;
+            var parentField = options.parentId;
 
             if (data && parentField) {
                 var hash = {};
@@ -3984,14 +3997,15 @@ var __meta__ = {
                     hash[id] = hash[id] || [];
                     hash[parentId] = hash[parentId] || [];
 
-                    item.items = hash[id];
+                    item.__items = hash[id];
+                    item.hasChildren = true;
                     hash[parentId].push(item);
                 }
 
-                options.data = hash[null] || hash[0];
-
-                model.children = "items";
+                return hash[null] || hash[0] || data;
             }
+
+            return data;
         },
 
         _attachBubbleHandlers: function() {
