@@ -280,7 +280,7 @@ var Worksheet = kendo.Class.extend({
     _cell: function(data) {
         var value = data.value;
 
-        var style = this._lookupStyle({
+        var style = {
             bold: data.bold,
             color: data.color,
             background: data.background,
@@ -289,7 +289,7 @@ var Worksheet = kendo.Class.extend({
             fontName: data.fontName,
             fontSize: data.fontSize,
             format: data.format
-        });
+        };
 
         var type = "s";
 
@@ -298,7 +298,12 @@ var Worksheet = kendo.Class.extend({
         } else if (value.toISOString) {
             type = "d";
             value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
+            if (!style.format) {
+                style.format = "mm-dd-yy";
+            }
         }
+
+        style = this._lookupStyle(style);
 
         var cell = {
             value: value,
@@ -310,12 +315,50 @@ var Worksheet = kendo.Class.extend({
     }
 });
 
-function convertDate(input) {
-    var d = new Date(1900, 0, 0),
-    isDateObject = typeof input === 'object',
-    offset = ((isDateObject ? input.getTimezoneOffset() : (new Date()).getTimezoneOffset()) - d.getTimezoneOffset()) * 60000;
-    return isDateObject ? ((input - d - offset ) / 86400000) + 1 : new Date(+d - offset + (input - 1) * 86400000);
-}
+var defaultFormats = {
+    "General": 0,
+    "0": 1,
+    "0.00": 2,
+    "#,##0": 3,
+    "#,##0.00": 4,
+    "0%": 9,
+    "0.00%": 10,
+    "0.00E+00": 11,
+    "# ?/?": 12,
+    "# ??/??": 13,
+    "mm-dd-yy": 14,
+    "d-mmm-yy": 15,
+    "d-mmm": 16,
+    "mmm-yy": 17,
+    "h:mm AM/PM": 18,
+    "h:mm:ss AM/PM": 19,
+    "h:mm": 20,
+    "h:mm:ss": 21,
+    "m/d/yy h:mm": 22,
+    "#,##0 ;(#,##0)": 37,
+    "#,##0 ;[Red](#,##0)": 38,
+    "#,##0.00;(#,##0.00)": 39,
+    "#,##0.00;[Red](#,##0.00)": 40,
+    '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)': 44,
+    "mm:ss": 45,
+    "[h]:mm:ss": 46,
+    "mmss.0": 47,
+    "##0.0E+0": 48,
+    "@": 49,
+    "[$-404]e/m/d": 27,
+    "m/d/yy": 30,
+    "[$-404]e/m/d": 36,
+    "[$-404]e/m/d": 50,
+    "[$-404]e/m/d": 57,
+    "t0": 59,
+    "t0.00": 60,
+    "t#,##0": 61,
+    "t#,##0.00": 62,
+    "t0%": 67,
+    "t0.00%": 68,
+    "t# ?/?": 69,
+    "t# ??/??": 70
+};
 
 function convertColor(color) {
     if (color.length < 6) {
@@ -398,7 +441,7 @@ var Workbook = kendo.Class.extend({
         });
 
         var formats = $.map(styles, function(style) {
-            if (style.format) {
+            if (style.format && defaultFormats[style.format] === undefined) {
                 return style;
             }
         });
@@ -426,7 +469,11 @@ var Workbook = kendo.Class.extend({
               }
 
               if (style.format) {
-                  result.numFmtId = 165 + $.inArray(style, formats);
+                  if (defaultFormats[style.format] !== undefined) {
+                      result.numFmtId = defaultFormats[style.format];
+                  } else {
+                      result.numFmtId = 165 + $.inArray(style, formats);
+                  }
               }
 
               return result;

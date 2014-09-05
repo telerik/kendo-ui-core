@@ -261,11 +261,27 @@ test("toDataUrl stores number formats", function() {
     equal(dom.find("numFmts > numFmt").length, 1);
 });
 
+test("toDataUrl doesn't store default formats", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { format: "mm-dd-yy", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("numFmts > numFmt").length, 0);
+});
+
 test("toDataUrl stores number format code", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { format: "foo", value: "foo" } ]
+               [ { format: "foo", value: new Date() } ]
            ]
         } ]
     });
@@ -291,6 +307,22 @@ test("toDataUrl stores number format id", function() {
     var dom = $(JSZip.prototype.files["styles.xml"]);
 
     equal(dom.find("numFmts > numFmt").attr("numFmtId"), "165");
+});
+
+test("toDataUrl stores default format id", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { format: "mm-dd-yy", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf:last").attr("numFmtId"), "14");
 });
 
 test("toDataUrl stores cell style as 'xf' element", function() {

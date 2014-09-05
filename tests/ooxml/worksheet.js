@@ -59,6 +59,16 @@ test("toXML sets the t attribute to 'd' when the value is a date", function() {
     equal(dom.find("c").attr("t"), "d");
 });
 
+test("toXML sets the 's' attrubte of dates", function() {
+    var worksheet = Worksheet([
+        [{ value: new Date() }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("s"), "1");
+});
+
 test("toXML stores dates as ISO strings", function() {
     var date = new Date();
 
