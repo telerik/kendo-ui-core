@@ -229,6 +229,70 @@ test("toDataUrl stores the fontName option as the 'val' attribute of the 'name' 
     equal(dom.find("font:last name").attr("val"), "Arial");
 });
 
+test("toDataUrl stores the fontSize option as the 'val' attribute of the 'sz' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { fontSize: 15 }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("font:last sz").attr("val"), "15");
+});
+
+test("toDataUrl stores number formats", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { format: "foo" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("numFmts > numFmt").length, 1);
+});
+
+test("toDataUrl stores number format code", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { format: "foo" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("numFmts > numFmt").attr("formatCode"), "foo");
+});
+
+test("toDataUrl stores number format id", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { format: "foo" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("numFmts > numFmt").attr("numFmtId"), "165");
+});
+
 test("toDataUrl stores cell style as 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {

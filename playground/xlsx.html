@@ -114,17 +114,18 @@
         this.href = new kendo.ooxml.Workbook({
             sheets: [
                 {
-                    title: "My wonderfool sheet",
+                    title: "My sheet",
                     data: [
                         [
                             { style: { background: "#f0f", color: "#aaf", bold: true }, value: "Bold with background and foreground" },
                             { style: { background: "#ffeeff", italic: true, underline: true }, value: "Italic and underline" },
-                            { style: { fontName: "Arial" }, value: "Font" }
+                            { style: { fontName: "Arial", fontSize: 20 }, value: "Font and font Size" },
+                            { style: { format: "dd-mm-yyyy" }, value: new Date() }
                         ]
                     ]
                 },
                 {
-                    title: "My second wonderfool sheet",
+                    title: "My second sheet",
                     data: [
                             [ { value: "Baz" }, { value: "Boo" }]
                     ]

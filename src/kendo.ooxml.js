@@ -147,6 +147,12 @@ var STYLES = kendo.template(
    ' xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"'+
    ' mc:Ignorable="x14ac"'+
    ' xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac">' +
+   '<numFmts count="${formats.length}">' +
+   '# for (var fi = 0; fi < formats.length; fi++) { #' +
+       '# var format = formats[fi]; #' +
+       '<numFmt formatCode="${format.format}" numFmtId="${165+fi}" />' +
+   '# } #' +
+   '</numFmts>' +
    '<fonts count="${fonts.length+1}" x14ac:knownFonts="1">' +
       '<font>' +
          '<sz val="11" />' +
@@ -167,11 +173,15 @@ var STYLES = kendo.template(
          '# if (font.underline) { #' +
             '<u/>' +
          '# } #' +
-         '<sz val="11" />' +
          '# if (font.color) { #' +
          '<color rgb="${font.color}" />' +
          '# } else { #' +
          '<color theme="1" />' +
+         '# } #' +
+         '# if (font.fontSize) { #' +
+         '<sz val="${font.fontSize}" />' +
+         '# } else { #' +
+         '<sz val="11" />' +
          '# } #' +
          '# if (font.fontName) { #' +
          '<name val="${font.fontName}" />' +
@@ -210,6 +220,9 @@ var STYLES = kendo.template(
        '# } #' +
        '# if (style.fillId) { #' +
           ' fillId="${style.fillId}" applyFill="1"' +
+       '# } #' +
+       '# if (style.numFmtId) { #' +
+          ' numFmtId="${style.numFmtId}" applyNumberFormat="1"' +
        '# } #' +
        '></xf>' +
    '# } #' +
@@ -272,6 +285,9 @@ var Worksheet = kendo.Class.extend({
 
         if (typeof value === "string") {
             value = this._lookupString(value);
+        } else if (value.toISOString) {
+            type = "d";
+            value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
         }
 
         var cell = {
@@ -283,6 +299,13 @@ var Worksheet = kendo.Class.extend({
         return cell;
     }
 });
+
+function convertDate(input) {
+    var d = new Date(1900, 0, 0),
+    isDateObject = typeof input === 'object',
+    offset = ((isDateObject ? input.getTimezoneOffset() : (new Date()).getTimezoneOffset()) - d.getTimezoneOffset()) * 60000;
+    return isDateObject ? ((input - d - offset ) / 86400000) + 1 : new Date(+d - offset + (input - 1) * 86400000);
+}
 
 function convertColor(color) {
     if (color.length < 6) {
@@ -352,7 +375,7 @@ var Workbook = kendo.Class.extend({
         var styles = $.map(this._styles, $.parseJSON);
 
         var hasFont = function(style) {
-            return style.underline || style.bold || style.italic || style.color || style.fontName;
+            return style.underline || style.bold || style.italic || style.color || style.fontName || style.fontSize;
         }
 
         var fonts = $.map(styles, function(style) {
@@ -365,7 +388,13 @@ var Workbook = kendo.Class.extend({
             }
         });
 
-        var fills = $.map(styles, function(style) {
+        var formats = $.map(styles, function(style) {
+            if (style.format) {
+                return style;
+            }
+        });
+
+       var fills = $.map(styles, function(style) {
             if (style.background) {
                 style.background = convertColor(style.background)
                 return style;
@@ -375,6 +404,7 @@ var Workbook = kendo.Class.extend({
         xl.file("styles.xml", STYLES({
            fonts: fonts,
            fills: fills,
+           formats: formats,
            styles: $.map(styles, function(style) {
               var result = {};
 
@@ -384,6 +414,10 @@ var Workbook = kendo.Class.extend({
 
               if (style.background) {
                   result.fillId = $.inArray(style, fills) + 2;
+              }
+
+              if (style.format) {
+                  result.numFmtId = 165 + $.inArray(style, formats);
               }
 
               return result;

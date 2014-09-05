@@ -41,12 +41,34 @@ test("toXML sets the r attribute to the alphanumeric and toXML number (index plu
     equal(dom.find("c").attr("r"), "A1");
 });
 
-test("toXML sets the t attribute to 's' when the value is string type", function() {
+test("toXML sets the t attribute to 's' when the value is a string", function() {
     var worksheet = Worksheet();
 
     var dom = $(worksheet.toXML());
 
     equal(dom.find("c").attr("t"), "s");
+});
+
+test("toXML sets the t attribute to 'd' when the value is a date", function() {
+    var worksheet = Worksheet([
+        [{ value: new Date() }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("t"), "d");
+});
+
+test("toXML stores dates as ISO strings", function() {
+    var date = new Date();
+
+    var worksheet = Worksheet([
+        [{ value: date }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c > v").text(), kendo.timezone.remove(date, "Etc/UTC").toISOString());
 });
 
 test("toXML adds strings to sharedStrings", function() {
