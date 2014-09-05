@@ -41,12 +41,9 @@
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
 
-            if (doc.namespaces) {
+            if (doc.namespaces && !doc.namespaces.kvml) {
                 doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
-
-                if (!doc.namespaces.kvml) {
-                    doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
-                }
+                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
             }
 
             this._root = new RootNode();
@@ -88,6 +85,8 @@
 
             this.createElement();
         },
+
+        createElement: noop,
 
         load: function(elements, transform) {
             var node = this,
@@ -132,8 +131,6 @@
             domElement.appendChild(this.element);
         },
 
-        createElement: noop,
-
         clear: function() {
             var element = this.element;
 
@@ -143,6 +140,12 @@
             }
 
             BaseNode.fn.clear.call(this);
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "visible") {
+                this.css("display", e.value !== false ? "" : "none");
+            }
         },
 
         setStyle: function() {
@@ -157,12 +160,6 @@
             }
 
             return style;
-        },
-
-        optionsChange: function(e) {
-            if (e.field == "visible") {
-                this.css("display", e.value !== false ? "" : "none");
-            }
         },
 
         attr: function(name, value) {
@@ -267,7 +264,7 @@
             if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
-                attrs.push(["weight", stroke.width || 1 + "px"]);
+                attrs.push(["weight", stroke.width + "px"]);
 
                 if (defined(stroke.opacity)) {
                     attrs.push(["opacity", stroke.opacity]);
@@ -392,10 +389,6 @@
             this.transform = this.createTransformNode(srcElement, transform);
 
             Node.fn.init.call(this, srcElement);
-
-            this.append(this.fill);
-            this.append(this.stroke);
-            this.append(this.transform);
         },
 
         attachTo: function(domElement) {
@@ -485,8 +478,6 @@
             this.pathData = this.createDataNode(srcElement);
 
             ShapeNode.fn.init.call(this, srcElement, transform);
-
-            this.append(this.pathData);
         },
 
         attachTo: function(domElement) {
@@ -535,46 +526,43 @@
                 center = boundingBox.center(),
                 originX = -center.x / boundingBox.width(),
                 originY = -center.y / boundingBox.height();
+
             return originX + "," + originY;
         }
     });
 
     var CircleNode = ShapeNode.extend({
+        createElement: function() {
+            this.element = createElementVML("oval");
+            this.setStyle();
+        },
+
         createTransformNode: function(srcElement, transform) {
             return new CircleTransformNode(srcElement, transform);
         },
 
         geometryChange: function() {
-            var radius = this.radius();
-            var center = this.center();
+            ShapeNode.fn.geometryChange.fn.call(this);
+
+            this.setStyle();
+        },
+
+        mapStyle: function() {
+            var styles = ShapeNode.fn.mapStyle.call(this);
+            var geometry = this.srcElement.geometry();
+            var radius = geometry.radius;
+            var center = geometry.center;
             var diameter = radius * 2;
 
-            this.css("left", center.x - radius + "px");
-            this.css("top", center.y - radius + "px");
-            this.css("width", diameter + "px");
-            this.css("height", diameter + "px");
-            this.invalidate();
-        },
+            styles.push(
+                ["left", center.x - radius + "px"],
+                ["top", center.y - radius + "px"],
+                ["width", diameter + "px"],
+                ["height", diameter + "px"]
+            );
 
-        center: function() {
-            return this.srcElement.geometry().center;
-        },
-
-        radius: function() {
-            return this.srcElement.geometry().radius;
-        },
-
-        template: renderTemplate(
-            "<kvml:oval " +
-            "style='position:absolute;" +
-            "#= d.renderVisibility() #" +
-            "#= d.renderCursor() #" +
-            "width:#= d.radius() * 2 #px;height:#= d.radius() * 2 #px;" +
-            "top:#= d.center().y - d.radius() #px;" +
-            "left:#= d.center().x - d.radius() #px;'>" +
-                "#= d.renderChildren() #" +
-            "</kvml:oval>"
-        )
+            return styles;
+        }
     });
 
     var ArcDataNode = PathDataNode.extend({
@@ -589,9 +577,11 @@
         }
     });
 
-    var TextPathDataNode = Node.extend({
-        geometryChange: function() {
-            this.attr("v", this.renderData());
+    var TextPathDataNode = PathDataNode.extend({
+        createElement: function() {
+            PathDataNode.fn.createElement.call(this);
+
+            this.attr("textpathok", true);
         },
 
         renderData: function() {
@@ -599,20 +589,22 @@
             var center = rect.center();
             return "m " + printPoints([new g.Point(rect.topLeft().x, center.y)]) +
                    " l " + printPoints([new g.Point(rect.bottomRight().x, center.y)]);
-        },
-
-        template: renderTemplate(
-            "<kvml:path textpathok='true' v='#= d.renderData() #' />"
-        )
+        }
     });
 
     var TextPathNode = Node.extend({
+        createElement: function() {
+            this.element = createElementVML("textpath");
+
+            this.attr("on", true);
+            this.attr("fitpath", false);
+            this.setStyle();
+            this.setString();
+        },
+
         optionsChange: function(e) {
-            if (e.field === "font") {
-                this.allCss(this.mapStyle());
-                this.geometryChange();
-            } if (e.field === "content") {
-                this.attr("string", this.srcElement.content());
+            if (e.field === "content") {
+                this.setString();
             }
 
             Node.fn.optionsChange.call(this, e);
@@ -622,14 +614,9 @@
             return [["font", this.srcElement.options.font]];
         },
 
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
-        template: renderTemplate(
-            "<kvml:textpath on='true' #= d.renderStyle() # " +
-            "fitpath='false' string='#= d.srcElement.content() #' />"
-        )
+        setString: function() {
+            this.attr("string", this.srcElement.content());
+        }
     });
 
     var TextNode = PathNode.extend({
@@ -637,12 +624,15 @@
             this.path = new TextPathNode(srcElement);
 
             PathNode.fn.init.call(this, srcElement, transform);
-
-            this.append(this.path);
         },
 
         createDataNode: function(srcElement) {
             return new TextPathDataNode(srcElement);
+        },
+
+        attachTo: function(domElement) {
+            this.path.attachTo(this.element);
+            PathNode.fn.attachTo.call(this, domElement);
         },
 
         optionsChange: function(e) {
@@ -669,19 +659,32 @@
     });
 
     var ImageFillNode = TransformNode.extend({
+        createElement: function() {
+            this.element = createElementVML("fill");
+
+            this.attr("type", "frame");
+            this.attr("rotate", true);
+            this.setSrc();
+            this.setTransform();
+        },
+
         optionsChange: function(e) {
             if (e.field === "src") {
-                this.attr("src", e.value);
+                this.setSrc();
             }
 
             TransformNode.fn.optionsChange.call(this, e);
         },
 
-        geometryChange: function() {
+        _geometryChange: function() {
             this.refresh();
         },
 
-        mapTransform: function(transform) {
+        setSrc: function() {
+            this.attr("src", this.srcElement.src());
+        },
+
+        mapTransform: function() {
             var img = this.srcElement;
             var rawbbox = img.rawBBox();
             var rawcenter = rawbbox.center();
@@ -695,6 +698,7 @@
             var height = rawbbox.height() / fillSize;
             var angle = 0;
 
+            var transform = this.transform;
             if (transform) {
                 var matrix = toMatrix(transform);
                 var sx = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
@@ -731,13 +735,7 @@
                 ["position", x + "," + y],
                 ["angle", angle]
             ];
-        },
-
-        template: renderTemplate(
-            "<kvml:fill src='#= d.srcElement.src() #' " +
-            "type='frame' rotate='true' " +
-            "#= d.renderTransform() #></kvml:fill>"
-        )
+        }
     });
 
     var ImageNode = PathNode.extend({
