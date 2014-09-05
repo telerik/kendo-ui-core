@@ -14,10 +14,20 @@
   <body>
 
     <div id="surface" style="border: 1px solid black"></div>
+    <button onclick="getPDF()">Get PDF</button>
 
     <script>
 
-      kendo.PDF.defineFont({
+      function getPDF() {
+        d.pdf.toDataURL(main, function(url){
+          window.open(url);
+        });
+      }
+
+      var d = kendo.dataviz.drawing;
+      var geo = kendo.dataviz.geometry;
+
+      d.pdf.defineFont({
         "FreeMono|Bold|Italic"  : "./freefont/FreeMonoBoldOblique.ttf",
         "FreeMono|Bold"         : "./freefont/FreeMonoBold.ttf",
         "FreeMono|Italic"       : "./freefont/FreeMonoOblique.ttf",
@@ -32,19 +42,19 @@
         "FreeSerif"             : "./freefont/FreeSerif.ttf"
       });
 
-      var d = kendo.dataviz.drawing;
-      var geo = kendo.dataviz.geometry;
-
       var surface = d.Surface.create($("#surface"), {
           width: 600,
           height: 400,
-          type: "pdf",
+          type: "svg",
       });
+
+      var main = new d.Group();
+      surface.draw(main);
 
       var circleGeometry = new geo.Circle([100, 100], 60);
       var circle = new d.Circle(circleGeometry).stroke("red", 1).fill("yellow");
       circle.fill().opacity = 0.3;
-      surface.draw(circle);
+      main.append(circle);
 
       var a1 = 40, a2 = 140;
       var b1 = -40, b2 = -140;
@@ -56,7 +66,7 @@
               endAngle: a2
           });
           var arc = new d.Arc(arcGeometry).stroke("red", 0.4);
-          surface.draw(arc);
+          main.append(arc);
           var arcGeometry = new geo.Arc([100, 100], {
               radiusX: i,
               radiusY: i,
@@ -66,7 +76,7 @@
           });
           var arc = new d.Arc(arcGeometry).stroke("red", 1);
           arc.stroke().opacity = 0.5;
-          surface.draw(arc);
+          main.append(arc);
 
           a1 += 5; a2 += 5;
           b1 += 5; b2 += 5;
@@ -74,7 +84,7 @@
 
       var position = new geo.Point(100, 100);
       var text = new d.Text("DAS TEXT ☺", position);
-      surface.draw(text);
+      main.append(text);
 
       var text = new d.Text("<b>foo</b>", new geo.Point(300, 100));
       text.options.font = "italic 40px FreeMono";
@@ -82,15 +92,15 @@
       //text.stroke().dashType = "dash";
       text.fill("#23c");
       text.fill().opacity = 0.5;
-      surface.draw(text);
+      main.append(text);
 
       var text = new d.Text("Kendo UI ♕", new geo.Point(300, 60));
       text.options.font = "40px FreeSerif";
-      surface.draw(text);
+      main.append(text);
 
       var text = new d.Text("ăşţîâ ĂŞŢÎÂ", new geo.Point(300, 20));
       text.options.font = "bold 40px FreeSerif";
-      surface.draw(text);
+      main.append(text);
 
       var path = new d.Path({ closed: true })
           .moveTo(100, 300)
@@ -98,24 +108,24 @@
           .lineTo(100, 300);
       path.stroke().width = 10;
       path.stroke().lineJoin = "round";
-      surface.draw(path);
+      main.append(path);
 
       var multiPath = new d.MultiPath()
           .moveTo(100, 200).curveTo([100, 100], [250, 100], [250, 200]).close()
           .moveTo(150, 150).lineTo(200, 150).close();
       multiPath.stroke().dashType = "dash";
       multiPath.opacity = 0.3;
-      surface.draw(multiPath);
+      main.append(multiPath);
 
       var group = new d.Group();
       var pathA = new d.Path().moveTo(298, 98).lineTo(302, 102);
       var pathB = new d.Path().moveTo(298, 102).lineTo(302, 98);
       group.append(pathA, pathB);
-      surface.draw(group);
+      main.append(group);
 
       var rect = new geo.Rect([ 300, 200 ], [ 213.34, 145.67 ]);
       var image = new d.Image("./images/1.jpg", rect);
-      surface.draw(image);
+      main.append(image);
 
     </script>
 

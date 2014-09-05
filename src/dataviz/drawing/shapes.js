@@ -36,6 +36,8 @@
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
+        nodeType: "Element",
+
         init: function(options) {
             this._initOptions(options);
         },
@@ -143,6 +145,8 @@
     deepExtend(Element.fn, ObserversMixin);
 
     var Group = Element.extend({
+        nodeType: "Group",
+
         init: function(options) {
             Element.fn.init.call(this, options);
             this.children = [];
@@ -161,10 +165,11 @@
 
             for (var i = 0; i < children.length; i++) {
                 var child = children[i];
-                callback(child);
 
                 if (child.traverse) {
                     child.traverse(callback);
+                } else {
+                    callback(child);
                 }
             }
 
@@ -226,6 +231,8 @@
     });
 
     var Text = Element.extend({
+        nodeType: "Text",
+
         init: function(content, position, options) {
             Element.fn.init.call(this, options);
 
@@ -277,6 +284,8 @@
     definePointAccessors(Text.fn, ["position"]);
 
     var Circle = Element.extend({
+        nodeType: "Circle",
+
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Circle());
@@ -305,6 +314,8 @@
     defineGeometryAccessors(Circle.fn, ["geometry"]);
 
     var Arc = Element.extend({
+        nodeType: "Arc",
+
         init: function(geometry, options) {
             Element.fn.init.call(this, options);
             this.geometry(geometry || new g.Arc());
@@ -450,6 +461,8 @@
     deepExtend(Segment.fn, ObserversMixin);
 
     var Path = Element.extend({
+        nodeType: "Path",
+
         init: function(options) {
             Element.fn.init.call(this, options);
             this.segments = new GeometryElementsArray();
@@ -552,6 +565,8 @@
     };
 
     var MultiPath = Element.extend({
+        nodeType: "MultiPath",
+
         init: function(options) {
             Element.fn.init.call(this, options);
             this.paths = new GeometryElementsArray();
@@ -606,6 +621,8 @@
     deepExtend(MultiPath.fn, drawing.mixins.Paintable);
 
     var Image = Element.extend({
+        nodeType: "Image",
+
         init: function(src, rect, options) {
             Element.fn.init.call(this, options);
 

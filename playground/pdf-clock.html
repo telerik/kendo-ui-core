@@ -16,20 +16,9 @@
 
 <body>
     <div id="example">
-    <div class="box">
-        <div id="info" class="box-col"></div>
-        <div class="box-col select-col">
-            <h4>Surface type</h4>
-            <ul id="select-type">
-                <li>SVG</li>
-                <li>PDF</li>
-                <li>Canvas</li>
-                <li>VML</li>
-            </ul>
-        </div>
-    </div>
     <div id="surface-container">
-        <div id="surface" style="width: 800px; height: 300px;"></div>
+      <button onclick="getPDF()">Get PDF</button>
+      <div id="surface" style="width: 800px; height: 300px;"></div>
     </div>
     <script>
     var dataviz = kendo.dataviz;
@@ -213,7 +202,7 @@
     });
 
     function initSurface(type) {
-        return drawing.Surface.create($("#surface"), { type: "pdf" });
+        return drawing.Surface.create($("#surface"));
     }
 
     function initClocks(container) {
@@ -241,45 +230,28 @@
         return [local, officeA, officeB];
     }
 
-    init();
+    var surface = initSurface();
 
-    function init() {
-        var surface = initSurface();
+    var root = new Group();
+    var clocks = initClocks(root);
 
-        var root = new Group();
-        var clocks = initClocks(root);
+    surface.draw(root);
 
-        surface.draw(root);
-
-        function loop() {
-            for (var i = 0; i < clocks.length; i++) {
-                clocks[i].set(new Date())
-            }
-
-            //kendo.animationFrame(loop);
-            setTimeout(loop, 500);
+    function loop() {
+        for (var i = 0; i < clocks.length; i++) {
+            clocks[i].set(new Date())
         }
 
-        loop();
+        //kendo.animationFrame(loop);
+        setTimeout(loop, 500);
+    }
 
-        $("#select-type li").each(function() {
-            var type = $(this).text().toLowerCase();
-            if (!kendo.support[type]) {
-                $(this).addClass("km-state-disabled");
-            }
-        });
+    loop();
 
-        $("#select-type").kendoMobileButtonGroup({
-            select: function(e) {
-                var option = $("li", e.sender.element).eq(e.index);
-                var type = option.text().toLowerCase();
-
-                surface.destroy();
-                surface = initSurface(type);
-                surface.draw(root);
-            },
-            index: $("#select-type li:not(.km-state-disabled)").index()
-        });
+    function getPDF() {
+      drawing.pdf.toDataURL(root, function(url){
+        window.open(url);
+      });
     }
     </script>
     <style scoped>
