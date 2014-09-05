@@ -197,6 +197,22 @@ test("toDataUrl stores bold italic style as 'i' element", function() {
     equal(dom.find("font > i").length, 1);
 });
 
+test("toDataUrl stores underline style as 'u' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { underline: true }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("font > u").length, 1);
+});
+
 test("toDataUrl stores cell style as 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {

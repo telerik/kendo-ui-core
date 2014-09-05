@@ -164,6 +164,9 @@ var STYLES = kendo.template(
          '# if (font.italic) { #' +
             '<i/>' +
          '# } #' +
+         '# if (font.underline) { #' +
+            '<u/>' +
+         '# } #' +
          '<sz val="11" />' +
          '# if (font.color) { #' +
          '<color rgb="${font.color}" />' +
@@ -349,7 +352,7 @@ var Workbook = kendo.Class.extend({
                 style.color = convertColor(style.color);
             }
 
-            if (style.bold || style.italic || style.color) {
+            if (style.underline || style.bold || style.italic || style.color) {
                 return style;
             }
         });
@@ -367,7 +370,7 @@ var Workbook = kendo.Class.extend({
            styles: $.map(styles, function(style) {
               var result = {};
 
-              if (style.bold || style.italic || style.color) {
+              if (style.underline || style.bold || style.italic || style.color) {
                   result.fontId = $.inArray(style, fonts) + 1;
               }
 
