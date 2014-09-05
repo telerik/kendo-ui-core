@@ -169,7 +169,7 @@ test("toDataUrl stores bold style as 'b' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { bold: true }, value: "foo" } ]
+               [ { bold: true, value: "foo" } ]
            ]
         } ]
     });
@@ -185,7 +185,7 @@ test("toDataUrl stores bold italic style as 'i' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { italic: true }, value: "foo" } ]
+               [ { italic: true, value: "foo" } ]
            ]
         } ]
     });
@@ -201,7 +201,7 @@ test("toDataUrl stores underline style as 'u' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { underline: true }, value: "foo" } ]
+               [ { underline: true, value: "foo" } ]
            ]
         } ]
     });
@@ -217,7 +217,7 @@ test("toDataUrl stores the fontName option as the 'val' attribute of the 'name' 
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { fontName: "Arial" }, value: "foo" } ]
+               [ { fontName: "Arial", value: "foo" } ]
            ]
         } ]
     });
@@ -233,7 +233,7 @@ test("toDataUrl stores the fontSize option as the 'val' attribute of the 'sz' el
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { fontSize: 15 }, value: "foo" } ]
+               [ { fontSize: 15, value: "foo" } ]
            ]
         } ]
     });
@@ -249,7 +249,7 @@ test("toDataUrl stores number formats", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { format: "foo" }, value: "foo" } ]
+               [ { format: "foo", value: "foo" } ]
            ]
         } ]
     });
@@ -265,7 +265,7 @@ test("toDataUrl stores number format code", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { format: "foo" }, value: "foo" } ]
+               [ { format: "foo", value: "foo" } ]
            ]
         } ]
     });
@@ -281,7 +281,7 @@ test("toDataUrl stores number format id", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { format: "foo" }, value: "foo" } ]
+               [ { format: "foo", value: "foo" } ]
            ]
         } ]
     });
@@ -297,7 +297,7 @@ test("toDataUrl stores cell style as 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { bold: true }, value: "foo" } ]
+               [ { bold: true, value: "foo" } ]
            ]
         } ]
     });
@@ -329,7 +329,7 @@ test("toDataUrl stores cell font index as 'fontId' attribute of the 'xf' element
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { bold: true }, value: "foo" } ]
+               [ { bold: true, value: "foo" } ]
            ]
         } ]
     });
@@ -345,7 +345,7 @@ test("toDataUrl sets 'applyFont' attribute to '1' if bold is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { bold: true }, value: "foo" } ]
+               [ { bold: true, value: "foo" } ]
            ]
         } ]
     });
@@ -362,8 +362,8 @@ test("toDataUrl reuses fonts and styles", function() {
         sheets: [ {
            data: [
                [
-                   { style: { bold: true }, value: "foo" },
-                   { style: { bold: true }, value: "bar" }
+                   { bold: true, value: "foo" },
+                   { bold: true, value: "bar" }
                ]
            ]
         } ]
@@ -381,7 +381,7 @@ test("toDataUrl sets the rgb attribute of the 'color' element when color style i
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { color: "#ff0000" }, value: "foo" } ]
+               [ { color: "#ff0000", value: "foo" } ]
            ]
         } ]
     });
@@ -397,7 +397,7 @@ test("toDataUrl and short color", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { color: "#f00" }, value: "foo" } ]
+               [ { color: "#f00", value: "foo" } ]
            ]
         } ]
     });
@@ -413,7 +413,7 @@ test("toDataUrl and rgba color", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { color: "#aabbccddee" }, value: "foo" } ]
+               [ { color: "#aabbccddee", value: "foo" } ]
            ]
         } ]
     });
@@ -445,7 +445,7 @@ test("toDataUrl creates a 'fill' element if the background style option is set",
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { background: "red" }, value: "foo" } ]
+               [ { background: "red", value: "foo" } ]
            ]
         } ]
     });
@@ -462,7 +462,7 @@ test("toDataUrl stores cell fill index as 'fillId' attribute of the 'xf' element
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { background: "red" }, value: "foo" } ]
+               [ { background: "red", value: "foo" } ]
            ]
         } ]
     });
@@ -478,7 +478,7 @@ test("toDataUrl sets 'applyFill' attribute to '1' if background is set", functio
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { background: "a0b0c0" }, value: "foo" } ]
+               [ { background: "a0b0c0", value: "foo" } ]
            ]
         } ]
     });
@@ -494,7 +494,7 @@ test("toDataUrl sets the rgb attribute of the 'fgColor' element when background 
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
            data: [
-               [ { style: { background: "#ff0000" }, value: "foo" } ]
+               [ { background: "#ff0000", value: "foo" } ]
            ]
         } ]
     });

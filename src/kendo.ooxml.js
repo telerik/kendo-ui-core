@@ -262,11 +262,11 @@ var Worksheet = kendo.Class.extend({
         return value;
     },
     _lookupStyle: function(style) {
-        if (!style) {
+        var json = kendo.stringify(style);
+
+        if (json == "{}") {
             return 0;
         }
-
-        var json = kendo.stringify(style);
 
         var index = $.inArray(json, this._styles);
 
@@ -280,7 +280,17 @@ var Worksheet = kendo.Class.extend({
     _cell: function(data) {
         var value = data.value;
 
-        var style = this._lookupStyle(data.style);
+        var style = this._lookupStyle({
+            bold: data.bold,
+            color: data.color,
+            background: data.background,
+            italic: data.italic,
+            underline: data.underline,
+            fontName: data.fontName,
+            fontSize: data.fontSize,
+            format: data.format
+        });
+
         var type = "s";
 
         if (typeof value === "string") {
@@ -359,7 +369,6 @@ var Workbook = kendo.Class.extend({
         rels.file(".rels", RELS);
 
         var xl = zip.folder("xl");
-
 
         var xlRels = xl.folder("_rels");
         xlRels.file("workbook.xml.rels", WORKBOOK_RELS({ count: sheetCount }));

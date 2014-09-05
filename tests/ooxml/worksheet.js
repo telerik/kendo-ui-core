@@ -162,7 +162,7 @@ test("toXML renders cells as children elements", function() {
 });
 
 test("toXML adds styles", function() {
-    var worksheet = Worksheet([[ { style: { bold: true }, value: "foo" } ]]);
+    var worksheet = Worksheet([[ { bold: true, value: "foo" } ]]);
 
     worksheet.toXML();
 
@@ -170,7 +170,7 @@ test("toXML adds styles", function() {
 });
 
 test("toXML sets style index plus one as 's' attribute", function() {
-    var worksheet = Worksheet([[ { style: { bold: true }, value: "foo" } ]]);
+    var worksheet = Worksheet([[ { bold: true, value: "foo" } ]]);
 
     var dom = $(worksheet.toXML());
     equal(dom.find("c").attr("s"), 1);
