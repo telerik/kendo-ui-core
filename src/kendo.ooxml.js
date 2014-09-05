@@ -173,9 +173,13 @@ var STYLES = kendo.template(
          '# } else { #' +
          '<color theme="1" />' +
          '# } #' +
+         '# if (font.fontName) { #' +
+         '<name val="${font.fontName}" />' +
+         '# } else { #' +
          '<name val="Calibri" />' +
-         '<family val="2" />' +
          '<scheme val="minor" />' +
+         '# } #' +
+         '<family val="2" />' +
       '</font>' +
    '# } #' +
    '</fonts>' +
@@ -347,12 +351,16 @@ var Workbook = kendo.Class.extend({
 
         var styles = $.map(this._styles, $.parseJSON);
 
+        var hasFont = function(style) {
+            return style.underline || style.bold || style.italic || style.color || style.fontName;
+        }
+
         var fonts = $.map(styles, function(style) {
             if (style.color) {
                 style.color = convertColor(style.color);
             }
 
-            if (style.underline || style.bold || style.italic || style.color) {
+            if (hasFont(style)) {
                 return style;
             }
         });
@@ -370,7 +378,7 @@ var Workbook = kendo.Class.extend({
            styles: $.map(styles, function(style) {
               var result = {};
 
-              if (style.underline || style.bold || style.italic || style.color) {
+              if (hasFont(style)) {
                   result.fontId = $.inArray(style, fonts) + 1;
               }
 

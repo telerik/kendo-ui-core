@@ -213,6 +213,22 @@ test("toDataUrl stores underline style as 'u' element", function() {
     equal(dom.find("font > u").length, 1);
 });
 
+test("toDataUrl stores the fontName option as the 'val' attribute of the 'name' element", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { style: { fontName: "Arial" }, value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("font:last name").attr("val"), "Arial");
+});
+
 test("toDataUrl stores cell style as 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
@@ -425,6 +441,5 @@ test("toDataUrl sets the rgb attribute of the 'fgColor' element when background 
 
     equal(dom.find("fills > fill:last > patternFill > fgColor").attr("rgb"), "FFFF0000");
 });
-
 
 }());
