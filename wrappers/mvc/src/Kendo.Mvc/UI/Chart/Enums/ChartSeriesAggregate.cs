@@ -21,6 +21,11 @@ namespace Kendo.Mvc.UI
         Sum,
 
         /// <summary>
+        /// The sum of all values for the date period. If there are not data for the current period of time the aggregate will return 'null'(instead of 'zero' for the sum aggregate).
+        /// </summary>
+        SumOrNull,
+
+        /// <summary>
         /// The number of values for the date period
         /// </summary>
         Count,
