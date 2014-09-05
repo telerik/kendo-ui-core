@@ -97,7 +97,7 @@ var __meta__ = {
         _compileTemplates: function(templates) {
             var that = this;
             var kendoTemplate = kendo.template;
-            
+
             that._compiled = {};
 
             $.each(templates, function(key, value) {
@@ -199,7 +199,7 @@ var __meta__ = {
                 y = options.position.top,
                 allowHideAfter = options.allowHideAfter,
                 popup, openPopup, attachClick, closeIcon;
-            
+
             openPopup = $("." + that._guid).last();
 
             popup = new kendo.ui.Popup(wrapper, {
@@ -211,7 +211,7 @@ var __meta__ = {
                 collision: "",
                 isRtl: that._isRtl,
                 close: function(e) {
-                    that.trigger(HIDE, {element: this.element});
+                    that._triggerHide(this.element);
                 },
                 deactivate: function(e) {
                     e.sender.element.off(NS);
@@ -319,7 +319,14 @@ var __meta__ = {
                 wrapper.off(NS).find(KICLOSE).off(NS);
                 wrapper.remove();
             }}));
-            this.trigger(HIDE, {element: wrapper});
+            this._triggerHide(wrapper);
+        },
+
+        _triggerHide: function(element) {
+            this.trigger(HIDE, { element: element });
+            this.angular("cleanup", function(){
+                return { elements: element };
+            });
         },
 
         show: function(content, type) {
@@ -333,7 +340,7 @@ var __meta__ = {
             }
 
             if (content !== null && content !== undefined && content !== "") {
-                
+
                 if (kendo.isFunction(content)) {
                     content = content();
                 }
@@ -352,7 +359,14 @@ var __meta__ = {
                     .attr("data-role", "alert")
                     .css({width: options.width, height: options.height})
                     .append(that._getCompiled(type)(args));
-                
+
+                that.angular("compile", function(){
+                    return {
+                        elements: wrapper,
+                        data: [{ dataItem: args }]
+                    };
+                });
+
                 if ($(options.appendTo)[0]) {
                     that._showStatic(wrapper, options);
                 } else {
@@ -404,7 +418,7 @@ var __meta__ = {
         getNotifications: function() {
             var that = this,
                 guidElements = $("." + that._guid);
-                
+
             if (that.options.appendTo) {
                 return guidElements;
             } else {
