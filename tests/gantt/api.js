@@ -25,6 +25,7 @@
         var dependencies = setupDependencyDataSource(options.dependencies || []);
 
         gantt = new Gantt(element, {
+            editable: { confirmation: false },
             columns: options.columns,
             dataSource: dataSource,
             dependencies: dependencies

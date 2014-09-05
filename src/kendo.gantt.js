@@ -46,7 +46,7 @@ var __meta__ = {
     var DEPENDENCY_DELETE_CONFIRM = "Are you sure you want to delete this dependency?";
     var COMMAND_BUTTON_TEMPLATE = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>';
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
-            '#if (editable == true) {#'+
+            '#if (editable) {#'+
                 '<div class="#=styles.actions#">' +
                     '<button class="#=styles.button#" data-action="#=action.data#"><span class="#=styles.iconPlus#"></span>#=action.title#</button>' +
                 '</div>' +
@@ -1163,7 +1163,7 @@ var __meta__ = {
         },
 
         _footer: function() {
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -1247,7 +1247,7 @@ var __meta__ = {
                 that._createTask(task, orderId);
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -1681,14 +1681,21 @@ var __meta__ = {
         },
 
         _confirm: function(callback, options) {
-            var messages = this.options.messages;
+            var editable = this.options.editable;
+            var messages;
+            var buttons;
 
-            var buttons = [
-                { name: "destroy", text: messages.destroy, click: function() { callback(); } },
-                { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
-            ];
+            if (editable === true || editable.confirmation !== false) {
+                messages = this.options.messages;
+                buttons = [
+                    { name: "destroy", text: messages.destroy, click: function() { callback(); } },
+                    { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
+                ];
 
-            this.showDialog(extend(true, {}, options, { buttons: buttons }));
+                this.showDialog(extend(true, {}, options, { buttons: buttons }));
+            } else {
+                callback();
+            }
         },
 
         showDialog: function(options) {

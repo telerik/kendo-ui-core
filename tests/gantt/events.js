@@ -9,7 +9,11 @@
     module("Gantt events", {
         setup: function() {
             element = $("<div/>");
-            gantt = new Gantt(element);
+            gantt = new Gantt(element, {
+                editable: {
+                    confirmation: false
+                }
+            });
         },
         teardown: function() {
             gantt.destroy();

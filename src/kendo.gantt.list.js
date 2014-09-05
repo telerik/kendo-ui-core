@@ -18,8 +18,6 @@ var __meta__ = {
     var kendoTextElement = kendoDom.text;
     var browser = kendo.support.browser;
     var mobileOS = kendo.support.mobileOS;
-    var isIE = browser.msie;
-    var oldIE = isIE && browser.version < 9;
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var extend = $.extend;
@@ -479,7 +477,7 @@ var __meta__ = {
                 }
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -696,7 +694,7 @@ var __meta__ = {
                             .removeClass(listStyles.dropPositions);
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 

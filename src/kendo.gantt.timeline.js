@@ -19,8 +19,6 @@ var __meta__ = {
     var isPlainObject = $.isPlainObject;
     var extend = $.extend;
     var browser = kendo.support.browser;
-    var isIE = browser.msie;
-    var oldIE = isIE && browser.version < 9;
     var keys = kendo.keys;
     var Query = kendo.data.Query;
     var NS = ".kendoGanttTimeline";
@@ -1652,7 +1650,7 @@ var __meta__ = {
                 dragInProgress = false;
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -1728,7 +1726,7 @@ var __meta__ = {
                 dragInProgress = false;
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -1829,7 +1827,7 @@ var __meta__ = {
                     .css("left", width);
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -1924,7 +1922,7 @@ var __meta__ = {
                 }
             };
 
-            if (this.options.editable !== true) {
+            if (!this.options.editable) {
                 return;
             }
 
@@ -2085,7 +2083,7 @@ var __meta__ = {
             var that = this;
             var styles = GanttTimeline.styles;
 
-            if (this.options.editable === true) {
+            if (this.options.editable) {
                 this._tabindex();
 
                 this.wrapper
