@@ -935,8 +935,13 @@ div.k-filebrowser-dropzone em
 
 .k-state-disabled
 {
-    filter:alpha(opacity=70);
     opacity:.7;
+}
+
+.k-ie7 .k-state-disabled,
+.k-ie8 .k-state-disabled
+{
+    filter:alpha(opacity=70);
 }
 
 .k-tile-empty.k-state-selected,
