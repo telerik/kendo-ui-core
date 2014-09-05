@@ -112,7 +112,7 @@ var WORKSHEET = kendo.template(
        '<row r="r${ri + 1}">' +
        '# for (var ci = 0; ci < row.data.length; ci++) { #' +
            '# var cell = row.data[ci];#' +
-           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" # if (cell.style) { # s="${cell.style}" # } # t="${cell.type}">' +
+           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" # if (cell.style) { # s="${cell.style}" # } # # if (cell.type) { # t="${cell.type}"# } #>' +
                '<v>${cell.value}</v>' +
            '</c>' +
        '# } #' +
@@ -271,11 +271,11 @@ var Worksheet = kendo.Class.extend({
         var index = $.inArray(json, this._styles);
 
         if (index < 0) {
-            // There is one default style so we skip it
-            index = this._styles.push(json);
+            index = this._styles.push(json) - 1;
         }
 
-        return index;
+        // There is one default style
+        return index + 1;
     },
     _cell: function(data) {
         var value = data.value;
@@ -291,16 +291,25 @@ var Worksheet = kendo.Class.extend({
             format: data.format
         };
 
-        var type = "s";
+        var type = typeof value;
 
-        if (typeof value === "string") {
+        if (type === "string") {
             value = this._lookupString(value);
+            type = "s";
+        } else if (type === "number") {
+            type = "n";
+        } else if (type === "boolean") {
+            type = "b";
+            value = +value;
         } else if (value.toISOString) {
             type = "d";
             value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
             if (!style.format) {
                 style.format = "mm-dd-yy";
             }
+        } else {
+            type = null;
+            value = "";
         }
 
         style = this._lookupStyle(style);

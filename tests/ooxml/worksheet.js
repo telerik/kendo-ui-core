@@ -49,7 +49,7 @@ test("toXML sets the t attribute to 's' when the value is a string", function() 
     equal(dom.find("c").attr("t"), "s");
 });
 
-test("toXML sets the t attribute to 'd' when the value is a date", function() {
+test("toXML sets the 't' attribute to 'd' when the value is a date", function() {
     var worksheet = Worksheet([
         [{ value: new Date() }]
     ]);
@@ -59,7 +59,77 @@ test("toXML sets the t attribute to 'd' when the value is a date", function() {
     equal(dom.find("c").attr("t"), "d");
 });
 
-test("toXML sets the 's' attrubte of dates", function() {
+test("toXML sets the 't' attribute to 'n' when the value is a number", function() {
+    var worksheet = Worksheet([
+        [{ value: 1 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("t"), "n");
+});
+
+test("toXML stores numbers", function() {
+    var worksheet = Worksheet([
+        [{ value: 1 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c > v").text(), "1");
+});
+
+test("toXML sets the 't' attribute to 'b' when the value is a boolean", function() {
+    var worksheet = Worksheet([
+        [{ value: true }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("t"), "b");
+});
+
+test("toXML doesn't set the 't' attribute when the value isn't primitive", function() {
+    var worksheet = Worksheet([
+        [{ value: {} }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("t"), null);
+});
+
+test("toXML doesn't store value that isn't primitive", function() {
+    var worksheet = Worksheet([
+        [{ value: {} }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c>v").text(), "");
+});
+
+test("toXML stores 'true' as '1'", function() {
+    var worksheet = Worksheet([
+        [{ value: true }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").text(), "1");
+});
+
+test("toXML stores 'false' as '0'", function() {
+    var worksheet = Worksheet([
+        [{ value: false }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").text(), "0");
+});
+
+test("toXML sets the 's' attribute of dates", function() {
     var worksheet = Worksheet([
         [{ value: new Date() }]
     ]);
@@ -184,6 +254,17 @@ test("toXML sets style index plus one as 's' attribute", function() {
 
     var dom = $(worksheet.toXML());
     equal(dom.find("c").attr("s"), 1);
+});
+
+test("toXML reuses styles", function() {
+    var worksheet = Worksheet([
+        [ { italic: true, value: "foo" } ],
+        [ { bold: true, value: "foo" } ],
+        [ { bold: true, value: "foo" } ]
+    ]);
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("row:last c:last").attr("s"), 2);
 });
 
 test("toXML does not set the 's' attribute if style is not set", function() {
