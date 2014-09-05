@@ -83,6 +83,12 @@
 
     // VML Node ================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+
+            this.createElement();
+        },
+
         load: function(elements, transform) {
             var node = this,
                 element = node.element,
@@ -118,21 +124,11 @@
                 }
 
                 node.append(childNode);
-
-                if (element) {
-                    childNode.attachTo(element);
-                }
+                childNode.attachTo(element);
             }
         },
 
         attachTo: function(domElement) {
-            this.createElement();
-
-            var nodes = this.childNodes;
-            for (var i = 0; i < nodes.length; i++) {
-                nodes[i].attachTo(this.element);
-            }
-
             domElement.appendChild(this.element);
         },
 
@@ -207,12 +203,12 @@
     var GroupNode = Node.extend({
         createElement: function() {
             this.element = doc.createElement("div");
-
-            this.css("display", "none");
             this.setStyle();
         },
 
         attachTo: function(domElement) {
+            this.css("display", "none");
+
             Node.fn.attachTo.call(this, domElement);
 
             if (this.srcElement.options.visible !== false) {
@@ -272,7 +268,7 @@
             if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
-                attrs.push(["weight", stroke.width + "px"]);
+                attrs.push(["weight", stroke.width || 1 + "px"]);
 
                 if (defined(stroke.opacity)) {
                     attrs.push(["opacity", stroke.opacity]);
@@ -404,6 +400,14 @@
             this.append(this.transform);
         },
 
+        attachTo: function(domElement) {
+            this.fill.attachTo(this.element);
+            this.stroke.attachTo(this.element);
+            this.transform.attachTo(this.element);
+
+            Node.fn.attachTo.call(this, domElement);
+        },
+
         createFillNode: function(srcElement) {
             return new FillNode(srcElement);
         },
@@ -485,6 +489,11 @@
             ShapeNode.fn.init.call(this, srcElement, transform);
 
             this.append(this.pathData);
+        },
+
+        attachTo: function(domElement) {
+            this.pathData.attachTo(this.element);
+            ShapeNode.fn.attachTo.call(this, domElement);
         },
 
         createDataNode: function(srcElement) {
