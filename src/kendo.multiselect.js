@@ -148,6 +148,7 @@ var __meta__ = {
             CLOSE,
             CHANGE,
             SELECT,
+            "filtering",
             "dataBinding",
             "dataBound"
         ],

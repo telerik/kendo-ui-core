@@ -153,4 +153,86 @@
         //simulate change
         multiselect._change();
     });
+
+    asyncTest("MultiSelect triggers filtering event on data source filter", 3, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                start();
+
+                var filter = e.filter;
+
+                equal(filter.field, "");
+                equal(filter.operator, "contains");
+                equal(filter.value, "baz");
+            }
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+    });
+
+    asyncTest("modifying filter expression in filtering event changes datasource result", 2, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                e.filter.value = "foo";
+            }
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+
+        setTimeout(function() {
+            start();
+            var data = multiselect.dataSource.view();
+
+            equal(data.length, 1);
+            equal(data[0], "foo");
+        });
+    });
+
+    asyncTest("MultiSelect filtering event can be prevented", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains",
+            filtering: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        multiselect.dataSource.bind("change", function() {
+            ok(false);
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+
+        setTimeout(function() {
+            start();
+            ok(true);
+        });
+    });
+
+    asyncTest("MultiSelect triggers filtering when filter is cleared", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        });
+
+        multiselect.dataSource.one("change", function() {
+            multiselect.bind("filtering", function(e) {
+                start();
+                equal(e.filter, undefined);
+            });
+
+            multiselect.ul.children("li").first().click();
+            multiselect.open();
+        });
+
+        multiselect.input.focus().val("bar").keydown();
+    });
 })();

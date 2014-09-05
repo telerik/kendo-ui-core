@@ -252,4 +252,53 @@ test("select event is not raised when custom value is entered", 0, function() {
     autocomplete._focus(null);
 });
 
+test("AutoComplete triggers filtering event on data source filter", 3, function() {
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            var filter = e.filter;
+
+            equal(filter.field, "");
+            equal(filter.operator, "contains");
+            equal(filter.value, "baz");
+        }
+    }).data("kendoAutoComplete");
+
+    autocomplete.search("baz");
+});
+
+test("modifying filter expression in filtering event changes datasource result", 2, function() {
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            e.filter.value = "foo";
+        }
+    }).data("kendoAutoComplete");
+
+    autocomplete.search("baz");
+
+    var data = autocomplete.dataSource.view();
+
+    equal(data.length, 1);
+    equal(data[0], "foo");
+});
+
+test("AutoComplete filtering event can be prevented", 0, function() {
+    var autocomplete = input.kendoAutoComplete({
+        dataSource: ["foo", "bar"],
+        filter: "contains",
+        filtering: function(e) {
+            e.preventDefault();
+        }
+    }).data("kendoAutoComplete");
+
+    autocomplete.dataSource.bind("change", function() {
+        ok(false);
+    });
+
+    autocomplete.search("baz");
+});
+
 }());

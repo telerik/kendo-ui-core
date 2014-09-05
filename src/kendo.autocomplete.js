@@ -166,6 +166,7 @@ var __meta__ = {
             "close",
             "change",
             "select",
+            "filtering",
             "dataBinding",
             "dataBound"
         ],
