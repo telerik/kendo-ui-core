@@ -465,9 +465,15 @@
                 .on("mousedown" + NS, function(e) {
                     editor._selectionStarted = true;
 
+                    // handle middle-click and ctrl-click on links
+                    if (browser.gecko) {
+                        return;
+                    }
+
                     var target = $(e.target);
 
-                    if (!browser.gecko && e.which == 2 && target.is("a[href]")) {
+                    if ((e.which == 2 || (e.which == 1 && e.ctrlKey)) &&
+                        target.is("a[href]")) {
                         window.open(target.attr("href"), "_new");
                     }
                 })
