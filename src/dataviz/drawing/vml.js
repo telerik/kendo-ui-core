@@ -45,7 +45,7 @@
                 doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
 
                 if (!doc.namespaces.kvml) {
-                    doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+                    doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
                 }
             }
 
@@ -247,7 +247,6 @@
     var StrokeNode = Node.extend({
         createElement: function() {
             this.element = createElementVML("stroke");
-            this.setStyle();
             this.setStroke();
         },
 
@@ -300,7 +299,6 @@
     var FillNode = Node.extend({
         createElement: function() {
             this.element = createElementVML("fill");
-            this.setStyle();
             this.setFill();
         },
 
@@ -418,8 +416,8 @@
 
         createElement: function() {
             this.element = createElementVML("shape");
-            this.setStyle();
             this.setCoordsize();
+            this.setStyle();
         },
 
         optionsChange: function(e) {
