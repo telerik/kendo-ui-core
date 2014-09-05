@@ -3335,15 +3335,17 @@ var __meta__ = {
 
                 for (var i = 0; i < categoryPts.length; i++) {
                     var other = categoryPts[i];
-                    var stack = point.series.stack;
-                    var otherStack = other.series.stack;
+                    if (other) {
+                        var stack = point.series.stack;
+                        var otherStack = other.series.stack;
 
-                    if ((stack && otherStack) && stack.group !== otherStack.group) {
-                        continue;
-                    }
+                        if ((stack && otherStack) && stack.group !== otherStack.group) {
+                            continue;
+                        }
 
-                    if (isNumber(other.value)) {
-                        categorySum += math.abs(other.value);
+                        if (isNumber(other.value)) {
+                            categorySum += math.abs(other.value);
+                        }
                     }
                 }
 

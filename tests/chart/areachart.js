@@ -289,12 +289,11 @@
         module("Area Chart / Stack / Missing values", {
             setup: function() {
                 sparseSeries.line = { width: 0 };
-                setupAreaChart(plotArea, {
-                    series: [ sparseSeries, sparseSeries ],
-                    isStacked: true
-                });
             },
-            teardown: destroyChart
+            teardown: function() {
+                sparseSeries.line = null;
+                destroyChart();
+            }
         });
 
         test("line is drawn between existing points when interpolating", function() {
@@ -317,6 +316,24 @@
                     sparseSeries
                 ],
                 isStacked: true
+            });
+
+            equal(areaChart.points.length, 8);
+        });
+
+        // ------------------------------------------------------------
+        module("Area Chart / Stack 100% / Missing values", {
+            teardown: destroyChart
+        });
+
+        test("renders stacked sparse series with interpolation", function() {
+            setupAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "interpolate" }, sparseSeries),
+                    sparseSeries
+                ],
+                isStacked: true,
+                isStacked100: true
             });
 
             equal(areaChart.points.length, 8);
