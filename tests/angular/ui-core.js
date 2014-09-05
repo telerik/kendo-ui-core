@@ -393,4 +393,26 @@ withAngularTests("Angular (UI Core)", function(runTest){
     //     });
     // });
 
+    runTest("Compile Notification template", function(dom, $scope){
+        expect(1);
+        $scope.options = {
+            animation: false,
+            templates: [
+                { type: "info", template: "#=message#|{{test}}|{{dataItem.message}}" }
+            ],
+            show: function(ev) {
+                equal(ev.element.html(), "foo|test|foo");
+                $scope.notf.hide();
+                start();
+            }
+        };
+        $scope.test = "test";
+        $("<div kendo-notification='notf' k-options='options'></div>").appendTo(dom);
+        $scope.whenRendered(function(){
+            $scope.notf.show({
+                message: "foo"
+            }, "info");
+        });
+    });
+
 });
