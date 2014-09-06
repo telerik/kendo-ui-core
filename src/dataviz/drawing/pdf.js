@@ -1,7 +1,6 @@
 (function(f, define){
     define([
         "./shapes",
-        "./svg",
         "../../kendo.pdf",
         "../../kendo.colorpicker", // for kendo.parseColor
         "../../kendo.dataviz.core"
