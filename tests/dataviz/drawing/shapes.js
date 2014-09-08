@@ -1457,4 +1457,320 @@
         });
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var ElementsArray = d.ElementsArray,
+            array, observer, element1, element2, element3;
+
+        function Observer() {
+            this.calls = 0;
+        }
+
+        Observer.prototype = {
+            geometryChange: function() {
+                this.calls++;
+            }
+        };
+
+        function createElementsArray(elements) {
+          observer = new Observer();
+          array = new ElementsArray(observer, elements);
+        }
+
+        function initElements() {
+            element1 = {
+                id: "foo"
+            };
+            element2 = {
+                id: "bar"
+            };
+            element3 = {
+                id: "baz"
+            };
+        }
+
+        function setup() {
+            createElementsArray();
+            initElements();
+        }
+
+        module("ElementsArray", {
+            setup: setup
+        });
+
+        test("sets observer", function() {
+            equal(array.observer, observer);
+        });
+
+        test("sets initial length", function() {
+            ok(array.length === 0);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / elements", {
+            setup: setup
+        });
+
+        test("sets current elements", function() {
+            array.elements([element1]);
+            equal(array.length, 1);
+            equal(array[0].id, "foo");
+        });
+
+        test("sets elements observer", function() {
+            array.elements([element1]);
+            equal(element1.observer, observer);
+        });
+
+        test("clears previous elements", function() {
+            array.elements([element1, element2]);
+            array.elements([element3]);
+            equal(array.length, 1);
+            equal(array[0].id, "baz");
+            equal(array[1], undefined);
+        });
+
+        test("clears previous elements observer", function() {
+            array.elements([element1, element2]);
+            array.elements([element3]);
+            equal(element1.observer, undefined);
+            equal(element2.observer, undefined);
+        });
+
+        test("triggers geometryChange", function() {
+            array.elements([element1]);
+            equal(observer.calls, 1);
+        });
+
+        test("returns current elements", function() {
+            array.elements([element1]);
+            var elements = array.elements();
+            equal(elements.length, 1);
+            equal(elements[0].id, "foo");
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / push", {
+            setup: setup
+        });
+
+        test("adds element", function() {
+            array.push(element1);
+            equal(array.length, 1);
+            equal(array[0].id, "foo");
+        });
+
+        test("sets new element observer", function() {
+            array.push(element1);
+            equal(array.length, 1);
+            equal(array[0].observer, observer);
+        });
+
+        test("adds multiple elements", function() {
+            array.push(element1, element2);
+            equal(array.length, 2);
+            equal(array[0].id, "foo");
+            equal(array[1].id, "bar");
+        });
+
+        test("sets elements observer", function() {
+            array.push(element1, element2);
+            equal(array[0].observer, observer);
+            equal(array[1].observer, observer);
+        });
+
+        test("triggers geometryChange", function() {
+            array.push(element1);
+            equal(observer.calls, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / pop", {
+            setup: function() {
+                initElements();
+                createElementsArray([element1, element2]);
+            }
+        });
+
+        test("removes last element", function() {
+            array.pop();
+            equal(array.length, 1);
+            equal(array[0].id, "foo");
+            equal(array[1], undefined);
+        });
+
+        test("returns removed element", function() {
+            var element = array.pop();
+            equal(element.id, "bar");
+        });
+
+        test("clears element observer", function() {
+            array.pop();
+            equal(element2.observer, undefined);
+        });
+
+        test("triggers geometryChange", function() {
+            array.pop();
+            equal(observer.calls, 1);
+        });
+
+        test("does not trigger geometryChange if there are no elements", function() {
+            observer = new Observer();
+            array = new ElementsArray(observer);
+            array.pop();
+            equal(observer.calls, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / splice", {
+            setup: function() {
+                initElements();
+                createElementsArray([element1, element2, element3]);
+            }
+        });
+
+        test("removes elements", function() {
+            array.splice(1, 2);
+            equal(array.length, 1);
+            equal(array[0].id, "foo");
+            equal(array[1], undefined);
+            equal(array[2], undefined);
+        });
+
+        test("clears removed elements observer", function() {
+            array.splice(1, 2);
+            equal(element2.observer, undefined);
+            equal(element3.observer, undefined);
+        });
+
+        test("replaces elements", function() {
+            var newElement = {
+                id: "new"
+            };
+            array.splice(1, 1, newElement);
+            equal(array.length, 3);
+            equal(array[1].id, "new");
+        });
+
+        test("clears replaced elements observer", function() {
+            var newElement = {
+                id: "new"
+            };
+            array.splice(1, 1, newElement);
+            equal(element2.observer, undefined);
+        });
+
+        test("sets replace elements observer", function() {
+            var newElement = {
+                id: "new"
+            };
+            array.splice(1, 1, newElement);
+            equal(newElement.observer, observer);
+        });
+
+        test("inserts elements", function() {
+            var newElement = {
+                id: "new"
+            };
+            array.splice(1, 0, newElement);
+            equal(array.length, 4);
+            equal(array[1].id, "new");
+        });
+
+        test("sets inserted elements observer", function() {
+            var newElement = {
+                id: "new"
+            };
+            array.splice(1, 0, newElement);
+            equal(newElement.observer, observer);
+        });
+
+        test("triggers geometryChange", function() {
+            array.splice(1, 2);
+            equal(observer.calls, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / shift", {
+            setup: function() {
+                initElements();
+                createElementsArray([element1]);
+            }
+        });
+
+        test("removes first element", function() {
+            array.shift();
+            equal(array.length, 0);
+        });
+
+        test("returns removed element", function() {
+            var result = array.shift();
+            equal(result, element1);
+        });
+
+        test("clears removed element observer", function() {
+            array.shift();
+            equal(element1.observer, undefined);
+        });
+
+        test("triggers geometryChange", function() {
+            array.shift();
+            equal(observer.calls, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / unshift", {
+            setup: function() {
+                initElements();
+                createElementsArray([element1]);
+            }
+        });
+
+        test("adds element to the start", function() {
+            array.unshift(element2);
+            equal(array.length, 2);
+            equal(array[0].id, "bar");
+        });
+
+        test("sets new element observer", function() {
+            array.unshift(element2);
+            equal(element2.observer, observer);
+        });
+
+        test("adds multiple elements to the start", function() {
+            array.unshift(element2, element3);
+            equal(array.length, 3);
+            equal(array[0].id, "bar");
+            equal(array[1].id, "baz");
+        });
+
+        test("sets new elements observer", function() {
+            array.unshift(element2, element3);
+            equal(element2.observer, observer);
+            equal(element3.observer, observer);
+        });
+
+        test("triggers geometryChange", function() {
+            array.unshift(element2);
+            equal(observer.calls, 1);
+        });
+
+        // ------------------------------------------------------------
+        module("ElementsArray / indexOf", {
+            setup: function() {
+                initElements();
+                createElementsArray([element1, element2, element3]);
+            }
+        });
+
+        test("returns element index", function() {
+            equal(array.indexOf(element2), 1);
+        });
+
+        test("returns -1 for not existing element", function() {
+            equal(array.indexOf({}), -1);
+        });
+
+    })();
+
 })();
