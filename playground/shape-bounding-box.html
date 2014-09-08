@@ -76,6 +76,7 @@
                 drawing = dataviz.drawing,
                 Path = drawing.Path,
                 Group = drawing.Group,
+                Rect = geometry.Rect,
                 MultiPath = drawing.MultiPath,
                 Segment = drawing.Segment,
                 Surface = drawing.Surface,
@@ -117,6 +118,38 @@
                     return pathString;
                 }
             });
+
+            clipTest();
+            function clipTest() {
+                clip = new geometry.ClipRect(new Point(100, 100), new geometry.Size(150, 150));
+                var circleGeometry = new Circle(Point.create(250, 200), 100);
+                circle = new drawing.Circle(circleGeometry, {stroke: {color: "red", width: 3}, 
+                     clip: clip
+                });
+                circle.transform(transform().translate(100, 100));
+                var circleGeometry2 = new Circle(Point.create(300, 200), 100);
+                circle2 = new drawing.Circle(circleGeometry2, {stroke: {color: "red", width: 3}});
+                circle2.clip(clip);
+
+                var group = new drawing.Group({});
+                group.append(circle);
+                group.append(circle2);
+                // surface.clear();
+                setTimeout(function() {
+                    surface.draw(group);
+                });                
+            }
+
+            function updateRect() {
+                // circle.clip(null);                
+                // setTimeout(function() {
+                    // circle.clip(new geometry.ClipRect(new Point(100, 100), new geometry.Size(150, 150)));
+                // }, 500);
+                // circle2.clip(null);
+                //circle.clip(null);
+                circle.clip(new geometry.ClipRect(new Point(100, 100), new geometry.Size(250, 150)));
+                //clip.size.setHeight(200);
+            }
 
             //imageTest();
 
@@ -216,8 +249,8 @@
 
             //curveTransformTest();
             function curveTransformTest() {
-                var curveTransform = new Path($.extend({transform: transform().translate(0, 100).scale(1,2).rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions)),
-                    original = new Path({stroke: {color: "blue", width: 1}});
+                curveTransform = new Path($.extend({transform: transform().translate(0, 100).scale(1,2).rotate(-45, 100, 100).scale(1.1, 0.7).matrix()}, strokeOptions));
+                original = new Path({stroke: {color: "blue", width: 1}});
                 testing = curveTransform;
                 curveTransform.moveTo(100, 100);
                 curveTransform.curveTo(Point.create(200, 200), Point.create(300, 200), Point.create(400, 100));
@@ -239,16 +272,17 @@
                 surface.draw(mainGroup);
             }
 
-            kendo.bind($("body"), viewModel);
+           //kendo.bind($("body"), viewModel);
 
             function rectPath(rect, options) {
                 var rectPath = new Path(options),
                     width = rect.width(),
-                    height = rect.height();
-                rectPath.moveTo(rect.p0.x, rect.p0.y);
-                rectPath.lineTo(rect.p0.x + width, rect.p0.y);
-                rectPath.lineTo(rect.p0.x + width, rect.p0.y + height);
-                rectPath.lineTo(rect.p0.x, rect.p0.y + height);
+                    height = rect.height(),
+                    origin = rect.origin;
+                rectPath.moveTo(origin.x, origin.y);
+                rectPath.lineTo(origin.x + width, origin.y);
+                rectPath.lineTo(origin.x + width, origin.y + height);
+                rectPath.lineTo(origin.x, origin.y + height);
                 rectPath.close();
 
                 return rectPath;
