@@ -6,34 +6,13 @@ require 'codegen/lib/component'
 TYPE_SCRIPT = ERB.new(File.read("build/codegen/lib/type_script/kendo.ts.erb"), 0, '%<>')
 
 module CodeGen::TypeScript
-    EXCLUDE = [
-        'docs/api/framework/kendo.md',
-        'docs/api/framework/class.md',
-        'docs/api/framework/router.md',
-        'docs/api/framework/view.md',
-        'docs/api/framework/layout.md',
-        'docs/api/framework/hierarchicaldatasource.md',
-        'docs/api/framework/schedulerdatasource.md',
-        'docs/api/framework/schedulerevent.md',
-        'docs/api/framework/pivotdatasource.md',
-        'docs/api/framework/ganttdatasource.md',
-        'docs/api/framework/gantttask.md',
-        'docs/api/framework/ganttdependencydatasource.md',
-        'docs/api/framework/ganttdependency.md',
-        'docs/api/framework/datasource.md',
-        'docs/api/framework/binder.md',
-        'docs/api/framework/model.md',
-        'docs/api/framework/observable.md',
-        'docs/api/framework/observableobject.md',
-        'docs/api/framework/node.md',
-        'docs/api/framework/observablearray.md',
-        'docs/api/framework/widget.md',
-        'docs/api/framework/mobilewidget.md',
-        'docs/api/framework/draggable.md',
-        'docs/api/framework/droptarget.md',
-        'docs/api/framework/droptargetarea.md',
-        'docs/api/mobile/application.md',
-        'docs/api/web/ui.md'
+    EXCLUDE = FileList[
+        "docs/api/javascript/{kendo,class,router,view,layout,observable}.md",
+        'docs/api/javascript/data/{node,binder,datasource,observableobject,observablearray,model,pivotdatasource,ganttdatasource,gantttask,ganttdependencydatasource,ganttdependency,hierarchicaldatasource,schedulerdatasource,schedulerevent}.md',
+        'docs/api/javascript/ui/{widget,draggable,droptarget,droptargetarea}.md',
+        'docs/api/javascript/mobile/application.md',
+        'docs/api/javascript/mobile/ui/mobilewidget.md',
+        'docs/api/javascript/ui/ui.md'
     ]
 
     TYPES = {
