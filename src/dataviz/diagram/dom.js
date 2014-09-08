@@ -50,6 +50,7 @@
             isFunction = kendo.isFunction,
             isString = Utils.isString,
 
+            deepExtend = kendo.deepExtend,
             math = Math;
 
         // Constants ==============================================================
@@ -2682,21 +2683,57 @@
                 }
             },
 
+            _addShapes: function(shapes) {
+                var length = shapes.length;
+
+                for (var i = 0; i < length; i++) {
+                    var shape = shapes[i];
+
+                    var shape = this._dataMap[shape.id];
+
+                    if (shape) {
+                        return shape;
+                    }
+
+                    var options = deepExtend({}, this.options.shapeDefaults, {
+
+
+                    });
+                    shape = new Shape(options, shape);
+                    this.addShape(shape);
+                    this._dataMap[dataItem.id] = shape;
+                    return shape;
+                }
+            },
+
             _refreshConnections: function(e) {
                 if (e.action === "remove") {
                     // remove connections
                 } else {
-                    this._addCoonection();
+                    this._addConnections(e.sender.view());
                 }
-
             },
 
-            _addShapes: function(shapes) {
-                var length = shapes.length;
+            _addConnections: function(connections) {
+                var length = connections.length;
 
-                for (var i = 0; i < shapes.length; i++) {
-                    this._addDataItem(shapes[i]);
+                for (var i = 0; i < length; i++) {
+                    this._addDataItem(connections[i]);
                 }
+
+                //var diagram = this,
+                //    options = diagram.options,
+                //    defaults = options.connectionDefaults,
+                //    connections = options.connections,
+                //    conn, source, target, i;
+
+                //for(i = 0; i < connections.length; i++) {
+                //    conn = connections[i];
+                //    source = diagram._findConnectionShape(conn.from);
+                //    target = diagram._findConnectionShape(conn.to);
+
+                //    diagram.connect(source, target, deepExtend({}, defaults, conn));
+                //}
             },
             //_dataSource: function () {
             //    var that = this,
@@ -2773,9 +2810,64 @@
             }
         });
 
+        var ShapeModel = kendo.data.model.define({
+            id: "id",
+
+            fields: {
+                id: { type: "number" },
+                text: { type: "string" },
+                width: { type: "number" },
+                height: { type: "number" },
+                x: { type: "number" },
+                y: { type: "number" },
+                type: { type: "string" },
+                visual: { type: "string" }
+            }
+        });
+
+        var DiagramDataSource = DataSource.extend({
+            init: function(options) {
+                DataSource.fn.init.call(this, deepExtend({}, {
+                    schema: {
+                        modelBase: ShapeModel,
+                        model: ShapeModel
+                    }
+                }, options));
+            }
+        });
+
+        var ConnectionModel = kendo.data.model.define({
+            id: "id",
+
+            fields: {
+                id: { type: "number" },
+                text: { type: "string" },
+                from: { type: "number" },
+                to: { type: "number" }
+            }
+        });
+
+        var DiagramConnectionDataSource = DataSource.extend({
+            init: function(options) {
+                DataSource.fn.init.call(this, deepExtend({}, {
+                    schema: {
+                        modelBase: ConnectionModel,
+                        model: ConnectionModel
+                    }
+                }, options));
+            }
+        });
+
+        deepExtend(kendo.data, {
+            DiagramDataSource: DiagramDataSource,
+            DiagramConnectionDataSource: DiagramConnectionDataSource,
+            ConnectionModel: ConnectionModel,
+            ShapeModel: ShapeModel
+        });
+
         dataviz.ui.plugin(Diagram);
 
-        kendo.deepExtend(diagram, {
+        deepExtend(diagram, {
             Shape: Shape,
             Connection: Connection,
             Connector: Connector
