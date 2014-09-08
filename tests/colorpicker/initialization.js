@@ -44,6 +44,30 @@
         cp.enable(true);
         equal(cp.wrapper.attr("tabIndex"), 5);
     });
+
+    test("opens on click on an associated <label>", function(){
+        expect(2);
+
+        // embedded in <label>
+        $("<label>ColorPicker: <input /></label>")
+            .appendTo(QUnit.fixture)
+            .find("input").kendoColorPicker({
+                open: function() {
+                    ok(true);
+                }
+            }).end()
+            .click();
+
+        // <label for="...">
+        $("<div><label for='colorpicker'>ColorPicker:</label><input id='colorpicker' /></div>")
+            .appendTo(QUnit.fixture)
+            .find("input").kendoColorPicker({
+                open: function() {
+                    ok(true)
+                }
+            }).end()
+            .find("label").click();
+    });
 })();
 
 

@@ -826,6 +826,21 @@ var __meta__ = {
 
             if (element.is("input")) {
                 element.appendTo(content);
+
+                // if there exists a <label> associated with this
+                // input field, we must catch clicks on it to prevent
+                // the built-in color picker from showing up.
+                // https://github.com/telerik/kendo-ui-core/issues/292
+
+                var label = element.closest("label");
+                var id = element.attr("id");
+                if (id) {
+                    label = label.add('label[for="' + id + '"]');
+                }
+                label.click(function(ev){
+                    that.open();
+                    ev.preventDefault();
+                });
             }
 
             that._tabIndex = element.attr("tabIndex") || 0;
