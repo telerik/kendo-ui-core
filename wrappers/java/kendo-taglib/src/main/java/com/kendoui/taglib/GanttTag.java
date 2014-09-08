@@ -53,6 +53,10 @@ public class GanttTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     }
 
+    public void setEditable(com.kendoui.taglib.gantt.EditableTag value) {
+        setProperty("editable", value);
+    }
+
     public void setMessages(com.kendoui.taglib.gantt.MessagesTag value) {
         setProperty("messages", value);
     }

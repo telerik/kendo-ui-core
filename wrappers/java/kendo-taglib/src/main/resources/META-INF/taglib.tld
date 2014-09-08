@@ -15939,6 +15939,23 @@ custom number format, standard date format or a custom date format.</description
 
 
     <tag>
+        <description>If set to false the user won't be able to create, modify or delete tasks and dependencies.</description>
+        <name>gantt-editable</name>
+        <tag-class>com.kendoui.taglib.gantt.EditableTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>If set to true the gantt will display a confirmation dialog when the user deletes a task or a dependency.</description>
+            <name>confirmation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
         <description>The configuration of the gantt messages. Use this option to customize or localize the gantt messages.</description>
         <name>gantt-messages</name>
         <tag-class>com.kendoui.taglib.gantt.MessagesTag</tag-class>
