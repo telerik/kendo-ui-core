@@ -4701,7 +4701,7 @@ var __meta__ = {
         _prepareColumns: function(rows, columns, parentCell, parentRow) {
             var row = parentRow || rows[rows.length - 1];
 
-            var childRow;
+            var childRow = rows[row.index + 1];
             var totalColSpan = 0;
 
             for (var idx = 0; idx < columns.length; idx++) {

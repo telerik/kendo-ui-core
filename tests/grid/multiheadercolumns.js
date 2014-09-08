@@ -130,6 +130,33 @@
         equal(lastRow.find("th").first().text(), "master1-child-child");
     });
 
+    test("render correct number of rows and columns - two parents with 3 levels single columns", function() {
+
+        var grid = new Grid(table, {
+            columns: [
+                {
+                    title: "master1",
+                    columns: [{
+                        title: "master1-child",
+                        columns: [{ title: "master1-child-child"}]
+                    }]
+                },
+                {
+                    title: "master2",
+                    columns: [{
+                        title: "master2-child",
+                        columns: [{ title: "master2-child-child1"}]
+                    }]
+                }]
+        });
+
+        equal(grid.thead.find("tr").length, 3);
+        equal(grid.thead.find("tr:first").find("th").length, 2);
+        equal(grid.thead.find("tr:eq(1)").find("th").length, 2);
+        equal(grid.thead.find("tr:last").find("th").length, 2);
+    });
+
+
     test("render correct number of col elements", function() {
         var grid = new Grid(table, {
             columns: [
