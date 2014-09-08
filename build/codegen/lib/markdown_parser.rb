@@ -1,8 +1,9 @@
 require 'kramdown'
 
 module CodeGen
-    MARKDOWN = FileList['docs/api/javascript/{ui,dataviz}/*.md']
+    MARKDOWN = FileList['docs/api/javascript/{ui,dataviz/ui}/*.md']
         .exclude('docs/api/javascript/ui/ui.md')
+        .exclude('docs/api/javascript/ui/widget.md')
         .exclude('docs/api/javascript/ui/draggable.md')
         .exclude('docs/api/javascript/ui/droptarget.md')
         .exclude('docs/api/javascript/ui/droptargetarea.md')
