@@ -108,26 +108,26 @@
             "@header-text-color":               constant(COLOR, ".k-header"),
 
             "@button-background-color":         constant(BGCOLOR, ".k-button"),
-            "@button-hover-background-color":   constant(BGCOLOR, ".k-button:hover"),
-            "@button-active-background":        constant(BGCOLOR, ".k-button:active"),
+            "@button-hover-background-color":   constant(BGCOLOR, ".k-button.k-state-hover"),
+            "@button-active-background":        constant(BGCOLOR, ".k-button.k-state-active"),
             "@button-text-color":               constant(COLOR, ".k-button"),
-            "@button-hover-text-color":         constant(COLOR, ".k-button:hover"),
+            "@button-hover-text-color":         constant(COLOR, ".k-button.k-state-hover"),
 
             "@primary-button-text-color":       constant(COLOR, ".k-primary"),
             "@primary-button-background-color": constant(BGCOLOR, ".k-primary"),
             "@primary-button-border-color":     constant(BORDERCOLOR, ".k-primary"),
             "@primary-gradient":                gradientConstant(".k-primary"),
-            "@primary-focused-color":           constant(COLOR, ".k-primary:focus"),
-            "@primary-focused-border-color":    constant(BORDERCOLOR, ".k-primary:focus"),
-            "@primary-focused-gradient":        gradientConstant(".k-primary:focus"),
-            "@primary-hover-text-color":        constant(COLOR, ".k-primary:hover"),
-            "@primary-hover-border-color":      constant(BORDERCOLOR, ".k-primary:hover"),
-            "@primary-hover-gradient":          gradientConstant(".k-primary:hover"),
-            "@primary-hover-background-color":  constant(BGCOLOR, ".k-primary:hover"),
-            "@primary-active-text-color":       constant(COLOR, ".k-primary:active"),
-            "@primary-active-border-color":     constant(BORDERCOLOR, ".k-primary:active"),
-            "@primary-active-gradient":         gradientConstant(".k-primary:active"),
-            "@primary-active-background-color": constant(BGCOLOR, ".k-primary:active"),
+            "@primary-focused-color":           constant(COLOR, ".k-primary.k-state-focused"),
+            "@primary-focused-border-color":    constant(BORDERCOLOR, ".k-primary.k-state-focused"),
+            "@primary-focused-gradient":        gradientConstant(".k-primary.k-state-focused"),
+            "@primary-hover-text-color":        constant(COLOR, ".k-primary.k-state-hover"),
+            "@primary-hover-border-color":      constant(BORDERCOLOR, ".k-primary.k-state-hover"),
+            "@primary-hover-gradient":          gradientConstant(".k-primary.k-state-hover"),
+            "@primary-hover-background-color":  constant(BGCOLOR, ".k-primary.k-state-hover"),
+            "@primary-active-text-color":       constant(COLOR, ".k-primary.k-state-active"),
+            "@primary-active-border-color":     constant(BORDERCOLOR, ".k-primary.k-state-active"),
+            "@primary-active-gradient":         gradientConstant(".k-primary.k-state-active"),
+            "@primary-active-background-color": constant(BGCOLOR, ".k-primary.k-state-active"),
             "@primary-disabled-text-color":      constant(COLOR, ".k-primary.k-state-disabled"),
             "@primary-disabled-border-color":   constant(BORDERCOLOR, ".k-primary.k-state-disabled"),
             "@primary-disabled-background-color":constant(BGCOLOR, ".k-primary.k-state-disabled"),
@@ -184,48 +184,48 @@
             "@button-focused-shadow": {
                 readonly: true,
                 infer: function() {
-                    return cssPropertyFrom(".k-button:focus", "box-shadow");
+                    return cssPropertyFrom(".k-button.k-state-focused", "box-shadow");
                 }
-            }, 
+            },
             "@button-focused-active-shadow": {
                 readonly: true,
                 infer: function() {
-                    return cssPropertyFrom(".k-button:focus:active", "box-shadow");
+                    return cssPropertyFrom(".k-button.k-state-focused.k-state-active", "box-shadow");
                 }
-            }, 
+            },
             "@primary-shadow": {
                 readonly: true,
                 infer: function() {
                     return cssPropertyFrom(".k-primary", "box-shadow");
                 }
-            },          
+            },
             "@primary-focused-active-item-shadow": {
                 readonly: true,
                 infer: function() {
-                    return cssPropertyFrom(".k-primary:focus", "box-shadow");
+                    return cssPropertyFrom(".k-primary.k-state-focused", "box-shadow");
                 }
             },
             "@primary-hover-shadow": {
                 readonly: true,
                 infer: function() {
-                    return cssPropertyFrom(".k-primary:hover", "box-shadow");
+                    return cssPropertyFrom(".k-primary.k-state-hover", "box-shadow");
                 }
             },
             "@primary-active-shadow": {
                 readonly: true,
                 infer: function() {
-                    return cssPropertyFrom(".k-primary:active", "box-shadow");
+                    return cssPropertyFrom(".k-primary.k-state-active", "box-shadow");
                 }
-            },         
+            },
 
             "@error-background-color":          constant(BGCOLOR, ".k-state-error"),
             "@error-border-color":              constant(BORDERCOLOR, ".k-state-error"),
             "@error-text-color":                constant(COLOR, ".k-state-error"),
 
             "@disabled-text-color":             constant(COLOR, ".k-state-disabled"),
-			"@disabled-gradient":               gradientConstant(".k-state-disabled"),
+            "@disabled-gradient":               gradientConstant(".k-state-disabled"),
             "@disabled-border-color":           constant(BORDERCOLOR, ".k-state-disabled"),
-			"@disabled-background-color":       constant(BGCOLOR, ".k-state-disabled"), 
+            "@disabled-background-color":       constant(BGCOLOR, ".k-state-disabled"),
 
             "@validation-background-color":     constant(BGCOLOR, ".k-tooltip-validation"),
             "@validation-border-color":         constant(BORDERCOLOR, ".k-tooltip-validation"),
@@ -258,7 +258,7 @@
             "@event-text-color":                    constant(COLOR, ".k-event"),
             "@event-inverse-text-color":            constant(COLOR, ".k-event-inverse"),
             "@scheduler-nonwork-background-color":  constant(BGCOLOR, ".k-scheduler-table .k-nonwork-hour"),
-            "@resize-background-color":             constant(BGCOLOR, ".k-ie7 .k-event .k-resize-handle, .k-event .k-resize-handle:after"),
+            "@resize-background-color":             constant(BGCOLOR, ".k-ie7 .k-event .k-resize-handle"),
 
             "@calendar-border-radius":              constant("border-radius", ".k-window .k-link"),
             "@calendar-content-text-color":         constant(COLOR, ".k-calendar .k-link"),
@@ -271,9 +271,9 @@
             "@calendar-header-hover-background":        constant("background-color", ".k-calendar .k-nav-fast.k-state-hover"),
             "@calendar-group-background-color":         constant(BGCOLOR, ".k-calendar th"),
             "@button-border-color":                     constant(BORDERCOLOR, ".k-button"),
-            "@button-hover-border-color":               constant(BORDERCOLOR, ".k-button:hover"),
-            "@button-active-border-color":              constant(BORDERCOLOR, ".k-button:active"),
-            "@button-focused-border-color":             constant(BORDERCOLOR, ".k-button:focus, .k-button.k-state-focused"),
+            "@button-hover-border-color":               constant(BORDERCOLOR, ".k-button.k-state-hover"),
+            "@button-active-border-color":              constant(BORDERCOLOR, ".k-button.k-state-active"),
+            "@button-focused-border-color":             constant(BORDERCOLOR, ".k-button.k-state-focused, .k-button.k-state-focused"),
             "@menu-border-color":                       constant(BORDERCOLOR, ".k-menu .k-item"),
             "@filter-menu-content-background":          constant(BGCOLOR, ".k-secondary.k-filter-menu"),
             "@icon-background-color":                   constant(BGCOLOR, ".k-treeview .k-icon"),
@@ -405,7 +405,7 @@
                 "@calendar-footer-hover-background": "Calendar footer hover background"
             },
             "Drop-downs": {
-                "@drop-down-text-color":          "Text color", 
+                "@drop-down-text-color":          "Text color",
                 "@drop-down-background":          "Background color",
                 "@drop-down-border-color":        "Border color"
             },
