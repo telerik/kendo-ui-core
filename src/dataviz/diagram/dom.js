@@ -2636,7 +2636,7 @@
                     this._shapesErrorHandler = proxy(this._error, this);
                 }
 
-                this.dataSource = kendo.data.DataSource.create(ds)
+                this.dataSource = kendo.data.DiagramDataSource.create(ds)
                     .bind("change", this._shapesRefreshHandler)
                     .bind("error", this._shapesErrorHandler);
 
@@ -2659,7 +2659,7 @@
                     this._connectionsErrorHandler = proxy(this._error, this);
                 }
 
-                this.connectionsDataSource = kendo.data.DataSource.create(ds)
+                this.connectionsDataSource = kendo.data.DiagramConnectionDataSource.create(ds)
                     .bind("change", this._connectionsRefreshHandler)
                     .bind("error", this._connectionsErrorHandler);
 
@@ -2683,26 +2683,25 @@
                 }
             },
 
-            _addShapes: function(shapes) {
-                var length = shapes.length;
+            _addShapes: function(dataItems) {
+                var length = dataItems.length;
 
                 for (var i = 0; i < length; i++) {
-                    var shape = shapes[i];
+                    var dataItem = dataItems[i];
 
-                    var shape = this._dataMap[shape.id];
+                    var shape = this._dataMap[dataItems.id];
 
                     if (shape) {
-                        return shape;
+                        continue;
                     }
 
                     var options = deepExtend({}, this.options.shapeDefaults, {
 
 
                     });
-                    shape = new Shape(options, shape);
+                    shape = new Shape(options, dataItem);
                     this.addShape(shape);
                     this._dataMap[dataItem.id] = shape;
-                    return shape;
                 }
             },
 
@@ -2810,7 +2809,7 @@
             }
         });
 
-        var ShapeModel = kendo.data.model.define({
+        var ShapeModel = kendo.data.Model.define({
             id: "id",
 
             fields: {
@@ -2825,9 +2824,9 @@
             }
         });
 
-        var DiagramDataSource = DataSource.extend({
+        var DiagramDataSource = kendo.data.DataSource.extend({
             init: function(options) {
-                DataSource.fn.init.call(this, deepExtend({}, {
+                kendo.data.DataSource.fn.init.call(this, deepExtend({}, {
                     schema: {
                         modelBase: ShapeModel,
                         model: ShapeModel
@@ -2836,7 +2835,8 @@
             }
         });
 
-        var ConnectionModel = kendo.data.model.define({
+
+        var ConnectionModel = kendo.data.Model.define({
             id: "id",
 
             fields: {
@@ -2847,9 +2847,9 @@
             }
         });
 
-        var DiagramConnectionDataSource = DataSource.extend({
+        var DiagramConnectionDataSource = kendo.data.DataSource.extend({
             init: function(options) {
-                DataSource.fn.init.call(this, deepExtend({}, {
+                kendo.data.DataSource.fn.init.call(this, deepExtend({}, {
                     schema: {
                         modelBase: ConnectionModel,
                         model: ConnectionModel
@@ -2857,6 +2857,26 @@
                 }, options));
             }
         });
+
+        var createDataSource = function(type, name) {
+            return function(options) {
+                options = isArray(dataSource) ? { data: options } : options;
+
+                var dataSource = options || {};
+                var data = dataSource.data;
+
+                dataSource.data = data;
+
+                if (!(dataSource instanceof type) && dataSource instanceof kendo.data.DataSource) {
+                    throw new Error("Incorrect DataSource type. Only " + name + " instances are supported");
+                }
+
+                return dataSource instanceof type ? dataSource : new type(dataSource);
+            };
+        };
+
+        DiagramDataSource.create = createDataSource(DiagramDataSource, "DiagramDataSource");
+        DiagramConnectionDataSource.create = createDataSource(DiagramConnectionDataSource, "DiagramConnectionDataSource");
 
         deepExtend(kendo.data, {
             DiagramDataSource: DiagramDataSource,
