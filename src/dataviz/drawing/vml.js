@@ -132,13 +132,7 @@
         },
 
         clear: function() {
-            var element = this.element;
-
-            if (element) {
-                element.parentNode.removeChild(element);
-                this.element = null;
-            }
-
+            this.element.innerHTML = "";
             BaseNode.fn.clear.call(this);
         },
 
