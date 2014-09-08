@@ -247,17 +247,17 @@ test('date formatting supports small year with four digits', function() {
 
 tzTest("Sofia", "date formatting supports 'z' timezone offset specifier", function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "z"), "-2");
+    equal(toString(d, "z"), "+2");
 });
 
 tzTest("Sofia", "date formatting supports padded timezone offset specifier", function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "zz"), "-02");
+    equal(toString(d, "zz"), "+02");
 });
 
 tzTest("Sofia", "date formatting supports full timezone offset", function() {
     var d = date(2000, 0, 1);
-    equal(toString(d, "zzz"), "-02:00");
+    equal(toString(d, "zzz"), "+02:00");
 });
 
 }());
