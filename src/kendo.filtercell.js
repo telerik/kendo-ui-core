@@ -248,10 +248,11 @@ var __meta__ = {
                         DataSource.create(suggestDataSource);
 
 
-                if (!options.customDataSource) {
-                    suggestDataSource._pageSize = undefined;
-                    suggestDataSource.reader.data = removeDuplicates(suggestDataSource.reader.data, this.options.field);
-                }
+            }
+
+            if (!options.customDataSource) {
+                suggestDataSource._pageSize = undefined;
+                suggestDataSource.reader.data = removeDuplicates(suggestDataSource.reader.data, this.options.field);
             }
 
             this.suggestDataSource = suggestDataSource;
