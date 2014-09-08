@@ -48,7 +48,7 @@ instance.If the dependencies option is set to a JavaScript object or array the w
 
     /**
     * If set to false the user won't be able to create, modify or delete tasks and dependencies.
-    * @param boolean $value
+    * @param boolean|\Kendo\UI\GanttEditable|array $value
     * @return \Kendo\UI\Gantt
     */
     public function editable($value) {
