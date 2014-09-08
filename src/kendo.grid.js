@@ -5283,13 +5283,13 @@ var __meta__ = {
 
    function adjustRowHeight(row1, row2) {
        var height;
-       var clientHeight1 = row1.clientHeight;
-       var clientHeight2 = row2.clientHeight;
+       var offsetHeight1 = row1.offsetHeight;
+       var offsetHeight2 = row2.offsetHeight;
 
-       if (clientHeight1 > clientHeight2) {
-           height = clientHeight1 + "px";
-       } else if (clientHeight1 < clientHeight2) {
-           height = clientHeight2 + "px";
+       if (offsetHeight1 > offsetHeight2) {
+           height = offsetHeight1 + "px";
+       } else if (offsetHeight1 < offsetHeight2) {
+           height = offsetHeight2 + "px";
        }
 
        if (height) {
