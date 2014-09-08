@@ -34,6 +34,7 @@
     var NONE = "none",
         TRANSP = "transparent",
         COORDINATE_MULTIPLE = 100,
+        COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
         TRANSFORM_PRECISION = 4;
 
     // VML rendering surface ==================================================
@@ -58,23 +59,10 @@
 
         draw: function(element) {
             this._root.load([element], null);
-            /*
-            if (kendo.support.browser.version < 8) {
-                setTimeout(function() {
-                    surface._rootElement.style.display = "block";
-                }, 0);
-            }
-            */
         },
 
         clear: function() {
             this._root.clear();
-
-            /*
-            if (kendo.support.browser.version < 8) {
-                this._rootElement.style.display = "none";
-            }
-            */
         }
     });
 
@@ -440,10 +428,9 @@
         },
 
         setCoordsize: function() {
-            var scale = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE;
             this.allAttr([
                 ["coordorigin", "0 0"],
-                ["coordsize", scale + " " + scale]
+                ["coordsize", COORDINATE_SIZE + " " + COORDINATE_SIZE]
             ]);
         }
     });
