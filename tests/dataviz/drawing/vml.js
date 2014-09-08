@@ -1,5 +1,6 @@
 (function() {
     var dataviz = kendo.dataviz,
+        deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
         Point = g.Point,
@@ -367,7 +368,7 @@
         });
 
         test("renders nowrap", function() {
-            equal(groupNode.element.style.whiteSpace, "nowrap");
+            equal(groupNode.element.style["white-space"], "nowrap");
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
@@ -448,102 +449,102 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var path,
-            strokeNode,
-            container;
+            strokeNode;
+
+        function createNode(pathOptions) {
+            path = new Path(deepExtend({
+                stroke: {
+                    width: 1
+                }
+            }, pathOptions));
+            strokeNode = new StrokeNode(path);
+        }
 
         module("StrokeNode", {
             setup: function() {
-                container = document.createElement("div");
-
-                path = new Path({ stroke: { width: 1 } });
-                strokeNode = new StrokeNode(path);
-                strokeNode.attachTo(container);
+                createNode();
             }
         });
 
         test("renders on attribute", function() {
-            path.options.set("stroke.color", "red");
-
-            ok(strokeNode.render().indexOf("on='true'") !== -1);
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.on, "true");
         });
 
         test("renders on attribute when no stroke is set", function() {
-            path.options.set("stroke", null);
-            ok(strokeNode.render().indexOf("on='false'") !== -1);
+            createNode({ stroke: null });
+            equal(strokeNode.element.on, "false");
         });
 
         test("renders on attribute when stroke width is 0", function() {
-            path.options.set("stroke", { color: "red", width: 0 });
-            ok(strokeNode.render().indexOf("on='false'") !== -1);
+            createNode({ stroke: { color: "red", width: 0 } });
+            equal(strokeNode.element.on, "false");
         });
 
         test("renders color", function() {
-            path.options.set("stroke.color", "red");
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.color, "red");
+        });
 
-            ok(strokeNode.render().indexOf("color='red'") !== -1);
+        test("renders default stroke width", function() {
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.weight, "1px");
         });
 
         test("renders stroke width", function() {
-            path.options.set("stroke.width", 2);
-
-            ok(strokeNode.render().indexOf("weight='2px'") !== -1);
+            createNode({ stroke: { width: 2 } });
+            equal(strokeNode.element.weight, "2px");
         });
 
         test("renders stroke opacity", function() {
-            path.options.set("stroke.opacity", 0.5);
-
-            ok(strokeNode.render().indexOf("opacity='0.5'") !== -1);
+            createNode({ stroke: { opacity: 0.5 } });
+            equal(strokeNode.element.opacity, "0.5");
         });
 
         test("does not render stroke opacity if not set", function() {
-            equal(strokeNode.render().indexOf("opacity="), -1);
+            ok(!strokeNode.element.opacity);
         });
 
         test("renders stroke dashType", function() {
-            path.options.set("stroke.dashType", "dot");
-
-            ok(strokeNode.render().indexOf("dashstyle='dot'") !== -1);
+            createNode({ stroke: { dashType: "dot" } });
+            equal(strokeNode.element.dashstyle, "dot");
         });
 
         test("does not render stroke dashType if not set", function() {
-            equal(strokeNode.render().indexOf("dashstyle="), -1);
+            ok(!strokeNode.element.dashstyle);
         });
 
         test("renders stroke lineJoin", function() {
-            path.options.set("stroke.lineJoin", "round");
-
-            ok(strokeNode.render().indexOf("joinstyle='round'") !== -1);
+            createNode({ stroke: { lineJoin: "round" } });
+            equal(strokeNode.element.joinstyle, "round");
         });
 
         test("does not render stroke lineJoin if not set", function() {
-            path.options.set("stroke.lineJoin", null);
-            equal(strokeNode.render().indexOf("joinstyle="), -1);
+            ok(!strokeNode.element.joinstyle);
         });
 
         test("renders stroke lineCap", function() {
-            path.options.set("stroke.lineCap", "round");
-
-            ok(strokeNode.render().indexOf("endcap='round'") !== -1);
+            createNode({ stroke: { lineCap: "round" } });
+            equal(strokeNode.element.endcap, "round");
         });
 
         test("renders stroke lineCap (butt)", function() {
-            path.options.set("stroke.lineCap", "butt");
-
-            ok(strokeNode.render().indexOf("endcap='flat'") !== -1);
+            createNode({ stroke: { lineCap: "butt" } });
+            equal(strokeNode.element.endcap, "flat");
         });
 
         test("does not render stroke lineCap if not set", function() {
-            equal(strokeNode.render().indexOf("endcap="), -1);
+            ok(!strokeNode.element.endcap);
         });
 
         test("optionsChange sets stroke color", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "color");
-                equal(value, "red");
+                if (name === "color") {
+                    equal(value, "red");
+                }
             };
 
             path.options.set("stroke.color", "red");
@@ -551,8 +552,9 @@
 
         test("optionsChange sets stroke width", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "weight");
-                equal(value, 4);
+                if (name === "weight") {
+                    equal(value, "4px");
+                }
             };
 
             path.options.set("stroke.width", 4);
@@ -560,8 +562,9 @@
 
         test("optionsChange sets stroke opacity", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "opacity");
-                equal(value, 0.4);
+                if (name === "opacity") {
+                    equal(value, 0.4);
+                }
             };
 
             path.options.set("stroke.opacity", 0.4);
@@ -569,8 +572,9 @@
 
         test("optionsChange sets stroke dashType", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "dashstyle");
-                equal(value, "dot");
+                if (name === "dashstyle") {
+                    equal(value, "dot");
+                }
             };
 
             path.options.set("stroke.dashType", "dot");
@@ -590,16 +594,18 @@
             path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
         });
 
-        test("optionsChange clears stroke", 2, function() {
+        test("optionsChange clears stroke", 1, function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("stroke", null);
         });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var path,

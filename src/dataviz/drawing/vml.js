@@ -249,7 +249,7 @@
             if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
-                attrs.push(["weight", stroke.width + "px"]);
+                attrs.push(["weight", (stroke.width || 1) + "px"]);
 
                 if (defined(stroke.opacity)) {
                     attrs.push(["opacity", stroke.opacity]);
