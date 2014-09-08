@@ -119,7 +119,7 @@ var __meta__ = {
             }
         },
 
-        _filterSource: function(filter) {
+        _filterSource: function(filter, force) {
             var that = this;
             var options = that.options;
             var dataSource = that.dataSource;
@@ -136,7 +136,11 @@ var __meta__ = {
                 expression.push(filter);
             }
 
-            dataSource.filter(expression);
+            if (!force) {
+                dataSource.filter(expression);
+            } else {
+                dataSource.read(expression);
+            }
         },
 
         _header: function() {

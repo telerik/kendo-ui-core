@@ -395,6 +395,7 @@ var __meta__ = {
                 filter = options.filter,
                 field = options.dataTextField,
                 inputValue = that.input.val(),
+                expression,
                 length;
 
             if (options.placeholder === inputValue) {
@@ -411,12 +412,15 @@ var __meta__ = {
                 that._state = FILTER;
                 that._open = true;
 
-                that._filterSource({
+                expression = {
                     value: ignoreCase ? word.toLowerCase() : word,
                     field: field,
                     operator: filter,
                     ignoreCase: ignoreCase
-                });
+                };
+
+                that._filterSource(expression, that._retrieveData);
+                that._retrieveData = false;
             }
         },
 
