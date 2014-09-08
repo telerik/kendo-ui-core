@@ -1,9 +1,13 @@
 require 'kramdown'
 
 module CodeGen
-    MARKDOWN = FileList['docs/api/{web,dataviz}/*.md']
-        .exclude('**/ui.md')
-        .include('docs/api/framework/datasource.md')
+    MARKDOWN = FileList['docs/api/javascript/{ui,dataviz}/*.md']
+        .exclude('docs/api/javascript/ui/ui.md')
+        .exclude('docs/api/javascript/ui/draggable.md')
+        .exclude('docs/api/javascript/ui/droptarget.md')
+        .exclude('docs/api/javascript/ui/droptargetarea.md')
+        .exclude('docs/api/javascript/ui/validator.md')
+        .include('docs/api/javascript/data/datasource.md')
 
 class MarkdownParser
 
@@ -254,7 +258,7 @@ class MarkdownParser
             element.children.map { |child| element_text(child) }.join
         else
             element.value || ""
-        end 
+        end
     end
 
     def element_value(element)
