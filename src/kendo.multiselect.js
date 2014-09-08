@@ -394,7 +394,8 @@ var __meta__ = {
                 ignoreCase = options.ignoreCase,
                 filter = options.filter,
                 field = options.dataTextField,
-                inputValue = that.input.val();
+                inputValue = that.input.val(),
+                length;
 
             if (options.placeholder === inputValue) {
                 inputValue = "";
@@ -404,7 +405,9 @@ var __meta__ = {
 
             word = typeof word === "string" ? word : inputValue;
 
-            if (word.length >= options.minLength) {
+            length = word.length;
+
+            if (!length || length >= options.minLength) {
                 that._state = FILTER;
                 that._open = true;
 

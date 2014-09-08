@@ -152,4 +152,24 @@
 
         multiselect.search("te");
     });
+
+    asyncTest("MultiSelect filters on empty input", 1, function() {
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            minLength: 3,
+            dataSource: ["foo", "bar"],
+            filter: "contains"
+        });
+
+        multiselect.dataSource.one("change", function() {
+            multiselect.one("filtering", function(e) {
+                start();
+                equal(e.filter.value, "");
+            });
+
+            multiselect.input.val("").keydown();
+        });
+
+        multiselect.input.focus().val("baz").keydown();
+    });
 })();
