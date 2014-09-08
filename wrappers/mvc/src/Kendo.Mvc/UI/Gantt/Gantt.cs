@@ -37,6 +37,8 @@ namespace Kendo.Mvc.UI
 
 //>> Initialization
         
+            Editable = new GanttEditableSettings();
+                
             Messages = new GanttMessagesSettings();
                 
             Views = new List<GanttView>();
@@ -67,7 +69,11 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
-        public bool? Editable { get; set; }
+        public GanttEditableSettings Editable
+        {
+            get;
+            set;
+        }
         
         public bool? Navigatable { get; set; }
         
@@ -124,9 +130,10 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
-            if (Editable.HasValue)
+            var editable = Editable.ToJson();
+            if (editable.Any())
             {
-                json["editable"] = Editable;
+                json["editable"] = editable;
             }
                 
             if (Navigatable.HasValue)
