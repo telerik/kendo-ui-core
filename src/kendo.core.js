@@ -653,17 +653,14 @@ function pad(number, digits, end) {
                 result = math.abs(minutes / 60).toString().split(".")[0];
                 minutes = math.abs(minutes) - (result * 60);
 
-                result = (sign ? "-" : "+") + pad(result);
+                result = (sign ? "+" : "-") + pad(result);
                 result += ":" + pad(minutes);
-            } else if (match === "zz") {
+            } else if (match === "zz" || match === "z") {
                 result = date.getTimezoneOffset() / 60;
                 sign = result < 0;
 
                 result = math.abs(result).toString().split(".")[0];
-                result = (sign ? "-" : "+") + pad(result);
-            } else if (match === "z") {
-                result = date.getTimezoneOffset() / 60;
-                result = (result > 0 ? "+" : "") + result.toString().split(".")[0];
+                result = (sign ? "+" : "-") + (match === "zz" ? pad(result) : result);
             }
 
             return result !== undefined ? result : match.slice(1, match.length - 1);
