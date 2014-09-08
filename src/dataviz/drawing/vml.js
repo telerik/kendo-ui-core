@@ -72,9 +72,12 @@
             BaseNode.fn.init.call(this, srcElement);
 
             this.createElement();
+            this.element._kendoNode = this;
         },
 
-        createElement: noop,
+        createElement: function() {
+            this.element = doc.createElement("div");
+        },
 
         load: function(elements, transform) {
             var node = this,
@@ -171,7 +174,7 @@
 
     var RootNode = Node.extend({
         createElement: function() {
-            this.element = doc.createElement("div");
+            Node.fn.createElement.call(this);
 
             this.css("width", "100%");
             this.css("height", "100%");
@@ -181,7 +184,7 @@
 
     var GroupNode = Node.extend({
         createElement: function() {
-            this.element = doc.createElement("div");
+            Node.fn.createElement.call(this);
             this.setStyle();
         },
 

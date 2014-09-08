@@ -62,6 +62,89 @@
         });
     })();
 
+    function baseNodeTests(name, TNode, TElement) {
+        var node;
+        var srcElement;
+
+        module("Base VML Node tests / " + name, {
+            setup: function() {
+                srcElement = new TElement();
+                node = new TNode(srcElement);
+            }
+        });
+
+        test("sets element", function() {
+            ok(node.element);
+        });
+
+        test("sets _kendoNode expando", function() {
+            deepEqual(node.element._kendoNode, node);
+        });
+
+        test("attachTo attaches DOM element", function() {
+            var parent = document.createElement("div");
+            node.attachTo(parent);
+
+            equal(node.element.parentNode, parent);
+        });
+
+        test("clear cleans up child DOM nodes", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.children.length, 0);
+        });
+
+        test("load appends child nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            node.load([parentGroup]);
+
+            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
+        });
+
+        test("load appends child DOM nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            node.load([parentGroup]);
+
+            equal(node.element.children[0].children[0],
+                  node.childNodes[0].childNodes[0].element);
+        });
+
+        test("load attaches node", function() {
+            node.attachTo(document.createElement("div"));
+
+            var group = new Group();
+            node.load([group]);
+
+            equal(node.childNodes[0].element.parentNode, node.element);
+        });
+
+        test("renders visibility", function() {
+            srcElement.visible(false);
+            node = new TNode(srcElement);
+            equal(node.element.style.display, "none");
+        });
+
+        test("does not render visibility if not set", function() {
+            equal(node.element.style.display, "");
+        });
+
+        test("options change for visible updates display css style", function() {
+            node.css = function(style, value) {
+                equal(style, "display");
+                equal(value, "none");
+            };
+            srcElement.visible(false);
+        });
+
+    }
+
     // ------------------------------------------------------------
     (function() {
         var node;
@@ -191,33 +274,6 @@
             };
             node.load([image], currentMatrix);
         });
-
-        test("load appends child nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
-        });
-
-        test("attachTo renders children", 2, function() {
-            var ChildNode = Node.extend({});
-
-            var child = new ChildNode();
-            node.append(child);
-
-            var grandChild = new ChildNode();
-            child.append(grandChild);
-
-            ChildNode.fn.render = function() {
-                ok(true);
-                return Node.fn.render.call(this);
-            };
-
-            node.attachTo(document.createElement("div"));
-        });
     })();
 
     // ------------------------------------------------------------
@@ -272,14 +328,21 @@
 
     // ------------------------------------------------------------
     (function() {
-        module("RootNode");
+        var node;
 
-        test("attachTo directly sets element", function() {
-            var rootNode = new vml.RootNode();
-            var container = document.createElement("div");
-            rootNode.attachTo(container);
+        module("RootNode", {
+            setup: function() {
+                node = new vml.RootNode();
+            }
+        });
 
-            deepEqual(rootNode.element, container);
+        test("sets size", function() {
+            equal(node.element.style.width, "100%");
+            equal(node.element.style.height, "100%");
+        });
+
+        test("sets position", function() {
+            equal(node.element.style.position, "relative");
         });
     })();
 
@@ -287,98 +350,24 @@
     (function() {
         var groupNode;
 
+        baseNodeTests("Group", vml.GroupNode, d.Group);
+
         module("GroupNode", {
             setup: function() {
                 groupNode = new GroupNode();
             }
         });
 
-        test("attachTo sets element", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(groupNode.element);
-        });
-
-        test("attachTo sets element for child nodes", function() {
-            groupNode.append(new GroupNode());
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(groupNode.childNodes[0].element);
-        });
-
-        test("attachTo sets element for grandchild nodes", function() {
-            var child = new GroupNode();
-            var grandChild = new GroupNode();
-
-            child.append(grandChild);
-            groupNode.append(child);
-
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(grandChild.element);
-        });
-
-        test("attachTo sets _kendoNode expando", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(groupNode.element._kendoNode, groupNode);
-        });
-
-        test("attachTo sets _kendoNode expando on child elements", function() {
-            var childGroup = new GroupNode();
-            groupNode.append(childGroup);
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(childGroup.element._kendoNode, childGroup);
-        });
-
-        test("attachTo sets _kendoNode expando for grandchild nodes", function() {
-            var child = new GroupNode();
-            var grandChild = new GroupNode();
-
-            child.append(grandChild);
-            groupNode.append(child);
-
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(grandChild.element._kendoNode, grandChild);
-        });
-
-        test("clear removes element", function() {
-            groupNode.attachTo(document.createElement("div"));
-            groupNode.clear();
-
-            ok(!groupNode.element);
-        });
-
-        test("clear removes _kendoNode expando from element", function() {
-            var container = document.createElement("div");
-            groupNode.attachTo(container);
-            groupNode.clear();
-
-            ok(!container._kendoNode);
-        });
-
-        test("load attaches node", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            var group = new Group();
-            groupNode.load([group]);
-
-            ok(groupNode.childNodes[0].element);
-        });
-
         test("renders div tag", function() {
-            equal(groupNode.render(), "<div style='position:absolute;white-space:nowrap;' ></div>");
+            equal(groupNode.element.tagName.toLowerCase(), "div");
         });
 
-        test("renders visibility", function() {
-            groupNode = new GroupNode(new Group({visible: false}));
-            ok(groupNode.render().indexOf("display:none;") !== -1);
+        test("renders position", function() {
+            equal(groupNode.element.style.position, "absolute");
         });
 
-        test("does not render visibility if not set", function() {
-            ok(groupNode.render().indexOf("display:none;") === -1);
+        test("renders nowrap", function() {
+            equal(groupNode.element.style.whiteSpace, "nowrap");
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
@@ -457,18 +446,9 @@
 
             group.options.set("foo", 1);
         });
-
-        test("options change for visible updates display css style", function() {
-            var group = new Group();
-            groupNode = new GroupNode(group);
-            groupNode.css = function(style, value) {
-                equal(style, "display");
-                equal(value, "none");
-            };
-            group.visible(false);
-        });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var path,
@@ -1634,5 +1614,6 @@
 
         shapeTests(d.Image, vml.ImageNode, "ImageNode");
     })();
+    */
 
 })();
