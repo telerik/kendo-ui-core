@@ -283,7 +283,7 @@ test("combobox substracts height of header from list", function() {
       combobox.dataSource.read();
       combobox.open();
 
-      equal(combobox.ul.height(), 100 - combobox.header.height());
+      equal(combobox.ul.height(), 100 - combobox.ul[0].offsetTop);
 });
 
 test("combobox populates its list when the datasource changes", function() {

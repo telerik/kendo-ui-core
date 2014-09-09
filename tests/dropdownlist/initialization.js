@@ -933,7 +933,7 @@
 
         var list = dropdownlist.list;
         var filterHeader = list.find(".k-textbox");
-        var height = list.height() - filterHeader.outerHeight();
+        var height = list.height() - dropdownlist.ul[0].offsetTop;
 
         equal(dropdownlist.ul.height(), height);
     });

@@ -393,9 +393,7 @@ var __meta__ = {
                     list = that.list,
                     height = that.options.height,
                     visible = that.popup.visible(),
-                    filterInput = that.filterInput,
-                    header = that.header,
-                    offsetHeight = 0,
+                    offsetTop,
                     popups;
 
                 popups = list.add(list.parent(".k-animation-container")).show();
@@ -405,17 +403,11 @@ var __meta__ = {
                 popups.height(height);
 
                 if (height !== "auto") {
-                    if (filterInput) {
-                        offsetHeight += filterInput.outerHeight();
-                    }
+                    offsetTop = that.ul[0].offsetTop;
 
-                    if (header) {
-                        offsetHeight += header.outerHeight();
+                    if (offsetTop) {
+                        height = list.height() - offsetTop;
                     }
-                }
-
-                if (offsetHeight) {
-                    height = list.height() - offsetHeight;
                 }
 
                 that.ul.height(height);
