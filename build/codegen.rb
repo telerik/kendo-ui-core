@@ -97,7 +97,7 @@ namespace :generate do
         task :api => 'Kendo.Mvc.xml' do
             parser = CodeGen::MVC::API::XmlParser.new('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.xml')
 
-            generator = CodeGen::MVC::API::Generator.new('docs/api/wrappers/aspnet-mvc/')
+            generator = CodeGen::MVC::API::Generator.new('docs/api/aspnet-mvc/')
 
             parser.components do |component|
                 generator.component(component)
@@ -210,7 +210,7 @@ namespace :generate do
 
                 import_metadata(component)
 
-                generator = CodeGen::PHP::API::Generator.new('docs/api/wrappers/php/')
+                generator = CodeGen::PHP::API::Generator.new('docs/api/php/')
 
                 generator.component(component)
 
@@ -249,7 +249,7 @@ namespace :generate do
 
                 import_metadata(component)
 
-                generator = CodeGen::Java::API::Generator.new('docs/api/wrappers/jsp/')
+                generator = CodeGen::Java::API::Generator.new('docs/api/jsp/')
 
                 generator.component(component)
 

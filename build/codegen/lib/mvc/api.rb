@@ -113,7 +113,7 @@ PARAMETER = ERB.new(%{
                 if type.include?(namespace)
                     known = true
 
-                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/api/wrappers/aspnet-mvc/#{namespace}/\\1)")
+                    type = type.sub(/#{namespace}\.(\w+)/, "[#{namespace}.\\1](/api/aspnet-mvc/#{namespace}/\\1)")
                     break
                 end
             end

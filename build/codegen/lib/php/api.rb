@@ -84,12 +84,12 @@ COMPONENT_DESCRIPTION = ERB.new(%{
 
 A PHP wrapper for Kendo UI [<%= name %>](<%= api_link %>).
 <% if widget? %>
-Inherits from [\\Kendo\\UI\\Widget\](/api/wrappers/php/Kendo/UI/Widget).
+Inherits from [\\Kendo\\UI\\Widget\](/api/php/Kendo/UI/Widget).
 
 ## Usage
 
 To use <%= php_class %> in a PHP page instantiate a new instance, configure it via the available
-configuration [methods](#methods) and output it by `echo`-ing the result of the [render](/api/wrappers/php/Kendo/UI/Widget#render) method.
+configuration [methods](#methods) and output it by `echo`-ing the result of the [render](/api/php/Kendo/UI/Widget#render) method.
 
 ### Using Kendo <%= php_class %>
 
@@ -266,7 +266,7 @@ Sets the data source of the <%= name %>.
 
 ##### $value `\\Kendo\\Data\\DataSource|array`
 
-#### Example - using [\\Kendo\\Data\\DataSource](/api/wrappers/php/kendo/data/datasource)
+#### Example - using [\\Kendo\\Data\\DataSource](/api/php/kendo/data/datasource)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
@@ -295,7 +295,7 @@ Sets the data source of the <%= name %>.
 
 ##### $value `\\Kendo\\Data\\HierarchicalDataSource|array`
 
-#### Example - using [\\Kendo\\Data\\HierarchicalDataSource](/api/wrappers/php/kendo/data/hierarchicaldatasource)
+#### Example - using [\\Kendo\\Data\\HierarchicalDataSource](/api/php/kendo/data/hierarchicaldatasource)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
@@ -400,7 +400,7 @@ For additional information check the [<%= name %>](/api/<%= suite %>/<%= owner.n
     <%= owner.variable %>-><%= php_name %>('on<%= name.pascalize %>');
     ?>
 
-#### Example - using [\\Kendo\\JavaScriptFunction](/api/wrappers/php/kendo/javascriptfunction)
+#### Example - using [\\Kendo\\JavaScriptFunction](/api/php/kendo/javascriptfunction)
 
     <?php
     <%= owner.variable %> = <%= owner.value %>;
