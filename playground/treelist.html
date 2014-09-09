@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title></title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.columnsorter.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.treelist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+    </head>
+    <body>
+    <button class="filter">Filter on `Anne`</button>
+    <button class="clear">Clear</button>
+
+    <h3>TreeView</h3>
+    <div id="tree"></div>
+    <h3>TreeList</h3>
+    <div id="list"></div>
+        <script>
+            var empl = {
+                    type: "odata",
+                    serverSorting: true,
+                    page: 1,
+                    transport: {
+                        read: {
+                            //url: "http://services.odata.org/V3/Northwind/Northwind.svc/Employees",
+                            url: function(parent) {
+                                 var filter = "";
+                                 if (parent.EmployeeID) {
+                                     filter = "?$filter=(ReportsTo eq " + parent.EmployeeID + ")"
+                                 }
+                                 return "http://services.odata.org/V3/Northwind/Northwind.svc/Employees" + filter;
+                             }
+                        },
+                    },
+                    //sort: { field: "FirstName", dir: "desc" },
+                    schema: {
+                        total: '["odata.count"]',
+                        data: "value",
+                        model: {
+                            id: "EmployeeID",
+                            parentId: "ReportsTo",
+                            hasChildren: function(item){
+                                return true;
+                            }
+                        }
+                    }
+            };
+
+            var treeDS = new kendo.data.HierarchicalDataSource(empl);
+            var listDS = new kendo.data.TreeListDataSource(empl);
+
+            $("#tree").kendoTreeView({
+                dataSource: treeDS,
+                dataTextField: "FirstName"
+            });
+
+            $("#list").kendoTreeList({
+                dataSource: listDS,
+                selectable: true,
+                columns: [ { field: "FirstName", sortable: true } ]
+            });
+
+
+//            ds.read();
+//            ds.view()[0].load();
+//            ds.view()[0].children.view()[3].load();
+
+
+            $(".filter").click(function() {
+                ds.filter({ field: "FirstName", operator: "eq", value: "Anne" });
+            });
+
+            $(".clear").click(function() {
+                ds.filter({});
+            });
+        </script>
+    </body>
+</html>
+
