@@ -255,6 +255,9 @@ var __meta__ = {
                                     var _wrapper = $(widget.wrapper)[0];
                                     var _element = $(widget.element)[0];
                                     widget.destroy();
+                                    if (dropDestroyHandler) {
+                                        dropDestroyHandler();
+                                    }
                                     widget = null;
                                     if (_wrapper && _element) {
                                         _wrapper.parentNode.replaceChild(_element, _wrapper);
@@ -270,7 +273,7 @@ var __meta__ = {
                         var widget = createWidget(scope, element, attrs, role, origAttr);
                         setupBindings();
 
-                        var prev_destroy = null;
+                        var dropDestroyHandler;
                         function setupBindings() {
 
                             var isFormField = /^(input|select|textarea)$/i.test(element[0].tagName);
@@ -284,11 +287,8 @@ var __meta__ = {
                                 return isFormField ? formValue(element) : widget.value();
                             }
 
-                            // Cleanup after ourselves
-                            if (prev_destroy) {
-                                prev_destroy();
-                            }
-                            prev_destroy = scope.$on("$destroy", function() {
+                            dropDestroyHandler = scope.$on("$destroy", function() {
+                                dropDestroyHandler();
                                 if (widget) {
                                     if (widget.element) {
                                         widget = kendoWidgetInstance(widget.element);
