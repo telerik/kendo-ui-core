@@ -2216,12 +2216,10 @@
                 return result;
             },
 
-            setDataSource: function (dataSource) {
+            setDataSource: function(dataSource) {
+                // TODO: should remove this
                 this.options.dataSource = dataSource;
-                this._dataSource();
-                if (this.options.autoBind) {
-                    this.dataSource.fetch();
-                }
+                this.fetchFreshData();
             },
             /**
              * Performs a diagram layout of the given type.
@@ -2622,6 +2620,11 @@
                 if (this.options.autoBind) {
                     this.dataSource.fetch();
                 }
+
+                this._connectionDataSource();
+                if (this.options.autoBind) {
+                    this.connectionsDataSource.fetch();
+                }
             },
             _dataSource: function() {
                 var dsOptions = this.options.dataSource || {};
@@ -2715,25 +2718,19 @@
 
             _addConnections: function(connections) {
                 var length = connections.length;
+                    defaults = this.options.connectionDefaults;
 
                 for (var i = 0; i < length; i++) {
-                    this._addDataItem(connections[i]);
+                    var conn = connections[i];
+                    var from = this._dataMap[conn.from];
+                    var to = this._dataMap[conn.to];
+
+                    if (from && to) {
+                        this.connect(from, to, deepExtend({}, defaults, conn));
+                    }
                 }
-
-                //var diagram = this,
-                //    options = diagram.options,
-                //    defaults = options.connectionDefaults,
-                //    connections = options.connections,
-                //    conn, source, target, i;
-
-                //for(i = 0; i < connections.length; i++) {
-                //    conn = connections[i];
-                //    source = diagram._findConnectionShape(conn.from);
-                //    target = diagram._findConnectionShape(conn.to);
-
-                //    diagram.connect(source, target, deepExtend({}, defaults, conn));
-                //}
             },
+
             //_dataSource: function () {
             //    var that = this,
             //        options = that.options,
