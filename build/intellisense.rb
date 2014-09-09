@@ -7,10 +7,6 @@ INTELLISENSE_DOC_TEMPLATE_CONTENTS = File.read(File.join(File.dirname(__FILE__),
 INTELLISENSE_DOC_TEMPLATE = ERB.new INTELLISENSE_DOC_TEMPLATE_CONTENTS, 0, '%<>'
 
 module CodeGen::IntelliSense
-    EXCLUDE = [
-        'docs/api/framework/fx.md'
-    ]
-
     class Component < CodeGen::Component
 
         def real_class?
@@ -61,8 +57,6 @@ module CodeGen::IntelliSense
 end
 
 def get_intellisense(sources)
-
-    sources = sources.find_all { |source| !CodeGen::IntelliSense::EXCLUDE.include?(source) }
 
     classes = sources.map do |source|
         parser = CodeGen::MarkdownParser.new

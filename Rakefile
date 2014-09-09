@@ -76,33 +76,32 @@ ROOT_MAP = {
     'typescript' => 'resources/typescript'
 }
 
+def api_doc(wildcard)
+    FileList[File.join("docs/api/javascript", wildcard)]
+end
+
+def all_docs(prefix)
+    api_doc(File.join(prefix, "**/*.md"))
+end
+
+def framework_api_doc
+    api_doc("*.md").include(all_docs("data"))
+end
+
 def md_api_suite(suite)
     case suite
     when 'all'
-        FileList["docs/api/web/*.md"]
-        .include('docs/api/framework/*.md')
-        .include('docs/api/dataviz/**/*.md')
-        .include('docs/api/mobile/*.md')
-
+        all_docs("").exclude("docs/api/javascript/effects/**/*.md")
     when 'web'
-        FileList["docs/api/web/*.md"]
-        .include('docs/api/framework/*.md')
-
+        all_docs("ui").include(framework_api_doc)
     when 'dataviz'
-        FileList["docs/api/dataviz/**/*.md"]
-         .include('docs/api/framework/*.md')
-
+        all_docs("dataviz").include(framework_api_doc)
     when 'mobile'
-        FileList["docs/api/mobile/*.md"]
-        .include('docs/api/framework/*.md')
-
+        all_docs("mobile").include(framework_api_doc)
     when 'dataviz.mobile'
-        FileList["docs/api/mobile/*.md"]
-        .include('docs/api/dataviz/**/*.md')
-        .include('docs/api/framework/*.md')
+        all_docs("mobile").include(all_docs("dataviz")).include(framework_api_doc)
     end
 end
-
 
 require 'version'
 require 'timezone'

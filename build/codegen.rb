@@ -46,10 +46,10 @@ namespace :generate do
         desc 'Generate ASP.NET WebForms wrappers'
         task :wrappers do
             markdown = FileList[
-                'docs/api/dataviz/diagram.md',
-                'docs/api/dataviz/diagram/connection.md',
-                'docs/api/dataviz/diagram/shape.md',
-                'docs/api/dataviz/map.md'
+                'docs/api/javascript/dataviz/ui/diagram.md',
+                'docs/api/javascript/dataviz/diagram/connection.md',
+                'docs/api/javascript/dataviz/diagram/shape.md',
+                'docs/api/javascript/dataviz/map.md'
             ]
 
 
@@ -108,13 +108,13 @@ namespace :generate do
             desc 'Generate MVC DataViz wrappers'
             task :wrappers do
                 markdown = FileList[
-                    'docs/api/dataviz/map.md',
-                    'docs/api/dataviz/diagram.md',
-                    'docs/api/dataviz/treemap.md',
-                    'docs/api/web/colorpicker.md',
-                    'docs/api/web/gantt.md',
-                    'docs/api/web/toolbar.md',
-                    'docs/api/web/treeview.md'
+                    'docs/api/javascript/dataviz/ui/map.md',
+                    'docs/api/javascript/dataviz/ui/diagram.md',
+                    'docs/api/javascript/dataviz/ui/treemap.md',
+                    'docs/api/javascript/ui/colorpicker.md',
+                    'docs/api/javascript/ui/gantt.md',
+                    'docs/api/javascript/ui/toolbar.md',
+                    'docs/api/javascript/ui/treeview.md'
                 ]
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
@@ -150,7 +150,7 @@ namespace :generate do
 
             desc 'Generate MVC Mobile wrappers'
             task :wrappers do
-                markdown = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
+                markdown = FileList['docs/api/javascript/mobile/ui/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller|mobilewidget/)
 
                 components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::Mobile::Component) }
                     .sort { |a, b| a.name <=> b.name }
