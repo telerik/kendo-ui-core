@@ -7,6 +7,8 @@ namespace Kendo.Mvc.UI
         
         Up ,
         
+        Left ,
+        
         Right ,
         
         Radial ,
