@@ -58,6 +58,11 @@ var __meta__ = {
     var TreeListModel = Model.define({
         id: "id",
 
+        fields: {
+            id: { type: "number" },
+            parentId: { type: "number", defaultValue: null }
+        },
+
         init: function(value) {
             Model.fn.init.call(this, value);
 
@@ -67,9 +72,6 @@ var __meta__ = {
         loaded: function(value) {
             if (value !== undefined) {
                 this._loaded = value;
-                if (!value) {
-                    this.__items = undefined;
-                }
             } else {
                 return this._loaded;
             }
@@ -103,6 +105,32 @@ var __meta__ = {
 
             this.one(CHANGE, proxy(this._modelLoaded, this, model.id));
             this[method]({ id: model.id });
+        },
+
+        _byParentId: function(id) {
+            var result = [];
+            var view = this.view();
+
+            for (var i = 0; i < view.length; i++) {
+                if (view[i].parentId == id) {
+                    result.push(view[i]);
+                }
+            }
+
+            return result;
+        },
+
+        childNodes: function(model) {
+            return this._byParentId(model.id);
+        },
+
+        rootNodes: function() {
+            var model = this.reader.model;
+            return this._byParentId(model.fields.parentId.defaultValue);
+        },
+
+        parentNode: function(model) {
+            return this.get(model.parentId);
         },
 
         _modelLoaded: function(id) {

@@ -145,4 +145,103 @@
         ds.load(ds.at(0));
     });
 
+    test("childNodes returns child items", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 },
+                { id: 3, parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        var childNodes = ds.childNodes(ds.get(1));
+        equal(childNodes.length, 1);
+
+        childNodes = ds.childNodes(ds.get(2));
+        equal(childNodes.length, 1);
+    });
+
+    test("childNodes returns multiple child items", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 1 },
+                { id: 5, parentId: 2 },
+                { id: 6, parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        var childNodes = ds.childNodes(ds.get(1));
+        equal(childNodes.length, 3);
+
+        childNodes = ds.childNodes(ds.get(2));
+        equal(childNodes.length, 2);
+    });
+
+    test("parentNode returns parent node", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 },
+                { id: 3, parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        var parent = ds.parentNode(ds.get(2));
+        equal(parent.id, 1);
+    });
+
+    test("rootNodes returns root nodes", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 2, parentId: null },
+                { id: 5, parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        var roots = ds.rootNodes();
+        equal(roots.length, 2);
+        equal(roots[0].id, 1);
+        equal(roots[1].id, 2);
+    });
+
+    test("rootNodes uses parentId defaultValue", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: -1 },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 2, parentId: -1 },
+                { id: 5, parentId: 2 }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        parentId: { defaultValue: -1 }
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        var roots = ds.rootNodes();
+        equal(roots.length, 2);
+        equal(roots[0].id, 1);
+        equal(roots[1].id, 2);
+    });
+
 })();
