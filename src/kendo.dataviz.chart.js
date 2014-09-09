@@ -10623,7 +10623,7 @@ var __meta__ = {
             var result = null;
 
             if (countNumbers(values)) {
-                result = this.sum(values);
+                result = Aggregates.sum(values);
             }
 
             return result;
