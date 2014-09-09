@@ -2698,10 +2698,14 @@
                         continue;
                     }
 
-                    var options = deepExtend({}, this.options.shapeDefaults, {
+                    var options = deepExtend({},
+                        this.options.shapeDefaults,
+                        filterDataItem(
+                            [ "test", "id", "x", "y", "width", "height", "type", "visual" ],
+                            dataItem
+                        )
+                    );
 
-
-                    });
                     shape = new Shape(options, dataItem);
                     this.addShape(shape);
                     this._dataMap[dataItem.id] = shape;
@@ -2832,7 +2836,6 @@
             }
         });
 
-
         var ConnectionModel = kendo.data.Model.define({
             id: "id",
 
@@ -2840,7 +2843,8 @@
                 id: { type: "number" },
                 text: { type: "string" },
                 from: { type: "number" },
-                to: { type: "number" }
+                to: { type: "number" },
+                type: { type: "string" }
             }
         });
 
@@ -2881,6 +2885,20 @@
             ConnectionModel: ConnectionModel,
             ShapeModel: ShapeModel
         });
+
+        function filterDataItem(fields, dataItem) {
+            var result = {};
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                var value = dataItem[field];
+
+                if (value !== null && value !== undefined) {
+                    result[field] = value;
+                }
+            };
+
+            return result;
+        }
 
         dataviz.ui.plugin(Diagram);
 
