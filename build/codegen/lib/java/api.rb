@@ -177,7 +177,7 @@ COMPOSITE_OPTION_SECTION = ERB.new(%{
 
 <%= description %>
 
-More documentation is available at [kendo:<%= tag_name %>](/api/wrappers/jsp/<%= namespace %>/<%= tag_name.downcase.sub(namespace + '-', '') %>).
+More documentation is available at [kendo:<%= tag_name %>](/api/jsp/<%= namespace %>/<%= tag_name.downcase.sub(namespace + '-', '') %>).
 
 #### Example
 

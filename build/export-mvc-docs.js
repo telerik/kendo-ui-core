@@ -243,7 +243,7 @@ function exportDocs() {
             type = type.replace(regExp, function($0, $1) {
                 known = true;
 
-                var result = "[" + namespace + "." + $1 + "](/api/wrappers/aspnet-mvc/" + namespace + "/" + $1.replace(/<[^>]*>/g, "") + ")";
+                var result = "[" + namespace + "." + $1 + "](/api/aspnet-mvc/" + namespace + "/" + $1.replace(/<[^>]*>/g, "") + ")";
 
                 return result;
             });
@@ -381,7 +381,7 @@ function exportDocs() {
 
     function exportNamespace(namespace) {
         var types = getTypesByNamespace(namespace);
-        var path = "docs/api/wrappers/aspnet-mvc/" + namespace;
+        var path = "docs/api/aspnet-mvc/" + namespace;
         var typeName;
         var type;
 
