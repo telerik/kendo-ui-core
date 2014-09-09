@@ -18,7 +18,8 @@ var __meta__ = {
     var kendoTextElement = kendoDom.text;
     var ui = kendo.ui;
     var Widget = ui.Widget;
-    var HierarchicalDataSource = data.HierarchicalDataSource;
+    var DataSource = data.DataSource;
+    var Model = data.Model;
     var proxy = $.proxy;
     var map = $.map;
     var CHANGE = "change";
@@ -54,14 +55,58 @@ var __meta__ = {
         dragClueText: "k-clue-text"
     };
 
-    var TreeListDataSource = HierarchicalDataSource.extend({
+    var TreeListModel = Model.define({
+        id: "id",
+
+        init: function(value) {
+            Model.fn.init.call(this, value);
+
+            this._loaded = false;
+        },
+
+        loaded: function(value) {
+            if (value !== undefined) {
+                this._loaded = value;
+                if (!value) {
+                    this.__items = undefined;
+                }
+            } else {
+                return this._loaded;
+            }
+        },
+
+        shouldSerialize: function(field) {
+            return field == "id" || field != "_loaded" && Model.fn.shouldSerialize(this, field);
+        }
+    });
+
+    var TreeListDataSource = DataSource.extend({
         init: function(options) {
-            var children = kendo.getter("schema.model.children", true)(options || {});
-            if (children) {
-                throw new Error("TreeListDataSource can only be bound to homogeneous data.");
+            DataSource.fn.init.call(this, extend(true, {}, {
+                schema: {
+                    modelBase: TreeListModel,
+                    model: TreeListModel
+                }
+            }, options));
+        },
+
+        _readData: function(data) {
+            return this.data().toJSON().concat(DataSource.fn._readData.call(this, data));
+        },
+
+        load: function(model) {
+            var method = "_query";
+
+            if (!model.loaded()) {
+                method = "read";
             }
 
-            HierarchicalDataSource.fn.init.call(this, options);
+            this.one(CHANGE, proxy(this._modelLoaded, this, model.id));
+            this[method]({ id: model.id });
+        },
+
+        _modelLoaded: function(id) {
+            this.get(id).loaded(true);
         }
     });
 
@@ -289,7 +334,7 @@ var __meta__ = {
             for (var i = 0, length = tasks.length; i < length; i++) {
                 task = tasks[i];
 
-                level = task.level();
+                level = 0; //datasource.level(task);
 
                 attr = {
                     "data-uid": task.uid,
@@ -468,7 +513,8 @@ var __meta__ = {
     });
 
     extend(true, kendo.data, {
-        TreeListDataSource: TreeListDataSource
+        TreeListDataSource: TreeListDataSource,
+        TreeListModel: TreeListModel
     });
 
     extend(true, kendo.ui, {
