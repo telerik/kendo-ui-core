@@ -941,6 +941,9 @@
         stroke: function() {
             this._out("S", NL);
         },
+        clip: function() {
+            this._out("W", NL);
+        },
         closeStroke: function() {
             this._out("s", NL);
         },
@@ -1102,9 +1105,77 @@
         };
     }
 
+    function parseFontDef(fontdef) {
+        // XXX: this is very crude for now.  Proper parsing is quite involved.
+        var rx = /^\s*((normal|italic)\s+)?((normal|small-caps)\s+)?((normal|bold)\s+)?(([0-9.]+)(px|pt))(\/(([0-9.]+)(px|pt)))?\s+(.*?)\s*$/i;
+        var m = rx.exec(fontdef);
+        if (!m) {
+            return { fontSize: 12, fontFamily: "sans-serif" };
+        }
+        return {
+            italic     : m[2] && m[2].toLowerCase() == "italic",
+            variant    : m[4],
+            bold       : m[6] && m[6].toLowerCase() == "bold",
+            fontSize   : m[8] ? parseInt(m[8], 10) : 12,
+            lineHeight : m[12] ? parseInt(m[12], 10) : null,
+            fontFamily : m[14].split(/\s*,\s*/g)
+        };
+    }
+
+    function getFontURL(style) {
+        function mkFamily(name) {
+            if (style.bold) name += "|bold";
+            if (style.italic) name += "|italic";
+            return name.toLowerCase();
+        }
+        var fontFamily = style.fontFamily;
+        var name, url;
+        if (fontFamily instanceof Array) {
+            for (var i = 0; i < fontFamily.length; ++i) {
+                name = mkFamily(fontFamily[i]);
+                url = FONT_MAPPINGS[name];
+                if (url) return url;
+            }
+        } else {
+            url = FONT_MAPPINGS[fontFamily.toLowerCase()];
+        }
+        if (!url) url = "Times-Roman";
+        return url;
+    }
+
+    var FONT_MAPPINGS = {
+        "serif"                  : "Times-Roman",
+        "serif|bold"             : "Times-Bold",
+        "serif|italic"           : "Times-Italic",
+        "serif|bold|italic"      : "Times-BoldItalic",
+        "sans-serif"             : "Helvetica",
+        "sans-serif|bold"        : "Helvetica-Bold",
+        "sans-serif|italic"      : "Helvetica-Oblique",
+        "sans-serif|bold|italic" : "Helvetica-BoldOblique",
+        "monospace"              : "Courier",
+        "monospace|bold"         : "Courier-Bold",
+        "monospace|italic"       : "Courier-Oblique",
+        "monospace|bold|italic"  : "Courier-BoldOblique",
+    };
+
+    function defineFont(name, url) {
+        if (arguments.length == 1) {
+            for (var i in name) {
+                defineFont(i, name[i]);
+            }
+        } else {
+            name = name.toLowerCase();
+            FONT_MAPPINGS[name] = url;
+        }
+    }
+
     /// exports.
 
     PDF.BinaryStream = BinaryStream;
+    PDF.defineFont = defineFont;
+    PDF.parseFontDef = parseFontDef;
+    PDF.getFontURL = getFontURL;
+
     global.kendo.PDF = PDF;
 
 })(Function("return this")());
