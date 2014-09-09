@@ -237,6 +237,28 @@ h2+.box
 .suite-column > a:hover {
     background-color: #d3470f;
 }
+
+.new-widget,
+.beta-widget
+{
+    position: relative;
+    display: inline-block;
+    height: 9px;
+    width: 37px;
+    margin: 0 7px;
+    background-repeat: no-repeat;
+    background-image: url(tags.png);
+}
+
+.new-widget { width: 18px; background-position: -19px -9px; }
+.beta-widget { width: 21px; background-position: -16px 0; }
+
+h2 .new-widget,
+h2 .beta-widget {
+    vertical-align: top;
+    margin-top: 8px;
+}
+
 @media screen and (min-width: 1000px) {
     #page > ul > li {
         clear: none;
