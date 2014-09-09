@@ -605,59 +605,49 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var path,
-            fillNode,
-            container;
+            fillNode;
+
+        function createNode(pathOptions) {
+            path = new Path(pathOptions);
+            fillNode = new FillNode(path);
+        }
 
         module("FillNode", {
             setup: function() {
-                container = document.createElement("div");
-
-                path = new Path();
-                fillNode = new FillNode(path);
-                fillNode.attachTo(container);
+                createNode();
             }
         });
 
         test("renders on attribute if no fill set", function() {
-            path.options.set("fill", { color: "red" });
-            ok(fillNode.render().indexOf("on='true'") !== -1);
+            createNode({ fill: { color: "red" } });
+            equal(fillNode.element.on, "true");
         });
 
         test("renders on attribute if no fill set", function() {
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            equal(fillNode.element.on, "false");
         });
 
         test("renders on attribute if set to none", function() {
-            path.options.set("fill.color", "none");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
-        });
-
-        test("renders on attribute if set to none", function() {
-            path.options.set("fill.color", "none");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            createNode({ fill: { color: "none" } });
+            equal(fillNode.element.on, "false");
         });
 
         test("renders on attribute if set to transparent", function() {
-            path.options.set("fill.color", "transparent");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            createNode({ fill: { color: "transparent" } });
+            equal(fillNode.element.on, "false");
         });
 
         test("renders color", function() {
-            path.options.set("fill", { color: "red" });
-            var vml = fillNode.render();
-
-            ok(vml.indexOf("color='red'") !== -1);
+            createNode({ fill: { color: "red" } });
+            equal(fillNode.element.color, "red");
         });
 
         test("renders opacity", function() {
-            path.options.set("fill", { opacity: 0.5 });
-            var vml = fillNode.render();
-
-            ok(vml.indexOf("opacity='0.5'") !== -1);
+            createNode({ fill: { opacity: 0.5 } });
+            equal(fillNode.element.opacity, "0.5");
         });
 
         test("optionsChange sets fill color", function() {
@@ -672,8 +662,9 @@
 
         test("optionsChange sets fill opacity", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "opacity");
-                equal(value, 0.4);
+                if(name === "opacity") {
+                    equal(value, 0.4);
+                }
             };
 
             path.options.set("fill.opacity", 0.4);
@@ -681,8 +672,9 @@
 
         test("optionsChange clears fill for none", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "none");
@@ -690,8 +682,9 @@
 
         test("optionsChange clears fill for none", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "none");
@@ -699,8 +692,9 @@
 
         test("optionsChange clears fill for transparent", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if(name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "transparent");
@@ -732,6 +726,7 @@
         });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var transformNode;
