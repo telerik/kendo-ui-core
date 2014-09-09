@@ -315,9 +315,9 @@
 
     var TransformNode = Node.extend({
         init: function(srcElement, transform) {
-            Node.fn.init.call(this, srcElement);
-
             this.transform = transform;
+
+            Node.fn.init.call(this, srcElement);
         },
 
         createElement: function() {

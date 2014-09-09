@@ -469,6 +469,10 @@
             }
         });
 
+        test("renders stroke element", function() {
+            equal(strokeNode.element.tagName.toLowerCase(), "kvml:stroke");
+        });
+
         test("renders on attribute", function() {
             createNode({ stroke: { color: "red" } });
             equal(strokeNode.element.on, "true");
@@ -621,6 +625,10 @@
             }
         });
 
+        test("renders fill element", function() {
+            equal(fillNode.element.tagName.toLowerCase(), "kvml:fill");
+        });
+
         test("renders on attribute if no fill set", function() {
             createNode({ fill: { color: "red" } });
             equal(fillNode.element.on, "true");
@@ -726,61 +734,64 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var transformNode;
 
+        function createNode(matrix) {
+            transformNode = new vml.TransformNode(new d.Element(), matrix);
+        }
+
         module("TransformNode", {
             setup: function() {
-                transformNode = new TransformNode(new d.Element(), new Matrix(1,2,3,4,5,6));
+                createNode(new g.Matrix(1, 2, 3, 4, 5, 6));
             }
         });
 
         test("renders skew element", function() {
-            equal(transformNode.render().indexOf("<kvml:skew"), 0);
+            equal(transformNode.element.tagName.toLowerCase(), "kvml:skew");
         });
 
         test("sets on to true when matrix is available", function() {
-            ok(transformNode.render().indexOf("on='true'") !== -1);
+            equal(transformNode.element.on, "true");
         });
 
         test("sets on to false when matrix is not available", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("on='false'") !== -1);
+            createNode();
+            equal(transformNode.element.on, "false");
         });
 
         test("renders matrix attribute", function() {
-            ok(transformNode.render().indexOf("matrix='1,3,2,4,0,0'") !== -1);
+            equal(transformNode.element.matrix, "1,3,2,4,0,0");
         });
 
         test("rounds matrix values to the 4th digit", function() {
-            var value = 0.55555;
-            transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
-            equal(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1], 0.5556);
+            createNode(new Matrix(0.55555, 0, 0, 1, 0, 0));
+            var matrix = transformNode.element.matrix;
+            equal(matrix.substring(0, matrix.indexOf(",")), "0.5556");
         });
 
         test("does not render matrix attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("matrix") === -1);
+            createNode();
+            ok(!transformNode.element.matrix);
         });
 
         test("renders offset attribute", function() {
-            ok(transformNode.render().indexOf("offset='5px,6px'") !== -1);
+            equal(transformNode.element.offset, "5px,6px");
         });
 
         test("does not render offset attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("offset") === -1);
+            createNode();
+            ok(!transformNode.element.offset);
         });
 
         test("renders origin attribute", function() {
-            ok(transformNode.render().indexOf("origin='-0.5,-0.5'") !== -1);
+            equal(transformNode.element.origin, "-0.5,-0.5");
         });
 
         test("does not render origin attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("origin") === -1);
+            createNode();
+            ok(!transformNode.element.offset);
         });
 
         test("options change updates attributes", 4, function() {
@@ -842,6 +853,7 @@
             transformNode.refresh(new Matrix(1,2,3,4,5,6));
         });
     })();
+    /*
 
     // ------------------------------------------------------------
     function shapeTests(TShape, TNode, name) {
