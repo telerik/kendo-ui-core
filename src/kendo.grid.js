@@ -3784,6 +3784,9 @@ var __meta__ = {
                     var cellOptions = col.filterable && col.filterable.cell || {};
 
                     suggestDataSource = that.options.dataSource;
+                    if (suggestDataSource instanceof DataSource) {
+                        suggestDataSource = that.options.dataSource.options;
+                    }
 
                     var messages = extend(true, {}, filterable.messages);
                     if (col.filterable) {
