@@ -12,6 +12,7 @@
       :values:
           - down
           - up
+          - left
           - right
           - radial
           - tipover

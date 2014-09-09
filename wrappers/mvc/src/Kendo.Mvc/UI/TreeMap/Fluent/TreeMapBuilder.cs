@@ -35,6 +35,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// The theme of the TreeMap.
+        /// </summary>
+        /// <param name="value">The value that configures the theme.</param>
+        public TreeMapBuilder Theme(string value)
+        {
+            container.Theme = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The data item field which contains the tile value.
         /// </summary>
         /// <param name="value">The value that configures the valuefield.</param>
