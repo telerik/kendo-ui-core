@@ -418,7 +418,7 @@
             var styles = Node.fn.mapStyle.call(this);
 
             if (!width || !height) {
-                width = height = COORDINATE_MULTIPLE
+                width = height = COORDINATE_MULTIPLE;
             }
 
             styles.push(
