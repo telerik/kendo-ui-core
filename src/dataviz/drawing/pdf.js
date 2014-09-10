@@ -113,11 +113,13 @@
         var color = stroke.color;
         if (color) {
             color = parseColor(color);
+            if (color == null) return; // no stroke
             page.setStrokeColor(color.r, color.g, color.b);
         }
 
         var width = stroke.width;
         if (width != null) {
+            if (width == 0) return; // no stroke
             page.setLineWidth(width);
         }
 
@@ -161,11 +163,17 @@
     }
 
     function maybeFillStroke(element, page, pdf) {
-        if (element.fill() && element.stroke()) {
+        function should(thing) {
+            return thing
+                && !/^(none|transparent)$/i.test(thing.color)
+                && (thing.width == null || thing.width > 0)
+                && (thing.opacity == null || thing.opacity > 0);
+        }
+        if (should(element.fill()) && should(element.stroke())) {
             page.fillStroke();
-        } else if (element.fill()) {
+        } else if (should(element.fill())) {
             page.fill();
-        } else if (element.stroke()) {
+        } else if (should(element.stroke())) {
             page.stroke();
         }
     }
@@ -268,6 +276,9 @@
 
     function parseColor(color) {
         color = color.toLowerCase();
+        if (/^(none|transparent)$/.test(color)) {
+            return null;
+        }
         if (dataviz.Color.namedColors.hasOwnProperty(color)) {
             color = dataviz.Color.namedColors[color];
         }

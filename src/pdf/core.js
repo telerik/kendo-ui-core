@@ -11,9 +11,7 @@
 
     var NL = "\n";
 
-    var FONT_RESOURCE_COUNTER = 0;
-    var GS_RESOURCE_COUNTER = 0;
-    var X_RESOURCE_COUNTER = 0;
+    var RESOURCE_COUNTER = 0;
 
     var STANDARD_FONTS = [
         "Times-Roman",
@@ -317,7 +315,7 @@
                     props.ca = opacity;
                 }
                 gs = this.attach(new PDFDictionary(props));
-                gs._resourceName = PDFName.get("GS" + (++GS_RESOURCE_COUNTER));
+                gs._resourceName = PDFName.get("GS" + (++RESOURCE_COUNTER));
                 cache[id] = gs;
             }
             return gs;
@@ -430,9 +428,9 @@
     }, {
         render: function(out) {
             //out("(\xFE\xFF", utf16_be_encode(this.escape()), ")");
-            var txt = "";
-            for (var i = 0; i < this.value.length; ++i) {
-                txt += String.fromCharCode(this.value.charCodeAt(i) & 0xFF);
+            var txt = "", esc = this.escape();
+            for (var i = 0; i < esc.length; ++i) {
+                txt += String.fromCharCode(esc.charCodeAt(i) & 0xFF);
             }
             out("(", txt, ")");
         },
@@ -566,7 +564,7 @@
                 4: "DeviceCMYK"
             }[img.channels])
         };
-        this._resourceName = PDFName.get("I" + (++X_RESOURCE_COUNTER));
+        this._resourceName = PDFName.get("I" + (++RESOURCE_COUNTER));
     }, {}, PDFStream);
 
     /// standard fonts
@@ -577,7 +575,7 @@
             Subtype  : PDFName.get("Type1"),
             BaseFont : PDFName.get(name)
         };
-        this._resourceName = PDFName.get("F" + (++FONT_RESOURCE_COUNTER));
+        this._resourceName = PDFName.get("F" + (++RESOURCE_COUNTER));
     }, {
         encodeText: function(str) {
             return new PDFString(str+"");
@@ -595,7 +593,7 @@
         this._pdf = pdf;
         this._font = font;
         this._sub = font.makeSubset();
-        this._resourceName = PDFName.get("F" + (++FONT_RESOURCE_COUNTER));
+        this._resourceName = PDFName.get("F" + (++RESOURCE_COUNTER));
 
         var head = font.head;
 
