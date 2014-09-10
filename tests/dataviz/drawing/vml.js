@@ -1305,11 +1305,10 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textPathDataNode;
+        var node;
 
         module("TextPathDataNode", {
             setup: function() {
@@ -1318,27 +1317,31 @@
                     return { width: 40, height: 20, baseline: 15 };
                 };
 
-                textPathDataNode = new vml.TextPathDataNode(text);
+                node = new vml.TextPathDataNode(text);
             }
         });
 
         test("renders text path", function() {
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("renders text path w/o current transform", function() {
             var group = new d.Group({ transform: g.transform().translate(100, 100) });
             group.append(text);
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            node = new vml.TextPathDataNode(text);
+
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("renders text path w/o transform", function() {
             text.transform(g.transform().translate(100, 100));
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            node = new vml.TextPathDataNode(text);
+
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("geometryChange updates path", function() {
-            textPathDataNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(name, "v");
                 equal(value, "m 0,11000 l 4000,11000");
             };
@@ -1347,7 +1350,7 @@
         });
 
         test("rounds path coordinates", function() {
-            textPathDataNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(value, "m 10001,11001 l 14001,11001");
             };
 
@@ -1358,25 +1361,25 @@
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textPathNode;
+        var node;
 
         module("TextPathNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point(), { font: "4pt Arial" });
-                textPathNode = new vml.TextPathNode(text);
+                node = new vml.TextPathNode(text);
             }
         });
 
         test("renders style", function() {
-            ok(textPathNode.render().indexOf("style='font:4pt Arial;'") > -1);
+            equal(node.element.style.font, "4pt Arial");
         });
 
         test("renders string", function() {
-            ok(textPathNode.render().indexOf("string='Foo'") > -1);
+            equal(node.element.string, "Foo");
         });
 
         test("optionsChange updates style", function() {
-            textPathNode.css = function(name, value) {
+            node.css = function(name, value) {
                 equal(name, "font");
                 equal(value, "10pt Arial");
             };
@@ -1385,7 +1388,7 @@
         });
 
         test("optionsChange updates string", function() {
-            textPathNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(name, "string");
                 equal(value, "Bar");
             };
@@ -1397,38 +1400,42 @@
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textNode;
+        var node;
 
         module("TextNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point());
-                textNode = new vml.TextNode(text);
+                node = new vml.TextNode(text);
             }
         });
 
         test("forwards font change to path node", function() {
-            textNode.path.optionsChange = function() { ok(true); };
+            node.path.optionsChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards font change to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true); };
+            node.pathData.geometryChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards optionsChange to path node", function() {
-            textNode.path.optionsChange = function() { ok(true); };
+            node.path.optionsChange = function() { ok(true); };
             text.content("Bar");
         });
 
         test("geometryChange is forwarded to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true); };
+            node.pathData.geometryChange = function() { ok(true); };
             text.position().setX(1);
         });
 
-        shapeTests(d.Text, vml.TextNode, "TextNode");
+        shapeTests("TextNode", function(shapeOptions) {
+            var text = new d.Text("Foo", [], shapeOptions);
+            return new vml.TextNode(text);
+        });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var image;

@@ -592,6 +592,8 @@
         optionsChange: function(e) {
             if (e.field === "content") {
                 this.setString();
+            } else {
+                this.setStyle();
             }
 
             Node.fn.optionsChange.call(this, e);
