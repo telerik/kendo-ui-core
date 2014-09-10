@@ -78,7 +78,7 @@ var __meta__ = {
         },
 
         shouldSerialize: function(field) {
-            return field == "id" || field != "_loaded" && Model.fn.shouldSerialize(this, field);
+            return Model.fn.shouldSerialize.call(this, field) && field !== "_loaded";
         }
     });
 
@@ -267,7 +267,7 @@ var __meta__ = {
                     if (!model.loaded()) {
                         that.dataSource.load(model);
                     } else {
-                        that._render(that.dataSource.rootNodes());
+                        that.refresh();
                     }
 
                     e.stopPropagation();

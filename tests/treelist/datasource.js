@@ -18,6 +18,22 @@
         ok(m.loaded());
     });
 
+    test("toJSON serializes id and parentId", function() {
+        var m = new TreeListModel({ id: 12, parentId: 20 });
+
+        var json = m.toJSON();
+        equal(json.id, 12);
+        equal(json.parentId, 20);
+    });
+
+    test("toJSON does not serialize _loaded flag", function() {
+        var m = new TreeListModel();
+
+        m.loaded(true);
+
+        ok(typeof m.toJSON()._loaded === "undefined");
+    });
+
     module("TreeListDataSource");
 
     test("extends DataSource", function() {
