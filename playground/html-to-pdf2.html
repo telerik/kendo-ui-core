@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
+    <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="loader.js"></script>
+    <script>
+      requireSync([
+        "../src/jquery.js",
+        "../src/kendo.all.js"
+      ]);
+    </script>
+
+    <script src="html2canvas/core.js"></script>
+    <script src="html2canvas/dummyimagecontainer.js"></script>
+    <script src="html2canvas/font.js"></script>
+    <script src="html2canvas/fontmetrics.js"></script>
+    <script src="html2canvas/gradientcontainer.js"></script>
+    <script src="html2canvas/imagecontainer.js"></script>
+    <script src="html2canvas/imageloader.js"></script>
+    <script src="html2canvas/lineargradientcontainer.js"></script>
+    <script src="html2canvas/log.js"></script>
+    <script src="html2canvas/nodecontainer.js"></script>
+    <script src="html2canvas/nodeparser.js"></script>
+    <script src="html2canvas/proxyimagecontainer.js"></script>
+    <script src="html2canvas/renderer.js"></script>
+    <script src="html2canvas/renderers/canvas.js"></script>
+    <script src="html2canvas/stackingcontext.js"></script>
+    <script src="html2canvas/support.js"></script>
+    <script src="html2canvas/textcontainer.js"></script>
+    <script src="html2canvas/webkitgradientcontainer.js"></script>
+
+    <script src="html2canvas/renderers/kendo.js"></script>
+
+    <script>
+        kendo.PDF.defineFont({
+            "Verdana"             : "./Verdana/Verdana.ttf",
+            "Verdana|Bold"        : "./Verdana/Verdana_Bold.ttf",
+            "Verdana|Bold|Italic" : "./Verdana/Verdana_Bold_Italic.ttf",
+            "Verdana|Italic"      : "./Verdana/Verdana_Italic.ttf"
+        });
+    </script>
+
+    <style>
+      body {
+        margin: 0; padding: 1em;
+        font-size: 12px;
+        background: #ffc;
+        font-family: Verdana;
+      }
+      .k-widget, button {
+        font-family: Verdana !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 20em; margin: 1em">
+      <div id="grid"></div>
+      <button onclick="getPDF('#grid')">Get PDF</button>
+      <button onclick="draw('#grid')">Draw</button>
+    </div>
+
+    <div style="width: 20em; margin: 1em">
+      <div id="calendar"></div>
+      <button onclick="getPDF('#calendar')">Get PDF</button>
+      <button onclick="draw('#calendar')">Draw</button>
+    </div>
+
+    <div style="width: 10em; text-align: center; border-radius: 5px; border: 2px solid black; padding: 3px 10px">Rounded border</div>
+
+    <button onclick="getPDF('body')">PDF all</button>
+    <button onclick="draw('body')">Draw all</button>
+
+    <script>
+      function getPDF(sel) {
+        html2canvas($(sel)[0], {
+          logging: true,
+          async: false,
+          onrendered: function(root) {
+            kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
+          }
+        });
+      }
+
+      function draw(sel) {
+        html2canvas($(sel)[0], {
+          logging: true,
+          async: false,
+          onrendered: function(root) {
+            $(".surface").remove();
+            var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").insertAfter(sel);
+            var surface = kendo.dataviz.drawing.Surface.create(el);
+            surface.draw(root);
+          }
+        });
+      }
+
+      $("#grid").kendoGrid({
+        sortable: true,
+        selectable: true,
+        dataSource: [
+          { id: 1, text: "Foo" },
+          { id: 2, text: "Bar" },
+          { id: 3, text: "Baz" },
+          { id: 4, text: "½ ăşţîâ ¾" }
+        ],
+        columns: [
+          { title: "ID", field: "id" },
+          { title: "Text", field: "text" }
+        ]
+      });
+
+      $("#calendar").kendoCalendar();
+    </script>
+  </body>
+</html>
