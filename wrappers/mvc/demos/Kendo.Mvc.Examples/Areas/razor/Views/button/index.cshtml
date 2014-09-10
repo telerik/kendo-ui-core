@@ -1,40 +1,69 @@
-<p>
+<div>
+    <h4>Basic Button</h4>
+    <p>
+    @(Html.Kendo().Button()
+        .Name("primaryTextButton")
+        .HtmlAttributes( new {type = "button", @class = "k-primary" } )
+        .Content("Primary Button"))
 
-@(Html.Kendo().Button()
-    .Name("textButton")
-    .HtmlAttributes( new {type = "button"} )
-    .Content("Text button"))
+    @(Html.Kendo().Button()
+        .Name("textButton")
+        .HtmlAttributes( new {type = "button" } )
+        .Content("Button"))
+    </p>
+</div>
 
-@(Html.Kendo().Button()
-    .Name("iconTextButton")
-    .Tag("a")
-    .SpriteCssClass("k-icon k-i-ungroup")
-    .Content("Icon and text"))
+<div>
+    <h4>Disabled buttons</h4>
+    <p>
+    @(Html.Kendo().Button()
+        .Name("primaryDisabledButton1")
+        .HtmlAttributes( new { @class = "k-primary" } )
+        .Tag("span")
+        .Enable(false)
+        .Content("Primary disabled via configuration"))
+        
+    @(Html.Kendo().Button()
+        .Name("disabledButton1")
+        .Tag("span")
+        .Enable(false)
+        .Content("Disabled via configuration"))
+    </p><br />
+    
+    <p>
+    @(Html.Kendo().Button()
+        .Name("primaryDisabledButton2")
+        .HtmlAttributes( new { disabled = "disabled" , @class = "k-primary" } )
+        .Tag("span")
+        .Content("Primary disabled via HTML attribute"))
 
-@(Html.Kendo().Button()
-    .Name("kendoIconTextButton")
-    .Tag("a")
-    .Icon("plus")
-    .Content("Kendo UI icon"))
+    @(Html.Kendo().Button()
+        .Name("disabledButton2")
+        .Tag("span")
+        .HtmlAttributes(new { disabled = "disabled" })
+        .Content("Disabled via HTML attribute"))
+    </p>
+</div>
 
-@(Html.Kendo().Button()
-    .Name("iconButton")
-    .Tag("em")
-    .SpriteCssClass("k-icon k-i-refresh")
-    .Content("<span class='k-sprite'>Refresh</span>"))
+<div>
+    <h4>Buttons with icons</h4>
+    <p>
+    @(Html.Kendo().Button()
+        .Name("iconTextButton")
+        .Tag("a")
+        .SpriteCssClass("k-icon k-i-ungroup")
+        .Content("Icon and text"))
 
-</p><p>
+    @(Html.Kendo().Button()
+        .Name("kendoIconTextButton")
+        .Tag("a")
+        .Icon("plus")
+        .Content("Kendo UI icon"))
 
-@(Html.Kendo().Button()
-    .Name("disabledButton1")
-    .Tag("span")
-    .Enable(false)
-    .Content("Disabled via configuration"))
-
-@(Html.Kendo().Button()
-    .Name("disabledButton2")
-    .Tag("span")
-    .HtmlAttributes(new { disabled = "disabled" })
-    .Content("Disabled via HTML attribute"))
-
-</p>
+    @(Html.Kendo().Button()
+        .Name("iconButton")
+        .Tag("em")
+        .SpriteCssClass("k-icon k-i-refresh")
+        .Content("<span class='k-sprite'>Refresh</span>"))
+    </p>
+</div> 
