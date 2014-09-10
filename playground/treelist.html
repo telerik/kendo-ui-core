@@ -3,19 +3,19 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title></title>
-        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.dom.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.treeview.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.columnsorter.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.treelist.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dom.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.selectable.js"></script>
+        <script src="../src/kendo.columnsorter.js"></script>
+        <script src="../src/kendo.treelist.js"></script>
+        <script src="../src/kendo.pager.js"></script>
         <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
-        <link rel="stylesheet/less" type="text/css" href="../dist/styles/web/kendo.default.less"/>
+        <link rel="stylesheet/less" href="../dist/styles/web/kendo.default.less"/>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
@@ -25,25 +25,29 @@
     <h3>TreeList</h3>
     <div id="list"></div>
         <script>
+            var service = "http://demos.telerik.com/kendo-ui/service/Northwind.svc";
+
             var empl = {
                 type: "odata",
                 page: 1,
                 transport: {
                     read: {
-                        //url: "http://services.odata.org/V3/Northwind/Northwind.svc/Employees",
                         url: function(parent) {
-                             var filter = "";
+                             // load only root nodes
+                             var filter = "?$filter=(ReportsTo eq null)";
+
+                             // ... or load multiple levels at the same time
+                             //var filter = "";
+
                              if (parent.id) {
                                  filter = "?$filter=(ReportsTo eq " + parent.id + ")"
                              }
-                             return "http://services.odata.org/V3/Northwind/Northwind.svc/Employees" + filter;
+                             return service + "/Employees" + filter;
                          }
                     },
                 },
                 //sort: { field: "FirstName", dir: "desc" },
                 schema: {
-                    total: '["odata.count"]',
-                    data: "value",
                     model: {
                         id: "EmployeeID",
                         fields: {
