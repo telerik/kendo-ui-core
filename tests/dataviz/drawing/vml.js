@@ -1240,7 +1240,6 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var arc,
@@ -1261,8 +1260,8 @@
         });
 
         test("renders curve path", function() {
-            var result = node.render();
-            ok(result.indexOf("v='m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e'") !== -1);
+            equal(node.element.v,
+                  "m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e");
         });
 
         test("geometryChange updates path", function() {
@@ -1291,18 +1290,6 @@
             ok(arcNode.pathData instanceof vml.ArcDataNode);
         });
 
-        test("renders coordsize", function() {
-            ok(arcNode.render().indexOf("coordsize='10000 10000'") !== -1);
-        });
-
-        test("renders width", function() {
-            ok(arcNode.render().indexOf("width:100px;") !== -1);
-        });
-
-        test("renders height", function() {
-            ok(arcNode.render().indexOf("height:100px;") !== -1);
-        });
-
         test("geometryChange is forwarded to data node", function() {
             arcNode.pathData.geometryChange = function() {
                 ok(true);
@@ -1311,9 +1298,14 @@
             arc.geometry().setEndAngle(180);
         });
 
-        shapeTests(d.Arc, vml.ArcNode, "ArcNode");
+        shapeTests("ArcNode", function(shapeOptions) {
+            var geometry = new g.Arc(new Point(10, 20));
+            var shape = new d.Arc(geometry, shapeOptions);
+            return new vml.ArcNode(shape);
+        });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var text;
