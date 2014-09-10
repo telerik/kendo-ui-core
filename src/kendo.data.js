@@ -3049,7 +3049,7 @@ var __meta__ = {
 
             result = Query.process(data, options);
 
-            that._view = result.data;
+            that._view = that._preprocess(result.data);
 
             if (result.total !== undefined && !that.options.serverFiltering) {
                 that._total = result.total;
@@ -3060,6 +3060,10 @@ var __meta__ = {
             e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
+        },
+
+        _preprocess: function(data) {
+            return data;
         },
 
         _mergeState: function(options) {

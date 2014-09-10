@@ -96,6 +96,22 @@ var __meta__ = {
             return this.data().toJSON().concat(DataSource.fn._readData.call(this, data));
         },
 
+        _preprocess: function(data) {
+            var length = data.length;
+            var hasChildren = new Array(length);
+            var i;
+
+            for (i = 0; i < length; i++) {
+                hasChildren[data[i].parentId] = true;
+            }
+
+            for (i = 0; i < length; i++) {
+                data[i].loaded(hasChildren[data[i].id]);
+            }
+
+            return data;
+        },
+
         load: function(model) {
             var method = "_query";
 
@@ -131,6 +147,21 @@ var __meta__ = {
 
         parentNode: function(model) {
             return this.get(model.parentId);
+        },
+
+        level: function(model) {
+            var result = -1;
+
+            if (!(model instanceof TreeListModel)) {
+                model = this.get(model);
+            }
+
+            do {
+                model = this.parentNode(model);
+                result++;
+            } while (model);
+
+            return result;
         },
 
         _modelLoaded: function(id) {
@@ -193,8 +224,7 @@ var __meta__ = {
         refresh: function(e) {
             var dataSource = this.dataSource;
 
-            console.log("refresh", e, e.node);
-            this._render(dataSource.view());
+            this._render(dataSource.rootNodes());
         },
 
         _adjustHeight: function() {
@@ -233,6 +263,12 @@ var __meta__ = {
                     var model = that._modelFromElement(element);
 
                     model.set("expanded", !model.get("expanded"));
+
+                    if (!model.loaded()) {
+                        that.dataSource.load(model);
+                    } else {
+                        that._render(that.dataSource.rootNodes());
+                    }
 
                     e.stopPropagation();
                 });
@@ -358,11 +394,17 @@ var __meta__ = {
             var attr;
             var className = [];
             var level;
+            var hasChildren;
+            var childNodes;
+            var dataSource = this.dataSource;
 
             for (var i = 0, length = tasks.length; i < length; i++) {
                 task = tasks[i];
 
-                level = 0; //datasource.level(task);
+                level = dataSource.level(task);
+
+                childNodes = task.loaded() && dataSource.childNodes(task);
+                hasChildren = childNodes && childNodes.length;
 
                 attr = {
                     "data-uid": task.uid,
@@ -370,7 +412,7 @@ var __meta__ = {
                     "role": "row"
                 };
 
-                if (task.hasChildren) {
+                if (hasChildren) {
                     attr["aria-expanded"] = task.expanded;
                 }
 
@@ -378,7 +420,7 @@ var __meta__ = {
                     className.push(listStyles.alt);
                 }
 
-                if (task.hasChildren) {
+                if (hasChildren) {
                     className.push(listStyles.group);
                 }
 
@@ -391,6 +433,10 @@ var __meta__ = {
                     attr: attr,
                     level: level
                 }));
+
+                if (task.expanded && hasChildren) {
+                    rows = rows.concat(this._trs(childNodes));
+                }
 
                 className = [];
             }
@@ -418,14 +464,15 @@ var __meta__ = {
             var column = options.column;
             var value = task.get(column.field);
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
+            var hasChildren = !task.loaded() || this.dataSource.childNodes(task).length;
 
-            //if (column.field === "title") {
+            if (column.hierarchy) {
                 children = createPlaceholders({ level: options.level, className: listStyles.iconPlaceHolder });
                 children.push(kendoDomElement("span", {
-                    className: listStyles.icon + " " + (task.hasChildren ? (task.expanded ? listStyles.iconCollapse : listStyles.iconExpand)
+                    className: listStyles.icon + " " + (hasChildren ? (task.expanded ? listStyles.iconCollapse : listStyles.iconExpand)
                         : listStyles.iconHidden)
                 }));
-            //}
+            }
 
             children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
 

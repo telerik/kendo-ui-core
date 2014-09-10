@@ -244,4 +244,60 @@
         equal(roots[1].id, 2);
     });
 
+    test("node is considered loaded if it has children", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 3 },
+                { id: 2, parentId: null },
+                { id: 5, parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        ok(ds.get(1).loaded());
+        ok(ds.get(2).loaded());
+        ok(ds.get(3).loaded());
+    });
+
+    test("level returns item level", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 5, parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        equal(ds.level(1), 0);
+        equal(ds.level(2), 0);
+        equal(ds.level(3), 1);
+        equal(ds.level(4), 1);
+        equal(ds.level(5), 2);
+    });
+
+    test("level returns level when given model", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 5, parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        equal(ds.level(ds.get(1)), 0);
+        equal(ds.level(ds.get(4)), 1);
+        equal(ds.level(ds.get(5)), 2);
+    });
+
 })();

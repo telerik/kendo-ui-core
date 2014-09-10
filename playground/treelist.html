@@ -22,67 +22,54 @@
     <button class="filter">Filter on `Anne`</button>
     <button class="clear">Clear</button>
 
-    <h3>TreeView</h3>
-    <div id="tree"></div>
     <h3>TreeList</h3>
     <div id="list"></div>
         <script>
             var empl = {
-                    type: "odata",
-                    serverSorting: true,
-                    page: 1,
-                    transport: {
-                        read: {
-                            //url: "http://services.odata.org/V3/Northwind/Northwind.svc/Employees",
-                            url: function(parent) {
-                                 var filter = "";
-                                 if (parent.EmployeeID) {
-                                     filter = "?$filter=(ReportsTo eq " + parent.EmployeeID + ")"
-                                 }
-                                 return "http://services.odata.org/V3/Northwind/Northwind.svc/Employees" + filter;
+                type: "odata",
+                page: 1,
+                transport: {
+                    read: {
+                        //url: "http://services.odata.org/V3/Northwind/Northwind.svc/Employees",
+                        url: function(parent) {
+                             var filter = "";
+                             if (parent.id) {
+                                 filter = "?$filter=(ReportsTo eq " + parent.id + ")"
                              }
-                        },
+                             return "http://services.odata.org/V3/Northwind/Northwind.svc/Employees" + filter;
+                         }
                     },
-                    //sort: { field: "FirstName", dir: "desc" },
-                    schema: {
-                        total: '["odata.count"]',
-                        data: "value",
-                        model: {
-                            id: "EmployeeID",
-                            parentId: "ReportsTo",
-                            hasChildren: function(item){
-                                return true;
-                            }
+                },
+                //sort: { field: "FirstName", dir: "desc" },
+                schema: {
+                    total: '["odata.count"]',
+                    data: "value",
+                    model: {
+                        id: "EmployeeID",
+                        fields: {
+                            parentId: "ReportsTo"
                         }
                     }
+                }
             };
 
-            var treeDS = new kendo.data.HierarchicalDataSource(empl);
             var listDS = new kendo.data.TreeListDataSource(empl);
-
-            $("#tree").kendoTreeView({
-                dataSource: treeDS,
-                dataTextField: "FirstName"
-            });
 
             $("#list").kendoTreeList({
                 dataSource: listDS,
                 selectable: true,
-                columns: [ { field: "FirstName", sortable: true } ]
+                columns: [
+                    { field: "FirstName", title: "First Name", sortable: true, hierarchy: true },
+                    { field: "LastName", title: "Last Name", sortable: true }
+                ]
             });
 
-
-//            ds.read();
-//            ds.view()[0].load();
-//            ds.view()[0].children.view()[3].load();
-
-
             $(".filter").click(function() {
-                ds.filter({ field: "FirstName", operator: "eq", value: "Anne" });
+                listDS.filter({ field: "FirstName", operator: "eq", value: "Anne" });
             });
 
             $(".clear").click(function() {
-                ds.filter({});
+                listDS.filter({});
             });
         </script>
     </body>
