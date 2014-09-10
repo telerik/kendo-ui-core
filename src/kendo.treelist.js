@@ -19,6 +19,7 @@ var __meta__ = {
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var DataSource = data.DataSource;
+    var Query = data.Query;
     var Model = data.Model;
     var proxy = $.proxy;
     var map = $.map;
@@ -96,10 +97,40 @@ var __meta__ = {
             return this.data().toJSON().concat(DataSource.fn._readData.call(this, data));
         },
 
-        _preprocess: function(data) {
-            var length = data.length;
-            var hasChildren = new Array(length);
-            var i;
+        _filterCallback: function(query) {
+            var data = query.toArray();
+            var map = {};
+            var i, parent;
+            var result = [];
+
+            for (i = 0; i < data.length; i++) {
+                item = data[i];
+
+                while (item && !map[item.parentId]) {
+                    map[item.parentId] = true;
+                    item = this.parentNode(item);
+
+                    if (item) {
+                        result.push(item);
+                    }
+                }
+            }
+
+            return new Query(data.concat(result));
+        },
+
+        _queryProcess: function(data, options) {
+            options = options || {};
+
+            options.filterCallback = proxy(this._filterCallback, this);
+
+            var result = Query.process(data, options);
+            var length, hasChildren, i;
+
+            data = result.data;
+
+            length = data.length;
+            hasChildren = new Array(length);
 
             for (i = 0; i < length; i++) {
                 hasChildren[data[i].parentId] = true;
@@ -109,7 +140,9 @@ var __meta__ = {
                 data[i].loaded(hasChildren[data[i].id]);
             }
 
-            return data;
+            result.data = data;
+
+            return result;
         },
 
         load: function(model) {
@@ -162,6 +195,16 @@ var __meta__ = {
             } while (model);
 
             return result;
+        },
+
+        filter: function(value) {
+            var baseFilter = DataSource.fn.filter;
+
+            if (value === undefined) {
+                return baseFilter.call(this, value);
+            }
+
+            baseFilter.call(this, value);
         },
 
         _modelLoaded: function(id) {

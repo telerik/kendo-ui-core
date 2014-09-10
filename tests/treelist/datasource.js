@@ -316,4 +316,106 @@
         equal(ds.level(ds.get(5)), 2);
     });
 
+    test("filter by root items", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 5, parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "id", operator: "eq", value: 1 });
+
+        equal(ds.view()[0].id, 1);
+    });
+
+    test("filter by root items when none are found", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 5, parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "id", operator: "eq", value: -1 });
+
+        equal(ds.view().length, 0);
+    });
+
+    test("filter by child node should return parent items until root", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: null },
+                { id: 3, parentId: 1 },
+                { id: 4, parentId: 2 },
+                { id: 5, parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "id", operator: "eq", value: 5 });
+
+        equal(ds.view().length, 3, "length differs");
+        ok(ds.get(1));
+        ok(ds.get(3));
+        ok(ds.get(5));
+    });
+
+    test("filter preserves sort order", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "c", parentId: null },
+                { id: 2, text: "e", parentId: null },
+                { id: 3, text: "a", parentId: 1 },
+                { id: 4, text: "d", parentId: 2 },
+                { id: 5, text: "b", parentId: 3 }
+            ]
+        });
+
+        ds.read();
+
+        ds.query({
+            filter: { field: "id", operator: "eq", value: 5 },
+            sort: { field: "text", dir: "asc" }
+        });
+
+        var view = ds.view();
+
+        equal(view.length, 3, "length differs");
+        equal(view[0].text, "a");
+        equal(view[1].text, "b");
+        equal(view[2].text, "c");
+    });
+
+    test("filter returns parent once when matched by multiple children", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "c", parentId: null },
+                { id: 2, text: "aa", parentId: 1 },
+                { id: 3, text: "ab", parentId: 1 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "text", operator: "contains", value: "a" });
+
+        equal(ds.view().length, 3, "length differs");
+        ok(ds.get(1));
+        ok(ds.get(2));
+        ok(ds.get(3));
+    });
+
 })();

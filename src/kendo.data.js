@@ -1476,12 +1476,18 @@ var __meta__ = {
             group = options.group,
             sort = normalizeGroup(group || []).concat(normalizeSort(options.sort || [])),
             total,
+            filterCallback = options.filterCallback,
             filter = options.filter,
             skip = options.skip,
             take = options.take;
 
         if (filter) {
             query = query.filter(filter);
+
+            if (filterCallback) {
+                query = filterCallback(query);
+            }
+
             total = query.toArray().length;
         }
 
@@ -3047,9 +3053,9 @@ var __meta__ = {
                 that._aggregateResult = calculateAggregates(data, options);
             }
 
-            result = Query.process(data, options);
+            result = that._queryProcess(data, options);
 
-            that._view = that._preprocess(result.data);
+            that._view = result.data;
 
             if (result.total !== undefined && !that.options.serverFiltering) {
                 that._total = result.total;
@@ -3062,8 +3068,8 @@ var __meta__ = {
             that.trigger(CHANGE, e);
         },
 
-        _preprocess: function(data) {
-            return data;
+        _queryProcess: function(data, options) {
+            return Query.process(data, options);
         },
 
         _mergeState: function(options) {
@@ -3118,7 +3124,7 @@ var __meta__ = {
                 if (!that.trigger(REQUESTSTART, { type: "read" })) {
                     that.trigger(PROGRESS);
 
-                    result = Query.process(that._data, that._mergeState(options));
+                    result = that._queryProcess(that._data, that._mergeState(options));
 
                     if (!that.options.serverFiltering) {
                         if (result.total !== undefined) {
@@ -3423,7 +3429,7 @@ var __meta__ = {
 
                             if (!remote) {
                                 var sort = normalizeGroup(that.group() || []).concat(normalizeSort(that.sort() || []));
-                                processed = Query.process(range.data, { sort: sort, filter: that.filter() });
+                                processed = that._queryProcess(range.data, { sort: sort, filter: that.filter() });
                                 flatData = rangeData = processed.data;
 
                                 if (processed.total !== undefined) {
