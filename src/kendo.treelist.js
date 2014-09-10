@@ -107,7 +107,7 @@ var __meta__ = {
                 item = data[i];
 
                 while (item && !map[item.parentId]) {
-                    map[item.parentId] = true;
+                    map[item.parentId] = map[item.id] = true;
                     item = this.parentNode(item);
 
                     if (item) {

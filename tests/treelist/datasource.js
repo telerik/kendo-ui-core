@@ -418,4 +418,41 @@
         ok(ds.get(3));
     });
 
+    test("filter does not duplicate parent items", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "aa", parentId: null },
+                { id: 2, text: "ab", parentId: 1 },
+                { id: 3, text: "c", parentId: 1 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "text", operator: "contains", value: "a" });
+
+        equal(ds.view().length, 2, "length differs");
+    });
+
+    test("filter keeps all root items", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "a", parentId: null },
+                { id: 2, text: "b", parentId: null },
+                { id: 3, text: "ca", parentId: 1 },
+                { id: 4, text: "cb", parentId: 2 }
+            ]
+        });
+
+        ds.read();
+
+        ds.filter({ field: "text", operator: "contains", value: "c" });
+
+        equal(ds.view().length, 4);
+        ok(ds.get(1));
+        ok(ds.get(2));
+        ok(ds.get(3));
+        ok(ds.get(4));
+    });
+
 })();
