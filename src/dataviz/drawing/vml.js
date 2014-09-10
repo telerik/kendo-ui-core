@@ -414,17 +414,22 @@
             this.transform.refresh(this.srcElement.currentTransform(transform));
         },
 
-        mapStyle: function() {
+        mapStyle: function(width, height) {
             var styles = Node.fn.mapStyle.call(this);
+
+            if (!width || !height) {
+                width = height = COORDINATE_MULTIPLE
+            }
+
             styles.push(
                 ["position", "absolute"],
-                ["width", COORDINATE_MULTIPLE + "px"],
-                ["height", COORDINATE_MULTIPLE + "px"]
+                ["width", width + "px"],
+                ["height", height + "px"]
             );
 
             var cursor = this.srcElement.options.cursor;
             if (cursor) {
-                styles.push("cursor", cursor);
+                styles.push(["cursor", cursor]);
             }
 
             return styles;
@@ -526,23 +531,21 @@
         },
 
         geometryChange: function() {
-            ShapeNode.fn.geometryChange.fn.call(this);
+            ShapeNode.fn.geometryChange.call(this);
 
             this.setStyle();
         },
 
         mapStyle: function() {
-            var styles = ShapeNode.fn.mapStyle.call(this);
             var geometry = this.srcElement.geometry();
             var radius = geometry.radius;
             var center = geometry.center;
             var diameter = radius * 2;
 
+            var styles = ShapeNode.fn.mapStyle.call(this, diameter, diameter);
             styles.push(
                 ["left", center.x - radius + "px"],
-                ["top", center.y - radius + "px"],
-                ["width", diameter + "px"],
-                ["height", diameter + "px"]
+                ["top", center.y - radius + "px"]
             );
 
             return styles;

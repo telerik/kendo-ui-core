@@ -853,59 +853,59 @@
             transformNode.refresh(new Matrix(1,2,3,4,5,6));
         });
     })();
-    /*
 
     // ------------------------------------------------------------
-    function shapeTests(TShape, TNode, name) {
+    function shapeTests(name, createNode) {
         var shape,
             node;
 
         module("Shape tests / " + name, {
             setup: function() {
-                shape = new TShape();
-                node = new TNode(shape);
+                node = createNode();
             }
         });
 
         test("renders visibility", function() {
-            shape.visible(false);
-            ok(node.render().indexOf("display:none;") !== -1);
+            node = createNode({ visible: false });
+            equal(node.element.style.display, "none");
         });
 
         test("does not render visibility if not set", function() {
-            ok(node.render().indexOf("display:none;") === -1);
+            ok(!node.element.style.display);
         });
 
         test("does not render visibility if set to true", function() {
-            shape.visible(true);
-            ok(node.render().indexOf("display:none;") === -1);
+            node = createNode({ visible: true });
+            ok(!node.element.style.display);
         });
 
         test("renders cursor", function() {
-            shape.options.set("cursor", "hand");
-            ok(node.render().indexOf("cursor:hand;") !== -1);
+            node = createNode({ cursor: "grab" });
+            equal(node.element.style.cursor, "grab");
         });
 
         test("does not render cursor if not set", function() {
-            ok(node.render().indexOf("cursor") === -1);
+            ok(!node.element.style.cursor);
         });
 
         test("optionsChange sets visibility to hidden", function() {
             node.css = function(name, value) {
-                equal(name, "display");
-                equal(value, "none");
+                if (name === "display") {
+                    equal(value, "none");
+                }
             };
 
-            shape.visible(false);
+            node.srcElement.visible(false);
         });
 
         test("optionsChange sets visibility to visible", function() {
             node.css = function(name, value) {
-                equal(name, "display");
-                equal(value, "");
+                if (name === "display") {
+                    equal(value, "");
+                }
             };
 
-            shape.visible(true);
+            node.srcElement.visible(true);
         });
 
         test("optionsChange is forwarded to stroke", function() {
@@ -913,7 +913,7 @@
                 ok(true);
             };
 
-            shape.options.set("stroke", { width: 1 });
+            node.srcElement.options.set("stroke", { width: 1 });
         });
 
         test("optionsChange is not forwarded to stroke", 0, function() {
@@ -921,7 +921,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to fill", function() {
@@ -929,7 +929,7 @@
                 ok(true);
             };
 
-            shape.options.set("fill", { color: "red" });
+            node.srcElement.options.set("fill", { color: "red" });
         });
 
         test("optionsChange is not forwarded to fill", 0, function() {
@@ -937,7 +937,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to transform", function() {
@@ -945,7 +945,7 @@
                 ok(true);
             };
 
-            shape.options.set("transform", Matrix.unit());
+            node.srcElement.options.set("transform", Matrix.unit());
         });
 
         test("optionsChange is not forwarded to transform", 0, function() {
@@ -953,7 +953,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("refreshTransform calls transform refresh method with the srcElement transformation", 12, function() {
@@ -962,8 +962,8 @@
             var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
             var group = new Group({transform: parentMatrix});
 
-            shape.transform(srcMatrix);
-            group.append(shape);
+            node.srcElement.transform(srcMatrix);
+            group.append(node.srcElement);
 
             node.transform.refresh = function(transform) {
                 compareMatrices(transform.matrix(), currentMatrix);
@@ -977,58 +977,54 @@
     // ------------------------------------------------------------
     (function() {
         var path,
-            node,
-            container;
+            node;
+
+        function createNode(path) {
+            node = new vml.PathDataNode(path);
+        }
 
         module("PathDataNode", {
             setup: function() {
-                container = document.createElement("div");
-
                 path = new Path();
-                node = new vml.PathDataNode(path);
-                node.attachTo(container);
             }
         });
 
         test("renders straight segments", function() {
-            path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30);
-
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 2000,3000 e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30));
+            equal(node.element.v, "m 0,0 l 1000,2000 2000,3000 e");
         });
 
         test("renders curve", function() {
-            path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
-
-            ok(node.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 e'") !== -1);
+            createNode(path.moveTo(0, 0).curveTo([10, 10], [20, 10], [30, 0]));
+            equal(node.element.v, "m 0,0 c 1000,1000 2000,1000 3000,0 e");
         });
 
         test("switches between line and curve", function() {
-            path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
-
-            ok(node.render().indexOf("v='m 0,0 l 500,500 c 1000,1000 2000,1000 3000,0 e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(5, 5).curveTo([10, 10], [20, 10], [30, 0]));
+            equal(node.element.v, "m 0,0 l 500,500 c 1000,1000 2000,1000 3000,0 e");
         });
 
         test("switches between curve and line", function() {
-            path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
-
-            ok(node.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 l 4000,1000 e'") !== -1);
+            createNode(path.moveTo(0, 0).curveTo([10, 10], [20, 10], [30, 0]).lineTo(40, 10));
+            equal(node.element.v, "m 0,0 c 1000,1000 2000,1000 3000,0 l 4000,1000 e");
         });
 
         test("renders closed paths", function() {
-            path.moveTo(0, 0).lineTo(10, 20).close();
-
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 x e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(10, 20).close());
+            equal(node.element.v, "m 0,0 l 1000,2000 x e");
         });
 
         test("does not render segments for empty path", function() {
-            equal(node.render().indexOf("v="), -1);
+            createNode(path);
+            ok(!node.element.v);
         });
 
         test("geometryChange sets path", function() {
-            path.moveTo(0, 0);
+            createNode(path.moveTo(0, 0));
             node.attr = function(name, value) {
-                equal(name, "v");
-                equal(value, "m 0,0 l 1000,1000 e");
+                if (name === "v") {
+                    equal(value, "m 0,0 l 1000,1000 e");
+                }
             };
 
             path.lineTo(10, 10);
@@ -1039,16 +1035,12 @@
     // ------------------------------------------------------------
     (function() {
         var path,
-            pathNode,
-            container;
+            pathNode;
 
         module("PathNode", {
             setup: function() {
-                container = document.createElement("div");
-
                 path = new Path();
                 pathNode = new PathNode(path);
-                pathNode.attachTo(container);
             }
         });
 
@@ -1065,15 +1057,15 @@
         });
 
         test("renders coordsize", function() {
-            ok(pathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+            ok(pathNode.element.coordsize, "10000 10000");
         });
 
         test("renders width", function() {
-            ok(pathNode.render().indexOf("width:100px;") !== -1);
+            ok(pathNode.element.style.width, "100px");
         });
 
         test("renders height", function() {
-            ok(pathNode.render().indexOf("height:100px;") !== -1);
+            ok(pathNode.element.style.height, "100px");
         });
 
         test("geometryChange is forwarded to pathData", function() {
@@ -1102,7 +1094,7 @@
                 .moveTo(0, 0).lineTo(10, 20)
                 .moveTo(10, 10).lineTo(10, 20);
 
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e'") !== -1);
+            ok(node.element.v, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
         });
 
     })();
@@ -1124,15 +1116,15 @@
         });
 
         test("renders coordsize", function() {
-            ok(multiPathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+            ok(multiPathNode.element.coordsize, "10000 10000");
         });
 
         test("renders width", function() {
-            ok(multiPathNode.render().indexOf("width:100px;") !== -1);
+            ok(multiPathNode.element.style.width, "100px");
         });
 
         test("renders height", function() {
-            ok(multiPathNode.render().indexOf("height:100px;") !== -1);
+            ok(multiPathNode.element.style.height, "100px");
         });
     })();
 
@@ -1149,7 +1141,7 @@
         });
 
         test("circle transform origin is minus bbox center over bbox size", function() {
-            ok(circleTransformNode.render().indexOf("origin='-3,-2'") !== -1);
+            ok(circleTransformNode.element.origin, "-3,-2");
         });
 
         test("options change updates attributes", 4, function() {
@@ -1194,11 +1186,13 @@
         });
 
         test("renders center", function() {
-            ok(circleNode.render().indexOf("top:-10px;left:-20px;") !== -1);
+            ok(circleNode.element.style.top, "-10px");
+            ok(circleNode.element.style.left, "-20px");
         });
 
         test("renders radius", function() {
-            ok(circleNode.render().indexOf("width:60px;height:60px;") !== -1);
+            ok(circleNode.element.style.width, "60px");
+            ok(circleNode.element.style.height, "60px");
         });
 
         test("geometryChange sets center", 2, function() {
@@ -1239,9 +1233,14 @@
             circle.options.set("foo", true);
         });
 
-        shapeTests(d.Circle, vml.CircleNode, "CircleNode");
+        shapeTests("CircleNode", function(shapeOptions) {
+            var geometry = new g.Circle(new Point(10, 20), 30);
+            var circle = new Circle(geometry, shapeOptions);
+            return new CircleNode(circle);
+        });
     })();
 
+    /*
     // ------------------------------------------------------------
     (function() {
         var arc,
