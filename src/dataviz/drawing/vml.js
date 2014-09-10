@@ -665,7 +665,7 @@
             TransformNode.fn.optionsChange.call(this, e);
         },
 
-        _geometryChange: function() {
+        geometryChange: function() {
             this.refresh();
         },
 

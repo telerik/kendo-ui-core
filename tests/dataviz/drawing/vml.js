@@ -1435,7 +1435,6 @@
         });
     })();
 
-    /*
     // ------------------------------------------------------------
     (function() {
         var image;
@@ -1449,7 +1448,7 @@
         });
 
         test("renders rectangle", function() {
-            equal(dataNode.renderData(), "m 1000,2000 l 10000,2000 10000,10000 1000,10000 x e");
+            equal(dataNode.element.v, "m 1000,2000 l 10000,2000 10000,10000 1000,10000 x e");
         });
     })();
 
@@ -1466,62 +1465,62 @@
         });
 
         test("renders src", function() {
-            contains(fillNode.render(), "src='foo'");
+            equal(fillNode.element.src, "foo");
         });
 
         test("renders type", function() {
-            contains(fillNode.render(), "type='frame'");
+            equal(fillNode.element.type, "frame");
         });
 
         test("renders rotate", function() {
-            contains(fillNode.render(), "rotate='true'");
+            equal(fillNode.element.rotate, true);
         });
 
         test("renders fill relative size", function() {
-            contains(fillNode.render(), "size='0.9,0.8'");
+            equal(fillNode.element.size, "0.9,0.8");
         });
 
         test("renders fill relative center position", function() {
-            contains(fillNode.render(), "position='0.05,0.1'");
+            equal(fillNode.element.position, "0.05,0.1");
         });
 
         test("renders default angle of rotation", function() {
-            contains(fillNode.render(), "angle='0'");
+            equal(fillNode.element.angle, "0");
         });
 
         test("sets size for transformation scale", function() {
             image.transform(g.transform().scale(2, 4));
-            contains(fillNode.render(), "size='1.8,3.2'");
+            equal(fillNode.element.size, "1.8,3.2");
         });
 
         test("sets position for transformation scale", function() {
             image.transform(g.transform().scale(2, 4));
-            contains(fillNode.render(), "position='0.6,1.9'");
+            equal(fillNode.element.position, "0.6,1.9");
         });
 
         test("sets position for transformation translation", function() {
             image.transform(g.transform().translate(10, 20));
-            contains(fillNode.render(), "position='0.15,0.3'");
+            equal(fillNode.element.position, "0.15,0.3");
         });
 
         test("sets position for transformation translation and scale", function() {
             image.transform(g.transform().translate(10, 20).scale(2, 4));
-            contains(fillNode.render(), "position='0.7,2.1'");
+            equal(fillNode.element.position, "0.7,2.1");
         });
 
         test("sets position for transformation rotation", function() {
             image.transform(g.transform().translate(10, 20).rotate(90));
-            contains(fillNode.render(), "position='-1,0.25'");
+            equal(fillNode.element.position, "-1,0.25");
         });
 
         test("sets angle for transformation angle", function() {
             image.transform(g.transform().rotate(45));
-            contains(fillNode.render(), "angle='45'");
+            equal(fillNode.element.angle, "45");
         });
 
         test("sets angle for transformation angle and non-uniform scale", function() {
             image.transform(g.transform().rotate(45).scale(2, 4));
-            contains(fillNode.render(), "angle='45'");
+            equal(fillNode.element.angle, "45");
         });
 
         test("optionsChange sets src", function() {
@@ -1623,8 +1622,10 @@
             imageNode.refreshTransform(g.transform(parentMatrix));
         });
 
-        shapeTests(d.Image, vml.ImageNode, "ImageNode");
+        shapeTests("ImageNode", function(shapeOptions) {
+            var image = new d.Image("foo", new g.Rect([10, 20], [90, 80]), shapeOptions);
+            return new vml.ImageNode(image);
+        });
     })();
-    */
 
 })();
