@@ -34,14 +34,14 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
   </head>
     <body>
-        <div id="grid"></div>
+        <div id="grid" style="width: 400px"></div>
 
         <script>
             $(document).ready(function () {
                 $("#grid").kendoGrid({
                     dataSource: {
                         type: "odata",
-                        group: "foo",
+                      //  group: "foo",
                         transport: {
                             read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                         },

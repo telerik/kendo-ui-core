@@ -4492,12 +4492,20 @@ var __meta__ = {
                 length,
                 lockedCols = $(),
                 skipHiddenCount = 0,
-                container;
+                container,
+                colSpan,
+                spanIdx,
+                colOffset = 0;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
+
                     if (!columns[idx].hidden) {
-                        lockedCols = lockedCols.add(cols.eq(idx - skipHiddenCount));
+                        colSpan = leafColumns(columns[idx].columns || []).length || 1;
+                        for (spanIdx = 0; spanIdx < colSpan; spanIdx++) {
+                            lockedCols = lockedCols.add(cols.eq(idx + colOffset + spanIdx - skipHiddenCount));
+                        }
+                        colOffset += colSpan - 1;
                     } else {
                         skipHiddenCount ++;
                     }
