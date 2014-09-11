@@ -2987,7 +2987,7 @@ var __meta__ = {
         },
 
         _setContentWidth: function() {
-            var contentTable = this.content.children("table");
+            var contentTable = this.content.find("table");
             var contentWidth = this.content.width();
 
             var rowLength = contentTable.children("colgroup").children().length;
