@@ -228,22 +228,29 @@
 
     var IMAGE_CACHE = {};
 
+    function withCanvas(width, height, cont) {
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        cont(canvas.getContext("2d"), canvas);
+    }
+
     function loadImage(url, cont) {
         var img = IMAGE_CACHE[url];
         if (img) {
             cont(img);
         } else {
-            loadBinary(url, function(data){
-                data = BinaryStream(data);
-                data.offset(0);
-                if (data.readShort() == 0xFFD8 && data.readShort() == 0xFFE0 &&
-                    (data.skip(2), data.readString(4)) == "JFIF")
-                {
-                    var img = new PDF.JPEG(data);
-                    IMAGE_CACHE[url] = img;
-                    cont(img);
-                }
-            });
+            var img = new Image();
+            img.src = url;
+            img.onload = function() {
+                withCanvas(img.width, img.height, function(ctx, canvas){
+                    ctx.drawImage(img, 0, 0);
+                    var data = canvas.toDataURL("image/jpeg");
+                    data = data.substr(data.indexOf(";base64,") + 8);
+                    data = window.atob(data);
+                    cont(IMAGE_CACHE[url] = new PDF.JPEG(data));
+                });
+            };
         }
     }
 
@@ -1173,6 +1180,7 @@
     PDF.defineFont = defineFont;
     PDF.parseFontDef = parseFontDef;
     PDF.getFontURL = getFontURL;
+    PDF.withCanvas = withCanvas;
 
     global.kendo.PDF = PDF;
 
