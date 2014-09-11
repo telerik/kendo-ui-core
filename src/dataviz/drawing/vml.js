@@ -209,7 +209,7 @@
             Node.fn.attachTo.call(this, domElement);
 
             if (this.srcElement.options.visible !== false) {
-                this.css("display", "block");
+                this.css("display", "");
             }
         },
 
