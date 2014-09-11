@@ -1837,6 +1837,10 @@
                                 this.refresh();
                             }
                         }
+                        for (var i = 0; i < this.shapes.length; i++) {
+                            var shape = this.shapes[i];
+                            shape.updateModel();
+                        }
                         unit = new TransformUnit(this.shapes, this.shapeStates, this);
                     }
                 }

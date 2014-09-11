@@ -432,10 +432,8 @@
         var Shape = DiagramElement.extend({
             init: function (options, dataItem) {
                 var that = this;
-                var diagram = options.diagram;
-                delete options.diagram; // avoid stackoverflow and reassign later on again
                 DiagramElement.fn.init.call(that, options, dataItem);
-                that.options.diagram = diagram;
+                this._getOptions();
                 options = that.options;
                 that.connectors = [];
                 that.type = options.type;
@@ -458,6 +456,27 @@
             },
 
             options: diagram.shapeDefaults(),
+
+            _getOptions: function() {
+                this.options = deepExtend({},
+                    this.options,
+                    filterDataItem(
+                        ["text", "x", "y", "width", "height", "type", "visual"],
+                        this.options.dataItem
+                    )
+                );
+            },
+
+            updateModel: function() {
+                if (this.diagram) {
+                    var bounds = this._bounds;
+                    var model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
+                    model.set("x", bounds.x);
+                    model.set("y", bounds.y);
+                    model.set("width", bounds.width);
+                    model.set("height", bounds.height);
+                }
+            },
 
             updateBounds: function() {
                 var bounds = this.visual._measure(true);
@@ -2674,8 +2693,11 @@
             },
 
             _refreshShapes: function(e) {
+                console.log(e.action);
                 if (e.action === "remove") {
                     // remove shapes
+                } if (e.action === "itemchange") {
+                    // update shapes
                 } else {
                     this.clear();
                     this._addShapes(e.sender.view());
@@ -2698,16 +2720,7 @@
                         continue;
                     }
 
-                    var options = deepExtend({},
-                        this.options.shapeDefaults,
-                        filterDataItem(
-                            [ "test", "id", "x", "y", "width", "height", "type", "visual" ],
-                            dataItem
-                        )
-                    );
-
-                    shape = new Shape(options, dataItem);
-                    this.addShape(shape);
+                    shape = this.addShape(deepExtend({}, { dataItem: dataItem }));
                     this._dataMap[dataItem.id] = shape;
                 }
             },
@@ -2761,6 +2774,7 @@
             //        .bind(CHANGE, that._refreshHandler)
             //        .bind(ERROR, that._errorHandler);
             //},
+
             _unbindDataSource: function () {
                 var that = this;
 
@@ -2803,8 +2817,7 @@
             },
 
             _refresh: function () {
-                var i;
-                for (i = 0; i < this.connections.length; i++) {
+                for (var i = 0; i < this.connections.length; i++) {
                     this.connections[i].refresh();
                 }
             }
