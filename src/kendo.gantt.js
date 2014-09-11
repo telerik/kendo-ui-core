@@ -1059,6 +1059,17 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
 
+            if (this.dataSource) {
+                this.dataSource.unbind("change", this._refreshHandler);
+                this.dataSource.unbind("progress", this._progressHandler);
+                this.dataSource.unbind("error", this._errorHandler);
+            }
+
+            if (this.dependencies) {
+                this.dependencies.unbind("change", this._dependencyRefreshHandler);
+                this.dependencies.unbind("error", this._dependencyErrorHandler);
+            }
+
             if (this.timeline) {
                 this.timeline.unbind();
                 this.timeline.destroy();
