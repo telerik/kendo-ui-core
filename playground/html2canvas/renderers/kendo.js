@@ -26,11 +26,12 @@ KendoRenderer.prototype = Object.create(Renderer.prototype);
 
 function define(name, func) {
     KendoRenderer.prototype[name] = function() {
-        console.log("*** %s", name, arguments);
+        //console.log("*** %s", name, arguments);
         try {
             return func.apply(this, arguments);
         } catch(ex) {
             console.error(ex);
+            console.log(ex.stack);
         }
     };
     // KendoRenderer.prototype[name] = func;
@@ -82,10 +83,10 @@ define("drawShape", function(shape, color) {
     path.fill(color);
 });
 
-define("taints", function(imageContainer) {
-});
-
 define("drawImage", function(imageContainer, sx, sy, sw, sh, dx, dy, dw, dh) {
+    var rect = new geo.Rect([ dx, dy ], [ dw, dh ]);
+    var image = new drawing.Image(imageContainer.src, rect);
+    this.add(image);
 });
 
 define("clip", function(shape, callback, context) {
@@ -155,12 +156,40 @@ define("text", function(str, left, bottom) {
 });
 
 define("backgroundRepeatShape", function(imageContainer, backgroundPosition, size, bounds, left, top, width, height, borderData) {
-});
-
-define("renderBackgroundRepeat", function(imageContainer, backgroundPosition, size, bounds, borderLeft, borderTop) {
+    // XXX: pattern fill support in the drawing API first?
 });
 
 define("renderBackgroundGradient", function(gradientImage, bounds) {
+    if (gradientImage instanceof LinearGradientContainer) {
+        // XXX: gradient support in the drawing API.
+
+        // handling it as an image is wasteful and won't look properly
+        // in PDF anyway because we only support JPEG images (no
+        // transparency).
+        return;
+
+        // make an image for this gradient
+        var self = this;
+        kendo.PDF.withCanvas(bounds.width, bounds.height, function(ctx, canvas){
+            var gradient = ctx.createLinearGradient(
+                canvas.width * gradientImage.x0, canvas.height * gradientImage.y0,
+                canvas.width * gradientImage.x1, canvas.height * gradientImage.y1
+            );
+            gradientImage.colorStops.forEach(function(colorStop) {
+                gradient.addColorStop(colorStop.stop, colorStop.color);
+            });
+            ctx.fillStyle = gradient;
+            ctx.rect(0, 0, canvas.width, canvas.height);
+            ctx.fill();
+            var rect = new geo.Rect(
+                [ bounds.left, bounds.top ],
+                [ bounds.width, bounds.height ]
+            );
+            var url = canvas.toDataURL("image/png");
+            var img = new drawing.Image(url, rect);
+            self.add(img);
+        });
+    }
 });
 
 define("resizeImage", function(imageContainer, size) {

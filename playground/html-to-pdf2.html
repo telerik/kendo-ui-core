@@ -66,7 +66,8 @@
       <button onclick="draw('#calendar')">Draw</button>
     </div>
 
-    <div style="width: 10em; text-align: center; border-radius: 5px; border: 2px solid black; padding: 3px 10px">Rounded border</div>
+    <div style="width: 10em; text-align: center; border-radius: 5px; border: 2px solid black; padding: 2em; background: url('images/2.jpg') no-repeat 50% 50%">Rounded border</div>
+    <img src="images/2.jpg" width="100" />
 
     <button onclick="getPDF('body')">PDF all</button>
     <button onclick="draw('body')">Draw all</button>
@@ -74,7 +75,7 @@
     <script>
       function getPDF(sel) {
         html2canvas($(sel)[0], {
-          logging: true,
+          //logging: true,
           async: false,
           onrendered: function(root) {
             kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
@@ -84,7 +85,7 @@
 
       function draw(sel) {
         html2canvas($(sel)[0], {
-          logging: true,
+          //logging: true,
           async: false,
           onrendered: function(root) {
             $(".surface").remove();
