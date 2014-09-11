@@ -39,7 +39,14 @@ function LinearGradientContainer(imageData) {
     }
 
     this.colorStops = imageData.args.slice(hasDirection ? 1 : 0).map(function(colorStop) {
-        var colorStopMatch = colorStop.match(this.stepRegExp);
+        var colorStopMatch = colorStop.match(this.transparentRegExp);
+        if (colorStopMatch) {
+            return {
+                color: "rgba(0, 0, 0, 0)",
+                stop: colorStopMatch[2] === "%" ? colorStopMatch[1] / 100 : null
+            };
+        }
+        colorStopMatch = colorStop.match(this.stepRegExp);
         return {
             color: colorStopMatch[1],
             stop: colorStopMatch[3] === "%" ? colorStopMatch[2] / 100 : null
@@ -70,4 +77,5 @@ function LinearGradientContainer(imageData) {
 
 LinearGradientContainer.prototype = Object.create(GradientContainer.prototype);
 
-LinearGradientContainer.prototype.stepRegExp = /((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/;
+LinearGradientContainer.prototype.stepRegExp = /(rgba?\(\d{1,3},\s*\d{1,3},\s*\d{1,3}(?:,\s*[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/;
+LinearGradientContainer.prototype.transparentRegExp = /transparent\s+(\d{1,3})?(%|px)?/;
