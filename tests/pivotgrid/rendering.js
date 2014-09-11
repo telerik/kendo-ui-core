@@ -3469,6 +3469,10 @@
         var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
         var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
 
+        contentTable.wrap("<div/>");
+
+        pivotgrid.refresh();
+
         ok(parseInt(headerTable.css("min-width")) > 100);
         ok(parseInt(contentTable.css("min-width")) > 100);
     });
