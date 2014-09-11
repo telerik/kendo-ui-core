@@ -457,14 +457,17 @@
 
             options: diagram.shapeDefaults(),
 
-            updateOptionsFromModel: function() {
-                this.options = deepExtend({},
-                    this.options,
-                    filterDataItem(
-                        ["text", "x", "y", "width", "height", "type", "visual"],
-                        this.options.dataItem
-                    )
-                );
+            updateOptionsFromModel: function(model) {
+                var fields = ["text", "x", "y", "width", "height", "type", "visual"];
+
+                if (model) {
+                    this.redraw(filterDataItem(fields, model));
+                } else {
+                    this.options = deepExtend({},
+                        this.options,
+                        filterDataItem(fields, this.options.dataItem)
+                    );
+                }
             },
 
             updateModel: function() {
@@ -1356,6 +1359,7 @@
                 that.zoom(that.options.zoom);
 
                 that.canvas.draw();
+                this._shouldRefresh = true;
             },
             options: {
                 name: "Diagram",
@@ -2718,9 +2722,8 @@
                     var dataItem = items[i];
 
                     var shape = this._dataMap[dataItem.id];
-                    shape.updateOptionsFromModel();
-                    shape.redraw();
-                };
+                    shape.updateOptionsFromModel(dataItem);
+                }
             },
 
             _addShapes: function(dataItems) {
