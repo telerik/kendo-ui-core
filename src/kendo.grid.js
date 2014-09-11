@@ -4533,12 +4533,12 @@ var __meta__ = {
             var lockedCells = $(), lockedCols = $();
 
             lockedCells = lockedCells.add(cells.filter(".k-group-cell"));
-            for (idx = 0, length = lockedColumns(that.columns).length; idx < length; idx++) {
+            for (idx = 0, length = leafColumns(lockedColumns(that.columns)).length; idx < length; idx++) {
                 lockedCells = lockedCells.add(cells.eq(idx + groups));
             }
 
             lockedCols = lockedCols.add(cols.filter(".k-group-col"));
-            for (idx = 0, length = visibleLockedColumns(that.columns).length; idx < length; idx++) {
+            for (idx = 0, length = leafColumns(visibleLockedColumns(that.columns)).length; idx < length; idx++) {
                 lockedCols = lockedCols.add(cols.eq(idx + groups));
             }
 

@@ -1431,4 +1431,19 @@
         equal(grid.thead.find("tr:last th")[0].rowSpan, 1);
     });
 
+    test("footer col elements are move to the locked container with multiple headers", function() {
+        var grid = setup({
+            autoBind: false,
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedFooter.find("col").length, 2);
+        equal(grid.lockedFooter.find("td").length, 2);
+        equal(grid.footer.find("table:last td").length, 3);
+        equal(grid.footer.find("table:last col").length, 3);
+    });
 })();
