@@ -345,6 +345,10 @@
         test("sets position", function() {
             equal(node.element.style.position, "relative");
         });
+
+        test("doesn't attach _kendoNode", function() {
+            ok(!node.element._kendoNode);
+        });
     })();
 
     // ------------------------------------------------------------

@@ -72,11 +72,15 @@
             BaseNode.fn.init.call(this, srcElement);
 
             this.createElement();
-            this.element._kendoNode = this;
+            this.attachReference();
         },
 
         createElement: function() {
             this.element = doc.createElement("div");
+        },
+
+        attachReference: function() {
+            this.element._kendoNode = this;
         },
 
         load: function(elements, transform) {
@@ -179,6 +183,9 @@
             this.css("width", "100%");
             this.css("height", "100%");
             this.css("position", "relative");
+        },
+
+        attachReference: function() {
         }
     });
 
