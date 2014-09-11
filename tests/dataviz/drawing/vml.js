@@ -349,6 +349,13 @@
         test("doesn't attach _kendoNode", function() {
             ok(!node.element._kendoNode);
         });
+
+        test("clear cleans up content", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.innerHTML, "");
+        });
     })();
 
     // ------------------------------------------------------------

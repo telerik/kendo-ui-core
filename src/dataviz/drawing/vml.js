@@ -127,8 +127,12 @@
         },
 
         clear: function() {
-            this.element.innerHTML = "";
             BaseNode.fn.clear.call(this);
+
+            if (this.element && this.element.parentNode) {
+                this.element.parentNode.removeChild(this.element);
+                this.element = null;
+            }
         },
 
         optionsChange: function(e) {
@@ -185,8 +189,12 @@
             this.css("position", "relative");
         },
 
-        attachReference: function() {
-        }
+        clear: function() {
+            BaseNode.fn.clear.call(this);
+            this.element.innerHTML = "";
+        },
+
+        attachReference: noop
     });
 
     var GroupNode = Node.extend({
