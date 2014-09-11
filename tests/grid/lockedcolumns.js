@@ -1284,4 +1284,151 @@
 
         ok(!wasCalled);
     });
+
+    test("tr elements are created in locked table for multi header locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+        equal(grid.thead.find("tr").length, 2);
+    });
+
+    test("tr elements are created in locked table for multi header locked columns with row filter", function() {
+        var grid = setup({
+            filterable: {
+                mode: "row"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 3);
+        equal(grid.thead.find("tr").length, 3);
+    });
+
+    test("th elements are created in locked table for multi header locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr:first th").length, 1);
+        equal(grid.lockedHeader.find("tr:last th").length, 2);
+
+        equal(grid.thead.find("tr:first th").length, 2);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("th elements are created in locked table for multi header locked columns - two locked columns", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", locked: true },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+
+        equal(grid.lockedHeader.find("tr:first th").length, 2);
+        equal(grid.lockedHeader.find("tr:last th").length, 2);
+
+        equal(grid.thead.find("tr:first th").length, 1);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("th elements in locked table with multiple headers and grouping", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        equal(grid.lockedHeader.find("tr:first th").length, 2);
+        ok(grid.lockedHeader.find("tr:first th:first").hasClass("k-group-cell"));
+        equal(grid.lockedHeader.find("tr:last th").length, 3);
+        ok(grid.lockedHeader.find("tr:last th:first").hasClass("k-group-cell"));
+
+        equal(grid.thead.find("tr:first th").length, 2);
+        equal(grid.thead.find("tr:last th").length, 2);
+    });
+
+    test("col elements are move to the locked container with muliple headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("col").length, 2);
+        equal(grid.thead.parent().find("col").length, 3);
+    });
+
+    test("col elements are move to the locked container with multiple headers and grouping", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        grid.dataSource.group({ field: "foo" });
+
+        equal(grid.lockedHeader.find("col").length, 3, "locked container");
+        equal(grid.thead.parent().find("col").length, 3, "non locked container");
+    });
+
+    test("empty rows are removed when multiple header column is locked", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedHeader.find("tr").length, 2);
+        equal(grid.thead.find("tr").length, 1);
+    });
+
+    test("rowspan is recalculated when empty rows are removed - multiple header column is locked", function() {
+        var grid = setup({
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child" }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.find("tr th")[0].rowSpan, 1);
+    });
+
+    test("rowspan is recalculated when empty rows are removed - two level non locked column", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", columns: [{ title: "master1-child" }] },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", columns: [ "foo" ] }, { title: "master1-child1" }] }
+            ]
+        });
+
+        equal(grid.thead.find("tr:first th")[0].rowSpan, 1);
+        equal(grid.thead.find("tr:last th")[0].rowSpan, 1);
+    });
+
 })();

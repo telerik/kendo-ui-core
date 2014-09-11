@@ -512,6 +512,37 @@ var __meta__ = {
         return width;
     }
 
+    function removeEmptyRows(container) {
+        var rows = container.find("tr:not(.k-filter-row)")
+
+        var emptyRowsCount = rows.filter(function() {
+            return !$(this).children().length;
+        }).remove().length;
+
+        var cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+        for (var idx = 0; idx < cells.length; idx++) {
+            if (cells[idx].rowSpan > 1) {
+                cells[idx].rowSpan -= emptyRowsCount;
+            }
+        }
+    }
+
+
+    function mapColumnToCellRows(columns, cells, rowIndex, rows, cellIndex) {
+        var idx, row, length
+
+        for (idx = 0, length = columns.length; idx < length; idx++) {
+            row = rows[rowIndex] || [];
+            row.push(cells.eq(cellIndex + idx));
+            rows[rowIndex] = row;
+
+            if (columns[idx].columns) {
+                mapColumnToCellRows(columns[idx].columns, cells, rowIndex + 1, rows, cellIndex + columns.length);
+            }
+        }
+    }
+
     function lockedColumns(columns) {
         return grep(columns, function(column) {
             return column.locked;
@@ -1771,7 +1802,12 @@ var __meta__ = {
 
         _syncLockedHeaderHeight: function() {
             if (this.lockedHeader) {
-                this._adjustRowsHeight(this.lockedHeader.children("table"), this.thead.parent());
+                var lockedTable = this.lockedHeader.children("table");
+                var table = this.thead.parent();
+
+                this._adjustRowsHeight(lockedTable, table);
+
+                syncTableHeight(lockedTable, table);
             }
         },
 
@@ -4166,8 +4202,8 @@ var __meta__ = {
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate(),
                 columnLeafs = leafColumns(that.columns),
-                columnsLocked = lockedColumns(that.columns),
-                columns = options.scrollable ? nonLockedColumns(columnLeafs) : columnLeafs;
+                columnsLocked = leafColumns(lockedColumns(that.columns)),
+                columns = options.scrollable ? leafColumns(nonLockedColumns(that.columns)) : columnLeafs;
 
             if (options.scrollable && columnsLocked.length) {
                 if (options.rowTemplate || options.altRowTemplate) {
@@ -4503,6 +4539,52 @@ var __meta__ = {
             that.lockedFooter = html.prependTo(footer);
         },
 
+        _childColumns: function(cell) {
+            var container = this.thead;
+            var result = $().add(cell);
+
+            var row = cell.closest("tr");
+            var headerRows = container.find("tr:not(.k-filter-row)");
+            var level = headerRows.index(row) + cell[0].rowSpan;
+            if (level <= headerRows.length - 1) {
+                var child = row.next();
+                var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+                var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
+
+                var offset = index - prevCells.filter(function() {
+                    return this.rowSpan > 1;
+                }).length;
+
+                var idx;
+
+                prevCells = prevCells.filter(function() {
+                    return this.colSpan > 1;
+                });
+
+                for (idx = 0; idx < prevCells.length; idx++) {
+                    offset += prevCells[idx].colSpan || 1;
+                }
+
+                var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+                offset = offset || 1;
+
+                var colSpan = cell[0].colSpan ? cell[0].colSpan : 1;
+
+                idx = 0;
+                while (idx < colSpan) {
+                    var child = cells.eq(idx + (offset - 1));
+                    result = result.add(this._childColumns(child));
+                    if (child[0].colSpan > 1) {
+                        colSpan -= child[0].colSpan - 1;
+                    }
+                    idx++;
+                }
+            }
+
+            return result;
+        },
+
         _appendLockedColumnHeader: function(container) {
             var that = this,
                 columns = this.columns,
@@ -4515,6 +4597,7 @@ var __meta__ = {
                 table,
                 header,
                 filtercellCells,
+                rows = [],
                 skipHiddenCount = 0,
                 cols = $(),
                 hasFilterRow = that._hasFilterRow(),
@@ -4522,15 +4605,24 @@ var __meta__ = {
                 cells = $();
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
-            header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
-            filtercellCells = that.thead.find(".k-filter-row").find("th:not(.k-group-cell,.k-hierarchy-cell)");
+            header = that.thead.find("tr:first .k-header:not(.k-group-cell,.k-hierarchy-cell)");
+            filtercellCells = that.thead.find(".k-filter-row").find("th");
 
+            var colOffset = 0;
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
+                    var cell = header.eq(idx);
+
                     if (!columns[idx].hidden) {
-                        cols = cols.add(colgroup.eq(idx - skipHiddenCount));
+                        var colSpan = (cell[0].colSpan || 1);
+                        for (var spanIdx = 0; spanIdx < colSpan; spanIdx++) {
+                            cols = cols.add(colgroup.eq(idx + colOffset + spanIdx - skipHiddenCount));
+                        }
+                        colOffset += colSpan - 1;
                     }
-                    cells = cells.add(header.eq(idx));
+
+                    mapColumnToCellRows([columns[idx]], that._childColumns(cell), 0, rows, 0);
+
                     filterCells = filterCells.add(filtercellCells.eq(idx));
                 }
                 if (columns[idx].hidden) {
@@ -4538,18 +4630,25 @@ var __meta__ = {
                 }
             }
 
-            if (cells.length) {
-                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead><tr></tr>' + (hasFilterRow ? '<tr class="k-filter-row" />' : '') +
-                    '</thead></table></div>';
+            if (rows.length) {
+                html = '<div class="k-grid-header-locked" style="width:1px"><table' + (isIE7 ? ' cellspacing="0"' : '') + '><colgroup/><thead>';
+                html += new Array(rows.length + 1).join("<tr></tr>");
+                html += (hasFilterRow ? '<tr class="k-filter-row" />' : '') + '</thead></table></div>';
 
                 table = $(html);
 
                 colgroup = table.find("colgroup");
-                tr = table.find("thead tr:first");
-                trFilter = table.find(".k-filter-row");
-
                 colgroup.append(that.thead.prev().find("col.k-group-col").add(cols));
-                tr.append(that.thead.find("tr:first .k-group-cell").add(cells));
+
+                tr = table.find("thead tr:not(.k-filter-row)");
+                for (idx = 0, length = rows.length; idx < length; idx++) {
+                    cells = $(rows[idx]).map(function() { return this.toArray(); });
+                    tr.eq(idx).append(that.thead.find("tr:eq(" + idx + ") .k-group-cell").add(cells));
+                }
+
+                removeEmptyRows(this.thead);
+
+                trFilter = table.find(".k-filter-row");
                 trFilter.append(that.thead.find(".k-filter-row .k-group-cell").add(filterCells));
 
                 this.lockedHeader = table.prependTo(container);
@@ -4761,13 +4860,13 @@ var __meta__ = {
             if (this._isLocked()) {
                 table = table || this.lockedHeader.find("table").add(this.lockedTable);
 
-                normalizeCols(table, visibleLockedColumns(this.columns), this._hasDetails(), this._groups());
+                normalizeCols(table, leafColumns(visibleLockedColumns(this.columns)), this._hasDetails(), this._groups());
             }
         },
 
         _appendCols: function(table, locked) {
             if (locked) {
-                normalizeCols(table, visibleNonLockedColumns(this.columns), this._hasDetails(), 0);
+                normalizeCols(table, leafColumns(visibleNonLockedColumns(this.columns)), this._hasDetails(), 0);
             } else {
                 normalizeCols(table, visibleColumns(leafColumns(this.columns)), this._hasDetails(), this._groups());
             }
@@ -5376,49 +5475,49 @@ var __meta__ = {
        },
 
        _adjustRowsHeight: function(table1, table2) {
-          var rows = table1[0].rows,
-            length = rows.length,
-            idx,
-            rows2 = table2[0].rows,
-            containers = table1.add(table2),
-            containersLength = containers.length,
-            heights = [];
+           var rows = table1[0].rows,
+               length = rows.length,
+               idx,
+               rows2 = table2[0].rows,
+               containers = table1.add(table2),
+               containersLength = containers.length,
+               heights = [];
 
-        for (idx = 0; idx < length; idx++) {
-              if (!rows2[idx]) {
-                break;
-              }
+           for (idx = 0; idx < length; idx++) {
+               if (!rows2[idx]) {
+                   break;
+               }
 
-              if (rows[idx].style.height) {
-                  rows[idx].style.height = rows2[idx].style.height = "";
-              }
+               if (rows[idx].style.height) {
+                   rows[idx].style.height = rows2[idx].style.height = "";
+               }
 
-              var offsetHeight1 = rows[idx].offsetHeight;
-              var offsetHeight2 = rows2[idx].offsetHeight;
-              var height = 0;
+               var offsetHeight1 = rows[idx].offsetHeight;
+               var offsetHeight2 = rows2[idx].offsetHeight;
+               var height = 0;
 
-              if (offsetHeight1 > offsetHeight2) {
-                  height = offsetHeight1;
-              } else if (offsetHeight1 < offsetHeight2) {
-                  height = offsetHeight2;
-              }
+               if (offsetHeight1 > offsetHeight2) {
+                   height = offsetHeight1;
+               } else if (offsetHeight1 < offsetHeight2) {
+                   height = offsetHeight2;
+               }
 
-              heights.push(height);
-          }
+               heights.push(height);
+           }
 
-          for (idx = 0; idx < containersLength; idx++) {
-              containers[idx].style.display = "none";
-          }
+           for (idx = 0; idx < containersLength; idx++) {
+               containers[idx].style.display = "none";
+           }
 
-          for (idx = 0; idx < length; idx++) {
-              if (heights[idx]) {
-                  rows[idx].style.height = rows2[idx].style.height = heights[idx] + "px";
-              }
-          }
+           for (idx = 0; idx < length; idx++) {
+               if (heights[idx]) {
+                   rows[idx].style.height = rows2[idx].style.height = heights[idx] + "px";
+               }
+           }
 
-          for (idx = 0; idx < containersLength; idx++) {
-              containers[idx].style.display = "";
-          }
+           for (idx = 0; idx < containersLength; idx++) {
+               containers[idx].style.display = "";
+           }
        }
    });
 
@@ -5428,6 +5527,27 @@ var __meta__ = {
 
    if (kendo.PDFMixin) {
        kendo.PDFMixin.extend(Grid.prototype);
+   }
+
+   function syncTableHeight(table1, table2) {
+       table1 = table1[0];
+       table2 = table2[0];
+
+       if (table1.rows.length !== table2.rows.length) {
+           var lockedHeigth = table1.offsetHeight;
+           var tableHeigth = table2.offsetHeight;
+
+           var row;
+           var diff;
+           if (lockedHeigth > tableHeigth) {
+               row = table2.rows[table2.rows.length - 1];
+               diff = lockedHeigth - tableHeigth;
+           } else {
+               row = table1.rows[table1.rows.length - 1];
+               diff = tableHeigth - lockedHeigth;
+           }
+           row.style.height = row.offsetHeight + diff + "px";
+       }
    }
 
    function adjustRowHeight(row1, row2) {

@@ -59,112 +59,178 @@
                             }
                         }
                     },
-//                    autoBind: false,
+                                        autoBind: true,
                     pageable: true,
-                    detailTemplate: "fffff",
+                    resizable: true,
+                    reorderable: true,
                     toolbar: ["create"],
                     //sortable: true,
-                    scrollable: false,
+                    scrollable: true,
                     //groupable: true,
                     columns: [
-//                { title: "master" },
-                { title: "master1", footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",  columns: [{ title: "master1-child", columns: [{ title: "master1-child-child"}] }, { title: "master1-child1" }] },
-                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
-            ]
-              //     columns: [{
-              //         title: "Contact Details",
-              //         columns: [
-              //             {
-              //                 field: "ContactName",
-              //                 title: "Contact Name",
-              //                 width: 140
-              //             },{
-              //             field: "ContactTitle",
-              //             title: "Contact Title",
-              //             width: 290
-              //         }, {
-              //             title: "Company Name",
-              //             columns: [{
-              //             field: "CustomerID",
-              //             width: 100
-              //         }]
-              //         }
-              //         ] }, {
-              //             field: "CustomerID",
-              //             width: 100
-              //         },{
-              //         field: "Country",
-              //         width: 200
-              //         }]
-                   });
+                    { title: "master", width: 100 },
+                    { title: "master1", width: 200, locked: true,  footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",
+                        columns: [{
+                            title: "master1-child",
+                            columns: [{ title: "master1-child-child", width: 100}, { title: "master1-child-child", width: 100}]
+                        },
+                        // { title: "master1-child1", width: 100/*, columns: [{ title: "master1-child-child"},{ title: "master1-child-child"}] */ }
+                        ] },
+//                  { title: "master", width: 100 , locked: true},
+                  { title: "master2", columns: [{ title: "master2-child", width: 100 }, { title: "master2-child1", width: 100 }] },
+//                  { title: "master1", footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",
+//                      columns: [{
+//                          title: "master1-child", width: 100
+//                    //      columns: [{ title: "master1-child-child"},{ title: "master1-child-child", width: 100}]
+//                      },
+//                      { title: "master1-child1", width: 100//, columns: [{ title: "master1-child-child"}/*,{ title: "master1-child-child"}*/]
+//                      }] }
+                 ]
                 });
 
-                /*
-                function f(rows, columns, parentCell) {
-                    var row = rows[rows.length - 1];
+/*
+                var header = $(".k-grid-header");
 
-                    var childRow;
-                    var totalColSpan = 0;
+                header.on("click", "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
+                    var cell = $(this);
 
-                    for (var idx = 0; idx < columns.length; idx++) {
-                        var cell = { title: columns[idx].title, colSpan: 0 };
-                        row.cells.push(cell);
+                    header.find(".highlight, .highlight-children").removeClass("highlight").removeClass("highlight-children");
 
-                        if (columns[idx].columns && columns[idx].columns.length) {
-                            if (!childRow) {
-                                childRow = { rowSpan: 0, cells: [] };
-                                rows.push(childRow);
-                            }
-                            cell.colSpan = columns[idx].columns.length;
-                            totalColSpan += cell.colSpan;
-                            f(rows, columns[idx].columns, cell);
-                            row.rowSpan = rows.length;
-                        }
-                    }
-                    if (parentCell) {
-                        parentCell.colSpan += totalColSpan;
-                    }
-                }
+                   // var p = parents(cell, header);
+                    //var c = children(cell, header);
+                    //$(p).map(function() { return this.toArray(); }).addClass("highlight");
+                    //$(c).map(function() { return this.toArray(); }).addClass("highlight-children");
 
-                function rowBuilder(html, columns) {
-                    var rows = [{ rowSpan: 0, cells: [] }];
 
-                    f(rows, columns);
+                    //var cols = $(header).next().find("tr:not(.k-grouping-row)").first().find("td:not(.k-group-cell,.k-hierarchy-cell)")
+                    var masterCells = $(header).find("tr:first").find("th:not(.k-group-cell,.k-hierarchy-cell)");
 
-                    for (var idx = 0; idx < rows.length; idx++) {
-                        html += "<tr>";
-                        var row = rows[idx];
-                        for (var j = 0; j < row.cells.length; j++) {
-                            html += "<th";
-                            if (row.rowSpan && !row.cells[j].colSpan) {
-                                html += " rowspan='" + row.rowSpan + "'";
-                            }
+                    var d = getDataCells(header);
 
-                            if (row.cells[j].colSpan) {
-                                html += " colspan='" + row.cells[j].colSpan + "'";
-                            }
-                            html += ">";
+                    var grid = $("#grid").data("kendoGrid");
 
-                            html += row.cells[j].title + "</th>";
-                        }
-                        html += "</tr>";
+                    for (var idx = 0; idx < d.length; idx++) {
+                        var p = parents(d.eq(idx), header);
+                        console.log(grid.columns[masterCells.index(p[p.length - 1])]);
+                     //   break;
                     }
 
-                    return html;
-                }
+                    $(d).map(function() { return this }).addClass("highlight-children");
+                });*/
+             });
 
-                $(function() {
-                    var columns = [
-                        { title: "foo", columns: [ { title: "child1" }, { title: "child2" } ] },
-                        { title: "bar" },
-                        { title: "baz", columns: [ { title: "child1", columns: [{ title: "child1-child" }, { title: "child1-child2" }, { title: "child1-child3" }] }, { title: "child2" } ] }
-                    ];
+             function getDataCells(container) {
+                 var rows = container.find("tr");
+                 var cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)")
+                     .filter(function() {
+                         return this.rowSpan > 1;
+                     });
 
-                    var html = rowBuilder(html, columns);
+                 cells = cells.add(rows.last().find("th:not(.k-group-cell,.k-hierarchy-cell)"));
 
-                    $("table thead").html(html);
-                });
-                */
+                 return cells;
+             }
+
+             function children(cell, container) {
+                 var result = [cell];
+
+                 var row = cell.closest("tr");
+                 var headerRows = container.find("tr:not(.k-filter-row)");
+                 var level = headerRows.index(row) + cell[0].rowSpan;
+                 if (level <= headerRows.length - 1) {
+                     var child = row.next();
+                     var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+                     var prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)");
+
+                     var offset = index - prevCells.filter(function() {
+                         return this.rowSpan > 1;
+                     }).length;
+
+                     var idx;
+
+                     prevCells = prevCells.filter(function() {
+                         return this.colSpan > 1;
+                     });
+
+                     for (idx = 0; idx < prevCells.length; idx++) {
+                         offset += prevCells[idx].colSpan || 1;
+                     }
+
+                     var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+                     offset = offset || 1;
+
+                     var colSpan = cell[0].colSpan ? cell[0].colSpan : 1;
+
+                     idx = 0;
+                     while (idx < colSpan) {
+                         var child = cells.eq(idx + (offset - 1));
+                         result = result.concat(children(child, container));
+                         if (child[0].colSpan > 1) {
+                            colSpan -= child[0].colSpan - 1;
+                         }
+                         idx++;
+                     }
+                 }
+
+                 return result;
+             }
+
+
+             function parents(cell, container) {
+                 var result = [cell];
+
+                 var row = cell.closest("tr");
+                 var headerRows = container.find("tr:not(.k-filter-row)");
+                 var level = headerRows.index(row);
+                 if (level > 0) {
+                     var parent = headerRows.eq(level - 1);
+                     var parentCellsWithChildren = parent.find("th:not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                         return !$(this).attr("rowspan");
+                     });
+
+                     var offset = 0;
+                     var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
+
+                     prevCells = cell.prevAll(":not(.k-group-cell,.k-hierarchy-cell)").filter(function() {
+                         return this.colSpan > 1;
+                     });
+
+                     for (idx = 0; idx < prevCells.length; idx++) {
+                         offset += prevCells[idx].colSpan || 1;
+                     }
+
+                     index += Math.max(offset - 1, 0);
+
+                     offset = 0;
+                     for (var idx = 0; idx < parentCellsWithChildren.length; idx++) {
+                         var parentCell = parentCellsWithChildren.eq(idx);
+                         if (parentCell.attr("colSpan")) {
+                             offset += parentCell[0].colSpan;
+                             } else {
+                             offset += 1;
+                         }
+                         if (index >= idx && index < offset) {
+                             result = result.concat(parents(parentCell, container));
+                             break;
+                         }
+                     }
+                 }
+                 return result;
+             }
+
             </script>
+
+            <style>
+                .highlight {
+                    background: red;
+                }
+                .highlight-children {
+                    background: green;
+                }
+                .k-resize-handle {
+                    background: red;
+                }
+            </style>
     </body>
 </html>
