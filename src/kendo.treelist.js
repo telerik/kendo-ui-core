@@ -98,25 +98,81 @@ var __meta__ = {
         },
 
         _filterCallback: function(query) {
+            var result = [];
             var data = query.toArray();
             var map = {};
-            var i, parent;
-            var result = [];
+            var i, parent, item;
 
             for (i = 0; i < data.length; i++) {
                 item = data[i];
 
-                while (item && !map[item.parentId]) {
-                    map[item.parentId] = map[item.id] = true;
-                    item = this.parentNode(item);
+                while (item) {
+                    map[item.id] = true;
 
-                    if (item) {
-                        result.push(item);
+                    if (!map[item.parentId]) {
+                        map[item.parentId] = true;
+                        item = this.parentNode(item);
+
+                        if (item) {
+                            result.push(item);
+                        }
+                    } else {
+                        break;
                     }
                 }
             }
 
             return new Query(data.concat(result));
+        },
+
+        _subtree: function(map, id) {
+            var result = (id ? map[id] : map[null]) || [];
+
+            for (var i = 0, len = result.length; i < len; i++) {
+                result = result.concat(this._subtree(map, result[i].id));
+            }
+
+            return result;
+        },
+
+        _calculateAggregates: function (data, options) {
+            options = options || {};
+
+            var result = {};
+            var item, subtree, i, id, parentId;
+            var filter = options.filter;
+
+            if (filter) {
+                data = Query.process(data, {
+                    filter: filter,
+                    filterCallback: proxy(this._filterCallback, this)
+                }).data;
+            }
+
+            // build hash id -> children
+            var map = {};
+
+            for (i = 0; i < data.length; i++) {
+                item = data[i];
+                id = item.id;
+                parentId = item.parentId;
+
+                map[id] = map[id] || [];
+                map[parentId] = map[parentId] || [];
+                map[parentId].push(item);
+            }
+
+            // calculate aggregates for each subtree
+            result[null] = new Query(this._subtree(map, null)).aggregate(options.aggregate);
+
+            for (i = 0; i < data.length; i++) {
+                item = data[i];
+                subtree = this._subtree(map, item.id);
+
+                result[item.id] = new Query(subtree).aggregate(options.aggregate);
+            }
+
+            return result;
         },
 
         _queryProcess: function(data, options) {
@@ -420,7 +476,7 @@ var __meta__ = {
                 width = column.width;
 
                 if (width && parseInt(width, 10) !== 0) {
-                    style = { style: { width: typeof width === STRING ? width : width + "px" } };
+                    style = { style: { width: typeof width === "string" ? width : width + "px" } };
                 } else {
                     style = null;
                 }

@@ -455,4 +455,89 @@
         ok(ds.get(4));
     });
 
+    test("aggregate calculates aggregates for each parent item", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, foo: 1, parentId: null },
+                { id: 2, foo: 2, parentId: 1 },
+                { id: 3, foo: 3, parentId: 1 },
+                { id: 4, foo: 4, parentId: 2 },
+                { id: 5, foo: 5, parentId: null }
+            ],
+            aggregate: [
+                { field: "foo", aggregate: "sum" }
+            ]
+        });
+
+        ds.read();
+
+        var aggregates = ds.aggregates();
+        equal(aggregates[null].foo.sum, 15);
+        equal(aggregates[1].foo.sum, 9);
+        equal(aggregates[2].foo.sum, 4);
+    });
+
+    test("filter initially", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, foo: 1, parentId: null },
+                { id: 2, foo: 2, parentId: 1 },
+                { id: 3, foo: 3, parentId: 1 }, // filtered out
+                { id: 4, foo: 4, parentId: 2 },
+                { id: 5, foo: 5, parentId: null }
+            ],
+            filter: { field: "foo", operator: "neq", value: 3 }
+        });
+
+        ds.read();
+
+        equal(ds.view().length, 4);
+    });
+
+    test("aggregate works on filtered data", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, foo: 1, parentId: null },
+                { id: 2, foo: 2, parentId: 1 },
+                { id: 3, foo: 3, parentId: 1 }, // filtered out
+                { id: 4, foo: 4, parentId: 2 },
+                { id: 5, foo: 5, parentId: null }
+            ],
+            filter: { field: "foo", operator: "neq", value: 3 },
+            aggregate: [
+                { field: "foo", aggregate: "sum" }
+            ]
+        });
+
+        ds.read();
+
+        var aggregates = ds.aggregates();
+        equal(aggregates[null].foo.sum, 12);
+        equal(aggregates[1].foo.sum, 6);
+        equal(aggregates[2].foo.sum, 4);
+    });
+
+    test("aggregate works on filtered parents", function() {
+         var ds = new TreeListDataSource({
+            data: [
+                { id: 1, foo: 1, parentId: null }, // filtered out
+                { id: 2, foo: 2, parentId: 1 },
+                { id: 3, foo: 3, parentId: 1 },
+                { id: 4, foo: 4, parentId: 2 },
+                { id: 5, foo: 5, parentId: null }
+            ],
+            filter: { field: "foo", operator: "neq", value: 1 },
+            aggregate: [
+                { field: "foo", aggregate: "sum" }
+            ]
+        });
+
+        ds.read();
+
+        var aggregates = ds.aggregates();
+        equal(aggregates[null].foo.sum, 15);
+        equal(aggregates[1].foo.sum, 9);
+        equal(aggregates[2].foo.sum, 4);
+    });
+
 })();

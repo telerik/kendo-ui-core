@@ -1513,20 +1513,6 @@ var __meta__ = {
         };
     };
 
-    function calculateAggregates(data, options) {
-        options = options || {};
-
-        var query = new Query(data),
-            aggregates = options.aggregate,
-            filter = options.filter;
-
-        if(filter) {
-            query = query.filter(filter);
-        }
-
-        return query.aggregate(aggregates);
-    }
-
     var LocalTransport = Class.extend({
         init: function(options) {
             this.data = options.data;
@@ -3022,6 +3008,20 @@ var __meta__ = {
             }
         },
 
+        _calculateAggregates: function (data, options) {
+            options = options || {};
+
+            var query = new Query(data),
+                aggregates = options.aggregate,
+                filter = options.filter;
+
+            if (filter) {
+                query = query.filter(filter);
+            }
+
+            return query.aggregate(aggregates);
+        },
+
         _process: function (data, e) {
             var that = this,
                 options = {},
@@ -3050,7 +3050,7 @@ var __meta__ = {
 
             if (that.options.serverAggregates !== true) {
                 options.aggregate = that._aggregate;
-                that._aggregateResult = calculateAggregates(data, options);
+                that._aggregateResult = that._calculateAggregates(data, options);
             }
 
             result = that._queryProcess(data, options);
@@ -3135,7 +3135,7 @@ var __meta__ = {
                     }
 
                     that._view = result.data;
-                    that._aggregateResult = calculateAggregates(that._data, options);
+                    that._aggregateResult = that._calculateAggregates(that._data, options);
                     that.trigger(REQUESTEND, { });
                     that.trigger(CHANGE, { items: result.data });
                 }
