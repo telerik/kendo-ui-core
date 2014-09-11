@@ -433,7 +433,7 @@
             init: function (options, dataItem) {
                 var that = this;
                 DiagramElement.fn.init.call(that, options, dataItem);
-                this._getOptions();
+                this.updateOptionsFromModel();
                 options = that.options;
                 that.connectors = [];
                 that.type = options.type;
@@ -457,7 +457,7 @@
 
             options: diagram.shapeDefaults(),
 
-            _getOptions: function() {
+            updateOptionsFromModel: function() {
                 this.options = deepExtend({},
                     this.options,
                     filterDataItem(
@@ -471,10 +471,14 @@
                 if (this.diagram) {
                     var bounds = this._bounds;
                     var model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
-                    model.set("x", bounds.x);
-                    model.set("y", bounds.y);
-                    model.set("width", bounds.width);
-                    model.set("height", bounds.height);
+                    this.diagram._shouldRefresh = false;
+                    model._set("x", bounds.x);
+                    model._set("y", bounds.y);
+                    model._set("width", bounds.width);
+                    model._set("height", bounds.height);
+
+                    this.diagram._shouldRefresh = true;
+                    model.trigger("change");
                 }
             },
 
@@ -2693,11 +2697,12 @@
             },
 
             _refreshShapes: function(e) {
-                console.log(e.action);
                 if (e.action === "remove") {
                     // remove shapes
                 } if (e.action === "itemchange") {
-                    // update shapes
+                    if (this._shouldRefresh) {
+                        this._updateShapes(e.items);
+                    }
                 } else {
                     this.clear();
                     this._addShapes(e.sender.view());
@@ -2708,13 +2713,23 @@
                 }
             },
 
+            _updateShapes: function(items) {
+                for (var i = 0; i < items.length; i++) {
+                    var dataItem = items[i];
+
+                    var shape = this._dataMap[dataItem.id];
+                    shape.updateOptionsFromModel();
+                    shape.redraw();
+                };
+            },
+
             _addShapes: function(dataItems) {
                 var length = dataItems.length;
 
                 for (var i = 0; i < length; i++) {
                     var dataItem = dataItems[i];
 
-                    var shape = this._dataMap[dataItems.id];
+                    var shape = this._dataMap[dataItem.id];
 
                     if (shape) {
                         continue;
