@@ -28,6 +28,7 @@ var __meta__ = {
     var TABINDEX = "tabIndex";
     var CLICK = "click";
     var WIDTH = "width";
+    var STRING = "string";
     var DIRECTIONS = {
         "down": {
             origin: "bottom center",
@@ -70,6 +71,28 @@ var __meta__ = {
             '</div>' +
         '</div>');
 
+    var DATERANGEEDITOR = function(container, options) {
+        var attr = { name: options.field };
+        var validationRules = options.model.fields[options.field].validation;
+
+        if (validationRules && isPlainObject(validationRules) && validationRules.message) {
+            attr[kendo.attr("dateCompare-msg")] = validationRules.message;
+        }
+
+        $('<input type="text" required ' +
+                kendo.attr("type") + '="date" ' +
+                kendo.attr("role") + '="datetimepicker" ' +
+                kendo.attr("bind") + '="value:' +
+                options.field +'" ' +
+                kendo.attr("validate") + "='true' />")
+            .attr(attr)
+            .appendTo(container);
+
+        $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>')
+            .hide()
+            .appendTo(container);
+    };
+
     var ganttStyles = {
         wrapper: "k-widget k-gantt",
         listWrapper: "k-gantt-layout k-gantt-treelist",
@@ -96,10 +119,13 @@ var __meta__ = {
         gridContent: "k-grid-content",
         popup: {
             form: "k-popup-edit-form",
+            editForm: "k-gantt-edit-form",
             formContainer: "k-edit-form-container",
             message: "k-popup-message",
             buttonsContainer: "k-edit-buttons k-state-default",
-            button: "k-button"
+            button: "k-button",
+            editField: "k-edit-field",
+            editLabel: "k-edit-label"
         },
         toolbar: {
             headerWrapper: "k-floatwrap k-header k-gantt-toolbar",
@@ -145,12 +171,20 @@ var __meta__ = {
 
     function dateCompareValidator(input) {
         if (input.filter("[name=end], [name=start]").length) {
-            var container = input.closest("td.k-edit-cell");
-            var editable = container.data("kendoEditable");
             var field = input.attr("name");
             var picker = kendo.widgetInstance(input, kendo.ui);
-            var model = editable ? editable.options.model : null;
             var dates = {};
+            var container = input;
+            var editable;
+            var model;
+
+            while (container !== window && !editable) {
+                container = container.parent();
+
+                editable = container.data("kendoEditable");
+            }
+
+            model = editable ? editable.options.model : null;
 
             if (!model) {
                 return true;
@@ -868,6 +902,12 @@ var __meta__ = {
         GanttDependency: GanttDependency
     });
 
+    var editors = {
+        desktop: {
+            dateRange: DATERANGEEDITOR
+        }
+    };
+
     var Editor = kendo.Observable.extend({
         init: function(element, options) {
             kendo.Observable.fn.init.call(this);
@@ -875,18 +915,96 @@ var __meta__ = {
             this.element = element;
             this.options = extend(true, {}, this.options, options);
             this.createButton = this.options.createButton;
+        },
+
+        fields: function(editors, model) {
+            var messages = this.options.messages.editor;
+
+            var fields = [
+                { field: "title", title: messages.title },
+                { field: "start", title: messages.start, editor: editors.dateRange },
+                { field: "end", title: messages.end, editor: editors.dateRange },
+                { field: "percentComplete", title: messages.percentComplete }
+            ];
+
+            return fields;
+        },
+
+        _buildEditTemplate: function(model, fields, editableFields) {
+            var template = this.options.editable.template;
+            var settings = extend({}, kendo.Template, this.options.templateSettings);
+            var paramName = settings.paramName;
+            var popupStyles = ganttStyles.popup;
+            var html = "";
+
+            if (template) {
+                if (typeof template === STRING) {
+                    template = window.unescape(template);
+                }
+
+                html += (kendo.template(template, settings))(model);
+            } else {
+                for (var i = 0, length = fields.length; i < length; i++) {
+                    var field = fields[i];
+
+                    html += '<div class="' + popupStyles.editLabel + '"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
+
+                    if ((!model.editable || model.editable(field.field))) {
+                        editableFields.push(field);
+                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="' + popupStyles.editField + '"></div>';
+                    } else {
+                        var tmpl = "#:";
+
+                        if (field.field) {
+                            field = kendo.expr(field.field, paramName);
+                            tmpl += field + "==null?'':" + field;
+                        } else {
+                            tmpl += "''";
+                        }
+
+                        tmpl += "#";
+
+                        tmpl = kendo.template(tmpl, settings);
+
+                        html += '<div class="' + popupStyles.editField + '">' + tmpl(model) + '</div>';
+                    }
+                }
+            }
+
+            return html;
         }
     });
 
     var PopupEditor = Editor.extend({
         destroy: function() {
             this.close();
+            this.unbind();
+        },
+
+        editTask: function(task) {
+            this.editable = this._createPopupEditor(task);
         },
 
         close: function() {
-            if (this.popup) {
-                this.popup.destroy();
-                this.popup = null;
+            var that = this;
+
+            var destroy = function() {
+                if (that.editable) {
+                    that.editable.destroy();
+                    that.editable = null;
+                    that.container = null;
+                }
+
+                if (that.popup) {
+                    that.popup.destroy();
+                    that.popup = null;
+                }
+            };
+
+            if (this.editable && this.container.is(":visible")) {
+                this.container.data("kendoWindow").bind("deactivate", destroy).close();
+            } else {
+                destroy();
             }
         },
 
@@ -900,7 +1018,7 @@ var __meta__ = {
             for (var i = 0, length = buttons.length; i < length; i++) {
                 html += this.createButton(buttons[i]);
             }
-            
+
             html += '</div></div></div>';
 
             var wrapper = this.element;
@@ -934,6 +1052,92 @@ var __meta__ = {
                 .getKendoWindow();
 
             popup.center().open();
+        },
+
+        _createPopupEditor: function(task) {
+            var that = this;
+            var options = {};
+            var messages = this.options.messages;
+            var popupStyles = ganttStyles.popup;
+            var html = kendo.format('<div {0}="{1}" class="{2} {3}"><div class="{4}">', 
+                kendo.attr("uid"), task.uid, popupStyles.form, popupStyles.editForm, popupStyles.formContainer);
+            
+            var fields = this.fields(editors.desktop, task);
+            var editableFields = [];
+
+            html += this._buildEditTemplate(task, fields, editableFields);
+
+            html += '<div class="' + popupStyles.buttonsContainer + '">';
+            html += this.createButton({ name: "update", text: messages.save });
+            html += this.createButton({ name: "canceledit", text: messages.cancel });
+            html += this.createButton({ name: "delete", text: messages.destroy });
+
+            html += '</div></div></div>';
+
+            var container = this.container = $(html).appendTo(this.element)
+                .eq(0)
+                .kendoWindow(extend({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: messages.editor.editorTitle,
+                    visible: false,
+                    close: function(e) {
+                        if (e.userTriggered) {
+                            if (that.trigger("cancel", { container: container, model: task })) {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                }, options));
+
+            var editableWidget = container
+                .kendoEditable({
+                    fields: editableFields,
+                    model: task,
+                    clearContainer: false,
+                    validateOnBlur: true,
+                    target: that.options.target
+                })
+                .data("kendoEditable");
+
+            if (!this.trigger("edit", { container: container, model: task })) {
+                container.data("kendoWindow").center().open();
+
+                container.on(CLICK + NS, "a.k-gantt-cancel", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger("cancel", { container: container, model: task });
+                });
+
+                container.on(CLICK + NS, "a.k-gantt-update", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var fields = that.fields(editors.desktop, task);
+                    var updateInfo = {};
+                    var field;
+
+                    for (var i = 0, length = fields.length; i < length; i++) {
+                        field = fields[i].field;
+                        updateInfo[field] = task.get(field);
+                    }
+
+                    that.trigger("save", { container: container, model: task, updateInfo: updateInfo });
+                });
+
+                container.on(CLICK + NS, "a.k-gantt-delete", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger("remove", { container: container, model: task });
+                });
+            } else {
+                that.trigger("cancel", { container: container, model: task });
+            }
+
+            return editableWidget;
         }
     });
 
@@ -1012,6 +1216,7 @@ var __meta__ = {
             dataSource: {},
             dependencies: {},
             messages: {
+                save: "Save",
                 cancel: "Cancel",
                 destroy: "Delete",
                 deleteTaskWindowTitle: "Delete task",
@@ -1026,6 +1231,13 @@ var __meta__ = {
                     addChild: "Add Child",
                     insertBefore: "Add Above",
                     insertAfter: "Add Below"
+                },
+                editor: {
+                    editorTitle: "Task",
+                    title: "Title",
+                    start: "Start",
+                    end: "End",
+                    percentComplete: "Percent Complete"
                 }
             },
             showWorkHours: true,
@@ -1058,7 +1270,7 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
+            
             if (this.dataSource) {
                 this.dataSource.unbind("change", this._refreshHandler);
                 this.dataSource.unbind("progress", this._progressHandler);
@@ -1432,6 +1644,9 @@ var __meta__ = {
                 .bind("select", function(e) {
                     that.select("[data-uid='" + e.uid + "']");
                 })
+                .bind("editTask", function(e) {
+                    that.editTask(e.uid);
+                })
                 .bind("clear", function(e) {
                     that.clearSelection();
                 })
@@ -1485,10 +1700,40 @@ var __meta__ = {
         },
 
         _createEditor: function(command) {
-            this._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
+            var that = this;
+
+            var editor = this._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
                 target: this,
                 createButton: proxy(this._createButton, this)
             }));
+
+            editor
+                .bind("cancel", function(e) {
+                    var task = that.dataSource.getByUid(e.model.uid);
+
+                    if (that.trigger("cancel", { container: e.container, task: task })) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    that.cancelTask();
+                })
+                .bind("edit", function(e) {
+                    var task = that.dataSource.getByUid(e.model.uid);
+
+                    if (that.trigger("edit", { container: e.container, task: task })) {
+                        e.preventDefault();
+                    }
+                })
+                .bind("save", function(e) {
+                    var task = that.dataSource.getByUid(e.model.uid);
+
+                    that.saveTask(task, e.updateInfo);
+                })
+                .bind("remove", function(e) {
+                    that.removeTask(e.model.uid);
+                });
+
         },
 
         _createButton: function(command) {
@@ -1555,6 +1800,44 @@ var __meta__ = {
 
         items: function() {
             return this.wrapper.children(".k-task");
+        },
+
+        cancelTask: function() {
+            var editor = this._editor;
+            var container = editor.container;
+
+            if (container) {
+                editor.close();
+            }
+        },
+
+        editTask: function(uid) {
+            var task = typeof uid === "string" ? this.dataSource.getByUid(uid) : uid;
+
+            if (!task) {
+                return;
+            }
+
+            var taskCopy = this.dataSource._createNewModel(task.toJSON());
+            taskCopy.uid = task.uid;
+
+            this.cancelTask();
+
+            this._editTask(taskCopy);
+        },
+
+        _editTask: function(task) {
+            this._editor.editTask(task);
+        },
+
+        saveTask: function(task, updateInfo) {
+            var editor = this._editor;
+            var container = editor.container;
+            var editable = editor.editable;
+
+            if (container && editable && editable.end()) {
+                this._updateTask(task, updateInfo);
+            }
         },
 
         _updateTask: function(task, updateInfo) {
@@ -1734,6 +2017,10 @@ var __meta__ = {
 
             if (this.trigger("dataBinding")) {
                 return;
+            }
+
+            if (this._editor) {
+                this._editor.close();
             }
 
             this.clearSelection();

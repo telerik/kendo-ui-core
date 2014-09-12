@@ -23,6 +23,7 @@ var __meta__ = {
     var Query = kendo.data.Query;
     var NS = ".kendoGanttTimeline";
     var CLICK = "click";
+    var DBLCLICK = "dblclick";
     var KEYDOWN = "keydown";
     var DOT = ".";
     var TIME_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 't')#");
@@ -1894,7 +1895,7 @@ var __meta__ = {
             var startY;
             var content;
             var contentOffset;
-            var useVML = kendo.support.browser.msie && kendo.support.browser.version < 9;
+            var useVML = browser.msie && browser.version < 9;
             var styles = GanttTimeline.styles;
 
             var cleanUp = function() {
@@ -2089,6 +2090,11 @@ var __meta__ = {
                 this.wrapper
                     .on(CLICK + NS, DOT + styles.taskDelete, function(e) {
                         that.trigger("removeTask", { uid: $(this).closest(DOT + styles.task).attr("data-uid") });
+                        e.stopPropagation();
+                        e.preventDefault();
+                    })
+                    .on(DBLCLICK + NS, DOT + styles.task, function(e) {
+                        that.trigger("editTask", { uid: $(this).attr("data-uid") });
                         e.stopPropagation();
                         e.preventDefault();
                     })
