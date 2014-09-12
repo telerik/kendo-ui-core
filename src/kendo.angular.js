@@ -389,6 +389,12 @@ var __meta__ = {
 
                                 // keep in sync
                                 scope.$watch(attrs.kNgModel, function(newValue, oldValue){
+                                    if (newValue === undefined) {
+                                        // because widget's value() method usually checks if the new value is undefined,
+                                        // in which case it returns the current value rather than clearing the field.
+                                        // https://github.com/telerik/kendo-ui-core/issues/299
+                                        newValue = null;
+                                    }
                                     if (updating) {
                                         return;
                                     }

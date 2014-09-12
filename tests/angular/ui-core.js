@@ -35,6 +35,26 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("clear the widget value when Angular sends undefined", function(dom, $scope){
+        $("<div><input kendo-datepicker='date' k-ng-model='foo.date' /><input kendo-numerictextbox='number' k-ng-model='foo.number' /></div>")
+            .appendTo(dom);
+        var now = new Date();
+        $scope.foo = {
+            date   : now,
+            number : 10
+        };
+        $scope.whenRendered(function(){
+            start();
+            equal($scope.date.value(), now);
+            equal($scope.number.value(), 10);
+            $scope.$apply(function(){
+                $scope.foo = null;
+            });
+            equal($scope.date.value(), null);
+            equal($scope.number.value(), null);
+        });
+    });
+
     runTest("store widget reference in $scope", function(dom, $scope){
         $("<div kendo-window='window' k-title='\"Reference\"'></div>").appendTo(dom);
         expect(2);
