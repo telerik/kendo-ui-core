@@ -2208,6 +2208,7 @@ var __meta__ = {
 
             that.editable = new kendo.ui.Editable(row
                 .addClass("k-grid-edit-row"),{
+                    target: that,
                     fields: fields,
                     model: model,
                     clearContainer: false
