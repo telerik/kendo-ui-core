@@ -41,7 +41,7 @@
                 $("#grid").kendoGrid({
                     dataSource: {
                         type: "odata",
-                      //  group: "foo",
+                        group: "foo",
                         transport: {
                             read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                         },
@@ -59,6 +59,7 @@
                             }
                         }
                     },
+                    height: 400,
                                         autoBind: true,
                     pageable: true,
                     resizable: true,
@@ -72,7 +73,7 @@
                     { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
                         columns: [{
                             title: "master1-child",
-                            columns: [{ title: "master1-child-child", footerTemplate: "foo", width: 100}, { title: "master1-child-child", width: 100}]
+                            columns: [{ title: "master1-child-child", groupFooterTemplate: "foo", footerTemplate: "foo", width: 100}, { title: "master1-child-child", width: 100}]
                         },
                         // { title: "master1-child1", width: 100/*, columns: [{ title: "master1-child-child"},{ title: "master1-child-child"}] */ }
                         ] },

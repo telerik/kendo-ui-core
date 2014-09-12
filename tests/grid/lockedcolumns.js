@@ -1446,4 +1446,67 @@
         equal(grid.footer.find("table:last td").length, 3);
         equal(grid.footer.find("table:last col").length, 3);
     });
+
+    test("group row in locked content has correct colspan - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedTable.find(".k-grouping-row > td:first").attr("colspan"), 3); // groupcell + two locked column
+    });
+
+    test("group row in non locked content has correct colspan - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.table.find(".k-grouping-row > td:first").attr("colspan"), 3); // three non locked columns
+    });
+
+    test("group row in non locked content has correct colspan with multiple groups - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.table.find(".k-grouping-row:first > td:first").attr("colspan"), 3); // two non locked columns
+        equal(grid.table.find(".k-grouping-row:eq(1) > td:first").attr("colspan"), 3); // two non locked columns
+    });
+
+    test("group row in locked content has correct colspan with multiple groups - with multiline headers", function() {
+        var grid = setup({
+            dataSource: {
+                group: [ {field: "foo" }, { field: "bar" }]
+            },
+            columns: [
+                { title: "master" },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", footerTemplate: "foo" }, { title: "master1-child1" }] },
+                { title: "master2", columns: [{ title: "master2-child" }, { title: "master2-child1" }] }
+            ]
+        });
+
+        equal(grid.lockedTable.find(".k-grouping-row:first > td:first").attr("colspan"), 4); // two groupcells + locked column
+        equal(grid.lockedTable.find(".k-grouping-row:eq(1) > td:eq(1)").attr("colspan"), 3); // single groupcell + locked column
+    });
+
 })();

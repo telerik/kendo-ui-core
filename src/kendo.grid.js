@@ -5429,7 +5429,7 @@ var __meta__ = {
                         groupFooterTemplate: that.groupFooterTemplate
                     };
 
-            colspan = isLocked ? colspan - visibleLockedColumns(that.columns).length : colspan;
+            colspan = isLocked ? colspan - leafColumns(visibleLockedColumns(that.columns)).length : colspan;
 
             if(groups > 0) {
 
@@ -5468,7 +5468,7 @@ var __meta__ = {
                var table = this.lockedTable;
 
                if (groups > 0) {
-                   colspan = colspan - visibleNonLockedColumns(this.columns).length;
+                   colspan = colspan - visibleColumns(leafColumns(nonLockedColumns(this.columns))).length;
                    for (idx = 0, length = data.length; idx < length; idx++) {
                        html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, templates);
                    }
