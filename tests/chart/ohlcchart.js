@@ -325,7 +325,7 @@
         });
 
         test("applies series color to point border", function() {
-            equal(ohlcPoint.options.color, "lineColor");
+            equal(ohlcPoint.color, "lineColor");
         });
 
         test("applies opacity to point", function() {
@@ -345,7 +345,7 @@
                 color: function(p) { return "#f00" }
             });
 
-            equal(ohlcPoint.options.color, "#f00");
+            equal(ohlcPoint.color, "#f00");
         });
 
         test("applies color function for each point", 2, function() {
@@ -480,7 +480,7 @@
             }],
             point;
 
-        function createBubbleChart(candlestickSeries) {
+        function createOHLCChart(candlestickSeries) {
             var chart = createChart({
                 dataSource: {
                     data: data
@@ -496,12 +496,12 @@
         }
 
         // ------------------------------------------------------------
-        module("Candlestick Chart / Data Binding / Data Source", {
+        module("OHLC Chart / Data Binding / Data Source", {
             teardown: destroyChart
         });
 
         test("binds to 4-element array", function() {
-            createBubbleChart({
+            createOHLCChart({
                 data: [[2, 4, 0, 3]]
             });
 
@@ -509,7 +509,7 @@
         });
 
         test("binds open, high, low and close field", function() {
-            createBubbleChart({
+            createOHLCChart({
                 openField: "open",
                 highField: "high",
                 lowField: "low",
@@ -520,7 +520,7 @@
         });
 
         test("binds color field", function() {
-            createBubbleChart({
+            createOHLCChart({
                 openField: "open",
                 highField: "high",
                 lowField: "low",
@@ -528,7 +528,22 @@
                 colorField: "color"
             });
 
-            deepEqual(point.options.color, "color");
+            deepEqual(point.color, "color");
+        });
+
+        test("evaluates color function", function() {
+            createOHLCChart({
+                openField: "open",
+                highField: "high",
+                lowField: "low",
+                closeField: "close",
+                colorField: "color",
+                color: function() {
+                    return "foo";
+                }
+            });
+
+            deepEqual(point.color, "foo");
         });
 
     })();

@@ -333,7 +333,7 @@
         });
 
         test("highlightOverlay renders default border color (computed)", function() {
-            firstPoint.options.color = "#ffffff";
+            firstPoint.color = "#ffffff";
             var rect = firstPoint.highlightOverlay(view).children[0];
 
             equal(rect.options.stroke, "#cccccc");
@@ -373,7 +373,7 @@
         });
 
         test("highlightOverlay renders default line color (computed)", function() {
-            firstPoint.options.color = "#ffffff";
+            firstPoint.color = "#ffffff";
             var line = firstPoint.highlightOverlay(view).children[1];
 
             equal(line.options.stroke, "#cccccc");
@@ -631,7 +631,7 @@
             }],
             point;
 
-        function createBubbleChart(candlestickSeries) {
+        function createCandlestickChart(candlestickSeries) {
             chart = createChart({
                 dataSource: {
                     data: data
@@ -652,7 +652,7 @@
         });
 
         test("binds to 4-element array", function() {
-            createBubbleChart({
+            createCandlestickChart({
                 data: [[2, 4, 0, 3]]
             });
 
@@ -660,7 +660,7 @@
         });
 
         test("binds open, high, low and close field", function() {
-            createBubbleChart({
+            createCandlestickChart({
                 openField: "open",
                 highField: "high",
                 lowField: "low",
@@ -671,7 +671,7 @@
         });
 
         test("binds color field", function() {
-            createBubbleChart({
+            createCandlestickChart({
                 openField: "open",
                 highField: "high",
                 lowField: "low",
@@ -679,7 +679,7 @@
                 colorField: "color"
             });
 
-            deepEqual(point.options.color, "color");
+            deepEqual(point.color, "color");
         });
 
         test("binds downColor field", function() {
@@ -699,7 +699,46 @@
 
             point = chart._plotArea.charts[0].points[0];
 
-            deepEqual(point.options.color, "downColor");
+            deepEqual(point.color, "downColor");
+        });
+
+        test("evaluates color function", function() {
+            createCandlestickChart({
+                openField: "open",
+                highField: "high",
+                lowField: "low",
+                closeField: "close",
+                colorField: "color",
+                color: function() {
+                    return "foo";
+                }
+            });
+
+            deepEqual(point.color, "foo");
+        });
+
+        test("does not taint following points with down color", function() {
+            var chart = createChart({
+                dataSource: {
+                    data: [{
+                        open: 3, high: 4, low: 1, close: 2, color: "color", downColor: "downColor"
+                    }, {
+                        open: 2, high: 4, low: 1, close: 3, color: "color", downColor: "downColor"
+                    }]
+                },
+                series: [{
+                    type: "candlestick",
+                    openField: "open",
+                    highField: "high",
+                    lowField: "low",
+                    closeField: "close",
+                    baseField: "downColor"
+                }]
+            });
+
+            point = chart._plotArea.charts[0].points[1];
+
+            deepEqual(point.color, "color");
         });
     })();
 
