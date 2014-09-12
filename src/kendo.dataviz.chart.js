@@ -6003,13 +6003,13 @@ var __meta__ = {
                     strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
                 } : {},
                 rectStyle = deepExtend({
-                    fill: options.color,
+                    fill: point.color,
                     fillOpacity: options.opacity
                 }, border),
                 lineStyle = {
                     strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
                     strokeWidth: options.line.width,
-                    stroke: options.line.color || options.color,
+                    stroke: options.line.color || point.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt"
                 };
@@ -6040,7 +6040,7 @@ var __meta__ = {
 
             if (!defined(borderColor)) {
                 borderColor =
-                    new Color(options.color).brightness(border._brightness).toHex();
+                    new Color(point.color).brightness(border._brightness).toHex();
             }
 
             return borderColor;
@@ -6123,7 +6123,6 @@ var __meta__ = {
             var options = chart.options;
             var value = data.valueFields;
             var children = chart.children;
-            var pointColor = data.fields.color || series.color;
             var valueParts = chart.splitValue(value);
             var hasValue = areNumbers(valueParts);
             var categoryPoints = chart.categoryPoints[categoryIx];
@@ -6135,15 +6134,7 @@ var __meta__ = {
             }
 
             if (hasValue) {
-                if (series.type == CANDLESTICK) {
-                    if (value.open > value.close) {
-                        pointColor = data.fields.downColor || series.downColor || series.color;
-                    }
-                }
-
-                point = chart.createPoint(
-                    data, deepExtend(fields, { series: { color: pointColor } })
-                );
+                point = chart.createPoint(data, fields);
             }
 
             cluster = children[categoryIx];
@@ -6187,12 +6178,26 @@ var __meta__ = {
             var value = data.valueFields;
             var pointOptions = deepExtend({}, series);
             var pointType = chart.pointType();
+            var color = data.fields.color || series.color;
 
             pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
             );
 
-            return new pointType(value, pointOptions);
+            if (series.type == CANDLESTICK) {
+                if (value.open > value.close) {
+                    color = data.fields.downColor || series.downColor || series.color;
+                }
+            }
+
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
+            }
+
+            var point = new pointType(value, pointOptions);
+            point.color = color;
+
+            return point;
         },
 
         splitValue: function(value) {
@@ -6286,7 +6291,7 @@ var __meta__ = {
                     strokeOpacity: lineOptions.opacity || options.opacity,
                     zIndex: -1,
                     strokeWidth: lineOptions.width,
-                    stroke: options.color || lineOptions.color,
+                    stroke: point.color || lineOptions.color,
                     dashType: lineOptions.dashType
                 };
 
@@ -6337,7 +6342,6 @@ var __meta__ = {
             var seriesIx = fields.seriesIx;
             var options = chart.options;
             var children = chart.children;
-            var pointColor = data.fields.color || series.color;
             var value = data.valueFields;
             var valueParts = chart.splitValue(value);
             var hasValue = areNumbers(valueParts);
@@ -6350,9 +6354,7 @@ var __meta__ = {
             }
 
             if (hasValue) {
-                point = chart.createPoint(
-                    data, deepExtend(fields, { series: { color: pointColor } })
-                );
+                point = chart.createPoint(data, fields);
             }
 
             cluster = children[categoryIx];
@@ -6578,8 +6580,8 @@ var __meta__ = {
                 markersBorder = deepExtend({}, markers.border);
 
                 if (!defined(markersBorder.color)) {
-                    if (defined(point.options.color)) {
-                        markersBorder.color = point.options.color;
+                    if (defined(point.color)) {
+                        markersBorder.color = point.color;
                     } else {
                         markersBorder.color =
                             new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
@@ -6649,7 +6651,7 @@ var __meta__ = {
             return view.createMultiLine(points, {
                     strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
                     strokeWidth: options.line.width,
-                    stroke: options.line.color || options.color,
+                    stroke: options.line.color || this.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt",
                     data: { data: { modelId: this.modelId } }
@@ -6663,7 +6665,7 @@ var __meta__ = {
             return view.createPolyline(point.medianPoints, false, {
                     strokeOpacity: valueOrDefault(options.median.opacity, options.opacity),
                     strokeWidth: options.median.width,
-                    stroke: options.median.color || options.color,
+                    stroke: options.median.color || point.color,
                     dashType: options.median.dashType,
                     strokeLineCap: "butt",
                     data: { data: { modelId: this.modelId } }
@@ -6673,13 +6675,13 @@ var __meta__ = {
         createBody: function(view, options) {
             var point = this,
                 border = options.border.width > 0 ? {
-                    stroke: options.color || point.getBorderColor(),
+                    stroke: point.color || point.getBorderColor(),
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType,
                     strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
                 } : {},
                 body = deepExtend({
-                    fill: options.color,
+                    fill: point.color,
                     fillOpacity: options.opacity,
                     data: { data: { modelId: this.modelId } }
                 }, border);
@@ -6700,7 +6702,7 @@ var __meta__ = {
             return view.createPolyline(point.meanPoints, false, {
                     strokeOpacity: valueOrDefault(options.mean.opacity, options.opacity),
                     strokeWidth: options.mean.width,
-                    stroke: options.mean.color || options.color,
+                    stroke: options.mean.color || point.color,
                     dashType: options.mean.dashType,
                     strokeLineCap: "butt",
                     data: { data: { modelId: this.modelId } }
