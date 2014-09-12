@@ -19,6 +19,10 @@ namespace Kendo.Mvc.UI
         
         public bool? Confirmation { get; set; }
         
+        public string Template { get; set; }
+
+        public string TemplateId { get; set; }
+        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
@@ -28,6 +32,20 @@ namespace Kendo.Mvc.UI
             if (Confirmation.HasValue)
             {
                 json["confirmation"] = Confirmation;
+            }
+                
+            if (!string.IsNullOrEmpty(TemplateId))
+            {
+                json["template"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        TemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(Template))
+            {
+                json["template"] = Template;
             }
                 
         //<< Serialization

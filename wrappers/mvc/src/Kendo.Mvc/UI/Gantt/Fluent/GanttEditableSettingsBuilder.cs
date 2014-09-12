@@ -30,6 +30,30 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Gantt will know
+		/// which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public GanttEditableSettingsBuilder Template(string value)
+        {
+            container.Template = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Gantt will know
+		/// which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.
+        /// </summary>
+        /// <param name="value">The value that configures the template.</param>
+        public GanttEditableSettingsBuilder TemplateId(string value)
+        {
+            container.TemplateId = value;
+
+            return this;
+        }
+        
         //<< Fields
     }
 }
