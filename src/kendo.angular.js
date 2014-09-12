@@ -75,6 +75,12 @@ var __meta__ = {
         kNgDelay    : true
     };
 
+    var ignoredOwnProperties = {
+        // XXX: other names to ignore here?
+        name    : true,
+        title   : true
+    };
+
     function addOption(scope, options, name, value) {
         options[name] = angular.copy(scope.$eval(value));
         if (options[name] === undefined && value.match(/^\w*$/)) {
@@ -114,7 +120,7 @@ var __meta__ = {
 
             if (widgetOptions.hasOwnProperty(dataName)) {
                 addOption(scope, options, dataName, value);
-            } else if (widgetOptions.hasOwnProperty(name) && name != "name") { // `name` must be forbidden. XXX: other names to ignore here?
+            } else if (widgetOptions.hasOwnProperty(name) && !ignoredOwnProperties[name]) {
                 addOption(scope, options, name, value);
             } else if (!ignoredAttributes[name]) {
                 var match = name.match(/^k(On)?([A-Z].*)/);
