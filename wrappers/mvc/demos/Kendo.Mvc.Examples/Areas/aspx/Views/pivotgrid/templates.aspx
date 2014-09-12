@@ -3,8 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <script id="dataCellTemplate" type="text/x-kendo-tmpl">
-    # var columnMember = columnTuple.members[0]; #
-    # var rowMember = rowTuple.members[0]; #
+    # var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #
+    # var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #
     # var value = kendo.toString(kendo.parseFloat(dataItem.value) || "N/A", "c2"); #
 
     # if (columnMember.children.length || rowMember.children.length) { #
