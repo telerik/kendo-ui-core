@@ -451,7 +451,8 @@ var __meta__ = {
                 column = columns[i];
                 attr = {
                     "data-field": column.field,
-                    "data-title": column.title, className: classNames.header,
+                    "data-title": column.title,
+                    className: classNames.header,
                     "role": "columnheader"
                 };
 
@@ -463,14 +464,12 @@ var __meta__ = {
 
         _cols: function() {
             var columns = this.columns;
-            var column;
             var style;
             var width;
             var cols = [];
 
             for (var i = 0, length = columns.length; i < length; i++) {
-                column = columns[i];
-                width = column.width;
+                width = columns[i].width;
 
                 if (width && parseInt(width, 10) !== 0) {
                     style = { style: { width: typeof width === "string" ? width : width + "px" } };
@@ -549,7 +548,11 @@ var __meta__ = {
             for (var i = 0, l = columns.length; i < l; i++) {
                 column = columns[i];
 
-                children.push(this._td({ model: options.model, column: column, level: options.level }));
+                children.push(this._td({
+                    model: options.model,
+                    column: column,
+                    level: options.level
+                }));
             }
 
             return kendoDomElement("tr", options.attr, children);

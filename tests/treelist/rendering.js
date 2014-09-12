@@ -116,4 +116,15 @@
         equal(alt.index(), 1);
     });
 
+    test("renders column titles within headers", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", title: "Foo" }
+            ]
+        });
+
+        equal(instance.header.find("th:last").text(), "Foo");
+    });
+
 })();
