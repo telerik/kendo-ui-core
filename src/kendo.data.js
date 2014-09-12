@@ -2078,7 +2078,7 @@ var __meta__ = {
 
     var DataSource = Observable.extend({
         init: function(options) {
-            var that = this, data;
+            var that = this, model, data;
 
             if (options) {
                 data = options.data;

@@ -28,7 +28,7 @@ var __meta__ = {
     var NS = ".kendoGanttList";
     var CLICK = "click";
 
-    var listStyles = {
+    var classNames = {
         wrapper: "k-treelist k-grid k-widget",
         header: "k-header",
         alt: "k-alt",
@@ -285,20 +285,20 @@ var __meta__ = {
 
             this._dataSource();
             this._columns();
-            this._layout();
-            this._domTrees();
-            this._header();
-            this._sortable();
-            this._selectable();
-            this._attachEvents();
+            //this._layout();
+            //this._domTrees();
+            //this._header();
+            //this._sortable();
+            //this._selectable();
+            //this._attachEvents();
 
-            this._adjustHeight();
+            //this._adjustHeight();
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
 
-            kendo.notify(this);
+            //kendo.notify(this);
         },
 
         _dataSource: function() {
@@ -323,7 +323,7 @@ var __meta__ = {
         refresh: function(e) {
             var dataSource = this.dataSource;
 
-            this._render(dataSource.rootNodes());
+            //this._render(dataSource.rootNodes());
         },
 
         _adjustHeight: function() {
@@ -332,6 +332,8 @@ var __meta__ = {
 
         destroy: function() {
             Widget.fn.destroy.call(this);
+
+            return;
 
             this.dataSource.unbind(CHANGE, this._refreshHandler);
 
@@ -357,7 +359,7 @@ var __meta__ = {
             var that = this;
 
             that.content
-                .on(CLICK + NS, "td > span." + listStyles.icon + ":not(." + listStyles.iconHidden + ")", function(e) {
+                .on(CLICK + NS, "td > span." + classNames.icon + ":not(." + classNames.iconHidden + ")", function(e) {
                     var element = $(this);
                     var model = that._modelFromElement(element);
 
@@ -380,20 +382,9 @@ var __meta__ = {
 
         _columns: function() {
             var columns = this.options.columns || [];
-            var column;
-            var model = function() {
-                this.field = "";
-                this.title = "";
-                this.editable = false;
-                this.sortable = false;
-            };
 
             this.columns = map(columns, function(column) {
-                column = typeof column === "string" ? {
-                    field: column, title: column
-                } : column;
-
-                return extend(new model(), column);
+                return (typeof column === "string") ? { field: column } : column;
             });
         },
 
@@ -401,12 +392,12 @@ var __meta__ = {
             var element = this.element;
 
             element
-                .addClass(listStyles.wrapper)
-                .append("<div class='" + listStyles.gridHeader + "'><div class='" + listStyles.gridHeaderWrap + "'></div></div>")
-                .append("<div class='" + listStyles.gridContentWrap + "'></div>");
+                .addClass(classNames.wrapper)
+                .append("<div class='" + classNames.gridHeader + "'><div class='" + classNames.gridHeaderWrap + "'></div></div>")
+                .append("<div class='" + classNames.gridContentWrap + "'></div>");
 
-            this.header = element.find(DOT + listStyles.gridHeaderWrap);
-            this.content = element.find(DOT + listStyles.gridContent);
+            this.header = element.find(DOT + classNames.gridHeaderWrap);
+            this.content = element.find(DOT + classNames.gridContent);
         },
 
         _header: function() {
@@ -454,7 +445,7 @@ var __meta__ = {
                 column = columns[i];
                 attr = {
                     "data-field": column.field,
-                    "data-title": column.title, className: listStyles.header,
+                    "data-title": column.title, className: classNames.header,
                     "role": "columnheader"
                 };
 
@@ -516,11 +507,11 @@ var __meta__ = {
                 }
 
                 if (i % 2 !== 0) {
-                    className.push(listStyles.alt);
+                    className.push(classNames.alt);
                 }
 
                 if (hasChildren) {
-                    className.push(listStyles.group);
+                    className.push(classNames.group);
                 }
 
                 if (className.length) {
@@ -566,10 +557,10 @@ var __meta__ = {
             var hasChildren = !task.loaded() || this.dataSource.childNodes(task).length;
 
             if (column.hierarchy) {
-                children = createPlaceholders({ level: options.level, className: listStyles.iconPlaceHolder });
+                children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
                 children.push(kendoDomElement("span", {
-                    className: listStyles.icon + " " + (hasChildren ? (task.expanded ? listStyles.iconCollapse : listStyles.iconExpand)
-                        : listStyles.iconHidden)
+                    className: classNames.icon + " " + (hasChildren ? (task.expanded ? classNames.iconCollapse : classNames.iconExpand)
+                        : classNames.iconHidden)
                 }));
             }
 
@@ -645,7 +636,7 @@ var __meta__ = {
 
         select: function(value) {
             var element = this.content.find(value);
-            var selectedClassName = listStyles.selected;
+            var selectedClassName = classNames.selected;
 
             if (element.length) {
                 element
@@ -668,7 +659,7 @@ var __meta__ = {
             var selected = this.select();
 
             if (selected.length) {
-                selected.removeClass(listStyles.selected);
+                selected.removeClass(classNames.selected);
 
                 this.trigger("change");
             }
