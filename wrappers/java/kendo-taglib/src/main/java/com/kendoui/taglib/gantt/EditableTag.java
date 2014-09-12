@@ -53,12 +53,24 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "gantt-editable";
     }
 
+    public void setTemplate(EditableTemplateFunctionTag value) {
+        setEvent("template", value.getBody());
+    }
+
     public boolean getConfirmation() {
         return (boolean)getProperty("confirmation");
     }
 
     public void setConfirmation(boolean value) {
         setProperty("confirmation", value);
+    }
+
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
+    }
+
+    public void setTemplate(java.lang.String value) {
+        setProperty("template", value);
     }
 
 //<< Attributes

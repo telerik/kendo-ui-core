@@ -15942,7 +15942,7 @@ custom number format, standard date format or a custom date format.</description
         <description>If set to false the user won't be able to create, modify or delete tasks and dependencies.</description>
         <name>gantt-editable</name>
         <tag-class>com.kendoui.taglib.gantt.EditableTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>JSP</body-content>
 
         <attribute>
             <description>If set to true the gantt will display a confirmation dialog when the user deletes a task or a dependency.</description>
@@ -15950,10 +15950,24 @@ custom number format, standard date format or a custom date format.</description
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
+        <attribute>
+            <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Gantt will know
+which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
 
     </tag>
 
 
+    <tag>
+        <description>The template which renders the editor.The template should contain elements whose name HTML attributes are set as the editable fields. This is how the Gantt will know
+which field to update. The other option is to use MVVM bindings in order to bind HTML elements to data item fields.</description>
+        <name>gantt-editable-template</name>
+        <tag-class>com.kendoui.taglib.gantt.EditableTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
 
     <tag>
         <description>The configuration of the gantt messages. Use this option to customize or localize the gantt messages.</description>
@@ -19859,7 +19873,7 @@ Cancelling the event will prevent the user action.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies whether the widget will replace the prompt characters with spaces on blur. Prompt chars will be shown again on focus.</description>
+            <description>Specifies whether the widget will replace the prompt characters with spaces on blur. Prompt chars will be shown again on focus (available since Q2 2014 SP1).</description>
             <name>clearPromptChar</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
