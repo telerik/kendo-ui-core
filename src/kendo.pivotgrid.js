@@ -3204,7 +3204,7 @@ var __meta__ = {
                 this._buildRows(root, 0);
                 this._normalize();
             } else {
-                this.rows.push(element("tr", null, [ element("th", null) ]));
+                this.rows.push(element("tr", null, [ element("th", null, [ htmlNode("&nbsp;") ]) ]));
             }
 
             return element("tbody", null, this.rows);
@@ -3504,7 +3504,7 @@ var __meta__ = {
                 this._buildRows(root, 0);
                 this._normalize();
             } else {
-                this.rows.push(element("tr", null, [ element("td", null) ]));
+                this.rows.push(element("tr", null, [ element("td", null, [ htmlNode("&nbsp;") ]) ]));
             }
 
             return element("tbody", null, this.rows);
@@ -3763,7 +3763,7 @@ var __meta__ = {
 
                 this._buildRows();
             } else {
-                this.rows.push(element("tr", null, [ element("td", null, [ text("") ]) ]));
+                this.rows.push(element("tr", null, [ element("td", null, [ htmlNode("&nbsp;") ]) ]));
             }
 
             return element("tbody", null, this.rows);

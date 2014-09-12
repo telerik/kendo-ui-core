@@ -206,6 +206,24 @@
         });
     }
 
+    test("PivotGrid renders column header with a non-breaking space if no tuples", function() {
+        var tuples = [
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-grid-header").find("table");
+
+        var tr = headerTable.find("tr");
+        var th = headerTable.find("th");
+
+        equal(tr.length, 1);
+        equal(th.length, 1);
+        equal(th.html(), "&nbsp;");
+    });
+
     test("PivotGrid renders column header for 1 dimension with one tuple", function() {
         var tuples = [
             { members: [ { name: "dim 0", levelNum: "0", children: [] }] }
@@ -1142,6 +1160,24 @@
             }
         });
     }
+
+    test("PivotGrid renders row header with a non-breaking space if no tuples", function() {
+        var tuples = [
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSourceRows(tuples)
+        });
+
+        var headerTable = pivotgrid.wrapper.find(".k-pivot-rowheaders").find("table");
+
+        var tr = headerTable.find("tr");
+        var td = headerTable.find("td");
+
+        equal(tr.length, 1);
+        equal(td.length, 1);
+        equal(td.html(), "&nbsp;");
+    });
 
     test("PivotGrid renders row header for 1 dimension with one tuple", function() {
         var tuples = [
@@ -2219,6 +2255,23 @@
             kendo.destroy(QUnit.fixture);
             kendo.ns = "";
         }
+    });
+
+    test("PivotGrid renders a non-breaking space if no data", function() {
+        var tuples = [
+        ]
+
+        var pivotgrid = createPivot({
+            dataSource: createDataSource(tuples, [])
+        });
+
+        var contentTable = pivotgrid.wrapper.find(".k-grid-content").find("table");
+
+        var rows = contentTable.find("tr");
+
+        equal(rows.length, 1);
+        equal(rows.find("td").length, 1);
+        equal(rows.find("td").eq(0).html(), "&nbsp;");
     });
 
     test("PivotGrid renders one data cell", function() {
