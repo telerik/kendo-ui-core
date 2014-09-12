@@ -2523,6 +2523,9 @@ var __meta__ = {
                     filter: ">:not(.k-empty)",
                     hint: that.options.hint,
                     cursor: "move",
+                    start: function(e) {
+                        e.item.focus().blur();
+                    },
                     change: function(e) {
                         var name = e.item.attr(kendo.attr("name"));
 
@@ -2861,7 +2864,7 @@ var __meta__ = {
         },
 
         _createSettingTarget: function(element, options) {
-            var template = '<span class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
+            var template = '<span tabindex="0" class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
             var icons = "";
 
             if (options.filterable) {
