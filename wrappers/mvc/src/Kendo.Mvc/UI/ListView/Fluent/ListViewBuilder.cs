@@ -78,6 +78,25 @@
         }
 
         /// <summary>
+        /// Specifies ListView alt item template.
+        /// </summary>      
+        /// <param name="templateId">The Id of the element which contains the template.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ListView&lt;Order&gt;()
+        ///             .Name("Orders")        
+        ///             .ClientAltTemplateId("listViewTemplate");
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ListViewBuilder<T> ClientAltTemplateId(string templateId)
+        {
+            Component.ClientAltTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
         /// Allows paging of the data.
         /// </summary>
         /// <example>
