@@ -259,6 +259,34 @@
     border-radius: @main-border-radius;
 }
 
+.k-grid > .k-grouping-header,
+.k-grid-header:first-child,
+.k-grid-toolbar:first-child,
+.k-scheduler > .k-scheduler-toolbar:first-child
+{
+    border-radius: @inner-border-radius @inner-border-radius 0 0;
+}
+ 
+.k-grid-header:first-child th.k-header:first-child,
+thead.k-grid-header th.k-header:first-child,
+.k-rtl thead.k-grid-header th.k-header:last-child
+{
+    border-radius: @inner-border-radius 0 0 0;
+}
+ 
+.k-rtl .k-grid-header:first-child th.k-header:first-child,
+.k-rtl thead.k-grid-header th.k-header:first-child,
+thead.k-grid-header th.k-header:last-child
+{
+    border-radius: 0 @inner-border-radius 0 0;
+}
+ 
+.k-grid-pager,
+.k-scheduler-footer
+{
+    border-radius: 0 0 @inner-border-radius @inner-border-radius;
+}
+
 .k-menu > .k-first
 {
     border-radius: @inner-border-radius 0 0 @inner-border-radius;
