@@ -285,11 +285,12 @@
             init: function (options, dataItem) {
                 var that = this;
                 Observable.fn.init.call(that);
-                that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
+                that.id = diagram.randomId();
+                that.options = deepExtend({}, that.options, options);
                 that.isSelected = false;
                 that.dataItem = dataItem;
                 that.visual = new Group({
-                    id: that.options.id,
+                    id: that.id,
                     autoSize: that.options.autoSize
                 });
                 that._template();
@@ -465,7 +466,7 @@
                 } else {
                     this.options = deepExtend({},
                         this.options,
-                        filterDataItem(fields, this.options.dataItem)
+                        filterDataItem(fields, this.dataItem)
                     );
                 }
             },
@@ -473,7 +474,7 @@
             updateModel: function() {
                 if (this.diagram) {
                     var bounds = this._bounds;
-                    var model = this.diagram.dataSource.getByUid(this.options.dataItem.uid);
+                    var model = this.diagram.dataSource.getByUid(this.dataItem.uid);
                     this.diagram._shouldRefresh = false;
                     model._set("x", bounds.x);
                     model._set("y", bounds.y);
@@ -1724,7 +1725,7 @@
                     item.redraw(options);
                     shape = item;
                 } else if (!(item instanceof kendo.Class)) {
-                    shapeDefaults = deepExtend({}, shapeDefaults, item);
+                    shapeDefaults = deepExtend({}, shapeDefaults, item || {});
                     shape = new Shape(shapeDefaults);
                 } else {
                     return;
@@ -2738,7 +2739,8 @@
                         continue;
                     }
 
-                    shape = this.addShape(deepExtend({}, { dataItem: dataItem }));
+                    shape = new Shape(this.options.shapeDefaults, dataItem);
+                    this.addShape(shape);
                     this._dataMap[dataItem.id] = shape;
                 }
             },

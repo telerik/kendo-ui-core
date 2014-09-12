@@ -910,7 +910,7 @@
                 this.tools[index] = tool;
             },
             triggerClick: function(data) {
-                if(this.startPoint.equals(data.point)) {
+                if (this.startPoint.equals(data.point)) {
                     this.diagram.trigger("click", data);
                 }
 
