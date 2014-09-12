@@ -1,6 +1,5 @@
 (function() {
     var TreeListDataSource = kendo.data.TreeListDataSource;
-    var TreeListModel = kendo.data.TreeListModel;
     var TreeList = kendo.ui.TreeList;
 
     var dom;
@@ -118,6 +117,26 @@
         equal(columns.length, 2);
         equal(columns[0].field, "id");
         equal(columns[1].field, "parentId");
+    });
+
+    test("first column is expandable by default", function() {
+        createTreeList({
+            columns: [ "id", "parentId" ]
+        });
+
+        ok(instance.columns[0].expandable);
+    });
+
+    test("does not set expandable if defined", function() {
+        createTreeList({
+            columns: [
+                { field: "id" },
+                { field: "parentId", expandable: true }
+            ]
+        });
+
+        ok(!instance.columns[0].expandable);
+        ok(instance.columns[1].expandable);
     });
 
 })();

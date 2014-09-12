@@ -285,9 +285,9 @@ var __meta__ = {
 
             this._dataSource();
             this._columns();
-            //this._layout();
-            //this._domTrees();
-            //this._header();
+            this._layout();
+            this._domTrees();
+            this._header();
             //this._sortable();
             //this._selectable();
             //this._attachEvents();
@@ -323,7 +323,7 @@ var __meta__ = {
         refresh: function(e) {
             var dataSource = this.dataSource;
 
-            //this._render(dataSource.rootNodes());
+            this._render(dataSource.rootNodes());
         },
 
         _adjustHeight: function() {
@@ -344,15 +344,13 @@ var __meta__ = {
             this.content.off(NS);
             this.header = null;
             this.content = null;
-            this.levels = null;
 
             kendo.destroy(this.element);
         },
 
         options: {
             name: "TreeList",
-            autoBind: true,
-            selectable: true
+            autoBind: true
         },
 
         _attachEvents: function() {
@@ -386,6 +384,14 @@ var __meta__ = {
             this.columns = map(columns, function(column) {
                 return (typeof column === "string") ? { field: column } : column;
             });
+
+            var expandableColumns = $.grep(this.columns, function(c) {
+                return c.expandable;
+            });
+
+            if (this.columns.length && !expandableColumns.length) {
+                this.columns[0].expandable = true;
+            }
         },
 
         _layout: function () {
@@ -393,7 +399,7 @@ var __meta__ = {
 
             element
                 .addClass(classNames.wrapper)
-                .append("<div class='" + classNames.gridHeader + "'><div class='" + classNames.gridHeaderWrap + "'></div></div>")
+                .append("<div class='" + classNames.gridHeader + "'><div class='" + classNames.gridHeaderWrap + "' /></div>")
                 .append("<div class='" + classNames.gridContentWrap + "'></div>");
 
             this.header = element.find(DOT + classNames.gridHeaderWrap);
@@ -416,15 +422,15 @@ var __meta__ = {
             domTree.render([table]);
         },
 
-        _render: function(tasks) {
+        _render: function(data) {
             var colgroup;
             var tbody;
             var table;
 
-            this.levels = [{ field: null, value: 0 }];
+            this._absoluteIndex = 0;
 
             colgroup = kendoDomElement("colgroup", null, this._cols());
-            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(tasks));
+            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
             table = kendoDomElement("table", {
                 "style": { "min-width": this.options.listWidth + "px" },
                 "tabIndex": 0,
@@ -432,7 +438,7 @@ var __meta__ = {
             }, [colgroup, tbody]);
 
             this.contentTree.render([table]);
-            this.trigger("render");
+            //this.trigger("render");
         },
 
         _ths: function() {
@@ -478,8 +484,8 @@ var __meta__ = {
             return cols;
         },
 
-        _trs: function(tasks) {
-            var task;
+        _trs: function(data) {
+            var model;
             var rows = [];
             var attr;
             var className = [];
@@ -488,27 +494,28 @@ var __meta__ = {
             var childNodes;
             var dataSource = this.dataSource;
 
-            for (var i = 0, length = tasks.length; i < length; i++) {
-                task = tasks[i];
+            for (var i = 0, length = data.length; i < length; i++) {
+                model = data[i];
 
-                level = dataSource.level(task);
+                level = dataSource.level(model);
 
-                childNodes = task.loaded() && dataSource.childNodes(task);
+                childNodes = model.loaded() && dataSource.childNodes(model);
                 hasChildren = childNodes && childNodes.length;
 
                 attr = {
-                    "data-uid": task.uid,
+                    "data-uid": model.uid,
                     "data-level": level,
                     "role": "row"
                 };
 
                 if (hasChildren) {
-                    attr["aria-expanded"] = task.expanded;
+                    attr["aria-expanded"] = model.expanded;
                 }
 
-                if (i % 2 !== 0) {
+                if (this._absoluteIndex % 2 !== 0) {
                     className.push(classNames.alt);
                 }
+                this._absoluteIndex++;
 
                 if (hasChildren) {
                     className.push(classNames.group);
@@ -519,12 +526,12 @@ var __meta__ = {
                 }
 
                 rows.push(this._tds({
-                    task: task,
+                    model: model,
                     attr: attr,
                     level: level
                 }));
 
-                if (task.expanded && hasChildren) {
+                if (model.expanded && hasChildren) {
                     rows = rows.concat(this._trs(childNodes));
                 }
 
@@ -542,7 +549,7 @@ var __meta__ = {
             for (var i = 0, l = columns.length; i < l; i++) {
                 column = columns[i];
 
-                children.push(this._td({ task: options.task, column: column, level: options.level }));
+                children.push(this._td({ model: options.model, column: column, level: options.level }));
             }
 
             return kendoDomElement("tr", options.attr, children);
@@ -550,44 +557,29 @@ var __meta__ = {
 
         _td: function(options) {
             var children = [];
-            var task = options.task;
+            var model = options.model;
             var column = options.column;
-            var value = task.get(column.field);
+            var value = model.get(column.field);
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
-            var hasChildren = !task.loaded() || this.dataSource.childNodes(task).length;
+            var hasChildren = !model.loaded() || this.dataSource.childNodes(model).length;
+            var iconClass;
 
-            if (column.hierarchy) {
+            if (column.expandable) {
                 children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
-                children.push(kendoDomElement("span", {
-                    className: classNames.icon + " " + (hasChildren ? (task.expanded ? classNames.iconCollapse : classNames.iconExpand)
-                        : classNames.iconHidden)
-                }));
+                iconClass = [classNames.icon];
+
+                if (hasChildren) {
+                    iconClass.push(model.expanded ? classNames.iconCollapse : classNames.iconExpand);
+                } else {
+                    iconClass.push(iconHidden);
+                }
+
+                children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
             }
 
             children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
 
             return kendoDomElement("td", { "role": "gridcell" }, children);
-        },
-
-        _levels: function(options) {
-            var levels = this.levels;
-            var level;
-            var hasChildren = options.hasChildren;
-            var idx = options.idx;
-            var id = options.id;
-
-            for (var i = 0, length = levels.length; i < length; i++) {
-                level = levels[i];
-
-                if (level.field == idx) {
-
-                    if (hasChildren) {
-                        levels.push({ field: id, value: level.value + 1 });
-                    }
-
-                    return level.value;
-                }
-            }
         },
 
         _sortable: function() {

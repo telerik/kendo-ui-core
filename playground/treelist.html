@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="../dist/styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" href="../dist/styles/web/kendo.default.less"/>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <style> body { font-family: Tahoma, sans-serif; }</style>
     </head>
     <body>
     <button class="filter">Filter on `Anne`</button>
@@ -34,10 +35,10 @@
                     read: {
                         url: function(parent) {
                              // load only root nodes
-                             var filter = "?$filter=(ReportsTo eq null)";
+                             //var filter = "?$filter=(ReportsTo eq null)";
 
                              // ... or load multiple levels at the same time
-                             //var filter = "";
+                             var filter = "";
 
                              if (parent.id) {
                                  filter = "?$filter=(ReportsTo eq " + parent.id + ")"
@@ -52,7 +53,8 @@
                         id: "EmployeeID",
                         fields: {
                             parentId: "ReportsTo"
-                        }
+                        },
+                        expanded: true
                     }
                 }
             };
@@ -63,7 +65,7 @@
                 dataSource: listDS,
                 selectable: true,
                 columns: [
-                    { field: "FirstName", title: "First Name", sortable: true, hierarchy: true },
+                    { field: "FirstName", title: "First Name", sortable: true },
                     { field: "LastName", title: "Last Name", sortable: true }
                 ]
             });
