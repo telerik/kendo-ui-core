@@ -8,15 +8,15 @@
 
 <demo:header />
 	<%
-	String dataCellTemplate = "# var columnMember = columnTuple.members[0]; #" +
-	        "# var rowMember = rowTuple.members[0]; # " + 
+	String dataCellTemplate = "# var columnMember = columnTuple ? columnTuple.members[0] : { children: [] }; #" +
+	        "# var rowMember = rowTuple ? rowTuple.members[0] : { children: [] }; #" +
 	        "# var value = kendo.toString(kendo.parseFloat(dataItem.value) || \"N/A\", \"c2\"); #" +
 	        "# if (columnMember.children.length || rowMember.children.length) { #" +
 	        "   	<em  style=\"color: red\">#: value # (total)</em>" +
 	        "# } else { #" +
 	        "	#: value #" +
 			"# } #";
-			
+
 	String headerTemplate = "# if (!member.children.length) { #" +
     						"	<em>#: member.caption #</em>" +
 							"# } else { #" +
