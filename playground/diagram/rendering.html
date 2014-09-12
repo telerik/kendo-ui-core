@@ -74,6 +74,7 @@
     var dataviz = kendo.dataviz;
     var diagram = dataviz.diagram;
 
+    function createDiagram() {
     $("#canvas").kendoDiagram({
         dataSource: [{
             "name" : "Telerik",
@@ -190,6 +191,9 @@
         g.append(fn);
         return g;
     }
+    }
+
+    $(document).ready(createDiagram);
 </script>
 </body>
 </html>

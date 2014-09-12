@@ -42,10 +42,7 @@
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
 
-            if (doc.namespaces && !doc.namespaces.kvml) {
-                doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
-                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
-            }
+            enableVML();
 
             this._root = new RootNode();
             this._root.attachTo(this.element[0]);
@@ -211,6 +208,13 @@
             if (this.srcElement.options.visible !== false) {
                 this.css("display", "");
             }
+        },
+
+        _attachTo: function(domElement) {
+            var frag = document.createDocumentFragment();
+            frag.appendChild(this.element);
+
+            domElement.appendChild(frag);
         },
 
         mapStyle: function() {
@@ -771,6 +775,22 @@
     });
 
     // Helper functions =======================================================
+    function enableVML() {
+        if (doc.namespaces && !doc.namespaces.kvml) {
+            doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
+            doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
+            /*
+            setTimeout(function() {
+                if (doc.styleSheets.length < 31) {
+                    doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
+                } else {
+                    doc.styleSheets[0].addRule(".kvml", "behavior:url(#default#VML)");
+                }
+            }, 0);
+            */
+        }
+    }
+
     function createElementVML(type) {
         var element = doc.createElement("kvml:" + type);
         element.className = "kvml";
