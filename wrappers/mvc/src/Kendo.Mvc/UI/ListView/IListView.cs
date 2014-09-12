@@ -29,6 +29,11 @@
             get;            
         }
 
+        string ClientAltTemplateId
+        {
+            get;
+        }
+
         PageableSettings Pageable
         {
             get;        

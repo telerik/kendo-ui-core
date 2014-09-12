@@ -70,6 +70,12 @@
             get;
             set;
         }
+
+        public string ClientAltTemplateId
+        {
+            get;
+            set;
+        }
         
         public PageableSettings Pageable
         {

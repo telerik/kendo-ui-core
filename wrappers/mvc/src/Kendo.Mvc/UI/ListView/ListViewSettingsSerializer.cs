@@ -48,6 +48,11 @@
             {
                 options["template"] = new ClientHandlerDescriptor { HandlerName = string.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, listView.ClientTemplateId) };
             }
+
+            if (!string.IsNullOrEmpty(listView.ClientAltTemplateId))
+            {
+                options["altTemplate"] = new ClientHandlerDescriptor { HandlerName = string.Format("kendo.template(jQuery('{0}{1}').html())", idPrefix, listView.ClientAltTemplateId) };
+            }
         }
 
         private void SerializePaging(IDictionary<string, object> options)
