@@ -100,6 +100,70 @@
         return hashKey(objectKey(object));
     }
 
+    // Mixins =================================================================
+    function geometryChange() {
+        if (this.observer) {
+            this.observer.geometryChange();
+        }
+    }
+
+    var ObserversMixin = {
+        observers: function() {
+            this._observers = this._observers || [];
+            return this._observers;
+        },
+
+        addObserver: function(element) {
+            var observers = this.observers();
+            observers.push(element);
+            return this;
+        },
+
+        removeObserver: function(element) {
+            var observers = this.observers();
+            var index = inArray(element, observers);
+            if (index != -1) {
+                observers.splice(index, 1);
+            }
+            return this;
+        },
+
+        trigger: function(methodName, event) {
+            var observers = this.observers();
+            var length = observers.length;
+            var observer;
+            var idx;
+
+            if (!this._suspended) {
+                for (idx = 0; idx < length; idx++) {
+                    observer = observers[idx];
+                    if (observer[methodName]) {
+                        observer[methodName](event);
+                    }
+                }
+            }
+            return this;
+        },
+
+        optionsChange: function(e) {
+            this.trigger("optionsChange", e);
+        },
+
+        geometryChange: function(e) {
+            this.trigger("geometryChange", e);
+        },
+
+        suspend: function() {
+            this._suspended = true;
+            return this;
+        },
+
+        resume: function() {
+            this._suspended = false;
+            return this;
+        }
+    };
+
     // Array helpers ==========================================================
     function arrayLimits(arr) {
         var length = arr.length,
@@ -164,9 +228,8 @@
     }
 
     var ElementsArray = kendo.Class.extend({
-        init: function(observer, array) {
+        init: function(array) {
             array = array || [];
-            this.observer = observer;
             this._splice(0, array.length, array);
         },
 
@@ -174,7 +237,7 @@
             if (elements) {
                 this._splice(0, this.length, elements);
 
-                this.trigger();
+                this._change();
                 return this;
             } else {
                 return this.slice(0);
@@ -207,7 +270,7 @@
             var elements = slice.call(arguments, 2);
             var result = this._splice(index, howMany, elements);
 
-            this.trigger();
+            this._change();
 
             return result;
         },
@@ -256,28 +319,30 @@
 
         _add: function(elements) {
             this._setObserver(elements);
-            this.trigger();
+            this._change();
         },
 
         _remove: function(elements) {
             this._clearObserver(elements);
-            this.trigger();
+            this._change();
         },
 
         _setObserver: function(elements) {
             for (var idx = 0; idx < elements.length; idx++) {
-                elements[idx].observer = this.observer;
+                elements[idx].addObserver(this);
             }
         },
 
         _clearObserver: function(elements) {
             for (var idx = 0; idx < elements.length; idx++) {
-                delete elements[idx].observer;
+                elements[idx].removeObserver(this);
             }
         },
 
-        trigger: function() {}
+        _change: function() {}
     });
+
+    deepExtend(ElementsArray.fn, ObserversMixin);
 
     // Template helpers =======================================================
     function renderTemplate(text) {
@@ -336,70 +401,6 @@
     function isTransparent(color) {
         return color === "" || color === "none" || color === "transparent";
     }
-
-    // Mixins =================================================================
-    function geometryChange() {
-        if (this.observer) {
-            this.observer.geometryChange();
-        }
-    }
-
-    var ObserversMixin = {
-        observers: function() {
-            this._observers = this._observers || [];
-            return this._observers;
-        },
-
-        addObserver: function(element) {
-            var observers = this.observers();
-            observers.push(element);
-            return this;
-        },
-
-        removeObserver: function(element) {
-            var observers = this.observers();
-            var index = inArray(element, observers);
-            if (index != -1) {
-                observers.splice(index, 1);
-            }
-            return this;
-        },
-
-        trigger: function(methodName, event) {
-            var observers = this.observers();
-            var length = observers.length;
-            var observer;
-            var idx;
-
-            if (!this._suspended) {
-                for (idx = 0; idx < length; idx++) {
-                    observer = observers[idx];
-                    if (observer[methodName]) {
-                        observer[methodName](event);
-                    }
-                }
-            }
-            return this;
-        },
-
-        optionsChange: function(e) {
-            this.trigger("optionsChange", e);
-        },
-
-        geometryChange: function(e) {
-            this.trigger("geometryChange", e);
-        },
-
-        suspend: function() {
-            this._suspended = true;
-            return this;
-        },
-
-        resume: function() {
-            this._suspended = false;
-            return this;
-        }
-    };
 
     // Exports ================================================================
     deepExtend(dataviz, {

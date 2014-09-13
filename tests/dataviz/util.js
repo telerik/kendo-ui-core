@@ -101,10 +101,16 @@
             array, observer, element1, element2, element3;
 
         var ChangeElementsArray = ElementsArray.extend({
-            trigger: function() {
-                this.observer.change();
+            _change: function() {
+                this.trigger("change");
             }
         });
+
+        function Element(id) {
+            this.id = id;
+        }
+
+        kendo.deepExtend(Element.prototype, util.ObserversMixin);
 
         function Observer() {
             this.calls = 0;
@@ -118,19 +124,14 @@
 
         function createElementsArray(elements) {
           observer = new Observer();
-          array = new ChangeElementsArray(observer, elements);
+          array = new ChangeElementsArray(elements);
+          array.addObserver(observer);
         }
 
         function initElements() {
-            element1 = {
-                id: "foo"
-            };
-            element2 = {
-                id: "bar"
-            };
-            element3 = {
-                id: "baz"
-            };
+            element1 = new Element("foo");
+            element2 = new Element("bar");
+            element3 = new Element("baz");
         }
 
         function setup() {
@@ -138,16 +139,36 @@
             initElements();
         }
 
-        module("Array Helpers / ElementsArray", {
-            setup: setup
-        });
+        function isArrayObserver(element) {
+            equal(element.observers()[0], array);
+        }
 
-        test("sets observer", function() {
-            equal(array.observer, observer);
-        });
+        function hasNoObservers(element) {
+            equal(element.observers().length, 0);
+        }
+
+        module("Array Helpers / ElementsArray");
 
         test("sets initial length", function() {
-            ok(array.length === 0);
+            createElementsArray();
+            equal(array.length, 0);
+        });
+
+        test("sets initial array", function() {
+            initElements();
+            createElementsArray([element1, element2, element3]);
+            equal(array.length, 3);
+            equal(array[0].id, "foo");
+            equal(array[1].id, "bar");
+            equal(array[2].id, "baz");
+        });
+
+        test("sets initial elements observer", function() {
+            initElements();
+            createElementsArray([element1, element2, element3]);
+            isArrayObserver(element1);
+            isArrayObserver(element2);
+            isArrayObserver(element3);
         });
 
         // ------------------------------------------------------------
@@ -163,7 +184,7 @@
 
         test("sets elements observer", function() {
             array.elements([element1]);
-            equal(element1.observer, observer);
+            isArrayObserver(element1)
         });
 
         test("clears previous elements", function() {
@@ -177,8 +198,8 @@
         test("clears previous elements observer", function() {
             array.elements([element1, element2]);
             array.elements([element3]);
-            equal(element1.observer, undefined);
-            equal(element2.observer, undefined);
+            hasNoObservers(element1);
+            hasNoObservers(element2);
         });
 
         test("triggers change", function() {
@@ -207,7 +228,7 @@
         test("sets new element observer", function() {
             array.push(element1);
             equal(array.length, 1);
-            equal(array[0].observer, observer);
+            isArrayObserver(element1);
         });
 
         test("adds multiple elements", function() {
@@ -219,8 +240,8 @@
 
         test("sets elements observer", function() {
             array.push(element1, element2);
-            equal(array[0].observer, observer);
-            equal(array[1].observer, observer);
+            isArrayObserver(element1);
+            isArrayObserver(element2);
         });
 
         test("triggers change", function() {
@@ -250,7 +271,7 @@
 
         test("clears element observer", function() {
             array.pop();
-            equal(element2.observer, undefined);
+            hasNoObservers(element2);
         });
 
         test("triggers change", function() {
@@ -259,8 +280,7 @@
         });
 
         test("does not trigger change if there are no elements", function() {
-            observer = new Observer();
-            array = new ChangeElementsArray(observer);
+            createElementsArray();
             array.pop();
             equal(observer.calls, 0);
         });
@@ -283,50 +303,40 @@
 
         test("clears removed elements observer", function() {
             array.splice(1, 2);
-            equal(element2.observer, undefined);
-            equal(element3.observer, undefined);
+            hasNoObservers(element2);
+            hasNoObservers(element3);
         });
 
         test("replaces elements", function() {
-            var newElement = {
-                id: "new"
-            };
+            var newElement = new Element("new");
             array.splice(1, 1, newElement);
             equal(array.length, 3);
             equal(array[1].id, "new");
         });
 
         test("clears replaced elements observer", function() {
-            var newElement = {
-                id: "new"
-            };
+            var newElement = new Element("new");
             array.splice(1, 1, newElement);
-            equal(element2.observer, undefined);
+            hasNoObservers(element2);
         });
 
         test("sets replace elements observer", function() {
-            var newElement = {
-                id: "new"
-            };
+            var newElement = new Element("new");
             array.splice(1, 1, newElement);
-            equal(newElement.observer, observer);
+            isArrayObserver(newElement);
         });
 
         test("inserts elements", function() {
-            var newElement = {
-                id: "new"
-            };
+            var newElement = new Element("new");
             array.splice(1, 0, newElement);
             equal(array.length, 4);
             equal(array[1].id, "new");
         });
 
         test("sets inserted elements observer", function() {
-            var newElement = {
-                id: "new"
-            };
+            var newElement = new Element("new");
             array.splice(1, 0, newElement);
-            equal(newElement.observer, observer);
+            isArrayObserver(newElement);
         });
 
         test("triggers change", function() {
@@ -354,7 +364,7 @@
 
         test("clears removed element observer", function() {
             array.shift();
-            equal(element1.observer, undefined);
+            hasNoObservers(element1);
         });
 
         test("triggers change", function() {
@@ -378,7 +388,7 @@
 
         test("sets new element observer", function() {
             array.unshift(element2);
-            equal(element2.observer, observer);
+            isArrayObserver(element2);
         });
 
         test("adds multiple elements to the start", function() {
@@ -390,8 +400,8 @@
 
         test("sets new elements observer", function() {
             array.unshift(element2, element3);
-            equal(element2.observer, observer);
-            equal(element3.observer, observer);
+            isArrayObserver(element2);
+            isArrayObserver(element3);
         });
 
         test("triggers change", function() {
