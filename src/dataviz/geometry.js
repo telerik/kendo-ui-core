@@ -637,14 +637,11 @@
                    other._matrix.equals(this._matrix);
         },
 
-
         _optionsChange: function() {
-            if (this.observer) {
-                this.observer.optionsChange({
-                    field: "transform",
-                    value: this
-                });
-            }
+            this.optionsChange({
+                field: "transform",
+                value: this
+            });
         },
 
         translate: function(x, y) {
@@ -696,6 +693,8 @@
             return this._matrix;
         }
     });
+
+    deepExtend(Transformation.fn, ObserversMixin);
 
     function transform(matrix) {
         if (matrix === null) {

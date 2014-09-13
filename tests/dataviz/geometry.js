@@ -1203,12 +1203,12 @@
 
         test("translate triggers observer optionsChange", function() {
             transformation = new Transformation();
-            transformation.observer = {
+            transformation.addObserver({
                 optionsChange: function(e) {
                     equal(e.field, "transform");
                     equal(e.value, transformation);
                 }
-            };
+            });
             transformation.translate(10, 20);
         });
 
@@ -1247,12 +1247,12 @@
 
         test("scale triggers observer optionsChange", function() {
             transformation = new Transformation();
-            transformation.observer = {
+            transformation.addObserver({
                 optionsChange: function(e) {
                     equal(e.field, "transform");
                     equal(e.value, transformation);
                 }
-            };
+            });
             transformation.scale(1, 2);
         });
 
@@ -1278,12 +1278,12 @@
 
         test("rotate triggers observer optionsChange", function() {
             transformation = new Transformation();
-            transformation.observer = {
+            transformation.addObserver({
                 optionsChange: function(e) {
                     equal(e.field, "transform");
                     equal(e.value, transformation);
                 }
-            };
+            });
             transformation.rotate(30);
         });
 
@@ -1302,12 +1302,12 @@
 
         test("multiply triggers observer optionsChange", function() {
             transformation = new Transformation();
-            transformation.observer = {
+            transformation.addObserver({
                 optionsChange: function(e) {
                     equal(e.field, "transform");
                     equal(e.value, transformation);
                 }
-            };
+            });
             transformation.multiply(new Matrix(3,3,3,3,3,3));
         });
     })();
