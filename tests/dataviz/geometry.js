@@ -473,41 +473,41 @@
         });
 
         test("changing width triggers geometryChange", function() {
-            size.observer = {
+            size.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             size.setWidth(1);
         });
 
         test("changing height triggers geometryChange", function() {
-            size.observer = {
+            size.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             size.setHeight(1);
         });
 
         test("setting width to same value does not trigger geometryChange", 0, function() {
-            size.observer = {
+            size.addObserver({
                 geometryChange: function() {
                     ok(false);
                 }
-            };
+            });
 
             size.setWidth(10);
         });
 
         test("setting height to same value does not trigger geometryChange", 0, function() {
-            size.observer = {
+            size.addObserver({
                 geometryChange: function() {
                     ok(false);
                 }
-            };
+            });
 
             size.setHeight(20);
         });

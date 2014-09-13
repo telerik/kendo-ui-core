@@ -200,8 +200,6 @@
             this.height = height || 0;
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         equals: function(other) {
             return other && other.width === this.width && other.height === this.height;
         },
@@ -211,6 +209,7 @@
         }
     });
     defineAccessors(Size.fn, ["width", "height"]);
+    deepExtend(Size.fn, ObserversMixin);
 
     Size.create = function(arg0, arg1) {
         if (defined(arg0)) {
