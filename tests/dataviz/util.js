@@ -605,6 +605,29 @@
             element.optionsChange();
             equal(observer._optionsChange.length, 1);
         });
+
+        // ------------------------------------------------------------
+        module("Observers / observer field", {
+            setup: function() {
+                setup();
+                element.foo = new Element();
+                element.foo.addObserver(element);
+            }
+        });
+
+        test("sets field observer", function() {
+            var newElement = new Element();
+            element._observerField("foo", newElement);
+            equal(newElement.observers()[0], element);
+        });
+
+        test("clears existing field observer", function() {
+            var existingElement = element.foo;
+            var newElement = new Element();
+            element._observerField("foo", newElement);
+            equal(existingElement.observers().length, 0);
+        });
+
     })();
 
 })();

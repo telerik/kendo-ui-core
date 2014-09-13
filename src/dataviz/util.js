@@ -160,6 +160,14 @@
         resume: function() {
             this._suspended = false;
             return this;
+        },
+
+        _observerField: function(field, value) {
+            if (this[field]) {
+                this[field].removeObserver(this);
+            }
+            this[field] = value;
+            value.addObserver(this);
         }
     };
 
