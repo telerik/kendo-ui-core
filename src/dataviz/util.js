@@ -129,13 +129,12 @@
         },
 
         trigger: function(methodName, event) {
-            var observers = this.observers();
-            var length = observers.length;
+            var observers = this._observers;
             var observer;
             var idx;
 
-            if (!this._suspended) {
-                for (idx = 0; idx < length; idx++) {
+            if (observers && !this._suspended) {
+                for (idx = 0; idx < observers.length; idx++) {
                     observer = observers[idx];
                     if (observer[methodName]) {
                         observer[methodName](event);

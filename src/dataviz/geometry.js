@@ -19,7 +19,8 @@
         defined = util.defined,
         rad = util.rad,
         deg = util.deg,
-        round = util.round;
+        round = util.round,
+        ObserversMixin = util.ObserversMixin;
 
     var PI_DIV_2 = math.PI / 2,
         MIN_NUM = util.MIN_NUM,
@@ -31,8 +32,6 @@
             this.x = x || 0;
             this.y = y || 0;
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         equals: function(other) {
             return other && other.x === this.x && other.y === this.y;
@@ -131,6 +130,7 @@
         }
     });
     defineAccessors(Point.fn, ["x", "y"]);
+    deepExtend(Point.fn, ObserversMixin);
 
     // IE < 9 doesn't allow to override toString on definition
     Point.fn.toString = function(digits, separator) {

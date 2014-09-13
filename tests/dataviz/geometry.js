@@ -79,41 +79,41 @@
     });
 
     test("changing x triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         point.setX(1);
     });
 
     test("changing y triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         point.setY(1);
     });
 
     test("setting x to same value does not trigger geometryChange", 0, function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
 
         point.setX(10);
     });
 
     test("setting y to same value does not trigger geometryChange", 0, function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
 
         point.setY(20);
     });
@@ -147,11 +147,11 @@
     });
 
     test("move triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         point.move(90, 100)
     });
@@ -167,11 +167,11 @@
     });
 
     test("rotate triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         point.rotate(90)
     });
@@ -215,11 +215,11 @@
     });
 
     test("scaleCopy does not trigger geometry change", 0, function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
         point.scaleCopy(2);
     });
 
@@ -240,9 +240,9 @@
     });
 
     test("translate triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() { ok(true); }
-        };
+        });
 
         point.translate(5, 10);
     });
@@ -256,9 +256,9 @@
     });
 
     test("translate triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() { ok(true); }
-        };
+        });
 
         point.translateWith(new Point(5, 10));
     });
@@ -296,11 +296,11 @@
     });
 
     test("transformCopy does not trigger geometry change", 0, function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
         point.transformCopy(Matrix.unit);
     });
 
@@ -337,9 +337,9 @@
     });
 
     test("round triggers geometryChange", function() {
-        point.observer = {
+        point.addObserver({
             geometryChange: function() { ok(true); }
-        };
+        });
 
         point.round();
     });
