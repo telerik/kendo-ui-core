@@ -4,7 +4,7 @@
     ], f);
 })(function() {
 
-(function () {
+(function ($) {
     // Imports ================================================================
     var math = Math,
         kendo = window.kendo,
@@ -16,6 +16,7 @@
         MAX_NUM = Number.MAX_VALUE,
         MIN_NUM = -Number.MAX_VALUE,
         UNDEFINED = "undefined",
+        inArray = $.inArray,
         push = [].push,
         pop = [].pop,
         splice = [].splice,
@@ -343,6 +344,63 @@
         }
     }
 
+    var ObserversMixin = {
+        observers: function() {
+            this._observers = this._observers || [];
+            return this._observers;
+        },
+
+        addObserver: function(element) {
+            var observers = this.observers();
+            observers.push(element);
+            return this;
+        },
+
+        removeObserver: function(element) {
+            var observers = this.observers();
+            var index = inArray(element, observers);
+            if (index != -1) {
+                observers.splice(index, 1);
+            }
+            return this;
+        },
+
+        trigger: function(methodName, event) {
+            var observers = this.observers();
+            var length = observers.length;
+            var observer;
+            var idx;
+
+            if (!this._suspended) {
+                for (idx = 0; idx < length; idx++) {
+                    observer = observers[idx];
+                    if (observer[methodName]) {
+                        observer[methodName](event);
+                    }
+                }
+            }
+            return this;
+        },
+
+        optionsChange: function(e) {
+            this.trigger("optionsChange", e);
+        },
+
+        geometryChange: function(e) {
+            this.trigger("geometryChange", e);
+        },
+
+        suspend: function() {
+            this._suspended = true;
+            return this;
+        },
+
+        resume: function() {
+            this._suspended = false;
+            return this;
+        }
+    };
+
     // Exports ================================================================
     deepExtend(dataviz, {
         util: {
@@ -368,6 +426,7 @@
             last: last,
             limitValue: limitValue,
             objectKey: objectKey,
+            ObserversMixin: ObserversMixin,
             round: round,
             rad: rad,
             renderAttr: renderAttr,
@@ -383,7 +442,7 @@
             valueOrDefault: valueOrDefault
         }
     });
-})();
+})(window.kendo.jQuery);
 
 return window.kendo;
 
