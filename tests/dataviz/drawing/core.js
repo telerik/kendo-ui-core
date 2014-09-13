@@ -116,6 +116,8 @@
 
     // ------------------------------------------------------------
     var options;
+    var ObserverClass = kendo.Class.extend({});
+    kendo.deepExtend(ObserverClass.fn, dataviz.util.ObserversMixin);
 
     module("Options Store", {
         setup: function() {
@@ -125,7 +127,7 @@
                     baz: true
                 },
                 bar: true,
-                obj: new kendo.Class()
+                obj: new ObserverClass()
             });
         }
     });
@@ -143,7 +145,7 @@
     });
 
     test("sets observer on functions", function() {
-        equal(options.obj.observer, options);
+        equal(options.obj.observers()[0], options);
     });
 
     test("set", function() {
@@ -152,12 +154,12 @@
     });
 
     test("set triggers optionsChange", function() {
-        options.observer = {
+        options.addObserver({
             optionsChange: function(e) {
                 equal(e.field, "baz");
                 equal(e.value, true);
             }
-        };
+        });
 
         options.set("baz", true);
     });
@@ -168,21 +170,21 @@
     });
 
     test("nested set on existing field triggers optionsChange", function() {
-        options.observer = {
+        options.addObserver({
             optionsChange: function(e) {
                 equal(e.field, "foo.bar.baz");
             }
-        };
+        });
 
         options.set("foo.bar.baz", true);
     });
 
     test("nested set on new field triggers optionsChange", function() {
-        options.observer = {
+        options.addObserver({
             optionsChange: function(e) {
                 equal(e.field, "baz.baz");
             }
-        };
+        });
 
         options.set("baz.baz", true);
     });

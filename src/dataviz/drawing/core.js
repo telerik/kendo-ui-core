@@ -14,7 +14,8 @@
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz;
+        dataviz = kendo.dataviz,
+        util = dataviz.util;
 
     // Base drawing surface ==================================================
     var Surface = kendo.Observable.extend({
@@ -157,19 +158,12 @@
             var field,
                 member;
 
-            this.observer = null;
             this.prefix = prefix || "";
 
             for (field in options) {
                 member = options[field];
                 member = this._wrap(member, field);
                 this[field] = member;
-            }
-        },
-
-        optionsChange: function(e) {
-            if (this.observer) {
-                this.observer.optionsChange(e);
             }
         },
 
@@ -182,8 +176,8 @@
 
             if (current !== value) {
                 var composite = this._set(field, this._wrap(value, field));
-                if (this.observer && !composite) {
-                    this.observer.optionsChange({
+                if (!composite) {
+                    this.optionsChange({
                         field: this.prefix + field,
                         value: value
                     });
@@ -205,7 +199,7 @@
 
                     if (!obj) {
                         obj = new OptionsStore({}, path + ".");
-                        obj.observer = this;
+                        obj.addObserver(this);
                         this[path] = obj;
                     }
 
@@ -231,12 +225,13 @@
                     object = new OptionsStore(object, this.prefix + field + ".");
                 }
 
-                object.observer = this;
+                object.addObserver(this);
             }
 
             return object;
         }
     });
+    deepExtend(OptionsStore.fn, util.ObserversMixin);
 
     var SurfaceFactory = function() {
         this._items = [];
