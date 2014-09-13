@@ -332,7 +332,7 @@
 
         setCenter: function(value) {
             this.center = Point.create(value);
-            this.center.observer = this;
+            this.center.addObserver(this);
             this.geometryChange();
             return this;
         },
@@ -340,8 +340,6 @@
         getCenter: function() {
             return this.center;
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         equals: function(other) {
             return  other &&
@@ -386,6 +384,7 @@
         }
     });
     defineAccessors(Circle.fn, ["radius"]);
+    deepExtend(Circle.fn, ObserversMixin);
 
     var Arc = Class.extend({
         init: function(center, options) {

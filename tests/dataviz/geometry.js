@@ -722,11 +722,11 @@
     });
 
     test("modifying center triggers geometryChange", function() {
-        circle.observer = {
+        circle.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         circle.center.setX(1);
     });
@@ -756,21 +756,21 @@
     });
 
     test("setting radius triggers geometryChange", function() {
-        circle.observer = {
+        circle.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         circle.setRadius(1);
     });
 
     test("setting radius to same value does not trigger geometryChange", 0, function() {
-        circle.observer = {
+        circle.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
 
         circle.setRadius(10);
     });
