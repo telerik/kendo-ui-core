@@ -30,13 +30,7 @@
         defined = util.defined,
         last = util.last,
 
-        inArray = $.inArray,
-        push = [].push,
-        pop = [].pop,
-        splice = [].splice,
-        shift = [].shift,
-        slice = [].slice,
-        unshift = [].unshift;
+        inArray = $.inArray;
 
     // Drawing primitives =====================================================
     var Element = Class.extend({
@@ -685,126 +679,11 @@
         };
     }
 
-    var ElementsArray = Class.extend({
-        init: function(observer, array) {
-            array = array || [];
-            this.observer = observer;
-            this._splice(0, array.length, array);
-        },
-
-        elements: function(elements) {
-            if (elements) {
-                this._splice(0, this.length, elements);
-
-                this.observer.geometryChange();
-                return this;
-            } else {
-                return this.slice(0);
-            }
-        },
-
-        push: function() {
-            var elements = arguments;
-            var result = push.apply(this, elements);
-
-            this._add(elements);
-
-            return result;
-        },
-
-        slice: slice,
-
-        pop: function() {
-            var length = this.length;
-            var result = pop.apply(this);
-
-            if (length) {
-                this._remove([result]);
-            }
-
-            return result;
-        },
-
-        splice: function(index, howMany) {
-            var elements = slice.call(arguments, 2);
-            var result = this._splice(index, howMany, elements);
-
-            this.observer.geometryChange();
-
-            return result;
-        },
-
-        shift: function() {
-            var length = this.length;
-            var result = shift.apply(this);
-
-            if (length) {
-                this._remove([result]);
-            }
-
-            return result;
-        },
-
-        unshift: function() {
-            var elements = arguments;
-            var result = unshift.apply(this, elements);
-
-            this._add(elements);
-
-            return result;
-        },
-
-        indexOf: function(element) {
-            var that = this;
-            var idx;
-            var length;
-
-            for (idx = 0, length = that.length; idx < length; idx++) {
-                if (that[idx] === element) {
-                    return idx;
-                }
-            }
-            return -1;
-        },
-
-        _splice: function(index, howMany, elements) {
-            var result = splice.apply(this, [index, howMany].concat(elements));
-
-            this._clearObserver(result);
-            this._setObserver(elements);
-
-            return result;
-        },
-
-        _add: function(elements) {
-            this._setObserver(elements);
-            this.observer.geometryChange();
-        },
-
-        _remove: function(elements) {
-            this._clearObserver(elements);
-            this.observer.geometryChange();
-        },
-
-        _setObserver: function(elements) {
-            for (var idx = 0; idx < elements.length; idx++) {
-                elements[idx].observer = this.observer;
-            }
-        },
-
-        _clearObserver: function(elements) {
-            for (var idx = 0; idx < elements.length; idx++) {
-                delete elements[idx].observer;
-            }
-        }
-    });
-
     // Exports ================================================================
     deepExtend(drawing, {
         Arc: Arc,
         Circle: Circle,
         Element: Element,
-        ElementsArray: ElementsArray,
         Group: Group,
         Image: Image,
         MultiPath: MultiPath,
