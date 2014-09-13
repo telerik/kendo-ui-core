@@ -402,7 +402,7 @@
 
         setCenter: function(value) {
             this.center = Point.create(value);
-            this.center.observer = this;
+            this.center.addObserver(this);
             this.geometryChange();
             return this;
         },
@@ -412,8 +412,6 @@
         },
 
         MAX_INTERVAL: 90,
-
-        geometryChange: util.mixins.geometryChange,
 
         pointAt: function(angle) {
             var center = this.center;
@@ -532,6 +530,7 @@
         }
     });
     defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "anticlockwise"]);
+    deepExtend(Arc.fn, ObserversMixin);
 
     var Matrix = Class.extend({
         init: function (a, b, c, d, e, f) {

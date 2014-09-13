@@ -839,7 +839,7 @@
 
     test("constructor sets center", function() {
         ok(arc.center.equals(new Point(100, 100)));
-        ok(arc.center.observer === arc);
+        ok(arc.center.observers()[0] === arc);
     });
 
     test("constructor inits center if not passed", function() {
@@ -864,11 +864,11 @@
     });
 
     test("modifying center triggers geometryChange", function() {
-        arc.observer = {
+        arc.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         arc.center.setX(1);
     });
@@ -888,21 +888,21 @@
     });
 
     test("setting a field triggers geometryChange", function() {
-        arc.observer = {
+        arc.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         arc.setRadiusX(10);
     });
 
     test("setting a field to the same value does not trigger geometryChange", 0, function() {
-        arc.observer = {
+        arc.addObserver({
             geometryChange: function() {
                 ok(false);
             }
-        };
+        });
 
         arc.setRadiusX(50);
     });
