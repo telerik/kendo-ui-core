@@ -563,6 +563,20 @@
         ok(rect.origin.equals(new g.Point(10, 10)));
     });
 
+    test("sets origin observer", function() {
+        var origin = new g.Point(10, 10);
+        rect.setOrigin(origin);
+        equal(origin.observers()[0], rect);
+    });
+
+    test("removes existing origin observer", function() {
+        var origin = new g.Point(10, 10);
+        var newOrigin = new g.Point(20, 20);
+        rect.setOrigin(origin);
+        rect.setOrigin(newOrigin);
+        equal(origin.observers().length, 0);
+    });
+
     test("gets origin", function() {
         ok(rect.getOrigin().equals(new g.Point(0, 0)));
     });
@@ -576,6 +590,20 @@
     test("sets size from array", function() {
         rect.setSize([10, 10]);
         ok(rect.size.equals(new g.Size(10, 10)));
+    });
+
+    test("sets size observer", function() {
+        var size = new g.Size(10, 10);
+        rect.setSize(size);
+        equal(size.observers()[0], rect);
+    });
+
+    test("removes existing size observer", function() {
+        var size = new g.Size(10, 10);
+        var newSize = new g.Size(20, 20);
+        rect.setSize(size);
+        rect.setSize(newSize);
+        equal(size.observers().length, 0);
     });
 
     test("gets size", function() {

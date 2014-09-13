@@ -245,8 +245,7 @@
         },
 
         setOrigin: function(value) {
-            this.origin = Point.create(value);
-            this.origin.addObserver(this);
+            this._observerField("origin", Point.create(value));
             this.geometryChange();
             return this;
         },
@@ -256,8 +255,7 @@
         },
 
         setSize: function(value) {
-            this.size = Size.create(value);
-            this.size.addObserver(this);
+            this._observerField("size", Size.create(value));
             this.geometryChange();
             return this;
         },
