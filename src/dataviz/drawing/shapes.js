@@ -29,6 +29,7 @@
         arrayLimits = util.arrayLimits,
         defined = util.defined,
         last = util.last,
+        ObserversMixin = util.ObserversMixin,
 
         inArray = $.inArray;
 
@@ -47,16 +48,8 @@
             }
 
             this.options = new OptionsStore(options);
-            this.options.observer = this;
+            this.options.addObserver(this);
         },
-
-        optionsChange: function(e) {
-            if (this.observer) {
-                this.observer.optionsChange(e);
-            }
-        },
-
-        geometryChange: util.mixins.geometryChange,
 
         transform: function(transform) {
             if (defined(transform)) {
@@ -118,6 +111,8 @@
         }
     });
 
+    deepExtend(Element.fn, ObserversMixin);
+
     var Group = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
@@ -125,13 +120,11 @@
         },
 
         childrenChange: function(action, items, index) {
-            if (this.observer) {
-                this.observer.childrenChange({
-                    action: action,
-                    items: items,
-                    index: index
-                });
-            }
+            this.trigger("childrenChange",{
+                action: action,
+                items: items,
+                index: index
+            });
         },
 
         traverse: function(callback) {
@@ -333,8 +326,6 @@
             this.controlOut(controlOut);
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         bboxTo: function(toSegment, matrix) {
             var rect;
             var segmentAnchor = this.anchor().transformCopy(matrix);
@@ -421,6 +412,7 @@
         }
     });
     definePointAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
+    deepExtend(Segment.fn, ObserversMixin);
 
     var Path = Element.extend({
         init: function(options) {
@@ -447,7 +439,7 @@
             var point = defined(y) ? new Point(x, y) : x,
                 segment = new Segment(point);
 
-            segment.observer = this;
+            segment.addObserver(this);
 
             this.segments.push(segment);
             this.geometryChange();
@@ -459,7 +451,7 @@
             if (this.segments.length > 0) {
                 var lastSegment = last(this.segments);
                 var segment = new Segment(point, controlIn);
-                segment.observer = this;
+                segment.addObserver(this);
 
                 lastSegment.controlOut(controlOut);
 
@@ -535,7 +527,7 @@
 
         moveTo: function(x, y) {
             var path = new Path();
-            path.observer = this;
+            path.addObserver(this);
 
             this.paths.push(path);
             path.moveTo(x, y);
@@ -650,7 +642,7 @@
         return function(value) {
             if (defined(value)) {
                 this[fieldName] = value;
-                this[fieldName].observer = this;
+                this[fieldName].addObserver(this);
                 this.geometryChange();
                 return this;
             } else {
@@ -670,7 +662,7 @@
         return function(value) {
             if (defined(value)) {
                 this[fieldName] = Point.create(value);
-                this[fieldName].observer = this;
+                this[fieldName].addObserver(this);
                 this.geometryChange();
                 return this;
             } else {

@@ -137,11 +137,11 @@
         });
 
         test("fill triggers optionsChange", function() {
-            shape.observer = {
+            shape.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             shape.fill("red");
         });
@@ -163,11 +163,11 @@
         });
 
         test("stroke triggers optionsChange", function() {
-            shape.observer = {
+            shape.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             shape.stroke("red");
         });
@@ -208,11 +208,11 @@
         test("append triggers childrenChange", function() {
             var child = new Group();
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.append(child);
         });
@@ -240,13 +240,13 @@
             var toRemove = new Group();
             group.append(child);
             group.append(toRemove);
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     equal(args.action, "remove");
                     ok(args.items[0] === toRemove);
                     equal(args.index, 1);
                 }
-            };
+            });
 
             group.remove(toRemove);
         });
@@ -256,11 +256,11 @@
             var toRemove = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     ok(false);
                 }
-            };
+            });
 
             group.remove(toRemove);
         });
@@ -294,13 +294,13 @@
             var toRemove = new Group();
             group.append(child);
             group.append(toRemove);
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     equal(args.action, "remove");
                     ok(args.items[0] === toRemove);
                     equal(args.index, 1);
                 }
-            };
+            });
 
             group.removeAt(1);
         });
@@ -309,11 +309,11 @@
             var child = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     ok(false);
                 }
-            };
+            });
 
             group.removeAt(-1);
             group.removeAt(1);
@@ -330,11 +330,11 @@
             var child = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.clear();
         });
@@ -352,11 +352,11 @@
         });
 
         test("visible triggers optionsChange", function() {
-            group.observer = {
+            group.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.visible(false);
         });
@@ -531,11 +531,11 @@
         });
 
         test("changing the position triggers geometryChange", function() {
-            text.observer = {
+            text.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             text.position().setX(5);
         });
@@ -552,9 +552,9 @@
         });
 
         test("setting content triggers optionsChange", function() {
-            text.observer = {
+            text.addObserver({
                 optionsChange: function() { ok(true); }
-            };
+            });
 
             text.content("Bar");
         });
@@ -573,11 +573,11 @@
         });
 
         test("position setter triggers geometryChange", function() {
-            text.observer = {
+            text.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             text.position(new g.Point());
         });
@@ -597,7 +597,7 @@
 
         test("retrieving bbox doesn't change position observer", function() {
             text.bbox();
-            equal(text.position().observer, text);
+            equal(text.position().observers()[0], text);
         });
 
         test("bbox returns transformed bounding box", function() {
@@ -662,31 +662,31 @@
         });
 
         test("changing the center triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry().center.setX(5);
         });
 
         test("changing the radius triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry().setRadius(5);
         });
 
         test("changing the geometry triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry(new Point(10, 10));
         });
@@ -767,21 +767,21 @@
         });
 
         test("changing the center triggers geometryChange", function() {
-            arc.observer = {
+            arc.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             arc.geometry().center.setX(5);
         });
 
         test("changing a geometry field triggers geometryChange", 2, function() {
-            arc.observer = {
+            arc.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             arc.geometry().setRadiusX(100);
             arc.geometry().setAnticlockwise(true);
@@ -854,21 +854,21 @@
         });
 
         test("changing the anchor point triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.anchor().setX(5);
         });
 
         test("setting the anchor point triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.anchor(new Point());
         });
@@ -883,21 +883,21 @@
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlIn().setX(5);
         });
 
         test("setting the control point (in) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlIn(new Point());
         });
@@ -912,11 +912,11 @@
         });
 
         test("changing the control point (out) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlOut().setX(5);
         });
@@ -931,11 +931,11 @@
         });
 
         test("setting the control point (out) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlOut(new Point());
         });
@@ -1088,22 +1088,22 @@
                 controlIn = Point.create(40, 20);
             path.moveTo(0, 0);
             path.curveTo(controlOut, controlIn, Point.create(30,30));
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             controlOut.setX(20);
             controlIn.setY(30);
         });
 
         test("adding a point triggers geometryChange", function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             path.moveTo(0, 0);
         });
@@ -1114,22 +1114,22 @@
         });
 
         test("close triggers geometryChange", function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             path.close();
         });
 
         test("close does not trigger optionsChange", 0, function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: $.noop,
                 optionsChange: function() {
                     ok(false);
                 }
-            };
+            });
 
             path.close();
         });
@@ -1243,7 +1243,7 @@
 
         test("moveTo sets path observer", function() {
             multiPath.moveTo(0, 0);
-            deepEqual(multiPath.paths[0].observer, multiPath);
+            deepEqual(multiPath.paths[0].observers()[0], multiPath);
         });
 
         test("moveTo adds new path", function() {
@@ -1297,11 +1297,11 @@
                 controlIn = Point.create(40, 20);
             multiPath.moveTo(0, 0);
             multiPath.curveTo(controlOut, controlIn, Point.create(30,30));
-            multiPath.observer = {
+            multiPath.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             controlOut.setX(20);
             controlIn.setY(30);
@@ -1394,11 +1394,11 @@
         });
 
         test("src setter triggers optionsChange", function() {
-            image.observer = {
+            image.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.src("bar");
         });
@@ -1412,11 +1412,11 @@
         });
 
         test("rect setter triggers geometryChange", function() {
-            image.observer = {
+            image.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.rect(new g.Rect());
         });
@@ -1426,11 +1426,11 @@
         });
 
         test("changing the rect triggers geometryChange", function() {
-            image.observer = {
+            image.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.rect().origin.setX(5);
         });
