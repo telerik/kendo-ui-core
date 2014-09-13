@@ -611,21 +611,21 @@
     });
 
     test("modifying origin triggers geometryChange", function() {
-        rect.observer = {
+        rect.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         rect.origin.setX(1);
     });
 
     test("modifying size triggers geometryChange", function() {
-        rect.observer = {
+        rect.addObserver({
             geometryChange: function() {
                 ok(true);
             }
-        };
+        });
 
         rect.size.setWidth(1);
     });

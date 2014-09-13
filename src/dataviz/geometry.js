@@ -231,8 +231,6 @@
             this.setSize(size || new Size());
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         clone: function() {
             return new Rect(
                 this.origin.clone(),
@@ -248,7 +246,7 @@
 
         setOrigin: function(value) {
             this.origin = Point.create(value);
-            this.origin.observer = this;
+            this.origin.addObserver(this);
             this.geometryChange();
             return this;
         },
@@ -259,7 +257,7 @@
 
         setSize: function(value) {
             this.size = Size.create(value);
-            this.size.observer = this;
+            this.size.addObserver(this);
             this.geometryChange();
             return this;
         },
@@ -305,6 +303,8 @@
             return Rect.fromPoints(tl, tr, br, bl);
         }
     });
+
+    deepExtend(Rect.fn, ObserversMixin);
 
     Rect.fromPoints = function() {
         var topLeft = Point.min.apply(this, arguments);
