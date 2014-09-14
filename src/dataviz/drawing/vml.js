@@ -571,6 +571,7 @@
             ShapeNode.fn.geometryChange.call(this);
 
             this.setStyle();
+            this.refreshTransform();
         },
 
         mapStyle: function() {

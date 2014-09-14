@@ -1302,6 +1302,14 @@
             circle.geometry().setRadius(60);
         });
 
+        test("geometryChange should update transformation", function() {
+            circleNode.transform.refresh = function() {
+                ok(true);
+            };
+
+            circle.geometry().setRadius(60);
+        });
+
         test("optionsChange is forwarded to transform", function() {
             circleNode.transform.optionsChange = function(e) {
                 ok(true);
