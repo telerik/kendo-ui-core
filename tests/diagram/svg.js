@@ -1225,9 +1225,11 @@
         });
 
         test("redraw triggers geometry change once", 1, function() {
-            drawingElement.geometryChange = function() {
-                ok(true);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             line.redraw({
                 from: new Point(5, 25),
                 to: new Point(30, 50)
@@ -1235,9 +1237,12 @@
         });
 
         test("redraw dose not trigger geometry change if from or to are not passed", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             line.redraw({
                 stroke: {
                     color: "red"

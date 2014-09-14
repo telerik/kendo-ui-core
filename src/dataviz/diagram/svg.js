@@ -553,10 +553,10 @@
 
             drawingElement.suspend();
 
-            drawingElement.moveTo([0, 0]);
-            drawingElement.lineTo([width, 0]);
-            drawingElement.lineTo([width, height]);
-            drawingElement.lineTo([0, height]);
+            drawingElement.moveTo(0, 0);
+            drawingElement.lineTo(width, 0);
+            drawingElement.lineTo(width, height);
+            drawingElement.lineTo(0, height);
             drawingElement.close();
 
             drawingElement.resume();
@@ -908,7 +908,7 @@
                 }
 
                 if (from || to) {
-                    this._updatePath();
+                    this._drawPath();
                     this._redrawMarkers(true, options);
                 } else {
                     this._redrawMarkers(false, options);
@@ -920,26 +920,27 @@
 
         _initPath: function() {
             var options = this.options;
-            var from = options.from || new Point();
-            var to = options.to || new Point();
             var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
-            this._from = new g.Point(from.x, from.y);
-            this._to = new g.Point(to.x, to.y);
-            drawingElement.moveTo(this._from);
-            drawingElement.lineTo(this._to);
+            this._drawPath();
             this.container.append(drawingElement);
         },
 
-        _updatePath: function() {
+        _drawPath: function() {
             var options = this.options;
-            var from = options.from;
-            var to = options.to;
-            this._from.x = from.x;
-            this._from.y = from.y;
-            this._to.move(to.x, to.y);
+            var drawingElement = this.drawingElement;
+            var from = options.from || new Point();
+            var to = options.to || new Point();
+
+            drawingElement.suspend();
+
+            drawingElement.moveTo(from.x, from.y);
+            drawingElement.lineTo(to.x, to.y);
+
+            drawingElement.resume();
+            drawingElement.geometryChange();
         }
     });
 
