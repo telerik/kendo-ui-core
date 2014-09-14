@@ -704,6 +704,19 @@
             circle.geometry(new Point(10, 10));
         });
 
+        test("geometry sets new geometry observer", function() {
+            var geometry = new g.Circle();
+            circle.geometry(geometry);
+            equal(geometry.observers()[0], circle);
+        });
+
+        test("geometry clears previous geometry observer", function() {
+            var geometry = new g.Circle();
+            circle.geometry(geometry);
+            circle.geometry(new g.Circle());
+            equal(geometry.observers().length, 0);
+        });
+
         test("geometry setter is chainable", function() {
             equal(circle.geometry(new Point(10, 10)), circle);
         });
@@ -798,6 +811,29 @@
 
             arc.geometry().setRadiusX(100);
             arc.geometry().setAnticlockwise(true);
+        });
+
+        test("changing geometry triggers geometryChange", function() {
+            arc.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+
+            arc.geometry(new g.Arc());
+        });
+
+        test("geometry sets new geometry observer", function() {
+            var geometry = new g.Arc();
+            arc.geometry(geometry);
+            equal(geometry.observers()[0], arc);
+        });
+
+        test("geometry clears previous geometry observer", function() {
+            var geometry = new g.Arc();
+            arc.geometry(geometry);
+            arc.geometry(new g.Arc());
+            equal(geometry.observers().length, 0);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -1471,6 +1507,19 @@
             });
 
             image.rect(new g.Rect());
+        });
+
+        test("rect sets new rect observer", function() {
+            var rect = new g.Rect();
+            image.rect(rect);
+            equal(rect.observers()[0], image);
+        });
+
+        test("rect clears previous rect observer", function() {
+            var rect = new g.Rect();
+            image.rect(rect);
+            image.rect(new g.Rect());
+            equal(rect.observers().length, 0);
         });
 
         test("rect setter is chainable", function() {

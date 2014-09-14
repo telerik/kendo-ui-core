@@ -641,8 +641,7 @@
         var fieldName = "_" + name;
         return function(value) {
             if (defined(value)) {
-                this[fieldName] = value;
-                this[fieldName].addObserver(this);
+                this._observerField(fieldName, value);
                 this.geometryChange();
                 return this;
             } else {
