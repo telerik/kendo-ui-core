@@ -962,9 +962,11 @@
         });
 
         test("triggers geometry change once on update", 1, function() {
-            drawingElement.geometryChange = function() {
-                ok(true);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             rectangle.redraw({
                 width: 300,
                 height: 50
@@ -972,9 +974,12 @@
         });
 
         test("does not trigger geometry change if width or height are not changed", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             rectangle.redraw({
                 width: 200,
                 height: 100
@@ -983,9 +988,11 @@
 
         test("updates transformation once", 1, function() {
             var container = rectangle.drawingContainer();
-            container.transform = function() {
-                ok(true);
-            };
+            container.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                }
+            });
 
             rectangle.redraw({
                 x: 10,
@@ -995,9 +1002,11 @@
 
         test("does not update transformation if x and y are the same", 0, function() {
             var container = rectangle.drawingContainer();
-            container.transform = function() {
-                ok(false);
-            };
+            container.addObserver({
+                optionsChange: function(e) {
+                    ok(false);
+                }
+            });
 
             rectangle.redraw({
                 x: 5,

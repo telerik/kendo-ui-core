@@ -528,7 +528,7 @@
             if (options) {
                 VisualBase.fn.redraw.call(this, options);
                 if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
-                    this._updatePath();
+                    this._drawPath();
                 }
                 if (this._diffNumericOptions(options, [X, Y])) {
                     this._setPosition();
@@ -538,33 +538,29 @@
 
         _initPath: function() {
             var options = this.options;
-            var width = options.width;
-            var height = options.height;
             var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
-
-            var points = this._points = [new g.Point(), new g.Point(width, 0),
-                new g.Point(width, height), new g.Point(0, height)];
-
-            drawingElement.moveTo(points[0]);
-            for (var i = 1; i < 4; i++) {
-                drawingElement.lineTo(points[i]);
-            }
-            drawingElement.close();
+            this._drawPath();
         },
 
-        _updatePath: function() {
-            var points = this._points;
+        _drawPath: function() {
+            var drawingElement = this.drawingElement;
             var sizeOptions = sizeOptionsOrDefault(this.options);
             var width = sizeOptions.width;
             var height = sizeOptions.height;
 
-            points[1].x = width;
+            drawingElement.suspend();
 
-            points[3].y = height;
-            points[2].move(width, height);
+            drawingElement.moveTo([0, 0]);
+            drawingElement.lineTo([width, 0]);
+            drawingElement.lineTo([width, height]);
+            drawingElement.lineTo([0, height]);
+            drawingElement.close();
+
+            drawingElement.resume();
+            drawingElement.geometryChange();
         }
     });
 
