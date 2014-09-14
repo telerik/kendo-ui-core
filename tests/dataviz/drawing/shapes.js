@@ -1322,6 +1322,39 @@
         });
 
         shapeBaseTests(Path, "Path");
+
+        // ------------------------------------------------------------
+        module("Path / Class methods");
+
+        test("fromRect creates path from the passed rectangle", function() {
+            var path = Path.fromRect(new g.Rect([10, 20], [50, 50]));
+
+            ok(path.segments[0].anchor().equals({
+                x: 10,
+                y: 20
+            }));
+            ok(path.segments[1].anchor().equals({
+                x: 60,
+                y: 20
+            }));
+            ok(path.segments[2].anchor().equals({
+                x: 60,
+                y: 70
+            }));
+            ok(path.segments[3].anchor().equals({
+                x: 10,
+                y: 70
+            }));
+            ok(path.options.get("closed"));
+        });
+
+        test("fromRect creates path with the specified options", function() {
+            var path = Path.fromRect(new g.Rect(), {
+                foo: "bar"
+            });
+
+            equal(path.options.get("foo"), "bar");
+        });
     })();
 
     // ------------------------------------------------------------
