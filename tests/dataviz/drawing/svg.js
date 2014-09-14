@@ -189,6 +189,22 @@
 
             shape.visible(true);
         });
+
+        module("Base Node tests / " + name + " / observer", {
+            setup: function() {
+                shape = new TShape();
+                node = new TNode(shape);
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(shape.observers()[0], node);
+        });
+
+        test("clear removes srcElement observer", function() {
+            node.clear();
+            equal(shape.observers().length, 0);
+        });
     }
 
     // ------------------------------------------------------------

@@ -195,10 +195,15 @@
 
         clear: function() {
             var element = this.element;
+            var srcElement = this.srcElement;
 
             if (element) {
                 element.parentNode.removeChild(element);
                 this.element = null;
+            }
+
+            if (srcElement) {
+                srcElement.removeObserver(this);
             }
 
             BaseNode.fn.clear.call(this);
