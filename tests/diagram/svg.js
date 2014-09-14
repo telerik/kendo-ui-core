@@ -1295,19 +1295,24 @@
             ok(segments[1].anchor().equals({x: 35, y: 35}));
         });
 
-        test("redraw trigger geometry change once", 1, function() {
-                drawingElement.geometryChange = function() {
-                ok(true);
-            };
+        test("redraw triggers geometry change once", 1, function() {
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             polyline.redraw({
                 points: [new Point(15, 30), new Point(35, 35)]
             });
         });
 
         test("redraw dose not trigger geometry change if points are not passed ", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             polyline.redraw({
                 stroke: {
                     color: "red"
@@ -1316,9 +1321,12 @@
         });
 
         test("redraw dose not trigger geometry change if points are the same ", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             polyline.redraw({
                 points: [
                     new Point(10, 20),

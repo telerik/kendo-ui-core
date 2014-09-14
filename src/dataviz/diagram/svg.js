@@ -540,7 +540,8 @@
             var options = this.options;
             var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
-                stroke: options.stroke
+                stroke: options.stroke,
+                closed: true
             });
             this._drawPath();
         },
@@ -551,16 +552,12 @@
             var width = sizeOptions.width;
             var height = sizeOptions.height;
 
-            drawingElement.suspend();
-
-            drawingElement.moveTo(0, 0);
-            drawingElement.lineTo(width, 0);
-            drawingElement.lineTo(width, height);
-            drawingElement.lineTo(0, height);
-            drawingElement.close();
-
-            drawingElement.resume();
-            drawingElement.geometryChange();
+            drawingElement.segments.elements([
+                createSegment(0, 0),
+                createSegment(width, 0),
+                createSegment(width, height),
+                createSegment(0, height)
+            ]);
         }
     });
 
@@ -934,13 +931,10 @@
             var from = options.from || new Point();
             var to = options.to || new Point();
 
-            drawingElement.suspend();
-
-            drawingElement.moveTo(from.x, from.y);
-            drawingElement.lineTo(to.x, to.y);
-
-            drawingElement.resume();
-            drawingElement.geometryChange();
+            drawingElement.segments.elements([
+                createSegment(from.x, from.y),
+                createSegment(to.x, to.y)
+            ]);
         }
     });
 
@@ -1015,16 +1009,14 @@
             var drawingElement = this.drawingElement;
             var options = this.options;
             var points = options.points;
-            var segments = drawingElement.segments = [];
-            var point, segment;
+            var segments = [];
+            var point;
             for (var i = 0; i < points.length; i++) {
                 point = points[i];
-                segment = new d.Segment(new g.Point(point.x, point.y));
-                segment.observer = drawingElement;
-                segments.push(segment);
+                segments.push(createSegment(point.x, point.y));
             }
 
-            drawingElement.geometryChange();
+            drawingElement.segments.elements(segments);
         },
 
         options: {
@@ -1376,6 +1368,10 @@
         }
 
         return hasChanges;
+    }
+
+    function createSegment(x, y) {
+        return new d.Segment(new g.Point(x, y));
     }
 
     // Exports ================================================================
