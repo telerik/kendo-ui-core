@@ -30,6 +30,7 @@
         defined = util.defined,
         last = util.last,
         ObserversMixin = util.ObserversMixin,
+        ElementsArray = util.ElementsArray,
 
         inArray = $.inArray;
 
@@ -319,6 +320,12 @@
     deepExtend(Arc.fn, drawing.mixins.Paintable);
     defineGeometryAccessors(Arc.fn, ["geometry"]);
 
+    var GeometryElementsArray = ElementsArray.extend({
+        _change: function() {
+            this.geometryChange();
+        }
+    });
+
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
             this.anchor(anchor || new Point());
@@ -417,7 +424,8 @@
     var Path = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            this.segments = [];
+            this.segments = new GeometryElementsArray();
+            this.segments.addObserver(this);
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
@@ -429,7 +437,10 @@
         },
 
         moveTo: function(x, y) {
-            this.segments = [];
+            this.suspend();
+            this.segments.elements([]);
+            this.resume();
+
             this.lineTo(x, y);
 
             return this;
@@ -439,10 +450,7 @@
             var point = defined(y) ? new Point(x, y) : x,
                 segment = new Segment(point);
 
-            segment.addObserver(this);
-
             this.segments.push(segment);
-            this.geometryChange();
 
             return this;
         },
@@ -451,9 +459,9 @@
             if (this.segments.length > 0) {
                 var lastSegment = last(this.segments);
                 var segment = new Segment(point, controlIn);
-                segment.addObserver(this);
-
+                this.suspend();
                 lastSegment.controlOut(controlOut);
+                this.resume();
 
                 this.segments.push(segment);
             }

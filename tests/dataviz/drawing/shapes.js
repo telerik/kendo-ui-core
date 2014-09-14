@@ -1119,6 +1119,15 @@
             equal(path.segments.length, 1);
         });
 
+        test("moveTo triggers geometryChange once", 1, function() {
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.moveTo(0, 0);
+        });
+
         test("lineTo adds segment", function() {
             path.lineTo(0, 0);
             equal(path.segments.length, 1);
@@ -1137,6 +1146,16 @@
 
         test("lineTo returns path", function() {
             deepEqual(path.lineTo(0, 0), path);
+        });
+
+        test("lineTo triggers geometryChange once", 1, function() {
+            path.moveTo(0, 0);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.lineTo([10, 10]);
         });
 
         test("curveTo does nothing if move segment has not been set", function() {
@@ -1169,6 +1188,16 @@
             ok(path.segments[0].controlOut().equals(new Point(10, 10)));
             ok(path.segments[1].controlIn().equals(new Point(40, 20)));
             ok(path.segments[1].anchor().equals(new Point(30, 30)));
+        });
+
+        test("curveTo triggers geometryChange once", 1, function() {
+            path.moveTo(0, 0);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.curveTo([10, 10], [40, 20], [30, 30]);
         });
 
         test("changing the control points triggers geometryChange", 2, function() {
