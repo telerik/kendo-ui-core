@@ -661,8 +661,7 @@
         var fieldName = "_" + name;
         return function(value) {
             if (defined(value)) {
-                this[fieldName] = Point.create(value);
-                this[fieldName].addObserver(this);
+                this._observerField(fieldName, Point.create(value));
                 this.geometryChange();
                 return this;
             } else {

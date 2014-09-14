@@ -546,6 +546,19 @@
             equal(text.position(), position);
         });
 
+        test("position sets new point observer", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            equal(position.observers()[0], text);
+        });
+
+        test("position clears previous point observer", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            text.position(new g.Point(10, 10));
+            equal(position.observers().length, 0);
+        });
+
         test("position can be set to an array", function() {
             text.position([10, 10]);
             deepEqual(text.position().toArray(), [10, 10]);
@@ -873,6 +886,19 @@
             segment.anchor(new Point());
         });
 
+        test("anchor sets new point observer", function() {
+            var anchor = new g.Point(10, 10);
+            segment.anchor(anchor);
+            equal(anchor.observers()[0], segment);
+        });
+
+        test("anchor clears previous point observer", function() {
+            var anchor = new g.Point(10, 10);
+            segment.anchor(anchor);
+            segment.anchor(new g.Point(10, 10));
+            equal(anchor.observers().length, 0);
+        });
+
         test("anchor setter is chainable", function() {
             equal(segment.anchor(new Point()), segment);
         });
@@ -902,6 +928,19 @@
             segment.controlIn(new Point());
         });
 
+        test("controlIn sets new point observer", function() {
+            var controlIn = new g.Point(10, 10);
+            segment.controlIn(controlIn);
+            equal(controlIn.observers()[0], segment);
+        });
+
+        test("controlIn clears previous point observer", function() {
+            var controlIn = new g.Point(10, 10);
+            segment.controlIn(controlIn);
+            segment.controlIn(new g.Point(10, 10));
+            equal(controlIn.observers().length, 0);
+        });
+
         test("controlIn setter is chainable", function() {
             equal(segment.controlIn(new Point()), segment);
         });
@@ -919,6 +958,19 @@
             });
 
             segment.controlOut().setX(5);
+        });
+
+        test("controlOut sets new point observer", function() {
+            var controlOut = new g.Point(10, 10);
+            segment.controlOut(controlOut);
+            equal(controlOut.observers()[0], segment);
+        });
+
+        test("controlOut clears previous point observer", function() {
+            var controlOut = new g.Point(10, 10);
+            segment.controlOut(controlOut);
+            segment.controlOut(new g.Point(10, 10));
+            equal(controlOut.observers().length, 0);
         });
 
         test("controlOut setter is chainable", function() {
