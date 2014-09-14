@@ -526,7 +526,8 @@
     var MultiPath = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            this.paths = [];
+            this.paths = new GeometryElementsArray();
+            this.paths.addObserver(this);
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
@@ -535,10 +536,9 @@
 
         moveTo: function(x, y) {
             var path = new Path();
-            path.addObserver(this);
+            path.moveTo(x, y);
 
             this.paths.push(path);
-            path.moveTo(x, y);
 
             return this;
         },

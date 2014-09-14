@@ -1358,11 +1358,6 @@
             equal(multiPath.paths[0].segments.length, 1);
         });
 
-        test("moveTo sets path observer", function() {
-            multiPath.moveTo(0, 0);
-            deepEqual(multiPath.paths[0].observers()[0], multiPath);
-        });
-
         test("moveTo adds new path", function() {
             multiPath.moveTo(0, 0).lineTo(0, 0).moveTo(0, 0);
             equal(multiPath.paths.length, 2);
@@ -1370,6 +1365,15 @@
 
         test("moveTo returns multiPath", function() {
             deepEqual(multiPath.moveTo(0, 0), multiPath);
+        });
+
+        test("moveTo triggers geometryChange once", 1, function() {
+            multiPath.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            multiPath.moveTo(0, 0);
         });
 
         test("lineTo does nothing if called first", function() {
