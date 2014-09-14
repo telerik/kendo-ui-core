@@ -765,6 +765,19 @@
         ok(circle.center.equals(center));
     });
 
+    test("sets center observer", function() {
+        var center = new g.Point(10, 10);
+        circle.setCenter(center);
+        equal(center.observers()[0], circle);
+    });
+
+    test("clears existing center observer", function() {
+        var center = new g.Point(10, 10);
+        circle.setCenter(center);
+        circle.setCenter(new g.Point(20, 20));
+        equal(center.observers().length, 0);
+    });
+
     test("sets center from array", function() {
         circle.setCenter([10, 10]);
         ok(circle.center.equals(new g.Point(10, 10)));

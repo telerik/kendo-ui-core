@@ -329,8 +329,7 @@
         },
 
         setCenter: function(value) {
-            this.center = Point.create(value);
-            this.center.addObserver(this);
+            this._observerField("center", Point.create(value));
             this.geometryChange();
             return this;
         },
