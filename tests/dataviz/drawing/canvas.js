@@ -159,6 +159,7 @@
     // ------------------------------------------------------------
     (function() {
         var node;
+        var srcElement;
 
         module("Node", {
             setup: function() {
@@ -259,6 +260,23 @@
             });
 
             node.renderTo(ctx);
+        });
+
+        // ------------------------------------------------------------
+        module("Node / source observer", {
+            setup: function() {
+                srcElement = new d.Element();
+                node = new canv.Node(srcElement);
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(srcElement.observers()[0], node);
+        });
+
+        test("clear removes srcElement observer", function() {
+            node.clear();
+            equal(srcElement.observers().length, 0);
         });
     })();
 

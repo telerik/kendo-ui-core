@@ -89,6 +89,21 @@
 
     // Nodes ===================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+            if (srcElement) {
+                srcElement.addObserver(this);
+            }
+        },
+
+        clear: function() {
+            if (this.srcElement) {
+                this.srcElement.removeObserver(this);
+            }
+
+            BaseNode.fn.clear.call(this);
+        },
+
         renderTo: function(ctx) {
             var childNodes = this.childNodes,
                 i;
