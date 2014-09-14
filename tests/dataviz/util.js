@@ -540,6 +540,20 @@
             equal(observer._change.length, 1);
         });
 
+        test("does not call observers method if resumed less times than suspended", function() {
+            element.suspend();
+            element.suspend();
+            element.resume();
+            element.trigger("change");
+            equal(observer._change.length, 0);
+        });
+
+        test("calls observers method if resumed without being suspended", function() {
+            element.resume();
+            element.trigger("change");
+            equal(observer._change.length, 1);
+        });
+
         // ------------------------------------------------------------
         module("Observers / geometryChange", {
             setup: function() {

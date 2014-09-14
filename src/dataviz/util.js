@@ -153,12 +153,12 @@
         },
 
         suspend: function() {
-            this._suspended = true;
+            this._suspended = (this._suspended || 0) + 1;
             return this;
         },
 
         resume: function() {
-            this._suspended = false;
+            this._suspended = math.max((this._suspended || 0) - 1, 0);
             return this;
         },
 
