@@ -109,6 +109,16 @@
             } else {
                 return this.options.get("visible") !== false;
             }
+        },
+
+        clip: function(clip) {
+            var options = this.options;
+            if (defined(clip)) {
+                options.set("clip", clip);
+                return this;
+            } else {
+                return options.get("clip");
+            }
         }
     });
 
