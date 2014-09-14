@@ -1074,10 +1074,24 @@
             ok(segments[1].anchor().equals({x: 300, y: 200}));
         });
 
+        test("redrawing the path triggers geometry change once", 1, function() {
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+        });
+
         test("redraw does not redraw path if no data is passed", 0, function() {
-            drawingContainer.childrenChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
             path.redraw({
                 stroke: {
                     color: "red"
@@ -1086,9 +1100,11 @@
         });
 
         test("redraw does not redraw path if passed data is the same", 0, function() {
-            drawingContainer.childrenChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
             path.redraw({
                 data: "M100,100L200,200"
             });

@@ -872,14 +872,10 @@
 
         _setData: function(data) {
             var drawingElement = this.drawingElement;
-            var paths = d.Path.parse(data || "").paths;
-            drawingElement.paths = paths;
-
-            for (var i = 0; i < paths.length; i++) {
-                paths[i].observer = drawingElement;
-            }
-
-            drawingElement.geometryChange();
+            var multipath = d.Path.parse(data || "");
+            var paths = multipath.paths.slice(0);
+            multipath.paths.elements([]);
+            drawingElement.paths.elements(paths);
         }
     });
 
