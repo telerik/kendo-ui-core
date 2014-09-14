@@ -962,6 +962,19 @@
         ok(arc.center.equals(center));
     });
 
+    test("sets center observer", function() {
+        var center = new g.Point(10, 10);
+        arc.setCenter(center);
+        equal(center.observers()[0], arc);
+    });
+
+    test("clears existing center observer", function() {
+        var center = new g.Point(10, 10);
+        arc.setCenter(center);
+        arc.setCenter(new g.Point(10, 10));
+       equal(center.observers().length, 0);
+    });
+
     test("sets center from array", function() {
         arc.setCenter([10, 10]);
         ok(arc.center.equals(new g.Point(10, 10)));
