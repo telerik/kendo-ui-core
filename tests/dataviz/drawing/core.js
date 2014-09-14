@@ -17,13 +17,6 @@
         }
     });
 
-    test("constructor adds srcElement observer", function() {
-        var src = kendo.deepExtend({}, dataviz.util.ObserversMixin);
-        node = new BaseNode(src);
-
-        equal(src.observers()[0], node);
-    });
-
     test("append adds child node", function() {
         deepEqual(node.childNodes[0], child);
     });
