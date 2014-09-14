@@ -102,7 +102,6 @@
 
             if (srcElement) {
                 this.srcElement = srcElement;
-                srcElement.addObserver(this);
             }
         },
 

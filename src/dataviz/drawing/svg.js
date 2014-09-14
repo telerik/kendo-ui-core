@@ -92,6 +92,13 @@
 
     // SVG Node ================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+            if (srcElement) {
+                srcElement.addObserver(this);
+            }
+        },
+
         load: function(elements) {
             var node = this,
                 element = node.element,

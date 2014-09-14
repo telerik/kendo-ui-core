@@ -194,6 +194,24 @@
         attachReference: noop
     });
 
+    var SourceObserverNode = Node.extend({
+        init: function(srcElement) {
+            Node.fn.init.call(this, srcElement);
+            if (srcElement) {
+                srcElement.addObserver(this);
+            }
+        },
+
+        clear: function() {
+            var srcElement = this.srcElement;
+            if (srcElement) {
+                srcElement.removeObserver(this);
+            }
+
+            Node.fn.clear.call(this);
+        }
+    });
+
     var GroupNode = Node.extend({
         createElement: function() {
             Node.fn.createElement.call(this);
@@ -386,13 +404,13 @@
         }
     });
 
-    var ShapeNode = Node.extend({
+    var ShapeNode = SourceObserverNode.extend({
         init: function(srcElement, transform) {
             this.fill = this.createFillNode(srcElement, transform);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
 
-            Node.fn.init.call(this, srcElement);
+            SourceObserverNode.fn.init.call(this, srcElement);
         },
 
         attachTo: function(domElement) {
