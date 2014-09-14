@@ -17,11 +17,11 @@
         }
     });
 
-    test("constructor sets srcElement observer", function() {
-        var src = { };
+    test("constructor adds srcElement observer", function() {
+        var src = kendo.deepExtend({}, dataviz.util.ObserversMixin);
         node = new BaseNode(src);
 
-        deepEqual(src.observer, node);
+        equal(src.observers()[0], node);
     });
 
     test("append adds child node", function() {

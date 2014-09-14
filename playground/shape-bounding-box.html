@@ -119,7 +119,7 @@
                 }
             });
 
-            clipTest();
+            //clipTest();
             function clipTest() {
                 clip = new geometry.ClipRect(new Point(100, 100), new geometry.Size(150, 150));
                 var circleGeometry = new Circle(Point.create(250, 200), 100);
@@ -230,7 +230,7 @@
             }
 
 
-            //circleTransformTest();
+            circleTransformTest();
             function circleTransformTest() {
                 var m = transform().scale(1,2).rotate(30).translate(500,-500).matrix();
                 circleGeometry = new Circle(Point.create(250, 200), 100);
@@ -245,6 +245,10 @@
 
                 surface.clear();
                 surface.draw(mainGroup);
+            }
+            
+            function testChange() {
+                circleGeometry.setRadius(20);
             }
 
             //curveTransformTest();
