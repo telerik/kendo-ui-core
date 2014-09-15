@@ -435,4 +435,45 @@ withAngularTests("Angular (UI Core)", function(runTest){
         });
     });
 
+    runTest("DropDown, ComboBox, MultiSelect -- k-ng-model returns items instead of string values", function(dom, $scope){
+        $scope.options = {
+            dataSource: $scope.data,
+            dataValueField: "id",
+            dataTextField: "text"
+        };
+        $scope.comboModel = { id: 2 };
+        $scope.dropDownModel = { id: 2 };
+        $scope.multiSelectModel = [ { id: 2 } ];
+
+        $("<div>" +
+          "  <input kendo-combobox='combo' k-options='options' k-ng-model='comboModel' />" +
+          "  <input kendo-dropdownlist='dropDown' k-options='options' k-ng-model='dropDownModel' />" +
+          "  <input kendo-multiselect='multiSelect' k-options='options' k-ng-model='multiSelectModel' />" +
+          "</div>").appendTo(dom);
+
+        expect(6);
+        $scope.whenRendered(function(){
+            var combo = $scope.combo;
+            var dropDown = $scope.dropDown;
+            var multiSelect = $scope.multiSelect;
+
+            // have correct initial values
+            equal(combo.value(), "2");
+            equal(dropDown.value(), "2");
+            deepEqual(multiSelect.value(), [ 2 ]);
+
+            combo.value(1); combo.trigger("change");
+            dropDown.value(1); dropDown.trigger("change");
+            multiSelect.value([ 2, 1 ]); multiSelect.trigger("change");
+
+            deepEqual($scope.comboModel, { id: 1, text: "Foo" });
+            deepEqual($scope.dropDownModel, { id: 1, text: "Foo" });
+            deepEqual($scope.multiSelectModel, [
+                { id: 2, text: "Bar" },
+                { id: 1, text: "Foo" }
+            ]);
+            start();
+        });
+    });
+
 });

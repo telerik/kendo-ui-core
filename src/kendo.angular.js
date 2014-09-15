@@ -385,7 +385,7 @@ var __meta__ = {
                                 var getter = $parse(attrs.kNgModel);
                                 var setter = getter.assign;
                                 var updating = false;
-                                widget.value(getter(scope));
+                                setter(scope, widget.$angular_setLogicValue(getter(scope)));
 
                                 // keep in sync
                                 scope.$watch(attrs.kNgModel, function(newValue, oldValue){
@@ -401,12 +401,12 @@ var __meta__ = {
                                     if (newValue === oldValue) {
                                         return;
                                     }
-                                    widget.value(newValue);
+                                    setter(scope, widget.$angular_setLogicValue(newValue));
                                 });
                                 widget.first("change", function(){
                                     updating = true;
                                     scope.$apply(function(){
-                                        setter(scope, widget.value());
+                                        setter(scope, widget.$angular_getLogicValue());
                                     });
                                     updating = false;
                                 });
@@ -711,6 +711,45 @@ var __meta__ = {
                 }
             });
         }
+    });
+
+    defadvice("ui.Widget", "$angular_getLogicValue", function(){
+        return this.self.value();
+    });
+
+    defadvice("ui.Widget", "$angular_setLogicValue", function(val){
+        this.self.value(val);
+        return this.self.value();
+    });
+
+    defadvice("ui.Select", "$angular_getLogicValue", function(){
+        var item = this.self.dataItem();
+        return item ? item.toJSON() : null;
+    });
+
+    defadvice("ui.Select", "$angular_setLogicValue", function(orig){
+        var self = this.self;
+        var val = orig != null ? orig[self.options.dataValueField || self.options.dataTextField] : null;
+        self.value(val);
+        return self.dataItem() || orig;
+    });
+
+    defadvice("ui.MultiSelect", "$angular_getLogicValue", function(){
+        return $.map(this.self.dataItems(), function(item){
+            return item.toJSON();
+        });
+    });
+
+    defadvice("ui.MultiSelect", "$angular_setLogicValue", function(orig){
+        if (orig == null) {
+            orig = [];
+        }
+        var self = this.self;
+        var val = $.map(orig, function(item){
+            return item[self.options.dataValueField];
+        });
+        self.value(val);
+        self.$angular_getLogicValue();
     });
 
     // All event handlers that are strings are compiled the Angular way.
