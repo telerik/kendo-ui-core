@@ -9,6 +9,7 @@
     var DayView = kendo.ui.GanttDayView;
     var WeekView = kendo.ui.GanttWeekView;
     var MonthView = kendo.ui.GanttMonthView;
+    var YearView = kendo.ui.GanttYearView;
 
     var headerTree;
     
@@ -677,13 +678,13 @@
     });
 
     function weekView(options) {
-        var dayView = new WeekView(element, extend(true, {
+        var weekView = new WeekView(element, extend(true, {
             headerTree: headerTree,
             taskTree: taskTree,
             dependencyTree: dependencyTree
         }, options));
 
-        return dayView;
+        return weekView;
     }
 
     test("header field initialized", function() {
@@ -962,13 +963,13 @@
     });
 
     function monthView(options) {
-        var dayView = new MonthView(element, extend(true, {
+        var monthView = new MonthView(element, extend(true, {
             headerTree: headerTree,
             taskTree: taskTree,
             dependencyTree: dependencyTree
         }, options));
 
-        return dayView;
+        return monthView;
     }
 
     test("header field initialized", function() {
@@ -1247,6 +1248,196 @@
         equal(view.header.find("tr:first th")[0].colSpan, 21);
         equal(view.header.find("tr:first th")[1].colSpan, 22);
         equal(view.header.find("tr:first th")[2].colSpan, 23);
+    });
+
+
+    module("Year View", {
+        setup: function() {
+            element = $(
+                "<div>\
+                    <div class='k-grid-header'>\
+                        <div class='k-grid-header-wrap'>\
+                        </div>\
+                    </div>\
+                    <div class='k-grid-content'>\
+                        <div class='k-gantt-timeline-tasks'>\
+                        </div>\
+                        <div class='k-gantt-timeline-dependencies'>\
+                        </div>\
+                    </div>\
+                </div>");
+
+            headerTree = new kendo.dom.Tree(element.find(".k-grid-header-wrap")[0]);
+            taskTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-tasks")[0]);
+            dependencyTree = new kendo.dom.Tree(element.find(".k-gantt-timeline-dependencies")[0]);
+        },
+        teardown: function() {
+            if (view) {
+                view.destroy();
+            }
+        }
+    });
+
+    function yearView(options) {
+        var yearView = new YearView(element, extend(true, {
+            headerTree: headerTree,
+            taskTree: taskTree,
+            dependencyTree: dependencyTree
+        }, options));
+
+        return yearView;
+    }
+
+    test("header field initialized", function() {
+        view = yearView();
+
+        equal(view.header[0], element.find(".k-grid-header")[0]);
+    });
+
+    test("content field initialized", function() {
+        view = yearView();
+
+        equal(view.content[0], element.find(".k-grid-content")[0]);
+    });
+
+    test("range() sets view range to containing years", 2, function() {
+        view = yearView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2015/04/17")
+        };
+
+        view.range(range);
+
+        equal(kendo.toString(view.start, "yyyy/MM/dd"), "2014/01/01");
+        equal(kendo.toString(view.end, "yyyy/MM/dd"), "2016/01/01");
+    });
+
+    test("_calculateTableWidth() honors slotSize property", function() {
+        view = yearView({
+            slotSize: 100
+        });
+
+        view._slots = [[
+            { span: 1 },
+            { span: 1 },
+            { span: 1 }
+        ]];
+
+        equal(view._calculateTableWidth(), 300);
+    });
+
+
+    test("renderLayout() creates table with correct width", function() {
+        view = yearView();
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/17")
+        };
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("table").width(), view._tableWidth);
+    });
+
+    test("renderLayout() creates year and month header rows", function() {
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/17")
+        };
+
+        view = yearView();
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr").length, 2);
+    });
+
+
+    test("renderLayout() creates year headers with correct text", 2, function() {
+        var range = {
+            start: new Date("2014/04/15"),
+            end: new Date("2014/04/23")
+        };
+
+        view = yearView();
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:last th").eq(0).text(), "Jan");
+        equal(view.header.find("tr:last th:last").eq(0).text(), "Dec");
+    });
+
+    test("renderLayout() creates month headers for each month in range", function() {
+        var range = {
+            start: new Date("2014/08/15"),
+            end: new Date("2014/08/23")
+        };
+
+        view = yearView();
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:last th").length, 12);
+    });
+
+    test("renderLayout() month headers have correct column span", 3, function() {
+        var range = {
+            start: new Date("2014/08/15"),
+            end: new Date("2014/08/23")
+        };
+
+        view = yearView();
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:last th:first")[0].colSpan, 1);
+        equal(view.header.find("tr:last th")[4].colSpan, 1);
+        equal(view.header.find("tr:last th:last")[0].colSpan, 1);
+    });
+
+
+    test("renderLayout() creates year headers with correct text", function() {
+        var range = {
+            start: new Date("2014/08/15"),
+            end: new Date("2014/08/23")
+        };
+
+        view = yearView();
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:first th").eq(0).text(), "2014");
+    });
+
+    test("renderLayout() creates year headers for each year in range", function() {
+        var range = {
+            start: new Date("2014/08/15"),
+            end: new Date("2015/10/23")
+        };
+
+        view = yearView();
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:first th").length, 2);
+    });
+
+    test("renderLayout() year headers have correct column span", 2, function() {
+        var range = {
+            start: new Date("2014/08/15"),
+            end: new Date("2015/10/23")
+        };
+
+        view = yearView();
+
+        view.range(range);
+        view.renderLayout();
+
+        equal(view.header.find("tr:first th")[0].colSpan, 12);
+        equal(view.header.find("tr:first th")[1].colSpan, 12);
     });
 
 }());

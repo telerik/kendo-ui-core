@@ -30,6 +30,7 @@ var __meta__ = {
     var DAY_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')#");
     var WEEK_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'ddd M/dd')# - #=kendo.toString(kendo.date.addDays(end, -1), 'ddd M/dd')#");
     var MONTH_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'MMM')#");
+    var YEAR_HEADER_TEMPLATE = kendo.template("#=kendo.toString(start, 'yyyy')#");
     var RESIZE_HINT = kendo.template('<div class="#=styles.marquee#">' +
                            '<div class="#=styles.marqueeColor#"></div>' +
                        '</div>');
@@ -53,6 +54,9 @@ var __meta__ = {
         },
         month: {
             type: "kendo.ui.GanttMonthView"
+        },
+        year: {
+            type: "kendo.ui.GanttYearView"
         }
     };
 
@@ -1195,6 +1199,29 @@ var __meta__ = {
             return slots;
         },
 
+        _years: function(start, end) {
+            var slotEnd;
+            var slots = [];
+
+            start = new Date(start);
+            end = new Date(end);
+
+            while (start < end) {
+                slotEnd = new Date(start);
+                slotEnd.setFullYear(slotEnd.getFullYear() + 1);
+
+                slots.push({
+                    start: start,
+                    end: slotEnd,
+                    span: 12
+                });
+
+                start = slotEnd;
+            }
+
+            return slots;
+        },
+
         _slotHeaders: function(slots, template) {
             var columns = [];
             var slot;
@@ -1353,6 +1380,44 @@ var __meta__ = {
             return rows;
         }
     });
+    
+    kendo.ui.GanttYearView = GanttView.extend({
+        name: "year",
+
+        options: {
+            yearHeaderTemplate: YEAR_HEADER_TEMPLATE,
+            monthHeaderTemplate: MONTH_HEADER_TEMPLATE
+        },
+
+        range: function(range) {
+            this.start = kendo.date.firstDayOfMonth(new Date(range.start.setMonth(0)));
+            this.end = kendo.date.firstDayOfMonth(new Date(range.end.setMonth(12))); //set month to first month of next year
+        },
+
+        _createSlots: function() {
+            var slots = [];
+            var monthSlots = this._months(this.start, this.end);
+
+            $(monthSlots).each(function(index, slot) {
+                slot.span = 1;
+            });
+
+            slots.push(this._years(this.start, this.end));
+            slots.push(monthSlots);
+
+            return slots;
+        },
+
+        _layout: function() {
+            var rows = [];
+            var options = this.options;
+
+            rows.push(this._slotHeaders(this._slots[0], kendo.template(options.yearHeaderTemplate)));
+            rows.push(this._slotHeaders(this._slots[1], kendo.template(options.monthHeaderTemplate)));
+
+            return rows;
+        }
+    });
 
     var timelineStyles = {
         wrapper: "k-timeline k-grid k-widget",
@@ -1413,7 +1478,8 @@ var __meta__ = {
                 views: {
                     day: "Day",
                     week: "Week",
-                    month: "Month"
+                    month: "Month",
+                    year: "Year"
                 }
             },
             snap: true,
@@ -1593,8 +1659,8 @@ var __meta__ = {
             var end = new Query(tasks).sort(endOrder).toArray()[0].end || new Date();
 
             return {
-                start: start,
-                end: end
+                start: new Date(start),
+                end: new Date(end)
             };
         },
 
