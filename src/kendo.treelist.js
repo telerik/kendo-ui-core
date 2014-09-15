@@ -367,13 +367,16 @@ var __meta__ = {
         },
 
         _toggleChildren: function(e) {
-            var model = this.dataItem(e.currentTarget);
+            var icon = $(e.currentTarget);
+            var model = this.dataItem(icon);
 
             model.set("expanded", !model.get("expanded"));
 
-            //if (!model.loaded()) {
-                //that.dataSource.load(model);
-            //}
+            if (!model.loaded()) {
+                icon.addClass("k-loading");
+            }
+
+            this.dataSource.load(model);
         },
 
         _attachEvents: function() {

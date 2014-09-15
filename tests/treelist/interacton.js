@@ -43,4 +43,52 @@
         equal(instance.content.find("tr").length, 1);
     });
 
+    test("click on expand arrow loads items from remote", function() {
+        var calls = 0;
+        var ds = new kendo.data.TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    options.success([ { id: ++calls, hasChildren: true } ]);
+                }
+            }
+        });
+
+        ds.read();
+
+        createTreeList({ dataSource: ds });
+
+        instance.content.find(".k-i-expand").click();
+
+        equal(instance.content.find("tr").length, 2);
+    });
+
+    test("shows loading icon during remote items", function() {
+        var calls = 0;
+        var readOperation;
+
+        createTreeList({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        // use promise to control when the transport reads
+                        readOperation = $.Deferred();
+                        readOperation.then(function() {
+                            options.success([ { id: ++calls, hasChildren: true } ]);
+                        });
+                    }
+                }
+            }
+        });
+
+        // initial load
+        instance.dataSource.read();
+        readOperation.resolve();
+
+        instance.content.find(".k-i-expand").click();
+        equal(instance.content.find(".k-icon.k-loading").length, 1);
+
+        readOperation.resolve();
+        //equal(instance.content.find(".k-icon.k-loading").length, 0);
+    });
+
 })();
