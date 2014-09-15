@@ -940,6 +940,89 @@
             rect.size.setWidth(200);
             isRectPath(path, rect);
         });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var DefinitionNode = svg.DefinitionNode;
+        var definitionNode, rect, definitions;
+
+        module("DefinitionNode", {
+            setup: function() {
+                definitionNode = new DefinitionNode();
+            }
+        });
+
+        test("renders defs", function() {
+            ok(definitionNode.render().indexOf("defs") !== -1);
+        });
+
+        test("attachTo sets element", function() {
+            definitionNode.attachTo("foo");
+            equal(definitionNode.element, "foo");
+        });
+
+        module("DefinitionNode / definitionChange", {
+            setup: function() {
+                rect = new g.ClipRect([10, 10], [100, 100]);
+                definitions = {
+                    clip: rect
+                };
+                definitionNode = new DefinitionNode();
+            }
+        });
+
+        test("add creates ClipNode", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            ok(definitionNode.childNodes[0] instanceof svg.ClipNode);
+        });
+
+        test("add does not create another node if definition has the same id", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 1);
+        });
+
+        test("remove clears definition", 2, function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            var node = definitionNode.definitionMap[rect.id].element;
+            node.clear = function() {
+                ok(true);
+            };
+            definitionNode.definitionChange({
+                action: "remove",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 0);
+        });
+
+        test("remove does not clear definition if it was added more times", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "remove",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 1);
+        });
 
     })();
 

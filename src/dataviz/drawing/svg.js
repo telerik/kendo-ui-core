@@ -21,7 +21,8 @@
         renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr,
         renderSize = util.renderSize,
-        renderTemplate = util.renderTemplate;
+        renderTemplate = util.renderTemplate,
+        inArray = $.inArray;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -293,6 +294,89 @@
         },
 
         clear: BaseNode.fn.clear
+    });
+
+    var DefinitionNode = Node.extend({
+        init: function() {
+            Node.fn.init.call(this);
+            this.definitionMap = {};
+        },
+
+        attachTo: function(domElement) {
+            this.element = domElement;
+        },
+
+        template: renderTemplate(
+            "<defs>#= d.renderChildren()#</defs>"
+        ),
+
+        definitionChange: function(e) {
+            var definitions = e.definitions;
+            var action = e.action;
+
+            if (action == "add") {
+                this.addDefinitions(definitions);
+            } else if (action == "remove") {
+                this.removeDefinitions(definitions);
+            }
+        },
+
+        createDefinition: function(type, item) {
+            var node;
+            if (type == "clip") {
+                node = new ClipNode(item);
+            }
+            return node;
+        },
+
+        addDefinitions: function(definitions) {
+            for (var field in definitions) {
+                this.addDefinition(field, definitions[field]);
+            }
+        },
+
+        addDefinition: function(type, srcElement) {
+            var definitionMap = this.definitionMap;
+            var id = srcElement.id;
+            var element = this.element;
+            var node, mapItem;
+
+            mapItem = definitionMap[id];
+            if (!mapItem) {
+                node = this.createDefinition(type, srcElement);
+                definitionMap[id] = {
+                    element: node,
+                    count: 1
+                };
+                this.append(node);
+                if (element) {
+                    node.attachTo(this.element);
+                }
+            } else {
+                mapItem.count++;
+            }
+        },
+
+        removeDefinitions: function(definitions) {
+            for (var field in definitions) {
+                this.removeDefinition(definitions[field]);
+            }
+        },
+
+        removeDefinition: function(item) {
+            var definitionMap = this.definitionMap;
+            var id = item.id;
+            var mapItem;
+
+            mapItem = definitionMap[item.id];
+            if (mapItem) {
+                mapItem.count--;
+                if (mapItem.count === 0) {
+                    this.remove(inArray(mapItem.element, this.childNodes), 1);
+                    delete definitionMap[id];
+                }
+            }
+        }
     });
 
     var ClipNode = Node.extend({
@@ -719,6 +803,7 @@
             ArcNode: ArcNode,
             CircleNode: CircleNode,
             ClipNode: ClipNode,
+            DefinitionNode: DefinitionNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
