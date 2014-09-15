@@ -367,8 +367,7 @@ var __meta__ = {
         },
 
         _toggleChildren: function(e) {
-            var element = $(e.currentTarget);
-            var model = this._modelFromElement(element);
+            var model = this.dataItem(e.currentTarget);
 
             model.set("expanded", !model.get("expanded"));
 
@@ -673,8 +672,8 @@ var __meta__ = {
             this.dataSource = dataSource;
         },
 
-        _modelFromElement: function(element) {
-            var row = element.closest("tr");
+        dataItem: function(element) {
+            var row = $(element).closest("tr");
             var model = this.dataSource.getByUid(row.attr(kendo.attr("uid")));
 
             return model;
