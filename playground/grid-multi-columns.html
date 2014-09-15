@@ -34,14 +34,14 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
   </head>
     <body>
-        <div id="grid" ></div>
+        <div id="grid" style="width: 100%" ></div>
 
         <script>
             $(document).ready(function () {
                 $("#grid").kendoGrid({
                     dataSource: {
                         type: "odata",
-                        group: "foo",
+                     //   group: "foo",
                         transport: {
                             read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                         },
@@ -65,29 +65,52 @@
                     resizable: true,
                     reorderable: true,
                     toolbar: ["create"],
-                    //sortable: true,
+                    sortable: true,
+                    filterable: true,
                     scrollable: true,
                     //groupable: true,
                     columns: [
-                    { title: "master", width: 100 },
-                    { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
-                        columns: [{
-                            title: "master1-child",
-                            columns: [{ title: "master1-child-child", groupFooterTemplate: "foo", footerTemplate: "foo", width: 100}, { title: "master1-child-child", width: 100}]
-                        },
-                        // { title: "master1-child1", width: 100/*, columns: [{ title: "master1-child-child"},{ title: "master1-child-child"}] */ }
-                        ] },
-//                  { title: "master", width: 100 , locked: true},
-                  { title: "master2", columns: [{ title: "master2-child", width: 100 }, { title: "master2-child1", width: 100 }] },
-//                  { title: "master1", footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",
-//                      columns: [{
-//                          title: "master1-child", width: 100
-//                    //      columns: [{ title: "master1-child-child"},{ title: "master1-child-child", width: 100}]
-//                      },
-//                      { title: "master1-child1", width: 100//, columns: [{ title: "master1-child-child"}/*,{ title: "master1-child-child"}*/]
-//                      }] }
-                 ]
-                });
+                        {
+                            title: "Contact Info",
+                            locked: true,
+                            columns: [
+                            {
+                                field: "ContactName",
+                                title: "Contact Name",
+                                width: 200
+                                }, {
+                                field: "ContactTitle",
+                                title: "Contact Title",
+                                width: 200
+                            }]
+                        }, {
+                            field: "CompanyName",
+                            title: "Company Name",
+                                width: 200
+                        }, {
+                            field: "Country",
+                            width: 150
+                        }]
+//                   columns: [
+//                   { title: "master", width: 100 },
+//                   { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
+//                       columns: [{
+//                           title: "master1-child",
+//                           columns: [{ title: "master1-child-child", groupFooterTemplate: "foo", footerTemplate: "foo", width: 100}, { title: "master1-child-child", width: 100}]
+//                       },
+//                       // { title: "master1-child1", width: 100/*, columns: [{ title: "master1-child-child"},{ title: "master1-child-child"}] */ }
+//                       ] },
+//                { title: "master", width: 100 , locked: true},
+//              { title: "master2", columns: [{ title: "master2-child", width: 100 }, { title: "master2-child1", width: 100 }] },
+//                { title: "master1", footerTemplate: "foo", field: "foo", groupFooterTemplate: "baz",
+//                    columns: [{
+//                        title: "master1-child", width: 100
+//                  //      columns: [{ title: "master1-child-child"},{ title: "master1-child-child", width: 100}]
+//                    },
+//                    { title: "master1-child1", width: 100//, columns: [{ title: "master1-child-child"}/*,{ title: "master1-child-child"}*/]
+//                    }] }
+//                ]
+               });
 
 /*
                 var header = $(".k-grid-header");

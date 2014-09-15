@@ -581,6 +581,26 @@ var __meta__ = {
         return result;
     }
 
+    function leafDataCells(container) {
+        var rows = container.find("tr:not(.k-filter-row)");
+
+        var cells = $();
+        if (rows.length > 1) {
+            cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)")
+                .filter(function() { return this.rowSpan > 1; });
+        }
+
+        cells = cells.add(rows.last().find("th:not(.k-group-cell,.k-hierarchy-cell)"));
+
+        var indexAttr = kendo.attr("index");
+        cells.sort(function(a, b) {
+            a = $(a).attr(indexAttr);
+            b = $(b).attr(indexAttr);
+            return a > b ? 1 : (a < b ? -1 : 0);
+        });
+        return cells;
+    }
+
     function appendContent(tbody, table, html) {
         var placeholder,
             tmp = tbody;
@@ -3824,7 +3844,7 @@ var __meta__ = {
 
         _filterable: function() {
             var that = this,
-                columns = that.columns,
+                columns = leafColumns(that.columns),
                 filterMenu,
                 cells,
                 cell,
@@ -3840,7 +3860,7 @@ var __meta__ = {
                 }
 
             if (filterable && !that.options.columnMenu) {
-                cells = that._headerCells();
+                cells = leafDataCells(that.thead);//that._headerCells();
 
                 for (var idx = 0, length = cells.length; idx < length; idx++) {
                     cell = cells.eq(idx);
@@ -3882,7 +3902,7 @@ var __meta__ = {
                return;
             }
 
-            var columns = that.columns,
+            var columns = leafColumns(that.columns),
                 filterable = that.options.filterable,
                 rowheader = that.thead.find(".k-filter-row");
 
@@ -3951,14 +3971,14 @@ var __meta__ = {
 
         _sortable: function() {
             var that = this,
-                columns = that.columns,
+                columns = leafColumns(that.columns),
                 column,
                 sorterInstance,
                 cell,
                 sortable = that.options.sortable;
 
             if (sortable) {
-                var cells = that._headerCells();
+                var cells = leafDataCells(that.thead);
 
                 for (var idx = 0, length = cells.length; idx < length; idx++) {
                     column = columns[idx];
@@ -4445,11 +4465,14 @@ var __meta__ = {
                 th,
                 text,
                 html = "",
-                length;
+                length,
+                leafs = leafColumns(that.columns);
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 th = columns[idx].column || columns[idx];
                 text = that._headerCellText(th);
+
+                var index = inArray(th, leafs);
 
                 if (!th.command) {
                     html += "<th role='columnheader' " + kendo.attr("field") + "='" + (th.field || "") + "' ";
@@ -4474,11 +4497,21 @@ var __meta__ = {
                         html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
                     }
 
+                    if (index > -1) {
+                        html += kendo.attr("index") + "='" + index + "'";
+                    }
+
                     html += stringifyAttributes(th.headerAttributes);
 
                     html += ">" + text + "</th>";
                 } else {
-                    html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + text + "</th>";
+                    html += "<th" + stringifyAttributes(th.headerAttributes);
+
+                    if (index > -1) {
+                        html += kendo.attr("index") + "='" + index + "'";
+                    }
+
+                    html += ">" + text + "</th>";
                 }
             }
             return html;
