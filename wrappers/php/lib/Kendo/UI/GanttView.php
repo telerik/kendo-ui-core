@@ -6,7 +6,7 @@ class GanttView extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * If set to true the view will be initially selected by the gantt widget. The default selected view is "day".
+    * If set to true the view will be initially selected by the Gantt widget. The default selected view is "day".
     * @param boolean $value
     * @return \Kendo\UI\GanttView
     */
@@ -91,7 +91,7 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the monthHeaderTemplate option of the GanttView.
-    * The template used to render the month slots in "month" views.
+    * The template used to render the month slots in "month" and "year" views.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\GanttView
     */
@@ -103,12 +103,34 @@ class GanttView extends \Kendo\SerializableObject {
 
     /**
     * Sets the monthHeaderTemplate option of the GanttView.
-    * The template used to render the month slots in "month" views.
+    * The template used to render the month slots in "month" and "year" views.
     * @param string $value The template content.
     * @return \Kendo\UI\GanttView
     */
     public function monthHeaderTemplate($value) {
         return $this->setProperty('monthHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the yearHeaderTemplate option of the GanttView.
+    * The template used to render the year slots in "year" view.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\GanttView
+    */
+    public function yearHeaderTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('yearHeaderTemplate', $value);
+    }
+
+    /**
+    * Sets the yearHeaderTemplate option of the GanttView.
+    * The template used to render the year slots in "year" view.
+    * @param string $value The template content.
+    * @return \Kendo\UI\GanttView
+    */
+    public function yearHeaderTemplate($value) {
+        return $this->setProperty('yearHeaderTemplate', $value);
     }
 
     /**
