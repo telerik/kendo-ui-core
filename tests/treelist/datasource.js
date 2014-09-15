@@ -604,4 +604,39 @@
         equal(ds.get(1).hasChildren, true);
     });
 
+    test("create with options object instantiates TreeListDataSource", function() {
+        var ds = TreeListDataSource.create({});
+
+        ok(ds instanceof TreeListDataSource);
+    });
+
+    test("create with array argument instantiates TreeListDataSource with data", function() {
+        var ds = TreeListDataSource.create([ { id: 1 } ]);
+
+        ok(ds instanceof TreeListDataSource);
+
+        ds.read();
+
+        ok(ds.get(1));
+    });
+
+    test("create with ObservableArray argument instantiates TreeListDataSource with data", function() {
+        var array = new kendo.data.ObservableArray([ { id: 1 } ]);
+        var ds = TreeListDataSource.create(array);
+
+        ok(ds instanceof TreeListDataSource, "instance");
+
+        ds.read();
+
+        ok(ds.get(1), "get");
+    });
+
+    test("create with existing instance", function() {
+        var ds = TreeListDataSource.create({});
+
+        var recreated = TreeListDataSource.create(ds);
+
+        equal(recreated, ds);
+    });
+
 })();

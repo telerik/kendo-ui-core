@@ -19,6 +19,7 @@ var __meta__ = {
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var DataSource = data.DataSource;
+    var ObservableArray = data.ObservableArray;
     var Query = data.Query;
     var Model = data.Model;
     var proxy = $.proxy;
@@ -275,6 +276,16 @@ var __meta__ = {
         }
     });
 
+    TreeListDataSource.create = function(options) {
+        if ($.isArray(options)) {
+            options = { data: options };
+        } else if (options instanceof ObservableArray) {
+            options = { data: options.toJSON() };
+        }
+
+        return options instanceof TreeListDataSource ? options : new TreeListDataSource(options);
+    };
+
     function createPlaceholders(options) {
         var spans = [];
         var className = options.className;
@@ -317,12 +328,7 @@ var __meta__ = {
                 this._refreshHandler = proxy(this.refresh, this);
             }
 
-            //TODO Implement TreeListDataSource.create and refactor this code!!!
-            if (dataSource instanceof TreeListDataSource) {
-                this.dataSource = dataSource;
-            } else {
-                this.dataSource = new TreeListDataSource(dataSource);
-            }
+            this.dataSource = TreeListDataSource.create(dataSource);
 
             this.dataSource.bind(CHANGE, this._refreshHandler);
         },
