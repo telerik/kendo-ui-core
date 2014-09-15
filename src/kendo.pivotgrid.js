@@ -3224,7 +3224,7 @@ var __meta__ = {
             for (; rowIdx < rowsLength; rowIdx++) {
                 row = rows[rowIdx];
 
-                if (row.rowspan === 1) {
+                if (row.rowSpan === 1) {
                     continue;
                 }
 
@@ -3237,7 +3237,7 @@ var __meta__ = {
                     cell = cells[cellIdx];
 
                     if (cell.tupleAll) {
-                        cell.attr.rowspan = row.rowspan;
+                        cell.attr.rowSpan = row.rowSpan;
                     }
                 }
             }
@@ -3265,7 +3265,7 @@ var __meta__ = {
 
             if (length) {
                 for (; idx < length; idx++) {
-                    rowLength += cells[idx].attr.colspan || 1;
+                    rowLength += cells[idx].attr.colSpan || 1;
                 }
             }
 
@@ -3290,8 +3290,8 @@ var __meta__ = {
                 row = element("tr", null, []);
 
                 row.parentMember = parentMember;
-                row.colspan = 0;
-                row.rowspan = 1;
+                row.colSpan = 0;
+                row.rowSpan = 1;
 
                 map[rowKey] = row;
                 parentRow = map[rootName + (Number(levelNum) - 1)];
@@ -3312,7 +3312,7 @@ var __meta__ = {
 
                 if (!row.parentMember || row.parentMember !== parentMember) {
                     row.parentMember = parentMember;
-                    row.colspan = 0;
+                    row.colSpan = 0;
                 }
             }
 
@@ -3360,7 +3360,7 @@ var __meta__ = {
             var path;
 
             var idx = 0;
-            var colspan;
+            var colSpan;
             var metadata;
 
             if (member.measure) {
@@ -3400,7 +3400,7 @@ var __meta__ = {
             cell = this._cell((row.notFirst ? " k-first" : ""), cellChildren);
 
             row.children.push(cell);
-            row.colspan += 1;
+            row.colSpan += 1;
 
             if (childrenLength) {
                 allCell = this._cell(" k-alt", [this._content(member, tuple)]);
@@ -3410,40 +3410,40 @@ var __meta__ = {
                     childRow = this._buildRows(children[idx], memberIdx, member);
                 }
 
-                colspan = childRow.colspan;
-                cell.attr.colspan = colspan;
+                colSpan = childRow.colSpan;
+                cell.attr.colSpan = colSpan;
 
-                metadata.children = colspan;
+                metadata.children = colSpan;
                 metadata.members = 1;
 
-                row.colspan += colspan;
-                row.rowspan = childRow.rowspan + 1;
+                row.colSpan += colSpan;
+                row.rowSpan = childRow.rowSpan + 1;
 
                 if (nextMember) {
                     if (nextMember.measure) {
-                        colspan = this._measures(nextMember.children, tuple, " k-alt");
+                        colSpan = this._measures(nextMember.children, tuple, " k-alt");
                     } else {
-                        colspan = this._buildRows(tuple, memberIdx + 1).colspan;
+                        colSpan = this._buildRows(tuple, memberIdx + 1).colSpan;
                     }
 
-                    allCell.attr.colspan = colspan;
-                    colspan -= 1;
+                    allCell.attr.colSpan = colSpan;
+                    colSpan -= 1;
 
-                    metadata.members += colspan;
-                    row.colspan += colspan;
+                    metadata.members += colSpan;
+                    row.colSpan += colSpan;
                 }
             } else if (nextMember) {
                 if (nextMember.measure) {
-                    colspan = this._measures(nextMember.children, tuple);
+                    colSpan = this._measures(nextMember.children, tuple);
                 } else {
-                    colspan = this._buildRows(tuple, memberIdx + 1).colspan;
+                    colSpan = this._buildRows(tuple, memberIdx + 1).colSpan;
                 }
 
-                metadata.members = colspan;
+                metadata.members = colSpan;
 
-                if (colspan > 1) {
-                    cell.attr.colspan = colspan;
-                    row.colspan += colspan - 1;
+                if (colSpan > 1) {
+                    cell.attr.colSpan = colSpan;
+                    row.colSpan += colSpan - 1;
                 }
             }
 
@@ -3522,7 +3522,7 @@ var __meta__ = {
 
             var row;
             var cell;
-            var maxColspan;
+            var maxcolSpan;
             var map = this.map;
             var allRow;
 
@@ -3530,11 +3530,11 @@ var __meta__ = {
                 row = rows[rowIdx];
 
                 for (memberIdx = 0; memberIdx < membersLength; memberIdx++) {
-                    maxColspan = this[members[memberIdx].name];
-                    cell = row.colspan["dim" + memberIdx];
+                    maxcolSpan = this[members[memberIdx].name];
+                    cell = row.colSpan["dim" + memberIdx];
 
-                    if (cell && cell.levelNum < maxColspan) {
-                        cell.attr.colspan = (maxColspan - cell.levelNum) + 1;
+                    if (cell && cell.levelNum < maxcolSpan) {
+                        cell.attr.colSpan = (maxcolSpan - cell.levelNum) + 1;
                     }
                 }
             }
@@ -3553,8 +3553,8 @@ var __meta__ = {
 
         _row: function(children) {
             var row = element("tr", null, children);
-            row.rowspan = 1;
-            row.colspan = {};
+            row.rowSpan = 1;
+            row.colSpan = {};
 
             this.rows.push(row);
 
@@ -3606,7 +3606,7 @@ var __meta__ = {
                 attr = { className: row.allCell ? "k-grid-footer" : "" };
                 row.children.push(element("td", attr, [ this._content(children[0], tuple) ]));
 
-                row.rowspan = childrenLength;
+                row.rowSpan = childrenLength;
 
                 for (idx = 1; idx < childrenLength; idx++) {
                     this._row([ element("td", attr, [ this._content(children[idx], tuple) ]) ]);
@@ -3646,7 +3646,7 @@ var __meta__ = {
             cell.levelNum = levelNum;
 
             row.children.push(cell);
-            row.colspan["dim" + memberIdx] = cell;
+            row.colSpan["dim" + memberIdx] = cell;
 
             if (!this[rootName] || this[rootName] < levelNum) {
                 this[rootName] = levelNum;
@@ -3660,41 +3660,41 @@ var __meta__ = {
                     childRow = this._buildRows(children[idx], memberIdx);
 
                     if (row !== childRow) {
-                        row.rowspan += childRow.rowspan;
+                        row.rowSpan += childRow.rowSpan;
                     }
                 }
 
-                if (row.rowspan > 1) {
-                    cell.attr.rowspan = row.rowspan;
+                if (row.rowSpan > 1) {
+                    cell.attr.rowSpan = row.rowSpan;
                 }
 
-                metadata.children = row.rowspan;
+                metadata.children = row.rowSpan;
 
                 allCell = element("td", { className: "k-grid-footer" }, [this._content(member, tuple)]);
                 allCell.levelNum = levelNum;
 
                 allRow = this._row([ allCell ]);
-                allRow.colspan["dim" + memberIdx] = allCell;
+                allRow.colSpan["dim" + memberIdx] = allCell;
                 allRow.allCell = true;
 
                 map[tuplePath + member.name + "all"] = allRow;
 
                 if (nextMember) {
                     childRow = this._buildRows(tuple, memberIdx + 1);
-                    allCell.attr.rowspan = childRow.rowspan;
+                    allCell.attr.rowSpan = childRow.rowSpan;
                 }
 
-                row.rowspan += allRow.rowspan;
+                row.rowSpan += allRow.rowSpan;
 
-                metadata.members = allRow.rowspan;
+                metadata.members = allRow.rowSpan;
 
             } else if (nextMember) {
                 row.hasChild = false;
                 this._buildRows(tuple, memberIdx + 1);
 
-                (allCell || cell).attr.rowspan = row.rowspan;
+                (allCell || cell).attr.rowSpan = row.rowSpan;
 
-                metadata.members = row.rowspan;
+                metadata.members = row.rowSpan;
             }
 
             if (metadata.maxChildren < metadata.children) {
