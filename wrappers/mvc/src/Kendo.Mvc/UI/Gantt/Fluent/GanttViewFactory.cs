@@ -66,6 +66,20 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Add(GanttViewType.Month);
         }
+
+        public virtual GanttViewBuilder YearView(Action<GanttViewBuilder> addViewAction)
+        {
+            var builder = Add(GanttViewType.Year);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+
+        public void YearView()
+        {
+            Add(GanttViewType.Year);
+        }
     }
 }
 

@@ -37,6 +37,10 @@ namespace Kendo.Mvc.UI
 
         public string MonthHeaderTemplateId { get; set; }
         
+        public string YearHeaderTemplate { get; set; }
+
+        public string YearHeaderTemplateId { get; set; }
+        
         public GanttViewType? Type { get; set; }
         
         //<< Fields
@@ -109,6 +113,20 @@ namespace Kendo.Mvc.UI
             else if (!string.IsNullOrEmpty(MonthHeaderTemplate))
             {
                 json["monthHeaderTemplate"] = MonthHeaderTemplate;
+            }
+                
+            if (!string.IsNullOrEmpty(YearHeaderTemplateId))
+            {
+                json["yearHeaderTemplate"] = new ClientHandlerDescriptor {
+                    HandlerName = string.Format(
+                        "jQuery('#{0}').html()",
+                        YearHeaderTemplateId
+                    )
+                };
+            }
+            else if (!string.IsNullOrEmpty(YearHeaderTemplate))
+            {
+                json["yearHeaderTemplate"] = YearHeaderTemplate;
             }
                 
             if (Type.HasValue)

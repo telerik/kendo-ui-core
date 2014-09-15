@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// If set to true the view will be initially selected by the gantt widget. The default selected view is "day".
+        /// If set to true the view will be initially selected by the Gantt widget. The default selected view is "day".
         /// </summary>
         /// <param name="value">The value that configures the selected.</param>
         public GanttViewBuilder Selected(bool value)
@@ -108,7 +108,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The template used to render the month slots in "month" views.
+        /// The template used to render the month slots in "month" and "year" views.
         /// </summary>
         /// <param name="value">The value that configures the monthheadertemplate.</param>
         public GanttViewBuilder MonthHeaderTemplate(string value)
@@ -119,12 +119,34 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// The template used to render the month slots in "month" views.
+        /// The template used to render the month slots in "month" and "year" views.
         /// </summary>
         /// <param name="value">The value that configures the monthheadertemplate.</param>
         public GanttViewBuilder MonthHeaderTemplateId(string value)
         {
             container.MonthHeaderTemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The template used to render the year slots in "year" view.
+        /// </summary>
+        /// <param name="value">The value that configures the yearheadertemplate.</param>
+        public GanttViewBuilder YearHeaderTemplate(string value)
+        {
+            container.YearHeaderTemplate = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The template used to render the year slots in "year" view.
+        /// </summary>
+        /// <param name="value">The value that configures the yearheadertemplate.</param>
+        public GanttViewBuilder YearHeaderTemplateId(string value)
+        {
+            container.YearHeaderTemplateId = value;
 
             return this;
         }
