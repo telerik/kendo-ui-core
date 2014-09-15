@@ -308,7 +308,7 @@ var __meta__ = {
             this._header();
             //this._sortable();
             //this._selectable();
-            //this._attachEvents();
+            this._attachEvents();
 
             //this._adjustHeight();
 
@@ -366,24 +366,21 @@ var __meta__ = {
             autoBind: true
         },
 
+        _toggleChildren: function(e) {
+            var element = $(e.currentTarget);
+            var model = this._modelFromElement(element);
+
+            model.set("expanded", !model.get("expanded"));
+
+            //if (!model.loaded()) {
+                //that.dataSource.load(model);
+            //}
+        },
+
         _attachEvents: function() {
-            var that = this;
+            var icons = "." + classNames.iconCollapse + ", ." + classNames.iconExpand;
 
-            that.content
-                .on(CLICK + NS, "td > span." + classNames.icon + ":not(." + classNames.iconHidden + ")", function(e) {
-                    var element = $(this);
-                    var model = that._modelFromElement(element);
-
-                    model.set("expanded", !model.get("expanded"));
-
-                    if (!model.loaded()) {
-                        that.dataSource.load(model);
-                    } else {
-                        that.refresh();
-                    }
-
-                    e.stopPropagation();
-                });
+            this.content.on(CLICK + NS, icons, proxy(this._toggleChildren, this));
         },
 
         _domTrees: function() {
