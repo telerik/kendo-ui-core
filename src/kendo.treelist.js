@@ -181,7 +181,7 @@ var __meta__ = {
             options.filterCallback = proxy(this._filterCallback, this);
 
             var result = Query.process(data, options);
-            var length, hasChildren, i;
+            var length, hasChildren, i, flag, item;
 
             data = result.data;
 
@@ -193,7 +193,12 @@ var __meta__ = {
             }
 
             for (i = 0; i < length; i++) {
-                data[i].loaded(hasChildren[data[i].id]);
+                item = data[i];
+                flag = !!hasChildren[item.id];
+                item.loaded(flag);
+                if (item.hasChildren !== true) {
+                    item.hasChildren = flag;
+                }
             }
 
             result.data = data;
@@ -263,8 +268,10 @@ var __meta__ = {
             baseFilter.call(this, value);
         },
 
-        _modelLoaded: function(id) {
-            this.get(id).loaded(true);
+        _modelLoaded: function(id, e) {
+            var model = this.get(id);
+            model.loaded(true);
+            model.hasChildren = this.childNodes(model).length > 0;
         }
     });
 
@@ -564,17 +571,16 @@ var __meta__ = {
             var column = options.column;
             var value = model.get(column.field);
             var formatedValue = column.format ? kendo.format(column.format, value) : value;
-            var hasChildren = !model.loaded() || this.dataSource.childNodes(model).length;
             var iconClass;
 
             if (column.expandable) {
                 children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
                 iconClass = [classNames.icon];
 
-                if (hasChildren) {
+                if (model.hasChildren) {
                     iconClass.push(model.expanded ? classNames.iconCollapse : classNames.iconExpand);
                 } else {
-                    iconClass.push(iconHidden);
+                    iconClass.push(classNames.iconHidden);
                 }
 
                 children.push(kendoDomElement("span", { className: iconClass.join(" ") }));

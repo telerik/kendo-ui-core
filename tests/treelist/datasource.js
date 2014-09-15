@@ -261,7 +261,7 @@
     });
 
     test("node is considered loaded if it has children", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 3, parentId: 1 },
@@ -279,7 +279,7 @@
     });
 
     test("level returns item level", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 2, parentId: null },
@@ -299,7 +299,7 @@
     });
 
     test("level returns level when given model", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 2, parentId: null },
@@ -317,7 +317,7 @@
     });
 
     test("filter by root items", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 2, parentId: null },
@@ -335,7 +335,7 @@
     });
 
     test("filter by root items when none are found", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 2, parentId: null },
@@ -353,7 +353,7 @@
     });
 
     test("filter by child node should return parent items until root", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, parentId: null },
                 { id: 2, parentId: null },
@@ -374,7 +374,7 @@
     });
 
     test("filter preserves sort order", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "c", parentId: null },
                 { id: 2, text: "e", parentId: null },
@@ -400,7 +400,7 @@
     });
 
     test("filter returns parent once when matched by multiple children", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "c", parentId: null },
                 { id: 2, text: "aa", parentId: 1 },
@@ -419,7 +419,7 @@
     });
 
     test("filter does not duplicate parent items", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "aa", parentId: null },
                 { id: 2, text: "ab", parentId: 1 },
@@ -435,7 +435,7 @@
     });
 
     test("filter keeps all root items", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, text: "a", parentId: null },
                 { id: 2, text: "b", parentId: null },
@@ -456,7 +456,7 @@
     });
 
     test("aggregate calculates aggregates for each parent item", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, foo: 1, parentId: null },
                 { id: 2, foo: 2, parentId: 1 },
@@ -478,7 +478,7 @@
     });
 
     test("filter initially", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, foo: 1, parentId: null },
                 { id: 2, foo: 2, parentId: 1 },
@@ -495,7 +495,7 @@
     });
 
     test("aggregate works on filtered data", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, foo: 1, parentId: null },
                 { id: 2, foo: 2, parentId: 1 },
@@ -518,7 +518,7 @@
     });
 
     test("aggregate works on filtered parents", function() {
-         var ds = new TreeListDataSource({
+        var ds = new TreeListDataSource({
             data: [
                 { id: 1, foo: 1, parentId: null }, // filtered out
                 { id: 2, foo: 2, parentId: 1 },
@@ -538,6 +538,70 @@
         equal(aggregates[null].foo.sum, 15);
         equal(aggregates[1].foo.sum, 9);
         equal(aggregates[2].foo.sum, 4);
+    });
+
+    test("load sets hasChildren flag when no children are loaded", function() {
+        var called;
+
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    if (!called) {
+                        called = true;
+                        options.success([ { id: 1, hasChildren: true } ]);
+                    } else {
+                        options.success([]);
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.load(ds.at(0));
+
+        ok(!ds.at(0).hasChildren);
+    });
+
+    test("initially loaded items set hasChildren flag", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        ds.read();
+
+        equal(ds.get(1).hasChildren, true);
+        equal(ds.get(2).hasChildren, false);
+    });
+
+    test("hasChildren flag is not overridden", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1, hasChildren: true }
+            ]
+        });
+
+        ds.read();
+
+        equal(ds.get(1).hasChildren, true);
+        equal(ds.get(2).hasChildren, true);
+    });
+
+    test("hasChildren flag is updated upon discrepancies", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null, hasChildren: false },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        ds.read();
+
+        equal(ds.get(1).hasChildren, true);
     });
 
 })();

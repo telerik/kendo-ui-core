@@ -104,7 +104,7 @@
         createTreeList({ dataSource: expandedDataSource });
 
         var blankIcon = instance.content.find("span.k-icon.k-i-none");
-        equal(blankIcon.length, 2);
+        equal(blankIcon.length, 4);
         equal(blankIcon.closest("tr").length, 2);
     });
 
@@ -125,6 +125,19 @@
         });
 
         equal(instance.header.find("th:last").text(), "Foo");
+    });
+
+    test("does not render expand arrows when hasChildren is false", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, expanded: true },
+                    { id: 2, parentId: 1 }
+                ]
+            }
+        });
+
+        equal(instance.content.find(".k-icon.k-i-expand").length, 0);
     });
 
 })();

@@ -1259,7 +1259,7 @@ var __meta__ = {
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 current = data[idx];
-                containsChildren = current && current.hasChildren && current.children.view().length;
+                containsChildren = current && current.hasChildren && current.children && current.children.view().length;
 
                 if (containsChildren || filter(current)) {
                     result.push(current);
