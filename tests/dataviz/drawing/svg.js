@@ -875,4 +875,72 @@
             image.src("Bar");
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var ClipNode = svg.ClipNode;
+        var clipNode, rect;
+
+        function isRectPath(path, rect) {
+            var segments = path.segments;
+            var x = rect.origin.x;
+            var y = rect.origin.y;
+            var width = rect.width();
+            var height = rect.height();
+
+            ok(segments[0].anchor().equals({
+                x: x,
+                y: y
+            }));
+            ok(segments[1].anchor().equals({
+                x: x + width,
+                y: y
+            }));
+            ok(segments[2].anchor().equals({
+                x: x + width,
+                y: y + height
+            }));
+            ok(segments[3].anchor().equals({
+                x: x,
+                y: y + height
+            }));
+            ok(path.options.closed);
+        }
+
+        module("ClipNode", {
+            setup: function() {
+                rect = new g.ClipRect([10, 10], [100, 100]);
+                clipNode = new ClipNode(rect);
+            }
+        });
+
+        test("renders clippath", function() {
+
+            ok(clipNode.render().indexOf("clippath") !== -1);
+        });
+
+        test("renders clip rect id", function() {
+            ok(clipNode.render().indexOf("id='" + rect.id + "'") !== -1);
+        });
+
+        test("loads path", function() {
+            var pathNode = clipNode.childNodes[0];
+            ok(pathNode instanceof PathNode);
+        });
+
+        test("loads path from clip rect", function() {
+            var pathNode = clipNode.childNodes[0];
+            var path = pathNode.srcElement;
+            isRectPath(path, rect);
+        });
+
+        test("changing clip rect updates path", function() {
+            var pathNode = clipNode.childNodes[0];
+            var path = pathNode.srcElement;
+            rect.size.setWidth(200);
+            isRectPath(path, rect);
+        });
+
+    })();
+
 })();

@@ -295,6 +295,29 @@
         clear: BaseNode.fn.clear
     });
 
+    var ClipNode = Node.extend({
+        init: function(clipRect) {
+            Node.fn.init.call(this);
+
+            this.clipRect = clipRect;
+            this.id = clipRect.id;
+            this.path = d.Path.fromRect(clipRect);
+
+            clipRect.addObserver(this);
+
+            this.load([this.path]);
+        },
+
+        template: renderTemplate(
+            "<clippath id='#=d.id#'>#= d.renderChildren()#</clippath>"
+        ),
+
+        geometryChange: function(e) {
+            var path = d.Path.fromRect(this.clipRect);
+            this.path.segments.elements(path.segments.elements());
+        }
+    });
+
     var GroupNode = Node.extend({
         template: renderTemplate(
             "<g#= d.renderTransform() + d.renderStyle() #>#= d.renderChildren() #</g>"
@@ -695,6 +718,7 @@
         svg: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,
+            ClipNode: ClipNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,
