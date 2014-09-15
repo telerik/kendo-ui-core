@@ -65,6 +65,10 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("monthHeaderTemplate", value.getBody());
     }
 
+    public void setYearHeaderTemplate(ViewYearHeaderTemplateFunctionTag value) {
+        setEvent("yearHeaderTemplate", value.getBody());
+    }
+
     public java.lang.String getDayHeaderTemplate() {
         return (java.lang.String)getProperty("dayHeaderTemplate");
     }
@@ -119,6 +123,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setWeekHeaderTemplate(java.lang.String value) {
         setProperty("weekHeaderTemplate", value);
+    }
+
+    public java.lang.String getYearHeaderTemplate() {
+        return (java.lang.String)getProperty("yearHeaderTemplate");
+    }
+
+    public void setYearHeaderTemplate(java.lang.String value) {
+        setProperty("yearHeaderTemplate", value);
     }
 
 //<< Attributes

@@ -16064,7 +16064,7 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template used to render the month slots in "month" views.</description>
+            <description>The template used to render the month slots in "month" and "year" views.</description>
             <name>monthHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16099,6 +16099,12 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>The template used to render the year slots in "year" view.</description>
+            <name>yearHeaderTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -16121,9 +16127,15 @@ By default the Kendo UI Gantt widget displays all three ("day", "week", and "mon
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The template used to render the month slots in "month" views.</description>
+        <description>The template used to render the month slots in "month" and "year" views.</description>
         <name>gantt-view-monthHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.gantt.ViewMonthHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template used to render the year slots in "year" view.</description>
+        <name>gantt-view-yearHeaderTemplate</name>
+        <tag-class>com.kendoui.taglib.gantt.ViewYearHeaderTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
