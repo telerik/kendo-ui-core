@@ -1288,7 +1288,7 @@ var __meta__ = {
                             } else if (that.footer) {
                                 footer = that.footer.find(">.k-grid-footer-wrap>table");
                             }
-                            if (!footer[0]) {
+                            if (!footer || !footer[0]) {
                                 footer = $();
                             }
                             var header = th.closest("table");
