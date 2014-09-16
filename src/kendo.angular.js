@@ -749,7 +749,7 @@ var __meta__ = {
             return item[self.options.dataValueField];
         });
         self.value(val);
-        self.$angular_getLogicValue();
+        return self.$angular_getLogicValue();
     });
 
     // All event handlers that are strings are compiled the Angular way.
