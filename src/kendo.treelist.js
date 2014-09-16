@@ -26,6 +26,7 @@ var __meta__ = {
     var map = $.map;
     var grep = $.grep;
     var CHANGE = "change";
+    var ERROR = "error";
     var DOT = ".";
     var NS = ".kendoGanttList";
     var CLICK = "click";
@@ -209,14 +210,29 @@ var __meta__ = {
         },
 
         load: function(model) {
-            var method = "_query";
+            var that = this;
 
-            if (!model.loaded()) {
-                method = "read";
-            }
+            return $.Deferred(function(deferred) {
+                var method = "_query";
 
-            this.one(CHANGE, proxy(this._modelLoaded, this, model.id));
-            this[method]({ id: model.id });
+                if (!model.loaded()) {
+                    method = "read";
+                }
+
+                function success(e) {
+                    that._modelLoaded(e, model.id);
+
+                    deferred.resolve();
+                }
+
+                that.one(CHANGE, success);
+                that.one(ERROR, function() {
+                    this.unbind(CHANGE, success);
+
+                    deferred.reject();
+                });
+                that[method]({ id: model.id });
+            }).promise();
         },
 
         _byParentId: function(id) {
@@ -270,7 +286,7 @@ var __meta__ = {
             baseFilter.call(this, value);
         },
 
-        _modelLoaded: function(id, e) {
+        _modelLoaded: function(e, id) {
             var model = this.get(id);
             model.loaded(true);
             model.hasChildren = this.childNodes(model).length > 0;
@@ -377,7 +393,8 @@ var __meta__ = {
                 icon.addClass("k-loading");
             }
 
-            this.dataSource.load(model);
+            this.dataSource.load(model)
+                .always(proxy(this.refresh, this));
         },
 
         _attachEvents: function() {

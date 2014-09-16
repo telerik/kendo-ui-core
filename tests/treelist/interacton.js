@@ -62,7 +62,7 @@
         equal(instance.content.find("tr").length, 2);
     });
 
-    test("shows loading icon during remote items", function() {
+    test("shows loading icon during loading of remote data", function() {
         var calls = 0;
         var readOperation;
 
@@ -84,11 +84,37 @@
         instance.dataSource.read();
         readOperation.resolve();
 
+        // expand item
         instance.content.find(".k-i-expand").click();
         equal(instance.content.find(".k-icon.k-loading").length, 1);
 
         readOperation.resolve();
-        //equal(instance.content.find(".k-icon.k-loading").length, 0);
+        equal(instance.content.find(".k-icon.k-loading").length, 0);
+    });
+
+    test("removes collapsed icon if no data is returned", function() {
+        var called;
+
+        createTreeList({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        if (!called) {
+                            called = true;
+                            options.success([ { id: 1, hasChildren: true } ]);
+                        } else {
+                            options.success([]);
+                        }
+                    }
+                }
+            }
+        });
+
+        instance.dataSource.read();
+
+        instance.content.find(".k-i-expand").click();
+
+        equal(instance.content.find(".k-icon.k-i-collapse").length, 0);
     });
 
 })();

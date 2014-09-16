@@ -639,4 +639,112 @@
         equal(recreated, ds);
     });
 
+    test("node.loaded is false upon error", function() {
+        var called;
+
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    if (!called) {
+                        called = true;
+                        options.success([ { id: 1, hasChildren: true } ]);
+                    } else {
+                        options.error({});
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.load(ds.at(0));
+
+        ok(!ds.at(0).loaded());
+    });
+
+    test("node.loaded is not updated on successful load after error", function() {
+        var calls = 0;
+
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    calls++;
+
+                    if (calls == 1) {
+                        options.success([
+                            { id: 1, hasChildren: true },
+                            { id: 2, hasChildren: true }
+                        ]);
+                    } else if (calls == 2) {
+                        options.error({});
+                    } else {
+                        options.success([ { id: 3, parentId: 2 } ]);
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.load(ds.get(1));
+
+        ds.load(ds.get(2));
+
+        ok(!ds.get(1).loaded(), "Change handler updates wrong model");
+        ok(ds.get(2).loaded(), "Change handler did not update correct model");
+    });
+
+    test("load returns promise", function() {
+        var ds = new TreeListDataSource({
+            data: [ { id: 1 } ]
+        });
+
+        ds.read();
+
+        var result = ds.load(ds.at(0));
+        ok($.isFunction(result.then));
+    });
+
+    test("load resolves promise", 1, function() {
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { id: 1, hasChildren: true }
+                    ]);
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.load(ds.get(1)).then(function() {
+            ok(true);
+        });
+    });
+
+    test("load rejects promise upon error", 1, function() {
+        var calls = 0;
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    calls++;
+
+                    if (calls == 1) {
+                        options.success([
+                            { id: 1, hasChildren: true }
+                        ]);
+                    } else {
+                        options.error({});
+                    }
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.load(ds.get(1)).then($.noop, function() {
+            ok(true);
+        });
+    });
 })();
