@@ -788,6 +788,27 @@
         }
     }
 
+    function baseUrl() {
+        var base = document.getElementsByTagName("base")[0],
+            url = "",
+            href = document.location.href,
+            hashIndex = href.indexOf("#");
+
+        if (base && !kendo.support.browser.msie) {
+            if (hashIndex !== -1) {
+                href = href.substring(0, hashIndex);
+            }
+
+            url = href;
+        }
+
+        return url;
+    }
+
+    function refUrl(id) {
+        return "url(" + baseUrl() + "#"  + id + ")";
+    }
+
     // Exports ================================================================
     kendo.support.svg = (function() {
         return doc.implementation.hasFeature(
