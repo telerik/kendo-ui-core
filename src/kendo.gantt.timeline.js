@@ -1557,13 +1557,21 @@ var __meta__ = {
                     continue;
                 }
 
-                name = isSettings ? view.type : view;
+                name = isSettings ? ((typeof view.type !== "string") ? view.title : view.type) : view;
 
                 defaultView = defaultViews[name];
 
                 if (defaultView) {
-                    view = extend({ title: this.options.messages.views[name] }, isSettings ? view : {}, defaultView);
+                    if (isSettings) {
+                        view.type = defaultView.type;
+                    }
 
+                    defaultView.title = this.options.messages.views[name];
+                }
+
+                view = extend({ title: name }, defaultView, isSettings ? view : {});
+
+                if (name) {
                     this.views[name] = view;
 
                     if (!selected || view.selected) {

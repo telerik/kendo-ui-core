@@ -97,13 +97,27 @@
         equal(timeline.views.day.type, "kendo.ui.GanttDayView");
     });
 
-    test("invalid views are not set", function() {
-        timeline = new Timeline(element, {
-            views: ["day", "invalidView"]
+    test("error is thrown if invalid view is set", 1, function() {
+        throws(function() {
+            var gantt = new Gantt(element, {
+                views: [ "NoExistingView" ]
+            });
+        });
+    });
+
+    test("custom view is instantiated", function() {
+        var MyCustomView = kendo.ui.GanttDayView.extend({
         });
 
-        equal(timeline.views.day.title, "Day");
-        equal(timeline.views.invalidView, undefined);
+        var timeline = new Timeline(element, {
+            views: [ {
+                title: "foo",
+                type: MyCustomView
+            }]
+        });
+
+        timeline.view("foo");
+        ok(timeline.view() instanceof MyCustomView);
     });
 
     test("views with selectable false are not set", function() {
