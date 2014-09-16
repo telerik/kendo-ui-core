@@ -34,14 +34,14 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
   </head>
     <body>
-        <div id="grid" style="width: 100%" ></div>
+        <div id="grid" style="width: 800px"></div>
 
         <script>
             $(document).ready(function () {
                 $("#grid").kendoGrid({
                     dataSource: {
                         type: "odata",
-                     //   group: "foo",
+                        //group: "foo",
                         transport: {
                             read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                         },
@@ -72,13 +72,10 @@
                     columns: [
                         {
                             title: "Contact Info",
-                            locked: true,
+                           // locked: true,
                             columns: [
-                            {
-                                field: "ContactName",
-                                title: "Contact Name",
-                                width: 200
-                                }, {
+                                "ContactName"
+                                , {
                                 field: "ContactTitle",
                                 title: "Contact Title",
                                 width: 200
@@ -87,10 +84,11 @@
                             field: "CompanyName",
                             title: "Company Name",
                                 width: 200
-                        }, {
+                        }, {  title: "foo title", columns:  [
+                        {
                             field: "Country",
                             width: 150
-                        }]
+                        }] }]
 //                   columns: [
 //                   { title: "master", width: 100 },
 //                   { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",

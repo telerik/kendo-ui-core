@@ -1203,9 +1203,16 @@ var __meta__ = {
             if (!isRtl) {
                 left = th[0].offsetWidth;
 
-                th.prevAll(":visible").each(function() {
-                    left += this.offsetWidth;
-                });
+                var cells = leafDataCells(th.closest("thead"));
+                for (var idx = 0; idx < cells.length; idx++) {
+                    if (cells[idx] == th[0]) {
+                        break;
+                    }
+                    left += cells[idx].offsetWidth;
+                }
+                //th.prevAll(":visible").each(function() {
+                //    left += this.offsetWidth;
+                //});
             } else {
                 left = th.position().left;
                 if (scrollable) {
@@ -1219,7 +1226,7 @@ var __meta__ = {
             }
 
             resizeHandle.css({
-                top: scrollable ? 0 : heightAboveHeader(that.wrapper),
+                top: th.position().top,//scrollable ? 0 : heightAboveHeader(that.wrapper),
                 left: left - indicatorWidth,
                 height: th.outerHeight(),
                 width: indicatorWidth * 3
@@ -1341,8 +1348,8 @@ var __meta__ = {
                             that._hideResizeHandle();
                         }
 
-                        var index = $.inArray(th[0], th.parent().children(":visible")),
-                            header = th.closest("table");
+                        var header = th.closest("table"),
+                            index = $.inArray(th[0], leafDataCells(th.closest("thead")).filter(":visible"));
 
                         isLocked = header.parent().hasClass("k-grid-header-locked");
 
@@ -1429,7 +1436,11 @@ var __meta__ = {
                         if (columnWidth != newWidth) {
                             header = that.lockedHeader ? that.lockedHeader.find("thead:first tr:first").add(that.thead.find("tr:first")) : th.parent();
 
-                            column = that.columns[header.find("th:not(.k-group-cell):not(.k-hierarchy-cell)").index(th)];
+                            var index = th.attr(kendo.attr("index"));
+                            if (!index) {
+                                index = header.find("th:not(.k-group-cell):not(.k-hierarchy-cell)").index(th);
+                            }
+                            column = leafColumns(that.columns)[index];
 
                             column.width = newWidth;
 
