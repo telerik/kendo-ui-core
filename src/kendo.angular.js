@@ -385,7 +385,7 @@ var __meta__ = {
                                 var getter = $parse(attrs.kNgModel);
                                 var setter = getter.assign;
                                 var updating = false;
-                                setter(scope, widget.$angular_setLogicValue(getter(scope)));
+                                widget.$angular_setLogicValue(getter(scope));
 
                                 // keep in sync
                                 scope.$watch(attrs.kNgModel, function(newValue, oldValue){
@@ -401,7 +401,7 @@ var __meta__ = {
                                     if (newValue === oldValue) {
                                         return;
                                     }
-                                    setter(scope, widget.$angular_setLogicValue(newValue));
+                                    widget.$angular_setLogicValue(newValue);
                                 });
                                 widget.first("change", function(){
                                     updating = true;
@@ -719,7 +719,6 @@ var __meta__ = {
 
     defadvice("ui.Widget", "$angular_setLogicValue", function(val){
         this.self.value(val);
-        return this.self.value();
     });
 
     defadvice("ui.Select", "$angular_getLogicValue", function(){
@@ -731,7 +730,6 @@ var __meta__ = {
         var self = this.self;
         var val = orig != null ? orig[self.options.dataValueField || self.options.dataTextField] : null;
         self.value(val);
-        return self.dataItem() || orig;
     });
 
     defadvice("ui.MultiSelect", "$angular_getLogicValue", function(){
@@ -749,7 +747,36 @@ var __meta__ = {
             return item[self.options.dataValueField];
         });
         self.value(val);
-        return self.$angular_getLogicValue();
+    });
+
+    defadvice("ui.AutoComplete", "$angular_getLogicValue", function(){
+        var options = this.self.options;
+
+        var values = this.self.value().split(options.separator);
+        var data = this.self.dataSource.data();
+        var dataItems = [];
+        for (var idx = 0, length = data.length; idx < length; idx++) {
+            var item = data[idx];
+            var dataValue = options.dataTextField ? item[options.dataTextField] : item;
+            for (var j = 0; j < values.length; j++) {
+                if (dataValue === values[j]) {
+                    dataItems.push(item.toJSON());
+                    break;
+                }
+            }
+        }
+        return dataItems;
+    });
+
+    defadvice("ui.AutoComplete", "$angular_setLogicValue", function(orig){
+        if (orig == null) {
+            orig = [];
+        }
+        var self = this.self;
+        var val = $.map(orig, function(item){
+            return item[self.options.dataTextField];
+        });
+        self.value(val);
     });
 
     // All event handlers that are strings are compiled the Angular way.
