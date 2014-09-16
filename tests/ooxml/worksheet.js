@@ -274,4 +274,37 @@ test("toXML does not set the 's' attribute if style is not set", function() {
     equal(dom.find("c").attr("s"), null);
 });
 
+test("toXML creates a 'pane' element when the freezePane option is set", function() {
+    var worksheet = Worksheet({
+        freezePane: {
+            colSplit: 1
+        }
+    });
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("pane").length, 1);
+});
+
+test("toXML sets the 'xSplit' attribute when the colSplit option is set", function() {
+    var worksheet = Worksheet({
+        freezePane: {
+            colSplit: 2
+        }
+    });
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("pane").attr("xSplit"), 2);
+});
+
+test("toXML sets the 'ySplit' attribute when the rowSplit option is set", function() {
+    var worksheet = Worksheet({
+        freezePane: {
+            rowSplit: 2
+        }
+    });
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("pane").attr("ySplit"), 2);
+});
+
 }());
