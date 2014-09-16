@@ -289,8 +289,17 @@
     });
 
     var RootNode = Node.extend({
+        init: function() {
+            Node.fn.init.call(this);
+            this.defs = new DefinitionNode();
+        },
+
         attachTo: function(domElement) {
             this.element = domElement;
+        },
+
+        definitionChange: function(e) {
+            this.defs.definitionChange(e);
         },
 
         clear: BaseNode.fn.clear

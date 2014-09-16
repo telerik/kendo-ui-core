@@ -209,10 +209,27 @@
 
     // ------------------------------------------------------------
     (function() {
-        module("RootNode");
+        var rootNode;
+
+        module("RootNode", {
+            setup: function() {
+                rootNode = new svg.RootNode();
+            }
+        });
+
+        test("inits definition node", function() {
+            ok(rootNode.defs instanceof svg.DefinitionNode);
+        });
+
+        test("propagates definition change to definition node", function() {
+            var defs = rootNode.defs;
+            defs.definitionChange = function(e) {
+                equal(e, "foo");
+            };
+            rootNode.definitionChange("foo");
+        });
 
         test("attachTo directly sets element", function() {
-            var rootNode = new svg.RootNode();
             var container = document.createElement("div");
             rootNode.attachTo(container);
 
