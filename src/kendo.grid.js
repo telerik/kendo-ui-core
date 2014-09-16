@@ -5116,7 +5116,7 @@ var __meta__ = {
             if(groups > length) {
                 $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
             } else if(groups < length) {
-                container.find("tr:first").each(function(){
+                container.find("tr").each(function(){
                     $(this).find("th.k-group-cell")
                         .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
                 });
