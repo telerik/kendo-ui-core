@@ -59,9 +59,7 @@
             if (--count > 0) return;
             var pdf = new PDF();
             var page = pdf.addPage();
-            group.traverse(function(element){
-                drawElement(element, page, pdf);
-            });
+            drawElement(group, page, pdf);
             var binary = pdf.render();
             var base64 = window.btoa(binary);
             var dataurl = "data:application/pdf;base64," + base64;

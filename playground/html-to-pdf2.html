@@ -73,11 +73,17 @@
     <button onclick="draw('body')">Draw all</button>
 
     <script>
+      function translation(sel) {
+        var pos = $(sel).offset();
+        return new kendo.dataviz.geometry.Matrix(1, 0, 0, 1, -pos.left, -pos.top);
+      }
+
       function getPDF(sel) {
         html2canvas($(sel)[0], {
           //logging: true,
           async: false,
           onrendered: function(root) {
+            root.transform(translation(sel));
             kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
           }
         });
@@ -88,6 +94,7 @@
           //logging: true,
           async: false,
           onrendered: function(root) {
+            root.transform(translation(sel));
             $(".surface").remove();
             var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").insertAfter(sel);
             var surface = kendo.dataviz.drawing.Surface.create(el);
