@@ -633,12 +633,12 @@ var __meta__ = {
 
             element.options = deepExtend({}, element.options, options);
             element.id = element.options.id;
+
+            this.createVisual();
         },
 
         reflow: function(targetBox) {
             var element = this,
-                children = element.children,
-                box,
                 i,
                 currentChild;
 
@@ -735,14 +735,27 @@ var __meta__ = {
         },
 
         append: function() {
-            var element = this,
-                i,
-                length = arguments.length;
+            append(this.children, arguments);
 
-            append(element.children, arguments);
+            for (var i = 0; i < arguments.length; i++) {
+                var child = arguments[i]
 
-            for (i = 0; i < length; i++) {
-                arguments[i].parent = element;
+                child.parent = this;
+                this.appendVisual(child.visual)
+            }
+        },
+
+        createVisual: function() {
+            this.visual = new dataviz.drawing.Group();
+        },
+
+        appendVisual: function(childVisual) {
+            if (this.visual) {
+                this.visual.append(childVisual);
+            } else {
+                // Allow chart elements without visuals to
+                // pass through child visuals
+                this.parent.appendVisual(childVisual);
             }
         }
     });
