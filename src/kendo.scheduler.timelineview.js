@@ -62,6 +62,38 @@ var __meta__ = {
                 '#}#' +
                 '</div>';
 
+    function times(rowLevels, rowCount) {
+        var rows = new Array(rowCount).join().split(",");
+        var rowHeaderRows = [];
+        var rowIndex;
+
+        for (var rowLevelIndex = 0; rowLevelIndex < rowLevels.length; rowLevelIndex++) {
+            var level = rowLevels[rowLevelIndex];
+            var rowspan = rowCount / level.length;
+            var className;
+
+            for (rowIndex = 0; rowIndex < level.length; rowIndex++) {
+                className = level[rowIndex].className || "";
+
+                if (level[rowIndex].allDay) {
+                    className = "k-scheduler-times-all-day";
+                }
+
+                rows[rowspan * rowIndex] += '<th class="' + className + '" rowspan="' + rowspan + '">' + level[rowIndex].text + "</th>";
+            }
+        }
+
+        for (rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            rowHeaderRows.push(rows[rowIndex]);
+        }
+
+        if (rowCount < 1) {
+            return $();
+        }
+
+        return $('<div class="k-scheduler-times">' + table(rowHeaderRows) + '</div>');
+    }
+
     function toInvariantTime(date) {
         var staticDate = new Date(1980, 1, 1, 0, 0, 0);
         setTime(staticDate, getMilliseconds(date));
@@ -75,12 +107,6 @@ var __meta__ = {
     function isInTimeRange(value, min, max, overlaps) {
         overlaps = overlaps ? value <= max : value < max;
         return value > min && overlaps;
-    }
-
-    function toInvariantTime(date) {
-        var staticDate = new Date(1980, 1, 1, 0, 0, 0);
-        setTime(staticDate, getMilliseconds(date));
-        return staticDate;
     }
 
     var TimelineView = SchedulerView.extend({
@@ -341,10 +367,11 @@ var __meta__ = {
 
             var resources = this.groupedResources;
 
-            if (resources.length && this._groupOrientation() === "vertical") {
+            if (resources.length && this._isGrouped()) {
+                //horizontal grouping is not supported
+                //is correct to always render vertical grouping?
                 rows = this._createRowsLayout(resources, null);
             } else {
-                //horizontal grouping is not supported
                 rows = [{
                     //add template here
                     text: "All events"
@@ -600,65 +627,221 @@ var __meta__ = {
        
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
-                var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
-                var container = this.content;
 
-                if (this._isInTimeSlot(event) || event.isAllDay) {
-                    group = this.groups[groupIndex];
+                if (this._isInDateSlot(event)) {
+                    var isMultiDayEvent = event.isAllDay || event.end.getTime() - event.start.getTime() >= MS_PER_DAY;
+                    var container = this.content;
 
-                    if (!group._continuousEvents) {
-                        group._continuousEvents = [];
-                    }
+                    //timeslot means viewStartTime & view.endTime
+                    if (isMultiDayEvent || this._isInTimeSlot(event)) {
+                        console.log("event for rendering");
+                        console.log(event);
+                        group = this.groups[groupIndex];
 
-                    if (isMultiDayEvent) {
-                        ranges = group.customSlotRanges(event);
-                    } else {
-                        ranges = group.slotRanges(event);
-                    }
+                        if (!group._continuousEvents) {
+                            group._continuousEvents = [];
+                        }
 
-                    console.log(ranges);
-                    var rangeCount = ranges.length;
-
-                    for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++) {
-                        var range = ranges[rangeIndex];
                         var start = event.start;
                         var end = event.end;
+                        var occurrence;
 
-                        if (rangeCount > 1) {
-                            if (rangeIndex === 0) {
-                                end = range.end.endDate();
-                            } else if (rangeIndex == rangeCount - 1) {
-                                start = range.start.startDate();
+                        //detect and fix events that end at slot hole
+                        //experiment:
+                        var startTime = getMilliseconds(this.startTime());
+                        var endTime = getMilliseconds(this.endTime());
+                        //endTime = endTime != 0 ? endTime : MS_PER_DAY;
+                        var eventStartTime = event._time("start");
+                        var eventEndTime = event._time("end");
+                        var tail = false;
+                        var head = false;
+
+
+                        //case1: starts before viewStart, ends after viewEnd
+                        //case: starts before viewStart and ends before view start
+                        if (event.isAllDay) {
+                            var startDate = getDate(start);
+                            if (startTime > eventStartTime) {
+                                setTime(startDate, startTime);
+                                tail = true;
+                            }
+
+                            var endDate = getDate(end);
+
+                            if (endTime === getMilliseconds(getDate(this.endTime()))) {
+                                endDate = kendo.date.addDays(endDate, 1);
                             } else {
-                                start = range.start.startDate();
-                                end = range.end.endDate();
+                                setTime(endDate, endTime);
+                                head = true;
+                            }
+
+                            occurrence = event.clone({
+                                start: startDate,
+                                end: endDate,
+                                startTime: event.startTime,
+                                endTime: event.endTime,
+                                isAllDay: false
+                            });
+
+                        } else {
+                            var startDate;
+                            var endDate;
+
+                            //startTime = 0 is marking only start of event range
+
+                            if (startTime > eventStartTime) {
+                                startDate = getDate(start);
+                                setTime(startDate, startTime);
+                                tail = true;
+                                console.log("adjust startTime " + event.uid);
+                            } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventStartTime) {
+                                startDate = getDate(start);
+                                //in case the date should be moved to next date
+                                kendo.date.addDays(startDate,1);
+
+                                setTime(startDate, startTime);
+                                tail = true;
+                                console.log("adjust startTime " + event.uid);
+                            }
+
+                            if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventEndTime) {
+                                endDate = getDate(end);
+                                //endDate = getDate(endDate);
+                                setTime(endDate, endTime);
+                                head = true;
+                                console.log("adjust endTime");
+                            } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < startTime) {
+                                endDate = getDate(end);
+                                kendo.date.addDays(endDate,-1);
+                                //endDate = getDate(endDate);
+                                setTime(endDate, endTime);
+                                head = true;
+                                console.log("adjust endTime");
+                            }
+
+                            occurrence = event.clone({
+                                start: startDate ? startDate : start,
+                                end: endDate ? endDate : end,
+                                startTime: event.startTime,
+                                endTime: event.endTime
+                            });
+                        }
+
+                        //if (endTime != 0 && endTime < eventEndTime || startTime > eventEndTime  ) {
+                        //    var endDate = getDate(occurrence.end);
+                        //    if (event.isAllDay) {
+
+                        //    } else {
+                        //        setTime(endDate, endTime);
+                        //    }
+
+
+                        //    occurrence.end = endDate;
+                        //    head = true;
+                        //    console.log("end time adjust");
+                        //}
+
+                        //if (isMultiDayEvent) {
+                        //    ranges = group.customSlotRanges(occurrence);
+                        //} else {
+                        ranges = group.slotRanges(occurrence, false);
+                        //}
+
+                        var rangeCount = ranges.length;
+
+                        for (var rangeIndex = 0; rangeIndex < rangeCount; rangeIndex++) {
+                            var range = ranges[rangeIndex];
+
+                            //if (rangeCount > 1) {
+                            //    if (rangeIndex === 0) {
+                            //        end = range.end.endDate();
+                            //    } else if (rangeIndex == rangeCount - 1) {
+                            //        start = range.start.startDate();
+                            //    } else {
+                            //        start = range.start.startDate();
+                            //        end = range.end.endDate();
+                            //    }
+                            //}
+                            if (this._isInTimeSlot(occurrence)) {//} || event.isAllDay) {
+                                console.log("second check passed");
+
+                                element = this._createEventElement(occurrence, event, true, range.head || head, range.tail || tail);
+                                element.appendTo(container);
+                                this._positionEvent(occurrence, element, range);
+
+                                //?add support
+                                //addContinuousEvent(group, range, element, false);
                             }
                         }
-
-                        var occurrence;
-                        if (event.isAllDay) {
-                            debugger;
-                            occurrence = event.clone({ start: getDate(start), end: new Date(getDate(event.end).getTime() + MS_PER_DAY - 1), startTime: event.startTime, endTime: event.endTime });
-                        } else {
-                            occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
-                        }
-
-                        if (this._isInTimeSlot(occurrence) || event.isAllDay) {
-                            element = this._createEventElement(event, true, range.head, range.tail);
-                            element.appendTo(container);
-                            this._positionEvent(occurrence, element, range);
-
-                            //?add support
-                            //addContinuousEvent(group, range, element, false);
-                        }
                     }
+
                 }
+
             }
         },
 
+        _isInDateSlot: function(event) {
+            var groups = this.groups[0];
+            var slotStart = groups.firstSlot().start;
+            var slotEnd = groups.lastSlot().end - 1;
+
+            var startTime = kendo.date.toUtcTime(event.start);
+            var endTime = kendo.date.toUtcTime(kendo.date.addDays(event.end,1));
+
+            return (isInDateRange(startTime, slotStart, slotEnd) ||
+                isInDateRange(endTime, slotStart, slotEnd) ||
+                isInDateRange(slotStart, startTime, endTime) ||
+                isInDateRange(slotEnd, startTime, endTime)) &&
+                (!isInDateRange(endTime, slotStart, slotStart) || isInDateRange(endTime, startTime, startTime)|| event.isAllDay);
+        },
+
         _isInTimeSlot: function(event) {
-            //todo
+            //experiment start
+            var dates = this._dates;
             var slotStartTime = this.startTime(),
+                slotEndTime = this.endTime(),
+                startTime = event.startTime || event.start,
+                endTime = event.endTime || event.end;
+
+            //za kakvo se otnasq endTime ? A) krai ili B) na4alo
+            if (getMilliseconds(slotEndTime) === getMilliseconds(kendo.date.getDate(slotEndTime))) {
+                slotEndTime = kendo.date.getDate(slotEndTime);
+                setTime(slotEndTime, MS_PER_DAY - 1);
+            }
+
+            slotEndTime = getMilliseconds(slotEndTime);
+            slotStartTime = getMilliseconds(slotStartTime);
+
+            var slotRanges = [];
+            for (i = 0; i < dates.length; i++) {
+                var rangeStart = getDate(dates[i]);
+                setTime(rangeStart, slotStartTime);
+
+                var rangeEnd = getDate(dates[i]);
+                setTime(rangeEnd, slotEndTime);
+
+                slotRanges.push({
+                    //make sure the date
+                    start: rangeStart,
+                    end: rangeEnd
+                });
+            }
+
+            var hiddenZoneLength = slotStartTime + (MS_PER_DAY - slotEndTime);
+            var eventLength = (endTime - event._date("end")) - (startTime - event._date("start"));
+
+            var overlaps = startTime !== slotEndTime;
+            for (var slotIndex = 0; slotIndex < slotRanges.length; slotIndex++) {
+                //x1 <= y2 && y1 <= x2
+                //needs additional check only for exceptions
+                if (+startTime <= +slotRanges[slotIndex].end && +slotRanges[slotIndex].start <= +endTime) {
+                    return true;
+                }
+            }
+            return false;
+            //experiment end
+
+            /*var slotStartTime = this.startTime(),
                 slotEndTime = this.endTime(),
                 startTime = event.startTime || event.start,
                 endTime = event.endTime || event.end;
@@ -669,29 +852,39 @@ var __meta__ = {
             }
 
             if (event._date("end") > event._date("start")) {
-               endTime = +event._date("end") + (MS_PER_DAY - 1);
+                endTime = +event._date("end") + (MS_PER_DAY - 1);
             }
 
             endTime = endTime - event._date("end");
+
             startTime = startTime - event._date("start");
             slotEndTime = getMilliseconds(slotEndTime);
             slotStartTime = getMilliseconds(slotStartTime);
 
-            if(slotStartTime === startTime && startTime === endTime) {
+            if (slotStartTime === startTime && startTime === endTime) {
                 return true;
             }
 
             var overlaps = startTime !== slotEndTime;
 
+            var hiddenZoneLength = slotStartTime + (MS_PER_DAY - slotEndTime);
+            var eventLength = endTime >= startTime ? endTime - startTime : (MS_PER_DAY - startTime) + endTime;
+
             return isInTimeRange(startTime, slotStartTime, slotEndTime, overlaps) ||
-                isInTimeRange(endTime, slotStartTime, slotEndTime, overlaps) ||
-                isInTimeRange(slotStartTime, startTime, endTime) ||
-                isInTimeRange(slotEndTime, startTime, endTime);
+            isInTimeRange(endTime, slotStartTime, slotEndTime, overlaps) ||
+            isInTimeRange(slotStartTime, startTime, endTime) ||
+            isInTimeRange(slotEndTime, startTime, endTime) ||
+            (eventLength > hiddenZoneLength &&
+                (!isInTimeRange(startTime, slotStartTime, slotEndTime) ||
+                !isInTimeRange(endTime, slotStartTime, slotEndTime))) ; */ //||
+            //((isInTimeRange(endTime, slotStartTime, MS_PER_DAY) ||
+            //    isInTimeRange(startTime, 0, slotEndTime)) && event._date("end") > event._date("start"));
         },
 
-        _createEventElement: function(event, isOneDayEvent, head, tail) {
+        _createEventElement: function(occurrence, event, isOneDayEvent, head, tail) {
             //todo
-            var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
+            //var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
+            var template = this.eventTemplate;
             var options = this.options;
             var editable = options.editable;
             var isMobile = this._isMobile();
@@ -709,9 +902,10 @@ var __meta__ = {
                 endTime = getMilliseconds(new Date(this.endTime().getTime() + MS_PER_DAY - 1));
             }
 
-            if (!isOneDayEvent && !event.isAllDay) {
-                endDate = new Date(endDate.getTime() + MS_PER_DAY);
-            }
+            ////fake end time
+            //if (!isOneDayEvent && !event.isAllDay) {
+            //    endDate = new Date(endDate.getTime() + MS_PER_DAY - 1);
+            //}
 
             var eventStartDate = event.start;
             var eventEndDate = event.end;
@@ -725,6 +919,17 @@ var __meta__ = {
             } else if ((eventEndDate > endDate && !isOneDayEvent) || (isOneDayEvent && eventEndTime > endTime)) {
                 head = true;
             }
+
+            //include in the above if statement ?
+            //console.log(startTime);
+            //console.log(eventStartTime);
+            //if (startTime > eventStartTime) {
+            //    tail = true;
+            //}
+//
+            //if (endTime < eventEndTime) {
+            //    head = true;
+            //}
 
             var resources = this.eventResources(event);
             
@@ -782,12 +987,13 @@ var __meta__ = {
 
             var start = event.startTime || event.start;
             var end = event.endTime || event.end;
-            var rect = slotRange.innerRect(start, end, false);
+
+            var rect = slotRange.outerRect(start, end, false);
             rect.top = slotRange.start.offsetTop;
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
             var width = rect.right - rect.left -2;
-
+            console.log(width);
             if (width < 0) {
                 width = 0;
             }
@@ -807,6 +1013,7 @@ var __meta__ = {
 
             slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
+            //allday events only ?
             allDayEvents.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
             var rows = SchedulerView.createRows(allDayEvents);
@@ -819,9 +1026,11 @@ var __meta__ = {
 
             for (var idx = 0, length = rows.length; idx < length; idx++) {
                 var rowEvents = rows[idx].events;
+                var date = new Date();
 
                 for (var j = 0, eventLength = rowEvents.length; j < eventLength; j++) {
                     $(rowEvents[j].element).css({
+                        //need update
                         top: top + idx * eventHeight
                     });
                 }

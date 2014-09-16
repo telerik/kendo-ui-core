@@ -393,22 +393,6 @@ var __meta__ = {
             return this.timeSlotRanges(startTime, endTime);
         },
 
-        //need update - naming?
-        customSlotRanges: function (event, isDay) {
-            var startTime = event.startTime || kendo.date.toUtcTime(event.start);
-            var endTime = event.endTime || kendo.date.toUtcTime(event.end);
-
-            if (isDay === undefined) {
-                isDay = event.isAllDay;
-            }
-            //debugger;
-            if (isDay) {
-                endTime = startTime + kendo.date.MS_PER_DAY;
-            }
-
-            return this.timeSlotRanges(startTime, endTime);
-        },
-
         ranges: function(startTime, endTime, isDay, isAllDay) {
             if (typeof startTime != "number") {
                 startTime = kendo.date.toUtcTime(startTime);
@@ -722,15 +706,19 @@ var __meta__ = {
 
                 bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
 
-                //need update:
-                left = startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration;
-                right = endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration;
+                //update? Custom prop needed for timeline
+                //right need to be calculated by getting the last possible slot.
+                // This most probably can be achieved by having more than one slotCollection for each row or improving this calculation
+                // to support time 'holes'
+                left = Math.round(startSlot.offsetLeft + startSlot[property + "Width"] * startOffset / startSlotDuration);
+                right = Math.round(endSlot.offsetLeft + endSlot[property + "Width"] - endSlot[property + "Width"] * endOffset / endSlotDuration);
             }
 
             return {
                 top: top,
                 bottom: bottom,
-                left: left,
+                //fix for first column has no left border
+                left: left === 0 ? left : left + 1,
                 right: right
             };
         },
