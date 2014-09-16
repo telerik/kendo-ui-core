@@ -62,6 +62,10 @@
         equal(instance.content.find("tr").length, 2);
     });
 
+    function loadingIcons() {
+        return instance.content.find(".k-loading");
+    }
+
     test("shows loading icon during loading of remote data", function() {
         var calls = 0;
         var readOperation;
@@ -86,10 +90,10 @@
 
         // expand item
         instance.content.find(".k-i-expand").click();
-        equal(instance.content.find(".k-icon.k-loading").length, 1);
+        equal(loadingIcons().length, 1, "loading icon not shown upon expanding");
 
         readOperation.resolve();
-        equal(instance.content.find(".k-icon.k-loading").length, 0);
+        equal(loadingIcons().length, 0, "icon is not hidden after operation finishes");
     });
 
     test("removes collapsed icon if no data is returned", function() {
@@ -116,5 +120,45 @@
 
         equal(instance.content.find(".k-icon.k-i-collapse").length, 0);
     });
+
+//    test("loading removes loading icons when operation completes", function() {
+//        var calls = 0;
+//        var readQueue = [];
+//
+//        createTreeList({
+//            dataSource: {
+//                transport: {
+//                    read: function(options) {
+//                        // use promise to control when the transport finishes reading
+//                        var deferred = $.Deferred();
+//                        deferred.then(function() {
+//                            options.success([
+//                                { id: ++calls, hasChildren: true },
+//                                { id: ++calls, hasChildren: true }
+//                            ]);
+//                        });
+//
+//                        readQueue.push(deferred);
+//                    }
+//                }
+//            }
+//        });
+//
+//        var ds = instance.dataSource;
+//
+//        // initial load
+//        ds.read();
+//        readQueue.shift().resolve();
+//
+//        // expand items
+//        instance.content.find(".k-i-expand").click();
+//        equal(loadingIcons().length, 2);
+//
+//        readQueue.shift().resolve();
+//        equal(loadingIcons().length, 1);
+//
+//        readQueue.shift().resolve();
+//        equal(loadingIcons().length, 0);
+//    });
 
 })();

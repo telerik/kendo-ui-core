@@ -323,7 +323,7 @@ var __meta__ = {
             this._layout();
             this._domTrees();
             this._header();
-            //this._sortable();
+            this._sortable();
             //this._selectable();
             this._attachEvents();
 
@@ -363,19 +363,17 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
 
-            return;
+            //this.dataSource.unbind(CHANGE, this._refreshHandler);
 
-            this.dataSource.unbind(CHANGE, this._refreshHandler);
+            //if (this.touch) {
+            //    this.touch.destroy();
+            //}
 
-            if (this.touch) {
-                this.touch.destroy();
-            }
+            //this.content.off(NS);
+            //this.header = null;
+            //this.content = null;
 
-            this.content.off(NS);
-            this.header = null;
-            this.content = null;
-
-            kendo.destroy(this.element);
+            //kendo.destroy(this.element);
         },
 
         options: {
@@ -389,12 +387,10 @@ var __meta__ = {
 
             model.set("expanded", !model.get("expanded"));
 
-            if (!model.loaded()) {
-                icon.addClass("k-loading");
-            }
-
             this.dataSource.load(model)
                 .always(proxy(this.refresh, this));
+
+            this.refresh();
         },
 
         _attachEvents: function() {
@@ -624,6 +620,10 @@ var __meta__ = {
                     iconClass.push(model.expanded ? classNames.iconCollapse : classNames.iconExpand);
                 } else {
                     iconClass.push(classNames.iconHidden);
+                }
+
+                if (!model.loaded() && model.expanded) {
+                    iconClass.push("k-loading");
                 }
 
                 children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
