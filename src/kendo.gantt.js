@@ -142,17 +142,6 @@ var __meta__ = {
         }
     };
 
-    var defaultCommands = {
-        canceledit: {
-            text: "Cancel",
-            className: ganttStyles.buttonCancel
-        },
-        destroy: {
-            text: "Delete",
-            className: ganttStyles.primary + " " + ganttStyles.buttonDelete
-        }
-    };
-
     function selector(uid) {
         return "[" + kendo.attr("uid") + (uid ? "='" + uid + "']" : "]");
     }
@@ -934,7 +923,7 @@ var __meta__ = {
             var template = this.options.editable.template;
             var settings = extend({}, kendo.Template, this.options.templateSettings);
             var paramName = settings.paramName;
-            var popupStyles = ganttStyles.popup;
+            var popupStyles = Gantt.styles.popup;
             var html = "";
 
             if (template) {
@@ -1010,7 +999,7 @@ var __meta__ = {
 
         showDialog: function(options) {
             var buttons = options.buttons;
-            var popupStyles = ganttStyles.popup;
+            var popupStyles = Gantt.styles.popup;
 
             var html = kendo.format('<div class="{0}"><div class="{1}"><p class="{2}">{3}</p><div class="{4}">',
                 popupStyles.form, popupStyles.formContainer, popupStyles.message, options.text, popupStyles.buttonsContainer);
@@ -1058,7 +1047,7 @@ var __meta__ = {
             var that = this;
             var options = {};
             var messages = this.options.messages;
-            var popupStyles = ganttStyles.popup;
+            var popupStyles = Gantt.styles.popup;
             var html = kendo.format('<div {0}="{1}" class="{2} {3}"><div class="{4}">', 
                 kendo.attr("uid"), task.uid, popupStyles.form, popupStyles.editForm, popupStyles.formContainer);
             
@@ -2408,6 +2397,17 @@ var __meta__ = {
     kendo.ui.plugin(Gantt);
 
     extend(true, Gantt, { styles: ganttStyles });
+
+    var defaultCommands = {
+        canceledit: {
+            text: "Cancel",
+            className: Gantt.styles.buttonCancel
+        },
+        destroy: {
+            text: "Delete",
+            className: Gantt.styles.primary + " " + Gantt.styles.buttonDelete
+        }
+    };
 
 })(window.kendo.jQuery);
 
