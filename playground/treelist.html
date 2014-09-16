@@ -63,9 +63,9 @@
 
             $("#list").kendoTreeList({
                 dataSource: listDS,
-                selectable: true,
+                //selectable: true,
                 columns: [
-                    { field: "FirstName", title: "First Name", sortable: true },
+                    { field: "FirstName", title: "First Name", sortable: true, template: "Template #:FirstName#" },
                     { field: "LastName", title: "Last Name", sortable: true }
                 ]
             });

@@ -24,6 +24,7 @@ var __meta__ = {
     var Model = data.Model;
     var proxy = $.proxy;
     var map = $.map;
+    var grep = $.grep;
     var CHANGE = "change";
     var DOT = ".";
     var NS = ".kendoGanttList";
@@ -397,12 +398,26 @@ var __meta__ = {
                 return (typeof column === "string") ? { field: column } : column;
             });
 
-            var expandableColumns = $.grep(this.columns, function(c) {
+            var expandableColumns = grep(this.columns, function(c) {
                 return c.expandable;
             });
 
             if (this.columns.length && !expandableColumns.length) {
                 this.columns[0].expandable = true;
+            }
+
+            this._columnTemplate();
+        },
+
+        _columnTemplate: function() {
+            var idx, length, column;
+            var columns = this.columns;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                column = columns[idx];
+                if (column.template) {
+                    column.template = kendo.template(column.template);
+                }
             }
         },
 
@@ -575,8 +590,14 @@ var __meta__ = {
             var model = options.model;
             var column = options.column;
             var value = model.get(column.field);
-            var formatedValue = column.format ? kendo.format(column.format, value) : value;
+            var formatedValue;
             var iconClass;
+
+            if (column.template) {
+                formatedValue = column.template(model);
+            } else {
+                formatedValue = column.format ? kendo.format(column.format, value) : value;
+            }
 
             if (column.expandable) {
                 children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
@@ -591,7 +612,8 @@ var __meta__ = {
                 children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
             }
 
-            children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
+            //children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
+            children.push(kendoTextElement(formatedValue));
 
             return kendoDomElement("td", { "role": "gridcell" }, children);
         },

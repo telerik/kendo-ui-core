@@ -140,4 +140,40 @@
         equal(instance.content.find(".k-icon.k-i-expand").length, 0);
     });
 
+    test("column template as string", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", template: "Template #=id#" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "Template 1");
+    });
+
+    test("column template as function", function() {
+        var templateFunction = function(data) {
+            return "Template " + data.id;
+        };
+
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", template: templateFunction },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "Template 1");
+    });
+
 })();
