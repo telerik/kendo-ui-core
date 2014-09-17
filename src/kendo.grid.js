@@ -493,10 +493,55 @@ var __meta__ = {
         }
     }
 
+    function normalizeColumns(columns, encoded, hide) {
+        return map(columns, function(column) {
+            column = typeof column === STRING ? { field: column } : column;
+
+            var hidden;
+
+            if (!isVisible(column) || hide) {
+                column.attributes = addHiddenStyle(column.attributes);
+                column.footerAttributes = addHiddenStyle(column.footerAttributes);
+                column.headerAttributes = addHiddenStyle(column.headerAttributes);
+                hidden = true;
+            }
+
+            if (column.columns) {
+                column.columns = normalizeColumns(column.columns, encoded, hidden);
+            }
+
+            return extend({ encoded: encoded, hidden: hidden }, column);
+        });
+    };
+
+    function isVisible(column) {
+        return visibleColumns([column]).length > 0;
+    }
+
     function visibleColumns(columns) {
         return grep(columns, function(column) {
-            return !column.hidden;
+            var result = !column.hidden;
+            if (result && column.columns) {
+                result = visibleColumns(column.columns).length > 0;
+            }
+            return result;
         });
+    }
+
+    function hiddenLeafColumnsCount(columns) {
+        var counter = 0;
+        var column;
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            column = columns[idx];
+
+            if (column.columns) {
+                counter += hiddenLeafColumnsCount(column.columns);
+            } else if (column.hidden) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     function columnsWidth(cols) {
@@ -510,6 +555,22 @@ var __meta__ = {
         }
 
         return width;
+    }
+
+    function updateRowSpan(container) {
+        var rows = container.find("tr:not(.k-filter-row)")
+
+        var emptyRowsCount = rows.filter(function() {
+            return !$(this).children(":visible").length;
+        }).length;
+
+        var cells = rows.find("th:not(.k-group-cell,.k-hierarchy-cell)");
+
+        for (var idx = 0; idx < cells.length; idx++) {
+            if (cells[idx].rowSpan > 1) {
+                cells[idx].rowSpan -= emptyRowsCount;
+            }
+        }
     }
 
     function removeEmptyRows(container) {
@@ -557,13 +618,13 @@ var __meta__ = {
 
     function visibleNonLockedColumns(columns) {
         return grep(columns, function(column) {
-            return !column.locked && !column.hidden;
+            return !column.locked && isVisible(column);
         });
     }
 
     function visibleLockedColumns(columns) {
         return grep(columns, function(column) {
-            return column.locked && !column.hidden;
+            return column.locked && isVisible(column);
         });
     }
 
@@ -4066,16 +4127,7 @@ var __meta__ = {
                 columns = lockedCols.concat(columns);
             }
 
-            that.columns = map(columns, function(column) {
-                column = typeof column === STRING ? { field: column } : column;
-                if (column.hidden) {
-                    column.attributes = addHiddenStyle(column.attributes);
-                    column.footerAttributes = addHiddenStyle(column.footerAttributes);
-                    column.headerAttributes = addHiddenStyle(column.headerAttributes);
-                }
-
-                return extend({ encoded: encoded }, column);
-            });
+            that.columns = normalizeColumns(columns, encoded);
         },
 
         _groups: function() {
@@ -4544,8 +4596,14 @@ var __meta__ = {
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
 
-                    if (!columns[idx].hidden) {
-                        colSpan = leafColumns(columns[idx].columns || []).length || 1;
+                    if (isVisible(columns[idx])) {
+                        var colSpan = 1;
+
+                        if (columns[idx].columns) {
+                            colSpan = leafColumns(columns[idx].columns).length - hiddenLeafColumnsCount(columns[idx].columns);
+                        }
+
+                        colSpan = colSpan || 1;
                         for (spanIdx = 0; spanIdx < colSpan; spanIdx++) {
                             lockedCols = lockedCols.add(cols.eq(idx + colOffset + spanIdx - skipHiddenCount));
                         }
@@ -4665,8 +4723,14 @@ var __meta__ = {
                 if (columns[idx].locked) {
                     var cell = header.eq(idx);
 
-                    if (!columns[idx].hidden) {
-                        var colSpan = (cell[0].colSpan || 1);
+                    if (isVisible(columns[idx])) {
+                        var colSpan = 1;
+
+                        if (columns[idx].columns) {
+                            colSpan = leafColumns(columns[idx].columns).length - hiddenLeafColumnsCount(columns[idx].columns);
+                        }
+
+                        colSpan = colSpan || 1;
                         for (var spanIdx = 0; spanIdx < colSpan; spanIdx++) {
                             cols = cols.add(colgroup.eq(idx + colOffset + spanIdx - skipHiddenCount));
                         }
@@ -4677,7 +4741,12 @@ var __meta__ = {
 
                     filterCells = filterCells.add(filtercellCells.eq(idx));
                 }
-                if (columns[idx].hidden) {
+
+                if (columns[idx].columns) {
+                    skipHiddenCount += hiddenLeafColumnsCount(columns[idx].columns);
+                }
+
+                if (!isVisible(columns[idx])) {
                     skipHiddenCount++;
                 }
             }
@@ -4809,7 +4878,7 @@ var __meta__ = {
             this.angular("compile", function(){
                 return {
                     elements: thead.find("th").get(),
-                    data: map(columns, function(col){ return { column: col }; })
+                    data: map(columns, function(col) { return { column: col }; })
                 };
             });
 
@@ -5111,12 +5180,15 @@ var __meta__ = {
             var that = this,
                 container = that._isLocked() ? that.lockedHeader : that.thead,
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
-                length = container.find("tr:first").find("th.k-group-cell").length;
+                length = container.find("tr:first").find("th.k-group-cell").length,
+                rows = container.find("tr").filter(function() {
+                    return $(this).children(":visible").length
+                });
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(rows);
             } else if(groups < length) {
-                container.find("tr").each(function(){
+                container.find("tr").each(function() {
                     $(this).find("th.k-group-cell")
                         .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
                 });

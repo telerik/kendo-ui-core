@@ -70,25 +70,28 @@
                     scrollable: true,
                     groupable: true,
                     columns: [
-                        {
-                            title: "Contact Info",
-                           // locked: true,
-                            columns: [
-                                "ContactName"
-                                , {
+                    {
+                        title: "Contact Info",
+                        hidden: true,
+                      //  locked: true,
+                        columns: [
+                            { field: "ContactName", hidden: false, width: 100 },
+                            {
+                                hidden: false,
                                 field: "ContactTitle",
                                 title: "Contact Title",
                                 width: 200
                             }]
                         }, {
-                            field: "CompanyName",
-                            title: "Company Name",
-                                width: 200
+                        field: "CompanyName",
+                        title: "Company Name",
+                        width: 200
                         }, {  title: "foo title", columns:  [
                         {
                             field: "Country",
+hidden: false,
                             width: 150
-                        }] }]
+                    }] }]
 //                   columns: [
 //                   { title: "master", width: 100 },
 //                   { title: "master1", width: 200, locked: true,  field: "foo", groupFooterTemplate: "baz",
