@@ -2639,21 +2639,21 @@
                 this._selectedItems = [];
                 this.connections = [];
                 this._dataMap = {};
+                this._connectionsDataMap = {};
                 this.undoRedoService = new UndoRedoService();
                 this.id = diagram.randomId();
             },
 
             _fetchFreshData: function () {
                 this._dataSource();
-                if (this.options.autoBind) {
-                    this.dataSource.fetch();
-                }
 
                 this._connectionDataSource();
                 if (this.options.autoBind) {
+                    this.dataSource.fetch();
                     this.connectionsDataSource.fetch();
                 }
             },
+
             _dataSource: function() {
                 var dsOptions = this.options.dataSource || {};
                 var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
@@ -2670,13 +2670,8 @@
                 this.dataSource = kendo.data.DiagramDataSource.create(ds)
                     .bind("change", this._shapesRefreshHandler)
                     .bind("error", this._shapesErrorHandler);
-
-                if (this.dataSource) {
-                    if (this.options.autoBind) {
-                        this.dataSource.fetch();
-                    }
-                }
             },
+
             _connectionDataSource: function() {
                 var dsOptions = this.options.connectionsDataSource || {};
                 var ds = isArray(dsOptions) ? { data: dsOptions } : dsOptions;
@@ -2693,12 +2688,6 @@
                 this.connectionsDataSource = kendo.data.DiagramConnectionDataSource.create(ds)
                     .bind("change", this._connectionsRefreshHandler)
                     .bind("error", this._connectionsErrorHandler);
-
-                if (this.connectionsDataSource) {
-                    if (this.options.autoBind) {
-                        this.connectionsDataSource.fetch();
-                    }
-                }
             },
 
             _refreshShapes: function(e) {
@@ -2711,6 +2700,9 @@
                 } else {
                     this.clear();
                     this._addShapes(e.sender.view());
+                    if (this.connectionsDataSource) {
+                        this._addConnections(this.connectionsDataSource.view());
+                    }
                 }
 
                 if (this.options.layout) {
@@ -2748,6 +2740,8 @@
             _refreshConnections: function(e) {
                 if (e.action === "remove") {
                     // remove connections
+                } else if (e.action === "itemchange") {
+                    // update connections
                 } else {
                     this._addConnections(e.sender.view());
                 }
@@ -2759,13 +2753,26 @@
 
                 for (var i = 0; i < length; i++) {
                     var conn = connections[i];
-                    var from = this._dataMap[conn.from];
-                    var to = this._dataMap[conn.to];
 
-                    if (from && to) {
-                        this.connect(from, to, deepExtend({}, defaults, conn));
+                    if (!this._connectionsDataMap[conn.from + "-" + conn.to]) {
+                        var from = this._validateConnector(conn.from);
+                        var to = this._validateConnector(conn.to);
+
+                        if (from && to) {
+                            this._connectionsDataMap[conn.from + "-" + conn.to] = this.connect(from, to, deepExtend({}, defaults, conn));
+                        }
                     }
                 }
+            },
+
+            _validateConnector: function(value) {
+                var connector = value;
+
+                if (isNumber(value)) {
+                    connector = this._dataMap[value];
+                }
+
+                return connector;
             },
 
             //_dataSource: function () {
@@ -2931,6 +2938,10 @@
             };
 
             return result;
+        }
+
+        function isNumber(val) {
+            return typeof val === "number" && !isNaN(val);
         }
 
         dataviz.ui.plugin(Diagram);
