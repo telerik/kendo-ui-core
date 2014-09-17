@@ -449,6 +449,61 @@
         ok(params.indexOf('FROM (SELECT (Filter([foo].Children, NOT [foo].CurrentMember.MEMBER_CAPTION = "zoo")) ON 0 FROM ( SELECT (Filter([foo].Children, [foo].CurrentMember.MEMBER_CAPTION = "boo")) ON 0 FROM [cubeName] ))') > -1);
     });
 
+    test("parameterMap sort is generated", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }],
+            measures: ["[bar]", "[baz]"],
+            sort: [{ field: "[foo]", dir: "asc" }]
+        }, "read");
+
+        ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,asc)},{{[bar],[baz]}})') > -1);
+    });
+
+    test("parameterMap sort is missed if column is not expanded", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: false }],
+            measures: ["[bar]", "[baz]"],
+            sort: [{ field: "[foo]", dir: "asc" }]
+        }, "read");
+
+        ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,asc)},{{[bar],[baz]}})') === -1);
+    });
+
+    test("parameterMap does not generate multiple sort expression for one member", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }],
+            measures: ["[bar]", "[baz]"],
+            sort: [{ field: "[foo]", dir: "asc" }, { field: "[foo]", dir: "desc" }]
+        }, "read");
+
+        ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,asc)},{{[bar],[baz]}})') > -1);
+        ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,desc)},{{[bar],[baz]}})') === -1);
+    });
+
+    test("parameterMap generates sort expression for two members", function() {
+        var transport = new kendo.data.XmlaTransport({ });
+
+        var params = transport.parameterMap({
+            connection: { catalog: "catalogName", cube: "cubeName" },
+            columns: [{ name: "[foo]", expand: true }],
+            rows: [{ name: "[qux]", expand: true }],
+            measures: ["[bar]", "[baz]"],
+            sort: [{ field: "[foo]", dir: "asc" }, { field: "[qux]", dir: "desc" }]
+        }, "read");
+
+        ok(params.indexOf('CROSSJOIN({ORDER([foo].Children,[foo].CurrentMember.MEMBER_CAPTION,asc)},{{[bar],[baz]}})') > -1);
+        ok(params.indexOf('NON EMPTY {[qux],ORDER([qux].Children,[qux].CurrentMember.MEMBER_CAPTION,desc)}') > -1);
+    });
+
     test("parameterMap create empty discover statment wrap", function() {
         var transport = new kendo.data.XmlaTransport({ });
        var params = transport.parameterMap({ connection: { catalog: "catalogName" } }, "discover");
