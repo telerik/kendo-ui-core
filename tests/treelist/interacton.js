@@ -81,7 +81,8 @@
                         });
                     }
                 }
-            }
+            },
+            autoBind: false
         });
 
         // initial load
@@ -114,51 +115,8 @@
             }
         });
 
-        instance.dataSource.read();
-
         instance.content.find(".k-i-expand").click();
 
         equal(instance.content.find(".k-icon.k-i-collapse").length, 0);
     });
-
-//    test("loading removes loading icons when operation completes", function() {
-//        var calls = 0;
-//        var readQueue = [];
-//
-//        createTreeList({
-//            dataSource: {
-//                transport: {
-//                    read: function(options) {
-//                        // use promise to control when the transport finishes reading
-//                        var deferred = $.Deferred();
-//                        deferred.then(function() {
-//                            options.success([
-//                                { id: ++calls, hasChildren: true },
-//                                { id: ++calls, hasChildren: true }
-//                            ]);
-//                        });
-//
-//                        readQueue.push(deferred);
-//                    }
-//                }
-//            }
-//        });
-//
-//        var ds = instance.dataSource;
-//
-//        // initial load
-//        ds.read();
-//        readQueue.shift().resolve();
-//
-//        // expand items
-//        instance.content.find(".k-i-expand").click();
-//        equal(loadingIcons().length, 2);
-//
-//        readQueue.shift().resolve();
-//        equal(loadingIcons().length, 1);
-//
-//        readQueue.shift().resolve();
-//        equal(loadingIcons().length, 0);
-//    });
-
 })();

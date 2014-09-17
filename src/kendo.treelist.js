@@ -211,29 +211,13 @@ var __meta__ = {
         },
 
         load: function(model) {
-            var that = this;
+            var method = "_query";
 
-            return $.Deferred(function(deferred) {
-                var method = "_query";
+            if (!model.loaded()) {
+                method = "read";
+            }
 
-                if (!model.loaded()) {
-                    method = "read";
-                }
-
-                function success(e) {
-                    that._modelLoaded(e, model.id);
-
-                    deferred.resolve();
-                }
-
-                that.one(CHANGE, success);
-                that.one(ERROR, function() {
-                    this.unbind(CHANGE, success);
-
-                    deferred.reject();
-                });
-                that[method]({ id: model.id });
-            }).promise();
+            return this[method]({ id: model.id }).then(proxy(this._modelLoaded, this, model.id));
         },
 
         _byParentId: function(id) {
@@ -287,7 +271,7 @@ var __meta__ = {
             baseFilter.call(this, value);
         },
 
-        _modelLoaded: function(e, id) {
+        _modelLoaded: function(id, e) {
             var model = this.get(id);
             model.loaded(true);
             model.hasChildren = this.childNodes(model).length > 0;
@@ -351,7 +335,7 @@ var __meta__ = {
             this.dataSource.bind(CHANGE, this._refreshHandler);
         },
 
-        refresh: function(e) {
+        refresh: function() {
             var dataSource = this.dataSource;
 
             this._render(dataSource.rootNodes());
