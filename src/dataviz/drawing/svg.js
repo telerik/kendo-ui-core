@@ -95,6 +95,7 @@
     var Node = BaseNode.extend({
         init: function(srcElement) {
             BaseNode.fn.init.call(this, srcElement);
+            this.definitions = {};
             if (srcElement) {
                 srcElement.addObserver(this);
             }
@@ -128,11 +129,13 @@
                     childNode = new ImageNode(srcElement);
                 }
 
+                node.append(childNode);
+
+                childNode.createDefinitions();
+
                 if (children && children.length > 0) {
                     childNode.load(children);
                 }
-
-                node.append(childNode);
 
                 if (element) {
                     childNode.attachTo(element);
@@ -194,8 +197,12 @@
         },
 
         optionsChange: function(e) {
-            if (e.field === "visible") {
-                this.css("display", e.value ? "" : NONE);
+            var field = e.field;
+            var value = e.value;
+            if (field === "visible") {
+                this.css("display", value ? "" : NONE);
+            } else if (DefinitionMap[field]) {
+                this.updateDefinition(field, value);
             }
 
             BaseNode.fn.optionsChange.call(this, e);
@@ -213,6 +220,8 @@
             if (srcElement) {
                 srcElement.removeObserver(this);
             }
+
+            this.clearDefinitions();
 
             BaseNode.fn.clear.call(this);
         },
@@ -285,6 +294,93 @@
 
         renderStyle: function() {
             return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        createDefinitions: function() {
+            var srcElement = this.srcElement;
+            var definitions = this.definitions;
+            var definition, field, options, hasDefinitions;
+            if (srcElement) {
+                options = srcElement.options;
+
+                for (field in DefinitionMap) {
+                    definition = options.get(field);
+                    if (definition) {
+                        definitions[field] = definition;
+                        hasDefinitions = true;
+                    }
+                }
+                if (hasDefinitions) {
+                    this.definitionChange({
+                        action: "add",
+                        definitions: definitions
+                    });
+                }
+            }
+        },
+
+        definitionChange: function(e) {
+            if (this.parent) {
+                this.parent.definitionChange(e);
+            }
+        },
+
+        updateDefinition: function(type, value) {
+            var definitions = this.definitions;
+            var current = definitions[type];
+            var attr = DefinitionMap[type];
+            var definition = {};
+            if (current) {
+                definition[type] = current;
+                this.definitionChange({
+                    action: "remove",
+                    definitions: definition
+                });
+                delete definitions[type];
+            }
+
+            if (!value) {
+                if (current) {
+                    this.removeAttr(attr);
+                }
+            } else {
+                definition[type] = value;
+                this.definitionChange({
+                    action: "add",
+                    definitions: definition
+                });
+                definitions[type] = value;
+                this.attr(attr, refUrl(value.id));
+            }
+        },
+
+        clearDefinitions: function() {
+            var definitions = this.definitions;
+            var field;
+
+            for (field in definitions) {
+                this.definitionChange({
+                    action: "remove",
+                    definitions: definitions
+                });
+                this.definitions = {};
+                break;
+            }
+        },
+
+        renderDefinitions: function() {
+            return renderAllAttr(this.mapDefinitions());
+        },
+
+        mapDefinitions: function() {
+            var definitions = this.definitions;
+            var attrs = [];
+            var field;
+            for (field in definitions) {
+                attrs.push([DefinitionMap[field], refUrl(definitions[field].id)]);
+            }
+
+            return attrs;
         }
     });
 
@@ -296,7 +392,12 @@
 
         attachTo: function(domElement) {
             this.element = domElement;
+            this.defs.attachTo(domElement.firstElementChild);
         },
+
+        template: renderTemplate(
+            "#=d.defs.render()##= d.renderChildren() #"
+        ),
 
         definitionChange: function(e) {
             this.defs.definitionChange(e);
@@ -377,7 +478,7 @@
             var id = item.id;
             var mapItem;
 
-            mapItem = definitionMap[item.id];
+            mapItem = definitionMap[id];
             if (mapItem) {
                 mapItem.count--;
                 if (mapItem.count === 0) {
@@ -389,14 +490,14 @@
     });
 
     var ClipNode = Node.extend({
-        init: function(clipRect) {
+        init: function(srcElement) {
             Node.fn.init.call(this);
 
-            this.clipRect = clipRect;
-            this.id = clipRect.id;
-            this.path = d.Path.fromRect(clipRect);
+            this.srcElement = srcElement;
+            this.id = srcElement.id;
+            this.path = d.Path.fromRect(srcElement);
 
-            clipRect.addObserver(this);
+            srcElement.addObserver(this);
 
             this.load([this.path]);
         },
@@ -406,14 +507,14 @@
         ),
 
         geometryChange: function(e) {
-            var path = d.Path.fromRect(this.clipRect);
+            var path = d.Path.fromRect(this.srcElement);
             this.path.segments.elements(path.segments.elements());
         }
     });
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() + d.renderStyle() #>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderStyle() + d.renderDefinitions()#>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
@@ -614,6 +715,7 @@
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderTransform() #></path>"
         )
     });
@@ -664,6 +766,7 @@
             "r='#= d.radius() #' " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderTransform() # ></circle>"
         )
     });
@@ -705,6 +808,7 @@
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
             "#=  d.renderTransform() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )
     });
@@ -749,7 +853,7 @@
 
         template: renderTemplate(
             "<image #= d.renderStyle() # #= d.renderTransform()# " +
-            "#= d.renderPosition() # #= d.renderSource() #>" +
+            "#= d.renderPosition() # #= d.renderSource() # #= d.renderDefinitions()#>" +
             "</image>"
         )
     });
@@ -817,6 +921,12 @@
     function refUrl(id) {
         return "url(" + baseUrl() + "#"  + id + ")";
     }
+
+    // Mappings ===============================================================
+
+    var DefinitionMap = {
+        clip: "clip-path"
+    };
 
     // Exports ================================================================
     kendo.support.svg = (function() {
