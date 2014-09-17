@@ -202,9 +202,20 @@ var __meta__ = {
 
             that.wrapper.children(".k-tabstrip-items")
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
-                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, function(e) {
-                    if (that.wrapper[0] !== document.activeElement) {
-                        that.wrapper.focus();
+                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, function (e) {
+                    var wr = that.wrapper[0];
+                    if (wr !== document.activeElement) {
+                        var msie = kendo.support.browser.msie;
+                        if (msie) {
+                            try {
+                                // does not scroll to the active element
+                                wr.setActive();
+                            } catch (j) {
+                                wr.focus();
+                            }
+                        } else {
+                            wr.focus();
+                        }
                     }
 
                     if (that._click($(e.currentTarget))) {
