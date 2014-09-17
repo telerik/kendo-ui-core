@@ -176,4 +176,64 @@
         equal(instance.content.find("tr>td:last").text(), "Template 1");
     });
 
+    test("column without field is rendered empty", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { title: "foo" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "");
+    });
+
+    test("format column value", function() {
+        createTreeList({
+            columns: [
+                { field: "id", format: "{0}-{0}" },
+                "parentId"
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr>td:first").text(), "1-1");
+    });
+
+    test("column values are encoded", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, text: "<div>foo</div>" },
+                ]
+            },
+            columns: [ "id", "text"]
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "<div>foo</div>");
+    });
+
+    test("column values are not encoded", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, text: "<div>foo</div>" },
+                ]
+            },
+            columns: [
+                "id",
+                { field: "text", encoded: false }
+            ]
+        });
+
+        equal(instance.content.find("tr>td:last").text(), "foo");
+    });
 })();

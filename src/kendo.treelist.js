@@ -16,6 +16,7 @@ var __meta__ = {
     var kendoDom = kendo.dom;
     var kendoDomElement = kendoDom.element;
     var kendoTextElement = kendoDom.text;
+    var kendoHtmlElement = kendoDom.html;
     var ui = kendo.ui;
     var Widget = ui.Widget;
     var DataSource = data.DataSource;
@@ -408,7 +409,9 @@ var __meta__ = {
             var columns = this.options.columns || [];
 
             this.columns = map(columns, function(column) {
-                return (typeof column === "string") ? { field: column } : column;
+                column = (typeof column === "string") ? { field: column } : column;
+
+                return extend({ encoded: true }, column);
             });
 
             var expandableColumns = grep(this.columns, function(c) {
@@ -602,14 +605,20 @@ var __meta__ = {
             var children = [];
             var model = options.model;
             var column = options.column;
-            var value = model.get(column.field);
-            var formatedValue;
+            var value;
             var iconClass;
 
             if (column.template) {
-                formatedValue = column.template(model);
+                value = column.template(model);
             } else {
-                formatedValue = column.format ? kendo.format(column.format, value) : value;
+                if (column.field) {
+                    value = model.get(column.field);
+                    if (column.format) {
+                        value = kendo.format(column.format, value);
+                    }
+                } else {
+                    value = "";
+                }
             }
 
             if (column.expandable) {
@@ -629,8 +638,11 @@ var __meta__ = {
                 children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
             }
 
-            //children.push(kendoDomElement("span", null, [kendoTextElement(formatedValue)]));
-            children.push(kendoTextElement(formatedValue));
+            if (column.encoded) {
+                children.push(kendoTextElement(value));
+            } else {
+                children.push(kendoHtmlElement (value));
+            }
 
             return kendoDomElement("td", { "role": "gridcell" }, children);
         },

@@ -139,4 +139,24 @@
         ok(instance.columns[1].expandable);
     });
 
+    test("column encoded is set by default", function() {
+        createTreeList({
+            columns: [ "id", "parentId" ]
+        });
+
+        ok(instance.columns[0].encoded);
+        ok(instance.columns[1].encoded);
+    });
+
+    test("define column.encoded", function() {
+        createTreeList({
+            columns: [
+                { field: "id", encoded: false },
+                "parentId"
+            ]
+        });
+
+        ok(!instance.columns[0].encoded);
+        ok(instance.columns[1].encoded);
+    });
 })();
