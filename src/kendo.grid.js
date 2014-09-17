@@ -2118,13 +2118,6 @@ var __meta__ = {
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 
-            that.angular("compile", function(){
-                return {
-                    elements: container.get(),
-                    scopeFrom: that.tbody.find("[" + kendo.attr("uid") + "=" + model.uid + "]")
-                };
-            });
-
             that.editable = that._editContainer
                 .kendoEditable({
                     fields: fields,
