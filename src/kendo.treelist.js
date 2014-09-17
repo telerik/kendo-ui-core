@@ -386,10 +386,12 @@ var __meta__ = {
             var icon = $(e.currentTarget);
             var model = this.dataItem(icon);
 
-            model.set("expanded", !model.get("expanded"));
+            model.expanded = !model.expanded;
 
-            this.dataSource.load(model)
-                .always(proxy(this.refresh, this));
+            if (!model.loaded()) {
+                this.dataSource.load(model)
+                    .always(proxy(this.refresh, this));
+            }
 
             this.refresh();
         },

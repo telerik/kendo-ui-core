@@ -2707,6 +2707,7 @@ var __meta__ = {
 
         read: function(data) {
             var that = this, params = that._params(data);
+            var deferred = $.Deferred();
 
             that._queueRequest(params, function() {
                 if (!that.trigger(REQUESTSTART, { type: "read" })) {
@@ -2717,16 +2718,32 @@ var __meta__ = {
                     if (that.online()) {
                         that.transport.read({
                             data: params,
-                            success: proxy(that.success, that),
-                            error: proxy(that.error, that)
+                            success: function(data) {
+                                that.success(data);
+
+                                deferred.resolve();
+                            },
+                            error: function() {
+                                var args = slice.call(arguments);
+
+                                that.error.apply(that, args);
+
+                                deferred.reject.apply(deferred, args);
+                            }
                         });
                     } else if (that.options.offlineStorage != null){
                         that.success(that.offlineData());
+
+                        deferred.resolve();
                     }
                 } else {
                     that._dequeueRequest();
+
+                    deferred.resolve();
                 }
             });
+
+            return deferred.promise();
         },
 
         success: function(data) {
@@ -3114,62 +3131,43 @@ var __meta__ = {
         },
 
         query: function(options) {
-            var that = this,
-                result,
-                remote = that.options.serverSorting || that.options.serverPaging || that.options.serverFiltering || that.options.serverGrouping || that.options.serverAggregates;
+            var result;
+            var remote = this.options.serverSorting || this.options.serverPaging || this.options.serverFiltering || this.options.serverGrouping || this.options.serverAggregates;
 
-            if (remote || ((that._data === undefined || that._data.length === 0) && !that._destroyed.length)) {
-                that.read(that._mergeState(options));
-            } else {
-                if (!that.trigger(REQUESTSTART, { type: "read" })) {
-                    that.trigger(PROGRESS);
-
-                    result = that._queryProcess(that._data, that._mergeState(options));
-
-                    if (!that.options.serverFiltering) {
-                        if (result.total !== undefined) {
-                            that._total = result.total;
-                        } else {
-                            that._total = that._data.length;
-                        }
-                    }
-
-                    that._view = result.data;
-                    that._aggregateResult = that._calculateAggregates(that._data, options);
-                    that.trigger(REQUESTEND, { });
-                    that.trigger(CHANGE, { items: result.data });
-                }
+            if (remote || ((this._data === undefined || this._data.length === 0) && !this._destroyed.length)) {
+                return this.read(this._mergeState(options));
             }
+
+            if (!this.trigger(REQUESTSTART, { type: "read" })) {
+                this.trigger(PROGRESS);
+
+                result = this._queryProcess(this._data, this._mergeState(options));
+
+                if (!this.options.serverFiltering) {
+                    if (result.total !== undefined) {
+                        this._total = result.total;
+                    } else {
+                        this._total = this._data.length;
+                    }
+                }
+
+                this._view = result.data;
+                this._aggregateResult = this._calculateAggregates(this._data, options);
+                this.trigger(REQUESTEND, { });
+                this.trigger(CHANGE, { items: result.data });
+            }
+
+            return $.Deferred().resolve().promise();
         },
 
         fetch: function(callback) {
-            var that = this;
-
-            return $.Deferred(function(deferred) {
-                var success = function(e) {
-                    that.unbind(ERROR, error);
-
-                    deferred.resolve();
-
-                    if (callback) {
-                        callback.call(that, e);
-                    }
-                };
-
-                var error = function(e) {
-                    deferred.reject(e);
-                };
-
-                that.one(CHANGE, success);
-                that.one(ERROR, error);
-                that._query();
-            }).promise();
+            return this._query().then(proxy(callback, this));
         },
 
         _query: function(options) {
             var that = this;
 
-            that.query(extend({}, {
+            return that.query(extend({}, {
                 page: that.page(),
                 pageSize: that.pageSize(),
                 sort: that.sort(),

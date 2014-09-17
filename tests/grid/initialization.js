@@ -31,6 +31,7 @@
 
         dataSource.read = function() {
             readWasCalled = true;
+            return $.Deferred().promise();
         };
 
         new Grid(table, { dataSource: dataSource } );
