@@ -52,9 +52,33 @@ function makeIt() {
     }
     page.endText();
 
+    page.save();
     page.translate(100, 100);
     page.scale(300, 225);
     page.drawImage(imgurl);
+    page.restore();
+
+    page.translate(0, 500);
+
+    page.moveTo(100, 100);
+    page.setLineJoin(0);
+
+    page.setLineWidth(10);
+    page.setStrokeColor(1, 0, 0);
+    page.lineTo(200, 100);
+
+    page.setLineWidth(5);
+    page.setStrokeColor(0, 0.8, 0);
+    page.lineTo(200, 200);
+
+    page.setLineWidth(15);
+    page.setStrokeColor(0, 0, 1);
+    page.lineTo(100, 200);
+
+    page.setLineWidth(10);
+    page.setStrokeColor(0, 0, 0);
+    page.lineTo(100, 100);
+    page.closeStroke();
 
     var binary = pdf.render();
     fs.writeFileSync("/tmp/pdf.txt", binary, { encoding: "binary" });

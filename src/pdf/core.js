@@ -240,6 +240,12 @@
         if (img) {
             cont(img);
         } else {
+            if (global.process) { // XXX: temporary
+                require("fs").readFile(url, { encoding: "binary" }, function(err, data){
+                    cont(IMAGE_CACHE[url] = new PDF.JPEG(data));
+                });
+                return;
+            }
             var img = new Image();
             img.src = url;
             img.onload = function() {
