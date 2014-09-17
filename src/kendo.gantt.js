@@ -913,7 +913,7 @@ var __meta__ = {
                 { field: "title", title: messages.title },
                 { field: "start", title: messages.start, editor: editors.dateRange },
                 { field: "end", title: messages.end, editor: editors.dateRange },
-                { field: "percentComplete", title: messages.percentComplete }
+                { field: "percentComplete", title: messages.percentComplete, format: "p0" }
             ];
 
             return fields;
@@ -1048,6 +1048,7 @@ var __meta__ = {
             var options = {};
             var messages = this.options.messages;
             var popupStyles = Gantt.styles.popup;
+
             var html = kendo.format('<div {0}="{1}" class="{2} {3}"><div class="{4}">', 
                 kendo.attr("uid"), task.uid, popupStyles.form, popupStyles.editForm, popupStyles.formContainer);
             
@@ -1057,7 +1058,7 @@ var __meta__ = {
             html += this._buildEditTemplate(task, fields, editableFields);
 
             html += '<div class="' + popupStyles.buttonsContainer + '">';
-            html += this.createButton({ name: "update", text: messages.save });
+            html += this.createButton({ name: "update", text: messages.save, className: Gantt.styles.primary });
             html += this.createButton({ name: "canceledit", text: messages.cancel });
             html += this.createButton({ name: "delete", text: messages.destroy });
 
@@ -1226,7 +1227,7 @@ var __meta__ = {
                     title: "Title",
                     start: "Start",
                     end: "End",
-                    percentComplete: "Percent Complete"
+                    percentComplete: "Complete"
                 }
             },
             showWorkHours: true,
