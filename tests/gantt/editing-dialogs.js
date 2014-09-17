@@ -61,7 +61,7 @@
 
         gantt.removeTask(taskUid);
 
-        equal($(".k-popup-message").text(), "Are you sure you want to delete this task and all of its dependencies?");
+        equal($(".k-popup-message").text(), "Are you sure you want to delete this task?");
     });
 
     test("delete button rendered", function() {

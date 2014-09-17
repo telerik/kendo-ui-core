@@ -43,7 +43,7 @@ var __meta__ = {
     var ACTIVE_CELL = "gantt_active_cell";
     var ACTIVE_OPTION = "action-option-focused";
     var DOT = ".";
-    var TASK_DELETE_CONFIRM = "Are you sure you want to delete this task and all of its dependencies?";
+    var TASK_DELETE_CONFIRM = "Are you sure you want to delete this task?";
     var DEPENDENCY_DELETE_CONFIRM = "Are you sure you want to delete this dependency?";
     var COMMAND_BUTTON_TEMPLATE = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>';
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
