@@ -422,10 +422,10 @@ var __meta__ = {
                 this.columns[0].expandable = true;
             }
 
-            this._columnTemplate();
+            this._columnTemplates();
         },
 
-        _columnTemplate: function() {
+        _columnTemplates: function() {
             var idx, length, column;
             var columns = this.columns;
 
@@ -433,6 +433,10 @@ var __meta__ = {
                 column = columns[idx];
                 if (column.template) {
                     column.template = kendo.template(column.template);
+                }
+
+                if (column.headerTemplate) {
+                    column.headerTemplate = kendo.template(column.headerTemplate);
                 }
             }
         },
@@ -487,6 +491,7 @@ var __meta__ = {
         _ths: function() {
             var columns = this.columns;
             var column;
+            var title;
             var attr;
             var ths = [];
 
@@ -499,7 +504,13 @@ var __meta__ = {
                     "role": "columnheader"
                 };
 
-                ths.push(kendoDomElement("th", attr, [kendoTextElement(column.title)]));
+                if (column.headerTemplate) {
+                    title = column.headerTemplate({});
+                } else {
+                    title = column.title || column.field || "";
+                }
+
+                ths.push(kendoDomElement("th", attr, [kendoTextElement(title)]));
             }
 
             return ths;

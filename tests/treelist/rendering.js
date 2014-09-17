@@ -236,4 +236,88 @@
 
         equal(instance.content.find("tr>td:last").text(), "foo");
     });
+
+    test("column render title", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", title: "foo" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.header.find("tr>th:last").text(), "foo");
+    });
+
+    test("column field is rendered when no title is specified", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", title: "foo" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.header.find("tr>th:first").text(), "id");
+    });
+
+    test("render empty string for column title", function() {
+        createTreeList({
+            columns: [
+                { template: "foo" },
+                { field: "parentId", title: "foo" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.header.find("tr>th:first").text(), "");
+    });
+
+    test("column header template as string", function() {
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", headerTemplate: "Header template" },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.header.find("tr>th:last").text(), "Header template");
+    });
+
+    test("column header template as function", function() {
+        var templateFunction = function(data) {
+            return "Header template";
+        };
+
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", headerTemplate: templateFunction },
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        equal(instance.header.find("tr>th:last").text(), "Header template");
+    });
 })();
