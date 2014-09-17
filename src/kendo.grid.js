@@ -4989,7 +4989,7 @@ var __meta__ = {
             if (locked) {
                 normalizeCols(table, leafColumns(visibleNonLockedColumns(this.columns)), this._hasDetails(), 0);
             } else {
-                normalizeCols(table, visibleColumns(leafColumns(this.columns)), this._hasDetails(), this._groups());
+                normalizeCols(table, leafColumns(visibleColumns(this.columns)), this._hasDetails(), this._groups());
             }
         },
 
