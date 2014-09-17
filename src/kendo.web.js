@@ -69,6 +69,7 @@
         "./kendo.gantt.list",
         "./kendo.gantt.timeline",
         "./kendo.gantt",
+        "./kendo.treelist",
         "./kendo.pivotgrid",
         "./kendo.pivot.configurator",
         "./kendo.angular"

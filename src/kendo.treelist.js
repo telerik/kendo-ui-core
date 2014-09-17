@@ -27,9 +27,8 @@ var __meta__ = {
     var map = $.map;
     var grep = $.grep;
     var CHANGE = "change";
-    var ERROR = "error";
     var DOT = ".";
-    var NS = ".kendoGanttList";
+    var NS = ".kendoTreeList";
     var CLICK = "click";
 
     var classNames = {
