@@ -789,6 +789,10 @@ var __meta__ = {
 
                 e.preventDefault();
 
+                if (splitButton.hasClass(STATE_DISABLED)) {
+                    return;
+                }
+
                 if (popup.element.is(":visible")) {
                     isDefaultPrevented = this.trigger(CLOSE, { target: splitButton });
                 } else {
