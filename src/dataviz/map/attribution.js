@@ -2,7 +2,7 @@
     define([ "../util" ], f);
 })(function(){
 
-(function() {
+(function($) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         template = kendo.template,
@@ -118,6 +118,6 @@
     });
 
     kendo.dataviz.ui.plugin(Attribution);
-})(jQuery);
+})(window.kendo.jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

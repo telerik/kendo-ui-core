@@ -2,7 +2,7 @@
     define([ "./shapes" ], f);
 })(function(){
 
-(function (&) {
+(function ($) {
 
     // Imports ================================================================
     var noop = $.noop,
