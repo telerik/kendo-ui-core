@@ -620,15 +620,15 @@ var __meta__ = {
 
             if (column.template) {
                 value = column.template(model);
-            } else {
-                if (column.field) {
-                    value = model.get(column.field);
-                    if (column.format) {
-                        value = kendo.format(column.format, value);
-                    }
-                } else {
-                    value = "";
+            } else if (column.field) {
+                value = model.get(column.field);
+                if (column.format) {
+                    value = kendo.format(column.format, value);
                 }
+            }
+
+            if (typeof value == "undefined") {
+                value = "";
             }
 
             if (column.expandable) {

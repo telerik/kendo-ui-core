@@ -192,6 +192,24 @@
         equal(instance.content.find("tr>td:last").text(), "");
     });
 
+    test("render empty cell if column field is undefined in the model", function() {
+        createTreeList({
+            columns: [
+                "id",
+                "text"
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, text: "foo",  parentId: null },
+                    { id: 2, parentId: null }
+                ]
+            }
+        });
+
+        equal(instance.content.find("tr:first>td:last").text(), "foo");
+        equal(instance.content.find("tr:last>td:last").text(), "");
+    });
+
     test("format column value", function() {
         createTreeList({
             columns: [
