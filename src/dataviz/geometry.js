@@ -2,7 +2,7 @@
     define([ "./util" ], f);
 })(function(){
 
-(function () {
+(function ($) {
 
     // Imports ================================================================
     var math = Math,
