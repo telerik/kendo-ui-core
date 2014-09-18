@@ -293,6 +293,7 @@ var __meta__ = {
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
             minorTickCount: 2,
+            editable: true,
             //new option
             numberOfDays: 1,
             majorTick: 60,
@@ -636,6 +637,7 @@ var __meta__ = {
                     if (isMultiDayEvent || this._isInTimeSlot(event)) {
                         console.log("event for rendering");
                         console.log(event);
+
                         group = this.groups[groupIndex];
 
                         if (!group._continuousEvents) {
@@ -786,7 +788,8 @@ var __meta__ = {
             var slotEnd = groups.lastSlot().end - 1;
 
             var startTime = kendo.date.toUtcTime(event.start);
-            var endTime = kendo.date.toUtcTime(kendo.date.addDays(event.end,1));
+            //var endTime = kendo.date.toUtcTime(kendo.date.addDays(event.end,1));
+            var endTime = kendo.date.toUtcTime(event.end);
 
             return (isInDateRange(startTime, slotStart, slotEnd) ||
                 isInDateRange(endTime, slotStart, slotEnd) ||
