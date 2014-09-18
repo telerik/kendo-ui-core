@@ -1,6 +1,13 @@
 (function() {
     var container,
-        ToolBar = kendo.ui.ToolBar;
+        ToolBar = kendo.ui.ToolBar,
+        MOUSEDOWN = kendo.support.mousedown,
+        MOUSEUP = kendo.support.mouseup;
+
+    function click(element) {
+        element.trigger(MOUSEDOWN);
+        element.trigger(MOUSEUP);
+    }
 
     module("Toolbar: API: ", {
         setup: function() {
@@ -132,6 +139,28 @@
         toolbar.enable("#foo_overflow", false);
 
         ok($("#foo_overflow").parent("li").hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+    });
+
+    test("enable method disables SplitButton", 2, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                    { id: "option1", text: "Option 1" },
+                    { id: "option2", text: "Option 2" },
+                    { id: "option3", text: "Option 3" }
+                ]
+                }
+            ]
+        }).data("kendoToolBar");
+
+        toolbar.enable("#splitButton", false);
+
+        var popup = $("#splitButton").parent().data("kendoPopup");
+
+        click($(".k-split-button-arrow"));
+
+        ok(!popup.visible(), "popup does not open");
+        ok($("#splitButton").hasClass("k-state-disabled"));
     });
 
     test("get selected item from group returns the selected toggle button", 1, function() {
