@@ -14,7 +14,6 @@
         noop = $.noop,
 
         dataviz = kendo.dataviz,
-        defined = dataviz.defined,
 
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
@@ -23,12 +22,12 @@
         toMatrix = g.toMatrix,
 
         util = dataviz.util,
+        defined = util.defined,
         deg = util.deg,
         round = util.round;
 
     // Constants ==============================================================
     var NONE = "none",
-        TRANSP = "transparent",
         COORDINATE_MULTIPLE = 100,
         COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
         TRANSFORM_PRECISION = 4;
@@ -130,7 +129,7 @@
 
         optionsChange: function(e) {
             if (e.field == "visible") {
-                this.css("display", e.value !== false ? "" : "none");
+                this.css("display", e.value !== false ? "" : NONE);
             }
         },
 
@@ -142,7 +141,7 @@
             var style = [];
 
             if (this.srcElement && this.srcElement.options.visible === false) {
-                style.push([ "display", "none" ]);
+                style.push([ "display", NONE ]);
             }
 
             return style;
@@ -200,7 +199,7 @@
         },
 
         attachTo: function(domElement) {
-            this.css("display", "none");
+            this.css("display", NONE);
 
             Node.fn.attachTo.call(this, domElement);
 

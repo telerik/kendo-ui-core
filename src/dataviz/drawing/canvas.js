@@ -18,13 +18,13 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        alignToPixel = dataviz.util.alignToPixel,
-        append = dataviz.append,
-        defined = dataviz.defined,
-        round = dataviz.round,
-        renderTemplate = dataviz.renderTemplate,
 
         util = dataviz.util,
+        alignToPixel = util.alignToPixel,
+        append = util.append,
+        defined = util.defined,
+        round = util.round,
+        renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
 
         d = dataviz.drawing,

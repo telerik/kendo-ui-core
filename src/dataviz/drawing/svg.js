@@ -11,18 +11,16 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        defined = dataviz.defined,
-        renderTemplate = dataviz.renderTemplate,
-
         g = dataviz.geometry,
-
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
         util = dataviz.util,
+        defined = util.defined,
         renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr,
-        renderSize = util.renderSize;
+        renderSize = util.renderSize,
+        renderTemplate = util.renderTemplate;
 
     // Constants ==============================================================
     var BUTT = "butt",

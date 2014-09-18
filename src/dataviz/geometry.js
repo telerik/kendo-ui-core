@@ -1,16 +1,18 @@
-(function(f, define){
-    define([ "./util" ], f);
-})(function(){
-
-(function ($) {
+(function(f, define) {
+    define([
+        "./util"
+    ], f);
+})(function() {
 
     // Imports ================================================================
     var math = Math,
-        inArray = $.inArray,
 
         kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
+
+        $ = kendo.jQuery,
+        inArray = $.inArray,
 
         dataviz = kendo.dataviz,
         util = dataviz.util,
@@ -786,7 +788,5 @@
             toMatrix: toMatrix
         }
     });
-
-})(window.kendo.jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

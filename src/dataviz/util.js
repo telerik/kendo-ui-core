@@ -1,11 +1,8 @@
-(function(f, define){
-    define([ "../kendo.dataviz.core" ], f);
-})(function(){
-
-(function () {
-
-    // TODO
-    // Remove duplicate functions from core, chart, map
+(function(f, define) {
+    define([
+        "../kendo.core"
+    ], f);
+})(function() {
 
     // Imports ================================================================
     var math = Math,
@@ -159,6 +156,10 @@
     }
 
     // Template helpers =======================================================
+    function renderTemplate(text) {
+        return kendo.template(text, { useWithBlock: false, paramName: "d" });
+    }
+
     function renderAttr(name, value) {
         return (defined(value) && value !== null) ? " " + name + "='" + value + "' " : "";
     }
@@ -245,6 +246,7 @@
             renderPos: renderPos,
             renderSize: renderSize,
             renderStyle: renderStyle,
+            renderTemplate: renderTemplate,
             sparseArrayLimits: sparseArrayLimits,
             sparseArrayMin: sparseArrayMin,
             sparseArrayMax: sparseArrayMax,
@@ -252,7 +254,5 @@
             valueOrDefault: valueOrDefault
         }
     });
-
-})(window.kendo.jQuery);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

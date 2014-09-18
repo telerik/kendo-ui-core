@@ -1,5 +1,8 @@
 (function(f, define){
-    define([ "./kendo.core" ], f);
+    define([
+        "./kendo.core",
+        "./kendo.dataviz.drawing"
+    ], f);
 })(function(){
 
 var __meta__ = {
@@ -16,7 +19,7 @@ var __meta__ = {
     // Imports ================================================================
     var doc = document,
         kendo = window.kendo,
-        dataviz = kendo.dataviz = {},
+        dataviz = kendo.dataviz,
         Class = kendo.Class,
         template = kendo.template,
         map = $.map,

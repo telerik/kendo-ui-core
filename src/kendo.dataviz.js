@@ -14,6 +14,7 @@
         "./kendo.mobile.scroller",
         "./kendo.popup",
         "./kendo.tooltip",
+        "./kendo.dataviz.drawing",
         "./kendo.dataviz.core",
         "./kendo.dataviz.themes",
         "./kendo.dataviz.chart",

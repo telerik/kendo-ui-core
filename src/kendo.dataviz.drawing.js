@@ -1,7 +1,5 @@
 (function(f, define){
     define([
-        "./kendo.dataviz.core",
-
         "./dataviz/util",
         "./dataviz/geometry",
         "./dataviz/drawing/core",
@@ -19,7 +17,7 @@
         name: "Drawing API",
         category: "dataviz",
         description: "The Kendo DataViz low-level drawing API",
-        depends: [ "dataviz.core" ]
+        depends: [ "core" ]
     };
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

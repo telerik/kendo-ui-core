@@ -12,12 +12,13 @@
         Class = kendo.Class,
         Point = geometry.Point,
         deepExtend = kendo.deepExtend,
-        deg = dataviz.util.deg,
-        round = dataviz.round,
         trim = $.trim,
         math = Math,
         pow = math.pow,
-        last = dataviz.last;
+        util = dataviz.util,
+        deg = util.deg,
+        last = util.last,
+        round = util.round;
 
     var SEGMENT_REGEX = /([a-z]{1})([^a-z]*)(z)?/gi,
         SPLIT_REGEX = /[,\s]?(-?(?:\d+\.)?\d+)/g,
