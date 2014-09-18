@@ -628,6 +628,24 @@ var __meta__ = {
         });
     }
 
+    function visibleLeafColumns(columns) {
+        var result = [];
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (columns[idx].hidden) {
+                continue;
+            }
+
+            if (columns[idx].columns) {
+                result = result.concat(visibleLeafColumns(columns[idx].columns));
+            } else {
+                result.push(columns[idx]);
+            }
+        }
+
+        return result;
+    }
+
     function leafColumns(columns) {
         var result = [];
 
@@ -4545,7 +4563,8 @@ var __meta__ = {
                     }
 
                     if (columns[idx].colSpan > 1) {
-                        html += 'colspan="' + columns[idx].colSpan + '"';
+                        html += 'colspan="' + (columns[idx].colSpan - hiddenLeafColumnsCount(columns[idx])) + '" ';
+                        html += kendo.attr("colspan") + "='" + columns[idx].colSpan + "'";
                     }
 
                     if (th.title) {
@@ -4656,6 +4675,8 @@ var __meta__ = {
             var row = cell.closest("tr");
             var headerRows = container.find("tr:not(.k-filter-row)");
             var level = headerRows.index(row) + cell[0].rowSpan;
+            var colSpanAttr = kendo.attr("colspan");
+
             if (level <= headerRows.length - 1) {
                 var child = row.next();
                 var index = row.find("th:not(.k-group-cell,.k-hierarchy-cell)").index(cell);
@@ -4668,25 +4689,24 @@ var __meta__ = {
                 var idx;
 
                 prevCells = prevCells.filter(function() {
-                    return this.colSpan > 1;
+                    return $(this).attr(colSpanAttr) > 1;
                 });
 
                 for (idx = 0; idx < prevCells.length; idx++) {
-                    offset += prevCells[idx].colSpan || 1;
+                    offset += prevCells.eq(idx).attr(colSpanAttr) || 1;
                 }
 
                 var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
 
                 offset = offset || 1;
 
-                var colSpan = cell[0].colSpan ? cell[0].colSpan : 1;
-
+                var colSpan = cell.attr(colSpanAttr) || 1;
                 idx = 0;
                 while (idx < colSpan) {
                     var child = cells.eq(idx + (offset - 1));
                     result = result.add(this._childColumns(child));
-                    if (child[0].colSpan > 1) {
-                        colSpan -= child[0].colSpan - 1;
+                    if (child.attr(colSpanAttr) > 1) {
+                        colSpan -= child.attr(colSpanAttr) - 1;
                     }
                     idx++;
                 }
@@ -4724,7 +4744,7 @@ var __meta__ = {
                     var cell = header.eq(idx);
 
                     if (isVisible(columns[idx])) {
-                        var colSpan = 1;
+                        var colSpan;
 
                         if (columns[idx].columns) {
                             colSpan = leafColumns(columns[idx].columns).length - hiddenLeafColumnsCount(columns[idx].columns);
@@ -4981,15 +5001,15 @@ var __meta__ = {
             if (this._isLocked()) {
                 table = table || this.lockedHeader.find("table").add(this.lockedTable);
 
-                normalizeCols(table, leafColumns(visibleLockedColumns(this.columns)), this._hasDetails(), this._groups());
+                normalizeCols(table, visibleLeafColumns(visibleLockedColumns(this.columns)), this._hasDetails(), this._groups());
             }
         },
 
         _appendCols: function(table, locked) {
             if (locked) {
-                normalizeCols(table, leafColumns(visibleNonLockedColumns(this.columns)), this._hasDetails(), 0);
+                normalizeCols(table, visibleLeafColumns(visibleNonLockedColumns(this.columns)), this._hasDetails(), 0);
             } else {
-                normalizeCols(table, leafColumns(visibleColumns(this.columns)), this._hasDetails(), this._groups());
+                normalizeCols(table, visibleLeafColumns(visibleColumns(this.columns)), this._hasDetails(), this._groups());
             }
         },
 
@@ -5182,11 +5202,12 @@ var __meta__ = {
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length,
                 rows = container.find("tr").filter(function() {
-                    return $(this).children(":visible").length
+                    return !$(this).children(":visible").length
                 });
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(rows);
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
+                rows.find("th.k-group-cell").hide();
             } else if(groups < length) {
                 container.find("tr").each(function() {
                     $(this).find("th.k-group-cell")
@@ -5443,7 +5464,7 @@ var __meta__ = {
                 current = $(that.current()),
                 isCurrentInHeader = false,
                 groups = (that.dataSource.group() || []).length,
-                colspan = groups + visibleColumns(leafColumns(that.columns)).length;
+                colspan = groups + visibleLeafColumns(visibleColumns(that.columns)).length;
 
             if (e && e.action === "itemchange" && that.editable) { // skip rebinding if editing is in progress
                 return;
@@ -5545,7 +5566,7 @@ var __meta__ = {
                         groupFooterTemplate: that.groupFooterTemplate
                     };
 
-            colspan = isLocked ? colspan - leafColumns(visibleLockedColumns(that.columns)).length : colspan;
+            colspan = isLocked ? colspan - visibleLeafColumns(visibleLockedColumns(that.columns)).length : colspan;
 
             if(groups > 0) {
 

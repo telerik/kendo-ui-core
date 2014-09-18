@@ -84,7 +84,7 @@
         equal(firstRow.find("th").length, 2);
         equal(firstRow.find("th").first().attr("rowSpan"), 2);
         equal(firstRow.find("th").first().text(), "master");
-        equal(firstRow.find("th").last().attr("colSpan"), 2);
+        equal(firstRow.find("th").last().attr("colSpan"), 2, "foo");
         equal(firstRow.find("th").last().text(), "master1");
         equal(lastRow.find("th").length, 2);
         equal(lastRow.find("th").first().text(), "child");

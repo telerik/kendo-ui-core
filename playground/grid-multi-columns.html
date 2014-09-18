@@ -38,10 +38,23 @@
 
         <script>
             $(document).ready(function () {
+                 var grid = new kendo.ui.Grid($("#grid"), {
+            dataSource: {
+                data: [{ foo: 1, bar: "bar"}],
+                group: { field: "bar" }
+            },
+            columns: [
+                { title: "foo", locked: true, columns: [{ field: "foo", width: 100, hidden: true }, { field: "foo", width:100, hidden: false }] },
+                { field: "bar",  width: 100 },
+                { columns: [ { title: "bar", hidden: false, width: 100 }] }
+            ]
+        });
+return;
+
                 $("#grid").kendoGrid({
                     dataSource: {
                         type: "odata",
-                        //group: "foo",
+                        group: "foo",
                         transport: {
                             read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
                         },
@@ -74,9 +87,9 @@ columnMenu: true,
                     {
                         title: "Contact Info",
                         hidden: true,
-                      //  locked: true,
+                       //locked: true,
                         columns: [
-                            { field: "ContactName", hidden: false, width: 100 },
+                            { field: "ContactName", hidden: true, width: 100 },
                             {
                                 hidden: false,
                                 field: "ContactTitle",
@@ -90,7 +103,7 @@ columnMenu: true,
                         }, {  title: "foo title", columns:  [
                         {
                             field: "Country",
-hidden: false,
+hidden: true,
                             width: 150
                     }] }]
 //                   columns: [
