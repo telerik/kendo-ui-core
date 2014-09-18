@@ -45,7 +45,7 @@ var __meta__ = {
     var DOT = ".";
     var TASK_DELETE_CONFIRM = "Are you sure you want to delete this task?";
     var DEPENDENCY_DELETE_CONFIRM = "Are you sure you want to delete this dependency?";
-    var COMMAND_BUTTON_TEMPLATE = '<a class="k-button #=className#" #=attr# href="\\#">#=text#</a>';
+    var COMMAND_BUTTON_TEMPLATE = '<a class="#=className#" #=attr# href="\\#">#=text#</a>';
     var HEADER_TEMPLATE = kendo.template('<div class="#=styles.headerWrapper#">' +
             '#if (editable) {#'+
                 '<div class="#=styles.actions#">' +
@@ -1059,7 +1059,7 @@ var __meta__ = {
 
             html += '<div class="' + popupStyles.buttonsContainer + '">';
             html += this.createButton({ name: "update", text: messages.save, className: Gantt.styles.primary });
-            html += this.createButton({ name: "canceledit", text: messages.cancel });
+            html += this.createButton({ name: "cancel", text: messages.cancel });
             html += this.createButton({ name: "delete", text: messages.destroy });
 
             html += '</div></div></div>';
@@ -1729,7 +1729,7 @@ var __meta__ = {
         _createButton: function(command) {
             var commandName = command.name || command.text;
             var options = { 
-                className: "k-gantt-" + (commandName || "").replace(/\s/g, ""),
+                className: Gantt.styles.popup.button + " k-gantt-" + (commandName || "").replace(/\s/g, ""),
                 text: commandName,
                 attr: ""
             };
@@ -1743,9 +1743,7 @@ var __meta__ = {
                     command.className += " " + options.className;
                 }
 
-                options = extend(true, options, defaultCommands[commandName], command);
-            } else {
-                options = extend(true, options, defaultCommands[commandName]);
+                options = extend(true, options, command);
             }
 
             return kendo.template(COMMAND_BUTTON_TEMPLATE)(options);
@@ -1972,8 +1970,8 @@ var __meta__ = {
             if (editable === true || editable.confirmation !== false) {
                 messages = this.options.messages;
                 buttons = [
-                    { name: "destroy", text: messages.destroy, click: function() { callback(); } },
-                    { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
+                    { name: "delete", text: messages.destroy, className: Gantt.styles.primary, click: function() { callback(); } },
+                    { name: "cancel", text: messages.cancel, click: function() { callback(true); } }
                 ];
 
                 this.showDialog(extend(true, {}, options, { buttons: buttons }));
@@ -2398,17 +2396,6 @@ var __meta__ = {
     kendo.ui.plugin(Gantt);
 
     extend(true, Gantt, { styles: ganttStyles });
-
-    var defaultCommands = {
-        canceledit: {
-            text: "Cancel",
-            className: Gantt.styles.buttonCancel
-        },
-        destroy: {
-            text: "Delete",
-            className: Gantt.styles.primary + " " + Gantt.styles.buttonDelete
-        }
-    };
 
 })(window.kendo.jQuery);
 
