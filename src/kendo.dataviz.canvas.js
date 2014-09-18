@@ -10,11 +10,10 @@ var __meta__ = {
     depends: [ "dataviz.core" ]
 };
 
-(function () {
+(function ($) {
 
     // Imports ================================================================
-    var $ = jQuery,
-        math = Math,
+    var math = Math,
 
         kendo = window.kendo,
         dataviz = kendo.dataviz,
