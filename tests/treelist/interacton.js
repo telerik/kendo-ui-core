@@ -5,6 +5,7 @@
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
+            dom.remove();
 
             dom = instance = null;
         }
@@ -66,57 +67,106 @@
         return instance.content.find(".k-loading");
     }
 
+    function controlledRead() {
+        var queue = [];
+
+        var read = function(options) {
+            var deferred = $.Deferred();
+
+            deferred.then(options.success, options.error);
+
+            queue.push(deferred);
+        };
+
+        read.resolve = function(value) {
+            queue.shift().resolve(value);
+        };
+
+        read.reject = function(value) {
+            queue.shift().reject(value);
+        };
+
+        return read;
+    }
+
     test("shows loading icon during loading of remote data", function() {
-        var calls = 0;
-        var readOperation;
+        var read = controlledRead();
 
         createTreeList({
-            dataSource: {
-                transport: {
-                    read: function(options) {
-                        // use promise to control when the transport reads
-                        readOperation = $.Deferred();
-                        readOperation.then(function() {
-                            options.success([ { id: ++calls, hasChildren: true } ]);
-                        });
-                    }
-                }
-            },
+            dataSource: { transport: { read: read } },
             autoBind: false
         });
 
         // initial load
         instance.dataSource.read();
-        readOperation.resolve();
+        read.resolve([ { id: 1, hasChildren: true } ]);
 
         // expand item
         instance.content.find(".k-i-expand").click();
+
         equal(loadingIcons().length, 1, "loading icon not shown upon expanding");
 
-        readOperation.resolve();
+        read.resolve([ { id: 2, parentId: 1 } ]);
+
         equal(loadingIcons().length, 0, "icon is not hidden after operation finishes");
     });
 
     test("removes collapsed icon if no data is returned", function() {
-        var called;
+        var read = controlledRead();
 
         createTreeList({
-            dataSource: {
-                transport: {
-                    read: function(options) {
-                        if (!called) {
-                            called = true;
-                            options.success([ { id: 1, hasChildren: true } ]);
-                        } else {
-                            options.success([]);
-                        }
-                    }
-                }
-            }
+            dataSource: { transport: { read: read } }
         });
+
+        read.resolve([ { id: 1, hasChildren: true } ]);
 
         instance.content.find(".k-i-expand").click();
 
+        read.resolve([]);
+
         equal(instance.content.find(".k-icon.k-i-collapse").length, 0);
+    });
+
+    test("clicks on loading icon are ignored", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.resolve([ { id: 1, hasChildren: true } ]);
+
+        instance.content.find(".k-i-expand").click();
+
+        instance.content.find(".k-i-collapse").click();
+
+        equal(instance.content.find(".k-i-expand").length, 0);
+        equal(instance.content.find(".k-loading").length, 1);
+    });
+
+    test("shows initial loading message during load", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        ok(instance.content.text().indexOf("Loading") >= 0);
+
+        read.resolve([ { id: 1 } ]);
+
+        ok(instance.content.text().indexOf("Loading") < 0);
+    });
+
+    test("shows no rows message when no rows have been fetched", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.resolve([]);
+
+        ok(instance.content.text().indexOf("No rows") >= 0);
     });
 })();

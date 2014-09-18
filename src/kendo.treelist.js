@@ -332,6 +332,12 @@ var __meta__ = {
             this.dataSource = TreeListDataSource.create(dataSource);
 
             this.dataSource.bind(CHANGE, this._refreshHandler);
+
+            this.dataSource.bind("progress", proxy(function() {
+                if (!this.content.find("tr").length) {
+                    this.content.html("<div class='k-loading-message'><span class='k-icon k-loading' /> Loading&hellip;</div>");
+                }
+            }, this));
         },
 
         refresh: function() {
@@ -368,10 +374,15 @@ var __meta__ = {
         _toggleChildren: function(e) {
             var icon = $(e.currentTarget);
             var model = this.dataItem(icon);
+            var loaded = model.loaded();
+
+            if (!loaded && model.expanded) {
+                return;
+            }
 
             model.expanded = !model.expanded;
 
-            if (!model.loaded()) {
+            if (!loaded) {
                 this.dataSource.load(model)
                     .always(proxy(this.refresh, this));
             }
@@ -455,15 +466,18 @@ var __meta__ = {
         },
 
         _render: function(data) {
-            var colgroup;
-            var tbody;
-            var table;
-
             this._absoluteIndex = 0;
 
-            colgroup = kendoDomElement("colgroup", null, this._cols());
-            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
-            table = kendoDomElement("table", {
+            if (!data.length) {
+                this.content.html("<div class='k-empty-message'>No rows</div>");
+                return;
+            } else {
+                this.content.find(".k-loading-message,.k-empty-message").remove();
+            }
+
+            var colgroup = kendoDomElement("colgroup", null, this._cols());
+            var tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
+            var table = kendoDomElement("table", {
                 "style": { "min-width": this.options.listWidth + "px" },
                 "tabIndex": 0,
                 "role": "treegrid"
