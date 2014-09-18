@@ -50,7 +50,6 @@
             isFunction = kendo.isFunction,
             isString = Utils.isString,
 
-            deepExtend = kendo.deepExtend,
             math = Math;
 
         // Constants ==============================================================
@@ -285,12 +284,11 @@
             init: function (options, dataItem) {
                 var that = this;
                 Observable.fn.init.call(that);
-                that.id = diagram.randomId();
-                that.options = deepExtend({}, that.options, options);
+                that.options = deepExtend({ id: diagram.randomId() }, that.options, options);
                 that.isSelected = false;
                 that.dataItem = dataItem;
                 that.visual = new Group({
-                    id: that.id,
+                    id: that.options.id,
                     autoSize: that.options.autoSize
                 });
                 that._template();
@@ -463,7 +461,7 @@
 
                 if (model) {
                     this.redraw(filterDataItem(fields, model));
-                } else {
+                } else if (this.dataItem) {
                     this.options = deepExtend({},
                         this.options,
                         filterDataItem(fields, this.dataItem)
@@ -2749,7 +2747,7 @@
 
             _addConnections: function(connections) {
                 var length = connections.length;
-                    defaults = this.options.connectionDefaults;
+                var defaults = this.options.connectionDefaults;
 
                 for (var i = 0; i < length; i++) {
                     var conn = connections[i];
@@ -2935,7 +2933,7 @@
                 if (value !== null && value !== undefined) {
                     result[field] = value;
                 }
-            };
+            }
 
             return result;
         }

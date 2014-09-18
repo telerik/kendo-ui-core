@@ -1821,15 +1821,15 @@
             },
 
             stop: function () {
-                var unit;
+                var unit, i, shape;
                 if (this._cp != this._sp) {
                     if (this._rotating) {
                         unit = new RotateUnit(this, this.shapes, this.initialRotates);
                         this._rotating = false;
                     } else {
                         if (this.diagram.ruler) {
-                            for (var i = 0; i < this.shapes.length; i++) {
-                                var shape = this.shapes[i];
+                            for (i = 0; i < this.shapes.length; i++) {
+                                shape = this.shapes[i];
                                 var bounds = shape.bounds();
                                 bounds = this._truncateSizeToGuides(this._truncatePositionToGuides(bounds));
                                 shape.bounds(bounds);
@@ -1837,8 +1837,8 @@
                                 this.refresh();
                             }
                         }
-                        for (var i = 0; i < this.shapes.length; i++) {
-                            var shape = this.shapes[i];
+                        for (i = 0; i < this.shapes.length; i++) {
+                            shape = this.shapes[i];
                             shape.updateModel();
                         }
                         unit = new TransformUnit(this.shapes, this.shapeStates, this);
