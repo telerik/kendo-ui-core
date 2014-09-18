@@ -2,11 +2,10 @@
     define([ "./shapes" ], f);
 })(function(){
 
-(function () {
+(function (&) {
 
     // Imports ================================================================
-    var $ = jQuery,
-        noop = $.noop,
+    var noop = $.noop,
         doc = document,
         math = Math,
 
