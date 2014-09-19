@@ -1666,7 +1666,7 @@
             };
 
             image.rect().setSize([200, 200]);
-            fillNode.geometryChange()
+            fillNode.geometryChange();
         });
     })();
 

@@ -4,6 +4,7 @@
         g = dataviz.geometry,
         Point = g.Point,
         Matrix = g.Matrix,
+        ClipRect = g.ClipRect,
 
         d = dataviz.drawing,
         Circle = d.Circle,
@@ -124,6 +125,35 @@
             ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
         });
 
+        test("load creates definitions", 3, function() {
+            var clipRect = new ClipRect();
+            node.definitionChange = function(e) {
+                equal(e.action, "add");
+                equal(e.definitions.clip, clipRect);
+            };
+
+            node.load([new Group({
+                clip: clipRect
+            })]);
+
+            equal(node.childNodes[0].definitions.clip, clipRect);
+        });
+
+        test("load does not create definitions if source does not have definitions", 0, function() {
+            var clipRect = new ClipRect();
+            var definitions;
+            node.definitionChange = function() {
+                ok(false);
+            };
+
+            node.load([new Group()]);
+            definitions = node.childNodes[0].definitions;
+
+            for (var definition in definitions) {
+                ok(false);
+            }
+        });
+
         test("attachTo renders children", 2, function() {
             var ChildNode = Node.extend({});
 
@@ -140,12 +170,14 @@
 
             node.attachTo(document.createElement("div"));
         });
+
     })();
 
     // ------------------------------------------------------------
     function nodeTests(TShape, TNode, name) {
         var shape,
             node,
+            clip,
             container;
 
         module("Base Node tests / " + name, {
@@ -190,6 +222,7 @@
             shape.visible(true);
         });
 
+        // ------------------------------------------------------------
         module("Base Node tests / " + name + " / observer", {
             setup: function() {
                 shape = new TShape();
@@ -204,6 +237,84 @@
         test("clear removes srcElement observer", function() {
             node.clear();
             equal(shape.observers().length, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Base Node tests / " + name + " / definitions", {
+            setup: function() {
+                container = new GroupNode();
+                clip = new ClipRect();
+                shape = new TShape();
+                shape.clip(clip);
+                container.load([shape]);
+                node = container.childNodes[0];
+            }
+        });
+
+        test("renders clip-path", function() {
+            ok(node.render().indexOf("clip-path='url(#" + clip.id + ")'") != -1);
+        });
+
+        test("clearing definition in the options removes definition", function() {
+            shape.options.set("clip", null);
+            equal(node.definitions.clip, undefined);
+        });
+
+        test("clearing definition triggers definition change", function() {
+            node.definitionChange = function(e) {
+                equal(e.action, "remove");
+                equal(e.definitions.clip, clip);
+            };
+            shape.options.set("clip", null);
+        });
+
+        test("clearing definition removes attribute", function() {
+            node.removeAttr = function(attr) {
+                equal(attr, "clip-path");
+            };
+            shape.options.set("clip", null);
+        });
+
+        test("sets new definition", 2, function() {
+            var newClip = new ClipRect();
+            node.definitionChange = function(e) {
+                if (e.action == "add") {
+                    equal(e.definitions.clip, newClip);
+                }
+            };
+            shape.options.set("clip", newClip);
+            equal(node.definitions.clip, newClip);
+        });
+
+        test("setting new definition updates attribute", function() {
+            var newClip = new ClipRect();
+            node.attr = function(attr, value) {
+                equal(attr, "clip-path");
+                equal(value, "url(#" + newClip.id + ")");
+            };
+            shape.options.set("clip", newClip);
+            equal(node.definitions.clip, newClip);
+        });
+
+        test("setting new definition removes the old one", function() {
+            var newClip = new ClipRect();
+            node.definitionChange = function(e) {
+                if (e.action == "remove") {
+                    equal(e.definitions.clip, clip);
+                }
+            };
+            shape.options.set("clip", newClip);
+        });
+
+        test("clear removes definitions", function() {
+            node.definitionChange = function(e) {
+                equal(e.action, "remove");
+                equal(e.definitions.clip, clip);
+            };
+            node.clear();
+            for (var definition in node.definitions) {
+                ok(false);
+            }
         });
     }
 
@@ -221,6 +332,13 @@
             ok(rootNode.defs instanceof svg.DefinitionNode);
         });
 
+        test("renders definition node", function() {
+            rootNode.defs.render = function() {
+                ok(true);
+            };
+            rootNode.render();
+        });
+
         test("propagates definition change to definition node", function() {
             var defs = rootNode.defs;
             defs.definitionChange = function(e) {
@@ -234,6 +352,15 @@
             rootNode.attachTo(container);
 
             deepEqual(rootNode.element, container);
+        });
+
+        test("attachTo attaches first child to definition node", function() {
+            var container = document.createElement("div");
+            var child = document.createElement("div");
+            container.appendChild(child);
+            rootNode.attachTo(container);
+
+            deepEqual(rootNode.defs.element, child);
         });
     })();
 
@@ -932,7 +1059,6 @@
         });
 
         test("renders clippath", function() {
-
             ok(clipNode.render().indexOf("clippath") !== -1);
         });
 
@@ -956,6 +1082,11 @@
             var path = pathNode.srcElement;
             rect.size.setWidth(200);
             isRectPath(path, rect);
+        });
+
+        test("clear removes srcElement observer", function() {
+            clipNode.clear();
+            equal(rect.observers().length, 0);
         });
     })();
 

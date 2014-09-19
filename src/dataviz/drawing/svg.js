@@ -473,9 +473,9 @@
             }
         },
 
-        removeDefinition: function(item) {
+        removeDefinition: function(srcElement) {
             var definitionMap = this.definitionMap;
-            var id = item.id;
+            var id = srcElement.id;
             var mapItem;
 
             mapItem = definitionMap[id];
