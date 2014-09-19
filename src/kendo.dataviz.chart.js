@@ -78,7 +78,10 @@ var __meta__ = {
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId,
-        valueOrDefault = dataviz.valueOrDefault;
+        valueOrDefault = dataviz.valueOrDefault,
+
+        geo = dataviz.geometry,
+        draw = dataviz.drawing;
 
     // Constants ==============================================================
     var NS = ".kendoChart",
@@ -261,6 +264,8 @@ var __meta__ = {
             chart.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative");
+
+            chart.surface = draw.Surface.create(chart.element);
 
             if (userOptions) {
                 dataSource = userOptions.dataSource;
@@ -458,21 +463,19 @@ var __meta__ = {
                 model = chart._getModel(),
                 view;
 
-            chart._destroyView();
-
             chart._model = model;
             chart._plotArea = model._plotArea;
 
-            view = chart._view =
-                dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
+            model.renderVisual();
 
-            if (view) {
-                view.load(model);
-                chart._viewElement = chart._renderView(view);
+            chart.surface.clear();
+            chart.surface.draw(model.visual);
+
+            /*
                 chart._tooltip = chart._createTooltip();
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
-            }
+            */
         },
 
         _sharedTooltip: function() {
@@ -513,7 +516,7 @@ var __meta__ = {
                 model = new RootElement(chart._modelOptions()),
                 plotArea;
 
-            model.parent = chart;
+            //model.parent = chart;
 
             Title.buildTitle(options.title, model);
 
@@ -7846,11 +7849,16 @@ var __meta__ = {
             var pane = this;
 
             // Content (such as charts) is rendered, but excluded from reflows
+            var content;
             if (last(pane.children) === pane.content) {
-                pane.children.pop();
+                content = pane.children.pop();
             }
 
             BoxElement.fn.reflow.call(pane, targetBox);
+
+            if (content) {
+                pane.children.push(content);
+            }
 
             if (pane.title) {
                 pane.contentBox.y1 += pane.title.box.height();
@@ -7866,8 +7874,7 @@ var __meta__ = {
                 result = [];
 
             group.children = elements.concat(
-                pane.renderGridLines(view),
-                pane.content.getViewElements(view)
+                pane.renderGridLines(view)
             );
 
             pane.view = view;

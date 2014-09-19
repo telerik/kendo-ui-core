@@ -633,12 +633,12 @@ var __meta__ = {
 
             element.options = deepExtend({}, element.options, options);
             element.id = element.options.id;
-
-            this.createVisual();
         },
 
         reflow: function(targetBox) {
             var element = this,
+                children = element.children,
+                box,
                 i,
                 currentChild;
 
@@ -738,10 +738,20 @@ var __meta__ = {
             append(this.children, arguments);
 
             for (var i = 0; i < arguments.length; i++) {
-                var child = arguments[i]
+                arguments[i].parent = this;
+            }
+        },
 
-                child.parent = this;
-                this.appendVisual(child.visual)
+        renderVisual: function() {
+            this.createVisual();
+
+            if (this.visual && this.parent) {
+                this.parent.appendVisual(this.visual);
+            }
+
+            var children = this.children;
+            for (var i = 0; i < children.length; i++) {
+                children[i].renderVisual();
             }
         },
 
