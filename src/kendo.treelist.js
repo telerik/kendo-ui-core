@@ -209,6 +209,17 @@ var __meta__ = {
             return result;
         },
 
+        _queueRequest: function(options, callback) {
+            // allow simultaneous requests (loading multiple items at the same time)
+            callback.call(this);
+        },
+
+        _modelLoaded: function(id, e) {
+            var model = this.get(id);
+            model.loaded(true);
+            model.hasChildren = this.childNodes(model).length > 0;
+        },
+
         load: function(model) {
             var method = "_query";
 
@@ -268,12 +279,6 @@ var __meta__ = {
             }
 
             baseFilter.call(this, value);
-        },
-
-        _modelLoaded: function(id, e) {
-            var model = this.get(id);
-            model.loaded(true);
-            model.hasChildren = this.childNodes(model).length > 0;
         }
     });
 

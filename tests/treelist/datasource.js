@@ -36,6 +36,37 @@
 
     module("TreeListDataSource");
 
+    function controlledRead() {
+        var queue = [];
+
+        var read = function(options) {
+            var deferred = $.Deferred();
+
+            deferred.then(options.success, options.error);
+
+            queue.push(deferred);
+        };
+
+        read.resolve = function(value) {
+            if (!queue.length) {
+                throw new Error("Tried to resolve a request that hasn't been executed.");
+            }
+            queue.shift().resolve(value);
+            return read;
+        };
+
+        read.reject = function(value) {
+            queue.shift().reject(value);
+            return read;
+        };
+
+        read.queueLength = function() {
+            return queue.length;
+        };
+
+        return read;
+    }
+
     test("extends DataSource", function() {
         ok(new TreeListDataSource() instanceof kendo.data.DataSource);
     });
@@ -58,9 +89,7 @@
                 read: function(options) {
                     calls++;
 
-                    options.success([
-                        { id: calls }
-                    ]);
+                    options.success([ { id: calls } ]);
                 }
             }
         });
@@ -80,10 +109,8 @@
         var ds = new TreeListDataSource({
             transport: {
                 read: function(options) {
-                    calls++;
-
                     options.success([
-                        { id: calls }
+                        { id: ++calls }
                     ]);
                 }
             }
@@ -102,10 +129,8 @@
         var ds = new TreeListDataSource({
             transport: {
                 read: function(options) {
-                    calls++;
-
                     options.success([
-                        { id: calls }
+                        { id: ++calls }
                     ]);
                 }
             }
@@ -125,10 +150,8 @@
         var ds = new TreeListDataSource({
             transport: {
                 read: function(options) {
-                    calls++;
-
                     options.success([
-                        { id: calls }
+                        { id: ++calls }
                     ]);
                 }
             }
@@ -640,55 +663,33 @@
     });
 
     test("node.loaded is false upon error", function() {
-        var called;
-
-        var ds = new TreeListDataSource({
-            transport: {
-                read: function(options) {
-                    if (!called) {
-                        called = true;
-                        options.success([ { id: 1, hasChildren: true } ]);
-                    } else {
-                        options.error({});
-                    }
-                }
-            }
-        });
+        var read = controlledRead();
+        var ds = new TreeListDataSource({ transport: { read: read } });
 
         ds.read();
+        read.resolve([ { id: 1, hasChildren: true } ]);
 
         ds.load(ds.at(0));
+        read.reject({});
 
         ok(!ds.at(0).loaded());
     });
 
     test("node.loaded is not updated on successful load after error", function() {
-        var calls = 0;
-
-        var ds = new TreeListDataSource({
-            transport: {
-                read: function(options) {
-                    calls++;
-
-                    if (calls == 1) {
-                        options.success([
-                            { id: 1, hasChildren: true },
-                            { id: 2, hasChildren: true }
-                        ]);
-                    } else if (calls == 2) {
-                        options.error({});
-                    } else {
-                        options.success([ { id: 3, parentId: 2 } ]);
-                    }
-                }
-            }
-        });
+        var read = controlledRead();
+        var ds = new TreeListDataSource({ transport: { read: read } });
 
         ds.read();
+        read.resolve([
+            { id: 1, hasChildren: true },
+            { id: 2, hasChildren: true }
+        ]);
 
         ds.load(ds.get(1));
+        read.reject({});
 
         ds.load(ds.get(2));
+        read.resolve([ { id: 3, parentId: 2 } ]);
 
         ok(!ds.get(1).loaded(), "Change handler updates wrong model");
         ok(ds.get(2).loaded(), "Change handler did not update correct model");
@@ -706,46 +707,49 @@
     });
 
     test("load resolves promise", 1, function() {
-        var ds = new TreeListDataSource({
-            transport: {
-                read: function(options) {
-                    options.success([
-                        { id: 1, hasChildren: true }
-                    ]);
-                }
-            }
-        });
+        var read = controlledRead();
+        var ds = new TreeListDataSource({ transport: { read: read } });
 
         ds.read();
+        read.resolve([ { id: 1, hasChildren: true } ]);
 
         ds.load(ds.get(1)).then(function() {
             ok(true);
         });
+
+        read.resolve([]);
     });
 
     test("load rejects promise upon error", 1, function() {
-        var calls = 0;
-        var ds = new TreeListDataSource({
-            transport: {
-                read: function(options) {
-                    calls++;
-
-                    if (calls == 1) {
-                        options.success([
-                            { id: 1, hasChildren: true }
-                        ]);
-                    } else {
-                        options.error({});
-                    }
-                }
-            }
-        });
+        var read = controlledRead();
+        var ds = new TreeListDataSource({ transport: { read: read } });
 
         ds.read();
+        read.resolve([ { id: 1, hasChildren: true } ]);
 
-        ds.load(ds.get(1)).then($.noop, function() {
+        ds.load(ds.get(1)).fail(function() {
             ok(true);
         });
+
+        read.reject({});
+    });
+
+    test("load queues requests", 3, function() {
+        var read = controlledRead();
+        var ds = new TreeListDataSource({ transport: { read: read } });
+
+        ds.read();
+        read.resolve([
+            { id: 1, hasChildren: true },
+            { id: 2, hasChildren: true },
+            { id: 3, hasChildren: true }
+        ]);
+
+        ds.load(ds.get(1)).then($.proxy(ok, this, true));
+        ds.load(ds.get(2)).then($.proxy(ok, this, true));
+        ds.load(ds.get(3)).then($.proxy(ok, this, true));
+
+        read.resolve([]).resolve([]).resolve([]);
     });
 
 })();
