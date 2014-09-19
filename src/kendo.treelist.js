@@ -41,7 +41,9 @@ var __meta__ = {
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
         gridContentWrap: "k-grid-content",
+        loading: "k-loading",
         selected: "k-state-selected",
+        status: "k-status",
         icon: "k-icon",
         iconCollapse: "k-i-collapse",
         iconExpand: "k-i-expand",
@@ -339,15 +341,17 @@ var __meta__ = {
             this.dataSource.bind(CHANGE, this._refreshHandler);
 
             this.dataSource.bind("progress", proxy(function() {
-                var content = this.content;
                 var messages = this.options.messages;
 
-                if (!content.find("tr").length) {
-                    content.html(
-                        "<div class='k-status'><span class='k-icon k-loading' /> " +
-                            messages.loading +
-                        "</div>"
-                    );
+                if (!this.content.find("tr").length) {
+                    this.contentTree.render([
+                        kendoDomElement("div", { className: classNames.status }, [
+                            kendoDomElement("span", {
+                                className: classNames.icon + " " + classNames.loading
+                            }),
+                            kendoTextElement(messages.loading)
+                        ])
+                    ]);
                 }
             }, this));
         },
@@ -488,21 +492,22 @@ var __meta__ = {
             this._absoluteIndex = 0;
 
             if (!data.length) {
-                this.content.html("<div class='k-status'>" + messages.noRows + "</div>");
-                return;
+                this.contentTree.render([
+                    kendoDomElement("div", { className: classNames.status }, [
+                        kendoTextElement(messages.noRows)
+                    ])
+                ]);
             } else {
-                this.content.find(".k-status").remove();
+                colgroup = kendoDomElement("colgroup", null, this._cols());
+                tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
+                table = kendoDomElement("table", {
+                    "style": { "min-width": this.options.listWidth + "px" },
+                    "tabIndex": 0,
+                    "role": "treegrid"
+                }, [colgroup, tbody]);
+
+                this.contentTree.render([table]);
             }
-
-            colgroup = kendoDomElement("colgroup", null, this._cols());
-            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
-            table = kendoDomElement("table", {
-                "style": { "min-width": this.options.listWidth + "px" },
-                "tabIndex": 0,
-                "role": "treegrid"
-            }, [colgroup, tbody]);
-
-            this.contentTree.render([table]);
             //this.trigger("render");
         },
 
