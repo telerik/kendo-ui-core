@@ -158,6 +158,18 @@
         ok(instance.content.text().indexOf("Loading") < 0);
     });
 
+    test("uses passed loading message", function() {
+        var read = controlledRead();
+        var message = "Fetching data";
+
+        createTreeList({
+            dataSource: { transport: { read: read } },
+            messages: { loading: message }
+        });
+
+        ok(instance.content.text().indexOf(message) >= 0);
+    });
+
     test("shows no rows message when no rows have been fetched", function() {
         var read = controlledRead();
 
@@ -167,6 +179,20 @@
 
         read.resolve([]);
 
-        ok(instance.content.text().indexOf("No rows") >= 0);
+        equal(instance.content.text(), "No records to display");
+    });
+
+    test("uses passed no rows message", function() {
+        var read = controlledRead();
+        var message = "Nothing to show";
+
+        createTreeList({
+            dataSource: { transport: { read: read } },
+            messages: { noRows: message }
+        });
+
+        read.resolve([]);
+
+        equal(instance.content.text(), message);
     });
 })();

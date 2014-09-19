@@ -339,8 +339,15 @@ var __meta__ = {
             this.dataSource.bind(CHANGE, this._refreshHandler);
 
             this.dataSource.bind("progress", proxy(function() {
-                if (!this.content.find("tr").length) {
-                    this.content.html("<div class='k-status'><span class='k-icon k-loading' /> Loading&hellip;</div>");
+                var content = this.content;
+                var messages = this.options.messages;
+
+                if (!content.find("tr").length) {
+                    content.html(
+                        "<div class='k-status'><span class='k-icon k-loading' /> " +
+                            messages.loading +
+                        "</div>"
+                    );
                 }
             }, this));
         },
@@ -373,7 +380,11 @@ var __meta__ = {
 
         options: {
             name: "TreeList",
-            autoBind: true
+            autoBind: true,
+            messages: {
+                noRows: "No records to display",
+                loading: "Loading..."
+            }
         },
 
         _toggleChildren: function(e) {
@@ -471,18 +482,21 @@ var __meta__ = {
         },
 
         _render: function(data) {
+            var colgroup, tbody, table;
+            var messages = this.options.messages;
+
             this._absoluteIndex = 0;
 
             if (!data.length) {
-                this.content.html("<div class='k-status'>No rows</div>");
+                this.content.html("<div class='k-status'>" + messages.noRows + "</div>");
                 return;
             } else {
                 this.content.find(".k-status").remove();
             }
 
-            var colgroup = kendoDomElement("colgroup", null, this._cols());
-            var tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
-            var table = kendoDomElement("table", {
+            colgroup = kendoDomElement("colgroup", null, this._cols());
+            tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
+            table = kendoDomElement("table", {
                 "style": { "min-width": this.options.listWidth + "px" },
                 "tabIndex": 0,
                 "role": "treegrid"
