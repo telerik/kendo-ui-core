@@ -1,4 +1,6 @@
-(function(){
+(function(parseFloat){
+
+    "use strict";
 
     var drawing = kendo.dataviz.drawing;
     var geo = kendo.dataviz.geometry;
@@ -15,9 +17,32 @@
     function getBorder(style, side) {
         side = "border-" + side;
         return {
-            width: parseInt(style.getPropertyValue(side + "-width"), 10),
+            width: parseFloat(style.getPropertyValue(side + "-width")),
             style: style.getPropertyValue(side + "-style"),
             color: style.getPropertyValue(side + "-color")
+        };
+    }
+
+    function getContentBox(element) {
+        var box = element.getBoundingClientRect();
+        box = innerBox(box, element, "border-*-width");
+        box = innerBox(box, element, "padding-*");
+        return box;
+    }
+
+    function innerBox(box, element, prop) {
+        var style = getComputedStyle(element);
+        var wt = parseFloat(style.getPropertyValue(prop.replace("*", "top")));
+        var wr = parseFloat(style.getPropertyValue(prop.replace("*", "right")));
+        var wb = parseFloat(style.getPropertyValue(prop.replace("*", "bottom")));
+        var wl = parseFloat(style.getPropertyValue(prop.replace("*", "left")));
+        return {
+            top    : box.top + wt,
+            right  : box.right - wr,
+            bottom : box.bottom - wb,
+            left   : box.left + wl,
+            width  : box.right - box.left - wr - wl,
+            height : box.bottom - box.top - wb - wt
         };
     }
 
@@ -128,10 +153,6 @@
 
         var boxes = getBounds(element);
 
-        if (bgColor) {
-            console.log(bgColor.toCssRgba(), boxes[0]);
-        }
-
         // var offset = $(element).offset(), width = $(element).width(), height = $(element).height();
         // var boxes = [{
         //     left   : offset.left,
@@ -151,19 +172,60 @@
         }
     }
 
+    function renderImage(element, group) {
+        var box = getContentBox(element);
+        var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
+        var image = new drawing.Image(element.src, rect);
+        group.append(image);
+    }
+
+    function zIndexSort(a, b) {
+        var sa = getComputedStyle(a);
+        var sb = getComputedStyle(b);
+        var za = parseFloat(sa.getPropertyValue("z-index"));
+        var zb = parseFloat(sb.getPropertyValue("z-index"));
+        var pa = sa.getPropertyValue("position");
+        var pb = sb.getPropertyValue("position");
+        if (isNaN(za) && isNaN(zb)) {
+            if (pa == "static" && pb == "static") {
+                return 0;
+            }
+            if (pa == "static") return -1;
+            if (pb == "static") return 1;
+            return 0;
+        }
+        if (isNaN(za)) {
+            return zb >= 0 ? -1 : 1;
+        }
+        if (isNaN(zb)) {
+            return za >= 0 ? 1 : -1;
+        }
+        return parseFloat(za) - parseFloat(zb);
+    }
+
     function renderContents(element, group) {
+        switch (element.tagName.toLowerCase()) {
+          case "img":
+            renderImage(element, group);
+            return;
+        }
+        var children = [];
         for (var i = element.firstChild; i; i = i.nextSibling) {
             switch (i.nodeType) {
               case 1:         // Element
-                if (/\S/.test(i.data)) {
-                    renderElement(i, group)
-                }
+                children.push(i);
                 break;
               case 3:         // Text
-                renderText(element, i, group)
+                if (/\S/.test(i.data)) {
+                    renderText(element, i, group);
+                }
                 break;
             }
         }
+        children = children.sort(zIndexSort);
+        children.forEach(function(el){
+            renderElement(el, group);
+        });
     }
 
     function renderText(element, node, group) {
@@ -175,12 +237,7 @@
 
         // skip whitespace
         var start = 0;
-        var end = /\S\s*$/.exec(node.data);
-        if (!end) {
-            // only whitespace?
-            return null;
-        }
-        end = end.index + 1;
+        var end = /\S\s*$/.exec(node.data).index + 1;
 
         function doChunk() {
             while (!/\S/.test(text.charAt(start))) {
@@ -190,17 +247,22 @@
                 start++;
             }
             range.setStart(node, start);
-            for (var i = start + 1; i <= end; ++i) {
-                range.setEnd(node, i);
-                if (range.getClientRects().length > 1 || (isJustified && /\s/.test(text.charAt(i - 1)))) {
-                    range.setEnd(node, --i);
+            while (++start <= end) {
+                range.setEnd(node, start);
+
+                // for justified text we must split at each space, as
+                // space has variable width.  otherwise we can
+                // optimize and split only at end of line (i.e. when a
+                // new rectangle would be created).
+                if ((isJustified && /\s/.test(text.charAt(start - 1)))
+                    || range.getClientRects().length > 1) {
+                    range.setEnd(node, --start);
                     break;
                 }
             }
             var box = range.getBoundingClientRect();
             var str = range.toString().replace(/\s+$/, "");
             drawText(str, box);
-            start = i;
         }
 
         // simply getPropertyValue("font") doesn't work in Firefox :-\
@@ -227,9 +289,13 @@
     }
 
     function renderElement(element, container) {
+        if (/^(style|script|link|meta|iframe|svg)$/i.test(element.tagName)) {
+            return;
+        }
         var style = getComputedStyle(element);
+        //console.log(element.tagName, style.getPropertyValue("z-index"), element);
 
-        var opacity = parseFloat(style.getPropertyValue(opacity));
+        var opacity = parseFloat(style.getPropertyValue("opacity"));
         if (opacity == 0) return;
         // XXX: how  to handle opacity?
 
@@ -237,13 +303,20 @@
         var t = getTransform(style);
         if (t) {
             var prevTransform = element.style.transform;
-            element.style.setProperty("transform", "none", "important");
-            // XXX: not quite correct
-            transform(group, mmul(t.matrix, [ 1, 0, 0, 1, t.origin[0], t.origin[1] ]));
+            //element.style.setProperty("transform", "none", "important");
+            element.style.transform = "none";
+
+            // XXX: not quite correct, must take origin into account
+            var m = [ 1, 0, 0, 1, 0, 0 ];
+            m = mmul(m, [ 1, 0, 0, 1, -t.origin[0], -t.origin[1] ]);
+            m = mmul(m, t.matrix);
+            m = mmul(m, [ 1, 0, 0, 1, t.origin[0], t.origin[1] ]);
+            transform(group, m);
         }
         renderBorderAndBackground(element, group);
         renderContents(element, group);
         if (t) {
+            console.log(prevTransform);
             element.style.transform = prevTransform;
         }
         container.append(group);
@@ -270,4 +343,4 @@
         ];
     }
 
-})();
+})(parseFloat);

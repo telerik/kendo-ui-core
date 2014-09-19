@@ -113,6 +113,9 @@
             color = parseColor(color);
             if (color == null) return; // no stroke
             page.setStrokeColor(color.r, color.g, color.b);
+            if (color.a != 1) {
+                page.setStrokeOpacity(color.a);
+            }
         }
 
         var width = stroke.width;
@@ -152,6 +155,9 @@
         if (color) {
             color = parseColor(color);
             page.setFillColor(color.r, color.g, color.b);
+            if (color.a != 1) {
+                page.setFillOpacity(color.a);
+            }
         }
 
         var opacity = fill.opacity;
