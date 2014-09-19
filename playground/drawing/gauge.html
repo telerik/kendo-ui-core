@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gauge components</title>
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.common.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.default.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.default.min.css" />
+    <script src="../../src/jquery.min.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.svg.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/text-metrics.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/mixins.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/vml.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+    <!--<script src="../../src/kendo.dataviz.gauge.js"></script>-->
+     <script src="gauge.js"></script> 
+<style>
+#surface {
+    height: 500px;
+}
+</style>
+</head>
+<body>
+  <div id="surface"></div>
+  <div id="gauge"></div>
+  <script>
+    var dataviz = kendo.dataviz;
+    var geo = dataviz.geometry;
+    var draw = dataviz.drawing;
+
+    var Point = geo.Point;
+    var Circle = draw.Circle;
+    var Group = draw.Group;
+    var Path = draw.Path;
+    var Text = draw.Text;
+    var Arc = draw.Arc;
+
+    var Pointer = dataviz.Pointer;
+    var RadialPointer = dataviz.RadialPointer;
+    var RadialScale = dataviz.RadialScale;
+
+    var surface = draw.Surface.create($("#surface"));
+
+    var root = new Group();
+    var pointer = new RadialPointer();
+    pointer.render(root);
+
+    var scale = new RadialScale({
+        minorUnit: 10,
+        majorUnit: 20,
+        startAngle: -20,
+        endAngle: 180,
+        minorTicks: {
+            visible: false
+        }
+    });
+    scale.render(root);
+
+    surface.draw(root);
+
+   //  $("#gauge").kendoRadialGauge({
+   //     pointer: {
+   //         value: 5
+   //     },
+   //     scale: {
+   //         min: 0,
+   //         max: 10
+   //     }
+   // });
+  </script>
+</body>
+</html>
