@@ -36,7 +36,8 @@
         border-width: 2px 5px 1em 10px;
         border-color: red green blue orange;
         border-style: solid;
-        background: rgba(255, 255, 255, 0.7);
+        border-radius: 10px 20px 30px 40px;
+        background: rgba(255, 255, 255, 0.5);
         padding: 1em;
         margin: 1em;
         color: red;
@@ -46,7 +47,8 @@
       }
 
       .test span {
-        border: 1px solid #ccc;
+        border: 1px solid #777;
+        background: rgba(0, 1, 0, 0.15);
       }
       .test span b {
         background: #fea;
@@ -57,6 +59,7 @@
 
     <button onclick="pdf('#test1')">PDF</button>
     <div id="test1" style="padding: 2em">
+
       <img src="images/4.jpg" width="200px"
            style="margin-left: 1em;
                   border: 2px solid black;
@@ -66,8 +69,22 @@
                   opacity: 0.7;
                   transform: rotate(15deg);
                   left: 10px;
+                  border-radius: 20px;
                   background: yellow;" />
-      <div style="width: 30%; font: 14px/20px verdana; position: relative" class="test">
+
+      <img src="images/4.jpg" width="200px"
+           style="margin-left: 1em;
+                  border: 2px solid black;
+                  padding: 5px;
+                  position: absolute;
+                  z-index: -1;
+                  opacity: 0.7;
+                  transform: rotate(15deg);
+                  left: 100px;
+                  border-radius: 20px;
+                  background: yellow;" />
+
+      <div style="width: 30%; font: 14px/24px verdana; position: relative" class="test">
         <span>
           This is a nonsensical document, but syntactically valid HTML 4.0. All
           100% conformant CSS1 agents should be able to render the document
@@ -79,6 +96,22 @@
           style="text-decoration:none">parent page</A>.
         </span>
       </div>
+      <div style="width: 500px; height: 100px; overflow: hidden; border: 1px solid black; position: relative">
+        Opacity: <b>broken</b>; border-radius: <b>broken</b><br /> CSS
+        transforms: <b>broken</b>.  Shape A: translate by -origin, apply
+        transform, render element.  Shape B: translate by +origin, append A.
+        Return B.<br />
+        <b>€</b>
+        <div style="position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: yellow; border: 1px solid red">
+          Implement clipping!
+        </div>
+      </div>
+      <ul>
+        <li>Render</li>
+        <li>List</li>
+        <li>Bullets</li>
+        <li>Or numbers</li>
+      </ul>
     </div>
 
     <script>
@@ -91,14 +124,16 @@
         });
       }
 
-      draw("#test1");
-
       function pdf(sel) {
         var el = $(sel)[0];
         kendo.dataviz.drawing.drawDOM(el, function(root){
           kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
         });
       }
+
+      $(document).ready(function(){
+        draw("#test1");
+      });
     </script>
 
   </body>

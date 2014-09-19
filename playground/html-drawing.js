@@ -313,6 +313,13 @@
             m = mmul(m, [ 1, 0, 0, 1, t.origin[0], t.origin[1] ]);
             transform(group, m);
         }
+
+        // XXX: the proper order is:
+        //      - background
+        //      - content
+        //      - border
+        // in the current impl, the background of a child element
+        // might show slightly over the border.
         renderBorderAndBackground(element, group);
         renderContents(element, group);
         if (t) {
