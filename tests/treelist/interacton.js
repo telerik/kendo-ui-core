@@ -79,6 +79,9 @@
         };
 
         read.resolve = function(value) {
+            if (!queue.length) {
+                throw new Error("Tried to resolve a request that hasn't been executed.");
+            }
             queue.shift().resolve(value);
         };
 
@@ -194,5 +197,67 @@
         read.resolve([]);
 
         equal(instance.content.text(), message);
+    });
+
+    test("shows refresh icon to allow re-fetching of rows", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.resolve([ { id: 1, hasChildren: true } ]);
+
+        instance.content.find(".k-i-expand").click();
+
+        read.reject({});
+
+        equal(instance.content.find(".k-i-refresh").length, 1);
+    });
+
+    test("clicking refresh icon fetches rows", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.resolve([ { id: 1, hasChildren: true } ]);
+
+        instance.content.find(".k-i-expand").click();
+
+        read.reject({});
+
+        instance.content.find(".k-i-refresh").click();
+
+        read.resolve([ { id: 2, parentId: 1 } ]);
+
+        equal(instance.content.find("tr").length, 2);
+    });
+
+    test("failing to load root item shows request failed message", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.reject({});
+
+        ok(instance.content.text().indexOf("Request failed.") >= 0);
+    });
+
+    test("request failed messages is used from messages object", function() {
+        var read = controlledRead();
+        var message = "Oops, something went wrong.";
+
+        createTreeList({
+            dataSource: { transport: { read: read } },
+            messages: { requestFailed: message }
+        });
+
+        read.reject({});
+
+        ok(instance.content.text().indexOf(message) >= 0);
     });
 })();

@@ -27,6 +27,7 @@ var __meta__ = {
     var map = $.map;
     var grep = $.grep;
     var CHANGE = "change";
+    var ERROR = "error";
     var DOT = ".";
     var NS = ".kendoTreeList";
     var CLICK = "click";
@@ -42,6 +43,7 @@ var __meta__ = {
         gridContent: "k-grid-content",
         gridContentWrap: "k-grid-content",
         loading: "k-loading",
+        refresh: "k-i-refresh",
         selected: "k-state-selected",
         status: "k-status",
         icon: "k-icon",
@@ -84,7 +86,7 @@ var __meta__ = {
         },
 
         shouldSerialize: function(field) {
-            return Model.fn.shouldSerialize.call(this, field) && field !== "_loaded";
+            return Model.fn.shouldSerialize.call(this, field) && field !== "_loaded" && field != "_error";
         }
     });
 
@@ -216,10 +218,14 @@ var __meta__ = {
             callback.call(this);
         },
 
-        _modelLoaded: function(id, e) {
+        _modelLoaded: function(id) {
             var model = this.get(id);
             model.loaded(true);
             model.hasChildren = this.childNodes(model).length > 0;
+        },
+
+        _modelError: function(id, e) {
+            this.get(id)._error = e;
         },
 
         load: function(model) {
@@ -229,7 +235,10 @@ var __meta__ = {
                 method = "read";
             }
 
-            return this[method]({ id: model.id }).then(proxy(this._modelLoaded, this, model.id));
+            return this[method]({ id: model.id }).then(
+                proxy(this._modelLoaded, this, model.id),
+                proxy(this._modelError, this, model.id)
+            );
         },
 
         _byParentId: function(id) {
@@ -334,11 +343,14 @@ var __meta__ = {
                 this.dataSource.unbind(CHANGE, this._refreshHandler);
             } else {
                 this._refreshHandler = proxy(this.refresh, this);
+                this._errorHandler = proxy(this._error, this);
             }
 
             this.dataSource = TreeListDataSource.create(dataSource);
 
             this.dataSource.bind(CHANGE, this._refreshHandler);
+
+            this.dataSource.bind(ERROR, this._errorHandler);
 
             this.dataSource.bind("progress", proxy(function() {
                 var messages = this.options.messages;
@@ -356,10 +368,16 @@ var __meta__ = {
             }, this));
         },
 
+        _error: function(e) {
+            if (!this.dataSource.rootNodes().length) {
+                this._render({ error: e });
+            }
+        },
+
         refresh: function() {
             var dataSource = this.dataSource;
 
-            this._render(dataSource.rootNodes());
+            this._render({ data: dataSource.rootNodes() });
         },
 
         _adjustHeight: function() {
@@ -387,7 +405,9 @@ var __meta__ = {
             autoBind: true,
             messages: {
                 noRows: "No records to display",
-                loading: "Loading..."
+                loading: "Loading...",
+                requestFailed: "Request failed.",
+                retry: "Retry"
             }
         },
 
@@ -396,10 +416,18 @@ var __meta__ = {
             var model = this.dataItem(icon);
             var loaded = model.loaded();
 
+            // reset error state
+            if (model._error) {
+                model.expanded = false;
+                model._error = undefined;
+            }
+
+            // do not trigger load twice
             if (!loaded && model.expanded) {
                 return;
             }
 
+            // toggle expanded state
             model.expanded = !model.expanded;
 
             if (!loaded) {
@@ -411,7 +439,9 @@ var __meta__ = {
         },
 
         _attachEvents: function() {
-            var icons = "." + classNames.iconCollapse + ", ." + classNames.iconExpand;
+            var icons = "." + classNames.iconCollapse +
+                ", ." + classNames.iconExpand +
+                ", ." + classNames.refresh;
 
             this.content.on(CLICK + NS, icons, proxy(this._toggleChildren, this));
         },
@@ -463,7 +493,7 @@ var __meta__ = {
             element
                 .addClass(classNames.wrapper)
                 .append("<div class='" + classNames.gridHeader + "'><div class='" + classNames.gridHeaderWrap + "' /></div>")
-                .append("<div class='" + classNames.gridContentWrap + "'></div>");
+                .append("<div class='" + classNames.gridContentWrap + "' />");
 
             this.header = element.find(DOT + classNames.gridHeaderWrap);
             this.content = element.find(DOT + classNames.gridContent);
@@ -485,13 +515,20 @@ var __meta__ = {
             domTree.render([table]);
         },
 
-        _render: function(data) {
+        _render: function(options) {
             var colgroup, tbody, table;
             var messages = this.options.messages;
+            var data = options.data;
 
             this._absoluteIndex = 0;
 
-            if (!data.length) {
+            if (options.error) {
+                this.contentTree.render([
+                    kendoDomElement("div", { className: classNames.status }, [
+                        kendoTextElement(messages.requestFailed)
+                    ])
+                ]);
+            } else if (!data.length) {
                 this.contentTree.render([
                     kendoDomElement("div", { className: classNames.status }, [
                         kendoTextElement(messages.noRows)
@@ -665,8 +702,10 @@ var __meta__ = {
                     iconClass.push(classNames.iconHidden);
                 }
 
-                if (!model.loaded() && model.expanded) {
-                    iconClass.push("k-loading");
+                if (model._error) {
+                    iconClass.push(classNames.refresh);
+                } else if (!model.loaded() && model.expanded) {
+                    iconClass.push(classNames.loading);
                 }
 
                 children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
