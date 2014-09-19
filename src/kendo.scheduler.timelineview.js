@@ -699,7 +699,7 @@ var __meta__ = {
                             } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < eventStartTime) {
                                 startDate = getDate(start);
                                 //in case the date should be moved to next date
-                                kendo.date.addDays(startDate,1);
+                                startDate = kendo.date.addDays(startDate,1);
 
                                 setTime(startDate, startTime);
                                 tail = true;
@@ -714,7 +714,7 @@ var __meta__ = {
                                 console.log("adjust endTime");
                             } else if ((endTime === 0 ? MS_PER_DAY : endTime ) < startTime) {
                                 endDate = getDate(end);
-                                kendo.date.addDays(endDate,-1);
+                                endDate = kendo.date.addDays(endDate,-1);
                                 //endDate = getDate(endDate);
                                 setTime(endDate, endTime);
                                 head = true;
@@ -837,7 +837,7 @@ var __meta__ = {
             for (var slotIndex = 0; slotIndex < slotRanges.length; slotIndex++) {
                 //x1 <= y2 && y1 <= x2
                 //needs additional check only for exceptions
-                if (+startTime <= +slotRanges[slotIndex].end && +slotRanges[slotIndex].start <= +endTime) {
+                if (+startTime <= +slotRanges[slotIndex].end && +slotRanges[slotIndex].start < +endTime) {
                     return true;
                 }
             }
