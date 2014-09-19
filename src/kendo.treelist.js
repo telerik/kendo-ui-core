@@ -340,7 +340,7 @@ var __meta__ = {
 
             this.dataSource.bind("progress", proxy(function() {
                 if (!this.content.find("tr").length) {
-                    this.content.html("<div class='k-loading-message'><span class='k-icon k-loading' /> Loading&hellip;</div>");
+                    this.content.html("<div class='k-status'><span class='k-icon k-loading' /> Loading&hellip;</div>");
                 }
             }, this));
         },
@@ -474,10 +474,10 @@ var __meta__ = {
             this._absoluteIndex = 0;
 
             if (!data.length) {
-                this.content.html("<div class='k-empty-message'>No rows</div>");
+                this.content.html("<div class='k-status'>No rows</div>");
                 return;
             } else {
-                this.content.find(".k-loading-message,.k-empty-message").remove();
+                this.content.find(".k-status").remove();
             }
 
             var colgroup = kendoDomElement("colgroup", null, this._cols());
