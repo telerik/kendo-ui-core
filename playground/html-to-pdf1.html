@@ -172,28 +172,28 @@
     <p style="color: black; font-size: 1em; line-height: 1.3em; clear: both">
       This is a nonsensical document, but syntactically valid HTML 4.0. All 100% conformant CSS1 agents should be able to render the document elements above this paragraph <b>indistinguishably</b> (to the pixel) from this reference rendering, (except font rasterization and form widgets). All discrepancies should be traceable to CSS1 implementation shortcomings. Once you have finished evaluating this test, you can return to the <A HREF="sec5526c.htm" style="text-decoration:none">parent page</A>.
     </p>
-    <!-- <script type="text/javascript" src="../dist/html2canvas.js"></script> -->
-    <script src="html2canvas/promise.js"></script>
-    <!-- <script src="../src/fallback.js"></script> -->
 
-    <script src="html2canvas/core.js"></script>
-    <script src="html2canvas/dummyimagecontainer.js"></script>
-    <script src="html2canvas/font.js"></script>
-    <script src="html2canvas/fontmetrics.js"></script>
-    <script src="html2canvas/gradientcontainer.js"></script>
-    <script src="html2canvas/imagecontainer.js"></script>
-    <script src="html2canvas/imageloader.js"></script>
-    <script src="html2canvas/lineargradientcontainer.js"></script>
-    <script src="html2canvas/log.js"></script>
-    <script src="html2canvas/nodecontainer.js"></script>
-    <script src="html2canvas/nodeparser.js"></script>
-    <script src="html2canvas/proxyimagecontainer.js"></script>
-    <script src="html2canvas/renderer.js"></script>
-    <script src="html2canvas/renderers/canvas.js"></script>
-    <script src="html2canvas/stackingcontext.js"></script>
-    <script src="html2canvas/support.js"></script>
-    <script src="html2canvas/textcontainer.js"></script>
-    <script src="html2canvas/webkitgradientcontainer.js"></script>
+    <!-- <script src="html2canvas/promise.js"></script> -->
+    <!-- <\!-- <script src="../src/fallback.js"></script> -\-> -->
+
+    <!-- <script src="html2canvas/core.js"></script> -->
+    <!-- <script src="html2canvas/dummyimagecontainer.js"></script> -->
+    <!-- <script src="html2canvas/font.js"></script> -->
+    <!-- <script src="html2canvas/fontmetrics.js"></script> -->
+    <!-- <script src="html2canvas/gradientcontainer.js"></script> -->
+    <!-- <script src="html2canvas/imagecontainer.js"></script> -->
+    <!-- <script src="html2canvas/imageloader.js"></script> -->
+    <!-- <script src="html2canvas/lineargradientcontainer.js"></script> -->
+    <!-- <script src="html2canvas/log.js"></script> -->
+    <!-- <script src="html2canvas/nodecontainer.js"></script> -->
+    <!-- <script src="html2canvas/nodeparser.js"></script> -->
+    <!-- <script src="html2canvas/proxyimagecontainer.js"></script> -->
+    <!-- <script src="html2canvas/renderer.js"></script> -->
+    <!-- <script src="html2canvas/renderers/canvas.js"></script> -->
+    <!-- <script src="html2canvas/stackingcontext.js"></script> -->
+    <!-- <script src="html2canvas/support.js"></script> -->
+    <!-- <script src="html2canvas/textcontainer.js"></script> -->
+    <!-- <script src="html2canvas/webkitgradientcontainer.js"></script> -->
 
     <!-- pdf -->
     <script src="loader.js"></script>
@@ -201,9 +201,9 @@
       requireSync([
         "../src/jquery.js",
         "../src/kendo.dataviz.js",
+        "./html-drawing.js"
       ]);
     </script>
-    <script src="html2canvas/renderers/kendo.js"></script>
 
     <script type="text/javascript">
         kendo.PDF.defineFont({
@@ -212,13 +212,16 @@
             "Verdana|Bold|Italic" : "./Verdana/Verdana_Bold_Italic.ttf",
             "Verdana|Italic"      : "./Verdana/Verdana_Italic.ttf"
         });
-        html2canvas.logging = true;
-        html2canvas(document.body, {
-            logging: true,
-            async: false,
-            onrendered: function(root) {
-                kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
-            }
+        <!-- html2canvas.logging = true; -->
+        <!-- html2canvas(document.body, { -->
+        <!--     logging: true, -->
+        <!--     async: false, -->
+        <!--     onrendered: function(root) { -->
+        <!--         kendo.dataviz.drawing.pdf.toDataURL(root, window.open); -->
+        <!--     } -->
+        <!-- }); -->
+        kendo.dataviz.drawing.drawDOM(document.body, function(root){
+          kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
         });
     </script>
   </body>

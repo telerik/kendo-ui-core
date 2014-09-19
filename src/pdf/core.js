@@ -253,7 +253,7 @@
                     ctx.drawImage(img, 0, 0);
                     var data = canvas.toDataURL("image/jpeg");
                     data = data.substr(data.indexOf(";base64,") + 8);
-                    data = window.atob(data);
+                    data = global.atob(data);
                     cont(IMAGE_CACHE[url] = new PDF.JPEG(data));
                 });
             };
@@ -1117,18 +1117,19 @@
     }
 
     function parseFontDef(fontdef) {
-        // XXX: this is very crude for now.  Proper parsing is quite involved.
-        var rx = /^\s*((normal|italic)\s+)?((normal|small-caps)\s+)?((normal|bold)\s+)?(([0-9.]+)(px|pt))(\/(([0-9.]+)(px|pt)))?\s+(.*?)\s*$/i;
+        // XXX: this is very crude for now and buggy.  Proper parsing is quite involved.
+        var rx = /^\s*((normal|italic)\s+)?((normal|small-caps)\s+)?((normal|bold|\d+)\s+)?(([0-9.]+)(px|pt))(\/(([0-9.]+)(px|pt)|normal))?\s+(.*?)\s*$/i;
         var m = rx.exec(fontdef);
         if (!m) {
             return { fontSize: 12, fontFamily: "sans-serif" };
         }
+        var fontSize = m[8] ? parseInt(m[8], 10) : 12;
         return {
             italic     : m[2] && m[2].toLowerCase() == "italic",
             variant    : m[4],
-            bold       : m[6] && m[6].toLowerCase() == "bold",
-            fontSize   : m[8] ? parseInt(m[8], 10) : 12,
-            lineHeight : m[12] ? parseInt(m[12], 10) : null,
+            bold       : m[6] && /bold|700/i.test(m[6]),
+            fontSize   : fontSize,
+            lineHeight : m[12] ? m[12] == "normal" ? fontSize : parseInt(m[12], 10) : null,
             fontFamily : m[14].split(/\s*,\s*/g)
         };
     }
