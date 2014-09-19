@@ -307,4 +307,57 @@ test("toXML sets the 'ySplit' attribute when the rowSplit option is set", functi
     equal(dom.find("pane").attr("ySplit"), 2);
 });
 
+test("toXML creates 'cols' element when the columns option is set", function() {
+    var worksheet = Worksheet({
+        columns: []
+    });
+
+    var dom = $(worksheet.toXML());
+    equal(dom.find("cols").length, 1);
+});
+
+test("toXML creates 'col' element for every item in the columns option", function() {
+    var worksheet = Worksheet({
+        columns: [{}, {}]
+    });
+
+    var dom = $($.parseXML(worksheet.toXML()));
+    equal(dom.find("col").length, 2);
+});
+
+test("toXML sets the 'min' and 'max' attribute of the 'col' element to the column index plus one", function() {
+    var worksheet = Worksheet({
+        columns: [{}]
+    });
+
+    var dom = $($.parseXML(worksheet.toXML()));
+    equal(dom.find("col").attr("min"), 1);
+    equal(dom.find("col").attr("max"), 1);
+});
+
+test("toXML sets the 'customWidth' attribute of the 'col' element when width is set", function() {
+    var worksheet = Worksheet({
+        columns: [{
+           width: 1
+        }]
+    });
+
+    var dom = $($.parseXML(worksheet.toXML()));
+    equal(dom.find("col").attr("customWidth"), 1);
+});
+
+test("toXML sets the 'width' attribute of the 'col' element according to forumla", function() {
+// see: http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column(v=office.14).aspx
+// for some reason though subtracting 5 px padding didn't work and we don't do it
+
+    var worksheet = Worksheet({
+        columns: [{
+           width: 500
+        }]
+    });
+
+    var dom = $($.parseXML(worksheet.toXML()));
+    equal(Math.round(dom.find("col").attr("width")), 71);
+});
+
 }());

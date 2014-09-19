@@ -112,11 +112,24 @@ var WORKSHEET = kendo.template(
        '# if (freezePane.rowSplit) { #' +
        ' ySplit="${freezePane.rowSplit}"' +
        '# } #' +
+       ' topLeftCell="${String.fromCharCode(65 + freezePane.colSplit)}${freezePane.rowSplit+1}"'+
        '/>' +
        '# } #' +
        '</sheetView>' +
    '</sheetViews>' +
    '<sheetFormatPr defaultRowHeight="15" x14ac:dyDescent="0.25" />' +
+   '# if (columns) { #' +
+   '<cols>' +
+   '# for (var ci = 0; ci < columns.length; ci++) { #' +
+       '# var column = columns[ci]; #' +
+       '<col min="${ci+1}" max="${ci+1}"' +
+       '# if (column.width) { #' +
+       ' customWidth="1" width="${(((column.width)/7)*100+0.5)/100}" ' +
+       '# } #' +
+       '/>' +
+   '# } #' +
+   '</cols>' +
+   '# } #' +
    '<sheetData>' +
    '# for (var ri = 0; ri < data.length; ri++) { #' +
        '# var row = data[ri]; #' +
@@ -251,6 +264,7 @@ var Worksheet = kendo.Class.extend({
     toXML: function() {
         return WORKSHEET({
             freezePane: this.options.freezePane,
+            columns: this.options.columns,
             data: $.map(this.options.data || [], $.proxy(this._row, this))
         });
     },
