@@ -136,13 +136,22 @@ var WORKSHEET = kendo.template(
        '<row r="r${ri + 1}">' +
        '# for (var ci = 0; ci < row.data.length; ci++) { #' +
            '# var cell = row.data[ci];#' +
-           '<c r="${String.fromCharCode(65 + ci)}${ri+1}" # if (cell.style) { # s="${cell.style}" # } # # if (cell.type) { # t="${cell.type}"# } #>' +
+           '<c r="${cell.ref}" # if (cell.style) { # s="${cell.style}" # } # # if (cell.type) { # t="${cell.type}"# } #>' +
+           '# if (cell.value != null) { #' +
                '<v>${cell.value}</v>' +
+           '# } #' +
            '</c>' +
        '# } #' +
        '</row>' +
    '# } #' +
    '</sheetData>' +
+   '# if (mergeCells.length) { #' +
+   '<mergeCells count="${mergeCells.length}">' +
+       '# for (var ci = 0; ci < mergeCells.length; ci++) { #' +
+       '<mergeCell ref="${mergeCells[ci]}"/>' +
+       '# } #' +
+   '</mergeCells>' +
+   '# } #' +
    '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
 '</worksheet>');
 
@@ -255,22 +264,29 @@ var STYLES = kendo.template(
    '<tableStyles count="0" defaultTableStyle="TableStyleMedium2" defaultPivotStyle="PivotStyleMedium9" />' +
 '</styleSheet>');
 
+function ref(rowIndex, colIndex) {
+    return String.fromCharCode(65 + colIndex) + (rowIndex + 1);
+}
+
 var Worksheet = kendo.Class.extend({
     init: function(options, sharedStrings, styles) {
         this.options = options;
         this._strings = sharedStrings;
         this._styles = styles;
+        this._mergeCells = [];
     },
     toXML: function() {
         return WORKSHEET({
             freezePane: this.options.freezePane,
             columns: this.options.columns,
-            data: $.map(this.options.data || [], $.proxy(this._row, this))
+            data: $.map(this.options.data || [], $.proxy(this._row, this)),
+            mergeCells: this._mergeCells,
         });
     },
-    _row: function(data) {
+    _row: function(data, rowIndex) {
+        this._cellIndex = 0;
         return {
-            data: $.map(data, $.proxy(this._cell, this))
+            data: $.map(data, $.proxy(this._cell, this, rowIndex))
         };
     },
     _lookupString: function(value) {
@@ -303,7 +319,7 @@ var Worksheet = kendo.Class.extend({
         // There is one default style
         return index + 1;
     },
-    _cell: function(data) {
+    _cell: function(rowIndex, data) {
         var value = data.value;
 
         var style = {
@@ -327,7 +343,7 @@ var Worksheet = kendo.Class.extend({
         } else if (type === "boolean") {
             type = "b";
             value = +value;
-        } else if (value.toISOString) {
+        } else if (value != null && value.toISOString) {
             type = "d";
             value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
             if (!style.format) {
@@ -343,8 +359,29 @@ var Worksheet = kendo.Class.extend({
         var cell = {
             value: value,
             type: type,
-            style: style
+            style: style,
+            ref: ref(rowIndex, this._cellIndex)
         };
+
+        if (data.colSpan > 1) {
+            var cells = new Array(data.colSpan);
+
+            cells[0] = cell;
+
+            for (var ci = 1; ci < cells.length; ci++) {
+                this._cellIndex++;
+
+                cells[ci] = {
+                    ref: ref(rowIndex, this._cellIndex)
+                };
+            }
+
+            this._mergeCells.push(cell.ref + ":" + ref(rowIndex, this._cellIndex));
+
+            cell = cells;
+        }
+
+        this._cellIndex ++;
 
         return cell;
     }

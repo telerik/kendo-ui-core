@@ -360,4 +360,75 @@ test("toXML sets the 'width' attribute of the 'col' element according to forumla
     equal(Math.round(dom.find("col").attr("width")), 71);
 });
 
+test("toXML creates the 'mergeCell' element for cells with colSpan", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").length, 1);
+});
+
+test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with colSpan", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").attr("ref"), "A1:B1");
+});
+
+test("toXML adds extra cells after cell with colSpan", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 3 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").length, 3);
+});
+
+test("toXML creates empty extra cells after cell with colSpan", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c:last").children().length, 0);
+});
+
+test("toXML adjusts the ref of cells after colspan", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 3 }, { }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c:last").attr("r"), "D1");
+});
+
+test("toXML sets the 'count' attribute of the 'mergeCells' element", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 3 }, { }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCells").attr("count"), 1);
+});
+
+test("toXML creates 'mergeCell' elements for multiple cells with colSpan attribute", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 3 }, { }, { colSpan: 2}],
+        [{ colSpan: 3 }, { }, { colSpan: 2}]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").length, 4);
+});
+
 }());
