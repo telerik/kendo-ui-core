@@ -93,6 +93,15 @@
             BaseNode.fn.init.call(this, srcElement);
             if (srcElement) {
                 srcElement.addObserver(this);
+                this.initClip();
+            }
+        },
+
+        initClip: function() {
+            var clip = this.srcElement.clip();
+            if (clip) {
+                this.clip = clip;
+                clip.addObserver(this);
             }
         },
 
@@ -101,7 +110,38 @@
                 this.srcElement.removeObserver(this);
             }
 
+            this.clearClip();
+
             BaseNode.fn.clear.call(this);
+        },
+
+        clearClip: function() {
+            if (this.clip) {
+                this.clip.removeObserver(this);
+                delete this.clip;
+            }
+        },
+
+        setClip: function(ctx) {
+            if (this.clip) {
+                var path = new PathNode(d.Path.fromRect(this.clip, {
+                    stroke: {
+                        color: NONE
+                    }
+                }));
+                ctx.beginPath();
+                path.renderTo(ctx);
+                ctx.clip();
+            }
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "clip") {
+                this.clearClip();
+                this.initClip();
+            }
+
+            BaseNode.fn.optionsChange.call(this, e);
         },
 
         renderTo: function(ctx) {
@@ -110,6 +150,7 @@
 
             ctx.save();
             this.setTransform(ctx);
+            this.setClip(ctx);
 
             for (i = 0; i < childNodes.length; i++) {
                 childNodes[i].renderTo(ctx);
@@ -199,9 +240,11 @@
         renderTo: function(ctx) {
             ctx.save();
 
+            this.setTransform(ctx);
+            this.setClip(ctx);
+
             ctx.beginPath();
 
-            this.setTransform(ctx);
             this.renderPoints(ctx, this.srcElement);
 
             this.setLineDash(ctx);
@@ -341,9 +384,12 @@
             var size = text.measure();
 
             ctx.save();
-            ctx.beginPath();
 
             this.setTransform(ctx);
+            this.setClip(ctx);
+
+            ctx.beginPath();
+
             ctx.font = text.options.font;
 
             if (this.setFill(ctx)) {
@@ -377,6 +423,8 @@
                 ctx.save();
 
                 this.setTransform(ctx);
+                this.setClip(ctx);
+
                 this.drawImage(ctx);
 
                 ctx.restore();

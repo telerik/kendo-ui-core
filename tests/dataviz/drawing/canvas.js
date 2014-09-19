@@ -13,7 +13,7 @@
         return kendo.deepExtend({
             beginPath: $.noop,
             clearRect: $.noop,
-            close: $.noop,
+            closePath: $.noop,
             drawImage: $.noop,
             fill: $.noop,
             fillText: $.noop,
@@ -156,10 +156,70 @@
         });
     })();
 
+    function clipTests(TShape, TNode, nodeName) {
+        var shape;
+        var node;
+        var clip;
+
+        module("Clip Tests / " + nodeName, {
+            setup: function() {
+                clip = new g.ClipRect();
+
+                shape = new TShape();
+                shape.clip(clip);
+
+                node = new TNode(shape);
+            }
+        });
+
+        test("inits clip", function() {
+            equal(node.clip, clip);
+        });
+
+        test("adds clip observer", function() {
+            ok($.inArray(node, clip.observers()) != -1);
+        });
+
+        test("clear removes clip", function() {
+            node.clear();
+            equal(node.clip, undefined);
+        });
+
+        test("clear removes clip observer", function() {
+            node.clear();
+            equal($.inArray(node, clip.observers()), -1);
+        });
+
+        test("sets clip", function() {
+            var context = mockContext({
+                clip: function() {
+                    ok(true);
+                }
+            });
+            node.renderTo(context);
+        });
+
+        test("sets clip after transformation", function() {
+            shape.transform(g.transform());
+            var isSetTransformation = false;
+            var context = mockContext({
+                clip: function() {
+                    ok(isSetTransformation);
+                },
+                transform: function() {
+                    isSetTransformation = true;
+                }
+            });
+            node.renderTo(context);
+        });
+    }
+
     // ------------------------------------------------------------
     (function() {
         var node;
         var srcElement;
+
+        clipTests(d.Group, canv.Node, "Node");
 
         module("Node", {
             setup: function() {
@@ -470,6 +530,7 @@
             pathNode;
 
         paintTests(d.Path, canv.PathNode, "PathNode");
+        clipTests(d.Path, canv.PathNode, "PathNode");
 
         module("PathNode", {
             setup: function() {
@@ -775,6 +836,7 @@
         var textNode;
 
         paintTests(d.Text, canv.TextNode, "TextNode");
+        clipTests(d.Text, canv.TextNode, "TextNode");
 
         module("TextNode", {
             setup: function() {
@@ -895,6 +957,15 @@
     (function() {
         var image;
         var imageNode;
+
+        var LoadedImageNode = canv.ImageNode.extend({
+            init: function(srcElement) {
+                canv.ImageNode.fn.init.call(this, srcElement);
+                this._loaded = true;
+            }
+        });
+
+        clipTests(d.Image, LoadedImageNode, "ImageNode");
 
         module("ImageNode", {
             setup: function() {
