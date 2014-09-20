@@ -998,6 +998,11 @@
             equal(path.options.stroke.color, "foo");
         });
 
+        test("constructs path from Rect", function() {
+            path = Path.fromRect(new g.Rect([10, 20], [100, 200]));
+            compareBoundingBox(path.rawBBox(), [10, 20, 110, 220]);
+        });
+
         test("moveTo adds segment", function() {
             path.moveTo(0, 0);
             equal(path.segments.length, 1);
@@ -1198,7 +1203,6 @@
             path.transform(g.transform().scale(2,2));
             compareBoundingBox(path.rawBBox(), [0, 0, 100, 100]);
         });
-
 
         shapeBaseTests(Path, "Path");
     })();

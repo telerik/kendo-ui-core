@@ -514,6 +514,15 @@
     });
     deepExtend(Path.fn, drawing.mixins.Paintable);
 
+    Path.fromRect = function(rect, options) {
+        return new Path(options)
+            .moveTo(rect.topLeft())
+            .lineTo(rect.topRight())
+            .lineTo(rect.bottomRight())
+            .lineTo(rect.bottomLeft())
+            .close();
+    };
+
     var MultiPath = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
