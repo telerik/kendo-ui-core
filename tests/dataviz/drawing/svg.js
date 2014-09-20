@@ -387,13 +387,18 @@
             ok(pathNode.render().indexOf("stroke='red'") !== -1);
         });
 
-        test("renders empty stroke if set to transparent", function() {
+        test("renders empty stroke if set to 'transparent'", function() {
             path.options.set("stroke.color", "transparent");
             ok(pathNode.render().indexOf("stroke='none'") !== -1);
         });
 
-        test("renders empty stroke if set to none", function() {
+        test("renders empty stroke if set to 'none'", function() {
             path.options.set("stroke.color", "none");
+            ok(pathNode.render().indexOf("stroke='none'") !== -1);
+        });
+
+        test("renders empty stroke if set to ''", function() {
+            path.options.set("stroke.color", "");
             ok(pathNode.render().indexOf("stroke='none'") !== -1);
         });
 
@@ -476,6 +481,11 @@
             ok(pathNode.render().indexOf("fill='none'") !== -1);
         });
 
+        test("renders empty fill if set to ''", function() {
+            path.options.set("fill", '');
+            ok(pathNode.render().indexOf("fill='none'") !== -1);
+        });
+
         test("renders cursor", function() {
             path.options.set("cursor", "hand");
             ok(pathNode.render().indexOf("cursor:hand;") !== -1);
@@ -526,13 +536,31 @@
             path.options.set("fill.opacity", 0.4);
         });
 
-        test("optionsChange sets fill color to none for transparent", function() {
+        test("optionsChange sets fill color to none for 'transparent'", function() {
             pathNode.attr = function(name, value) {
                 equal(name, "fill");
                 equal(value, "none");
             };
 
             path.options.set("fill.color", "transparent");
+        });
+
+        test("optionsChange sets fill color to none for 'none'", function() {
+            pathNode.attr = function(name, value) {
+                equal(name, "fill");
+                equal(value, "none");
+            };
+
+            path.options.set("fill.color", "none");
+        });
+
+        test("optionsChange sets fill color to none for ''", function() {
+            pathNode.attr = function(name, value) {
+                equal(name, "fill");
+                equal(value, "none");
+            };
+
+            path.options.set("fill.color", "");
         });
 
         test("optionsChange sets fill", 2, function() {

@@ -17,6 +17,7 @@
 
         util = dataviz.util,
         defined = util.defined,
+        isTransparent = util.isTransparent,
         renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr,
         renderSize = util.renderSize,
@@ -31,7 +32,6 @@
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         TRANSFORM = "transform",
-        TRANSP = "transparent",
         UNDEFINED = "undefined";
 
     // SVG rendering surface ==================================================
@@ -409,7 +409,7 @@
         mapStroke: function(stroke) {
             var attrs = [];
 
-            if (stroke && stroke.color !== NONE && stroke.color !== TRANSP) {
+            if (stroke && !isTransparent(stroke.color)) {
                 attrs.push(["stroke", stroke.color]);
                 attrs.push(["stroke-width", stroke.width]);
                 attrs.push(["stroke-linecap", this.renderLinecap(stroke)]);
@@ -462,7 +462,7 @@
         mapFill: function(fill) {
             var attrs = [];
 
-            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
+            if (fill && !isTransparent(fill.color)) {
                 attrs.push(["fill", fill.color]);
 
                 if (defined(fill.opacity)) {

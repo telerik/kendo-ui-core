@@ -23,6 +23,7 @@
         alignToPixel = util.alignToPixel,
         append = util.append,
         defined = util.defined,
+        isTransparent = util.isTransparent,
         round = util.round,
         renderTemplate = util.renderTemplate,
         valueOrDefault = util.valueOrDefault,
@@ -39,8 +40,7 @@
         DASH_ARRAYS = d.DASH_ARRAYS,
         FRAME_DELAY = 1000 / 60,
         NONE = "none",
-        SOLID = "solid",
-        TRANSP = "transparent";
+        SOLID = "solid";
 
     // Canvas Surface ==========================================================
     var Surface = d.Surface.extend({
@@ -201,7 +201,7 @@
 
         setFill: function(ctx) {
             var fill = this.srcElement.options.fill;
-            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
+            if (fill && !isTransparent(fill.color)) {
                 ctx.fillStyle = fill.color;
                 ctx.globalAlpha = fill.opacity;
                 ctx.fill();
@@ -212,7 +212,7 @@
 
         setStroke: function(ctx) {
             var stroke = this.srcElement.options.stroke;
-            if (stroke && stroke.color !== NONE && stroke.color !== TRANSP) {
+            if (stroke && !isTransparent(stroke.color)) {
                 ctx.strokeStyle = stroke.color;
                 ctx.lineWidth = valueOrDefault(stroke.width, 1);
                 ctx.globalAlpha = stroke.opacity;

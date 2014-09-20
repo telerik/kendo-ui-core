@@ -645,17 +645,18 @@
             equal(fillNode.element.on, "true");
         });
 
-        test("renders on attribute if no fill set", function() {
+        test("renders on attribute if set to 'none'", function() {
+            path.options.set("fill.color", "none");
             equal(fillNode.element.on, "false");
         });
 
-        test("renders on attribute if set to none", function() {
-            createNode({ fill: { color: "none" } });
+        test("renders on attribute if set to 'transparent'", function() {
+            path.options.set("fill.color", "transparent");
             equal(fillNode.element.on, "false");
         });
 
-        test("renders on attribute if set to transparent", function() {
-            createNode({ fill: { color: "transparent" } });
+        test("renders on attribute if set to ''", function() {
+            path.options.set("fill.color", "");
             equal(fillNode.element.on, "false");
         });
 
@@ -689,7 +690,7 @@
             path.options.set("fill.opacity", 0.4);
         });
 
-        test("optionsChange clears fill for none", function() {
+        test("optionsChange clears fill for 'none'", function() {
             fillNode.attr = function(name, value) {
                 if (name === "on") {
                     equal(value, "false");
@@ -699,24 +700,24 @@
             path.options.set("fill.color", "none");
         });
 
-        test("optionsChange clears fill for none", function() {
+        test("optionsChange clears fill for 'transparent'", function() {
             fillNode.attr = function(name, value) {
                 if (name === "on") {
                     equal(value, "false");
                 }
             };
 
-            path.options.set("fill.color", "none");
+            path.options.set("fill.color", "transparent");
         });
 
-        test("optionsChange clears fill for transparent", function() {
+        test("optionsChange clears fill for ''", function() {
             fillNode.attr = function(name, value) {
                 if(name === "on") {
                     equal(value, "false");
                 }
             };
 
-            path.options.set("fill.color", "transparent");
+            path.options.set("fill.color", "");
         });
 
         test("optionsChange sets fill", 3, function() {

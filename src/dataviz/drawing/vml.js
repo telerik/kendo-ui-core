@@ -22,8 +22,10 @@
         toMatrix = g.toMatrix,
 
         util = dataviz.util,
+        isTransparent = util.isTransparent,
         defined = util.defined,
         deg = util.deg,
+        renderTemplate = util.renderTemplate,
         round = util.round;
 
     // Constants ==============================================================
@@ -315,7 +317,7 @@
             var fill = this.srcElement.options.fill;
             var attrs = [];
 
-            if (fill && fill.color !== NONE && fill.color !== TRANSP) {
+            if (fill && !isTransparent(fill.color)) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", fill.color]);
 

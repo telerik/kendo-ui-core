@@ -209,6 +209,10 @@
         return result.join(" ");
     }
 
+    function isTransparent(color) {
+        return color === "" || color === "none" || color === "transparent";
+    }
+
     // Mixins =================================================================
     function geometryChange() {
         if (this.observer) {
@@ -236,6 +240,7 @@
             hashKey: hashKey,
             hashObject: hashObject,
             isNumber: isNumber,
+            isTransparent: isTransparent,
             last: last,
             limitValue: limitValue,
             objectKey: objectKey,
