@@ -17,10 +17,30 @@
               "kendo.dataviz.chart" ], function(){
 
         $("#chart").kendoChart({
+            series: [{
+                type: "column",
+                data: [1, 2, 3]
+            }],
+            categoryAxis: {
+                categories: ["Fooooooo", "Baaaaaaaaaar\nBar", "Baz"],
+                labels: {
+                    rotation: 45,
+                    border: {
+                        width: 1,
+                        color: "#cf0"
+                    }
+                }
+            }
         });
 
     });
     </script>
+    <style>
+        #chart {
+            width: 800px;
+            height: 500px;
+        }
+    </style>
   </head>
   <body>
       <div id="chart"></div>

@@ -20,6 +20,8 @@ var __meta__ = {
     var doc = document,
         kendo = window.kendo,
         dataviz = kendo.dataviz,
+        geom = dataviz.geometry,
+        draw = dataviz.drawing,
         Class = kendo.Class,
         template = kendo.template,
         map = $.map,
@@ -452,6 +454,10 @@ var __meta__ = {
             box.y2 = box.y1 + height;
 
             return box;
+        },
+
+        toRect: function() {
+            return new geom.Rect([this.x1, this.y1], [this.width(), this.height()]);
         }
     };
 
@@ -973,6 +979,28 @@ var __meta__ = {
                 cursor: options.cursor,
                 data: { modelId: boxElement.modelId }
             };
+        },
+
+        visualStyle: function() {
+            var boxElement = this,
+                options = boxElement.options,
+                border = options.border || {};
+
+            return {
+                stroke: {
+                    width: border.width,
+                    color: border.color,
+                    opacity: valueOrDefault(border.opacity, options.opacity),
+                    dashType: border.dashType
+                },
+                fill: {
+                    color: options.background,
+                    opacity: options.opacity
+                },
+                // TODO: zIndex
+                //zIndex: options.zIndex,
+                cursor: options.cursor
+            };
         }
     });
 
@@ -1026,6 +1054,16 @@ var __meta__ = {
                     })
                 )
             ];
+        },
+
+        createVisual: function() {
+            var opt = this.options;
+
+            this.visual = new draw.Text(this.content, this.box.toRect().topLeft(), {
+                font: opt.font,
+                fill: { color: opt.color, opacity: opt.opacity },
+                cursor: opt.cursor
+            });
         }
     });
 
@@ -1299,6 +1337,42 @@ var __meta__ = {
             return [element];
         },
 
+        createVisual: function() {
+            var options = this.options;
+
+            if (!options.visible) {
+                return;
+            }
+
+            this.visual = new dataviz.drawing.Group({
+                transform: this.rotationTransform()
+            });
+
+            // TODO Z-INDEX
+            //var zIndex = boxOptions.zIndex;
+
+            if (this.hasBox()) {
+                var box = draw.Path.fromRect(this.paddingBox.toRect(), this.visualStyle());
+                this.visual.append(box);
+            }
+        },
+
+        rotationTransform: function() {
+            var rotation = this.options.rotation;
+            if (!rotation) {
+                return null;
+            }
+
+            var center = this.normalBox.center();
+            var cx = center.x;
+            var cy = center.y;
+            var boxCenter = this.box.center();
+
+            return geom.transform()
+                       .translate(boxCenter.x - cx, boxCenter.y - cy)
+                       .rotate(rotation, [cx, cy]);
+        },
+
         rotationMatrix: function() {
             var textbox = this;
             var options = textbox.options;
@@ -1392,27 +1466,29 @@ var __meta__ = {
         }
     });
 
-    function createAxisTick(view, options, tickOptions) {
+    function createAxisTick(options, tickOptions) {
         var tickX = options.tickX,
             tickY = options.tickY,
-            position = options.position,
-            start, end;
+            position = options.position;
+
+        var tick = new draw.Path({
+            stroke: {
+                width: tickOptions.width,
+                color: tickOptions.color
+            }
+            // TODO
+            // align: options._alignLines
+        });
 
         if (options.vertical) {
-            start = Point2D(tickX, position);
-            end = Point2D(tickX + tickOptions.size, position);
+            tick.moveTo(tickX, position)
+                .lineTo(tickX + tickOptions.size, position);
         } else {
-            start = Point2D(position, tickY);
-            end = Point2D(position, tickY + tickOptions.size);
+            tick.moveTo(position, tickY)
+                .lineTo(position, tickY + tickOptions.size);
         }
 
-        return view.createLine(
-            start.x, start.y,
-            end.x, end.y, {
-                strokeWidth: tickOptions.width,
-                stroke: tickOptions.color,
-                align: options._alignLines
-            });
+        return tick;
     }
 
     function createAxisGridLine(view, options, gridLine) {
@@ -1662,25 +1738,32 @@ var __meta__ = {
             return value;
         },
 
-        renderTicks: function(view) {
+        createVisual: function() {
+            this.visual = new draw.Group();
+            this.createBackground();
+            this.createPlotBands();
+            this.createLine();
+        },
+
+        createTicks: function(view) {
             var axis = this,
-                ticks = [],
                 options = axis.options,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
                 tickLineOptions= {
-                    _alignLines: options._alignLines,
+                    // TODO
+                    // _alignLines: options._alignLines,
                     vertical: options.vertical
                 },
                 start, end;
 
-            function render(tickPositions, tickOptions) {
+            function render(tickPositions, tickOptions, skipUnit) {
                 var i, count = tickPositions.length;
 
                 if (tickOptions.visible) {
                     for (i = tickOptions.skip; i < count; i += tickOptions.step) {
-                        if (i % tickOptions.skipUnit === 0) {
+                        if (defined(skipUnit) && (i % skipUnit === 0)) {
                             continue;
                         }
 
@@ -1688,55 +1771,42 @@ var __meta__ = {
                         tickLineOptions.tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                         tickLineOptions.position = tickPositions[i];
 
-                        ticks.push(createAxisTick(view, tickLineOptions, tickOptions));
+                        axis.visual.append(createAxisTick(tickLineOptions, tickOptions));
                     }
                 }
             }
 
             render(axis.getMajorTickPositions(), options.majorTicks);
-            render(axis.getMinorTickPositions(), deepExtend({}, {
-                    skipUnit: majorUnit / options.minorUnit
-                }, options.minorTicks));
-
-            return ticks;
+            render(axis.getMinorTickPositions(), options.minorTicks, majorUnit / options.minorUnit);
         },
 
-        renderLine: function(view) {
+        createLine: function() {
             var axis = this,
                 options = axis.options,
                 line = options.line,
                 lineBox = axis.lineBox(),
-                lineOptions,
-                elements = [];
+                lineOptions;
 
             if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
+                var path = new draw.Path({
+                    stroke: {
+                        width: line.width,
+                        color: line.color,
+                        dashType: line.dashType,
+                    }
+
+                    /* TODO
                     zIndex: line.zIndex,
                     align: options._alignLines
-                };
+                    */
+                });
 
-                elements.push(view.createLine(
-                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
-                    lineOptions));
+                path.moveTo(lineBox.x1, lineBox.y1)
+                    .lineTo(lineBox.x2, lineBox.y2);
 
-                append(elements, axis.renderTicks(view));
+                this.visual.append(path);
+                this.createTicks();
             }
-
-            return elements;
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                elements = ChartElement.fn.getViewElements.call(axis, view);
-
-            append(elements, axis.renderLine(view));
-            append(elements, axis.renderPlotBands(view));
-            append(elements, axis.renderBackground(view));
-
-            return elements;
         },
 
         getActualTickSize: function () {
@@ -1755,36 +1825,35 @@ var __meta__ = {
             return tickSize;
         },
 
-        renderBackground: function(view) {
+        createBackground: function() {
             var axis = this,
                 options = axis.options,
                 background = options.background,
-                box = axis.box,
-                elements = [];
+                box = axis.box;
 
             if (background) {
-                elements.push(
-                    view.createRect(box, {
-                        fill: background, zIndex: -1
-                    })
-                );
-            }
+                var path = draw.Path.fromRect(box.toRect(), {
+                    fill: {
+                        color: background
+                    },
+                    stroke: null
+                });
 
-            return elements;
+                this.visual.append(path);
+            }
         },
 
-        renderPlotBands: function(view) {
+        createPlotBands: function() {
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
                 vertical = options.vertical,
-                result = [],
                 plotArea = axis.plotArea,
                 slotX, slotY, from, to;
 
             if (plotBands.length) {
                 var range = this.range();
-                result = map(plotBands, function(item) {
+                $.each(plotBands, function(i, item) {
                     from = valueOrDefault(item.from, MIN_VALUE);
                     to = valueOrDefault(item.to, MAX_VALUE);
                     var element = [];
@@ -1798,16 +1867,23 @@ var __meta__ = {
                             slotY = plotArea.axisY.lineBox();
                         }
 
-                        element = view.createRect(
-                                Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                                { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
-                    }
+                        var bandRect = new geom.Rect(
+                            [slotX.x1, slotY.y1],
+                            [slotX.width(), slotY.height()]
+                        );
 
-                    return element;
+                        var path = draw.Path.fromRect(bandRect, {
+                            fill: {
+                                color: item.color,
+                                opacity: item.opacity
+                            },
+                            stroke: null
+                        });
+
+                        axis.visual.append(path);
+                    }
                 });
             }
-
-            return result;
         },
 
         renderGridLines: function(view, altAxis) {
