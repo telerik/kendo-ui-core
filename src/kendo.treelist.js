@@ -43,6 +43,7 @@ var __meta__ = {
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
         gridContentWrap: "k-grid-content",
+        footerTemplate: "k-footer-template",
         loading: "k-loading",
         refresh: "k-i-refresh",
         retry: "k-request-retry",
@@ -507,13 +508,9 @@ var __meta__ = {
 
         _header: function() {
             var domTree = this.headerTree;
-            var colgroup;
-            var thead;
-            var table;
-
-            colgroup = kendoDomElement("colgroup", null, this._cols());
-            thead = kendoDomElement("thead", { "role": "rowgroup" }, [kendoDomElement("tr", { "role": "row" }, this._ths())]);
-            table = kendoDomElement("table", {
+            var colgroup = kendoDomElement("colgroup", null, this._cols());
+            var thead = kendoDomElement("thead", { "role": "rowgroup" }, [kendoDomElement("tr", { "role": "row" }, this._ths())]);
+            var table = kendoDomElement("table", {
                 "style": { "min-width": this.options.listWidth + "px" },
                 "role": "grid"
             }, [colgroup, thead]);
@@ -529,6 +526,7 @@ var __meta__ = {
             this._absoluteIndex = 0;
 
             if (options.error) {
+                // root-level error message
                 this.contentTree.render([
                     kendoDomElement("div", { className: classNames.status }, [
                         kendoTextElement(messages.requestFailed),
@@ -538,14 +536,19 @@ var __meta__ = {
                     ])
                 ]);
             } else if (!data.length) {
+                // no rows message
                 this.contentTree.render([
                     kendoDomElement("div", { className: classNames.status }, [
                         kendoTextElement(messages.noRows)
                     ])
                 ]);
             } else {
+                // render rows
                 colgroup = kendoDomElement("colgroup", null, this._cols());
-                tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs(data));
+                tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs({
+                    data: data,
+                    level: 0
+                }));
                 table = kendoDomElement("table", {
                     "style": { "min-width": this.options.listWidth + "px" },
                     "tabIndex": 0,
@@ -554,7 +557,6 @@ var __meta__ = {
 
                 this.contentTree.render([table]);
             }
-            //this.trigger("render");
         },
 
         _ths: function() {
@@ -606,20 +608,21 @@ var __meta__ = {
             return cols;
         },
 
-        _trs: function(data) {
+        _trs: function(options) {
             var model;
             var rows = [];
             var attr;
-            var className = [];
-            var level;
+            var className;
+            var level = options.level;
+            var data = options.data;
             var hasChildren;
             var childNodes;
             var dataSource = this.dataSource;
 
             for (var i = 0, length = data.length; i < length; i++) {
-                model = data[i];
+                className = [];
 
-                level = dataSource.level(model);
+                model = data[i];
 
                 childNodes = model.loaded() && dataSource.childNodes(model);
                 hasChildren = childNodes && childNodes.length;
@@ -651,19 +654,51 @@ var __meta__ = {
                     model: model,
                     attr: attr,
                     level: level
-                }));
+                }, this._td));
 
                 if (model.expanded && hasChildren) {
-                    rows = rows.concat(this._trs(childNodes));
+                    rows = rows.concat(this._trs({
+                        data: childNodes,
+                        level: level + 1
+                    }));
                 }
+            }
 
-                className = [];
+            if (this._hasFooterTemplate()) {
+                rows.push(this._tds({
+                    model: options.aggregates,
+                    attr: { className: classNames.footerTemplate },
+                    level: level
+                }, this._footerTd));
             }
 
             return rows;
         },
 
-        _tds: function(options) {
+        _footerTd: function(options) {
+            var content = [];
+            var column = options.column;
+            var template = options.column.footerTemplate || $.noop;
+
+            if (column.expandable) {
+                content = content.concat(createPlaceholders({
+                    level: options.level + 1,
+                    className: classNames.iconPlaceHolder
+                }));
+            }
+
+            content.push(kendoTextElement(template() || ""));
+
+            return kendoDomElement("td", { "role": "gridcell" }, content);
+        },
+
+        _hasFooterTemplate: function() {
+            return !!grep(this.columns, function(c) {
+                return c.footerTemplate;
+            }).length;
+        },
+
+        _tds: function(options, renderer) {
             var children = [];
             var columns = this.columns;
             var column;
@@ -671,7 +706,7 @@ var __meta__ = {
             for (var i = 0, l = columns.length; i < l; i++) {
                 column = columns[i];
 
-                children.push(this._td({
+                children.push(renderer({
                     model: options.model,
                     column: column,
                     level: options.level

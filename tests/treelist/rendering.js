@@ -338,4 +338,51 @@
 
         equal(instance.header.find("tr>th:last").text(), "Header template");
     });
+
+    test("footer template as function is rendered", function() {
+        var templateFunction = function() {
+            return "Footer template";
+        };
+
+        createTreeList({
+            columns: [
+                "id",
+                { field: "parentId", footerTemplate: templateFunction }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+        equal(instance.content.find("tr").length, 2);
+        equal(footers.length, 1);
+        equal(footers.find("td").eq(0).text(), "", "Footer cells without content should be empty");
+        equal(footers.find("td").eq(1).text(), "Footer template");
+    });
+
+    test("footer template renders for child rows", function() {
+        var templateFunction = function() {
+            return "Footer template";
+        };
+
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: templateFunction } ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, expanded: true },
+                    { id: 2, parentId: 1 },
+                    { id: 3, parentId: 1 }
+                ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+
+        equal(footers.length, 2);
+        equal(footers.find("td").first().find(".k-i-none").length, 2);
+        equal(footers.find("td").last().text(), "Footer template");
+    });
 })();
