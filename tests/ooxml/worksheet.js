@@ -370,6 +370,16 @@ test("toXML creates the 'mergeCell' element for cells with colSpan", function() 
     equal(dom.find("mergeCell").length, 1);
 });
 
+test("toXML creates the 'mergeCell' element for cells with rowSpan", function() {
+    var worksheet = Worksheet([
+        [{ rowSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").length, 1);
+});
+
 test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with colSpan", function() {
     var worksheet = Worksheet([
         [{ colSpan: 2 }]
@@ -380,6 +390,27 @@ test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with c
     equal(dom.find("mergeCell").attr("ref"), "A1:B1");
 });
 
+test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with rowSpan", function() {
+    var worksheet = Worksheet([
+        [{ rowSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").attr("ref"), "A1:A2");
+});
+
+test("toXML creates the 'mergeCell' element for cells with rowSpan", function() {
+    var worksheet = Worksheet([
+        [{ rowSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").length, 1);
+});
+
+
 test("toXML adds extra cells after cell with colSpan", function() {
     var worksheet = Worksheet([
         [{ colSpan: 3 }]
@@ -388,6 +419,18 @@ test("toXML adds extra cells after cell with colSpan", function() {
     var dom = $(worksheet.toXML());
 
     equal(dom.find("c").length, 3);
+});
+
+test("toXML adds missing cells after cell with rowSpan", function() {
+    var worksheet = Worksheet([
+        [{ rowSpan: 3 }, {}],
+        [ {} ],
+        [ {} ],
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").length, 6);
 });
 
 test("toXML creates empty extra cells after cell with colSpan", function() {
