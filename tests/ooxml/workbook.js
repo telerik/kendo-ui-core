@@ -554,4 +554,52 @@ test("toDataUrl sets 'applyAlignment' attribute to '1' if hAlign is set", functi
     equal(dom.find("cellXfs > xf").last().attr("applyAlignment"), 1);
 });
 
+test("toDataUrl sets 'applyAlignment' attribute to '1' if vAlign is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { vAlign: "middle", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("applyAlignment"), 1);
+});
+
+test("toDataUrl creates 'alignment' element and sets its 'horizontal' attribute if hAlign is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { hAlign: "center", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf:last > alignment").attr("horizontal"), "center");
+});
+
+test("toDataUrl creates 'alignment' element and sets its 'vertical' attribute if vAlign is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { vAlign: "center", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf:last > alignment").attr("vertical"), "center");
+});
+
 }());

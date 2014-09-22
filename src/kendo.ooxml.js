@@ -262,7 +262,21 @@ var STYLES = kendo.template(
        '# if (style.numFmtId) { #' +
           ' numFmtId="${style.numFmtId}" applyNumberFormat="1"' +
        '# } #' +
-       '></xf>' +
+       '# if (style.hAlign || style.vAlign) { #' +
+       ' applyAlignment="1"' +
+       '# } #' +
+       '>' +
+       '# if (style.hAlign || style.vAlign) { #' +
+       '<alignment' +
+       '# if (style.hAlign) { #' +
+       ' horizontal="${style.hAlign}"' +
+       '# } #' +
+       '# if (style.vAlign) { #' +
+       ' vertical="${style.vAlign}"' +
+       '# } #' +
+       '/>' +
+       '# } #' +
+       '</xf>' +
    '# } #' +
    '</cellXfs>' +
    '<dxfs count="0" />' +
@@ -339,7 +353,9 @@ var Worksheet = kendo.Class.extend({
             underline: data.underline,
             fontName: data.fontName,
             fontSize: data.fontSize,
-            format: data.format
+            format: data.format,
+            hAlign: data.hAlign,
+            vAlign: data.vAlign
         };
 
         var type = typeof value;
@@ -549,6 +565,9 @@ var Workbook = kendo.Class.extend({
               if (style.background) {
                   result.fillId = $.inArray(style, fills) + 2;
               }
+
+              result.hAlign = style.hAlign;
+              result.vAlign = style.vAlign;
 
               if (style.format) {
                   if (defaultFormats[style.format] !== undefined) {
