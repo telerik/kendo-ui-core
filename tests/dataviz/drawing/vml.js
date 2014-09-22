@@ -891,8 +891,8 @@
         });
 
         test("renders cursor", function() {
-            node = createNode({ cursor: "grab" });
-            equal(node.element.style.cursor, "grab");
+            node = createNode({ cursor: "none" });
+            equal(node.element.style.cursor, "none");
         });
 
         test("does not render cursor if not set", function() {
