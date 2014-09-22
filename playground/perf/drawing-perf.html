@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <title>Map sandbox</title>
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.common.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/web/kendo.default.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.min.css" />
+    <link rel="stylesheet" href="../../dist/styles/dataviz/kendo.dataviz.default.min.css" />
+    <script src="../../src/jquery.min.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/text-metrics.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/mixins.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/vml.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+</head>
+<body>
+    <div style="padding: 100px;">
+        <div id="surface" style="width: 800px; height: 300px;"></div>
+    </div>
+    <script>
+    var dataviz = kendo.dataviz;
+    var geo = dataviz.geometry;
+    var Point = geo.Point;
+    var drawing = dataviz.drawing;
+    var Circle = drawing.Circle;
+    var Group = drawing.Group;
+    var Path = drawing.Path;
+    var Text = drawing.Text;
+
+    var Clock = kendo.Class.extend({
+        init: function(container, options) {
+            this.options = $.extend({}, this.options, options);
+            this._center = Point.create(this.options.center);
+            this._render(container);
+            this.set(new Date());
+        },
+
+        options: {
+            center: [0, 0],
+            size: 100,
+            offset: 0,
+            title: ""
+        },
+
+        set: function(date) {
+            var center = this._center;
+
+            var seconds = date.getMilliseconds() / 1000;
+            seconds += date.getSeconds();
+            seconds += date.getMinutes() * 60;
+            seconds += (this.options.offset + date.getHours()) * 60 * 60;
+
+            var angle = (360 / 60) * seconds;
+            this._seconds.transform(geo.transform().rotate(angle, center));
+
+            angle = (360 / (60 * 60)) * seconds;
+            this._minutes.transform(geo.transform().rotate(angle, center));
+
+            angle = (360 / (12 * 60 * 60)) * seconds;
+            this._hours.transform(geo.transform().rotate(angle, center));
+        },
+
+        _render: function(container) {
+            // Stacking order matches element order
+            var root = new Group();
+            root.append(
+                this._renderFrame(),
+                this._renderTicks(),
+                this._renderHands(),
+                this._renderLabels(),
+                this._renderTitle()
+            );
+
+            container.append(root);
+        },
+
+        _renderHands: function() {
+            var center = this._center;
+            this._seconds = new Path()
+                .stroke("red", 1)
+                .moveTo(center).lineTo(center.x, this._fromTop(0.05));
+
+            this._minutes = new Path({
+                stroke: {
+                    color: "black",
+                    width: 3,
+                    lineCap: "round",
+                    opacity: 0.6
+                }
+            }).moveTo(center).lineTo(center.x, this._fromTop(0.04));
+
+            this._hours = new Path({
+                stroke: {
+                    color: "black",
+                    width: 6,
+                    lineCap: "round",
+                    opacity: 0.6
+                }
+            }).moveTo(center).lineTo(center.x, this._fromTop(0.25));
+
+            var hands = new Group();
+            hands.append(this._seconds, this._minutes, this._hours);
+
+            return hands;
+        },
+
+        _renderTicks: function () {
+            var center = this._center;
+            var ticks = new Group();
+
+            for (var i = 0; i < 360; i += 30) {
+                var p1 = new Point(center.x, this._fromTop(0.03)).rotate(i, center);
+                var p2 = new Point(center.x, this._fromTop(0.055)).rotate(i, center);
+                ticks.append(new Path({
+                    stroke: {
+                        color: "#333",
+                        width: 1
+                    }
+                }).moveTo(p1).lineTo(p2));
+            }
+
+            return ticks;
+        },
+
+        _renderLabels: function() {
+            var center = this._center;
+            var labels = new Group();
+            var font = "bold " + this.options.size * 0.08 + "px arial, helvetica, sans-serif";
+
+            var hours = 12;
+            for (var i = 0; i < 360; i += 90) {
+                var pos = new Point(center.x, this._fromTop(0.12)).rotate(i, center);
+                var text = new Text(hours, pos, {
+                    font: font,
+                    fill: {
+                        color: "#333"
+                    }
+                });
+
+                this._centerText(text);
+
+                hours = (hours + 3) % 12;
+                labels.append(text);
+            }
+
+            return labels;
+        },
+
+        _renderFrame: function() {
+            var frame = new Group();
+            var size = this.options.size;
+
+            var outerCircle = new geo.Circle(this._center, (size / 2) - 4);
+            var innerCircle = new geo.Circle(this._center, size * 0.01);
+
+            frame.append(
+                new Circle(outerCircle, {
+                    stroke: {
+                        color: "#333",
+                        width: 1
+                    }
+                }),
+                new Circle(innerCircle).fill("black")
+            );
+
+            return frame;
+        },
+
+        _renderTitle: function() {
+            var group = new Group();
+            var title = this.options.title;
+
+            if (title) {
+                var pos = [this._center.x, this._fromTop(-0.1)];
+                var text = new Text(title, pos, {
+                    font: "bold 16px arial",
+                    fill: {
+                        color: "#333"
+                    }
+                });
+
+                this._centerText(text);
+                group.append(text);
+            }
+
+            return group;
+        },
+
+        _centerText: function(text) {
+            var bbox = text.bbox();
+            text.position().translate(-bbox.width() / 2, -bbox.height() / 2);
+        },
+
+        _fromTop: function(ratio) {
+            var size = this.options.size;
+            var top = this._center.y - size / 2;
+            return top + size * ratio;
+        }
+    });
+
+    function initSurface(type) {
+        return drawing.Surface.create($("#surface"));
+    }
+
+    var CLOCKS = 100;
+    var RUNS = 3;
+    $(document).ready(function() {
+        var surface = initSurface();
+
+        var root = new Group();
+
+        for (var i = 0; i < CLOCKS; i++) {
+            var clock = new Clock(root, {
+                center: [150 + i * 2, 150],
+                size: 300
+            });
+        }
+
+        var now = new Date().getTime();
+        var i = 0;
+        function loop() {
+            document.title = "Run " + i;
+
+            surface.clear();
+            surface.draw(root);
+
+            if (++i > RUNS) {
+                setTimeout(function() {
+                    var elapsed = (new Date().getTime()) - now;
+                    document.title = elapsed / i;
+                });
+            } else {
+                setTimeout(loop, 0);
+            }
+        }
+
+        loop();
+    });
+    </script>
+</body>
+</html>

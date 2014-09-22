@@ -117,10 +117,9 @@
             var end = index + count;
             for (var i = index; i < end; i++) {
                 this.childNodes[i].clear();
+                this.childNodes[i].parent = null;
             }
             this.childNodes.splice(index, count);
-
-            this.parent = null;
         },
 
         clear: function() {

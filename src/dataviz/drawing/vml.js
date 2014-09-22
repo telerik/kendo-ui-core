@@ -7,32 +7,30 @@
     // Imports ================================================================
     var doc = document,
         atan2 = Math.atan2,
-        max = Math.max,
         sqrt = Math.sqrt,
 
         kendo = window.kendo,
         deepExtend = kendo.deepExtend,
+        noop = $.noop,
 
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
-        renderTemplate = dataviz.renderTemplate,
 
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
         g = dataviz.geometry,
-        Matrix = g.Matrix,
         toMatrix = g.toMatrix,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr,
-        renderAllAttr = util.renderAllAttr,
+        deg = util.deg,
         round = util.round;
 
     // Constants ==============================================================
     var NONE = "none",
         TRANSP = "transparent",
         COORDINATE_MULTIPLE = 100,
+        COORDINATE_SIZE = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE,
         TRANSFORM_PRECISION = 4;
 
     // VML rendering surface ==================================================
@@ -40,15 +38,10 @@
         init: function(element, options) {
             d.Surface.fn.init.call(this, element, options);
 
-            if (doc.namespaces) {
-                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
-            }
+            enableVML();
 
             this._root = new RootNode();
-            this.element[0].innerHTML = this._template(this);
-
-            this._rootElement = this.element[0].firstChild;
-            this._root.attachTo(this._rootElement);
+            this._root.attachTo(this.element[0]);
 
             this.element.on("click", this._click);
             this.element.on("mouseover", this._mouseenter);
@@ -58,32 +51,31 @@
         type: "vml",
 
         draw: function(element) {
-            var surface = this;
-            surface._root.load([element], null);
-
-            if (kendo.support.browser.version < 8) {
-                setTimeout(function() {
-                    surface._rootElement.style.display = "block";
-                }, 0);
-            }
+            this._root.load([element], null);
         },
 
         clear: function() {
             this._root.clear();
-
-            if (kendo.support.browser.version < 8) {
-                this._rootElement.style.display = "none";
-            }
-        },
-
-        _template: renderTemplate(
-            "<div style='position: relative; width: 100%; height: 100%;'>" +
-            "<#= d._root.render() #/div>"
-        )
+        }
     });
 
     // VML Node ================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+
+            this.createElement();
+            this.attachReference();
+        },
+
+        createElement: function() {
+            this.element = doc.createElement("div");
+        },
+
+        attachReference: function() {
+            this.element._kendoNode = this;
+        },
+
         load: function(elements, transform) {
             var node = this,
                 element = node.element,
@@ -119,76 +111,41 @@
                 }
 
                 node.append(childNode);
-
-                if (element) {
-                    childNode.attachTo(element);
-                }
+                childNode.attachTo(element);
             }
         },
 
         attachTo: function(domElement) {
-            var container = doc.createElement("div");
-
-            container.style.display = "none";
-            doc.body.appendChild(container);
-            container.innerHTML = this.render();
-
-            var element = container.firstChild;
-            if (element) {
-                domElement.appendChild(element);
-                this.setElement(element);
-            }
-
-            doc.body.removeChild(container);
-        },
-
-        setElement: function(element) {
-            var nodes = this.childNodes,
-                childElement,
-                i;
-
-            if (this.element) {
-                this.element._kendoNode = null;
-            }
-
-            this.element = element;
-            element._kendoNode = this;
-
-            for (i = 0; i < nodes.length; i++) {
-                childElement = element.childNodes[i];
-                nodes[i].setElement(childElement);
-            }
-        },
-
-        template: renderTemplate(
-            "#= d.renderChildren() #"
-        ),
-
-        render: function() {
-            return this.template(this);
-        },
-
-        renderChildren: function() {
-            var nodes = this.childNodes,
-                output = "",
-                i;
-
-            for (i = 0; i < nodes.length; i++) {
-                output += nodes[i].render();
-            }
-
-            return output;
+            domElement.appendChild(this.element);
         },
 
         clear: function() {
-            var element = this.element;
+            BaseNode.fn.clear.call(this);
 
-            if (element) {
-                element.parentNode.removeChild(element);
+            if (this.element && this.element.parentNode) {
+                this.element.parentNode.removeChild(this.element);
                 this.element = null;
             }
+        },
 
-            BaseNode.fn.clear.call(this);
+        optionsChange: function(e) {
+            if (e.field == "visible") {
+                this.css("display", e.value !== false ? "" : "none");
+            }
+        },
+
+        setStyle: function() {
+            this.allCss(this.mapStyle());
+        },
+
+        mapStyle: function() {
+            var style = [];
+
+            if (this.srcElement && this.srcElement.options.visible === false) {
+                style.push([ "display", "none" ]);
+            }
+
+            return style;
         },
 
         attr: function(name, value) {
@@ -213,35 +170,56 @@
             for (var i = 0; i < styles.length; i++) {
                 this.css(styles[i][0], styles[i][1]);
             }
-        },
-
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
         }
     });
 
     var RootNode = Node.extend({
-        attachTo: function(domElement) {
-            this.element = domElement;
+        createElement: function() {
+            Node.fn.createElement.call(this);
+
+            this.allCss([
+                ["width", "100%"],
+                ["height", "100%"],
+                ["position", "relative"],
+                ["visibility", "visible"]
+            ]);
         },
 
-        clear: BaseNode.fn.clear
+        clear: function() {
+            BaseNode.fn.clear.call(this);
+            this.element.innerHTML = "";
+        },
+
+        attachReference: noop
     });
 
     var GroupNode = Node.extend({
-        template: renderTemplate(
-            "<div#= d.renderStyle() #>#= d.renderChildren() #</div>"
-        ),
+        createElement: function() {
+            Node.fn.createElement.call(this);
+            this.setStyle();
+        },
+
+        attachTo: function(domElement) {
+            this.css("display", "none");
+
+            Node.fn.attachTo.call(this, domElement);
+
+            if (this.srcElement.options.visible !== false) {
+                this.css("display", "");
+            }
+        },
+
+        _attachTo: function(domElement) {
+            var frag = document.createDocumentFragment();
+            frag.appendChild(this.element);
+
+            domElement.appendChild(frag);
+        },
 
         mapStyle: function() {
-            var style = [];
+            var style = Node.fn.mapStyle.call(this);
             style.push(["position", "absolute"]);
             style.push(["white-space", "nowrap"]);
-            if (this.srcElement && this.srcElement.options.visible === false) {
-                style.push([
-                    "display", "none"
-                ]);
-            }
 
             return style;
         },
@@ -249,11 +227,9 @@
         optionsChange: function(e) {
             if (e.field === "transform") {
                 this.refreshTransform();
-            } else if (e.field == "visible"){
-                this.css("display", e.value !== false ? "" : "none");
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         refreshTransform: function(transform) {
@@ -261,6 +237,7 @@
                 children = this.childNodes,
                 length = children.length,
                 i;
+
             for (i = 0; i < length; i++) {
                 children[i].refreshTransform(currentTransform);
             }
@@ -268,33 +245,29 @@
     });
 
     var StrokeNode = Node.extend({
+        createElement: function() {
+            this.element = createElementVML("stroke");
+            this.setStroke();
+        },
+
         optionsChange: function(e) {
-            if (e.field === "stroke") {
-                this.allAttr(this.mapStroke(e.value));
-            } else {
-                var name = this.attributeMap[e.field];
-                if (name) {
-                    this.attr(name, e.value);
-                }
+            if (e.field.indexOf("stroke") === 0) {
+                this.setStroke();
             }
-
-            this.invalidate();
         },
 
-        attributeMap: {
-            "stroke.color": "color",
-            "stroke.width": "weight",
-            "stroke.opacity": "opacity",
-            "stroke.dashType": "dashstyle"
+        setStroke: function() {
+            this.allAttr(this.mapStroke());
         },
 
-        mapStroke: function(stroke) {
+        mapStroke: function() {
+            var stroke = this.srcElement.options.stroke;
             var attrs = [];
 
             if (stroke && stroke.width !== 0) {
                 attrs.push(["on", "true"]);
                 attrs.push(["color", stroke.color]);
-                attrs.push(["weight", stroke.width + "px"]);
+                attrs.push(["weight", (stroke.width || 1) + "px"]);
 
                 if (defined(stroke.opacity)) {
                     attrs.push(["opacity", stroke.opacity]);
@@ -320,46 +293,27 @@
             }
 
             return attrs;
-        },
-
-        renderStroke: function() {
-            return renderAllAttr(
-                this.mapStroke(this.srcElement.options.stroke)
-            );
-        },
-
-        template: renderTemplate(
-            "<kvml:stroke #= d.renderStroke() #></kvml:stroke>"
-        )
+        }
     });
 
     var FillNode = Node.extend({
+        createElement: function() {
+            this.element = createElementVML("fill");
+            this.setFill();
+        },
+
         optionsChange: function(e) {
-            switch(e.field) {
-                case "fill":
-                    this.allAttr(this.mapFill(e.value));
-                    break;
-
-                case "fill.color":
-                    this.allAttr(this.mapFill({ color: e.value }));
-                    break;
-
-                default:
-                    var name = this.attributeMap[e.field];
-                    if (name) {
-                        this.attr(name, e.value);
-                    }
-                    break;
+            if (e.field.indexOf("fill") === 0) {
+                this.setFill();
             }
-
-            this.invalidate();
         },
 
-        attributeMap: {
-            "fill.opacity": "opacity"
+        setFill: function() {
+            this.allAttr(this.mapFill());
         },
 
-        mapFill: function(fill) {
+        mapFill: function() {
+            var fill = this.srcElement.options.fill;
             var attrs = [];
 
             if (fill && fill.color !== NONE && fill.color !== TRANSP) {
@@ -374,42 +328,43 @@
             }
 
             return attrs;
-        },
-
-        renderFill: function() {
-            return renderAllAttr(
-                this.mapFill(this.srcElement.options.fill)
-            );
-        },
-
-        template: renderTemplate(
-            "<kvml:fill #= d.renderFill() #></kvml:fill>"
-        )
+        }
     });
 
     var TransformNode = Node.extend({
         init: function(srcElement, transform) {
-            Node.fn.init.call(this, srcElement);
             this.transform = transform;
+
+            Node.fn.init.call(this, srcElement);
+        },
+
+        createElement: function() {
+            this.element = createElementVML("skew");
+            this.setTransform();
         },
 
         optionsChange: function(e) {
-            if (e.field == "transform") {
+            if (e.field === "transform") {
                 this.refresh(this.srcElement.currentTransform());
             }
-            this.invalidate();
         },
 
         refresh: function(transform) {
             this.transform = transform;
-            this.allAttr(this.mapTransform(transform));
+            this.setTransform();
         },
 
         transformOrigin: function() {
             return "-0.5,-0.5";
         },
 
-        mapTransform: function(transform) {
+        setTransform: function() {
+            this.allAttr(this.mapTransform());
+        },
+
+        mapTransform: function() {
+            var transform = this.transform;
+
             var attrs = [],
                 a, b, c, d,
                 matrix = toMatrix(transform);
@@ -427,15 +382,7 @@
             }
 
             return attrs;
-        },
-
-        renderTransform: function() {
-            return renderAllAttr(this.mapTransform(this.transform));
-        },
-
-        template: renderTemplate(
-            "<kvml:skew #= d.renderTransform() # ></kvml:skew>"
-        )
+        }
     });
 
     var ShapeNode = Node.extend({
@@ -445,10 +392,14 @@
             this.transform = this.createTransformNode(srcElement, transform);
 
             Node.fn.init.call(this, srcElement);
+        },
 
-            this.append(this.fill);
-            this.append(this.stroke);
-            this.append(this.transform);
+        attachTo: function(domElement) {
+            this.fill.attachTo(this.element);
+            this.stroke.attachTo(this.element);
+            this.transform.attachTo(this.element);
+
+            Node.fn.attachTo.call(this, domElement);
         },
 
         createFillNode: function(srcElement) {
@@ -459,10 +410,14 @@
             return new TransformNode(srcElement, transform);
         },
 
+        createElement: function() {
+            this.element = createElementVML("shape");
+            this.setCoordsize();
+            this.setStyle();
+        },
+
         optionsChange: function(e) {
-            if (e.field === "visible") {
-                this.css("display", e.value ? "" : "none");
-            } else if (e.field.indexOf("fill") === 0) {
+            if (e.field.indexOf("fill") === 0) {
                 this.fill.optionsChange(e);
             } else if (e.field.indexOf("stroke") === 0) {
                 this.stroke.optionsChange(e);
@@ -470,73 +425,59 @@
                 this.transform.optionsChange(e);
             }
 
-            this.invalidate();
+            Node.fn.optionsChange.call(this, e);
         },
 
         refreshTransform: function(transform) {
             this.transform.refresh(this.srcElement.currentTransform(transform));
         },
 
-        mapStyle: function() {
-            var style = [
+        mapStyle: function(width, height) {
+            var styles = Node.fn.mapStyle.call(this);
+
+            if (!width || !height) {
+                width = height = COORDINATE_MULTIPLE;
+            }
+
+            styles.push(
                 ["position", "absolute"],
-                ["width", COORDINATE_MULTIPLE + "px"],
-                ["height", COORDINATE_MULTIPLE + "px"],
-                ["cursor", this.srcElement.options.cursor]
-            ];
+                ["width", width + "px"],
+                ["height", height + "px"]
+            );
 
-            if (this.srcElement.options.visible === false) {
-                style.push(["display", "none"]);
-            }
-
-            return style;
-        },
-
-        renderCursor: function() {
             var cursor = this.srcElement.options.cursor;
-
             if (cursor) {
-                return "cursor:" + cursor + ";";
+                styles.push(["cursor", cursor]);
             }
 
-            return "";
+            return styles;
         },
 
-        renderVisibility: function() {
-            if (this.srcElement.options.visible === false) {
-                return "display:none;";
-            }
-
-            return "";
-        },
-
-        renderCoordsize: function() {
-            var scale = COORDINATE_MULTIPLE * COORDINATE_MULTIPLE;
-            return "coordsize='" + scale + " " + scale + "'";
-        },
-
-        template: renderTemplate(
-            "<kvml:shape " +
-            "#= d.renderStyle() # " +
-            "coordorigin='0 0' #= d.renderCoordsize() #>" +
-                "#= d.renderChildren() #" +
-            "</kvml:shape>"
-        )
+        setCoordsize: function() {
+            this.allAttr([
+                ["coordorigin", "0 0"],
+                ["coordsize", COORDINATE_SIZE + " " + COORDINATE_SIZE]
+            ]);
+        }
     });
 
     var PathDataNode = Node.extend({
-        renderData: function() {
-            return printPath(this.srcElement);
+        createElement: function() {
+            this.element = createElementVML("path");
+            this.setPathData();
         },
 
         geometryChange: function() {
-            this.attr("v", this.renderData());
-            Node.fn.geometryChange.call(this);
+            this.setPathData();
         },
 
-        template: renderTemplate(
-            "<kvml:path #= kendo.dataviz.util.renderAttr('v', d.renderData()) #></kvml:path>"
-        )
+        setPathData: function() {
+            this.attr("v", this.renderData());
+        },
+
+        renderData: function() {
+            return printPath(this.srcElement);
+        }
     });
 
     var PathNode = ShapeNode.extend({
@@ -544,8 +485,11 @@
             this.pathData = this.createDataNode(srcElement);
 
             ShapeNode.fn.init.call(this, srcElement, transform);
+        },
 
-            this.append(this.pathData);
+        attachTo: function(domElement) {
+            this.pathData.attachTo(this.element);
+            ShapeNode.fn.attachTo.call(this, domElement);
         },
 
         createDataNode: function(srcElement) {
@@ -589,46 +533,41 @@
                 center = boundingBox.center(),
                 originX = -center.x / boundingBox.width(),
                 originY = -center.y / boundingBox.height();
+
             return originX + "," + originY;
         }
     });
 
     var CircleNode = ShapeNode.extend({
+        createElement: function() {
+            this.element = createElementVML("oval");
+            this.setStyle();
+        },
+
         createTransformNode: function(srcElement, transform) {
             return new CircleTransformNode(srcElement, transform);
         },
 
         geometryChange: function() {
-            var radius = this.radius();
-            var center = this.center();
+            ShapeNode.fn.geometryChange.call(this);
+
+            this.setStyle();
+        },
+
+        mapStyle: function() {
+            var geometry = this.srcElement.geometry();
+            var radius = geometry.radius;
+            var center = geometry.center;
             var diameter = radius * 2;
 
-            this.css("left", center.x - radius + "px");
-            this.css("top", center.y - radius + "px");
-            this.css("width", diameter + "px");
-            this.css("height", diameter + "px");
-            this.invalidate();
-        },
+            var styles = ShapeNode.fn.mapStyle.call(this, diameter, diameter);
+            styles.push(
+                ["left", center.x - radius + "px"],
+                ["top", center.y - radius + "px"]
+            );
 
-        center: function() {
-            return this.srcElement.geometry().center;
-        },
-
-        radius: function() {
-            return this.srcElement.geometry().radius;
-        },
-
-        template: renderTemplate(
-            "<kvml:oval " +
-            "style='position:absolute;" +
-            "#= d.renderVisibility() #" +
-            "#= d.renderCursor() #" +
-            "width:#= d.radius() * 2 #px;height:#= d.radius() * 2 #px;" +
-            "top:#= d.center().y - d.radius() #px;" +
-            "left:#= d.center().x - d.radius() #px;'>" +
-                "#= d.renderChildren() #" +
-            "</kvml:oval>"
-        )
+            return styles;
+        }
     });
 
     var ArcDataNode = PathDataNode.extend({
@@ -643,9 +582,11 @@
         }
     });
 
-    var TextPathDataNode = Node.extend({
-        geometryChange: function() {
-            this.attr("v", this.renderData());
+    var TextPathDataNode = PathDataNode.extend({
+        createElement: function() {
+            PathDataNode.fn.createElement.call(this);
+
+            this.attr("textpathok", true);
         },
 
         renderData: function() {
@@ -653,20 +594,24 @@
             var center = rect.center();
             return "m " + printPoints([new g.Point(rect.topLeft().x, center.y)]) +
                    " l " + printPoints([new g.Point(rect.bottomRight().x, center.y)]);
-        },
-
-        template: renderTemplate(
-            "<kvml:path textpathok='true' v='#= d.renderData() #' />"
-        )
+        }
     });
 
     var TextPathNode = Node.extend({
+        createElement: function() {
+            this.element = createElementVML("textpath");
+
+            this.attr("on", true);
+            this.attr("fitpath", false);
+            this.setStyle();
+            this.setString();
+        },
+
         optionsChange: function(e) {
-            if (e.field === "font") {
-                this.allCss(this.mapStyle());
-                this.geometryChange();
-            } if (e.field === "content") {
-                this.attr("string", this.srcElement.content());
+            if (e.field === "content") {
+                this.setString();
+            } else {
+                this.setStyle();
             }
 
             Node.fn.optionsChange.call(this, e);
@@ -676,14 +621,9 @@
             return [["font", this.srcElement.options.font]];
         },
 
-        renderStyle: function() {
-            return renderAttr("style", util.renderStyle(this.mapStyle()));
-        },
-
-        template: renderTemplate(
-            "<kvml:textpath on='true' #= d.renderStyle() # " +
-            "fitpath='false' string='#= d.srcElement.content() #' />"
-        )
+        setString: function() {
+            this.attr("string", this.srcElement.content());
+        }
     });
 
     var TextNode = PathNode.extend({
@@ -691,12 +631,15 @@
             this.path = new TextPathNode(srcElement);
 
             PathNode.fn.init.call(this, srcElement, transform);
-
-            this.append(this.path);
         },
 
         createDataNode: function(srcElement) {
             return new TextPathDataNode(srcElement);
+        },
+
+        attachTo: function(domElement) {
+            this.path.attachTo(this.element);
+            PathNode.fn.attachTo.call(this, domElement);
         },
 
         optionsChange: function(e) {
@@ -723,9 +666,18 @@
     });
 
     var ImageFillNode = TransformNode.extend({
+        createElement: function() {
+            this.element = createElementVML("fill");
+
+            this.attr("type", "frame");
+            this.attr("rotate", true);
+            this.setSrc();
+            this.setTransform();
+        },
+
         optionsChange: function(e) {
             if (e.field === "src") {
-                this.attr("src", e.value);
+                this.setSrc();
             }
 
             TransformNode.fn.optionsChange.call(this, e);
@@ -735,7 +687,11 @@
             this.refresh();
         },
 
-        mapTransform: function(transform) {
+        setSrc: function() {
+            this.attr("src", this.srcElement.src());
+        },
+
+        mapTransform: function() {
             var img = this.srcElement;
             var rawbbox = img.rawBBox();
             var rawcenter = rawbbox.center();
@@ -749,6 +705,7 @@
             var height = rawbbox.height() / fillSize;
             var angle = 0;
 
+            var transform = this.transform;
             if (transform) {
                 var matrix = toMatrix(transform);
                 var sx = sqrt(matrix.a * matrix.a + matrix.b * matrix.b);
@@ -757,8 +714,8 @@
                 width *= sx;
                 height *= sy;
 
-                var ax = util.deg(atan2(matrix.b, matrix.d));
-                var ay = util.deg(atan2(-matrix.c, matrix.a));
+                var ax = deg(atan2(matrix.b, matrix.d));
+                var ay = deg(atan2(-matrix.c, matrix.a));
                 angle = (ax + ay) / 2;
 
                 if (angle !== 0) {
@@ -785,13 +742,7 @@
                 ["position", x + "," + y],
                 ["angle", angle]
             ];
-        },
-
-        template: renderTemplate(
-            "<kvml:fill src='#= d.srcElement.src() #' " +
-            "type='frame' rotate='true' " +
-            "#= d.renderTransform() #></kvml:fill>"
-        )
+        }
     });
 
     var ImageNode = PathNode.extend({
@@ -823,6 +774,22 @@
     });
 
     // Helper functions =======================================================
+    function enableVML() {
+        if (doc.namespaces && !doc.namespaces.kvml) {
+            doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
+
+            var stylesheet = doc.styleSheets.length > 30 ? doc.styleSheets[0] : doc.createStyleSheet();
+            stylesheet.addRule(".kvml", "behavior:url(#default#VML)");
+        }
+    }
+
+    function createElementVML(type) {
+        var element = doc.createElement("kvml:" + type);
+        element.className = "kvml";
+
+        return element;
+    }
+
     function printPoints(points) {
         var length = points.length;
         var result = [];

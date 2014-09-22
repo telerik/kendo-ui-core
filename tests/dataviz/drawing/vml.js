@@ -1,5 +1,6 @@
 (function() {
     var dataviz = kendo.dataviz,
+        deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
         Point = g.Point,
@@ -61,6 +62,89 @@
             surface.draw(group);
         });
     })();
+
+    function baseNodeTests(name, TNode, TElement) {
+        var node;
+        var srcElement;
+
+        module("Base VML Node tests / " + name, {
+            setup: function() {
+                srcElement = new TElement();
+                node = new TNode(srcElement);
+            }
+        });
+
+        test("sets element", function() {
+            ok(node.element);
+        });
+
+        test("sets _kendoNode expando", function() {
+            deepEqual(node.element._kendoNode, node);
+        });
+
+        test("attachTo attaches DOM element", function() {
+            var parent = document.createElement("div");
+            node.attachTo(parent);
+
+            equal(node.element.parentNode, parent);
+        });
+
+        test("clear cleans up child DOM nodes", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.children.length, 0);
+        });
+
+        test("load appends child nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            node.load([parentGroup]);
+
+            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
+        });
+
+        test("load appends child DOM nodes", function() {
+            var parentGroup = new Group();
+            var childGroup = new Group();
+            parentGroup.append(childGroup);
+
+            node.load([parentGroup]);
+
+            equal(node.element.children[0].children[0],
+                  node.childNodes[0].childNodes[0].element);
+        });
+
+        test("load attaches node", function() {
+            node.attachTo(document.createElement("div"));
+
+            var group = new Group();
+            node.load([group]);
+
+            equal(node.childNodes[0].element.parentNode, node.element);
+        });
+
+        test("renders visibility", function() {
+            srcElement.visible(false);
+            node = new TNode(srcElement);
+            equal(node.element.style.display, "none");
+        });
+
+        test("does not render visibility if not set", function() {
+            equal(node.element.style.display, "");
+        });
+
+        test("options change for visible updates display css style", function() {
+            node.css = function(style, value) {
+                equal(style, "display");
+                equal(value, "none");
+            };
+            srcElement.visible(false);
+        });
+
+    }
 
     // ------------------------------------------------------------
     (function() {
@@ -191,33 +275,6 @@
             };
             node.load([image], currentMatrix);
         });
-
-        test("load appends child nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
-        });
-
-        test("attachTo renders children", 2, function() {
-            var ChildNode = Node.extend({});
-
-            var child = new ChildNode();
-            node.append(child);
-
-            var grandChild = new ChildNode();
-            child.append(grandChild);
-
-            ChildNode.fn.render = function() {
-                ok(true);
-                return Node.fn.render.call(this);
-            };
-
-            node.attachTo(document.createElement("div"));
-        });
     })();
 
     // ------------------------------------------------------------
@@ -272,14 +329,32 @@
 
     // ------------------------------------------------------------
     (function() {
-        module("RootNode");
+        var node;
 
-        test("attachTo directly sets element", function() {
-            var rootNode = new vml.RootNode();
-            var container = document.createElement("div");
-            rootNode.attachTo(container);
+        module("RootNode", {
+            setup: function() {
+                node = new vml.RootNode();
+            }
+        });
 
-            deepEqual(rootNode.element, container);
+        test("sets size", function() {
+            equal(node.element.style.width, "100%");
+            equal(node.element.style.height, "100%");
+        });
+
+        test("sets position", function() {
+            equal(node.element.style.position, "relative");
+        });
+
+        test("doesn't attach _kendoNode", function() {
+            ok(!node.element._kendoNode);
+        });
+
+        test("clear cleans up content", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.innerHTML, "");
         });
     })();
 
@@ -287,98 +362,24 @@
     (function() {
         var groupNode;
 
+        baseNodeTests("Group", vml.GroupNode, d.Group);
+
         module("GroupNode", {
             setup: function() {
                 groupNode = new GroupNode();
             }
         });
 
-        test("attachTo sets element", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(groupNode.element);
-        });
-
-        test("attachTo sets element for child nodes", function() {
-            groupNode.append(new GroupNode());
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(groupNode.childNodes[0].element);
-        });
-
-        test("attachTo sets element for grandchild nodes", function() {
-            var child = new GroupNode();
-            var grandChild = new GroupNode();
-
-            child.append(grandChild);
-            groupNode.append(child);
-
-            groupNode.attachTo(document.createElement("div"));
-
-            ok(grandChild.element);
-        });
-
-        test("attachTo sets _kendoNode expando", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(groupNode.element._kendoNode, groupNode);
-        });
-
-        test("attachTo sets _kendoNode expando on child elements", function() {
-            var childGroup = new GroupNode();
-            groupNode.append(childGroup);
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(childGroup.element._kendoNode, childGroup);
-        });
-
-        test("attachTo sets _kendoNode expando for grandchild nodes", function() {
-            var child = new GroupNode();
-            var grandChild = new GroupNode();
-
-            child.append(grandChild);
-            groupNode.append(child);
-
-            groupNode.attachTo(document.createElement("div"));
-
-            deepEqual(grandChild.element._kendoNode, grandChild);
-        });
-
-        test("clear removes element", function() {
-            groupNode.attachTo(document.createElement("div"));
-            groupNode.clear();
-
-            ok(!groupNode.element);
-        });
-
-        test("clear removes _kendoNode expando from element", function() {
-            var container = document.createElement("div");
-            groupNode.attachTo(container);
-            groupNode.clear();
-
-            ok(!container._kendoNode);
-        });
-
-        test("load attaches node", function() {
-            groupNode.attachTo(document.createElement("div"));
-
-            var group = new Group();
-            groupNode.load([group]);
-
-            ok(groupNode.childNodes[0].element);
-        });
-
         test("renders div tag", function() {
-            equal(groupNode.render(), "<div style='position:absolute;white-space:nowrap;' ></div>");
+            equal(groupNode.element.tagName.toLowerCase(), "div");
         });
 
-        test("renders visibility", function() {
-            groupNode = new GroupNode(new Group({visible: false}));
-            ok(groupNode.render().indexOf("display:none;") !== -1);
+        test("renders position", function() {
+            equal(groupNode.element.style.position, "absolute");
         });
 
-        test("does not render visibility if not set", function() {
-            ok(groupNode.render().indexOf("display:none;") === -1);
+        test("renders nowrap", function() {
+            equal(groupNode.element.style["white-space"], "nowrap");
         });
 
         test("refreshTransform method calls childNodes refreshTransform method", function() {
@@ -457,113 +458,108 @@
 
             group.options.set("foo", 1);
         });
-
-        test("options change for visible updates display css style", function() {
-            var group = new Group();
-            groupNode = new GroupNode(group);
-            groupNode.css = function(style, value) {
-                equal(style, "display");
-                equal(value, "none");
-            };
-            group.visible(false);
-        });
     })();
 
     // ------------------------------------------------------------
     (function() {
         var path,
-            strokeNode,
-            container;
+            strokeNode;
+
+        function createNode(pathOptions) {
+            path = new Path(deepExtend({
+                stroke: {
+                    width: 1
+                }
+            }, pathOptions));
+            strokeNode = new StrokeNode(path);
+        }
 
         module("StrokeNode", {
             setup: function() {
-                container = document.createElement("div");
-
-                path = new Path({ stroke: { width: 1 } });
-                strokeNode = new StrokeNode(path);
-                strokeNode.attachTo(container);
+                createNode();
             }
         });
 
-        test("renders on attribute", function() {
-            path.options.set("stroke.color", "red");
+        test("renders stroke element", function() {
+            equal(strokeNode.element.tagName.toLowerCase(), "kvml:stroke");
+        });
 
-            ok(strokeNode.render().indexOf("on='true'") !== -1);
+        test("renders on attribute", function() {
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.on, "true");
         });
 
         test("renders on attribute when no stroke is set", function() {
-            path.options.set("stroke", null);
-            ok(strokeNode.render().indexOf("on='false'") !== -1);
+            createNode({ stroke: null });
+            equal(strokeNode.element.on, "false");
         });
 
         test("renders on attribute when stroke width is 0", function() {
-            path.options.set("stroke", { color: "red", width: 0 });
-            ok(strokeNode.render().indexOf("on='false'") !== -1);
+            createNode({ stroke: { color: "red", width: 0 } });
+            equal(strokeNode.element.on, "false");
         });
 
         test("renders color", function() {
-            path.options.set("stroke.color", "red");
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.color, "red");
+        });
 
-            ok(strokeNode.render().indexOf("color='red'") !== -1);
+        test("renders default stroke width", function() {
+            createNode({ stroke: { color: "red" } });
+            equal(strokeNode.element.weight, "1px");
         });
 
         test("renders stroke width", function() {
-            path.options.set("stroke.width", 2);
-
-            ok(strokeNode.render().indexOf("weight='2px'") !== -1);
+            createNode({ stroke: { width: 2 } });
+            equal(strokeNode.element.weight, "2px");
         });
 
         test("renders stroke opacity", function() {
-            path.options.set("stroke.opacity", 0.5);
-
-            ok(strokeNode.render().indexOf("opacity='0.5'") !== -1);
+            createNode({ stroke: { opacity: 0.5 } });
+            equal(strokeNode.element.opacity, "0.5");
         });
 
         test("does not render stroke opacity if not set", function() {
-            equal(strokeNode.render().indexOf("opacity="), -1);
+            ok(!strokeNode.element.opacity);
         });
 
         test("renders stroke dashType", function() {
-            path.options.set("stroke.dashType", "dot");
-
-            ok(strokeNode.render().indexOf("dashstyle='dot'") !== -1);
+            createNode({ stroke: { dashType: "dot" } });
+            equal(strokeNode.element.dashstyle, "dot");
         });
 
         test("does not render stroke dashType if not set", function() {
-            equal(strokeNode.render().indexOf("dashstyle="), -1);
+            ok(!strokeNode.element.dashstyle);
         });
 
         test("renders stroke lineJoin", function() {
-            path.options.set("stroke.lineJoin", "round");
-
-            ok(strokeNode.render().indexOf("joinstyle='round'") !== -1);
+            createNode({ stroke: { lineJoin: "round" } });
+            equal(strokeNode.element.joinstyle, "round");
         });
 
         test("does not render stroke lineJoin if not set", function() {
-            path.options.set("stroke.lineJoin", null);
-            equal(strokeNode.render().indexOf("joinstyle="), -1);
+            ok(!strokeNode.element.joinstyle);
         });
 
         test("renders stroke lineCap", function() {
-            path.options.set("stroke.lineCap", "round");
-
-            ok(strokeNode.render().indexOf("endcap='round'") !== -1);
+            createNode({ stroke: { lineCap: "round" } });
+            equal(strokeNode.element.endcap, "round");
         });
 
         test("renders stroke lineCap (butt)", function() {
-            path.options.set("stroke.lineCap", "butt");
-
-            ok(strokeNode.render().indexOf("endcap='flat'") !== -1);
+            createNode({ stroke: { lineCap: "butt" } });
+            equal(strokeNode.element.endcap, "flat");
         });
 
         test("does not render stroke lineCap if not set", function() {
-            equal(strokeNode.render().indexOf("endcap="), -1);
+            ok(!strokeNode.element.endcap);
         });
 
         test("optionsChange sets stroke color", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "color");
-                equal(value, "red");
+                if (name === "color") {
+                    equal(value, "red");
+                }
             };
 
             path.options.set("stroke.color", "red");
@@ -571,8 +567,9 @@
 
         test("optionsChange sets stroke width", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "weight");
-                equal(value, 4);
+                if (name === "weight") {
+                    equal(value, "4px");
+                }
             };
 
             path.options.set("stroke.width", 4);
@@ -580,8 +577,9 @@
 
         test("optionsChange sets stroke opacity", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "opacity");
-                equal(value, 0.4);
+                if (name === "opacity") {
+                    equal(value, 0.4);
+                }
             };
 
             path.options.set("stroke.opacity", 0.4);
@@ -589,8 +587,9 @@
 
         test("optionsChange sets stroke dashType", function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "dashstyle");
-                equal(value, "dot");
+                if (name === "dashstyle") {
+                    equal(value, "dot");
+                }
             };
 
             path.options.set("stroke.dashType", "dot");
@@ -610,10 +609,11 @@
             path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
         });
 
-        test("optionsChange clears stroke", 2, function() {
+        test("optionsChange clears stroke", 1, function() {
             strokeNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("stroke", null);
@@ -623,55 +623,50 @@
     // ------------------------------------------------------------
     (function() {
         var path,
-            fillNode,
-            container;
+            fillNode;
+
+        function createNode(pathOptions) {
+            path = new Path(pathOptions);
+            fillNode = new FillNode(path);
+        }
 
         module("FillNode", {
             setup: function() {
-                container = document.createElement("div");
-
-                path = new Path();
-                fillNode = new FillNode(path);
-                fillNode.attachTo(container);
+                createNode();
             }
         });
 
-        test("renders on attribute if no fill set", function() {
-            path.options.set("fill", { color: "red" });
-            ok(fillNode.render().indexOf("on='true'") !== -1);
+        test("renders fill element", function() {
+            equal(fillNode.element.tagName.toLowerCase(), "kvml:fill");
         });
 
         test("renders on attribute if no fill set", function() {
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            createNode({ fill: { color: "red" } });
+            equal(fillNode.element.on, "true");
+        });
+
+        test("renders on attribute if no fill set", function() {
+            equal(fillNode.element.on, "false");
         });
 
         test("renders on attribute if set to none", function() {
-            path.options.set("fill.color", "none");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
-        });
-
-        test("renders on attribute if set to none", function() {
-            path.options.set("fill.color", "none");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            createNode({ fill: { color: "none" } });
+            equal(fillNode.element.on, "false");
         });
 
         test("renders on attribute if set to transparent", function() {
-            path.options.set("fill.color", "transparent");
-            ok(fillNode.render().indexOf("on='false'") !== -1);
+            createNode({ fill: { color: "transparent" } });
+            equal(fillNode.element.on, "false");
         });
 
         test("renders color", function() {
-            path.options.set("fill", { color: "red" });
-            var vml = fillNode.render();
-
-            ok(vml.indexOf("color='red'") !== -1);
+            createNode({ fill: { color: "red" } });
+            equal(fillNode.element.color, "red");
         });
 
         test("renders opacity", function() {
-            path.options.set("fill", { opacity: 0.5 });
-            var vml = fillNode.render();
-
-            ok(vml.indexOf("opacity='0.5'") !== -1);
+            createNode({ fill: { opacity: 0.5 } });
+            equal(fillNode.element.opacity, "0.5");
         });
 
         test("optionsChange sets fill color", function() {
@@ -686,8 +681,9 @@
 
         test("optionsChange sets fill opacity", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "opacity");
-                equal(value, 0.4);
+                if(name === "opacity") {
+                    equal(value, 0.4);
+                }
             };
 
             path.options.set("fill.opacity", 0.4);
@@ -695,8 +691,9 @@
 
         test("optionsChange clears fill for none", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "none");
@@ -704,8 +701,9 @@
 
         test("optionsChange clears fill for none", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if (name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "none");
@@ -713,8 +711,9 @@
 
         test("optionsChange clears fill for transparent", function() {
             fillNode.attr = function(name, value) {
-                equal(name, "on");
-                equal(value, "false");
+                if(name === "on") {
+                    equal(value, "false");
+                }
             };
 
             path.options.set("fill.color", "transparent");
@@ -750,56 +749,60 @@
     (function() {
         var transformNode;
 
+        function createNode(matrix) {
+            transformNode = new vml.TransformNode(new d.Element(), matrix);
+        }
+
         module("TransformNode", {
             setup: function() {
-                transformNode = new TransformNode(new d.Element(), new Matrix(1,2,3,4,5,6));
+                createNode(new g.Matrix(1, 2, 3, 4, 5, 6));
             }
         });
 
         test("renders skew element", function() {
-            equal(transformNode.render().indexOf("<kvml:skew"), 0);
+            equal(transformNode.element.tagName.toLowerCase(), "kvml:skew");
         });
 
         test("sets on to true when matrix is available", function() {
-            ok(transformNode.render().indexOf("on='true'") !== -1);
+            equal(transformNode.element.on, "true");
         });
 
         test("sets on to false when matrix is not available", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("on='false'") !== -1);
+            createNode();
+            equal(transformNode.element.on, "false");
         });
 
         test("renders matrix attribute", function() {
-            ok(transformNode.render().indexOf("matrix='1,3,2,4,0,0'") !== -1);
+            equal(transformNode.element.matrix, "1,3,2,4,0,0");
         });
 
         test("rounds matrix values to the 4th digit", function() {
-            var value = 0.55555;
-            transformNode = new TransformNode(new d.Element(), new Matrix(value, 0, 0, 1, 0, 0));
-            equal(/matrix='(\d\.\d+)/g.exec(transformNode.render())[1], 0.5556);
+            createNode(new Matrix(0.55555, 0, 0, 1, 0, 0));
+            var matrix = transformNode.element.matrix;
+            equal(matrix.substring(0, matrix.indexOf(",")), "0.5556");
         });
 
         test("does not render matrix attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("matrix") === -1);
+            createNode();
+            ok(!transformNode.element.matrix);
         });
 
         test("renders offset attribute", function() {
-            ok(transformNode.render().indexOf("offset='5px,6px'") !== -1);
+            equal(transformNode.element.offset, "5px,6px");
         });
 
         test("does not render offset attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("offset") === -1);
+            createNode();
+            ok(!transformNode.element.offset);
         });
 
         test("renders origin attribute", function() {
-            ok(transformNode.render().indexOf("origin='-0.5,-0.5'") !== -1);
+            equal(transformNode.element.origin, "-0.5,-0.5");
         });
 
         test("does not render origin attribute if there is no matrix", function() {
-            transformNode = new TransformNode(new d.Element());
-            ok(transformNode.render().indexOf("origin") === -1);
+            createNode();
+            ok(!transformNode.element.offset);
         });
 
         test("options change updates attributes", 4, function() {
@@ -863,56 +866,57 @@
     })();
 
     // ------------------------------------------------------------
-    function shapeTests(TShape, TNode, name) {
+    function shapeTests(name, createNode) {
         var shape,
             node;
 
         module("Shape tests / " + name, {
             setup: function() {
-                shape = new TShape();
-                node = new TNode(shape);
+                node = createNode();
             }
         });
 
         test("renders visibility", function() {
-            shape.visible(false);
-            ok(node.render().indexOf("display:none;") !== -1);
+            node = createNode({ visible: false });
+            equal(node.element.style.display, "none");
         });
 
         test("does not render visibility if not set", function() {
-            ok(node.render().indexOf("display:none;") === -1);
+            ok(!node.element.style.display);
         });
 
         test("does not render visibility if set to true", function() {
-            shape.visible(true);
-            ok(node.render().indexOf("display:none;") === -1);
+            node = createNode({ visible: true });
+            ok(!node.element.style.display);
         });
 
         test("renders cursor", function() {
-            shape.options.set("cursor", "hand");
-            ok(node.render().indexOf("cursor:hand;") !== -1);
+            node = createNode({ cursor: "grab" });
+            equal(node.element.style.cursor, "grab");
         });
 
         test("does not render cursor if not set", function() {
-            ok(node.render().indexOf("cursor") === -1);
+            ok(!node.element.style.cursor);
         });
 
         test("optionsChange sets visibility to hidden", function() {
             node.css = function(name, value) {
-                equal(name, "display");
-                equal(value, "none");
+                if (name === "display") {
+                    equal(value, "none");
+                }
             };
 
-            shape.visible(false);
+            node.srcElement.visible(false);
         });
 
         test("optionsChange sets visibility to visible", function() {
             node.css = function(name, value) {
-                equal(name, "display");
-                equal(value, "");
+                if (name === "display") {
+                    equal(value, "");
+                }
             };
 
-            shape.visible(true);
+            node.srcElement.visible(true);
         });
 
         test("optionsChange is forwarded to stroke", function() {
@@ -920,7 +924,7 @@
                 ok(true);
             };
 
-            shape.options.set("stroke", { width: 1 });
+            node.srcElement.options.set("stroke", { width: 1 });
         });
 
         test("optionsChange is not forwarded to stroke", 0, function() {
@@ -928,7 +932,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to fill", function() {
@@ -936,7 +940,7 @@
                 ok(true);
             };
 
-            shape.options.set("fill", { color: "red" });
+            node.srcElement.options.set("fill", { color: "red" });
         });
 
         test("optionsChange is not forwarded to fill", 0, function() {
@@ -944,7 +948,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to transform", function() {
@@ -952,7 +956,7 @@
                 ok(true);
             };
 
-            shape.options.set("transform", Matrix.unit());
+            node.srcElement.options.set("transform", Matrix.unit());
         });
 
         test("optionsChange is not forwarded to transform", 0, function() {
@@ -960,7 +964,7 @@
                 ok(true);
             };
 
-            shape.options.set("foo", true);
+            node.srcElement.options.set("foo", true);
         });
 
         test("refreshTransform calls transform refresh method with the srcElement transformation", 12, function() {
@@ -969,8 +973,8 @@
             var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
             var group = new Group({transform: parentMatrix});
 
-            shape.transform(srcMatrix);
-            group.append(shape);
+            node.srcElement.transform(srcMatrix);
+            group.append(node.srcElement);
 
             node.transform.refresh = function(transform) {
                 compareMatrices(transform.matrix(), currentMatrix);
@@ -984,58 +988,54 @@
     // ------------------------------------------------------------
     (function() {
         var path,
-            node,
-            container;
+            node;
+
+        function createNode(path) {
+            node = new vml.PathDataNode(path);
+        }
 
         module("PathDataNode", {
             setup: function() {
-                container = document.createElement("div");
-
                 path = new Path();
-                node = new vml.PathDataNode(path);
-                node.attachTo(container);
             }
         });
 
         test("renders straight segments", function() {
-            path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30);
-
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 2000,3000 e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(10, 20).lineTo(20, 30));
+            equal(node.element.v, "m 0,0 l 1000,2000 2000,3000 e");
         });
 
         test("renders curve", function() {
-            path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
-
-            ok(node.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 e'") !== -1);
+            createNode(path.moveTo(0, 0).curveTo([10, 10], [20, 10], [30, 0]));
+            equal(node.element.v, "m 0,0 c 1000,1000 2000,1000 3000,0 e");
         });
 
         test("switches between line and curve", function() {
-            path.moveTo(0, 0).lineTo(5, 5).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0));
-
-            ok(node.render().indexOf("v='m 0,0 l 500,500 c 1000,1000 2000,1000 3000,0 e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(5, 5).curveTo([10, 10], [20, 10], [30, 0]));
+            equal(node.element.v, "m 0,0 l 500,500 c 1000,1000 2000,1000 3000,0 e");
         });
 
         test("switches between curve and line", function() {
-            path.moveTo(0, 0).curveTo(Point.create(10, 10), Point.create(20, 10), Point.create(30, 0)).lineTo(40, 10);
-
-            ok(node.render().indexOf("v='m 0,0 c 1000,1000 2000,1000 3000,0 l 4000,1000 e'") !== -1);
+            createNode(path.moveTo(0, 0).curveTo([10, 10], [20, 10], [30, 0]).lineTo(40, 10));
+            equal(node.element.v, "m 0,0 c 1000,1000 2000,1000 3000,0 l 4000,1000 e");
         });
 
         test("renders closed paths", function() {
-            path.moveTo(0, 0).lineTo(10, 20).close();
-
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 x e'") !== -1);
+            createNode(path.moveTo(0, 0).lineTo(10, 20).close());
+            equal(node.element.v, "m 0,0 l 1000,2000 x e");
         });
 
         test("does not render segments for empty path", function() {
-            equal(node.render().indexOf("v="), -1);
+            createNode(path);
+            ok(!node.element.v);
         });
 
         test("geometryChange sets path", function() {
-            path.moveTo(0, 0);
+            createNode(path.moveTo(0, 0));
             node.attr = function(name, value) {
-                equal(name, "v");
-                equal(value, "m 0,0 l 1000,1000 e");
+                if (name === "v") {
+                    equal(value, "m 0,0 l 1000,1000 e");
+                }
             };
 
             path.lineTo(10, 10);
@@ -1046,16 +1046,12 @@
     // ------------------------------------------------------------
     (function() {
         var path,
-            pathNode,
-            container;
+            pathNode;
 
         module("PathNode", {
             setup: function() {
-                container = document.createElement("div");
-
                 path = new Path();
                 pathNode = new PathNode(path);
-                pathNode.attachTo(container);
             }
         });
 
@@ -1072,15 +1068,15 @@
         });
 
         test("renders coordsize", function() {
-            ok(pathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+            ok(pathNode.element.coordsize, "10000 10000");
         });
 
         test("renders width", function() {
-            ok(pathNode.render().indexOf("width:100px;") !== -1);
+            ok(pathNode.element.style.width, "100px");
         });
 
         test("renders height", function() {
-            ok(pathNode.render().indexOf("height:100px;") !== -1);
+            ok(pathNode.element.style.height, "100px");
         });
 
         test("geometryChange is forwarded to pathData", function() {
@@ -1109,7 +1105,7 @@
                 .moveTo(0, 0).lineTo(10, 20)
                 .moveTo(10, 10).lineTo(10, 20);
 
-            ok(node.render().indexOf("v='m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e'") !== -1);
+            ok(node.element.v, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
         });
 
     })();
@@ -1131,15 +1127,15 @@
         });
 
         test("renders coordsize", function() {
-            ok(multiPathNode.render().indexOf("coordsize='10000 10000'") !== -1);
+            ok(multiPathNode.element.coordsize, "10000 10000");
         });
 
         test("renders width", function() {
-            ok(multiPathNode.render().indexOf("width:100px;") !== -1);
+            ok(multiPathNode.element.style.width, "100px");
         });
 
         test("renders height", function() {
-            ok(multiPathNode.render().indexOf("height:100px;") !== -1);
+            ok(multiPathNode.element.style.height, "100px");
         });
     })();
 
@@ -1156,7 +1152,7 @@
         });
 
         test("circle transform origin is minus bbox center over bbox size", function() {
-            ok(circleTransformNode.render().indexOf("origin='-3,-2'") !== -1);
+            ok(circleTransformNode.element.origin, "-3,-2");
         });
 
         test("options change updates attributes", 4, function() {
@@ -1201,11 +1197,13 @@
         });
 
         test("renders center", function() {
-            ok(circleNode.render().indexOf("top:-10px;left:-20px;") !== -1);
+            ok(circleNode.element.style.top, "-10px");
+            ok(circleNode.element.style.left, "-20px");
         });
 
         test("renders radius", function() {
-            ok(circleNode.render().indexOf("width:60px;height:60px;") !== -1);
+            ok(circleNode.element.style.width, "60px");
+            ok(circleNode.element.style.height, "60px");
         });
 
         test("geometryChange sets center", 2, function() {
@@ -1246,7 +1244,11 @@
             circle.options.set("foo", true);
         });
 
-        shapeTests(d.Circle, vml.CircleNode, "CircleNode");
+        shapeTests("CircleNode", function(shapeOptions) {
+            var geometry = new g.Circle(new Point(10, 20), 30);
+            var circle = new Circle(geometry, shapeOptions);
+            return new CircleNode(circle);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -1269,8 +1271,8 @@
         });
 
         test("renders curve path", function() {
-            var result = node.render();
-            ok(result.indexOf("v='m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e'") !== -1);
+            equal(node.element.v,
+                  "m 15000,10000 c 15000,13491 14011,16915 12500,18660 10989,20406 9011,20406 7500,18660 e");
         });
 
         test("geometryChange updates path", function() {
@@ -1299,18 +1301,6 @@
             ok(arcNode.pathData instanceof vml.ArcDataNode);
         });
 
-        test("renders coordsize", function() {
-            ok(arcNode.render().indexOf("coordsize='10000 10000'") !== -1);
-        });
-
-        test("renders width", function() {
-            ok(arcNode.render().indexOf("width:100px;") !== -1);
-        });
-
-        test("renders height", function() {
-            ok(arcNode.render().indexOf("height:100px;") !== -1);
-        });
-
         test("geometryChange is forwarded to data node", function() {
             arcNode.pathData.geometryChange = function() {
                 ok(true);
@@ -1319,13 +1309,17 @@
             arc.geometry().setEndAngle(180);
         });
 
-        shapeTests(d.Arc, vml.ArcNode, "ArcNode");
+        shapeTests("ArcNode", function(shapeOptions) {
+            var geometry = new g.Arc(new Point(10, 20));
+            var shape = new d.Arc(geometry, shapeOptions);
+            return new vml.ArcNode(shape);
+        });
     })();
 
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textPathDataNode;
+        var node;
 
         module("TextPathDataNode", {
             setup: function() {
@@ -1334,27 +1328,31 @@
                     return { width: 40, height: 20, baseline: 15 };
                 };
 
-                textPathDataNode = new vml.TextPathDataNode(text);
+                node = new vml.TextPathDataNode(text);
             }
         });
 
         test("renders text path", function() {
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("renders text path w/o current transform", function() {
             var group = new d.Group({ transform: g.transform().translate(100, 100) });
             group.append(text);
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            node = new vml.TextPathDataNode(text);
+
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("renders text path w/o transform", function() {
             text.transform(g.transform().translate(100, 100));
-            ok(textPathDataNode.render().indexOf("'m 10000,11000 l 14000,11000") > -1);
+            node = new vml.TextPathDataNode(text);
+
+            ok(node.element.v, "m 10000,11000 l 14000,11000");
         });
 
         test("geometryChange updates path", function() {
-            textPathDataNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(name, "v");
                 equal(value, "m 0,11000 l 4000,11000");
             };
@@ -1363,7 +1361,7 @@
         });
 
         test("rounds path coordinates", function() {
-            textPathDataNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(value, "m 10001,11001 l 14001,11001");
             };
 
@@ -1374,25 +1372,25 @@
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textPathNode;
+        var node;
 
         module("TextPathNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point(), { font: "4pt Arial" });
-                textPathNode = new vml.TextPathNode(text);
+                node = new vml.TextPathNode(text);
             }
         });
 
         test("renders style", function() {
-            ok(textPathNode.render().indexOf("style='font:4pt Arial;'") > -1);
+            equal(node.element.style.font, "4pt Arial");
         });
 
         test("renders string", function() {
-            ok(textPathNode.render().indexOf("string='Foo'") > -1);
+            equal(node.element.string, "Foo");
         });
 
         test("optionsChange updates style", function() {
-            textPathNode.css = function(name, value) {
+            node.css = function(name, value) {
                 equal(name, "font");
                 equal(value, "10pt Arial");
             };
@@ -1401,7 +1399,7 @@
         });
 
         test("optionsChange updates string", function() {
-            textPathNode.attr = function(name, value) {
+            node.attr = function(name, value) {
                 equal(name, "string");
                 equal(value, "Bar");
             };
@@ -1413,36 +1411,39 @@
     // ------------------------------------------------------------
     (function() {
         var text;
-        var textNode;
+        var node;
 
         module("TextNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point());
-                textNode = new vml.TextNode(text);
+                node = new vml.TextNode(text);
             }
         });
 
         test("forwards font change to path node", function() {
-            textNode.path.optionsChange = function() { ok(true); };
+            node.path.optionsChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards font change to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true); };
+            node.pathData.geometryChange = function() { ok(true); };
             text.options.set("font", "10pt Arial");
         });
 
         test("forwards optionsChange to path node", function() {
-            textNode.path.optionsChange = function() { ok(true); };
+            node.path.optionsChange = function() { ok(true); };
             text.content("Bar");
         });
 
         test("geometryChange is forwarded to path data node", function() {
-            textNode.pathData.geometryChange = function() { ok(true); };
+            node.pathData.geometryChange = function() { ok(true); };
             text.position().setX(1);
         });
 
-        shapeTests(d.Text, vml.TextNode, "TextNode");
+        shapeTests("TextNode", function(shapeOptions) {
+            var text = new d.Text("Foo", [], shapeOptions);
+            return new vml.TextNode(text);
+        });
     })();
 
     // ------------------------------------------------------------
@@ -1458,7 +1459,7 @@
         });
 
         test("renders rectangle", function() {
-            equal(dataNode.renderData(), "m 1000,2000 l 10000,2000 10000,10000 1000,10000 x e");
+            equal(dataNode.element.v, "m 1000,2000 l 10000,2000 10000,10000 1000,10000 x e");
         });
     })();
 
@@ -1475,62 +1476,62 @@
         });
 
         test("renders src", function() {
-            contains(fillNode.render(), "src='foo'");
+            equal(fillNode.element.src, "foo");
         });
 
         test("renders type", function() {
-            contains(fillNode.render(), "type='frame'");
+            equal(fillNode.element.type, "frame");
         });
 
         test("renders rotate", function() {
-            contains(fillNode.render(), "rotate='true'");
+            equal(fillNode.element.rotate, true);
         });
 
         test("renders fill relative size", function() {
-            contains(fillNode.render(), "size='0.9,0.8'");
+            equal(fillNode.element.size, "0.9,0.8");
         });
 
         test("renders fill relative center position", function() {
-            contains(fillNode.render(), "position='0.05,0.1'");
+            equal(fillNode.element.position, "0.05,0.1");
         });
 
         test("renders default angle of rotation", function() {
-            contains(fillNode.render(), "angle='0'");
+            equal(fillNode.element.angle, "0");
         });
 
         test("sets size for transformation scale", function() {
             image.transform(g.transform().scale(2, 4));
-            contains(fillNode.render(), "size='1.8,3.2'");
+            equal(fillNode.element.size, "1.8,3.2");
         });
 
         test("sets position for transformation scale", function() {
             image.transform(g.transform().scale(2, 4));
-            contains(fillNode.render(), "position='0.6,1.9'");
+            equal(fillNode.element.position, "0.6,1.9");
         });
 
         test("sets position for transformation translation", function() {
             image.transform(g.transform().translate(10, 20));
-            contains(fillNode.render(), "position='0.15,0.3'");
+            equal(fillNode.element.position, "0.15,0.3");
         });
 
         test("sets position for transformation translation and scale", function() {
             image.transform(g.transform().translate(10, 20).scale(2, 4));
-            contains(fillNode.render(), "position='0.7,2.1'");
+            equal(fillNode.element.position, "0.7,2.1");
         });
 
         test("sets position for transformation rotation", function() {
             image.transform(g.transform().translate(10, 20).rotate(90));
-            contains(fillNode.render(), "position='-1,0.25'");
+            equal(fillNode.element.position, "-1,0.25");
         });
 
         test("sets angle for transformation angle", function() {
             image.transform(g.transform().rotate(45));
-            contains(fillNode.render(), "angle='45'");
+            equal(fillNode.element.angle, "45");
         });
 
         test("sets angle for transformation angle and non-uniform scale", function() {
             image.transform(g.transform().rotate(45).scale(2, 4));
-            contains(fillNode.render(), "angle='45'");
+            equal(fillNode.element.angle, "45");
         });
 
         test("optionsChange sets src", function() {
@@ -1632,7 +1633,10 @@
             imageNode.refreshTransform(g.transform(parentMatrix));
         });
 
-        shapeTests(d.Image, vml.ImageNode, "ImageNode");
+        shapeTests("ImageNode", function(shapeOptions) {
+            var image = new d.Image("foo", new g.Rect([10, 20], [90, 80]), shapeOptions);
+            return new vml.ImageNode(image);
+        });
     })();
 
 })();
