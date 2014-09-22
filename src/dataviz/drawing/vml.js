@@ -181,9 +181,12 @@
         createElement: function() {
             Node.fn.createElement.call(this);
 
-            this.css("width", "100%");
-            this.css("height", "100%");
-            this.css("position", "relative");
+            this.allCss([
+                ["width", "100%"],
+                ["height", "100%"],
+                ["position", "relative"],
+                ["visibility", "visible"]
+            ]);
         },
 
         clear: function() {
@@ -778,16 +781,9 @@
     function enableVML() {
         if (doc.namespaces && !doc.namespaces.kvml) {
             doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
-            doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
-            /*
-            setTimeout(function() {
-                if (doc.styleSheets.length < 31) {
-                    doc.createStyleSheet().addRule(".kvml", "behavior:url(#default#VML)");
-                } else {
-                    doc.styleSheets[0].addRule(".kvml", "behavior:url(#default#VML)");
-                }
-            }, 0);
-            */
+
+            var stylesheet = doc.styleSheets.length > 0 ? doc.styleSheets[0] : doc.createStyleSheet();
+            stylesheet.addRule(".kvml", "behavior:url(#default#VML)");
         }
     }
 
