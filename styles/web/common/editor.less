@@ -45,8 +45,13 @@ table.k-editor
 
 .k-editor-toolbar li
 {
-    display: inline; /* mandatory for IE7. Floats and the inline-block hack break it */
+    display: inline-block;
     vertical-align: middle;
+}
+
+.k-ie7 .k-editor-toolbar li
+{
+    display: inline; /* mandatory for IE7. Floats and the inline-block hack break it */
 }
 
 .k-webkit .k-editor-toolbar,
