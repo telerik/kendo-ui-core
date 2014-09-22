@@ -782,7 +782,7 @@
         if (doc.namespaces && !doc.namespaces.kvml) {
             doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml");
 
-            var stylesheet = doc.styleSheets.length > 0 ? doc.styleSheets[0] : doc.createStyleSheet();
+            var stylesheet = doc.styleSheets.length > 30 ? doc.styleSheets[0] : doc.createStyleSheet();
             stylesheet.addRule(".kvml", "behavior:url(#default#VML)");
         }
     }
