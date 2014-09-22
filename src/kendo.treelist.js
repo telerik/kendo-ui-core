@@ -35,6 +35,7 @@ var __meta__ = {
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
         header: "k-header",
+        button: "k-button",
         alt: "k-alt",
         editCell: "k-edit-cell",
         group: "k-treelist-group",
@@ -44,6 +45,7 @@ var __meta__ = {
         gridContentWrap: "k-grid-content",
         loading: "k-loading",
         refresh: "k-i-refresh",
+        retry: "k-request-retry",
         selected: "k-state-selected",
         status: "k-status",
         icon: "k-icon",
@@ -442,8 +444,12 @@ var __meta__ = {
             var icons = "." + classNames.iconCollapse +
                 ", ." + classNames.iconExpand +
                 ", ." + classNames.refresh;
+            var retryButton = "." + classNames.retry;
+            var dataSource = this.dataSource;
 
-            this.content.on(CLICK + NS, icons, proxy(this._toggleChildren, this));
+            this.content
+                .on(CLICK + NS, icons, proxy(this._toggleChildren, this))
+                .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource));
         },
 
         _domTrees: function() {
@@ -525,7 +531,10 @@ var __meta__ = {
             if (options.error) {
                 this.contentTree.render([
                     kendoDomElement("div", { className: classNames.status }, [
-                        kendoTextElement(messages.requestFailed)
+                        kendoTextElement(messages.requestFailed),
+                        kendoDomElement("button", {
+                            className: [ classNames.button, classNames.retry ].join(" ")
+                        }, [ kendoTextElement(messages.retry) ])
                     ])
                 ]);
             } else if (!data.length) {

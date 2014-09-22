@@ -260,4 +260,48 @@
 
         ok(instance.content.text().indexOf(message) >= 0);
     });
+
+    test("retry button is rendered for root level", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.reject({});
+
+        var button = instance.content.find("button.k-button.k-request-retry");
+        equal(button.length, 1);
+        equal(button.text(), "Retry");
+    });
+
+    test("retry button uses retry message", function() {
+        var read = controlledRead();
+        var message = "Try again";
+
+        createTreeList({
+            dataSource: { transport: { read: read } },
+            messages: { retry: message }
+        });
+
+        read.reject({});
+
+        equal(instance.content.find(".k-request-retry").text(), message);
+    });
+
+    test("clicking retry button triggers read", function() {
+        var read = controlledRead();
+
+        createTreeList({
+            dataSource: { transport: { read: read } }
+        });
+
+        read.reject({});
+
+        instance.content.find(".k-request-retry").click();
+
+        read.resolve([ { id: 1 } ]);
+
+        equal(instance.content.find("tr").length, 1);
+    });
 })();
