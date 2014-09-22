@@ -3934,6 +3934,35 @@ function pad(number, digits, end) {
         return start;
     };
 
+    var fileSaver = document.createElement("a");
+    var downloadAttribute = "download" in fileSaver;
+
+    if (downloadAttribute) {
+        kendo.saveAs = function(dataURI, filename) {
+            fileSaver.download = filename;
+            fileSaver.href = dataURI;
+
+            var e = document.createEvent("MouseEvents");
+            e.initMouseEvent("click", true, false, window,
+                0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+            fileSaver.dispatchEvent(e);
+        };
+    } else if (navigator.msSaveBlob) {
+        kendo.saveAs = function(dataURI, filename) {
+            var parts = dataURI.split(";base64,");
+            var contentType = parts[0];
+            var base64 = atob(parts[1]);
+            var array = new Uint8Array(base64.length);
+
+            for (var idx = 0; idx < base64.length; idx++) {
+                array[idx] = base64.charCodeAt(idx);
+            }
+
+            navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), filename);
+        };
+    }
+
 })(jQuery);
 
 return window.kendo;

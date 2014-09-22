@@ -59,59 +59,7 @@
       function excel() {
         var grid = $("#grid").data("kendoGrid");
 
-        /*
-        var data = grid.dataSource.view();
-
-        var file = {
-          worksheets: [{
-            data: []
-          }],
-          creator: 'John Smith',
-          created: new Date('8/16/2012'),
-          lastModifiedBy: 'Larry Jones',
-          modified: new Date(),
-          activeWorksheet: 0
-        };
-
-        var worksheetData = file.worksheets[0].data;
-        var worksheetDataHeader = [];
-
-        worksheetData.push(worksheetDataHeader);
-
-        for (var ci = 0; ci < grid.columns.length; ci++) {
-          var title = grid.columns[ci].title || grid.columns[ci].field;
-          worksheetDataHeader.push({
-            value: title,
-            autoWidth: true
-          });
-        }
-
-        for (var di = 0; di < data.length; di++) {
-          var dataItem = data[di];
-          var worksheetDataItem = [];
-
-          for (ci = 0; ci < grid.columns.length; ci++) {
-            var column = grid.columns[ci];
-
-            worksheetDataItem.push({
-              value: dataItem.get(column.field)
-            });
-          }
-
-          worksheetData.push(worksheetDataItem);
-        }
-
-        var result = xlsx(file);
-
-        if (navigator.msSaveBlob) {
-          var blob = toBlob(result.base64, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-          navigator.msSaveBlob(blob, this.getAttribute("download"));
-        } else {
-          this.href = result.href();
-        }
-        */
-
-        this.href = new kendo.ooxml.Workbook({
+        var base64 = new kendo.ooxml.Workbook({
             sheets: [
                 {
                     title: "My sheet",
@@ -150,20 +98,10 @@
                 }
             ]
         }).toDataURL();
+
+        kendo.saveAs(base64, "Export.xlsx");
       }
 
-      // See: http://goo.gl/qlg5dd
-    function toBlob(base64, type) {
-      var rawData = base64.substring(base64.indexOf("base64," + 7));
-      var data = atob(rawData);
-      var arr = new Uint8Array(data.length);
-
-      for (var i = 0; i < data.length; ++i) {
-        arr[i] = data.charCodeAt(i);
-      }
-
-      return new Blob([ arr.buffer ], { type: type });
-    }
     </script>
 </body>
 </html>
