@@ -691,7 +691,6 @@ test("total is correct after removing all items, syncing adding new one and canc
     equal(dataSource.total(), 1);
 });
 
-
 test("total is updated after removing all items and adding new", function() {
     var dataSource = new DataSource({
         schema: {
@@ -712,6 +711,38 @@ test("total is updated after removing all items and adding new", function() {
     equal(dataSource.total(), 1);
 });
 
+test("sync returns promise", function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+    });
 
+    dataSource.read();
+
+    var promise = dataSource.sync();
+
+    ok($.isFunction(promise.then));
+});
+
+test("sync returns promise when offline", 2, function() {
+    var dataSource = new DataSource({
+        schema: {
+            model: { id: "id" }
+        },
+        data: [{ id: 1, foo: "bar"},{ id: 2, foo: "baz"}]
+    });
+
+    dataSource.read();
+
+    dataSource.online(false);
+
+    var promise = dataSource.sync();
+
+    ok($.isFunction(promise.then));
+
+    promise.then($.proxy(ok, this, true));
+});
 
 }());

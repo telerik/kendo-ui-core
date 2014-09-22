@@ -2467,6 +2467,7 @@ var __meta__ = {
                 updated = [],
                 destroyed = that._destroyed,
                 data = that._flatData(that._data);
+            var promise;
 
             if (that.online()) {
 
@@ -2487,7 +2488,7 @@ var __meta__ = {
                 promises.push.apply(promises, that._send("update", updated));
                 promises.push.apply(promises, that._send("destroy", destroyed));
 
-                $.when
+                promise = $.when
                  .apply(null, promises)
                  .then(function() {
                     var idx, length;
@@ -2506,7 +2507,11 @@ var __meta__ = {
                 that._storeData(true);
 
                 that._change({ action: "sync" });
+
+                promise = $.Deferred().resolve().promise();
             }
+
+            return promise;
         },
 
         cancelChanges: function(model) {
