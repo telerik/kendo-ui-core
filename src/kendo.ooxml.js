@@ -368,9 +368,9 @@ var Worksheet = kendo.Class.extend({
         } else if (type === "boolean") {
             type = "b";
             value = +value;
-        } else if (value && value.toISOString) {
+        } else if (value && value.getTime) {
             type = "d";
-            value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
+            value = kendo.timezone.remove(value, "Etc/UTC").toJSON();
             if (!style.format) {
                 style.format = "mm-dd-yy";
             }
@@ -498,8 +498,8 @@ var Workbook = kendo.Class.extend({
         docProps.file("core.xml", CORE({
             creator: "Kendo UI",
             lastModifiedBy: "Kendo UI",
-            created: new Date().toISOString(),
-            modified: new Date().toISOString()
+            created: new Date().toJSON(),
+            modified: new Date().toJSON()
         }));
 
         var sheetCount = this._sheets.length;
