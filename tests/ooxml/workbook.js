@@ -538,4 +538,20 @@ test("toDataUrl sets the rgb attribute of the 'fgColor' element when background 
     equal(dom.find("fills > fill:last > patternFill > fgColor").attr("rgb"), "FFFF0000");
 });
 
+test("toDataUrl sets 'applyAlignment' attribute to '1' if hAlign is set", function() {
+    var workbook = new kendo.ooxml.Workbook({
+        sheets: [ {
+           data: [
+               [ { hAlign: "center", value: "foo" } ]
+           ]
+        } ]
+    });
+
+    workbook.toDataURL();
+
+    var dom = $(JSZip.prototype.files["styles.xml"]);
+
+    equal(dom.find("cellXfs > xf").last().attr("applyAlignment"), 1);
+});
+
 }());
