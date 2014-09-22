@@ -283,8 +283,14 @@ var STYLES = kendo.template(
    '<tableStyles count="0" defaultTableStyle="TableStyleMedium2" defaultPivotStyle="PivotStyleMedium9" />' +
 '</styleSheet>');
 
+function numChar(colIndex) {
+   var letter = Math.floor(colIndex / 26) - 1;
+
+   return (letter >= 0 ? numChar(letter) : "") + String.fromCharCode(65 + (colIndex % 26));
+}
+
 function ref(rowIndex, colIndex) {
-    return String.fromCharCode(65 + colIndex) + (rowIndex + 1);
+    return numChar(colIndex) + (rowIndex + 1);
 }
 
 var Worksheet = kendo.Class.extend({
@@ -343,6 +349,11 @@ var Worksheet = kendo.Class.extend({
         return index + 1;
     },
     _cell: function(rows, rowIndex, data) {
+        if (!data) {
+            this._cellIndex++;
+            return;
+        }
+
         var value = data.value;
 
         var style = {

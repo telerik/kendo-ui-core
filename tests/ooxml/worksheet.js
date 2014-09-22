@@ -33,12 +33,38 @@ test("toXML creates a 'c' element for cells", function() {
 });
 
 
-test("toXML sets the r attribute to the alphanumeric and toXML number (index plus one)", function() {
+test("toXML sets the r attribute to the alphanumeric and cell number (index plus one)", function() {
     var worksheet = Worksheet();
 
     var dom = $(worksheet.toXML());
 
     equal(dom.find("c").attr("r"), "A1");
+});
+
+test("toXML sets the 'r' attribute to the alphanumeric when index is greater than 26", function() {
+    var row = new Array(27);
+
+    row.push({})
+
+    var worksheet = Worksheet([
+        row
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").attr("r"), "AB1");
+});
+
+test("toXML skips empty cells", function() {
+    var row = new Array(25);
+
+    var worksheet = Worksheet([
+        [,,{}]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("c").length, 1);
 });
 
 test("toXML sets the t attribute to 's' when the value is a string", function() {
