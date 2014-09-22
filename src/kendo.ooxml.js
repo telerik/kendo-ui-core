@@ -2,6 +2,8 @@
     define([ "./kendo.core" ], f);
 })(function(){
 
+/* global JSZip */
+
 var __meta__ = {
     id: "ooxml",
     name: "XLSX export",
@@ -286,7 +288,7 @@ var Worksheet = kendo.Class.extend({
             columns: this.options.columns,
             data: $.map(data, $.proxy(this._row, this, data)),
             mergeCells: this._mergeCells,
-            autoFilter: this.options.filter ? "A1:" + ref(0, this.options.columns.length - 1) : null,
+            autoFilter: this.options.filter ? "A1:" + ref(0, this.options.columns.length - 1) : null
         });
     },
     _row: function(rows, cells, rowIndex) {
@@ -350,7 +352,7 @@ var Worksheet = kendo.Class.extend({
         } else if (type === "boolean") {
             type = "b";
             value = +value;
-        } else if (value != null && value.toISOString) {
+        } else if (value && value.toISOString) {
             type = "d";
             value = kendo.timezone.remove(value, "Etc/UTC").toISOString();
             if (!style.format) {
@@ -423,7 +425,6 @@ var defaultFormats = {
     "#,##0 ;[Red](#,##0)": 38,
     "#,##0.00;(#,##0.00)": 39,
     "#,##0.00;[Red](#,##0.00)": 40,
-    '_("$"* #,##0.00_);_("$"* \(#,##0.00\);_("$"* "-"??_);_(@_)': 44,
     "mm:ss": 45,
     "[h]:mm:ss": 46,
     "mmss.0": 47,
@@ -431,9 +432,6 @@ var defaultFormats = {
     "@": 49,
     "[$-404]e/m/d": 27,
     "m/d/yy": 30,
-    "[$-404]e/m/d": 36,
-    "[$-404]e/m/d": 50,
-    "[$-404]e/m/d": 57,
     "t0": 59,
     "t0.00": 60,
     "t#,##0": 61,
@@ -512,7 +510,7 @@ var Workbook = kendo.Class.extend({
 
         var hasFont = function(style) {
             return style.underline || style.bold || style.italic || style.color || style.fontName || style.fontSize;
-        }
+        };
 
         var fonts = $.map(styles, function(style) {
             if (style.color) {
@@ -532,7 +530,7 @@ var Workbook = kendo.Class.extend({
 
        var fills = $.map(styles, function(style) {
             if (style.background) {
-                style.background = convertColor(style.background)
+                style.background = convertColor(style.background);
                 return style;
             }
         });
