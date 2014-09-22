@@ -485,4 +485,15 @@ test("toXML creates one mergeCell for a cell with both colSpan and rowSpan set",
     equal(dom.find("mergeCell").attr("ref"), "A1:B2");
 });
 
+test("toXML creates 'autoFilter' element when the filter option is set", function() {
+    var worksheet = Worksheet({
+        columns: [ {}, {} ],
+        filter: true
+    });
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("autoFilter").attr("ref"), "A1:B1");
+});
+
 }());

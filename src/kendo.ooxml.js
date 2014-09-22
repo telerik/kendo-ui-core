@@ -152,6 +152,9 @@ var WORKSHEET = kendo.template(
        '# } #' +
    '</mergeCells>' +
    '# } #' +
+   '# if (autoFilter) { #' +
+   '<autoFilter ref="${autoFilter}"/>' +
+   '# } #' +
    '<pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3" footer="0.3" />' +
 '</worksheet>');
 
@@ -283,6 +286,7 @@ var Worksheet = kendo.Class.extend({
             columns: this.options.columns,
             data: $.map(data, $.proxy(this._row, this, data)),
             mergeCells: this._mergeCells,
+            autoFilter: this.options.filter ? "A1:" + ref(0, this.options.columns.length - 1) : null,
         });
     },
     _row: function(rows, cells, rowIndex) {
