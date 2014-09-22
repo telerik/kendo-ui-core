@@ -366,27 +366,27 @@ var Worksheet = kendo.Class.extend({
             ref: ref(rowIndex, this._cellIndex)
         };
 
-        if (data.colSpan > 1) {
+        var colSpan = data.colSpan || 1;
+        var rowSpan = data.rowSpan || 1;
+
+        if (colSpan > 1 || rowSpan > 1) {
             var cells = [cell];
 
-            for (var ci = 1; ci < data.colSpan; ci++) {
+            for (var ci = 1; ci < colSpan; ci++) {
                 this._cellIndex++;
 
                 cells[ci] = { ref: ref(rowIndex, this._cellIndex) };
             }
 
-            this._mergeCells.push(cell.ref + ":" + ref(rowIndex, this._cellIndex));
-
-            cell = cells;
-        }
-
-        if (data.rowSpan > 1) {
-            for (var ri = 1; ri < data.rowSpan; ri++) {
+            for (var ri = 1; ri < rowSpan; ri++) {
                 if (rows[rowIndex + ri]) {
                     rows[rowIndex + ri].splice(this._cellIndex, 0, {});
                 }
             }
-            this._mergeCells.push(cell.ref + ":" + ref(rowIndex + data.rowSpan - 1, this._cellIndex));
+
+            this._mergeCells.push(cell.ref + ":" + ref(rowIndex + rowSpan - 1, this._cellIndex));
+
+            cell = cells;
         }
 
         this._cellIndex ++;

@@ -474,4 +474,15 @@ test("toXML creates 'mergeCell' elements for multiple cells with colSpan attribu
     equal(dom.find("mergeCell").length, 4);
 });
 
+test("toXML creates one mergeCell for a cell with both colSpan and rowSpan set", function() {
+    var worksheet = Worksheet([
+        [{ colSpan: 2, rowSpan: 2 }]
+    ]);
+
+    var dom = $(worksheet.toXML());
+
+    equal(dom.find("mergeCell").length, 1);
+    equal(dom.find("mergeCell").attr("ref"), "A1:B2");
+});
+
 }());
