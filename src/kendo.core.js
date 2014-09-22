@@ -3938,8 +3938,8 @@ function pad(number, digits, end) {
     var downloadAttribute = "download" in fileSaver;
 
     if (downloadAttribute) {
-        kendo.saveAs = function(dataURI, filename) {
-            fileSaver.download = filename;
+        kendo.saveAs = function(dataURI, fileName) {
+            fileSaver.download = fileName;
             fileSaver.href = dataURI;
 
             var e = document.createEvent("MouseEvents");
@@ -3949,7 +3949,7 @@ function pad(number, digits, end) {
             fileSaver.dispatchEvent(e);
         };
     } else if (navigator.msSaveBlob) {
-        kendo.saveAs = function(dataURI, filename) {
+        kendo.saveAs = function(dataURI, fileName) {
             var parts = dataURI.split(";base64,");
             var contentType = parts[0];
             var base64 = atob(parts[1]);
@@ -3959,7 +3959,37 @@ function pad(number, digits, end) {
                 array[idx] = base64.charCodeAt(idx);
             }
 
-            navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), filename);
+            navigator.msSaveBlob(new Blob([array.buffer], { type: contentType }), fileName);
+        };
+    } else {
+        kendo.saveAs = function(dataURI, fileName, proxyURL) {
+            var form = document.createElement("form");
+            form.action = proxyURL;
+            form.method = "POST";
+
+            var parts = dataURI.split(";base64,");
+
+            var contentTypeElement = document.createElement("input");
+            contentTypeElement.value = parts[0];
+            contentTypeElement.name = "contentType";
+            contentTypeElement.type = "hidden";
+            form.appendChild(contentTypeElement);
+
+            var base64Element = document.createElement("input");
+            base64Element.value = parts[1];
+            base64Element.name = "base64";
+            base64Element.type = "hidden";
+            form.appendChild(base64Element);
+
+            var filenameElement = document.createElement("input");
+            filenameElement.value = fileName;
+            filenameElement.name = "fileName";
+            filenameElement.type = "hidden";
+            form.appendChild(filenameElement);
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
         };
     }
 

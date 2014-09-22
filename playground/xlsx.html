@@ -22,10 +22,11 @@
       <li>Firefox</li>
       <li>IE10+</li>
     </ul>
+    <a download="Contacts.xlsx" class="k-button" id="export">Export</a>
     <div id="grid" style="height: 365px"></div>
     <script>
-        $("#grid").kendoGrid({
-          toolbar: '<a download="Contacts.xlsx" class="k-button" id="export">Export</a>',
+        $("grid").kendoGrid({
+          toolbar: '',
           dataSource: {
               type: "odata",
               transport: {
@@ -54,7 +55,9 @@
               field: "Country",
               width: 150
           }]
-      }).on("click", "#export", excel);
+      })
+
+      $("#export").on("click", excel);
 
       function excel() {
         var grid = $("#grid").data("kendoGrid");
@@ -99,7 +102,7 @@
             ]
         }).toDataURL();
 
-        kendo.saveAs(base64, "Export.xlsx");
+        kendo.saveAs(base64, "Export.xlsx", "http://korchev:88/filesaver");
       }
 
     </script>
