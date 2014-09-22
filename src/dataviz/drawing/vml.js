@@ -7,7 +7,6 @@
     // Imports ================================================================
     var doc = document,
         atan2 = Math.atan2,
-        max = Math.max,
         sqrt = Math.sqrt,
 
         kendo = window.kendo,
@@ -16,18 +15,15 @@
 
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
-        renderTemplate = dataviz.renderTemplate,
 
         d = dataviz.drawing,
         BaseNode = d.BaseNode,
 
         g = dataviz.geometry,
-        Matrix = g.Matrix,
         toMatrix = g.toMatrix,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr,
-        renderAllAttr = util.renderAllAttr,
+        deg = util.deg,
         round = util.round;
 
     // Constants ==============================================================
@@ -718,8 +714,8 @@
                 width *= sx;
                 height *= sy;
 
-                var ax = util.deg(atan2(matrix.b, matrix.d));
-                var ay = util.deg(atan2(-matrix.c, matrix.a));
+                var ax = deg(atan2(matrix.b, matrix.d));
+                var ay = deg(atan2(-matrix.c, matrix.a));
                 angle = (ax + ay) / 2;
 
                 if (angle !== 0) {
