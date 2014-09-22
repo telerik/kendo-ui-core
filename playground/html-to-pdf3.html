@@ -42,7 +42,7 @@
         margin: 1em;
         color: red;
         box-sizing: border-box;
-        //transform: rotate(15deg);
+        transform: rotate(-5deg);
         text-align: justify;
       }
 
@@ -65,7 +65,7 @@
                   border: 2px solid black;
                   padding: 5px;
                   position: absolute;
-                  z-index: -1;
+                  z-index: 5;
                   opacity: 0.7;
                   transform: rotate(15deg);
                   left: 10px;
@@ -77,14 +77,14 @@
                   border: 2px solid black;
                   padding: 5px;
                   position: absolute;
-                  z-index: -1;
+                  z-index: 6;
                   opacity: 0.7;
                   transform: rotate(15deg);
                   left: 100px;
-                  border-radius: 20px;
+                  border-top-left-radius: 20px 40px;
                   background: yellow;" />
 
-      <div style="width: 30%; font: 14px/24px verdana; position: relative" class="test">
+      <div style="width: 30%; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr" class="test">
         <span>
           This is a nonsensical document, but syntactically valid HTML 4.0. All
           100% conformant CSS1 agents should be able to render the document
@@ -132,7 +132,9 @@
       }
 
       $(document).ready(function(){
-        draw("#test1");
+        setTimeout(function(){
+          draw("#test1");
+        }, 10);
       });
     </script>
 

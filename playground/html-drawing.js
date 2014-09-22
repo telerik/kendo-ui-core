@@ -63,10 +63,6 @@
         shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
     }
 
-    function translate(shape, x, y) {
-        transform(shape, [ 1, 0, 0, 1, x, y ]);
-    }
-
     function renderBorderAndBackground(element, group) {
         function drawEdge(tl, tr, br, bl, color) {
             var path = new drawing.Path({
@@ -81,7 +77,7 @@
             path.close();
         }
 
-        function drawOne(box) {
+        function drawOne(box, isFirst, isLast) {
             if (bgColor) {
                 // paint background.
                 // XXX: background image-s TODO.
@@ -105,17 +101,6 @@
                 );
             }
 
-            // right border
-            if (right.width > 0) {
-                drawEdge(
-                    { x: box.right               , y: box.top },
-                    { x: box.right               , y: box.bottom },
-                    { x: box.right - right.width , y: box.bottom - bottom.width },
-                    { x: box.right - right.width , y: box.top + top.width },
-                    right.color
-                );
-            }
-
             // bottom border
             if (bottom.width > 0) {
                 drawEdge(
@@ -128,13 +113,24 @@
             }
 
             // left border
-            if (left.width > 0) {
+            if (((isFirst && dir == "ltr") || (isLast && dir == "rtl")) && left.width > 0) {
                 drawEdge(
                     { x: box.left                , y: box.top },
                     { x: box.left                , y: box.bottom },
                     { x: box.left + left.width   , y: box.bottom - bottom.width },
                     { x: box.left + left.width   , y: box.top + top.width },
                     left.color
+                );
+            }
+
+            // right border
+            if (((isLast && dir == "ltr") || (isFirst && dir == "rtl")) && right.width > 0) {
+                drawEdge(
+                    { x: box.right               , y: box.top },
+                    { x: box.right               , y: box.bottom },
+                    { x: box.right - right.width , y: box.bottom - bottom.width },
+                    { x: box.right - right.width , y: box.top + top.width },
+                    right.color
                 );
             }
         }
@@ -144,6 +140,7 @@
         var right = getBorder(style, "right");
         var bottom = getBorder(style, "bottom");
         var left = getBorder(style, "left");
+        var dir = style.getPropertyValue("direction");
 
         var bgColor = style.getPropertyValue("background-color");
         bgColor = pdf.parseColor(bgColor);
@@ -152,23 +149,8 @@
         }
 
         var boxes = getBounds(element);
-
-        // var offset = $(element).offset(), width = $(element).width(), height = $(element).height();
-        // var boxes = [{
-        //     left   : offset.left,
-        //     top    : offset.top,
-        //     width  : width,
-        //     height : height,
-        //     right  : offset.left + width,
-        //     bottom : offset.top + height
-        // }];
-
-        // var boxes = [
-        //     element.getBoundingClientRect()
-        // ];
-
         for (var i = 0; i < boxes.length; ++i) {
-            drawOne(boxes[i]);
+            drawOne(boxes[i], i == 0, i == boxes.length - 1);
         }
     }
 
@@ -213,7 +195,12 @@
         for (var i = element.firstChild; i; i = i.nextSibling) {
             switch (i.nodeType) {
               case 1:         // Element
-                children.push(i);
+                var pos = getComputedStyle(i).getPropertyValue("position");
+                if (pos == "static") {
+                    renderElement(i, group);
+                } else {
+                    children.push(i);
+                }
                 break;
               case 3:         // Text
                 if (/\S/.test(i.data)) {
@@ -230,7 +217,7 @@
 
     function renderText(element, node, group) {
         var text = node.data;
-        var range = document.createRange();
+        var range = element.ownerDocument.createRange();
         var style = getComputedStyle(element);
         var align = style.getPropertyValue("text-align");
         var isJustified = align == "justify";
@@ -300,33 +287,29 @@
         // XXX: how  to handle opacity?
 
         var group = new drawing.Group();
+        container.append(group);
         var t = getTransform(style);
         if (t) {
             var prevTransform = element.style.transform;
             //element.style.setProperty("transform", "none", "important");
             element.style.transform = "none";
 
-            // XXX: not quite correct, must take origin into account
-            var m = [ 1, 0, 0, 1, 0, 0 ];
-            m = mmul(m, [ 1, 0, 0, 1, -t.origin[0], -t.origin[1] ]);
+            // must translate to origin before applying the CSS
+            // transformation, then translate back.
+            var bbox = element.getBoundingClientRect();
+            var x = bbox.left + t.origin[0];
+            var y = bbox.top + t.origin[1];
+            var m = [ 1, 0, 0, 1, -x, -y ];
             m = mmul(m, t.matrix);
-            m = mmul(m, [ 1, 0, 0, 1, t.origin[0], t.origin[1] ]);
+            m = mmul(m, [ 1, 0, 0, 1, x, y ]);
             transform(group, m);
         }
 
-        // XXX: the proper order is:
-        //      - background
-        //      - content
-        //      - border
-        // in the current impl, the background of a child element
-        // might show slightly over the border.
         renderBorderAndBackground(element, group);
         renderContents(element, group);
         if (t) {
-            console.log(prevTransform);
             element.style.transform = prevTransform;
         }
-        container.append(group);
     }
 
     drawing.drawDOM = function(element, cont) {
