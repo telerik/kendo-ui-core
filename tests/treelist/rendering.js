@@ -434,9 +434,37 @@
             }
         });
 
-        var footers = instance.content.find("tr.k-footer-template");
+        var footerCells = instance.content.find("tr.k-footer-template td");
 
-        equal(footers.eq(0).find("td").last().text(), "3", "Child footer template");
-        equal(footers.eq(1).find("td").last().text(), "4", "Root footer template");
+        equal(footerCells.eq(0).text(), "3", "Child footer template");
+        equal(footerCells.eq(1).text(), "4", "Root footer template");
+    });
+
+    test("footer template gets aggregate for own column", function() {
+        createTreeList({
+            columns: [
+                { field: "id", footerTemplate: "#= max #" },
+                { field: "foo", footerTemplate: "#= sum #" }
+            ],
+            dataSource: {
+                data: [
+                    { id: 1, foo: 8, parentId: null, expanded: true },
+                    { id: 2, foo: 1, parentId: 1 },
+                    { id: 3, foo: 3, parentId: 1 },
+                    { id: 4, foo: 5, parentId: 1 }
+                ],
+                aggregate: [
+                    { field: "id", aggregate: "max" },
+                    { field: "foo", aggregate: "sum" }
+                ]
+            }
+        });
+
+        var footerCells = instance.content.find("tr.k-footer-template td");
+
+        equal(footerCells.eq(0).text(), "4", "Child footer template, max id");
+        equal(footerCells.eq(1).text(), "9", "Child footer template, sum foo");
+        equal(footerCells.eq(2).text(), "4", "Root footer template, max id");
+        equal(footerCells.eq(3).text(), "17", "Root footer template, sum foo");
     });
 })();
