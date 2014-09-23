@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.dataviz.themes", "../../kendo.util",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.editable", "../../kendo.dataviz.themes", "../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
@@ -314,8 +314,7 @@
             visible: function (value) {
                 if (isUndefined(value)) {
                     return this.visual.visible();
-                }
-                else {
+                } else {
                     this.visual.visible(value);
                 }
             },
