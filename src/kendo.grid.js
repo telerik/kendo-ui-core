@@ -528,6 +528,33 @@ var __meta__ = {
         });
     }
 
+    function columnPosition(column, columns, row) {
+        row = row || 0;
+        for (var idx = 0; idx < columns.length; idx++) {
+           if (columns[idx] == column) {
+                return { cell: idx, row: row };
+           } else if (columns[idx].columns) {
+               var result = columnPosition(column, columns[idx].columns, row + 1);
+               if (result) {
+                    return result;
+               }
+           }
+        }
+        return null;
+    }
+
+    function flatColumns(columns) {
+        var result = [];
+        for (var idx = 0; idx < columns.length; idx++) {
+            result.push(columns[idx]);
+            if (columns[idx].columns) {
+                result = result.concat(flatColumns(columns[idx].columns));
+            }
+
+        }
+        return result;
+    }
+
     function hiddenLeafColumnsCount(columns) {
         var counter = 0;
         var column;
@@ -5261,7 +5288,9 @@ var __meta__ = {
                 idx,
                 cols,
                 colWidth,
+                row,
                 width = 0,
+                headerCellIndex,
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
@@ -5270,8 +5299,12 @@ var __meta__ = {
 
             if (typeof column == "number") {
                 column = columns[column];
+            } else if (isPlainObject(column)) {
+                column = grep(flatColumns(columns), function(item) {
+                    return item === column;
+                })[0];
             } else {
-                column = grep(columns, function(item) {
+                column = grep(flatColumns(columns), function(item) {
                     return item.field === column;
                 })[0];
             }
@@ -5280,16 +5313,39 @@ var __meta__ = {
                 return;
             }
 
-            columnIndex = inArray(column, visibleColumns(columns));
+            if (column.columns && column.columns.length) {
+                var position = columnPosition(column, columns);
+                columnIndex = position.cell;
+                column.hidden = true;
+                column.attributes = addHiddenStyle(column.attributes);
+                column.footerAttributes = addHiddenStyle(column.footerAttributes);
+                column.headerAttributes = addHiddenStyle(column.headerAttributes);
+
+                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, false);
+
+                for (var idx = 0; idx < column.columns.length; idx++) {
+                   this.hideColumn(column.columns[idx]);
+                }
+
+                return;
+            }
+
+            columnIndex = inArray(column, visibleColumns(leafColumns(columns)));
             column.hidden = true;
             column.attributes = addHiddenStyle(column.attributes);
             column.footerAttributes = addHiddenStyle(column.footerAttributes);
             column.headerAttributes = addHiddenStyle(column.headerAttributes);
+
             that._templates();
 
             that._updateCols();
             that._updateLockedCols();
-            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:first-child>th"), columnIndex, false);
+
+            cell = $(leafDataCells(that.thead).filter(":visible")[columnIndex]);
+            row = cell.parent();
+            headerCellIndex = row.find("th:not(.k-group-cell):not(.k-hierarchy-cell):visible").index(cell);
+
+            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + row.index() + ")>th"), headerCellIndex, false);
             setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, false);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
