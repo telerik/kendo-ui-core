@@ -72,10 +72,6 @@
         shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
     }
 
-    function toDegrees(radians) {
-        return ((180 * radians) / Math.PI) % 360;
-    }
-
     function addArcToPath(arc, path) {
         var points = arc.curvePoints();
         for (var i = 1; i < points.length; i += 3) {
@@ -83,28 +79,7 @@
         }
     }
 
-    function pow(x, y) {
-        return Math.pow(x, y);
-    }
-
-    function sqrt(x) {
-        return Math.sqrt(x);
-    }
-
     function renderBorderAndBackground(element, group) {
-        function drawEdge(tl, tr, br, bl, color) {
-            var path = new drawing.Path({
-                fill: { color: color },
-                stroke: null
-            });
-            group.append(path);
-            path.moveTo(tl.x, tl.y);
-            path.lineTo(tr.x, tr.y);
-            path.lineTo(br.x, br.y);
-            path.lineTo(bl.x, bl.y);
-            path.close();
-        }
-
         // this function will be called to draw each border.  it
         // draws starting at origin and the resulted path must be
         // translated/rotated to be placed in the proper position.
@@ -118,8 +93,9 @@
         //    - `rl` and `rl` -- the border radius on the left and right
         //      (objects containing x and y, for horiz/vertical radius)
         //
-        function drawRounded(len, Wtop, Wleft, Wright, rl, rr) {
+        function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr) {
             var path = new drawing.Path({
+                fill: { color: color },
                 stroke: null
             });
 
@@ -134,10 +110,10 @@
 
             if (rl.x > 0 && rl.y > 0) {
                 addArcToPath(new geo.Arc([ rl.x, rl.y ], {
-                    startAngle: -180,
-                    endAngle: -90,
-                    radiusX: rl.x,
-                    radiusY: rl.y
+                    startAngle : -180,
+                    endAngle   : -90,
+                    radiusX    : rl.x,
+                    radiusY    : rl.y
                 }), path);
             }
             path.lineTo(len - rr.x, 0);
@@ -179,84 +155,56 @@
             return path;
         }
 
+        // for left/right borders we need to invert the border-radiuses
         function inv(p) {
             return { x: p.y, y: p.x };
         }
 
+        // draws a single border box
         function drawOne(box, isFirst, isLast) {
+            // background
+            var background;
             if (bgColor) {
-                // paint background.
                 // XXX: background image-s TODO.
-                drawEdge(
-                    { x: box.left  , y: box.top },
-                    { x: box.right , y: box.top },
-                    { x: box.right , y: box.bottom },
-                    { x: box.left  , y: box.bottom },
-                    bgColor.toCssRgba()
-                );
+                // XXX: clip to content path (possibly rounded)
+                background = new drawing.Path({
+                    fill: { color: bgColor.toCssRgba() },
+                    stroke: null
+                })
+                    .moveTo(box.left, box.top)
+                    .lineTo(box.right, box.top)
+                    .lineTo(box.right, box.bottom)
+                    .lineTo(box.left, box.bottom)
+                    .close();
+                group.append(background);
             }
 
             // top border
             if (top.width > 0) {
-                // drawEdge(
-                //     { x: box.left                , y: box.top },
-                //     { x: box.right               , y: box.top },
-                //     { x: box.right - right.width , y: box.top + top.width },
-                //     { x: box.left + left.width   , y: box.top + top.width },
-                //     top.color
-                // );
-
-                var path = drawRounded(box.width, top.width, left.width, right.width, TLr, TRr);
+                var path = drawEdge(top.color, box.width, top.width, left.width, right.width, rTL, rTR);
                 setTransform(path, [ 1, 0, 0, 1, box.left, box.top ]);
                 group.append(path);
-                path.fill(top.color);
             }
 
             // bottom border
             if (bottom.width > 0) {
-                // drawEdge(
-                //     { x: box.left                , y: box.bottom },
-                //     { x: box.right               , y: box.bottom },
-                //     { x: box.right - right.width , y: box.bottom - bottom.width },
-                //     { x: box.left + left.width   , y: box.bottom - bottom.width },
-                //     bottom.color
-                // );
-
-                var path = drawRounded(box.width, bottom.width, left.width, right.width, BLr, BRr);
+                var path = drawEdge(bottom.color, box.width, bottom.width, left.width, right.width, rBL, rBR);
                 setTransform(path, [ 1, 0, 0, -1, box.left, box.bottom ]);
                 group.append(path);
-                path.fill(bottom.color);
             }
 
             // left border
-            if (((isFirst && dir == "ltr") || (isLast && dir == "rtl")) && left.width > 0) {
-                // drawEdge(
-                //     { x: box.left                , y: box.top },
-                //     { x: box.left                , y: box.bottom },
-                //     { x: box.left + left.width   , y: box.bottom - bottom.width },
-                //     { x: box.left + left.width   , y: box.top + top.width },
-                //     left.color
-                // );
-
-                var path = drawRounded(box.height, left.width, bottom.width, top.width, inv(BLr), inv(TLr));
+            if (left.width > 0 && ((isFirst && dir == "ltr") || (isLast && dir == "rtl"))) {
+                var path = drawEdge(left.color, box.height, left.width, bottom.width, top.width, inv(rBL), inv(rTL));
                 setTransform(path, [ 0, -1, 1, 0, box.left, box.bottom ]);
                 group.append(path);
-                path.fill(left.color);
             }
-            // right border
-            if (((isLast && dir == "ltr") || (isFirst && dir == "rtl")) && right.width > 0) {
-                // drawEdge(
-                //     { x: box.right               , y: box.top },
-                //     { x: box.right               , y: box.bottom },
-                //     { x: box.right - right.width , y: box.bottom - bottom.width },
-                //     { x: box.right - right.width , y: box.top + top.width },
-                //     right.color
-                // );
 
-                var path = drawRounded(box.height, right.width, top.width, bottom.width, inv(TRr), inv(BRr));
+            // right border
+            if (right.width > 0 && ((isLast && dir == "ltr") || (isFirst && dir == "rtl"))) {
+                var path = drawEdge(right.color, box.height, right.width, top.width, bottom.width, inv(rTR), inv(rBR));
                 setTransform(path, [ 0, 1, -1, 0, box.right, box.top ]);
                 group.append(path);
-                path.fill(right.color);
             }
         }
 
@@ -266,10 +214,10 @@
         var bottom = getBorder(style, "bottom");
         var left = getBorder(style, "left");
 
-        var TLr = getBorderRadius(style, "top-left");
-        var TRr = getBorderRadius(style, "top-right");
-        var BLr = getBorderRadius(style, "bottom-left");
-        var BRr = getBorderRadius(style, "bottom-right");
+        var rTL = getBorderRadius(style, "top-left");
+        var rTR = getBorderRadius(style, "top-right");
+        var rBL = getBorderRadius(style, "bottom-left");
+        var rBR = getBorderRadius(style, "bottom-right");
 
         var dir = style.getPropertyValue("direction");
 
