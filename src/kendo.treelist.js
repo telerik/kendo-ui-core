@@ -26,6 +26,7 @@ var __meta__ = {
     var proxy = $.proxy;
     var map = $.map;
     var grep = $.grep;
+    var STRING = "string";
     var CHANGE = "change";
     var ERROR = "error";
     var PROGRESS = "progress";
@@ -424,7 +425,8 @@ var __meta__ = {
                 loading: "Loading...",
                 requestFailed: "Request failed.",
                 retry: "Retry"
-            }
+            },
+            editable: false
         },
 
         _toggleChildren: function(e) {
@@ -869,6 +871,64 @@ var __meta__ = {
             var model = this.dataSource.getByUid(row.attr(kendo.attr("uid")));
 
             return model;
+        },
+
+        editRow: function(row) {
+            var model;
+
+            if (typeof row === STRING) {
+                row = this.content.find(row);
+            }
+
+            model = this.dataItem(row);
+
+            this._destroyEditable();
+
+            this._createEditor(row, model);
+        },
+
+        _createEditor: function(row, model) {
+            row.addClass("k-grid-edit-row");
+
+            this.editable = new ui.Editable(row, {
+                target: this,
+                clearContainer: false,
+                model: model,
+                fields: this._editableFields(row.children(), model)
+            });
+        },
+
+        _destroyEditable: function() {
+            if (!this.editable) {
+                return;
+            }
+
+            this.editable.destroy();
+            this.editable = null;
+        },
+
+        _editableFields: function(cells, model) {
+            var fields = [];
+            var columns = this.columns;
+            var idx, length, field, column;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                column = columns[idx];
+                field = column.field;
+
+                if (field && model.editable(field)) {
+
+                    cells.eq(idx).attr(kendo.attr("container-for"), field).empty();
+
+                    fields.push({
+                        field: field,
+                        format: column.format,
+                        editor: column.editor
+                    });
+                }
+            }
+
+            return fields;
         }
     });
 
@@ -887,4 +947,4 @@ var __meta__ = {
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
