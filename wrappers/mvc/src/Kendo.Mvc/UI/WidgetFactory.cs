@@ -1350,6 +1350,61 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new GanttBuilder<TTaskModel,TDependenciesModel>(new Gantt<TTaskModel,TDependenciesModel>(ViewContext, Initializer, UrlGenerator));
         }
+
+        /// <summary>
+        /// Creates a new <see cref="Kendo.Mvc.UI.Gantt{T}"/> bound to the specified data source.
+        /// </summary>
+        /// <typeparam name="T">The type of the data item</typeparam>
+        /// <param name="dataSource">The data source.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Gantt(ViewBag.Tasks)
+        ///             .Name("Gantt")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual GanttBuilder<TTaskModel, TDependenciesModel> Gantt<TTaskModel, TDependenciesModel>(IEnumerable<TTaskModel> dataSource, IEnumerable<TDependenciesModel> dependenciesDataSource = null) 
+            where TTaskModel : class, IGanttTask  where TDependenciesModel : class, IGanttDependency
+        {
+            GanttBuilder<TTaskModel, TDependenciesModel> builder = Gantt<TTaskModel, TDependenciesModel>();
+
+            builder.Component.DataSource.Data = dataSource;
+
+            if (dependenciesDataSource != null)
+            {
+                builder.Component.DependenciesDataSource.Data = dependenciesDataSource;
+            }
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Kendo.Mvc.UI.Gantt{T}"/> bound an item in ViewData.
+        /// </summary>
+        /// <typeparam name="T">Type of the data item</typeparam>
+        /// <param name="dataSourceViewDataKey">The data source view data key.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Gantt("tasks")
+        ///             .Name("Gantt")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual GanttBuilder<TTaskModel, TDependenciesModel> Gantt<TTaskModel, TDependenciesModel>(string dataSourceViewDataKey, string dependenciesDataSourceViewDataKey = null)
+            where TTaskModel : class, IGanttTask
+            where TDependenciesModel : class, IGanttDependency
+        {
+            GanttBuilder<TTaskModel, TDependenciesModel> builder = Gantt<TTaskModel, TDependenciesModel>();
+
+            builder.Component.DataSource.Data = ViewContext.ViewData.Eval(dataSourceViewDataKey) as IEnumerable<TTaskModel>;
+
+            if (!string.IsNullOrWhiteSpace(dependenciesDataSourceViewDataKey))
+            {
+                builder.Component.DependenciesDataSource.Data = ViewContext.ViewData.Eval(dependenciesDataSourceViewDataKey) as IEnumerable<TDependenciesModel>;
+            }
+
+            return builder;
+        }
         
         /// <summary>
         /// Creates a <see cref="Map"/>

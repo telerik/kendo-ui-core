@@ -210,6 +210,10 @@ namespace Kendo.Mvc.UI
                 
         //<< Serialization
 
+            ProcessDataSource(DataSource);
+
+            ProcessDataSource(DependenciesDataSource);
+
             json["dataSource"] = (Dictionary<string, object>)DataSource.ToJson();
 
             json["dependencies"] = (Dictionary<string, object>)DependenciesDataSource.ToJson();
@@ -217,6 +221,19 @@ namespace Kendo.Mvc.UI
             writer.Write(Initializer.Initialize(Selector, "Gantt", json));
 
             base.WriteInitializationScript(writer);
+        }
+
+        private void ProcessDataSource(DataSource dataSource)
+        {
+            if (DependenciesDataSource.Type != DataSourceType.Custom || DependenciesDataSource.CustomType == "aspnetmvc-ajax")
+            {
+                if (DependenciesDataSource.IsClientOperationMode)
+                {
+                    DataSourceRequest request = new DataSourceRequest();
+
+                    dataSource.Process(request, true);
+                }
+            }
         }
 
         protected override void WriteHtml(HtmlTextWriter writer)
