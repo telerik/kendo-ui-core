@@ -7,30 +7,10 @@
     <script>
       requireSync([
         "../src/jquery.js",
-        "../src/kendo.all.js"
+        "../src/kendo.all.js",
+        "./html-drawing.js"
       ]);
     </script>
-
-    <script src="html2canvas/core.js"></script>
-    <script src="html2canvas/dummyimagecontainer.js"></script>
-    <script src="html2canvas/font.js"></script>
-    <script src="html2canvas/fontmetrics.js"></script>
-    <script src="html2canvas/gradientcontainer.js"></script>
-    <script src="html2canvas/imagecontainer.js"></script>
-    <script src="html2canvas/imageloader.js"></script>
-    <script src="html2canvas/lineargradientcontainer.js"></script>
-    <script src="html2canvas/log.js"></script>
-    <script src="html2canvas/nodecontainer.js"></script>
-    <script src="html2canvas/nodeparser.js"></script>
-    <script src="html2canvas/proxyimagecontainer.js"></script>
-    <script src="html2canvas/renderer.js"></script>
-    <script src="html2canvas/renderers/canvas.js"></script>
-    <script src="html2canvas/stackingcontext.js"></script>
-    <script src="html2canvas/support.js"></script>
-    <script src="html2canvas/textcontainer.js"></script>
-    <script src="html2canvas/webkitgradientcontainer.js"></script>
-
-    <script src="html2canvas/renderers/kendo.js"></script>
 
     <script>
         kendo.PDF.defineFont({
@@ -79,27 +59,18 @@
       }
 
       function getPDF(sel) {
-        html2canvas($(sel)[0], {
-          //logging: true,
-          async: false,
-          onrendered: function(root) {
-            root.transform(translation(sel));
-            kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
-          }
+        var el = $(sel)[0];
+        kendo.dataviz.drawing.drawDOM(el, function(root){
+          kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
         });
       }
 
       function draw(sel) {
-        html2canvas($(sel)[0], {
-          //logging: true,
-          async: false,
-          onrendered: function(root) {
-            root.transform(translation(sel));
-            $(".surface").remove();
-            var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").insertAfter(sel);
-            var surface = kendo.dataviz.drawing.Surface.create(el);
-            surface.draw(root);
-          }
+        var el = $(sel)[0];
+        kendo.dataviz.drawing.drawDOM(el, function(root){
+          var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
+          var surface = kendo.dataviz.drawing.Surface.create(el);
+          surface.draw(root);
         });
       }
 
