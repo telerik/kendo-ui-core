@@ -44,8 +44,14 @@
             options = options || {};
 
             var transform = options.transform;
+            var clip = options.clip;
+
             if (transform) {
                 options.transform = g.transform(transform);
+            }
+
+            if (clip && !clip.id) {
+                clip.id = kendo.guid();
             }
 
             this.options = new OptionsStore(options);
@@ -114,6 +120,9 @@
         clip: function(clip) {
             var options = this.options;
             if (defined(clip)) {
+                if (!clip.id) {
+                    clip.id = kendo.guid();
+                }
                 options.set("clip", clip);
                 return this;
             } else {

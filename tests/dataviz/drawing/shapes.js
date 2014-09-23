@@ -61,6 +61,56 @@
             compareMatrices(element.options.transform.matrix(), matrix);
         });
 
+        test("constructor sets id to passed clip path", function() {
+            var path = new Path();
+            element = new Element({
+                clip: path
+            });
+
+            ok(path.id);
+        });
+
+        test("constructor does not override id if it is already set to the passed clip path ", function() {
+            var path = new Path();
+            path.id = "foo";
+            element = new Element({
+                clip: path
+            });
+
+            equal(path.id, "foo");
+        });
+
+        test("clip sets clip option", function() {
+            var path = new Path();
+            element.clip(path);
+            equal(element.options.clip, path);
+        });
+
+        test("clip sets id to passed path", function() {
+            var path = new Path();
+            element.clip(path);
+
+            ok(path.id);
+        });
+
+        test("clip does not override id if it is already set to the passed path ", function() {
+            var path = new Path();
+            path.id = "foo";
+            element.clip(path);
+
+            equal(path.id, "foo");
+        });
+
+        test("clip returns clip option", function() {
+            element.options.clip = "foo";
+
+            equal(element.clip(), "foo");
+        });
+
+        test("visible returns true if visible option is not defined", function() {
+            ok(element.visible());
+        });
+
         test("parentTransform returns undefined if element has no parents", function() {
             ok(element.parentTransform() === undefined);
         });

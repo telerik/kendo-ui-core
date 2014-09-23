@@ -4,7 +4,6 @@
         g = dataviz.geometry,
         Point = g.Point,
         Matrix = g.Matrix,
-        ClipRect = g.ClipRect,
 
         d = dataviz.drawing,
         Circle = d.Circle,
@@ -126,21 +125,21 @@
         });
 
         test("load creates definitions", 3, function() {
-            var clipRect = new ClipRect();
+            var path = new Path();
             node.definitionChange = function(e) {
                 equal(e.action, "add");
-                equal(e.definitions.clip, clipRect);
+                equal(e.definitions.clip, path);
             };
 
             node.load([new Group({
-                clip: clipRect
+                clip: path
             })]);
 
-            equal(node.childNodes[0].definitions.clip, clipRect);
+            equal(node.childNodes[0].definitions.clip, path);
         });
 
         test("load does not create definitions if source does not have definitions", 0, function() {
-            var clipRect = new ClipRect();
+            var path = new Path();
             var definitions;
             node.definitionChange = function() {
                 ok(false);
@@ -243,7 +242,7 @@
         module("Base Node tests / " + name + " / definitions", {
             setup: function() {
                 container = new GroupNode();
-                clip = new ClipRect();
+                clip = new Path();
                 shape = new TShape();
                 shape.clip(clip);
                 container.load([shape]);
@@ -276,7 +275,7 @@
         });
 
         test("sets new definition", 2, function() {
-            var newClip = new ClipRect();
+            var newClip = new Path();
             node.definitionChange = function(e) {
                 if (e.action == "add") {
                     equal(e.definitions.clip, newClip);
@@ -287,23 +286,23 @@
         });
 
         test("setting new definition updates attribute", function() {
-            var newClip = new ClipRect();
+            var newClip = new Path();
             node.attr = function(attr, value) {
                 equal(attr, "clip-path");
                 equal(value, "url(#" + newClip.id + ")");
             };
-            shape.options.set("clip", newClip);
+            shape.clip(newClip);
             equal(node.definitions.clip, newClip);
         });
 
         test("setting new definition removes the old one", function() {
-            var newClip = new ClipRect();
+            var newClip = new Path();
             node.definitionChange = function(e) {
                 if (e.action == "remove") {
                     equal(e.definitions.clip, clip);
                 }
             };
-            shape.options.set("clip", newClip);
+            shape.clip(newClip);
         });
 
         test("clear removes definitions", function() {
@@ -1023,38 +1022,13 @@
     // ------------------------------------------------------------
     (function() {
         var ClipNode = svg.ClipNode;
-        var clipNode, rect;
-
-        function isRectPath(path, rect) {
-            var segments = path.segments;
-            var x = rect.origin.x;
-            var y = rect.origin.y;
-            var width = rect.width();
-            var height = rect.height();
-
-            ok(segments[0].anchor().equals({
-                x: x,
-                y: y
-            }));
-            ok(segments[1].anchor().equals({
-                x: x + width,
-                y: y
-            }));
-            ok(segments[2].anchor().equals({
-                x: x + width,
-                y: y + height
-            }));
-            ok(segments[3].anchor().equals({
-                x: x,
-                y: y + height
-            }));
-            ok(path.options.closed);
-        }
+        var clipNode;
+        var path;
 
         module("ClipNode", {
             setup: function() {
-                rect = new g.ClipRect([10, 10], [100, 100]);
-                clipNode = new ClipNode(rect);
+                path = new d.Path();
+                clipNode = new ClipNode(path);
             }
         });
 
@@ -1062,38 +1036,22 @@
             ok(clipNode.render().indexOf("clippath") !== -1);
         });
 
-        test("renders clip rect id", function() {
-            ok(clipNode.render().indexOf("id='" + rect.id + "'") !== -1);
+        test("renders clip path id", function() {
+            ok(clipNode.render().indexOf("id='" + path.id + "'") !== -1);
         });
 
         test("loads path", function() {
             var pathNode = clipNode.childNodes[0];
             ok(pathNode instanceof PathNode);
+            equal(pathNode.srcElement, path);
         });
 
-        test("loads path from clip rect", function() {
-            var pathNode = clipNode.childNodes[0];
-            var path = pathNode.srcElement;
-            isRectPath(path, rect);
-        });
-
-        test("changing clip rect updates path", function() {
-            var pathNode = clipNode.childNodes[0];
-            var path = pathNode.srcElement;
-            rect.size.setWidth(200);
-            isRectPath(path, rect);
-        });
-
-        test("clear removes srcElement observer", function() {
-            clipNode.clear();
-            equal(rect.observers().length, 0);
-        });
     })();
 
     // ------------------------------------------------------------
     (function() {
         var DefinitionNode = svg.DefinitionNode;
-        var definitionNode, rect, definitions;
+        var definitionNode, path, definitions;
 
         module("DefinitionNode", {
             setup: function() {
@@ -1112,9 +1070,9 @@
 
         module("DefinitionNode / definitionChange", {
             setup: function() {
-                rect = new g.ClipRect([10, 10], [100, 100]);
+                path = new d.Path();
                 definitions = {
-                    clip: rect
+                    clip: path
                 };
                 definitionNode = new DefinitionNode();
             }
@@ -1145,7 +1103,7 @@
                 action: "add",
                 definitions: definitions
             });
-            var node = definitionNode.definitionMap[rect.id].element;
+            var node = definitionNode.definitionMap[path.id].element;
             node.clear = function() {
                 ok(true);
             };

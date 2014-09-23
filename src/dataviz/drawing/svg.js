@@ -495,21 +495,13 @@
 
             this.srcElement = srcElement;
             this.id = srcElement.id;
-            this.path = d.Path.fromRect(srcElement);
 
-            srcElement.addObserver(this);
-
-            this.load([this.path]);
+            this.load([srcElement]);
         },
 
         template: renderTemplate(
             "<clippath id='#=d.id#'>#= d.renderChildren()#</clippath>"
-        ),
-
-        geometryChange: function(e) {
-            var path = d.Path.fromRect(this.srcElement);
-            this.path.segments.elements(path.segments.elements());
-        }
+        )
     });
 
     var GroupNode = Node.extend({

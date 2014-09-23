@@ -163,7 +163,7 @@
 
         module("Clip Tests / " + nodeName, {
             setup: function() {
-                clip = new g.ClipRect();
+                clip = new d.Path();
 
                 shape = new TShape();
                 shape.clip(clip);

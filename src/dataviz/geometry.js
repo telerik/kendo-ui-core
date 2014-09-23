@@ -322,13 +322,6 @@
         );
     };
 
-    var ClipRect = Rect.extend({
-        init: function(origin, size) {
-            Rect.fn.init.call(this, origin, size);
-            this.id = kendo.guid();
-        }
-    });
-
     var Circle = Class.extend({
         init: function(center, radius) {
             this.setCenter(center || new Point());
@@ -778,7 +771,6 @@
         geometry: {
             Arc: Arc,
             Circle: Circle,
-            ClipRect: ClipRect,
             Matrix: Matrix,
             Point: Point,
             Rect: Rect,

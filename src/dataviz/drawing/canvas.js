@@ -124,13 +124,8 @@
 
         setClip: function(ctx) {
             if (this.clip) {
-                var path = new PathNode(d.Path.fromRect(this.clip, {
-                    stroke: {
-                        color: NONE
-                    }
-                }));
                 ctx.beginPath();
-                path.renderTo(ctx);
+                PathNode.fn.renderPoints(ctx, this.clip);
                 ctx.clip();
             }
         },
