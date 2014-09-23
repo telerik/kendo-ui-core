@@ -380,7 +380,10 @@ var __meta__ = {
         refresh: function() {
             var dataSource = this.dataSource;
 
-            this._render({ data: dataSource.rootNodes() });
+            this._render({
+                data: dataSource.rootNodes(),
+                aggregates: dataSource.aggregates()
+            });
         },
 
         _adjustHeight: function() {
@@ -491,6 +494,10 @@ var __meta__ = {
                 if (column.headerTemplate) {
                     column.headerTemplate = kendo.template(column.headerTemplate);
                 }
+
+                if (column.footerTemplate) {
+                    column.footerTemplate = kendo.template(column.footerTemplate);
+                }
             }
         },
 
@@ -546,6 +553,7 @@ var __meta__ = {
                 // render rows
                 colgroup = kendoDomElement("colgroup", null, this._cols());
                 tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs({
+                    aggregates: options.aggregates,
                     data: data,
                     level: 0
                 }));
@@ -615,6 +623,7 @@ var __meta__ = {
             var className;
             var level = options.level;
             var data = options.data;
+            var aggregates = options.aggregates || {};
             var hasChildren;
             var childNodes;
             var dataSource = this.dataSource;
@@ -658,6 +667,8 @@ var __meta__ = {
 
                 if (model.expanded && hasChildren) {
                     rows = rows.concat(this._trs({
+                        parentId: model.id,
+                        aggregates: aggregates,
                         data: childNodes,
                         level: level + 1
                     }));
@@ -666,7 +677,7 @@ var __meta__ = {
 
             if (this._hasFooterTemplate()) {
                 rows.push(this._tds({
-                    model: options.aggregates,
+                    model: aggregates[options.parentId || null],
                     attr: { className: classNames.footerTemplate },
                     level: level
                 }, this._footerTd));
@@ -679,6 +690,7 @@ var __meta__ = {
             var content = [];
             var column = options.column;
             var template = options.column.footerTemplate || $.noop;
+            var aggregates = options.model[column.field] || {};
 
             if (column.expandable) {
                 content = content.concat(createPlaceholders({
@@ -687,7 +699,7 @@ var __meta__ = {
                 }));
             }
 
-            content.push(kendoTextElement(template() || ""));
+            content.push(kendoTextElement(template(aggregates) || ""));
 
             return kendoDomElement("td", { "role": "gridcell" }, content);
         },

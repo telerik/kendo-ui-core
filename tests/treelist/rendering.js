@@ -385,4 +385,58 @@
         equal(footers.find("td").first().find(".k-i-none").length, 2);
         equal(footers.find("td").last().text(), "Footer template");
     });
+
+    test("footer template as string compiles template", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "foo" } ],
+            dataSource: {
+                data: [ { id: 1, parentId: null } ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+
+        equal(footers.find("td").last().text(), "foo");
+    });
+
+    test("footer template is passed aggregate values", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "#= count #" } ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null },
+                    { id: 2, parentId: null }
+                ],
+                aggregate: [
+                    { field: "id", aggregate: "count" }
+                ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+
+        equal(footers.find("td").last().text(), "2");
+    });
+
+    test("footer template is passed correct aggregates for child rows", function() {
+        createTreeList({
+            columns: [ { field: "id", footerTemplate: "#= count #" } ],
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, expanded: true },
+                    { id: 2, parentId: 1 },
+                    { id: 3, parentId: 1 },
+                    { id: 4, parentId: 1 }
+                ],
+                aggregate: [
+                    { field: "id", aggregate: "count" }
+                ]
+            }
+        });
+
+        var footers = instance.content.find("tr.k-footer-template");
+
+        equal(footers.eq(0).find("td").last().text(), "3", "Child footer template");
+        equal(footers.eq(1).find("td").last().text(), "4", "Root footer template");
+    });
 })();
