@@ -2395,6 +2395,26 @@
                  [ 30, 7.5, 799, 577 ], TOLERANCE);
         });
 
+        test("ignores plotBands if they are not in the axis range", function() {
+            var axis = new DateCategoryAxis({
+                plotBands: [{
+                    from: new Date("2012/01/01"),
+                    to: new Date("2012/01/03"),
+                    color: "red"
+                }],
+                min: new Date("2013/01/01")
+            });
+            axis.reflow(chartBox);
+            view = new ViewStub();
+
+            plotArea = new dataviz.CategoricalPlotArea([{}], { });
+            plotArea.reflow(chartBox);
+            axis.plotArea = plotArea;
+            var plotBands = axis.renderPlotBands(view);
+
+            equal(plotBands.length, 0);
+        });
+
         // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Horizontal / Justified", {
             setup: function() {
