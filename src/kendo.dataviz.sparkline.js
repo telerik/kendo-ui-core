@@ -260,7 +260,9 @@ var __meta__ = {
         },
 
         _hideElement: function() {
-            this.element.hide().remove();
+            if (this.element) {
+                this.element.hide().remove();
+            }
         }
     });
 
