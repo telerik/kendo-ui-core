@@ -217,6 +217,7 @@ namespace Kendo.Mvc.UI
             options.Add("modal", Modal);
             options.Add("iframe", Iframe);
             options.Add("draggable", Draggable);
+            options.Add("scrollable", Scrollable);
             options.Add("pinned", Pinned);
             if (AutoFocus == false)
             {
