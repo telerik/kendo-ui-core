@@ -10,10 +10,6 @@
         return window.getComputedStyle(element);
     }
 
-    function getBounds(element) {
-        return element.getClientRects();
-    }
-
     function getBorder(style, side) {
         side = "border-" + side;
         return {
@@ -21,6 +17,14 @@
             style: style.getPropertyValue(side + "-style"),
             color: style.getPropertyValue(side + "-color")
         };
+    }
+
+    function getBorderRadius(style, side) {
+        var r = style.getPropertyValue("border-" + side + "-radius").split(/\s+/g).map(parseFloat);
+        if (r.length == 1) {
+            r.push(r[0]);
+        }
+        return { x: r[0], y: r[1] };
     }
 
     function getContentBox(element) {
@@ -53,14 +57,38 @@
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform)[1]
             .split(/\s*,\s*/g).map(parseFloat);
         origin = origin.split(/\s+/g).map(parseFloat);
+
+        // var tmp = matrix[1];
+        // matrix[1] = matrix[2];
+        // matrix[2] = tmp;
+
         return {
             matrix: matrix,
             origin: origin
         };
     }
 
-    function transform(shape, m) {
+    function setTransform(shape, m) {
         shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
+    }
+
+    function toDegrees(radians) {
+        return ((180 * radians) / Math.PI) % 360;
+    }
+
+    function addArcToPath(arc, path) {
+        var points = arc.curvePoints();
+        for (var i = 1; i < points.length; i += 3) {
+            path.curveTo(points[i], points[i + 1], points[i + 2]);
+        }
+    }
+
+    function pow(x, y) {
+        return Math.pow(x, y);
+    }
+
+    function sqrt(x) {
+        return Math.sqrt(x);
     }
 
     function renderBorderAndBackground(element, group) {
@@ -77,6 +105,84 @@
             path.close();
         }
 
+        // this function will be called to draw each border.  it
+        // draws starting at origin and the resulted path must be
+        // translated/rotated to be placed in the proper position.
+        //
+        // arguments are named as if it draws the top border:
+        //
+        //    - `len` the length of the edge
+        //    - `Wtop` the width of the edge (i.e. border-top-width)
+        //    - `Wleft` the width of the left edge (border-left-width)
+        //    - `Wright` the width of the right edge
+        //    - `rl` and `rl` -- the border radius on the left and right
+        //      (objects containing x and y, for horiz/vertical radius)
+        //
+        function drawRounded(len, Wtop, Wleft, Wright, rl, rr) {
+            var path = new drawing.Path({
+                stroke: null
+            });
+
+            if (rl.x == 0 || rl.y == 0) {
+                rl.x = rl.y = 0;
+            }
+            if (rr.x == 0 || rr.y == 0) {
+                rr.x = rr.y = 0;
+            }
+
+            path.moveTo(0, rl.y);
+
+            if (rl.x > 0 && rl.y > 0) {
+                addArcToPath(new geo.Arc([ rl.x, rl.y ], {
+                    startAngle: -180,
+                    endAngle: -90,
+                    radiusX: rl.x,
+                    radiusY: rl.y
+                }), path);
+            }
+            path.lineTo(len - rr.x, 0);
+
+            if (rr.x > 0 && rr.y > 0) {
+                addArcToPath(new geo.Arc([ len - rr.x, rr.y ], {
+                    startAngle : -90,
+                    endAngle   : 0,
+                    radiusX    : rr.x,
+                    radiusY    : rr.y
+                }), path);
+                path.lineTo(len - Wright, rr.y);
+            } else {
+                path.lineTo(len - Wright, Wtop);
+            }
+
+            if (rr.x - Wright > 0 && rr.y - Wtop > 0) {
+                addArcToPath(new geo.Arc([ len - rr.x, rr.y ], {
+                    startAngle    : -0,
+                    endAngle      : -90,
+                    radiusX       : rr.x - Wright,
+                    radiusY       : rr.y - Wtop,
+                    anticlockwise : true
+                }), path);
+            }
+            path.lineTo(Math.max(rl.x, Wleft), Wtop);
+
+            if (rl.x - Wleft > 0 && rl.y - Wtop > 0) {
+                addArcToPath(new geo.Arc([ rl.x, rl.y ], {
+                    startAngle    : -90,
+                    endAngle      : -180,
+                    radiusX       : rl.x - Wleft,
+                    radiusY       : rl.y - Wtop,
+                    anticlockwise : true
+                }), path);
+            }
+
+            path.close();
+            return path;
+        }
+
+        function inv(p) {
+            return { x: p.y, y: p.x };
+        }
+
         function drawOne(box, isFirst, isLast) {
             if (bgColor) {
                 // paint background.
@@ -87,51 +193,70 @@
                     { x: box.right , y: box.bottom },
                     { x: box.left  , y: box.bottom },
                     bgColor.toCssRgba()
-                )
+                );
             }
 
             // top border
             if (top.width > 0) {
-                drawEdge(
-                    { x: box.left                , y: box.top },
-                    { x: box.right               , y: box.top },
-                    { x: box.right - right.width , y: box.top + top.width },
-                    { x: box.left + left.width   , y: box.top + top.width },
-                    top.color
-                );
+                // drawEdge(
+                //     { x: box.left                , y: box.top },
+                //     { x: box.right               , y: box.top },
+                //     { x: box.right - right.width , y: box.top + top.width },
+                //     { x: box.left + left.width   , y: box.top + top.width },
+                //     top.color
+                // );
+
+                var path = drawRounded(box.width, top.width, left.width, right.width, TLr, TRr);
+                setTransform(path, [ 1, 0, 0, 1, box.left, box.top ]);
+                group.append(path);
+                path.fill(top.color);
             }
 
             // bottom border
             if (bottom.width > 0) {
-                drawEdge(
-                    { x: box.left                , y: box.bottom },
-                    { x: box.right               , y: box.bottom },
-                    { x: box.right - right.width , y: box.bottom - bottom.width },
-                    { x: box.left + left.width   , y: box.bottom - bottom.width },
-                    bottom.color
-                );
+                // drawEdge(
+                //     { x: box.left                , y: box.bottom },
+                //     { x: box.right               , y: box.bottom },
+                //     { x: box.right - right.width , y: box.bottom - bottom.width },
+                //     { x: box.left + left.width   , y: box.bottom - bottom.width },
+                //     bottom.color
+                // );
+
+                var path = drawRounded(box.width, bottom.width, left.width, right.width, BLr, BRr);
+                setTransform(path, [ 1, 0, 0, -1, box.left, box.bottom ]);
+                group.append(path);
+                path.fill(bottom.color);
             }
 
             // left border
             if (((isFirst && dir == "ltr") || (isLast && dir == "rtl")) && left.width > 0) {
-                drawEdge(
-                    { x: box.left                , y: box.top },
-                    { x: box.left                , y: box.bottom },
-                    { x: box.left + left.width   , y: box.bottom - bottom.width },
-                    { x: box.left + left.width   , y: box.top + top.width },
-                    left.color
-                );
-            }
+                // drawEdge(
+                //     { x: box.left                , y: box.top },
+                //     { x: box.left                , y: box.bottom },
+                //     { x: box.left + left.width   , y: box.bottom - bottom.width },
+                //     { x: box.left + left.width   , y: box.top + top.width },
+                //     left.color
+                // );
 
+                var path = drawRounded(box.height, left.width, bottom.width, top.width, inv(BLr), inv(TLr));
+                setTransform(path, [ 0, -1, 1, 0, box.left, box.bottom ]);
+                group.append(path);
+                path.fill(left.color);
+            }
             // right border
             if (((isLast && dir == "ltr") || (isFirst && dir == "rtl")) && right.width > 0) {
-                drawEdge(
-                    { x: box.right               , y: box.top },
-                    { x: box.right               , y: box.bottom },
-                    { x: box.right - right.width , y: box.bottom - bottom.width },
-                    { x: box.right - right.width , y: box.top + top.width },
-                    right.color
-                );
+                // drawEdge(
+                //     { x: box.right               , y: box.top },
+                //     { x: box.right               , y: box.bottom },
+                //     { x: box.right - right.width , y: box.bottom - bottom.width },
+                //     { x: box.right - right.width , y: box.top + top.width },
+                //     right.color
+                // );
+
+                var path = drawRounded(box.height, right.width, top.width, bottom.width, inv(TRr), inv(BRr));
+                setTransform(path, [ 0, 1, -1, 0, box.right, box.top ]);
+                group.append(path);
+                path.fill(right.color);
             }
         }
 
@@ -140,6 +265,12 @@
         var right = getBorder(style, "right");
         var bottom = getBorder(style, "bottom");
         var left = getBorder(style, "left");
+
+        var TLr = getBorderRadius(style, "top-left");
+        var TRr = getBorderRadius(style, "top-right");
+        var BLr = getBorderRadius(style, "bottom-left");
+        var BRr = getBorderRadius(style, "bottom-right");
+
         var dir = style.getPropertyValue("direction");
 
         var bgColor = style.getPropertyValue("background-color");
@@ -148,7 +279,7 @@
             bgColor = null;     // opacity zero
         }
 
-        var boxes = getBounds(element);
+        var boxes = element.getClientRects();
         for (var i = 0; i < boxes.length; ++i) {
             drawOne(boxes[i], i == 0, i == boxes.length - 1);
         }
@@ -280,8 +411,6 @@
             return;
         }
         var style = getComputedStyle(element);
-        //console.log(element.tagName, style.getPropertyValue("z-index"), element);
-
         var opacity = parseFloat(style.getPropertyValue("opacity"));
         if (opacity == 0) return;
         // XXX: how  to handle opacity?
@@ -302,7 +431,7 @@
             var m = [ 1, 0, 0, 1, -x, -y ];
             m = mmul(m, t.matrix);
             m = mmul(m, [ 1, 0, 0, 1, x, y ]);
-            transform(group, m);
+            setTransform(group, m);
         }
 
         renderBorderAndBackground(element, group);
@@ -317,7 +446,7 @@
 
         // translate to start of page
         var pos = $(element).offset();
-        transform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
+        setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
         renderElement(element, group);
         cont(group);

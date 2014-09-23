@@ -33,16 +33,16 @@
       }
 
       .test {
-        border-width: 2px 5px 1em 10px;
+        border-width: 25px 10px 15px 5px;
         border-color: red green blue orange;
         border-style: solid;
-        border-radius: 10px 20px 30px 40px;
-        background: rgba(255, 255, 255, 0.5);
+        border-radius: 40px 50px 60px 70px;
+        background: rgba(255, 255, 200, 0.5);
         padding: 1em;
         margin: 1em;
         color: red;
         box-sizing: border-box;
-        transform: rotate(-5deg);
+        transform: rotate(5deg);
         text-align: justify;
       }
 
@@ -77,11 +77,12 @@
                   border: 2px solid black;
                   padding: 5px;
                   position: absolute;
-                  z-index: 6;
+                  top: 450px;
+                  z-index: 3;
                   opacity: 0.7;
                   transform: rotate(15deg);
                   left: 100px;
-                  border-top-left-radius: 20px 40px;
+                  border-top-left-radius: 20px 80px;
                   background: yellow;" />
 
       <div style="width: 30%; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr" class="test">
@@ -96,22 +97,22 @@
           style="text-decoration:none">parent page</A>.
         </span>
       </div>
-      <div style="width: 500px; height: 100px; overflow: hidden; border: 1px solid black; position: relative">
-        Opacity: <b>broken</b>; border-radius: <b>broken</b><br /> CSS
-        transforms: <b>broken</b>.  Shape A: translate by -origin, apply
-        transform, render element.  Shape B: translate by +origin, append A.
-        Return B.<br />
-        <b>€</b>
-        <div style="position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: yellow; border: 1px solid red">
-          Implement clipping!
-        </div>
-      </div>
-      <ul>
-        <li>Render</li>
-        <li>List</li>
-        <li>Bullets</li>
-        <li>Or numbers</li>
-      </ul>
+      <!-- <div style="width: 500px; height: 100px; overflow: hidden; border: 1px solid black; position: relative"> -->
+      <!--   Opacity: <b>broken</b>; border-radius: <b>broken</b><br /> CSS -->
+      <!--   transforms: <b>broken</b>.  Shape A: translate by -origin, apply -->
+      <!--   transform, render element.  Shape B: translate by +origin, append A. -->
+      <!--   Return B.<br /> -->
+      <!--   <b>€</b> -->
+      <!--   <div style="position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: yellow; border: 1px solid red"> -->
+      <!--     Implement clipping! -->
+      <!--   </div> -->
+      <!-- </div> -->
+      <!-- <ul> -->
+      <!--   <li>Render</li> -->
+      <!--   <li>List</li> -->
+      <!--   <li>Bullets</li> -->
+      <!--   <li>Or numbers</li> -->
+      <!-- </ul> -->
     </div>
 
     <script>
