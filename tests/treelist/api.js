@@ -50,4 +50,44 @@
 
         equal(dataItem, instance.dataSource.get(2));
     });
+
+    test("destroy unbinds dataSource handlers", function() {
+        createTreeList();
+
+        var dataSource = instance.dataSource;
+
+        instance.destroy();
+
+        function hasHandlers(eventName) {
+            var handlers = dataSource._events[eventName];
+            return handlers && handlers.length;
+        }
+
+        ok(!hasHandlers("change"), "change handlers remaining");
+        ok(!hasHandlers("error"), "error handlers remaining");
+        ok(!hasHandlers("progress"), "progress handlers remaining");
+    });
+
+    test("destroy nulls dom references", function() {
+        createTreeList();
+
+        instance.destroy();
+
+        ok(!instance.element);
+        ok(!instance.header);
+        ok(!instance.content);
+        ok(!instance.headerTree);
+        ok(!instance.contentTree);
+    });
+
+    test("destroy removes event handlers", function() {
+        createTreeList();
+
+        var content = instance.content;
+
+        instance.destroy();
+
+        var events = $._data(content[0], "events");
+        ok(!events || !events.click || !events.click.length);
+    });
 })()

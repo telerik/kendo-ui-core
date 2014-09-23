@@ -28,6 +28,7 @@ var __meta__ = {
     var grep = $.grep;
     var CHANGE = "change";
     var ERROR = "error";
+    var PROGRESS = "progress";
     var DOT = ".";
     var NS = ".kendoTreeList";
     var CLICK = "click";
@@ -342,33 +343,30 @@ var __meta__ = {
         _dataSource: function() {
             var dataSource = this.options.dataSource;
 
-            if (this.dataSource && this._refreshHandler) {
-                this.dataSource.unbind(CHANGE, this._refreshHandler);
-            } else {
-                this._refreshHandler = proxy(this.refresh, this);
-                this._errorHandler = proxy(this._error, this);
-            }
+            this._refreshHandler = proxy(this.refresh, this);
+            this._errorHandler = proxy(this._error, this);
+            this._progressHandler = proxy(this._progress, this);
 
             this.dataSource = TreeListDataSource.create(dataSource);
 
             this.dataSource.bind(CHANGE, this._refreshHandler);
-
             this.dataSource.bind(ERROR, this._errorHandler);
+            this.dataSource.bind(PROGRESS, this._progressHandler);
+        },
 
-            this.dataSource.bind("progress", proxy(function() {
-                var messages = this.options.messages;
+        _progress: function() {
+            var messages = this.options.messages;
 
-                if (!this.content.find("tr").length) {
-                    this.contentTree.render([
-                        kendoDomElement("div", { className: classNames.status }, [
-                            kendoDomElement("span", {
-                                className: classNames.icon + " " + classNames.loading
-                            }),
-                            kendoTextElement(messages.loading)
-                        ])
-                    ]);
-                }
-            }, this));
+            if (!this.content.find("tr").length) {
+                this.contentTree.render([
+                    kendoDomElement("div", { className: classNames.status }, [
+                        kendoDomElement("span", {
+                            className: classNames.icon + " " + classNames.loading
+                        }),
+                        kendoTextElement(messages.loading)
+                    ])
+                ]);
+            }
         },
 
         _error: function(e) {
@@ -393,17 +391,16 @@ var __meta__ = {
         destroy: function() {
             Widget.fn.destroy.call(this);
 
-            //this.dataSource.unbind(CHANGE, this._refreshHandler);
+            var dataSource = this.dataSource;
 
-            //if (this.touch) {
-            //    this.touch.destroy();
-            //}
+            dataSource.unbind(CHANGE, this._refreshHandler);
+            dataSource.unbind(ERROR, this._errorHandler);
+            dataSource.unbind(PROGRESS, this._progressHandler);
 
-            //this.content.off(NS);
-            //this.header = null;
-            //this.content = null;
+            this.content.off(NS);
 
-            //kendo.destroy(this.element);
+            this._refreshHandler = this._errorHandler = this._progressHandler = null;
+            this.header = this.content = this.element = this.headerTree = this.contentTree = null;
         },
 
         options: {
@@ -802,21 +799,19 @@ var __meta__ = {
             cells = null;
         },
 
+        _rowClick: function(e) {
+           var element = $(e.currentTarget);
+
+           if (!e.ctrlKey) {
+               this.select(element);
+           } else {
+               this.clearSelection();
+           }
+       },
+
         _selectable: function() {
-            var that = this;
-            var selectable = this.options.selectable;
-
-            if (selectable) {
-                this.content
-                   .on(CLICK + NS, "tr", function(e) {
-                       var element = $(this);
-
-                       if (!e.ctrlKey) {
-                           that.select(element);
-                       } else {
-                           that.clearSelection();
-                       }
-                   });
+            if (this.options.selectable) {
+                this.content.on(CLICK + NS, "tr", proxy(this._rowClick, this));
             }
         },
 
@@ -833,7 +828,7 @@ var __meta__ = {
                     .addClass(selectedClassName)
                     .attr("aria-selected", true);
 
-                this.trigger("change");
+                this.trigger(CHANGE);
 
                 return;
             }
@@ -847,7 +842,7 @@ var __meta__ = {
             if (selected.length) {
                 selected.removeClass(classNames.selected);
 
-                this.trigger("change");
+                this.trigger(CHANGE);
             }
         },
 
