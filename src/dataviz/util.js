@@ -4,6 +4,7 @@
     ], f);
 })(function() {
 
+(function () {
     // Imports ================================================================
     var math = Math,
         kendo = window.kendo,
@@ -259,5 +260,8 @@
             valueOrDefault: valueOrDefault
         }
     });
+})();
+
+return window.kendo;
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
