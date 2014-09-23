@@ -1699,6 +1699,30 @@
                  [291, 573], TOLERANCE);
         });
 
+        test("remove plotBands if they are not in range", function() {
+            var axis = new NumericAxis(3, 10, {
+                plotBands: [{
+                    from: 1,
+                    to: 2,
+                    color: "red",
+                    opacity: 0.5
+                }],
+                labels: {
+                    font: "16px Verdana, sans-serif"
+                },
+                min: 3
+            });
+            axis.reflow(chartBox);
+            view = new ViewStub();
+
+            plotArea = new dataviz.CategoricalPlotArea([{}], { });
+            plotArea.reflow(chartBox);
+            axis.plotArea = plotArea;
+            var plotBands = axis.renderPlotBands(view);
+
+            equal(plotBands.length, 0);
+        });
+
     })();
 
 

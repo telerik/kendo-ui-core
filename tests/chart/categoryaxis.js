@@ -1175,7 +1175,7 @@
 
         // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Horizontal", {
-            setup: function() {  
+            setup: function() {
                 createPlotArea(lineSeriesData);
             }
         });
@@ -1193,7 +1193,7 @@
             equal(plotBands.style.fillOpacity, 0.5);
         });
 
-        test("renders z index", function() {            
+        test("renders z index", function() {
             equal(plotBands.style.zIndex, -1);
         });
 
@@ -1211,7 +1211,7 @@
 
         // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Vertical", {
-            setup: function() {                
+            setup: function() {
                 createPlotArea(barSeriesData);
             }
         });
@@ -1229,7 +1229,7 @@
             equal(plotBands.style.fillOpacity, 0.5);
         });
 
-        test("renders z index", function() {             
+        test("renders z index", function() {
             equal(plotBands.style.zIndex, -1);
         });
 
