@@ -241,6 +241,11 @@
             ok(highlight.viewElement === chart._viewElement);
         });
 
+        test("redraw unsets active point", function() {
+            chart._unsetActivePoint = function() { ok(true); };
+            chart.redraw();
+        });
+
         // ------------------------------------------------------------
         module("destroy", {
             setup: function() {
@@ -255,7 +260,7 @@
 
         test("destroys tooltip", function() {
             chart._tooltip.destroy();
-            chart._tooltip = { destroy: function() { ok(true); }};
+            chart._tooltip = { destroy: function() { ok(true); }, hide: $.noop };
             chart.destroy();
         });
 

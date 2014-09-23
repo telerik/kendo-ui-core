@@ -1345,6 +1345,8 @@ var __meta__ = {
             if (chart._tooltip) {
                 chart._tooltip.destroy();
             }
+
+            chart._unsetActivePoint();
         }
     });
     deepExtend(Chart.fn, dataviz.ExportMixin);
