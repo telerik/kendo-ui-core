@@ -984,6 +984,56 @@
         equal(th.eq(2).is(":visible"), true);
     });
 
+    test("hide last multiline group column header in locked grid - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(2);
+
+        var rows = grid.thead.find("tr");
+        var lockedRows = grid.lockedHeader.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(lockedRows.eq(0).find("th").eq(0).is(":visible"), "locked header cell");
+
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(!rows.eq(1).find("th").eq(2).is(":visible"), "last column cell 1");
+        ok(!rows.eq(1).find("th").eq(3).is(":visible"), "last column cell 2");
+    });
+
+    test("hide last multiline group column header in locked grid - multiline headers with group locked column", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", locked: true, columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(2);
+
+        var rows = grid.thead.find("tr");
+        var lockedRows = grid.lockedHeader.find("tr");
+
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(0).find("th").eq(1).is(":visible"), "hidden header row 1");
+        ok(lockedRows.eq(0).find("th").eq(0).is(":visible"), "locked header row 1");
+
+        ok(!rows.eq(1).find("th").eq(0).is(":visible"), "hidden header row 2 cell 1");
+        ok(!rows.eq(1).find("th").eq(1).is(":visible"), "hidden header row 2 cell 2");
+
+        ok(lockedRows.eq(1).find("th").eq(0).is(":visible"), "locked header row 2 cell 1");
+        ok(lockedRows.eq(1).find("th").eq(1).is(":visible"), "locked header row 2 cell 2");
+
+        ok(!rows.eq(3).find("th").eq(0).is(":visible"));
+    });
+
     test("hide non locked column header in grid with locked column", function() {
         var grid = setup({
             columns: [

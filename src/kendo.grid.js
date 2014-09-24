@@ -528,23 +528,30 @@ var __meta__ = {
         });
     }
 
-    function columnVisiblePosition(column, columns, row) {
+    function columnVisiblePosition(column, columns, row, cellCounts) {
+        var result;
+        var idx;
+
         row = row || 0;
-        var counter = 0
-        for (var idx = 0; idx < columns.length; idx++) {
-            if (columns[idx] == column) {
-                return { cell: counter, row: row };
+        cellCounts = cellCounts || {};
+        cellCounts[row] = cellCounts[row] || 0;
+
+        for (idx = 0; idx < columns.length; idx++) {
+           if (columns[idx] == column) {
+                result = { cell: cellCounts[row], row: row };
+                break;
            } else if (columns[idx].columns) {
-               var result = columnVisiblePosition(column, columns[idx].columns, row + 1);
+               result = columnVisiblePosition(column, columns[idx].columns, row + 1, cellCounts);
                if (result) {
-                    return result;
+                    break;
                }
            }
+
            if (!columns[idx].hidden) {
-               counter++;
+               cellCounts[row]++;
            }
         }
-        return null;
+        return result;
     }
 
     function flatColumns(columns) {
@@ -5298,7 +5305,7 @@ var __meta__ = {
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 columns = that.columns,
-                visibleLocked = visibleLockedColumns(columns).length,
+                visibleLocked = that.lockedHeader ? leafDataCells(that.lockedHeader).filter(":visible").length : 0,
                 columnIndex;
 
             if (typeof column == "number") {
@@ -5345,11 +5352,18 @@ var __meta__ = {
             that._updateCols();
             that._updateLockedCols();
 
-            cell = $(leafDataCells(that.thead).filter(":visible")[columnIndex]);
-            row = cell.parent();
-            headerCellIndex = row.find("th:not(.k-group-cell):not(.k-hierarchy-cell):visible").index(cell);
+            var container = that.thead;
 
-            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + row.index() + ")>th"), headerCellIndex, false);
+            headerCellIndex = columnIndex;
+            if (that.lockedHeader && visibleLocked > columnIndex) {
+                container = that.lockedHeader;
+            } else {
+                headerCellIndex -= visibleLocked;
+            }
+
+            cell = leafDataCells(container).filter(":visible").eq(headerCellIndex);
+            cell.hide();
+
             setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, false);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));
