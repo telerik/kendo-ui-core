@@ -197,6 +197,7 @@
     var SourceObserverNode = Node.extend({
         init: function(srcElement) {
             Node.fn.init.call(this, srcElement);
+
             if (srcElement) {
                 srcElement.addObserver(this);
             }
@@ -212,7 +213,7 @@
         }
     });
 
-    var GroupNode = Node.extend({
+    var GroupNode = SourceObserverNode.extend({
         createElement: function() {
             Node.fn.createElement.call(this);
             this.setStyle();

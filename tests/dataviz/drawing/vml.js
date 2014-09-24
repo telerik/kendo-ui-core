@@ -360,6 +360,7 @@
 
     // ------------------------------------------------------------
     (function() {
+        var group;
         var groupNode;
 
         baseNodeTests("Group", vml.GroupNode, d.Group);
@@ -1039,7 +1040,7 @@
         module("Shape tests / " + name + " / source observer", {
             setup: function() {
                 node = createNode();
-                shape = shape;
+                shape = node.srcElement;
             }
         });
 
@@ -1160,17 +1161,24 @@
 
         module("MultiPathDataNode", {
             setup: function() {
-                multiPath = new MultiPath();
+                multiPath = new MultiPath().moveTo(0, 0).lineTo(10, 20);
                 node = new vml.MultiPathDataNode(multiPath);
             }
         });
 
-        test("renders composite paths", function() {
-            multiPath
-                .moveTo(0, 0).lineTo(10, 20)
-                .moveTo(10, 10).lineTo(10, 20);
+        test("renders composite paths initially", function() {
+            equal(node.element.v, "m 0,0 l 1000,2000 e");
+        });
 
-            ok(node.element.v, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
+        test("geometryChange sets composite path", function() {
+            node.attr = function(name, value) {
+                if (name === "v") {
+                    equal(value, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
+                }
+            };
+
+            multiPath.moveTo(10, 10).lineTo(10, 20);
+            node.geometryChange();
         });
 
     })();
@@ -1441,7 +1449,7 @@
             };
 
             text.position().setX(0);
-            textPathDataNode.geometryChange();
+            node.geometryChange();
         });
 
         test("rounds path coordinates", function() {
@@ -1450,7 +1458,7 @@
             };
 
             text.position().translate(0.005, 0.005);
-            textPathDataNode.geometryChange();
+            node.geometryChange();
         });
     })();
 
@@ -1481,7 +1489,7 @@
             };
 
             text.options.set("font", "10pt Arial");
-            textPathNode.optionsChange({
+            node.optionsChange({
                 field: "font",
                 value: "10pt Arial"
             });
@@ -1494,7 +1502,7 @@
             };
 
             text.content("Bar");
-            textPathNode.optionsChange({
+            node.optionsChange({
                 field: "content",
                 value: "Bar"
             });
