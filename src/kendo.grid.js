@@ -528,16 +528,20 @@ var __meta__ = {
         });
     }
 
-    function columnPosition(column, columns, row) {
+    function columnVisiblePosition(column, columns, row) {
         row = row || 0;
+        var counter = 0
         for (var idx = 0; idx < columns.length; idx++) {
-           if (columns[idx] == column) {
-                return { cell: idx, row: row };
+            if (columns[idx] == column) {
+                return { cell: counter, row: row };
            } else if (columns[idx].columns) {
-               var result = columnPosition(column, columns[idx].columns, row + 1);
+               var result = columnVisiblePosition(column, columns[idx].columns, row + 1);
                if (result) {
                     return result;
                }
+           }
+           if (!columns[idx].hidden) {
+               counter++;
            }
         }
         return null;
@@ -5309,12 +5313,12 @@ var __meta__ = {
                 })[0];
             }
 
-            if (!column || column.hidden) {
+            if (!column || !isVisible(column)) {
                 return;
             }
 
             if (column.columns && column.columns.length) {
-                var position = columnPosition(column, columns);
+                var position = columnVisiblePosition(column, columns);
                 columnIndex = position.cell;
                 column.hidden = true;
                 column.attributes = addHiddenStyle(column.attributes);

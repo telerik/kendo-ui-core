@@ -338,6 +338,32 @@
         ok(!ths.eq(2).is(":visible"));
     });
 
+    test("hide group column header cells in grid with details - multiline headers", function() {
+        var grid = setup({
+            detailTemplate: "foo",
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(1);
+
+        var rows = grid.thead.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(!rows.eq(0).find("th").eq(2).is(":visible"));
+        ok(rows.eq(0).find("th").eq(3).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(!rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(1).find("th").eq(4).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(2).find("th").eq(1).is(":visible"));
+    });
+
     test("hide column header cells in grid with details", function() {
         var grid = setup({ detailTemplate: "foo" });
 
@@ -351,6 +377,34 @@
     });
 
     test("hide column header cells in grouped grid", function() {
+        var grid = setup({
+            dataSource: {
+                group: { field: "foo" }
+            },
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(1);
+
+        var rows = grid.thead.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(!rows.eq(0).find("th").eq(2).is(":visible"));
+        ok(rows.eq(0).find("th").eq(3).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(!rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(1).find("th").eq(4).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+        ok(!rows.eq(2).find("th").eq(1).is(":visible"));
+    });
+
+    test("hide top multiline column header cells in grouped grid - multiline headers", function() {
         var grid = setup({ dataSource: {
                 group: { field: "foo" }
             }
@@ -364,6 +418,7 @@
         ok(ths.eq(2).is(":visible"));
         ok(ths.eq(3).is(":visible"));
     });
+
 
     test("hide column cells", function() {
         var grid = setup();

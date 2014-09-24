@@ -38,25 +38,26 @@
 
         <script>
             $(document).ready(function () {
-                 var grid = new kendo.ui.Grid($("#grid"), {
-            dataSource: {
-                data: [{ foo: 1, bar: "bar"}],
-               // group: { field: "bar" }
-            },
-            scrollable: false,
-            columns:[
-                { title: "master", width: 10 },
-                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
-                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
-            ]
+                var grid = new kendo.ui.Grid($("#grid"), {
+                    dataSource: {
+                        data: [{ foo: 1, bar: "bar"}],
+                        // group: { field: "bar" }
+                    },
+                    height: 400,
+                    scrollable: true,
+                    columns:[
+                    { title: "master", width: 100, locked: true },
+                    { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 200 }] }, { title: "master1-child1", width: 300 }] },
+                    { title: "master2", columns: [{ title: "master2-child", width: 400 }, { title: "master2-child1", width: 500 }] }
+                    ]
 
-           // columns: [
-           //     { title: "foo", locked: true, columns: [{ field: "foo", width: 100, hidden: true }, { field: "foo", width:100, hidden: false }] },
-           //     { field: "bar",  width: 100 },
-           //     { columns: [ { title: "bar", hidden: false, width: 100 }] }
-           // ]
-        });
-return;
+                    // columns: [
+                    //     { title: "foo", locked: true, columns: [{ field: "foo", width: 100, hidden: true }, { field: "foo", width:100, hidden: false }] },
+                    //     { field: "bar",  width: 100 },
+                    //     { columns: [ { title: "bar", hidden: false, width: 100 }] }
+                    // ]
+                });
+                return;
 
                 $("#grid").kendoGrid({
                     dataSource: {
@@ -87,7 +88,7 @@ return;
                     toolbar: ["create"],
                     sortable: true,
                     filterable: true,
-                    scrollable: false,
+                    scrollable: true,
                     groupable: true,
 columnMenu: true,
                     columns: [{
@@ -98,13 +99,14 @@ columnMenu: true,
                     {
                         title: "Contact Info",
                         hidden: false,
-                      // locked: true,
+                       locked: true,
                         columns: [
                             { field: "ContactName", hidden: false, /*width: 100 */},
                             {
                                 hidden: false,
                                 field: "ContactTitle",
                                 title: "Contact Title",
+                                footerTemplate: "foo"
                                 //width: 200
                             }]
                         },  {  title: "foo title", columns:  [
