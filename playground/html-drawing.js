@@ -82,11 +82,69 @@
         shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
     }
 
-    function addArcToPath(arc, path) {
-        var points = arc.curvePoints();
+    function setClipping(shape, clipPath) {
+        // XXX: update this when the drawing-clip API is available.
+        // XXX: also in dataviz/drawing/pdf.js
+        shape._pdfClip = clipPath;
+    }
+
+    function addArcToPath(path, x, y, options) {
+        var points = new geo.Arc([ x, y ], options).curvePoints();
         for (var i = 1; i < points.length; i += 3) {
             path.curveTo(points[i], points[i + 1], points[i + 2]);
         }
+    }
+
+    function sanitizeRadius(r) {
+        if (r.x <= 0 || r.y <= 0) {
+            r.x = r.y = 0;
+        }
+    }
+
+    function clipBox(box, radiusTL, radiusTR, radiusBR, radiusBL) {
+        var path = new drawing.Path({ fill: null, stroke: null });
+        sanitizeRadius(radiusTL);
+        sanitizeRadius(radiusTR);
+        sanitizeRadius(radiusBR);
+        sanitizeRadius(radiusBL);
+        path.moveTo(box.left, box.top + radiusTL.y);
+        if (radiusTL.x > 0 && radiusTL.y > 0) {
+            addArcToPath(path, box.left + radiusTL.x, box.top + radiusTL.y, {
+                startAngle: -180,
+                endAngle: -90,
+                radiusX: radiusTL.x,
+                radiusY: radiusTL.y
+            });
+        }
+        path.lineTo(box.right - radiusTR.x, box.top);
+        if (radiusTR.x > 0 && radiusTR.y > 0) {
+            addArcToPath(path, box.right - radiusTR.x, box.top + radiusTR.y, {
+                startAngle: -90,
+                endAngle: 0,
+                radiusX: radiusTR.x,
+                radiusY: radiusTR.y
+            });
+        }
+        path.lineTo(box.right, box.bottom - radiusBR.y);
+        if (radiusBR.x > 0 && radiusBR.y > 0) {
+            addArcToPath(path, box.right - radiusBR.x, box.bottom - radiusBR.y, {
+                startAngle: 0,
+                endAngle: 90,
+                radiusX: radiusBR.x,
+                radiusY: radiusBR.y
+            });
+        }
+        path.lineTo(box.left + radiusBL.x, box.bottom);
+        if (radiusBL.x > 0 && radiusBL.y > 0) {
+            addArcToPath(path, box.left + radiusBL.x, box.bottom - radiusBL.y, {
+                startAngle: 90,
+                endAngle: 180,
+                radiusX: radiusBL.x,
+                radiusY: radiusBL.y
+            });
+        }
+        path.close();
+        return path;
     }
 
     function renderBorderAndBackground(element, group) {
@@ -106,12 +164,8 @@
         function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr) {
             var group = new drawing.Group();
 
-            if (rl.x == 0 || rl.y == 0) {
-                rl.x = rl.y = 0;
-            }
-            if (rr.x == 0 || rr.y == 0) {
-                rr.x = rr.y = 0;
-            }
+            sanitizeRadius(rl);
+            sanitizeRadius(rr);
 
             // draw main border.  this is the area without the rounded corners
             var path = new drawing.Path({
@@ -151,22 +205,22 @@
                 });
                 path.moveTo(0, 0);
 
-                addArcToPath(new geo.Arc([ 0, r.y ], {
+                addArcToPath(path, 0, r.y, {
                     startAngle: -90,
                     endAngle: -toDegrees(angle),
                     radiusX: r.x,
                     radiusY: r.y
-                }), path);
+                });
 
                 if (ri.x > 0 && ri.y > 0) {
                     path.lineTo(ri.x * cos(angle), r.y - ri.y * sin(angle));
-                    addArcToPath(new geo.Arc([ 0, r.y ], {
+                    addArcToPath(path, 0, r.y, {
                         startAngle: -toDegrees(angle),
                         endAngle: -90,
                         radiusX: ri.x,
                         radiusY: ri.y,
                         anticlockwise: true
-                    }), path);
+                    });
                 }
                 else if (ri.x > 0) {
                     path.lineTo(ri.x, Wtop)
@@ -205,6 +259,7 @@
                     .lineTo(box.left, box.bottom)
                     .close();
                 group.append(background);
+                setClipping(background, clipBox(box, rTL, rTR, rBR, rBL));
             }
 
             // top border
@@ -266,6 +321,33 @@
         var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
         var image = new drawing.Image(element.src, rect);
         group.append(image);
+
+        // XXX: a bit of cleanup would be in order.  This duplicates
+        // some lines from above.
+        var style = getComputedStyle(element);
+
+        var top = getBorder(style, "top");
+        var right = getBorder(style, "right");
+        var bottom = getBorder(style, "bottom");
+        var left = getBorder(style, "left");
+
+        var rTL = getBorderRadius(style, "top-left");
+        var rTR = getBorderRadius(style, "top-right");
+        var rBL = getBorderRadius(style, "bottom-left");
+        var rBR = getBorderRadius(style, "bottom-right");
+
+        var pt = parseFloat(style.getPropertyValue("padding-top"));
+        var pr = parseFloat(style.getPropertyValue("padding-right"));
+        var pb = parseFloat(style.getPropertyValue("padding-bottom"));
+        var pl = parseFloat(style.getPropertyValue("padding-left"));
+
+        setClipping(image, clipBox(
+            box,
+            { x: rTL.x - left.width - pl, y: rTL.y - top.width - pt },
+            { x: rTR.x - right.width - pr, y: rTR.y - top.width - pt },
+            { x: rBR.x - right.width - pr, y: rBR.y - bottom.width - pb },
+            { x: rBL.x - left.width - pl, y: rBL.y - bottom.width - pb }
+        ));
     }
 
     function zIndexSort(a, b) {

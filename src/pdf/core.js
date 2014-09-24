@@ -953,7 +953,7 @@
             this._out("S", NL);
         },
         clip: function() {
-            this._out("W", NL);
+            this._out("W n", NL);
         },
         closeStroke: function() {
             this._out("s", NL);

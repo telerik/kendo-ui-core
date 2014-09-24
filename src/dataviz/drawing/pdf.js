@@ -82,6 +82,7 @@
         page.save();
         setStrokeOptions(element, page, pdf);
         setFillOptions(element, page, pdf);
+        setClipping(element, page, pdf);
 
         var transform = element.transform();
         if (transform) {
@@ -163,6 +164,15 @@
         var opacity = fill.opacity;
         if (opacity != null) {
             page.setFillOpacity(opacity);
+        }
+    }
+
+    function setClipping(element, page, pdf) {
+        // XXX: only Path supported at the moment.
+        // XXX: update this when drawing-clip API is available
+        if (element._pdfClip) {
+            drawPath(element._pdfClip, page, pdf);
+            page.clip();
         }
     }
 
