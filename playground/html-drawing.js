@@ -63,11 +63,6 @@
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform)[1]
             .split(/\s*,\s*/g).map(parseFloat);
         origin = origin.split(/\s+/g).map(parseFloat);
-
-        // var tmp = matrix[1];
-        // matrix[1] = matrix[2];
-        // matrix[2] = tmp;
-
         return {
             matrix: matrix,
             origin: origin
@@ -101,46 +96,50 @@
         }
     }
 
-    function clipBox(box, radiusTL, radiusTR, radiusBR, radiusBL) {
+    // Create a drawing.Path for a rounded rectangle.  Receives the
+    // bounding box and the border-radiuses in CSS order (top-left,
+    // top-right, bottom-right, bottom-left).  The radiuses must be
+    // objects containing x (horiz. radius) and y (vertical radius).
+    function roundBox(box, rTL, rTR, rBR, rBL) {
         var path = new drawing.Path({ fill: null, stroke: null });
-        sanitizeRadius(radiusTL);
-        sanitizeRadius(radiusTR);
-        sanitizeRadius(radiusBR);
-        sanitizeRadius(radiusBL);
-        path.moveTo(box.left, box.top + radiusTL.y);
-        if (radiusTL.x > 0 && radiusTL.y > 0) {
-            addArcToPath(path, box.left + radiusTL.x, box.top + radiusTL.y, {
+        sanitizeRadius(rTL);
+        sanitizeRadius(rTR);
+        sanitizeRadius(rBR);
+        sanitizeRadius(rBL);
+        path.moveTo(box.left, box.top + rTL.y);
+        if (rTL.x) {
+            addArcToPath(path, box.left + rTL.x, box.top + rTL.y, {
                 startAngle: -180,
                 endAngle: -90,
-                radiusX: radiusTL.x,
-                radiusY: radiusTL.y
+                radiusX: rTL.x,
+                radiusY: rTL.y
             });
         }
-        path.lineTo(box.right - radiusTR.x, box.top);
-        if (radiusTR.x > 0 && radiusTR.y > 0) {
-            addArcToPath(path, box.right - radiusTR.x, box.top + radiusTR.y, {
+        path.lineTo(box.right - rTR.x, box.top);
+        if (rTR.x) {
+            addArcToPath(path, box.right - rTR.x, box.top + rTR.y, {
                 startAngle: -90,
                 endAngle: 0,
-                radiusX: radiusTR.x,
-                radiusY: radiusTR.y
+                radiusX: rTR.x,
+                radiusY: rTR.y
             });
         }
-        path.lineTo(box.right, box.bottom - radiusBR.y);
-        if (radiusBR.x > 0 && radiusBR.y > 0) {
-            addArcToPath(path, box.right - radiusBR.x, box.bottom - radiusBR.y, {
+        path.lineTo(box.right, box.bottom - rBR.y);
+        if (rBR.x) {
+            addArcToPath(path, box.right - rBR.x, box.bottom - rBR.y, {
                 startAngle: 0,
                 endAngle: 90,
-                radiusX: radiusBR.x,
-                radiusY: radiusBR.y
+                radiusX: rBR.x,
+                radiusY: rBR.y
             });
         }
-        path.lineTo(box.left + radiusBL.x, box.bottom);
-        if (radiusBL.x > 0 && radiusBL.y > 0) {
-            addArcToPath(path, box.left + radiusBL.x, box.bottom - radiusBL.y, {
+        path.lineTo(box.left + rBL.x, box.bottom);
+        if (rBL.x) {
+            addArcToPath(path, box.left + rBL.x, box.bottom - rBL.y, {
                 startAngle: 90,
                 endAngle: 180,
-                radiusX: radiusBL.x,
-                radiusY: radiusBL.y
+                radiusX: rBL.x,
+                radiusY: rBL.y
             });
         }
         path.close();
@@ -173,19 +172,19 @@
                 stroke: null
             });
             group.append(path);
-            path.moveTo(rl.x > 0 ? max(rl.x, Wleft) : 0, 0)
-                .lineTo(len - (rr.x > 0 ? max(rr.x, Wright) : 0), 0)
+            path.moveTo(rl.x ? max(rl.x, Wleft) : 0, 0)
+                .lineTo(len - (rr.x ? max(rr.x, Wright) : 0), 0)
                 .lineTo(len - max(rr.x, Wright), Wtop)
                 .lineTo(max(rl.x, Wleft), Wtop)
                 .close();
 
-            if (rl.x > 0) {
+            if (rl.x) {
                 var path = drawRoundCorner(Wleft, rl);
                 setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
                 group.append(path);
             }
 
-            if (rr.x > 0) {
+            if (rr.x) {
                 var path = drawRoundCorner(Wright, rr);
                 setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
                 group.append(path);
@@ -195,15 +194,18 @@
             // translated/rotated to be placed properly).
             function drawRoundCorner(Wright, r) {
                 var angle = PI/2 * Wright / (Wright + Wtop);
+
+                // not sanitizing this one, because negative values
+                // are useful to fill the box correctly.
                 var ri = {
                     x: r.x - Wright,
                     y: r.y - Wtop
                 };
+
                 var path = new drawing.Path({
                     fill: { color: color },
                     stroke: null
-                });
-                path.moveTo(0, 0);
+                }).moveTo(0, 0);
 
                 addArcToPath(path, 0, r.y, {
                     startAngle: -90,
@@ -259,7 +261,7 @@
                     .lineTo(box.left, box.bottom)
                     .close();
                 group.append(background);
-                setClipping(background, clipBox(box, rTL, rTR, rBR, rBL));
+                setClipping(background, roundBox(box, rTL, rTR, rBR, rBL));
             }
 
             // top border
@@ -322,14 +324,18 @@
         var image = new drawing.Image(element.src, rect);
         group.append(image);
 
+        // if border-radius is in use, the image must be clipped.  for
+        // each corner, we need to subtract from the radius the border
+        // and padding widths, to get the same rendering as in browser.
+
         // XXX: a bit of cleanup would be in order.  This duplicates
         // some lines from above.
         var style = getComputedStyle(element);
 
-        var top = getBorder(style, "top");
-        var right = getBorder(style, "right");
-        var bottom = getBorder(style, "bottom");
-        var left = getBorder(style, "left");
+        var bt = getBorder(style, "top");
+        var br = getBorder(style, "right");
+        var bb = getBorder(style, "bottom");
+        var bl = getBorder(style, "left");
 
         var rTL = getBorderRadius(style, "top-left");
         var rTR = getBorderRadius(style, "top-right");
@@ -341,12 +347,12 @@
         var pb = parseFloat(style.getPropertyValue("padding-bottom"));
         var pl = parseFloat(style.getPropertyValue("padding-left"));
 
-        setClipping(image, clipBox(
+        setClipping(image, roundBox(
             box,
-            { x: rTL.x - left.width - pl, y: rTL.y - top.width - pt },
-            { x: rTR.x - right.width - pr, y: rTR.y - top.width - pt },
-            { x: rBR.x - right.width - pr, y: rBR.y - bottom.width - pb },
-            { x: rBL.x - left.width - pl, y: rBL.y - bottom.width - pb }
+            { x: rTL.x - bl.width - pl , y: rTL.y - bt.width - pt },
+            { x: rTR.x - br.width - pr , y: rTR.y - bt.width - pt },
+            { x: rBR.x - br.width - pr , y: rBR.y - bb.width - pb },
+            { x: rBL.x - bl.width - pl , y: rBL.y - bb.width - pb }
         ));
     }
 
