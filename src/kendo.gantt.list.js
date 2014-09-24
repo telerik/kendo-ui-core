@@ -598,6 +598,10 @@ var __meta__ = {
 
             if (validation && validation.dateCompare &&
                 isFunction(validation.dateCompare) && validation.message) {
+                $('<span ' + kendo.attr("for") + '="' + column.field + '" class="k-invalid-msg"/>')
+                    .hide()
+                    .appendTo(cell);
+
                 cell.find('[name=' + column.field + ']')
                     .attr(kendo.attr("dateCompare-msg"), validation.message);
             }
