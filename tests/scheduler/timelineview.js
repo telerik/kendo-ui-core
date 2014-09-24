@@ -158,6 +158,26 @@
         ok(view.element.find(".k-event").length);
     });
 
+    test("same day event which starts and end at the startTime is rendered as one cell duration", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            //startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            //endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo", title: "",
+            start: new Date(2013, 1, 2, 0, 0, 0),
+            end: new Date(2013, 1, 2, 0, 0, 0),
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+
+        ok(view.content.find(".k-event").length);
+    });
+
     //normal events with no slot holes:
     test("event is rendered correctly", function() {
         var view = setup({ date: new Date(2013, 1, 2), numberOfDays: 1  });
@@ -261,7 +281,7 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     test("event is not rendered when starts in end date", function() {
@@ -276,7 +296,7 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     module("Timeline View rendering with slot holes", {
@@ -311,6 +331,29 @@
 
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
         equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 15);
+
+        ok(view.element.find(".k-event").length);
+    });
+
+    test("all day event is rendered correctly when times are different than zero", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            endTime: new Date(2013, 1, 2, 18, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 2, 19, 0, 0),
+            end: new Date(2013, 1, 2, 19, 0, 0),
+            isAllDay: true,
+            id: "2"
+        })]);
+
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
+        equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 7);
 
         ok(view.element.find(".k-event").length);
     });
@@ -395,13 +438,13 @@
         view.render([new SchedulerEvent({
             uid: "foo",
             title: "",
-            start: new Date(2013, 1, 2, 0, 0, 0),
-            end: new Date(2013, 1, 2, 0, 0, 0),
+            start: new Date(2013, 1, 1, 0, 0, 0),
+            end: new Date(2013, 1, 1, 0, 0, 0),
             isAllDay: true,
             id: "2"
         })]);
 
-        ok(view.element.find(".k-event").length === 0);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     test("all day event is rendered correctly", function() {
@@ -560,7 +603,7 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     test("event is not rendered when starts in end date", function() {
@@ -580,7 +623,7 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     test("event between two dates is not rendered when starts at end date and ends at start date", function() {
@@ -667,7 +710,7 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
     test("event is not rendered when starts at end time and ends start time next day", function() {
@@ -687,7 +730,38 @@
             id: "2"
         })]);
 
-        ok(!view.element.find(".k-event").length);
+        equal(view.content.find("div.k-event").length, 0);
     });
 
+    test("cross-midnight event is not rendered if ends at the begining of the View", function() {
+        var view = setup({
+            date: new Date(2013, 1, 2),
+            startTime: new Date(2013, 1, 2, 10, 0, 0, 0),
+            numberOfDays: 2
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date(2013, 1, 1, 12, 0, 0),
+            end: new Date(2013, 1, 2, 0, 0, 0),
+            isAllDay: false,
+            id: "2"
+        })]);
+
+        equal(view.content.find("div.k-event").length, 0);
+    });
+
+    module("Timeline View rendering icons", {
+        setup: function() {
+            container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
+        },
+        teardown: function() {
+            if (container.data("kendoTimelineView")) {
+                container.data("kendoTimelineView").destroy();
+            }
+
+            kendo.destroy(QUnit.fixture);
+        }
+    });
 })();
