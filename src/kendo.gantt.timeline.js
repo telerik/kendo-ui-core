@@ -2034,6 +2034,8 @@ var __meta__ = {
                         return;
                     }
 
+                    that.view()._removeDependencyDragHint();
+
                     var target = $(kendo.elementUnderCursor(e));
                     var currentX = e.x.location + content.scrollLeft() - contentOffset.left;
                     var currentY = e.y.location + content.scrollTop() - contentOffset.top;
