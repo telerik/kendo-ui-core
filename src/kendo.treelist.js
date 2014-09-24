@@ -232,6 +232,14 @@ var __meta__ = {
             this.get(id)._error = e;
         },
 
+        read: function(data) {
+            if (!data || !data.id) {
+                this._data.length = 0;
+            }
+
+            return DataSource.fn.read.call(this, data);
+        },
+
         load: function(model) {
             var method = "_query";
 

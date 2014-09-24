@@ -752,4 +752,24 @@
         read.resolve([]).resolve([]).resolve([]);
     });
 
+    test("read clears dataSource data", function() {
+        var calls = 0;
+
+        var ds = new TreeListDataSource({
+            transport: {
+                read: function(options) {
+                    calls++;
+
+                    options.success([ { id: calls } ]);
+                }
+            }
+        });
+
+        ds.read();
+
+        ds.read();
+
+        equal(ds.data().length, 1);
+    });
+
 })();
