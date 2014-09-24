@@ -6,6 +6,12 @@
     var geo = kendo.dataviz.geometry;
     var pdf = kendo.dataviz.drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
+    var PI = Math.PI;
+    var cos = Math.cos;
+    var sin = Math.sin;
+    var min = Math.min;
+    var max = Math.max;
+
     function getComputedStyle(element) {
         return window.getComputedStyle(element);
     }
@@ -68,6 +74,10 @@
         };
     }
 
+    function toDegrees(radians) {
+        return ((180 * radians) / PI) % 360;
+    }
+
     function setTransform(shape, m) {
         shape.transform(new geo.Matrix(m[0], m[1], m[2], m[3], m[4], m[5]));
     }
@@ -94,10 +104,7 @@
         //      (objects containing x and y, for horiz/vertical radius)
         //
         function drawEdge(color, len, Wtop, Wleft, Wright, rl, rr) {
-            var path = new drawing.Path({
-                fill: { color: color },
-                stroke: null
-            });
+            var group = new drawing.Group();
 
             if (rl.x == 0 || rl.y == 0) {
                 rl.x = rl.y = 0;
@@ -106,53 +113,74 @@
                 rr.x = rr.y = 0;
             }
 
-            path.moveTo(0, rl.y);
+            // draw main border.  this is the area without the rounded corners
+            var path = new drawing.Path({
+                fill: { color: color },
+                stroke: null
+            });
+            group.append(path);
+            path.moveTo(rl.x > 0 ? max(rl.x, Wleft) : 0, 0)
+                .lineTo(len - (rr.x > 0 ? max(rr.x, Wright) : 0), 0)
+                .lineTo(len - max(rr.x, Wright), Wtop)
+                .lineTo(max(rl.x, Wleft), Wtop)
+                .close();
 
-            if (rl.x > 0 && rl.y > 0) {
-                addArcToPath(new geo.Arc([ rl.x, rl.y ], {
-                    startAngle : -180,
-                    endAngle   : -90,
-                    radiusX    : rl.x,
-                    radiusY    : rl.y
-                }), path);
-            }
-            path.lineTo(len - rr.x, 0);
-
-            if (rr.x > 0 && rr.y > 0) {
-                addArcToPath(new geo.Arc([ len - rr.x, rr.y ], {
-                    startAngle : -90,
-                    endAngle   : 0,
-                    radiusX    : rr.x,
-                    radiusY    : rr.y
-                }), path);
-                path.lineTo(len - Wright, rr.y);
-            } else {
-                path.lineTo(len - Wright, Wtop);
+            if (rl.x > 0) {
+                var path = drawRoundCorner(Wleft, rl);
+                setTransform(path, [ -1, 0, 0, 1, rl.x, 0 ]);
+                group.append(path);
             }
 
-            if (rr.x - Wright > 0 && rr.y - Wtop > 0) {
-                addArcToPath(new geo.Arc([ len - rr.x, rr.y ], {
-                    startAngle    : -0,
-                    endAngle      : -90,
-                    radiusX       : rr.x - Wright,
-                    radiusY       : rr.y - Wtop,
-                    anticlockwise : true
-                }), path);
-            }
-            path.lineTo(Math.max(rl.x, Wleft), Wtop);
-
-            if (rl.x - Wleft > 0 && rl.y - Wtop > 0) {
-                addArcToPath(new geo.Arc([ rl.x, rl.y ], {
-                    startAngle    : -90,
-                    endAngle      : -180,
-                    radiusX       : rl.x - Wleft,
-                    radiusY       : rl.y - Wtop,
-                    anticlockwise : true
-                }), path);
+            if (rr.x > 0) {
+                var path = drawRoundCorner(Wright, rr);
+                setTransform(path, [ 1, 0, 0, 1, len - rr.x, 0 ]);
+                group.append(path);
             }
 
-            path.close();
-            return path;
+            // draws one round corner, starting at origin (needs to be
+            // translated/rotated to be placed properly).
+            function drawRoundCorner(Wright, r) {
+                var angle = PI/2 * Wright / (Wright + Wtop);
+                var ri = {
+                    x: r.x - Wright,
+                    y: r.y - Wtop
+                };
+                var path = new drawing.Path({
+                    fill: { color: color },
+                    stroke: null
+                });
+                path.moveTo(0, 0);
+
+                addArcToPath(new geo.Arc([ 0, r.y ], {
+                    startAngle: -90,
+                    endAngle: -toDegrees(angle),
+                    radiusX: r.x,
+                    radiusY: r.y
+                }), path);
+
+                if (ri.x > 0 && ri.y > 0) {
+                    path.lineTo(ri.x * cos(angle), r.y - ri.y * sin(angle));
+                    addArcToPath(new geo.Arc([ 0, r.y ], {
+                        startAngle: -toDegrees(angle),
+                        endAngle: -90,
+                        radiusX: ri.x,
+                        radiusY: ri.y,
+                        anticlockwise: true
+                    }), path);
+                }
+                else if (ri.x > 0) {
+                    path.lineTo(ri.x, Wtop)
+                        .lineTo(0, Wtop);
+                }
+                else {
+                    path.lineTo(ri.x, Wtop)
+                        .lineTo(ri.x, 0);
+                }
+
+                return path.close();
+            }
+
+            return group;
         }
 
         // for left/right borders we need to invert the border-radiuses
@@ -188,8 +216,8 @@
 
             // bottom border
             if (bottom.width > 0) {
-                var path = drawEdge(bottom.color, box.width, bottom.width, left.width, right.width, rBL, rBR);
-                setTransform(path, [ 1, 0, 0, -1, box.left, box.bottom ]);
+                var path = drawEdge(bottom.color, box.width, bottom.width, right.width, left.width, rBR, rBL);
+                setTransform(path, [ -1, 0, 0, -1, box.right, box.bottom ]);
                 group.append(path);
             }
 

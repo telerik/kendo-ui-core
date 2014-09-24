@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" href="../dist/styles/web/kendo.common.css" />
     <link rel="stylesheet" href="../dist/styles/web/kendo.default.css" />
+    <script src="http://test.d/html2canvas/dist/html2canvas.js"></script>
     <script src="loader.js"></script>
     <script>
       requireSync([
@@ -33,11 +34,13 @@
       }
 
       .test {
-        border-width: 25px 10px 15px 5px;
-        border-color: red green blue orange;
+        border-width: 25px 5px 15px 5px;
+        border-radius: 10px 60px 35px 50px;
+        border-top-left-radius: 20px 40px;
+        border-bottom-right-radius: 50px 25px;
+        border-color: rgba(255, 0, 0, 0.5) rgba(0, 255, 0, 0.5) rgba(0, 0, 255, 0.5) rgba(0, 0, 0, 0.5);
         border-style: solid;
-        border-radius: 40px 50px 60px 70px;
-        background: rgba(255, 255, 200, 0.5);
+        background: rgba(100, 100, 100, 0.5);
         padding: 1em;
         margin: 1em;
         color: red;
@@ -60,17 +63,17 @@
     <button onclick="pdf('#test1')">PDF</button>
     <div id="test1" style="padding: 2em">
 
-      <img src="images/4.jpg" width="200px"
-           style="margin-left: 1em;
-                  border: 2px solid black;
-                  padding: 5px;
-                  position: absolute;
-                  z-index: 5;
-                  opacity: 0.7;
-                  transform: rotate(15deg);
-                  left: 10px;
-                  border-radius: 20px;
-                  background: yellow;" />
+      <!-- <img src="images/4.jpg" width="200px" -->
+      <!--      style="margin-left: 1em; -->
+      <!--             border: 2px solid black; -->
+      <!--             padding: 5px; -->
+      <!--             position: absolute; -->
+      <!--             z-index: 5; -->
+      <!--             opacity: 0.7; -->
+      <!--             transform: rotate(15deg); -->
+      <!--             left: 10px; -->
+      <!--             border-radius: 20px; -->
+      <!--             background: yellow;" /> -->
 
       <img src="images/4.jpg" width="200px"
            style="margin-left: 1em;
@@ -85,7 +88,7 @@
                   border-top-left-radius: 20px 80px;
                   background: yellow;" />
 
-      <div style="width: 30%; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr" class="test">
+      <div style="width: 30%; font: 14px/24px verdana; position: relative; z-index: 10; direction: ltr; text-indent: 4em" class="test">
         <span>
           This is a nonsensical document, but syntactically valid HTML 4.0. All
           100% conformant CSS1 agents should be able to render the document
@@ -137,6 +140,10 @@
           draw("#test1");
         }, 10);
       });
+
+      <!-- html2canvas($("#test1")[0]).then(function(canvas){ -->
+      <!--   document.body.appendChild(canvas); -->
+      <!-- }); -->
     </script>
 
   </body>
