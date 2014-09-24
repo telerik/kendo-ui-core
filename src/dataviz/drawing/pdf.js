@@ -241,11 +241,11 @@
     function drawArc(element, page, pdf) {
         var points = element.geometry().curvePoints();
         page.moveTo(points[0].x, points[0].y);
-        for (var i = 1; i < points.length; i += 3) {
+        for (var i = 1; i < points.length;) {
             page.bezier(
-                points[i + 0].x, points[i + 0].y,
-                points[i + 1].x, points[i + 1].y,
-                points[i + 2].x, points[i + 2].y
+                points[i].x, points[i++].y,
+                points[i].x, points[i++].y,
+                points[i].x, points[i++].y
             );
         }
         maybeFillStroke(element, page, pdf);

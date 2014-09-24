@@ -55,6 +55,7 @@ function makeIt() {
     page.save();
     page.translate(100, 100);
     page.scale(300, 225);
+    page.setFillOpacity(0.1);
     page.drawImage(imgurl);
     page.restore();
 

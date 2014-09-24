@@ -1,10 +1,13 @@
-(function(parseFloat){
+(function(parseFloat, Math, $){
 
     "use strict";
 
-    var drawing = kendo.dataviz.drawing;
-    var geo = kendo.dataviz.geometry;
-    var pdf = kendo.dataviz.drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
+    /* -----[ local vars ]----- */
+
+    var dataviz = kendo.dataviz;
+    var drawing = dataviz.drawing;
+    var geo = dataviz.geometry;
+    var pdf = drawing.pdf; // XXX: should not really depend on this.  needed for parseColor
 
     var PI = Math.PI;
     var cos = Math.cos;
@@ -12,21 +15,41 @@
     var min = Math.min;
     var max = Math.max;
 
+    /* -----[ exports ]----- */
+
+    drawing.drawDOM = function(element, cont) {
+        var group = new drawing.Group();
+
+        // translate to start of page
+        var pos = $(element).offset();
+        setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
+
+        renderElement(element, group);
+        cont(group);
+    };
+
+    // seriously, that's it.
+    return;
+
     function getComputedStyle(element) {
         return window.getComputedStyle(element);
+    }
+
+    function getPropertyValue(style, prop) {
+        return style.getPropertyValue(prop);
     }
 
     function getBorder(style, side) {
         side = "border-" + side;
         return {
-            width: parseFloat(style.getPropertyValue(side + "-width")),
-            style: style.getPropertyValue(side + "-style"),
-            color: style.getPropertyValue(side + "-color")
+            width: parseFloat(getPropertyValue(style, side + "-width")),
+            style: getPropertyValue(style, side + "-style"),
+            color: getPropertyValue(style, side + "-color")
         };
     }
 
     function getBorderRadius(style, side) {
-        var r = style.getPropertyValue("border-" + side + "-radius").split(/\s+/g).map(parseFloat);
+        var r = getPropertyValue(style, "border-" + side + "-radius").split(/\s+/g).map(parseFloat);
         if (r.length == 1) {
             r.push(r[0]);
         }
@@ -42,10 +65,10 @@
 
     function innerBox(box, element, prop) {
         var style = getComputedStyle(element);
-        var wt = parseFloat(style.getPropertyValue(prop.replace("*", "top")));
-        var wr = parseFloat(style.getPropertyValue(prop.replace("*", "right")));
-        var wb = parseFloat(style.getPropertyValue(prop.replace("*", "bottom")));
-        var wl = parseFloat(style.getPropertyValue(prop.replace("*", "left")));
+        var wt = parseFloat(getPropertyValue(style, prop.replace("*", "top")));
+        var wr = parseFloat(getPropertyValue(style, prop.replace("*", "right")));
+        var wb = parseFloat(getPropertyValue(style, prop.replace("*", "bottom")));
+        var wl = parseFloat(getPropertyValue(style, prop.replace("*", "left")));
         return {
             top    : box.top + wt,
             right  : box.right - wr,
@@ -57,9 +80,9 @@
     }
 
     function getTransform(style) {
-        var transform = style.getPropertyValue("transform");
+        var transform = getPropertyValue(style, "transform");
         if (transform == "none") return null;
-        var origin = style.getPropertyValue("transform-origin");
+        var origin = getPropertyValue(style, "transform-origin");
         var matrix = /^\s*matrix\(\s*(.*?)\s*\)\s*$/.exec(transform)[1]
             .split(/\s*,\s*/g).map(parseFloat);
         origin = origin.split(/\s+/g).map(parseFloat);
@@ -84,9 +107,9 @@
     }
 
     function addArcToPath(path, x, y, options) {
-        var points = new geo.Arc([ x, y ], options).curvePoints();
-        for (var i = 1; i < points.length; i += 3) {
-            path.curveTo(points[i], points[i + 1], points[i + 2]);
+        var points = new geo.Arc([ x, y ], options).curvePoints(), i = 1;
+        while (i < points.length) {
+            path.curveTo(points[i++], points[i++], points[i++]);
         }
     }
 
@@ -142,8 +165,7 @@
                 radiusY: rBL.y
             });
         }
-        path.close();
-        return path;
+        return path.close();
     }
 
     function renderBorderAndBackground(element, group) {
@@ -304,9 +326,9 @@
         var rBL = getBorderRadius(style, "bottom-left");
         var rBR = getBorderRadius(style, "bottom-right");
 
-        var dir = style.getPropertyValue("direction");
+        var dir = getPropertyValue(style, "direction");
 
-        var bgColor = style.getPropertyValue("background-color");
+        var bgColor = getPropertyValue(style, "background-color");
         bgColor = pdf.parseColor(bgColor);
         if (bgColor && bgColor.a == 0) {
             bgColor = null;     // opacity zero
@@ -322,7 +344,6 @@
         var box = getContentBox(element);
         var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
         var image = new drawing.Image(element.src, rect);
-        group.append(image);
 
         // if border-radius is in use, the image must be clipped.  for
         // each corner, we need to subtract from the radius the border
@@ -342,10 +363,10 @@
         var rBL = getBorderRadius(style, "bottom-left");
         var rBR = getBorderRadius(style, "bottom-right");
 
-        var pt = parseFloat(style.getPropertyValue("padding-top"));
-        var pr = parseFloat(style.getPropertyValue("padding-right"));
-        var pb = parseFloat(style.getPropertyValue("padding-bottom"));
-        var pl = parseFloat(style.getPropertyValue("padding-left"));
+        var pt = parseFloat(getPropertyValue(style, "padding-top"));
+        var pr = parseFloat(getPropertyValue(style, "padding-right"));
+        var pb = parseFloat(getPropertyValue(style, "padding-bottom"));
+        var pl = parseFloat(getPropertyValue(style, "padding-left"));
 
         setClipping(image, roundBox(
             box,
@@ -354,15 +375,17 @@
             { x: rBR.x - br.width - pr , y: rBR.y - bb.width - pb },
             { x: rBL.x - bl.width - pl , y: rBL.y - bb.width - pb }
         ));
+
+        group.append(image);
     }
 
     function zIndexSort(a, b) {
         var sa = getComputedStyle(a);
         var sb = getComputedStyle(b);
-        var za = parseFloat(sa.getPropertyValue("z-index"));
-        var zb = parseFloat(sb.getPropertyValue("z-index"));
-        var pa = sa.getPropertyValue("position");
-        var pb = sb.getPropertyValue("position");
+        var za = parseFloat(getPropertyValue(sa, "z-index"));
+        var zb = parseFloat(getPropertyValue(sb, "z-index"));
+        var pa = getPropertyValue(sa, "position");
+        var pb = getPropertyValue(sb, "position");
         if (isNaN(za) && isNaN(zb)) {
             if (pa == "static" && pb == "static") {
                 return 0;
@@ -390,7 +413,7 @@
         for (var i = element.firstChild; i; i = i.nextSibling) {
             switch (i.nodeType) {
               case 1:         // Element
-                var pos = getComputedStyle(i).getPropertyValue("position");
+                var pos = getPropertyValue(getComputedStyle(i), "position");
                 if (pos == "static") {
                     renderElement(i, group);
                 } else {
@@ -414,7 +437,7 @@
         var text = node.data;
         var range = element.ownerDocument.createRange();
         var style = getComputedStyle(element);
-        var align = style.getPropertyValue("text-align");
+        var align = getPropertyValue(style, "text-align");
         var isJustified = align == "justify";
 
         // skip whitespace
@@ -449,14 +472,14 @@
 
         // simply getPropertyValue("font") doesn't work in Firefox :-\
         var font = [
-            style.getPropertyValue("font-style"),
-            style.getPropertyValue("font-variant"),
-            style.getPropertyValue("font-weight"),
-            style.getPropertyValue("font-size") + "/" + style.getPropertyValue("line-height"),
-            style.getPropertyValue("font-family")
+            getPropertyValue(style, "font-style"),
+            getPropertyValue(style, "font-variant"),
+            getPropertyValue(style, "font-weight"),
+            getPropertyValue(style, "font-size") + "/" + getPropertyValue(style, "line-height"),
+            getPropertyValue(style, "font-family")
         ].join(" ");
 
-        var color = style.getPropertyValue("color");
+        var color = getPropertyValue(style, "color");
 
         function drawText(str, box) {
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
@@ -475,7 +498,7 @@
             return;
         }
         var style = getComputedStyle(element);
-        var opacity = parseFloat(style.getPropertyValue("opacity"));
+        var opacity = parseFloat(getPropertyValue(style, "opacity"));
         if (opacity == 0) return;
         // XXX: how  to handle opacity?
 
@@ -505,17 +528,6 @@
         }
     }
 
-    drawing.drawDOM = function(element, cont) {
-        var group = new drawing.Group();
-
-        // translate to start of page
-        var pos = $(element).offset();
-        setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
-
-        renderElement(element, group);
-        cont(group);
-    };
-
     function mmul(a, b) {
         var a1 = a[0], b1 = a[1], c1 = a[2], d1 = a[3], e1 = a[4], f1 = a[5];
         var a2 = b[0], b2 = b[1], c2 = b[2], d2 = b[3], e2 = b[4], f2 = b[5];
@@ -526,4 +538,4 @@
         ];
     }
 
-})(parseFloat);
+})(parseFloat, Math, kendo.jQuery);
