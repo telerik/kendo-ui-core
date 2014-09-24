@@ -572,6 +572,10 @@ var __meta__ = {
 
             if ((field.type === "date" || $.type(field) === "date") &&
                 /H|m|s|F|g|u/.test(column.format)) {
+                if (column.field === "start") {
+                    delete field.validation.dateCompare;
+                }
+
                 attr[BINDING] = "value:" + column.field;
                 attr[DATATYPE] = "date";
                 editor = function(container, options) {
@@ -608,10 +612,11 @@ var __meta__ = {
             var cell = this._editableContainer;
             var model = this._modelFromElement(cell);
             var column = this._columnFromElement(cell);
+            var field = column.field;
             var copy = cell.data("modelCopy");
             var taskInfo = {};
 
-            taskInfo[column.field] = copy.get(column.field);
+            taskInfo[field] = copy.get(field);
 
             cell.empty()
                 .removeData("modelCopy")
@@ -625,6 +630,10 @@ var __meta__ = {
             this._editableContent = null;
 
             if (!cancelUpdate) {
+                if (field === "start") {
+                    taskInfo.end = new Date(taskInfo.start.getTime() + model.duration());
+                }
+
                 this.trigger("update", { task: model, updateInfo: taskInfo });
             }
         },

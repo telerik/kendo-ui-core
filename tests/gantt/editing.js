@@ -611,7 +611,7 @@
         }
     });
 
-    test("fails when start after end", function() {
+    test("passes when start after end", function() {
         var targetCell = ganttList.content.find("td").eq(0);
         var picker;
 
@@ -619,7 +619,7 @@
         picker = kendo.widgetInstance(ganttList._editableContainer.find("input[name=start]"));
         picker.value("05/07/2014")
 
-        ok(!ganttList.editable.end());
+        ok(ganttList.editable.end());
     });
 
     test("passes when start equals end", function() {
