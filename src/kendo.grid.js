@@ -4727,24 +4727,25 @@ var __meta__ = {
                 var idx;
 
                 prevCells = prevCells.filter(function() {
-                    return $(this).attr(colSpanAttr) > 1;
+                    return parseInt($(this).attr(colSpanAttr), 10) > 1;
                 });
 
                 for (idx = 0; idx < prevCells.length; idx++) {
-                    offset += prevCells.eq(idx).attr(colSpanAttr) || 1;
+                    offset += parseInt(prevCells.eq(idx).attr(colSpanAttr), 10) || 1;
                 }
 
                 var cells = child.find("th:not(.k-group-cell,.k-hierarchy-cell)");
 
                 offset = offset || 1;
 
-                var colSpan = cell.attr(colSpanAttr) || 1;
+                var colSpan = parseInt(cell.attr(colSpanAttr), 10) || 1;
                 idx = 0;
                 while (idx < colSpan) {
                     var child = cells.eq(idx + (offset - 1));
                     result = result.add(this._childColumns(child));
-                    if (child.attr(colSpanAttr) > 1) {
-                        colSpan -= child.attr(colSpanAttr) - 1;
+                    var value = parseInt(child.attr(colSpanAttr), 10);
+                    if (value > 1) {
+                        colSpan -= value - 1;
                     }
                     idx++;
                 }
@@ -5362,7 +5363,7 @@ var __meta__ = {
             }
 
             cell = leafDataCells(container).filter(":visible").eq(headerCellIndex);
-            cell.hide();
+            cell[0].style.display = "none";
 
             setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, false);
             if (footer[0]) {
@@ -5422,26 +5423,49 @@ var __meta__ = {
                 cell,
                 tables,
                 width,
+                row,
+                headerCellIndex,
                 colWidth,
                 cols,
                 columns = that.columns,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
-                lockedColumnsCount = lockedColumns(columns).length,
+                lockedColumnsCount = that.lockedHeader ? leafDataCells(that.lockedHeader).length : 0,
                 columnIndex;
 
             if (typeof column == "number") {
                 column = columns[column];
+            } else if (isPlainObject(column)) {
+                column = grep(flatColumns(columns), function(item) {
+                    return item === column;
+                })[0];
             } else {
-                column = grep(columns, function(item) {
+                column = grep(flatColumns(columns), function(item) {
                     return item.field === column;
                 })[0];
             }
 
-            if (!column || !column.hidden) {
+            if (!column || isVisible(column)) {
                 return;
             }
 
-            columnIndex = inArray(column, columns);
+            if (column.columns && column.columns.length) {
+                var position = columnVisiblePosition(column, columns);
+                columnIndex = position.cell;
+                column.hidden = false;
+                column.attributes = removeHiddenStyle(column.attributes);
+                column.footerAttributes = removeHiddenStyle(column.footerAttributes);
+                column.headerAttributes = removeHiddenStyle(column.headerAttributes);
+
+                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, true);
+
+                for (var idx = 0; idx < column.columns.length; idx++) {
+                   this.showColumn(column.columns[idx]);
+                }
+
+                return;
+            }
+
+            columnIndex = inArray(column, leafColumns(columns));
             column.hidden = false;
             column.attributes = removeHiddenStyle(column.attributes);
             column.footerAttributes = removeHiddenStyle(column.footerAttributes);
@@ -5450,7 +5474,19 @@ var __meta__ = {
 
             that._updateCols();
             that._updateLockedCols();
-            setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:first-child>th"), columnIndex, true);
+
+            var container = that.thead;
+
+            headerCellIndex = columnIndex;
+            if (that.lockedHeader && lockedColumnsCount > columnIndex) {
+                container = that.lockedHeader;
+            } else {
+                headerCellIndex -= lockedColumnsCount;
+            }
+
+            cell = leafDataCells(container).eq(headerCellIndex);
+            cell[0].style.display = "";
+
             setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr.k-filter-row>th"), columnIndex, true);
             if (footer[0]) {
                 that._updateCols(footer.find(">.k-grid-footer-wrap>table"));

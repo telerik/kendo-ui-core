@@ -1208,6 +1208,155 @@
         equal(parseInt(groupCell.eq(1).attr("colspan"), 10), 1);
     });
 
+    test("show locked column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10, locked: true },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+
+        var rows = grid.thead.find("tr");
+        ok(grid.lockedHeader.find("tr").eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
+    test("show column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(0);
+        grid.showColumn(0);
+
+        var rows = grid.thead.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(rows.eq(0).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
+    test("show multiline group column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+
+        var rows = grid.thead.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(rows.eq(0).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
+    test("show multiline group locked column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+
+        var rows = grid.thead.find("tr");
+        var lockedRows = grid.lockedHeader.find("tr");
+
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+
+        ok(lockedRows.eq(0).find("th").eq(0).is(":visible"));
+
+        ok(lockedRows.eq(1).find("th").eq(0).is(":visible"));
+        ok(lockedRows.eq(1).find("th").eq(1).is(":visible"));
+
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(lockedRows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
+    test("show two multiline group locked column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", locked: true, columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", locked: true, columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(1);
+        grid.showColumn(1);
+
+        var rows = grid.thead.find("tr");
+        var lockedRows = grid.lockedHeader.find("tr");
+
+        ok(lockedRows.eq(0).find("th").eq(0).is(":visible"));
+        ok(lockedRows.eq(0).find("th").eq(1).is(":visible"));
+
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+
+        ok(lockedRows.eq(1).find("th").eq(0).is(":visible"));
+        ok(lockedRows.eq(1).find("th").eq(1).is(":visible"));
+        ok(lockedRows.eq(1).find("th").eq(2).is(":visible"));
+        ok(lockedRows.eq(1).find("th").eq(3).is(":visible"));
+
+        ok(lockedRows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
+
+    test("show multiline child group column header - multiline headers", function() {
+        var grid = setup({
+            columns: [
+                { title: "master", width: 10 },
+                { title: "master1", columns: [{ title: "master1-child", columns: [{ title: "master1-child-child", width: 20 }] }, { title: "master1-child1", width: 30 }] },
+                { title: "master2", columns: [{ title: "master2-child", width: 40 }, { title: "master2-child1", width: 50 }] }
+            ]
+        });
+
+        grid.hideColumn(grid.columns[1].columns[1]);
+        grid.showColumn(grid.columns[1].columns[1]);
+
+        var rows = grid.thead.find("tr");
+        ok(rows.eq(0).find("th").eq(0).is(":visible"));
+        ok(rows.eq(0).find("th").eq(1).is(":visible"));
+        ok(rows.eq(0).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(0).is(":visible"));
+        ok(rows.eq(1).find("th").eq(1).is(":visible"));
+        ok(rows.eq(1).find("th").eq(2).is(":visible"));
+        ok(rows.eq(1).find("th").eq(3).is(":visible"));
+        ok(rows.eq(2).find("th").eq(0).is(":visible"));
+    });
+
     test("show locked column header", function() {
         var grid = setup({
             columns: [
