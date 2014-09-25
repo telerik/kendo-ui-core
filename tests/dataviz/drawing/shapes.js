@@ -93,6 +93,14 @@
             ok(path.id);
         });
 
+        test("clip setting null clears clip", function() {
+            var path = new Path();
+            element.clip(path);
+            element.clip(null);
+
+            equal(element.options.clip, null);
+        });
+
         test("clip does not override id if it is already set to the passed path ", function() {
             var path = new Path();
             path.id = "foo";

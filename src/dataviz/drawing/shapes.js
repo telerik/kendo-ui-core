@@ -120,7 +120,7 @@
         clip: function(clip) {
             var options = this.options;
             if (defined(clip)) {
-                if (!clip.id) {
+                if (clip && !clip.id) {
                     clip.id = kendo.guid();
                 }
                 options.set("clip", clip);
