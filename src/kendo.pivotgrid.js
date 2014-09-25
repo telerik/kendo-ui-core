@@ -2475,50 +2475,64 @@ var __meta__ = {
 
     kendo.ui.PivotSettingTarget = Widget.extend({
         init: function(element, options) {
-            Widget.fn.init.call(this, element, options);
+            var that = this;
 
-            this.element.addClass("k-pivot-setting");
+            Widget.fn.init.call(that, element, options);
 
-            this.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
+            that.element.addClass("k-pivot-setting");
 
-            this._refreshHandler = $.proxy(this.refresh, this);
-            this.dataSource.first(CHANGE, this._refreshHandler);
+            that.dataSource = kendo.data.PivotDataSource.create(options.dataSource);
+
+            that._refreshHandler = $.proxy(that.refresh, that);
+            that.dataSource.first(CHANGE, that._refreshHandler);
 
             if (!options.template) {
-                this.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
-                    (this.options.enabled ?
+                that.options.template = "<div data-" + kendo.ns + 'name="${data.name || data}">${data.name || data}' +
+                    (that.options.enabled ?
                     '<a class="k-button k-button-icon k-button-bare"><span class="k-icon k-setting-delete"></span></a>' : "") + '</div>';
             }
 
-            this.template = kendo.template(this.options.template);
-            this.emptyTemplate = kendo.template(this.options.emptyTemplate);
+            that.template = kendo.template(that.options.template);
+            that.emptyTemplate = kendo.template(that.options.emptyTemplate);
 
-            this._sortable();
+            that._sortable();
 
-            var that = this;
+            that.element.on("click" + NS, ".k-button", function(e) {
+                var target = $(e.target);
+                var name = target.closest("[" + kendo.attr("name") + "]")
+                                 .attr(kendo.attr("name"));
 
-            this.element.on("click" + NS, ".k-setting-delete", function() {
-                var name = $(this).closest("[" + kendo.attr("name") + "]").attr(kendo.attr("name"));
-                if (name) {
+                if (!name) {
+                    return;
+                }
+
+                if (target.hasClass("k-setting-delete")) {
                     that.remove(name);
+                } else if (that.options.sortable && target.hasClass("k-button")) {
+                    //TODO: add sort filter and do not remove all
+                    that.dataSource.sort({
+                        field: name,
+                        dir: target.find(".k-i-sort-asc")[0] ? "desc" : "asc"
+                    });
                 }
             });
 
             if (options.filterable) {
-                this.fieldMenu = new ui.PivotFieldMenu(this.element, {
-                    messages: this.options.messages.fieldMenu,
+                that.fieldMenu = new ui.PivotFieldMenu(that.element, {
+                    messages: that.options.messages.fieldMenu,
                     filter: ".k-setting-filter",
-                    dataSource: this.dataSource
+                    dataSource: that.dataSource
                 });
             }
 
-            this.refresh();
+            that.refresh();
         },
 
         options: {
             name: "PivotSettingTarget",
             template: null,
             filterable: false,
+            sortable: false,
             emptyTemplate: "<div class='k-empty'>${data}</div>",
             setting: "columns",
             enabled: true,
@@ -2634,13 +2648,40 @@ var __meta__ = {
             }
         },
 
+        _sortExpr: function(expressions, item) {
+            for (var idx = 0, length = expressions.length; idx < length; idx++) {
+                if ((item.name || item) === expressions[idx].field) {
+                    return expressions[idx];
+                }
+            }
+
+            return null;
+        },
+
         refresh: function() {
             var items = this.dataSource[this.options.setting]();
+            var sortExpressions = this.dataSource.sort();
+            var sortExpr, sortIcon;
 
-            var html = this.emptyTemplate(this.options.messages.empty);
+            var html = "";
+            var length = items.length;
+            var idx = 0;
 
-            if (items.length) {
-                html = kendo.render(this.template, items);
+            if (length) {
+                for (; idx < length; idx++) {
+                    sortIcon = null;
+
+                    if (sortExpressions) {
+                        sortExpr = this._sortExpr(sortExpressions, items[idx]);
+                        if (sortExpr) {
+                            sortIcon = "k-i-sort-" + sortExpr.dir;
+                        }
+                    }
+
+                    html += this.template(extend({ sortIcon: sortIcon }, items[idx]));
+                }
+            } else {
+                html = this.emptyTemplate(this.options.messages.empty)
             }
 
             this.element.html(html);
@@ -2748,6 +2789,7 @@ var __meta__ = {
             autoBind: true,
             reorderable: true,
             filterable: false,
+            sortable: false,
             height: null,
             columnWidth: 100,
             configurator: "",
@@ -2891,6 +2933,12 @@ var __meta__ = {
             var template = '<span tabindex="0" class="k-button" data-' + kendo.ns + 'name="${data.name || data}">${data.name || data}';
             var icons = "";
 
+            if (options.sortable) {
+                icons += '#if (data.sortIcon) {#';
+                icons += '<span class="k-icon ${data.sortIcon} k-setting-sort"></span>';
+                icons += '#}#';
+            }
+
             if (options.filterable) {
                 icons += '<span class="k-icon k-filter k-setting-filter"></span>';
             }
@@ -2917,6 +2965,7 @@ var __meta__ = {
                 connectWith: this.rowFields,
                 setting: "columns",
                 filterable: this.options.filterable,
+                sortable: this.options.sortable,
                 messages: {
                     empty: this.options.messages.columnFields,
                     fieldMenu: this.options.messages.fieldMenu
@@ -2927,6 +2976,7 @@ var __meta__ = {
                 connectWith: this.columnFields,
                 setting: "rows",
                 filterable: this.options.filterable,
+                sortable: this.options.sortable,
                 messages: {
                     empty: this.options.messages.rowFields,
                     fieldMenu: this.options.messages.fieldMenu

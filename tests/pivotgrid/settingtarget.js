@@ -18,6 +18,19 @@
         }
     });
 
+    function settingTemplateWithSort() {
+        var template = '<span class="k-button" data-name="${data.name || data}">${data.name || data}';
+
+        var icons = '#if (data.sortIcon) {#';
+            icons += '<span class="k-icon ${data.sortIcon} k-setting-sort"></span>';
+            icons += '#}#';
+
+        template += '<span class="k-field-actions">' + icons + '</span>';
+        template += '</span>';
+
+        return template;
+    }
+
     test("pivotsettingtarget object is attached", function() {
         new PivotSettingTarget($(div), {});
 
@@ -440,6 +453,86 @@
 
         equal(dataSource.columns().length, 1);
         equal(dataSource.columns()[0].name, "bar");
+    });
+
+    test("clicking setting button sorts pivotgrid", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sortable: true
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        stub(dataSource, {
+            sort: dataSource.sort
+        });
+
+        $(div).children().find(".k-button:first").click();
+
+        ok(dataSource.calls("sort"));
+    });
+
+    /*test("clicking setting button changes sort direction", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "asc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            template: settingTemplateWithSort(),
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        var button = $(div).find(".k-button:first");
+
+        stub(dataSource, {
+            sort: dataSource.sort
+        });
+
+        $(div).find(".k-button:first").click();
+
+        equal(dataSource.args("sort")[0].dir, "desc");
+    });
+    */
+
+    test("clicking setting button adds 'ASC' sort icon", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "asc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: true,
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(sort.hasClass("k-i-sort-asc"));
+    });
+
+    test("clicking setting button adds 'DESC' sort icon", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: true,
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(sort.hasClass("k-i-sort-desc"));
     });
 
     test("validate returns true for measures setting and measure(dimension)", function() {
