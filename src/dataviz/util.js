@@ -238,7 +238,7 @@
         init: function(array) {
             array = array || [];
 
-            this.length = array.length;
+            this.length = 0;
             this._splice(0, array.length, array);
         },
 
