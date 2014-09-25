@@ -1631,41 +1631,6 @@
                 return this.dataSource.getByUid(this._editContainer.attr(kendo.attr("uid")));
             },
 
-            _displayRow: function(row) {
-                var that = this,
-                    model = that._modelForContainer(row),
-                    related,
-                    newRow,
-                    nextRow,
-                    isAlt = row.hasClass("k-alt");
-
-                if (model) {
-                    if (that.lockedContent) {
-                        related = $((isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model));
-                        that._relatedRow(row.last()).replaceWith(related);
-                    }
-
-                    that.angular("cleanup", function(){ return { elements: row.get() }; });
-
-                    newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
-                    row.replaceWith(newRow);
-
-                    that.angular("compile", function(){
-                        return {
-                            elements: newRow.get(),
-                            data: [ { dataItem: model } ]
-                        };
-                    });
-
-                    nextRow = newRow.next();
-                    if (nextRow.hasClass("k-detail-row") && nextRow.is(":visible")) {
-                        newRow.find(".k-hierarchy-cell .k-icon")
-                        .removeClass("k-plus")
-                        .addClass("k-minus");
-                    }
-                }
-            },
-
             _destroyEditable: function() {
                 var that = this;
 
