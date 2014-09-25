@@ -89,7 +89,7 @@
 
         var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-        equal(menu.options.sortable, true);
+        ok(menu.options.sortable);
         equal(menu.options.filterable, false);
     });
 
@@ -116,8 +116,28 @@
 
         var menu = grid.thead.find("th:first").data("kendoColumnMenu");
 
-        equal(menu.options.sortable, true);
+        ok(menu.options.sortable);
         equal(menu.options.messages.sortAscending, "foo");
+    });
+
+    test("passes extended sortable options", function() {
+        var grid = setup({
+            columns: [{
+                field: "foo",
+                sortable: {
+                    compare: "foo",
+                    mode: "single"
+                }
+            }],
+            sortable: {
+                mode: "multiple"
+            }
+        });
+
+        var menu = grid.thead.find("th:first").data("kendoColumnMenu");
+
+        equal(menu.options.sortable.compare, "foo");
+        equal(menu.options.sortable.mode, "multiple");
     });
 
     test("columnMenu as true boolean and filterable grid", function() {

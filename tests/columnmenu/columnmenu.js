@@ -287,6 +287,35 @@
         equal(sort[0].dir, "asc");
     });
 
+    test("selecting sort item sorts the dataSource with compare", function() {
+        var menu = setup({
+            field: "foo",
+            sortable: {
+                compare: function() {}
+            }
+        });
+
+        menu.wrapper.find(".k-sort-asc").click();
+        var sort = dataSource.sort();
+
+        ok(sort[0].compare);
+    });
+
+    test("selecting sort item sorts the dataSource with compare when sortable mode is multiple", function() {
+        var menu = setup({
+            field: "foo",
+            sortable: {
+                mode: "multiple",
+                compare: function() {}
+            }
+        });
+
+        menu.wrapper.find(".k-sort-asc").click();
+        var sort = dataSource.sort();
+
+        ok(sort[0].compare);
+    });
+
     test("clicking asc item highlight it", function() {
         var menu = setup({ field: "foo" });
 

@@ -3668,7 +3668,11 @@ var __meta__ = {
                         if (menu) {
                             menu.destroy();
                         }
-                        sortable = column.sortable !== false && columnMenu.sortable !== false ? options.sortable : false;
+
+                        sortable = column.sortable !== false && columnMenu.sortable !== false && options.sortable !== false ? extend({}, options.sortable, {
+                            compare: (column.sortable || {}).compare
+                        }) : false;
+
                         filterable = options.filterable && column.filterable !== false && columnMenu.filterable !== false ? extend({ pane: that.pane }, column.filterable, options.filterable) : false;
                         menuOptions = {
                             dataSource: that.dataSource,
