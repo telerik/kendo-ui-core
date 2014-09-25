@@ -357,6 +357,7 @@ var __meta__ = {
         _sortDataSource: function(item, dir) {
             var that = this,
                 sortable = that.options.sortable,
+                compare = sortable.compare === null ? undefined : sortable.compare,
                 dataSource = that.dataSource,
                 idx,
                 length,
@@ -370,7 +371,7 @@ var __meta__ = {
             }
 
             if (sortable === true || sortable.mode === "single") {
-                sort = [ { field: that.field, dir: dir } ];
+                sort = [ { field: that.field, dir: dir, compare: compare} ];
             } else {
                 for (idx = 0, length = sort.length; idx < length; idx++) {
                     if (sort[idx].field === that.field) {
@@ -378,7 +379,7 @@ var __meta__ = {
                         break;
                     }
                 }
-                sort.push({ field: that.field, dir: dir });
+                sort.push({ field: that.field, dir: dir, compare: compare });
             }
 
             dataSource.sort(sort);
