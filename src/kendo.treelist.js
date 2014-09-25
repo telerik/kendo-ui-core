@@ -33,6 +33,7 @@ var __meta__ = {
     var DOT = ".";
     var NS = ".kendoTreeList";
     var CLICK = "click";
+    var EDIT = "edit";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -67,6 +68,40 @@ var __meta__ = {
         dragClue: "k-drag-clue",
         dragClueText: "k-clue-text"
     };
+
+    function findNode(dom, virtual) {
+        virtual = [virtual];
+
+        var current = virtual.shift();
+
+        while(current) {
+
+            if (current.node === dom || current.root === dom) {
+                return current;
+            }
+
+            [].push.apply(virtual, current.children);
+
+            current = virtual.shift();
+        }
+
+        return null;
+    }
+
+    function empty(element) {
+        var parent = element.node.parentNode;
+
+        element.children = [];
+        element.remove();
+        element.render(parent, null);
+    }
+
+    function removeChild(element, index) {
+        var children = element.children;
+
+        //children[index].remove();
+        children.splice(index, 1);
+    }
 
     var TreeListModel = Model.define({
         id: "id",
@@ -381,12 +416,7 @@ var __meta__ = {
         },
 
         refresh: function() {
-            var dataSource = this.dataSource;
-
-            this._render({
-                data: dataSource.rootNodes(),
-                aggregates: dataSource.aggregates()
-            });
+            this._render();
         },
 
         _showStatus: function(statusDom) {
@@ -428,6 +458,10 @@ var __meta__ = {
             },
             editable: false
         },
+
+        events: [
+            EDIT
+        ],
 
         _toggleChildren: function(e) {
             var icon = $(e.currentTarget);
@@ -551,9 +585,12 @@ var __meta__ = {
         },
 
         _render: function(options) {
+            options = options || {};
+
             var colgroup, tbody, table;
             var messages = this.options.messages;
-            var data = options.data;
+            var data = this.dataSource.rootNodes();
+            var aggregates = this.dataSource.aggregates();
 
             this._absoluteIndex = 0;
 
@@ -668,6 +705,10 @@ var __meta__ = {
                     className.push(classNames.group);
                 }
 
+                if (model._edit) {
+                    className.push("k-grid-edit-row");
+                }
+
                 if (className.length) {
                     attr.className = className.join(" ");
                 }
@@ -747,6 +788,7 @@ var __meta__ = {
             var column = options.column;
             var value;
             var iconClass;
+            var attr = { "role": "gridcell" };
 
             if (column.template) {
                 value = column.template(model);
@@ -761,32 +803,36 @@ var __meta__ = {
                 value = "";
             }
 
-            if (column.expandable) {
-                children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
-                iconClass = [classNames.icon];
-
-                if (model.hasChildren) {
-                    iconClass.push(model.expanded ? classNames.iconCollapse : classNames.iconExpand);
-                } else {
-                    iconClass.push(classNames.iconHidden);
-                }
-
-                if (model._error) {
-                    iconClass.push(classNames.refresh);
-                } else if (!model.loaded() && model.expanded) {
-                    iconClass.push(classNames.loading);
-                }
-
-                children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
-            }
-
-            if (column.encoded) {
-                children.push(kendoTextElement(value));
+            if (model._edit && model.editable(column.field)) {
+                attr[kendo.attr("container-for")] = column.field;
             } else {
-                children.push(kendoHtmlElement (value));
+                if (column.expandable) {
+                    children = createPlaceholders({ level: options.level, className: classNames.iconPlaceHolder });
+                    iconClass = [classNames.icon];
+
+                    if (model.hasChildren) {
+                        iconClass.push(model.expanded ? classNames.iconCollapse : classNames.iconExpand);
+                    } else {
+                        iconClass.push(classNames.iconHidden);
+                    }
+
+                    if (model._error) {
+                        iconClass.push(classNames.refresh);
+                    } else if (!model.loaded() && model.expanded) {
+                        iconClass.push(classNames.loading);
+                    }
+
+                    children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
+                }
+
+                if (column.encoded) {
+                    children.push(kendoTextElement(value));
+                } else {
+                    children.push(kendoHtmlElement (value));
+                }
             }
 
-            return kendoDomElement("td", { "role": "gridcell" }, children);
+            return kendoDomElement("td", attr , children);
         },
 
         _sortable: function() {
@@ -881,21 +927,39 @@ var __meta__ = {
             }
 
             model = this.dataItem(row);
+            model._edit = true;
 
-            this._destroyEditable();
+            this._cancelEditor();
 
-            this._createEditor(row, model);
+            this._render();
+
+            this._createEditor(model);
+
+            this.trigger(EDIT, {
+                container: this.editable.element,
+                model: model
+            });
         },
 
-        _createEditor: function(row, model) {
-            row.addClass("k-grid-edit-row");
+        cancelRow: function() {
+            this._cancelEditor();
 
-            this.editable = new ui.Editable(row, {
-                target: this,
-                clearContainer: false,
-                model: model,
-                fields: this._editableFields(row.children(), model)
-            });
+            this._render();
+        },
+
+        _cancelEditor: function() {
+            var model;
+            var editable = this.editable;
+
+            if (editable) {
+                model = this.dataItem(editable.element);
+
+                this._destroyEditable();
+
+                this.dataSource.cancelChanges(model);
+
+                model._edit = false;
+            }
         },
 
         _destroyEditable: function() {
@@ -904,10 +968,22 @@ var __meta__ = {
             }
 
             this.editable.destroy();
+            this.editable.element.find("[" + kendo.attr("container-for") + "]").empty();
             this.editable = null;
         },
 
-        _editableFields: function(cells, model) {
+        _createEditor: function(model) {
+            var row = this.content.find("[" + kendo.attr("uid") + "=" + model.uid + "]");
+
+            this.editable = new ui.Editable(row, {
+                fields: this._editableFields(model),
+                target: this,
+                clearContainer: false,
+                model: model
+            });
+        },
+
+        _editableFields: function(model) {
             var fields = [];
             var columns = this.columns;
             var idx, length, field, column;
@@ -917,9 +993,6 @@ var __meta__ = {
                 field = column.field;
 
                 if (field && model.editable(field)) {
-
-                    cells.eq(idx).attr(kendo.attr("container-for"), field).empty();
-
                     fields.push({
                         field: field,
                         format: column.format,

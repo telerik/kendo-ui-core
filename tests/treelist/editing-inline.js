@@ -173,4 +173,83 @@
         equal(cells.eq(0).attr(kendo.attr("container-for")), "id");
         equal(cells.eq(1).attr(kendo.attr("container-for")), "parentId");
     });
+
+    test("editRow trigger edit event", 1, function() {
+        createTreeList({
+            edit: function() {
+                ok(true);
+            }
+        });
+
+        instance.editRow(instance.content.find("tr").first());
+    });
+
+    test("edit event argumetns", 2, function() {
+        createTreeList({
+            edit: function(e) {
+                var row = this.content.find("tr");
+                equal(e.container[0], row[0]);
+                equal(e.model.id, 1);
+            }
+        });
+
+        instance.editRow(instance.content.find("tr").first());
+    });
+
+    test("cancelRow destroy current editable", function() {
+        createTreeList();
+
+        instance.editRow("tr:first");
+        instance.cancelRow();
+
+        ok(!instance.editable);
+        ok(!instance.content.find("tr:first").data("kendoEditable"));
+    });
+
+    test("cancelRow cancel changes for current model", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1, parentId: null, text: "foo" },
+                    { id: 2, parentId: null, text: "bar" }
+                ]
+            }
+        });
+
+        var row = instance.content.find("tr").first();
+        var model = instance.dataItem(row);
+
+        instance.editRow(row);
+
+        model.set("text", "baz");
+
+        instance.cancelRow();
+
+        equal(model.text, "foo");
+        ok(!model.dirty);
+    });
+
+    test("cancelRow repaints the row", function() {
+        createTreeList();
+
+        var row = instance.content.find("tr").first();
+        instance.editRow(row);
+        instance.cancelRow();
+
+        row = instance.content.find("tr").first();
+
+        equal(row.find("input").length, 0);
+        equal(row.children().eq(0).text(), "1");
+    });
+
+    test("edit another row repaints the previous row", function() {
+        createTreeList();
+
+        instance.editRow(instance.content.find("tr").first());
+        instance.editRow(instance.content.find("tr").last());
+
+        var row = instance.content.find("tr").first();
+        equal(row.find("input").length, 0);
+        equal(row.children().eq(0).text(), "1");
+    });
 })();
