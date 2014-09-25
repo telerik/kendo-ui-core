@@ -63,6 +63,66 @@
         });
     })();
 
+    function baseClipTests(name, TNode, TElement) {
+        var node;
+        var srcElement;
+        var clip;
+        var bbox;
+
+        var TestNode = TNode.extend({
+            clipBBox: function() {
+                return bbox;
+            }
+        });
+
+        module("Clip tests / " + name, {
+            setup: function() {
+                srcElement = new TElement();
+                bbox = new g.Rect([10, 20], [100, 100]);
+                clip = d.Path.fromRect(bbox);
+                srcElement.clip(clip);
+                node = new TestNode(srcElement);
+            }
+        });
+
+        test("sets clip style", function() {
+            equal(node.element.style.clip, "rect(20px 110px 120px 10px)");
+        });
+
+        test("sets clip observer", function() {
+            equal(clip.observers().length, 2);
+        });
+
+        test("changing element clip option updates clip style", function() {
+            bbox = new g.Rect([20, 30], [100, 100]);
+
+            srcElement.clip(new Path());
+            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+        });
+
+        test("clearing element clip option updates clip style", function() {
+            srcElement.clip(null);
+
+            equal(node.element.style.clip, "rect(auto auto auto auto)");
+        });
+
+        test("changing element clip path updates clip style", function() {
+            bbox = new g.Rect([20, 30], [100, 100]);
+
+            clip.moveTo(10, 10);
+            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+        });
+
+        test("sets clip style", function() {
+            ok(node.element.style.clip);
+        });
+
+        test("clear removes clip observer", function() {
+            node.clear();
+            equal(clip.observers().length, 1);
+        });
+    }
+
     function baseNodeTests(name, TNode, TElement) {
         var node;
         var srcElement;
@@ -363,6 +423,7 @@
         var group;
         var groupNode;
 
+        baseClipTests("Group", vml.GroupNode, d.Group);
         baseNodeTests("Group", vml.GroupNode, d.Group);
 
         module("GroupNode", {
@@ -486,6 +547,26 @@
             groupNode.clear();
             equal(group.observers().length, 0);
         });
+
+        // ------------------------------------------------------------
+        module("GroupNode / clip", {
+            setup: function() {
+                group = new Group();
+                groupNode = new GroupNode(group);
+            }
+        });
+
+        test("clipBBox returns clip path bbox with src element current transformation", function() {
+            var clip = d.Path.fromRect(new g.Rect([10, 10], [100, 100]));
+            var parentGroup = new Group({
+                transform: g.transform().translate(100, 100)
+            });
+            parentGroup.append(group);
+
+            group.transform(g.transform().translate(100, 100));
+            compareBoundingBox(groupNode.clipBBox(clip), [210, 210, 310, 310]);
+        });
+
     })();
 
     // ------------------------------------------------------------
@@ -1052,6 +1133,21 @@
             node.clear();
             equal(shape.observers().length, 0);
         });
+
+        // ------------------------------------------------------------
+        module("Shape tests / " + name + " / clip", {
+            setup: function() {
+                node = createNode();
+                shape = node.srcElement;
+            }
+        });
+
+        test("clipBBox returns clip path bbox translated with minus the top left coordinates of the shape raw bbox", function() {
+            var clip = d.Path.fromRect(new g.Rect([10, 10], [100, 100]));
+            var topLeft = shape.rawBBox().topLeft();
+
+            compareBoundingBox(node.clipBBox(clip), [10 - topLeft.x, 10 - topLeft.y, 110 - topLeft.x, 110 - topLeft.y]);
+        });
     }
 
     // ------------------------------------------------------------
@@ -1117,6 +1213,8 @@
     (function() {
         var path,
             pathNode;
+
+        baseClipTests("PathNode", vml.PathNode, d.Path);
 
         module("PathNode", {
             setup: function() {
@@ -1187,6 +1285,8 @@
     (function() {
         var multiPath,
             multiPathNode;
+
+        baseClipTests("MultiPathNode", vml.MultiPathNode, d.MultiPath);
 
         module("MultiPathNode", {
             setup: function() {
@@ -1265,6 +1365,8 @@
     (function() {
         var circle,
             circleNode;
+
+        baseClipTests("CircleNode", vml.CircleNode, d.Circle);
 
         module("CircleNode", {
             setup: function() {
@@ -1380,6 +1482,8 @@
     (function() {
         var arc,
             arcNode;
+
+        baseClipTests("ArcNode", vml.ArcNode, d.Arc);
 
         module("ArcNode", {
             setup: function() {
@@ -1513,6 +1617,8 @@
     (function() {
         var text;
         var node;
+
+        baseClipTests("TextNode", vml.TextNode, d.Text);
 
         module("TextNode", {
             setup: function() {
@@ -1682,6 +1788,8 @@
     (function() {
         var image;
         var imageNode;
+
+        baseClipTests("ImageNode", vml.ImageNode, d.Image);
 
         module("ImageNode", {
             setup: function() {
