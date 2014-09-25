@@ -68,7 +68,7 @@
 
         instance.dataSource.data([]);
 
-        equal(instance.content.find("td").length, 0);
+        equal(instance.content.find("tr:not('.k-status')").length, 0);
     });
 
     test("renders expand arrows", function() {
@@ -466,5 +466,15 @@
         equal(footerCells.eq(1).text(), "9", "Child footer template, sum foo");
         equal(footerCells.eq(2).text(), "4", "Root footer template, max id");
         equal(footerCells.eq(3).text(), "17", "Root footer template, sum foo");
+    });
+
+    test("scrollable:false renders one table", function() {
+        createTreeList({
+            scrollable: false,
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        equal(instance.element.find("table").length, 1);
     });
 })();

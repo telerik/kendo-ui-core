@@ -333,8 +333,6 @@ var __meta__ = {
             this._dataSource();
             this._columns();
             this._layout();
-            this._domTrees();
-            this._header();
             this._sortable();
             //this._selectable();
             this._attachEvents();
@@ -366,13 +364,11 @@ var __meta__ = {
             var messages = this.options.messages;
 
             if (!this.content.find("tr").length) {
-                this.contentTree.render([
-                    kendoDomElement("div", { className: classNames.status }, [
-                        kendoDomElement("span", {
-                            className: classNames.icon + " " + classNames.loading
-                        }),
-                        kendoTextElement(messages.loading)
-                    ])
+                this._showStatus([
+                    kendoDomElement("span", {
+                        className: classNames.icon + " " + classNames.loading
+                    }),
+                    kendoTextElement(messages.loading)
                 ]);
             }
         },
@@ -392,6 +388,14 @@ var __meta__ = {
             });
         },
 
+        _showStatus: function(statusDom) {
+            this.contentTree.render([
+                kendoDomElement("tr", { className: classNames.status }, [
+                    kendoDomElement("td", null, statusDom)
+                ])
+            ]);
+        },
+
         _adjustHeight: function() {
             //this.content.height(this.element.height() - this.header.parent().outerHeight());
         },
@@ -408,12 +412,13 @@ var __meta__ = {
             this.content.off(NS);
 
             this._refreshHandler = this._errorHandler = this._progressHandler = null;
-            this.header = this.content = this.element = this.headerTree = this.contentTree = null;
+            this.header = this.content = this.element = this._headerTree = this.contentTree = null;
         },
 
         options: {
             name: "TreeList",
             autoBind: true,
+            scrollable: true,
             messages: {
                 noRows: "No records to display",
                 loading: "Loading...",
@@ -461,11 +466,6 @@ var __meta__ = {
                 .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource));
         },
 
-        _domTrees: function() {
-            this.headerTree = new kendoDom.Tree(this.header[0]);
-            this.contentTree = new kendoDom.Tree(this.content[0]);
-        },
-
         _columns: function() {
             var columns = this.options.columns || [];
 
@@ -509,25 +509,43 @@ var __meta__ = {
         _layout: function () {
             var element = this.element;
 
-            element
-                .addClass(classNames.wrapper)
-                .append("<div class='" + classNames.gridHeader + "'><div class='" + classNames.gridHeaderWrap + "' /></div>")
-                .append("<div class='" + classNames.gridContentWrap + "' />");
+            element.addClass(classNames.wrapper);
 
-            this.header = element.find(DOT + classNames.gridHeaderWrap);
-            this.content = element.find(DOT + classNames.gridContent);
-        },
+            var layout =
+                "<div class='#= gridHeader #'>" +
+                    "<div class='#= gridHeaderWrap #'>" +
+                        "<table role='grid'>" +
+                            "<thead role='rowgroup' />" +
+                        "</table>" +
+                    "</div>" +
+                "</div>" +
+                "<div class='#= gridContentWrap #'>" +
+                    "<table role='treegrid' tabindex='0'>" +
+                        "<tbody />" +
+                    "</table>" +
+                "</div>";
 
-        _header: function() {
-            var domTree = this.headerTree;
-            var colgroup = kendoDomElement("colgroup", null, this._cols());
-            var thead = kendoDomElement("thead", { "role": "rowgroup" }, [kendoDomElement("tr", { "role": "row" }, this._ths())]);
-            var table = kendoDomElement("table", {
-                "style": { "min-width": this.options.listWidth + "px" },
-                "role": "grid"
-            }, [colgroup, thead]);
+            if (!this.options.scrollable) {
+                layout =
+                    "<table role='treegrid' tabindex='0'>" +
+                        "<thead class='#= gridHeader #' role='rowgroup' />" +
+                        "<tbody />" +
+                    "</table>";
+            }
 
-            domTree.render([table]);
+            element.append(kendo.template(layout)(classNames));
+
+            this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack();
+            this._headerTree = new kendoDom.Tree(this.header[0]);
+            this._headerTree.render([kendoDomElement("tr", { "role": "row" }, this._ths())]);
+
+            this.content = element.find(DOT + classNames.gridContentWrap).find("tbody");
+
+            if (!this.content.length) {
+                this.content = element.find("tbody");
+            }
+
+            this.contentTree = new kendoDom.Tree(this.content[0]);
         },
 
         _render: function(options) {
@@ -539,36 +557,24 @@ var __meta__ = {
 
             if (options.error) {
                 // root-level error message
-                this.contentTree.render([
-                    kendoDomElement("div", { className: classNames.status }, [
-                        kendoTextElement(messages.requestFailed),
-                        kendoDomElement("button", {
-                            className: [ classNames.button, classNames.retry ].join(" ")
-                        }, [ kendoTextElement(messages.retry) ])
-                    ])
+                this._showStatus([
+                    kendoTextElement(messages.requestFailed),
+                    kendoDomElement("button", {
+                        className: [ classNames.button, classNames.retry ].join(" ")
+                    }, [ kendoTextElement(messages.retry) ])
                 ]);
             } else if (!data.length) {
                 // no rows message
-                this.contentTree.render([
-                    kendoDomElement("div", { className: classNames.status }, [
-                        kendoTextElement(messages.noRows)
-                    ])
+                this._showStatus([
+                    kendoTextElement(messages.noRows)
                 ]);
             } else {
                 // render rows
-                colgroup = kendoDomElement("colgroup", null, this._cols());
-                tbody = kendoDomElement("tbody", { "role": "rowgroup" }, this._trs({
+                this.contentTree.render(this._trs({
                     aggregates: options.aggregates,
                     data: data,
                     level: 0
                 }));
-                table = kendoDomElement("table", {
-                    "style": { "min-width": this.options.listWidth + "px" },
-                    "tabIndex": 0,
-                    "role": "treegrid"
-                }, [colgroup, tbody]);
-
-                this.contentTree.render([table]);
             }
         },
 
@@ -618,7 +624,7 @@ var __meta__ = {
                 cols.push(kendoDomElement("col", style, []));
             }
 
-            return cols;
+            return kendoDomElement("colgroup", null, cols);
         },
 
         _trs: function(options) {
