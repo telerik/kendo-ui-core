@@ -140,8 +140,8 @@ test("toDataUrl creates sharedStrings.xml", function() {
 test("toDataUrl stores shared strings in sharedStrings", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { value: "foo" }, { value: "foo" }, { value: "bar" } ]
+           rows: [
+               { cells: [ { value: "foo" }, { value: "foo" }, { value: "bar" } ] }
            ]
         } ]
     });
@@ -168,8 +168,8 @@ test("toDataUrl creates styles.xml", function() {
 test("toDataUrl stores bold style as 'b' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { bold: true, value: "foo" } ]
+           rows: [
+               { cells: [ { bold: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -184,8 +184,8 @@ test("toDataUrl stores bold style as 'b' element", function() {
 test("toDataUrl stores bold italic style as 'i' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { italic: true, value: "foo" } ]
+           rows: [
+               { cells: [ { italic: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -200,8 +200,8 @@ test("toDataUrl stores bold italic style as 'i' element", function() {
 test("toDataUrl stores underline style as 'u' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { underline: true, value: "foo" } ]
+           rows: [
+               { cells: [ { underline: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -216,8 +216,8 @@ test("toDataUrl stores underline style as 'u' element", function() {
 test("toDataUrl stores the fontName option as the 'val' attribute of the 'name' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { fontName: "Arial", value: "foo" } ]
+           rows: [
+               { cells: [ { fontName: "Arial", value: "foo" } ] }
            ]
         } ]
     });
@@ -232,8 +232,8 @@ test("toDataUrl stores the fontName option as the 'val' attribute of the 'name' 
 test("toDataUrl stores the fontSize option as the 'val' attribute of the 'sz' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { fontSize: 15, value: "foo" } ]
+           rows: [
+               { cells: [ { fontSize: 15, value: "foo" } ] }
            ]
         } ]
     });
@@ -248,8 +248,8 @@ test("toDataUrl stores the fontSize option as the 'val' attribute of the 'sz' el
 test("toDataUrl stores number formats", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { format: "foo", value: "foo" } ]
+           rows: [
+               { cells: [ { format: "foo", value: "foo" } ] }
            ]
         } ]
     });
@@ -264,8 +264,8 @@ test("toDataUrl stores number formats", function() {
 test("toDataUrl doesn't store default formats", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { format: "mm-dd-yy", value: "foo" } ]
+           rows: [
+               { cells: [ { format: "mm-dd-yy", value: "foo" } ] }
            ]
         } ]
     });
@@ -280,8 +280,8 @@ test("toDataUrl doesn't store default formats", function() {
 test("toDataUrl stores number format code", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { format: "foo", value: new Date() } ]
+           rows: [
+               { cells: [ { format: "foo", value: new Date() } ] }
            ]
         } ]
     });
@@ -296,8 +296,8 @@ test("toDataUrl stores number format code", function() {
 test("toDataUrl stores number format id", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { format: "foo", value: "foo" } ]
+           rows: [
+               { cells: [ { format: "foo", value: "foo" } ] }
            ]
         } ]
     });
@@ -312,8 +312,8 @@ test("toDataUrl stores number format id", function() {
 test("toDataUrl stores default format id", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { format: "mm-dd-yy", value: "foo" } ]
+           rows: [
+               { cells: [ { format: "mm-dd-yy", value: "foo" } ] }
            ]
         } ]
     });
@@ -328,8 +328,8 @@ test("toDataUrl stores default format id", function() {
 test("toDataUrl stores cell style as 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { bold: true, value: "foo" } ]
+           rows: [
+               { cells: [ { bold: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -344,8 +344,8 @@ test("toDataUrl stores cell style as 'xf' element", function() {
 test("toDataUrl stores default cell style style as 'xf'", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { value: "foo" } ]
+           rows: [
+               { cells: [ { value: "foo" } ] }
            ]
         } ]
     });
@@ -360,8 +360,8 @@ test("toDataUrl stores default cell style style as 'xf'", function() {
 test("toDataUrl stores cell font index as 'fontId' attribute of the 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { bold: true, value: "foo" } ]
+           rows: [
+               { cells: [ { bold: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -376,8 +376,8 @@ test("toDataUrl stores cell font index as 'fontId' attribute of the 'xf' element
 test("toDataUrl sets 'applyFont' attribute to '1' if bold is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { bold: true, value: "foo" } ]
+           rows: [
+               { cells: [ { bold: true, value: "foo" } ] }
            ]
         } ]
     });
@@ -392,11 +392,8 @@ test("toDataUrl sets 'applyFont' attribute to '1' if bold is set", function() {
 test("toDataUrl reuses fonts and styles", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [
-                   { bold: true, value: "foo" },
-                   { bold: true, value: "bar" }
-               ]
+           rows: [
+               { cells: [ { bold: true, value: "foo" }, { bold: true, value: "bar" } ] }
            ]
         } ]
     });
@@ -412,8 +409,8 @@ test("toDataUrl reuses fonts and styles", function() {
 test("toDataUrl sets the rgb attribute of the 'color' element when color style is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { color: "#ff0000", value: "foo" } ]
+           rows: [
+               { cells: [ { color: "#ff0000", value: "foo" } ] }
            ]
         } ]
     });
@@ -428,8 +425,8 @@ test("toDataUrl sets the rgb attribute of the 'color' element when color style i
 test("toDataUrl and short color", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { color: "#f00", value: "foo" } ]
+           rows: [
+               { cells: [ { color: "#f00", value: "foo" } ] }
            ]
         } ]
     });
@@ -444,8 +441,8 @@ test("toDataUrl and short color", function() {
 test("toDataUrl and rgba color", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { color: "#aabbccddee", value: "foo" } ]
+           rows: [
+               { cells: [ { color: "#aabbccddee", value: "foo" } ] }
            ]
         } ]
     });
@@ -460,8 +457,8 @@ test("toDataUrl and rgba color", function() {
 test("toDataUrl creates two default 'fill' elements", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { value: "foo" } ]
+           rows: [
+               { cells: [ { value: "foo" } ] }
            ]
         } ]
     });
@@ -476,8 +473,8 @@ test("toDataUrl creates two default 'fill' elements", function() {
 test("toDataUrl creates a 'fill' element if the background style option is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { background: "red", value: "foo" } ]
+           rows: [
+               { cells: [ { background: "red", value: "foo" } ] }
            ]
         } ]
     });
@@ -493,8 +490,8 @@ test("toDataUrl creates a 'fill' element if the background style option is set",
 test("toDataUrl stores cell fill index as 'fillId' attribute of the 'xf' element", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { background: "red", value: "foo" } ]
+           rows: [
+               { cells: [ { background: "red", value: "foo" } ] }
            ]
         } ]
     });
@@ -509,8 +506,8 @@ test("toDataUrl stores cell fill index as 'fillId' attribute of the 'xf' element
 test("toDataUrl sets 'applyFill' attribute to '1' if background is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { background: "a0b0c0", value: "foo" } ]
+           rows: [
+               { cells: [ { background: "a0b0c0", value: "foo" } ] }
            ]
         } ]
     });
@@ -525,8 +522,8 @@ test("toDataUrl sets 'applyFill' attribute to '1' if background is set", functio
 test("toDataUrl sets the rgb attribute of the 'fgColor' element when background style is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { background: "#ff0000", value: "foo" } ]
+           rows: [
+               { cells: [ { background: "#ff0000", value: "foo" } ] }
            ]
         } ]
     });
@@ -541,8 +538,8 @@ test("toDataUrl sets the rgb attribute of the 'fgColor' element when background 
 test("toDataUrl sets 'applyAlignment' attribute to '1' if hAlign is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { hAlign: "center", value: "foo" } ]
+           rows: [
+               { cells: [ { hAlign: "center", value: "foo" } ] }
            ]
         } ]
     });
@@ -557,8 +554,8 @@ test("toDataUrl sets 'applyAlignment' attribute to '1' if hAlign is set", functi
 test("toDataUrl sets 'applyAlignment' attribute to '1' if vAlign is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { vAlign: "middle", value: "foo" } ]
+           rows: [
+               { cells: [ { vAlign: "middle", value: "foo" } ] }
            ]
         } ]
     });
@@ -573,8 +570,8 @@ test("toDataUrl sets 'applyAlignment' attribute to '1' if vAlign is set", functi
 test("toDataUrl creates 'alignment' element and sets its 'horizontal' attribute if hAlign is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { hAlign: "center", value: "foo" } ]
+           rows: [
+               { cells: [ { hAlign: "center", value: "foo" } ] }
            ]
         } ]
     });
@@ -589,8 +586,8 @@ test("toDataUrl creates 'alignment' element and sets its 'horizontal' attribute 
 test("toDataUrl creates 'alignment' element and sets its 'vertical' attribute if vAlign is set", function() {
     var workbook = new kendo.ooxml.Workbook({
         sheets: [ {
-           data: [
-               [ { vAlign: "center", value: "foo" } ]
+           rows: [
+               { cells: [ { vAlign: "center", value: "foo" } ] }
            ]
         } ]
     });

@@ -301,21 +301,21 @@ var Worksheet = kendo.Class.extend({
         this._mergeCells = [];
     },
     toXML: function() {
-        var data = this.options.data || [];
+        var rows = this.options.rows || [];
 
         return WORKSHEET({
             freezePane: this.options.freezePane,
             columns: this.options.columns,
-            data: $.map(data, $.proxy(this._row, this, data)),
+            data: $.map(rows, $.proxy(this._row, this, rows)),
             mergeCells: this._mergeCells,
             autoFilter: this.options.filter ? "A1:" + ref(0, this.options.columns.length - 1) : null
         });
     },
-    _row: function(rows, cells, rowIndex) {
+    _row: function(rows, row, rowIndex) {
         this._cellIndex = 0;
 
         return {
-            data: $.map(cells, $.proxy(this._cell, this, rows, rowIndex))
+            data: $.map(row.cells, $.proxy(this._cell, this, rows, rowIndex))
         };
     },
     _lookupString: function(value) {
@@ -413,7 +413,7 @@ var Worksheet = kendo.Class.extend({
 
             for (var ri = 1; ri < rowSpan; ri++) {
                 if (rows[rowIndex + ri]) {
-                    rows[rowIndex + ri].splice(this._cellIndex, 0, {});
+                    rows[rowIndex + ri].cells.splice(this._cellIndex, 0, {});
                 }
             }
 

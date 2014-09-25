@@ -15,10 +15,10 @@ module("Worksheet", {
 });
 
 function Worksheet(options) {
-    options = options || [ [ { value: "foo" } ] ];
+    options = options || [ { cells: [ { value: "foo" } ] } ];
 
     if ($.isArray(options)) {
-        options = { data: options };
+        options = { rows: options };
     }
 
     return new kendo.ooxml.Worksheet(options, sharedStrings, styles);
@@ -42,13 +42,11 @@ test("toXML sets the r attribute to the alphanumeric and cell number (index plus
 });
 
 test("toXML sets the 'r' attribute to the alphanumeric when index is greater than 26", function() {
-    var row = new Array(27);
+    var cells = new Array(27);
 
-    row.push({})
+    cells.push({})
 
-    var worksheet = Worksheet([
-        row
-    ]);
+    var worksheet = Worksheet([ { cells: cells } ]);
 
     var dom = $(worksheet.toXML());
 
@@ -59,7 +57,7 @@ test("toXML skips empty cells", function() {
     var row = new Array(25);
 
     var worksheet = Worksheet([
-        [,,{}]
+        { cells: [,,{}] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -77,7 +75,7 @@ test("toXML sets the t attribute to 's' when the value is a string", function() 
 
 test("toXML sets the 't' attribute to 'd' when the value is a date", function() {
     var worksheet = Worksheet([
-        [{ value: new Date() }]
+        { cells: [{ value: new Date() }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -87,7 +85,7 @@ test("toXML sets the 't' attribute to 'd' when the value is a date", function() 
 
 test("toXML sets the 't' attribute to 'n' when the value is a number", function() {
     var worksheet = Worksheet([
-        [{ value: 1 }]
+        { cells: [{ value: 1 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -97,7 +95,7 @@ test("toXML sets the 't' attribute to 'n' when the value is a number", function(
 
 test("toXML stores numbers", function() {
     var worksheet = Worksheet([
-        [{ value: 1 }]
+        { cells: [{ value: 1 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -107,7 +105,7 @@ test("toXML stores numbers", function() {
 
 test("toXML sets the 't' attribute to 'b' when the value is a boolean", function() {
     var worksheet = Worksheet([
-        [{ value: true }]
+        { cells: [{ value: true }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -117,7 +115,7 @@ test("toXML sets the 't' attribute to 'b' when the value is a boolean", function
 
 test("toXML doesn't set the 't' attribute when the value isn't primitive", function() {
     var worksheet = Worksheet([
-        [{ value: {} }]
+        { cells: [{ value: {} }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -127,7 +125,7 @@ test("toXML doesn't set the 't' attribute when the value isn't primitive", funct
 
 test("toXML doesn't store value that isn't primitive", function() {
     var worksheet = Worksheet([
-        [{ value: {} }]
+        { cells: [{ value: {} }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -137,7 +135,7 @@ test("toXML doesn't store value that isn't primitive", function() {
 
 test("toXML stores 'true' as '1'", function() {
     var worksheet = Worksheet([
-        [{ value: true }]
+        { cells: [{ value: true }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -147,7 +145,7 @@ test("toXML stores 'true' as '1'", function() {
 
 test("toXML stores 'false' as '0'", function() {
     var worksheet = Worksheet([
-        [{ value: false }]
+        { cells: [{ value: false }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -157,7 +155,7 @@ test("toXML stores 'false' as '0'", function() {
 
 test("toXML sets the 's' attribute of dates", function() {
     var worksheet = Worksheet([
-        [{ value: new Date() }]
+        { cells: [{ value: new Date() }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -169,7 +167,7 @@ test("toXML stores dates as ISO strings", function() {
     var date = new Date();
 
     var worksheet = Worksheet([
-        [{ value: date }]
+        { cells: [{ value: date }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -202,7 +200,9 @@ test("toXML increments uniqueCount of sharedStrings", function() {
 });
 
 test("toXML increments shared string count when existing value is used", function() {
-    var worksheet = Worksheet([ [ { value: "foo"}, { value: "foo" } ] ]);
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo"}, { value: "foo" } ]  }
+    ]);
 
     worksheet.toXML();
 
@@ -210,7 +210,9 @@ test("toXML increments shared string count when existing value is used", functio
 });
 
 test("toXML doesn't increment uniqueCount when existing value is used", function() {
-    var worksheet = Worksheet([ [ { value: "foo"}, { value: "foo" } ] ]);
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo"}, { value: "foo" } ]  }
+    ]);
 
     worksheet.toXML();
 
@@ -218,7 +220,9 @@ test("toXML doesn't increment uniqueCount when existing value is used", function
 });
 
 test("toXML creates a new shared string", function() {
-    var worksheet = Worksheet([ [ { value: "foo"}, { value: "bar" } ] ]);
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo"}, { value: "bar" } ]  }
+    ]);
 
     worksheet.toXML();
 
@@ -260,7 +264,9 @@ test("toXML sets the 'r' attribute to index plus one", function() {
 });
 
 test("toXML renders cells as children elements", function() {
-    var worksheet = Worksheet([[ { value: "foo" }, { value: "bar" } ]]);
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo" }, { value: "bar" } ] }
+    ]);
 
     var dom = $(worksheet.toXML());
     equal(dom.find("c:first v").text(), "0");
@@ -268,7 +274,9 @@ test("toXML renders cells as children elements", function() {
 });
 
 test("toXML adds styles", function() {
-    var worksheet = Worksheet([[ { bold: true, value: "foo" } ]]);
+    var worksheet = Worksheet([
+        { cells: [ { bold: true, value: "foo" } ] }
+    ]);
 
     worksheet.toXML();
 
@@ -276,7 +284,9 @@ test("toXML adds styles", function() {
 });
 
 test("toXML sets style index plus one as 's' attribute", function() {
-    var worksheet = Worksheet([[ { bold: true, value: "foo" } ]]);
+    var worksheet = Worksheet([
+        { cells: [ { bold: true, value: "foo" } ] }
+    ]);
 
     var dom = $(worksheet.toXML());
     equal(dom.find("c").attr("s"), 1);
@@ -284,9 +294,9 @@ test("toXML sets style index plus one as 's' attribute", function() {
 
 test("toXML reuses styles", function() {
     var worksheet = Worksheet([
-        [ { italic: true, value: "foo" } ],
-        [ { bold: true, value: "foo" } ],
-        [ { bold: true, value: "foo" } ]
+        { cells: [ { italic: true, value: "foo" } ] },
+        { cells: [ { bold: true, value: "foo" } ] },
+        { cells: [ { bold: true, value: "foo" } ] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -294,7 +304,9 @@ test("toXML reuses styles", function() {
 });
 
 test("toXML does not set the 's' attribute if style is not set", function() {
-    var worksheet = Worksheet([[ { value: "foo" } ]]);
+    var worksheet = Worksheet([
+        { cells: [ { value: "foo" } ] }
+    ]);
 
     var dom = $(worksheet.toXML());
     equal(dom.find("c").attr("s"), null);
@@ -388,7 +400,7 @@ test("toXML sets the 'width' attribute of the 'col' element according to forumla
 
 test("toXML creates the 'mergeCell' element for cells with colSpan", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 2 }]
+        { cells: [{ colSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -398,7 +410,7 @@ test("toXML creates the 'mergeCell' element for cells with colSpan", function() 
 
 test("toXML creates the 'mergeCell' element for cells with rowSpan", function() {
     var worksheet = Worksheet([
-        [{ rowSpan: 2 }]
+        { cells: [{ rowSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -408,7 +420,7 @@ test("toXML creates the 'mergeCell' element for cells with rowSpan", function() 
 
 test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with colSpan", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 2 }]
+        { cells: [{ colSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -418,7 +430,7 @@ test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with c
 
 test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with rowSpan", function() {
     var worksheet = Worksheet([
-        [{ rowSpan: 2 }]
+        { cells: [{ rowSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -428,7 +440,7 @@ test("toXML sets the 'ref' attribute of the 'mergeCell' element for cells with r
 
 test("toXML creates the 'mergeCell' element for cells with rowSpan", function() {
     var worksheet = Worksheet([
-        [{ rowSpan: 2 }]
+        { cells: [{ rowSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -439,7 +451,7 @@ test("toXML creates the 'mergeCell' element for cells with rowSpan", function() 
 
 test("toXML adds extra cells after cell with colSpan", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 3 }]
+        { cells: [{ colSpan: 3 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -449,9 +461,9 @@ test("toXML adds extra cells after cell with colSpan", function() {
 
 test("toXML adds missing cells after cell with rowSpan", function() {
     var worksheet = Worksheet([
-        [{ rowSpan: 3 }, {}],
-        [ {} ],
-        [ {} ],
+        { cells: [{ rowSpan: 3 }, {}] },
+        { cells: [ {} ] },
+        { cells: [ {} ] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -461,7 +473,7 @@ test("toXML adds missing cells after cell with rowSpan", function() {
 
 test("toXML creates empty extra cells after cell with colSpan", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 2 }]
+        { cells: [{ colSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -471,7 +483,7 @@ test("toXML creates empty extra cells after cell with colSpan", function() {
 
 test("toXML adjusts the ref of cells after colspan", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 3 }, { }]
+        { cells: [{ colSpan: 3 }, { }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -481,7 +493,7 @@ test("toXML adjusts the ref of cells after colspan", function() {
 
 test("toXML sets the 'count' attribute of the 'mergeCells' element", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 3 }, { }]
+        { cells: [{ colSpan: 3 }, { }] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -491,8 +503,8 @@ test("toXML sets the 'count' attribute of the 'mergeCells' element", function() 
 
 test("toXML creates 'mergeCell' elements for multiple cells with colSpan attribute", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 3 }, { }, { colSpan: 2}],
-        [{ colSpan: 3 }, { }, { colSpan: 2}]
+        { cells: [{ colSpan: 3 }, { }, { colSpan: 2}] },
+        { cells: [{ colSpan: 3 }, { }, { colSpan: 2}] }
     ]);
 
     var dom = $(worksheet.toXML());
@@ -502,7 +514,7 @@ test("toXML creates 'mergeCell' elements for multiple cells with colSpan attribu
 
 test("toXML creates one mergeCell for a cell with both colSpan and rowSpan set", function() {
     var worksheet = Worksheet([
-        [{ colSpan: 2, rowSpan: 2 }]
+        { cells: [{ colSpan: 2, rowSpan: 2 }] }
     ]);
 
     var dom = $(worksheet.toXML());
