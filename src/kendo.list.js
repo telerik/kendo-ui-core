@@ -136,7 +136,8 @@ var __meta__ = {
         },
 
         _header: function() {
-            var template = this.options.headerTemplate;
+            var that = this;
+            var template = that.options.headerTemplate;
             var header;
 
             if ($.isFunction(template)) {
@@ -144,11 +145,16 @@ var __meta__ = {
             }
 
             if (template) {
-                this.list.prepend(template);
+                that.list.prepend(template);
 
-                header = this.ul.prev();
+                header = that.ul.prev();
 
-                this.header = header[0] ? header : null;
+                that.header = header[0] ? header : null;
+                if (that.header) {
+                    that.angular("compile", function(){
+                        return { elements: that.header };
+                    });
+                }
             }
         },
 
