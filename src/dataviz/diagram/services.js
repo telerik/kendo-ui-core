@@ -913,7 +913,6 @@
                 if (this.startPoint.equals(data.point)) {
                     this.diagram.trigger("click", data);
                 }
-
             },
             _discardNewConnection: function () {
                 if (this.newConnection) {
