@@ -103,13 +103,13 @@
           style="text-decoration:none">parent page</A>.
         </span>
       </div>
-      <div style="width: 500px; height: 100px; overflow: hidden; border: 1px solid black; position: relative">
+      <div style="width: 500px; height: 100px; padding: 10px; overflow: hidden; border: 1px solid black; position: relative; border-radius: 30px;">
         Opacity: <b>broken</b>; border-radius: <b>broken</b><br /> CSS
         transforms: <b>broken</b>.  Shape A: translate by -origin, apply
         transform, render element.  Shape B: translate by +origin, append A.
         Return B.<br />
         <b>€</b>
-        <div style="position: absolute; left: 50px; top: 50px; width: 100px; height: 100px; background: yellow; border: 1px solid red">
+        <div style="position: absolute; right: -50px; top: 50px; width: 100px; height: 100px; background: yellow; border: 1px solid red; clip: rect(10px, 50px, 150px, 10px)">
           Implement clipping!
         </div>
       </div>
@@ -124,7 +124,9 @@
     <script>
       function draw(sel) {
         var el = $(sel)[0];
+        console.time("drawing");
         kendo.dataviz.drawing.drawDOM(el, function(root){
+          console.timeEnd("drawing");
           var el = $("<div class='surface' style='position: absolute; background: white; right: 1em; top: 1em; bottom: 1em; border: 1px solid #000; width: 600px'></div>").appendTo(document.body);
           var surface = kendo.dataviz.drawing.Surface.create(el);
           surface.draw(root);
@@ -133,8 +135,12 @@
 
       function pdf(sel) {
         var el = $(sel)[0];
+        console.time("pdf");
         kendo.dataviz.drawing.drawDOM(el, function(root){
-          kendo.dataviz.drawing.pdf.toDataURL(root, window.open);
+          kendo.dataviz.drawing.pdf.toDataURL(root, function(url){
+            console.timeEnd("pdf");
+            window.open(url);
+          });
         });
       }
 

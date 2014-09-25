@@ -119,6 +119,39 @@
         }
     }
 
+    function elementRoundBox(element, box, type) {
+        var style = getComputedStyle(element);
+
+        var rTL = getBorderRadius(style, "top-left");
+        var rTR = getBorderRadius(style, "top-right");
+        var rBL = getBorderRadius(style, "bottom-left");
+        var rBR = getBorderRadius(style, "bottom-right");
+
+        if (type > 0) {
+            var bt = getBorder(style, "top");
+            var br = getBorder(style, "right");
+            var bb = getBorder(style, "bottom");
+            var bl = getBorder(style, "left");
+            rTL.x -= bl.width; rTL.y -= bt.width;
+            rTR.x -= br.width; rTR.y -= bt.width;
+            rBR.x -= br.width; rBR.y -= bb.width;
+            rBL.x -= bl.width; rBL.y -= bb.width;
+        }
+
+        if (type > 1) {
+            var pt = parseFloat(getPropertyValue(style, "padding-top"));
+            var pr = parseFloat(getPropertyValue(style, "padding-right"));
+            var pb = parseFloat(getPropertyValue(style, "padding-bottom"));
+            var pl = parseFloat(getPropertyValue(style, "padding-left"));
+            rTL.x -= pl; rTL.y -= pt;
+            rTR.x -= pr; rTR.y -= pt;
+            rBR.x -= pr; rBR.y -= pb;
+            rBL.x -= pl; rBL.y -= pb;
+        }
+
+        return roundBox(box, rTL, rTR, rBR, rBL);
+    }
+
     // Create a drawing.Path for a rounded rectangle.  Receives the
     // bounding box and the border-radiuses in CSS order (top-left,
     // top-right, bottom-right, bottom-left).  The radiuses must be
@@ -169,6 +202,73 @@
     }
 
     function renderBorderAndBackground(element, group) {
+        var style = getComputedStyle(element);
+        var top = getBorder(style, "top");
+        var right = getBorder(style, "right");
+        var bottom = getBorder(style, "bottom");
+        var left = getBorder(style, "left");
+
+        var rTL = getBorderRadius(style, "top-left");
+        var rTR = getBorderRadius(style, "top-right");
+        var rBL = getBorderRadius(style, "bottom-left");
+        var rBR = getBorderRadius(style, "bottom-right");
+
+        var dir = getPropertyValue(style, "direction");
+
+        var bgColor = getPropertyValue(style, "background-color");
+        bgColor = pdf.parseColor(bgColor);
+        if (bgColor && bgColor.a == 0) {
+            bgColor = null;     // opacity zero
+        }
+
+        var innerbox = innerBox(element.getBoundingClientRect(), element, "border-*-width");
+
+        // CSS "clip" property - if present, replace the group with a
+        // new one which is clipped.  This must happen before drawing
+        // the borders and background.
+        (function(){
+            var clip = getPropertyValue(style, "clip");
+            var m = /^\s*rect\((.*)\)\s*$/.exec(clip);
+            if (m) {
+                var a = m[1].split(/[ ,]+/g);
+                var top = a[0] == "auto" ? innerbox.top : parseFloat(a[0]) + innerbox.top;
+                var right = a[1] == "auto" ? innerbox.right : parseFloat(a[1]) + innerbox.left;
+                var bottom = a[2] == "auto" ? innerbox.bottom : parseFloat(a[2]) + innerbox.top;
+                var left = a[3] == "auto" ? innerbox.left : parseFloat(a[3]) + innerbox.left;
+                var tmp = new drawing.Group();
+                setClipping(tmp,
+                            (new drawing.Path({ fill: null, stroke: null })
+                             .moveTo(left, top)
+                             .lineTo(right, top)
+                             .lineTo(right, bottom)
+                             .lineTo(left, bottom)
+                             .close()));
+                group.append(tmp);
+                group = tmp;
+            }
+        })();
+
+        var boxes = element.getClientRects();
+        for (var i = 0; i < boxes.length; ++i) {
+            drawOne(boxes[i], i == 0, i == boxes.length - 1);
+        }
+
+        // overflow: hidden/auto - if present, replace the group with
+        // a new one clipped by the inner box.
+        (function(){
+            var overflow = getPropertyValue(style, "overflow");
+            if (/^(hidden|auto)$/.test(overflow)) {
+                var clipPath = elementRoundBox(element, innerbox, 1);
+                var tmp = new drawing.Group();
+                setClipping(tmp, clipPath);
+                group.append(tmp);
+                group = tmp;
+            }
+        })();
+
+        // the contents will be drawn in this group which is possibly clipped.
+        return group; // only utility functions after this line.
+
         // this function will be called to draw each border.  it
         // draws starting at origin and the resulted path must be
         // translated/rotated to be placed in the proper position.
@@ -314,68 +414,13 @@
                 group.append(path);
             }
         }
-
-        var style = getComputedStyle(element);
-        var top = getBorder(style, "top");
-        var right = getBorder(style, "right");
-        var bottom = getBorder(style, "bottom");
-        var left = getBorder(style, "left");
-
-        var rTL = getBorderRadius(style, "top-left");
-        var rTR = getBorderRadius(style, "top-right");
-        var rBL = getBorderRadius(style, "bottom-left");
-        var rBR = getBorderRadius(style, "bottom-right");
-
-        var dir = getPropertyValue(style, "direction");
-
-        var bgColor = getPropertyValue(style, "background-color");
-        bgColor = pdf.parseColor(bgColor);
-        if (bgColor && bgColor.a == 0) {
-            bgColor = null;     // opacity zero
-        }
-
-        var boxes = element.getClientRects();
-        for (var i = 0; i < boxes.length; ++i) {
-            drawOne(boxes[i], i == 0, i == boxes.length - 1);
-        }
     }
 
     function renderImage(element, group) {
         var box = getContentBox(element);
         var rect = new geo.Rect([ box.left, box.top ], [ box.width, box.height ]);
         var image = new drawing.Image(element.src, rect);
-
-        // if border-radius is in use, the image must be clipped.  for
-        // each corner, we need to subtract from the radius the border
-        // and padding widths, to get the same rendering as in browser.
-
-        // XXX: a bit of cleanup would be in order.  This duplicates
-        // some lines from above.
-        var style = getComputedStyle(element);
-
-        var bt = getBorder(style, "top");
-        var br = getBorder(style, "right");
-        var bb = getBorder(style, "bottom");
-        var bl = getBorder(style, "left");
-
-        var rTL = getBorderRadius(style, "top-left");
-        var rTR = getBorderRadius(style, "top-right");
-        var rBL = getBorderRadius(style, "bottom-left");
-        var rBR = getBorderRadius(style, "bottom-right");
-
-        var pt = parseFloat(getPropertyValue(style, "padding-top"));
-        var pr = parseFloat(getPropertyValue(style, "padding-right"));
-        var pb = parseFloat(getPropertyValue(style, "padding-bottom"));
-        var pl = parseFloat(getPropertyValue(style, "padding-left"));
-
-        setClipping(image, roundBox(
-            box,
-            { x: rTL.x - bl.width - pl , y: rTL.y - bt.width - pt },
-            { x: rTR.x - br.width - pr , y: rTR.y - bt.width - pt },
-            { x: rBR.x - br.width - pr , y: rBR.y - bb.width - pb },
-            { x: rBL.x - bl.width - pl , y: rBL.y - bb.width - pb }
-        ));
-
+        setClipping(image, elementRoundBox(element, box, 2));
         group.append(image);
     }
 
@@ -409,6 +454,7 @@
             renderImage(element, group);
             return;
         }
+
         var children = [];
         for (var i = element.firstChild; i; i = i.nextSibling) {
             switch (i.nodeType) {
@@ -521,7 +567,7 @@
             setTransform(group, m);
         }
 
-        renderBorderAndBackground(element, group);
+        group = renderBorderAndBackground(element, group);
         renderContents(element, group);
         if (t) {
             element.style.transform = prevTransform;
