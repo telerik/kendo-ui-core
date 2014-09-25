@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.editable", "../../kendo.dataviz.themes", "../kendo.util",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.editable", "../../kendo.window", "../../kendo.dataviz.themes", "../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
@@ -49,6 +49,7 @@
             isArray = $.isArray,
             isFunction = kendo.isFunction,
             isString = Utils.isString,
+            isPlainObject = $.isPlainObject,
 
             math = Math;
 
@@ -101,7 +102,8 @@
             Y = "y",
             MOUSEWHEEL_NS = "DOMMouseScroll" + NS + " mousewheel" + NS,
             MOBILE_ZOOM_RATE = 0.05,
-            MOBILE_PAN_DISTANCE = 5;
+            MOBILE_PAN_DISTANCE = 5,
+            BUTTON_TEMPLATE = '<a class="k-button k-button-icontext #=className#" href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
 
         diagram.DefaultConnectors = [{
             name: TOP,
@@ -122,6 +124,21 @@
                 return shape.getPosition("center");
             }
         }];
+
+        var defaultCommands = {
+            cancel: {
+                text: "Cancel",
+                imageClass: "k-cancel",
+                className: "k-diagram-cancel",
+                iconClass: "k-icon"
+            },
+            update: {
+                text: "Update",
+                imageClass: "k-update",
+                className: "k-diagram-update",
+                iconClass: "k-icon"
+            }
+        };
 
         diagram.shapeDefaults = function(extra) {
             var defaults = {
@@ -1358,6 +1375,7 @@
 
                 that.canvas.draw();
                 this._shouldRefresh = true;
+                this._initMobile();
             },
             options: {
                 name: "Diagram",
@@ -1394,6 +1412,316 @@
             },
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
+
+            _initMobile: function() {
+                var options = this.options;
+                var that = this;
+
+                this._isMobile = (options.mobile === true && kendo.support.mobileOS) ||
+                                    options.mobile === "phone" ||
+                                    options.mobile === "tablet";
+
+                if (this._isMobile) {
+                    var html = this.wrapper.addClass("k-diagram-mobile").wrap(
+                            '<div data-' + kendo.ns + 'role="view" ' +
+                            'data-' + kendo.ns + 'init-widgets="false"></div>'
+                        )
+                        .parent();
+
+                    this.pane = kendo.mobile.ui.Pane.wrap(html);
+                    this.view = this.pane.view();
+                    this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? { modal: false } : {
+                        align: "bottom center",
+                        position: "bottom center",
+                        effect: "slideIn:up"
+                    };
+
+                    if (options.height) {
+                        this.pane.element.parent().css(HEIGHT, options.height);
+                    }
+
+                    this._editAnimation = "slide";
+
+                    this.view.bind("show", function() {
+                        if (that._isLocked()) {
+                            that._updateTablesWidth();
+                            that._applyLockedContainersWidth();
+                            that._syncLockedContentHeight();
+                            that._syncLockedHeaderHeight();
+                            that._syncLockedFooterHeight();
+                        }
+                    });
+                }
+            },
+
+            edit: function(item) {
+                var dataItem = item.dataItem;
+                var uid = dataItem.uid;
+
+                this.cancelEdit();
+
+                var that = this,
+                    html = '<div ' + kendo.attr("uid") + '="' + dataItem.uid + '" class="k-popup-edit-form' + (this._isMobile ? ' k-mobile-list' : '') + '"><div class="k-edit-form-container">',
+                    column,
+                    command,
+                    fields = [],
+                    idx,
+                    length,
+                    tmpl,
+                    updateText,
+                    cancelText,
+                    tempCommand,
+                    attr,
+                    editable = that.options.editable,
+                    template = editable.template,
+                    options = isPlainObject(editable) ? editable.window : {},
+                    settings = deepExtend({}, kendo.Template, that.options.templateSettings);
+
+                options = options || {};
+
+                if (template) {
+                    if (typeof template === "string") {
+                        template = window.unescape(template);
+                    }
+
+                    html += (kendo.template(template, settings))(dataItem);
+                } else {
+                    var modelFields = dataItem.fields;
+                    for (var field in modelFields) {
+                        html += '<div class="k-edit-label"><label for="' + field + '">' + (field || "") + '</label></div>';
+                        if (dataItem.editable && dataItem.editable(field)) {
+                            fields.push({ field: field });
+                            html += '<div ' + kendo.attr("container-for") + '="' + field + '" class="k-edit-field"></div>';
+                        }
+                    }
+                }
+
+                var container;
+
+                if (!this._isMobile) {
+                    html += '<div class="k-edit-buttons k-state-default">';
+                    html += this._createButton("update") + this._createButton("cancel");
+                    html += '</div></div></div>';
+
+                    container = this._editContainer = $(html)
+                    .appendTo(this.wrapper).eq(0)
+                    .kendoWindow(deepExtend({
+                        modal: true,
+                        resizable: false,
+                        draggable: true,
+                        title: "Edit",
+                        visible: false,
+                        close: function(e) {
+                            if (e.userTriggered) {
+                                //The bellow line is required due to: draggable window in IE, change event will be triggered while the window is closing
+                                e.sender.element.focus();
+                                if (that.trigger("cancel", { container: container, model: dataItem })) {
+                                    e.preventDefault();
+                                    return;
+                                }
+
+                                that.cancelEdit();
+                            }
+                        }
+                    }, options));
+                } else {
+                    html += "</div></div>";
+                    that.editView = that.pane.append(
+                        '<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false" class="k-grid-edit-form">'+
+                            '<div data-' + kendo.ns + 'role="header" class="k-header">'+
+                                that._createButton("update") +
+                                (options.title || "Edit") +
+                                that._createButton("cancel") +
+                            '</div>'+
+                            html +
+                        '</div>');
+                    container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
+                }
+
+                that.editable = that._editContainer
+                    .kendoEditable({
+                        fields: fields,
+                        model: dataItem,
+                        clearContainer: false,
+                        target: that
+                    }).data("kendoEditable");
+
+                // TODO: Replace this code with labels and for="ID"
+                if (that._isMobile) {
+                    container.find("input[type=checkbox],input[type=radio]")
+                             .parent(".k-edit-field")
+                             .addClass("k-check")
+                             .prev(".k-edit-label")
+                             .addClass("k-check")
+                             .click(function() {
+                                 $(this).next().children("input").click();
+                             });
+                }
+
+                that._openPopUpEditor();
+
+                that.trigger("edit", { container: container, model: dataItem });
+
+                this._attachButtonEvents();
+            },
+
+            _attachButtonEvents: function() {
+                var container = this.editView ? this.editView.element : this._editContainer;
+
+                if (!this._editCancelClickHandler) {
+                    this._editCancelClickHandler = proxy(this._editCancelClick, this);
+                }
+
+                container.on(CLICK + NS, "a.k-diagram-cancel", this._editCancelClickHandler);
+
+                if (!this._editUpdateClickHandler) {
+                    this._editUpdateClickHandler = proxy(this._editUpdateClick, this);
+                }
+
+                container.on(CLICK + NS, "a.k-diagram-update", this._editUpdateClickHandler);
+            },
+
+            _editUpdateClick: function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                this.saveEdit();
+            },
+
+            _editCancelClick: function(e) {
+                var model = this.editable.options.model;
+                var container = this.editView ? this.editView.element : this._editContainer;
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (this.trigger("cancel", { container: container, model: model })) {
+                    return;
+                }
+
+                this.cancelEdit();
+            },
+
+            _openPopUpEditor: function() {
+                if (!this._isMobile) {
+                    this._editContainer.data("kendoWindow").center().open();
+                } else {
+                    this.pane.navigate(this.editView, this._editAnimation);
+                }
+            },
+
+            saveEdit: function() {
+                if (this.editable && this.editable.end() &&
+                    !this.trigger("save", { container: this._editContainer, model: this._modelFromContainer() } )) {
+
+                    this.dataSource.sync();
+                    this._destroyEditable();
+                }
+            },
+
+            cancelEdit: function() {
+                if (this._editContainer) {
+                    this._destroyEditable();
+
+                    this.dataSource.cancelChanges(this._modelFromContainer());
+                }
+            },
+
+            _modelFromContainer: function() {
+                return this.dataSource.getByUid(this._editContainer.attr(kendo.attr("uid")));
+            },
+
+            _displayRow: function(row) {
+                var that = this,
+                    model = that._modelForContainer(row),
+                    related,
+                    newRow,
+                    nextRow,
+                    isAlt = row.hasClass("k-alt");
+
+                if (model) {
+                    if (that.lockedContent) {
+                        related = $((isAlt ? that.lockedAltRowTemplate : that.lockedRowTemplate)(model));
+                        that._relatedRow(row.last()).replaceWith(related);
+                    }
+
+                    that.angular("cleanup", function(){ return { elements: row.get() }; });
+
+                    newRow = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+                    row.replaceWith(newRow);
+
+                    that.angular("compile", function(){
+                        return {
+                            elements: newRow.get(),
+                            data: [ { dataItem: model } ]
+                        };
+                    });
+
+                    nextRow = newRow.next();
+                    if (nextRow.hasClass("k-detail-row") && nextRow.is(":visible")) {
+                        newRow.find(".k-hierarchy-cell .k-icon")
+                        .removeClass("k-plus")
+                        .addClass("k-minus");
+                    }
+                }
+            },
+
+            _destroyEditable: function() {
+                var that = this;
+
+                var destroy = function() {
+                    if (that.editable) {
+
+                        var container = that.editView ? that.editView.element : that._editContainer;
+
+                        if (container) {
+                            container.off(CLICK + NS, "a.k-diagram-cancel", that._editCancelClickHandler);
+                            container.off(CLICK + NS, "a.k-diagram-update", that._editUpdateClickHandler);
+                        }
+
+                        that._detachModelChange();
+                        that.editable.destroy();
+                        that.editable = null;
+                        that._editContainer = null;
+                        that._destroyEditView();
+                    }
+                };
+
+                if (that.editable) {
+                    that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
+                }
+            },
+
+            _destroyEditView: function() {
+                if (this.editView) {
+                    this.editView.purge();
+                    this.editView = null;
+                }
+            },
+
+            _attachModelChange: function(model) {
+                var that = this;
+
+                that._modelChangeHandler = function(e) {
+                    that._modelChange({ field: e.field, model: this });
+                };
+
+                model.bind("change", that._modelChangeHandler);
+            },
+
+            _detachModelChange: function() {
+                var that = this,
+                    container = that._editContainer,
+                    model = that._modelFromContainer();
+
+                if (model) {
+                    model.unbind(CHANGE, that._modelChangeHandler);
+                }
+            },
+
+            _createButton: function(commandName) {
+                return kendo.template(BUTTON_TEMPLATE)(defaultCommands[commandName]);
+            },
 
             _initElements: function() {
                 this.wrapper = this.element.empty()
@@ -2700,10 +3028,10 @@
                     if (this.connectionsDataSource) {
                         this._addConnections(this.connectionsDataSource.view());
                     }
-                }
 
-                if (this.options.layout) {
-                    this.layout(this.options.layout);
+                    if (this.options.layout) {
+                        this.layout(this.options.layout);
+                    }
                 }
             },
 
