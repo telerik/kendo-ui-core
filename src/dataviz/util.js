@@ -237,6 +237,8 @@
     var ElementsArray = kendo.Class.extend({
         init: function(array) {
             array = array || [];
+
+            this.length = array.length;
             this._splice(0, array.length, array);
         },
 
