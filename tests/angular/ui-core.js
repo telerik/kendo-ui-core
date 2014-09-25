@@ -179,15 +179,17 @@ withAngularTests("Angular (UI Core)", function(runTest){
             dataValueField: "id",
             template: "{{dataItem.text}} {{dataItem.id}}",
             valueTemplate: "{{dataItem.id}} {{dataItem.text}}",
+            headerTemplate: "<div id='test-header-template'>|{{1+1}}|</div>"
         };
         var input = $("<select kendo-dropdownlist='list' k-options='options'></select>").appendTo(dom);
-        expect(3);
+        expect(4);
         $scope.whenRendered(function(){
             var items = $scope.list.items();
             equal($(items[0]).text(), "Foo 1");
             equal($(items[1]).text(), "Bar 2");
             $scope.list.value(2);
             equal($scope.list.span.text(), "2 Bar");
+            equal($("#test-header-template").html(), "|2|");
             start();
         });
     });
