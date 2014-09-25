@@ -512,7 +512,7 @@ var __meta__ = {
 
             return extend({ encoded: encoded, hidden: hidden }, column);
         });
-    };
+    }
 
     function isVisible(column) {
         return visibleColumns([column]).length > 0;
@@ -526,6 +526,10 @@ var __meta__ = {
             }
             return result;
         });
+    }
+
+    function toJQuery(elements) {
+        return $(elements).map(function() { return this.toArray(); });
     }
 
     function columnVisiblePosition(column, columns, row, cellCounts) {
@@ -596,7 +600,7 @@ var __meta__ = {
     }
 
     function updateRowSpan(container) {
-        var rows = container.find("tr:not(.k-filter-row)")
+        var rows = container.find("tr:not(.k-filter-row)");
 
         var emptyRowsCount = rows.filter(function() {
             return !$(this).children(":visible").length;
@@ -612,7 +616,7 @@ var __meta__ = {
     }
 
     function removeEmptyRows(container) {
-        var rows = container.find("tr:not(.k-filter-row)")
+        var rows = container.find("tr:not(.k-filter-row)");
 
         var emptyRowsCount = rows.filter(function() {
             return !$(this).children().length;
@@ -629,7 +633,7 @@ var __meta__ = {
 
 
     function mapColumnToCellRows(columns, cells, rowIndex, rows, cellIndex) {
-        var idx, row, length
+        var idx, row, length;
 
         for (idx = 0, length = columns.length; idx < length; idx++) {
             row = rows[rowIndex] || [];
@@ -4654,7 +4658,7 @@ var __meta__ = {
                 if (columns[idx].locked) {
 
                     if (isVisible(columns[idx])) {
-                        var colSpan = 1;
+                        colSpan = 1;
 
                         if (columns[idx].columns) {
                             colSpan = leafColumns(columns[idx].columns).length - hiddenLeafColumnsCount(columns[idx].columns);
@@ -4741,7 +4745,7 @@ var __meta__ = {
                 var colSpan = parseInt(cell.attr(colSpanAttr), 10) || 1;
                 idx = 0;
                 while (idx < colSpan) {
-                    var child = cells.eq(idx + (offset - 1));
+                    child = cells.eq(idx + (offset - 1));
                     result = result.add(this._childColumns(child));
                     var value = parseInt(child.attr(colSpanAttr), 10);
                     if (value > 1) {
@@ -4822,7 +4826,7 @@ var __meta__ = {
 
                 tr = table.find("thead tr:not(.k-filter-row)");
                 for (idx = 0, length = rows.length; idx < length; idx++) {
-                    cells = $(rows[idx]).map(function() { return this.toArray(); });
+                    cells = toJQuery(rows[idx]);
                     tr.eq(idx).append(that.thead.find("tr:eq(" + idx + ") .k-group-cell").add(cells));
                 }
 
@@ -4880,7 +4884,7 @@ var __meta__ = {
                    var rows = [{ rowSpan: 1, cells: [], index: 0 }];
                    that._prepareColumns(rows, columns);
 
-                   for (var idx = 0; idx < rows.length; idx++) {
+                   for (idx = 0; idx < rows.length; idx++) {
                        html += "<tr>";
                        if (hasDetails) {
                            html += '<th class="k-hierarchy-cell">&nbsp;</th>';
@@ -5241,7 +5245,7 @@ var __meta__ = {
                 filterCells = container.find("tr.k-filter-row").find("th.k-group-cell").length,
                 length = container.find("tr:first").find("th.k-group-cell").length,
                 rows = container.find("tr").filter(function() {
-                    return !$(this).children(":visible").length
+                    return !$(this).children(":visible").length;
                 });
 
             if(groups > length) {
@@ -5335,7 +5339,7 @@ var __meta__ = {
 
                 setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, false);
 
-                for (var idx = 0; idx < column.columns.length; idx++) {
+                for (idx = 0; idx < column.columns.length; idx++) {
                    this.hideColumn(column.columns[idx]);
                 }
 
@@ -5458,7 +5462,7 @@ var __meta__ = {
 
                 setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, true);
 
-                for (var idx = 0; idx < column.columns.length; idx++) {
+                for (idx = 0; idx < column.columns.length; idx++) {
                    this.showColumn(column.columns[idx]);
                 }
 
