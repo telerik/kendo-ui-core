@@ -12,7 +12,7 @@
 
         public int PredecessorID { get; set; }
         public int SuccessorID { get; set; }
-        public int Type { get; set; }
+        public DependencyType Type { get; set; }
 
         public GanttDependency ToEntity()
         {
@@ -21,7 +21,7 @@
                 ID = DependencyID,
                 PredecessorID = PredecessorID,
                 SuccessorID = SuccessorID,
-                Type = Type
+                Type = (int)Type
             };
         }
     }

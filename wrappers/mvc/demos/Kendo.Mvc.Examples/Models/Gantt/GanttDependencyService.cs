@@ -28,7 +28,7 @@
                 DependencyID = dependency.ID,
                 PredecessorID = dependency.PredecessorID,
                 SuccessorID = dependency.SuccessorID,
-                Type = dependency.Type
+                Type = (DependencyType)dependency.Type
             }).AsQueryable();  
         }
 

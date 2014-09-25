@@ -711,6 +711,7 @@
     <Compile Include="UI\ContextMenu\ContextMenuOrientation.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSortDescriptorFactoryBase.cs" />
     <Compile Include="UI\DataSource\Fluent\FilterableAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\Gantt\DependencyType.cs" />
     <Compile Include="UI\Grid\Fluent\GridColumnFilterableCellSettingsBuilder.cs" />
     <Compile Include="UI\Grid\GridFilterMode.cs" />
     <Compile Include="UI\Grid\Settings\GridColumnFilterableCellSettings.cs" />
@@ -2226,4 +2227,12 @@
   <ItemGroup>
     <Compile Include="UI\TreeMap\TreeMapType.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\ColorPicker\Settings\ColorPickerMessagesSettings.cs" /><Compile Include="UI\ColorPicker\Fluent\ColorPickerMessagesSettingsBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Gantt\Settings\GanttEditableSettings.cs" /><Compile Include="UI\Gantt\Fluent\GanttEditableSettingsBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\ColorPicker\Settings\ColorPickerMessagesSettings.cs" />
+    <Compile Include="UI\ColorPicker\Fluent\ColorPickerMessagesSettingsBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Gantt\Settings\GanttEditableSettings.cs" />
+    <Compile Include="UI\Gantt\Fluent\GanttEditableSettingsBuilder.cs" />
+  </ItemGroup>
+</Project>

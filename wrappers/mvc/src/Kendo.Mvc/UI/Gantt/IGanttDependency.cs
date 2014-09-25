@@ -4,5 +4,10 @@
 
     public interface IGanttDependency
     {
+        DependencyType Type 
+        { 
+            get;
+            set; 
+        }
     }
 }
