@@ -1,5 +1,6 @@
 (function() {
     var dataviz = kendo.dataviz,
+        deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
         Point = g.Point,
@@ -9,21 +10,32 @@
         canv = d.canvas,
         Surface = canv.Surface;
 
+    var Context = kendo.Class.extend({
+        init: function() {
+            this._state = [];
+        },
+
+        beginPath: $.noop,
+        clearRect: $.noop,
+        close: $.noop,
+        drawImage: $.noop,
+        fill: $.noop,
+        fillText: $.noop,
+        lineTo: $.noop,
+        moveTo: $.noop,
+        restore: function() {
+            deepExtend(this, this._state.pop());
+        },
+        save: function() {
+            this._state.push(deepExtend({}, this));
+        },
+        stroke: $.noop,
+        strokeText: $.noop
+    });
+
     function mockContext(members) {
-        return kendo.deepExtend({
-            beginPath: $.noop,
-            clearRect: $.noop,
-            closePath: $.noop,
-            drawImage: $.noop,
-            fill: $.noop,
-            fillText: $.noop,
-            lineTo: $.noop,
-            moveTo: $.noop,
-            restore: $.noop,
-            save: $.noop,
-            stroke: $.noop,
-            strokeText: $.noop
-        }, members);
+        var context = new Context();
+        return deepExtend(context, members);
     }
 
     // ------------------------------------------------------------
@@ -219,8 +231,6 @@
         var node;
         var srcElement;
 
-        clipTests(d.Group, canv.Node, "Node");
-
         module("Node", {
             setup: function() {
                 node = new canv.Node();
@@ -298,8 +308,39 @@
             node.load([new d.Group()]);
         });
 
+        // ------------------------------------------------------------
+        module("Node / source observer", {
+            setup: function() {
+                srcElement = new d.Element();
+                node = new canv.Node(srcElement);
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(srcElement.observers()[0], node);
+        });
+
+        test("clear removes srcElement observer", function() {
+            node.clear();
+            equal(srcElement.observers().length, 0);
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var group;
+        var node;
+
+        clipTests(d.Group, canv.GroupNode, "GroupNode");
+
+        module("GroupNode", {
+            setup: function() {
+                group = new d.Group();
+                node = new canv.GroupNode(group);
+            }
+        });
+
         test("renders transform", function() {
-            var group = new d.Group();
             group.transform(new Matrix(1e-6, 2, 3, 4, 5, 6));
 
             var ctx = mockContext({
@@ -322,21 +363,27 @@
             node.renderTo(ctx);
         });
 
-        // ------------------------------------------------------------
-        module("Node / source observer", {
-            setup: function() {
-                srcElement = new d.Element();
-                node = new canv.Node(srcElement);
-            }
+        test("renders opacity", function() {
+            group.opacity(0.5);
+
+            var ctx = mockContext();
+            node.renderTo(ctx);
+
+            equal(ctx.globalAlpha, 0.5);
         });
 
-        test("Adds srcElement observer", function() {
-            equal(srcElement.observers()[0], node);
-        });
+        test("multiplies opacity with parent opacity", function() {
+            group.opacity(0.5);
 
-        test("clear removes srcElement observer", function() {
-            node.clear();
-            equal(srcElement.observers().length, 0);
+            var childGroup = new d.Group({ opacity: 0.5 });
+            node.load([childGroup]);
+
+            var ctx = mockContext({
+                restore: $.noop
+            });
+            node.renderTo(ctx);
+
+            equal(ctx.globalAlpha, 0.25);
         });
     })();
 
@@ -351,6 +398,15 @@
 
                 node = new TNode(shape);
             }
+        });
+
+        test("renders global opacity", function() {
+            shape.opacity(0.5);
+
+            var ctx = mockContext();
+            node.renderTo(ctx);
+
+            equal(ctx.globalAlpha, 0.5);
         });
 
         test("renders stroke", function() {
@@ -421,6 +477,19 @@
             node.renderTo(ctx);
         });
 
+        test("multiplies stroke opacity with global opacity", function() {
+            shape.options.set("stroke.opacity", 0.5);
+            shape.opacity(0.5);
+
+            var ctx = mockContext({
+                stroke: function() {
+                    equal(ctx.globalAlpha, 0.25);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
         test("does not render stroke opacity if not set", function() {
             var ctx = mockContext({
                 stroke: function() {
@@ -475,6 +544,19 @@
             node.renderTo(ctx);
         });
 
+        test("multiplies fill opacity with global opacity", function() {
+            shape.options.set("fill.opacity", 0.5);
+            shape.opacity(0.5);
+
+            var ctx = mockContext({
+                fill: function() {
+                    equal(ctx.globalAlpha, 0.25);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
+
         test("does not render fill if not set", 0, function() {
             shape.options.set("fill", null);
 
@@ -522,6 +604,23 @@
 
             node.renderTo(ctx);
         });
+
+        test("multiplies stroke and fill opacity with global opacity", function() {
+            shape.options.set("stroke.opacity", 0.5);
+            shape.options.set("fill.opacity", 0.5);
+            shape.opacity(0.5);
+
+            var ctx = mockContext({
+                fill: function() {
+                    equal(ctx.globalAlpha, 0.25);
+                },
+                stroke: function() {
+                    equal(ctx.globalAlpha, 0.25);
+                }
+            });
+
+            node.renderTo(ctx);
+        });
     }
 
     // ------------------------------------------------------------
@@ -530,7 +629,6 @@
             pathNode;
 
         paintTests(d.Path, canv.PathNode, "PathNode");
-        clipTests(d.Path, canv.PathNode, "PathNode");
 
         module("PathNode", {
             setup: function() {
@@ -548,7 +646,7 @@
             }
         });
 
-        test("saves and restores context", 2, function() {
+        test("saves and restores context", function() {
             pathNode.renderTo(mockContext({
                 save: function() {
                     ok(true);
