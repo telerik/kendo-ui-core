@@ -18,8 +18,17 @@ kendo.data.ExcelExporter = kendo.Class.extend({
     init: function(options) {
         this.columns = options.columns || [];
         this.options = options;
-        this.dataSource =
-            kendo.data.DataSource.create(options.dataSource instanceof kendo.data.DataSource ? options.dataSource.options : options.dataSource);
+        var dataSource = options.dataSource;
+        if (dataSource instanceof kendo.data.DataSource) {
+            this.dataSource = new dataSource.constructor($.extend(
+                {},
+                dataSource.options,
+                {
+                    page: dataSource.page()
+                }));
+        } else {
+            this.dataSource = kendo.data.DataSource.create(dataSource);
+        }
     },
     workbook: function() {
         var promise = this.dataSource.fetch();

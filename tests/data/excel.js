@@ -83,6 +83,27 @@ test("only data items that match the filter are exported", 2, function() {
     });
 });
 
+test("exports current page", 2, function() {
+    var options = {
+        columns: [ { field: "foo" } ],
+        dataSource: new kendo.data.DataSource({
+            data: [
+               { foo: "foo" },
+               { foo: "bar" }
+            ],
+            pageSize: 1
+        })
+    };
+
+    options.dataSource.read();
+    options.dataSource.page(2);
+
+    testWorkbook(options, function(book) {
+        equal(book.sheets[0].rows.length, 2);
+        equal(book.sheets[0].rows[1].cells[0].value, "bar");
+    });
+});
+
 test("freezes first row", function() {
     testWorkbook({ columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].freezePane.rowSplit, 1);
@@ -93,6 +114,6 @@ test("enables filtering", function() {
     testWorkbook({ filter: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].filter, true);
     });
-})
+});
 
 }());
