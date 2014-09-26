@@ -747,6 +747,48 @@ function loadAll() {
     return loadComponents(listKendoFiles());
 }
 
+function checkDeps(files) {
+    var loading = [];
+    var loaded = [];
+    function indent() {
+        var n = loading.length;
+        var str = "";
+        while (n-- > 0) str += "..";
+        return str;
+    }
+    function loadOne(filename, basedir){
+        filename = filename.replace(/(\.js)?$/, ".js");
+        filename = PATH.resolve(basedir, filename);
+        filename = PATH.relative(SRCDIR, filename);
+        filename = PATH.normalize(filename);
+        if (loaded.indexOf(filename) >= 0) {
+            return;
+        }
+        var out = indent() + filename, cycle = false;
+        if (loading.indexOf(filename) >= 0) {
+            out += " *** CYCLE!";
+            cycle = true;
+        }
+        console.log(out);
+        if (cycle) {
+            throw new Error(filename + " depends on itself");
+        }
+        loading.push(filename);
+        var comp = getKendoFile(filename);
+        comp.getAMDDeps().forEach(function(f){
+            loadOne(f, comp.dirname());
+        });
+        loaded.push(loading.pop());
+    }
+    files.forEach(function(file){
+        var comp = getKendoFile(file);
+        if (!comp.isSubfile()) {
+            loadOne(comp.filename(), comp.dirname());
+            console.log("---");
+        }
+    });
+}
+
 /* -----[ exports ]----- */
 
 exports.getKendoFile = getKendoFile;
@@ -772,10 +814,12 @@ if (require.main === module) (function(){
         .describe("full", "Full build")
         .describe("min", "Minified build")
         .describe("kendo-config", "Generate kendo-config.json")
+        .describe("check-deps", "Report circular dependencies")
         .boolean("all-deps")
         .boolean("direct-deps")
         .boolean("bundle-all")
         .boolean("min")
+        .boolean("check-deps")
         .string("subfiles")
         .string("build")
         .wrap(80)
@@ -817,6 +861,11 @@ if (require.main === module) (function(){
 
     if (ARGV["bundle-all"]) {
         files = loadAll();
+    }
+
+    if (ARGV["check-deps"]) {
+        checkDeps(files || REST);
+        return;
     }
 
     if (ARGV["full"] || ARGV["min"]) {
