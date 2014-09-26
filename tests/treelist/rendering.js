@@ -477,4 +477,66 @@
 
         equal(instance.element.find("table").length, 1);
     });
+
+    function button(command) {
+        command = command ? (".k-grid-" + command) : ""
+        return instance.content.find(".k-button.k-button-icontext" + command);
+    }
+
+    test("command column renders default buttons", function() {
+        createTreeList({
+            dataSouce: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        var editButton = button("edit");
+        equal(editButton.length, 1);
+        equal(editButton.text(), "Edit");
+        equal(editButton.find(".k-icon.k-edit").length, 1);
+    });
+
+    test("command column with multiple buttons renders them all", function() {
+        createTreeList({
+            dataSouce: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit", "destroy"] }
+            ]
+        });
+
+        equal(button("edit").length, 1);
+        equal(button("delete").length, 1);
+    });
+
+    test("command column allows command customization", function() {
+        createTreeList({
+            dataSouce: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "edit", text: "Change" } ] }
+            ]
+        });
+
+        var editButton = button("edit");
+        equal(editButton.length, 1);
+        equal(editButton.text(), "Change");
+    });
+
+    test("custom commands render button without icon", function() {
+        createTreeList({
+            dataSouce: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [ { name: "foo", text: "Bar" } ] }
+            ]
+        });
+
+        var fooButton = button();
+        equal(fooButton.length, 1);
+        equal(fooButton.text(), "Bar");
+        equal(fooButton.find(".k-icon").length, 0);
+    });
 })();

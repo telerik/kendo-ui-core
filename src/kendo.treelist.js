@@ -69,6 +69,44 @@ var __meta__ = {
         dragClueText: "k-clue-text"
     };
 
+    var defaultCommands = {
+        create: {
+            text: "Add new record",
+            imageClass: "k-add",
+            className: "k-grid-add"
+        },
+        cancel: {
+            text: "Cancel changes",
+            imageClass: "k-cancel",
+            className: "k-grid-cancel-changes"
+        },
+        save: {
+            text: "Save changes",
+            imageClass: "k-update",
+            className: "k-grid-save-changes"
+        },
+        destroy: {
+            text: "Delete",
+            imageClass: "k-delete",
+            className: "k-grid-delete"
+        },
+        edit: {
+            text: "Edit",
+            imageClass: "k-edit",
+            className: "k-grid-edit"
+        },
+        update: {
+            text: "Update",
+            imageClass: "k-update",
+            className: "k-primary k-grid-update"
+        },
+        canceledit: {
+            text: "Cancel",
+            imageClass: "k-cancel",
+            className: "k-grid-cancel"
+        }
+    };
+
     function findNode(dom, virtual) {
         virtual = [virtual];
 
@@ -603,7 +641,6 @@ var __meta__ = {
         _render: function(options) {
             options = options || {};
 
-            var colgroup, tbody, table;
             var messages = this.options.messages;
             var data = this.dataSource.rootNodes();
             var aggregates = this.dataSource.aggregates();
@@ -733,7 +770,7 @@ var __meta__ = {
                     model: model,
                     attr: attr,
                     level: level
-                }, this._td));
+                }, proxy(this._td, this)));
 
                 if (model.expanded && hasChildren) {
                     rows = rows.concat(this._trs({
@@ -841,14 +878,35 @@ var __meta__ = {
                     children.push(kendoDomElement("span", { className: iconClass.join(" ") }));
                 }
 
-                if (column.encoded) {
+                if (column.command) {
+                    children = $.map(column.command, this._button);
+                } else if (column.encoded) {
                     children.push(kendoTextElement(value));
                 } else {
-                    children.push(kendoHtmlElement (value));
+                    children.push(kendoHtmlElement(value));
                 }
             }
 
-            return kendoDomElement("td", attr , children);
+            return kendoDomElement("td", attr, children);
+        },
+
+        _button: function(command) {
+            var name = command.name || command;
+            var icon = [];
+
+            command = extend({} , defaultCommands[name], command);
+
+            if (command.imageClass) {
+                icon.push(kendoDomElement("span", {
+                    className: [ "k-icon", command.imageClass ].join(" ")
+                }));
+            }
+
+            return kendoDomElement(
+                "button", {
+                    className: [ "k-button", "k-button-icontext", command.className ].join(" ")
+                }, icon.concat([ kendoTextElement(command.text) ])
+            );
         },
 
         _sortable: function() {
