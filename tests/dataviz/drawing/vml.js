@@ -69,6 +69,13 @@
         var clip;
         var bbox;
 
+        function compareClipStyle(node, expected) {
+            if (kendo.support.browser.mozilla) {
+                expected = expected.replace(/\s/g, ", ");
+            }
+            equal(node.element.style.clip, expected);
+        }
+
         var TestNode = TNode.extend({
             clipBBox: function() {
                 return bbox;
@@ -86,7 +93,7 @@
         });
 
         test("sets clip style", function() {
-            equal(node.element.style.clip, "rect(20px 110px 120px 10px)");
+            compareClipStyle(node, "rect(20px 110px 120px 10px)");
         });
 
         test("sets clip observer", function() {
@@ -97,20 +104,20 @@
             bbox = new g.Rect([20, 30], [100, 100]);
 
             srcElement.clip(new Path());
-            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+            compareClipStyle(node, "rect(30px 120px 130px 20px)");
         });
 
         test("clearing element clip option updates clip style", function() {
             srcElement.clip(null);
 
-            equal(node.element.style.clip, "rect(auto auto auto auto)");
+            compareClipStyle(node, "rect(auto auto auto auto)");
         });
 
         test("changing element clip path updates clip style", function() {
             bbox = new g.Rect([20, 30], [100, 100]);
 
             clip.moveTo(10, 10);
-            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+            compareClipStyle(node, "rect(30px 120px 130px 20px)");
         });
 
         test("sets clip style", function() {
