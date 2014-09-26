@@ -475,29 +475,63 @@
         ok(dataSource.calls("sort"));
     });
 
-    /*test("clicking setting button changes sort direction", function() {
+    test("setting button persists sort expressions", function() {
         var dataSource = new kendo.data.PivotDataSource({
             columns: ["foo", "bar"],
-            sort: [{ field: "foo", dir: "asc"}]
+            sortable: true,
+            sort: [{ field: "bar", dir: "desc"}]
         });
 
         var setting = new PivotSettingTarget($(div), {
-            template: settingTemplateWithSort(),
             dataSource: dataSource,
             sortable: true
         });
 
-        var button = $(div).find(".k-button:first");
-
-        stub(dataSource, {
-            sort: dataSource.sort
+        setting.sort({
+            field: "foo",
+            dir: "asc"
         });
 
-        $(div).find(".k-button:first").click();
+        var sort = dataSource.sort();
 
-        equal(dataSource.args("sort")[0].dir, "desc");
+
+        equal(sort.length, 2);
+
+        equal(sort[0].field, "bar");
+        equal(sort[0].dir, "desc");
+
+        equal(sort[1].field, "foo");
+        equal(sort[1].dir, "asc");
     });
-    */
+
+    test("setting button removes last sort expr with same name", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sortable: true,
+            sort: [{ field: "foo", dir: "asc"}, { field: "bar", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            dataSource: dataSource,
+            sortable: true
+        });
+
+        setting.sort({
+            field: "foo",
+            dir: "desc"
+        });
+
+        var sort = dataSource.sort();
+
+
+        equal(sort.length, 2);
+
+        equal(sort[0].field, "bar");
+        equal(sort[0].dir, "desc");
+
+        equal(sort[1].field, "foo");
+        equal(sort[1].dir, "desc");
+    });
 
     test("clicking setting button adds 'ASC' sort icon", function() {
         var dataSource = new kendo.data.PivotDataSource({

@@ -2473,6 +2473,32 @@ var __meta__ = {
        }
     });
 
+    var getSortExpr = function(expressions, name) {
+        for (var idx = 0, length = expressions.length; idx < length; idx++) {
+            if (expressions[idx].field === name) {
+                return expressions[idx];
+            }
+        }
+
+        return null;
+    };
+
+    var removeSortExpr = function(expressions, name) {
+        var result = [];
+
+        if (!expressions) {
+            return result;
+        }
+
+        for (var idx = 0, length = expressions.length; idx < length; idx++) {
+            if (expressions[idx].field !== name) {
+                result.push(expressions[idx]);
+            }
+        }
+
+        return result;
+    };
+
     kendo.ui.PivotSettingTarget = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -2509,8 +2535,7 @@ var __meta__ = {
                 if (target.hasClass("k-setting-delete")) {
                     that.remove(name);
                 } else if (that.options.sortable && target.hasClass("k-button")) {
-                    //TODO: add sort filter and do not remove all
-                    that.dataSource.sort({
+                    that.sort({
                         field: name,
                         dir: target.find(".k-i-sort-asc")[0] ? "desc" : "asc"
                     });
@@ -2526,6 +2551,14 @@ var __meta__ = {
             }
 
             that.refresh();
+        },
+
+        sort: function(expr) {
+            var result = removeSortExpr(this.dataSource.sort(), expr.field);
+
+            result.push(expr);
+
+            this.dataSource.sort(result);
         },
 
         options: {
@@ -2648,16 +2681,6 @@ var __meta__ = {
             }
         },
 
-        _sortExpr: function(expressions, item) {
-            for (var idx = 0, length = expressions.length; idx < length; idx++) {
-                if ((item.name || item) === expressions[idx].field) {
-                    return expressions[idx];
-                }
-            }
-
-            return null;
-        },
-
         refresh: function() {
             var items = this.dataSource[this.options.setting]();
             var sortExpressions = this.dataSource.sort();
@@ -2666,19 +2689,21 @@ var __meta__ = {
             var html = "";
             var length = items.length;
             var idx = 0;
+            var item;
 
             if (length) {
                 for (; idx < length; idx++) {
+                    item = items[idx];
                     sortIcon = null;
 
                     if (sortExpressions) {
-                        sortExpr = this._sortExpr(sortExpressions, items[idx]);
+                        sortExpr = getSortExpr(sortExpressions, (item.name || item));
                         if (sortExpr) {
                             sortIcon = "k-i-sort-" + sortExpr.dir;
                         }
                     }
 
-                    html += this.template(extend({ sortIcon: sortIcon }, items[idx]));
+                    html += this.template(extend({ sortIcon: sortIcon }, item));
                 }
             } else {
                 html = this.emptyTemplate(this.options.messages.empty)
