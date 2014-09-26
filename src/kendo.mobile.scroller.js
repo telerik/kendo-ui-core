@@ -463,9 +463,11 @@ var __meta__ = {
             mousewheelScrolling: true,
             avoidScrolling: function() { return false; },
             pullToRefresh: false,
-            pullTemplate: "Pull to refresh",
-            releaseTemplate: "Release to refresh",
-            refreshTemplate: "Refreshing"
+            messages: {
+                pullTemplate: "Pull to refresh",
+                releaseTemplate: "Release to refresh",
+                refreshTemplate: "Refreshing"
+            }
         },
 
         events: [
@@ -574,9 +576,9 @@ var __meta__ = {
             var that = this;
 
             that.dimensions.y.forceEnabled();
-            that.pullTemplate = kendo.template(that.options.pullTemplate);
-            that.releaseTemplate = kendo.template(that.options.releaseTemplate);
-            that.refreshTemplate = kendo.template(that.options.refreshTemplate);
+            that.pullTemplate = kendo.template(that.options.messages.pullTemplate);
+            that.releaseTemplate = kendo.template(that.options.messages.releaseTemplate);
+            that.refreshTemplate = kendo.template(that.options.messages.refreshTemplate);
 
             that.scrollElement.prepend('<span class="km-scroller-pull"><span class="km-icon"></span><span class="km-loading-left"></span><span class="km-loading-right"></span><span class="km-template">' + that.pullTemplate({}) + '</span></span>');
             that.refreshHint = that.scrollElement.children().first();
