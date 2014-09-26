@@ -528,6 +528,7 @@
         var color = getPropertyValue(style, "color");
 
         function drawText(str, box) {
+            str = str.replace(/[\r\n ]+/g, " ");
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
                 font: font,
                 fill: { color: color }
