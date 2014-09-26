@@ -962,9 +962,11 @@
         });
 
         test("triggers geometry change once on update", 1, function() {
-            drawingElement.geometryChange = function() {
-                ok(true);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             rectangle.redraw({
                 width: 300,
                 height: 50
@@ -972,9 +974,12 @@
         });
 
         test("does not trigger geometry change if width or height are not changed", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             rectangle.redraw({
                 width: 200,
                 height: 100
@@ -983,9 +988,11 @@
 
         test("updates transformation once", 1, function() {
             var container = rectangle.drawingContainer();
-            container.transform = function() {
-                ok(true);
-            };
+            container.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "transform");
+                }
+            });
 
             rectangle.redraw({
                 x: 10,
@@ -995,9 +1002,11 @@
 
         test("does not update transformation if x and y are the same", 0, function() {
             var container = rectangle.drawingContainer();
-            container.transform = function() {
-                ok(false);
-            };
+            container.addObserver({
+                optionsChange: function(e) {
+                    ok(false);
+                }
+            });
 
             rectangle.redraw({
                 x: 5,
@@ -1065,10 +1074,24 @@
             ok(segments[1].anchor().equals({x: 300, y: 200}));
         });
 
+        test("redrawing the path triggers geometry change once", 1, function() {
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+
+            path.redraw({
+                data: "M100,100L300,200"
+            });
+        });
+
         test("redraw does not redraw path if no data is passed", 0, function() {
-            drawingContainer.childrenChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
             path.redraw({
                 stroke: {
                     color: "red"
@@ -1077,9 +1100,11 @@
         });
 
         test("redraw does not redraw path if passed data is the same", 0, function() {
-            drawingContainer.childrenChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
             path.redraw({
                 data: "M100,100L200,200"
             });
@@ -1200,9 +1225,11 @@
         });
 
         test("redraw triggers geometry change once", 1, function() {
-            drawingElement.geometryChange = function() {
-                ok(true);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             line.redraw({
                 from: new Point(5, 25),
                 to: new Point(30, 50)
@@ -1210,9 +1237,12 @@
         });
 
         test("redraw dose not trigger geometry change if from or to are not passed", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             line.redraw({
                 stroke: {
                     color: "red"
@@ -1265,19 +1295,24 @@
             ok(segments[1].anchor().equals({x: 35, y: 35}));
         });
 
-        test("redraw trigger geometry change once", 1, function() {
-                drawingElement.geometryChange = function() {
-                ok(true);
-            };
+        test("redraw triggers geometry change once", 1, function() {
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
             polyline.redraw({
                 points: [new Point(15, 30), new Point(35, 35)]
             });
         });
 
         test("redraw dose not trigger geometry change if points are not passed ", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             polyline.redraw({
                 stroke: {
                     color: "red"
@@ -1286,9 +1321,12 @@
         });
 
         test("redraw dose not trigger geometry change if points are the same ", 0, function() {
-            drawingElement.geometryChange = function() {
-                ok(false);
-            };
+            drawingElement.addObserver({
+                geometryChange: function() {
+                    ok(false);
+                }
+            });
+
             polyline.redraw({
                 points: [
                     new Point(10, 20),

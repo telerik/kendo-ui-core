@@ -21,7 +21,8 @@
         renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr,
         renderSize = util.renderSize,
-        renderTemplate = util.renderTemplate;
+        renderTemplate = util.renderTemplate,
+        inArray = $.inArray;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -92,6 +93,14 @@
 
     // SVG Node ================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+            this.definitions = {};
+            if (srcElement) {
+                srcElement.addObserver(this);
+            }
+        },
+
         load: function(elements) {
             var node = this,
                 element = node.element,
@@ -120,11 +129,13 @@
                     childNode = new ImageNode(srcElement);
                 }
 
+                node.append(childNode);
+
+                childNode.createDefinitions();
+
                 if (children && children.length > 0) {
                     childNode.load(children);
                 }
-
-                node.append(childNode);
 
                 if (element) {
                     childNode.attachTo(element);
@@ -186,8 +197,12 @@
         },
 
         optionsChange: function(e) {
-            if (e.field === "visible") {
-                this.css("display", e.value ? "" : NONE);
+            var field = e.field;
+            var value = e.value;
+            if (field === "visible") {
+                this.css("display", value ? "" : NONE);
+            } else if (DefinitionMap[field]) {
+                this.updateDefinition(field, value);
             }
 
             BaseNode.fn.optionsChange.call(this, e);
@@ -195,11 +210,18 @@
 
         clear: function() {
             var element = this.element;
+            var srcElement = this.srcElement;
 
             if (element) {
                 element.parentNode.removeChild(element);
                 this.element = null;
             }
+
+            if (srcElement) {
+                srcElement.removeObserver(this);
+            }
+
+            this.clearDefinitions();
 
             BaseNode.fn.clear.call(this);
         },
@@ -272,20 +294,219 @@
 
         renderStyle: function() {
             return renderAttr("style", util.renderStyle(this.mapStyle()));
+        },
+
+        createDefinitions: function() {
+            var srcElement = this.srcElement;
+            var definitions = this.definitions;
+            var definition, field, options, hasDefinitions;
+            if (srcElement) {
+                options = srcElement.options;
+
+                for (field in DefinitionMap) {
+                    definition = options.get(field);
+                    if (definition) {
+                        definitions[field] = definition;
+                        hasDefinitions = true;
+                    }
+                }
+                if (hasDefinitions) {
+                    this.definitionChange({
+                        action: "add",
+                        definitions: definitions
+                    });
+                }
+            }
+        },
+
+        definitionChange: function(e) {
+            if (this.parent) {
+                this.parent.definitionChange(e);
+            }
+        },
+
+        updateDefinition: function(type, value) {
+            var definitions = this.definitions;
+            var current = definitions[type];
+            var attr = DefinitionMap[type];
+            var definition = {};
+            if (current) {
+                definition[type] = current;
+                this.definitionChange({
+                    action: "remove",
+                    definitions: definition
+                });
+                delete definitions[type];
+            }
+
+            if (!value) {
+                if (current) {
+                    this.removeAttr(attr);
+                }
+            } else {
+                definition[type] = value;
+                this.definitionChange({
+                    action: "add",
+                    definitions: definition
+                });
+                definitions[type] = value;
+                this.attr(attr, refUrl(value.id));
+            }
+        },
+
+        clearDefinitions: function() {
+            var definitions = this.definitions;
+            var field;
+
+            for (field in definitions) {
+                this.definitionChange({
+                    action: "remove",
+                    definitions: definitions
+                });
+                this.definitions = {};
+                break;
+            }
+        },
+
+        renderDefinitions: function() {
+            return renderAllAttr(this.mapDefinitions());
+        },
+
+        mapDefinitions: function() {
+            var definitions = this.definitions;
+            var attrs = [];
+            var field;
+            for (field in definitions) {
+                attrs.push([DefinitionMap[field], refUrl(definitions[field].id)]);
+            }
+
+            return attrs;
         }
     });
 
     var RootNode = Node.extend({
+        init: function() {
+            Node.fn.init.call(this);
+            this.defs = new DefinitionNode();
+        },
+
         attachTo: function(domElement) {
             this.element = domElement;
+            this.defs.attachTo(domElement.firstElementChild);
+        },
+
+        template: renderTemplate(
+            "#=d.defs.render()##= d.renderChildren() #"
+        ),
+
+        definitionChange: function(e) {
+            this.defs.definitionChange(e);
         },
 
         clear: BaseNode.fn.clear
     });
 
+    var DefinitionNode = Node.extend({
+        init: function() {
+            Node.fn.init.call(this);
+            this.definitionMap = {};
+        },
+
+        attachTo: function(domElement) {
+            this.element = domElement;
+        },
+
+        template: renderTemplate(
+            "<defs>#= d.renderChildren()#</defs>"
+        ),
+
+        definitionChange: function(e) {
+            var definitions = e.definitions;
+            var action = e.action;
+
+            if (action == "add") {
+                this.addDefinitions(definitions);
+            } else if (action == "remove") {
+                this.removeDefinitions(definitions);
+            }
+        },
+
+        createDefinition: function(type, item) {
+            var node;
+            if (type == "clip") {
+                node = new ClipNode(item);
+            }
+            return node;
+        },
+
+        addDefinitions: function(definitions) {
+            for (var field in definitions) {
+                this.addDefinition(field, definitions[field]);
+            }
+        },
+
+        addDefinition: function(type, srcElement) {
+            var definitionMap = this.definitionMap;
+            var id = srcElement.id;
+            var element = this.element;
+            var node, mapItem;
+
+            mapItem = definitionMap[id];
+            if (!mapItem) {
+                node = this.createDefinition(type, srcElement);
+                definitionMap[id] = {
+                    element: node,
+                    count: 1
+                };
+                this.append(node);
+                if (element) {
+                    node.attachTo(this.element);
+                }
+            } else {
+                mapItem.count++;
+            }
+        },
+
+        removeDefinitions: function(definitions) {
+            for (var field in definitions) {
+                this.removeDefinition(definitions[field]);
+            }
+        },
+
+        removeDefinition: function(srcElement) {
+            var definitionMap = this.definitionMap;
+            var id = srcElement.id;
+            var mapItem;
+
+            mapItem = definitionMap[id];
+            if (mapItem) {
+                mapItem.count--;
+                if (mapItem.count === 0) {
+                    this.remove(inArray(mapItem.element, this.childNodes), 1);
+                    delete definitionMap[id];
+                }
+            }
+        }
+    });
+
+    var ClipNode = Node.extend({
+        init: function(srcElement) {
+            Node.fn.init.call(this);
+
+            this.srcElement = srcElement;
+            this.id = srcElement.id;
+
+            this.load([srcElement]);
+        },
+
+        template: renderTemplate(
+            "<clippath id='#=d.id#'>#= d.renderChildren()#</clippath>"
+        )
+    });
+
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g#= d.renderTransform() + d.renderStyle() #>#= d.renderChildren() #</g>"
+            "<g#= d.renderTransform() + d.renderStyle() + d.renderDefinitions()#>#= d.renderChildren() #</g>"
         ),
 
         optionsChange: function(e) {
@@ -486,6 +707,7 @@
             "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderTransform() #></path>"
         )
     });
@@ -536,6 +758,7 @@
             "r='#= d.radius() #' " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderTransform() # ></circle>"
         )
     });
@@ -577,6 +800,7 @@
             "x='#= this.pos().x #' y='#= this.pos().y #' " +
             "#= d.renderStroke() # " +
             "#=  d.renderTransform() # " +
+            "#= d.renderDefinitions() # " +
             "#= d.renderFill() #><tspan>#= this.srcElement.content() #</tspan></text>"
         )
     });
@@ -621,7 +845,7 @@
 
         template: renderTemplate(
             "<image #= d.renderStyle() # #= d.renderTransform()# " +
-            "#= d.renderPosition() # #= d.renderSource() #>" +
+            "#= d.renderPosition() # #= d.renderSource() # #= d.renderDefinitions()#>" +
             "</image>"
         )
     });
@@ -669,6 +893,33 @@
         }
     }
 
+    function baseUrl() {
+        var base = document.getElementsByTagName("base")[0],
+            url = "",
+            href = document.location.href,
+            hashIndex = href.indexOf("#");
+
+        if (base && !kendo.support.browser.msie) {
+            if (hashIndex !== -1) {
+                href = href.substring(0, hashIndex);
+            }
+
+            url = href;
+        }
+
+        return url;
+    }
+
+    function refUrl(id) {
+        return "url(" + baseUrl() + "#"  + id + ")";
+    }
+
+    // Mappings ===============================================================
+
+    var DefinitionMap = {
+        clip: "clip-path"
+    };
+
     // Exports ================================================================
     kendo.support.svg = (function() {
         return doc.implementation.hasFeature(
@@ -683,6 +934,8 @@
         svg: {
             ArcNode: ArcNode,
             CircleNode: CircleNode,
+            ClipNode: ClipNode,
+            DefinitionNode: DefinitionNode,
             GroupNode: GroupNode,
             ImageNode: ImageNode,
             MultiPathNode: MultiPathNode,

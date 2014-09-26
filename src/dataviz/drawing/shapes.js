@@ -29,6 +29,8 @@
         arrayLimits = util.arrayLimits,
         defined = util.defined,
         last = util.last,
+        ObserversMixin = util.ObserversMixin,
+        ElementsArray = util.ElementsArray,
 
         inArray = $.inArray;
 
@@ -42,21 +44,19 @@
             options = options || {};
 
             var transform = options.transform;
+            var clip = options.clip;
+
             if (transform) {
                 options.transform = g.transform(transform);
             }
 
-            this.options = new OptionsStore(options);
-            this.options.observer = this;
-        },
-
-        optionsChange: function(e) {
-            if (this.observer) {
-                this.observer.optionsChange(e);
+            if (clip && !clip.id) {
+                clip.id = kendo.guid();
             }
-        },
 
-        geometryChange: util.mixins.geometryChange,
+            this.options = new OptionsStore(options);
+            this.options.addObserver(this);
+        },
 
         transform: function(transform) {
             if (defined(transform)) {
@@ -115,8 +115,23 @@
             } else {
                 return this.options.get("visible") !== false;
             }
+        },
+
+        clip: function(clip) {
+            var options = this.options;
+            if (defined(clip)) {
+                if (clip && !clip.id) {
+                    clip.id = kendo.guid();
+                }
+                options.set("clip", clip);
+                return this;
+            } else {
+                return options.get("clip");
+            }
         }
     });
+
+    deepExtend(Element.fn, ObserversMixin);
 
     var Group = Element.extend({
         init: function(options) {
@@ -125,13 +140,11 @@
         },
 
         childrenChange: function(action, items, index) {
-            if (this.observer) {
-                this.observer.childrenChange({
-                    action: action,
-                    items: items,
-                    index: index
-                });
-            }
+            this.trigger("childrenChange",{
+                action: action,
+                items: items,
+                index: index
+            });
         },
 
         traverse: function(callback) {
@@ -326,14 +339,18 @@
     deepExtend(Arc.fn, drawing.mixins.Paintable);
     defineGeometryAccessors(Arc.fn, ["geometry"]);
 
+    var GeometryElementsArray = ElementsArray.extend({
+        _change: function() {
+            this.geometryChange();
+        }
+    });
+
     var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
             this.anchor(anchor || new Point());
             this.controlIn(controlIn);
             this.controlOut(controlOut);
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         bboxTo: function(toSegment, matrix) {
             var rect;
@@ -421,11 +438,13 @@
         }
     });
     definePointAccessors(Segment.fn, ["anchor", "controlIn", "controlOut"]);
+    deepExtend(Segment.fn, ObserversMixin);
 
     var Path = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            this.segments = [];
+            this.segments = new GeometryElementsArray();
+            this.segments.addObserver(this);
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
@@ -437,7 +456,10 @@
         },
 
         moveTo: function(x, y) {
-            this.segments = [];
+            this.suspend();
+            this.segments.elements([]);
+            this.resume();
+
             this.lineTo(x, y);
 
             return this;
@@ -447,10 +469,7 @@
             var point = defined(y) ? new Point(x, y) : x,
                 segment = new Segment(point);
 
-            segment.observer = this;
-
             this.segments.push(segment);
-            this.geometryChange();
 
             return this;
         },
@@ -459,9 +478,9 @@
             if (this.segments.length > 0) {
                 var lastSegment = last(this.segments);
                 var segment = new Segment(point, controlIn);
-                segment.observer = this;
-
+                this.suspend();
                 lastSegment.controlOut(controlOut);
+                this.resume();
 
                 this.segments.push(segment);
             }
@@ -526,7 +545,8 @@
     var MultiPath = Element.extend({
         init: function(options) {
             Element.fn.init.call(this, options);
-            this.paths = [];
+            this.paths = new GeometryElementsArray();
+            this.paths.addObserver(this);
 
             if (!defined(this.options.stroke)) {
                 this.stroke("#000");
@@ -535,10 +555,9 @@
 
         moveTo: function(x, y) {
             var path = new Path();
-            path.observer = this;
+            path.moveTo(x, y);
 
             this.paths.push(path);
-            path.moveTo(x, y);
 
             return this;
         },
@@ -649,8 +668,7 @@
         var fieldName = "_" + name;
         return function(value) {
             if (defined(value)) {
-                this[fieldName] = value;
-                this[fieldName].observer = this;
+                this._observerField(fieldName, value);
                 this.geometryChange();
                 return this;
             } else {
@@ -669,8 +687,7 @@
         var fieldName = "_" + name;
         return function(value) {
             if (defined(value)) {
-                this[fieldName] = Point.create(value);
-                this[fieldName].observer = this;
+                this._observerField(fieldName, Point.create(value));
                 this.geometryChange();
                 return this;
             } else {

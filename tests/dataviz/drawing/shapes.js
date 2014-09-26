@@ -61,6 +61,64 @@
             compareMatrices(element.options.transform.matrix(), matrix);
         });
 
+        test("constructor sets id to passed clip path", function() {
+            var path = new Path();
+            element = new Element({
+                clip: path
+            });
+
+            ok(path.id);
+        });
+
+        test("constructor does not override id if it is already set to the passed clip path ", function() {
+            var path = new Path();
+            path.id = "foo";
+            element = new Element({
+                clip: path
+            });
+
+            equal(path.id, "foo");
+        });
+
+        test("clip sets clip option", function() {
+            var path = new Path();
+            element.clip(path);
+            equal(element.options.clip, path);
+        });
+
+        test("clip sets id to passed path", function() {
+            var path = new Path();
+            element.clip(path);
+
+            ok(path.id);
+        });
+
+        test("clip setting null clears clip", function() {
+            var path = new Path();
+            element.clip(path);
+            element.clip(null);
+
+            equal(element.options.clip, null);
+        });
+
+        test("clip does not override id if it is already set to the passed path ", function() {
+            var path = new Path();
+            path.id = "foo";
+            element.clip(path);
+
+            equal(path.id, "foo");
+        });
+
+        test("clip returns clip option", function() {
+            element.options.clip = "foo";
+
+            equal(element.clip(), "foo");
+        });
+
+        test("visible returns true if visible option is not defined", function() {
+            ok(element.visible());
+        });
+
         test("parentTransform returns undefined if element has no parents", function() {
             ok(element.parentTransform() === undefined);
         });
@@ -137,11 +195,11 @@
         });
 
         test("fill triggers optionsChange", function() {
-            shape.observer = {
+            shape.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             shape.fill("red");
         });
@@ -163,11 +221,11 @@
         });
 
         test("stroke triggers optionsChange", function() {
-            shape.observer = {
+            shape.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             shape.stroke("red");
         });
@@ -208,11 +266,11 @@
         test("append triggers childrenChange", function() {
             var child = new Group();
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.append(child);
         });
@@ -240,13 +298,13 @@
             var toRemove = new Group();
             group.append(child);
             group.append(toRemove);
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     equal(args.action, "remove");
                     ok(args.items[0] === toRemove);
                     equal(args.index, 1);
                 }
-            };
+            });
 
             group.remove(toRemove);
         });
@@ -256,11 +314,11 @@
             var toRemove = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     ok(false);
                 }
-            };
+            });
 
             group.remove(toRemove);
         });
@@ -294,13 +352,13 @@
             var toRemove = new Group();
             group.append(child);
             group.append(toRemove);
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     equal(args.action, "remove");
                     ok(args.items[0] === toRemove);
                     equal(args.index, 1);
                 }
-            };
+            });
 
             group.removeAt(1);
         });
@@ -309,11 +367,11 @@
             var child = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function(args) {
                     ok(false);
                 }
-            };
+            });
 
             group.removeAt(-1);
             group.removeAt(1);
@@ -330,11 +388,11 @@
             var child = new Group();
             group.append(child);
 
-            group.observer = {
+            group.addObserver({
                 childrenChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.clear();
         });
@@ -352,11 +410,11 @@
         });
 
         test("visible triggers optionsChange", function() {
-            group.observer = {
+            group.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             group.visible(false);
         });
@@ -531,11 +589,11 @@
         });
 
         test("changing the position triggers geometryChange", function() {
-            text.observer = {
+            text.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             text.position().setX(5);
         });
@@ -546,15 +604,28 @@
             equal(text.position(), position);
         });
 
+        test("position sets new point observer", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            equal(position.observers()[0], text);
+        });
+
+        test("position clears previous point observer", function() {
+            var position = new g.Point(10, 10);
+            text.position(position);
+            text.position(new g.Point(10, 10));
+            equal(position.observers().length, 0);
+        });
+
         test("position can be set to an array", function() {
             text.position([10, 10]);
             deepEqual(text.position().toArray(), [10, 10]);
         });
 
         test("setting content triggers optionsChange", function() {
-            text.observer = {
+            text.addObserver({
                 optionsChange: function() { ok(true); }
-            };
+            });
 
             text.content("Bar");
         });
@@ -573,11 +644,11 @@
         });
 
         test("position setter triggers geometryChange", function() {
-            text.observer = {
+            text.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             text.position(new g.Point());
         });
@@ -597,7 +668,7 @@
 
         test("retrieving bbox doesn't change position observer", function() {
             text.bbox();
-            equal(text.position().observer, text);
+            equal(text.position().observers()[0], text);
         });
 
         test("bbox returns transformed bounding box", function() {
@@ -662,33 +733,46 @@
         });
 
         test("changing the center triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry().center.setX(5);
         });
 
         test("changing the radius triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry().setRadius(5);
         });
 
         test("changing the geometry triggers geometryChange", function() {
-            circle.observer = {
+            circle.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             circle.geometry(new Point(10, 10));
+        });
+
+        test("geometry sets new geometry observer", function() {
+            var geometry = new g.Circle();
+            circle.geometry(geometry);
+            equal(geometry.observers()[0], circle);
+        });
+
+        test("geometry clears previous geometry observer", function() {
+            var geometry = new g.Circle();
+            circle.geometry(geometry);
+            circle.geometry(new g.Circle());
+            equal(geometry.observers().length, 0);
         });
 
         test("geometry setter is chainable", function() {
@@ -767,24 +851,47 @@
         });
 
         test("changing the center triggers geometryChange", function() {
-            arc.observer = {
+            arc.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             arc.geometry().center.setX(5);
         });
 
         test("changing a geometry field triggers geometryChange", 2, function() {
-            arc.observer = {
+            arc.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             arc.geometry().setRadiusX(100);
             arc.geometry().setAnticlockwise(true);
+        });
+
+        test("changing geometry triggers geometryChange", function() {
+            arc.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+
+            arc.geometry(new g.Arc());
+        });
+
+        test("geometry sets new geometry observer", function() {
+            var geometry = new g.Arc();
+            arc.geometry(geometry);
+            equal(geometry.observers()[0], arc);
+        });
+
+        test("geometry clears previous geometry observer", function() {
+            var geometry = new g.Arc();
+            arc.geometry(geometry);
+            arc.geometry(new g.Arc());
+            equal(geometry.observers().length, 0);
         });
 
         test("boundingBox returns geometry bounding rect with half stroke width added", function() {
@@ -854,23 +961,36 @@
         });
 
         test("changing the anchor point triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.anchor().setX(5);
         });
 
         test("setting the anchor point triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.anchor(new Point());
+        });
+
+        test("anchor sets new point observer", function() {
+            var anchor = new g.Point(10, 10);
+            segment.anchor(anchor);
+            equal(anchor.observers()[0], segment);
+        });
+
+        test("anchor clears previous point observer", function() {
+            var anchor = new g.Point(10, 10);
+            segment.anchor(anchor);
+            segment.anchor(new g.Point(10, 10));
+            equal(anchor.observers().length, 0);
         });
 
         test("anchor setter is chainable", function() {
@@ -883,23 +1003,36 @@
         });
 
         test("changing the control point (in) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlIn().setX(5);
         });
 
         test("setting the control point (in) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlIn(new Point());
+        });
+
+        test("controlIn sets new point observer", function() {
+            var controlIn = new g.Point(10, 10);
+            segment.controlIn(controlIn);
+            equal(controlIn.observers()[0], segment);
+        });
+
+        test("controlIn clears previous point observer", function() {
+            var controlIn = new g.Point(10, 10);
+            segment.controlIn(controlIn);
+            segment.controlIn(new g.Point(10, 10));
+            equal(controlIn.observers().length, 0);
         });
 
         test("controlIn setter is chainable", function() {
@@ -912,13 +1045,26 @@
         });
 
         test("changing the control point (out) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlOut().setX(5);
+        });
+
+        test("controlOut sets new point observer", function() {
+            var controlOut = new g.Point(10, 10);
+            segment.controlOut(controlOut);
+            equal(controlOut.observers()[0], segment);
+        });
+
+        test("controlOut clears previous point observer", function() {
+            var controlOut = new g.Point(10, 10);
+            segment.controlOut(controlOut);
+            segment.controlOut(new g.Point(10, 10));
+            equal(controlOut.observers().length, 0);
         });
 
         test("controlOut setter is chainable", function() {
@@ -931,11 +1077,11 @@
         });
 
         test("setting the control point (out) triggers geometryChange", function() {
-            segment.observer = {
+            segment.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             segment.controlOut(new Point());
         });
@@ -1031,6 +1177,15 @@
             equal(path.segments.length, 1);
         });
 
+        test("moveTo triggers geometryChange once", 1, function() {
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.moveTo(0, 0);
+        });
+
         test("lineTo adds segment", function() {
             path.lineTo(0, 0);
             equal(path.segments.length, 1);
@@ -1049,6 +1204,16 @@
 
         test("lineTo returns path", function() {
             deepEqual(path.lineTo(0, 0), path);
+        });
+
+        test("lineTo triggers geometryChange once", 1, function() {
+            path.moveTo(0, 0);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.lineTo([10, 10]);
         });
 
         test("curveTo does nothing if move segment has not been set", function() {
@@ -1083,27 +1248,37 @@
             ok(path.segments[1].anchor().equals(new Point(30, 30)));
         });
 
+        test("curveTo triggers geometryChange once", 1, function() {
+            path.moveTo(0, 0);
+            path.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            path.curveTo([10, 10], [40, 20], [30, 30]);
+        });
+
         test("changing the control points triggers geometryChange", 2, function() {
             var controlOut = Point.create(10, 10),
                 controlIn = Point.create(40, 20);
             path.moveTo(0, 0);
             path.curveTo(controlOut, controlIn, Point.create(30,30));
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             controlOut.setX(20);
             controlIn.setY(30);
         });
 
         test("adding a point triggers geometryChange", function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             path.moveTo(0, 0);
         });
@@ -1114,22 +1289,22 @@
         });
 
         test("close triggers geometryChange", function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             path.close();
         });
 
         test("close does not trigger optionsChange", 0, function() {
-            path.observer = {
+            path.addObserver({
                 geometryChange: $.noop,
                 optionsChange: function() {
                     ok(false);
                 }
-            };
+            });
 
             path.close();
         });
@@ -1205,6 +1380,39 @@
         });
 
         shapeBaseTests(Path, "Path");
+
+        // ------------------------------------------------------------
+        module("Path / Class methods");
+
+        test("fromRect creates path from the passed rectangle", function() {
+            var path = Path.fromRect(new g.Rect([10, 20], [50, 50]));
+
+            ok(path.segments[0].anchor().equals({
+                x: 10,
+                y: 20
+            }));
+            ok(path.segments[1].anchor().equals({
+                x: 60,
+                y: 20
+            }));
+            ok(path.segments[2].anchor().equals({
+                x: 60,
+                y: 70
+            }));
+            ok(path.segments[3].anchor().equals({
+                x: 10,
+                y: 70
+            }));
+            ok(path.options.get("closed"));
+        });
+
+        test("fromRect creates path with the specified options", function() {
+            var path = Path.fromRect(new g.Rect(), {
+                foo: "bar"
+            });
+
+            equal(path.options.get("foo"), "bar");
+        });
     })();
 
     // ------------------------------------------------------------
@@ -1241,11 +1449,6 @@
             equal(multiPath.paths[0].segments.length, 1);
         });
 
-        test("moveTo sets path observer", function() {
-            multiPath.moveTo(0, 0);
-            deepEqual(multiPath.paths[0].observer, multiPath);
-        });
-
         test("moveTo adds new path", function() {
             multiPath.moveTo(0, 0).lineTo(0, 0).moveTo(0, 0);
             equal(multiPath.paths.length, 2);
@@ -1253,6 +1456,15 @@
 
         test("moveTo returns multiPath", function() {
             deepEqual(multiPath.moveTo(0, 0), multiPath);
+        });
+
+        test("moveTo triggers geometryChange once", 1, function() {
+            multiPath.addObserver({
+                geometryChange: function() {
+                    ok(true);
+                }
+            });
+            multiPath.moveTo(0, 0);
         });
 
         test("lineTo does nothing if called first", function() {
@@ -1297,11 +1509,11 @@
                 controlIn = Point.create(40, 20);
             multiPath.moveTo(0, 0);
             multiPath.curveTo(controlOut, controlIn, Point.create(30,30));
-            multiPath.observer = {
+            multiPath.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             controlOut.setX(20);
             controlIn.setY(30);
@@ -1394,11 +1606,11 @@
         });
 
         test("src setter triggers optionsChange", function() {
-            image.observer = {
+            image.addObserver({
                 optionsChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.src("bar");
         });
@@ -1412,13 +1624,26 @@
         });
 
         test("rect setter triggers geometryChange", function() {
-            image.observer = {
+            image.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.rect(new g.Rect());
+        });
+
+        test("rect sets new rect observer", function() {
+            var rect = new g.Rect();
+            image.rect(rect);
+            equal(rect.observers()[0], image);
+        });
+
+        test("rect clears previous rect observer", function() {
+            var rect = new g.Rect();
+            image.rect(rect);
+            image.rect(new g.Rect());
+            equal(rect.observers().length, 0);
         });
 
         test("rect setter is chainable", function() {
@@ -1426,11 +1651,11 @@
         });
 
         test("changing the rect triggers geometryChange", function() {
-            image.observer = {
+            image.addObserver({
                 geometryChange: function() {
                     ok(true);
                 }
-            };
+            });
 
             image.rect().origin.setX(5);
         });

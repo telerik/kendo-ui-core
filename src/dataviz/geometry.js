@@ -19,7 +19,8 @@
         defined = util.defined,
         rad = util.rad,
         deg = util.deg,
-        round = util.round;
+        round = util.round,
+        ObserversMixin = util.ObserversMixin;
 
     var PI_DIV_2 = math.PI / 2,
         MIN_NUM = util.MIN_NUM,
@@ -31,8 +32,6 @@
             this.x = x || 0;
             this.y = y || 0;
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         equals: function(other) {
             return other && other.x === this.x && other.y === this.y;
@@ -131,6 +130,7 @@
         }
     });
     defineAccessors(Point.fn, ["x", "y"]);
+    deepExtend(Point.fn, ObserversMixin);
 
     // IE < 9 doesn't allow to override toString on definition
     Point.fn.toString = function(digits, separator) {
@@ -200,8 +200,6 @@
             this.height = height || 0;
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         equals: function(other) {
             return other && other.width === this.width && other.height === this.height;
         },
@@ -211,6 +209,7 @@
         }
     });
     defineAccessors(Size.fn, ["width", "height"]);
+    deepExtend(Size.fn, ObserversMixin);
 
     Size.create = function(arg0, arg1) {
         if (defined(arg0)) {
@@ -232,8 +231,6 @@
             this.setSize(size || new Size());
         },
 
-        geometryChange: util.mixins.geometryChange,
-
         clone: function() {
             return new Rect(
                 this.origin.clone(),
@@ -248,8 +245,7 @@
         },
 
         setOrigin: function(value) {
-            this.origin = Point.create(value);
-            this.origin.observer = this;
+            this._observerField("origin", Point.create(value));
             this.geometryChange();
             return this;
         },
@@ -259,8 +255,7 @@
         },
 
         setSize: function(value) {
-            this.size = Size.create(value);
-            this.size.observer = this;
+            this._observerField("size", Size.create(value));
             this.geometryChange();
             return this;
         },
@@ -307,6 +302,8 @@
         }
     });
 
+    deepExtend(Rect.fn, ObserversMixin);
+
     Rect.fromPoints = function() {
         var topLeft = Point.min.apply(this, arguments);
         var bottomRight = Point.max.apply(this, arguments);
@@ -332,8 +329,7 @@
         },
 
         setCenter: function(value) {
-            this.center = Point.create(value);
-            this.center.observer = this;
+            this._observerField("center", Point.create(value));
             this.geometryChange();
             return this;
         },
@@ -341,8 +337,6 @@
         getCenter: function() {
             return this.center;
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         equals: function(other) {
             return  other &&
@@ -387,6 +381,7 @@
         }
     });
     defineAccessors(Circle.fn, ["radius"]);
+    deepExtend(Circle.fn, ObserversMixin);
 
     var Arc = Class.extend({
         init: function(center, options) {
@@ -403,8 +398,7 @@
         // TODO: clone, equals
 
         setCenter: function(value) {
-            this.center = Point.create(value);
-            this.center.observer = this;
+            this._observerField("center", Point.create(value));
             this.geometryChange();
             return this;
         },
@@ -414,8 +408,6 @@
         },
 
         MAX_INTERVAL: 90,
-
-        geometryChange: util.mixins.geometryChange,
 
         pointAt: function(angle) {
             var center = this.center;
@@ -534,6 +526,7 @@
         }
     });
     defineAccessors(Arc.fn, ["radiusX", "radiusY", "startAngle", "endAngle", "anticlockwise"]);
+    deepExtend(Arc.fn, ObserversMixin);
 
     var Matrix = Class.extend({
         init: function (a, b, c, d, e, f) {
@@ -640,14 +633,11 @@
                    other._matrix.equals(this._matrix);
         },
 
-
         _optionsChange: function() {
-            if (this.observer) {
-                this.observer.optionsChange({
-                    field: "transform",
-                    value: this
-                });
-            }
+            this.optionsChange({
+                field: "transform",
+                value: this
+            });
         },
 
         translate: function(x, y) {
@@ -699,6 +689,8 @@
             return this._matrix;
         }
     });
+
+    deepExtend(Transformation.fn, ObserversMixin);
 
     function transform(matrix) {
         if (matrix === null) {

@@ -124,6 +124,35 @@
             ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
         });
 
+        test("load creates definitions", 3, function() {
+            var path = new Path();
+            node.definitionChange = function(e) {
+                equal(e.action, "add");
+                equal(e.definitions.clip, path);
+            };
+
+            node.load([new Group({
+                clip: path
+            })]);
+
+            equal(node.childNodes[0].definitions.clip, path);
+        });
+
+        test("load does not create definitions if source does not have definitions", 0, function() {
+            var path = new Path();
+            var definitions;
+            node.definitionChange = function() {
+                ok(false);
+            };
+
+            node.load([new Group()]);
+            definitions = node.childNodes[0].definitions;
+
+            for (var definition in definitions) {
+                ok(false);
+            }
+        });
+
         test("attachTo renders children", 2, function() {
             var ChildNode = Node.extend({});
 
@@ -140,12 +169,14 @@
 
             node.attachTo(document.createElement("div"));
         });
+
     })();
 
     // ------------------------------------------------------------
     function nodeTests(TShape, TNode, name) {
         var shape,
             node,
+            clip,
             container;
 
         module("Base Node tests / " + name, {
@@ -189,18 +220,146 @@
 
             shape.visible(true);
         });
+
+        // ------------------------------------------------------------
+        module("Base Node tests / " + name + " / observer", {
+            setup: function() {
+                shape = new TShape();
+                node = new TNode(shape);
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(shape.observers()[0], node);
+        });
+
+        test("clear removes srcElement observer", function() {
+            node.clear();
+            equal(shape.observers().length, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Base Node tests / " + name + " / definitions", {
+            setup: function() {
+                container = new GroupNode();
+                clip = new Path();
+                shape = new TShape();
+                shape.clip(clip);
+                container.load([shape]);
+                node = container.childNodes[0];
+            }
+        });
+
+        test("renders clip-path", function() {
+            ok(node.render().indexOf("clip-path='url(#" + clip.id + ")'") != -1);
+        });
+
+        test("clearing definition in the options removes definition", function() {
+            shape.options.set("clip", null);
+            equal(node.definitions.clip, undefined);
+        });
+
+        test("clearing definition triggers definition change", function() {
+            node.definitionChange = function(e) {
+                equal(e.action, "remove");
+                equal(e.definitions.clip, clip);
+            };
+            shape.options.set("clip", null);
+        });
+
+        test("clearing definition removes attribute", function() {
+            node.removeAttr = function(attr) {
+                equal(attr, "clip-path");
+            };
+            shape.options.set("clip", null);
+        });
+
+        test("sets new definition", 2, function() {
+            var newClip = new Path();
+            node.definitionChange = function(e) {
+                if (e.action == "add") {
+                    equal(e.definitions.clip, newClip);
+                }
+            };
+            shape.options.set("clip", newClip);
+            equal(node.definitions.clip, newClip);
+        });
+
+        test("setting new definition updates attribute", function() {
+            var newClip = new Path();
+            node.attr = function(attr, value) {
+                equal(attr, "clip-path");
+                equal(value, "url(#" + newClip.id + ")");
+            };
+            shape.clip(newClip);
+            equal(node.definitions.clip, newClip);
+        });
+
+        test("setting new definition removes the old one", function() {
+            var newClip = new Path();
+            node.definitionChange = function(e) {
+                if (e.action == "remove") {
+                    equal(e.definitions.clip, clip);
+                }
+            };
+            shape.clip(newClip);
+        });
+
+        test("clear removes definitions", function() {
+            node.definitionChange = function(e) {
+                equal(e.action, "remove");
+                equal(e.definitions.clip, clip);
+            };
+            node.clear();
+            for (var definition in node.definitions) {
+                ok(false);
+            }
+        });
     }
 
     // ------------------------------------------------------------
     (function() {
-        module("RootNode");
+        var rootNode;
+
+        module("RootNode", {
+            setup: function() {
+                rootNode = new svg.RootNode();
+            }
+        });
+
+        test("inits definition node", function() {
+            ok(rootNode.defs instanceof svg.DefinitionNode);
+        });
+
+        test("renders definition node", function() {
+            rootNode.defs.render = function() {
+                ok(true);
+            };
+            rootNode.render();
+        });
+
+        test("propagates definition change to definition node", function() {
+            var defs = rootNode.defs;
+            defs.definitionChange = function(e) {
+                equal(e, "foo");
+            };
+            rootNode.definitionChange("foo");
+        });
 
         test("attachTo directly sets element", function() {
-            var rootNode = new svg.RootNode();
             var container = document.createElement("div");
             rootNode.attachTo(container);
 
             deepEqual(rootNode.element, container);
+        });
+
+        test("attachTo attaches first child to definition node", function() {
+            var container = document.createElement("div");
+            var child = document.createElement("div");
+            container.appendChild(child);
+            rootNode.attachTo(container);
+
+            deepEqual(rootNode.defs.element, child);
         });
     })();
 
@@ -859,4 +1018,118 @@
             image.src("Bar");
         });
     })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var ClipNode = svg.ClipNode;
+        var clipNode;
+        var path;
+
+        module("ClipNode", {
+            setup: function() {
+                path = new d.Path();
+                clipNode = new ClipNode(path);
+            }
+        });
+
+        test("renders clippath", function() {
+            ok(clipNode.render().indexOf("clippath") !== -1);
+        });
+
+        test("renders clip path id", function() {
+            ok(clipNode.render().indexOf("id='" + path.id + "'") !== -1);
+        });
+
+        test("loads path", function() {
+            var pathNode = clipNode.childNodes[0];
+            ok(pathNode instanceof PathNode);
+            equal(pathNode.srcElement, path);
+        });
+
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var DefinitionNode = svg.DefinitionNode;
+        var definitionNode, path, definitions;
+
+        module("DefinitionNode", {
+            setup: function() {
+                definitionNode = new DefinitionNode();
+            }
+        });
+
+        test("renders defs", function() {
+            ok(definitionNode.render().indexOf("defs") !== -1);
+        });
+
+        test("attachTo sets element", function() {
+            definitionNode.attachTo("foo");
+            equal(definitionNode.element, "foo");
+        });
+
+        module("DefinitionNode / definitionChange", {
+            setup: function() {
+                path = new d.Path();
+                definitions = {
+                    clip: path
+                };
+                definitionNode = new DefinitionNode();
+            }
+        });
+
+        test("add creates ClipNode", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            ok(definitionNode.childNodes[0] instanceof svg.ClipNode);
+        });
+
+        test("add does not create another node if definition has the same id", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 1);
+        });
+
+        test("remove clears definition", 2, function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            var node = definitionNode.definitionMap[path.id].element;
+            node.clear = function() {
+                ok(true);
+            };
+            definitionNode.definitionChange({
+                action: "remove",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 0);
+        });
+
+        test("remove does not clear definition if it was added more times", function() {
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "add",
+                definitions: definitions
+            });
+            definitionNode.definitionChange({
+                action: "remove",
+                definitions: definitions
+            });
+            equal(definitionNode.childNodes.length, 1);
+        });
+
+    })();
+
 })();

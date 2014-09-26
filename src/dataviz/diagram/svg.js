@@ -528,7 +528,7 @@
             if (options) {
                 VisualBase.fn.redraw.call(this, options);
                 if (this._diffNumericOptions(options, [WIDTH, HEIGHT])) {
-                    this._updatePath();
+                    this._drawPath();
                 }
                 if (this._diffNumericOptions(options, [X, Y])) {
                     this._setPosition();
@@ -538,33 +538,26 @@
 
         _initPath: function() {
             var options = this.options;
-            var width = options.width;
-            var height = options.height;
             var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
-                stroke: options.stroke
+                stroke: options.stroke,
+                closed: true
             });
-
-            var points = this._points = [new g.Point(), new g.Point(width, 0),
-                new g.Point(width, height), new g.Point(0, height)];
-
-            drawingElement.moveTo(points[0]);
-            for (var i = 1; i < 4; i++) {
-                drawingElement.lineTo(points[i]);
-            }
-            drawingElement.close();
+            this._drawPath();
         },
 
-        _updatePath: function() {
-            var points = this._points;
+        _drawPath: function() {
+            var drawingElement = this.drawingElement;
             var sizeOptions = sizeOptionsOrDefault(this.options);
             var width = sizeOptions.width;
             var height = sizeOptions.height;
 
-            points[1].x = width;
-
-            points[3].y = height;
-            points[2].move(width, height);
+            drawingElement.segments.elements([
+                createSegment(0, 0),
+                createSegment(width, 0),
+                createSegment(width, height),
+                createSegment(0, height)
+            ]);
         }
     });
 
@@ -876,14 +869,10 @@
 
         _setData: function(data) {
             var drawingElement = this.drawingElement;
-            var paths = d.Path.parse(data || "").paths;
-            drawingElement.paths = paths;
-
-            for (var i = 0; i < paths.length; i++) {
-                paths[i].observer = drawingElement;
-            }
-
-            drawingElement.geometryChange();
+            var multipath = d.Path.parse(data || "");
+            var paths = multipath.paths.slice(0);
+            multipath.paths.elements([]);
+            drawingElement.paths.elements(paths);
         }
     });
 
@@ -916,7 +905,7 @@
                 }
 
                 if (from || to) {
-                    this._updatePath();
+                    this._drawPath();
                     this._redrawMarkers(true, options);
                 } else {
                     this._redrawMarkers(false, options);
@@ -928,26 +917,24 @@
 
         _initPath: function() {
             var options = this.options;
-            var from = options.from || new Point();
-            var to = options.to || new Point();
             var drawingElement = this.drawingElement = new d.Path({
                 fill: options.fill,
                 stroke: options.stroke
             });
-            this._from = new g.Point(from.x, from.y);
-            this._to = new g.Point(to.x, to.y);
-            drawingElement.moveTo(this._from);
-            drawingElement.lineTo(this._to);
+            this._drawPath();
             this.container.append(drawingElement);
         },
 
-        _updatePath: function() {
+        _drawPath: function() {
             var options = this.options;
-            var from = options.from;
-            var to = options.to;
-            this._from.x = from.x;
-            this._from.y = from.y;
-            this._to.move(to.x, to.y);
+            var drawingElement = this.drawingElement;
+            var from = options.from || new Point();
+            var to = options.to || new Point();
+
+            drawingElement.segments.elements([
+                createSegment(from.x, from.y),
+                createSegment(to.x, to.y)
+            ]);
         }
     });
 
@@ -1022,16 +1009,14 @@
             var drawingElement = this.drawingElement;
             var options = this.options;
             var points = options.points;
-            var segments = drawingElement.segments = [];
-            var point, segment;
+            var segments = [];
+            var point;
             for (var i = 0; i < points.length; i++) {
                 point = points[i];
-                segment = new d.Segment(new g.Point(point.x, point.y));
-                segment.observer = drawingElement;
-                segments.push(segment);
+                segments.push(createSegment(point.x, point.y));
             }
 
-            drawingElement.geometryChange();
+            drawingElement.segments.elements(segments);
         },
 
         options: {
@@ -1383,6 +1368,10 @@
         }
 
         return hasChanges;
+    }
+
+    function createSegment(x, y) {
+        return new d.Segment(new g.Point(x, y));
     }
 
     // Exports ================================================================

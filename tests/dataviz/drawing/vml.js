@@ -63,6 +63,66 @@
         });
     })();
 
+    function baseClipTests(name, TNode, TElement) {
+        var node;
+        var srcElement;
+        var clip;
+        var bbox;
+
+        var TestNode = TNode.extend({
+            clipBBox: function() {
+                return bbox;
+            }
+        });
+
+        module("Clip tests / " + name, {
+            setup: function() {
+                srcElement = new TElement();
+                bbox = new g.Rect([10, 20], [100, 100]);
+                clip = d.Path.fromRect(bbox);
+                srcElement.clip(clip);
+                node = new TestNode(srcElement);
+            }
+        });
+
+        test("sets clip style", function() {
+            equal(node.element.style.clip, "rect(20px 110px 120px 10px)");
+        });
+
+        test("sets clip observer", function() {
+            equal(clip.observers().length, 2);
+        });
+
+        test("changing element clip option updates clip style", function() {
+            bbox = new g.Rect([20, 30], [100, 100]);
+
+            srcElement.clip(new Path());
+            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+        });
+
+        test("clearing element clip option updates clip style", function() {
+            srcElement.clip(null);
+
+            equal(node.element.style.clip, "rect(auto auto auto auto)");
+        });
+
+        test("changing element clip path updates clip style", function() {
+            bbox = new g.Rect([20, 30], [100, 100]);
+
+            clip.moveTo(10, 10);
+            equal(node.element.style.clip, "rect(30px 120px 130px 20px)");
+        });
+
+        test("sets clip style", function() {
+            ok(node.element.style.clip);
+        });
+
+        test("clear removes clip observer", function() {
+            node.clear();
+            equal(clip.observers().length, 1);
+        });
+    }
+
     function baseNodeTests(name, TNode, TElement) {
         var node;
         var srcElement;
@@ -360,8 +420,10 @@
 
     // ------------------------------------------------------------
     (function() {
+        var group;
         var groupNode;
 
+        baseClipTests("Group", vml.GroupNode, d.Group);
         baseNodeTests("Group", vml.GroupNode, d.Group);
 
         module("GroupNode", {
@@ -458,6 +520,53 @@
 
             group.options.set("foo", 1);
         });
+
+        test("options change for visible updates display css style", function() {
+            var group = new Group();
+            groupNode = new GroupNode(group);
+            groupNode.css = function(style, value) {
+                equal(style, "display");
+                equal(value, "none");
+            };
+            group.visible(false);
+        });
+
+        // ------------------------------------------------------------
+        module("GroupNode / source observer", {
+            setup: function() {
+                group = new Group();
+                groupNode = new GroupNode(group);
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(group.observers()[0], groupNode);
+        });
+
+        test("clear removes srcElement observer", function() {
+            groupNode.clear();
+            equal(group.observers().length, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("GroupNode / clip", {
+            setup: function() {
+                group = new Group();
+                groupNode = new GroupNode(group);
+            }
+        });
+
+        test("clipBBox returns clip path bbox with src element current transformation", function() {
+            var clip = d.Path.fromRect(new g.Rect([10, 10], [100, 100]));
+            var parentGroup = new Group({
+                transform: g.transform().translate(100, 100)
+            });
+            parentGroup.append(group);
+
+            group.transform(g.transform().translate(100, 100));
+            compareBoundingBox(groupNode.clipBBox(clip), [210, 210, 310, 310]);
+        });
+
     })();
 
     // ------------------------------------------------------------
@@ -472,6 +581,14 @@
                 }
             }, pathOptions));
             strokeNode = new StrokeNode(path);
+        }
+
+        function updateOption(field, value) {
+            path.options.set(field, value);
+            strokeNode.optionsChange({
+                field: field,
+                value: value
+            });
         }
 
         module("StrokeNode", {
@@ -562,7 +679,7 @@
                 }
             };
 
-            path.options.set("stroke.color", "red");
+            updateOption("stroke.color", "red");
         });
 
         test("optionsChange sets stroke width", function() {
@@ -572,7 +689,7 @@
                 }
             };
 
-            path.options.set("stroke.width", 4);
+            updateOption("stroke.width", 4);
         });
 
         test("optionsChange sets stroke opacity", function() {
@@ -582,7 +699,7 @@
                 }
             };
 
-            path.options.set("stroke.opacity", 0.4);
+            updateOption("stroke.opacity", 0.4);
         });
 
         test("optionsChange sets stroke dashType", function() {
@@ -592,7 +709,7 @@
                 }
             };
 
-            path.options.set("stroke.dashType", "dot");
+            updateOption("stroke.dashType", "dot");
         });
 
         test("optionsChange sets stroke", 3, function() {
@@ -606,7 +723,7 @@
                 }
             };
 
-            path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
+            updateOption("stroke", { color: "red", opacity: 0.4, width: 4 });
         });
 
         test("optionsChange clears stroke", 1, function() {
@@ -616,7 +733,7 @@
                 }
             };
 
-            path.options.set("stroke", null);
+            updateOption("stroke", null);
         });
     })();
 
@@ -628,6 +745,14 @@
         function createNode(pathOptions) {
             path = new Path(pathOptions);
             fillNode = new FillNode(path);
+        }
+
+        function updateOption(field, value) {
+            path.options.set(field, value);
+            fillNode.optionsChange({
+                field: field,
+                value: value
+            });
         }
 
         module("FillNode", {
@@ -677,7 +802,7 @@
                 }
             };
 
-            path.options.set("fill.color", "red");
+            updateOption("fill.color", "red");
         });
 
         test("optionsChange sets fill opacity", function() {
@@ -687,7 +812,7 @@
                 }
             };
 
-            path.options.set("fill.opacity", 0.4);
+            updateOption("fill.opacity", 0.4);
         });
 
         test("optionsChange clears fill for 'none'", function() {
@@ -697,7 +822,7 @@
                 }
             };
 
-            path.options.set("fill.color", "none");
+            updateOption("fill.color", "none");
         });
 
         test("optionsChange clears fill for 'transparent'", function() {
@@ -707,7 +832,7 @@
                 }
             };
 
-            path.options.set("fill.color", "transparent");
+            updateOption("fill.color", "transparent");
         });
 
         test("optionsChange clears fill for ''", function() {
@@ -717,7 +842,7 @@
                 }
             };
 
-            path.options.set("fill.color", "");
+            updateOption("fill.color", "");
         });
 
         test("optionsChange sets fill", 3, function() {
@@ -733,7 +858,7 @@
                 }
             };
 
-            path.options.set("fill", { color: "red", opacity: 0.4 });
+            updateOption("fill", { color: "red", opacity: 0.4 });
         });
 
         test("optionsChange clears fill", 2, function() {
@@ -742,7 +867,7 @@
                 equal(value, "false");
             };
 
-            path.options.set("fill", null);
+            updateOption("fill", null);
         });
     })();
 
@@ -752,6 +877,17 @@
 
         function createNode(matrix) {
             transformNode = new vml.TransformNode(new d.Element(), matrix);
+        }
+
+        function updateTransform(expectedValues, element, transformation) {
+            transformNode.attr = function(key, value) {
+                equal(expectedValues[key], value);
+            };
+            element.transform(transformation);
+            transformNode.optionsChange({
+                field: "transform",
+                value: transformation
+            });
         }
 
         module("TransformNode", {
@@ -813,12 +949,11 @@
                     matrix: "1,3,2,4,0,0",
                     offset: "5px,6px",
                     origin: "-0.5,-0.5"
-                };
+                },
+                transformation = g.transform(new Matrix(1,2,3,4,5,6));
+
             transformNode = new TransformNode(element);
-            transformNode.attr = function(key, value) {
-                equal(expectedValues[key], value);
-            };
-            element.options.set("transform", new Matrix(1,2,3,4,5,6));
+            updateTransform(expectedValues, element, transformation);
         });
 
         test("options change takes parents matrix into account", 4, function() {
@@ -829,13 +964,11 @@
                     matrix: "1,3,2,4,0,0",
                     offset: "15px,16px",
                     origin: "-0.5,-0.5"
-                };
+                },
+                transformation = g.transform(new Matrix(1,2,3,4,5,6));
             group.append(element);
             transformNode = new TransformNode(element);
-            transformNode.attr = function(key, value) {
-                equal(expectedValues[key], value);
-            };
-            element.options.set("transform", new Matrix(1,2,3,4,5,6));
+            updateTransform(expectedValues, element, transformation);
         });
 
         test("clearing transform updates attributes", function() {
@@ -844,10 +977,7 @@
                     on: "false"
                 };
             transformNode = new TransformNode(element);
-            transformNode.attr = function(key, value) {
-                equal(expectedValues[key], value);
-            };
-            element.options.set("transform", null);
+            updateTransform(expectedValues, element, null);
         });
 
         test("refresh method updates attributes", function() {
@@ -858,6 +988,7 @@
                     offset: "5px,6px",
                     origin: "-0.5,-0.5"
                 };
+
             transformNode = new TransformNode(element);
             transformNode.attr = function(key, value) {
                 equal(expectedValues[key], value);
@@ -874,6 +1005,7 @@
         module("Shape tests / " + name, {
             setup: function() {
                 node = createNode();
+                shape = node.srcElement;
             }
         });
 
@@ -907,7 +1039,7 @@
                 }
             };
 
-            node.srcElement.visible(false);
+            shape.visible(false);
         });
 
         test("optionsChange sets visibility to visible", function() {
@@ -917,7 +1049,7 @@
                 }
             };
 
-            node.srcElement.visible(true);
+            shape.visible(true);
         });
 
         test("optionsChange is forwarded to stroke", function() {
@@ -925,7 +1057,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("stroke", { width: 1 });
+            shape.options.set("stroke", { width: 1 });
         });
 
         test("optionsChange is not forwarded to stroke", 0, function() {
@@ -933,7 +1065,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("foo", true);
+            shape.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to fill", function() {
@@ -941,7 +1073,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("fill", { color: "red" });
+            shape.options.set("fill", { color: "red" });
         });
 
         test("optionsChange is not forwarded to fill", 0, function() {
@@ -949,7 +1081,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("foo", true);
+            shape.options.set("foo", true);
         });
 
         test("optionsChange is forwarded to transform", function() {
@@ -957,7 +1089,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("transform", Matrix.unit());
+            shape.transform(Matrix.unit());
         });
 
         test("optionsChange is not forwarded to transform", 0, function() {
@@ -965,7 +1097,7 @@
                 ok(true);
             };
 
-            node.srcElement.options.set("foo", true);
+            shape.options.set("foo", true);
         });
 
         test("refreshTransform calls transform refresh method with the srcElement transformation", 12, function() {
@@ -974,8 +1106,8 @@
             var currentMatrix = parentMatrix.multiplyCopy(srcMatrix);
             var group = new Group({transform: parentMatrix});
 
-            node.srcElement.transform(srcMatrix);
-            group.append(node.srcElement);
+            shape.transform(srcMatrix);
+            group.append(shape);
 
             node.transform.refresh = function(transform) {
                 compareMatrices(transform.matrix(), currentMatrix);
@@ -983,6 +1115,38 @@
 
             node.refreshTransform();
             node.refreshTransform(g.transform(parentMatrix));
+        });
+
+        // ------------------------------------------------------------
+        module("Shape tests / " + name + " / source observer", {
+            setup: function() {
+                node = createNode();
+                shape = node.srcElement;
+            }
+        });
+
+        test("Adds srcElement observer", function() {
+            equal(shape.observers()[0], node);
+        });
+
+        test("clear removes srcElement observer", function() {
+            node.clear();
+            equal(shape.observers().length, 0);
+        });
+
+        // ------------------------------------------------------------
+        module("Shape tests / " + name + " / clip", {
+            setup: function() {
+                node = createNode();
+                shape = node.srcElement;
+            }
+        });
+
+        test("clipBBox returns clip path bbox translated with minus the top left coordinates of the shape raw bbox", function() {
+            var clip = d.Path.fromRect(new g.Rect([10, 10], [100, 100]));
+            var topLeft = shape.rawBBox().topLeft();
+
+            compareBoundingBox(node.clipBBox(clip), [10 - topLeft.x, 10 - topLeft.y, 110 - topLeft.x, 110 - topLeft.y]);
         });
     }
 
@@ -1040,6 +1204,7 @@
             };
 
             path.lineTo(10, 10);
+            node.geometryChange();
         });
 
     })();
@@ -1049,15 +1214,13 @@
         var path,
             pathNode;
 
+        baseClipTests("PathNode", vml.PathNode, d.Path);
+
         module("PathNode", {
             setup: function() {
                 path = new Path();
                 pathNode = new PathNode(path);
             }
-        });
-
-        test("sets observer", function() {
-            equal(path.observer, pathNode);
         });
 
         test("initializes a TransformNode", function() {
@@ -1096,17 +1259,24 @@
 
         module("MultiPathDataNode", {
             setup: function() {
-                multiPath = new MultiPath();
+                multiPath = new MultiPath().moveTo(0, 0).lineTo(10, 20);
                 node = new vml.MultiPathDataNode(multiPath);
             }
         });
 
-        test("renders composite paths", function() {
-            multiPath
-                .moveTo(0, 0).lineTo(10, 20)
-                .moveTo(10, 10).lineTo(10, 20);
+        test("renders composite paths initially", function() {
+            equal(node.element.v, "m 0,0 l 1000,2000 e");
+        });
 
-            ok(node.element.v, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
+        test("geometryChange sets composite path", function() {
+            node.attr = function(name, value) {
+                if (name === "v") {
+                    equal(value, "m 0,0 l 1000,2000 m 1000,1000 l 1000,2000 e");
+                }
+            };
+
+            multiPath.moveTo(10, 10).lineTo(10, 20);
+            node.geometryChange();
         });
 
     })();
@@ -1115,6 +1285,8 @@
     (function() {
         var multiPath,
             multiPathNode;
+
+        baseClipTests("MultiPathNode", vml.MultiPathNode, d.MultiPath);
 
         module("MultiPathNode", {
             setup: function() {
@@ -1163,10 +1335,15 @@
                     offset: "6px,7px",
                     origin: "-3,-2"
                 };
+            var transformation = g.transform(new Matrix(2,3,4,5,6,7));
             circleTransformNode.attr = function(key, value) {
                 equal(expectedValues[key], value);
             };
-            transformCircle.options.set("transform", new Matrix(2,3,4,5,6,7));
+            transformCircle.transform(transformation);
+            circleTransformNode.optionsChange({
+                field: "transform",
+                value: transformation
+            });
         });
 
         test("clearing transform updates attributes", 1, function() {
@@ -1176,7 +1353,11 @@
             circleTransformNode.attr = function(key, value) {
                 equal(expectedValues[key], value);
             };
-            transformCircle.options.set("transform", null);
+            transformCircle.transform(null);
+            circleTransformNode.optionsChange({
+                field: "transform",
+                value: null
+            });
         });
     })();
 
@@ -1184,6 +1365,8 @@
     (function() {
         var circle,
             circleNode;
+
+        baseClipTests("CircleNode", vml.CircleNode, d.Circle);
 
         module("CircleNode", {
             setup: function() {
@@ -1229,12 +1412,20 @@
             circle.geometry().setRadius(60);
         });
 
+        test("geometryChange should update transformation", function() {
+            circleNode.transform.refresh = function() {
+                ok(true);
+            };
+
+            circle.geometry().setRadius(60);
+        });
+
         test("optionsChange is forwarded to transform", function() {
             circleNode.transform.optionsChange = function(e) {
                 ok(true);
             };
 
-            circle.options.set("transform", Matrix.unit());
+            circle.transform(Matrix.unit());
         });
 
         test("optionsChange is not forwarded to transform", 0, function() {
@@ -1283,6 +1474,7 @@
             };
 
             arc.geometry().setEndAngle(180);
+            node.geometryChange();
         });
 
     })();
@@ -1290,6 +1482,8 @@
     (function() {
         var arc,
             arcNode;
+
+        baseClipTests("ArcNode", vml.ArcNode, d.Arc);
 
         module("ArcNode", {
             setup: function() {
@@ -1359,6 +1553,7 @@
             };
 
             text.position().setX(0);
+            node.geometryChange();
         });
 
         test("rounds path coordinates", function() {
@@ -1367,6 +1562,7 @@
             };
 
             text.position().translate(0.005, 0.005);
+            node.geometryChange();
         });
     })();
 
@@ -1397,6 +1593,10 @@
             };
 
             text.options.set("font", "10pt Arial");
+            node.optionsChange({
+                field: "font",
+                value: "10pt Arial"
+            });
         });
 
         test("optionsChange updates string", function() {
@@ -1406,6 +1606,10 @@
             };
 
             text.content("Bar");
+            node.optionsChange({
+                field: "content",
+                value: "Bar"
+            });
         });
     })();
 
@@ -1413,6 +1617,8 @@
     (function() {
         var text;
         var node;
+
+        baseClipTests("TextNode", vml.TextNode, d.Text);
 
         module("TextNode", {
             setup: function() {
@@ -1469,6 +1675,14 @@
         var image;
         var fillNode;
 
+        function updateTransform(value) {
+            image.transform(value);
+            fillNode.optionsChange({
+                field: "transform",
+                value: value
+            });
+        }
+
         module("ImageFillNode", {
             setup: function() {
                 image = new d.Image("foo", new g.Rect([10, 20], [90, 80]));
@@ -1501,37 +1715,37 @@
         });
 
         test("sets size for transformation scale", function() {
-            image.transform(g.transform().scale(2, 4));
+            updateTransform(g.transform().scale(2, 4));
             equal(fillNode.element.size, "1.8,3.2");
         });
 
         test("sets position for transformation scale", function() {
-            image.transform(g.transform().scale(2, 4));
+            updateTransform(g.transform().scale(2, 4));
             equal(fillNode.element.position, "0.6,1.9");
         });
 
         test("sets position for transformation translation", function() {
-            image.transform(g.transform().translate(10, 20));
+            updateTransform(g.transform().translate(10, 20));
             equal(fillNode.element.position, "0.15,0.3");
         });
 
         test("sets position for transformation translation and scale", function() {
-            image.transform(g.transform().translate(10, 20).scale(2, 4));
+            updateTransform(g.transform().translate(10, 20).scale(2, 4));
             equal(fillNode.element.position, "0.7,2.1");
         });
 
         test("sets position for transformation rotation", function() {
-            image.transform(g.transform().translate(10, 20).rotate(90));
+            updateTransform(g.transform().translate(10, 20).rotate(90));
             equal(fillNode.element.position, "-1,0.25");
         });
 
         test("sets angle for transformation angle", function() {
-            image.transform(g.transform().rotate(45));
+            updateTransform(g.transform().rotate(45));
             equal(fillNode.element.angle, "45");
         });
 
         test("sets angle for transformation angle and non-uniform scale", function() {
-            image.transform(g.transform().rotate(45).scale(2, 4));
+            updateTransform(g.transform().rotate(45).scale(2, 4));
             equal(fillNode.element.angle, "45");
         });
 
@@ -1542,6 +1756,10 @@
             };
 
             image.src("bar");
+            fillNode.optionsChange({
+                field: "src",
+                value: "bar"
+            });
         });
 
         test("optionsChange sets transform", function() {
@@ -1551,7 +1769,7 @@
                 }
             };
 
-            image.transform(g.transform().rotate(45));
+            updateTransform(g.transform().rotate(45));
         });
 
         test("geometryChange sets transform", function() {
@@ -1562,6 +1780,7 @@
             };
 
             image.rect().setSize([200, 200]);
+            fillNode.geometryChange();
         });
     })();
 
@@ -1570,15 +1789,13 @@
         var image;
         var imageNode;
 
+        baseClipTests("ImageNode", vml.ImageNode, d.Image);
+
         module("ImageNode", {
             setup: function() {
                 image = new d.Image("foo", new g.Rect(new g.Point(10, 20), [90, 80]));
                 imageNode = new vml.ImageNode(image);
             }
-        });
-
-        test("sets observer", function() {
-            equal(image.observer, imageNode);
         });
 
         test("optionsChange is forwarded to fill (src)", function() {

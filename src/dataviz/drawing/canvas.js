@@ -89,12 +89,63 @@
 
     // Nodes ===================================================================
     var Node = BaseNode.extend({
+        init: function(srcElement) {
+            BaseNode.fn.init.call(this, srcElement);
+            if (srcElement) {
+                srcElement.addObserver(this);
+                this.initClip();
+            }
+        },
+
+        initClip: function() {
+            var clip = this.srcElement.clip();
+            if (clip) {
+                this.clip = clip;
+                clip.addObserver(this);
+            }
+        },
+
+        clear: function() {
+            if (this.srcElement) {
+                this.srcElement.removeObserver(this);
+            }
+
+            this.clearClip();
+
+            BaseNode.fn.clear.call(this);
+        },
+
+        clearClip: function() {
+            if (this.clip) {
+                this.clip.removeObserver(this);
+                delete this.clip;
+            }
+        },
+
+        setClip: function(ctx) {
+            if (this.clip) {
+                ctx.beginPath();
+                PathNode.fn.renderPoints(ctx, this.clip);
+                ctx.clip();
+            }
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "clip") {
+                this.clearClip();
+                this.initClip();
+            }
+
+            BaseNode.fn.optionsChange.call(this, e);
+        },
+
         renderTo: function(ctx) {
             var childNodes = this.childNodes,
                 i;
 
             ctx.save();
             this.setTransform(ctx);
+            this.setClip(ctx);
 
             for (i = 0; i < childNodes.length; i++) {
                 childNodes[i].renderTo(ctx);
@@ -184,9 +235,11 @@
         renderTo: function(ctx) {
             ctx.save();
 
+            this.setTransform(ctx);
+            this.setClip(ctx);
+
             ctx.beginPath();
 
-            this.setTransform(ctx);
             this.renderPoints(ctx, this.srcElement);
 
             this.setLineDash(ctx);
@@ -326,9 +379,12 @@
             var size = text.measure();
 
             ctx.save();
-            ctx.beginPath();
 
             this.setTransform(ctx);
+            this.setClip(ctx);
+
+            ctx.beginPath();
+
             ctx.font = text.options.font;
 
             if (this.setFill(ctx)) {
@@ -362,6 +418,8 @@
                 ctx.save();
 
                 this.setTransform(ctx);
+                this.setClip(ctx);
+
                 this.drawImage(ctx);
 
                 ctx.restore();

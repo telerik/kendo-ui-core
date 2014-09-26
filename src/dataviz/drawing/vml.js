@@ -194,7 +194,106 @@
         attachReference: noop
     });
 
-    var GroupNode = Node.extend({
+    var ClipObserver = kendo.Class.extend({
+        init: function(srcElement, observer) {
+            this.srcElement = srcElement;
+            this.observer = observer;
+
+            srcElement.addObserver(this);
+        },
+
+        geometryChange: function() {
+            this.observer.optionsChange({
+                field: "clip",
+                value: this.srcElement
+            });
+        },
+
+        clear: function() {
+            this.srcElement.removeObserver(this);
+        }
+    });
+
+    var ObserverNode = Node.extend({
+        init: function(srcElement) {
+            Node.fn.init.call(this, srcElement);
+
+            if (srcElement) {
+                srcElement.addObserver(this);
+                this.initClip();
+            }
+        },
+
+        mapStyle: function() {
+            var style = Node.fn.mapStyle.call(this);
+            if (this.srcElement && this.srcElement.clip()) {
+                style.push(["clip", this.clipRect()]);
+            }
+            return style;
+        },
+
+        optionsChange: function(e) {
+            if (e.field == "clip") {
+                this.clearClip();
+                this.initClip();
+
+                this.css(e.field, this.clipRect());
+            }
+
+            Node.fn.optionsChange.call(this, e);
+        },
+
+        clear: function() {
+            var srcElement = this.srcElement;
+            if (srcElement) {
+                srcElement.removeObserver(this);
+            }
+
+            this.clearClip();
+
+            Node.fn.clear.call(this);
+        },
+
+        initClip: function() {
+            if (this.srcElement.clip()) {
+                this.clip = new ClipObserver(this.srcElement.clip(), this);
+                this.clip.observer = this;
+            }
+        },
+
+        clearClip: function() {
+            if (this.clip) {
+                this.clip.clear();
+                delete this.clip;
+            }
+        },
+
+        clipRect: function() {
+            var clipRect = "rect(auto auto auto auto)";
+            var clip = this.srcElement.clip();
+            if (clip) {
+                var bbox = this.clipBBox(clip);
+                var topLeft = bbox.topLeft();
+                var bottomRight = bbox.bottomRight();
+                clipRect = kendo.format("rect({0}px {1}px {2}px {3}px)",
+                    topLeft.y,
+                    bottomRight.x,
+                    bottomRight.y,
+                    topLeft.x);
+            }
+            return clipRect;
+        },
+
+        clipBBox: function(clip) {
+            var topLeft = this.srcElement.rawBBox().topLeft();
+            var clipBBox = clip.rawBBox();
+            clipBBox.origin.translate(-topLeft.x, -topLeft.y);
+
+            return clipBBox;
+        }
+    });
+
+    var GroupNode = ObserverNode.extend({
         createElement: function() {
             Node.fn.createElement.call(this);
             this.setStyle();
@@ -218,7 +317,7 @@
         },
 
         mapStyle: function() {
-            var style = Node.fn.mapStyle.call(this);
+            var style = ObserverNode.fn.mapStyle.call(this);
             style.push(["position", "absolute"]);
             style.push(["white-space", "nowrap"]);
 
@@ -230,7 +329,7 @@
                 this.refreshTransform();
             }
 
-            Node.fn.optionsChange.call(this, e);
+            ObserverNode.fn.optionsChange.call(this, e);
         },
 
         refreshTransform: function(transform) {
@@ -242,6 +341,10 @@
             for (i = 0; i < length; i++) {
                 children[i].refreshTransform(currentTransform);
             }
+        },
+
+        clipBBox: function(clip) {
+            return clip.bbox(this.srcElement.currentTransform());
         }
     });
 
@@ -386,13 +489,13 @@
         }
     });
 
-    var ShapeNode = Node.extend({
+    var ShapeNode = ObserverNode.extend({
         init: function(srcElement, transform) {
             this.fill = this.createFillNode(srcElement, transform);
             this.stroke = new StrokeNode(srcElement);
             this.transform = this.createTransformNode(srcElement, transform);
 
-            Node.fn.init.call(this, srcElement);
+            ObserverNode.fn.init.call(this, srcElement);
         },
 
         attachTo: function(domElement) {
@@ -426,7 +529,7 @@
                 this.transform.optionsChange(e);
             }
 
-            Node.fn.optionsChange.call(this, e);
+            ObserverNode.fn.optionsChange.call(this, e);
         },
 
         refreshTransform: function(transform) {
@@ -434,7 +537,7 @@
         },
 
         mapStyle: function(width, height) {
-            var styles = Node.fn.mapStyle.call(this);
+            var styles = ObserverNode.fn.mapStyle.call(this);
 
             if (!width || !height) {
                 width = height = COORDINATE_MULTIPLE;
@@ -553,6 +656,7 @@
             ShapeNode.fn.geometryChange.call(this);
 
             this.setStyle();
+            this.refreshTransform();
         },
 
         mapStyle: function() {
