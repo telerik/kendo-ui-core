@@ -32,7 +32,6 @@ test("toXML creates a 'c' element for cells", function() {
     equal(dom.find("c").length, 1);
 });
 
-
 test("toXML sets the r attribute to the alphanumeric and cell number (index plus one)", function() {
     var worksheet = Worksheet();
 
@@ -321,6 +320,7 @@ test("toXML creates a 'pane' element when the freezePane option is set", functio
 
     var dom = $(worksheet.toXML());
     equal(dom.find("pane").length, 1);
+    equal(dom.find("pane").attr("topLeftCell"), "B1");
 });
 
 test("toXML sets the 'xSplit' attribute when the colSplit option is set", function() {
@@ -343,6 +343,7 @@ test("toXML sets the 'ySplit' attribute when the rowSplit option is set", functi
 
     var dom = $(worksheet.toXML());
     equal(dom.find("pane").attr("ySplit"), 2);
+    equal(dom.find("pane").attr("topLeftCell"), "A3");
 });
 
 test("toXML creates 'cols' element when the columns option is set", function() {

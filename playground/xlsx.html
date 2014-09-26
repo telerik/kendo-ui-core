@@ -9,7 +9,7 @@
     <script>
         requireSync([
             "../src/jquery",
-            "../src/kendo.ooxml",
+            "../src/kendo.excel",
             "../src/kendo.grid"
         ]);
     </script>
@@ -22,17 +22,17 @@
       <li>Firefox</li>
       <li>IE10+</li>
     </ul>
-    <a download="Contacts.xlsx" class="k-button" id="export">Export</a>
     <div id="grid" style="height: 365px"></div>
     <script>
-        $("grid").kendoGrid({
-          toolbar: '',
+        $("#grid").kendoGrid({
+          toolbar: '<button id="export" class="k-button">Export</button>',
           dataSource: {
               type: "odata",
               transport: {
                   read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
               },
-              pageSize: 10
+              pageSize: 10,
+              serverPaging: true
           },
           sortable: true,
           pageable: {
@@ -62,47 +62,14 @@
       function excel() {
         var grid = $("#grid").data("kendoGrid");
 
-        var base64 = new kendo.ooxml.Workbook({
-            sheets: [
-                {
-                    title: "My sheet",
-                    freezePane: {
-                        rowSplit: 1,
-                        colSplit: 2
-                    },
-                    columns: [
-                        { width: 300 }
-                    ],
-                    data: [
-                        [
-                            { background: "#f0f", color: "#aaf", bold: true, value: "Bold with background and foreground" },
-                            { background: "#ffeeff", italic: true, underline: true, value: "Italic and underline" },
-                            { fontName: "Arial", fontSize: 20, value: "Font and font Size" },
-                            { value: new Date() },
-                            { format: "yy-mm-dd", value: new Date() },
-                            { value: 42 },
-                            { value: false }
-                        ],
-                        [
-                            { italic: true, value: new Date() },
-                            { color: "#0f0", value: 3.14 },
-                            { value: true }
-                        ]
-                    ]
-                },
-                {
-                    title: "My second sheet",
-                    data: [
-                            [ { colSpan: 3, value: "colSpan = 3" }, { value: "Boo" }],
-                            [ { colSpan: 2, value: "colSpan = 2" }, { value: "Boo" }],
-                            [ { rowSpan: 2, value: "rowSpan = 2" }, { value: "Boo" }],
-                            [ { rowSpan: 2, colSpan: 3, hAlign: "right", vAlign: "top", value: "rowSpan=2, colspan=3" }]
-                    ]
-                }
-            ]
-        }).toDataURL();
+        var exporter = new kendo.data.ExcelExporter({
+            columns: grid.columns,
+            dataSource: grid.dataSource
+        });
 
-        kendo.saveAs(base64, "Export.xlsx", "http://korchev:88/filesaver");
+        exporter.workbook().then(function(book) {
+            kendo.saveAs(book.toDataURL(), "Export.xlsx", "http://korchev:88/filesaver");
+        });
       }
 
     </script>

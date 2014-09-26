@@ -6,7 +6,7 @@
 
 var __meta__ = {
     id: "ooxml",
-    name: "XLSX export",
+    name: "XLSX generation",
     category: "framework",
     advanced: true,
     depends: [ "core" ]
@@ -114,7 +114,7 @@ var WORKSHEET = kendo.template(
        '# if (freezePane.rowSplit) { #' +
        ' ySplit="${freezePane.rowSplit}"' +
        '# } #' +
-       ' topLeftCell="${String.fromCharCode(65 + freezePane.colSplit)}${freezePane.rowSplit+1}"'+
+       ' topLeftCell="${String.fromCharCode(65 + (freezePane.colSplit || 0))}${(freezePane.rowSplit || 0)+1}"'+
        '/>' +
        '# } #' +
        '</sheetView>' +
@@ -493,15 +493,18 @@ var Workbook = kendo.Class.extend({
             count: 0,
             uniqueCount: 0
         };
-        this._sheets = [];
+        this.sheets = this.options.sheets || [];
         this._styles = [];
 
-        $.map(this.options.sheets || [], $.proxy(this.addSheet, this));
     },
     addSheet: function(options) {
         this._sheets.push(new Worksheet(options, this._strings, this._styles));
     },
     toDataURL: function() {
+        this._sheets = $.map(this.sheets, $.proxy(function(options) {
+            return new Worksheet(options, this._strings, this._styles);
+        }, this));
+
         var zip = new JSZip();
 
         var docProps = zip.folder("docProps");
