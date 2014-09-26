@@ -58,7 +58,7 @@ var __meta__ = {
         }
     }
 
-    function removeDuplicates (dataSelector, dataTextField) {
+    function removeDuplicates(dataSelector, dataTextField) {
         var getter = kendo.getter(dataTextField, true);
 
         return function(e) {
@@ -250,11 +250,11 @@ var __meta__ = {
                     this.suggestDataSource =
                         DataSource.create(suggestDataSource);
 
+            }
 
-                if (!options.customDataSource) {
-                    suggestDataSource._pageSize = undefined;
-                    suggestDataSource.reader.data = removeDuplicates(suggestDataSource.reader.data, this.options.field);
-                }
+            if (!options.customDataSource) {
+                suggestDataSource._pageSize = undefined;
+                suggestDataSource.reader.data = removeDuplicates(suggestDataSource.reader.data, this.options.field);
             }
 
             this.suggestDataSource = suggestDataSource;
