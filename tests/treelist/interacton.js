@@ -203,6 +203,25 @@
         equal(statusHTML(), message);
     });
 
+    test("shows no rows message when datasource is filtered to zero elements", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1 },
+                    { id: 2 }
+                ]
+            }
+        });
+
+        instance.dataSource.filter({ field: "id", operator: "eq", value: 3 });
+
+        equal(statusHTML(), "No records to display");
+
+        instance.dataSource.filter({});
+
+        equal(instance.content.find("tr").length, 2);
+    });
+
     test("shows refresh icon to allow re-fetching of rows", function() {
         var read = controlledRead();
 

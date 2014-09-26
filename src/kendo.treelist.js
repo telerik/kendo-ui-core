@@ -425,7 +425,7 @@ var __meta__ = {
             var status = this.element.find(".k-status");
 
             if (!status.length) {
-                status = this.element.append("<div class='k-status' />");
+                status = $("<div class='k-status' />").appendTo(this.element);
             }
 
             this._contentTree.render([]);
