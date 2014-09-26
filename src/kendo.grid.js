@@ -1828,7 +1828,7 @@ var __meta__ = {
 
             tr = cell.parent().removeClass("k-grid-edit-row");
 
-            that._destroyEditable(); // editable should be destoryed before content of the container is changed
+            that._destroyEditable(); // editable should be destroyed before content of the container is changed
 
             that._displayCell(cell, column, model);
 
@@ -1851,11 +1851,16 @@ var __meta__ = {
                 tmpl = proxy(tmpl, state.storage);
             }
 
+            that.angular("cleanup", function(){
+                return { elements: cell.parent() };
+            });
+
             cell.empty().html(tmpl(dataItem));
+
             that.angular("compile", function(){
                 return {
-                    elements: cell.get(),
-                    scopeFrom: cell.parent()
+                    elements: cell.parent(),
+                    data: [ { dataItem: dataItem } ]
                 };
             });
         },
