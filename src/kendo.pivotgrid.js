@@ -2473,7 +2473,11 @@ var __meta__ = {
        }
     });
 
-    var getSortExpr = function(expressions, name) {
+    var sortExpr = function(expressions, name) {
+        if (!expressions) {
+            return null;
+        }
+
         for (var idx = 0, length = expressions.length; idx < length; idx++) {
             if (expressions[idx].field === name) {
                 return expressions[idx];
@@ -2551,14 +2555,6 @@ var __meta__ = {
             }
 
             that.refresh();
-        },
-
-        sort: function(expr) {
-            var result = removeSortExpr(this.dataSource.sort(), expr.field);
-
-            result.push(expr);
-
-            this.dataSource.sort(result);
         },
 
         options: {
@@ -2681,29 +2677,26 @@ var __meta__ = {
             }
         },
 
-        refresh: function() {
-            var items = this.dataSource[this.options.setting]();
-            var sortExpressions = this.dataSource.sort();
-            var sortExpr, sortIcon;
+        sort: function(expr) {
+            var result = removeSortExpr(this.dataSource.sort(), expr.field);
 
+            result.push(expr);
+
+            this.dataSource.sort(result);
+        },
+
+        refresh: function() {
             var html = "";
+            var items = this.dataSource[this.options.setting]();
             var length = items.length;
             var idx = 0;
             var item;
 
+
             if (length) {
                 for (; idx < length; idx++) {
                     item = items[idx];
-                    sortIcon = null;
-
-                    if (sortExpressions) {
-                        sortExpr = getSortExpr(sortExpressions, (item.name || item));
-                        if (sortExpr) {
-                            sortIcon = "k-i-sort-" + sortExpr.dir;
-                        }
-                    }
-
-                    html += this.template(extend({ sortIcon: sortIcon }, item));
+                    html += this.template(extend({ sortIcon: this._sortIcon(item.name || item) }, item));
                 }
             } else {
                 html = this.emptyTemplate(this.options.messages.empty)
@@ -2728,7 +2721,19 @@ var __meta__ = {
 
             this.element = null;
             this._refreshHandler = null;
-        }
+        },
+
+        _sortIcon: function(name) {
+            var expressions = this.dataSource.sort();
+            var expr = sortExpr(expressions, name);
+            var icon = "";
+
+            if (expr) {
+                icon = "k-i-sort-" + expr.dir;
+            }
+
+            return icon;
+        },
     });
 
     var PivotGrid = Widget.extend({
