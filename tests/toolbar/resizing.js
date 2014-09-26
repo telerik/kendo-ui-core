@@ -269,4 +269,22 @@
         equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");
     });
 
+    test("Overflow anchor is NOT shown if a widget with popup is initialized in the overflow container", 1, function() {
+        var toolbar = container.kendoToolBar({
+            items: [
+                { type: "button", id: "foo", text: "foo" },
+                { type: "button", id: "bar", text: "bar" },
+                { template: '<div>foo</div>', overflowTemplate: '<div><select id="dropdown"></select></div>' }
+            ]
+        }).data("kendoToolBar");
+
+        $('#dropdown').kendoDropDownList({
+            dataSource: ['a', 'b', 'c']
+        });
+
+        toolbar.resize(); //force resizing
+
+        equal(toolbar.overflowAnchor.css("visibility"), "hidden");
+    });
+
 })();
