@@ -309,6 +309,14 @@ span.k-datetimepicker .k-select+.k-select
     padding-bottom: 0.4em;
 }
 
+/* above style breaks NumericTextBox layout due display:block style applied to the input */
+.km.root .k-combobox .k-dropdown-wrap:before,
+.km.root .k-picker-wrap:before,
+.km.root .k-numeric-wrap:before
+{
+    content: none;
+}
+
 .k-combobox .k-input,
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input
