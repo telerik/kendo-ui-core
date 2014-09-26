@@ -10,7 +10,6 @@
         var dataviz = kendo.dataviz,
             diagram = dataviz.diagram,
             Widget = kendo.ui.Widget,
-            ContextMenu = kendo.ui.ContextMenu,
             Class = kendo.Class,
             proxy = $.proxy,
             deepExtend = kendo.deepExtend,
@@ -1377,7 +1376,6 @@
                 that.canvas.draw();
                 this._shouldRefresh = true;
                 this._initMobile();
-                this._initContextMenu();
             },
             options: {
                 name: "Diagram",
@@ -1414,18 +1412,6 @@
             },
 
             events: [ZOOM_END, ZOOM_START, PAN, SELECT, ITEMROTATE, ITEMBOUNDSCHANGE, CHANGE, CLICK],
-
-            _initContextMenu: function() {
-                var that = this;
-
-                that._contextMenu = new ContextMenu($("<ul><li name='edit'>Edit<li/></ul>"), {
-                    select: function(e) {
-                        if ($(e.item).attr("name") === "edit") {
-                            that.edit();
-                        }
-                    }
-                });
-            },
 
             _initMobile: function() {
                 var options = this.options;
@@ -1468,8 +1454,7 @@
                 }
             },
 
-            edit: function() {
-                var item = this.select()[0];
+            edit: function(item) {
                 var dataItem = item.dataItem;
                 var uid = dataItem.uid;
 
@@ -1745,9 +1730,7 @@
                         .on("mousedown" + NS, proxy(that._mouseDown, that))
                         .on("keydown" + NS, proxy(that._keydown, that))
                         .on("mouseover" + NS, proxy(that._mouseover, that))
-                        .on("mouseout" + NS, proxy(that._mouseout, that))
-                        .on("contextmenu" + NS, proxy(that._contextMenuEvent, that));
-
+                        .on("mouseout" + NS, proxy(that._mouseout, that));
                 } else {
                     that._userEvents = new kendo.UserEvents(element, {
                         multiTouch: true
@@ -1764,16 +1747,6 @@
 
                 that._resizeHandler = proxy(that.resize, that);
                 kendo.onResize(that._resizeHandler);
-            },
-
-            _contextMenuEvent: function(e) {
-                var point = this._calculatePosition(e);
-
-                if (this.toolService.start(point, this._meta(e)) && this.toolService.end(point, this._meta(e))) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this._contextMenu.open(point.x, point.y);
-                }
             },
 
             _gestureStart: function(e) {
@@ -1900,9 +1873,6 @@
                 that.canvas = undefined;
 
                 that.destroyScroller();
-
-                this._contextMenu.destroy();
-                this._contextMenu = null;
             },
             destroyScroller: function () {
                 var scroller = this.scroller;
@@ -2899,7 +2869,6 @@
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
                     e.preventDefault();
-                    this._contextMenu.close();
                 }
             },
             _addItem: function (item) {
