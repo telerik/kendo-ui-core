@@ -7,7 +7,7 @@
             snippet = dojo.fixLineEndings(snippet);
 
             var form = $('<form method="post" action="' + dojo.configuration.url + '" target="_blank" />').hide().appendTo(document.body);
-            $("<input name='snippet'>").val(snippet).appendTo(form);
+            $("<input name='snippet'>").val(window.btoa(snippet)).appendTo(form);
 
             form.submit();
         },
