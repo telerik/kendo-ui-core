@@ -40,6 +40,7 @@
 
     sync_require.LOADED = LOADED;
 
+    var LOADING = [];
     function load(path, file) {
         var url;
         file = file.replace(/\.js$/, "") + ".js";
@@ -51,6 +52,12 @@
         if (LOADED[url]) {
             return LOADED[url].value;
         }
+        if (LOADING.indexOf(url) >= 0) {
+            console.error("Circular dependency: %s.  Ignoring the issue and hope for the best, but please fix that.", url);
+            console.log(LOADING.join("\n -> "));
+            return null;
+        }
+        LOADING.push(url);
         var start = new Date().getTime();
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, false);
@@ -63,6 +70,8 @@
             try {
                 var exported = new Function("define", code)(define);
                 LOADED[url] = { value: exported, start: start, stop: stop, time: time };
+                var pos = LOADING.indexOf(url);
+                if (pos >= 0) LOADING.splice(pos, pos + 1);
                 return exported;
             } catch(ex) {
                 console.error("Caught error when evaluating " + url);
