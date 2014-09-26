@@ -1309,6 +1309,7 @@ var __meta__ = {
             var indicatorWidth = that.options.columnResizeHandleWidth;
             var scrollable = that.options.scrollable;
             var resizeHandle = that.resizeHandle;
+            var groups = this._groups();
             var left;
 
             if (resizeHandle && that.lockedContent && resizeHandle.data("th")[0] !== th[0]) {
@@ -1331,10 +1332,12 @@ var __meta__ = {
                     }
                     left += cells[idx].offsetWidth;
                 }
-                //th.prevAll(":visible").each(function() {
-                //    left += this.offsetWidth;
-                //});
-            } else {
+
+                if (groups > 0) {
+                    left += this.thead.find(".k-group-cell:first").outerWidth() * groups;
+                }
+
+           } else {
                 left = th.position().left;
                 if (scrollable) {
                     var headerWrap = th.closest(".k-grid-header-wrap, .k-grid-header-locked"),
@@ -1484,11 +1487,11 @@ var __meta__ = {
                         cursor(that.wrapper, 'col-resize');
 
                         if (options.scrollable) {
-                            col = header.find("col:eq(" + index + ")")
-                                .add(contentTable.children("colgroup").find("col:eq(" + index + ")"))
-                                .add(footer.find("colgroup").find("col:eq(" + index + ")"));
+                            col = header.find("col:not(.k-group-col):not(.k-hierarchy-col):eq(" + index + ")")
+                                .add(contentTable.children("colgroup").find("col:not(.k-group-col):not(.k-hierarchy-col):eq(" + index + ")"))
+                                .add(footer.find("colgroup").find("col:not(.k-group-col):not(.k-hierarchy-col):eq(" + index + ")"));
                         } else {
-                            col = contentTable.children("colgroup").find("col:eq(" + index + ")");
+                            col = contentTable.children("colgroup").find("col:not(.k-group-col):not(.k-hierarchy-col):eq(" + index + ")");
                         }
 
                         columnStart = e.x.location;
