@@ -1342,11 +1342,17 @@ var __meta__ = {
                 }
             }
 
+            chart._unsetActivePoint();
+
             if (chart._tooltip) {
                 chart._tooltip.destroy();
             }
 
-            chart._unsetActivePoint();
+            if (chart._highlight) {
+                chart._highlight.destroy();
+            }
+
+            chart._viewElement = null;
         }
     });
     deepExtend(Chart.fn, dataviz.ExportMixin);
@@ -9865,6 +9871,12 @@ var __meta__ = {
             stroke: WHITE,
             strokeWidth: 1,
             strokeOpacity: 0.2
+        },
+
+        destroy: function() {
+            this.viewElement = null;
+            this.view = null;
+            this._overlays = null;
         },
 
         show: function(points) {
