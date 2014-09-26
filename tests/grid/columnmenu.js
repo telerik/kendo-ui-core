@@ -244,4 +244,40 @@
         equal(th.eq(0).data("kendoColumnMenu").options.lockedColumns, false);
         equal(th.eq(1).data("kendoColumnMenu").options.lockedColumns, false);
     });
+
+    test("column menu initialization over multiline data columns", function() {
+        var grid = setup({
+            columns: [
+                { columns: [{ field: "foo" }] },
+                { field: "bar" },
+                { columns: [{ field: "foo" }] }
+            ]
+        });
+
+        var rows = grid.thead.find("tr");
+
+        ok(rows.eq(0).find("th").eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+        ok(rows.eq(1).find("th").eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+        ok(rows.eq(1).find("th").eq(1).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+    });
+
+    test("column menu initialization over multiline locked data columns", function() {
+        var grid = setup({
+            columns: [
+                { columns: [{ field: "foo" }], locked: true },
+                { field: "bar" },
+                { columns: [{ field: "foo" }] }
+            ]
+        });
+
+        var rows = grid.thead.find("tr");
+        var lockedRows = grid.lockedHeader.find("tr");
+
+        ok(lockedRows.eq(1).find("th").eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+
+        ok(rows.eq(0).find("th").eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+        ok(rows.eq(1).find("th").eq(0).data("kendoColumnMenu") instanceof kendo.ui.ColumnMenu);
+    });
+
+
 })();

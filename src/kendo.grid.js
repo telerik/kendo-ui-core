@@ -3908,7 +3908,7 @@ var __meta__ = {
         _columnMenu: function() {
             var that = this,
                 menu,
-                columns = that.columns,
+                columns = leafColumns(that.columns),
                 column,
                 options = that.options,
                 columnMenu = options.columnMenu,
@@ -3929,7 +3929,7 @@ var __meta__ = {
                     columnMenu = {};
                 }
 
-                cells = that.thead.find("tr:first th:not(.k-hierarchy-cell):not(.k-group-cell)");
+                cells = leafDataCells(that.thead);
 
                 for (var idx = 0, length = cells.length; idx < length; idx++) {
                     column = columns[idx];
