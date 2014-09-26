@@ -93,7 +93,10 @@ var __meta__ = {
         edit: {
             text: "Edit",
             imageClass: "k-edit",
-            className: "k-grid-edit"
+            className: "k-grid-edit",
+            click: function(e) {
+                this.editRow($(e.currentTarget).closest("tr"));
+            }
         },
         update: {
             text: "Update",
@@ -540,15 +543,30 @@ var __meta__ = {
         },
 
         _attachEvents: function() {
-            var icons = "." + classNames.iconCollapse +
+            var icons = DOT + classNames.iconCollapse +
                 ", ." + classNames.iconExpand +
                 ", ." + classNames.refresh;
-            var retryButton = "." + classNames.retry;
+            var retryButton = DOT + classNames.retry;
             var dataSource = this.dataSource;
 
             this.element
                 .on(CLICK + NS, icons, proxy(this._toggleChildren, this))
-                .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource));
+                .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource))
+                .on(CLICK + NS, "tbody .k-button", proxy(this._commandClick, this));
+        },
+
+        _commandFromClass: function(className) {
+            var match = (/k-grid-([^\b]+)/).exec(className);
+            return match ? match[1] : "";
+        },
+
+        _commandClick: function(e) {
+            var commandName = this._commandFromClass(e.target.className)
+            var command = defaultCommands[commandName];
+
+            if (command.click) {
+                command.click.call(this, e);
+            }
         },
 
         _columns: function() {

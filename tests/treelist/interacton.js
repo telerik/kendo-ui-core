@@ -327,4 +327,20 @@
 
         equal(instance.content.find("tr").length, 1);
     });
+
+    test("clicking edit button triggers edit mode", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        var editSpy = spy(instance, "editRow");
+
+        instance.content.find(".k-grid-edit").click();
+
+        ok(editSpy.calls, 1);
+    });
 })();
