@@ -1,7 +1,7 @@
 <div id="example">
   <div ng-app="KendoDemo" ng-controller="MyCtrl">
-    <div kendo-pivot-grid k-options="options"></div>
-    <div kendo-pivot-configurator k-data-source="dataSource"></div>
+    <div kendo-pivot-grid k-options="options" id="pivotgrid"></div>
+    <div kendo-pivot-configurator k-data-source="dataSource" id="cofigurator"></div>
   </div>
 </div>
 
@@ -30,21 +30,23 @@
       });
       $scope.options = {
           columnWidth: 200,
-          height: 550,
+          height: 580,
           dataSource: $scope.dataSource
       };
   }
 </script>
 
 <style>
-  #pivotgrid {
-    display: inline-block;
-    vertical-align: top;
-    width: 71%;
-  }
+    #pivotgrid
+    {
+        display: inline-block;
+        vertical-align: top;
+        width: 70%;
+    }
 
-  #configurator {
-    display: inline-block;
-    vertical-align: top;
-  }
+    #configurator
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
 </style>
