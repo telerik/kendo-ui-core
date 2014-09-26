@@ -124,11 +124,11 @@ var WORKSHEET = kendo.template(
    '<cols>' +
    '# for (var ci = 0; ci < columns.length; ci++) { #' +
        '# var column = columns[ci]; #' +
-       '<col min="${ci+1}" max="${ci+1}"' +
        '# if (column.width) { #' +
+       '<col min="${ci+1}" max="${ci+1}"' +
        ' customWidth="1" width="${(((column.width)/7)*100+0.5)/100}" ' +
-       '# } #' +
        '/>' +
+       '# } #' +
    '# } #' +
    '</cols>' +
    '# } #' +

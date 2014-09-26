@@ -87,6 +87,12 @@ test("freezes first row", function() {
     testWorkbook({ columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].freezePane.rowSplit, 1);
     });
+});
+
+test("enables filtering", function() {
+    testWorkbook({ filter: true, columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
+        equal(book.sheets[0].filter, true);
+    });
 })
 
 }());

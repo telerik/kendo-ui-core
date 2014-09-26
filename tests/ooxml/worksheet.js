@@ -355,9 +355,9 @@ test("toXML creates 'cols' element when the columns option is set", function() {
     equal(dom.find("cols").length, 1);
 });
 
-test("toXML creates 'col' element for every item in the columns option", function() {
+test("toXML creates 'col' element for every item in the columns option that has width set", function() {
     var worksheet = Worksheet({
-        columns: [{}, {}]
+        columns: [{ width: 10}, { width: 10 }]
     });
 
     var dom = $($.parseXML(worksheet.toXML()));
@@ -366,7 +366,7 @@ test("toXML creates 'col' element for every item in the columns option", functio
 
 test("toXML sets the 'min' and 'max' attribute of the 'col' element to the column index plus one", function() {
     var worksheet = Worksheet({
-        columns: [{}]
+        columns: [{ width: 10 }]
     });
 
     var dom = $($.parseXML(worksheet.toXML()));

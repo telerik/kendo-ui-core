@@ -64,7 +64,8 @@
 
         var exporter = new kendo.data.ExcelExporter({
             columns: grid.columns,
-            dataSource: grid.dataSource
+            dataSource: grid.dataSource,
+            filter: true
         });
 
         exporter.workbook().then(function(book) {

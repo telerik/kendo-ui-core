@@ -17,6 +17,7 @@ var __meta__ = {
 kendo.data.ExcelExporter = kendo.Class.extend({
     init: function(options) {
         this.columns = options.columns || [];
+        this.options = options;
         this.dataSource =
             kendo.data.DataSource.create(options.dataSource instanceof kendo.data.DataSource ? options.dataSource.options : options.dataSource);
     },
@@ -29,7 +30,8 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                     {
                        columns: this._columns(),
                        rows: this._rows(),
-                       freezePane: this._freezePane()
+                       freezePane: this._freezePane(),
+                       filter: this.options.filter
                     }
                 ]
             });
