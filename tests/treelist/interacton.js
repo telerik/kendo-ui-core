@@ -147,6 +147,10 @@
         equal(instance.content.find(".k-loading").length, 1);
     });
 
+    function statusHTML() {
+        return instance.element.find(".k-status").text();
+    }
+
     test("shows initial loading message during load", function() {
         var read = controlledRead();
 
@@ -154,11 +158,11 @@
             dataSource: { transport: { read: read } }
         });
 
-        ok(instance.content.text().indexOf("Loading") >= 0);
+        ok(statusHTML().indexOf("Loading") >= 0);
 
         read.resolve([ { id: 1 } ]);
 
-        ok(instance.content.text().indexOf("Loading") < 0);
+        ok(statusHTML().indexOf("Loading") < 0);
     });
 
     test("uses passed loading message", function() {
@@ -170,7 +174,7 @@
             messages: { loading: message }
         });
 
-        ok(instance.content.text().indexOf(message) >= 0);
+        ok(statusHTML().indexOf(message) >= 0);
     });
 
     test("shows no rows message when no rows have been fetched", function() {
@@ -182,7 +186,7 @@
 
         read.resolve([]);
 
-        equal(instance.content.text(), "No records to display");
+        equal(statusHTML(), "No records to display");
     });
 
     test("uses passed no rows message", function() {
@@ -196,7 +200,7 @@
 
         read.resolve([]);
 
-        equal(instance.content.text(), message);
+        equal(statusHTML(), message);
     });
 
     test("shows refresh icon to allow re-fetching of rows", function() {
@@ -244,7 +248,7 @@
 
         read.reject({});
 
-        ok(instance.content.text().indexOf("Request failed.") >= 0);
+        ok(instance.element.text().indexOf("Request failed.") >= 0);
     });
 
     test("request failed messages is used from messages object", function() {
@@ -258,7 +262,7 @@
 
         read.reject({});
 
-        ok(instance.content.text().indexOf(message) >= 0);
+        ok(instance.element.text().indexOf(message) >= 0);
     });
 
     test("retry button is rendered for root level", function() {
@@ -270,7 +274,7 @@
 
         read.reject({});
 
-        var button = instance.content.find("button.k-button.k-request-retry");
+        var button = instance.element.find("button.k-button.k-request-retry");
         equal(button.length, 1);
         equal(button.text(), "Retry");
     });
@@ -286,7 +290,7 @@
 
         read.reject({});
 
-        equal(instance.content.find(".k-request-retry").text(), message);
+        equal(instance.element.find(".k-request-retry").text(), message);
     });
 
     test("clicking retry button triggers read", function() {
@@ -298,7 +302,7 @@
 
         read.reject({});
 
-        instance.content.find(".k-request-retry").click();
+        instance.element.find(".k-request-retry").click();
 
         read.resolve([ { id: 1 } ]);
 

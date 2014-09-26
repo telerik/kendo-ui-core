@@ -68,7 +68,7 @@
 
         instance.dataSource.data([]);
 
-        equal(instance.content.find("tr:not('.k-status')").length, 0);
+        equal(instance.content.find("tr").length, 0);
     });
 
     test("renders expand arrows", function() {

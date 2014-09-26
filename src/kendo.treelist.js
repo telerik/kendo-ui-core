@@ -400,12 +400,14 @@ var __meta__ = {
             var messages = this.options.messages;
 
             if (!this.content.find("tr").length) {
-                this._showStatus([
-                    kendoDomElement("span", {
-                        className: classNames.icon + " " + classNames.loading
-                    }),
-                    kendoTextElement(messages.loading)
-                ]);
+                this._showStatus(
+                    kendo.template(
+                        "<span class='#= className #' /> #: messages.loading #"
+                    )({
+                        className: classNames.icon + " " + classNames.loading,
+                        messages: messages
+                    })
+                );
             }
         },
 
@@ -419,12 +421,20 @@ var __meta__ = {
             this._render();
         },
 
-        _showStatus: function(statusDom) {
-            this.contentTree.render([
-                kendoDomElement("tr", { className: classNames.status }, [
-                    kendoDomElement("td", null, statusDom)
-                ])
-            ]);
+        _showStatus: function(message) {
+            var status = this.element.find(".k-status");
+
+            if (!status.length) {
+                status = this.element.append("<div class='k-status' />");
+            }
+
+            this._contentTree.render([]);
+
+            status.html(message);
+        },
+
+        _hideStatus: function() {
+            this.element.find(".k-status").remove();
         },
 
         _adjustHeight: function() {
@@ -440,10 +450,11 @@ var __meta__ = {
             dataSource.unbind(ERROR, this._errorHandler);
             dataSource.unbind(PROGRESS, this._progressHandler);
 
-            this.content.off(NS);
+            this.element.off(NS);
 
             this._refreshHandler = this._errorHandler = this._progressHandler = null;
-            this.header = this.content = this.element = this._headerTree = this.contentTree = null;
+            this.header = this.content = this.element = null;
+            this._statusTree = this._headerTree = this._contentTree = null;
         },
 
         options: {
@@ -497,7 +508,7 @@ var __meta__ = {
             var retryButton = "." + classNames.retry;
             var dataSource = this.dataSource;
 
-            this.content
+            this.element
                 .on(CLICK + NS, icons, proxy(this._toggleChildren, this))
                 .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource));
         },
@@ -569,9 +580,12 @@ var __meta__ = {
                     "</table>";
             }
 
-            element.append(kendo.template(layout)(classNames));
+            element.append(
+                kendo.template(layout)(classNames) +
+                "<div class='k-status' />"
+            );
 
-            this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack();
+            this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack().filter("thead");
             this._headerTree = new kendoDom.Tree(this.header[0]);
             this._headerTree.render([kendoDomElement("tr", { "role": "row" }, this._ths())]);
 
@@ -581,7 +595,9 @@ var __meta__ = {
                 this.content = element.find("tbody");
             }
 
-            this.contentTree = new kendoDom.Tree(this.content[0]);
+            this._contentTree = new kendoDom.Tree(this.content[0]);
+
+            this._statusTree = new kendoDom.Tree(this.element.children(".k-status")[0]);
         },
 
         _render: function(options) {
@@ -596,20 +612,20 @@ var __meta__ = {
 
             if (options.error) {
                 // root-level error message
-                this._showStatus([
-                    kendoTextElement(messages.requestFailed),
-                    kendoDomElement("button", {
-                        className: [ classNames.button, classNames.retry ].join(" ")
-                    }, [ kendoTextElement(messages.retry) ])
-                ]);
+                this._showStatus(kendo.template(
+                    "#: messages.requestFailed # " +
+                    "<button class='#= buttonClass #'>#: messages.retry #</button>"
+                )({
+                    buttonClass: [ classNames.button, classNames.retry ].join(" "),
+                    messages: messages
+                }));
             } else if (!data.length) {
                 // no rows message
-                this._showStatus([
-                    kendoTextElement(messages.noRows)
-                ]);
+                this._showStatus(kendo.htmlEncode(messages.noRows));
             } else {
                 // render rows
-                this.contentTree.render(this._trs({
+                this._hideStatus();
+                this._contentTree.render(this._trs({
                     aggregates: options.aggregates,
                     data: data,
                     level: 0
