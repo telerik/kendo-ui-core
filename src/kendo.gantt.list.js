@@ -513,10 +513,12 @@ var __meta__ = {
                             finishEdit();
                             break;
                         case keys.ESC:
-                            cell = that._editableContainer;
-                            model = that._modelFromElement(cell);
-                            if (!that.trigger("cancel", { model: model, cell: cell })) {
-                                that._closeCell(true);
+                            if (that.editable) {
+                                cell = that._editableContainer;
+                                model = that._modelFromElement(cell);
+                                if (!that.trigger("cancel", { model: model, cell: cell })) {
+                                    that._closeCell(true);
+                                }
                             }
                             break;
                     }
