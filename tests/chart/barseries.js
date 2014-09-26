@@ -1113,7 +1113,7 @@
     (function() {
         var BarLabel = kendo.dataviz.BarLabel,
             barLabel,
-            paddingBox,
+            barBox,
             text;
 
         module("BarLabel", {
@@ -1187,81 +1187,58 @@
             equal(text.options.padding.bottom, 0);
         });
 
+        // ------------------------------------------------------------
         module("BarLabel / Align to clip box / vertical", {
             setup: function() {
                 barLabel = new BarLabel("content", {vertical: true, padding: 0, margin: 0});
-                barLabel.reflow(Box2D(50, 50, 60, 60));
-                text = barLabel.children[0];
-                paddingBox = text.paddingBox.clone();
+                barBox = Box2D(30, 30, 70, 70);
+                barLabel.reflow(barBox);
+                barLabel.parent = {
+                    box: barBox
+                };
             }
         });
 
-        test("label inside the box is not aligned", function() {
-            barLabel.alignToClipBox(Box2D(0, paddingBox.y1 - 20, 100, paddingBox.y1 + 1));
-            var result = text.paddingBox;
-            equal(result.x1, paddingBox.x1);
-            equal(result.x2, paddingBox.x2);
-            equal(result.y1, paddingBox.y1);
-            equal(result.y2, paddingBox.y2);
-        });
-
-        test("label above the box is aligned to the top of the box", 4, function() {
-            text.reflow = function(result) {
-                equal(result.x1, paddingBox.x1);
-                equal(result.x2, paddingBox.x2);
-                close(result.y1, paddingBox.y1 + 20, 0.1);
-                equal(result.y2, paddingBox.y2 + 20);
+        test("label is reflowed in the intersection between the parent box and the clip box", function() {
+            barLabel.reflow = function(targetBox) {
+                equal(targetBox.y1, 40);
+                equal(targetBox.y2, 70);
             };
-            barLabel.alignToClipBox(Box2D(0, paddingBox.y2 + 20, 100, paddingBox.y2 + 30));
+            barLabel.alignToClipBox(Box2D(0, 40, 100, 80));
         });
 
-        test("label below the box is aligned to the bottom of the box", 4, function() {
-            text.reflow = function(result) {
-                equal(result.x1, paddingBox.x1);
-                equal(result.x2, paddingBox.x2);
-                equal(result.y1, paddingBox.y1 - 20);
-                close(result.y2, paddingBox.y2 - 20, 0.1);
+        test("label is not reflowed if the parent box is inside the clip box", 0, function() {
+            barLabel.reflow = function() {
+                ok(false);
             };
-            barLabel.alignToClipBox(Box2D(0, paddingBox.y1 - 30, 100, paddingBox.y1 - 20));
+            barLabel.alignToClipBox(Box2D(0, 30, 100, 70));
         });
 
-
+        // ------------------------------------------------------------
         module("BarLabel / Align to clip box / horizontal", {
             setup: function() {
                 barLabel = new BarLabel("content", {vertical: false, padding: 0, margin: 0});
-                barLabel.reflow(Box2D(50, 50, 60, 60));
-                text = barLabel.children[0];
-                paddingBox = text.paddingBox.clone();
+                barBox = Box2D(30, 30, 70, 70);
+                barLabel.reflow(barBox);
+                barLabel.parent = {
+                    box: barBox
+                };
             }
         });
 
-        test("label inside the box is not aligned", function() {
-            barLabel.alignToClipBox(Box2D(paddingBox.x1 - 20, 0, paddingBox.x1 + 1, 100));
-            var result = text.paddingBox;
-            equal(result.x1, paddingBox.x1);
-            equal(result.x2, paddingBox.x2);
-            equal(result.y1, paddingBox.y1);
-            equal(result.y2, paddingBox.y2);
+        test("label is reflowed in the intersection between the parent box and the clip box", function() {
+            barLabel.reflow = function(targetBox) {
+                equal(targetBox.x1, 30);
+                equal(targetBox.x2, 60);
+            };
+            barLabel.alignToClipBox(Box2D(30, 0, 60, 100));
         });
 
-        test("label left from the box is aligned to the left side of the box", 4, function() {
-            text.reflow = function(result) {
-                equal(result.y1, paddingBox.y1);
-                equal(result.y2, paddingBox.y2);
-                close(result.x1, paddingBox.x1 + 20, 0.1);
-                equal(result.x2, paddingBox.x2 + 20);
+        test("label is not reflowed if the parent box is inside the clip box", 0, function() {
+            barLabel.reflow = function() {
+                ok(false);
             };
-            barLabel.alignToClipBox(Box2D(paddingBox.x2 + 20, 0, paddingBox.x2 + 30, 100));
-        });
-
-        test("label right from the box is aligned to the right side of the box", 4, function() {
-            text.reflow = function(result) {
-                equal(result.y1, paddingBox.y1);
-                equal(result.y2, paddingBox.y2);
-                equal(result.x1, paddingBox.x1 - 20);
-                close(result.x2, paddingBox.x2 - 20, 0.1);
-            };
-            barLabel.alignToClipBox(Box2D(paddingBox.x1 - 30, 0, paddingBox.x1 - 20, 100));
+            barLabel.alignToClipBox(Box2D(30, 0, 70, 100));
         });
 
     })();

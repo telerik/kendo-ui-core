@@ -1647,19 +1647,15 @@ var __meta__ = {
                 start = field + "1",
                 end = field + "2",
                 text = barLabel.children[0],
-                box = text.paddingBox,
-                difference;
+                parentBox = barLabel.parent.box,
+                targetBox;
 
-            if (box[end] < clipBox[start]) {
-                difference = clipBox[start] - box[end];
-            } else if (clipBox[end] < box[start]) {
-                difference = clipBox[end] - box[start];
-            }
+            if (parentBox[start] < clipBox[start] || clipBox[end] < parentBox[end]) {
+                targetBox = text.paddingBox.clone();
+                targetBox[start] = math.max(parentBox[start], clipBox[start]);
+                targetBox[end] = math.min(parentBox[end], clipBox[end]);
 
-            if (defined(difference)) {
-                box[start] += difference;
-                box[end] += difference;
-                text.reflow(box);
+                this.reflow(targetBox);
             }
         },
 
