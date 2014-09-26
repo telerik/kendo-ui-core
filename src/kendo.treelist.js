@@ -673,10 +673,10 @@ var __meta__ = {
             var className;
             var level = options.level;
             var data = options.data;
-            var aggregates = options.aggregates || {};
             var hasChildren;
             var childNodes;
             var dataSource = this.dataSource;
+            var aggregates = dataSource.aggregates() || {};
 
             for (var i = 0, length = data.length; i < length; i++) {
                 className = [];
