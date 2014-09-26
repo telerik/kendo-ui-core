@@ -408,6 +408,34 @@
         equal(suggestedItems.length, 2);
     });
 
+    test("suggest dataSource shows only unique records when instance of dataSource is provided and it is not custom bound to nested field", function() {
+        var ds = new kendo.data.DataSource({
+            schema: {
+                model: {
+                    fields: {
+                        foo: {
+                            type: "string"
+                        }
+                    }
+                }
+            },
+            transport: {
+                read: function(options) {
+                    options.success([
+                        { bar: { foo: "1" } },
+                        { bar: { foo: "1" } },
+                        { bar: { foo: "2" } }
+                    ]);
+                }
+            }
+        });
+
+        filterCell = setup(dom, { dataSource: ds, field: "bar.foo", suggestDataSource: ds, customDataSource: false });
+        filterCell.suggestDataSource.read();
+        var suggestedItems = filterCell.suggestDataSource.data();
+        equal(suggestedItems.length, 2);
+    });
+
     test("suggest dataSource shows all records when using inherited dataSource options", function() {
         var ds = new kendo.data.DataSource({
             schema: {

@@ -59,6 +59,8 @@ var __meta__ = {
     }
 
     function removeDuplicates (dataSelector, dataTextField) {
+        var getter = kendo.getter(dataTextField, true);
+
         return function(e) {
             var items = dataSelector(e),
                 result = [],
@@ -67,7 +69,8 @@ var __meta__ = {
 
             while (index < items.length) {
                 var item = items[index++],
-                    text = item[dataTextField];
+                    text = getter(item);
+
                 if(!seen.hasOwnProperty(text)){
                     result.push(item);
                     seen[text] = true;
