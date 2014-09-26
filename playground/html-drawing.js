@@ -101,9 +101,7 @@
     }
 
     function setClipping(shape, clipPath) {
-        // XXX: update this when the drawing-clip API is available.
-        // XXX: also in dataviz/drawing/pdf.js
-        shape._pdfClip = clipPath;
+        shape.clip(clipPath);
     }
 
     function addArcToPath(path, x, y, options) {

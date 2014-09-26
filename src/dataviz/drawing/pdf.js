@@ -169,9 +169,9 @@
 
     function setClipping(element, page, pdf) {
         // XXX: only Path supported at the moment.
-        // XXX: update this when drawing-clip API is available
-        if (element._pdfClip) {
-            drawPath(element._pdfClip, page, pdf);
+        var clip = element.clip();
+        if (clip) {
+            drawPath(clip, page, pdf);
             page.clip();
         }
     }
