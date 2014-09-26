@@ -593,6 +593,7 @@ var __meta__ = {
 
         _layout: function () {
             var element = this.element;
+            var colgroup = this._colgroup();
 
             element.addClass(classNames.wrapper);
 
@@ -600,12 +601,14 @@ var __meta__ = {
                 "<div class='#= gridHeader #'>" +
                     "<div class='#= gridHeaderWrap #'>" +
                         "<table role='grid'>" +
+                            colgroup +
                             "<thead role='rowgroup' />" +
                         "</table>" +
                     "</div>" +
                 "</div>" +
                 "<div class='#= gridContentWrap #'>" +
                     "<table role='treegrid' tabindex='0'>" +
+                        colgroup +
                         "<tbody />" +
                     "</table>" +
                 "</div>";
@@ -613,6 +616,7 @@ var __meta__ = {
             if (!this.options.scrollable) {
                 layout =
                     "<table role='treegrid' tabindex='0'>" +
+                        colgroup +
                         "<thead class='#= gridHeader #' role='rowgroup' />" +
                         "<tbody />" +
                     "</table>";
@@ -698,25 +702,25 @@ var __meta__ = {
             return ths;
         },
 
-        _cols: function() {
+        _colgroup: function() {
             var columns = this.columns;
-            var style;
-            var width;
             var cols = [];
+            var style, width;
 
             for (var i = 0, length = columns.length; i < length; i++) {
+                cols.push("<col ");
+
                 width = columns[i].width;
 
                 if (width && parseInt(width, 10) !== 0) {
-                    style = { style: { width: typeof width === "string" ? width : width + "px" } };
-                } else {
-                    style = null;
+                    cols.push("style='width:'");
+                    cols.push(typeof width === "string" ? width : width + "px");
                 }
 
-                cols.push(kendoDomElement("col", style, []));
+                cols.push("/>");
             }
 
-            return kendoDomElement("colgroup", null, cols);
+            return "<colgroup>" + cols.join("") + "</colgroup>";
         },
 
         _trs: function(options) {

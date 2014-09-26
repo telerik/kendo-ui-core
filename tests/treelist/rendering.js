@@ -478,6 +478,25 @@
         equal(instance.element.find("table").length, 1);
     });
 
+    test("renders colgroup elements in all tables", function() {
+        createTreeList({
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        equal(instance.element.find("colgroup").length, 2);
+    });
+
+    test("renders single colgroup in non-scrollable grid", function() {
+        createTreeList({
+            scrollable: false,
+            dataSouce: [ { id: 1 } ],
+            columns: [ { field: "id" } ]
+        });
+
+        equal(instance.element.find("colgroup").length, 1);
+    });
+
     function button(command) {
         command = command ? (".k-grid-" + command) : ""
         return instance.content.find(".k-button.k-button-icontext" + command);
