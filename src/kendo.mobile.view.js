@@ -33,6 +33,10 @@ var __meta__ = {
         attrValue = kendo.attrValue,
         roleSelector = kendo.roleSelector;
 
+    function byDirective(directives) {
+        return directives.replace(/(\S+)/g, "kendo-mobile-$1,").slice(0, -1);
+    }
+
     function initPopOvers(element) {
         var popovers = element.find(roleSelector("popover")),
             idx, length,
@@ -420,7 +424,7 @@ var __meta__ = {
 
             that._setupLayouts(container);
 
-            initWidgets(container.children(roleSelector("modalview drawer")));
+            initWidgets(container.children(that._locate("modalview drawer")));
         },
 
         destroy: function() {
@@ -508,9 +512,9 @@ var __meta__ = {
 
             that._setupLayouts(sandbox);
 
-            modalViews = sandbox.children(roleSelector("modalview drawer"));
+            modalViews = sandbox.children(that._locate("modalview drawer"));
 
-            container.append(sandbox.children(roleSelector("layout modalview drawer")).add(views));
+            container.append(sandbox.children(that._locate("layout modalview drawer")).add(views));
 
             // Initialize the modalviews after they have been appended to the final container
             initWidgets(modalViews);
@@ -518,6 +522,9 @@ var __meta__ = {
             return that._createView(view);
         },
 
+        _locate: function(selectors) {
+            return this.$angular ? byDirective(selectors) : roleSelector(selectors);
+        },
 
         _findViewElement: function(url) {
             var element,
@@ -548,6 +555,10 @@ var __meta__ = {
 
             if (layout) {
                 layout = that.layouts[layout];
+            }
+
+            if (that.$angular) {
+                element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
             }
 
             viewOptions = {
@@ -589,13 +600,13 @@ var __meta__ = {
         },
 
         _hideViews: function(container) {
-            return container.children(roleSelector("view splitview")).hide();
+            return container.children(this._locate("view splitview")).hide();
         },
 
         _setupLayouts: function(element) {
             var that = this;
 
-            element.children(roleSelector("layout")).each(function() {
+            element.children(that._locate("layout")).each(function() {
                 var layout = $(this),
                     platform = attrValue(layout,  "platform");
 

@@ -888,6 +888,18 @@ var __meta__ = {
         });
     }
 
+    // mobile directives
+    module.directive('kendoMobileApplication', function() {
+        return {
+            terminal: true,
+            link: function(scope, element, attrs, controllers) {
+                attrs.$angular = true;
+                new kendo.mobile.Application(element, attrs);
+            }
+        };
+    });
+
+
 })(window.kendo.jQuery, window.angular);
 
 return window.kendo;

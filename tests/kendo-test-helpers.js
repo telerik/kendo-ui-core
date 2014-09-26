@@ -322,3 +322,47 @@ function withAngularTests(moduleName, func) {
     func(runTest);
 
 }
+
+var ngTestModule, ngTest;
+
+(function() {
+    var $injector, $scope, $compile;
+
+    ngTestModule = function(name, config) {
+        if (!config) {
+            config = {};
+        }
+
+        var setup = config.setup || $.noop;
+        var teardown = config.teardown || $.noop;
+
+        config.setup = function() {
+            $injector = angular.injector(["ng", "kendo.directives"]);
+
+            $injector.invoke(function($rootScope, _$compile_) {
+                $scope = $rootScope.$new();
+                $compile = _$compile_;
+            });
+
+            setup();
+        }
+
+        config.teardown = function() {
+            teardown();
+            $scope.$destroy();
+            kendo.destroy(QUnit.fixture);
+        }
+
+        module(name, config);
+    }
+
+    ngTest = function(name, assertions, setup, check) {
+        asyncTest(name, assertions, function() {
+            setup();
+            $compile(QUnit.fixture)($scope);
+            $scope.$digest();
+            start();
+            check();
+        });
+    }
+})();

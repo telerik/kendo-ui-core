@@ -101,6 +101,7 @@ var __meta__ = {
                 serverNavigation: options.serverNavigation,
                 remoteViewURLPrefix: options.root || "",
                 layout: options.layout,
+                $angular: options.$angular,
                 loader: that.loader
             });
 
