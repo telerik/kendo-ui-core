@@ -78,13 +78,33 @@
         }
     }
 
+    var globalAlpha = 1;
+
+    function setGlobalAlpha(page, opacity, line, fill) {
+        globalAlpha *= opacity;
+        if (line) {
+            page.setStrokeOpacity(globalAlpha);
+        }
+        if (fill) {
+            page.setFillOpacity(globalAlpha);
+        }
+    }
+
     function drawElement(element, page, pdf) {
+        var saveGlobalAlpha = globalAlpha;
+        var transform = element.transform();
+        var opacity = element.opacity();
+
         page.save();
+
+        if (opacity != null) {
+            setGlobalAlpha(page, opacity, true, true);
+        }
+
         setStrokeOptions(element, page, pdf);
         setFillOptions(element, page, pdf);
         setClipping(element, page, pdf);
 
-        var transform = element.transform();
         if (transform) {
             var m = transform.matrix();
             page.transform(m.a, m.b, m.c, m.d, m.e, m.f);
@@ -101,6 +121,7 @@
         }, element, page, pdf);
 
         page.restore();
+        globalAlpha = saveGlobalAlpha;
     }
 
     function setStrokeOptions(element, page, pdf) {
@@ -115,7 +136,7 @@
             if (color == null) return; // no stroke
             page.setStrokeColor(color.r, color.g, color.b);
             if (color.a != 1) {
-                page.setStrokeOpacity(color.a);
+                page.setStrokeOpacity(globalAlpha * color.a);
             }
         }
 
@@ -142,7 +163,7 @@
 
         var opacity = stroke.opacity;
         if (opacity != null) {
-            page.setStrokeOpacity(opacity);
+            page.setStrokeOpacity(globalAlpha * opacity);
         }
     }
 
@@ -157,13 +178,13 @@
             color = parseColor(color);
             page.setFillColor(color.r, color.g, color.b);
             if (color.a != 1) {
-                page.setFillOpacity(color.a);
+                page.setFillOpacity(globalAlpha * color.a);
             }
         }
 
         var opacity = fill.opacity;
         if (opacity != null) {
-            page.setFillOpacity(opacity);
+            page.setFillOpacity(globalAlpha * opacity);
         }
     }
 

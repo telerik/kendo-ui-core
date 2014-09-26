@@ -545,10 +545,14 @@
         var style = getComputedStyle(element);
         var opacity = parseFloat(getPropertyValue(style, "opacity"));
         if (opacity == 0) return;
-        // XXX: how  to handle opacity?
 
         var group = new drawing.Group();
         container.append(group);
+
+        if (opacity < 1) {
+            group.opacity(opacity);
+        }
+
         var t = getTransform(style);
         if (t) {
             var prevTransform = element.style.transform;
