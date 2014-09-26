@@ -202,9 +202,9 @@ var __meta__ = {
                         handler.dataSource.read(pullParameters.call(listView, handler._first));
                     }
                 },
-                pullTemplate: options.pullTemplate,
-                releaseTemplate: options.releaseTemplate,
-                refreshTemplate: options.refreshTemplate
+                pullTemplate: options.messages.pullTemplate,
+                releaseTemplate: options.messages.releaseTemplate,
+                refreshTemplate: options.messages.refreshTemplate
             });
         },
 
@@ -523,7 +523,7 @@ var __meta__ = {
         init: function(listView, buffer) {
 
             this._loadIcon = $(LOAD_ICON).hide();
-            this._loadButton = $('<a class="km-load">' + listView.options.loadMoreText + '</a>').hide();
+            this._loadButton = $('<a class="km-load">' + listView.options.messages.loadMoreText + '</a>').hide();
             this.element = $('<li class="km-load-more" style="display: none"></li>').append(this._loadIcon).append(this._loadButton).appendTo(listView.element);
 
             var loadMore = this;
@@ -945,13 +945,15 @@ var __meta__ = {
             headerTemplate: '<span class="km-text">#:value#</span>',
             appendOnRefresh: false,
             loadMore: false,
-            loadMoreText: "Press to load more",
             endlessScroll: false,
             scrollThreshold: 30,
             pullToRefresh: false,
-            pullTemplate: "Pull to refresh",
-            releaseTemplate: "Release to refresh",
-            refreshTemplate: "Refreshing",
+            messages: {
+                loadMoreText: "Press to load more",
+                pullTemplate: "Pull to refresh",
+                releaseTemplate: "Release to refresh",
+                refreshTemplate: "Refreshing"
+            },
             pullOffset: 140,
             filterable: false,
             virtualViewSize: null

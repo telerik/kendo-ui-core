@@ -250,7 +250,7 @@
         dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
         wrapper = dom.wrap("<div />").parent(),
         scroller = new kendo.mobile.ui.Scroller(wrapper),
-        listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more...", dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ], pageSize: 10 }) });
+        listView = new ListView(dom, { loadMore: true, messages: { loadMoreText: "Press to load more..." }, dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ], pageSize: 10 }) });
 
         var footer = listView.wrapper.find(".km-load-more").eq(0);
 
