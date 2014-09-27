@@ -2,6 +2,8 @@
     define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller", "./kendo.view" ], f);
 })(function(){
 
+"use strict";
+
 var __meta__ = {
     id: "mobile.view",
     name: "View",
@@ -379,6 +381,7 @@ var __meta__ = {
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
         VIEW_SHOW = "viewShow",
+        VIEW_TYPE_DETERMINED = "viewTypeDetermined",
         AFTER = "after";
 
     var ViewEngine = Observable.extend({
@@ -425,7 +428,18 @@ var __meta__ = {
             that._setupLayouts(container);
 
             initWidgets(container.children(that._locate("modalview drawer")));
+            this.bind(this.events, options);
         },
+
+        events: [
+            SHOW_START,
+            AFTER,
+            VIEW_SHOW,
+            LOAD_START,
+            LOAD_COMPLETE,
+            SAME_VIEW_REQUESTED,
+            VIEW_TYPE_DETERMINED
+        ],
 
         destroy: function() {
             kendo.destroy(this.container);
@@ -467,7 +481,7 @@ var __meta__ = {
                 element = [];
             }
 
-            this.trigger("viewTypeDetermined", { remote: element.length === 0, url: url });
+            this.trigger(VIEW_TYPE_DETERMINED, { remote: element.length === 0, url: url });
 
             if (element[0]) {
                 if (!view) {
