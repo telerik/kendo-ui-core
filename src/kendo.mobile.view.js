@@ -490,16 +490,19 @@ var __meta__ = {
 
                 return showClosure(view);
             } else {
-                that._loadView(url, showClosure);
+                if (this.serverNavigation) {
+                    location.href = url;
+                } else {
+                    that._loadView(url, showClosure);
+                }
                 return true;
             }
         },
 
         append: function(html, url) {
-            var that = this,
-                sandbox = that.sandbox,
+            var sandbox = this.sandbox,
                 urlPath = (url || "").split("?")[0],
-                container = that.container,
+                container = this.container,
                 views,
                 modalViews,
                 view;
@@ -512,7 +515,7 @@ var __meta__ = {
 
             container.append(sandbox.children("script, style"));
 
-            views = that._hideViews(sandbox);
+            views = this._hideViews(sandbox);
             view = views.first();
 
             // Generic HTML content found as remote view - no remote view markers
@@ -524,16 +527,16 @@ var __meta__ = {
                 view.hide().attr(attr("url"), urlPath);
             }
 
-            that._setupLayouts(sandbox);
+            this._setupLayouts(sandbox);
 
-            modalViews = sandbox.children(that._locate("modalview drawer"));
+            modalViews = sandbox.children(this._locate("modalview drawer"));
 
-            container.append(sandbox.children(that._locate("layout modalview drawer")).add(views));
+            container.append(sandbox.children(this._locate("layout modalview drawer")).add(views));
 
             // Initialize the modalviews after they have been appended to the final container
             initWidgets(modalViews);
 
-            return that._createView(view);
+            return this._createView(view);
         },
 
         _locate: function(selectors) {
@@ -559,41 +562,32 @@ var __meta__ = {
         },
 
         _createView: function(element) {
-            var that = this,
-                viewOptions,
-                layout = attrValue(element, "layout");
+            var layout = attrValue(element, "layout");
 
             if (typeof layout === "undefined") {
-                layout = that.layout;
+                layout = this.layout;
             }
 
             if (layout) {
-                layout = that.layouts[layout];
+                layout = this.layouts[layout];
             }
 
-            if (that.$angular) {
+            if (this.$angular) {
                 element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
             }
 
-            viewOptions = {
-                defaultTransition: that.transition,
-                loader: that.loader,
-                container: that.container,
+            return kendo.initWidget(element, {
+                defaultTransition: this.transition,
+                loader: this.loader,
+                container: this.container,
                 layout: layout,
-                modelScope: that.modelScope,
+                modelScope: this.modelScope,
                 reload: attrValue(element, "reload")
-            };
-
-            return kendo.initWidget(element, viewOptions, ui.roles);
+            }, ui.roles);
         },
 
         _loadView: function(url, callback) {
             var that = this;
-
-            if (this.serverNavigation) {
-                location.href = url;
-                return;
-            }
 
             if (that._xhr) {
                 that._xhr.abort();
