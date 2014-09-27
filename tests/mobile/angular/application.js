@@ -25,4 +25,12 @@
     function() {
         equal(kendo.mobile.application.options.skin, 'flat');
     });
+
+    ngTest("assignment puts reference in scope", 1,
+    function() {
+        QUnit.fixture.html("<div kendo-mobile-application='app' k-skin='\"flat\"' id=foo><kendo-mobile-view></kendo-mobile-view></div>");
+    },
+    function() {
+        equal(kendo.mobile.application, ngScope().app);
+    });
 }());

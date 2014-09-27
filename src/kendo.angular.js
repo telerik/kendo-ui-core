@@ -21,7 +21,10 @@ var __meta__ = {
     /*jshint eqnull:true,loopfunc:true,-W052,-W028  */
 
     var module = angular.module('kendo.directives', []);
-    var $parse, $timeout, $compile, $log;
+    var $parse = angular.injector(['ng']).get('$parse'),
+        $timeout,
+        $compile,
+        $log;
 
     function withoutTimeout(f) {
         var save = $timeout;
@@ -169,7 +172,6 @@ var __meta__ = {
 
     function exposeWidget(widget, scope, attrs, kendoWidget, origAttr) {
         if (attrs[origAttr]) {
-            // expose the widget object
             var set = $parse(attrs[origAttr]).assign;
             if (set) {
                 // set the value of the expression to the kendo widget object to expose its api
@@ -180,10 +182,9 @@ var __meta__ = {
         }
     }
 
-    module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, parse, compile, log) {
+    module.factory('directiveFactory', ['$timeout', '$parse', '$compile', '$log', function(timeout, $parse, compile, log) {
 
         $timeout = timeout;
-        $parse = parse;
         $compile = compile;
         $log = log;
 

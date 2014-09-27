@@ -323,10 +323,14 @@ function withAngularTests(moduleName, func) {
 
 }
 
-var ngTestModule, ngTest;
+var ngTestModule, ngTest, ngScope;
 
 (function() {
     var $injector, $scope, $compile;
+
+    ngScope = function() {
+        return $scope;
+    }
 
     ngTestModule = function(name, config) {
         if (!config) {
