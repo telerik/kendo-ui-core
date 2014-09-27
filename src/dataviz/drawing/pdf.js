@@ -78,27 +78,14 @@
         }
     }
 
-    var globalAlpha = 1;
-
-    function setGlobalAlpha(page, opacity, line, fill) {
-        globalAlpha *= opacity;
-        if (line) {
-            page.setStrokeOpacity(globalAlpha);
-        }
-        if (fill) {
-            page.setFillOpacity(globalAlpha);
-        }
-    }
-
     function drawElement(element, page, pdf) {
-        var saveGlobalAlpha = globalAlpha;
         var transform = element.transform();
         var opacity = element.opacity();
 
         page.save();
 
         if (opacity != null) {
-            setGlobalAlpha(page, opacity, true, true);
+            page.setOpacity(opacity);
         }
 
         setStrokeOptions(element, page, pdf);
@@ -121,7 +108,6 @@
         }, element, page, pdf);
 
         page.restore();
-        globalAlpha = saveGlobalAlpha;
     }
 
     function setStrokeOptions(element, page, pdf) {
@@ -136,7 +122,7 @@
             if (color == null) return; // no stroke
             page.setStrokeColor(color.r, color.g, color.b);
             if (color.a != 1) {
-                page.setStrokeOpacity(globalAlpha * color.a);
+                page.setStrokeOpacity(color.a);
             }
         }
 
@@ -163,7 +149,7 @@
 
         var opacity = stroke.opacity;
         if (opacity != null) {
-            page.setStrokeOpacity(globalAlpha * opacity);
+            page.setStrokeOpacity(opacity);
         }
     }
 
@@ -178,13 +164,13 @@
             color = parseColor(color);
             page.setFillColor(color.r, color.g, color.b);
             if (color.a != 1) {
-                page.setFillOpacity(globalAlpha * color.a);
+                page.setFillOpacity(color.a);
             }
         }
 
         var opacity = fill.opacity;
         if (opacity != null) {
-            page.setFillOpacity(globalAlpha * opacity);
+            page.setFillOpacity(opacity);
         }
     }
 

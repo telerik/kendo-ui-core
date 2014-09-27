@@ -772,9 +772,12 @@
         this._fontResources = {};
         this._gsResources = {};
         this._xResources = {};
+        this._opacity = 1;
 
         this._font = null;
         this._fontSize = null;
+
+        this._contextStack = [];
 
         props = this.props = props || {};
         props.Type = PDFName.get("Page");
@@ -859,8 +862,12 @@
         setStrokeColor: function(r, g, b) {
             this._out(r, " ", g, " ", b, " RG", NL);
         },
+        setOpacity: function(opacity) {
+            this.setFillOpacity(opacity);
+            this.setStrokeOpacity(opacity);
+        },
         setStrokeOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(opacity, true);
+            var gs = this._pdf.getOpacityGS(this._opacity *= opacity, true);
             this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
@@ -868,7 +875,7 @@
             this._out(r, " ", g, " ", b, " rg", NL);
         },
         setFillOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(opacity, false);
+            var gs = this._pdf.getOpacityGS(this._opacity *= opacity, false);
             this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
@@ -888,10 +895,12 @@
             this._out(mitterLimit, " M", NL);
         },
         save: function() {
+            this._contextStack.push(this._context());
             this._out("q", NL);
         },
         restore: function() {
             this._out("Q", NL);
+            this._context(this._contextStack.pop());
         },
 
         // paths
@@ -968,6 +977,17 @@
             var img = this._pdf.getImage(url);
             this._xResources[img._resourceName] = img;
             this._out(img._resourceName, " Do", NL);
+        },
+
+        // internal
+        _context: function(val) {
+            if (val != null) {
+                this._opacity = val.opacity;
+            } else {
+                return {
+                    opacity: this._opacity
+                };
+            }
         }
     }, PDFDictionary);
 
