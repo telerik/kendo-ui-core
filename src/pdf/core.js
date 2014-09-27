@@ -865,9 +865,10 @@
         setOpacity: function(opacity) {
             this.setFillOpacity(opacity);
             this.setStrokeOpacity(opacity);
+            this._opacity *= opacity;
         },
         setStrokeOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(this._opacity *= opacity, true);
+            var gs = this._pdf.getOpacityGS(this._opacity * opacity, true);
             this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
@@ -875,7 +876,7 @@
             this._out(r, " ", g, " ", b, " rg", NL);
         },
         setFillOpacity: function(opacity) {
-            var gs = this._pdf.getOpacityGS(this._opacity *= opacity, false);
+            var gs = this._pdf.getOpacityGS(this._opacity * opacity, false);
             this._gsResources[gs._resourceName] = gs;
             this._out(gs._resourceName, " gs", NL);
         },
