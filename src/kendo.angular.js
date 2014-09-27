@@ -525,6 +525,10 @@ var __meta__ = {
         ContextMenu    : "ul"
     };
 
+    var MANUAL_DIRECTIVES = [
+        'MobileApplication'
+    ];
+
     function createDirectives(klass, isMobile) {
         function make(directiveName, widgetName) {
             module.directive(directiveName, [
@@ -537,6 +541,11 @@ var __meta__ = {
 
         var name = isMobile ? "Mobile" : "";
         name += klass.fn.options.name;
+
+        if (MANUAL_DIRECTIVES.indexOf(name) > -1) {
+            return;
+        }
+
         var className = name;
         var shortcut = "kendo" + name.charAt(0) + name.substr(1).toLowerCase();
         name = "kendo" + name;
@@ -893,8 +902,7 @@ var __meta__ = {
         return {
             terminal: true,
             link: function(scope, element, attrs, controllers) {
-                attrs.$angular = true;
-                new kendo.mobile.Application(element, attrs);
+                createWidget(scope, element, attrs, 'kendoMobileApplication', 'kendoMobileApplication');
             }
         };
     });

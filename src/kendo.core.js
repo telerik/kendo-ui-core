@@ -3030,6 +3030,8 @@ function pad(number, digits, end) {
             return kendo.mobile.application && kendo.mobile.application.options && kendo.mobile.application.options.useNativeScrolling;
         },
 
+        roles: {},
+
         ui: {
             Widget: MobileWidget,
             DataBoundWidget: DataBoundWidget.extend(MobileWidget.prototype),
