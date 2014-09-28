@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.menu", "../../kendo.editable", "../../kendo.window", "../../kendo.dataviz.themes", "../kendo.util",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.toolbar", "../../kendo.editable", "../../kendo.window", "../../kendo.dataviz.themes", "../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
@@ -1376,6 +1376,10 @@
                 that.canvas.draw();
                 this._shouldRefresh = true;
                 this._initMobile();
+
+                this._toolBar = new DiagramToolBar(this, {
+                    tools: this.options.shapeDefaults.editable.tools
+                });
             },
             options: {
                 name: "Diagram",
@@ -3233,6 +3237,86 @@
         function isNumber(val) {
             return typeof val === "number" && !isNaN(val);
         }
+
+        var DiagramToolBar = Class.extend({
+            init: function(diagram, options) {
+                this.diagram = diagram;
+                this.options = options;
+                this.toolBarActions = new ToolBarActions(diagram);
+                this.createToolBar();
+                this.createTools(this.options.tools);
+            },
+
+            createToolBar: function() {
+                this.element = $("<div id='diagramToolBar' style='width: 130px;'></div>");
+                this._toolBar = this.element
+                    .kendoToolBar({
+                        click: proxy(this.click, this)
+                    }).getKendoToolBar();
+
+                this.diagram.element.append(this.element);
+            },
+
+            createTools: function(tools) {
+                for (var i = 0; i < tools.length; i++) {
+                    var tool = tools[i];
+                    this.createTool(tool);
+                }
+            },
+
+            createTool: function(tool) {
+                if (isPlainObject(tool)) {
+                    if (tool.type) {
+                        this[tool.type + "Tool"](tool);
+                    } else if (tool.template) {
+                        this._toolBar.add({
+                            template: tool.template
+                        });
+                    }
+                } else {
+                    var tool = this[tool + "Tool"];
+                    if (tool) {
+                        this[tool]({ });
+                    }
+                }
+            },
+
+            editTool: function(options) {
+                this._toolBar.add({
+                    type: "button",
+                    text: "edit",
+                    id: "edit"
+                });
+            },
+
+            deleteTool: function(options) {
+                this._toolBar.add({
+                    type: "button",
+                    text: "delete",
+                    id: "delete"
+                });
+            },
+
+            click: function(e) {
+                this.toolBarActions[e.id]();
+            }
+        });
+
+        var ToolBarActions = Class.extend({
+            init: function(diagram) {
+                this.diagram = diagram;
+            },
+            delete: function() {
+                this.diagram.delete(this.selectedElement());
+            },
+            edit: function() {
+                debugger;
+                this.diagram.edit(this.selectedElement());
+            },
+            selectedElement: function() {
+                return this.diagram.select()[0];
+            }
+        });
 
         dataviz.ui.plugin(Diagram);
 
