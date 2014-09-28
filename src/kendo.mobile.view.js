@@ -58,8 +58,6 @@ var __meta__ = {
     var View = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
-
-
             this.params = {};
 
             $.extend(this, options);
@@ -572,18 +570,30 @@ var __meta__ = {
                 layout = this.layouts[layout];
             }
 
-            if (this.$angular) {
-                element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
-            }
-
-            return kendo.initWidget(element, {
+            var options = {
                 defaultTransition: this.transition,
                 loader: this.loader,
                 container: this.container,
                 layout: layout,
                 modelScope: this.modelScope,
                 reload: attrValue(element, "reload")
-            }, ui.roles);
+            }
+
+            if (this.$angular) {
+                element.attr("data-role", element[0].tagName.toLowerCase().replace('kendo-mobile-', ''));
+
+                angular.element(element).injector().invoke(function($compile) {
+                    var scope = angular.element(element).scope();
+                    scope.viewOptions = options;
+                    $compile(element)(scope);
+                    scope.$digest();
+                });
+
+                return kendo.widgetInstance(element, ui);
+            } else {
+                return kendo.initWidget(element, options, ui.roles);
+            }
+
         },
 
         _loadView: function(url, callback) {

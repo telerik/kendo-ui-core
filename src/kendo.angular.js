@@ -527,7 +527,8 @@ var __meta__ = {
     };
 
     var MANUAL_DIRECTIVES = [
-        'MobileApplication'
+        'MobileApplication',
+        'MobileView'
     ];
 
     function createDirectives(klass, isMobile) {
@@ -899,11 +900,18 @@ var __meta__ = {
     }
 
     // mobile directives
-    module.directive('kendoMobileApplication', function() {
+    module
+    .directive('kendoMobileApplication', function() {
         return {
             terminal: true,
             link: function(scope, element, attrs, controllers) {
                 createWidget(scope, element, attrs, 'kendoMobileApplication', 'kendoMobileApplication');
+            }
+        };
+    }).directive('kendoMobileView', function() {
+        return {
+            link: function(scope, element, attrs, controllers) {
+                createWidget(scope, element, attrs, 'kendoMobileView', 'kendoMobileView');
             }
         };
     });

@@ -1,5 +1,4 @@
 (function () {
-
     ngTestModule("Mobile Application", {
         teardown: function() {
             kendo.mobile.application.destroy();
