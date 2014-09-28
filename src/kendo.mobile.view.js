@@ -587,24 +587,29 @@ var __meta__ = {
         },
 
         _loadView: function(url, callback) {
-            var that = this;
-
-            if (that._xhr) {
-                that._xhr.abort();
+            if (this._xhr) {
+                this._xhr.abort();
             }
 
-            that.trigger(LOAD_START);
+            this.trigger(LOAD_START);
 
-            that._xhr = $.get(kendo.absoluteURL(url, that.remoteViewURLPrefix), function(html) {
-                            that.trigger(LOAD_COMPLETE);
-                            callback(that.append(html, url));
-                        }, 'html')
-                        .fail(function(request) {
-                            that.trigger(LOAD_COMPLETE);
-                            if (request.status === 0 && request.responseText) {
-                                callback(that.append(request.responseText, url));
-                            }
-                        });
+            this._xhr = $.get(kendo.absoluteURL(url, this.remoteViewURLPrefix), "html")
+                .always($.proxy(this, "_xhrComplete", callback, url));
+        },
+
+        _xhrComplete: function(callback, url, response, status, err) {
+            var success = true;
+
+            if (typeof response === "object") {
+                success = response.status == 0 && response.responseText.length > 0;
+                response = response.responseText;
+            }
+
+            this.trigger(LOAD_COMPLETE);
+
+            if (success) {
+                callback(this.append(response, url));
+            }
         },
 
         _hideViews: function(container) {

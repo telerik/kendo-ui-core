@@ -107,6 +107,22 @@
         viewEngine.showView("page2.html");
     });
 
+    asyncTest("Works with safari/cordova local file quirk", 2, function() {
+        $.mockjax({
+            url: "page2.html",
+            status: 0,
+            responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
+        });
+
+        viewEngine.bind("viewShow", function(e) {
+            start();
+            equal(root.find("#page2").length, 1, "Remote view is inserted in the application DOM element");
+            equal(e.view.element[0], root.find("#page2")[0]);
+        });
+
+        viewEngine.showView("page2.html");
+    });
+
     asyncTest("If view is missing, treats body contents as the view", 2, function() {
         $.mockjax({
             url: "page2.html",
