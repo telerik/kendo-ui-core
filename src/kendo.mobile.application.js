@@ -160,8 +160,17 @@ var __meta__ = {
                 this._setupDocumentTitle();
             }
 
-            this._startHistory();
-            this.trigger(INIT);
+            var that = this,
+                startHistory = function() {
+                    that._startHistory();
+                    that.trigger(INIT);
+                }
+
+            if (this.options.$angular) {
+                setTimeout(startHistory);
+            } else {
+                startHistory();
+            }
         },
 
         options: {
