@@ -89,22 +89,26 @@ var __meta__ = {
         destroy: {
             text: "Delete",
             imageClass: "k-delete",
-            className: "k-grid-delete"
+            className: "k-grid-delete",
+            methodName: "removeRow"
         },
         edit: {
             text: "Edit",
             imageClass: "k-edit",
-            className: "k-grid-edit"
+            className: "k-grid-edit",
+            methodName: "editRow"
         },
         update: {
             text: "Update",
             imageClass: "k-update",
-            className: "k-primary k-grid-update"
+            className: "k-primary k-grid-update",
+            methodName: "saveRow"
         },
         canceledit: {
             text: "Cancel",
             imageClass: "k-cancel",
-            className: "k-grid-cancel"
+            className: "k-grid-cancel",
+            methodName: "cancelRow"
         }
     };
 
@@ -530,33 +534,40 @@ var __meta__ = {
                 .on(CLICK + NS, "tbody .k-button", proxy(this._commandClick, this));
         },
 
-        _commandFromClass: function(className) {
-            var match = (/k-grid-([^\b]+)/).exec(className);
-            return match ? match[1] : "";
+        _commandByName: function(name) {
+            var columns = this.columns;
+            var i, j, commands;
+
+            if (defaultCommands[name]) {
+                return defaultCommands[name];
+            }
+
+            // command not found in defaultCommands, must be custom
+            for (i = 0; i < columns.length; i++) {
+                commands = columns[i].command;
+                if (commands) {
+                    for (j = 0; j < commands.length; j++) {
+                        if (commands[j].name == name) {
+                            return commands[j];
+                        }
+                    }
+                }
+            }
         },
 
         _commandClick: function(e) {
-            var commandName = this._commandFromClass(e.currentTarget.className);
+            var button = $(e.currentTarget);
+            var commandName = button.attr("data-command");
+            var command = this._commandByName(commandName);
+            var row = button.closest("tr");
 
-            this["_" + commandName](e);
-        },
-
-        _edit: function(e) {
-            var row = $(e.currentTarget).closest("tr");
-            this.editRow(row);
-        },
-
-        _delete: function(e) {
-            var row = $(e.currentTarget).closest("tr");
-            this.removeRow(row);
-        },
-
-        _cancel: function() {
-            this.cancelRow();
-        },
-
-        _update: function() {
-            this.saveRow();
+            if (command) {
+                if (command.methodName) {
+                    this[command.methodName](row);
+                } else if (command.click) {
+                    command.click();
+                }
+            }
         },
 
         _columns: function() {
@@ -920,6 +931,7 @@ var __meta__ = {
 
             return kendoDomElement(
                 "button", {
+                    "data-command": name,
                     className: [ "k-button", "k-button-icontext", command.className ].join(" ")
                 }, icon.concat([ kendoTextElement(command.text) ])
             );

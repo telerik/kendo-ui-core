@@ -417,4 +417,32 @@
 
         instance.content.find(".k-grid-delete").click();
     });
+
+    test("custom command renders button with passed className", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [
+                    { name: "foo", className: "foo" }
+                ] }
+            ]
+        });
+
+        equal(instance.content.find(".foo").length, 1);
+    });
+
+    test("clicking custom command buttons executes their click action", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: [
+                    { name: "foo", className: "foo", click: function() { ok(true); } }
+                ] }
+            ]
+        });
+
+        instance.content.find(".foo").click();
+    });
 })();
