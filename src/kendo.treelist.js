@@ -110,40 +110,6 @@ var __meta__ = {
         }
     };
 
-    function findNode(dom, virtual) {
-        virtual = [virtual];
-
-        var current = virtual.shift();
-
-        while(current) {
-
-            if (current.node === dom || current.root === dom) {
-                return current;
-            }
-
-            [].push.apply(virtual, current.children);
-
-            current = virtual.shift();
-        }
-
-        return null;
-    }
-
-    function empty(element) {
-        var parent = element.node.parentNode;
-
-        element.children = [];
-        element.remove();
-        element.render(parent, null);
-    }
-
-    function removeChild(element, index) {
-        var children = element.children;
-
-        //children[index].remove();
-        children.splice(index, 1);
-    }
-
     var TreeListModel = Model.define({
         id: "id",
 
