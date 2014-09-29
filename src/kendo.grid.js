@@ -5337,8 +5337,6 @@ var __meta__ = {
                 position,
                 row,
                 width = 0,
-                parents = [],
-                parent,
                 headerCellIndex,
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
@@ -5374,24 +5372,15 @@ var __meta__ = {
                    this.hideColumn(column.columns[idx]);
                 }
 
+                that.trigger(COLUMNHIDE, { column: column });
+
                 return;
             }
 
             columnIndex = inArray(column, visibleColumns(leafColumns(columns)));
             setColumnVisibility(column, false);
 
-            if (columnParents(column, columns, parents) && parents.length) {
-                for (idx = parents.length - 1; idx >= 0; idx--) {
-                    parent = parents[idx];
-                    if (!visibleColumns(parent.columns).length && !parent.hidden) {
-                        position = columnVisiblePosition(parent, columns);
-
-                        setColumnVisibility(parent, false);
-
-                        setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, false);
-                    }
-                }
-            }
+            that._setParentsVisibility(column, false);
 
             that._templates();
 
@@ -5461,6 +5450,32 @@ var __meta__ = {
             that.trigger(COLUMNHIDE, { column: column });
         },
 
+        _setParentsVisibility: function(column, visible) {
+            var columns = this.columns;
+            var idx;
+            var parents = [];
+            var parent;
+            var position;
+
+            var predicate = visible ?
+                function(p) { return visibleColumns(p.columns).length && p.hidden; } :
+                function(p) { return !visibleColumns(p.columns).length && !p.hidden; };
+
+
+            if (columnParents(column, columns, parents) && parents.length) {
+                for (idx = parents.length - 1; idx >= 0; idx--) {
+                    parent = parents[idx];
+                    if (predicate(parent)) {
+                        position = columnVisiblePosition(parent, columns);
+                        setColumnVisibility(parent, visible);
+                        setCellVisibility(elements($(">table>thead", this.lockedHeader), this.thead, ">tr:eq(" + position.row + ")>th"), position.cell, visible);
+                    }
+                }
+            }
+
+
+        },
+
         showColumn: function(column) {
             var that = this,
                 idx,
@@ -5505,6 +5520,8 @@ var __meta__ = {
                    this.showColumn(column.columns[idx]);
                 }
 
+                that.trigger(COLUMNSHOW, { column: column });
+
                 return;
             }
 
@@ -5512,17 +5529,7 @@ var __meta__ = {
 
             setColumnVisibility(column, true);
 
-            var parents = [];
-            if (columnParents(column, columns, parents) && parents.length) {
-                for (idx = parents.length - 1; idx >= 0; idx--) {
-                    var parent = parents[idx];
-                    if (visibleColumns(parent.columns).length && parent.hidden) {
-                        position = columnVisiblePosition(parent, columns);
-                        setColumnVisibility(parent, true);
-                        setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, true);
-                    }
-                }
-            }
+            that._setParentsVisibility(column, true);
 
             that._templates();
             that._updateCols();
