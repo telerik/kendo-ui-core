@@ -424,7 +424,15 @@ var __meta__ = {
             }
         },
 
-        refresh: function() {
+        refresh: function(e) {
+            e = e || {};
+
+            if (e.action == "itemchange" && this.editable) {
+                return;
+            }
+
+            this._cancelEditor();
+
             this._render();
         },
 
@@ -456,6 +464,8 @@ var __meta__ = {
             dataSource.unbind(CHANGE, this._refreshHandler);
             dataSource.unbind(ERROR, this._errorHandler);
             dataSource.unbind(PROGRESS, this._progressHandler);
+
+            this._destroyEditable();
 
             this.element.off(NS);
 

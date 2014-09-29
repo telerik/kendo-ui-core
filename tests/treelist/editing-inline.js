@@ -252,4 +252,44 @@
         equal(row.find("input").length, 0);
         equal(row.children().eq(0).text(), "1");
     });
+
+    test("widget destroy destroyes current editor", function() {
+        createTreeList();
+
+        instance.editRow("tr:first");
+        instance.destroy();
+
+        ok(!instance.editable);
+        ok(!dom.find("tbody>tr:first").data("kendoEditable"));
+    });
+
+    test("widget refresh destroys editable", function() {
+        createTreeList();
+
+        instance.editRow("tr:first");
+        instance.refresh();
+
+        ok(!instance.editable);
+        ok(!dom.find("tbody>tr:first").data("kendoEditable"));
+        equal(dom.find(".k-grid-edit-row").length, 0);
+    });
+
+    test("refresh doesn't destroy ediatble on itemchange", function() {
+        createTreeList({
+            dataSource: {
+                data: [
+                    { id: 1, text: "foo", parentId: null },
+                    { id: 3, text: "bar", parentId: null },
+                ]
+            }
+        });
+
+        instance.editRow("tr:first");
+
+        var editable = instance.editable;
+
+        instance.dataSource.at(0).set("text", "baz");
+
+        strictEqual(editable, instance.editable);
+    });
 })();
