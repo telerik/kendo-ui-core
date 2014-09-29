@@ -34,6 +34,7 @@ var __meta__ = {
     var NS = ".kendoTreeList";
     var CLICK = "click";
     var EDIT = "edit";
+    var SAVE = "save";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -485,7 +486,8 @@ var __meta__ = {
         },
 
         events: [
-            EDIT
+            EDIT,
+            SAVE
         ],
 
         _toggleChildren: function(e) {
@@ -1028,6 +1030,24 @@ var __meta__ = {
             this._cancelEditor();
 
             this._render();
+        },
+
+        saveRow: function() {
+            var editable = this.editable;
+            var args;
+
+            if (!editable) {
+                return ;
+            }
+
+            args = {
+                model: this.dataItem(editable.element),
+                container: editable.element
+            };
+
+            if (editable.end() && !this.trigger(SAVE, args)) {
+                this.dataSource.sync();
+            }
         },
 
         _cancelEditor: function() {

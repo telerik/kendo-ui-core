@@ -1,6 +1,7 @@
 (function() {
     var dom;
     var instance;
+    var TreeListDataSource = kendo.data.TreeListDataSource;
 
     module("TreeList inline editing", {
         setup: function() {
@@ -291,5 +292,141 @@
         instance.dataSource.at(0).set("text", "baz");
 
         strictEqual(editable, instance.editable);
+    });
+
+    test("saveRow calls data source sync method", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, parentId: null },
+                { id: 2, parentId: 1 }
+            ]
+        });
+
+        var syncSpy = spy(ds, "sync");
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        instance.editRow("tr:first");
+        instance.saveRow();
+
+        equal(syncSpy.calls("sync"), 1);
+    });
+
+    test("sync is not called if there are validation errors", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        id: { editable: false },
+                        parentId: { editable: false },
+                        text: { validation: { required: true } }
+                    }
+                }
+            }
+        });
+
+        var syncSpy = spy(ds, "sync");
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ]
+        });
+
+        instance.editRow("tr:first");
+        instance.content.find("tr:first input").val("");
+        instance.saveRow();
+
+        equal(syncSpy.calls("sync"), 0);
+    });
+
+    test("saveRow triggers save event", 2, function() {
+        var model;
+
+        createTreeList({
+            save: function(e) {
+                strictEqual(e.model, model);
+                ok(e.container);
+            }
+        });
+
+        instance.editRow("tr:first");
+        model = instance.dataItem(instance.content.find("tr:first"));
+        instance.saveRow();
+    });
+
+    test("save event doesn't trigger if there isn't editable", function() {
+        var wasCalled = false;
+        createTreeList({
+            save: function() {
+                wasCaleld = true;
+            }
+        });
+
+        instance.saveRow();
+
+        ok(!wasCalled);
+    });
+
+    test("save event doesn't trigger if validation fails", function() {
+        var wasCalled = false;
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ],
+            schema: {
+                model: {
+                    fields: {
+                        id: { editable: false },
+                        parentId: { editable: false },
+                        text: { validation: { required: true } }
+                    }
+                }
+            }
+        });
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ],
+            save: function() {
+                wasCalled = true;
+            }
+        });
+
+        instance.editRow("tr:first");
+        instance.content.find("tr:first input").val("");
+        instance.saveRow();
+
+        ok(!wasCalled);
+    });
+
+    test("sync is not called if save event is prevented", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ]
+        });
+
+        var syncSpy = spy(ds, "sync");
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ],
+            save: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        instance.editRow("tr:first");
+        instance.saveRow();
+
+        equal(syncSpy.calls("sync"), 0);
     });
 })();
