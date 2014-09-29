@@ -201,12 +201,10 @@
                 k;
             if (source instanceof Point) {
                 sourcePoint = source;
-            }
-            else if (source instanceof Connector) {
+            } else if (source instanceof Connector) {
                 if (isAutoConnector(source)) {
                     autoSourceShape = source.shape;
-                }
-                else {
+                } else {
                     connection._resolvedSourceConnector = source;
                     sourcePoint = source.position();
                 }
@@ -214,12 +212,10 @@
 
             if (target instanceof Point) {
                 targetPoint = target;
-            }
-            else if (target instanceof Connector) {
+            } else if (target instanceof Connector) {
                 if (isAutoConnector(target)) {
                     autoTargetShape = target.shape;
-                }
-                else {
+                } else {
                     connection._resolvedTargetConnector = target;
                     targetPoint = target.position();
                 }
@@ -233,14 +229,12 @@
                 if (targetPoint) {
                     connection._resolvedSourceConnector = closestConnector(targetPoint, autoSourceShape);
                 } else if (autoTargetShape) {
-
                     for (var i = 0; i < autoSourceShape.connectors.length; i++) {
                         if (autoSourceShape.connectors.length == 5) // presuming this means the default connectors
                         {
                             // will emphasize the vertical or horizontal direction, which matters when using the cascading router and distances which are equal for multiple connectors.
                             k = preferred[i];
-                        }
-                        else {
+                        } else {
                             k = i;
                         }
                         sourceConnector = autoSourceShape.connectors[k];
@@ -904,6 +898,7 @@
             init: function (from, to, options, dataItem) {
                 var that = this;
                 DiagramElement.fn.init.call(that, options, dataItem);
+                this.updateOptionsFromModel();
                 that._router = new PolylineRouter(this);
                 that.path = new diagram.Polyline(that.options);
                 that.path.fill(TRANSPARENT);
@@ -918,6 +913,7 @@
                 }
                 that.refresh();
             },
+
             options: {
                 hover: {
                     stroke: {}
@@ -926,6 +922,19 @@
                 endCap: NONE,
                 points: [],
                 selectable: true
+            },
+
+            updateOptionsFromModel: function(model) {
+                var fields = ["from", "to", "text", "type"];
+
+                if (model) {
+                    this.redraw(filterDataItem(fields, model));
+                } else if (this.dataItem) {
+                    this.options = deepExtend({},
+                        this.options,
+                        filterDataItem(fields, this.dataItem)
+                    );
+                }
             },
 
             /**
@@ -1067,6 +1076,10 @@
             },
 
             content: function(content) {
+                if (defined(this.options.text)) {
+                    content.text = this.options.text;
+                }
+
                 var result = DiagramElement.fn.content.call(this, content);
                 if (defined(content)) {
                     this.refresh();
@@ -3068,9 +3081,18 @@
                 if (e.action === "remove") {
                     // remove connections
                 } else if (e.action === "itemchange") {
-                    // update connections
+                    if (this._shouldRefresh) {
+                        this._updateConnections(e.items);
+                    }
                 } else {
                     this._addConnections(e.sender.view());
+                }
+            },
+
+            _updateConnections: function(items) {
+                for (i = 0; i < items.length; i++) {
+                    var item = items[i];
+
                 }
             },
 
@@ -3086,7 +3108,10 @@
                         var to = this._validateConnector(conn.to);
 
                         if (from && to) {
-                            this._connectionsDataMap[conn.from + "-" + conn.to] = this.connect(from, to, deepExtend({}, defaults, conn));
+                            var id = conn.from + "-" + conn.to;
+                            var connection = new Connection(from, to, defaults, conn);
+                            this._connectionsDataMap[id] = connection;
+                            this.addConnection(connection);
                         }
                     }
                 }
