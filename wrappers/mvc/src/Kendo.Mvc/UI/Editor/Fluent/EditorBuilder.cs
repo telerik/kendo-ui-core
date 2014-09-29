@@ -2,6 +2,9 @@ namespace Kendo.Mvc.UI.Fluent
 {
     using System;
 
+    /// <summary>
+    /// The fluent API for configuring Kendo UI Editor for ASP.NET MVC.
+    /// </summary>
     public class EditorBuilder : WidgetBuilderBase<Editor, EditorBuilder>, IHideObjectMembers
     {
         public EditorBuilder(Editor component)
