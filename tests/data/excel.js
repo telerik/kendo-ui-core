@@ -74,14 +74,16 @@ test("the data source data is exported after the columns", 1, function() {
 test("only data items that match the filter are exported", 2, function() {
     var options = {
         columns: [ { field: "foo" } ],
-        dataSource: {
+        dataSource: new DataSource({
             data: [
                { foo: "foo" },
                { foo: "bar" }
-            ],
-            filter: { field: "foo", operator: "neq", value: "foo" }
-        }
+            ]
+        })
     };
+
+    options.dataSource.read();
+    options.dataSource.filter({ field: "foo", operator: "neq", value: "foo" });
 
     testWorkbook(options, function(book) {
         equal(book.sheets[0].rows.length, 2);

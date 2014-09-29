@@ -24,7 +24,8 @@ kendo.data.ExcelExporter = kendo.Class.extend({
                 {},
                 dataSource.options,
                 {
-                    page: dataSource.page()
+                    page: dataSource.page(),
+                    filter: dataSource.filter()
                 }));
         } else {
             this.dataSource = kendo.data.DataSource.create(dataSource);
