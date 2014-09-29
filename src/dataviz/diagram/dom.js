@@ -1514,7 +1514,7 @@
                     container = this._editContainer = $(html)
                     .appendTo(this.wrapper).eq(0)
                     .kendoWindow(deepExtend({
-                        modal: false,
+                        modal: true,
                         resizable: false,
                         draggable: true,
                         title: "Edit",
