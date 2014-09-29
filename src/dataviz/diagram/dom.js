@@ -3090,7 +3090,7 @@
             },
 
             _updateConnections: function(items) {
-                for (i = 0; i < items.length; i++) {
+                for (var i = 0; i < items.length; i++) {
                     var item = items[i];
 
                 }
@@ -3348,7 +3348,7 @@
                         });
                     }
                 } else {
-                    var tool = this[tool + "Tool"];
+                    tool = this[tool + "Tool"];
                     if (tool) {
                         this[tool]({ });
                     }
@@ -3402,7 +3402,7 @@
             init: function(diagram) {
                 this.diagram = diagram;
             },
-            delete: function() {
+            "delete": function() {
                 this.diagram.remove(this.selectedElement());
                 this.diagram.destroyToolBar();
             },
