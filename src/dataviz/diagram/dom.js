@@ -1728,7 +1728,7 @@
                 element.on(MOUSEWHEEL_NS, proxy(that._wheel, that));
                 if (!kendo.support.touch && !kendo.support.mobileOS) {
                     that.toolService = new ToolService(that);
-                    element
+                    element.find(".k-layer")
                         .on("mousemove" + NS, proxy(that._mouseMove, that))
                         .on("mouseup" + NS, proxy(that._mouseUp, that))
                         .on("mousedown" + NS, proxy(that._mouseDown, that))
@@ -3310,7 +3310,6 @@
                 this.diagram.delete(this.selectedElement());
             },
             edit: function() {
-                debugger;
                 this.diagram.edit(this.selectedElement());
             },
             selectedElement: function() {
