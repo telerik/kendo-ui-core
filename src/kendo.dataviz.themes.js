@@ -2960,6 +2960,12 @@ var __meta__ = {
             ]
         }
     });
+    
+    
+     registerTheme("material", {
+       
+    })
+    
 
 })(window.kendo.jQuery);
 

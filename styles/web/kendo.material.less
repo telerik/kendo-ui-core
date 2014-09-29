@@ -1,0 +1,278 @@
+@image-folder: "Bootstrap";
+@texture: none;
+@tooltip-texture: none;
+@fallback-texture: none;
+
+/* Widget Base Styles */
+@widget-text-color: #444444;
+@inverse-text-color: #fff;
+@widget-gradient: none;
+@widget-background-color: #fff;
+@widget-border-color: #ccc;
+@widget-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+
+/* Inputs */
+@input-background-color: #ffffff;
+@input-text-color: @widget-text-color;
+
+/* Links */
+@link-text-color: #428bca;
+
+/* Headers */
+@header-text-color: @widget-text-color;
+@header-background-color: #f5f5f5;
+
+/* Buttons */
+@button-text-color: @widget-text-color;
+@button-background-color: #f5f5f5;
+
+/* Group Base Styles */
+@group-background-color: #f5f5f5;
+@group-border-color: rgba(0, 0, 0, 0.2);
+
+/* Content */
+@content-background-color: @widget-background-color;
+
+
+/* Widget States */
+
+/* Hover State */
+@hover-text-color: @widget-text-color;
+@hover-gradient: none;
+@hover-background-color: #ebebeb;
+@hover-border-color: #adadad;
+@hover-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+
+/* Selects, Dropdowns */
+@select-background-color: #ebebeb;
+@select-border-color: @hover-border-color;
+@select-hover-background-color: #ebebeb;
+@select-group-background-color: #ffffff;
+
+/* Selected State */
+@selected-text-color: #ffffff;
+@selected-gradient: none;
+@selected-background-color: #428bca;
+@selected-border-color: #428bca;
+@selected-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+
+/*Focused State*/
+@focused-border-color: #67afe9;
+@focused-shadow: 0 0 7px 0 #67afe9;
+@focused-item-shadow: inset 0 0 7px 0 #67afe9;
+@focused-active-item-shadow: inset 0 0 10px 3px darken(#428bca, 8%);
+
+/* Active State */
+@active-text-color: @widget-text-color;
+@active-gradient:  none;
+@active-background-color: #ffffff;
+@active-border-color: #cccccc;
+@active-shadow: none;
+
+/* Error State */
+@error-text-color: #b94a48;
+@error-background-color: #f2dede;
+@error-border-color: #eed3d7;
+
+/* Disabled State */
+@disabled-text-color: #999999;
+
+/* Notification */
+@notification-info-background-color: #e5f5fa;
+@notification-info-text-color: #0487c4;
+@notification-info-border-color: #b7e1f0;
+@notification-success-background-color: #eaf7ec;
+@notification-success-text-color: #349946;
+@notification-success-border-color: #c3e8ca;
+@notification-warning-background-color: #fff4d9;
+@notification-warning-text-color: #0487c4;
+@notification-warning-border-color: #fff0c8;
+@notification-error-background-color: #ffe0d9;
+@notification-error-text-color: #ef470a;
+@notification-error-border-color: #ffb7a8;
+
+/* ToolTip */
+@tooltip-text-color: #fff;
+@tooltip-background-color: #000;
+@tooltip-border-color: #000;
+
+/* Validation Message */
+@validation-text-color: #c09853;
+@validation-background-color: #fcf8e3;
+@validation-border-color: #fbeed5;
+
+/* Splitter */
+@splitbar-background-color: @header-background-color;
+
+/* Slider */
+@draghandle-border-radius: 13px;
+@draghandle-border-color: #ffffff;
+@draghandle-background-color: @widget-background-color;
+@draghandle-shadow: 0 0 0 1px #c4c4c4;
+@draghandle-hover-border-color: @hover-border-color;
+@draghandle-hover-background-color: @hover-background-color;
+@draghandle-hover-shadow: none;
+
+/* Grid */
+@alt-background-color: #f5f5f5;
+@nested-alt-background-color: darken(@alt-background-color, 8%);
+@cell-border-color: #e7e7e7;
+@column-highlight-background-color: #e9e9e9;
+@active-filter-background-color: @active-background-color;
+
+/* Scheduler */
+@scheduler-background-color: @widget-background-color;
+@current-time-color: @error-border-color;
+@event-background-color: #0187cb;
+@event-text-color: @selected-text-color;
+@event-inverse-text-color: @widget-text-color;
+@scheduler-nonwork-background-color: #f5f5f5;
+@resize-background-color: #fff;
+
+/* Upload */
+@upload-progress-background-color: #d0f8ff;
+@upload-progress-text-color: #06c;
+@upload-success-background-color: #f0ad4e;
+@upload-success-text-color: #ffffff;
+@upload-error-background-color: #ffded7;
+@upload-error-text-color: #c00;
+
+/* Gantt*/
+
+@task-summary-color: lighten(@widget-text-color, 25%);
+@task-summary-selected-color: lighten(@selected-background-color, 25%);
+
+/* Loading Indicators */
+@loading-panel-color: #fff;
+
+/* Shadows */
+@shadow-color: rgba(0, 0, 0, .2);
+@shadow-inset-color: #ccc;
+
+/* Border Radii */
+@main-border-radius: 4px;
+@list-border-radius: @main-border-radius - 1;
+@inner-border-radius: @main-border-radius - 1;
+@slider-border-radius: 13px;
+
+/* Icons */
+@default-icon-opacity: 1;
+
+@calendar-border-radius: 4px;
+@calendar-content-text-color: @widget-text-color;
+@calendar-footer-background: #f5f5f5;
+@calendar-footer-text-decoration: none;
+@calendar-footer-hover-text-decoration: underline;
+@calendar-footer-hover-background: @widget-background-color;
+@calendar-header-hover-text-decoration: none;
+@calendar-header-hover-background: @hover-background-color;
+@calendar-footer-active-background: @widget-background-color;
+@calendar-group-background-color: @group-background-color;
+@button-border-color: #f5f5f5;
+@menu-border-color: @widget-border-color;
+@tabstrip-items-border: transparent;
+@tabstrip-active-background: @widget-background-color;
+@tabstrip-tabs-color: #428bca;
+@form-widget-color: @widget-text-color;
+@drop-down-border-color: @widget-border-color;
+@drop-down-hover-border-color: #adadad;
+@drop-down-focused-border-color: #67afe9;
+@drop-down-background: #ffffff;
+@drop-down-text-color: @widget-text-color;
+@secondary-border-color: #cccccc;
+@secondary-text-color: @widget-text-color;
+@numeric-selected-background: #ebebeb;
+@panelbar-items-border: @widget-border-color;
+@panelbar-content-background: @content-background-color;
+@panelbar-content-color: @widget-text-color;
+@window-shadow-style: 1px 1px 7px 1px;
+@filter-menu-content-background: @content-background-color;
+@icon-background-color: transparent;
+@disabled-background-color: @button-background-color;
+@disabled-border-color: @button-background-color;
+@disabled-gradient: @widget-gradient;
+
+//new var-s
+@treeview-text-color: #428bca;
+@treeview-hover-text-color: #428bca;
+@tabstrip-tabs-hover-color: #428bca;
+@pager-hover-color: #428bca;
+@multiselect-buttons-border-color: #357ebd;
+@multiselect-buttons-color: #ffffff;
+@multiselect-buttons-background: #428bca;
+@multiselect-buttons-hover-background: #3276b1;
+@multiselect-buttons-hover-border-color: #295f8e;
+@slider-selection-background-color: #ebebeb;
+@form-widgets-border-color: #cccccc;
+@pager-text-color: #a5a5a5;
+@draghandle-selected-background: #cccccc;
+@upload-status-color: #f0ad4e;
+@form-widgets-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+@menu-active-background: #e7e7e7;
+@concave-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
+
+@primary-button-text-color: #fff;
+@primary-button-background-color: #3f51b5;
+@primary-button-border-color: #3f51b5;
+@primary-gradient: none;
+@primary-shadow:none;
+
+@primary-hover-text-color: @primary-button-text-color;
+@primary-hover-background-color: #3949ab;
+@primary-hover-border-color: #3949ab;
+@primary-hover-gradient: none;
+@primary-hover-shadow:none;
+
+@primary-focused-color: @primary-button-text-color; 
+@primary-focused-border-color: #eff8ff;
+@primary-focused-gradient: none;
+@primary-focused-active-item-shadow: 0 0 8px 0 #cfe6f8;
+
+@primary-active-text-color: @primary-button-text-color;
+@primary-active-background-color: #283593;
+@primary-active-gradient: none;
+@primary-active-border-color: #283593;
+@primary-active-shadow: 0 6px 17px 0 #66afe9;
+
+@primary-disabled-text-color: #a8a8a8;
+@primary-disabled-background-color: #eaeaea;
+@primary-disabled-border-color: #eaeaea;
+@primary-disabled-gradient: none;
+
+@button-hover-text-color: @hover-text-color;
+@button-hover-background-color: #ebebeb;
+@button-hover-border-color: #ebebeb;
+
+@button-active-background: #d6d6d6;
+@button-active-border-color: @selected-border-color;
+@button-focused-border-color: #f0f0f0;
+@button-focused-shadow: 0 6px 17px 0 #c4c4c4;
+@button-focused-active-shadow: 0 6px 17px 0 #66afe9;
+
+@import "theme-template.less";
+
+
+
+.k-primary:active
+{
+    color: @primary-active-text-color;
+    border-color: @primary-active-border-color;
+    .composite-background(@primary-active-gradient);
+    background-color: @primary-active-background-color;
+    .box-shadow(@primary-active-shadow);
+}
+
+.k-button:active
+{
+    color: @button-text-color;
+    background-color:@button-active-background;
+    border-color: @hover-border-color;
+}
+
+.k-button:active:hover,
+.k-button.k-state-active:hover
+{
+    color: @primary-hover-text-color;
+    border-color: @primary-hover-border-color;
+    background-color: @primary-hover-background-color;
+}
