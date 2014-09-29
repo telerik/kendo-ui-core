@@ -22,7 +22,7 @@
         <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less"/>
         <script>window.less = { env: "development", logLevel: 1 };</script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
-        <style> body { font-family: Tahoma, sans-serif; }</style>
+        <style> body { font-size: 14px; font-family: Tahoma, sans-serif; }</style>
     </head>
     <body>
     <button class="filter">Filter on `Anne`</button>
@@ -72,7 +72,7 @@
                 columns: [
                     { field: "FirstName", title: "First Name", sortable: true },
                     { field: "LastName", title: "Last Name", sortable: true },
-                    { command: ["edit"] }
+                    { command: ["edit", "destroy"] }
                 ]
             });
 
