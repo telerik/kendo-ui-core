@@ -337,10 +337,65 @@
             ]
         });
 
-        var editSpy = spy(instance, "editRow");
+        var row = instance.content.find(".k-grid-edit").closest("tr");
+
+        instance.editRow = function(arg) {
+            ok(true);
+            equal(arg[0], row[0]);
+        };
 
         instance.content.find(".k-grid-edit").click();
+    });
 
-        ok(editSpy.calls, 1);
+    test("editing row shows update and cancel buttons", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        instance.editRow("tr");
+
+        var content = instance.content;
+        equal(content.find(".k-grid-update").length, 1);
+        equal(content.find(".k-grid-cancel").length, 1);
+    });
+
+    test("clicking cancel button calls cancelRow", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        instance.editRow("tr");
+
+        instance.cancelRow = function() {
+            ok(true);
+        };
+
+        instance.content.find(".k-grid-cancel").click();
+    });
+
+    test("clicking update button calls saveRow", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        instance.editRow("tr");
+
+        instance.saveRow = function() {
+            ok(true);
+        };
+
+        instance.content.find(".k-grid-update").click();
     });
 })();

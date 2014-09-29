@@ -93,10 +93,7 @@ var __meta__ = {
         edit: {
             text: "Edit",
             imageClass: "k-edit",
-            className: "k-grid-edit",
-            click: function(e) {
-                this.editRow($(e.currentTarget).closest("tr"));
-            }
+            className: "k-grid-edit"
         },
         update: {
             text: "Update",
@@ -537,12 +534,22 @@ var __meta__ = {
         },
 
         _commandClick: function(e) {
-            var commandName = this._commandFromClass(e.target.className)
-            var command = defaultCommands[commandName];
+            var commandName = this._commandFromClass(e.currentTarget.className)
 
-            if (command.click) {
-                command.click.call(this, e);
-            }
+            this["_" + commandName](e);
+        },
+
+        _edit: function(e) {
+            var row = $(e.currentTarget).closest("tr");
+            this.editRow(row);
+        },
+
+        _cancel: function() {
+            this.cancelRow();
+        },
+
+        _update: function() {
+            this.saveRow();
         },
 
         _columns: function() {
@@ -854,7 +861,7 @@ var __meta__ = {
                 value = "";
             }
 
-            if (model._edit && model.editable(column.field)) {
+            if (model._edit && column.field && model.editable(column.field)) {
                 attr[kendo.attr("container-for")] = column.field;
             } else {
                 if (column.expandable) {
@@ -877,7 +884,11 @@ var __meta__ = {
                 }
 
                 if (column.command) {
-                    children = $.map(column.command, this._button);
+                    if (model._edit) {
+                        children = $.map(["update","canceledit"], this._button);
+                    } else {
+                        children = $.map(column.command, this._button);
+                    }
                 } else if (column.encoded) {
                     children.push(kendoTextElement(value));
                 } else {
