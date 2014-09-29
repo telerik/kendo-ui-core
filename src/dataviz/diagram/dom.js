@@ -1622,7 +1622,7 @@
                 if (this.editable && this.editable.end() &&
                     !this.trigger("save", { container: this._editContainer, model: this._modelFromContainer() } )) {
 
-                    this.dataSource.sync();
+                    //this.dataSource.sync();
                     this._destroyEditable();
                 }
             },
@@ -1736,9 +1736,10 @@
                         .on("mousemove" + NS, proxy(that._mouseMove, that))
                         .on("mouseup" + NS, proxy(that._mouseUp, that))
                         .on("mousedown" + NS, proxy(that._mouseDown, that))
-                        .on("keydown" + NS, proxy(that._keydown, that))
                         .on("mouseover" + NS, proxy(that._mouseover, that))
                         .on("mouseout" + NS, proxy(that._mouseout, that));
+
+                    element.on("keydown" + NS, proxy(that._keydown, that));
                 } else {
                     that._userEvents = new kendo.UserEvents(element, {
                         multiTouch: true
@@ -2056,7 +2057,22 @@
              * @param items DiagramElement, Array of Items.
              * @param undoable.
              */
-            remove: function (items, undoable) {
+            remove: function(item) {
+                var dataSource = this.dataSource;
+
+                if (item instanceof Connection) {
+                    dataSource = this.connectionsDataSource;
+                }
+
+                if (item.length) {
+                    this._remove(item, true);
+                    this.destroyToolBar();
+                } else {
+                    dataSource.remove(item.dataItem);
+                }
+            },
+
+            _remove: function (items, undoable) {
                 var isMultiple = isArray(items);
 
                 if (isUndefined(undoable)) {
@@ -2720,16 +2736,6 @@
                 return result;
             },
 
-            remove: function(item) {
-                var dataSource = this.dataSource;
-
-                if (item instanceof Connection) {
-                    dataSource = this.connectionsDataSource;
-                }
-
-                dataSource.remove(item.dataItem);
-            },
-
             _removeItem: function (item, undoable) {
                 item.select(false);
                 if (item instanceof Shape) {
@@ -2880,18 +2886,13 @@
                     that.layout(options.layout);
                 }
             },
-
             _mouseDown: function (e) {
                 if (this.pauseMouseHandlers) {
                     return;
                 }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
-                    return;
-                    this.toolBar = new DiagramToolBar(diagram, {
-                        tools: this.options.shapeDefaults.editable.tools
-                    });
-                    this.toolBar.show(p);
+                    this.destroyToolBar();
                     e.preventDefault();
                 }
             },
@@ -2908,6 +2909,18 @@
                 }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.end(p, this._meta(e))) {
+                    var diagram = this.toolService.diagram;
+
+                    if (!this.toolBar && diagram.select().length === 1) {
+                        this.toolBar = new DiagramToolBar(diagram, {
+                            tools: this.options.shapeDefaults.editable.tools
+                        });
+                        var shape = this.toolService.hoveredItem;
+                        var shapeBounds = shape.bounds();
+                        var toolBarElement = this.toolBar.element;
+                        var point = new Point(shapeBounds.x, shapeBounds.y - this.toolBar._popup.element.outerHeight());
+                        this.toolBar.show(point);
+                    }
                     e.preventDefault();
                 }
             },
@@ -3161,6 +3174,14 @@
                 for (var i = 0; i < this.connections.length; i++) {
                     this.connections[i].refresh();
                 }
+            },
+
+            destroyToolBar: function() {
+                if (this.toolBar) {
+                    this.toolBar.hide();
+                    this.toolBar.destroy();
+                    this.toolBar = null;
+                }
             }
         });
 
@@ -3269,19 +3290,19 @@
             },
 
             options: {
-                popup: {}
             },
 
             createPopup: function() {
                 this.container = $("<div></div>").append(this.element);
-                this._popup = this.container.kendoPopup(this.options.popup).getKendoPopup();
+                this._popup = this.container.kendoPopup({}).getKendoPopup();
             },
 
             createToolBar: function() {
-                this.element = $("<div id='diagramToolBar' style='width: 130px;'></div>");
+                this.element = $("<div id='diagramToolBar'></div>");
                 this._toolBar = this.element
                     .kendoToolBar({
-                        click: proxy(this.click, this)
+                        click: proxy(this.click, this),
+                        resizable: false
                     }).getKendoToolBar();
             },
 
@@ -3310,7 +3331,7 @@
             },
 
             show: function(point) {
-                this._popup.open(point);
+                this._popup.open(point.x, point.y);
             },
 
             hide: function() {
@@ -3319,14 +3340,18 @@
 
             editTool: function(options) {
                 this._toolBar.add({
+                    spriteCssClass: "k-icon k-i-pencil",
                     type: "button",
-                    text: "edit",
+                    showText: "overflow",
+                    text: "Edit",
                     id: "edit"
                 });
             },
 
             deleteTool: function(options) {
                 this._toolBar.add({
+                    spriteCssClass: "k-icon k-i-close",
+                    showText: "overflow",
                     type: "button",
                     text: "delete",
                     id: "delete"
@@ -3354,9 +3379,11 @@
             },
             delete: function() {
                 this.diagram.remove(this.selectedElement());
+                this.diagram.destroyToolBar();
             },
             edit: function() {
                 this.diagram.edit(this.selectedElement());
+                this.diagram.destroyToolBar();
             },
             selectedElement: function() {
                 return this.diagram.select()[0];

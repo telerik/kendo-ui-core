@@ -971,7 +971,6 @@
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(false);
                     this.hoveredItem = undefined;
-                    this.diagram.hideToolBar();
                 }
             },
             _hitTest: function (point) {
