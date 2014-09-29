@@ -569,6 +569,31 @@
         ok(sort.hasClass("k-i-sort-desc"));
     });
 
+    test("remove sort icon if allowUnsort is enabled", function() {
+        var dataSource = new kendo.data.PivotDataSource({
+            columns: ["foo", "bar"],
+            sort: [{ field: "foo", dir: "desc"}]
+        });
+
+        var setting = new PivotSettingTarget($(div), {
+            sortable: {
+                allowUnsort: true
+            },
+            dataSource: dataSource,
+            template: settingTemplateWithSort()
+        });
+
+        setting.sort({
+            field: "foo",
+            dir: "asc"
+        });
+
+        var button = $(div).find(".k-button:first");
+        var sort = button.find(".k-field-actions").children(".k-icon:first");
+
+        ok(!sort[0]);
+    });
+
     test("validate returns true for measures setting and measure(dimension)", function() {
         var setting = new PivotSettingTarget($(div), {
             setting: "measures"

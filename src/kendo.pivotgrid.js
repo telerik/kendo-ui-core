@@ -2487,12 +2487,8 @@ var __meta__ = {
         return null;
     };
 
-    var removeSortExpr = function(expressions, name) {
+    var removeExpr = function(expressions, name) {
         var result = [];
-
-        if (!expressions) {
-            return result;
-        }
 
         for (var idx = 0, length = expressions.length; idx < length; idx++) {
             if (expressions[idx].field !== name) {
@@ -2678,9 +2674,19 @@ var __meta__ = {
         },
 
         sort: function(expr) {
-            var result = removeSortExpr(this.dataSource.sort(), expr.field);
+            var sortable = this.options.sortable;
+            var skipExpr = sortable && sortable.allowUnsort && expr.dir === "asc";
 
-            result.push(expr);
+            var expressions = (this.dataSource.sort() || []);
+            var result = removeExpr(expressions, expr.field);
+
+            if (skipExpr && expressions.length !== result.length) {
+                expr = null
+            }
+
+            if (expr) {
+                result.push(expr);
+            }
 
             this.dataSource.sort(result);
         },
