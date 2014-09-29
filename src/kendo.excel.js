@@ -82,7 +82,8 @@ kendo.data.ExcelExporter = kendo.Class.extend({
     _columns: function() {
         return $.map(this.columns, function(column) {
             return {
-                width: column.width
+                width: column.width,
+                autoWidth: column.width ? false : true
             };
         });
     }

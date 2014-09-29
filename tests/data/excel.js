@@ -46,6 +46,12 @@ test("sets the columns option of the workbook", 1, function() {
     });
 });
 
+test("sets autoWidth if the column width isn't set", 1, function() {
+    testWorkbook({ columns: [ { } ], dataSource: [] }, function(book) {
+        equal(book.sheets[0].columns[0].autoWidth, true);
+    });
+});
+
 test("the first row contains the column titles", 2, function() {
     testWorkbook({ columns: [ { title: "foo" }, { title: "bar"} ], dataSource: [] }, function(book) {
         equal(book.sheets[0].rows[0].cells[0].value, "foo");
