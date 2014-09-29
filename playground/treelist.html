@@ -67,6 +67,7 @@
             var listDS = new kendo.data.TreeListDataSource(empl);
 
             $("#list").kendoTreeList({
+                toolbar: ["create", "save", "cancel"],
                 dataSource: listDS,
                 //selectable: true,
                 columns: [

@@ -43,6 +43,7 @@ var __meta__ = {
         alt: "k-alt",
         editCell: "k-edit-cell",
         group: "k-treelist-group",
+        gridToolbar: "k-grid-toolbar",
         gridHeader: "k-grid-header",
         gridHeaderWrap: "k-grid-header-wrap",
         gridContent: "k-grid-content",
@@ -74,17 +75,20 @@ var __meta__ = {
         create: {
             text: "Add new record",
             imageClass: "k-add",
-            className: "k-grid-add"
+            className: "k-grid-add",
+            methodName: "addRow"
         },
         cancel: {
             text: "Cancel changes",
             imageClass: "k-cancel",
-            className: "k-grid-cancel-changes"
+            className: "k-grid-cancel-changes",
+            methodName: "cancelChanges"
         },
         save: {
             text: "Save changes",
             imageClass: "k-update",
-            className: "k-grid-save-changes"
+            className: "k-grid-save-changes",
+            methodName: "saveChanges"
         },
         destroy: {
             text: "Delete",
@@ -381,6 +385,7 @@ var __meta__ = {
             this._sortable();
             //this._selectable();
             this._attachEvents();
+            this._toolbar();
 
             //this._adjustHeight();
 
@@ -531,7 +536,7 @@ var __meta__ = {
             this.element
                 .on(CLICK + NS, icons, proxy(this._toggleChildren, this))
                 .on(CLICK + NS, retryButton, proxy(dataSource.fetch, dataSource))
-                .on(CLICK + NS, "tbody .k-button", proxy(this._commandClick, this));
+                .on(CLICK + NS, ".k-button[data-command]", proxy(this._commandClick, this));
         },
 
         _commandByName: function(name) {
@@ -613,10 +618,11 @@ var __meta__ = {
         _layout: function () {
             var element = this.element;
             var colgroup = this._colgroup();
+            var layout = "";
 
             element.addClass(classNames.wrapper);
 
-            var layout =
+            layout =
                 "<div class='#= gridHeader #'>" +
                     "<div class='#= gridHeaderWrap #'>" +
                         "<table role='grid'>" +
@@ -641,10 +647,16 @@ var __meta__ = {
                     "</table>";
             }
 
+            if (this.options.toolbar) {
+                layout = "<div class='#= header # #= gridToolbar #' />" + layout;
+            }
+
             element.append(
                 kendo.template(layout)(classNames) +
                 "<div class='k-status' />"
             );
+
+            this.toolbar = element.find(DOT + classNames.gridToolbar);
 
             this.header = element.find(DOT + classNames.gridHeader).find("thead").addBack().filter("thead");
             this._headerTree = new kendoDom.Tree(this.header[0]);
@@ -659,6 +671,21 @@ var __meta__ = {
             this._contentTree = new kendoDom.Tree(this.content[0]);
 
             this._statusTree = new kendoDom.Tree(this.element.children(".k-status")[0]);
+        },
+
+        _toolbar: function() {
+            var options = this.options.toolbar;
+
+            if (!options) {
+                return;
+            }
+
+            if ($.isArray(options)) {
+                var buttons = $.map(options, this._button);
+                new kendoDom.Tree(this.toolbar[0]).render(buttons);
+            } else {
+                this.toolbar.append(kendo.template(options)({}));
+            }
         },
 
         _render: function(options) {
@@ -903,7 +930,7 @@ var __meta__ = {
 
                 if (column.command) {
                     if (model._edit) {
-                        children = $.map(["update","canceledit"], this._button);
+                        children = $.map(["update", "canceledit"], this._button);
                     } else {
                         children = $.map(column.command, this._button);
                     }

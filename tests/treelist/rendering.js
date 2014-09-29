@@ -558,4 +558,35 @@
         equal(fooButton.text(), "Bar");
         equal(fooButton.find(".k-icon").length, 0);
     });
+
+    test("toolbar as a string template", function() {
+        createTreeList({
+            toolbar: "<p class='foo'>bar</p>"
+        });
+
+        var toolbar = dom.find(".k-header.k-grid-toolbar");
+        equal(toolbar.length, 1);
+        equal(toolbar.find(".foo").length, 1);
+    });
+
+    test("toolbar as a compiled template", function() {
+        createTreeList({
+            toolbar: kendo.template("<p class='foo'>bar</p>")
+        });
+
+        var toolbar = dom.find(".k-header.k-grid-toolbar");
+        equal(toolbar.find(".foo").length, 1);
+    });
+
+    test("toolbar as an array of commands", function() {
+        createTreeList({
+            toolbar: ["create", "save", "cancel"]
+        });
+
+        var toolbar = dom.find(".k-header.k-grid-toolbar");
+        equal(toolbar.find("button").length, 3);
+        equal(toolbar.find(".k-grid-add").length, 1);
+        equal(toolbar.find(".k-grid-save-changes").length, 1);
+        equal(toolbar.find(".k-grid-cancel-changes").length, 1);
+    });
 })();
