@@ -398,4 +398,23 @@
 
         instance.content.find(".k-grid-update").click();
     });
+
+    test("clicking delete button calls removeRow", function() {
+        createTreeList({
+            dataSource: [ { id: 1 } ],
+            columns: [
+                { field: "id" },
+                { command: ["destroy"] }
+            ]
+        });
+
+        var row = instance.content.find(".k-grid-delete").closest("tr");
+
+        instance.removeRow = function(arg) {
+            ok(true);
+            equal(arg[0], row[0]);
+        };
+
+        instance.content.find(".k-grid-delete").click();
+    });
 })();

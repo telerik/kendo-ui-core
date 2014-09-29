@@ -546,6 +546,11 @@ var __meta__ = {
             this.editRow(row);
         },
 
+        _delete: function(e) {
+            var row = $(e.currentTarget).closest("tr");
+            this.removeRow(row);
+        },
+
         _cancel: function() {
             this.cancelRow();
         },
