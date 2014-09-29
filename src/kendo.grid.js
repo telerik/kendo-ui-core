@@ -514,6 +514,33 @@ var __meta__ = {
         });
     }
 
+    function columnParents(column, columns, parents) {
+        parents = parents || [];
+
+        for (var idx = 0; idx < columns.length; idx++) {
+            if (column === columns[idx]) {
+                return true;
+            } else if (columns[idx].columns) {
+                var inserted = parents.length;
+                parents.push(columns[idx]);
+                if (!columnParents(column, columns[idx].columns, parents)) {
+                    parents.splice(inserted, parents.length - inserted);
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function setColumnVisibility(column, visible) {
+        var method = visible ? removeHiddenStyle : addHiddenStyle;
+        column.hidden = !visible;
+        column.attributes = method(column.attributes);
+        column.footerAttributes = method(column.footerAttributes);
+        column.headerAttributes = method(column.headerAttributes);
+    }
+
     function isVisible(column) {
         return visibleColumns([column]).length > 0;
     }
@@ -5307,8 +5334,11 @@ var __meta__ = {
                 idx,
                 cols,
                 colWidth,
+                position,
                 row,
                 width = 0,
+                parents = [],
+                parent,
                 headerCellIndex,
                 length,
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
@@ -5332,15 +5362,13 @@ var __meta__ = {
                 return;
             }
 
-            if (column.columns && column.columns.length) {
-                var position = columnVisiblePosition(column, columns);
-                columnIndex = position.cell;
-                column.hidden = true;
-                column.attributes = addHiddenStyle(column.attributes);
-                column.footerAttributes = addHiddenStyle(column.footerAttributes);
-                column.headerAttributes = addHiddenStyle(column.headerAttributes);
 
-                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, false);
+            if (column.columns && column.columns.length) {
+                position = columnVisiblePosition(column, columns);
+
+                setColumnVisibility(column, false);
+
+                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, false);
 
                 for (idx = 0; idx < column.columns.length; idx++) {
                    this.hideColumn(column.columns[idx]);
@@ -5350,10 +5378,20 @@ var __meta__ = {
             }
 
             columnIndex = inArray(column, visibleColumns(leafColumns(columns)));
-            column.hidden = true;
-            column.attributes = addHiddenStyle(column.attributes);
-            column.footerAttributes = addHiddenStyle(column.footerAttributes);
-            column.headerAttributes = addHiddenStyle(column.headerAttributes);
+            setColumnVisibility(column, false);
+
+            if (columnParents(column, columns, parents) && parents.length) {
+                for (idx = parents.length - 1; idx >= 0; idx--) {
+                    parent = parents[idx];
+                    if (!visibleColumns(parent.columns).length && !parent.hidden) {
+                        position = columnVisiblePosition(parent, columns);
+
+                        setColumnVisibility(parent, false);
+
+                        setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, false);
+                    }
+                }
+            }
 
             that._templates();
 
@@ -5432,6 +5470,7 @@ var __meta__ = {
                 width,
                 row,
                 headerCellIndex,
+                position,
                 colWidth,
                 cols,
                 columns = that.columns,
@@ -5456,14 +5495,11 @@ var __meta__ = {
             }
 
             if (column.columns && column.columns.length) {
-                var position = columnVisiblePosition(column, columns);
-                columnIndex = position.cell;
-                column.hidden = false;
-                column.attributes = removeHiddenStyle(column.attributes);
-                column.footerAttributes = removeHiddenStyle(column.footerAttributes);
-                column.headerAttributes = removeHiddenStyle(column.headerAttributes);
+                position = columnVisiblePosition(column, columns);
 
-                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), columnIndex, true);
+                setColumnVisibility(column, true);
+
+                setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, true);
 
                 for (idx = 0; idx < column.columns.length; idx++) {
                    this.showColumn(column.columns[idx]);
@@ -5473,12 +5509,22 @@ var __meta__ = {
             }
 
             columnIndex = inArray(column, leafColumns(columns));
-            column.hidden = false;
-            column.attributes = removeHiddenStyle(column.attributes);
-            column.footerAttributes = removeHiddenStyle(column.footerAttributes);
-            column.headerAttributes = removeHiddenStyle(column.headerAttributes);
-            that._templates();
 
+            setColumnVisibility(column, true);
+
+            var parents = [];
+            if (columnParents(column, columns, parents) && parents.length) {
+                for (idx = parents.length - 1; idx >= 0; idx--) {
+                    var parent = parents[idx];
+                    if (visibleColumns(parent.columns).length && parent.hidden) {
+                        position = columnVisiblePosition(parent, columns);
+                        setColumnVisibility(parent, true);
+                        setCellVisibility(elements($(">table>thead", that.lockedHeader), that.thead, ">tr:eq(" + position.row + ")>th"), position.cell, true);
+                    }
+                }
+            }
+
+            that._templates();
             that._updateCols();
             that._updateLockedCols();
 

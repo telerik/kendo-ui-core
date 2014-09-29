@@ -100,7 +100,7 @@ columnMenu: true,
                         title: "Contact Info",
                         hidden: false,
                         columns: [
-                            { field: "ContactName", hidden: false, /*width: 100 */},
+                            { columns: [
                             {
                                 hidden: false,
                                 field: "ContactTitle",
@@ -108,10 +108,17 @@ columnMenu: true,
                                 footerTemplate: "foo"
                                 //width: 200
                             }]
+                        },
+                            { field: "ContactName", hidden: false, /*width: 100 */},
+]
                         },  {  title: "foo title", columns:  [
                         {
                             field: "Country",
-hidden: true,
+hidden: false,
+                            //width: 150
+                    },{
+                            field: "Country1",
+hidden: false,
                             //width: 150
                     }] }]
 //                   columns: [
