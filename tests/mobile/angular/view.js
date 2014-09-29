@@ -5,7 +5,7 @@
         }
     });
 
-    ngTest("view is instantiated from a kendo-mobile-view directive", 1,
+    ngTest("is instantiated from a kendo-mobile-view directive", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view id=foo></kendo-mobile-view></div>");
     },
@@ -14,13 +14,41 @@
         equal(kendo.mobile.application.view().element[0], element[0]);
     });
 
-
-    ngTest("view reads configuration options from attributes", 1,
+    ngTest("reads configuration options from attributes", 1,
     function() {
         QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view k-title='\"foo\"'></kendo-mobile-view></div>");
     },
     function() {
         equal(kendo.mobile.application.view().options.title, "foo");
+    });
+
+    ngTest("works with a ng-controller", 1,
+    function() {
+        angular.module('kendo.tests').controller('foo', function($scope) {
+            $scope.foo = "Foo";
+        })
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view ng-controller=foo>{{foo}}</kendo-mobile-view></div>");
+    },
+    function() {
+        equal(kendo.mobile.application.view().scrollerContent.text(), "Foo");
+    });
+
+    ngTest("Executes the controller each time it is displayed",
+    2,
+    function() {
+        var i = 0;
+        angular.module('kendo.tests').controller('foo', [ '$parse', '$scope', function($parse, $scope) {
+            i ++;
+            $scope.foo = i;
+        }])
+        QUnit.fixture.html("<div kendo-mobile-application><kendo-mobile-view ng-controller=foo>{{foo}}</kendo-mobile-view><kendo-mobile-view id=bar></kendo-mobile-view></div>");
+    },
+    function() {
+        var app = kendo.mobile.application;
+        equal(app.view().scrollerContent.text(), "1");
+        app.navigate("#bar");
+        app.navigate("#/");
+        equal(app.view().scrollerContent.text(), "2");
     });
 }());
 

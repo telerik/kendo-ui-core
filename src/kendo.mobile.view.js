@@ -68,7 +68,10 @@ var __meta__ = {
             this._layout();
             this._overlay();
             this._scroller();
-            this._model();
+
+            if (!this.options.$angular) {
+                this._model();
+            }
         },
 
         events: [
@@ -140,21 +143,30 @@ var __meta__ = {
         },
 
         showStart: function() {
-            var that = this;
-            that.element.css("display", "");
+            var element = this.element;
 
-            if (!that.inited) {
-                that.inited = true;
-                that.trigger(INIT, {view: that});
+            element.css("display", "");
+
+            if (!this.inited) {
+                this.inited = true;
+                this.trigger(INIT, {view: this});
             }
 
-            if (that.layout) {
-                that.layout.attach(that);
+            if (this.layout) {
+                this.layout.attach(this);
             }
 
-            that._padIfNativeScrolling();
-            that.trigger(SHOW, {view: that});
-            kendo.resize(that.element);
+            if (this.options.$angular) {
+                var controller = element.controller();
+
+                if (controller) {
+                    element.injector().invoke(controller.constructor, null, { $scope: element.scope() });
+                }
+            }
+
+            this._padIfNativeScrolling();
+            this.trigger(SHOW, {view: this});
+            kendo.resize(element);
         },
 
         showEnd: function() {
