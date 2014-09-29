@@ -124,6 +124,45 @@ test("exports current page", 2, function() {
     });
 });
 
+test("exports current pageSize", 2, function() {
+    var options = {
+        columns: [ { field: "foo" } ],
+        dataSource: new kendo.data.DataSource({
+            data: [
+               { foo: "foo" },
+               { foo: "bar" }
+            ],
+            pageSize: 1
+        })
+    };
+
+    options.dataSource.read();
+    options.dataSource.pageSize(2);
+
+    testWorkbook(options, function(book) {
+        equal(book.sheets[0].rows.length, 3);
+        equal(book.sheets[0].rows[1].cells[0].value, "foo");
+    });
+});
+
+test("exports sorted data", function() {
+    var options = {
+        columns: [ { field: "foo" } ],
+        dataSource: new kendo.data.DataSource({
+            data: [
+               { foo: "foo" },
+               { foo: "bar" }
+            ]
+        })
+    };
+
+    options.dataSource.sort({ field: "foo", dir: "asc" });
+
+    testWorkbook(options, function(book) {
+        equal(book.sheets[0].rows[1].cells[0].value, "bar");
+    });
+});
+
 test("freezes first row", function() {
     testWorkbook({ columns: [ { field: "foo" } ], dataSource: [ {} ] }, function(book) {
         equal(book.sheets[0].freezePane.rowSplit, 1);
