@@ -52,6 +52,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
 
         if (this.columns.length) {
             rows.push({
+                type: "header",
                 cells: $.map(this.columns, function(column) {
                     return {
                         value: column.title || column.field
@@ -62,6 +63,7 @@ kendo.data.ExcelExporter = kendo.Class.extend({
 
         rows.push.apply(rows, $.map(this.dataSource.view(), $.proxy(function(dataItem) {
             return {
+                type: "data",
                 cells: $.map(this.columns, $.proxy(this._cell, this, dataItem))
             };
         }, this)));

@@ -71,6 +71,18 @@ test("the data source data is exported after the columns", 1, function() {
     });
 });
 
+test("the type of data rows is set to 'data'", function() {
+    testWorkbook({ columns: [ { field: "foo" } ], dataSource: [{ foo: "bar" }] }, function(book) {
+        equal(book.sheets[0].rows[1].type, "data");
+    });
+});
+
+test("the type of header row is set to 'header'", function() {
+    testWorkbook({ columns: [ { field: "foo" } ], dataSource: [{ foo: "bar" }] }, function(book) {
+        equal(book.sheets[0].rows[0].type, "header");
+    });
+});
+
 test("only data items that match the filter are exported", 2, function() {
     var options = {
         columns: [ { field: "foo" } ],
