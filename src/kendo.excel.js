@@ -72,7 +72,10 @@ kendo.data.ExcelExporter = kendo.Class.extend({
     },
     _freezePane: function() {
         return {
-            rowSplit: 1
+            rowSplit: 1,
+            colSplit: $.grep(this.columns, function(column) {
+               return column.locked;
+            }).length
         };
     },
     _cell: function(dataItem, column) {

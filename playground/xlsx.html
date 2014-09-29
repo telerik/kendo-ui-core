@@ -22,7 +22,7 @@
       <li>Firefox</li>
       <li>IE10+</li>
     </ul>
-    <div id="grid" style="height: 365px"></div>
+    <div id="grid" style="height: 365px;width: 800px"></div>
     <script>
         $("#grid").kendoGrid({
           toolbar: '<button id="export" class="k-button">Export</button>',
@@ -43,18 +43,21 @@
           columns: [{
               field: "ContactName",
               title: "Contact Name",
-              width: 200
+              width: 200,
+              locked: true
           }, {
               field: "ContactTitle",
               title: "Contact Title",
               width: 250
           }, {
               field: "CompanyName",
-              title: "Company Name"
+              title: "Company Name",
+              width: 500
           }, {
               field: "Country",
               width: 150
-          }]
+          }],
+          columnMenu: true
       })
 
       $("#export").on("click", excel);

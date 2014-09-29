@@ -136,4 +136,10 @@ test("enables filtering", function() {
     });
 });
 
+test("locked columns set the freezePane", function() {
+    testWorkbook({ columns: [ { field: "foo", locked: true }, { locked: true } ], dataSource: [ {} ] }, function(book) {
+        equal(book.sheets[0].freezePane.colSplit, 2);
+    });
+});
+
 }());
