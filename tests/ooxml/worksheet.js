@@ -385,7 +385,7 @@ test("toXML sets the 'customWidth' attribute of the 'col' element when width is 
     equal(dom.find("col").attr("customWidth"), 1);
 });
 
-test("toXML sets the 'width' attribute of the 'col' element according to forumla", function() {
+test("toXML sets the 'width' attribute of the 'col' element according to formula", function() {
 // see: http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column(v=office.14).aspx
 // for some reason though subtracting 5 px padding didn't work and we don't do it
 
@@ -397,6 +397,23 @@ test("toXML sets the 'width' attribute of the 'col' element according to forumla
 
     var dom = $($.parseXML(worksheet.toXML()));
     equal(Math.round(dom.find("col").attr("width")), 71);
+});
+
+test("toXML calculates the 'width' attribute based on string length", function() {
+// see: http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column(v=office.14).aspx
+// for some reason though subtracting 5 px padding didn't work and we don't do it
+
+    var worksheet = Worksheet({
+        columns: [{
+           autoWidth: true
+        }],
+        rows: [
+            { cells: [ { value: "foo" }] }
+        ]
+    });
+
+    var dom = $($.parseXML(worksheet.toXML()));
+    equal(Math.round(dom.find("col").attr("width")), 4);
 });
 
 test("toXML creates the 'mergeCell' element for cells with colSpan", function() {

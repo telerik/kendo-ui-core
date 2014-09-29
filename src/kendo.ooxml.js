@@ -125,8 +125,12 @@ var WORKSHEET = kendo.template(
    '# for (var ci = 0; ci < columns.length; ci++) { #' +
        '# var column = columns[ci]; #' +
        '# if (column.width) { #' +
-       '<col min="${ci+1}" max="${ci+1}"' +
-       ' customWidth="1" width="${(((column.width)/7)*100+0.5)/100}" ' +
+       '<col min="${ci+1}" max="${ci+1}" customWidth="1"' +
+       '# if (column.autoWidth) { #' +
+       ' width="${((column.width*7+5)/7*256)/256}" bestFit="1"' +
+       '# } else { #' +
+       ' width="${(((column.width)/7)*100+0.5)/100}" ' +
+       '# } #' +
        '/>' +
        '# } #' +
    '# } #' +
@@ -368,6 +372,14 @@ var Worksheet = kendo.Class.extend({
             hAlign: data.hAlign,
             vAlign: data.vAlign
         };
+
+        var columns = this.options.columns || [];
+
+        var column = columns[this._cellIndex];
+
+        if (column && column.autoWidth) {
+            column.width = Math.max(column.width || 0, ("" + value).length);
+        }
 
         var type = typeof value;
 
