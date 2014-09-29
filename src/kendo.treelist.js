@@ -536,7 +536,7 @@ var __meta__ = {
         },
 
         _commandClick: function(e) {
-            var commandName = this._commandFromClass(e.currentTarget.className)
+            var commandName = this._commandFromClass(e.currentTarget.className);
 
             this["_" + commandName](e);
         },
