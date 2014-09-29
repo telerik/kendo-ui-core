@@ -643,12 +643,14 @@
                         this.handle = this.adorner._hitTest(p);
                     }
                 }
+
                 if (!this.handle) {
                     this.handle = diagram._resizingAdorner._hitTest(p);
                     if (this.handle) {
                         this.adorner = diagram._resizingAdorner;
                     }
                 }
+
                 if (this.adorner) {
                     this.adorner.start(p);
                 }
@@ -969,6 +971,7 @@
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(false);
                     this.hoveredItem = undefined;
+                    this.diagram.hideToolBar();
                 }
             },
             _hitTest: function (point) {

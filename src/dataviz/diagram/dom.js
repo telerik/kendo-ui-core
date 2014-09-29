@@ -1,5 +1,9 @@
 (function (f, define) {
-    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.toolbar", "../../kendo.editable", "../../kendo.window", "../../kendo.dataviz.themes", "../kendo.util",
+    define(["../../kendo.data", "../../kendo.draganddrop", "../../kendo.popup", "../../kendo.toolbar",
+           "../../kendo.editable",
+           "../../kendo.window",
+           "../../kendo.dataviz.themes",
+           "../kendo.util",
            "./svg",
            "./services",
            "./layout" ], f);
@@ -1510,7 +1514,7 @@
                     container = this._editContainer = $(html)
                     .appendTo(this.wrapper).eq(0)
                     .kendoWindow(deepExtend({
-                        modal: true,
+                        modal: false,
                         resizable: false,
                         draggable: true,
                         title: "Edit",
@@ -2698,21 +2702,21 @@
 
                 if (!items) {
                     args = this._selectedItems.slice();
-                }
-                else if (!isArray(items)) {
+                } else if (!isArray(items)) {
                     args = [items];
                 }
+
                 for (i = 0; i < args.length; i++) {
                     var item = args[i];
                     if (item instanceof Shape) {
                         result.shapes.push(item);
                         result.visuals.push(item.visual);
-                    }
-                    else if (item instanceof Connection) {
+                    } else if (item instanceof Connection) {
                         result.cons.push(item);
                         result.visuals.push(item.visual);
                     }
                 }
+
                 return result;
             },
 
@@ -2883,6 +2887,11 @@
                 }
                 var p = this._calculatePosition(e);
                 if (e.which == 1 && this.toolService.start(p, this._meta(e))) {
+                    return;
+                    this.toolBar = new DiagramToolBar(diagram, {
+                        tools: this.options.shapeDefaults.editable.tools
+                    });
+                    this.toolBar.show(p);
                     e.preventDefault();
                 }
             },
@@ -3251,10 +3260,21 @@
         var DiagramToolBar = Class.extend({
             init: function(diagram, options) {
                 this.diagram = diagram;
-                this.options = options;
+                this.options = deepExtend({}, this.options, options);
                 this.toolBarActions = new ToolBarActions(diagram);
                 this.createToolBar();
                 this.createTools(this.options.tools);
+
+                this.createPopup();
+            },
+
+            options: {
+                popup: {}
+            },
+
+            createPopup: function() {
+                this.container = $("<div></div>").append(this.element);
+                this._popup = this.container.kendoPopup(this.options.popup).getKendoPopup();
             },
 
             createToolBar: function() {
@@ -3263,13 +3283,11 @@
                     .kendoToolBar({
                         click: proxy(this.click, this)
                     }).getKendoToolBar();
-
-                this.diagram.element.append(this.element);
             },
 
-            createTools: function(tools) {
-                for (var i = 0; i < tools.length; i++) {
-                    var tool = tools[i];
+            createTools: function() {
+                for (var i = 0; i < this.options.tools.length; i++) {
+                    var tool = this.options.tools[i];
                     this.createTool(tool);
                 }
             },
@@ -3291,6 +3309,14 @@
                 }
             },
 
+            show: function(point) {
+                this._popup.open(point);
+            },
+
+            hide: function() {
+                this._popup.close();
+            },
+
             editTool: function(options) {
                 this._toolBar.add({
                     type: "button",
@@ -3309,6 +3335,16 @@
 
             click: function(e) {
                 this.toolBarActions[e.id]();
+            },
+
+            destroy: function() {
+                this.diagram = null;
+                this.element = null;
+                this.options = null;
+
+                this._toolBar.destroy();
+                this._popup.destroy();
+                this.toolBarActions.destroy();
             }
         });
 
@@ -3324,6 +3360,10 @@
             },
             selectedElement: function() {
                 return this.diagram.select()[0];
+            },
+
+            destroy: function() {
+                this.diagram = null;
             }
         });
 
