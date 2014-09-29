@@ -2715,14 +2715,25 @@
                 }
                 return result;
             },
+
+            remove: function(item) {
+                var dataSource = this.dataSource;
+
+                if (item instanceof Connection) {
+                    dataSource = this.connectionsDataSource;
+                }
+
+                dataSource.remove(item.dataItem);
+            },
+
             _removeItem: function (item, undoable) {
                 item.select(false);
                 if (item instanceof Shape) {
                     this._removeShape(item, undoable);
-                }
-                else if (item instanceof Connection) {
+                } else if (item instanceof Connection) {
                     this._removeConnection(item, undoable);
                 }
+
                 if (!undoable) {
                     this.mainLayer.remove(item.visual);
                 }
@@ -3154,8 +3165,7 @@
                 height: { type: "number" },
                 x: { type: "number" },
                 y: { type: "number" },
-                type: { type: "string" },
-                visual: { type: "string" }
+                type: { type: "string" }
             }
         });
 
@@ -3307,7 +3317,7 @@
                 this.diagram = diagram;
             },
             delete: function() {
-                this.diagram.delete(this.selectedElement());
+                this.diagram.remove(this.selectedElement());
             },
             edit: function() {
                 this.diagram.edit(this.selectedElement());
