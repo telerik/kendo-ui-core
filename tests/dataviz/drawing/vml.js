@@ -163,36 +163,6 @@
             equal(node.element.children.length, 0);
         });
 
-        test("load appends child nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
-        });
-
-        test("load appends child DOM nodes", function() {
-            var parentGroup = new Group();
-            var childGroup = new Group();
-            parentGroup.append(childGroup);
-
-            node.load([parentGroup]);
-
-            equal(node.element.children[0].children[0],
-                  node.childNodes[0].childNodes[0].element);
-        });
-
-        test("load attaches node", function() {
-            node.attachTo(document.createElement("div"));
-
-            var group = new Group();
-            node.load([group]);
-
-            equal(node.childNodes[0].element.parentNode, node.element);
-        });
-
         test("renders visibility", function() {
             srcElement.visible(false);
             node = new TNode(srcElement);
@@ -213,11 +183,95 @@
 
     }
 
+    function nodeLoadTests(name, TNode, createElement) {
+        var node;
+        var element;
+
+        module("Node / Load / " + name, {
+            setup: function() {
+                node = new Node();
+                element = createElement();
+            }
+        });
+
+        test("appends node", function() {
+            node.append = function(child) {
+                ok(child instanceof TNode);
+            };
+
+            node.load([element]);
+        });
+
+        test("load appends PathNode with srcElement transformation", function() {
+            var matrix = new Matrix(2,2,2,2,2,2),
+                element = createElement({ transform: matrix });
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), matrix);
+            };
+
+            node.load([element]);
+        });
+
+        test("load appends node with current transformation", function() {
+            var transform = g.transform();
+            node.append = function(child) {
+                ok(child.transform.transform.matrix().equals(transform.matrix()));
+            };
+
+            node.load([element], transform);
+        });
+
+        test("load appends node with combined transformation", function() {
+            var matrix = new Matrix(3,3,3,3,3,3),
+                currentMatrix = new Matrix(2,2,2,2,2,2),
+                combinedMatrix = currentMatrix.multiplyCopy(matrix),
+                element = createElement({ transform: matrix });
+
+            node.append = function(child) {
+                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
+            };
+
+            node.load([element], currentMatrix);
+        });
+    }
+
     // ------------------------------------------------------------
     (function() {
         var node;
 
-        module("Node", {
+        module("RootNode", {
+            setup: function() {
+                node = new vml.RootNode();
+            }
+        });
+
+        test("sets size", function() {
+            equal(node.element.style.width, "100%");
+            equal(node.element.style.height, "100%");
+        });
+
+        test("sets position", function() {
+            equal(node.element.style.position, "relative");
+        });
+
+        test("doesn't attach _kendoNode", function() {
+            ok(!node.element._kendoNode);
+        });
+
+        test("clear cleans up content", function() {
+            node.load([new Group()]);
+            node.clear();
+
+            equal(node.element.innerHTML, "");
+        });
+    })();
+
+    // ------------------------------------------------------------
+    (function() {
+        var node;
+
+        module("Node / Group load", {
             setup: function() {
                 node = new Node();
             }
@@ -231,125 +285,10 @@
             node.load([new Group()]);
         });
 
-        test("load appends PathNode", function() {
-            node.append = function(child) {
-                ok(child instanceof PathNode);
-            };
-
-            node.load([new Path()]);
-        });
-
-        test("load appends PathNode with srcElement transformation", function() {
-            var matrix = new Matrix(2,2,2,2,2,2),
-                path = new Path({transform: matrix});
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), matrix);
-            };
-            node.load([path]);
-        });
-
-        test("load appends PathNode with current transformation", function() {
-            var matrix = new Matrix(2,2,2,2,2,2),
-                path = new Path();
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), matrix);
-            };
-            node.load([path], matrix);
-        });
-
-        test("load appends PathNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                path = new Path({transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-
-            node.load([path], currentMatrix);
-        });
-
-        test("load appends MultiPathNode", function() {
-            node.append = function(child) {
-                ok(child instanceof MultiPathNode);
-            };
-
-            node.load([new MultiPath()]);
-        });
-
-        test("load appends CircleNode", function() {
-            node.append = function(child) {
-                ok(child instanceof CircleNode);
-            };
-
-            node.load([new Circle(new g.Circle())]);
-        });
-
-        test("load appends TextNode", function() {
-            node.append = function(child) {
-                ok(child instanceof vml.TextNode);
-            };
-
-            node.load([new d.Text("foo", new g.Point())]);
-        });
-
-        test("load appends TextNode with current transformation", function() {
-            var transform = g.transform();
-            node.append = function(child) {
-                ok(child.transform.transform.matrix().equals(transform.matrix()));
-            };
-            node.load([new d.Text("foo", new g.Point())], transform);
-        });
-
-        test("load appends TextNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                text = new d.Text("foo", new g.Point(), {transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-
-            node.load([text], currentMatrix);
-        });
-
-        test("load appends ImageNode", function() {
-            node.append = function(child) {
-                ok(child instanceof vml.ImageNode);
-            };
-
-            node.load([new d.Image("foo", new g.Rect())]);
-        });
-
-        test("load appends ImageNode with current transformation", function() {
-            var transform = g.transform();
-            node.append = function(child) {
-                ok(child.transform.transform.matrix().equals(transform.matrix()));
-            };
-            node.load([new d.Image("foo", new g.Rect())], transform);
-        });
-
-        test("load appends ImageNode with combined transformation", function() {
-            var matrix = new Matrix(3,3,3,3,3,3),
-                currentMatrix = new Matrix(2,2,2,2,2,2),
-                combinedMatrix = currentMatrix.multiplyCopy(matrix),
-                image = new d.Image("foo", new g.Rect(), {transform: matrix});
-
-            node.append = function(child) {
-                compareMatrices(child.transform.transform.matrix(), combinedMatrix);
-            };
-            node.load([image], currentMatrix);
-        });
-    })();
-
-    // ------------------------------------------------------------
-    (function() {
-        var node;
+        // ------------------------------------------------------------
         var groupLoad = GroupNode.fn.load;
 
-        module("Node / group load transformations", {
+        module("Node / Group load / Transformations", {
             setup: function() {
                 node = new Node();
             },
@@ -391,37 +330,6 @@
                 compareMatrices(transform.matrix(), combinedMatrix);
             };
             node.load([group], g.transform(currentMatrix));
-        });
-    })();
-
-    // ------------------------------------------------------------
-    (function() {
-        var node;
-
-        module("RootNode", {
-            setup: function() {
-                node = new vml.RootNode();
-            }
-        });
-
-        test("sets size", function() {
-            equal(node.element.style.width, "100%");
-            equal(node.element.style.height, "100%");
-        });
-
-        test("sets position", function() {
-            equal(node.element.style.position, "relative");
-        });
-
-        test("doesn't attach _kendoNode", function() {
-            ok(!node.element._kendoNode);
-        });
-
-        test("clear cleans up content", function() {
-            node.load([new Group()]);
-            node.clear();
-
-            equal(node.element.innerHTML, "");
         });
     })();
 
@@ -1223,6 +1131,11 @@
 
         baseClipTests("PathNode", vml.PathNode, d.Path);
 
+        nodeLoadTests("PathNode", vml.PathNode, function (options) {
+                return new d.Path(options);
+            }
+        );
+
         module("PathNode", {
             setup: function() {
                 path = new Path();
@@ -1294,6 +1207,11 @@
             multiPathNode;
 
         baseClipTests("MultiPathNode", vml.MultiPathNode, d.MultiPath);
+
+        nodeLoadTests("MultiPathNode", vml.MultiPathNode, function (options) {
+                return new d.MultiPath(options);
+            }
+        );
 
         module("MultiPathNode", {
             setup: function() {
@@ -1374,6 +1292,12 @@
             circleNode;
 
         baseClipTests("CircleNode", vml.CircleNode, d.Circle);
+
+        nodeLoadTests("CircleNode", vml.CircleNode, function (options) {
+                var geometry = new g.Circle(new Point(10, 20), 30);
+                return new d.Circle(geometry, options);
+            }
+        );
 
         module("CircleNode", {
             setup: function() {
@@ -1627,6 +1551,11 @@
 
         baseClipTests("TextNode", vml.TextNode, d.Text);
 
+        nodeLoadTests("TextNode", vml.TextNode, function (options) {
+                return new d.Text("Foo", new g.Point(), options);
+            }
+        );
+
         module("TextNode", {
             setup: function() {
                 text = new d.Text("Foo", new g.Point());
@@ -1797,6 +1726,11 @@
         var imageNode;
 
         baseClipTests("ImageNode", vml.ImageNode, d.Image);
+
+        nodeLoadTests("ImageNode", vml.ImageNode, function (options) {
+                return new d.Image("foo", new g.Rect(), options);
+            }
+        );
 
         module("ImageNode", {
             setup: function() {
