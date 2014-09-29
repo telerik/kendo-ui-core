@@ -4511,6 +4511,10 @@ var __meta__ = {
             if (hasFilterRow) {
                 var filterRow = $("<tr/>");
                 filterRow.addClass("k-filter-row");
+                var hasGroups = that.dataSource.group();
+                if (hasGroups) {
+                    $(new Array(hasGroups.length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(filterRow);
+                }
                 if (hasDetails) {
                     filterRow.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
                 }
