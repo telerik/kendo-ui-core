@@ -5,7 +5,7 @@
     ], f);
 })(function(){
 
-(function(parseFloat, Math, $){
+(function(parseFloat, Math){
 
     "use strict";
 
@@ -30,7 +30,7 @@
         var group = new drawing.Group();
 
         // translate to start of page
-        var pos = $(element).offset();
+        var pos = element.getBoundingClientRect();
         setTransform(group, [ 1, 0, 0, 1, -pos.left, -pos.top ]);
 
         renderElement(element, group);
@@ -734,6 +734,6 @@
         ];
     }
 
-})(parseFloat, Math, kendo.jQuery);
+})(parseFloat, Math);
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
