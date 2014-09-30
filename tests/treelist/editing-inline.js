@@ -425,4 +425,99 @@
 
         equal(syncSpy.calls("sync"), 0);
     });
+
+    test("removeRow hides target row", function() {
+        createTreeList();
+
+        var row = instance.content.find("tr:first");
+        instance.removeRow(row);
+
+        ok(!row.is(":visible"));
+    });
+
+    test("removeRow row model from data source", function() {
+        createTreeList();
+
+        var row = instance.content.find("tr:first");
+        instance.removeRow(row);
+
+        ok(!instance.dataSource.get(1));
+    });
+
+    test("removeRow calls sync method of the data source", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ]
+        });
+
+        var syncSpy = spy(ds, "sync");
+
+        createTreeList({
+            dataSource: ds
+        });
+
+        var row = instance.content.find("tr:first");
+        instance.removeRow(row);
+
+        equal(syncSpy.calls("sync"), 1);
+    });
+
+    test("removeRow trigger remove event", 2, function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ]
+        });
+
+        createTreeList({
+            dataSource: ds,
+            remove: function(e) {
+                equal(e.model, model);
+                equal(e.row[0], row[0]);
+            }
+        });
+
+        var row = instance.content.find("tr:first");
+        var model = instance.dataItem(row);
+        instance.removeRow(row);
+    });
+
+    test("preventing remove event", function() {
+        var ds = new TreeListDataSource({
+            data: [
+                { id: 1, text: "foo", parentId: null },
+                { id: 2, text: "bar", parentId: 1 }
+            ]
+        });
+
+        var syncSpy = spy(ds, "sync");
+
+        createTreeList({
+            dataSource: ds,
+            columns: [ "id", "text" ],
+            remove: function(e) {
+                e.preventDefault();
+            }
+        });
+
+        var row = instance.content.find("tr:first");
+        instance.removeRow(row);
+
+        equal(syncSpy.calls("sync"), 0);
+        ok(row.is(":visible"));
+        ok(instance.dataSource.get(1));
+    });
+
+    test("removeRow cancels edited item", function() {
+        createTreeList();
+
+        instance.editRow(instance.content.find("tr:first"));
+        instance.removeRow(instance.content.find("tr:last"));
+
+        ok(!instance.content.find("tr:first").data("kendoEditable"));
+        ok(!instance.editable);
+    });
 })();

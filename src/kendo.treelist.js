@@ -35,6 +35,7 @@ var __meta__ = {
     var CLICK = "click";
     var EDIT = "edit";
     var SAVE = "save";
+    var REMOVE = "remove";
 
     var classNames = {
         wrapper: "k-treelist k-grid k-widget",
@@ -496,7 +497,8 @@ var __meta__ = {
 
         events: [
             EDIT,
-            SAVE
+            SAVE,
+            REMOVE
         ],
 
         _toggleChildren: function(e) {
@@ -1090,6 +1092,22 @@ var __meta__ = {
             };
 
             if (editable.end() && !this.trigger(SAVE, args)) {
+                this.dataSource.sync();
+            }
+        },
+
+        removeRow: function(row) {
+            var model = this.dataItem(row);
+            var args = {
+                model: model,
+                row: row
+            };
+
+            if (model && !this.trigger(REMOVE, args)) {
+                row.hide();
+
+                this.dataSource.remove(model);
+
                 this.dataSource.sync();
             }
         },
