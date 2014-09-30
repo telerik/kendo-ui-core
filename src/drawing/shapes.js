@@ -806,6 +806,20 @@
     });
     defineGeometryAccessors(Image.fn, ["rect"]);
 
+    var GradientStop = Class.extend({
+        init: function(offset, color, opacity) {
+            this.options = new OptionsStore({
+                offset: offset,
+                color: color,
+                opacity: opacity || 1
+            });
+            this.options.addObserver(this);
+        }
+    });
+
+    defineOptionsAccessors(GradientStop.fn, ["offset", "color", "opacity"]);
+    deepExtend(GradientStop.fn, ObserversMixin);
+
     // Helper functions ===========================================
     function elementsBoundingBox(elements, applyTransform, transformation) {
         var boundingBox;
@@ -898,12 +912,30 @@
         };
     }
 
+    function defineOptionsAccessors(fn, names) {
+        for (var i = 0; i < names.length; i++) {
+            fn[names[i]] = optionsAccessor(names[i]);
+        }
+    }
+
+    function optionsAccessor(name) {
+        return function(value) {
+            if (defined(value)) {
+                this.options.set(name, value);
+                return this;
+            } else {
+                return this.options.get(name);
+            }
+        };
+    }
+
     // Exports ================================================================
     deepExtend(drawing, {
         Arc: Arc,
         Circle: Circle,
         Element: Element,
         ElementsArray: ElementsArray,
+        GradientStop: GradientStop,
         Group: Group,
         Image: Image,
         MultiPath: MultiPath,

@@ -1786,4 +1786,79 @@
         });
     })();
 
+    // ------------------------------------------------------------
+    (function() {
+        var GradientStop = d.GradientStop;
+        var stop;
+
+        module("GradientStop", {
+            setup: function() {
+                stop = new GradientStop(0.5, "foo", 0.7);
+            }
+        });
+
+        test("inits offset", function() {
+            equal(stop.options.offset, 0.5);
+        });
+
+        test("inits color", function() {
+            equal(stop.options.color, "foo");
+        });
+
+        test("inits opacity", function() {
+            equal(stop.options.opacity, 0.7);
+        });
+
+        test("sets opacity to one if not specified", function() {
+            stop = new GradientStop(0.5, "foo");
+            equal(stop.options.opacity, 1);
+        });
+
+        test("offset sets offset", function() {
+            stop.offset(1);
+            equal(stop.options.offset, 1);
+        });
+
+        test("offset triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "offset");
+                    equal(e.value, 1);
+                }
+            });
+            stop.offset(1);
+        });
+
+        test("color sets color", function() {
+            stop.color("bar");
+            equal(stop.options.color, "bar");
+        });
+
+        test("color triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "color");
+                    equal(e.value, "bar");
+                }
+            });
+            stop.color("bar");
+        });
+
+        test("opacity sets opacity", function() {
+            stop.opacity(0.1);
+            equal(stop.options.opacity, 0.1);
+        });
+
+        test("opacity triggers options change", function() {
+            stop.addObserver({
+                optionsChange: function(e) {
+                    equal(e.field, "opacity");
+                    equal(e.value, 0.1);
+                }
+            });
+            stop.opacity(0.1);
+        });
+
+    })();
+
 })();
