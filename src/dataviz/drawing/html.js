@@ -526,24 +526,59 @@
             drawText(str, box);
         }
 
+        var fontSize = getPropertyValue(style, "font-size");
+
         // simply getPropertyValue("font") doesn't work in Firefox :-\
         var font = [
             getPropertyValue(style, "font-style"),
             getPropertyValue(style, "font-variant"),
             getPropertyValue(style, "font-weight"),
-            getPropertyValue(style, "font-size") + "/" + getPropertyValue(style, "line-height"),
+            fontSize + "/" + getPropertyValue(style, "line-height"),
             getPropertyValue(style, "font-family")
         ].join(" ");
+
+        fontSize = parseFloat(fontSize);
 
         var color = getPropertyValue(style, "color");
 
         function drawText(str, box) {
+            var path;
             str = str.replace(/[\r\n ]+/g, " ");
             var text = new drawing.Text(str, new geo.Point(box.left, box.top), {
                 font: font,
                 fill: { color: color }
             });
             group.append(text);
+
+            function decorate(ypos) {
+                var width = fontSize / 12; // XXX: seems to be a good value
+                var path = new drawing.Path({ stroke: {
+                    width: width,
+                    color: getPropertyValue(style, "color")
+                }});
+
+                // path.moveTo(box.left, box.top)
+                //     .lineTo(box.right, box.top)
+                //     .lineTo(box.right, box.bottom)
+                //     .lineTo(box.left, box.bottom)
+                //     .close();
+
+                ypos -= width;
+                path.moveTo(box.left, ypos)
+                    .lineTo(box.right, ypos);
+                group.append(path);
+            }
+
+            switch (getPropertyValue(style, "text-decoration")) {
+              case "underline":
+                decorate(box.bottom);
+                break;
+
+              case "line-through":
+                // XXX: seems to be a good value but not sure how to determine it precisely
+                decorate(box.bottom - box.height / 3);
+                break;
+            }
         }
 
         while (!doChunk()) {}
