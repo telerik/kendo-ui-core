@@ -3122,7 +3122,7 @@
                 for (var i = 0; i < length; i++) {
                     var conn = connections[i];
 
-                    if (!this._connectionsDataMap[conn.from + "-" + conn.to]) {
+                    if (!this._connectionsDataMap[conn.id]) {
                         var from = this._validateConnector(conn.from);
                         var to = this._validateConnector(conn.to);
 
