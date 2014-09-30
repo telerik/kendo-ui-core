@@ -593,7 +593,6 @@
     test("filterable option renders filter icons", function() {
         createTreeList({
             filterable: true,
-            dataSouce: [ { id: 1 } ],
             columns: [ { field: "id" } ]
         });
 
@@ -605,7 +604,6 @@
     test("links for filtering and sorting are rendered independent", function() {
         createTreeList({
             filterable: true,
-            dataSouce: [ { id: 1 } ],
             columns: [ { field: "id", sortable: true } ]
         });
 
@@ -615,12 +613,44 @@
     test("filterable option adds classes to header cell", function() {
         createTreeList({
             filterable: true,
-            dataSouce: [ { id: 1 } ],
             columns: [ { field: "id" } ]
         });
 
         var headerCell = dom.find("th.k-header");
         ok(headerCell.hasClass("k-with-icon"));
         ok(headerCell.hasClass("k-filterable"));
+    });
+
+    test("filterable columns get a filterMenu instance", function() {
+        createTreeList({
+            filterable: true,
+            columns: [ { field: "id" } ]
+        });
+
+        ok(dom.find("th.k-header").data("kendoFilterMenu"));
+    });
+
+    test("filtering icon is not rendered for command column", function() {
+        createTreeList({
+            filterable: true,
+            columns: [
+                { field: "id" },
+                { command: ["edit"] }
+            ]
+        });
+
+        equal(dom.find(".k-grid-filter").length, 1);
+    });
+
+    test("filtering can be suppressed per column", function() {
+        createTreeList({
+            filterable: true,
+            columns: [
+                { field: "id" },
+                { field: "parentId", filterable: false }
+            ]
+        });
+
+        equal(dom.find(".k-grid-filter").length, 1);
     });
 })();

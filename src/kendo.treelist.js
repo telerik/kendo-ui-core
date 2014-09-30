@@ -389,6 +389,7 @@ var __meta__ = {
             this._columns();
             this._layout();
             this._sortable();
+            this._filterable();
             //this._selectable();
             this._attachEvents();
             this._toolbar();
@@ -744,20 +745,6 @@ var __meta__ = {
                     title = column.title || column.field || "";
                 }
 
-                if (filterable) {
-                    cellClasses.push(classNames.withIcon, classNames.filterable);
-
-                    children.push(
-                        kendoDomElement("a", {
-                            href: "#",
-                            tabindex: "-1",
-                            className: classNames.gridFilter
-                        }, [kendoDomElement("span", {
-                            className: [ classNames.icon, classNames.iconFilter ].join(" ")
-                        })])
-                    );
-                }
-
                 if (column.sortable) {
                     children.push(kendoDomElement("a", { href: "#", className: classNames.link }, [
                         kendoTextElement(title)
@@ -1018,6 +1005,26 @@ var __meta__ = {
             }
 
             cells = null;
+        },
+
+        _filterable: function() {
+            var cells = this.header.find("th");
+            var filterable = this.options.filterable;
+            var idx, length;
+
+            if (!filterable) {
+                return;
+            }
+
+            for (idx = 0, length = cells.length; idx < length; idx++) {
+                column = this.columns[idx];
+
+                if (column.command || column.filterable === false) {
+                    continue;
+                }
+
+                cells.eq(idx).kendoFilterMenu({ dataSource: this.dataSource });
+            }
         },
 
         _rowClick: function(e) {

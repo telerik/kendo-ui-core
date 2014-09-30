@@ -18,6 +18,11 @@
         <script src="../src/kendo.treelist.js"></script>
         <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.filtermenu.js"></script>
         <link rel="stylesheet/less" href="../styles/web/kendo.common.less"/>
         <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less"/>
         <script>window.less = { env: "development", logLevel: 1 };</script>
@@ -70,9 +75,9 @@
             $("#list").kendoTreeList({
                 toolbar: ["create", "save", "cancel"],
                 dataSource: listDS,
-                //selectable: true,
+                filterable: true,
                 columns: [
-                    { field: "FirstName", title: "First Name", sortable: true },
+                    { field: "FirstName", title: "First Name" },
                     { field: "LastName", title: "Last Name", sortable: true },
                     { command: ["edit", "destroy"] }
                 ]
