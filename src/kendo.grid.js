@@ -5493,7 +5493,7 @@ var __meta__ = {
                 for (idx = parents.length - 1; idx >= 0; idx--) {
                     parent = parents[idx];
                     position = columnPosition(parent, columns);
-                    cell = elements($(">table>thead", this.lockedHeader), this.thead, ">tr:eq(" + position.row + ")>th").eq(position.cell);
+                    cell = elements($(">table>thead", this.lockedHeader), this.thead, ">tr:eq(" + position.row + ")>th:not(.k-group-cell):not(.k-hierarchy-cell)").eq(position.cell);
 
                     if (predicate(parent)) {
                         setColumnVisibility(parent, visible);
