@@ -3771,6 +3771,8 @@ var __meta__ = {
                 filterable = that.options.filterable,
                 rowheader = that.thead.find(".k-filter-row");
 
+            this._updateHeader(this.dataSource.group().length);
+
             for (var i = 0; i < columns.length; i++) {
                 var suggestDataSource,
                     col = columns[i],
@@ -3797,6 +3799,7 @@ var __meta__ = {
                     }
 
                     if (cellOptions.enabled === false) {
+                        th.html("&nbsp;");
                         continue;
                     }
                     if (cellOptions.dataSource) {
@@ -3825,6 +3828,8 @@ var __meta__ = {
                             operators: operators,
                             showOperators: cellOptions.showOperators
                         }).appendTo(th);
+                } else {
+                    th.html("&nbsp;");
                 }
             }
         },
@@ -4429,7 +4434,7 @@ var __meta__ = {
 
             colgroup = that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)");
             header = that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)");
-            filtercellCells = that.thead.find(".k-filter-row").find("th");
+            filtercellCells = that.thead.find(".k-filter-row").find("th:not(.k-group-cell,.k-hierarchy-cell)");
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
                 if (columns[idx].locked) {
@@ -4511,7 +4516,6 @@ var __meta__ = {
             if (hasFilterRow) {
                 var filterRow = $("<tr/>");
                 filterRow.addClass("k-filter-row");
-                var hasGroups = that.dataSource.group();
                 if (hasDetails) {
                     filterRow.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
                 }
@@ -4830,14 +4834,15 @@ var __meta__ = {
                 length = container.find("tr:first").find("th.k-group-cell").length;
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr:first"));
             } else if(groups < length) {
                 container.find("tr").each(function(){
                     $(this).find("th.k-group-cell")
                         .filter(":eq(" + groups + ")," + ":gt(" + groups + ")").remove();
                 });
-            } else if(length > filterCells) {
-                $(new Array(length - filterCells + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find(".k-filter-row"));
+            }
+            if(groups > filterCells) {
+                $(new Array(groups - filterCells + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find(".k-filter-row"));
             }
         },
 

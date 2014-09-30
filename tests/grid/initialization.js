@@ -658,6 +658,24 @@
         equal(grid.thead.find(".k-filter-row").find("th").length, 3);
     });
 
+    test("filtercell creates th cell with nbps when filtering for that column is disabled", function() {
+        var div = $("<div/>").appendTo(QUnit.fixture);
+        var grid = new Grid(div, {
+            dataSource: {
+                data: [
+                    { foo: 1, bar: 1, baz: 1},
+                ]
+            },
+            columns: [ { field: "foo", filterable: false }, "bar"],
+            filterable: {
+                mode: "cell row"
+            }
+        });
+
+        equal(grid.thead.find(".k-filter-row").find("th").length, 2);
+        equal(grid.thead.find(".k-filter-row").find("th").eq(0).html(), "&nbsp;");
+    });
+
     test("filtercell hides its th cells based on column visibility", function() {
         var div = $("<div/>").appendTo(QUnit.fixture);
         var grid = new Grid(div, {
